@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
+use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Services\Scale\ScaleIdentityResolver;
 use App\Services\Scale\ScaleRegistry;
@@ -17,6 +18,7 @@ class ScalesLookupController extends Controller
         private ScaleIdentityResolver $identityResolver,
         private ScaleCodeResponseProjector $responseProjector,
         private OrgContext $orgContext,
+        private LandingSurfaceContractService $landingSurfaceContractService,
     ) {}
 
     /**
@@ -96,6 +98,13 @@ class ScalesLookupController extends Controller
             'report_summary_i18n_json' => $row['report_summary_i18n_json'] ?? null,
             'seo_schema_json' => $row['seo_schema_json'] ?? null,
             'seo_schema' => $row['seo_schema_json'] ?? null,
+            'landing_surface_v1' => $this->buildLandingSurface(
+                $primarySlug,
+                $locale,
+                $scaleCodeMeta['scale_code'],
+                $seo,
+                $isIndexable
+            ),
         ]);
     }
 
@@ -235,6 +244,70 @@ class ScalesLookupController extends Controller
     {
         $trimmed = trim((string) $value);
         return $trimmed !== '' ? $trimmed : null;
+    }
+
+    /**
+     * @param  array{title:?string,description:?string,og_image_url:?string}  $seo
+     * @return array<string,mixed>
+     */
+    private function buildLandingSurface(
+        string $primarySlug,
+        string $locale,
+        string $scaleCode,
+        array $seo,
+        bool $isIndexable
+    ): array {
+        $segment = $locale === 'zh-CN' ? 'zh' : 'en';
+        $canonicalPath = '/'.$segment.'/tests/'.rawurlencode($primarySlug);
+
+        return $this->landingSurfaceContractService->build([
+            'landing_scope' => 'public_indexable_detail',
+            'entry_surface' => 'test_detail',
+            'entry_type' => 'test_landing',
+            'summary_blocks' => [
+                [
+                    'key' => 'hero',
+                    'title' => $seo['title'] ?? $scaleCode,
+                    'body' => $seo['description'] ?? null,
+                    'kind' => 'answer_first',
+                ],
+            ],
+            'discoverability_keys' => ['test_landing', 'start_test', 'related_content'],
+            'continue_reading_keys' => ['related_content', 'faq'],
+            'start_test_target' => $canonicalPath.'/take',
+            'result_resume_target' => null,
+            'content_continue_target' => $scaleCode === 'MBTI' ? '/'.$segment.'/topics/mbti' : '/'.$segment.'/articles',
+            'cta_bundle' => [
+                [
+                    'key' => 'start_test',
+                    'label' => $locale === 'zh-CN' ? '开始测试' : 'Start test',
+                    'href' => $canonicalPath.'/take',
+                    'kind' => 'start_test',
+                ],
+                [
+                    'key' => 'back_to_tests',
+                    'label' => $locale === 'zh-CN' ? '返回测试列表' : 'Back to tests',
+                    'href' => '/'.$segment.'/tests',
+                    'kind' => 'discover',
+                ],
+                [
+                    'key' => 'continue_public_content',
+                    'label' => $locale === 'zh-CN' ? '继续阅读' : 'Continue reading',
+                    'href' => $scaleCode === 'MBTI' ? '/'.$segment.'/topics/mbti' : '/'.$segment.'/articles',
+                    'kind' => 'content_continue',
+                ],
+            ],
+            'indexability_state' => $isIndexable ? 'indexable' : 'noindex',
+            'attribution_scope' => 'public_test_landing',
+            'surface_family' => 'test',
+            'primary_content_ref' => $primarySlug,
+            'related_surface_keys' => ['test_take', 'topic_cluster'],
+            'fingerprint_seed' => [
+                'primary_slug' => $primarySlug,
+                'locale' => $locale,
+                'scale_code' => $scaleCode,
+            ],
+        ]);
     }
 
     private function deprecatedScaleResponse(string $legacyScaleCode, string $requestedSlug, string $primarySlug): JsonResponse

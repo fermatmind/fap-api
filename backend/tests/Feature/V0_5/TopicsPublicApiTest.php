@@ -65,7 +65,9 @@ final class TopicsPublicApiTest extends TestCase
             ->assertJsonPath('pagination.total', 1)
             ->assertJsonCount(1, 'items')
             ->assertJsonPath('items.0.slug', 'mbti')
-            ->assertJsonPath('items.0.seo_meta.seo_title', 'MBTI Guide and Type Hub');
+            ->assertJsonPath('items.0.seo_meta.seo_title', 'MBTI Guide and Type Hub')
+            ->assertJsonPath('landing_surface_v1.landing_contract_version', 'landing.surface.v1')
+            ->assertJsonPath('landing_surface_v1.entry_surface', 'topic_index');
     }
 
     public function test_list_respects_locale_and_org_scope(): void
@@ -233,6 +235,9 @@ final class TopicsPublicApiTest extends TestCase
             ->assertJsonPath('seo_meta.seo_title', 'MBTI Guide and Type Hub | FermatMind')
             ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
             ->assertJsonPath('seo_surface_v1.surface_type', 'topic_public_detail')
+            ->assertJsonPath('landing_surface_v1.landing_contract_version', 'landing.surface.v1')
+            ->assertJsonPath('landing_surface_v1.entry_surface', 'topic_detail')
+            ->assertJsonPath('landing_surface_v1.entry_type', 'topic_profile')
             ->assertJsonPath('entry_groups.featured.0.entry_type', 'personality_profile')
             ->assertJsonPath('entry_groups.featured.0.title', (string) $personality->title)
             ->assertJsonPath('entry_groups.featured.0.url', '/en/personality/intj')

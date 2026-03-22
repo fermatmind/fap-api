@@ -12,6 +12,7 @@ use App\Models\TopicProfileSeoMeta;
 use App\Services\Cms\TopicEntryResolverService;
 use App\Services\Cms\TopicProfileSeoService;
 use App\Services\Cms\TopicProfileService;
+use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -25,6 +26,7 @@ final class TopicController extends Controller
         private readonly TopicProfileService $topicProfileService,
         private readonly TopicEntryResolverService $topicEntryResolverService,
         private readonly TopicProfileSeoService $topicProfileSeoService,
+        private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
     ) {}
 
@@ -60,6 +62,7 @@ final class TopicController extends Controller
                 'total' => (int) $paginator->total(),
                 'last_page' => (int) $paginator->lastPage(),
             ],
+            'landing_surface_v1' => $this->buildIndexLandingSurface($validated['locale']),
         ]);
     }
 
@@ -82,6 +85,7 @@ final class TopicController extends Controller
 
         $meta = $this->topicProfileSeoService->buildMeta($profile, $validated['locale']);
         $jsonLd = $this->topicProfileSeoService->buildJsonLd($profile, $validated['locale']);
+        $entryGroups = $this->topicEntryResolverService->resolveGroupedEntries($profile, $validated['locale']);
 
         return response()->json([
             'ok' => true,
@@ -90,9 +94,10 @@ final class TopicController extends Controller
                 fn (TopicProfileSection $section): array => $this->sectionPayload($section),
                 $profile->sections->all()
             ),
-            'entry_groups' => $this->topicEntryResolverService->resolveGroupedEntries($profile, $validated['locale']),
+            'entry_groups' => $entryGroups,
             'seo_meta' => $this->seoMetaPayload($profile->seoMeta),
             'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'topic_public_detail'),
+            'landing_surface_v1' => $this->buildDetailLandingSurface($profile, $entryGroups, $validated['locale']),
         ]);
     }
 
@@ -141,6 +146,140 @@ final class TopicController extends Controller
             'alternates' => is_array($meta['alternates'] ?? null) ? $meta['alternates'] : [],
             'structured_data' => $jsonLd,
         ]);
+    }
+
+    /**
+     * @param  array<string,list<array<string,mixed>>>  $entryGroups
+     * @return array<string,mixed>
+     */
+    private function buildDetailLandingSurface(TopicProfile $profile, array $entryGroups, string $locale): array
+    {
+        $segment = $this->frontendLocaleSegment($locale);
+        $firstFeatured = $this->firstEntryForGroups($entryGroups, ['featured', 'articles', 'personalities', 'related']);
+        $firstTest = $this->firstEntryForGroups($entryGroups, ['tests']);
+
+        return $this->landingSurfaceContractService->build([
+            'landing_scope' => 'public_indexable_detail',
+            'entry_surface' => 'topic_detail',
+            'entry_type' => 'topic_profile',
+            'summary_blocks' => [
+                [
+                    'key' => 'hero',
+                    'title' => (string) ($profile->title ?? ''),
+                    'body' => trim((string) ($profile->excerpt ?? $profile->subtitle ?? '')),
+                    'kind' => 'answer_first',
+                ],
+            ],
+            'discoverability_keys' => array_keys($entryGroups),
+            'continue_reading_keys' => array_keys($entryGroups),
+            'start_test_target' => is_array($firstTest) ? trim((string) ($firstTest['url'] ?? '')) : '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+            'result_resume_target' => null,
+            'content_continue_target' => is_array($firstFeatured) ? trim((string) ($firstFeatured['url'] ?? '')) : '/'.$segment.'/personality',
+            'cta_bundle' => array_values(array_filter([
+                [
+                    'key' => 'start_test',
+                    'label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
+                    'href' => is_array($firstTest) ? trim((string) ($firstTest['url'] ?? '')) : '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+                    'kind' => 'start_test',
+                ],
+                is_array($firstFeatured)
+                    ? [
+                        'key' => 'continue_public_content',
+                        'label' => trim((string) ($firstFeatured['cta_label'] ?? '')) ?: ($locale === 'zh-CN' ? '继续阅读' : 'Continue reading'),
+                        'href' => trim((string) ($firstFeatured['url'] ?? '')),
+                        'kind' => 'content_continue',
+                    ]
+                    : null,
+                [
+                    'key' => 'personality_hub',
+                    'label' => $locale === 'zh-CN' ? '人格画像' : 'Personality hub',
+                    'href' => '/'.$segment.'/personality',
+                    'kind' => 'discover',
+                ],
+            ])),
+            'indexability_state' => $profile->is_indexable ? 'indexable' : 'noindex',
+            'attribution_scope' => 'public_topic_landing',
+            'surface_family' => 'topic',
+            'primary_content_ref' => (string) ($profile->slug ?? $profile->topic_code ?? ''),
+            'related_surface_keys' => array_keys($entryGroups),
+            'fingerprint_seed' => [
+                'slug' => (string) ($profile->slug ?? ''),
+                'locale' => $locale,
+                'entry_group_count' => count($entryGroups),
+            ],
+        ]);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function buildIndexLandingSurface(string $locale): array
+    {
+        $segment = $this->frontendLocaleSegment($locale);
+
+        return $this->landingSurfaceContractService->build([
+            'landing_scope' => 'public_indexable_index',
+            'entry_surface' => 'topic_index',
+            'entry_type' => 'topic_family_index',
+            'summary_blocks' => [
+                [
+                    'key' => 'hero',
+                    'title' => $locale === 'zh-CN' ? '主题内容聚合' : 'Topic clusters',
+                    'body' => $locale === 'zh-CN'
+                        ? '围绕测试、人格与职业内容组织结构化主题入口。'
+                        : 'Structured topic hubs that connect tests, personality profiles, and career content.',
+                    'kind' => 'hero',
+                ],
+            ],
+            'discoverability_keys' => ['topic_index', 'personality_detail', 'tests_detail', 'article_detail'],
+            'continue_reading_keys' => ['topic_detail', 'personality_detail', 'tests_detail'],
+            'start_test_target' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+            'result_resume_target' => null,
+            'content_continue_target' => '/'.$segment.'/personality',
+            'cta_bundle' => [
+                [
+                    'key' => 'start_test',
+                    'label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
+                    'href' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+                    'kind' => 'start_test',
+                ],
+                [
+                    'key' => 'personality_hub',
+                    'label' => $locale === 'zh-CN' ? '人格画像' : 'Personality hub',
+                    'href' => '/'.$segment.'/personality',
+                    'kind' => 'discover',
+                ],
+            ],
+            'indexability_state' => 'indexable',
+            'attribution_scope' => 'public_topic_landing',
+            'surface_family' => 'topic',
+            'primary_content_ref' => 'topic:index',
+            'related_surface_keys' => ['topic_detail', 'personality_detail', 'tests_detail'],
+            'fingerprint_seed' => ['locale' => $locale],
+        ]);
+    }
+
+    /**
+     * @param  array<string,list<array<string,mixed>>>  $entryGroups
+     * @param  list<string>  $groups
+     * @return array<string,mixed>|null
+     */
+    private function firstEntryForGroups(array $entryGroups, array $groups): ?array
+    {
+        foreach ($groups as $group) {
+            $items = $entryGroups[$group] ?? [];
+            $first = is_array($items[0] ?? null) ? $items[0] : null;
+            if ($first !== null) {
+                return $first;
+            }
+        }
+
+        return null;
+    }
+
+    private function frontendLocaleSegment(string $locale): string
+    {
+        return $locale === 'zh-CN' ? 'zh' : 'en';
     }
 
     /**

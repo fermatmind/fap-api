@@ -37,6 +37,9 @@ class ScalesLookupTest extends TestCase
             'seo_schema_json',
             'seo_schema',
         ]);
+        $response->assertJsonPath('landing_surface_v1.landing_contract_version', 'landing.surface.v1');
+        $response->assertJsonPath('landing_surface_v1.entry_surface', 'test_detail');
+        $response->assertJsonPath('landing_surface_v1.entry_type', 'test_landing');
     }
 
     public function test_lookup_aliases_resolve_to_canonical_for_all_six_models(): void

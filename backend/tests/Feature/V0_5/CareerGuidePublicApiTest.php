@@ -214,6 +214,8 @@ final class CareerGuidePublicApiTest extends TestCase
             ->assertJsonPath('guide.guide_code', 'from-mbti-to-job-fit')
             ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
             ->assertJsonPath('seo_surface_v1.surface_type', 'career_guide_public_detail')
+            ->assertJsonPath('landing_surface_v1.landing_contract_version', 'landing.surface.v1')
+            ->assertJsonPath('landing_surface_v1.entry_surface', 'career_guide_detail')
             ->assertJsonPath('guide.category_slug', 'assessment-usage')
             ->assertJsonPath('guide.body_md', '# Guide body')
             ->assertJsonPath('related_jobs.0.job_code', 'product-manager')

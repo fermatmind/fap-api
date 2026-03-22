@@ -10,6 +10,7 @@ use App\Models\CareerJob;
 use App\Models\CareerJobSection;
 use App\Services\Cms\CareerJobSeoService;
 use App\Services\Cms\CareerJobService;
+use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -22,6 +23,7 @@ final class CareerJobController extends Controller
     public function __construct(
         private readonly CareerJobService $careerJobService,
         private readonly CareerJobSeoService $careerJobSeoService,
+        private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
     ) {}
 
@@ -89,6 +91,7 @@ final class CareerJobController extends Controller
             ),
             'seo_meta' => $this->careerJobService->seoMetaPayload($job->seoMeta),
             'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'career_job_public_detail'),
+            'landing_surface_v1' => $this->buildLandingSurface($job, $validated['locale']),
         ]);
     }
 
@@ -137,6 +140,78 @@ final class CareerJobController extends Controller
             'alternates' => is_array($meta['alternates'] ?? null) ? $meta['alternates'] : [],
             'structured_data' => $jsonLd,
         ]);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function buildLandingSurface(CareerJob $job, string $locale): array
+    {
+        $segment = $this->frontendLocaleSegment($locale);
+        $personalityCodes = array_values(array_filter(array_map(
+            static fn (mixed $value): string => strtoupper(trim((string) $value)),
+            array_merge(
+                (array) ($job->fit_personality_codes ?? []),
+                (array) ($job->mbti_primary_codes ?? []),
+                (array) ($job->mbti_secondary_codes ?? [])
+            )
+        )));
+        $personalitySlug = strtolower((string) ($personalityCodes[0] ?? ''));
+
+        return $this->landingSurfaceContractService->build([
+            'landing_scope' => 'public_indexable_detail',
+            'entry_surface' => 'career_job_detail',
+            'entry_type' => 'career_job',
+            'summary_blocks' => [
+                [
+                    'key' => 'hero',
+                    'title' => (string) ($job->title ?? ''),
+                    'body' => trim((string) ($job->excerpt ?? '')),
+                    'kind' => 'answer_first',
+                ],
+            ],
+            'discoverability_keys' => ['career_job', 'personality_profile', 'career_guide', 'start_test'],
+            'continue_reading_keys' => ['personality_profile', 'career_guide'],
+            'start_test_target' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+            'result_resume_target' => null,
+            'content_continue_target' => $personalitySlug !== '' ? '/'.$segment.'/personality/'.$personalitySlug : '/'.$segment.'/career/guides',
+            'cta_bundle' => array_values(array_filter([
+                [
+                    'key' => 'start_test',
+                    'label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
+                    'href' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+                    'kind' => 'start_test',
+                ],
+                $personalitySlug !== ''
+                    ? [
+                        'key' => 'personality_profile',
+                        'label' => $locale === 'zh-CN' ? '查看人格画像' : 'View personality profile',
+                        'href' => '/'.$segment.'/personality/'.$personalitySlug,
+                        'kind' => 'content_continue',
+                    ]
+                    : null,
+                [
+                    'key' => 'career_guides',
+                    'label' => $locale === 'zh-CN' ? '阅读职业指南' : 'Read career guides',
+                    'href' => '/'.$segment.'/career/guides',
+                    'kind' => 'discover',
+                ],
+            ])),
+            'indexability_state' => $job->is_indexable ? 'indexable' : 'noindex',
+            'attribution_scope' => 'public_career_job_landing',
+            'surface_family' => 'career_job',
+            'primary_content_ref' => (string) ($job->slug ?? ''),
+            'related_surface_keys' => ['personality_profile', 'career_guide'],
+            'fingerprint_seed' => [
+                'slug' => (string) ($job->slug ?? ''),
+                'locale' => $locale,
+            ],
+        ]);
+    }
+
+    private function frontendLocaleSegment(string $locale): string
+    {
+        return $locale === 'zh-CN' ? 'zh' : 'en';
     }
 
     /**
