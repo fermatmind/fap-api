@@ -63,6 +63,7 @@ final class ContentControlPlaneService
                 'rollback_target' => $release['rollback_target'],
                 'locale_scope' => $localeScope,
                 'experiment_scope' => $governance['experiment_scope'],
+                'content_inventory_v1' => $governance['content_inventory_v1'],
                 'runtime_artifact_ref' => $release['runtime_artifact_ref'],
                 'cultural_context' => $governance['cultural_context'],
                 'content_object_inventory' => $this->summarizeContentObjects($contentObjects),
@@ -132,6 +133,7 @@ final class ContentControlPlaneService
      *   status:string,
      *   cultural_context:?string,
      *   experiment_scope:array<string,mixed>,
+     *   content_inventory_v1:array<string,mixed>,
      *   content_object_inventory:list<array<string,mixed>>
      * }
      */
@@ -151,6 +153,7 @@ final class ContentControlPlaneService
                     'experiment_keys' => [],
                     'overlay_targets' => [],
                 ],
+                'content_inventory_v1' => $this->defaultInventorySummary(false),
                 'content_object_inventory' => $this->defaultObjectInventory(
                     trim((string) ($manifest['region'] ?? '')) !== '' && trim((string) ($manifest['locale'] ?? '')) !== '',
                     false,
@@ -163,6 +166,7 @@ final class ContentControlPlaneService
 
         $errors = $this->mbtiGovernance->lintPack($pack);
         $document = $this->mbtiGovernance->loadDocument($baseDir);
+        $inventoryDocument = $this->mbtiGovernance->loadInventoryDocument($baseDir);
         $filePolicies = is_array($document['file_policies'] ?? null) ? $document['file_policies'] : [];
 
         $stableFiles = 0;
@@ -216,6 +220,9 @@ final class ContentControlPlaneService
                 'experiment_keys' => $experimentKeys,
                 'overlay_targets' => $overlayTargets,
             ],
+            'content_inventory_v1' => is_array($inventoryDocument)
+                ? $this->mbtiGovernance->summarizeInventory($inventoryDocument)
+                : $this->defaultInventorySummary(true),
             'content_object_inventory' => $this->defaultObjectInventory(
                 trim((string) ($document['cultural_context'] ?? '')) !== '',
                 $narrativeFiles > 0,
@@ -223,6 +230,25 @@ final class ContentControlPlaneService
                 $commercialOverlayFiles > 0,
                 true,
             ),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function defaultInventorySummary(bool $enabled): array
+    {
+        return [
+            'inventory_status' => $enabled ? 'missing' : 'not_applicable',
+            'inventory_contract_version' => 0,
+            'inventory_fingerprint' => null,
+            'governance_profile' => null,
+            'fragment_family_count' => 0,
+            'fragment_family_keys' => [],
+            'selection_tag_count' => 0,
+            'selection_tag_keys' => [],
+            'section_family_count' => 0,
+            'section_family_keys' => [],
         ];
     }
 

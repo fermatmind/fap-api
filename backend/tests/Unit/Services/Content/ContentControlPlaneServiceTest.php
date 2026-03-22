@@ -57,12 +57,22 @@ final class ContentControlPlaneServiceTest extends TestCase
         $this->assertArrayHasKey('rollback_target', $contract);
         $this->assertArrayHasKey('locale_scope', $contract);
         $this->assertArrayHasKey('experiment_scope', $contract);
+        $this->assertArrayHasKey('content_inventory_v1', $contract);
         $this->assertArrayHasKey('runtime_artifact_ref', $contract);
         $this->assertArrayHasKey('content_objects_v1', $contract);
         $this->assertSame('compiled', $contract['compile_status']);
         $this->assertSame('passing', $contract['governance_status']);
         $this->assertNull($contract['runtime_artifact_ref']);
         $this->assertNotEmpty($contract['content_object_inventory']);
+
+        $inventory = $contract['content_inventory_v1'];
+        $this->assertSame(1, $inventory['inventory_contract_version']);
+        $this->assertSame('mbti_content_inventory.v1', $inventory['governance_profile']);
+        $this->assertSame('mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03', $inventory['inventory_fingerprint']);
+        $this->assertSame(14, $inventory['fragment_family_count']);
+        $this->assertContains('traits.why_this_type', $inventory['section_family_keys']);
+        $this->assertContains('cta.surface', $inventory['section_family_keys']);
+        $this->assertArrayHasKey('selection_tag_keys', $inventory);
 
         $objects = collect($contract['content_objects_v1']);
         $this->assertNotEmpty($objects);
@@ -139,6 +149,7 @@ final class ContentControlPlaneServiceTest extends TestCase
         $this->assertTrue(collect($draftContract['content_objects_v1'])->every(
             fn (array $object): bool => $object['runtime_artifact_ref'] === null
         ));
+        $this->assertSame(14, $draftContract['content_inventory_v1']['fragment_family_count']);
 
         $this->insertSuccessfulPublishRelease(
             (string) $version->id,
@@ -155,6 +166,7 @@ final class ContentControlPlaneServiceTest extends TestCase
         $this->assertSame('published', $publishedContract['draft_state']);
         $this->assertIsArray($publishedContract['runtime_artifact_ref']);
         $this->assertSame((string) $version->content_package_version, $publishedContract['runtime_artifact_ref']['pack_version']);
+        $this->assertSame('mbti_content_inventory.v1', $publishedContract['content_inventory_v1']['governance_profile']);
 
         $publishedObjects = collect($publishedContract['content_objects_v1'])->keyBy('content_object_type');
         $this->assertIsArray($publishedObjects['narrative_fragment']['runtime_artifact_ref']);
@@ -209,6 +221,7 @@ final class ContentControlPlaneServiceTest extends TestCase
         $this->assertSame('published', $contract['release_candidate_status']);
         $this->assertIsArray($contract['rollback_target']);
         $this->assertSame($previousReleaseId, $contract['rollback_target']['release_id']);
+        $this->assertSame(14, $contract['content_inventory_v1']['fragment_family_count']);
 
         $publishedObject = collect($contract['content_objects_v1'])
             ->first(fn (array $object): bool => is_array($object['runtime_artifact_ref'] ?? null));

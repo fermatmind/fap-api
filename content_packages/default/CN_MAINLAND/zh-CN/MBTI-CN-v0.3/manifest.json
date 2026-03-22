@@ -43,6 +43,7 @@
         "rules": "fap.report.rules.v1",
         "section_policies": "fap.report.section_policies.v1",
         "dynamic_sections": "fap.mbti.dynamic_sections.v1",
+        "inventory": "fap.mbti.content_inventory.v1",
         "content_governance": "fap.mbti.content_governance.v1",
         "overrides_unified": "fap.report.overrides.v1",
         "meta": "fap.landing.meta.v1"
@@ -197,6 +198,9 @@
         ],
         "dynamic_sections": [
             "report_dynamic_sections.json"
+        ],
+        "inventory": [
+            "mbti_content_inventory.json"
         ],
         "content_governance": [
             "report_content_governance.json"
