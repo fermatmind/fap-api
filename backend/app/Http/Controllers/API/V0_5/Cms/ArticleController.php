@@ -10,6 +10,7 @@ use App\Models\Article;
 use App\Services\Cms\ArticlePublishService;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\ArticleService;
+use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -22,6 +23,7 @@ class ArticleController extends Controller
         private readonly ArticleService $articleService,
         private readonly ArticlePublishService $articlePublishService,
         private readonly ArticleSeoService $articleSeoService,
+        private readonly SeoSurfaceContractService $seoSurfaceContractService,
     ) {}
 
     /**
@@ -117,9 +119,13 @@ class ArticleController extends Controller
 
         $article->loadMissing($this->articleRelations());
 
+        $meta = $this->articleSeoService->buildSeoPayload($article);
+        $jsonLd = $this->articleSeoService->generateJsonLd($article);
+
         return response()->json([
             'ok' => true,
             'article' => $this->articlePayload($article),
+            'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'article_public_detail'),
         ]);
     }
 
@@ -160,9 +166,33 @@ class ArticleController extends Controller
             return response()->json(['error' => 'not found'], 404);
         }
 
+        $meta = $this->articleSeoService->buildSeoPayload($article);
+        $jsonLd = $this->articleSeoService->generateJsonLd($article);
+
         return response()->json([
-            'meta' => $this->articleSeoService->buildSeoPayload($article),
-            'jsonld' => $this->articleSeoService->generateJsonLd($article),
+            'meta' => $meta,
+            'jsonld' => $jsonLd,
+            'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'article_public_detail'),
+        ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $meta
+     * @return array<string,mixed>
+     */
+    private function buildSeoSurface(array $meta, array $jsonLd, string $surfaceType): array
+    {
+        return $this->seoSurfaceContractService->build([
+            'metadata_scope' => 'public_indexable_detail',
+            'surface_type' => $surfaceType,
+            'canonical_url' => $meta['canonical'] ?? null,
+            'robots_policy' => $meta['robots'] ?? null,
+            'title' => $meta['title'] ?? null,
+            'description' => $meta['description'] ?? null,
+            'og_payload' => is_array($meta['og'] ?? null) ? $meta['og'] : [],
+            'twitter_payload' => is_array($meta['twitter'] ?? null) ? $meta['twitter'] : [],
+            'alternates' => is_array($meta['alternates'] ?? null) ? $meta['alternates'] : [],
+            'structured_data' => $jsonLd,
         ]);
     }
 

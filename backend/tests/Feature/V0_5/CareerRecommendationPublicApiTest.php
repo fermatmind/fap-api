@@ -299,6 +299,9 @@ final class CareerRecommendationPublicApiTest extends TestCase
 
         $enResponse->assertOk()
             ->assertJsonPath('runtime_type_code', 'INTJ-A')
+            ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
+            ->assertJsonPath('seo_surface_v1.surface_type', 'career_recommendation_public_detail')
+            ->assertJsonPath('seo_surface_v1.indexability_state', 'indexable')
             ->assertJsonPath('canonical_type_code', 'INTJ')
             ->assertJsonPath('public_route_slug', 'intj-a')
             ->assertJsonPath('graph_type_code', 'INTJ')
@@ -325,6 +328,7 @@ final class CareerRecommendationPublicApiTest extends TestCase
 
         $zhResponse->assertOk()
             ->assertJsonPath('runtime_type_code', 'INTJ-A')
+            ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
             ->assertJsonPath('canonical_type_code', 'INTJ')
             ->assertJsonPath('public_route_slug', 'intj-a')
             ->assertJsonPath('graph_type_code', 'INTJ')

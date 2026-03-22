@@ -12,6 +12,7 @@ use App\Models\TopicProfileSeoMeta;
 use App\Services\Cms\TopicEntryResolverService;
 use App\Services\Cms\TopicProfileSeoService;
 use App\Services\Cms\TopicProfileService;
+use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -24,6 +25,7 @@ final class TopicController extends Controller
         private readonly TopicProfileService $topicProfileService,
         private readonly TopicEntryResolverService $topicEntryResolverService,
         private readonly TopicProfileSeoService $topicProfileSeoService,
+        private readonly SeoSurfaceContractService $seoSurfaceContractService,
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -78,6 +80,9 @@ final class TopicController extends Controller
             return $this->notFoundResponse('topic not found.');
         }
 
+        $meta = $this->topicProfileSeoService->buildMeta($profile, $validated['locale']);
+        $jsonLd = $this->topicProfileSeoService->buildJsonLd($profile, $validated['locale']);
+
         return response()->json([
             'ok' => true,
             'profile' => $this->profileDetailPayload($profile),
@@ -87,6 +92,7 @@ final class TopicController extends Controller
             ),
             'entry_groups' => $this->topicEntryResolverService->resolveGroupedEntries($profile, $validated['locale']),
             'seo_meta' => $this->seoMetaPayload($profile->seoMeta),
+            'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'topic_public_detail'),
         ]);
     }
 
@@ -107,9 +113,33 @@ final class TopicController extends Controller
             return response()->json(['error' => 'not found'], 404);
         }
 
+        $meta = $this->topicProfileSeoService->buildMeta($profile, $validated['locale']);
+        $jsonLd = $this->topicProfileSeoService->buildJsonLd($profile, $validated['locale']);
+
         return response()->json([
-            'meta' => $this->topicProfileSeoService->buildMeta($profile, $validated['locale']),
-            'jsonld' => $this->topicProfileSeoService->buildJsonLd($profile, $validated['locale']),
+            'meta' => $meta,
+            'jsonld' => $jsonLd,
+            'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'topic_public_detail'),
+        ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $meta
+     * @return array<string,mixed>
+     */
+    private function buildSeoSurface(array $meta, array $jsonLd, string $surfaceType): array
+    {
+        return $this->seoSurfaceContractService->build([
+            'metadata_scope' => 'public_indexable_detail',
+            'surface_type' => $surfaceType,
+            'canonical_url' => $meta['canonical'] ?? null,
+            'robots_policy' => $meta['robots'] ?? null,
+            'title' => $meta['title'] ?? null,
+            'description' => $meta['description'] ?? null,
+            'og_payload' => is_array($meta['og'] ?? null) ? $meta['og'] : [],
+            'twitter_payload' => is_array($meta['twitter'] ?? null) ? $meta['twitter'] : [],
+            'alternates' => is_array($meta['alternates'] ?? null) ? $meta['alternates'] : [],
+            'structured_data' => $jsonLd,
         ]);
     }
 

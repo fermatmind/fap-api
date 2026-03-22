@@ -106,6 +106,8 @@ final class ArticlePublicApiTest extends TestCase
 
         $response->assertOk()
             ->assertJsonPath('meta.canonical', $canonical)
+            ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
+            ->assertJsonPath('seo_surface_v1.surface_type', 'article_public_detail')
             ->assertJsonPath('meta.alternates.en', $canonical)
             ->assertJsonPath('meta.alternates.zh', $zhCanonical)
             ->assertJsonPath('meta.alternates.zh-CN', $zhCanonical)

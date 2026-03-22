@@ -195,6 +195,8 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonCount(1, 'sections')
             ->assertJsonPath('sections.0.section_key', 'overview')
             ->assertJsonPath('seo_meta.seo_title', 'INTJ Personality Type')
+            ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
+            ->assertJsonPath('seo_surface_v1.surface_type', 'mbti_personality_public_detail')
             ->assertJsonPath('mbti_public_projection_v1.display_type', 'INTJ')
             ->assertJsonPath('mbti_public_projection_v1.canonical_type_code', 'INTJ')
             ->assertJsonPath('mbti_public_projection_v1.runtime_type_code', null)
@@ -326,6 +328,8 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('meta.title', 'INTJ-A Personality Type: Traits, Careers, and Growth | FermatMind')
             ->assertJsonPath('meta.description', 'Explore INTJ-A traits, strengths, blind spots, work style, relationships, and growth advice.')
             ->assertJsonPath('meta.canonical', 'https://staging.fermatmind.com/en/personality/intj-a')
+            ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
+            ->assertJsonPath('seo_surface_v1.surface_type', 'mbti_personality_public_detail')
             ->assertJsonPath('meta.alternates.en', 'https://staging.fermatmind.com/en/personality/intj-a')
             ->assertJsonPath('meta.alternates.zh-CN', 'https://staging.fermatmind.com/zh/personality/intj-a')
             ->assertJsonPath('meta.robots', 'index,follow');
@@ -340,6 +344,7 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('meta.title', 'INTJ-T 人格类型：特质、职业与成长 | FermatMind')
             ->assertJsonPath('meta.description', '探索 INTJ-T 的特质、优势、关系模式与成长建议。')
             ->assertJsonPath('meta.canonical', 'https://staging.fermatmind.com/zh/personality/intj-t')
+            ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
             ->assertJsonPath('meta.alternates.en', 'https://staging.fermatmind.com/en/personality/intj-t')
             ->assertJsonPath('meta.alternates.zh-CN', 'https://staging.fermatmind.com/zh/personality/intj-t')
             ->assertJsonPath('meta.robots', 'noindex,follow');

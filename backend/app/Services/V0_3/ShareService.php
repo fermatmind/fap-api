@@ -15,6 +15,7 @@ use App\Services\InsightGraph\InsightGraphContractService;
 use App\Services\InsightGraph\PartnerReadContractService;
 use App\Services\InsightGraph\WidgetSurfaceContractService;
 use App\Services\PublicSurface\PublicSurfaceContractService;
+use App\Services\PublicSurface\SeoSurfaceContractService;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportComposer;
 use App\Services\Scale\ScaleIdentityWriteProjector;
@@ -36,6 +37,7 @@ class ShareService
         private readonly MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
         private readonly BigFivePublicProjectionService $bigFivePublicProjectionService,
         private readonly PublicSurfaceContractService $publicSurfaceContractService,
+        private readonly SeoSurfaceContractService $seoSurfaceContractService,
         private readonly InsightGraphContractService $insightGraphContractService,
         private readonly PartnerReadContractService $partnerReadContractService,
         private readonly WidgetSurfaceContractService $widgetSurfaceContractService,
@@ -811,6 +813,7 @@ class ShareService
             $big5Projection,
             $publicSafeReport
         );
+        $payload['seo_surface_v1'] = $this->buildSeoSurfaceContract($payload, $locale, $scaleCode, $resolvedShareId);
         $payload['insight_graph_v1'] = $this->insightGraphContractService->buildForShare(
             $payload,
             is_array($payload['public_surface_v1'] ?? null) ? $payload['public_surface_v1'] : []
@@ -914,6 +917,55 @@ class ShareService
     }
 
     /**
+     * @param  array<string,mixed>  $payload
+     * @return array<string,mixed>
+     */
+    private function buildSeoSurfaceContract(array $payload, string $locale, string $scaleCode, string $shareId): array
+    {
+        $canonicalUrl = trim((string) data_get($payload, 'public_surface_v1.canonical_url', ''));
+        $canonicalUrl = $canonicalUrl !== '' ? $canonicalUrl : ($shareId !== '' ? $this->buildLocalizedShareUrl($shareId, $locale) : null);
+
+        $title = trim((string) ($payload['title'] ?? ''));
+        $summary = trim((string) ($payload['summary'] ?? ''));
+        $typeCode = trim((string) ($payload['type_code'] ?? ''));
+        $surfaceType = $scaleCode === 'BIG5_OCEAN' ? 'big5_share_public_safe' : 'mbti_share_public_safe';
+
+        return $this->seoSurfaceContractService->build([
+            'metadata_scope' => 'public_share_safe',
+            'surface_type' => $surfaceType,
+            'canonical_url' => $canonicalUrl,
+            'robots_policy' => data_get($payload, 'public_surface_v1.robots_policy', 'noindex,follow'),
+            'title' => $title !== '' ? $title : $typeCode,
+            'description' => $summary !== '' ? $summary : trim((string) ($payload['subtitle'] ?? '')),
+            'og_payload' => [
+                'title' => $title !== '' ? $title : $typeCode,
+                'description' => $summary !== '' ? $summary : trim((string) ($payload['subtitle'] ?? '')),
+                'image' => $shareId !== '' ? $this->buildLocalizedShareOgUrl($shareId) : null,
+                'type' => 'website',
+                'url' => $canonicalUrl,
+            ],
+            'twitter_payload' => [
+                'card' => 'summary_large_image',
+                'title' => $title !== '' ? $title : $typeCode,
+                'description' => $summary !== '' ? $summary : trim((string) ($payload['subtitle'] ?? '')),
+                'image' => $shareId !== '' ? $this->buildLocalizedShareOgUrl($shareId) : null,
+            ],
+            'structured_data' => [],
+            'indexability_state' => 'noindex',
+            'sitemap_state' => 'excluded',
+            'llms_exposure_state' => 'withhold',
+            'share_safety_state' => 'public_share_safe',
+            'public_summary_fingerprint' => data_get($payload, 'public_surface_v1.public_summary_fingerprint'),
+            'fingerprint_seed' => [
+                'scale_code' => $scaleCode,
+                'locale' => $locale,
+                'type_code' => $typeCode,
+                'entry_surface' => data_get($payload, 'public_surface_v1.entry_surface'),
+            ],
+        ]);
+    }
+
+    /**
      * @param  array<string, mixed>  $payload
      * @return array<string, mixed>
      */
@@ -954,6 +1006,11 @@ class ShareService
         $segment = $locale === 'zh-CN' ? 'zh' : 'en';
 
         return rtrim((string) config('app.frontend_url', 'http://localhost'), '/').'/'.$segment.'/share/'.$shareId;
+    }
+
+    private function buildLocalizedShareOgUrl(string $shareId): string
+    {
+        return rtrim((string) config('app.frontend_url', 'http://localhost'), '/').'/og/share/'.$shareId;
     }
 
     private function resolveCompareCtaLabel(string $locale): string
