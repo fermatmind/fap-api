@@ -246,6 +246,8 @@ final class CareerJobPublicApiTest extends TestCase
         $response->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath('job.job_code', 'product-manager')
+            ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
+            ->assertJsonPath('seo_surface_v1.surface_type', 'career_job_public_detail')
             ->assertJsonPath('job.industry_label', 'Technology')
             ->assertJsonPath('job.salary.currency', 'USD')
             ->assertJsonPath('job.outlook.summary', 'Growing')
@@ -401,6 +403,8 @@ final class CareerJobPublicApiTest extends TestCase
         $enResponse->assertOk()
             ->assertJsonPath('meta.title', 'Product Manager Career Guide | FermatMind')
             ->assertJsonPath('meta.canonical', 'https://staging.fermatmind.com/en/career/jobs/product-manager')
+            ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
+            ->assertJsonPath('seo_surface_v1.surface_type', 'career_job_public_detail')
             ->assertJsonPath('meta.alternates.en', 'https://staging.fermatmind.com/en/career/jobs/product-manager')
             ->assertJsonPath('meta.alternates.zh-CN', 'https://staging.fermatmind.com/zh/career/jobs/product-manager')
             ->assertJsonPath('meta.robots', 'index,follow')
@@ -411,6 +415,7 @@ final class CareerJobPublicApiTest extends TestCase
         $zhResponse = $this->getJson('/api/v0.5/career-jobs/product-manager/seo?locale=zh-CN');
         $zhResponse->assertOk()
             ->assertJsonPath('meta.canonical', 'https://staging.fermatmind.com/zh/career/jobs/product-manager')
+            ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
             ->assertJsonPath('meta.robots', 'noindex,follow')
             ->assertJsonPath('jsonld.name', (string) $zhJob->title)
             ->assertJsonPath('jsonld.mainEntityOfPage', 'https://staging.fermatmind.com/zh/career/jobs/product-manager');

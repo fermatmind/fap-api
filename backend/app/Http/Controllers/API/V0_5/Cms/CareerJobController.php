@@ -10,6 +10,7 @@ use App\Models\CareerJob;
 use App\Models\CareerJobSection;
 use App\Services\Cms\CareerJobSeoService;
 use App\Services\Cms\CareerJobService;
+use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -21,6 +22,7 @@ final class CareerJobController extends Controller
     public function __construct(
         private readonly CareerJobService $careerJobService,
         private readonly CareerJobSeoService $careerJobSeoService,
+        private readonly SeoSurfaceContractService $seoSurfaceContractService,
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -75,6 +77,9 @@ final class CareerJobController extends Controller
             return $this->notFoundResponse('career job not found.');
         }
 
+        $meta = $this->careerJobSeoService->buildMeta($job, $validated['locale']);
+        $jsonLd = $this->careerJobSeoService->buildJsonLd($job, $validated['locale']);
+
         return response()->json([
             'ok' => true,
             'job' => $this->careerJobService->detailPayload($job),
@@ -83,6 +88,7 @@ final class CareerJobController extends Controller
                 $job->sections->all()
             ),
             'seo_meta' => $this->careerJobService->seoMetaPayload($job->seoMeta),
+            'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'career_job_public_detail'),
         ]);
     }
 
@@ -103,9 +109,33 @@ final class CareerJobController extends Controller
             return response()->json(['error' => 'not found'], 404);
         }
 
+        $meta = $this->careerJobSeoService->buildMeta($job, $validated['locale']);
+        $jsonLd = $this->careerJobSeoService->buildJsonLd($job, $validated['locale']);
+
         return response()->json([
-            'meta' => $this->careerJobSeoService->buildMeta($job, $validated['locale']),
-            'jsonld' => $this->careerJobSeoService->buildJsonLd($job, $validated['locale']),
+            'meta' => $meta,
+            'jsonld' => $jsonLd,
+            'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'career_job_public_detail'),
+        ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $meta
+     * @return array<string,mixed>
+     */
+    private function buildSeoSurface(array $meta, array $jsonLd, string $surfaceType): array
+    {
+        return $this->seoSurfaceContractService->build([
+            'metadata_scope' => 'public_indexable_detail',
+            'surface_type' => $surfaceType,
+            'canonical_url' => $meta['canonical'] ?? null,
+            'robots_policy' => $meta['robots'] ?? null,
+            'title' => $meta['title'] ?? null,
+            'description' => $meta['description'] ?? null,
+            'og_payload' => is_array($meta['og'] ?? null) ? $meta['og'] : [],
+            'twitter_payload' => is_array($meta['twitter'] ?? null) ? $meta['twitter'] : [],
+            'alternates' => is_array($meta['alternates'] ?? null) ? $meta['alternates'] : [],
+            'structured_data' => $jsonLd,
         ]);
     }
 

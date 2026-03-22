@@ -212,6 +212,8 @@ final class CareerGuidePublicApiTest extends TestCase
         $response->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath('guide.guide_code', 'from-mbti-to-job-fit')
+            ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
+            ->assertJsonPath('seo_surface_v1.surface_type', 'career_guide_public_detail')
             ->assertJsonPath('guide.category_slug', 'assessment-usage')
             ->assertJsonPath('guide.body_md', '# Guide body')
             ->assertJsonPath('related_jobs.0.job_code', 'product-manager')
@@ -313,6 +315,8 @@ final class CareerGuidePublicApiTest extends TestCase
 
         $response->assertOk()
             ->assertJsonPath('meta.title', 'From MBTI to Job Fit | FermatMind')
+            ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
+            ->assertJsonPath('seo_surface_v1.surface_type', 'career_guide_public_detail')
             ->assertJsonPath(
                 'meta.canonical',
                 'https://staging.fermatmind.com/en/career/guides/from-mbti-to-job-fit'
@@ -372,6 +376,7 @@ final class CareerGuidePublicApiTest extends TestCase
                 'meta.canonical',
                 'https://staging.fermatmind.com/en/career/guides/solo-guide'
             )
+            ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
             ->assertJsonPath(
                 'meta.alternates.en',
                 'https://staging.fermatmind.com/en/career/guides/solo-guide'

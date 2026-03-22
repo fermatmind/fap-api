@@ -14,6 +14,7 @@ use App\Models\PersonalityProfileVariantSection;
 use App\Models\PersonalityProfileVariantSeoMeta;
 use App\Services\Cms\PersonalityProfileSeoService;
 use App\Services\Cms\PersonalityProfileService;
+use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -25,6 +26,7 @@ class PersonalityController extends Controller
     public function __construct(
         private readonly PersonalityProfileService $personalityProfileService,
         private readonly PersonalityProfileSeoService $personalityProfileSeoService,
+        private readonly SeoSurfaceContractService $seoSurfaceContractService,
     ) {}
 
     public function index(Request $request): JsonResponse
@@ -86,6 +88,8 @@ class PersonalityController extends Controller
         /** @var PersonalityProfileVariant|null $variant */
         $variant = $routeProfile['variant'];
         $projection = $this->personalityProfileService->buildPublicProjection($profile, $variant);
+        $meta = $this->personalityProfileSeoService->buildMeta($profile, $variant);
+        $jsonLd = $this->personalityProfileSeoService->buildJsonLd($profile, $variant);
 
         return response()->json([
             'ok' => true,
@@ -93,6 +97,7 @@ class PersonalityController extends Controller
             'sections' => $this->publicSectionPayloads($profile, $variant),
             'seo_meta' => $this->seoMetaPayload($profile, $variant),
             'mbti_public_projection_v1' => $projection,
+            'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'mbti_personality_public_detail'),
         ]);
     }
 
@@ -118,10 +123,33 @@ class PersonalityController extends Controller
         $profile = $routeProfile['profile'];
         /** @var PersonalityProfileVariant|null $variant */
         $variant = $routeProfile['variant'];
+        $meta = $this->personalityProfileSeoService->buildMeta($profile, $variant);
+        $jsonLd = $this->personalityProfileSeoService->buildJsonLd($profile, $variant);
 
         return response()->json([
-            'meta' => $this->personalityProfileSeoService->buildMeta($profile, $variant),
-            'jsonld' => $this->personalityProfileSeoService->buildJsonLd($profile, $variant),
+            'meta' => $meta,
+            'jsonld' => $jsonLd,
+            'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'mbti_personality_public_detail'),
+        ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $meta
+     * @return array<string,mixed>
+     */
+    private function buildSeoSurface(array $meta, array $jsonLd, string $surfaceType): array
+    {
+        return $this->seoSurfaceContractService->build([
+            'metadata_scope' => 'public_indexable_detail',
+            'surface_type' => $surfaceType,
+            'canonical_url' => $meta['canonical'] ?? null,
+            'robots_policy' => $meta['robots'] ?? null,
+            'title' => $meta['title'] ?? null,
+            'description' => $meta['description'] ?? null,
+            'og_payload' => is_array($meta['og'] ?? null) ? $meta['og'] : [],
+            'twitter_payload' => is_array($meta['twitter'] ?? null) ? $meta['twitter'] : [],
+            'alternates' => is_array($meta['alternates'] ?? null) ? $meta['alternates'] : [],
+            'structured_data' => $jsonLd,
         ]);
     }
 

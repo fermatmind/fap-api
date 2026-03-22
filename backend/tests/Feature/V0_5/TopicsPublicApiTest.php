@@ -231,6 +231,8 @@ final class TopicsPublicApiTest extends TestCase
             ->assertJsonCount(1, 'sections')
             ->assertJsonPath('sections.0.section_key', 'overview')
             ->assertJsonPath('seo_meta.seo_title', 'MBTI Guide and Type Hub | FermatMind')
+            ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
+            ->assertJsonPath('seo_surface_v1.surface_type', 'topic_public_detail')
             ->assertJsonPath('entry_groups.featured.0.entry_type', 'personality_profile')
             ->assertJsonPath('entry_groups.featured.0.title', (string) $personality->title)
             ->assertJsonPath('entry_groups.featured.0.url', '/en/personality/intj')
@@ -361,6 +363,8 @@ final class TopicsPublicApiTest extends TestCase
         $enResponse->assertOk()
             ->assertJsonPath('meta.title', 'MBTI Guide and Type Hub | FermatMind')
             ->assertJsonPath('meta.canonical', 'https://staging.fermatmind.com/en/topics/mbti')
+            ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
+            ->assertJsonPath('seo_surface_v1.surface_type', 'topic_public_detail')
             ->assertJsonPath('meta.robots', 'index,follow');
         self::assertSame('CollectionPage', data_get($enResponse->json(), 'jsonld.@type'));
         self::assertSame(
@@ -371,6 +375,7 @@ final class TopicsPublicApiTest extends TestCase
         $zhResponse = $this->getJson('/api/v0.5/topics/mbti/seo?locale=zh-CN');
         $zhResponse->assertOk()
             ->assertJsonPath('meta.canonical', 'https://staging.fermatmind.com/zh/topics/mbti')
+            ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
             ->assertJsonPath('meta.robots', 'noindex,follow');
         self::assertSame(
             'https://staging.fermatmind.com/zh/topics/mbti',

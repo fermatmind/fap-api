@@ -80,6 +80,11 @@ final class ShareSummaryContractTest extends TestCase
         $this->assertSame($response->json('type_name'), $response->json('mbti_public_projection_v1.profile.type_name'));
         $this->assertSame($response->json('dimensions'), $response->json('mbti_public_projection_v1.dimensions'));
         $this->assertSame('public.surface.v1', $response->json('public_surface_v1.version'));
+        $this->assertSame('seo.surface.v1', $response->json('seo_surface_v1.metadata_contract_version'));
+        $this->assertSame('public_share_safe', $response->json('seo_surface_v1.metadata_scope'));
+        $this->assertSame('mbti_share_public_safe', $response->json('seo_surface_v1.surface_type'));
+        $this->assertSame('noindex,follow', $response->json('seo_surface_v1.robots_policy'));
+        $this->assertSame('noindex', $response->json('seo_surface_v1.indexability_state'));
         $this->assertSame('mbti_share_landing', $response->json('public_surface_v1.entry_surface'));
         $this->assertSame('noindex,follow', $response->json('public_surface_v1.robots_policy'));
         $this->assertSame('share_public_surface', $response->json('public_surface_v1.attribution_scope'));
@@ -183,6 +188,7 @@ final class ShareSummaryContractTest extends TestCase
             'mbti_public_summary_v1',
             'mbti_public_projection_v1',
             'public_surface_v1',
+            'seo_surface_v1',
             'insight_graph_v1',
             'embed_surface_v1',
             'widget_surface_v1',
@@ -234,6 +240,8 @@ final class ShareSummaryContractTest extends TestCase
             ->assertJsonPath('type_code', 'BIG5')
             ->assertJsonPath('type_name', 'Big Five personality')
             ->assertJsonPath('public_surface_v1.version', 'public.surface.v1')
+            ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
+            ->assertJsonPath('seo_surface_v1.surface_type', 'big5_share_public_safe')
             ->assertJsonPath('public_surface_v1.entry_surface', 'big5_share_landing')
             ->assertJsonPath('public_surface_v1.robots_policy', 'noindex,follow')
             ->assertJsonPath('public_surface_v1.attribution_scope', 'share_public_surface')
