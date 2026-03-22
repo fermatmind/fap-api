@@ -248,6 +248,8 @@ final class CareerJobPublicApiTest extends TestCase
             ->assertJsonPath('job.job_code', 'product-manager')
             ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
             ->assertJsonPath('seo_surface_v1.surface_type', 'career_job_public_detail')
+            ->assertJsonPath('landing_surface_v1.landing_contract_version', 'landing.surface.v1')
+            ->assertJsonPath('landing_surface_v1.entry_surface', 'career_job_detail')
             ->assertJsonPath('job.industry_label', 'Technology')
             ->assertJsonPath('job.salary.currency', 'USD')
             ->assertJsonPath('job.outlook.summary', 'Growing')

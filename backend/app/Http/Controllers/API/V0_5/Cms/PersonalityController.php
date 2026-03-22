@@ -14,6 +14,7 @@ use App\Models\PersonalityProfileVariantSection;
 use App\Models\PersonalityProfileVariantSeoMeta;
 use App\Services\Cms\PersonalityProfileSeoService;
 use App\Services\Cms\PersonalityProfileService;
+use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ class PersonalityController extends Controller
     public function __construct(
         private readonly PersonalityProfileService $personalityProfileService,
         private readonly PersonalityProfileSeoService $personalityProfileSeoService,
+        private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
     ) {}
 
@@ -62,6 +64,7 @@ class PersonalityController extends Controller
                 'total' => (int) $paginator->total(),
                 'last_page' => (int) $paginator->lastPage(),
             ],
+            'landing_surface_v1' => $this->buildIndexLandingSurface($validated['locale']),
         ]);
     }
 
@@ -98,6 +101,7 @@ class PersonalityController extends Controller
             'seo_meta' => $this->seoMetaPayload($profile, $variant),
             'mbti_public_projection_v1' => $projection,
             'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'mbti_personality_public_detail'),
+            'landing_surface_v1' => $this->buildDetailLandingSurface($profile, $variant, $projection, $validated['locale']),
         ]);
     }
 
@@ -151,6 +155,146 @@ class PersonalityController extends Controller
             'alternates' => is_array($meta['alternates'] ?? null) ? $meta['alternates'] : [],
             'structured_data' => $jsonLd,
         ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $projection
+     * @return array<string,mixed>
+     */
+    private function buildDetailLandingSurface(
+        PersonalityProfile $profile,
+        ?PersonalityProfileVariant $variant,
+        array $projection,
+        string $locale
+    ): array {
+        $segment = $this->frontendLocaleSegment($locale);
+        $routeSlug = $this->resolveRouteSlug($profile, $variant);
+        $careerPath = '/'.$segment.'/career/recommendations/mbti/'.$routeSlug;
+        $topicPath = '/'.$segment.'/topics/mbti';
+        $startTestPath = '/'.$segment.'/tests/mbti-personality-test-16-personality-types';
+
+        return $this->landingSurfaceContractService->build([
+            'landing_scope' => 'public_indexable_detail',
+            'entry_surface' => 'personality_detail',
+            'entry_type' => 'personality_profile',
+            'summary_blocks' => [
+                [
+                    'key' => 'hero',
+                    'title' => (string) ($profile->title ?? ''),
+                    'body' => trim((string) ($projection['summary_card']['summary'] ?? $profile->excerpt ?? '')),
+                    'kind' => 'answer_first',
+                ],
+            ],
+            'discoverability_keys' => [
+                'personality_detail',
+                'topic_cluster',
+                'career_recommendation',
+                'start_test',
+            ],
+            'continue_reading_keys' => [
+                'career_recommendation',
+                'topic_cluster',
+                'related_content',
+            ],
+            'start_test_target' => $startTestPath,
+            'result_resume_target' => null,
+            'content_continue_target' => $careerPath,
+            'cta_bundle' => [
+                [
+                    'key' => 'start_test',
+                    'label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
+                    'href' => $startTestPath,
+                    'kind' => 'start_test',
+                ],
+                [
+                    'key' => 'career_recommendation',
+                    'label' => $locale === 'zh-CN' ? '查看职业推荐' : 'View career recommendations',
+                    'href' => $careerPath,
+                    'kind' => 'content_continue',
+                ],
+                [
+                    'key' => 'topic_cluster',
+                    'label' => $locale === 'zh-CN' ? '查看主题聚合' : 'Browse topic hub',
+                    'href' => $topicPath,
+                    'kind' => 'discover',
+                ],
+            ],
+            'indexability_state' => $profile->is_indexable ? 'indexable' : 'noindex',
+            'attribution_scope' => 'public_personality_landing',
+            'seo_surface_ref' => (string) ($profile->slug ?? ''),
+            'surface_family' => 'personality',
+            'primary_content_ref' => (string) ($variant?->runtime_type_code ?? $profile->type_code ?? $profile->slug ?? ''),
+            'related_surface_keys' => ['career_recommendation', 'topic_cluster'],
+            'fingerprint_seed' => [
+                'slug' => (string) ($profile->slug ?? ''),
+                'runtime_type_code' => (string) ($variant?->runtime_type_code ?? ''),
+                'locale' => $locale,
+            ],
+        ]);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function buildIndexLandingSurface(string $locale): array
+    {
+        $segment = $this->frontendLocaleSegment($locale);
+
+        return $this->landingSurfaceContractService->build([
+            'landing_scope' => 'public_indexable_index',
+            'entry_surface' => 'personality_index',
+            'entry_type' => 'personality_family_index',
+            'summary_blocks' => [
+                [
+                    'key' => 'hero',
+                    'title' => $locale === 'zh-CN' ? '人格类型' : 'Personality types',
+                    'body' => $locale === 'zh-CN'
+                        ? '浏览 16 型人格的公开画像、职业建议与延伸阅读。'
+                        : 'Browse public personality profiles, career guidance, and next reading paths across all 16 types.',
+                    'kind' => 'hero',
+                ],
+            ],
+            'discoverability_keys' => ['personality_index', 'topic_cluster', 'career_recommendation', 'start_test'],
+            'continue_reading_keys' => ['topic_cluster', 'personality_detail'],
+            'start_test_target' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+            'result_resume_target' => null,
+            'content_continue_target' => '/'.$segment.'/topics/mbti',
+            'cta_bundle' => [
+                [
+                    'key' => 'start_test',
+                    'label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
+                    'href' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+                    'kind' => 'start_test',
+                ],
+                [
+                    'key' => 'topic_cluster',
+                    'label' => $locale === 'zh-CN' ? '查看主题聚合' : 'Browse topic hub',
+                    'href' => '/'.$segment.'/topics/mbti',
+                    'kind' => 'discover',
+                ],
+            ],
+            'indexability_state' => 'indexable',
+            'attribution_scope' => 'public_personality_landing',
+            'surface_family' => 'personality',
+            'primary_content_ref' => 'personality:index',
+            'related_surface_keys' => ['personality_detail', 'topic_cluster'],
+            'fingerprint_seed' => ['locale' => $locale],
+        ]);
+    }
+
+    private function resolveRouteSlug(PersonalityProfile $profile, ?PersonalityProfileVariant $variant): string
+    {
+        $runtimeType = strtoupper(trim((string) ($variant?->runtime_type_code ?? '')));
+        if ($runtimeType !== '') {
+            return strtolower($runtimeType);
+        }
+
+        return strtolower(trim((string) ($profile->slug ?? $profile->type_code ?? '')));
+    }
+
+    private function frontendLocaleSegment(string $locale): string
+    {
+        return $locale === 'zh-CN' ? 'zh' : 'en';
     }
 
     /**

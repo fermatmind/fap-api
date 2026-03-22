@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CareerGuide;
 use App\Services\Cms\CareerGuideSeoService;
 use App\Services\Cms\CareerGuideService;
+use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ final class CareerGuideController extends Controller
     public function __construct(
         private readonly CareerGuideService $careerGuideService,
         private readonly CareerGuideSeoService $careerGuideSeoService,
+        private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
     ) {}
 
@@ -89,6 +91,7 @@ final class CareerGuideController extends Controller
             'related_personality_profiles' => $this->careerGuideService->relatedPersonalityProfilesPayload($guide),
             'seo_meta' => $this->careerGuideService->seoMetaPayload($guide),
             'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'career_guide_public_detail'),
+            'landing_surface_v1' => $this->buildLandingSurface($guide, $validated['locale']),
         ]);
     }
 
@@ -137,6 +140,78 @@ final class CareerGuideController extends Controller
             'alternates' => is_array($meta['alternates'] ?? null) ? $meta['alternates'] : [],
             'structured_data' => $jsonLd,
         ]);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function buildLandingSurface(CareerGuide $guide, string $locale): array
+    {
+        $segment = $this->frontendLocaleSegment($locale);
+        $relatedJobs = $this->careerGuideService->relatedJobsPayload($guide);
+        $relatedArticles = $this->careerGuideService->relatedArticlesPayload($guide);
+        $relatedProfiles = $this->careerGuideService->relatedPersonalityProfilesPayload($guide);
+
+        return $this->landingSurfaceContractService->build([
+            'landing_scope' => 'public_indexable_detail',
+            'entry_surface' => 'career_guide_detail',
+            'entry_type' => 'career_guide',
+            'summary_blocks' => [
+                [
+                    'key' => 'hero',
+                    'title' => (string) ($guide->title ?? ''),
+                    'body' => trim((string) ($guide->excerpt ?? '')),
+                    'kind' => 'answer_first',
+                ],
+            ],
+            'discoverability_keys' => ['career_guide', 'career_job', 'article_detail', 'personality_profile'],
+            'continue_reading_keys' => ['career_job', 'article_detail', 'personality_profile'],
+            'start_test_target' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+            'result_resume_target' => null,
+            'content_continue_target' => trim((string) (($relatedJobs[0]['slug'] ?? null) !== null
+                ? '/'.$segment.'/career/jobs/'.rawurlencode((string) $relatedJobs[0]['slug'])
+                : (($relatedArticles[0]['slug'] ?? null) !== null
+                    ? '/'.$segment.'/articles/'.rawurlencode((string) $relatedArticles[0]['slug'])
+                    : ''))),
+            'cta_bundle' => array_values(array_filter([
+                [
+                    'key' => 'start_test',
+                    'label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
+                    'href' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+                    'kind' => 'start_test',
+                ],
+                ($relatedJobs[0]['slug'] ?? null) !== null
+                    ? [
+                        'key' => 'related_job',
+                        'label' => $locale === 'zh-CN' ? '查看相关职业' : 'View related job',
+                        'href' => '/'.$segment.'/career/jobs/'.rawurlencode((string) $relatedJobs[0]['slug']),
+                        'kind' => 'content_continue',
+                    ]
+                    : null,
+                ($relatedProfiles[0]['slug'] ?? null) !== null
+                    ? [
+                        'key' => 'related_personality',
+                        'label' => $locale === 'zh-CN' ? '查看人格画像' : 'View personality profile',
+                        'href' => '/'.$segment.'/personality/'.rawurlencode((string) $relatedProfiles[0]['slug']),
+                        'kind' => 'discover',
+                    ]
+                    : null,
+            ])),
+            'indexability_state' => $guide->is_indexable ? 'indexable' : 'noindex',
+            'attribution_scope' => 'public_career_guide_landing',
+            'surface_family' => 'career_guide',
+            'primary_content_ref' => (string) ($guide->slug ?? ''),
+            'related_surface_keys' => ['career_job', 'article_detail', 'personality_profile'],
+            'fingerprint_seed' => [
+                'slug' => (string) ($guide->slug ?? ''),
+                'locale' => $locale,
+            ],
+        ]);
+    }
+
+    private function frontendLocaleSegment(string $locale): string
+    {
+        return $locale === 'zh-CN' ? 'zh' : 'en';
     }
 
     /**

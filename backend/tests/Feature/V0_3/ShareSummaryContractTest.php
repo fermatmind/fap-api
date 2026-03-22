@@ -80,6 +80,11 @@ final class ShareSummaryContractTest extends TestCase
         $this->assertSame($response->json('type_name'), $response->json('mbti_public_projection_v1.profile.type_name'));
         $this->assertSame($response->json('dimensions'), $response->json('mbti_public_projection_v1.dimensions'));
         $this->assertSame('public.surface.v1', $response->json('public_surface_v1.version'));
+        $this->assertSame('landing.surface.v1', $response->json('landing_surface_v1.landing_contract_version'));
+        $this->assertSame('public_share_safe', $response->json('landing_surface_v1.landing_scope'));
+        $this->assertSame('mbti_share_entry', $response->json('landing_surface_v1.entry_surface'));
+        $this->assertSame('noindex', $response->json('landing_surface_v1.indexability_state'));
+        $this->assertSame('public_share_safe', $response->json('landing_surface_v1.share_safety_state'));
         $this->assertSame('seo.surface.v1', $response->json('seo_surface_v1.metadata_contract_version'));
         $this->assertSame('public_share_safe', $response->json('seo_surface_v1.metadata_scope'));
         $this->assertSame('mbti_share_public_safe', $response->json('seo_surface_v1.surface_type'));
@@ -188,6 +193,7 @@ final class ShareSummaryContractTest extends TestCase
             'mbti_public_summary_v1',
             'mbti_public_projection_v1',
             'public_surface_v1',
+            'landing_surface_v1',
             'seo_surface_v1',
             'insight_graph_v1',
             'embed_surface_v1',
@@ -240,6 +246,9 @@ final class ShareSummaryContractTest extends TestCase
             ->assertJsonPath('type_code', 'BIG5')
             ->assertJsonPath('type_name', 'Big Five personality')
             ->assertJsonPath('public_surface_v1.version', 'public.surface.v1')
+            ->assertJsonPath('landing_surface_v1.landing_contract_version', 'landing.surface.v1')
+            ->assertJsonPath('landing_surface_v1.entry_surface', 'big5_share_entry')
+            ->assertJsonPath('landing_surface_v1.indexability_state', 'noindex')
             ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
             ->assertJsonPath('seo_surface_v1.surface_type', 'big5_share_public_safe')
             ->assertJsonPath('public_surface_v1.entry_surface', 'big5_share_landing')
