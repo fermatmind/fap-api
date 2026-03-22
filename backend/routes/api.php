@@ -16,6 +16,7 @@ use App\Http\Controllers\API\V0_3\MbtiCompareInviteController;
 use App\Http\Controllers\API\V0_3\MeController as MeV03Controller;
 use App\Http\Controllers\API\V0_3\OrgInvitesController;
 use App\Http\Controllers\API\V0_3\OrgsController;
+use App\Http\Controllers\API\V0_3\PublicGatewaySurfaceController;
 use App\Http\Controllers\API\V0_3\ScalesController;
 use App\Http\Controllers\API\V0_3\ScalesLookupController;
 use App\Http\Controllers\API\V0_3\ScalesSitemapSourceController;
@@ -153,6 +154,10 @@ Route::prefix('v0.3')->middleware([
         Route::get('/scales', [ScalesController::class, 'index']);
         Route::get('/scales/lookup', [ScalesLookupController::class, 'lookup']);
         Route::get('/scales/sitemap-source', [ScalesSitemapSourceController::class, 'index']);
+        Route::get('/public-gateways/home', [PublicGatewaySurfaceController::class, 'home']);
+        Route::get('/public-gateways/tests', [PublicGatewaySurfaceController::class, 'tests']);
+        Route::get('/public-gateways/help', [PublicGatewaySurfaceController::class, 'help']);
+        Route::get('/public-gateways/help/{slug}', [PublicGatewaySurfaceController::class, 'helpDetail']);
         Route::get('/scales/{scale_code}/questions', [ScalesController::class, 'questions']);
         Route::get('/scales/{scale_code}', [ScalesController::class, 'show']);
 

@@ -10,6 +10,8 @@ use App\Models\Article;
 use App\Services\Cms\ArticlePublishService;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\ArticleService;
+use App\Services\PublicSurface\AnswerSurfaceContractService;
+use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -23,6 +25,8 @@ class ArticleController extends Controller
         private readonly ArticleService $articleService,
         private readonly ArticlePublishService $articlePublishService,
         private readonly ArticleSeoService $articleSeoService,
+        private readonly AnswerSurfaceContractService $answerSurfaceContractService,
+        private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
     ) {}
 
@@ -69,6 +73,10 @@ class ArticleController extends Controller
                 'total' => (int) $paginator->total(),
                 'last_page' => (int) $paginator->lastPage(),
             ],
+            'landing_surface_v1' => $this->buildIndexLandingSurface(
+                $items,
+                $validated['locale'] ?? 'en'
+            ),
         ]);
     }
 
@@ -126,6 +134,8 @@ class ArticleController extends Controller
             'ok' => true,
             'article' => $this->articlePayload($article),
             'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'article_public_detail'),
+            'landing_surface_v1' => $this->buildDetailLandingSurface($article, $locale),
+            'answer_surface_v1' => $this->buildDetailAnswerSurface($article, $locale),
         ]);
     }
 
@@ -193,6 +203,253 @@ class ArticleController extends Controller
             'twitter_payload' => is_array($meta['twitter'] ?? null) ? $meta['twitter'] : [],
             'alternates' => is_array($meta['alternates'] ?? null) ? $meta['alternates'] : [],
             'structured_data' => $jsonLd,
+        ]);
+    }
+
+    /**
+     * @param  array<int,array<string,mixed>>  $items
+     * @return array<string,mixed>
+     */
+    private function buildIndexLandingSurface(array $items, string $locale): array
+    {
+        $segment = $this->frontendLocaleSegment($locale);
+        $discoverabilityItems = array_values(array_filter(array_map(
+            static function (array $item): ?array {
+                $slug = trim((string) ($item['slug'] ?? ''));
+                $title = trim((string) ($item['title'] ?? ''));
+                if ($slug === '' || $title === '') {
+                    return null;
+                }
+
+                $locale = trim((string) ($item['locale'] ?? 'en'));
+                $segment = $locale === 'zh-CN' ? 'zh' : 'en';
+
+                return [
+                    'key' => $slug,
+                    'title' => $title,
+                    'summary' => trim((string) ($item['excerpt'] ?? '')),
+                    'href' => '/'.$segment.'/articles/'.$slug,
+                    'kind' => 'article_detail',
+                    'badge_label' => is_array($item['category'] ?? null)
+                        ? trim((string) (($item['category']['name'] ?? '')))
+                        : null,
+                ];
+            },
+            array_slice($items, 0, 6)
+        )));
+        $firstHref = $discoverabilityItems[0]['href'] ?? '/'.$segment.'/articles';
+
+        return $this->landingSurfaceContractService->build([
+            'landing_scope' => 'public_indexable_hub',
+            'entry_surface' => 'article_index',
+            'entry_type' => 'content_hub',
+            'summary_blocks' => [
+                [
+                    'key' => 'articles_index',
+                    'title' => $locale === 'zh-CN' ? '文章与洞察' : 'Articles and insights',
+                    'body' => $locale === 'zh-CN'
+                        ? '从公开文章进入人格、主题、职业与测试主链。'
+                        : 'Use public articles to continue into personality, topic, career, and assessment surfaces.',
+                    'kind' => 'answer_first',
+                ],
+            ],
+            'discoverability_items' => $discoverabilityItems,
+            'discoverability_keys' => array_column($discoverabilityItems, 'key'),
+            'continue_reading_keys' => ['article_detail', 'topics_index', 'personality_index'],
+            'start_test_target' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+            'content_continue_target' => $firstHref,
+            'cta_bundle' => [
+                [
+                    'key' => 'featured_article',
+                    'label' => $locale === 'zh-CN' ? '阅读精选文章' : 'Read featured article',
+                    'href' => $firstHref,
+                    'kind' => 'content_continue',
+                ],
+                [
+                    'key' => 'topic_hub',
+                    'label' => $locale === 'zh-CN' ? '查看主题聚合' : 'Browse topic hubs',
+                    'href' => '/'.$segment.'/topics',
+                    'kind' => 'discover',
+                ],
+                [
+                    'key' => 'start_test',
+                    'label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
+                    'href' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+                    'kind' => 'start_test',
+                ],
+            ],
+            'indexability_state' => 'indexable',
+            'attribution_scope' => 'public_article_landing',
+            'surface_family' => 'article',
+            'primary_content_ref' => 'articles_index',
+            'related_surface_keys' => ['topics_index', 'personality_index', 'tests_index'],
+            'fingerprint_seed' => [
+                'locale' => $locale,
+                'discoverability_keys' => array_column($discoverabilityItems, 'key'),
+            ],
+        ]);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function buildDetailLandingSurface(Article $article, string $locale): array
+    {
+        $segment = $this->frontendLocaleSegment($locale);
+        $slug = trim((string) $article->slug);
+
+        return $this->landingSurfaceContractService->build([
+            'landing_scope' => 'public_indexable_detail',
+            'entry_surface' => 'article_detail',
+            'entry_type' => 'editorial_article',
+            'summary_blocks' => [
+                [
+                    'key' => 'article_hero',
+                    'title' => (string) $article->title,
+                    'body' => trim((string) ($article->excerpt ?? '')),
+                    'kind' => 'answer_first',
+                ],
+            ],
+            'discoverability_keys' => ['article_index', 'topic_hub', 'personality_hub', 'career_recommendations'],
+            'continue_reading_keys' => ['article_index', 'topic_hub'],
+            'start_test_target' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+            'content_continue_target' => '/'.$segment.'/articles',
+            'cta_bundle' => [
+                [
+                    'key' => 'back_to_articles',
+                    'label' => $locale === 'zh-CN' ? '返回文章列表' : 'Back to articles',
+                    'href' => '/'.$segment.'/articles',
+                    'kind' => 'content_continue',
+                ],
+                [
+                    'key' => 'topic_hub',
+                    'label' => $locale === 'zh-CN' ? '查看主题聚合' : 'Browse topic hubs',
+                    'href' => '/'.$segment.'/topics',
+                    'kind' => 'discover',
+                ],
+                [
+                    'key' => 'start_test',
+                    'label' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
+                    'href' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+                    'kind' => 'start_test',
+                ],
+            ],
+            'indexability_state' => $article->is_indexable ? 'indexable' : 'noindex',
+            'attribution_scope' => 'public_article_detail',
+            'surface_family' => 'article',
+            'primary_content_ref' => $slug,
+            'related_surface_keys' => ['topic_hub', 'personality_hub', 'tests_index'],
+            'fingerprint_seed' => [
+                'slug' => $slug,
+                'locale' => $locale,
+            ],
+        ]);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function buildDetailAnswerSurface(Article $article, string $locale): array
+    {
+        $segment = $this->frontendLocaleSegment($locale);
+        $category = $article->relationLoaded('category') && $article->category
+            ? trim((string) ($article->category->name ?? ''))
+            : null;
+        $tagNames = $article->relationLoaded('tags')
+            ? array_values(array_filter(array_map(
+                static fn ($tag): string => trim((string) ($tag->name ?? '')),
+                $article->tags->all()
+            )))
+            : [];
+        $faqBlocks = [
+            [
+                'key' => 'article_use',
+                'question' => $locale === 'zh-CN' ? '什么时候适合阅读这篇文章？' : 'When should I use this article?',
+                'answer' => $locale === 'zh-CN'
+                    ? '当你想把公开内容和测评、人格画像或职业建议串起来时，先从这篇文章的核心摘要开始。'
+                    : 'Use this article when you want to connect public content with tests, personality profiles, or career guidance from a single starting point.',
+            ],
+            [
+                'key' => 'article_limits',
+                'question' => $locale === 'zh-CN' ? '这篇文章会替代正式判断吗？' : 'Does this replace formal judgment?',
+                'answer' => $locale === 'zh-CN'
+                    ? '不会。它只提供公开解释和行动线索，不替代医疗、法律或专业诊断。'
+                    : 'No. It offers public explanation and action cues, but does not replace medical, legal, or professional judgment.',
+            ],
+        ];
+
+        $compareBlocks = array_values(array_filter([
+            $category !== null
+                ? [
+                    'key' => 'article_category',
+                    'title' => $locale === 'zh-CN' ? '内容分类' : 'Content category',
+                    'body' => $category,
+                    'kind' => 'content_compare',
+                ]
+                : null,
+            $tagNames !== []
+                ? [
+                    'key' => 'article_tags',
+                    'title' => $locale === 'zh-CN' ? '相关标签' : 'Related tags',
+                    'body' => implode($locale === 'zh-CN' ? '、' : ', ', array_slice($tagNames, 0, 4)),
+                    'kind' => 'content_compare',
+                ]
+                : null,
+        ]));
+
+        $nextStepBlocks = [
+            [
+                'key' => 'articles_index',
+                'title' => $locale === 'zh-CN' ? '继续浏览文章' : 'Continue with articles',
+                'body' => $locale === 'zh-CN' ? '回到文章目录，继续扩展公开内容阅读链路。' : 'Return to the article hub to keep expanding the public reading chain.',
+                'href' => '/'.$segment.'/articles',
+                'kind' => 'content_continue',
+            ],
+            [
+                'key' => 'topic_hub',
+                'title' => $locale === 'zh-CN' ? '进入主题聚合' : 'Go to topic hubs',
+                'body' => $locale === 'zh-CN' ? '把文章阅读继续到更结构化的主题入口。' : 'Continue from the article into a more structured topic entry surface.',
+                'href' => '/'.$segment.'/topics',
+                'kind' => 'discover',
+            ],
+            [
+                'key' => 'start_test',
+                'title' => $locale === 'zh-CN' ? '开始测试' : 'Take the test',
+                'body' => $locale === 'zh-CN' ? '如果你想把阅读转成自我测量，可以从测试入口开始。' : 'If you want to turn reading into self-measurement, continue into an assessment.',
+                'href' => '/'.$segment.'/tests/mbti-personality-test-16-personality-types',
+                'kind' => 'start_test',
+            ],
+        ];
+
+        return $this->answerSurfaceContractService->build([
+            'answer_scope' => 'public_indexable_detail',
+            'surface_type' => 'article_public_detail',
+            'summary_blocks' => [
+                [
+                    'key' => 'article_summary',
+                    'title' => (string) $article->title,
+                    'body' => trim((string) ($article->excerpt ?? '')),
+                    'kind' => 'answer_first',
+                ],
+            ],
+            'faq_blocks' => $faqBlocks,
+            'compare_blocks' => $compareBlocks,
+            'next_step_blocks' => $nextStepBlocks,
+            'evidence_refs' => array_values(array_filter(array_merge(
+                ['article:'.trim((string) $article->slug)],
+                $category !== null ? ['category:'.$category] : [],
+                array_map(static fn (string $tag): string => 'tag:'.$tag, array_slice($tagNames, 0, 4))
+            ))),
+            'public_safety_state' => 'public_indexable',
+            'indexability_state' => $article->is_indexable ? 'indexable' : 'noindex',
+            'attribution_scope' => 'public_article_answer',
+            'primary_content_ref' => trim((string) $article->slug),
+            'related_surface_keys' => ['articles_index', 'topic_hub', 'tests_index'],
+            'fingerprint_seed' => [
+                'slug' => trim((string) $article->slug),
+                'locale' => $locale,
+                'tag_count' => count($tagNames),
+            ],
         ]);
     }
 
@@ -403,6 +660,11 @@ class ArticleController extends Controller
         $raw = trim((string) $request->query('org_id', '0'));
 
         return preg_match('/^\d+$/', $raw) === 1 ? (int) $raw : 0;
+    }
+
+    private function frontendLocaleSegment(string $locale): string
+    {
+        return $locale === 'zh-CN' ? 'zh' : 'en';
     }
 
     /**

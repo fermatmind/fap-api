@@ -42,7 +42,10 @@ final class ArticlePublicApiTest extends TestCase
             ->assertJsonPath('pagination.per_page', 20)
             ->assertJsonPath('pagination.total', 21)
             ->assertJsonPath('pagination.last_page', 2)
-            ->assertJsonCount(20, 'items');
+            ->assertJsonCount(20, 'items')
+            ->assertJsonPath('landing_surface_v1.landing_contract_version', 'landing.surface.v1')
+            ->assertJsonPath('landing_surface_v1.entry_surface', 'article_index')
+            ->assertJsonPath('landing_surface_v1.entry_type', 'content_hub');
 
         $this->assertSame(
             ['en'],
@@ -116,6 +119,32 @@ final class ArticlePublicApiTest extends TestCase
 
         $this->assertSame($canonical.'#article', data_get($response->json(), 'jsonld.@id'));
         $this->assertStringNotContainsString($legacyCanonical, (string) $response->getContent());
+    }
+
+    public function test_article_detail_includes_landing_and_answer_surfaces(): void
+    {
+        $article = $this->createArticle([
+            'slug' => 'career-fit-guide',
+            'locale' => 'en',
+            'title' => 'Career Fit Guide',
+            'excerpt' => 'Use article-level insight to continue into tests and public hubs.',
+        ]);
+
+        $this->createSeoMeta($article, [
+            'seo_title' => 'Career Fit Guide | FermatMind',
+            'seo_description' => 'Use article-level insight to continue into tests and public hubs.',
+        ]);
+
+        $response = $this->getJson('/api/v0.5/articles/career-fit-guide?locale=en');
+
+        $response->assertOk()
+            ->assertJsonPath('landing_surface_v1.landing_contract_version', 'landing.surface.v1')
+            ->assertJsonPath('landing_surface_v1.entry_surface', 'article_detail')
+            ->assertJsonPath('landing_surface_v1.entry_type', 'editorial_article')
+            ->assertJsonPath('answer_surface_v1.answer_contract_version', 'answer.surface.v1')
+            ->assertJsonPath('answer_surface_v1.surface_type', 'article_public_detail')
+            ->assertJsonPath('answer_surface_v1.summary_blocks.0.key', 'article_summary')
+            ->assertJsonPath('answer_surface_v1.next_step_blocks.0.href', '/en/articles');
     }
 
     public function test_article_seo_does_not_fake_missing_locale_alternates(): void
