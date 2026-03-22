@@ -116,6 +116,10 @@ class ContentPackVersionResource extends Resource
                         ->label('MBTI content inventory')
                         ->content(fn (?ContentPackVersion $record): HtmlString => self::renderInventoryContract($record))
                         ->columnSpanFull(),
+                    Forms\Components\Placeholder::make('cp.fragment_object_groups_v1')
+                        ->label('Objectized fragment groups')
+                        ->content(fn (?ContentPackVersion $record): HtmlString => self::renderFragmentObjectGroups($record))
+                        ->columnSpanFull(),
                     Forms\Components\Placeholder::make('cp.content_object_inventory')
                         ->label('First-wave managed objects')
                         ->content(fn (?ContentPackVersion $record): HtmlString => self::renderObjectInventory($record))
@@ -234,11 +238,14 @@ class ContentPackVersionResource extends Resource
                     'governance_profile' => null,
                     'fragment_family_count' => 0,
                     'fragment_family_keys' => [],
+                    'fragment_object_group_count' => 0,
+                    'fragment_object_group_keys' => [],
                     'selection_tag_count' => 0,
                     'selection_tag_keys' => [],
                     'section_family_count' => 0,
                     'section_family_keys' => [],
                 ],
+                'fragment_object_groups_v1' => [],
                 'runtime_artifact_ref' => null,
                 'content_object_inventory' => [],
                 'content_objects_v1' => [],
@@ -318,6 +325,7 @@ class ContentPackVersionResource extends Resource
         }
 
         $fragmentFamilyKeys = implode(', ', (array) ($inventory['fragment_family_keys'] ?? []));
+        $fragmentObjectGroupKeys = implode(', ', (array) ($inventory['fragment_object_group_keys'] ?? []));
         $sectionFamilyKeys = implode(', ', (array) ($inventory['section_family_keys'] ?? []));
         $selectionTagKeys = implode(', ', (array) ($inventory['selection_tag_keys'] ?? []));
 
@@ -328,6 +336,8 @@ class ContentPackVersionResource extends Resource
             'governance_profile='.(string) ($inventory['governance_profile'] ?? 'none'),
             'fragment_family_count='.(int) ($inventory['fragment_family_count'] ?? 0),
             'fragment_family_keys='.($fragmentFamilyKeys !== '' ? $fragmentFamilyKeys : 'none'),
+            'fragment_object_group_count='.(int) ($inventory['fragment_object_group_count'] ?? 0),
+            'fragment_object_group_keys='.($fragmentObjectGroupKeys !== '' ? $fragmentObjectGroupKeys : 'none'),
             'selection_tag_count='.(int) ($inventory['selection_tag_count'] ?? 0),
             'selection_tag_keys='.($selectionTagKeys !== '' ? $selectionTagKeys : 'none'),
             'section_family_count='.(int) ($inventory['section_family_count'] ?? 0),
@@ -335,6 +345,37 @@ class ContentPackVersionResource extends Resource
         ];
 
         return new HtmlString('<ul><li>'.implode('</li><li>', array_map('e', $items)).'</li></ul>');
+    }
+
+    private static function renderFragmentObjectGroups(?ContentPackVersion $record): HtmlString
+    {
+        $groups = self::controlPlaneValue($record, 'fragment_object_groups_v1', []);
+        if (! is_array($groups) || $groups === []) {
+            return new HtmlString('<span>No objectized fragment groups are visible yet.</span>');
+        }
+
+        $items = array_map(static function (mixed $item): string {
+            if (! is_array($item)) {
+                return '';
+            }
+
+            $sourceRefs = implode(', ', array_values(array_filter((array) ($item['source_refs'] ?? []), 'is_string')));
+            $parts = [
+                (string) ($item['object_group_key'] ?? 'unknown_group'),
+                'family='.(string) ($item['fragment_family'] ?? 'unknown'),
+                'authoring='.(string) ($item['authoring_scope'] ?? 'unknown'),
+                'review_profile='.(string) ($item['review_state_profile'] ?? 'unknown'),
+                'preview_target='.(string) ($item['preview_target_key'] ?? 'unknown'),
+                'runtime_binding='.(string) ($item['runtime_binding'] ?? 'metadata_only'),
+                'governance='.(string) ($item['governance_profile'] ?? 'unknown'),
+                'source_refs='.($sourceRefs !== '' ? $sourceRefs : 'none'),
+            ];
+
+            return e(implode(' | ', $parts));
+        }, $groups);
+        $items = array_values(array_filter($items, static fn (string $item): bool => $item !== ''));
+
+        return new HtmlString('<ul><li>'.implode('</li><li>', $items).'</li></ul>');
     }
 
     private static function renderObjectInventory(?ContentPackVersion $record): HtmlString
@@ -351,8 +392,21 @@ class ContentPackVersionResource extends Resource
 
             $type = (string) ($item['type'] ?? 'unknown');
             $enabled = (bool) ($item['enabled'] ?? false);
+            $fragmentFamily = trim((string) ($item['fragment_family'] ?? ''));
+            $runtimeBinding = trim((string) ($item['runtime_binding'] ?? ''));
 
-            return e($type).': '.($enabled ? 'enabled' : 'not_in_scope');
+            $parts = [
+                $type,
+                $enabled ? 'enabled' : 'not_in_scope',
+            ];
+            if ($fragmentFamily !== '') {
+                $parts[] = 'family='.$fragmentFamily;
+            }
+            if ($runtimeBinding !== '') {
+                $parts[] = 'runtime_binding='.$runtimeBinding;
+            }
+
+            return e(implode(' | ', $parts));
         }, $inventory);
         $items = array_values(array_filter($items, static fn (string $item): bool => $item !== ''));
 
@@ -377,14 +431,20 @@ class ContentPackVersionResource extends Resource
                 $artifactRef = 'runtime_artifact_ref='.(string) ($artifact['storage_path'] ?? ($artifact['dir_alias'] ?? 'published'));
             }
 
+            $sourceRefs = implode(', ', array_values(array_filter((array) ($item['source_refs'] ?? []), 'is_string')));
             $parts = [
                 (string) ($item['content_object_type'] ?? 'unknown'),
+                'family='.(string) ($item['fragment_family'] ?? 'unknown'),
+                'object_group='.(string) ($item['object_group_key'] ?? 'n/a'),
                 'draft='.(string) ($item['draft_state'] ?? 'unknown'),
                 'review='.(string) ($item['review_state'] ?? 'unknown'),
                 'compile='.(string) ($item['compile_status'] ?? 'unknown'),
                 'governance='.(string) ($item['governance_status'] ?? 'unknown'),
                 'release_candidate='.(string) ($item['release_candidate_status'] ?? 'unknown'),
+                'preview='.(string) ($item['preview_target'] ?? 'unknown'),
                 'locale='.(string) ($item['locale_scope'] ?? 'unknown'),
+                'runtime_binding='.(string) ($item['runtime_binding'] ?? 'metadata_only'),
+                'source_refs='.($sourceRefs !== '' ? $sourceRefs : 'none'),
                 $artifactRef,
             ];
 

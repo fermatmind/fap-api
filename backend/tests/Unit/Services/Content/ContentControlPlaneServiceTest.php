@@ -58,6 +58,7 @@ final class ContentControlPlaneServiceTest extends TestCase
         $this->assertArrayHasKey('locale_scope', $contract);
         $this->assertArrayHasKey('experiment_scope', $contract);
         $this->assertArrayHasKey('content_inventory_v1', $contract);
+        $this->assertArrayHasKey('fragment_object_groups_v1', $contract);
         $this->assertArrayHasKey('runtime_artifact_ref', $contract);
         $this->assertArrayHasKey('content_objects_v1', $contract);
         $this->assertSame('compiled', $contract['compile_status']);
@@ -68,11 +69,15 @@ final class ContentControlPlaneServiceTest extends TestCase
         $inventory = $contract['content_inventory_v1'];
         $this->assertSame(1, $inventory['inventory_contract_version']);
         $this->assertSame('mbti_content_inventory.v1', $inventory['governance_profile']);
-        $this->assertSame('mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03', $inventory['inventory_fingerprint']);
+        $this->assertSame('mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03-ce6', $inventory['inventory_fingerprint']);
         $this->assertSame(14, $inventory['fragment_family_count']);
+        $this->assertSame(8, $inventory['fragment_object_group_count']);
+        $this->assertContains('tone_fragment', $inventory['fragment_object_group_keys']);
         $this->assertContains('traits.why_this_type', $inventory['section_family_keys']);
         $this->assertContains('cta.surface', $inventory['section_family_keys']);
         $this->assertArrayHasKey('selection_tag_keys', $inventory);
+        $this->assertCount(8, $contract['fragment_object_groups_v1']);
+        $this->assertContains('scene_fragment', array_column($contract['fragment_object_groups_v1'], 'object_group_key'));
 
         $objects = collect($contract['content_objects_v1']);
         $this->assertNotEmpty($objects);
@@ -83,6 +88,10 @@ final class ContentControlPlaneServiceTest extends TestCase
             'faq_explainability_copy',
             'scene_fragment',
             'action_fragment',
+            'stress_fragment',
+            'recovery_fragment',
+            'watchout_fragment',
+            'tone_fragment',
             'locale_variant_draft',
             'experiment_overlay',
             'release_candidate_metadata',
@@ -92,6 +101,8 @@ final class ContentControlPlaneServiceTest extends TestCase
             'content_object_v1',
             'content_object_id',
             'content_object_type',
+            'fragment_family',
+            'object_group_key',
             'authoring_scope',
             'draft_state',
             'revision_no',
@@ -104,10 +115,12 @@ final class ContentControlPlaneServiceTest extends TestCase
             'rollback_target',
             'locale_scope',
             'experiment_scope',
+            'runtime_binding',
             'runtime_artifact_ref',
             'source_pack_version_id',
             'source_release_id',
             'governance_profile',
+            'source_refs',
         ];
 
         foreach ($objects as $object) {
@@ -119,6 +132,10 @@ final class ContentControlPlaneServiceTest extends TestCase
         $this->assertTrue($objects->every(fn (array $object): bool => $object['runtime_artifact_ref'] === null));
 
         $objectsByType = $objects->keyBy('content_object_type');
+        $this->assertSame('tone_fragment', $objectsByType['tone_fragment']['content_object_type']);
+        $this->assertSame('tone_fragment', $objectsByType['tone_fragment']['fragment_family']);
+        $this->assertSame('runtime_bindable', $objectsByType['tone_fragment']['runtime_binding']);
+        $this->assertContains('report_dynamic_sections.json', $objectsByType['tone_fragment']['source_refs']);
         $this->assertSame('locale_variant_draft_ready', $objectsByType['locale_variant_draft']['draft_state']);
         $this->assertSame('locale_review_ready', $objectsByType['locale_variant_draft']['review_state']);
         $this->assertSame('draft_only', $objectsByType['locale_variant_draft']['release_candidate_status']);
@@ -150,6 +167,7 @@ final class ContentControlPlaneServiceTest extends TestCase
             fn (array $object): bool => $object['runtime_artifact_ref'] === null
         ));
         $this->assertSame(14, $draftContract['content_inventory_v1']['fragment_family_count']);
+        $this->assertSame(8, $draftContract['content_inventory_v1']['fragment_object_group_count']);
 
         $this->insertSuccessfulPublishRelease(
             (string) $version->id,
@@ -170,6 +188,7 @@ final class ContentControlPlaneServiceTest extends TestCase
 
         $publishedObjects = collect($publishedContract['content_objects_v1'])->keyBy('content_object_type');
         $this->assertIsArray($publishedObjects['narrative_fragment']['runtime_artifact_ref']);
+        $this->assertIsArray($publishedObjects['tone_fragment']['runtime_artifact_ref']);
         $this->assertSame((string) $version->id, $publishedObjects['narrative_fragment']['source_pack_version_id']);
         $this->assertNotNull($publishedObjects['narrative_fragment']['source_release_id']);
         $this->assertNull($publishedObjects['locale_variant_draft']['runtime_artifact_ref']);
@@ -222,6 +241,7 @@ final class ContentControlPlaneServiceTest extends TestCase
         $this->assertIsArray($contract['rollback_target']);
         $this->assertSame($previousReleaseId, $contract['rollback_target']['release_id']);
         $this->assertSame(14, $contract['content_inventory_v1']['fragment_family_count']);
+        $this->assertSame(8, $contract['content_inventory_v1']['fragment_object_group_count']);
 
         $publishedObject = collect($contract['content_objects_v1'])
             ->first(fn (array $object): bool => is_array($object['runtime_artifact_ref'] ?? null));

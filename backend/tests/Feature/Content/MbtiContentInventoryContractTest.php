@@ -50,7 +50,7 @@ final class MbtiContentInventoryContractTest extends TestCase
         $this->assertSame(1, $inventory['inventory_contract_version'] ?? null);
         $this->assertSame('MBTI.cn-mainland.zh-CN.v0.3', $inventory['pack_id'] ?? null);
         $this->assertSame('CN_MAINLAND.zh-CN', $inventory['cultural_context'] ?? null);
-        $this->assertSame('mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03-ce5', $inventory['inventory_fingerprint'] ?? null);
+        $this->assertSame('mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03-ce6', $inventory['inventory_fingerprint'] ?? null);
         $this->assertSame('mbti_content_inventory.v1', $inventory['governance_profile'] ?? null);
 
         $families = array_values(array_filter((array) ($inventory['fragment_families'] ?? []), 'is_array'));
@@ -123,6 +123,35 @@ final class MbtiContentInventoryContractTest extends TestCase
             data_get($selectionTagSchema, 'tone_mode.values')
         );
 
+        $fragmentObjectGroups = array_values(array_filter((array) ($inventory['fragment_object_groups'] ?? []), 'is_array'));
+        $fragmentObjectGroupKeys = array_values(array_filter(array_map(
+            static fn (array $group): string => trim((string) ($group['object_group_key'] ?? '')),
+            $fragmentObjectGroups
+        )));
+        $this->assertEqualsCanonicalizing([
+            'narrative_fragment',
+            'faq_explainability_copy',
+            'scene_fragment',
+            'action_fragment',
+            'stress_fragment',
+            'recovery_fragment',
+            'watchout_fragment',
+            'tone_fragment',
+        ], $fragmentObjectGroupKeys);
+
+        $fragmentObjectGroupIndex = [];
+        foreach ($fragmentObjectGroups as $group) {
+            $groupKey = trim((string) ($group['object_group_key'] ?? ''));
+            if ($groupKey !== '') {
+                $fragmentObjectGroupIndex[$groupKey] = $group;
+            }
+        }
+
+        $this->assertSame('explainability_fragment', $fragmentObjectGroupIndex['narrative_fragment']['fragment_family'] ?? null);
+        $this->assertSame('runtime_bindable', $fragmentObjectGroupIndex['tone_fragment']['runtime_binding'] ?? null);
+        $this->assertSame('growth_content.action_fragment.v1', $fragmentObjectGroupIndex['action_fragment']['governance_profile'] ?? null);
+        $this->assertContains('report_dynamic_sections.json', $fragmentObjectGroupIndex['scene_fragment']['source_refs'] ?? []);
+
         $matrix = array_values(array_filter((array) ($inventory['section_family_matrix'] ?? []), 'is_array'));
         $matrixIndex = [];
         foreach ($matrix as $row) {
@@ -180,6 +209,7 @@ final class MbtiContentInventoryContractTest extends TestCase
             'inventory_fingerprint' => $compiled['inventory_fingerprint'] ?? null,
             'governance_profile' => $compiled['governance_profile'] ?? null,
             'fragment_family_keys' => data_get($compiled, 'summary.fragment_family_keys', []),
+            'fragment_object_group_keys' => data_get($compiled, 'summary.fragment_object_group_keys', []),
             'selection_tag_keys' => data_get($compiled, 'summary.selection_tag_keys', []),
             'section_family_keys' => data_get($compiled, 'summary.section_family_keys', []),
         ];
