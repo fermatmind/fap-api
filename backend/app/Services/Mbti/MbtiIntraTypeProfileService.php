@@ -356,6 +356,11 @@ final class MbtiIntraTypeProfileService
                 }
             }
 
+            $score += $this->scoreCandidateTags(
+                $candidate,
+                $this->buildRecommendationTagWeights($profileSeedKey, $sameTypeDivergenceKeys, $sectionSelectionKeys, $personalization)
+            );
+
             if (isset($orderMap[$key])) {
                 $score += max(0, 80 - ((int) $orderMap[$key] * 5));
             }
@@ -393,6 +398,115 @@ final class MbtiIntraTypeProfileService
         }
 
         return array_values(array_slice(array_values(array_unique(array_filter($selected))), 0, 4));
+    }
+
+    /**
+     * @param  list<string>  $sameTypeDivergenceKeys
+     * @param  array<string, string>  $sectionSelectionKeys
+     * @param  array<string, mixed>  $personalization
+     * @return array<string, int>
+     */
+    private function buildRecommendationTagWeights(
+        string $profileSeedKey,
+        array $sameTypeDivergenceKeys,
+        array $sectionSelectionKeys,
+        array $personalization
+    ): array {
+        $weights = [];
+        $currentIntentCluster = strtolower(trim((string) data_get($personalization, 'user_state.current_intent_cluster', 'default')));
+        foreach ($this->intentClusterToTags($currentIntentCluster) as $tag) {
+            $weights[$tag] = max($weights[$tag] ?? 0, 110);
+        }
+
+        foreach ([$profileSeedKey, ...$sameTypeDivergenceKeys, ...array_values($sectionSelectionKeys)] as $key) {
+            $normalized = strtolower(trim((string) $key));
+            if ($normalized === '') {
+                continue;
+            }
+
+            foreach ($this->selectionKeyToTags($normalized) as $tag => $weight) {
+                $weights[$tag] = max($weights[$tag] ?? 0, $weight);
+            }
+        }
+
+        return $weights;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function intentClusterToTags(string $intentCluster): array
+    {
+        return match ($intentCluster) {
+            'career_move' => ['intent:career_move', 'scene:work', 'focus:career_next_step', 'focus:career_transition'],
+            'relationship_tuning' => ['intent:relationship_tuning', 'scene:communication', 'focus:relationship_repair'],
+            'clarify_type' => ['intent:clarify_type', 'focus:growth_boundary', 'focus:growth_clarity'],
+            'deep_reading' => ['intent:deep_reading', 'focus:revisit_resume'],
+            default => ['intent:action_activation', 'scene:growth', 'focus:growth_clarity'],
+        };
+    }
+
+    /**
+     * @return array<string, int>
+     */
+    private function selectionKeyToTags(string $normalized): array
+    {
+        $weights = [];
+
+        if (str_contains($normalized, 'career') || str_contains($normalized, 'work')) {
+            $weights['scene:work'] = 90;
+            $weights['focus:career_next_step'] = 90;
+            $weights['focus:career_role_fit'] = 70;
+        }
+
+        if (str_contains($normalized, 'relationship') || str_contains($normalized, 'communication')) {
+            $weights['scene:communication'] = 90;
+            $weights['focus:relationship_repair'] = 90;
+            $weights['focus:relationship_communication'] = 70;
+        }
+
+        if (str_contains($normalized, 'watchout') || str_contains($normalized, 'stability') || str_contains($normalized, 'recovery')) {
+            $weights['scene:stress_recovery'] = 80;
+            $weights['focus:growth_recovery'] = 80;
+        }
+
+        if (str_contains($normalized, 'clarify') || str_contains($normalized, 'contrast') || str_contains($normalized, 'why_this_type')) {
+            $weights['intent:clarify_type'] = 75;
+            $weights['focus:growth_boundary'] = 70;
+        }
+
+        if (str_contains($normalized, 'growth') || str_contains($normalized, 'action')) {
+            $weights['scene:growth'] = 60;
+            $weights['focus:growth_clarity'] = 60;
+        }
+
+        return $weights;
+    }
+
+    /**
+     * @param  array<string, mixed>  $candidate
+     * @param  array<string, int>  $weights
+     */
+    private function scoreCandidateTags(array $candidate, array $weights): int
+    {
+        $score = 0;
+        foreach ($this->normalizeCandidateTags($candidate) as $tag) {
+            $score += (int) ($weights[$tag] ?? 0);
+        }
+
+        return $score;
+    }
+
+    /**
+     * @param  array<string, mixed>  $candidate
+     * @return list<string>
+     */
+    private function normalizeCandidateTags(array $candidate): array
+    {
+        return array_values(array_unique(array_filter(array_map(
+            static fn (mixed $tag): string => strtolower(trim((string) $tag)),
+            is_array($candidate['tags'] ?? null) ? $candidate['tags'] : []
+        ))));
     }
 
     /**

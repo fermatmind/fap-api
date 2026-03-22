@@ -3,7 +3,7 @@
   "inventory_contract_version": 1,
   "pack_id": "MBTI.cn-mainland.zh-CN.v0.3",
   "cultural_context": "CN_MAINLAND.zh-CN",
-  "inventory_fingerprint": "mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03",
+  "inventory_fingerprint": "mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03-ce4",
   "governance_profile": "mbti_content_inventory.v1",
   "fragment_families": [
     {
@@ -319,7 +319,21 @@
         "career.next_step"
       ],
       "block_kinds": [
-        "recommendation"
+        "recommendation",
+        "recommendation_growth_clarity",
+        "recommendation_growth_recovery",
+        "recommendation_growth_boundary",
+        "recommendation_career_next_step",
+        "recommendation_career_role_fit",
+        "recommendation_career_transition",
+        "recommendation_relationship_repair",
+        "recommendation_relationship_boundary",
+        "recommendation_relationship_communication",
+        "recommendation_scene_execution",
+        "recommendation_scene_conflict",
+        "recommendation_scene_recovery",
+        "recommendation_revisit_resume",
+        "recommendation_adaptive_retry"
       ],
       "selection_tags": [
         "section_key",
@@ -329,7 +343,11 @@
         "adaptive_state",
         "access_tier",
         "locale_scope",
-        "evidence_ref"
+        "evidence_ref",
+        "scene_key",
+        "cross_assessment_key",
+        "axis_band",
+        "boundary_flag"
       ]
     },
     {
@@ -344,7 +362,15 @@
         "recommendation.surface"
       ],
       "block_kinds": [
-        "cta_bundle"
+        "cta_bundle",
+        "cta_bundle_growth",
+        "cta_bundle_career",
+        "cta_bundle_relationship",
+        "cta_bundle_revisit",
+        "cta_bundle_adaptive_next_best",
+        "cta_bundle_low_pressure",
+        "cta_bundle_share_forward",
+        "cta_bundle_unlock_deepening"
       ],
       "selection_tags": [
         "section_key",
@@ -354,7 +380,11 @@
         "access_tier",
         "tone_mode",
         "locale_scope",
-        "evidence_ref"
+        "evidence_ref",
+        "memory_state",
+        "cta_intent",
+        "cta_softness_mode",
+        "cta_entry_reason"
       ]
     },
     {
@@ -543,7 +573,13 @@
         "career",
         "relationship",
         "revisit",
-        "adaptive"
+        "adaptive",
+        "default",
+        "action_activation",
+        "career_move",
+        "relationship_tuning",
+        "clarify_type",
+        "deep_reading"
       ]
     },
     "memory_state": {
@@ -553,7 +589,8 @@
         "carryover",
         "revisit",
         "resumed",
-        "stale"
+        "stale",
+        "resume_ready"
       ]
     },
     "adaptive_state": {
@@ -562,7 +599,9 @@
         "baseline",
         "adaptive",
         "self_healing",
-        "guardrail"
+        "guardrail",
+        "feedback_redirect_to_action",
+        "career_followthrough_loop"
       ]
     },
     "cross_assessment_key": {
@@ -603,6 +642,32 @@
     "evidence_ref": {
       "type": "string",
       "description": "Stable reference to authored evidence or compiled artifact sections."
+    },
+    "cta_intent": {
+      "type": "string",
+      "values": [
+        "growth",
+        "career",
+        "relationship",
+        "revisit",
+        "adaptive",
+        "share_forward",
+        "unlock_deepening"
+      ]
+    },
+    "cta_softness_mode": {
+      "type": "string",
+      "values": [
+        "guided",
+        "direct",
+        "low_pressure",
+        "reflective",
+        "share_forward"
+      ]
+    },
+    "cta_entry_reason": {
+      "type": "string",
+      "description": "Backend-owned CTA bundle reason key."
     }
   },
   "section_family_matrix": [

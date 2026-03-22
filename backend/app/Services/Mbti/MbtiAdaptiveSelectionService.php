@@ -792,6 +792,7 @@ final class MbtiAdaptiveSelectionService
         foreach ($orderedRecommendationKeys as $index => $key) {
             $orderMap[$key] = $index;
         }
+        $tagWeights = $this->buildRecommendationTagWeights($adaptive);
 
         $scored = [];
         foreach ($candidates as $index => $candidate) {
@@ -809,6 +810,8 @@ final class MbtiAdaptiveSelectionService
             foreach ($themes as $theme) {
                 $score += (int) ($weights[$theme] ?? 0) * 12;
             }
+
+            $score += $this->scoreCandidateTags($candidate, $tagWeights);
 
             if (isset($orderMap[$key])) {
                 $score += max(0, 30 - ((int) $orderMap[$key] * 3));
@@ -840,6 +843,53 @@ final class MbtiAdaptiveSelectionService
         $selected = array_values(array_unique(array_filter(array_merge($selected, array_slice($baselineSelection, 0, 2)))));
 
         return array_slice($selected, 0, 4);
+    }
+
+    /**
+     * @param  array<string, mixed>  $adaptive
+     * @return array<string, int>
+     */
+    private function buildRecommendationTagWeights(array $adaptive): array
+    {
+        $weights = [];
+
+        $adaptiveState = strtolower(trim((string) ($adaptive['selection_rewrite_reason'] ?? '')));
+        if ($adaptiveState !== '') {
+            $weights['adaptive:'.$adaptiveState] = 95;
+        }
+
+        $nextBestFamily = strtolower(trim((string) data_get($adaptive, 'next_best_action_v1.family', '')));
+        if ($nextBestFamily !== '') {
+            $weights['focus:'.$nextBestFamily] = 80;
+        }
+
+        return $weights;
+    }
+
+    /**
+     * @param  array<string, mixed>  $candidate
+     * @param  array<string, int>  $weights
+     */
+    private function scoreCandidateTags(array $candidate, array $weights): int
+    {
+        $score = 0;
+        foreach ($this->normalizeCandidateTags($candidate) as $tag) {
+            $score += (int) ($weights[$tag] ?? 0);
+        }
+
+        return $score;
+    }
+
+    /**
+     * @param  array<string, mixed>  $candidate
+     * @return list<string>
+     */
+    private function normalizeCandidateTags(array $candidate): array
+    {
+        return array_values(array_unique(array_filter(array_map(
+            static fn (mixed $tag): string => strtolower(trim((string) $tag)),
+            is_array($candidate['tags'] ?? null) ? $candidate['tags'] : []
+        ))));
     }
 
     /**

@@ -47,6 +47,9 @@ final class MbtiContentGovernanceService
         'access_tier',
         'locale_scope',
         'evidence_ref',
+        'cta_intent',
+        'cta_softness_mode',
+        'cta_entry_reason',
     ];
 
     /**
@@ -109,6 +112,7 @@ final class MbtiContentGovernanceService
         'report_cards_fallback_stress_recovery.json',
         'report_dynamic_sections.json',
         'report_recommended_reads.json',
+        'commercial_spec.json',
         'report_select_rules.json',
         'report_section_policies.json',
         'report_rules.json',

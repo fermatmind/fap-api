@@ -1,6 +1,6 @@
 {
   "inventory_contract_version": 1,
-  "inventory_fingerprint": "mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03",
+  "inventory_fingerprint": "mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03-ce4",
   "governance_profile": "mbti_content_inventory.v1",
   "fragment_family_keys": [
     "explainability_fragment",
@@ -31,7 +31,10 @@
     "tone_mode",
     "access_tier",
     "locale_scope",
-    "evidence_ref"
+    "evidence_ref",
+    "cta_intent",
+    "cta_softness_mode",
+    "cta_entry_reason"
   ],
   "section_family_keys": [
     "overview",

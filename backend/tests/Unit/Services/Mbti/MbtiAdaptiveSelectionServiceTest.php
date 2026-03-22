@@ -105,6 +105,7 @@ final class MbtiAdaptiveSelectionServiceTest extends TestCase
             data_get($adaptive, 'continuity.carryover_action_keys.0')
         );
         $this->assertContains('read-career', (array) data_get($adaptive, 'recommendation_selection_keys', []));
+        $this->assertContains('read-retry', (array) data_get($adaptive, 'recommendation_selection_keys', []));
         $this->assertNotSame(
             (string) (($base['section_selection_keys']['growth.next_actions'] ?? '')),
             (string) (($adaptive['section_selection_keys']['growth.next_actions'] ?? ''))
@@ -198,7 +199,7 @@ final class MbtiAdaptiveSelectionServiceTest extends TestCase
                     'type' => 'article',
                     'title' => '一周行动实验',
                     'priority' => 30,
-                    'tags' => ['growth', 'action'],
+                    'tags' => ['growth', 'action', 'intent:action_activation', 'scene:growth', 'focus:growth_clarity'],
                     'url' => 'https://example.com/read-action',
                 ],
                 [
@@ -207,7 +208,7 @@ final class MbtiAdaptiveSelectionServiceTest extends TestCase
                     'type' => 'article',
                     'title' => '职业环境匹配',
                     'priority' => 10,
-                    'tags' => ['career', 'work'],
+                    'tags' => ['career', 'work', 'intent:career_move', 'scene:work', 'focus:career_next_step'],
                     'url' => 'https://example.com/read-career',
                 ],
                 [
@@ -216,8 +217,17 @@ final class MbtiAdaptiveSelectionServiceTest extends TestCase
                     'type' => 'article',
                     'title' => '边界类型解释',
                     'priority' => 25,
-                    'tags' => ['explainability', 'mbti'],
+                    'tags' => ['explainability', 'mbti', 'intent:clarify_type', 'scene:stress_recovery', 'focus:growth_boundary'],
                     'url' => 'https://example.com/read-explain',
+                ],
+                [
+                    'id' => 'read-retry',
+                    'key' => 'read-retry',
+                    'type' => 'article',
+                    'title' => '换一条更低阻力的重试路径',
+                    'priority' => 12,
+                    'tags' => ['growth', 'adaptive:feedback_redirect_to_action', 'scene:growth', 'focus:adaptive_retry'],
+                    'url' => 'https://example.com/read-retry',
                 ],
             ],
             'scores' => [

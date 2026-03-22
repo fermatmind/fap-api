@@ -2,7 +2,7 @@
     "schema": "fap.mbti.content_governance.compiled.v1",
     "pack_id": "MBTI.cn-mainland.zh-CN.v0.3",
     "version": "v0.3",
-    "generated_at": "2026-03-22T14:43:03+00:00",
+    "generated_at": "2026-03-22T15:28:37+00:00",
     "required_layers": [
         "skeleton",
         "intensity",
@@ -194,6 +194,22 @@
         }
     },
     "file_policies": {
+        "commercial_spec.json": {
+            "layers": [
+                "action"
+            ],
+            "content_tier": "commercial_overlay",
+            "is_canonical": false,
+            "experiment_key": null,
+            "targets": [
+                "unlock_full_report",
+                "career_bridge",
+                "workspace_lite",
+                "share_result"
+            ],
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "high"
+        },
         "identity_layers.json": {
             "layers": [
                 "skeleton"
