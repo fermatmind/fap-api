@@ -14,6 +14,7 @@ use App\Services\BigFive\BigFivePublicProjectionService;
 use App\Services\InsightGraph\InsightGraphContractService;
 use App\Services\InsightGraph\PartnerReadContractService;
 use App\Services\InsightGraph\WidgetSurfaceContractService;
+use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\PublicSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
@@ -37,6 +38,7 @@ class ShareService
         private readonly MbtiPublicProjectionService $mbtiPublicProjectionService,
         private readonly MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
         private readonly BigFivePublicProjectionService $bigFivePublicProjectionService,
+        private readonly AnswerSurfaceContractService $answerSurfaceContractService,
         private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly PublicSurfaceContractService $publicSurfaceContractService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
@@ -817,6 +819,7 @@ class ShareService
         );
         $payload['seo_surface_v1'] = $this->buildSeoSurfaceContract($payload, $locale, $scaleCode, $resolvedShareId);
         $payload['landing_surface_v1'] = $this->buildLandingSurfaceContract($payload, $locale, $scaleCode);
+        $payload['answer_surface_v1'] = $this->buildAnswerSurfaceContract($payload, $locale, $scaleCode);
         $payload['insight_graph_v1'] = $this->insightGraphContractService->buildForShare(
             $payload,
             is_array($payload['public_surface_v1'] ?? null) ? $payload['public_surface_v1'] : []
@@ -981,6 +984,98 @@ class ShareService
             'related_surface_keys' => $discoverabilityKeys,
             'share_safety_state' => 'public_share_safe',
             'runtime_artifact_ref' => $this->stringOrNull(data_get($payload, 'seo_surface_v1.runtime_artifact_ref')),
+            'fingerprint_seed' => [
+                'scale_code' => $scaleCode,
+                'locale' => $locale,
+                'share_id' => $this->stringOrNull($payload['share_id'] ?? null),
+            ],
+        ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @return array<string,mixed>
+     */
+    private function buildAnswerSurfaceContract(array $payload, string $locale, string $scaleCode): array
+    {
+        $summary = $this->stringOrNull($payload['summary'] ?? null);
+        $title = $this->stringOrNull($payload['title'] ?? null);
+        $compareBlocks = [];
+        $nextStepBlocks = [];
+        $evidenceRefs = array_values(array_filter([
+            $this->stringOrNull(data_get($payload, 'seo_surface_v1.metadata_fingerprint')),
+            $this->stringOrNull(data_get($payload, 'landing_surface_v1.landing_fingerprint')),
+            $this->stringOrNull(data_get($payload, 'public_surface_v1.public_summary_fingerprint')),
+        ]));
+
+        if ($scaleCode === 'MBTI') {
+            $comparativeLabel = $this->stringOrNull(data_get($payload, 'comparative_v1.cohort_relative_position.label'));
+            $comparativeSummary = $this->stringOrNull(data_get($payload, 'comparative_v1.cohort_relative_position.summary'));
+            if ($comparativeLabel !== null || $comparativeSummary !== null) {
+                $compareBlocks[] = [
+                    'key' => 'comparative_position',
+                    'title' => $comparativeLabel ?? ($locale === 'zh-CN' ? '相对位置' : 'Relative position'),
+                    'body' => $comparativeSummary,
+                    'kind' => 'comparative',
+                ];
+                $evidenceRefs[] = 'comparative_v1';
+            }
+
+            $workingLifeFocus = $this->stringOrNull(data_get($payload, 'working_life_v1.career_focus_key'));
+            if ($workingLifeFocus !== null) {
+                $nextStepBlocks[] = [
+                    'key' => 'working_life_focus',
+                    'title' => $locale === 'zh-CN' ? '当前重点' : 'Current focus',
+                    'body' => $workingLifeFocus,
+                    'href' => null,
+                    'kind' => 'next_focus',
+                ];
+                $evidenceRefs[] = 'working_life_v1';
+            }
+        } elseif ($scaleCode === 'BIG5_OCEAN') {
+            $headline = $this->stringOrNull(data_get($payload, 'controlled_narrative_v1.narrative_summary'));
+            if ($headline !== null) {
+                $compareBlocks[] = [
+                    'key' => 'narrative_summary',
+                    'title' => $locale === 'zh-CN' ? '大五摘要' : 'Big Five summary',
+                    'body' => $headline,
+                    'kind' => 'narrative',
+                ];
+                $evidenceRefs[] = 'controlled_narrative_v1';
+            }
+        }
+
+        $nextStepBlocks = array_merge(
+            $nextStepBlocks,
+            $this->answerSurfaceContractService->buildNextStepBlocksFromCtas(
+                is_array(data_get($payload, 'landing_surface_v1.cta_bundle')) ? data_get($payload, 'landing_surface_v1.cta_bundle') : [],
+                2
+            )
+        );
+
+        return $this->answerSurfaceContractService->build([
+            'answer_scope' => 'public_share_safe',
+            'surface_type' => $scaleCode === 'BIG5_OCEAN' ? 'big5_share_public_safe' : 'mbti_share_public_safe',
+            'summary_blocks' => [
+                [
+                    'key' => 'share_summary',
+                    'title' => $title,
+                    'body' => $summary,
+                    'kind' => 'public_safe_summary',
+                ],
+            ],
+            'faq_blocks' => [],
+            'compare_blocks' => $compareBlocks,
+            'next_step_blocks' => $nextStepBlocks,
+            'evidence_refs' => $evidenceRefs,
+            'public_safety_state' => 'public_share_safe',
+            'indexability_state' => 'noindex',
+            'attribution_scope' => 'share_public_surface',
+            'seo_surface_ref' => $this->stringOrNull(data_get($payload, 'seo_surface_v1.metadata_fingerprint')),
+            'landing_surface_ref' => $this->stringOrNull(data_get($payload, 'landing_surface_v1.landing_fingerprint')),
+            'public_surface_ref' => $this->stringOrNull(data_get($payload, 'public_surface_v1.public_summary_fingerprint')),
+            'primary_content_ref' => $this->stringOrNull($payload['type_code'] ?? null),
+            'related_surface_keys' => (array) data_get($payload, 'public_surface_v1.discoverability_keys', []),
             'fingerprint_seed' => [
                 'scale_code' => $scaleCode,
                 'locale' => $locale,

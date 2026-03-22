@@ -7,6 +7,7 @@ namespace App\Http\Controllers\API\V0_5\Cms;
 use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Http\Controllers\Controller;
 use App\Services\Cms\CareerRecommendationService;
+use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Http\JsonResponse;
@@ -19,6 +20,7 @@ final class CareerRecommendationController extends Controller
 
     public function __construct(
         private readonly CareerRecommendationService $careerRecommendationService,
+        private readonly AnswerSurfaceContractService $answerSurfaceContractService,
         private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
     ) {}
@@ -128,6 +130,12 @@ final class CareerRecommendationController extends Controller
                 'locale' => $validated['locale'],
             ],
         ]);
+        $payload['answer_surface_v1'] = $this->buildAnswerSurface(
+            $payload,
+            is_array($payload['seo_surface_v1'] ?? null) ? $payload['seo_surface_v1'] : [],
+            is_array($payload['landing_surface_v1'] ?? null) ? $payload['landing_surface_v1'] : [],
+            $validated['locale'],
+        );
 
         return response()->json($payload);
     }
@@ -135,6 +143,138 @@ final class CareerRecommendationController extends Controller
     private function frontendLocaleSegment(string $locale): string
     {
         return $locale === 'zh-CN' ? 'zh' : 'en';
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @param  array<string,mixed>  $seoSurface
+     * @param  array<string,mixed>  $landingSurface
+     * @return array<string,mixed>
+     */
+    private function buildAnswerSurface(array $payload, array $seoSurface, array $landingSurface, string $locale): array
+    {
+        $displayType = trim((string) data_get($payload, 'display_type', ''));
+        $heroSummary = trim((string) data_get($payload, 'hero_summary', ''));
+        $graphTypeCode = trim((string) data_get($payload, 'graph_type_code', ''));
+        $matchedJobs = is_array(data_get($payload, 'matched_jobs')) ? data_get($payload, 'matched_jobs') : [];
+        $matchedGuides = is_array(data_get($payload, 'matched_guides')) ? data_get($payload, 'matched_guides') : [];
+        $preferredRoles = is_array(data_get($payload, 'career.preferred_roles.groups')) ? data_get($payload, 'career.preferred_roles.groups') : [];
+        $primaryJobTitles = array_values(array_filter(array_map(
+            static fn (mixed $job): string => is_array($job) ? trim((string) ($job['title'] ?? '')) : '',
+            $matchedJobs
+        )));
+        $guideTitles = array_values(array_filter(array_map(
+            static fn (mixed $guide): string => is_array($guide) ? trim((string) ($guide['title'] ?? '')) : '',
+            $matchedGuides
+        )));
+
+        $faqBlocks = [];
+        $faqBlocks[] = [
+            'key' => 'route_graph_key',
+            'question' => $locale === 'zh-CN' ? $displayType.' 的职业匹配按什么 key 计算？' : 'Which key drives career matching for '.$displayType.'?',
+            'answer' => $locale === 'zh-CN'
+                ? '公开路由使用 '.$displayType.'，但 graph match 继续回落到 '.$graphTypeCode.'。'
+                : 'The public route uses '.$displayType.', while graph matching still falls back to '.$graphTypeCode.'.',
+        ];
+        if ($primaryJobTitles !== []) {
+            $faqBlocks[] = [
+                'key' => 'primary_roles',
+                'question' => $locale === 'zh-CN' ? $displayType.' 现在优先看哪些方向？' : 'Which roles should '.$displayType.' review first?',
+                'answer' => $locale === 'zh-CN'
+                    ? implode('、', array_slice($primaryJobTitles, 0, 4)).' 是当前优先方向。'
+                    : implode(', ', array_slice($primaryJobTitles, 0, 4)).' are the current first-pass directions.',
+            ];
+        }
+        if ($guideTitles !== []) {
+            $faqBlocks[] = [
+                'key' => 'guide_followup',
+                'question' => $locale === 'zh-CN' ? '除了岗位，还应该继续看什么？' : 'What should you validate beyond the job list?',
+                'answer' => $locale === 'zh-CN'
+                    ? implode('、', array_slice($guideTitles, 0, 3)).' 可以继续补齐路径判断。'
+                    : implode(', ', array_slice($guideTitles, 0, 3)).' help validate the path beyond the role list.',
+            ];
+        }
+
+        $compareBlocks = [
+            [
+                'key' => 'authority_route',
+                'title' => $locale === 'zh-CN' ? '公开路由 key' : 'Public route key',
+                'body' => $displayType,
+                'kind' => 'authority_compare',
+            ],
+            [
+                'key' => 'graph_key',
+                'title' => $locale === 'zh-CN' ? '内部 graph key' : 'Internal graph key',
+                'body' => $graphTypeCode,
+                'kind' => 'authority_compare',
+            ],
+        ];
+
+        $nextStepBlocks = $this->answerSurfaceContractService->buildNextStepBlocksFromCtas(
+            is_array($landingSurface['cta_bundle'] ?? null) ? $landingSurface['cta_bundle'] : [],
+            3
+        );
+
+        if ($nextStepBlocks === [] && $preferredRoles !== []) {
+            foreach ($preferredRoles as $index => $group) {
+                if (! is_array($group)) {
+                    continue;
+                }
+                $title = trim((string) ($group['group_title'] ?? ''));
+                $description = trim((string) ($group['description'] ?? ''));
+                if ($title === '' && $description === '') {
+                    continue;
+                }
+                $nextStepBlocks[] = [
+                    'key' => 'preferred_role_'.$index,
+                    'title' => $title !== '' ? $title : ($locale === 'zh-CN' ? '优先方向' : 'Preferred direction'),
+                    'body' => $description,
+                    'href' => null,
+                    'kind' => 'preferred_role',
+                ];
+            }
+        }
+
+        return $this->answerSurfaceContractService->build([
+            'answer_scope' => 'public_indexable_detail',
+            'surface_type' => 'career_recommendation_public_detail',
+            'summary_blocks' => [
+                [
+                    'key' => 'answer_first',
+                    'title' => $displayType,
+                    'body' => $heroSummary,
+                    'kind' => 'answer_first',
+                ],
+                [
+                    'key' => 'career_summary',
+                    'title' => trim((string) data_get($payload, 'career.summary.title', '')),
+                    'body' => trim((string) ((data_get($payload, 'career.summary.paragraphs.0') ?? ''))),
+                    'kind' => 'career_summary',
+                ],
+            ],
+            'faq_blocks' => $faqBlocks,
+            'compare_blocks' => $compareBlocks,
+            'next_step_blocks' => $nextStepBlocks,
+            'evidence_refs' => array_values(array_filter([
+                (string) ($seoSurface['metadata_fingerprint'] ?? ''),
+                (string) ($landingSurface['landing_fingerprint'] ?? ''),
+                'career.summary',
+                $matchedJobs !== [] ? 'matched_jobs' : '',
+                $matchedGuides !== [] ? 'matched_guides' : '',
+            ])),
+            'public_safety_state' => 'public_indexable',
+            'indexability_state' => 'indexable',
+            'attribution_scope' => 'public_career_recommendation_answer',
+            'seo_surface_ref' => (string) ($seoSurface['metadata_fingerprint'] ?? ''),
+            'landing_surface_ref' => (string) ($landingSurface['landing_fingerprint'] ?? ''),
+            'primary_content_ref' => trim((string) data_get($payload, 'public_route_slug', '')),
+            'related_surface_keys' => ['career_job', 'career_guide', 'personality_profile'],
+            'fingerprint_seed' => [
+                'public_route_slug' => trim((string) data_get($payload, 'public_route_slug', '')),
+                'graph_type_code' => $graphTypeCode,
+                'locale' => $locale,
+            ],
+        ]);
     }
 
     /**

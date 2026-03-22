@@ -10,6 +10,7 @@ use App\Models\CareerJob;
 use App\Models\CareerJobSection;
 use App\Services\Cms\CareerJobSeoService;
 use App\Services\Cms\CareerJobService;
+use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Http\JsonResponse;
@@ -23,6 +24,7 @@ final class CareerJobController extends Controller
     public function __construct(
         private readonly CareerJobService $careerJobService,
         private readonly CareerJobSeoService $careerJobSeoService,
+        private readonly AnswerSurfaceContractService $answerSurfaceContractService,
         private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
     ) {}
@@ -81,17 +83,21 @@ final class CareerJobController extends Controller
 
         $meta = $this->careerJobSeoService->buildMeta($job, $validated['locale']);
         $jsonLd = $this->careerJobSeoService->buildJsonLd($job, $validated['locale']);
+        $sections = array_map(
+            fn (CareerJobSection $section): array => $this->careerJobService->sectionPayload($section),
+            $job->sections->all()
+        );
+        $seoSurface = $this->buildSeoSurface($meta, $jsonLd, 'career_job_public_detail');
+        $landingSurface = $this->buildLandingSurface($job, $validated['locale']);
 
         return response()->json([
             'ok' => true,
             'job' => $this->careerJobService->detailPayload($job),
-            'sections' => array_map(
-                fn (CareerJobSection $section): array => $this->careerJobService->sectionPayload($section),
-                $job->sections->all()
-            ),
+            'sections' => $sections,
             'seo_meta' => $this->careerJobService->seoMetaPayload($job->seoMeta),
-            'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'career_job_public_detail'),
-            'landing_surface_v1' => $this->buildLandingSurface($job, $validated['locale']),
+            'seo_surface_v1' => $seoSurface,
+            'landing_surface_v1' => $landingSurface,
+            'answer_surface_v1' => $this->buildAnswerSurface($job, $sections, $seoSurface, $landingSurface, $validated['locale']),
         ]);
     }
 
@@ -202,6 +208,94 @@ final class CareerJobController extends Controller
             'surface_family' => 'career_job',
             'primary_content_ref' => (string) ($job->slug ?? ''),
             'related_surface_keys' => ['personality_profile', 'career_guide'],
+            'fingerprint_seed' => [
+                'slug' => (string) ($job->slug ?? ''),
+                'locale' => $locale,
+            ],
+        ]);
+    }
+
+    /**
+     * @param  array<int,array<string,mixed>>  $sections
+     * @param  array<string,mixed>  $seoSurface
+     * @param  array<string,mixed>  $landingSurface
+     * @return array<string,mixed>
+     */
+    private function buildAnswerSurface(
+        CareerJob $job,
+        array $sections,
+        array $seoSurface,
+        array $landingSurface,
+        string $locale
+    ): array {
+        $fitCodes = array_values(array_filter(array_unique(array_map(
+            static fn (mixed $value): string => strtoupper(trim((string) $value)),
+            array_merge(
+                (array) ($job->fit_personality_codes ?? []),
+                (array) ($job->mbti_primary_codes ?? []),
+                (array) ($job->mbti_secondary_codes ?? [])
+            )
+        ))));
+        $riasec = is_array($job->riasec_profile ?? null) ? $job->riasec_profile : [];
+        $riasecText = implode(' · ', array_values(array_filter(array_map(
+            static function (string $key) use ($riasec): ?string {
+                $value = $riasec[$key] ?? null;
+
+                return is_numeric($value) ? $key.' '.(string) $value : null;
+            },
+            ['R', 'I', 'A', 'S', 'E', 'C']
+        ))));
+
+        $compareBlocks = array_values(array_filter([
+            $fitCodes !== []
+                ? [
+                    'key' => 'fit_personality_codes',
+                    'title' => $locale === 'zh-CN' ? '适配人格' : 'Fit personality codes',
+                    'body' => implode(', ', array_slice($fitCodes, 0, 4)),
+                    'kind' => 'fit_compare',
+                ]
+                : null,
+            $riasecText !== ''
+                ? [
+                    'key' => 'riasec_vector',
+                    'title' => 'RIASEC',
+                    'body' => $riasecText,
+                    'kind' => 'fit_compare',
+                ]
+                : null,
+        ]));
+
+        return $this->answerSurfaceContractService->build([
+            'answer_scope' => $job->is_indexable ? 'public_indexable_detail' : 'public_noindex_detail',
+            'surface_type' => 'career_job_public_detail',
+            'summary_blocks' => [
+                [
+                    'key' => 'job_summary',
+                    'title' => (string) ($job->title ?? ''),
+                    'body' => trim((string) ($job->excerpt ?? '')),
+                    'kind' => 'answer_first',
+                ],
+            ],
+            'faq_blocks' => $this->answerSurfaceContractService->extractFaqBlocksFromSectionPayloads($sections),
+            'compare_blocks' => $compareBlocks,
+            'next_step_blocks' => $this->answerSurfaceContractService->buildNextStepBlocksFromCtas(
+                is_array($landingSurface['cta_bundle'] ?? null) ? $landingSurface['cta_bundle'] : [],
+                3
+            ),
+            'evidence_refs' => array_values(array_filter([
+                (string) ($seoSurface['metadata_fingerprint'] ?? ''),
+                (string) ($landingSurface['landing_fingerprint'] ?? ''),
+                $fitCodes !== [] ? 'fit_personality_codes' : '',
+                $riasecText !== '' ? 'riasec_profile' : '',
+                $sections !== [] ? 'career_job_sections' : '',
+            ])),
+            'public_safety_state' => 'public_indexable',
+            'indexability_state' => $job->is_indexable ? 'indexable' : 'noindex',
+            'attribution_scope' => 'public_career_job_answer',
+            'seo_surface_ref' => (string) ($seoSurface['metadata_fingerprint'] ?? ''),
+            'landing_surface_ref' => (string) ($landingSurface['landing_fingerprint'] ?? ''),
+            'primary_content_ref' => (string) ($job->slug ?? ''),
+            'related_surface_keys' => ['personality_profile', 'career_guide', 'start_test'],
             'fingerprint_seed' => [
                 'slug' => (string) ($job->slug ?? ''),
                 'locale' => $locale,
