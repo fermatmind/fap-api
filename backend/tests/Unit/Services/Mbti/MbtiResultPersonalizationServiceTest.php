@@ -150,28 +150,28 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             trim((string) data_get($clear, 'selection_fingerprint')),
             trim((string) data_get($strong, 'selection_fingerprint'))
         );
-        $this->assertSame(
-            [
-                'growth.next_actions.next_action.EI.E',
-                'growth.next_actions.boundary.TF',
-                'growth.next_actions.identity.t',
-            ],
-            $clear['sections']['growth.next_actions']['selected_blocks'] ?? null
+        $this->assertCount(5, (array) ($this->section($clear, 'growth.next_actions')['selected_blocks'] ?? []));
+        $this->assertCount(5, (array) ($this->section($clear, 'career.work_experiments')['selected_blocks'] ?? []));
+        $this->assertContains(
+            'action_reset',
+            array_map(
+                static fn (array $block): string => (string) ($block['kind'] ?? ''),
+                array_values((array) ($this->section($clear, 'growth.next_actions')['blocks'] ?? []))
+            )
         );
-        $this->assertSame(
-            [
-                'career.work_experiments.work_experiment.EI.E',
-                'career.work_experiments.boundary.JP',
-                'career.work_experiments.identity.t',
-            ],
-            $clear['sections']['career.work_experiments']['selected_blocks'] ?? null
+        $this->assertContains(
+            'work_scene_transition',
+            array_map(
+                static fn (array $block): string => (string) ($block['kind'] ?? ''),
+                array_values((array) ($this->section($clear, 'career.work_experiments')['blocks'] ?? []))
+            )
         );
         $this->assertStringContainsString(
             'mode.action_boundary_buffered',
             (string) ($clear['section_selection_keys']['growth.next_actions'] ?? '')
         );
         $this->assertStringContainsString(
-            'growth_next_actions_next_action_ei_e+growth_next_actions_boundary_tf+growth_next_actions_identity_t',
+            'growth_next_actions_next_action_ei_e',
             (string) ($clear['section_selection_keys']['growth.next_actions'] ?? '')
         );
         $this->assertStringContainsString(
@@ -423,7 +423,7 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             $clear['variant_keys']['career.work_experiments'] ?? null
         );
         $this->assertSame(
-            'career.next_step:TF.T.boundary:identity.T:boundary.TF',
+            'career.next_step:TF.T.boundary:identity.T:action.career_next_step_theme_clarify_decision_criteria:boundary.TF',
             $clear['variant_keys']['career.next_step'] ?? null
         );
         $this->assertSame(
@@ -443,16 +443,16 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             $clear['variant_keys']['relationships.try_this_week'] ?? null
         );
         $this->assertNotSame(
-            data_get($clear, 'sections.overview.selected_blocks.0'),
-            data_get($strong, 'sections.overview.selected_blocks.0')
+            ($this->section($clear, 'overview')['selected_blocks'][0] ?? null),
+            ($this->section($strong, 'overview')['selected_blocks'][0] ?? null)
         );
         $this->assertStringContainsString(
             '稳定的外倾倾向',
-            (string) data_get($clear, 'sections.overview.blocks.0.text', '')
+            (string) ($this->section($clear, 'overview')['blocks'][0]['text'] ?? '')
         );
         $this->assertStringContainsString(
             '外倾偏好已经很鲜明',
-            (string) data_get($strong, 'sections.overview.blocks.0.text', '')
+            (string) ($this->section($strong, 'overview')['blocks'][0]['text'] ?? '')
         );
         $this->assertStringContainsString(
             '两套判断入口之间来回校准',
@@ -486,9 +486,25 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             'career_next_step',
             $clear['sections']['career.next_step']['blocks'][1]['kind'] ?? null
         );
+        $this->assertCount(5, (array) ($this->section($clear, 'career.next_step')['selected_blocks'] ?? []));
+        $this->assertContains(
+            'work_scene_role_fit',
+            array_map(
+                static fn (array $block): string => (string) ($block['kind'] ?? ''),
+                array_values((array) ($this->section($clear, 'career.next_step')['blocks'] ?? []))
+            )
+        );
         $this->assertSame(
             'work_experiment',
             $clear['sections']['career.work_experiments']['blocks'][1]['kind'] ?? null
+        );
+        $this->assertCount(5, (array) ($this->section($clear, 'career.work_experiments')['selected_blocks'] ?? []));
+        $this->assertContains(
+            'work_scene_transition',
+            array_map(
+                static fn (array $block): string => (string) ($block['kind'] ?? ''),
+                array_values((array) ($this->section($clear, 'career.work_experiments')['blocks'] ?? []))
+            )
         );
         $this->assertSame(
             'why_this_type',
@@ -522,6 +538,7 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             'next_action',
             $clear['sections']['growth.next_actions']['blocks'][1]['kind'] ?? null
         );
+        $this->assertCount(5, (array) ($this->section($clear, 'growth.next_actions')['selected_blocks'] ?? []));
         $this->assertSame(
             'weekly_experiment',
             $clear['sections']['growth.weekly_experiments']['blocks'][1]['kind'] ?? null
@@ -530,9 +547,24 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             'watchout',
             $clear['sections']['growth.watchouts']['blocks'][1]['kind'] ?? null
         );
+        $this->assertContains(
+            'watchout_recovery_gap',
+            array_map(
+                static fn (array $block): string => (string) ($block['kind'] ?? ''),
+                array_values((array) ($this->section($clear, 'growth.watchouts')['blocks'] ?? []))
+            )
+        );
         $this->assertSame(
             'relationship_practice',
             $clear['sections']['relationships.try_this_week']['blocks'][1]['kind'] ?? null
+        );
+        $this->assertCount(5, (array) ($this->section($clear, 'relationships.try_this_week')['selected_blocks'] ?? []));
+        $this->assertContains(
+            'relationship_low_intensity_reconnect',
+            array_map(
+                static fn (array $block): string => (string) ($block['kind'] ?? ''),
+                array_values((array) ($this->section($clear, 'relationships.try_this_week')['blocks'] ?? []))
+            )
         );
         $this->assertStringContainsString(
             '主类型',
@@ -625,21 +657,11 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertSame('ENFP-T', $careerMove['type_code']);
         $this->assertSame('T', $clarify['identity']);
         $this->assertSame('T', $careerMove['identity']);
-        $this->assertSame(
-            [
-                'growth.next_actions.next_action.EI.E',
-                'growth.next_actions.axis_strength.EI.E.clear',
-                'growth.next_actions.identity.t',
-            ],
-            $clarify['sections']['growth.next_actions']['selected_blocks'] ?? null
-        );
-        $this->assertSame(
-            [
-                'growth.next_actions.next_action.EI.E',
-                'growth.next_actions.axis_strength.EI.E.clear',
-                'growth.next_actions.boundary.TF',
-            ],
-            $careerMove['sections']['growth.next_actions']['selected_blocks'] ?? null
+        $this->assertCount(5, (array) ($this->section($clarify, 'growth.next_actions')['selected_blocks'] ?? []));
+        $this->assertCount(5, (array) ($this->section($careerMove, 'growth.next_actions')['selected_blocks'] ?? []));
+        $this->assertNotSame(
+            $this->section($clarify, 'growth.next_actions')['selected_blocks'] ?? null,
+            $this->section($careerMove, 'growth.next_actions')['selected_blocks'] ?? null
         );
         $this->assertNotSame(
             $clarify['sections']['growth.next_actions']['selected_blocks'] ?? null,
@@ -961,7 +983,7 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertSame('en', $english['locale']);
         $this->assertStringContainsString(
             'stable Extraversion preference',
-            (string) data_get($english, 'sections.overview.blocks.0.text', '')
+            (string) ($this->section($english, 'overview')['blocks'][0]['text'] ?? '')
         );
         $this->assertStringContainsString(
             'At work, you usually start through',
@@ -969,7 +991,7 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         );
         $this->assertStringNotContainsString(
             '稳定的外倾倾向',
-            (string) data_get($english, 'sections.overview.blocks.0.text', '')
+            (string) ($this->section($english, 'overview')['blocks'][0]['text'] ?? '')
         );
         $this->assertStringNotContainsString(
             '在工作里',
@@ -1022,5 +1044,13 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertSame('zh-CN', data_get($personalization, 'cultural_calibration_v1.locale_context'));
         $this->assertSame('INTJ-A', (string) ($personalization['type_code'] ?? ''));
         $this->assertSame('A', (string) ($personalization['identity'] ?? ''));
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function section(array $payload, string $sectionKey): array
+    {
+        return (array) (($payload['sections'][$sectionKey] ?? []));
     }
 }

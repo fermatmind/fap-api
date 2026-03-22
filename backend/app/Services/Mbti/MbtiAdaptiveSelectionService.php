@@ -16,6 +16,7 @@ final class MbtiAdaptiveSelectionService
         'growth.watchouts',
         'career.next_step',
         'career.work_experiments',
+        'relationships.try_this_week',
         'traits.why_this_type',
     ];
 
@@ -587,6 +588,9 @@ final class MbtiAdaptiveSelectionService
             'career.work_experiments' => $intentCluster === 'career_move' || $reason === 'career_followthrough_loop'
                 ? 'adaptive_experiment_followthrough'
                 : 'adaptive_experiment_resume',
+            'relationships.try_this_week' => $reason === 'relationship_followthrough_loop'
+                ? 'adaptive_relationship_followthrough'
+                : 'adaptive_relationship_resume',
             'traits.why_this_type' => $reason === 'feedback_redirect_to_action'
                 ? 'adaptive_clarify_boundary'
                 : 'adaptive_identity_reset',
@@ -643,7 +647,7 @@ final class MbtiAdaptiveSelectionService
             $selected = $availableIds;
         }
 
-        return array_slice($selected, 0, 3);
+        return array_slice($selected, 0, $this->maxBlocksForSection($sectionKey, $selectionMode));
     }
 
     /**
@@ -653,27 +657,43 @@ final class MbtiAdaptiveSelectionService
     {
         return match ($sectionKey) {
             'growth.next_actions' => match ($selectionMode) {
-                'adaptive_redirect_to_action' => ['next_action', 'axis_strength', 'identity'],
-                'adaptive_career_followthrough' => ['next_action', 'boundary', 'axis_strength'],
-                default => ['next_action', 'identity', 'boundary'],
+                'adaptive_redirect_to_action' => ['next_action', 'action_momentum_start', 'action_resistance_break', 'boundary', 'identity'],
+                'adaptive_career_followthrough' => ['next_action', 'action_bridge_step', 'action_experiment', 'boundary', 'axis_strength'],
+                default => ['next_action', 'action_experiment', 'action_momentum_start', 'identity', 'boundary'],
             },
             'growth.watchouts' => match ($selectionMode) {
-                'adaptive_reduce_resistance' => ['watchout', 'identity', 'axis_strength'],
-                default => ['watchout', 'boundary', 'identity'],
+                'adaptive_reduce_resistance' => ['watchout', 'watchout_overextension', 'watchout_energy_leak', 'boundary', 'identity'],
+                default => ['watchout', 'watchout_energy_leak', 'watchout_overextension', 'identity', 'boundary'],
             },
             'career.next_step' => match ($selectionMode) {
-                'adaptive_career_followthrough' => ['career_next_step', 'boundary', 'axis_strength'],
-                default => ['career_next_step', 'identity', 'axis_strength'],
+                'adaptive_career_followthrough' => ['career_next_step', 'work_scene_transition', 'work_scene_role_fit', 'boundary', 'axis_strength'],
+                default => ['career_next_step', 'work_scene_role_fit', 'work_scene_execution', 'identity', 'boundary'],
             },
             'career.work_experiments' => match ($selectionMode) {
-                'adaptive_experiment_followthrough' => ['work_experiment', 'boundary', 'axis_strength'],
-                default => ['work_experiment', 'identity', 'axis_strength'],
+                'adaptive_experiment_followthrough' => ['work_experiment', 'work_scene_focus_recovery', 'work_scene_transition', 'boundary', 'axis_strength'],
+                default => ['work_experiment', 'work_scene_collaboration', 'work_scene_execution', 'identity', 'boundary'],
+            },
+            'relationships.try_this_week' => match ($selectionMode) {
+                'adaptive_relationship_followthrough' => ['relationship_practice', 'relationship_misread_repair', 'relationship_boundary_negotiation', 'boundary', 'identity'],
+                default => ['relationship_practice', 'relationship_low_intensity_reconnect', 'relationship_bridge', 'identity', 'boundary'],
             },
             'traits.why_this_type' => match ($selectionMode) {
                 'adaptive_clarify_boundary' => ['why_this_type', 'misunderstanding_fix', 'boundary', 'axis_strength'],
                 default => ['why_this_type', 'identity', 'axis_strength'],
             },
             default => [],
+        };
+    }
+
+    private function maxBlocksForSection(string $sectionKey, string $selectionMode): int
+    {
+        return match ($sectionKey) {
+            'growth.next_actions',
+            'growth.watchouts',
+            'career.next_step',
+            'career.work_experiments',
+            'relationships.try_this_week' => 4,
+            default => 3,
         };
     }
 

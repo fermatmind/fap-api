@@ -77,6 +77,18 @@ final class MbtiAdaptiveSelectionServiceTest extends TestCase
             'adaptive.feedback_redirect_to_action',
             (string) (($adaptive['section_selection_keys']['growth.next_actions'] ?? ''))
         );
+        $this->assertContains(
+            'relationships.try_this_week',
+            array_keys((array) data_get($adaptive, 'adaptive_selection_v1.action_effect_weights', []))
+        );
+        $this->assertCount(4, (array) ($this->section($adaptive, 'relationships.try_this_week')['selected_blocks'] ?? []));
+        $this->assertContains(
+            'relationship_low_intensity_reconnect',
+            array_map(
+                static fn (array $block): string => (string) ($block['kind'] ?? ''),
+                array_values((array) ($this->section($adaptive, 'relationships.try_this_week')['blocks'] ?? []))
+            )
+        );
         $this->assertStringContainsString(
             'adaptive.feedback_redirect_to_action',
             (string) (($adaptive['action_selection_keys']['career.next_step'] ?? ''))
@@ -223,5 +235,13 @@ final class MbtiAdaptiveSelectionServiceTest extends TestCase
                 'AT' => 'clear',
             ],
         ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function section(array $payload, string $sectionKey): array
+    {
+        return (array) (($payload['sections'][$sectionKey] ?? []));
     }
 }

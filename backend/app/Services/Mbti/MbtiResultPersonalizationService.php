@@ -185,6 +185,37 @@ final class MbtiResultPersonalizationService
         'relationship_practice' => '本周关系练习',
         'work_experiment' => '工作实验',
         'watchout' => '风险提醒',
+        'action_experiment' => '行动实验',
+        'action_reset' => '动作重置',
+        'action_resistance_break' => '阻力拆解',
+        'action_momentum_start' => '起步动量',
+        'action_bridge_step' => '桥接动作',
+        'action_low_pressure_step' => '低压动作',
+        'watchout_overextension' => '过度拉伸提醒',
+        'watchout_people_pleasing' => '讨好风险提醒',
+        'watchout_overcontrol' => '过度控制提醒',
+        'watchout_energy_leak' => '能量泄漏提醒',
+        'watchout_avoidant_delay' => '回避延迟提醒',
+        'watchout_recovery_gap' => '恢复断档提醒',
+        'work_scene_execution' => '执行场景',
+        'work_scene_collaboration' => '协作场景',
+        'work_scene_pacing' => '节奏场景',
+        'work_scene_role_fit' => '角色匹配场景',
+        'work_scene_transition' => '过渡场景',
+        'work_scene_promotion_readiness' => '晋升准备场景',
+        'work_scene_team_friction' => '团队摩擦场景',
+        'work_scene_focus_recovery' => '注意力恢复场景',
+        'relationship_bridge' => '关系桥接',
+        'relationship_boundary_negotiation' => '边界协商',
+        'relationship_misread_repair' => '误读修复',
+        'relationship_conflict_recovery' => '冲突恢复',
+        'relationship_try_this_week' => '本周关系尝试',
+        'relationship_low_intensity_reconnect' => '低强度重新连接',
+        'recovery_reset' => '恢复重置',
+        'recovery_reentry' => '恢复重入',
+        'revisit_resume' => '复访继续',
+        'adaptive_retry' => '自适应重试',
+        'adaptive_reduce_pressure' => '减压自适应',
         'decision' => '决策场景',
         'stress_recovery' => '压力恢复场景',
         'communication' => '沟通协作场景',
@@ -215,6 +246,37 @@ final class MbtiResultPersonalizationService
         'relationship_practice' => 'Relationship practice',
         'work_experiment' => 'Work experiment',
         'watchout' => 'Watchout',
+        'action_experiment' => 'Action experiment',
+        'action_reset' => 'Action reset',
+        'action_resistance_break' => 'Resistance break',
+        'action_momentum_start' => 'Momentum start',
+        'action_bridge_step' => 'Bridge step',
+        'action_low_pressure_step' => 'Low-pressure step',
+        'watchout_overextension' => 'Overextension watchout',
+        'watchout_people_pleasing' => 'People-pleasing watchout',
+        'watchout_overcontrol' => 'Overcontrol watchout',
+        'watchout_energy_leak' => 'Energy leak watchout',
+        'watchout_avoidant_delay' => 'Avoidant delay watchout',
+        'watchout_recovery_gap' => 'Recovery gap watchout',
+        'work_scene_execution' => 'Execution scene',
+        'work_scene_collaboration' => 'Collaboration scene',
+        'work_scene_pacing' => 'Pacing scene',
+        'work_scene_role_fit' => 'Role-fit scene',
+        'work_scene_transition' => 'Transition scene',
+        'work_scene_promotion_readiness' => 'Promotion-readiness scene',
+        'work_scene_team_friction' => 'Team-friction scene',
+        'work_scene_focus_recovery' => 'Focus-recovery scene',
+        'relationship_bridge' => 'Relationship bridge',
+        'relationship_boundary_negotiation' => 'Boundary negotiation',
+        'relationship_misread_repair' => 'Misread repair',
+        'relationship_conflict_recovery' => 'Conflict recovery',
+        'relationship_try_this_week' => 'This-week relationship try',
+        'relationship_low_intensity_reconnect' => 'Low-intensity reconnect',
+        'recovery_reset' => 'Recovery reset',
+        'recovery_reentry' => 'Recovery re-entry',
+        'revisit_resume' => 'Revisit resume',
+        'adaptive_retry' => 'Adaptive retry',
+        'adaptive_reduce_pressure' => 'Adaptive pressure reduction',
         'decision' => 'Decision scene',
         'stress_recovery' => 'Stress recovery scene',
         'communication' => 'Communication scene',
@@ -1351,6 +1413,7 @@ final class MbtiResultPersonalizationService
                 'growth.weekly_experiments',
                 'relationships.try_this_week',
                 'career.work_experiments',
+                'career.next_step',
                 'growth.watchouts',
             ], true)) {
                 $sectionVariants[$sectionKey] = $this->buildActionSectionVariant(
@@ -1360,7 +1423,8 @@ final class MbtiResultPersonalizationService
                     $sceneFingerprint,
                     $actionAuthority,
                     $doc,
-                    $locale
+                    $locale,
+                    ''
                 );
 
                 continue;
@@ -1917,19 +1981,23 @@ final class MbtiResultPersonalizationService
         $growthActionKeys = $this->remapStyleKeys((array) data_get($sceneFingerprint, 'growth.style_keys', []), 'weekly_action');
         $relationshipActionKeys = $this->remapStyleKeys((array) data_get($sceneFingerprint, 'communication.style_keys', []), 'relationship_action');
         $workExperimentKeys = $this->remapStyleKeys((array) data_get($sceneFingerprint, 'work.style_keys', []), 'work_experiment');
+        $careerNextStepKeys = $this->remapStyleKeys((array) data_get($sceneFingerprint, 'decision.style_keys', []), 'career_next_step');
         $watchoutKeys = $this->remapStyleKeys((array) data_get($sceneFingerprint, 'stress_recovery.style_keys', []), 'watchout');
         $actionTheme = $this->resolveActionTheme($sceneFingerprint, $sectionVariants, $explainabilityAuthority);
+        $careerNextStepTheme = $this->resolveCareerNextStepTheme($sceneFingerprint, $sectionVariants);
         $stabilityBucket = trim((string) ($explainabilityAuthority['stability_bucket'] ?? 'mixed'));
 
         $growthActionKeys[] = sprintf('weekly_action.theme.%s', $actionTheme);
         $relationshipActionKeys[] = sprintf('relationship_action.theme.%s', $actionTheme);
         $workExperimentKeys[] = sprintf('work_experiment.theme.%s', $actionTheme);
+        $careerNextStepKeys[] = sprintf('career_next_step.theme.%s', $careerNextStepTheme);
         $watchoutKeys[] = sprintf('watchout.stability.%s', $stabilityBucket !== '' ? $stabilityBucket : 'mixed');
 
         if ($identity !== '') {
             $growthActionKeys[] = sprintf('weekly_action.identity.%s', $identity);
             $relationshipActionKeys[] = sprintf('relationship_action.identity.%s', $identity);
             $workExperimentKeys[] = sprintf('work_experiment.identity.%s', $identity);
+            $careerNextStepKeys[] = sprintf('career_next_step.identity.%s', $identity);
             $watchoutKeys[] = sprintf('watchout.identity.%s', $identity);
         }
 
@@ -1960,9 +2028,13 @@ final class MbtiResultPersonalizationService
 
         return [
             'action_plan_summary' => $this->buildActionPlanSummary($sceneFingerprint, $stabilityBucket, $doc, $locale),
+            'action_theme' => $actionTheme,
+            'stability_bucket' => $stabilityBucket !== '' ? $stabilityBucket : 'mixed',
+            'close_call_axes' => array_values((array) data_get($explainabilityAuthority, 'close_call_axes', [])),
             'weekly_action_keys' => array_values(array_unique(array_filter($growthActionKeys))),
             'relationship_action_keys' => array_values(array_unique(array_filter($relationshipActionKeys))),
             'work_experiment_keys' => array_values(array_unique(array_filter($workExperimentKeys))),
+            'career_next_step_keys' => array_values(array_unique(array_filter($careerNextStepKeys))),
             'watchout_keys' => array_values(array_unique(array_filter($watchoutKeys))),
         ];
     }
@@ -2049,6 +2121,209 @@ final class MbtiResultPersonalizationService
             'EI' => 'protect_energy_lane',
             'SN' => 'turn_pattern_into_proof',
             default => 'repeat_high_fit_experiment',
+        };
+    }
+
+    /**
+     * @param  array<string, mixed>  $primaryAxis
+     * @param  array<string, mixed>|null  $supportAxis
+     */
+    private function resolveActionSupportKind(
+        string $sectionKey,
+        string $actionTheme,
+        string $stabilityBucket,
+        array $primaryAxis,
+        string $boundaryAxis,
+        ?array $supportAxis,
+        string $identity,
+        string $intentCluster
+    ): string {
+        $axisCode = strtoupper(trim((string) ($primaryAxis['axis'] ?? '')));
+        $band = strtolower(trim((string) ($primaryAxis['band'] ?? '')));
+        $theme = trim($actionTheme);
+        $supportAxisCode = strtoupper(trim((string) ($supportAxis['axis'] ?? '')));
+
+        return match ($sectionKey) {
+            'growth.next_actions' => match (true) {
+                $intentCluster === 'career_move' => 'action_bridge_step',
+                $intentCluster === 'clarify_type' => 'action_experiment',
+                $theme === 'make_rhythm_visible' => 'action_momentum_start',
+                $theme === 'clarify_decision_criteria' => 'action_bridge_step',
+                $theme === 'protect_energy_lane' => 'action_low_pressure_step',
+                $theme === 'turn_pattern_into_proof' => 'action_experiment',
+                $stabilityBucket === 'context_sensitive' => 'action_reset',
+                $boundaryAxis !== '' => 'action_low_pressure_step',
+                default => 'action_resistance_break',
+            },
+            'growth.watchouts' => match (true) {
+                $stabilityBucket === 'context_sensitive' || $band === 'boundary' => 'watchout_recovery_gap',
+                $theme === 'protect_energy_lane' => 'watchout_energy_leak',
+                $theme === 'name_decision_rule' || $identity === 'T' => 'watchout_overcontrol',
+                $axisCode === 'EI' || $supportAxisCode === 'EI' => 'watchout_people_pleasing',
+                default => 'watchout_overextension',
+            },
+            'career.next_step' => match (true) {
+                $intentCluster === 'career_move' => 'work_scene_role_fit',
+                $intentCluster === 'clarify_type' => 'work_scene_transition',
+                $axisCode === 'JP' || $boundaryAxis === 'JP' => 'work_scene_pacing',
+                $axisCode === 'TF' || $boundaryAxis === 'TF' => 'work_scene_role_fit',
+                $axisCode === 'EI' || $supportAxisCode === 'EI' => 'work_scene_collaboration',
+                $axisCode === 'SN' || $supportAxisCode === 'SN' => 'work_scene_execution',
+                default => 'work_scene_transition',
+            },
+            'career.work_experiments' => match (true) {
+                $intentCluster === 'career_move' => 'work_scene_team_friction',
+                $intentCluster === 'clarify_type' => 'work_scene_pacing',
+                $theme === 'make_rhythm_visible' => 'work_scene_execution',
+                $theme === 'clarify_decision_criteria' => 'work_scene_pacing',
+                $theme === 'protect_energy_lane' => 'work_scene_focus_recovery',
+                $theme === 'turn_pattern_into_proof' => 'work_scene_team_friction',
+                $boundaryAxis === 'JP' => 'work_scene_transition',
+                default => 'work_scene_collaboration',
+            },
+            'relationships.try_this_week' => match (true) {
+                $intentCluster === 'relationship_tuning' => 'relationship_boundary_negotiation',
+                $theme === 'clarify_decision_criteria' || $axisCode === 'TF' || $boundaryAxis === 'TF' => 'relationship_boundary_negotiation',
+                $theme === 'protect_energy_lane' || $axisCode === 'EI' => 'relationship_low_intensity_reconnect',
+                $stabilityBucket === 'context_sensitive' => 'relationship_misread_repair',
+                $stabilityBucket === 'mixed' => 'relationship_conflict_recovery',
+                default => 'relationship_bridge',
+            },
+            default => 'revisit_resume',
+        };
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function actionSupportKindsForSection(string $sectionKey, string $supportKind): array
+    {
+        return match ($sectionKey) {
+            'growth.next_actions' => array_values(array_unique(array_filter([
+                $supportKind,
+                'action_experiment',
+                'action_bridge_step',
+                'action_momentum_start',
+                'action_low_pressure_step',
+                'action_reset',
+                'action_resistance_break',
+            ]))),
+            'growth.watchouts' => array_values(array_unique(array_filter([
+                $supportKind,
+                'watchout_overextension',
+                'watchout_people_pleasing',
+                'watchout_overcontrol',
+                'watchout_energy_leak',
+                'watchout_avoidant_delay',
+                'watchout_recovery_gap',
+            ]))),
+            'career.next_step' => array_values(array_unique(array_filter([
+                $supportKind,
+                'work_scene_role_fit',
+                'work_scene_transition',
+                'work_scene_execution',
+                'work_scene_collaboration',
+                'work_scene_pacing',
+                'work_scene_promotion_readiness',
+                'work_scene_team_friction',
+                'work_scene_focus_recovery',
+            ]))),
+            'career.work_experiments' => array_values(array_unique(array_filter([
+                $supportKind,
+                'work_scene_execution',
+                'work_scene_collaboration',
+                'work_scene_pacing',
+                'work_scene_role_fit',
+                'work_scene_transition',
+                'work_scene_promotion_readiness',
+                'work_scene_team_friction',
+                'work_scene_focus_recovery',
+            ]))),
+            'relationships.try_this_week' => array_values(array_unique(array_filter([
+                $supportKind,
+                'relationship_bridge',
+                'relationship_boundary_negotiation',
+                'relationship_misread_repair',
+                'relationship_conflict_recovery',
+                'relationship_try_this_week',
+                'relationship_low_intensity_reconnect',
+            ]))),
+            default => [$supportKind],
+        };
+    }
+
+    /**
+     * @param  array<string, mixed>  $doc
+     * @param  array<string, mixed>  $sceneFingerprint
+     * @param  array<string, mixed>|null  $supportAxis
+     */
+    private function resolveActionSupportText(
+        array $doc,
+        string $sectionKey,
+        string $supportKind,
+        string $locale,
+        array $sceneFingerprint,
+        array $primaryAxis,
+        ?array $supportAxis,
+        string $identity,
+        string $actionTheme,
+        string $stabilityBucket,
+        string $boundaryAxis
+    ): string {
+        $templateNode = data_get($doc, 'action_support_templates.'.$sectionKey.'.'.$supportKind);
+        if ($templateNode === null) {
+            $templateNode = $doc['action_support_templates'][$sectionKey][$supportKind] ?? null;
+        }
+
+        $template = $this->resolveTemplate($templateNode, $locale, '');
+        if ($template === '') {
+            return '';
+        }
+
+        $primaryHint = $this->sceneSummaryHint($this->sceneHintText($doc, $locale, $primaryAxis), $locale);
+        $supportHint = is_array($supportAxis)
+            ? $this->sceneSummaryHint($this->sceneHintText($doc, $locale, $supportAxis), $locale)
+            : $primaryHint;
+        $actionHint = $this->actionThemeLabel($actionTheme, $locale);
+        $identityClause = $this->shortIdentityClause($identity, $locale);
+        $boundaryClause = '';
+
+        return $this->renderTemplate($template, [
+            'scene_side_hint' => $primaryHint,
+            'support_hint' => $supportHint,
+            'action_hint' => $actionHint,
+            'work_hint' => $supportHint !== '' ? $supportHint : $primaryHint,
+            'relationship_hint' => $supportHint !== '' ? $supportHint : $primaryHint,
+            'recovery_hint' => $supportHint !== '' ? $supportHint : $primaryHint,
+            'watchout_hint' => $supportHint !== '' ? $supportHint : $primaryHint,
+            'identity_clause' => $identityClause,
+            'boundary_clause' => $boundaryClause,
+            'stability_bucket' => $stabilityBucket,
+        ]);
+    }
+
+    private function extractThemeFromActionKey(string $actionKey): string
+    {
+        if ($actionKey === '') {
+            return '';
+        }
+
+        if (preg_match('/\.theme\.([a-z0-9_]+)/i', $actionKey, $matches) === 1) {
+            return strtolower(trim((string) ($matches[1] ?? '')));
+        }
+
+        return '';
+    }
+
+    private function actionThemeLabel(string $actionTheme, string $locale): string
+    {
+        return match ($actionTheme) {
+            'make_rhythm_visible' => $locale === 'zh-CN' ? '先把节奏显性化' : 'make the rhythm visible first',
+            'clarify_decision_criteria' => $locale === 'zh-CN' ? '先把判断标准说清楚' : 'clarify the decision criteria first',
+            'protect_energy_lane' => $locale === 'zh-CN' ? '先守住能量边界' : 'protect the energy lane first',
+            'turn_pattern_into_proof' => $locale === 'zh-CN' ? '先把模式转成证据' : 'turn the pattern into evidence first',
+            'repeat_high_fit_experiment' => $locale === 'zh-CN' ? '先重复高匹配动作' : 'repeat the high-fit move first',
+            default => $locale === 'zh-CN' ? '先做一个更小的动作' : 'start with a smaller move',
         };
     }
 
@@ -2415,7 +2690,8 @@ final class MbtiResultPersonalizationService
         array $sceneFingerprint,
         array $actionAuthority,
         array $doc,
-        string $locale
+        string $locale,
+        string $intentCluster
     ): array {
         $sceneKey = self::SECTION_SCENE_MAP[$sectionKey] ?? 'growth';
         $primaryAxis = is_array(data_get($sceneFingerprint, $sceneKey.'.primary_axis'))
@@ -2452,6 +2728,18 @@ final class MbtiResultPersonalizationService
         $sceneTemplateKey = $this->sceneTemplateKeyForSection($sectionKey, $sceneKey);
         $sceneBlockKind = $this->sceneBlockKind($sceneKey, $sectionKey);
         $actionKey = $this->resolveActionKeyForSection($sectionKey, $actionAuthority);
+        $actionTheme = $this->extractThemeFromActionKey($actionKey);
+        $stabilityBucket = trim((string) ($actionAuthority['stability_bucket'] ?? 'mixed'));
+        $supportKind = $this->resolveActionSupportKind(
+            $sectionKey,
+            $actionTheme,
+            $stabilityBucket,
+            $primaryAxis,
+            is_string($boundaryAxis) ? $boundaryAxis : '',
+            $supportAxis,
+            $identity,
+            $intentCluster
+        );
 
         $blocks = [];
         $selectedBlocks = [];
@@ -2515,6 +2803,41 @@ final class MbtiResultPersonalizationService
             }
         }
 
+        foreach ($this->actionSupportKindsForSection($sectionKey, $supportKind) as $supportKindCandidate) {
+            $supportText = $this->resolveActionSupportText(
+                $doc,
+                $sectionKey,
+                $supportKindCandidate,
+                $locale,
+                $sceneFingerprint,
+                $primaryAxis,
+                $supportAxis,
+                $identity,
+                $actionTheme,
+                $stabilityBucket,
+                is_string($boundaryAxis) ? $boundaryAxis : ''
+            );
+            if ($supportText === '') {
+                continue;
+            }
+
+            $blockId = sprintf(
+                '%s.%s.%s.%s.%s',
+                $sectionKey,
+                $supportKindCandidate,
+                $axisCode,
+                $side,
+                $this->normalizeActionKeyForVariant($actionTheme !== '' ? $actionTheme : $supportKindCandidate)
+            );
+            $selectedBlocks[] = $blockId;
+            $blocks[] = [
+                'id' => $blockId,
+                'kind' => $supportKindCandidate,
+                'label' => $this->blockLabel($supportKindCandidate, $doc, $locale),
+                'text' => $supportText,
+            ];
+        }
+
         return [
             'variant_key' => implode(':', [
                 $sectionKey,
@@ -2544,6 +2867,7 @@ final class MbtiResultPersonalizationService
     {
         $keys = match ($sectionKey) {
             'growth.next_actions', 'growth.weekly_experiments' => (array) ($actionAuthority['weekly_action_keys'] ?? []),
+            'career.next_step' => (array) ($actionAuthority['career_next_step_keys'] ?? []),
             'relationships.try_this_week' => (array) ($actionAuthority['relationship_action_keys'] ?? []),
             'career.work_experiments' => (array) ($actionAuthority['work_experiment_keys'] ?? []),
             'growth.watchouts' => (array) ($actionAuthority['watchout_keys'] ?? []),
