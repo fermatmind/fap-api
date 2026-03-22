@@ -28,6 +28,7 @@ return [
     'artifact_slot_version_dual_write_enabled' => false,
     'lifecycle_ledger_dual_write_enabled' => false,
     'access_projection_dual_write_enabled' => false,
+    'control_plane_read_from_catalog_enabled' => false,
     'content_pack_v2_dual_write_enabled' => false,
     'resolver_materialization_enabled' => false,
     'packs_v2_remote_rehydrate_enabled' => false,

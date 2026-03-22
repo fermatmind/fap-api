@@ -171,6 +171,13 @@ final class StorageControlPlaneStatusService
      */
     private function reportsArtifactsLifecycleSection(array $inventory): array
     {
+        if ($this->controlPlaneReadFromCatalogEnabled()) {
+            $catalog = $this->catalogReportsArtifactsLifecycleSection($inventory);
+            if ($catalog !== null) {
+                return $catalog;
+            }
+        }
+
         $canonicalRootPath = storage_path('app/private/artifacts');
         $legacyRootPath = storage_path('app/private/reports');
 
@@ -236,6 +243,13 @@ final class StorageControlPlaneStatusService
      */
     private function reportArtifactsArchiveSection(): array
     {
+        if ($this->controlPlaneReadFromCatalogEnabled()) {
+            $catalog = $this->catalogReportArtifactsArchiveSection();
+            if ($catalog !== null) {
+                return $catalog;
+            }
+        }
+
         $audit = $this->latestAuditForAction('storage_archive_report_artifacts');
         if ($audit === null) {
             return array_merge([
@@ -297,6 +311,104 @@ final class StorageControlPlaneStatusService
      */
     private function reportArtifactsPostureSection(): array
     {
+        if ($this->controlPlaneReadFromCatalogEnabled()) {
+            $archive = $this->catalogReportArtifactsPostureNode('archive_report_artifacts', [
+                'candidate_count',
+                'copied_count',
+                'verified_count',
+                'already_archived_count',
+                'failed_count',
+                'results_count',
+            ]);
+            $rehydrate = $this->catalogReportArtifactsPostureNode('rehydrate_report_artifacts', [
+                'candidate_count',
+                'rehydrated_count',
+                'verified_count',
+                'skipped_count',
+                'blocked_count',
+                'failed_count',
+                'results_count',
+            ]);
+            $shrink = $this->catalogReportArtifactsPostureNode('shrink_archived_report_artifacts', [
+                'candidate_count',
+                'deleted_count',
+                'skipped_missing_local_count',
+                'blocked_missing_remote_count',
+                'blocked_missing_archive_proof_count',
+                'blocked_missing_rehydrate_proof_count',
+                'blocked_hash_mismatch_count',
+                'failed_count',
+                'results_count',
+            ]);
+
+            if ($archive !== null || $rehydrate !== null || $shrink !== null) {
+                $archiveAudit = $this->latestAuditForAction('storage_archive_report_artifacts');
+                $rehydrateAudit = $this->latestAuditForAction('storage_rehydrate_report_artifacts');
+                $shrinkAudit = $this->latestAuditForAction('storage_shrink_archived_report_artifacts');
+
+                $archive ??= $this->reportArtifactsPostureNode($archiveAudit, [
+                    'candidate_count',
+                    'copied_count',
+                    'verified_count',
+                    'already_archived_count',
+                    'failed_count',
+                    'results_count',
+                ]);
+                $rehydrate ??= $this->reportArtifactsPostureNode($rehydrateAudit, [
+                    'candidate_count',
+                    'rehydrated_count',
+                    'verified_count',
+                    'skipped_count',
+                    'blocked_count',
+                    'failed_count',
+                    'results_count',
+                ]);
+                $shrink ??= $this->reportArtifactsPostureNode($shrinkAudit, [
+                    'candidate_count',
+                    'deleted_count',
+                    'skipped_missing_local_count',
+                    'blocked_missing_remote_count',
+                    'blocked_missing_archive_proof_count',
+                    'blocked_missing_rehydrate_proof_count',
+                    'blocked_hash_mismatch_count',
+                    'failed_count',
+                    'results_count',
+                ]);
+
+                $statuses = [
+                    $archive['status'] ?? 'not_available',
+                    $rehydrate['status'] ?? 'not_available',
+                    $shrink['status'] ?? 'not_available',
+                ];
+
+                $overallStatus = match (true) {
+                    count(array_filter($statuses, static fn (string $status): bool => $status !== 'not_available')) === 0 => 'not_available',
+                    in_array('not_available', $statuses, true) => 'partial',
+                    default => 'ok',
+                };
+
+                $lastUpdatedAt = $this->latestTimestamp([
+                    $archive['latest_generated_at'] ?? null,
+                    $rehydrate['latest_generated_at'] ?? null,
+                    $shrink['latest_generated_at'] ?? null,
+                ]);
+
+                return array_merge([
+                    'status' => $overallStatus,
+                    'durable_receipt_source' => 'attempt_receipts',
+                    'target_disk' => $this->consistentReportArtifactsTargetDisk([$archiveAudit, $rehydrateAudit, $shrinkAudit]),
+                    'archive' => $archive,
+                    'rehydrate' => $rehydrate,
+                    'shrink' => $shrink,
+                ], $this->freshnessFromTimestamp(
+                    $lastUpdatedAt,
+                    'ledger-derived',
+                    self::MANUAL_CONTROL_PLANE_STALE_AFTER_SECONDS,
+                    'not_available'
+                ));
+            }
+        }
+
         $archiveAudit = $this->latestAuditForAction('storage_archive_report_artifacts');
         $rehydrateAudit = $this->latestAuditForAction('storage_rehydrate_report_artifacts');
         $shrinkAudit = $this->latestAuditForAction('storage_shrink_archived_report_artifacts');
@@ -895,6 +1007,228 @@ final class StorageControlPlaneStatusService
             self::MANUAL_CONTROL_PLANE_STALE_AFTER_SECONDS,
             'not_available'
         ));
+    }
+
+    private function controlPlaneReadFromCatalogEnabled(): bool
+    {
+        return (bool) config('storage_rollout.control_plane_read_from_catalog_enabled', false);
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function catalogReportsArtifactsLifecycleSection(array $inventory): ?array
+    {
+        if (! Schema::hasTable('report_artifact_slots')) {
+            return null;
+        }
+
+        $reportJsonSlotCount = $this->countCatalogSlots(['report_json_free', 'report_json_full']);
+        $pdfSlotCount = $this->countCatalogSlots(['report_pdf_free', 'report_pdf_full']);
+        $reportJsonBytes = $this->sumCatalogBytes(['report_json_free', 'report_json_full']);
+        $pdfBytes = $this->sumCatalogBytes(['report_pdf_free', 'report_pdf_full']);
+
+        if ($reportJsonSlotCount === 0 && $pdfSlotCount === 0 && $reportJsonBytes === 0 && $pdfBytes === 0) {
+            return null;
+        }
+
+        $latestUpdatedAt = $this->latestTimestamp([
+            $this->maxColumnTimestamp('report_artifact_slots', 'updated_at'),
+            $this->maxColumnTimestamp('report_artifact_versions', 'updated_at'),
+        ]);
+
+        $latestInventoryGeneratedAt = $this->normalizeTimestamp($inventory['latest_generated_at'] ?? null) ?? $latestUpdatedAt;
+
+        return array_merge([
+            'status' => 'ok',
+            'canonical_root_path' => storage_path('app/private/artifacts'),
+            'legacy_root_path' => storage_path('app/private/reports'),
+            'canonical_user_output' => [
+                'report_json_files' => $reportJsonSlotCount,
+                'pdf_files' => $pdfSlotCount,
+                'bytes' => $reportJsonBytes + $pdfBytes,
+            ],
+            'legacy_fallback_live' => [
+                'report_json_files' => $this->matchingFilesStats(storage_path('app/private/reports'), static fn (string $relativePath): bool => str_ends_with($relativePath, '/report.json') || $relativePath === 'report.json')['files'],
+                'pdf_files' => $this->matchingFilesStats(storage_path('app/private/reports'), static fn (string $relativePath): bool => str_ends_with($relativePath, '/report_free.pdf')
+                    || str_ends_with($relativePath, '/report_full.pdf')
+                    || in_array($relativePath, ['report_free.pdf', 'report_full.pdf'], true))['files'],
+                'bytes' => 0,
+            ],
+            'safe_to_prune_derived' => [
+                'timestamp_backup_json_files' => 0,
+                'latest_reports_backups_policy' => [
+                    'keep_days' => (int) config('storage_retention.reports.keep_days', 0),
+                    'keep_timestamp_backups' => (int) config('storage_retention.reports.keep_timestamp_backups', 0),
+                ],
+            ],
+            'archive_candidate_status' => 'ledger_backed',
+        ], $this->freshnessFromTimestamp(
+            $latestInventoryGeneratedAt,
+            'ledger-derived',
+            self::INVENTORY_STALE_AFTER_SECONDS,
+            'not_available'
+        ));
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function catalogReportArtifactsArchiveSection(): ?array
+    {
+        if (! Schema::hasTable('artifact_lifecycle_jobs')) {
+            return null;
+        }
+
+        $job = DB::table('artifact_lifecycle_jobs')
+            ->where('job_type', 'archive_report_artifacts')
+            ->orderByDesc('finished_at')
+            ->orderByDesc('id')
+            ->first();
+
+        if ($job === null) {
+            return null;
+        }
+
+        $request = $this->decodeMaybeJson($job->request_payload_json ?? null);
+        $result = $this->decodeMaybeJson($job->result_payload_json ?? null);
+        $latestGeneratedAt = $this->normalizeTimestamp($job->finished_at ?? $job->updated_at ?? $job->created_at);
+        $summary = is_array($result['summary'] ?? null) ? $result['summary'] : [];
+
+        return array_merge([
+            'status' => 'ok',
+            'durable_receipt_source' => 'attempt_receipts',
+            'target_disk' => $this->normalizeOptionalString(data_get($request, 'target_disk') ?? data_get($result, 'target_disk')),
+            'latest_generated_at' => $latestGeneratedAt,
+            'latest_mode' => $this->normalizeOptionalString(data_get($request, 'mode') ?? data_get($result, 'mode')),
+            'latest_plan_path' => $this->normalizeOptionalString(data_get($request, 'plan_path')),
+            'latest_run_path' => $this->normalizeOptionalString(data_get($result, 'run_path')),
+            'latest_run_path_exists' => is_string(data_get($result, 'run_path')) && file_exists((string) data_get($result, 'run_path')),
+            'latest_summary' => [
+                'candidate_count' => (int) data_get($summary, 'candidate_count', 0),
+                'copied_count' => (int) data_get($summary, 'copied_count', 0),
+                'verified_count' => (int) data_get($summary, 'verified_count', 0),
+                'already_archived_count' => (int) data_get($summary, 'already_archived_count', 0),
+                'failed_count' => (int) data_get($summary, 'failed_count', 0),
+                'results_count' => count((array) ($result['results'] ?? [])),
+            ],
+        ], $this->freshnessFromTimestamp(
+            $latestGeneratedAt,
+            'ledger-derived',
+            self::MANUAL_CONTROL_PLANE_STALE_AFTER_SECONDS,
+            'not_available'
+        ));
+    }
+
+    /**
+     * @param  list<string>  $slotCodes
+     */
+    private function countCatalogSlots(array $slotCodes): int
+    {
+        if (! Schema::hasTable('report_artifact_slots')) {
+            return 0;
+        }
+
+        return (int) DB::table('report_artifact_slots')
+            ->whereIn('slot_code', $slotCodes)
+            ->whereNotNull('current_version_id')
+            ->count();
+    }
+
+    /**
+     * @param  list<string>  $slotCodes
+     */
+    private function sumCatalogBytes(array $slotCodes): int
+    {
+        if (! Schema::hasTable('report_artifact_slots') || ! Schema::hasTable('report_artifact_versions')) {
+            return 0;
+        }
+
+        return (int) DB::table('report_artifact_slots')
+            ->join('report_artifact_versions', 'report_artifact_versions.id', '=', 'report_artifact_slots.current_version_id')
+            ->whereIn('report_artifact_slots.slot_code', $slotCodes)
+            ->sum('report_artifact_versions.byte_size');
+    }
+
+    private function maxColumnTimestamp(string $table, string $column): ?string
+    {
+        if (! Schema::hasTable($table) || ! Schema::hasColumn($table, $column)) {
+            return null;
+        }
+
+        $value = DB::table($table)->max($column);
+
+        return $this->normalizeTimestamp($value);
+    }
+
+    /**
+     * @param  list<string>  $summaryFields
+     * @return array<string,mixed>|null
+     */
+    private function catalogReportArtifactsPostureNode(string $jobType, array $summaryFields): ?array
+    {
+        if (! Schema::hasTable('artifact_lifecycle_jobs')) {
+            return null;
+        }
+
+        $job = DB::table('artifact_lifecycle_jobs')
+            ->where('job_type', $jobType)
+            ->orderByDesc('finished_at')
+            ->orderByDesc('id')
+            ->first();
+
+        if ($job === null) {
+            return null;
+        }
+
+        $request = $this->decodeMaybeJson($job->request_payload_json ?? null);
+        $result = $this->decodeMaybeJson($job->result_payload_json ?? null);
+        $latestGeneratedAt = $this->normalizeTimestamp($job->finished_at ?? $job->updated_at ?? $job->created_at);
+        $latestRunPath = $this->normalizeOptionalString(data_get($result, 'run_path'));
+        $summary = [];
+
+        foreach ($summaryFields as $field) {
+            if ($field === 'results_count') {
+                $summary[$field] = count((array) ($result['results'] ?? []));
+
+                continue;
+            }
+
+            $summary[$field] = (int) data_get($result, 'summary.'.$field, 0);
+        }
+
+        return array_merge([
+            'status' => 'ok',
+            'latest_generated_at' => $latestGeneratedAt,
+            'latest_mode' => $this->normalizeOptionalString(data_get($request, 'mode') ?? data_get($result, 'mode')),
+            'latest_plan_path' => $this->normalizeOptionalString(data_get($request, 'plan_path')),
+            'latest_run_path' => $latestRunPath,
+            'latest_run_path_exists' => $latestRunPath !== null && file_exists($latestRunPath),
+            'latest_summary' => $summary,
+        ], $this->freshnessFromTimestamp(
+            $latestGeneratedAt,
+            'ledger-derived',
+            self::MANUAL_CONTROL_PLANE_STALE_AFTER_SECONDS,
+            'not_available'
+        ));
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function decodeMaybeJson(mixed $value): array
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+
+        if (! is_string($value) || $value === '') {
+            return [];
+        }
+
+        $decoded = json_decode($value, true);
+
+        return is_array($decoded) ? $decoded : [];
     }
 
     /**
