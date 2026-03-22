@@ -12,6 +12,7 @@ final class LandingSurfaceContractService
      *   entry_surface:string,
      *   entry_type:string,
      *   summary_blocks?:array<int,array<string,mixed>>,
+     *   discoverability_items?:array<int,array<string,mixed>>,
      *   discoverability_keys?:array<int,string>,
      *   continue_reading_keys?:array<int,string>,
      *   start_test_target?:?string,
@@ -37,6 +38,7 @@ final class LandingSurfaceContractService
         $entrySurface = $this->normalizeString($context['entry_surface'] ?? null) ?? 'public_entry';
         $entryType = $this->normalizeString($context['entry_type'] ?? null) ?? 'public_content';
         $summaryBlocks = $this->normalizeSummaryBlocks($context['summary_blocks'] ?? []);
+        $discoverabilityItems = $this->normalizeDiscoverabilityItems($context['discoverability_items'] ?? []);
         $discoverabilityKeys = $this->normalizeStringList($context['discoverability_keys'] ?? []);
         $continueReadingKeys = $this->normalizeStringList($context['continue_reading_keys'] ?? []);
         $startTestTarget = $this->normalizeString($context['start_test_target'] ?? null);
@@ -60,6 +62,7 @@ final class LandingSurfaceContractService
         $fingerprintSeed['entry_surface'] = $entrySurface;
         $fingerprintSeed['entry_type'] = $entryType;
         $fingerprintSeed['summary_blocks'] = $summaryBlocks;
+        $fingerprintSeed['discoverability_items'] = $discoverabilityItems;
         $fingerprintSeed['discoverability_keys'] = $discoverabilityKeys;
         $fingerprintSeed['continue_reading_keys'] = $continueReadingKeys;
         $fingerprintSeed['start_test_target'] = $startTestTarget;
@@ -84,6 +87,7 @@ final class LandingSurfaceContractService
             'entry_surface' => $entrySurface,
             'entry_type' => $entryType,
             'summary_blocks' => $summaryBlocks,
+            'discoverability_items' => $discoverabilityItems,
             'discoverability_keys' => $discoverabilityKeys,
             'continue_reading_keys' => $continueReadingKeys,
             'start_test_target' => $startTestTarget,
@@ -111,6 +115,48 @@ final class LandingSurfaceContractService
         $normalized = trim((string) $value);
 
         return $normalized === '' ? null : $normalized;
+    }
+
+    /**
+     * @param  array<int,mixed>  $items
+     * @return list<array<string,string|null>>
+     */
+    private function normalizeDiscoverabilityItems(array $items): array
+    {
+        $normalized = [];
+
+        foreach ($items as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $key = $this->normalizeString($item['key'] ?? null);
+            $title = $this->normalizeString($item['title'] ?? null);
+            $summary = $this->normalizeString($item['summary'] ?? $item['body'] ?? null);
+            $href = $this->normalizeString($item['href'] ?? $item['url'] ?? null);
+            $kind = $this->normalizeString($item['kind'] ?? null);
+            $badgeLabel = $this->normalizeString($item['badge_label'] ?? $item['badge'] ?? null);
+
+            if ($title === null || $href === null) {
+                continue;
+            }
+
+            $dedupeKey = $key ?? $href;
+            if (isset($normalized[$dedupeKey])) {
+                continue;
+            }
+
+            $normalized[$dedupeKey] = [
+                'key' => $key ?? $href,
+                'title' => $title,
+                'summary' => $summary,
+                'href' => $href,
+                'kind' => $kind,
+                'badge_label' => $badgeLabel,
+            ];
+        }
+
+        return array_values($normalized);
     }
 
     /**
