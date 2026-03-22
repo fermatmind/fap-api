@@ -889,6 +889,7 @@ class AttemptReadController extends Controller
             'pulse_check_v1' => is_array($personalization['pulse_check_v1'] ?? null) ? $personalization['pulse_check_v1'] : [],
             'longitudinal_memory_v1' => is_array($personalization['longitudinal_memory_v1'] ?? null) ? $personalization['longitudinal_memory_v1'] : [],
             'adaptive_selection_v1' => is_array($personalization['adaptive_selection_v1'] ?? null) ? $personalization['adaptive_selection_v1'] : [],
+            'tone_profile_v1' => is_array($personalization['tone_profile_v1'] ?? null) ? $personalization['tone_profile_v1'] : [],
             'comparative_v1' => is_array($personalization['comparative_v1'] ?? null) ? $personalization['comparative_v1'] : [],
             'career_focus_key' => trim((string) ($personalization['career_focus_key'] ?? '')),
             'career_journey_keys' => is_array($personalization['career_journey_keys'] ?? null) ? $personalization['career_journey_keys'] : [],
@@ -941,6 +942,32 @@ class AttemptReadController extends Controller
             $meta['next_best_action_key'] = trim((string) data_get($adaptiveSelection, 'next_best_action_v1.key', ''));
             $meta['next_best_action_section_key'] = trim((string) data_get($adaptiveSelection, 'next_best_action_v1.section_key', ''));
             $meta['next_best_action_reason'] = trim((string) data_get($adaptiveSelection, 'next_best_action_v1.reason', ''));
+        }
+
+        $toneProfile = is_array($personalization['tone_profile_v1'] ?? null)
+            ? $personalization['tone_profile_v1']
+            : [];
+        if ($toneProfile !== []) {
+            $meta['tone_contract_version'] = trim((string) ($toneProfile['tone_contract_version'] ?? $toneProfile['version'] ?? ''));
+            $meta['tone_fingerprint'] = trim((string) ($toneProfile['tone_fingerprint'] ?? ''));
+            $meta['tone_scope'] = trim((string) ($toneProfile['tone_scope'] ?? ''));
+            $meta['default_tone_mode'] = trim((string) ($toneProfile['default_tone_mode'] ?? ''));
+            $meta['tone_reason'] = trim((string) ($toneProfile['tone_reason'] ?? ''));
+            $meta['phrasing_mode'] = trim((string) ($toneProfile['phrasing_mode'] ?? ''));
+            $meta['tone_softness_mode'] = trim((string) ($toneProfile['tone_softness_mode'] ?? ''));
+            $meta['section_tone_modes'] = is_array($toneProfile['section_tone_modes'] ?? null)
+                ? $toneProfile['section_tone_modes']
+                : [];
+            $meta['section_tone_reasons'] = is_array($toneProfile['section_tone_reasons'] ?? null)
+                ? $toneProfile['section_tone_reasons']
+                : [];
+            $meta['tone_anchor_keys'] = array_values(array_filter(array_map(
+                'strval',
+                is_array($toneProfile['tone_anchor_keys'] ?? null) ? $toneProfile['tone_anchor_keys'] : []
+            )));
+            $meta['tone_evidence'] = is_array($toneProfile['tone_evidence'] ?? null)
+                ? $toneProfile['tone_evidence']
+                : [];
         }
 
         $narrativeRuntime = is_array($personalization['narrative_runtime_contract_v1'] ?? null)

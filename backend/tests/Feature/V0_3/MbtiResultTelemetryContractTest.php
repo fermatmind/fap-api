@@ -45,7 +45,7 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertSame('A', (string) ($meta['identity'] ?? ''));
             $this->assertSame('report_phase4a_contract', (string) ($meta['engine_version'] ?? ''));
             $this->assertSame('mbti.personalization.phase9e.v1', (string) ($meta['schema_version'] ?? ''));
-            $this->assertSame('phase9c.v1', (string) ($meta['dynamic_sections_version'] ?? ''));
+            $this->assertSame('phase9d.v1', (string) ($meta['dynamic_sections_version'] ?? ''));
             $this->assertSame('controlled_narrative.v1', (string) ($meta['narrative_contract_version'] ?? ''));
             $this->assertSame('narrative_runtime_contract.v1', (string) ($meta['narrative_runtime_contract_version'] ?? ''));
             $this->assertSame('off', (string) ($meta['narrative_runtime_mode'] ?? ''));
@@ -171,6 +171,11 @@ class MbtiResultTelemetryContractTest extends TestCase
             $this->assertIsArray($meta['recommendation_effect_weights'] ?? null);
             $this->assertIsArray($meta['cta_effect_weights'] ?? null);
             $this->assertIsArray($meta['next_best_action_v1'] ?? null);
+            $this->assertSame('mbti.tone_profile.v1', (string) ($meta['tone_contract_version'] ?? ''));
+            $this->assertNotSame('', trim((string) ($meta['tone_fingerprint'] ?? '')));
+            $this->assertNotSame('', trim((string) ($meta['default_tone_mode'] ?? '')));
+            $this->assertNotSame('', trim((string) ($meta['tone_reason'] ?? '')));
+            $this->assertNotSame('', trim((string) ($meta['phrasing_mode'] ?? '')));
         }
 
         $this->assertSame($eventMeta['report_view']['variant_keys'] ?? null, $eventMeta['result_view']['variant_keys'] ?? null);
@@ -199,6 +204,11 @@ class MbtiResultTelemetryContractTest extends TestCase
         $this->assertSame($eventMeta['report_view']['norming_version'] ?? null, $eventMeta['result_view']['norming_version'] ?? null);
         $this->assertSame($eventMeta['report_view']['norming_scope'] ?? null, $eventMeta['result_view']['norming_scope'] ?? null);
         $this->assertSame($eventMeta['report_view']['norming_source'] ?? null, $eventMeta['result_view']['norming_source'] ?? null);
+        $this->assertSame($eventMeta['report_view']['tone_contract_version'] ?? null, $eventMeta['result_view']['tone_contract_version'] ?? null);
+        $this->assertNotSame('', trim((string) data_get($eventMeta, 'result_view.tone_fingerprint', '')));
+        $this->assertNotSame('', trim((string) data_get($eventMeta, 'report_view.tone_fingerprint', '')));
+        $this->assertNotSame('', trim((string) data_get($eventMeta, 'result_view.default_tone_mode', '')));
+        $this->assertNotSame('', trim((string) data_get($eventMeta, 'report_view.default_tone_mode', '')));
         $this->assertSame($eventMeta['report_view']['locale_context'] ?? null, $eventMeta['result_view']['locale_context'] ?? null);
         $this->assertSame($eventMeta['report_view']['cultural_context'] ?? null, $eventMeta['result_view']['cultural_context'] ?? null);
         $this->assertSame($eventMeta['report_view']['calibrated_section_keys'] ?? null, $eventMeta['result_view']['calibrated_section_keys'] ?? null);

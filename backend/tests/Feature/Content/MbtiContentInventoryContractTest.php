@@ -50,7 +50,7 @@ final class MbtiContentInventoryContractTest extends TestCase
         $this->assertSame(1, $inventory['inventory_contract_version'] ?? null);
         $this->assertSame('MBTI.cn-mainland.zh-CN.v0.3', $inventory['pack_id'] ?? null);
         $this->assertSame('CN_MAINLAND.zh-CN', $inventory['cultural_context'] ?? null);
-        $this->assertSame('mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03-ce4', $inventory['inventory_fingerprint'] ?? null);
+        $this->assertSame('mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03-ce5', $inventory['inventory_fingerprint'] ?? null);
         $this->assertSame('mbti_content_inventory.v1', $inventory['governance_profile'] ?? null);
 
         $families = array_values(array_filter((array) ($inventory['fragment_families'] ?? []), 'is_array'));
@@ -118,6 +118,10 @@ final class MbtiContentInventoryContractTest extends TestCase
             $this->assertArrayHasKey($tagKey, $selectionTagSchema);
             $this->assertNotSame('', trim((string) ($selectionTagSchema[$tagKey]['type'] ?? '')));
         }
+        $this->assertSame(
+            ['supportive', 'direct', 'reflective', 'stabilizing', 'low_pressure'],
+            data_get($selectionTagSchema, 'tone_mode.values')
+        );
 
         $matrix = array_values(array_filter((array) ($inventory['section_family_matrix'] ?? []), 'is_array'));
         $matrixIndex = [];
@@ -152,6 +156,12 @@ final class MbtiContentInventoryContractTest extends TestCase
         $this->assertSame('scene_fragment', $matrixIndex['overview']['primary_family'] ?? null);
         $this->assertSame('explainability_fragment', $matrixIndex['traits.why_this_type']['primary_family'] ?? null);
         $this->assertContains('explainability_fragment', $matrixIndex['growth.stability_confidence']['secondary_families'] ?? []);
+        $this->assertContains('tone_fragment', $matrixIndex['growth.stability_confidence']['secondary_families'] ?? []);
+        $this->assertContains('tone_fragment', $matrixIndex['traits.adjacent_type_contrast']['secondary_families'] ?? []);
+        $this->assertContains('tone_fragment', $matrixIndex['growth.next_actions']['secondary_families'] ?? []);
+        $this->assertContains('tone_fragment', $matrixIndex['growth.watchouts']['secondary_families'] ?? []);
+        $this->assertContains('tone_fragment', $matrixIndex['career.next_step']['secondary_families'] ?? []);
+        $this->assertContains('tone_fragment', $matrixIndex['relationships.try_this_week']['secondary_families'] ?? []);
         $this->assertSame('action_fragment', $matrixIndex['growth.next_actions']['primary_family'] ?? null);
         $this->assertSame('cta_bundle_fragment', $matrixIndex['cta.surface']['primary_family'] ?? null);
     }

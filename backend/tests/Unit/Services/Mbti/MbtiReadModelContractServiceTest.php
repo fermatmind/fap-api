@@ -44,6 +44,14 @@ final class MbtiReadModelContractServiceTest extends TestCase
                 'memory_state' => 'resume_ready',
                 'progression_state' => 'reading_loop',
             ],
+            'tone_profile_v1' => [
+                'tone_contract_version' => 'mbti.tone_profile.v1',
+                'tone_fingerprint' => 'fixture-tone-fingerprint',
+                'default_tone_mode' => 'reflective',
+                'section_tone_modes' => ['traits.why_this_type' => 'reflective'],
+                'tone_reason' => 'revisit_resume_context',
+                'phrasing_mode' => 'reflective',
+            ],
             'ordered_recommendation_keys' => ['read-action'],
             'reading_focus_key' => 'read-action',
             'cta_bundle_v1' => [
@@ -86,6 +94,7 @@ final class MbtiReadModelContractServiceTest extends TestCase
                 'pulse_check_v1',
                 'longitudinal_memory_v1',
                 'adaptive_selection_v1',
+                'tone_profile_v1',
                 'continuity',
                 'cross_assessment_v1',
                 'synthesis_keys',
@@ -129,6 +138,12 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $this->assertContains('adaptive_selection_v1.recommendation_effect_weights', $contract['telemetry_parity_fields']);
         $this->assertContains('adaptive_selection_v1.next_best_action_v1.key', $contract['telemetry_parity_fields']);
         $this->assertContains('working_life_v1.career_focus_key', $contract['telemetry_parity_fields']);
+        $this->assertContains('tone_profile_v1.tone_contract_version', $contract['telemetry_parity_fields']);
+        $this->assertContains('tone_profile_v1.tone_fingerprint', $contract['telemetry_parity_fields']);
+        $this->assertContains('tone_profile_v1.default_tone_mode', $contract['telemetry_parity_fields']);
+        $this->assertContains('tone_profile_v1.tone_reason', $contract['telemetry_parity_fields']);
+        $this->assertContains('tone_profile_v1.phrasing_mode', $contract['telemetry_parity_fields']);
+        $this->assertContains('tone_profile_v1.section_tone_modes', $contract['telemetry_parity_fields']);
         $this->assertContains('intra_type_profile_v1.version', $contract['telemetry_parity_fields']);
         $this->assertContains('intra_type_profile_v1.profile_seed_key', $contract['telemetry_parity_fields']);
         $this->assertContains('intra_type_profile_v1.same_type_divergence_keys', $contract['telemetry_parity_fields']);
@@ -173,6 +188,7 @@ final class MbtiReadModelContractServiceTest extends TestCase
             'continuity' => ['carryover_focus_key' => 'traits.close_call_axes'],
             'ordered_recommendation_keys' => ['read-explain'],
             'longitudinal_memory_v1' => ['memory_state' => 'resume_ready'],
+            'tone_profile_v1' => ['default_tone_mode' => 'reflective'],
             'cta_bundle_v1' => ['bundle_key' => 'cta_bundle_revisit'],
             'working_life_v1' => ['career_focus_key' => 'career.work_experiments'],
         ];
@@ -186,6 +202,7 @@ final class MbtiReadModelContractServiceTest extends TestCase
         $this->assertSame(['journey_state' => 'resume_action_loop'], $merged['action_journey_v1']);
         $this->assertSame(['pulse_state' => 'reinforce'], $merged['pulse_check_v1']);
         $this->assertSame(['memory_state' => 'resume_ready'], $merged['longitudinal_memory_v1']);
+        $this->assertSame(['default_tone_mode' => 'reflective'], $merged['tone_profile_v1']);
         $this->assertSame(['bundle_key' => 'cta_bundle_revisit'], $merged['cta_bundle_v1']);
         $this->assertSame(['carryover_focus_key' => 'traits.close_call_axes'], $merged['continuity']);
         $this->assertSame(['read-explain'], $merged['ordered_recommendation_keys']);

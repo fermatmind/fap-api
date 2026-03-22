@@ -2,9 +2,9 @@
     "schema": "fap.mbti.content_inventory.compiled.v1",
     "pack_id": "MBTI.cn-mainland.zh-CN.v0.3",
     "version": "v0.3",
-    "generated_at": "2026-03-22T15:28:37+00:00",
+    "generated_at": "2026-03-22T16:21:16+00:00",
     "inventory_contract_version": 1,
-    "inventory_fingerprint": "mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03-ce4",
+    "inventory_fingerprint": "mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03-ce5",
     "governance_profile": "mbti_content_inventory.v1",
     "fragment_families": [
         {
@@ -618,11 +618,11 @@
         "tone_mode": {
             "type": "string",
             "values": [
-                "neutral",
-                "warm",
+                "supportive",
                 "direct",
                 "reflective",
-                "pragmatic"
+                "stabilizing",
+                "low_pressure"
             ]
         },
         "access_tier": {
@@ -719,7 +719,8 @@
                 "explainability_fragment",
                 "recovery_fragment",
                 "boundary_fragment",
-                "watchout_fragment"
+                "watchout_fragment",
+                "tone_fragment"
             ],
             "content_goal": "Stability, pressure, and recovery framing."
         },
@@ -728,7 +729,8 @@
             "primary_family": "explainability_fragment",
             "secondary_families": [
                 "boundary_fragment",
-                "revisit_fragment"
+                "revisit_fragment",
+                "tone_fragment"
             ],
             "content_goal": "Contrast with adjacent types and boundary states."
         },
@@ -738,7 +740,8 @@
             "secondary_families": [
                 "recovery_fragment",
                 "revisit_fragment",
-                "adaptive_response_fragment"
+                "adaptive_response_fragment",
+                "tone_fragment"
             ],
             "content_goal": "Next actions with memory-aware follow-through."
         },
@@ -747,7 +750,8 @@
             "primary_family": "watchout_fragment",
             "secondary_families": [
                 "recovery_fragment",
-                "adaptive_response_fragment"
+                "adaptive_response_fragment",
+                "tone_fragment"
             ],
             "content_goal": "Watchouts, resistance, and recovery."
         },
@@ -767,7 +771,8 @@
             "secondary_families": [
                 "action_fragment",
                 "revisit_fragment",
-                "adaptive_response_fragment"
+                "adaptive_response_fragment",
+                "tone_fragment"
             ],
             "content_goal": "Career bridge into the next concrete step."
         },
@@ -795,7 +800,8 @@
             "secondary_families": [
                 "action_fragment",
                 "recovery_fragment",
-                "adaptive_response_fragment"
+                "adaptive_response_fragment",
+                "tone_fragment"
             ],
             "content_goal": "Concrete relationship experiment for this week."
         },
@@ -820,7 +826,7 @@
     ],
     "summary": {
         "inventory_contract_version": 1,
-        "inventory_fingerprint": "mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03-ce4",
+        "inventory_fingerprint": "mbti_content_inventory_v1.cn-mainland.zh-CN.2026-03-ce5",
         "governance_profile": "mbti_content_inventory.v1",
         "fragment_family_count": 14,
         "fragment_family_keys": [

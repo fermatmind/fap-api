@@ -120,7 +120,7 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertSame(false, data_get($strong, 'boundary_flags.EI'));
         $this->assertSame('MBTI.cn-mainland.zh-CN.v0.3', $clear['pack_id']);
         $this->assertSame('report_phase4a_contract', $clear['engine_version']);
-        $this->assertSame('phase9c.v1', $clear['dynamic_sections_version']);
+        $this->assertSame('phase9d.v1', $clear['dynamic_sections_version']);
         $this->assertSame('narrative_runtime_contract.v1', data_get($clear, 'narrative_runtime_contract_v1.version'));
         $this->assertSame('off', data_get($clear, 'narrative_runtime_contract_v1.runtime_mode'));
         $this->assertSame('null', data_get($clear, 'narrative_runtime_contract_v1.provider_name'));
@@ -589,11 +589,11 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             )
         );
         $this->assertStringContainsString(
-            '主类型',
+            '判断入口',
             (string) ($clear['sections']['traits.why_this_type']['blocks'][1]['text'] ?? '')
         );
         $this->assertStringContainsString(
-            '误读',
+            '读不准你',
             (string) ($clear['sections']['traits.why_this_type']['blocks'][2]['text'] ?? '')
         );
         $this->assertStringContainsString(
@@ -601,23 +601,23 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
             (string) ($clear['sections']['traits.close_call_axes']['blocks'][0]['text'] ?? '')
         );
         $this->assertStringContainsString(
-            '最容易把你看成ENFJ',
+            '和ENFJ看起来有点像',
             (string) ($clear['sections']['traits.adjacent_type_contrast']['blocks'][0]['text'] ?? '')
         );
         $this->assertStringContainsString(
-            '回到',
+            '结果测错了',
             (string) ($clear['sections']['traits.adjacent_type_contrast']['blocks'][1]['text'] ?? '')
         );
         $this->assertStringContainsString(
-            '情境敏感型稳定',
+            '可被照顾的能力',
             (string) ($clear['sections']['growth.stability_confidence']['blocks'][0]['text'] ?? '')
         );
         $this->assertStringContainsString(
-            '恢复入口',
+            '恢复方式',
             (string) ($clear['sections']['growth.stability_confidence']['blocks'][1]['text'] ?? '')
         );
         $this->assertStringContainsString(
-            '自救方式',
+            '拉回可用区',
             (string) ($clear['sections']['growth.stability_confidence']['blocks'][2]['text'] ?? '')
         );
         $this->assertStringContainsString(
@@ -1058,6 +1058,104 @@ final class MbtiResultPersonalizationServiceTest extends TestCase
         $this->assertStringNotContainsString(
             '在工作里',
             (string) data_get($english, 'scene_fingerprint.work.summary', '')
+        );
+    }
+
+    public function test_it_emits_backend_owned_tone_profile_and_visible_tone_differences_for_same_type(): void
+    {
+        $service = app(MbtiResultPersonalizationService::class);
+
+        $payload = [
+            'versions' => [
+                'engine' => 'report_phase4a_contract',
+                'content_pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+                'dir_version' => 'MBTI-CN-v0.3',
+            ],
+            'profile' => [
+                'type_code' => 'ENFP-T',
+            ],
+            'recommended_reads' => [
+                [
+                    'id' => 'read-growth',
+                    'type' => 'article',
+                    'title' => '成长清晰度练习',
+                    'priority' => 20,
+                    'tags' => ['growth', 'intent:clarify_type', 'scene:growth'],
+                    'url' => 'https://example.com/read-growth',
+                ],
+            ],
+            'scores' => [
+                'EI' => ['pct' => 67, 'delta' => 17, 'side' => 'E', 'state' => 'clear'],
+                'SN' => ['pct' => 64, 'delta' => 14, 'side' => 'N', 'state' => 'clear'],
+                'TF' => ['pct' => 59, 'delta' => 9, 'side' => 'T', 'state' => 'balanced'],
+                'JP' => ['pct' => 57, 'delta' => 7, 'side' => 'J', 'state' => 'moderate'],
+                'AT' => ['pct' => 68, 'delta' => 18, 'side' => 'T', 'state' => 'clear'],
+            ],
+            'axis_states' => [
+                'EI' => 'clear',
+                'SN' => 'clear',
+                'TF' => 'balanced',
+                'JP' => 'moderate',
+                'AT' => 'clear',
+            ],
+        ];
+
+        $baseline = $service->buildForReportPayload($payload, [
+            'type_code' => 'ENFP-T',
+            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+            'dir_version' => 'MBTI-CN-v0.3',
+            'locale' => 'zh-CN',
+            'engine_version' => 'report_phase4a_contract',
+        ]);
+
+        $reflective = $service->attachCtaBundleForExistingPersonalization(array_replace_recursive($baseline, [
+            'user_state' => [
+                'current_intent_cluster' => 'clarify_type',
+                'action_completion_tendency' => 'repeatable',
+            ],
+            'longitudinal_memory_v1' => [
+                'memory_state' => 'resume_ready',
+                'progression_state' => 'reading_loop',
+            ],
+        ]), [
+            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+            'dir_version' => 'MBTI-CN-v0.3',
+            'locale' => 'zh-CN',
+        ]);
+
+        $stabilizing = $service->attachCtaBundleForExistingPersonalization(array_replace_recursive($baseline, [
+            'user_state' => [
+                'current_intent_cluster' => 'relationship_tuning',
+                'action_completion_tendency' => 'warming_up',
+            ],
+            'longitudinal_memory_v1' => [
+                'memory_state' => 'building',
+                'progression_state' => 'active_loop',
+            ],
+            'adaptive_selection_v1' => [
+                'selection_rewrite_reason' => 'adaptive_reduce_pressure',
+            ],
+        ]), [
+            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+            'dir_version' => 'MBTI-CN-v0.3',
+            'locale' => 'zh-CN',
+        ]);
+
+        $this->assertSame('mbti.tone_profile.v1', data_get($reflective, 'tone_profile_v1.tone_contract_version'));
+        $this->assertSame('reflective', data_get($reflective, 'tone_profile_v1.section_tone_modes')['traits.why_this_type'] ?? null);
+        $this->assertSame('stabilizing', data_get($stabilizing, 'tone_profile_v1.section_tone_modes')['growth.stability_confidence'] ?? null);
+        $this->assertSame('low_pressure', data_get($stabilizing, 'tone_profile_v1.section_tone_modes')['growth.next_actions'] ?? null);
+        $this->assertNotSame(
+            $reflective['sections']['growth.stability_confidence']['blocks'][0]['text'] ?? null,
+            $stabilizing['sections']['growth.stability_confidence']['blocks'][0]['text'] ?? null
+        );
+        $this->assertNotSame(
+            $reflective['sections']['growth.next_actions']['blocks'][1]['text'] ?? null,
+            $stabilizing['sections']['growth.next_actions']['blocks'][1]['text'] ?? null
+        );
+        $this->assertNotSame(
+            $reflective['sections']['relationships.try_this_week']['blocks'][1]['text'] ?? null,
+            $stabilizing['sections']['relationships.try_this_week']['blocks'][1]['text'] ?? null
         );
     }
 
