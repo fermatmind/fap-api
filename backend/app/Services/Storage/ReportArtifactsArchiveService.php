@@ -29,10 +29,14 @@ final class ReportArtifactsArchiveService
     /**
      * @return array<string,mixed>
      */
-    public function buildPlan(string $targetDisk): array
+    public function buildPlan(string $targetDisk, array $selection = []): array
     {
         $targetDisk = $this->normalizeDisk($targetDisk);
-        $candidates = $this->collectCandidates($targetDisk);
+        $selectionMeta = $this->selectionMeta($selection);
+        $candidates = $this->collectCandidates($targetDisk, $selectionMeta['requested_attempt_ids']);
+        if ($selectionMeta['requested_limit'] !== null) {
+            $candidates = array_slice($candidates, 0, $selectionMeta['requested_limit']);
+        }
         $summary = $this->buildSummary($candidates);
 
         $payload = [
@@ -42,6 +46,11 @@ final class ReportArtifactsArchiveService
             'generated_at' => now()->toIso8601String(),
             'disk' => $targetDisk,
             'target_disk' => $targetDisk,
+            'selection_scope' => $selectionMeta['selection_scope'],
+            'requested_attempt_ids' => $selectionMeta['requested_attempt_ids'],
+            'requested_limit' => $selectionMeta['requested_limit'],
+            'generated_by_command' => $selectionMeta['generated_by_command'],
+            'candidate_count' => $summary['candidate_count'],
             'summary' => $summary + [
                 'copied_count' => 0,
                 'verified_count' => 0,
@@ -69,6 +78,7 @@ final class ReportArtifactsArchiveService
         $this->assertPlanSchema($plan);
 
         $targetDisk = $this->normalizeDisk((string) ($plan['target_disk'] ?? $plan['disk'] ?? ''));
+        $selectionMeta = $this->selectionMetaFromPlan($plan);
         $candidates = is_array($plan['candidates'] ?? null) ? array_values($plan['candidates']) : [];
         $results = [];
         $summary = [
@@ -120,6 +130,11 @@ final class ReportArtifactsArchiveService
             'target_disk' => $targetDisk,
             'plan' => trim((string) data_get($plan, '_meta.plan_path', '')),
             'plan_path' => trim((string) data_get($plan, '_meta.plan_path', '')),
+            'selection_scope' => $selectionMeta['selection_scope'],
+            'requested_attempt_ids' => $selectionMeta['requested_attempt_ids'],
+            'requested_limit' => $selectionMeta['requested_limit'],
+            'generated_by_command' => $selectionMeta['generated_by_command'],
+            'candidate_count' => $summary['candidate_count'],
             'summary' => $summary,
             'results' => $results,
         ];
@@ -141,7 +156,7 @@ final class ReportArtifactsArchiveService
     /**
      * @return list<array<string,mixed>>
      */
-    private function collectCandidates(string $targetDisk): array
+    private function collectCandidates(string $targetDisk, array $requestedAttemptIds = []): array
     {
         $artifactsRoot = storage_path('app/private/artifacts');
         if (! is_dir($artifactsRoot)) {
@@ -159,6 +174,11 @@ final class ReportArtifactsArchiveService
             foreach (File::allFiles($root) as $file) {
                 $candidate = $this->candidateFromFile($file, $artifactsRoot, $targetDisk);
                 if ($candidate === null) {
+                    continue;
+                }
+
+                if ($requestedAttemptIds !== []
+                    && ! in_array((string) ($candidate['attempt_id'] ?? ''), $requestedAttemptIds, true)) {
                     continue;
                 }
 
@@ -534,6 +554,10 @@ final class ReportArtifactsArchiveService
                 'plan' => $planPath,
                 'plan_path' => $planPath,
                 'run_path' => $runPath,
+                'selection_scope' => $payload['selection_scope'] ?? 'legacy_unscoped_plan',
+                'requested_attempt_ids' => array_values(is_array($payload['requested_attempt_ids'] ?? null) ? $payload['requested_attempt_ids'] : []),
+                'requested_limit' => $payload['requested_limit'] ?? null,
+                'generated_by_command' => $payload['generated_by_command'] ?? null,
                 'candidate_count' => (int) ($summary['candidate_count'] ?? 0),
                 'copied_count' => (int) ($summary['copied_count'] ?? 0),
                 'verified_count' => (int) ($summary['verified_count'] ?? 0),
@@ -572,6 +596,93 @@ final class ReportArtifactsArchiveService
         if ((string) ($plan['schema'] ?? '') !== self::PLAN_SCHEMA) {
             throw new \RuntimeException('report artifact archive plan schema mismatch.');
         }
+    }
+
+    /**
+     * @param  array<string,mixed>  $selection
+     * @return array{
+     *     selection_scope:string,
+     *     requested_attempt_ids:list<string>,
+     *     requested_limit:int|null,
+     *     generated_by_command:string
+     * }
+     */
+    private function selectionMeta(array $selection): array
+    {
+        $requestedAttemptIds = array_values(array_filter(array_map(
+            static fn (mixed $value): string => trim((string) $value),
+            is_array($selection['attempt_ids'] ?? null) ? $selection['attempt_ids'] : []
+        ), static fn (string $value): bool => $value !== ''));
+        $requestedAttemptIds = array_values(array_unique($requestedAttemptIds));
+        sort($requestedAttemptIds);
+
+        $requestedLimit = $this->normalizeSelectionLimit($selection['limit'] ?? null);
+
+        $selectionScope = 'full_scan';
+        if ($requestedAttemptIds !== [] && $requestedLimit !== null) {
+            $selectionScope = 'attempt_scoped_limited';
+        } elseif ($requestedAttemptIds !== []) {
+            $selectionScope = 'attempt_scoped';
+        } elseif ($requestedLimit !== null) {
+            $selectionScope = 'limit_scoped';
+        }
+
+        return [
+            'selection_scope' => $selectionScope,
+            'requested_attempt_ids' => $requestedAttemptIds,
+            'requested_limit' => $requestedLimit,
+            'generated_by_command' => trim((string) ($selection['generated_by_command'] ?? 'storage:archive-report-artifacts')),
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $plan
+     * @return array{
+     *     selection_scope:string,
+     *     requested_attempt_ids:list<string>,
+     *     requested_limit:int|null,
+     *     generated_by_command:string|null
+     * }
+     */
+    private function selectionMetaFromPlan(array $plan): array
+    {
+        $requestedAttemptIds = array_values(array_filter(array_map(
+            static fn (mixed $value): string => trim((string) $value),
+            is_array($plan['requested_attempt_ids'] ?? null) ? $plan['requested_attempt_ids'] : []
+        ), static fn (string $value): bool => $value !== ''));
+        $requestedAttemptIds = array_values(array_unique($requestedAttemptIds));
+        sort($requestedAttemptIds);
+
+        $selectionScope = trim((string) ($plan['selection_scope'] ?? ''));
+        if ($selectionScope === '') {
+            $selectionScope = 'legacy_unscoped_plan';
+        }
+
+        $generatedByCommand = trim((string) ($plan['generated_by_command'] ?? ''));
+
+        return [
+            'selection_scope' => $selectionScope,
+            'requested_attempt_ids' => $requestedAttemptIds,
+            'requested_limit' => $this->normalizeSelectionLimit($plan['requested_limit'] ?? null),
+            'generated_by_command' => $generatedByCommand !== '' ? $generatedByCommand : null,
+        ];
+    }
+
+    private function normalizeSelectionLimit(mixed $value): ?int
+    {
+        if ($value === null || $value === '') {
+            return null;
+        }
+
+        if (is_int($value)) {
+            return $value > 0 ? $value : null;
+        }
+
+        if (is_string($value) && ctype_digit($value) && (int) $value > 0) {
+            return (int) $value;
+        }
+
+        return null;
     }
 
     private function normalizeDisk(string $disk): string

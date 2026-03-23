@@ -14,6 +14,8 @@ final class StorageArchiveReportArtifacts extends Command
     protected $signature = 'storage:archive-report-artifacts
         {--dry-run : Build an archive plan for canonical report artifacts only}
         {--execute : Execute archive from an existing plan}
+        {--attempt-id=* : Narrow dry-run candidate selection to one or more attempt_ids}
+        {--limit= : Limit dry-run candidate selection after candidate collection}
         {--disk=s3 : Remote object storage disk that receives archived canonical artifacts}
         {--plan= : Absolute or storage-relative plan path required for execute mode}
         {--json : Emit the full payload as JSON}';
@@ -44,11 +46,21 @@ final class StorageArchiveReportArtifacts extends Command
             $this->ensureTargetDiskIsRemote($disk);
 
             if ($dryRun) {
-                $plan = $this->service->buildPlan($disk);
+                $plan = $this->service->buildPlan($disk, [
+                    'attempt_ids' => $this->normalizedAttemptIds(),
+                    'limit' => $this->normalizedLimit(),
+                    'generated_by_command' => 'storage:archive-report-artifacts',
+                ]);
                 $planPath = $this->persistPlan($plan);
                 $payload = $plan + ['plan' => $planPath];
 
                 return $this->emitPayload($payload);
+            }
+
+            if ($this->normalizedAttemptIds() !== [] || $this->option('limit') !== null) {
+                $this->error('--attempt-id and --limit are only supported with --dry-run.');
+
+                return self::FAILURE;
             }
 
             $planOption = trim((string) ($this->option('plan') ?? ''));
@@ -67,9 +79,10 @@ final class StorageArchiveReportArtifacts extends Command
                 return self::FAILURE;
             }
 
-            $plan['_meta'] = [
-                'plan_path' => $resolvedPlanPath,
-            ];
+            $plan['_meta'] = array_merge(
+                is_array($plan['_meta'] ?? null) ? $plan['_meta'] : [],
+                ['plan_path' => $resolvedPlanPath]
+            );
             $payload = $this->frontDoorEnabled()
                 ? $this->frontDoor->execute('archive_report_artifacts', $plan, fn (array $resolvedPlan): array => $this->service->executePlan($resolvedPlan))
                 : $this->service->executePlan($plan);
@@ -123,6 +136,14 @@ final class StorageArchiveReportArtifacts extends Command
         $this->line('target_disk='.(string) ($payload['target_disk'] ?? ''));
         $this->line('schema='.(string) ($payload['schema'] ?? ''));
         $this->line('plan='.(string) ($payload['plan'] ?? ''));
+        $this->line('selection_scope='.(string) data_get($payload, 'selection_scope', 'legacy_unscoped_plan'));
+        $requestedAttemptIds = data_get($payload, 'requested_attempt_ids', []);
+        if (! is_array($requestedAttemptIds)) {
+            $requestedAttemptIds = [];
+        }
+        $this->line('requested_attempt_ids='.implode(',', array_map(static fn (mixed $value): string => (string) $value, $requestedAttemptIds)));
+        $requestedLimit = data_get($payload, 'requested_limit');
+        $this->line('requested_limit='.(is_int($requestedLimit) ? (string) $requestedLimit : ''));
         $this->line('candidate_count='.(int) ($summary['candidate_count'] ?? 0));
         $this->line('copied_count='.(int) ($summary['copied_count'] ?? 0));
         $this->line('verified_count='.(int) ($summary['verified_count'] ?? 0));
@@ -193,5 +214,41 @@ final class StorageArchiveReportArtifacts extends Command
     private function frontDoorEnabled(): bool
     {
         return (bool) config('storage_rollout.lifecycle_front_door_enabled', false);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function normalizedAttemptIds(): array
+    {
+        $values = $this->option('attempt-id');
+        if (! is_array($values)) {
+            return [];
+        }
+
+        $attemptIds = array_values(array_filter(array_map(
+            static fn (mixed $value): string => trim((string) $value),
+            $values
+        ), static fn (string $value): bool => $value !== ''));
+
+        $attemptIds = array_values(array_unique($attemptIds));
+        sort($attemptIds);
+
+        return $attemptIds;
+    }
+
+    private function normalizedLimit(): ?int
+    {
+        $raw = $this->option('limit');
+        if ($raw === null || trim((string) $raw) === '') {
+            return null;
+        }
+
+        $limit = trim((string) $raw);
+        if (! ctype_digit($limit) || (int) $limit <= 0) {
+            throw new \RuntimeException('--limit must be a positive integer.');
+        }
+
+        return (int) $limit;
     }
 }
