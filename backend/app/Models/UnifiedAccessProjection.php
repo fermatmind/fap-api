@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class UnifiedAccessProjection extends Model
 {
+    protected $table = 'unified_access_projections';
+
     protected $fillable = [
         'attempt_id',
         'access_state',

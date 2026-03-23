@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class AttemptReceipt extends Model
 {
+    protected $table = 'attempt_receipts';
+
     protected $fillable = [
         'attempt_id',
         'seq',

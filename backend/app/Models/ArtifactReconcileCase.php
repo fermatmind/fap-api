@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ArtifactReconcileCase extends Model
 {
+    protected $table = 'artifact_reconcile_cases';
+
     protected $fillable = [
         'attempt_id',
         'slot_code',
