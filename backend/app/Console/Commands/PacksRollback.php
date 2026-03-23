@@ -25,6 +25,7 @@ final class PacksRollback extends Command
         $scaleCode = strtoupper(trim((string) $this->option('scale')));
         if ($scaleCode !== 'BIG5_OCEAN') {
             $this->error('packs:rollback currently supports only --scale=BIG5_OCEAN');
+
             return 1;
         }
 
@@ -37,6 +38,7 @@ final class PacksRollback extends Command
 
         if ($region === '' || $locale === '' || $dirAlias === '') {
             $this->error('--region/--locale/--dir_alias are required.');
+
             return 1;
         }
 
@@ -82,6 +84,7 @@ final class PacksRollback extends Command
         }
 
         $normalized = strtolower(trim((string) $value));
+
         return in_array($normalized, ['1', 'true', 'yes', 'on'], true);
     }
 }

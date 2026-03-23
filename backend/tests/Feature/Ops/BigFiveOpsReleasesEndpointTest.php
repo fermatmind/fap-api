@@ -75,9 +75,9 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         ]);
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $owner['token'],
+            'Authorization' => 'Bearer '.$owner['token'],
             'X-Org-Id' => (string) $orgId,
-        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/releases?region=CN_MAINLAND&locale=zh-CN&limit=10');
+        ])->getJson('/api/v0.3/orgs/'.$orgId.'/big5/releases?region=CN_MAINLAND&locale=zh-CN&limit=10');
 
         $response->assertStatus(200);
         $response->assertJsonPath('ok', true);
@@ -101,9 +101,9 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         $orgId = $this->createOrgForToken($owner['token']);
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $outsider['token'],
+            'Authorization' => 'Bearer '.$outsider['token'],
             'X-Org-Id' => (string) $orgId,
-        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/releases');
+        ])->getJson('/api/v0.3/orgs/'.$orgId.'/big5/releases');
 
         $response->assertStatus(404);
         $response->assertJsonPath('error_code', 'ORG_NOT_FOUND');
@@ -143,9 +143,9 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         ]);
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $owner['token'],
+            'Authorization' => 'Bearer '.$owner['token'],
             'X-Org-Id' => (string) $orgId,
-        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/releases/latest?region=CN_MAINLAND&locale=zh-CN');
+        ])->getJson('/api/v0.3/orgs/'.$orgId.'/big5/releases/latest?region=CN_MAINLAND&locale=zh-CN');
 
         $response->assertStatus(200);
         $response->assertJsonPath('ok', true);
@@ -198,9 +198,9 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         ]);
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $owner['token'],
+            'Authorization' => 'Bearer '.$owner['token'],
             'X-Org-Id' => (string) $orgId,
-        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/releases/latest/audits?region=CN_MAINLAND&locale=zh-CN');
+        ])->getJson('/api/v0.3/orgs/'.$orgId.'/big5/releases/latest/audits?region=CN_MAINLAND&locale=zh-CN');
 
         $response->assertStatus(200);
         $response->assertJsonPath('ok', true);
@@ -242,9 +242,9 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         ]);
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $owner['token'],
+            'Authorization' => 'Bearer '.$owner['token'],
             'X-Org-Id' => (string) $orgId,
-        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/releases/latest/audits?result=failed&limit=10');
+        ])->getJson('/api/v0.3/orgs/'.$orgId.'/big5/releases/latest/audits?result=failed&limit=10');
 
         $response->assertStatus(200);
         $response->assertJsonPath('ok', true);
@@ -299,9 +299,9 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         ]);
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $owner['token'],
+            'Authorization' => 'Bearer '.$owner['token'],
             'X-Org-Id' => (string) $orgId,
-        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/releases/latest/audits?release_action=publish&limit=10');
+        ])->getJson('/api/v0.3/orgs/'.$orgId.'/big5/releases/latest/audits?release_action=publish&limit=10');
 
         $response->assertStatus(200);
         $response->assertJsonPath('ok', true);
@@ -344,9 +344,9 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         ]);
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $owner['token'],
+            'Authorization' => 'Bearer '.$owner['token'],
             'X-Org-Id' => (string) $orgId,
-        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/audits?action=big5_pack_publish&result=success&release_id=' . $releaseId . '&limit=10');
+        ])->getJson('/api/v0.3/orgs/'.$orgId.'/big5/audits?action=big5_pack_publish&result=success&release_id='.$releaseId.'&limit=10');
 
         $response->assertStatus(200);
         $response->assertJsonPath('ok', true);
@@ -363,9 +363,9 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         $orgId = $this->createOrgForToken($owner['token']);
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $outsider['token'],
+            'Authorization' => 'Bearer '.$outsider['token'],
             'X-Org-Id' => (string) $orgId,
-        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/audits');
+        ])->getJson('/api/v0.3/orgs/'.$orgId.'/big5/audits');
 
         $response->assertStatus(404);
         $response->assertJsonPath('error_code', 'ORG_NOT_FOUND');
@@ -377,9 +377,9 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         $orgId = $this->createOrgForToken($owner['token']);
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $owner['token'],
+            'Authorization' => 'Bearer '.$owner['token'],
             'X-Org-Id' => (string) $orgId,
-        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/releases/latest/audits');
+        ])->getJson('/api/v0.3/orgs/'.$orgId.'/big5/releases/latest/audits');
 
         $response->assertStatus(404);
         $response->assertJsonPath('error_code', 'RELEASE_NOT_FOUND');
@@ -417,9 +417,9 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         ]);
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $owner['token'],
+            'Authorization' => 'Bearer '.$owner['token'],
             'X-Org-Id' => (string) $orgId,
-        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/audits/' . $auditId);
+        ])->getJson('/api/v0.3/orgs/'.$orgId.'/big5/audits/'.$auditId);
 
         $response->assertStatus(200);
         $response->assertJsonPath('ok', true);
@@ -448,9 +448,9 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         ]);
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $owner['token'],
+            'Authorization' => 'Bearer '.$owner['token'],
             'X-Org-Id' => (string) $orgId,
-        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/audits/' . $auditId);
+        ])->getJson('/api/v0.3/orgs/'.$orgId.'/big5/audits/'.$auditId);
 
         $response->assertStatus(404);
         $response->assertJsonPath('error_code', 'AUDIT_NOT_FOUND');
@@ -477,9 +477,9 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         ]);
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $outsider['token'],
+            'Authorization' => 'Bearer '.$outsider['token'],
             'X-Org-Id' => (string) $orgId,
-        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/audits/' . $auditId);
+        ])->getJson('/api/v0.3/orgs/'.$orgId.'/big5/audits/'.$auditId);
 
         $response->assertStatus(404);
         $response->assertJsonPath('error_code', 'ORG_NOT_FOUND');
@@ -500,9 +500,9 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         ]);
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $owner['token'],
+            'Authorization' => 'Bearer '.$owner['token'],
             'X-Org-Id' => (string) $orgId,
-        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/releases/latest');
+        ])->getJson('/api/v0.3/orgs/'.$orgId.'/big5/releases/latest');
 
         $response->assertStatus(404);
         $response->assertJsonPath('error_code', 'RELEASE_NOT_FOUND');
@@ -549,9 +549,9 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         ]);
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $owner['token'],
+            'Authorization' => 'Bearer '.$owner['token'],
             'X-Org-Id' => (string) $orgId,
-        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/releases/' . $releaseId);
+        ])->getJson('/api/v0.3/orgs/'.$orgId.'/big5/releases/'.$releaseId);
 
         $response->assertStatus(200);
         $response->assertJsonPath('ok', true);
@@ -577,9 +577,9 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         ]);
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $owner['token'],
+            'Authorization' => 'Bearer '.$owner['token'],
             'X-Org-Id' => (string) $orgId,
-        ])->getJson('/api/v0.3/orgs/' . $orgId . '/big5/releases/' . $releaseId);
+        ])->getJson('/api/v0.3/orgs/'.$orgId.'/big5/releases/'.$releaseId);
 
         $response->assertStatus(404);
         $response->assertJsonPath('error_code', 'RELEASE_NOT_FOUND');
@@ -592,7 +592,7 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
     {
         $now = now();
         $userId = (int) DB::table('users')->insertGetId([
-            'name' => 'User ' . $email,
+            'name' => 'User '.$email,
             'email' => $email,
             'password' => bcrypt('secret'),
             'created_at' => $now,
@@ -610,10 +610,10 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
     private function createOrgForToken(string $token): int
     {
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
             'X-Org-Id' => '0',
         ])->postJson('/api/v0.3/orgs', [
-            'name' => 'BIG5 Ops Org ' . Str::random(6),
+            'name' => 'BIG5 Ops Org '.Str::random(6),
         ]);
 
         $response->assertStatus(200);
@@ -622,7 +622,7 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
     }
 
     /**
-     * @param array<string,mixed> $row
+     * @param  array<string,mixed>  $row
      */
     private function insertRelease(array $row): void
     {
@@ -650,7 +650,7 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
     }
 
     /**
-     * @param array<string,mixed> $row
+     * @param  array<string,mixed>  $row
      */
     private function insertAudit(array $row): void
     {
@@ -662,7 +662,7 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
             'meta_json' => json_encode([], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             'ip' => '127.0.0.1',
             'user_agent' => 'phpunit',
-            'request_id' => 'req_' . Str::random(8),
+            'request_id' => 'req_'.Str::random(8),
             'reason' => null,
             'result' => null,
             'created_at' => now(),

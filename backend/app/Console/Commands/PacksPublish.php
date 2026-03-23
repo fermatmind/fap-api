@@ -36,8 +36,9 @@ final class PacksPublish extends Command
     public function handle(ContentPackPublisher $publisher, ContentPathAliasResolver $pathAliasResolver): int
     {
         $scaleCode = strtoupper(trim((string) $this->option('scale')));
-        if (!in_array($scaleCode, ['BIG5_OCEAN', 'SDS_20'], true)) {
+        if (! in_array($scaleCode, ['BIG5_OCEAN', 'SDS_20'], true)) {
             $this->error('packs:publish supports only --scale=BIG5_OCEAN|SDS_20');
+
             return 1;
         }
 
@@ -53,14 +54,16 @@ final class PacksPublish extends Command
 
         if ($packId === '' || $version === '' || $region === '' || $locale === '' || $dirAlias === '') {
             $this->error('--pack/--version/--region/--locale/--dir_alias are required.');
+
             return 1;
         }
 
         $sourceContext = $pathAliasResolver->resolveBackendPublishSourceContext($packId, $version);
         $sourceDir = trim((string) ($sourceContext['selected_path'] ?? ''));
         $sourceSelection = strtolower(trim((string) ($sourceContext['selected_source'] ?? 'legacy')));
-        if (!File::isDirectory($sourceDir)) {
+        if (! File::isDirectory($sourceDir)) {
             $this->error("pack source directory not found: {$sourceDir}");
+
             return 1;
         }
 
@@ -105,6 +108,7 @@ final class PacksPublish extends Command
             );
         } catch (\Throwable $e) {
             $this->error('failed to stage content version: '.$e->getMessage());
+
             return 1;
         }
 
@@ -153,7 +157,7 @@ final class PacksPublish extends Command
         }
         File::ensureDirectoryExists($releaseRoot);
 
-        if (!File::copyDirectory($sourceDir, $stagedDir)) {
+        if (! File::copyDirectory($sourceDir, $stagedDir)) {
             throw new RuntimeException('COPY_SOURCE_FAILED');
         }
 
@@ -197,6 +201,7 @@ final class PacksPublish extends Command
                 $decoded['content_package_version'] = $version;
                 $decoded['region'] = $region;
                 $decoded['locale'] = $locale;
+
                 return $decoded;
             }
         }
@@ -235,6 +240,7 @@ final class PacksPublish extends Command
         }
 
         $normalized = strtolower(trim((string) $value));
+
         return in_array($normalized, ['1', 'true', 'yes', 'on'], true);
     }
 
