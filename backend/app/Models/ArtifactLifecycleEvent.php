@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ArtifactLifecycleEvent extends Model
 {
+    protected $table = 'artifact_lifecycle_events';
+
     protected $fillable = [
         'job_id',
         'attempt_id',

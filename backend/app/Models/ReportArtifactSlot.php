@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReportArtifactSlot extends Model
 {
+    protected $table = 'report_artifact_slots';
+
     protected $fillable = [
         'attempt_id',
         'slot_code',
