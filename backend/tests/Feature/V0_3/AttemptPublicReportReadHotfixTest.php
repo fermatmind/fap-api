@@ -142,19 +142,20 @@ final class AttemptPublicReportReadHotfixTest extends TestCase
         ]);
     }
 
-    public function test_public_mbti_report_can_be_read_without_attempt_ownership(): void
+    public function test_public_mbti_report_can_be_read_with_mismatched_but_bound_public_identity(): void
     {
         $this->seedScales();
         config()->set('fap.features.report_snapshot_strict_v2', false);
 
         $attemptId = (string) Str::uuid();
-        $anonId = 'anon_mbti_owner';
-        $token = $this->issueAnonToken($anonId);
-        $this->createAttempt($attemptId, 'MBTI', $anonId);
+        $ownerAnonId = 'anon_mbti_owner';
+        $viewerAnonId = 'anon_mbti_viewer';
+        $token = $this->issueAnonToken($viewerAnonId);
+        $this->createAttempt($attemptId, 'MBTI', $ownerAnonId);
         $this->createResult($attemptId, 'MBTI');
 
         $response = $this->withHeaders([
-            'X-Anon-Id' => $anonId,
+            'X-Anon-Id' => $viewerAnonId,
             'Authorization' => 'Bearer '.$token,
         ])
             ->getJson("/api/v0.3/attempts/{$attemptId}/report");
@@ -166,6 +167,34 @@ final class AttemptPublicReportReadHotfixTest extends TestCase
         $response->assertJsonPath('meta.scale_code_legacy', 'MBTI');
         $this->assertIsArray($response->json('report'));
         $this->assertStringNotContainsString('No query results for model', (string) $response->getContent());
+    }
+
+    public function test_public_mbti_report_access_can_be_read_with_mismatched_but_bound_public_identity(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $ownerAnonId = 'anon_access_owner';
+        $viewerAnonId = 'anon_access_viewer';
+        $token = $this->issueAnonToken($viewerAnonId);
+        $this->createAttempt($attemptId, 'MBTI', $ownerAnonId);
+        $this->createResult($attemptId, 'MBTI');
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $viewerAnonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('attempt_id', $attemptId);
+        $response->assertJsonPath('access_state', 'locked');
+        $response->assertJsonPath('report_state', 'ready');
+        $response->assertJsonPath('pdf_state', 'missing');
+        $response->assertJsonPath('actions.page_href', "/result/{$attemptId}");
+        $response->assertJsonPath('actions.pdf_href', null);
+        $response->assertJsonPath('actions.history_href', '/history/mbti');
+        $response->assertJsonPath('actions.lookup_href', '/orders/lookup');
     }
 
     public function test_public_mbti_report_rejects_orphan_result_with_explicit_attempt_not_found_contract(): void

@@ -153,4 +153,31 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         $pdf->assertHeader('X-Report-Scale', 'MBTI');
         $pdf->assertHeader('X-Report-Locked', 'true');
     }
+
+    public function test_public_mbti_report_pdf_still_requires_matching_attempt_subject(): void
+    {
+        $this->seedScales();
+        config()->set('fap.features.report_snapshot_strict_v2', false);
+        Storage::fake('local');
+
+        $attemptId = (string) Str::uuid();
+        $ownerAnonId = 'anon_mbti_pdf_owner';
+        $viewerAnonId = 'anon_mbti_pdf_viewer';
+        $token = $this->issueAnonToken($viewerAnonId);
+        $this->createAttempt($attemptId, 'MBTI', $ownerAnonId);
+        $this->createResult($attemptId);
+
+        $headers = [
+            'X-Anon-Id' => $viewerAnonId,
+            'Authorization' => 'Bearer '.$token,
+        ];
+
+        $json = $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/report");
+        $json->assertStatus(200);
+        $json->assertJsonPath('ok', true);
+        $json->assertJsonPath('locked', true);
+
+        $pdf = $this->withHeaders($headers)->get("/api/v0.3/attempts/{$attemptId}/report.pdf");
+        $pdf->assertStatus(404);
+    }
 }

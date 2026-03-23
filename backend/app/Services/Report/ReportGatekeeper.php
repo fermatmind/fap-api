@@ -24,6 +24,8 @@ class ReportGatekeeper
 {
     use ReportGatekeeperTeaserTrait;
 
+    private const PUBLIC_REPORT_READ_SCALES = ['MBTI', 'BIG5_OCEAN', 'IQ_RAVEN', 'EQ_60'];
+
     private const SNAPSHOT_RETRY_AFTER_SECONDS = 3;
 
     public function __construct(
@@ -451,6 +453,18 @@ class ReportGatekeeper
 
         $attempt = $this->subjects->findAttemptForCurrentContext($attemptId, $actor);
         if (! $attempt instanceof Attempt) {
+            if ($this->canFallbackToPublicReportSubject($actor)) {
+                $subject = $this->subjects->findSubjectForSystem(max(0, $orgId), $attemptId);
+                if ($subject !== null && $this->isPublicReportScaleForSubject($subject->attempt, $subject->result)) {
+                    return [
+                        'ok' => true,
+                        'attempt' => $subject->attempt,
+                        'result' => $subject->result,
+                        'org_id' => $subject->orgId,
+                    ];
+                }
+            }
+
             return $this->notFound('ATTEMPT_NOT_FOUND', 'attempt not found.');
         }
 
@@ -477,6 +491,19 @@ class ReportGatekeeper
         $normalizedRole = strtolower(trim((string) $role));
 
         return $normalizedRole === 'system';
+    }
+
+    private function canFallbackToPublicReportSubject(ReportAccessActor $actor): bool
+    {
+        return $this->orgContext->contextKind() === OrgContext::KIND_PUBLIC
+            && ($actor->userId !== null || $actor->anonId !== null);
+    }
+
+    private function isPublicReportScaleForSubject(Attempt $attempt, Result $result): bool
+    {
+        $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?: $result->scale_code ?: '')));
+
+        return in_array($scaleCode, self::PUBLIC_REPORT_READ_SCALES, true);
     }
 
     private function upsertSnapshotVariants(

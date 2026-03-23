@@ -514,13 +514,27 @@ class AttemptReadController extends Controller
         ]);
     }
 
-    private function resolveAttemptForReportRead(Request $request, int $orgId, string $attemptId, string $scaleCode): Attempt
+    private function resolveAttemptForReportRead(
+        Request $request,
+        int $orgId,
+        string $attemptId,
+        string $scaleCode,
+        bool $allowPublicSystemFallback = true
+    ): Attempt
     {
         if ($this->isPublicReportScale($scaleCode)) {
-            $attempt = $this->reportSubjects->findAttemptForCurrentContext($attemptId, $this->reportActor($request));
+            $actor = $this->reportActor($request);
+            $attempt = $this->reportSubjects->findAttemptForCurrentContext($attemptId, $actor);
 
             if ($attempt instanceof Attempt) {
                 return $attempt;
+            }
+
+            if ($allowPublicSystemFallback && $this->canFallbackToPublicReportSubject($actor)) {
+                $attempt = $this->reportSubjects->findAttemptForSystem(max(0, $orgId), $attemptId);
+                if ($attempt instanceof Attempt) {
+                    return $attempt;
+                }
             }
 
             throw new ApiProblemException(404, 'ATTEMPT_NOT_FOUND', 'attempt not found.');
@@ -1279,6 +1293,12 @@ class AttemptReadController extends Controller
         return $this->isPublicResultScale($scaleCode);
     }
 
+    private function canFallbackToPublicReportSubject(ReportAccessActor $actor): bool
+    {
+        return $this->orgContext->contextKind() === OrgContext::KIND_PUBLIC
+            && ($actor->userId !== null || $actor->anonId !== null);
+    }
+
     private function resolveNormalizedScaleCode(array $responseCodes): string
     {
         $legacy = strtoupper(trim((string) ($responseCodes['scale_code_legacy'] ?? '')));
@@ -1338,7 +1358,7 @@ class AttemptReadController extends Controller
         $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->firstOrFail();
         $responseCodes = $this->resolveResponseScaleCodes($result);
         $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
-        $attempt = $this->resolveAttemptForReportRead($request, $orgId, $id, $scaleCode);
+        $attempt = $this->resolveAttemptForReportRead($request, $orgId, $id, $scaleCode, false);
 
         $gate = $this->reportGatekeeper->resolve(
             $orgId,
