@@ -118,6 +118,31 @@ final class BigFiveOpsWriteEndpointsTest extends TestCase
         $this->assertSame('success', (string) ($rollbackAudit->result ?? ''));
     }
 
+
+    public function test_publish_rejects_path_traversal_inputs(): void
+    {
+        $owner = $this->createUserWithToken('ops-write-validate@big5.test');
+        $orgId = $this->createOrgForToken($owner['token']);
+
+        $headers = [
+            'Authorization' => 'Bearer '.$owner['token'],
+            'X-Org-Id' => (string) $orgId,
+        ];
+
+        $response = $this->withHeaders($headers)->postJson('/api/v0.3/orgs/'.$orgId.'/big5/releases/publish', [
+            'pack' => 'BIG5_OCEAN',
+            'pack_version' => 'v1',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'dir_alias' => '../../tmp',
+            'probe' => false,
+            'skip_drift' => true,
+        ]);
+
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors(['dir_alias']);
+    }
+
     public function test_owner_can_run_norms_write_operations_via_ops_endpoints(): void
     {
         $owner = $this->createUserWithToken('ops-norms-owner@big5.test');

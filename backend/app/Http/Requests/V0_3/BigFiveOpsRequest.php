@@ -16,17 +16,17 @@ final class BigFiveOpsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'region' => ['sometimes', 'string', 'max:64'],
-            'locale' => ['sometimes', 'string', 'max:32'],
+            'region' => ['sometimes', 'string', 'max:64', 'regex:/\A(?!\.\.)[A-Za-z0-9_-]+\z/'],
+            'locale' => ['sometimes', 'string', 'max:32', 'regex:/\A(?!\.\.)[A-Za-z0-9_-]+\z/'],
             'action' => ['sometimes', 'string', 'max:64'],
             'release_action' => ['sometimes', 'string', 'max:64'],
             'result' => ['sometimes', 'string', 'max:32'],
             'release_id' => ['sometimes', 'string', 'max:128'],
             'limit' => ['sometimes', 'integer', 'min:1', 'max:100'],
 
-            'dir_alias' => ['sometimes', 'string', 'max:128'],
-            'pack' => ['sometimes', 'string', 'max:128'],
-            'pack_version' => ['sometimes', 'string', 'max:128'],
+            'dir_alias' => ['sometimes', 'string', 'max:128', 'regex:/\A(?!\.\.)[A-Za-z0-9_-]+\z/'],
+            'pack' => ['sometimes', 'string', 'max:128', 'regex:/\A(?!\.\.)[A-Za-z0-9_-]+\z/'],
+            'pack_version' => ['sometimes', 'string', 'max:128', 'regex:/\A(?!\.\.)[A-Za-z0-9._-]+\z/'],
             'probe' => ['sometimes', 'boolean'],
             'skip_drift' => ['sometimes', 'boolean'],
             'base_url' => ['sometimes', 'string', 'max:512'],

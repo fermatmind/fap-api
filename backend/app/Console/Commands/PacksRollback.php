@@ -42,6 +42,11 @@ final class PacksRollback extends Command
             return 1;
         }
 
+        if (! $this->isSafePathSegment($region) || ! $this->isSafePathSegment($locale) || ! $this->isSafePathSegment($dirAlias)) {
+            $this->error('invalid --region/--locale/--dir_alias value.');
+            return 1;
+        }
+
         $result = $publisher->rollback(
             $region,
             $locale,
@@ -75,6 +80,12 @@ final class PacksRollback extends Command
         }
 
         return $status === 'success' ? 0 : 1;
+    }
+
+
+    private function isSafePathSegment(string $value): bool
+    {
+        return (bool) preg_match('/\A(?!\.\.)[A-Za-z0-9_-]+\z/', $value);
     }
 
     private function isTruthy(mixed $value): bool

@@ -58,6 +58,11 @@ final class PacksPublish extends Command
             return 1;
         }
 
+        if (! $this->isSafePathSegment($packId) || ! $this->isSafeVersion($version) || ! $this->isSafePathSegment($region) || ! $this->isSafePathSegment($locale) || ! $this->isSafePathSegment($dirAlias)) {
+            $this->error('invalid --pack/--pack-version/--region/--locale/--dir_alias value.');
+            return 1;
+        }
+
         $sourceContext = $pathAliasResolver->resolveBackendPublishSourceContext($packId, $version);
         $sourceDir = trim((string) ($sourceContext['selected_path'] ?? ''));
         $sourceSelection = strtolower(trim((string) ($sourceContext['selected_source'] ?? 'legacy')));
@@ -251,6 +256,16 @@ final class PacksPublish extends Command
             : 'norms:big5:drift-check';
     }
 
+
+    private function isSafePathSegment(string $value): bool
+    {
+        return (bool) preg_match('/\A(?!\.\.)[A-Za-z0-9_-]+\z/', $value);
+    }
+
+    private function isSafeVersion(string $value): bool
+    {
+        return (bool) preg_match('/\A(?!\.\.)[A-Za-z0-9._-]+\z/', $value);
+    }
     private function resolveLocalSourceType(string $sourceSelection): string
     {
         $selection = strtolower(trim($sourceSelection));
