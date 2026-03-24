@@ -23,7 +23,6 @@ class AttemptReadController extends Controller
 {
     use ResolvesAttemptOwnership;
 
-    private const PUBLIC_RESULT_READ_SCALES = ['MBTI', 'BIG5_OCEAN', 'IQ_RAVEN', 'EQ_60'];
 
     private const SENSITIVE_RESULT_READ_SCALES = ['SDS_20', 'CLINICAL_COMBO_68'];
 
@@ -77,7 +76,7 @@ class AttemptReadController extends Controller
 
         $responseCodes = $this->resolveResponseScaleCodes($result);
         $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
-        $attempt = $this->resolveAttemptForResultRead($request, $orgId, $id, $scaleCode);
+        $attempt = $this->resolveAttemptForResultRead($request, $id);
         $attemptId = $this->resolveAttemptId($result, $attempt, $id);
         $packId = $this->preferredStringField($result, $attempt, 'pack_id');
         $dirVersion = $this->preferredStringField($result, $attempt, 'dir_version');
@@ -347,15 +346,8 @@ class AttemptReadController extends Controller
         return $payload;
     }
 
-    private function resolveAttemptForResultRead(Request $request, int $orgId, string $attemptId, string $scaleCode): ?Attempt
+    private function resolveAttemptForResultRead(Request $request, string $attemptId): ?Attempt
     {
-        if ($this->isPublicResultScale($scaleCode)) {
-            return Attempt::withoutGlobalScopes()
-                ->where('org_id', $orgId)
-                ->where('id', $attemptId)
-                ->first();
-        }
-
         $attempt = $this->ownedAttemptQuery($request, $attemptId)->first();
         if ($attempt instanceof Attempt) {
             return $attempt;
@@ -364,10 +356,6 @@ class AttemptReadController extends Controller
         throw new ApiProblemException(404, 'RESOURCE_NOT_FOUND', 'attempt not found.');
     }
 
-    private function isPublicResultScale(string $scaleCode): bool
-    {
-        return in_array($scaleCode, self::PUBLIC_RESULT_READ_SCALES, true);
-    }
 
     private function resolveNormalizedScaleCode(array $responseCodes): string
     {

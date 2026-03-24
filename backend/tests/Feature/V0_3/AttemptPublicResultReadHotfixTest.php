@@ -126,7 +126,7 @@ final class AttemptPublicResultReadHotfixTest extends TestCase
         $response->assertJsonPath('meta.scale_code_legacy', 'BIG5_OCEAN');
     }
 
-    public function test_public_orphan_result_can_be_read_without_attempt_row(): void
+    public function test_public_orphan_result_read_requires_owned_attempt(): void
     {
         $this->seedScales();
 
@@ -152,16 +152,8 @@ final class AttemptPublicResultReadHotfixTest extends TestCase
         $response = $this->withHeader('X-Anon-Id', 'anon_orphan_probe')
             ->getJson("/api/v0.3/attempts/{$attemptId}/result");
 
-        $response->assertStatus(200);
-        $response->assertJsonPath('ok', true);
-        $response->assertJsonPath('attempt_id', $attemptId);
-        $response->assertJsonPath('type_code', 'IQ-RESULT');
-        $response->assertJsonPath('meta.scale_code_legacy', 'IQ_RAVEN');
-        $response->assertJsonPath('meta.pack_id', 'IQ_RAVEN.result-pack');
-        $response->assertJsonPath('meta.dir_version', 'IQ_RAVEN.result-dir');
-        $response->assertJsonPath('meta.content_package_version', 'result-only-v1');
-        $response->assertJsonPath('meta.scoring_spec_version', 'result-only-score-v1');
-        $response->assertJsonPath('meta.report_engine_version', 'v2.1');
+        $response->assertStatus(404);
+        $response->assertJsonPath('error_code', 'RESOURCE_NOT_FOUND');
     }
 
     public function test_sds20_anonymous_result_read_is_still_rejected(): void
