@@ -350,6 +350,40 @@ final class DsarRequestApiTest extends TestCase
         $this->assertSame('RuntimeException', (string) ($terminalContext['exception_class'] ?? ''));
     }
 
+    public function test_owner_cannot_create_dsar_for_user_outside_org_membership(): void
+    {
+        Queue::fake();
+
+        $orgId = 703;
+        $ownerUserId = 70301;
+        $outsideUserId = 70302;
+
+        $this->seedUser($ownerUserId, "owner_{$ownerUserId}@example.test", '+8613900007031');
+        $this->seedUser($outsideUserId, "outside_{$outsideUserId}@example.test", '+8613900007032');
+        $this->seedOrgWithOwnerMembership($orgId, $ownerUserId);
+
+        $ownerToken = $this->issueToken($ownerUserId, $orgId, 'owner', 'anon_owner_dsar_703');
+
+        $headers = [
+            'Authorization' => 'Bearer '.$ownerToken,
+            'X-Org-Id' => (string) $orgId,
+        ];
+
+        $response = $this->withHeaders($headers)->postJson('/api/v0.3/compliance/dsar/requests', [
+            'subject_user_id' => $outsideUserId,
+            'mode' => 'hybrid_anonymize',
+            'reason' => 'cross tenant probe',
+        ]);
+
+        $response->assertStatus(422)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'INVALID_SUBJECT')
+            ->assertJsonPath('message', 'subject user is not in current organization.');
+
+        Queue::assertNothingPushed();
+        $this->assertSame(0, DB::table('dsar_requests')->count());
+    }
+
     private function seedUser(int $userId, string $email, string $phoneE164): void
     {
         DB::table('users')->insert([
