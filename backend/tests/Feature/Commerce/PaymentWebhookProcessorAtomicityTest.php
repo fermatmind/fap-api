@@ -140,6 +140,76 @@ final class PaymentWebhookProcessorAtomicityTest extends TestCase
         $this->assertSame(1, DB::table('benefit_wallet_ledgers')->where('reason', 'topup')->count());
     }
 
+    public function test_settled_credit_pack_new_event_id_does_not_retopup_wallet(): void
+    {
+        (new Pr19CommerceSeeder)->run();
+
+        $orderNo = 'ord_atomic_credit_dup';
+        DB::table('orders')->insert([
+            'id' => (string) Str::uuid(),
+            'order_no' => $orderNo,
+            'org_id' => 0,
+            'user_id' => null,
+            'anon_id' => null,
+            'sku' => 'MBTI_CREDIT',
+            'quantity' => 1,
+            'target_attempt_id' => null,
+            'amount_cents' => 4990,
+            'currency' => 'USD',
+            'status' => 'created',
+            'provider' => 'billing',
+            'external_trade_no' => null,
+            'paid_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+            'amount_total' => 4990,
+            'amount_refunded' => 0,
+            'item_sku' => 'MBTI_CREDIT',
+            'provider_order_id' => null,
+            'device_id' => null,
+            'request_id' => null,
+            'created_ip' => null,
+            'fulfilled_at' => null,
+            'refunded_at' => null,
+        ]);
+
+        $first = $this->postSignedBillingWebhook([
+            'provider_event_id' => 'evt_atomic_credit_dup_1',
+            'order_no' => $orderNo,
+            'external_trade_no' => 'trade_atomic_credit_dup_1',
+            'amount_cents' => 4990,
+            'currency' => 'USD',
+        ], [
+            'X-Org-Id' => '0',
+        ]);
+        $first->assertStatus(200);
+        $first->assertJson([
+            'ok' => true,
+            'order_no' => $orderNo,
+            'provider_event_id' => 'evt_atomic_credit_dup_1',
+        ]);
+
+        $second = $this->postSignedBillingWebhook([
+            'provider_event_id' => 'evt_atomic_credit_dup_2',
+            'order_no' => $orderNo,
+            'external_trade_no' => 'trade_atomic_credit_dup_2',
+            'amount_cents' => 4990,
+            'currency' => 'USD',
+        ], [
+            'X-Org-Id' => '0',
+        ]);
+        $second->assertStatus(200);
+        $second->assertJson([
+            'ok' => true,
+            'duplicate' => true,
+            'order_no' => $orderNo,
+            'provider_event_id' => 'evt_atomic_credit_dup_2',
+        ]);
+
+        $this->assertSame(1, DB::table('benefit_wallet_ledgers')->where('reason', 'topup')->count());
+        $this->assertSame(2, DB::table('payment_events')->where('provider', 'billing')->whereIn('provider_event_id', ['evt_atomic_credit_dup_1', 'evt_atomic_credit_dup_2'])->count());
+    }
+
     public function test_report_unlock_split_replay_converges_without_duplicate_side_effects(): void
     {
         (new Pr19CommerceSeeder)->run();

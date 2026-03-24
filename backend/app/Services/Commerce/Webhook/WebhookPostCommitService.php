@@ -22,7 +22,7 @@ class WebhookPostCommitService
             : null;
         $postCommitOutcome = null;
 
-        if (($result['ok'] ?? false) && is_array($postCommitCtx)) {
+        if (($result['ok'] ?? false) && ! ($result['duplicate'] ?? false) && is_array($postCommitCtx)) {
             $postCommitOutcome = $this->core->runWebhookPostCommitSideEffects($postCommitCtx);
 
             if (($postCommitOutcome['ok'] ?? false) === true) {
