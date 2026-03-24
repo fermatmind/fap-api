@@ -47,6 +47,10 @@ final class ComplianceDsarController extends Controller
         $subjectUserId = (int) $payload['subject_user_id'];
         $mode = (string) ($payload['mode'] ?? 'hybrid_anonymize');
         $reason = isset($payload['reason']) ? trim((string) $payload['reason']) : null;
+        if (! $this->subjectBelongsToOrg($orgId, $subjectUserId)) {
+            return $this->invalidSubject();
+        }
+
         $initialPayload = [
             'ip' => $request->ip(),
             'user_agent' => (string) $request->userAgent(),
@@ -455,6 +459,37 @@ final class ComplianceDsarController extends Controller
             'error_code' => 'DSAR_REQUEST_NOT_FOUND',
             'message' => 'dsar request not found.',
         ], 404);
+    }
+
+    private function invalidSubject(): JsonResponse
+    {
+        return response()->json([
+            'ok' => false,
+            'error_code' => 'INVALID_SUBJECT',
+            'message' => 'subject user is not in current organization.',
+        ], 422);
+    }
+
+    private function subjectBelongsToOrg(int $orgId, int $subjectUserId): bool
+    {
+        if (! SchemaBaseline::hasTable('organization_members')) {
+            return false;
+        }
+
+        if (! SchemaBaseline::hasColumn('organization_members', 'org_id')
+            || ! SchemaBaseline::hasColumn('organization_members', 'user_id')) {
+            return false;
+        }
+
+        $query = DB::table('organization_members')
+            ->where('org_id', $orgId)
+            ->where('user_id', $subjectUserId);
+
+        if (SchemaBaseline::hasColumn('organization_members', 'is_active')) {
+            $query->where('is_active', 1);
+        }
+
+        return $query->exists();
     }
 
     private function appendStatusTransitionAudit(
