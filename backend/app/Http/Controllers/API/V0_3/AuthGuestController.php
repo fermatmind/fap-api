@@ -83,6 +83,10 @@ final class AuthGuestController extends Controller
             return null;
         }
 
+        if (preg_match('/^\d+$/', $anonId) === 1) {
+            return null;
+        }
+
         $lower = mb_strtolower($anonId, 'UTF-8');
         foreach (['todo', 'placeholder', 'fixme', 'tbd', '填这里'] as $bad) {
             if (mb_strpos($lower, $bad) !== false) {

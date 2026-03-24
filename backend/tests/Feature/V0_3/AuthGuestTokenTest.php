@@ -68,6 +68,30 @@ final class AuthGuestTokenTest extends TestCase
         $this->assertMatchesRegularExpression('/^anon_[0-9a-fA-F-]{36}$/', $anonId);
     }
 
+
+    public function test_guest_token_does_not_use_numeric_body_anon_id(): void
+    {
+        $response = $this->postJson('/api/v0.3/auth/guest', [
+            'anon_id' => '1',
+        ]);
+
+        $response->assertStatus(200)->assertJson([
+            'ok' => true,
+        ]);
+
+        $anonId = (string) $response->json('anon_id');
+        $this->assertMatchesRegularExpression('/^anon_[0-9a-fA-F-]{36}$/', $anonId);
+
+        $token = (string) $response->json('fm_token');
+        $authRow = DB::table('auth_tokens')
+            ->where('token_hash', hash('sha256', $token))
+            ->first();
+
+        $this->assertNotNull($authRow);
+        $this->assertNull($authRow->user_id);
+        $this->assertSame($anonId, (string) ($authRow->anon_id ?? ''));
+    }
+
     public function test_guest_token_rejects_invalid_anon_id_payload(): void
     {
         $response = $this->postJson('/api/v0.3/auth/guest', [
