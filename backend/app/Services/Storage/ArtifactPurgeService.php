@@ -141,12 +141,7 @@ final class ArtifactPurgeService
 
         if (SchemaBaseline::hasTable('storage_blob_locations')) {
             $locationRows = StorageBlobLocation::query()
-                ->where(function ($query) use ($canonicalPaths, $blobHashes): void {
-                    $query->whereIn('storage_path', array_values($canonicalPaths));
-                    if ($blobHashes !== []) {
-                        $query->orWhereIn('blob_hash', array_keys($blobHashes));
-                    }
-                })
+                ->whereIn('storage_path', array_values($canonicalPaths))
                 ->get(['id', 'blob_hash', 'disk', 'storage_path', 'location_kind', 'meta_json']);
 
             foreach ($locationRows as $locationRow) {
@@ -224,8 +219,6 @@ final class ArtifactPurgeService
             $locationsQuery = StorageBlobLocation::query();
             if ($locationIds !== []) {
                 $locationsQuery->whereIn('id', $locationIds);
-            } elseif ($blobHashes !== []) {
-                $locationsQuery->whereIn('blob_hash', $blobHashes);
             } else {
                 $locationsQuery->whereRaw('1 = 0');
             }
