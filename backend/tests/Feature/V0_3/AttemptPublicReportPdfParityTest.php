@@ -173,9 +173,9 @@ final class AttemptPublicReportPdfParityTest extends TestCase
         ];
 
         $json = $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/report");
-        $json->assertStatus(200);
-        $json->assertJsonPath('ok', true);
-        $json->assertJsonPath('locked', true);
+        $json->assertStatus(404);
+        $json->assertJsonPath('error_code', 'ATTEMPT_NOT_FOUND');
+        $json->assertJsonPath('message', 'attempt not found.');
 
         $pdf = $this->withHeaders($headers)->get("/api/v0.3/attempts/{$attemptId}/report.pdf");
         $pdf->assertStatus(404);

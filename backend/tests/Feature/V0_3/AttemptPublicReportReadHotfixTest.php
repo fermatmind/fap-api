@@ -142,7 +142,7 @@ final class AttemptPublicReportReadHotfixTest extends TestCase
         ]);
     }
 
-    public function test_public_mbti_report_can_be_read_with_mismatched_but_bound_public_identity(): void
+    public function test_public_mbti_report_requires_matching_attempt_subject(): void
     {
         $this->seedScales();
         config()->set('fap.features.report_snapshot_strict_v2', false);
@@ -160,16 +160,13 @@ final class AttemptPublicReportReadHotfixTest extends TestCase
         ])
             ->getJson("/api/v0.3/attempts/{$attemptId}/report");
 
-        $response->assertStatus(200);
-        $response->assertJsonPath('ok', true);
-        $response->assertJsonPath('locked', true);
-        $response->assertJsonPath('variant', 'free');
-        $response->assertJsonPath('meta.scale_code_legacy', 'MBTI');
-        $this->assertIsArray($response->json('report'));
+        $response->assertStatus(404);
+        $response->assertJsonPath('error_code', 'ATTEMPT_NOT_FOUND');
+        $response->assertJsonPath('message', 'attempt not found.');
         $this->assertStringNotContainsString('No query results for model', (string) $response->getContent());
     }
 
-    public function test_public_mbti_report_access_can_be_read_with_mismatched_but_bound_public_identity(): void
+    public function test_public_mbti_report_access_requires_matching_attempt_subject(): void
     {
         $this->seedScales();
 
@@ -185,16 +182,9 @@ final class AttemptPublicReportReadHotfixTest extends TestCase
             'Authorization' => 'Bearer '.$token,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
 
-        $response->assertStatus(200);
-        $response->assertJsonPath('ok', true);
-        $response->assertJsonPath('attempt_id', $attemptId);
-        $response->assertJsonPath('access_state', 'locked');
-        $response->assertJsonPath('report_state', 'ready');
-        $response->assertJsonPath('pdf_state', 'missing');
-        $response->assertJsonPath('actions.page_href', "/result/{$attemptId}");
-        $response->assertJsonPath('actions.pdf_href', null);
-        $response->assertJsonPath('actions.history_href', '/history/mbti');
-        $response->assertJsonPath('actions.lookup_href', '/orders/lookup');
+        $response->assertStatus(404);
+        $response->assertJsonPath('error_code', 'ATTEMPT_NOT_FOUND');
+        $response->assertJsonPath('message', 'attempt not found.');
     }
 
     public function test_public_mbti_report_rejects_orphan_result_with_explicit_attempt_not_found_contract(): void
