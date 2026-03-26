@@ -6,6 +6,7 @@ namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\OrderResource\Pages;
 use App\Filament\Ops\Resources\OrderResource\RelationManagers\BenefitGrantsRelationManager;
+use App\Filament\Ops\Resources\OrderResource\RelationManagers\PaymentAttemptsRelationManager;
 use App\Filament\Ops\Resources\OrderResource\RelationManagers\PaymentEventsRelationManager;
 use App\Filament\Ops\Resources\OrderResource\Support\OrderLinkageSupport;
 use App\Models\Order;
@@ -118,6 +119,16 @@ class OrderResource extends \App\Filament\Shared\BaseTenantResource
                 Tables\Columns\TextColumn::make('grant_state')
                     ->badge()
                     ->toggleable(),
+                Tables\Columns\TextColumn::make('commerce_exception')
+                    ->label('Exception')
+                    ->state(fn (Order $record): string => $support->primaryException($record)['label'])
+                    ->badge()
+                    ->color(fn (Order $record): string => $support->primaryException($record)['state']),
+                Tables\Columns\TextColumn::make('exception_count')
+                    ->label('Exception count')
+                    ->state(fn (Order $record): int => $support->exceptionCount($record))
+                    ->numeric()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('payment_attempts_count')
                     ->label('Payment attempts')
                     ->numeric()
@@ -127,19 +138,36 @@ class OrderResource extends \App\Filament\Shared\BaseTenantResource
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('latest_payment_attempt_provider')
                     ->label('Attempt provider')
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('latest_payment_attempt_provider_trade_no')
                     ->label('Attempt provider ref')
                     ->copyable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('last_reconciled_at')
                     ->dateTime()
                     ->toggleable(),
+                Tables\Columns\TextColumn::make('compensation_status')
+                    ->label('Compensation')
+                    ->state(fn (Order $record): string => $support->compensationStatus($record)['label'])
+                    ->badge()
+                    ->color(fn (Order $record): string => $support->compensationStatus($record)['state']),
                 Tables\Columns\TextColumn::make('latest_payment_status')
                     ->label('Payment status')
                     ->state(fn (Order $record): string => $support->paymentStatus($record)['label'])
                     ->badge()
                     ->color(fn (Order $record): string => $support->paymentStatus($record)['state']),
+                Tables\Columns\TextColumn::make('latest_handle_status')
+                    ->label('Handle status')
+                    ->badge()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('latest_benefit_status')
+                    ->label('Grant status')
+                    ->badge()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('latest_access_state')
+                    ->label('Access state')
+                    ->badge()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('target_attempt_id')
                     ->label('attempt_id')
                     ->copyable(),
@@ -244,6 +272,12 @@ class OrderResource extends \App\Filament\Shared\BaseTenantResource
                     ->options(fn (): array => $support->distinctOrderOptions('payment_state')),
                 Tables\Filters\SelectFilter::make('grant_state')
                     ->options(fn (): array => $support->distinctOrderOptions('grant_state')),
+                Tables\Filters\SelectFilter::make('commerce_exception_filter')
+                    ->label('Commerce exception')
+                    ->options($support->exceptionOptions())
+                    ->query(function (Builder $query, array $data) use ($support): void {
+                        $support->applyExceptionFilter($query, $data['value'] ?? null);
+                    }),
                 Tables\Filters\TernaryFilter::make('paid_success')
                     ->label('Paid success')
                     ->queries(
@@ -327,6 +361,7 @@ class OrderResource extends \App\Filament\Shared\BaseTenantResource
     public static function getRelations(): array
     {
         return [
+            PaymentAttemptsRelationManager::class,
             PaymentEventsRelationManager::class,
             BenefitGrantsRelationManager::class,
         ];

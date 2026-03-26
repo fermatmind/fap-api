@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Resources\OrderResource\Support;
 
+use App\Filament\Ops\Resources\BenefitGrantResource;
+use App\Filament\Ops\Resources\PaymentAttemptResource;
+use App\Filament\Ops\Resources\PaymentEventResource;
 use App\Models\Order;
+use App\Models\PaymentAttempt;
 use App\Services\Commerce\OrderManager;
 use App\Support\SchemaBaseline;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,6 +18,30 @@ use Illuminate\Support\Facades\DB;
 
 final class OrderLinkageSupport
 {
+    private const EXCEPTION_LABELS = [
+        'pending_unpaid' => 'pending_unpaid',
+        'provider_created_not_paid' => 'provider_created_not_paid',
+        'callback_missing' => 'callback_missing',
+        'paid_no_grant' => 'paid_no_grant',
+        'grant_without_paid' => 'grant_without_paid',
+        'webhook_error' => 'webhook_error',
+        'compensation_touched' => 'compensation_touched',
+        'refund_revoked' => 'refund_revoked',
+        'late_callback_corrected' => 'late_callback_corrected',
+    ];
+
+    private const PRIMARY_EXCEPTION_ORDER = [
+        'webhook_error',
+        'callback_missing',
+        'late_callback_corrected',
+        'paid_no_grant',
+        'grant_without_paid',
+        'refund_revoked',
+        'provider_created_not_paid',
+        'pending_unpaid',
+        'compensation_touched',
+    ];
+
     /**
      * @return Builder<Order>
      */
@@ -57,7 +85,12 @@ final class OrderLinkageSupport
                 ->selectSub($this->paymentAttemptField('state'), 'latest_payment_attempt_state')
                 ->selectSub($this->paymentAttemptField('provider'), 'latest_payment_attempt_provider')
                 ->selectSub($this->paymentAttemptField('provider_trade_no'), 'latest_payment_attempt_provider_trade_no')
-                ->selectSub($this->paymentAttemptField('external_trade_no'), 'latest_payment_attempt_external_trade_no');
+                ->selectSub($this->paymentAttemptField('external_trade_no'), 'latest_payment_attempt_external_trade_no')
+                ->selectSub($this->paymentAttemptField('callback_received_at'), 'latest_payment_attempt_callback_received_at')
+                ->selectSub($this->paymentAttemptField('verified_at'), 'latest_payment_attempt_verified_at')
+                ->selectSub($this->paymentAttemptField('finalized_at'), 'latest_payment_attempt_finalized_at')
+                ->selectSub($this->paymentAttemptField('last_error_code'), 'latest_payment_attempt_last_error_code')
+                ->selectSub($this->paymentAttemptField('last_error_message'), 'latest_payment_attempt_last_error_message');
         } else {
             $query->selectRaw('0 as payment_attempts_count');
         }
@@ -84,6 +117,16 @@ final class OrderLinkageSupport
                 ->selectSub($this->snapshotExistsField(), 'has_report_snapshot');
         } else {
             $query->selectRaw('0 as has_report_snapshot');
+        }
+
+        if (SchemaBaseline::hasTable('unified_access_projections')) {
+            $query
+                ->selectSub($this->accessProjectionField('access_state'), 'latest_access_state')
+                ->selectSub($this->accessProjectionField('report_state'), 'latest_access_report_state')
+                ->selectSub($this->accessProjectionField('pdf_state'), 'latest_access_pdf_state')
+                ->selectSub($this->accessProjectionField('reason_code'), 'latest_access_reason_code')
+                ->selectSub($this->accessProjectionField('projection_version'), 'latest_access_projection_version')
+                ->selectSub($this->accessProjectionField('refreshed_at'), 'latest_access_refreshed_at');
         }
 
         if (SchemaBaseline::hasTable('report_jobs')) {
@@ -306,6 +349,70 @@ final class OrderLinkageSupport
             ->sort()
             ->mapWithKeys(fn (string $value): array => [$value => $value])
             ->all();
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public function exceptionOptions(): array
+    {
+        return self::EXCEPTION_LABELS;
+    }
+
+    /**
+     * @param  Builder<Order>  $query
+     */
+    public function applyExceptionFilter(Builder $query, ?string $value): void
+    {
+        $exception = strtolower(trim((string) $value));
+        if ($exception === '' || ! array_key_exists($exception, self::EXCEPTION_LABELS)) {
+            return;
+        }
+
+        match ($exception) {
+            'pending_unpaid' => $query
+                ->whereIn('orders.payment_state', [Order::PAYMENT_STATE_CREATED, Order::PAYMENT_STATE_PENDING])
+                ->where(function (Builder $builder): void {
+                    $builder
+                        ->whereNotExists($this->paymentAttemptExistsQuery())
+                        ->orWhereExists($this->paymentAttemptStateExistsQuery([PaymentAttempt::STATE_INITIATED]));
+                }),
+            'provider_created_not_paid' => $query
+                ->whereIn('orders.payment_state', [Order::PAYMENT_STATE_CREATED, Order::PAYMENT_STATE_PENDING])
+                ->whereExists($this->paymentAttemptStateExistsQuery([
+                    PaymentAttempt::STATE_PROVIDER_CREATED,
+                    PaymentAttempt::STATE_CLIENT_PRESENTED,
+                ])),
+            'callback_missing' => $query
+                ->whereIn('orders.payment_state', [Order::PAYMENT_STATE_CREATED, Order::PAYMENT_STATE_PENDING])
+                ->whereExists($this->paymentAttemptStateExistsQuery([
+                    PaymentAttempt::STATE_CALLBACK_RECEIVED,
+                    PaymentAttempt::STATE_VERIFIED,
+                ])),
+            'paid_no_grant' => $query
+                ->where('orders.payment_state', Order::PAYMENT_STATE_PAID)
+                ->where('orders.grant_state', '!=', Order::GRANT_STATE_GRANTED)
+                ->whereNotExists($this->activeBenefitExistsQuery())
+                ->where($this->notRefundedLikeOrderClause()),
+            'grant_without_paid' => $query
+                ->whereExists($this->activeBenefitExistsQuery())
+                ->where(function (Builder $builder): void {
+                    $builder
+                        ->whereNotIn('orders.payment_state', [Order::PAYMENT_STATE_PAID, Order::PAYMENT_STATE_REFUNDED])
+                        ->orWhereNull('orders.payment_state');
+                }),
+            'webhook_error' => $query->whereExists($this->webhookErrorExistsQuery()),
+            'compensation_touched' => $query->whereNotNull('orders.last_reconciled_at'),
+            'refund_revoked' => $query
+                ->where('orders.payment_state', Order::PAYMENT_STATE_REFUNDED)
+                ->whereExists($this->revokedBenefitExistsQuery()),
+            'late_callback_corrected' => $query
+                ->where('orders.payment_state', Order::PAYMENT_STATE_PAID)
+                ->whereNotNull('orders.last_reconciled_at')
+                ->whereNotNull('orders.paid_at')
+                ->whereColumn('orders.paid_at', '>', 'orders.last_reconciled_at'),
+            default => null,
+        };
     }
 
     /**
@@ -581,6 +688,57 @@ final class OrderLinkageSupport
     /**
      * @return array{label:string,state:string}
      */
+    public function primaryException(object $order): array
+    {
+        foreach (self::PRIMARY_EXCEPTION_ORDER as $key) {
+            if ($this->matchesException($key, $order)) {
+                return ['label' => $key, 'state' => $this->exceptionState($key)];
+            }
+        }
+
+        return ['label' => 'clear', 'state' => 'success'];
+    }
+
+    public function exceptionCount(object $order): int
+    {
+        $count = 0;
+
+        foreach (array_keys(self::EXCEPTION_LABELS) as $key) {
+            if ($this->matchesException($key, $order)) {
+                $count++;
+            }
+        }
+
+        return $count;
+    }
+
+    /**
+     * @return array{label:string,state:string}
+     */
+    public function compensationStatus(object $order): array
+    {
+        if (! filled($order->last_reconciled_at ?? null)) {
+            return ['label' => 'untouched', 'state' => 'gray'];
+        }
+
+        if ($this->matchesException('late_callback_corrected', $order)) {
+            return ['label' => 'corrected_after_compensation', 'state' => 'success'];
+        }
+
+        $paymentState = $this->resolvedPaymentStateValue($order);
+
+        return match ($paymentState) {
+            Order::PAYMENT_STATE_PAID => ['label' => 'paid_after_compensation', 'state' => 'success'],
+            Order::PAYMENT_STATE_FAILED,
+            Order::PAYMENT_STATE_CANCELED,
+            Order::PAYMENT_STATE_EXPIRED => ['label' => 'closed_after_compensation', 'state' => 'warning'],
+            default => ['label' => 'touched', 'state' => 'warning'],
+        };
+    }
+
+    /**
+     * @return array{label:string,state:string}
+     */
     public function unlockStatus(object $order): array
     {
         if ($this->hasActiveBenefitGrant($order)) {
@@ -687,6 +845,7 @@ final class OrderLinkageSupport
      * @return array{
      *     headline: array<string, array{label:string,state:string}>,
      *     order_summary: array{fields:list<array{label:string,value:string,hint:?string,kind:string,state:?string}>,notes:list<string>},
+     *     payment_attempts: list<array<string, mixed>>,
      *     payment_events: list<array{
      *         provider_event_id:string,
      *         status:array{label:string,state:string},
@@ -700,6 +859,8 @@ final class OrderLinkageSupport
      *     benefit_summary: array{fields:list<array{label:string,value:string,hint:?string,kind:string,state:?string}>,notes:list<string>},
      *     report_summary: array{fields:list<array{label:string,value:string,hint:?string,kind:string,state:?string}>,notes:list<string>},
      *     attempt_summary: array{fields:list<array{label:string,value:string,hint:?string,kind:string,state:?string}>,notes:list<string>},
+     *     access_summary: array{fields:list<array{label:string,value:string,hint:?string,kind:string,state:?string}>,notes:list<string>},
+     *     compensation_summary: array{fields:list<array{label:string,value:string,hint:?string,kind:string,state:?string}>,notes:list<string>},
      *     exception_summary: array{fields:list<array{label:string,value:string,hint:?string,kind:string,state:?string}>,notes:list<string>},
      *     links: list<array{label:string,url:string,kind:string}>
      * }
@@ -708,13 +869,17 @@ final class OrderLinkageSupport
     {
         $orderRow = DB::table('orders')->where('id', (string) $order->getKey())->first() ?? $order;
         $resolvedAttemptId = $this->resolvedAttemptId($order);
+        $orderNo = (string) ($orderRow->order_no ?? '');
         $paymentEvents = $this->paymentEvents((string) ($orderRow->order_no ?? ''));
+        $paymentAttempts = $this->paymentAttempts($orderNo);
+        $latestPaymentAttempt = $paymentAttempts[0] ?? null;
         $grants = $this->benefitGrants((string) ($orderRow->order_no ?? ''), $resolvedAttemptId);
         $activeGrant = $this->activeGrant($grants);
         $snapshot = $this->reportSnapshot((string) ($orderRow->order_no ?? ''), $resolvedAttemptId);
         $reportPayload = $this->decodeJson($snapshot->report_json ?? null);
         $reportJob = $this->reportJob($resolvedAttemptId);
         $attempt = $this->attempt($resolvedAttemptId);
+        $accessProjection = $this->accessProjection($resolvedAttemptId);
         $result = $this->result($resolvedAttemptId);
         $share = $this->share($resolvedAttemptId);
         $delivery = app(OrderManager::class)->presentOrderDelivery($orderRow);
@@ -744,6 +909,8 @@ final class OrderLinkageSupport
                 $this->field('requested_sku', $this->requestedSku($order)),
                 $this->field('effective_sku', $this->effectiveSku($order)),
                 $this->field('benefit_code', $this->stringOrDash($activeGrant->benefit_code ?? ($order->latest_benefit_code ?? null))),
+                $this->field('payment_attempts', $this->stringOrDash($order->payment_attempts_count ?? count($paymentAttempts))),
+                $this->field('last_reconciled_at', $this->formatTimestamp($orderRow->last_reconciled_at ?? null)),
                 $this->pillField(
                     'contact_email_present',
                     $this->truthy($deliveryState['contact_email_present'] ?? null) ? 'present' : 'missing',
@@ -828,7 +995,9 @@ final class OrderLinkageSupport
 
         $paymentSummary = array_map(function (object $event): array {
             return [
+                'id' => $this->stringOrDash($event->id ?? null),
                 'provider_event_id' => $this->stringOrDash($event->provider_event_id ?? null),
+                'payment_attempt_id' => $this->stringOrDash($event->payment_attempt_id ?? null),
                 'status' => [
                     'label' => $this->stringOrDash($event->status ?? null),
                     'state' => $this->statusState((string) ($event->status ?? '')),
@@ -848,20 +1017,77 @@ final class OrderLinkageSupport
             ];
         }, $paymentEvents);
 
+        $paymentAttemptSummary = array_map(function (object $paymentAttempt): array {
+            return [
+                'id' => $this->stringOrDash($paymentAttempt->id ?? null),
+                'attempt_no' => $this->stringOrDash($paymentAttempt->attempt_no ?? null),
+                'provider' => $this->stringOrDash($paymentAttempt->provider ?? null),
+                'state' => [
+                    'label' => $this->stringOrDash($paymentAttempt->state ?? null),
+                    'state' => $this->statusState((string) ($paymentAttempt->state ?? '')),
+                ],
+                'provider_trade_no' => $this->stringOrDash($paymentAttempt->provider_trade_no ?? null),
+                'external_trade_no' => $this->stringOrDash($paymentAttempt->external_trade_no ?? null),
+                'provider_session_ref' => $this->stringOrDash($paymentAttempt->provider_session_ref ?? null),
+                'callback_received_at' => $this->formatTimestamp($paymentAttempt->callback_received_at ?? null),
+                'verified_at' => $this->formatTimestamp($paymentAttempt->verified_at ?? null),
+                'finalized_at' => $this->formatTimestamp($paymentAttempt->finalized_at ?? null),
+                'last_error_code' => $this->stringOrDash($paymentAttempt->last_error_code ?? null),
+                'last_error_message' => $this->shortText($paymentAttempt->last_error_message ?? null),
+            ];
+        }, $paymentAttempts);
+
+        $accessSummary = [
+            'fields' => [
+                $this->pillField('access_state', $this->stringOrDash($accessProjection->access_state ?? ($order->latest_access_state ?? null)), $this->statusState((string) ($accessProjection->access_state ?? ($order->latest_access_state ?? '')))),
+                $this->pillField('report_state', $this->stringOrDash($accessProjection->report_state ?? null), $this->statusState((string) ($accessProjection->report_state ?? ''))),
+                $this->pillField('pdf_state', $this->stringOrDash($accessProjection->pdf_state ?? null), $this->statusState((string) ($accessProjection->pdf_state ?? ''))),
+                $this->field('reason_code', $this->stringOrDash($accessProjection->reason_code ?? ($order->latest_access_reason_code ?? null))),
+                $this->field('projection_version', $this->stringOrDash($accessProjection->projection_version ?? ($order->latest_access_projection_version ?? null))),
+                $this->field('produced_at', $this->formatTimestamp($accessProjection->produced_at ?? null)),
+                $this->field('refreshed_at', $this->formatTimestamp($accessProjection->refreshed_at ?? ($order->latest_access_refreshed_at ?? null))),
+            ],
+            'notes' => [
+                'Unified access projection stays read-only here. This page only surfaces the latest access truth alongside the order.',
+            ],
+        ];
+
+        $compensationState = $this->compensationStatus($order);
+        $compensationSummary = [
+            'fields' => [
+                $this->pillField('compensation_status', $compensationState['label'], $compensationState['state']),
+                $this->field('last_reconciled_at', $this->formatTimestamp($orderRow->last_reconciled_at ?? null)),
+                $this->field('latest_attempt_state', $this->stringOrDash($latestPaymentAttempt->state ?? ($order->latest_payment_attempt_state ?? null))),
+                $this->field('latest_attempt_provider', $this->stringOrDash($latestPaymentAttempt->provider ?? ($order->latest_payment_attempt_provider ?? null))),
+                $this->field('latest_attempt_ref', $this->stringOrDash($latestPaymentAttempt->provider_trade_no ?? ($order->latest_payment_attempt_provider_trade_no ?? null))),
+                $this->field(
+                    'suggested_command',
+                    $orderNo !== '' ? 'php artisan commerce:compensate-pending-orders --order='.$orderNo.' --dry-run' : '-',
+                    'Command hint only. OP-4 keeps compensation execution in CLI.'
+                ),
+            ],
+            'notes' => [
+                'Compensation remains a command-driven workflow. This page only tells ops whether compensation has already touched the order.',
+            ],
+        ];
+
         $exceptionSummary = [
-            'fields' => $this->exceptionFields($orderRow, $paymentEvents, $activeGrant, $snapshot, $reportJob, $deliveryState, $resolvedAttemptId),
+            'fields' => $this->exceptionFields($order, $paymentEvents, $activeGrant, $snapshot, $reportJob, $deliveryState, $resolvedAttemptId),
             'notes' => ['These rules are explicit v1 diagnostics, not a full rule engine or BI funnel.'],
         ];
 
         return [
             'headline' => $headline,
             'order_summary' => $orderSummary,
+            'payment_attempts' => $paymentAttemptSummary,
             'payment_events' => $paymentSummary,
             'benefit_summary' => $benefitSummary,
             'report_summary' => $reportSummary,
             'attempt_summary' => $attemptSummary,
+            'access_summary' => $accessSummary,
+            'compensation_summary' => $compensationSummary,
             'exception_summary' => $exceptionSummary,
-            'links' => $this->links($orderRow, $resolvedAttemptId, $shareId !== '' ? $shareId : null, $attempt),
+            'links' => $this->links($order, $orderRow, $resolvedAttemptId, $shareId !== '' ? $shareId : null, $attempt, $latestPaymentAttempt, $paymentEvents[0] ?? null, $activeGrant),
         ];
     }
 
@@ -905,6 +1131,15 @@ final class OrderLinkageSupport
         return DB::table('payment_attempts')
             ->selectRaw('count(*)')
             ->whereColumn('payment_attempts.order_no', 'orders.order_no');
+    }
+
+    private function accessProjectionField(string $column): QueryBuilder
+    {
+        return DB::table('unified_access_projections')
+            ->select($column)
+            ->whereColumn('unified_access_projections.attempt_id', 'orders.target_attempt_id')
+            ->orderByRaw('coalesce(refreshed_at, produced_at) desc')
+            ->limit(1);
     }
 
     private function benefitField(string $column): QueryBuilder
@@ -994,6 +1229,60 @@ final class OrderLinkageSupport
                 ->where(function (QueryBuilder $builder): void {
                     $builder->whereColumn('benefit_grants.order_no', 'orders.order_no')
                         ->orWhereColumn('benefit_grants.attempt_id', 'orders.target_attempt_id');
+                });
+        };
+    }
+
+    private function revokedBenefitExistsQuery(): \Closure
+    {
+        return function (QueryBuilder $benefitQuery): void {
+            $benefitQuery
+                ->selectRaw('1')
+                ->from('benefit_grants')
+                ->whereRaw("lower(coalesce(benefit_grants.status, '')) in (?, ?)", ['revoked', 'expired'])
+                ->where(function (QueryBuilder $builder): void {
+                    $builder->whereColumn('benefit_grants.order_no', 'orders.order_no')
+                        ->orWhereColumn('benefit_grants.attempt_id', 'orders.target_attempt_id');
+                });
+        };
+    }
+
+    private function paymentAttemptExistsQuery(): \Closure
+    {
+        return function (QueryBuilder $attemptQuery): void {
+            $attemptQuery
+                ->selectRaw('1')
+                ->from('payment_attempts')
+                ->whereColumn('payment_attempts.order_no', 'orders.order_no');
+        };
+    }
+
+    /**
+     * @param  list<string>  $states
+     */
+    private function paymentAttemptStateExistsQuery(array $states): \Closure
+    {
+        return function (QueryBuilder $attemptQuery) use ($states): void {
+            $attemptQuery
+                ->selectRaw('1')
+                ->from('payment_attempts')
+                ->whereColumn('payment_attempts.order_no', 'orders.order_no')
+                ->whereIn('payment_attempts.state', $states);
+        };
+    }
+
+    private function webhookErrorExistsQuery(): \Closure
+    {
+        return function (QueryBuilder $eventQuery): void {
+            $eventQuery
+                ->selectRaw('1')
+                ->from('payment_events')
+                ->whereColumn('payment_events.order_no', 'orders.order_no')
+                ->where(function (QueryBuilder $builder): void {
+                    $builder->where('signature_ok', 0)
+                        ->orWhereIn('status', ['failed', 'rejected', 'post_commit_failed'])
+                        ->orWhereIn('handle_status', ['failed', 'reprocess_failed'])
+                        ->orWhereNotNull('last_error_message');
                 });
         };
     }
@@ -1122,7 +1411,9 @@ final class OrderLinkageSupport
 
         return DB::table('payment_events')
             ->select([
+                'id',
                 'provider_event_id',
+                'payment_attempt_id',
                 'status',
                 'handle_status',
                 'signature_ok',
@@ -1133,6 +1424,37 @@ final class OrderLinkageSupport
             ])
             ->where('order_no', $orderNo)
             ->orderByRaw('coalesce(processed_at, handled_at, updated_at, created_at) desc')
+            ->limit(10)
+            ->get()
+            ->all();
+    }
+
+    /**
+     * @return list<object>
+     */
+    private function paymentAttempts(string $orderNo): array
+    {
+        if ($orderNo === '' || ! SchemaBaseline::hasTable('payment_attempts')) {
+            return [];
+        }
+
+        return DB::table('payment_attempts')
+            ->select([
+                'id',
+                'attempt_no',
+                'provider',
+                'state',
+                'provider_trade_no',
+                'external_trade_no',
+                'provider_session_ref',
+                'callback_received_at',
+                'verified_at',
+                'finalized_at',
+                'last_error_code',
+                'last_error_message',
+            ])
+            ->where('order_no', $orderNo)
+            ->orderByDesc('attempt_no')
             ->limit(10)
             ->get()
             ->all();
@@ -1252,6 +1574,18 @@ final class OrderLinkageSupport
             ->first();
     }
 
+    private function accessProjection(?string $attemptId): ?object
+    {
+        if ($attemptId === null || ! SchemaBaseline::hasTable('unified_access_projections')) {
+            return null;
+        }
+
+        return DB::table('unified_access_projections')
+            ->where('attempt_id', $attemptId)
+            ->orderByRaw('coalesce(refreshed_at, produced_at) desc')
+            ->first();
+    }
+
     /**
      * @return list<array{label:string,value:string,hint:?string,kind:string,state:?string}>
      */
@@ -1264,55 +1598,56 @@ final class OrderLinkageSupport
         array $deliveryState,
         ?string $resolvedAttemptId,
     ): array {
-        $paymentHandled = collect($paymentEvents)->contains(function (object $event): bool {
-            return filled($event->handled_at ?? null)
-                || in_array(strtolower(trim((string) ($event->handle_status ?? ''))), ['processed', 'handled', 'succeeded'], true);
-        });
-
-        $paid = $this->isPaidLike((string) ($order->status ?? '')) || filled($order->paid_at ?? null);
         $snapshotStatus = strtolower(trim((string) ($snapshot->status ?? '')));
         $reportJobStatus = strtolower(trim((string) ($reportJob->status ?? '')));
         $pdfReady = (bool) ($deliveryState['can_download_pdf'] ?? false);
+        $fields = [];
 
-        return [
-            $this->pillField(
-                'paid_but_no_grant',
-                $paid && $activeGrant === null ? 'triggered' : 'clear',
-                $paid && $activeGrant === null ? 'danger' : 'success',
-                $paid && $activeGrant === null ? 'Payment succeeded but no active benefit_grant exists.' : null
-            ),
-            $this->pillField(
-                'grant_exists_but_snapshot_missing',
-                $activeGrant !== null && $snapshot === null ? 'triggered' : 'clear',
-                $activeGrant !== null && $snapshot === null ? 'danger' : 'success',
-                $activeGrant !== null && $snapshot === null ? 'Unlock fact exists without a report_snapshot.' : null
-            ),
-            $this->pillField(
-                'snapshot_failed',
-                in_array($snapshotStatus, ['failed', 'error'], true) || in_array($reportJobStatus, ['failed', 'error'], true) ? 'triggered' : 'clear',
-                in_array($snapshotStatus, ['failed', 'error'], true) || in_array($reportJobStatus, ['failed', 'error'], true) ? 'danger' : 'success',
-                $this->shortText(($snapshot->last_error ?? null) ?: ($reportJob->last_error ?? null))
-            ),
-            $this->pillField(
-                'pdf_unavailable',
-                $resolvedAttemptId !== null && ! $pdfReady ? 'triggered' : 'clear',
-                $resolvedAttemptId !== null && ! $pdfReady ? 'warning' : 'success',
-                $resolvedAttemptId !== null && ! $pdfReady ? 'Attempt is linked but PDF is not marked ready.' : null
-            ),
-            $this->pillField(
-                'order_exists_but_no_payment_handled',
-                ! $paymentHandled ? 'triggered' : 'clear',
-                ! $paymentHandled ? 'warning' : 'success',
-                ! $paymentHandled ? 'No handled payment event summary is available yet.' : null
-            ),
-        ];
+        foreach (array_keys(self::EXCEPTION_LABELS) as $key) {
+            $triggered = $this->matchesException($key, $order);
+            $fields[] = $this->pillField(
+                $key,
+                $triggered ? 'triggered' : 'clear',
+                $triggered ? $this->exceptionState($key) : 'success',
+                $triggered ? $this->exceptionHint($key, $order) : null
+            );
+        }
+
+        $fields[] = $this->pillField(
+            'grant_exists_but_snapshot_missing',
+            $activeGrant !== null && $snapshot === null ? 'triggered' : 'clear',
+            $activeGrant !== null && $snapshot === null ? 'danger' : 'success',
+            $activeGrant !== null && $snapshot === null ? 'Unlock fact exists without a report_snapshot.' : null
+        );
+        $fields[] = $this->pillField(
+            'snapshot_failed',
+            in_array($snapshotStatus, ['failed', 'error'], true) || in_array($reportJobStatus, ['failed', 'error'], true) ? 'triggered' : 'clear',
+            in_array($snapshotStatus, ['failed', 'error'], true) || in_array($reportJobStatus, ['failed', 'error'], true) ? 'danger' : 'success',
+            $this->shortText(($snapshot->last_error ?? null) ?: ($reportJob->last_error ?? null))
+        );
+        $fields[] = $this->pillField(
+            'pdf_unavailable',
+            $resolvedAttemptId !== null && ! $pdfReady ? 'triggered' : 'clear',
+            $resolvedAttemptId !== null && ! $pdfReady ? 'warning' : 'success',
+            $resolvedAttemptId !== null && ! $pdfReady ? 'Attempt is linked but PDF is not marked ready.' : null
+        );
+
+        return $fields;
     }
 
     /**
      * @return list<array{label:string,url:string,kind:string}>
      */
-    private function links(object $order, ?string $attemptId, ?string $shareId, ?object $attempt): array
-    {
+    private function links(
+        object $orderRecord,
+        object $order,
+        ?string $attemptId,
+        ?string $shareId,
+        ?object $attempt,
+        ?object $latestPaymentAttempt,
+        ?object $latestPaymentEvent,
+        ?object $activeGrant,
+    ): array {
         $base = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
         $localeSegment = $this->localeSegment((string) ($attempt->locale ?? ''));
         $links = [];
@@ -1357,13 +1692,130 @@ final class OrderLinkageSupport
             ];
         }
 
+        if (($latestPaymentAttempt->id ?? null) !== null) {
+            $links[] = [
+                'label' => 'Latest payment attempt',
+                'url' => PaymentAttemptResource::getUrl('view', ['record' => (string) $latestPaymentAttempt->id]),
+                'kind' => 'ops',
+            ];
+        }
+
+        if (($latestPaymentEvent->id ?? null) !== null) {
+            $links[] = [
+                'label' => 'Latest payment event',
+                'url' => PaymentEventResource::getUrl('view', ['record' => (string) $latestPaymentEvent->id]),
+                'kind' => 'ops',
+            ];
+        }
+
+        if (($activeGrant->id ?? null) !== null) {
+            $links[] = [
+                'label' => 'Latest benefit grant',
+                'url' => BenefitGrantResource::getUrl('view', ['record' => (string) $activeGrant->id]),
+                'kind' => 'ops',
+            ];
+        }
+
         $links[] = [
             'label' => 'Order Lookup',
             'url' => '/ops/order-lookup',
             'kind' => 'ops',
         ];
 
+        if (filled($orderRecord->last_reconciled_at ?? null) && trim((string) ($order->order_no ?? '')) !== '') {
+            $links[] = [
+                'label' => 'Compensation hint',
+                'url' => '#compensation-summary',
+                'kind' => 'ops',
+            ];
+        }
+
         return $links;
+    }
+
+    private function resolvedPaymentStateValue(object $order): string
+    {
+        return Order::normalizePaymentState(
+            (string) ($order->payment_state ?? ''),
+            (string) ($order->status ?? '')
+        );
+    }
+
+    private function resolvedGrantStateValue(object $order): string
+    {
+        return Order::normalizeGrantState(
+            (string) ($order->grant_state ?? ''),
+            (string) ($order->status ?? '')
+        );
+    }
+
+    private function latestPaymentAttemptState(object $order): string
+    {
+        return PaymentAttempt::normalizedState((string) ($order->latest_payment_attempt_state ?? ''));
+    }
+
+    private function matchesException(string $key, object $order): bool
+    {
+        $paymentState = $this->resolvedPaymentStateValue($order);
+        $grantState = $this->resolvedGrantStateValue($order);
+        $attemptState = $this->latestPaymentAttemptState($order);
+        $hasAttempt = (int) ($order->payment_attempts_count ?? 0) > 0;
+        $hasActiveGrant = $this->hasActiveBenefitGrant($order);
+        $latestHandleStatus = strtolower(trim((string) ($order->latest_handle_status ?? '')));
+        $latestPaymentStatus = strtolower(trim((string) ($order->latest_payment_status ?? '')));
+        $latestPaymentError = trim((string) ($order->latest_payment_error ?? ''));
+        $latestSignatureOk = $order->latest_signature_ok ?? null;
+
+        return match ($key) {
+            'pending_unpaid' => in_array($paymentState, [Order::PAYMENT_STATE_CREATED, Order::PAYMENT_STATE_PENDING], true)
+                && (! $hasAttempt || $attemptState === PaymentAttempt::STATE_INITIATED),
+            'provider_created_not_paid' => in_array($paymentState, [Order::PAYMENT_STATE_CREATED, Order::PAYMENT_STATE_PENDING], true)
+                && in_array($attemptState, [PaymentAttempt::STATE_PROVIDER_CREATED, PaymentAttempt::STATE_CLIENT_PRESENTED], true),
+            'callback_missing' => in_array($paymentState, [Order::PAYMENT_STATE_CREATED, Order::PAYMENT_STATE_PENDING], true)
+                && in_array($attemptState, [PaymentAttempt::STATE_CALLBACK_RECEIVED, PaymentAttempt::STATE_VERIFIED], true),
+            'paid_no_grant' => $paymentState === Order::PAYMENT_STATE_PAID
+                && $grantState !== Order::GRANT_STATE_GRANTED
+                && ! $hasActiveGrant,
+            'grant_without_paid' => $hasActiveGrant
+                && ! in_array($paymentState, [Order::PAYMENT_STATE_PAID, Order::PAYMENT_STATE_REFUNDED], true),
+            'webhook_error' => $latestSignatureOk !== null && ! $this->truthy($latestSignatureOk)
+                || in_array($latestPaymentStatus, ['failed', 'rejected', 'post_commit_failed'], true)
+                || in_array($latestHandleStatus, ['failed', 'reprocess_failed'], true)
+                || $latestPaymentError !== '',
+            'compensation_touched' => filled($order->last_reconciled_at ?? null),
+            'refund_revoked' => $paymentState === Order::PAYMENT_STATE_REFUNDED
+                && in_array(strtolower(trim((string) ($order->latest_benefit_status ?? ''))), ['revoked', 'expired'], true),
+            'late_callback_corrected' => $paymentState === Order::PAYMENT_STATE_PAID
+                && filled($order->last_reconciled_at ?? null)
+                && filled($order->paid_at ?? null)
+                && Carbon::parse((string) $order->paid_at)->gt(Carbon::parse((string) $order->last_reconciled_at)),
+            default => false,
+        };
+    }
+
+    private function exceptionState(string $key): string
+    {
+        return match ($key) {
+            'webhook_error', 'paid_no_grant', 'grant_without_paid' => 'danger',
+            'late_callback_corrected' => 'success',
+            default => 'warning',
+        };
+    }
+
+    private function exceptionHint(string $key, object $order): string
+    {
+        return match ($key) {
+            'pending_unpaid' => 'No provider-created attempt is visible yet. This still looks like a true unpaid order.',
+            'provider_created_not_paid' => 'A provider session exists, but the order has not reached a paid terminal state.',
+            'callback_missing' => 'Attempt reached callback_received/verified while the order still reads pending. Check webhook handling.',
+            'paid_no_grant' => 'Payment is confirmed, but grant/access is not unlocked yet.',
+            'grant_without_paid' => 'A grant exists without a paid order state. Audit entitlement issuance.',
+            'webhook_error' => 'Latest webhook signature or handling status indicates an error.',
+            'compensation_touched' => 'Compensation touched this order at '.$this->formatTimestamp($order->last_reconciled_at ?? null).'.',
+            'refund_revoked' => 'Refunded order has a revoked/expired grant trail.',
+            'late_callback_corrected' => 'Late callback corrected an order after compensation already touched it.',
+            default => '-',
+        };
     }
 
     private function resolvedAttemptId(object $order): ?string
@@ -1404,7 +1856,7 @@ final class OrderLinkageSupport
         return match (true) {
             $status === '' => 'gray',
             in_array($status, ['paid', 'fulfilled', 'active', 'ready', 'full', 'completed', 'processed', 'handled', 'succeeded'], true) => 'success',
-            in_array($status, ['pending', 'queued', 'running', 'processing'], true) => 'warning',
+            in_array($status, ['pending', 'queued', 'running', 'processing', 'initiated', 'provider_created', 'client_presented', 'callback_received', 'verified'], true) => 'warning',
             in_array($status, ['failed', 'error', 'revoked', 'expired', 'invalid', 'refunded'], true) => 'danger',
             default => 'gray',
         };

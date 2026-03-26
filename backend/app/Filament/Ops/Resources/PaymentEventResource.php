@@ -8,6 +8,7 @@ use App\Filament\Ops\Resources\PaymentEventResource\Pages;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Filament\Shared\BaseTenantResource;
 use App\Models\AdminApproval;
+use App\Models\Order;
 use App\Models\PaymentEvent;
 use App\Services\Audit\AuditLogger;
 use App\Support\Rbac\PermissionNames;
@@ -91,6 +92,27 @@ class PaymentEventResource extends BaseTenantResource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
+                Tables\Actions\Action::make('openOrder')
+                    ->label('Open Order')
+                    ->icon('heroicon-o-shopping-cart')
+                    ->url(function (PaymentEvent $record): ?string {
+                        $orderId = Order::query()
+                            ->withoutGlobalScopes()
+                            ->where('order_no', (string) ($record->order_no ?? ''))
+                            ->value('id');
+
+                        return $orderId !== null ? OrderResource::getUrl('view', ['record' => (string) $orderId]) : null;
+                    })
+                    ->openUrlInNewTab(false)
+                    ->visible(fn (PaymentEvent $record): bool => filled($record->order_no ?? null)),
+                Tables\Actions\Action::make('openAttempt')
+                    ->label('Open Attempt')
+                    ->icon('heroicon-o-banknotes')
+                    ->url(fn (PaymentEvent $record): ?string => filled($record->payment_attempt_id ?? null)
+                        ? PaymentAttemptResource::getUrl('view', ['record' => (string) $record->payment_attempt_id])
+                        : null)
+                    ->openUrlInNewTab(false)
+                    ->visible(fn (PaymentEvent $record): bool => filled($record->payment_attempt_id ?? null)),
                 Tables\Actions\Action::make('requestReprocess')
                     ->label('Request Reprocess')
                     ->icon('heroicon-o-arrow-path')

@@ -25,8 +25,15 @@ class ViewOrder extends ViewRecord
     public array $orderSummary = ['fields' => [], 'notes' => []];
 
     /**
+     * @var list<array<string,mixed>>
+     */
+    public array $paymentAttempts = [];
+
+    /**
      * @var list<array{
+     *     id:string,
      *     provider_event_id:string,
+     *     payment_attempt_id:string,
      *     status:array{label:string,state:string},
      *     handle_status:array{label:string,state:string},
      *     signature:array{label:string,state:string},
@@ -56,6 +63,16 @@ class ViewOrder extends ViewRecord
     /**
      * @var array{fields:list<array{label:string,value:string,hint:?string,kind:string,state:?string}>,notes:list<string>}
      */
+    public array $accessSummary = ['fields' => [], 'notes' => []];
+
+    /**
+     * @var array{fields:list<array{label:string,value:string,hint:?string,kind:string,state:?string}>,notes:list<string>}
+     */
+    public array $compensationSummary = ['fields' => [], 'notes' => []];
+
+    /**
+     * @var array{fields:list<array{label:string,value:string,hint:?string,kind:string,state:?string}>,notes:list<string>}
+     */
     public array $exceptionSummary = ['fields' => [], 'notes' => []];
 
     /**
@@ -71,27 +88,30 @@ class ViewOrder extends ViewRecord
 
         $this->headline = $detail['headline'];
         $this->orderSummary = $detail['order_summary'];
+        $this->paymentAttempts = $detail['payment_attempts'];
         $this->paymentEvents = $detail['payment_events'];
         $this->benefitSummary = $detail['benefit_summary'];
         $this->reportSummary = $detail['report_summary'];
         $this->attemptSummary = $detail['attempt_summary'];
+        $this->accessSummary = $detail['access_summary'];
+        $this->compensationSummary = $detail['compensation_summary'];
         $this->exceptionSummary = $detail['exception_summary'];
         $this->links = $detail['links'];
     }
 
     public function getTitle(): string
     {
-        return 'Unlock / Commerce Linkage';
+        return 'Commerce Timeline';
     }
 
     public function getHeading(): string
     {
-        return 'Unlock / Commerce Linkage';
+        return 'Commerce Timeline';
     }
 
     public function getSubheading(): ?string
     {
-        return 'Read-only order diagnostics across payment, grant, report, PDF, and share linkage.';
+        return 'Read-only order diagnostics across payment attempts, webhook events, unlock, access, compensation, report, PDF, and share linkage.';
     }
 
     public function getBreadcrumb(): string

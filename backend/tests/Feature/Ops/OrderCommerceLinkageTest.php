@@ -44,7 +44,6 @@ final class OrderCommerceLinkageTest extends TestCase
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/orders')
             ->assertOk()
-            ->assertSee('Unlock / Commerce Linkage')
             ->assertDontSee('Request Manual Grant')
             ->assertDontSee('Request Refund');
 
@@ -62,6 +61,12 @@ final class OrderCommerceLinkageTest extends TestCase
             ->assertTableColumnExists('amount_cents')
             ->assertTableColumnExists('currency')
             ->assertTableColumnExists('status')
+            ->assertTableColumnExists('payment_state')
+            ->assertTableColumnExists('grant_state')
+            ->assertTableColumnExists('commerce_exception')
+            ->assertTableColumnExists('payment_attempts_count')
+            ->assertTableColumnExists('latest_payment_attempt_state')
+            ->assertTableColumnExists('compensation_status')
             ->assertTableColumnExists('latest_payment_status')
             ->assertTableColumnExists('target_attempt_id')
             ->assertTableColumnExists('requested_sku')
@@ -89,10 +94,13 @@ final class OrderCommerceLinkageTest extends TestCase
             ->get('/ops/orders/'.$chain['order']->getKey())
             ->assertOk()
             ->assertSee('Order Summary')
+            ->assertSee('Payment Attempts')
             ->assertSee('Payment Events')
             ->assertSee('Benefit / Unlock')
             ->assertSee('Report / PDF Delivery')
-            ->assertSee('Attempt Linkage')
+            ->assertSee('Assessment Attempt Linkage')
+            ->assertSee('Unified Access')
+            ->assertSee('Compensation Summary')
             ->assertSee('Exception Diagnostics')
             ->assertSee('unlock: unlocked')
             ->assertSee('paid')
@@ -100,11 +108,16 @@ final class OrderCommerceLinkageTest extends TestCase
             ->assertSee('INTJ')
             ->assertSee((string) $chain['order_no'])
             ->assertSee((string) $chain['attempt_id'])
+            ->assertSee((string) $chain['payment_attempt_id'])
             ->assertSee((string) $chain['share_id'])
             ->assertSee('Order page')
             ->assertSee('Result page')
             ->assertSee('Report page')
             ->assertSee('Share page')
+            ->assertSee('Latest payment attempt')
+            ->assertSee('Latest payment event')
+            ->assertSee('Latest benefit grant')
+            ->assertSee('Order Lookup')
             ->assertDontSee('payload_json')
             ->assertDontSee('report_json')
             ->assertDontSee('report_full_json')
@@ -193,6 +206,7 @@ final class OrderCommerceLinkageTest extends TestCase
      *     order:Order,
      *     order_no:string,
      *     attempt_id:string,
+     *     payment_attempt_id:string,
      *     share_id:string,
      *     payment_secret:string,
      *     report_secret:string
@@ -204,6 +218,8 @@ final class OrderCommerceLinkageTest extends TestCase
         $shareId = (string) Str::uuid();
         $orderId = (string) Str::uuid();
         $paymentEventId = (string) Str::uuid();
+        $paymentAttemptId = (string) Str::uuid();
+        $benefitGrantId = (string) Str::uuid();
         $orderNo ??= 'ord_diag_'.Str::lower(Str::random(6));
         $paymentSecret = 'payment-secret-'.Str::lower(Str::random(6));
         $reportSecret = 'report-secret-'.Str::lower(Str::random(6));
@@ -313,6 +329,12 @@ final class OrderCommerceLinkageTest extends TestCase
         if (Schema::hasColumn('orders', 'provider_order_id')) {
             $orderRow['provider_order_id'] = 'pi_'.$orderNo;
         }
+        if (Schema::hasColumn('orders', 'payment_state')) {
+            $orderRow['payment_state'] = 'paid';
+        }
+        if (Schema::hasColumn('orders', 'grant_state')) {
+            $orderRow['grant_state'] = 'granted';
+        }
         if (Schema::hasColumn('orders', 'fulfilled_at')) {
             $orderRow['fulfilled_at'] = now()->subMinutes(7);
         }
@@ -346,6 +368,39 @@ final class OrderCommerceLinkageTest extends TestCase
 
         DB::table('orders')->insert($orderRow);
 
+        if (Schema::hasTable('payment_attempts')) {
+            DB::table('payment_attempts')->insert([
+                'id' => $paymentAttemptId,
+                'org_id' => $orgId,
+                'order_id' => $orderId,
+                'order_no' => $orderNo,
+                'attempt_no' => 1,
+                'provider' => 'stripe',
+                'channel' => 'web',
+                'provider_app' => 'web-primary',
+                'pay_scene' => 'checkout',
+                'state' => 'paid',
+                'external_trade_no' => 'ext_'.$orderNo,
+                'provider_trade_no' => 'pi_'.$orderNo,
+                'provider_session_ref' => 'cs_'.$orderNo,
+                'amount_expected' => 2990,
+                'currency' => 'USD',
+                'payload_meta_json' => json_encode(['surface' => 'ops-test'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'latest_payment_event_id' => null,
+                'initiated_at' => now()->subMinutes(10),
+                'provider_created_at' => now()->subMinutes(10),
+                'client_presented_at' => now()->subMinutes(10),
+                'callback_received_at' => now()->subMinutes(9),
+                'verified_at' => now()->subMinutes(9),
+                'finalized_at' => now()->subMinutes(9),
+                'last_error_code' => null,
+                'last_error_message' => null,
+                'meta_json' => null,
+                'created_at' => now()->subMinutes(10),
+                'updated_at' => now()->subMinutes(9),
+            ]);
+        }
+
         DB::table('payment_events')->insert([
             'id' => $paymentEventId,
             'org_id' => $orgId,
@@ -353,6 +408,7 @@ final class OrderCommerceLinkageTest extends TestCase
             'provider_event_id' => 'evt_'.Str::lower(Str::random(8)),
             'order_id' => $orderId,
             'order_no' => $orderNo,
+            'payment_attempt_id' => $paymentAttemptId,
             'event_type' => 'payment_intent.succeeded',
             'signature_ok' => 1,
             'status' => 'paid',
@@ -377,8 +433,14 @@ final class OrderCommerceLinkageTest extends TestCase
             'scale_uid' => '55555555-5555-4555-8555-555555555555',
         ]);
 
+        if (Schema::hasTable('payment_attempts')) {
+            DB::table('payment_attempts')
+                ->where('id', $paymentAttemptId)
+                ->update(['latest_payment_event_id' => $paymentEventId]);
+        }
+
         DB::table('benefit_grants')->insert([
-            'id' => (string) Str::uuid(),
+            'id' => $benefitGrantId,
             'org_id' => $orgId,
             'user_id' => '1001',
             'benefit_code' => 'MBTI_FULL_REPORT',
@@ -395,6 +457,23 @@ final class OrderCommerceLinkageTest extends TestCase
             'created_at' => now()->subMinutes(8),
             'updated_at' => now()->subMinutes(8),
         ]);
+
+        if (Schema::hasTable('unified_access_projections')) {
+            DB::table('unified_access_projections')->insert([
+                'attempt_id' => $attemptId,
+                'access_state' => 'granted',
+                'report_state' => 'ready',
+                'pdf_state' => 'ready',
+                'reason_code' => 'payment_granted',
+                'projection_version' => 1,
+                'actions_json' => json_encode(['can_download_pdf' => true], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'payload_json' => json_encode(['source' => 'ops-test'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'produced_at' => now()->subMinutes(8),
+                'refreshed_at' => now()->subMinutes(7),
+                'created_at' => now()->subMinutes(8),
+                'updated_at' => now()->subMinutes(7),
+            ]);
+        }
 
         DB::table('shares')->insert([
             'id' => $shareId,
@@ -434,6 +513,7 @@ final class OrderCommerceLinkageTest extends TestCase
             'order' => $order,
             'order_no' => $orderNo,
             'attempt_id' => $attemptId,
+            'payment_attempt_id' => $paymentAttemptId,
             'share_id' => $shareId,
             'payment_secret' => $paymentSecret,
             'report_secret' => $reportSecret,
