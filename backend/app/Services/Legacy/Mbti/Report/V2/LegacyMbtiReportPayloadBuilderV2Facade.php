@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services\Legacy\Mbti\Report\V2;
 
+/**
+ * Legacy facade retained so builder golden tests can keep their historical entrypoint.
+ */
 final class LegacyMbtiReportPayloadBuilderV2Facade
 {
     public function __construct(private readonly LegacyMbtiReportPayloadComposer $composer)

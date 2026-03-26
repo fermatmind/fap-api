@@ -5,10 +5,10 @@ Date: 2026-01-29
 ## 相关入口文件（questions 输出链路）
 - `backend/routes/api.php`
   - v0.2 已有 `/api/v0.3/content-packs/{pack_id}/{dir_version}/questions`
-  - v0.2 MBTI questions: `MbtiController::questions()`
+  - 历史上 v0.2 MBTI questions 曾走 `MbtiController::questions()`；该控制器已在后续 PR 中删除
   - v0.3 目前仅有 scales index/show/lookup，无 questions endpoint
-- `backend/app/Http/Controllers/MbtiController.php`
-  - 直接读 content_packages/*/questions.json，固定 MBTI 144 题校验
+- 历史入口：`backend/app/Http/Controllers/MbtiController.php`（已删除）
+  - 当时直接读 content_packages/*/questions.json，固定 MBTI 144 题校验
 - `backend/app/Http/Controllers/API/V0_2/ContentPacksController.php`
   - 使用 `ContentPacksIndex` 定位 questions.json 与 manifest.json
 - `backend/app/Services/Content/ContentPacksIndex.php`
@@ -19,7 +19,7 @@ Date: 2026-01-29
 ## pack 定位与读取关键点
 - `content_packs.root` 指向 repo 根目录的 `content_packages`（local/s3 兼容）
 - `ContentPacksIndex::find(pack_id, dir_version)` 为 v0.2 内容包读取主入口
-- MBTI 读取直接按默认 region/locale/dir_version 组路径（`MbtiController`）
+- 历史上 MBTI 读取曾直接按默认 region/locale/dir_version 组路径（`MbtiController`）；current runtime 已不再依赖该控制器
 
 ## FapSelfCheck 现有结构
 - `backend/app/Console/Commands/FapSelfCheck.php`

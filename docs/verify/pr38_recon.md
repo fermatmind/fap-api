@@ -5,7 +5,7 @@
 - 相关入口文件：
   - backend/app/Services/Content/ContentLoaderService.php
   - backend/app/Services/ContentPackResolver.php
-  - backend/app/Http/Controllers/MbtiController.php
+  - 历史入口：backend/app/Http/Controllers/MbtiController.php（已删除）
 
 - 相关测试：
   - backend/tests/Unit/Services/ContentLoaderMtimeCacheTest.php（新增）
@@ -14,7 +14,7 @@
 - 需要新增/修改点：
   - ContentLoaderService：cache key 加入 filemtime（已存在），并确保 Cache 异常自动降级直读
   - ContentPackResolver：loader 回调仅返回 abs path，读盘由 ContentLoaderService 统一完成
-  - MbtiController::canAccessAttemptReport：anon/user 不匹配时支持 share_id 校验（query 优先，header 次之）
+  - 历史整改项：MbtiController::canAccessAttemptReport；current share/access 校验已迁到 current v0.3 read path
   - 404 口径保持一致
 
 - 风险点与规避：

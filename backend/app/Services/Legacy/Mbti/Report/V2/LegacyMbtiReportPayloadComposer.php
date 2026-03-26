@@ -12,6 +12,9 @@ use App\Services\Legacy\Mbti\Report\V2\Sections\NarrativeSectionBuilder;
 use App\Services\Legacy\Mbti\Report\V2\Sections\RecommendationsSectionBuilder;
 use App\Services\Legacy\Mbti\Report\V2\Sections\ScoresSectionBuilder;
 
+/**
+ * Legacy section composer retained for compat/test coverage only.
+ */
 final class LegacyMbtiReportPayloadComposer
 {
     /**

@@ -9,8 +9,8 @@
   - 采用显式 $commands 列表 + Commands 目录自动加载；新增命令建议显式注册避免缓存找不到。
 - backend/app/Http/Controllers/LookupController.php
   - 现有 lookup 接口使用统一 envelope：ok=true/false + error/message。
-- backend/app/Http/Controllers/MbtiController.php
-  - 现有 v0.2 scale meta / questions 参考响应结构（ok + payload）。
+- 历史参考：`backend/app/Http/Controllers/MbtiController.php` 已在后续 PR 中删除。
+  - 这里仅保留它曾提供过 v0.2 scale meta / questions 响应结构的历史备注。
 
 ## 相关 DB 表/迁移
 - 当前 migrations 中未发现 scales_registry / scale_slugs 相关表。

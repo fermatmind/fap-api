@@ -9,6 +9,11 @@ use App\Services\Rules\RuleEngine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * Internal legacy MBTI builder core retained for legacy fixture/golden coverage.
+ *
+ * Current runtime report assembly is served by ReportComposer / ReportPayloadAssembler.
+ */
 class LegacyMbtiReportPayloadBuilderV2Core
 {
     public function __construct(
@@ -431,7 +436,7 @@ try {
         'scores_pct'              => $scoresPct,
         'axis_states'             => $axisStates,
         'engine'                  => 'm3',
-        'source'                  => 'LegacyMbtiAttemptService::buildHighlights',
+        'source'                  => 'LegacyMbtiReportPayloadBuilderV2Core::buildHighlights',
     ];
 
     if (method_exists($applier, 'applyHighlights')) {

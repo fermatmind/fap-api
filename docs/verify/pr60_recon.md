@@ -29,7 +29,7 @@
 
 ```text
 38:  GET|HEAD  api/v0.2/attempts/{id}/quality API\V0_2\PsychometricsController@q…
-39:  GET|HEAD  api/v0.2/attempts/{id}/report ........... MbtiController@getReport
+39:  GET|HEAD  api/v0.2/attempts/{id}/report ........... historical `MbtiController@getReport` route (removed later)
 43:  GET|HEAD  api/v0.2/attempts/{id}/stats API\V0_2\PsychometricsController@sta…
 95:  POST      api/v0.3/attempts/start ........ API\V0_3\AttemptsController@start
 96:  POST      api/v0.3/attempts/submit ...... API\V0_3\AttemptsController@submit

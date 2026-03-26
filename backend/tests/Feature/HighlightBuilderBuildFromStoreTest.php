@@ -48,7 +48,7 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
         config()->set('fap.content.region', $region);
         config()->set('fap.content.locale', $locale);
         config()->set('fap.content.content_package_version', $version);
-        config()->set('fap.content_package_version', $version); // MbtiController / some call-sites
+        config()->set('fap.content_package_version', $version); // legacy builder / some historical call-sites
 
         // 4) 再兜底：如果有地方直接读 content.scale/content.region/content.locale
         config()->set('content.scale', $scale);

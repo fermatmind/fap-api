@@ -6,9 +6,8 @@ Date: 2026-01-29
 - `backend/routes/api.php`
   - v0.2 已有 `/api/v0.3/attempts`, `/attempts/start`, `/attempts/{id}/result`, `/attempts/{id}/report`
   - v0.3 仅有 `/api/v0.3/scales`、`/scales/lookup`、`/scales/{scale_code}`、`/scales/{scale_code}/questions`
-- `backend/app/Http/Controllers/MbtiController.php`
-  - v0.2 attempts start/submit/result/report 主链路
-  - MBTI 计分逻辑 + result_json 写入 + report v1.2 输出
+- 历史入口：`backend/app/Http/Controllers/MbtiController.php`（已删除）
+  - 当时承载 v0.2 attempts start/submit/result/report 主链路
 - `backend/app/Services/Score/MbtiAttemptScorer.php`
   - MBTI 计分核心算法（scores_pct / type_code / axis_states）
 - `backend/app/Services/Report/ReportComposer.php`
