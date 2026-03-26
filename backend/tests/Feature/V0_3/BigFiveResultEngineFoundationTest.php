@@ -43,6 +43,9 @@ final class BigFiveResultEngineFoundationTest extends TestCase
         $resultResponse->assertJsonPath('big5_public_projection_v1.schema_version', 'big5.public_projection.v1');
         $resultResponse->assertJsonPath('big5_public_projection_v1.ordered_section_keys.0', 'traits.overview');
         $resultResponse->assertJsonPath('big5_public_projection_v1.trait_bands.O', 'mid');
+        $resultResponse->assertJsonCount(30, 'big5_public_projection_v1.facet_vector');
+        $resultResponse->assertJsonPath('big5_public_projection_v1.facet_vector.0.key', 'N1');
+        $resultResponse->assertJsonPath('big5_public_projection_v1.facet_vector.0.domain', 'N');
         $resultResponse->assertJsonPath('big5_public_projection_v1.controlled_narrative_v1.version', 'controlled_narrative.v1');
         $resultResponse->assertJsonPath('big5_public_projection_v1.controlled_narrative_v1.runtime_mode', 'mock');
         $resultResponse->assertJsonPath('big5_public_projection_v1.cultural_calibration_v1.version', 'cultural_calibration.v1');
@@ -59,7 +62,11 @@ final class BigFiveResultEngineFoundationTest extends TestCase
         $reportResponse->assertOk();
         $reportResponse->assertJsonPath('big5_public_projection_v1.schema_version', 'big5.public_projection.v1');
         $reportResponse->assertJsonPath('big5_public_projection_v1.ordered_section_keys.1', 'traits.why_this_profile');
+        $reportResponse->assertJsonCount(30, 'big5_public_projection_v1.facet_vector');
+        $reportResponse->assertJsonPath('big5_public_projection_v1.facet_vector.0.key', 'N1');
+        $reportResponse->assertJsonPath('big5_public_projection_v1.facet_vector.0.domain', 'N');
         $reportResponse->assertJsonPath('report._meta.big5_public_projection_v1.schema_version', 'big5.public_projection.v1');
+        $reportResponse->assertJsonCount(30, 'report._meta.big5_public_projection_v1.facet_vector');
         $reportResponse->assertJsonPath('report._meta.big5_public_projection_v1.controlled_narrative_v1.version', 'controlled_narrative.v1');
         $reportResponse->assertJsonPath('report._meta.big5_public_projection_v1.cultural_calibration_v1.version', 'cultural_calibration.v1');
         $reportResponse->assertJsonPath('report._meta.big5_public_projection_v1.comparative_v1.version', 'comparative.norming.v1');
