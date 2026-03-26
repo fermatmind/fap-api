@@ -265,6 +265,26 @@ final class ArtifactSchemaFoundationMigrationTest extends TestCase
                     'sbl_verified_idx',
                 ],
             ],
+            'content_release_exact_manifest_files' => [
+                'content_release_exact_manifest_files',
+                [
+                    'id',
+                    'content_release_exact_manifest_id',
+                    'logical_path',
+                    'blob_hash',
+                    'size_bytes',
+                    'role',
+                    'content_type',
+                    'encoding',
+                    'checksum',
+                    'created_at',
+                    'updated_at',
+                ],
+                [
+                    'cremf_manifest_path_uq',
+                    'cremf_blob_hash_idx',
+                ],
+            ],
         ];
     }
 }

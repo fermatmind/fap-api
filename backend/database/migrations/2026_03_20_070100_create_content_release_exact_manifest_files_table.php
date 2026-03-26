@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -14,10 +15,15 @@ return new class extends Migration
             return;
         }
 
-        Schema::create('content_release_exact_manifest_files', function (Blueprint $table): void {
+        $portableAscii = $this->supportsPortableAsciiLogicalPathIndex();
+
+        Schema::create('content_release_exact_manifest_files', function (Blueprint $table) use ($portableAscii): void {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('content_release_exact_manifest_id');
-            $table->string('logical_path', 1024);
+            $logicalPath = $table->string('logical_path', 1024);
+            if ($portableAscii) {
+                $logicalPath->charset('ascii')->collation('ascii_bin');
+            }
             $table->char('blob_hash', 64);
             $table->unsignedBigInteger('size_bytes')->default(0);
             $table->string('role', 64)->nullable();
@@ -39,5 +45,12 @@ return new class extends Migration
     {
         // forward-only migration: rollback disabled to prevent data loss in production.
         // Irreversible operation: schema/data rollback handled via forward fix migrations.
+    }
+
+    private function supportsPortableAsciiLogicalPathIndex(): bool
+    {
+        $driver = DB::connection()->getDriverName();
+
+        return in_array($driver, ['mysql', 'mariadb'], true);
     }
 };
