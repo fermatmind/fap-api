@@ -35,7 +35,9 @@ class PaymentEventsRelationManager extends RelationManager
             ])
             ->defaultSort('created_at', 'desc')
             ->headerActions([])
-            ->actions([])
+            ->actions([
+                Tables\Actions\ViewAction::make(),
+            ])
             ->bulkActions([]);
     }
 }

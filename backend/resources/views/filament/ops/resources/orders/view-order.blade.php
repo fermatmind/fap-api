@@ -10,7 +10,7 @@
                     <div class="ops-shell-inline-intro">
                         <span class="ops-shell-inline-intro__eyebrow">Support diagnostic</span>
                         <p class="ops-shell-inline-intro__meta">
-                            Rooted on <code>{{ (string) ($record->order_no ?? $record->getKey()) }}</code>. This page keeps order, payment, unlock, report, PDF, and share breadcrumbs in one read-only surface.
+                            Rooted on <code>{{ (string) ($record->order_no ?? $record->getKey()) }}</code>. This page keeps order, payment attempts, webhook events, unlock, access, compensation, report, PDF, and share breadcrumbs in one read-only surface.
                         </p>
                     </div>
 
@@ -67,6 +67,54 @@
                     'fields' => $orderSummary['fields'] ?? [],
                     'notes' => $orderSummary['notes'] ?? [],
                 ])
+            </div>
+        </x-filament::section>
+
+        <x-filament::section>
+            <div class="ops-results-header">
+                <div>
+                    <h3 class="ops-results-header__title">Payment Attempts</h3>
+                    <p class="ops-results-header__meta">Backend-owned initiation timeline with provider refs, callback milestones, and final state summaries.</p>
+                </div>
+            </div>
+
+            <div class="ops-card-list mt-4">
+                @forelse ($paymentAttempts as $paymentAttempt)
+                    <div class="ops-result-card">
+                        <div class="ops-result-card__header">
+                            <div>
+                                <p class="ops-result-card__title">attempt #{{ (string) ($paymentAttempt['attempt_no'] ?? '-') }}</p>
+                                <p class="ops-result-card__meta">
+                                    provider={{ (string) ($paymentAttempt['provider'] ?? '-') }}
+                                    | callback={{ (string) ($paymentAttempt['callback_received_at'] ?? '-') }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2">
+                            <x-filament.ops.shared.status-pill
+                                :state="(string) ($paymentAttempt['state']['state'] ?? 'gray')"
+                                :label="'state: '.(string) ($paymentAttempt['state']['label'] ?? '-')"
+                            />
+                        </div>
+
+                        <div class="mt-4 space-y-2">
+                            <p class="ops-control-hint">attempt_id={{ (string) ($paymentAttempt['id'] ?? '-') }}</p>
+                            <p class="ops-control-hint">provider_trade_no={{ (string) ($paymentAttempt['provider_trade_no'] ?? '-') }}</p>
+                            <p class="ops-control-hint">external_trade_no={{ (string) ($paymentAttempt['external_trade_no'] ?? '-') }}</p>
+                            <p class="ops-control-hint">provider_session_ref={{ (string) ($paymentAttempt['provider_session_ref'] ?? '-') }}</p>
+                            <p class="ops-control-hint">verified={{ (string) ($paymentAttempt['verified_at'] ?? '-') }} | finalized={{ (string) ($paymentAttempt['finalized_at'] ?? '-') }}</p>
+                            <p class="ops-control-hint">error={{ (string) ($paymentAttempt['last_error_code'] ?? '-') }} | {{ (string) ($paymentAttempt['last_error_message'] ?? '-') }}</p>
+                        </div>
+                    </div>
+                @empty
+                    <x-filament.ops.shared.empty-state
+                        eyebrow="Payment attempts"
+                        icon="heroicon-o-banknotes"
+                        title="No payment attempts found"
+                        description="Legacy orders may still have a complete order ledger but no attempt timeline."
+                    />
+                @endforelse
             </div>
         </x-filament::section>
 
@@ -157,8 +205,8 @@
         <x-filament::section>
             <div class="ops-results-header">
                 <div>
-                    <h3 class="ops-results-header__title">Attempt Linkage</h3>
-                    <p class="ops-results-header__meta">Attempt, result, locale, region, and share attribution breadcrumbs for drill-through diagnostics.</p>
+                    <h3 class="ops-results-header__title">Assessment Attempt Linkage</h3>
+                    <p class="ops-results-header__meta">Assessment attempt, result, locale, region, and share attribution breadcrumbs for drill-through diagnostics.</p>
                 </div>
             </div>
 
@@ -170,11 +218,43 @@
             </div>
         </x-filament::section>
 
+        <x-filament::section id="compensation-summary">
+            <div class="ops-results-header">
+                <div>
+                    <h3 class="ops-results-header__title">Unified Access</h3>
+                    <p class="ops-results-header__meta">Latest access projection summary so support can see whether unlock and report posture actually propagated.</p>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                @include('filament.ops.resources.attempts.partials.field-grid', [
+                    'fields' => $accessSummary['fields'] ?? [],
+                    'notes' => $accessSummary['notes'] ?? [],
+                ])
+            </div>
+        </x-filament::section>
+
+        <x-filament::section>
+            <div class="ops-results-header">
+                <div>
+                    <h3 class="ops-results-header__title">Compensation Summary</h3>
+                    <p class="ops-results-header__meta">Latest reconcile touch, payment correction posture, and command hints without turning this page into a remediation console.</p>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                @include('filament.ops.resources.attempts.partials.field-grid', [
+                    'fields' => $compensationSummary['fields'] ?? [],
+                    'notes' => $compensationSummary['notes'] ?? [],
+                ])
+            </div>
+        </x-filament::section>
+
         <x-filament::section>
             <div class="ops-results-header">
                 <div>
                     <h3 class="ops-results-header__title">Exception Diagnostics</h3>
-                    <p class="ops-results-header__meta">Explicit v1 exception rules for support and ops, without expanding into a full BI or remediation console.</p>
+                    <p class="ops-results-header__meta">Backend-owned commerce exception taxonomy for support and ops without expanding into a full BI or remediation console.</p>
                 </div>
             </div>
 

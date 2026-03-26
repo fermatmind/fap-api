@@ -25,9 +25,9 @@ class CommerceKpiWidget extends BaseWidget
         if ($orgId <= 0) {
             return [
                 Stat::make(__('ops.widgets.paid_orders_today'), '0')->description(__('ops.widgets.select_org_to_view_metrics')),
-                Stat::make(__('ops.widgets.pending_orders'), '0')->description(__('ops.widgets.no_org_selected')),
-                Stat::make(__('ops.widgets.revenue_today'), '0')->description(__('ops.widgets.no_org_selected')),
-                Stat::make(__('ops.widgets.unlock_rate'), '0%')->description(__('ops.widgets.no_org_selected')),
+                Stat::make('Pending unresolved', '0')->description(__('ops.widgets.no_org_selected')),
+                Stat::make('Paid no grant', '0')->description(__('ops.widgets.no_org_selected')),
+                Stat::make('Compensated recently', '0')->description(__('ops.widgets.no_org_selected')),
                 Stat::make(__('ops.widgets.refund_count'), '0')->description(__('ops.widgets.no_org_selected')),
                 Stat::make(__('ops.widgets.webhook_failures'), '0')->description(__('ops.widgets.no_org_selected')),
             ];
@@ -35,40 +35,35 @@ class CommerceKpiWidget extends BaseWidget
 
         $paidOrders = (int) DB::table('orders')
             ->where('org_id', $orgId)
-            ->whereIn('status', ['paid', 'fulfilled', 'refunded'])
-            ->where('created_at', '>=', $start)
-            ->where('created_at', '<', $end)
+            ->where('payment_state', 'paid')
+            ->where('paid_at', '>=', $start)
+            ->where('paid_at', '<', $end)
             ->count();
 
-        $todayRevenue = (int) DB::table('orders')
-            ->where('org_id', $orgId)
-            ->whereIn('status', ['paid', 'fulfilled'])
-            ->where('created_at', '>=', $start)
-            ->where('created_at', '<', $end)
-            ->sum(DB::raw('COALESCE(amount_cents, 0)'));
-
-        $pendingOrders = (int) DB::table('orders')
+        $pendingUnresolved = (int) DB::table('orders')
             ->where('org_id', $orgId)
             ->whereIn('payment_state', ['created', 'pending'])
             ->count();
 
+        $paidNoGrant = (int) DB::table('orders')
+            ->where('org_id', $orgId)
+            ->where('payment_state', 'paid')
+            ->where('grant_state', '!=', 'granted')
+            ->count();
+
+        $compensatedRecently = (int) DB::table('orders')
+            ->where('org_id', $orgId)
+            ->whereNotNull('last_reconciled_at')
+            ->where('last_reconciled_at', '>=', $start)
+            ->where('last_reconciled_at', '<', $end)
+            ->count();
+
         $refundCount = (int) DB::table('orders')
             ->where('org_id', $orgId)
-            ->where('status', 'refunded')
-            ->where('updated_at', '>=', $start)
-            ->where('updated_at', '<', $end)
+            ->where('payment_state', 'refunded')
+            ->where('refunded_at', '>=', $start)
+            ->where('refunded_at', '<', $end)
             ->count();
-
-        $unlockCount = (int) DB::table('benefit_grants')
-            ->where('org_id', $orgId)
-            ->where('status', 'active')
-            ->where('created_at', '>=', $start)
-            ->where('created_at', '<', $end)
-            ->count();
-
-        $unlockRate = $paidOrders > 0
-            ? round(($unlockCount / $paidOrders) * 100, 1)
-            : 0;
 
         $webhookFailures = (int) DB::table('payment_events')
             ->where('org_id', $orgId)
@@ -83,10 +78,12 @@ class CommerceKpiWidget extends BaseWidget
 
         return [
             Stat::make(__('ops.widgets.paid_orders_today'), (string) $paidOrders),
-            Stat::make(__('ops.widgets.pending_orders'), (string) $pendingOrders)
-                ->color($pendingOrders > 0 ? 'warning' : 'success'),
-            Stat::make(__('ops.widgets.revenue_today'), (string) $todayRevenue)->description(__('ops.widgets.cents')),
-            Stat::make(__('ops.widgets.unlock_rate'), (string) $unlockRate.'%'),
+            Stat::make('Pending unresolved', (string) $pendingUnresolved)
+                ->color($pendingUnresolved > 0 ? 'warning' : 'success'),
+            Stat::make('Paid no grant', (string) $paidNoGrant)
+                ->color($paidNoGrant > 0 ? 'danger' : 'success'),
+            Stat::make('Compensated recently', (string) $compensatedRecently)
+                ->color($compensatedRecently > 0 ? 'warning' : 'gray'),
             Stat::make(__('ops.widgets.refund_count'), (string) $refundCount)
                 ->color($refundCount > 0 ? 'warning' : 'success'),
             Stat::make(__('ops.widgets.webhook_failures'), (string) $webhookFailures)

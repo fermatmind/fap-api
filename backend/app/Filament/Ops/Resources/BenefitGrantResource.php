@@ -9,6 +9,7 @@ use App\Filament\Ops\Support\StatusBadge;
 use App\Filament\Shared\BaseTenantResource;
 use App\Models\AdminApproval;
 use App\Models\BenefitGrant;
+use App\Models\Order;
 use App\Services\Audit\AuditLogger;
 use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
@@ -86,6 +87,19 @@ class BenefitGrantResource extends BaseTenantResource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
+                Tables\Actions\Action::make('openOrder')
+                    ->label('Open Order')
+                    ->icon('heroicon-o-shopping-cart')
+                    ->url(function (BenefitGrant $record): ?string {
+                        $orderId = Order::query()
+                            ->withoutGlobalScopes()
+                            ->where('order_no', (string) ($record->order_no ?? ''))
+                            ->value('id');
+
+                        return $orderId !== null ? OrderResource::getUrl('view', ['record' => (string) $orderId]) : null;
+                    })
+                    ->openUrlInNewTab(false)
+                    ->visible(fn (BenefitGrant $record): bool => filled($record->order_no ?? null)),
                 Tables\Actions\Action::make('requestRevoke')
                     ->label('Request Revoke')
                     ->icon('heroicon-o-no-symbol')
