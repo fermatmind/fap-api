@@ -57,11 +57,14 @@ final class QualitySignalExtractor
         $candidates = [
             $payload['quality'] ?? null,
             $payload['normed_json']['quality'] ?? null,
-            $snapshot['quality'] ?? null,
-            $snapshot['eq_60']['quality'] ?? null,
-            $snapshot['sds_20']['quality'] ?? null,
-            $snapshot['clinical_combo_68']['quality'] ?? null,
         ];
+
+        if (! $this->isMbtiPayload($payload)) {
+            $candidates[] = $snapshot['quality'] ?? null;
+            $candidates[] = $snapshot['eq_60']['quality'] ?? null;
+            $candidates[] = $snapshot['sds_20']['quality'] ?? null;
+            $candidates[] = $snapshot['clinical_combo_68']['quality'] ?? null;
+        }
 
         foreach ($candidates as $candidate) {
             if (is_array($candidate)) {
@@ -70,6 +73,24 @@ final class QualitySignalExtractor
         }
 
         return [];
+    }
+
+    private function isMbtiPayload(array $payload): bool
+    {
+        $candidates = [
+            $payload['scale_code'] ?? null,
+            $payload['scale_code_legacy'] ?? null,
+            $payload['scale_code_v2'] ?? null,
+        ];
+
+        foreach ($candidates as $candidate) {
+            $value = strtoupper(trim((string) $candidate));
+            if ($value === 'MBTI' || $value === 'MBTI_16_TYPE') {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

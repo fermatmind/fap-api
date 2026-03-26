@@ -441,12 +441,9 @@ class LegacyReportService
         }
 
         if ($includePsychometrics) {
-            $snapshot = $attempt->calculation_snapshot_json;
-            if (is_string($snapshot)) {
-                $decoded = json_decode($snapshot, true);
-                $snapshot = is_array($decoded) ? $decoded : null;
-            }
-            $reportPayload['psychometrics'] = $snapshot;
+            // This include is legacy-only compatibility data. Prefer current result quality and
+            // keep attempts.calculation_snapshot_json only as a fallback source for older payloads.
+            $reportPayload['psychometrics'] = $this->buildLegacyPsychometricsInclude($attempt, $result);
         }
 
         return [
@@ -463,6 +460,50 @@ class LegacyReportService
     private function resolveUserId(LegacyRequestContext $context): string
     {
         return trim((string) ($context->resolvedUserId() ?? ''));
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function buildLegacyPsychometricsInclude(Attempt $attempt, Result $result): ?array
+    {
+        $snapshot = $attempt->calculation_snapshot_json;
+        if (is_string($snapshot)) {
+            $decoded = json_decode($snapshot, true);
+            $snapshot = is_array($decoded) ? $decoded : null;
+        }
+        if (! is_array($snapshot)) {
+            $snapshot = [];
+        }
+
+        $resultPayload = is_array($result->result_json ?? null) ? $result->result_json : [];
+        $quality = $resultPayload['quality'] ?? null;
+        if (! is_array($quality)) {
+            $quality = data_get($resultPayload, 'normed_json.quality');
+        }
+        if (! is_array($quality)) {
+            $quality = $snapshot['quality'] ?? null;
+        }
+
+        if (is_array($quality)) {
+            $snapshot['quality'] = $quality;
+        }
+
+        $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? $result->scale_code ?? '')));
+        if ($scaleCode === 'MBTI') {
+            $legacyVersion = trim((string) ($snapshot['version'] ?? ''));
+            $minimal = [];
+            if ($legacyVersion !== '') {
+                $minimal['version'] = $legacyVersion;
+            }
+            if (is_array($quality)) {
+                $minimal['quality'] = $quality;
+            }
+
+            return $minimal !== [] ? $minimal : null;
+        }
+
+        return $snapshot !== [] ? $snapshot : null;
     }
 
     private function resolveAnonId(LegacyRequestContext $context): string
