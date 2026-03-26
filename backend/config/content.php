@@ -2,6 +2,7 @@
 
 // file: backend/config/content.php
 // 本文件为 legacy/兼容桥接，内容包定位以 config/content_packs.php 为单一真相源。
+// MBTI current canonical dir 也以 content_packs.canonical_dir_versions.MBTI 为准。
 
 return [
     /**
@@ -26,10 +27,11 @@ return [
      * "No default content_package_version configured for scale=default."
      */
     'default_versions' => [
-        // ✅ 线上默认 scale=default 时用这个
+        // ✅ 线上默认 scale=default 时用当前 canonical MBTI dir
         'default' => env('FAP_DEFAULT_DIR_VERSION', 'MBTI-CN-v0.3'),
 
         // ✅ 可选：兼容旧路径/旧调用（如果历史上有人传 scale=MBTI）
+        // 这里仍然指向 current canonical，而不是 compat alias dir。
         'MBTI' => env('FAP_DEFAULT_DIR_VERSION', 'MBTI-CN-v0.3'),
     ],
 

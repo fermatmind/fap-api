@@ -23,6 +23,8 @@ return [
     // Content path read mode and publish mode.
     // content_path_mode: legacy|dual_prefer_old|dual_prefer_new|v2
     // content_publish_mode: legacy|dual|v2
+    // Note: for MBTI, current canonical dir is still defined by
+    // content_packs.canonical_dir_versions.MBTI. The v2 maps below are compat identity/path aliases.
     'content_path_mode' => env('FAP_CONTENT_PATH_MODE', 'legacy'),
     'content_publish_mode' => env('FAP_CONTENT_PUBLISH_MODE', 'legacy'),
 
@@ -72,6 +74,8 @@ return [
         'EQ_60' => 'EQ_60',
     ],
 
+    // v2 pack/dir maps are compat aliases for dual-code/read-path migration.
+    // They do not redefine the current runtime canonical MBTI content source.
     'pack_id_map_v2' => [
         'MBTI' => 'MBTI_PERSONALITY_TEST_16_TYPES.cn-mainland.zh-CN.v0.3',
         'BIG5_OCEAN' => 'BIG_FIVE_OCEAN_MODEL',

@@ -205,6 +205,7 @@ trait ReportPayloadAssemblerOverridesTrait
             }
         }
 
+        // Compat fallback only: current main path is pack chain -> manifest-declared overrides docs.
         if (empty($docs) && is_callable($ctx['loadReportAssetJson'] ?? null)) {
             $raw = ($ctx['loadReportAssetJson'])($legacyContentPackageDir, 'report_overrides.json');
             if (is_object($raw)) {
