@@ -372,6 +372,14 @@ class AttemptSubmitTxService
             if (in_array($scaleCode, ['BIG5_OCEAN', 'SDS_20', 'EQ_60'], true) && is_array($resultJson['normed_json'] ?? null)) {
                 $resultJson = array_merge($resultJson, $resultJson['normed_json']);
             }
+            if (
+                $scaleCode === 'MBTI'
+                &&
+                ! is_array($resultJson['quality'] ?? null)
+                && is_array($resultJson['normed_json']['quality'] ?? null)
+            ) {
+                $resultJson['quality'] = $resultJson['normed_json']['quality'];
+            }
             if (is_array($resultJson['quality'] ?? null)) {
                 $resultJson['quality']['client_duration_ms'] = $durationMs;
             }
@@ -428,6 +436,24 @@ class AttemptSubmitTxService
             } else {
                 $resultData['id'] = (string) Str::uuid();
                 $result = Result::create($resultData);
+            }
+
+            // attempt_quality remains a compat mirror for ops/legacy readers, not the current truth.
+            if ($scaleCode === 'MBTI' && \App\Support\SchemaBaseline::hasTable('attempt_quality')) {
+                $quality = is_array($resultJson['quality'] ?? null) ? $resultJson['quality'] : null;
+                if (is_array($quality)) {
+                    $checks = $quality['checks'] ?? null;
+                    DB::table('attempt_quality')->updateOrInsert(
+                        ['attempt_id' => $attemptId],
+                        [
+                            'checks_json' => is_array($checks)
+                                ? json_encode($checks, JSON_UNESCAPED_SLASHES)
+                                : json_encode([], JSON_UNESCAPED_SLASHES),
+                            'grade' => strtoupper(trim((string) ($quality['grade'] ?? $quality['level'] ?? 'A'))),
+                            'created_at' => now(),
+                        ]
+                    );
+                }
             }
 
             $responsePayload = $this->core->buildSubmitPayload($locked, $result, true);

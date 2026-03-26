@@ -2,7 +2,9 @@
 
 namespace App\Services\Attempts;
 
+use App\Services\Assessment\ScoreResult;
 use App\Exceptions\Api\ApiProblemException;
+use App\Services\Psychometrics\MbtiQualityEvaluator;
 
 class AttemptSubmitScoreService
 {
@@ -48,6 +50,27 @@ class AttemptSubmitScoreService
         $modelSelection = is_array($scored['model_selection'] ?? null)
             ? $scored['model_selection']
             : [];
+
+        if (
+            $scaleCode === 'MBTI'
+            && $scoreResult instanceof ScoreResult
+            && $contentPackageVersion !== ''
+        ) {
+            // Current MBTI quality truth starts here and is persisted through results.result_json.
+            $quality = app(MbtiQualityEvaluator::class)->evaluate(
+                (string) ($canonicalized['region'] ?? ''),
+                (string) ($canonicalized['locale'] ?? ''),
+                $contentPackageVersion,
+                $dirVersion,
+                $mergedAnswers
+            );
+
+            if ($quality !== []) {
+                $normed = is_array($scoreResult->normedJson ?? null) ? $scoreResult->normedJson : [];
+                $normed['quality'] = $quality;
+                $scoreResult->normedJson = $normed;
+            }
+        }
 
         $commercial = $registryRow['commercial_json'] ?? null;
         if (is_string($commercial)) {
