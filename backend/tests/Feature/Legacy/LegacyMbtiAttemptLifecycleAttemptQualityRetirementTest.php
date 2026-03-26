@@ -7,7 +7,7 @@ namespace Tests\Feature\Legacy;
 use App\DTO\Legacy\LegacyRequestContext;
 use App\Models\Attempt;
 use App\Models\Result;
-use App\Services\Legacy\LegacyMbtiAttemptService;
+use App\Services\Legacy\Mbti\Attempt\LegacyMbtiAttemptLifecycleService;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -73,8 +73,8 @@ final class LegacyMbtiAttemptLifecycleAttemptQualityRetirementTest extends TestC
             attributes: []
         );
 
-        /** @var LegacyMbtiAttemptService $service */
-        $service = app(LegacyMbtiAttemptService::class);
+        /** @var LegacyMbtiAttemptLifecycleService $service */
+        $service = app(LegacyMbtiAttemptLifecycleService::class);
         $payload = $service->storeAttempt([
             'anon_id' => 'legacy-mbti-retirement-anon',
             'scale_code' => 'MBTI',

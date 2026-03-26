@@ -20,6 +20,12 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Throwable;
 
+/**
+ * Legacy-only compatibility service.
+ *
+ * Current `/api/v0.3/attempts/{id}/report` requests are served by the
+ * current report composer / gate pipeline, not by this service.
+ */
 class LegacyReportService
 {
     use WritesEvents;
@@ -235,6 +241,9 @@ class LegacyReportService
         }
     }
 
+    /**
+     * Build a legacy-compatible report payload for isolated compatibility paths.
+     */
     public function getReportPayload(Attempt $attempt, LegacyRequestContext $context): array
     {
         $attemptId = (string) $attempt->id;

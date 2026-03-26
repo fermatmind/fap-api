@@ -9,7 +9,6 @@ REPORT_FILE="${ARTIFACT_DIR}/legacy_service_request_coupling.txt"
 mkdir -p "${ARTIFACT_DIR}"
 
 TARGETS=(
-  "${BACKEND_DIR}/app/Services/Legacy/LegacyMbtiAttemptService.php"
   "${BACKEND_DIR}/app/Services/Legacy/LegacyReportService.php"
   "${BACKEND_DIR}/app/Services/Legacy/Mbti/Attempt/LegacyMbtiAttemptLifecycleService.php"
 )
