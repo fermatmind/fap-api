@@ -242,6 +242,29 @@ final class ArtifactSchemaFoundationMigrationTest extends TestCase
                     'artifact_reconcile_cases_status_idx',
                 ],
             ],
+            'storage_blob_locations' => [
+                'storage_blob_locations',
+                [
+                    'id',
+                    'blob_hash',
+                    'disk',
+                    'storage_path',
+                    'location_kind',
+                    'size_bytes',
+                    'checksum',
+                    'etag',
+                    'storage_class',
+                    'verified_at',
+                    'meta_json',
+                    'created_at',
+                    'updated_at',
+                ],
+                [
+                    'sbl_disk_path_uq',
+                    'sbl_blob_hash_idx',
+                    'sbl_verified_idx',
+                ],
+            ],
         ];
     }
 }
