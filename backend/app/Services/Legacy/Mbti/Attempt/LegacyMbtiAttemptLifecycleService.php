@@ -448,23 +448,6 @@ class LegacyMbtiAttemptLifecycleService
                 $attempt = Attempt::create($attemptData);
             }
 
-            if (\App\Support\SchemaBaseline::hasTable('attempt_quality')) {
-                $quality = $psychometrics['quality'] ?? null;
-                if (is_array($quality)) {
-                    $checks = $quality['checks'] ?? null;
-                    DB::table('attempt_quality')->updateOrInsert(
-                        ['attempt_id' => $attemptId],
-                        [
-                            'checks_json' => is_array($checks)
-                                ? json_encode($checks, JSON_UNESCAPED_SLASHES)
-                                : null,
-                            'grade' => (string) ($quality['grade'] ?? ''),
-                            'created_at' => now(),
-                        ]
-                    );
-                }
-            }
-
             // ✅ 3) results 表：兼容旧逻辑（有则更新，无则创建）
             $result = $this->resultQuery($attemptId)->first();
             $isNewResult = false;

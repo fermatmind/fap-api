@@ -438,24 +438,6 @@ class AttemptSubmitTxService
                 $result = Result::create($resultData);
             }
 
-            // attempt_quality remains a compat mirror for ops/legacy readers, not the current truth.
-            if ($scaleCode === 'MBTI' && \App\Support\SchemaBaseline::hasTable('attempt_quality')) {
-                $quality = is_array($resultJson['quality'] ?? null) ? $resultJson['quality'] : null;
-                if (is_array($quality)) {
-                    $checks = $quality['checks'] ?? null;
-                    DB::table('attempt_quality')->updateOrInsert(
-                        ['attempt_id' => $attemptId],
-                        [
-                            'checks_json' => is_array($checks)
-                                ? json_encode($checks, JSON_UNESCAPED_SLASHES)
-                                : json_encode([], JSON_UNESCAPED_SLASHES),
-                            'grade' => strtoupper(trim((string) ($quality['grade'] ?? $quality['level'] ?? 'A'))),
-                            'created_at' => now(),
-                        ]
-                    );
-                }
-            }
-
             $responsePayload = $this->core->buildSubmitPayload($locked, $result, true);
             $postCommitCtx = [
                 'org_id' => $orgId,

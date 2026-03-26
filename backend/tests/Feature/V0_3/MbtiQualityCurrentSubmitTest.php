@@ -8,6 +8,7 @@ use App\Models\Result;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -67,7 +68,7 @@ final class MbtiQualityCurrentSubmitTest extends TestCase
         return $answers;
     }
 
-    public function test_mbti_current_submit_writes_quality_truth_and_attempt_quality_mirror(): void
+    public function test_mbti_current_submit_writes_quality_truth_without_attempt_quality_mirror(): void
     {
         (new ScaleRegistrySeeder())->run();
 
@@ -120,9 +121,7 @@ final class MbtiQualityCurrentSubmitTest extends TestCase
         $this->assertSame((string) ($quality['grade'] ?? ''), (string) data_get($resultJson, 'quality.grade'));
         $this->assertIsArray(data_get($resultJson, 'normed_json.quality'));
 
-        $mirror = DB::table('attempt_quality')->where('attempt_id', $attemptId)->first();
-        $this->assertNotNull($mirror);
-        $this->assertSame((string) ($quality['grade'] ?? ''), (string) ($mirror->grade ?? ''));
+        $this->assertFalse(Schema::hasTable('attempt_quality'));
 
         $resultRead = $this->withHeaders([
             'X-Anon-Id' => $anonId,

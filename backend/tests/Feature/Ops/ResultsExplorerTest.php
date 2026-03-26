@@ -177,10 +177,6 @@ final class ResultsExplorerTest extends TestCase
             'grade' => 'B',
         ];
         $truthResult->update(['result_json' => $truthPayload]);
-        DB::table('attempt_quality')
-            ->where('attempt_id', (string) $truthChain['attempt_id'])
-            ->update(['grade' => 'A']);
-
         $fallbackChain = $this->seedDiagnosticChain(orgId: 89, orderNo: 'ord_results_fallback_001');
         $fallbackResult = Result::query()->findOrFail((string) $fallbackChain['result']->getKey());
 
@@ -471,13 +467,6 @@ final class ResultsExplorerTest extends TestCase
             'finished_at' => now()->subMinutes(13),
             'created_at' => now()->subMinutes(14),
             'updated_at' => now()->subMinutes(13),
-        ]);
-
-        DB::table('attempt_quality')->insert([
-            'attempt_id' => $attemptId,
-            'checks_json' => json_encode(['speeding' => false], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-            'grade' => 'A',
-            'created_at' => now()->subMinutes(13),
         ]);
 
         DB::table('events')->insert([

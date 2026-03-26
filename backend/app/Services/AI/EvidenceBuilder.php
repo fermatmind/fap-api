@@ -46,25 +46,6 @@ final class EvidenceBuilder
                 );
             }
 
-            $snapshot = $attempt->calculation_snapshot_json;
-            if (is_string($snapshot)) {
-                $decoded = json_decode($snapshot, true);
-                $snapshot = is_array($decoded) ? $decoded : null;
-            }
-
-            if (is_array($snapshot)) {
-                $version = trim((string) ($snapshot['version'] ?? ''));
-                if ($version !== '') {
-                    $this->pushEvidence(
-                        $items,
-                        'calc_snapshot_version',
-                        'psychometrics',
-                        'attempts.calculation_snapshot_json.version',
-                        "snapshot_version={$version}",
-                        $now
-                    );
-                }
-            }
         }
 
         if ($result) {

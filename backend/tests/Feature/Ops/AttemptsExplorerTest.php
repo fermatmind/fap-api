@@ -357,13 +357,6 @@ final class AttemptsExplorerTest extends TestCase
             'updated_at' => now()->subMinutes(13),
         ]);
 
-        DB::table('attempt_quality')->insert([
-            'attempt_id' => $attemptId,
-            'checks_json' => json_encode(['speeding' => false, 'straightlining' => false], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-            'grade' => 'A',
-            'created_at' => now()->subMinutes(13),
-        ]);
-
         $this->insertAnswerSet($attemptId, $orgId, 'MBTI', base64_encode(json_encode([['question_id' => 'Q-1', 'code' => 'A']], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)), hash('sha256', 'mbti-chain'), 93);
 
         DB::table('events')->insert([
