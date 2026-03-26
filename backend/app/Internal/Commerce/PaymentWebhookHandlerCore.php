@@ -1846,7 +1846,11 @@ class PaymentWebhookHandlerCore
                 ->update($updates);
         }
 
-        $transition = $this->orders->transition($orderNo, 'refunded', $orgId);
+        $transition = $this->orders->transition($orderNo, 'refunded', $orgId, [
+            'provider_trade_no' => $normalized['external_trade_no'] ?? null,
+            'last_payment_event_at' => $normalized['paid_at'] ?? null,
+            'refunded_at' => $normalized['paid_at'] ?? $now,
+        ]);
         if (! ($transition['ok'] ?? false)) {
             return $transition;
         }

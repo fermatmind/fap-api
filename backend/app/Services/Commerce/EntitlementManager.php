@@ -11,6 +11,7 @@ class EntitlementManager
 {
     public function __construct(
         private readonly UnifiedAccessProjectionWriter $accessProjections,
+        private readonly OrderManager $orders,
     ) {}
 
     public function hasFullAccess(
@@ -103,7 +104,7 @@ class EntitlementManager
             $modules ?? $catalog->modulesForBenefitCode($orgId, $benefitCode)
         );
         $freeModule = $catalog->freeModuleForBenefitCode($orgId, $benefitCode);
-        if ($grantedModules !== [] && $freeModule !== '' && !in_array($freeModule, $grantedModules, true)) {
+        if ($grantedModules !== [] && $freeModule !== '' && ! in_array($freeModule, $grantedModules, true)) {
             $grantedModules[] = $freeModule;
             $grantedModules = ReportAccess::normalizeModules($grantedModules);
         }
@@ -127,9 +128,14 @@ class EntitlementManager
                 $existing = DB::table('benefit_grants')->where('id', (string) ($existing->id ?? ''))->first() ?: $existing;
             }
 
+            $normalizedExistingOrderNo = trim((string) ($orderNo ?? ''));
+            if ($normalizedExistingOrderNo !== '') {
+                $this->orders->syncGrantState($normalizedExistingOrderNo, $orgId, 'granted');
+            }
+
             $this->refreshAccessProjection($attemptId, [
                 'source_system' => 'entitlement_manager',
-                'source_ref' => $orderNo !== '' ? $orderNo : $benefitCode,
+                'source_ref' => $normalizedExistingOrderNo !== '' ? $normalizedExistingOrderNo : $benefitCode,
                 'actor_type' => $userId !== '' ? 'user' : 'anon',
                 'actor_id' => $userId !== '' ? $userId : $anonId,
                 'reason_code' => 'entitlement_granted',
@@ -190,6 +196,9 @@ class EntitlementManager
         DB::table('benefit_grants')->insert($row);
 
         $grant = DB::table('benefit_grants')->where('id', $row['id'])->first();
+        if ($normalizedOrderNo !== '') {
+            $this->orders->syncGrantState($normalizedOrderNo, $orgId, 'granted');
+        }
         $this->refreshAccessProjection($attemptId, [
             'source_system' => 'entitlement_manager',
             'source_ref' => $normalizedOrderNo !== '' ? $normalizedOrderNo : $benefitCode,
@@ -302,6 +311,8 @@ class EntitlementManager
             ]);
 
         if ($byOrderNo > 0) {
+            $this->orders->syncGrantState($orderNo, $orderOrgId, 'revoked');
+
             return [
                 'ok' => true,
                 'revoked' => $byOrderNo,
@@ -320,6 +331,10 @@ class EntitlementManager
                 'updated_at' => $now,
                 'revoked_at' => $now,
             ]);
+
+        if ($revoked > 0) {
+            $this->orders->syncGrantState($orderNo, $orderOrgId, 'revoked');
+        }
 
         return [
             'ok' => true,

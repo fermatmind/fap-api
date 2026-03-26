@@ -136,6 +136,9 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonPath('provider', 'billing');
         $response->assertJsonPath('status', 'pending');
+        $response->assertJsonPath('payment_state', 'pending');
+        $response->assertJsonPath('grant_state', 'not_started');
+        $response->assertJsonPath('channel', 'web');
         $response->assertJsonPath('result_url', 'https://web.example.test/en/result/'.$attemptId);
 
         $orderNo = (string) $response->json('order_no');
@@ -147,6 +150,9 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $this->assertStringContainsString('/en/pay/wait', $waitUrl);
         $this->assertStringContainsString('order_no='.$orderNo, $waitUrl);
         $this->assertStringContainsString('payment_recovery_token=', $waitUrl);
+        $this->assertSame('pending', (string) DB::table('orders')->where('order_no', $orderNo)->value('payment_state'));
+        $this->assertSame('not_started', (string) DB::table('orders')->where('order_no', $orderNo)->value('grant_state'));
+        $this->assertSame('web', (string) DB::table('orders')->where('order_no', $orderNo)->value('channel'));
     }
 
     public function test_checkout_wechatpay_desktop_returns_qr_action(): void

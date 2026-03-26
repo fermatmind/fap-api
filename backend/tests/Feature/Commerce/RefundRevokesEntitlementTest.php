@@ -81,6 +81,8 @@ class RefundRevokesEntitlementTest extends TestCase
         $job->handle(app(OrderManager::class), app(EntitlementManager::class));
 
         $this->assertSame('refunded', (string) DB::table('orders')->where('order_no', $orderNo)->value('status'));
+        $this->assertSame('refunded', (string) DB::table('orders')->where('order_no', $orderNo)->value('payment_state'));
+        $this->assertSame('revoked', (string) DB::table('orders')->where('order_no', $orderNo)->value('grant_state'));
         $this->assertSame('revoked', (string) DB::table('benefit_grants')->where('order_no', $orderNo)->value('status'));
 
         $this->assertDatabaseHas('audit_logs', [

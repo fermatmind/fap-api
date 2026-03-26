@@ -2,6 +2,7 @@
 
 namespace App\Services\Payments;
 
+use App\Models\Order;
 use App\Services\Commerce\SkuPriceService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -9,22 +10,30 @@ use Illuminate\Support\Str;
 class PaymentService
 {
     public const BENEFIT_TYPE = 'report_unlock';
+
     public const BENEFIT_REF = 'mbti_report_v1';
+
     private const PAYMENT_PROVIDER_INTERNAL = 'internal';
+
     private const PAYMENT_PROVIDER_MOCK = 'mock';
+
     private const MAX_ORDER_QUANTITY = 1000;
+
     private const MAX_INT32 = 2147483647;
 
     public function __construct(
         private PaymentRouter $router,
         private SkuPriceService $skuPriceService,
-    ) {
-    }
+    ) {}
 
     public function createOrder(array $data, array $actor = []): array
     {
         $itemSku = strtoupper(trim((string) ($data['item_sku'] ?? '')));
         $currency = strtoupper(trim((string) ($data['currency'] ?? 'CNY')));
+        $userId = $this->trimOrNull($data['user_id'] ?? ($actor['user_id'] ?? null));
+        $anonId = $this->trimOrNull($data['anon_id'] ?? ($actor['anon_id'] ?? null));
+        $channel = Order::normalizeChannel($this->trimOrNull($data['channel'] ?? null)) ?? 'web';
+        $providerApp = $this->trimOrNull($data['provider_app'] ?? null);
         $qtyRaw = $data['quantity'] ?? 1;
         $qty = is_numeric($qtyRaw) ? (int) $qtyRaw : 1;
         if ($qty < 1 || $qty > self::MAX_ORDER_QUANTITY) {
@@ -44,17 +53,23 @@ class PaymentService
         $amountCents = $unitPriceCents * $qty;
 
         $orderId = (string) Str::uuid();
+        $orderNo = 'ord_'.Str::uuid();
         $now = now();
 
         $row = [
             'id' => $orderId,
-            'user_id' => $this->trimOrNull($data['user_id'] ?? ($actor['user_id'] ?? null)),
-            'anon_id' => $this->trimOrNull($data['anon_id'] ?? ($actor['anon_id'] ?? null)),
+            'order_no' => $orderNo,
+            'user_id' => $userId,
+            'anon_id' => $anonId,
             'device_id' => $this->trimOrNull($data['device_id'] ?? null),
             'provider' => $this->trimOrNull($data['provider'] ?? null) ?: 'internal',
+            'channel' => $channel,
+            'provider_app' => $providerApp,
             'provider_order_id' => $this->trimOrNull($data['provider_order_id'] ?? null),
             'org_id' => $legacyOrgId,
-            'status' => 'pending',
+            'status' => Order::STATUS_PENDING,
+            'payment_state' => Order::PAYMENT_STATE_PENDING,
+            'grant_state' => Order::GRANT_STATE_NOT_STARTED,
             'currency' => $currency,
             'amount_total' => $amountCents,
             'amount_cents' => $amountCents,
@@ -64,6 +79,7 @@ class PaymentService
             'quantity' => $qty,
             'request_id' => $this->trimOrNull($data['request_id'] ?? null),
             'created_ip' => $this->trimOrNull($data['ip'] ?? null),
+            'external_user_ref' => $this->resolveExternalUserRef($userId, $anonId),
             'paid_at' => null,
             'fulfilled_at' => null,
             'refunded_at' => null,
@@ -83,11 +99,14 @@ class PaymentService
     public function markPaid(string $orderId, string $userId, ?string $anonId, array $context = []): array
     {
         $order = $this->ownedOrderQuery($orderId, $userId, $anonId)->first();
-        if (!$order) {
+        if (! $order) {
             return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
         }
 
         if (in_array($order->status, ['paid', 'fulfilled'], true)) {
+            $this->syncLedgerStateForLegacyOrder($orderId, (string) ($order->status ?? ''));
+            $order = DB::table('orders')->where('id', $orderId)->first() ?: $order;
+
             return [
                 'ok' => true,
                 'order' => $order,
@@ -101,10 +120,10 @@ class PaymentService
         $now = now();
 
         $provider = self::PAYMENT_PROVIDER_INTERNAL;
-        $providerEventId = 'dev_mark_paid:' . $orderId;
+        $providerEventId = 'dev_mark_paid:'.$orderId;
         $existing = $this->paymentEventQuery($provider, $providerEventId)->first();
 
-        if (!$existing) {
+        if (! $existing) {
             $payload = [
                 'mode' => 'dev',
                 'event' => 'mark_paid',
@@ -132,7 +151,8 @@ class PaymentService
         DB::table('orders')
             ->where('id', $orderId)
             ->update([
-                'status' => 'paid',
+                'status' => Order::STATUS_PAID,
+                'payment_state' => Order::PAYMENT_STATE_PAID,
                 'paid_at' => $now,
                 'updated_at' => $now,
             ]);
@@ -148,20 +168,25 @@ class PaymentService
     public function fulfill(string $orderId, string $userId, ?string $anonId): array
     {
         $order = $this->ownedOrderQuery($orderId, $userId, $anonId)->first();
-        if (!$order) {
+        if (! $order) {
             return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
         }
 
-        if (!in_array($order->status, ['paid', 'fulfilled'], true)) {
+        if ($order->status === 'fulfilled') {
+            $this->syncLedgerStateForLegacyOrder($orderId, (string) ($order->status ?? ''));
+            $order = DB::table('orders')->where('id', $orderId)->first() ?: $order;
+        }
+
+        if (! in_array($order->status, ['paid', 'fulfilled'], true)) {
             return $this->conflict('ORDER_NOT_PAID', 'order status not paid.');
         }
 
         $targetUserId = $this->trimOrNull($userId) ?: $this->trimOrNull($order->user_id ?? null);
-        if (!$targetUserId) {
+        if (! $targetUserId) {
             $targetUserId = $this->trimOrNull($anonId) ?: $this->trimOrNull($order->anon_id ?? null);
         }
 
-        if (!$targetUserId) {
+        if (! $targetUserId) {
             return [
                 'ok' => false,
                 'status' => 422,
@@ -177,7 +202,7 @@ class PaymentService
             ->where('benefit_ref', self::BENEFIT_REF)
             ->first();
 
-        if (!$benefitRow) {
+        if (! $benefitRow) {
             $benefitRow = [
                 'id' => (string) Str::uuid(),
                 'user_id' => $targetUserId,
@@ -198,7 +223,9 @@ class PaymentService
             DB::table('orders')
                 ->where('id', $orderId)
                 ->update([
-                    'status' => 'fulfilled',
+                    'status' => Order::STATUS_FULFILLED,
+                    'payment_state' => Order::PAYMENT_STATE_PAID,
+                    'grant_state' => Order::GRANT_STATE_GRANTED,
                     'fulfilled_at' => $now,
                     'updated_at' => $now,
                 ]);
@@ -255,21 +282,22 @@ class PaymentService
     {
         $provider = self::PAYMENT_PROVIDER_MOCK;
         $providerEventId = $this->trimOrNull($payload['provider_event_id'] ?? null);
-        if (!$providerEventId) {
+        if (! $providerEventId) {
             return $this->invalid('MISSING_EVENT_ID', 'provider_event_id missing.');
         }
 
         $providerOrderId = $this->trimOrNull($payload['provider_order_id'] ?? null);
-        if (!$providerOrderId) {
+        if (! $providerOrderId) {
             return $this->invalid('MISSING_ORDER_ID', 'provider_order_id missing.');
         }
 
         $eventType = $this->trimOrNull($payload['event_type'] ?? null);
-        if (!$eventType) {
+        if (! $eventType) {
             return $this->invalid('MISSING_EVENT_TYPE', 'event_type missing.');
         }
 
         $signatureOk = (bool) ($context['signature_ok'] ?? false);
+
         return DB::transaction(function () use (
             $provider,
             $providerEventId,
@@ -285,7 +313,7 @@ class PaymentService
                 ->first();
 
             $now = now();
-            if (!$order) {
+            if (! $order) {
                 return [
                     'ok' => false,
                     'status' => 404,
@@ -331,7 +359,7 @@ class PaymentService
                 ];
             }
 
-            if (!$signatureOk) {
+            if (! $signatureOk) {
                 $this->paymentEventQuery($provider, $providerEventId)->update([
                     'handled_at' => $now,
                     'handle_status' => 'signature_invalid',
@@ -363,7 +391,7 @@ class PaymentService
                     $actorId = $actorUserId ?? $actorAnonId ?? '';
 
                     $fulfillResult = $this->fulfill($orderId, $actorId, $actorAnonId);
-                    if (!$fulfillResult['ok']) {
+                    if (! $fulfillResult['ok']) {
                         $handleStatus = 'fulfill_failed';
                     }
                 } else {
@@ -420,7 +448,7 @@ class PaymentService
         $anonId = $this->trimOrNull($anonId);
 
         $query = DB::table('orders')->where('id', $orderId);
-        if (!$userId && !$anonId) {
+        if (! $userId && ! $anonId) {
             return $query->whereRaw('1=0');
         }
 
@@ -441,7 +469,7 @@ class PaymentService
                 }
             }
 
-            if (!$applied) {
+            if (! $applied) {
                 $q->whereRaw('1=0');
             }
         });
@@ -491,11 +519,49 @@ class PaymentService
 
     private function trimOrNull($value): ?string
     {
-        if (!is_string($value)) {
+        if (! is_string($value)) {
             return null;
         }
         $v = trim($value);
+
         return $v !== '' ? $v : null;
+    }
+
+    private function resolveExternalUserRef(?string $userId, ?string $anonId): ?string
+    {
+        if ($userId !== null) {
+            return substr('user:'.$userId, 0, 128);
+        }
+
+        if ($anonId !== null) {
+            return substr('anon:'.$anonId, 0, 128);
+        }
+
+        return null;
+    }
+
+    private function syncLedgerStateForLegacyOrder(string $orderId, string $status): void
+    {
+        $normalizedStatus = strtolower(trim($status));
+        $updates = [];
+
+        if (in_array($normalizedStatus, [Order::STATUS_PAID, Order::STATUS_FULFILLED], true)) {
+            $updates['payment_state'] = Order::PAYMENT_STATE_PAID;
+        }
+
+        if ($normalizedStatus === Order::STATUS_FULFILLED) {
+            $updates['grant_state'] = Order::GRANT_STATE_GRANTED;
+        }
+
+        if ($updates === []) {
+            return;
+        }
+
+        $updates['updated_at'] = now();
+
+        DB::table('orders')
+            ->where('id', $orderId)
+            ->update($updates);
     }
 
     private function presentBenefit($row): array

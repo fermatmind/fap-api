@@ -19,7 +19,7 @@ final class WechatPayGatewayOrderNoMappingTest extends TestCase
 
     public function test_normalize_payload_supports_resource_ciphertext_array(): void
     {
-        $gateway = new WechatPayGateway();
+        $gateway = new WechatPayGateway;
 
         $normalized = $gateway->normalizePayload([
             'id' => 'evt_resource_ciphertext_array_001',
@@ -46,7 +46,7 @@ final class WechatPayGatewayOrderNoMappingTest extends TestCase
 
     public function test_normalize_payload_supports_result_ciphertext_json_string(): void
     {
-        $gateway = new WechatPayGateway();
+        $gateway = new WechatPayGateway;
 
         $cipher = json_encode([
             'out_trade_no' => '8300b57f665041c19b48143275669567',
@@ -77,7 +77,7 @@ final class WechatPayGatewayOrderNoMappingTest extends TestCase
     {
         $this->seedCommerceCatalog();
 
-        $outTradeNo = 'wx' . substr(hash('sha256', 'legacy-order-no-001'), 0, 30);
+        $outTradeNo = 'wx'.substr(hash('sha256', 'legacy-order-no-001'), 0, 30);
         $expectedOrderNo = $this->createOrderAndBindExternalTradeNo($outTradeNo);
 
         $cipher = json_encode([
@@ -92,7 +92,7 @@ final class WechatPayGatewayOrderNoMappingTest extends TestCase
 
         $this->assertIsString($cipher);
 
-        $gateway = new WechatPayGateway();
+        $gateway = new WechatPayGateway;
         $normalized = $gateway->normalizePayload([
             'resource' => [
                 'ciphertext' => $cipher,
@@ -159,17 +159,28 @@ final class WechatPayGatewayOrderNoMappingTest extends TestCase
     private function resolveSeededSku(): string
     {
         if (Schema::hasColumn('skus', 'org_id')) {
-            $sku = (string) DB::table('skus')->where('org_id', 0)->orderBy('sku')->value('sku');
+            $sku = (string) DB::table('skus')
+                ->where('org_id', 0)
+                ->where('is_active', true)
+                ->orderBy('sku')
+                ->value('sku');
             if ($sku !== '') {
                 return $sku;
             }
 
-            $sku = (string) DB::table('skus')->where('org_id', 1)->orderBy('sku')->value('sku');
+            $sku = (string) DB::table('skus')
+                ->where('org_id', 1)
+                ->where('is_active', true)
+                ->orderBy('sku')
+                ->value('sku');
             if ($sku !== '') {
                 return $sku;
             }
         }
 
-        return (string) DB::table('skus')->orderBy('sku')->value('sku');
+        return (string) DB::table('skus')
+            ->where('is_active', true)
+            ->orderBy('sku')
+            ->value('sku');
     }
 }

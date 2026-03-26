@@ -105,7 +105,7 @@ final class MbtiAccessHubBuilder
 
         return [
             'access_state' => $this->resolveDeliveryAccessState(
-                (string) ($order->status ?? ''),
+                $order,
                 $canViewReport,
                 $canRequestClaimEmail,
                 $canResend
@@ -195,7 +195,7 @@ final class MbtiAccessHubBuilder
     }
 
     private function resolveDeliveryAccessState(
-        string $status,
+        object $order,
         bool $canViewReport,
         bool $canRequestClaimEmail,
         bool $canResend
@@ -204,7 +204,7 @@ final class MbtiAccessHubBuilder
             return ReportAccess::ACCESS_HUB_STATE_READY;
         }
 
-        if ($this->isPendingStatus($status)) {
+        if ($this->isPendingStatus($order)) {
             return ReportAccess::ACCESS_HUB_STATE_PENDING;
         }
 
@@ -248,13 +248,17 @@ final class MbtiAccessHubBuilder
             : null;
     }
 
-    private function isPendingStatus(string $status): bool
+    private function isPendingStatus(object $order): bool
     {
-        return ! in_array(
-            strtolower(trim($status)),
-            ['paid', 'fulfilled', 'failed', 'canceled', 'cancelled', 'refunded'],
-            true
-        );
+        $paymentState = $this->orders->resolvedPaymentState($order);
+
+        return ! in_array($paymentState, [
+            \App\Models\Order::PAYMENT_STATE_PAID,
+            \App\Models\Order::PAYMENT_STATE_FAILED,
+            \App\Models\Order::PAYMENT_STATE_CANCELED,
+            \App\Models\Order::PAYMENT_STATE_EXPIRED,
+            \App\Models\Order::PAYMENT_STATE_REFUNDED,
+        ], true);
     }
 
     private function isMbtiScale(mixed $scaleCode): bool

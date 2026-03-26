@@ -35,8 +35,15 @@ final class OrderPricingTest extends TestCase
 
         $stored = DB::table('orders')->where('id', $orderId)->first();
         $this->assertNotNull($stored);
+        $this->assertStringStartsWith('ord_', (string) ($stored->order_no ?? ''));
         $this->assertSame(1990, (int) ($stored->amount_total ?? 0));
         $this->assertSame(1990, (int) ($stored->amount_cents ?? 0));
+        $this->assertSame('pending', (string) ($stored->status ?? ''));
+        $this->assertSame('pending', (string) ($stored->payment_state ?? ''));
+        $this->assertSame('not_started', (string) ($stored->grant_state ?? ''));
+        $this->assertSame('user:u_pricing_1', (string) ($stored->external_user_ref ?? ''));
+        $this->assertSame('web', (string) ($stored->channel ?? ''));
+        $this->assertNull($stored->provider_app ?? null);
     }
 
     public function test_create_order_throws_invalid_sku_exception_when_sku_does_not_exist(): void
@@ -71,6 +78,41 @@ final class OrderPricingTest extends TestCase
         $this->assertFalse((bool) ($result['ok'] ?? true));
         $this->assertSame('AMOUNT_TOO_LARGE', (string) ($result['error_code'] ?? ''));
         $this->assertSame(422, (int) ($result['status'] ?? 0));
+    }
+
+    public function test_mark_paid_and_fulfill_keep_split_states_in_sync(): void
+    {
+        $this->seedSku('MBTI_FULL', 1990, 'CNY');
+
+        $created = app(PaymentService::class)->createOrder([
+            'user_id' => 'u_pricing_flow',
+            'item_sku' => 'MBTI_FULL',
+            'quantity' => 1,
+            'currency' => 'CNY',
+            'channel' => 'web',
+        ]);
+
+        $order = $created['order'] ?? null;
+        $orderId = is_array($order) ? (string) ($order['id'] ?? '') : (string) ($order->id ?? '');
+        $this->assertNotSame('', $orderId);
+
+        $paid = app(PaymentService::class)->markPaid($orderId, 'u_pricing_flow', null);
+        $this->assertTrue((bool) ($paid['ok'] ?? false));
+
+        $paidRow = DB::table('orders')->where('id', $orderId)->first();
+        $this->assertNotNull($paidRow);
+        $this->assertSame('paid', (string) ($paidRow->status ?? ''));
+        $this->assertSame('paid', (string) ($paidRow->payment_state ?? ''));
+        $this->assertSame('not_started', (string) ($paidRow->grant_state ?? ''));
+
+        $fulfilled = app(PaymentService::class)->fulfill($orderId, 'u_pricing_flow', null);
+        $this->assertTrue((bool) ($fulfilled['ok'] ?? false));
+
+        $fulfilledRow = DB::table('orders')->where('id', $orderId)->first();
+        $this->assertNotNull($fulfilledRow);
+        $this->assertSame('fulfilled', (string) ($fulfilledRow->status ?? ''));
+        $this->assertSame('paid', (string) ($fulfilledRow->payment_state ?? ''));
+        $this->assertSame('granted', (string) ($fulfilledRow->grant_state ?? ''));
     }
 
     private function seedSku(string $sku, int $priceCents, string $currency): void
