@@ -11,6 +11,8 @@ final class ContentPathAliasResolver
 {
     /**
      * Resolve backend content_packs root directory for a legacy pack id.
+     * This is a compat alias bridge only. Current runtime canonical truth must come from
+     * content_packs config / primary resolvers, not from alias selection side effects.
      * Default behavior remains legacy-first, with safe fallback if mapped path does not exist.
      */
     public function resolveBackendPackRoot(string $legacyPackId): string
@@ -42,6 +44,7 @@ final class ContentPathAliasResolver
      * Modes:
      * - legacy/dual: prefer legacy path, fallback mapped path.
      * - v2: prefer mapped path, fallback legacy path.
+     * This does not redefine which dir is canonical for runtime reads.
      */
     public function resolveBackendPublishSourceDir(string $legacyPackId, string $version): string
     {

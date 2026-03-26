@@ -85,6 +85,7 @@ trait ReportPayloadAssemblerPackDocsTrait
             }
         }
 
+        // Compat fallback only: current main path is pack chain -> manifest-declared assets.
         if (is_callable($ctx['loadReportAssetJson'] ?? null)) {
             $raw = ($ctx['loadReportAssetJson'])($legacyContentPackageDir, $wantedBasename);
 

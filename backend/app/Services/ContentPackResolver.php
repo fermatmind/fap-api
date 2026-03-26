@@ -76,8 +76,15 @@ final class ContentPackResolver
                 }
             }
 
-            $picked = $matches[count($matches) - 1];
-            $trace['picked'] = ['reason' => $cand['reason'], 'key' => $key, 'pack_id' => $picked['pack_id']];
+            $picked = $this->pickPreferredPayload($matches, $scale);
+            if ($picked !== null) {
+                $trace['picked'] = [
+                    'reason' => $cand['reason'] . ':preferred_match',
+                    'key' => $key,
+                    'pack_id' => $picked['pack_id'],
+                    'dir_version' => $picked['dir_version'] ?? null,
+                ];
+            }
             break;
         }
 
@@ -174,10 +181,119 @@ final class ContentPackResolver
                 $this->indexByKey[$key] = [];
             }
             $this->indexByKey[$key][] = $payload;
-            $this->byPackId[$packId] = $payload;
+
+            if (!isset($this->byPackId[$packId])) {
+                $this->byPackId[$packId] = $payload;
+                continue;
+            }
+
+            $current = $this->byPackId[$packId];
+            $this->byPackId[$packId] = $this->comparePayloadPreference($payload, $current, $scale) < 0
+                ? $payload
+                : $current;
         }
 
         $this->built = true;
+    }
+
+    private function pickPreferredPayload(array $matches, string $scale): ?array
+    {
+        $preferred = null;
+
+        foreach ($matches as $candidate) {
+            if (!is_array($candidate)) {
+                continue;
+            }
+
+            if ($preferred === null || $this->comparePayloadPreference($candidate, $preferred, $scale) < 0) {
+                $preferred = $candidate;
+            }
+        }
+
+        return $preferred;
+    }
+
+    private function comparePayloadPreference(array $candidate, array $current, string $scale): int
+    {
+        $candidateScore = $this->payloadPreferenceScore($candidate, $scale);
+        $currentScore = $this->payloadPreferenceScore($current, $scale);
+
+        if ($candidateScore !== $currentScore) {
+            return $candidateScore <=> $currentScore;
+        }
+
+        $candidateDir = (string) ($candidate['dir_version'] ?? '');
+        $currentDir = (string) ($current['dir_version'] ?? '');
+        if ($candidateDir !== $currentDir) {
+            return strcmp($candidateDir, $currentDir);
+        }
+
+        $candidateBase = (string) ($candidate['base_dir'] ?? '');
+        $currentBase = (string) ($current['base_dir'] ?? '');
+        if ($candidateBase !== $currentBase) {
+            return strcmp($candidateBase, $currentBase);
+        }
+
+        return strcmp((string) ($candidate['pack_id'] ?? ''), (string) ($current['pack_id'] ?? ''));
+    }
+
+    private function payloadPreferenceScore(array $payload, string $scale): int
+    {
+        $score = 100;
+        $dirVersion = trim((string) ($payload['dir_version'] ?? ''));
+        $scale = strtoupper(trim($scale));
+
+        $canonicalDir = $this->canonicalDirVersionForScale($scale);
+        if ($canonicalDir !== null && $dirVersion === $canonicalDir) {
+            return 0;
+        }
+
+        $compatDirs = $this->compatAliasDirVersionsForScale($scale);
+        if ($dirVersion !== '' && in_array($dirVersion, $compatDirs, true)) {
+            $score += 50;
+        }
+
+        $defaultDir = trim((string) config('content_packs.default_dir_version', ''));
+        if ($defaultDir !== '' && $dirVersion === $defaultDir) {
+            $score -= 10;
+        }
+
+        return $score;
+    }
+
+    private function canonicalDirVersionForScale(string $scale): ?string
+    {
+        $map = (array) config('content_packs.canonical_dir_versions', []);
+        $value = trim((string) ($map[$scale] ?? ''));
+
+        if ($value !== '') {
+            return $value;
+        }
+
+        if ($scale === 'MBTI') {
+            $fallback = trim((string) config('content_packs.default_dir_version', ''));
+
+            return $fallback !== '' ? $fallback : null;
+        }
+
+        return null;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function compatAliasDirVersionsForScale(string $scale): array
+    {
+        $map = (array) config('content_packs.compat_alias_dir_versions', []);
+        $raw = $map[$scale] ?? [];
+        if (!is_array($raw)) {
+            return [];
+        }
+
+        return array_values(array_filter(array_map(
+            static fn ($value): string => trim((string) $value),
+            $raw
+        ), static fn (string $value): bool => $value !== ''));
     }
 
     private function makeKey(string $scale, string $region, string $locale, string $version): string

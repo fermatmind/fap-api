@@ -65,6 +65,7 @@ trait ReportPayloadAssemblerProfilesTrait
             return $picked;
         }
 
+        // Compat fallback only: current main path is pack chain -> type_profiles asset.
         if (is_callable($ctx['loadTypeProfile'] ?? null)) {
             $p = ($ctx['loadTypeProfile'])($legacyContentPackageDir, $typeCode);
             if (is_array($p)) {
@@ -105,6 +106,7 @@ trait ReportPayloadAssemblerProfilesTrait
             return $picked;
         }
 
+        // Compat fallback only: current main path is pack chain -> identity asset.
         if (is_callable($ctx['loadReportAssetItems'] ?? null)) {
             $map = ($ctx['loadReportAssetItems'])($legacyContentPackageDir, 'report_identity_cards.json', 'type_code');
             if (is_object($map)) {
@@ -167,6 +169,7 @@ trait ReportPayloadAssemblerProfilesTrait
             $card['code'] = $card['code'] ?? $role;
         }
 
+        // Compat fallback only: current main path is pack chain -> roles asset.
         if (!$card && is_callable($ctx['buildRoleCard'] ?? null)) {
             $x = ($ctx['buildRoleCard'])($legacyContentPackageDir, $typeCode);
             if (is_array($x)) {
@@ -203,6 +206,7 @@ trait ReportPayloadAssemblerProfilesTrait
             $card['code'] = $card['code'] ?? $st;
         }
 
+        // Compat fallback only: current main path is pack chain -> strategies asset.
         if (!$card && is_callable($ctx['buildStrategyCard'] ?? null)) {
             $x = ($ctx['buildStrategyCard'])($legacyContentPackageDir, $typeCode);
             if (is_array($x)) {
@@ -268,6 +272,7 @@ trait ReportPayloadAssemblerProfilesTrait
             }
         }
 
+        // Compat fallback only: current main path is pack chain -> borderline asset.
         if (is_callable($ctx['buildBorderlineNote'] ?? null)) {
             $x = ($ctx['buildBorderlineNote'])($scoresPct, $legacyContentPackageDir);
             if (is_array($x)) {

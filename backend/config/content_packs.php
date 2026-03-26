@@ -37,6 +37,19 @@ return [
     // default_dir_version 对应目录名（MBTI-CN-v0.3）
     'default_dir_version' => env('FAP_DEFAULT_DIR_VERSION', 'MBTI-CN-v0.3'),
 
+    // MBTI content source-of-truth:
+    // - canonical_dir_versions: current runtime canonical dirs
+    // - compat_alias_dir_versions: compat-only aliases that may still be resolved explicitly
+    // Canonical truth is defined here, not by scale_identity dir_version v1/v2 naming.
+    'canonical_dir_versions' => [
+        'MBTI' => env('FAP_DEFAULT_DIR_VERSION', 'MBTI-CN-v0.3'),
+    ],
+    'compat_alias_dir_versions' => [
+        'MBTI' => [
+            'MBTI_PERSONALITY_TEST_16_TYPES-CN-v0.3',
+        ],
+    ],
+
     // ✅ 默认 region/locale 也钉死到 CN_MAINLAND/zh-CN（仍保留 fallback 机制）
     'default_region' => env('FAP_DEFAULT_REGION', 'CN_MAINLAND'),
     'default_locale' => env('FAP_DEFAULT_LOCALE', 'zh-CN'),
