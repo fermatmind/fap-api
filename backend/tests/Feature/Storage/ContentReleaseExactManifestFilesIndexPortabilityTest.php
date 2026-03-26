@@ -35,6 +35,14 @@ final class ContentReleaseExactManifestFilesIndexPortabilityTest extends TestCas
             "->string('logical_path', 1024)\n                ->charset('ascii')\n                ->collation('ascii_bin')\n                ->change();",
             $normalizeMigration
         );
+        $this->assertStringContainsString(
+            "\$table->index(['content_release_exact_manifest_id'], self::TEMP_FOREIGN_KEY_SUPPORT_INDEX);",
+            $normalizeMigration
+        );
+        $this->assertStringContainsString(
+            '$table->dropIndex(self::TEMP_FOREIGN_KEY_SUPPORT_INDEX);',
+            $normalizeMigration
+        );
         $this->assertStringNotContainsString('logical_path(191)', $createMigration.$normalizeMigration);
         $this->assertStringNotContainsString('logical_path(255)', $createMigration.$normalizeMigration);
 
@@ -72,6 +80,11 @@ final class ContentReleaseExactManifestFilesIndexPortabilityTest extends TestCas
         $this->assertSame('logical_path', (string) ($indexRows[1]->column_name ?? $indexRows[1]->COLUMN_NAME ?? ''));
         $this->assertNull($indexRows[0]->sub_part ?? $indexRows[0]->SUB_PART ?? null);
         $this->assertNull($indexRows[1]->sub_part ?? $indexRows[1]->SUB_PART ?? null);
+
+        $this->assertFalse(
+            SchemaIndex::indexExists('content_release_exact_manifest_files', 'cremf_manifest_fk_idx'),
+            'temporary foreign-key support index should be removed after normalize migration'
+        );
     }
 
     /**
