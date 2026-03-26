@@ -998,6 +998,60 @@ class OrderManager
         ];
     }
 
+    public function latestPaymentAttemptForOrder(string $orderNo, int $orgId): ?object
+    {
+        if (! Schema::hasTable('payment_attempts')) {
+            return null;
+        }
+
+        $orderNo = trim($orderNo);
+        if ($orderNo === '') {
+            return null;
+        }
+
+        return DB::table('payment_attempts')
+            ->where('order_no', $orderNo)
+            ->where('org_id', $orgId)
+            ->orderByDesc('attempt_no')
+            ->first();
+    }
+
+    public function findPaymentAttemptById(string $attemptId): ?object
+    {
+        if (! Schema::hasTable('payment_attempts')) {
+            return null;
+        }
+
+        $attemptId = trim($attemptId);
+        if ($attemptId === '') {
+            return null;
+        }
+
+        return DB::table('payment_attempts')
+            ->where('id', $attemptId)
+            ->first();
+    }
+
+    public function touchReconciledLedger(string $orderNo, int $orgId, ?string $reconciledAt = null): void
+    {
+        $orderNo = trim($orderNo);
+        if ($orderNo === '') {
+            return;
+        }
+
+        $timestamp = $reconciledAt !== null && trim($reconciledAt) !== ''
+            ? $reconciledAt
+            : now()->toDateTimeString();
+
+        DB::table('orders')
+            ->where('order_no', $orderNo)
+            ->where('org_id', $orgId)
+            ->update([
+                'last_reconciled_at' => $timestamp,
+                'updated_at' => now(),
+            ]);
+    }
+
     public function touchPaymentLedger(
         string $orderNo,
         int $orgId,
@@ -1086,6 +1140,8 @@ class OrderManager
             'payment_state' => Order::PAYMENT_STATE_PAID,
             'updated_at' => $now,
             'last_payment_event_at' => ($paidAt !== null && $paidAt !== '') ? $paidAt : $now,
+            'closed_at' => null,
+            'expired_at' => null,
         ];
 
         if (empty($order->paid_at)) {
@@ -1270,6 +1326,13 @@ class OrderManager
             'expired',
             Order::STATUS_REFUNDED,
         ], true)) {
+            return true;
+        }
+        if (in_array($fromStatus, [
+            Order::STATUS_FAILED,
+            Order::STATUS_CANCELED,
+            'expired',
+        ], true) && $toStatus === Order::STATUS_PAID) {
             return true;
         }
         if ($fromStatus === Order::STATUS_PAID && $toStatus === Order::STATUS_FULFILLED) {
@@ -1644,6 +1707,8 @@ class OrderManager
             case Order::STATUS_PAID:
                 $updates['payment_state'] = $explicitPaymentState ?? Order::PAYMENT_STATE_PAID;
                 $updates['paid_at'] = $context['paid_at'] ?? ($order->paid_at ?? $transitionedAt);
+                $updates['closed_at'] = null;
+                $updates['expired_at'] = null;
                 $updates['grant_state'] = $this->resolvedGrantState($order);
                 break;
             case Order::STATUS_FULFILLED:
@@ -1663,6 +1728,7 @@ class OrderManager
             case 'expired':
                 $updates['payment_state'] = $explicitPaymentState ?? Order::PAYMENT_STATE_EXPIRED;
                 $updates['expired_at'] = $context['expired_at'] ?? $transitionedAt;
+                $updates['closed_at'] = $context['closed_at'] ?? $order->closed_at ?? null;
                 break;
             case Order::STATUS_REFUNDED:
                 $updates['payment_state'] = $explicitPaymentState ?? Order::PAYMENT_STATE_REFUNDED;

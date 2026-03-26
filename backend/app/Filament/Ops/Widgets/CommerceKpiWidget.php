@@ -49,7 +49,7 @@ class CommerceKpiWidget extends BaseWidget
 
         $pendingOrders = (int) DB::table('orders')
             ->where('org_id', $orgId)
-            ->whereRaw("lower(coalesce(status, '')) in (?, ?)", ['created', 'pending'])
+            ->whereIn('payment_state', ['created', 'pending'])
             ->count();
 
         $refundCount = (int) DB::table('orders')
@@ -86,7 +86,7 @@ class CommerceKpiWidget extends BaseWidget
             Stat::make(__('ops.widgets.pending_orders'), (string) $pendingOrders)
                 ->color($pendingOrders > 0 ? 'warning' : 'success'),
             Stat::make(__('ops.widgets.revenue_today'), (string) $todayRevenue)->description(__('ops.widgets.cents')),
-            Stat::make(__('ops.widgets.unlock_rate'), (string) $unlockRate . '%'),
+            Stat::make(__('ops.widgets.unlock_rate'), (string) $unlockRate.'%'),
             Stat::make(__('ops.widgets.refund_count'), (string) $refundCount)
                 ->color($refundCount > 0 ? 'warning' : 'success'),
             Stat::make(__('ops.widgets.webhook_failures'), (string) $webhookFailures)

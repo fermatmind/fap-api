@@ -1,0 +1,271 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Services\Commerce\Compensation\Gateways;
+
+use App\Services\Commerce\Compensation\Contracts\PaymentLifecycleGatewayInterface;
+use Illuminate\Support\Arr;
+use Yansongda\Pay\Pay;
+
+class WechatPayLifecycleGateway implements PaymentLifecycleGatewayInterface
+{
+    public function provider(): string
+    {
+        return 'wechatpay';
+    }
+
+    public function queryPaymentStatus(array $context): array
+    {
+        $queriedAt = now()->toIso8601String();
+        if (! $this->isConfigured()) {
+            return $this->unsupportedQuery($queriedAt, 'wechatpay query not configured.');
+        }
+
+        $queryOrder = $this->buildQueryOrder($context);
+        if ($queryOrder === []) {
+            return $this->unsupportedQuery($queriedAt, 'wechatpay query missing trade reference.');
+        }
+
+        try {
+            $payload = $this->dispatchQuery($queryOrder);
+        } catch (\Throwable $e) {
+            return [
+                'ok' => false,
+                'supported' => true,
+                'status' => 'unknown',
+                'provider_trade_no' => null,
+                'paid_at' => null,
+                'queried_at' => $queriedAt,
+                'raw_state' => null,
+                'is_terminal' => false,
+                'supports_close' => true,
+                'reason' => mb_substr($e->getMessage(), 0, 255),
+            ];
+        }
+
+        $rawState = strtoupper(trim((string) Arr::get($payload, 'trade_state', Arr::get($payload, 'trade_status', ''))));
+        $status = match ($rawState) {
+            'SUCCESS' => 'paid',
+            'PAYERROR' => 'failed',
+            'CLOSED', 'REVOKED' => 'canceled',
+            'NOTPAY', 'USERPAYING' => 'pending',
+            default => 'unknown',
+        };
+
+        return [
+            'ok' => $status !== 'unknown',
+            'supported' => true,
+            'status' => $status,
+            'provider_trade_no' => $this->trimOrNull(
+                (string) Arr::get($payload, 'transaction_id', Arr::get($payload, 'trade_no', ''))
+            ),
+            'paid_at' => $this->trimOrNull((string) Arr::get($payload, 'success_time', Arr::get($payload, 'paid_at', ''))),
+            'queried_at' => $queriedAt,
+            'raw_state' => $rawState !== '' ? $rawState : null,
+            'is_terminal' => in_array($status, ['paid', 'failed', 'canceled'], true),
+            'supports_close' => true,
+            'reason' => $status === 'unknown' ? 'wechatpay query returned unknown trade state.' : null,
+        ];
+    }
+
+    public function closePayment(array $context): array
+    {
+        $closedAt = now()->toIso8601String();
+        if (! $this->isConfigured()) {
+            return [
+                'ok' => false,
+                'supported' => false,
+                'status' => 'unsupported',
+                'provider_trade_no' => null,
+                'closed_at' => null,
+                'raw_state' => null,
+                'is_terminal' => false,
+                'supports_close' => false,
+                'reason' => 'wechatpay close not configured.',
+            ];
+        }
+
+        $queryOrder = $this->buildQueryOrder($context);
+        if ($queryOrder === []) {
+            return [
+                'ok' => false,
+                'supported' => true,
+                'status' => 'unknown',
+                'provider_trade_no' => null,
+                'closed_at' => null,
+                'raw_state' => null,
+                'is_terminal' => false,
+                'supports_close' => true,
+                'reason' => 'wechatpay close missing trade reference.',
+            ];
+        }
+
+        try {
+            $payload = $this->dispatchClose($queryOrder);
+        } catch (\Throwable $e) {
+            return [
+                'ok' => false,
+                'supported' => true,
+                'status' => 'unknown',
+                'provider_trade_no' => null,
+                'closed_at' => null,
+                'raw_state' => null,
+                'is_terminal' => false,
+                'supports_close' => true,
+                'reason' => mb_substr($e->getMessage(), 0, 255),
+            ];
+        }
+
+        $rawState = strtoupper(trim((string) Arr::get($payload, 'trade_state', Arr::get($payload, 'trade_status', 'CLOSED'))));
+
+        return [
+            'ok' => true,
+            'supported' => true,
+            'status' => 'closed',
+            'provider_trade_no' => $this->trimOrNull(
+                (string) Arr::get($payload, 'transaction_id', Arr::get($payload, 'trade_no', ''))
+            ),
+            'closed_at' => $closedAt,
+            'raw_state' => $rawState !== '' ? $rawState : 'CLOSED',
+            'is_terminal' => true,
+            'supports_close' => true,
+            'reason' => null,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $order
+     * @return array<string,mixed>
+     */
+    protected function dispatchQuery(array $order): array
+    {
+        Pay::config(config('pay'));
+
+        return $this->responseToArray(Pay::wechat()->query($order));
+    }
+
+    /**
+     * @param  array<string,mixed>  $order
+     * @return array<string,mixed>
+     */
+    protected function dispatchClose(array $order): array
+    {
+        Pay::config(config('pay'));
+
+        return $this->responseToArray(Pay::wechat()->close($order));
+    }
+
+    /**
+     * @param  array<string,mixed>  $context
+     * @return array<string,mixed>
+     */
+    private function buildQueryOrder(array $context): array
+    {
+        $order = [];
+
+        $providerTradeNo = $this->trimOrNull((string) ($context['provider_trade_no'] ?? ''));
+        if ($providerTradeNo !== null) {
+            $order['transaction_id'] = $providerTradeNo;
+        }
+
+        $externalTradeNo = $this->trimOrNull((string) ($context['external_trade_no'] ?? ''));
+        if ($externalTradeNo === null) {
+            $externalTradeNo = $this->resolveOutTradeNo((string) ($context['order_no'] ?? ''));
+        }
+        if ($externalTradeNo !== null) {
+            $order['out_trade_no'] = $externalTradeNo;
+        }
+
+        return $order;
+    }
+
+    private function isConfigured(): bool
+    {
+        if (! class_exists(Pay::class)) {
+            return false;
+        }
+
+        $default = config('pay.wechat.default', []);
+        if (! is_array($default)) {
+            return false;
+        }
+
+        $mchId = trim((string) ($default['mch_id'] ?? ''));
+        $secretKey = trim((string) ($default['mch_secret_key'] ?? ''));
+
+        return $mchId !== '' && strlen($secretKey) === 32;
+    }
+
+    private function resolveOutTradeNo(string $orderNo): ?string
+    {
+        $orderNo = trim($orderNo);
+        if ($orderNo === '') {
+            return null;
+        }
+
+        if (preg_match('/^ord_([0-9a-fA-F]{8})-([0-9a-fA-F]{4})-([0-9a-fA-F]{4})-([0-9a-fA-F]{4})-([0-9a-fA-F]{12})$/', $orderNo, $m) === 1) {
+            return strtolower($m[1].$m[2].$m[3].$m[4].$m[5]);
+        }
+
+        return 'wx'.substr(hash('sha256', $orderNo), 0, 30);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function responseToArray(mixed $response): array
+    {
+        if (is_array($response)) {
+            return $response;
+        }
+
+        if ($response instanceof \JsonSerializable) {
+            $serialized = $response->jsonSerialize();
+            if (is_array($serialized)) {
+                return $serialized;
+            }
+        }
+
+        if (is_object($response)) {
+            if (method_exists($response, 'all')) {
+                $all = $response->all();
+                if (is_array($all)) {
+                    return $all;
+                }
+            }
+
+            if (method_exists($response, 'toArray')) {
+                $array = $response->toArray();
+                if (is_array($array)) {
+                    return $array;
+                }
+            }
+        }
+
+        return [];
+    }
+
+    private function unsupportedQuery(string $queriedAt, string $reason): array
+    {
+        return [
+            'ok' => false,
+            'supported' => false,
+            'status' => 'unsupported',
+            'provider_trade_no' => null,
+            'paid_at' => null,
+            'queried_at' => $queriedAt,
+            'raw_state' => null,
+            'is_terminal' => false,
+            'supports_close' => false,
+            'reason' => $reason,
+        ];
+    }
+
+    private function trimOrNull(string $value): ?string
+    {
+        $value = trim($value);
+
+        return $value !== '' ? $value : null;
+    }
+}

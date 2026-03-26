@@ -132,6 +132,9 @@ class OrderResource extends \App\Filament\Shared\BaseTenantResource
                     ->label('Attempt provider ref')
                     ->copyable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('last_reconciled_at')
+                    ->dateTime()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('latest_payment_status')
                     ->label('Payment status')
                     ->state(fn (Order $record): string => $support->paymentStatus($record)['label'])
