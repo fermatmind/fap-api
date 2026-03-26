@@ -14,6 +14,8 @@ return new class extends Migration
 
     private const UNIQUE_INDEX = 'cremf_manifest_path_uq';
 
+    private const TEMP_FOREIGN_KEY_SUPPORT_INDEX = 'cremf_manifest_fk_idx';
+
     public function up(): void
     {
         if (! Schema::hasTable(self::TABLE)) {
@@ -24,8 +26,17 @@ return new class extends Migration
             return;
         }
 
-        if (! Schema::hasColumn(self::TABLE, 'logical_path')) {
+        if (
+            ! Schema::hasColumn(self::TABLE, 'content_release_exact_manifest_id')
+            || ! Schema::hasColumn(self::TABLE, 'logical_path')
+        ) {
             return;
+        }
+
+        if (! SchemaIndex::indexExists(self::TABLE, self::TEMP_FOREIGN_KEY_SUPPORT_INDEX)) {
+            Schema::table(self::TABLE, function (Blueprint $table): void {
+                $table->index(['content_release_exact_manifest_id'], self::TEMP_FOREIGN_KEY_SUPPORT_INDEX);
+            });
         }
 
         if (SchemaIndex::indexExists(self::TABLE, self::UNIQUE_INDEX)) {
@@ -44,6 +55,12 @@ return new class extends Migration
         if (! SchemaIndex::indexExists(self::TABLE, self::UNIQUE_INDEX)) {
             Schema::table(self::TABLE, function (Blueprint $table): void {
                 $table->unique(['content_release_exact_manifest_id', 'logical_path'], self::UNIQUE_INDEX);
+            });
+        }
+
+        if (SchemaIndex::indexExists(self::TABLE, self::TEMP_FOREIGN_KEY_SUPPORT_INDEX)) {
+            Schema::table(self::TABLE, function (Blueprint $table): void {
+                $table->dropIndex(self::TEMP_FOREIGN_KEY_SUPPORT_INDEX);
             });
         }
     }
