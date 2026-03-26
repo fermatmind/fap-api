@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Ops;
 
 use App\Filament\Ops\Resources\ResultResource\Pages\ListResults;
+use App\Filament\Ops\Resources\ResultResource\Support\ResultExplorerSupport;
 use App\Models\AdminUser;
 use App\Models\Attempt;
 use App\Models\Organization;
@@ -164,6 +165,35 @@ final class ResultsExplorerTest extends TestCase
             ->assertDontSee('Report page')
             ->assertDontSee('Attempt Explorer')
             ->assertSee('Report drill-through is unavailable while the attempt row is missing.');
+    }
+
+    public function test_results_explorer_prefers_result_quality_truth_and_no_longer_depends_on_attempt_quality(): void
+    {
+        $truthChain = $this->seedDiagnosticChain(orgId: 88, orderNo: 'ord_results_truth_001');
+        $truthResult = Result::query()->findOrFail((string) $truthChain['result']->getKey());
+        $truthPayload = is_array($truthResult->result_json ?? null) ? $truthResult->result_json : [];
+        $truthPayload['quality'] = [
+            'level' => 'B',
+            'grade' => 'B',
+        ];
+        $truthResult->update(['result_json' => $truthPayload]);
+        DB::table('attempt_quality')
+            ->where('attempt_id', (string) $truthChain['attempt_id'])
+            ->update(['grade' => 'A']);
+
+        $fallbackChain = $this->seedDiagnosticChain(orgId: 89, orderNo: 'ord_results_fallback_001');
+        $fallbackResult = Result::query()->findOrFail((string) $fallbackChain['result']->getKey());
+
+        /** @var ResultExplorerSupport $support */
+        $support = app(ResultExplorerSupport::class);
+
+        $truthDetail = $support->buildDetail($truthResult->fresh());
+        $truthQuality = collect($truthDetail['attempt_summary']['fields'])->firstWhere('label', 'quality');
+        $this->assertSame('B', $truthQuality['value'] ?? null);
+
+        $fallbackDetail = $support->buildDetail($fallbackResult);
+        $fallbackQuality = collect($fallbackDetail['attempt_summary']['fields'])->firstWhere('label', 'quality');
+        $this->assertSame('-', $fallbackQuality['value'] ?? null);
     }
 
     private function createOrganization(string $name): Organization

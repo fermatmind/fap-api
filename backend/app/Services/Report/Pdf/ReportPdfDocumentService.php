@@ -122,6 +122,7 @@ final class ReportPdfDocumentService
         )));
         $qualityLevel = strtoupper(trim((string) (
             data_get($gate, 'quality.level')
+            ?? data_get($result?->result_json, 'quality.level')
             ?? data_get($result?->result_json, 'normed_json.quality.level', '')
         )));
 

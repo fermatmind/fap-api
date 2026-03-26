@@ -1259,24 +1259,24 @@ final class ResultExplorerSupport
      */
     private function fetchAttemptQualitySummary(Result $result): array
     {
-        if (! SchemaBaseline::hasTable('attempt_quality')) {
-            return ['summary' => '-', 'hint' => null];
-        }
-
-        $row = DB::table('attempt_quality')
-            ->select(['grade', 'created_at'])
-            ->where('attempt_id', (string) $result->attempt_id)
-            ->orderByDesc('created_at')
-            ->first();
-
-        if ($row === null) {
-            return ['summary' => 'missing', 'hint' => 'Raw checks_json stays hidden.'];
-        }
-
-        return [
-            'summary' => $this->stringOrDash($row->grade ?? null),
-            'hint' => 'Raw checks_json stays hidden.',
+        $payload = $this->arrayFromMixed($result->result_json);
+        $candidates = [
+            $payload['quality'] ?? null,
+            data_get($payload, 'normed_json.quality'),
         ];
+
+        foreach ($candidates as $candidate) {
+            if (! is_array($candidate)) {
+                continue;
+            }
+
+            $summary = trim((string) ($candidate['grade'] ?? $candidate['level'] ?? ''));
+            if ($summary !== '') {
+                return ['summary' => $summary, 'hint' => null];
+            }
+        }
+
+        return ['summary' => '-', 'hint' => null];
     }
 
     /**

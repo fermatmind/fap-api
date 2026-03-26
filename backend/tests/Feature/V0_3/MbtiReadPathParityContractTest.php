@@ -9,6 +9,8 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Report\Composer\ReportComposeContext;
 use App\Services\Report\Composer\ReportPayloadAssembler;
+use App\Services\Report\Pdf\ReportPdfDocumentService;
+use App\Services\Report\ReportGatekeeper;
 use App\Support\OrgContext;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -149,6 +151,80 @@ final class MbtiReadPathParityContractTest extends TestCase
             'tone_profile_v1.tone_fingerprint',
             (array) data_get($readContract, 'telemetry_parity_fields', [])
         );
+    }
+
+    public function test_result_read_and_pdf_fallback_prefer_top_level_quality_truth(): void
+    {
+        $this->seedScales();
+        Config::set('fap_experiments.experiments', []);
+
+        $anonId = 'mbti_quality_truth_anon';
+        $attemptId = $this->createMbtiAttemptWithResult($anonId);
+
+        $result = Result::query()->where('attempt_id', $attemptId)->firstOrFail();
+        $payload = is_array($result->result_json ?? null) ? $result->result_json : [];
+        $payload['quality'] = [
+            'level' => 'B',
+            'grade' => 'B',
+            'flags' => ['TOP_LEVEL'],
+        ];
+        $payload['normed_json'] = [
+            'quality' => [
+                'level' => 'D',
+                'grade' => 'D',
+                'flags' => ['NORMED'],
+            ],
+        ];
+        $payload['breakdown_json'] = [
+            'score_result' => [
+                'quality' => [
+                    'level' => 'C',
+                    'grade' => 'C',
+                    'flags' => ['BREAKDOWN'],
+                ],
+            ],
+        ];
+        $payload['axis_scores_json']['score_result'] = [
+            'quality' => [
+                'level' => 'A',
+                'grade' => 'A',
+                'flags' => ['AXIS'],
+            ],
+        ];
+        $result->update(['result_json' => $payload]);
+        $result->refresh();
+
+        /** @var ReportGatekeeper $gatekeeper */
+        $gatekeeper = app(ReportGatekeeper::class);
+        $gate = $gatekeeper->resolve(0, $attemptId, null, $anonId, 'public');
+
+        $this->assertTrue((bool) ($gate['ok'] ?? false));
+        $this->assertSame('B', (string) data_get($gate, 'quality.level'));
+        $this->assertSame(['TOP_LEVEL'], (array) data_get($gate, 'quality.flags', []));
+
+        $response = $this->invokeController('result', $attemptId, $anonId);
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('B', (string) data_get($response->getData(true), 'result.quality.level'));
+        $this->assertSame(['TOP_LEVEL'], (array) data_get($response->getData(true), 'result.quality.flags', []));
+
+        /** @var ReportPdfDocumentService $pdfService */
+        $pdfService = app(ReportPdfDocumentService::class);
+        $pdf = $pdfService->getOrGenerate(
+            Attempt::query()->findOrFail($attemptId),
+            [
+                'variant' => 'free',
+                'locked' => true,
+                'report' => [
+                    'sections' => [
+                        ['key' => 'traits'],
+                    ],
+                ],
+            ],
+            $result
+        );
+
+        $this->assertStringContainsString('Quality Level: B', $pdf['binary']);
     }
 
     private function seedScales(): void

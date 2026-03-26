@@ -806,6 +806,7 @@ class ReportGatekeeper
     private function extractScoreContract(Result $result): array
     {
         $payload = is_array($result->result_json ?? null) ? $result->result_json : [];
+        $topLevelQuality = is_array($payload['quality'] ?? null) ? $payload['quality'] : [];
         $candidates = [
             $payload['normed_json'] ?? null,
             $payload['breakdown_json']['score_result'] ?? null,
@@ -819,19 +820,19 @@ class ReportGatekeeper
 
             $norms = is_array($candidate['norms'] ?? null) ? $candidate['norms'] : [];
             $quality = is_array($candidate['quality'] ?? null) ? $candidate['quality'] : [];
-            if ($norms === [] && $quality === []) {
+            if ($norms === [] && $quality === [] && $topLevelQuality === []) {
                 continue;
             }
 
             return [
                 'norms' => $norms,
-                'quality' => $quality,
+                'quality' => $topLevelQuality !== [] ? $topLevelQuality : $quality,
             ];
         }
 
         return [
             'norms' => [],
-            'quality' => [],
+            'quality' => $topLevelQuality,
         ];
     }
 
