@@ -36,6 +36,10 @@ final class BigFiveHistoryCompareTest extends TestCase
         $response->assertJsonPath('scale_code', 'BIG5_OCEAN');
         $response->assertJsonPath('history_compare.current_attempt_id', $latestAttemptId);
         $response->assertJsonPath('history_compare.previous_attempt_id', $olderAttemptId);
+        $response->assertJsonPath('history_compare.current_domains_mean.O', 3.5);
+        $response->assertJsonPath('history_compare.previous_domains_mean.O', 3);
+        $response->assertJsonPath('history_compare.current_domains_mean.A', 3.6);
+        $response->assertJsonPath('history_compare.previous_domains_mean.A', 3.3);
         $response->assertJsonPath('history_compare.domains_delta.O.delta', 0.5);
         $response->assertJsonPath('history_compare.domains_delta.O.direction', 'up');
         $response->assertJsonPath('history_compare.domains_delta.E.delta', -0.2);

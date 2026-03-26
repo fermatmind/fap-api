@@ -14,6 +14,15 @@ final class BigFivePublicProjectionService
 {
     private const DOMAIN_ORDER = ['O', 'C', 'E', 'A', 'N'];
 
+    private const FACET_ORDER = [
+        'N1', 'E1', 'O1', 'A1', 'C1',
+        'N2', 'E2', 'O2', 'A2', 'C2',
+        'N3', 'E3', 'O3', 'A3', 'C3',
+        'N4', 'E4', 'O4', 'A4', 'C4',
+        'N5', 'E5', 'O5', 'A5', 'C5',
+        'N6', 'E6', 'O6', 'A6', 'C6',
+    ];
+
     public function __construct(
         private readonly ControlledGenerationRuntime $controlledGenerationRuntime,
         private readonly ControlledNarrativeLayerService $controlledNarrativeLayerService,
@@ -31,6 +40,42 @@ final class BigFivePublicProjectionService
         'E' => ['en' => 'Extraversion', 'zh' => '外向性'],
         'A' => ['en' => 'Agreeableness', 'zh' => '宜人性'],
         'N' => ['en' => 'Neuroticism', 'zh' => '情绪性'],
+    ];
+
+    /**
+     * @var array<string,string>
+     */
+    private const FACET_NAME_SLUG = [
+        'N1' => 'anxiety',
+        'N2' => 'anger',
+        'N3' => 'depression',
+        'N4' => 'self_consciousness',
+        'N5' => 'immoderation',
+        'N6' => 'vulnerability',
+        'E1' => 'friendliness',
+        'E2' => 'gregariousness',
+        'E3' => 'assertiveness',
+        'E4' => 'activity_level',
+        'E5' => 'excitement_seeking',
+        'E6' => 'cheerfulness',
+        'O1' => 'imagination',
+        'O2' => 'artistic_interests',
+        'O3' => 'emotionality',
+        'O4' => 'adventurousness',
+        'O5' => 'intellect',
+        'O6' => 'liberalism',
+        'A1' => 'trust',
+        'A2' => 'morality',
+        'A3' => 'altruism',
+        'A4' => 'cooperation',
+        'A5' => 'modesty',
+        'A6' => 'sympathy',
+        'C1' => 'self_efficacy',
+        'C2' => 'orderliness',
+        'C3' => 'dutifulness',
+        'C4' => 'achievement_striving',
+        'C5' => 'self_discipline',
+        'C6' => 'cautiousness',
     ];
 
     /**
@@ -87,8 +132,11 @@ final class BigFivePublicProjectionService
     {
         $locale = $this->normalizeLocale($locale);
         $domainsMean = is_array(data_get($scoreResult, 'raw_scores.domains_mean')) ? data_get($scoreResult, 'raw_scores.domains_mean') : [];
+        $facetsMean = is_array(data_get($scoreResult, 'raw_scores.facets_mean')) ? data_get($scoreResult, 'raw_scores.facets_mean') : [];
         $domainsPercentile = is_array(data_get($scoreResult, 'scores_0_100.domains_percentile')) ? data_get($scoreResult, 'scores_0_100.domains_percentile') : [];
+        $facetsPercentile = is_array(data_get($scoreResult, 'scores_0_100.facets_percentile')) ? data_get($scoreResult, 'scores_0_100.facets_percentile') : [];
         $domainBuckets = is_array(data_get($scoreResult, 'facts.domain_buckets')) ? data_get($scoreResult, 'facts.domain_buckets') : [];
+        $facetBuckets = is_array(data_get($scoreResult, 'facts.facet_buckets')) ? data_get($scoreResult, 'facts.facet_buckets') : [];
         $topStrengthFacets = array_values(array_filter(array_map('strval', is_array(data_get($scoreResult, 'facts.top_strength_facets')) ? data_get($scoreResult, 'facts.top_strength_facets') : [])));
         $topGrowthFacets = array_values(array_filter(array_map('strval', is_array(data_get($scoreResult, 'facts.top_growth_facets')) ? data_get($scoreResult, 'facts.top_growth_facets') : [])));
         $tags = array_values(array_filter(array_map('strval', is_array($scoreResult['tags'] ?? null) ? $scoreResult['tags'] : [])));
@@ -107,6 +155,24 @@ final class BigFivePublicProjectionService
                 'percentile' => (int) ($domainsPercentile[$trait] ?? 0),
                 'band' => $band,
                 'band_label' => $this->bandLabel($trait, $band, $locale),
+            ];
+        }
+
+        $facetVector = [];
+        foreach (self::FACET_ORDER as $facet) {
+            $bucket = strtolower(trim((string) ($facetBuckets[$facet] ?? 'mid')));
+            if (! in_array($bucket, ['low', 'mid', 'high', 'extreme_low', 'extreme_high'], true)) {
+                $bucket = 'mid';
+            }
+
+            $facetVector[] = [
+                'key' => $facet,
+                'label' => $this->facetLabel($facet),
+                'slug' => self::FACET_NAME_SLUG[$facet] ?? strtolower($facet),
+                'domain' => substr($facet, 0, 1),
+                'mean' => round((float) ($facetsMean[$facet] ?? 0.0), 2),
+                'percentile' => (int) ($facetsPercentile[$facet] ?? 0),
+                'bucket' => $bucket,
             ];
         }
 
@@ -147,6 +213,7 @@ final class BigFivePublicProjectionService
         $projection = [
             'schema_version' => 'big5.public_projection.v1',
             'trait_vector' => $traitVector,
+            'facet_vector' => $facetVector,
             'trait_bands' => $traitBands,
             'dominant_traits' => $dominantTraits,
             'variant_keys' => $variantKeys,
@@ -249,6 +316,19 @@ final class BigFivePublicProjectionService
     private function traitLabel(string $trait, string $locale): string
     {
         return self::TRAIT_LABELS[$trait][$locale] ?? $trait;
+    }
+
+    private function facetLabel(string $facet): string
+    {
+        $slug = self::FACET_NAME_SLUG[$facet] ?? strtolower($facet);
+        $words = array_filter(explode('_', $slug), static fn (string $word): bool => $word !== '');
+        if ($words === []) {
+            return $facet;
+        }
+
+        $title = implode(' ', array_map(static fn (string $word): string => ucfirst($word), $words));
+
+        return sprintf('%s %s', $facet, $title);
     }
 
     private function bandLabel(string $trait, string $band, string $locale): string
