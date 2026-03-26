@@ -273,6 +273,10 @@ final class PaymentWebhookControllerTest extends TestCase
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_sec002_bill_1')
             ->count());
+        $this->assertNull(DB::table('payment_events')
+            ->where('provider', 'billing')
+            ->where('provider_event_id', 'evt_sec002_bill_1')
+            ->value('payment_attempt_id'));
         $this->assertSame(0, DB::table('email_outbox')->count());
     }
 

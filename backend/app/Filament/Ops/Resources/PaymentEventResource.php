@@ -55,6 +55,7 @@ class PaymentEventResource extends BaseTenantResource
                 Tables\Columns\TextColumn::make('provider')->sortable(),
                 Tables\Columns\TextColumn::make('provider_event_id')->label('Event ID')->searchable()->copyable(),
                 Tables\Columns\TextColumn::make('order_no')->searchable()->copyable(),
+                Tables\Columns\TextColumn::make('payment_attempt_id')->label('Attempt ID')->searchable()->copyable()->toggleable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn (string $state): string => StatusBadge::color($state))

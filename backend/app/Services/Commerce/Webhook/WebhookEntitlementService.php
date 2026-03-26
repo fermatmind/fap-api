@@ -271,6 +271,15 @@ class WebhookEntitlementService
                     $eventAt = is_scalar($normalized['paid_at'] ?? null)
                         ? (string) $normalized['paid_at']
                         : null;
+                    $boundPaymentAttempt = $this->core->orderManager()->bindPaymentEventToAttempt(
+                        $orderNo,
+                        $orgId,
+                        $provider,
+                        (string) ($eventRow->id ?? ''),
+                        $providerTradeNo,
+                        $providerTradeNo,
+                        $eventAt
+                    );
                     $nonSuccessPaymentState = $this->resolveNonSuccessPaymentState($eventType);
                     $this->core->orderManager()->touchPaymentLedger(
                         $orderNo,
@@ -292,6 +301,14 @@ class WebhookEntitlementService
                             );
 
                             return $refund;
+                        }
+                        if ($boundPaymentAttempt !== null) {
+                            $this->core->orderManager()->advancePaymentAttempt((string) ($boundPaymentAttempt->id ?? ''), [
+                                'state' => \App\Models\PaymentAttempt::STATE_VERIFIED,
+                                'latest_payment_event_id' => (string) ($eventRow->id ?? ''),
+                                'provider_trade_no' => $providerTradeNo,
+                                'verified_at' => $eventAt,
+                            ]);
                         }
                         $this->core->markEventProcessed($provider, $providerEventId);
 
@@ -322,6 +339,18 @@ class WebhookEntitlementService
                             return $transition;
                         }
 
+                        if ($boundPaymentAttempt !== null) {
+                            $this->core->orderManager()->advancePaymentAttempt((string) ($boundPaymentAttempt->id ?? ''), [
+                                'state' => match ($nonSuccessPaymentState) {
+                                    \App\Models\Order::PAYMENT_STATE_FAILED => \App\Models\PaymentAttempt::STATE_FAILED,
+                                    \App\Models\Order::PAYMENT_STATE_EXPIRED => \App\Models\PaymentAttempt::STATE_EXPIRED,
+                                    default => \App\Models\PaymentAttempt::STATE_CANCELED,
+                                },
+                                'latest_payment_event_id' => (string) ($eventRow->id ?? ''),
+                                'provider_trade_no' => $providerTradeNo,
+                                'verified_at' => $eventAt,
+                            ]);
+                        }
                         $this->core->markEventProcessed($provider, $providerEventId);
 
                         return [
@@ -383,6 +412,18 @@ class WebhookEntitlementService
 
                             return $orderTransition;
                         }
+                    }
+
+                    if ($boundPaymentAttempt !== null) {
+                        $this->core->orderManager()->advancePaymentAttempt((string) ($boundPaymentAttempt->id ?? ''), [
+                            'state' => \App\Models\PaymentAttempt::STATE_PAID,
+                            'latest_payment_event_id' => (string) ($eventRow->id ?? ''),
+                            'provider_trade_no' => $providerTradeNo,
+                            'verified_at' => $eventAt,
+                            'external_trade_no' => is_scalar($normalized['external_trade_no'] ?? null)
+                                ? (string) $normalized['external_trade_no']
+                                : null,
+                        ]);
                     }
 
                     $updateRow = [

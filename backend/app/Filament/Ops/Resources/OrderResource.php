@@ -118,6 +118,20 @@ class OrderResource extends \App\Filament\Shared\BaseTenantResource
                 Tables\Columns\TextColumn::make('grant_state')
                     ->badge()
                     ->toggleable(),
+                Tables\Columns\TextColumn::make('payment_attempts_count')
+                    ->label('Payment attempts')
+                    ->numeric()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('latest_payment_attempt_state')
+                    ->badge()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('latest_payment_attempt_provider')
+                    ->label('Attempt provider')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('latest_payment_attempt_provider_trade_no')
+                    ->label('Attempt provider ref')
+                    ->copyable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('latest_payment_status')
                     ->label('Payment status')
                     ->state(fn (Order $record): string => $support->paymentStatus($record)['label'])

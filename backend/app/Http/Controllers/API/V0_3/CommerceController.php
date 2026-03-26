@@ -166,6 +166,10 @@ class CommerceController extends Controller
         $status = $this->resolvePublicOrderStatus($order);
         $message = $this->publicOrderMessage($order);
         $delivery = $this->buildOrderDelivery($order);
+        $paymentAttemptSummary = $this->orders->paymentAttemptSummary(
+            (string) ($order->order_no ?? ''),
+            (int) ($order->org_id ?? $orgId)
+        );
         $paymentRecoveryToken = $paymentRecoveryVerified && $requestedPaymentRecoveryToken !== null
             ? $requestedPaymentRecoveryToken
             : $this->orders->issuePaymentRecoveryToken($order);
@@ -204,6 +208,8 @@ class CommerceController extends Controller
             'result_url' => $recoveryUrls['result_url'],
             'pay' => $payment['pay'],
             'checkout_url' => $payment['checkout_url'],
+            'payment_attempts_count' => $paymentAttemptSummary['count'],
+            'latest_payment_attempt' => $paymentAttemptSummary['latest'],
             'delivery' => $delivery['delivery'],
         ];
 
@@ -303,6 +309,10 @@ class CommerceController extends Controller
                     $paymentRecoveryToken
                 );
                 $order = $this->orders->findOrderByOrderNo((string) ($order->order_no ?? $existingOrderNo), $orgId) ?? $order;
+                $paymentAttemptSummary = $this->orders->paymentAttemptSummary(
+                    (string) ($order->order_no ?? $existingOrderNo),
+                    (int) ($order->org_id ?? $orgId)
+                );
 
                 return response()->json([
                     'ok' => true,
@@ -319,6 +329,8 @@ class CommerceController extends Controller
                     'result_url' => $recoveryUrls['result_url'],
                     'pay' => $payment['pay'],
                     'checkout_url' => $payment['checkout_url'],
+                    'payment_attempts_count' => $paymentAttemptSummary['count'],
+                    'latest_payment_attempt' => $paymentAttemptSummary['latest'],
                 ]);
             }
         }
@@ -385,6 +397,10 @@ class CommerceController extends Controller
         if ($description === '') {
             $description = 'FermatMind Order';
         }
+        $paymentScene = $this->resolvePaymentActionScene((string) $request->userAgent());
+        $paymentAttempt = $order !== null
+            ? $this->createPaymentAttemptForOrder($order, $provider, $paymentScene)
+            : null;
 
         $payAction = $this->resolveCheckoutPayAction(
             $provider,
@@ -398,6 +414,13 @@ class CommerceController extends Controller
         );
 
         if (($payAction['ok'] ?? true) !== true) {
+            if ($paymentAttempt !== null) {
+                $this->orders->advancePaymentAttempt((string) ($paymentAttempt->id ?? ''), [
+                    'state' => \App\Models\PaymentAttempt::STATE_FAILED,
+                    'last_error_code' => $this->trimNullableString($payAction['error_code'] ?? null),
+                    'last_error_message' => $this->trimNullableString($payAction['message'] ?? null),
+                ]);
+            }
             $status = (int) ($payAction['status'] ?? 502);
             abort($status >= 400 ? $status : 502, (string) ($payAction['message'] ?? 'payment unavailable.'));
         }
@@ -418,21 +441,35 @@ class CommerceController extends Controller
         }
 
         if ($order !== null) {
-            $this->orders->markPaymentPending(
+            $freshOrder = $this->orders->findOrderByOrderNo(
                 (string) ($order->order_no ?? ''),
-                (int) ($order->org_id ?? $orgId),
+                (int) ($order->org_id ?? $orgId)
+            ) ?? $order;
+            $this->orders->markPaymentPending(
+                (string) ($freshOrder->order_no ?? ''),
+                (int) ($freshOrder->org_id ?? $orgId),
                 $ledgerContext['channel'] ?? null,
                 $ledgerContext['provider_app'] ?? null
             );
+            $paymentAttempt = $this->recordPaymentAttemptPresentation(
+                $paymentAttempt,
+                $freshOrder,
+                $paymentScene,
+                $payAction,
+                $payPayload,
+                $checkoutUrl
+            );
             $this->persistOrderPaymentPayload(
-                $order,
-                $this->resolvePaymentActionScene((string) $request->userAgent()),
+                $freshOrder,
+                $paymentScene,
                 [
                     'provider' => $provider,
                     'pay' => $payPayload,
                     'checkout_url' => $checkoutUrl,
-                ]
+                ],
+                $this->trimNullableString($paymentAttempt->id ?? null)
             );
+            $order = $freshOrder;
         }
 
         $paymentRecoveryToken = $order !== null ? $this->orders->issuePaymentRecoveryToken($order) : null;
@@ -467,6 +504,18 @@ class CommerceController extends Controller
             'result_url' => $recoveryUrls['result_url'],
             'pay' => $presentedPayment['pay'],
             'checkout_url' => $presentedPayment['checkout_url'],
+            'payment_attempts_count' => $order !== null
+                ? $this->orders->paymentAttemptSummary(
+                    (string) ($order->order_no ?? ''),
+                    (int) ($order->org_id ?? 0)
+                )['count']
+                : 0,
+            'latest_payment_attempt' => $order !== null
+                ? $this->orders->paymentAttemptSummary(
+                    (string) ($order->order_no ?? ''),
+                    (int) ($order->org_id ?? 0)
+                )['latest']
+                : null,
         ]);
     }
 
@@ -531,6 +580,10 @@ class CommerceController extends Controller
             $order = $this->orders->findOrderByOrderNo((string) ($order->order_no ?? $orderNo), $orgId) ?? $order;
             $status = $this->resolvePublicOrderStatus($order);
         }
+        $paymentAttemptSummary = $this->orders->paymentAttemptSummary(
+            (string) ($order->order_no ?? $orderNo),
+            (int) ($order->org_id ?? $orgId)
+        );
 
         $payload = [
             'ok' => true,
@@ -546,6 +599,8 @@ class CommerceController extends Controller
             'result_url' => $recoveryUrls['result_url'],
             'pay' => $payment['pay'],
             'checkout_url' => $payment['checkout_url'],
+            'payment_attempts_count' => $paymentAttemptSummary['count'],
+            'latest_payment_attempt' => $paymentAttemptSummary['latest'],
             'delivery' => $delivery['delivery'],
         ];
 
@@ -739,6 +794,7 @@ class CommerceController extends Controller
         if ($description === '') {
             $description = 'FermatMind Order';
         }
+        $paymentAttempt = $this->createPaymentAttemptForOrder($order, $normalizedProvider, $scene);
 
         $payAction = $this->resolveCheckoutPayAction(
             $normalizedProvider,
@@ -758,6 +814,13 @@ class CommerceController extends Controller
                 'status' => (string) ($order->status ?? ''),
                 'reason' => $payAction['error_code'] ?? $payAction['message'] ?? 'unknown',
             ]);
+            if ($paymentAttempt !== null) {
+                $this->orders->advancePaymentAttempt((string) ($paymentAttempt->id ?? ''), [
+                    'state' => \App\Models\PaymentAttempt::STATE_FAILED,
+                    'last_error_code' => $this->trimNullableString($payAction['error_code'] ?? null),
+                    'last_error_message' => $this->trimNullableString($payAction['message'] ?? null),
+                ]);
+            }
 
             return [
                 'provider' => $normalizedProvider,
@@ -773,7 +836,21 @@ class CommerceController extends Controller
             $this->trimNullableString($order->channel ?? null),
             $this->trimNullableString($order->provider_app ?? null)
         );
-        $this->persistOrderPaymentPayload($order, $scene, $presented);
+        $freshOrder = $this->orders->findOrderByOrderNo($orderNo, (int) ($order->org_id ?? 0)) ?? $order;
+        $paymentAttempt = $this->recordPaymentAttemptPresentation(
+            $paymentAttempt,
+            $freshOrder,
+            $scene,
+            $payAction,
+            is_array($presented['pay'] ?? null) ? $presented['pay'] : null,
+            $this->trimNullableString($presented['checkout_url'] ?? null)
+        );
+        $this->persistOrderPaymentPayload(
+            $freshOrder,
+            $scene,
+            $presented,
+            $this->trimNullableString($paymentAttempt->id ?? null)
+        );
 
         return $this->decoratePaymentPayloadForRecovery($presented, $paymentRecoveryToken);
     }
@@ -865,7 +942,7 @@ class CommerceController extends Controller
      *     checkout_url:?string
      * }  $payload
      */
-    private function persistOrderPaymentPayload(object $order, string $scene, array $payload): void
+    private function persistOrderPaymentPayload(object $order, string $scene, array $payload, ?string $paymentAttemptId = null): void
     {
         $provider = strtolower(trim((string) ($payload['provider'] ?? '')));
         $pay = $payload['pay'] ?? null;
@@ -893,6 +970,7 @@ class CommerceController extends Controller
                 'provider' => $provider,
             ],
             'checkout_url' => $payload['checkout_url'] ?? null,
+            'payment_attempt_id' => $paymentAttemptId,
             'cached_at' => now()->toIso8601String(),
         ];
         $cache[$provider] = $providerCache;
@@ -905,6 +983,122 @@ class CommerceController extends Controller
                 'meta_json' => json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                 'updated_at' => now(),
             ]);
+    }
+
+    private function createPaymentAttemptForOrder(object $order, string $provider, string $scene): ?object
+    {
+        $created = $this->orders->createPaymentAttempt(
+            (string) ($order->order_no ?? ''),
+            (int) ($order->org_id ?? 0),
+            $provider,
+            $this->trimNullableString($order->channel ?? null),
+            $this->trimNullableString($order->provider_app ?? null),
+            $scene,
+            (int) ($order->amount_cents ?? $order->amount_total ?? 0),
+            (string) ($order->currency ?? 'USD'),
+            [
+                'source' => 'order_payment_action',
+                'scene' => $scene,
+            ]
+        );
+
+        if (($created['ok'] ?? false) !== true) {
+            Log::warning('ORDER_PAYMENT_ATTEMPT_CREATE_FAILED', [
+                'order_no' => (string) ($order->order_no ?? ''),
+                'provider' => $provider,
+                'error_code' => $created['error_code'] ?? $created['error'] ?? 'unknown',
+            ]);
+
+            return null;
+        }
+
+        return is_object($created['attempt'] ?? null) ? $created['attempt'] : null;
+    }
+
+    private function recordPaymentAttemptPresentation(
+        ?object $paymentAttempt,
+        object $order,
+        string $scene,
+        array $payAction,
+        ?array $payPayload,
+        ?string $checkoutUrl
+    ): ?object {
+        if ($paymentAttempt === null) {
+            return null;
+        }
+
+        $provider = strtolower(trim((string) ($order->provider ?? '')));
+        $payloadMeta = [
+            'scene' => $scene,
+            'pay_type' => strtolower(trim((string) ($payPayload['type'] ?? ''))),
+            'pay_value_sha256' => $this->digestNullableString($payPayload['value'] ?? null),
+            'checkout_url_sha256' => $this->digestNullableString($checkoutUrl),
+            'has_checkout_url' => $checkoutUrl !== null && trim($checkoutUrl) !== '',
+        ];
+        $externalTradeNo = $this->trimNullableString($payAction['external_trade_no'] ?? null)
+            ?? $this->trimNullableString($order->external_trade_no ?? null);
+        $providerSessionRef = $this->resolveProviderSessionRef(
+            $provider,
+            $payPayload,
+            $checkoutUrl,
+            $payAction
+        );
+
+        if ($payPayload !== null) {
+            $paymentAttempt = $this->orders->advancePaymentAttempt((string) ($paymentAttempt->id ?? ''), [
+                'state' => \App\Models\PaymentAttempt::STATE_PROVIDER_CREATED,
+                'external_trade_no' => $externalTradeNo,
+                'provider_session_ref' => $providerSessionRef,
+                'provider_created_at' => now()->toDateTimeString(),
+                'payload_meta_json' => $payloadMeta,
+            ]);
+
+            return $this->orders->advancePaymentAttempt((string) ($paymentAttempt->id ?? ''), [
+                'state' => \App\Models\PaymentAttempt::STATE_CLIENT_PRESENTED,
+                'client_presented_at' => now()->toDateTimeString(),
+                'payload_meta_json' => $payloadMeta,
+            ]);
+        }
+
+        return $this->orders->advancePaymentAttempt((string) ($paymentAttempt->id ?? ''), [
+            'payload_meta_json' => $payloadMeta,
+        ]);
+    }
+
+    private function resolveProviderSessionRef(
+        string $provider,
+        ?array $payPayload,
+        ?string $checkoutUrl,
+        array $payAction
+    ): ?string {
+        $provider = strtolower(trim($provider));
+
+        if ($provider === 'lemonsqueezy') {
+            $path = trim((string) parse_url((string) ($checkoutUrl ?? ''), PHP_URL_PATH));
+            if ($path !== '') {
+                $segment = basename($path);
+                if ($segment !== '') {
+                    return substr($segment, 0, 191);
+                }
+            }
+        }
+
+        $explicit = $this->trimNullableString($payAction['provider_session_ref'] ?? null);
+        if ($explicit !== null) {
+            return $explicit;
+        }
+
+        return $this->trimNullableString($payPayload['provider_session_ref'] ?? null);
+    }
+
+    private function digestNullableString(mixed $value): ?string
+    {
+        $normalized = trim((string) $value);
+        if ($normalized === '') {
+            return null;
+        }
+
+        return hash('sha256', $normalized);
     }
 
     private function resolvePaymentActionScene(string $userAgent): string

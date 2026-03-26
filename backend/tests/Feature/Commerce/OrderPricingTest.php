@@ -44,6 +44,7 @@ final class OrderPricingTest extends TestCase
         $this->assertSame('user:u_pricing_1', (string) ($stored->external_user_ref ?? ''));
         $this->assertSame('web', (string) ($stored->channel ?? ''));
         $this->assertNull($stored->provider_app ?? null);
+        $this->assertSame(1, DB::table('payment_attempts')->where('order_id', $orderId)->count());
     }
 
     public function test_create_order_throws_invalid_sku_exception_when_sku_does_not_exist(): void

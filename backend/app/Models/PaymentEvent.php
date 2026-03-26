@@ -24,6 +24,7 @@ class PaymentEvent extends Model
         'provider',
         'provider_event_id',
         'order_id',
+        'payment_attempt_id',
         'order_no',
         'event_type',
         'signature_ok',
@@ -62,6 +63,11 @@ class PaymentEvent extends Model
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class, 'order_no', 'order_no');
+    }
+
+    public function paymentAttempt(): BelongsTo
+    {
+        return $this->belongsTo(PaymentAttempt::class, 'payment_attempt_id', 'id');
     }
 
     public static function allowOrgZeroContext(): bool

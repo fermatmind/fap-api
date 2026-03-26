@@ -26,6 +26,7 @@ class PaymentEventsRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('provider')->sortable(),
                 Tables\Columns\TextColumn::make('provider_event_id')->searchable()->copyable(),
+                Tables\Columns\TextColumn::make('payment_attempt_id')->label('Attempt ID')->copyable()->toggleable(),
                 Tables\Columns\TextColumn::make('status')->badge()->sortable(),
                 Tables\Columns\IconColumn::make('signature_ok')->boolean(),
                 Tables\Columns\TextColumn::make('handle_status')->badge(),
