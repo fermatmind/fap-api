@@ -5,7 +5,7 @@
 - 相关入口文件（命中 KEY_RE 后补齐）：
   - backend/app/Services/ContentPackResolver.php（legacy：fallback + loadJson/loadText 热路径）
   - backend/app/Services/Content/ContentStore.php（hot_redis 资产缓存策略）
-  - backend/app/Http/Controllers/MbtiController.php（/api/v0.3/attempts/{id}/report）
+  - 历史入口：backend/app/Http/Controllers/MbtiController.php（后续 PR 已删除；current `/api/v0.3/attempts/{id}/report` 走 `AttemptReadController`）
   - backend/app/Http/Middleware/FmTokenOptional.php（fm_user_id / fm_anon_id 注入）
   - backend/routes/api.php（v0.2 路由与 middleware 口径）
   - backend/config/cache.php（hot_redis store）
@@ -27,7 +27,7 @@
 - 需要新增/修改点：
   - ContentLoaderService：Cache::remember 统一缓存读盘（pack_id + dir_version + rel_path → key）
   - ContentPackResolver：fallback 扫描与 file_get_contents 只在 cache miss 执行
-  - MbtiController::getReport：IDOR 防护（owner 校验失败统一 404）
+  - 历史整改项：MbtiController::getReport 的 IDOR 防护；current ownership/read path 已迁到 v0.3 current controllers
 
 - 风险点与规避（端口/CI 工具依赖/pack-seed-config 一致性/sqlite 迁移一致性/404 口径/脱敏）：
   - 缓存 key 禁止写入绝对路径；key 使用 pack_id + dir_version + rel_path 的 hash

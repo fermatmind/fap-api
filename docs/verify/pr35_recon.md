@@ -5,7 +5,7 @@
   - backend/app/Services/Assessment/Drivers/GenericLikertDriver.php
   - backend/app/Services/Commerce/PaymentWebhookProcessor.php
   - backend/app/Http/Controllers/API/V0_3/Webhooks/PaymentWebhookController.php
-  - backend/app/Http/Controllers/MbtiController.php
+  - 历史入口：backend/app/Http/Controllers/MbtiController.php（已删除）
   - backend/app/Services/Content/ContentLoaderService.php
 - 相关路由：
   - POST /api/v0.3/webhooks/payment/{provider}

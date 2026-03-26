@@ -63,11 +63,11 @@
 ## 7. ReportLookup 关系澄清
 - /api/v0.3/lookup/* 只做 attempt/order 定位并返回 report_api，不直接读 snapshot
 - 真正消费 snapshot 的是 /api/v0.3/attempts/{id}/report（Gatekeeper）
-- v0.3 legacy report 仍走 legacy report_jobs 链路（需显式标注）
+- 历史上曾有 legacy report_jobs 兼容链路；current `/api/v0.3/attempts/{id}/report` 已不再由 legacy controller/service 提供。
 
 补充说明：
 - `LookupController` 的 `/lookup/ticket|device|order` 输出的是 `result_api/report_api` 定位信息。
-- `GET /api/v0.3/attempts/{attemptId}/report` 由 `LegacyReportController` + `LegacyReportService` 处理，核心依赖 `report_jobs` 与 `GenerateReportJob`，不是 `report_snapshots`。
+- `GET /api/v0.3/attempts/{attemptId}/report` 当前由 `AttemptReadController` + `ReportGatekeeper` 驱动；`LegacyReportService` 仅保留 isolated compatibility 行为。
 
 ## 8. 存储真相
 - Snapshot payload 存于 DB（report_snapshots JSON/text-json 列）

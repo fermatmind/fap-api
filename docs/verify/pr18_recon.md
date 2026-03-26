@@ -7,7 +7,8 @@
 - v0.3 Scales lookup: `backend/app/Http/Controllers/API/V0_3/ScalesLookupController.php`
 - Scale registry 服务：`backend/app/Services/Scale/ScaleRegistry.php`
 - Event 写入：`backend/app/Services/Analytics/EventRecorder.php`
-- Report jobs：`backend/app/Models/ReportJob.php`, `backend/app/Jobs/GenerateReportJob.php`, `backend/app/Http/Controllers/MbtiController.php`
+- Report jobs：`backend/app/Models/ReportJob.php`, `backend/app/Jobs/GenerateReportJob.php`
+  - `MbtiController.php` 是当时的历史入口，现已删除
 - 鉴权中间件：`backend/app/Http/Middleware/FmTokenAuth.php`
   - 从 `fm_tokens` DB 解析 `user_id` 并注入 request attributes `fm_user_id/user_id`
 - Token 签发：`backend/app/Services/Auth/FmTokenService.php`

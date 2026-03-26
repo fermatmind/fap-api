@@ -8,6 +8,11 @@ use App\Services\Legacy\Mbti\Report\V2\LegacyMbtiReportPayloadBuilderV2;
 use App\Services\Legacy\Mbti\Report\V2\LegacyMbtiReportPayloadBuilderV2Facade;
 use App\Services\Legacy\Mbti\Report\V2\LegacyMbtiReportPayloadComposer;
 
+/**
+ * Legacy MBTI payload builder kept for compatibility tests and golden fixtures.
+ *
+ * It is not part of the current v0.3 runtime report chain.
+ */
 final class LegacyMbtiReportPayloadBuilder
 {
     private LegacyMbtiReportPayloadBuilderV2 $legacy;
