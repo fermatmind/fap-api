@@ -3,6 +3,7 @@
 namespace App\Services\Payments;
 
 use App\Models\Order;
+use App\Models\PaymentAttempt;
 use App\Services\Commerce\SkuPriceService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -89,6 +90,9 @@ class PaymentService
 
         DB::table('orders')->insert($row);
         $order = DB::table('orders')->where('id', $orderId)->first();
+        if ($order) {
+            $this->ensureLegacyPaymentAttempt($order);
+        }
 
         return [
             'ok' => true,
@@ -121,6 +125,7 @@ class PaymentService
 
         $provider = self::PAYMENT_PROVIDER_INTERNAL;
         $providerEventId = 'dev_mark_paid:'.$orderId;
+        $paymentAttempt = $this->ensureLegacyPaymentAttempt($order);
         $existing = $this->paymentEventQuery($provider, $providerEventId)->first();
 
         if (! $existing) {
@@ -135,6 +140,8 @@ class PaymentService
                 'provider' => $provider,
                 'provider_event_id' => $providerEventId,
                 'order_id' => $orderId,
+                'payment_attempt_id' => is_object($paymentAttempt) ? ($paymentAttempt->id ?? null) : null,
+                'order_no' => $order->order_no ?? null,
                 'event_type' => 'mark_paid',
                 'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                 'signature_ok' => true,
@@ -156,6 +163,15 @@ class PaymentService
                 'paid_at' => $now,
                 'updated_at' => $now,
             ]);
+        if ($paymentAttempt) {
+            $this->advanceLegacyPaymentAttempt((string) $paymentAttempt->id, [
+                'state' => PaymentAttempt::STATE_PAID,
+                'latest_payment_event_id' => $existing->id ?? $this->trimOrNull($this->paymentEventQuery($provider, $providerEventId)->value('id')),
+                'verified_at' => $now,
+                'callback_received_at' => $now,
+                'finalized_at' => $now,
+            ]);
+        }
 
         $order = DB::table('orders')->where('id', $orderId)->first();
 
@@ -330,6 +346,8 @@ class PaymentService
                 'provider' => $provider,
                 'provider_event_id' => $providerEventId,
                 'order_id' => $orderId,
+                'payment_attempt_id' => $this->trimOrNull((string) (is_object($legacyAttempt = $this->ensureLegacyPaymentAttempt($order)) ? ($legacyAttempt->id ?? '') : '')),
+                'order_no' => $order->order_no ?? null,
                 'event_type' => $eventType,
                 'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                 'signature_ok' => $signatureOk,
@@ -380,9 +398,19 @@ class PaymentService
                         ->where('id', $orderId)
                         ->update([
                             'status' => 'paid',
+                            'payment_state' => Order::PAYMENT_STATE_PAID,
                             'paid_at' => $now,
                             'updated_at' => $now,
                         ]);
+                }
+                if (! empty($eventRow['payment_attempt_id'])) {
+                    $this->advanceLegacyPaymentAttempt((string) $eventRow['payment_attempt_id'], [
+                        'state' => PaymentAttempt::STATE_PAID,
+                        'latest_payment_event_id' => (string) $eventRow['id'],
+                        'callback_received_at' => $now,
+                        'verified_at' => $now,
+                        'finalized_at' => $now,
+                    ]);
                 }
 
                 if (in_array($order->status, ['pending', 'paid', 'fulfilled'], true)) {
@@ -403,6 +431,7 @@ class PaymentService
                         ->where('id', $orderId)
                         ->update([
                             'status' => 'refunded',
+                            'payment_state' => Order::PAYMENT_STATE_REFUNDED,
                             'refunded_at' => $now,
                             'updated_at' => $now,
                         ]);
@@ -562,6 +591,120 @@ class PaymentService
         DB::table('orders')
             ->where('id', $orderId)
             ->update($updates);
+    }
+
+    private function ensureLegacyPaymentAttempt(object $order): ?object
+    {
+        if (! DB::getSchemaBuilder()->hasTable('payment_attempts')) {
+            return null;
+        }
+
+        $existing = $this->latestPaymentAttemptForOrder((string) ($order->id ?? ''));
+        if ($existing) {
+            return $existing;
+        }
+
+        $now = now();
+        $row = [
+            'id' => (string) Str::uuid(),
+            'org_id' => (int) ($order->org_id ?? 0),
+            'order_id' => (string) ($order->id ?? ''),
+            'order_no' => (string) ($order->order_no ?? ''),
+            'attempt_no' => 1,
+            'provider' => strtolower(trim((string) ($order->provider ?? self::PAYMENT_PROVIDER_INTERNAL))),
+            'channel' => Order::normalizeChannel((string) ($order->channel ?? '')) ?? 'web',
+            'provider_app' => $this->trimOrNull($order->provider_app ?? null),
+            'pay_scene' => null,
+            'state' => PaymentAttempt::STATE_INITIATED,
+            'external_trade_no' => $this->trimOrNull($order->external_trade_no ?? null),
+            'provider_trade_no' => $this->trimOrNull($order->provider_trade_no ?? null),
+            'provider_session_ref' => null,
+            'amount_expected' => (int) ($order->amount_cents ?? $order->amount_total ?? 0),
+            'currency' => strtoupper(trim((string) ($order->currency ?? 'USD'))),
+            'payload_meta_json' => json_encode(['source' => 'legacy_payment_service'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'latest_payment_event_id' => null,
+            'initiated_at' => $now,
+            'provider_created_at' => null,
+            'client_presented_at' => null,
+            'callback_received_at' => null,
+            'verified_at' => null,
+            'finalized_at' => null,
+            'last_error_code' => null,
+            'last_error_message' => null,
+            'meta_json' => null,
+            'created_at' => $now,
+            'updated_at' => $now,
+        ];
+
+        DB::table('payment_attempts')->insert($row);
+
+        return DB::table('payment_attempts')->where('id', $row['id'])->first();
+    }
+
+    private function latestPaymentAttemptForOrder(string $orderId): ?object
+    {
+        if ($orderId === '' || ! DB::getSchemaBuilder()->hasTable('payment_attempts')) {
+            return null;
+        }
+
+        return DB::table('payment_attempts')
+            ->where('order_id', $orderId)
+            ->orderByDesc('attempt_no')
+            ->first();
+    }
+
+    private function advanceLegacyPaymentAttempt(string $attemptId, array $updates): void
+    {
+        if ($attemptId === '' || ! DB::getSchemaBuilder()->hasTable('payment_attempts')) {
+            return;
+        }
+
+        $current = DB::table('payment_attempts')->where('id', $attemptId)->first();
+        if (! $current) {
+            return;
+        }
+
+        $state = isset($updates['state']) ? PaymentAttempt::normalizedState((string) $updates['state']) : null;
+        if ($state !== null) {
+            $updates['state'] = $this->resolveLegacyAttemptState(
+                (string) ($current->state ?? ''),
+                $state
+            );
+        }
+
+        foreach (['callback_received_at', 'verified_at', 'finalized_at'] as $field) {
+            if (isset($updates[$field]) && ! is_string($updates[$field])) {
+                $updates[$field] = (string) $updates[$field];
+            }
+        }
+
+        $updates['updated_at'] = now();
+
+        DB::table('payment_attempts')
+            ->where('id', $attemptId)
+            ->update($updates);
+    }
+
+    private function resolveLegacyAttemptState(string $currentState, string $requestedState): string
+    {
+        $rank = [
+            PaymentAttempt::STATE_INITIATED => 10,
+            PaymentAttempt::STATE_PROVIDER_CREATED => 20,
+            PaymentAttempt::STATE_CLIENT_PRESENTED => 30,
+            PaymentAttempt::STATE_CALLBACK_RECEIVED => 40,
+            PaymentAttempt::STATE_VERIFIED => 50,
+            PaymentAttempt::STATE_PAID => 60,
+            PaymentAttempt::STATE_FAILED => 60,
+            PaymentAttempt::STATE_CANCELED => 60,
+            PaymentAttempt::STATE_EXPIRED => 60,
+        ];
+
+        $normalizedCurrent = PaymentAttempt::normalizedState($currentState);
+        $normalizedRequested = PaymentAttempt::normalizedState($requestedState);
+
+        return ($rank[$normalizedRequested] ?? 0) >= ($rank[$normalizedCurrent] ?? 0)
+            ? $normalizedRequested
+            : $normalizedCurrent;
     }
 
     private function presentBenefit($row): array

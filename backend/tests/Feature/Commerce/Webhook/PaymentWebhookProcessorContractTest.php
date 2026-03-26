@@ -8,6 +8,8 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Commerce\PaymentWebhookProcessor;
 use Database\Seeders\Pr19CommerceSeeder;
+use Illuminate\Cache\ArrayStore;
+use Illuminate\Cache\Repository as CacheRepository;
 use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
@@ -30,7 +32,7 @@ final class PaymentWebhookProcessorContractTest extends TestCase
 
     public function test_duplicate_event_is_idempotent_and_db_state_is_stable(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
 
         $attemptId = $this->createMbtiAttemptWithResult();
         $orderNo = 'ord_contract_dup_1';
@@ -94,7 +96,7 @@ final class PaymentWebhookProcessorContractTest extends TestCase
 
     public function test_provider_mismatch_is_rejected_without_entitlement_write(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
 
         $orderNo = 'ord_contract_provider_mismatch_1';
 
@@ -155,7 +157,7 @@ final class PaymentWebhookProcessorContractTest extends TestCase
 
     public function test_semantic_reject_keeps_http_200_and_reject_reason_contract(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
 
         $orderNo = 'ord_contract_semantic_reject_1';
         DB::table('orders')->insert([
@@ -207,7 +209,7 @@ final class PaymentWebhookProcessorContractTest extends TestCase
 
     public function test_amount_and_currency_mismatch_are_rejected_with_stable_contract(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
         $processor = app(PaymentWebhookProcessor::class);
 
         $orderNo = 'ord_contract_amount_currency_1';
@@ -282,7 +284,7 @@ final class PaymentWebhookProcessorContractTest extends TestCase
 
     public function test_missing_order_keeps_contract_and_does_not_grant_benefit(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
 
         $res = $this->postSignedBillingWebhook([
             'provider_event_id' => 'evt_contract_order_missing_1',
@@ -305,7 +307,7 @@ final class PaymentWebhookProcessorContractTest extends TestCase
 
     public function test_refund_event_does_not_issue_duplicate_benefit_side_effects(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
 
         $orderNo = 'ord_contract_refund_1';
         DB::table('orders')->insert([
@@ -363,11 +365,15 @@ final class PaymentWebhookProcessorContractTest extends TestCase
 
     public function test_lock_timeout_returns_webhook_busy_contract(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
 
+        $cacheStore = new CacheRepository(new ArrayStore);
+        $this->app->instance('cache.store', $cacheStore);
+        $this->app->instance(\Illuminate\Contracts\Cache\Repository::class, $cacheStore);
         Cache::shouldReceive('lock')
             ->once()
-            ->andReturn(new class {
+            ->andReturn(new class
+            {
                 public function block(int $seconds, callable $callback): mixed
                 {
                     throw new LockTimeoutException('busy');
@@ -391,7 +397,7 @@ final class PaymentWebhookProcessorContractTest extends TestCase
 
     public function test_oversized_payload_is_rejected_by_controller_with_413(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
         config(['payments.webhook_max_payload_bytes' => 1024]);
 
         $res = $this->postSignedBillingWebhook([
@@ -409,7 +415,7 @@ final class PaymentWebhookProcessorContractTest extends TestCase
 
     public function test_controller_propagates_processor_status_in_contract_mode(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
 
         $mock = Mockery::mock(PaymentWebhookProcessor::class);
         $mock->shouldReceive('process')

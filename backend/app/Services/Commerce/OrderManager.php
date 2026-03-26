@@ -3,6 +3,7 @@
 namespace App\Services\Commerce;
 
 use App\Models\Order;
+use App\Models\PaymentAttempt;
 use App\Services\Email\EmailOutboxService;
 use App\Services\Payments\PaymentProviderRegistry;
 use App\Services\Report\ReportAccess;
@@ -703,6 +704,298 @@ class OrderManager
                 'grant_state' => Order::normalizeGrantState($grantState),
                 'updated_at' => now(),
             ]);
+    }
+
+    public function createPaymentAttempt(
+        string $orderNo,
+        int $orgId,
+        string $provider,
+        ?string $channel,
+        ?string $providerApp,
+        ?string $payScene,
+        int $amountExpected,
+        ?string $currency,
+        array $payloadMeta = [],
+        array $meta = [],
+    ): array {
+        if (! Schema::hasTable('payment_attempts')) {
+            return $this->conflict('PAYMENT_ATTEMPTS_UNAVAILABLE', 'payment attempts unavailable.');
+        }
+
+        $orderNo = trim($orderNo);
+        if ($orderNo === '') {
+            return $this->badRequest('ORDER_REQUIRED', 'order_no is required.');
+        }
+
+        return DB::transaction(function () use (
+            $orderNo,
+            $orgId,
+            $provider,
+            $channel,
+            $providerApp,
+            $payScene,
+            $amountExpected,
+            $currency,
+            $payloadMeta,
+            $meta,
+        ): array {
+            $order = DB::table('orders')
+                ->where('order_no', $orderNo)
+                ->where('org_id', $orgId)
+                ->lockForUpdate()
+                ->first();
+            if (! $order) {
+                return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
+            }
+
+            $nextAttemptNo = ((int) DB::table('payment_attempts')
+                ->where('order_id', (string) ($order->id ?? ''))
+                ->max('attempt_no')) + 1;
+            if ($nextAttemptNo <= 0) {
+                $nextAttemptNo = 1;
+            }
+
+            $now = now();
+            $row = [
+                'id' => (string) Str::uuid(),
+                'org_id' => $orgId,
+                'order_id' => (string) ($order->id ?? ''),
+                'order_no' => $orderNo,
+                'attempt_no' => $nextAttemptNo,
+                'provider' => strtolower(trim($provider)),
+                'channel' => Order::normalizeChannel($channel),
+                'provider_app' => $this->trimOrNull($providerApp),
+                'pay_scene' => $this->normalizePaymentAttemptPayScene($payScene),
+                'state' => PaymentAttempt::STATE_INITIATED,
+                'external_trade_no' => null,
+                'provider_trade_no' => null,
+                'provider_session_ref' => null,
+                'amount_expected' => max(0, $amountExpected),
+                'currency' => strtoupper(trim((string) $currency)) !== '' ? strtoupper(trim((string) $currency)) : 'USD',
+                'payload_meta_json' => $this->encodeJsonColumn($payloadMeta),
+                'latest_payment_event_id' => null,
+                'initiated_at' => $now,
+                'provider_created_at' => null,
+                'client_presented_at' => null,
+                'callback_received_at' => null,
+                'verified_at' => null,
+                'finalized_at' => null,
+                'last_error_code' => null,
+                'last_error_message' => null,
+                'meta_json' => $this->encodeJsonColumn($meta),
+                'created_at' => $now,
+                'updated_at' => $now,
+            ];
+
+            DB::table('payment_attempts')->insert($row);
+
+            return [
+                'ok' => true,
+                'attempt' => DB::table('payment_attempts')->where('id', $row['id'])->first() ?? (object) $row,
+            ];
+        });
+    }
+
+    public function advancePaymentAttempt(string $attemptId, array $context = []): ?object
+    {
+        if (! Schema::hasTable('payment_attempts')) {
+            return null;
+        }
+
+        $attemptId = trim($attemptId);
+        if ($attemptId === '') {
+            return null;
+        }
+
+        $attempt = DB::table('payment_attempts')
+            ->where('id', $attemptId)
+            ->first();
+        if (! $attempt) {
+            return null;
+        }
+
+        $resolvedState = $this->resolveNextPaymentAttemptState(
+            (string) ($attempt->state ?? ''),
+            $context['state'] ?? null
+        );
+        $updates = [
+            'state' => $resolvedState,
+            'updated_at' => now(),
+        ];
+
+        foreach ([
+            'external_trade_no',
+            'provider_trade_no',
+            'provider_session_ref',
+            'latest_payment_event_id',
+            'last_error_code',
+            'last_error_message',
+        ] as $field) {
+            $value = $this->trimOrNull($context[$field] ?? null);
+            if ($value !== null) {
+                $updates[$field] = $value;
+            }
+        }
+
+        foreach ([
+            'initiated_at',
+            'provider_created_at',
+            'client_presented_at',
+            'callback_received_at',
+            'verified_at',
+            'finalized_at',
+        ] as $field) {
+            $value = $this->trimOrNull($context[$field] ?? null);
+            if ($value !== null) {
+                $updates[$field] = $value;
+            }
+        }
+
+        if ($resolvedState === PaymentAttempt::STATE_PROVIDER_CREATED && empty($attempt->provider_created_at)) {
+            $updates['provider_created_at'] = $updates['provider_created_at'] ?? now();
+        }
+
+        if ($resolvedState === PaymentAttempt::STATE_CLIENT_PRESENTED && empty($attempt->client_presented_at)) {
+            $updates['client_presented_at'] = $updates['client_presented_at'] ?? now();
+        }
+
+        if ($resolvedState === PaymentAttempt::STATE_CALLBACK_RECEIVED && empty($attempt->callback_received_at)) {
+            $updates['callback_received_at'] = $updates['callback_received_at'] ?? now();
+        }
+
+        if (in_array($resolvedState, [
+            PaymentAttempt::STATE_VERIFIED,
+            PaymentAttempt::STATE_PAID,
+            PaymentAttempt::STATE_FAILED,
+            PaymentAttempt::STATE_CANCELED,
+            PaymentAttempt::STATE_EXPIRED,
+        ], true) && empty($attempt->verified_at)) {
+            $updates['verified_at'] = $updates['verified_at'] ?? now();
+        }
+
+        if (PaymentAttempt::isFinalState($resolvedState) && empty($attempt->finalized_at)) {
+            $updates['finalized_at'] = $updates['finalized_at'] ?? now();
+        }
+
+        if (array_key_exists('payload_meta_json', $context)) {
+            $updates['payload_meta_json'] = $this->encodeJsonColumn(
+                $this->mergeJsonColumns($attempt->payload_meta_json ?? null, $context['payload_meta_json'])
+            );
+        }
+
+        if (array_key_exists('meta_json', $context)) {
+            $updates['meta_json'] = $this->encodeJsonColumn(
+                $this->mergeJsonColumns($attempt->meta_json ?? null, $context['meta_json'])
+            );
+        }
+
+        DB::table('payment_attempts')
+            ->where('id', $attemptId)
+            ->update($updates);
+
+        return DB::table('payment_attempts')->where('id', $attemptId)->first();
+    }
+
+    public function bindPaymentEventToAttempt(
+        string $orderNo,
+        int $orgId,
+        string $provider,
+        string $paymentEventId,
+        ?string $externalTradeNo = null,
+        ?string $providerTradeNo = null,
+        ?string $callbackReceivedAt = null
+    ): ?object {
+        if (! Schema::hasTable('payment_attempts') || ! Schema::hasColumn('payment_events', 'payment_attempt_id')) {
+            return null;
+        }
+
+        $paymentEventId = trim($paymentEventId);
+        if ($paymentEventId === '') {
+            return null;
+        }
+
+        $event = DB::table('payment_events')->where('id', $paymentEventId)->first();
+        if (! $event) {
+            return null;
+        }
+
+        $existingAttemptId = $this->trimOrNull((string) ($event->payment_attempt_id ?? ''));
+        if ($existingAttemptId !== null) {
+            return $this->advancePaymentAttempt($existingAttemptId, [
+                'state' => PaymentAttempt::STATE_CALLBACK_RECEIVED,
+                'latest_payment_event_id' => $paymentEventId,
+                'external_trade_no' => $externalTradeNo,
+                'provider_trade_no' => $providerTradeNo,
+                'callback_received_at' => $callbackReceivedAt,
+            ]);
+        }
+
+        $order = DB::table('orders')
+            ->where('order_no', trim($orderNo))
+            ->where('org_id', $orgId)
+            ->first();
+        if (! $order) {
+            return null;
+        }
+
+        $attempt = $this->resolvePaymentAttemptForWebhook(
+            (string) ($order->id ?? ''),
+            strtolower(trim($provider)),
+            $externalTradeNo,
+            $providerTradeNo
+        );
+        if (! $attempt) {
+            return null;
+        }
+
+        DB::table('payment_events')
+            ->where('id', $paymentEventId)
+            ->update([
+                'payment_attempt_id' => (string) ($attempt->id ?? ''),
+                'updated_at' => now(),
+            ]);
+
+        return $this->advancePaymentAttempt((string) ($attempt->id ?? ''), [
+            'state' => PaymentAttempt::STATE_CALLBACK_RECEIVED,
+            'latest_payment_event_id' => $paymentEventId,
+            'external_trade_no' => $externalTradeNo,
+            'provider_trade_no' => $providerTradeNo,
+            'callback_received_at' => $callbackReceivedAt,
+        ]);
+    }
+
+    public function paymentAttemptSummary(string $orderNo, int $orgId): array
+    {
+        if (! Schema::hasTable('payment_attempts')) {
+            return [
+                'count' => 0,
+                'latest' => null,
+            ];
+        }
+
+        $count = (int) DB::table('payment_attempts')
+            ->where('order_no', $orderNo)
+            ->where('org_id', $orgId)
+            ->count();
+
+        $latest = DB::table('payment_attempts')
+            ->where('order_no', $orderNo)
+            ->where('org_id', $orgId)
+            ->orderByDesc('attempt_no')
+            ->first();
+
+        return [
+            'count' => $count,
+            'latest' => $latest ? [
+                'id' => (string) ($latest->id ?? ''),
+                'attempt_no' => (int) ($latest->attempt_no ?? 0),
+                'provider' => (string) ($latest->provider ?? ''),
+                'state' => (string) ($latest->state ?? ''),
+                'external_trade_no' => $latest->external_trade_no ?? null,
+                'provider_trade_no' => $latest->provider_trade_no ?? null,
+                'provider_session_ref' => $latest->provider_session_ref ?? null,
+            ] : null,
+        ];
     }
 
     public function touchPaymentLedger(
@@ -1490,6 +1783,116 @@ class OrderManager
         }
 
         return null;
+    }
+
+    private function resolveNextPaymentAttemptState(string $currentState, mixed $requestedState): string
+    {
+        $normalizedCurrent = PaymentAttempt::normalizedState($currentState);
+        $normalizedRequested = PaymentAttempt::normalizedState(is_scalar($requestedState) ? (string) $requestedState : null);
+
+        if ($this->paymentAttemptStateRank($normalizedRequested) >= $this->paymentAttemptStateRank($normalizedCurrent)) {
+            return $normalizedRequested;
+        }
+
+        return $normalizedCurrent;
+    }
+
+    private function paymentAttemptStateRank(string $state): int
+    {
+        return match (PaymentAttempt::normalizedState($state)) {
+            PaymentAttempt::STATE_INITIATED => 10,
+            PaymentAttempt::STATE_PROVIDER_CREATED => 20,
+            PaymentAttempt::STATE_CLIENT_PRESENTED => 30,
+            PaymentAttempt::STATE_CALLBACK_RECEIVED => 40,
+            PaymentAttempt::STATE_VERIFIED => 50,
+            PaymentAttempt::STATE_PAID,
+            PaymentAttempt::STATE_FAILED,
+            PaymentAttempt::STATE_CANCELED,
+            PaymentAttempt::STATE_EXPIRED => 60,
+            default => 0,
+        };
+    }
+
+    private function resolvePaymentAttemptForWebhook(
+        string $orderId,
+        string $provider,
+        ?string $externalTradeNo,
+        ?string $providerTradeNo
+    ): ?object {
+        if ($orderId === '') {
+            return null;
+        }
+
+        $tradeRefs = array_values(array_filter(array_unique([
+            $this->trimOrNull($externalTradeNo),
+            $this->trimOrNull($providerTradeNo),
+        ])));
+
+        if ($tradeRefs !== []) {
+            $matched = DB::table('payment_attempts')
+                ->where('order_id', $orderId)
+                ->where('provider', $provider)
+                ->where(function ($query) use ($tradeRefs): void {
+                    foreach ($tradeRefs as $tradeRef) {
+                        $query->orWhere('external_trade_no', $tradeRef)
+                            ->orWhere('provider_trade_no', $tradeRef)
+                            ->orWhere('provider_session_ref', $tradeRef);
+                    }
+                })
+                ->orderByDesc('attempt_no')
+                ->first();
+            if ($matched) {
+                return $matched;
+            }
+        }
+
+        $openAttempt = DB::table('payment_attempts')
+            ->where('order_id', $orderId)
+            ->where('provider', $provider)
+            ->whereNotIn('state', [
+                PaymentAttempt::STATE_PAID,
+                PaymentAttempt::STATE_FAILED,
+                PaymentAttempt::STATE_CANCELED,
+                PaymentAttempt::STATE_EXPIRED,
+            ])
+            ->orderByDesc('attempt_no')
+            ->first();
+        if ($openAttempt) {
+            return $openAttempt;
+        }
+
+        return DB::table('payment_attempts')
+            ->where('order_id', $orderId)
+            ->where('provider', $provider)
+            ->orderByDesc('attempt_no')
+            ->first();
+    }
+
+    private function normalizePaymentAttemptPayScene(?string $payScene): ?string
+    {
+        $normalized = strtolower(trim((string) $payScene));
+        if ($normalized === '') {
+            return null;
+        }
+
+        return mb_strlen($normalized, 'UTF-8') > 32
+            ? mb_substr($normalized, 0, 32, 'UTF-8')
+            : $normalized;
+    }
+
+    private function mergeJsonColumns(mixed $existing, mixed $incoming): array
+    {
+        $existingArray = $this->decodeMeta($existing);
+        $incomingArray = is_array($incoming) ? $incoming : $this->decodeMeta($incoming);
+
+        return array_replace_recursive($existingArray, $incomingArray);
+    }
+
+    private function encodeJsonColumn(array $payload): ?string
+    {
+        return $payload !== []
+            ? json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+            : null;
     }
 
     private function normalizeRequestId(mixed $value): ?string

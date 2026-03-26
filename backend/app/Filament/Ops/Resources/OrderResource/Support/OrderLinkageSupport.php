@@ -50,6 +50,18 @@ final class OrderLinkageSupport
                 ->selectSub($this->paymentField('handled_at'), 'latest_payment_handled_at');
         }
 
+        if (SchemaBaseline::hasTable('payment_attempts')) {
+            $query
+                ->selectSub($this->paymentAttemptCountField(), 'payment_attempts_count')
+                ->selectSub($this->paymentAttemptField('id'), 'latest_payment_attempt_id')
+                ->selectSub($this->paymentAttemptField('state'), 'latest_payment_attempt_state')
+                ->selectSub($this->paymentAttemptField('provider'), 'latest_payment_attempt_provider')
+                ->selectSub($this->paymentAttemptField('provider_trade_no'), 'latest_payment_attempt_provider_trade_no')
+                ->selectSub($this->paymentAttemptField('external_trade_no'), 'latest_payment_attempt_external_trade_no');
+        } else {
+            $query->selectRaw('0 as payment_attempts_count');
+        }
+
         if (SchemaBaseline::hasTable('benefit_grants')) {
             $query
                 ->selectSub($this->benefitField('id'), 'latest_benefit_grant_id')
@@ -877,6 +889,22 @@ final class OrderLinkageSupport
             ->whereColumn('payment_events.order_no', 'orders.order_no')
             ->orderByRaw('coalesce(processed_at, handled_at, updated_at, created_at) desc')
             ->limit(1);
+    }
+
+    private function paymentAttemptField(string $column): QueryBuilder
+    {
+        return DB::table('payment_attempts')
+            ->select($column)
+            ->whereColumn('payment_attempts.order_no', 'orders.order_no')
+            ->orderByDesc('attempt_no')
+            ->limit(1);
+    }
+
+    private function paymentAttemptCountField(): QueryBuilder
+    {
+        return DB::table('payment_attempts')
+            ->selectRaw('count(*)')
+            ->whereColumn('payment_attempts.order_no', 'orders.order_no');
     }
 
     private function benefitField(string $column): QueryBuilder

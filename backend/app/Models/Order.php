@@ -6,6 +6,7 @@ use App\Models\Concerns\HasOrgScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Order extends Model
 {
@@ -202,6 +203,17 @@ class Order extends Model
     public function paymentEvents(): HasMany
     {
         return $this->hasMany(PaymentEvent::class, 'order_no', 'order_no');
+    }
+
+    public function paymentAttempts(): HasMany
+    {
+        return $this->hasMany(PaymentAttempt::class, 'order_no', 'order_no');
+    }
+
+    public function latestPaymentAttempt(): HasOne
+    {
+        return $this->hasOne(PaymentAttempt::class, 'order_no', 'order_no')
+            ->ofMany('attempt_no', 'max');
     }
 
     public function benefitGrants(): HasMany

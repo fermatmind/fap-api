@@ -153,6 +153,49 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $this->assertSame('pending', (string) DB::table('orders')->where('order_no', $orderNo)->value('payment_state'));
         $this->assertSame('not_started', (string) DB::table('orders')->where('order_no', $orderNo)->value('grant_state'));
         $this->assertSame('web', (string) DB::table('orders')->where('order_no', $orderNo)->value('channel'));
+        $this->assertSame(1, (int) ($response->json('payment_attempts_count') ?? 0));
+        $this->assertSame('initiated', (string) ($response->json('latest_payment_attempt.state') ?? ''));
+    }
+
+    public function test_cached_order_payment_action_does_not_create_duplicate_payment_attempts(): void
+    {
+        $this->seedCommerce();
+
+        config([
+            'payments.providers.wechatpay.enabled' => true,
+        ]);
+
+        $mock = Mockery::mock(WechatPayCheckoutService::class);
+        $mock->shouldReceive('createCheckoutAction')
+            ->once()
+            ->andReturn([
+                'ok' => true,
+                'type' => 'qr',
+                'value' => 'weixin://wxpay/bizpayurl?pr=attempt_cache_qr',
+            ]);
+        $this->app->instance(WechatPayCheckoutService::class, $mock);
+
+        $response = $this->checkout([
+            'sku' => 'MBTI_CREDIT',
+            'provider' => 'wechatpay',
+            'email' => 'attempt-cache@example.com',
+        ], [
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        ]);
+
+        $response->assertStatus(200);
+        $orderNo = (string) $response->json('order_no');
+        $paymentRecoveryToken = (string) $response->json('payment_recovery_token');
+        $this->assertNotSame('', $orderNo);
+        $this->assertSame(1, DB::table('payment_attempts')->where('order_no', $orderNo)->count());
+
+        $followup = $this->getJson('/api/v0.3/orders/'.$orderNo.'?include_payment_action=1&payment_recovery_token='.urlencode($paymentRecoveryToken), [
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        ]);
+
+        $followup->assertStatus(200);
+        $followup->assertJsonPath('payment_attempts_count', 1);
+        $this->assertSame(1, DB::table('payment_attempts')->where('order_no', $orderNo)->count());
     }
 
     public function test_checkout_wechatpay_desktop_returns_qr_action(): void
