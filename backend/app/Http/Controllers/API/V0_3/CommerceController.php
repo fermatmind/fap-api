@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Services\Commerce\Checkout\AlipayCheckoutService;
 use App\Services\Commerce\Checkout\LemonSqueezyCheckoutService;
 use App\Services\Commerce\Checkout\WechatPayCheckoutService;
@@ -68,6 +69,8 @@ class CommerceController extends Controller
             'email' => ['nullable', 'string', 'max:320'],
             'target_attempt_id' => ['nullable', 'string', 'max:64'],
             'provider' => ['nullable', 'string', 'max:32'],
+            'channel' => ['nullable', 'string', 'max:64'],
+            'provider_app' => ['nullable', 'string', 'max:128'],
             'idempotency_key' => ['nullable', 'string', 'max:128'],
             'org_id' => ['prohibited'],
             'user_id' => ['prohibited'],
@@ -102,7 +105,15 @@ class CommerceController extends Controller
             $provider,
             $idempotencyKey,
             $contactEmail,
-            $this->resolveRequestId($request)
+            $this->resolveRequestId($request),
+            [],
+            [],
+            $this->resolveOrderLedgerContext(
+                $request,
+                $payload,
+                $payload['target_attempt_id'] ?? null,
+                $provider
+            )
         );
 
         if (! ($result['ok'] ?? false)) {
@@ -152,8 +163,8 @@ class CommerceController extends Controller
         $order = $result['order'];
         $ownershipVerified = (bool) ($result['ownership_verified'] ?? true);
         $paymentRecoveryVerified = (bool) ($result['payment_recovery_verified'] ?? false);
-        $status = $this->normalizePublicOrderStatus((string) ($order->status ?? ''));
-        $message = $this->publicOrderMessage((string) ($order->status ?? ''));
+        $status = $this->resolvePublicOrderStatus($order);
+        $message = $this->publicOrderMessage($order);
         $delivery = $this->buildOrderDelivery($order);
         $paymentRecoveryToken = $paymentRecoveryVerified && $requestedPaymentRecoveryToken !== null
             ? $requestedPaymentRecoveryToken
@@ -169,6 +180,11 @@ class CommerceController extends Controller
             $status === 'pending' && ($request->boolean('include_payment_action') || $paymentRecoveryVerified),
             $paymentRecoveryToken
         );
+        if ($status === 'pending') {
+            $order = $this->orders->findOrderByOrderNo((string) ($order->order_no ?? ''), $orgId) ?? $order;
+            $status = $this->resolvePublicOrderStatus($order);
+            $message = $this->publicOrderMessage($order);
+        }
 
         $payload = [
             'ok' => true,
@@ -176,10 +192,13 @@ class CommerceController extends Controller
             'order_no' => $order->order_no ?? null,
             'attempt_id' => $delivery['attempt_id'],
             'status' => $status,
+            'payment_state' => $this->orders->resolvedPaymentState($order),
+            'grant_state' => $this->orders->resolvedGrantState($order),
             'message' => $message,
             'amount_cents' => $order->amount_cents ?? $order->amount_total ?? null,
             'currency' => $order->currency ?? null,
             'provider' => $payment['provider'],
+            'channel' => $order->channel ?? null,
             'payment_recovery_token' => $paymentRecoveryToken,
             'wait_url' => $recoveryUrls['wait_url'],
             'result_url' => $recoveryUrls['result_url'],
@@ -214,6 +233,8 @@ class CommerceController extends Controller
             'surface' => ['nullable', 'string', 'max:64'],
             'order_no' => ['nullable', 'string', 'max:64'],
             'provider' => ['nullable', 'string', 'max:32'],
+            'channel' => ['nullable', 'string', 'max:64'],
+            'provider_app' => ['nullable', 'string', 'max:128'],
             'idempotency_key' => ['nullable', 'string', 'max:128'],
             'share_id' => ['nullable', 'string', 'max:128'],
             'compare_invite_id' => ['nullable', 'string', 'max:128'],
@@ -278,17 +299,21 @@ class CommerceController extends Controller
                 $payment = $this->buildOrderPaymentPayload(
                     $request,
                     $order,
-                    $this->normalizePublicOrderStatus((string) ($order->status ?? '')) === 'pending',
+                    $this->resolvePublicOrderStatus($order) === 'pending',
                     $paymentRecoveryToken
                 );
+                $order = $this->orders->findOrderByOrderNo((string) ($order->order_no ?? $existingOrderNo), $orgId) ?? $order;
 
                 return response()->json([
                     'ok' => true,
                     'order_no' => $order->order_no ?? $existingOrderNo,
                     'attempt_id' => $order->target_attempt_id ?? null,
-                    'status' => $this->normalizePublicOrderStatus((string) ($order->status ?? '')),
-                    'message' => $this->publicOrderMessage((string) ($order->status ?? '')),
+                    'status' => $this->resolvePublicOrderStatus($order),
+                    'payment_state' => $this->orders->resolvedPaymentState($order),
+                    'grant_state' => $this->orders->resolvedGrantState($order),
+                    'message' => $this->publicOrderMessage($order),
                     'provider' => $payment['provider'] ?? $provider,
+                    'channel' => $order->channel ?? null,
                     'payment_recovery_token' => $paymentRecoveryToken,
                     'wait_url' => $recoveryUrls['wait_url'],
                     'result_url' => $recoveryUrls['result_url'],
@@ -317,6 +342,12 @@ class CommerceController extends Controller
 
         $idempotencyKey = $this->resolveIdempotencyKey($request, $payload);
         $attemptId = trim((string) ($payload['attempt_id'] ?? ''));
+        $ledgerContext = $this->resolveOrderLedgerContext(
+            $request,
+            $payload,
+            $attemptId !== '' ? $attemptId : null,
+            $provider
+        );
 
         $created = $this->orders->createOrder(
             $orgId,
@@ -330,7 +361,8 @@ class CommerceController extends Controller
             $contactEmail,
             $this->resolveRequestId($request),
             $attribution,
-            $emailCapture
+            $emailCapture,
+            $ledgerContext
         );
 
         if (! ($created['ok'] ?? false)) {
@@ -386,6 +418,12 @@ class CommerceController extends Controller
         }
 
         if ($order !== null) {
+            $this->orders->markPaymentPending(
+                (string) ($order->order_no ?? ''),
+                (int) ($order->org_id ?? $orgId),
+                $ledgerContext['channel'] ?? null,
+                $ledgerContext['provider_app'] ?? null
+            );
             $this->persistOrderPaymentPayload(
                 $order,
                 $this->resolvePaymentActionScene((string) $request->userAgent()),
@@ -420,7 +458,10 @@ class CommerceController extends Controller
             'attempt_id' => $attemptIdFromOrder !== '' ? $attemptIdFromOrder : null,
             'provider' => $provider,
             'status' => 'pending',
+            'payment_state' => 'pending',
+            'grant_state' => 'not_started',
             'message' => 'Order created, waiting for payment.',
+            'channel' => $ledgerContext['channel'] ?? null,
             'payment_recovery_token' => $paymentRecoveryToken,
             'wait_url' => $recoveryUrls['wait_url'],
             'result_url' => $recoveryUrls['result_url'],
@@ -469,7 +510,7 @@ class CommerceController extends Controller
         }
 
         $delivery = $this->buildOrderDelivery($order);
-        $status = $this->normalizePublicOrderStatus((string) ($order->status ?? ''));
+        $status = $this->resolvePublicOrderStatus($order);
         $paymentRecoveryToken = $status === 'pending'
             ? $this->orders->issuePaymentRecoveryToken($order)
             : null;
@@ -486,13 +527,20 @@ class CommerceController extends Controller
             $status === 'pending',
             $paymentRecoveryToken
         );
+        if ($status === 'pending') {
+            $order = $this->orders->findOrderByOrderNo((string) ($order->order_no ?? $orderNo), $orgId) ?? $order;
+            $status = $this->resolvePublicOrderStatus($order);
+        }
 
         $payload = [
             'ok' => true,
             'order_no' => $order->order_no ?? $orderNo,
             'status' => $status,
+            'payment_state' => $this->orders->resolvedPaymentState($order),
+            'grant_state' => $this->orders->resolvedGrantState($order),
             'attempt_id' => $delivery['attempt_id'],
             'provider' => $payment['provider'],
+            'channel' => $order->channel ?? null,
             'payment_recovery_token' => $paymentRecoveryToken,
             'wait_url' => $recoveryUrls['wait_url'],
             'result_url' => $recoveryUrls['result_url'],
@@ -658,6 +706,13 @@ class CommerceController extends Controller
         $scene = $this->resolvePaymentActionScene((string) $request->userAgent());
         $cached = $this->resolveCachedOrderPaymentPayload($order, $normalizedProvider, $scene);
         if ($cached !== null) {
+            $this->orders->markPaymentPending(
+                (string) ($order->order_no ?? ''),
+                (int) ($order->org_id ?? 0),
+                $this->trimNullableString($order->channel ?? null),
+                $this->trimNullableString($order->provider_app ?? null)
+            );
+
             return $this->decoratePaymentPayloadForRecovery($cached, $paymentRecoveryToken);
         }
 
@@ -712,6 +767,12 @@ class CommerceController extends Controller
         }
 
         $presented = $this->presentCheckoutPayAction($normalizedProvider, $payAction);
+        $this->orders->markPaymentPending(
+            $orderNo,
+            (int) ($order->org_id ?? 0),
+            $this->trimNullableString($order->channel ?? null),
+            $this->trimNullableString($order->provider_app ?? null)
+        );
         $this->persistOrderPaymentPayload($order, $scene, $presented);
 
         return $this->decoratePaymentPayloadForRecovery($presented, $paymentRecoveryToken);
@@ -1096,6 +1157,55 @@ class CommerceController extends Controller
         return $sku !== '' ? strtoupper($sku) : '';
     }
 
+    /**
+     * @param  array<string,mixed>  $payload
+     * @return array{channel:?string,provider_app:?string}
+     */
+    private function resolveOrderLedgerContext(
+        Request $request,
+        array $payload,
+        ?string $attemptId,
+        string $provider
+    ): array {
+        $explicitChannel = Order::normalizeChannel(
+            $this->trimNullableString($payload['channel'] ?? $request->header('X-Channel', ''))
+        );
+        $attemptChannel = $this->resolveAttemptOrderChannel($attemptId);
+        $channel = $explicitChannel ?? $attemptChannel ?? 'web';
+
+        $providerApp = $this->trimNullableString($payload['provider_app'] ?? $request->header('X-Provider-App', ''));
+        if ($providerApp === null) {
+            $providerApp = match (strtolower(trim($provider))) {
+                'wechatpay' => $channel === 'wechat_miniapp'
+                    ? $this->trimNullableString(config('pay.wechat.default.mini_app_id', config('pay.wechat.default.mp_app_id', config('pay.wechat.default.app_id', ''))))
+                    : null,
+                'alipay' => $channel === 'alipay_miniapp'
+                    ? $this->trimNullableString(config('pay.alipay.default.app_id', ''))
+                    : null,
+                default => null,
+            };
+        }
+
+        return [
+            'channel' => $channel,
+            'provider_app' => $providerApp,
+        ];
+    }
+
+    private function resolveAttemptOrderChannel(?string $attemptId): ?string
+    {
+        $normalizedAttemptId = $this->trimNullableString($attemptId);
+        if ($normalizedAttemptId === null) {
+            return null;
+        }
+
+        $attemptChannel = DB::table('attempts')
+            ->where('id', $normalizedAttemptId)
+            ->value('channel');
+
+        return Order::normalizeChannel(is_scalar($attemptChannel) ? (string) $attemptChannel : null);
+    }
+
     private function resolveContactEmail(array $payload, ?string $userId): ?string
     {
         $inputEmail = $this->normalizeEmail((string) ($payload['email'] ?? ''));
@@ -1156,22 +1266,29 @@ class CommerceController extends Controller
         return $this->orders->presentOrderDelivery($order);
     }
 
-    private function normalizePublicOrderStatus(string $status): string
+    private function resolvePublicOrderStatus(object $order): string
     {
-        $status = strtolower(trim($status));
+        return $this->normalizePublicOrderStatus(
+            $this->orders->resolvedPaymentState($order)
+        );
+    }
+
+    private function normalizePublicOrderStatus(string $paymentState): string
+    {
+        $status = strtolower(trim($paymentState));
 
         return match ($status) {
-            'paid', 'fulfilled' => 'paid',
+            'paid' => 'paid',
             'failed' => 'failed',
-            'canceled', 'cancelled' => 'canceled',
+            'canceled', 'cancelled', 'expired' => 'canceled',
             'refunded' => 'refunded',
             default => 'pending',
         };
     }
 
-    private function publicOrderMessage(string $status): string
+    private function publicOrderMessage(object $order): string
     {
-        return match ($this->normalizePublicOrderStatus($status)) {
+        return match ($this->resolvePublicOrderStatus($order)) {
             'paid' => 'Payment confirmed.',
             'failed' => 'Payment failed.',
             'canceled' => 'Order canceled.',

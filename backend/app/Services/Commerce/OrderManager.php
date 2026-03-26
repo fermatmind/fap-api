@@ -13,7 +13,12 @@ use Illuminate\Support\Str;
 
 class OrderManager
 {
-    private const FINAL_STATUSES = ['fulfilled', 'failed', 'canceled', 'refunded'];
+    private const FINAL_STATUSES = [
+        Order::STATUS_FULFILLED,
+        Order::STATUS_FAILED,
+        Order::STATUS_CANCELED,
+        Order::STATUS_REFUNDED,
+    ];
 
     private const MAX_ORDER_QUANTITY = 1000;
 
@@ -40,6 +45,7 @@ class OrderManager
         ?string $requestId = null,
         array $attribution = [],
         array $emailCapture = [],
+        array $ledgerContext = [],
     ): array {
         $requestedSku = $this->skus->normalizeSku($sku);
         if ($requestedSku === '') {
@@ -87,6 +93,14 @@ class OrderManager
 
         $idempotencyKey = $this->normalizeIdempotencyKey($idempotencyKey);
         $useIdempotency = $idempotencyKey !== '';
+        $resolvedLedgerContext = $this->resolveLedgerContext(
+            $provider,
+            $targetAttemptId,
+            $normalizedUserId,
+            $normalizedAnonId,
+            $contactEmailHash,
+            $ledgerContext
+        );
 
         $createRow = function () use (
             $orgId,
@@ -107,7 +121,8 @@ class OrderManager
             $contactEmailHash,
             $requestId,
             $attribution,
-            $emailCapture
+            $emailCapture,
+            $resolvedLedgerContext
         ): array {
             $orderNo = 'ord_'.Str::uuid();
             $now = now();
@@ -136,15 +151,25 @@ class OrderManager
                 'target_attempt_id' => $this->trimOrNull($targetAttemptId),
                 'amount_cents' => $unitPriceCents * $quantity,
                 'currency' => (string) ($skuRow->currency ?? 'USD'),
-                'status' => 'created',
+                'status' => Order::STATUS_CREATED,
+                'payment_state' => Order::PAYMENT_STATE_CREATED,
+                'grant_state' => Order::GRANT_STATE_NOT_STARTED,
                 'provider' => $provider,
+                'channel' => $resolvedLedgerContext['channel'],
+                'provider_app' => $resolvedLedgerContext['provider_app'],
                 'external_trade_no' => null,
+                'provider_trade_no' => null,
                 'paid_at' => null,
+                'expired_at' => null,
+                'closed_at' => null,
+                'last_payment_event_at' => null,
+                'last_reconciled_at' => null,
                 'created_at' => $now,
                 'updated_at' => $now,
                 'requested_sku' => $requestedSku,
                 'effective_sku' => $effectiveSku !== '' ? $effectiveSku : $skuToLookup,
                 'entitlement_id' => $entitlementId,
+                'external_user_ref' => $resolvedLedgerContext['external_user_ref'],
                 'meta_json' => $orderMeta !== []
                     ? json_encode($orderMeta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
                     : null,
@@ -420,6 +445,8 @@ class OrderManager
             })
             ->orderByRaw("
                 case
+                    when lower(coalesce(payment_state, '')) = 'paid' then 0
+                    when lower(coalesce(payment_state, '')) in ('created', 'pending') then 1
                     when lower(coalesce(status, '')) in ('paid', 'fulfilled') then 0
                     when lower(coalesce(status, '')) in ('created', 'pending') then 1
                     else 2
@@ -433,7 +460,23 @@ class OrderManager
 
     public function isPaidOrFulfilledStatus(?string $status): bool
     {
-        return $this->isDeliveryEligibleStatus((string) $status);
+        return Order::normalizePaymentState(null, $status) === Order::PAYMENT_STATE_PAID;
+    }
+
+    public function resolvedPaymentState(object $order): string
+    {
+        return Order::normalizePaymentState(
+            (string) ($order->payment_state ?? ''),
+            (string) ($order->status ?? '')
+        );
+    }
+
+    public function resolvedGrantState(object $order): string
+    {
+        return Order::normalizeGrantState(
+            (string) ($order->grant_state ?? ''),
+            (string) ($order->status ?? '')
+        );
     }
 
     /**
@@ -575,6 +618,135 @@ class OrderManager
         ];
     }
 
+    public function markPaymentPending(
+        string $orderNo,
+        int $orgId,
+        ?string $channel = null,
+        ?string $providerApp = null
+    ): array {
+        $orderNo = trim($orderNo);
+        if ($orderNo === '') {
+            return $this->badRequest('ORDER_REQUIRED', 'order_no is required.');
+        }
+
+        $order = DB::table('orders')
+            ->where('order_no', $orderNo)
+            ->where('org_id', $orgId)
+            ->first();
+        if (! $order) {
+            return $this->notFound('ORDER_NOT_FOUND', 'order not found.');
+        }
+
+        $paymentState = $this->resolvedPaymentState($order);
+        if (in_array($paymentState, [
+            Order::PAYMENT_STATE_PAID,
+            Order::PAYMENT_STATE_FAILED,
+            Order::PAYMENT_STATE_CANCELED,
+            Order::PAYMENT_STATE_EXPIRED,
+            Order::PAYMENT_STATE_REFUNDED,
+        ], true)) {
+            return [
+                'ok' => true,
+                'order' => $order,
+                'skipped' => true,
+            ];
+        }
+
+        $normalizedChannel = Order::normalizeChannel($channel);
+        $normalizedProviderApp = $this->trimOrNull($providerApp);
+        $updates = [
+            'payment_state' => Order::PAYMENT_STATE_PENDING,
+            'updated_at' => now(),
+        ];
+
+        $legacyStatus = strtolower(trim((string) ($order->status ?? '')));
+        if ($legacyStatus === '' || $legacyStatus === Order::STATUS_CREATED) {
+            $updates['status'] = Order::STATUS_PENDING;
+        }
+
+        if ($normalizedChannel !== null && $this->trimOrNull((string) ($order->channel ?? '')) === null) {
+            $updates['channel'] = $normalizedChannel;
+        }
+
+        if ($normalizedProviderApp !== null && $this->trimOrNull((string) ($order->provider_app ?? '')) === null) {
+            $updates['provider_app'] = $normalizedProviderApp;
+        }
+
+        DB::table('orders')
+            ->where('order_no', $orderNo)
+            ->where('org_id', $orgId)
+            ->update($updates);
+
+        return [
+            'ok' => true,
+            'order' => DB::table('orders')
+                ->where('order_no', $orderNo)
+                ->where('org_id', $orgId)
+                ->first(),
+        ];
+    }
+
+    public function syncGrantState(
+        string $orderNo,
+        int $orgId,
+        string $grantState
+    ): void {
+        $orderNo = trim($orderNo);
+        if ($orderNo === '') {
+            return;
+        }
+
+        DB::table('orders')
+            ->where('order_no', $orderNo)
+            ->where('org_id', $orgId)
+            ->update([
+                'grant_state' => Order::normalizeGrantState($grantState),
+                'updated_at' => now(),
+            ]);
+    }
+
+    public function touchPaymentLedger(
+        string $orderNo,
+        int $orgId,
+        ?string $providerTradeNo = null,
+        ?string $eventAt = null,
+        ?string $paymentState = null
+    ): void {
+        $orderNo = trim($orderNo);
+        if ($orderNo === '') {
+            return;
+        }
+
+        $eventTimestamp = ($eventAt !== null && trim($eventAt) !== '') ? $eventAt : now()->toDateTimeString();
+        $updates = [
+            'updated_at' => now(),
+            'last_payment_event_at' => $eventTimestamp,
+        ];
+
+        $normalizedProviderTradeNo = $this->trimOrNull($providerTradeNo);
+        if ($normalizedProviderTradeNo !== null) {
+            $updates['provider_trade_no'] = $normalizedProviderTradeNo;
+        }
+
+        if ($paymentState !== null) {
+            $normalizedPaymentState = Order::normalizePaymentState($paymentState);
+            $updates['payment_state'] = $normalizedPaymentState;
+
+            if ($normalizedPaymentState === Order::PAYMENT_STATE_CANCELED) {
+                $updates['closed_at'] = $eventTimestamp;
+            }
+
+            if ($normalizedPaymentState === Order::PAYMENT_STATE_EXPIRED) {
+                $updates['expired_at'] = $eventTimestamp;
+            }
+        }
+
+        DB::table('orders')
+            ->where('order_no', $orderNo)
+            ->where('org_id', $orgId)
+            ->update($updates);
+    }
+
     public function transitionToPaidAtomic(
         string $orderNo,
         int $orgId,
@@ -601,6 +773,7 @@ class OrderManager
         }
 
         if (in_array($fromStatus, ['paid', 'fulfilled'], true)) {
+            $this->touchPaymentLedger($orderNo, $orgId, $externalTradeNo, $paidAt, Order::PAYMENT_STATE_PAID);
             $this->syncPurchasedInviteFromOrder($order, $paidAt);
 
             return [
@@ -616,8 +789,10 @@ class OrderManager
 
         $now = now();
         $updates = [
-            'status' => 'paid',
+            'status' => Order::STATUS_PAID,
+            'payment_state' => Order::PAYMENT_STATE_PAID,
             'updated_at' => $now,
+            'last_payment_event_at' => ($paidAt !== null && $paidAt !== '') ? $paidAt : $now,
         ];
 
         if (empty($order->paid_at)) {
@@ -626,6 +801,7 @@ class OrderManager
 
         if ($externalTradeNo) {
             $updates['external_trade_no'] = $externalTradeNo;
+            $updates['provider_trade_no'] = $externalTradeNo;
         }
 
         $updated = DB::table('orders')
@@ -661,7 +837,7 @@ class OrderManager
         ];
     }
 
-    public function transition(string $orderNo, string $toStatus, ?int $orgId = null): array
+    public function transition(string $orderNo, string $toStatus, ?int $orgId = null, array $context = []): array
     {
         $orderNo = trim($orderNo);
         $toStatus = strtolower(trim($toStatus));
@@ -704,17 +880,7 @@ class OrderManager
             'updated_at' => now(),
         ];
 
-        if ($toStatus === 'paid') {
-            $updates['paid_at'] = $updates['updated_at'];
-        }
-
-        if ($toStatus === 'fulfilled') {
-            $updates['fulfilled_at'] = $updates['updated_at'];
-        }
-
-        if ($toStatus === 'refunded') {
-            $updates['refunded_at'] = $updates['updated_at'];
-        }
+        $updates = array_replace($updates, $this->ledgerUpdatesForTransition($toStatus, $order, $context));
 
         $updateQuery = DB::table('orders')->where('order_no', $orderNo);
         if ($orgId !== null) {
@@ -741,7 +907,7 @@ class OrderManager
         }
 
         $order = DB::table('orders')->where('order_no', $orderNo)->first();
-        if (in_array($toStatus, ['paid', 'fulfilled'], true)) {
+        if (in_array($toStatus, [Order::STATUS_PAID, Order::STATUS_FULFILLED], true)) {
             $this->syncPurchasedInviteFromOrder($order, null);
         }
 
@@ -794,16 +960,29 @@ class OrderManager
 
     private function isTransitionAllowed(string $fromStatus, string $toStatus): bool
     {
-        if ($fromStatus === 'created' && in_array($toStatus, ['pending', 'paid', 'failed', 'canceled', 'refunded'], true)) {
+        if ($fromStatus === Order::STATUS_CREATED && in_array($toStatus, [
+            Order::STATUS_PENDING,
+            Order::STATUS_PAID,
+            Order::STATUS_FAILED,
+            Order::STATUS_CANCELED,
+            'expired',
+            Order::STATUS_REFUNDED,
+        ], true)) {
             return true;
         }
-        if ($fromStatus === 'pending' && in_array($toStatus, ['paid', 'failed', 'canceled', 'refunded'], true)) {
+        if ($fromStatus === Order::STATUS_PENDING && in_array($toStatus, [
+            Order::STATUS_PAID,
+            Order::STATUS_FAILED,
+            Order::STATUS_CANCELED,
+            'expired',
+            Order::STATUS_REFUNDED,
+        ], true)) {
             return true;
         }
-        if ($fromStatus === 'paid' && $toStatus === 'fulfilled') {
+        if ($fromStatus === Order::STATUS_PAID && $toStatus === Order::STATUS_FULFILLED) {
             return true;
         }
-        if ($fromStatus === 'fulfilled' && $toStatus === 'refunded') {
+        if ($fromStatus === Order::STATUS_FULFILLED && $toStatus === Order::STATUS_REFUNDED) {
             return true;
         }
 
@@ -850,7 +1029,7 @@ class OrderManager
         $attemptId = $this->resolveKnownAttemptId($orgId, $order->target_attempt_id ?? null);
         $reportUrl = $attemptId !== null ? $this->reportUrl($attemptId) : null;
         $reportPdfUrl = $attemptId !== null ? $this->reportPdfUrl($attemptId) : null;
-        $deliveryEligible = $attemptId !== null && $this->isDeliveryEligibleStatus((string) ($order->status ?? ''));
+        $deliveryEligible = $attemptId !== null && $this->isDeliveryEligibleOrder($order);
         $recipient = $attemptId !== null
             ? $this->emailOutbox->resolvePaymentSuccessRecipient(
                 $this->trimOrNull((string) ($order->user_id ?? '')),
@@ -971,7 +1150,7 @@ class OrderManager
 
     private function isDeliveryEligibleStatus(string $status): bool
     {
-        return in_array(strtolower(trim($status)), ['paid', 'fulfilled'], true);
+        return Order::normalizePaymentState(null, $status) === Order::PAYMENT_STATE_PAID;
     }
 
     private function resolveOrderProductSummary(object $order): ?string
@@ -1142,6 +1321,175 @@ class OrderManager
         DB::table('mbti_compare_invites')
             ->where('id', $compareInviteId)
             ->update($update);
+    }
+
+    /**
+     * @param  array<string,mixed>  $context
+     * @return array<string,mixed>
+     */
+    private function ledgerUpdatesForTransition(string $toStatus, object $order, array $context): array
+    {
+        $updates = [];
+        $transitionedAt = $context['transitioned_at'] ?? now();
+        $providerTradeNo = $this->trimOrNull($context['provider_trade_no'] ?? null);
+        $paymentEventAt = $this->trimOrNull($context['last_payment_event_at'] ?? null);
+        $explicitPaymentState = isset($context['payment_state'])
+            ? Order::normalizePaymentState((string) $context['payment_state'])
+            : null;
+
+        if ($providerTradeNo !== null) {
+            $updates['provider_trade_no'] = $providerTradeNo;
+        }
+        if ($paymentEventAt !== null) {
+            $updates['last_payment_event_at'] = $paymentEventAt;
+        }
+
+        switch ($toStatus) {
+            case Order::STATUS_PENDING:
+                $updates['payment_state'] = $explicitPaymentState ?? Order::PAYMENT_STATE_PENDING;
+                break;
+            case Order::STATUS_PAID:
+                $updates['payment_state'] = $explicitPaymentState ?? Order::PAYMENT_STATE_PAID;
+                $updates['paid_at'] = $context['paid_at'] ?? ($order->paid_at ?? $transitionedAt);
+                $updates['grant_state'] = $this->resolvedGrantState($order);
+                break;
+            case Order::STATUS_FULFILLED:
+                $updates['payment_state'] = $explicitPaymentState ?? Order::PAYMENT_STATE_PAID;
+                $updates['fulfilled_at'] = $order->fulfilled_at ?? $transitionedAt;
+                break;
+            case Order::STATUS_FAILED:
+                $updates['payment_state'] = $explicitPaymentState ?? Order::PAYMENT_STATE_FAILED;
+                break;
+            case Order::STATUS_CANCELED:
+                $updates['payment_state'] = $explicitPaymentState ?? Order::PAYMENT_STATE_CANCELED;
+                $updates['closed_at'] = $context['closed_at'] ?? $transitionedAt;
+                if (($updates['payment_state'] ?? null) === Order::PAYMENT_STATE_EXPIRED) {
+                    $updates['expired_at'] = $context['expired_at'] ?? $transitionedAt;
+                }
+                break;
+            case 'expired':
+                $updates['payment_state'] = $explicitPaymentState ?? Order::PAYMENT_STATE_EXPIRED;
+                $updates['expired_at'] = $context['expired_at'] ?? $transitionedAt;
+                break;
+            case Order::STATUS_REFUNDED:
+                $updates['payment_state'] = $explicitPaymentState ?? Order::PAYMENT_STATE_REFUNDED;
+                $updates['refunded_at'] = $context['refunded_at'] ?? ($order->refunded_at ?? $transitionedAt);
+                break;
+        }
+
+        return $updates;
+    }
+
+    private function isDeliveryEligibleOrder(object $order): bool
+    {
+        if ($this->resolvedPaymentState($order) !== Order::PAYMENT_STATE_PAID) {
+            return false;
+        }
+
+        if ($this->resolvedGrantState($order) === Order::GRANT_STATE_GRANTED) {
+            return true;
+        }
+
+        return $this->isLegacyDeliveryEligibleOrder($order);
+    }
+
+    private function isLegacyDeliveryEligibleOrder(object $order): bool
+    {
+        $legacyStatus = strtolower(trim((string) ($order->status ?? '')));
+        if (! in_array($legacyStatus, [
+            Order::STATUS_PAID,
+            Order::STATUS_FULFILLED,
+        ], true)) {
+            return false;
+        }
+
+        $rawPaymentState = strtolower(trim((string) ($order->payment_state ?? '')));
+        if ($rawPaymentState !== '' && $rawPaymentState !== Order::PAYMENT_STATE_CREATED) {
+            return false;
+        }
+
+        $rawGrantState = strtolower(trim((string) ($order->grant_state ?? '')));
+
+        return $rawGrantState === '' || $rawGrantState === Order::GRANT_STATE_NOT_STARTED;
+    }
+
+    /**
+     * @param  array<string,mixed>  $ledgerContext
+     * @return array{
+     *     channel:?string,
+     *     provider_app:?string,
+     *     external_user_ref:?string
+     * }
+     */
+    private function resolveLedgerContext(
+        string $provider,
+        ?string $targetAttemptId,
+        ?string $userId,
+        ?string $anonId,
+        ?string $contactEmailHash,
+        array $ledgerContext
+    ): array {
+        $explicitChannel = Order::normalizeChannel(
+            is_scalar($ledgerContext['channel'] ?? null) ? (string) $ledgerContext['channel'] : null
+        );
+        $attemptChannel = $this->resolveAttemptChannel($targetAttemptId);
+        $channel = $explicitChannel ?? $attemptChannel ?? 'web';
+
+        $providerApp = $this->trimOrNull(
+            is_scalar($ledgerContext['provider_app'] ?? null) ? (string) $ledgerContext['provider_app'] : null
+        );
+
+        if ($providerApp === null) {
+            $providerApp = match (strtolower(trim($provider))) {
+                'wechatpay' => $channel === 'wechat_miniapp'
+                    ? $this->trimOrNull((string) config('pay.wechat.default.mini_app_id', config('pay.wechat.default.mp_app_id', config('pay.wechat.default.app_id', ''))))
+                    : null,
+                'alipay' => $channel === 'alipay_miniapp'
+                    ? $this->trimOrNull((string) config('pay.alipay.default.app_id', ''))
+                    : null,
+                default => null,
+            };
+        }
+
+        return [
+            'channel' => $channel,
+            'provider_app' => $providerApp,
+            'external_user_ref' => $this->resolveExternalUserRef($userId, $anonId, $contactEmailHash),
+        ];
+    }
+
+    private function resolveAttemptChannel(?string $targetAttemptId): ?string
+    {
+        $attemptId = $this->trimOrNull($targetAttemptId);
+        if ($attemptId === null || ! Schema::hasTable('attempts')) {
+            return null;
+        }
+
+        $attemptChannel = DB::table('attempts')
+            ->where('id', $attemptId)
+            ->value('channel');
+
+        return Order::normalizeChannel(is_scalar($attemptChannel) ? (string) $attemptChannel : null);
+    }
+
+    private function resolveExternalUserRef(?string $userId, ?string $anonId, ?string $contactEmailHash): ?string
+    {
+        $normalizedUserId = $this->trimOrNull($userId);
+        if ($normalizedUserId !== null) {
+            return substr('user:'.$normalizedUserId, 0, 128);
+        }
+
+        $normalizedAnonId = $this->trimOrNull($anonId);
+        if ($normalizedAnonId !== null) {
+            return substr('anon:'.$normalizedAnonId, 0, 128);
+        }
+
+        $normalizedContactHash = $this->trimOrNull($contactEmailHash);
+        if ($normalizedContactHash !== null) {
+            return substr('email_hash:'.$normalizedContactHash, 0, 128);
+        }
+
+        return null;
     }
 
     private function normalizeRequestId(mixed $value): ?string

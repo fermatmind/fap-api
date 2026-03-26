@@ -98,6 +98,9 @@ class OrderResource extends \App\Filament\Shared\BaseTenantResource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('provider')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('channel')
+                    ->badge()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('amount_cents')
                     ->label('Amount (cents)')
                     ->numeric()
@@ -109,6 +112,12 @@ class OrderResource extends \App\Filament\Shared\BaseTenantResource
                     ->formatStateUsing(fn (Order $record): string => $support->orderStatus($record)['label'])
                     ->badge()
                     ->color(fn (Order $record): string => $support->orderStatus($record)['state']),
+                Tables\Columns\TextColumn::make('payment_state')
+                    ->badge()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('grant_state')
+                    ->badge()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('latest_payment_status')
                     ->label('Payment status')
                     ->state(fn (Order $record): string => $support->paymentStatus($record)['label'])
@@ -212,6 +221,12 @@ class OrderResource extends \App\Filament\Shared\BaseTenantResource
                     }),
                 Tables\Filters\SelectFilter::make('provider')
                     ->options(fn (): array => $support->distinctOrderOptions('provider')),
+                Tables\Filters\SelectFilter::make('channel')
+                    ->options(fn (): array => $support->distinctOrderOptions('channel')),
+                Tables\Filters\SelectFilter::make('payment_state')
+                    ->options(fn (): array => $support->distinctOrderOptions('payment_state')),
+                Tables\Filters\SelectFilter::make('grant_state')
+                    ->options(fn (): array => $support->distinctOrderOptions('grant_state')),
                 Tables\Filters\TernaryFilter::make('paid_success')
                     ->label('Paid success')
                     ->queries(

@@ -10,9 +10,7 @@ use Illuminate\Support\Str;
 
 class WebhookEntitlementService
 {
-    public function __construct(private PaymentWebhookHandlerCore $core)
-    {
-    }
+    public function __construct(private PaymentWebhookHandlerCore $core) {}
 
     public function handle(array $ctx): array
     {
@@ -267,6 +265,21 @@ class WebhookEntitlementService
                     ]);
                     $eventContext = $this->core->buildEventContext($orderMeta, $anonId);
 
+                    $providerTradeNo = is_scalar($normalized['external_trade_no'] ?? null)
+                        ? (string) $normalized['external_trade_no']
+                        : null;
+                    $eventAt = is_scalar($normalized['paid_at'] ?? null)
+                        ? (string) $normalized['paid_at']
+                        : null;
+                    $nonSuccessPaymentState = $this->resolveNonSuccessPaymentState($eventType);
+                    $this->core->orderManager()->touchPaymentLedger(
+                        $orderNo,
+                        $orgId,
+                        $providerTradeNo,
+                        $eventAt,
+                        $nonSuccessPaymentState
+                    );
+
                     if ($isRefundEvent) {
                         $refund = $this->core->handleRefund($orderNo, $order, $normalized, $providerEventId, $orgId);
                         if (! ($refund['ok'] ?? false)) {
@@ -283,6 +296,40 @@ class WebhookEntitlementService
                         $this->core->markEventProcessed($provider, $providerEventId);
 
                         return $refund;
+                    }
+
+                    if ($nonSuccessPaymentState !== null) {
+                        $legacyStatus = $nonSuccessPaymentState === \App\Models\Order::PAYMENT_STATE_FAILED
+                            ? \App\Models\Order::STATUS_FAILED
+                            : \App\Models\Order::STATUS_CANCELED;
+                        $transition = $this->core->orderManager()->transition($orderNo, $legacyStatus, $orgId, [
+                            'payment_state' => $nonSuccessPaymentState,
+                            'provider_trade_no' => $providerTradeNo,
+                            'last_payment_event_at' => $eventAt,
+                            'closed_at' => $eventAt,
+                            'expired_at' => $eventAt,
+                        ]);
+
+                        if (! ($transition['ok'] ?? false)) {
+                            $this->core->markEventError(
+                                $provider,
+                                $providerEventId,
+                                'failed',
+                                (string) ($transition['error'] ?? 'ORDER_STATUS_INVALID'),
+                                (string) ($transition['message'] ?? 'order transition failed.')
+                            );
+
+                            return $transition;
+                        }
+
+                        $this->core->markEventProcessed($provider, $providerEventId);
+
+                        return [
+                            'ok' => true,
+                            'order_no' => $orderNo,
+                            'provider_event_id' => $providerEventId,
+                            'payment_state' => $nonSuccessPaymentState,
+                        ];
                     }
 
                     $effectiveSku = strtoupper((string) ($normalizedSkuMeta['effective_sku']
@@ -484,6 +531,7 @@ class WebhookEntitlementService
                             );
 
                             if (! ($grant['ok'] ?? false)) {
+                                $this->core->orderManager()->syncGrantState($orderNo, $orgId, \App\Models\Order::GRANT_STATE_GRANT_FAILED);
                                 $this->core->markEventError(
                                     $provider,
                                     $providerEventId,
@@ -585,5 +633,28 @@ class WebhookEntitlementService
         }
 
         return substr($normalized, 0, 128);
+    }
+
+    private function resolveNonSuccessPaymentState(string $eventType): ?string
+    {
+        $normalized = strtolower(trim($eventType));
+
+        if ($normalized === '') {
+            return null;
+        }
+
+        if (str_contains($normalized, 'refund')) {
+            return null;
+        }
+
+        foreach (['close', 'closed', 'cancel', 'canceled', 'cancelled', 'expire', 'expired'] as $needle) {
+            if (str_contains($normalized, $needle)) {
+                return str_contains($normalized, 'expire')
+                    ? \App\Models\Order::PAYMENT_STATE_EXPIRED
+                    : \App\Models\Order::PAYMENT_STATE_CANCELED;
+            }
+        }
+
+        return null;
     }
 }

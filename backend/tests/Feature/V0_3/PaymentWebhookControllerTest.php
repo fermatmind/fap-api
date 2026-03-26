@@ -266,6 +266,9 @@ final class PaymentWebhookControllerTest extends TestCase
         $this->assertNoLegacyErrorKey($second);
 
         $this->assertSame('fulfilled', (string) DB::table('orders')->where('order_no', $orderNo)->value('status'));
+        $this->assertSame('paid', (string) DB::table('orders')->where('order_no', $orderNo)->value('payment_state'));
+        $this->assertSame('not_started', (string) DB::table('orders')->where('order_no', $orderNo)->value('grant_state'));
+        $this->assertNotNull(DB::table('orders')->where('order_no', $orderNo)->value('last_payment_event_at'));
         $this->assertSame(1, DB::table('payment_events')
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_sec002_bill_1')
