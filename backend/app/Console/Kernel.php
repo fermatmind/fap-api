@@ -9,6 +9,7 @@ use App\Console\Commands\Big5AttemptPurge;
 use App\Console\Commands\Big5PsychometricsReport;
 use App\Console\Commands\Big5TelemetrySummary;
 use App\Console\Commands\CiScaleImpact;
+use App\Console\Commands\CommerceCompensatePendingOrders;
 use App\Console\Commands\CommerceReconcile;
 use App\Console\Commands\ContentCompile;
 use App\Console\Commands\ContentLint;
@@ -115,6 +116,7 @@ class Kernel extends ConsoleKernel
         Big5AttemptPurge::class,
         Big5TelemetrySummary::class,
         CommerceReconcile::class,
+        CommerceCompensatePendingOrders::class,
         PacksPublish::class,
         PacksRollback::class,
         Packs2Publish::class,
