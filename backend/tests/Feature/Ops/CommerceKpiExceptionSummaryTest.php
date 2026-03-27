@@ -75,8 +75,32 @@ final class CommerceKpiExceptionSummaryTest extends TestCase
         $this->assertContains('Pending unresolved', $labels);
         $this->assertContains('Paid no grant', $labels);
         $this->assertContains('Compensated recently', $labels);
+        $this->assertSame('2', $valuesByLabel[__('ops.widgets.paid_orders_today')] ?? null);
         $this->assertSame('2', $valuesByLabel['Pending unresolved'] ?? null);
         $this->assertSame('1', $valuesByLabel['Paid no grant'] ?? null);
         $this->assertSame('1', $valuesByLabel['Compensated recently'] ?? null);
+    }
+
+    public function test_commerce_kpi_widget_uses_placeholder_when_no_org_is_selected(): void
+    {
+        $context = app(OrgContext::class);
+        $context->set(0, null, null, null, OrgContext::KIND_PUBLIC);
+        app()->instance(OrgContext::class, $context);
+
+        $widget = app(CommerceKpiWidget::class);
+        $method = new ReflectionMethod($widget, 'getStats');
+        $method->setAccessible(true);
+        $stats = $method->invoke($widget);
+
+        $this->assertCount(6, $stats);
+        $this->assertSame('—', (string) $stats[0]->getValue());
+        $this->assertSame(__('ops.widgets.select_org_to_view_metrics'), (string) $stats[0]->getDescription());
+
+        foreach ($stats as $stat) {
+            $this->assertSame('—', (string) $stat->getValue());
+            $this->assertNotSame('0', (string) $stat->getValue());
+        }
+
+        $this->assertSame(__('ops.widgets.no_org_selected'), (string) $stats[1]->getDescription());
     }
 }

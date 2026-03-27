@@ -67,7 +67,7 @@ return [
         'unlock_rate' => 'Unlock Rate',
         'refund_count' => 'Refund Count',
         'webhook_failures' => 'Webhook Failures',
-        'select_org_to_view_metrics' => 'Select org to view live metrics',
+        'select_org_to_view_metrics' => 'No organization selected. Select an org to view live metrics.',
         'no_org_selected' => 'No organization selected',
         'cents' => 'cents',
         'webhook_failures_15m' => 'Webhook Failures (15m)',
