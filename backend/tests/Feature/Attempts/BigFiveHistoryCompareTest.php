@@ -6,6 +6,8 @@ namespace Tests\Feature\Attempts;
 
 use App\Models\Attempt;
 use App\Models\UnifiedAccessProjection;
+use Database\Seeders\Pr19CommerceSeeder;
+use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -17,6 +19,9 @@ final class BigFiveHistoryCompareTest extends TestCase
 
     public function test_me_attempts_big5_returns_history_compare_summary(): void
     {
+        (new ScaleRegistrySeeder())->run();
+        (new Pr19CommerceSeeder())->run();
+
         $userId = 8101;
         $anonId = 'anon_big5_history';
         $this->seedUser($userId);
@@ -25,8 +30,40 @@ final class BigFiveHistoryCompareTest extends TestCase
         $olderAttemptId = $this->seedBigFiveAttempt($anonId, (string) $userId, now()->subDays(2));
         $latestAttemptId = $this->seedBigFiveAttempt($anonId, (string) $userId, now()->subDay());
 
-        $this->seedBigFiveResult($olderAttemptId, ['O' => 3.0, 'C' => 3.1, 'E' => 3.2, 'A' => 3.3, 'N' => 3.4]);
-        $this->seedBigFiveResult($latestAttemptId, ['O' => 3.5, 'C' => 3.1, 'E' => 3.0, 'A' => 3.6, 'N' => 3.2]);
+        $this->seedBigFiveResult(
+            $olderAttemptId,
+            ['O' => 3.0, 'C' => 3.1, 'E' => 3.2, 'A' => 3.3, 'N' => 3.4],
+            [
+                'scores_0_100' => [
+                    'domains_percentile' => ['O' => 42, 'C' => 48, 'E' => 55, 'A' => 63, 'N' => 71],
+                    'facets_percentile' => ['N1' => 79, 'E2' => 35, 'A3' => 66],
+                ],
+                'facts' => [
+                    'facet_buckets' => ['N1' => 'high', 'E2' => 'low', 'A3' => 'high'],
+                    'top_strength_facets' => ['N1', 'A3'],
+                    'top_growth_facets' => ['E2'],
+                ],
+                'quality' => ['level' => 'B'],
+                'norms' => ['status' => 'CALIBRATED', 'norms_version' => '2025Q4'],
+            ]
+        );
+        $this->seedBigFiveResult(
+            $latestAttemptId,
+            ['O' => 3.5, 'C' => 3.1, 'E' => 3.0, 'A' => 3.6, 'N' => 3.2],
+            [
+                'scores_0_100' => [
+                    'domains_percentile' => ['O' => 84, 'C' => 63, 'E' => 51, 'A' => 78, 'N' => 40],
+                    'facets_percentile' => ['O5' => 88, 'A3' => 73, 'C4' => 69, 'E2' => 34],
+                ],
+                'facts' => [
+                    'facet_buckets' => ['O5' => 'high', 'A3' => 'high', 'C4' => 'mid', 'E2' => 'low'],
+                    'top_strength_facets' => ['O5', 'A3', 'C4'],
+                    'top_growth_facets' => ['E2'],
+                ],
+                'quality' => ['level' => 'A'],
+                'norms' => ['status' => 'CALIBRATED', 'norms_version' => '2026Q1'],
+            ]
+        );
         $this->seedAccessProjection($olderAttemptId, [
             'access_state' => 'locked',
             'report_state' => 'ready',
@@ -79,6 +116,15 @@ final class BigFiveHistoryCompareTest extends TestCase
         $response->assertJsonPath('items.0.access_summary.variant', 'full');
         $response->assertJsonPath('items.0.access_summary.actions.page_href', "/result/{$latestAttemptId}");
         $response->assertJsonPath('items.0.access_summary.actions.pdf_href', "/api/v0.3/attempts/{$latestAttemptId}/report.pdf");
+        $response->assertJsonPath('items.0.top_facets_summary_v1.items.0.key', 'O5');
+        $response->assertJsonPath('items.0.top_facets_summary_v1.items.1.key', 'A3');
+        $response->assertJsonPath('items.0.quality_summary.level', 'A');
+        $response->assertJsonPath('items.0.quality_summary.grade', 'A');
+        $response->assertJsonPath('items.0.norms_summary.status', 'CALIBRATED');
+        $response->assertJsonPath('items.0.norms_summary.norms_version', '2026Q1');
+        $response->assertJsonPath('items.0.offer_summary.primary_offer', null);
+        $response->assertJsonPath('items.0.share_summary.enabled', true);
+        $response->assertJsonPath('items.0.share_summary.share_kind', 'big5_result');
         $response->assertJsonPath('items.1.access_summary.access_state', 'locked');
         $response->assertJsonPath('items.1.access_summary.report_state', 'ready');
         $response->assertJsonPath('items.1.access_summary.pdf_state', 'unavailable');
@@ -86,6 +132,16 @@ final class BigFiveHistoryCompareTest extends TestCase
         $response->assertJsonPath('items.1.access_summary.variant', 'free');
         $response->assertJsonPath('items.1.access_summary.actions.page_href', "/result/{$olderAttemptId}");
         $response->assertJsonPath('items.1.access_summary.actions.pdf_href', null);
+        $response->assertJsonPath('items.1.top_facets_summary_v1.items.0.key', 'N1');
+        $response->assertJsonPath('items.1.quality_summary.level', 'B');
+        $response->assertJsonPath('items.1.quality_summary.grade', 'B');
+        $response->assertJsonPath('items.1.norms_summary.status', 'CALIBRATED');
+        $response->assertJsonPath('items.1.norms_summary.norms_version', '2025Q4');
+        $response->assertJsonPath('items.1.offer_summary.primary_offer.sku', 'SKU_BIG5_FULL_REPORT_299');
+        $response->assertJsonPath('items.1.offer_summary.primary_offer.benefit_code', 'BIG5_FULL_REPORT');
+        $response->assertJsonPath('items.1.offer_summary.primary_offer.formatted_price', '¥2.99');
+        $response->assertJsonPath('items.1.offer_summary.primary_offer.modules_included.0', 'big5_full');
+        $response->assertJsonPath('items.1.share_summary.enabled', true);
     }
 
     private function seedBigFiveAttempt(string $anonId, string $userId, \DateTimeInterface $submittedAt): string
@@ -121,8 +177,31 @@ final class BigFiveHistoryCompareTest extends TestCase
     /**
      * @param array{O:float,C:float,E:float,A:float,N:float} $domainsMean
      */
-    private function seedBigFiveResult(string $attemptId, array $domainsMean): void
+    private function seedBigFiveResult(string $attemptId, array $domainsMean, array $overrides = []): void
     {
+        $scorePayload = array_replace_recursive([
+            'raw_scores' => [
+                'domains_mean' => $domainsMean,
+                'facets_mean' => [],
+            ],
+            'scores_0_100' => [
+                'domains_percentile' => [],
+                'facets_percentile' => [],
+            ],
+            'facts' => [
+                'facet_buckets' => [],
+                'top_strength_facets' => [],
+                'top_growth_facets' => [],
+            ],
+            'quality' => [
+                'level' => 'A',
+            ],
+            'norms' => [
+                'status' => 'MISSING',
+                'norms_version' => null,
+            ],
+        ], $overrides);
+
         DB::table('results')->insert([
             'id' => (string) Str::uuid(),
             'attempt_id' => $attemptId,
@@ -136,6 +215,9 @@ final class BigFiveHistoryCompareTest extends TestCase
             'profile_version' => null,
             'content_package_version' => 'v1',
             'result_json' => json_encode([
+                'normed_json' => $scorePayload,
+                'breakdown_json' => ['score_result' => $scorePayload],
+                'axis_scores_json' => ['score_result' => $scorePayload],
                 'raw_scores' => [
                     'domains_mean' => $domainsMean,
                     'facets_mean' => [],
