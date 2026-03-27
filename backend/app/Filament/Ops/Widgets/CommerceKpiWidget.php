@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 class CommerceKpiWidget extends BaseWidget
 {
+    private const NO_ORG_PLACEHOLDER = '—';
+
     protected function getHeading(): ?string
     {
         return __('ops.widgets.today_business');
@@ -24,12 +26,12 @@ class CommerceKpiWidget extends BaseWidget
 
         if ($orgId <= 0) {
             return [
-                Stat::make(__('ops.widgets.paid_orders_today'), '0')->description(__('ops.widgets.select_org_to_view_metrics')),
-                Stat::make('Pending unresolved', '0')->description(__('ops.widgets.no_org_selected')),
-                Stat::make('Paid no grant', '0')->description(__('ops.widgets.no_org_selected')),
-                Stat::make('Compensated recently', '0')->description(__('ops.widgets.no_org_selected')),
-                Stat::make(__('ops.widgets.refund_count'), '0')->description(__('ops.widgets.no_org_selected')),
-                Stat::make(__('ops.widgets.webhook_failures'), '0')->description(__('ops.widgets.no_org_selected')),
+                $this->noOrgStat(__('ops.widgets.paid_orders_today'), __('ops.widgets.select_org_to_view_metrics')),
+                $this->noOrgStat('Pending unresolved', __('ops.widgets.no_org_selected')),
+                $this->noOrgStat('Paid no grant', __('ops.widgets.no_org_selected')),
+                $this->noOrgStat('Compensated recently', __('ops.widgets.no_org_selected')),
+                $this->noOrgStat(__('ops.widgets.refund_count'), __('ops.widgets.no_org_selected')),
+                $this->noOrgStat(__('ops.widgets.webhook_failures'), __('ops.widgets.no_org_selected')),
             ];
         }
 
@@ -89,5 +91,12 @@ class CommerceKpiWidget extends BaseWidget
             Stat::make(__('ops.widgets.webhook_failures'), (string) $webhookFailures)
                 ->color($webhookFailures > 0 ? 'danger' : 'success'),
         ];
+    }
+
+    private function noOrgStat(string $label, string $description): Stat
+    {
+        return Stat::make($label, self::NO_ORG_PLACEHOLDER)
+            ->description($description)
+            ->color('gray');
     }
 }

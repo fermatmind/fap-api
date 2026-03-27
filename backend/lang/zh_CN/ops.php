@@ -67,7 +67,7 @@ return [
         'unlock_rate' => '解锁率',
         'refund_count' => '退款数量',
         'webhook_failures' => 'Webhook 失败数',
-        'select_org_to_view_metrics' => '请选择组织后查看实时指标',
+        'select_org_to_view_metrics' => '未选择组织，请选择组织后查看实时指标',
         'no_org_selected' => '未选择组织',
         'cents' => '分',
         'webhook_failures_15m' => 'Webhook 失败（15分钟）',
