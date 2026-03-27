@@ -5,6 +5,7 @@ namespace App\Services\V0_3\Me;
 use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Models\UnifiedAccessProjection;
 use App\Support\ApiPagination;
 
 class MeAttemptsService
@@ -64,11 +65,36 @@ class MeAttemptsService
             }
         }
 
+        $projectionByAttemptId = [];
+        $needsAccessSummary = false;
+        foreach ($attemptModels as $attempt) {
+            if ($attempt instanceof Attempt && $this->shouldIncludeAccessSummary($attempt)) {
+                $needsAccessSummary = true;
+                break;
+            }
+        }
+
+        if ($needsAccessSummary && $attemptIds !== []) {
+            $projectionRows = UnifiedAccessProjection::query()
+                ->whereIn('attempt_id', $attemptIds)
+                ->get();
+            foreach ($projectionRows as $projection) {
+                if (! $projection instanceof UnifiedAccessProjection) {
+                    continue;
+                }
+                $attemptId = (string) ($projection->attempt_id ?? '');
+                if ($attemptId === '') {
+                    continue;
+                }
+                $projectionByAttemptId[$attemptId] = $projection;
+            }
+        }
+
         $items = [];
         foreach ($attemptModels as $attempt) {
             $attemptId = (string) ($attempt->id ?? '');
             $result = $resultByAttemptId[$attemptId] ?? null;
-            $items[] = $this->presentAttempt($attempt, $result);
+            $items[] = $this->presentAttempt($attempt, $result, $projectionByAttemptId[$attemptId] ?? null);
         }
 
         $paginator->setCollection(collect($items));
@@ -90,7 +116,11 @@ class MeAttemptsService
         ];
     }
 
-    private function presentAttempt(Attempt $attempt, ?Result $result = null): array
+    private function presentAttempt(
+        Attempt $attempt,
+        ?Result $result = null,
+        ?UnifiedAccessProjection $projection = null
+    ): array
     {
         $attemptId = (string) ($attempt->id ?? '');
         $domainsMean = $this->extractDomainsMean($result?->result_json);
@@ -125,7 +155,71 @@ class MeAttemptsService
             $output['lookup_key'] = (string) ($attempt->id ?? '');
         }
 
+        if ($this->shouldIncludeAccessSummary($attempt)) {
+            $output['access_summary'] = $this->buildAccessSummary(
+                $attempt,
+                $projection,
+                $result instanceof Result
+            );
+        }
+
         return $output;
+    }
+
+    /**
+     * @return array{
+     *   access_state:string,
+     *   report_state:string,
+     *   pdf_state:string,
+     *   reason_code:?string,
+     *   access_level:?string,
+     *   variant:?string,
+     *   modules_allowed:list<string>,
+     *   modules_preview:list<string>,
+     *   actions:array{page_href:?string,pdf_href:?string}
+     * }
+     */
+    private function buildAccessSummary(
+        Attempt $attempt,
+        ?UnifiedAccessProjection $projection,
+        bool $resultExists
+    ): array
+    {
+        $payload = is_array($projection?->payload_json) ? $projection->payload_json : [];
+        $accessState = $this->normalizeProjectionState(
+            (string) ($projection?->access_state ?? ($resultExists ? 'locked' : 'pending')),
+            'access'
+        );
+        $reportState = $this->normalizeProjectionState(
+            (string) ($projection?->report_state ?? ($resultExists ? 'ready' : 'pending')),
+            'report'
+        );
+        $pdfState = $this->normalizeProjectionState(
+            (string) ($projection?->pdf_state ?? 'missing'),
+            'pdf'
+        );
+        $reasonCode = $this->nullableText(
+            $projection?->reason_code ?? ($resultExists ? 'projection_missing_result_ready' : 'projection_missing_result_pending')
+        );
+
+        return [
+            'access_state' => $accessState,
+            'report_state' => $reportState,
+            'pdf_state' => $pdfState,
+            'reason_code' => $reasonCode,
+            'access_level' => $this->nullableText($payload['access_level'] ?? null),
+            'variant' => $this->nullableText($payload['variant'] ?? null),
+            'modules_allowed' => $this->normalizeStringArray($payload['modules_allowed'] ?? null),
+            'modules_preview' => $this->normalizeStringArray($payload['modules_preview'] ?? null),
+            'actions' => [
+                'page_href' => $this->supportsPageEntry($accessState, $reportState)
+                    ? $this->resultPagePathForAttempt($attempt)
+                    : null,
+                'pdf_href' => $this->supportsPdfDownload($accessState, $pdfState)
+                    ? "/api/v0.3/attempts/{$attempt->id}/report.pdf"
+                    : null,
+            ],
+        ];
     }
 
     /**
@@ -204,6 +298,82 @@ class MeAttemptsService
         }
 
         return [];
+    }
+
+    private function shouldIncludeAccessSummary(Attempt $attempt): bool
+    {
+        return strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'BIG5_OCEAN';
+    }
+
+    private function supportsPageEntry(string $accessState, string $reportState): bool
+    {
+        return ! in_array($this->normalizeProjectionState($accessState, 'access'), ['deleted', 'expired'], true)
+            && ! in_array($this->normalizeProjectionState($reportState, 'report'), ['deleted', 'expired', 'unavailable'], true);
+    }
+
+    private function supportsPdfDownload(string $accessState, string $pdfState): bool
+    {
+        return $this->normalizeProjectionState($accessState, 'access') === 'ready'
+            && $this->normalizeProjectionState($pdfState, 'pdf') === 'ready';
+    }
+
+    private function resultPagePathForAttempt(Attempt $attempt): string
+    {
+        $scaleCode = strtoupper(trim((string) ($attempt->scale_code ?? '')));
+
+        return in_array($scaleCode, ['SDS_20', 'CLINICAL_COMBO_68'], true)
+            ? "/attempts/{$attempt->id}/report"
+            : "/result/{$attempt->id}";
+    }
+
+    private function normalizeProjectionState(string $state, string $kind): string
+    {
+        $normalized = strtolower(trim($state));
+
+        return match (true) {
+            $normalized === 'ready' => 'ready',
+            in_array($normalized, ['pending', 'generating', 'queued', 'running', 'submitted'], true) => 'pending',
+            in_array($normalized, ['restoring', 'rehydrating'], true) => 'restoring',
+            in_array($normalized, ['deleted', 'purged', 'anonymized'], true) => 'deleted',
+            $normalized === 'expired' => 'expired',
+            $kind === 'access' && in_array($normalized, ['locked', 'recovery_available'], true) => 'locked',
+            in_array($normalized, ['missing', 'unavailable', 'archived', 'shrunk', 'failed', 'blocked'], true) => 'unavailable',
+            default => $kind === 'access' ? 'locked' : 'unavailable',
+        };
+    }
+
+    private function nullableText(mixed $value): ?string
+    {
+        if (! is_string($value)) {
+            return null;
+        }
+
+        $normalized = trim($value);
+        return $normalized !== '' ? $normalized : null;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function normalizeStringArray(mixed $value): array
+    {
+        if (! is_array($value)) {
+            return [];
+        }
+
+        $out = [];
+        foreach ($value as $item) {
+            if (! is_string($item)) {
+                continue;
+            }
+            $normalized = trim($item);
+            if ($normalized === '') {
+                continue;
+            }
+            $out[$normalized] = $normalized;
+        }
+
+        return array_values($out);
     }
 
     /**

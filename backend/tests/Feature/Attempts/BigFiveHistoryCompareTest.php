@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Attempts;
 
 use App\Models\Attempt;
+use App\Models\UnifiedAccessProjection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -26,6 +27,30 @@ final class BigFiveHistoryCompareTest extends TestCase
 
         $this->seedBigFiveResult($olderAttemptId, ['O' => 3.0, 'C' => 3.1, 'E' => 3.2, 'A' => 3.3, 'N' => 3.4]);
         $this->seedBigFiveResult($latestAttemptId, ['O' => 3.5, 'C' => 3.1, 'E' => 3.0, 'A' => 3.6, 'N' => 3.2]);
+        $this->seedAccessProjection($olderAttemptId, [
+            'access_state' => 'locked',
+            'report_state' => 'ready',
+            'pdf_state' => 'missing',
+            'reason_code' => 'preview_only',
+            'payload_json' => [
+                'access_level' => 'preview',
+                'variant' => 'free',
+                'modules_allowed' => ['summary'],
+                'modules_preview' => ['report.full'],
+            ],
+        ]);
+        $this->seedAccessProjection($latestAttemptId, [
+            'access_state' => 'ready',
+            'report_state' => 'ready',
+            'pdf_state' => 'ready',
+            'reason_code' => 'entitlement_granted',
+            'payload_json' => [
+                'access_level' => 'full',
+                'variant' => 'full',
+                'modules_allowed' => ['summary', 'report.full', 'pdf'],
+                'modules_preview' => [],
+            ],
+        ]);
 
         $response = $this->withHeaders([
             'Authorization' => "Bearer {$token}",
@@ -46,6 +71,21 @@ final class BigFiveHistoryCompareTest extends TestCase
         $response->assertJsonPath('history_compare.domains_delta.E.direction', 'down');
         $response->assertJsonPath('items.0.attempt_id', $latestAttemptId);
         $response->assertJsonPath('items.0.result_summary.domains_mean.O', 3.5);
+        $response->assertJsonPath('items.0.access_summary.access_state', 'ready');
+        $response->assertJsonPath('items.0.access_summary.report_state', 'ready');
+        $response->assertJsonPath('items.0.access_summary.pdf_state', 'ready');
+        $response->assertJsonPath('items.0.access_summary.reason_code', 'entitlement_granted');
+        $response->assertJsonPath('items.0.access_summary.access_level', 'full');
+        $response->assertJsonPath('items.0.access_summary.variant', 'full');
+        $response->assertJsonPath('items.0.access_summary.actions.page_href', "/result/{$latestAttemptId}");
+        $response->assertJsonPath('items.0.access_summary.actions.pdf_href', "/api/v0.3/attempts/{$latestAttemptId}/report.pdf");
+        $response->assertJsonPath('items.1.access_summary.access_state', 'locked');
+        $response->assertJsonPath('items.1.access_summary.report_state', 'ready');
+        $response->assertJsonPath('items.1.access_summary.pdf_state', 'unavailable');
+        $response->assertJsonPath('items.1.access_summary.access_level', 'preview');
+        $response->assertJsonPath('items.1.access_summary.variant', 'free');
+        $response->assertJsonPath('items.1.access_summary.actions.page_href', "/result/{$olderAttemptId}");
+        $response->assertJsonPath('items.1.access_summary.actions.pdf_href', null);
     }
 
     private function seedBigFiveAttempt(string $anonId, string $userId, \DateTimeInterface $submittedAt): string
@@ -110,6 +150,25 @@ final class BigFiveHistoryCompareTest extends TestCase
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+    }
+
+    /**
+     * @param  array<string,mixed>  $attributes
+     */
+    private function seedAccessProjection(string $attemptId, array $attributes): void
+    {
+        UnifiedAccessProjection::query()->create(array_merge([
+            'attempt_id' => $attemptId,
+            'access_state' => 'locked',
+            'report_state' => 'pending',
+            'pdf_state' => 'missing',
+            'reason_code' => null,
+            'projection_version' => 1,
+            'actions_json' => [],
+            'payload_json' => [],
+            'produced_at' => now(),
+            'refreshed_at' => now(),
+        ], $attributes));
     }
 
     private function seedUser(int $id): void
