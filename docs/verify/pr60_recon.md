@@ -1,5 +1,8 @@
 # PR60 Recon
 
+> Historical PR recon note.
+> This document captures the PR60 risk scan context at the time it was written. It is not the current MBTI + Big5 release-freeze source of truth.
+
 - Keywords: AttemptsController|OrderManager|PsychometricsController
 - 相关入口文件：
   - backend/app/Http/Controllers/API/V0_3/AttemptsController.php

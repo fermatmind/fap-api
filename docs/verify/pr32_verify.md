@@ -1,5 +1,7 @@
 # PR32 Verify
 
+> Historical note (2026-03-27): this file is kept for PR audit history only. It is not part of the active MBTI + BIG5 release-freeze evidence chain.
+
 - Date: 2026-02-05
 - Env: local
 - Commands:

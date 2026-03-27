@@ -1,5 +1,8 @@
 # PR52 Verify
 
+> Historical PR verification note.
+> This document records the 2026-02-07 PR52 verification chain only. It is not the current MBTI + Big5 release-freeze source of truth.
+
 - Date: 2026-02-07
 - Commands:
   - php artisan route:list
