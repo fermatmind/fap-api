@@ -25,6 +25,7 @@ bash "${BACKEND_DIR}/scripts/ci_verify_mbti.sh"
 
 if [[ "${RUN_BIG5_OCEAN_GATE}" != "1" ]]; then
   echo "[CI][scales] BIG5_OCEAN gate not requested; skip BIG5 compiled evidence checks"
+  echo "[CI][scales] use backend/scripts/release_freeze_verify.sh when MBTI + BIG5 release-freeze evidence is required"
   exit 0
 fi
 
