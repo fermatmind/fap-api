@@ -9,7 +9,7 @@
                 <x-filament::button color="primary" tag="a" href="/ops/select-org">
                     Back to Select Org
                 </x-filament::button>
-                <x-filament::button color="gray" tag="a" href="/docs/04-ops/admin-ops-runbook.md" target="_blank">
+                <x-filament::button color="gray" tag="a" href="/docs/04-ops/ops-bootstrap.md" target="_blank">
                     Open Runbook
                 </x-filament::button>
             </div>

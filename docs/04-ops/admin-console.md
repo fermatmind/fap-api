@@ -23,17 +23,21 @@
 | Analyst | admin.events.read, admin.audit.read, admin.funnel.read |
 
 ## 登录方式
-- 初始化：`php artisan admin:bootstrap-owner --email=owner@example.com --password=owner12345 --name=Owner`
-- 打开：`/admin`（默认 `http://127.0.0.1:18010/admin`）
+- 首次 bootstrap：优先参考 `docs/04-ops/ops-bootstrap.md`
+- 官方首个管理员命令：`php artisan admin:bootstrap-owner --email=owner@example.com --password='ChangeMe123!' --name='Owner'`
+- 正确登录模型：`App\Models\AdminUser`，不要用 `App\Models\User`
+- 打开：`/ops/login`（默认 `http://127.0.0.1:18010/ops/login`）
 - 备用：API Token 访问 `/api/v0.3/admin/*`（Header：`X-FAP-Admin-Token`）
 - 开关：`FAP_ADMIN_PANEL_ENABLED=true|false`
 
 ## 常用路径
-- UI：`/admin`
+- UI：`/ops`
+- Login：`/ops/login`
+- Select Org：`/ops/select-org`
 - API：`/api/v0.3/admin/*`
 
 ## 截图位点（待补）
-- Admin 登录页（/admin）
+- Admin 登录页（/ops/login）
 - Admin Users 列表 + 禁用弹窗
 - Roles 权限勾选页
 - Audit Logs 过滤 + 导出按钮
@@ -42,6 +46,7 @@
 - Widgets：HealthzStatusWidget、FunnelWidget
 
 ## 本机手动验收要点
-- 浏览器打开 `http://127.0.0.1:18010/admin` 登录 Owner
+- 浏览器打开 `http://127.0.0.1:18010/ops/login` 登录 Owner
+- 首次登录/无 org 状态下应进入 `Select Org`
 - HealthzStatusWidget 与 FunnelWidget 正常显示；无数据时显示 “no data”
 - ContentReleaseResource 可看到发布记录，Probe 可执行并写入 audit_logs
