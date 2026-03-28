@@ -3,6 +3,7 @@
 namespace App\Services\Commerce\Webhook;
 
 use App\Internal\Commerce\PaymentWebhookHandlerCore;
+use App\Services\Commerce\Repair\OrderRepairService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -486,10 +487,15 @@ class WebhookEntitlementService
                         'attempt' => $attemptMeta,
                     ], $anonId);
                     $eventUserId = $order->user_id ? (string) $order->user_id : $userId;
+                    $repairService = app(OrderRepairService::class);
+                    $grantMissingOnSettledOrder = $kind === 'report_unlock'
+                        && $orderAlreadySettled
+                        && ! $repairService->hasActiveGrantForOrder($order);
 
                     $retryingPostCommitOnly = $inserted === 0
                         && ! $this->core->isEventProcessed($eventRow)
-                        && $orderAlreadySettled;
+                        && $orderAlreadySettled
+                        && ! $grantMissingOnSettledOrder;
 
                     if ($kind === 'credit_pack') {
                         $unitQty = (int) ($skuRow->unit_qty ?? 0);
@@ -626,13 +632,29 @@ class WebhookEntitlementService
                             'provider' => $provider,
                             'provider_event_id' => $providerEventId,
                             'order_id' => $order->id ?? null,
+                            'grant_missing_on_settled_order' => $grantMissingOnSettledOrder,
                         ]);
+
+                        if ($grantMissingOnSettledOrder) {
+                            $fulfilled = $this->core->orderManager()->transition($orderNo, 'fulfilled', $orgId);
+                            if (! ($fulfilled['ok'] ?? false)) {
+                                $this->core->markEventError(
+                                    $provider,
+                                    $providerEventId,
+                                    'failed',
+                                    (string) ($fulfilled['error'] ?? 'ORDER_STATUS_INVALID'),
+                                    (string) ($fulfilled['message'] ?? 'order transition failed.')
+                                );
+
+                                return $fulfilled;
+                            }
+                        }
 
                         $this->core->markEventProcessed($provider, $providerEventId);
 
                         return [
                             'ok' => true,
-                            'duplicate' => true,
+                            'duplicate' => ! $grantMissingOnSettledOrder,
                             'order_no' => $orderNo,
                             'provider_event_id' => $providerEventId,
                         ];

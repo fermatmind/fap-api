@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\PaymentAttempt;
 use App\Services\Commerce\Compensation\Gateways\WechatPayLifecycleGateway;
 use App\Services\Commerce\Compensation\PendingOrderCompensationService;
+use Database\Seeders\Pr19CommerceSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -17,15 +18,17 @@ final class PaidNoGrantCompensationVisibilityTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_compensation_surfaces_paid_but_not_granted_order_detail(): void
+    public function test_compensation_repairs_paid_order_without_webhook_event(): void
     {
         config([
             'pay.wechat.default.mch_id' => 'mch_test',
             'pay.wechat.default.mch_secret_key' => str_repeat('k', 32),
         ]);
+        (new Pr19CommerceSeeder)->run();
 
         $email = 'paid-no-grant@example.com';
-        $order = $this->insertPendingWechatOrder('ord_paid_no_grant_1', $email);
+        $attemptId = $this->insertAttempt('anon_ord_paid_no_grant_1');
+        $order = $this->insertPendingWechatOrder('ord_paid_no_grant_1', $email, $attemptId);
         $this->insertPaymentAttempt($order->id, (string) $order->order_no);
 
         $this->app->instance(WechatPayLifecycleGateway::class, new class extends WechatPayLifecycleGateway
@@ -48,8 +51,10 @@ final class PaidNoGrantCompensationVisibilityTest extends TestCase
 
         $freshOrder = DB::table('orders')->where('id', $order->id)->first();
         $this->assertSame(Order::PAYMENT_STATE_PAID, (string) ($freshOrder->payment_state ?? ''));
-        $this->assertSame(Order::GRANT_STATE_NOT_STARTED, (string) ($freshOrder->grant_state ?? ''));
+        $this->assertSame(Order::GRANT_STATE_GRANTED, (string) ($freshOrder->grant_state ?? ''));
+        $this->assertSame(Order::STATUS_FULFILLED, (string) ($freshOrder->status ?? ''));
         $this->assertNotNull($freshOrder->last_reconciled_at ?? null);
+        $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $order->order_no)->where('status', 'active')->count());
 
         $response = $this->postJson('/api/v0.3/orders/lookup', [
             'order_no' => $order->order_no,
@@ -58,11 +63,11 @@ final class PaidNoGrantCompensationVisibilityTest extends TestCase
 
         $response->assertOk();
         $response->assertJsonPath('payment_state', 'paid');
-        $response->assertJsonPath('grant_state', 'not_started');
+        $response->assertJsonPath('grant_state', 'granted');
         $response->assertJsonPath('last_reconciled_at', (string) $freshOrder->last_reconciled_at);
     }
 
-    private function insertPendingWechatOrder(string $orderNo, string $email): object
+    private function insertPendingWechatOrder(string $orderNo, string $email, string $attemptId): object
     {
         $orderId = (string) Str::uuid();
         $now = now()->subHours(2);
@@ -76,7 +81,7 @@ final class PaidNoGrantCompensationVisibilityTest extends TestCase
             'contact_email_hash' => hash('sha256', $email),
             'sku' => 'MBTI_REPORT_FULL',
             'quantity' => 1,
-            'target_attempt_id' => null,
+            'target_attempt_id' => $attemptId,
             'amount_cents' => 299,
             'amount_total' => 299,
             'amount_refunded' => 0,
@@ -104,6 +109,36 @@ final class PaidNoGrantCompensationVisibilityTest extends TestCase
         ]);
 
         return DB::table('orders')->where('id', $orderId)->first();
+    }
+
+    private function insertAttempt(string $anonId): string
+    {
+        $attemptId = (string) Str::uuid();
+        $timestamp = now()->subHours(2);
+
+        DB::table('attempts')->insert([
+            'id' => $attemptId,
+            'org_id' => 0,
+            'anon_id' => $anonId,
+            'user_id' => null,
+            'scale_code' => 'MBTI',
+            'scale_version' => 'v0.3',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'question_count' => 144,
+            'answers_summary_json' => json_encode(['stage' => 'seed'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'client_platform' => 'test',
+            'started_at' => $timestamp,
+            'submitted_at' => $timestamp,
+            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
+            'dir_version' => 'MBTI-CN-v0.3',
+            'content_package_version' => 'v0.3',
+            'scoring_spec_version' => '2026.01',
+            'created_at' => $timestamp,
+            'updated_at' => $timestamp,
+        ]);
+
+        return $attemptId;
     }
 
     private function insertPaymentAttempt(string $orderId, string $orderNo): void

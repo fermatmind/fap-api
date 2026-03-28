@@ -10,6 +10,8 @@ use App\Console\Commands\Big5PsychometricsReport;
 use App\Console\Commands\Big5TelemetrySummary;
 use App\Console\Commands\CiScaleImpact;
 use App\Console\Commands\CommerceCompensatePendingOrders;
+use App\Console\Commands\CommerceRepairPaidOrders;
+use App\Console\Commands\CommerceRepairPostCommitFailed;
 use App\Console\Commands\CommerceReconcile;
 use App\Console\Commands\ContentCompile;
 use App\Console\Commands\ContentLint;
@@ -117,6 +119,8 @@ class Kernel extends ConsoleKernel
         Big5TelemetrySummary::class,
         CommerceReconcile::class,
         CommerceCompensatePendingOrders::class,
+        CommerceRepairPaidOrders::class,
+        CommerceRepairPostCommitFailed::class,
         PacksPublish::class,
         PacksRollback::class,
         Packs2Publish::class,
@@ -164,6 +168,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('storage:inventory --json')->weeklyOn(1, '04:10')->withoutOverlapping();
         $schedule->exec(PHP_BINARY.' '.base_path('artisan').' storage:control-plane-snapshot --json')->dailyAt('04:20')->withoutOverlapping();
         $schedule->command('payments:prune-events --days=90')->dailyAt('03:00')->withoutOverlapping();
+        $schedule->command('commerce:repair-paid-orders --limit=50')->everyFiveMinutes()->withoutOverlapping();
+        $schedule->command('commerce:repair-post-commit-failed --limit=50')->everyFiveMinutes()->withoutOverlapping();
         $schedule->command('quality:daily-summary')->dailyAt('03:20')->withoutOverlapping();
         $schedule->command('sds:psychometrics --window=last_7_days')->weeklyOn(1, '04:10')->withoutOverlapping();
         $schedule->command('eq60:psychometrics --window=last_90_days')->weeklyOn(1, '04:20')->withoutOverlapping();

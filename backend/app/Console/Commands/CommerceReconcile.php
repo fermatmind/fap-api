@@ -39,9 +39,10 @@ final class CommerceReconcile extends Command
         $endAtStorageTz = (clone $endAtBusinessTz)->setTimezone($storageTz);
 
         $paidOrders = DB::table('orders')
-            ->select(['order_no', 'status'])
+            ->select(['order_no', 'payment_state'])
             ->where('org_id', $orgId)
             ->whereNotNull('order_no')
+            ->where('payment_state', 'paid')
             ->where(function ($query) use ($startAtStorageTz, $endAtStorageTz): void {
                 $query->where(function ($q) use ($startAtStorageTz, $endAtStorageTz): void {
                     $q->whereNotNull('paid_at')
@@ -49,9 +50,8 @@ final class CommerceReconcile extends Command
                         ->where('paid_at', '<', $endAtStorageTz);
                 })->orWhere(function ($q) use ($startAtStorageTz, $endAtStorageTz): void {
                     $q->whereNull('paid_at')
-                        ->whereIn('status', ['paid', 'fulfilled', 'refunded', 'chargeback'])
-                        ->where('created_at', '>=', $startAtStorageTz)
-                        ->where('created_at', '<', $endAtStorageTz);
+                        ->where('updated_at', '>=', $startAtStorageTz)
+                        ->where('updated_at', '<', $endAtStorageTz);
                 });
             })
             ->orderBy('order_no')
@@ -78,17 +78,12 @@ final class CommerceReconcile extends Command
             if ($orderNo === '') {
                 continue;
             }
-            $status = strtolower(trim((string) ($order->status ?? '')));
             $paidOrderSet[$orderNo] = true;
             $paidCount++;
 
             $hasActiveGrant = isset($activeGrantSet[$orderNo]);
             if ($hasActiveGrant) {
                 $unlockedCount++;
-                continue;
-            }
-
-            if (in_array($status, ['refunded', 'chargeback'], true)) {
                 continue;
             }
 
