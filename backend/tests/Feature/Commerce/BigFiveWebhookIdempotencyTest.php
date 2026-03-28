@@ -21,8 +21,8 @@ final class BigFiveWebhookIdempotencyTest extends TestCase
 
     private function seedCommerce(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
     }
 
     private function createBigFiveAttemptWithResult(string $anonId): string
@@ -169,6 +169,7 @@ final class BigFiveWebhookIdempotencyTest extends TestCase
         }));
         $this->assertTrue($matchedMetas->contains(function (array $meta): bool {
             $status = (string) ($meta['webhook_status'] ?? '');
+
             return in_array($status, ['processed', 'duplicate'], true);
         }));
         $this->assertTrue($matchedMetas->contains(function (array $meta): bool {
@@ -199,7 +200,7 @@ final class BigFiveWebhookIdempotencyTest extends TestCase
         $response->assertJsonPath('rejected', true);
         $response->assertJsonPath('reject_reason', 'SKU_NOT_FOUND');
 
-        $this->assertSame('failed', (string) DB::table('payment_events')
+        $this->assertSame('rejected', (string) DB::table('payment_events')
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_big5_badsku_1')
             ->value('status'));
@@ -246,11 +247,12 @@ final class BigFiveWebhookIdempotencyTest extends TestCase
         if (is_array($raw)) {
             return $raw;
         }
-        if (!is_string($raw) || trim($raw) === '') {
+        if (! is_string($raw) || trim($raw) === '') {
             return [];
         }
 
         $decoded = json_decode($raw, true);
+
         return is_array($decoded) ? $decoded : [];
     }
 }

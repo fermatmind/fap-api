@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\DB;
 
 final class OrderRepairService
 {
+    private const BLOCKING_REJECT_CODES = [
+        'ATTEMPT_OWNER_MISMATCH',
+        'ATTEMPT_SCALE_MISMATCH',
+    ];
+
     public function __construct(
         private readonly EntitlementManager $entitlements,
         private readonly OrderManager $orders,
@@ -58,6 +63,21 @@ final class OrderRepairService
             return $this->failure('BENEFIT_CODE_NOT_FOUND', 'benefit code cannot be resolved.', $freshOrder, $context, [
                 'sku' => (string) ($skuRow->sku ?? ''),
             ]);
+        }
+
+        $blockingEvent = $this->resolveBlockingSemanticRejectEvent($freshOrder);
+        if ($blockingEvent !== null) {
+            return $this->skip(
+                'BLOCKED_BY_SEMANTIC_REJECT',
+                'paid-order repair is blocked by unresolved semantic reject event.',
+                $freshOrder,
+                $context,
+                [
+                    'blocking_payment_event_id' => (string) ($blockingEvent->id ?? ''),
+                    'blocking_last_error_code' => (string) ($blockingEvent->last_error_code ?? ''),
+                    'blocking_handle_status' => (string) ($blockingEvent->handle_status ?? ''),
+                ]
+            );
         }
 
         $activeGrant = $this->resolveActiveGrantForOrder($freshOrder, $benefitCode);
@@ -220,6 +240,10 @@ final class OrderRepairService
             return false;
         }
 
+        if ($this->resolveBlockingSemanticRejectEvent($freshOrder) !== null) {
+            return false;
+        }
+
         return ! $this->hasActiveGrantForOrder($freshOrder);
     }
 
@@ -297,6 +321,22 @@ final class OrderRepairService
         $benefitCode = strtoupper(trim((string) ($skuRow->benefit_code ?? '')));
 
         return $benefitCode !== '' ? $benefitCode : null;
+    }
+
+    private function resolveBlockingSemanticRejectEvent(object $order): ?object
+    {
+        $orderNo = trim((string) ($order->order_no ?? ''));
+        if ($orderNo === '') {
+            return null;
+        }
+
+        return DB::table('payment_events')
+            ->where('order_no', $orderNo)
+            ->where('status', 'rejected')
+            ->whereIn('last_error_code', self::BLOCKING_REJECT_CODES)
+            ->orderByDesc('updated_at')
+            ->orderByDesc('created_at')
+            ->first();
     }
 
     /**
