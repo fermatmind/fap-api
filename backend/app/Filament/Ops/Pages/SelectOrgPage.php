@@ -27,6 +27,10 @@ class SelectOrgPage extends Page
 
     public string $returnTo = '';
 
+    public int $currentOrgId = 0;
+
+    public string $currentOrgName = 'No Org Selected';
+
     /**
      * @var list<array{id:int,name:string,status:string,domain:?string,updated_at:string}>
      */
@@ -41,6 +45,17 @@ class SelectOrgPage extends Page
     {
         $this->returnTo = trim((string) request()->query('return_to', ''));
         $this->refreshOrganizations();
+        $this->refreshCurrentOrgSummary();
+    }
+
+    public function getTitle(): string
+    {
+        return 'Select organization';
+    }
+
+    public function getSubheading(): ?string
+    {
+        return 'Use the Fermat Ops workspace shell to choose the active organization before opening commerce, content, or runtime workflows.';
     }
 
     public function updatedSearch(): void
@@ -63,7 +78,7 @@ class SelectOrgPage extends Page
             ->where('id', $orgId)
             ->exists();
 
-        if (!$exists) {
+        if (! $exists) {
             Notification::make()
                 ->title('Organization not found')
                 ->danger()
@@ -151,6 +166,11 @@ class SelectOrgPage extends Page
         return 'No organization is selected yet. Create a new organization or import/sync existing organizations.';
     }
 
+    public function visibleOrganizationsCount(): int
+    {
+        return count($this->organizations);
+    }
+
     public function canCreateOrganization(): bool
     {
         $guard = (string) config('admin.guard', 'admin');
@@ -180,7 +200,7 @@ class SelectOrgPage extends Page
 
         if ($search !== '') {
             $query->where(function ($builder) use ($search): void {
-                $builder->where('name', 'like', '%' . $search . '%');
+                $builder->where('name', 'like', '%'.$search.'%');
 
                 if (preg_match('/^\d+$/', $search) === 1) {
                     $builder->orWhere('id', (int) $search);
@@ -200,5 +220,39 @@ class SelectOrgPage extends Page
             ])
             ->values()
             ->all();
+    }
+
+    private function refreshCurrentOrgSummary(): void
+    {
+        $rawOrgId = (string) session('ops_org_id', '');
+        if ($rawOrgId === '' || preg_match('/^\d+$/', $rawOrgId) !== 1) {
+            $this->currentOrgId = 0;
+            $this->currentOrgName = 'No Org Selected';
+
+            return;
+        }
+
+        $this->currentOrgId = (int) $rawOrgId;
+
+        if (! \App\Support\SchemaBaseline::hasTable('organizations')) {
+            $this->currentOrgName = 'No Org Selected';
+            $this->currentOrgId = 0;
+
+            return;
+        }
+
+        $row = DB::table('organizations')
+            ->select(['name'])
+            ->where('id', $this->currentOrgId)
+            ->first();
+
+        if ($row === null) {
+            $this->currentOrgId = 0;
+            $this->currentOrgName = 'No Org Selected';
+
+            return;
+        }
+
+        $this->currentOrgName = trim((string) $row->name);
     }
 }
