@@ -91,31 +91,56 @@ cd /opt/fap-api/backend
 # 2) 安装后端依赖
 composer install --no-dev --optimize-autoloader
 
-# 3) 构建前端资源（若发布工件不含构建产物）
+# 3) 生成 Ops 自定义主题（固定 public 路径产物）
+# build 会同时执行 build:app + build:ops-theme；若只需重建 Ops 主题，至少执行 build:ops-theme
 npm ci
 npm run build
 
-# 4) 数据库迁移
+# 4) 发布 Filament core assets（CSS / JS）
+php artisan filament:assets
+
+# 5) 数据库迁移
 php artisan migrate --force
 
-# 5) 缓存与路由缓存
+# 6) 缓存与路由缓存
 php artisan config:cache
 php artisan route:cache
 
-# 6) 基线校验
+# 7) Ops 资产验收
+test -s public/css/filament/ops/theme.css
+test -s public/css/filament/filament/app.css
+test -s public/css/filament/forms/forms.css
+test -s public/css/filament/support/support.css
+test -s public/js/filament/filament/app.js
+! grep -Eq '@tailwind|@config|vendor/filament/filament/resources/css/base.css' public/css/filament/ops/theme.css
+
+# 7.1) 线上 Ops smoke（production 示例）
+curl -I https://ops.fermatmind.com/ops/login
+curl -I https://ops.fermatmind.com/css/filament/ops/theme.css
+curl -I https://ops.fermatmind.com/css/filament/filament/app.css
+curl -I https://ops.fermatmind.com/css/filament/forms/forms.css
+curl -I https://ops.fermatmind.com/css/filament/support/support.css
+curl -I https://ops.fermatmind.com/js/filament/filament/app.js
+! curl -s https://ops.fermatmind.com/css/filament/ops/theme.css | rg '^@tailwind|@config|vendor/filament/filament/resources/css/base.css'
+
+# 8) 基线校验
 php artisan fap:schema:verify
 ```
 
 ### 5.1 Ops Theme Build in Deploy Pipeline
 - 当前 Filament Ops Panel 通过 `->theme(asset('css/filament/ops/theme.css'))` 注册自定义主题。
+- `backend/resources/css/filament/ops/theme.css` 是 Tailwind 源文件，不是可直接在线服务的生产产物。
+- `backend/public/css/filament/ops/theme.css` 是唯一合法的运行时主题文件，必须由 `npm run build` 或 `npm run build:ops-theme` 生成。
 - Deployer 发布时会在 `{{release_path}}/backend` 内执行：
   - `npm ci --no-audit --no-fund`
   - `npm run build:ops-theme`
 - Deployer 还会显式执行 `php artisan filament:assets`，确保 Filament 核心 CSS/JS 被复制到当前 release 的 `backend/public`。
-- 发布链会在切换 symlink 前校验 `backend/public/css/filament/ops/theme.css` 已生成且非空；若缺失，部署会直接失败。
-- 发布链也会校验关键 Filament 资源存在且非空；缺失这些资源会导致 `/ops` 的样式缺失、脚本 404 或 Alpine 初始化报错。
+- 发布链会在切换 symlink 前校验 `backend/public/css/filament/ops/theme.css` 已生成、非空且不包含 raw Tailwind source 签名；若仍含 `@tailwind`、`@config` 或原始 vendor `@import`，部署会直接失败。
+- 发布链也会校验关键 Filament 资源存在且非空，包括 `backend/public/css/filament/filament/app.css`、`backend/public/css/filament/forms/forms.css`、`backend/public/css/filament/support/support.css`、`backend/public/js/filament/filament/app.js` 等；缺失这些资源会导致 `/ops` 的样式缺失、脚本 404 或 Alpine 初始化报错。
 - 这一步是 release 产物构建，不是 shared 配置，也不是将编译产物提交进 git。
 - 若目标主机缺少 `node` / `npm`，或版本低于当前仓库基线（Node 20.19+ / NPM 10+），部署会 fail fast。
+- 禁止继续使用 `cp resources/css/filament/ops/theme.css public/css/filament/ops/theme.css` 作为正式发布方案；这会把源码误当成线上产物。
+- GitHub Actions 在 deploy 后会按 `TARGET` 对应域名执行同一套 Ops smoke；若线上仍在服务 raw source theme，或关键 core assets 404，workflow 会直接失败。
 
 ## 6. Supervisor 队列守护配置（无 Horizon）
 当前基线：使用 Supervisor 常驻 `queue:work`。至少部署以下两个 program。
