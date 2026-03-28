@@ -296,6 +296,16 @@ task('ensure:shared-perms', function () {
     run("find {$base}/shared/content_packages -type f -exec chmod 664 {} \\;");
 });
 
+task('ensure:release-runtime-perms', function () {
+    $owner = currentHost()->getRemoteUser() ?: 'ubuntu';
+    $cacheDir = '{{release_path}}/backend/bootstrap/cache';
+
+    run("mkdir -p {$cacheDir}");
+    run("sudo -n /usr/bin/chown -R {$owner}:www-data {$cacheDir}");
+    run("find {$cacheDir} -type d -exec chmod 2775 {} \\;");
+    run("find {$cacheDir} -type f -exec chmod 664 {} \\;");
+});
+
 /**
  * ======================================================
  * runtime dirs（healthz 依赖）
@@ -443,6 +453,7 @@ after('deploy:vendors', 'build:ops-theme');
 after('build:ops-theme', 'guard:ops-theme-asset');
 after('guard:ops-theme-asset', 'artisan:filament:assets');
 after('artisan:filament:assets', 'guard:filament-assets');
+after('artisan:migrate', 'ensure:release-runtime-perms');
 
 after('deploy:symlink', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');
