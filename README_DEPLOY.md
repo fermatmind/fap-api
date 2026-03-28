@@ -88,25 +88,49 @@ cd /opt/fap-api/backend
 # 1) 拉取代码
 # git pull --ff-only origin <release-branch-or-tag>
 
-# 2) 安装后端依赖
+# 2) 先清理 release-derived bootstrap cache（必须在任何 cache producer 之前）
+php -r '
+require "vendor/autoload.php";
+$app = require "bootstrap/app.php";
+$paths = [
+    $app->getCachedConfigPath(),
+    $app->getCachedEventsPath(),
+    $app->getCachedPackagesPath(),
+    $app->getCachedServicesPath(),
+];
+foreach ($paths as $path) {
+    if (is_file($path)) {
+        @unlink($path);
+    }
+}
+foreach (glob(dirname($app->getCachedRoutesPath()).DIRECTORY_SEPARATOR."routes-*.php") ?: [] as $path) {
+    @unlink($path);
+}
+'
+
+# 3) 安装后端依赖
+# composer install 会触发 post-autoload-dump -> package:discover，因此它本身就是 bootstrap cache producer
 composer install --no-dev --optimize-autoloader
 
-# 3) 生成 Ops 自定义主题（固定 public 路径产物）
+# 4) 生成 Ops 自定义主题（固定 public 路径产物）
 # build 会同时执行 build:app + build:ops-theme；若只需重建 Ops 主题，至少执行 build:ops-theme
 npm ci
 npm run build
 
-# 4) 发布 Filament core assets（CSS / JS）
+# 5) 发布 Filament core assets（CSS / JS）
 php artisan filament:assets
 
-# 5) 数据库迁移
-php artisan migrate --force
-
-# 6) 缓存与路由缓存
+# 6) 完成 bootstrap cache rebuild
+# composer install 已经触发 package:discover；这里显式再跑一次，确保 active release 的 package/provider manifest 与当前代码一致
+php artisan package:discover --ansi
 php artisan config:cache
 php artisan route:cache
+php artisan event:cache
 
-# 7) Ops 资产验收
+# 7) 数据库迁移
+php artisan migrate --force
+
+# 8) Ops 资产验收
 test -s public/css/filament/ops/theme.css
 test -s public/css/filament/filament/app.css
 test -s public/css/filament/forms/forms.css
@@ -114,7 +138,7 @@ test -s public/css/filament/support/support.css
 test -s public/js/filament/filament/app.js
 ! grep -Eq '@tailwind|@config|vendor/filament/filament/resources/css/base.css' public/css/filament/ops/theme.css
 
-# 7.1) 线上 Ops smoke（production 示例）
+# 8.1) 线上 Ops smoke（production 示例）
 curl -I https://ops.fermatmind.com/ops/login
 curl -I https://ops.fermatmind.com/css/filament/ops/theme.css
 curl -I https://ops.fermatmind.com/css/filament/filament/app.css
@@ -123,7 +147,7 @@ curl -I https://ops.fermatmind.com/css/filament/support/support.css
 curl -I https://ops.fermatmind.com/js/filament/filament/app.js
 ! curl -s https://ops.fermatmind.com/css/filament/ops/theme.css | rg '^@tailwind|@config|vendor/filament/filament/resources/css/base.css'
 
-# 7.2) 入口契约 smoke
+# 8.2) 入口契约 smoke
 # production: 根入口必须跳到 /ops
 curl -sSI --max-redirs 0 https://ops.fermatmind.com/ | rg '^HTTP/[0-9.]+ 30[12] '
 curl -sSI --max-redirs 0 https://ops.fermatmind.com/ | rg -i '^Location: (/ops|https://ops\.fermatmind\.com/ops)\r?$'
@@ -138,7 +162,7 @@ curl -sSI --max-redirs 0 https://staging.fermatmind.com/ops | rg '^HTTP/[0-9.]+ 
 curl -sSI --max-redirs 0 https://staging.fermatmind.com/ops | rg -i '^Location: (/ops/login|https://staging\.fermatmind\.com/ops/login)\r?$'
 curl -sSI https://staging.fermatmind.com/ops/login | rg '^HTTP/[0-9.]+ 200 '
 
-# 8) 基线校验
+# 8.3) 基线校验
 php artisan fap:schema:verify
 ```
 
@@ -158,6 +182,24 @@ php artisan fap:schema:verify
 - 若目标主机缺少 `node` / `npm`，或版本低于当前仓库基线（Node 20.19+ / NPM 10+），部署会 fail fast。
 - 禁止继续使用 `cp resources/css/filament/ops/theme.css public/css/filament/ops/theme.css` 作为正式发布方案；这会把源码误当成线上产物。
 - GitHub Actions 在 deploy 后会按 `TARGET` 对应域名执行对应的 entry smoke 与 asset smoke；production 额外断言 `/ -> /ops` 与 `/admin -> /ops`，staging 不共享这条根入口契约。
+
+### 5.2 Bootstrap Cache Lifecycle in Deploy / Rollback
+- `backend/bootstrap/cache` 中的 `config.php`、`routes-*.php`、`events.php`、`packages.php`、`services.php` 都是 release-derived bootstrap cache，不应作为跨 release 的 shared state 继承。
+- 当前 Deployer 契约是不再共享 `backend/bootstrap/cache`；每个 release 在自己的 `backend/bootstrap/cache` 下生成自身产物。
+- deploy 时会在任何 cache producer 之前先清理上述 release-derived 文件，再按以下顺序重建：
+  - Composer / `php artisan package:discover --ansi`
+  - `php artisan config:cache`
+  - `php artisan route:cache`
+  - `php artisan event:cache`
+- 这样可以避免 stale `config.php` 影响 provider registration / panel enablement，也可以避免 stale `routes-*.php` / `events.php` / `packages.php` / `services.php` 污染当前 release。
+- Deployer `rollback` 切回旧 release 后，会在目标 release 上再次执行同一套 bootstrap cache clear + rebuild，然后再做既有 smoke。
+- 如果不是用 Deployer，而是手工切 symlink / 手工回退到旧目录，必须在目标 release 上重跑同一组命令：
+  - `php -r 'require "vendor/autoload.php"; $app = require "bootstrap/app.php"; $paths = [$app->getCachedConfigPath(), $app->getCachedEventsPath(), $app->getCachedPackagesPath(), $app->getCachedServicesPath()]; foreach ($paths as $path) { if (is_file($path)) { @unlink($path); } } foreach (glob(dirname($app->getCachedRoutesPath()).DIRECTORY_SEPARATOR."routes-*.php") ?: [] as $path) { @unlink($path); }'`
+  - `php artisan package:discover --ansi`
+  - `php artisan config:cache`
+  - `php artisan route:cache`
+  - `php artisan event:cache`
+- 手工 rollback 只切换代码目录但不重建 bootstrap cache，不是正式可接受方案。
 
 ## 6. Supervisor 队列守护配置（无 Horizon）
 当前基线：使用 Supervisor 常驻 `queue:work`。至少部署以下两个 program。
