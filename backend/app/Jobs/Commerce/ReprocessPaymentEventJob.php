@@ -39,40 +39,32 @@ class ReprocessPaymentEventJob implements ShouldQueue
     {
         $event = DB::table('payment_events')
             ->where('id', $this->paymentEventId)
-            ->where('org_id', $this->orgId)
             ->first();
 
         if (! $event) {
             return;
         }
 
+        $effectiveOrgId = $this->resolveEffectiveOrgId($event);
+
         $provider = strtolower(trim((string) ($event->provider ?? '')));
         $payload = $this->decodePayload($event->payload_json ?? null);
         if ($provider === '' || $payload === []) {
-            $this->markFailed($event, 'INVALID_EVENT_PAYLOAD', 'provider/payload missing');
+            $this->markFailed($event, $effectiveOrgId, 'INVALID_EVENT_PAYLOAD', 'provider/payload missing');
 
             return;
         }
 
         $signatureOk = (bool) ($event->signature_ok ?? false);
         $originalStatus = strtolower(trim((string) ($event->status ?? '')));
-        $result = $processor->handle(
-            $provider,
-            $payload,
-            $this->orgId,
-            null,
-            null,
-            $signatureOk,
-            [],
-            (string) ($event->payload_sha256 ?? ''),
-            (int) ($event->payload_size_bytes ?? -1),
-        );
+        $result = $processor->process($provider, $payload, $signatureOk);
 
         if (($result['ok'] ?? false) === true) {
-            $repair = $this->repairOrderIfNeeded($event, $orderRepair);
+            $repair = $this->repairOrderIfNeeded($event, $orderRepair, $effectiveOrgId);
             if (($repair['ok'] ?? true) !== true) {
                 $this->markFailed(
                     $event,
+                    $effectiveOrgId,
                     (string) ($repair['error'] ?? 'ORDER_REPAIR_FAILED'),
                     (string) ($repair['message'] ?? 'order repair failed after payment-event reprocess.'),
                     $this->retryableStatus($originalStatus)
@@ -84,6 +76,7 @@ class ReprocessPaymentEventJob implements ShouldQueue
             DB::table('payment_events')
                 ->where('id', $this->paymentEventId)
                 ->update([
+                    'org_id' => $effectiveOrgId,
                     'status' => 'processed',
                     'handle_status' => ($result['duplicate'] ?? false) ? 'duplicate' : 'reprocessed',
                     'last_error_code' => null,
@@ -94,6 +87,7 @@ class ReprocessPaymentEventJob implements ShouldQueue
                 ]);
 
             $this->writeAudit(
+                orgId: $effectiveOrgId,
                 action: 'reprocess_payment_event_executed',
                 targetType: 'PaymentEvent',
                 targetId: (string) $event->id,
@@ -114,7 +108,7 @@ class ReprocessPaymentEventJob implements ShouldQueue
         $errorCode = (string) ($result['error_code'] ?? $result['error'] ?? 'REPROCESS_FAILED');
         $message = (string) ($result['message'] ?? 'reprocess failed.');
 
-        $this->markFailed($event, $errorCode, $message, $this->retryableStatus($originalStatus));
+        $this->markFailed($event, $effectiveOrgId, $errorCode, $message, $this->retryableStatus($originalStatus));
     }
 
     /**
@@ -136,11 +130,12 @@ class ReprocessPaymentEventJob implements ShouldQueue
         return [];
     }
 
-    private function markFailed(object $event, string $errorCode, string $message, ?string $preserveStatus = null): void
+    private function markFailed(object $event, int $orgId, string $errorCode, string $message, ?string $preserveStatus = null): void
     {
         DB::table('payment_events')
             ->where('id', (string) $event->id)
             ->update([
+                'org_id' => $orgId,
                 'status' => $preserveStatus ?? 'failed',
                 'handle_status' => 'reprocess_failed',
                 'last_error_code' => $errorCode,
@@ -150,6 +145,7 @@ class ReprocessPaymentEventJob implements ShouldQueue
             ]);
 
         $this->writeAudit(
+            orgId: $orgId,
             action: 'reprocess_payment_event_failed',
             targetType: 'PaymentEvent',
             targetId: (string) $event->id,
@@ -165,18 +161,18 @@ class ReprocessPaymentEventJob implements ShouldQueue
         );
     }
 
-    private function writeAudit(string $action, string $targetType, string $targetId, string $orderNo, array $meta): void
+    private function writeAudit(int $orgId, string $action, string $targetType, string $targetId, string $orderNo, array $meta): void
     {
         $reason = trim((string) ($meta['reason'] ?? 'reprocess_payment_event'));
         DB::table('audit_logs')->insert([
-            'org_id' => $this->orgId,
+            'org_id' => $orgId,
             'actor_admin_id' => null,
             'action' => $action,
             'target_type' => $targetType,
             'target_id' => $targetId,
             'meta_json' => json_encode(array_merge([
                 'actor' => 'system',
-                'org_id' => $this->orgId,
+                'org_id' => $orgId,
                 'order_no' => $orderNo,
                 'correlation_id' => $this->correlationId,
             ], $meta), JSON_UNESCAPED_UNICODE),
@@ -192,7 +188,7 @@ class ReprocessPaymentEventJob implements ShouldQueue
     /**
      * @return array<string,mixed>
      */
-    private function repairOrderIfNeeded(object $event, OrderRepairService $orderRepair): array
+    private function repairOrderIfNeeded(object $event, OrderRepairService $orderRepair, int $orgId): array
     {
         $orderNo = trim((string) ($event->order_no ?? ''));
         if ($orderNo === '') {
@@ -200,7 +196,7 @@ class ReprocessPaymentEventJob implements ShouldQueue
         }
 
         $order = DB::table('orders')
-            ->where('org_id', $this->orgId)
+            ->where('org_id', $orgId)
             ->where('order_no', $orderNo)
             ->first();
 
@@ -218,6 +214,27 @@ class ReprocessPaymentEventJob implements ShouldQueue
             'correlation_id' => $this->correlationId,
             'payment_event_id' => (string) ($event->id ?? ''),
         ]);
+    }
+
+    private function resolveEffectiveOrgId(object $event): int
+    {
+        $orderNo = trim((string) ($event->order_no ?? ''));
+        if ($orderNo !== '') {
+            $resolvedOrgId = DB::table('orders')
+                ->where('order_no', $orderNo)
+                ->value('org_id');
+
+            if ($resolvedOrgId !== null && (int) $resolvedOrgId > 0) {
+                return (int) $resolvedOrgId;
+            }
+        }
+
+        $eventOrgId = (int) ($event->org_id ?? 0);
+        if ($eventOrgId > 0) {
+            return $eventOrgId;
+        }
+
+        return $this->orgId;
     }
 
     private function retryableStatus(string $status): ?string

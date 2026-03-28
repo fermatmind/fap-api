@@ -117,6 +117,7 @@ class WebhookEntitlementService
                 ) {
                     $insertSeed = [
                         'id' => (string) Str::uuid(),
+                        'org_id' => $orgId,
                         'provider' => $provider,
                         'provider_event_id' => $providerEventId,
                         'order_id' => (string) Str::uuid(),
@@ -172,6 +173,7 @@ class WebhookEntitlementService
                     $attempts = $attempts > 0 ? $attempts + 1 : 1;
 
                     $baseRow = [
+                        'org_id' => $orgId,
                         'provider' => $provider,
                         'provider_event_id' => $providerEventId,
                         'order_id' => $eventRow->order_id ?? ($insertSeed['order_id'] ?? (string) Str::uuid()),
@@ -250,6 +252,7 @@ class WebhookEntitlementService
                     $orderMeta = $this->core->resolveOrderMeta($orgId, $orderNo, $order);
                     $normalizedSkuMeta = $this->core->normalizeOrderSkuMeta($order);
                     $this->core->updatePaymentEvent($provider, $providerEventId, [
+                        'org_id' => (int) ($order->org_id ?? $orgId),
                         'order_id' => $order->id ?? null,
                         'event_type' => $eventType,
                         'signature_ok' => $signatureOk,
