@@ -147,9 +147,16 @@ final class SemanticRejectRepairOpsTenantVisibilityAcceptanceTest extends TestCa
                 ->count()
         );
 
+        $anonymousLookup = $this->postJson('/api/v0.3/orders/lookup', [
+            'order_no' => $orderNo,
+            'email' => $tenant['email'],
+        ]);
+
+        $anonymousLookup->assertStatus(404);
+        $anonymousLookup->assertJsonPath('error_code', 'ORDER_NOT_FOUND');
+
         $lookup = $this->withHeaders([
             'Authorization' => 'Bearer '.$tenant['token'],
-            'X-Org-Id' => (string) $tenant['org_id'],
         ])->postJson('/api/v0.3/orders/lookup', [
             'order_no' => $orderNo,
             'email' => $tenant['email'],
@@ -162,6 +169,7 @@ final class SemanticRejectRepairOpsTenantVisibilityAcceptanceTest extends TestCa
         $lookup->assertJsonPath('status', 'paid');
         $lookup->assertJsonPath('payment_state', 'paid');
         $lookup->assertJsonPath('grant_state', 'granted');
+        $lookup->assertJsonPath('latest_payment_attempt.state', 'paid');
 
         $opsRecord = app(OrderLinkageSupport::class)
             ->query()
