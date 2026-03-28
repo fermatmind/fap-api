@@ -429,7 +429,7 @@ before('deploy:prepare', 'ensure:phpredis');
 before('deploy:shared', 'fap:seed_shared_content_packages');
 
 after('deploy:update_code', 'ensure:node-toolchain');
-after('deploy:prepare', 'bootstrap-cache:clear-release');
+after('deploy:vendors', 'bootstrap-cache:clear-release');
 
 after('deploy:shared', 'ensure:shared-perms');
 after('deploy:shared', 'ensure:healthz-deps');
