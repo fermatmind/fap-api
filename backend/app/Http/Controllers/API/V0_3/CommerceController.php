@@ -798,8 +798,6 @@ class CommerceController extends Controller
         if ($description === '') {
             $description = 'FermatMind Order';
         }
-        $paymentAttempt = $this->createPaymentAttemptForOrder($order, $normalizedProvider, $scene);
-
         $payAction = $this->resolveCheckoutPayAction(
             $normalizedProvider,
             $orderNo,
@@ -834,6 +832,11 @@ class CommerceController extends Controller
         }
 
         $presented = $this->presentCheckoutPayAction($normalizedProvider, $payAction);
+        if (! is_array($presented['pay'] ?? null) && $this->trimNullableString($presented['checkout_url'] ?? null) === null) {
+            return $this->decoratePaymentPayloadForRecovery($presented, $paymentRecoveryToken);
+        }
+
+        $paymentAttempt = $this->createPaymentAttemptForOrder($order, $normalizedProvider, $scene);
         $this->orders->markPaymentPending(
             $orderNo,
             (int) ($order->org_id ?? 0),
