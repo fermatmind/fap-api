@@ -61,8 +61,26 @@ final class CatalogSemanticRejectRepairOpsTenantVisibilityAcceptanceTest extends
 
         $orderNo = (string) $checkout->json('order_no');
         $this->assertNotSame('', $orderNo);
+        $createdOrder = DB::table('orders')->where('order_no', $orderNo)->first();
+        $this->assertNotNull($createdOrder);
+        $originalSku = strtoupper((string) (
+            $createdOrder->effective_sku
+            ?? $createdOrder->sku
+            ?? $createdOrder->item_sku
+            ?? ''
+        ));
+        $this->assertNotSame('', $originalSku);
+        $this->assertGreaterThan(
+            0,
+            DB::table('skus')
+                ->where('sku', $originalSku)
+                ->where('is_active', true)
+                ->count()
+        );
 
         $missingSku = 'SKU_CATALOG_MISSING_'.Str::upper(Str::random(8));
+        $this->assertNotSame('', $missingSku);
+
         DB::table('orders')
             ->where('order_no', $orderNo)
             ->update([
@@ -78,8 +96,8 @@ final class CatalogSemanticRejectRepairOpsTenantVisibilityAcceptanceTest extends
             'provider_event_id' => $providerEventId,
             'order_no' => $orderNo,
             'external_trade_no' => 'trade_'.$orderNo,
-            'amount_cents' => 199,
-            'currency' => 'CNY',
+            'amount_cents' => (int) ($createdOrder->amount_cents ?? 0),
+            'currency' => (string) ($createdOrder->currency ?? 'CNY'),
             'event_type' => 'payment_succeeded',
         ]);
 

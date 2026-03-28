@@ -26,41 +26,19 @@ final class AttemptRequiredSemanticRejectRepairOpsTenantVisibilityAcceptanceTest
 
     public function test_benefit_code_not_found_repair_converges_consistently_in_lookup_ops_and_tenant(): void
     {
-        $missingBenefitSku = 'SKU_BENEFIT_MISSING_'.Str::upper(Str::random(8));
-
         $this->runPostPaidSemanticRejectScenario(
             rejectCode: 'BENEFIT_CODE_NOT_FOUND',
-            beforeWebhook: function (string $orderNo) use ($missingBenefitSku): void {
-                DB::table('orders')
-                    ->where('order_no', $orderNo)
+            beforeWebhook: function (string $orderNo, string $orderSku): void {
+                DB::table('skus')
+                    ->where('sku', $orderSku)
                     ->update([
-                        'sku' => $missingBenefitSku,
-                        'item_sku' => $missingBenefitSku,
-                        'effective_sku' => $missingBenefitSku,
-                        'requested_sku' => $missingBenefitSku,
+                        'benefit_code' => '',
                         'updated_at' => now()->subMinutes(9),
                     ]);
-
-                DB::table('skus')->updateOrInsert(
-                    ['sku' => $missingBenefitSku],
-                    [
-                        'scale_code' => 'MBTI',
-                        'kind' => 'report_unlock',
-                        'unit_qty' => 1,
-                        'benefit_code' => '',
-                        'scope' => 'attempt',
-                        'price_cents' => 199,
-                        'currency' => 'CNY',
-                        'is_active' => true,
-                        'meta_json' => json_encode([], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-                        'created_at' => now()->subMinutes(10),
-                        'updated_at' => now()->subMinutes(9),
-                    ]
-                );
             },
-            repairFix: function (string $orderNo, string $attemptId) use ($missingBenefitSku): void {
+            repairFix: function (string $orderNo, string $attemptId, string $orderSku): void {
                 DB::table('skus')
-                    ->where('sku', $missingBenefitSku)
+                    ->where('sku', $orderSku)
                     ->update([
                         'benefit_code' => 'MBTI_REPORT_FULL',
                         'updated_at' => now()->subMinutes(8),
@@ -73,7 +51,7 @@ final class AttemptRequiredSemanticRejectRepairOpsTenantVisibilityAcceptanceTest
     {
         $this->runPostPaidSemanticRejectScenario(
             rejectCode: 'ATTEMPT_REQUIRED',
-            beforeWebhook: function (string $orderNo): void {
+            beforeWebhook: function (string $orderNo, string $orderSku): void {
                 DB::table('orders')
                     ->where('order_no', $orderNo)
                     ->update([
@@ -81,7 +59,7 @@ final class AttemptRequiredSemanticRejectRepairOpsTenantVisibilityAcceptanceTest
                         'updated_at' => now()->subMinutes(9),
                     ]);
             },
-            repairFix: function (string $orderNo, string $attemptId): void {
+            repairFix: function (string $orderNo, string $attemptId, string $orderSku): void {
                 DB::table('orders')
                     ->where('order_no', $orderNo)
                     ->update([
@@ -129,16 +107,25 @@ final class AttemptRequiredSemanticRejectRepairOpsTenantVisibilityAcceptanceTest
 
         $orderNo = (string) $checkout->json('order_no');
         $this->assertNotSame('', $orderNo);
+        $createdOrder = DB::table('orders')->where('order_no', $orderNo)->first();
+        $this->assertNotNull($createdOrder);
+        $orderSku = strtoupper((string) (
+            $createdOrder->effective_sku
+            ?? $createdOrder->sku
+            ?? $createdOrder->item_sku
+            ?? ''
+        ));
+        $this->assertNotSame('', $orderSku);
 
-        $beforeWebhook($orderNo);
+        $beforeWebhook($orderNo, $orderSku);
 
         $providerEventId = 'evt_'.Str::lower($rejectCode).'_'.$orderNo;
         $webhook = $this->postSignedBillingWebhook([
             'provider_event_id' => $providerEventId,
             'order_no' => $orderNo,
             'external_trade_no' => 'trade_'.$orderNo,
-            'amount_cents' => 199,
-            'currency' => 'CNY',
+            'amount_cents' => (int) ($createdOrder->amount_cents ?? 0),
+            'currency' => (string) ($createdOrder->currency ?? 'CNY'),
             'event_type' => 'payment_succeeded',
         ]);
 
@@ -199,7 +186,30 @@ final class AttemptRequiredSemanticRejectRepairOpsTenantVisibilityAcceptanceTest
 
         $this->assertPaidOrderRepairDidNotResolve($tenant['org_id'], $orderNo, $providerEventId, $rejectCode);
 
-        $repairFix($orderNo, $attemptId);
+        $repairFix($orderNo, $attemptId, $orderSku);
+
+        $this->assertDatabaseHas('payment_events', [
+            'provider' => 'billing',
+            'provider_event_id' => $providerEventId,
+            'status' => 'rejected',
+            'handle_status' => 'rejected',
+            'last_error_code' => $rejectCode,
+        ]);
+        $this->assertDatabaseHas('orders', [
+            'order_no' => $orderNo,
+            'org_id' => $tenant['org_id'],
+            'payment_state' => 'paid',
+            'grant_state' => 'not_started',
+            'status' => 'paid',
+        ]);
+        $this->assertSame(
+            0,
+            DB::table('benefit_grants')
+                ->where('org_id', $tenant['org_id'])
+                ->where('order_no', $orderNo)
+                ->where('status', 'active')
+                ->count()
+        );
 
         $exitCode = Artisan::call('commerce:repair-post-commit-failed', [
             '--org_id' => $tenant['org_id'],
