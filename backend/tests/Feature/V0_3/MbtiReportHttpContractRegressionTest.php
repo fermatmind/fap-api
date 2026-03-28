@@ -139,6 +139,8 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
             'ENFP',
             'T'
         );
+        $this->assertStableMbtiPreviewContractV1((array) $resp->json('mbti_preview_v1'));
+        $resp->assertJsonPath('mbti_preview_v1.mode', 'module_preview');
         $resp->assertJsonPath('mbti_access_hub_v1.access_state', 'locked')
             ->assertJsonPath('mbti_access_hub_v1.report_access.can_view_report', true)
             ->assertJsonPath('mbti_access_hub_v1.report_access.attempt_id', $attemptId)
@@ -210,6 +212,8 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
             'INTJ',
             'A'
         );
+        $this->assertStableMbtiPreviewContractV1((array) $resp->json('mbti_preview_v1'));
+        $resp->assertJsonPath('mbti_preview_v1.mode', 'none');
         $resp->assertJsonPath('mbti_access_hub_v1.access_state', 'ready')
             ->assertJsonPath('mbti_access_hub_v1.report_access.can_view_report', true)
             ->assertJsonPath('mbti_access_hub_v1.report_access.attempt_id', $attemptId)
@@ -250,6 +254,7 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
             'report',
             'mbti_public_summary_v1',
             'mbti_public_projection_v1',
+            'mbti_preview_v1',
             'scale_code',
             'scale_code_legacy',
             'scale_code_v2',
@@ -276,6 +281,7 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
         $this->assertIsArray($payload['report']);
         $this->assertIsArray($payload['mbti_public_summary_v1']);
         $this->assertIsArray($payload['mbti_public_projection_v1']);
+        $this->assertIsArray($payload['mbti_preview_v1']);
         $this->assertNotSame('', trim((string) $payload['scale_code']));
         $this->assertNotSame('', trim((string) $payload['scale_code_legacy']));
         $this->assertNotSame('', trim((string) $payload['scale_code_v2']));
@@ -283,7 +289,66 @@ final class MbtiReportHttpContractRegressionTest extends TestCase
 
         $this->assertStableCtaShape((array) $payload['cta']);
         $this->assertStableMbtiReportShape((array) $payload['report']);
+        $this->assertStableMbtiPreviewContractV1((array) $payload['mbti_preview_v1']);
         $this->assertStableMbtiAccessHubShape((array) $payload['mbti_access_hub_v1']);
+    }
+
+    /**
+     * @param  array<string,mixed>  $preview
+     */
+    private function assertStableMbtiPreviewContractV1(array $preview): void
+    {
+        foreach (['mode', 'modules', 'sections'] as $key) {
+            $this->assertArrayHasKey($key, $preview);
+        }
+
+        $this->assertContains((string) ($preview['mode'] ?? ''), ['none', 'module_preview']);
+        $this->assertIsArray($preview['modules']);
+        $this->assertIsArray($preview['sections']);
+
+        foreach ((array) $preview['sections'] as $section) {
+            $this->assertIsArray($section);
+            foreach ([
+                'key',
+                'module_code',
+                'has_preview_content',
+                'visible_preview_cards',
+                'has_locked_remainder',
+            ] as $key) {
+                $this->assertArrayHasKey($key, $section);
+            }
+
+            $this->assertIsString($section['key']);
+            $this->assertIsString($section['module_code']);
+            $this->assertIsBool($section['has_preview_content']);
+            $this->assertIsArray($section['visible_preview_cards']);
+            $this->assertIsBool($section['has_locked_remainder']);
+
+            foreach ((array) $section['visible_preview_cards'] as $card) {
+                $this->assertIsArray($card);
+                foreach ([
+                    'id',
+                    'title',
+                    'body',
+                    'bullets',
+                    'tips',
+                    'tags',
+                    'module_code',
+                    'access_level',
+                ] as $key) {
+                    $this->assertArrayHasKey($key, $card);
+                }
+
+                $this->assertIsString($card['id']);
+                $this->assertIsString($card['title']);
+                $this->assertTrue($card['body'] === null || is_string($card['body']));
+                $this->assertIsArray($card['bullets']);
+                $this->assertIsArray($card['tips']);
+                $this->assertIsArray($card['tags']);
+                $this->assertIsString($card['module_code']);
+                $this->assertSame('preview', $card['access_level']);
+            }
+        }
     }
 
     /**
