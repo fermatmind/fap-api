@@ -23,6 +23,16 @@ final class CommerceRepairPostCommitFailed extends Command
         'ATTEMPT_REQUIRED',
     ];
 
+    private const LEGACY_REPAIRABLE_SEMANTIC_REJECT_CODES = [
+        'rejected_provider_mismatch',
+    ];
+
+    private const LEGACY_FAILED_SEMANTIC_REJECT_CODES = [
+        'SKU_NOT_FOUND',
+        'BENEFIT_CODE_NOT_FOUND',
+        'ATTEMPT_REQUIRED',
+    ];
+
     protected $signature = 'commerce:repair-post-commit-failed
         {--org_id=0 : Organization id}
         {--older_than_minutes=5 : Ignore very fresh failures}
@@ -132,6 +142,12 @@ final class CommerceRepairPostCommitFailed extends Command
                 $statusQuery->orWhere(function ($semanticQuery) use ($semanticRejectCodes): void {
                     $semanticQuery->whereIn('payment_events.status', ['rejected', 'orphan'])
                         ->whereIn('payment_events.last_error_code', $semanticRejectCodes);
+                })->orWhere(function ($legacyRejectedQuery): void {
+                    $legacyRejectedQuery->whereIn('payment_events.status', ['rejected', 'orphan'])
+                        ->whereIn('payment_events.last_error_code', self::LEGACY_REPAIRABLE_SEMANTIC_REJECT_CODES);
+                })->orWhere(function ($legacyFailedQuery): void {
+                    $legacyFailedQuery->where('payment_events.status', 'failed')
+                        ->whereIn('payment_events.last_error_code', self::LEGACY_FAILED_SEMANTIC_REJECT_CODES);
                 });
             })
             ->where(function ($queueQuery): void {
