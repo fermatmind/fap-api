@@ -285,3 +285,82 @@ jobs:
           done
           echo "Auth guest contract check failed"
           exit 1
+
+      - name: Ops asset smoke (post deploy)
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          case "$TARGET" in
+            production)
+              OPS_HOST="ops.fermatmind.com"
+              ;;
+            staging)
+              OPS_HOST="staging.fermatmind.com"
+              ;;
+            *)
+              echo "invalid TARGET=$TARGET"
+              exit 2
+              ;;
+          esac
+
+          LOGIN_URL="https://${OPS_HOST}/ops/login"
+          THEME_URL="https://${OPS_HOST}/css/filament/ops/theme.css"
+          APP_CSS_URL="https://${OPS_HOST}/css/filament/filament/app.css"
+          FORMS_URL="https://${OPS_HOST}/css/filament/forms/forms.css"
+          SUPPORT_URL="https://${OPS_HOST}/css/filament/support/support.css"
+          APP_JS_URL="https://${OPS_HOST}/js/filament/filament/app.js"
+
+          ssh_remote() {
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$1"
+          }
+
+          assert_http_200() {
+            local url="$1"
+            ssh_remote "curl -fsSI --resolve '${OPS_HOST}:443:127.0.0.1' '${url}' >/dev/null"
+          }
+
+          retry() {
+            local label="$1"
+            local attempts="$2"
+            shift 2
+
+            for i in $(seq 1 "$attempts"); do
+              if "$@"; then
+                return 0
+              fi
+              sleep 2
+            done
+
+            echo "${label} failed"
+            return 1
+          }
+
+          echo "Ops login smoke: $LOGIN_URL"
+          retry "Ops login smoke" 5 assert_http_200 "$LOGIN_URL"
+
+          echo "Ops asset smoke: $THEME_URL"
+          retry "Ops theme smoke" 5 assert_http_200 "$THEME_URL"
+
+          echo "Ops asset smoke: $APP_CSS_URL"
+          retry "Ops app.css smoke" 5 assert_http_200 "$APP_CSS_URL"
+
+          echo "Ops asset smoke: $FORMS_URL"
+          retry "Ops forms.css smoke" 5 assert_http_200 "$FORMS_URL"
+
+          echo "Ops asset smoke: $SUPPORT_URL"
+          retry "Ops support.css smoke" 5 assert_http_200 "$SUPPORT_URL"
+
+          echo "Ops asset smoke: $APP_JS_URL"
+          retry "Ops app.js smoke" 5 assert_http_200 "$APP_JS_URL"
+
+          echo "Ops theme content assertion"
+          retry "Ops theme content assertion" 5 ssh_remote "if curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${THEME_URL}' | grep -Eq '@tailwind|@config|vendor/filament/filament/resources/css/base\\.css'; then exit 1; fi"
+
+          echo "Ops login reference assertion"
+          retry "Ops theme reference assertion" 5 ssh_remote "curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${LOGIN_URL}' | grep -q 'css/filament/ops/theme.css'"
+          retry "Ops app.css reference assertion" 5 ssh_remote "curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${LOGIN_URL}' | grep -q 'css/filament/filament/app.css'"
+          retry "Ops forms.css reference assertion" 5 ssh_remote "curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${LOGIN_URL}' | grep -q 'css/filament/forms/forms.css'"
+          retry "Ops support.css reference assertion" 5 ssh_remote "curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${LOGIN_URL}' | grep -q 'css/filament/support/support.css'"
+          retry "Ops app.js reference assertion" 5 ssh_remote "curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${LOGIN_URL}' | grep -q 'js/filament/filament/app.js'"

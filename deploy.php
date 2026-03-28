@@ -127,6 +127,11 @@ task('guard:ops-theme-asset', function () {
     if (! test("[ -s {$asset} ]")) {
         throw new \RuntimeException("ops theme asset missing or empty: {$asset}");
     }
+
+    $rawSourcePattern = '@tailwind|@config|vendor/filament/filament/resources/css/base\\.css';
+    if (test("grep -Eq '{$rawSourcePattern}' {$asset}")) {
+        throw new \RuntimeException("ops theme asset is raw source, not compiled CSS: {$asset}");
+    }
 });
 
 task('guard:filament-assets', function () {
