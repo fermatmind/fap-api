@@ -286,6 +286,97 @@ jobs:
           echo "Auth guest contract check failed"
           exit 1
 
+      - name: Ops entry smoke (post deploy)
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          case "$TARGET" in
+            production)
+              OPS_HOST="ops.fermatmind.com"
+              ASSERT_ROOT_REDIRECT="yes"
+              ;;
+            staging)
+              OPS_HOST="staging.fermatmind.com"
+              ASSERT_ROOT_REDIRECT="no"
+              ;;
+            *)
+              echo "invalid TARGET=$TARGET"
+              exit 2
+              ;;
+          esac
+
+          ROOT_URL="https://${OPS_HOST}/"
+          ADMIN_URL="https://${OPS_HOST}/admin"
+          OPS_URL="https://${OPS_HOST}/ops"
+          LOGIN_URL="https://${OPS_HOST}/ops/login"
+
+          ssh_remote() {
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=yes -o ConnectTimeout=10 \
+              -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$1"
+          }
+
+          fetch_headers() {
+            local url="$1"
+            ssh_remote "curl -sSI --max-redirs 0 --resolve '${OPS_HOST}:443:127.0.0.1' '${url}'"
+          }
+
+          assert_redirect() {
+            local url="$1"
+            local expected_relative="$2"
+            local headers
+            local location
+            headers="$(fetch_headers "$url")"
+            printf '%s\n' "$headers" | grep -Eq '^HTTP/[0-9.]+ 30[12] '
+            location="$(printf '%s\n' "$headers" | tr -d '\r' | awk 'BEGIN { IGNORECASE = 1 } /^Location:/ { sub(/^Location:[[:space:]]*/, "", $0); print; exit }')"
+            [ -n "$location" ]
+
+            case "$location" in
+              "$expected_relative"|https://"${OPS_HOST}${expected_relative}")
+                return 0
+                ;;
+            esac
+
+            return 1
+          }
+
+          assert_200() {
+            local url="$1"
+            local headers
+            headers="$(fetch_headers "$url")"
+            printf '%s\n' "$headers" | grep -Eq '^HTTP/[0-9.]+ 200 '
+          }
+
+          retry() {
+            local label="$1"
+            local attempts="$2"
+            shift 2
+
+            for i in $(seq 1 "$attempts"); do
+              if "$@"; then
+                return 0
+              fi
+              sleep 2
+            done
+
+            echo "${label} failed"
+            return 1
+          }
+
+          if [ "$ASSERT_ROOT_REDIRECT" = "yes" ]; then
+            echo "Ops root smoke: $ROOT_URL"
+            retry "Ops root redirect" 5 assert_redirect "$ROOT_URL" "/ops"
+
+            echo "Ops admin alias smoke: $ADMIN_URL"
+            retry "Ops admin redirect" 5 assert_redirect "$ADMIN_URL" "/ops"
+          fi
+
+          echo "Ops panel smoke: $OPS_URL"
+          retry "Ops panel redirect" 5 assert_redirect "$OPS_URL" "/ops/login"
+
+          echo "Ops login smoke: $LOGIN_URL"
+          retry "Ops login 200" 5 assert_200 "$LOGIN_URL"
+
       - name: Ops asset smoke (post deploy)
         shell: bash
         run: |
