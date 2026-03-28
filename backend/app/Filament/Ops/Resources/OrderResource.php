@@ -114,7 +114,10 @@ class OrderResource extends \App\Filament\Shared\BaseTenantResource
                     ->badge()
                     ->color(fn (Order $record): string => $support->orderStatus($record)['state']),
                 Tables\Columns\TextColumn::make('payment_state')
+                    ->label('Payment status')
+                    ->state(fn (Order $record): string => $support->paymentStatus($record)['label'])
                     ->badge()
+                    ->color(fn (Order $record): string => $support->paymentStatus($record)['state'])
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('grant_state')
                     ->badge()
@@ -152,12 +155,12 @@ class OrderResource extends \App\Filament\Shared\BaseTenantResource
                     ->badge()
                     ->color(fn (Order $record): string => $support->compensationStatus($record)['state']),
                 Tables\Columns\TextColumn::make('latest_payment_status')
-                    ->label('Payment status')
-                    ->state(fn (Order $record): string => $support->paymentStatus($record)['label'])
+                    ->label('Webhook status')
+                    ->state(fn (Order $record): string => $support->webhookStatus($record)['label'])
                     ->badge()
-                    ->color(fn (Order $record): string => $support->paymentStatus($record)['state']),
+                    ->color(fn (Order $record): string => $support->webhookStatus($record)['state']),
                 Tables\Columns\TextColumn::make('latest_handle_status')
-                    ->label('Handle status')
+                    ->label('Webhook handle status')
                     ->badge()
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('latest_benefit_status')
@@ -268,8 +271,6 @@ class OrderResource extends \App\Filament\Shared\BaseTenantResource
                     ->options(fn (): array => $support->distinctOrderOptions('provider')),
                 Tables\Filters\SelectFilter::make('channel')
                     ->options(fn (): array => $support->distinctOrderOptions('channel')),
-                Tables\Filters\SelectFilter::make('payment_state')
-                    ->options(fn (): array => $support->distinctOrderOptions('payment_state')),
                 Tables\Filters\SelectFilter::make('grant_state')
                     ->options(fn (): array => $support->distinctOrderOptions('grant_state')),
                 Tables\Filters\SelectFilter::make('commerce_exception_filter')
@@ -326,6 +327,12 @@ class OrderResource extends \App\Filament\Shared\BaseTenantResource
                     ->options(fn (): array => $support->distinctPaymentStatusOptions())
                     ->query(function (Builder $query, array $data) use ($support): void {
                         $support->applyPaymentStatusFilter($query, $data['value'] ?? null);
+                    }),
+                Tables\Filters\SelectFilter::make('webhook_status_filter')
+                    ->label('Webhook status')
+                    ->options(fn (): array => $support->distinctWebhookStatusOptions())
+                    ->query(function (Builder $query, array $data) use ($support): void {
+                        $support->applyWebhookStatusFilter($query, $data['value'] ?? null);
                     }),
                 Tables\Filters\SelectFilter::make('unlock_status_filter')
                     ->label('Unlock status')

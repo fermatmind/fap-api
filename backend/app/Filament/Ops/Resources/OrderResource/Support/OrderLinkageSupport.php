@@ -271,6 +271,28 @@ final class OrderLinkageSupport
      */
     public function distinctPaymentStatusOptions(): array
     {
+        if (! SchemaBaseline::hasColumn('orders', 'payment_state')) {
+            return [];
+        }
+
+        return collect([
+            Order::PAYMENT_STATE_CREATED,
+            Order::PAYMENT_STATE_PENDING,
+            Order::PAYMENT_STATE_PAID,
+            Order::PAYMENT_STATE_FAILED,
+            Order::PAYMENT_STATE_CANCELED,
+            Order::PAYMENT_STATE_EXPIRED,
+            Order::PAYMENT_STATE_REFUNDED,
+        ])
+            ->mapWithKeys(fn (string $value): array => [$value => $value])
+            ->all();
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public function distinctWebhookStatusOptions(): array
+    {
         if (! SchemaBaseline::hasTable('payment_events') || ! SchemaBaseline::hasColumn('payment_events', 'status')) {
             return [];
         }
@@ -512,17 +534,30 @@ final class OrderLinkageSupport
      */
     public function applyPaymentStatusFilter(Builder $query, ?string $value): void
     {
-        $paymentStatus = trim((string) $value);
-        if ($paymentStatus === '' || ! SchemaBaseline::hasTable('payment_events')) {
+        $paymentState = strtolower(trim((string) $value));
+        if ($paymentState === '' || ! SchemaBaseline::hasColumn('orders', 'payment_state')) {
             return;
         }
 
-        $query->whereExists(function (QueryBuilder $paymentQuery) use ($paymentStatus): void {
+        $query->where('orders.payment_state', $paymentState);
+    }
+
+    /**
+     * @param  Builder<Order>  $query
+     */
+    public function applyWebhookStatusFilter(Builder $query, ?string $value): void
+    {
+        $webhookStatus = trim((string) $value);
+        if ($webhookStatus === '' || ! SchemaBaseline::hasTable('payment_events')) {
+            return;
+        }
+
+        $query->whereExists(function (QueryBuilder $paymentQuery) use ($webhookStatus): void {
             $paymentQuery
                 ->selectRaw('1')
                 ->from('payment_events')
                 ->whereColumn('payment_events.order_no', 'orders.order_no')
-                ->where('payment_events.status', $paymentStatus);
+                ->where('payment_events.status', $webhookStatus);
         });
     }
 
@@ -592,6 +627,7 @@ final class OrderLinkageSupport
         if ($value) {
             $query
                 ->where($this->paidLikeOrderClause())
+                ->whereExists($this->activeBenefitExistsQuery())
                 ->whereExists($this->snapshotReadyExistsQuery());
 
             return;
@@ -600,6 +636,7 @@ final class OrderLinkageSupport
         $query->where(function (Builder $builder): void {
             $builder
                 ->where($this->notPaidLikeOrderClause())
+                ->orWhereNotExists($this->activeBenefitExistsQuery())
                 ->orWhereNotExists($this->snapshotReadyExistsQuery());
         });
     }
@@ -643,6 +680,7 @@ final class OrderLinkageSupport
             'delivered' => $query->whereExists($this->deliveryEmailExistsQuery()),
             'ready' => $query
                 ->where($this->paidLikeOrderClause())
+                ->whereExists($this->activeBenefitExistsQuery())
                 ->whereNotExists($this->deliveryEmailExistsQuery())
                 ->whereExists($this->snapshotReadyExistsQuery()),
             'failed' => $query->where(function (Builder $builder): void {
@@ -656,6 +694,7 @@ final class OrderLinkageSupport
                 ->whereNotExists($this->deliveryEmailExistsQuery())
                 ->where(function (Builder $builder): void {
                     $builder->where($this->notPaidLikeOrderClause())
+                        ->orWhereNotExists($this->activeBenefitExistsQuery())
                         ->orWhereNotExists($this->snapshotReadyExistsQuery());
                 }),
             default => null,
@@ -676,6 +715,19 @@ final class OrderLinkageSupport
      * @return array{label:string,state:string}
      */
     public function paymentStatus(object $order): array
+    {
+        $status = $this->resolvedPaymentStateValue($order);
+        if ($status === '') {
+            return ['label' => 'missing', 'state' => 'gray'];
+        }
+
+        return ['label' => $status, 'state' => $this->statusState($status)];
+    }
+
+    /**
+     * @return array{label:string,state:string}
+     */
+    public function webhookStatus(object $order): array
     {
         $status = trim((string) ($order->latest_payment_status ?? ''));
         if ($status === '') {
@@ -741,15 +793,17 @@ final class OrderLinkageSupport
      */
     public function unlockStatus(object $order): array
     {
+        $paymentState = $this->resolvedPaymentStateValue($order);
+
         if ($this->hasActiveBenefitGrant($order)) {
             return ['label' => 'unlocked', 'state' => 'success'];
         }
 
-        if ($this->isRefundedLike((string) ($order->status ?? ''))) {
+        if ($paymentState === Order::PAYMENT_STATE_REFUNDED) {
             return ['label' => 'refunded', 'state' => 'danger'];
         }
 
-        if ($this->isPaidLike((string) ($order->status ?? '')) || $this->isPaidLike((string) ($order->latest_payment_status ?? ''))) {
+        if ($paymentState === Order::PAYMENT_STATE_PAID) {
             return ['label' => 'paid_no_grant', 'state' => 'warning'];
         }
 
@@ -1358,45 +1412,36 @@ final class OrderLinkageSupport
     private function paidLikeOrderClause(): \Closure
     {
         return function (Builder|QueryBuilder $builder): void {
-            $builder->where(function (Builder|QueryBuilder $nested): void {
-                $nested
-                    ->whereRaw("lower(coalesce(orders.status, '')) in (?, ?, ?, ?)", ['paid', 'fulfilled', 'complete', 'completed'])
-                    ->orWhereNotNull('orders.paid_at');
-            });
+            $builder->where('orders.payment_state', Order::PAYMENT_STATE_PAID);
         };
     }
 
     private function refundedLikeOrderClause(): \Closure
     {
         return function (Builder|QueryBuilder $builder): void {
-            $builder->where(function (Builder|QueryBuilder $nested): void {
-                $nested
-                    ->whereRaw("lower(coalesce(orders.status, '')) like ?", ['%refund%']);
-
-                if (SchemaBaseline::hasColumn('orders', 'refunded_at')) {
-                    $nested->orWhereNotNull('orders.refunded_at');
-                }
-            });
+            $builder->where('orders.payment_state', Order::PAYMENT_STATE_REFUNDED);
         };
     }
 
     private function notPaidLikeOrderClause(): \Closure
     {
         return function (Builder|QueryBuilder $builder): void {
-            $builder
-                ->whereRaw("lower(coalesce(orders.status, '')) not in (?, ?, ?, ?)", ['paid', 'fulfilled', 'complete', 'completed'])
-                ->whereNull('orders.paid_at');
+            $builder->where(function (Builder|QueryBuilder $nested): void {
+                $nested
+                    ->whereNull('orders.payment_state')
+                    ->orWhere('orders.payment_state', '!=', Order::PAYMENT_STATE_PAID);
+            });
         };
     }
 
     private function notRefundedLikeOrderClause(): \Closure
     {
         return function (Builder|QueryBuilder $builder): void {
-            $builder->whereRaw("lower(coalesce(orders.status, '')) not like ?", ['%refund%']);
-
-            if (SchemaBaseline::hasColumn('orders', 'refunded_at')) {
-                $builder->whereNull('orders.refunded_at');
-            }
+            $builder->where(function (Builder|QueryBuilder $nested): void {
+                $nested
+                    ->whereNull('orders.payment_state')
+                    ->orWhere('orders.payment_state', '!=', Order::PAYMENT_STATE_REFUNDED);
+            });
         };
     }
 
@@ -1735,18 +1780,17 @@ final class OrderLinkageSupport
 
     private function resolvedPaymentStateValue(object $order): string
     {
-        return Order::normalizePaymentState(
-            (string) ($order->payment_state ?? ''),
-            (string) ($order->status ?? '')
-        );
-    }
+        $state = strtolower(trim((string) ($order->payment_state ?? '')));
 
-    private function resolvedGrantStateValue(object $order): string
-    {
-        return Order::normalizeGrantState(
-            (string) ($order->grant_state ?? ''),
-            (string) ($order->status ?? '')
-        );
+        return in_array($state, [
+            Order::PAYMENT_STATE_CREATED,
+            Order::PAYMENT_STATE_PENDING,
+            Order::PAYMENT_STATE_PAID,
+            Order::PAYMENT_STATE_FAILED,
+            Order::PAYMENT_STATE_CANCELED,
+            Order::PAYMENT_STATE_EXPIRED,
+            Order::PAYMENT_STATE_REFUNDED,
+        ], true) ? $state : '';
     }
 
     private function latestPaymentAttemptState(object $order): string
@@ -1757,7 +1801,6 @@ final class OrderLinkageSupport
     private function matchesException(string $key, object $order): bool
     {
         $paymentState = $this->resolvedPaymentStateValue($order);
-        $grantState = $this->resolvedGrantStateValue($order);
         $attemptState = $this->latestPaymentAttemptState($order);
         $hasAttempt = (int) ($order->payment_attempts_count ?? 0) > 0;
         $hasActiveGrant = $this->hasActiveBenefitGrant($order);
@@ -1774,7 +1817,6 @@ final class OrderLinkageSupport
             'callback_missing' => in_array($paymentState, [Order::PAYMENT_STATE_CREATED, Order::PAYMENT_STATE_PENDING], true)
                 && in_array($attemptState, [PaymentAttempt::STATE_CALLBACK_RECEIVED, PaymentAttempt::STATE_VERIFIED], true),
             'paid_no_grant' => $paymentState === Order::PAYMENT_STATE_PAID
-                && $grantState !== Order::GRANT_STATE_GRANTED
                 && ! $hasActiveGrant,
             'grant_without_paid' => $hasActiveGrant
                 && ! in_array($paymentState, [Order::PAYMENT_STATE_PAID, Order::PAYMENT_STATE_REFUNDED], true),
@@ -1839,7 +1881,8 @@ final class OrderLinkageSupport
         $snapshotStatus = strtolower(trim((string) ($order->latest_snapshot_status ?? '')));
 
         return $this->resolvedAttemptId($order) !== null
-            && ($this->isPaidLike((string) ($order->status ?? '')) || $this->isPaidLike((string) ($order->latest_payment_status ?? '')))
+            && $this->resolvedPaymentStateValue($order) === Order::PAYMENT_STATE_PAID
+            && $this->hasActiveBenefitGrant($order)
             && in_array($snapshotStatus, ['ready', 'full', 'completed'], true);
     }
 
@@ -1857,19 +1900,9 @@ final class OrderLinkageSupport
             $status === '' => 'gray',
             in_array($status, ['paid', 'fulfilled', 'active', 'ready', 'full', 'completed', 'processed', 'handled', 'succeeded'], true) => 'success',
             in_array($status, ['pending', 'queued', 'running', 'processing', 'initiated', 'provider_created', 'client_presented', 'callback_received', 'verified'], true) => 'warning',
-            in_array($status, ['failed', 'error', 'revoked', 'expired', 'invalid', 'refunded'], true) => 'danger',
+            in_array($status, ['failed', 'error', 'revoked', 'expired', 'invalid', 'refunded', 'canceled', 'cancelled'], true) => 'danger',
             default => 'gray',
         };
-    }
-
-    private function isPaidLike(?string $status): bool
-    {
-        return in_array(strtolower(trim((string) $status)), ['paid', 'fulfilled', 'complete', 'completed', 'succeeded'], true);
-    }
-
-    private function isRefundedLike(?string $status): bool
-    {
-        return str_contains(strtolower(trim((string) $status)), 'refund');
     }
 
     private function contactEmailHash(string $candidate): ?string
