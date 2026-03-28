@@ -144,11 +144,11 @@ final class PaymentWebhookProcessorContractTest extends TestCase
         ]);
 
         $this->assertSame('created', (string) DB::table('orders')->where('order_no', $orderNo)->value('status'));
-        $this->assertSame('rejected_provider_mismatch', (string) DB::table('payment_events')
+        $this->assertSame('PROVIDER_MISMATCH', (string) DB::table('payment_events')
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_contract_provider_mismatch_1')
             ->value('last_error_code'));
-        $this->assertSame('REJECTED_PROVIDER_MISMATCH', (string) DB::table('payment_events')
+        $this->assertSame('PROVIDER_MISMATCH', (string) DB::table('payment_events')
             ->where('provider', 'billing')
             ->where('provider_event_id', 'evt_contract_provider_mismatch_1')
             ->value('reason'));

@@ -314,6 +314,308 @@ final class PaymentRepairEngineTest extends TestCase
         $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'active')->count());
     }
 
+    public function test_post_commit_repair_command_reprocesses_provider_mismatch_after_provider_is_corrected(): void
+    {
+        config([
+            'queue.default' => 'sync',
+            'queue.connections.database.driver' => 'sync',
+        ]);
+
+        (new Pr19CommerceSeeder)->run();
+
+        $attemptId = $this->insertAttempt('anon_provider_repair');
+        $orderNo = 'ord_repair_provider_mismatch_1';
+        $this->insertReportUnlockOrder($orderNo, $attemptId, 'anon_provider_repair');
+
+        DB::table('orders')
+            ->where('order_no', $orderNo)
+            ->update([
+                'provider' => 'stripe',
+                'updated_at' => now()->subMinutes(10),
+            ]);
+
+        $processor = app(PaymentWebhookProcessor::class);
+        $first = $processor->handle('billing', [
+            'provider_event_id' => 'evt_repair_provider_mismatch_1',
+            'order_no' => $orderNo,
+            'external_trade_no' => 'trade_repair_provider_mismatch_1',
+            'amount_cents' => 199,
+            'currency' => 'CNY',
+        ], 0, null, 'anon_provider_repair', true);
+
+        $this->assertFalse((bool) ($first['ok'] ?? true));
+        $this->assertDatabaseHas('payment_events', [
+            'provider_event_id' => 'evt_repair_provider_mismatch_1',
+            'status' => 'rejected',
+            'handle_status' => 'rejected',
+            'last_error_code' => 'PROVIDER_MISMATCH',
+            'reason' => 'PROVIDER_MISMATCH',
+        ]);
+
+        DB::table('orders')
+            ->where('order_no', $orderNo)
+            ->update([
+                'provider' => 'billing',
+                'updated_at' => now()->subMinutes(9),
+            ]);
+
+        $exitCode = Artisan::call('commerce:repair-post-commit-failed', [
+            '--org_id' => 0,
+            '--older_than_minutes' => 0,
+            '--limit' => 20,
+        ]);
+        $this->assertSame(0, $exitCode);
+
+        $this->assertDatabaseHas('payment_events', [
+            'provider_event_id' => 'evt_repair_provider_mismatch_1',
+            'status' => 'processed',
+            'handle_status' => 'reprocessed',
+        ]);
+        $this->assertDatabaseHas('orders', [
+            'order_no' => $orderNo,
+            'payment_state' => 'paid',
+            'grant_state' => 'granted',
+            'status' => 'fulfilled',
+        ]);
+        $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'active')->count());
+    }
+
+    public function test_post_commit_repair_command_reprocesses_rejected_sku_not_found_after_sku_is_restored(): void
+    {
+        config([
+            'queue.default' => 'sync',
+            'queue.connections.database.driver' => 'sync',
+        ]);
+
+        (new Pr19CommerceSeeder)->run();
+
+        $attemptId = $this->insertAttempt('anon_semantic_sku_fix');
+        $orderNo = 'ord_repair_semantic_sku_1';
+        $providerEventId = 'evt_repair_semantic_sku_1';
+        $this->insertOrder($orderNo, 'SKU_REPAIR_MBTI_UNKNOWN', $attemptId, 'anon_semantic_sku_fix');
+
+        $first = app(PaymentWebhookProcessor::class)->handle('billing', [
+            'provider_event_id' => $providerEventId,
+            'order_no' => $orderNo,
+            'external_trade_no' => 'trade_repair_semantic_sku_1',
+            'amount_cents' => 199,
+            'currency' => 'CNY',
+        ], 0, null, 'anon_semantic_sku_fix', true);
+
+        $this->assertFalse((bool) ($first['ok'] ?? true));
+        $this->assertDatabaseHas('payment_events', [
+            'provider_event_id' => $providerEventId,
+            'status' => 'rejected',
+            'handle_status' => 'rejected',
+            'last_error_code' => 'SKU_NOT_FOUND',
+            'reason' => 'SKU_NOT_FOUND',
+        ]);
+
+        $this->upsertSku('SKU_REPAIR_MBTI_UNKNOWN', 'MBTI', 'report_unlock', 'MBTI_REPORT_FULL', 199, 'CNY');
+
+        $exitCode = Artisan::call('commerce:repair-post-commit-failed', [
+            '--org_id' => 0,
+            '--older_than_minutes' => 0,
+            '--limit' => 20,
+        ]);
+        $this->assertSame(0, $exitCode);
+
+        $this->assertDatabaseHas('payment_events', [
+            'provider_event_id' => $providerEventId,
+            'status' => 'processed',
+            'handle_status' => 'reprocessed',
+        ]);
+        $this->assertDatabaseHas('orders', [
+            'order_no' => $orderNo,
+            'payment_state' => 'paid',
+            'grant_state' => 'granted',
+            'status' => 'fulfilled',
+        ]);
+        $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'active')->count());
+    }
+
+    public function test_post_commit_repair_command_reprocesses_rejected_benefit_code_missing_after_sku_is_corrected(): void
+    {
+        config([
+            'queue.default' => 'sync',
+            'queue.connections.database.driver' => 'sync',
+        ]);
+
+        (new Pr19CommerceSeeder)->run();
+
+        $attemptId = $this->insertAttempt('anon_semantic_benefit_fix');
+        $orderNo = 'ord_repair_semantic_benefit_1';
+        $providerEventId = 'evt_repair_semantic_benefit_1';
+        $this->upsertSku('SKU_REPAIR_MBTI_NO_BENEFIT', 'MBTI', 'report_unlock', '', 199, 'CNY');
+        $this->insertOrder($orderNo, 'SKU_REPAIR_MBTI_NO_BENEFIT', $attemptId, 'anon_semantic_benefit_fix');
+
+        $first = app(PaymentWebhookProcessor::class)->handle('billing', [
+            'provider_event_id' => $providerEventId,
+            'order_no' => $orderNo,
+            'external_trade_no' => 'trade_repair_semantic_benefit_1',
+            'amount_cents' => 199,
+            'currency' => 'CNY',
+        ], 0, null, 'anon_semantic_benefit_fix', true);
+
+        $this->assertFalse((bool) ($first['ok'] ?? true));
+        $this->assertDatabaseHas('payment_events', [
+            'provider_event_id' => $providerEventId,
+            'status' => 'rejected',
+            'handle_status' => 'rejected',
+            'last_error_code' => 'BENEFIT_CODE_NOT_FOUND',
+            'reason' => 'BENEFIT_CODE_NOT_FOUND',
+        ]);
+
+        DB::table('skus')
+            ->where('sku', 'SKU_REPAIR_MBTI_NO_BENEFIT')
+            ->update([
+                'benefit_code' => 'MBTI_REPORT_FULL',
+                'updated_at' => now()->subMinutes(9),
+            ]);
+
+        $exitCode = Artisan::call('commerce:repair-post-commit-failed', [
+            '--org_id' => 0,
+            '--older_than_minutes' => 0,
+            '--limit' => 20,
+        ]);
+        $this->assertSame(0, $exitCode);
+
+        $this->assertDatabaseHas('payment_events', [
+            'provider_event_id' => $providerEventId,
+            'status' => 'processed',
+            'handle_status' => 'reprocessed',
+        ]);
+        $this->assertDatabaseHas('orders', [
+            'order_no' => $orderNo,
+            'payment_state' => 'paid',
+            'grant_state' => 'granted',
+            'status' => 'fulfilled',
+        ]);
+        $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'active')->count());
+    }
+
+    public function test_post_commit_repair_command_reprocesses_rejected_attempt_required_after_attempt_is_backfilled(): void
+    {
+        config([
+            'queue.default' => 'sync',
+            'queue.connections.database.driver' => 'sync',
+        ]);
+
+        (new Pr19CommerceSeeder)->run();
+
+        $repairAttemptId = $this->insertAttempt('anon_semantic_attempt_fix');
+        $orderNo = 'ord_repair_semantic_attempt_1';
+        $providerEventId = 'evt_repair_semantic_attempt_1';
+        $this->insertOrder($orderNo, 'MBTI_REPORT_FULL', null, 'anon_semantic_attempt_fix');
+
+        $first = app(PaymentWebhookProcessor::class)->handle('billing', [
+            'provider_event_id' => $providerEventId,
+            'order_no' => $orderNo,
+            'external_trade_no' => 'trade_repair_semantic_attempt_1',
+            'amount_cents' => 199,
+            'currency' => 'CNY',
+        ], 0, null, 'anon_semantic_attempt_fix', true);
+
+        $this->assertFalse((bool) ($first['ok'] ?? true));
+        $this->assertDatabaseHas('payment_events', [
+            'provider_event_id' => $providerEventId,
+            'status' => 'rejected',
+            'handle_status' => 'rejected',
+            'last_error_code' => 'ATTEMPT_REQUIRED',
+            'reason' => 'ATTEMPT_REQUIRED',
+        ]);
+
+        DB::table('orders')
+            ->where('order_no', $orderNo)
+            ->update([
+                'target_attempt_id' => $repairAttemptId,
+                'updated_at' => now()->subMinutes(9),
+            ]);
+
+        $exitCode = Artisan::call('commerce:repair-post-commit-failed', [
+            '--org_id' => 0,
+            '--older_than_minutes' => 0,
+            '--limit' => 20,
+        ]);
+        $this->assertSame(0, $exitCode);
+
+        $this->assertDatabaseHas('payment_events', [
+            'provider_event_id' => $providerEventId,
+            'status' => 'processed',
+            'handle_status' => 'reprocessed',
+        ]);
+        $this->assertDatabaseHas('orders', [
+            'order_no' => $orderNo,
+            'payment_state' => 'paid',
+            'grant_state' => 'granted',
+            'status' => 'fulfilled',
+        ]);
+        $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'active')->count());
+    }
+
+    public function test_paid_order_repair_command_skips_orders_blocked_by_unresolved_attempt_mismatch_semantic_rejects(): void
+    {
+        (new Pr19CommerceSeeder)->run();
+
+        $cases = [
+            [
+                'code' => 'ATTEMPT_OWNER_MISMATCH',
+                'order_no' => 'ord_paid_repair_owner_blocked_1',
+                'provider_event_id' => 'evt_paid_repair_owner_blocked_1',
+            ],
+            [
+                'code' => 'ATTEMPT_SCALE_MISMATCH',
+                'order_no' => 'ord_paid_repair_scale_blocked_1',
+                'provider_event_id' => 'evt_paid_repair_scale_blocked_1',
+            ],
+        ];
+
+        foreach ($cases as $case) {
+            $attemptId = $this->insertAttempt('anon_'.$case['code']);
+            $this->insertReportUnlockOrder($case['order_no'], $attemptId, 'anon_'.$case['code']);
+
+            DB::table('orders')
+                ->where('order_no', $case['order_no'])
+                ->update([
+                    'status' => 'paid',
+                    'payment_state' => 'paid',
+                    'grant_state' => 'not_started',
+                    'paid_at' => now()->subMinutes(10),
+                    'updated_at' => now()->subMinutes(10),
+                ]);
+
+            $this->insertRejectedPaymentEvent($case['order_no'], $case['provider_event_id'], $case['code']);
+
+            $exitCode = Artisan::call('commerce:repair-paid-orders', [
+                '--org_id' => 0,
+                '--order' => $case['order_no'],
+                '--older_than_minutes' => 0,
+                '--limit' => 20,
+                '--json' => 1,
+            ]);
+            $this->assertSame(0, $exitCode);
+
+            $summary = json_decode(Artisan::output(), true);
+            $this->assertIsArray($summary);
+            $this->assertSame(0, (int) ($summary['candidate_count'] ?? -1));
+            $this->assertSame(0, (int) ($summary['repaired_count'] ?? -1));
+            $this->assertSame(0, (int) ($summary['failed_count'] ?? -1));
+
+            $this->assertDatabaseHas('orders', [
+                'order_no' => $case['order_no'],
+                'payment_state' => 'paid',
+                'grant_state' => 'not_started',
+                'status' => 'paid',
+            ]);
+            $this->assertSame(0, DB::table('benefit_grants')->where('order_no', $case['order_no'])->count());
+            $this->assertDatabaseHas('payment_events', [
+                'provider_event_id' => $case['provider_event_id'],
+                'status' => 'rejected',
+                'last_error_code' => $case['code'],
+            ]);
+        }
+    }
+
     private function insertAttempt(string $anonId): string
     {
         $attemptId = (string) Str::uuid();
@@ -345,15 +647,20 @@ final class PaymentRepairEngineTest extends TestCase
 
     private function insertReportUnlockOrder(string $orderNo, string $attemptId, string $anonId): void
     {
+        $this->insertOrder($orderNo, 'MBTI_REPORT_FULL', $attemptId, $anonId);
+    }
+
+    private function insertOrder(string $orderNo, string $sku, ?string $attemptId, string $anonId): void
+    {
         DB::table('orders')->insert([
             'id' => (string) Str::uuid(),
             'order_no' => $orderNo,
             'org_id' => 0,
             'user_id' => null,
             'anon_id' => $anonId,
-            'sku' => 'MBTI_REPORT_FULL',
-            'item_sku' => 'MBTI_REPORT_FULL',
-            'effective_sku' => 'MBTI_REPORT_FULL',
+            'sku' => $sku,
+            'item_sku' => $sku,
+            'effective_sku' => $sku,
             'quantity' => 1,
             'target_attempt_id' => $attemptId,
             'amount_cents' => 199,
@@ -371,6 +678,64 @@ final class PaymentRepairEngineTest extends TestCase
             'refunded_at' => null,
             'created_at' => now()->subMinutes(8),
             'updated_at' => now()->subMinutes(8),
+        ]);
+    }
+
+    private function upsertSku(
+        string $sku,
+        string $scaleCode,
+        string $kind,
+        string $benefitCode,
+        int $priceCents,
+        string $currency
+    ): void {
+        DB::table('skus')->updateOrInsert(
+            ['sku' => $sku],
+            [
+                'scale_code' => $scaleCode,
+                'kind' => $kind,
+                'unit_qty' => 1,
+                'benefit_code' => $benefitCode,
+                'scope' => 'attempt',
+                'price_cents' => $priceCents,
+                'currency' => $currency,
+                'is_active' => true,
+                'meta_json' => json_encode([], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'created_at' => now()->subMinutes(10),
+                'updated_at' => now()->subMinutes(10),
+            ]
+        );
+    }
+
+    private function insertRejectedPaymentEvent(string $orderNo, string $providerEventId, string $errorCode): void
+    {
+        $orderId = (string) DB::table('orders')
+            ->where('order_no', $orderNo)
+            ->value('id');
+
+        DB::table('payment_events')->insert([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'provider' => 'billing',
+            'provider_event_id' => $providerEventId,
+            'order_id' => $orderId,
+            'order_no' => $orderNo,
+            'event_type' => 'payment_succeeded',
+            'status' => 'rejected',
+            'handle_status' => 'rejected',
+            'last_error_code' => $errorCode,
+            'reason' => $errorCode,
+            'attempts' => 0,
+            'payload_json' => json_encode([
+                'provider_event_id' => $providerEventId,
+                'order_no' => $orderNo,
+                'amount_cents' => 199,
+                'currency' => 'CNY',
+                'event_type' => 'payment_succeeded',
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'signature_ok' => true,
+            'created_at' => now()->subMinutes(10),
+            'updated_at' => now()->subMinutes(10),
         ]);
     }
 }

@@ -11,6 +11,18 @@ use Illuminate\Support\Str;
 
 final class CommerceRepairPostCommitFailed extends Command
 {
+    private const REPAIRABLE_SEMANTIC_REJECT_CODES = [
+        'ORDER_NOT_FOUND',
+        'PROVIDER_MISMATCH',
+        'AMOUNT_MISMATCH',
+        'CURRENCY_MISMATCH',
+        'ATTEMPT_OWNER_MISMATCH',
+        'ATTEMPT_SCALE_MISMATCH',
+        'SKU_NOT_FOUND',
+        'BENEFIT_CODE_NOT_FOUND',
+        'ATTEMPT_REQUIRED',
+    ];
+
     protected $signature = 'commerce:repair-post-commit-failed
         {--org_id=0 : Organization id}
         {--older_than_minutes=5 : Ignore very fresh failures}
@@ -90,17 +102,7 @@ final class CommerceRepairPostCommitFailed extends Command
         bool $includeSemanticRejects
     ): array {
         $cutoff = now()->subMinutes($olderThanMinutes);
-        $semanticRejectCodes = [
-            'ORDER_NOT_FOUND',
-            'PROVIDER_MISMATCH',
-            'AMOUNT_MISMATCH',
-            'CURRENCY_MISMATCH',
-            'ATTEMPT_OWNER_MISMATCH',
-            'ATTEMPT_SCALE_MISMATCH',
-            'SKU_NOT_FOUND',
-            'BENEFIT_CODE_NOT_FOUND',
-            'ATTEMPT_REQUIRED',
-        ];
+        $semanticRejectCodes = self::REPAIRABLE_SEMANTIC_REJECT_CODES;
 
         return DB::table('payment_events')
             ->leftJoin('orders', 'orders.order_no', '=', 'payment_events.order_no')

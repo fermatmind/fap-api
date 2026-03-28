@@ -237,7 +237,7 @@ class WebhookEntitlementService
                             $provider,
                             $providerEventId,
                             'rejected',
-                            'rejected_provider_mismatch',
+                            'PROVIDER_MISMATCH',
                             $detail
                         );
 
@@ -371,14 +371,14 @@ class WebhookEntitlementService
                         ?? $order->item_sku
                         ?? ''));
                     if ($effectiveSku === '') {
-                        $this->core->markEventError($provider, $providerEventId, 'failed', 'SKU_NOT_FOUND', 'sku missing on order.');
+                        $this->core->markEventError($provider, $providerEventId, 'rejected', 'SKU_NOT_FOUND', 'sku missing on order.');
 
                         return $this->core->semanticReject('SKU_NOT_FOUND', 'sku missing on order.');
                     }
 
                     $skuRow = $this->core->skuCatalog()->getActiveSku($effectiveSku, null, (int) ($order->org_id ?? $orgId));
                     if (! $skuRow) {
-                        $this->core->markEventError($provider, $providerEventId, 'failed', 'SKU_NOT_FOUND', 'sku not found.');
+                        $this->core->markEventError($provider, $providerEventId, 'rejected', 'SKU_NOT_FOUND', 'sku not found.');
 
                         return $this->core->semanticReject('SKU_NOT_FOUND', 'sku not found.');
                     }
@@ -462,7 +462,7 @@ class WebhookEntitlementService
                         $this->core->markEventError(
                             $provider,
                             $providerEventId,
-                            'failed',
+                            'rejected',
                             'BENEFIT_CODE_NOT_FOUND',
                             'benefit code missing on sku.'
                         );
@@ -529,7 +529,7 @@ class WebhookEntitlementService
                     } elseif ($kind === 'report_unlock') {
                         $attemptId = (string) ($order->target_attempt_id ?? '');
                         if ($attemptId === '') {
-                            $this->core->markEventError($provider, $providerEventId, 'failed', 'ATTEMPT_REQUIRED', 'target_attempt_id is required.');
+                            $this->core->markEventError($provider, $providerEventId, 'rejected', 'ATTEMPT_REQUIRED', 'target_attempt_id is required.');
 
                             return $this->core->semanticReject('ATTEMPT_REQUIRED', 'target_attempt_id is required for report_unlock.');
                         }
