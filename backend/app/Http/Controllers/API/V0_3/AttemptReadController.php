@@ -26,6 +26,7 @@ use App\Services\Mbti\MbtiWorkingLifeConsolidationService;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
 use App\Services\Report\Pdf\ReportPdfDocumentService;
+use App\Services\Report\MbtiPreviewContractBuilder;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportGatekeeper;
 use App\Services\Scale\ScaleCodeResponseProjector;
@@ -57,6 +58,7 @@ class AttemptReadController extends Controller
         private MbtiReadModelContractService $mbtiReadModelContractService,
         private MbtiWorkingLifeConsolidationService $mbtiWorkingLifeConsolidationService,
         private MbtiAccessHubBuilder $mbtiAccessHubBuilder,
+        private MbtiPreviewContractBuilder $mbtiPreviewContractBuilder,
         private EventRecorder $eventRecorder,
         private ScaleCodeResponseProjector $responseProjector,
         private ReportSubjectRepository $reportSubjects,
@@ -381,6 +383,9 @@ class AttemptReadController extends Controller
                 $gate,
                 $userId !== null ? (string) $userId : null,
                 $anonId
+            );
+            $responsePayload[MbtiPreviewContractBuilder::KEY] = $this->mbtiPreviewContractBuilder->buildFromReportEnvelope(
+                $responsePayload
             );
         } elseif ($scaleCode === 'BIG5_OCEAN') {
             $projection = data_get($responsePayload, 'report._meta.big5_public_projection_v1');
