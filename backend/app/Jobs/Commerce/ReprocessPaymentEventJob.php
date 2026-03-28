@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Jobs\Commerce;
 
 use App\Services\Commerce\PaymentWebhookProcessor;
+use App\Services\Commerce\Repair\OrderRepairService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -34,7 +35,7 @@ class ReprocessPaymentEventJob implements ShouldQueue
         $this->onQueue('commerce');
     }
 
-    public function handle(PaymentWebhookProcessor $processor): void
+    public function handle(PaymentWebhookProcessor $processor, OrderRepairService $orderRepair): void
     {
         $event = DB::table('payment_events')
             ->where('id', $this->paymentEventId)
@@ -54,6 +55,7 @@ class ReprocessPaymentEventJob implements ShouldQueue
         }
 
         $signatureOk = (bool) ($event->signature_ok ?? false);
+        $originalStatus = strtolower(trim((string) ($event->status ?? '')));
         $result = $processor->handle(
             $provider,
             $payload,
@@ -67,6 +69,18 @@ class ReprocessPaymentEventJob implements ShouldQueue
         );
 
         if (($result['ok'] ?? false) === true) {
+            $repair = $this->repairOrderIfNeeded($event, $orderRepair);
+            if (($repair['ok'] ?? true) !== true) {
+                $this->markFailed(
+                    $event,
+                    (string) ($repair['error'] ?? 'ORDER_REPAIR_FAILED'),
+                    (string) ($repair['message'] ?? 'order repair failed after payment-event reprocess.'),
+                    $this->retryableStatus($originalStatus)
+                );
+
+                return;
+            }
+
             DB::table('payment_events')
                 ->where('id', $this->paymentEventId)
                 ->update([
@@ -90,6 +104,7 @@ class ReprocessPaymentEventJob implements ShouldQueue
                     'reason' => $this->reason,
                     'correlation_id' => $this->correlationId,
                     'duplicate' => (bool) ($result['duplicate'] ?? false),
+                    'order_repair' => $repair,
                 ],
             );
 
@@ -99,7 +114,7 @@ class ReprocessPaymentEventJob implements ShouldQueue
         $errorCode = (string) ($result['error_code'] ?? $result['error'] ?? 'REPROCESS_FAILED');
         $message = (string) ($result['message'] ?? 'reprocess failed.');
 
-        $this->markFailed($event, $errorCode, $message);
+        $this->markFailed($event, $errorCode, $message, $this->retryableStatus($originalStatus));
     }
 
     /**
@@ -121,12 +136,12 @@ class ReprocessPaymentEventJob implements ShouldQueue
         return [];
     }
 
-    private function markFailed(object $event, string $errorCode, string $message): void
+    private function markFailed(object $event, string $errorCode, string $message, ?string $preserveStatus = null): void
     {
         DB::table('payment_events')
             ->where('id', (string) $event->id)
             ->update([
-                'status' => 'failed',
+                'status' => $preserveStatus ?? 'failed',
                 'handle_status' => 'reprocess_failed',
                 'last_error_code' => $errorCode,
                 'last_error_message' => mb_substr($message, 0, 255),
@@ -172,5 +187,43 @@ class ReprocessPaymentEventJob implements ShouldQueue
             'result' => str_contains($action, 'failed') ? 'failed' : 'success',
             'created_at' => now(),
         ]);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function repairOrderIfNeeded(object $event, OrderRepairService $orderRepair): array
+    {
+        $orderNo = trim((string) ($event->order_no ?? ''));
+        if ($orderNo === '') {
+            return ['ok' => true, 'skipped' => true, 'reason' => 'missing_order_no'];
+        }
+
+        $order = DB::table('orders')
+            ->where('org_id', $this->orgId)
+            ->where('order_no', $orderNo)
+            ->first();
+
+        if (! $order) {
+            return ['ok' => true, 'skipped' => true, 'reason' => 'order_not_found'];
+        }
+
+        if (! $orderRepair->isPaidReportUnlockOrder($order)) {
+            return ['ok' => true, 'skipped' => true, 'reason' => 'order_repair_not_required'];
+        }
+
+        return $orderRepair->repairPaidOrder($order, [
+            'source' => 'reprocess_payment_event_job',
+            'reason' => $this->reason,
+            'correlation_id' => $this->correlationId,
+            'payment_event_id' => (string) ($event->id ?? ''),
+        ]);
+    }
+
+    private function retryableStatus(string $status): ?string
+    {
+        return in_array($status, ['post_commit_failed', 'rejected', 'orphan'], true)
+            ? $status
+            : null;
     }
 }

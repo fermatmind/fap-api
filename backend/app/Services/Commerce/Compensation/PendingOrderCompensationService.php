@@ -7,6 +7,7 @@ namespace App\Services\Commerce\Compensation;
 use App\Models\Order;
 use App\Models\PaymentAttempt;
 use App\Services\Commerce\OrderManager;
+use App\Services\Commerce\Repair\OrderRepairService;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -15,6 +16,7 @@ final class PendingOrderCompensationService
     public function __construct(
         private readonly PaymentLifecycleGatewayRegistry $gateways,
         private readonly OrderManager $orders,
+        private readonly OrderRepairService $orderRepair,
     ) {}
 
     /**
@@ -32,6 +34,9 @@ final class PendingOrderCompensationService
      *     unsupported_count:int,
      *     close_attempted_count:int,
      *     close_success_count:int,
+     *     repair_candidate_count:int,
+     *     repair_repaired_count:int,
+     *     repair_failed_count:int,
      *     results:array<int,array<string,mixed>>
      * }
      */
@@ -53,6 +58,9 @@ final class PendingOrderCompensationService
             'unsupported_count' => 0,
             'close_attempted_count' => 0,
             'close_success_count' => 0,
+            'repair_candidate_count' => 0,
+            'repair_repaired_count' => 0,
+            'repair_failed_count' => 0,
             'results' => [],
         ];
 
@@ -74,6 +82,19 @@ final class PendingOrderCompensationService
             ] as $counter) {
                 $summary[$counter] += (int) ($result[$counter] ?? 0);
             }
+        }
+
+        $repairCandidates = $this->collectPaidNoGrantCandidates($normalized);
+        $summary['candidate_count'] += count($repairCandidates);
+        $summary['repair_candidate_count'] = count($repairCandidates);
+
+        foreach ($repairCandidates as $candidate) {
+            $summary['processed_count']++;
+            $result = $this->processRepairCandidate($candidate, $normalized);
+            $summary['results'][] = $result;
+            $summary['repair_repaired_count'] += (int) ($result['repair_repaired_count'] ?? 0);
+            $summary['repair_failed_count'] += (int) ($result['repair_failed_count'] ?? 0);
+            $summary['unresolved_count'] += (int) ($result['unresolved_count'] ?? 0);
         }
 
         return $summary;
@@ -322,6 +343,61 @@ final class PendingOrderCompensationService
     }
 
     /**
+     * @param  array<string,mixed>  $candidate
+     * @param  array<string,mixed>  $options
+     * @return array<string,mixed>
+     */
+    private function processRepairCandidate(array $candidate, array $options): array
+    {
+        $order = $candidate['order'];
+        $attempt = $candidate['attempt'];
+        $reconciledAt = now()->toIso8601String();
+
+        $result = [
+            'order_no' => (string) ($order->order_no ?? ''),
+            'attempt_id' => is_object($attempt) ? (string) ($attempt->id ?? '') : null,
+            'provider' => strtolower(trim((string) ($candidate['provider'] ?? ''))),
+            'status' => 'repair_pending',
+            'reason' => null,
+            'repair_repaired_count' => 0,
+            'repair_failed_count' => 0,
+            'unresolved_count' => 0,
+        ];
+
+        if ($options['dry_run']) {
+            $result['status'] = 'repair_candidate';
+
+            return $result;
+        }
+
+        $repair = $this->orderRepair->repairPaidOrder($order, [
+            'source' => 'pending_order_compensation',
+            'reason' => 'paid_no_grant_repair',
+        ]);
+
+        if (($repair['ok'] ?? false) !== true) {
+            $result['status'] = 'repair_failed';
+            $result['reason'] = (string) ($repair['message'] ?? 'paid-order repair failed.');
+            $result['repair_failed_count'] = 1;
+            $result['unresolved_count'] = 1;
+            $this->touchReconciled($order, $attempt, $reconciledAt, [
+                'paid_order_repair' => $repair,
+            ], (string) ($repair['error'] ?? 'PAID_ORDER_REPAIR_FAILED'), $result['reason']);
+
+            return $result;
+        }
+
+        $result['status'] = ($repair['skipped'] ?? false) === true ? 'repair_skipped' : 'repair_repaired';
+        $result['reason'] = (string) ($repair['reason'] ?? '');
+        $result['repair_repaired_count'] = ($repair['repaired'] ?? false) === true ? 1 : 0;
+        $this->touchReconciled($order, $attempt, $reconciledAt, [
+            'paid_order_repair' => $repair,
+        ], null, null);
+
+        return $result;
+    }
+
+    /**
      * @param  array<string,mixed>  $options
      * @return array<int,array<string,mixed>>
      */
@@ -398,6 +474,78 @@ final class PendingOrderCompensationService
 
     /**
      * @param  array<string,mixed>  $options
+     * @return array<int,array<string,mixed>>
+     */
+    private function collectPaidNoGrantCandidates(array $options): array
+    {
+        if ($options['attempt'] !== null) {
+            $attempt = $this->orders->findPaymentAttemptById($options['attempt']);
+            if (! $attempt) {
+                return [];
+            }
+
+            $order = $this->orders->findOrderByOrderNo((string) ($attempt->order_no ?? ''), (int) ($attempt->org_id ?? 0));
+            if (! $order || ! $this->matchesProvider($order, $attempt, $options['provider'])) {
+                return [];
+            }
+
+            return $this->passesPaidRepairCandidateGuards($order, $attempt, $options, true)
+                ? [$this->makeCandidate($order, $attempt)]
+                : [];
+        }
+
+        if ($options['order'] !== null) {
+            $orderQuery = DB::table('orders')
+                ->where('order_no', $options['order']);
+            if ($options['provider'] !== null) {
+                $orderQuery->where('provider', $options['provider']);
+            }
+
+            $order = $orderQuery->orderByDesc('created_at')->first();
+            if (! $order) {
+                return [];
+            }
+
+            $attempt = $this->orders->latestPaymentAttemptForOrder(
+                (string) ($order->order_no ?? ''),
+                (int) ($order->org_id ?? 0)
+            );
+
+            return $this->passesPaidRepairCandidateGuards($order, $attempt, $options, true)
+                ? [$this->makeCandidate($order, $attempt)]
+                : [];
+        }
+
+        $orders = DB::table('orders')
+            ->where('payment_state', Order::PAYMENT_STATE_PAID)
+            ->when($options['provider'] !== null, fn ($query) => $query->where('provider', $options['provider']))
+            ->orderBy('paid_at')
+            ->orderBy('updated_at')
+            ->limit(max($options['limit'] * 5, $options['limit']))
+            ->get();
+
+        $candidates = [];
+        foreach ($orders as $order) {
+            $attempt = $this->orders->latestPaymentAttemptForOrder(
+                (string) ($order->order_no ?? ''),
+                (int) ($order->org_id ?? 0)
+            );
+
+            if (! $this->passesPaidRepairCandidateGuards($order, $attempt, $options, false)) {
+                continue;
+            }
+
+            $candidates[] = $this->makeCandidate($order, $attempt);
+            if (count($candidates) >= $options['limit']) {
+                break;
+            }
+        }
+
+        return $candidates;
+    }
+
+    /**
+     * @param  array<string,mixed>  $options
      */
     private function normalizeOptions(array $options): array
     {
@@ -450,6 +598,28 @@ final class PendingOrderCompensationService
         }
 
         if (! $targeted || $options['only_stale']) {
+            return $this->isStale($order, $attempt, $options['older_than_minutes']);
+        }
+
+        return true;
+    }
+
+    private function passesPaidRepairCandidateGuards(object $order, ?object $attempt, array $options, bool $targeted): bool
+    {
+        $paymentState = strtolower(trim((string) ($order->payment_state ?? '')));
+        if ($paymentState !== Order::PAYMENT_STATE_PAID) {
+            return false;
+        }
+
+        if (! $this->matchesProvider($order, $attempt, $options['provider'])) {
+            return false;
+        }
+
+        if (! $this->orderRepair->requiresPaidOrderRepair($order)) {
+            return false;
+        }
+
+        if ($options['only_stale']) {
             return $this->isStale($order, $attempt, $options['older_than_minutes']);
         }
 
