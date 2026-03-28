@@ -40,7 +40,6 @@ set('shared_files', [
 
 set('shared_dirs', [
     'backend/storage',
-    'backend/bootstrap/cache',
     'content_packages',
 ]);
 
@@ -153,6 +152,68 @@ task('guard:filament-assets', function () {
     }
 });
 
+task('bootstrap-cache:clear-release', function () {
+    within('{{release_path}}/backend', function () {
+        run(<<<'BASH'
+{{bin/php}} -r '
+require "vendor/autoload.php";
+$app = require "bootstrap/app.php";
+$paths = [
+    $app->getCachedConfigPath(),
+    $app->getCachedEventsPath(),
+    $app->getCachedPackagesPath(),
+    $app->getCachedServicesPath(),
+];
+foreach ($paths as $path) {
+    if (is_file($path)) {
+        @unlink($path);
+    }
+}
+foreach (glob(dirname($app->getCachedRoutesPath()).DIRECTORY_SEPARATOR."routes-*.php") ?: [] as $path) {
+    @unlink($path);
+}
+'
+BASH);
+    });
+});
+
+task('bootstrap-cache:rebuild-current', function () {
+    within('{{current_path}}/backend', function () {
+        run(<<<'BASH'
+{{bin/php}} -r '
+require "vendor/autoload.php";
+$app = require "bootstrap/app.php";
+$paths = [
+    $app->getCachedConfigPath(),
+    $app->getCachedEventsPath(),
+    $app->getCachedPackagesPath(),
+    $app->getCachedServicesPath(),
+];
+foreach ($paths as $path) {
+    if (is_file($path)) {
+        @unlink($path);
+    }
+}
+foreach (glob(dirname($app->getCachedRoutesPath()).DIRECTORY_SEPARATOR."routes-*.php") ?: [] as $path) {
+    @unlink($path);
+}
+'
+BASH);
+        run('{{bin/php}} artisan package:discover --ansi');
+        run('{{bin/php}} artisan config:cache --ansi');
+        run('{{bin/php}} artisan route:cache --ansi');
+        run('{{bin/php}} artisan event:cache --ansi');
+    });
+});
+
+task('rollback:healthcheck', [
+    'reload:php-fpm',
+    'reload:nginx',
+    'healthcheck:public',
+    'healthcheck:auth-guest-contract',
+    'healthcheck:ops-entry-contract',
+]);
+
 /**
  * ======================================================
  * Composer（backend）
@@ -226,14 +287,10 @@ task('ensure:shared-perms', function () {
     $base = get('deploy_path');
 
     run("sudo -n /usr/bin/chown -R ubuntu:www-data {$base}/shared/backend/storage");
-    run("sudo -n /usr/bin/chown -R ubuntu:www-data {$base}/shared/backend/bootstrap/cache");
     run("sudo -n /usr/bin/chown -R ubuntu:www-data {$base}/shared/content_packages");
 
     run("find {$base}/shared/backend/storage -type d -exec chmod 2775 {} \\;");
     run("find {$base}/shared/backend/storage -type f -exec chmod 664 {} \\;");
-
-    run("find {$base}/shared/backend/bootstrap/cache -type d -exec chmod 2775 {} \\;");
-    run("find {$base}/shared/backend/bootstrap/cache -type f -exec chmod 664 {} \\;");
 
     run("find {$base}/shared/content_packages -type d -exec chmod 2775 {} \\;");
     run("find {$base}/shared/content_packages -type f -exec chmod 664 {} \\;");
@@ -372,6 +429,7 @@ before('deploy:prepare', 'ensure:phpredis');
 before('deploy:shared', 'fap:seed_shared_content_packages');
 
 after('deploy:update_code', 'ensure:node-toolchain');
+after('deploy:prepare', 'bootstrap-cache:clear-release');
 
 after('deploy:shared', 'ensure:shared-perms');
 after('deploy:shared', 'ensure:healthz-deps');
@@ -391,5 +449,8 @@ after('deploy:symlink', 'reload:nginx');
 after('deploy:symlink', 'healthcheck:public');
 after('deploy:symlink', 'healthcheck:auth-guest-contract');
 after('deploy:symlink', 'healthcheck:ops-entry-contract');
+
+after('rollback', 'bootstrap-cache:rebuild-current');
+after('bootstrap-cache:rebuild-current', 'rollback:healthcheck');
 
 after('deploy:failed', 'deploy:unlock');
