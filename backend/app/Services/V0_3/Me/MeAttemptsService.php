@@ -229,7 +229,13 @@ class MeAttemptsService
      *   variant:?string,
      *   modules_allowed:list<string>,
      *   modules_preview:list<string>,
-     *   actions:array{page_href:?string,pdf_href:?string}
+     *   actions:array{
+     *     page_href:?string,
+     *     pdf_href:?string,
+     *     wait_href:?string,
+     *     history_href:?string,
+     *     lookup_href:?string
+     *   }
      * }
      */
     private function buildAccessSummary(
@@ -264,14 +270,40 @@ class MeAttemptsService
             'variant' => $this->nullableText($payload['variant'] ?? null),
             'modules_allowed' => $this->normalizeStringArray($payload['modules_allowed'] ?? null),
             'modules_preview' => $this->normalizeStringArray($payload['modules_preview'] ?? null),
-            'actions' => [
-                'page_href' => $this->supportsPageEntry($accessState, $reportState)
-                    ? $this->resultPagePathForAttempt($attempt)
-                    : null,
-                'pdf_href' => $this->supportsPdfDownload($accessState, $pdfState)
-                    ? "/api/v0.3/attempts/{$attempt->id}/report.pdf"
-                    : null,
-            ],
+            'actions' => $this->buildAccessSummaryActions($attempt, $accessState, $reportState, $pdfState),
+        ];
+    }
+
+    /**
+     * @return array{
+     *   page_href:?string,
+     *   pdf_href:?string,
+     *   wait_href:?string,
+     *   history_href:?string,
+     *   lookup_href:?string
+     * }
+     */
+    private function buildAccessSummaryActions(
+        Attempt $attempt,
+        string $accessState,
+        string $reportState,
+        string $pdfState
+    ): array {
+        $pageHref = $this->supportsPageEntry($accessState, $reportState)
+            ? $this->resultPagePathForAttempt($attempt)
+            : null;
+        $historyHref = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI'
+            ? '/history/mbti'
+            : null;
+
+        return [
+            'page_href' => $pageHref,
+            'pdf_href' => $this->supportsPdfDownload($accessState, $pdfState)
+                ? "/api/v0.3/attempts/{$attempt->id}/report.pdf"
+                : null,
+            'wait_href' => $this->isWaitingState($reportState) ? $pageHref : null,
+            'history_href' => $historyHref,
+            'lookup_href' => '/orders/lookup',
         ];
     }
 
@@ -593,7 +625,7 @@ class MeAttemptsService
 
     private function shouldIncludeAccessSummary(Attempt $attempt): bool
     {
-        return strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'BIG5_OCEAN';
+        return in_array(strtoupper(trim((string) ($attempt->scale_code ?? ''))), ['BIG5_OCEAN', 'MBTI'], true);
     }
 
     private function supportsPageEntry(string $accessState, string $reportState): bool
@@ -606,6 +638,11 @@ class MeAttemptsService
     {
         return $this->normalizeProjectionState($accessState, 'access') === 'ready'
             && $this->normalizeProjectionState($pdfState, 'pdf') === 'ready';
+    }
+
+    private function isWaitingState(string $state): bool
+    {
+        return in_array($this->normalizeProjectionState($state, 'report'), ['pending', 'restoring'], true);
     }
 
     private function resultPagePathForAttempt(Attempt $attempt): string
