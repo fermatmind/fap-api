@@ -41,12 +41,15 @@ final class CommerceRepairPostCommitFailed extends Command
         ];
 
         foreach ($events as $event) {
+            $effectiveOrgId = $this->resolveEffectiveOrgId($event, $orgId);
+
             $summary['results'][] = [
                 'payment_event_id' => (string) ($event->id ?? ''),
                 'provider_event_id' => (string) ($event->provider_event_id ?? ''),
                 'order_no' => (string) ($event->order_no ?? ''),
                 'status' => (string) ($event->status ?? ''),
                 'last_error_code' => (string) ($event->last_error_code ?? ''),
+                'effective_org_id' => $effectiveOrgId,
             ];
 
             if ($dryRun) {
@@ -55,15 +58,15 @@ final class CommerceRepairPostCommitFailed extends Command
 
             DB::table('payment_events')
                 ->where('id', (string) ($event->id ?? ''))
-                ->where('org_id', (int) ($event->org_id ?? $orgId))
                 ->update([
+                    'org_id' => $effectiveOrgId,
                     'handle_status' => 'queued',
                     'updated_at' => now(),
                 ]);
 
             ReprocessPaymentEventJob::dispatch(
                 (string) ($event->id ?? ''),
-                (int) ($event->org_id ?? $orgId),
+                $effectiveOrgId,
                 'scheduled_payment_repair',
                 (string) Str::uuid(),
             );
@@ -100,26 +103,40 @@ final class CommerceRepairPostCommitFailed extends Command
         ];
 
         return DB::table('payment_events')
-            ->where('org_id', $orgId)
-            ->where('updated_at', '<=', $cutoff)
-            ->where('attempts', '<', $maxAttempts)
+            ->leftJoin('orders', 'orders.order_no', '=', 'payment_events.order_no')
+            ->select('payment_events.*')
+            ->selectRaw('coalesce(nullif(payment_events.org_id, 0), orders.org_id, 0) as effective_org_id')
+            ->where(function ($orgScope) use ($orgId): void {
+                $orgScope
+                    ->where('payment_events.org_id', $orgId)
+                    ->orWhere(function ($scopedQuery) use ($orgId): void {
+                        $scopedQuery
+                            ->where(function ($orgQuery): void {
+                                $orgQuery->whereNull('payment_events.org_id')
+                                    ->orWhere('payment_events.org_id', 0);
+                            })
+                            ->where('orders.org_id', $orgId);
+                    });
+            })
+            ->where('payment_events.updated_at', '<=', $cutoff)
+            ->where('payment_events.attempts', '<', $maxAttempts)
             ->where(function ($statusQuery) use ($includeSemanticRejects, $semanticRejectCodes): void {
-                $statusQuery->where('status', 'post_commit_failed');
+                $statusQuery->where('payment_events.status', 'post_commit_failed');
 
                 if (! $includeSemanticRejects) {
                     return;
                 }
 
                 $statusQuery->orWhere(function ($semanticQuery) use ($semanticRejectCodes): void {
-                    $semanticQuery->whereIn('status', ['rejected', 'orphan'])
-                        ->whereIn('last_error_code', $semanticRejectCodes);
+                    $semanticQuery->whereIn('payment_events.status', ['rejected', 'orphan'])
+                        ->whereIn('payment_events.last_error_code', $semanticRejectCodes);
                 });
             })
             ->where(function ($queueQuery): void {
-                $queueQuery->whereNull('handle_status')
-                    ->orWhere('handle_status', '!=', 'queued');
+                $queueQuery->whereNull('payment_events.handle_status')
+                    ->orWhere('payment_events.handle_status', '!=', 'queued');
             })
-            ->orderBy('updated_at')
+            ->orderBy('payment_events.updated_at')
             ->limit($limit)
             ->get()
             ->all();
@@ -149,5 +166,20 @@ final class CommerceRepairPostCommitFailed extends Command
         }
 
         return in_array(strtolower(trim((string) $value)), ['1', 'true', 'yes', 'on'], true);
+    }
+
+    private function resolveEffectiveOrgId(object $event, int $fallbackOrgId): int
+    {
+        $effectiveOrgId = (int) ($event->effective_org_id ?? 0);
+        if ($effectiveOrgId > 0) {
+            return $effectiveOrgId;
+        }
+
+        $eventOrgId = (int) ($event->org_id ?? 0);
+        if ($eventOrgId > 0) {
+            return $eventOrgId;
+        }
+
+        return $fallbackOrgId;
     }
 }
