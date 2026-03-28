@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Pages;
 
+use App\Services\Org\OrganizationService;
 use App\Support\Rbac\PermissionNames;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 
@@ -136,16 +136,41 @@ class SelectOrgPage extends Page
         $nextNumber = (int) DB::table('organizations')->count() + 1;
         $name = 'Organization '.$nextNumber;
 
-        $orgId = (int) DB::table('organizations')->insertGetId([
-            'name' => $name,
-            'owner_user_id' => 0,
-            'status' => 'active',
-            'domain' => null,
-            'timezone' => 'UTC',
-            'locale' => 'en-US',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+        $ownerUserId = is_object($user) && method_exists($user, 'getAuthIdentifier')
+            ? (int) $user->getAuthIdentifier()
+            : 0;
+
+        if ($ownerUserId <= 0) {
+            Notification::make()
+                ->title('Admin session missing')
+                ->danger()
+                ->send();
+
+            return;
+        }
+
+        $orgId = app(OrganizationService::class)->createOrg($name, $ownerUserId);
+
+        $defaults = [];
+        if (\App\Support\SchemaBaseline::hasColumn('organizations', 'status')) {
+            $defaults['status'] = 'active';
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('organizations', 'domain')) {
+            $defaults['domain'] = null;
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('organizations', 'timezone')) {
+            $defaults['timezone'] = 'UTC';
+        }
+        if (\App\Support\SchemaBaseline::hasColumn('organizations', 'locale')) {
+            $defaults['locale'] = 'en-US';
+        }
+        if ($defaults !== []) {
+            DB::table('organizations')
+                ->where('id', $orgId)
+                ->update($defaults);
+        }
 
         $this->refreshOrganizations();
 
@@ -156,9 +181,9 @@ class SelectOrgPage extends Page
             ->send();
     }
 
-    public function goToImport(): RedirectResponse
+    public function goToImport(): void
     {
-        return redirect()->route('filament.ops.pages.organizations-import');
+        $this->redirectRoute('filament.ops.pages.organizations-import', navigate: true);
     }
 
     public function whyVisibleHint(): string
@@ -224,15 +249,15 @@ class SelectOrgPage extends Page
 
     private function refreshCurrentOrgSummary(): void
     {
-        $rawOrgId = (string) session('ops_org_id', '');
-        if ($rawOrgId === '' || preg_match('/^\d+$/', $rawOrgId) !== 1) {
+        $orgId = $this->resolveSelectedOrgId();
+        if ($orgId <= 0) {
             $this->currentOrgId = 0;
             $this->currentOrgName = 'No Org Selected';
 
             return;
         }
 
-        $this->currentOrgId = (int) $rawOrgId;
+        $this->currentOrgId = $orgId;
 
         if (! \App\Support\SchemaBaseline::hasTable('organizations')) {
             $this->currentOrgName = 'No Org Selected';
@@ -254,5 +279,25 @@ class SelectOrgPage extends Page
         }
 
         $this->currentOrgName = trim((string) $row->name);
+    }
+
+    private function resolveSelectedOrgId(): int
+    {
+        $rawSessionOrgId = (string) session('ops_org_id', '');
+        if ($rawSessionOrgId !== '' && preg_match('/^\d+$/', $rawSessionOrgId) === 1) {
+            return max(0, (int) $rawSessionOrgId);
+        }
+
+        $rawCookieOrgId = (string) request()->cookie('ops_org_id', '');
+        if ($rawCookieOrgId !== '' && preg_match('/^\d+$/', $rawCookieOrgId) === 1) {
+            $orgId = max(0, (int) $rawCookieOrgId);
+            if ($orgId > 0) {
+                session(['ops_org_id' => $orgId]);
+            }
+
+            return $orgId;
+        }
+
+        return 0;
     }
 }
