@@ -1198,7 +1198,7 @@ final class OrderLinkageSupport
 
     private function benefitField(string $column): QueryBuilder
     {
-        return DB::table('benefit_grants')
+        $query = DB::table('benefit_grants')
             ->select($column)
             ->where(function (QueryBuilder $builder): void {
                 $builder->whereColumn('benefit_grants.order_no', 'orders.order_no')
@@ -1207,11 +1207,15 @@ final class OrderLinkageSupport
             ->orderByRaw("case when lower(coalesce(status, '')) = 'active' then 0 else 1 end")
             ->orderByRaw('coalesce(updated_at, created_at) desc')
             ->limit(1);
+
+        $this->applyExpectedBenefitFilter($query);
+
+        return $query;
     }
 
     private function activeBenefitExistsField(): QueryBuilder
     {
-        return DB::table('benefit_grants')
+        $query = DB::table('benefit_grants')
             ->selectRaw('1')
             ->where('benefit_grants.status', 'active')
             ->where(function (QueryBuilder $builder): void {
@@ -1219,6 +1223,43 @@ final class OrderLinkageSupport
                     ->orWhereColumn('benefit_grants.attempt_id', 'orders.target_attempt_id');
             })
             ->limit(1);
+
+        $this->applyExpectedBenefitFilter($query);
+
+        return $query;
+    }
+
+    private function expectedBenefitCodeField(): ?QueryBuilder
+    {
+        if (! SchemaBaseline::hasTable('skus')) {
+            return null;
+        }
+
+        return DB::table('skus')
+            ->selectRaw('upper(coalesce(benefit_code, \'\'))')
+            ->where('is_active', true)
+            ->whereRaw("upper(coalesce(skus.sku, '')) = upper(coalesce(nullif(orders.item_sku, ''), orders.sku, ''))")
+            ->limit(1);
+    }
+
+    private function applyExpectedBenefitFilter(QueryBuilder $query): void
+    {
+        $expectedA = $this->expectedBenefitCodeField();
+        $expectedB = $this->expectedBenefitCodeField();
+
+        if ($expectedA === null || $expectedB === null) {
+            return;
+        }
+
+        $query->where(function (QueryBuilder $builder) use ($expectedA, $expectedB): void {
+            $builder->whereRaw(
+                'coalesce(('.$expectedA->toSql()."), '') = ''",
+                $expectedA->getBindings()
+            )->orWhereRaw(
+                "upper(coalesce(benefit_grants.benefit_code, '')) = (".$expectedB->toSql().')',
+                $expectedB->getBindings()
+            );
+        });
     }
 
     private function snapshotField(string $column): QueryBuilder

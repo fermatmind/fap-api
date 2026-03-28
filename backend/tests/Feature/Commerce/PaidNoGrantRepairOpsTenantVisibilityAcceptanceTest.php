@@ -146,6 +146,13 @@ final class PaidNoGrantRepairOpsTenantVisibilityAcceptanceTest extends TestCase
         ]);
         $this->assertSame(0, $exitCode);
 
+        $secondExitCode = Artisan::call('commerce:repair-paid-orders', [
+            '--org_id' => $tenant['org_id'],
+            '--older_than_minutes' => 0,
+            '--limit' => 20,
+        ]);
+        $this->assertSame(0, $secondExitCode);
+
         $repairedOrder = DB::table('orders')->where('order_no', $orderNo)->first();
         $this->assertNotNull($repairedOrder);
         $this->assertSame('paid', (string) ($repairedOrder->payment_state ?? ''));
@@ -166,6 +173,15 @@ final class PaidNoGrantRepairOpsTenantVisibilityAcceptanceTest extends TestCase
             'benefit_code' => 'MBTI_REPORT_FULL',
             'status' => 'active',
         ]);
+        $this->assertSame(
+            1,
+            DB::table('benefit_grants')
+                ->where('org_id', $tenant['org_id'])
+                ->where('order_no', $orderNo)
+                ->where('benefit_code', 'MBTI_REPORT_FULL')
+                ->where('status', 'active')
+                ->count()
+        );
 
         $lookup = $this->postJson('/api/v0.3/orders/lookup', [
             'order_no' => $orderNo,
@@ -244,6 +260,124 @@ final class PaidNoGrantRepairOpsTenantVisibilityAcceptanceTest extends TestCase
         $this->assertContains('latest_benefit_status', $componentNames);
         $this->assertContains('unlock_status', $componentNames);
         $this->assertContains('status', $componentNames);
+    }
+
+    public function test_paid_no_grant_visibility_ignores_unrelated_active_grant_until_correct_benefit_is_repaired(): void
+    {
+        $this->seedCommerceCatalog();
+
+        $tenant = $this->createTenantOrgUserToken();
+        $this->grantScaleForOrg($tenant['org_id'], 'MBTI');
+
+        $attemptId = $this->createMbtiAttemptWithResult(
+            orgId: $tenant['org_id'],
+            userId: (string) $tenant['user_id'],
+            anonId: $tenant['anon_id'],
+        );
+
+        config([
+            'payments.providers.billing.enabled' => true,
+        ]);
+
+        $checkout = $this->withHeaders([
+            'Authorization' => 'Bearer '.$tenant['token'],
+            'X-Org-Id' => (string) $tenant['org_id'],
+        ])->postJson('/api/v0.3/orders/checkout', [
+            'attempt_id' => $attemptId,
+            'sku' => 'MBTI_REPORT_FULL',
+            'provider' => 'billing',
+            'email' => $tenant['email'],
+        ]);
+
+        $checkout->assertOk();
+
+        $orderNo = (string) $checkout->json('order_no');
+        $this->assertNotSame('', $orderNo);
+
+        $this->promoteOrderToPaidNoGrant($tenant['org_id'], $orderNo);
+        $this->insertActiveGrant(
+            orgId: $tenant['org_id'],
+            attemptId: $attemptId,
+            orderNo: $orderNo,
+            benefitCode: 'OTHER_BENEFIT',
+            benefitRef: 'wrong_'.$orderNo,
+        );
+
+        $opsRecord = app(OrderLinkageSupport::class)
+            ->query()
+            ->where('orders.order_no', $orderNo)
+            ->first();
+
+        $this->assertNotNull($opsRecord);
+
+        $opsSupport = app(OrderLinkageSupport::class);
+        $this->assertSame('paid', $opsSupport->paymentStatus($opsRecord)['label']);
+        $this->assertSame('paid_no_grant', $opsSupport->unlockStatus($opsRecord)['label']);
+        $this->assertSame('missing', $opsSupport->webhookStatus($opsRecord)['label']);
+
+        $this->bootstrapTenantContext($tenant['org_id'], $tenant['user_id']);
+        $this->actingAs(TenantUser::query()->findOrFail($tenant['user_id']), (string) config('tenant.guard', 'tenant'));
+        request()->attributes->set('org_id', $tenant['org_id']);
+        request()->attributes->set('fm_org_id', $tenant['org_id']);
+        request()->attributes->set('org_context_resolved', true);
+        request()->attributes->set('org_context_kind', \App\Support\OrgContext::KIND_TENANT);
+
+        $tenantRecord = TenantOrderResource::getEloquentQuery()
+            ->where('order_no', $orderNo)
+            ->first();
+
+        $this->assertNotNull($tenantRecord);
+
+        $tenantPayment = $this->tenantResourceMethod('paymentStatus');
+        $tenantGrant = $this->tenantResourceMethod('grantStatus');
+        $tenantUnlock = $this->tenantResourceMethod('unlockStatus');
+
+        $this->assertSame('paid', $tenantPayment->invoke(null, $tenantRecord)['label']);
+        $this->assertSame('missing', $tenantGrant->invoke(null, $tenantRecord)['label']);
+        $this->assertSame('paid_no_grant', $tenantUnlock->invoke(null, $tenantRecord)['label']);
+
+        $exitCode = Artisan::call('commerce:repair-paid-orders', [
+            '--org_id' => $tenant['org_id'],
+            '--older_than_minutes' => 0,
+            '--limit' => 20,
+        ]);
+        $this->assertSame(0, $exitCode);
+
+        $this->assertSame(
+            2,
+            DB::table('benefit_grants')
+                ->where('org_id', $tenant['org_id'])
+                ->where('order_no', $orderNo)
+                ->where('status', 'active')
+                ->count()
+        );
+        $this->assertSame(
+            1,
+            DB::table('benefit_grants')
+                ->where('org_id', $tenant['org_id'])
+                ->where('order_no', $orderNo)
+                ->where('benefit_code', 'MBTI_REPORT_FULL')
+                ->where('status', 'active')
+                ->count()
+        );
+
+        $repairedOpsRecord = app(OrderLinkageSupport::class)
+            ->query()
+            ->where('orders.order_no', $orderNo)
+            ->first();
+
+        $this->assertNotNull($repairedOpsRecord);
+        $this->assertSame('paid', $opsSupport->paymentStatus($repairedOpsRecord)['label']);
+        $this->assertSame('unlocked', $opsSupport->unlockStatus($repairedOpsRecord)['label']);
+
+        $repairedTenantRecord = TenantOrderResource::getEloquentQuery()
+            ->where('order_no', $orderNo)
+            ->first();
+
+        $this->assertNotNull($repairedTenantRecord);
+        $this->assertSame('paid', $tenantPayment->invoke(null, $repairedTenantRecord)['label']);
+        $this->assertSame('active', $tenantGrant->invoke(null, $repairedTenantRecord)['label']);
+        $this->assertSame('unlocked', $tenantUnlock->invoke(null, $repairedTenantRecord)['label']);
     }
 
     private function seedCommerceCatalog(): void
@@ -396,6 +530,33 @@ final class PaidNoGrantRepairOpsTenantVisibilityAcceptanceTest extends TestCase
                 'finalized_at' => $timestamp,
                 'updated_at' => $timestamp,
             ]);
+    }
+
+    private function insertActiveGrant(
+        int $orgId,
+        string $attemptId,
+        string $orderNo,
+        string $benefitCode,
+        string $benefitRef
+    ): void {
+        DB::table('benefit_grants')->insert([
+            'id' => (string) Str::uuid(),
+            'org_id' => $orgId,
+            'user_id' => null,
+            'benefit_code' => $benefitCode,
+            'scope' => 'attempt',
+            'attempt_id' => $attemptId,
+            'status' => 'active',
+            'benefit_type' => 'report_unlock',
+            'benefit_ref' => $benefitRef,
+            'order_no' => $orderNo,
+            'source_order_id' => (string) Str::uuid(),
+            'source_event_id' => null,
+            'expires_at' => null,
+            'meta_json' => null,
+            'created_at' => now()->subMinutes(9),
+            'updated_at' => now()->subMinutes(9),
+        ]);
     }
 
     private function tenantResourceMethod(string $name): ReflectionMethod

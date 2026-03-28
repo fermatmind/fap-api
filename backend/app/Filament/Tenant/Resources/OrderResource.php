@@ -7,10 +7,10 @@ namespace App\Filament\Tenant\Resources;
 use App\Filament\Shared\BaseTenantResource;
 use App\Filament\Tenant\Resources\OrderResource\Pages;
 use App\Models\Order;
+use Filament\Forms\Form;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
-use Filament\Forms\Form;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -124,21 +124,29 @@ class OrderResource extends BaseTenantResource
 
     private static function latestBenefitStatusField(): QueryBuilder
     {
-        return DB::table('benefit_grants')
+        $query = DB::table('benefit_grants')
             ->select('status')
             ->whereColumn('benefit_grants.order_no', 'orders.order_no')
             ->orderByRaw("case when lower(coalesce(status, '')) = 'active' then 0 else 1 end")
             ->orderByRaw('coalesce(updated_at, created_at) desc')
             ->limit(1);
+
+        self::applyExpectedBenefitFilter($query);
+
+        return $query;
     }
 
     private static function activeBenefitExistsField(): QueryBuilder
     {
-        return DB::table('benefit_grants')
+        $query = DB::table('benefit_grants')
             ->selectRaw('1')
             ->whereColumn('benefit_grants.order_no', 'orders.order_no')
             ->where('benefit_grants.status', 'active')
             ->limit(1);
+
+        self::applyExpectedBenefitFilter($query);
+
+        return $query;
     }
 
     /**
@@ -206,6 +214,39 @@ class OrderResource extends BaseTenantResource
             Order::PAYMENT_STATE_EXPIRED,
             Order::PAYMENT_STATE_REFUNDED,
         ], true) ? $state : '';
+    }
+
+    private static function expectedBenefitCodeField(): ?QueryBuilder
+    {
+        if (! Schema::hasTable('skus')) {
+            return null;
+        }
+
+        return DB::table('skus')
+            ->selectRaw('upper(coalesce(benefit_code, \'\'))')
+            ->where('is_active', true)
+            ->whereRaw("upper(coalesce(skus.sku, '')) = upper(coalesce(nullif(orders.item_sku, ''), orders.sku, ''))")
+            ->limit(1);
+    }
+
+    private static function applyExpectedBenefitFilter(QueryBuilder $query): void
+    {
+        $expectedA = self::expectedBenefitCodeField();
+        $expectedB = self::expectedBenefitCodeField();
+
+        if ($expectedA === null || $expectedB === null) {
+            return;
+        }
+
+        $query->where(function (QueryBuilder $builder) use ($expectedA, $expectedB): void {
+            $builder->whereRaw(
+                'coalesce(('.$expectedA->toSql()."), '') = ''",
+                $expectedA->getBindings()
+            )->orWhereRaw(
+                "upper(coalesce(benefit_grants.benefit_code, '')) = (".$expectedB->toSql().')',
+                $expectedB->getBindings()
+            );
+        });
     }
 
     private static function statusColor(string $status): string
