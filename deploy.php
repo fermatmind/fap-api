@@ -302,14 +302,19 @@ task('healthcheck:ops-entry-contract', function () {
         return run("curl -sSI --max-redirs 0 --resolve {$host}:443:127.0.0.1 {$url}");
     };
 
-    $assertRedirect = static function (string $url, string $expectedPattern, string $label) use ($fetchHeaders): void {
+    $assertRedirect = static function (string $url, string $expectedRelative, string $expectedAbsolute, string $label) use ($fetchHeaders): void {
         $headers = $fetchHeaders($url);
 
         if (! preg_match('/^HTTP\\/[0-9.]+ 30[12]\\b/m', $headers)) {
             throw new \RuntimeException("{$label} did not return a 301/302 redirect");
         }
 
-        if (! preg_match($expectedPattern, $headers)) {
+        if (! preg_match('/^Location:\\s*(.+)\\r?$/mi', $headers, $matches)) {
+            throw new \RuntimeException("{$label} redirect response did not include a Location header");
+        }
+
+        $location = trim((string) ($matches[1] ?? ''));
+        if ($location !== $expectedRelative && $location !== $expectedAbsolute) {
             throw new \RuntimeException("{$label} redirect target did not match expected location");
         }
     };
@@ -322,21 +327,22 @@ task('healthcheck:ops-entry-contract', function () {
         }
     };
 
-    $quotedHost = preg_quote($host, '/');
-
     $assertRedirect(
         "https://{$host}/",
-        '/^Location:\\s*(?:\\/ops|https:\\/\\/' . $quotedHost . '\\/ops)\\r?$/mi',
+        '/ops',
+        "https://{$host}/ops",
         'ops host root'
     );
     $assertRedirect(
         "https://{$host}/admin",
-        '/^Location:\\s*(?:\\/ops|https:\\/\\/' . $quotedHost . '\\/ops)\\r?$/mi',
+        '/ops',
+        "https://{$host}/ops",
         'ops host admin alias'
     );
     $assertRedirect(
         "https://{$host}/ops",
-        '/^Location:\\s*(?:\\/ops\\/login|https:\\/\\/' . $quotedHost . '\\/ops\\/login)\\r?$/mi',
+        '/ops/login',
+        "https://{$host}/ops/login",
         'ops panel root'
     );
     $assertStatus(

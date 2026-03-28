@@ -126,16 +126,16 @@ curl -I https://ops.fermatmind.com/js/filament/filament/app.js
 # 7.2) 入口契约 smoke
 # production: 根入口必须跳到 /ops
 curl -sSI --max-redirs 0 https://ops.fermatmind.com/ | rg '^HTTP/[0-9.]+ 30[12] '
-curl -sSI --max-redirs 0 https://ops.fermatmind.com/ | rg '^Location: (/ops|https://ops\.fermatmind\.com/ops)\r?$'
+curl -sSI --max-redirs 0 https://ops.fermatmind.com/ | rg -i '^Location: (/ops|https://ops\.fermatmind\.com/ops)\r?$'
 curl -sSI --max-redirs 0 https://ops.fermatmind.com/admin | rg '^HTTP/[0-9.]+ 30[12] '
-curl -sSI --max-redirs 0 https://ops.fermatmind.com/admin | rg '^Location: (/ops|https://ops\.fermatmind\.com/ops)\r?$'
+curl -sSI --max-redirs 0 https://ops.fermatmind.com/admin | rg -i '^Location: (/ops|https://ops\.fermatmind\.com/ops)\r?$'
 curl -sSI --max-redirs 0 https://ops.fermatmind.com/ops | rg '^HTTP/[0-9.]+ 30[12] '
-curl -sSI --max-redirs 0 https://ops.fermatmind.com/ops | rg '^Location: (/ops/login|https://ops\.fermatmind\.com/ops/login)\r?$'
+curl -sSI --max-redirs 0 https://ops.fermatmind.com/ops | rg -i '^Location: (/ops/login|https://ops\.fermatmind\.com/ops/login)\r?$'
 curl -sSI https://ops.fermatmind.com/ops/login | rg '^HTTP/[0-9.]+ 200 '
 
 # staging: 不强制要求 / -> /ops，只验证 /ops 与 /ops/login
 curl -sSI --max-redirs 0 https://staging.fermatmind.com/ops | rg '^HTTP/[0-9.]+ 30[12] '
-curl -sSI --max-redirs 0 https://staging.fermatmind.com/ops | rg '^Location: (/ops/login|https://staging\.fermatmind\.com/ops/login)\r?$'
+curl -sSI --max-redirs 0 https://staging.fermatmind.com/ops | rg -i '^Location: (/ops/login|https://staging\.fermatmind\.com/ops/login)\r?$'
 curl -sSI https://staging.fermatmind.com/ops/login | rg '^HTTP/[0-9.]+ 200 '
 
 # 8) 基线校验
