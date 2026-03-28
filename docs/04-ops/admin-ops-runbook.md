@@ -1,5 +1,12 @@
 # Admin Ops Runbook
 
+## Bootstrap
+
+- 首个 Ops 管理员与首个 org 的正式 bootstrap/runbook 请先看：`docs/04-ops/ops-bootstrap.md`
+- 当前正确登录入口是 `/ops/login`
+- 不要把 `App\Models\User` 当成 Ops 登录账号
+- 不要把 `/ops/organizations-import` 当成已自动化完成的 org import 流程
+
 ## 健康检查（Healthz Snapshot）
 1) API：`GET /api/v0.3/admin/healthz/snapshot`
 2) 预期：返回最新 `ops_healthz_snapshots` 记录，`ok=true` 为绿色
@@ -21,5 +28,4 @@
 ## 常见故障
 - Token 不匹配：检查 `FAP_ADMIN_TOKEN` 与请求 Header（`X-FAP-Admin-Token`）
 - Admin 用户被禁用：在 Admin Users 中启用或重新 bootstrap
-- 会话失效：重新登录 /admin，或改用 token 调用 API
-
+- 会话失效：重新登录 `/ops/login`，或改用 token 调用 API
