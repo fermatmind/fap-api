@@ -123,6 +123,21 @@ curl -I https://ops.fermatmind.com/css/filament/support/support.css
 curl -I https://ops.fermatmind.com/js/filament/filament/app.js
 ! curl -s https://ops.fermatmind.com/css/filament/ops/theme.css | rg '^@tailwind|@config|vendor/filament/filament/resources/css/base.css'
 
+# 7.2) 入口契约 smoke
+# production: 根入口必须跳到 /ops
+curl -sSI --max-redirs 0 https://ops.fermatmind.com/ | rg '^HTTP/[0-9.]+ 30[12] '
+curl -sSI --max-redirs 0 https://ops.fermatmind.com/ | rg '^Location: (/ops|https://ops\.fermatmind\.com/ops)\r?$'
+curl -sSI --max-redirs 0 https://ops.fermatmind.com/admin | rg '^HTTP/[0-9.]+ 30[12] '
+curl -sSI --max-redirs 0 https://ops.fermatmind.com/admin | rg '^Location: (/ops|https://ops\.fermatmind\.com/ops)\r?$'
+curl -sSI --max-redirs 0 https://ops.fermatmind.com/ops | rg '^HTTP/[0-9.]+ 30[12] '
+curl -sSI --max-redirs 0 https://ops.fermatmind.com/ops | rg '^Location: (/ops/login|https://ops\.fermatmind\.com/ops/login)\r?$'
+curl -sSI https://ops.fermatmind.com/ops/login | rg '^HTTP/[0-9.]+ 200 '
+
+# staging: 不强制要求 / -> /ops，只验证 /ops 与 /ops/login
+curl -sSI --max-redirs 0 https://staging.fermatmind.com/ops | rg '^HTTP/[0-9.]+ 30[12] '
+curl -sSI --max-redirs 0 https://staging.fermatmind.com/ops | rg '^Location: (/ops/login|https://staging\.fermatmind\.com/ops/login)\r?$'
+curl -sSI https://staging.fermatmind.com/ops/login | rg '^HTTP/[0-9.]+ 200 '
+
 # 8) 基线校验
 php artisan fap:schema:verify
 ```
@@ -137,10 +152,12 @@ php artisan fap:schema:verify
 - Deployer 还会显式执行 `php artisan filament:assets`，确保 Filament 核心 CSS/JS 被复制到当前 release 的 `backend/public`。
 - 发布链会在切换 symlink 前校验 `backend/public/css/filament/ops/theme.css` 已生成、非空且不包含 raw Tailwind source 签名；若仍含 `@tailwind`、`@config` 或原始 vendor `@import`，部署会直接失败。
 - 发布链也会校验关键 Filament 资源存在且非空，包括 `backend/public/css/filament/filament/app.css`、`backend/public/css/filament/forms/forms.css`、`backend/public/css/filament/support/support.css`、`backend/public/js/filament/filament/app.js` 等；缺失这些资源会导致 `/ops` 的样式缺失、脚本 404 或 Alpine 初始化报错。
+- production Ops host 的根入口契约是 `https://ops.fermatmind.com/ -> /ops`；这条契约由仓库路由显式表达，并在 deploy/workflow/manual smoke 中验收。
+- staging 不共享这条根入口契约；`https://staging.fermatmind.com/` 仍按前台站点处理，entry smoke 只覆盖 `/ops` 与 `/ops/login`。
 - 这一步是 release 产物构建，不是 shared 配置，也不是将编译产物提交进 git。
 - 若目标主机缺少 `node` / `npm`，或版本低于当前仓库基线（Node 20.19+ / NPM 10+），部署会 fail fast。
 - 禁止继续使用 `cp resources/css/filament/ops/theme.css public/css/filament/ops/theme.css` 作为正式发布方案；这会把源码误当成线上产物。
-- GitHub Actions 在 deploy 后会按 `TARGET` 对应域名执行同一套 Ops smoke；若线上仍在服务 raw source theme，或关键 core assets 404，workflow 会直接失败。
+- GitHub Actions 在 deploy 后会按 `TARGET` 对应域名执行对应的 entry smoke 与 asset smoke；production 额外断言 `/ -> /ops` 与 `/admin -> /ops`，staging 不共享这条根入口契约。
 
 ## 6. Supervisor 队列守护配置（无 Horizon）
 当前基线：使用 Supervisor 常驻 `queue:work`。至少部署以下两个 program。

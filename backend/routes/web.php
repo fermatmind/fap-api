@@ -4,6 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SitemapController;
 
 Route::get('/', function () {
+    $requestHost = strtolower((string) request()->getHost());
+    $opsAllowedHost = strtolower(trim((string) config('ops.allowed_host', '')));
+
+    if (config('admin.panel_enabled') && $opsAllowedHost !== '' && $requestHost === $opsAllowedHost) {
+        return redirect('/ops');
+    }
+
     return view('welcome');
 });
 

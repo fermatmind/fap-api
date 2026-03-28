@@ -75,6 +75,7 @@ host('production')
     ->setPort((int)(getenv('DEPLOY_PORT_PROD') ?: 22))
     ->set('deploy_path', getenv('DEPLOY_PATH_PROD') ?: '/var/www/fap-api')
     ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_PROD') ?: 'fermatmind.com')
+    ->set('ops_entry_host', getenv('OPS_ENTRY_HOST_PROD') ?: 'ops.fermatmind.com')
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api')
     ->set('php_fpm_service', getenv('PHP_FPM_SERVICE_PROD') ?: 'php8.4-fpm');
 
@@ -84,6 +85,7 @@ host('staging')
     ->setPort((int)(getenv('DEPLOY_PORT_STG') ?: 22))
     ->set('deploy_path', getenv('DEPLOY_PATH_STG') ?: '/var/www/fap-api-staging')
     ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_STG') ?: 'staging.fermatmind.com')
+    ->set('ops_entry_host', getenv('OPS_ENTRY_HOST_STG') ?: '')
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api-staging')
     ->set('php_fpm_service', getenv('PHP_FPM_SERVICE_STG') ?: 'php8.4-fpm');
 
@@ -288,6 +290,62 @@ task('healthcheck:auth-guest-contract', function () {
     run($cmd);
 });
 
+task('healthcheck:ops-entry-contract', function () {
+    $host = trim((string) get('ops_entry_host', ''));
+
+    if ($host === '') {
+        writeln('<comment>Skip ops entry contract smoke (ops_entry_host not configured)</comment>');
+        return;
+    }
+
+    $fetchHeaders = static function (string $url) use ($host): string {
+        return run("curl -sSI --max-redirs 0 --resolve {$host}:443:127.0.0.1 {$url}");
+    };
+
+    $assertRedirect = static function (string $url, string $expectedPattern, string $label) use ($fetchHeaders): void {
+        $headers = $fetchHeaders($url);
+
+        if (! preg_match('/^HTTP\\/[0-9.]+ 30[12]\\b/m', $headers)) {
+            throw new \RuntimeException("{$label} did not return a 301/302 redirect");
+        }
+
+        if (! preg_match($expectedPattern, $headers)) {
+            throw new \RuntimeException("{$label} redirect target did not match expected location");
+        }
+    };
+
+    $assertStatus = static function (string $url, int $status, string $label) use ($fetchHeaders): void {
+        $headers = $fetchHeaders($url);
+
+        if (! preg_match('/^HTTP\\/[0-9.]+ ' . $status . '\\b/m', $headers)) {
+            throw new \RuntimeException("{$label} did not return HTTP {$status}");
+        }
+    };
+
+    $quotedHost = preg_quote($host, '/');
+
+    $assertRedirect(
+        "https://{$host}/",
+        '/^Location:\\s*(?:\\/ops|https:\\/\\/' . $quotedHost . '\\/ops)\\r?$/mi',
+        'ops host root'
+    );
+    $assertRedirect(
+        "https://{$host}/admin",
+        '/^Location:\\s*(?:\\/ops|https:\\/\\/' . $quotedHost . '\\/ops)\\r?$/mi',
+        'ops host admin alias'
+    );
+    $assertRedirect(
+        "https://{$host}/ops",
+        '/^Location:\\s*(?:\\/ops\\/login|https:\\/\\/' . $quotedHost . '\\/ops\\/login)\\r?$/mi',
+        'ops panel root'
+    );
+    $assertStatus(
+        "https://{$host}/ops/login",
+        200,
+        'ops login page'
+    );
+});
+
 /**
  * ======================================================
  * Seed shared content_packages
@@ -326,5 +384,6 @@ after('deploy:symlink', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');
 after('deploy:symlink', 'healthcheck:public');
 after('deploy:symlink', 'healthcheck:auth-guest-contract');
+after('deploy:symlink', 'healthcheck:ops-entry-contract');
 
 after('deploy:failed', 'deploy:unlock');
