@@ -98,14 +98,26 @@ class ResolveOrgContext
 
     private function resolveOrgId(Request $request): int
     {
-        $candidates = [
-            $request->header('X-FM-Org-Id'),
-            $request->header('X-Org-Id'),
-            $request->query('org_id'),
-            $request->route('org_id'),
-            $request->attributes->get('fm_org_id'),
-            $request->attributes->get('org_id'),
-        ];
+        $candidates = $this->isOpsPanelRequest($request)
+            ? [
+                $request->attributes->get('ops_org_id'),
+                $request->attributes->get('fm_org_id'),
+                $request->attributes->get('org_id'),
+                $request->hasSession() ? $request->session()->get('ops_org_id') : null,
+                $request->cookie('ops_org_id'),
+                $request->header('X-FM-Org-Id'),
+                $request->header('X-Org-Id'),
+                $request->query('org_id'),
+                $request->route('org_id'),
+            ]
+            : [
+                $request->header('X-FM-Org-Id'),
+                $request->header('X-Org-Id'),
+                $request->query('org_id'),
+                $request->route('org_id'),
+                $request->attributes->get('fm_org_id'),
+                $request->attributes->get('org_id'),
+            ];
         $tokenOrgId = $this->resolveOrgIdFromToken($request);
         if ($tokenOrgId !== null) {
             $candidates[] = $tokenOrgId;
@@ -137,6 +149,16 @@ class ResolveOrgContext
         }
 
         return count($resolved) === 1 ? $resolved[0] : -1;
+    }
+
+    private function isOpsPanelRequest(Request $request): bool
+    {
+        $routeName = (string) optional($request->route())->getName();
+        if ($routeName !== '' && str_starts_with($routeName, 'filament.ops.')) {
+            return true;
+        }
+
+        return str_starts_with('/'.ltrim($request->path(), '/'), '/ops');
     }
 
     private function normalizeOrgId(mixed $candidate): ?int

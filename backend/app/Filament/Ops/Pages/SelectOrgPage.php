@@ -95,11 +95,12 @@ class SelectOrgPage extends Page
         }
 
         session(['ops_org_id' => $orgId]);
+        Cookie::queue(Cookie::forget('ops_org_id', '/ops'));
         Cookie::queue(cookie(
             name: 'ops_org_id',
             value: (string) $orgId,
             minutes: 60 * 24 * 30,
-            path: '/ops',
+            path: '/',
             domain: null,
             secure: (bool) config('session.secure'),
             httpOnly: true,

@@ -7,11 +7,14 @@ namespace Tests\Feature\Ops;
 use App\Filament\Ops\Pages\OrganizationsImportPage;
 use App\Filament\Ops\Pages\SelectOrgPage;
 use App\Filament\Ops\Resources\OrganizationResource\Pages\CreateOrganization;
+use App\Livewire\Filament\Ops\Livewire\CurrentOrgSwitcher;
 use App\Models\Organization;
+use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Livewire\Livewire;
 use Tests\Feature\Ops\Support\InteractsWithCommerceOpsWorkbench;
@@ -141,6 +144,99 @@ final class SelectOrgFlowTest extends TestCase
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops')
             ->assertOk();
+    }
+
+    public function test_selected_org_is_restored_as_same_org_context_across_ops_and_cms_pages(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_OWNER,
+            PermissionNames::ADMIN_OPS_READ,
+            PermissionNames::ADMIN_MENU_COMMERCE,
+            PermissionNames::ADMIN_MENU_SUPPORT,
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+            PermissionNames::ADMIN_CONTENT_PUBLISH,
+        ]);
+        $selectedOrg = $this->createOrganization('Default Org');
+
+        $baseSession = [
+            'ops_admin_totp_verified_user_id' => (int) $admin->id,
+            'ops_org_id' => (int) $selectedOrg->id,
+        ];
+
+        $paths = [
+            '/ops',
+            '/ops/content-overview',
+            '/ops/content-search',
+            '/ops/content-metrics',
+            '/ops/content-release',
+            '/ops/seo-operations',
+            '/ops/post-release-observability',
+        ];
+
+        foreach ($paths as $path) {
+            $this->withSession($baseSession)
+                ->withCookie('ops_org_id', (string) $selectedOrg->id)
+                ->actingAs($admin, (string) config('admin.guard', 'admin'))
+                ->get($path)
+                ->assertOk();
+
+            $this->assertSame((int) $selectedOrg->id, (int) app(OrgContext::class)->orgId(), $path);
+        }
+
+        app(OrgContext::class)->set((int) $selectedOrg->id, (int) $admin->id, 'admin', null, OrgContext::KIND_TENANT);
+        app()->instance(OrgContext::class, app(OrgContext::class));
+
+        $this->withSession($baseSession)
+            ->withCookie('ops_org_id', (string) $selectedOrg->id)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        Livewire::test(CurrentOrgSwitcher::class)
+            ->assertOk()
+            ->assertSet('orgId', (int) $selectedOrg->id)
+            ->assertSee($selectedOrg->name);
+    }
+
+    public function test_cookie_only_ops_org_id_restores_session_and_org_context_before_org_guard_runs(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_OWNER,
+            PermissionNames::ADMIN_CONTENT_READ,
+        ]);
+        $selectedOrg = $this->createOrganization('Cookie Restore Org');
+
+        $this->withSession([
+            'ops_admin_totp_verified_user_id' => (int) $admin->id,
+        ])->withCookie('ops_org_id', (string) $selectedOrg->id)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/content-overview')
+            ->assertOk()
+            ->assertSessionHas('ops_org_id', (int) $selectedOrg->id);
+
+        $this->assertSame((int) $selectedOrg->id, (int) app(OrgContext::class)->orgId());
+    }
+
+    public function test_select_org_action_normalizes_ops_org_cookie_for_follow_up_requests(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_OWNER,
+            PermissionNames::ADMIN_CONTENT_READ,
+        ]);
+        $selectedOrg = $this->createOrganization('Normalized Cookie Org');
+
+        session(['ops_admin_totp_verified_user_id' => (int) $admin->id]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        Livewire::test(SelectOrgPage::class)
+            ->call('selectOrg', (int) $selectedOrg->id)
+            ->assertRedirect('/ops');
+
+        $queuedCookie = Cookie::queued('ops_org_id', null, '/');
+
+        $this->assertNotNull($queuedCookie);
+        $this->assertSame('/', $queuedCookie?->getPath());
+        $this->assertSame((string) $selectedOrg->id, $queuedCookie?->getValue());
     }
 
     public function test_organizations_import_page_is_reachable_and_explains_runbook_status(): void

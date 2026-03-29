@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire\Filament\Ops\Livewire;
 
+use App\Support\OrgContext;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
@@ -59,25 +60,9 @@ final class CurrentOrgSwitcher extends Component
 
     private function resolveOrgId(): ?int
     {
-        $attr = request()->attributes->get('org_id');
-        if (is_numeric($attr)) {
-            $n = (int) $attr;
-
-            return $n > 0 ? $n : null;
-        }
-
-        $sess = session('ops_org_id');
-        if (is_numeric($sess)) {
-            $n = (int) $sess;
-
-            return $n > 0 ? $n : null;
-        }
-
-        $cookie = request()->cookie('ops_org_id');
-        if (is_numeric($cookie)) {
-            $n = (int) $cookie;
-
-            return $n > 0 ? $n : null;
+        $orgId = (int) app(OrgContext::class)->orgId();
+        if ($orgId > 0) {
+            return $orgId;
         }
 
         return null;
