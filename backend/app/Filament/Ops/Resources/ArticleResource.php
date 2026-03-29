@@ -6,16 +6,18 @@ namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\ArticleResource\Pages;
 use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
+use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\Article;
 use App\Support\OrgContext;
-use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Components\BelongsToManyMultiSelect;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Builder;
 
 class ArticleResource extends Resource
@@ -35,12 +37,12 @@ class ArticleResource extends Resource
 
     public static function canCreate(): bool
     {
-        return self::canPublish();
+        return self::canWrite();
     }
 
     public static function canEdit($record): bool
     {
-        return self::canPublish();
+        return self::canWrite();
     }
 
     public static function canDelete($record): bool
@@ -50,7 +52,7 @@ class ArticleResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.content');
+        return __('ops.group.content_workspace');
     }
 
     public static function getNavigationLabel(): string
@@ -285,6 +287,12 @@ class ArticleResource extends Resource
                     ->label('Edit')
                     ->icon('heroicon-o-pencil-square')
                     ->color('gray'),
+                Tables\Actions\Action::make('release')
+                    ->label('Release')
+                    ->icon('heroicon-o-rocket-launch')
+                    ->color('primary')
+                    ->visible(fn (Article $record): bool => ContentAccess::canRelease() && $record->status !== 'published')
+                    ->action(fn (Article $record) => self::releaseRecord($record)),
             ])
             ->bulkActions([]);
     }
@@ -327,27 +335,33 @@ class ArticleResource extends Resource
 
     private static function canRead(): bool
     {
-        $guard = (string) config('admin.guard', 'admin');
-        $user = auth($guard)->user();
-
-        return is_object($user)
-            && method_exists($user, 'hasPermission')
-            && (
-                $user->hasPermission(PermissionNames::ADMIN_CONTENT_READ)
-                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
-            );
+        return ContentAccess::canRead();
     }
 
-    private static function canPublish(): bool
+    private static function canWrite(): bool
     {
-        $guard = (string) config('admin.guard', 'admin');
-        $user = auth($guard)->user();
+        return ContentAccess::canWrite();
+    }
 
-        return is_object($user)
-            && method_exists($user, 'hasPermission')
-            && (
-                $user->hasPermission(PermissionNames::ADMIN_CONTENT_PUBLISH)
-                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
-            );
+    public static function releaseRecord(Article $record): void
+    {
+        if (! ContentAccess::canRelease()) {
+            throw new AuthorizationException('You do not have permission to release articles.');
+        }
+
+        if ($record->status === 'published') {
+            return;
+        }
+
+        $record->forceFill([
+            'status' => 'published',
+            'published_at' => $record->published_at ?? now(),
+        ])->save();
+
+        Notification::make()
+            ->title('Article released')
+            ->body('The article is now marked as published.')
+            ->success()
+            ->send();
     }
 }

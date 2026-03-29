@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\ContentPackVersionResource\Pages;
+use App\Filament\Ops\Support\ContentAccess;
 use App\Models\ContentPackVersion;
 use App\Services\Content\ContentControlPlaneService;
-use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -32,20 +32,22 @@ class ContentPackVersionResource extends Resource
 
     public static function canViewAny(): bool
     {
-        $guard = (string) config('admin.guard', 'admin');
-        $user = auth($guard)->user();
+        return ContentAccess::canRead();
+    }
 
-        return is_object($user)
-            && method_exists($user, 'hasPermission')
-            && (
-                $user->hasPermission(PermissionNames::ADMIN_CONTENT_READ)
-                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
-            );
+    public static function canCreate(): bool
+    {
+        return ContentAccess::canWrite();
+    }
+
+    public static function canEdit($record): bool
+    {
+        return ContentAccess::canWrite();
     }
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.content');
+        return __('ops.group.content_release');
     }
 
     public static function getNavigationLabel(): string

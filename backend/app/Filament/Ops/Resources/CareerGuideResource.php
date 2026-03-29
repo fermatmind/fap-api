@@ -6,15 +6,17 @@ namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\CareerGuideResource\Pages;
 use App\Filament\Ops\Resources\CareerGuideResource\Support\CareerGuideWorkspace;
+use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\CareerGuide;
-use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
@@ -43,12 +45,12 @@ class CareerGuideResource extends Resource
 
     public static function canCreate(): bool
     {
-        return self::canPublish();
+        return self::canWrite();
     }
 
     public static function canEdit($record): bool
     {
-        return self::canPublish();
+        return self::canWrite();
     }
 
     public static function canDelete($record): bool
@@ -58,7 +60,7 @@ class CareerGuideResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.content');
+        return __('ops.group.content_workspace');
     }
 
     public static function getNavigationLabel(): string
@@ -441,6 +443,12 @@ class CareerGuideResource extends Resource
                     ->label('Edit')
                     ->icon('heroicon-o-pencil-square')
                     ->color('gray'),
+                Tables\Actions\Action::make('release')
+                    ->label('Release')
+                    ->icon('heroicon-o-rocket-launch')
+                    ->color('primary')
+                    ->visible(fn (CareerGuide $record): bool => ContentAccess::canRelease() && $record->status !== CareerGuide::STATUS_PUBLISHED)
+                    ->action(fn (CareerGuide $record) => self::releaseRecord($record)),
             ])
             ->bulkActions([]);
     }
@@ -463,27 +471,33 @@ class CareerGuideResource extends Resource
 
     private static function canRead(): bool
     {
-        $guard = (string) config('admin.guard', 'admin');
-        $user = auth($guard)->user();
-
-        return is_object($user)
-            && method_exists($user, 'hasPermission')
-            && (
-                $user->hasPermission(PermissionNames::ADMIN_CONTENT_READ)
-                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
-            );
+        return ContentAccess::canRead();
     }
 
-    private static function canPublish(): bool
+    private static function canWrite(): bool
     {
-        $guard = (string) config('admin.guard', 'admin');
-        $user = auth($guard)->user();
+        return ContentAccess::canWrite();
+    }
 
-        return is_object($user)
-            && method_exists($user, 'hasPermission')
-            && (
-                $user->hasPermission(PermissionNames::ADMIN_CONTENT_PUBLISH)
-                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
-            );
+    public static function releaseRecord(CareerGuide $record): void
+    {
+        if (! ContentAccess::canRelease()) {
+            throw new AuthorizationException('You do not have permission to release career guides.');
+        }
+
+        if ($record->status === CareerGuide::STATUS_PUBLISHED) {
+            return;
+        }
+
+        $record->forceFill([
+            'status' => CareerGuide::STATUS_PUBLISHED,
+            'published_at' => $record->published_at ?? now(),
+        ])->save();
+
+        Notification::make()
+            ->title('Career guide released')
+            ->body('The career guide is now marked as published.')
+            ->success()
+            ->send();
     }
 }

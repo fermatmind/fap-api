@@ -18,6 +18,10 @@ final class PermissionNames
 
     public const ADMIN_CONTENT_READ = 'admin.content.read';
 
+    public const ADMIN_CONTENT_WRITE = 'admin.content.write';
+
+    public const ADMIN_CONTENT_RELEASE = 'admin.content.release';
+
     public const ADMIN_CONTENT_PUBLISH = 'admin.content.publish';
 
     public const ADMIN_CONTENT_PROBE = 'admin.content.probe';
@@ -76,6 +80,8 @@ final class PermissionNames
             self::ADMIN_FINANCE_WRITE,
             self::ADMIN_APPROVAL_REVIEW,
             self::ADMIN_CONTENT_READ,
+            self::ADMIN_CONTENT_WRITE,
+            self::ADMIN_CONTENT_RELEASE,
             self::ADMIN_CONTENT_PUBLISH,
             self::ADMIN_CONTENT_PROBE,
             self::ADMIN_AUDIT_READ,
@@ -143,7 +149,7 @@ final class PermissionNames
             ],
             self::ROLE_CONTENT => [
                 self::ADMIN_CONTENT_READ,
-                self::ADMIN_CONTENT_PUBLISH,
+                self::ADMIN_CONTENT_WRITE,
                 self::ADMIN_CONTENT_PROBE,
                 self::ADMIN_AUDIT_READ,
             ],

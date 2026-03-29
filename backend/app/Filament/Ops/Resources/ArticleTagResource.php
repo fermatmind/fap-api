@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\ArticleTagResource\Pages;
+use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\ArticleTag;
 use App\Support\OrgContext;
-use App\Support\Rbac\PermissionNames;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -38,12 +38,12 @@ class ArticleTagResource extends Resource
 
     public static function canCreate(): bool
     {
-        return self::canPublish();
+        return self::canWrite();
     }
 
     public static function canEdit($record): bool
     {
-        return self::canPublish();
+        return self::canWrite();
     }
 
     public static function canDelete($record): bool
@@ -53,7 +53,7 @@ class ArticleTagResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.content');
+        return __('ops.group.content_data');
     }
 
     public static function getNavigationLabel(): string
@@ -141,27 +141,11 @@ class ArticleTagResource extends Resource
 
     private static function canRead(): bool
     {
-        $guard = (string) config('admin.guard', 'admin');
-        $user = auth($guard)->user();
-
-        return is_object($user)
-            && method_exists($user, 'hasPermission')
-            && (
-                $user->hasPermission(PermissionNames::ADMIN_CONTENT_READ)
-                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
-            );
+        return ContentAccess::canRead();
     }
 
-    private static function canPublish(): bool
+    private static function canWrite(): bool
     {
-        $guard = (string) config('admin.guard', 'admin');
-        $user = auth($guard)->user();
-
-        return is_object($user)
-            && method_exists($user, 'hasPermission')
-            && (
-                $user->hasPermission(PermissionNames::ADMIN_CONTENT_PUBLISH)
-                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
-            );
+        return ContentAccess::canWrite();
     }
 }
