@@ -7,12 +7,14 @@ namespace App\Filament\Ops\Resources;
 use App\Filament\Ops\Resources\OrganizationResource\Pages;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\Organization;
+use App\Services\Ops\OrgVisibilityResolver;
 use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class OrganizationResource extends Resource
 {
@@ -104,6 +106,14 @@ class OrganizationResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $guard = (string) config('admin.guard', 'admin');
+
+        return app(OrgVisibilityResolver::class)
+            ->applyEloquentVisibility(parent::getEloquentQuery(), auth($guard)->user());
     }
 
     public static function getPages(): array

@@ -82,8 +82,8 @@ class GlobalSearchPage extends Page
         return is_object($user)
             && method_exists($user, 'hasPermission')
             && (
-                $user->hasPermission(PermissionNames::ADMIN_OPS_READ)
-                || $user->hasPermission(PermissionNames::ADMIN_GLOBAL_SEARCH)
+                $user->hasPermission(PermissionNames::ADMIN_GLOBAL_SEARCH)
+                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
             );
     }
 }

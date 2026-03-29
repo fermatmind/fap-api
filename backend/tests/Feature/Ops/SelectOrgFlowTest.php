@@ -77,16 +77,16 @@ final class SelectOrgFlowTest extends TestCase
         $this->withSession([
             'ops_admin_totp_verified_user_id' => (int) $admin->id,
         ])->actingAs($admin, (string) config('admin.guard', 'admin'))
-            ->get('/ops/orders')
-            ->assertRedirect('/ops/select-org?return_to=%2Fops%2Forders');
+            ->get('/ops/payment-events')
+            ->assertRedirect('/ops/select-org?return_to=%2Fops%2Fpayment-events');
 
         session(['ops_admin_totp_verified_user_id' => (int) $admin->id]);
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
 
         Livewire::test(SelectOrgPage::class)
-            ->set('returnTo', '/ops/orders')
+            ->set('returnTo', '/ops/payment-events')
             ->call('selectOrg', (int) $selectedOrg->id)
-            ->assertRedirect('/ops/orders');
+            ->assertRedirect('/ops/payment-events');
 
         $this->assertSame((int) $selectedOrg->id, (int) session('ops_org_id'));
 
@@ -94,7 +94,7 @@ final class SelectOrgFlowTest extends TestCase
             'ops_admin_totp_verified_user_id' => (int) $admin->id,
             'ops_org_id' => (int) $selectedOrg->id,
         ])->actingAs($admin, (string) config('admin.guard', 'admin'))
-            ->get('/ops/orders')
+            ->get('/ops/payment-events')
             ->assertOk()
             ->assertSee($chain['order_no']);
     }

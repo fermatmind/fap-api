@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Livewire;
 
+use App\Services\Ops\OrgVisibilityResolver;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -27,7 +28,9 @@ class CurrentOrgSwitcher extends Component
             return;
         }
 
-        $exists = DB::table('organizations')->where('id', $orgId)->exists();
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+        $exists = app(OrgVisibilityResolver::class)->isVisibleOrganization($user, $orgId);
         if (! $exists) {
             return;
         }
@@ -62,7 +65,11 @@ class CurrentOrgSwitcher extends Component
             $this->currentOrgId = (int) $rawOrgId;
         }
 
-        $this->organizations = DB::table('organizations')
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        $this->organizations = app(OrgVisibilityResolver::class)
+            ->visibleOrganizationsQuery($user)
             ->select(['id', 'name'])
             ->orderBy('name')
             ->limit(50)
@@ -73,7 +80,7 @@ class CurrentOrgSwitcher extends Component
             ])
             ->all();
 
-        if ($this->currentOrgId > 0) {
+        if ($this->currentOrgId > 0 && app(OrgVisibilityResolver::class)->isVisibleOrganization($user, $this->currentOrgId)) {
             $row = DB::table('organizations')
                 ->where('id', $this->currentOrgId)
                 ->first(['name']);

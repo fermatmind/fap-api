@@ -56,8 +56,29 @@ class SecureLink extends Page
 
     public string $statusMessage = '';
 
+    private function canGenerateSecureLink(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && (
+                $user->hasPermission(PermissionNames::ADMIN_OWNER)
+                || $user->hasPermission(PermissionNames::ADMIN_OPS_READ)
+                || $user->hasPermission(PermissionNames::ADMIN_GLOBAL_SEARCH)
+            );
+    }
+
     public function generate(): void
     {
+        if (! $this->canGenerateSecureLink()) {
+            $this->statusMessage = 'permission denied.';
+            $this->generatedLink = '';
+
+            return;
+        }
+
         $orgId = max(0, (int) app(OrgContext::class)->orgId());
         $orderNo = trim($this->orderNo);
         if ($orderNo === '') {
