@@ -11,7 +11,7 @@
         <x-filament-ops::ops-section
             eyebrow="Content search"
             title="Content search"
-            description="Search only the visible production CMS modules. Support/global search remains isolated from this surface."
+            description="Search the visible CMS modules, isolate stale lifecycle candidates, and apply lifecycle actions without leaving the Ops CMS surface."
         >
             <x-filament-ops::ops-toolbar>
                 <div class="ops-control-stack">
@@ -23,7 +23,7 @@
                         placeholder="article title, slug, category, tag, guide, job"
                         class="ops-input"
                     />
-                    <p class="ops-control-hint">Results stay inside current CMS boundaries: articles/taxonomy are current-org, career guides/jobs are global.</p>
+                    <p class="ops-control-hint">Results stay inside current CMS boundaries: articles/taxonomy are current-org, career guides/jobs are global. Lifecycle actions only target editorial content.</p>
                 </div>
 
                 <x-slot name="actions">
@@ -47,6 +47,26 @@
                             </select>
                         </label>
 
+                        <label class="ops-control-stack" for="ops-content-search-lifecycle">
+                            <span class="ops-control-label">Lifecycle</span>
+                            <select id="ops-content-search-lifecycle" wire:model="lifecycleFilter" class="ops-input">
+                                <option value="all">All</option>
+                                <option value="active">Active</option>
+                                <option value="downranked">Down-ranked</option>
+                                <option value="archived">Archived</option>
+                                <option value="soft_deleted">Soft deleted</option>
+                            </select>
+                        </label>
+
+                        <label class="ops-control-stack" for="ops-content-search-stale">
+                            <span class="ops-control-label">Freshness</span>
+                            <select id="ops-content-search-stale" wire:model="staleFilter" class="ops-input">
+                                <option value="all">All</option>
+                                <option value="only_stale">Only stale</option>
+                                <option value="only_fresh">Only fresh</option>
+                            </select>
+                        </label>
+
                         <x-filament::button color="primary" wire:click="runSearch">
                             Search
                         </x-filament::button>
@@ -57,18 +77,43 @@
 
         <x-filament-ops::ops-section
             title="Results"
-            description="Open a result directly in its native resource surface after finding the right content object."
+            description="Open a result directly in its native resource surface, or use batch lifecycle actions on editorial records."
         >
             <x-slot name="actions">
-                <span class="ops-results-header__meta">{{ $elapsedMs }} ms</span>
+                <div class="ops-toolbar-inline">
+                    <span class="ops-results-header__meta">{{ $elapsedMs }} ms</span>
+                    @if (\App\Filament\Ops\Support\ContentAccess::canRelease())
+                        <label class="ops-control-stack" for="ops-content-search-bulk-action">
+                            <span class="ops-control-label">Bulk action</span>
+                            <select id="ops-content-search-bulk-action" wire:model="bulkAction" class="ops-input">
+                                <option value="archive">Archive</option>
+                                <option value="soft_delete">Soft delete</option>
+                                <option value="down_rank">Down-rank</option>
+                            </select>
+                        </label>
+                        <x-filament::button color="gray" wire:click="applyBulkAction">
+                            Apply
+                        </x-filament::button>
+                    @endif
+                </div>
             </x-slot>
 
             <div class="ops-card-list">
                 @forelse ($items as $item)
                     <x-filament-ops::ops-result-card
                         :title="(string) ($item['label'] ?? '-')"
-                        :meta="(string) ($item['type'] ?? '-') . ' | ' . (string) ($item['scope'] ?? '-') . ' | status=' . (string) ($item['status'] ?? '-') . (((string) ($item['subtitle'] ?? '')) !== '' ? ' | ' . (string) ($item['subtitle'] ?? '') : '')"
+                        :meta="(string) ($item['type'] ?? '-') . ' | ' . (string) ($item['scope'] ?? '-') . ' | status=' . (string) ($item['status'] ?? '-') . ' | lifecycle=' . (string) ($item['lifecycle_state'] ?? 'active') . ' | stale=' . ((bool) ($item['is_stale'] ?? false) ? 'yes' : 'no') . (((string) ($item['subtitle'] ?? '')) !== '' ? ' | ' . (string) ($item['subtitle'] ?? '') : '')"
                     >
+                        @if (($item['actionable'] ?? false) && \App\Filament\Ops\Support\ContentAccess::canRelease())
+                            <label class="ops-control-stack">
+                                <span class="ops-control-label">Select for lifecycle batch</span>
+                                <input
+                                    type="checkbox"
+                                    wire:model="selectedTargets"
+                                    value="{{ (string) ($item['selection_key'] ?? '') }}"
+                                />
+                            </label>
+                        @endif
                         <x-slot name="actions">
                             <x-filament::button size="xs" color="gray" tag="a" href="{{ (string) ($item['url'] ?? '/ops') }}">
                                 Open

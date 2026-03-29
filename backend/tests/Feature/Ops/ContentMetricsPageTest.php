@@ -235,10 +235,11 @@ final class ContentMetricsPageTest extends TestCase
             ->assertSet('headlineFields.3.value', '3')
             ->assertSet('headlineFields.4.value', '3')
             ->assertSet('scopeFields.0.value', '2')
-            ->assertSet('scopeFields.1.value', '33% (1/3)')
-            ->assertSet('scopeFields.2.value', '67% (2/3)')
-            ->assertSet('scopeFields.3.value', '40% (2/5)')
-            ->assertSet('scopeFields.4.value', '2')
+            ->assertSet('scopeFields.1.value', '0')
+            ->assertSet('scopeFields.2.value', '33% (1/3)')
+            ->assertSet('scopeFields.3.value', '67% (2/3)')
+            ->assertSet('scopeFields.4.value', '40% (2/5)')
+            ->assertSet('scopeFields.5.value', '2')
             ->assertSet('freshnessCards.0.value', '1')
             ->assertSet('freshnessCards.0.latest_title', 'Stale Metrics Article')
             ->assertSet('freshnessCards.1.value', '1')
@@ -246,6 +247,44 @@ final class ContentMetricsPageTest extends TestCase
             ->assertSet('freshnessCards.2.value', '1')
             ->assertSet('freshnessCards.2.latest_title', 'Stale Career Job')
             ->assertSet('freshnessCards.3.value', '2');
+    }
+
+    public function test_content_metrics_can_archive_stale_article_drafts(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+        $selectedOrg = $this->createOrganization('Stale Archive Org');
+
+        $staleArticle = Article::query()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'slug' => 'stale-archive-article',
+            'locale' => 'en',
+            'title' => 'Stale Archive Article',
+            'excerpt' => 'Stale archive excerpt',
+            'content_md' => 'Stale archive body',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+        ]);
+        $staleArticle->forceFill(['updated_at' => Carbon::now()->subDays(30)])->save();
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        app()->instance('request', Request::create('/ops/content-metrics', 'POST'));
+
+        $context = app(OrgContext::class);
+        $context->set((int) $selectedOrg->id, (int) $admin->id, 'admin');
+        app()->instance(OrgContext::class, $context);
+
+        Livewire::test(ContentMetricsPage::class)
+            ->assertOk()
+            ->assertSet('freshnessCards.0.value', '1')
+            ->call('archiveStale', 'article')
+            ->assertSet('freshnessCards.0.value', '0');
+
+        $staleArticle->refresh();
+        $this->assertSame('archived', $staleArticle->lifecycle_state);
+        $this->assertFalse($staleArticle->is_indexable);
     }
 
     private function createOrganization(string $name): Organization

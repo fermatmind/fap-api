@@ -3,12 +3,12 @@
         <x-filament-ops::ops-section
             eyebrow="Content metrics"
             title="Content metrics"
-            description="Track the visible CMS footprint across current-org articles, global career content, taxonomy, and release pressure."
+            description="Track the visible CMS footprint across current-org articles, global career content, lifecycle backlog, stale drafts, and release pressure."
         >
             <x-filament-ops::ops-toolbar>
                 <div class="ops-control-stack">
                     <span class="ops-control-label">Metrics contract</span>
-                    <p class="ops-control-hint">This page measures only the production CMS bootstrap surfaces. Support search, SEO operations, and post-release observability stay separate.</p>
+                    <p class="ops-control-hint">This page now doubles as a lifecycle console: use the stale cards to archive old drafts before they pile up in review and release queues.</p>
                 </div>
 
                 <x-slot name="actions">
@@ -63,10 +63,22 @@
                         <p class="ops-control-hint">{{ $card['description'] }}</p>
                         <p class="ops-control-hint">Latest record: {{ $card['latest_title'] ?? 'No recent record' }}</p>
                         <x-slot name="actions">
-                            <x-filament.ops.shared.status-pill
-                                :state="$card['status_state']"
-                                :label="$card['status'].' | '.$card['value']"
-                            />
+                            <div class="ops-toolbar-inline">
+                                <x-filament.ops.shared.status-pill
+                                    :state="$card['status_state']"
+                                    :label="$card['status'].' | '.$card['value']"
+                                />
+                                @if (($card['can_archive'] ?? false) && ($card['action_type'] ?? null) !== null)
+                                    <x-filament::button
+                                        size="xs"
+                                        color="warning"
+                                        type="button"
+                                        wire:click="archiveStale('{{ $card['action_type'] }}')"
+                                    >
+                                        Archive stale
+                                    </x-filament::button>
+                                @endif
+                            </div>
                         </x-slot>
                     </x-filament-ops::ops-result-card>
                 @endforeach
