@@ -18,6 +18,9 @@
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentMetricsPage::getUrl() }}">
                         Content Metrics
                     </x-filament::button>
+                    <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentGrowthAttributionPage::getUrl() }}">
+                        Growth Attribution
+                    </x-filament::button>
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentSearchPage::getUrl() }}">
                         Content Search
                     </x-filament::button>

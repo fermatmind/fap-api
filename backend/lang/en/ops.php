@@ -46,6 +46,7 @@ return [
         'orders' => 'Orders',
         'content_overview' => 'Content Overview',
         'content_metrics' => 'Content Metrics',
+        'content_growth_attribution' => 'Growth Attribution',
         'seo_operations' => 'SEO Operations',
         'content_search' => 'Content Search',
         'content_workspace' => 'Content Workspace',

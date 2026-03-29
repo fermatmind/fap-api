@@ -33,11 +33,11 @@ final class StorageBlobLocationsIndexPortabilityTest extends TestCase
         $this->assertStringContainsString("charset('ascii')", $createMigration);
         $this->assertStringContainsString("collation('ascii_bin')", $createMigration);
         $this->assertStringContainsString(
-            "->string('disk', 32)\n                ->charset('ascii')\n                ->collation('ascii_bin')\n                ->change();",
+            'ALTER TABLE `%s` MODIFY `disk` VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin NOT NULL',
             $normalizeMigration
         );
         $this->assertStringContainsString(
-            "->string('storage_path', 1024)\n                ->charset('ascii')\n                ->collation('ascii_bin')\n                ->change();",
+            'ALTER TABLE `%s` MODIFY `storage_path` VARCHAR(1024) CHARACTER SET ascii COLLATE ascii_bin NOT NULL',
             $normalizeMigration
         );
         $this->assertStringNotContainsString('storage_path(191)', $createMigration.$normalizeMigration);
