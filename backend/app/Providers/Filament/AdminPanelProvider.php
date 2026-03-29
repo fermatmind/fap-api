@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Ops\Pages\OpsDashboard;
+use App\Filament\Ops\Pages\OpsLogin;
 use App\Http\Middleware\BindOpsLoginResponse;
 use App\Http\Middleware\EnsureAdminTotpVerified;
 use App\Http\Middleware\OpsAccessControl;
@@ -31,7 +32,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->id('ops')
             ->path('ops')
-            ->login()
+            ->login(OpsLogin::class)
             ->authGuard((string) config('admin.guard', 'admin'))
             ->brandName('Fermat Ops')
             ->colors([
