@@ -7,6 +7,8 @@ namespace App\Filament\Ops\Resources;
 use App\Filament\Ops\Resources\CareerGuideResource\Pages;
 use App\Filament\Ops\Resources\CareerGuideResource\Support\CareerGuideWorkspace;
 use App\Filament\Ops\Support\ContentAccess;
+use App\Filament\Ops\Support\ContentReleaseAudit;
+use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\CareerGuide;
 use Filament\Forms;
@@ -430,8 +432,10 @@ class CareerGuideResource extends Resource
                     ->label('Release')
                     ->icon('heroicon-o-rocket-launch')
                     ->color('primary')
-                    ->visible(fn (CareerGuide $record): bool => ContentAccess::canRelease() && $record->status !== CareerGuide::STATUS_PUBLISHED)
-                    ->action(fn (CareerGuide $record) => self::releaseRecord($record)),
+                    ->visible(fn (CareerGuide $record): bool => ContentAccess::canRelease()
+                        && $record->status !== CareerGuide::STATUS_PUBLISHED
+                        && (EditorialReviewAudit::latestState('guide', $record)['state'] ?? null) === EditorialReviewAudit::STATE_APPROVED)
+                    ->action(fn (CareerGuide $record) => self::releaseRecord($record, 'resource_table')),
             ])
             ->bulkActions([]);
     }
@@ -462,7 +466,7 @@ class CareerGuideResource extends Resource
         return ContentAccess::canWrite();
     }
 
-    public static function releaseRecord(CareerGuide $record): void
+    public static function releaseRecord(CareerGuide $record, string $source = 'resource_table'): void
     {
         if (! ContentAccess::canRelease()) {
             throw new AuthorizationException('You do not have permission to release career guides.');
@@ -472,11 +476,17 @@ class CareerGuideResource extends Resource
             return;
         }
 
+        if ((EditorialReviewAudit::latestState('guide', $record)['state'] ?? null) !== EditorialReviewAudit::STATE_APPROVED) {
+            throw new AuthorizationException('This career guide must be approved in editorial review before it can be published.');
+        }
+
         $record->forceFill([
             'status' => CareerGuide::STATUS_PUBLISHED,
             'is_public' => true,
             'published_at' => $record->published_at ?? now(),
         ])->save();
+
+        ContentReleaseAudit::log('guide', $record->fresh(), $source);
 
         Notification::make()
             ->title('Career guide released')

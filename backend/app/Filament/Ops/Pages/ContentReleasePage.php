@@ -8,6 +8,7 @@ use App\Filament\Ops\Resources\ArticleResource;
 use App\Filament\Ops\Resources\CareerGuideResource;
 use App\Filament\Ops\Resources\CareerJobResource;
 use App\Filament\Ops\Support\ContentAccess;
+use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
@@ -79,17 +80,21 @@ class ContentReleasePage extends Page
             throw new AuthorizationException('You do not have permission to release content.');
         }
 
-        match ($type) {
-            'article' => ArticleResource::releaseRecord(
-                Article::query()->whereIn('org_id', $this->currentOrgIds())->findOrFail($id)
-            ),
-            'guide' => CareerGuideResource::releaseRecord(
-                CareerGuide::query()->findOrFail($id)
-            ),
-            'job' => CareerJobResource::releaseRecord(
-                CareerJob::query()->findOrFail($id)
-            ),
+        $record = match ($type) {
+            'article' => Article::query()->whereIn('org_id', $this->currentOrgIds())->findOrFail($id),
+            'guide' => CareerGuide::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
+            'job' => CareerJob::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
             default => throw new AuthorizationException('Unsupported content type.'),
+        };
+
+        if ($this->reviewState($type, $record) !== EditorialReviewAudit::STATE_APPROVED) {
+            throw new AuthorizationException('This record must be approved in editorial review before it can be published.');
+        }
+
+        match ($type) {
+            'article' => ArticleResource::releaseRecord($record, 'release_workspace'),
+            'guide' => CareerGuideResource::releaseRecord($record, 'release_workspace'),
+            'job' => CareerJobResource::releaseRecord($record, 'release_workspace'),
         };
 
         $this->refreshWorkspace();
@@ -110,6 +115,7 @@ class ContentReleasePage extends Page
                 id: (int) $record->id,
                 title: $record->title,
                 status: (string) $record->status,
+                reviewState: $this->reviewState('article', $record),
                 locale: (string) $record->locale,
                 visibility: $record->is_public ? 'Public' : 'Private',
                 updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
@@ -118,6 +124,7 @@ class ContentReleasePage extends Page
             ));
 
         $guides = CareerGuide::query()
+            ->withoutGlobalScopes()
             ->where('org_id', 0)
             ->when($this->statusFilter !== 'all', fn ($query) => $query->where('status', $this->statusFilter))
             ->latest('updated_at')
@@ -128,6 +135,7 @@ class ContentReleasePage extends Page
                 id: (int) $record->id,
                 title: $record->title,
                 status: (string) $record->status,
+                reviewState: $this->reviewState('guide', $record),
                 locale: (string) $record->locale,
                 visibility: $record->is_public ? 'Public' : 'Private',
                 updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
@@ -136,6 +144,7 @@ class ContentReleasePage extends Page
             ));
 
         $jobs = CareerJob::query()
+            ->withoutGlobalScopes()
             ->where('org_id', 0)
             ->when($this->statusFilter !== 'all', fn ($query) => $query->where('status', $this->statusFilter))
             ->latest('updated_at')
@@ -146,6 +155,7 @@ class ContentReleasePage extends Page
                 id: (int) $record->id,
                 title: $record->title,
                 status: (string) $record->status,
+                reviewState: $this->reviewState('job', $record),
                 locale: (string) $record->locale,
                 visibility: $record->is_public ? 'Public' : 'Private',
                 updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
@@ -168,6 +178,7 @@ class ContentReleasePage extends Page
             ->all();
 
         $draftCount = $allItems->where('status', 'draft')->count();
+        $approvedCount = $allItems->where('review_state', EditorialReviewAudit::STATE_APPROVED)->count();
         $publishedCount = $allItems->where('status', 'published')->count();
 
         $this->releaseFields = [
@@ -175,6 +186,11 @@ class ContentReleasePage extends Page
                 'label' => 'Draft queue',
                 'value' => (string) $draftCount,
                 'hint' => 'Draft content waiting inside the lightweight review-and-release surface.',
+            ],
+            [
+                'label' => 'Approved for publish',
+                'value' => (string) $approvedCount,
+                'hint' => 'Draft records with a current approval decision and no newer edits after review.',
             ],
             [
                 'label' => 'Published content',
@@ -226,6 +242,7 @@ class ContentReleasePage extends Page
         int $id,
         string $title,
         string $status,
+        string $reviewState,
         string $locale,
         string $visibility,
         string $updatedAt,
@@ -238,13 +255,14 @@ class ContentReleasePage extends Page
             'type_label' => $typeLabel,
             'title' => $title,
             'status' => $status,
+            'review_state' => $reviewState,
             'locale' => $locale,
             'visibility' => $visibility,
             'updated_at' => $updatedAt,
             'updated_at_sort' => strtotime($updatedAt) ?: 0,
             'edit_url' => $editUrl,
             'index_url' => $indexUrl,
-            'releaseable' => $status === 'draft',
+            'releaseable' => $status === 'draft' && $reviewState === EditorialReviewAudit::STATE_APPROVED,
         ];
     }
 
@@ -273,5 +291,16 @@ class ContentReleasePage extends Page
             'published' => 'Published',
             default => ucfirst($value),
         };
+    }
+
+    private function reviewState(string $type, object $record): string
+    {
+        if ((string) data_get($record, 'status') === 'published') {
+            return EditorialReviewAudit::STATE_APPROVED;
+        }
+
+        $decision = EditorialReviewAudit::latestState($type, $record);
+
+        return $decision['state'] ?? EditorialReviewAudit::STATE_NEEDS_ATTENTION;
     }
 }

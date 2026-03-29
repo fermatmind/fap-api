@@ -15,6 +15,12 @@
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentOverviewPage::getUrl() }}">
                         Overview
                     </x-filament::button>
+                    <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\EditorialReviewPage::getUrl() }}">
+                        Editorial Review
+                    </x-filament::button>
+                    <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\PostReleaseObservabilityPage::getUrl() }}">
+                        Observability
+                    </x-filament::button>
                     <x-filament::button color="primary" tag="a" href="{{ \App\Filament\Ops\Pages\ContentWorkspacePage::getUrl() }}">
                         Workspace
                     </x-filament::button>
@@ -74,6 +80,7 @@
                         <th>Type</th>
                         <th>Title</th>
                         <th>Status</th>
+                        <th>Review state</th>
                         <th>Locale</th>
                         <th>Visibility</th>
                         <th>Updated</th>
@@ -96,6 +103,12 @@
                                 :label="ucfirst($item['status'])"
                             />
                         </td>
+                        <td class="ops-table__status">
+                            <x-filament.ops.shared.status-pill
+                                :state="match ($item['review_state']) { 'approved' => 'success', 'ready' => 'info', 'changes_requested' => 'warning', 'rejected' => 'danger', default => 'warning' }"
+                                :label="\App\Filament\Ops\Support\EditorialReviewAudit::label($item['review_state'])"
+                            />
+                        </td>
                         <td>{{ $item['locale'] }}</td>
                         <td>{{ $item['visibility'] }}</td>
                         <td>{{ $item['updated_at'] }}</td>
@@ -113,6 +126,10 @@
                                         wire:click="releaseItem('{{ $item['type'] }}', {{ $item['id'] }})"
                                     >
                                         Publish
+                                    </x-filament::button>
+                                @elseif ($item['status'] === 'draft')
+                                    <x-filament::button size="xs" color="warning" disabled>
+                                        Needs Approval
                                     </x-filament::button>
                                 @else
                                     <x-filament::button size="xs" color="success" disabled>

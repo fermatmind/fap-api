@@ -7,6 +7,8 @@ namespace App\Filament\Ops\Resources;
 use App\Filament\Ops\Resources\CareerJobResource\Pages;
 use App\Filament\Ops\Resources\CareerJobResource\Support\CareerJobWorkspace;
 use App\Filament\Ops\Support\ContentAccess;
+use App\Filament\Ops\Support\ContentReleaseAudit;
+use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\CareerJob;
 use Filament\Forms;
@@ -376,8 +378,10 @@ class CareerJobResource extends Resource
                     ->label('Release')
                     ->icon('heroicon-o-rocket-launch')
                     ->color('primary')
-                    ->visible(fn (CareerJob $record): bool => ContentAccess::canRelease() && $record->status !== CareerJob::STATUS_PUBLISHED)
-                    ->action(fn (CareerJob $record) => self::releaseRecord($record)),
+                    ->visible(fn (CareerJob $record): bool => ContentAccess::canRelease()
+                        && $record->status !== CareerJob::STATUS_PUBLISHED
+                        && (EditorialReviewAudit::latestState('job', $record)['state'] ?? null) === EditorialReviewAudit::STATE_APPROVED)
+                    ->action(fn (CareerJob $record) => self::releaseRecord($record, 'resource_table')),
             ])
             ->bulkActions([]);
     }
@@ -677,7 +681,7 @@ class CareerJobResource extends Resource
         return ContentAccess::canWrite();
     }
 
-    public static function releaseRecord(CareerJob $record): void
+    public static function releaseRecord(CareerJob $record, string $source = 'resource_table'): void
     {
         if (! ContentAccess::canRelease()) {
             throw new AuthorizationException('You do not have permission to release career jobs.');
@@ -687,11 +691,17 @@ class CareerJobResource extends Resource
             return;
         }
 
+        if ((EditorialReviewAudit::latestState('job', $record)['state'] ?? null) !== EditorialReviewAudit::STATE_APPROVED) {
+            throw new AuthorizationException('This career job must be approved in editorial review before it can be published.');
+        }
+
         $record->forceFill([
             'status' => CareerJob::STATUS_PUBLISHED,
             'is_public' => true,
             'published_at' => $record->published_at ?? now(),
         ])->save();
+
+        ContentReleaseAudit::log('job', $record->fresh(), $source);
 
         Notification::make()
             ->title('Career job released')

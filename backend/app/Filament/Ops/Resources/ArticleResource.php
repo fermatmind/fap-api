@@ -7,6 +7,8 @@ namespace App\Filament\Ops\Resources;
 use App\Filament\Ops\Resources\ArticleResource\Pages;
 use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
 use App\Filament\Ops\Support\ContentAccess;
+use App\Filament\Ops\Support\ContentReleaseAudit;
+use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\Article;
 use App\Support\OrgContext;
@@ -291,8 +293,10 @@ class ArticleResource extends Resource
                     ->label('Release')
                     ->icon('heroicon-o-rocket-launch')
                     ->color('primary')
-                    ->visible(fn (Article $record): bool => ContentAccess::canRelease() && $record->status !== 'published')
-                    ->action(fn (Article $record) => self::releaseRecord($record)),
+                    ->visible(fn (Article $record): bool => ContentAccess::canRelease()
+                        && $record->status !== 'published'
+                        && (EditorialReviewAudit::latestState('article', $record)['state'] ?? null) === EditorialReviewAudit::STATE_APPROVED)
+                    ->action(fn (Article $record) => self::releaseRecord($record, 'resource_table')),
             ])
             ->bulkActions([]);
     }
@@ -338,7 +342,7 @@ class ArticleResource extends Resource
         return ContentAccess::canWrite();
     }
 
-    public static function releaseRecord(Article $record): void
+    public static function releaseRecord(Article $record, string $source = 'resource_table'): void
     {
         if (! ContentAccess::canRelease()) {
             throw new AuthorizationException('You do not have permission to release articles.');
@@ -348,11 +352,17 @@ class ArticleResource extends Resource
             return;
         }
 
+        if ((EditorialReviewAudit::latestState('article', $record)['state'] ?? null) !== EditorialReviewAudit::STATE_APPROVED) {
+            throw new AuthorizationException('This article must be approved in editorial review before it can be published.');
+        }
+
         $record->forceFill([
             'status' => 'published',
             'is_public' => true,
             'published_at' => $record->published_at ?? now(),
         ])->save();
+
+        ContentReleaseAudit::log('article', $record->fresh(), $source);
 
         Notification::make()
             ->title('Article released')
