@@ -88,48 +88,14 @@ host('staging')
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api-staging')
     ->set('php_fpm_service', getenv('PHP_FPM_SERVICE_STG') ?: 'php8.4-fpm');
 
-/**
- * ======================================================
- * Node / NPM（Ops Theme release build）
- * ======================================================
- */
-task('ensure:node-toolchain', function () {
-    if (! test('command -v node >/dev/null 2>&1')) {
-        throw new \RuntimeException('node missing on deploy host');
-    }
-
-    if (! test('command -v npm >/dev/null 2>&1')) {
-        throw new \RuntimeException('npm missing on deploy host');
-    }
-
-    $nodeVersion = trim(run('node -p "process.versions.node"'));
-    $npmVersion = trim(run('npm -v'));
-
-    if (version_compare($nodeVersion, '20.19.0', '<')) {
-        throw new \RuntimeException("node {$nodeVersion} is too old; require >= 20.19.0 for current backend package.json");
-    }
-
-    if (version_compare($npmVersion, '10.0.0', '<')) {
-        throw new \RuntimeException("npm {$npmVersion} is too old; require >= 10.0.0 for reproducible backend package-lock installs");
-    }
-});
-
-task('build:ops-theme', function () {
-    within('{{release_path}}/backend', function () {
-        run('test -f package-lock.json');
-        run('npm ci --no-audit --no-fund');
-        run('npm run build:ops-theme');
-    });
-});
-
 task('guard:ops-theme-asset', function () {
-    $asset = '{{release_path}}/backend/public/css/filament/ops/theme.css';
+    $asset = '{{release_path}}/backend/public/css/app/ops-theme.css';
 
     if (! test("[ -s {$asset} ]")) {
         throw new \RuntimeException("ops theme asset missing or empty: {$asset}");
     }
 
-    $rawSourcePattern = '@tailwind|@config|vendor/filament/filament/resources/css/base\\.css';
+    $rawSourcePattern = '@tailwind|@config|resources/css/filament/ops/theme\\.css|vendor/filament/filament/resources/css/base\\.css';
     if (test("grep -Eq '{$rawSourcePattern}' {$asset}")) {
         throw new \RuntimeException("ops theme asset is raw source, not compiled CSS: {$asset}");
     }
@@ -438,7 +404,6 @@ before('deploy', 'guard:forbid-destructive');
 before('deploy:prepare', 'ensure:phpredis');
 before('deploy:shared', 'fap:seed_shared_content_packages');
 
-after('deploy:update_code', 'ensure:node-toolchain');
 after('deploy:vendors', 'bootstrap-cache:clear-release');
 
 after('deploy:shared', 'ensure:shared-perms');
@@ -446,12 +411,11 @@ after('deploy:shared', 'ensure:healthz-deps');
 
 /**
  * vendor 必须先安装完成：
- * - build:ops-theme 依赖 vendor/filament/filament/tailwind.config.preset
- * - artisan:filament:assets 也依赖 composer vendor
+ * - composer post-autoload-dump 会先完成 package:discover
+ * - artisan:filament:assets 依赖 composer vendor，并发布 committed fallback CSS
  */
-after('deploy:vendors', 'build:ops-theme');
-after('build:ops-theme', 'guard:ops-theme-asset');
-after('guard:ops-theme-asset', 'artisan:filament:assets');
+after('deploy:vendors', 'artisan:filament:assets');
+after('artisan:filament:assets', 'guard:ops-theme-asset');
 after('artisan:filament:assets', 'guard:filament-assets');
 after('artisan:migrate', 'ensure:release-runtime-perms');
 
