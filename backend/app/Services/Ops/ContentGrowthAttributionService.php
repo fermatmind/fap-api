@@ -63,6 +63,24 @@ final class ContentGrowthAttributionService
                     ->filter(fn (Order $order): bool => $this->matchesSurface($surface, $this->orderCandidates($order)))
                     ->values();
 
+                $seedAliases = $this->shareAliases($matchingEvents, $matchingOrders);
+
+                if ($seedAliases !== []) {
+                    $matchingEvents = $events
+                        ->filter(function (Event $event) use ($surface, $seedAliases): bool {
+                            return $this->matchesSurface($surface, $this->eventCandidates($event))
+                                || $this->hasAnyAlias($this->eventShareAliases($event), $seedAliases);
+                        })
+                        ->values();
+
+                    $matchingOrders = $orders
+                        ->filter(function (Order $order) use ($surface, $seedAliases): bool {
+                            return $this->matchesSurface($surface, $this->orderCandidates($order))
+                                || $this->hasAnyAlias($this->orderShareAliases($order), $seedAliases);
+                        })
+                        ->values();
+                }
+
                 $shareTouchpoints = $this->shareTouchpoints($matchingEvents, $matchingOrders);
                 $paidOrders = $matchingOrders->count();
                 $shareAssistedOrders = $matchingOrders
@@ -235,7 +253,7 @@ final class ContentGrowthAttributionService
             'title' => trim((string) data_get($record, 'title', 'Untitled')),
             'public_path' => $publicPath,
             'public_url' => $publicUrl,
-            'canonical_ready' => $canonical !== '',
+            'canonical_ready' => $canonical !== '' && $this->urlsMatch($canonical, $publicUrl),
             'indexable' => (bool) data_get($record, 'is_indexable'),
             'published_at' => data_get($record, 'published_at'),
         ];
@@ -318,35 +336,7 @@ final class ContentGrowthAttributionService
      */
     private function shareTouchpoints(Collection $events, Collection $orders): int
     {
-        $touchpoints = [];
-
-        foreach ($events as $event) {
-            $shareId = trim((string) ($event->share_id ?? ''));
-            if ($shareId !== '') {
-                $touchpoints['share:'.$shareId] = true;
-            }
-
-            $meta = is_array($event->meta_json) ? $event->meta_json : [];
-            $shareClickId = trim((string) data_get($meta, 'share_click_id', ''));
-            if ($shareClickId !== '') {
-                $touchpoints['click:'.$shareClickId] = true;
-            }
-        }
-
-        foreach ($orders as $order) {
-            $attribution = $this->orders->extractAttributionFromOrder($order);
-            $shareId = trim((string) ($attribution['share_id'] ?? ''));
-            $shareClickId = trim((string) ($attribution['share_click_id'] ?? ''));
-
-            if ($shareId !== '') {
-                $touchpoints['share:'.$shareId] = true;
-            }
-            if ($shareClickId !== '') {
-                $touchpoints['click:'.$shareClickId] = true;
-            }
-        }
-
-        return count($touchpoints);
+        return count($this->shareAliases($events, $orders));
     }
 
     private function isShareAssistedOrder(Order $order): bool
@@ -410,6 +400,104 @@ final class ContentGrowthAttributionService
         $base = rtrim((string) config('app.frontend_url', config('app.url', 'https://example.test')), '/');
 
         return $base !== '' ? $base : 'https://example.test';
+    }
+
+    /**
+     * @param  Collection<int, Event>  $events
+     * @param  Collection<int, Order>  $orders
+     * @return list<string>
+     */
+    private function shareAliases(Collection $events, Collection $orders): array
+    {
+        $aliases = [];
+
+        foreach ($events as $event) {
+            foreach ($this->eventShareAliases($event) as $alias) {
+                $aliases[$alias] = true;
+            }
+        }
+
+        foreach ($orders as $order) {
+            foreach ($this->orderShareAliases($order) as $alias) {
+                $aliases[$alias] = true;
+            }
+        }
+
+        return array_keys($aliases);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function eventShareAliases(Event $event): array
+    {
+        $aliases = [];
+        $shareId = trim((string) ($event->share_id ?? ''));
+
+        if ($shareId !== '') {
+            $aliases[] = 'share:'.$shareId;
+        }
+
+        $meta = is_array($event->meta_json) ? $event->meta_json : [];
+        $shareClickId = trim((string) data_get($meta, 'share_click_id', ''));
+
+        if ($shareClickId !== '') {
+            $aliases[] = 'click:'.$shareClickId;
+        }
+
+        return $aliases;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function orderShareAliases(Order $order): array
+    {
+        $aliases = [];
+        $attribution = $this->orders->extractAttributionFromOrder($order);
+        $shareId = trim((string) ($attribution['share_id'] ?? ''));
+        $shareClickId = trim((string) ($attribution['share_click_id'] ?? ''));
+
+        if ($shareId !== '') {
+            $aliases[] = 'share:'.$shareId;
+        }
+
+        if ($shareClickId !== '') {
+            $aliases[] = 'click:'.$shareClickId;
+        }
+
+        return $aliases;
+    }
+
+    /**
+     * @param  list<string>  $aliases
+     * @param  list<string>  $knownAliases
+     */
+    private function hasAnyAlias(array $aliases, array $knownAliases): bool
+    {
+        if ($aliases === [] || $knownAliases === []) {
+            return false;
+        }
+
+        $lookup = array_fill_keys($knownAliases, true);
+
+        foreach ($aliases as $alias) {
+            if (isset($lookup[$alias])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function urlsMatch(string $left, string $right): bool
+    {
+        return $this->normalizeUrl($left) === $this->normalizeUrl($right);
+    }
+
+    private function normalizeUrl(string $value): string
+    {
+        return rtrim(mb_strtolower(trim($value), 'UTF-8'), '/');
     }
 
     private function formatCurrencyCents(int $value): string

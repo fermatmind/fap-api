@@ -37,6 +37,7 @@ final class ContentGrowthAttributionPageTest extends TestCase
         parent::setUp();
 
         $this->withoutVite();
+        config()->set('app.frontend_url', 'https://frontend.example.test');
         Filament::setCurrentPanel(app(PanelRegistry::class)->get('ops'));
     }
 
@@ -269,6 +270,113 @@ final class ContentGrowthAttributionPageTest extends TestCase
             ->assertSet('matrixRows.0.share_assisted_orders', 1)
             ->assertSet('matrixRows.1.title', 'Growth Guide')
             ->assertSet('matrixRows.1.paid_orders', 1);
+    }
+
+    public function test_content_growth_attribution_tracks_share_only_conversion_lineage_and_strict_canonical_health(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+        ]);
+        $selectedOrg = $this->createOrganization('Growth Lineage Org');
+
+        $article = Article::query()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'slug' => 'lineage-article',
+            'locale' => 'en',
+            'title' => 'Lineage Article',
+            'excerpt' => 'Lineage article excerpt',
+            'content_md' => 'Body',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::now()->subDays(2),
+        ]);
+
+        ArticleSeoMeta::query()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'article_id' => (int) $article->id,
+            'locale' => 'en',
+            'seo_title' => 'Lineage Article SEO',
+            'seo_description' => 'Lineage article description',
+            'canonical_url' => 'https://frontend.example.test/en/articles/not-the-real-slug',
+            'og_title' => 'Lineage Article OG',
+            'og_description' => 'Lineage Article OG Description',
+            'og_image_url' => 'https://frontend.example.test/images/lineage-article.png',
+            'robots' => 'index,follow',
+            'is_indexable' => true,
+        ]);
+
+        Event::query()->create([
+            'id' => (string) Str::uuid(),
+            'event_code' => 'share_generate',
+            'event_name' => 'share_generate',
+            'org_id' => (int) $selectedOrg->id,
+            'meta_json' => [
+                'landing_path' => '/en/articles/lineage-article',
+                'share_click_id' => 'lineage_click_1',
+            ],
+            'share_id' => 'lineage_share_1',
+            'occurred_at' => Carbon::now()->subDays(2),
+        ]);
+
+        Event::query()->create([
+            'id' => (string) Str::uuid(),
+            'event_code' => 'share_click',
+            'event_name' => 'share_click',
+            'org_id' => (int) $selectedOrg->id,
+            'meta_json' => [
+                'entry_page' => 'share_page',
+                'share_click_id' => 'lineage_click_1',
+            ],
+            'share_id' => 'lineage_share_1',
+            'occurred_at' => Carbon::now()->subDay(),
+        ]);
+
+        Order::query()->create([
+            'id' => (string) Str::uuid(),
+            'order_no' => 'ord_lineage_article',
+            'provider' => 'stripe',
+            'status' => 'paid',
+            'payment_state' => 'paid',
+            'grant_state' => 'not_started',
+            'amount_total' => 4999,
+            'amount_cents' => 4999,
+            'currency' => 'USD',
+            'item_sku' => 'MBTI_REPORT_FULL',
+            'sku' => 'MBTI_REPORT_FULL',
+            'quantity' => 1,
+            'anon_id' => 'anon_lineage_article',
+            'org_id' => (int) $selectedOrg->id,
+            'meta_json' => [
+                'attribution' => [
+                    'share_id' => 'lineage_share_1',
+                    'share_click_id' => 'lineage_click_1',
+                    'entrypoint' => 'share_page',
+                ],
+            ],
+            'paid_at' => Carbon::now()->subHours(8),
+        ]);
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        app()->instance('request', Request::create('/ops/content-growth-attribution', 'GET'));
+
+        $context = app(OrgContext::class);
+        $context->set((int) $selectedOrg->id, (int) $admin->id, 'admin');
+        app()->instance(OrgContext::class, $context);
+
+        Livewire::test(ContentGrowthAttributionPage::class)
+            ->assertOk()
+            ->assertSet('headlineFields.0.value', '0')
+            ->assertSet('headlineFields.1.value', '1')
+            ->assertSet('headlineFields.2.value', '2')
+            ->assertSet('headlineFields.3.value', '1')
+            ->assertSet('headlineFields.4.value', '$49.99')
+            ->assertSet('diagnosticCards.1.value', '1')
+            ->assertSet('matrixRows.0.title', 'Lineage Article')
+            ->assertSet('matrixRows.0.paid_orders', 1)
+            ->assertSet('matrixRows.0.share_assisted_orders', 1)
+            ->assertSet('matrixRows.0.share_touchpoints', 2)
+            ->assertSet('matrixRows.0.seo_label', 'Canonical gap');
     }
 
     private function createOrganization(string $name): Organization
