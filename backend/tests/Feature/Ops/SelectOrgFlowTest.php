@@ -53,13 +53,14 @@ final class SelectOrgFlowTest extends TestCase
         $createdOrg = Organization::query()->latest('id')->firstOrFail();
 
         $this->assertDatabaseCount('organizations', 3);
-        $this->assertSame((int) $admin->id, (int) $createdOrg->owner_user_id);
-        $this->assertDatabaseHas('organization_members', [
+        $this->assertSame(0, (int) $createdOrg->owner_user_id);
+        $this->assertDatabaseMissing('organization_members', [
             'org_id' => (int) $createdOrg->id,
-            'user_id' => (int) $admin->id,
-            'role' => 'owner',
-            'is_active' => 1,
         ]);
+
+        Livewire::test(SelectOrgPage::class)
+            ->call('selectOrg', (int) $createdOrg->id)
+            ->assertRedirect('/ops');
     }
 
     public function test_select_org_action_persists_context_and_return_to_target_opens(): void

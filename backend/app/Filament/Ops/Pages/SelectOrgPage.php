@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Pages;
 
-use App\Services\Org\OrganizationService;
 use App\Support\Rbac\PermissionNames;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
@@ -136,41 +135,26 @@ class SelectOrgPage extends Page
         $nextNumber = (int) DB::table('organizations')->count() + 1;
         $name = 'Organization '.$nextNumber;
 
-        $guard = (string) config('admin.guard', 'admin');
-        $user = auth($guard)->user();
-        $ownerUserId = is_object($user) && method_exists($user, 'getAuthIdentifier')
-            ? (int) $user->getAuthIdentifier()
-            : 0;
-
-        if ($ownerUserId <= 0) {
-            Notification::make()
-                ->title('Admin session missing')
-                ->danger()
-                ->send();
-
-            return;
-        }
-
-        $orgId = app(OrganizationService::class)->createOrg($name, $ownerUserId);
-
-        $defaults = [];
+        $payload = [
+            'name' => $name,
+            'owner_user_id' => 0,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
         if (\App\Support\SchemaBaseline::hasColumn('organizations', 'status')) {
-            $defaults['status'] = 'active';
+            $payload['status'] = 'active';
         }
         if (\App\Support\SchemaBaseline::hasColumn('organizations', 'domain')) {
-            $defaults['domain'] = null;
+            $payload['domain'] = null;
         }
         if (\App\Support\SchemaBaseline::hasColumn('organizations', 'timezone')) {
-            $defaults['timezone'] = 'UTC';
+            $payload['timezone'] = 'UTC';
         }
         if (\App\Support\SchemaBaseline::hasColumn('organizations', 'locale')) {
-            $defaults['locale'] = 'en-US';
+            $payload['locale'] = 'en-US';
         }
-        if ($defaults !== []) {
-            DB::table('organizations')
-                ->where('id', $orgId)
-                ->update($defaults);
-        }
+
+        $orgId = (int) DB::table('organizations')->insertGetId($payload);
 
         $this->refreshOrganizations();
 
