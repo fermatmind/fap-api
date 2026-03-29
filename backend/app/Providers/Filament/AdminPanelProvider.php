@@ -57,7 +57,7 @@ class AdminPanelProvider extends PanelProvider
             ->font('Instrument Sans')
             ->darkMode(false)
             ->defaultThemeMode(ThemeMode::Light)
-            ->theme(asset('css/filament/ops/theme.css'))
+            ->theme('ops-theme')
             ->discoverResources(in: app_path('Filament/Ops/Resources'), for: 'App\\Filament\\Ops\\Resources')
             ->discoverPages(in: app_path('Filament/Ops/Pages'), for: 'App\\Filament\\Ops\\Pages')
             ->pages([

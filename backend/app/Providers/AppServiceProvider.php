@@ -31,6 +31,8 @@ use App\Support\Logging\RedactProcessor;
 use App\Support\OrgContext;
 use App\Support\Security\ExternalKmsPiiEnvelopeAdapter;
 use App\Support\Security\LocalPiiEnvelopeAdapter;
+use Filament\Support\Assets\Theme;
+use Filament\Support\Facades\FilamentAsset;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -285,6 +287,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        FilamentAsset::register([
+            Theme::make('ops-theme', resource_path('css/filament/ops/theme.compiled.css')),
+        ]);
+
         Gate::policy(Attempt::class, AttemptPolicy::class);
         Gate::policy(Order::class, OrderPolicy::class);
         Gate::policy(PaymentEvent::class, PaymentEventPolicy::class);

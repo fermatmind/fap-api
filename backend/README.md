@@ -37,6 +37,30 @@ php artisan migrate --force
 php artisan fap:schema:verify
 ```
 
+## Ops Panel Theme 发布说明
+- Ops panel Tailwind 源文件：`backend/resources/css/filament/ops/theme.css`
+- Ops panel 静态 fallback：`backend/resources/css/filament/ops/theme.compiled.css`
+- 运行时加载路径：`/css/app/ops-theme.css`
+- 发布方式：`php artisan filament:assets`
+
+部署要求：
+- 不要使用 `composer install --no-scripts`
+- 当前 `backend/composer.json` 已在 `post-autoload-dump` 中自动执行 `php artisan filament:assets --ansi`
+- 服务器不需要 node / pnpm；运行时只发布仓库内已编译的 fallback CSS
+- 若某次部署显式禁用了 Composer scripts，需手动补跑：
+
+```bash
+cd /Users/rainie/Desktop/GitHub/fap-api/backend
+php artisan filament:assets --ansi
+```
+
+本地更新 Ops theme fallback：
+
+```bash
+cd /Users/rainie/Desktop/GitHub/fap-api/backend
+npm run build:ops-theme
+```
+
 ## verify_mbti：本机 / 服务器 / CI 可重复验收
 
 ### A. 本机模式（自动创建 attempt）
