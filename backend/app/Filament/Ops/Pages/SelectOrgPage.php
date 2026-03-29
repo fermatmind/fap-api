@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Pages;
 
+use App\Services\Ops\OrgVisibilityResolver;
 use App\Support\Rbac\PermissionNames;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
@@ -40,6 +41,13 @@ class SelectOrgPage extends Page
         return __('ops.nav.select_org');
     }
 
+    public static function canAccess(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+
+        return app(OrgVisibilityResolver::class)->canSelectOrganizations(auth($guard)->user());
+    }
+
     public function mount(): void
     {
         $this->returnTo = trim((string) request()->query('return_to', ''));
@@ -73,9 +81,9 @@ class SelectOrgPage extends Page
             return;
         }
 
-        $exists = DB::table('organizations')
-            ->where('id', $orgId)
-            ->exists();
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+        $exists = app(OrgVisibilityResolver::class)->isVisibleOrganization($user, $orgId);
 
         if (! $exists) {
             Notification::make()
@@ -203,8 +211,10 @@ class SelectOrgPage extends Page
 
         $search = trim($this->search);
 
-        $query = DB::table('organizations')
-            ->select(['id', 'name', 'status', 'domain', 'updated_at'])
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+        $query = app(OrgVisibilityResolver::class)
+            ->visibleOrganizationsQuery($user)
             ->orderBy('id', 'desc');
 
         if ($search !== '') {
@@ -246,6 +256,15 @@ class SelectOrgPage extends Page
         if (! \App\Support\SchemaBaseline::hasTable('organizations')) {
             $this->currentOrgName = 'No Org Selected';
             $this->currentOrgId = 0;
+
+            return;
+        }
+
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+        if (! app(OrgVisibilityResolver::class)->isVisibleOrganization($user, $this->currentOrgId)) {
+            $this->currentOrgId = 0;
+            $this->currentOrgName = 'No Org Selected';
 
             return;
         }

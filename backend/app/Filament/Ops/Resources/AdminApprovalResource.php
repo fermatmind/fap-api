@@ -10,6 +10,7 @@ use App\Filament\Shared\BaseTenantResource;
 use App\Jobs\ExecuteApprovalJob;
 use App\Models\AdminApproval;
 use App\Services\Audit\AuditLogger;
+use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -39,7 +40,13 @@ class AdminApprovalResource extends BaseTenantResource
             return null;
         }
 
+        $orgId = max(0, (int) app(OrgContext::class)->orgId());
+        if ($orgId <= 0) {
+            return null;
+        }
+
         $count = (int) DB::table('admin_approvals')
+            ->where('org_id', $orgId)
             ->where('status', AdminApproval::STATUS_PENDING)
             ->count();
 

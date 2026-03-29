@@ -261,7 +261,6 @@ class ReportSnapshotResource extends Resource
             && method_exists($user, 'hasPermission')
             && (
                 $user->hasPermission(PermissionNames::ADMIN_MENU_SUPPORT)
-                || $user->hasPermission(PermissionNames::ADMIN_OPS_READ)
                 || $user->hasPermission(PermissionNames::ADMIN_OWNER)
             );
     }

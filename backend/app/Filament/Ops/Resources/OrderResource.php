@@ -392,7 +392,6 @@ class OrderResource extends \App\Filament\Shared\BaseTenantResource
             && (
                 $user->hasPermission(PermissionNames::ADMIN_MENU_COMMERCE)
                 || $user->hasPermission(PermissionNames::ADMIN_MENU_SUPPORT)
-                || $user->hasPermission(PermissionNames::ADMIN_OPS_READ)
                 || $user->hasPermission(PermissionNames::ADMIN_OWNER)
             );
     }

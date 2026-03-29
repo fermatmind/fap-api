@@ -25,6 +25,7 @@ class RequireOpsOrgSelected
         'filament.ops.pages.go-live-gate',
         'filament.ops.pages.health-checks',
         'filament.ops.pages.queue-monitor',
+        'filament.ops.pages.global-search',
     ];
 
     /**
@@ -36,6 +37,10 @@ class RequireOpsOrgSelected
         'filament.ops.resources.permissions.',
         'filament.ops.resources.organizations.',
         'filament.ops.resources.deploys.',
+        'filament.ops.resources.orders.',
+        'filament.ops.resources.attempts.',
+        'filament.ops.resources.results.',
+        'filament.ops.resources.reports.',
     ];
 
     /**
@@ -46,14 +51,12 @@ class RequireOpsOrgSelected
         'filament.ops.pages.delivery-tools',
         'filament.ops.pages.secure-link',
         'filament.ops.pages.webhook-monitor',
-        'filament.ops.pages.global-search',
     ];
 
     /**
      * @var list<string>
      */
     private array $orgScopedResourcePrefixes = [
-        'filament.ops.resources.orders.',
         'filament.ops.resources.payment-events.',
         'filament.ops.resources.benefit-grants.',
         'filament.ops.resources.skus.',
@@ -107,7 +110,7 @@ class RequireOpsOrgSelected
         $request->session()->flash('ops_org_required_message', '需要先选择组织后再访问该模块。');
 
         return redirect()->route('filament.ops.pages.select-org', [
-            'return_to' => '/' . ltrim($request->path(), '/'),
+            'return_to' => '/'.ltrim($request->path(), '/'),
         ]);
     }
 }
