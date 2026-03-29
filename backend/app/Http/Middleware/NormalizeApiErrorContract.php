@@ -16,7 +16,7 @@ final class NormalizeApiErrorContract
     {
         $response = $next($request);
 
-        if (!$request->is('api/*') || !($response instanceof JsonResponse)) {
+        if (! $request->is('api/*') || ! ($response instanceof JsonResponse)) {
             return $response;
         }
 
@@ -26,7 +26,7 @@ final class NormalizeApiErrorContract
         }
 
         $payload = $response->getData(true);
-        if (!is_array($payload)) {
+        if (! is_array($payload)) {
             $payload = [];
         }
 
@@ -136,12 +136,12 @@ final class NormalizeApiErrorContract
     }
 
     /**
-     * @param array<int, mixed> $candidates
+     * @param  array<int, mixed>  $candidates
      */
     private function firstNonEmptyString(array $candidates): string
     {
         foreach ($candidates as $candidate) {
-            if (!is_string($candidate) && !is_numeric($candidate)) {
+            if (! is_string($candidate) && ! is_numeric($candidate)) {
                 continue;
             }
 

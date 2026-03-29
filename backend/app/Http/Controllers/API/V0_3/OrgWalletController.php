@@ -12,8 +12,7 @@ class OrgWalletController extends Controller
 {
     public function __construct(
         private OrgContext $orgContext,
-    ) {
-    }
+    ) {}
 
     /**
      * GET /api/v0.3/orgs/{org_id}/wallets
@@ -23,7 +22,7 @@ class OrgWalletController extends Controller
         $orgId = $this->orgContext->orgId();
         $role = $this->orgContext->role();
 
-        if ((int) $org_id !== $orgId || $orgId <= 0 || !$this->isAdminRole($role)) {
+        if ((int) $org_id !== $orgId || $orgId <= 0 || ! $this->isAdminRole($role)) {
             return $this->orgNotFound();
         }
 
@@ -46,7 +45,7 @@ class OrgWalletController extends Controller
         $orgId = $this->orgContext->orgId();
         $role = $this->orgContext->role();
 
-        if ((int) $org_id !== $orgId || $orgId <= 0 || !$this->isAdminRole($role)) {
+        if ((int) $org_id !== $orgId || $orgId <= 0 || ! $this->isAdminRole($role)) {
             return $this->orgNotFound();
         }
 

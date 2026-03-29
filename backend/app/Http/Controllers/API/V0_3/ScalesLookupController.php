@@ -117,7 +117,7 @@ class ScalesLookupController extends Controller
     }
 
     /**
-     * @param array<string,mixed> $row
+     * @param  array<string,mixed>  $row
      * @return array{title:?string,description:?string,og_image_url:?string}
      */
     private function resolveSeoByLocale(array $row, string $locale): array
@@ -154,7 +154,7 @@ class ScalesLookupController extends Controller
     }
 
     /**
-     * @param array<string,mixed> $row
+     * @param  array<string,mixed>  $row
      */
     private function resolveIsIndexable(array $row): bool
     {
@@ -204,7 +204,7 @@ class ScalesLookupController extends Controller
             return 'zh-CN';
         }
         if ($lang === 'en') {
-            return $region !== '' ? 'en-' . strtoupper($region) : 'en';
+            return $region !== '' ? 'en-'.strtoupper($region) : 'en';
         }
 
         return $lang;
@@ -218,6 +218,7 @@ class ScalesLookupController extends Controller
         }
 
         $parts = explode('-', $locale);
+
         return strtolower((string) ($parts[0] ?? 'en'));
     }
 
@@ -243,6 +244,7 @@ class ScalesLookupController extends Controller
     private function trimOrNull(mixed $value): ?string
     {
         $trimmed = trim((string) $value);
+
         return $trimmed !== '' ? $trimmed : null;
     }
 

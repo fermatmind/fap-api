@@ -11,9 +11,7 @@ class EmailBindingVerificationMail extends Mailable
     use Queueable;
     use SerializesModels;
 
-    public function __construct(public readonly string $token)
-    {
-    }
+    public function __construct(public readonly string $token) {}
 
     public function build(): self
     {

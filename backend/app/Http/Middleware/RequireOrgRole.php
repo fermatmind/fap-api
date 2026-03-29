@@ -13,8 +13,7 @@ class RequireOrgRole
     public function __construct(
         private MembershipService $memberships,
         private OrgContext $orgContext,
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, Closure $next, string ...$roles): Response
     {
@@ -33,7 +32,7 @@ class RequireOrgRole
             return $this->orgNotFound();
         }
 
-        if ($roles !== [] && !in_array($role, $roles, true)) {
+        if ($roles !== [] && ! in_array($role, $roles, true)) {
             return $this->orgNotFound();
         }
 
@@ -63,7 +62,7 @@ class RequireOrgRole
     private function resolveUserId(Request $request): ?int
     {
         $raw = (string) ($request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id') ?? '');
-        if ($raw === '' || !preg_match('/^\d+$/', $raw)) {
+        if ($raw === '' || ! preg_match('/^\d+$/', $raw)) {
             return null;
         }
 

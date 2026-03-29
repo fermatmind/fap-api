@@ -14,19 +14,19 @@ use App\Services\Analytics\EventRecorder;
 use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\BigFive\BigFivePublicProjectionService;
 use App\Services\Commerce\MbtiAccessHubBuilder;
+use App\Services\Mbti\MbtiActionJourneyContractService;
+use App\Services\Mbti\MbtiAdaptiveSelectionService;
 use App\Services\Mbti\MbtiIntraTypeProfileService;
 use App\Services\Mbti\MbtiPrivacyConsentContractService;
 use App\Services\Mbti\MbtiPublicProjectionService;
-use App\Services\Mbti\MbtiReadModelContractService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
-use App\Services\Mbti\MbtiActionJourneyContractService;
-use App\Services\Mbti\MbtiAdaptiveSelectionService;
+use App\Services\Mbti\MbtiReadModelContractService;
 use App\Services\Mbti\MbtiUserStateOrchestrationService;
 use App\Services\Mbti\MbtiWorkingLifeConsolidationService;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
-use App\Services\Report\Pdf\ReportPdfDocumentService;
 use App\Services\Report\MbtiPreviewContractBuilder;
+use App\Services\Report\Pdf\ReportPdfDocumentService;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportGatekeeper;
 use App\Services\Scale\ScaleCodeResponseProjector;
@@ -523,8 +523,7 @@ class AttemptReadController extends Controller
         Request $request,
         string $attemptId,
         string $scaleCode
-    ): Attempt
-    {
+    ): Attempt {
         if ($this->isPublicReportScale($scaleCode)) {
             $actor = $this->reportActor($request);
             $attempt = $this->reportSubjects->findAttemptForCurrentContext($attemptId, $actor);

@@ -15,8 +15,7 @@ class OrgInvitesController extends Controller
         private InviteService $invites,
         private Rbac $rbac,
         private OrgContext $orgContext,
-    ) {
-    }
+    ) {}
 
     /**
      * POST /api/v0.3/orgs/{org_id}/invites
@@ -75,7 +74,7 @@ class OrgInvitesController extends Controller
         }
 
         $res = $this->invites->acceptInvite((string) $payload['token'], $userId);
-        if (!($res['ok'] ?? false)) {
+        if (! ($res['ok'] ?? false)) {
             $error = (string) ($res['error_code'] ?? $res['error'] ?? 'INVITE_INVALID');
             $status = match ($error) {
                 'INVITE_NOT_FOUND' => 404,
@@ -93,7 +92,7 @@ class OrgInvitesController extends Controller
     private function resolveUserId(Request $request): ?int
     {
         $raw = (string) ($request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id') ?? '');
-        if ($raw === '' || !preg_match('/^\d+$/', $raw)) {
+        if ($raw === '' || ! preg_match('/^\d+$/', $raw)) {
             return null;
         }
 

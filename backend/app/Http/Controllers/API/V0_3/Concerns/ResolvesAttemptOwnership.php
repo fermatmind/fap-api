@@ -69,7 +69,7 @@ trait ResolvesAttemptOwnership
 
     private function normalizeNumericString(mixed $candidate): ?string
     {
-        if (!is_string($candidate) && !is_numeric($candidate)) {
+        if (! is_string($candidate) && ! is_numeric($candidate)) {
             return null;
         }
 
@@ -83,7 +83,7 @@ trait ResolvesAttemptOwnership
 
     private function normalizeString(mixed $candidate): ?string
     {
-        if (!is_string($candidate) && !is_numeric($candidate)) {
+        if (! is_string($candidate) && ! is_numeric($candidate)) {
             return null;
         }
 

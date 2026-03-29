@@ -14,8 +14,7 @@ class AttemptProgressController extends Controller
     public function __construct(
         private AttemptProgressService $progressService,
         private OrgContext $orgContext,
-    ) {
-    }
+    ) {}
 
     /**
      * PUT /api/v0.3/attempts/{attempt_id}/progress
@@ -53,11 +52,12 @@ class AttemptProgressController extends Controller
         $attempt = $attemptQuery->firstOrFail();
 
         $result = $this->progressService->saveProgress($attempt, $token !== '' ? $token : null, $userId, $payload);
-        if (!($result['ok'] ?? false)) {
+        if (! ($result['ok'] ?? false)) {
             $status = (int) ($result['status'] ?? 400);
             if (in_array($status, [401, 403], true)) {
                 abort(404);
             }
+
             return response()->json($result, $status);
         }
 
@@ -90,11 +90,12 @@ class AttemptProgressController extends Controller
         $attempt = $attemptQuery->firstOrFail();
 
         $result = $this->progressService->getProgress($attempt, $token !== '' ? $token : null, $userId);
-        if (!($result['ok'] ?? false)) {
+        if (! ($result['ok'] ?? false)) {
             $status = (int) ($result['status'] ?? 400);
             if (in_array($status, [401, 403], true)) {
                 abort(404);
             }
+
             return response()->json($result, $status);
         }
 

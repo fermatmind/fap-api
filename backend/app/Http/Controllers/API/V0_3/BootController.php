@@ -16,8 +16,7 @@ class BootController extends Controller
         private FlagManager $flagManager,
         private ExperimentAssigner $experimentAssigner,
         private OrgContext $orgContext,
-    ) {
-    }
+    ) {}
 
     /**
      * GET /api/v0.3/boot
@@ -84,7 +83,7 @@ class BootController extends Controller
         ];
 
         foreach ($candidates as $candidate) {
-            if (!is_string($candidate) && !is_numeric($candidate)) {
+            if (! is_string($candidate) && ! is_numeric($candidate)) {
                 continue;
             }
             $value = trim((string) $candidate);
@@ -93,6 +92,6 @@ class BootController extends Controller
             }
         }
 
-        return 'anon_' . Str::uuid();
+        return 'anon_'.Str::uuid();
     }
 }

@@ -28,6 +28,7 @@ class AdminAuth
             }
 
             $request->attributes->set('admin_auth_mode', 'session');
+
             return $next($request);
         }
 
@@ -41,7 +42,7 @@ class AdminAuth
             return $this->unauthorizedResponse('admin_token_missing');
         }
 
-        if ($expect === '' || !hash_equals($expect, $token)) {
+        if ($expect === '' || ! hash_equals($expect, $token)) {
             return $this->forbiddenResponse('admin_token_invalid');
         }
 

@@ -14,7 +14,7 @@ class CheckAiBudget
 
     public function handle(Request $request, Closure $next): Response
     {
-        if (!(bool) config('ai.enabled', true) || !(bool) config('ai.insights_enabled', true)) {
+        if (! (bool) config('ai.enabled', true) || ! (bool) config('ai.insights_enabled', true)) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'AI_DISABLED',
@@ -23,7 +23,7 @@ class CheckAiBudget
             ], 503);
         }
 
-        if (!(bool) config('ai.breaker_enabled', true)) {
+        if (! (bool) config('ai.breaker_enabled', true)) {
             return $next($request);
         }
 
@@ -60,7 +60,7 @@ class CheckAiBudget
     {
         $userId = trim((string) $request->attributes->get('fm_user_id', ''));
         if ($userId !== '') {
-            return 'user:' . $userId;
+            return 'user:'.$userId;
         }
 
         $anonId = trim((string) $request->attributes->get('anon_id', ''));
@@ -69,7 +69,7 @@ class CheckAiBudget
         }
 
         if ($anonId !== '') {
-            return 'anon:' . $anonId;
+            return 'anon:'.$anonId;
         }
 
         return 'unknown';
@@ -104,6 +104,7 @@ class CheckAiBudget
         if ($tokens < 1) {
             return 1;
         }
+
         return $tokens;
     }
 

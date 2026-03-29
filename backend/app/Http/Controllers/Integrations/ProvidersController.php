@@ -10,7 +10,6 @@ use App\Services\Ingestion\ReplayService;
 use App\Support\Idempotency\IdempotencyKey;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -63,7 +62,7 @@ class ProvidersController extends Controller
         $state = (string) $request->query('state', '');
         $code = (string) $request->query('code', '');
         $userId = $this->resolveUserId($request);
-        $ingestKey = 'igk_' . Str::random(48);
+        $ingestKey = 'igk_'.Str::random(48);
         $ingestKeyHash = hash('sha256', $ingestKey);
 
         $externalUserId = 'mock_'.substr(sha1($provider.'|'.$state.'|'.$code), 0, 12);
