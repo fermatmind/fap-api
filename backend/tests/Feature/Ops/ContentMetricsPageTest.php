@@ -287,6 +287,41 @@ final class ContentMetricsPageTest extends TestCase
         $this->assertFalse($staleArticle->is_indexable);
     }
 
+    public function test_content_metrics_excludes_archived_drafts_from_active_stale_pressure(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+        ]);
+        $selectedOrg = $this->createOrganization('Archived Draft Metrics Org');
+
+        $archivedDraft = Article::query()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'slug' => 'archived-draft-metrics-article',
+            'locale' => 'en',
+            'title' => 'Archived Draft Metrics Article',
+            'excerpt' => 'Archived draft excerpt',
+            'content_md' => 'Archived draft body',
+            'status' => 'draft',
+            'lifecycle_state' => 'archived',
+            'is_public' => false,
+            'is_indexable' => false,
+        ]);
+        $archivedDraft->forceFill(['updated_at' => Carbon::now()->subDays(30)])->save();
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        app()->instance('request', Request::create('/ops/content-metrics', 'GET'));
+
+        $context = app(OrgContext::class);
+        $context->set((int) $selectedOrg->id, (int) $admin->id, 'admin');
+        app()->instance(OrgContext::class, $context);
+
+        Livewire::test(ContentMetricsPage::class)
+            ->assertOk()
+            ->assertSet('headlineFields.3.value', '0')
+            ->assertSet('scopeFields.1.value', '1')
+            ->assertSet('freshnessCards.0.value', '0');
+    }
+
     private function createOrganization(string $name): Organization
     {
         return Organization::query()->create([

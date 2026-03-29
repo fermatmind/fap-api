@@ -57,7 +57,6 @@ return [
             'ai_insight_feedback',
             'ai_insights',
             'auth_tokens',
-            'attempt_quality',
             'attempts',
             'attempt_submissions',
             'audit_logs',

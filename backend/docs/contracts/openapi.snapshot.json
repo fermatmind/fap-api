@@ -303,6 +303,29 @@
                 "x-laravel-name": "api.v0_3.attempts.report"
             }
         },
+        "/api/v0.3/attempts/{id}/report-access": {
+            "get": {
+                "operationId": "api.v0_3.attempts.report_access",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AttemptReadController@reportAccess",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
+                ],
+                "x-laravel-name": "api.v0_3.attempts.report_access"
+            }
+        },
         "/api/v0.3/attempts/{id}/report.pdf": {
             "get": {
                 "operationId": "api.v0_3.attempts.report_pdf",
@@ -1421,6 +1444,90 @@
                 ]
             }
         },
+        "/api/v0.3/public-gateways/help": {
+            "get": {
+                "operationId": "get_api_v0_3_public_gateways_help",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\PublicGatewaySurfaceController@help",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/public-gateways/help/{slug}": {
+            "get": {
+                "operationId": "get_api_v0_3_public_gateways_help_slug_",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\PublicGatewaySurfaceController@helpDetail",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/public-gateways/home": {
+            "get": {
+                "operationId": "get_api_v0_3_public_gateways_home",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\PublicGatewaySurfaceController@home",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
+        "/api/v0.3/public-gateways/tests": {
+            "get": {
+                "operationId": "get_api_v0_3_public_gateways_tests",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\PublicGatewaySurfaceController@tests",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
         "/api/v0.3/scales": {
             "get": {
                 "operationId": "get_api_v0_3_scales",
@@ -2152,7 +2259,7 @@
                     "App\\Http\\Middleware\\SetOpsRequestContext",
                     "App\\Http\\Middleware\\AdminAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
-                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized"
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:write"
                 ]
             }
         },
@@ -2176,7 +2283,7 @@
                     "App\\Http\\Middleware\\SetOpsRequestContext",
                     "App\\Http\\Middleware\\AdminAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
-                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized"
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:write"
                 ]
             }
         },
@@ -2200,7 +2307,7 @@
                     "App\\Http\\Middleware\\SetOpsRequestContext",
                     "App\\Http\\Middleware\\AdminAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
-                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized"
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:release"
                 ]
             }
         },
@@ -2224,7 +2331,7 @@
                     "App\\Http\\Middleware\\SetOpsRequestContext",
                     "App\\Http\\Middleware\\AdminAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
-                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized"
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:write"
                 ]
             }
         },
@@ -2248,7 +2355,7 @@
                     "App\\Http\\Middleware\\SetOpsRequestContext",
                     "App\\Http\\Middleware\\AdminAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
-                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized"
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:release"
                 ]
             }
         },

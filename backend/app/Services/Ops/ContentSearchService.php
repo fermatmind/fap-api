@@ -73,7 +73,7 @@ class ContentSearchService
             }
         }
 
-        if ($lifecycleFilter === 'all' && in_array($typeFilter, ['all', 'category'], true)) {
+        if ($lifecycleFilter === 'all' && $staleFilter === 'all' && in_array($typeFilter, ['all', 'category'], true)) {
             $categories = ArticleCategory::query()
                 ->whereIn('org_id', $currentOrgIds)
                 ->where(function ($query) use ($needle): void {
@@ -101,7 +101,7 @@ class ContentSearchService
             }
         }
 
-        if ($lifecycleFilter === 'all' && in_array($typeFilter, ['all', 'tag'], true)) {
+        if ($lifecycleFilter === 'all' && $staleFilter === 'all' && in_array($typeFilter, ['all', 'tag'], true)) {
             $tags = ArticleTag::query()
                 ->whereIn('org_id', $currentOrgIds)
                 ->where(function ($query) use ($needle): void {

@@ -116,6 +116,10 @@ class ContentMetricsPage extends Page
             ->count();
         $articleDrafts = (clone $articleBaseQuery)
             ->where('status', 'draft')
+            ->where(function ($query): void {
+                $query->where('lifecycle_state', ContentLifecycleService::STATE_ACTIVE)
+                    ->orWhereNull('lifecycle_state');
+            })
             ->count();
         $articleArchived = (clone $articleBaseQuery)
             ->where('lifecycle_state', ContentLifecycleService::STATE_ARCHIVED)
@@ -128,6 +132,10 @@ class ContentMetricsPage extends Page
             ->count();
         $articleStaleBaseQuery = (clone $articleBaseQuery)
             ->where('status', 'draft')
+            ->where(function ($query): void {
+                $query->where('lifecycle_state', ContentLifecycleService::STATE_ACTIVE)
+                    ->orWhereNull('lifecycle_state');
+            })
             ->where('updated_at', '<', $staleThreshold);
         $articleStaleDrafts = (clone $articleStaleBaseQuery)->count();
 
@@ -142,7 +150,13 @@ class ContentMetricsPage extends Page
             ->where('org_id', 0);
 
         $guideTotal = (clone $guideBaseQuery)->count();
-        $guideDrafts = (clone $guideBaseQuery)->where('status', CareerGuide::STATUS_DRAFT)->count();
+        $guideDrafts = (clone $guideBaseQuery)
+            ->where('status', CareerGuide::STATUS_DRAFT)
+            ->where(function ($query): void {
+                $query->where('lifecycle_state', ContentLifecycleService::STATE_ACTIVE)
+                    ->orWhereNull('lifecycle_state');
+            })
+            ->count();
         $guidePublishedPublic = (clone $guideBaseQuery)
             ->where('status', CareerGuide::STATUS_PUBLISHED)
             ->where('is_public', true)
@@ -162,11 +176,21 @@ class ContentMetricsPage extends Page
             ->count();
         $guideStaleBaseQuery = (clone $guideBaseQuery)
             ->where('status', CareerGuide::STATUS_DRAFT)
+            ->where(function ($query): void {
+                $query->where('lifecycle_state', ContentLifecycleService::STATE_ACTIVE)
+                    ->orWhereNull('lifecycle_state');
+            })
             ->where('updated_at', '<', $staleThreshold);
         $guideStaleDrafts = (clone $guideStaleBaseQuery)->count();
 
         $jobTotal = (clone $jobBaseQuery)->count();
-        $jobDrafts = (clone $jobBaseQuery)->where('status', CareerJob::STATUS_DRAFT)->count();
+        $jobDrafts = (clone $jobBaseQuery)
+            ->where('status', CareerJob::STATUS_DRAFT)
+            ->where(function ($query): void {
+                $query->where('lifecycle_state', ContentLifecycleService::STATE_ACTIVE)
+                    ->orWhereNull('lifecycle_state');
+            })
+            ->count();
         $jobPublishedPublic = (clone $jobBaseQuery)
             ->where('status', CareerJob::STATUS_PUBLISHED)
             ->where('is_public', true)
@@ -186,6 +210,10 @@ class ContentMetricsPage extends Page
             ->count();
         $jobStaleBaseQuery = (clone $jobBaseQuery)
             ->where('status', CareerJob::STATUS_DRAFT)
+            ->where(function ($query): void {
+                $query->where('lifecycle_state', ContentLifecycleService::STATE_ACTIVE)
+                    ->orWhereNull('lifecycle_state');
+            })
             ->where('updated_at', '<', $staleThreshold);
         $jobStaleDrafts = (clone $jobStaleBaseQuery)->count();
 

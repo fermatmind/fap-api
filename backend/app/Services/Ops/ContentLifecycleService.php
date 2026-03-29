@@ -70,18 +70,30 @@ final class ContentLifecycleService
             'article' => Article::query()
                 ->whereIn('org_id', $currentOrgIds)
                 ->where('status', 'draft')
+                ->where(function ($query): void {
+                    $query->where('lifecycle_state', self::STATE_ACTIVE)
+                        ->orWhereNull('lifecycle_state');
+                })
                 ->where('updated_at', '<', $staleThreshold)
                 ->get(),
             'guide' => CareerGuide::query()
                 ->withoutGlobalScopes()
                 ->where('org_id', 0)
                 ->where('status', CareerGuide::STATUS_DRAFT)
+                ->where(function ($query): void {
+                    $query->where('lifecycle_state', self::STATE_ACTIVE)
+                        ->orWhereNull('lifecycle_state');
+                })
                 ->where('updated_at', '<', $staleThreshold)
                 ->get(),
             'job' => CareerJob::query()
                 ->withoutGlobalScopes()
                 ->where('org_id', 0)
                 ->where('status', CareerJob::STATUS_DRAFT)
+                ->where(function ($query): void {
+                    $query->where('lifecycle_state', self::STATE_ACTIVE)
+                        ->orWhereNull('lifecycle_state');
+                })
                 ->where('updated_at', '<', $staleThreshold)
                 ->get(),
             default => throw new AuthorizationException('Unsupported stale lifecycle type.'),

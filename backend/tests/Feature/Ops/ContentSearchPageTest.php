@@ -331,6 +331,19 @@ final class ContentSearchPageTest extends TestCase
             'is_public' => false,
             'is_indexable' => true,
         ]);
+        ArticleCategory::query()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'slug' => 'filter-category',
+            'name' => 'Filter Category',
+            'description' => 'Fresh taxonomy should stay out of stale lifecycle search',
+            'is_active' => true,
+        ]);
+        ArticleTag::query()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'slug' => 'filter-tag',
+            'name' => 'Filter Tag',
+            'is_active' => true,
+        ]);
 
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
         app()->instance('request', Request::create('/ops/content-search', 'GET'));
@@ -346,7 +359,9 @@ final class ContentSearchPageTest extends TestCase
             ->set('staleFilter', 'only_stale')
             ->call('runSearch')
             ->assertSee('Archived Filter Article')
-            ->assertDontSee('Active Filter Article');
+            ->assertDontSee('Active Filter Article')
+            ->assertDontSee('Filter Category')
+            ->assertDontSee('Filter Tag');
     }
 
     private function createOrganization(string $name): Organization

@@ -45,12 +45,10 @@ return new class extends Migration
             });
         }
 
-        Schema::table(self::TABLE, function (Blueprint $table): void {
-            $table->string('logical_path', 1024)
-                ->charset('ascii')
-                ->collation('ascii_bin')
-                ->change();
-        });
+        DB::statement(sprintf(
+            'ALTER TABLE `%s` MODIFY `logical_path` VARCHAR(1024) CHARACTER SET ascii COLLATE ascii_bin NOT NULL',
+            self::TABLE
+        ));
 
         if (! SchemaIndex::indexExists(self::TABLE, self::UNIQUE_INDEX)) {
             Schema::table(self::TABLE, function (Blueprint $table): void {
