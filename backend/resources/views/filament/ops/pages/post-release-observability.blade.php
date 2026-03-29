@@ -3,7 +3,7 @@
         <x-filament-ops::ops-section
             eyebrow="Post-release observability"
             title="Post-release observability"
-            description="Observe what the CMS release surface has recently published, which records are publicly reachable, and which publish audits were written for follow-up."
+            description="Observe what the CMS release surface has recently published, which follow-up signals were dispatched, and where cache invalidation or broadcast steps failed."
         >
             <x-filament-ops::ops-toolbar>
                 <div class="ops-control-stack">
@@ -27,7 +27,7 @@
 
         <x-filament-ops::ops-section
             title="Release telemetry"
-            description="A compact view of release events and post-publish state inside the selected CMS boundary."
+            description="A compact view of release events, cache invalidation signals, and broadcast outcomes inside the selected CMS boundary."
         >
             <x-filament-ops::ops-field-grid :fields="$headlineFields" />
         </x-filament-ops::ops-section>
@@ -63,8 +63,8 @@
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Recent publish audits"
-            description="Publish audit rows written by the CMS release workspace for the current org boundary."
+            title="Recent release events"
+            description="Publish, cache invalidation, broadcast, and failure-alert audit rows for the current org boundary."
         >
             <div class="ops-card-list">
                 @forelse ($auditCards as $card)

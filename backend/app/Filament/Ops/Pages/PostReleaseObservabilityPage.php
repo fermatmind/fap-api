@@ -92,7 +92,12 @@ class PostReleaseObservabilityPage extends Page
                 ->count();
 
         $releaseAuditsQuery = AuditLog::query()
-            ->where('action', 'content_release_publish')
+            ->whereIn('action', [
+                'content_release_publish',
+                'content_release_cache_signal',
+                'content_release_broadcast',
+                'content_release_failure_alert',
+            ])
             ->where('org_id', max(0, (int) app(OrgContext::class)->orgId()))
             ->latest('created_at');
 
@@ -101,7 +106,31 @@ class PostReleaseObservabilityPage extends Page
             ->get();
 
         $publishAuditCount24h = (clone $releaseAuditsQuery)
+            ->where('action', 'content_release_publish')
             ->where('created_at', '>=', $recentThreshold)
+            ->count();
+
+        $cacheSignalCount24h = AuditLog::query()
+            ->where('action', 'content_release_cache_signal')
+            ->where('org_id', max(0, (int) app(OrgContext::class)->orgId()))
+            ->where('created_at', '>=', $recentThreshold)
+            ->count();
+
+        $broadcastCount24h = AuditLog::query()
+            ->where('action', 'content_release_broadcast')
+            ->where('org_id', max(0, (int) app(OrgContext::class)->orgId()))
+            ->where('created_at', '>=', $recentThreshold)
+            ->count();
+
+        $followUpFailureCount24h = AuditLog::query()
+            ->whereIn('action', [
+                'content_release_cache_signal',
+                'content_release_broadcast',
+                'content_release_failure_alert',
+            ])
+            ->where('org_id', max(0, (int) app(OrgContext::class)->orgId()))
+            ->where('created_at', '>=', $recentThreshold)
+            ->where('result', 'failed')
             ->count();
 
         $this->headlineFields = [
@@ -116,6 +145,23 @@ class PostReleaseObservabilityPage extends Page
                 'hint' => 'Audit rows written by the CMS release workspace during the last 24 hours.',
             ],
             [
+                'label' => 'Cache invalidation signals',
+                'value' => (string) $cacheSignalCount24h,
+                'hint' => 'Downstream cache invalidation webhooks attempted by the CMS release flow in the last 24 hours.',
+            ],
+            [
+                'label' => 'Broadcast events',
+                'value' => (string) $broadcastCount24h,
+                'hint' => 'Release event broadcasts attempted by the CMS release flow in the last 24 hours.',
+            ],
+            [
+                'label' => 'Follow-up failures',
+                'value' => (string) $followUpFailureCount24h,
+                'kind' => 'pill',
+                'state' => $followUpFailureCount24h > 0 ? 'warning' : 'success',
+                'hint' => 'Failed cache invalidation or broadcast follow-up events after release.',
+            ],
+            [
                 'label' => 'Public delivery footprint',
                 'value' => (string) $publicFootprint,
                 'hint' => 'Published and public records currently reachable through the visible public content contract.',
@@ -126,11 +172,6 @@ class PostReleaseObservabilityPage extends Page
                 'kind' => 'pill',
                 'state' => $visibilityGaps > 0 ? 'warning' : 'success',
                 'hint' => 'Published-but-not-public records that can cause release confusion after approval.',
-            ],
-            [
-                'label' => 'Recent audit stream',
-                'value' => (string) $recentAuditRows->count(),
-                'hint' => 'Most recent publish audit rows available to this selected-org release boundary.',
             ],
         ];
 
@@ -172,13 +213,16 @@ class PostReleaseObservabilityPage extends Page
         $this->auditCards = $recentAuditRows
             ->map(function (AuditLog $row): array {
                 $meta = is_array($row->meta_json) ? $row->meta_json : [];
+                $result = trim((string) ($row->result ?? 'success'));
 
                 return [
                     'title' => trim((string) data_get($meta, 'title', 'Untitled release event')),
                     'meta' => trim((string) ($row->action.' | '.(string) ($row->target_type ?? 'unknown'))),
-                    'description' => 'Actor: '.trim((string) data_get($meta, 'actor_email', 'unknown')).' | Visibility: '.trim((string) data_get($meta, 'visibility', 'unknown')).' | Source: '.trim((string) data_get($meta, 'source', 'unknown')),
-                    'status' => trim((string) data_get($meta, 'status_after', 'published')),
-                    'status_state' => 'success',
+                    'description' => 'Source: '.trim((string) data_get($meta, 'source', 'unknown'))
+                        .' | Endpoint: '.trim((string) data_get($meta, 'endpoint', 'n/a'))
+                        .' | Visibility: '.trim((string) data_get($meta, 'visibility', 'unknown')),
+                    'status' => $result,
+                    'status_state' => $result === 'failed' ? 'danger' : 'success',
                     'latest_title' => optional($row->created_at)?->toDateTimeString() ?? 'Unknown',
                 ];
             })

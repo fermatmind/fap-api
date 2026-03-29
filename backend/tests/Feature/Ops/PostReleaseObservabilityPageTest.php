@@ -26,6 +26,7 @@ use Filament\PanelRegistry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -38,6 +39,7 @@ final class PostReleaseObservabilityPageTest extends TestCase
     {
         parent::setUp();
 
+        config()->set('app.frontend_url', 'https://example.test');
         Filament::setCurrentPanel(app(PanelRegistry::class)->get('ops'));
     }
 
@@ -57,6 +59,16 @@ final class PostReleaseObservabilityPageTest extends TestCase
 
     public function test_post_release_observability_shows_recent_publish_state_and_audits(): void
     {
+        config()->set('ops.content_release_observability.cache_invalidation_urls', [
+            'https://cache.example.test/invalidate',
+        ]);
+        config()->set('ops.content_release_observability.broadcast_webhook', 'https://broadcast.example.test/content-release');
+
+        Http::fake([
+            'https://cache.example.test/*' => Http::response(['ok' => true], 200),
+            'https://broadcast.example.test/*' => Http::response(['ok' => true], 200),
+        ]);
+
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_RELEASE,
         ]);
@@ -166,14 +178,43 @@ final class PostReleaseObservabilityPageTest extends TestCase
         $this->assertTrue($article->is_public);
         $this->assertNotNull($article->published_at);
 
-        $audit = AuditLog::query()
+        $publishAudit = AuditLog::query()
             ->where('action', 'content_release_publish')
             ->where('target_type', 'article')
             ->where('target_id', (string) $article->id)
             ->first();
 
-        $this->assertNotNull($audit);
-        $this->assertSame((int) $selectedOrg->id, (int) $audit->org_id);
+        $cacheSignalAudit = AuditLog::query()
+            ->where('action', 'content_release_cache_signal')
+            ->where('target_type', 'article')
+            ->where('target_id', (string) $article->id)
+            ->first();
+
+        $broadcastAudit = AuditLog::query()
+            ->where('action', 'content_release_broadcast')
+            ->where('target_type', 'article')
+            ->where('target_id', (string) $article->id)
+            ->first();
+
+        $this->assertNotNull($publishAudit);
+        $this->assertNotNull($cacheSignalAudit);
+        $this->assertNotNull($broadcastAudit);
+        $this->assertSame((int) $selectedOrg->id, (int) $publishAudit->org_id);
+        $this->assertSame('success', $cacheSignalAudit->result);
+        $this->assertSame('success', $broadcastAudit->result);
+
+        Http::assertSentCount(2);
+        Http::assertSent(function ($request): bool {
+            return $request->url() === 'https://cache.example.test/invalidate'
+                && data_get($request->data(), 'event') === 'content_release_publish'
+                && data_get($request->data(), 'content.type') === 'article'
+                && data_get($request->data(), 'cache_signal.kind') === 'invalidate';
+        });
+        Http::assertSent(function ($request): bool {
+            return $request->url() === 'https://broadcast.example.test/content-release'
+                && data_get($request->data(), 'event') === 'content_release_publish'
+                && data_get($request->data(), 'source') === 'release_workspace';
+        });
 
         $this->withSession($this->opsSession($admin, $selectedOrg))
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -182,8 +223,10 @@ final class PostReleaseObservabilityPageTest extends TestCase
             ->assertSee('Post-release observability')
             ->assertSee('Release telemetry')
             ->assertSee('Recently published records')
-            ->assertSee('Recent publish audits')
-            ->assertSee('Observability Article');
+            ->assertSee('Recent release events')
+            ->assertSee('Observability Article')
+            ->assertSee('content_release_cache_signal')
+            ->assertSee('content_release_broadcast');
 
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
         app()->instance('request', Request::create('/ops/post-release-observability', 'GET'));
@@ -196,15 +239,28 @@ final class PostReleaseObservabilityPageTest extends TestCase
             ->assertOk()
             ->assertSet('headlineFields.0.value', '3')
             ->assertSet('headlineFields.1.value', '1')
-            ->assertSet('headlineFields.2.value', '2')
+            ->assertSet('headlineFields.2.value', '1')
             ->assertSet('headlineFields.3.value', '1')
-            ->assertSet('headlineFields.4.value', '1')
+            ->assertSet('headlineFields.4.value', '0')
+            ->assertSet('headlineFields.5.value', '2')
+            ->assertSet('headlineFields.6.value', '1')
             ->assertSet('releaseCards.0.title', 'Observability Article')
-            ->assertSet('auditCards.0.title', 'Observability Article');
+            ->assertCount('auditCards', 3);
     }
 
-    public function test_resource_release_action_writes_audits_and_observability_ignores_other_org_rows(): void
+    public function test_resource_release_action_triggers_failure_alerts_and_observability_ignores_other_org_rows(): void
     {
+        config()->set('ops.content_release_observability.cache_invalidation_urls', [
+            'https://cache.example.test/invalidate',
+        ]);
+        config()->set('ops.content_release_observability.broadcast_webhook', '');
+        config()->set('ops.alert.webhook', 'https://alerts.example.test/ops');
+
+        Http::fake([
+            'https://cache.example.test/*' => Http::response(['ok' => false], 500),
+            'https://alerts.example.test/*' => Http::response(['ok' => true], 200),
+        ]);
+
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_RELEASE,
         ]);
@@ -233,18 +289,43 @@ final class PostReleaseObservabilityPageTest extends TestCase
         EditorialReviewAudit::mark(EditorialReviewAudit::STATE_APPROVED, 'article', $article);
         ArticleResource::releaseRecord($article, 'resource_table');
 
+        $article->refresh();
+        $this->assertSame('published', $article->status);
+
+        $failedSignalAudit = AuditLog::query()
+            ->where('action', 'content_release_cache_signal')
+            ->where('target_type', 'article')
+            ->where('target_id', (string) $article->id)
+            ->first();
+
+        $failureAlertAudit = AuditLog::query()
+            ->where('action', 'content_release_failure_alert')
+            ->where('target_type', 'article')
+            ->where('target_id', (string) $article->id)
+            ->first();
+
+        $this->assertNotNull($failedSignalAudit);
+        $this->assertSame('failed', $failedSignalAudit->result);
+        $this->assertNotNull($failureAlertAudit);
+        $this->assertSame('success', $failureAlertAudit->result);
+
+        Http::assertSent(function ($request): bool {
+            return $request->url() === 'https://alerts.example.test/ops'
+                && str_contains((string) data_get($request->data(), 'text', ''), 'CMS release follow-up failed');
+        });
+
         AuditLog::withoutGlobalScopes()->create([
             'org_id' => (int) $otherOrg->id,
             'actor_admin_id' => (int) $admin->id,
-            'action' => 'content_release_publish',
+            'action' => 'content_release_cache_signal',
             'target_type' => 'article',
             'target_id' => '99999',
-            'meta_json' => ['title' => 'Other Org Audit', 'source' => 'resource_table'],
+            'meta_json' => ['title' => 'Other Org Audit', 'source' => 'resource_table', 'endpoint' => 'https://cache.other.test/invalidate'],
             'ip' => '127.0.0.1',
             'user_agent' => 'phpunit',
             'request_id' => 'other-org-audit',
-            'reason' => 'cms_release_workspace',
-            'result' => 'success',
+            'reason' => 'cms_release_observability',
+            'result' => 'failed',
             'created_at' => now(),
         ]);
 
@@ -265,7 +346,9 @@ final class PostReleaseObservabilityPageTest extends TestCase
         Livewire::test(PostReleaseObservabilityPage::class)
             ->assertOk()
             ->assertSet('headlineFields.1.value', '1')
-            ->assertSet('auditCards.0.description', 'Actor: [REDACTED] | Visibility: public | Source: resource_table');
+            ->assertSet('headlineFields.2.value', '1')
+            ->assertSet('headlineFields.4.value', '1')
+            ->assertSet('auditCards.0.status', 'success');
     }
 
     private function createOrganization(string $name): Organization

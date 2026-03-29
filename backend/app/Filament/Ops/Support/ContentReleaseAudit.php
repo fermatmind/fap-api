@@ -41,5 +41,7 @@ final class ContentReleaseAudit
             reason: 'cms_release_workspace',
             result: 'success',
         );
+
+        ContentReleaseFollowUp::dispatch($type, $record, $source, $request);
     }
 }
