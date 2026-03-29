@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services\Storage;
 
+use App\Models\AttemptReceipt;
 use App\Models\ReportArtifactSlot;
 use App\Models\ReportArtifactVersion;
-use App\Models\ReportSnapshot;
-use App\Models\AttemptReceipt;
 use App\Support\SchemaBaseline;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;

@@ -260,6 +260,7 @@ final class EventRecorder
                 if ($variantValue !== '') {
                     $normalized[$experimentKey] = $variantValue;
                 }
+
                 continue;
             }
 
@@ -328,6 +329,7 @@ final class EventRecorder
             }
             if (! isset($resolvedContract[$experimentKey]) || ! is_array($resolvedContract[$experimentKey])) {
                 $resolvedContract[$experimentKey] = $entry;
+
                 continue;
             }
             $resolvedContract[$experimentKey] = array_merge($entry, $resolvedContract[$experimentKey]);
@@ -342,13 +344,13 @@ final class EventRecorder
             $version = $this->firstNonEmptyString([
                 $contractEntry['version'] ?? null,
                 $meta['version'] ?? null,
-                config('fap_experiments.experiments.' . $experimentKey . '.version'),
+                config('fap_experiments.experiments.'.$experimentKey.'.version'),
                 'v1',
             ]);
             $stage = $this->firstNonEmptyString([
                 $contractEntry['stage'] ?? null,
                 $meta['stage'] ?? null,
-                config('fap_experiments.experiments.' . $experimentKey . '.stage'),
+                config('fap_experiments.experiments.'.$experimentKey.'.stage'),
                 'prod',
             ]);
             $assignedAt = $this->normalizeIsoTimestamp($contractEntry['assigned_at'] ?? null)

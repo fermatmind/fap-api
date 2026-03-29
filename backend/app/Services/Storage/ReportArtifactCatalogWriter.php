@@ -8,7 +8,6 @@ use App\Models\ReportArtifactSlot;
 use App\Models\ReportArtifactVersion;
 use App\Support\SchemaBaseline;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 final class ReportArtifactCatalogWriter
 {
@@ -100,6 +99,7 @@ final class ReportArtifactCatalogWriter
         $now = now();
         $snapshotMeta = $this->loadSnapshotMeta($attemptId);
         $blob = $this->blobCatalogService->findByHash($contentHash);
+
         return DB::transaction(function () use (
             $attemptId,
             $scaleCode,

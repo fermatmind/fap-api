@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Schema;
 class ScaleRegistryWriter
 {
     private const LEGACY_TABLE = 'scales_registry';
+
     private const V2_TABLE = 'scales_registry_v2';
 
     public function upsertScale(array $payload): ScaleRegistryModel
@@ -61,7 +62,7 @@ class ScaleRegistryWriter
             return $legacyScale;
         }
 
-        $scale = new ScaleRegistryModel();
+        $scale = new ScaleRegistryModel;
         $scale->forceFill($data);
         if (! is_array($scale->slugs_json ?? null)) {
             $decoded = $this->decodeJsonArray($data['slugs_json'] ?? null);
@@ -80,7 +81,7 @@ class ScaleRegistryWriter
         $primarySlug = $this->normalizeSlug((string) $scale->primary_slug);
         $slugs = $scale->slugs_json;
 
-        if (!is_array($slugs)) {
+        if (! is_array($slugs)) {
             $slugs = [];
         }
 
@@ -137,9 +138,10 @@ class ScaleRegistryWriter
         if ($slug === '') {
             return '';
         }
-        if (!preg_match('/^[a-z0-9-]{0,127}$/', $slug)) {
+        if (! preg_match('/^[a-z0-9-]{0,127}$/', $slug)) {
             return '';
         }
+
         return $slug;
     }
 

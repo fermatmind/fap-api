@@ -10,12 +10,11 @@ final class BigFiveNormGroupResolver
 {
     public function __construct(
         private readonly PsychometricNormGroupResolver $resolver,
-    ) {
-    }
+    ) {}
 
     /**
-     * @param array<string,mixed> $normsCompiled
-     * @param array<string,mixed> $ctx
+     * @param  array<string,mixed>  $normsCompiled
+     * @param  array<string,mixed>  $ctx
      * @return array{
      *   group_id:string,
      *   status:string,

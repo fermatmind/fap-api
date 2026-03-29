@@ -30,8 +30,7 @@ final class CulturalCalibrationLayerService
     public function __construct(
         private readonly ContentPacksIndex $packsIndex,
         private readonly MbtiContentGovernanceService $mbtiGovernanceService,
-    ) {
-    }
+    ) {}
 
     /**
      * @param  array<string, mixed>  $authority

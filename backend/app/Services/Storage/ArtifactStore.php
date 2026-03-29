@@ -195,8 +195,7 @@ final class ArtifactStore
         string $contentType,
         string $locationKind,
         array $meta = []
-    ): void
-    {
+    ): void {
         if (! $this->shouldDualWriteBlobCatalog()) {
             return;
         }

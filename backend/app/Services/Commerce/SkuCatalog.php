@@ -11,6 +11,7 @@ class SkuCatalog
     public function normalizeSku(string $sku): string
     {
         $sku = strtoupper(trim($sku));
+
         return $sku !== '' ? $sku : '';
     }
 
@@ -19,8 +20,7 @@ class SkuCatalog
         ?string $scaleCode = null,
         ?int $orgId = null,
         bool $includeGlobalFallback = true
-    ): ?Sku
-    {
+    ): ?Sku {
         $sku = $this->normalizeSku($sku);
         if ($sku === '') {
             return null;
@@ -38,10 +38,9 @@ class SkuCatalog
         ?string $scaleCode = null,
         ?int $orgId = null,
         bool $includeGlobalFallback = true
-    ): Sku
-    {
+    ): Sku {
         $row = $this->getActiveSku($sku, $scaleCode, $orgId, $includeGlobalFallback);
-        if (!$row) {
+        if (! $row) {
             throw new \InvalidArgumentException('SKU_NOT_FOUND');
         }
 
@@ -52,8 +51,7 @@ class SkuCatalog
         ?string $scaleCode = null,
         ?int $orgId = null,
         bool $includeGlobalFallback = true
-    ): array
-    {
+    ): array {
         $items = [];
         $rows = $this->baseQuery($scaleCode, true, $orgId, $includeGlobalFallback)
             ->orderBy('sku')
@@ -62,7 +60,7 @@ class SkuCatalog
 
         foreach ($rows as $row) {
             $meta = $this->decodeMeta($row);
-            if (!empty($meta['anchor']) || !empty($meta['deprecated'])) {
+            if (! empty($meta['anchor']) || ! empty($meta['deprecated'])) {
                 continue;
             }
 
@@ -100,8 +98,7 @@ class SkuCatalog
         ?string $scaleCode = null,
         ?int $orgId = null,
         bool $includeGlobalFallback = true
-    ): array
-    {
+    ): array {
         $requestedSku = $this->normalizeSku($sku);
         if ($requestedSku === '') {
             return [
@@ -114,7 +111,7 @@ class SkuCatalog
         }
 
         $requestedRow = $this->findSkuRow($requestedSku, $scaleCode, $orgId, $includeGlobalFallback);
-        if (!$requestedRow) {
+        if (! $requestedRow) {
             return [
                 'requested_sku' => $requestedSku,
                 'effective_sku' => null,
@@ -148,13 +145,13 @@ class SkuCatalog
         }
 
         $effectiveRow = $this->getActiveSku($effectiveSku, $scaleCode, $orgId, $includeGlobalFallback);
-        if (!$effectiveRow && $requestedSku !== $effectiveSku) {
+        if (! $effectiveRow && $requestedSku !== $effectiveSku) {
             $effectiveRow = $this->getActiveSku($requestedSku, $scaleCode, $orgId, $includeGlobalFallback);
         }
 
         $entitlementId = null;
         $entitlementMeta = $this->decodeMeta($effectiveRow ?: $requestedRow);
-        if (!empty($entitlementMeta['entitlement_id'])) {
+        if (! empty($entitlementMeta['entitlement_id'])) {
             $entitlementId = (string) $entitlementMeta['entitlement_id'];
         }
 
@@ -172,15 +169,14 @@ class SkuCatalog
         ?string $scaleCode = null,
         ?int $orgId = null,
         bool $includeGlobalFallback = true
-    ): bool
-    {
+    ): bool {
         $sku = $this->normalizeSku($sku);
         if ($sku === '') {
             return false;
         }
 
         $row = $this->findSkuRow($sku, $scaleCode, $orgId, $includeGlobalFallback);
-        if (!$row) {
+        if (! $row) {
             return false;
         }
 
@@ -192,15 +188,14 @@ class SkuCatalog
         ?string $scaleCode = null,
         ?int $orgId = null,
         bool $includeGlobalFallback = true
-    ): ?string
-    {
+    ): ?string {
         $sku = $this->normalizeSku($sku);
         if ($sku === '') {
             return null;
         }
 
         $row = $this->findSkuRow($sku, $scaleCode, $orgId, $includeGlobalFallback);
-        if (!$row) {
+        if (! $row) {
             return null;
         }
 
@@ -221,8 +216,7 @@ class SkuCatalog
         ?string $scaleCode = null,
         ?int $orgId = null,
         bool $includeGlobalFallback = true
-    ): ?string
-    {
+    ): ?string {
         $rows = $this->baseQuery($scaleCode, false, $orgId, $includeGlobalFallback)
             ->orderBy('sku')
             ->get();
@@ -246,8 +240,7 @@ class SkuCatalog
         ?string $scaleCode = null,
         ?int $orgId = null,
         bool $includeGlobalFallback = true
-    ): ?string
-    {
+    ): ?string {
         $items = $this->listActiveSkus($scaleCode, $orgId, $includeGlobalFallback);
         if (count($items) === 0) {
             return null;
@@ -255,7 +248,7 @@ class SkuCatalog
 
         foreach ($items as $item) {
             $meta = $item['meta_json'] ?? [];
-            if (is_array($meta) && (!empty($meta['effective_default']) || !empty($meta['default']))) {
+            if (is_array($meta) && (! empty($meta['effective_default']) || ! empty($meta['default']))) {
                 return (string) ($item['sku'] ?? null);
             }
         }
@@ -268,8 +261,7 @@ class SkuCatalog
         bool $activeOnly,
         ?int $orgId = null,
         bool $includeGlobalFallback = true
-    ): \Illuminate\Database\Eloquent\Builder
-    {
+    ): \Illuminate\Database\Eloquent\Builder {
         $query = Sku::query();
         if ($activeOnly) {
             $query->where('is_active', true);
@@ -283,18 +275,20 @@ class SkuCatalog
         if ($scale !== null) {
             $query->where('scale_code', $scale);
         }
+
         return $query;
     }
 
     private function normalizeScaleCode(?string $scaleCode): ?string
     {
         $scaleCode = $scaleCode !== null ? strtoupper(trim($scaleCode)) : '';
+
         return $scaleCode !== '' ? $scaleCode : null;
     }
 
     private function decodeMeta(?Sku $row): array
     {
-        if (!$row) {
+        if (! $row) {
             return [];
         }
 
@@ -316,7 +310,7 @@ class SkuCatalog
             $decoded = json_decode($raw, true);
             $raw = is_array($decoded) ? $decoded : null;
         }
-        if (!is_array($raw)) {
+        if (! is_array($raw)) {
             return [];
         }
 
@@ -325,7 +319,7 @@ class SkuCatalog
 
     private function isAnchorMeta(array $meta): bool
     {
-        return !empty($meta['anchor']) || !empty($meta['is_anchor']);
+        return ! empty($meta['anchor']) || ! empty($meta['is_anchor']);
     }
 
     private function findSkuRow(
@@ -333,8 +327,7 @@ class SkuCatalog
         ?string $scaleCode = null,
         ?int $orgId = null,
         bool $includeGlobalFallback = true
-    ): ?Sku
-    {
+    ): ?Sku {
         $rows = $this->baseQuery($scaleCode, false, $orgId, $includeGlobalFallback)
             ->where('sku', $sku)
             ->get();
@@ -347,8 +340,7 @@ class SkuCatalog
         ?string $scaleCode = null,
         ?int $orgId = null,
         bool $includeGlobalFallback = true
-    ): ?string
-    {
+    ): ?string {
         $rows = $this->baseQuery($scaleCode, true, $orgId, $includeGlobalFallback)
             ->orderBy('sku')
             ->get();
@@ -369,8 +361,7 @@ class SkuCatalog
         ?string $scaleCode = null,
         ?int $orgId = null,
         bool $includeGlobalFallback = true
-    ): ?string
-    {
+    ): ?string {
         $rows = $this->baseQuery($scaleCode, false, $orgId, $includeGlobalFallback)
             ->orderBy('sku')
             ->get();
@@ -422,6 +413,7 @@ class SkuCatalog
 
         if ($orgId === null) {
             $first = $rows->first();
+
             return $first instanceof Sku ? $first : null;
         }
 
@@ -436,6 +428,7 @@ class SkuCatalog
         });
 
         $first = $sorted->first();
+
         return $first instanceof Sku ? $first : null;
     }
 

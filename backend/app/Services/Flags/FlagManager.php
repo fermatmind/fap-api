@@ -4,7 +4,6 @@ namespace App\Services\Flags;
 
 use App\Models\FeatureFlag;
 use App\Support\StableBucket;
-use Illuminate\Support\Facades\Schema;
 
 class FlagManager
 {
@@ -17,7 +16,7 @@ class FlagManager
 
     public function resolve(int $orgId, ?int $userId, ?string $anonId): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('feature_flags')) {
+        if (! \App\Support\SchemaBaseline::hasTable('feature_flags')) {
             return [];
         }
 
@@ -43,29 +42,29 @@ class FlagManager
 
     private function evaluateRules($rules, string $flagKey, int $orgId, ?int $userId, ?string $anonId)
     {
-        if (!is_array($rules) || $rules === []) {
+        if (! is_array($rules) || $rules === []) {
             return false;
         }
 
         $default = $rules['default'] ?? false;
         $rulesList = $rules['rules'] ?? [];
-        if (!is_array($rulesList)) {
+        if (! is_array($rulesList)) {
             $rulesList = [];
         }
 
         $subjectKey = $this->subjectKey($userId, $anonId);
 
         foreach ($rulesList as $rule) {
-            if (!is_array($rule)) {
+            if (! is_array($rule)) {
                 continue;
             }
 
             $when = $rule['when'] ?? [];
-            if (!is_array($when)) {
+            if (! is_array($when)) {
                 $when = [];
             }
 
-            if (!$this->matchesWhen($when, $flagKey, $subjectKey, $orgId, $userId, $anonId)) {
+            if (! $this->matchesWhen($when, $flagKey, $subjectKey, $orgId, $userId, $anonId)) {
                 continue;
             }
 
@@ -81,15 +80,15 @@ class FlagManager
 
     private function matchesWhen(array $when, string $flagKey, string $subjectKey, int $orgId, ?int $userId, ?string $anonId): bool
     {
-        if (array_key_exists('org_id', $when) && !$this->matchesId($when['org_id'], $orgId)) {
+        if (array_key_exists('org_id', $when) && ! $this->matchesId($when['org_id'], $orgId)) {
             return false;
         }
 
-        if (array_key_exists('user_id', $when) && !$this->matchesId($when['user_id'], $userId)) {
+        if (array_key_exists('user_id', $when) && ! $this->matchesId($when['user_id'], $userId)) {
             return false;
         }
 
-        if (array_key_exists('anon_id', $when) && !$this->matchesString($when['anon_id'], $anonId)) {
+        if (array_key_exists('anon_id', $when) && ! $this->matchesString($when['anon_id'], $anonId)) {
             return false;
         }
 
@@ -99,7 +98,7 @@ class FlagManager
                 return false;
             }
             if ($percent < 100) {
-                $bucket = StableBucket::bucket($subjectKey . '|' . $flagKey . '|' . $this->salt, 100);
+                $bucket = StableBucket::bucket($subjectKey.'|'.$flagKey.'|'.$this->salt, 100);
                 if ($bucket >= $percent) {
                     return false;
                 }
@@ -112,12 +111,12 @@ class FlagManager
     private function subjectKey(?int $userId, ?string $anonId): string
     {
         if ($userId !== null) {
-            return 'user:' . $userId;
+            return 'user:'.$userId;
         }
 
         $anonId = trim((string) ($anonId ?? ''));
         if ($anonId !== '') {
-            return 'anon:' . $anonId;
+            return 'anon:'.$anonId;
         }
 
         return 'anon:missing';
@@ -135,10 +134,11 @@ class FlagManager
                     return true;
                 }
             }
+
             return false;
         }
 
-        if (!is_numeric($ruleValue)) {
+        if (! is_numeric($ruleValue)) {
             return false;
         }
 
@@ -162,10 +162,11 @@ class FlagManager
                     return true;
                 }
             }
+
             return false;
         }
 
-        if (!is_string($ruleValue) && !is_numeric($ruleValue)) {
+        if (! is_string($ruleValue) && ! is_numeric($ruleValue)) {
             return false;
         }
 
@@ -174,7 +175,7 @@ class FlagManager
 
     private function normalizePercent($value): int
     {
-        if (!is_numeric($value)) {
+        if (! is_numeric($value)) {
             return 0;
         }
 

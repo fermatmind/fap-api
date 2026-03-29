@@ -5,7 +5,6 @@ namespace App\Services\Ingestion;
 use App\Support\Idempotency\IdempotencyKey;
 use App\Support\Idempotency\IdempotencyStore;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class IngestionService
@@ -16,9 +15,8 @@ class IngestionService
         array $batchMeta,
         array $samples,
         array $audit = []
-    ): array
-    {
-        if (!\App\Support\SchemaBaseline::hasTable('ingest_batches')) {
+    ): array {
+        if (! \App\Support\SchemaBaseline::hasTable('ingest_batches')) {
             return [
                 'ok' => false,
                 'error' => 'MISSING_TABLE',
@@ -77,11 +75,12 @@ class IngestionService
 
         $inserted = 0;
         $skipped = 0;
-        $store = new IdempotencyStore();
+        $store = new IdempotencyStore;
 
         foreach ($samples as $sample) {
-            if (!is_array($sample)) {
+            if (! is_array($sample)) {
                 $skipped++;
+
                 continue;
             }
 
@@ -92,6 +91,7 @@ class IngestionService
 
             if ($recordedAt === '') {
                 $skipped++;
+
                 continue;
             }
 
@@ -108,6 +108,7 @@ class IngestionService
 
             if (($idRecord['existing'] ?? false) === true) {
                 $skipped++;
+
                 continue;
             }
 
@@ -127,6 +128,7 @@ class IngestionService
                     'updated_at' => $now,
                 ]);
                 $inserted++;
+
                 continue;
             }
 
@@ -143,6 +145,7 @@ class IngestionService
                     'updated_at' => $now,
                 ]);
                 $inserted++;
+
                 continue;
             }
 
@@ -160,6 +163,7 @@ class IngestionService
                     'updated_at' => $now,
                 ]);
                 $inserted++;
+
                 continue;
             }
 

@@ -32,7 +32,9 @@ class ContentPackage
         ];
 
         foreach ($candidates as $p) {
-            if (is_file($p)) return $p;
+            if (is_file($p)) {
+                return $p;
+            }
         }
 
         throw new \RuntimeException("content package file not found: pkg={$pkg}, file={$file}");
@@ -46,7 +48,7 @@ class ContentPackage
         if ($json === null) {
             throw new \RuntimeException("invalid JSON: {$path}");
         }
-        if (!is_array($json)) {
+        if (! is_array($json)) {
             throw new \RuntimeException("JSON must decode to array/object: {$path}");
         }
 
@@ -56,10 +58,12 @@ class ContentPackage
     public static function loadMbtiQuestionsRaw(): array
     {
         static $cache = null;
-        if ($cache !== null) return $cache;
+        if ($cache !== null) {
+            return $cache;
+        }
 
-        $pkg  = self::mbtiPackageVersion();
-        $path = self::resolvePkgFile($pkg, "questions.json");
+        $pkg = self::mbtiPackageVersion();
+        $path = self::resolvePkgFile($pkg, 'questions.json');
 
         $json = self::loadJson($path);
 
@@ -68,15 +72,22 @@ class ContentPackage
         // B) { items: [...] }
         // C) { questions: [...] } / { data: [...] }
         $items = $json;
-        if (isset($json['items'])) $items = $json['items'];
-        if (isset($json['questions'])) $items = $json['questions'];
-        if (isset($json['data'])) $items = $json['data'];
+        if (isset($json['items'])) {
+            $items = $json['items'];
+        }
+        if (isset($json['questions'])) {
+            $items = $json['questions'];
+        }
+        if (isset($json['data'])) {
+            $items = $json['data'];
+        }
 
-        if (!is_array($items)) {
+        if (! is_array($items)) {
             throw new \RuntimeException("questions.json must be array or {items/questions/data:[]}: {$path}");
         }
 
         $cache = $items;
+
         return $items;
     }
 
@@ -85,17 +96,17 @@ class ContentPackage
         // 不把 key_pole/direction/score/irt 暴露给前端（避免“看答案”）
         return array_map(function ($q) {
             $opts = $q['options'] ?? [];
-            $opts = array_map(fn($o) => [
+            $opts = array_map(fn ($o) => [
                 'code' => $o['code'] ?? null,
                 'text' => $o['text'] ?? null,
             ], $opts);
 
             return [
                 'question_id' => $q['question_id'] ?? null,
-                'order'       => $q['order'] ?? null,
-                'dimension'   => $q['dimension'] ?? null,
-                'text'        => $q['text'] ?? null,
-                'options'     => $opts,
+                'order' => $q['order'] ?? null,
+                'dimension' => $q['dimension'] ?? null,
+                'text' => $q['text'] ?? null,
+                'options' => $opts,
             ];
         }, $items);
     }

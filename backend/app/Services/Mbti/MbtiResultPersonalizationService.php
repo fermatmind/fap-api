@@ -745,8 +745,7 @@ final class MbtiResultPersonalizationService
         private readonly ControlledNarrativeLayerService $controlledNarrativeLayerService,
         private readonly CulturalCalibrationLayerService $culturalCalibrationLayerService,
         private readonly MbtiReadModelContractService $readModelContractService,
-    ) {
-    }
+    ) {}
 
     /**
      * @param  array<string, mixed>  $reportPayload
@@ -832,43 +831,43 @@ final class MbtiResultPersonalizationService
         }
 
         $personalization = $this->userStateOrchestrationService->withBaseline([
-                'schema_version' => 'mbti.personalization.phase9e.v1',
-                'locale' => $locale,
-                'type_code' => $typeCode,
-                'identity' => $identity,
-                'axis_vector' => $axisVector,
-                'axis_bands' => $axisBands,
-                'boundary_flags' => $boundaryFlags,
-                'dominant_axes' => $dominantAxes,
-                'scene_fingerprint' => $sceneFingerprint,
-                'explainability_summary' => $explainabilityAuthority['explainability_summary'],
-                'close_call_axes' => $explainabilityAuthority['close_call_axes'],
-                'neighbor_type_keys' => $explainabilityAuthority['neighbor_type_keys'],
-                'contrast_keys' => $explainabilityAuthority['contrast_keys'],
-                'confidence_or_stability_keys' => $explainabilityAuthority['confidence_or_stability_keys'],
-                'work_style_keys' => array_values((array) data_get($sceneFingerprint, 'work.style_keys', [])),
-                'relationship_style_keys' => array_values((array) data_get($sceneFingerprint, 'relationships.style_keys', [])),
-                'decision_style_keys' => array_values((array) data_get($sceneFingerprint, 'decision.style_keys', [])),
-                'stress_recovery_keys' => array_values((array) data_get($sceneFingerprint, 'stress_recovery.style_keys', [])),
-                'communication_style_keys' => array_values((array) data_get($sceneFingerprint, 'communication.style_keys', [])),
-                'work_style_summary' => $careerBridgeAuthority['work_style_summary'],
-                'role_fit_keys' => $careerBridgeAuthority['role_fit_keys'],
-                'collaboration_fit_keys' => $careerBridgeAuthority['collaboration_fit_keys'],
-                'work_env_preference_keys' => $careerBridgeAuthority['work_env_preference_keys'],
-                'career_next_step_keys' => $careerBridgeAuthority['career_next_step_keys'],
-                'action_plan_summary' => $actionAuthority['action_plan_summary'],
-                'weekly_action_keys' => $actionAuthority['weekly_action_keys'],
-                'relationship_action_keys' => $actionAuthority['relationship_action_keys'],
-                'work_experiment_keys' => $actionAuthority['work_experiment_keys'],
-                'watchout_keys' => $actionAuthority['watchout_keys'],
-                'recommended_read_candidates' => $this->extractRecommendationCandidates($reportPayload),
-                'variant_keys' => $variantKeys,
-                'sections' => $sectionVariants,
-                'pack_id' => trim((string) ($context['pack_id'] ?? data_get($reportPayload, 'versions.content_pack_id', ''))),
-                'engine_version' => trim((string) ($context['engine_version'] ?? data_get($reportPayload, 'versions.engine', ''))),
-                'content_package_dir' => trim((string) ($context['dir_version'] ?? data_get($reportPayload, 'versions.dir_version', ''))),
-                'dynamic_sections_version' => trim((string) ($dynamicDoc['version'] ?? '')),
-            ], (bool) ($context['has_unlock'] ?? false));
+            'schema_version' => 'mbti.personalization.phase9e.v1',
+            'locale' => $locale,
+            'type_code' => $typeCode,
+            'identity' => $identity,
+            'axis_vector' => $axisVector,
+            'axis_bands' => $axisBands,
+            'boundary_flags' => $boundaryFlags,
+            'dominant_axes' => $dominantAxes,
+            'scene_fingerprint' => $sceneFingerprint,
+            'explainability_summary' => $explainabilityAuthority['explainability_summary'],
+            'close_call_axes' => $explainabilityAuthority['close_call_axes'],
+            'neighbor_type_keys' => $explainabilityAuthority['neighbor_type_keys'],
+            'contrast_keys' => $explainabilityAuthority['contrast_keys'],
+            'confidence_or_stability_keys' => $explainabilityAuthority['confidence_or_stability_keys'],
+            'work_style_keys' => array_values((array) data_get($sceneFingerprint, 'work.style_keys', [])),
+            'relationship_style_keys' => array_values((array) data_get($sceneFingerprint, 'relationships.style_keys', [])),
+            'decision_style_keys' => array_values((array) data_get($sceneFingerprint, 'decision.style_keys', [])),
+            'stress_recovery_keys' => array_values((array) data_get($sceneFingerprint, 'stress_recovery.style_keys', [])),
+            'communication_style_keys' => array_values((array) data_get($sceneFingerprint, 'communication.style_keys', [])),
+            'work_style_summary' => $careerBridgeAuthority['work_style_summary'],
+            'role_fit_keys' => $careerBridgeAuthority['role_fit_keys'],
+            'collaboration_fit_keys' => $careerBridgeAuthority['collaboration_fit_keys'],
+            'work_env_preference_keys' => $careerBridgeAuthority['work_env_preference_keys'],
+            'career_next_step_keys' => $careerBridgeAuthority['career_next_step_keys'],
+            'action_plan_summary' => $actionAuthority['action_plan_summary'],
+            'weekly_action_keys' => $actionAuthority['weekly_action_keys'],
+            'relationship_action_keys' => $actionAuthority['relationship_action_keys'],
+            'work_experiment_keys' => $actionAuthority['work_experiment_keys'],
+            'watchout_keys' => $actionAuthority['watchout_keys'],
+            'recommended_read_candidates' => $this->extractRecommendationCandidates($reportPayload),
+            'variant_keys' => $variantKeys,
+            'sections' => $sectionVariants,
+            'pack_id' => trim((string) ($context['pack_id'] ?? data_get($reportPayload, 'versions.content_pack_id', ''))),
+            'engine_version' => trim((string) ($context['engine_version'] ?? data_get($reportPayload, 'versions.engine', ''))),
+            'content_package_dir' => trim((string) ($context['dir_version'] ?? data_get($reportPayload, 'versions.dir_version', ''))),
+            'dynamic_sections_version' => trim((string) ($dynamicDoc['version'] ?? '')),
+        ], (bool) ($context['has_unlock'] ?? false));
 
         $personalization = $this->bigFiveSynthesisService->attach($personalization, [
             'org_id' => (int) ($context['org_id'] ?? 0),
@@ -1034,6 +1033,7 @@ final class MbtiResultPersonalizationService
             $kind = trim((string) ($block['kind'] ?? ''));
             if ($kind === '') {
                 $blocks[] = $block;
+
                 continue;
             }
 
@@ -1446,7 +1446,6 @@ final class MbtiResultPersonalizationService
     }
 
     /**
-     * @param  mixed  $value
      * @return list<string>
      */
     private function normalizeStringList(mixed $value): array
@@ -2903,8 +2902,7 @@ final class MbtiResultPersonalizationService
             'growth.watchouts',
             'career.next_step',
             'relationships.try_this_week' => match (true) {
-                in_array($kind, ['next_action', 'watchout', 'career_next_step', 'relationship_practice'], true)
-                    => $this->resolveSceneText($doc, $kind, $locale, $primaryAxis, $sectionKey, $toneMode),
+                in_array($kind, ['next_action', 'watchout', 'career_next_step', 'relationship_practice'], true) => $this->resolveSceneText($doc, $kind, $locale, $primaryAxis, $sectionKey, $toneMode),
                 true => $this->resolveActionSupportText(
                     $doc,
                     $sectionKey,
@@ -3668,10 +3666,10 @@ final class MbtiResultPersonalizationService
             'relationships.try_this_week' => 'relationship_practice',
             'growth.watchouts' => 'watchout',
             default => match ($sceneKey) {
-            'decision' => 'decision',
-            'stress_recovery' => 'stress_recovery',
-            'communication' => 'communication',
-            default => 'scene',
+                'decision' => 'decision',
+                'stress_recovery' => 'stress_recovery',
+                'communication' => 'communication',
+                default => 'scene',
             },
         };
     }
@@ -3908,8 +3906,7 @@ final class MbtiResultPersonalizationService
         array $axis,
         string $toneSectionKey = '',
         string $toneMode = ''
-    ): string
-    {
+    ): string {
         $sceneHint = $this->resolveTemplate(
             data_get($doc, 'scene_hints.'.($axis['axis'] ?? '').'.'.($axis['side'] ?? '')),
             $locale,

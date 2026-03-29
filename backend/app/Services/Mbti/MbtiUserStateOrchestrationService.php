@@ -1149,11 +1149,13 @@ final class MbtiUserStateOrchestrationService
             $feedback = trim((string) ($row['meta']['feedback'] ?? ''));
             if (in_array($feedback, self::POSITIVE_FEEDBACK_VALUES, true)) {
                 $hasPositive = true;
+
                 continue;
             }
 
             if (in_array($feedback, self::MIXED_FEEDBACK_VALUES, true)) {
                 $hasMixed = true;
+
                 continue;
             }
 
@@ -1201,7 +1203,7 @@ final class MbtiUserStateOrchestrationService
         }
 
         if (count($categories) === 1) {
-            return $categories[0] . '_only';
+            return $categories[0].'_only';
         }
 
         return 'mixed';

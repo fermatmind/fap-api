@@ -3,13 +3,12 @@
 namespace App\Services\Ingestion;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class ConsentService
 {
     public function recordConsent(?string $userId, string $provider, string $consentVersion, array $scopes): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('integrations')) {
+        if (! \App\Support\SchemaBaseline::hasTable('integrations')) {
             return [
                 'ok' => false,
                 'error' => 'MISSING_TABLE',
@@ -63,7 +62,7 @@ class ConsentService
             ];
         }
 
-        if (!\App\Support\SchemaBaseline::hasTable('integrations')) {
+        if (! \App\Support\SchemaBaseline::hasTable('integrations')) {
             return [
                 'ok' => false,
                 'status' => 500,

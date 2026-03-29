@@ -8,6 +8,7 @@ use App\Services\VectorStore\Drivers\QdrantDriver;
 final class VectorStoreManager implements VectorStoreInterface
 {
     private ?VectorStoreInterface $driver = null;
+
     private ?VectorStoreInterface $fallback = null;
 
     public function driverName(): string
@@ -84,17 +85,20 @@ final class VectorStoreManager implements VectorStoreInterface
         $driverName = (string) config('vectorstore.driver', 'mysql_fallback');
         $enabled = (bool) config('vectorstore.enabled', true);
 
-        if (!$enabled) {
+        if (! $enabled) {
             $this->driver = $this->fallback();
+
             return $this->driver;
         }
 
         if ($driverName === 'qdrant' && (bool) config('vectorstore.qdrant.enabled', false)) {
-            $this->driver = new QdrantDriver();
+            $this->driver = new QdrantDriver;
+
             return $this->driver;
         }
 
         $this->driver = $this->fallback();
+
         return $this->driver;
     }
 
@@ -104,7 +108,7 @@ final class VectorStoreManager implements VectorStoreInterface
             return $this->fallback;
         }
 
-        $this->fallback = new MySqlFallbackDriver();
+        $this->fallback = new MySqlFallbackDriver;
 
         return $this->fallback;
     }

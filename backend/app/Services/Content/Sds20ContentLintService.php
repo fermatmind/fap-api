@@ -30,8 +30,7 @@ final class Sds20ContentLintService
 
     public function __construct(
         private readonly Sds20PackLoader $loader,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{ok:bool,pack_id:string,version:string,errors:list<array{file:string,line:int,message:string}>}
@@ -58,7 +57,7 @@ final class Sds20ContentLintService
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintQuestions(string $version, array &$errors): void
     {
@@ -76,12 +75,13 @@ final class Sds20ContentLintService
             $qid = (int) ($row['question_id'] ?? 0);
             if ($qid <= 0) {
                 $errors[] = $this->error($file, $line, 'question_id must be positive integer.');
+
                 continue;
             }
             $seen[$qid] = ($seen[$qid] ?? 0) + 1;
 
             $direction = (int) ($row['direction'] ?? 0);
-            if (!in_array($direction, [1, -1], true)) {
+            if (! in_array($direction, [1, -1], true)) {
                 $errors[] = $this->error($file, $line, 'direction must be 1 or -1.');
             }
 
@@ -101,14 +101,15 @@ final class Sds20ContentLintService
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintOptions(string $version, array &$errors): void
     {
         $file = $this->loader->rawPath('options_sds20_bilingual.json', $version);
         $doc = $this->loader->readJson($file);
-        if (!is_array($doc)) {
+        if (! is_array($doc)) {
             $errors[] = $this->error($file, 1, 'options json invalid.');
+
             return;
         }
 
@@ -123,8 +124,9 @@ final class Sds20ContentLintService
         $labels = is_array($doc['labels'] ?? null) ? $doc['labels'] : [];
         foreach (['zh-CN', 'en'] as $locale) {
             $format = $labels[$locale] ?? null;
-            if (!is_array($format) || count($format) !== 4) {
+            if (! is_array($format) || count($format) !== 4) {
                 $errors[] = $this->error($file, 1, 'labels.'.$locale.' must contain exactly 4 options.');
+
                 continue;
             }
 
@@ -137,19 +139,20 @@ final class Sds20ContentLintService
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintPolicy(string $version, array &$errors): void
     {
         $file = $this->loader->rawPath('policy.json', $version);
         $doc = $this->loader->readJson($file);
-        if (!is_array($doc)) {
+        if (! is_array($doc)) {
             $errors[] = $this->error($file, 1, 'policy.json invalid.');
+
             return;
         }
 
         foreach (['engine_version', 'scoring_spec_version', 'quality_rules', 'crisis_rules', 'factor_map', 'clinical_buckets'] as $key) {
-            if (!array_key_exists($key, $doc)) {
+            if (! array_key_exists($key, $doc)) {
                 $errors[] = $this->error($file, 1, 'policy field missing: '.$key);
             }
         }
@@ -181,8 +184,9 @@ final class Sds20ContentLintService
         $allFactorIds = [];
         foreach (self::REQUIRED_FACTOR_KEYS as $factorKey) {
             $items = $factorMap[$factorKey] ?? null;
-            if (!is_array($items) || $items === []) {
+            if (! is_array($items) || $items === []) {
                 $errors[] = $this->error($file, 1, 'factor_map.'.$factorKey.' missing or empty.');
+
                 continue;
             }
 
@@ -190,6 +194,7 @@ final class Sds20ContentLintService
                 $qid = (int) $qidRaw;
                 if ($qid < 1 || $qid > self::REQUIRED_QUESTION_COUNT) {
                     $errors[] = $this->error($file, 1, 'factor_map.'.$factorKey.' contains invalid question id.');
+
                     continue;
                 }
                 $allFactorIds[] = $qid;
@@ -204,6 +209,7 @@ final class Sds20ContentLintService
         $buckets = is_array($doc['clinical_buckets'] ?? null) ? $doc['clinical_buckets'] : [];
         if ($buckets === []) {
             $errors[] = $this->error($file, 1, 'clinical_buckets missing.');
+
             return;
         }
 
@@ -211,8 +217,9 @@ final class Sds20ContentLintService
 
         $cursor = 0;
         foreach ($buckets as $bucket) {
-            if (!is_array($bucket)) {
+            if (! is_array($bucket)) {
                 $errors[] = $this->error($file, 1, 'clinical bucket item must be object.');
+
                 continue;
             }
 
@@ -237,21 +244,23 @@ final class Sds20ContentLintService
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintLanding(string $version, array &$errors): void
     {
         $file = $this->loader->rawPath('landing_i18n.json', $version);
         $doc = $this->loader->readJson($file);
-        if (!is_array($doc)) {
+        if (! is_array($doc)) {
             $errors[] = $this->error($file, 1, 'landing_i18n.json invalid.');
+
             return;
         }
 
         foreach (['zh-CN', 'en'] as $locale) {
             $node = is_array($doc[$locale] ?? null) ? $doc[$locale] : null;
-            if (!is_array($node)) {
+            if (! is_array($node)) {
                 $errors[] = $this->error($file, 1, 'landing node missing for '.$locale);
+
                 continue;
             }
 
@@ -274,14 +283,15 @@ final class Sds20ContentLintService
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintReportLayout(string $version, array &$errors): void
     {
         $file = $this->loader->rawPath('report_layout.json', $version);
         $doc = $this->loader->readJson($file);
-        if (!is_array($doc)) {
+        if (! is_array($doc)) {
             $errors[] = $this->error($file, 1, 'report_layout.json invalid.');
+
             return;
         }
 
@@ -289,17 +299,19 @@ final class Sds20ContentLintService
         $sections = is_array($layout['sections'] ?? null) ? $layout['sections'] : [];
         if ($sections === []) {
             $errors[] = $this->error($file, 1, 'layout.sections cannot be empty.');
+
             return;
         }
 
         $keys = [];
         foreach ($sections as $section) {
-            if (!is_array($section)) {
+            if (! is_array($section)) {
                 continue;
             }
             $key = trim((string) ($section['key'] ?? ''));
             if ($key === '') {
                 $errors[] = $this->error($file, 1, 'section key is required.');
+
                 continue;
             }
             $keys[] = $key;
@@ -311,7 +323,7 @@ final class Sds20ContentLintService
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintBlocks(string $version, array &$errors): void
     {
@@ -325,21 +337,24 @@ final class Sds20ContentLintService
             $expectedSection = (string) $check['section'];
 
             $doc = $this->loader->readJson($file);
-            if (!is_array($doc)) {
+            if (! is_array($doc)) {
                 $errors[] = $this->error($file, 1, 'block file invalid json.');
+
                 continue;
             }
 
             foreach (['zh-CN', 'en'] as $locale) {
                 $rows = $doc[$locale] ?? null;
-                if (!is_array($rows) || $rows === []) {
+                if (! is_array($rows) || $rows === []) {
                     $errors[] = $this->error($file, 1, $locale.' blocks cannot be empty.');
+
                     continue;
                 }
 
                 foreach ($rows as $idx => $row) {
-                    if (!is_array($row)) {
+                    if (! is_array($row)) {
                         $errors[] = $this->error($file, 1, $locale.' block row must be object.');
+
                         continue;
                     }
 
@@ -361,7 +376,7 @@ final class Sds20ContentLintService
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintGoldenCases(string $version, array &$errors): void
     {
@@ -385,7 +400,7 @@ final class Sds20ContentLintService
             if ($caseId === '') {
                 $errors[] = $this->error($file, $line, 'case_id is required.');
             }
-            if (!in_array($locale, ['zh-CN', 'en'], true)) {
+            if (! in_array($locale, ['zh-CN', 'en'], true)) {
                 $errors[] = $this->error($file, $line, 'locale must be zh-CN or en.');
             }
             if (strlen($answers) !== self::REQUIRED_QUESTION_COUNT || preg_match('/^[ABCD]+$/', $answers) !== 1) {
@@ -394,10 +409,10 @@ final class Sds20ContentLintService
             if ($durationMs <= 0) {
                 $errors[] = $this->error($file, $line, 'duration_ms must be > 0.');
             }
-            if (!in_array($clinical, ['normal', 'mild_depression', 'moderate_depression', 'severe_depression'], true)) {
+            if (! in_array($clinical, ['normal', 'mild_depression', 'moderate_depression', 'severe_depression'], true)) {
                 $errors[] = $this->error($file, $line, 'expected_clinical_level invalid.');
             }
-            if (!in_array($qualityLevel, ['A', 'B', 'C', 'D'], true)) {
+            if (! in_array($qualityLevel, ['A', 'B', 'C', 'D'], true)) {
                 $errors[] = $this->error($file, $line, 'expected_quality_level must be A/B/C/D.');
             }
 
@@ -407,13 +422,13 @@ final class Sds20ContentLintService
     }
 
     /**
-     * @param array<string,string> $row
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  array<string,string>  $row
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function assertBooleanColumn(string $file, int $line, array $row, string $column, array &$errors): void
     {
         $value = trim((string) ($row[$column] ?? ''));
-        if (!in_array($value, ['0', '1'], true)) {
+        if (! in_array($value, ['0', '1'], true)) {
             $errors[] = $this->error($file, $line, $column.' must be 0 or 1.');
         }
     }

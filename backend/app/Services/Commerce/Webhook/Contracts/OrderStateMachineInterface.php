@@ -7,7 +7,7 @@ namespace App\Services\Commerce\Webhook\Contracts;
 interface OrderStateMachineInterface
 {
     /**
-     * @param array<string,mixed> $normalized
+     * @param  array<string,mixed>  $normalized
      * @return array<string,mixed>
      */
     public function advance(string $orderNo, int $orgId, array $normalized): array;

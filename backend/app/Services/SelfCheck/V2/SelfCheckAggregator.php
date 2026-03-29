@@ -9,11 +9,9 @@ use App\Services\SelfCheck\V2\Contracts\ProbeInterface;
 final class SelfCheckAggregator
 {
     /**
-     * @param array<int,ProbeInterface> $probes
+     * @param  array<int,ProbeInterface>  $probes
      */
-    public function __construct(private readonly array $probes)
-    {
-    }
+    public function __construct(private readonly array $probes) {}
 
     /**
      * @return array<string,mixed>

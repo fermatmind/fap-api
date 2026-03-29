@@ -14,7 +14,9 @@ final class TagBuilder
     public static function add(array &$set, string $tag): void
     {
         $tag = self::norm($tag);
-        if ($tag === '') return;
+        if ($tag === '') {
+            return;
+        }
         $set[$tag] = true;
     }
 
@@ -22,7 +24,9 @@ final class TagBuilder
     public static function addMany(array &$set, array $tags): void
     {
         foreach ($tags as $t) {
-            if (!is_string($t)) continue;
+            if (! is_string($t)) {
+                continue;
+            }
             self::add($set, $t);
         }
     }
@@ -43,7 +47,7 @@ final class TagBuilder
     /**
      * 把“上下文事实”翻译成 tags（引擎只认识 tags）
      *
-     * @param array $ctx 你现有的 report ctx（可以是 ReportComposer 里的 ctx）
+     * @param  array  $ctx  你现有的 report ctx（可以是 ReportComposer 里的 ctx）
      * @return array<string,true>
      */
     public static function buildContextTags(array $ctx): array
@@ -53,7 +57,7 @@ final class TagBuilder
         $set = self::emptySet();
 
         // 1) type
-        $type = (string)($ctx['type_code'] ?? $ctx['type'] ?? '');
+        $type = (string) ($ctx['type_code'] ?? $ctx['type'] ?? '');
         if ($type !== '') {
             self::add($set, "type:{$type}");
 
@@ -65,8 +69,10 @@ final class TagBuilder
         // 期望形态：['EI'=>'I','SN'=>'N','TF'=>'T','JP'=>'J','AT'=>'A']
         if (isset($ctx['axis']) && is_array($ctx['axis'])) {
             foreach ($ctx['axis'] as $dim => $side) {
-                if (!is_string($dim) || !is_string($side)) continue;
-                self::add($set, "axis:" . strtoupper($dim) . ":" . strtoupper($side));
+                if (! is_string($dim) || ! is_string($side)) {
+                    continue;
+                }
+                self::add($set, 'axis:'.strtoupper($dim).':'.strtoupper($side));
             }
         }
 
@@ -74,8 +80,10 @@ final class TagBuilder
         // 期望形态：['EI'=>'clear','JP'=>'borderline', ...]
         if (isset($ctx['axis_state']) && is_array($ctx['axis_state'])) {
             foreach ($ctx['axis_state'] as $dim => $st) {
-                if (!is_string($dim) || !is_string($st)) continue;
-                self::add($set, "state:" . strtoupper($dim) . ":" . strtolower($st));
+                if (! is_string($dim) || ! is_string($st)) {
+                    continue;
+                }
+                self::add($set, 'state:'.strtoupper($dim).':'.strtolower($st));
             }
         }
 
@@ -83,17 +91,23 @@ final class TagBuilder
         // 期望形态：['JP','EI',...]
         if (isset($ctx['borderline']) && is_array($ctx['borderline'])) {
             foreach ($ctx['borderline'] as $dim) {
-                if (!is_string($dim)) continue;
-                self::add($set, "borderline:" . strtoupper($dim));
+                if (! is_string($dim)) {
+                    continue;
+                }
+                self::add($set, 'borderline:'.strtoupper($dim));
             }
         }
 
         // 5) role / strategy（如果 ctx 已经算好了就直接塞 tags；不在这里做业务推导）
-        $role = (string)($ctx['role'] ?? '');
-        if ($role !== '') self::add($set, "role:" . strtoupper($role));
+        $role = (string) ($ctx['role'] ?? '');
+        if ($role !== '') {
+            self::add($set, 'role:'.strtoupper($role));
+        }
 
-        $strategy = (string)($ctx['strategy'] ?? '');
-        if ($strategy !== '') self::add($set, "strategy:" . strtoupper($strategy));
+        $strategy = (string) ($ctx['strategy'] ?? '');
+        if ($strategy !== '') {
+            self::add($set, 'strategy:'.strtoupper($strategy));
+        }
 
         // 6) 如果你已经有一坨 context_tags（历史遗留），也可以直接并入（兼容）
         if (isset($ctx['tags']) && is_array($ctx['tags'])) {
@@ -106,10 +120,10 @@ final class TagBuilder
     /**
      * 评估某个候选 item 时，把 item.tags + section + item:id 合并进去
      *
-     * @param array<string,true> $contextTags
-     * @param array $item 候选 item（cards/highlights/reads 的一条）
-     * @param string|null $section traits/career...（cards/highlights有意义）
-     * @param string|null $itemId card.xxx/read.xxx...
+     * @param  array<string,true>  $contextTags
+     * @param  array  $item  候选 item（cards/highlights/reads 的一条）
+     * @param  string|null  $section  traits/career...（cards/highlights有意义）
+     * @param  string|null  $itemId  card.xxx/read.xxx...
      * @return array<string,true>
      */
     public static function buildEvalTags(array $contextTags, array $item, ?string $section, ?string $itemId): array
@@ -122,11 +136,11 @@ final class TagBuilder
         }
 
         if ($section !== null && $section !== '') {
-            self::add($set, "section:" . $section);
+            self::add($set, 'section:'.$section);
         }
 
         if ($itemId !== null && $itemId !== '') {
-            self::add($set, "item:" . $itemId);
+            self::add($set, 'item:'.$itemId);
         }
 
         return $set;
@@ -140,7 +154,9 @@ final class TagBuilder
     private static function norm(string $tag): string
     {
         $tag = trim($tag);
-        if ($tag === '') return '';
+        if ($tag === '') {
+            return '';
+        }
 
         // 把中间空白压缩掉（可选）
         $tag = preg_replace('/\s+/', ' ', $tag) ?? $tag;
@@ -148,25 +164,27 @@ final class TagBuilder
         // 推荐规范：prefix 全小写（type/axis/state/role...），其余保持
         // 只处理第一个 ":" 之前的部分
         $pos = strpos($tag, ':');
-        if ($pos === false) return $tag;
+        if ($pos === false) {
+            return $tag;
+        }
 
         $prefix = strtolower(substr($tag, 0, $pos));
-        $rest   = substr($tag, $pos + 1);
+        $rest = substr($tag, $pos + 1);
 
-        return $prefix . ':' . $rest;
+        return $prefix.':'.$rest;
     }
 
     /** 从 ENTJ-A 补 axis:EI:E 等 */
     private static function addAxisTagsFromTypeCode(array &$set, string $typeCode): void
     {
         // 支持 ENFJ-A / ENTJ-T 这种
-        if (!preg_match('/^([EI])([SN])([TF])([JP])-(A|T)$/', strtoupper($typeCode), $m)) {
+        if (! preg_match('/^([EI])([SN])([TF])([JP])-(A|T)$/', strtoupper($typeCode), $m)) {
             return;
         }
-        self::add($set, "axis:EI:" . $m[1]);
-        self::add($set, "axis:SN:" . $m[2]);
-        self::add($set, "axis:TF:" . $m[3]);
-        self::add($set, "axis:JP:" . $m[4]);
-        self::add($set, "axis:AT:" . $m[5]);
+        self::add($set, 'axis:EI:'.$m[1]);
+        self::add($set, 'axis:SN:'.$m[2]);
+        self::add($set, 'axis:TF:'.$m[3]);
+        self::add($set, 'axis:JP:'.$m[4]);
+        self::add($set, 'axis:AT:'.$m[5]);
     }
 }

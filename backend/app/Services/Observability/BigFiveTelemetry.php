@@ -10,8 +10,7 @@ final class BigFiveTelemetry
 {
     public function __construct(
         private readonly EventRecorder $events,
-    ) {
-    }
+    ) {}
 
     public function recordAttemptStarted(
         int $orgId,
@@ -196,7 +195,7 @@ final class BigFiveTelemetry
     }
 
     /**
-     * @param array<string,mixed> $meta
+     * @param  array<string,mixed>  $meta
      */
     private function emit(
         string $eventCode,
@@ -232,7 +231,7 @@ final class BigFiveTelemetry
     }
 
     /**
-     * @param array<string,mixed> $meta
+     * @param  array<string,mixed>  $meta
      * @return array<string,mixed>
      */
     private function withRequiredMeta(array $meta): array

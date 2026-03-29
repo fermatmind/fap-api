@@ -21,13 +21,13 @@ final class NormGroupResolver
         $gender = $this->normalizeGender((string) ($ctx['gender'] ?? 'ALL'));
         $ageBand = $this->resolveAgeBand($ctx);
 
-        if (!Schema::hasTable('scale_norms_versions') || !Schema::hasTable('scale_norm_stats')) {
+        if (! Schema::hasTable('scale_norms_versions') || ! Schema::hasTable('scale_norm_stats')) {
             return $this->missingPayload($locale, $region, $gender, $ageBand);
         }
 
         foreach ($this->buildCandidates($locale, $gender, $ageBand) as $groupId) {
             $hit = $this->loadGroup($scaleCode, $groupId, $locale, $region);
-            if (!is_array($hit)) {
+            if (! is_array($hit)) {
                 continue;
             }
 
@@ -130,7 +130,7 @@ final class NormGroupResolver
     {
         $ageBand = trim((string) ($ctx['age_band'] ?? ''));
         $default = (string) config('eq60_norms.resolver.default_age_band', '18-60');
-        if ($ageBand !== '' && !in_array(strtolower($ageBand), ['all', 'any', '*'], true)) {
+        if ($ageBand !== '' && ! in_array(strtolower($ageBand), ['all', 'any', '*'], true)) {
             return $ageBand;
         }
 
@@ -141,7 +141,7 @@ final class NormGroupResolver
 
         $bands = (array) config('eq60_norms.resolver.age_bands', []);
         foreach ($bands as $band => $def) {
-            if (!is_string($band) || !is_array($def)) {
+            if (! is_string($band) || ! is_array($def)) {
                 continue;
             }
 
@@ -169,7 +169,7 @@ final class NormGroupResolver
 
         $out = [];
         foreach ($templates as $template) {
-            if (!is_string($template) || trim($template) === '') {
+            if (! is_string($template) || trim($template) === '') {
                 continue;
             }
 
@@ -210,7 +210,7 @@ final class NormGroupResolver
             ->orderByDesc('created_at')
             ->first();
 
-        if (!$version) {
+        if (! $version) {
             return null;
         }
 
@@ -221,7 +221,7 @@ final class NormGroupResolver
             ->orderByDesc('sample_n')
             ->first();
 
-        if (!$metric) {
+        if (! $metric) {
             return null;
         }
 

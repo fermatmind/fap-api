@@ -57,8 +57,7 @@ class MeAttemptsService
     public function __construct(
         private readonly ScaleRegistry $scaleRegistry,
         private readonly OfferResolver $offerResolver,
-    ) {
-    }
+    ) {}
 
     public function list(
         int $orgId,
@@ -67,8 +66,7 @@ class MeAttemptsService
         int $pageSize,
         int $page,
         ?string $scaleCode = null
-    ): array
-    {
+    ): array {
         if ($userId === null && $anonId === null) {
             throw new ApiProblemException(401, 'UNAUTHORIZED', 'Missing or invalid fm_token.');
         }
@@ -92,7 +90,7 @@ class MeAttemptsService
         $attemptModels = [];
         $attemptIds = [];
         foreach ($paginator->items() as $attempt) {
-            if (!$attempt instanceof Attempt) {
+            if (! $attempt instanceof Attempt) {
                 continue;
             }
             $attemptModels[] = $attempt;
@@ -170,8 +168,7 @@ class MeAttemptsService
         Attempt $attempt,
         ?Result $result = null,
         ?UnifiedAccessProjection $projection = null
-    ): array
-    {
+    ): array {
         $attemptId = (string) ($attempt->id ?? '');
         $domainsMean = $this->extractDomainsMean($result?->result_json);
         $accessSummary = null;
@@ -192,9 +189,9 @@ class MeAttemptsService
             $output['ticket_code'] = (string) $attempt->ticket_code;
         }
 
-        if (!empty($attempt->submitted_at)) {
+        if (! empty($attempt->submitted_at)) {
             $output['submitted_at'] = (string) $attempt->submitted_at;
-        } elseif (!empty($attempt->created_at)) {
+        } elseif (! empty($attempt->created_at)) {
             $output['submitted_at'] = (string) $attempt->created_at;
         } else {
             $output['submitted_at'] = null;
@@ -242,8 +239,7 @@ class MeAttemptsService
         Attempt $attempt,
         ?UnifiedAccessProjection $projection,
         bool $resultExists
-    ): array
-    {
+    ): array {
         $payload = is_array($projection?->payload_json) ? $projection->payload_json : [];
         $accessState = $this->normalizeProjectionState(
             (string) ($projection?->access_state ?? ($resultExists ? 'locked' : 'pending')),
@@ -308,8 +304,8 @@ class MeAttemptsService
     }
 
     /**
-     * @param list<Attempt> $attemptModels
-     * @param array<string,Result> $resultByAttemptId
+     * @param  list<Attempt>  $attemptModels
+     * @param  array<string,Result>  $resultByAttemptId
      * @return array<string,mixed>|null
      */
     private function buildBigFiveHistoryCompare(array $attemptModels, array $resultByAttemptId): ?array
@@ -368,12 +364,12 @@ class MeAttemptsService
         ];
 
         foreach ($candidates as $node) {
-            if (!is_array($node)) {
+            if (! is_array($node)) {
                 continue;
             }
             $out = [];
             foreach (['O', 'C', 'E', 'A', 'N'] as $domain) {
-                if (!array_key_exists($domain, $node)) {
+                if (! array_key_exists($domain, $node)) {
                     continue 2;
                 }
                 $out[$domain] = round((float) $node[$domain], 2);
@@ -677,6 +673,7 @@ class MeAttemptsService
         }
 
         $normalized = trim($value);
+
         return $normalized !== '' ? $normalized : null;
     }
 
@@ -712,11 +709,12 @@ class MeAttemptsService
         if (is_array($value)) {
             return $value;
         }
-        if (!is_string($value) || trim($value) === '') {
+        if (! is_string($value) || trim($value) === '') {
             return [];
         }
 
         $decoded = json_decode($value, true);
+
         return is_array($decoded) ? $decoded : [];
     }
 
@@ -779,6 +777,7 @@ class MeAttemptsService
         }
 
         $code = strtoupper(trim($value));
+
         return array_key_exists($code, self::BIG_FIVE_FACET_META) ? $code : '';
     }
 
@@ -789,6 +788,7 @@ class MeAttemptsService
         }
 
         $bucket = strtolower(trim($value));
+
         return in_array($bucket, ['low', 'mid', 'high', 'extreme_low', 'extreme_high'], true)
             ? $bucket
             : null;

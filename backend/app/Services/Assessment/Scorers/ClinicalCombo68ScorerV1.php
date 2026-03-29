@@ -7,11 +7,11 @@ namespace App\Services\Assessment\Scorers;
 final class ClinicalCombo68ScorerV1
 {
     /**
-     * @param array<int|string,mixed> $answersByQuestion
-     * @param array<int,array{module_code:string,options_set_code:string,is_reverse:bool}> $questionIndex
-     * @param array<string,array<string,mixed>> $optionSets
-     * @param array<string,mixed> $policy
-     * @param array<string,mixed> $ctx
+     * @param  array<int|string,mixed>  $answersByQuestion
+     * @param  array<int,array{module_code:string,options_set_code:string,is_reverse:bool}>  $questionIndex
+     * @param  array<string,array<string,mixed>>  $optionSets
+     * @param  array<string,mixed>  $policy
+     * @param  array<string,mixed>  $ctx
      * @return array<string,mixed>
      */
     public function score(
@@ -26,13 +26,13 @@ final class ClinicalCombo68ScorerV1
 
         for ($qid = 1; $qid <= 68; $qid++) {
             $meta = $questionIndex[$qid] ?? null;
-            if (!is_array($meta)) {
+            if (! is_array($meta)) {
                 throw new \InvalidArgumentException('question meta missing: '.$qid);
             }
 
             $setCode = trim((string) ($meta['options_set_code'] ?? ''));
             $set = $optionSets[$setCode] ?? null;
-            if (!is_array($set)) {
+            if (! is_array($set)) {
                 throw new \InvalidArgumentException('option set missing: '.$setCode);
             }
 
@@ -53,7 +53,7 @@ final class ClinicalCombo68ScorerV1
 
             $rawCodes[$qid] = $code;
             $numeric = (int) ($scoringMap[$code] ?? -9999);
-            if (!array_key_exists($code, $scoringMap)) {
+            if (! array_key_exists($code, $scoringMap)) {
                 throw new \InvalidArgumentException('invalid scoring option: '.$qid);
             }
 
@@ -280,7 +280,7 @@ final class ClinicalCombo68ScorerV1
     }
 
     /**
-     * @param array<string,mixed> $scoreMap
+     * @param  array<string,mixed>  $scoreMap
      */
     private function normalizeAnswerCode(mixed $raw, array $scoreMap): ?string
     {
@@ -321,7 +321,7 @@ final class ClinicalCombo68ScorerV1
     }
 
     /**
-     * @param array<string,mixed> $scoreMap
+     * @param  array<string,mixed>  $scoreMap
      */
     private function reverseScore(int $numeric, array $scoreMap): int
     {
@@ -333,7 +333,7 @@ final class ClinicalCombo68ScorerV1
     }
 
     /**
-     * @param array<int,string> $rawCodes
+     * @param  array<int,string>  $rawCodes
      */
     private function ratio(array $rawCodes, callable $predicate): float
     {
@@ -353,7 +353,7 @@ final class ClinicalCombo68ScorerV1
     }
 
     /**
-     * @param array<int,string> $rawCodes
+     * @param  array<int,string>  $rawCodes
      */
     private function longstringMax(array $rawCodes): int
     {
@@ -382,7 +382,7 @@ final class ClinicalCombo68ScorerV1
     }
 
     /**
-     * @param array<int,int> $x
+     * @param  array<int,int>  $x
      */
     private function sumRange(array $x, int $from, int $to): int
     {
@@ -395,8 +395,8 @@ final class ClinicalCombo68ScorerV1
     }
 
     /**
-     * @param array<int,int> $x
-     * @param list<int> $ids
+     * @param  array<int,int>  $x
+     * @param  list<int>  $ids
      */
     private function sumIds(array $x, array $ids): int
     {
@@ -409,8 +409,8 @@ final class ClinicalCombo68ScorerV1
     }
 
     /**
-     * @param array<string,mixed> $muSigma
-     * @param array<string,mixed> $clamp
+     * @param  array<string,mixed>  $muSigma
+     * @param  array<string,mixed>  $clamp
      */
     private function tScore(int $raw, array $muSigma, array $clamp): int
     {
@@ -435,12 +435,12 @@ final class ClinicalCombo68ScorerV1
     }
 
     /**
-     * @param list<array<string,mixed>> $rules
+     * @param  list<array<string,mixed>>  $rules
      */
     private function levelFromT(int $t, array $rules, string $fallback): string
     {
         foreach ($rules as $rule) {
-            if (!is_array($rule)) {
+            if (! is_array($rule)) {
                 continue;
             }
             $min = array_key_exists('min_t', $rule) ? (int) $rule['min_t'] : 20;
@@ -459,8 +459,8 @@ final class ClinicalCombo68ScorerV1
     }
 
     /**
-     * @param array<string,int> $subScores
-     * @param list<string> $tieOrder
+     * @param  array<string,int>  $subScores
+     * @param  list<string>  $tieOrder
      */
     private function dominantTraitTag(array $subScores, array $tieOrder): ?string
     {
@@ -512,7 +512,7 @@ final class ClinicalCombo68ScorerV1
     }
 
     /**
-     * @param array<string,mixed> $ctx
+     * @param  array<string,mixed>  $ctx
      */
     private function resolveCompletionSeconds(array $ctx): int
     {

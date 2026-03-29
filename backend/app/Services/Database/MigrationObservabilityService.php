@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Services\Database;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 final class MigrationObservabilityService
 {
@@ -23,7 +22,7 @@ final class MigrationObservabilityService
     {
         $steps = max(1, min($steps, 20));
 
-        if (!\App\Support\SchemaBaseline::hasTable('migrations')) {
+        if (! \App\Support\SchemaBaseline::hasTable('migrations')) {
             return [
                 'steps' => $steps,
                 'items' => [],
@@ -53,7 +52,7 @@ final class MigrationObservabilityService
 
     private function migrationSummary(int $limit): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('migrations')) {
+        if (! \App\Support\SchemaBaseline::hasTable('migrations')) {
             return [
                 'current_batch' => 0,
                 'total' => 0,
@@ -87,7 +86,7 @@ final class MigrationObservabilityService
 
     private function indexAuditSummary(int $limit): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('migration_index_audits')) {
+        if (! \App\Support\SchemaBaseline::hasTable('migration_index_audits')) {
             return [
                 'total' => 0,
                 'by_action' => [],
@@ -139,7 +138,7 @@ final class MigrationObservabilityService
     }
 
     /**
-     * @param iterable<object> $rows
+     * @param  iterable<object>  $rows
      * @return list<array{key: string, total: int}>
      */
     private function toBucketRows(iterable $rows, string $field): array
@@ -156,7 +155,7 @@ final class MigrationObservabilityService
     }
 
     /**
-     * @param iterable<object> $rows
+     * @param  iterable<object>  $rows
      * @return list<array<string, mixed>>
      */
     private function toRecentRows(iterable $rows): array
@@ -180,4 +179,4 @@ final class MigrationObservabilityService
 
         return $items;
     }
-};
+}

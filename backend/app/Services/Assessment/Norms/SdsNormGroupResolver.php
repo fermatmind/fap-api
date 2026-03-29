@@ -10,11 +10,10 @@ final class SdsNormGroupResolver
 {
     public function __construct(
         private readonly PsychometricNormGroupResolver $resolver,
-    ) {
-    }
+    ) {}
 
     /**
-     * @param array<string,mixed> $ctx
+     * @param  array<string,mixed>  $ctx
      * @return array<string,mixed>
      */
     public function resolve(array $ctx): array

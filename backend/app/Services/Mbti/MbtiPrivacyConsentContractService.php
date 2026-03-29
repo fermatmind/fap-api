@@ -7,8 +7,11 @@ namespace App\Services\Mbti;
 final class MbtiPrivacyConsentContractService
 {
     private const VERSION = 'mbti.privacy_contract.v1';
+
     private const SUBJECT_EXPORT_SCHEMA = 'mbti.subject_export.v1';
+
     private const ANONYMIZED_VECTOR_SCHEMA = 'mbti.anonymized_vector.v1';
+
     private const ERASURE_SCOPE_SCHEMA = 'mbti.erasure_scope.v1';
 
     /**
@@ -430,7 +433,6 @@ final class MbtiPrivacyConsentContractService
     }
 
     /**
-     * @param  mixed  $value
      * @return list<array{axis:string,side:string,percent:float|int,state:string}>
      */
     private function normalizeDominantAxes(mixed $value): array
@@ -457,7 +459,6 @@ final class MbtiPrivacyConsentContractService
     }
 
     /**
-     * @param  mixed  $value
      * @return array<string, string>
      */
     private function normalizeSceneFingerprint(mixed $value): array
@@ -484,7 +485,6 @@ final class MbtiPrivacyConsentContractService
     }
 
     /**
-     * @param  mixed  $value
      * @return list<string>
      */
     private function normalizeCloseCallAxes(mixed $value): array

@@ -122,7 +122,7 @@ trait ReportPayloadAssemblerProfilesTrait
 
     private function pickItemByTypeCode($items, string $typeCode, string $keyField = 'type_code'): ?array
     {
-        if (!is_array($items)) {
+        if (! is_array($items)) {
             return null;
         }
 
@@ -133,7 +133,7 @@ trait ReportPayloadAssemblerProfilesTrait
         $isList = (array_keys($items) === range(0, count($items) - 1));
         if ($isList) {
             foreach ($items as $row) {
-                if (!is_array($row)) {
+                if (! is_array($row)) {
                     continue;
                 }
                 $k = (string) ($row[$keyField] ?? '');
@@ -170,7 +170,7 @@ trait ReportPayloadAssemblerProfilesTrait
         }
 
         // Compat fallback only: current main path is pack chain -> roles asset.
-        if (!$card && is_callable($ctx['buildRoleCard'] ?? null)) {
+        if (! $card && is_callable($ctx['buildRoleCard'] ?? null)) {
             $x = ($ctx['buildRoleCard'])($legacyContentPackageDir, $typeCode);
             if (is_array($x)) {
                 return $x;
@@ -207,7 +207,7 @@ trait ReportPayloadAssemblerProfilesTrait
         }
 
         // Compat fallback only: current main path is pack chain -> strategies asset.
-        if (!$card && is_callable($ctx['buildStrategyCard'] ?? null)) {
+        if (! $card && is_callable($ctx['buildStrategyCard'] ?? null)) {
             $x = ($ctx['buildStrategyCard'])($legacyContentPackageDir, $typeCode);
             if (is_array($x)) {
                 return $x;
@@ -246,7 +246,7 @@ trait ReportPayloadAssemblerProfilesTrait
         $ei = ($core !== '' && ($core[0] === 'I')) ? 'I' : 'E';
         $at = ($suffix === 'A') ? 'A' : 'T';
 
-        return $ei . $at;
+        return $ei.$at;
     }
 
     private function loadBorderlineNoteFromPackChain(
@@ -291,6 +291,7 @@ trait ReportPayloadAssemblerProfilesTrait
         if ($a === []) {
             return false;
         }
+
         return array_keys($a) !== range(0, count($a) - 1);
     }
 }

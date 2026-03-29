@@ -10,14 +10,14 @@ class GenericReportBuilder
     public function build(Attempt $attempt, Result $result): array
     {
         $resultJson = $result->result_json;
-        if (!is_array($resultJson)) {
+        if (! is_array($resultJson)) {
             $resultJson = [];
         }
 
         $rawScore = $resultJson['raw_score'] ?? null;
         $finalScore = $resultJson['final_score'] ?? null;
         $breakdown = $resultJson['breakdown_json'] ?? [];
-        if (!is_array($breakdown)) {
+        if (! is_array($breakdown)) {
             $breakdown = [];
         }
 

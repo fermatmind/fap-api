@@ -3,13 +3,12 @@
 namespace App\Services\Memory;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 final class MemoryProposer
 {
     public function proposeFromInsights(int $userId): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('ai_insights')) {
+        if (! \App\Support\SchemaBaseline::hasTable('ai_insights')) {
             return ['ok' => false, 'error' => 'ai_insights_missing', 'items' => []];
         }
 

@@ -11,8 +11,7 @@ final class ClinicalComboContentCompileService
     public function __construct(
         private readonly ClinicalComboPackLoader $loader,
         private readonly ClinicalComboContentLintService $lint,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{ok:bool,pack_id:string,version:string,compiled_dir:string,errors:list<array{file:string,line:int,message:string}>,hashes:array<string,string>}
@@ -21,7 +20,7 @@ final class ClinicalComboContentCompileService
     {
         $version = $this->normalizeVersion($version);
         $lint = $this->lint->lint($version);
-        if (!($lint['ok'] ?? false)) {
+        if (! ($lint['ok'] ?? false)) {
             return [
                 'ok' => false,
                 'pack_id' => ClinicalComboPackLoader::PACK_ID,
@@ -33,7 +32,7 @@ final class ClinicalComboContentCompileService
         }
 
         $compiledDir = $this->loader->compiledDir($version);
-        if (!is_dir($compiledDir)) {
+        if (! is_dir($compiledDir)) {
             File::makeDirectory($compiledDir, 0775, true, true);
         }
 
@@ -190,7 +189,7 @@ final class ClinicalComboContentCompileService
         $hashes = [];
         foreach ($files as $name => $payload) {
             $json = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
-            if (!is_string($json)) {
+            if (! is_string($json)) {
                 continue;
             }
             File::put($this->loader->compiledPath($name, $version), $json."\n");
@@ -257,7 +256,7 @@ final class ClinicalComboContentCompileService
     }
 
     /**
-     * @param array<string,string> $hashes
+     * @param  array<string,string>  $hashes
      * @return array<string,array{sha256:string}>
      */
     private function manifestFiles(array $hashes): array
@@ -273,7 +272,7 @@ final class ClinicalComboContentCompileService
     }
 
     /**
-     * @param array<string,string> $hashes
+     * @param  array<string,string>  $hashes
      */
     private function hashMap(array $hashes): string
     {
@@ -288,19 +287,19 @@ final class ClinicalComboContentCompileService
 
     private function hashDirectory(string $dir): string
     {
-        if (!is_dir($dir)) {
+        if (! is_dir($dir)) {
             return '';
         }
 
         $files = File::allFiles($dir);
         usort($files, static fn (\SplFileInfo $a, \SplFileInfo $b): int => strcmp($a->getPathname(), $b->getPathname()));
 
-        $prefix = rtrim($dir, '/\\') . DIRECTORY_SEPARATOR;
+        $prefix = rtrim($dir, '/\\').DIRECTORY_SEPARATOR;
         $rows = [];
         foreach ($files as $file) {
             $path = $file->getPathname();
             $rel = str_starts_with($path, $prefix) ? substr($path, strlen($prefix)) : $file->getFilename();
-            $rows[] = $rel . ':' . hash_file('sha256', $path);
+            $rows[] = $rel.':'.hash_file('sha256', $path);
         }
 
         return hash('sha256', implode("\n", $rows));

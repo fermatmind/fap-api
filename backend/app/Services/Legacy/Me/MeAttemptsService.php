@@ -28,7 +28,7 @@ class MeAttemptsService
 
         $items = [];
         foreach ($paginator->items() as $attempt) {
-            if (!$attempt instanceof Attempt) {
+            if (! $attempt instanceof Attempt) {
                 continue;
             }
             $items[] = $this->presentAttempt($attempt);
@@ -61,9 +61,9 @@ class MeAttemptsService
             $output['ticket_code'] = (string) $attempt->ticket_code;
         }
 
-        if (!empty($attempt->submitted_at)) {
+        if (! empty($attempt->submitted_at)) {
             $output['submitted_at'] = (string) $attempt->submitted_at;
-        } elseif (!empty($attempt->created_at)) {
+        } elseif (! empty($attempt->created_at)) {
             $output['submitted_at'] = (string) $attempt->created_at;
         } else {
             $output['submitted_at'] = null;

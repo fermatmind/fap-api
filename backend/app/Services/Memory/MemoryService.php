@@ -6,18 +6,18 @@ use App\Services\AI\Embeddings\EmbeddingClient;
 use App\Services\VectorStore\VectorStoreManager;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\LazyCollection;
 use Illuminate\Support\Str;
 
 final class MemoryService
 {
     private const DEFAULT_EXPORT_LIMIT = 200;
+
     private const MAX_EXPORT_LIMIT = 500;
 
     public function propose(int $userId, array $payload): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('memories')) {
+        if (! \App\Support\SchemaBaseline::hasTable('memories')) {
             return ['ok' => false, 'error' => 'memories_table_missing'];
         }
 
@@ -51,7 +51,7 @@ final class MemoryService
 
     public function confirm(int $userId, string $memoryId): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('memories')) {
+        if (! \App\Support\SchemaBaseline::hasTable('memories')) {
             return ['ok' => false, 'error' => 'memories_table_missing'];
         }
 
@@ -60,7 +60,7 @@ final class MemoryService
             ->where('user_id', $userId)
             ->first();
 
-        if (!$row) {
+        if (! $row) {
             return ['ok' => false, 'error' => 'memory_not_found'];
         }
 
@@ -84,7 +84,7 @@ final class MemoryService
 
     public function delete(int $userId, string $memoryId): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('memories')) {
+        if (! \App\Support\SchemaBaseline::hasTable('memories')) {
             return ['ok' => false, 'error' => 'memories_table_missing'];
         }
 
@@ -103,7 +103,7 @@ final class MemoryService
 
     public function exportConfirmedPage(int $userId, int $limit, ?string $cursor): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('memories')) {
+        if (! \App\Support\SchemaBaseline::hasTable('memories')) {
             return [
                 'ok' => false,
                 'error' => 'memories_table_missing',
@@ -162,7 +162,7 @@ final class MemoryService
 
     public function exportConfirmedCursor(int $userId): LazyCollection
     {
-        if (!\App\Support\SchemaBaseline::hasTable('memories')) {
+        if (! \App\Support\SchemaBaseline::hasTable('memories')) {
             return LazyCollection::make([]);
         }
 
@@ -192,7 +192,7 @@ final class MemoryService
             'id' => $id,
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
-        if (!is_string($json)) {
+        if (! is_string($json)) {
             return null;
         }
 
@@ -210,12 +210,12 @@ final class MemoryService
         }
 
         $decoded = base64_decode($cursor, true);
-        if (!is_string($decoded) || $decoded === '') {
+        if (! is_string($decoded) || $decoded === '') {
             return null;
         }
 
         $payload = json_decode($decoded, true);
-        if (!is_array($payload)) {
+        if (! is_array($payload)) {
             return null;
         }
 
@@ -238,11 +238,12 @@ final class MemoryService
             'subject' => 'memory_embedding',
         ]);
 
-        if (!($embed['ok'] ?? false)) {
+        if (! ($embed['ok'] ?? false)) {
             return $embed;
         }
 
         $vectorStore = app(VectorStoreManager::class);
+
         return $vectorStore->upsert((string) config('memory.default_namespace', 'memory'), [[
             'id' => (string) ($row->id ?? ''),
             'owner_type' => 'memory',

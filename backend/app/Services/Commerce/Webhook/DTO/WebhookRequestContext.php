@@ -7,8 +7,8 @@ namespace App\Services\Commerce\Webhook\DTO;
 final class WebhookRequestContext
 {
     /**
-     * @param array<string,mixed> $payload
-     * @param array<string,mixed> $payloadMeta
+     * @param  array<string,mixed>  $payload
+     * @param  array<string,mixed>  $payloadMeta
      */
     public function __construct(
         public readonly string $provider,
@@ -20,6 +20,5 @@ final class WebhookRequestContext
         public readonly array $payloadMeta = [],
         public readonly string $rawPayloadSha256 = '',
         public readonly int $rawPayloadBytes = -1,
-    ) {
-    }
+    ) {}
 }

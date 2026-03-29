@@ -32,11 +32,13 @@ trait ReportGatekeeperTeaserTrait
         foreach ($sections as $key => $value) {
             if (isset($freeSet[$key])) {
                 $out[$key] = $value;
+
                 continue;
             }
 
-            if (!$blurOthers) {
+            if (! $blurOthers) {
                 $out[$key] = null;
+
                 continue;
             }
 

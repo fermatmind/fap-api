@@ -23,7 +23,7 @@ class LocalDriver implements ContentSourceDriver
         $key = $this->normalizeKey($key);
         $path = $this->absPath($key);
 
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             throw new RuntimeException("Content key not found: {$key}");
         }
 
@@ -38,6 +38,7 @@ class LocalDriver implements ContentSourceDriver
     public function exists(string $key): bool
     {
         $key = $this->normalizeKey($key);
+
         return is_file($this->absPath($key));
     }
 
@@ -45,9 +46,9 @@ class LocalDriver implements ContentSourceDriver
     {
         $prefix = $this->normalizeKey($prefix);
         $baseDir = $this->rootDir;
-        $scanDir = $prefix === '' ? $baseDir : $baseDir . '/' . $prefix;
+        $scanDir = $prefix === '' ? $baseDir : $baseDir.'/'.$prefix;
 
-        if (!is_dir($scanDir)) {
+        if (! is_dir($scanDir)) {
             return [];
         }
 
@@ -57,7 +58,7 @@ class LocalDriver implements ContentSourceDriver
         );
 
         foreach ($iterator as $fileInfo) {
-            if (!$fileInfo->isFile()) {
+            if (! $fileInfo->isFile()) {
                 continue;
             }
 
@@ -74,17 +75,18 @@ class LocalDriver implements ContentSourceDriver
         $key = $this->normalizeKey($key);
         $path = $this->absPath($key);
 
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             return null;
         }
 
         $hash = sha1_file($path);
+
         return $hash === false ? null : $hash;
     }
 
     private function absPath(string $key): string
     {
-        return $this->rootDir . '/' . $key;
+        return $this->rootDir.'/'.$key;
     }
 
     private function normalizeKey(string $key): string

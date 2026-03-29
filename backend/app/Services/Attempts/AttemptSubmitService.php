@@ -7,11 +7,6 @@ use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Assessment\AssessmentRunner;
-use App\Services\Attempts\AttemptSubmitCanonicalizeService;
-use App\Services\Attempts\AttemptSubmitGuardService;
-use App\Services\Attempts\AttemptSubmitPostCommitService;
-use App\Services\Attempts\AttemptSubmitScoreService;
-use App\Services\Attempts\AttemptSubmitTxService;
 use App\Services\Experiments\ExperimentAssigner;
 use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Report\ReportGatekeeper;
@@ -354,7 +349,7 @@ class AttemptSubmitService
             return [];
         }
 
-        if (!is_array($assignments)) {
+        if (! is_array($assignments)) {
             return [];
         }
 

@@ -12,11 +12,10 @@ final class Sds20ReportComposer
 {
     public function __construct(
         private readonly Sds20PackLoader $packLoader,
-    ) {
-    }
+    ) {}
 
     /**
-     * @param array<string,mixed> $ctx
+     * @param  array<string,mixed>  $ctx
      * @return array{ok:bool,report?:array<string,mixed>,error?:string,message?:string,status?:int}
      */
     public function composeVariant(Attempt $attempt, Result $result, string $variant, array $ctx = []): array
@@ -51,7 +50,7 @@ final class Sds20ReportComposer
         $sections = [];
 
         foreach ($sectionsConfig as $sectionConfig) {
-            if (!is_array($sectionConfig)) {
+            if (! is_array($sectionConfig)) {
                 continue;
             }
 
@@ -64,7 +63,7 @@ final class Sds20ReportComposer
                 array_map(static fn ($v): string => strtolower(trim((string) $v)), (array) ($sectionConfig['required_in_variant'] ?? ['free', 'full'])),
                 static fn (string $v): bool => $v !== ''
             ));
-            if ($requiredInVariant !== [] && !in_array($variant, $requiredInVariant, true)) {
+            if ($requiredInVariant !== [] && ! in_array($variant, $requiredInVariant, true)) {
                 continue;
             }
 
@@ -81,12 +80,13 @@ final class Sds20ReportComposer
                 if (is_array($copySection)) {
                     $sections[] = $copySection;
                 }
+
                 continue;
             }
 
             $sectionBlocks = [];
             foreach ($blocks as $block) {
-                if (!is_array($block)) {
+                if (! is_array($block)) {
                     continue;
                 }
                 if ((string) ($block['section_key'] ?? '') !== $key) {
@@ -162,7 +162,7 @@ final class Sds20ReportComposer
         ];
 
         foreach ($candidates as $candidate) {
-            if (!is_array($candidate)) {
+            if (! is_array($candidate)) {
                 continue;
             }
             if (strtoupper((string) ($candidate['scale_code'] ?? '')) !== 'SDS_20') {
@@ -176,7 +176,7 @@ final class Sds20ReportComposer
     }
 
     /**
-     * @param array<string,mixed> $landing
+     * @param  array<string,mixed>  $landing
      * @return array<string,mixed>|null
      */
     private function composeCopySection(
@@ -203,7 +203,7 @@ final class Sds20ReportComposer
         }
 
         if ($key === 'crisis_banner') {
-            if (!$crisisAlert) {
+            if (! $crisisAlert) {
                 return null;
             }
 
@@ -225,7 +225,7 @@ final class Sds20ReportComposer
     }
 
     /**
-     * @param list<array<string,mixed>> $sections
+     * @param  list<array<string,mixed>>  $sections
      * @return array{0:list<array<string,mixed>>,1:list<array<string,mixed>>}
      */
     private function buildCompatBlocks(array $sections): array
@@ -234,7 +234,7 @@ final class Sds20ReportComposer
         $paid = [];
 
         foreach ($sections as $section) {
-            if (!is_array($section)) {
+            if (! is_array($section)) {
                 continue;
             }
 
@@ -243,7 +243,7 @@ final class Sds20ReportComposer
             $blocks = is_array($section['blocks'] ?? null) ? $section['blocks'] : [];
 
             foreach ($blocks as $block) {
-                if (!is_array($block)) {
+                if (! is_array($block)) {
                     continue;
                 }
 
@@ -266,7 +266,7 @@ final class Sds20ReportComposer
     }
 
     /**
-     * @param array<string,mixed> $data
+     * @param  array<string,mixed>  $data
      */
     private function renderTemplate(string $template, array $data): string
     {

@@ -17,7 +17,7 @@ final class StripeEventParser implements WebhookEventParserInterface
 
     public function parse(array $payload): NormalizedPaymentEvent
     {
-        $normalized = (new StripeGateway())->normalizePayload($payload);
+        $normalized = (new StripeGateway)->normalizePayload($payload);
 
         return new NormalizedPaymentEvent(
             provider: 'stripe',

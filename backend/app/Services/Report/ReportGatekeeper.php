@@ -269,7 +269,7 @@ class ReportGatekeeper
                 }
 
                 if ($snapshotStatus !== 'ready') {
-                        Log::warning('[REPORT] snapshot_status_unknown', [
+                    Log::warning('[REPORT] snapshot_status_unknown', [
                         'org_id' => $effectiveOrgId,
                         'attempt_id' => $attemptId,
                         'status' => $snapshotStatus !== '' ? $snapshotStatus : null,

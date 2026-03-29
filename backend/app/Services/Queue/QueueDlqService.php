@@ -7,14 +7,12 @@ namespace App\Services\Queue;
 use Illuminate\Contracts\Queue\Factory as QueueFactory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 
 class QueueDlqService
 {
     public function __construct(
         private readonly QueueFactory $queueFactory,
-    ) {
-    }
+    ) {}
 
     public function metrics(): array
     {
@@ -97,7 +95,7 @@ class QueueDlqService
             ];
         }
 
-        if (!$force && \App\Support\SchemaBaseline::hasTable('queue_dlq_replays')) {
+        if (! $force && \App\Support\SchemaBaseline::hasTable('queue_dlq_replays')) {
             $already = DB::table('queue_dlq_replays')
                 ->where('failed_job_id', $failedJobId)
                 ->where('replay_status', 'replayed')
@@ -129,7 +127,7 @@ class QueueDlqService
         }
 
         $payload = (string) ($failedJob->payload ?? '');
-        if ($payload === '' || !$this->isJsonObject($payload)) {
+        if ($payload === '' || ! $this->isJsonObject($payload)) {
             $this->insertReplayLog(
                 $failedJobId,
                 $this->failedJobUuid($failedJob),
@@ -223,11 +221,12 @@ class QueueDlqService
             }
         }
 
-        if (!\App\Support\SchemaBaseline::hasTable('failed_jobs')) {
+        if (! \App\Support\SchemaBaseline::hasTable('failed_jobs')) {
             return null;
         }
 
         $row = DB::table('failed_jobs')->where('id', $failedJobId)->first();
+
         return is_object($row) ? $row : null;
     }
 
@@ -270,7 +269,7 @@ class QueueDlqService
         string $requestedBy,
         ?string $notes
     ): int {
-        if (!\App\Support\SchemaBaseline::hasTable('queue_dlq_replays')) {
+        if (! \App\Support\SchemaBaseline::hasTable('queue_dlq_replays')) {
             return 0;
         }
 
@@ -295,12 +294,14 @@ class QueueDlqService
     private function failedJobUuid(object $failedJob): ?string
     {
         $value = trim((string) ($failedJob->uuid ?? ''));
+
         return $value !== '' ? $value : null;
     }
 
     private function isJsonObject(string $payload): bool
     {
         $decoded = json_decode($payload, true);
+
         return is_array($decoded);
     }
 
@@ -314,7 +315,7 @@ class QueueDlqService
     }
 
     /**
-     * @param array<int, array{status: string, total: int}> $replayStatus
+     * @param  array<int, array{status: string, total: int}>  $replayStatus
      */
     private function statusCount(array $replayStatus, string $status): int
     {

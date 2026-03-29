@@ -5,9 +5,9 @@ namespace App\Services\Score;
 class MbtiAttemptScorer
 {
     /**
-     * @param array $answers  [ ['question_id'=>'Q1','code'=>'A'], ... ]
-     * @param array $questionsIndex question_id => ['dimension','key_pole','direction','score_map','weight','code']
-     * @param array|null $scoringSpec scoring_spec.json (optional)
+     * @param  array  $answers  [ ['question_id'=>'Q1','code'=>'A'], ... ]
+     * @param  array  $questionsIndex  question_id => ['dimension','key_pole','direction','score_map','weight','code']
+     * @param  array|null  $scoringSpec  scoring_spec.json (optional)
      */
     public function score(array $answers, array $questionsIndex, ?array $scoringSpec = null): array
     {
@@ -31,33 +31,34 @@ class MbtiAttemptScorer
         // 校验
         foreach ($answers as $a) {
             $qid = $a['question_id'] ?? null;
-            if (!$qid || !isset($questionsIndex[$qid])) {
-                throw new \RuntimeException("Unknown question_id: " . (string)$qid);
+            if (! $qid || ! isset($questionsIndex[$qid])) {
+                throw new \RuntimeException('Unknown question_id: '.(string) $qid);
             }
         }
 
         if (count($answers) !== $expectedQuestionCount) {
-            throw new \RuntimeException("Invalid answers count. expected={$expectedQuestionCount}, got=" . count($answers));
+            throw new \RuntimeException("Invalid answers count. expected={$expectedQuestionCount}, got=".count($answers));
         }
 
-        $dimN        = array_fill_keys($dims, 0);
+        $dimN = array_fill_keys($dims, 0);
         $sumTowardP1 = array_fill_keys($dims, 0);
-        $countP1     = array_fill_keys($dims, 0);
-        $countP2     = array_fill_keys($dims, 0);
-        $countNeutral= array_fill_keys($dims, 0);
-        $skipped     = [];
+        $countP1 = array_fill_keys($dims, 0);
+        $countP2 = array_fill_keys($dims, 0);
+        $countNeutral = array_fill_keys($dims, 0);
+        $skipped = [];
 
-        $defaultScoreMap = ['A'=>2,'B'=>1,'C'=>0,'D'=>-1,'E'=>-2];
+        $defaultScoreMap = ['A' => 2, 'B' => 1, 'C' => 0, 'D' => -1, 'E' => -2];
         $fallbackScoreMap = $this->normalizeScoreMap($scoringSpec['likert']['score_map'] ?? null, $defaultScoreMap);
 
         foreach ($answers as $a) {
-            $qid  = (string)($a['question_id'] ?? '');
-            $code = strtoupper((string)($a['code'] ?? ''));
+            $qid = (string) ($a['question_id'] ?? '');
+            $code = strtoupper((string) ($a['code'] ?? ''));
 
             $meta = $questionsIndex[$qid];
-            $dim  = $meta['dimension'] ?? null;
-            if (!$dim || !isset($dimN[$dim])) {
+            $dim = $meta['dimension'] ?? null;
+            if (! $dim || ! isset($dimN[$dim])) {
                 $skipped[] = ['question_id' => $qid, 'reason' => 'invalid_dimension', 'dimension' => $dim];
+
                 continue;
             }
 
@@ -65,19 +66,30 @@ class MbtiAttemptScorer
 
             // normalize
             $norm = [];
-            foreach ($scoreMap as $k=>$v) $norm[strtoupper((string)$k)] = (int)$v;
+            foreach ($scoreMap as $k => $v) {
+                $norm[strtoupper((string) $k)] = (int) $v;
+            }
             $scoreMap = $norm;
 
-            if (!array_key_exists($code, $scoreMap)) $scoreMap = $defaultScoreMap;
+            if (! array_key_exists($code, $scoreMap)) {
+                $scoreMap = $defaultScoreMap;
+            }
 
             // 全0兜底
             $allZero = true;
-            foreach ($scoreMap as $v) { if ((int)$v !== 0) { $allZero=false; break; } }
-            if ($allZero) $scoreMap = $defaultScoreMap;
+            foreach ($scoreMap as $v) {
+                if ((int) $v !== 0) {
+                    $allZero = false;
+                    break;
+                }
+            }
+            if ($allZero) {
+                $scoreMap = $defaultScoreMap;
+            }
 
-            $rawScore  = (int)($scoreMap[$code] ?? 0);
-            $direction = (int)($meta['direction'] ?? 1);
-            $keyPole   = (string)($meta['key_pole'] ?? '');
+            $rawScore = (int) ($scoreMap[$code] ?? 0);
+            $direction = (int) ($meta['direction'] ?? 1);
+            $keyPole = (string) ($meta['key_pole'] ?? '');
 
             $signed = $rawScore * (($direction === 0) ? 1 : $direction);
 
@@ -87,13 +99,17 @@ class MbtiAttemptScorer
             $dimN[$dim] += 1;
             $sumTowardP1[$dim] += $towardP1;
 
-            if ($towardP1 > 0) $countP1[$dim] += 1;
-            elseif ($towardP1 < 0) $countP2[$dim] += 1;
-            else $countNeutral[$dim] += 1;
+            if ($towardP1 > 0) {
+                $countP1[$dim] += 1;
+            } elseif ($towardP1 < 0) {
+                $countP2[$dim] += 1;
+            } else {
+                $countNeutral[$dim] += 1;
+            }
         }
 
         foreach ($dims as $dim) {
-            if ((int)$dimN[$dim] <= 0) {
+            if ((int) $dimN[$dim] <= 0) {
                 throw new \RuntimeException("No scored answers for dim={$dim}");
             }
         }
@@ -101,8 +117,8 @@ class MbtiAttemptScorer
         // scores_pct：0..100（toward P1）
         $scoresPct = [];
         foreach ($dims as $dim) {
-            $n = (int)$dimN[$dim];
-            $pct = (int)round((($sumTowardP1[$dim] + 2*$n) / (4*$n)) * 100);
+            $n = (int) $dimN[$dim];
+            $pct = (int) round((($sumTowardP1[$dim] + 2 * $n) / (4 * $n)) * 100);
             $pct = max(0, min(100, $pct));
             $scoresPct[$dim] = $pct;
         }
@@ -126,7 +142,7 @@ class MbtiAttemptScorer
                 $displayPct >= 70 => 'strong',
                 $displayPct >= 60 => 'clear',
                 $displayPct >= 55 => 'weak',
-                default           => 'very_weak',
+                default => 'very_weak',
             };
         }
 
@@ -134,12 +150,12 @@ class MbtiAttemptScorer
         $scoresJson = [];
         foreach ($dims as $dim) {
             $scoresJson[$dim] = [
-                'a'       => $countP1[$dim],
-                'b'       => $countP2[$dim],
+                'a' => $countP1[$dim],
+                'b' => $countP2[$dim],
                 'neutral' => $countNeutral[$dim],
-                'sum'     => $sumTowardP1[$dim],
-                'total'   => $dimN[$dim],
-                'count'   => $dimN[$dim],
+                'sum' => $sumTowardP1[$dim],
+                'total' => $dimN[$dim],
+                'count' => $dimN[$dim],
             ];
         }
 
@@ -182,13 +198,13 @@ class MbtiAttemptScorer
         $dims = array_keys($dimensions);
 
         if (count($answers) !== $expectedQuestionCount) {
-            throw new \RuntimeException("Invalid answers count. expected={$expectedQuestionCount}, got=" . count($answers));
+            throw new \RuntimeException("Invalid answers count. expected={$expectedQuestionCount}, got=".count($answers));
         }
 
         foreach ($answers as $a) {
             $qid = $a['question_id'] ?? null;
-            if (!$qid || !isset($questionsIndex[$qid])) {
-                throw new \RuntimeException("Unknown question_id: " . (string)$qid);
+            if (! $qid || ! isset($questionsIndex[$qid])) {
+                throw new \RuntimeException('Unknown question_id: '.(string) $qid);
             }
         }
 
@@ -215,24 +231,25 @@ class MbtiAttemptScorer
         $facetWeightSum = [];
 
         foreach ($answers as $a) {
-            $qid  = (string)($a['question_id'] ?? '');
-            $code = strtoupper((string)($a['code'] ?? ''));
+            $qid = (string) ($a['question_id'] ?? '');
+            $code = strtoupper((string) ($a['code'] ?? ''));
             $meta = $questionsIndex[$qid];
-            $dim  = $meta['dimension'] ?? null;
+            $dim = $meta['dimension'] ?? null;
 
-            if (!$dim || !isset($dimensions[$dim])) {
+            if (! $dim || ! isset($dimensions[$dim])) {
                 $skipped[] = ['question_id' => $qid, 'reason' => 'invalid_dimension', 'dimension' => $dim];
+
                 continue;
             }
 
             $scoreMap = $this->normalizeScoreMap($meta['score_map'] ?? null, $scoreMapDefault);
-            if (!array_key_exists($code, $scoreMap)) {
+            if (! array_key_exists($code, $scoreMap)) {
                 $scoreMap = $scoreMapDefault;
             }
 
-            $rawScore  = (int) ($scoreMap[$code] ?? 0);
+            $rawScore = (int) ($scoreMap[$code] ?? 0);
             $direction = (int) ($meta['direction'] ?? 1);
-            $keyPole   = (string) ($meta['key_pole'] ?? '');
+            $keyPole = (string) ($meta['key_pole'] ?? '');
 
             $signed = $rawScore * (($direction === 0) ? 1 : $direction);
             $p1 = $dimensions[$dim]['p1'];
@@ -246,14 +263,18 @@ class MbtiAttemptScorer
             $sumWeighted[$dim] += $weighted;
             $weightSum[$dim] += $weight;
 
-            if ($towardP1 > 0) $countP1[$dim] += 1;
-            elseif ($towardP1 < 0) $countP2[$dim] += 1;
-            else $countNeutral[$dim] += 1;
+            if ($towardP1 > 0) {
+                $countP1[$dim] += 1;
+            } elseif ($towardP1 < 0) {
+                $countP2[$dim] += 1;
+            } else {
+                $countNeutral[$dim] += 1;
+            }
 
             $qCode = (string) ($meta['code'] ?? '');
             if ($qCode !== '' && isset($facetMap[$qCode])) {
                 $facetKey = $facetMap[$qCode]['facet'];
-                if (!isset($facetSum[$facetKey])) {
+                if (! isset($facetSum[$facetKey])) {
                     $facetSum[$facetKey] = 0.0;
                     $facetWeightSum[$facetKey] = 0.0;
                 }
@@ -299,7 +320,7 @@ class MbtiAttemptScorer
                 $displayPct >= 70 => 'strong',
                 $displayPct >= 60 => 'clear',
                 $displayPct >= 55 => 'weak',
-                default           => 'very_weak',
+                default => 'very_weak',
             };
 
             $clarity = abs($pct - 50) * 2;
@@ -318,7 +339,7 @@ class MbtiAttemptScorer
             'JP' => $winningPoles['JP'] ?? 'J',
         ];
         $atSuffix = $winningPoles['AT'] ?? 'A';
-        $typeCode = implode('', $letters) . '-' . $atSuffix;
+        $typeCode = implode('', $letters).'-'.$atSuffix;
 
         $scoresJson = [];
         foreach ($dims as $dim) {
@@ -360,7 +381,7 @@ class MbtiAttemptScorer
         }
 
         $pciOverall = null;
-        if (!empty($pciAxes)) {
+        if (! empty($pciAxes)) {
             $sum = 0.0;
             $n = 0;
             foreach ($pciAxes as $row) {
@@ -406,24 +427,25 @@ class MbtiAttemptScorer
     private function getDimensionPoles(string $dim): array
     {
         return match ($dim) {
-            'EI' => ['E','I'],
-            'SN' => ['S','N'],
-            'TF' => ['T','F'],
-            'JP' => ['J','P'],
-            'AT' => ['A','T'],
-            default => ['',''],
+            'EI' => ['E', 'I'],
+            'SN' => ['S', 'N'],
+            'TF' => ['T', 'F'],
+            'JP' => ['J', 'P'],
+            'AT' => ['A', 'T'],
+            default => ['', ''],
         };
     }
 
     private function expectedCount(array $questionsIndex): int
     {
         $count = count($questionsIndex);
+
         return $count > 0 ? $count : 144;
     }
 
     private function normalizeScoreMap(?array $scoreMap, array $fallback): array
     {
-        if (!is_array($scoreMap) || empty($scoreMap)) {
+        if (! is_array($scoreMap) || empty($scoreMap)) {
             return $fallback;
         }
 
@@ -454,8 +476,13 @@ class MbtiAttemptScorer
     private function clampWeight(mixed $raw, float $min, float $max, float $fallback): float
     {
         $val = is_numeric($raw) ? (float) $raw : $fallback;
-        if ($val < $min) $val = $min;
-        if ($val > $max) $val = $max;
+        if ($val < $min) {
+            $val = $min;
+        }
+        if ($val > $max) {
+            $val = $max;
+        }
+
         return $val;
     }
 
@@ -476,7 +503,7 @@ class MbtiAttemptScorer
 
         $out = [];
         foreach ($dims as $row) {
-            if (!is_array($row)) {
+            if (! is_array($row)) {
                 continue;
             }
             $code = strtoupper((string) ($row['code'] ?? ''));
@@ -511,7 +538,7 @@ class MbtiAttemptScorer
         ];
 
         $defaults = $scoringSpec['tie_break']['defaults'] ?? null;
-        if (!is_array($defaults)) {
+        if (! is_array($defaults)) {
             return $fallback;
         }
 
@@ -530,7 +557,7 @@ class MbtiAttemptScorer
     private function resolvePciLevels(?array $scoringSpec): array
     {
         $levels = $scoringSpec['pci']['levels'] ?? null;
-        if (!is_array($levels) || empty($levels)) {
+        if (! is_array($levels) || empty($levels)) {
             return [
                 ['code' => 'slight', 'min' => 0, 'max' => 14],
                 ['code' => 'moderate', 'min' => 15, 'max' => 30],
@@ -538,22 +565,25 @@ class MbtiAttemptScorer
                 ['code' => 'very_clear', 'min' => 51, 'max' => 100],
             ];
         }
+
         return $levels;
     }
 
     private function pciLevel(float $clarity, array $levels): string
     {
         foreach ($levels as $level) {
-            if (!is_array($level)) {
+            if (! is_array($level)) {
                 continue;
             }
             $min = isset($level['min']) ? (float) $level['min'] : 0.0;
             $max = isset($level['max']) ? (float) $level['max'] : 100.0;
             if ($clarity >= $min && $clarity <= $max) {
                 $code = (string) ($level['code'] ?? '');
+
                 return $code !== '' ? $code : 'unknown';
             }
         }
+
         return 'unknown';
     }
 
@@ -561,16 +591,16 @@ class MbtiAttemptScorer
     {
         $out = [];
         $groups = $scoringSpec['facets']['mapping']['groups'] ?? null;
-        if (!is_array($groups)) {
+        if (! is_array($groups)) {
             return $out;
         }
 
         foreach ($groups as $dim => $facets) {
-            if (!is_array($facets)) {
+            if (! is_array($facets)) {
                 continue;
             }
             foreach ($facets as $facetKey => $codes) {
-                if (!is_array($codes)) {
+                if (! is_array($codes)) {
                     continue;
                 }
                 foreach ($codes as $code) {
@@ -591,7 +621,7 @@ class MbtiAttemptScorer
 
     private function isV2Spec(?array $scoringSpec): bool
     {
-        if (!is_array($scoringSpec)) {
+        if (! is_array($scoringSpec)) {
             return false;
         }
 
@@ -604,6 +634,7 @@ class MbtiAttemptScorer
     private function resolveEngineVersion(?array $scoringSpec): string
     {
         $engine = is_array($scoringSpec) ? (string) ($scoringSpec['engine_version'] ?? '') : '';
+
         return $engine !== '' ? $engine : 'mbti-legacy-v1';
     }
 }

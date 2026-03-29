@@ -110,7 +110,7 @@ trait ReportPayloadAssemblerComposeFinalizeTrait
             $reportPayload['_meta']['highlights']['explain'] = $reportPayload['_meta']['highlights']['explain'] ?? null;
         }
 
-        if (!empty($assemblerMetaSections) && is_array($assemblerMetaSections)) {
+        if (! empty($assemblerMetaSections) && is_array($assemblerMetaSections)) {
             $reportPayload['_meta']['sections'] = array_replace_recursive(
                 is_array($reportPayload['_meta']['sections'] ?? null) ? $reportPayload['_meta']['sections'] : [],
                 $assemblerMetaSections
@@ -181,8 +181,10 @@ trait ReportPayloadAssemblerComposeFinalizeTrait
                 }
                 if (is_object($x)) {
                     $a = json_decode(json_encode($x, JSON_UNESCAPED_UNICODE), true);
+
                     return is_array($a) ? $a : null;
                 }
+
                 return null;
             };
 
@@ -303,10 +305,10 @@ trait ReportPayloadAssemblerComposeFinalizeTrait
         $locale = (string) ($parts[2] ?? config('content_packs.default_locale', 'zh-CN'));
 
         $candidates = [
-            $root . DIRECTORY_SEPARATOR . 'default' . DIRECTORY_SEPARATOR . $region . DIRECTORY_SEPARATOR . $locale . DIRECTORY_SEPARATOR . $contentPackageDir . DIRECTORY_SEPARATOR . 'identity_layers.json',
+            $root.DIRECTORY_SEPARATOR.'default'.DIRECTORY_SEPARATOR.$region.DIRECTORY_SEPARATOR.$locale.DIRECTORY_SEPARATOR.$contentPackageDir.DIRECTORY_SEPARATOR.'identity_layers.json',
         ];
 
-        foreach (glob($root . DIRECTORY_SEPARATOR . 'default' . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . '*' . DIRECTORY_SEPARATOR . $contentPackageDir . DIRECTORY_SEPARATOR . 'identity_layers.json') ?: [] as $path) {
+        foreach (glob($root.DIRECTORY_SEPARATOR.'default'.DIRECTORY_SEPARATOR.'*'.DIRECTORY_SEPARATOR.'*'.DIRECTORY_SEPARATOR.$contentPackageDir.DIRECTORY_SEPARATOR.'identity_layers.json') ?: [] as $path) {
             $candidates[] = $path;
         }
 

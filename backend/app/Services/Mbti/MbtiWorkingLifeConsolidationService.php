@@ -233,7 +233,6 @@ final class MbtiWorkingLifeConsolidationService
     }
 
     /**
-     * @param  mixed  $value
      * @return list<string>
      */
     private function normalizeStringList(mixed $value): array

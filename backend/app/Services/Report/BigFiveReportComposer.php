@@ -607,13 +607,14 @@ final class BigFiveReportComposer
         $bestByGroup = [];
         foreach ($rows as $index => $row) {
             $exclusive = trim((string) ($row['exclusive_group'] ?? ''));
-            $key = $exclusive !== '' ? $exclusive : '__row_' . $index;
+            $key = $exclusive !== '' ? $exclusive : '__row_'.$index;
 
             if (! isset($bestByGroup[$key])) {
                 $bestByGroup[$key] = [
                     'index' => $index,
                     'row' => $row,
                 ];
+
                 continue;
             }
 

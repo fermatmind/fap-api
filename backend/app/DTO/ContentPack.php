@@ -9,6 +9,5 @@ final class ContentPack
     public function __construct(
         public string $packId,
         public string $dirVersion,
-    ) {
-    }
+    ) {}
 }

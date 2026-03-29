@@ -6,6 +6,7 @@ namespace App\Services\AI;
 
 use App\Models\Attempt;
 use App\Models\Result;
+
 final class EvidenceBuilder
 {
     public function build(?Attempt $attempt, ?Result $result): array
@@ -92,7 +93,7 @@ final class EvidenceBuilder
             if ($count >= $limit) {
                 break;
             }
-            if (!is_scalar($value)) {
+            if (! is_scalar($value)) {
                 continue;
             }
             $keyStr = is_string($key) ? $key : (string) $key;
@@ -101,7 +102,7 @@ final class EvidenceBuilder
                 $items,
                 $type,
                 $source,
-                $pointerPrefix . '.' . $keyStr,
+                $pointerPrefix.'.'.$keyStr,
                 "{$keyStr}={$valStr}",
                 $createdAt
             );

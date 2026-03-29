@@ -75,9 +75,9 @@ class AttemptStartService
         $locale = (string) ($dto->locale ?? $row['default_locale'] ?? config('content_packs.default_locale', ''));
 
         $anonId = trim((string) ($dto->anonId ?? $ctx->anonId() ?? ''));
-if ($anonId === '') {
-    $anonId = 'anon_'.Str::uuid();
-}
+        if ($anonId === '') {
+            $anonId = 'anon_'.Str::uuid();
+        }
 
         ScaleRolloutGate::assertEnabled($scaleCode, $row, $region, $anonId);
 

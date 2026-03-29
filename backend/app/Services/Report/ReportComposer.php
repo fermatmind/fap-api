@@ -19,8 +19,7 @@ class ReportComposer
         private readonly ReportPayloadAssembler $assembler,
         private readonly ReportPersistence $persistence,
         private readonly TemplateEngine $templateEngine,
-    ) {
-    }
+    ) {}
 
     public function compose(Attempt $attempt, array $ctx = [], ?Result $result = null): array
     {
@@ -32,8 +31,7 @@ class ReportComposer
         string $variant,
         array $ctx = [],
         ?Result $result = null
-    ): array
-    {
+    ): array {
         $ctx['variant'] = ReportAccess::normalizeVariant($variant);
         $ctx['report_access_level'] = $ctx['variant'] === ReportAccess::VARIANT_FREE
             ? ReportAccess::REPORT_ACCESS_FREE

@@ -13,7 +13,7 @@ final class Sds20PackLoader
     public const PACK_VERSION = 'v1';
 
     public function __construct(
-        private ?ContentPackV2Resolver $v2Resolver = null,
+        private ?ContentPackV2Resolver $v2Resolver,
         private ContentPathAliasResolver $pathAliasResolver,
     ) {}
 

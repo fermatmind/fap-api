@@ -3,7 +3,6 @@
 namespace App\Services\Agent\Triggers;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 final class LowMoodStreakTrigger
 {
@@ -62,7 +61,7 @@ final class LowMoodStreakTrigger
 
     private function fetchMoodSamples(int $userId, int $days): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('health_samples')) {
+        if (! \App\Support\SchemaBaseline::hasTable('health_samples')) {
             return [];
         }
 

@@ -16,8 +16,7 @@ final class NarrativeGenerationRequest
         public readonly string $locale,
         public readonly array $authority,
         public readonly array $context = [],
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string, mixed>

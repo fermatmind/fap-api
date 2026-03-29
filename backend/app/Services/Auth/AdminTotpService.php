@@ -96,7 +96,7 @@ class AdminTotpService
 
     private function verifyRecoveryCode(AdminUser $user, string $code): bool
     {
-        if (!\App\Support\SchemaBaseline::hasTable('admin_user_totp_recovery_codes')) {
+        if (! \App\Support\SchemaBaseline::hasTable('admin_user_totp_recovery_codes')) {
             return false;
         }
 
@@ -132,7 +132,7 @@ class AdminTotpService
             return '';
         }
 
-        $time = pack('N*', 0) . pack('N*', $timeSlice);
+        $time = pack('N*', 0).pack('N*', $timeSlice);
         $hash = hash_hmac('sha1', $time, $secretKey, true);
         $offset = ord(substr($hash, -1)) & 0x0F;
         $binary = (

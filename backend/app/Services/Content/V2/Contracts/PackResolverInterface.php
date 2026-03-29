@@ -9,7 +9,7 @@ use App\Services\Content\ContentPack;
 interface PackResolverInterface
 {
     /**
-     * @param array<int,ContentPack> $chain
+     * @param  array<int,ContentPack>  $chain
      */
     public function resolvePrimary(array $chain): ?ContentPack;
 }

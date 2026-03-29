@@ -22,13 +22,13 @@ final class ContentPacksIndex
             ? (string) config('content_packs.cache_dir', '')
             : (string) config('content_packs.root', '');
 
-        $packsRootFs = rtrim($packsRoot, "/\\");
+        $packsRootFs = rtrim($packsRoot, '/\\');
         $defaults = $this->defaults();
 
         $cacheKey = CacheKeys::packsIndex();
         $cache = $this->cacheStore();
 
-        if (!$refresh) {
+        if (! $refresh) {
             try {
                 $cached = $cache->get($cacheKey);
             } catch (\Throwable $e) {
@@ -45,7 +45,7 @@ final class ContentPacksIndex
             }
         }
 
-        if ($packsRootFs === '' || !File::isDirectory($packsRootFs)) {
+        if ($packsRootFs === '' || ! File::isDirectory($packsRootFs)) {
             Log::error('CONTENT_PACKS_ROOT_INVALID', [
                 'driver' => $driver,
                 'packs_root' => $packsRootFs,
@@ -196,6 +196,7 @@ final class ContentPacksIndex
             $manifestPathNorm = str_replace(DIRECTORY_SEPARATOR, '/', $manifestPath);
             if (str_contains($manifestPathNorm, '/_deprecated/')) {
                 $stats['skipped_deprecated']++;
+
                 continue;
             }
 
@@ -210,8 +211,9 @@ final class ContentPacksIndex
             }
 
             $manifest = json_decode($manifestRaw, true);
-            if (!is_array($manifest)) {
+            if (! is_array($manifest)) {
                 $stats['skipped_manifest_json_invalid']++;
+
                 continue;
             }
 
@@ -222,40 +224,46 @@ final class ContentPacksIndex
 
             $packDir = dirname($manifestPath);
             $dirVersion = basename($packDir);
-            if (!$this->isManifestConsistent($manifest, $dirVersion, $packId)) {
+            if (! $this->isManifestConsistent($manifest, $dirVersion, $packId)) {
                 $stats['skipped_manifest_consistency']++;
+
                 continue;
             }
 
-            $versionPath = $packDir . DIRECTORY_SEPARATOR . 'version.json';
+            $versionPath = $packDir.DIRECTORY_SEPARATOR.'version.json';
             $version = $this->readJsonFile($versionPath);
-            if (!is_array($version)) {
+            if (! is_array($version)) {
                 $stats['skipped_version_invalid']++;
+
                 continue;
             }
-            if (!$this->isVersionConsistent(
+            if (! $this->isVersionConsistent(
                 $version,
                 $packId,
                 (string) ($manifest['content_package_version'] ?? ''),
                 $dirVersion
             )) {
                 $stats['skipped_version_invalid']++;
+
                 continue;
             }
 
-            $questionsPath = $packDir . DIRECTORY_SEPARATOR . 'questions.json';
-            if (!File::exists($questionsPath)) {
+            $questionsPath = $packDir.DIRECTORY_SEPARATOR.'questions.json';
+            if (! File::exists($questionsPath)) {
                 $stats['skipped_questions_invalid']++;
+
                 continue;
             }
-            if (!is_array($this->readJsonFile($questionsPath))) {
+            if (! is_array($this->readJsonFile($questionsPath))) {
                 $stats['skipped_questions_invalid']++;
+
                 continue;
             }
 
-            $key = $packId . '|' . $dirVersion;
+            $key = $packId.'|'.$dirVersion;
             if (isset($seen[$key])) {
                 $stats['skipped_duplicate']++;
+
                 continue;
             }
 
@@ -303,6 +311,7 @@ final class ContentPacksIndex
             if ($cmp !== 0) {
                 return $cmp;
             }
+
             return strcmp((string) ($a['dir_version'] ?? ''), (string) ($b['dir_version'] ?? ''));
         });
 
@@ -328,7 +337,7 @@ final class ContentPacksIndex
                 continue;
             }
 
-            if (!isset($byPackId[$packId])) {
+            if (! isset($byPackId[$packId])) {
                 $byPackId[$packId] = [
                     'default_dir_version' => '',
                     'versions' => [],
@@ -338,7 +347,7 @@ final class ContentPacksIndex
             $byPackId[$packId]['versions'][] = $dirVersion;
 
             $updatedAt = (int) ($item['updated_at'] ?? 0);
-            if (!isset($latest[$packId]) || $updatedAt > (int) ($latest[$packId]['updated_at'] ?? 0)) {
+            if (! isset($latest[$packId]) || $updatedAt > (int) ($latest[$packId]['updated_at'] ?? 0)) {
                 $latest[$packId] = [
                     'dir_version' => $dirVersion,
                     'updated_at' => $updatedAt,
@@ -376,7 +385,7 @@ final class ContentPacksIndex
         $pathNorm = str_replace(DIRECTORY_SEPARATOR, '/', $path);
         $rootNorm = rtrim($rootNorm, '/');
 
-        if ($rootNorm !== '' && str_starts_with($pathNorm, $rootNorm . '/')) {
+        if ($rootNorm !== '' && str_starts_with($pathNorm, $rootNorm.'/')) {
             return substr($pathNorm, strlen($rootNorm) + 1);
         }
 
@@ -386,7 +395,7 @@ final class ContentPacksIndex
     private function findInItems(array $items, string $packId, string $dirVersion): ?array
     {
         foreach ($items as $item) {
-            if (!is_array($item)) {
+            if (! is_array($item)) {
                 continue;
             }
             if ((string) ($item['pack_id'] ?? '') !== $packId) {
@@ -419,13 +428,13 @@ final class ContentPacksIndex
             return false;
         }
 
-        if (!$this->signatureMatches($item, 'manifest', $manifestSig)) {
+        if (! $this->signatureMatches($item, 'manifest', $manifestSig)) {
             return false;
         }
-        if (!$this->signatureMatches($item, 'version', $versionSig)) {
+        if (! $this->signatureMatches($item, 'version', $versionSig)) {
             return false;
         }
-        if (!$this->signatureMatches($item, 'questions', $questionsSig)) {
+        if (! $this->signatureMatches($item, 'questions', $questionsSig)) {
             return false;
         }
 
@@ -437,7 +446,7 @@ final class ContentPacksIndex
      */
     private function fileSignature(string $path): ?array
     {
-        if ($path === '' || !File::isFile($path)) {
+        if ($path === '' || ! File::isFile($path)) {
             return null;
         }
 
@@ -448,10 +457,10 @@ final class ContentPacksIndex
             return null;
         }
 
-        if (!is_int($mtimeRaw) && !is_numeric($mtimeRaw)) {
+        if (! is_int($mtimeRaw) && ! is_numeric($mtimeRaw)) {
             return null;
         }
-        if (!is_int($sizeRaw) && !is_numeric($sizeRaw)) {
+        if (! is_int($sizeRaw) && ! is_numeric($sizeRaw)) {
             return null;
         }
 
@@ -469,7 +478,7 @@ final class ContentPacksIndex
         $mtimeKey = $prefix.'_mtime';
         $sizeKey = $prefix.'_size';
 
-        if (!array_key_exists($mtimeKey, $item) || !array_key_exists($sizeKey, $item)) {
+        if (! array_key_exists($mtimeKey, $item) || ! array_key_exists($sizeKey, $item)) {
             return false;
         }
 
@@ -479,7 +488,7 @@ final class ContentPacksIndex
 
     private function readJsonFile(string $path): ?array
     {
-        if ($path === '' || !File::isFile($path)) {
+        if ($path === '' || ! File::isFile($path)) {
             return null;
         }
 
@@ -490,6 +499,7 @@ final class ContentPacksIndex
         }
 
         $decoded = json_decode($raw, true);
+
         return is_array($decoded) ? $decoded : null;
     }
 

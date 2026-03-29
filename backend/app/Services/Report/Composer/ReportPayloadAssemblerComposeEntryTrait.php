@@ -160,11 +160,11 @@ trait ReportPayloadAssemblerComposeEntryTrait
         $axisStates = is_array($result->axis_states ?? null) ? $result->axis_states : [];
 
         foreach ($dims as $d) {
-            if (!array_key_exists($d, $scoresPct)) {
+            if (! array_key_exists($d, $scoresPct)) {
                 $warnings[] = "scores_pct_missing:$d";
                 $scoresPct[$d] = 50;
             }
-            if (!array_key_exists($d, $axisStates)) {
+            if (! array_key_exists($d, $axisStates)) {
                 $warnings[] = "axis_states_missing:$d";
                 $axisStates[$d] = 'moderate';
             }
@@ -199,6 +199,7 @@ trait ReportPayloadAssemblerComposeEntryTrait
         if ($wantExplainPayload) {
             $empty = function (string $target, string $ctxName) use ($tags) {
                 $ctxTags = is_array($tags) ? array_values(array_filter($tags, fn ($x) => is_string($x) && $x !== '')) : [];
+
                 return [
                     'target' => $target,
                     'ctx' => $ctxName,
@@ -229,15 +230,17 @@ trait ReportPayloadAssemblerComposeEntryTrait
             ];
 
             $explainCollector = function (string $ctxName, array $payload) use (&$explainPayload) {
-                if (!is_array($explainPayload)) {
+                if (! is_array($explainPayload)) {
                     return;
                 }
                 if ($ctxName === 'reads' || str_starts_with($ctxName, 'reads:')) {
                     $explainPayload['reads'] = $payload;
+
                     return;
                 }
                 if ($ctxName === 'highlights' || str_starts_with($ctxName, 'highlights:')) {
                     $explainPayload['highlights'] = $payload;
+
                     return;
                 }
                 if (str_starts_with($ctxName, 'cards:')) {
@@ -263,7 +266,7 @@ trait ReportPayloadAssemblerComposeEntryTrait
         ];
 
         $hlTemplatesDoc = $store->loadHighlights();
-        $builder = new HighlightBuilder();
+        $builder = new HighlightBuilder;
         $selectRules = $store->loadSelectRules();
         $hlBuild = $builder->buildFromTemplatesDoc($reportForHL, $hlTemplatesDoc, 3, 10, $selectRules);
 
@@ -302,7 +305,7 @@ trait ReportPayloadAssemblerComposeEntryTrait
             $contentPackageDir
         );
 
-        if (!is_array($borderlineNote['items'] ?? null)) {
+        if (! is_array($borderlineNote['items'] ?? null)) {
             $borderlineNote['items'] = [];
         }
 

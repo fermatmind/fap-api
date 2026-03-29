@@ -6,12 +6,10 @@ namespace App\Services\SelfCheck;
 
 final class SelfCheckRunner
 {
-    public function __construct(private readonly SelfCheckIo $io)
-    {
-    }
+    public function __construct(private readonly SelfCheckIo $io) {}
 
     /**
-     * @param array<int, object> $checks
+     * @param  array<int, object>  $checks
      * @return array<int, SelfCheckResult>
      */
     public function runAll(SelfCheckContext $ctx, array $checks): array
@@ -20,17 +18,18 @@ final class SelfCheckRunner
 
         $results = [];
         foreach ($checks as $check) {
-            if (!is_object($check) || !method_exists($check, 'run') || !method_exists($check, 'name')) {
+            if (! is_object($check) || ! method_exists($check, 'run') || ! method_exists($check, 'name')) {
                 continue;
             }
 
             $section = (string) $check->name();
             $result = $check->run($ctx, $this->io);
 
-            if (!$result instanceof SelfCheckResult) {
+            if (! $result instanceof SelfCheckResult) {
                 $fallback = new SelfCheckResult($section);
                 $fallback->addError('invalid check result object');
                 $results[] = $fallback;
+
                 continue;
             }
 
@@ -44,7 +43,7 @@ final class SelfCheckRunner
     public function isOverallOk(array $results): bool
     {
         foreach ($results as $result) {
-            if (!$result->isOk()) {
+            if (! $result->isOk()) {
                 return false;
             }
         }

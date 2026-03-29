@@ -42,7 +42,7 @@ final class PartnerApiService
             'requested_at' => now()->toISOString(),
         ];
 
-        $ctx = new OrgContext();
+        $ctx = new OrgContext;
         $ctx->set($orgId, null, 'partner', $anonId);
 
         $startPayload = [

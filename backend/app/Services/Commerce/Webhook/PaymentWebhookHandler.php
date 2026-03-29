@@ -6,6 +6,4 @@ namespace App\Services\Commerce\Webhook;
 
 use App\Internal\Commerce\PaymentWebhookHandlerCore;
 
-class PaymentWebhookHandler extends PaymentWebhookHandlerCore
-{
-}
+class PaymentWebhookHandler extends PaymentWebhookHandlerCore {}

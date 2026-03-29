@@ -73,7 +73,7 @@ class AnswerSetStore
     {
         $normalized = [];
         foreach ($answers as $answer) {
-            if (!is_array($answer)) {
+            if (! is_array($answer)) {
                 continue;
             }
             $qid = trim((string) ($answer['question_id'] ?? ''));
@@ -118,7 +118,7 @@ class AnswerSetStore
 
     private function sortKeysRecursively($value)
     {
-        if (!is_array($value)) {
+        if (! is_array($value)) {
             return $value;
         }
 
@@ -128,6 +128,7 @@ class AnswerSetStore
             foreach ($value as $key => $item) {
                 $value[$key] = $this->sortKeysRecursively($item);
             }
+
             return $value;
         }
 
@@ -135,6 +136,7 @@ class AnswerSetStore
         foreach ($value as $item) {
             $result[] = $this->sortKeysRecursively($item);
         }
+
         return $result;
     }
 

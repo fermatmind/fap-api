@@ -11,8 +11,7 @@ final class ScoreResult
         public ?string $typeCode = null,
         public ?array $axisScoresJson = null,
         public ?array $normedJson = null,
-    ) {
-    }
+    ) {}
 
     public function toArray(): array
     {

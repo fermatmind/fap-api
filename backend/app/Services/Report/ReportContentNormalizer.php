@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services\Report;
@@ -19,20 +20,26 @@ final class ReportContentNormalizer
      * - 过滤非字符串 / 空白
      * - trim
      *
-     * @param mixed $v
      * @return array<int,string>
      */
     public static function normalizeStringArray(mixed $v): array
     {
-        if (!is_array($v)) return [];
+        if (! is_array($v)) {
+            return [];
+        }
 
         $out = [];
         foreach ($v as $x) {
-            if (!is_string($x)) continue;
+            if (! is_string($x)) {
+                continue;
+            }
             $s = trim($x);
-            if ($s === '') continue;
+            if ($s === '') {
+                continue;
+            }
             $out[] = $s;
         }
+
         return array_values($out);
     }
 
@@ -42,21 +49,21 @@ final class ReportContentNormalizer
      * 注意：你的 pipeline 里“没写 tips”的情况最终可能变成 tips=[]，
      * 所以这里把 “empty array” 也视作需要补默认（用于验收“删字段回读”）。
      *
-     * @param array<string,mixed> $it
-     * @param array<int,string>|null $defaultTips
-     * @param string $key
+     * @param  array<string,mixed>  $it
+     * @param  array<int,string>|null  $defaultTips
      * @return array<string,mixed>
      */
     public static function fillTipsIfMissing(array $it, ?array $defaultTips = null, string $key = 'tips'): array
     {
         $tipsRaw = $it[$key] ?? null;
-        $tips    = self::normalizeStringArray($tipsRaw);
+        $tips = self::normalizeStringArray($tipsRaw);
 
         if (count($tips) === 0) {
             $tips = self::normalizeStringArray($defaultTips ?? self::DEFAULT_TIPS);
         }
 
         $it[$key] = $tips;
+
         return $it;
     }
 
@@ -66,18 +73,22 @@ final class ReportContentNormalizer
      * - tags: array<string>（缺省 => []）
      * - priority: int（缺省 => 0）
      *
-     * @param array<string,mixed> $c
+     * @param  array<string,mixed>  $c
      * @return array<string,mixed>
      */
     public static function card(array $c): array
     {
         $c = self::fillTipsIfMissing($c);
 
-        if (!array_key_exists('tags', $c)) $c['tags'] = [];
+        if (! array_key_exists('tags', $c)) {
+            $c['tags'] = [];
+        }
         $c['tags'] = self::normalizeStringArray($c['tags']);
 
-        if (!array_key_exists('priority', $c)) $c['priority'] = 0;
-        $c['priority'] = (int)($c['priority'] ?? 0);
+        if (! array_key_exists('priority', $c)) {
+            $c['priority'] = 0;
+        }
+        $c['priority'] = (int) ($c['priority'] ?? 0);
 
         return $c;
     }
@@ -87,23 +98,25 @@ final class ReportContentNormalizer
      * - tips: 默认可按 kind 做细分（action/blindspot 等），否则走 DEFAULT_TIPS
      * - tags: array<string>（缺省 => []）
      *
-     * @param array<string,mixed> $h
-     * @param string|null $typeCode 仅用于未来扩展，不依赖也没关系
+     * @param  array<string,mixed>  $h
+     * @param  string|null  $typeCode  仅用于未来扩展，不依赖也没关系
      * @return array<string,mixed>
      */
     public static function highlight(array $h, ?string $typeCode = null): array
     {
-        $kind = is_string($h['kind'] ?? null) ? trim((string)$h['kind']) : '';
+        $kind = is_string($h['kind'] ?? null) ? trim((string) $h['kind']) : '';
 
         $defaultTips = match ($kind) {
-            'action'    => ['把目标写成 1 句话，再拆成 3 个可交付节点'],
+            'action' => ['把目标写成 1 句话，再拆成 3 个可交付节点'],
             'blindspot' => ['重要场景先做一次“反向校验”再决定'],
-            default     => self::DEFAULT_TIPS,
+            default => self::DEFAULT_TIPS,
         };
 
         $h = self::fillTipsIfMissing($h, $defaultTips, 'tips');
 
-        if (!array_key_exists('tags', $h)) $h['tags'] = [];
+        if (! array_key_exists('tags', $h)) {
+            $h['tags'] = [];
+        }
         $h['tags'] = self::normalizeStringArray($h['tags']);
 
         return $h;
@@ -115,7 +128,7 @@ final class ReportContentNormalizer
      * - tags: array<string>（缺省 => []）
      * - priority: int（缺省 => 0）
      *
-     * @param array<string,mixed> $r
+     * @param  array<string,mixed>  $r
      * @return array<string,mixed>
      */
     public static function read(array $r): array
@@ -161,20 +174,28 @@ final class ReportContentNormalizer
     /**
      * 统一 tips 入口：Controller 不要再出现 tips 的 default 分支
      *
-     * @param mixed $tipsRaw 可能是 null|string|array|false
-     * @param array $ctx     可选：用于按 type/locale/场景做差异化默认
+     * @param  mixed  $tipsRaw  可能是 null|string|array|false
+     * @param  array  $ctx  可选：用于按 type/locale/场景做差异化默认
      */
     public static function normalizeTips(mixed $tipsRaw, array $ctx = []): array
     {
         // 1) 显式关闭 tips（可选：如果你们支持这种用法）
-        if ($tipsRaw === false) return [];
+        if ($tipsRaw === false) {
+            return [];
+        }
 
         // 2) 未传/空 -> 默认
-        if ($tipsRaw === null) return self::DEFAULT_TIPS;
-        if (is_string($tipsRaw) && trim($tipsRaw) === '') return self::DEFAULT_TIPS;
+        if ($tipsRaw === null) {
+            return self::DEFAULT_TIPS;
+        }
+        if (is_string($tipsRaw) && trim($tipsRaw) === '') {
+            return self::DEFAULT_TIPS;
+        }
 
         // 3) array -> 直接用（必要时可在这里做字段兜底/清洗）
-        if (is_array($tipsRaw)) return $tipsRaw;
+        if (is_array($tipsRaw)) {
+            return $tipsRaw;
+        }
 
         // 4) string -> 如果你支持 tips 策略 key，就在这里解析
         if (is_string($tipsRaw)) {

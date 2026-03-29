@@ -5,13 +5,12 @@ namespace App\Services\Memory;
 use App\Services\AI\Embeddings\EmbeddingClient;
 use App\Services\VectorStore\VectorStoreManager;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 final class MemoryRetriever
 {
     public function search(int $userId, string $query, array $filters = []): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('memories')) {
+        if (! \App\Support\SchemaBaseline::hasTable('memories')) {
             return ['ok' => false, 'error' => 'memories_table_missing', 'items' => []];
         }
 
@@ -25,7 +24,7 @@ final class MemoryRetriever
             'subject' => 'memory_query',
         ]);
 
-        if (!($embed['ok'] ?? false)) {
+        if (! ($embed['ok'] ?? false)) {
             return ['ok' => false, 'error' => 'embedding_failed', 'items' => []];
         }
 
@@ -38,7 +37,7 @@ final class MemoryRetriever
 
         $ids = [];
         foreach ($matches['matches'] ?? [] as $match) {
-            if (!empty($match['id'])) {
+            if (! empty($match['id'])) {
                 $ids[] = (string) $match['id'];
             }
         }

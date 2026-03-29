@@ -3,7 +3,6 @@
 namespace App\Services\Agent\Triggers;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 final class NoActivityTrigger
 {
@@ -11,7 +10,7 @@ final class NoActivityTrigger
     {
         $days = (int) ($settings['days'] ?? config('agent.triggers.no_activity.days', 5));
 
-        if (!\App\Support\SchemaBaseline::hasTable('events')) {
+        if (! \App\Support\SchemaBaseline::hasTable('events')) {
             return ['ok' => false, 'fired' => false, 'reason' => 'events_missing'];
         }
 

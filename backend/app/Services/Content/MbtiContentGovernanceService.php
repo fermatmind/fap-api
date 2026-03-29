@@ -231,6 +231,7 @@ final class MbtiContentGovernanceService
             $layerNode = is_array($taxonomyLayers[$layer] ?? null) ? $taxonomyLayers[$layer] : null;
             if ($layerNode === null) {
                 $errors[] = $this->error($path, "taxonomy.layers.{$layer}", "Missing required governance layer '{$layer}'.");
+
                 continue;
             }
 
@@ -241,6 +242,7 @@ final class MbtiContentGovernanceService
             $blockKinds = array_values(array_filter(array_map('strval', (array) ($layerNode['block_kinds'] ?? []))));
             if ($blockKinds === []) {
                 $errors[] = $this->error($path, "taxonomy.layers.{$layer}", "Layer '{$layer}' requires block_kinds.");
+
                 continue;
             }
 
@@ -251,6 +253,7 @@ final class MbtiContentGovernanceService
                         "taxonomy.layers.{$layer}",
                         "Block kind '{$blockKind}' is assigned to multiple layers."
                     );
+
                     continue;
                 }
                 $blockKindIndex[$blockKind] = $layer;
@@ -294,6 +297,7 @@ final class MbtiContentGovernanceService
             $policy = is_array($filePolicies[$fileName] ?? null) ? $filePolicies[$fileName] : null;
             if ($policy === null) {
                 $errors[] = $this->error($path, "file_policies.{$fileName}", "Missing governance policy for {$fileName}.");
+
                 continue;
             }
 
@@ -311,6 +315,7 @@ final class MbtiContentGovernanceService
             $tier = trim((string) ($policy['content_tier'] ?? ''));
             if ($tier === '' || ! is_array($tierPolicies[$tier] ?? null)) {
                 $errors[] = $this->error($path, "file_policies.{$fileName}", "{$fileName} references unknown content_tier '{$tier}'.");
+
                 continue;
             }
             $tierPolicy = is_array($tierPolicies[$tier] ?? null) ? $tierPolicies[$tier] : [];
@@ -531,6 +536,7 @@ final class MbtiContentGovernanceService
             $key = trim((string) ($family['key'] ?? ''));
             if ($key === '') {
                 $errors[] = $this->error($path, $familyPath.'.key', 'fragment family requires key.');
+
                 continue;
             }
 
@@ -581,6 +587,7 @@ final class MbtiContentGovernanceService
             $objectGroupKey = trim((string) ($group['object_group_key'] ?? ''));
             if ($objectGroupKey === '') {
                 $errors[] = $this->error($path, $groupPath.'.object_group_key', 'objectized fragment group requires object_group_key.');
+
                 continue;
             }
 
@@ -636,6 +643,7 @@ final class MbtiContentGovernanceService
             $tagSchemaNode = is_array($tagSchema[$requiredTagKey] ?? null) ? $tagSchema[$requiredTagKey] : null;
             if ($tagSchemaNode === null) {
                 $errors[] = $this->error($path, 'inventory.selection_tag_schema', "Missing selection tag schema for '{$requiredTagKey}'.");
+
                 continue;
             }
 
@@ -650,6 +658,7 @@ final class MbtiContentGovernanceService
             $sectionKey = trim((string) ($row['section_key'] ?? ''));
             if ($sectionKey === '') {
                 $errors[] = $this->error($path, 'inventory.section_family_matrix.'.$index.'.section_key', 'section_family_matrix requires section_key.');
+
                 continue;
             }
 

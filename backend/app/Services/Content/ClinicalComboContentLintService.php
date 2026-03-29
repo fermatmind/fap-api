@@ -31,8 +31,7 @@ final class ClinicalComboContentLintService
     public function __construct(
         private readonly ClinicalComboPackLoader $loader,
         private readonly TemplateEngine $templateEngine,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{ok:bool,pack_id:string,version:string,errors:list<array{file:string,line:int,message:string}>}
@@ -64,7 +63,7 @@ final class ClinicalComboContentLintService
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintQuestions(string $version, array &$errors): void
     {
@@ -113,8 +112,8 @@ final class ClinicalComboContentLintService
     }
 
     /**
-     * @param list<array{line:int,row:array<string,string>}> $rows
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{line:int,row:array<string,string>}>  $rows
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintQuestionRows(array $rows, string $file, array &$errors): void
     {
@@ -130,33 +129,34 @@ final class ClinicalComboContentLintService
             $qid = (int) ($row['question_id'] ?? 0);
             if ($qid <= 0) {
                 $errors[] = $this->error($file, $line, 'question_id must be positive integer.');
+
                 continue;
             }
             $seen[$qid] = true;
 
             $module = trim((string) ($row['module_code'] ?? ''));
-            if (!$this->moduleMatchesQuestionRange($module, $qid)) {
+            if (! $this->moduleMatchesQuestionRange($module, $qid)) {
                 $errors[] = $this->error($file, $line, 'module_code does not match question id range.');
             }
 
             $isReverse = (int) ($row['is_reverse'] ?? 0);
-            if (!in_array($isReverse, [0, 1], true)) {
+            if (! in_array($isReverse, [0, 1], true)) {
                 $errors[] = $this->error($file, $line, 'is_reverse must be 0 or 1.');
             }
-            if ($isReverse === 1 && !in_array($qid, [18, 19], true)) {
+            if ($isReverse === 1 && ! in_array($qid, [18, 19], true)) {
                 $errors[] = $this->error($file, $line, 'only question 18/19 can be reverse.');
             }
         }
 
         for ($i = 1; $i <= self::REQUIRED_QUESTION_COUNT; $i++) {
-            if (!isset($seen[$i])) {
+            if (! isset($seen[$i])) {
                 $errors[] = $this->error($file, 1, 'missing question_id='.$i);
             }
         }
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintOptionsSets(string $version, array &$errors): void
     {
@@ -165,8 +165,9 @@ final class ClinicalComboContentLintService
 
         $zh = $this->loader->readJson($fileZh);
         $en = $this->loader->readJson($fileEn);
-        if (!is_array($zh) || !is_array($en)) {
+        if (! is_array($zh) || ! is_array($en)) {
             $errors[] = $this->error($fileZh, 1, 'options sets json invalid.');
+
             return;
         }
 
@@ -174,8 +175,9 @@ final class ClinicalComboContentLintService
         $setsEn = is_array($en['sets'] ?? null) ? $en['sets'] : [];
 
         foreach ($setsZh as $code => $set) {
-            if (!is_array($set)) {
+            if (! is_array($set)) {
                 $errors[] = $this->error($fileZh, 1, 'set '.$code.' must be object.');
+
                 continue;
             }
 
@@ -183,22 +185,22 @@ final class ClinicalComboContentLintService
             $labels = is_array($set['labels_zh'] ?? null) ? $set['labels_zh'] : [];
 
             foreach (['A', 'B', 'C', 'D', 'E'] as $opt) {
-                if (!array_key_exists($opt, $scoring)) {
+                if (! array_key_exists($opt, $scoring)) {
                     $errors[] = $this->error($fileZh, 1, 'set '.$code.' scoring missing option '.$opt);
                 }
-                if (!array_key_exists($opt, $labels)) {
+                if (! array_key_exists($opt, $labels)) {
                     $errors[] = $this->error($fileZh, 1, 'set '.$code.' labels_zh missing option '.$opt);
                 }
             }
         }
 
         foreach ($setsEn as $code => $set) {
-            if (!is_array($set)) {
+            if (! is_array($set)) {
                 continue;
             }
             $labels = is_array($set['labels_en'] ?? null) ? $set['labels_en'] : [];
             foreach (['A', 'B', 'C', 'D', 'E'] as $opt) {
-                if (!array_key_exists($opt, $labels)) {
+                if (! array_key_exists($opt, $labels)) {
                     $errors[] = $this->error($fileEn, 1, 'set '.$code.' labels_en missing option '.$opt);
                 }
             }
@@ -209,21 +211,22 @@ final class ClinicalComboContentLintService
             $line = (int) ($entry['line'] ?? 0);
             $row = (array) ($entry['row'] ?? []);
             $setCode = trim((string) ($row['options_set_code'] ?? ''));
-            if ($setCode === '' || !is_array($setsZh[$setCode] ?? null)) {
+            if ($setCode === '' || ! is_array($setsZh[$setCode] ?? null)) {
                 $errors[] = $this->error($this->loader->rawPath('questions_zh.csv', $version), $line, 'options_set_code not found in options_sets_zh.json.');
             }
         }
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintPolicy(string $version, array &$errors): void
     {
         $file = $this->loader->rawPath('policy.json', $version);
         $doc = $this->loader->readJson($file);
-        if (!is_array($doc)) {
+        if (! is_array($doc)) {
             $errors[] = $this->error($file, 1, 'policy.json invalid.');
+
             return;
         }
 
@@ -232,6 +235,7 @@ final class ClinicalComboContentLintService
             $node = is_array($muSigma[$dim] ?? null) ? $muSigma[$dim] : null;
             if ($node === null) {
                 $errors[] = $this->error($file, 1, 'scoring_rules.mu_sigma.'.$dim.' missing.');
+
                 continue;
             }
             $sigma = (float) ($node['sigma'] ?? 0.0);
@@ -245,6 +249,7 @@ final class ClinicalComboContentLintService
             $rules = is_array($buckets[$dim] ?? null) ? $buckets[$dim] : [];
             if ($rules === []) {
                 $errors[] = $this->error($file, 1, 'scoring_rules.buckets.'.$dim.' missing.');
+
                 continue;
             }
             $this->lintLevelRulesMonotonic($file, $rules, $dim, $errors);
@@ -263,7 +268,7 @@ final class ClinicalComboContentLintService
 
         $allowedOps = array_values(array_unique(array_map(static fn ($v): string => strtolower(trim((string) $v)), (array) data_get($doc, 'content_condition_rules.allowed_ops', []))));
         foreach (['eq', 'in', 'contains', 'gte', 'lte'] as $op) {
-            if (!in_array($op, $allowedOps, true)) {
+            if (! in_array($op, $allowedOps, true)) {
                 $errors[] = $this->error($file, 1, 'content_condition_rules.allowed_ops missing '.$op.'.');
             }
         }
@@ -281,7 +286,7 @@ final class ClinicalComboContentLintService
             'facts.function_impairment_level',
             'report_tags',
         ] as $requiredPath) {
-            if (!in_array($requiredPath, $allowedPaths, true)) {
+            if (! in_array($requiredPath, $allowedPaths, true)) {
                 $errors[] = $this->error($file, 1, 'content_condition_rules.allowed_paths missing '.$requiredPath.'.');
             }
         }
@@ -290,8 +295,8 @@ final class ClinicalComboContentLintService
     }
 
     /**
-     * @param list<array<string,mixed>> $rules
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array<string,mixed>>  $rules
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintLevelRulesMonotonic(string $file, array $rules, string $dim, array &$errors): void
     {
@@ -304,8 +309,9 @@ final class ClinicalComboContentLintService
 
         $cursor = $expectedStart;
         foreach ($rules as $rule) {
-            if (!is_array($rule)) {
+            if (! is_array($rule)) {
                 $errors[] = $this->error($file, 1, 'bucket rule must be object for '.$dim.'.');
+
                 continue;
             }
 
@@ -330,8 +336,8 @@ final class ClinicalComboContentLintService
     }
 
     /**
-     * @param array<string,mixed> $doc
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  array<string,mixed>  $doc
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintCrisisRules(string $version, string $file, array $doc, array &$errors): void
     {
@@ -357,6 +363,7 @@ final class ClinicalComboContentLintService
 
         if ($q9 === null || $q68 === null) {
             $errors[] = $this->error($file, 1, 'Q9 and Q68 must exist.');
+
             return;
         }
 
@@ -375,14 +382,15 @@ final class ClinicalComboContentLintService
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintVariablesAllowlist(string $version, array &$errors): void
     {
         $file = $this->loader->rawPath('variables_allowlist.json', $version);
         $doc = $this->loader->readJson($file);
-        if (!is_array($doc)) {
+        if (! is_array($doc)) {
             $errors[] = $this->error($file, 1, 'variables_allowlist.json invalid.');
+
             return;
         }
 
@@ -393,14 +401,15 @@ final class ClinicalComboContentLintService
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintReportLayoutSchema(string $version, array &$errors): void
     {
         $file = $this->loader->rawPath('report_layout.json', $version);
         $doc = $this->loader->readJson($file);
-        if (!is_array($doc)) {
+        if (! is_array($doc)) {
             $errors[] = $this->error($file, 1, 'report_layout.json invalid.');
+
             return;
         }
 
@@ -423,19 +432,22 @@ final class ClinicalComboContentLintService
         $sections = is_array($layout['sections'] ?? null) ? $layout['sections'] : [];
         if ($sections === []) {
             $errors[] = $this->error($file, 1, 'layout.sections cannot be empty.');
+
             return;
         }
 
         $seen = [];
         foreach ($sections as $index => $section) {
-            if (!is_array($section)) {
+            if (! is_array($section)) {
                 $errors[] = $this->error($file, 1, 'sections['.$index.'] must be object.');
+
                 continue;
             }
 
             $key = trim((string) ($section['key'] ?? ''));
             if ($key === '') {
                 $errors[] = $this->error($file, 1, 'sections['.$index.'].key is required.');
+
                 continue;
             }
 
@@ -445,12 +457,12 @@ final class ClinicalComboContentLintService
             $seen[$key] = true;
 
             $source = strtolower(trim((string) ($section['source'] ?? '')));
-            if (!in_array($source, ['copy', 'blocks'], true)) {
+            if (! in_array($source, ['copy', 'blocks'], true)) {
                 $errors[] = $this->error($file, 1, 'sections['.$index.'].source must be copy|blocks.');
             }
 
             $accessLevel = strtolower(trim((string) ($section['access_level'] ?? '')));
-            if (!in_array($accessLevel, ['free', 'paid'], true)) {
+            if (! in_array($accessLevel, ['free', 'paid'], true)) {
                 $errors[] = $this->error($file, 1, 'sections['.$index.'].access_level must be free|paid.');
             }
 
@@ -460,7 +472,7 @@ final class ClinicalComboContentLintService
             }
             foreach ($requiredVariants as $variant) {
                 $variant = strtolower(trim((string) $variant));
-                if (!in_array($variant, ['free', 'full'], true)) {
+                if (! in_array($variant, ['free', 'full'], true)) {
                     $errors[] = $this->error($file, 1, 'sections['.$index.'].required_in_variant has invalid value.');
                 }
             }
@@ -473,20 +485,20 @@ final class ClinicalComboContentLintService
         }
 
         foreach (self::REQUIRED_LAYOUT_SECTIONS as $required) {
-            if (!isset($seen[$required])) {
+            if (! isset($seen[$required])) {
                 $errors[] = $this->error($file, 1, 'required section missing: '.$required);
             }
         }
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintLayoutSatisfiability(string $version, array &$errors): void
     {
         $layoutFile = $this->loader->rawPath('report_layout.json', $version);
         $layoutDoc = $this->loader->readJson($layoutFile);
-        if (!is_array($layoutDoc)) {
+        if (! is_array($layoutDoc)) {
             return;
         }
 
@@ -500,7 +512,7 @@ final class ClinicalComboContentLintService
         $counts = [];
         foreach ($blocksByFile as $blocks) {
             foreach ($blocks as $block) {
-                if (!is_array($block)) {
+                if (! is_array($block)) {
                     continue;
                 }
                 $section = strtolower(trim((string) ($block['section'] ?? '')));
@@ -513,7 +525,7 @@ final class ClinicalComboContentLintService
         }
 
         foreach ($sections as $index => $section) {
-            if (!is_array($section)) {
+            if (! is_array($section)) {
                 continue;
             }
             $source = strtolower(trim((string) ($section['source'] ?? '')));
@@ -536,20 +548,21 @@ final class ClinicalComboContentLintService
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintBlocksCoverageByDimension(string $version, array &$errors): void
     {
         $blocksByFile = $this->loadRawBlocks($version);
         if ($blocksByFile === []) {
             $errors[] = $this->error($this->loader->rawPath('blocks', $version), 1, 'blocks directory is empty.');
+
             return;
         }
 
         $allBlocks = [];
         foreach ($blocksByFile as $blocks) {
             foreach ($blocks as $block) {
-                if (!is_array($block)) {
+                if (! is_array($block)) {
                     continue;
                 }
                 $allBlocks[] = $block;
@@ -614,7 +627,7 @@ final class ClinicalComboContentLintService
         ];
 
         foreach ($requiredIds as $requiredId) {
-            if (!isset($zhBlockIds[$requiredId])) {
+            if (! isset($zhBlockIds[$requiredId])) {
                 $errors[] = $this->error($this->loader->rawPath('blocks/free_blocks.json', $version), 1, 'required zh block missing: '.$requiredId);
             }
         }
@@ -643,14 +656,14 @@ final class ClinicalComboContentLintService
                 $has = true;
                 break;
             }
-            if (!$has) {
+            if (! $has) {
                 $errors[] = $this->error($this->loader->rawPath('blocks/free_blocks.json', $version), 1, 'EN safety core section missing block: '.$sectionKey);
             }
         }
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintExclusiveGroupConflicts(string $version, array &$errors): void
     {
@@ -663,13 +676,14 @@ final class ClinicalComboContentLintService
 
         foreach ($blocksByFile as $file => $blocks) {
             foreach ($blocks as $block) {
-                if (!is_array($block)) {
+                if (! is_array($block)) {
                     continue;
                 }
 
                 $blockId = trim((string) ($block['block_id'] ?? $block['id'] ?? ''));
                 if ($blockId === '') {
                     $errors[] = $this->error($file, 1, 'block_id is required for every block.');
+
                     continue;
                 }
 
@@ -682,14 +696,15 @@ final class ClinicalComboContentLintService
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintCrisisResourcesCompleteness(string $version, array &$errors): void
     {
         $file = $this->loader->rawPath('crisis_resources.json', $version);
         $doc = $this->loader->readJson($file);
-        if (!is_array($doc)) {
+        if (! is_array($doc)) {
             $errors[] = $this->error($file, 1, 'crisis_resources.json invalid.');
+
             return;
         }
 
@@ -698,6 +713,7 @@ final class ClinicalComboContentLintService
             $node = is_array($locales[$locale] ?? null) ? $locales[$locale] : [];
             if ($node === []) {
                 $errors[] = $this->error($file, 1, 'crisis_resources missing locale: '.$locale);
+
                 continue;
             }
 
@@ -711,7 +727,7 @@ final class ClinicalComboContentLintService
             $usRows = is_array($node['US'] ?? null) ? $node['US'] : [];
             $has988 = false;
             foreach ($usRows as $row) {
-                if (!is_array($row)) {
+                if (! is_array($row)) {
                     continue;
                 }
                 $phone = (string) ($row['phone'] ?? '');
@@ -720,20 +736,20 @@ final class ClinicalComboContentLintService
                     break;
                 }
             }
-            if (!$has988) {
+            if (! $has988) {
                 $errors[] = $this->error($file, 1, 'US crisis resources must include 988.');
             }
         }
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintConsentAndPrivacyDocs(string $version, array &$errors): void
     {
         $consentFile = $this->loader->rawPath('consent_i18n.json', $version);
         $consent = $this->loader->readJson($consentFile);
-        if (!is_array($consent)) {
+        if (! is_array($consent)) {
             $errors[] = $this->error($consentFile, 1, 'consent_i18n.json invalid.');
         } else {
             if (trim((string) ($consent['version'] ?? '')) === '') {
@@ -744,7 +760,7 @@ final class ClinicalComboContentLintService
                 foreach (['zh-CN', 'en'] as $locale) {
                     $value = $node[$locale] ?? null;
                     if ($field === 'checkboxes') {
-                        if (!is_array($value) || $value === []) {
+                        if (! is_array($value) || $value === []) {
                             $errors[] = $this->error($consentFile, 1, 'consent.'.$field.'.'.$locale.' must be non-empty array.');
                         }
                     } elseif (trim((string) $value) === '') {
@@ -756,8 +772,9 @@ final class ClinicalComboContentLintService
 
         $privacyFile = $this->loader->rawPath('privacy_addendum_i18n.json', $version);
         $privacy = $this->loader->readJson($privacyFile);
-        if (!is_array($privacy)) {
+        if (! is_array($privacy)) {
             $errors[] = $this->error($privacyFile, 1, 'privacy_addendum_i18n.json invalid.');
+
             return;
         }
 
@@ -779,7 +796,7 @@ final class ClinicalComboContentLintService
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintTemplateVariables(string $version, array &$errors): void
     {
@@ -790,7 +807,7 @@ final class ClinicalComboContentLintService
         $blocksByFile = $this->loadRawBlocks($version);
         foreach ($blocksByFile as $file => $blocks) {
             foreach ($blocks as $index => $block) {
-                if (!is_array($block)) {
+                if (! is_array($block)) {
                     continue;
                 }
 
@@ -802,7 +819,7 @@ final class ClinicalComboContentLintService
 
                     $vars = $this->templateEngine->extractVariables($text);
                     foreach ($vars as $var) {
-                        if (!isset($allowedSet[$var])) {
+                        if (! isset($allowedSet[$var])) {
                             $errors[] = $this->error($file, 1, 'unknown template variable '.$var.' in block index '.$index);
                         }
                     }
@@ -812,7 +829,7 @@ final class ClinicalComboContentLintService
     }
 
     /**
-     * @param list<array{file:string,line:int,message:string}> $errors
+     * @param  list<array{file:string,line:int,message:string}>  $errors
      */
     private function lintGoldenCases(string $version, array &$errors): void
     {
@@ -820,6 +837,7 @@ final class ClinicalComboContentLintService
         $rows = $this->loader->readCsvWithLines($file);
         if ($rows === []) {
             $errors[] = $this->error($file, 1, 'golden_cases.csv cannot be empty.');
+
             return;
         }
 
@@ -837,7 +855,7 @@ final class ClinicalComboContentLintService
 
             $reasonsJson = trim((string) ($row['expected_crisis_reasons_json'] ?? '[]'));
             $decoded = json_decode($reasonsJson, true);
-            if (!is_array($decoded)) {
+            if (! is_array($decoded)) {
                 $errors[] = $this->error($file, $line, 'expected_crisis_reasons_json must be valid json array.');
             }
         }
@@ -860,7 +878,7 @@ final class ClinicalComboContentLintService
     private function loadRawBlocks(string $version): array
     {
         $dir = $this->loader->rawPath('blocks', $version);
-        if (!is_dir($dir)) {
+        if (! is_dir($dir)) {
             return [];
         }
 
@@ -890,14 +908,15 @@ final class ClinicalComboContentLintService
         $out = [];
         foreach ($files as $file) {
             $doc = $this->loader->readJson($file);
-            if (!is_array($doc)) {
+            if (! is_array($doc)) {
                 $out[$file] = [];
+
                 continue;
             }
             $blocks = is_array($doc['blocks'] ?? null) ? $doc['blocks'] : [];
             $normalized = [];
             foreach ($blocks as $block) {
-                if (!is_array($block)) {
+                if (! is_array($block)) {
                     continue;
                 }
                 $normalized[] = $block;

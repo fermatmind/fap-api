@@ -21,8 +21,7 @@ final class NarrativeGenerationResponse
         public readonly int $tokensIn = 0,
         public readonly int $tokensOut = 0,
         public readonly float $costUsd = 0.0,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string, mixed>

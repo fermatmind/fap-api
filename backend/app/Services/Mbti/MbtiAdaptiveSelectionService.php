@@ -1045,6 +1045,7 @@ final class MbtiAdaptiveSelectionService
     private function mapActionKeyToSections(string $actionKey): array
     {
         $normalized = strtolower($actionKey);
+
         return match (true) {
             str_contains($normalized, 'work_experiment') => ['career.work_experiments'],
             str_contains($normalized, 'career_next_step') => ['career.next_step'],

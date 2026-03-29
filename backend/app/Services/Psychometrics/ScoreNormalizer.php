@@ -3,8 +3,8 @@
 namespace App\Services\Psychometrics;
 
 use App\Support\Stats\Percentile;
-use App\Support\Stats\Stanine;
 use App\Support\Stats\StandardError;
+use App\Support\Stats\Stanine;
 use App\Support\Stats\ZScore;
 
 class ScoreNormalizer

@@ -28,8 +28,7 @@ final class BigFivePublicProjectionService
         private readonly ControlledNarrativeLayerService $controlledNarrativeLayerService,
         private readonly VersionedComparativeNormingLayerService $comparativeNormingLayerService,
         private readonly CulturalCalibrationLayerService $culturalCalibrationLayerService,
-    ) {
-    }
+    ) {}
 
     /**
      * @var array<string,array{en:string,zh:string}>

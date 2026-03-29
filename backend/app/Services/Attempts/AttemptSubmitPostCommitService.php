@@ -10,9 +10,7 @@ use App\Support\OrgContext;
 
 class AttemptSubmitPostCommitService
 {
-    public function __construct(private AttemptSubmitService $core)
-    {
-    }
+    public function __construct(private AttemptSubmitService $core) {}
 
     public function handle(OrgContext $ctx, array $canonicalized, array $scored, array $tx): array
     {

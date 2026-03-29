@@ -15,8 +15,7 @@ final class QuestionsService
     public function __construct(
         private ContentPacksIndex $index,
         private AssetsMapper $assetsMapper
-    ) {
-    }
+    ) {}
 
     public function loadByPack(
         string $packId,
@@ -24,7 +23,7 @@ final class QuestionsService
         ?string $assetsBaseUrlOverride = null
     ): array {
         $found = $this->index->find($packId, $dirVersion);
-        if (!($found['ok'] ?? false)) {
+        if (! ($found['ok'] ?? false)) {
             return [
                 'ok' => false,
                 'error' => 'NOT_FOUND',
@@ -48,9 +47,9 @@ final class QuestionsService
             $contentPackageVersion = (string) ($cached['content_package_version'] ?? '');
         }
 
-        if (!is_array($questionsDoc)) {
+        if (! is_array($questionsDoc)) {
             $questions = $this->readJsonFile($questionsPath);
-            if (!($questions['ok'] ?? false)) {
+            if (! ($questions['ok'] ?? false)) {
                 return $questions;
             }
 
@@ -92,7 +91,7 @@ final class QuestionsService
 
     private function readJsonFile(string $path): array
     {
-        if ($path === '' || !File::exists($path) || !File::isFile($path)) {
+        if ($path === '' || ! File::exists($path) || ! File::isFile($path)) {
             return [
                 'ok' => false,
                 'error' => 'READ_FAILED',
@@ -111,7 +110,7 @@ final class QuestionsService
         }
 
         $decoded = json_decode($raw, true);
-        if (!is_array($decoded)) {
+        if (! is_array($decoded)) {
             return [
                 'ok' => false,
                 'error' => 'INVALID_JSON',
@@ -149,10 +148,12 @@ final class QuestionsService
     {
         try {
             $cached = $this->cacheStore()->get($cacheKey);
+
             return is_array($cached) ? $cached : null;
         } catch (\Throwable $e) {
             try {
                 $cached = Cache::store()->get($cacheKey);
+
                 return is_array($cached) ? $cached : null;
             } catch (\Throwable $fallback) {
                 return null;
@@ -166,10 +167,12 @@ final class QuestionsService
 
         try {
             $this->cacheStore()->put($cacheKey, $payload, $ttl);
+
             return;
         } catch (\Throwable $e) {
             try {
                 Cache::store()->put($cacheKey, $payload, $ttl);
+
                 return;
             } catch (\Throwable $fallback) {
                 Log::warning('QUESTIONS_CACHE_WRITE_FAILED', [

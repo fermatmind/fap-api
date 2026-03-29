@@ -7,7 +7,9 @@ namespace App\Services\InsightGraph;
 final class RelationshipIndexContractService
 {
     private const INDEX_VERSION = 'relationship.index.v1';
+
     private const INDEX_SCOPE = 'private_relationship_index';
+
     private const RESUME_VERSION = 'relationship.resume.v1';
 
     /**

@@ -12,8 +12,7 @@ final class ContentControlPlaneService
 {
     public function __construct(
         private readonly MbtiContentGovernanceService $mbtiGovernance,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{content_control_plane_v1:array<string,mixed>}

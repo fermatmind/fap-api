@@ -7,14 +7,12 @@ use Illuminate\Support\Str;
 
 final class InviteService
 {
-    public function __construct(private MembershipService $memberships)
-    {
-    }
+    public function __construct(private MembershipService $memberships) {}
 
     public function createInvite(int $orgId, string $email, \DateTimeInterface $expiresAt): array
     {
         $email = trim(strtolower($email));
-        $token = 'inv_' . Str::uuid()->toString() . Str::random(16);
+        $token = 'inv_'.Str::uuid()->toString().Str::random(16);
 
         $now = now();
         DB::table('organization_invites')->insert([
@@ -48,7 +46,7 @@ final class InviteService
         }
 
         $invite = DB::table('organization_invites')->where('token', $token)->first();
-        if (!$invite) {
+        if (! $invite) {
             return [
                 'ok' => false,
                 'error_code' => 'INVITE_NOT_FOUND',
@@ -56,7 +54,7 @@ final class InviteService
             ];
         }
 
-        if (!empty($invite->accepted_at)) {
+        if (! empty($invite->accepted_at)) {
             return [
                 'ok' => false,
                 'error_code' => 'INVITE_ALREADY_ACCEPTED',
@@ -64,7 +62,7 @@ final class InviteService
             ];
         }
 
-        if (!empty($invite->expires_at)) {
+        if (! empty($invite->expires_at)) {
             try {
                 if (now()->greaterThan(\Illuminate\Support\Carbon::parse($invite->expires_at))) {
                     return [

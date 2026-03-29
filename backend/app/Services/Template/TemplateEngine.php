@@ -6,9 +6,7 @@ namespace App\Services\Template;
 
 final class TemplateEngine
 {
-    public function __construct(private readonly TemplateVariableRegistry $registry)
-    {
-    }
+    public function __construct(private readonly TemplateVariableRegistry $registry) {}
 
     /**
      * @return list<string>
@@ -43,7 +41,7 @@ final class TemplateEngine
 
         $unknown = [];
         foreach ($vars as $varName) {
-            if (!$this->registry->isAllowed($varName)) {
+            if (! $this->registry->isAllowed($varName)) {
                 $unknown[] = $varName;
             }
         }
@@ -62,7 +60,7 @@ final class TemplateEngine
     public function renderString(string $template, TemplateContext $context, string $mode = 'text'): string
     {
         $mode = strtolower(trim($mode));
-        if (!in_array($mode, ['text', 'htmlsafe'], true)) {
+        if (! in_array($mode, ['text', 'htmlsafe'], true)) {
             $mode = 'text';
         }
 
@@ -73,7 +71,7 @@ final class TemplateEngine
 
         $missing = $this->registry->missingRequired($vars, $context);
         if ($missing !== []) {
-            throw new \InvalidArgumentException('Missing template variables: ' . implode(', ', $missing));
+            throw new \InvalidArgumentException('Missing template variables: '.implode(', ', $missing));
         }
 
         $rendered = preg_replace_callback('/\{\{\s*([a-zA-Z0-9_\.]+)\s*\}\}/', function (array $match) use ($context, $mode): string {
@@ -107,7 +105,7 @@ final class TemplateEngine
     public function renderReportPayload(mixed $payload, TemplateContext $context, string $mode = 'text'): mixed
     {
         if (is_string($payload)) {
-            if (!str_contains($payload, '{{')) {
+            if (! str_contains($payload, '{{')) {
                 return $payload;
             }
 

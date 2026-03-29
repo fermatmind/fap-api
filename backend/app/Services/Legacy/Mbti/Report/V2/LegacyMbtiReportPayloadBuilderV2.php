@@ -9,6 +9,4 @@ use App\Internal\Legacy\Mbti\Report\LegacyMbtiReportPayloadBuilderV2Core;
 /**
  * Thin legacy adapter retained for builder compatibility tests.
  */
-class LegacyMbtiReportPayloadBuilderV2 extends LegacyMbtiReportPayloadBuilderV2Core
-{
-}
+class LegacyMbtiReportPayloadBuilderV2 extends LegacyMbtiReportPayloadBuilderV2Core {}

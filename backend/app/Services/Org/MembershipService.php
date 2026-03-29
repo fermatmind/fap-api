@@ -3,7 +3,6 @@
 namespace App\Services\Org;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 final class MembershipService
 {
@@ -11,7 +10,7 @@ final class MembershipService
 
     public function getRole(int $orgId, int $userId): ?string
     {
-        if (!\App\Support\SchemaBaseline::hasTable('organization_members')) {
+        if (! \App\Support\SchemaBaseline::hasTable('organization_members')) {
             return null;
         }
 
@@ -22,6 +21,7 @@ final class MembershipService
             ->value('role');
 
         $role = is_string($role) ? trim($role) : '';
+
         return $role !== '' ? $role : null;
     }
 
@@ -33,7 +33,7 @@ final class MembershipService
     public function addMember(int $orgId, int $userId, string $role): void
     {
         $role = trim($role);
-        if ($role === '' || !in_array($role, self::ALLOWED_ROLES, true)) {
+        if ($role === '' || ! in_array($role, self::ALLOWED_ROLES, true)) {
             $role = 'member';
         }
 
@@ -52,6 +52,7 @@ final class MembershipService
                     'is_active' => 1,
                     'updated_at' => $now,
                 ]);
+
             return;
         }
 

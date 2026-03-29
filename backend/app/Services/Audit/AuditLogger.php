@@ -9,14 +9,12 @@ use App\Support\OrgContext;
 use App\Support\SensitiveDataRedactor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 
 class AuditLogger
 {
     public function __construct(
         private readonly SensitiveDataRedactor $redactor
-    ) {
-    }
+    ) {}
 
     public function log(
         Request $request,
@@ -27,7 +25,7 @@ class AuditLogger
         string $reason = 'unspecified',
         string $result = 'success',
     ): void {
-        if (!\App\Support\SchemaBaseline::hasTable('audit_logs')) {
+        if (! \App\Support\SchemaBaseline::hasTable('audit_logs')) {
             return;
         }
 
@@ -99,7 +97,7 @@ class AuditLogger
 
     private function sanitizeScalar(mixed $value): mixed
     {
-        if (!is_array($value)) {
+        if (! is_array($value)) {
             return $value;
         }
 

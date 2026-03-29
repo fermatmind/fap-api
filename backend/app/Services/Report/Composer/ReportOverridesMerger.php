@@ -57,7 +57,7 @@ class ReportOverridesMerger
         ];
 
         foreach ($docs as $doc) {
-            if (!is_array($doc)) {
+            if (! is_array($doc)) {
                 continue;
             }
 
@@ -70,10 +70,10 @@ class ReportOverridesMerger
 
             if (is_array($rules)) {
                 foreach ($rules as $rule) {
-                    if (!is_array($rule)) {
+                    if (! is_array($rule)) {
                         continue;
                     }
-                    if (!isset($rule['__src']) && is_array($doc['__src'] ?? null)) {
+                    if (! isset($rule['__src']) && is_array($doc['__src'] ?? null)) {
                         $rule['__src'] = $doc['__src'];
                     }
                     $base['rules'][] = $rule;
@@ -98,7 +98,7 @@ class ReportOverridesMerger
 
     public function apply(array $baseReport, ?array $overridesDoc, array $ctxMeta): array
     {
-        if (!is_array($overridesDoc) || $overridesDoc === []) {
+        if (! is_array($overridesDoc) || $overridesDoc === []) {
             return $baseReport;
         }
 

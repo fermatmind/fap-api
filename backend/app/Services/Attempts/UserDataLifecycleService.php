@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Attempts;
 
-use App\Support\SensitiveDataRedactor;
 use App\Support\SchemaBaseline;
+use App\Support\SensitiveDataRedactor;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -106,6 +106,7 @@ final class UserDataLifecycleService
                         $artifactResidualAudits[$attemptId] = is_array($purge['artifact_residual_audit'] ?? null)
                             ? $purge['artifact_residual_audit']
                             : [];
+
                         continue;
                     }
 

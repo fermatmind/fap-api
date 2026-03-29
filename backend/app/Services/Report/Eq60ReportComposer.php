@@ -12,8 +12,7 @@ final class Eq60ReportComposer
 {
     public function __construct(
         private readonly Eq60PackLoader $packLoader,
-    ) {
-    }
+    ) {}
 
     /**
      * @param  array<string,mixed>  $ctx
@@ -29,7 +28,7 @@ final class Eq60ReportComposer
 
         $locale = $this->packLoader->normalizeLocale((string) ($attempt->locale ?? 'zh-CN'));
         $reportCompiled = $this->packLoader->readCompiledJson('report.compiled.json', $version);
-        if (!is_array($reportCompiled)) {
+        if (! is_array($reportCompiled)) {
             return [
                 'ok' => false,
                 'error' => 'REPORT_LAYOUT_MISSING',
@@ -39,7 +38,7 @@ final class Eq60ReportComposer
         }
 
         $score = $this->extractScoreResult($result);
-        if (!is_array($score)) {
+        if (! is_array($score)) {
             return [
                 'ok' => false,
                 'error' => 'REPORT_SCORE_RESULT_MISSING',
@@ -62,7 +61,7 @@ final class Eq60ReportComposer
 
         $layoutByKey = [];
         foreach ($layoutSections as $section) {
-            if (!is_array($section)) {
+            if (! is_array($section)) {
                 continue;
             }
             $key = trim((string) ($section['key'] ?? ''));
@@ -74,7 +73,7 @@ final class Eq60ReportComposer
 
         $sections = [];
         foreach ($layoutSections as $sectionConfig) {
-            if (!is_array($sectionConfig)) {
+            if (! is_array($sectionConfig)) {
                 continue;
             }
 
@@ -84,7 +83,7 @@ final class Eq60ReportComposer
             }
 
             $requiredVariants = $this->normalizeVariants((array) ($sectionConfig['required_in_variant'] ?? ['free', 'full']));
-            if ($requiredVariants !== [] && !in_array($variant, $requiredVariants, true)) {
+            if ($requiredVariants !== [] && ! in_array($variant, $requiredVariants, true)) {
                 continue;
             }
 
@@ -97,7 +96,7 @@ final class Eq60ReportComposer
                 if ($variant !== ReportAccess::VARIANT_FULL) {
                     continue;
                 }
-                if (!in_array($moduleCode, $modulesAllowed, true)) {
+                if (! in_array($moduleCode, $modulesAllowed, true)) {
                     continue;
                 }
             }
@@ -107,6 +106,7 @@ final class Eq60ReportComposer
                 if (is_array($copySection)) {
                     $sections[] = $copySection;
                 }
+
                 continue;
             }
 
@@ -168,7 +168,7 @@ final class Eq60ReportComposer
         ];
 
         foreach ($candidates as $candidate) {
-            if (!is_array($candidate)) {
+            if (! is_array($candidate)) {
                 continue;
             }
             if (strtoupper((string) ($candidate['scale_code'] ?? '')) !== 'EQ_60') {
@@ -237,7 +237,7 @@ final class Eq60ReportComposer
         foreach ($this->localeFallbackOrder($locale) as $candidateLocale) {
             $localeCandidates = [];
             foreach ($allBlocks as $block) {
-                if (!is_array($block)) {
+                if (! is_array($block)) {
                     continue;
                 }
 
@@ -256,7 +256,7 @@ final class Eq60ReportComposer
                     continue;
                 }
 
-                if (!$this->matchBlock($block, $selectionTags)) {
+                if (! $this->matchBlock($block, $selectionTags)) {
                     continue;
                 }
 
@@ -292,7 +292,7 @@ final class Eq60ReportComposer
 
         $blocks = [];
         foreach ($selected as $row) {
-            if (!is_array($row)) {
+            if (! is_array($row)) {
                 continue;
             }
 
@@ -308,8 +308,8 @@ final class Eq60ReportComposer
     }
 
     /**
-     * @param array<string,mixed> $sectionConfig
-     * @param array<string,mixed> $score
+     * @param  array<string,mixed>  $sectionConfig
+     * @param  array<string,mixed>  $score
      * @return list<string>
      */
     private function buildSelectionTagsForSection(array $sectionConfig, array $score): array
@@ -317,31 +317,31 @@ final class Eq60ReportComposer
         $sectionKey = trim((string) ($sectionConfig['key'] ?? ''));
         $tags = [];
         if ($sectionKey !== '') {
-            $tags[] = 'section:' . $sectionKey;
+            $tags[] = 'section:'.$sectionKey;
         }
 
         $qualityLevel = strtoupper(trim((string) data_get($score, 'quality.level', '')));
         if ($qualityLevel !== '') {
-            $tags[] = 'quality_level:' . $qualityLevel;
+            $tags[] = 'quality_level:'.$qualityLevel;
         }
 
         foreach ((array) data_get($score, 'quality.flags', []) as $flag) {
             $normalizedFlag = strtoupper(trim((string) $flag));
             if ($normalizedFlag !== '') {
-                $tags[] = 'quality_flag:' . $normalizedFlag;
+                $tags[] = 'quality_flag:'.$normalizedFlag;
             }
         }
 
         $sectionDim = $this->sectionDimensionMap($sectionKey);
         if ($sectionDim !== null) {
-            $level = strtolower(trim((string) data_get($score, 'scores.' . $sectionDim . '.level', '')));
+            $level = strtolower(trim((string) data_get($score, 'scores.'.$sectionDim.'.level', '')));
             if ($level !== '') {
-                $tags[] = 'bucket:' . $level;
+                $tags[] = 'bucket:'.$level;
             }
         } elseif ($sectionKey === 'global_overview') {
             $globalLevel = strtolower(trim((string) data_get($score, 'scores.global.level', '')));
             if ($globalLevel !== '') {
-                $tags[] = 'bucket:' . $globalLevel;
+                $tags[] = 'bucket:'.$globalLevel;
             }
         }
 
@@ -373,8 +373,8 @@ final class Eq60ReportComposer
     }
 
     /**
-     * @param array<string,mixed> $block
-     * @param list<string> $selectionTags
+     * @param  array<string,mixed>  $block
+     * @param  list<string>  $selectionTags
      */
     private function matchBlock(array $block, array $selectionTags): bool
     {
@@ -386,7 +386,7 @@ final class Eq60ReportComposer
         )));
 
         foreach ($tagsAll as $tag) {
-            if (!isset($selectionSet[$tag])) {
+            if (! isset($selectionSet[$tag])) {
                 return false;
             }
         }
@@ -410,7 +410,7 @@ final class Eq60ReportComposer
     }
 
     /**
-     * @param list<array<string,mixed>> $blocks
+     * @param  list<array<string,mixed>>  $blocks
      * @return list<array<string,mixed>>
      */
     private function enforceExclusiveGroup(array $blocks): array
@@ -419,13 +419,14 @@ final class Eq60ReportComposer
         $seen = [];
 
         foreach ($blocks as $block) {
-            if (!is_array($block)) {
+            if (! is_array($block)) {
                 continue;
             }
 
             $group = trim((string) ($block['exclusive_group'] ?? ''));
             if ($group === '') {
                 $out[] = $block;
+
                 continue;
             }
 
@@ -441,8 +442,8 @@ final class Eq60ReportComposer
     }
 
     /**
-     * @param array<string,mixed> $a
-     * @param array<string,mixed> $b
+     * @param  array<string,mixed>  $a
+     * @param  array<string,mixed>  $b
      */
     private function comparePriority(array $a, array $b): int
     {
@@ -530,7 +531,7 @@ final class Eq60ReportComposer
         $paid = [];
 
         foreach ($sections as $section) {
-            if (!is_array($section)) {
+            if (! is_array($section)) {
                 continue;
             }
             $sectionKey = (string) ($section['key'] ?? '');
@@ -538,7 +539,7 @@ final class Eq60ReportComposer
             $blocks = is_array($section['blocks'] ?? null) ? $section['blocks'] : [];
 
             foreach ($blocks as $block) {
-                if (!is_array($block)) {
+                if (! is_array($block)) {
                     continue;
                 }
                 $payload = [
@@ -682,7 +683,7 @@ final class Eq60ReportComposer
     }
 
     /**
-     * @param array<string,array<string,mixed>> $layoutByKey
+     * @param  array<string,array<string,mixed>>  $layoutByKey
      */
     private function resolveSectionTitle(string $sectionKey, string $locale, array $layoutByKey = []): string
     {

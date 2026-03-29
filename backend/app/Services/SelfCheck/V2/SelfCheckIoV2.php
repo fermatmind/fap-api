@@ -19,12 +19,12 @@ class SelfCheckIoV2
     public function collectDeps(string $region, string $locale, bool $verbose = false): array
     {
         $aggregator = new SelfCheckAggregator([
-            new DbProbe(),
-            new RedisProbe(),
-            new QueueProbe(),
-            new CacheDirProbe(),
+            new DbProbe,
+            new RedisProbe,
+            new QueueProbe,
+            new CacheDirProbe,
             new ContentPackagesProbe($region, $locale),
-            new DiskProbe(),
+            new DiskProbe,
         ]);
 
         return $aggregator->run($verbose);

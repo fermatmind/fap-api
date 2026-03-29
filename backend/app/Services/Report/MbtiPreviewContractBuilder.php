@@ -78,7 +78,6 @@ final class MbtiPreviewContractBuilder
     }
 
     /**
-     * @param  mixed  $sectionsNode
      * @param  list<string>  $previewModules
      * @return list<array{
      *   key:string,
@@ -196,6 +195,7 @@ final class MbtiPreviewContractBuilder
 
             if ($accessLevel === ReportAccess::CARD_ACCESS_PAID) {
                 $hasPaidOrLockedContent = true;
+
                 continue;
             }
 
@@ -205,6 +205,7 @@ final class MbtiPreviewContractBuilder
 
             if ($previewModuleSet !== [] && ! isset($previewModuleSet[$moduleCode])) {
                 $hasPaidOrLockedContent = true;
+
                 continue;
             }
 

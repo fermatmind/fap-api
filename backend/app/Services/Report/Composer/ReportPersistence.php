@@ -11,8 +11,7 @@ class ReportPersistence
 {
     public function __construct(
         private readonly ArtifactStore $artifactStore,
-    ) {
-    }
+    ) {}
 
     public function persist(string $attemptId, array $payload): void
     {

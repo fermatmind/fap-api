@@ -8,8 +8,7 @@ final class AssessmentRunner
 {
     public function __construct(
         private AssessmentEngine $engine,
-    ) {
-    }
+    ) {}
 
     public function run(
         string $scaleCode,

@@ -15,23 +15,23 @@ final class PackCache
     {
         $pack = $this->normalizePack($pack);
 
-        $cacheRoot = rtrim((string)config('content_packs.cache_dir', ''), '/');
+        $cacheRoot = rtrim((string) config('content_packs.cache_dir', ''), '/');
         if ($cacheRoot === '') {
             throw new RuntimeException('Missing config: content_packs.cache_dir');
         }
 
-        $localPackDir = $cacheRoot . '/' . $pack;
+        $localPackDir = $cacheRoot.'/'.$pack;
 
         $lockHandle = $this->acquireLock($cacheRoot, $pack);
         try {
-            $driverName = (string)config('content_packs.driver', 'local');
+            $driverName = (string) config('content_packs.driver', 'local');
             $driver = $this->makeDriver($driverName);
-            $ttl = (int)config('content_packs.cache_ttl_seconds', 3600);
+            $ttl = (int) config('content_packs.cache_ttl_seconds', 3600);
 
-            $manifestKey = $pack . '/manifest.json';
+            $manifestKey = $pack.'/manifest.json';
             $sourceEtag = $driver->etag($manifestKey);
 
-            $metaPath = $localPackDir . '/.pack_cache_meta.json';
+            $metaPath = $localPackDir.'/.pack_cache_meta.json';
             $meta = $this->loadMeta($metaPath);
 
             if ($this->needsRefresh($localPackDir, $meta, $ttl, $sourceEtag)) {
@@ -46,17 +46,17 @@ final class PackCache
 
     private function refresh(string $pack, string $localPackDir, ContentSourceDriver $driver, string $driverName, ?string $sourceEtag): void
     {
-        $keys = $driver->list($pack . '/');
+        $keys = $driver->list($pack.'/');
 
         $localPackDirFs = $this->fsPath($localPackDir);
-        if (!is_dir($localPackDirFs) && !mkdir($localPackDirFs, 0775, true) && !is_dir($localPackDirFs)) {
+        if (! is_dir($localPackDirFs) && ! mkdir($localPackDirFs, 0775, true) && ! is_dir($localPackDirFs)) {
             throw new RuntimeException("Failed to create cache dir: {$localPackDirFs}");
         }
 
-        $prefix = rtrim($pack, '/') . '/';
+        $prefix = rtrim($pack, '/').'/';
         foreach ($keys as $key) {
             $key = $this->normalizeKey($key);
-            if (!str_starts_with($key, $prefix)) {
+            if (! str_starts_with($key, $prefix)) {
                 continue;
             }
 
@@ -70,17 +70,25 @@ final class PackCache
         }
 
         $meta = $this->makeMeta($pack, $sourceEtag, $driverName);
-        $meta->saveAtomic($this->fsPath($localPackDir . '/.pack_cache_meta.json'));
+        $meta->saveAtomic($this->fsPath($localPackDir.'/.pack_cache_meta.json'));
     }
 
     private function needsRefresh(string $localPackDir, ?PackCacheMeta $meta, int $ttl, ?string $sourceEtag): bool
     {
         $localPackDirFs = $this->fsPath($localPackDir);
 
-        if (!is_dir($localPackDirFs)) return true;
-        if ($meta === null) return true;
-        if ($meta->fetchedAt <= 0) return true;
-        if ((time() - $meta->fetchedAt) >= $ttl) return true;
+        if (! is_dir($localPackDirFs)) {
+            return true;
+        }
+        if ($meta === null) {
+            return true;
+        }
+        if ($meta->fetchedAt <= 0) {
+            return true;
+        }
+        if ((time() - $meta->fetchedAt) >= $ttl) {
+            return true;
+        }
 
         if ($sourceEtag !== null && $meta->manifestEtag !== null && $sourceEtag !== $meta->manifestEtag) {
             return true;
@@ -95,11 +103,11 @@ final class PackCache
 
         $source = $driverName === 's3'
             ? [
-                'disk' => (string)config('content_packs.s3_disk', 's3'),
-                'prefix' => (string)config('content_packs.s3_prefix', ''),
+                'disk' => (string) config('content_packs.s3_disk', 's3'),
+                'prefix' => (string) config('content_packs.s3_prefix', ''),
             ]
             : [
-                'root' => (string)config('content_packs.root', ''),
+                'root' => (string) config('content_packs.root', ''),
             ];
 
         return new PackCacheMeta(
@@ -125,12 +133,12 @@ final class PackCache
     {
         if ($driverName === 's3') {
             return new S3Driver(
-                (string)config('content_packs.s3_disk', 's3'),
-                (string)config('content_packs.s3_prefix', '')
+                (string) config('content_packs.s3_disk', 's3'),
+                (string) config('content_packs.s3_prefix', '')
             );
         }
 
-        return new LocalDriver((string)config('content_packs.root', ''));
+        return new LocalDriver((string) config('content_packs.root', ''));
     }
 
     private function normalizePack(string $pack): string
@@ -170,11 +178,11 @@ final class PackCache
             throw new RuntimeException('Invalid cache write path.');
         }
 
-        $dest = $localPackDir . '/' . $rel;
+        $dest = $localPackDir.'/'.$rel;
         $destFs = $this->fsPath($dest);
         $dirFs = dirname($destFs);
 
-        if (!is_dir($dirFs) && !mkdir($dirFs, 0775, true) && !is_dir($dirFs)) {
+        if (! is_dir($dirFs) && ! mkdir($dirFs, 0775, true) && ! is_dir($dirFs)) {
             throw new RuntimeException("Failed to create cache dir: {$dirFs}");
         }
 
@@ -188,7 +196,7 @@ final class PackCache
             throw new RuntimeException("Failed to write temp cache file: {$tmp}");
         }
 
-        if (!rename($tmp, $destFs)) {
+        if (! rename($tmp, $destFs)) {
             @unlink($tmp);
             throw new RuntimeException("Failed to move cache file into place: {$destFs}");
         }
@@ -196,20 +204,20 @@ final class PackCache
 
     private function acquireLock(string $cacheRoot, string $pack)
     {
-        $lockDir = $cacheRoot . '/.locks';
+        $lockDir = $cacheRoot.'/.locks';
         $lockDirFs = $this->fsPath($lockDir);
-        if (!is_dir($lockDirFs) && !mkdir($lockDirFs, 0775, true) && !is_dir($lockDirFs)) {
+        if (! is_dir($lockDirFs) && ! mkdir($lockDirFs, 0775, true) && ! is_dir($lockDirFs)) {
             throw new RuntimeException("Failed to create lock dir: {$lockDirFs}");
         }
 
-        $lockPath = $lockDir . '/' . sha1($pack) . '.lock';
+        $lockPath = $lockDir.'/'.sha1($pack).'.lock';
         $lockPathFs = $this->fsPath($lockPath);
         $handle = fopen($lockPathFs, 'c');
         if ($handle === false) {
             throw new RuntimeException("Failed to open lock file: {$lockPathFs}");
         }
 
-        if (!flock($handle, LOCK_EX)) {
+        if (! flock($handle, LOCK_EX)) {
             fclose($handle);
             throw new RuntimeException("Failed to lock cache file: {$lockPathFs}");
         }

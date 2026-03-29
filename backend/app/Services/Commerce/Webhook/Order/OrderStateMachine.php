@@ -9,9 +9,7 @@ use App\Services\Commerce\Webhook\Contracts\OrderStateMachineInterface;
 
 final class OrderStateMachine implements OrderStateMachineInterface
 {
-    public function __construct(private readonly OrderManager $orders)
-    {
-    }
+    public function __construct(private readonly OrderManager $orders) {}
 
     public function advance(string $orderNo, int $orgId, array $normalized): array
     {
@@ -28,7 +26,7 @@ final class OrderStateMachine implements OrderStateMachineInterface
             $normalized['paid_at'] ?? null
         );
 
-        if (!($toPaid['ok'] ?? false)) {
+        if (! ($toPaid['ok'] ?? false)) {
             return $toPaid;
         }
 

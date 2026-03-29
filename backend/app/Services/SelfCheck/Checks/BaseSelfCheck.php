@@ -9,7 +9,7 @@ use App\Services\SelfCheck\SelfCheckResult;
 abstract class BaseSelfCheck
 {
     /**
-     * @param array{0:bool,1:array<int,string>} $legacy
+     * @param  array{0:bool,1:array<int,string>}  $legacy
      */
     protected function absorbLegacy(SelfCheckResult $result, string $label, array $legacy): void
     {
@@ -23,6 +23,7 @@ abstract class BaseSelfCheck
 
             if ($this->looksLikeWarning($msg)) {
                 $result->addWarning($prefixed);
+
                 continue;
             }
 
@@ -33,14 +34,14 @@ abstract class BaseSelfCheck
             }
         }
 
-        if (!$ok && $messages === []) {
+        if (! $ok && $messages === []) {
             $result->addError($label === '' ? 'check failed' : "{$label}: check failed");
         }
     }
 
     /**
-     * @param array<string, bool> $declaredBasenames
-     * @param callable(): array{0:bool,1:array<int,string>} $runner
+     * @param  array<string, bool>  $declaredBasenames
+     * @param  callable(): array{0:bool,1:array<int,string>}  $runner
      */
     protected function runIfDeclared(
         SelfCheckResult $result,
@@ -49,8 +50,9 @@ abstract class BaseSelfCheck
         string $basename,
         callable $runner
     ): void {
-        if (!isset($declaredBasenames[$basename])) {
+        if (! isset($declaredBasenames[$basename])) {
             $result->addNote("{$sectionName}: SKIPPED (not declared in manifest.assets): {$basename}");
+
             return;
         }
 
@@ -60,6 +62,7 @@ abstract class BaseSelfCheck
     protected function looksLikeWarning(string $message): bool
     {
         $m = ltrim($message);
+
         return str_starts_with($m, 'WARN')
             || str_starts_with($m, '-- warnings --')
             || str_contains($m, ' WARN ')

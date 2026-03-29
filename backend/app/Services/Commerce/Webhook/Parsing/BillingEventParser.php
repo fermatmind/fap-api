@@ -17,7 +17,7 @@ final class BillingEventParser implements WebhookEventParserInterface
 
     public function parse(array $payload): NormalizedPaymentEvent
     {
-        $normalized = (new BillingGateway())->normalizePayload($payload);
+        $normalized = (new BillingGateway)->normalizePayload($payload);
 
         return new NormalizedPaymentEvent(
             provider: 'billing',

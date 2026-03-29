@@ -21,7 +21,7 @@ final class RedisProbe implements ProbeInterface
         $cacheDriver = (string) config("cache.stores.{$cacheStore}.driver", $cacheStore);
         $queueDriver = (string) config('queue.default', 'sync');
 
-        if (!($cacheDriver === 'redis' || $queueDriver === 'redis')) {
+        if (! ($cacheDriver === 'redis' || $queueDriver === 'redis')) {
             return (new ProbeResult(true, '', '', ['skipped' => true, 'reason' => 'redis_not_in_use']))->toArray($verbose);
         }
 
@@ -37,6 +37,7 @@ final class RedisProbe implements ProbeInterface
             ]))->toArray($verbose);
         } catch (\Throwable $e) {
             $ms = (int) round((microtime(true) - $t0) * 1000);
+
             return (new ProbeResult(false, 'REDIS_UNAVAILABLE', (string) $e->getMessage(), ['latency_ms' => $ms]))->toArray($verbose);
         }
     }

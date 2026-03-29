@@ -3,13 +3,12 @@
 namespace App\Services\Agent\Policies;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 final class ConsentPolicy
 {
     public function check(int $userId): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('integrations')) {
+        if (! \App\Support\SchemaBaseline::hasTable('integrations')) {
             return [
                 'ok' => false,
                 'allowed' => false,
@@ -22,7 +21,7 @@ final class ConsentPolicy
             ->orderByDesc('created_at')
             ->first();
 
-        if (!$row || empty($row->consent_version)) {
+        if (! $row || empty($row->consent_version)) {
             return [
                 'ok' => true,
                 'allowed' => false,

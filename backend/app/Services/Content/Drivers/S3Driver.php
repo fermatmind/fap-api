@@ -12,6 +12,7 @@ use Throwable;
 class S3Driver implements ContentSourceDriver
 {
     private string $diskName;
+
     private string $prefix;
 
     public function __construct(string $disk, string $prefix = '')
@@ -23,12 +24,14 @@ class S3Driver implements ContentSourceDriver
     public function get(string $key): string
     {
         $fullKey = $this->fullKey($key);
+
         return $this->disk()->get($fullKey);
     }
 
     public function exists(string $key): bool
     {
         $fullKey = $this->fullKey($key);
+
         return $this->disk()->exists($fullKey);
     }
 
@@ -44,9 +47,9 @@ class S3Driver implements ContentSourceDriver
         }
 
         $relative = [];
-        $strip = $this->prefix === '' ? '' : $this->prefix . '/';
+        $strip = $this->prefix === '' ? '' : $this->prefix.'/';
         foreach ($files as $fullKey) {
-            $key = ltrim((string)$fullKey, '/');
+            $key = ltrim((string) $fullKey, '/');
             if ($strip !== '' && str_starts_with($key, $strip)) {
                 $key = substr($key, strlen($strip));
             }
@@ -61,12 +64,13 @@ class S3Driver implements ContentSourceDriver
         $fullKey = $this->fullKey($key);
         $disk = $this->disk();
 
-        if (!method_exists($disk, 'checksum')) {
+        if (! method_exists($disk, 'checksum')) {
             return null;
         }
 
         try {
             $checksum = $disk->checksum($fullKey);
+
             return $checksum !== '' ? $checksum : null;
         } catch (Throwable $e) {
             return null;
@@ -76,7 +80,7 @@ class S3Driver implements ContentSourceDriver
     private function fullKey(string $key, bool $allowEmpty = false): string
     {
         $key = $this->normalizeKey($key);
-        if ($key === '' && !$allowEmpty) {
+        if ($key === '' && ! $allowEmpty) {
             throw new RuntimeException('Content key cannot be empty.');
         }
 

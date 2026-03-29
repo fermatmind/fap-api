@@ -6,9 +6,7 @@ use App\Internal\Commerce\PaymentWebhookHandlerCore;
 
 class WebhookTransitionService
 {
-    public function __construct(private PaymentWebhookHandlerCore $core)
-    {
-    }
+    public function __construct(private PaymentWebhookHandlerCore $core) {}
 
     public function handle(array $ctx): array
     {

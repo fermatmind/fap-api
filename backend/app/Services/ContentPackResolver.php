@@ -1,4 +1,5 @@
 <?php
+
 // file: backend/app/Services/ContentPackResolver.php
 
 namespace App\Services;
@@ -11,8 +12,10 @@ use RecursiveIteratorIterator;
 final class ContentPackResolver
 {
     private array $indexByKey = [];   // key => list[payload]
-    private array $byPackId   = [];   // pack_id => same payload
-    private bool  $built      = false;
+
+    private array $byPackId = [];   // pack_id => same payload
+
+    private bool $built = false;
 
     public function resolve(
         string $scale,
@@ -20,11 +23,10 @@ final class ContentPackResolver
         string $locale,
         string $version,
         ?string $dirVersion = null
-    ): ResolvedPack
-    {
+    ): ResolvedPack {
         $this->buildIndexOnce();
 
-        $scale  = trim($scale);
+        $scale = trim($scale);
         $region = $this->normRegion($region);
         $locale = $this->normLocale($locale);
         $version = trim($version);
@@ -49,24 +51,24 @@ final class ContentPackResolver
         $picked = null;
         foreach ($candidates as $cand) {
             $key = $this->makeKey($cand['scale'], $cand['region'], $cand['locale'], $cand['version']);
-            if (!isset($this->indexByKey[$key])) {
+            if (! isset($this->indexByKey[$key])) {
                 continue;
             }
 
             $matches = $this->indexByKey[$key];
-            if (!is_array($matches) || $matches === []) {
+            if (! is_array($matches) || $matches === []) {
                 continue;
             }
 
             if (is_string($dirVersion) && $dirVersion !== '') {
                 foreach ($matches as $payload) {
-                    if (!is_array($payload)) {
+                    if (! is_array($payload)) {
                         continue;
                     }
                     if ((string) ($payload['dir_version'] ?? '') === $dirVersion) {
                         $picked = $payload;
                         $trace['picked'] = [
-                            'reason' => $cand['reason'] . ':dir_version',
+                            'reason' => $cand['reason'].':dir_version',
                             'key' => $key,
                             'pack_id' => $picked['pack_id'],
                             'dir_version' => $dirVersion,
@@ -79,7 +81,7 @@ final class ContentPackResolver
             $picked = $this->pickPreferredPayload($matches, $scale);
             if ($picked !== null) {
                 $trace['picked'] = [
-                    'reason' => $cand['reason'] . ':preferred_match',
+                    'reason' => $cand['reason'].':preferred_match',
                     'key' => $key,
                     'pack_id' => $picked['pack_id'],
                     'dir_version' => $picked['dir_version'] ?? null,
@@ -90,7 +92,7 @@ final class ContentPackResolver
 
         // 最终兜底：default_pack_id（最稳定）
         if ($picked === null) {
-            $defaultPackId = (string)config('content_packs.default_pack_id', '');
+            $defaultPackId = (string) config('content_packs.default_pack_id', '');
             if ($defaultPackId !== '' && isset($this->byPackId[$defaultPackId])) {
                 $picked = $this->byPackId[$defaultPackId];
                 $trace['picked'] = ['reason' => 'default_pack_id', 'pack_id' => $picked['pack_id']];
@@ -127,10 +129,12 @@ final class ContentPackResolver
     // -------------------------
     private function buildIndexOnce(): void
     {
-        if ($this->built) return;
+        if ($this->built) {
+            return;
+        }
 
-        $root = (string)config('content_packs.root');
-        if (!is_dir($root)) {
+        $root = (string) config('content_packs.root');
+        if (! is_dir($root)) {
             throw new \RuntimeException("ContentPackResolver: content pack root not found: {$root}");
         }
 
@@ -141,21 +145,31 @@ final class ContentPackResolver
 
         foreach ($it as $file) {
             /** @var \SplFileInfo $file */
-            if (strtolower($file->getFilename()) !== 'manifest.json') continue;
+            if (strtolower($file->getFilename()) !== 'manifest.json') {
+                continue;
+            }
 
             $manifestPath = $file->getPathname();
             $manifestPathNorm = str_replace(DIRECTORY_SEPARATOR, '/', $manifestPath);
-            if (str_contains($manifestPathNorm, '/_deprecated/')) continue;
-            if (str_contains($manifestPathNorm, '/compiled/')) continue;
-            if (!str_contains($manifestPathNorm, '/default/')) continue;
+            if (str_contains($manifestPathNorm, '/_deprecated/')) {
+                continue;
+            }
+            if (str_contains($manifestPathNorm, '/compiled/')) {
+                continue;
+            }
+            if (! str_contains($manifestPathNorm, '/default/')) {
+                continue;
+            }
             $manifest = $this->readJson($manifestPath);
-            if (!is_array($manifest)) continue;
+            if (! is_array($manifest)) {
+                continue;
+            }
 
-            $packId  = (string)($manifest['pack_id'] ?? '');
-            $scale   = (string)($manifest['scale_code'] ?? '');
-            $region  = $this->normRegion((string)($manifest['region'] ?? ''));
-            $locale  = $this->normLocale((string)($manifest['locale'] ?? ''));
-            $version = (string)($manifest['content_package_version'] ?? '');
+            $packId = (string) ($manifest['pack_id'] ?? '');
+            $scale = (string) ($manifest['scale_code'] ?? '');
+            $region = $this->normRegion((string) ($manifest['region'] ?? ''));
+            $locale = $this->normLocale((string) ($manifest['locale'] ?? ''));
+            $version = (string) ($manifest['content_package_version'] ?? '');
 
             if ($packId === '' || $scale === '' || $region === '' || $locale === '' || $version === '') {
                 continue;
@@ -177,13 +191,14 @@ final class ContentPackResolver
             ];
 
             $key = $this->makeKey($scale, $region, $locale, $version);
-            if (!isset($this->indexByKey[$key])) {
+            if (! isset($this->indexByKey[$key])) {
                 $this->indexByKey[$key] = [];
             }
             $this->indexByKey[$key][] = $payload;
 
-            if (!isset($this->byPackId[$packId])) {
+            if (! isset($this->byPackId[$packId])) {
                 $this->byPackId[$packId] = $payload;
+
                 continue;
             }
 
@@ -201,7 +216,7 @@ final class ContentPackResolver
         $preferred = null;
 
         foreach ($matches as $candidate) {
-            if (!is_array($candidate)) {
+            if (! is_array($candidate)) {
                 continue;
             }
 
@@ -286,7 +301,7 @@ final class ContentPackResolver
     {
         $map = (array) config('content_packs.compat_alias_dir_versions', []);
         $raw = $map[$scale] ?? [];
-        if (!is_array($raw)) {
+        if (! is_array($raw)) {
             return [];
         }
 
@@ -304,8 +319,11 @@ final class ContentPackResolver
     private function readJson(string $path): ?array
     {
         $raw = @file_get_contents($path);
-        if ($raw === false || trim($raw) === '') return null;
+        if ($raw === false || trim($raw) === '') {
+            return null;
+        }
         $j = json_decode($raw, true);
+
         return is_array($j) ? $j : null;
     }
 
@@ -313,24 +331,31 @@ final class ContentPackResolver
     {
         $r = strtoupper(trim($r));
         $r = str_replace('-', '_', $r);
+
         return $r;
     }
 
     private function normLocale(string $l): string
     {
         $l = trim($l);
-        if ($l === '') return '';
+        if ($l === '') {
+            return '';
+        }
         // normalize like zh-CN / en-US
         $l = str_replace('_', '-', $l);
         $parts = explode('-', $l);
-        if (count($parts) === 1) return strtolower($parts[0]);
-        return strtolower($parts[0]) . '-' . strtoupper($parts[1]);
+        if (count($parts) === 1) {
+            return strtolower($parts[0]);
+        }
+
+        return strtolower($parts[0]).'-'.strtoupper($parts[1]);
     }
 
     private function baseLocale(string $locale): string
     {
         $locale = $this->normLocale($locale);
         $p = explode('-', $locale);
+
         return strtolower($p[0] ?? $locale);
     }
 
@@ -339,35 +364,35 @@ final class ContentPackResolver
         $out = [];
 
         // 1) exact
-        $out[] = ['reason'=>'exact', 'scale'=>$scale, 'region'=>$region, 'locale'=>$locale, 'version'=>$version];
+        $out[] = ['reason' => 'exact', 'scale' => $scale, 'region' => $region, 'locale' => $locale, 'version' => $version];
 
         // 2) locale fallback
-        if ((bool)config('content_packs.locale_fallback', true)) {
+        if ((bool) config('content_packs.locale_fallback', true)) {
             $bl = $this->baseLocale($locale);
             if ($bl !== $locale) {
-                $out[] = ['reason'=>'locale_fallback', 'scale'=>$scale, 'region'=>$region, 'locale'=>$bl, 'version'=>$version];
+                $out[] = ['reason' => 'locale_fallback', 'scale' => $scale, 'region' => $region, 'locale' => $bl, 'version' => $version];
             }
         }
 
         // 3) region fallback
-        $regionFallbacks = (array)config('content_packs.region_fallbacks', []);
+        $regionFallbacks = (array) config('content_packs.region_fallbacks', []);
         $chain = $regionFallbacks[$region] ?? ($regionFallbacks['*'] ?? []);
         foreach ($chain as $fr) {
-            $fr = $this->normRegion((string)$fr);
-            $out[] = ['reason'=>"region_fallback:{$fr}", 'scale'=>$scale, 'region'=>$fr, 'locale'=>$locale, 'version'=>$version];
+            $fr = $this->normRegion((string) $fr);
+            $out[] = ['reason' => "region_fallback:{$fr}", 'scale' => $scale, 'region' => $fr, 'locale' => $locale, 'version' => $version];
 
-            if ((bool)config('content_packs.locale_fallback', true)) {
+            if ((bool) config('content_packs.locale_fallback', true)) {
                 $bl = $this->baseLocale($locale);
                 if ($bl !== $locale) {
-                    $out[] = ['reason'=>"region+locale_fallback:{$fr}", 'scale'=>$scale, 'region'=>$fr, 'locale'=>$bl, 'version'=>$version];
+                    $out[] = ['reason' => "region+locale_fallback:{$fr}", 'scale' => $scale, 'region' => $fr, 'locale' => $bl, 'version' => $version];
                 }
             }
         }
 
         // 4) final fallback (default region/locale, same version)
-        $dr = $this->normRegion((string)config('content_packs.default_region', 'GLOBAL'));
-        $dl = $this->normLocale((string)config('content_packs.default_locale', 'en'));
-        $out[] = ['reason'=>'final_fallback', 'scale'=>$scale, 'region'=>$dr, 'locale'=>$dl, 'version'=>$version];
+        $dr = $this->normRegion((string) config('content_packs.default_region', 'GLOBAL'));
+        $dl = $this->normLocale((string) config('content_packs.default_locale', 'en'));
+        $out[] = ['reason' => 'final_fallback', 'scale' => $scale, 'region' => $dr, 'locale' => $dl, 'version' => $version];
 
         return $out;
     }
@@ -375,13 +400,19 @@ final class ContentPackResolver
     private function buildFallbackChain(array $manifest, array &$trace): array
     {
         $fallback = $manifest['fallback'] ?? [];
-        if (!is_array($fallback)) $fallback = [];
+        if (! is_array($fallback)) {
+            $fallback = [];
+        }
 
         $chain = [];
         foreach ($fallback as $i => $packId) {
-            if (!is_string($packId) || trim($packId) === '') continue;
+            if (! is_string($packId) || trim($packId) === '') {
+                continue;
+            }
             $packId = trim($packId);
-            if (!isset($this->byPackId[$packId])) continue;
+            if (! isset($this->byPackId[$packId])) {
+                continue;
+            }
             $p = $this->byPackId[$packId];
             $chain[] = [
                 'pack_id' => $p['pack_id'],
@@ -391,7 +422,8 @@ final class ContentPackResolver
             ];
         }
 
-        $trace['fallback_chain'] = array_map(fn($x) => $x['pack_id'], $chain);
+        $trace['fallback_chain'] = array_map(fn ($x) => $x['pack_id'], $chain);
+
         return $chain;
     }
 
@@ -419,13 +451,13 @@ final class ContentPackResolver
                 return null;
             }
 
-            $abs = rtrim($dir, "/\\") . DIRECTORY_SEPARATOR . $rel;
+            $abs = rtrim($dir, '/\\').DIRECTORY_SEPARATOR.$rel;
 
             return is_file($abs) ? $abs : null;
         };
 
         $readFile = function (string $rel) use ($loader, $sources, $resolveAbsPath): ?string {
-            $rel = ltrim($rel, "/\\");
+            $rel = ltrim($rel, '/\\');
             foreach ($sources as $source) {
                 $raw = $loader->readText(
                     (string) $source['pack_id'],
@@ -443,7 +475,7 @@ final class ContentPackResolver
         };
 
         $readJson = function (string $rel) use ($loader, $sources, $resolveAbsPath): ?array {
-            $rel = ltrim($rel, "/\\");
+            $rel = ltrim($rel, '/\\');
             foreach ($sources as $source) {
                 $json = $loader->readJson(
                     (string) $source['pack_id'],

@@ -10,8 +10,7 @@ final class AssetUrlResolver
     public function __construct(
         private ContentPacksIndex $index,
         private RegionContext $regionContext
-    ) {
-    }
+    ) {}
 
     public function resolve(
         string $packId,
@@ -34,8 +33,7 @@ final class AssetUrlResolver
         string $dirVersion,
         ?string $override,
         string $region
-    ): string
-    {
+    ): string {
         $override = is_string($override) ? trim($override) : '';
         if ($override !== '') {
             return $override;
@@ -59,7 +57,7 @@ final class AssetUrlResolver
             $appUrl = 'http://localhost';
         }
 
-        return rtrim($appUrl, '/') . '/storage/content_assets';
+        return rtrim($appUrl, '/').'/storage/content_assets';
     }
 
     private function resolveRegion(?string $region): string
@@ -76,29 +74,31 @@ final class AssetUrlResolver
 
         $default = (string) (config('regions.default_region') ?? config('content_packs.default_region', 'CN_MAINLAND'));
         $default = strtoupper(trim($default));
+
         return $default !== '' ? $default : 'CN_MAINLAND';
     }
 
     private function resolveCdnBaseUrl(string $region): string
     {
         $map = config('cdn_map.map', []);
-        if (!is_array($map) || $region === '') {
+        if (! is_array($map) || $region === '') {
             return '';
         }
 
         $row = $map[$region] ?? null;
-        if (!is_array($row)) {
+        if (! is_array($row)) {
             return '';
         }
 
         $base = trim((string) ($row['assets_base_url'] ?? ''));
+
         return $base;
     }
 
     private function readAssetsBaseUrlFromVersion(string $packId, string $dirVersion): string
     {
         $found = $this->index->find($packId, $dirVersion);
-        if (!($found['ok'] ?? false)) {
+        if (! ($found['ok'] ?? false)) {
             return '';
         }
 
@@ -109,8 +109,8 @@ final class AssetUrlResolver
         }
 
         $baseDir = dirname($manifestPath);
-        $versionPath = rtrim($baseDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'version.json';
-        if (!is_file($versionPath)) {
+        $versionPath = rtrim($baseDir, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'version.json';
+        if (! is_file($versionPath)) {
             return '';
         }
 
@@ -120,11 +120,12 @@ final class AssetUrlResolver
         }
 
         $decoded = json_decode($raw, true);
-        if (!is_array($decoded)) {
+        if (! is_array($decoded)) {
             return '';
         }
 
         $baseUrl = trim((string) ($decoded['assets_base_url'] ?? ''));
+
         return $baseUrl;
     }
 
@@ -135,10 +136,12 @@ final class AssetUrlResolver
         foreach ($parts as $p) {
             $p = trim($p);
             $p = trim($p, '/');
-            if ($p !== '') $clean[] = $p;
+            if ($p !== '') {
+                $clean[] = $p;
+            }
         }
 
-        return $baseUrl . '/' . implode('/', $clean);
+        return $baseUrl.'/'.implode('/', $clean);
     }
 
     private function assertStrictAssetPath(string $path): void
@@ -158,7 +161,7 @@ final class AssetUrlResolver
         if (str_contains($path, '..')) {
             throw new \RuntimeException('path traversal not allowed');
         }
-        if (!str_starts_with($path, 'assets/')) {
+        if (! str_starts_with($path, 'assets/')) {
             throw new \RuntimeException('asset path must start with assets/');
         }
     }

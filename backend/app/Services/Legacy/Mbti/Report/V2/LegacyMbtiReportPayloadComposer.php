@@ -18,16 +18,15 @@ use App\Services\Legacy\Mbti\Report\V2\Sections\ScoresSectionBuilder;
 final class LegacyMbtiReportPayloadComposer
 {
     /**
-     * @param array<int,SectionBuilderInterface> $sections
+     * @param  array<int,SectionBuilderInterface>  $sections
      */
     public function __construct(
         private readonly LegacyMbtiReportPayloadBuilderV2 $source,
         private readonly array $sections = [],
-    ) {
-    }
+    ) {}
 
     /**
-     * @param array<string,mixed> $input
+     * @param  array<string,mixed>  $input
      * @return array<string,mixed>
      */
     public function compose(array $input): array
@@ -52,12 +51,12 @@ final class LegacyMbtiReportPayloadComposer
         }
 
         return [
-            new HeaderSectionBuilder(),
-            new ScoresSectionBuilder(),
-            new HighlightsSectionBuilder(),
-            new NarrativeSectionBuilder(),
-            new RecommendationsSectionBuilder(),
-            new MetaSectionBuilder(),
+            new HeaderSectionBuilder,
+            new ScoresSectionBuilder,
+            new HighlightsSectionBuilder,
+            new NarrativeSectionBuilder,
+            new RecommendationsSectionBuilder,
+            new MetaSectionBuilder,
         ];
     }
 }

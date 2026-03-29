@@ -43,7 +43,7 @@ class AttemptProgressService
         $attemptId = (string) $attempt->id;
         $orgId = (int) ($attempt->org_id ?? 0);
         $draft = $this->loadDraft($attemptId);
-        if (!$draft) {
+        if (! $draft) {
             return [
                 'ok' => false,
                 'status' => 404,
@@ -62,7 +62,7 @@ class AttemptProgressService
             ];
         }
 
-        if (($token === null || trim($token) === '') && $userId !== null && !$this->matchesAttemptOwner($attempt, $userId)) {
+        if (($token === null || trim($token) === '') && $userId !== null && ! $this->matchesAttemptOwner($attempt, $userId)) {
             return [
                 'ok' => false,
                 'status' => 404,
@@ -71,7 +71,7 @@ class AttemptProgressService
             ];
         }
 
-        if (!$this->canAccessDraft($draft, $token, $userId)) {
+        if (! $this->canAccessDraft($draft, $token, $userId)) {
             return [
                 'ok' => false,
                 'status' => 404,
@@ -96,12 +96,12 @@ class AttemptProgressService
         }
 
         $incomingAnswers = $payload['answers'] ?? [];
-        if (!is_array($incomingAnswers)) {
+        if (! is_array($incomingAnswers)) {
             $incomingAnswers = [];
         }
 
         $existingAnswers = $draft['answers'] ?? [];
-        if (!is_array($existingAnswers)) {
+        if (! is_array($existingAnswers)) {
             $existingAnswers = [];
         }
 
@@ -141,7 +141,7 @@ class AttemptProgressService
     {
         $attemptId = (string) $attempt->id;
         $draft = $this->loadDraft($attemptId);
-        if (!$draft) {
+        if (! $draft) {
             return [
                 'ok' => false,
                 'status' => 404,
@@ -160,7 +160,7 @@ class AttemptProgressService
             ];
         }
 
-        if (($token === null || trim($token) === '') && $userId !== null && !$this->matchesAttemptOwner($attempt, $userId)) {
+        if (($token === null || trim($token) === '') && $userId !== null && ! $this->matchesAttemptOwner($attempt, $userId)) {
             return [
                 'ok' => false,
                 'status' => 404,
@@ -169,7 +169,7 @@ class AttemptProgressService
             ];
         }
 
-        if (!$this->canAccessDraft($draft, $token, $userId)) {
+        if (! $this->canAccessDraft($draft, $token, $userId)) {
             return [
                 'ok' => false,
                 'status' => 404,
@@ -201,16 +201,17 @@ class AttemptProgressService
     public function loadDraftAnswers(Attempt $attempt): array
     {
         $row = DB::table('attempt_drafts')->where('attempt_id', (string) $attempt->id)->first();
-        if (!$row) {
+        if (! $row) {
             return [];
         }
 
         $raw = $row->answers_json ?? null;
-        if (!is_string($raw) || $raw === '') {
+        if (! is_string($raw) || $raw === '') {
             return [];
         }
 
         $decoded = json_decode($raw, true);
+
         return is_array($decoded) ? $decoded : [];
     }
 
@@ -248,7 +249,7 @@ class AttemptProgressService
         }
 
         $row = DB::table('attempt_drafts')->where('attempt_id', $attemptId)->first();
-        if (!$row) {
+        if (! $row) {
             return null;
         }
 
@@ -284,7 +285,7 @@ class AttemptProgressService
     {
         $map = [];
         foreach ($existing as $answer) {
-            if (!is_array($answer)) {
+            if (! is_array($answer)) {
                 continue;
             }
             $qid = trim((string) ($answer['question_id'] ?? ''));
@@ -295,7 +296,7 @@ class AttemptProgressService
         }
 
         foreach ($incoming as $answer) {
-            if (!is_array($answer)) {
+            if (! is_array($answer)) {
                 continue;
             }
             $qid = trim((string) ($answer['question_id'] ?? ''));
@@ -314,7 +315,7 @@ class AttemptProgressService
     {
         $normalized = [];
         foreach ($answers as $answer) {
-            if (!is_array($answer)) {
+            if (! is_array($answer)) {
                 continue;
             }
             $normalized[] = $answer;
@@ -325,13 +326,14 @@ class AttemptProgressService
 
     private function generateToken(): string
     {
-        return 'resume_' . (string) Str::uuid();
+        return 'resume_'.(string) Str::uuid();
     }
 
     private function hashToken(string $token): string
     {
         $salt = (string) config('app.key', '');
-        return hash('sha256', $token . '|' . $salt);
+
+        return hash('sha256', $token.'|'.$salt);
     }
 
     private function matchesAttemptOwner(Attempt $attempt, int $userId): bool
@@ -351,24 +353,27 @@ class AttemptProgressService
         }
 
         $hash = $this->hashToken(trim($token));
+
         return hash_equals((string) ($draft['resume_token_hash'] ?? ''), $hash);
     }
 
     private function draftTtlDays(): int
     {
         $days = (int) config('fap_attempts.draft_ttl_days', 14);
+
         return $days > 0 ? $days : 14;
     }
 
     private function cacheStore(): string
     {
         $store = (string) config('fap_attempts.draft_cache_store', '');
+
         return $store !== '' ? $store : config('cache.default');
     }
 
     private function cacheKey(string $attemptId): string
     {
-        return 'attempt_draft:' . $attemptId;
+        return 'attempt_draft:'.$attemptId;
     }
 
     private function storeCache(array $draft, ?Carbon $expiresAt): void
@@ -393,6 +398,7 @@ class AttemptProgressService
     {
         $store = $this->cacheStore();
         $cached = Cache::store($store)->get($this->cacheKey($attemptId));
+
         return is_array($cached) ? $cached : null;
     }
 

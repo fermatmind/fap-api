@@ -9,9 +9,13 @@ use Illuminate\Support\Facades\DB;
 final class MbtiLongitudinalMemoryService
 {
     private const VERSION = 'mbti.longitudinal_memory.v1';
+
     private const MEMORY_SCOPE = 'identity_recent_mbti_window';
+
     private const WINDOW_DAYS = 120;
+
     private const MAX_ATTEMPTS = 5;
+
     private const MAX_EVENTS = 180;
 
     /**
@@ -267,6 +271,7 @@ final class MbtiLongitudinalMemoryService
 
                 if ($userId !== null) {
                     $query->orWhere('user_id', $userId);
+
                     return;
                 }
 

@@ -30,7 +30,7 @@ final class CardsCheck extends BaseSelfCheck
         $baseDir = dirname($manifestPath);
 
         $cardFiles = $manifest['assets']['cards'] ?? null;
-        if (is_array($cardFiles) && !empty($cardFiles)) {
+        if (is_array($cardFiles) && ! empty($cardFiles)) {
             $this->absorbLegacy(
                 $result,
                 'report_cards_*.json',
@@ -47,7 +47,7 @@ final class CardsCheck extends BaseSelfCheck
         }
 
         $fallbackCardFiles = $manifest['assets']['fallback_cards'] ?? null;
-        if (is_array($fallbackCardFiles) && !empty($fallbackCardFiles)) {
+        if (is_array($fallbackCardFiles) && ! empty($fallbackCardFiles)) {
             $this->absorbLegacy(
                 $result,
                 'report_cards_fallback_*.json',

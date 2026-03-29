@@ -7,10 +7,8 @@ class IdentityLayerBuilder
     /**
      * build layers.identity object
      *
-     * @param string $contentPackageVersion
-     * @param string $typeCode
-     * @param array  $scoresPct  你现有的 pct 结构（宽松兼容）
-     * @param array|null $borderlineNote buildBorderlineNote 的产物（可选）
+     * @param  array  $scoresPct  你现有的 pct 结构（宽松兼容）
+     * @param  array|null  $borderlineNote  buildBorderlineNote 的产物（可选）
      */
     public function build(
         string $contentPackageVersion,
@@ -19,9 +17,9 @@ class IdentityLayerBuilder
         ?array $borderlineNote = null
     ): array {
         $items = $this->loadReportAssetItems($contentPackageVersion, 'identity_layers.json');
-        $base  = is_array($items[$typeCode] ?? null) ? $items[$typeCode] : null;
+        $base = is_array($items[$typeCode] ?? null) ? $items[$typeCode] : null;
 
-        if (!$base) {
+        if (! $base) {
             // ✅ fallback：保证 layers.identity 永远是对象
             $base = [
                 'title' => $typeCode,
@@ -33,11 +31,21 @@ class IdentityLayerBuilder
         }
 
         // 统一字段规范化（避免前端崩）
-        if (!is_string($base['title'] ?? null)) $base['title'] = $typeCode;
-        if (!is_string($base['subtitle'] ?? null)) $base['subtitle'] = '';
-        if (!is_string($base['one_liner'] ?? null)) $base['one_liner'] = '';
-        if (!is_array($base['bullets'] ?? null)) $base['bullets'] = [];
-        if (!is_array($base['tags'] ?? null)) $base['tags'] = [];
+        if (! is_string($base['title'] ?? null)) {
+            $base['title'] = $typeCode;
+        }
+        if (! is_string($base['subtitle'] ?? null)) {
+            $base['subtitle'] = '';
+        }
+        if (! is_string($base['one_liner'] ?? null)) {
+            $base['one_liner'] = '';
+        }
+        if (! is_array($base['bullets'] ?? null)) {
+            $base['bullets'] = [];
+        }
+        if (! is_array($base['tags'] ?? null)) {
+            $base['tags'] = [];
+        }
 
         // ✅ 微调 1 句（优先 borderline，其次 AT 强弱）
         $micro = $this->buildMicroLine($scoresPct, $borderlineNote);
@@ -48,123 +56,138 @@ class IdentityLayerBuilder
         }
 
         // ✅ subtitle：做成肉眼可见的 A/T 差异（优先不覆盖已有 subtitle）
-if (trim((string)($base['subtitle'] ?? '')) === '') {
-    $at = $scoresPct['AT'] ?? null;
-    $side  = $this->pickSide($at);   // A / T
-    $pct   = $this->pickPct($at);    // 50..100
-    $delta = $this->pickDelta($at);  // 0..50
+        if (trim((string) ($base['subtitle'] ?? '')) === '') {
+            $at = $scoresPct['AT'] ?? null;
+            $side = $this->pickSide($at);   // A / T
+            $pct = $this->pickPct($at);    // 50..100
+            $delta = $this->pickDelta($at);  // 0..50
 
-    if ($side) {
-        if ($delta !== null && $delta >= 20) {
-            $base['subtitle'] = $side === 'A'
-                ? "更稳、更自洽（A），压力下更能扛住。"
-                : "更敏感、更自我要求（T），更在意细节与评价。";
-        } else {
-            $base['subtitle'] = $side === 'A'
-                ? "略偏 A：倾向先稳住再推进。"
-                : "略偏 T：倾向边走边校准。";
+            if ($side) {
+                if ($delta !== null && $delta >= 20) {
+                    $base['subtitle'] = $side === 'A'
+                        ? '更稳、更自洽（A），压力下更能扛住。'
+                        : '更敏感、更自我要求（T），更在意细节与评价。';
+                } else {
+                    $base['subtitle'] = $side === 'A'
+                        ? '略偏 A：倾向先稳住再推进。'
+                        : '略偏 T：倾向边走边校准。';
+                }
+            }
         }
-    }
-}
-        
+
         // 附上 type_code，方便前端/埋点
         $base['type_code'] = $typeCode;
 
         return $base;
     }
 
-private function buildMicroLine(array $scoresPct, ?array $borderlineNote): ?string
-{
-    // 1) 优先：borderline_note 命中（取“第一个 item”，兼容 list / map 两种结构）
-    $itemsRaw = (is_array($borderlineNote) && is_array($borderlineNote['items'] ?? null))
-        ? $borderlineNote['items']
-        : null;
+    private function buildMicroLine(array $scoresPct, ?array $borderlineNote): ?string
+    {
+        // 1) 优先：borderline_note 命中（取“第一个 item”，兼容 list / map 两种结构）
+        $itemsRaw = (is_array($borderlineNote) && is_array($borderlineNote['items'] ?? null))
+            ? $borderlineNote['items']
+            : null;
 
-    if (is_array($itemsRaw) && count($itemsRaw) > 0) {
-        // ✅ 关键：map -> list，保证 [0] 一定存在
-        $items = array_values($itemsRaw);
-        $it = $items[0] ?? null;
+        if (is_array($itemsRaw) && count($itemsRaw) > 0) {
+            // ✅ 关键：map -> list，保证 [0] 一定存在
+            $items = array_values($itemsRaw);
+            $it = $items[0] ?? null;
 
-        // 兼容不同结构：text / title
-        $txt = is_array($it) ? (string)($it['text'] ?? $it['title'] ?? '') : '';
-        if ($txt !== '') {
-            return "边界提示：{$txt}";
+            // 兼容不同结构：text / title
+            $txt = is_array($it) ? (string) ($it['text'] ?? $it['title'] ?? '') : '';
+            if ($txt !== '') {
+                return "边界提示：{$txt}";
+            }
         }
-    }
 
-    // 2) 否则：按 AT 强弱加一句
-    $at = $scoresPct['AT'] ?? null;
-    $side  = $this->pickSide($at);     // A / T
-    $pct   = $this->pickPct($at);      // 50..100
-    $delta = $this->pickDelta($at);    // 0..50
+        // 2) 否则：按 AT 强弱加一句
+        $at = $scoresPct['AT'] ?? null;
+        $side = $this->pickSide($at);     // A / T
+        $pct = $this->pickPct($at);      // 50..100
+        $delta = $this->pickDelta($at);    // 0..50
 
-    if ($side && $pct !== null) {
-        // 强阈值：可按你引擎的 clear/strong/very_strong 再调
-        if ($delta >= 20) {
+        if ($side && $pct !== null) {
+            // 强阈值：可按你引擎的 clear/strong/very_strong 再调
+            if ($delta >= 20) {
+                return $side === 'A'
+                    ? '你更偏 A：更稳、更抗压。'
+                    : '你更偏 T：更敏感、更易受情境影响。';
+            }
+
             return $side === 'A'
-                ? "你更偏 A：更稳、更抗压。"
-                : "你更偏 T：更敏感、更易受情境影响。";
+                ? '略偏 A：整体更稳定。'
+                : '略偏 T：倾向边走边校准。';
         }
 
-        return $side === 'A'
-            ? "略偏 A：整体更稳定。"
-            : "略偏 T：倾向边走边校准。";
+        return null;
     }
-
-    return null;
-}
 
     // ===== tolerant extractors (兼容你现在的 scoresPct 结构) =====
 
- private function pickSide($axis): ?string
-{
-    // ✅ 支持 int pct（你现在 results.scores_pct 就是这样）
-    if (is_int($axis) || is_float($axis) || (is_string($axis) && is_numeric($axis))) {
-        $raw = (int)$axis; // 0..100 或 1..99
-        return $raw >= 50 ? 'A' : 'T';
-    }
+    private function pickSide($axis): ?string
+    {
+        // ✅ 支持 int pct（你现在 results.scores_pct 就是这样）
+        if (is_int($axis) || is_float($axis) || (is_string($axis) && is_numeric($axis))) {
+            $raw = (int) $axis; // 0..100 或 1..99
 
-    if (is_array($axis)) {
-        $s = $axis['side'] ?? $axis['letter'] ?? null;
-        if (is_string($s) && $s !== '') return $s;
-
-        if (isset($axis['A']) || isset($axis['T'])) {
-            $a = (int)($axis['A'] ?? 0);
-            $t = (int)($axis['T'] ?? 0);
-            return $a >= $t ? 'A' : 'T';
+            return $raw >= 50 ? 'A' : 'T';
         }
-    }
-    return null;
-}
 
-private function pickPct($axis): ?int
-{
-    // ✅ 支持 int pct：统一成 50..100（主侧强度）
-    if (is_int($axis) || is_float($axis) || (is_string($axis) && is_numeric($axis))) {
-        $raw = (int)$axis;
-        return $raw >= 50 ? $raw : (100 - $raw);
-    }
+        if (is_array($axis)) {
+            $s = $axis['side'] ?? $axis['letter'] ?? null;
+            if (is_string($s) && $s !== '') {
+                return $s;
+            }
 
-    if (is_array($axis)) {
-        if (isset($axis['pct'])) return (int)$axis['pct'];
-        if (isset($axis['percent'])) return (int)$axis['percent'];
+            if (isset($axis['A']) || isset($axis['T'])) {
+                $a = (int) ($axis['A'] ?? 0);
+                $t = (int) ($axis['T'] ?? 0);
 
-        if ((isset($axis['A']) || isset($axis['T']))) {
-            $a = (int)($axis['A'] ?? 0);
-            $t = (int)($axis['T'] ?? 0);
-            return max($a, $t);
+                return $a >= $t ? 'A' : 'T';
+            }
         }
-    }
-    return null;
-}
 
-private function pickDelta($axis): ?int
-{
-    // ✅ delta 用 0..50
-    $pct = $this->pickPct($axis);
-    if ($pct !== null) return abs($pct - 50);
-    return null;
-}
+        return null;
+    }
+
+    private function pickPct($axis): ?int
+    {
+        // ✅ 支持 int pct：统一成 50..100（主侧强度）
+        if (is_int($axis) || is_float($axis) || (is_string($axis) && is_numeric($axis))) {
+            $raw = (int) $axis;
+
+            return $raw >= 50 ? $raw : (100 - $raw);
+        }
+
+        if (is_array($axis)) {
+            if (isset($axis['pct'])) {
+                return (int) $axis['pct'];
+            }
+            if (isset($axis['percent'])) {
+                return (int) $axis['percent'];
+            }
+
+            if ((isset($axis['A']) || isset($axis['T']))) {
+                $a = (int) ($axis['A'] ?? 0);
+                $t = (int) ($axis['T'] ?? 0);
+
+                return max($a, $t);
+            }
+        }
+
+        return null;
+    }
+
+    private function pickDelta($axis): ?int
+    {
+        // ✅ delta 用 0..50
+        $pct = $this->pickPct($axis);
+        if ($pct !== null) {
+            return abs($pct - 50);
+        }
+
+        return null;
+    }
 
     // ===== package loaders =====
 
@@ -172,17 +195,25 @@ private function pickDelta($axis): ?int
     {
         static $cache = [];
 
-        $key = $contentPackageVersion . '|' . $filename . '|RAW';
-        if (isset($cache[$key])) return $cache[$key];
+        $key = $contentPackageVersion.'|'.$filename.'|RAW';
+        if (isset($cache[$key])) {
+            return $cache[$key];
+        }
 
         $path = $this->resolvePackageFile($contentPackageVersion, $filename);
-        if ($path === null) return $cache[$key] = [];
+        if ($path === null) {
+            return $cache[$key] = [];
+        }
 
         $raw = @file_get_contents($path);
-        if ($raw === false || trim($raw) === '') return $cache[$key] = [];
+        if ($raw === false || trim($raw) === '') {
+            return $cache[$key] = [];
+        }
 
         $json = json_decode($raw, true);
-        if (!is_array($json)) return $cache[$key] = [];
+        if (! is_array($json)) {
+            return $cache[$key] = [];
+        }
 
         return $cache[$key] = $json;
     }
@@ -191,21 +222,27 @@ private function pickDelta($axis): ?int
     {
         static $cache = [];
 
-        $key = $contentPackageVersion . '|' . $filename . '|ITEMS';
-        if (isset($cache[$key])) return $cache[$key];
+        $key = $contentPackageVersion.'|'.$filename.'|ITEMS';
+        if (isset($cache[$key])) {
+            return $cache[$key];
+        }
 
         $json = $this->loadReportAssetJson($contentPackageVersion, $filename);
-        if (!is_array($json) || empty($json)) return $cache[$key] = [];
+        if (! is_array($json) || empty($json)) {
+            return $cache[$key] = [];
+        }
 
         $items = $json['items'] ?? $json;
-        if (!is_array($items)) return $cache[$key] = [];
+        if (! is_array($items)) {
+            return $cache[$key] = [];
+        }
 
         return $cache[$key] = $items;
     }
 
     private function resolvePackageFile(string $contentPackageVersion, string $filename): ?string
     {
-        $pkg = trim($contentPackageVersion, "/\\");
+        $pkg = trim($contentPackageVersion, '/\\');
 
         $envRoot = \App\Support\RuntimeConfig::value('FAP_CONTENT_PACKAGES_DIR');
         $envRoot = is_string($envRoot) && $envRoot !== '' ? rtrim($envRoot, '/') : null;
@@ -218,8 +255,11 @@ private function pickDelta($axis): ?int
         ]));
 
         foreach ($candidates as $p) {
-            if (is_string($p) && $p !== '' && file_exists($p)) return $p;
+            if (is_string($p) && $p !== '' && file_exists($p)) {
+                return $p;
+            }
         }
+
         return null;
     }
 }

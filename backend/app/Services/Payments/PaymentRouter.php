@@ -83,5 +83,4 @@ final class PaymentRouter
 
         return $default !== '' ? $default : 'CN_MAINLAND';
     }
-
 }

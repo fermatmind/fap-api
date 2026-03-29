@@ -3,14 +3,13 @@
 namespace App\Services\Agent\Notifiers;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 final class InAppNotifier
 {
     public function send(int $userId, array $payload): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('agent_messages')) {
+        if (! \App\Support\SchemaBaseline::hasTable('agent_messages')) {
             return ['ok' => false, 'error' => 'agent_messages_missing'];
         }
 

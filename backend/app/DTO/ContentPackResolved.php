@@ -7,9 +7,9 @@ namespace App\DTO;
 final class ContentPackResolved
 {
     /**
-     * @param array<string,mixed> $manifest
-     * @param array<int,array<string,mixed>> $fallbackChain
-     * @param array<string,callable> $loaders
+     * @param  array<string,mixed>  $manifest
+     * @param  array<int,array<string,mixed>>  $fallbackChain
+     * @param  array<string,callable>  $loaders
      */
     public function __construct(
         public ContentPack $pack,
@@ -17,6 +17,5 @@ final class ContentPackResolved
         public array $manifest,
         public array $fallbackChain,
         public array $loaders,
-    ) {
-    }
+    ) {}
 }

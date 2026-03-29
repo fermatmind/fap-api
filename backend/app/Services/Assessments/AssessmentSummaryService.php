@@ -91,6 +91,7 @@ class AssessmentSummaryService
         }
 
         $row = $this->registry->getByCode($code, (int) $assessment->org_id);
+
         return strtoupper(trim((string) ($row['driver_type'] ?? '')));
     }
 
@@ -161,7 +162,7 @@ class AssessmentSummaryService
                 $decoded = json_decode($scores, true);
                 $scores = is_array($decoded) ? $decoded : null;
             }
-            if (!is_array($scores)) {
+            if (! is_array($scores)) {
                 $payload = $row->result_json;
                 if (is_string($payload)) {
                     $decoded = json_decode($payload, true);
@@ -203,21 +204,21 @@ class AssessmentSummaryService
                 $decoded = json_decode($payload, true);
                 $payload = is_array($decoded) ? $decoded : null;
             }
-            if (!is_array($payload)) {
+            if (! is_array($payload)) {
                 continue;
             }
 
             $dimensions = $payload['breakdown_json']['dimensions'] ?? [];
-            if (!is_array($dimensions)) {
+            if (! is_array($dimensions)) {
                 continue;
             }
 
             foreach ($dimensions as $dim => $info) {
-                if (!is_array($info)) {
+                if (! is_array($info)) {
                     continue;
                 }
                 $val = $info['score'] ?? null;
-                if (!is_numeric($val)) {
+                if (! is_numeric($val)) {
                     continue;
                 }
                 $sum[$dim] = ($sum[$dim] ?? 0) + (float) $val;

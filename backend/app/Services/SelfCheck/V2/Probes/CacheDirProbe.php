@@ -33,7 +33,7 @@ final class CacheDirProbe implements ProbeInterface
             $probeErr = '';
 
             if ($writable) {
-                $probeFile = rtrim($path, '/') . '/.__healthz_probe';
+                $probeFile = rtrim($path, '/').'/.__healthz_probe';
                 try {
                     @file_put_contents($probeFile, (string) time());
                     @unlink($probeFile);
@@ -44,7 +44,7 @@ final class CacheDirProbe implements ProbeInterface
             }
 
             $ok = $exists && $writable && $probeOk;
-            if (!$ok) {
+            if (! $ok) {
                 $allOk = false;
             }
 

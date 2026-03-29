@@ -82,7 +82,6 @@ final class WorkspaceSurfaceContractService
     }
 
     /**
-     * @param  mixed  $values
      * @return array<int,string>
      */
     private function normalizeStringList(mixed $values): array

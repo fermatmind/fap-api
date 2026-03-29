@@ -7,8 +7,11 @@ namespace App\Services\InsightGraph;
 final class PrivateRelationshipJourneyContractService
 {
     private const JOURNEY_VERSION = 'private_relationship_journey.v1';
+
     private const JOURNEY_FINGERPRINT_VERSION = 'private_relationship_journey.fp.v1';
+
     private const PULSE_VERSION = 'dyadic_pulse_check.v1';
+
     private const JOURNEY_SCOPE = 'private_relationship_revisit';
 
     /**

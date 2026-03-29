@@ -2,10 +2,10 @@
 
 namespace App\Internal\Content;
 
-use App\Support\CacheKeys;
-use App\Services\Report\ReportContentNormalizer;
-use App\Services\Report\ReportAccess;
 use App\Services\Content\ContentPack;
+use App\Services\Report\ReportAccess;
+use App\Services\Report\ReportContentNormalizer;
+use App\Support\CacheKeys;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
@@ -18,14 +18,17 @@ final class ContentStoreV2Core
 
     // 旧兼容（如果你还需要从 ctx loader 兜底，可用）
     private array $ctx;
+
     private string $legacyDir;
 
     // =========================
     // ✅ In-memory caches (per ContentStore instance)
     // key = kind|pack_id|locale|version
     // =========================
-    private array $cacheHighlightPools  = [];
-    private array $cacheHighlightRules  = [];
+    private array $cacheHighlightPools = [];
+
+    private array $cacheHighlightRules = [];
+
     private array $cacheHighlightPolicy = [];
 
     public function __construct(array $chain, array $ctx = [], string $legacyDir = '')
@@ -55,7 +58,7 @@ final class ContentStoreV2Core
 
     private function logHotCache(string $kind, string $key, bool $hit): void
     {
-        if (!$this->shouldLogHotCache()) {
+        if (! $this->shouldLogHotCache()) {
             return;
         }
 
@@ -71,13 +74,13 @@ final class ContentStoreV2Core
 
         $root = (string) config('content_packs.root', '');
         $root = rtrim(str_replace(DIRECTORY_SEPARATOR, '/', $root), '/');
-        if ($root !== '' && str_starts_with($basePath, $root . '/')) {
+        if ($root !== '' && str_starts_with($basePath, $root.'/')) {
             return substr($basePath, strlen($root) + 1);
         }
 
         $cacheDir = (string) config('content_packs.cache_dir', '');
         $cacheDir = rtrim(str_replace(DIRECTORY_SEPARATOR, '/', $cacheDir), '/');
-        if ($cacheDir !== '' && str_starts_with($basePath, $cacheDir . '/')) {
+        if ($cacheDir !== '' && str_starts_with($basePath, $cacheDir.'/')) {
             return substr($basePath, strlen($cacheDir) + 1);
         }
 
@@ -87,7 +90,7 @@ final class ContentStoreV2Core
     private function isHotJsonAsset(string $relPath): bool
     {
         $relPath = str_replace(DIRECTORY_SEPARATOR, '/', $relPath);
-        if (!str_ends_with($relPath, '.json')) {
+        if (! str_ends_with($relPath, '.json')) {
             return false;
         }
 
@@ -144,6 +147,7 @@ final class ContentStoreV2Core
 
             if (is_array($cached)) {
                 $this->logHotCache('asset', $cacheKey, true);
+
                 return $cached;
             }
         }
@@ -154,7 +158,7 @@ final class ContentStoreV2Core
         }
 
         $json = json_decode((string) $raw, true);
-        if (!is_array($json)) {
+        if (! is_array($json)) {
             return null;
         }
 
@@ -190,6 +194,7 @@ final class ContentStoreV2Core
     public function loadCards(string $section): array
     {
         $doc = $this->loadCardsDoc($section);
+
         return is_array($doc['items'] ?? null) ? $doc['items'] : [];
     }
 
@@ -217,7 +222,7 @@ final class ContentStoreV2Core
         $doc = $this->loadJsonByBasenamePreferAssetKey('cards', $basename);
         $this->lightSchemaCheck($doc, $basename);
 
-         // ✅ 统一标准化（与 fallback cards 复用同一逻辑）
+        // ✅ 统一标准化（与 fallback cards 复用同一逻辑）
         return $this->normalizeCardsDocFromRawDoc($doc, $basename, $section);
     }
 
@@ -226,96 +231,107 @@ final class ContentStoreV2Core
     // =========================
 
     /**
- * ✅ section policies doc：
- * 文件名固定：report_section_policies.json
- *
- * 为了和 ReportComposer/Assembler 对齐，这里统一返回：
- * [
- *   'schema' => ...,
- *   'items'  => [ 'traits'=>[...], 'career'=>[...], ... ]   // ✅ 注意是 items，不是 sections
- * ]
- *
- * 兼容两种文件结构：
- * A) { "sections": { ... } }
- * B) { "items": { ... } }
- */
-public function loadSectionPolicies(): array
-{
-    $compiled = $this->loadCompiledSectionsSpec();
-    if (is_array($compiled)) {
-        $doc = $compiled;
-    } else {
-    $basename = 'report_section_policies.json';
+     * ✅ section policies doc：
+     * 文件名固定：report_section_policies.json
+     *
+     * 为了和 ReportComposer/Assembler 对齐，这里统一返回：
+     * [
+     *   'schema' => ...,
+     *   'items'  => [ 'traits'=>[...], 'career'=>[...], ... ]   // ✅ 注意是 items，不是 sections
+     * ]
+     *
+     * 兼容两种文件结构：
+     * A) { "sections": { ... } }
+     * B) { "items": { ... } }
+     */
+    public function loadSectionPolicies(): array
+    {
+        $compiled = $this->loadCompiledSectionsSpec();
+        if (is_array($compiled)) {
+            $doc = $compiled;
+        } else {
+            $basename = 'report_section_policies.json';
 
-    // 优先用 policies 这个 assetKey；找不到会自动走 scan-any-asset + legacy ctx（取决于 env 开关）
-        $doc = $this->loadJsonByBasenamePreferAssetKey('policies', $basename);
-        $this->lightSchemaCheck($doc, $basename);
-    }
-
-    // 兼容：sections / items
-    $sections = $doc['sections'] ?? ($doc['items'] ?? null);
-    if (!is_array($sections)) $sections = [];
-
-    $out = [];
-    foreach ($sections as $sec => $pol) {
-        if (!is_string($sec) || trim($sec) === '') continue;
-        if (!is_array($pol)) $pol = [];
-
-        $min = isset($pol['min_cards']) && is_numeric($pol['min_cards']) ? (int)$pol['min_cards'] : 2;
-        $min = max(1, $min);
-
-        $target = isset($pol['target_cards']) && is_numeric($pol['target_cards']) ? (int)$pol['target_cards'] : $min;
-        if ($target < $min) $target = $min;
-
-        $max = isset($pol['max_cards']) && is_numeric($pol['max_cards']) ? (int)$pol['max_cards'] : max($target, $min);
-        if ($max < $target) $max = $target;
-
-        // ✅ 可选字段：allow_fallback（默认 true）
-        $allowFallback = $pol['allow_fallback'] ?? true;
-        $allowFallback = is_bool($allowFallback) ? $allowFallback : (bool)$allowFallback;
-
-        $fallbackFile = $pol['fallback_file'] ?? null;
-        $fallbackFile = is_string($fallbackFile) ? trim($fallbackFile) : '';
-        if ($fallbackFile === '') {
-            $fallbackFile = "report_cards_fallback_{$sec}.json";
+            // 优先用 policies 这个 assetKey；找不到会自动走 scan-any-asset + legacy ctx（取决于 env 开关）
+            $doc = $this->loadJsonByBasenamePreferAssetKey('policies', $basename);
+            $this->lightSchemaCheck($doc, $basename);
         }
 
-        $out[$sec] = [
-            'min_cards'     => $min,
-            'target_cards'  => $target,
-            'max_cards'     => $max,
-            'allow_fallback'=> $allowFallback,
-            'fallback_file' => $fallbackFile,
+        // 兼容：sections / items
+        $sections = $doc['sections'] ?? ($doc['items'] ?? null);
+        if (! is_array($sections)) {
+            $sections = [];
+        }
+
+        $out = [];
+        foreach ($sections as $sec => $pol) {
+            if (! is_string($sec) || trim($sec) === '') {
+                continue;
+            }
+            if (! is_array($pol)) {
+                $pol = [];
+            }
+
+            $min = isset($pol['min_cards']) && is_numeric($pol['min_cards']) ? (int) $pol['min_cards'] : 2;
+            $min = max(1, $min);
+
+            $target = isset($pol['target_cards']) && is_numeric($pol['target_cards']) ? (int) $pol['target_cards'] : $min;
+            if ($target < $min) {
+                $target = $min;
+            }
+
+            $max = isset($pol['max_cards']) && is_numeric($pol['max_cards']) ? (int) $pol['max_cards'] : max($target, $min);
+            if ($max < $target) {
+                $max = $target;
+            }
+
+            // ✅ 可选字段：allow_fallback（默认 true）
+            $allowFallback = $pol['allow_fallback'] ?? true;
+            $allowFallback = is_bool($allowFallback) ? $allowFallback : (bool) $allowFallback;
+
+            $fallbackFile = $pol['fallback_file'] ?? null;
+            $fallbackFile = is_string($fallbackFile) ? trim($fallbackFile) : '';
+            if ($fallbackFile === '') {
+                $fallbackFile = "report_cards_fallback_{$sec}.json";
+            }
+
+            $out[$sec] = [
+                'min_cards' => $min,
+                'target_cards' => $target,
+                'max_cards' => $max,
+                'allow_fallback' => $allowFallback,
+                'fallback_file' => $fallbackFile,
+            ];
+        }
+
+        return [
+            'schema' => is_string($doc['schema'] ?? null) ? (string) $doc['schema'] : null,
+            'items' => $out, // ✅ 关键：统一成 items
         ];
     }
 
-    return [
-        'schema' => is_string($doc['schema'] ?? null) ? (string)$doc['schema'] : null,
-        'items'  => $out, // ✅ 关键：统一成 items
-    ];
-}
+    /**
+     * ✅ fallback cards（按 section 加载）
+     * - 优先 policies.items[section].fallback_file
+     * - 否则退化 report_cards_fallback_{section}.json
+     * - 返回：标准化后的 items(list)
+     */
+    public function loadFallbackCards(string $section): array
+    {
+        $polDoc = $this->loadSectionPolicies();
+        $policies = is_array($polDoc['items'] ?? null) ? $polDoc['items'] : [];
 
-/**
- * ✅ fallback cards（按 section 加载）
- * - 优先 policies.items[section].fallback_file
- * - 否则退化 report_cards_fallback_{section}.json
- * - 返回：标准化后的 items(list)
- */
-public function loadFallbackCards(string $section): array
-{
-    $polDoc = $this->loadSectionPolicies();
-    $policies = is_array($polDoc['items'] ?? null) ? $polDoc['items'] : [];
+        $fallbackFile = $policies[$section]['fallback_file'] ?? "report_cards_fallback_{$section}.json";
+        $basename = basename((string) $fallbackFile);
 
-    $fallbackFile = $policies[$section]['fallback_file'] ?? "report_cards_fallback_{$section}.json";
-    $basename = basename((string)$fallbackFile);
+        // 优先用 fallback_cards 这个 assetKey；找不到会 scan-any-asset + legacy ctx（取决于 env 开关）
+        $doc = $this->loadJsonByBasenamePreferAssetKey('fallback_cards', $basename);
+        $this->lightSchemaCheck($doc, $basename);
 
-    // 优先用 fallback_cards 这个 assetKey；找不到会 scan-any-asset + legacy ctx（取决于 env 开关）
-    $doc = $this->loadJsonByBasenamePreferAssetKey('fallback_cards', $basename);
-    $this->lightSchemaCheck($doc, $basename);
+        $norm = $this->normalizeCardsDocFromRawDoc($doc, $basename, $section);
 
-    $norm = $this->normalizeCardsDocFromRawDoc($doc, $basename, $section);
-    return is_array($norm['items'] ?? null) ? $norm['items'] : [];
-}
+        return is_array($norm['items'] ?? null) ? $norm['items'] : [];
+    }
 
     // =========================
     // ✅ New: Highlights Strategy loaders (pools/rules/policy)
@@ -351,6 +367,7 @@ public function loadFallbackCards(string $section): array
         $norm = $this->normalizeHighlightPoolsDoc($doc);
 
         $this->cacheHighlightPools[$ck] = $norm;
+
         return $norm;
     }
 
@@ -384,6 +401,7 @@ public function loadFallbackCards(string $section): array
         $norm = $this->normalizeHighlightRulesDoc($doc);
 
         $this->cacheHighlightRules[$ck] = $norm;
+
         return $norm;
     }
 
@@ -417,37 +435,44 @@ public function loadFallbackCards(string $section): array
         $norm = $this->normalizeHighlightPolicyDoc($doc);
 
         $this->cacheHighlightPolicy[$ck] = $norm;
+
         return $norm;
     }
 
-public function loadSelectRules(): array
-{
-    $compiledRules = $this->loadCompiledRulesDoc();
-    if (is_array($compiledRules)) {
-        $rules = $compiledRules['rules'] ?? $compiledRules;
-        return is_array($rules) ? $rules : [];
-    }
+    public function loadSelectRules(): array
+    {
+        $compiledRules = $this->loadCompiledRulesDoc();
+        if (is_array($compiledRules)) {
+            $rules = $compiledRules['rules'] ?? $compiledRules;
 
-    // 规则文件名固定
-    $filename = 'report_select_rules.json';
-
-    // pack chain：primary -> fallback，找到第一个存在的就用
-    foreach ($this->chain as $pack) {
-        if (!($pack instanceof ContentPack)) continue;
-
-        $path = rtrim($pack->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $filename;
-        if (is_string($path) && $path !== '' && is_file($path)) {
-            $json = $this->readJsonFromPath($pack, $filename, $path);
-            if (!is_array($json)) return [];
-
-            // 支持两种结构：{"rules":[...]} 或 直接就是 [...]
-            $rules = $json['rules'] ?? $json;
             return is_array($rules) ? $rules : [];
         }
-    }
 
-    return [];
-}
+        // 规则文件名固定
+        $filename = 'report_select_rules.json';
+
+        // pack chain：primary -> fallback，找到第一个存在的就用
+        foreach ($this->chain as $pack) {
+            if (! ($pack instanceof ContentPack)) {
+                continue;
+            }
+
+            $path = rtrim($pack->basePath(), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$filename;
+            if (is_string($path) && $path !== '' && is_file($path)) {
+                $json = $this->readJsonFromPath($pack, $filename, $path);
+                if (! is_array($json)) {
+                    return [];
+                }
+
+                // 支持两种结构：{"rules":[...]} 或 直接就是 [...]
+                $rules = $json['rules'] ?? $json;
+
+                return is_array($rules) ? $rules : [];
+            }
+        }
+
+        return [];
+    }
 
     /** highlights templates doc（给 HighlightBuilder 用） */
     public function loadHighlights(): array
@@ -472,7 +497,9 @@ public function loadSelectRules(): array
             throw new \RuntimeException('STORE_READS_MISSING: report_recommended_reads.json not found');
         }
 
-        if (!is_array($doc['items'] ?? null)) $doc['items'] = [];
+        if (! is_array($doc['items'] ?? null)) {
+            $doc['items'] = [];
+        }
 
         // buckets 缺省补齐（避免业务侧各种 isset）
         $doc['items']['by_type'] = is_array($doc['items']['by_type'] ?? null) ? $doc['items']['by_type'] : [];
@@ -498,97 +525,112 @@ public function loadSelectRules(): array
         return $doc;
     }
 
-/**
- * ✅ report_overrides.json（统一覆写器入口用）
- * - 必须走当前 pack chain（含 fallback chain）
- * - 与 self-check/manifest.assets 对齐（固定 basename：report_overrides.json）
- * - 若不存在：返回空规则（不抛错，避免影响线上）
- *
- * 返回固定结构：
- * [
- *   'schema' => 'fap.report.overrides.v1',
- *   'rules' => [...],
- *   '__src_chain' => [...],
- * ]
- */
-public function loadReportOverrides(): array
-{
-    $basename = 'report_overrides.json';
+    /**
+     * ✅ report_overrides.json（统一覆写器入口用）
+     * - 必须走当前 pack chain（含 fallback chain）
+     * - 与 self-check/manifest.assets 对齐（固定 basename：report_overrides.json）
+     * - 若不存在：返回空规则（不抛错，避免影响线上）
+     *
+     * 返回固定结构：
+     * [
+     *   'schema' => 'fap.report.overrides.v1',
+     *   'rules' => [...],
+     *   '__src_chain' => [...],
+     * ]
+     */
+    public function loadReportOverrides(): array
+    {
+        $basename = 'report_overrides.json';
 
-    // ✅ 复用 overrides 的“按 chain + order bucket”加载（能保留 __src / rule.__src）
-    $docs = $this->loadOverridesDocsOrderedFromChain();
+        // ✅ 复用 overrides 的“按 chain + order bucket”加载（能保留 __src / rule.__src）
+        $docs = $this->loadOverridesDocsOrderedFromChain();
 
-    // 只取 basename = report_overrides.json 的 doc（manifest.assets 一致）
-    $picked = [];
-    foreach ($docs as $d) {
-        if (!is_array($d)) continue;
+        // 只取 basename = report_overrides.json 的 doc（manifest.assets 一致）
+        $picked = [];
+        foreach ($docs as $d) {
+            if (! is_array($d)) {
+                continue;
+            }
 
-        $src = $d['__src'] ?? null;
-        $file = is_array($src) ? (string)($src['file'] ?? '') : '';
-        if ($file !== '' && basename($file) === $basename) {
-            $picked[] = $d;
-            continue;
-        }
+            $src = $d['__src'] ?? null;
+            $file = is_array($src) ? (string) ($src['file'] ?? '') : '';
+            if ($file !== '' && basename($file) === $basename) {
+                $picked[] = $d;
 
-        // 兜底：有些 doc 可能没 __src.file，但 rules 里有 __src.file
-        $rs = $d['rules'] ?? ($d['overrides'] ?? null);
-        if (is_array($rs)) {
-            foreach ($rs as $r) {
-                if (!is_array($r)) continue;
-                $rsrc = $r['__src'] ?? null;
-                $rfile = is_array($rsrc) ? (string)($rsrc['file'] ?? '') : '';
-                if ($rfile !== '' && basename($rfile) === $basename) {
-                    $picked[] = $d;
-                    break;
+                continue;
+            }
+
+            // 兜底：有些 doc 可能没 __src.file，但 rules 里有 __src.file
+            $rs = $d['rules'] ?? ($d['overrides'] ?? null);
+            if (is_array($rs)) {
+                foreach ($rs as $r) {
+                    if (! is_array($r)) {
+                        continue;
+                    }
+                    $rsrc = $r['__src'] ?? null;
+                    $rfile = is_array($rsrc) ? (string) ($rsrc['file'] ?? '') : '';
+                    if ($rfile !== '' && basename($rfile) === $basename) {
+                        $picked[] = $d;
+                        break;
+                    }
                 }
             }
         }
-    }
 
-    // ✅ 不存在：返回空规则（不抛错）
-    if (empty($picked)) {
-        return [
+        // ✅ 不存在：返回空规则（不抛错）
+        if (empty($picked)) {
+            return [
+                'schema' => 'fap.report.overrides.v1',
+                'rules' => [],
+                '__src_chain' => [],
+            ];
+        }
+
+        // 合并（沿用你 loadOverrides() 的 merge 口径，但只合并 report_overrides.json）
+        $merged = [
             'schema' => 'fap.report.overrides.v1',
             'rules' => [],
             '__src_chain' => [],
         ];
-    }
 
-    // 合并（沿用你 loadOverrides() 的 merge 口径，但只合并 report_overrides.json）
-    $merged = [
-        'schema' => 'fap.report.overrides.v1',
-        'rules' => [],
-        '__src_chain' => [],
-    ];
+        foreach ($picked as $d) {
+            if (! is_array($d)) {
+                continue;
+            }
 
-    foreach ($picked as $d) {
-        if (!is_array($d)) continue;
+            // 归一化：overrides -> rules
+            if (! is_array($d['rules'] ?? null) && is_array($d['overrides'] ?? null)) {
+                $d['rules'] = $d['overrides'];
+            }
 
-        // 归一化：overrides -> rules
-        if (!is_array($d['rules'] ?? null) && is_array($d['overrides'] ?? null)) {
-            $d['rules'] = $d['overrides'];
-        }
+            if (is_array($d['rules'] ?? null)) {
+                foreach ($d['rules'] as $r) {
+                    if (! is_array($r)) {
+                        continue;
+                    }
 
-        if (is_array($d['rules'] ?? null)) {
-            foreach ($d['rules'] as $r) {
-                if (!is_array($r)) continue;
+                    // defaults
+                    if (! isset($r['tags']) || ! is_array($r['tags'])) {
+                        $r['tags'] = [];
+                    }
+                    if (! isset($r['priority']) || ! is_numeric($r['priority'])) {
+                        $r['priority'] = 0;
+                    }
+                    if (! isset($r['rules']) || ! is_array($r['rules'])) {
+                        $r['rules'] = [];
+                    } // 某些 target 用得到
 
-                // defaults
-                if (!isset($r['tags']) || !is_array($r['tags'])) $r['tags'] = [];
-                if (!isset($r['priority']) || !is_numeric($r['priority'])) $r['priority'] = 0;
-                if (!isset($r['rules']) || !is_array($r['rules'])) $r['rules'] = []; // 某些 target 用得到
+                    $merged['rules'][] = $r;
+                }
+            }
 
-                $merged['rules'][] = $r;
+            if (is_array($d['__src'] ?? null)) {
+                $merged['__src_chain'][] = $d['__src'];
             }
         }
 
-        if (is_array($d['__src'] ?? null)) {
-            $merged['__src_chain'][] = $d['__src'];
-        }
+        return $merged;
     }
-
-    return $merged;
-}
 
     /** overrides（返回合并后的统一 doc：{schema,rules,__src_chain}，并补默认字段） */
     public function loadOverrides(): ?array
@@ -599,6 +641,7 @@ public function loadReportOverrides(): array
             if ((bool) config('fap.content.forbid_missing_overrides', false)) {
                 throw new \RuntimeException('STORE_OVERRIDES_MISSING: no overrides docs loaded');
             }
+
             return null;
         }
 
@@ -609,15 +652,25 @@ public function loadReportOverrides(): array
         ];
 
         foreach ($docs as $d) {
-            if (!is_array($d)) continue;
+            if (! is_array($d)) {
+                continue;
+            }
 
             if (is_array($d['rules'] ?? null)) {
                 foreach ($d['rules'] as $r) {
-                    if (!is_array($r)) continue;
+                    if (! is_array($r)) {
+                        continue;
+                    }
                     // defaults
-                    if (!isset($r['tags']) || !is_array($r['tags'])) $r['tags'] = [];
-                    if (!isset($r['priority']) || !is_numeric($r['priority'])) $r['priority'] = 0;
-                    if (!isset($r['rules']) || !is_array($r['rules'])) $r['rules'] = []; // 某些 target 用得到
+                    if (! isset($r['tags']) || ! is_array($r['tags'])) {
+                        $r['tags'] = [];
+                    }
+                    if (! isset($r['priority']) || ! is_numeric($r['priority'])) {
+                        $r['priority'] = 0;
+                    }
+                    if (! isset($r['rules']) || ! is_array($r['rules'])) {
+                        $r['rules'] = [];
+                    } // 某些 target 用得到
                     $merged['rules'][] = $r;
                 }
             }
@@ -636,28 +689,42 @@ public function loadReportOverrides(): array
     public function overridesOrderBuckets(): array
     {
         foreach ($this->chain as $p) {
-            if (!$p instanceof ContentPack) continue;
+            if (! $p instanceof ContentPack) {
+                continue;
+            }
             $ov = $p->assets()['overrides'] ?? null;
-            if (!is_array($ov) || $ov === []) continue;
+            if (! is_array($ov) || $ov === []) {
+                continue;
+            }
 
             // list: 默认 unified
-            if ($this->isListArray($ov)) return ['unified'];
+            if ($this->isListArray($ov)) {
+                return ['unified'];
+            }
 
             $order = $ov['order'] ?? null;
             if (is_array($order) && $order !== []) {
                 $out = [];
                 foreach ($order as $x) {
-                    if (is_string($x) && trim($x) !== '') $out[] = $x;
+                    if (is_string($x) && trim($x) !== '') {
+                        $out[] = $x;
+                    }
                 }
+
                 return $out ?: ['highlights_legacy', 'unified'];
             }
 
             // no order -> keys except order
             $out = [];
             foreach ($ov as $k => $_) {
-                if ($k === 'order') continue;
-                if (is_string($k) && trim($k) !== '') $out[] = $k;
+                if ($k === 'order') {
+                    continue;
+                }
+                if (is_string($k) && trim($k) !== '') {
+                    $out[] = $k;
+                }
             }
+
             return $out ?: ['highlights_legacy', 'unified'];
         }
 
@@ -676,14 +743,16 @@ public function loadReportOverrides(): array
     private function makePackCacheKey(string $kind): string
     {
         $packId = 'unknown_pack';
-        $ver    = 'unknown_ver';
+        $ver = 'unknown_ver';
         $locale = 'unknown_locale';
 
         foreach ($this->chain as $p) {
-            if (!$p instanceof ContentPack) continue;
+            if (! $p instanceof ContentPack) {
+                continue;
+            }
 
             $packId = is_string($p->packId()) ? $p->packId() : $packId;
-            $ver    = is_string($p->version()) ? $p->version() : $ver;
+            $ver = is_string($p->version()) ? $p->version() : $ver;
 
             // 尽量从 pack 上拿 locale（不强依赖方法存在）
             if (method_exists($p, 'locale')) {
@@ -700,7 +769,7 @@ public function loadReportOverrides(): array
             break; // primary pack only
         }
 
-        return $kind . '|' . $packId . '|' . $locale . '|' . $ver;
+        return $kind.'|'.$packId.'|'.$locale.'|'.$ver;
     }
 
     private function normalizeHighlightPoolsDoc(array $doc): array
@@ -709,36 +778,47 @@ public function loadReportOverrides(): array
         $raw = $doc['items'] ?? ($doc['pools'] ?? null);
 
         $out = [
-            'schema' => is_string($doc['schema'] ?? null) ? (string)$doc['schema'] : null,
-            'items'  => [
+            'schema' => is_string($doc['schema'] ?? null) ? (string) $doc['schema'] : null,
+            'items' => [
                 'strength' => [],
                 'blindspot' => [],
                 'action' => [],
             ],
         ];
 
-        if (!is_array($raw)) return $out;
+        if (! is_array($raw)) {
+            return $out;
+        }
 
         // 结构 A：{strength:[...], blindspot:[...], action:[...]}
-        if (!$this->isListArray($raw)) {
-            foreach (['strength','blindspot','action'] as $pool) {
+        if (! $this->isListArray($raw)) {
+            foreach (['strength', 'blindspot', 'action'] as $pool) {
                 $list = $raw[$pool] ?? [];
-                if (!is_array($list)) $list = [];
+                if (! is_array($list)) {
+                    $list = [];
+                }
                 $out['items'][$pool] = $this->normalizeHighlightTemplateList($list, $pool);
             }
+
             return $out;
         }
 
         // 结构 B：list[ {id,pool,title,body,tags,...}, ... ] -> regroup
         foreach ($raw as $it) {
-            if (!is_array($it)) continue;
+            if (! is_array($it)) {
+                continue;
+            }
 
             $pool = $it['pool'] ?? null;
             $pool = is_string($pool) ? trim($pool) : '';
-            if (!in_array($pool, ['strength','blindspot','action'], true)) continue;
+            if (! in_array($pool, ['strength', 'blindspot', 'action'], true)) {
+                continue;
+            }
 
             $norm = $this->normalizeHighlightTemplateItem($it, $pool);
-            if ($norm !== null) $out['items'][$pool][] = $norm;
+            if ($norm !== null) {
+                $out['items'][$pool][] = $norm;
+            }
         }
 
         return $out;
@@ -748,48 +828,60 @@ public function loadReportOverrides(): array
     {
         // 支持两种：{"rules":[...]} 或 直接 list
         $rules = $doc['rules'] ?? $doc;
-        if (!is_array($rules)) $rules = [];
+        if (! is_array($rules)) {
+            $rules = [];
+        }
 
         $out = [
-            'schema' => is_string($doc['schema'] ?? null) ? (string)$doc['schema'] : null,
-            'rules'  => [],
+            'schema' => is_string($doc['schema'] ?? null) ? (string) $doc['schema'] : null,
+            'rules' => [],
         ];
 
         foreach ($rules as $idx => $r) {
-            if (!is_array($r)) continue;
+            if (! is_array($r)) {
+                continue;
+            }
 
             $pool = $r['pool'] ?? null;
             $pool = is_string($pool) ? trim($pool) : '';
-            if (!in_array($pool, ['strength','blindspot','action'], true)) continue;
+            if (! in_array($pool, ['strength', 'blindspot', 'action'], true)) {
+                continue;
+            }
 
             $pick = $r['pick_ids'] ?? ($r['pick'] ?? null);
-            if (!is_array($pick)) $pick = [];
-            $pick = array_values(array_filter($pick, fn($x) => is_string($x) && trim($x) !== ''));
+            if (! is_array($pick)) {
+                $pick = [];
+            }
+            $pick = array_values(array_filter($pick, fn ($x) => is_string($x) && trim($x) !== ''));
 
-            if ($pick === []) continue;
+            if ($pick === []) {
+                continue;
+            }
 
             $explain = $r['explain'] ?? null;
             if (is_array($explain)) {
-                $explain = array_values(array_filter($explain, fn($x) => is_string($x) && trim($x) !== ''));
+                $explain = array_values(array_filter($explain, fn ($x) => is_string($x) && trim($x) !== ''));
                 $explain = $explain ?: null;
-            } elseif (!is_string($explain)) {
+            } elseif (! is_string($explain)) {
                 $explain = null;
             }
 
             // tags / priority 可选，沿用你现有 rules 风格
             $tags = $r['tags'] ?? [];
-            if (!is_array($tags)) $tags = [];
-            $tags = array_values(array_filter($tags, fn($x) => is_string($x) && trim($x) !== ''));
+            if (! is_array($tags)) {
+                $tags = [];
+            }
+            $tags = array_values(array_filter($tags, fn ($x) => is_string($x) && trim($x) !== ''));
 
             $priority = $r['priority'] ?? 0;
-            $priority = is_numeric($priority) ? (int)$priority : 0;
+            $priority = is_numeric($priority) ? (int) $priority : 0;
 
             $out['rules'][] = [
-                'pool'     => $pool,
+                'pool' => $pool,
                 'pick_ids' => $pick,
-                'tags'     => $tags,
+                'tags' => $tags,
                 'priority' => $priority,
-                'explain'  => $explain,
+                'explain' => $explain,
             ];
         }
 
@@ -800,15 +892,17 @@ public function loadReportOverrides(): array
     {
         // 兼容：items / policy / root map
         $items = $doc['items'] ?? ($doc['policy'] ?? null);
-        if (!is_array($items)) {
+        if (! is_array($items)) {
             // root map 直接当 items
             $items = $doc;
-            if (!is_array($items)) $items = [];
+            if (! is_array($items)) {
+                $items = [];
+            }
         }
 
         return [
-            'schema' => is_string($doc['schema'] ?? null) ? (string)$doc['schema'] : null,
-            'items'  => $items,
+            'schema' => is_string($doc['schema'] ?? null) ? (string) $doc['schema'] : null,
+            'items' => $items,
         ];
     }
 
@@ -816,10 +910,15 @@ public function loadReportOverrides(): array
     {
         $out = [];
         foreach ($list as $it) {
-            if (!is_array($it)) continue;
+            if (! is_array($it)) {
+                continue;
+            }
             $norm = $this->normalizeHighlightTemplateItem($it, $pool);
-            if ($norm !== null) $out[] = $norm;
+            if ($norm !== null) {
+                $out[] = $norm;
+            }
         }
+
         return $out;
     }
 
@@ -827,27 +926,33 @@ public function loadReportOverrides(): array
     {
         $id = $it['id'] ?? null;
         $id = is_string($id) ? trim($id) : '';
-        if ($id === '') return null;
+        if ($id === '') {
+            return null;
+        }
 
         $title = $it['title'] ?? '';
-        $title = is_string($title) ? (string)$title : '';
+        $title = is_string($title) ? (string) $title : '';
 
         $body = $it['body'] ?? ($it['desc'] ?? '');
-        $body = is_string($body) ? (string)$body : '';
+        $body = is_string($body) ? (string) $body : '';
 
         $tags = $it['tags'] ?? [];
-        if (!is_array($tags)) $tags = [];
-        $tags = array_values(array_filter($tags, fn($x) => is_string($x) && trim($x) !== ''));
+        if (! is_array($tags)) {
+            $tags = [];
+        }
+        $tags = array_values(array_filter($tags, fn ($x) => is_string($x) && trim($x) !== ''));
 
         $constraints = $it['constraints'] ?? [];
-        if (!is_array($constraints)) $constraints = [];
+        if (! is_array($constraints)) {
+            $constraints = [];
+        }
 
         return [
-            'id'          => $id,
-            'pool'        => $pool,
-            'title'       => $title,
-            'body'        => $body,
-            'tags'        => $tags,
+            'id' => $id,
+            'pool' => $pool,
+            'title' => $title,
+            'body' => $body,
+            'tags' => $tags,
             'constraints' => $constraints,
         ];
     }
@@ -860,13 +965,16 @@ public function loadReportOverrides(): array
     {
         // items 兼容：items / cards
         $items = $doc['items'] ?? ($doc['cards'] ?? null);
-        if (!is_array($items)) $items = [];
+        if (! is_array($items)) {
+            $items = [];
+        }
 
         // ✅ 标准化 items（缺省补齐 + 类型稳定 + 默认 tips 注入）
         $normItems = [];
         foreach ($items as $idx => $it) {
-            if (!is_array($it)) {
+            if (! is_array($it)) {
                 Log::warning('[STORE][CARDS] item_not_array', ['file' => $basename, 'section' => $section, 'idx' => $idx]);
+
                 continue;
             }
 
@@ -874,15 +982,16 @@ public function loadReportOverrides(): array
             $id = is_string($id) ? trim($id) : '';
             if ($id === '') {
                 Log::warning('[STORE][CARDS] item_missing_id_skip', ['file' => $basename, 'section' => $section, 'idx' => $idx]);
+
                 continue;
             }
             $it['id'] = $id;
 
             // section
-            if (!isset($it['section']) || !is_string($it['section']) || trim($it['section']) === '') {
+            if (! isset($it['section']) || ! is_string($it['section']) || trim($it['section']) === '') {
                 $it['section'] = $section;
             } else {
-                $it['section'] = trim((string)$it['section']);
+                $it['section'] = trim((string) $it['section']);
             }
 
             $it['access_level'] = ReportAccess::normalizeCardAccessLevel(
@@ -896,39 +1005,51 @@ public function loadReportOverrides(): array
             $it['module_code'] = strtolower($moduleCode);
 
             // title/desc
-            $it['title'] = is_string($it['title'] ?? null) ? (string)$it['title'] : '';
-            $it['desc']  = is_string($it['desc'] ?? null)  ? (string)$it['desc']  : '';
+            $it['title'] = is_string($it['title'] ?? null) ? (string) $it['title'] : '';
+            $it['desc'] = is_string($it['desc'] ?? null) ? (string) $it['desc'] : '';
 
             // bullets: array[string]
-            if (!is_array($it['bullets'] ?? null)) $it['bullets'] = [];
+            if (! is_array($it['bullets'] ?? null)) {
+                $it['bullets'] = [];
+            }
             $it['bullets'] = array_values(array_filter(
                 $it['bullets'],
-                fn($x) => is_string($x) && trim($x) !== ''
+                fn ($x) => is_string($x) && trim($x) !== ''
             ));
 
             // tips: array[string]
-            if (!is_array($it['tips'] ?? null)) $it['tips'] = [];
+            if (! is_array($it['tips'] ?? null)) {
+                $it['tips'] = [];
+            }
             $it['tips'] = array_values(array_filter(
                 $it['tips'],
-                fn($x) => is_string($x) && trim($x) !== ''
+                fn ($x) => is_string($x) && trim($x) !== ''
             ));
 
             // tags: array[string]
-            if (!isset($it['tags']) || !is_array($it['tags'])) $it['tags'] = [];
+            if (! isset($it['tags']) || ! is_array($it['tags'])) {
+                $it['tags'] = [];
+            }
             $it['tags'] = array_values(array_filter(
                 $it['tags'],
-                fn($x) => is_string($x) && trim($x) !== ''
+                fn ($x) => is_string($x) && trim($x) !== ''
             ));
 
             // rules: array
-            if (!isset($it['rules']) || !is_array($it['rules'])) $it['rules'] = [];
+            if (! isset($it['rules']) || ! is_array($it['rules'])) {
+                $it['rules'] = [];
+            }
 
             // priority: int
-            if (!isset($it['priority']) || !is_numeric($it['priority'])) $it['priority'] = 0;
-            $it['priority'] = (int)$it['priority'];
+            if (! isset($it['priority']) || ! is_numeric($it['priority'])) {
+                $it['priority'] = 0;
+            }
+            $it['priority'] = (int) $it['priority'];
 
             // match：保证键存在（generator 会读取）
-            if (!array_key_exists('match', $it)) $it['match'] = null;
+            if (! array_key_exists('match', $it)) {
+                $it['match'] = null;
+            }
 
             // ✅ 默认 tips 注入点
             $it = ReportContentNormalizer::fillTipsIfMissing($it);
@@ -939,24 +1060,32 @@ public function loadReportOverrides(): array
         // ✅ rules 缺省补齐（fallback 文件一般也允许带 rules；没带就用默认）
         $rules = is_array($doc['rules'] ?? null) ? $doc['rules'] : [];
 
-        $min = isset($rules['min_cards']) && is_numeric($rules['min_cards']) ? (int)$rules['min_cards'] : 2;
+        $min = isset($rules['min_cards']) && is_numeric($rules['min_cards']) ? (int) $rules['min_cards'] : 2;
         $min = max(2, $min);
 
-        $target = isset($rules['target_cards']) && is_numeric($rules['target_cards']) ? (int)$rules['target_cards'] : 3;
-        if ($target < $min) $target = $min;
+        $target = isset($rules['target_cards']) && is_numeric($rules['target_cards']) ? (int) $rules['target_cards'] : 3;
+        if ($target < $min) {
+            $target = $min;
+        }
 
-        $max = isset($rules['max_cards']) && is_numeric($rules['max_cards']) ? (int)$rules['max_cards'] : 6;
-        if ($max < $target) $max = $target;
+        $max = isset($rules['max_cards']) && is_numeric($rules['max_cards']) ? (int) $rules['max_cards'] : 6;
+        if ($max < $target) {
+            $max = $target;
+        }
 
         $fallbackTags = $rules['fallback_tags'] ?? ['fallback', 'kind:core'];
-        if (!is_array($fallbackTags)) $fallbackTags = ['fallback', 'kind:core'];
-        $fallbackTags = array_values(array_filter($fallbackTags, fn($x) => is_string($x) && trim($x) !== ''));
-        if ($fallbackTags === []) $fallbackTags = ['fallback', 'kind:core'];
+        if (! is_array($fallbackTags)) {
+            $fallbackTags = ['fallback', 'kind:core'];
+        }
+        $fallbackTags = array_values(array_filter($fallbackTags, fn ($x) => is_string($x) && trim($x) !== ''));
+        if ($fallbackTags === []) {
+            $fallbackTags = ['fallback', 'kind:core'];
+        }
 
         $rules = [
-            'min_cards'     => $min,
-            'target_cards'  => $target,
-            'max_cards'     => $max,
+            'min_cards' => $min,
+            'target_cards' => $target,
+            'max_cards' => $max,
             'fallback_tags' => $fallbackTags,
         ];
 
@@ -969,18 +1098,18 @@ public function loadReportOverrides(): array
     private function loadCompiledCardsDoc(string $section): ?array
     {
         foreach ($this->chain as $pack) {
-            if (!($pack instanceof ContentPack)) {
+            if (! ($pack instanceof ContentPack)) {
                 continue;
             }
 
             $relPath = 'compiled/cards.normalized.json';
-            $abs = rtrim($pack->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $relPath;
-            if (!is_file($abs)) {
+            $abs = rtrim($pack->basePath(), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$relPath;
+            if (! is_file($abs)) {
                 continue;
             }
 
             $json = $this->readJsonFromPath($pack, $relPath, $abs);
-            if (!is_array($json)) {
+            if (! is_array($json)) {
                 continue;
             }
 
@@ -1012,18 +1141,18 @@ public function loadReportOverrides(): array
     private function loadCompiledRulesDoc(): ?array
     {
         foreach ($this->chain as $pack) {
-            if (!($pack instanceof ContentPack)) {
+            if (! ($pack instanceof ContentPack)) {
                 continue;
             }
 
             $relPath = 'compiled/rules.normalized.json';
-            $abs = rtrim($pack->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $relPath;
-            if (!is_file($abs)) {
+            $abs = rtrim($pack->basePath(), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$relPath;
+            if (! is_file($abs)) {
                 continue;
             }
 
             $json = $this->readJsonFromPath($pack, $relPath, $abs);
-            if (!is_array($json)) {
+            if (! is_array($json)) {
                 continue;
             }
 
@@ -1041,18 +1170,18 @@ public function loadReportOverrides(): array
     private function loadCompiledSectionsSpec(): ?array
     {
         foreach ($this->chain as $pack) {
-            if (!($pack instanceof ContentPack)) {
+            if (! ($pack instanceof ContentPack)) {
                 continue;
             }
 
             $relPath = 'compiled/sections.spec.json';
-            $abs = rtrim($pack->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $relPath;
-            if (!is_file($abs)) {
+            $abs = rtrim($pack->basePath(), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$relPath;
+            if (! is_file($abs)) {
                 continue;
             }
 
             $json = $this->readJsonFromPath($pack, $relPath, $abs);
-            if (!is_array($json)) {
+            if (! is_array($json)) {
                 continue;
             }
 
@@ -1071,7 +1200,9 @@ public function loadReportOverrides(): array
     {
         // 1) 优先：assetKey 下找 basename
         $doc = $this->loadJsonFromChainByAssetKeyAndBasename($assetKey, $basename);
-        if ($doc !== null) return $doc;
+        if ($doc !== null) {
+            return $doc;
+        }
 
         // 🔥 爆炸验证 1：禁止“扫描所有 assets”兜底
         if ($this->isRuntimeEnvFlagEnabled('FAP_FORBID_STORE_ASSET_SCAN')) {
@@ -1080,7 +1211,9 @@ public function loadReportOverrides(): array
 
         // 2) 次选：扫描所有 assets 找 basename（容错）
         $doc = $this->loadJsonFromChainByAnyAssetAndBasename($basename);
-        if ($doc !== null) return $doc;
+        if ($doc !== null) {
+            return $doc;
+        }
 
         // 🔥 爆炸验证 2：禁止 legacy ctx loader 兜底
         if (is_callable($this->ctx['loadReportAssetJson'] ?? null) && $this->legacyDir !== '') {
@@ -1089,14 +1222,19 @@ public function loadReportOverrides(): array
             }
 
             $raw = ($this->ctx['loadReportAssetJson'])($this->legacyDir, $basename);
-            if (is_object($raw)) $raw = json_decode(json_encode($raw, JSON_UNESCAPED_UNICODE), true);
+            if (is_object($raw)) {
+                $raw = json_decode(json_encode($raw, JSON_UNESCAPED_UNICODE), true);
+            }
             if (is_array($raw)) {
                 $doc = $raw['doc'] ?? $raw['data'] ?? $raw;
-                if (is_array($doc)) return $doc;
+                if (is_array($doc)) {
+                    return $doc;
+                }
             }
         }
 
         Log::warning('[STORE] json_not_found', ['asset' => $assetKey, 'file' => $basename]);
+
         return [];
     }
 
@@ -1122,21 +1260,31 @@ public function loadReportOverrides(): array
     private function loadJsonFromChainByAssetKeyAndBasename(string $assetKey, string $basename): ?array
     {
         foreach ($this->chain as $p) {
-            if (!$p instanceof ContentPack) continue;
+            if (! $p instanceof ContentPack) {
+                continue;
+            }
 
             $assets = $p->assets();
             $val = $assets[$assetKey] ?? null;
 
             $paths = $this->flattenAssetPaths($val);
             foreach ($paths as $rel) {
-                if (!is_string($rel) || trim($rel) === '') continue;
-                if (basename($rel) !== $basename) continue;
+                if (! is_string($rel) || trim($rel) === '') {
+                    continue;
+                }
+                if (basename($rel) !== $basename) {
+                    continue;
+                }
 
-                $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $rel;
-                if (!is_file($abs)) continue;
+                $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$rel;
+                if (! is_file($abs)) {
+                    continue;
+                }
 
                 $json = $this->readJsonFromPath($p, $rel, $abs);
-                if (!is_array($json)) continue;
+                if (! is_array($json)) {
+                    continue;
+                }
 
                 Log::info('[STORE] json_loaded', [
                     'asset' => $assetKey,
@@ -1149,25 +1297,36 @@ public function loadReportOverrides(): array
                 return $json;
             }
         }
+
         return null;
     }
 
     private function loadJsonFromChainByAnyAssetAndBasename(string $basename): ?array
     {
         foreach ($this->chain as $p) {
-            if (!$p instanceof ContentPack) continue;
+            if (! $p instanceof ContentPack) {
+                continue;
+            }
 
             foreach (($p->assets() ?? []) as $assetKey => $val) {
                 $paths = $this->flattenAssetPaths($val);
                 foreach ($paths as $rel) {
-                    if (!is_string($rel) || trim($rel) === '') continue;
-                    if (basename($rel) !== $basename) continue;
+                    if (! is_string($rel) || trim($rel) === '') {
+                        continue;
+                    }
+                    if (basename($rel) !== $basename) {
+                        continue;
+                    }
 
-                    $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $rel;
-                    if (!is_file($abs)) continue;
+                    $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$rel;
+                    if (! is_file($abs)) {
+                        continue;
+                    }
 
                     $json = $this->readJsonFromPath($p, $rel, $abs);
-                    if (!is_array($json)) continue;
+                    if (! is_array($json)) {
+                        continue;
+                    }
 
                     Log::info('[STORE] json_loaded_scan', [
                         'asset' => $assetKey,
@@ -1181,6 +1340,7 @@ public function loadReportOverrides(): array
                 }
             }
         }
+
         return null;
     }
 
@@ -1190,24 +1350,34 @@ public function loadReportOverrides(): array
         $idx = 0;
 
         foreach ($this->chain as $p) {
-            if (!$p instanceof ContentPack) continue;
+            if (! $p instanceof ContentPack) {
+                continue;
+            }
 
             $assetVal = $p->assets()['overrides'] ?? null;
-            if (!is_array($assetVal) || $assetVal === []) continue;
+            if (! is_array($assetVal) || $assetVal === []) {
+                continue;
+            }
 
             $orderedPaths = $this->getOverridesOrderedPaths($assetVal);
 
             foreach ($orderedPaths as $rel) {
-                if (!is_string($rel) || trim($rel) === '') continue;
+                if (! is_string($rel) || trim($rel) === '') {
+                    continue;
+                }
 
-                $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $rel;
-                if (!is_file($abs)) continue;
+                $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$rel;
+                if (! is_file($abs)) {
+                    continue;
+                }
 
                 $json = $this->readJsonFromPath($p, $rel, $abs);
-                if (!is_array($json)) continue;
+                if (! is_array($json)) {
+                    continue;
+                }
 
                 // 归一化：overrides -> rules
-                if (!is_array($json['rules'] ?? null) && is_array($json['overrides'] ?? null)) {
+                if (! is_array($json['rules'] ?? null) && is_array($json['overrides'] ?? null)) {
                     $json['rules'] = $json['overrides'];
                 }
 
@@ -1223,10 +1393,16 @@ public function loadReportOverrides(): array
 
                 if (is_array($json['rules'] ?? null)) {
                     foreach ($json['rules'] as &$r) {
-                        if (is_array($r)) $r['__src'] = $src;
                         if (is_array($r)) {
-                            if (!isset($r['tags']) || !is_array($r['tags'])) $r['tags'] = [];
-                            if (!isset($r['priority']) || !is_numeric($r['priority'])) $r['priority'] = 0;
+                            $r['__src'] = $src;
+                        }
+                        if (is_array($r)) {
+                            if (! isset($r['tags']) || ! is_array($r['tags'])) {
+                                $r['tags'] = [];
+                            }
+                            if (! isset($r['priority']) || ! is_numeric($r['priority'])) {
+                                $r['priority'] = 0;
+                            }
                         }
                     }
                     unset($r);
@@ -1244,7 +1420,7 @@ public function loadReportOverrides(): array
     {
         // list
         if ($this->isListArray($assetVal)) {
-            return array_values(array_filter($assetVal, fn($x) => is_string($x) && trim($x) !== ''));
+            return array_values(array_filter($assetVal, fn ($x) => is_string($x) && trim($x) !== ''));
         }
 
         // map + order
@@ -1253,61 +1429,86 @@ public function loadReportOverrides(): array
 
         if (is_array($order) && $order !== []) {
             foreach ($order as $bucket) {
-                if (!is_string($bucket) || $bucket === '') continue;
+                if (! is_string($bucket) || $bucket === '') {
+                    continue;
+                }
                 $v = $assetVal[$bucket] ?? null;
-                if (!is_array($v)) continue;
+                if (! is_array($v)) {
+                    continue;
+                }
                 foreach ($v as $path) {
-                    if (is_string($path) && trim($path) !== '') $out[] = $path;
+                    if (is_string($path) && trim($path) !== '') {
+                        $out[] = $path;
+                    }
                 }
             }
+
             return array_values(array_unique($out));
         }
 
         // no order
         foreach ($assetVal as $k => $v) {
-            if ($k === 'order') continue;
-            if (!is_array($v)) continue;
+            if ($k === 'order') {
+                continue;
+            }
+            if (! is_array($v)) {
+                continue;
+            }
             foreach ($v as $path) {
-                if (is_string($path) && trim($path) !== '') $out[] = $path;
+                if (is_string($path) && trim($path) !== '') {
+                    $out[] = $path;
+                }
             }
         }
+
         return array_values(array_unique($out));
     }
 
     private function flattenAssetPaths($assetVal): array
     {
-        if (!is_array($assetVal)) return [];
+        if (! is_array($assetVal)) {
+            return [];
+        }
 
         if ($this->isListArray($assetVal)) {
-            return array_values(array_filter($assetVal, fn($x) => is_string($x) && trim($x) !== ''));
+            return array_values(array_filter($assetVal, fn ($x) => is_string($x) && trim($x) !== ''));
         }
 
         // map (e.g. overrides)
         $out = [];
         foreach ($assetVal as $k => $v) {
-            if ($k === 'order') continue;
+            if ($k === 'order') {
+                continue;
+            }
             $list = is_array($v) ? $v : [$v];
             foreach ($list as $x) {
-                if (is_string($x) && trim($x) !== '') $out[] = $x;
+                if (is_string($x) && trim($x) !== '') {
+                    $out[] = $x;
+                }
             }
         }
+
         return array_values(array_unique($out));
     }
 
     private function isListArray(array $a): bool
     {
-        if ($a === []) return true;
+        if ($a === []) {
+            return true;
+        }
+
         return array_keys($a) === range(0, count($a) - 1);
     }
 
     private function lightSchemaCheck(array $doc, string $file): void
     {
         // 轻量：只做“存在 & 类型”校验，不做强阻断
-        if (!is_array($doc)) {
+        if (! is_array($doc)) {
             Log::warning('[STORE] schema_bad', ['file' => $file, 'reason' => 'doc_not_array']);
+
             return;
         }
-        if (isset($doc['schema']) && !is_string($doc['schema'])) {
+        if (isset($doc['schema']) && ! is_string($doc['schema'])) {
             Log::warning('[STORE] schema_bad', ['file' => $file, 'reason' => 'schema_not_string']);
         }
     }
@@ -1315,11 +1516,13 @@ public function loadReportOverrides(): array
     private function normalizeReadBuckets(array $items): array
     {
         $normList = function ($list) {
-            if (!is_array($list)) return [];
+            if (! is_array($list)) {
+                return [];
+            }
 
             $out = [];
             foreach ($list as $it) {
-                if (!is_array($it)) {
+                if (! is_array($it)) {
                     continue;
                 }
 
@@ -1330,9 +1533,13 @@ public function loadReportOverrides(): array
         };
 
         // by_type/by_role/by_strategy/by_top_axis 都是 map -> list
-        foreach (['by_type','by_role','by_strategy','by_top_axis'] as $k) {
+        foreach (['by_type', 'by_role', 'by_strategy', 'by_top_axis'] as $k) {
             $m = $items[$k] ?? [];
-            if (!is_array($m)) { $items[$k] = []; continue; }
+            if (! is_array($m)) {
+                $items[$k] = [];
+
+                continue;
+            }
             foreach ($m as $key => $list) {
                 $m[$key] = $normList($list);
             }

@@ -11,14 +11,13 @@ class LegacyMbtiReportAssetRepository
 {
     public function __construct(
         private readonly LegacyMbtiPackRepository $packRepo,
-    ) {
-    }
+    ) {}
 
     public function loadAssetJson(string $contentDir, string $relPath, array $opts = []): ?array
     {
         static $cacheByKey = [];
 
-        $cacheKey = $contentDir . '|' . $relPath . '|' . md5((string) json_encode($opts));
+        $cacheKey = $contentDir.'|'.$relPath.'|'.md5((string) json_encode($opts));
         if (array_key_exists($cacheKey, $cacheByKey)) {
             return $cacheByKey[$cacheKey];
         }
@@ -32,12 +31,12 @@ class LegacyMbtiReportAssetRepository
     public function loadAssetItems(string $contentDir, string $relPath, array $opts = []): array
     {
         $json = $this->loadAssetJson($contentDir, $relPath, $opts);
-        if (!is_array($json)) {
+        if (! is_array($json)) {
             return [];
         }
 
         $items = $json['items'] ?? $json;
-        if (!is_array($items)) {
+        if (! is_array($items)) {
             return [];
         }
 
@@ -51,7 +50,7 @@ class LegacyMbtiReportAssetRepository
         if ($isList) {
             $indexed = [];
             foreach ($items as $it) {
-                if (!is_array($it)) {
+                if (! is_array($it)) {
                     continue;
                 }
 
@@ -84,7 +83,7 @@ class LegacyMbtiReportAssetRepository
         $out = [];
 
         foreach ($highlights as $h) {
-            if (!is_array($h)) {
+            if (! is_array($h)) {
                 continue;
             }
 
@@ -112,7 +111,7 @@ class LegacyMbtiReportAssetRepository
 
             $id = is_string($h['id'] ?? null) ? trim($h['id']) : '';
             if ($id === '') {
-                $id = 'hl.generated.' . (string) Str::uuid();
+                $id = 'hl.generated.'.(string) Str::uuid();
             }
             $h['id'] = $id;
 
@@ -158,7 +157,7 @@ class LegacyMbtiReportAssetRepository
                         break;
                     }
                 }
-                if (!$hasKindTag) {
+                if (! $hasKindTag) {
                     $tags[] = "kind:{$kind}";
                 }
             }

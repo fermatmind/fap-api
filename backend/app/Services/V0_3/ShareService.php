@@ -6,14 +6,14 @@ use App\Models\Attempt;
 use App\Models\PersonalityProfile;
 use App\Models\Result;
 use App\Models\Share;
-use App\Services\Cms\PersonalityProfileService;
-use App\Services\Mbti\MbtiPrivacyConsentContractService;
-use App\Services\Mbti\MbtiPublicProjectionService;
-use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use App\Services\BigFive\BigFivePublicProjectionService;
+use App\Services\Cms\PersonalityProfileService;
 use App\Services\InsightGraph\InsightGraphContractService;
 use App\Services\InsightGraph\PartnerReadContractService;
 use App\Services\InsightGraph\WidgetSurfaceContractService;
+use App\Services\Mbti\MbtiPrivacyConsentContractService;
+use App\Services\Mbti\MbtiPublicProjectionService;
+use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\PublicSurfaceContractService;
@@ -246,8 +246,7 @@ class ShareService
         Result $result,
         ?array $report = null,
         ?array $big5Projection = null
-    ): array
-    {
+    ): array {
         $resultJson = $this->normalizeArray($result->result_json ?? null);
         $report = is_array($report) ? $report : $this->buildPublicSafeReportSnapshot($attempt, $result);
         $reportProfile = $this->normalizeArray($report['profile'] ?? null);

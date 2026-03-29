@@ -2,15 +2,13 @@
 
 namespace App\Services\Attempts;
 
-use App\Services\Assessment\ScoreResult;
 use App\Exceptions\Api\ApiProblemException;
+use App\Services\Assessment\ScoreResult;
 use App\Services\Psychometrics\MbtiQualityEvaluator;
 
 class AttemptSubmitScoreService
 {
-    public function __construct(private AttemptSubmitService $core)
-    {
-    }
+    public function __construct(private AttemptSubmitService $core) {}
 
     public function handle(array $canonicalized): array
     {

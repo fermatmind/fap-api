@@ -9,11 +9,13 @@ use App\Exceptions\Api\ApiProblemException;
 final class ScaleRolloutGate
 {
     public const PAYWALL_OFF = 'off';
+
     public const PAYWALL_FREE_ONLY = 'free_only';
+
     public const PAYWALL_FULL = 'full';
 
     /**
-     * @param array<string,mixed> $scaleRow
+     * @param  array<string,mixed>  $scaleRow
      */
     public static function assertEnabled(string $scaleCode, array $scaleRow, string $region, string $subjectKey = ''): void
     {
@@ -23,7 +25,7 @@ final class ScaleRolloutGate
             $capabilities['enabled_in_prod'] ?? ($capabilities['rollout']['enabled_in_prod'] ?? true),
             true
         );
-        if (!$enabledInProd) {
+        if (! $enabledInProd) {
             throw self::notEnabled($scaleCode, $region, 'disabled');
         }
 
@@ -35,7 +37,7 @@ final class ScaleRolloutGate
         $enabledRegions = self::enabledRegions($capabilities);
         if ($enabledRegions !== []) {
             $normalizedRegion = self::normalizeRegion($region);
-            if (!in_array($normalizedRegion, $enabledRegions, true)) {
+            if (! in_array($normalizedRegion, $enabledRegions, true)) {
                 throw self::notEnabled($scaleCode, $region, 'region_not_allowed');
             }
         }
@@ -47,7 +49,7 @@ final class ScaleRolloutGate
 
         if ($rolloutRatio < 1.0 && trim($subjectKey) !== '') {
             $threshold = (int) floor($rolloutRatio * 10000.0);
-            $subject = strtoupper(trim($scaleCode)) . '|' . trim($subjectKey);
+            $subject = strtoupper(trim($scaleCode)).'|'.trim($subjectKey);
             $bucket = ((int) sprintf('%u', crc32($subject))) % 10000;
             if ($bucket >= $threshold) {
                 throw self::notEnabled($scaleCode, $region, 'ratio_not_hit');
@@ -56,7 +58,7 @@ final class ScaleRolloutGate
     }
 
     /**
-     * @param array<string,mixed> $scaleRow
+     * @param  array<string,mixed>  $scaleRow
      */
     public static function paywallMode(array $scaleRow): string
     {
@@ -67,7 +69,7 @@ final class ScaleRolloutGate
     }
 
     /**
-     * @param array<string,mixed> $scaleRow
+     * @param  array<string,mixed>  $scaleRow
      * @return array<string,mixed>
      */
     private static function capabilities(array $scaleRow): array
@@ -82,13 +84,13 @@ final class ScaleRolloutGate
     }
 
     /**
-     * @param array<string,mixed> $capabilities
+     * @param  array<string,mixed>  $capabilities
      * @return list<string>
      */
     private static function enabledRegions(array $capabilities): array
     {
         $raw = $capabilities['enabled_regions'] ?? ($capabilities['rollout']['enabled_regions'] ?? []);
-        if (!is_array($raw)) {
+        if (! is_array($raw)) {
             return [];
         }
 
@@ -105,7 +107,7 @@ final class ScaleRolloutGate
     }
 
     /**
-     * @param array<string,mixed> $capabilities
+     * @param  array<string,mixed>  $capabilities
      */
     private static function rolloutRatio(array $capabilities): float
     {

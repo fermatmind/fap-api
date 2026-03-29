@@ -6,9 +6,7 @@ namespace App\Services\Template;
 
 final class TemplateLintService
 {
-    public function __construct(private readonly TemplateEngine $engine)
-    {
-    }
+    public function __construct(private readonly TemplateEngine $engine) {}
 
     /**
      * @return list<array{block_id:string,unknown:list<string>,missing:list<string>}>
@@ -46,15 +44,16 @@ final class TemplateLintService
                         'missing' => array_values(array_unique($missing)),
                     ];
                 }
+
                 return;
             }
 
-            if (!is_array($node)) {
+            if (! is_array($node)) {
                 return;
             }
 
             foreach ($node as $key => $value) {
-                $nextPath = $path . '.' . (is_int($key) ? (string) $key : $key);
+                $nextPath = $path.'.'.(is_int($key) ? (string) $key : $key);
                 $walk($value, $nextPath);
             }
         };
@@ -76,10 +75,11 @@ final class TemplateLintService
                 foreach ($this->engine->extractVariables($node) as $varName) {
                     $vars[$varName] = true;
                 }
+
                 return;
             }
 
-            if (!is_array($node)) {
+            if (! is_array($node)) {
                 return;
             }
 

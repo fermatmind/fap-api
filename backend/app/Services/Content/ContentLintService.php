@@ -15,9 +15,7 @@ final class ContentLintService
     public function __construct(
         private readonly TemplateLintService $templateLint,
         private readonly MbtiContentGovernanceService $mbtiGovernance,
-    )
-    {
-    }
+    ) {}
 
     /**
      * @return array{ok:bool,packs:list<array<string,mixed>>}
@@ -32,7 +30,7 @@ final class ContentLintService
         foreach ($packs as $pack) {
             $result = $this->lintPack($pack);
             $results[] = $result;
-            if (!($result['ok'] ?? false)) {
+            if (! ($result['ok'] ?? false)) {
                 $ok = false;
             }
         }
@@ -72,7 +70,7 @@ final class ContentLintService
     }
 
     /**
-     * @param array<string,mixed> $pack
+     * @param  array<string,mixed>  $pack
      * @return array<string,mixed>
      */
     public function lintPack(array $pack): array
@@ -84,11 +82,11 @@ final class ContentLintService
         $errors = [];
         $variablesUsed = [];
 
-        $sectionsSpecPath = $baseDir . DIRECTORY_SEPARATOR . 'report_section_policies.json';
+        $sectionsSpecPath = $baseDir.DIRECTORY_SEPARATOR.'report_section_policies.json';
         $sectionsAllowed = [];
         if (is_file($sectionsSpecPath)) {
             $sectionsDoc = $this->readJsonFile($sectionsSpecPath);
-            if (!is_array($sectionsDoc)) {
+            if (! is_array($sectionsDoc)) {
                 $errors[] = $this->error($sectionsSpecPath, 'sections.spec', 'Invalid JSON.');
             } else {
                 $rawItems = $sectionsDoc['items'] ?? ($sectionsDoc['sections'] ?? null);
@@ -98,51 +96,54 @@ final class ContentLintService
             }
         }
 
-        $rulesPath = $baseDir . DIRECTORY_SEPARATOR . 'report_select_rules.json';
+        $rulesPath = $baseDir.DIRECTORY_SEPARATOR.'report_select_rules.json';
         if (is_file($rulesPath)) {
             $rulesDoc = $this->readJsonFile($rulesPath);
             $rulesNode = is_array($rulesDoc) ? ($rulesDoc['rules'] ?? $rulesDoc) : null;
-            if (!is_array($rulesNode)) {
+            if (! is_array($rulesNode)) {
                 $errors[] = $this->error($rulesPath, 'rules', 'Invalid rules JSON.');
             }
         }
 
-        $cardFiles = glob($baseDir . DIRECTORY_SEPARATOR . 'report_cards_*.json') ?: [];
+        $cardFiles = glob($baseDir.DIRECTORY_SEPARATOR.'report_cards_*.json') ?: [];
         foreach ($cardFiles as $cardFile) {
             $doc = $this->readJsonFile($cardFile);
-            if (!is_array($doc)) {
+            if (! is_array($doc)) {
                 $errors[] = $this->error($cardFile, 'cards.doc', 'Invalid JSON.');
+
                 continue;
             }
 
             $items = $doc['items'] ?? null;
-            if (!is_array($items)) {
+            if (! is_array($items)) {
                 $errors[] = $this->error($cardFile, 'cards.items', 'items must be an array.');
+
                 continue;
             }
 
             foreach ($items as $index => $item) {
                 $blockId = is_array($item) ? (string) ($item['id'] ?? "idx:{$index}") : "idx:{$index}";
-                $blockRef = basename($cardFile) . '#' . $blockId;
+                $blockRef = basename($cardFile).'#'.$blockId;
 
-                if (!is_array($item)) {
+                if (! is_array($item)) {
                     $errors[] = $this->error($cardFile, $blockRef, 'Card item must be an object.');
+
                     continue;
                 }
 
                 foreach (['id', 'section', 'tags', 'priority', 'access_level', 'module_code'] as $required) {
-                    if (!array_key_exists($required, $item)) {
+                    if (! array_key_exists($required, $item)) {
                         $errors[] = $this->error($cardFile, $blockRef, "Missing required field: {$required}.");
                     }
                 }
 
                 $accessLevel = strtolower(trim((string) ($item['access_level'] ?? '')));
-                if ($accessLevel === '' || !in_array($accessLevel, self::CARD_ACCESS_LEVELS, true)) {
+                if ($accessLevel === '' || ! in_array($accessLevel, self::CARD_ACCESS_LEVELS, true)) {
                     $errors[] = $this->error($cardFile, $blockRef, 'Invalid access_level. Allowed: free|preview|paid.');
                 }
 
                 $section = trim((string) ($item['section'] ?? ''));
-                if ($sectionsAllowed !== [] && $section !== '' && !in_array($section, $sectionsAllowed, true)) {
+                if ($sectionsAllowed !== [] && $section !== '' && ! in_array($section, $sectionsAllowed, true)) {
                     $errors[] = $this->error($cardFile, $blockRef, "Section '{$section}' is not declared in section policies.");
                 }
 
@@ -153,7 +154,7 @@ final class ContentLintService
                     }
                 }
                 foreach (['bullets', 'tips'] as $field) {
-                    if (!is_array($item[$field] ?? null)) {
+                    if (! is_array($item[$field] ?? null)) {
                         continue;
                     }
                     foreach ($item[$field] as $idx => $value) {
@@ -175,7 +176,7 @@ final class ContentLintService
                             $errors[] = $this->error(
                                 $cardFile,
                                 (string) ($tplIssue['block_id'] ?? $fieldRef),
-                                'Unknown template variables: ' . implode(', ', $unknown)
+                                'Unknown template variables: '.implode(', ', $unknown)
                             );
                         }
                     }
@@ -203,7 +204,7 @@ final class ContentLintService
     private function discoverPacks(): array
     {
         $root = (string) config('content_packs.root', base_path('content_packages'));
-        if (!is_dir($root)) {
+        if (! is_dir($root)) {
             return [];
         }
 
@@ -226,11 +227,11 @@ final class ContentLintService
             if (str_contains($normalizedPath, '/compiled/')) {
                 continue;
             }
-            if (!str_contains($normalizedPath, '/default/')) {
+            if (! str_contains($normalizedPath, '/default/')) {
                 continue;
             }
             $manifest = $this->readJsonFile($manifestPath);
-            if (!is_array($manifest)) {
+            if (! is_array($manifest)) {
                 continue;
             }
 
@@ -253,12 +254,12 @@ final class ContentLintService
      */
     private function readJsonFile(string $path): ?array
     {
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             return null;
         }
 
         $raw = file_get_contents($path);
-        if (!is_string($raw) || $raw === '') {
+        if (! is_string($raw) || $raw === '') {
             return null;
         }
 
@@ -272,7 +273,7 @@ final class ContentLintService
      */
     private function extractTemplateVariables(string $template): array
     {
-        if (!str_contains($template, '{{')) {
+        if (! str_contains($template, '{{')) {
             return [];
         }
 

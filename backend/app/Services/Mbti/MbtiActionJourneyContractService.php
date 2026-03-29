@@ -7,8 +7,11 @@ namespace App\Services\Mbti;
 final class MbtiActionJourneyContractService
 {
     private const JOURNEY_VERSION = 'action_journey.v1';
+
     private const JOURNEY_FINGERPRINT_VERSION = 'action_journey.fingerprint.v1';
+
     private const PULSE_VERSION = 'pulse_check.v1';
+
     private const JOURNEY_SCOPE = 'result_revisit';
 
     /**
@@ -385,7 +388,6 @@ final class MbtiActionJourneyContractService
     }
 
     /**
-     * @param  mixed  $value
      * @return list<string>
      */
     private function normalizeStringList(mixed $value): array

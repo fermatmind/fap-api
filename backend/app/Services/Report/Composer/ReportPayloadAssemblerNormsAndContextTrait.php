@@ -18,12 +18,12 @@ trait ReportPayloadAssemblerNormsAndContextTrait
 
     private function buildNormsPayload(string $packId, array $scoresPct): ?array
     {
-        if (!$this->isNormsEnabled()) {
+        if (! $this->isNormsEnabled()) {
             return null;
         }
 
         $version = $this->resolveNormsVersion($packId);
-        if (!$version) {
+        if (! $version) {
             return null;
         }
 
@@ -31,11 +31,11 @@ trait ReportPayloadAssemblerNormsAndContextTrait
         $scoreByMetric = [];
 
         foreach ($metrics as $metric) {
-            if (!array_key_exists($metric, $scoresPct)) {
+            if (! array_key_exists($metric, $scoresPct)) {
                 return null;
             }
             $score = $scoresPct[$metric];
-            if (!is_numeric($score)) {
+            if (! is_numeric($score)) {
                 return null;
             }
 
@@ -68,7 +68,7 @@ trait ReportPayloadAssemblerNormsAndContextTrait
             $scoreInt = (int) ($scoreByMetric[$metric] ?? 0);
             $rowKey = $metric.'|'.$scoreInt;
             $row = $rowsByMetricAndScore[$rowKey] ?? null;
-            if (!$row) {
+            if (! $row) {
                 return null;
             }
 
@@ -114,12 +114,13 @@ trait ReportPayloadAssemblerNormsAndContextTrait
 
     private function normalizeRequestedVersion($requested): ?string
     {
-        if (!is_string($requested) || $requested === '') {
+        if (! is_string($requested) || $requested === '') {
             return null;
         }
 
         if (substr_count($requested, '.') >= 3) {
             $parts = explode('.', $requested);
+
             return implode('.', array_slice($parts, 3));
         }
 

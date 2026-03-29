@@ -7,8 +7,11 @@ namespace App\Services\Analytics;
 final class EventPayloadLimiter
 {
     private int $maxTopKeys;
+
     private int $maxDepth;
+
     private int $maxListLength;
+
     private int $maxStringLength;
 
     public function __construct()
