@@ -35,7 +35,7 @@
         <x-filament::dropdown.list>
             @foreach ($locales as $key => $label)
                 <x-filament::dropdown.list.item
-                    wire:click="setLocale('{{ $key }}')"
+                    wire:click="setLocale('{{ $key }}', @js(request()->fullUrl()))"
                     :disabled="$locale === $key"
                 >
                     {{ $label }}
