@@ -10,20 +10,23 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     private const TABLE = 'events';
+
     private const SHARE_STYLE_COL = 'share_style_g';
+
     private const PAGE_SESSION_COL = 'page_session_id_g';
+
     private const INDEX = 'idx_events_share_dedupe_lookup';
 
     public function up(): void
     {
-        if (!Schema::hasTable(self::TABLE)) {
+        if (! Schema::hasTable(self::TABLE)) {
             return;
         }
 
         $driver = Schema::getConnection()->getDriverName();
 
         Schema::table(self::TABLE, function (Blueprint $table) use ($driver): void {
-            if (!Schema::hasColumn(self::TABLE, self::SHARE_STYLE_COL)) {
+            if (! Schema::hasColumn(self::TABLE, self::SHARE_STYLE_COL)) {
                 if ($driver === 'mysql') {
                     $table->string(self::SHARE_STYLE_COL, 64)
                         ->storedAs("json_unquote(json_extract(meta_json, '$.share_style'))");
@@ -35,7 +38,7 @@ return new class extends Migration
                 }
             }
 
-            if (!Schema::hasColumn(self::TABLE, self::PAGE_SESSION_COL)) {
+            if (! Schema::hasColumn(self::TABLE, self::PAGE_SESSION_COL)) {
                 if ($driver === 'mysql') {
                     $table->string(self::PAGE_SESSION_COL, 128)
                         ->storedAs("json_unquote(json_extract(meta_json, '$.page_session_id'))");
@@ -51,7 +54,7 @@ return new class extends Migration
         $columnsReady = Schema::hasColumn(self::TABLE, self::SHARE_STYLE_COL)
             && Schema::hasColumn(self::TABLE, self::PAGE_SESSION_COL);
 
-        if (!$columnsReady) {
+        if (! $columnsReady) {
             SchemaIndex::logIndexAction(
                 'create_index_skip_missing_columns',
                 self::TABLE,
@@ -65,6 +68,7 @@ return new class extends Migration
 
         if (SchemaIndex::indexExists(self::TABLE, self::INDEX)) {
             SchemaIndex::logIndexAction('create_index_skip_exists', self::TABLE, self::INDEX, $driver, ['phase' => 'up']);
+
             return;
         }
 

@@ -13,23 +13,23 @@ return new class extends Migration
     {
         if (Schema::hasTable('admin_users')) {
             Schema::table('admin_users', function (Blueprint $table): void {
-                if (!Schema::hasColumn('admin_users', 'totp_secret')) {
+                if (! Schema::hasColumn('admin_users', 'totp_secret')) {
                     $table->text('totp_secret')->nullable()->after('password');
                 }
 
-                if (!Schema::hasColumn('admin_users', 'totp_enabled_at')) {
+                if (! Schema::hasColumn('admin_users', 'totp_enabled_at')) {
                     $table->dateTime('totp_enabled_at')->nullable()->after('totp_secret');
                 }
 
-                if (!Schema::hasColumn('admin_users', 'password_changed_at')) {
+                if (! Schema::hasColumn('admin_users', 'password_changed_at')) {
                     $table->dateTime('password_changed_at')->nullable()->after('totp_enabled_at');
                 }
 
-                if (!Schema::hasColumn('admin_users', 'failed_login_count')) {
+                if (! Schema::hasColumn('admin_users', 'failed_login_count')) {
                     $table->unsignedInteger('failed_login_count')->default(0)->after('password_changed_at');
                 }
 
-                if (!Schema::hasColumn('admin_users', 'locked_until')) {
+                if (! Schema::hasColumn('admin_users', 'locked_until')) {
                     $table->dateTime('locked_until')->nullable()->after('failed_login_count');
                 }
             });
@@ -37,7 +37,7 @@ return new class extends Migration
             $this->ensureIndex('admin_users', ['locked_until'], 'admin_users_locked_until_idx');
         }
 
-        if (!Schema::hasTable('admin_user_totp_recovery_codes')) {
+        if (! Schema::hasTable('admin_user_totp_recovery_codes')) {
             Schema::create('admin_user_totp_recovery_codes', function (Blueprint $table): void {
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('admin_user_id');
@@ -47,7 +47,7 @@ return new class extends Migration
             });
         }
 
-        if (!Schema::hasTable('admin_user_password_histories')) {
+        if (! Schema::hasTable('admin_user_password_histories')) {
             Schema::create('admin_user_password_histories', function (Blueprint $table): void {
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('admin_user_id');
@@ -69,7 +69,7 @@ return new class extends Migration
 
     private function ensureIndex(string $tableName, array $columns, string $indexName): void
     {
-        if (!Schema::hasTable($tableName)) {
+        if (! Schema::hasTable($tableName)) {
             return;
         }
 
@@ -99,7 +99,7 @@ return new class extends Migration
 
     private function ensureUniqueIndex(string $tableName, array $columns, string $indexName): void
     {
-        if (!Schema::hasTable($tableName)) {
+        if (! Schema::hasTable($tableName)) {
             return;
         }
 

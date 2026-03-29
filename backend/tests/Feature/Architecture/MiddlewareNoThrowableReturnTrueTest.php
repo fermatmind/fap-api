@@ -22,13 +22,13 @@ final class MiddlewareNoThrowableReturnTrueTest extends TestCase
 
         /** @var SplFileInfo $file */
         foreach ($iterator as $file) {
-            if (!$file->isFile() || strtolower($file->getExtension()) !== 'php') {
+            if (! $file->isFile() || strtolower($file->getExtension()) !== 'php') {
                 continue;
             }
 
             $path = $file->getPathname();
             $source = file_get_contents($path);
-            if (!is_string($source)) {
+            if (! is_string($source)) {
                 continue;
             }
 
@@ -42,4 +42,3 @@ final class MiddlewareNoThrowableReturnTrueTest extends TestCase
         $this->assertSame([], $offenders, 'Throwable catch blocks must not return true in middleware.');
     }
 }
-

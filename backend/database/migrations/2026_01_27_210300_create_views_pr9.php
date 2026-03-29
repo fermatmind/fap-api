@@ -12,10 +12,10 @@ return new class extends Migration
         }
 
         $viewDir = base_path('tools/sql/views');
-        if (!is_dir($viewDir)) {
+        if (! is_dir($viewDir)) {
             $viewDir = base_path('../tools/sql/views');
         }
-        $files = glob($viewDir . '/v_*.sql') ?: [];
+        $files = glob($viewDir.'/v_*.sql') ?: [];
 
         foreach ($files as $file) {
             $viewName = pathinfo($file, PATHINFO_FILENAME);

@@ -9,7 +9,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('scale_slugs')) {
+        if (! Schema::hasTable('scale_slugs')) {
             Schema::create('scale_slugs', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('org_id')->default(0);
@@ -28,25 +28,25 @@ return new class extends Migration
         }
 
         Schema::table('scale_slugs', function (Blueprint $table) {
-            if (!Schema::hasColumn('scale_slugs', 'id')) {
+            if (! Schema::hasColumn('scale_slugs', 'id')) {
                 $table->bigIncrements('id');
             }
-            if (!Schema::hasColumn('scale_slugs', 'org_id')) {
+            if (! Schema::hasColumn('scale_slugs', 'org_id')) {
                 $table->unsignedBigInteger('org_id')->default(0);
             }
-            if (!Schema::hasColumn('scale_slugs', 'slug')) {
+            if (! Schema::hasColumn('scale_slugs', 'slug')) {
                 $table->string('slug', 127);
             }
-            if (!Schema::hasColumn('scale_slugs', 'scale_code')) {
+            if (! Schema::hasColumn('scale_slugs', 'scale_code')) {
                 $table->string('scale_code', 64);
             }
-            if (!Schema::hasColumn('scale_slugs', 'is_primary')) {
+            if (! Schema::hasColumn('scale_slugs', 'is_primary')) {
                 $table->boolean('is_primary')->default(false);
             }
-            if (!Schema::hasColumn('scale_slugs', 'created_at')) {
+            if (! Schema::hasColumn('scale_slugs', 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
-            if (!Schema::hasColumn('scale_slugs', 'updated_at')) {
+            if (! Schema::hasColumn('scale_slugs', 'updated_at')) {
                 $table->timestamp('updated_at')->nullable();
             }
         });
@@ -55,7 +55,7 @@ return new class extends Migration
         if (
             Schema::hasColumn('scale_slugs', 'org_id')
             && Schema::hasColumn('scale_slugs', 'slug')
-            && !$this->indexExists('scale_slugs', $uniqueName)
+            && ! $this->indexExists('scale_slugs', $uniqueName)
         ) {
             Schema::table('scale_slugs', function (Blueprint $table) use ($uniqueName) {
                 $table->unique(['org_id', 'slug'], $uniqueName);
@@ -63,21 +63,21 @@ return new class extends Migration
         }
 
         $scaleIdx = 'scale_slugs_scale_code_idx';
-        if (Schema::hasColumn('scale_slugs', 'scale_code') && !$this->indexExists('scale_slugs', $scaleIdx)) {
+        if (Schema::hasColumn('scale_slugs', 'scale_code') && ! $this->indexExists('scale_slugs', $scaleIdx)) {
             Schema::table('scale_slugs', function (Blueprint $table) use ($scaleIdx) {
                 $table->index('scale_code', $scaleIdx);
             });
         }
 
         $primaryIdx = 'scale_slugs_is_primary_idx';
-        if (Schema::hasColumn('scale_slugs', 'is_primary') && !$this->indexExists('scale_slugs', $primaryIdx)) {
+        if (Schema::hasColumn('scale_slugs', 'is_primary') && ! $this->indexExists('scale_slugs', $primaryIdx)) {
             Schema::table('scale_slugs', function (Blueprint $table) use ($primaryIdx) {
                 $table->index('is_primary', $primaryIdx);
             });
         }
 
         $orgIdx = 'scale_slugs_org_id_idx';
-        if (Schema::hasColumn('scale_slugs', 'org_id') && !$this->indexExists('scale_slugs', $orgIdx)) {
+        if (Schema::hasColumn('scale_slugs', 'org_id') && ! $this->indexExists('scale_slugs', $orgIdx)) {
             Schema::table('scale_slugs', function (Blueprint $table) use ($orgIdx) {
                 $table->index('org_id', $orgIdx);
             });
@@ -101,6 +101,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -111,6 +112,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -121,6 +123,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 

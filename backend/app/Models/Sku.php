@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class Sku extends Model
 {
     protected $table = 'skus';
+
     protected $primaryKey = 'sku';
+
     public $incrementing = false;
+
     protected $keyType = 'string';
 
     protected $fillable = [
@@ -78,6 +81,7 @@ class Sku extends Model
     public function getMetadataJsonAttribute(): array
     {
         $value = $this->meta_json ?? [];
+
         return is_array($value) ? $value : [];
     }
 

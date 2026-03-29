@@ -12,7 +12,7 @@ return new class extends Migration
         $driver = Schema::getConnection()->getDriverName();
         $isSqlite = $driver === 'sqlite';
 
-        if (!Schema::hasTable('attempt_answer_sets')) {
+        if (! Schema::hasTable('attempt_answer_sets')) {
             Schema::create('attempt_answer_sets', function (Blueprint $table) use ($isSqlite) {
                 $table->uuid('attempt_id')->primary();
                 $table->unsignedBigInteger('org_id')->default(0);
@@ -41,64 +41,64 @@ return new class extends Migration
         }
 
         Schema::table('attempt_answer_sets', function (Blueprint $table) use ($isSqlite) {
-            if (!Schema::hasColumn('attempt_answer_sets', 'attempt_id')) {
+            if (! Schema::hasColumn('attempt_answer_sets', 'attempt_id')) {
                 $table->uuid('attempt_id');
             }
-            if (!Schema::hasColumn('attempt_answer_sets', 'org_id')) {
+            if (! Schema::hasColumn('attempt_answer_sets', 'org_id')) {
                 $table->unsignedBigInteger('org_id')->default(0);
             }
-            if (!Schema::hasColumn('attempt_answer_sets', 'scale_code')) {
+            if (! Schema::hasColumn('attempt_answer_sets', 'scale_code')) {
                 $table->string('scale_code', 32);
             }
-            if (!Schema::hasColumn('attempt_answer_sets', 'pack_id')) {
+            if (! Schema::hasColumn('attempt_answer_sets', 'pack_id')) {
                 $table->string('pack_id', 128)->nullable();
             }
-            if (!Schema::hasColumn('attempt_answer_sets', 'dir_version')) {
+            if (! Schema::hasColumn('attempt_answer_sets', 'dir_version')) {
                 $table->string('dir_version', 128)->nullable();
             }
-            if (!Schema::hasColumn('attempt_answer_sets', 'scoring_spec_version')) {
+            if (! Schema::hasColumn('attempt_answer_sets', 'scoring_spec_version')) {
                 $table->string('scoring_spec_version', 64)->nullable();
             }
-            if (!Schema::hasColumn('attempt_answer_sets', 'answers_json')) {
+            if (! Schema::hasColumn('attempt_answer_sets', 'answers_json')) {
                 if ($isSqlite) {
                     $table->text('answers_json')->nullable();
                 } else {
                     $table->longText('answers_json')->nullable();
                 }
             }
-            if (!Schema::hasColumn('attempt_answer_sets', 'answers_hash')) {
+            if (! Schema::hasColumn('attempt_answer_sets', 'answers_hash')) {
                 $table->string('answers_hash', 64)->nullable();
             }
-            if (!Schema::hasColumn('attempt_answer_sets', 'question_count')) {
+            if (! Schema::hasColumn('attempt_answer_sets', 'question_count')) {
                 $table->integer('question_count')->default(0);
             }
-            if (!Schema::hasColumn('attempt_answer_sets', 'duration_ms')) {
+            if (! Schema::hasColumn('attempt_answer_sets', 'duration_ms')) {
                 $table->integer('duration_ms')->default(0);
             }
-            if (!Schema::hasColumn('attempt_answer_sets', 'submitted_at')) {
+            if (! Schema::hasColumn('attempt_answer_sets', 'submitted_at')) {
                 $table->timestamp('submitted_at')->nullable();
             }
-            if (!Schema::hasColumn('attempt_answer_sets', 'created_at')) {
+            if (! Schema::hasColumn('attempt_answer_sets', 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
         });
 
-        if (!$this->indexExists('attempt_answer_sets', 'attempt_answer_sets_org_idx')) {
+        if (! $this->indexExists('attempt_answer_sets', 'attempt_answer_sets_org_idx')) {
             Schema::table('attempt_answer_sets', function (Blueprint $table) {
                 $table->index(['org_id'], 'attempt_answer_sets_org_idx');
             });
         }
-        if (!$this->indexExists('attempt_answer_sets', 'attempt_answer_sets_scale_idx')) {
+        if (! $this->indexExists('attempt_answer_sets', 'attempt_answer_sets_scale_idx')) {
             Schema::table('attempt_answer_sets', function (Blueprint $table) {
                 $table->index(['scale_code'], 'attempt_answer_sets_scale_idx');
             });
         }
-        if (!$this->indexExists('attempt_answer_sets', 'attempt_answer_sets_hash_idx')) {
+        if (! $this->indexExists('attempt_answer_sets', 'attempt_answer_sets_hash_idx')) {
             Schema::table('attempt_answer_sets', function (Blueprint $table) {
                 $table->index(['answers_hash'], 'attempt_answer_sets_hash_idx');
             });
         }
-        if (!$this->indexExists('attempt_answer_sets', 'attempt_answer_sets_submitted_idx')) {
+        if (! $this->indexExists('attempt_answer_sets', 'attempt_answer_sets_submitted_idx')) {
             Schema::table('attempt_answer_sets', function (Blueprint $table) {
                 $table->index(['submitted_at'], 'attempt_answer_sets_submitted_idx');
             });
@@ -122,6 +122,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -132,17 +133,18 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
         $db = DB::getDatabaseName();
         $rows = DB::select(
-            "SELECT 1 FROM information_schema.statistics
+            'SELECT 1 FROM information_schema.statistics
              WHERE table_schema = ? AND table_name = ? AND index_name = ?
-             LIMIT 1",
+             LIMIT 1',
             [$db, $table, $indexName]
         );
 
-        return !empty($rows);
+        return ! empty($rows);
     }
 };

@@ -11,7 +11,7 @@ trait HasOrgScope
 {
     protected static function bootHasOrgScope(): void
     {
-        static::addGlobalScope(new TenantScope());
+        static::addGlobalScope(new TenantScope);
     }
 
     public static function bypassTenantScope(): bool

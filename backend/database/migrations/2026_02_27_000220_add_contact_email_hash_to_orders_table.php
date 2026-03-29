@@ -69,9 +69,9 @@ return new class extends Migration
 
         $database = DB::getDatabaseName();
         $rows = DB::select(
-            "SELECT 1 FROM information_schema.statistics
+            'SELECT 1 FROM information_schema.statistics
              WHERE table_schema = ? AND table_name = ? AND index_name = ?
-             LIMIT 1",
+             LIMIT 1',
             [$database, $table, $indexName]
         );
 

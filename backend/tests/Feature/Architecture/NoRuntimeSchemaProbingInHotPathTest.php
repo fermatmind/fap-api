@@ -28,7 +28,7 @@ final class NoRuntimeSchemaProbingInHotPathTest extends TestCase
         $violations = [];
 
         foreach ($scanRoots as $root) {
-            if (!is_dir($root)) {
+            if (! is_dir($root)) {
                 continue;
             }
 
@@ -37,13 +37,13 @@ final class NoRuntimeSchemaProbingInHotPathTest extends TestCase
             );
 
             foreach ($iterator as $fileInfo) {
-                if (!$fileInfo->isFile() || $fileInfo->getExtension() !== 'php') {
+                if (! $fileInfo->isFile() || $fileInfo->getExtension() !== 'php') {
                     continue;
                 }
 
                 $path = (string) $fileInfo->getPathname();
                 $lines = @file($path);
-                if (!is_array($lines)) {
+                if (! is_array($lines)) {
                     continue;
                 }
 

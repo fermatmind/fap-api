@@ -9,7 +9,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('archive_audits')) {
+        if (! Schema::hasTable('archive_audits')) {
             Schema::create('archive_audits', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->string('table_name', 64);
@@ -28,35 +28,35 @@ return new class extends Migration
         }
 
         Schema::table('archive_audits', function (Blueprint $table) {
-            if (!Schema::hasColumn('archive_audits', 'table_name')) {
+            if (! Schema::hasColumn('archive_audits', 'table_name')) {
                 $table->string('table_name', 64);
             }
-            if (!Schema::hasColumn('archive_audits', 'range_start')) {
+            if (! Schema::hasColumn('archive_audits', 'range_start')) {
                 $table->string('range_start', 32)->nullable();
             }
-            if (!Schema::hasColumn('archive_audits', 'range_end')) {
+            if (! Schema::hasColumn('archive_audits', 'range_end')) {
                 $table->string('range_end', 32)->nullable();
             }
-            if (!Schema::hasColumn('archive_audits', 'object_uri')) {
+            if (! Schema::hasColumn('archive_audits', 'object_uri')) {
                 $table->string('object_uri', 255)->nullable();
             }
-            if (!Schema::hasColumn('archive_audits', 'row_count')) {
+            if (! Schema::hasColumn('archive_audits', 'row_count')) {
                 $table->integer('row_count')->default(0);
             }
-            if (!Schema::hasColumn('archive_audits', 'checksum')) {
+            if (! Schema::hasColumn('archive_audits', 'checksum')) {
                 $table->string('checksum', 64)->nullable();
             }
-            if (!Schema::hasColumn('archive_audits', 'created_at')) {
+            if (! Schema::hasColumn('archive_audits', 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
         });
 
-        if (!$this->indexExists('archive_audits', 'archive_audits_table_idx')) {
+        if (! $this->indexExists('archive_audits', 'archive_audits_table_idx')) {
             Schema::table('archive_audits', function (Blueprint $table) {
                 $table->index(['table_name'], 'archive_audits_table_idx');
             });
         }
-        if (!$this->indexExists('archive_audits', 'archive_audits_created_idx')) {
+        if (! $this->indexExists('archive_audits', 'archive_audits_created_idx')) {
             Schema::table('archive_audits', function (Blueprint $table) {
                 $table->index(['created_at'], 'archive_audits_created_idx');
             });
@@ -80,6 +80,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -90,17 +91,18 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
         $db = DB::getDatabaseName();
         $rows = DB::select(
-            "SELECT 1 FROM information_schema.statistics
+            'SELECT 1 FROM information_schema.statistics
              WHERE table_schema = ? AND table_name = ? AND index_name = ?
-             LIMIT 1",
+             LIMIT 1',
             [$db, $table, $indexName]
         );
 
-        return !empty($rows);
+        return ! empty($rows);
     }
 };

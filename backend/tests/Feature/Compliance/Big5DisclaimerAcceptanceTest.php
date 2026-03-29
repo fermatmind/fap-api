@@ -16,7 +16,7 @@ final class Big5DisclaimerAcceptanceTest extends TestCase
     public function test_big5_questions_include_disclaimer_meta_and_start_persists_acceptance(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $questions = $this->getJson('/api/v0.3/scales/BIG5_OCEAN/questions?locale=zh-CN');
         $questions->assertStatus(200);
@@ -57,4 +57,3 @@ final class Big5DisclaimerAcceptanceTest extends TestCase
         $this->assertSame('zh-CN', (string) ($meta['disclaimer_locale'] ?? ''));
     }
 }
-

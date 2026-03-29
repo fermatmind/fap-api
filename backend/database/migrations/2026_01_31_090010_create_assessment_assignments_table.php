@@ -11,7 +11,7 @@ return new class extends Migration
     {
         $tableName = 'assessment_assignments';
 
-        if (!Schema::hasTable($tableName)) {
+        if (! Schema::hasTable($tableName)) {
             Schema::create($tableName, function (Blueprint $table): void {
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('org_id');
@@ -32,43 +32,43 @@ return new class extends Migration
         }
 
         Schema::table($tableName, function (Blueprint $table) use ($tableName): void {
-            if (!Schema::hasColumn($tableName, 'id')) {
+            if (! Schema::hasColumn($tableName, 'id')) {
                 $table->unsignedBigInteger('id')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'org_id')) {
+            if (! Schema::hasColumn($tableName, 'org_id')) {
                 $table->unsignedBigInteger('org_id')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'assessment_id')) {
+            if (! Schema::hasColumn($tableName, 'assessment_id')) {
                 $table->unsignedBigInteger('assessment_id')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'subject_type')) {
+            if (! Schema::hasColumn($tableName, 'subject_type')) {
                 $table->string('subject_type', 16)->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'subject_value')) {
+            if (! Schema::hasColumn($tableName, 'subject_value')) {
                 $table->string('subject_value', 255)->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'invite_token')) {
+            if (! Schema::hasColumn($tableName, 'invite_token')) {
                 $table->string('invite_token', 64)->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'started_at')) {
+            if (! Schema::hasColumn($tableName, 'started_at')) {
                 $table->timestamp('started_at')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'completed_at')) {
+            if (! Schema::hasColumn($tableName, 'completed_at')) {
                 $table->timestamp('completed_at')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'attempt_id')) {
+            if (! Schema::hasColumn($tableName, 'attempt_id')) {
                 $table->string('attempt_id', 64)->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'created_at')) {
+            if (! Schema::hasColumn($tableName, 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'updated_at')) {
+            if (! Schema::hasColumn($tableName, 'updated_at')) {
                 $table->timestamp('updated_at')->nullable();
             }
         });
 
         if (Schema::hasColumn($tableName, 'invite_token')
-            && !SchemaIndex::indexExists($tableName, 'assessment_assignments_invite_unique')) {
+            && ! SchemaIndex::indexExists($tableName, 'assessment_assignments_invite_unique')) {
             Schema::table($tableName, function (Blueprint $table): void {
                 $table->unique('invite_token', 'assessment_assignments_invite_unique');
             });
@@ -76,7 +76,7 @@ return new class extends Migration
 
         if (Schema::hasColumn($tableName, 'org_id')
             && Schema::hasColumn($tableName, 'assessment_id')
-            && !SchemaIndex::indexExists($tableName, 'assessment_assignments_org_assessment_idx')) {
+            && ! SchemaIndex::indexExists($tableName, 'assessment_assignments_org_assessment_idx')) {
             Schema::table($tableName, function (Blueprint $table): void {
                 $table->index(['org_id', 'assessment_id'], 'assessment_assignments_org_assessment_idx');
             });
@@ -84,14 +84,14 @@ return new class extends Migration
 
         if (Schema::hasColumn($tableName, 'org_id')
             && Schema::hasColumn($tableName, 'invite_token')
-            && !SchemaIndex::indexExists($tableName, 'assessment_assignments_org_invite_idx')) {
+            && ! SchemaIndex::indexExists($tableName, 'assessment_assignments_org_invite_idx')) {
             Schema::table($tableName, function (Blueprint $table): void {
                 $table->index(['org_id', 'invite_token'], 'assessment_assignments_org_invite_idx');
             });
         }
 
         if (Schema::hasColumn($tableName, 'attempt_id')
-            && !SchemaIndex::indexExists($tableName, 'assessment_assignments_attempt_idx')) {
+            && ! SchemaIndex::indexExists($tableName, 'assessment_assignments_attempt_idx')) {
             Schema::table($tableName, function (Blueprint $table): void {
                 $table->index('attempt_id', 'assessment_assignments_attempt_idx');
             });

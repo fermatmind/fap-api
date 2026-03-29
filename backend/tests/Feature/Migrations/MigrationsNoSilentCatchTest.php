@@ -46,7 +46,7 @@ final class MigrationsNoSilentCatchTest extends TestCase
     {
         $files = glob(base_path('database/migrations/*.php'));
 
-        if (!is_array($files)) {
+        if (! is_array($files)) {
             return [];
         }
 
@@ -66,7 +66,7 @@ final class MigrationsNoSilentCatchTest extends TestCase
 
         for ($i = 0; $i < $count; $i++) {
             $token = $tokens[$i];
-            if (!is_array($token) || $token[0] !== T_CATCH) {
+            if (! is_array($token) || $token[0] !== T_CATCH) {
                 continue;
             }
 
@@ -88,6 +88,7 @@ final class MigrationsNoSilentCatchTest extends TestCase
                 if ($text === '{') {
                     $braceDepth++;
                     $body .= $text;
+
                     continue;
                 }
 
@@ -97,6 +98,7 @@ final class MigrationsNoSilentCatchTest extends TestCase
                         break;
                     }
                     $body .= $text;
+
                     continue;
                 }
 
@@ -110,7 +112,7 @@ final class MigrationsNoSilentCatchTest extends TestCase
     }
 
     /**
-     * @param string|array{int, string, int} $token
+     * @param  string|array{int, string, int}  $token
      */
     private function tokenText(string|array $token): string
     {

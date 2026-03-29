@@ -10,7 +10,7 @@ return new class extends Migration
     {
         $tableName = 'events';
 
-        if (!Schema::hasTable($tableName)) {
+        if (! Schema::hasTable($tableName)) {
             Schema::create($tableName, function (Blueprint $table): void {
                 $table->char('id', 36)->primary();
                 $table->string('event_code', 64);
@@ -22,25 +22,25 @@ return new class extends Migration
         }
 
         Schema::table($tableName, function (Blueprint $table) use ($tableName): void {
-            if (!Schema::hasColumn($tableName, 'id')) {
+            if (! Schema::hasColumn($tableName, 'id')) {
                 $table->char('id', 36)->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'event_code')) {
+            if (! Schema::hasColumn($tableName, 'event_code')) {
                 $table->string('event_code', 64)->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'anon_id')) {
+            if (! Schema::hasColumn($tableName, 'anon_id')) {
                 $table->string('anon_id', 128)->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'attempt_id')) {
+            if (! Schema::hasColumn($tableName, 'attempt_id')) {
                 $table->string('attempt_id', 64)->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'meta_json')) {
+            if (! Schema::hasColumn($tableName, 'meta_json')) {
                 $table->json('meta_json')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'created_at')) {
+            if (! Schema::hasColumn($tableName, 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'updated_at')) {
+            if (! Schema::hasColumn($tableName, 'updated_at')) {
                 $table->timestamp('updated_at')->nullable();
             }
         });

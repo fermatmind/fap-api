@@ -10,13 +10,13 @@ return new class extends Migration
     {
         if (Schema::hasTable('orders')) {
             Schema::table('orders', function (Blueprint $table) {
-                if (!Schema::hasColumn('orders', 'requested_sku')) {
+                if (! Schema::hasColumn('orders', 'requested_sku')) {
                     $table->string('requested_sku', 64)->nullable();
                 }
-                if (!Schema::hasColumn('orders', 'effective_sku')) {
+                if (! Schema::hasColumn('orders', 'effective_sku')) {
                     $table->string('effective_sku', 64)->nullable();
                 }
-                if (!Schema::hasColumn('orders', 'entitlement_id')) {
+                if (! Schema::hasColumn('orders', 'entitlement_id')) {
                     $table->string('entitlement_id', 64)->nullable();
                 }
             });
@@ -24,13 +24,13 @@ return new class extends Migration
 
         if (Schema::hasTable('payment_events')) {
             Schema::table('payment_events', function (Blueprint $table) {
-                if (!Schema::hasColumn('payment_events', 'requested_sku')) {
+                if (! Schema::hasColumn('payment_events', 'requested_sku')) {
                     $table->string('requested_sku', 64)->nullable();
                 }
-                if (!Schema::hasColumn('payment_events', 'effective_sku')) {
+                if (! Schema::hasColumn('payment_events', 'effective_sku')) {
                     $table->string('effective_sku', 64)->nullable();
                 }
-                if (!Schema::hasColumn('payment_events', 'entitlement_id')) {
+                if (! Schema::hasColumn('payment_events', 'entitlement_id')) {
                     $table->string('entitlement_id', 64)->nullable();
                 }
             });

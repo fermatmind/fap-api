@@ -28,10 +28,11 @@ final class NoErrorKeyInApiResponsesTest extends TestCase
         foreach ($scanTargets as $target) {
             if (is_file($target)) {
                 $this->collectViolations($target, $forbiddenTokens, $violations);
+
                 continue;
             }
 
-            if (!is_dir($target)) {
+            if (! is_dir($target)) {
                 continue;
             }
 
@@ -40,7 +41,7 @@ final class NoErrorKeyInApiResponsesTest extends TestCase
             );
 
             foreach ($iterator as $fileInfo) {
-                if (!$fileInfo->isFile() || $fileInfo->getExtension() !== 'php') {
+                if (! $fileInfo->isFile() || $fileInfo->getExtension() !== 'php') {
                     continue;
                 }
 
@@ -55,13 +56,13 @@ final class NoErrorKeyInApiResponsesTest extends TestCase
     }
 
     /**
-     * @param array<int, string> $forbiddenTokens
-     * @param array<int, string> $violations
+     * @param  array<int, string>  $forbiddenTokens
+     * @param  array<int, string>  $violations
      */
     private function collectViolations(string $path, array $forbiddenTokens, array &$violations): void
     {
         $lines = @file($path);
-        if (!is_array($lines)) {
+        if (! is_array($lines)) {
             return;
         }
 

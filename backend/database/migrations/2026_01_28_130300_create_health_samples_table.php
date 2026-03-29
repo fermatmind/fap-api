@@ -12,7 +12,7 @@ return new class extends Migration
         $driver = Schema::getConnection()->getDriverName();
         $isSqlite = $driver === 'sqlite';
 
-        if (!Schema::hasTable('health_samples')) {
+        if (! Schema::hasTable('health_samples')) {
             Schema::create('health_samples', function (Blueprint $table) use ($isSqlite) {
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('user_id')->nullable();
@@ -31,41 +31,41 @@ return new class extends Migration
             });
         } else {
             Schema::table('health_samples', function (Blueprint $table) use ($isSqlite) {
-                if (!Schema::hasColumn('health_samples', 'id')) {
+                if (! Schema::hasColumn('health_samples', 'id')) {
                     $table->bigIncrements('id');
                 }
-                if (!Schema::hasColumn('health_samples', 'user_id')) {
+                if (! Schema::hasColumn('health_samples', 'user_id')) {
                     $table->unsignedBigInteger('user_id')->nullable();
                 }
-                if (!Schema::hasColumn('health_samples', 'source')) {
+                if (! Schema::hasColumn('health_samples', 'source')) {
                     $table->string('source', 64)->default('ingestion');
                 }
-                if (!Schema::hasColumn('health_samples', 'domain')) {
+                if (! Schema::hasColumn('health_samples', 'domain')) {
                     $table->string('domain', 64)->default('unknown');
                 }
-                if (!Schema::hasColumn('health_samples', 'recorded_at')) {
+                if (! Schema::hasColumn('health_samples', 'recorded_at')) {
                     $table->timestamp('recorded_at');
                 }
-                if (!Schema::hasColumn('health_samples', 'value_json')) {
+                if (! Schema::hasColumn('health_samples', 'value_json')) {
                     if ($isSqlite) {
                         $table->text('value_json');
                     } else {
                         $table->json('value_json');
                     }
                 }
-                if (!Schema::hasColumn('health_samples', 'confidence')) {
+                if (! Schema::hasColumn('health_samples', 'confidence')) {
                     $table->decimal('confidence', 4, 2)->default(1.0);
                 }
-                if (!Schema::hasColumn('health_samples', 'raw_payload_hash')) {
+                if (! Schema::hasColumn('health_samples', 'raw_payload_hash')) {
                     $table->string('raw_payload_hash', 64)->nullable();
                 }
-                if (!Schema::hasColumn('health_samples', 'ingest_batch_id')) {
+                if (! Schema::hasColumn('health_samples', 'ingest_batch_id')) {
                     $table->uuid('ingest_batch_id')->nullable();
                 }
-                if (!Schema::hasColumn('health_samples', 'created_at')) {
+                if (! Schema::hasColumn('health_samples', 'created_at')) {
                     $table->timestamp('created_at')->nullable();
                 }
-                if (!Schema::hasColumn('health_samples', 'updated_at')) {
+                if (! Schema::hasColumn('health_samples', 'updated_at')) {
                     $table->timestamp('updated_at')->nullable();
                 }
             });
@@ -76,7 +76,7 @@ return new class extends Migration
             Schema::hasTable('health_samples')
             && Schema::hasColumn('health_samples', 'user_id')
             && Schema::hasColumn('health_samples', 'recorded_at')
-            && !$this->indexExists('health_samples', $indexName)
+            && ! $this->indexExists('health_samples', $indexName)
         ) {
             Schema::table('health_samples', function (Blueprint $table) use ($indexName) {
                 $table->index(['user_id', 'recorded_at'], $indexName);
@@ -101,6 +101,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -111,6 +112,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -121,6 +123,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 

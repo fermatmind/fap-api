@@ -11,7 +11,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('fm_tokens')) {
+        if (! Schema::hasTable('fm_tokens')) {
             return;
         }
 
@@ -36,7 +36,7 @@ return new class extends Migration
 
             // Retire plaintext token persistence; token_hash becomes the only auth lookup key.
             if (str_starts_with($token, 'fm_')) {
-                $updates['token'] = 'retired_' . $tokenHash;
+                $updates['token'] = 'retired_'.$tokenHash;
             }
 
             if ($updates !== []) {
@@ -48,7 +48,7 @@ return new class extends Migration
             }
         }
 
-        if (!$this->indexExists('fm_tokens', 'fm_tokens_token_hash_unique') && Schema::hasColumn('fm_tokens', 'token_hash')) {
+        if (! $this->indexExists('fm_tokens', 'fm_tokens_token_hash_unique') && Schema::hasColumn('fm_tokens', 'token_hash')) {
             Schema::table('fm_tokens', function (Blueprint $table): void {
                 $table->unique(['token_hash'], 'fm_tokens_token_hash_unique');
             });
@@ -89,12 +89,12 @@ return new class extends Migration
 
         $db = DB::getDatabaseName();
         $rows = DB::select(
-            "SELECT 1 FROM information_schema.statistics
+            'SELECT 1 FROM information_schema.statistics
              WHERE table_schema = ? AND table_name = ? AND index_name = ?
-             LIMIT 1",
+             LIMIT 1',
             [$db, $table, $indexName]
         );
 
-        return !empty($rows);
+        return ! empty($rows);
     }
 };

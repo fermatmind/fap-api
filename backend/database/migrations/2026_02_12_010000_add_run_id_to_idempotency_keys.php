@@ -11,23 +11,24 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     private const TABLE = 'idempotency_keys';
+
     private const INDEX = 'idx_idempo_provider_run_external';
 
     public function up(): void
     {
-        if (!Schema::hasTable(self::TABLE)) {
+        if (! Schema::hasTable(self::TABLE)) {
             return;
         }
 
-        if (!Schema::hasColumn(self::TABLE, 'run_id')) {
+        if (! Schema::hasColumn(self::TABLE, 'run_id')) {
             Schema::table(self::TABLE, function (Blueprint $table): void {
                 $table->string('run_id', 36)->nullable();
             });
         }
 
-        if (!Schema::hasColumn(self::TABLE, 'provider')
-            || !Schema::hasColumn(self::TABLE, 'run_id')
-            || !Schema::hasColumn(self::TABLE, 'external_id')
+        if (! Schema::hasColumn(self::TABLE, 'provider')
+            || ! Schema::hasColumn(self::TABLE, 'run_id')
+            || ! Schema::hasColumn(self::TABLE, 'external_id')
             || SchemaIndex::indexExists(self::TABLE, self::INDEX)
             || $this->hasAnyIndexOnColumns(self::TABLE, ['provider', 'run_id', 'external_id'])) {
             return;
@@ -45,7 +46,7 @@ return new class extends Migration
     }
 
     /**
-     * @param list<string> $columns
+     * @param  list<string>  $columns
      */
     private function hasAnyIndexOnColumns(string $table, array $columns): bool
     {
@@ -54,7 +55,7 @@ return new class extends Migration
         }
 
         $database = DB::getDatabaseName();
-        if (!is_string($database) || $database === '') {
+        if (! is_string($database) || $database === '') {
             return false;
         }
 

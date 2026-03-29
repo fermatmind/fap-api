@@ -115,7 +115,7 @@ final class BigFiveDataDeletionCommandTest extends TestCase
             $attemptId
         ))
             ->expectsOutput('status=success')
-            ->expectsOutput('attempt_id=' . $attemptId)
+            ->expectsOutput('attempt_id='.$attemptId)
             ->expectsOutput('org_id=0')
             ->assertExitCode(0);
 
@@ -141,4 +141,3 @@ final class BigFiveDataDeletionCommandTest extends TestCase
         $this->assertSame('test_command', (string) ($requestRow->reason ?? ''));
     }
 }
-

@@ -30,4 +30,3 @@ return new class extends Migration
         // forward-only migration: rollback disabled by design.
     }
 };
-

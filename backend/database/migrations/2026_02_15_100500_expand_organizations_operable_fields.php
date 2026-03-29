@@ -13,24 +13,24 @@ return new class extends Migration
 
     public function up(): void
     {
-        if (!Schema::hasTable(self::TABLE)) {
+        if (! Schema::hasTable(self::TABLE)) {
             return;
         }
 
         Schema::table(self::TABLE, function (Blueprint $table): void {
-            if (!Schema::hasColumn(self::TABLE, 'status')) {
+            if (! Schema::hasColumn(self::TABLE, 'status')) {
                 $table->string('status', 32)->default('active')->after('name');
             }
 
-            if (!Schema::hasColumn(self::TABLE, 'domain')) {
+            if (! Schema::hasColumn(self::TABLE, 'domain')) {
                 $table->string('domain', 191)->nullable()->after('status');
             }
 
-            if (!Schema::hasColumn(self::TABLE, 'timezone')) {
+            if (! Schema::hasColumn(self::TABLE, 'timezone')) {
                 $table->string('timezone', 64)->default('UTC')->after('domain');
             }
 
-            if (!Schema::hasColumn(self::TABLE, 'locale')) {
+            if (! Schema::hasColumn(self::TABLE, 'locale')) {
                 $table->string('locale', 16)->default('en-US')->after('timezone');
             }
         });

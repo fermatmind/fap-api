@@ -13,7 +13,7 @@ return new class extends Migration
 
     public function up(): void
     {
-        if (!Schema::hasTable(self::TABLE)) {
+        if (! Schema::hasTable(self::TABLE)) {
             Schema::create(self::TABLE, function (Blueprint $table): void {
                 $table->bigIncrements('id');
                 $table->string('migration_name', 191)->nullable();
@@ -31,40 +31,40 @@ return new class extends Migration
         }
 
         Schema::table(self::TABLE, function (Blueprint $table): void {
-            if (!Schema::hasColumn(self::TABLE, 'migration_name')) {
+            if (! Schema::hasColumn(self::TABLE, 'migration_name')) {
                 $table->string('migration_name', 191)->nullable();
             }
-            if (!Schema::hasColumn(self::TABLE, 'table_name')) {
+            if (! Schema::hasColumn(self::TABLE, 'table_name')) {
                 $table->string('table_name', 128);
             }
-            if (!Schema::hasColumn(self::TABLE, 'index_name')) {
+            if (! Schema::hasColumn(self::TABLE, 'index_name')) {
                 $table->string('index_name', 128);
             }
-            if (!Schema::hasColumn(self::TABLE, 'action')) {
+            if (! Schema::hasColumn(self::TABLE, 'action')) {
                 $table->string('action', 64);
             }
-            if (!Schema::hasColumn(self::TABLE, 'phase')) {
+            if (! Schema::hasColumn(self::TABLE, 'phase')) {
                 $table->string('phase', 32)->nullable();
             }
-            if (!Schema::hasColumn(self::TABLE, 'driver')) {
+            if (! Schema::hasColumn(self::TABLE, 'driver')) {
                 $table->string('driver', 32)->default('');
             }
-            if (!Schema::hasColumn(self::TABLE, 'status')) {
+            if (! Schema::hasColumn(self::TABLE, 'status')) {
                 $table->string('status', 32)->default('logged');
             }
-            if (!Schema::hasColumn(self::TABLE, 'reason')) {
+            if (! Schema::hasColumn(self::TABLE, 'reason')) {
                 $table->string('reason', 191)->nullable();
             }
-            if (!Schema::hasColumn(self::TABLE, 'meta_json')) {
+            if (! Schema::hasColumn(self::TABLE, 'meta_json')) {
                 $table->text('meta_json')->nullable();
             }
-            if (!Schema::hasColumn(self::TABLE, 'recorded_at')) {
+            if (! Schema::hasColumn(self::TABLE, 'recorded_at')) {
                 $table->timestamp('recorded_at')->nullable();
             }
-            if (!Schema::hasColumn(self::TABLE, 'created_at')) {
+            if (! Schema::hasColumn(self::TABLE, 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
-            if (!Schema::hasColumn(self::TABLE, 'updated_at')) {
+            if (! Schema::hasColumn(self::TABLE, 'updated_at')) {
                 $table->timestamp('updated_at')->nullable();
             }
         });
@@ -82,7 +82,7 @@ return new class extends Migration
     }
 
     /**
-     * @param list<string> $columns
+     * @param  list<string>  $columns
      */
     private function ensureIndex(array $columns, string $indexName): void
     {
@@ -91,7 +91,7 @@ return new class extends Migration
         }
 
         foreach ($columns as $column) {
-            if (!Schema::hasColumn(self::TABLE, $column)) {
+            if (! Schema::hasColumn(self::TABLE, $column)) {
                 return;
             }
         }

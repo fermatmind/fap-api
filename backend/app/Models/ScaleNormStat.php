@@ -9,7 +9,9 @@ class ScaleNormStat extends Model
     protected $table = 'scale_norm_stats';
 
     protected $primaryKey = 'id';
+
     public $incrementing = false;
+
     protected $keyType = 'string';
 
     protected $fillable = [

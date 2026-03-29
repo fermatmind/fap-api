@@ -23,8 +23,8 @@ final class LegacyReportServicePsychometricsIncludeTest extends TestCase
 
     public function test_legacy_report_service_includes_psychometrics_snapshot_when_requested(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
         Config::set('storage_rollout.legacy_drain_enabled', false);
 
         $anonId = 'legacy-psychometrics-anon';

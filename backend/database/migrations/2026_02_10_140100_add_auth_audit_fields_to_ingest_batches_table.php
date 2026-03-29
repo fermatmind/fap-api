@@ -8,21 +8,21 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('ingest_batches')) {
+        if (! Schema::hasTable('ingest_batches')) {
             return;
         }
 
         Schema::table('ingest_batches', function (Blueprint $table) {
-            if (!Schema::hasColumn('ingest_batches', 'actor_user_id')) {
+            if (! Schema::hasColumn('ingest_batches', 'actor_user_id')) {
                 $table->unsignedBigInteger('actor_user_id')->nullable();
             }
-            if (!Schema::hasColumn('ingest_batches', 'auth_mode')) {
+            if (! Schema::hasColumn('ingest_batches', 'auth_mode')) {
                 $table->enum('auth_mode', ['sanctum', 'signature'])->nullable();
             }
-            if (!Schema::hasColumn('ingest_batches', 'signature_ok')) {
+            if (! Schema::hasColumn('ingest_batches', 'signature_ok')) {
                 $table->boolean('signature_ok')->default(false);
             }
-            if (!Schema::hasColumn('ingest_batches', 'source_ip')) {
+            if (! Schema::hasColumn('ingest_batches', 'source_ip')) {
                 $table->string('source_ip', 64)->nullable();
             }
         });

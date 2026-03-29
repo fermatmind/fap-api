@@ -9,11 +9,11 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('skus')) {
+        if (! Schema::hasTable('skus')) {
             return;
         }
 
-        if (!$this->indexExists('skus', 'skus_sku_unique') && Schema::hasColumn('skus', 'sku')) {
+        if (! $this->indexExists('skus', 'skus_sku_unique') && Schema::hasColumn('skus', 'sku')) {
             Schema::table('skus', function (Blueprint $table) {
                 $table->unique('sku', 'skus_sku_unique');
             });
@@ -37,6 +37,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -47,16 +48,18 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
         $db = DB::getDatabaseName();
         $rows = DB::select(
-            "SELECT 1 FROM information_schema.statistics
+            'SELECT 1 FROM information_schema.statistics
              WHERE table_schema = ? AND table_name = ? AND index_name = ?
-             LIMIT 1",
+             LIMIT 1',
             [$db, $table, $indexName]
         );
-        return !empty($rows);
+
+        return ! empty($rows);
     }
 };

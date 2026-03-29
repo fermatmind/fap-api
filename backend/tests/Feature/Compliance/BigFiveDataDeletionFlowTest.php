@@ -21,7 +21,7 @@ final class BigFiveDataDeletionFlowTest extends TestCase
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),
@@ -50,7 +50,7 @@ final class BigFiveDataDeletionFlowTest extends TestCase
 
         $questionIndex = [];
         foreach ((array) ($questions['question_index'] ?? []) as $qid => $meta) {
-            if (!is_array($meta)) {
+            if (! is_array($meta)) {
                 continue;
             }
             $questionIndex[(int) $qid] = $meta;
@@ -84,7 +84,7 @@ final class BigFiveDataDeletionFlowTest extends TestCase
     public function test_purged_big5_attempt_becomes_inaccessible_for_report_and_pdf(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $anonId = 'anon_big5_delete_flow';
         $token = $this->issueAnonToken($anonId);
@@ -141,15 +141,15 @@ final class BigFiveDataDeletionFlowTest extends TestCase
 
         $headers = [
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ];
 
         $this->withHeaders($headers)
-            ->get('/api/v0.3/attempts/' . $attemptId . '/report')
+            ->get('/api/v0.3/attempts/'.$attemptId.'/report')
             ->assertStatus(200);
 
         $this->withHeaders($headers)
-            ->get('/api/v0.3/attempts/' . $attemptId . '/report.pdf')
+            ->get('/api/v0.3/attempts/'.$attemptId.'/report.pdf')
             ->assertStatus(200);
 
         DB::table('report_snapshots')->insertOrIgnore([
@@ -188,11 +188,11 @@ final class BigFiveDataDeletionFlowTest extends TestCase
         $this->assertGreaterThan(0, (int) data_get($purge, 'counts.report_snapshots_deleted', 0));
 
         $this->withHeaders($headers)
-            ->get('/api/v0.3/attempts/' . $attemptId . '/report')
+            ->get('/api/v0.3/attempts/'.$attemptId.'/report')
             ->assertStatus(404);
 
         $this->withHeaders($headers)
-            ->get('/api/v0.3/attempts/' . $attemptId . '/report.pdf')
+            ->get('/api/v0.3/attempts/'.$attemptId.'/report.pdf')
             ->assertStatus(404);
 
         $this->assertSame(0, DB::table('results')->where('attempt_id', $attemptId)->count());

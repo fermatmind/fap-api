@@ -21,7 +21,7 @@ final class V0_3TraitReferenceTest extends TestCase
         $scanned = 0;
 
         foreach ($iterator as $fileInfo) {
-            if (!$fileInfo->isFile() || $fileInfo->getExtension() !== 'php') {
+            if (! $fileInfo->isFile() || $fileInfo->getExtension() !== 'php') {
                 continue;
             }
 
@@ -54,11 +54,11 @@ final class V0_3TraitReferenceTest extends TestCase
             return null;
         }
 
-        if (!preg_match('/^namespace\s+([^;]+);/m', $contents, $namespaceMatch)) {
+        if (! preg_match('/^namespace\s+([^;]+);/m', $contents, $namespaceMatch)) {
             return null;
         }
 
-        if (!preg_match('/^(?:final\s+|abstract\s+)?class\s+([A-Za-z_][A-Za-z0-9_]*)/m', $contents, $classMatch)) {
+        if (! preg_match('/^(?:final\s+|abstract\s+)?class\s+([A-Za-z_][A-Za-z0-9_]*)/m', $contents, $classMatch)) {
             return null;
         }
 

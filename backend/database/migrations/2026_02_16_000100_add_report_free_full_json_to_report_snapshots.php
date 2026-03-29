@@ -10,14 +10,14 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('report_snapshots')) {
+        if (! Schema::hasTable('report_snapshots')) {
             return;
         }
 
         $isSqlite = Schema::getConnection()->getDriverName() === 'sqlite';
 
         Schema::table('report_snapshots', function (Blueprint $table) use ($isSqlite): void {
-            if (!Schema::hasColumn('report_snapshots', 'report_free_json')) {
+            if (! Schema::hasColumn('report_snapshots', 'report_free_json')) {
                 if ($isSqlite) {
                     $table->text('report_free_json')->nullable();
                 } else {
@@ -25,7 +25,7 @@ return new class extends Migration
                 }
             }
 
-            if (!Schema::hasColumn('report_snapshots', 'report_full_json')) {
+            if (! Schema::hasColumn('report_snapshots', 'report_full_json')) {
                 if ($isSqlite) {
                     $table->text('report_full_json')->nullable();
                 } else {
@@ -41,4 +41,3 @@ return new class extends Migration
         // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };
-

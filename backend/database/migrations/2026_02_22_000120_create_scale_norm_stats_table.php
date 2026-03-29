@@ -9,7 +9,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('scale_norm_stats')) {
+        if (! Schema::hasTable('scale_norm_stats')) {
             Schema::create('scale_norm_stats', function (Blueprint $table) {
                 $table->uuid('id')->primary();
                 $table->uuid('norm_version_id');
@@ -24,44 +24,44 @@ return new class extends Migration
         }
 
         Schema::table('scale_norm_stats', function (Blueprint $table) {
-            if (!Schema::hasColumn('scale_norm_stats', 'id')) {
+            if (! Schema::hasColumn('scale_norm_stats', 'id')) {
                 $table->uuid('id')->nullable();
             }
-            if (!Schema::hasColumn('scale_norm_stats', 'norm_version_id')) {
+            if (! Schema::hasColumn('scale_norm_stats', 'norm_version_id')) {
                 $table->uuid('norm_version_id');
             }
-            if (!Schema::hasColumn('scale_norm_stats', 'metric_level')) {
+            if (! Schema::hasColumn('scale_norm_stats', 'metric_level')) {
                 $table->string('metric_level', 16)->nullable();
             }
-            if (!Schema::hasColumn('scale_norm_stats', 'metric_code')) {
+            if (! Schema::hasColumn('scale_norm_stats', 'metric_code')) {
                 $table->string('metric_code', 32)->nullable();
             }
-            if (!Schema::hasColumn('scale_norm_stats', 'mean')) {
+            if (! Schema::hasColumn('scale_norm_stats', 'mean')) {
                 $table->decimal('mean', 8, 4)->nullable();
             }
-            if (!Schema::hasColumn('scale_norm_stats', 'sd')) {
+            if (! Schema::hasColumn('scale_norm_stats', 'sd')) {
                 $table->decimal('sd', 8, 4)->nullable();
             }
-            if (!Schema::hasColumn('scale_norm_stats', 'sample_n')) {
+            if (! Schema::hasColumn('scale_norm_stats', 'sample_n')) {
                 $table->integer('sample_n')->nullable();
             }
-            if (!Schema::hasColumn('scale_norm_stats', 'created_at')) {
+            if (! Schema::hasColumn('scale_norm_stats', 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
-            if (!Schema::hasColumn('scale_norm_stats', 'updated_at')) {
+            if (! Schema::hasColumn('scale_norm_stats', 'updated_at')) {
                 $table->timestamp('updated_at')->nullable();
             }
         });
 
         $unique = 'scale_norm_stats_version_metric_uniq';
-        if (!$this->indexExists('scale_norm_stats', $unique)) {
+        if (! $this->indexExists('scale_norm_stats', $unique)) {
             Schema::table('scale_norm_stats', function (Blueprint $table) use ($unique) {
                 $table->unique(['norm_version_id', 'metric_level', 'metric_code'], $unique);
             });
         }
 
         $index = 'scale_norm_stats_norm_version_id_idx';
-        if (!$this->indexExists('scale_norm_stats', $index)) {
+        if (! $this->indexExists('scale_norm_stats', $index)) {
             Schema::table('scale_norm_stats', function (Blueprint $table) use ($index) {
                 $table->index('norm_version_id', $index);
             });

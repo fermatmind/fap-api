@@ -10,8 +10,9 @@ class Pr16IqRavenDemoSeeder extends Seeder
 {
     public function run(): void
     {
-        if (!Schema::hasTable('scales_registry') || !Schema::hasTable('scale_slugs')) {
+        if (! Schema::hasTable('scales_registry') || ! Schema::hasTable('scale_slugs')) {
             $this->command?->warn('Pr16IqRavenDemoSeeder skipped: missing tables.');
+
             return;
         }
 

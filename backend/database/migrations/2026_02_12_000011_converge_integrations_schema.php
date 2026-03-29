@@ -11,7 +11,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('integrations')) {
+        if (! Schema::hasTable('integrations')) {
             Schema::create('integrations', function (Blueprint $table): void {
                 $table->id();
                 $table->unsignedBigInteger('user_id')->nullable();
@@ -31,36 +31,36 @@ return new class extends Migration
         }
 
         Schema::table('integrations', function (Blueprint $table): void {
-            if (!Schema::hasColumn('integrations', 'ingest_key_hash')) {
+            if (! Schema::hasColumn('integrations', 'ingest_key_hash')) {
                 $table->string('ingest_key_hash', 64)->nullable()->after('status');
             }
-            if (!Schema::hasColumn('integrations', 'scopes_json')) {
+            if (! Schema::hasColumn('integrations', 'scopes_json')) {
                 $table->json('scopes_json')->nullable()->after('ingest_key_hash');
             }
-            if (!Schema::hasColumn('integrations', 'connected_at')) {
+            if (! Schema::hasColumn('integrations', 'connected_at')) {
                 $table->timestamp('connected_at')->nullable()->after('consent_version');
             }
-            if (!Schema::hasColumn('integrations', 'revoked_at')) {
+            if (! Schema::hasColumn('integrations', 'revoked_at')) {
                 $table->timestamp('revoked_at')->nullable()->after('connected_at');
             }
-            if (!Schema::hasColumn('integrations', 'webhook_last_event_id')) {
+            if (! Schema::hasColumn('integrations', 'webhook_last_event_id')) {
                 $table->string('webhook_last_event_id', 128)->nullable()->after('revoked_at');
             }
-            if (!Schema::hasColumn('integrations', 'webhook_last_timestamp')) {
+            if (! Schema::hasColumn('integrations', 'webhook_last_timestamp')) {
                 $table->unsignedBigInteger('webhook_last_timestamp')->nullable()->after('webhook_last_event_id');
             }
-            if (!Schema::hasColumn('integrations', 'webhook_last_received_at')) {
+            if (! Schema::hasColumn('integrations', 'webhook_last_received_at')) {
                 $table->timestamp('webhook_last_received_at')->nullable()->after('webhook_last_timestamp');
             }
-            if (!Schema::hasColumn('integrations', 'created_at')) {
+            if (! Schema::hasColumn('integrations', 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
-            if (!Schema::hasColumn('integrations', 'updated_at')) {
+            if (! Schema::hasColumn('integrations', 'updated_at')) {
                 $table->timestamp('updated_at')->nullable();
             }
         });
 
-        if (!$this->indexExists('integrations', 'integrations_ingest_key_hash_unique')) {
+        if (! $this->indexExists('integrations', 'integrations_ingest_key_hash_unique')) {
             Schema::table('integrations', function (Blueprint $table): void {
                 $table->unique(['ingest_key_hash'], 'integrations_ingest_key_hash_unique');
             });
@@ -84,6 +84,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -94,17 +95,18 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
         $db = DB::getDatabaseName();
         $rows = DB::select(
-            "SELECT 1 FROM information_schema.statistics
+            'SELECT 1 FROM information_schema.statistics
              WHERE table_schema = ? AND table_name = ? AND index_name = ?
-             LIMIT 1",
+             LIMIT 1',
             [$db, $table, $indexName]
         );
 
-        return !empty($rows);
+        return ! empty($rows);
     }
 };

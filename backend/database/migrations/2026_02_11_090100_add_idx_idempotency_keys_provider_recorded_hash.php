@@ -11,15 +11,17 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     private const TABLE = 'idempotency_keys';
+
     private const INDEX = 'idx_idempo_provider_recorded_hash';
+
     private const ALT_INDEX = 'idx_idempo_payload';
 
     public function up(): void
     {
-        if (!Schema::hasTable(self::TABLE)
-            || !Schema::hasColumn(self::TABLE, 'provider')
-            || !Schema::hasColumn(self::TABLE, 'recorded_at')
-            || !Schema::hasColumn(self::TABLE, 'hash')
+        if (! Schema::hasTable(self::TABLE)
+            || ! Schema::hasColumn(self::TABLE, 'provider')
+            || ! Schema::hasColumn(self::TABLE, 'recorded_at')
+            || ! Schema::hasColumn(self::TABLE, 'hash')
             || SchemaIndex::indexExists(self::TABLE, self::INDEX)
             || SchemaIndex::indexExists(self::TABLE, self::ALT_INDEX)
             || $this->hasAnyIndexOnColumns(self::TABLE, ['provider', 'recorded_at', 'hash'])) {
@@ -38,7 +40,7 @@ return new class extends Migration
     }
 
     /**
-     * @param list<string> $columns
+     * @param  list<string>  $columns
      */
     private function hasAnyIndexOnColumns(string $table, array $columns): bool
     {
@@ -47,7 +49,7 @@ return new class extends Migration
         }
 
         $database = DB::getDatabaseName();
-        if (!is_string($database) || $database === '') {
+        if (! is_string($database) || $database === '') {
             return false;
         }
 

@@ -14,7 +14,7 @@ return new class extends Migration
 
         if (Schema::hasTable('orders')) {
             Schema::table('orders', function (Blueprint $table) use ($isSqlite): void {
-                if (!Schema::hasColumn('orders', 'meta_json')) {
+                if (! Schema::hasColumn('orders', 'meta_json')) {
                     if ($isSqlite) {
                         $table->text('meta_json')->nullable();
                     } else {
@@ -26,7 +26,7 @@ return new class extends Migration
 
         if (Schema::hasTable('benefit_grants')) {
             Schema::table('benefit_grants', function (Blueprint $table) use ($isSqlite): void {
-                if (!Schema::hasColumn('benefit_grants', 'meta_json')) {
+                if (! Schema::hasColumn('benefit_grants', 'meta_json')) {
                     if ($isSqlite) {
                         $table->text('meta_json')->nullable();
                     } else {
@@ -43,4 +43,3 @@ return new class extends Migration
         // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };
-

@@ -12,7 +12,7 @@ return new class extends Migration
         $driver = Schema::getConnection()->getDriverName();
         $isSqlite = $driver === 'sqlite';
 
-        if (!Schema::hasTable('agent_triggers')) {
+        if (! Schema::hasTable('agent_triggers')) {
             Schema::create('agent_triggers', function (Blueprint $table) use ($isSqlite) {
                 $table->uuid('id')->primary();
                 $table->unsignedBigInteger('user_id');
@@ -30,38 +30,38 @@ return new class extends Migration
             });
         } else {
             Schema::table('agent_triggers', function (Blueprint $table) use ($isSqlite) {
-                if (!Schema::hasColumn('agent_triggers', 'id')) {
+                if (! Schema::hasColumn('agent_triggers', 'id')) {
                     $table->uuid('id')->primary();
                 }
-                if (!Schema::hasColumn('agent_triggers', 'user_id')) {
+                if (! Schema::hasColumn('agent_triggers', 'user_id')) {
                     $table->unsignedBigInteger('user_id');
                 }
-                if (!Schema::hasColumn('agent_triggers', 'trigger_type')) {
+                if (! Schema::hasColumn('agent_triggers', 'trigger_type')) {
                     $table->string('trigger_type', 64);
                 }
-                if (!Schema::hasColumn('agent_triggers', 'status')) {
+                if (! Schema::hasColumn('agent_triggers', 'status')) {
                     $table->string('status', 32)->default('fired');
                 }
-                if (!Schema::hasColumn('agent_triggers', 'fired_at')) {
+                if (! Schema::hasColumn('agent_triggers', 'fired_at')) {
                     $table->timestamp('fired_at')->nullable();
                 }
-                if (!Schema::hasColumn('agent_triggers', 'idempotency_key')) {
+                if (! Schema::hasColumn('agent_triggers', 'idempotency_key')) {
                     $table->string('idempotency_key', 128)->nullable();
                 }
-                if (!Schema::hasColumn('agent_triggers', 'suppressed_reason')) {
+                if (! Schema::hasColumn('agent_triggers', 'suppressed_reason')) {
                     $table->string('suppressed_reason', 128)->nullable();
                 }
-                if (!Schema::hasColumn('agent_triggers', 'payload_json')) {
+                if (! Schema::hasColumn('agent_triggers', 'payload_json')) {
                     if ($isSqlite) {
                         $table->text('payload_json')->nullable();
                     } else {
                         $table->json('payload_json')->nullable();
                     }
                 }
-                if (!Schema::hasColumn('agent_triggers', 'created_at')) {
+                if (! Schema::hasColumn('agent_triggers', 'created_at')) {
                     $table->timestamp('created_at')->nullable();
                 }
-                if (!Schema::hasColumn('agent_triggers', 'updated_at')) {
+                if (! Schema::hasColumn('agent_triggers', 'updated_at')) {
                     $table->timestamp('updated_at')->nullable();
                 }
             });
@@ -73,7 +73,7 @@ return new class extends Migration
             && Schema::hasColumn('agent_triggers', 'user_id')
             && Schema::hasColumn('agent_triggers', 'trigger_type')
             && Schema::hasColumn('agent_triggers', 'fired_at')
-            && !$this->indexExists('agent_triggers', $userTriggerIdx)
+            && ! $this->indexExists('agent_triggers', $userTriggerIdx)
         ) {
             Schema::table('agent_triggers', function (Blueprint $table) use ($userTriggerIdx) {
                 $table->index(['user_id', 'trigger_type', 'fired_at'], $userTriggerIdx);
@@ -84,7 +84,7 @@ return new class extends Migration
         if (
             Schema::hasTable('agent_triggers')
             && Schema::hasColumn('agent_triggers', 'idempotency_key')
-            && !$this->indexExists('agent_triggers', $idempotencyIdx)
+            && ! $this->indexExists('agent_triggers', $idempotencyIdx)
         ) {
             Schema::table('agent_triggers', function (Blueprint $table) use ($idempotencyIdx) {
                 $table->unique(['idempotency_key'], $idempotencyIdx);
@@ -95,7 +95,7 @@ return new class extends Migration
         if (
             Schema::hasTable('agent_triggers')
             && Schema::hasColumn('agent_triggers', 'status')
-            && !$this->indexExists('agent_triggers', $statusIdx)
+            && ! $this->indexExists('agent_triggers', $statusIdx)
         ) {
             Schema::table('agent_triggers', function (Blueprint $table) use ($statusIdx) {
                 $table->index(['status'], $statusIdx);
@@ -120,6 +120,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -130,6 +131,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -140,6 +142,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 

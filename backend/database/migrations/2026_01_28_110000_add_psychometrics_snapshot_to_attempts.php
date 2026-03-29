@@ -9,7 +9,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('attempts')) {
+        if (! Schema::hasTable('attempts')) {
             return;
         }
 
@@ -17,19 +17,19 @@ return new class extends Migration
         $isSqlite = $driver === 'sqlite';
 
         Schema::table('attempts', function (Blueprint $table) use ($isSqlite) {
-            if (!Schema::hasColumn('attempts', 'pack_id')) {
+            if (! Schema::hasColumn('attempts', 'pack_id')) {
                 $table->string('pack_id', 128)->nullable();
             }
-            if (!Schema::hasColumn('attempts', 'dir_version')) {
+            if (! Schema::hasColumn('attempts', 'dir_version')) {
                 $table->string('dir_version', 128)->nullable();
             }
-            if (!Schema::hasColumn('attempts', 'scoring_spec_version')) {
+            if (! Schema::hasColumn('attempts', 'scoring_spec_version')) {
                 $table->string('scoring_spec_version', 64)->nullable();
             }
-            if (!Schema::hasColumn('attempts', 'norm_version')) {
+            if (! Schema::hasColumn('attempts', 'norm_version')) {
                 $table->string('norm_version', 64)->nullable();
             }
-            if (!Schema::hasColumn('attempts', 'calculation_snapshot_json')) {
+            if (! Schema::hasColumn('attempts', 'calculation_snapshot_json')) {
                 if ($isSqlite) {
                     $table->text('calculation_snapshot_json')->nullable();
                 } else {
@@ -39,7 +39,7 @@ return new class extends Migration
         });
 
         $indexName = 'attempts_pack_norm_idx';
-        if (!$this->indexExists('attempts', $indexName)) {
+        if (! $this->indexExists('attempts', $indexName)) {
             Schema::table('attempts', function (Blueprint $table) use ($indexName) {
                 $table->index(['pack_id', 'norm_version'], $indexName);
             });
@@ -63,6 +63,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -73,6 +74,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -83,6 +85,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 

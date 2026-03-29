@@ -9,7 +9,9 @@ class ScaleNormsVersion extends Model
     protected $table = 'scale_norms_versions';
 
     protected $primaryKey = 'id';
+
     public $incrementing = false;
+
     protected $keyType = 'string';
 
     protected $fillable = [

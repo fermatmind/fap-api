@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     private const TABLE = 'norms_table';
+
     private const INDEX = 'idx_norms_table_version_metric_score';
 
     public function up(): void
     {
-        if (!Schema::hasTable(self::TABLE)) {
+        if (! Schema::hasTable(self::TABLE)) {
             return;
         }
 

@@ -13,8 +13,8 @@ return new class extends Migration
         $isSqlite = $driver === 'sqlite';
         $isMysql = $driver === 'mysql';
 
-        if (!Schema::hasTable('attempt_answer_rows')) {
-            Schema::create('attempt_answer_rows', function (Blueprint $table) use ($isSqlite, $isMysql) {
+        if (! Schema::hasTable('attempt_answer_rows')) {
+            Schema::create('attempt_answer_rows', function (Blueprint $table) use ($isMysql) {
                 /**
                  * MySQL 分区硬约束：
                  * - 分区键 submitted_at 必须在 PRIMARY KEY 里
@@ -73,35 +73,35 @@ return new class extends Migration
 
         // --- 表已存在：只做“缺啥补啥”，并且保证不会因为分区动作导致 migrate 失败 ---
         Schema::table('attempt_answer_rows', function (Blueprint $table) use ($isSqlite, $isMysql) {
-            if (!Schema::hasColumn('attempt_answer_rows', 'attempt_id')) {
+            if (! Schema::hasColumn('attempt_answer_rows', 'attempt_id')) {
                 $table->uuid('attempt_id');
             }
-            if (!Schema::hasColumn('attempt_answer_rows', 'org_id')) {
+            if (! Schema::hasColumn('attempt_answer_rows', 'org_id')) {
                 $table->unsignedBigInteger('org_id')->default(0);
             }
-            if (!Schema::hasColumn('attempt_answer_rows', 'scale_code')) {
+            if (! Schema::hasColumn('attempt_answer_rows', 'scale_code')) {
                 $table->string('scale_code', 32);
             }
-            if (!Schema::hasColumn('attempt_answer_rows', 'question_id')) {
+            if (! Schema::hasColumn('attempt_answer_rows', 'question_id')) {
                 $table->string('question_id', 128);
             }
-            if (!Schema::hasColumn('attempt_answer_rows', 'question_index')) {
+            if (! Schema::hasColumn('attempt_answer_rows', 'question_index')) {
                 $table->integer('question_index')->default(0);
             }
-            if (!Schema::hasColumn('attempt_answer_rows', 'question_type')) {
+            if (! Schema::hasColumn('attempt_answer_rows', 'question_type')) {
                 $table->string('question_type', 32);
             }
-            if (!Schema::hasColumn('attempt_answer_rows', 'answer_json')) {
+            if (! Schema::hasColumn('attempt_answer_rows', 'answer_json')) {
                 if ($isSqlite) {
                     $table->text('answer_json')->nullable();
                 } else {
                     $table->longText('answer_json')->nullable();
                 }
             }
-            if (!Schema::hasColumn('attempt_answer_rows', 'duration_ms')) {
+            if (! Schema::hasColumn('attempt_answer_rows', 'duration_ms')) {
                 $table->integer('duration_ms')->default(0);
             }
-            if (!Schema::hasColumn('attempt_answer_rows', 'submitted_at')) {
+            if (! Schema::hasColumn('attempt_answer_rows', 'submitted_at')) {
                 // 旧表存在时，不强行改 NOT NULL，避免生产/历史数据被打爆。
                 if ($isMysql) {
                     $table->dateTime('submitted_at')->nullable();
@@ -109,7 +109,7 @@ return new class extends Migration
                     $table->timestamp('submitted_at')->nullable();
                 }
             }
-            if (!Schema::hasColumn('attempt_answer_rows', 'created_at')) {
+            if (! Schema::hasColumn('attempt_answer_rows', 'created_at')) {
                 if ($isMysql) {
                     $table->dateTime('created_at')->nullable();
                 } else {
@@ -119,8 +119,8 @@ return new class extends Migration
         });
 
         // sqlite/非 mysql：补齐 UNIQUE 以匹配 upsert
-        if (!$isMysql) {
-            if (!$this->indexExists('attempt_answer_rows', 'attempt_answer_rows_attempt_question_unique')) {
+        if (! $isMysql) {
+            if (! $this->indexExists('attempt_answer_rows', 'attempt_answer_rows_attempt_question_unique')) {
                 Schema::table('attempt_answer_rows', function (Blueprint $table) {
                     $table->unique(['attempt_id', 'question_id'], 'attempt_answer_rows_attempt_question_unique');
                 });
@@ -128,22 +128,22 @@ return new class extends Migration
         }
 
         // 统一补齐普通索引
-        if (!$this->indexExists('attempt_answer_rows', 'attempt_answer_rows_org_idx')) {
+        if (! $this->indexExists('attempt_answer_rows', 'attempt_answer_rows_org_idx')) {
             Schema::table('attempt_answer_rows', function (Blueprint $table) {
                 $table->index(['org_id'], 'attempt_answer_rows_org_idx');
             });
         }
-        if (!$this->indexExists('attempt_answer_rows', 'attempt_answer_rows_scale_idx')) {
+        if (! $this->indexExists('attempt_answer_rows', 'attempt_answer_rows_scale_idx')) {
             Schema::table('attempt_answer_rows', function (Blueprint $table) {
                 $table->index(['scale_code'], 'attempt_answer_rows_scale_idx');
             });
         }
-        if (!$this->indexExists('attempt_answer_rows', 'attempt_answer_rows_attempt_idx')) {
+        if (! $this->indexExists('attempt_answer_rows', 'attempt_answer_rows_attempt_idx')) {
             Schema::table('attempt_answer_rows', function (Blueprint $table) {
                 $table->index(['attempt_id'], 'attempt_answer_rows_attempt_idx');
             });
         }
-        if (!$this->indexExists('attempt_answer_rows', 'attempt_answer_rows_submitted_idx')) {
+        if (! $this->indexExists('attempt_answer_rows', 'attempt_answer_rows_submitted_idx')) {
             Schema::table('attempt_answer_rows', function (Blueprint $table) {
                 $table->index(['submitted_at'], 'attempt_answer_rows_submitted_idx');
             });
@@ -168,6 +168,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -178,17 +179,18 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
         $db = DB::getDatabaseName();
         $rows = DB::select(
-            "SELECT 1 FROM information_schema.statistics
+            'SELECT 1 FROM information_schema.statistics
              WHERE table_schema = ? AND table_name = ? AND index_name = ?
-             LIMIT 1",
+             LIMIT 1',
             [$db, $table, $indexName]
         );
 
-        return !empty($rows);
+        return ! empty($rows);
     }
 };

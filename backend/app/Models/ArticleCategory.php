@@ -37,4 +37,3 @@ class ArticleCategory extends Model
         return $this->hasMany(Article::class, 'category_id', 'id');
     }
 }
-

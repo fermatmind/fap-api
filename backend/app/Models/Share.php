@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Share extends Model
 {
     public $incrementing = false;
+
     protected $keyType = 'string';
+
     protected $table = 'shares';
 
     protected $fillable = [

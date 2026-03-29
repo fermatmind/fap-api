@@ -9,7 +9,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('benefit_grants')) {
+        if (! Schema::hasTable('benefit_grants')) {
             Schema::create('benefit_grants', function (Blueprint $table) {
                 $table->uuid('id')->primary();
                 $table->unsignedBigInteger('org_id')->default(0);
@@ -31,25 +31,26 @@ return new class extends Migration
                 $table->index(['attempt_id', 'benefit_code'], 'benefit_grants_attempt_benefit_idx');
                 $table->unique(['source_order_id', 'benefit_type', 'benefit_ref'], 'uq_benefit_grants_source');
             });
+
             return;
         }
 
         Schema::table('benefit_grants', function (Blueprint $table) {
-            if (!Schema::hasColumn('benefit_grants', 'org_id')) {
+            if (! Schema::hasColumn('benefit_grants', 'org_id')) {
                 $table->unsignedBigInteger('org_id')->default(0);
             }
-            if (!Schema::hasColumn('benefit_grants', 'benefit_code')) {
+            if (! Schema::hasColumn('benefit_grants', 'benefit_code')) {
                 $table->string('benefit_code', 64)->nullable();
             }
-            if (!Schema::hasColumn('benefit_grants', 'scope')) {
+            if (! Schema::hasColumn('benefit_grants', 'scope')) {
                 $table->string('scope', 32)->nullable();
             }
-            if (!Schema::hasColumn('benefit_grants', 'attempt_id')) {
+            if (! Schema::hasColumn('benefit_grants', 'attempt_id')) {
                 $table->string('attempt_id', 64)->nullable();
             }
         });
 
-        if (!$this->indexExists('benefit_grants', 'benefit_grants_org_user_benefit_idx')
+        if (! $this->indexExists('benefit_grants', 'benefit_grants_org_user_benefit_idx')
             && Schema::hasColumn('benefit_grants', 'org_id')
             && Schema::hasColumn('benefit_grants', 'user_id')
             && Schema::hasColumn('benefit_grants', 'benefit_code')) {
@@ -58,7 +59,7 @@ return new class extends Migration
             });
         }
 
-        if (!$this->indexExists('benefit_grants', 'benefit_grants_attempt_benefit_idx')
+        if (! $this->indexExists('benefit_grants', 'benefit_grants_attempt_benefit_idx')
             && Schema::hasColumn('benefit_grants', 'attempt_id')
             && Schema::hasColumn('benefit_grants', 'benefit_code')) {
             Schema::table('benefit_grants', function (Blueprint $table) {
@@ -66,7 +67,7 @@ return new class extends Migration
             });
         }
 
-        if (!$this->indexExists('benefit_grants', 'uq_benefit_grants_source')
+        if (! $this->indexExists('benefit_grants', 'uq_benefit_grants_source')
             && Schema::hasColumn('benefit_grants', 'source_order_id')
             && Schema::hasColumn('benefit_grants', 'benefit_type')
             && Schema::hasColumn('benefit_grants', 'benefit_ref')) {
@@ -93,6 +94,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -103,16 +105,18 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
         $db = DB::getDatabaseName();
         $rows = DB::select(
-            "SELECT 1 FROM information_schema.statistics
+            'SELECT 1 FROM information_schema.statistics
              WHERE table_schema = ? AND table_name = ? AND index_name = ?
-             LIMIT 1",
+             LIMIT 1',
             [$db, $table, $indexName]
         );
-        return !empty($rows);
+
+        return ! empty($rows);
     }
 };

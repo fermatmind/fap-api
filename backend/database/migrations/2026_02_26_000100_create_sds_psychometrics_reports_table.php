@@ -10,7 +10,7 @@ return new class extends Migration
     {
         $isSqlite = Schema::getConnection()->getDriverName() === 'sqlite';
 
-        if (!Schema::hasTable('sds_psychometrics_reports')) {
+        if (! Schema::hasTable('sds_psychometrics_reports')) {
             Schema::create('sds_psychometrics_reports', function (Blueprint $table) use ($isSqlite): void {
                 $table->uuid('id')->primary();
                 $table->string('scale_code', 32)->default('SDS_20');
@@ -34,41 +34,41 @@ return new class extends Migration
         }
 
         Schema::table('sds_psychometrics_reports', function (Blueprint $table) use ($isSqlite): void {
-            if (!Schema::hasColumn('sds_psychometrics_reports', 'id')) {
+            if (! Schema::hasColumn('sds_psychometrics_reports', 'id')) {
                 $table->uuid('id')->nullable();
             }
-            if (!Schema::hasColumn('sds_psychometrics_reports', 'scale_code')) {
+            if (! Schema::hasColumn('sds_psychometrics_reports', 'scale_code')) {
                 $table->string('scale_code', 32)->default('SDS_20');
             }
-            if (!Schema::hasColumn('sds_psychometrics_reports', 'locale')) {
+            if (! Schema::hasColumn('sds_psychometrics_reports', 'locale')) {
                 $table->string('locale', 16)->default('zh-CN');
             }
-            if (!Schema::hasColumn('sds_psychometrics_reports', 'region')) {
+            if (! Schema::hasColumn('sds_psychometrics_reports', 'region')) {
                 $table->string('region', 32)->nullable();
             }
-            if (!Schema::hasColumn('sds_psychometrics_reports', 'norms_version')) {
+            if (! Schema::hasColumn('sds_psychometrics_reports', 'norms_version')) {
                 $table->string('norms_version', 64)->nullable();
             }
-            if (!Schema::hasColumn('sds_psychometrics_reports', 'time_window')) {
+            if (! Schema::hasColumn('sds_psychometrics_reports', 'time_window')) {
                 $table->string('time_window', 64)->default('last_90_days');
             }
-            if (!Schema::hasColumn('sds_psychometrics_reports', 'sample_n')) {
+            if (! Schema::hasColumn('sds_psychometrics_reports', 'sample_n')) {
                 $table->unsignedInteger('sample_n')->default(0);
             }
-            if (!Schema::hasColumn('sds_psychometrics_reports', 'metrics_json')) {
+            if (! Schema::hasColumn('sds_psychometrics_reports', 'metrics_json')) {
                 if ($isSqlite) {
                     $table->text('metrics_json')->nullable();
                 } else {
                     $table->json('metrics_json')->nullable();
                 }
             }
-            if (!Schema::hasColumn('sds_psychometrics_reports', 'generated_at')) {
+            if (! Schema::hasColumn('sds_psychometrics_reports', 'generated_at')) {
                 $table->timestamp('generated_at')->nullable();
             }
-            if (!Schema::hasColumn('sds_psychometrics_reports', 'created_at')) {
+            if (! Schema::hasColumn('sds_psychometrics_reports', 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
-            if (!Schema::hasColumn('sds_psychometrics_reports', 'updated_at')) {
+            if (! Schema::hasColumn('sds_psychometrics_reports', 'updated_at')) {
                 $table->timestamp('updated_at')->nullable();
             }
         });

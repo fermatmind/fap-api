@@ -11,7 +11,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('permission_role')) {
+        if (! Schema::hasTable('permission_role')) {
             Schema::create('permission_role', function (Blueprint $table): void {
                 $table->unsignedBigInteger('permission_id');
                 $table->unsignedBigInteger('role_id');
@@ -19,14 +19,15 @@ return new class extends Migration
                 $table->index(['role_id'], 'idx_permission_role_role');
                 $table->index(['permission_id'], 'idx_permission_role_permission');
             });
+
             return;
         }
 
         Schema::table('permission_role', function (Blueprint $table): void {
-            if (!Schema::hasColumn('permission_role', 'permission_id')) {
+            if (! Schema::hasColumn('permission_role', 'permission_id')) {
                 $table->unsignedBigInteger('permission_id')->nullable();
             }
-            if (!Schema::hasColumn('permission_role', 'role_id')) {
+            if (! Schema::hasColumn('permission_role', 'role_id')) {
                 $table->unsignedBigInteger('role_id')->nullable();
             }
         });
@@ -54,6 +55,7 @@ return new class extends Migration
 
         if (SchemaIndex::indexExists($tableName, $indexName)) {
             SchemaIndex::logIndexAction('create_unique_skip_exists', $tableName, $indexName, $driver, ['phase' => 'up']);
+
             return;
         }
 
@@ -65,6 +67,7 @@ return new class extends Migration
         } catch (\Throwable $e) {
             if (SchemaIndex::isDuplicateIndexException($e, $indexName)) {
                 SchemaIndex::logIndexAction('create_unique_skip_duplicate', $tableName, $indexName, $driver, ['phase' => 'up']);
+
                 return;
             }
 
@@ -78,6 +81,7 @@ return new class extends Migration
 
         if (SchemaIndex::indexExists($tableName, $indexName)) {
             SchemaIndex::logIndexAction('create_index_skip_exists', $tableName, $indexName, $driver, ['phase' => 'up']);
+
             return;
         }
 
@@ -89,6 +93,7 @@ return new class extends Migration
         } catch (\Throwable $e) {
             if (SchemaIndex::isDuplicateIndexException($e, $indexName)) {
                 SchemaIndex::logIndexAction('create_index_skip_duplicate', $tableName, $indexName, $driver, ['phase' => 'up']);
+
                 return;
             }
 

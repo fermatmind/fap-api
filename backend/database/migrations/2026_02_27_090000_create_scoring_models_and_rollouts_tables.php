@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     private const MODELS_TABLE = 'scoring_models';
+
     private const ROLLOUTS_TABLE = 'scoring_model_rollouts';
 
     public function up(): void
@@ -205,4 +206,3 @@ return new class extends Migration
         });
     }
 };
-

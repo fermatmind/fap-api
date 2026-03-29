@@ -23,6 +23,7 @@ final class TenantScope implements Scope
         $orgContext = app(OrgContext::class);
         if ($orgContext->isTenantContext()) {
             $builder->where($model->qualifyColumn('org_id'), $orgContext->requirePositiveOrgId());
+
             return;
         }
 
@@ -33,6 +34,7 @@ final class TenantScope implements Scope
         $publicOrgId = $this->publicContextOrgId($model);
         if ($orgContext->isPublicContext() && $publicOrgId !== null) {
             $builder->where($model->qualifyColumn('org_id'), $publicOrgId);
+
             return;
         }
 
@@ -43,7 +45,7 @@ final class TenantScope implements Scope
 
     private function isHttpRequest(): bool
     {
-        if (!app()->bound('request')) {
+        if (! app()->bound('request')) {
             return false;
         }
 
@@ -54,7 +56,7 @@ final class TenantScope implements Scope
 
     private function boolModelMethod(Model $model, string $method, bool $default = false): bool
     {
-        if (!method_exists($model, $method)) {
+        if (! method_exists($model, $method)) {
             return $default;
         }
 

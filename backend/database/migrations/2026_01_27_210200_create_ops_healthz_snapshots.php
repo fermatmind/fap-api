@@ -11,7 +11,7 @@ return new class extends Migration
     {
         $tableName = 'ops_healthz_snapshots';
 
-        if (!Schema::hasTable($tableName)) {
+        if (! Schema::hasTable($tableName)) {
             Schema::create($tableName, function (Blueprint $table): void {
                 $table->bigIncrements('id');
                 $table->string('env', 32);
@@ -28,38 +28,38 @@ return new class extends Migration
         }
 
         Schema::table($tableName, function (Blueprint $table) use ($tableName): void {
-            if (!Schema::hasColumn($tableName, 'id')) {
+            if (! Schema::hasColumn($tableName, 'id')) {
                 $table->unsignedBigInteger('id')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'env')) {
+            if (! Schema::hasColumn($tableName, 'env')) {
                 $table->string('env', 32)->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'revision')) {
+            if (! Schema::hasColumn($tableName, 'revision')) {
                 $table->string('revision', 64)->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'ok')) {
+            if (! Schema::hasColumn($tableName, 'ok')) {
                 $table->unsignedTinyInteger('ok')->default(0);
             }
-            if (!Schema::hasColumn($tableName, 'deps_json')) {
+            if (! Schema::hasColumn($tableName, 'deps_json')) {
                 $table->json('deps_json')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'error_codes_json')) {
+            if (! Schema::hasColumn($tableName, 'error_codes_json')) {
                 $table->json('error_codes_json')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'occurred_at')) {
+            if (! Schema::hasColumn($tableName, 'occurred_at')) {
                 $table->dateTime('occurred_at')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'created_at')) {
+            if (! Schema::hasColumn($tableName, 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'updated_at')) {
+            if (! Schema::hasColumn($tableName, 'updated_at')) {
                 $table->timestamp('updated_at')->nullable();
             }
         });
 
         if (Schema::hasColumn($tableName, 'env')
             && Schema::hasColumn($tableName, 'occurred_at')
-            && !SchemaIndex::indexExists($tableName, 'idx_ops_healthz_env_time')) {
+            && ! SchemaIndex::indexExists($tableName, 'idx_ops_healthz_env_time')) {
             Schema::table($tableName, function (Blueprint $table): void {
                 $table->index(['env', 'occurred_at'], 'idx_ops_healthz_env_time');
             });
@@ -68,7 +68,7 @@ return new class extends Migration
         if (Schema::hasColumn($tableName, 'env')
             && Schema::hasColumn($tableName, 'ok')
             && Schema::hasColumn($tableName, 'occurred_at')
-            && !SchemaIndex::indexExists($tableName, 'idx_ops_healthz_ok')) {
+            && ! SchemaIndex::indexExists($tableName, 'idx_ops_healthz_ok')) {
             Schema::table($tableName, function (Blueprint $table): void {
                 $table->index(['env', 'ok', 'occurred_at'], 'idx_ops_healthz_ok');
             });

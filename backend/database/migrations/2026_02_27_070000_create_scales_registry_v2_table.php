@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     private const TABLE = 'scales_registry_v2';
+
     private const LEGACY_TABLE = 'scales_registry';
 
     public function up(): void
@@ -254,4 +255,3 @@ return new class extends Migration
         return $defaultJson;
     }
 };
-

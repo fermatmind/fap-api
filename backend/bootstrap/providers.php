@@ -1,16 +1,16 @@
 <?php
 
 $filamentAvailable = class_exists(\Filament\PanelProvider::class);
-$configCachePath = __DIR__ . '/cache/config.php';
+$configCachePath = __DIR__.'/cache/config.php';
 $cachedConfig = is_file($configCachePath) ? require $configCachePath : [];
 $cachedConfig = is_array($cachedConfig) ? $cachedConfig : [];
 
 $adminConfig = is_array($cachedConfig['admin'] ?? null)
     ? $cachedConfig['admin']
-    : require __DIR__ . '/../config/admin.php';
+    : require __DIR__.'/../config/admin.php';
 $tenantConfig = is_array($cachedConfig['tenant'] ?? null)
     ? $cachedConfig['tenant']
-    : require __DIR__ . '/../config/tenant.php';
+    : require __DIR__.'/../config/tenant.php';
 
 $adminPanelEnabled = (bool) ($adminConfig['panel_enabled'] ?? false);
 $tenantPanelEnabled = (bool) ($tenantConfig['panel_enabled'] ?? false);

@@ -12,7 +12,7 @@ return new class extends Migration
         $driver = Schema::getConnection()->getDriverName();
         $isSqlite = $driver === 'sqlite';
 
-        if (!Schema::hasTable('attempt_quality')) {
+        if (! Schema::hasTable('attempt_quality')) {
             Schema::create('attempt_quality', function (Blueprint $table) use ($isSqlite) {
                 $table->bigIncrements('id');
                 $table->string('attempt_id', 64);
@@ -31,29 +31,29 @@ return new class extends Migration
         }
 
         Schema::table('attempt_quality', function (Blueprint $table) use ($isSqlite) {
-            if (!Schema::hasColumn('attempt_quality', 'id')) {
+            if (! Schema::hasColumn('attempt_quality', 'id')) {
                 $table->bigIncrements('id');
             }
-            if (!Schema::hasColumn('attempt_quality', 'attempt_id')) {
+            if (! Schema::hasColumn('attempt_quality', 'attempt_id')) {
                 $table->string('attempt_id', 64);
             }
-            if (!Schema::hasColumn('attempt_quality', 'checks_json')) {
+            if (! Schema::hasColumn('attempt_quality', 'checks_json')) {
                 if ($isSqlite) {
                     $table->text('checks_json');
                 } else {
                     $table->json('checks_json');
                 }
             }
-            if (!Schema::hasColumn('attempt_quality', 'grade')) {
+            if (! Schema::hasColumn('attempt_quality', 'grade')) {
                 $table->string('grade', 4);
             }
-            if (!Schema::hasColumn('attempt_quality', 'created_at')) {
+            if (! Schema::hasColumn('attempt_quality', 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
         });
 
         $uniqueName = 'attempt_quality_attempt_id_unique';
-        if (!$this->indexExists('attempt_quality', $uniqueName)) {
+        if (! $this->indexExists('attempt_quality', $uniqueName)) {
             Schema::table('attempt_quality', function (Blueprint $table) use ($uniqueName) {
                 $table->unique('attempt_id', $uniqueName);
             });
@@ -77,6 +77,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -87,6 +88,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -97,6 +99,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 

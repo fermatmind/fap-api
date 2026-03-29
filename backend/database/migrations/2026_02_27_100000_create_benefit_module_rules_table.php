@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Support\Database\SchemaIndex;
 use App\Services\Report\ReportAccess;
+use App\Support\Database\SchemaIndex;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +29,7 @@ return new class extends Migration
 
     private function createOrConvergeTable(): void
     {
-        if (!Schema::hasTable(self::TABLE)) {
+        if (! Schema::hasTable(self::TABLE)) {
             Schema::create(self::TABLE, function (Blueprint $table): void {
                 $table->uuid('id')->primary();
                 $table->unsignedBigInteger('org_id')->default(0);
@@ -46,31 +46,31 @@ return new class extends Migration
         }
 
         Schema::table(self::TABLE, function (Blueprint $table): void {
-            if (!Schema::hasColumn(self::TABLE, 'id')) {
+            if (! Schema::hasColumn(self::TABLE, 'id')) {
                 $table->uuid('id')->nullable();
             }
-            if (!Schema::hasColumn(self::TABLE, 'org_id')) {
+            if (! Schema::hasColumn(self::TABLE, 'org_id')) {
                 $table->unsignedBigInteger('org_id')->default(0);
             }
-            if (!Schema::hasColumn(self::TABLE, 'benefit_code')) {
+            if (! Schema::hasColumn(self::TABLE, 'benefit_code')) {
                 $table->string('benefit_code', 64);
             }
-            if (!Schema::hasColumn(self::TABLE, 'module_code')) {
+            if (! Schema::hasColumn(self::TABLE, 'module_code')) {
                 $table->string('module_code', 64);
             }
-            if (!Schema::hasColumn(self::TABLE, 'access_tier')) {
+            if (! Schema::hasColumn(self::TABLE, 'access_tier')) {
                 $table->string('access_tier', 16)->default('paid');
             }
-            if (!Schema::hasColumn(self::TABLE, 'priority')) {
+            if (! Schema::hasColumn(self::TABLE, 'priority')) {
                 $table->integer('priority')->default(100);
             }
-            if (!Schema::hasColumn(self::TABLE, 'is_active')) {
+            if (! Schema::hasColumn(self::TABLE, 'is_active')) {
                 $table->boolean('is_active')->default(true);
             }
-            if (!Schema::hasColumn(self::TABLE, 'created_at')) {
+            if (! Schema::hasColumn(self::TABLE, 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
-            if (!Schema::hasColumn(self::TABLE, 'updated_at')) {
+            if (! Schema::hasColumn(self::TABLE, 'updated_at')) {
                 $table->timestamp('updated_at')->nullable();
             }
         });
@@ -78,11 +78,11 @@ return new class extends Migration
 
     private function ensureIndexes(): void
     {
-        if (!Schema::hasTable(self::TABLE)) {
+        if (! Schema::hasTable(self::TABLE)) {
             return;
         }
 
-        if (!SchemaIndex::indexExists(self::TABLE, 'benefit_module_rules_org_benefit_module_unique')) {
+        if (! SchemaIndex::indexExists(self::TABLE, 'benefit_module_rules_org_benefit_module_unique')) {
             Schema::table(self::TABLE, function (Blueprint $table): void {
                 $table->unique(
                     ['org_id', 'benefit_code', 'module_code'],
@@ -91,7 +91,7 @@ return new class extends Migration
             });
         }
 
-        if (!SchemaIndex::indexExists(self::TABLE, 'benefit_module_rules_org_benefit_active_priority_idx')) {
+        if (! SchemaIndex::indexExists(self::TABLE, 'benefit_module_rules_org_benefit_active_priority_idx')) {
             Schema::table(self::TABLE, function (Blueprint $table): void {
                 $table->index(
                     ['org_id', 'benefit_code', 'is_active', 'priority'],
@@ -100,7 +100,7 @@ return new class extends Migration
             });
         }
 
-        if (!SchemaIndex::indexExists(self::TABLE, 'benefit_module_rules_org_benefit_tier_idx')) {
+        if (! SchemaIndex::indexExists(self::TABLE, 'benefit_module_rules_org_benefit_tier_idx')) {
             Schema::table(self::TABLE, function (Blueprint $table): void {
                 $table->index(
                     ['org_id', 'benefit_code', 'access_tier'],
@@ -112,7 +112,7 @@ return new class extends Migration
 
     private function seedGlobalDefaults(): void
     {
-        if (!Schema::hasTable(self::TABLE)) {
+        if (! Schema::hasTable(self::TABLE)) {
             return;
         }
 
