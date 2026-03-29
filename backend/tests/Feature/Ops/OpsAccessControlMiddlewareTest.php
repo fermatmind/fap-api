@@ -140,6 +140,69 @@ final class OpsAccessControlMiddlewareTest extends TestCase
         $this->assertSame(403, $response->getStatusCode());
     }
 
+    public function test_select_org_route_bypasses_host_and_ip_blocks(): void
+    {
+        $this->app->detectEnvironment(static fn (): string => 'production');
+        config()->set('ops.access_control.allowed_host', 'ops.example.test');
+        config()->set('ops.access_control.ip_allowlist', ['1.1.1.1']);
+
+        Redis::shouldReceive('sismember')
+            ->never();
+
+        $request = Request::create('/ops/select-org', 'GET', [], [], [], [
+            'REMOTE_ADDR' => '8.8.8.8',
+            'HTTP_HOST' => 'blocked.example.test',
+        ]);
+        $route = new Route(['GET'], '/ops/select-org', static fn (): Response => response('ok'));
+        $route->name('filament.ops.pages.select-org');
+        $request->setRouteResolver(static fn (): Route => $route);
+
+        $response = app(OpsAccessControl::class)->handle(
+            $request,
+            static fn (): Response => response('allowed'),
+        );
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('allowed', $response->getContent());
+    }
+
+    public function test_dashboard_route_is_not_treated_as_safe_route(): void
+    {
+        $this->app->detectEnvironment(static fn (): string => 'production');
+        config()->set('ops.access_control.allowed_host', 'ops.example.test');
+        config()->set('ops.access_control.ip_allowlist', []);
+        config()->set('ops.access_control.rate_limit.global', 100);
+
+        Redis::shouldReceive('sismember')
+            ->once()
+            ->with('ops:ip:blacklist', '8.8.8.8')
+            ->andReturn(false);
+        Redis::shouldReceive('incr')
+            ->once()
+            ->andReturn(1);
+        Redis::shouldReceive('expire')
+            ->once()
+            ->andReturnTrue();
+        Redis::shouldReceive('get')
+            ->once()
+            ->andReturn(1);
+
+        $request = Request::create('/ops', 'GET', [], [], [], [
+            'REMOTE_ADDR' => '8.8.8.8',
+            'HTTP_HOST' => 'blocked.example.test',
+        ]);
+        $route = new Route(['GET'], '/ops', static fn (): Response => response('ok'));
+        $route->name('filament.ops.pages.dashboard');
+        $request->setRouteResolver(static fn (): Route => $route);
+
+        $response = app(OpsAccessControl::class)->handle(
+            $request,
+            static fn (): Response => response('allowed'),
+        );
+
+        $this->assertSame(403, $response->getStatusCode());
+    }
+
     public function test_fail_open_allows_request_when_redis_lookup_throws(): void
     {
         $this->app->detectEnvironment(static fn (): string => 'production');

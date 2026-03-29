@@ -363,7 +363,6 @@ class OpsAccessControl
             'filament.ops.auth.login',
             'filament.ops.auth.logout',
             'filament.ops.pages.select-org',
-            'filament.ops.pages.dashboard',
         ], true);
     }
 

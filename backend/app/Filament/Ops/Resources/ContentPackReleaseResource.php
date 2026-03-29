@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\ContentPackReleaseResource\Pages;
+use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Jobs\Content\RunContentProbeJob;
 use App\Models\AdminApproval;
 use App\Models\ContentPackRelease;
 use App\Services\Audit\AuditLogger;
 use App\Support\OrgContext;
-use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
@@ -33,20 +33,12 @@ class ContentPackReleaseResource extends Resource
 
     public static function canViewAny(): bool
     {
-        $guard = (string) config('admin.guard', 'admin');
-        $user = auth($guard)->user();
-
-        return is_object($user)
-            && method_exists($user, 'hasPermission')
-            && (
-                $user->hasPermission(PermissionNames::ADMIN_CONTENT_READ)
-                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
-            );
+        return ContentAccess::canRelease();
     }
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.content');
+        return __('ops.group.content_release');
     }
 
     public static function getNavigationLabel(): string
@@ -84,6 +76,7 @@ class ContentPackReleaseResource extends Resource
                     ->label('Run Probe')
                     ->icon('heroicon-o-sparkles')
                     ->requiresConfirmation()
+                    ->visible(fn (): bool => ContentAccess::canRelease())
                     ->action(function (ContentPackRelease $record): void {
                         $correlationId = (string) Str::uuid();
                         $orgId = max(0, (int) app(OrgContext::class)->orgId());
@@ -119,7 +112,7 @@ class ContentPackReleaseResource extends Resource
                     ->label('Release')
                     ->icon('heroicon-o-paper-airplane')
                     ->requiresConfirmation()
-                    ->visible(fn (ContentPackRelease $record): bool => (bool) $record->probe_ok)
+                    ->visible(fn (ContentPackRelease $record): bool => ContentAccess::canRelease() && (bool) $record->probe_ok)
                     ->form([
                         Forms\Components\Textarea::make('reason')
                             ->required()
@@ -167,6 +160,7 @@ class ContentPackReleaseResource extends Resource
                     ->label('Request Rollback')
                     ->icon('heroicon-o-arrow-uturn-left')
                     ->requiresConfirmation()
+                    ->visible(fn (): bool => ContentAccess::canRelease())
                     ->form([
                         Forms\Components\Textarea::make('reason')
                             ->required()

@@ -6,6 +6,7 @@ namespace App\Filament\Ops\Resources\ContentPackVersionResource\Pages;
 
 use App\Filament\Ops\Resources\ContentPackReleaseResource;
 use App\Filament\Ops\Resources\ContentPackVersionResource;
+use App\Filament\Ops\Support\ContentAccess;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -19,6 +20,7 @@ class ListContentPackVersions extends ListRecords
             Actions\Action::make('releaseQueue')
                 ->label('Open Release Queue')
                 ->icon('heroicon-o-archive-box-arrow-down')
+                ->visible(fn (): bool => ContentAccess::canRelease())
                 ->url(ContentPackReleaseResource::getUrl('index')),
             Actions\CreateAction::make(),
         ];

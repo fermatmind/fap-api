@@ -102,8 +102,11 @@ class OpsLogin extends BaseLogin
     {
         $ip = (string) (request()->ip() ?? 'unknown');
         $email = trim((string) ($data['email'] ?? 'anonymous'));
+        $routeName = (string) optional(request()->route())->getName();
+        $routeKey = $routeName !== '' ? $routeName : 'filament.ops.auth.login';
 
         OpsDistributedLimiter::clear('ops:login:ip:'.$ip);
+        OpsDistributedLimiter::clear('ops:login:route:'.$routeKey);
         OpsDistributedLimiter::clear('ops:login:user:'.$email);
     }
 }

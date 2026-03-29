@@ -17,8 +17,11 @@ final class OpsLoginPageTest extends TestCase
 
         $this->get('/ops/login')
             ->assertOk()
+            ->assertSee('wire:submit="authenticate"', false)
             ->assertSee('novalidate', false)
             ->assertSee('autocomplete="username"', false)
-            ->assertSee('autocomplete="current-password"', false);
+            ->assertSee('autocomplete="current-password"', false)
+            ->assertSee("\$wire.set('data.email', emailInput.value)", false)
+            ->assertSee("\$wire.set('data.password', passwordInput.value)", false);
     }
 }
