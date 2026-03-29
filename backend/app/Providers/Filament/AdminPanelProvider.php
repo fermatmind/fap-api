@@ -81,6 +81,14 @@ class AdminPanelProvider extends PanelProvider
                 RequireOpsOrgSelected::class,
                 OpsAccessControl::class,
             ])
+            ->persistentMiddleware([
+                SetOpsRequestContext::class,
+                ResolveOrgContext::class,
+                SetOpsLocale::class,
+                EnsureAdminTotpVerified::class,
+                RequireOpsOrgSelected::class,
+                OpsAccessControl::class,
+            ])
             ->renderHook(
                 PanelsRenderHook::AUTH_LOGIN_FORM_BEFORE,
                 fn () => view('filament.ops.hooks.login-intro')
