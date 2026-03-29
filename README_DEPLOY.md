@@ -14,9 +14,11 @@ Truth Source: `backend/composer.json` / `backend/package.json` / `backend/config
 - PHP 8.2+（`composer.json` 约束：`^8.2`）
 - MySQL 8.0+
 - Redis 6+
-- Node 20 LTS+（仓库未锁定 engines，按 Vite 7 生产构建建议）
 - Composer 2.x
-- NPM 10+
+
+后端 production/staging deploy host 不要求安装 Node / NPM / pnpm。
+- Ops 自定义主题当前走 committed fallback CSS + `php artisan filament:assets`
+- 只有本地更新 `backend/resources/css/filament/ops/theme.compiled.css` 时才需要 Node
 
 推荐 PHP 扩展（Laravel 生产常规）：
 - `pdo_mysql`
@@ -112,42 +114,37 @@ foreach (glob(dirname($app->getCachedRoutesPath()).DIRECTORY_SEPARATOR."routes-*
 # composer install 会触发 post-autoload-dump -> package:discover，因此它本身就是 bootstrap cache producer
 composer install --no-dev --optimize-autoloader
 
-# 4) 生成 Ops 自定义主题（固定 public 路径产物）
-# build 会同时执行 build:app + build:ops-theme；若只需重建 Ops 主题，至少执行 build:ops-theme
-npm ci
-npm run build
-
-# 5) 发布 Filament core assets（CSS / JS）
+# 4) 发布 Filament assets（包含 Ops 主题与 Filament core CSS / JS）
 php artisan filament:assets
 
-# 6) 完成 bootstrap cache rebuild
+# 5) 完成 bootstrap cache rebuild
 # composer install 已经触发 package:discover；这里显式再跑一次，确保 active release 的 package/provider manifest 与当前代码一致
 php artisan package:discover --ansi
 php artisan config:cache
 php artisan route:cache
 php artisan event:cache
 
-# 7) 数据库迁移
+# 6) 数据库迁移
 php artisan migrate --force
 
-# 8) Ops 资产验收
-test -s public/css/filament/ops/theme.css
+# 7) Ops 资产验收
+test -s public/css/app/ops-theme.css
 test -s public/css/filament/filament/app.css
 test -s public/css/filament/forms/forms.css
 test -s public/css/filament/support/support.css
 test -s public/js/filament/filament/app.js
-! grep -Eq '@tailwind|@config|vendor/filament/filament/resources/css/base.css' public/css/filament/ops/theme.css
+! grep -Eq '@tailwind|@config|resources/css/filament/ops/theme.css|vendor/filament/filament/resources/css/base.css' public/css/app/ops-theme.css
 
-# 8.1) 线上 Ops smoke（production 示例）
+# 7.1) 线上 Ops smoke（production 示例）
 curl -I https://ops.fermatmind.com/ops/login
-curl -I https://ops.fermatmind.com/css/filament/ops/theme.css
+curl -I https://ops.fermatmind.com/css/app/ops-theme.css
 curl -I https://ops.fermatmind.com/css/filament/filament/app.css
 curl -I https://ops.fermatmind.com/css/filament/forms/forms.css
 curl -I https://ops.fermatmind.com/css/filament/support/support.css
 curl -I https://ops.fermatmind.com/js/filament/filament/app.js
-! curl -s https://ops.fermatmind.com/css/filament/ops/theme.css | rg '^@tailwind|@config|vendor/filament/filament/resources/css/base.css'
+! curl -s https://ops.fermatmind.com/css/app/ops-theme.css | rg '^@tailwind|@config|resources/css/filament/ops/theme.css|vendor/filament/filament/resources/css/base.css'
 
-# 8.2) 入口契约 smoke
+# 7.2) 入口契约 smoke
 # production: 根入口必须跳到 /ops
 curl -sSI --max-redirs 0 https://ops.fermatmind.com/ | rg '^HTTP/[0-9.]+ 30[12] '
 curl -sSI --max-redirs 0 https://ops.fermatmind.com/ | rg -i '^Location: (/ops|https://ops\.fermatmind\.com/ops)\r?$'
@@ -162,28 +159,36 @@ curl -sSI --max-redirs 0 https://staging.fermatmind.com/ops | rg '^HTTP/[0-9.]+ 
 curl -sSI --max-redirs 0 https://staging.fermatmind.com/ops | rg -i '^Location: (/ops/login|https://staging\.fermatmind\.com/ops/login)\r?$'
 curl -sSI https://staging.fermatmind.com/ops/login | rg '^HTTP/[0-9.]+ 200 '
 
-# 8.3) 基线校验
+# 7.3) 基线校验
 php artisan fap:schema:verify
 ```
 
 ### 5.1 Ops Theme Build in Deploy Pipeline
-- 当前 Filament Ops Panel 通过 `->theme(asset('css/filament/ops/theme.css'))` 注册自定义主题。
+- 当前 Filament Ops Panel 通过 `->theme('ops-theme')` 注册自定义主题。
 - `backend/resources/css/filament/ops/theme.css` 是 Tailwind 源文件，不是可直接在线服务的生产产物。
-- `backend/public/css/filament/ops/theme.css` 是唯一合法的运行时主题文件，必须由 `npm run build` 或 `npm run build:ops-theme` 生成。
-- Deployer 发布时会在 `{{release_path}}/backend` 内执行：
-  - `npm ci --no-audit --no-fund`
-  - `npm run build:ops-theme`
-- Deployer 还会显式执行 `php artisan filament:assets`，确保 Filament 核心 CSS/JS 被复制到当前 release 的 `backend/public`。
-- 发布链会在切换 symlink 前校验 `backend/public/css/filament/ops/theme.css` 已生成、非空且不包含 raw Tailwind source 签名；若仍含 `@tailwind`、`@config` 或原始 vendor `@import`，部署会直接失败。
+- `backend/resources/css/filament/ops/theme.compiled.css` 是 committed fallback CSS，server 不需要 Node 也能发布。
+- Deployer 只会显式执行 `php artisan filament:assets`，由 Filament 资产系统将 committed fallback CSS 发布到当前 release 的 `backend/public`。
+- 当前合法运行时主题文件是 `backend/public/css/app/ops-theme.css`。
+- 发布链会在切换 symlink 前校验 `backend/public/css/app/ops-theme.css` 已生成、非空且不包含 raw Tailwind source 签名；若仍含 `@tailwind`、`@config`、源码引用路径或原始 vendor `@import`，部署会直接失败。
 - 发布链也会校验关键 Filament 资源存在且非空，包括 `backend/public/css/filament/filament/app.css`、`backend/public/css/filament/forms/forms.css`、`backend/public/css/filament/support/support.css`、`backend/public/js/filament/filament/app.js` 等；缺失这些资源会导致 `/ops` 的样式缺失、脚本 404 或 Alpine 初始化报错。
 - production Ops host 的根入口契约是 `https://ops.fermatmind.com/ -> /ops`；这条契约由仓库路由显式表达，并在 deploy/workflow/manual smoke 中验收。
 - staging 不共享这条根入口契约；`https://staging.fermatmind.com/` 仍按前台站点处理，entry smoke 只覆盖 `/ops` 与 `/ops/login`。
-- 这一步是 release 产物构建，不是 shared 配置，也不是将编译产物提交进 git。
-- 若目标主机缺少 `node` / `npm`，或版本低于当前仓库基线（Node 20.19+ / NPM 10+），部署会 fail fast。
+- 这一步是 release 内的 Laravel/Filament 资产发布，不依赖运行时前端构建。
+- 生产/staging backend host 不要求 `node` / `npm` / `pnpm`。
 - 禁止继续使用 `cp resources/css/filament/ops/theme.css public/css/filament/ops/theme.css` 作为正式发布方案；这会把源码误当成线上产物。
 - GitHub Actions 在 deploy 后会按 `TARGET` 对应域名执行对应的 entry smoke 与 asset smoke；production 额外断言 `/ -> /ops` 与 `/admin -> /ops`，staging 不共享这条根入口契约。
 
-### 5.2 Bootstrap Cache Lifecycle in Deploy / Rollback
+### 5.2 Deployer rerun / failed release hygiene
+- Deployer release name 必须唯一；若上一轮失败残留了 `releases/93`，下一次 rerun 必须使用新的 `release_name`，例如：
+  - `vendor/bin/dep deploy production -o release_name=94`
+  - 或 `vendor/bin/dep deploy production -o release_name=$(date +%Y%m%d%H%M%S)`
+- `release 93 already exists` 不是成功上线，只表示失败残留目录未被复用。
+- 若 `releases/93` 不是 `current` 指向目标，且该 release 从未成功切换为 active release，则可安全清理：
+  - `test "$(readlink -f current)" != "$(readlink -f releases/93)"`
+  - `rm -rf releases/93`
+- 若不确定 `releases/93` 是否曾成为 active release，优先保留目录并直接使用新的唯一 `release_name` rerun。
+
+### 5.3 Bootstrap Cache Lifecycle in Deploy / Rollback
 - `backend/bootstrap/cache` 中的 `config.php`、`routes-*.php`、`events.php`、`packages.php`、`services.php` 都是 release-derived bootstrap cache，不应作为跨 release 的 shared state 继承。
 - 当前 Deployer 契约是不再共享 `backend/bootstrap/cache`；每个 release 在自己的 `backend/bootstrap/cache` 下生成自身产物。
 - deploy 时会在任何 cache producer 之前先清理上述 release-derived 文件，再按以下顺序重建：
