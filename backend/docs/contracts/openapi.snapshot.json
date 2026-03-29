@@ -149,7 +149,7 @@
         },
         "/api/v0.3/attempts/start": {
             "post": {
-                "operationId": "post_api_v0_3_attempts_start",
+                "operationId": "api.v0_3.attempts.start",
                 "tags": [
                     "api:v0.3"
                 ],
@@ -165,13 +165,15 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_attempt_submit"
-                ]
+                ],
+                "x-laravel-name": "api.v0_3.attempts.start"
             }
         },
         "/api/v0.3/attempts/submit": {
             "post": {
-                "operationId": "post_api_v0_3_attempts_submit",
+                "operationId": "api.v0_3.attempts.submit",
                 "tags": [
                     "api:v0.3"
                 ],
@@ -187,9 +189,11 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
                     "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_attempt_submit",
                     "App\\Http\\Middleware\\FmTokenAuth"
-                ]
+                ],
+                "x-laravel-name": "api.v0_3.attempts.submit"
             }
         },
         "/api/v0.3/attempts/{attempt_id}/progress": {
@@ -210,6 +214,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:attempt_id"
                 ]
             },
@@ -230,6 +235,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:attempt_id"
                 ]
             }
@@ -252,6 +258,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:attempt_id"
                 ],
                 "x-laravel-name": "api.v0_3.attempts.submission"
@@ -275,6 +282,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
                 "x-laravel-name": "api.v0_3.attempts.show"
@@ -298,6 +306,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
                 "x-laravel-name": "api.v0_3.attempts.report"
@@ -321,6 +330,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
                 "x-laravel-name": "api.v0_3.attempts.report_access"
@@ -344,6 +354,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
                 "x-laravel-name": "api.v0_3.attempts.report_pdf"
@@ -367,6 +378,7 @@
                     "App\\Http\\Middleware\\NormalizeApiErrorContract",
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
                     "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
                 ],
                 "x-laravel-name": "api.v0_3.attempts.result"

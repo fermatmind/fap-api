@@ -12,13 +12,13 @@ use Illuminate\Support\Facades\DB;
 
 final class ReportSubjectRepository
 {
-    public function __construct(private readonly OrgContext $orgContext) {}
-
     public function findSubjectForCurrentContext(string $attemptId, ReportAccessActor $actor): ?ReportSubject
     {
+        $orgContext = app(OrgContext::class);
+
         return $this->findSubjectForRealm(
-            $this->orgContext->contextKind(),
-            $this->orgContext->scopedOrgId(),
+            $orgContext->contextKind(),
+            $orgContext->scopedOrgId(),
             $attemptId,
             $actor,
         );
@@ -61,9 +61,11 @@ final class ReportSubjectRepository
 
     public function findAttemptForCurrentContext(string $attemptId, ReportAccessActor $actor): ?Attempt
     {
+        $orgContext = app(OrgContext::class);
+
         return $this->findAttemptForRealm(
-            $this->orgContext->contextKind(),
-            $this->orgContext->scopedOrgId(),
+            $orgContext->contextKind(),
+            $orgContext->scopedOrgId(),
             $attemptId,
             $actor,
         );

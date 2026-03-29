@@ -13,6 +13,17 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ResolveOrgContext
 {
+    private const PUBLIC_ATTEMPT_ROUTE_NAMES = [
+        'api.v0_3.attempts.start',
+        'api.v0_3.attempts.submit',
+        'api.v0_3.attempts.submission',
+        'api.v0_3.attempts.show',
+        'api.v0_3.attempts.result',
+        'api.v0_3.attempts.report',
+        'api.v0_3.attempts.report_access',
+        'api.v0_3.attempts.report_pdf',
+    ];
+
     public function __construct(
         private MembershipService $membershipService,
         private FmTokenService $tokenService,
@@ -118,9 +129,11 @@ class ResolveOrgContext
                 $request->attributes->get('fm_org_id'),
                 $request->attributes->get('org_id'),
             ];
-        $tokenOrgId = $this->resolveOrgIdFromToken($request);
-        if ($tokenOrgId !== null) {
-            $candidates[] = $tokenOrgId;
+        if (! $this->shouldForcePublicAttemptRealm($request)) {
+            $tokenOrgId = $this->resolveOrgIdFromToken($request);
+            if ($tokenOrgId !== null) {
+                $candidates[] = $tokenOrgId;
+            }
         }
 
         $resolved = [];
@@ -159,6 +172,54 @@ class ResolveOrgContext
         }
 
         return str_starts_with('/'.ltrim($request->path(), '/'), '/ops');
+    }
+
+    private function shouldForcePublicAttemptRealm(Request $request): bool
+    {
+        if ($request->attributes->get('force_public_attempt_realm') === true) {
+            return true;
+        }
+
+        $route = $request->route();
+        $routeName = is_object($route) ? trim((string) $route->getName()) : '';
+        $flag = is_object($route) ? ($route->defaults['public_realm'] ?? null) : null;
+
+        $isPublicAttemptRoute = in_array($routeName, self::PUBLIC_ATTEMPT_ROUTE_NAMES, true);
+        $hasPublicRealmDefault = $flag === true || $flag === 1 || $flag === '1';
+
+        return ($hasPublicRealmDefault || $isPublicAttemptRoute || $this->isPublicAttemptPath($request))
+            && ! $this->hasExplicitTenantOrgSignal($request);
+    }
+
+    private function isPublicAttemptPath(Request $request): bool
+    {
+        return $request->is('api/v0.3/attempts/start')
+            || $request->is('api/v0.3/attempts/submit')
+            || $request->is('api/v0.3/attempts/*/submission')
+            || $request->is('api/v0.3/attempts/*/result')
+            || $request->is('api/v0.3/attempts/*/report')
+            || $request->is('api/v0.3/attempts/*/report-access')
+            || $request->is('api/v0.3/attempts/*/report.pdf')
+            || preg_match('#^api/v0\.3/attempts/[0-9a-fA-F-]+$#', ltrim($request->path(), '/')) === 1;
+    }
+
+    private function hasExplicitTenantOrgSignal(Request $request): bool
+    {
+        $candidates = [
+            $request->header('X-FM-Org-Id'),
+            $request->header('X-Org-Id'),
+            $request->query('org_id'),
+            $request->route('org_id'),
+        ];
+
+        foreach ($candidates as $candidate) {
+            $normalized = $this->normalizeOrgId($candidate);
+            if ($normalized !== null && $normalized > 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function normalizeOrgId(mixed $candidate): ?int

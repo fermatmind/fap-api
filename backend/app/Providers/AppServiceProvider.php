@@ -59,6 +59,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->singleton(OrgContext::class, static fn (): OrgContext => new OrgContext);
+
         $this->app->singleton(PiiEnvelopeAdapter::class, function ($app) {
             $adapterRaw = strtolower(trim((string) config('services.pii.adapter', 'local')));
             $adapter = match ($adapterRaw) {

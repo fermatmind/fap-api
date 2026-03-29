@@ -62,7 +62,6 @@ class AttemptReadController extends Controller
         private EventRecorder $eventRecorder,
         private ScaleCodeResponseProjector $responseProjector,
         private ReportSubjectRepository $reportSubjects,
-        protected OrgContext $orgContext,
     ) {}
 
     /**
@@ -81,7 +80,7 @@ class AttemptReadController extends Controller
         $this->ownedAttemptQuery($request, $attemptId)->firstOrFail();
 
         $payload = $this->attemptSubmissionService->latestForAttempt(
-            $this->orgContext,
+            $this->currentOrgContext(),
             $attemptId,
             $this->resolveUserId($request),
             $this->resolveAnonId($request)
@@ -98,7 +97,7 @@ class AttemptReadController extends Controller
      */
     public function result(Request $request, string $id): JsonResponse
     {
-        $orgId = $this->orgContext->orgId();
+        $orgId = $this->currentOrgContext()->orgId();
         $result = Result::query()->where('org_id', $orgId)->where('attempt_id', $id)->first();
         if (! $result instanceof Result) {
             throw new ApiProblemException(404, 'RESULT_NOT_FOUND', 'result not found.');
@@ -120,7 +119,7 @@ class AttemptReadController extends Controller
                 $id,
                 $this->resolveUserId($request),
                 $this->resolveAnonId($request),
-                $this->orgContext->role(),
+                $this->currentOrgContext()->role(),
                 false,
                 false,
             );
@@ -287,13 +286,13 @@ class AttemptReadController extends Controller
         $refreshRaw = strtolower(trim((string) $request->query('refresh', '0')));
         $forceRefresh = in_array($refreshRaw, ['1', 'true', 'yes', 'on'], true);
 
-        $orgId = $this->orgContext->orgId();
+        $orgId = $this->currentOrgContext()->orgId();
         $userId = $this->resolveUserId($request);
         $anonId = $this->resolveAnonId($request);
         $result = Result::query()->where('org_id', $orgId)->where('attempt_id', $id)->first();
         if (! $result instanceof Result) {
             $submissionPayload = $this->attemptSubmissionService->latestForAttempt(
-                $this->orgContext,
+                $this->currentOrgContext(),
                 $id,
                 $userId !== null ? (string) $userId : null,
                 $anonId
@@ -322,7 +321,7 @@ class AttemptReadController extends Controller
             $id,
             $userId !== null ? (string) $userId : null,
             $anonId,
-            $this->orgContext->role(),
+            $this->currentOrgContext()->role(),
             false,
             $forceRefresh,
         );
@@ -486,7 +485,7 @@ class AttemptReadController extends Controller
      */
     public function reportAccess(Request $request, string $id): JsonResponse
     {
-        $orgId = $this->orgContext->orgId();
+        $orgId = $this->currentOrgContext()->orgId();
         $attempt = $this->resolveAttemptForAccessRead($request, $orgId, $id);
         $projection = UnifiedAccessProjection::query()
             ->where('attempt_id', (string) $attempt->id)
@@ -750,7 +749,7 @@ class AttemptReadController extends Controller
             $attemptId,
             $this->resolveUserId($request),
             $this->resolveAnonId($request),
-            $this->orgContext->role(),
+            $this->currentOrgContext()->role(),
             false,
             false,
         );
@@ -1303,8 +1302,13 @@ class AttemptReadController extends Controller
         return ReportAccessActor::from(
             $this->resolveUserId($request),
             $this->resolveAnonId($request),
-            $this->orgContext->role(),
+            $this->currentOrgContext()->role(),
         );
+    }
+
+    private function currentOrgContext(): OrgContext
+    {
+        return app(OrgContext::class);
     }
 
     private function resolveAttemptId(Result $result, ?Attempt $attempt, string $fallbackAttemptId): string
@@ -1341,7 +1345,7 @@ class AttemptReadController extends Controller
      */
     public function reportPdf(Request $request, string $id): Response
     {
-        $orgId = $this->orgContext->orgId();
+        $orgId = $this->currentOrgContext()->orgId();
         $userId = $this->resolveUserId($request);
         $anonId = $this->resolveAnonId($request);
         $result = Result::where('org_id', $orgId)->where('attempt_id', $id)->firstOrFail();
@@ -1354,7 +1358,7 @@ class AttemptReadController extends Controller
             $id,
             $userId !== null ? (string) $userId : null,
             $anonId,
-            $this->orgContext->role(),
+            $this->currentOrgContext()->role(),
             false,
             false,
         );
