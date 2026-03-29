@@ -8,7 +8,7 @@
             <x-filament-ops::ops-toolbar>
                 <div class="ops-control-stack">
                     <span class="ops-control-label">Release review</span>
-                    <p class="ops-control-hint">This workspace is the lightweight review surface for Phase 1. There is no workflow engine yet, so <code>content_release</code> is the approval boundary and a successful action follows the current public publish contract.</p>
+                    <p class="ops-control-hint">Only records that have completed owner assignment, reviewer assignment, formal submission, and approval can publish from this queue.</p>
                 </div>
 
                 <x-slot name="actions">
@@ -105,7 +105,7 @@
                         </td>
                         <td class="ops-table__status">
                             <x-filament.ops.shared.status-pill
-                                :state="match ($item['review_state']) { 'approved' => 'success', 'ready' => 'info', 'changes_requested' => 'warning', 'rejected' => 'danger', default => 'warning' }"
+                                :state="match ($item['review_state']) { 'approved' => 'success', 'ready' => 'info', 'in_review' => 'info', 'changes_requested' => 'warning', 'rejected' => 'danger', default => 'warning' }"
                                 :label="\App\Filament\Ops\Support\EditorialReviewAudit::label($item['review_state'])"
                             />
                         </td>
@@ -129,7 +129,7 @@
                                     </x-filament::button>
                                 @elseif ($item['status'] === 'draft')
                                     <x-filament::button size="xs" color="warning" disabled>
-                                        Needs Approval
+                                        Needs Workflow
                                     </x-filament::button>
                                 @else
                                     <x-filament::button size="xs" color="success" disabled>

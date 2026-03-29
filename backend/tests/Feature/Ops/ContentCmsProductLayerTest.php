@@ -25,6 +25,7 @@ use App\Models\ArticleTag;
 use App\Models\AuditLog;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
+use App\Models\EditorialReview;
 use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
@@ -117,6 +118,38 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->withSession($session)
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/content-release')
+            ->assertForbidden();
+
+        $this->withSession($session)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/editorial-review')
+            ->assertOk()
+            ->assertSee('Editorial review')
+            ->assertSee('Review queue');
+    }
+
+    public function test_approval_review_admin_can_open_editorial_review_but_not_release_surface(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+        ]);
+
+        $session = $this->opsSession((int) $admin->id);
+
+        $this->withSession($session)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/editorial-review')
+            ->assertOk()
+            ->assertSee('Editorial review');
+
+        $this->withSession($session)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/content-release')
+            ->assertForbidden();
+
+        $this->withSession($session)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/articles/create')
             ->assertForbidden();
     }
 
@@ -447,11 +480,17 @@ final class ContentCmsProductLayerTest extends TestCase
 
     public function test_editorial_review_approvals_are_persisted_and_gate_release_queue(): void
     {
-        $admin = $this->createAdminWithPermissions([
+        $owner = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+        $reviewer = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+        ]);
+        $publisher = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_RELEASE,
         ]);
 
-        $session = $this->opsSession((int) $admin->id);
+        $session = $this->opsSession((int) $owner->id);
         $selectedOrgId = (int) $session['ops_org_id'];
 
         $article = $this->seedArticle([
@@ -478,16 +517,37 @@ final class ContentCmsProductLayerTest extends TestCase
             'is_indexable' => true,
         ]);
 
-        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
-        app()->instance('request', Request::create('/ops/editorial-review', 'POST'));
+        $this->setOpsContext($selectedOrgId, $owner, '/ops/editorial-review');
+        Livewire::test(EditorialReviewPage::class)
+            ->assertOk()
+            ->set('ownerAssignments.article_'.$article->id, (string) $owner->id)
+            ->call('assignOwnerItem', 'article', (int) $article->id);
 
-        $context = app(OrgContext::class);
-        $context->set($selectedOrgId, (int) $admin->id, 'admin');
-        app()->instance(OrgContext::class, $context);
+        $this->setOpsContext($selectedOrgId, $reviewer, '/ops/editorial-review');
+        Livewire::test(EditorialReviewPage::class)
+            ->assertOk()
+            ->set('reviewerAssignments.article_'.$article->id, (string) $reviewer->id)
+            ->call('assignReviewerItem', 'article', (int) $article->id);
 
+        $this->setOpsContext($selectedOrgId, $owner, '/ops/editorial-review');
+        Livewire::test(EditorialReviewPage::class)
+            ->assertOk()
+            ->call('submitItem', 'article', (int) $article->id);
+
+        $this->setOpsContext($selectedOrgId, $reviewer, '/ops/editorial-review');
         Livewire::test(EditorialReviewPage::class)
             ->assertOk()
             ->call('approveItem', 'article', (int) $article->id);
+
+        $workflow = EditorialReview::withoutGlobalScopes()
+            ->where('content_type', 'article')
+            ->where('content_id', (int) $article->id)
+            ->first();
+
+        $this->assertNotNull($workflow);
+        $this->assertSame((int) $owner->id, (int) $workflow->owner_admin_user_id);
+        $this->assertSame((int) $reviewer->id, (int) $workflow->reviewer_admin_user_id);
+        $this->assertSame(EditorialReview::STATE_APPROVED, (string) $workflow->workflow_state);
 
         $audit = AuditLog::query()
             ->where('action', 'editorial_review_approved')
@@ -497,15 +557,14 @@ final class ContentCmsProductLayerTest extends TestCase
 
         $this->assertNotNull($audit);
 
-        $this->withSession($session)
-            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+        $this->withSession($this->opsSessionForOrg((int) $publisher->id, $selectedOrgId))
+            ->actingAs($publisher, (string) config('admin.guard', 'admin'))
             ->get('/ops/content-release')
             ->assertOk()
             ->assertSee('Approved')
             ->assertSee('Publish');
 
-        app()->instance('request', Request::create('/ops/content-release', 'POST'));
-        app()->instance(OrgContext::class, $context);
+        $this->setOpsContext($selectedOrgId, $publisher, '/ops/content-release');
 
         Livewire::test(ContentReleasePage::class)
             ->assertOk()
@@ -544,11 +603,14 @@ final class ContentCmsProductLayerTest extends TestCase
 
     public function test_editorial_review_can_request_changes_and_reject_records(): void
     {
-        $admin = $this->createAdminWithPermissions([
-            PermissionNames::ADMIN_CONTENT_RELEASE,
+        $owner = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+        $reviewer = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
         ]);
 
-        $session = $this->opsSession((int) $admin->id);
+        $session = $this->opsSession((int) $owner->id);
 
         $changesRequested = $this->seedArticle([
             'org_id' => (int) $session['ops_org_id'],
@@ -581,24 +643,93 @@ final class ContentCmsProductLayerTest extends TestCase
             ]);
         }
 
-        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
-        app()->instance('request', Request::create('/ops/editorial-review', 'POST'));
+        $this->routeRecordIntoReview((int) $session['ops_org_id'], $owner, $reviewer, 'article', $changesRequested);
+        $this->routeRecordIntoReview((int) $session['ops_org_id'], $owner, $reviewer, 'article', $rejected);
 
-        $context = app(OrgContext::class);
-        $context->set((int) $session['ops_org_id'], (int) $admin->id, 'admin');
-        app()->instance(OrgContext::class, $context);
-
+        $this->setOpsContext((int) $session['ops_org_id'], $reviewer, '/ops/editorial-review');
         Livewire::test(EditorialReviewPage::class)
             ->assertOk()
             ->call('requestChangesItem', 'article', (int) $changesRequested->id)
             ->call('rejectItem', 'article', (int) $rejected->id);
 
         $this->withSession($session)
-            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->actingAs($reviewer, (string) config('admin.guard', 'admin'))
             ->get('/ops/editorial-review')
             ->assertOk()
             ->assertSee('Changes requested')
             ->assertSee('Rejected');
+    }
+
+    public function test_editorial_workflow_assigns_owner_and_reviewer_then_submits_to_review(): void
+    {
+        $owner = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+        $reviewer = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+        ]);
+
+        $session = $this->opsSession((int) $owner->id);
+        $selectedOrgId = (int) $session['ops_org_id'];
+
+        $article = $this->seedArticle([
+            'org_id' => $selectedOrgId,
+            'title' => 'Workflow Assignment Article',
+            'excerpt' => 'Ready excerpt',
+            'content_md' => 'Ready body',
+            'status' => 'draft',
+        ]);
+
+        ArticleSeoMeta::query()->create([
+            'org_id' => $selectedOrgId,
+            'article_id' => (int) $article->id,
+            'locale' => 'en',
+            'seo_title' => 'Workflow Assignment Article SEO Title',
+            'seo_description' => 'Workflow Assignment Article SEO Description',
+            'canonical_url' => 'https://example.test/articles/workflow-assignment-article',
+            'og_title' => 'Workflow Assignment Article OG Title',
+            'og_description' => 'Workflow Assignment Article OG Description',
+            'og_image_url' => 'https://example.test/images/workflow-assignment-article.png',
+            'robots' => 'index,follow',
+            'is_indexable' => true,
+        ]);
+
+        $this->setOpsContext($selectedOrgId, $owner, '/ops/editorial-review');
+        Livewire::test(EditorialReviewPage::class)
+            ->assertOk()
+            ->set('ownerAssignments.article_'.$article->id, (string) $owner->id)
+            ->call('assignOwnerItem', 'article', (int) $article->id);
+
+        $this->setOpsContext($selectedOrgId, $reviewer, '/ops/editorial-review');
+        Livewire::test(EditorialReviewPage::class)
+            ->assertOk()
+            ->set('reviewerAssignments.article_'.$article->id, (string) $reviewer->id)
+            ->call('assignReviewerItem', 'article', (int) $article->id);
+
+        $this->setOpsContext($selectedOrgId, $owner, '/ops/editorial-review');
+        Livewire::test(EditorialReviewPage::class)
+            ->assertOk()
+            ->call('submitItem', 'article', (int) $article->id);
+
+        $workflow = EditorialReview::withoutGlobalScopes()
+            ->where('content_type', 'article')
+            ->where('content_id', (int) $article->id)
+            ->first();
+
+        $this->assertNotNull($workflow);
+        $this->assertSame((int) $owner->id, (int) $workflow->owner_admin_user_id);
+        $this->assertSame((int) $reviewer->id, (int) $workflow->reviewer_admin_user_id);
+        $this->assertSame(EditorialReview::STATE_IN_REVIEW, (string) $workflow->workflow_state);
+        $this->assertNotNull($workflow->submitted_at);
+
+        $this->withSession($this->opsSessionForOrg((int) $owner->id, $selectedOrgId))
+            ->actingAs($owner, (string) config('admin.guard', 'admin'))
+            ->get('/ops/editorial-review')
+            ->assertOk()
+            ->assertSee('Workflow Assignment Article')
+            ->assertSee('In review')
+            ->assertSee($owner->name)
+            ->assertSee($reviewer->name);
     }
 
     public function test_article_and_taxonomy_resources_are_scoped_to_selected_org_only(): void
@@ -745,15 +876,42 @@ final class ContentCmsProductLayerTest extends TestCase
 
     private function approveRecord(AdminUser $admin, int $orgId, string $type, object $record): void
     {
-        app()->instance('request', Request::create('/ops/editorial-review', 'POST'));
+        $this->routeRecordIntoReview($orgId, $admin, $admin, $type, $record);
+        $this->setOpsContext($orgId, $admin, '/ops/editorial-review');
+        EditorialReviewAudit::mark(EditorialReviewAudit::STATE_APPROVED, $type, $record);
+    }
+
+    private function routeRecordIntoReview(int $orgId, AdminUser $owner, AdminUser $reviewer, string $type, object $record): void
+    {
+        $this->setOpsContext($orgId, $owner, '/ops/editorial-review');
+        EditorialReviewAudit::assignOwner((int) $owner->id, $type, $record);
+
+        $this->setOpsContext($orgId, $reviewer, '/ops/editorial-review');
+        EditorialReviewAudit::assignReviewer((int) $reviewer->id, $type, $record);
+
+        $this->setOpsContext($orgId, $owner, '/ops/editorial-review');
+        EditorialReviewAudit::submit($type, $record);
+    }
+
+    private function setOpsContext(int $orgId, AdminUser $admin, string $path, string $method = 'POST'): void
+    {
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        app()->instance('request', Request::create($path, $method));
 
         $context = app(OrgContext::class);
         $context->set($orgId, (int) $admin->id, 'admin');
         app()->instance(OrgContext::class, $context);
+    }
 
-        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
-
-        EditorialReviewAudit::mark(EditorialReviewAudit::STATE_APPROVED, $type, $record);
+    /**
+     * @return array<string, mixed>
+     */
+    private function opsSessionForOrg(int $adminUserId, int $orgId): array
+    {
+        return [
+            'ops_org_id' => $orgId,
+            'ops_admin_totp_verified_user_id' => $adminUserId,
+        ];
     }
 
     /**

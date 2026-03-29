@@ -37,6 +37,38 @@ final class ContentAccess
         ]);
     }
 
+    public static function canReview(): bool
+    {
+        return self::hasAnyPermission([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+            PermissionNames::ADMIN_CONTENT_PUBLISH,
+            PermissionNames::ADMIN_OWNER,
+        ]);
+    }
+
+    public static function canOpenWorkflow(): bool
+    {
+        return self::canWrite() || self::canReview();
+    }
+
+    public static function canAssignOwner(): bool
+    {
+        return self::canWrite() || self::canReview();
+    }
+
+    public static function canAssignReviewer(): bool
+    {
+        return self::canReview();
+    }
+
+    public static function isOwner(): bool
+    {
+        return self::hasAnyPermission([
+            PermissionNames::ADMIN_OWNER,
+        ]);
+    }
+
     /**
      * @param  list<string>  $permissions
      */
