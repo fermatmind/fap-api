@@ -9,6 +9,7 @@
         str_contains($routeName, 'post-release-observability'),
         str_contains($routeName, 'content-release') => __('ops.group.content_release'),
         str_contains($routeName, 'content-metrics'),
+        str_contains($routeName, 'content-growth-attribution'),
         str_contains($routeName, 'seo-operations'),
         str_contains($routeName, 'content-search'),
         str_contains($routeName, 'content-overview'),

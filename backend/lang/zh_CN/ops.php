@@ -46,6 +46,7 @@ return [
         'orders' => '订单',
         'content_overview' => '内容总览',
         'content_metrics' => '内容指标',
+        'content_growth_attribution' => '增长归因',
         'seo_operations' => 'SEO运营',
         'content_search' => '内容搜索',
         'content_workspace' => '内容工作台',
