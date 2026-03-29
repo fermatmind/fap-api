@@ -22,7 +22,7 @@ class ContentWorkspacePage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Content Workspace';
+    protected static ?string $navigationGroup = 'Content Overview';
 
     protected static ?string $navigationLabel = 'Content Workspace';
 
@@ -56,14 +56,14 @@ class ContentWorkspacePage extends Page
             $this->workspaceCard(
                 'Career Guides',
                 'Global guide authoring workspace for structured career education content and related object links.',
-                CareerGuide::query()->count(),
+                CareerGuide::query()->where('org_id', 0)->count(),
                 CareerGuideResource::getUrl(),
                 CareerGuideResource::getUrl('create')
             ),
             $this->workspaceCard(
                 'Career Jobs',
                 'Global job profile workspace for structured role narratives, signals, sections, and SEO metadata.',
-                CareerJob::query()->count(),
+                CareerJob::query()->where('org_id', 0)->count(),
                 CareerJobResource::getUrl(),
                 CareerJobResource::getUrl('create')
             ),
@@ -113,7 +113,7 @@ class ContentWorkspacePage extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.content_workspace');
+        return __('ops.group.content_overview');
     }
 
     public static function getNavigationLabel(): string
@@ -133,7 +133,7 @@ class ContentWorkspacePage extends Page
     {
         $orgId = max(0, (int) app(OrgContext::class)->orgId());
 
-        return $orgId > 0 ? [0, $orgId] : [0];
+        return [$orgId];
     }
 
     /**

@@ -25,7 +25,7 @@
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Editorial workspaces"
+            title="Editorial"
             description="Primary content workspaces for long-form CMS authoring, structured career content, and release-ready editorial review."
         >
             <div class="ops-card-list">
@@ -52,7 +52,7 @@
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Content data"
+            title="Taxonomy"
             description="Supporting data structures that keep editorial taxonomies consistent and keep the workspace discoverable."
         >
             <div class="ops-card-list">

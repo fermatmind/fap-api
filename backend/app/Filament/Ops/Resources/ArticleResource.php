@@ -52,7 +52,7 @@ class ArticleResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.content_workspace');
+        return __('ops.group.editorial');
     }
 
     public static function getNavigationLabel(): string
@@ -155,7 +155,7 @@ class ArticleResource extends Resource
                                     ->relationship(
                                         'category',
                                         'name',
-                                        fn (Builder $query): Builder => $query->whereIn('article_categories.org_id', self::tenantOrgIds())
+                                        fn (Builder $query): Builder => $query->where('article_categories.org_id', self::currentOrgId())
                                     )
                                     ->searchable()
                                     ->preload()
@@ -164,7 +164,7 @@ class ArticleResource extends Resource
                                     ->relationship(
                                         'tags',
                                         'name',
-                                        fn (Builder $query): Builder => $query->whereIn('article_tags.org_id', self::tenantOrgIds())
+                                        fn (Builder $query): Builder => $query->where('article_tags.org_id', self::currentOrgId())
                                     )
                                     ->searchable()
                                     ->preload()
@@ -309,17 +309,12 @@ class ArticleResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->whereIn('org_id', self::tenantOrgIds());
+            ->where('org_id', self::currentOrgId());
     }
 
-    /**
-     * @return array<int,int>
-     */
-    private static function tenantOrgIds(): array
+    private static function currentOrgId(): int
     {
-        $orgId = max(0, (int) app(OrgContext::class)->orgId());
-
-        return $orgId > 0 ? [0, $orgId] : [0];
+        return max(0, (int) app(OrgContext::class)->orgId());
     }
 
     /**

@@ -376,20 +376,29 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/topics/{slug}/seo', [TopicController::class, 'seo']);
     Route::get('/topics/{slug}', [TopicController::class, 'show']);
 
-    Route::middleware([
+    $cmsAdminMiddleware = [
         EncryptCookies::class,
         AddQueuedCookiesToResponse::class,
         StartSession::class,
         SetOpsRequestContext::class,
         AdminAuth::class,
         ResolveOrgContext::class,
-        EnsureCmsAdminAuthorized::class,
+    ];
+
+    Route::middleware([
+        ...$cmsAdminMiddleware,
+        EnsureCmsAdminAuthorized::class.':write',
     ])->group(function () {
         Route::post('/cms/articles', [ArticleController::class, 'store']);
         Route::put('/cms/articles/{id}', [ArticleController::class, 'update']);
+        Route::post('/cms/articles/{id}/seo', [ArticleController::class, 'generateSeo']);
+    });
 
+    Route::middleware([
+        ...$cmsAdminMiddleware,
+        EnsureCmsAdminAuthorized::class.':release',
+    ])->group(function () {
         Route::post('/cms/articles/{id}/publish', [ArticleController::class, 'publish']);
         Route::post('/cms/articles/{id}/unpublish', [ArticleController::class, 'unpublish']);
-        Route::post('/cms/articles/{id}/seo', [ArticleController::class, 'generateSeo']);
     });
 });

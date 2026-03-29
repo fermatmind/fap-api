@@ -60,7 +60,7 @@ class CareerJobResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.content_workspace');
+        return __('ops.group.editorial');
     }
 
     public static function getNavigationLabel(): string

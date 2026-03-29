@@ -16,7 +16,7 @@ final class EnsureCmsAdminAuthorized
         private readonly OrgContext $orgContext,
     ) {}
 
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, string $ability = 'write'): Response
     {
         $guard = (string) config('admin.guard', 'admin');
         $user = auth($guard)->user();
@@ -29,11 +29,8 @@ final class EnsureCmsAdminAuthorized
             return $this->unauthorizedResponse('admin_session_required');
         }
 
-        if (
-            ! $user->hasPermission(PermissionNames::ADMIN_CONTENT_PUBLISH)
-            && ! $user->hasPermission(PermissionNames::ADMIN_OWNER)
-        ) {
-            return $this->forbiddenResponse('admin_content_publish_required');
+        if (! $this->isAuthorized($user, $ability)) {
+            return $this->forbiddenResponse($this->forbiddenReason($ability));
         }
 
         $adminUserId = (int) $user->getAuthIdentifier();
@@ -52,6 +49,45 @@ final class EnsureCmsAdminAuthorized
         app()->instance(OrgContext::class, $this->orgContext);
 
         return $next($request);
+    }
+
+    private function isAuthorized(object $user, string $ability): bool
+    {
+        $permissions = match ($ability) {
+            'release' => [
+                PermissionNames::ADMIN_CONTENT_RELEASE,
+                PermissionNames::ADMIN_CONTENT_PUBLISH,
+                PermissionNames::ADMIN_OWNER,
+            ],
+            'write' => [
+                PermissionNames::ADMIN_CONTENT_WRITE,
+                PermissionNames::ADMIN_CONTENT_PUBLISH,
+                PermissionNames::ADMIN_OWNER,
+            ],
+            default => [
+                PermissionNames::ADMIN_CONTENT_WRITE,
+                PermissionNames::ADMIN_CONTENT_RELEASE,
+                PermissionNames::ADMIN_CONTENT_PUBLISH,
+                PermissionNames::ADMIN_OWNER,
+            ],
+        };
+
+        foreach ($permissions as $permission) {
+            if ($user->hasPermission($permission)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function forbiddenReason(string $ability): string
+    {
+        return match ($ability) {
+            'release' => 'admin_content_release_required',
+            'write' => 'admin_content_write_required',
+            default => 'admin_content_access_required',
+        };
     }
 
     private function resolveTrustedOrgId(Request $request): int

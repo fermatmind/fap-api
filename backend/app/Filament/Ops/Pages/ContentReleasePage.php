@@ -118,6 +118,7 @@ class ContentReleasePage extends Page
             ));
 
         $guides = CareerGuide::query()
+            ->where('org_id', 0)
             ->when($this->statusFilter !== 'all', fn ($query) => $query->where('status', $this->statusFilter))
             ->latest('updated_at')
             ->get()
@@ -135,6 +136,7 @@ class ContentReleasePage extends Page
             ));
 
         $jobs = CareerJob::query()
+            ->where('org_id', 0)
             ->when($this->statusFilter !== 'all', fn ($query) => $query->where('status', $this->statusFilter))
             ->latest('updated_at')
             ->get()
@@ -212,7 +214,7 @@ class ContentReleasePage extends Page
     {
         $orgId = max(0, (int) app(OrgContext::class)->orgId());
 
-        return $orgId > 0 ? [0, $orgId] : [0];
+        return [$orgId];
     }
 
     /**
