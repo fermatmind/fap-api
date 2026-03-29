@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('client_platform', 32);      // wechat-miniprogram / web 等
             $table->string('client_version', 32)->nullable();
             $table->string('channel', 32)->nullable();  // wechat_ad / pdd / organic ...
-            $table->string('referrer', 255)->nullable();// 上一个页面或来源
+            $table->string('referrer', 255)->nullable(); // 上一个页面或来源
 
             // 时间信息
             $table->timestamp('started_at')->nullable();    // 点击开始测评

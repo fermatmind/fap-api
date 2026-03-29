@@ -12,7 +12,7 @@ return new class extends Migration
         $driver = Schema::getConnection()->getDriverName();
         $isSqlite = $driver === 'sqlite';
 
-        if (!Schema::hasTable('user_agent_settings')) {
+        if (! Schema::hasTable('user_agent_settings')) {
             Schema::create('user_agent_settings', function (Blueprint $table) use ($isSqlite) {
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('user_id');
@@ -33,49 +33,49 @@ return new class extends Migration
             });
         } else {
             Schema::table('user_agent_settings', function (Blueprint $table) use ($isSqlite) {
-                if (!Schema::hasColumn('user_agent_settings', 'id')) {
+                if (! Schema::hasColumn('user_agent_settings', 'id')) {
                     $table->bigIncrements('id');
                 }
-                if (!Schema::hasColumn('user_agent_settings', 'user_id')) {
+                if (! Schema::hasColumn('user_agent_settings', 'user_id')) {
                     $table->unsignedBigInteger('user_id');
                 }
-                if (!Schema::hasColumn('user_agent_settings', 'enabled')) {
+                if (! Schema::hasColumn('user_agent_settings', 'enabled')) {
                     $table->boolean('enabled')->default(false);
                 }
-                if (!Schema::hasColumn('user_agent_settings', 'quiet_hours_json')) {
+                if (! Schema::hasColumn('user_agent_settings', 'quiet_hours_json')) {
                     if ($isSqlite) {
                         $table->text('quiet_hours_json')->nullable();
                     } else {
                         $table->json('quiet_hours_json')->nullable();
                     }
                 }
-                if (!Schema::hasColumn('user_agent_settings', 'thresholds_json')) {
+                if (! Schema::hasColumn('user_agent_settings', 'thresholds_json')) {
                     if ($isSqlite) {
                         $table->text('thresholds_json')->nullable();
                     } else {
                         $table->json('thresholds_json')->nullable();
                     }
                 }
-                if (!Schema::hasColumn('user_agent_settings', 'channels_json')) {
+                if (! Schema::hasColumn('user_agent_settings', 'channels_json')) {
                     if ($isSqlite) {
                         $table->text('channels_json')->nullable();
                     } else {
                         $table->json('channels_json')->nullable();
                     }
                 }
-                if (!Schema::hasColumn('user_agent_settings', 'max_messages_per_day')) {
+                if (! Schema::hasColumn('user_agent_settings', 'max_messages_per_day')) {
                     $table->unsignedInteger('max_messages_per_day')->default(2);
                 }
-                if (!Schema::hasColumn('user_agent_settings', 'cooldown_minutes')) {
+                if (! Schema::hasColumn('user_agent_settings', 'cooldown_minutes')) {
                     $table->unsignedInteger('cooldown_minutes')->default(240);
                 }
-                if (!Schema::hasColumn('user_agent_settings', 'last_sent_at')) {
+                if (! Schema::hasColumn('user_agent_settings', 'last_sent_at')) {
                     $table->timestamp('last_sent_at')->nullable();
                 }
-                if (!Schema::hasColumn('user_agent_settings', 'created_at')) {
+                if (! Schema::hasColumn('user_agent_settings', 'created_at')) {
                     $table->timestamp('created_at')->nullable();
                 }
-                if (!Schema::hasColumn('user_agent_settings', 'updated_at')) {
+                if (! Schema::hasColumn('user_agent_settings', 'updated_at')) {
                     $table->timestamp('updated_at')->nullable();
                 }
             });
@@ -85,7 +85,7 @@ return new class extends Migration
         if (
             Schema::hasTable('user_agent_settings')
             && Schema::hasColumn('user_agent_settings', 'user_id')
-            && !$this->indexExists('user_agent_settings', $uniqueIndex)
+            && ! $this->indexExists('user_agent_settings', $uniqueIndex)
         ) {
             Schema::table('user_agent_settings', function (Blueprint $table) use ($uniqueIndex) {
                 $table->unique(['user_id'], $uniqueIndex);
@@ -110,6 +110,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -120,6 +121,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -130,6 +132,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 

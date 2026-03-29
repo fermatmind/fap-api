@@ -9,7 +9,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('skus')) {
+        if (! Schema::hasTable('skus')) {
             Schema::create('skus', function (Blueprint $table) {
                 $table->string('sku', 64)->primary();
                 $table->string('scale_code', 64);
@@ -26,49 +26,50 @@ return new class extends Migration
                 $table->index(['scale_code', 'is_active'], 'skus_scale_active_idx');
                 $table->index('benefit_code', 'skus_benefit_code_idx');
             });
+
             return;
         }
 
         Schema::table('skus', function (Blueprint $table) {
-            if (!Schema::hasColumn('skus', 'sku')) {
+            if (! Schema::hasColumn('skus', 'sku')) {
                 $table->string('sku', 64);
             }
-            if (!Schema::hasColumn('skus', 'scale_code')) {
+            if (! Schema::hasColumn('skus', 'scale_code')) {
                 $table->string('scale_code', 64)->nullable();
             }
-            if (!Schema::hasColumn('skus', 'kind')) {
+            if (! Schema::hasColumn('skus', 'kind')) {
                 $table->string('kind', 64)->nullable();
             }
-            if (!Schema::hasColumn('skus', 'unit_qty')) {
+            if (! Schema::hasColumn('skus', 'unit_qty')) {
                 $table->integer('unit_qty')->default(1);
             }
-            if (!Schema::hasColumn('skus', 'benefit_code')) {
+            if (! Schema::hasColumn('skus', 'benefit_code')) {
                 $table->string('benefit_code', 64)->nullable();
             }
-            if (!Schema::hasColumn('skus', 'scope')) {
+            if (! Schema::hasColumn('skus', 'scope')) {
                 $table->string('scope', 32)->nullable();
             }
-            if (!Schema::hasColumn('skus', 'price_cents')) {
+            if (! Schema::hasColumn('skus', 'price_cents')) {
                 $table->integer('price_cents')->default(0);
             }
-            if (!Schema::hasColumn('skus', 'currency')) {
+            if (! Schema::hasColumn('skus', 'currency')) {
                 $table->string('currency', 8)->default('USD');
             }
-            if (!Schema::hasColumn('skus', 'is_active')) {
+            if (! Schema::hasColumn('skus', 'is_active')) {
                 $table->boolean('is_active')->default(true);
             }
-            if (!Schema::hasColumn('skus', 'meta_json')) {
+            if (! Schema::hasColumn('skus', 'meta_json')) {
                 $table->json('meta_json')->nullable();
             }
-            if (!Schema::hasColumn('skus', 'created_at')) {
+            if (! Schema::hasColumn('skus', 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
-            if (!Schema::hasColumn('skus', 'updated_at')) {
+            if (! Schema::hasColumn('skus', 'updated_at')) {
                 $table->timestamp('updated_at')->nullable();
             }
         });
 
-        if (!$this->indexExists('skus', 'skus_scale_active_idx')
+        if (! $this->indexExists('skus', 'skus_scale_active_idx')
             && Schema::hasColumn('skus', 'scale_code')
             && Schema::hasColumn('skus', 'is_active')) {
             Schema::table('skus', function (Blueprint $table) {
@@ -76,13 +77,13 @@ return new class extends Migration
             });
         }
 
-        if (!$this->indexExists('skus', 'skus_benefit_code_idx') && Schema::hasColumn('skus', 'benefit_code')) {
+        if (! $this->indexExists('skus', 'skus_benefit_code_idx') && Schema::hasColumn('skus', 'benefit_code')) {
             Schema::table('skus', function (Blueprint $table) {
                 $table->index('benefit_code', 'skus_benefit_code_idx');
             });
         }
 
-        if (!$this->indexExists('skus', 'skus_sku_unique') && Schema::hasColumn('skus', 'sku')) {
+        if (! $this->indexExists('skus', 'skus_sku_unique') && Schema::hasColumn('skus', 'sku')) {
             Schema::table('skus', function (Blueprint $table) {
                 $table->unique('sku', 'skus_sku_unique');
             });
@@ -106,6 +107,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -116,16 +118,18 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
         $db = DB::getDatabaseName();
         $rows = DB::select(
-            "SELECT 1 FROM information_schema.statistics
+            'SELECT 1 FROM information_schema.statistics
              WHERE table_schema = ? AND table_name = ? AND index_name = ?
-             LIMIT 1",
+             LIMIT 1',
             [$db, $table, $indexName]
         );
-        return !empty($rows);
+
+        return ! empty($rows);
     }
 };

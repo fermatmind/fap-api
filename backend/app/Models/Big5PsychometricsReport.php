@@ -9,7 +9,9 @@ class Big5PsychometricsReport extends Model
     protected $table = 'big5_psychometrics_reports';
 
     protected $primaryKey = 'id';
+
     public $incrementing = false;
+
     protected $keyType = 'string';
 
     protected $fillable = [

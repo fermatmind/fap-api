@@ -12,8 +12,9 @@ final class ScaleRegistrySeeder extends Seeder
 {
     public function run(): void
     {
-        if (!Schema::hasTable('scales_registry') || !Schema::hasTable('scale_slugs')) {
+        if (! Schema::hasTable('scales_registry') || ! Schema::hasTable('scale_slugs')) {
             $this->command?->warn('ScaleRegistrySeeder skipped: missing tables.');
+
             return;
         }
 
@@ -25,7 +26,7 @@ final class ScaleRegistrySeeder extends Seeder
         if ($defaultPackId === '' || $defaultDirVersion === '' || $defaultRegion === '' || $defaultLocale === '') {
             throw new \RuntimeException(
                 'ScaleRegistrySeeder requires non-empty content_packs defaults: '
-                . 'default_pack_id/default_dir_version/default_region/default_locale'
+                .'default_pack_id/default_dir_version/default_region/default_locale'
             );
         }
 
@@ -367,7 +368,7 @@ final class ScaleRegistrySeeder extends Seeder
         $effectiveSku = null;
 
         foreach ($rows as $item) {
-            if (!is_array($item)) {
+            if (! is_array($item)) {
                 continue;
             }
 
@@ -379,11 +380,11 @@ final class ScaleRegistrySeeder extends Seeder
             $meta = $item['metadata_json'] ?? [];
             $meta = is_array($meta) ? $meta : [];
 
-            if ($anchorSku === null && !empty($meta['anchor'])) {
+            if ($anchorSku === null && ! empty($meta['anchor'])) {
                 $anchorSku = $sku;
             }
 
-            if ($effectiveSku === null && (!empty($meta['effective_default']) || !empty($meta['default']))) {
+            if ($effectiveSku === null && (! empty($meta['effective_default']) || ! empty($meta['default']))) {
                 $effectiveSku = $sku;
             }
         }
@@ -400,16 +401,17 @@ final class ScaleRegistrySeeder extends Seeder
     private function loadSkuSeedData(): array
     {
         $path = database_path('seed_data/skus_mbti.json');
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             return [];
         }
 
         $raw = file_get_contents($path);
-        if (!is_string($raw) || $raw === '') {
+        if (! is_string($raw) || $raw === '') {
             return [];
         }
 
         $decoded = json_decode($raw, true);
+
         return is_array($decoded) ? $decoded : [];
     }
 
@@ -417,7 +419,7 @@ final class ScaleRegistrySeeder extends Seeder
     {
         $offers = [];
         foreach ($rows as $item) {
-            if (!is_array($item)) {
+            if (! is_array($item)) {
                 continue;
             }
 
@@ -428,7 +430,7 @@ final class ScaleRegistrySeeder extends Seeder
 
             $meta = $item['metadata_json'] ?? [];
             $meta = is_array($meta) ? $meta : [];
-            if (!empty($meta['anchor']) || !empty($meta['deprecated'])) {
+            if (! empty($meta['anchor']) || ! empty($meta['deprecated'])) {
                 continue;
             }
             if (array_key_exists('offer', $meta) && $meta['offer'] === false) {
@@ -473,7 +475,7 @@ final class ScaleRegistrySeeder extends Seeder
             $decoded = json_decode($raw, true);
             $raw = is_array($decoded) ? $decoded : null;
         }
-        if (!is_array($raw)) {
+        if (! is_array($raw)) {
             return [];
         }
 

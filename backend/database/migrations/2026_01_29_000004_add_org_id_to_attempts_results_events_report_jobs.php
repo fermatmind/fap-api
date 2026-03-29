@@ -11,7 +11,7 @@ return new class extends Migration
     {
         if (Schema::hasTable('attempts')) {
             Schema::table('attempts', function (Blueprint $table) {
-                if (!Schema::hasColumn('attempts', 'org_id')) {
+                if (! Schema::hasColumn('attempts', 'org_id')) {
                     $table->unsignedBigInteger('org_id')->default(0);
                 }
             });
@@ -19,7 +19,7 @@ return new class extends Migration
 
         if (Schema::hasTable('results')) {
             Schema::table('results', function (Blueprint $table) {
-                if (!Schema::hasColumn('results', 'org_id')) {
+                if (! Schema::hasColumn('results', 'org_id')) {
                     $table->unsignedBigInteger('org_id')->default(0);
                 }
             });
@@ -27,7 +27,7 @@ return new class extends Migration
 
         if (Schema::hasTable('events')) {
             Schema::table('events', function (Blueprint $table) {
-                if (!Schema::hasColumn('events', 'org_id')) {
+                if (! Schema::hasColumn('events', 'org_id')) {
                     $table->unsignedBigInteger('org_id')->default(0);
                 }
             });
@@ -35,21 +35,21 @@ return new class extends Migration
 
         if (Schema::hasTable('report_jobs')) {
             Schema::table('report_jobs', function (Blueprint $table) {
-                if (!Schema::hasColumn('report_jobs', 'org_id')) {
+                if (! Schema::hasColumn('report_jobs', 'org_id')) {
                     $table->unsignedBigInteger('org_id')->default(0);
                 }
             });
         }
 
         $indexName = 'attempts_org_id_idx';
-        if (Schema::hasTable('attempts') && Schema::hasColumn('attempts', 'org_id') && !$this->indexExists('attempts', $indexName)) {
+        if (Schema::hasTable('attempts') && Schema::hasColumn('attempts', 'org_id') && ! $this->indexExists('attempts', $indexName)) {
             Schema::table('attempts', function (Blueprint $table) use ($indexName) {
                 $table->index('org_id', $indexName);
             });
         }
 
         $indexName = 'results_org_id_idx';
-        if (Schema::hasTable('results') && Schema::hasColumn('results', 'org_id') && !$this->indexExists('results', $indexName)) {
+        if (Schema::hasTable('results') && Schema::hasColumn('results', 'org_id') && ! $this->indexExists('results', $indexName)) {
             Schema::table('results', function (Blueprint $table) use ($indexName) {
                 $table->index('org_id', $indexName);
             });
@@ -58,22 +58,22 @@ return new class extends Migration
         $uniqueName = 'results_org_id_attempt_id_unique';
         $legacyUniqueName = 'results_org_attempt_unique';
         if (Schema::hasTable('results') && Schema::hasColumn('results', 'org_id') && Schema::hasColumn('results', 'attempt_id')
-            && !$this->indexExists('results', $uniqueName)
-            && !$this->indexExists('results', $legacyUniqueName)) {
+            && ! $this->indexExists('results', $uniqueName)
+            && ! $this->indexExists('results', $legacyUniqueName)) {
             Schema::table('results', function (Blueprint $table) use ($uniqueName) {
                 $table->unique(['org_id', 'attempt_id'], $uniqueName);
             });
         }
 
         $indexName = 'events_org_id_idx';
-        if (Schema::hasTable('events') && Schema::hasColumn('events', 'org_id') && !$this->indexExists('events', $indexName)) {
+        if (Schema::hasTable('events') && Schema::hasColumn('events', 'org_id') && ! $this->indexExists('events', $indexName)) {
             Schema::table('events', function (Blueprint $table) use ($indexName) {
                 $table->index('org_id', $indexName);
             });
         }
 
         $indexName = 'report_jobs_org_id_idx';
-        if (Schema::hasTable('report_jobs') && Schema::hasColumn('report_jobs', 'org_id') && !$this->indexExists('report_jobs', $indexName)) {
+        if (Schema::hasTable('report_jobs') && Schema::hasColumn('report_jobs', 'org_id') && ! $this->indexExists('report_jobs', $indexName)) {
             Schema::table('report_jobs', function (Blueprint $table) use ($indexName) {
                 $table->index('org_id', $indexName);
             });
@@ -97,6 +97,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -107,17 +108,18 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
         $db = DB::getDatabaseName();
         $rows = DB::select(
-            "SELECT 1 FROM information_schema.statistics
+            'SELECT 1 FROM information_schema.statistics
              WHERE table_schema = ? AND table_name = ? AND index_name = ?
-             LIMIT 1",
+             LIMIT 1',
             [$db, $table, $indexName]
         );
-        return !empty($rows);
-    }
 
+        return ! empty($rows);
+    }
 };

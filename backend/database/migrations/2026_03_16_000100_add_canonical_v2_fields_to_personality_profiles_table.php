@@ -56,6 +56,6 @@ return new class extends Migration
     public function down(): void
     {
         // Intentionally non-destructive: rollback does not remove additive schema.
-        return;
+
     }
 };

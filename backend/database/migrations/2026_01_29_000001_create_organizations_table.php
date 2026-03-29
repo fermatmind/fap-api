@@ -11,7 +11,7 @@ return new class extends Migration
     {
         $tableName = 'organizations';
 
-        if (!Schema::hasTable($tableName)) {
+        if (! Schema::hasTable($tableName)) {
             Schema::create($tableName, function (Blueprint $table): void {
                 $table->bigIncrements('id');
                 $table->string('name', 255);
@@ -23,25 +23,25 @@ return new class extends Migration
         }
 
         Schema::table($tableName, function (Blueprint $table) use ($tableName): void {
-            if (!Schema::hasColumn($tableName, 'id')) {
+            if (! Schema::hasColumn($tableName, 'id')) {
                 $table->unsignedBigInteger('id')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'name')) {
+            if (! Schema::hasColumn($tableName, 'name')) {
                 $table->string('name', 255)->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'owner_user_id')) {
+            if (! Schema::hasColumn($tableName, 'owner_user_id')) {
                 $table->unsignedBigInteger('owner_user_id')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'created_at')) {
+            if (! Schema::hasColumn($tableName, 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'updated_at')) {
+            if (! Schema::hasColumn($tableName, 'updated_at')) {
                 $table->timestamp('updated_at')->nullable();
             }
         });
 
         if (Schema::hasColumn($tableName, 'owner_user_id')
-            && !SchemaIndex::indexExists($tableName, 'organizations_owner_user_id_idx')) {
+            && ! SchemaIndex::indexExists($tableName, 'organizations_owner_user_id_idx')) {
             Schema::table($tableName, function (Blueprint $table): void {
                 $table->index('owner_user_id', 'organizations_owner_user_id_idx');
             });

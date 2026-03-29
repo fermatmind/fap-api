@@ -13,7 +13,9 @@ class ReportJob extends Model
     protected $table = 'report_jobs';
 
     protected $primaryKey = 'id';
+
     public $incrementing = false;
+
     protected $keyType = 'string';
 
     protected $fillable = [

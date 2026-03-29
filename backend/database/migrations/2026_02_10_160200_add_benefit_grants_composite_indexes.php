@@ -10,13 +10,16 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     private const TABLE = 'benefit_grants';
+
     private const IDX_USER = 'idx_grant_user_access';
+
     private const IDX_ANON = 'idx_grant_anon_access';
+
     private const IDX_SCOPE = 'idx_grant_scope_org';
 
     public function up(): void
     {
-        if (!Schema::hasTable(self::TABLE)) {
+        if (! Schema::hasTable(self::TABLE)) {
             return;
         }
 
@@ -41,7 +44,7 @@ return new class extends Migration
     }
 
     /**
-     * @param list<string> $columns
+     * @param  list<string>  $columns
      */
     private function addIndex(array $columns, string $index): void
     {
@@ -50,7 +53,7 @@ return new class extends Migration
         }
 
         foreach ($columns as $column) {
-            if (!Schema::hasColumn(self::TABLE, $column)) {
+            if (! Schema::hasColumn(self::TABLE, $column)) {
                 return;
             }
         }
@@ -62,7 +65,7 @@ return new class extends Migration
 
     private function dropIndex(string $index): void
     {
-        if (!SchemaIndex::indexExists(self::TABLE, $index)) {
+        if (! SchemaIndex::indexExists(self::TABLE, $index)) {
             return;
         }
 

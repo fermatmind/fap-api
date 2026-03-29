@@ -80,4 +80,3 @@ return new class extends Migration
         // Irreversible operation: schema/data rollback handled via forward fix migrations.
     }
 };
-

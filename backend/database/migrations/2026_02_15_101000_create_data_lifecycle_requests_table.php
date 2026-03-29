@@ -13,7 +13,7 @@ return new class extends Migration
 
     public function up(): void
     {
-        if (!Schema::hasTable(self::TABLE)) {
+        if (! Schema::hasTable(self::TABLE)) {
             Schema::create(self::TABLE, function (Blueprint $table): void {
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('org_id')->default(0);
@@ -45,7 +45,7 @@ return new class extends Migration
 
     private function ensureIndex(string $tableName, array $columns, string $indexName): void
     {
-        if (!Schema::hasTable($tableName)) {
+        if (! Schema::hasTable($tableName)) {
             return;
         }
 

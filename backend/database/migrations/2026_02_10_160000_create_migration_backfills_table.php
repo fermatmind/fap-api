@@ -12,7 +12,7 @@ return new class extends Migration
 
     public function up(): void
     {
-        if (!Schema::hasTable(self::TABLE)) {
+        if (! Schema::hasTable(self::TABLE)) {
             Schema::create(self::TABLE, function (Blueprint $table): void {
                 $table->string('key', 64)->primary();
                 $table->unsignedBigInteger('last_id')->default(0);
@@ -24,15 +24,15 @@ return new class extends Migration
         }
 
         Schema::table(self::TABLE, function (Blueprint $table): void {
-            if (!Schema::hasColumn(self::TABLE, 'last_id')) {
+            if (! Schema::hasColumn(self::TABLE, 'last_id')) {
                 $table->unsignedBigInteger('last_id')->default(0);
             }
 
-            if (!Schema::hasColumn(self::TABLE, 'last_cursor')) {
+            if (! Schema::hasColumn(self::TABLE, 'last_cursor')) {
                 $table->string('last_cursor', 64)->nullable();
             }
 
-            if (!Schema::hasColumn(self::TABLE, 'updated_at')) {
+            if (! Schema::hasColumn(self::TABLE, 'updated_at')) {
                 $table->timestamp('updated_at')->nullable();
             }
         });

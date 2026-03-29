@@ -11,30 +11,31 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('roles')) {
+        if (! Schema::hasTable('roles')) {
             Schema::create('roles', function (Blueprint $table): void {
                 $table->bigIncrements('id');
                 $table->string('name', 64)->unique();
                 $table->string('description', 255)->nullable();
                 $table->timestamps();
             });
+
             return;
         }
 
         Schema::table('roles', function (Blueprint $table): void {
-            if (!Schema::hasColumn('roles', 'id')) {
+            if (! Schema::hasColumn('roles', 'id')) {
                 $table->bigIncrements('id');
             }
-            if (!Schema::hasColumn('roles', 'name')) {
+            if (! Schema::hasColumn('roles', 'name')) {
                 $table->string('name', 64)->nullable();
             }
-            if (!Schema::hasColumn('roles', 'description')) {
+            if (! Schema::hasColumn('roles', 'description')) {
                 $table->string('description', 255)->nullable();
             }
-            if (!Schema::hasColumn('roles', 'created_at')) {
+            if (! Schema::hasColumn('roles', 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
-            if (!Schema::hasColumn('roles', 'updated_at')) {
+            if (! Schema::hasColumn('roles', 'updated_at')) {
                 $table->timestamp('updated_at')->nullable();
             }
         });
@@ -58,6 +59,7 @@ return new class extends Migration
         foreach ($knownNames as $knownName) {
             if (SchemaIndex::indexExists($tableName, $knownName)) {
                 SchemaIndex::logIndexAction('create_unique_skip_exists', $tableName, $knownName, $driver, ['phase' => 'up']);
+
                 return;
             }
         }
@@ -70,6 +72,7 @@ return new class extends Migration
         } catch (\Throwable $e) {
             if (SchemaIndex::isDuplicateIndexException($e, $indexName)) {
                 SchemaIndex::logIndexAction('create_unique_skip_duplicate', $tableName, $indexName, $driver, ['phase' => 'up']);
+
                 return;
             }
 

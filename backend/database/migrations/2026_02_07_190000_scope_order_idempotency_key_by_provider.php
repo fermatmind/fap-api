@@ -8,17 +8,18 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     private const OLD_UNIQUE = 'orders_org_idempotency_key_unique';
+
     private const NEW_UNIQUE = 'orders_org_provider_idempotency_key_unique';
 
     public function up(): void
     {
-        if (!Schema::hasTable('orders')) {
+        if (! Schema::hasTable('orders')) {
             return;
         }
 
-        if (!Schema::hasColumn('orders', 'org_id')
-            || !Schema::hasColumn('orders', 'provider')
-            || !Schema::hasColumn('orders', 'idempotency_key')) {
+        if (! Schema::hasColumn('orders', 'org_id')
+            || ! Schema::hasColumn('orders', 'provider')
+            || ! Schema::hasColumn('orders', 'idempotency_key')) {
             return;
         }
 
@@ -71,12 +72,12 @@ return new class extends Migration
 
         $database = DB::getDatabaseName();
         $rows = DB::select(
-            "SELECT 1 FROM information_schema.statistics
+            'SELECT 1 FROM information_schema.statistics
              WHERE table_schema = ? AND table_name = ? AND index_name = ?
-             LIMIT 1",
+             LIMIT 1',
             [$database, $table, $indexName]
         );
 
-        return !empty($rows);
+        return ! empty($rows);
     }
 };

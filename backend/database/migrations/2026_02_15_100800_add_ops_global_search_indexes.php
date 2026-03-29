@@ -26,7 +26,7 @@ return new class extends Migration
 
     private function ensureIndex(string $tableName, array $columns, string $indexName): void
     {
-        if (!Schema::hasTable($tableName)) {
+        if (! Schema::hasTable($tableName)) {
             return;
         }
 

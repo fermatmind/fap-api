@@ -12,14 +12,16 @@ class Pr19CommerceSeeder extends Seeder
 {
     public function run(): void
     {
-        if (!Schema::hasTable('skus')) {
+        if (! Schema::hasTable('skus')) {
             $this->command?->warn('Pr19CommerceSeeder skipped: skus table missing.');
+
             return;
         }
 
         $rows = $this->loadSkuSeedData();
         if (count($rows) === 0) {
             $this->command?->warn('Pr19CommerceSeeder skipped: seed data missing.');
+
             return;
         }
         /** @var CommerceConfigValidator $validator */
@@ -29,7 +31,7 @@ class Pr19CommerceSeeder extends Seeder
         $now = now();
 
         foreach ($rows as $item) {
-            if (!is_array($item)) {
+            if (! is_array($item)) {
                 continue;
             }
 
@@ -111,7 +113,7 @@ class Pr19CommerceSeeder extends Seeder
 
             foreach ($targets as $scaleCode => $benefits) {
                 $scale = DB::table('scales_registry')->where('org_id', 0)->where('code', $scaleCode)->first();
-                if (!$scale) {
+                if (! $scale) {
                     continue;
                 }
 
@@ -120,7 +122,7 @@ class Pr19CommerceSeeder extends Seeder
                     $decoded = json_decode($commercial, true);
                     $commercial = is_array($decoded) ? $decoded : null;
                 }
-                if (!is_array($commercial)) {
+                if (! is_array($commercial)) {
                     $commercial = [];
                 }
 
@@ -167,17 +169,17 @@ class Pr19CommerceSeeder extends Seeder
 
         $rows = [];
         foreach ($paths as $path) {
-            if (!is_file($path)) {
+            if (! is_file($path)) {
                 continue;
             }
 
             $raw = file_get_contents($path);
-            if (!is_string($raw) || $raw === '') {
+            if (! is_string($raw) || $raw === '') {
                 continue;
             }
 
             $decoded = json_decode($raw, true);
-            if (!is_array($decoded)) {
+            if (! is_array($decoded)) {
                 continue;
             }
 
@@ -195,7 +197,7 @@ class Pr19CommerceSeeder extends Seeder
     {
         $offers = [];
         foreach ($items as $item) {
-            if (!is_array($item)) {
+            if (! is_array($item)) {
                 continue;
             }
 
@@ -258,7 +260,7 @@ class Pr19CommerceSeeder extends Seeder
             $decoded = json_decode($raw, true);
             $raw = is_array($decoded) ? $decoded : null;
         }
-        if (!is_array($raw)) {
+        if (! is_array($raw)) {
             return [];
         }
 

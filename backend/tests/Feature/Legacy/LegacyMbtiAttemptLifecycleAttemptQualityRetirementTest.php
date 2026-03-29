@@ -10,7 +10,6 @@ use App\Models\Result;
 use App\Services\Legacy\Mbti\Attempt\LegacyMbtiAttemptLifecycleService;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
@@ -55,7 +54,7 @@ final class LegacyMbtiAttemptLifecycleAttemptQualityRetirementTest extends TestC
 
     public function test_legacy_mbti_store_attempt_keeps_snapshot_but_no_longer_writes_attempt_quality(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
         Queue::fake();
 
         $answers = $this->mbtiAnswers();

@@ -11,18 +11,19 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     private const TABLE = 'idempotency_keys';
+
     private const INDEX = 'idempotency_keys_identity_unique';
 
     public function up(): void
     {
-        if (!Schema::hasTable(self::TABLE)) {
+        if (! Schema::hasTable(self::TABLE)) {
             return;
         }
 
         if (
-            !Schema::hasColumn(self::TABLE, 'provider')
-            || !Schema::hasColumn(self::TABLE, 'external_id')
-            || !Schema::hasColumn(self::TABLE, 'recorded_at')
+            ! Schema::hasColumn(self::TABLE, 'provider')
+            || ! Schema::hasColumn(self::TABLE, 'external_id')
+            || ! Schema::hasColumn(self::TABLE, 'recorded_at')
         ) {
             return;
         }

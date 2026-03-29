@@ -12,7 +12,7 @@ return new class extends Migration
         $driver = Schema::getConnection()->getDriverName();
         $isSqlite = $driver === 'sqlite';
 
-        if (!Schema::hasTable('screen_time_samples')) {
+        if (! Schema::hasTable('screen_time_samples')) {
             Schema::create('screen_time_samples', function (Blueprint $table) use ($isSqlite) {
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('user_id')->nullable();
@@ -30,38 +30,38 @@ return new class extends Migration
             });
         } else {
             Schema::table('screen_time_samples', function (Blueprint $table) use ($isSqlite) {
-                if (!Schema::hasColumn('screen_time_samples', 'id')) {
+                if (! Schema::hasColumn('screen_time_samples', 'id')) {
                     $table->bigIncrements('id');
                 }
-                if (!Schema::hasColumn('screen_time_samples', 'user_id')) {
+                if (! Schema::hasColumn('screen_time_samples', 'user_id')) {
                     $table->unsignedBigInteger('user_id')->nullable();
                 }
-                if (!Schema::hasColumn('screen_time_samples', 'source')) {
+                if (! Schema::hasColumn('screen_time_samples', 'source')) {
                     $table->string('source', 64)->default('ingestion');
                 }
-                if (!Schema::hasColumn('screen_time_samples', 'recorded_at')) {
+                if (! Schema::hasColumn('screen_time_samples', 'recorded_at')) {
                     $table->timestamp('recorded_at');
                 }
-                if (!Schema::hasColumn('screen_time_samples', 'value_json')) {
+                if (! Schema::hasColumn('screen_time_samples', 'value_json')) {
                     if ($isSqlite) {
                         $table->text('value_json');
                     } else {
                         $table->json('value_json');
                     }
                 }
-                if (!Schema::hasColumn('screen_time_samples', 'confidence')) {
+                if (! Schema::hasColumn('screen_time_samples', 'confidence')) {
                     $table->decimal('confidence', 4, 2)->default(1.0);
                 }
-                if (!Schema::hasColumn('screen_time_samples', 'raw_payload_hash')) {
+                if (! Schema::hasColumn('screen_time_samples', 'raw_payload_hash')) {
                     $table->string('raw_payload_hash', 64)->nullable();
                 }
-                if (!Schema::hasColumn('screen_time_samples', 'ingest_batch_id')) {
+                if (! Schema::hasColumn('screen_time_samples', 'ingest_batch_id')) {
                     $table->uuid('ingest_batch_id')->nullable();
                 }
-                if (!Schema::hasColumn('screen_time_samples', 'created_at')) {
+                if (! Schema::hasColumn('screen_time_samples', 'created_at')) {
                     $table->timestamp('created_at')->nullable();
                 }
-                if (!Schema::hasColumn('screen_time_samples', 'updated_at')) {
+                if (! Schema::hasColumn('screen_time_samples', 'updated_at')) {
                     $table->timestamp('updated_at')->nullable();
                 }
             });
@@ -72,7 +72,7 @@ return new class extends Migration
             Schema::hasTable('screen_time_samples')
             && Schema::hasColumn('screen_time_samples', 'user_id')
             && Schema::hasColumn('screen_time_samples', 'recorded_at')
-            && !$this->indexExists('screen_time_samples', $indexName)
+            && ! $this->indexExists('screen_time_samples', $indexName)
         ) {
             Schema::table('screen_time_samples', function (Blueprint $table) use ($indexName) {
                 $table->index(['user_id', 'recorded_at'], $indexName);
@@ -97,6 +97,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -107,6 +108,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -117,6 +119,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 

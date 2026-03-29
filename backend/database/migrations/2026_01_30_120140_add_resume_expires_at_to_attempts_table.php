@@ -9,17 +9,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('attempts')) {
+        if (! Schema::hasTable('attempts')) {
             return;
         }
 
         Schema::table('attempts', function (Blueprint $table) {
-            if (!Schema::hasColumn('attempts', 'resume_expires_at')) {
+            if (! Schema::hasColumn('attempts', 'resume_expires_at')) {
                 $table->timestamp('resume_expires_at')->nullable();
             }
         });
 
-        if (!$this->indexExists('attempts', 'attempts_resume_expires_idx')) {
+        if (! $this->indexExists('attempts', 'attempts_resume_expires_idx')) {
             Schema::table('attempts', function (Blueprint $table) {
                 $table->index(['resume_expires_at'], 'attempts_resume_expires_idx');
             });
@@ -43,6 +43,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -53,17 +54,18 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
         $db = DB::getDatabaseName();
         $rows = DB::select(
-            "SELECT 1 FROM information_schema.statistics
+            'SELECT 1 FROM information_schema.statistics
              WHERE table_schema = ? AND table_name = ? AND index_name = ?
-             LIMIT 1",
+             LIMIT 1',
             [$db, $table, $indexName]
         );
 
-        return !empty($rows);
+        return ! empty($rows);
     }
 };

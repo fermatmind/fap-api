@@ -12,7 +12,7 @@ return new class extends Migration
         $driver = Schema::getConnection()->getDriverName();
         $isSqlite = $driver === 'sqlite';
 
-        if (!Schema::hasTable('memories')) {
+        if (! Schema::hasTable('memories')) {
             Schema::create('memories', function (Blueprint $table) use ($isSqlite) {
                 $table->uuid('id')->primary();
                 $table->unsignedBigInteger('user_id');
@@ -38,64 +38,64 @@ return new class extends Migration
             });
         } else {
             Schema::table('memories', function (Blueprint $table) use ($isSqlite) {
-                if (!Schema::hasColumn('memories', 'id')) {
+                if (! Schema::hasColumn('memories', 'id')) {
                     $table->uuid('id')->primary();
                 }
-                if (!Schema::hasColumn('memories', 'user_id')) {
+                if (! Schema::hasColumn('memories', 'user_id')) {
                     $table->unsignedBigInteger('user_id');
                 }
-                if (!Schema::hasColumn('memories', 'status')) {
+                if (! Schema::hasColumn('memories', 'status')) {
                     $table->string('status', 32)->default('proposed');
                 }
-                if (!Schema::hasColumn('memories', 'kind')) {
+                if (! Schema::hasColumn('memories', 'kind')) {
                     $table->string('kind', 64)->default('note');
                 }
-                if (!Schema::hasColumn('memories', 'title')) {
+                if (! Schema::hasColumn('memories', 'title')) {
                     $table->string('title', 128)->nullable();
                 }
-                if (!Schema::hasColumn('memories', 'content')) {
+                if (! Schema::hasColumn('memories', 'content')) {
                     $table->text('content');
                 }
-                if (!Schema::hasColumn('memories', 'content_hash')) {
+                if (! Schema::hasColumn('memories', 'content_hash')) {
                     $table->string('content_hash', 64)->nullable();
                 }
-                if (!Schema::hasColumn('memories', 'tags_json')) {
+                if (! Schema::hasColumn('memories', 'tags_json')) {
                     if ($isSqlite) {
                         $table->text('tags_json')->nullable();
                     } else {
                         $table->json('tags_json')->nullable();
                     }
                 }
-                if (!Schema::hasColumn('memories', 'evidence_json')) {
+                if (! Schema::hasColumn('memories', 'evidence_json')) {
                     if ($isSqlite) {
                         $table->text('evidence_json')->nullable();
                     } else {
                         $table->json('evidence_json')->nullable();
                     }
                 }
-                if (!Schema::hasColumn('memories', 'source_refs_json')) {
+                if (! Schema::hasColumn('memories', 'source_refs_json')) {
                     if ($isSqlite) {
                         $table->text('source_refs_json')->nullable();
                     } else {
                         $table->json('source_refs_json')->nullable();
                     }
                 }
-                if (!Schema::hasColumn('memories', 'consent_version')) {
+                if (! Schema::hasColumn('memories', 'consent_version')) {
                     $table->string('consent_version', 64)->nullable();
                 }
-                if (!Schema::hasColumn('memories', 'proposed_at')) {
+                if (! Schema::hasColumn('memories', 'proposed_at')) {
                     $table->timestamp('proposed_at')->nullable();
                 }
-                if (!Schema::hasColumn('memories', 'confirmed_at')) {
+                if (! Schema::hasColumn('memories', 'confirmed_at')) {
                     $table->timestamp('confirmed_at')->nullable();
                 }
-                if (!Schema::hasColumn('memories', 'deleted_at')) {
+                if (! Schema::hasColumn('memories', 'deleted_at')) {
                     $table->timestamp('deleted_at')->nullable();
                 }
-                if (!Schema::hasColumn('memories', 'created_at')) {
+                if (! Schema::hasColumn('memories', 'created_at')) {
                     $table->timestamp('created_at')->nullable();
                 }
-                if (!Schema::hasColumn('memories', 'updated_at')) {
+                if (! Schema::hasColumn('memories', 'updated_at')) {
                     $table->timestamp('updated_at')->nullable();
                 }
             });
@@ -106,7 +106,7 @@ return new class extends Migration
             Schema::hasTable('memories')
             && Schema::hasColumn('memories', 'user_id')
             && Schema::hasColumn('memories', 'status')
-            && !$this->indexExists('memories', $userStatusIdx)
+            && ! $this->indexExists('memories', $userStatusIdx)
         ) {
             Schema::table('memories', function (Blueprint $table) use ($userStatusIdx) {
                 $table->index(['user_id', 'status'], $userStatusIdx);
@@ -119,7 +119,7 @@ return new class extends Migration
             && Schema::hasColumn('memories', 'user_id')
             && Schema::hasColumn('memories', 'kind')
             && Schema::hasColumn('memories', 'created_at')
-            && !$this->indexExists('memories', $userKindIdx)
+            && ! $this->indexExists('memories', $userKindIdx)
         ) {
             Schema::table('memories', function (Blueprint $table) use ($userKindIdx) {
                 $table->index(['user_id', 'kind', 'created_at'], $userKindIdx);
@@ -130,7 +130,7 @@ return new class extends Migration
         if (
             Schema::hasTable('memories')
             && Schema::hasColumn('memories', 'content_hash')
-            && !$this->indexExists('memories', $contentHashIdx)
+            && ! $this->indexExists('memories', $contentHashIdx)
         ) {
             Schema::table('memories', function (Blueprint $table) use ($contentHashIdx) {
                 $table->index(['content_hash'], $contentHashIdx);
@@ -155,6 +155,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -165,6 +166,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -175,6 +177,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 

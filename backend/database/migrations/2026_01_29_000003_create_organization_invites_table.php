@@ -11,7 +11,7 @@ return new class extends Migration
     {
         $tableName = 'organization_invites';
 
-        if (!Schema::hasTable($tableName)) {
+        if (! Schema::hasTable($tableName)) {
             Schema::create($tableName, function (Blueprint $table): void {
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('org_id');
@@ -27,48 +27,48 @@ return new class extends Migration
         }
 
         Schema::table($tableName, function (Blueprint $table) use ($tableName): void {
-            if (!Schema::hasColumn($tableName, 'id')) {
+            if (! Schema::hasColumn($tableName, 'id')) {
                 $table->unsignedBigInteger('id')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'org_id')) {
+            if (! Schema::hasColumn($tableName, 'org_id')) {
                 $table->unsignedBigInteger('org_id')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'email')) {
+            if (! Schema::hasColumn($tableName, 'email')) {
                 $table->string('email', 255)->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'token')) {
+            if (! Schema::hasColumn($tableName, 'token')) {
                 $table->string('token', 128)->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'expires_at')) {
+            if (! Schema::hasColumn($tableName, 'expires_at')) {
                 $table->timestamp('expires_at')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'accepted_at')) {
+            if (! Schema::hasColumn($tableName, 'accepted_at')) {
                 $table->timestamp('accepted_at')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'created_at')) {
+            if (! Schema::hasColumn($tableName, 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'updated_at')) {
+            if (! Schema::hasColumn($tableName, 'updated_at')) {
                 $table->timestamp('updated_at')->nullable();
             }
         });
 
         if (Schema::hasColumn($tableName, 'token')
-            && !SchemaIndex::indexExists($tableName, 'organization_invites_token_unique')) {
+            && ! SchemaIndex::indexExists($tableName, 'organization_invites_token_unique')) {
             Schema::table($tableName, function (Blueprint $table): void {
                 $table->unique('token', 'organization_invites_token_unique');
             });
         }
 
         if (Schema::hasColumn($tableName, 'org_id')
-            && !SchemaIndex::indexExists($tableName, 'organization_invites_org_id_idx')) {
+            && ! SchemaIndex::indexExists($tableName, 'organization_invites_org_id_idx')) {
             Schema::table($tableName, function (Blueprint $table): void {
                 $table->index('org_id', 'organization_invites_org_id_idx');
             });
         }
 
         if (Schema::hasColumn($tableName, 'email')
-            && !SchemaIndex::indexExists($tableName, 'organization_invites_email_idx')) {
+            && ! SchemaIndex::indexExists($tableName, 'organization_invites_email_idx')) {
             Schema::table($tableName, function (Blueprint $table): void {
                 $table->index('email', 'organization_invites_email_idx');
             });

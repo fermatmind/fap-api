@@ -12,7 +12,7 @@ return new class extends Migration
         $driver = Schema::getConnection()->getDriverName();
         $isSqlite = $driver === 'sqlite';
 
-        if (!Schema::hasTable('embeddings_index')) {
+        if (! Schema::hasTable('embeddings_index')) {
             Schema::create('embeddings_index', function (Blueprint $table) use ($isSqlite) {
                 $table->uuid('id')->primary();
                 $table->string('namespace', 64)->default('default');
@@ -32,44 +32,44 @@ return new class extends Migration
             });
         } else {
             Schema::table('embeddings_index', function (Blueprint $table) use ($isSqlite) {
-                if (!Schema::hasColumn('embeddings_index', 'id')) {
+                if (! Schema::hasColumn('embeddings_index', 'id')) {
                     $table->uuid('id')->primary();
                 }
-                if (!Schema::hasColumn('embeddings_index', 'namespace')) {
+                if (! Schema::hasColumn('embeddings_index', 'namespace')) {
                     $table->string('namespace', 64)->default('default');
                 }
-                if (!Schema::hasColumn('embeddings_index', 'owner_type')) {
+                if (! Schema::hasColumn('embeddings_index', 'owner_type')) {
                     $table->string('owner_type', 64);
                 }
-                if (!Schema::hasColumn('embeddings_index', 'owner_id')) {
+                if (! Schema::hasColumn('embeddings_index', 'owner_id')) {
                     $table->string('owner_id', 64);
                 }
-                if (!Schema::hasColumn('embeddings_index', 'model')) {
+                if (! Schema::hasColumn('embeddings_index', 'model')) {
                     $table->string('model', 64);
                 }
-                if (!Schema::hasColumn('embeddings_index', 'dim')) {
+                if (! Schema::hasColumn('embeddings_index', 'dim')) {
                     $table->unsignedInteger('dim')->default(0);
                 }
-                if (!Schema::hasColumn('embeddings_index', 'content_hash')) {
+                if (! Schema::hasColumn('embeddings_index', 'content_hash')) {
                     $table->string('content_hash', 64)->nullable();
                 }
-                if (!Schema::hasColumn('embeddings_index', 'vectorstore')) {
+                if (! Schema::hasColumn('embeddings_index', 'vectorstore')) {
                     $table->string('vectorstore', 32)->default('mysql_fallback');
                 }
-                if (!Schema::hasColumn('embeddings_index', 'meta_json')) {
+                if (! Schema::hasColumn('embeddings_index', 'meta_json')) {
                     if ($isSqlite) {
                         $table->text('meta_json')->nullable();
                     } else {
                         $table->json('meta_json')->nullable();
                     }
                 }
-                if (!Schema::hasColumn('embeddings_index', 'last_upserted_at')) {
+                if (! Schema::hasColumn('embeddings_index', 'last_upserted_at')) {
                     $table->timestamp('last_upserted_at')->nullable();
                 }
-                if (!Schema::hasColumn('embeddings_index', 'created_at')) {
+                if (! Schema::hasColumn('embeddings_index', 'created_at')) {
                     $table->timestamp('created_at')->nullable();
                 }
-                if (!Schema::hasColumn('embeddings_index', 'updated_at')) {
+                if (! Schema::hasColumn('embeddings_index', 'updated_at')) {
                     $table->timestamp('updated_at')->nullable();
                 }
             });
@@ -80,7 +80,7 @@ return new class extends Migration
             Schema::hasTable('embeddings_index')
             && Schema::hasColumn('embeddings_index', 'owner_type')
             && Schema::hasColumn('embeddings_index', 'owner_id')
-            && !$this->indexExists('embeddings_index', $ownerIdx)
+            && ! $this->indexExists('embeddings_index', $ownerIdx)
         ) {
             Schema::table('embeddings_index', function (Blueprint $table) use ($ownerIdx) {
                 $table->index(['owner_type', 'owner_id'], $ownerIdx);
@@ -91,7 +91,7 @@ return new class extends Migration
         if (
             Schema::hasTable('embeddings_index')
             && Schema::hasColumn('embeddings_index', 'namespace')
-            && !$this->indexExists('embeddings_index', $namespaceIdx)
+            && ! $this->indexExists('embeddings_index', $namespaceIdx)
         ) {
             Schema::table('embeddings_index', function (Blueprint $table) use ($namespaceIdx) {
                 $table->index(['namespace'], $namespaceIdx);
@@ -102,7 +102,7 @@ return new class extends Migration
         if (
             Schema::hasTable('embeddings_index')
             && Schema::hasColumn('embeddings_index', 'content_hash')
-            && !$this->indexExists('embeddings_index', $contentHashIdx)
+            && ! $this->indexExists('embeddings_index', $contentHashIdx)
         ) {
             Schema::table('embeddings_index', function (Blueprint $table) use ($contentHashIdx) {
                 $table->index(['content_hash'], $contentHashIdx);
@@ -127,6 +127,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -137,6 +138,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -147,6 +149,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 

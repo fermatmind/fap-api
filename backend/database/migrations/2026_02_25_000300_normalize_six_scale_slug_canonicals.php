@@ -89,7 +89,7 @@ return new class extends Migration
 
     public function up(): void
     {
-        if (!Schema::hasTable('scales_registry') || !Schema::hasTable('scale_slugs')) {
+        if (! Schema::hasTable('scales_registry') || ! Schema::hasTable('scale_slugs')) {
             return;
         }
 
@@ -219,12 +219,12 @@ return new class extends Migration
         if (is_array($raw)) {
             return array_map(static fn (mixed $slug): string => (string) $slug, $raw);
         }
-        if (!is_string($raw) || trim($raw) === '') {
+        if (! is_string($raw) || trim($raw) === '') {
             return [];
         }
 
         $decoded = json_decode($raw, true);
-        if (!is_array($decoded)) {
+        if (! is_array($decoded)) {
             return [];
         }
 
@@ -232,7 +232,7 @@ return new class extends Migration
     }
 
     /**
-     * @param list<string> $slugs
+     * @param  list<string>  $slugs
      * @return list<string>
      */
     private function normalizeSlugs(array $slugs): array
@@ -243,10 +243,10 @@ return new class extends Migration
             if ($normalized === '') {
                 continue;
             }
-            if (!preg_match('/^[a-z0-9-]{1,127}$/', $normalized)) {
+            if (! preg_match('/^[a-z0-9-]{1,127}$/', $normalized)) {
                 continue;
             }
-            if (!isset($out[$normalized])) {
+            if (! isset($out[$normalized])) {
                 $out[$normalized] = true;
             }
         }

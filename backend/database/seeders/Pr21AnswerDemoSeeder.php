@@ -10,8 +10,9 @@ class Pr21AnswerDemoSeeder extends Seeder
 {
     public function run(): void
     {
-        if (!Schema::hasTable('scales_registry') || !Schema::hasTable('scale_slugs')) {
+        if (! Schema::hasTable('scales_registry') || ! Schema::hasTable('scale_slugs')) {
             $this->command?->warn('Pr21AnswerDemoSeeder skipped: missing tables.');
+
             return;
         }
 
@@ -70,7 +71,7 @@ class Pr21AnswerDemoSeeder extends Seeder
         $effectiveSku = null;
 
         foreach ($rows as $item) {
-            if (!is_array($item)) {
+            if (! is_array($item)) {
                 continue;
             }
 
@@ -82,11 +83,11 @@ class Pr21AnswerDemoSeeder extends Seeder
             $meta = $item['metadata_json'] ?? [];
             $meta = is_array($meta) ? $meta : [];
 
-            if ($anchorSku === null && !empty($meta['anchor'])) {
+            if ($anchorSku === null && ! empty($meta['anchor'])) {
                 $anchorSku = $sku;
             }
 
-            if ($effectiveSku === null && (!empty($meta['effective_default']) || !empty($meta['default']))) {
+            if ($effectiveSku === null && (! empty($meta['effective_default']) || ! empty($meta['default']))) {
                 $effectiveSku = $sku;
             }
         }
@@ -103,16 +104,17 @@ class Pr21AnswerDemoSeeder extends Seeder
     private function loadSkuSeedData(): array
     {
         $path = database_path('seed_data/skus_mbti.json');
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             return [];
         }
 
         $raw = file_get_contents($path);
-        if (!is_string($raw) || $raw === '') {
+        if (! is_string($raw) || $raw === '') {
             return [];
         }
 
         $decoded = json_decode($raw, true);
+
         return is_array($decoded) ? $decoded : [];
     }
 
@@ -120,7 +122,7 @@ class Pr21AnswerDemoSeeder extends Seeder
     {
         $offers = [];
         foreach ($rows as $item) {
-            if (!is_array($item)) {
+            if (! is_array($item)) {
                 continue;
             }
 
@@ -131,7 +133,7 @@ class Pr21AnswerDemoSeeder extends Seeder
 
             $meta = $item['metadata_json'] ?? [];
             $meta = is_array($meta) ? $meta : [];
-            if (!empty($meta['anchor']) || !empty($meta['deprecated'])) {
+            if (! empty($meta['anchor']) || ! empty($meta['deprecated'])) {
                 continue;
             }
             if (array_key_exists('offer', $meta) && $meta['offer'] === false) {

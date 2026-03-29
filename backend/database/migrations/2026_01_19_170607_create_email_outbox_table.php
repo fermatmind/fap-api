@@ -11,7 +11,7 @@ return new class extends Migration
     {
         $tableName = 'email_outbox';
 
-        if (!Schema::hasTable($tableName)) {
+        if (! Schema::hasTable($tableName)) {
             Schema::create($tableName, function (Blueprint $table): void {
                 $table->uuid('id')->primary();
                 $table->string('user_id', 64);
@@ -33,65 +33,65 @@ return new class extends Migration
         }
 
         Schema::table($tableName, function (Blueprint $table) use ($tableName): void {
-            if (!Schema::hasColumn($tableName, 'id')) {
+            if (! Schema::hasColumn($tableName, 'id')) {
                 $table->uuid('id')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'user_id')) {
+            if (! Schema::hasColumn($tableName, 'user_id')) {
                 $table->string('user_id', 64)->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'email')) {
+            if (! Schema::hasColumn($tableName, 'email')) {
                 $table->string('email')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'template')) {
+            if (! Schema::hasColumn($tableName, 'template')) {
                 $table->string('template', 64)->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'payload_json')) {
+            if (! Schema::hasColumn($tableName, 'payload_json')) {
                 $table->json('payload_json')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'claim_token_hash')) {
+            if (! Schema::hasColumn($tableName, 'claim_token_hash')) {
                 $table->string('claim_token_hash', 64)->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'claim_expires_at')) {
+            if (! Schema::hasColumn($tableName, 'claim_expires_at')) {
                 $table->timestamp('claim_expires_at')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'status')) {
+            if (! Schema::hasColumn($tableName, 'status')) {
                 $table->string('status', 24)->default('pending');
             }
-            if (!Schema::hasColumn($tableName, 'sent_at')) {
+            if (! Schema::hasColumn($tableName, 'sent_at')) {
                 $table->timestamp('sent_at')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'consumed_at')) {
+            if (! Schema::hasColumn($tableName, 'consumed_at')) {
                 $table->timestamp('consumed_at')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'created_at')) {
+            if (! Schema::hasColumn($tableName, 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'updated_at')) {
+            if (! Schema::hasColumn($tableName, 'updated_at')) {
                 $table->timestamp('updated_at')->nullable();
             }
         });
 
-        if (Schema::hasColumn($tableName, 'user_id') && !SchemaIndex::indexExists($tableName, 'email_outbox_user_id_index')) {
+        if (Schema::hasColumn($tableName, 'user_id') && ! SchemaIndex::indexExists($tableName, 'email_outbox_user_id_index')) {
             Schema::table($tableName, function (Blueprint $table): void {
                 $table->index('user_id', 'email_outbox_user_id_index');
             });
         }
 
         if (Schema::hasColumn($tableName, 'claim_token_hash')
-            && !SchemaIndex::indexExists($tableName, 'email_outbox_claim_token_hash_unique')) {
+            && ! SchemaIndex::indexExists($tableName, 'email_outbox_claim_token_hash_unique')) {
             Schema::table($tableName, function (Blueprint $table): void {
                 $table->unique('claim_token_hash', 'email_outbox_claim_token_hash_unique');
             });
         }
 
         if (Schema::hasColumn($tableName, 'claim_expires_at')
-            && !SchemaIndex::indexExists($tableName, 'email_outbox_claim_expires_at_index')) {
+            && ! SchemaIndex::indexExists($tableName, 'email_outbox_claim_expires_at_index')) {
             Schema::table($tableName, function (Blueprint $table): void {
                 $table->index('claim_expires_at', 'email_outbox_claim_expires_at_index');
             });
         }
 
-        if (Schema::hasColumn($tableName, 'status') && !SchemaIndex::indexExists($tableName, 'email_outbox_status_index')) {
+        if (Schema::hasColumn($tableName, 'status') && ! SchemaIndex::indexExists($tableName, 'email_outbox_status_index')) {
             Schema::table($tableName, function (Blueprint $table): void {
                 $table->index('status', 'email_outbox_status_index');
             });

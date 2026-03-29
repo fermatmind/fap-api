@@ -11,7 +11,7 @@ return new class extends Migration
     {
         $tableName = 'assessments';
 
-        if (!Schema::hasTable($tableName)) {
+        if (! Schema::hasTable($tableName)) {
             Schema::create($tableName, function (Blueprint $table): void {
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('org_id');
@@ -28,38 +28,38 @@ return new class extends Migration
         }
 
         Schema::table($tableName, function (Blueprint $table) use ($tableName): void {
-            if (!Schema::hasColumn($tableName, 'id')) {
+            if (! Schema::hasColumn($tableName, 'id')) {
                 $table->unsignedBigInteger('id')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'org_id')) {
+            if (! Schema::hasColumn($tableName, 'org_id')) {
                 $table->unsignedBigInteger('org_id')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'scale_code')) {
+            if (! Schema::hasColumn($tableName, 'scale_code')) {
                 $table->string('scale_code', 64)->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'title')) {
+            if (! Schema::hasColumn($tableName, 'title')) {
                 $table->string('title', 255)->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'created_by')) {
+            if (! Schema::hasColumn($tableName, 'created_by')) {
                 $table->unsignedBigInteger('created_by')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'due_at')) {
+            if (! Schema::hasColumn($tableName, 'due_at')) {
                 $table->timestamp('due_at')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'status')) {
+            if (! Schema::hasColumn($tableName, 'status')) {
                 $table->string('status', 32)->default('open');
             }
-            if (!Schema::hasColumn($tableName, 'created_at')) {
+            if (! Schema::hasColumn($tableName, 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
-            if (!Schema::hasColumn($tableName, 'updated_at')) {
+            if (! Schema::hasColumn($tableName, 'updated_at')) {
                 $table->timestamp('updated_at')->nullable();
             }
         });
 
         if (Schema::hasColumn($tableName, 'org_id')
             && Schema::hasColumn($tableName, 'created_at')
-            && !SchemaIndex::indexExists($tableName, 'assessments_org_created_idx')) {
+            && ! SchemaIndex::indexExists($tableName, 'assessments_org_created_idx')) {
             Schema::table($tableName, function (Blueprint $table): void {
                 $table->index(['org_id', 'created_at'], 'assessments_org_created_idx');
             });
@@ -67,7 +67,7 @@ return new class extends Migration
 
         if (Schema::hasColumn($tableName, 'org_id')
             && Schema::hasColumn($tableName, 'status')
-            && !SchemaIndex::indexExists($tableName, 'assessments_org_status_idx')) {
+            && ! SchemaIndex::indexExists($tableName, 'assessments_org_status_idx')) {
             Schema::table($tableName, function (Blueprint $table): void {
                 $table->index(['org_id', 'status'], 'assessments_org_status_idx');
             });

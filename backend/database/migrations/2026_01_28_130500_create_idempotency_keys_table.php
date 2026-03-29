@@ -12,7 +12,7 @@ return new class extends Migration
         $driver = Schema::getConnection()->getDriverName();
         $isSqlite = $driver === 'sqlite';
 
-        if (!Schema::hasTable('idempotency_keys')) {
+        if (! Schema::hasTable('idempotency_keys')) {
             Schema::create('idempotency_keys', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->string('provider', 64);
@@ -26,34 +26,34 @@ return new class extends Migration
             });
         } else {
             Schema::table('idempotency_keys', function (Blueprint $table) {
-                if (!Schema::hasColumn('idempotency_keys', 'id')) {
+                if (! Schema::hasColumn('idempotency_keys', 'id')) {
                     $table->bigIncrements('id');
                 }
-                if (!Schema::hasColumn('idempotency_keys', 'provider')) {
+                if (! Schema::hasColumn('idempotency_keys', 'provider')) {
                     $table->string('provider', 64);
                 }
-                if (!Schema::hasColumn('idempotency_keys', 'external_id')) {
+                if (! Schema::hasColumn('idempotency_keys', 'external_id')) {
                     $table->string('external_id', 128);
                 }
-                if (!Schema::hasColumn('idempotency_keys', 'recorded_at')) {
+                if (! Schema::hasColumn('idempotency_keys', 'recorded_at')) {
                     $table->timestamp('recorded_at');
                 }
-                if (!Schema::hasColumn('idempotency_keys', 'hash')) {
+                if (! Schema::hasColumn('idempotency_keys', 'hash')) {
                     $table->string('hash', 64);
                 }
-                if (!Schema::hasColumn('idempotency_keys', 'first_seen_at')) {
+                if (! Schema::hasColumn('idempotency_keys', 'first_seen_at')) {
                     $table->timestamp('first_seen_at')->nullable();
                 }
-                if (!Schema::hasColumn('idempotency_keys', 'last_seen_at')) {
+                if (! Schema::hasColumn('idempotency_keys', 'last_seen_at')) {
                     $table->timestamp('last_seen_at')->nullable();
                 }
-                if (!Schema::hasColumn('idempotency_keys', 'ingest_batch_id')) {
+                if (! Schema::hasColumn('idempotency_keys', 'ingest_batch_id')) {
                     $table->uuid('ingest_batch_id')->nullable();
                 }
-                if (!Schema::hasColumn('idempotency_keys', 'created_at')) {
+                if (! Schema::hasColumn('idempotency_keys', 'created_at')) {
                     $table->timestamp('created_at')->nullable();
                 }
-                if (!Schema::hasColumn('idempotency_keys', 'updated_at')) {
+                if (! Schema::hasColumn('idempotency_keys', 'updated_at')) {
                     $table->timestamp('updated_at')->nullable();
                 }
             });
@@ -66,7 +66,7 @@ return new class extends Migration
             && Schema::hasColumn('idempotency_keys', 'external_id')
             && Schema::hasColumn('idempotency_keys', 'recorded_at')
             && Schema::hasColumn('idempotency_keys', 'hash')
-            && !$this->indexExists('idempotency_keys', $uniqueName)
+            && ! $this->indexExists('idempotency_keys', $uniqueName)
         ) {
             Schema::table('idempotency_keys', function (Blueprint $table) use ($uniqueName) {
                 $table->unique(['provider', 'external_id', 'recorded_at', 'hash'], $uniqueName);
@@ -78,7 +78,7 @@ return new class extends Migration
             Schema::hasTable('idempotency_keys')
             && Schema::hasColumn('idempotency_keys', 'provider')
             && Schema::hasColumn('idempotency_keys', 'external_id')
-            && !$this->indexExists('idempotency_keys', $lookupName)
+            && ! $this->indexExists('idempotency_keys', $lookupName)
         ) {
             Schema::table('idempotency_keys', function (Blueprint $table) use ($lookupName) {
                 $table->index(['provider', 'external_id'], $lookupName);
@@ -103,6 +103,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -113,6 +114,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -123,6 +125,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 

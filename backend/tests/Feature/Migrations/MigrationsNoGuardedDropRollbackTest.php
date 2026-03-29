@@ -17,7 +17,7 @@ final class MigrationsNoGuardedDropRollbackTest extends TestCase
         foreach ($this->migrationFiles() as $filePath) {
             $source = (string) file_get_contents($filePath);
 
-            if (!str_contains($source, 'Schema::hasTable')) {
+            if (! str_contains($source, 'Schema::hasTable')) {
                 continue;
             }
 
@@ -34,7 +34,7 @@ final class MigrationsNoGuardedDropRollbackTest extends TestCase
         $this->assertSame(
             [],
             $violations,
-            "Guarded migration must not drop table in down()\n" . implode("\n", $violations)
+            "Guarded migration must not drop table in down()\n".implode("\n", $violations)
         );
     }
 
@@ -45,7 +45,7 @@ final class MigrationsNoGuardedDropRollbackTest extends TestCase
     {
         $files = glob(base_path('database/migrations/*.php'));
 
-        if (!is_array($files)) {
+        if (! is_array($files)) {
             return [];
         }
 
@@ -62,7 +62,7 @@ final class MigrationsNoGuardedDropRollbackTest extends TestCase
         for ($i = 0; $i < $count; $i++) {
             $token = $tokens[$i];
 
-            if (!is_array($token) || $token[0] !== T_FUNCTION) {
+            if (! is_array($token) || $token[0] !== T_FUNCTION) {
                 continue;
             }
 
@@ -75,7 +75,7 @@ final class MigrationsNoGuardedDropRollbackTest extends TestCase
                 $j++;
             }
 
-            if ($j >= $count || !is_array($tokens[$j]) || strtolower($tokens[$j][1]) !== 'down') {
+            if ($j >= $count || ! is_array($tokens[$j]) || strtolower($tokens[$j][1]) !== 'down') {
                 continue;
             }
 
@@ -97,6 +97,7 @@ final class MigrationsNoGuardedDropRollbackTest extends TestCase
                 if ($text === '{') {
                     $braceDepth++;
                     $body .= $text;
+
                     continue;
                 }
 
@@ -106,6 +107,7 @@ final class MigrationsNoGuardedDropRollbackTest extends TestCase
                         return $body;
                     }
                     $body .= $text;
+
                     continue;
                 }
 
@@ -119,7 +121,7 @@ final class MigrationsNoGuardedDropRollbackTest extends TestCase
     }
 
     /**
-     * @param string|array{int, string, int} $token
+     * @param  string|array{int, string, int}  $token
      */
     private function tokenText(string|array $token): string
     {

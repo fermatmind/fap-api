@@ -15,8 +15,9 @@ class QuantifiedSelfSeeder extends Seeder
 
         mt_srand(13);
 
-        if (!Schema::hasTable('sleep_samples') || !Schema::hasTable('health_samples') || !Schema::hasTable('screen_time_samples')) {
+        if (! Schema::hasTable('sleep_samples') || ! Schema::hasTable('health_samples') || ! Schema::hasTable('screen_time_samples')) {
             $this->command?->warn('QuantifiedSelfSeeder skipped: missing tables.');
+
             return;
         }
 
@@ -38,7 +39,7 @@ class QuantifiedSelfSeeder extends Seeder
                     'duration_minutes' => $durationMinutes,
                 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                 'confidence' => 0.95,
-                'raw_payload_hash' => hash('sha256', $dateStr . '|sleep'),
+                'raw_payload_hash' => hash('sha256', $dateStr.'|sleep'),
                 'ingest_batch_id' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -55,7 +56,7 @@ class QuantifiedSelfSeeder extends Seeder
                     'steps' => $steps,
                 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                 'confidence' => 0.98,
-                'raw_payload_hash' => hash('sha256', $dateStr . '|steps'),
+                'raw_payload_hash' => hash('sha256', $dateStr.'|steps'),
                 'ingest_batch_id' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -74,7 +75,7 @@ class QuantifiedSelfSeeder extends Seeder
                         'bpm' => $bpm,
                     ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                     'confidence' => 0.96,
-                    'raw_payload_hash' => hash('sha256', $dateStr . '|hr|' . $j),
+                    'raw_payload_hash' => hash('sha256', $dateStr.'|hr|'.$j),
                     'ingest_batch_id' => null,
                     'created_at' => now(),
                     'updated_at' => now(),
@@ -91,7 +92,7 @@ class QuantifiedSelfSeeder extends Seeder
                     'total_screen_minutes' => $screenMinutes,
                 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                 'confidence' => 0.9,
-                'raw_payload_hash' => hash('sha256', $dateStr . '|screen'),
+                'raw_payload_hash' => hash('sha256', $dateStr.'|screen'),
                 'ingest_batch_id' => null,
                 'created_at' => now(),
                 'updated_at' => now(),

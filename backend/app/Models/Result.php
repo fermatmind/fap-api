@@ -19,7 +19,9 @@ class Result extends Model
      * 主键是字符串 UUID，不是自增 int
      */
     protected $primaryKey = 'id';
+
     public $incrementing = false;
+
     protected $keyType = 'string';
 
     /**
@@ -53,12 +55,12 @@ class Result extends Model
      */
     protected $casts = [
         'scores_json' => 'array',
-        'scores_pct'  => 'array',
+        'scores_pct' => 'array',
         'axis_states' => 'array',
         'result_json' => 'array',
         'computed_at' => 'datetime',
-        'is_valid'    => 'boolean',
-        'org_id'      => 'integer',
+        'is_valid' => 'boolean',
+        'org_id' => 'integer',
     ];
 
     /**

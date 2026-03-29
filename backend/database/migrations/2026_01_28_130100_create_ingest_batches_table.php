@@ -12,8 +12,8 @@ return new class extends Migration
         $driver = Schema::getConnection()->getDriverName();
         $isSqlite = $driver === 'sqlite';
 
-        if (!Schema::hasTable('ingest_batches')) {
-            Schema::create('ingest_batches', function (Blueprint $table) use ($isSqlite) {
+        if (! Schema::hasTable('ingest_batches')) {
+            Schema::create('ingest_batches', function (Blueprint $table) {
                 $table->uuid('id')->primary();
                 $table->string('provider', 64);
                 $table->unsignedBigInteger('user_id')->nullable();
@@ -24,29 +24,29 @@ return new class extends Migration
                 $table->timestamp('created_at')->nullable();
             });
         } else {
-            Schema::table('ingest_batches', function (Blueprint $table) use ($isSqlite) {
-                if (!Schema::hasColumn('ingest_batches', 'id')) {
+            Schema::table('ingest_batches', function (Blueprint $table) {
+                if (! Schema::hasColumn('ingest_batches', 'id')) {
                     $table->uuid('id')->primary();
                 }
-                if (!Schema::hasColumn('ingest_batches', 'provider')) {
+                if (! Schema::hasColumn('ingest_batches', 'provider')) {
                     $table->string('provider', 64);
                 }
-                if (!Schema::hasColumn('ingest_batches', 'user_id')) {
+                if (! Schema::hasColumn('ingest_batches', 'user_id')) {
                     $table->unsignedBigInteger('user_id')->nullable();
                 }
-                if (!Schema::hasColumn('ingest_batches', 'range_start')) {
+                if (! Schema::hasColumn('ingest_batches', 'range_start')) {
                     $table->timestamp('range_start')->nullable();
                 }
-                if (!Schema::hasColumn('ingest_batches', 'range_end')) {
+                if (! Schema::hasColumn('ingest_batches', 'range_end')) {
                     $table->timestamp('range_end')->nullable();
                 }
-                if (!Schema::hasColumn('ingest_batches', 'raw_payload_hash')) {
+                if (! Schema::hasColumn('ingest_batches', 'raw_payload_hash')) {
                     $table->string('raw_payload_hash', 64)->nullable();
                 }
-                if (!Schema::hasColumn('ingest_batches', 'status')) {
+                if (! Schema::hasColumn('ingest_batches', 'status')) {
                     $table->string('status', 32)->default('received');
                 }
-                if (!Schema::hasColumn('ingest_batches', 'created_at')) {
+                if (! Schema::hasColumn('ingest_batches', 'created_at')) {
                     $table->timestamp('created_at')->nullable();
                 }
             });
@@ -57,7 +57,7 @@ return new class extends Migration
             Schema::hasTable('ingest_batches')
             && Schema::hasColumn('ingest_batches', 'provider')
             && Schema::hasColumn('ingest_batches', 'user_id')
-            && !$this->indexExists('ingest_batches', $indexName)
+            && ! $this->indexExists('ingest_batches', $indexName)
         ) {
             Schema::table('ingest_batches', function (Blueprint $table) use ($indexName) {
                 $table->index(['provider', 'user_id'], $indexName);
@@ -82,6 +82,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -92,6 +93,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -102,6 +104,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 

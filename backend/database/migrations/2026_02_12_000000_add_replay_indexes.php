@@ -24,9 +24,9 @@ return new class extends Migration
 
     private function addReplayIndex(string $table, string $indexName): void
     {
-        if (!Schema::hasTable($table)
-            || !Schema::hasColumn($table, 'ingest_batch_id')
-            || !Schema::hasColumn($table, 'id')
+        if (! Schema::hasTable($table)
+            || ! Schema::hasColumn($table, 'ingest_batch_id')
+            || ! Schema::hasColumn($table, 'id')
             || SchemaIndex::indexExists($table, $indexName)) {
             return;
         }

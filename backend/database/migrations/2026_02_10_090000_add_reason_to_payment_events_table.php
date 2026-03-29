@@ -8,12 +8,12 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('payment_events')) {
+        if (! Schema::hasTable('payment_events')) {
             return;
         }
 
         Schema::table('payment_events', function (Blueprint $table) {
-            if (!Schema::hasColumn('payment_events', 'reason')) {
+            if (! Schema::hasColumn('payment_events', 'reason')) {
                 $table->string('reason', 64)->nullable();
             }
         });

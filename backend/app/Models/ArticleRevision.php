@@ -45,4 +45,3 @@ class ArticleRevision extends Model
         return $this->belongsTo(Article::class, 'article_id', 'id');
     }
 }
-

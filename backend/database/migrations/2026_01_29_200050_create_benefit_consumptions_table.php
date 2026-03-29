@@ -9,7 +9,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('benefit_consumptions')) {
+        if (! Schema::hasTable('benefit_consumptions')) {
             Schema::create('benefit_consumptions', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('org_id')->default(0);
@@ -24,26 +24,27 @@ return new class extends Migration
                 );
                 $table->index('org_id', 'benefit_consumptions_org_idx');
             });
+
             return;
         }
 
         Schema::table('benefit_consumptions', function (Blueprint $table) {
-            if (!Schema::hasColumn('benefit_consumptions', 'org_id')) {
+            if (! Schema::hasColumn('benefit_consumptions', 'org_id')) {
                 $table->unsignedBigInteger('org_id')->default(0);
             }
-            if (!Schema::hasColumn('benefit_consumptions', 'benefit_code')) {
+            if (! Schema::hasColumn('benefit_consumptions', 'benefit_code')) {
                 $table->string('benefit_code', 64)->nullable();
             }
-            if (!Schema::hasColumn('benefit_consumptions', 'attempt_id')) {
+            if (! Schema::hasColumn('benefit_consumptions', 'attempt_id')) {
                 $table->string('attempt_id', 64)->nullable();
             }
-            if (!Schema::hasColumn('benefit_consumptions', 'consumed_at')) {
+            if (! Schema::hasColumn('benefit_consumptions', 'consumed_at')) {
                 $table->timestamp('consumed_at')->nullable();
             }
-            if (!Schema::hasColumn('benefit_consumptions', 'created_at')) {
+            if (! Schema::hasColumn('benefit_consumptions', 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
-            if (!Schema::hasColumn('benefit_consumptions', 'updated_at')) {
+            if (! Schema::hasColumn('benefit_consumptions', 'updated_at')) {
                 $table->timestamp('updated_at')->nullable();
             }
         });
@@ -52,8 +53,8 @@ return new class extends Migration
 
         $uniqueName = 'benefit_consumptions_org_id_benefit_code_attempt_id_unique';
         $legacyUniqueName = 'benefit_consumptions_org_benefit_attempt_unique';
-        if (!$this->indexExists('benefit_consumptions', $uniqueName)
-            && !$this->indexExists('benefit_consumptions', $legacyUniqueName)
+        if (! $this->indexExists('benefit_consumptions', $uniqueName)
+            && ! $this->indexExists('benefit_consumptions', $legacyUniqueName)
             && Schema::hasColumn('benefit_consumptions', 'org_id')
             && Schema::hasColumn('benefit_consumptions', 'benefit_code')
             && Schema::hasColumn('benefit_consumptions', 'attempt_id')) {
@@ -65,7 +66,7 @@ return new class extends Migration
             });
         }
 
-        if (!$this->indexExists('benefit_consumptions', 'benefit_consumptions_org_idx')
+        if (! $this->indexExists('benefit_consumptions', 'benefit_consumptions_org_idx')
             && Schema::hasColumn('benefit_consumptions', 'org_id')) {
             Schema::table('benefit_consumptions', function (Blueprint $table) {
                 $table->index('org_id', 'benefit_consumptions_org_idx');
@@ -90,6 +91,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -100,16 +102,18 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
         $db = DB::getDatabaseName();
         $rows = DB::select(
-            "SELECT 1 FROM information_schema.statistics
+            'SELECT 1 FROM information_schema.statistics
              WHERE table_schema = ? AND table_name = ? AND index_name = ?
-             LIMIT 1",
+             LIMIT 1',
             [$db, $table, $indexName]
         );
-        return !empty($rows);
+
+        return ! empty($rows);
     }
 };

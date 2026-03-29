@@ -12,7 +12,7 @@ return new class extends Migration
         $driver = Schema::getConnection()->getDriverName();
         $isSqlite = $driver === 'sqlite';
 
-        if (!Schema::hasTable('scales_registry')) {
+        if (! Schema::hasTable('scales_registry')) {
             Schema::create('scales_registry', function (Blueprint $table) use ($isSqlite) {
                 $table->string('code', 64);
                 $table->unsignedBigInteger('org_id')->default(0);
@@ -63,75 +63,75 @@ return new class extends Migration
         }
 
         Schema::table('scales_registry', function (Blueprint $table) use ($isSqlite) {
-            if (!Schema::hasColumn('scales_registry', 'code')) {
+            if (! Schema::hasColumn('scales_registry', 'code')) {
                 $table->string('code', 64);
             }
-            if (!Schema::hasColumn('scales_registry', 'org_id')) {
+            if (! Schema::hasColumn('scales_registry', 'org_id')) {
                 $table->unsignedBigInteger('org_id')->default(0);
             }
-            if (!Schema::hasColumn('scales_registry', 'primary_slug')) {
+            if (! Schema::hasColumn('scales_registry', 'primary_slug')) {
                 $table->string('primary_slug', 127);
             }
-            if (!Schema::hasColumn('scales_registry', 'slugs_json')) {
+            if (! Schema::hasColumn('scales_registry', 'slugs_json')) {
                 if ($isSqlite) {
                     $table->text('slugs_json');
                 } else {
                     $table->json('slugs_json');
                 }
             }
-            if (!Schema::hasColumn('scales_registry', 'driver_type')) {
+            if (! Schema::hasColumn('scales_registry', 'driver_type')) {
                 $table->string('driver_type', 32);
             }
-            if (!Schema::hasColumn('scales_registry', 'default_pack_id')) {
+            if (! Schema::hasColumn('scales_registry', 'default_pack_id')) {
                 $table->string('default_pack_id', 64)->nullable();
             }
-            if (!Schema::hasColumn('scales_registry', 'default_region')) {
+            if (! Schema::hasColumn('scales_registry', 'default_region')) {
                 $table->string('default_region', 32)->nullable();
             }
-            if (!Schema::hasColumn('scales_registry', 'default_locale')) {
+            if (! Schema::hasColumn('scales_registry', 'default_locale')) {
                 $table->string('default_locale', 32)->nullable();
             }
-            if (!Schema::hasColumn('scales_registry', 'default_dir_version')) {
+            if (! Schema::hasColumn('scales_registry', 'default_dir_version')) {
                 $table->string('default_dir_version', 128)->nullable();
             }
-            if (!Schema::hasColumn('scales_registry', 'capabilities_json')) {
+            if (! Schema::hasColumn('scales_registry', 'capabilities_json')) {
                 if ($isSqlite) {
                     $table->text('capabilities_json')->nullable();
                 } else {
                     $table->json('capabilities_json')->nullable();
                 }
             }
-            if (!Schema::hasColumn('scales_registry', 'view_policy_json')) {
+            if (! Schema::hasColumn('scales_registry', 'view_policy_json')) {
                 if ($isSqlite) {
                     $table->text('view_policy_json')->nullable();
                 } else {
                     $table->json('view_policy_json')->nullable();
                 }
             }
-            if (!Schema::hasColumn('scales_registry', 'commercial_json')) {
+            if (! Schema::hasColumn('scales_registry', 'commercial_json')) {
                 if ($isSqlite) {
                     $table->text('commercial_json')->nullable();
                 } else {
                     $table->json('commercial_json')->nullable();
                 }
             }
-            if (!Schema::hasColumn('scales_registry', 'seo_schema_json')) {
+            if (! Schema::hasColumn('scales_registry', 'seo_schema_json')) {
                 if ($isSqlite) {
                     $table->text('seo_schema_json')->nullable();
                 } else {
                     $table->json('seo_schema_json')->nullable();
                 }
             }
-            if (!Schema::hasColumn('scales_registry', 'is_public')) {
+            if (! Schema::hasColumn('scales_registry', 'is_public')) {
                 $table->boolean('is_public')->default(false);
             }
-            if (!Schema::hasColumn('scales_registry', 'is_active')) {
+            if (! Schema::hasColumn('scales_registry', 'is_active')) {
                 $table->boolean('is_active')->default(true);
             }
-            if (!Schema::hasColumn('scales_registry', 'created_at')) {
+            if (! Schema::hasColumn('scales_registry', 'created_at')) {
                 $table->timestamp('created_at')->nullable();
             }
-            if (!Schema::hasColumn('scales_registry', 'updated_at')) {
+            if (! Schema::hasColumn('scales_registry', 'updated_at')) {
                 $table->timestamp('updated_at')->nullable();
             }
         });
@@ -140,7 +140,7 @@ return new class extends Migration
         if (
             Schema::hasColumn('scales_registry', 'org_id')
             && Schema::hasColumn('scales_registry', 'primary_slug')
-            && !$this->indexExists('scales_registry', $uniqueName)
+            && ! $this->indexExists('scales_registry', $uniqueName)
         ) {
             Schema::table('scales_registry', function (Blueprint $table) use ($uniqueName) {
                 $table->unique(['org_id', 'primary_slug'], $uniqueName);
@@ -148,28 +148,28 @@ return new class extends Migration
         }
 
         $orgIdx = 'scales_registry_org_id_idx';
-        if (Schema::hasColumn('scales_registry', 'org_id') && !$this->indexExists('scales_registry', $orgIdx)) {
+        if (Schema::hasColumn('scales_registry', 'org_id') && ! $this->indexExists('scales_registry', $orgIdx)) {
             Schema::table('scales_registry', function (Blueprint $table) use ($orgIdx) {
                 $table->index('org_id', $orgIdx);
             });
         }
 
         $driverIdx = 'scales_registry_driver_type_idx';
-        if (Schema::hasColumn('scales_registry', 'driver_type') && !$this->indexExists('scales_registry', $driverIdx)) {
+        if (Schema::hasColumn('scales_registry', 'driver_type') && ! $this->indexExists('scales_registry', $driverIdx)) {
             Schema::table('scales_registry', function (Blueprint $table) use ($driverIdx) {
                 $table->index('driver_type', $driverIdx);
             });
         }
 
         $publicIdx = 'scales_registry_is_public_idx';
-        if (Schema::hasColumn('scales_registry', 'is_public') && !$this->indexExists('scales_registry', $publicIdx)) {
+        if (Schema::hasColumn('scales_registry', 'is_public') && ! $this->indexExists('scales_registry', $publicIdx)) {
             Schema::table('scales_registry', function (Blueprint $table) use ($publicIdx) {
                 $table->index('is_public', $publicIdx);
             });
         }
 
         $activeIdx = 'scales_registry_is_active_idx';
-        if (Schema::hasColumn('scales_registry', 'is_active') && !$this->indexExists('scales_registry', $activeIdx)) {
+        if (Schema::hasColumn('scales_registry', 'is_active') && ! $this->indexExists('scales_registry', $activeIdx)) {
             Schema::table('scales_registry', function (Blueprint $table) use ($activeIdx) {
                 $table->index('is_active', $activeIdx);
             });
@@ -193,6 +193,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -203,6 +204,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -213,6 +215,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 

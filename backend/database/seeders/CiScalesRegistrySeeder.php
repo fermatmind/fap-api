@@ -12,8 +12,9 @@ final class CiScalesRegistrySeeder extends Seeder
 {
     public function run(): void
     {
-        if (!Schema::hasTable('scales_registry')) {
+        if (! Schema::hasTable('scales_registry')) {
             $this->command?->warn('CiScalesRegistrySeeder skipped: missing scales_registry table.');
+
             return;
         }
 
@@ -27,7 +28,7 @@ final class CiScalesRegistrySeeder extends Seeder
         if ($defaultPackId === '' || $defaultDirVersion === '' || $defaultRegion === '' || $defaultLocale === '') {
             throw new \RuntimeException(
                 'CiScalesRegistrySeeder requires non-empty content_packs defaults: '
-                . 'default_pack_id/default_dir_version/default_region/default_locale'
+                .'default_pack_id/default_dir_version/default_region/default_locale'
             );
         }
 
@@ -262,6 +263,7 @@ final class CiScalesRegistrySeeder extends Seeder
         if (! $includeDemoScales) {
             $rows = array_values(array_filter($rows, static function (array $row): bool {
                 $code = strtoupper(trim((string) ($row['code'] ?? '')));
+
                 return ! in_array($code, ['DEMO_ANSWERS', 'SIMPLE_SCORE_DEMO'], true);
             }));
         }

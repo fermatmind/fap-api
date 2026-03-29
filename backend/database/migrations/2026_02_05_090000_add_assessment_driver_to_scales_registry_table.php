@@ -8,12 +8,12 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('scales_registry')) {
+        if (! Schema::hasTable('scales_registry')) {
             return;
         }
 
         Schema::table('scales_registry', function (Blueprint $table) {
-            if (!Schema::hasColumn('scales_registry', 'assessment_driver')) {
+            if (! Schema::hasColumn('scales_registry', 'assessment_driver')) {
                 $table->string('assessment_driver', 32)->nullable();
             }
         });

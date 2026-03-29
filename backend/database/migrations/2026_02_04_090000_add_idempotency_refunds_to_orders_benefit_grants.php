@@ -11,21 +11,21 @@ return new class extends Migration
     {
         if (Schema::hasTable('orders')) {
             Schema::table('orders', function (Blueprint $table) {
-                if (!Schema::hasColumn('orders', 'idempotency_key')) {
+                if (! Schema::hasColumn('orders', 'idempotency_key')) {
                     $table->string('idempotency_key', 128)->nullable();
                 }
-                if (!Schema::hasColumn('orders', 'refunded_at')) {
+                if (! Schema::hasColumn('orders', 'refunded_at')) {
                     $table->timestamp('refunded_at')->nullable();
                 }
-                if (!Schema::hasColumn('orders', 'refund_amount_cents')) {
+                if (! Schema::hasColumn('orders', 'refund_amount_cents')) {
                     $table->integer('refund_amount_cents')->nullable();
                 }
-                if (!Schema::hasColumn('orders', 'refund_reason')) {
+                if (! Schema::hasColumn('orders', 'refund_reason')) {
                     $table->string('refund_reason', 255)->nullable();
                 }
             });
 
-            if (!$this->indexExists('orders', 'orders_org_idempotency_key_unique')
+            if (! $this->indexExists('orders', 'orders_org_idempotency_key_unique')
                 && Schema::hasColumn('orders', 'org_id')
                 && Schema::hasColumn('orders', 'idempotency_key')) {
                 Schema::table('orders', function (Blueprint $table) {
@@ -36,12 +36,12 @@ return new class extends Migration
 
         if (Schema::hasTable('benefit_grants')) {
             Schema::table('benefit_grants', function (Blueprint $table) {
-                if (!Schema::hasColumn('benefit_grants', 'revoked_at')) {
+                if (! Schema::hasColumn('benefit_grants', 'revoked_at')) {
                     $table->timestamp('revoked_at')->nullable();
                 }
             });
 
-            if (!$this->indexExists('benefit_grants', 'benefit_grants_org_benefit_attempt_status_idx')
+            if (! $this->indexExists('benefit_grants', 'benefit_grants_org_benefit_attempt_status_idx')
                 && Schema::hasColumn('benefit_grants', 'org_id')
                 && Schema::hasColumn('benefit_grants', 'benefit_code')
                 && Schema::hasColumn('benefit_grants', 'attempt_id')
@@ -73,6 +73,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -83,16 +84,18 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
         $db = DB::getDatabaseName();
         $rows = DB::select(
-            "SELECT 1 FROM information_schema.statistics
+            'SELECT 1 FROM information_schema.statistics
              WHERE table_schema = ? AND table_name = ? AND index_name = ?
-             LIMIT 1",
+             LIMIT 1',
             [$db, $table, $indexName]
         );
-        return !empty($rows);
+
+        return ! empty($rows);
     }
 };

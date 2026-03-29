@@ -9,7 +9,9 @@ class NormSource extends Model
     protected $table = 'norm_sources';
 
     protected $primaryKey = 'source_id';
+
     public $incrementing = false;
+
     protected $keyType = 'string';
 
     protected $fillable = [

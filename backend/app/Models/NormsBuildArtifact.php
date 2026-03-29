@@ -11,7 +11,9 @@ class NormsBuildArtifact extends Model
     protected $table = 'norms_build_artifacts';
 
     protected $primaryKey = 'id';
+
     public $incrementing = false;
+
     protected $keyType = 'string';
 
     protected $fillable = [

@@ -12,7 +12,7 @@ return new class extends Migration
         $driver = Schema::getConnection()->getDriverName();
         $isSqlite = $driver === 'sqlite';
 
-        if (!Schema::hasTable('report_snapshots')) {
+        if (! Schema::hasTable('report_snapshots')) {
             Schema::create('report_snapshots', function (Blueprint $table) use ($isSqlite) {
                 $table->unsignedBigInteger('org_id')->default(0);
                 $table->string('attempt_id', 64);
@@ -40,41 +40,41 @@ return new class extends Migration
         }
 
         Schema::table('report_snapshots', function (Blueprint $table) use ($isSqlite) {
-            if (!Schema::hasColumn('report_snapshots', 'org_id')) {
+            if (! Schema::hasColumn('report_snapshots', 'org_id')) {
                 $table->unsignedBigInteger('org_id')->default(0);
             }
-            if (!Schema::hasColumn('report_snapshots', 'attempt_id')) {
+            if (! Schema::hasColumn('report_snapshots', 'attempt_id')) {
                 $table->string('attempt_id', 64);
             }
-            if (!Schema::hasColumn('report_snapshots', 'order_no')) {
+            if (! Schema::hasColumn('report_snapshots', 'order_no')) {
                 $table->string('order_no', 64)->nullable();
             }
-            if (!Schema::hasColumn('report_snapshots', 'scale_code')) {
+            if (! Schema::hasColumn('report_snapshots', 'scale_code')) {
                 $table->string('scale_code', 64);
             }
-            if (!Schema::hasColumn('report_snapshots', 'pack_id')) {
+            if (! Schema::hasColumn('report_snapshots', 'pack_id')) {
                 $table->string('pack_id', 128);
             }
-            if (!Schema::hasColumn('report_snapshots', 'dir_version')) {
+            if (! Schema::hasColumn('report_snapshots', 'dir_version')) {
                 $table->string('dir_version', 128);
             }
-            if (!Schema::hasColumn('report_snapshots', 'scoring_spec_version')) {
+            if (! Schema::hasColumn('report_snapshots', 'scoring_spec_version')) {
                 $table->string('scoring_spec_version', 64)->nullable();
             }
-            if (!Schema::hasColumn('report_snapshots', 'report_engine_version')) {
+            if (! Schema::hasColumn('report_snapshots', 'report_engine_version')) {
                 $table->string('report_engine_version', 32)->default('v1.2');
             }
-            if (!Schema::hasColumn('report_snapshots', 'snapshot_version')) {
+            if (! Schema::hasColumn('report_snapshots', 'snapshot_version')) {
                 $table->string('snapshot_version', 32)->default('v1');
             }
-            if (!Schema::hasColumn('report_snapshots', 'report_json')) {
+            if (! Schema::hasColumn('report_snapshots', 'report_json')) {
                 if ($isSqlite) {
                     $table->text('report_json');
                 } else {
                     $table->json('report_json');
                 }
             }
-            if (!Schema::hasColumn('report_snapshots', 'created_at')) {
+            if (! Schema::hasColumn('report_snapshots', 'created_at')) {
                 $table->timestamp('created_at');
             }
         });
@@ -84,27 +84,27 @@ return new class extends Migration
         $uniqueName = 'report_snapshots_attempt_id_unique';
         if (Schema::hasTable('report_snapshots')
             && Schema::hasColumn('report_snapshots', 'attempt_id')
-            && !$this->indexExists('report_snapshots', $uniqueName)) {
+            && ! $this->indexExists('report_snapshots', $uniqueName)) {
             Schema::table('report_snapshots', function (Blueprint $table) use ($uniqueName) {
                 $table->unique(['attempt_id'], $uniqueName);
             });
         }
 
-        if (!$this->indexExists('report_snapshots', 'report_snapshots_org_id_idx')
+        if (! $this->indexExists('report_snapshots', 'report_snapshots_org_id_idx')
             && Schema::hasColumn('report_snapshots', 'org_id')) {
             Schema::table('report_snapshots', function (Blueprint $table) {
                 $table->index('org_id', 'report_snapshots_org_id_idx');
             });
         }
 
-        if (!$this->indexExists('report_snapshots', 'report_snapshots_order_no_idx')
+        if (! $this->indexExists('report_snapshots', 'report_snapshots_order_no_idx')
             && Schema::hasColumn('report_snapshots', 'order_no')) {
             Schema::table('report_snapshots', function (Blueprint $table) {
                 $table->index('order_no', 'report_snapshots_order_no_idx');
             });
         }
 
-        if (!$this->indexExists('report_snapshots', 'report_snapshots_scale_code_idx')
+        if (! $this->indexExists('report_snapshots', 'report_snapshots_scale_code_idx')
             && Schema::hasColumn('report_snapshots', 'scale_code')) {
             Schema::table('report_snapshots', function (Blueprint $table) {
                 $table->index('scale_code', 'report_snapshots_scale_code_idx');
@@ -129,6 +129,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -139,16 +140,18 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
         $db = DB::getDatabaseName();
         $rows = DB::select(
-            "SELECT 1 FROM information_schema.statistics
+            'SELECT 1 FROM information_schema.statistics
              WHERE table_schema = ? AND table_name = ? AND index_name = ?
-             LIMIT 1",
+             LIMIT 1',
             [$db, $table, $indexName]
         );
-        return !empty($rows);
+
+        return ! empty($rows);
     }
 };

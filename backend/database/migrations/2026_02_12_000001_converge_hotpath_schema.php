@@ -26,7 +26,7 @@ return new class extends Migration
     private function convergePaymentEvents(): void
     {
         $table = 'payment_events';
-        if (!Schema::hasTable($table)) {
+        if (! Schema::hasTable($table)) {
             return;
         }
 
@@ -94,7 +94,7 @@ return new class extends Migration
     private function convergeOrders(): void
     {
         $table = 'orders';
-        if (!Schema::hasTable($table)) {
+        if (! Schema::hasTable($table)) {
             return;
         }
 
@@ -190,7 +190,7 @@ return new class extends Migration
     private function convergeAttempts(): void
     {
         $table = 'attempts';
-        if (!Schema::hasTable($table)) {
+        if (! Schema::hasTable($table)) {
             return;
         }
 
@@ -213,7 +213,7 @@ return new class extends Migration
     private function convergeReportSnapshots(): void
     {
         $table = 'report_snapshots';
-        if (!Schema::hasTable($table)) {
+        if (! Schema::hasTable($table)) {
             return;
         }
 
@@ -235,7 +235,7 @@ return new class extends Migration
 
     private function addColumnIfMissing(string $table, string $column, callable $callback): void
     {
-        if (!Schema::hasTable($table) || Schema::hasColumn($table, $column)) {
+        if (! Schema::hasTable($table) || Schema::hasColumn($table, $column)) {
             return;
         }
 
@@ -246,12 +246,12 @@ return new class extends Migration
 
     private function addIndexIfMissing(string $table, string $indexName, array $columns): void
     {
-        if (!Schema::hasTable($table) || SchemaIndex::indexExists($table, $indexName)) {
+        if (! Schema::hasTable($table) || SchemaIndex::indexExists($table, $indexName)) {
             return;
         }
 
         foreach ($columns as $column) {
-            if (!Schema::hasColumn($table, $column)) {
+            if (! Schema::hasColumn($table, $column)) {
                 return;
             }
         }
@@ -263,12 +263,12 @@ return new class extends Migration
 
     private function addUniqueIndexIfMissing(string $table, string $indexName, array $columns): void
     {
-        if (!Schema::hasTable($table) || SchemaIndex::indexExists($table, $indexName)) {
+        if (! Schema::hasTable($table) || SchemaIndex::indexExists($table, $indexName)) {
             return;
         }
 
         foreach ($columns as $column) {
-            if (!Schema::hasColumn($table, $column)) {
+            if (! Schema::hasColumn($table, $column)) {
                 return;
             }
         }

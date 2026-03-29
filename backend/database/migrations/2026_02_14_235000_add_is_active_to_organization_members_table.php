@@ -12,12 +12,12 @@ return new class extends Migration
     {
         $tableName = 'organization_members';
 
-        if (!Schema::hasTable($tableName)) {
+        if (! Schema::hasTable($tableName)) {
             return;
         }
 
         Schema::table($tableName, function (Blueprint $table) use ($tableName): void {
-            if (!Schema::hasColumn($tableName, 'is_active')) {
+            if (! Schema::hasColumn($tableName, 'is_active')) {
                 $table->tinyInteger('is_active')->default(1);
             }
         });
@@ -30,7 +30,7 @@ return new class extends Migration
 
         if (Schema::hasColumn($tableName, 'user_id')
             && Schema::hasColumn($tableName, 'is_active')
-            && !SchemaIndex::indexExists($tableName, 'organization_members_user_active_idx')) {
+            && ! SchemaIndex::indexExists($tableName, 'organization_members_user_active_idx')) {
             Schema::table($tableName, function (Blueprint $table): void {
                 $table->index(['user_id', 'is_active'], 'organization_members_user_active_idx');
             });

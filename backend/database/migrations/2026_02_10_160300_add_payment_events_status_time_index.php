@@ -10,14 +10,15 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     private const TABLE = 'payment_events';
+
     private const INDEX = 'idx_pay_status_time';
 
     public function up(): void
     {
-        if (!Schema::hasTable(self::TABLE)
-            || !Schema::hasColumn(self::TABLE, 'provider')
-            || !Schema::hasColumn(self::TABLE, 'status')
-            || !Schema::hasColumn(self::TABLE, 'received_at')
+        if (! Schema::hasTable(self::TABLE)
+            || ! Schema::hasColumn(self::TABLE, 'provider')
+            || ! Schema::hasColumn(self::TABLE, 'status')
+            || ! Schema::hasColumn(self::TABLE, 'received_at')
             || SchemaIndex::indexExists(self::TABLE, self::INDEX)) {
             return;
         }

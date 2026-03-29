@@ -12,7 +12,7 @@ return new class extends Migration
         $driver = Schema::getConnection()->getDriverName();
         $isSqlite = $driver === 'sqlite';
 
-        if (!Schema::hasTable('agent_messages')) {
+        if (! Schema::hasTable('agent_messages')) {
             Schema::create('agent_messages', function (Blueprint $table) use ($isSqlite) {
                 $table->uuid('id')->primary();
                 $table->unsignedBigInteger('user_id');
@@ -38,63 +38,63 @@ return new class extends Migration
             });
         } else {
             Schema::table('agent_messages', function (Blueprint $table) use ($isSqlite) {
-                if (!Schema::hasColumn('agent_messages', 'id')) {
+                if (! Schema::hasColumn('agent_messages', 'id')) {
                     $table->uuid('id')->primary();
                 }
-                if (!Schema::hasColumn('agent_messages', 'user_id')) {
+                if (! Schema::hasColumn('agent_messages', 'user_id')) {
                     $table->unsignedBigInteger('user_id');
                 }
-                if (!Schema::hasColumn('agent_messages', 'decision_id')) {
+                if (! Schema::hasColumn('agent_messages', 'decision_id')) {
                     $table->uuid('decision_id')->nullable();
                 }
-                if (!Schema::hasColumn('agent_messages', 'channel')) {
+                if (! Schema::hasColumn('agent_messages', 'channel')) {
                     $table->string('channel', 32)->default('in_app');
                 }
-                if (!Schema::hasColumn('agent_messages', 'status')) {
+                if (! Schema::hasColumn('agent_messages', 'status')) {
                     $table->string('status', 32)->default('queued');
                 }
-                if (!Schema::hasColumn('agent_messages', 'title')) {
+                if (! Schema::hasColumn('agent_messages', 'title')) {
                     $table->string('title', 128)->nullable();
                 }
-                if (!Schema::hasColumn('agent_messages', 'body')) {
+                if (! Schema::hasColumn('agent_messages', 'body')) {
                     $table->text('body');
                 }
-                if (!Schema::hasColumn('agent_messages', 'template_key')) {
+                if (! Schema::hasColumn('agent_messages', 'template_key')) {
                     $table->string('template_key', 64)->nullable();
                 }
-                if (!Schema::hasColumn('agent_messages', 'content_hash')) {
+                if (! Schema::hasColumn('agent_messages', 'content_hash')) {
                     $table->string('content_hash', 64)->nullable();
                 }
-                if (!Schema::hasColumn('agent_messages', 'idempotency_key')) {
+                if (! Schema::hasColumn('agent_messages', 'idempotency_key')) {
                     $table->string('idempotency_key', 128)->nullable();
                 }
-                if (!Schema::hasColumn('agent_messages', 'why_json')) {
+                if (! Schema::hasColumn('agent_messages', 'why_json')) {
                     if ($isSqlite) {
                         $table->text('why_json');
                     } else {
                         $table->json('why_json');
                     }
                 }
-                if (!Schema::hasColumn('agent_messages', 'evidence_json')) {
+                if (! Schema::hasColumn('agent_messages', 'evidence_json')) {
                     if ($isSqlite) {
                         $table->text('evidence_json');
                     } else {
                         $table->json('evidence_json');
                     }
                 }
-                if (!Schema::hasColumn('agent_messages', 'sent_at')) {
+                if (! Schema::hasColumn('agent_messages', 'sent_at')) {
                     $table->timestamp('sent_at')->nullable();
                 }
-                if (!Schema::hasColumn('agent_messages', 'acked_at')) {
+                if (! Schema::hasColumn('agent_messages', 'acked_at')) {
                     $table->timestamp('acked_at')->nullable();
                 }
-                if (!Schema::hasColumn('agent_messages', 'feedback_at')) {
+                if (! Schema::hasColumn('agent_messages', 'feedback_at')) {
                     $table->timestamp('feedback_at')->nullable();
                 }
-                if (!Schema::hasColumn('agent_messages', 'created_at')) {
+                if (! Schema::hasColumn('agent_messages', 'created_at')) {
                     $table->timestamp('created_at')->nullable();
                 }
-                if (!Schema::hasColumn('agent_messages', 'updated_at')) {
+                if (! Schema::hasColumn('agent_messages', 'updated_at')) {
                     $table->timestamp('updated_at')->nullable();
                 }
             });
@@ -105,7 +105,7 @@ return new class extends Migration
             Schema::hasTable('agent_messages')
             && Schema::hasColumn('agent_messages', 'user_id')
             && Schema::hasColumn('agent_messages', 'sent_at')
-            && !$this->indexExists('agent_messages', $userSentIdx)
+            && ! $this->indexExists('agent_messages', $userSentIdx)
         ) {
             Schema::table('agent_messages', function (Blueprint $table) use ($userSentIdx) {
                 $table->index(['user_id', 'sent_at'], $userSentIdx);
@@ -116,7 +116,7 @@ return new class extends Migration
         if (
             Schema::hasTable('agent_messages')
             && Schema::hasColumn('agent_messages', 'status')
-            && !$this->indexExists('agent_messages', $statusIdx)
+            && ! $this->indexExists('agent_messages', $statusIdx)
         ) {
             Schema::table('agent_messages', function (Blueprint $table) use ($statusIdx) {
                 $table->index(['status'], $statusIdx);
@@ -127,7 +127,7 @@ return new class extends Migration
         if (
             Schema::hasTable('agent_messages')
             && Schema::hasColumn('agent_messages', 'content_hash')
-            && !$this->indexExists('agent_messages', $contentHashIdx)
+            && ! $this->indexExists('agent_messages', $contentHashIdx)
         ) {
             Schema::table('agent_messages', function (Blueprint $table) use ($contentHashIdx) {
                 $table->index(['content_hash'], $contentHashIdx);
@@ -138,7 +138,7 @@ return new class extends Migration
         if (
             Schema::hasTable('agent_messages')
             && Schema::hasColumn('agent_messages', 'idempotency_key')
-            && !$this->indexExists('agent_messages', $idempotencyIdx)
+            && ! $this->indexExists('agent_messages', $idempotencyIdx)
         ) {
             Schema::table('agent_messages', function (Blueprint $table) use ($idempotencyIdx) {
                 $table->unique(['idempotency_key'], $idempotencyIdx);
@@ -163,6 +163,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -173,6 +174,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -183,6 +185,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 

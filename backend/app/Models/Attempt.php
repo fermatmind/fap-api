@@ -20,7 +20,9 @@ class Attempt extends Model
      * 主键是 UUID 字符串（char(36)），不是自增 int
      */
     protected $primaryKey = 'id';
+
     public $incrementing = false;
+
     protected $keyType = 'string';
 
     /**
@@ -38,7 +40,7 @@ class Attempt extends Model
             }
 
             // 2) Ticket Code（外部显式传入就不覆盖）
-            if (!empty($m->ticket_code)) {
+            if (! empty($m->ticket_code)) {
                 return;
             }
 
@@ -47,11 +49,12 @@ class Attempt extends Model
             $maxAttempts = 5;
 
             for ($i = 0; $i < $maxAttempts; $i++) {
-                $code = 'FMT-' . Str::upper(Str::random(8));
+                $code = 'FMT-'.Str::upper(Str::random(8));
 
                 // creating 阶段尚未写入 DB，需查库确认唯一（减少碰撞概率）
-                if (!static::withoutGlobalScopes()->where('ticket_code', $code)->exists()) {
+                if (! static::withoutGlobalScopes()->where('ticket_code', $code)->exists()) {
                     $m->ticket_code = $code;
+
                     return;
                 }
             }
@@ -118,16 +121,16 @@ class Attempt extends Model
      */
     protected $casts = [
         'answers_summary_json' => 'array',
-        'answers_json'         => 'array',
+        'answers_json' => 'array',
         'calculation_snapshot_json' => 'array',
-        'result_json'          => 'array',
-        'duration_ms'          => 'integer',
-        'org_id'               => 'integer',
+        'result_json' => 'array',
+        'duration_ms' => 'integer',
+        'org_id' => 'integer',
 
-        'started_at'           => 'datetime',
-        'submitted_at'         => 'datetime',
-        'created_at'           => 'datetime',
-        'updated_at'           => 'datetime',
+        'started_at' => 'datetime',
+        'submitted_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     /**
@@ -166,6 +169,7 @@ class Attempt extends Model
         }
 
         $p = $this->answers_storage_path;
+
         return is_string($p) && trim($p) !== '';
     }
 
@@ -179,6 +183,7 @@ class Attempt extends Model
 
         if (is_string($ans)) {
             $decoded = json_decode($ans, true);
+
             return is_array($decoded) ? $decoded : [];
         }
 

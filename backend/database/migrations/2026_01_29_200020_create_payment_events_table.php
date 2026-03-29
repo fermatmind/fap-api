@@ -9,7 +9,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('payment_events')) {
+        if (! Schema::hasTable('payment_events')) {
             Schema::create('payment_events', function (Blueprint $table) {
                 $table->uuid('id')->primary();
                 $table->string('provider', 32);
@@ -22,19 +22,20 @@ return new class extends Migration
                 $table->unique(['provider', 'provider_event_id'], 'payment_events_provider_provider_event_id_unique');
                 $table->index(['order_no', 'received_at'], 'payment_events_order_received_idx');
             });
+
             return;
         }
 
         Schema::table('payment_events', function (Blueprint $table) {
-            if (!Schema::hasColumn('payment_events', 'order_no')) {
+            if (! Schema::hasColumn('payment_events', 'order_no')) {
                 $table->string('order_no', 64)->nullable();
             }
-            if (!Schema::hasColumn('payment_events', 'received_at')) {
+            if (! Schema::hasColumn('payment_events', 'received_at')) {
                 $table->timestamp('received_at')->nullable();
             }
         });
 
-        if (!$this->indexExists('payment_events', 'payment_events_provider_provider_event_id_unique')
+        if (! $this->indexExists('payment_events', 'payment_events_provider_provider_event_id_unique')
             && Schema::hasColumn('payment_events', 'provider')
             && Schema::hasColumn('payment_events', 'provider_event_id')) {
             Schema::table('payment_events', function (Blueprint $table) {
@@ -42,7 +43,7 @@ return new class extends Migration
             });
         }
 
-        if (!$this->indexExists('payment_events', 'payment_events_order_received_idx')
+        if (! $this->indexExists('payment_events', 'payment_events_order_received_idx')
             && Schema::hasColumn('payment_events', 'order_no')
             && Schema::hasColumn('payment_events', 'received_at')) {
             Schema::table('payment_events', function (Blueprint $table) {
@@ -68,6 +69,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -78,16 +80,18 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
         $db = DB::getDatabaseName();
         $rows = DB::select(
-            "SELECT 1 FROM information_schema.statistics
+            'SELECT 1 FROM information_schema.statistics
              WHERE table_schema = ? AND table_name = ? AND index_name = ?
-             LIMIT 1",
+             LIMIT 1',
             [$db, $table, $indexName]
         );
-        return !empty($rows);
+
+        return ! empty($rows);
     }
 };

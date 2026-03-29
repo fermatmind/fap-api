@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('norms_versions')) {
+        if (! Schema::hasTable('norms_versions')) {
             Schema::create('norms_versions', function (Blueprint $table) {
                 $table->uuid('id')->primary();
                 $table->string('pack_id');
@@ -25,37 +25,37 @@ return new class extends Migration
             });
         } else {
             Schema::table('norms_versions', function (Blueprint $table) {
-                if (!Schema::hasColumn('norms_versions', 'id')) {
+                if (! Schema::hasColumn('norms_versions', 'id')) {
                     $table->uuid('id')->primary();
                 }
-                if (!Schema::hasColumn('norms_versions', 'pack_id')) {
+                if (! Schema::hasColumn('norms_versions', 'pack_id')) {
                     $table->string('pack_id');
                 }
-                if (!Schema::hasColumn('norms_versions', 'window_start_at')) {
+                if (! Schema::hasColumn('norms_versions', 'window_start_at')) {
                     $table->timestamp('window_start_at')->nullable();
                 }
-                if (!Schema::hasColumn('norms_versions', 'window_end_at')) {
+                if (! Schema::hasColumn('norms_versions', 'window_end_at')) {
                     $table->timestamp('window_end_at')->nullable();
                 }
-                if (!Schema::hasColumn('norms_versions', 'sample_n')) {
+                if (! Schema::hasColumn('norms_versions', 'sample_n')) {
                     $table->integer('sample_n');
                 }
-                if (!Schema::hasColumn('norms_versions', 'rank_rule')) {
+                if (! Schema::hasColumn('norms_versions', 'rank_rule')) {
                     $table->string('rank_rule', 16);
                 }
-                if (!Schema::hasColumn('norms_versions', 'status')) {
+                if (! Schema::hasColumn('norms_versions', 'status')) {
                     $table->string('status', 16);
                 }
-                if (!Schema::hasColumn('norms_versions', 'computed_at')) {
+                if (! Schema::hasColumn('norms_versions', 'computed_at')) {
                     $table->timestamp('computed_at')->nullable();
                 }
-                if (!Schema::hasColumn('norms_versions', 'created_at')) {
+                if (! Schema::hasColumn('norms_versions', 'created_at')) {
                     $table->timestamp('created_at')->nullable();
                 }
             });
         }
 
-        if (!Schema::hasTable('norms_table')) {
+        if (! Schema::hasTable('norms_table')) {
             Schema::create('norms_table', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->uuid('norms_version_id');
@@ -72,25 +72,25 @@ return new class extends Migration
             });
         } else {
             Schema::table('norms_table', function (Blueprint $table) {
-                if (!Schema::hasColumn('norms_table', 'id')) {
+                if (! Schema::hasColumn('norms_table', 'id')) {
                     $table->bigIncrements('id');
                 }
-                if (!Schema::hasColumn('norms_table', 'norms_version_id')) {
+                if (! Schema::hasColumn('norms_table', 'norms_version_id')) {
                     $table->uuid('norms_version_id');
                 }
-                if (!Schema::hasColumn('norms_table', 'metric_key')) {
+                if (! Schema::hasColumn('norms_table', 'metric_key')) {
                     $table->string('metric_key', 8);
                 }
-                if (!Schema::hasColumn('norms_table', 'score_int')) {
+                if (! Schema::hasColumn('norms_table', 'score_int')) {
                     $table->integer('score_int');
                 }
-                if (!Schema::hasColumn('norms_table', 'leq_count')) {
+                if (! Schema::hasColumn('norms_table', 'leq_count')) {
                     $table->integer('leq_count');
                 }
-                if (!Schema::hasColumn('norms_table', 'percentile')) {
+                if (! Schema::hasColumn('norms_table', 'percentile')) {
                     $table->decimal('percentile', 8, 6);
                 }
-                if (!Schema::hasColumn('norms_table', 'created_at')) {
+                if (! Schema::hasColumn('norms_table', 'created_at')) {
                     $table->timestamp('created_at')->nullable();
                 }
             });

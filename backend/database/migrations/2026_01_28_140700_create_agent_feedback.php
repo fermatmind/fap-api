@@ -12,8 +12,8 @@ return new class extends Migration
         $driver = Schema::getConnection()->getDriverName();
         $isSqlite = $driver === 'sqlite';
 
-        if (!Schema::hasTable('agent_feedback')) {
-            Schema::create('agent_feedback', function (Blueprint $table) use ($isSqlite) {
+        if (! Schema::hasTable('agent_feedback')) {
+            Schema::create('agent_feedback', function (Blueprint $table) {
                 $table->uuid('id')->primary();
                 $table->unsignedBigInteger('user_id');
                 $table->uuid('message_id');
@@ -23,29 +23,29 @@ return new class extends Migration
                 $table->timestamps();
             });
         } else {
-            Schema::table('agent_feedback', function (Blueprint $table) use ($isSqlite) {
-                if (!Schema::hasColumn('agent_feedback', 'id')) {
+            Schema::table('agent_feedback', function (Blueprint $table) {
+                if (! Schema::hasColumn('agent_feedback', 'id')) {
                     $table->uuid('id')->primary();
                 }
-                if (!Schema::hasColumn('agent_feedback', 'user_id')) {
+                if (! Schema::hasColumn('agent_feedback', 'user_id')) {
                     $table->unsignedBigInteger('user_id');
                 }
-                if (!Schema::hasColumn('agent_feedback', 'message_id')) {
+                if (! Schema::hasColumn('agent_feedback', 'message_id')) {
                     $table->uuid('message_id');
                 }
-                if (!Schema::hasColumn('agent_feedback', 'rating')) {
+                if (! Schema::hasColumn('agent_feedback', 'rating')) {
                     $table->string('rating', 32);
                 }
-                if (!Schema::hasColumn('agent_feedback', 'reason')) {
+                if (! Schema::hasColumn('agent_feedback', 'reason')) {
                     $table->string('reason', 128)->nullable();
                 }
-                if (!Schema::hasColumn('agent_feedback', 'notes')) {
+                if (! Schema::hasColumn('agent_feedback', 'notes')) {
                     $table->text('notes')->nullable();
                 }
-                if (!Schema::hasColumn('agent_feedback', 'created_at')) {
+                if (! Schema::hasColumn('agent_feedback', 'created_at')) {
                     $table->timestamp('created_at')->nullable();
                 }
-                if (!Schema::hasColumn('agent_feedback', 'updated_at')) {
+                if (! Schema::hasColumn('agent_feedback', 'updated_at')) {
                     $table->timestamp('updated_at')->nullable();
                 }
             });
@@ -55,7 +55,7 @@ return new class extends Migration
         if (
             Schema::hasTable('agent_feedback')
             && Schema::hasColumn('agent_feedback', 'message_id')
-            && !$this->indexExists('agent_feedback', $messageIdx)
+            && ! $this->indexExists('agent_feedback', $messageIdx)
         ) {
             Schema::table('agent_feedback', function (Blueprint $table) use ($messageIdx) {
                 $table->index(['message_id'], $messageIdx);
@@ -66,7 +66,7 @@ return new class extends Migration
         if (
             Schema::hasTable('agent_feedback')
             && Schema::hasColumn('agent_feedback', 'user_id')
-            && !$this->indexExists('agent_feedback', $userIdx)
+            && ! $this->indexExists('agent_feedback', $userIdx)
         ) {
             Schema::table('agent_feedback', function (Blueprint $table) use ($userIdx) {
                 $table->index(['user_id'], $userIdx);
@@ -91,6 +91,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -101,6 +102,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -111,6 +113,7 @@ return new class extends Migration
                     return true;
                 }
             }
+
             return false;
         }
 

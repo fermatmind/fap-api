@@ -44,4 +44,3 @@ class ArticleSeoMeta extends Model
         return $this->belongsTo(Article::class, 'article_id', 'id');
     }
 }
-

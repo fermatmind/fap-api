@@ -21,13 +21,15 @@ return new class extends Migration
 
         Schema::table('attempts', function (Blueprint $table) use ($after) {
             // ✅ 结果写回容器
-            if (!Schema::hasColumn('attempts', 'result_json')) {
+            if (! Schema::hasColumn('attempts', 'result_json')) {
                 $col = $table->json('result_json')->nullable();
-                if ($after) $col->after($after);
+                if ($after) {
+                    $col->after($after);
+                }
             }
 
             // ✅ 便于检索：最终类型（如 ESFP-A）
-            if (!Schema::hasColumn('attempts', 'type_code')) {
+            if (! Schema::hasColumn('attempts', 'type_code')) {
                 $col = $table->string('type_code', 16)->nullable();
                 if (Schema::hasColumn('attempts', 'result_json')) {
                     $col->after('result_json');

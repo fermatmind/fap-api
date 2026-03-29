@@ -8,12 +8,12 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('events')) {
+        if (! Schema::hasTable('events')) {
             return;
         }
 
         Schema::table('events', function (Blueprint $table) {
-            if (!Schema::hasColumn('events', 'experiments_json')) {
+            if (! Schema::hasColumn('events', 'experiments_json')) {
                 $table->json('experiments_json')->nullable();
             }
         });
