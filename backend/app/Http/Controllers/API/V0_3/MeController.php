@@ -9,9 +9,7 @@ use Illuminate\Http\JsonResponse;
 
 class MeController extends Controller
 {
-    public function __construct(private readonly MeFacadeService $me)
-    {
-    }
+    public function __construct(private readonly MeFacadeService $me) {}
 
     public function attempts(MeAttemptsIndexRequest $request): JsonResponse
     {

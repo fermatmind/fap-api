@@ -7,14 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class HealthzController extends Controller
 {
-    public function __construct(private readonly ?SelfCheckIoV2 $selfCheckIoV2 = null)
-    {
-    }
+    public function __construct(private readonly ?SelfCheckIoV2 $selfCheckIoV2 = null) {}
 
     public function show(Request $request)
     {
@@ -47,7 +44,7 @@ class HealthzController extends Controller
             }
         }
 
-        if (!$verbose) {
+        if (! $verbose) {
             return response()->json([
                 'ok' => $allOk,
                 'service' => $service,
@@ -70,8 +67,9 @@ class HealthzController extends Controller
         $out = [];
 
         foreach ($deps as $name => $dep) {
-            if (!is_array($dep)) {
+            if (! is_array($dep)) {
                 $out[$name] = ['ok' => false, 'error_code' => 'INVALID_DEP_SHAPE'];
+
                 continue;
             }
 
@@ -116,7 +114,7 @@ class HealthzController extends Controller
         $queueDriver = (string) config('queue.default', 'sync');
 
         $needsRedis = ($cacheDriver === 'redis' || $queueDriver === 'redis');
-        if (!$needsRedis) {
+        if (! $needsRedis) {
             return [
                 'ok' => true,
                 'skipped' => true,
@@ -157,8 +155,8 @@ class HealthzController extends Controller
         $t0 = microtime(true);
         try {
             $store = Cache::store($storeName);
-            $key = 'healthz:cache:' . Str::uuid()->toString();
-            $value = 'ok:' . (string) time();
+            $key = 'healthz:cache:'.Str::uuid()->toString();
+            $value = 'ok:'.(string) time();
             $store->put($key, $value, 30);
             $read = $store->get($key);
             $store->forget($key);
@@ -194,7 +192,7 @@ class HealthzController extends Controller
         $connection = config("queue.connections.{$driver}");
 
         try {
-            if (!is_array($connection)) {
+            if (! is_array($connection)) {
                 return [
                     'ok' => false,
                     'driver' => $driver,
@@ -207,7 +205,7 @@ class HealthzController extends Controller
                 $hasJobs = \App\Support\SchemaBaseline::hasTable('jobs');
                 $hasFailed = \App\Support\SchemaBaseline::hasTable('failed_jobs');
 
-                if (!$hasJobs) {
+                if (! $hasJobs) {
                     return [
                         'ok' => false,
                         'driver' => $driver,
@@ -270,7 +268,7 @@ class HealthzController extends Controller
 
         foreach ($paths as $name => $path) {
             $exists = is_dir($path);
-            if (!$exists) {
+            if (! $exists) {
                 @mkdir($path, 0775, true);
                 $exists = is_dir($path);
             }
@@ -292,7 +290,7 @@ class HealthzController extends Controller
             }
 
             $ok = $exists && $writable && $probeOk;
-            if (!$ok) {
+            if (! $ok) {
                 $allOk = false;
             }
 

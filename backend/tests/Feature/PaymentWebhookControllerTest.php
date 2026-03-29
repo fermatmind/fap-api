@@ -120,7 +120,7 @@ final class PaymentWebhookControllerTest extends TestCase
     private function encode(array $payload): string
     {
         $raw = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        if (!is_string($raw)) {
+        if (! is_string($raw)) {
             self::fail('json_encode payload failed.');
         }
 

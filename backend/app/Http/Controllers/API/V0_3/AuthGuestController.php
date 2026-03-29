@@ -69,12 +69,12 @@ final class AuthGuestController extends Controller
             return $fromTransport;
         }
 
-        return 'anon_' . (string) Str::uuid();
+        return 'anon_'.(string) Str::uuid();
     }
 
     private function normalizeAnonId(mixed $candidate): ?string
     {
-        if (!is_string($candidate) && !is_numeric($candidate)) {
+        if (! is_string($candidate) && ! is_numeric($candidate)) {
             return null;
         }
 

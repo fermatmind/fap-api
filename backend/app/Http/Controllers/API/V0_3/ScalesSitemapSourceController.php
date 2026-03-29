@@ -40,12 +40,13 @@ class ScalesSitemapSourceController extends Controller
                 }
 
                 $existing = $itemsBySlug[$slug] ?? null;
-                if (!$existing) {
+                if (! $existing) {
                     $itemsBySlug[$slug] = [
                         'slug' => $slug,
                         'lastmod' => $lastmod,
                         'is_indexable' => $isIndexable,
                     ];
+
                     continue;
                 }
 
@@ -74,6 +75,7 @@ class ScalesSitemapSourceController extends Controller
         }
 
         $lang = strtolower((string) explode('-', str_replace('_', '-', $raw))[0]);
+
         return $lang === 'zh' ? 'zh' : 'en';
     }
 

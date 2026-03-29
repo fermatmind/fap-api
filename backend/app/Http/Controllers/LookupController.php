@@ -25,10 +25,11 @@ class LookupController extends Controller
         $logger = app(LookupEventLogger::class);
 
         $limitIp = $limiter->limit('FAP_RATE_LOOKUP_IP', 60);
-        if ($ip !== '' && !$limiter->hit("lookup_ticket:ip:{$ip}", $limitIp, 60)) {
+        if ($ip !== '' && ! $limiter->hit("lookup_ticket:ip:{$ip}", $limitIp, 60)) {
             $logger->log('lookup_ticket', false, $request, null, [
                 'error_code' => 'RATE_LIMITED',
             ]);
+
             return response()->json([
                 'ok' => false,
                 'error_code' => 'RATE_LIMITED',
@@ -39,11 +40,12 @@ class LookupController extends Controller
         $raw = trim($code);
         $normalized = strtoupper($raw);
 
-        if (!preg_match('/^FMT-[A-Z0-9]{8}$/', $normalized)) {
+        if (! preg_match('/^FMT-[A-Z0-9]{8}$/', $normalized)) {
             $logger->log('lookup_ticket', false, $request, null, [
                 'error_code' => 'INVALID_FORMAT',
                 'ticket_code' => $normalized,
             ]);
+
             return response()->json([
                 'ok' => false,
                 'error_code' => 'INVALID_FORMAT',
@@ -58,11 +60,12 @@ class LookupController extends Controller
             ->where('org_id', $orgId)
             ->first();
 
-        if (!$attempt) {
+        if (! $attempt) {
             $logger->log('lookup_ticket', false, $request, null, [
                 'error_code' => 'NOT_FOUND',
                 'ticket_code' => $normalized,
             ]);
+
             return response()->json([
                 'ok' => false,
                 'error_code' => 'NOT_FOUND',
@@ -98,10 +101,11 @@ class LookupController extends Controller
         $logger = app(LookupEventLogger::class);
 
         $limitIp = $limiter->limit('FAP_RATE_LOOKUP_IP', 60);
-        if ($ip !== '' && !$limiter->hit("lookup_device:ip:{$ip}", $limitIp, 60)) {
+        if ($ip !== '' && ! $limiter->hit("lookup_device:ip:{$ip}", $limitIp, 60)) {
             $logger->log('lookup_device', false, $request, null, [
                 'error_code' => 'RATE_LIMITED',
             ]);
+
             return response()->json([
                 'ok' => false,
                 'error_code' => 'RATE_LIMITED',
@@ -111,10 +115,11 @@ class LookupController extends Controller
 
         $attemptIds = $request->input('attempt_ids');
 
-        if (!is_array($attemptIds)) {
+        if (! is_array($attemptIds)) {
             $logger->log('lookup_device', false, $request, null, [
                 'error_code' => 'INVALID_PAYLOAD',
             ]);
+
             return response()->json([
                 'ok' => false,
                 'error_code' => 'INVALID_PAYLOAD',
@@ -138,6 +143,7 @@ class LookupController extends Controller
                 'attempt_id_count' => 0,
                 'items_count' => 0,
             ]);
+
             return response()->json([
                 'ok' => true,
                 'items' => [],
@@ -146,10 +152,11 @@ class LookupController extends Controller
 
         $uuidRe = '/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/';
         foreach ($attemptIds as $id) {
-            if (!preg_match($uuidRe, $id)) {
+            if (! preg_match($uuidRe, $id)) {
                 $logger->log('lookup_device', false, $request, null, [
                     'error_code' => 'INVALID_ID',
                 ]);
+
                 return response()->json([
                     'ok' => false,
                     'error_code' => 'INVALID_ID',
@@ -175,7 +182,7 @@ class LookupController extends Controller
 
         $missing = [];
         foreach ($attemptIds as $id) {
-            if (!$rows->has($id)) {
+            if (! $rows->has($id)) {
                 $missing[] = $id;
             }
         }
@@ -197,7 +204,9 @@ class LookupController extends Controller
         $items = [];
         foreach ($attemptIds as $id) {
             $a = $rows->get($id);
-            if (!$a) continue;
+            if (! $a) {
+                continue;
+            }
 
             $items[] = [
                 'attempt_id' => $a->id,
@@ -228,10 +237,11 @@ class LookupController extends Controller
         $logger = app(LookupEventLogger::class);
 
         $limitIp = $limiter->limit('FAP_RATE_LOOKUP_IP', 60);
-        if ($ip !== '' && !$limiter->hit("lookup_order:ip:{$ip}", $limitIp, 60)) {
+        if ($ip !== '' && ! $limiter->hit("lookup_order:ip:{$ip}", $limitIp, 60)) {
             $logger->log('lookup_order', false, $request, null, [
                 'error_code' => 'RATE_LIMITED',
             ]);
+
             return response()->json([
                 'ok' => false,
                 'error_code' => 'RATE_LIMITED',
@@ -239,10 +249,11 @@ class LookupController extends Controller
             ], 429);
         }
 
-        if (!$this->lookupOrderEnabled()) {
+        if (! $this->lookupOrderEnabled()) {
             $logger->log('lookup_order', false, $request, null, [
                 'error_code' => 'NOT_ENABLED',
             ]);
+
             return response()->json([
                 'ok' => false,
                 'error_code' => 'NOT_ENABLED',
@@ -255,6 +266,7 @@ class LookupController extends Controller
             $logger->log('lookup_order', false, $request, null, [
                 'error_code' => 'INVALID_ORDER',
             ]);
+
             return response()->json([
                 'ok' => false,
                 'error_code' => 'INVALID_ORDER',
@@ -267,6 +279,7 @@ class LookupController extends Controller
             $logger->log('lookup_order', false, $request, null, [
                 'error_code' => 'NOT_SUPPORTED',
             ]);
+
             return response()->json([
                 'ok' => false,
                 'error_code' => 'NOT_SUPPORTED',
@@ -280,6 +293,7 @@ class LookupController extends Controller
                 'error_code' => 'NOT_SUPPORTED',
                 'table' => $table,
             ]);
+
             return response()->json([
                 'ok' => false,
                 'error_code' => 'NOT_SUPPORTED',
@@ -294,11 +308,12 @@ class LookupController extends Controller
         $query = DB::table($table)->where($orderColumn, $orderNo);
         $this->applyOrderOwnershipConstraint($query, $table, $orgId, $userId, $anonId);
         $row = $query->first();
-        if (!$row) {
+        if (! $row) {
             $logger->log('lookup_order', false, $request, null, [
                 'error_code' => 'NOT_FOUND',
                 'order_no_hash' => hash('sha256', $orderNo),
             ]);
+
             return response()->json([
                 'ok' => false,
                 'error_code' => 'NOT_FOUND',
@@ -330,13 +345,19 @@ class LookupController extends Controller
     private function lookupOrderEnabled(): bool
     {
         $raw = \App\Support\RuntimeConfig::value('LOOKUP_ORDER', '0');
+
         return filter_var($raw, FILTER_VALIDATE_BOOLEAN);
     }
 
     private function resolveOrderTable(): string
     {
-        if (\App\Support\SchemaBaseline::hasTable('orders')) return 'orders';
-        if (\App\Support\SchemaBaseline::hasTable('payments')) return 'payments';
+        if (\App\Support\SchemaBaseline::hasTable('orders')) {
+            return 'orders';
+        }
+        if (\App\Support\SchemaBaseline::hasTable('payments')) {
+            return 'payments';
+        }
+
         return '';
     }
 
@@ -348,6 +369,7 @@ class LookupController extends Controller
                 return $col;
             }
         }
+
         return null;
     }
 
@@ -362,6 +384,7 @@ class LookupController extends Controller
                 }
             }
         }
+
         return '';
     }
 
@@ -397,8 +420,9 @@ class LookupController extends Controller
         $hasUser = \App\Support\SchemaBaseline::hasColumn('attempts', 'user_id');
         $hasAnon = \App\Support\SchemaBaseline::hasColumn('attempts', 'anon_id');
 
-        if (($uid === '' || !$hasUser) && ($aid === '' || !$hasAnon)) {
+        if (($uid === '' || ! $hasUser) && ($aid === '' || ! $hasAnon)) {
             $query->whereRaw('1=0');
+
             return;
         }
 
@@ -419,7 +443,7 @@ class LookupController extends Controller
                 }
             }
 
-            if (!$applied) {
+            if (! $applied) {
                 $q->whereRaw('1=0');
             }
         });
@@ -436,6 +460,7 @@ class LookupController extends Controller
             $query->where('org_id', $orgId);
         } else {
             $query->whereRaw('1=0');
+
             return;
         }
 
@@ -444,8 +469,9 @@ class LookupController extends Controller
         $hasUser = \App\Support\SchemaBaseline::hasColumn($table, 'user_id');
         $hasAnon = \App\Support\SchemaBaseline::hasColumn($table, 'anon_id');
 
-        if (($uid === '' || !$hasUser) && ($aid === '' || !$hasAnon)) {
+        if (($uid === '' || ! $hasUser) && ($aid === '' || ! $hasAnon)) {
             $query->whereRaw('1=0');
+
             return;
         }
 
@@ -466,7 +492,7 @@ class LookupController extends Controller
                 }
             }
 
-            if (!$applied) {
+            if (! $applied) {
                 $q->whereRaw('1=0');
             }
         });
@@ -480,9 +506,13 @@ class LookupController extends Controller
      */
     public function meAttempts(Request $request): JsonResponse
     {
-        $limit = (int)($request->query('limit', 20));
-        if ($limit <= 0) $limit = 20;
-        if ($limit > 50) $limit = 50;
+        $limit = (int) ($request->query('limit', 20));
+        if ($limit <= 0) {
+            $limit = 20;
+        }
+        if ($limit > 50) {
+            $limit = 50;
+        }
 
         // ✅ Step 4：优先用 middleware 注入的 identity
         $userId = $request->attributes->get('fm_user_id')
@@ -494,14 +524,20 @@ class LookupController extends Controller
             ?? null;
 
         // ✅ 兼容兜底：允许旧 header（短期过渡）
-        if (!$anonId) {
+        if (! $anonId) {
             $anonId = trim((string) $request->header('X-FM-Anon-Id', ''));
-            if ($anonId === '') $anonId = trim((string) $request->header('X-Anon-Id', ''));
-            if ($anonId === '') $anonId = trim((string) $request->header('X-Device-Anon-Id', ''));
-            if ($anonId === '') $anonId = null;
+            if ($anonId === '') {
+                $anonId = trim((string) $request->header('X-Anon-Id', ''));
+            }
+            if ($anonId === '') {
+                $anonId = trim((string) $request->header('X-Device-Anon-Id', ''));
+            }
+            if ($anonId === '') {
+                $anonId = null;
+            }
         }
 
-        if (!$userId && !$anonId) {
+        if (! $userId && ! $anonId) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'UNAUTHORIZED',

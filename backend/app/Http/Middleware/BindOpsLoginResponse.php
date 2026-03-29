@@ -13,9 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BindOpsLoginResponse
 {
-    public function __construct(private readonly Container $app)
-    {
-    }
+    public function __construct(private readonly Container $app) {}
 
     public function handle(Request $request, Closure $next): Response
     {

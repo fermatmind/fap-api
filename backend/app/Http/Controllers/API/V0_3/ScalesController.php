@@ -88,263 +88,263 @@ class ScalesController extends Controller
         Eq60PackLoader $eq60PackLoader
     ): JsonResponse {
         try {
-        $orgId = $this->orgContext->orgId();
-        $code = strtoupper(trim($scale_code));
-        if ($code === '') {
-            return response()->json([
-                'ok' => false,
-                'error_code' => 'SCALE_REQUIRED',
-                'message' => 'scale_code is required.',
-            ], 400);
-        }
-        $this->inputGuard->assertAccepted($code);
+            $orgId = $this->orgContext->orgId();
+            $code = strtoupper(trim($scale_code));
+            if ($code === '') {
+                return response()->json([
+                    'ok' => false,
+                    'error_code' => 'SCALE_REQUIRED',
+                    'message' => 'scale_code is required.',
+                ], 400);
+            }
+            $this->inputGuard->assertAccepted($code);
 
-        $row = $this->registry->getByCode($code, $orgId);
-        if (! $row) {
-            return response()->json([
-                'ok' => false,
-                'error_code' => 'NOT_FOUND',
-                'message' => 'scale not found.',
-            ], 404);
-        }
-        $resolvedScaleCode = strtoupper(trim((string) ($row['code'] ?? $code)));
-        $scaleCodeMeta = $this->buildScaleCodeMeta($code, $row);
+            $row = $this->registry->getByCode($code, $orgId);
+            if (! $row) {
+                return response()->json([
+                    'ok' => false,
+                    'error_code' => 'NOT_FOUND',
+                    'message' => 'scale not found.',
+                ], 404);
+            }
+            $resolvedScaleCode = strtoupper(trim((string) ($row['code'] ?? $code)));
+            $scaleCodeMeta = $this->buildScaleCodeMeta($code, $row);
 
-        $packId = (string) ($row['default_pack_id'] ?? '');
-        $dirVersion = (string) ($row['default_dir_version'] ?? '');
-        if ($packId === '' || $dirVersion === '') {
-            return response()->json([
-                'ok' => false,
-                'error_code' => 'PACK_NOT_CONFIGURED',
-                'message' => 'scale pack not configured.',
-            ], 503);
-        }
-
-        $region = (string) ($request->query('region') ?? $row['default_region'] ?? config('content_packs.default_region', ''));
-        $locale = (string) ($request->query('locale') ?? $row['default_locale'] ?? config('content_packs.default_locale', ''));
-
-        if ($resolvedScaleCode === 'BIG5_OCEAN') {
-            $version = (string) ($row['default_dir_version'] ?? BigFivePackLoader::PACK_VERSION);
-            $normalizedLocale = $this->normalizeBigFiveLocale($locale);
-            $compiledMin = $bigFivePackLoader->readCompiledJson('questions.min.compiled.json', $version);
-            $compiled = null;
-            $questionsDoc = null;
-            $contentPackageVersion = $version;
-            $policyCompiled = $bigFivePackLoader->readCompiledJson('policy.compiled.json', $version);
-            $legalCompiled = $bigFivePackLoader->readCompiledJson('legal.compiled.json', $version);
-
-            if (is_array($compiledMin)) {
-                $questionsDoc = $this->buildBigFiveQuestionsDocFromMin($compiledMin, $normalizedLocale);
-                $contentPackageVersion = (string) ($compiledMin['pack_version'] ?? $version);
+            $packId = (string) ($row['default_pack_id'] ?? '');
+            $dirVersion = (string) ($row['default_dir_version'] ?? '');
+            if ($packId === '' || $dirVersion === '') {
+                return response()->json([
+                    'ok' => false,
+                    'error_code' => 'PACK_NOT_CONFIGURED',
+                    'message' => 'scale pack not configured.',
+                ], 503);
             }
 
-            if (! is_array($questionsDoc)) {
-                $compiled = $bigFivePackLoader->readCompiledJson('questions.compiled.json', $version);
-                if (! is_array($compiled)) {
-                    return response()->json([
-                        'ok' => false,
-                        'error_code' => 'COMPILED_MISSING',
-                        'message' => 'BIG5_OCEAN compiled questions missing.',
-                    ], 503);
+            $region = (string) ($request->query('region') ?? $row['default_region'] ?? config('content_packs.default_region', ''));
+            $locale = (string) ($request->query('locale') ?? $row['default_locale'] ?? config('content_packs.default_locale', ''));
+
+            if ($resolvedScaleCode === 'BIG5_OCEAN') {
+                $version = (string) ($row['default_dir_version'] ?? BigFivePackLoader::PACK_VERSION);
+                $normalizedLocale = $this->normalizeBigFiveLocale($locale);
+                $compiledMin = $bigFivePackLoader->readCompiledJson('questions.min.compiled.json', $version);
+                $compiled = null;
+                $questionsDoc = null;
+                $contentPackageVersion = $version;
+                $policyCompiled = $bigFivePackLoader->readCompiledJson('policy.compiled.json', $version);
+                $legalCompiled = $bigFivePackLoader->readCompiledJson('legal.compiled.json', $version);
+
+                if (is_array($compiledMin)) {
+                    $questionsDoc = $this->buildBigFiveQuestionsDocFromMin($compiledMin, $normalizedLocale);
+                    $contentPackageVersion = (string) ($compiledMin['pack_version'] ?? $version);
                 }
 
-                $questionsDocByLocale = is_array($compiled['questions_doc_by_locale'] ?? null)
-                    ? $compiled['questions_doc_by_locale']
-                    : [];
-                $questionsDoc = $questionsDocByLocale[$normalizedLocale] ?? ($compiled['questions_doc'] ?? null);
                 if (! is_array($questionsDoc)) {
-                    return response()->json([
-                        'ok' => false,
-                        'error_code' => 'COMPILED_INVALID',
-                        'message' => 'BIG5_OCEAN compiled questions invalid.',
-                    ], 503);
+                    $compiled = $bigFivePackLoader->readCompiledJson('questions.compiled.json', $version);
+                    if (! is_array($compiled)) {
+                        return response()->json([
+                            'ok' => false,
+                            'error_code' => 'COMPILED_MISSING',
+                            'message' => 'BIG5_OCEAN compiled questions missing.',
+                        ], 503);
+                    }
+
+                    $questionsDocByLocale = is_array($compiled['questions_doc_by_locale'] ?? null)
+                        ? $compiled['questions_doc_by_locale']
+                        : [];
+                    $questionsDoc = $questionsDocByLocale[$normalizedLocale] ?? ($compiled['questions_doc'] ?? null);
+                    if (! is_array($questionsDoc)) {
+                        return response()->json([
+                            'ok' => false,
+                            'error_code' => 'COMPILED_INVALID',
+                            'message' => 'BIG5_OCEAN compiled questions invalid.',
+                        ], 503);
+                    }
+                    $contentPackageVersion = (string) ($compiled['pack_version'] ?? $version);
                 }
-                $contentPackageVersion = (string) ($compiled['pack_version'] ?? $version);
-            }
 
-            $policy = is_array($policyCompiled['policy'] ?? null) ? $policyCompiled['policy'] : [];
-            $legal = is_array($legalCompiled['legal'] ?? null) ? $legalCompiled['legal'] : [];
-            $validityItemsRaw = is_array($policy['validity_items'] ?? null) ? $policy['validity_items'] : [];
-            $validityItems = [];
-            foreach ($validityItemsRaw as $item) {
-                if (! is_array($item)) {
-                    continue;
+                $policy = is_array($policyCompiled['policy'] ?? null) ? $policyCompiled['policy'] : [];
+                $legal = is_array($legalCompiled['legal'] ?? null) ? $legalCompiled['legal'] : [];
+                $validityItemsRaw = is_array($policy['validity_items'] ?? null) ? $policy['validity_items'] : [];
+                $validityItems = [];
+                foreach ($validityItemsRaw as $item) {
+                    if (! is_array($item)) {
+                        continue;
+                    }
+                    $itemId = trim((string) ($item['item_id'] ?? ''));
+                    if ($itemId === '') {
+                        continue;
+                    }
+                    $prompt = $normalizedLocale === 'zh-CN'
+                        ? trim((string) ($item['prompt_zh'] ?? ''))
+                        : trim((string) ($item['prompt_en'] ?? ''));
+
+                    $validityItems[] = [
+                        'item_id' => $itemId,
+                        'text' => $prompt,
+                        'required' => (bool) ($item['required'] ?? false),
+                    ];
                 }
-                $itemId = trim((string) ($item['item_id'] ?? ''));
-                if ($itemId === '') {
-                    continue;
+
+                $disclaimerTexts = is_array($legal['texts'] ?? null) ? $legal['texts'] : [];
+                $policyDisclaimerTexts = is_array($policy['disclaimer'] ?? null) ? $policy['disclaimer'] : [];
+                $disclaimerText = trim((string) ($disclaimerTexts[$normalizedLocale] ?? ''));
+                if ($disclaimerText === '') {
+                    $disclaimerText = trim((string) ($policyDisclaimerTexts[$normalizedLocale] ?? ''));
                 }
-                $prompt = $normalizedLocale === 'zh-CN'
-                    ? trim((string) ($item['prompt_zh'] ?? ''))
-                    : trim((string) ($item['prompt_en'] ?? ''));
 
-                $validityItems[] = [
-                    'item_id' => $itemId,
-                    'text' => $prompt,
-                    'required' => (bool) ($item['required'] ?? false),
-                ];
-            }
+                $disclaimerVersion = trim((string) ($legal['disclaimer_version'] ?? ''));
+                if ($disclaimerVersion === '') {
+                    $disclaimerVersion = 'BIG5_OCEAN_'.$version;
+                }
+                $disclaimerHash = trim((string) ($legal['hash'] ?? ''));
+                if ($disclaimerHash === '') {
+                    $disclaimerHash = hash('sha256', $disclaimerVersion.'|'.$disclaimerText);
+                }
 
-            $disclaimerTexts = is_array($legal['texts'] ?? null) ? $legal['texts'] : [];
-            $policyDisclaimerTexts = is_array($policy['disclaimer'] ?? null) ? $policy['disclaimer'] : [];
-            $disclaimerText = trim((string) ($disclaimerTexts[$normalizedLocale] ?? ''));
-            if ($disclaimerText === '') {
-                $disclaimerText = trim((string) ($policyDisclaimerTexts[$normalizedLocale] ?? ''));
-            }
-
-            $disclaimerVersion = trim((string) ($legal['disclaimer_version'] ?? ''));
-            if ($disclaimerVersion === '') {
-                $disclaimerVersion = 'BIG5_OCEAN_'.$version;
-            }
-            $disclaimerHash = trim((string) ($legal['hash'] ?? ''));
-            if ($disclaimerHash === '') {
-                $disclaimerHash = hash('sha256', $disclaimerVersion.'|'.$disclaimerText);
-            }
-
-            return response()->json([
-                'ok' => true,
-                'scale_code' => $scaleCodeMeta['scale_code'],
-                'region' => $region,
-                'locale' => $normalizedLocale,
-                'pack_id' => $packId,
-                'dir_version' => $dirVersion,
-                'content_package_version' => $contentPackageVersion,
-                'questions' => $questionsDoc,
-                'meta' => [
-                    'validity_items' => $validityItems,
-                    'disclaimer_version' => $disclaimerVersion,
-                    'disclaimer_hash' => $disclaimerHash,
-                    'disclaimer_text' => $disclaimerText,
-                ],
-            ] + $scaleCodeMeta);
-        }
-
-        if ($resolvedScaleCode === 'CLINICAL_COMBO_68') {
-            $version = (string) ($row['default_dir_version'] ?? ClinicalComboPackLoader::PACK_VERSION);
-            $doc = $clinicalPackLoader->loadQuestionsDoc($locale, $version);
-            $consent = $clinicalPackLoader->loadConsent((string) ($doc['locale_resolved'] ?? $locale), $version);
-            $privacyAddendum = $clinicalPackLoader->loadPrivacyAddendum((string) ($doc['locale_resolved'] ?? $locale), $version);
-            $crisisResources = $clinicalPackLoader->loadCrisisResources((string) ($doc['locale_resolved'] ?? $locale), $region, $version);
-
-            return response()->json([
-                'ok' => true,
-                'scale_code' => $scaleCodeMeta['scale_code'],
-                'region' => $region,
-                'locale' => (string) ($doc['locale_resolved'] ?? 'zh-CN'),
-                'pack_id' => $packId,
-                'dir_version' => $dirVersion,
-                'content_package_version' => $version,
-                'questions' => [
-                    'schema' => 'fap.questions.v1',
-                    'items' => is_array($doc['items'] ?? null) ? $doc['items'] : [],
-                ],
-                'meta' => [
-                    'locale_requested' => (string) ($doc['locale_requested'] ?? $locale),
-                    'locale_resolved' => (string) ($doc['locale_resolved'] ?? 'zh-CN'),
-                    'modules' => is_array($doc['modules'] ?? null) ? $doc['modules'] : [],
-                    'disclaimer_text' => (string) ($doc['disclaimer_text'] ?? ''),
-                    'consent' => $consent,
-                    'privacy_addendum' => $privacyAddendum,
-                    'crisis_resources' => $crisisResources,
-                ],
-            ] + $scaleCodeMeta);
-        }
-
-        if ($resolvedScaleCode === 'SDS_20') {
-            $version = (string) ($row['default_dir_version'] ?? Sds20PackLoader::PACK_VERSION);
-            $doc = $sds20PackLoader->loadQuestionsDoc($locale, $version);
-            $localeResolved = (string) ($doc['locale_resolved'] ?? $sds20PackLoader->normalizeLocale($locale));
-            $landing = $sds20PackLoader->loadLanding($localeResolved, $version);
-            $sourceCatalog = $sds20PackLoader->loadSourceCatalog($version);
-            $optionsFormat = $sds20PackLoader->loadOptionsFormat($localeResolved, $version);
-
-            return response()->json([
-                'ok' => true,
-                'scale_code' => $scaleCodeMeta['scale_code'],
-                'region' => $region,
-                'locale' => $localeResolved,
-                'pack_id' => $packId,
-                'dir_version' => $dirVersion,
-                'content_package_version' => $version,
-                'questions' => [
-                    'schema' => 'fap.questions.v1',
-                    'items' => is_array($doc['items'] ?? null) ? $doc['items'] : [],
-                ],
-                'options' => [
-                    'format' => $optionsFormat,
-                ],
-                'meta' => [
-                    'locale_requested' => (string) ($doc['locale_requested'] ?? $locale),
-                    'locale_resolved' => $localeResolved,
-                    'consent' => [
-                        'required' => (bool) data_get($landing, 'consent.required', true),
-                        'version' => (string) data_get($landing, 'consent.version', ''),
-                        'hash' => (string) data_get($landing, 'consent.hash', ''),
-                        'text' => (string) data_get($landing, 'consent.text', ''),
+                return response()->json([
+                    'ok' => true,
+                    'scale_code' => $scaleCodeMeta['scale_code'],
+                    'region' => $region,
+                    'locale' => $normalizedLocale,
+                    'pack_id' => $packId,
+                    'dir_version' => $dirVersion,
+                    'content_package_version' => $contentPackageVersion,
+                    'questions' => $questionsDoc,
+                    'meta' => [
+                        'validity_items' => $validityItems,
+                        'disclaimer_version' => $disclaimerVersion,
+                        'disclaimer_hash' => $disclaimerHash,
+                        'disclaimer_text' => $disclaimerText,
                     ],
-                    'disclaimer' => [
-                        'version' => (string) data_get($landing, 'disclaimer.version', ''),
-                        'hash' => (string) data_get($landing, 'disclaimer.hash', ''),
-                        'text' => (string) data_get($landing, 'disclaimer.text', ''),
-                    ],
-                    'source' => [
-                        'items' => $sourceCatalog,
-                    ],
-                ],
-            ] + $scaleCodeMeta);
-        }
+                ] + $scaleCodeMeta);
+            }
 
-        if ($resolvedScaleCode === 'EQ_60') {
-            $version = (string) ($row['default_dir_version'] ?? Eq60PackLoader::PACK_VERSION);
-            $doc = $eq60PackLoader->loadQuestionsDoc($locale, $version);
-            $localeResolved = (string) ($doc['locale_resolved'] ?? $eq60PackLoader->normalizeLocale($locale));
+            if ($resolvedScaleCode === 'CLINICAL_COMBO_68') {
+                $version = (string) ($row['default_dir_version'] ?? ClinicalComboPackLoader::PACK_VERSION);
+                $doc = $clinicalPackLoader->loadQuestionsDoc($locale, $version);
+                $consent = $clinicalPackLoader->loadConsent((string) ($doc['locale_resolved'] ?? $locale), $version);
+                $privacyAddendum = $clinicalPackLoader->loadPrivacyAddendum((string) ($doc['locale_resolved'] ?? $locale), $version);
+                $crisisResources = $clinicalPackLoader->loadCrisisResources((string) ($doc['locale_resolved'] ?? $locale), $region, $version);
+
+                return response()->json([
+                    'ok' => true,
+                    'scale_code' => $scaleCodeMeta['scale_code'],
+                    'region' => $region,
+                    'locale' => (string) ($doc['locale_resolved'] ?? 'zh-CN'),
+                    'pack_id' => $packId,
+                    'dir_version' => $dirVersion,
+                    'content_package_version' => $version,
+                    'questions' => [
+                        'schema' => 'fap.questions.v1',
+                        'items' => is_array($doc['items'] ?? null) ? $doc['items'] : [],
+                    ],
+                    'meta' => [
+                        'locale_requested' => (string) ($doc['locale_requested'] ?? $locale),
+                        'locale_resolved' => (string) ($doc['locale_resolved'] ?? 'zh-CN'),
+                        'modules' => is_array($doc['modules'] ?? null) ? $doc['modules'] : [],
+                        'disclaimer_text' => (string) ($doc['disclaimer_text'] ?? ''),
+                        'consent' => $consent,
+                        'privacy_addendum' => $privacyAddendum,
+                        'crisis_resources' => $crisisResources,
+                    ],
+                ] + $scaleCodeMeta);
+            }
+
+            if ($resolvedScaleCode === 'SDS_20') {
+                $version = (string) ($row['default_dir_version'] ?? Sds20PackLoader::PACK_VERSION);
+                $doc = $sds20PackLoader->loadQuestionsDoc($locale, $version);
+                $localeResolved = (string) ($doc['locale_resolved'] ?? $sds20PackLoader->normalizeLocale($locale));
+                $landing = $sds20PackLoader->loadLanding($localeResolved, $version);
+                $sourceCatalog = $sds20PackLoader->loadSourceCatalog($version);
+                $optionsFormat = $sds20PackLoader->loadOptionsFormat($localeResolved, $version);
+
+                return response()->json([
+                    'ok' => true,
+                    'scale_code' => $scaleCodeMeta['scale_code'],
+                    'region' => $region,
+                    'locale' => $localeResolved,
+                    'pack_id' => $packId,
+                    'dir_version' => $dirVersion,
+                    'content_package_version' => $version,
+                    'questions' => [
+                        'schema' => 'fap.questions.v1',
+                        'items' => is_array($doc['items'] ?? null) ? $doc['items'] : [],
+                    ],
+                    'options' => [
+                        'format' => $optionsFormat,
+                    ],
+                    'meta' => [
+                        'locale_requested' => (string) ($doc['locale_requested'] ?? $locale),
+                        'locale_resolved' => $localeResolved,
+                        'consent' => [
+                            'required' => (bool) data_get($landing, 'consent.required', true),
+                            'version' => (string) data_get($landing, 'consent.version', ''),
+                            'hash' => (string) data_get($landing, 'consent.hash', ''),
+                            'text' => (string) data_get($landing, 'consent.text', ''),
+                        ],
+                        'disclaimer' => [
+                            'version' => (string) data_get($landing, 'disclaimer.version', ''),
+                            'hash' => (string) data_get($landing, 'disclaimer.hash', ''),
+                            'text' => (string) data_get($landing, 'disclaimer.text', ''),
+                        ],
+                        'source' => [
+                            'items' => $sourceCatalog,
+                        ],
+                    ],
+                ] + $scaleCodeMeta);
+            }
+
+            if ($resolvedScaleCode === 'EQ_60') {
+                $version = (string) ($row['default_dir_version'] ?? Eq60PackLoader::PACK_VERSION);
+                $doc = $eq60PackLoader->loadQuestionsDoc($locale, $version);
+                $localeResolved = (string) ($doc['locale_resolved'] ?? $eq60PackLoader->normalizeLocale($locale));
+
+                return response()->json([
+                    'ok' => true,
+                    'scale_code' => $scaleCodeMeta['scale_code'],
+                    'region' => $region,
+                    'locale' => $localeResolved,
+                    'pack_id' => $packId,
+                    'dir_version' => $dirVersion,
+                    'content_package_version' => $version,
+                    'questions' => [
+                        'schema' => 'fap.questions.v1',
+                        'items' => is_array($doc['items'] ?? null) ? $doc['items'] : [],
+                    ],
+                    'meta' => [
+                        'locale_requested' => (string) ($doc['locale_requested'] ?? $locale),
+                        'locale_resolved' => $localeResolved,
+                        'option_anchors' => is_array($doc['option_anchors'] ?? null) ? $doc['option_anchors'] : [],
+                        'dimension_codes' => is_array($doc['dimension_codes'] ?? null) ? $doc['dimension_codes'] : ['SA', 'ER', 'SE', 'RM'],
+                    ],
+                ] + $scaleCodeMeta);
+            }
+
+            $assetsBaseUrlOverride = $request->attributes->get('assets_base_url');
+            $assetsBaseUrlOverride = is_string($assetsBaseUrlOverride) ? $assetsBaseUrlOverride : null;
+
+            $loaded = $questionsService->loadByPack($packId, $dirVersion, $assetsBaseUrlOverride);
+            if (! ($loaded['ok'] ?? false)) {
+                $error = (string) ($loaded['error_code'] ?? $loaded['error'] ?? 'READ_FAILED');
+                $status = $error === 'NOT_FOUND' ? 404 : 503;
+
+                return response()->json([
+                    'ok' => false,
+                    'error_code' => $error,
+                    'message' => (string) ($loaded['message'] ?? 'failed to load questions'),
+                ], $status);
+            }
 
             return response()->json([
                 'ok' => true,
                 'scale_code' => $scaleCodeMeta['scale_code'],
                 'region' => $region,
-                'locale' => $localeResolved,
+                'locale' => $locale,
                 'pack_id' => $packId,
                 'dir_version' => $dirVersion,
-                'content_package_version' => $version,
-                'questions' => [
-                    'schema' => 'fap.questions.v1',
-                    'items' => is_array($doc['items'] ?? null) ? $doc['items'] : [],
-                ],
-                'meta' => [
-                    'locale_requested' => (string) ($doc['locale_requested'] ?? $locale),
-                    'locale_resolved' => $localeResolved,
-                    'option_anchors' => is_array($doc['option_anchors'] ?? null) ? $doc['option_anchors'] : [],
-                    'dimension_codes' => is_array($doc['dimension_codes'] ?? null) ? $doc['dimension_codes'] : ['SA', 'ER', 'SE', 'RM'],
-                ],
+                'content_package_version' => (string) ($loaded['content_package_version'] ?? ''),
+                'questions' => $loaded['questions'],
             ] + $scaleCodeMeta);
-        }
-
-        $assetsBaseUrlOverride = $request->attributes->get('assets_base_url');
-        $assetsBaseUrlOverride = is_string($assetsBaseUrlOverride) ? $assetsBaseUrlOverride : null;
-
-        $loaded = $questionsService->loadByPack($packId, $dirVersion, $assetsBaseUrlOverride);
-        if (! ($loaded['ok'] ?? false)) {
-            $error = (string) ($loaded['error_code'] ?? $loaded['error'] ?? 'READ_FAILED');
-            $status = $error === 'NOT_FOUND' ? 404 : 503;
-
-            return response()->json([
-                'ok' => false,
-                'error_code' => $error,
-                'message' => (string) ($loaded['message'] ?? 'failed to load questions'),
-            ], $status);
-        }
-
-        return response()->json([
-            'ok' => true,
-            'scale_code' => $scaleCodeMeta['scale_code'],
-            'region' => $region,
-            'locale' => $locale,
-            'pack_id' => $packId,
-            'dir_version' => $dirVersion,
-            'content_package_version' => (string) ($loaded['content_package_version'] ?? ''),
-            'questions' => $loaded['questions'],
-        ] + $scaleCodeMeta);
         } catch (\Throwable $e) {
             if ($e instanceof ApiProblemException) {
                 throw $e;

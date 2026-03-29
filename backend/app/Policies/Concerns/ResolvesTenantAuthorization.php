@@ -29,7 +29,7 @@ trait ResolvesTenantAuthorization
 
     protected function canRead(mixed $user, int $recordOrgId): bool
     {
-        if (!$this->sameOrg($recordOrgId)) {
+        if (! $this->sameOrg($recordOrgId)) {
             return false;
         }
 
@@ -42,7 +42,7 @@ trait ResolvesTenantAuthorization
 
     protected function canWrite(mixed $user, int $recordOrgId): bool
     {
-        if (!$this->sameOrg($recordOrgId)) {
+        if (! $this->sameOrg($recordOrgId)) {
             return false;
         }
 

@@ -12,7 +12,7 @@ class AuthWxPhoneController extends Controller
 {
     public function __invoke(Request $request): JsonResponse
     {
-        if (!app()->environment(['local', 'testing', 'ci'])) {
+        if (! app()->environment(['local', 'testing', 'ci'])) {
             abort(404);
         }
 
@@ -26,10 +26,10 @@ class AuthWxPhoneController extends Controller
 
         $anonId = trim((string) ($data['anon_id'] ?? ''));
         if ($anonId === '') {
-            $anonId = 'anon_' . now()->timestamp . '_' . substr(sha1(Str::uuid()->toString()), 0, 10);
+            $anonId = 'anon_'.now()->timestamp.'_'.substr(sha1(Str::uuid()->toString()), 0, 10);
         }
 
-        $userId = 'u_' . substr(sha1($anonId), 0, 10);
+        $userId = 'u_'.substr(sha1($anonId), 0, 10);
 
         /** @var FmTokenService $tokenSvc */
         $tokenSvc = app(FmTokenService::class);
@@ -49,4 +49,3 @@ class AuthWxPhoneController extends Controller
         ], 200);
     }
 }
-

@@ -26,7 +26,7 @@ class ResolveAnonId
 
     private function normalize(mixed $value): ?string
     {
-        if (!is_string($value) && !is_numeric($value)) {
+        if (! is_string($value) && ! is_numeric($value)) {
             return null;
         }
 

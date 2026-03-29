@@ -17,7 +17,7 @@ final class HealthzAccessControl
         $ip = (string) $request->ip();
         $allowed = (array) config('healthz.allowed_ips', []);
 
-        if ($ip !== '' && !empty($allowed) && IpUtils::checkIp($ip, $allowed)) {
+        if ($ip !== '' && ! empty($allowed) && IpUtils::checkIp($ip, $allowed)) {
             return $next($request);
         }
 

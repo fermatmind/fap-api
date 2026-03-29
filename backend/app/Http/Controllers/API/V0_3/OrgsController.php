@@ -10,9 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class OrgsController extends Controller
 {
-    public function __construct(private OrganizationService $orgs)
-    {
-    }
+    public function __construct(private OrganizationService $orgs) {}
 
     /**
      * POST /api/v0.3/orgs
@@ -90,7 +88,7 @@ class OrgsController extends Controller
     private function resolveUserId(Request $request): ?int
     {
         $raw = (string) ($request->attributes->get('fm_user_id') ?? $request->attributes->get('user_id') ?? '');
-        if ($raw === '' || !preg_match('/^\d+$/', $raw)) {
+        if ($raw === '' || ! preg_match('/^\d+$/', $raw)) {
             return null;
         }
 

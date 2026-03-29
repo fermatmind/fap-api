@@ -14,7 +14,7 @@ class HandleProviderWebhook extends Controller
     public function handle(Request $request, string $provider)
     {
         $provider = strtolower(trim($provider));
-        if (!$this->isSupportedProvider($provider)) {
+        if (! $this->isSupportedProvider($provider)) {
             return $this->notFoundResponse();
         }
 
@@ -40,12 +40,12 @@ class HandleProviderWebhook extends Controller
         }
 
         $verification = $this->verifySignature($provider, $request);
-        if (!($verification['ok'] ?? false)) {
+        if (! ($verification['ok'] ?? false)) {
             return $this->notFoundResponse();
         }
 
         $idKey = IdempotencyKey::build($provider, $eventId, $recordedAt, $payload);
-        $store = new IdempotencyStore();
+        $store = new IdempotencyStore;
         $idRecord = $store->recordFast([
             'provider' => $idKey['provider'],
             'external_id' => $idKey['external_id'],
@@ -164,7 +164,7 @@ class HandleProviderWebhook extends Controller
                 continue;
             }
 
-            if (!preg_match('/^\d{10,13}$/', $raw)) {
+            if (! preg_match('/^\d{10,13}$/', $raw)) {
                 return null;
             }
 
@@ -195,7 +195,7 @@ class HandleProviderWebhook extends Controller
         string $eventId,
         ?int $timestamp,
     ): void {
-        if ($externalUserId === '' || !\App\Support\SchemaBaseline::hasTable('integrations')) {
+        if ($externalUserId === '' || ! \App\Support\SchemaBaseline::hasTable('integrations')) {
             return;
         }
 

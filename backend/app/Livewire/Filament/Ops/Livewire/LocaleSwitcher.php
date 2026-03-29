@@ -63,4 +63,3 @@ final class LocaleSwitcher extends Component
         return view('livewire.filament.ops.livewire.locale-switcher');
     }
 }
-

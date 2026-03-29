@@ -136,7 +136,7 @@ final class RequestIdPropagationTest extends TestCase
         ]);
 
         $requestId = 'req_fer2_42_webhook_store';
-        $providerEventId = 'evt_reqid_store_' . Str::lower(Str::random(10));
+        $providerEventId = 'evt_reqid_store_'.Str::lower(Str::random(10));
 
         $response = $this->withHeader('X-Request-Id', $requestId)
             ->postJson('/api/v0.3/webhooks/payment/stripe', $this->stripePayload($providerEventId));
@@ -164,11 +164,11 @@ final class RequestIdPropagationTest extends TestCase
             'type' => 'charge.succeeded',
             'data' => [
                 'object' => [
-                    'id' => 'ch_' . Str::lower(Str::random(8)),
+                    'id' => 'ch_'.Str::lower(Str::random(8)),
                     'amount' => 199,
                     'currency' => 'usd',
                     'metadata' => [
-                        'order_no' => 'ord_reqid_' . Str::lower(Str::random(8)),
+                        'order_no' => 'ord_reqid_'.Str::lower(Str::random(8)),
                     ],
                 ],
             ],

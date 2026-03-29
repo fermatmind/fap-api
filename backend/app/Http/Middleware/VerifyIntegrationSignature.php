@@ -13,7 +13,7 @@ class VerifyIntegrationSignature
     public function handle(Request $request, Closure $next): Response
     {
         $provider = strtolower(trim((string) $request->route('provider', '')));
-        if (!$this->isAllowedProvider($provider)) {
+        if (! $this->isAllowedProvider($provider)) {
             return $this->unauthorizedResponse();
         }
 
@@ -22,6 +22,7 @@ class VerifyIntegrationSignature
             $request->attributes->set('integration_auth_mode', 'sanctum');
             $request->attributes->set('integration_signature_ok', false);
             $request->attributes->set('integration_actor_user_id', $authUserId);
+
             return $next($request);
         }
 
@@ -48,7 +49,7 @@ class VerifyIntegrationSignature
 
         $rawBody = (string) $request->getContent();
         $expected = hash_hmac('sha256', "{$timestamp}.{$rawBody}", $secret);
-        if (!hash_equals($expected, $signature)) {
+        if (! hash_equals($expected, $signature)) {
             return $this->unauthorizedResponse();
         }
 
@@ -72,6 +73,7 @@ class VerifyIntegrationSignature
                 $sanctumId = Auth::guard('sanctum')->id();
                 if (is_numeric($sanctumId)) {
                     Auth::shouldUse('sanctum');
+
                     return (int) $sanctumId;
                 }
             }

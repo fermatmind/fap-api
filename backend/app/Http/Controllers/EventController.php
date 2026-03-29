@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Models\Event;
+use App\Services\Analytics\EventNormalizer;
 use App\Services\Analytics\EventPayloadLimiter;
 use App\Services\Auth\FmTokenService;
 use App\Services\Experiments\ExperimentAssigner;
-use App\Services\Analytics\EventNormalizer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -36,7 +36,7 @@ class EventController extends Controller
         $ingestToken = trim((string) config('fap.events.ingest_token', ''));
 
         if ($ingestToken !== '') {
-            if (!hash_equals($ingestToken, $token)) {
+            if (! hash_equals($ingestToken, $token)) {
                 abort(response()->json([
                     'ok' => false,
                     'error_code' => 'unauthorized',
@@ -54,7 +54,7 @@ class EventController extends Controller
         }
 
         $validated = app(FmTokenService::class)->validateToken($token);
-        if (!($validated['ok'] ?? false)) {
+        if (! ($validated['ok'] ?? false)) {
             abort(response()->json([
                 'ok' => false,
                 'error_code' => 'unauthorized',
@@ -128,25 +128,25 @@ class EventController extends Controller
 
         $maxTopKeys = max(0, (int) config('fap.events.max_top_keys', 200));
         $data = $request->validate([
-            'event_name'  => ['nullable', 'string', 'max:64'],
-            'event_code'  => ['required', 'string', 'max:64'],
-            'anon_id'     => ['nullable', 'string', 'max:128'],
-            'attempt_id'  => ['required', 'uuid'],
+            'event_name' => ['nullable', 'string', 'max:64'],
+            'event_code' => ['required', 'string', 'max:64'],
+            'anon_id' => ['nullable', 'string', 'max:128'],
+            'attempt_id' => ['required', 'uuid'],
             'occurred_at' => ['nullable', 'date'],
 
             // ✅ 关键：顶层 share_id（验收脚本 F 会按 events.share_id 查）
-            'share_id'    => ['nullable', 'uuid'],
+            'share_id' => ['nullable', 'uuid'],
 
             // ✅ 兼容两种入参：props / meta_json
-            'props'       => ['nullable', 'array', "max:{$maxTopKeys}"],
-            'props_json'  => ['nullable', 'array', "max:{$maxTopKeys}"],
-            'meta_json'   => ['nullable', 'array', "max:{$maxTopKeys}"],
+            'props' => ['nullable', 'array', "max:{$maxTopKeys}"],
+            'props_json' => ['nullable', 'array', "max:{$maxTopKeys}"],
+            'meta_json' => ['nullable', 'array', "max:{$maxTopKeys}"],
             'experiments_json' => ['nullable'],
         ]);
 
         // ✅ meta_json：props + meta_json 合并（meta_json 覆盖同名字段）
         $props = $data['props'] ?? $data['props_json'] ?? [];
-        $meta  = $data['meta_json'] ?? [];
+        $meta = $data['meta_json'] ?? [];
         $limiter = app(EventPayloadLimiter::class);
         $props = $limiter->limit($props);
         $meta = $limiter->limit($meta);
@@ -164,9 +164,9 @@ class EventController extends Controller
         // 2) meta_json.share_id / props.share_id（合并后在 mergedMeta 里）
         $shareId = null;
 
-        if (!empty($data['share_id'])) {
+        if (! empty($data['share_id'])) {
             $shareId = (string) $data['share_id'];
-        } elseif (is_array($mergedMeta) && !empty($mergedMeta['share_id'])) {
+        } elseif (is_array($mergedMeta) && ! empty($mergedMeta['share_id'])) {
             $shareId = (string) $mergedMeta['share_id'];
         }
 
@@ -186,7 +186,7 @@ class EventController extends Controller
             'meta_json' => $meta,
         ];
 
-        if (!$this->canWriteAttemptEvent($payload['attempt_id'], $auth, $request)) {
+        if (! $this->canWriteAttemptEvent($payload['attempt_id'], $auth, $request)) {
             return $this->notFoundResponse('attempt not found.');
         }
 
@@ -203,7 +203,7 @@ class EventController extends Controller
             ? (string) Str::uuid7()
             : (string) Str::uuid();
         $columns['event_code'] = $data['event_code'];
-        if (!isset($columns['event_name']) || $columns['event_name'] === null || $columns['event_name'] === '') {
+        if (! isset($columns['event_name']) || $columns['event_name'] === null || $columns['event_name'] === '') {
             $columns['event_name'] = $data['event_name'] ?? $data['event_code'];
         }
         $columns['attempt_id'] = $columns['attempt_id'] ?? $data['attempt_id'];
@@ -215,7 +215,7 @@ class EventController extends Controller
         $columns['share_id'] = $columns['share_id'] ?? $shareId;
         $columns['meta_json'] = $normalized['props'];
         $columns['user_id'] = $auth['user_id'];
-        $columns['occurred_at'] = $columns['occurred_at'] ?? (!empty($data['occurred_at'])
+        $columns['occurred_at'] = $columns['occurred_at'] ?? (! empty($data['occurred_at'])
             ? Carbon::parse($data['occurred_at'])
             : now());
 
@@ -262,11 +262,11 @@ class EventController extends Controller
     private function canWriteAttemptEvent(string $attemptId, array $auth, Request $request): bool
     {
         $attemptId = trim($attemptId);
-        if ($attemptId === '' || !\App\Support\SchemaBaseline::hasTable('attempts')) {
+        if ($attemptId === '' || ! \App\Support\SchemaBaseline::hasTable('attempts')) {
             return true;
         }
 
-        if (!DB::table('attempts')->where('id', $attemptId)->exists()) {
+        if (! DB::table('attempts')->where('id', $attemptId)->exists()) {
             return true;
         }
 
@@ -290,7 +290,7 @@ class EventController extends Controller
                 $hasIdentityConstraint = true;
             }
 
-            if (!$hasIdentityConstraint) {
+            if (! $hasIdentityConstraint) {
                 $query->whereRaw('1=0');
             }
         }
@@ -312,6 +312,7 @@ class EventController extends Controller
         }
 
         $header = (string) $request->header('X-Boot-Experiments', '');
+
         return $this->normalizeExperiments($header);
     }
 

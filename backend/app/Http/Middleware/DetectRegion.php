@@ -11,9 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DetectRegion
 {
-    public function __construct(private RegionContext $regionContext)
-    {
-    }
+    public function __construct(private RegionContext $regionContext) {}
 
     public function handle(Request $request, Closure $next): Response
     {
@@ -21,10 +19,10 @@ class DetectRegion
         $defaultRegion = $this->resolveDefaultRegion($regions);
 
         $region = strtoupper(trim((string) $request->header('X-Region', '')));
-        if ($region === '' || !is_array($regions) || !array_key_exists($region, $regions)) {
+        if ($region === '' || ! is_array($regions) || ! array_key_exists($region, $regions)) {
             $region = $defaultRegion;
         }
-        if (!is_array($regions) || !array_key_exists($region, $regions)) {
+        if (! is_array($regions) || ! array_key_exists($region, $regions)) {
             $region = 'CN_MAINLAND';
         }
 
@@ -125,7 +123,7 @@ class DetectRegion
             return '';
         }
 
-        if (!preg_match('/^[A-Za-z0-9-]+$/', $raw)) {
+        if (! preg_match('/^[A-Za-z0-9-]+$/', $raw)) {
             return '';
         }
 
@@ -140,10 +138,10 @@ class DetectRegion
 
         $locale = $lang;
         if ($region !== '') {
-            $locale .= '-' . strtoupper($region);
+            $locale .= '-'.strtoupper($region);
         }
         if ($rest !== []) {
-            $locale .= '-' . implode('-', $rest);
+            $locale .= '-'.implode('-', $rest);
         }
 
         return $locale;

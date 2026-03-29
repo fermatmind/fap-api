@@ -17,8 +17,7 @@ class ResolveOrgContext
         private MembershipService $membershipService,
         private FmTokenService $tokenService,
         private OrgContext $orgContext,
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, Closure $next): Response
     {
@@ -157,12 +156,12 @@ class ResolveOrgContext
     private function resolveOrgIdFromToken(Request $request): ?int
     {
         $payload = $this->resolveFmTokenPayload($request);
-        if (!($payload['ok'] ?? false)) {
+        if (! ($payload['ok'] ?? false)) {
             return null;
         }
 
         $orgId = $payload['org_id'] ?? null;
-        if (!is_int($orgId)) {
+        if (! is_int($orgId)) {
             return null;
         }
 
@@ -182,7 +181,7 @@ class ResolveOrgContext
     private function resolveUserIdFromToken(Request $request): ?int
     {
         $payload = $this->resolveFmTokenPayload($request);
-        if (!($payload['ok'] ?? false)) {
+        if (! ($payload['ok'] ?? false)) {
             return null;
         }
 
@@ -197,7 +196,7 @@ class ResolveOrgContext
     private function resolveTokenRole(Request $request): ?string
     {
         $payload = $this->resolveFmTokenPayload($request);
-        if (!($payload['ok'] ?? false)) {
+        if (! ($payload['ok'] ?? false)) {
             return null;
         }
 
@@ -209,7 +208,7 @@ class ResolveOrgContext
     private function resolveAnonIdFromToken(Request $request): ?string
     {
         $payload = $this->resolveFmTokenPayload($request);
-        if (!($payload['ok'] ?? false)) {
+        if (! ($payload['ok'] ?? false)) {
             return null;
         }
 
@@ -240,7 +239,7 @@ class ResolveOrgContext
         }
 
         $payload = $this->tokenService->validateToken($token);
-        if (!is_array($payload)) {
+        if (! is_array($payload)) {
             $payload = ['ok' => false];
         }
 

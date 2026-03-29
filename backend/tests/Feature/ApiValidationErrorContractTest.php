@@ -16,7 +16,7 @@ final class ApiValidationErrorContractTest extends TestCase
     public function test_orders_validation_failure_returns_unified_contract(): void
     {
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $this->issueAnonToken(),
+            'Authorization' => 'Bearer '.$this->issueAnonToken(),
         ])->postJson('/api/v0.3/orders', []);
 
         $response->assertStatus(422);
@@ -35,12 +35,12 @@ final class ApiValidationErrorContractTest extends TestCase
 
     private function issueAnonToken(): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),
             'user_id' => null,
-            'anon_id' => 'contract_anon_' . Str::random(8),
+            'anon_id' => 'contract_anon_'.Str::random(8),
             'org_id' => 0,
             'role' => 'public',
             'created_at' => now(),

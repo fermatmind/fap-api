@@ -14,7 +14,7 @@ final class IntegrationsIngestAuth
     public function handle(Request $request, Closure $next): Response
     {
         $provider = strtolower(trim((string) $request->route('provider', '')));
-        if (!$this->isAllowedProvider($provider)) {
+        if (! $this->isAllowedProvider($provider)) {
             return $this->unauthorized('unsupported_provider');
         }
 
@@ -56,7 +56,7 @@ final class IntegrationsIngestAuth
             }
         );
 
-        if (!$passed) {
+        if (! $passed) {
             return $this->unauthorized('token_missing_or_invalid');
         }
 
@@ -85,7 +85,7 @@ final class IntegrationsIngestAuth
                 ->lockForUpdate()
                 ->first();
 
-            if (!$row || !is_numeric($row->user_id ?? null)) {
+            if (! $row || ! is_numeric($row->user_id ?? null)) {
                 return ['ok' => false, 'reason' => 'invalid_ingest_key'];
             }
 
@@ -119,7 +119,7 @@ final class IntegrationsIngestAuth
             return ['ok' => true, 'user_id' => (string) ((int) $row->user_id)];
         });
 
-        if (!($resolved['ok'] ?? false)) {
+        if (! ($resolved['ok'] ?? false)) {
             return $this->unauthorized((string) ($resolved['reason'] ?? 'invalid_ingest_key'));
         }
 

@@ -15,14 +15,14 @@ class IngestRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $meta = $this->input('meta', []);
-        if (!is_array($meta)) {
+        if (! is_array($meta)) {
             $meta = [];
         }
 
-        if (!array_key_exists('range_start', $meta) && $this->has('range_start')) {
+        if (! array_key_exists('range_start', $meta) && $this->has('range_start')) {
             $meta['range_start'] = $this->input('range_start');
         }
-        if (!array_key_exists('range_end', $meta) && $this->has('range_end')) {
+        if (! array_key_exists('range_end', $meta) && $this->has('range_end')) {
             $meta['range_end'] = $this->input('range_end');
         }
 
@@ -67,12 +67,12 @@ class IngestRequest extends FormRequest
             $maxDepth = max(1, (int) config('integrations.ingest.max_value_depth', 8));
             $maxBytes = max(1, (int) config('integrations.ingest.max_value_bytes', 8192));
             $samples = $this->input('samples', []);
-            if (!is_array($samples)) {
+            if (! is_array($samples)) {
                 return;
             }
 
             foreach ($samples as $i => $sample) {
-                if (!is_array($sample) || !array_key_exists('value', $sample)) {
+                if (! is_array($sample) || ! array_key_exists('value', $sample)) {
                     continue;
                 }
 
@@ -92,7 +92,7 @@ class IngestRequest extends FormRequest
 
     private function depth($value, int $depth = 0): int
     {
-        if (!is_array($value)) {
+        if (! is_array($value)) {
             return $depth;
         }
 
@@ -107,7 +107,7 @@ class IngestRequest extends FormRequest
     private function jsonBytes($value): int
     {
         $encoded = json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        if (!is_string($encoded)) {
+        if (! is_string($encoded)) {
             return 0;
         }
 

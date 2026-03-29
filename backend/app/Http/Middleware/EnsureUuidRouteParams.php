@@ -17,7 +17,7 @@ class EnsureUuidRouteParams
             $raw = $request->route($paramName);
             $value = is_string($raw) || is_numeric($raw) ? trim((string) $raw) : '';
 
-            if ($value === '' || !Str::isUuid($value)) {
+            if ($value === '' || ! Str::isUuid($value)) {
                 return response()->json([
                     'ok' => false,
                     'error_code' => 'NOT_FOUND',

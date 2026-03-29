@@ -17,8 +17,7 @@ class BootController extends Controller
         private RegionContext $regionContext,
         private PaymentRouter $paymentRouter,
         private ExperimentAssigner $experimentAssigner,
-    ) {
-    }
+    ) {}
 
     /**
      * GET /api/v0.4/boot
@@ -63,11 +62,11 @@ class BootController extends Controller
         ];
 
         $body = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        if (!is_string($body)) {
+        if (! is_string($body)) {
             $body = '{"ok":false}';
         }
 
-        $etag = '"' . sha1($body) . '"';
+        $etag = '"'.sha1($body).'"';
         $headers = [
             'Cache-Control' => 'public, max-age=300',
             'Vary' => 'X-Region, Accept-Language, X-FAP-Locale, X-Anon-Id',
@@ -101,7 +100,7 @@ class BootController extends Controller
             $appUrl = 'http://localhost';
         }
 
-        return rtrim($appUrl, '/') . '/storage/content_assets';
+        return rtrim($appUrl, '/').'/storage/content_assets';
     }
 
     private function etagMatches(string $header, string $etag): bool
@@ -136,7 +135,7 @@ class BootController extends Controller
         ];
 
         foreach ($candidates as $candidate) {
-            if (!is_string($candidate) && !is_numeric($candidate)) {
+            if (! is_string($candidate) && ! is_numeric($candidate)) {
                 continue;
             }
             $value = trim((string) $candidate);

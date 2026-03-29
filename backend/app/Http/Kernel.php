@@ -42,7 +42,7 @@ class Kernel extends HttpKernel
             // Laravel default: 'throttle:api' and bindings
             \App\Http\Middleware\AttachRequestId::class,
             \App\Http\Middleware\DetectRegion::class,
-            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
+            \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\NormalizeApiErrorContract::class,
         ],
@@ -55,19 +55,19 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $middlewareAliases = [
-        'auth'       => \App\Http\Middleware\Authenticate::class,
+        'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings'   => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
-        'can'        => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest'      => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'can' => \Illuminate\Auth\Middleware\Authorize::class,
+        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
-        'signed'     => \Illuminate\Routing\Middleware\ValidateSignature::class,
-        'throttle'   => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'verified'   => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
+        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
         // ✅ our fm token gate
-        'fm_token'   => \App\Http\Middleware\FmTokenAuth::class,
+        'fm_token' => \App\Http\Middleware\FmTokenAuth::class,
         'integration.signature' => \App\Http\Middleware\VerifyIntegrationSignature::class,
     ];
 
@@ -78,19 +78,19 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $routeMiddleware = [
-        'auth'       => \App\Http\Middleware\Authenticate::class,
+        'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings'   => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
-        'can'        => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest'      => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'can' => \Illuminate\Auth\Middleware\Authorize::class,
+        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
-        'signed'     => \Illuminate\Routing\Middleware\ValidateSignature::class,
-        'throttle'   => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'verified'   => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
+        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
         // ✅ our fm token gate
-        'fm_token'   => \App\Http\Middleware\FmTokenAuth::class,
+        'fm_token' => \App\Http\Middleware\FmTokenAuth::class,
         'integration.signature' => \App\Http\Middleware\VerifyIntegrationSignature::class,
     ];
 }
