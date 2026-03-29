@@ -40,19 +40,19 @@ class ContentOverviewPage extends Page
 
     public function mount(): void
     {
-        $tenantOrgIds = $this->tenantOrgIds();
+        $currentOrgIds = $this->currentOrgIds();
 
-        $articleCount = Article::query()->whereIn('org_id', $tenantOrgIds)->count();
+        $articleCount = Article::query()->whereIn('org_id', $currentOrgIds)->count();
         $publishedArticleCount = Article::query()
-            ->whereIn('org_id', $tenantOrgIds)
+            ->whereIn('org_id', $currentOrgIds)
             ->where('status', 'published')
             ->count();
-        $categoryCount = ArticleCategory::query()->whereIn('org_id', $tenantOrgIds)->count();
-        $tagCount = ArticleTag::query()->whereIn('org_id', $tenantOrgIds)->count();
+        $categoryCount = ArticleCategory::query()->whereIn('org_id', $currentOrgIds)->count();
+        $tagCount = ArticleTag::query()->whereIn('org_id', $currentOrgIds)->count();
         $guideCount = CareerGuide::query()->where('org_id', 0)->count();
         $jobCount = CareerJob::query()->where('org_id', 0)->count();
         $draftEditorialCount = Article::query()
-            ->whereIn('org_id', $tenantOrgIds)
+            ->whereIn('org_id', $currentOrgIds)
             ->where('status', 'draft')
             ->count()
             + CareerGuide::query()->where('org_id', 0)->where('status', CareerGuide::STATUS_DRAFT)->count()
@@ -90,9 +90,9 @@ class ContentOverviewPage extends Page
         ];
 
         $this->recentItems = array_values(array_filter([
-            $this->latestItem('Latest article', Article::query()->whereIn('org_id', $tenantOrgIds)->latest('updated_at')->first(), 'title', ArticleResource::getUrl()),
-            $this->latestItem('Latest category', ArticleCategory::query()->whereIn('org_id', $tenantOrgIds)->latest('updated_at')->first(), 'name', ArticleCategoryResource::getUrl()),
-            $this->latestItem('Latest tag', ArticleTag::query()->whereIn('org_id', $tenantOrgIds)->latest('updated_at')->first(), 'name', ArticleTagResource::getUrl()),
+            $this->latestItem('Latest article', Article::query()->whereIn('org_id', $currentOrgIds)->latest('updated_at')->first(), 'title', ArticleResource::getUrl()),
+            $this->latestItem('Latest category', ArticleCategory::query()->whereIn('org_id', $currentOrgIds)->latest('updated_at')->first(), 'name', ArticleCategoryResource::getUrl()),
+            $this->latestItem('Latest tag', ArticleTag::query()->whereIn('org_id', $currentOrgIds)->latest('updated_at')->first(), 'name', ArticleTagResource::getUrl()),
             $this->latestItem('Latest career guide', CareerGuide::query()->where('org_id', 0)->latest('updated_at')->first(), 'title', CareerGuideResource::getUrl()),
             $this->latestItem('Latest career job', CareerJob::query()->where('org_id', 0)->latest('updated_at')->first(), 'title', CareerJobResource::getUrl()),
         ]));
@@ -116,11 +116,11 @@ class ContentOverviewPage extends Page
     /**
      * @return array<int, int>
      */
-    private function tenantOrgIds(): array
+    private function currentOrgIds(): array
     {
         $orgId = max(0, (int) app(OrgContext::class)->orgId());
 
-        return $orgId > 0 ? [0, $orgId] : [0];
+        return [$orgId];
     }
 
     /**

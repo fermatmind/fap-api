@@ -89,13 +89,21 @@ final class ContentCmsProductLayerTest extends TestCase
             ->assertForbidden();
     }
 
-    public function test_legacy_publish_permission_still_allows_write_but_not_release(): void
+    public function test_legacy_publish_permission_still_allows_write_and_release_as_compatibility_bridge(): void
     {
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_PUBLISH,
         ]);
 
         $session = $this->opsSession((int) $admin->id);
+
+        $article = $this->seedArticle([
+            'org_id' => (int) $session['ops_org_id'],
+            'title' => 'Legacy Publish Queue Article',
+            'status' => 'draft',
+            'is_public' => false,
+            'published_at' => null,
+        ]);
 
         $this->withSession($session)
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -105,7 +113,15 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->withSession($session)
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/content-release')
-            ->assertForbidden();
+            ->assertOk()
+            ->assertSee('Release workspace')
+            ->assertSee('Legacy Publish Queue Article');
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        ArticleResource::releaseRecord($article);
+
+        $article->refresh();
+        $this->assertSame('published', $article->status);
     }
 
     public function test_content_release_admin_can_open_release_surface_but_not_article_create(): void
@@ -237,6 +253,71 @@ final class ContentCmsProductLayerTest extends TestCase
             ->assertSee('Global career content')
             ->assertDontSee('Content versions')
             ->assertDontSee('Release records');
+    }
+
+    public function test_content_overview_current_org_cards_do_not_count_global_article_taxonomy_rows(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+        ]);
+
+        $session = $this->opsSession((int) $admin->id);
+        $selectedOrgId = (int) $session['ops_org_id'];
+
+        Article::query()->create([
+            'org_id' => $selectedOrgId,
+            'slug' => 'selected-org-article',
+            'locale' => 'en',
+            'title' => 'Selected Org Article',
+            'content_md' => 'Selected article body',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+        ]);
+        Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'global-article',
+            'locale' => 'en',
+            'title' => 'Global Article',
+            'content_md' => 'Global article body',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+        ]);
+        ArticleCategory::query()->create([
+            'org_id' => $selectedOrgId,
+            'slug' => 'selected-category',
+            'name' => 'Selected Category',
+            'is_active' => true,
+        ]);
+        ArticleCategory::query()->create([
+            'org_id' => 0,
+            'slug' => 'global-category',
+            'name' => 'Global Category',
+            'is_active' => true,
+        ]);
+        ArticleTag::query()->create([
+            'org_id' => $selectedOrgId,
+            'slug' => 'selected-tag',
+            'name' => 'Selected Tag',
+            'is_active' => true,
+        ]);
+        ArticleTag::query()->create([
+            'org_id' => 0,
+            'slug' => 'global-tag',
+            'name' => 'Global Tag',
+            'is_active' => true,
+        ]);
+
+        $this->withSession($session)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/content-overview')
+            ->assertOk()
+            ->assertSee('Current org editorial')
+            ->assertSee('1', false)
+            ->assertSee('Current org taxonomy')
+            ->assertSee('2', false)
+            ->assertDontSee('Global Article');
     }
 
     public function test_navigation_groups_match_cms_bootstrap_blueprint(): void
