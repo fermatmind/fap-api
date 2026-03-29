@@ -137,6 +137,17 @@ class OpsAccessControl
                 return $next($request);
             }
 
+            if ($this->isSafeRoute($routeName)) {
+                OpsSecurityEvent::emit('PASS', [
+                    'route' => $routeName,
+                    'ip' => $request->ip(),
+                    'host' => $request->getHost(),
+                    'user_id' => $admin?->getAuthIdentifier(),
+                ]);
+
+                return $next($request);
+            }
+
             if (! app()->environment(['local', 'testing', 'ci'])) {
                 if (OpsIpBlacklist::isBlocked((string) $request->ip())) {
                     OpsSecurityEvent::emit('IP_BLACKLIST_BLOCKED', [
@@ -344,6 +355,16 @@ class OpsAccessControl
         }
 
         return false;
+    }
+
+    private function isSafeRoute(string $routeName): bool
+    {
+        return in_array($routeName, [
+            'filament.ops.auth.login',
+            'filament.ops.auth.logout',
+            'filament.ops.pages.select-org',
+            'filament.ops.pages.dashboard',
+        ], true);
     }
 
     private function hasSensitiveActionPermission(?Authenticatable $user): bool
