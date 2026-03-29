@@ -7,6 +7,7 @@ namespace App\Livewire\Filament\Ops\Livewire;
 use Filament\Facades\Filament;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 final class LocaleSwitcher extends Component
@@ -25,7 +26,7 @@ final class LocaleSwitcher extends Component
         $this->locale = array_key_exists($current, $this->locales) ? $current : 'zh_CN';
     }
 
-    public function setLocale(string $locale): void
+    public function setLocale(string $locale, ?string $returnUrl = null): void
     {
         if (! array_key_exists($locale, $this->locales)) {
             return;
@@ -55,11 +56,54 @@ final class LocaleSwitcher extends Component
             $user?->forceFill(['preferred_locale' => $locale])->save();
         }
 
-        $this->redirect(request()->fullUrl(), navigate: true);
+        $this->redirect($this->resolveReturnUrl($returnUrl), navigate: true);
     }
 
     public function render(): View
     {
         return view('livewire.filament.ops.livewire.locale-switcher');
+    }
+
+    private function resolveReturnUrl(?string $returnUrl): string
+    {
+        $returnUrl = trim((string) $returnUrl);
+        if ($returnUrl === '') {
+            return $this->fallbackReturnUrl();
+        }
+
+        if (Str::startsWith($returnUrl, '/')) {
+            return Str::startsWith($returnUrl, '/ops') ? $returnUrl : $this->fallbackReturnUrl();
+        }
+
+        $parts = parse_url($returnUrl);
+        $path = trim((string) ($parts['path'] ?? ''));
+        if ($path === '' || ! Str::startsWith($path, '/ops')) {
+            return $this->fallbackReturnUrl();
+        }
+
+        $requestOrigin = request()->getSchemeAndHttpHost();
+        $candidateOrigin = sprintf(
+            '%s://%s',
+            (string) ($parts['scheme'] ?? request()->getScheme()),
+            (string) ($parts['host'] ?? request()->getHost())
+        );
+
+        if ($candidateOrigin !== $requestOrigin) {
+            return $this->fallbackReturnUrl();
+        }
+
+        $query = trim((string) ($parts['query'] ?? ''));
+        $fragment = trim((string) ($parts['fragment'] ?? ''));
+
+        return $path
+            .($query !== '' ? '?'.$query : '')
+            .($fragment !== '' ? '#'.$fragment : '');
+    }
+
+    private function fallbackReturnUrl(): string
+    {
+        $panelPath = trim((string) (Filament::getCurrentPanel()?->getPath() ?? 'ops'), '/');
+
+        return '/'.($panelPath !== '' ? $panelPath : 'ops');
     }
 }
