@@ -15,6 +15,7 @@ use App\Models\CareerJobSeoMeta;
 use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Services\Ops\SeoOperationsService;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
@@ -34,6 +35,7 @@ final class SeoOperationsPageTest extends TestCase
     {
         parent::setUp();
 
+        config()->set('app.frontend_url', 'https://example.test');
         Filament::setCurrentPanel(app(PanelRegistry::class)->get('ops'));
     }
 
@@ -51,7 +53,7 @@ final class SeoOperationsPageTest extends TestCase
             ->assertRedirectContains('/ops/select-org');
     }
 
-    public function test_seo_operations_page_renders_selected_org_and_global_seo_signals(): void
+    public function test_seo_operations_page_renders_operational_seo_and_growth_signals(): void
     {
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_READ,
@@ -77,7 +79,7 @@ final class SeoOperationsPageTest extends TestCase
             'locale' => 'en',
             'seo_title' => 'SEO Ready Article Title',
             'seo_description' => 'SEO Ready Article Description',
-            'canonical_url' => 'https://example.test/articles/seo-ready-article',
+            'canonical_url' => 'https://example.test/en/articles/seo-ready-article',
             'og_title' => 'SEO Ready OG Title',
             'og_description' => 'SEO Ready OG Description',
             'og_image_url' => 'https://example.test/images/seo-ready-article.png',
@@ -129,7 +131,7 @@ final class SeoOperationsPageTest extends TestCase
             'locale' => 'en',
             'seo_title' => 'Other Org SEO Title',
             'seo_description' => 'Other Org SEO Description',
-            'canonical_url' => 'https://example.test/articles/other-org-seo-article',
+            'canonical_url' => 'https://example.test/en/articles/other-org-seo-article',
             'og_title' => 'Other Org OG Title',
             'og_description' => 'Other Org OG Description',
             'og_image_url' => 'https://example.test/images/other-org-seo-article.png',
@@ -159,7 +161,7 @@ final class SeoOperationsPageTest extends TestCase
             'career_guide_id' => (int) $guideReady->id,
             'seo_title' => 'SEO Ready Guide Title',
             'seo_description' => 'SEO Ready Guide Description',
-            'canonical_url' => 'https://example.test/guides/seo-ready-guide',
+            'canonical_url' => 'https://example.test/en/career/guides/seo-ready-guide',
             'og_title' => 'SEO Ready Guide OG Title',
             'og_description' => 'SEO Ready Guide OG Description',
             'og_image_url' => 'https://example.test/images/seo-ready-guide.png',
@@ -218,7 +220,7 @@ final class SeoOperationsPageTest extends TestCase
             'job_id' => (int) $jobReady->id,
             'seo_title' => 'SEO Ready Job Title',
             'seo_description' => 'SEO Ready Job Description',
-            'canonical_url' => 'https://example.test/jobs/seo-ready-job',
+            'canonical_url' => 'https://example.test/en/career/jobs/seo-ready-job',
             'og_title' => 'SEO Ready Job OG Title',
             'og_description' => 'SEO Ready Job OG Description',
             'og_image_url' => 'https://example.test/images/seo-ready-job.png',
@@ -261,9 +263,8 @@ final class SeoOperationsPageTest extends TestCase
             ->get('/ops/seo-operations')
             ->assertOk()
             ->assertSee('SEO operations')
-            ->assertSee('SEO readiness')
-            ->assertSee('Coverage details')
-            ->assertSee('Attention queue')
+            ->assertSee('Growth diagnostics')
+            ->assertSee('SEO issue queue')
             ->assertSee('Article SEO gaps')
             ->assertSee('Career guide SEO gaps');
 
@@ -286,10 +287,126 @@ final class SeoOperationsPageTest extends TestCase
             ->assertSet('coverageFields.2.value', '50% (1/2)')
             ->assertSet('coverageFields.3.value', '50% (1/2)')
             ->assertSet('coverageFields.4.value', '3')
-            ->assertSet('attentionCards.0.value', '1')
-            ->assertSet('attentionCards.1.value', '1')
-            ->assertSet('attentionCards.2.value', '1')
-            ->assertSet('attentionCards.3.value', '2');
+            ->assertSet('growthFields.0.value', '2')
+            ->assertSet('growthFields.1.value', '3')
+            ->assertSet('growthFields.2.value', '1')
+            ->assertSet('growthFields.3.value', '50% (3/6)')
+            ->assertCount('issueQueue', 3)
+            ->assertSee('Published with discovery blockers')
+            ->assertDontSee('Other Org SEO Article');
+    }
+
+    public function test_seo_operations_can_apply_bulk_actions_to_fix_operational_gaps(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+        $selectedOrg = $this->createOrganization('SEO Fix Org');
+
+        $article = Article::query()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'slug' => 'fix-me-article',
+            'locale' => 'en',
+            'title' => 'Fix Me Article',
+            'excerpt' => 'Fix me article excerpt',
+            'content_md' => 'Fix body',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => false,
+            'published_at' => Carbon::now()->subDay(),
+        ]);
+        ArticleSeoMeta::query()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'article_id' => (int) $article->id,
+            'locale' => 'en',
+            'seo_title' => '',
+            'seo_description' => '',
+            'canonical_url' => 'https://example.test/wrong-article',
+            'og_title' => '',
+            'og_description' => '',
+            'og_image_url' => '',
+            'robots' => '',
+            'is_indexable' => true,
+        ]);
+
+        $guide = CareerGuide::query()->create([
+            'org_id' => 0,
+            'guide_code' => 'fix-guide',
+            'slug' => 'fix-guide',
+            'locale' => 'en',
+            'title' => 'Fix Guide',
+            'excerpt' => 'Fix guide excerpt',
+            'category_slug' => 'career-planning',
+            'body_md' => 'Guide body',
+            'body_html' => '<p>Guide body</p>',
+            'related_industry_slugs_json' => ['technology'],
+            'status' => CareerGuide::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'sort_order' => 0,
+            'schema_version' => 'v1',
+            'published_at' => Carbon::now()->subDay(),
+        ]);
+        CareerGuideSeoMeta::query()->create([
+            'career_guide_id' => (int) $guide->id,
+            'seo_title' => '',
+            'seo_description' => '',
+            'canonical_url' => 'https://example.test/wrong-guide',
+            'og_title' => '',
+            'og_description' => '',
+            'og_image_url' => '',
+            'twitter_title' => '',
+            'twitter_description' => '',
+            'twitter_image_url' => '',
+            'robots' => '',
+        ]);
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        app()->instance('request', Request::create('/ops/seo-operations', 'POST'));
+
+        $context = app(OrgContext::class);
+        $context->set((int) $selectedOrg->id, (int) $admin->id, 'admin');
+        app()->instance(OrgContext::class, $context);
+
+        Livewire::test(SeoOperationsPage::class)
+            ->set('selectedTargets', [
+                'article:'.$article->id,
+                'guide:'.$guide->id,
+            ])
+            ->set('bulkAction', SeoOperationsService::ACTION_FILL_METADATA)
+            ->call('applyBulkAction')
+            ->assertSet('selectedTargets', [])
+            ->assertCount('issueQueue', 2)
+            ->set('selectedTargets', [
+                'article:'.$article->id,
+                'guide:'.$guide->id,
+            ])
+            ->set('bulkAction', SeoOperationsService::ACTION_SYNC_CANONICAL)
+            ->call('applyBulkAction')
+            ->set('selectedTargets', [
+                'article:'.$article->id,
+            ])
+            ->set('bulkAction', SeoOperationsService::ACTION_MARK_INDEXABLE)
+            ->call('applyBulkAction')
+            ->set('issueFilter', SeoOperationsService::ISSUE_GROWTH)
+            ->assertCount('issueQueue', 0)
+            ->set('issueFilter', SeoOperationsService::ISSUE_SOCIAL)
+            ->assertCount('issueQueue', 2)
+            ->assertSee('Fix Guide')
+            ->assertSee('Fix Me Article');
+
+        $article->refresh();
+        $guide->refresh();
+        $articleSeo = $article->seoMeta()->firstOrFail();
+        $guideSeo = $guide->seoMeta()->firstOrFail();
+
+        $this->assertTrue((bool) $article->is_indexable);
+        $this->assertSame('https://example.test/en/articles/fix-me-article', $articleSeo->canonical_url);
+        $this->assertSame('index,follow', $articleSeo->robots);
+        $this->assertSame('Fix Me Article', $articleSeo->seo_title);
+        $this->assertSame('https://example.test/en/career/guides/fix-guide', $guideSeo->canonical_url);
+        $this->assertSame('index,follow', $guideSeo->robots);
+        $this->assertSame('Fix Guide', $guideSeo->seo_title);
     }
 
     private function createOrganization(string $name): Organization
