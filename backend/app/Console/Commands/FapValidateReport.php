@@ -4,19 +4,21 @@ namespace App\Console\Commands;
 
 use App\Models\Attempt;
 use App\Models\Result;
-use Illuminate\Console\Command;
 use App\Services\Report\ReportComposer;
+use Illuminate\Console\Command;
 
 class FapValidateReport extends Command
 {
     protected $signature = 'fap:validate-report {--attempt= : Attempt id} {--json= : Write report json to a file}';
+
     protected $description = 'Runtime validate report output (min_cards, meta/cards consistency, highlights assertions).';
 
     public function handle(): int
     {
-        $attemptId = (string)($this->option('attempt') ?? '');
+        $attemptId = (string) ($this->option('attempt') ?? '');
         if ($attemptId === '') {
             $this->error('Missing --attempt=...');
+
             return self::FAILURE;
         }
 
@@ -31,8 +33,9 @@ class FapValidateReport extends Command
         ], $result);
         $report = is_array($out) ? ($out['report'] ?? $out) : [];
 
-        if (!is_array($report) || $report === []) {
+        if (! is_array($report) || $report === []) {
             $this->error('Report is empty or not array.');
+
             return self::FAILURE;
         }
 
@@ -61,10 +64,10 @@ class FapValidateReport extends Command
             $metaFinal = $report['_meta']['sections'][$s]['assembler']['counts']['final'] ?? null;
 
             // assert1: final >= min_cards
-            $ok1 = is_numeric($policyMin) && is_numeric($metaFinal) && ((int)$metaFinal >= (int)$policyMin);
+            $ok1 = is_numeric($policyMin) && is_numeric($metaFinal) && ((int) $metaFinal >= (int) $policyMin);
 
             // assert2: metaFinal == cards.length
-            $ok2 = is_numeric($metaFinal) && ((int)$metaFinal === $cardsLen);
+            $ok2 = is_numeric($metaFinal) && ((int) $metaFinal === $cardsLen);
 
             $this->line(sprintf(
                 '%s: cards=%d meta.final=%s policy.min=%s | assert1=%s assert2=%s',
@@ -76,7 +79,9 @@ class FapValidateReport extends Command
                 $ok2 ? 'OK' : 'FAIL'
             ));
 
-            if (!$ok1 || !$ok2) $failures++;
+            if (! $ok1 || ! $ok2) {
+                $failures++;
+            }
         }
 
         // -------------------------
@@ -86,7 +91,7 @@ class FapValidateReport extends Command
             ?? ($report['sections']['highlights'] ?? null);
 
         if ($high === null) {
-            $this->line("highlights: MISSING | FAIL");
+            $this->line('highlights: MISSING | FAIL');
             $failures++;
         } else {
             // compat:
@@ -106,27 +111,27 @@ class FapValidateReport extends Command
                 ?? $report['_meta']['highlights']['policy']
                 ?? null;
 
-            if (!is_array($policy)) {
+            if (! is_array($policy)) {
                 $constraints = $report['_meta']['highlights']['finalize_meta']['constraints']
                     ?? $report['_meta']['highlights']['base_meta']['constraints']
                     ?? null;
 
                 if (is_array($constraints)) {
                     $policy = [
-                        'min_total'    => (int)($constraints['total_min'] ?? 3),
-                        'max_total'    => (int)($constraints['total_max'] ?? 4),
-                        'max_strength' => (int)($constraints['max_strength'] ?? 2),
+                        'min_total' => (int) ($constraints['total_min'] ?? 3),
+                        'max_total' => (int) ($constraints['total_max'] ?? 4),
+                        'max_strength' => (int) ($constraints['max_strength'] ?? 2),
                     ];
                 }
             }
 
-            if (!is_array($policy)) {
+            if (! is_array($policy)) {
                 $policy = ['min_total' => 3, 'max_total' => 4, 'max_strength' => 2];
             }
 
-            $minTotal = (int)($policy['min_total'] ?? 3);
-            $maxTotal = (int)($policy['max_total'] ?? 4);
-            $maxStrength = (int)($policy['max_strength'] ?? 2);
+            $minTotal = (int) ($policy['min_total'] ?? 3);
+            $maxTotal = (int) ($policy['max_total'] ?? 4);
+            $maxStrength = (int) ($policy['max_strength'] ?? 2);
 
             $total = is_array($items) ? count($items) : 0;
 
@@ -134,27 +139,33 @@ class FapValidateReport extends Command
             $poolSet = [];
 
             foreach ($items as $it) {
-                if (!is_array($it)) continue;
-                $pool = (string)($it['pool'] ?? $it['kind'] ?? '');
-                if ($pool !== '') $poolSet[$pool] = true;
-                if ($pool === 'strength') $strengthCount++;
+                if (! is_array($it)) {
+                    continue;
+                }
+                $pool = (string) ($it['pool'] ?? $it['kind'] ?? '');
+                if ($pool !== '') {
+                    $poolSet[$pool] = true;
+                }
+                if ($pool === 'strength') {
+                    $strengthCount++;
+                }
             }
 
             $okH1 = ($total >= $minTotal && $total <= $maxTotal);
             $okH2 = ($strengthCount <= $maxStrength);
 
             $this->line(sprintf(
-                "highlights: total=%s in[%s,%s]=%s | strength.count=%s <= %s = %s",
+                'highlights: total=%s in[%s,%s]=%s | strength.count=%s <= %s = %s',
                 $total,
                 $minTotal,
                 $maxTotal,
-                ($okH1 ? "OK" : "FAIL"),
+                ($okH1 ? 'OK' : 'FAIL'),
                 $strengthCount,
                 $maxStrength,
-                ($okH2 ? "OK" : "FAIL")
+                ($okH2 ? 'OK' : 'FAIL')
             ));
 
-            if (!$okH1 || !$okH2) {
+            if (! $okH1 || ! $okH2) {
                 $failures++;
             }
 
@@ -162,31 +173,39 @@ class FapValidateReport extends Command
             $missingExplain = 0;
             $checkedExplain = 0;
             foreach ($items as $it) {
-                if (!is_array($it)) continue;
+                if (! is_array($it)) {
+                    continue;
+                }
                 $checkedExplain++;
                 $ex = $it['explain'] ?? null;
-                if (!is_string($ex) || trim($ex) === '') $missingExplain++;
+                if (! is_string($ex) || trim($ex) === '') {
+                    $missingExplain++;
+                }
             }
             $this->line(sprintf(
-                "highlights.explain: checked=%d missing=%d | %s",
+                'highlights.explain: checked=%d missing=%d | %s',
                 $checkedExplain,
                 $missingExplain,
-                ($missingExplain === 0 ? "OK" : "FAIL")
+                ($missingExplain === 0 ? 'OK' : 'FAIL')
             ));
-            if ($missingExplain > 0) $failures++;
+            if ($missingExplain > 0) {
+                $failures++;
+            }
 
             // pools>=3 (strength/blindspot/action)
             $pools = array_keys($poolSet);
             $okH4 = (count($pools) >= 3);
-            if (!empty($items)) {
+            if (! empty($items)) {
                 $this->line(
-                    "highlights.pools>=1: " .
-                    json_encode(array_slice($pools, 0, 10), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) .
-                    " | " . ($okH4 ? "OK" : "FAIL")
+                    'highlights.pools>=1: '.
+                    json_encode(array_slice($pools, 0, 10), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES).
+                    ' | '.($okH4 ? 'OK' : 'FAIL')
                 );
-                if (!$okH4) $failures++;
+                if (! $okH4) {
+                    $failures++;
+                }
             } else {
-                $this->line("highlights.pools>=1: SKIP (empty highlights)");
+                $this->line('highlights.pools>=1: SKIP (empty highlights)');
             }
         }
 
@@ -195,10 +214,12 @@ class FapValidateReport extends Command
         // -------------------------
         if ($failures > 0) {
             $this->error("FAILED: {$failures} assertion group(s) violated.");
+
             return self::FAILURE;
         }
 
         $this->info('PASS: runtime report assertions OK');
+
         return self::SUCCESS;
     }
 }

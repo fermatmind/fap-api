@@ -40,7 +40,7 @@ final class Eq60PsychometricsReport extends Command
 
     public function handle(): int
     {
-        if (!Schema::hasTable('eq60_psychometrics_reports')) {
+        if (! Schema::hasTable('eq60_psychometrics_reports')) {
             $this->error('Missing table eq60_psychometrics_reports. Run migrations first.');
 
             return 1;
@@ -90,15 +90,15 @@ final class Eq60PsychometricsReport extends Command
                 ?? data_get($payload, 'normed_json.quality.level')
                 ?? ''
             ));
-            if (!in_array($quality, ['A', 'B', 'C', 'D'], true)) {
+            if (! in_array($quality, ['A', 'B', 'C', 'D'], true)) {
                 continue;
             }
 
             $globalStd = data_get($payload, 'scores.global.std_score');
-            if (!is_numeric($globalStd)) {
+            if (! is_numeric($globalStd)) {
                 $globalStd = data_get($payload, 'normed_json.scores.global.std_score');
             }
-            if (!is_numeric($globalStd)) {
+            if (! is_numeric($globalStd)) {
                 continue;
             }
 
@@ -107,14 +107,14 @@ final class Eq60PsychometricsReport extends Command
                 $qualityCWorseCount++;
             }
 
-            if (!in_array($quality, $qualityLevels, true)) {
+            if (! in_array($quality, $qualityLevels, true)) {
                 continue;
             }
 
             $dimensionStd = [];
             foreach (self::DIMENSIONS as $dimension) {
                 $value = data_get($payload, 'scores.'.$dimension.'.std_score');
-                if (!is_numeric($value)) {
+                if (! is_numeric($value)) {
                     $value = data_get($payload, 'normed_json.scores.'.$dimension.'.std_score');
                 }
                 if (is_numeric($value)) {
@@ -123,7 +123,7 @@ final class Eq60PsychometricsReport extends Command
             }
 
             $flags = data_get($payload, 'quality.flags');
-            if (!is_array($flags)) {
+            if (! is_array($flags)) {
                 $flags = data_get($payload, 'normed_json.quality.flags');
             }
             $normalizedFlags = [];
@@ -135,7 +135,7 @@ final class Eq60PsychometricsReport extends Command
             }
 
             $tags = data_get($payload, 'report_tags');
-            if (!is_array($tags)) {
+            if (! is_array($tags)) {
                 $tags = data_get($payload, 'normed_json.report_tags');
             }
             $normalizedTags = [];
@@ -248,7 +248,7 @@ final class Eq60PsychometricsReport extends Command
         $levels = [];
         foreach ($parts as $part) {
             $candidate = strtoupper(trim((string) $part));
-            if (in_array($candidate, ['A', 'B', 'C', 'D'], true) && !in_array($candidate, $levels, true)) {
+            if (in_array($candidate, ['A', 'B', 'C', 'D'], true) && ! in_array($candidate, $levels, true)) {
                 $levels[] = $candidate;
             }
         }
@@ -407,7 +407,7 @@ final class Eq60PsychometricsReport extends Command
         if (is_array($json)) {
             return $json;
         }
-        if (!is_string($json) || trim($json) === '') {
+        if (! is_string($json) || trim($json) === '') {
             return [];
         }
 

@@ -25,8 +25,9 @@ class NormsBig5Roll extends Command
 
     public function handle(): int
     {
-        if (!Schema::hasTable('scale_norms_versions') || !Schema::hasTable('scale_norm_stats')) {
+        if (! Schema::hasTable('scale_norms_versions') || ! Schema::hasTable('scale_norm_stats')) {
             $this->error('Missing required tables: scale_norms_versions/scale_norm_stats.');
+
             return 1;
         }
 
@@ -54,14 +55,14 @@ class NormsBig5Roll extends Command
         foreach ($rows as $row) {
             $identity = trim((string) ($row->user_id ?? ''));
             if ($identity === '') {
-                $identity = 'anon:' . trim((string) ($row->anon_id ?? ''));
+                $identity = 'anon:'.trim((string) ($row->anon_id ?? ''));
             } else {
-                $identity = 'user:' . $identity;
+                $identity = 'user:'.$identity;
             }
             if ($identity === 'anon:') {
-                $identity = 'attempt:' . (string) $row->id;
+                $identity = 'attempt:'.(string) $row->id;
             }
-            if (!isset($deduped[$identity])) {
+            if (! isset($deduped[$identity])) {
                 $deduped[$identity] = $row;
             }
         }
@@ -70,21 +71,21 @@ class NormsBig5Roll extends Command
         foreach ($deduped as $row) {
             $payload = $this->decodeResultJson($row->result_json ?? null);
             $qualityLevel = strtoupper((string) data_get($payload, 'quality.level', ''));
-            if (!in_array($qualityLevel, ['A', 'B'], true)) {
+            if (! in_array($qualityLevel, ['A', 'B'], true)) {
                 continue;
             }
 
             $domains = data_get($payload, 'raw_scores.domains_mean');
             $facets = data_get($payload, 'raw_scores.facets_mean');
-            if (!is_array($domains) || !is_array($facets)) {
+            if (! is_array($domains) || ! is_array($facets)) {
                 continue;
             }
 
             $locale = $this->normalizeLocale((string) ($row->locale ?? ''));
             $region = $this->normalizeRegion((string) ($row->region ?? ''));
-            $groupId = $locale . '_prod_all_18-60';
+            $groupId = $locale.'_prod_all_18-60';
 
-            if (!isset($groups[$groupId])) {
+            if (! isset($groups[$groupId])) {
                 $groups[$groupId] = [
                     'locale' => $locale,
                     'region' => $region,
@@ -113,10 +114,11 @@ class NormsBig5Roll extends Command
 
         if ($groups === []) {
             $this->warn('No eligible BIG5 quality A/B records found for rolling norms.');
+
             return 0;
         }
 
-        $version = 'roll_' . now()->format('Ymd_His');
+        $version = 'roll_'.now()->format('Ymd_His');
         $thresholds = (array) config('big5_norms.rolling.publish_thresholds', []);
         $published = 0;
 
@@ -128,11 +130,13 @@ class NormsBig5Roll extends Command
                 $threshold = (int) ($thresholds[$groupId] ?? PHP_INT_MAX);
                 if ($sampleN < $threshold) {
                     $this->line("skip {$groupId}: sample_n={$sampleN} threshold={$threshold}");
+
                     continue;
                 }
 
-                if (!$this->hasCoverage($group)) {
+                if (! $this->hasCoverage($group)) {
                     $this->line("skip {$groupId}: metric coverage incomplete");
+
                     continue;
                 }
 
@@ -153,7 +157,7 @@ class NormsBig5Roll extends Command
                     'status' => 'CALIBRATED',
                     'is_active' => 1,
                     'published_at' => $now,
-                    'checksum' => hash('sha256', $groupId . '|' . $version . '|' . $sampleN),
+                    'checksum' => hash('sha256', $groupId.'|'.$version.'|'.$sampleN),
                     'meta_json' => json_encode(['window_days' => (int) $this->option('window_days')], JSON_UNESCAPED_UNICODE),
                     'created_at' => $now,
                     'updated_at' => $now,
@@ -214,6 +218,7 @@ class NormsBig5Roll extends Command
 
         if ($published === 0) {
             $this->warn('No BIG5 rolling norms published (threshold/coverage constraints).');
+
             return 0;
         }
 
@@ -272,10 +277,11 @@ class NormsBig5Roll extends Command
         $parts = explode('-', $locale);
         if (count($parts) === 1) {
             $lang = strtolower($parts[0]);
+
             return $lang === 'zh' ? 'zh-CN' : $lang;
         }
 
-        return strtolower($parts[0]) . '-' . strtoupper($parts[1]);
+        return strtolower($parts[0]).'-'.strtoupper($parts[1]);
     }
 
     private function normalizeRegion(string $region): string
@@ -294,7 +300,7 @@ class NormsBig5Roll extends Command
             return $value;
         }
 
-        if (!is_string($value) || trim($value) === '') {
+        if (! is_string($value) || trim($value) === '') {
             return [];
         }
 

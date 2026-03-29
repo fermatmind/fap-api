@@ -89,7 +89,7 @@ final class ScaleIdentityGate extends Command
                 ));
             }
             if ($violations !== []) {
-                $this->warn('violations=' . json_encode($violations, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+                $this->warn('violations='.json_encode($violations, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
             }
         }
 
@@ -124,10 +124,10 @@ final class ScaleIdentityGate extends Command
                     continue;
                 }
                 if ($codeV1 !== '') {
-                    $checks[$codeV1 . '|' . $scaleUid] = ['code' => $codeV1, 'scale_uid' => $scaleUid];
+                    $checks[$codeV1.'|'.$scaleUid] = ['code' => $codeV1, 'scale_uid' => $scaleUid];
                 }
                 if ($codeV2 !== '') {
-                    $checks[$codeV2 . '|' . $scaleUid] = ['code' => $codeV2, 'scale_uid' => $scaleUid];
+                    $checks[$codeV2.'|'.$scaleUid] = ['code' => $codeV2, 'scale_uid' => $scaleUid];
                 }
             }
 
@@ -141,7 +141,7 @@ final class ScaleIdentityGate extends Command
                     if ($aliasCode === '' || $scaleUid === '') {
                         continue;
                     }
-                    $checks[$aliasCode . '|' . $scaleUid] = ['code' => $aliasCode, 'scale_uid' => $scaleUid];
+                    $checks[$aliasCode.'|'.$scaleUid] = ['code' => $aliasCode, 'scale_uid' => $scaleUid];
                 }
             }
 
@@ -422,6 +422,7 @@ final class ScaleIdentityGate extends Command
         }
 
         $normalized = strtolower(trim((string) $value));
+
         return in_array($normalized, ['1', 'true', 'yes', 'on'], true);
     }
 
@@ -444,7 +445,8 @@ final class ScaleIdentityGate extends Command
         $normalized = trim($relativePath, '/');
         if ($scope === 'content_packages') {
             $root = rtrim((string) config('content_packs.root', base_path('../content_packages')), DIRECTORY_SEPARATOR);
-            return $root . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $normalized);
+
+            return $root.DIRECTORY_SEPARATOR.str_replace('/', DIRECTORY_SEPARATOR, $normalized);
         }
 
         return base_path($normalized);

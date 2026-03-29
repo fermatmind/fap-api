@@ -2,12 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Controllers\HealthzController;
 use Illuminate\Console\Command;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Http\Request;
-use App\Http\Controllers\HealthzController;
 
 class OpsHealthzSnapshot extends Command
 {
@@ -29,7 +29,7 @@ class OpsHealthzSnapshot extends Command
             $baseUrl = (string) (\App\Support\RuntimeConfig::raw('FAP_BASE_URL') ?: 'http://127.0.0.1:8000');
         }
 
-        $url = rtrim($baseUrl, '/') . '/api/healthz';
+        $url = rtrim($baseUrl, '/').'/api/healthz';
 
         try {
             $data = null;
@@ -49,13 +49,14 @@ class OpsHealthzSnapshot extends Command
                 $data = $this->fetchLocalHealthz();
             }
 
-            if (!is_array($data)) {
+            if (! is_array($data)) {
                 $this->error('Healthz response not available');
+
                 return 1;
             }
 
             $deps = $data['deps'] ?? [];
-            if (!is_array($deps)) {
+            if (! is_array($deps)) {
                 $deps = [];
             }
 
@@ -66,7 +67,7 @@ class OpsHealthzSnapshot extends Command
             DB::table('ops_healthz_snapshots')->insert([
                 'env' => $env,
                 'revision' => $this->resolveRevision(),
-                'ok' => !empty($data['ok']) ? 1 : 0,
+                'ok' => ! empty($data['ok']) ? 1 : 0,
                 'deps_json' => $depsJson,
                 'error_codes_json' => $errorJson,
                 'occurred_at' => now(),
@@ -75,11 +76,13 @@ class OpsHealthzSnapshot extends Command
             ]);
         } catch (\Throwable $e) {
             Log::warning('[ops:healthz-snapshot] failed', ['error' => $e->getMessage()]);
-            $this->error('Failed: ' . $e->getMessage());
+            $this->error('Failed: '.$e->getMessage());
+
             return 1;
         }
 
         $this->info('ok');
+
         return 0;
     }
 
@@ -89,11 +92,11 @@ class OpsHealthzSnapshot extends Command
         $counts = [];
 
         foreach ($deps as $dep) {
-            if (!is_array($dep)) {
+            if (! is_array($dep)) {
                 continue;
             }
             $code = $dep['error_code'] ?? null;
-            if (!is_string($code) || trim($code) === '') {
+            if (! is_string($code) || trim($code) === '') {
                 continue;
             }
             $code = trim($code);
@@ -150,8 +153,8 @@ class OpsHealthzSnapshot extends Command
         }
 
         $repoRoot = base_path('..');
-        if (is_dir($repoRoot . '/.git')) {
-            $cmd = 'git -C ' . escapeshellarg($repoRoot) . ' rev-parse HEAD 2>/dev/null';
+        if (is_dir($repoRoot.'/.git')) {
+            $cmd = 'git -C '.escapeshellarg($repoRoot).' rev-parse HEAD 2>/dev/null';
             $rev = trim((string) @shell_exec($cmd));
             if ($rev !== '') {
                 return $rev;

@@ -57,7 +57,7 @@ final class NormsBig5BootstrapBuild extends Command
         $source = trim((string) $this->option('source'));
         $profiles = (array) config('big5_norms.bootstrap.sources', []);
         $profile = $profiles[$source] ?? null;
-        if (!is_array($profile)) {
+        if (! is_array($profile)) {
             $this->error("unknown --source={$source}");
 
             return 1;
@@ -89,7 +89,7 @@ final class NormsBig5BootstrapBuild extends Command
         $build = [];
         if ($inputPath !== '' && is_file($inputPath)) {
             $parsedInput = $this->readCsv($inputPath);
-            if (!($parsedInput['ok'] ?? false)) {
+            if (! ($parsedInput['ok'] ?? false)) {
                 foreach ((array) ($parsedInput['errors'] ?? []) as $error) {
                     $this->error((string) $error);
                 }
@@ -103,7 +103,7 @@ final class NormsBig5BootstrapBuild extends Command
             $fallbackGroupId = trim((string) ($profile['fallback_group_id'] ?? ''));
             $fallbackRawPath = $this->resolvePath((string) config('big5_norms.bootstrap.fallback_raw_csv', 'content_packs/BIG5_OCEAN/v1/raw/norm_stats.csv'));
             $fallback = $this->readFallbackNormRows($fallbackRawPath, $fallbackGroupId);
-            if (!($fallback['ok'] ?? false)) {
+            if (! ($fallback['ok'] ?? false)) {
                 foreach ((array) ($fallback['errors'] ?? []) as $error) {
                     $this->error((string) $error);
                 }
@@ -114,7 +114,7 @@ final class NormsBig5BootstrapBuild extends Command
             $sourceMode = 'fallback_norm_rows';
         }
 
-        if (!($build['ok'] ?? false)) {
+        if (! ($build['ok'] ?? false)) {
             foreach ((array) ($build['errors'] ?? []) as $error) {
                 $this->error((string) $error);
             }
@@ -150,7 +150,7 @@ final class NormsBig5BootstrapBuild extends Command
         $existingRows = [];
         if (is_file($outputPath)) {
             $parsedSeed = $this->readCsv($outputPath, self::REQUIRED_HEADERS);
-            if (!($parsedSeed['ok'] ?? false)) {
+            if (! ($parsedSeed['ok'] ?? false)) {
                 foreach ((array) ($parsedSeed['errors'] ?? []) as $error) {
                     $this->error((string) $error);
                 }
@@ -227,9 +227,9 @@ final class NormsBig5BootstrapBuild extends Command
 
         $computeSpecHash = $this->computeSpecHash((string) config('big5_norms.bootstrap.hash_algo', 'sha256'));
         $csvWritten = false;
-        if (!$dryRun) {
+        if (! $dryRun) {
             $csvWritten = $this->writeCsv($outputPath, self::REQUIRED_HEADERS, $mergedRows);
-            if (!$csvWritten) {
+            if (! $csvWritten) {
                 $this->error("failed to write output csv: {$outputPath}");
 
                 return 1;
@@ -262,10 +262,10 @@ final class NormsBig5BootstrapBuild extends Command
             'output_csv_path' => $outputPath,
         ];
 
-        if (!$dryRun) {
+        if (! $dryRun) {
             $artifactPath = $this->resolveArtifactPath((string) $this->option('artifact'), $normsVersion, $groupId);
             $artifactDir = dirname($artifactPath);
-            if (!is_dir($artifactDir)) {
+            if (! is_dir($artifactDir)) {
                 File::makeDirectory($artifactDir, 0755, true);
             }
             File::put(
@@ -309,13 +309,13 @@ final class NormsBig5BootstrapBuild extends Command
     }
 
     /**
-     * @param list<string> $headers
-     * @param list<array<string,mixed>> $rows
+     * @param  list<string>  $headers
+     * @param  list<array<string,mixed>>  $rows
      */
     private function writeCsv(string $path, array $headers, array $rows): bool
     {
         $dir = dirname($path);
-        if (!is_dir($dir)) {
+        if (! is_dir($dir)) {
             File::makeDirectory($dir, 0755, true);
         }
 
@@ -341,12 +341,12 @@ final class NormsBig5BootstrapBuild extends Command
     }
 
     /**
-     * @param list<string>|null $requiredHeaders
+     * @param  list<string>|null  $requiredHeaders
      * @return array{ok: bool, rows?: list<array<string,string>>, errors?: list<string>}
      */
     private function readCsv(string $path, ?array $requiredHeaders = null): array
     {
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             return [
                 'ok' => false,
                 'errors' => ["csv not found: {$path}"],
@@ -363,7 +363,7 @@ final class NormsBig5BootstrapBuild extends Command
 
         try {
             $header = fgetcsv($handle);
-            if (!is_array($header) || $header === []) {
+            if (! is_array($header) || $header === []) {
                 return [
                     'ok' => false,
                     'errors' => ["csv missing header: {$path}"],
@@ -372,7 +372,7 @@ final class NormsBig5BootstrapBuild extends Command
             $header = array_map(static fn ($value): string => trim((string) $value), $header);
             if (is_array($requiredHeaders)) {
                 foreach ($requiredHeaders as $required) {
-                    if (!in_array($required, $header, true)) {
+                    if (! in_array($required, $header, true)) {
                         return [
                             'ok' => false,
                             'errors' => ["csv missing header {$required}: {$path}"],
@@ -383,7 +383,7 @@ final class NormsBig5BootstrapBuild extends Command
 
             $rows = [];
             while (($raw = fgetcsv($handle)) !== false) {
-                if (!is_array($raw)) {
+                if (! is_array($raw)) {
                     continue;
                 }
                 $assoc = [];
@@ -416,7 +416,7 @@ final class NormsBig5BootstrapBuild extends Command
         }
 
         $parsed = $this->readCsv($path);
-        if (!($parsed['ok'] ?? false)) {
+        if (! ($parsed['ok'] ?? false)) {
             return $parsed;
         }
 
@@ -529,7 +529,7 @@ final class NormsBig5BootstrapBuild extends Command
         if ($root === '') {
             $root = storage_path('app/norm_sources/big5');
         }
-        if (!str_starts_with($root, '/')) {
+        if (! str_starts_with($root, '/')) {
             $root = $this->resolvePath($root);
         }
 
@@ -552,7 +552,7 @@ final class NormsBig5BootstrapBuild extends Command
         $policyPath = base_path('content_packs/BIG5_OCEAN/v1/raw/policy.json');
         $policyRaw = is_file($policyPath) ? (string) file_get_contents($policyPath) : '{}';
         $policy = json_decode($policyRaw, true);
-        if (!is_array($policy)) {
+        if (! is_array($policy)) {
             $policy = [];
         }
 

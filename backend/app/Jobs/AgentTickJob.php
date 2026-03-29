@@ -9,7 +9,6 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class AgentTickJob implements ShouldQueue
 {
@@ -17,11 +16,11 @@ class AgentTickJob implements ShouldQueue
 
     public function handle(): void
     {
-        if (!(bool) config('agent.enabled', false)) {
+        if (! (bool) config('agent.enabled', false)) {
             return;
         }
 
-        if (!\App\Support\SchemaBaseline::hasTable('user_agent_settings')) {
+        if (! \App\Support\SchemaBaseline::hasTable('user_agent_settings')) {
             return;
         }
 

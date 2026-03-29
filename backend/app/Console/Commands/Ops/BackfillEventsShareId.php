@@ -17,7 +17,7 @@ class BackfillEventsShareId extends Command
     public function handle(): int
     {
         if ((bool) $this->option('sync')) {
-            (new BackfillEventsShareIdJob())->handle();
+            (new BackfillEventsShareIdJob)->handle();
             $this->info('events share_id backfill completed (sync)');
 
             return self::SUCCESS;

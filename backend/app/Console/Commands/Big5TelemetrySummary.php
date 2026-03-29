@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -90,7 +89,7 @@ final class Big5TelemetrySummary extends Command
     }
 
     /**
-     * @param Collection<int,object> $rows
+     * @param  Collection<int,object>  $rows
      * @return array{numerator:int,denominator:int,rate:float}
      */
     private function computeReportFailureRate(Collection $rows): array
@@ -108,6 +107,7 @@ final class Big5TelemetrySummary extends Command
 
             if ($code === 'big5_report_compose_failed') {
                 $failed++;
+
                 continue;
             }
 
@@ -121,7 +121,7 @@ final class Big5TelemetrySummary extends Command
     }
 
     /**
-     * @param Collection<int,object> $rows
+     * @param  Collection<int,object>  $rows
      * @return array{
      *   fallback:array{numerator:int,denominator:int,rate:float},
      *   missing:array{numerator:int,denominator:int,rate:float}
@@ -149,7 +149,7 @@ final class Big5TelemetrySummary extends Command
 
             $isCalibrated = $status === 'CALIBRATED';
             $isProdGroup = $group !== '' && str_contains($group, '_prod_');
-            if (!$isCalibrated || !$isProdGroup) {
+            if (! $isCalibrated || ! $isProdGroup) {
                 $fallback++;
             }
         }
@@ -161,7 +161,7 @@ final class Big5TelemetrySummary extends Command
     }
 
     /**
-     * @param Collection<int,object> $rows
+     * @param  Collection<int,object>  $rows
      * @return array{
      *   unlock_success:array{numerator:int,denominator:int,rate:float},
      *   webhook_failed:array{numerator:int,denominator:int,rate:float}
@@ -195,7 +195,7 @@ final class Big5TelemetrySummary extends Command
     }
 
     /**
-     * @param Collection<int,object> $rows
+     * @param  Collection<int,object>  $rows
      * @return array{numerator:int,denominator:int,rate:float}
      */
     private function computeLocaleMismatchRate(Collection $rows): array
@@ -211,7 +211,7 @@ final class Big5TelemetrySummary extends Command
             }
 
             $total++;
-            if (!in_array($locale, $allowed, true)) {
+            if (! in_array($locale, $allowed, true)) {
                 $mismatch++;
             }
         }
@@ -241,11 +241,12 @@ final class Big5TelemetrySummary extends Command
         if (is_array($raw)) {
             return $raw;
         }
-        if (!is_string($raw) || trim($raw) === '') {
+        if (! is_string($raw) || trim($raw) === '') {
             return [];
         }
 
         $decoded = json_decode($raw, true);
+
         return is_array($decoded) ? $decoded : [];
     }
 
@@ -256,7 +257,7 @@ final class Big5TelemetrySummary extends Command
         }
 
         $normalized = strtolower(trim((string) $value));
+
         return in_array($normalized, ['1', 'true', 'yes', 'on'], true);
     }
 }
-

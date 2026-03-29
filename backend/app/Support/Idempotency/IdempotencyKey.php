@@ -41,6 +41,7 @@ class IdempotencyKey
     public static function hashPayload($payload): string
     {
         $canonical = self::canonicalJson($payload);
+
         return hash('sha256', $canonical);
     }
 
@@ -51,6 +52,7 @@ class IdempotencyKey
         if ($json === false) {
             return '';
         }
+
         return $json;
     }
 
@@ -82,6 +84,7 @@ class IdempotencyKey
             foreach ($value as $k => $v) {
                 $value[$k] = self::normalize($v);
             }
+
             return $value;
         }
 
@@ -91,6 +94,7 @@ class IdempotencyKey
             foreach ($arr as $k => $v) {
                 $arr[$k] = self::normalize($v);
             }
+
             return $arr;
         }
 

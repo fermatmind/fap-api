@@ -17,7 +17,9 @@ class BackfillEventsShareIdJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public int $tries = 3;
+
     public array $backoff = [5, 10, 20];
+
     public int $timeout = 120;
 
     private const BATCH_SIZE = 1000;
@@ -77,7 +79,7 @@ class BackfillEventsShareIdJob implements ShouldQueue
     }
 
     /**
-     * @param array<int, array{id:string,share_id:string,updated_at:mixed}> $rows
+     * @param  array<int, array{id:string,share_id:string,updated_at:mixed}>  $rows
      */
     private function flush(array $rows): int
     {

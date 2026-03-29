@@ -195,4 +195,3 @@ final class NormsBig5DriftCheck extends Command
         return $out;
     }
 }
-

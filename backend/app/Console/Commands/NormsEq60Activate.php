@@ -21,7 +21,7 @@ final class NormsEq60Activate extends Command
 
     public function handle(): int
     {
-        if (!Schema::hasTable('scale_norms_versions')) {
+        if (! Schema::hasTable('scale_norms_versions')) {
             $this->error('Missing required table: scale_norms_versions.');
 
             return 1;

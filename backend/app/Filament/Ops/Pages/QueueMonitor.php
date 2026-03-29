@@ -59,7 +59,7 @@ class QueueMonitor extends Page
         return $count > 0 ? (string) $count : null;
     }
 
-    public static function getNavigationBadgeColor(): string | array | null
+    public static function getNavigationBadgeColor(): string|array|null
     {
         return 'danger';
     }

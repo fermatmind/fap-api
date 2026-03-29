@@ -11,9 +11,13 @@ final class OrgContext
     public const KIND_TENANT = 'tenant';
 
     private int $orgId = 0;
+
     private ?int $userId = null;
+
     private ?string $role = null;
+
     private ?string $anonId = null;
+
     private string $contextKind = self::KIND_PUBLIC;
 
     public function set(int $orgId, ?int $userId, ?string $role, ?string $anonId = null, ?string $contextKind = null): void
@@ -43,7 +47,7 @@ final class OrgContext
     {
         $orgId = $this->orgId();
         if ($orgId <= 0) {
-            throw new OrgContextMissingException();
+            throw new OrgContextMissingException;
         }
 
         return $orgId;
@@ -91,7 +95,7 @@ final class OrgContext
 
     private function resolveOrgIdFromRequest(): ?int
     {
-        if (!app()->bound('request')) {
+        if (! app()->bound('request')) {
             return null;
         }
 
@@ -117,7 +121,7 @@ final class OrgContext
 
     private function normalizeOrgId(mixed $candidate): ?int
     {
-        if (!is_int($candidate) && !is_string($candidate) && !is_numeric($candidate)) {
+        if (! is_int($candidate) && ! is_string($candidate) && ! is_numeric($candidate)) {
             return null;
         }
 

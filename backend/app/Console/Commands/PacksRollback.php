@@ -44,6 +44,7 @@ final class PacksRollback extends Command
 
         if (! $this->isSafePathSegment($region) || ! $this->isSafePathSegment($locale) || ! $this->isSafePathSegment($dirAlias)) {
             $this->error('invalid --region/--locale/--dir_alias value.');
+
             return 1;
         }
 
@@ -81,7 +82,6 @@ final class PacksRollback extends Command
 
         return $status === 'success' ? 0 : 1;
     }
-
 
     private function isSafePathSegment(string $value): bool
     {

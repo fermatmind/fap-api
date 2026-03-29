@@ -43,6 +43,7 @@ class NormsImport extends Command
     ];
 
     private const SDS_METRIC_LEVEL = 'global';
+
     private const SDS_METRIC_CODE = 'INDEX_SCORE';
 
     protected $signature = 'norms:import
@@ -55,14 +56,16 @@ class NormsImport extends Command
 
     public function handle(): int
     {
-        if (!Schema::hasTable('scale_norms_versions') || !Schema::hasTable('scale_norm_stats')) {
+        if (! Schema::hasTable('scale_norms_versions') || ! Schema::hasTable('scale_norm_stats')) {
             $this->error('Missing required tables: scale_norms_versions/scale_norm_stats. Run migrations first.');
+
             return 1;
         }
 
         $scaleCode = strtoupper(trim((string) $this->option('scale')));
         if ($scaleCode === '') {
             $this->error('--scale is required.');
+
             return 1;
         }
 
@@ -71,7 +74,7 @@ class NormsImport extends Command
             $csvPath = $scaleCode === 'SDS_20'
                 ? base_path('resources/norms/sds/sds_norm_stats_seed.csv')
                 : base_path('resources/norms/big5/big5_norm_stats_seed.csv');
-        } elseif (!str_starts_with($csvPath, '/')) {
+        } elseif (! str_starts_with($csvPath, '/')) {
             $csvPath = base_path($csvPath);
         }
 
@@ -79,20 +82,22 @@ class NormsImport extends Command
         $activate = $this->isTruthy($this->option('activate'));
 
         $parse = $this->readCsv($csvPath);
-        if (!($parse['ok'] ?? false)) {
+        if (! ($parse['ok'] ?? false)) {
             foreach ((array) ($parse['errors'] ?? []) as $err) {
                 $this->error((string) $err);
             }
+
             return 1;
         }
 
         $rows = (array) ($parse['rows'] ?? []);
         [$ok, $errors, $groups, $canonicalRows] = $this->validateRows($rows, $scaleCode);
 
-        if (!$ok) {
+        if (! $ok) {
             foreach ($errors as $err) {
                 $this->error($err);
             }
+
             return 1;
         }
 
@@ -104,10 +109,11 @@ class NormsImport extends Command
         }
 
         $checksum = hash('sha256', json_encode($canonicalRows, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-        $this->info('checksum=' . $checksum);
+        $this->info('checksum='.$checksum);
 
         if ($dryRun) {
             $this->info('dry-run=1, no write performed.');
+
             return 0;
         }
 
@@ -161,6 +167,7 @@ class NormsImport extends Command
         });
 
         $this->info(sprintf('imported groups=%d from %s', count($groups), $csvPath));
+
         return 0;
     }
 
@@ -213,7 +220,7 @@ class NormsImport extends Command
 
     private function upsertSources(array $groups, $now): void
     {
-        if (!Schema::hasTable('norm_sources')) {
+        if (! Schema::hasTable('norm_sources')) {
             return;
         }
 
@@ -252,7 +259,7 @@ class NormsImport extends Command
             if ($sourceId === '') {
                 continue;
             }
-            if (!isset($sourceRows[$sourceId])) {
+            if (! isset($sourceRows[$sourceId])) {
                 $sourceRows[$sourceId] = [
                     'source_id' => $sourceId,
                     'title' => $sourceId,
@@ -290,6 +297,7 @@ class NormsImport extends Command
             $scale = strtoupper(trim((string) ($row['scale_code'] ?? '')));
             if ($scale !== $scaleCode) {
                 $errors[] = "line {$rowNo}: scale_code must be {$scaleCode}, got {$scale}";
+
                 continue;
             }
 
@@ -322,11 +330,11 @@ class NormsImport extends Command
                 $errors[] = "line {$rowNo}: invalid age_min/age_max";
             }
 
-            if (!in_array($attrs['source_type'], ['open_dataset', 'peer_reviewed', 'internal_prod'], true)) {
+            if (! in_array($attrs['source_type'], ['open_dataset', 'peer_reviewed', 'internal_prod'], true)) {
                 $errors[] = "line {$rowNo}: invalid source_type={$attrs['source_type']}";
             }
 
-            if (!in_array($attrs['status'], ['BOOTSTRAP', 'CALIBRATED', 'RETIRED'], true)) {
+            if (! in_array($attrs['status'], ['BOOTSTRAP', 'CALIBRATED', 'RETIRED'], true)) {
                 $errors[] = "line {$rowNo}: invalid status={$attrs['status']}";
             }
 
@@ -342,7 +350,7 @@ class NormsImport extends Command
             $sampleN = (int) ($row['sample_n'] ?? 0);
 
             if ($isSdsScale) {
-                if (!in_array($metricLevel, ['global', 'index'], true)) {
+                if (! in_array($metricLevel, ['global', 'index'], true)) {
                     $errors[] = "line {$rowNo}: invalid metric_level={$metricLevel} for SDS_20";
                 }
                 if ($metricCode !== self::SDS_METRIC_CODE) {
@@ -352,14 +360,14 @@ class NormsImport extends Command
                     $errors[] = "line {$rowNo}: mean must be in [0,100] for SDS_20";
                 }
             } else {
-                if (!in_array($metricLevel, ['domain', 'facet'], true)) {
+                if (! in_array($metricLevel, ['domain', 'facet'], true)) {
                     $errors[] = "line {$rowNo}: invalid metric_level={$metricLevel}";
                 }
 
-                if ($metricLevel === 'domain' && !in_array($metricCode, self::DOMAINS, true)) {
+                if ($metricLevel === 'domain' && ! in_array($metricCode, self::DOMAINS, true)) {
                     $errors[] = "line {$rowNo}: invalid domain metric_code={$metricCode}";
                 }
-                if ($metricLevel === 'facet' && !in_array($metricCode, self::FACETS, true)) {
+                if ($metricLevel === 'facet' && ! in_array($metricCode, self::FACETS, true)) {
                     $errors[] = "line {$rowNo}: invalid facet metric_code={$metricCode}";
                 }
 
@@ -382,7 +390,7 @@ class NormsImport extends Command
                 $attrs['group_id'],
             ]);
 
-            if (!isset($groups[$groupKey])) {
+            if (! isset($groups[$groupKey])) {
                 $groups[$groupKey] = [
                     'attrs' => $attrs,
                     'metrics' => [],
@@ -397,9 +405,10 @@ class NormsImport extends Command
                 $errors[] = "line {$rowNo}: is_active must be consistent within group {$groupKey}";
             }
 
-            $metricKey = $metricLevel . ':' . $metricCode;
+            $metricKey = $metricLevel.':'.$metricCode;
             if (isset($groups[$groupKey]['metrics'][$metricKey])) {
                 $errors[] = "line {$rowNo}: duplicated metric {$metricKey} in group {$groupKey}";
+
                 continue;
             }
 
@@ -424,7 +433,7 @@ class NormsImport extends Command
         foreach ($groups as $groupKey => $group) {
             if ($isSdsScale) {
                 $globalCoverage = array_keys((array) ($group['coverage']['global'] ?? []));
-                if (count($globalCoverage) !== 1 || !in_array(self::SDS_METRIC_CODE, $globalCoverage, true)) {
+                if (count($globalCoverage) !== 1 || ! in_array(self::SDS_METRIC_CODE, $globalCoverage, true)) {
                     $errors[] = 'group '.$groupKey.': global coverage must contain INDEX_SCORE';
                 }
 
@@ -464,7 +473,7 @@ class NormsImport extends Command
     }
 
     /**
-     * @param array<string,mixed> $group
+     * @param  array<string,mixed>  $group
      */
     private function coverageSummaryLine(string $scaleCode, array $group): string
     {
@@ -487,7 +496,7 @@ class NormsImport extends Command
 
     private function readCsv(string $path, ?array $requiredHeaders = null): array
     {
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             return ['ok' => false, 'errors' => ["csv not found: {$path}"]];
         }
 
@@ -506,6 +515,7 @@ class NormsImport extends Command
             $line++;
             if ($line === 1) {
                 $header = array_map(static fn ($v): string => trim((string) $v), (array) $csv);
+
                 continue;
             }
 

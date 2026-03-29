@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use Carbon\CarbonImmutable;
 
 class FapWeeklyReport extends Command
 {
@@ -22,7 +22,7 @@ class FapWeeklyReport extends Command
 
     public function handle(): int
     {
-        $days  = max(1, (int) $this->option('days'));
+        $days = max(1, (int) $this->option('days'));
         $limit = max(1, (int) $this->option('limit'));
 
         // ✅ 用 UTC 口径，和你手动 SQL 的 UTC_TIMESTAMP 保持一致
@@ -79,7 +79,7 @@ class FapWeeklyReport extends Command
 
         $overall = DB::selectOne($overallSql, [$since]);
 
-        $this->info("FAP Weekly Report (attempt-deduped, funnel-only)");
+        $this->info('FAP Weekly Report (attempt-deduped, funnel-only)');
         $this->line("Window (UTC): last {$days} day(s), since {$since}");
 
         $this->table(
@@ -139,7 +139,7 @@ class FapWeeklyReport extends Command
 
             $rows = DB::select($byTypeSql, [$since]);
 
-            $this->line("");
+            $this->line('');
             $this->info("Breakdown by type_code (top {$limit})");
 
             $tableRows = array_map(function ($r) {

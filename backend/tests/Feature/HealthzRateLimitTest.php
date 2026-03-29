@@ -39,7 +39,7 @@ class HealthzRateLimitTest extends TestCase
 
         $server = ['REMOTE_ADDR' => '198.51.100.23'];
         $ip = Request::create('/api/healthz', 'GET', [], [], [], $server)->ip();
-        app(RateLimiter::class)->clear(md5('api_public' . 'ip:' . $ip));
+        app(RateLimiter::class)->clear(md5('api_public'.'ip:'.$ip));
 
         $this->withServerVariables($server)->getJson('/api/healthz')->assertStatus(200);
         $this->withServerVariables($server)->getJson('/api/healthz')->assertStatus(200);

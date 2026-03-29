@@ -52,7 +52,7 @@ final class ResilientClient
             throw $e;
         }
 
-        if (!$response->successful()) {
+        if (! $response->successful()) {
             self::logFailure($url, $response->status(), $startedAt);
         }
 
@@ -70,7 +70,7 @@ final class ResilientClient
             throw $e;
         }
 
-        if (!$response->successful()) {
+        if (! $response->successful()) {
             self::logFailure($url, $response->status(), $startedAt);
         }
 

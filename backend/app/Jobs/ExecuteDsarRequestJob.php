@@ -270,7 +270,6 @@ final class ExecuteDsarRequestJob implements ShouldQueue
     }
 
     /**
-     * @param  object  $requestRow
      * @param  array{
      *   attempts:int,
      *   max_tries:int,

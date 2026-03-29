@@ -17,7 +17,7 @@ final class RedactProcessor
     private array $sensitiveKeyParts = [];
 
     /**
-     * @param list<string>|null $keys
+     * @param  list<string>|null  $keys
      */
     public function __construct(?array $keys = null)
     {
@@ -49,7 +49,7 @@ final class RedactProcessor
     }
 
     /**
-     * @param array<string, mixed>|LogRecord $record
+     * @param  array<string, mixed>|LogRecord  $record
      * @return array<string, mixed>|LogRecord
      */
     public function __invoke(array|LogRecord $record): array|LogRecord
@@ -73,7 +73,7 @@ final class RedactProcessor
     }
 
     /**
-     * @param array<mixed> $data
+     * @param  array<mixed>  $data
      * @return array<mixed>
      */
     private function redactArray(array $data): array
@@ -83,11 +83,13 @@ final class RedactProcessor
         foreach ($data as $key => $value) {
             if ($this->isSensitiveKey($key)) {
                 $result[$key] = self::REDACTED;
+
                 continue;
             }
 
             if (is_array($value)) {
                 $result[$key] = $this->redactArray($value);
+
                 continue;
             }
 

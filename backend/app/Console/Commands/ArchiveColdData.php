@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Schema;
 class ArchiveColdData extends Command
 {
     protected $signature = 'fap:archive:cold-data {--before=}';
+
     protected $description = 'Archive cold data into JSONL.gz and record audits.';
 
     public function handle(): int
@@ -17,6 +18,7 @@ class ArchiveColdData extends Command
         $beforeRaw = (string) ($this->option('before') ?? '');
         if ($beforeRaw === '') {
             $this->error('Missing --before=YYYY-MM-DD');
+
             return 1;
         }
 
@@ -24,6 +26,7 @@ class ArchiveColdData extends Command
             $before = Carbon::parse($beforeRaw)->startOfDay();
         } catch (\Throwable $e) {
             $this->error('Invalid --before date.');
+
             return 1;
         }
 
@@ -35,8 +38,9 @@ class ArchiveColdData extends Command
 
         $results = [];
         foreach ($tables as $table => $dateColumn) {
-            if (!Schema::hasTable($table) || !Schema::hasColumn($table, $dateColumn)) {
+            if (! Schema::hasTable($table) || ! Schema::hasColumn($table, $dateColumn)) {
                 $results[] = ['table' => $table, 'skipped' => true, 'reason' => 'missing'];
+
                 continue;
             }
 
@@ -45,6 +49,7 @@ class ArchiveColdData extends Command
         }
 
         $this->info(json_encode(['ok' => true, 'results' => $results], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+
         return 0;
     }
 
@@ -53,7 +58,7 @@ class ArchiveColdData extends Command
         $rowCount = 0;
         $archivePath = $this->archivePath($table, $before);
         $dir = dirname($archivePath);
-        if (!is_dir($dir)) {
+        if (! is_dir($dir)) {
             mkdir($dir, 0777, true);
         }
 
@@ -71,7 +76,7 @@ class ArchiveColdData extends Command
                     if ($json === false) {
                         $json = '{}';
                     }
-                    gzwrite($handle, $json . "\n");
+                    gzwrite($handle, $json."\n");
                     $rowCount++;
                 }
             });
@@ -96,7 +101,7 @@ class ArchiveColdData extends Command
         if ($driver === 'mysql') {
             $this->dropMysqlPartitions($table, $before);
         } else {
-            $this->line('sqlite/other driver: skip partition drop for ' . $table);
+            $this->line('sqlite/other driver: skip partition drop for '.$table);
         }
 
         return [
@@ -117,7 +122,8 @@ class ArchiveColdData extends Command
         $base = (string) config('fap_attempts.archive_path', storage_path('app/archives'));
         $stamp = now()->format('Ymd_His');
         $beforeTag = $before->format('Ymd');
-        return rtrim($base, '/') . '/' . $table . '/' . $table . '_before_' . $beforeTag . '_' . $stamp . '.jsonl.gz';
+
+        return rtrim($base, '/').'/'.$table.'/'.$table.'_before_'.$beforeTag.'_'.$stamp.'.jsonl.gz';
     }
 
     private function archiveUri(string $path): string
@@ -127,17 +133,19 @@ class ArchiveColdData extends Command
             $bucket = (string) config('fap_attempts.archive_bucket', '');
             $prefix = trim((string) config('fap_attempts.archive_prefix', 'archives'), '/');
             $name = basename($path);
-            return 's3://' . $bucket . '/' . $prefix . '/' . $name;
+
+            return 's3://'.$bucket.'/'.$prefix.'/'.$name;
         }
 
         if ($driver === 'oss') {
             $bucket = (string) config('fap_attempts.archive_bucket', '');
             $prefix = trim((string) config('fap_attempts.archive_prefix', 'archives'), '/');
             $name = basename($path);
-            return 'oss://' . $bucket . '/' . $prefix . '/' . $name;
+
+            return 'oss://'.$bucket.'/'.$prefix.'/'.$name;
         }
 
-        return 'file://' . $path;
+        return 'file://'.$path;
     }
 
     private function dropMysqlPartitions(string $table, Carbon $before): void
@@ -175,7 +183,7 @@ class ArchiveColdData extends Command
             return;
         }
 
-        $sql = 'ALTER TABLE ' . $table . ' DROP PARTITION ' . implode(', ', $drop);
+        $sql = 'ALTER TABLE '.$table.' DROP PARTITION '.implode(', ', $drop);
         DB::statement($sql);
     }
 }

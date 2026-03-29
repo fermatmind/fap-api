@@ -38,7 +38,7 @@ final class AssetCollectorOrgIsolationTest extends TestCase
 
     public function test_append_by_device_key_hash_updates_only_current_org(): void
     {
-        if (!Schema::hasColumn('attempts', 'device_key_hash')) {
+        if (! Schema::hasColumn('attempts', 'device_key_hash')) {
             Schema::table('attempts', static function (Blueprint $table): void {
                 $table->string('device_key_hash', 191)->nullable()->index();
             });

@@ -22,11 +22,13 @@ class OpsDeployEvent extends Command
         $status = trim((string) $this->option('status'));
         if ($status === '') {
             $this->error('Missing required --status');
+
             return 1;
         }
 
-        if (!in_array($status, ['success', 'failed', 'rollback'], true)) {
+        if (! in_array($status, ['success', 'failed', 'rollback'], true)) {
             $this->error('Invalid --status, must be success|failed|rollback');
+
             return 1;
         }
 
@@ -65,11 +67,13 @@ class OpsDeployEvent extends Command
             ]);
         } catch (\Throwable $e) {
             Log::warning('[ops:deploy-event] failed', ['error' => $e->getMessage()]);
-            $this->error('Failed to write ops_deploy_events: ' . $e->getMessage());
+            $this->error('Failed to write ops_deploy_events: '.$e->getMessage());
+
             return 1;
         }
 
         $this->info('ok');
+
         return 0;
     }
 
@@ -95,8 +99,8 @@ class OpsDeployEvent extends Command
         }
 
         $repoRoot = base_path('..');
-        if (is_dir($repoRoot . '/.git')) {
-            $cmd = 'git -C ' . escapeshellarg($repoRoot) . ' rev-parse HEAD 2>/dev/null';
+        if (is_dir($repoRoot.'/.git')) {
+            $cmd = 'git -C '.escapeshellarg($repoRoot).' rev-parse HEAD 2>/dev/null';
             $rev = trim((string) @shell_exec($cmd));
             if ($rev !== '') {
                 return $rev;

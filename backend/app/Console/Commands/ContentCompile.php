@@ -26,8 +26,7 @@ final class ContentCompile extends Command
         ClinicalComboContentCompileService $clinicalCompile,
         Sds20ContentCompileService $sds20Compile,
         Eq60ContentCompileService $eq60Compile
-    ): int
-    {
+    ): int {
         $pack = $this->option('pack');
         $version = $this->option('pack-version');
         if (is_string($pack) && strtoupper(trim($pack)) === 'BIG5_OCEAN') {
@@ -61,6 +60,7 @@ final class ContentCompile extends Command
         $packs = is_array($result['packs'] ?? null) ? $result['packs'] : [];
         if ($packs === []) {
             $this->warn('No content packs found.');
+
             return 1;
         }
 
@@ -72,19 +72,20 @@ final class ContentCompile extends Command
             if ($ok) {
                 $compiledDir = (string) ($packResult['compiled_dir'] ?? '');
                 $this->info("[PASS] {$packId} ({$version}) -> {$compiledDir}");
+
                 continue;
             }
 
             $this->error("[FAIL] {$packId} ({$version})");
             foreach ((array) ($packResult['errors'] ?? []) as $err) {
-                if (!is_array($err)) {
+                if (! is_array($err)) {
                     continue;
                 }
                 $file = (string) ($err['file'] ?? '');
                 $line = (int) ($err['line'] ?? 0);
                 $block = (string) ($err['block_id'] ?? '');
                 $msg = (string) ($err['message'] ?? '');
-                $lineLabel = $line > 0 ? (':' . $line) : '';
+                $lineLabel = $line > 0 ? (':'.$line) : '';
                 $this->line("  - {$file}{$lineLabel} :: {$block} :: {$msg}");
             }
         }

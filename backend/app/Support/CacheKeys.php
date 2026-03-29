@@ -23,12 +23,12 @@ final class CacheKeys
             $cachePrefix = trim((string) \App\Support\RuntimeConfig::value('CACHE_PREFIX', ''));
         }
 
-        return $cachePrefix === '' ? $appVersion : $appVersion . ':' . $cachePrefix;
+        return $cachePrefix === '' ? $appVersion : $appVersion.':'.$cachePrefix;
     }
 
     public static function packsIndex(): string
     {
-        return self::base() . ':content_packs:index';
+        return self::base().':content_packs:index';
     }
 
     public static function packManifest(string $packId, string $dirVersion): string
@@ -36,7 +36,7 @@ final class CacheKeys
         $packId = trim($packId);
         $dirVersion = trim($dirVersion);
 
-        return self::base() . ':content_packs:manifest:' . $packId . ':' . $dirVersion;
+        return self::base().':content_packs:manifest:'.$packId.':'.$dirVersion;
     }
 
     public static function packQuestions(string $packId, string $dirVersion): string
@@ -44,7 +44,7 @@ final class CacheKeys
         $packId = trim($packId);
         $dirVersion = trim($dirVersion);
 
-        return self::base() . ':content_packs:questions:' . $packId . ':' . $dirVersion;
+        return self::base().':content_packs:questions:'.$packId.':'.$dirVersion;
     }
 
     public static function mbtiQuestions(string $packId, string $dirVersion): string
@@ -52,7 +52,7 @@ final class CacheKeys
         $packId = trim($packId);
         $dirVersion = trim($dirVersion);
 
-        return self::base() . ':mbti:questions:' . $packId . ':' . $dirVersion;
+        return self::base().':mbti:questions:'.$packId.':'.$dirVersion;
     }
 
     public static function contentAsset(string $packPath, string $relPath): string
@@ -60,30 +60,30 @@ final class CacheKeys
         $packPath = trim($packPath);
         $relPath = trim($relPath);
 
-        return self::base() . ':asset:' . $packPath . ':' . $relPath;
+        return self::base().':asset:'.$packPath.':'.$relPath;
     }
 
     public static function scaleRegistryActive(int $orgId): string
     {
-        return self::base() . ':scale_registry:active:' . $orgId;
+        return self::base().':scale_registry:active:'.$orgId;
     }
 
     public static function scaleRegistryByCode(int $orgId, string $code): string
     {
         $code = trim($code);
 
-        return self::base() . ':scale_registry:code:' . $orgId . ':' . $code;
+        return self::base().':scale_registry:code:'.$orgId.':'.$code;
     }
 
     public static function scaleRegistryBySlug(int $orgId, string $slug): string
     {
         $slug = trim($slug);
 
-        return self::base() . ':scale_registry:slug:' . $orgId . ':' . $slug;
+        return self::base().':scale_registry:slug:'.$orgId.':'.$slug;
     }
 
     private static function base(): string
     {
-        return self::PREFIX . ':v=' . self::versionTag();
+        return self::PREFIX.':v='.self::versionTag();
     }
 }

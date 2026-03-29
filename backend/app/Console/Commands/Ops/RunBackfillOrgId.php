@@ -27,11 +27,13 @@ class RunBackfillOrgId extends Command
 
         if ($table === '' || $idColumn === '' || $orgIdColumn === '') {
             $this->error('table / id-column / org-id-column cannot be empty');
+
             return self::FAILURE;
         }
 
         if ($batchSize <= 0) {
             $this->error('batch-size must be > 0');
+
             return self::FAILURE;
         }
 
@@ -46,6 +48,7 @@ class RunBackfillOrgId extends Command
         if ((bool) $this->option('sync')) {
             $job->handle();
             $this->info('backfill completed (sync)');
+
             return self::SUCCESS;
         }
 

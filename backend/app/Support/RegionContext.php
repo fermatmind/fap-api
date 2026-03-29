@@ -7,7 +7,9 @@ namespace App\Support;
 final class RegionContext
 {
     private string $region;
+
     private string $locale;
+
     private string $currency;
 
     public function __construct()

@@ -17,8 +17,9 @@ class BackfillFmTokenHash extends Command
     public function handle(): int
     {
         if ((bool) $this->option('sync')) {
-            (new BackfillFmTokenHashJob())->handle();
+            (new BackfillFmTokenHashJob)->handle();
             $this->info('fm token hash backfill completed (sync)');
+
             return self::SUCCESS;
         }
 

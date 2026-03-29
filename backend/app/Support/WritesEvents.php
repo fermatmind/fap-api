@@ -2,13 +2,13 @@
 
 namespace App\Support;
 
+use App\Models\Event;
+use App\Services\Analytics\EventNormalizer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Event;
-use App\Services\Analytics\EventNormalizer;
+use Illuminate\Support\Str;
 
 trait WritesEvents
 {
@@ -36,12 +36,12 @@ trait WritesEvents
             $fmUserId = ($fmUserIdRaw === '') ? null : $fmUserIdRaw;
 
             // Headers (funnel)
-            $hExperiment     = trim((string) ($request->header('X-Experiment') ?? ''));
-            $hAppVersion     = trim((string) ($request->header('X-App-Version') ?? ''));
-            $hChannel        = trim((string) ($request->header('X-Channel') ?? ''));
+            $hExperiment = trim((string) ($request->header('X-Experiment') ?? ''));
+            $hAppVersion = trim((string) ($request->header('X-App-Version') ?? ''));
+            $hChannel = trim((string) ($request->header('X-Channel') ?? ''));
             $hClientPlatform = trim((string) ($request->header('X-Client-Platform') ?? ''));
-            $hEntryPage      = trim((string) ($request->header('X-Entry-Page') ?? ''));
-            $hShareId        = trim((string) ($request->header('X-Share-Id') ?? ''));
+            $hEntryPage = trim((string) ($request->header('X-Entry-Page') ?? ''));
+            $hShareId = trim((string) ($request->header('X-Share-Id') ?? ''));
 
             // anon_id source: extra > request attrs > input
             $anonId = $extra['anon_id']
@@ -50,7 +50,7 @@ trait WritesEvents
                 ?? $request->input('anon_id');
 
             // anon_id sanitize
-            if (!is_string($anonId)) {
+            if (! is_string($anonId)) {
                 $anonId = null;
             } else {
                 $s = trim($anonId);
@@ -69,7 +69,9 @@ trait WritesEvents
                     ];
                     foreach ($blacklist as $bad) {
                         $b = trim((string) $bad);
-                        if ($b === '') continue;
+                        if ($b === '') {
+                            continue;
+                        }
                         if (mb_strpos($lower, mb_strtolower($b, 'UTF-8')) !== false) {
                             $anonId = null;
                             break;
@@ -80,18 +82,20 @@ trait WritesEvents
 
             // incoming meta
             $incoming = $extra['meta_json'] ?? [];
-            if (!is_array($incoming)) {
+            if (! is_array($incoming)) {
                 $incoming = json_decode((string) $incoming, true) ?: [];
             }
-            if (!is_array($incoming)) $incoming = [];
+            if (! is_array($incoming)) {
+                $incoming = [];
+            }
 
             // share_id unify
             $qShareId = trim((string) ($request->query('share_id') ?? ''));
 
             $resolvedShareId = null;
-            if (!empty($extra['share_id'])) {
+            if (! empty($extra['share_id'])) {
                 $resolvedShareId = trim((string) $extra['share_id']);
-            } elseif (!empty($incoming['share_id'])) {
+            } elseif (! empty($incoming['share_id'])) {
                 $resolvedShareId = trim((string) $incoming['share_id']);
             } elseif ($qShareId !== '') {
                 $resolvedShareId = $qShareId;
@@ -100,7 +104,7 @@ trait WritesEvents
             }
 
             if (
-                (!isset($incoming['share_id']) || $incoming['share_id'] === null || $incoming['share_id'] === '')
+                (! isset($incoming['share_id']) || $incoming['share_id'] === null || $incoming['share_id'] === '')
                 && is_string($resolvedShareId) && $resolvedShareId !== ''
             ) {
                 $incoming['share_id'] = $resolvedShareId;
@@ -108,8 +112,10 @@ trait WritesEvents
 
             // fill incoming meta by header (only when empty)
             $fillIncoming = function (string $k, string $v) use (&$incoming): void {
-                $empty = !isset($incoming[$k]) || $incoming[$k] === null || $incoming[$k] === '';
-                if ($empty && $v !== '') $incoming[$k] = $v;
+                $empty = ! isset($incoming[$k]) || $incoming[$k] === null || $incoming[$k] === '';
+                if ($empty && $v !== '') {
+                    $incoming[$k] = $v;
+                }
             };
 
             $fillIncoming('experiment', $hExperiment);
@@ -120,19 +126,37 @@ trait WritesEvents
 
             // column values normalize: extra > attrs > incoming > header > input
             $colChannel = $extra['channel'] ?? trim((string) $request->attributes->get('channel', ''));
-            if ($colChannel === '') $colChannel = trim((string) ($incoming['channel'] ?? ''));
-            if ($colChannel === '') $colChannel = $hChannel;
-            if ($colChannel === '') $colChannel = trim((string) $request->input('channel', ''));
+            if ($colChannel === '') {
+                $colChannel = trim((string) ($incoming['channel'] ?? ''));
+            }
+            if ($colChannel === '') {
+                $colChannel = $hChannel;
+            }
+            if ($colChannel === '') {
+                $colChannel = trim((string) $request->input('channel', ''));
+            }
 
             $colPlatform = $extra['client_platform'] ?? trim((string) $request->attributes->get('client_platform', ''));
-            if ($colPlatform === '') $colPlatform = trim((string) ($incoming['client_platform'] ?? ''));
-            if ($colPlatform === '') $colPlatform = $hClientPlatform;
-            if ($colPlatform === '') $colPlatform = trim((string) $request->input('client_platform', ''));
+            if ($colPlatform === '') {
+                $colPlatform = trim((string) ($incoming['client_platform'] ?? ''));
+            }
+            if ($colPlatform === '') {
+                $colPlatform = $hClientPlatform;
+            }
+            if ($colPlatform === '') {
+                $colPlatform = trim((string) $request->input('client_platform', ''));
+            }
 
             $colVersion = $extra['client_version'] ?? trim((string) $request->attributes->get('client_version', ''));
-            if ($colVersion === '') $colVersion = trim((string) ($incoming['version'] ?? ''));
-            if ($colVersion === '') $colVersion = $hAppVersion;
-            if ($colVersion === '') $colVersion = trim((string) $request->input('client_version', ''));
+            if ($colVersion === '') {
+                $colVersion = trim((string) ($incoming['version'] ?? ''));
+            }
+            if ($colVersion === '') {
+                $colVersion = $hAppVersion;
+            }
+            if ($colVersion === '') {
+                $colVersion = trim((string) $request->input('client_version', ''));
+            }
 
             // A) 10s debounce + backfill
             if (in_array($eventCode, ['result_view', 'report_view', 'share_view'], true) && $anonId && $attemptId) {
@@ -146,10 +170,12 @@ trait WritesEvents
 
                 if ($existing) {
                     $old = $existing->meta_json;
-                    if (!is_array($old)) {
+                    if (! is_array($old)) {
                         $old = json_decode((string) $old, true) ?: [];
                     }
-                    if (!is_array($old)) $old = [];
+                    if (! is_array($old)) {
+                        $old = [];
+                    }
 
                     $changed = false;
 
@@ -163,9 +189,9 @@ trait WritesEvents
                         'page',
                     ];
                     foreach ($overwriteKeys as $k) {
-                        $newVal  = $incoming[$k] ?? null;
+                        $newVal = $incoming[$k] ?? null;
                         $newGood = $newVal !== null && $newVal !== '';
-                        if ($newGood && (!isset($old[$k]) || $old[$k] !== $newVal)) {
+                        if ($newGood && (! isset($old[$k]) || $old[$k] !== $newVal)) {
                             $old[$k] = $newVal;
                             $changed = true;
                         }
@@ -173,9 +199,9 @@ trait WritesEvents
 
                     $oneShot = ['type_code', 'engine_version', 'engine', 'content_package_version'];
                     foreach ($oneShot as $k) {
-                        $oldEmpty = !isset($old[$k]) || $old[$k] === null || $old[$k] === '';
-                        $newVal   = $incoming[$k] ?? null;
-                        $newGood  = $newVal !== null && $newVal !== '';
+                        $oldEmpty = ! isset($old[$k]) || $old[$k] === null || $old[$k] === '';
+                        $newVal = $incoming[$k] ?? null;
+                        $newGood = $newVal !== null && $newVal !== '';
                         if ($oldEmpty && $newGood) {
                             $old[$k] = $newVal;
                             $changed = true;
@@ -277,7 +303,7 @@ trait WritesEvents
             $columns = $normalized['columns'];
             $columns['id'] = (string) Str::uuid();
             $columns['event_code'] = $eventCode;
-            if (!isset($columns['event_name']) || $columns['event_name'] === null || $columns['event_name'] === '') {
+            if (! isset($columns['event_name']) || $columns['event_name'] === null || $columns['event_name'] === '') {
                 $columns['event_name'] = $eventCode;
             }
             $columns['attempt_id'] = $columns['attempt_id'] ?? $attemptId;
@@ -301,7 +327,7 @@ trait WritesEvents
         } catch (\Throwable $e) {
             Log::warning('event_log_failed', [
                 'event_code' => $eventCode,
-                'error'      => $e->getMessage(),
+                'error' => $e->getMessage(),
             ]);
         }
     }
@@ -314,7 +340,7 @@ trait WritesEvents
 
         try {
             $driver = DB::connection()->getDriverName();
-            if (!in_array($driver, ['mysql', 'sqlite'], true)) {
+            if (! in_array($driver, ['mysql', 'sqlite'], true)) {
                 self::$hasShareDedupeLookupColumns = false;
 
                 return false;

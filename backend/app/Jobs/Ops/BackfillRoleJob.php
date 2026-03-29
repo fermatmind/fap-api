@@ -10,7 +10,6 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 
 class BackfillRoleJob implements ShouldQueue
 {
@@ -20,8 +19,9 @@ class BackfillRoleJob implements ShouldQueue
     {
         $lock = Cache::lock('backfill:organization_members:role', 300);
 
-        if (!$lock->get()) {
+        if (! $lock->get()) {
             Log::info('[backfill_role] lock busy, skip');
+
             return;
         }
 
@@ -29,10 +29,11 @@ class BackfillRoleJob implements ShouldQueue
         $lastId = 0;
 
         try {
-            if (!\App\Support\SchemaBaseline::hasTable('organization_members')
-                || !\App\Support\SchemaBaseline::hasColumn('organization_members', 'id')
-                || !\App\Support\SchemaBaseline::hasColumn('organization_members', 'role')) {
+            if (! \App\Support\SchemaBaseline::hasTable('organization_members')
+                || ! \App\Support\SchemaBaseline::hasColumn('organization_members', 'id')
+                || ! \App\Support\SchemaBaseline::hasColumn('organization_members', 'role')) {
                 Log::warning('[backfill_role] table/column missing');
+
                 return;
             }
 

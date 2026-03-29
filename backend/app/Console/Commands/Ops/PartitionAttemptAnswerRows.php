@@ -23,28 +23,33 @@ class PartitionAttemptAnswerRows extends Command
         $driver = DB::connection()->getDriverName();
         if ($driver !== 'mysql') {
             $this->info('skip: current driver is not mysql');
+
             return self::SUCCESS;
         }
 
-        if (!Schema::hasTable(self::TABLE)) {
-            $this->error('table missing: ' . self::TABLE);
+        if (! Schema::hasTable(self::TABLE)) {
+            $this->error('table missing: '.self::TABLE);
+
             return self::FAILURE;
         }
 
         if ($this->hasAnyPartition()) {
-            $this->info('already partitioned: ' . self::TABLE);
+            $this->info('already partitioned: '.self::TABLE);
+
             return self::SUCCESS;
         }
 
         $months = (int) $this->option('months');
         if ($months <= 0) {
             $this->error('--months must be greater than 0');
+
             return self::FAILURE;
         }
 
         $constraintError = $this->partitionConstraintError();
         if ($constraintError !== null) {
             $this->error($constraintError);
+
             return self::FAILURE;
         }
 
@@ -53,8 +58,9 @@ class PartitionAttemptAnswerRows extends Command
         $this->line($sql);
 
         $shouldExecute = (bool) $this->option('execute');
-        if (!$shouldExecute) {
+        if (! $shouldExecute) {
             $this->info('dry-run mode (pass --execute to apply DDL)');
+
             return self::SUCCESS;
         }
 
@@ -62,7 +68,7 @@ class PartitionAttemptAnswerRows extends Command
         DB::statement($sql);
         $elapsedMs = (int) round((microtime(true) - $startedAt) * 1000);
 
-        $this->info('partition DDL executed successfully. elapsed_ms=' . $elapsedMs);
+        $this->info('partition DDL executed successfully. elapsed_ms='.$elapsedMs);
 
         return self::SUCCESS;
     }
@@ -70,7 +76,7 @@ class PartitionAttemptAnswerRows extends Command
     private function hasAnyPartition(): bool
     {
         $database = DB::getDatabaseName();
-        if (!is_string($database) || $database === '') {
+        if (! is_string($database) || $database === '') {
             return false;
         }
 
@@ -90,7 +96,7 @@ class PartitionAttemptAnswerRows extends Command
     private function partitionConstraintError(): ?string
     {
         $database = DB::getDatabaseName();
-        if (!is_string($database) || $database === '') {
+        if (! is_string($database) || $database === '') {
             return 'cannot resolve current database name';
         }
 
@@ -128,7 +134,7 @@ class PartitionAttemptAnswerRows extends Command
             $pkRows
         );
 
-        if (!in_array('submitted_at', $pkColumns, true)) {
+        if (! in_array('submitted_at', $pkColumns, true)) {
             return 'constraint failed: PRIMARY KEY must include submitted_at';
         }
 
@@ -142,7 +148,7 @@ class PartitionAttemptAnswerRows extends Command
 
         for ($i = 0; $i < $months; $i++) {
             $next = (clone $cursor)->addMonth();
-            $name = 'p' . $cursor->format('Ym');
+            $name = 'p'.$cursor->format('Ym');
             $parts[] = sprintf(
                 "PARTITION %s VALUES LESS THAN ('%s 00:00:00')",
                 $name,
@@ -153,9 +159,9 @@ class PartitionAttemptAnswerRows extends Command
 
         $parts[] = 'PARTITION pmax VALUES LESS THAN (MAXVALUE)';
 
-        return 'ALTER TABLE ' . self::TABLE
-            . ' PARTITION BY RANGE COLUMNS(submitted_at) ('
-            . implode(', ', $parts)
-            . ')';
+        return 'ALTER TABLE '.self::TABLE
+            .' PARTITION BY RANGE COLUMNS(submitted_at) ('
+            .implode(', ', $parts)
+            .')';
     }
 }

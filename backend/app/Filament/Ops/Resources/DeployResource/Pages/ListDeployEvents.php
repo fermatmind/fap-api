@@ -3,8 +3,8 @@
 namespace App\Filament\Ops\Resources\DeployResource\Pages;
 
 use App\Filament\Ops\Resources\DeployResource;
-use Filament\Resources\Pages\ListRecords;
 use App\Services\Audit\AuditLogger;
+use Filament\Resources\Pages\ListRecords;
 
 class ListDeployEvents extends ListRecords
 {

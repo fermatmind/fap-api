@@ -60,6 +60,7 @@ final class PacksPublish extends Command
 
         if (! $this->isSafePathSegment($packId) || ! $this->isSafeVersion($version) || ! $this->isSafePathSegment($region) || ! $this->isSafePathSegment($locale) || ! $this->isSafePathSegment($dirAlias)) {
             $this->error('invalid --pack/--pack-version/--region/--locale/--dir_alias value.');
+
             return 1;
         }
 
@@ -256,7 +257,6 @@ final class PacksPublish extends Command
             : 'norms:big5:drift-check';
     }
 
-
     private function isSafePathSegment(string $value): bool
     {
         return (bool) preg_match('/\A(?!\.\.)[A-Za-z0-9_-]+\z/', $value);
@@ -266,6 +266,7 @@ final class PacksPublish extends Command
     {
         return (bool) preg_match('/\A(?!\.\.)[A-Za-z0-9._-]+\z/', $value);
     }
+
     private function resolveLocalSourceType(string $sourceSelection): string
     {
         $selection = strtolower(trim($sourceSelection));

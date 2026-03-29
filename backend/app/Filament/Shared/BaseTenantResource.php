@@ -21,8 +21,8 @@ abstract class BaseTenantResource extends Resource
 
         $model = static::getModel();
         $uses = class_uses_recursive($model);
-        if (!in_array(HasOrgScope::class, $uses, true)) {
-            throw new \LogicException($model . ' must use HasOrgScope');
+        if (! in_array(HasOrgScope::class, $uses, true)) {
+            throw new \LogicException($model.' must use HasOrgScope');
         }
 
         return parent::getEloquentQuery()->where('org_id', $orgId);

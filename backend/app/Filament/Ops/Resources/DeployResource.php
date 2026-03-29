@@ -15,7 +15,9 @@ class DeployResource extends Resource
     protected static ?string $model = OpsDeployEvent::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rocket-launch';
+
     protected static ?string $navigationGroup = 'Observability';
+
     protected static ?string $navigationLabel = 'Deploy Events';
 
     public static function canViewAny(): bool
@@ -82,7 +84,7 @@ class DeployResource extends Resource
                         if ($rev === '') {
                             return;
                         }
-                        $query->where('revision', 'like', '%' . $rev . '%');
+                        $query->where('revision', 'like', '%'.$rev.'%');
                     }),
             ])
             ->actions([
@@ -90,7 +92,8 @@ class DeployResource extends Resource
                     ->label('Meta')
                     ->modalContent(function (OpsDeployEvent $record) {
                         $json = json_encode($record->meta_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-                        return new \Illuminate\Support\HtmlString('<pre style="white-space: pre-wrap;">' . e($json) . '</pre>');
+
+                        return new \Illuminate\Support\HtmlString('<pre style="white-space: pre-wrap;">'.e($json).'</pre>');
                     })
                     ->modalHeading('Meta JSON'),
             ])

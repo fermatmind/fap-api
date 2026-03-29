@@ -16,7 +16,6 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 
 class GenerateInsightJob implements ShouldQueue
 {
@@ -32,14 +31,16 @@ class GenerateInsightJob implements ShouldQueue
 
     public function handle(InsightGenerator $generator, EvidenceBuilder $evidenceBuilder, BudgetLedger $ledger): void
     {
-        if (!\App\Support\SchemaBaseline::hasTable('ai_insights')) {
+        if (! \App\Support\SchemaBaseline::hasTable('ai_insights')) {
             Log::warning('[ai_insights] table missing', ['id' => $this->insightId]);
+
             return;
         }
 
         $insight = DB::table('ai_insights')->where('id', $this->insightId)->first();
-        if (!$insight) {
+        if (! $insight) {
             Log::warning('[ai_insights] record missing', ['id' => $this->insightId]);
+
             return;
         }
 
@@ -77,7 +78,7 @@ class GenerateInsightJob implements ShouldQueue
             $ledger->incrementTokens($provider, $model, $subject, $tokensIn, $tokensOut, $costUsd, now());
         } catch (BudgetLedgerException $e) {
             $failOpen = (bool) config('ai.fail_open_when_redis_down', false);
-            if (!$failOpen) {
+            if (! $failOpen) {
                 $env = \App\Support\RuntimeConfig::raw('AI_FAIL_OPEN_WHEN_REDIS_DOWN');
                 if ($env !== false && $env !== '') {
                     $failOpen = filter_var($env, FILTER_VALIDATE_BOOLEAN);
@@ -88,6 +89,7 @@ class GenerateInsightJob implements ShouldQueue
                 Log::warning('[ai_insights] ledger unavailable (fail-open)', [
                     'id' => $this->insightId,
                 ]);
+
                 return;
             }
 
@@ -170,12 +172,12 @@ class GenerateInsightJob implements ShouldQueue
     {
         $userId = trim((string) ($insight->user_id ?? ''));
         if ($userId !== '') {
-            return 'user:' . $userId;
+            return 'user:'.$userId;
         }
 
         $anonId = trim((string) ($insight->anon_id ?? ''));
         if ($anonId !== '') {
-            return 'anon:' . $anonId;
+            return 'anon:'.$anonId;
         }
 
         return 'unknown';
@@ -192,6 +194,7 @@ class GenerateInsightJob implements ShouldQueue
         }
 
         $json = json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
         return $json === false ? null : $json;
     }
 }

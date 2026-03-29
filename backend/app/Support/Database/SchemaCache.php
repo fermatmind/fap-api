@@ -18,7 +18,7 @@ final class SchemaCache
 
     public static function hasTable(string $table): bool
     {
-        if (!array_key_exists($table, self::$tableCache)) {
+        if (! array_key_exists($table, self::$tableCache)) {
             self::$tableCache[$table] = \App\Support\SchemaBaseline::hasTable($table);
         }
 
@@ -27,8 +27,8 @@ final class SchemaCache
 
     public static function hasColumn(string $table, string $column): bool
     {
-        $key = $table . '.' . $column;
-        if (!array_key_exists($key, self::$columnCache)) {
+        $key = $table.'.'.$column;
+        if (! array_key_exists($key, self::$columnCache)) {
             self::$columnCache[$key] = \App\Support\SchemaBaseline::hasColumn($table, $column);
         }
 

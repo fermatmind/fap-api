@@ -21,6 +21,7 @@ class NormsUpdate extends Command
         }
         if ($packId === '') {
             $this->error('pack_id is required (option or config content_packs.default_pack_id)');
+
             return 1;
         }
 
@@ -37,8 +38,9 @@ class NormsUpdate extends Command
         $hasIsValid = Schema::hasColumn('results', 'is_valid');
         $hasContentPackageVersion = Schema::hasColumn('results', 'content_package_version');
 
-        if (!$hasAxisStates && !$hasScoresJson && !$hasAttemptResult && !$hasScoresPct) {
+        if (! $hasAxisStates && ! $hasScoresJson && ! $hasAttemptResult && ! $hasScoresPct) {
             $this->warn('No usable score source columns found.');
+
             return 0;
         }
 
@@ -102,7 +104,7 @@ class NormsUpdate extends Command
                 $hasScoresPct,
                 $hasAttemptResult
             );
-            if (!$scores) {
+            if (! $scores) {
                 continue;
             }
 
@@ -114,6 +116,7 @@ class NormsUpdate extends Command
 
         if ($sampleN < 200) {
             $this->info("Sample size {$sampleN} < 200, keep active version unchanged.");
+
             return 0;
         }
 
@@ -227,6 +230,7 @@ class NormsUpdate extends Command
                 $total = $this->toNumber($val['total'] ?? null);
                 if ($sum !== null && $total !== null && $total > 0) {
                     $pct = (($sum + 2 * $total) / (4 * $total)) * 100;
+
                     return max(0.0, min(100.0, $pct));
                 }
             }
@@ -246,7 +250,7 @@ class NormsUpdate extends Command
     {
         $scoresPct = $this->decodeJson($reportJson['scores_pct'] ?? null) ?? [];
         $scores = $this->decodeJson($reportJson['scores'] ?? null);
-        if (!is_array($scores)) {
+        if (! is_array($scores)) {
             $scores = $this->decodeJson($reportJson['scores_json'] ?? null);
         }
 
@@ -281,6 +285,7 @@ class NormsUpdate extends Command
         if (is_string($val) && is_numeric($val)) {
             return (float) $val;
         }
+
         return null;
     }
 
@@ -294,8 +299,10 @@ class NormsUpdate extends Command
         }
         if (is_string($val) && $val !== '') {
             $decoded = json_decode($val, true);
+
             return is_array($decoded) ? $decoded : null;
         }
+
         return null;
     }
 

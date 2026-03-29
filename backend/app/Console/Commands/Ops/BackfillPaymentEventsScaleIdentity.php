@@ -75,6 +75,7 @@ class BackfillPaymentEventsScaleIdentity extends Command
                 $resolvedUid = trim((string) ($identity['scale_uid'] ?? ''));
                 if ($resolvedV2 === '') {
                     $skippedUnknown++;
+
                     continue;
                 }
 
@@ -207,4 +208,3 @@ class BackfillPaymentEventsScaleIdentity extends Command
         ];
     }
 }
-

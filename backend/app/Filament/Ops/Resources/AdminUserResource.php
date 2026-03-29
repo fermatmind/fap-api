@@ -16,7 +16,9 @@ class AdminUserResource extends Resource
     protected static ?string $model = AdminUser::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
+
     protected static ?string $navigationGroup = 'Admin';
+
     protected static ?string $navigationLabel = 'Admin Users';
 
     public static function canViewAny(): bool
@@ -134,7 +136,7 @@ class AdminUserResource extends Resource
     private static function passwordRules(): array
     {
         $rules = [
-            'min:' . max(8, (int) config('admin.password_policy.min_length', 12)),
+            'min:'.max(8, (int) config('admin.password_policy.min_length', 12)),
         ];
 
         if ((bool) config('admin.password_policy.require_uppercase', true)) {

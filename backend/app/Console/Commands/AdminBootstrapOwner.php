@@ -31,6 +31,7 @@ class AdminBootstrapOwner extends Command
 
         if ($email === '' || $password === '') {
             $this->error('Missing required --email or --password');
+
             return 1;
         }
 
@@ -38,8 +39,9 @@ class AdminBootstrapOwner extends Command
             $name = 'Owner';
         }
 
-        if (!Schema::hasTable('admin_users')) {
+        if (! Schema::hasTable('admin_users')) {
             $this->error('Missing admin_users table. Run migrations first.');
+
             return 1;
         }
 
@@ -77,15 +79,15 @@ class AdminBootstrapOwner extends Command
         $this->writeAudit($user->id, $email);
 
         $url = (string) config('admin.url', 'http://127.0.0.1:18010/admin');
-        $this->info('Owner ready: ' . $email);
-        $this->info('Login: ' . $url);
+        $this->info('Owner ready: '.$email);
+        $this->info('Login: '.$url);
 
         return 0;
     }
 
     private function writeAudit(int $adminId, string $email): void
     {
-        if (!Schema::hasTable('audit_logs')) {
+        if (! Schema::hasTable('audit_logs')) {
             return;
         }
 
