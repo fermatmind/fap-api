@@ -10,6 +10,7 @@ use App\Filament\Ops\Resources\CareerJobResource;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Filament\Ops\Support\EditorialReviewChecklist;
+use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
@@ -38,12 +39,25 @@ class EditorialReviewPage extends Page
     /** @var list<array<string, mixed>> */
     public array $reviewItems = [];
 
+    /** @var array<string, string> */
+    public array $ownerAssignments = [];
+
+    /** @var array<string, string> */
+    public array $reviewerAssignments = [];
+
+    /** @var array<int, string> */
+    public array $ownerOptions = [];
+
+    /** @var array<int, string> */
+    public array $reviewerOptions = [];
+
     public string $typeFilter = 'all';
 
     public string $reviewStateFilter = 'all';
 
     public function mount(): void
     {
+        $this->loadAssignmentOptions();
         $this->refreshReviewSurface();
     }
 
@@ -57,13 +71,94 @@ class EditorialReviewPage extends Page
         $this->refreshReviewSurface();
     }
 
+    public function assignOwnerItem(string $type, int $id): void
+    {
+        if (! ContentAccess::canAssignOwner()) {
+            throw new AuthorizationException('You do not have permission to assign an owner.');
+        }
+
+        $record = $this->resolveRecord($type, $id);
+        $selection = trim((string) ($this->ownerAssignments[$this->workflowKey($type, $id)] ?? ''));
+        $ownerAdminId = (int) $selection;
+
+        if ($ownerAdminId <= 0) {
+            throw new AuthorizationException('Select an owner before saving the assignment.');
+        }
+
+        EditorialReviewAudit::assignOwner($ownerAdminId, $type, $record);
+
+        Notification::make()
+            ->title('Owner assigned')
+            ->success()
+            ->send();
+
+        $this->refreshReviewSurface();
+    }
+
+    public function assignReviewerItem(string $type, int $id): void
+    {
+        if (! ContentAccess::canAssignReviewer()) {
+            throw new AuthorizationException('You do not have permission to assign a reviewer.');
+        }
+
+        $record = $this->resolveRecord($type, $id);
+        $selection = trim((string) ($this->reviewerAssignments[$this->workflowKey($type, $id)] ?? ''));
+        $reviewerAdminId = (int) $selection;
+
+        if ($reviewerAdminId <= 0) {
+            throw new AuthorizationException('Select a reviewer before saving the assignment.');
+        }
+
+        EditorialReviewAudit::assignReviewer($reviewerAdminId, $type, $record);
+
+        Notification::make()
+            ->title('Reviewer assigned')
+            ->success()
+            ->send();
+
+        $this->refreshReviewSurface();
+    }
+
+    public function submitItem(string $type, int $id): void
+    {
+        $record = $this->resolveRecord($type, $id);
+        $missing = EditorialReviewChecklist::missing($type, $record);
+        $snapshot = EditorialReviewAudit::latestState($type, $record);
+
+        if ($missing !== []) {
+            throw new AuthorizationException('Fix the checklist gaps before submitting for review.');
+        }
+
+        if ((int) ($snapshot['owner_admin_user_id'] ?? 0) <= 0 || (int) ($snapshot['reviewer_admin_user_id'] ?? 0) <= 0) {
+            throw new AuthorizationException('Assign both an owner and a reviewer before submitting for review.');
+        }
+
+        if (! $this->canSubmitForReview($snapshot)) {
+            throw new AuthorizationException('You do not have permission to submit this record for review.');
+        }
+
+        EditorialReviewAudit::submit($type, $record);
+
+        Notification::make()
+            ->title('Sent to review')
+            ->success()
+            ->send();
+
+        $this->refreshReviewSurface();
+    }
+
     public function approveItem(string $type, int $id): void
     {
         $record = $this->resolveRecord($type, $id);
         $missing = EditorialReviewChecklist::missing($type, $record);
+        $snapshot = EditorialReviewAudit::latestState($type, $record);
 
         if ($missing !== []) {
             throw new AuthorizationException('You cannot approve a record with review checklist gaps.');
+        }
+
+        if (! $this->canDecideReview($snapshot)) {
+            throw new AuthorizationException('You are not the assigned reviewer for this record.');
         }
 
         EditorialReviewAudit::mark(EditorialReviewAudit::STATE_APPROVED, $type, $record);
@@ -79,6 +174,11 @@ class EditorialReviewPage extends Page
     public function requestChangesItem(string $type, int $id): void
     {
         $record = $this->resolveRecord($type, $id);
+        $snapshot = EditorialReviewAudit::latestState($type, $record);
+
+        if (! $this->canDecideReview($snapshot)) {
+            throw new AuthorizationException('You are not the assigned reviewer for this record.');
+        }
 
         EditorialReviewAudit::mark(EditorialReviewAudit::STATE_CHANGES_REQUESTED, $type, $record);
 
@@ -93,6 +193,11 @@ class EditorialReviewPage extends Page
     public function rejectItem(string $type, int $id): void
     {
         $record = $this->resolveRecord($type, $id);
+        $snapshot = EditorialReviewAudit::latestState($type, $record);
+
+        if (! $this->canDecideReview($snapshot)) {
+            throw new AuthorizationException('You are not the assigned reviewer for this record.');
+        }
 
         EditorialReviewAudit::mark(EditorialReviewAudit::STATE_REJECTED, $type, $record);
 
@@ -116,11 +221,13 @@ class EditorialReviewPage extends Page
 
     public static function canAccess(): bool
     {
-        return ContentAccess::canRelease();
+        return ContentAccess::canOpenWorkflow();
     }
 
     private function refreshReviewSurface(): void
     {
+        $this->loadAssignmentOptions();
+
         $currentOrgIds = $this->currentOrgIds();
 
         $articles = Article::query()
@@ -163,8 +270,11 @@ class EditorialReviewPage extends Page
         }
 
         $readyCount = $allItems->where('review_state', EditorialReviewAudit::STATE_READY)->count();
+        $inReviewCount = $allItems->where('review_state', EditorialReviewAudit::STATE_IN_REVIEW)->count();
         $approvedCount = $allItems->where('review_state', EditorialReviewAudit::STATE_APPROVED)->count();
         $attentionCount = $allItems->where('review_state', EditorialReviewAudit::STATE_NEEDS_ATTENTION)->count();
+
+        $this->hydrateAssignmentSelections($allItems->all());
 
         $this->reviewItems = $filteredItems
             ->sortByDesc('updated_at_sort')
@@ -180,7 +290,12 @@ class EditorialReviewPage extends Page
             [
                 'label' => 'Ready for release review',
                 'value' => (string) $readyCount,
-                'hint' => 'Draft records that satisfy the current checklist and are ready for an explicit approval decision.',
+                'hint' => 'Checklist-clean drafts that have not yet been formally submitted into the reviewer queue.',
+            ],
+            [
+                'label' => 'Currently in review',
+                'value' => (string) $inReviewCount,
+                'hint' => 'Draft records actively assigned and submitted to a reviewer.',
             ],
             [
                 'label' => 'Approved for release',
@@ -221,7 +336,8 @@ class EditorialReviewPage extends Page
     private function reviewRowForArticle(Article $record): array
     {
         $missing = EditorialReviewChecklist::missing('article', $record);
-        $reviewState = $this->resolveReviewState('article', $record, $missing === []);
+        $snapshot = EditorialReviewAudit::latestState('article', $record);
+        $reviewState = $this->resolveReviewState($snapshot, $missing === []);
 
         return $this->reviewRow(
             type: 'article',
@@ -230,6 +346,10 @@ class EditorialReviewPage extends Page
             title: (string) $record->title,
             locale: (string) $record->locale,
             reviewState: $reviewState,
+            ownerAdminId: (int) ($snapshot['owner_admin_user_id'] ?? 0),
+            ownerLabel: (string) ($snapshot['owner_label'] ?? ''),
+            reviewerAdminId: (int) ($snapshot['reviewer_admin_user_id'] ?? 0),
+            reviewerLabel: (string) ($snapshot['reviewer_label'] ?? ''),
             checklistLabel: $missing === [] ? 'Content + SEO ready' : 'Missing: '.implode(', ', $missing),
             updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
             editUrl: ArticleResource::getUrl('edit', ['record' => $record]),
@@ -242,7 +362,8 @@ class EditorialReviewPage extends Page
     private function reviewRowForGuide(CareerGuide $record): array
     {
         $missing = EditorialReviewChecklist::missing('guide', $record);
-        $reviewState = $this->resolveReviewState('guide', $record, $missing === []);
+        $snapshot = EditorialReviewAudit::latestState('guide', $record);
+        $reviewState = $this->resolveReviewState($snapshot, $missing === []);
 
         return $this->reviewRow(
             type: 'guide',
@@ -251,6 +372,10 @@ class EditorialReviewPage extends Page
             title: (string) $record->title,
             locale: (string) $record->locale,
             reviewState: $reviewState,
+            ownerAdminId: (int) ($snapshot['owner_admin_user_id'] ?? 0),
+            ownerLabel: (string) ($snapshot['owner_label'] ?? ''),
+            reviewerAdminId: (int) ($snapshot['reviewer_admin_user_id'] ?? 0),
+            reviewerLabel: (string) ($snapshot['reviewer_label'] ?? ''),
             checklistLabel: $missing === [] ? 'Content + SEO ready' : 'Missing: '.implode(', ', $missing),
             updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
             editUrl: CareerGuideResource::getUrl('edit', ['record' => $record]),
@@ -263,7 +388,8 @@ class EditorialReviewPage extends Page
     private function reviewRowForJob(CareerJob $record): array
     {
         $missing = EditorialReviewChecklist::missing('job', $record);
-        $reviewState = $this->resolveReviewState('job', $record, $missing === []);
+        $snapshot = EditorialReviewAudit::latestState('job', $record);
+        $reviewState = $this->resolveReviewState($snapshot, $missing === []);
 
         return $this->reviewRow(
             type: 'job',
@@ -272,6 +398,10 @@ class EditorialReviewPage extends Page
             title: (string) $record->title,
             locale: (string) $record->locale,
             reviewState: $reviewState,
+            ownerAdminId: (int) ($snapshot['owner_admin_user_id'] ?? 0),
+            ownerLabel: (string) ($snapshot['owner_label'] ?? ''),
+            reviewerAdminId: (int) ($snapshot['reviewer_admin_user_id'] ?? 0),
+            reviewerLabel: (string) ($snapshot['reviewer_label'] ?? ''),
             checklistLabel: $missing === [] ? 'Content + SEO ready' : 'Missing: '.implode(', ', $missing),
             updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
             editUrl: CareerJobResource::getUrl('edit', ['record' => $record]),
@@ -288,21 +418,45 @@ class EditorialReviewPage extends Page
         string $title,
         string $locale,
         string $reviewState,
+        int $ownerAdminId,
+        string $ownerLabel,
+        int $reviewerAdminId,
+        string $reviewerLabel,
         string $checklistLabel,
         string $updatedAt,
         string $editUrl,
     ): array {
+        $workflowKey = $this->workflowKey($type, $id);
+
         return [
             'type' => $type,
             'id' => $id,
+            'workflow_key' => $workflowKey,
             'type_label' => $typeLabel,
             'title' => $title !== '' ? $title : 'Untitled',
             'locale' => $locale !== '' ? $locale : 'Unknown',
             'review_state' => $reviewState,
+            'owner_admin_user_id' => $ownerAdminId > 0 ? $ownerAdminId : null,
+            'owner_label' => $ownerLabel !== '' ? $ownerLabel : 'Unassigned',
+            'reviewer_admin_user_id' => $reviewerAdminId > 0 ? $reviewerAdminId : null,
+            'reviewer_label' => $reviewerLabel !== '' ? $reviewerLabel : 'Unassigned',
             'checklist_label' => $checklistLabel,
             'updated_at' => $updatedAt,
             'updated_at_sort' => strtotime($updatedAt) ?: 0,
             'edit_url' => $editUrl,
+            'can_assign_owner' => ContentAccess::canAssignOwner(),
+            'can_assign_reviewer' => ContentAccess::canAssignReviewer(),
+            'can_submit' => ($reviewState === EditorialReviewAudit::STATE_READY || $reviewState === EditorialReviewAudit::STATE_CHANGES_REQUESTED)
+                && $ownerAdminId > 0
+                && $reviewerAdminId > 0
+                && $this->canSubmitForReview([
+                    'owner_admin_user_id' => $ownerAdminId,
+                    'reviewer_admin_user_id' => $reviewerAdminId,
+                ]),
+            'can_decide' => $reviewState === EditorialReviewAudit::STATE_IN_REVIEW
+                && $this->canDecideReview([
+                    'reviewer_admin_user_id' => $reviewerAdminId,
+                ]),
         ];
     }
 
@@ -313,6 +467,7 @@ class EditorialReviewPage extends Page
             'guide' => 'Career Guide',
             'job' => 'Career Job',
             EditorialReviewAudit::STATE_READY => EditorialReviewAudit::label(EditorialReviewAudit::STATE_READY),
+            EditorialReviewAudit::STATE_IN_REVIEW => EditorialReviewAudit::label(EditorialReviewAudit::STATE_IN_REVIEW),
             EditorialReviewAudit::STATE_APPROVED => EditorialReviewAudit::label(EditorialReviewAudit::STATE_APPROVED),
             EditorialReviewAudit::STATE_CHANGES_REQUESTED => EditorialReviewAudit::label(EditorialReviewAudit::STATE_CHANGES_REQUESTED),
             EditorialReviewAudit::STATE_REJECTED => EditorialReviewAudit::label(EditorialReviewAudit::STATE_REJECTED),
@@ -321,20 +476,21 @@ class EditorialReviewPage extends Page
         };
     }
 
-    private function resolveReviewState(string $type, object $record, bool $checklistReady): string
+    /**
+     * @param  array<string, mixed>|null  $snapshot
+     */
+    private function resolveReviewState(?array $snapshot, bool $checklistReady): string
     {
         if (! $checklistReady) {
             return EditorialReviewAudit::STATE_NEEDS_ATTENTION;
         }
 
-        $decision = EditorialReviewAudit::latestState($type, $record);
-
-        return $decision['state'] ?? EditorialReviewAudit::STATE_READY;
+        return (string) ($snapshot['state'] ?? EditorialReviewAudit::STATE_READY);
     }
 
     private function resolveRecord(string $type, int $id): object
     {
-        if (! ContentAccess::canRelease()) {
+        if (! ContentAccess::canOpenWorkflow()) {
             throw new AuthorizationException('You do not have permission to review content.');
         }
 
@@ -344,5 +500,91 @@ class EditorialReviewPage extends Page
             'job' => CareerJob::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
             default => throw new AuthorizationException('Unsupported review type.'),
         };
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $items
+     */
+    private function hydrateAssignmentSelections(array $items): void
+    {
+        foreach ($items as $item) {
+            $this->ownerAssignments[$item['workflow_key']] = (string) ($item['owner_admin_user_id'] ?? '');
+            $this->reviewerAssignments[$item['workflow_key']] = (string) ($item['reviewer_admin_user_id'] ?? '');
+        }
+    }
+
+    private function loadAssignmentOptions(): void
+    {
+        $admins = AdminUser::query()
+            ->where('is_active', 1)
+            ->orderBy('name')
+            ->orderBy('email')
+            ->get();
+
+        $this->ownerOptions = $admins
+            ->filter(fn (AdminUser $admin): bool => $admin->hasPermission(\App\Support\Rbac\PermissionNames::ADMIN_CONTENT_WRITE)
+                || $admin->hasPermission(\App\Support\Rbac\PermissionNames::ADMIN_CONTENT_PUBLISH)
+                || $admin->hasPermission(\App\Support\Rbac\PermissionNames::ADMIN_OWNER))
+            ->mapWithKeys(fn (AdminUser $admin): array => [(int) $admin->id => trim($admin->name !== '' ? $admin->name : $admin->email)])
+            ->all();
+
+        $this->reviewerOptions = $admins
+            ->filter(fn (AdminUser $admin): bool => $admin->hasPermission(\App\Support\Rbac\PermissionNames::ADMIN_APPROVAL_REVIEW)
+                || $admin->hasPermission(\App\Support\Rbac\PermissionNames::ADMIN_CONTENT_RELEASE)
+                || $admin->hasPermission(\App\Support\Rbac\PermissionNames::ADMIN_CONTENT_PUBLISH)
+                || $admin->hasPermission(\App\Support\Rbac\PermissionNames::ADMIN_OWNER))
+            ->mapWithKeys(fn (AdminUser $admin): array => [(int) $admin->id => trim($admin->name !== '' ? $admin->name : $admin->email)])
+            ->all();
+    }
+
+    private function workflowKey(string $type, int $id): string
+    {
+        return $type.'_'.$id;
+    }
+
+    /**
+     * @param  array<string, mixed>|null  $snapshot
+     */
+    private function canSubmitForReview(?array $snapshot): bool
+    {
+        if (ContentAccess::isOwner()) {
+            return true;
+        }
+
+        if (! ContentAccess::canOpenWorkflow()) {
+            return false;
+        }
+
+        $actorId = $this->actorAdminId();
+
+        return $actorId > 0 && $actorId === (int) ($snapshot['owner_admin_user_id'] ?? 0);
+    }
+
+    /**
+     * @param  array<string, mixed>|null  $snapshot
+     */
+    private function canDecideReview(?array $snapshot): bool
+    {
+        if (ContentAccess::isOwner()) {
+            return true;
+        }
+
+        if (! ContentAccess::canReview()) {
+            return false;
+        }
+
+        $actorId = $this->actorAdminId();
+
+        return $actorId > 0 && $actorId === (int) ($snapshot['reviewer_admin_user_id'] ?? 0);
+    }
+
+    private function actorAdminId(): int
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user) && is_numeric(data_get($user, 'id'))
+            ? (int) data_get($user, 'id')
+            : 0;
     }
 }

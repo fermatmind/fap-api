@@ -9,6 +9,7 @@ use App\Filament\Ops\Resources\CareerGuideResource;
 use App\Filament\Ops\Resources\CareerJobResource;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\EditorialReviewAudit;
+use App\Filament\Ops\Support\EditorialReviewChecklist;
 use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
@@ -299,8 +300,21 @@ class ContentReleasePage extends Page
             return EditorialReviewAudit::STATE_APPROVED;
         }
 
+        $checklistReady = EditorialReviewChecklist::missing($type, $record) === [];
         $decision = EditorialReviewAudit::latestState($type, $record);
 
-        return $decision['state'] ?? EditorialReviewAudit::STATE_NEEDS_ATTENTION;
+        if (is_array($decision) && ($decision['state'] ?? null) !== null) {
+            $state = (string) $decision['state'];
+
+            if ($state === EditorialReviewAudit::STATE_READY && ! $checklistReady) {
+                return EditorialReviewAudit::STATE_NEEDS_ATTENTION;
+            }
+
+            return $state;
+        }
+
+        return $checklistReady
+            ? EditorialReviewAudit::STATE_READY
+            : EditorialReviewAudit::STATE_NEEDS_ATTENTION;
     }
 }

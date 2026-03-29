@@ -60,6 +60,9 @@ final class PostReleaseObservabilityPageTest extends TestCase
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_RELEASE,
         ]);
+        $owner = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
         $selectedOrg = $this->createOrganization('Release Observability Org');
 
         $article = Article::query()->create([
@@ -154,6 +157,13 @@ final class PostReleaseObservabilityPageTest extends TestCase
         $context->set((int) $selectedOrg->id, (int) $admin->id, 'admin');
         app()->instance(OrgContext::class, $context);
 
+        $this->routeRecordIntoReview((int) $selectedOrg->id, $owner, $admin, 'article', $article);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        app()->instance('request', Request::create('/ops/editorial-review', 'POST'));
+
+        $context = app(OrgContext::class);
+        $context->set((int) $selectedOrg->id, (int) $admin->id, 'admin');
+        app()->instance(OrgContext::class, $context);
         EditorialReviewAudit::mark(EditorialReviewAudit::STATE_APPROVED, 'article', $article);
 
         Livewire::test(ContentReleasePage::class)
@@ -208,6 +218,9 @@ final class PostReleaseObservabilityPageTest extends TestCase
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_RELEASE,
         ]);
+        $owner = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
         $selectedOrg = $this->createOrganization('Selected Observability Org');
         $otherOrg = $this->createOrganization('Other Observability Org');
 
@@ -222,6 +235,19 @@ final class PostReleaseObservabilityPageTest extends TestCase
             'is_public' => false,
             'is_indexable' => true,
         ]);
+        ArticleSeoMeta::query()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'article_id' => (int) $article->id,
+            'locale' => 'en',
+            'seo_title' => 'Resource Release Article SEO Title',
+            'seo_description' => 'Resource Release Article SEO Description',
+            'canonical_url' => 'https://example.test/articles/resource-release-article',
+            'og_title' => 'Resource Release Article OG Title',
+            'og_description' => 'Resource Release Article OG Description',
+            'og_image_url' => 'https://example.test/images/resource-release-article.png',
+            'robots' => 'index,follow',
+            'is_indexable' => true,
+        ]);
 
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
         app()->instance('request', Request::create('/ops/articles', 'POST'));
@@ -230,6 +256,13 @@ final class PostReleaseObservabilityPageTest extends TestCase
         $context->set((int) $selectedOrg->id, (int) $admin->id, 'admin');
         app()->instance(OrgContext::class, $context);
 
+        $this->routeRecordIntoReview((int) $selectedOrg->id, $owner, $admin, 'article', $article);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        app()->instance('request', Request::create('/ops/editorial-review', 'POST'));
+
+        $context = app(OrgContext::class);
+        $context->set((int) $selectedOrg->id, (int) $admin->id, 'admin');
+        app()->instance(OrgContext::class, $context);
         EditorialReviewAudit::mark(EditorialReviewAudit::STATE_APPROVED, 'article', $article);
         ArticleResource::releaseRecord($article, 'resource_table');
 
@@ -320,5 +353,32 @@ final class PostReleaseObservabilityPageTest extends TestCase
             'ops_org_id' => (int) $selectedOrg->id,
             'ops_admin_totp_verified_user_id' => (int) $admin->id,
         ];
+    }
+
+    private function routeRecordIntoReview(int $orgId, AdminUser $owner, AdminUser $reviewer, string $type, object $record): void
+    {
+        $this->actingAs($owner, (string) config('admin.guard', 'admin'));
+        app()->instance('request', Request::create('/ops/editorial-review', 'POST'));
+
+        $context = app(OrgContext::class);
+        $context->set($orgId, (int) $owner->id, 'admin');
+        app()->instance(OrgContext::class, $context);
+        EditorialReviewAudit::assignOwner((int) $owner->id, $type, $record);
+
+        $this->actingAs($reviewer, (string) config('admin.guard', 'admin'));
+        app()->instance('request', Request::create('/ops/editorial-review', 'POST'));
+
+        $context = app(OrgContext::class);
+        $context->set($orgId, (int) $reviewer->id, 'admin');
+        app()->instance(OrgContext::class, $context);
+        EditorialReviewAudit::assignReviewer((int) $reviewer->id, $type, $record);
+
+        $this->actingAs($owner, (string) config('admin.guard', 'admin'));
+        app()->instance('request', Request::create('/ops/editorial-review', 'POST'));
+
+        $context = app(OrgContext::class);
+        $context->set($orgId, (int) $owner->id, 'admin');
+        app()->instance(OrgContext::class, $context);
+        EditorialReviewAudit::submit($type, $record);
     }
 }
