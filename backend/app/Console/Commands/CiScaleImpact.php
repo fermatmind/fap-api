@@ -23,7 +23,7 @@ final class CiScaleImpact extends Command
         $base = trim((string) $this->option('base'));
         $head = trim((string) $this->option('head'));
         $format = strtolower(trim((string) $this->option('format')));
-        if (!in_array($format, ['json', 'env'], true)) {
+        if (! in_array($format, ['json', 'env'], true)) {
             $format = 'json';
         }
 
@@ -48,12 +48,13 @@ final class CiScaleImpact extends Command
      */
     private function collectChangedPaths(string $base, string $head): array
     {
-        if (!$this->gitRefExists($base)) {
+        if (! $this->gitRefExists($base)) {
             $this->runGit(['fetch', '--no-tags', '--prune', '--depth=200', 'origin', 'main']);
         }
 
         if ($this->gitRefExists($base)) {
             $diff = $this->runGit(['diff', '--name-only', '--diff-filter=ACMR', "{$base}...{$head}"]);
+
             return $this->splitLines($diff);
         }
 
@@ -75,7 +76,7 @@ final class CiScaleImpact extends Command
         $process = new Process(array_merge(['git'], $args), base_path());
         $process->run();
 
-        if (!$process->isSuccessful()) {
+        if (! $process->isSuccessful()) {
             return '';
         }
 
@@ -100,29 +101,29 @@ final class CiScaleImpact extends Command
     }
 
     /**
-     * @param array<string,mixed> $payload
+     * @param  array<string,mixed>  $payload
      */
     private function toEnvOutput(array $payload): string
     {
         $bool = static fn (bool $v): string => $v ? '1' : '0';
 
         $lines = [
-            'run_big5_ocean_gate=' . $bool((bool) ($payload['run_big5_ocean_gate'] ?? false)),
-            'run_clinical_combo_68_gate=' . $bool((bool) ($payload['run_clinical_combo_68_gate'] ?? false)),
-            'run_sds_20_gate=' . $bool((bool) ($payload['run_sds_20_gate'] ?? false)),
-            'run_eq_60_gate=' . $bool((bool) ($payload['run_eq_60_gate'] ?? false)),
-            'run_sds_norms_gate=' . $bool((bool) ($payload['run_sds_norms_gate'] ?? false)),
-            'run_full_scale_regression=' . $bool((bool) ($payload['run_full_scale_regression'] ?? false)),
-            'run_mbti_smoke=' . $bool((bool) ($payload['run_mbti_smoke'] ?? true)),
-            'scale_scope=' . (string) ($payload['scale_scope'] ?? 'mbti_only'),
-            'reason=' . (string) ($payload['reason'] ?? ''),
+            'run_big5_ocean_gate='.$bool((bool) ($payload['run_big5_ocean_gate'] ?? false)),
+            'run_clinical_combo_68_gate='.$bool((bool) ($payload['run_clinical_combo_68_gate'] ?? false)),
+            'run_sds_20_gate='.$bool((bool) ($payload['run_sds_20_gate'] ?? false)),
+            'run_eq_60_gate='.$bool((bool) ($payload['run_eq_60_gate'] ?? false)),
+            'run_sds_norms_gate='.$bool((bool) ($payload['run_sds_norms_gate'] ?? false)),
+            'run_full_scale_regression='.$bool((bool) ($payload['run_full_scale_regression'] ?? false)),
+            'run_mbti_smoke='.$bool((bool) ($payload['run_mbti_smoke'] ?? true)),
+            'scale_scope='.(string) ($payload['scale_scope'] ?? 'mbti_only'),
+            'reason='.(string) ($payload['reason'] ?? ''),
         ];
 
         return implode(PHP_EOL, $lines);
     }
 
     /**
-     * @param array<string,mixed> $payload
+     * @param  array<string,mixed>  $payload
      */
     private function writeGithubOutput(array $payload): void
     {
@@ -133,17 +134,17 @@ final class CiScaleImpact extends Command
 
         $bool = static fn (bool $v): string => $v ? '1' : '0';
         $lines = [
-            'run_big5_ocean_gate=' . $bool((bool) ($payload['run_big5_ocean_gate'] ?? false)),
-            'run_clinical_combo_68_gate=' . $bool((bool) ($payload['run_clinical_combo_68_gate'] ?? false)),
-            'run_sds_20_gate=' . $bool((bool) ($payload['run_sds_20_gate'] ?? false)),
-            'run_eq_60_gate=' . $bool((bool) ($payload['run_eq_60_gate'] ?? false)),
-            'run_sds_norms_gate=' . $bool((bool) ($payload['run_sds_norms_gate'] ?? false)),
-            'run_full_scale_regression=' . $bool((bool) ($payload['run_full_scale_regression'] ?? false)),
-            'run_mbti_smoke=' . $bool((bool) ($payload['run_mbti_smoke'] ?? true)),
-            'scale_scope=' . (string) ($payload['scale_scope'] ?? 'mbti_only'),
-            'reason=' . (string) ($payload['reason'] ?? ''),
+            'run_big5_ocean_gate='.$bool((bool) ($payload['run_big5_ocean_gate'] ?? false)),
+            'run_clinical_combo_68_gate='.$bool((bool) ($payload['run_clinical_combo_68_gate'] ?? false)),
+            'run_sds_20_gate='.$bool((bool) ($payload['run_sds_20_gate'] ?? false)),
+            'run_eq_60_gate='.$bool((bool) ($payload['run_eq_60_gate'] ?? false)),
+            'run_sds_norms_gate='.$bool((bool) ($payload['run_sds_norms_gate'] ?? false)),
+            'run_full_scale_regression='.$bool((bool) ($payload['run_full_scale_regression'] ?? false)),
+            'run_mbti_smoke='.$bool((bool) ($payload['run_mbti_smoke'] ?? true)),
+            'scale_scope='.(string) ($payload['scale_scope'] ?? 'mbti_only'),
+            'reason='.(string) ($payload['reason'] ?? ''),
         ];
 
-        file_put_contents($target, implode(PHP_EOL, $lines) . PHP_EOL, FILE_APPEND);
+        file_put_contents($target, implode(PHP_EOL, $lines).PHP_EOL, FILE_APPEND);
     }
 }

@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 $appUrl = rtrim((string) env('APP_URL', 'http://localhost'), '/');
-$globalTermsUrl = (string) env('FAP_GLOBAL_TERMS_URL', $appUrl . '/terms');
-$globalPrivacyUrl = (string) env('FAP_GLOBAL_PRIVACY_URL', $appUrl . '/privacy');
-$globalRefundUrl = (string) env('FAP_GLOBAL_REFUND_URL', $appUrl . '/refund');
-$cnTermsUrl = (string) env('FAP_CN_TERMS_URL', $appUrl . '/zh/terms');
-$cnPrivacyUrl = (string) env('FAP_CN_PRIVACY_URL', $appUrl . '/zh/privacy');
-$cnRefundUrl = (string) env('FAP_CN_REFUND_URL', $appUrl . '/zh/refund');
+$globalTermsUrl = (string) env('FAP_GLOBAL_TERMS_URL', $appUrl.'/terms');
+$globalPrivacyUrl = (string) env('FAP_GLOBAL_PRIVACY_URL', $appUrl.'/privacy');
+$globalRefundUrl = (string) env('FAP_GLOBAL_REFUND_URL', $appUrl.'/refund');
+$cnTermsUrl = (string) env('FAP_CN_TERMS_URL', $appUrl.'/zh/terms');
+$cnPrivacyUrl = (string) env('FAP_CN_PRIVACY_URL', $appUrl.'/zh/privacy');
+$cnRefundUrl = (string) env('FAP_CN_REFUND_URL', $appUrl.'/zh/refund');
 
 return [
     'default_region' => env('FAP_DEFAULT_REGION', 'CN_MAINLAND'),

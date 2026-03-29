@@ -123,14 +123,14 @@ class HealthChecks extends Page
             $passwordSet = trim((string) config('mail.mailers.smtp.password', '')) !== '';
 
             $summary = implode(', ', array_filter([
-                'mailer=' . ($mailer !== '' ? $mailer : 'unknown'),
-                'host=' . ($host !== '' ? $host : 'n/a'),
-                'port=' . ($port !== '' ? $port : 'n/a'),
-                'encryption=' . ($encryption !== '' ? $encryption : 'none'),
-                'from=' . ($fromAddress !== '' ? $fromAddress : 'n/a'),
-                'from_name=' . ($fromName !== '' ? $fromName : 'n/a'),
-                'smtp_username_set=' . ($usernameSet ? 'yes' : 'no'),
-                'smtp_password_set=' . ($passwordSet ? 'yes' : 'no'),
+                'mailer='.($mailer !== '' ? $mailer : 'unknown'),
+                'host='.($host !== '' ? $host : 'n/a'),
+                'port='.($port !== '' ? $port : 'n/a'),
+                'encryption='.($encryption !== '' ? $encryption : 'none'),
+                'from='.($fromAddress !== '' ? $fromAddress : 'n/a'),
+                'from_name='.($fromName !== '' ? $fromName : 'n/a'),
+                'smtp_username_set='.($usernameSet ? 'yes' : 'no'),
+                'smtp_password_set='.($passwordSet ? 'yes' : 'no'),
             ]));
 
             $ok = $mailer !== '';

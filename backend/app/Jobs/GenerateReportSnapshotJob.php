@@ -11,7 +11,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 
 class GenerateReportSnapshotJob implements ShouldQueue
 {
@@ -42,7 +41,7 @@ class GenerateReportSnapshotJob implements ShouldQueue
     public function handle(ReportSnapshotStore $store): void
     {
         $attemptId = trim($this->attemptId);
-        if ($attemptId === '' || !\App\Support\SchemaBaseline::hasTable('report_snapshots')) {
+        if ($attemptId === '' || ! \App\Support\SchemaBaseline::hasTable('report_snapshots')) {
             return;
         }
 
@@ -63,10 +62,10 @@ class GenerateReportSnapshotJob implements ShouldQueue
                 'org_role' => 'system',
             ]);
 
-            if (!($result['ok'] ?? false)) {
+            if (! ($result['ok'] ?? false)) {
                 $error = (string) ($result['error'] ?? 'SNAPSHOT_FAILED');
                 $message = (string) ($result['message'] ?? 'report snapshot generation failed.');
-                throw new \RuntimeException($error . ': ' . $message);
+                throw new \RuntimeException($error.': '.$message);
             }
 
             $this->updateSnapshotState($attemptId, [
@@ -76,7 +75,7 @@ class GenerateReportSnapshotJob implements ShouldQueue
         } catch (\Throwable $e) {
             $this->updateSnapshotState($attemptId, [
                 'status' => 'failed',
-                'last_error' => $this->truncateError($e::class . ': ' . $e->getMessage()),
+                'last_error' => $this->truncateError($e::class.': '.$e->getMessage()),
             ]);
 
             Log::error('REPORT_SNAPSHOT_GENERATE_FAILED', [
@@ -93,7 +92,7 @@ class GenerateReportSnapshotJob implements ShouldQueue
 
     private function updateSnapshotState(string $attemptId, array $fields): void
     {
-        if (!\App\Support\SchemaBaseline::hasTable('report_snapshots')) {
+        if (! \App\Support\SchemaBaseline::hasTable('report_snapshots')) {
             return;
         }
 
@@ -116,7 +115,7 @@ class GenerateReportSnapshotJob implements ShouldQueue
     private function snapshotQuery(string $attemptId): Builder
     {
         $base = DB::table('report_snapshots')->where('attempt_id', $attemptId);
-        if (!\App\Support\SchemaBaseline::hasColumn('report_snapshots', 'org_id')) {
+        if (! \App\Support\SchemaBaseline::hasColumn('report_snapshots', 'org_id')) {
             return $base;
         }
 

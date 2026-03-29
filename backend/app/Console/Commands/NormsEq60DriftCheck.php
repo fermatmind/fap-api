@@ -22,7 +22,7 @@ final class NormsEq60DriftCheck extends Command
 
     public function handle(): int
     {
-        if (!Schema::hasTable('scale_norms_versions') || !Schema::hasTable('scale_norm_stats')) {
+        if (! Schema::hasTable('scale_norms_versions') || ! Schema::hasTable('scale_norm_stats')) {
             $this->error('Missing required tables: scale_norms_versions/scale_norm_stats.');
 
             return 1;
@@ -162,7 +162,7 @@ final class NormsEq60DriftCheck extends Command
                 continue;
             }
 
-            if (!isset($out[$gid])) {
+            if (! isset($out[$gid])) {
                 $out[$gid] = [
                     'id' => (string) ($row->id ?? ''),
                     'group_id' => $gid,
@@ -191,7 +191,7 @@ final class NormsEq60DriftCheck extends Command
             ->orderByDesc('sample_n')
             ->first(['mean', 'sd']);
 
-        if (!$row) {
+        if (! $row) {
             return null;
         }
 
@@ -209,7 +209,7 @@ final class NormsEq60DriftCheck extends Command
         }
 
         $trimmed = trim((string) $value);
-        if ($trimmed === '' || !is_numeric($trimmed)) {
+        if ($trimmed === '' || ! is_numeric($trimmed)) {
             return $fallback;
         }
 

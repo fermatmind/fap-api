@@ -618,6 +618,7 @@ class MbtiInsightsPage extends Page
                     $axisTotal = (int) $axisGroup->sum('results_count');
                     if ($axisTotal <= 0) {
                         $leadMap[$axisCode] = 'n/a';
+
                         continue;
                     }
 

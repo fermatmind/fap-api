@@ -20,6 +20,7 @@ class GenerateReportJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public string $attemptId;
+
     public ?string $jobId;
 
     public function __construct(string $attemptId, ?string $jobId = null)
@@ -41,7 +42,7 @@ class GenerateReportJob implements ShouldQueue
 
         $job = ReportJob::where('attempt_id', $attemptId)->first();
 
-        if (!$job) {
+        if (! $job) {
             $job = ReportJob::create([
                 'id' => $this->jobId ?: (string) Str::uuid(),
                 'org_id' => $orgId,
@@ -72,17 +73,21 @@ class GenerateReportJob implements ShouldQueue
                 'defaultProfileVersion' => config('fap.profile_version', 'mbti32-v2.5'),
             ], $result);
 
-            if (!($res['ok'] ?? false)) {
+            if (! ($res['ok'] ?? false)) {
                 $msg = $res['message'] ?? 'Report compose failed';
                 $err = $res['error'] ?? 'REPORT_FAILED';
                 throw new \RuntimeException("{$err}: {$msg}");
             }
 
             $reportPayload = $res['report'] ?? [];
-            if (!is_array($reportPayload)) $reportPayload = [];
+            if (! is_array($reportPayload)) {
+                $reportPayload = [];
+            }
 
             $reportPayload['tags'] = $res['tags'] ?? ($reportPayload['tags'] ?? []);
-            if (!is_array($reportPayload['tags'])) $reportPayload['tags'] = [];
+            if (! is_array($reportPayload['tags'])) {
+                $reportPayload['tags'] = [];
+            }
 
             $job->status = 'success';
             $job->finished_at = now();

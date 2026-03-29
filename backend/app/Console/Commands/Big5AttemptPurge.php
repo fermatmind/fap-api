@@ -41,24 +41,23 @@ final class Big5AttemptPurge extends Command
             'scale_code' => 'BIG5_OCEAN',
         ]);
 
-        if (!($result['ok'] ?? false)) {
+        if (! ($result['ok'] ?? false)) {
             $this->line('status=failed');
-            $this->line('error=' . strtoupper((string) ($result['error'] ?? 'UNKNOWN')));
+            $this->line('error='.strtoupper((string) ($result['error'] ?? 'UNKNOWN')));
 
             return 1;
         }
 
         $counts = is_array($result['counts'] ?? null) ? $result['counts'] : [];
         $this->line('status=success');
-        $this->line('attempt_id=' . (string) ($result['attempt_id'] ?? $attemptId));
-        $this->line('org_id=' . (string) ($result['org_id'] ?? $orgId));
-        $this->line('results_deleted=' . (string) (($counts['results_deleted'] ?? 0)));
-        $this->line('report_snapshots_deleted=' . (string) (($counts['report_snapshots_deleted'] ?? 0)));
-        $this->line('shares_deleted=' . (string) (($counts['shares_deleted'] ?? 0)));
-        $this->line('report_jobs_deleted=' . (string) (($counts['report_jobs_deleted'] ?? 0)));
-        $this->line('attempts_redacted=' . (string) (($counts['attempts_redacted'] ?? 0)));
+        $this->line('attempt_id='.(string) ($result['attempt_id'] ?? $attemptId));
+        $this->line('org_id='.(string) ($result['org_id'] ?? $orgId));
+        $this->line('results_deleted='.(string) (($counts['results_deleted'] ?? 0)));
+        $this->line('report_snapshots_deleted='.(string) (($counts['report_snapshots_deleted'] ?? 0)));
+        $this->line('shares_deleted='.(string) (($counts['shares_deleted'] ?? 0)));
+        $this->line('report_jobs_deleted='.(string) (($counts['report_jobs_deleted'] ?? 0)));
+        $this->line('attempts_redacted='.(string) (($counts['attempts_redacted'] ?? 0)));
 
         return 0;
     }
 }
-

@@ -43,20 +43,22 @@ class FapSelfCheck extends Command
         $io = app(SelfCheckIo::class);
         $manifestPath = $io->resolveManifestPath($ctx);
 
-        if (!$manifestPath) {
+        if (! $manifestPath) {
             $this->error('❌ cannot resolve manifest.json (use --path or --pkg or --pack_id)');
+
             return 1;
         }
 
         $manifestPath = $io->normalizePath($manifestPath);
         $ctx->withManifestPath($manifestPath);
 
-        $this->line('== CHECK ' . $io->guessPackIdForDisplay($manifestPath));
-        $this->line('   manifest: ' . $manifestPath);
+        $this->line('== CHECK '.$io->guessPackIdForDisplay($manifestPath));
+        $this->line('   manifest: '.$manifestPath);
 
         $manifest = $io->readJsonFile($manifestPath);
-        if (!is_array($manifest)) {
+        if (! is_array($manifest)) {
             $this->error('SELF-CHECK FAILED: manifest invalid JSON');
+
             return 1;
         }
 
@@ -68,16 +70,16 @@ class FapSelfCheck extends Command
         $runner = app(SelfCheckRunner::class);
 
         $checks = [
-            new ManifestContractCheck(),
-            new AssetsSchemasCheck(),
-            new LandingMetaCheck(),
-            new QuestionsCheck(),
-            new TypeProfilesCheck(),
-            new CardsCheck(),
-            new HighlightsCheck(),
-            new SectionPoliciesCheck(),
-            new ReportRulesCheck(),
-            new IdentityLayersCheck(),
+            new ManifestContractCheck,
+            new AssetsSchemasCheck,
+            new LandingMetaCheck,
+            new QuestionsCheck,
+            new TypeProfilesCheck,
+            new CardsCheck,
+            new HighlightsCheck,
+            new SectionPoliciesCheck,
+            new ReportRulesCheck,
+            new IdentityLayersCheck,
         ];
 
         $results = $runner->runAll($ctx, $checks);
@@ -90,10 +92,12 @@ class FapSelfCheck extends Command
 
         if ($runner->isOverallOk($results)) {
             $this->info('✅ SELF-CHECK PASSED');
+
             return 0;
         }
 
         $this->error('❌ SELF-CHECK FAILED (see errors above)');
+
         return 1;
     }
 
@@ -117,7 +121,7 @@ class FapSelfCheck extends Command
         }
 
         foreach ($messages as $message) {
-            $this->line('  - ' . $message);
+            $this->line('  - '.$message);
         }
     }
 }

@@ -138,27 +138,32 @@ final class StorageMigrateLegacyArtifacts extends Command
 
             if ($source === '' || $target === '') {
                 $skippedFiles++;
+
                 continue;
             }
 
             if (! $disk->exists($source)) {
                 $missingFiles++;
+
                 continue;
             }
 
             if ($disk->exists($target)) {
                 $skippedFiles++;
+
                 continue;
             }
 
             $content = $disk->get($source);
             if (! is_string($content) || $content === '') {
                 $failedFiles++;
+
                 continue;
             }
 
             if (! $disk->put($target, $content)) {
                 $failedFiles++;
+
                 continue;
             }
 

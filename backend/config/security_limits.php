@@ -6,5 +6,5 @@ return [
 
     // meta_json 字段额外限制：避免小包体内塞超深/超大的数组导致验证与序列化开销
     'public_event_meta_max_bytes' => (int) env('PUBLIC_EVENT_META_MAX_BYTES', 4096),
-    'public_event_meta_max_keys'  => (int) env('PUBLIC_EVENT_META_MAX_KEYS', 50),
+    'public_event_meta_max_keys' => (int) env('PUBLIC_EVENT_META_MAX_KEYS', 50),
 ];

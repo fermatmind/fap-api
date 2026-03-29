@@ -84,6 +84,7 @@ final class CommerceReconcile extends Command
             $hasActiveGrant = isset($activeGrantSet[$orderNo]);
             if ($hasActiveGrant) {
                 $unlockedCount++;
+
                 continue;
             }
 

@@ -19,12 +19,14 @@ class MetricsWeeklyValidity extends Command
     {
         if ((int) \App\Support\RuntimeConfig::value('WEEKLY_METRICS_ENABLED', 0) !== 1) {
             $this->line(json_encode(['ok' => false, 'error' => 'NOT_ENABLED']));
+
             return 2;
         }
 
         $weekKey = $this->normalizeWeekKey((string) $this->option('week'));
         if ($weekKey === null) {
             $this->error('Invalid --week. Expect ISO week like 2026-W03.');
+
             return 1;
         }
 
@@ -50,14 +52,15 @@ class MetricsWeeklyValidity extends Command
         $markdown = $this->renderMarkdown($weekKey, $windowStart, $windowEnd, $groups, $topK);
 
         $dir = storage_path('app/ops/weekly');
-        if (!File::exists($dir)) {
+        if (! File::exists($dir)) {
             File::makeDirectory($dir, 0755, true);
         }
 
-        $path = $dir . DIRECTORY_SEPARATOR . "validity_{$weekKey}.md";
+        $path = $dir.DIRECTORY_SEPARATOR."validity_{$weekKey}.md";
         File::put($path, $markdown);
 
         $this->info("OK: wrote {$path}");
+
         return self::SUCCESS;
     }
 
@@ -68,7 +71,7 @@ class MetricsWeeklyValidity extends Command
             return CarbonImmutable::now('UTC')->format('o-\WW');
         }
 
-        if (!preg_match('/^(\d{4})-W(\d{2})$/', $weekOpt, $m)) {
+        if (! preg_match('/^(\d{4})-W(\d{2})$/', $weekOpt, $m)) {
             return null;
         }
 
@@ -105,7 +108,7 @@ class MetricsWeeklyValidity extends Command
     }
 
     /**
-     * @param iterable<int, object> $rows
+     * @param  iterable<int, object>  $rows
      * @return array<string, array<string, mixed>>
      */
     private function buildGroups(iterable $rows, int $topK): array
@@ -116,9 +119,9 @@ class MetricsWeeklyValidity extends Command
             $packId = (string) $row->pack_id;
             $packVersion = (string) $row->pack_version;
             $reportVersion = (string) $row->report_version;
-            $key = $packId . '|' . $packVersion . '|' . $reportVersion;
+            $key = $packId.'|'.$packVersion.'|'.$reportVersion;
 
-            if (!isset($groups[$key])) {
+            if (! isset($groups[$key])) {
                 $groups[$key] = [
                     'pack_id' => $packId,
                     'pack_version' => $packVersion,
@@ -154,7 +157,7 @@ class MetricsWeeklyValidity extends Command
                 $tags = json_decode((string) $row->reason_tags_json, true);
                 if (is_array($tags)) {
                     foreach ($tags as $tag) {
-                        if (!is_string($tag)) {
+                        if (! is_string($tag)) {
                             continue;
                         }
                         $tag = trim($tag);
@@ -190,7 +193,7 @@ class MetricsWeeklyValidity extends Command
     }
 
     /**
-     * @param array<string,int> $counts
+     * @param  array<string,int>  $counts
      * @return array<int, array{key:string,count:int}>
      */
     private function topCounts(array $counts, int $k): array
@@ -204,6 +207,7 @@ class MetricsWeeklyValidity extends Command
             if ($a['count'] === $b['count']) {
                 return strcmp($a['key'], $b['key']);
             }
+
             return $b['count'] <=> $a['count'];
         });
 
@@ -211,7 +215,7 @@ class MetricsWeeklyValidity extends Command
     }
 
     /**
-     * @param array<int,string> $texts
+     * @param  array<int,string>  $texts
      * @return array<int,string>
      */
     private function topKeywords(array $texts, int $k): array
@@ -220,14 +224,14 @@ class MetricsWeeklyValidity extends Command
         $stopwords = $this->stopwords();
 
         foreach ($texts as $text) {
-            if (!is_string($text) || trim($text) === '') {
+            if (! is_string($text) || trim($text) === '') {
                 continue;
             }
             $clean = mb_strtolower($text, 'UTF-8');
             $clean = preg_replace('/[0-9]+/u', ' ', $clean);
             $clean = preg_replace('/[^\p{L}\s]+/u', ' ', $clean);
             $words = preg_split('/\s+/u', $clean, -1, PREG_SPLIT_NO_EMPTY);
-            if (!is_array($words)) {
+            if (! is_array($words)) {
                 continue;
             }
             foreach ($words as $word) {
@@ -242,6 +246,7 @@ class MetricsWeeklyValidity extends Command
         }
 
         $items = $this->topCounts($counts, $k);
+
         return array_map(fn (array $item) => $item['key'], $items);
     }
 
@@ -277,7 +282,7 @@ class MetricsWeeklyValidity extends Command
     }
 
     /**
-     * @param array<string, array<string,mixed>> $groups
+     * @param  array<string, array<string,mixed>>  $groups
      */
     private function renderMarkdown(
         string $weekKey,
@@ -295,9 +300,9 @@ class MetricsWeeklyValidity extends Command
         $lines[] = "# Weekly Validity Metrics ({$weekKey})";
         $lines[] = '';
         $lines[] = "- Window (UTC): {$windowStart} ~ {$windowEnd}";
-        $lines[] = '- Generated at (UTC): ' . CarbonImmutable::now('UTC')->format('Y-m-d H:i:s');
-        $lines[] = '- Total groups: ' . count($groups);
-        $lines[] = '- Total N: ' . $totalN;
+        $lines[] = '- Generated at (UTC): '.CarbonImmutable::now('UTC')->format('Y-m-d H:i:s');
+        $lines[] = '- Total groups: '.count($groups);
+        $lines[] = '- Total N: '.$totalN;
         $lines[] = '';
 
         if (count($groups) === 0) {
@@ -305,14 +310,15 @@ class MetricsWeeklyValidity extends Command
             $lines[] = '';
             $lines[] = '- N: 0';
             $lines[] = '';
+
             return implode("\n", $lines);
         }
 
         foreach ($groups as $group) {
-            $lines[] = '## ' . $group['pack_id'] . ' | ' . $group['pack_version'] . ' | ' . $group['report_version'];
+            $lines[] = '## '.$group['pack_id'].' | '.$group['pack_version'].' | '.$group['report_version'];
             $lines[] = '';
-            $lines[] = '- N: ' . (int) $group['n'];
-            $lines[] = '- avg_score: ' . number_format((float) $group['avg_score'], 2, '.', '');
+            $lines[] = '- N: '.(int) $group['n'];
+            $lines[] = '- avg_score: '.number_format((float) $group['avg_score'], 2, '.', '');
             $lines[] = '';
             $lines[] = '### Distribution';
             $lines[] = '';
@@ -321,27 +327,27 @@ class MetricsWeeklyValidity extends Command
             foreach ([1, 2, 3, 4, 5] as $score) {
                 $count = (int) ($group['distribution'][$score] ?? 0);
                 $pct = $this->percent($count, (int) $group['n']);
-                $lines[] = '| ' . $score . ' | ' . $count . ' | ' . $pct . '% |';
+                $lines[] = '| '.$score.' | '.$count.' | '.$pct.'% |';
             }
             $lines[] = '';
 
             $lowN = (int) $group['low_score_n'];
             $lines[] = '### Low score (<=2)';
             $lines[] = '';
-            $lines[] = '- low_score_N: ' . $lowN;
+            $lines[] = '- low_score_N: '.$lowN;
             $lines[] = '';
 
-            $lines[] = '#### low_score_top_tags (top ' . $topK . ')';
+            $lines[] = '#### low_score_top_tags (top '.$topK.')';
             $lines[] = '';
             $lines[] = $this->renderTopTable($group['top_tags'] ?? [], $lowN);
             $lines[] = '';
 
-            $lines[] = '#### low_score_top_type_code (top ' . $topK . ')';
+            $lines[] = '#### low_score_top_type_code (top '.$topK.')';
             $lines[] = '';
             $lines[] = $this->renderTopTable($group['top_type_code'] ?? [], $lowN);
             $lines[] = '';
 
-            $lines[] = '#### free_text_keywords (top ' . $topK . ')';
+            $lines[] = '#### free_text_keywords (top '.$topK.')';
             $lines[] = '';
             $lines[] = $this->renderKeywordList($group['keywords'] ?? []);
             $lines[] = '';
@@ -351,7 +357,7 @@ class MetricsWeeklyValidity extends Command
     }
 
     /**
-     * @param array<int, array{key:string,count:int}> $items
+     * @param  array<int, array{key:string,count:int}>  $items
      */
     private function renderTopTable(array $items, int $denom): string
     {
@@ -364,14 +370,14 @@ class MetricsWeeklyValidity extends Command
         $lines[] = '|---|---:|---:|';
         foreach ($items as $item) {
             $pct = $this->percent((int) $item['count'], $denom);
-            $lines[] = '| ' . $item['key'] . ' | ' . (int) $item['count'] . ' | ' . $pct . '% |';
+            $lines[] = '| '.$item['key'].' | '.(int) $item['count'].' | '.$pct.'% |';
         }
 
         return implode("\n", $lines);
     }
 
     /**
-     * @param array<int,string> $keywords
+     * @param  array<int,string>  $keywords
      */
     private function renderKeywordList(array $keywords): string
     {
@@ -381,7 +387,7 @@ class MetricsWeeklyValidity extends Command
 
         $lines = [];
         foreach ($keywords as $word) {
-            $lines[] = '- ' . $word;
+            $lines[] = '- '.$word;
         }
 
         return implode("\n", $lines);

@@ -64,12 +64,12 @@ final class SchemaBaseline
             return false;
         }
 
-        if (!self::hasTable($table)) {
+        if (! self::hasTable($table)) {
             return false;
         }
 
         $cacheKey = self::cacheKey($table);
-        if (!array_key_exists($cacheKey, self::$tableColumnsCache)) {
+        if (! array_key_exists($cacheKey, self::$tableColumnsCache)) {
             self::$tableColumnsCache[$cacheKey] = self::introspectColumns($table);
         }
 
@@ -138,12 +138,12 @@ final class SchemaBaseline
     private static function featureForTable(string $table): ?string
     {
         $tableToFeature = config('fap.schema_baseline.feature_tables', []);
-        if (!is_array($tableToFeature)) {
+        if (! is_array($tableToFeature)) {
             return null;
         }
 
         $feature = $tableToFeature[$table] ?? null;
-        if (!is_string($feature)) {
+        if (! is_string($feature)) {
             return null;
         }
 

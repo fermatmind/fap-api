@@ -12,13 +12,16 @@ use Illuminate\Support\Facades\Schema;
 class SyncScaleSlugs extends Command
 {
     protected $signature = 'fap:scales:sync-slugs';
+
     protected $description = 'Rebuild scale_slugs from scales_registry.';
+
     private const V2_TABLE = 'scales_registry_v2';
 
     public function handle(): int
     {
-        if (!Schema::hasTable('scales_registry') || !Schema::hasTable('scale_slugs')) {
+        if (! Schema::hasTable('scales_registry') || ! Schema::hasTable('scale_slugs')) {
             $this->warn('scale tables missing; migrate first.');
+
             return self::FAILURE;
         }
 
@@ -43,7 +46,7 @@ class SyncScaleSlugs extends Command
      */
     private function loadScalesForSlugSync()
     {
-        if (!Schema::hasTable(self::V2_TABLE) || !(bool) config('fap.scales_registry.use_v2', true)) {
+        if (! Schema::hasTable(self::V2_TABLE) || ! (bool) config('fap.scales_registry.use_v2', true)) {
             return ScaleRegistryModel::query()->orderBy('code')->get();
         }
 
@@ -57,11 +60,11 @@ class SyncScaleSlugs extends Command
             if (is_string($payload['slugs_json'] ?? null)) {
                 $decoded = json_decode((string) $payload['slugs_json'], true);
                 $payload['slugs_json'] = is_array($decoded) ? $decoded : [];
-            } elseif (!is_array($payload['slugs_json'] ?? null)) {
+            } elseif (! is_array($payload['slugs_json'] ?? null)) {
                 $payload['slugs_json'] = [];
             }
 
-            $model = new ScaleRegistryModel();
+            $model = new ScaleRegistryModel;
             $model->forceFill($payload);
 
             return $model;

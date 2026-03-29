@@ -13,9 +13,7 @@ class SendAgentMessageJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function __construct(private int $userId)
-    {
-    }
+    public function __construct(private int $userId) {}
 
     public function handle(): void
     {

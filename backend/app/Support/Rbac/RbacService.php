@@ -7,13 +7,12 @@ namespace App\Support\Rbac;
 use App\Models\AdminUser;
 use App\Models\Permission;
 use App\Models\Role;
-use Illuminate\Support\Facades\Schema;
 
 class RbacService
 {
     public function grantRole(AdminUser $user, string $roleName): void
     {
-        if (!$this->tablesReady()) {
+        if (! $this->tablesReady()) {
             return;
         }
 
@@ -28,7 +27,7 @@ class RbacService
 
     public function revokeRole(AdminUser $user, string $roleName): void
     {
-        if (!$this->tablesReady()) {
+        if (! $this->tablesReady()) {
             return;
         }
 
@@ -41,11 +40,11 @@ class RbacService
     }
 
     /**
-     * @param list<string> $permissionNames
+     * @param  list<string>  $permissionNames
      */
     public function syncRolePermissions(string $roleName, array $permissionNames): void
     {
-        if (!$this->tablesReady()) {
+        if (! $this->tablesReady()) {
             return;
         }
 
@@ -74,7 +73,7 @@ class RbacService
 
     public function assertCan(AdminUser $user, string $permissionName): void
     {
-        if (!$user->hasPermission($permissionName)) {
+        if (! $user->hasPermission($permissionName)) {
             abort(404, 'Not Found');
         }
     }

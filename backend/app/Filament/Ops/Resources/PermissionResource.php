@@ -16,12 +16,15 @@ class PermissionResource extends Resource
     protected static ?string $model = Permission::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-key';
+
     protected static ?string $navigationGroup = 'Admin';
+
     protected static ?string $navigationLabel = 'Permissions';
 
     public static function canViewAny(): bool
     {
         $user = auth((string) config('admin.guard', 'admin'))->user();
+
         return $user !== null
             && method_exists($user, 'hasPermission')
             && $user->hasPermission(PermissionNames::ADMIN_OWNER);

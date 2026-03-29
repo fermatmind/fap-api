@@ -73,12 +73,14 @@ class BackfillAttemptAnswerSetsScaleIdentity extends Command
                 $legacyCode = $this->resolveLegacyCode($row);
                 if ($legacyCode === '') {
                     $skippedUnknown++;
+
                     continue;
                 }
 
                 $identity = $this->identityResolver->resolveByAnyCode($legacyCode);
                 if (! is_array($identity) || ! (bool) ($identity['is_known'] ?? false)) {
                     $skippedUnknown++;
+
                     continue;
                 }
 
@@ -86,6 +88,7 @@ class BackfillAttemptAnswerSetsScaleIdentity extends Command
                 $resolvedUid = trim((string) ($identity['scale_uid'] ?? ''));
                 if ($resolvedV2 === '') {
                     $skippedUnknown++;
+
                     continue;
                 }
 
@@ -148,4 +151,3 @@ class BackfillAttemptAnswerSetsScaleIdentity extends Command
         return strtoupper(trim((string) ($attempt->scale_code ?? '')));
     }
 }
-

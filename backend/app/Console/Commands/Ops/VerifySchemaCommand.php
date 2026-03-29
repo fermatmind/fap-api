@@ -27,11 +27,11 @@ final class VerifySchemaCommand extends Command
                 }
 
                 $feature = $this->featureForTable($table);
-                if ($feature !== null && !$this->featureEnabled($feature)) {
+                if ($feature !== null && ! $this->featureEnabled($feature)) {
                     continue;
                 }
 
-                if (!Schema::hasTable($table)) {
+                if (! Schema::hasTable($table)) {
                     $missingTables[] = $table;
                 }
             }
@@ -41,17 +41,18 @@ final class VerifySchemaCommand extends Command
         if (is_array($requiredColumns)) {
             foreach ($requiredColumns as $table => $columns) {
                 $table = strtolower(trim((string) $table));
-                if ($table === '' || !is_array($columns)) {
+                if ($table === '' || ! is_array($columns)) {
                     continue;
                 }
 
                 $feature = $this->featureForTable($table);
-                if ($feature !== null && !$this->featureEnabled($feature)) {
+                if ($feature !== null && ! $this->featureEnabled($feature)) {
                     continue;
                 }
 
-                if (!Schema::hasTable($table)) {
+                if (! Schema::hasTable($table)) {
                     $missingTables[] = $table;
+
                     continue;
                 }
 
@@ -61,7 +62,7 @@ final class VerifySchemaCommand extends Command
                         continue;
                     }
 
-                    if (!Schema::hasColumn($table, $column)) {
+                    if (! Schema::hasColumn($table, $column)) {
                         $missingColumns[] = "{$table}.{$column}";
                     }
                 }
@@ -101,12 +102,12 @@ final class VerifySchemaCommand extends Command
     private function featureForTable(string $table): ?string
     {
         $tableToFeature = config('fap.schema_baseline.feature_tables', []);
-        if (!is_array($tableToFeature)) {
+        if (! is_array($tableToFeature)) {
             return null;
         }
 
         $feature = $tableToFeature[$table] ?? null;
-        if (!is_string($feature)) {
+        if (! is_string($feature)) {
             return null;
         }
 

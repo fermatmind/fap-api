@@ -10,7 +10,6 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 
 class BackfillOrgIdJob implements ShouldQueue
 {
@@ -31,32 +30,35 @@ class BackfillOrgIdJob implements ShouldQueue
 
     public function handle(): void
     {
-        if (!$this->isSafeIdentifier($this->table)
-            || !$this->isSafeIdentifier($this->idColumn)
-            || !$this->isSafeIdentifier($this->orgIdColumn)) {
+        if (! $this->isSafeIdentifier($this->table)
+            || ! $this->isSafeIdentifier($this->idColumn)
+            || ! $this->isSafeIdentifier($this->orgIdColumn)) {
             Log::warning('[org_id_backfill] invalid identifier', [
                 'table' => $this->table,
                 'id_column' => $this->idColumn,
                 'org_id_column' => $this->orgIdColumn,
             ]);
+
             return;
         }
 
-        if (!\App\Support\SchemaBaseline::hasTable('migration_backfills')
-            || !\App\Support\SchemaBaseline::hasTable($this->table)
-            || !\App\Support\SchemaBaseline::hasColumn($this->table, $this->idColumn)
-            || !\App\Support\SchemaBaseline::hasColumn($this->table, $this->orgIdColumn)) {
+        if (! \App\Support\SchemaBaseline::hasTable('migration_backfills')
+            || ! \App\Support\SchemaBaseline::hasTable($this->table)
+            || ! \App\Support\SchemaBaseline::hasColumn($this->table, $this->idColumn)
+            || ! \App\Support\SchemaBaseline::hasColumn($this->table, $this->orgIdColumn)) {
             Log::warning('[org_id_backfill] table/column missing', [
                 'table' => $this->table,
                 'id_column' => $this->idColumn,
                 'org_id_column' => $this->orgIdColumn,
             ]);
+
             return;
         }
 
         $lock = Cache::lock("backfill:org_id:{$this->table}", 300);
-        if (!$lock->get()) {
+        if (! $lock->get()) {
             Log::info('[org_id_backfill] lock busy, skip', ['table' => $this->table]);
+
             return;
         }
 

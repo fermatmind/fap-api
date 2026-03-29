@@ -248,9 +248,6 @@ final class QueueBacklogProbe extends Command
         return array_keys($dedup);
     }
 
-    /**
-     * @param  mixed  $value
-     */
     private function isTruthy(mixed $value): bool
     {
         if (is_bool($value)) {
@@ -273,7 +270,6 @@ final class QueueBacklogProbe extends Command
     }
 
     /**
-     * @param  mixed  $rawQueues
      * @return list<string>
      */
     private function normalizeQueueList(mixed $rawQueues): array

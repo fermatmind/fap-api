@@ -7,7 +7,9 @@ namespace App\Support;
 final class SensitiveDataRedactor
 {
     private const REDACTED = '[REDACTED]';
+
     private const REDACTED_PSYCH = '[REDACTED_PSYCH]';
+
     private const REDACTION_VERSION = 'v2';
 
     /** @var list<string> */
@@ -48,7 +50,7 @@ final class SensitiveDataRedactor
     ];
 
     /**
-     * @param array<mixed> $data
+     * @param  array<mixed>  $data
      * @return array<mixed>
      */
     public function redact(array $data): array
@@ -57,7 +59,7 @@ final class SensitiveDataRedactor
     }
 
     /**
-     * @param array<mixed> $data
+     * @param  array<mixed>  $data
      * @return array{data: array<mixed>, count: int, version: string}
      */
     public function redactWithMeta(array $data): array
@@ -90,7 +92,7 @@ final class SensitiveDataRedactor
     }
 
     /**
-     * @param array<mixed> $data
+     * @param  array<mixed>  $data
      * @return array<mixed>
      */
     private function redactRecursive(array $data, int &$count): array
@@ -101,16 +103,19 @@ final class SensitiveDataRedactor
             if ($this->isSensitiveKey($key)) {
                 $redacted[$key] = self::REDACTED;
                 $count++;
+
                 continue;
             }
 
             if ($this->isPsychPrivacyKey($key)) {
                 $redacted[$key] = $this->redactPsychValue($value, $count);
+
                 continue;
             }
 
             if (is_array($value)) {
                 $redacted[$key] = $this->redactRecursive($value, $count);
+
                 continue;
             }
 
@@ -152,7 +157,7 @@ final class SensitiveDataRedactor
     }
 
     /**
-     * @param array<mixed> $value
+     * @param  array<mixed>  $value
      */
     private function countArrayLeaves(array $value): int
     {
@@ -161,6 +166,7 @@ final class SensitiveDataRedactor
         foreach ($value as $item) {
             if (is_array($item)) {
                 $count += $this->countArrayLeaves($item);
+
                 continue;
             }
 

@@ -54,14 +54,14 @@ class BucketCdf
         $out = [];
 
         foreach ($points as $p) {
-            if (!is_array($p)) {
+            if (! is_array($p)) {
                 continue;
             }
 
             $score = $p['score'] ?? $p['value'] ?? null;
             $cdf = $p['cdf'] ?? $p['percentile'] ?? null;
 
-            if (!is_numeric($score) || !is_numeric($cdf)) {
+            if (! is_numeric($score) || ! is_numeric($cdf)) {
                 continue;
             }
 

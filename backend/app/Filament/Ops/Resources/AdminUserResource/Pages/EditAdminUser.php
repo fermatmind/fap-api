@@ -62,7 +62,7 @@ class EditAdminUser extends EditRecord
 
     private function isPasswordReused(string $plainPassword): bool
     {
-        if (!\App\Support\SchemaBaseline::hasTable('admin_user_password_histories')) {
+        if (! \App\Support\SchemaBaseline::hasTable('admin_user_password_histories')) {
             return false;
         }
 

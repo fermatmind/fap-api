@@ -22,7 +22,7 @@ final class SchemaIndex
 
     public static function indexExists(string $table, string $indexName, ?string $connection = null): bool
     {
-        if (!self::isSafeIdentifier($table) || !self::isSafeIdentifier($indexName)) {
+        if (! self::isSafeIdentifier($table) || ! self::isSafeIdentifier($indexName)) {
             return false;
         }
 
@@ -81,7 +81,7 @@ final class SchemaIndex
         ];
 
         foreach (self::SAFE_EXTRA_KEYS as $key) {
-            if (!array_key_exists($key, $extra)) {
+            if (! array_key_exists($key, $extra)) {
                 continue;
             }
 
@@ -182,7 +182,7 @@ final class SchemaIndex
     ): void {
         try {
             $conn = self::connection(self::safeString($extra['connection'] ?? null, 32));
-            if (!$conn->getSchemaBuilder()->hasTable(self::AUDIT_TABLE)) {
+            if (! $conn->getSchemaBuilder()->hasTable(self::AUDIT_TABLE)) {
                 return;
             }
 
@@ -197,7 +197,7 @@ final class SchemaIndex
                 if (in_array($key, self::SAFE_EXTRA_KEYS, true)) {
                     continue;
                 }
-                if (!is_scalar($value) && $value !== null) {
+                if (! is_scalar($value) && $value !== null) {
                     continue;
                 }
                 $meta[(string) $key] = self::truncate((string) $value);
@@ -244,7 +244,7 @@ final class SchemaIndex
             if ($file === '') {
                 continue;
             }
-            if (strpos($file, DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'migrations' . DIRECTORY_SEPARATOR) === false) {
+            if (strpos($file, DIRECTORY_SEPARATOR.'database'.DIRECTORY_SEPARATOR.'migrations'.DIRECTORY_SEPARATOR) === false) {
                 continue;
             }
 
@@ -275,7 +275,7 @@ final class SchemaIndex
 
     private static function safeString(mixed $value, int $maxLength): ?string
     {
-        if (!is_scalar($value) && $value !== null) {
+        if (! is_scalar($value) && $value !== null) {
             return null;
         }
 

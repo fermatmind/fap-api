@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 $appUrl = rtrim((string) env('APP_URL', 'http://localhost'), '/');
-$localAssets = $appUrl . '/storage/content_assets';
+$localAssets = $appUrl.'/storage/content_assets';
 
 return [
     'default_region' => env('FAP_DEFAULT_REGION', 'CN_MAINLAND'),

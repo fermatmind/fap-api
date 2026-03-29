@@ -73,12 +73,14 @@ class BackfillReportSnapshotsScaleIdentity extends Command
                 $legacyCode = strtoupper(trim((string) ($row->scale_code ?? '')));
                 if ($legacyCode === '') {
                     $skippedUnknown++;
+
                     continue;
                 }
 
                 $identity = $this->identityResolver->resolveByAnyCode($legacyCode);
                 if (! is_array($identity) || ! (bool) ($identity['is_known'] ?? false)) {
                     $skippedUnknown++;
+
                     continue;
                 }
 
@@ -86,6 +88,7 @@ class BackfillReportSnapshotsScaleIdentity extends Command
                 $resolvedUid = trim((string) ($identity['scale_uid'] ?? ''));
                 if ($resolvedV2 === '') {
                     $skippedUnknown++;
+
                     continue;
                 }
 
@@ -129,4 +132,3 @@ class BackfillReportSnapshotsScaleIdentity extends Command
         return self::SUCCESS;
     }
 }
-

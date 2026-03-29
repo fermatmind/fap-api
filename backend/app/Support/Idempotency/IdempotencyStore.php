@@ -15,7 +15,7 @@ class IdempotencyStore
             ->where('hash', $hash)
             ->first();
 
-        if (!$row) {
+        if (! $row) {
             return null;
         }
 
@@ -30,7 +30,7 @@ class IdempotencyStore
             ->where('hash', $hash)
             ->first();
 
-        if (!$row) {
+        if (! $row) {
             return null;
         }
 
@@ -45,7 +45,7 @@ class IdempotencyStore
             ->where('recorded_at', $recordedAt)
             ->first();
 
-        if (!$row) {
+        if (! $row) {
             return null;
         }
 
@@ -146,15 +146,15 @@ class IdempotencyStore
 
         $inserted = $affected > 0;
 
-        if (!$inserted) {
+        if (! $inserted) {
             $current = $this->findByIdentity($provider, $externalId, $recordedAt);
             $this->touchByIdentity($provider, $externalId, $recordedAt);
         }
 
         return [
             'inserted' => $inserted,
-            'existing' => !$inserted,
-            'hash_mismatch' => !$inserted
+            'existing' => ! $inserted,
+            'hash_mismatch' => ! $inserted
                 ? trim((string) ($current['hash'] ?? '')) !== $hash
                 : false,
         ];
@@ -170,7 +170,7 @@ class IdempotencyStore
     }
 
     /**
-     * @param array<int, string> $externalIds
+     * @param  array<int, string>  $externalIds
      * @return array<int, string>
      */
     public function pluckInsertedExternalIds(string $provider, string $runId, array $externalIds): array

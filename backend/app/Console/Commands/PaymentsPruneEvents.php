@@ -10,14 +10,16 @@ use Illuminate\Support\Facades\Schema;
 class PaymentsPruneEvents extends Command
 {
     private const TABLE = 'payment_events';
+
     private const CHUNK_SIZE = 1000;
 
     protected $signature = 'payments:prune-events {--days=90}';
+
     protected $description = 'Archive and prune old payment webhook events.';
 
     public function handle(): int
     {
-        if (!Schema::hasTable(self::TABLE)) {
+        if (! Schema::hasTable(self::TABLE)) {
             $this->info(json_encode([
                 'ok' => true,
                 'skipped' => true,
@@ -30,17 +32,20 @@ class PaymentsPruneEvents extends Command
         $days = (int) ($this->option('days') ?? 90);
         if ($days <= 0) {
             $this->error('Invalid --days, must be greater than 0.');
+
             return 1;
         }
 
-        if (!Schema::hasColumn(self::TABLE, 'id')) {
+        if (! Schema::hasColumn(self::TABLE, 'id')) {
             $this->error('payment_events.id is required for prune.');
+
             return 1;
         }
 
         $dateColumn = $this->resolveDateColumn();
         if ($dateColumn === null) {
             $this->error('payment_events.created_at/received_at missing.');
+
             return 1;
         }
 
@@ -65,13 +70,14 @@ class PaymentsPruneEvents extends Command
 
         $archivePath = $this->archivePath($cutoff);
         $archiveDir = dirname($archivePath);
-        if (!is_dir($archiveDir)) {
+        if (! is_dir($archiveDir)) {
             mkdir($archiveDir, 0777, true);
         }
 
         $handle = gzopen($archivePath, 'wb9');
         if ($handle === false) {
             $this->error('Failed to open archive file.');
+
             return 1;
         }
 
@@ -99,7 +105,7 @@ class PaymentsPruneEvents extends Command
                         $line = '{}';
                     }
 
-                    if (gzwrite($handle, $line . "\n") === false) {
+                    if (gzwrite($handle, $line."\n") === false) {
                         throw new \RuntimeException('failed to write archive line');
                     }
 
@@ -120,14 +126,15 @@ class PaymentsPruneEvents extends Command
             gzclose($handle);
             @unlink($archivePath);
 
-            $this->error('Archive failed: ' . $e->getMessage());
+            $this->error('Archive failed: '.$e->getMessage());
+
             return 1;
         }
 
         gzclose($handle);
 
         $checksum = hash_file('sha256', $archivePath);
-        $objectUri = 'file://' . $archivePath;
+        $objectUri = 'file://'.$archivePath;
 
         if (Schema::hasTable('archive_audits')) {
             DB::table('archive_audits')->insert([
@@ -208,6 +215,6 @@ class PaymentsPruneEvents extends Command
         $stamp = now()->format('Ymd_His');
         $beforeTag = $cutoff->format('Ymd');
 
-        return rtrim($base, '/') . '/payment_events/payment_events_before_' . $beforeTag . '_' . $stamp . '.jsonl.gz';
+        return rtrim($base, '/').'/payment_events/payment_events_before_'.$beforeTag.'_'.$stamp.'.jsonl.gz';
     }
 }

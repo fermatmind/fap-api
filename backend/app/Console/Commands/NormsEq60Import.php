@@ -45,7 +45,7 @@ final class NormsEq60Import extends Command
 
     public function handle(): int
     {
-        if (!Schema::hasTable('scale_norms_versions') || !Schema::hasTable('scale_norm_stats')) {
+        if (! Schema::hasTable('scale_norms_versions') || ! Schema::hasTable('scale_norm_stats')) {
             $this->error('Missing required tables: scale_norms_versions/scale_norm_stats. Run migrations first.');
 
             return 1;
@@ -54,7 +54,7 @@ final class NormsEq60Import extends Command
         $csvPath = trim((string) $this->option('csv'));
         if ($csvPath === '') {
             $csvPath = base_path('resources/norms/eq60/eq60_norms_seed.csv');
-        } elseif (!str_starts_with($csvPath, '/')) {
+        } elseif (! str_starts_with($csvPath, '/')) {
             $csvPath = base_path($csvPath);
         }
 
@@ -62,7 +62,7 @@ final class NormsEq60Import extends Command
         $dryRun = $this->isTruthy($this->option('dry-run'));
 
         $parsed = $this->readCsv($csvPath);
-        if (!($parsed['ok'] ?? false)) {
+        if (! ($parsed['ok'] ?? false)) {
             foreach ((array) ($parsed['errors'] ?? []) as $error) {
                 $this->error((string) $error);
             }
@@ -71,7 +71,7 @@ final class NormsEq60Import extends Command
         }
 
         [$ok, $errors, $groups] = $this->validateRows((array) ($parsed['rows'] ?? []));
-        if (!$ok) {
+        if (! $ok) {
             foreach ($errors as $error) {
                 $this->error($error);
             }
@@ -161,6 +161,7 @@ final class NormsEq60Import extends Command
             $scale = strtoupper(trim((string) ($row['scale_code'] ?? '')));
             if ($scale !== self::SCALE_CODE) {
                 $errors[] = "line {$lineNo}: scale_code must be ".self::SCALE_CODE.", got {$scale}";
+
                 continue;
             }
 
@@ -183,6 +184,7 @@ final class NormsEq60Import extends Command
 
             if ($version === '' || $locale === '' || $region === '' || $groupId === '') {
                 $errors[] = "line {$lineNo}: norms_version/locale/region/group_id are required";
+
                 continue;
             }
             if ($gender === '') {
@@ -190,18 +192,22 @@ final class NormsEq60Import extends Command
             }
             if ($ageMin <= 0 || $ageMax < $ageMin) {
                 $errors[] = "line {$lineNo}: invalid age range {$ageMin}-{$ageMax}";
+
                 continue;
             }
-            if (!in_array($metricLevel, ['global', 'index'], true) || $metricCode === '') {
+            if (! in_array($metricLevel, ['global', 'index'], true) || $metricCode === '') {
                 $errors[] = "line {$lineNo}: invalid metric_level/metric_code";
+
                 continue;
             }
             if ($mean === null || $sd === null || $sd <= 0.0 || $sampleN <= 0) {
                 $errors[] = "line {$lineNo}: invalid mean/sd/sample_n";
+
                 continue;
             }
             if ($sourceId === '') {
                 $errors[] = "line {$lineNo}: source_id is required";
+
                 continue;
             }
             if ($sourceType === '') {
@@ -210,8 +216,9 @@ final class NormsEq60Import extends Command
             if ($status === '') {
                 $status = 'PROVISIONAL';
             }
-            if (!in_array($status, ['CALIBRATED', 'PROVISIONAL', 'MISSING', 'RETIRED', 'BOOTSTRAP'], true)) {
+            if (! in_array($status, ['CALIBRATED', 'PROVISIONAL', 'MISSING', 'RETIRED', 'BOOTSTRAP'], true)) {
                 $errors[] = "line {$lineNo}: invalid status {$status}";
+
                 continue;
             }
 
@@ -220,7 +227,7 @@ final class NormsEq60Import extends Command
             $isActive = $this->isTruthy($row['is_active'] ?? '0');
 
             $groupKey = $groupId.'|'.$version;
-            if (!isset($groups[$groupKey])) {
+            if (! isset($groups[$groupKey])) {
                 $groups[$groupKey] = [
                     'attrs' => [
                         'scale_code' => self::SCALE_CODE,
@@ -266,7 +273,7 @@ final class NormsEq60Import extends Command
      */
     private function readCsv(string $csvPath): array
     {
-        if (!is_file($csvPath)) {
+        if (! is_file($csvPath)) {
             return [
                 'ok' => false,
                 'errors' => ["csv not found: {$csvPath}"],
@@ -290,10 +297,11 @@ final class NormsEq60Import extends Command
             $lineNo++;
             if ($lineNo === 1) {
                 $headers = is_array($row) ? array_map(static fn ($v): string => trim((string) $v), $row) : [];
+
                 continue;
             }
 
-            if (!is_array($row) || $row === [null]) {
+            if (! is_array($row) || $row === [null]) {
                 continue;
             }
 
@@ -322,7 +330,7 @@ final class NormsEq60Import extends Command
 
         $missing = [];
         foreach (self::REQUIRED_HEADERS as $header) {
-            if (!in_array($header, $headers, true)) {
+            if (! in_array($header, $headers, true)) {
                 $missing[] = $header;
             }
         }

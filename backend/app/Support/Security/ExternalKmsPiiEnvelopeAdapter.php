@@ -61,6 +61,7 @@ final class ExternalKmsPiiEnvelopeAdapter implements PiiEnvelopeAdapter
                     if ($retryBackoffMs > 0) {
                         usleep($retryBackoffMs * 1000);
                     }
+
                     continue;
                 }
 

@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 final class NormsBig5Rebuild extends Command
 {
     private const SCALE_CODE = 'BIG5_OCEAN';
+
     private const SOURCE_ID = 'FERMATMIND_PROD_ROLLING';
 
     private const DOMAINS = ['O', 'C', 'E', 'A', 'N'];

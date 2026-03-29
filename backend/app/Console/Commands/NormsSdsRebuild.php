@@ -31,7 +31,7 @@ final class NormsSdsRebuild extends Command
 
     public function handle(): int
     {
-        if (!Schema::hasTable('scale_norms_versions') || !Schema::hasTable('scale_norm_stats')) {
+        if (! Schema::hasTable('scale_norms_versions') || ! Schema::hasTable('scale_norm_stats')) {
             $this->error('Missing required tables: scale_norms_versions/scale_norm_stats.');
 
             return 1;
@@ -128,12 +128,12 @@ final class NormsSdsRebuild extends Command
                 ?? data_get($payload, 'normed_json.quality.level')
                 ?? ''
             ));
-            if (!in_array($quality, $qualityLevels, true)) {
+            if (! in_array($quality, $qualityLevels, true)) {
                 continue;
             }
 
             $flags = data_get($payload, 'quality.flags');
-            if (!is_array($flags)) {
+            if (! is_array($flags)) {
                 $flags = data_get($payload, 'normed_json.quality.flags');
             }
             if (is_array($flags)) {
@@ -149,10 +149,10 @@ final class NormsSdsRebuild extends Command
             }
 
             $indexScore = data_get($payload, 'scores.global.index_score');
-            if (!is_numeric($indexScore)) {
+            if (! is_numeric($indexScore)) {
                 $indexScore = data_get($payload, 'normed_json.scores.global.index_score');
             }
-            if (!is_numeric($indexScore)) {
+            if (! is_numeric($indexScore)) {
                 continue;
             }
 
@@ -321,7 +321,7 @@ final class NormsSdsRebuild extends Command
         $levels = [];
         foreach ($parts as $part) {
             $candidate = strtoupper(trim((string) $part));
-            if (in_array($candidate, ['A', 'B', 'C', 'D'], true) && !in_array($candidate, $levels, true)) {
+            if (in_array($candidate, ['A', 'B', 'C', 'D'], true) && ! in_array($candidate, $levels, true)) {
                 $levels[] = $candidate;
             }
         }
@@ -373,7 +373,7 @@ final class NormsSdsRebuild extends Command
     }
 
     /**
-     * @param list<float> $values
+     * @param  list<float>  $values
      */
     private function mean(array $values): float
     {
@@ -385,7 +385,7 @@ final class NormsSdsRebuild extends Command
     }
 
     /**
-     * @param list<float> $values
+     * @param  list<float>  $values
      */
     private function populationSd(array $values, float $mean): float
     {

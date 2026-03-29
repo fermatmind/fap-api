@@ -150,7 +150,7 @@ final class ReportSnapshotExplorerSupport
 
         $like = '%'.$needle.'%';
 
-        $query->where(function (Builder $builder) use ($needle, $like): void {
+        $query->where(function (Builder $builder) use ($like): void {
             $builder
                 ->where('report_snapshots.attempt_id', 'like', $like)
                 ->orWhere('report_snapshots.order_no', 'like', $like)
@@ -182,12 +182,12 @@ final class ReportSnapshotExplorerSupport
             }
 
             if (SchemaBaseline::hasTable('results')) {
-                $builder->orWhereExists(function (QueryBuilder $resultQuery) use ($needle, $like): void {
+                $builder->orWhereExists(function (QueryBuilder $resultQuery) use ($like): void {
                     $resultQuery
                         ->selectRaw('1')
                         ->from('results')
                         ->whereColumn('results.attempt_id', 'report_snapshots.attempt_id')
-                        ->where(function (QueryBuilder $nested) use ($needle, $like): void {
+                        ->where(function (QueryBuilder $nested) use ($like): void {
                             $nested->where('results.attempt_id', 'like', $like);
 
                             if (SchemaBaseline::hasColumn('results', 'id')) {
@@ -1590,9 +1590,6 @@ final class ReportSnapshotExplorerSupport
         return Str::limit($text, $limit, '...');
     }
 
-    /**
-     * @param  mixed  $utm
-     */
     private function utmSummary(mixed $utm): string
     {
         if (! is_array($utm)) {

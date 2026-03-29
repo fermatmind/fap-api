@@ -3,8 +3,8 @@
 namespace App\Filament\Ops\Resources\AdminUserResource\Pages;
 
 use App\Filament\Ops\Resources\AdminUserResource;
-use Illuminate\Support\Facades\DB;
 use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Support\Facades\DB;
 
 class CreateAdminUser extends CreateRecord
 {

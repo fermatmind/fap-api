@@ -11,13 +11,13 @@ final class StableBucket
         }
 
         $hash = hash('sha256', $value);
-        if (!is_string($hash) || $hash === '') {
+        if (! is_string($hash) || $hash === '') {
             return 0;
         }
 
         $slice = substr($hash, 0, 8);
         $num = hexdec($slice);
-        if (!is_int($num)) {
+        if (! is_int($num)) {
             $num = 0;
         }
 

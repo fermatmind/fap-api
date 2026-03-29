@@ -125,7 +125,7 @@ final class AppServiceProviderContentStoreIsolationTest extends TestCase
     }
 
     /**
-     * @param array<int,array{sql:string,bindings:array}> $queries
+     * @param  array<int,array{sql:string,bindings:array}>  $queries
      * @return array{sql:string,bindings:array}|null
      */
     private function firstAttemptsQuery(array $queries): ?array
@@ -141,7 +141,7 @@ final class AppServiceProviderContentStoreIsolationTest extends TestCase
     }
 
     /**
-     * @param array<int,mixed> $bindings
+     * @param  array<int,mixed>  $bindings
      * @return array<int,int>
      */
     private function numericBindings(array $bindings): array

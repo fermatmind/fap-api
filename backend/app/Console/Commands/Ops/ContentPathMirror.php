@@ -97,6 +97,7 @@ class ContentPathMirror extends Command
             if (! is_dir($source)) {
                 $sourceMissingAliases++;
                 $this->line(sprintf('[skip] source missing scope=%s old_path=%s source=%s', $scope, $oldPath, $source));
+
                 continue;
             }
 
@@ -234,6 +235,7 @@ class ContentPathMirror extends Command
             if (! is_file($targetFile)) {
                 $mismatch++;
                 $targetMissing++;
+
                 continue;
             }
 
@@ -347,4 +349,3 @@ class ContentPathMirror extends Command
         ));
     }
 }
-
