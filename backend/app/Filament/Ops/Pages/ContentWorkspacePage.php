@@ -22,7 +22,7 @@ class ContentWorkspacePage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Content Workspace';
+    protected static ?string $navigationGroup = 'Content Overview';
 
     protected static ?string $navigationLabel = 'Content Workspace';
 
@@ -43,27 +43,27 @@ class ContentWorkspacePage extends Page
 
     public function mount(): void
     {
-        $tenantOrgIds = $this->tenantOrgIds();
+        $currentOrgIds = $this->currentOrgIds();
 
         $this->editorialCards = [
             $this->workspaceCard(
                 'Articles',
                 'Org-aware editorial workspace for long-form CMS publishing, SEO metadata, and visibility state.',
-                Article::query()->whereIn('org_id', $tenantOrgIds)->count(),
+                Article::query()->whereIn('org_id', $currentOrgIds)->count(),
                 ArticleResource::getUrl(),
                 ArticleResource::getUrl('create')
             ),
             $this->workspaceCard(
                 'Career Guides',
                 'Global guide authoring workspace for structured career education content and related object links.',
-                CareerGuide::query()->count(),
+                CareerGuide::query()->where('org_id', 0)->count(),
                 CareerGuideResource::getUrl(),
                 CareerGuideResource::getUrl('create')
             ),
             $this->workspaceCard(
                 'Career Jobs',
                 'Global job profile workspace for structured role narratives, signals, sections, and SEO metadata.',
-                CareerJob::query()->count(),
+                CareerJob::query()->where('org_id', 0)->count(),
                 CareerJobResource::getUrl(),
                 CareerJobResource::getUrl('create')
             ),
@@ -73,14 +73,14 @@ class ContentWorkspacePage extends Page
             $this->workspaceCard(
                 'Categories',
                 'Taxonomy records that shape article organization and filtering inside the editorial workspace.',
-                ArticleCategory::query()->whereIn('org_id', $tenantOrgIds)->count(),
+                ArticleCategory::query()->whereIn('org_id', $currentOrgIds)->count(),
                 ArticleCategoryResource::getUrl(),
                 ArticleCategoryResource::getUrl('create')
             ),
             $this->workspaceCard(
                 'Tags',
                 'Lightweight metadata used to cluster related editorial records and speed up operator discovery.',
-                ArticleTag::query()->whereIn('org_id', $tenantOrgIds)->count(),
+                ArticleTag::query()->whereIn('org_id', $currentOrgIds)->count(),
                 ArticleTagResource::getUrl(),
                 ArticleTagResource::getUrl('create')
             ),
@@ -113,7 +113,7 @@ class ContentWorkspacePage extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.content_workspace');
+        return __('ops.group.content_overview');
     }
 
     public static function getNavigationLabel(): string
@@ -129,11 +129,11 @@ class ContentWorkspacePage extends Page
     /**
      * @return array<int, int>
      */
-    private function tenantOrgIds(): array
+    private function currentOrgIds(): array
     {
         $orgId = max(0, (int) app(OrgContext::class)->orgId());
 
-        return $orgId > 0 ? [0, $orgId] : [0];
+        return $orgId > 0 ? [$orgId] : [];
     }
 
     /**

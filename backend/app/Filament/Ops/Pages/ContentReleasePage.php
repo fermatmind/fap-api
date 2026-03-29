@@ -81,7 +81,7 @@ class ContentReleasePage extends Page
 
         match ($type) {
             'article' => ArticleResource::releaseRecord(
-                Article::query()->whereIn('org_id', $this->tenantOrgIds())->findOrFail($id)
+                Article::query()->whereIn('org_id', $this->currentOrgIds())->findOrFail($id)
             ),
             'guide' => CareerGuideResource::releaseRecord(
                 CareerGuide::query()->findOrFail($id)
@@ -97,10 +97,10 @@ class ContentReleasePage extends Page
 
     private function refreshWorkspace(): void
     {
-        $tenantOrgIds = $this->tenantOrgIds();
+        $currentOrgIds = $this->currentOrgIds();
 
         $articles = Article::query()
-            ->whereIn('org_id', $tenantOrgIds)
+            ->whereIn('org_id', $currentOrgIds)
             ->when($this->statusFilter !== 'all', fn ($query) => $query->where('status', $this->statusFilter))
             ->latest('updated_at')
             ->get()
@@ -118,6 +118,7 @@ class ContentReleasePage extends Page
             ));
 
         $guides = CareerGuide::query()
+            ->where('org_id', 0)
             ->when($this->statusFilter !== 'all', fn ($query) => $query->where('status', $this->statusFilter))
             ->latest('updated_at')
             ->get()
@@ -135,6 +136,7 @@ class ContentReleasePage extends Page
             ));
 
         $jobs = CareerJob::query()
+            ->where('org_id', 0)
             ->when($this->statusFilter !== 'all', fn ($query) => $query->where('status', $this->statusFilter))
             ->latest('updated_at')
             ->get()
@@ -208,11 +210,11 @@ class ContentReleasePage extends Page
     /**
      * @return array<int, int>
      */
-    private function tenantOrgIds(): array
+    private function currentOrgIds(): array
     {
         $orgId = max(0, (int) app(OrgContext::class)->orgId());
 
-        return $orgId > 0 ? [0, $orgId] : [0];
+        return $orgId > 0 ? [$orgId] : [];
     }
 
     /**

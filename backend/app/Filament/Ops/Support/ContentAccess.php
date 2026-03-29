@@ -32,6 +32,7 @@ final class ContentAccess
     {
         return self::hasAnyPermission([
             PermissionNames::ADMIN_CONTENT_RELEASE,
+            PermissionNames::ADMIN_CONTENT_PUBLISH,
             PermissionNames::ADMIN_OWNER,
         ]);
     }

@@ -26,7 +26,7 @@ final class ArticleCmsWriteAuthTest extends TestCase
             ->assertJsonPath('error_code', 'UNAUTHORIZED');
     }
 
-    public function test_admin_without_publish_permission_is_rejected(): void
+    public function test_admin_without_content_write_permission_is_rejected(): void
     {
         $admin = $this->createAdminWithPermissions([]);
 
@@ -39,9 +39,9 @@ final class ArticleCmsWriteAuthTest extends TestCase
             ->assertJsonPath('error_code', 'FORBIDDEN');
     }
 
-    public function test_admin_with_publish_permission_can_create_article_in_trusted_org_scope(): void
+    public function test_admin_with_content_write_permission_can_create_article_in_trusted_org_scope(): void
     {
-        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_PUBLISH]);
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
 
         $response = $this->withSession(['ops_org_id' => 12])
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -77,9 +77,59 @@ final class ArticleCmsWriteAuthTest extends TestCase
             ->assertJsonPath('article.org_id', 13);
     }
 
-    public function test_cross_org_article_update_is_rejected(): void
+    public function test_legacy_publish_permission_can_still_create_article_in_trusted_org_scope(): void
     {
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_PUBLISH]);
+
+        $response = $this->withSession(['ops_org_id' => 14])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->postJson('/api/v0.5/cms/articles', $this->articlePayload('legacy-publish-can-write'));
+
+        $response->assertStatus(201)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('article.org_id', 14);
+    }
+
+    public function test_admin_with_content_release_permission_can_publish_article(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_RELEASE]);
+        $article = Article::query()->create([
+            'org_id' => 21,
+            'slug' => 'release-target',
+            'locale' => 'en',
+            'title' => 'Release target',
+            'content_md' => 'Initial content',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+        ]);
+
+        $response = $this->withSession(['ops_org_id' => 21])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->postJson('/api/v0.5/cms/articles/'.$article->id.'/publish');
+
+        $response->assertStatus(200)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('article.status', 'published')
+            ->assertJsonPath('article.is_public', true);
+    }
+
+    public function test_admin_with_content_release_permission_cannot_create_article(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_RELEASE]);
+
+        $response = $this->withSession(['ops_org_id' => 15])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->postJson('/api/v0.5/cms/articles', $this->articlePayload('release-cannot-write'));
+
+        $response->assertStatus(403)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'FORBIDDEN');
+    }
+
+    public function test_cross_org_article_update_is_rejected(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
         $article = Article::query()->create([
             'org_id' => 21,
             'slug' => 'cross-org-target',
@@ -114,8 +164,8 @@ final class ArticleCmsWriteAuthTest extends TestCase
     private function createAdminWithPermissions(array $permissions): AdminUser
     {
         $admin = AdminUser::query()->create([
-            'name' => 'admin_' . Str::lower(Str::random(6)),
-            'email' => 'admin_' . Str::lower(Str::random(6)) . '@example.test',
+            'name' => 'admin_'.Str::lower(Str::random(6)),
+            'email' => 'admin_'.Str::lower(Str::random(6)).'@example.test',
             'password' => bcrypt('secret'),
             'is_active' => 1,
         ]);
@@ -125,7 +175,7 @@ final class ArticleCmsWriteAuthTest extends TestCase
         }
 
         $role = Role::query()->create([
-            'name' => 'role_' . Str::lower(Str::random(10)),
+            'name' => 'role_'.Str::lower(Str::random(10)),
             'description' => null,
         ]);
 

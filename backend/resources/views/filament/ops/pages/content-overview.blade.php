@@ -3,7 +3,7 @@
         <x-filament-ops::ops-section
             eyebrow="CMS product layer"
             title="Content overview"
-            description="Track the editorial workspace, release surface, and supporting content data from one Ops-native overview."
+            description="Track the production CMS bootstrap boundary across org-scoped editorial, global career content, taxonomy, and the lightweight release surface."
         >
             <x-filament-ops::ops-toolbar>
                 <div class="ops-control-stack">
@@ -26,7 +26,7 @@
 
         <x-filament-ops::ops-section
             title="Workspace health"
-            description="A compact summary of editorial objects, supporting data, and release-system inventory."
+            description="A compact summary of the visible CMS modules that are actually part of the production workspace."
         >
             <x-filament-ops::ops-field-grid :fields="$summaryFields" />
         </x-filament-ops::ops-section>
@@ -52,7 +52,7 @@
                         eyebrow="Content overview"
                         icon="heroicon-o-clipboard-document-list"
                         title="No content records yet"
-                        description="Recent workspace activity will appear here once editorial or release records exist."
+                        description="Recent CMS activity will appear here once editorial or taxonomy records exist."
                     />
                 @endforelse
             </div>

@@ -4,21 +4,31 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Ops;
 
+use App\Filament\Ops\Pages\ContentOverviewPage;
+use App\Filament\Ops\Pages\ContentReleasePage;
+use App\Filament\Ops\Pages\ContentWorkspacePage;
+use App\Filament\Ops\Resources\ArticleCategoryResource;
 use App\Filament\Ops\Resources\ArticleResource;
+use App\Filament\Ops\Resources\ArticleTagResource;
 use App\Filament\Ops\Resources\CareerGuideResource;
 use App\Filament\Ops\Resources\CareerJobResource;
+use App\Filament\Ops\Resources\ContentPackReleaseResource;
+use App\Filament\Ops\Resources\ContentPackVersionResource;
 use App\Models\AdminUser;
 use App\Models\Article;
+use App\Models\ArticleCategory;
+use App\Models\ArticleTag;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
-use App\Models\ContentPackRelease;
-use App\Models\ContentPackVersion;
 use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -32,7 +42,7 @@ final class ContentCmsProductLayerTest extends TestCase
             PermissionNames::ADMIN_CONTENT_READ,
         ]);
 
-        $this->seedReleaseSurface();
+        $this->seedCmsSurface();
 
         $session = $this->opsSession((int) $admin->id);
 
@@ -47,8 +57,8 @@ final class ContentCmsProductLayerTest extends TestCase
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/content-workspace')
             ->assertOk()
-            ->assertSee('Editorial workspaces')
-            ->assertSee('Content data');
+            ->assertSee('Editorial')
+            ->assertSee('Taxonomy');
 
         $this->withSession($session)
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -80,13 +90,21 @@ final class ContentCmsProductLayerTest extends TestCase
             ->assertForbidden();
     }
 
-    public function test_legacy_publish_permission_still_allows_write_but_not_release(): void
+    public function test_legacy_publish_permission_still_allows_write_and_release_as_compatibility_bridge(): void
     {
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_PUBLISH,
         ]);
 
         $session = $this->opsSession((int) $admin->id);
+
+        $article = $this->seedArticle([
+            'org_id' => (int) $session['ops_org_id'],
+            'title' => 'Legacy Publish Queue Article',
+            'status' => 'draft',
+            'is_public' => false,
+            'published_at' => null,
+        ]);
 
         $this->withSession($session)
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -96,7 +114,15 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->withSession($session)
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/content-release')
-            ->assertForbidden();
+            ->assertOk()
+            ->assertSee('Release workspace')
+            ->assertSee('Legacy Publish Queue Article');
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        ArticleResource::releaseRecord($article);
+
+        $article->refresh();
+        $this->assertSame('published', $article->status);
     }
 
     public function test_content_release_admin_can_open_release_surface_but_not_article_create(): void
@@ -136,12 +162,9 @@ final class ContentCmsProductLayerTest extends TestCase
             ->assertSee('Filters')
             ->assertSee('Article')
             ->assertSee('Career Guide')
-            ->assertSee('Career Job');
-
-        $this->withSession($session)
-            ->actingAs($admin, (string) config('admin.guard', 'admin'))
-            ->get('/ops/content-pack-releases')
-            ->assertOk();
+            ->assertSee('Career Job')
+            ->assertDontSee('Content Pack Release')
+            ->assertDontSee('Content Pack Version');
 
         $this->withSession($session)
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -182,16 +205,21 @@ final class ContentCmsProductLayerTest extends TestCase
         $job->refresh();
 
         $this->assertSame('published', $article->status);
-        $this->assertFalse($article->is_public);
+        $this->assertTrue($article->is_public);
         $this->assertNotNull($article->published_at);
 
         $this->assertSame(CareerGuide::STATUS_PUBLISHED, $guide->status);
-        $this->assertFalse($guide->is_public);
+        $this->assertTrue($guide->is_public);
         $this->assertNotNull($guide->published_at);
 
         $this->assertSame(CareerJob::STATUS_PUBLISHED, $job->status);
-        $this->assertFalse($job->is_public);
+        $this->assertTrue($job->is_public);
         $this->assertNotNull($job->published_at);
+
+        $this->getJson('/api/v0.5/articles/'.$article->slug.'?locale=en&org_id=0')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('article.slug', $article->slug);
     }
 
     public function test_content_write_admin_cannot_release_draft_content_records(): void
@@ -211,6 +239,212 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->expectException(AuthorizationException::class);
 
         ArticleResource::releaseRecord($article);
+    }
+
+    public function test_content_overview_stays_on_visible_cms_modules_only(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+        ]);
+
+        $this->seedCmsSurface();
+
+        $session = $this->opsSession((int) $admin->id);
+
+        $this->withSession($session)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/content-overview')
+            ->assertOk()
+            ->assertSee('Current org editorial')
+            ->assertSee('Global career content')
+            ->assertDontSee('Content versions')
+            ->assertDontSee('Release records');
+    }
+
+    public function test_content_overview_current_org_cards_do_not_count_global_article_taxonomy_rows(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+        ]);
+
+        $session = $this->opsSession((int) $admin->id);
+        $selectedOrgId = (int) $session['ops_org_id'];
+
+        Article::query()->create([
+            'org_id' => $selectedOrgId,
+            'slug' => 'selected-org-article',
+            'locale' => 'en',
+            'title' => 'Selected Org Article',
+            'content_md' => 'Selected article body',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+        ]);
+        Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'global-article',
+            'locale' => 'en',
+            'title' => 'Global Article',
+            'content_md' => 'Global article body',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+        ]);
+        ArticleCategory::query()->create([
+            'org_id' => $selectedOrgId,
+            'slug' => 'selected-category',
+            'name' => 'Selected Category',
+            'is_active' => true,
+        ]);
+        ArticleCategory::query()->create([
+            'org_id' => 0,
+            'slug' => 'global-category',
+            'name' => 'Global Category',
+            'is_active' => true,
+        ]);
+        ArticleTag::query()->create([
+            'org_id' => $selectedOrgId,
+            'slug' => 'selected-tag',
+            'name' => 'Selected Tag',
+            'is_active' => true,
+        ]);
+        ArticleTag::query()->create([
+            'org_id' => 0,
+            'slug' => 'global-tag',
+            'name' => 'Global Tag',
+            'is_active' => true,
+        ]);
+
+        $this->withSession($session)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/content-overview')
+            ->assertOk()
+            ->assertSee('Current org editorial')
+            ->assertSee('1', false)
+            ->assertSee('Current org taxonomy')
+            ->assertSee('2', false)
+            ->assertDontSee('Global Article');
+    }
+
+    public function test_cms_workspace_pages_require_org_selection_before_rendering(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+
+        $session = [
+            'ops_admin_totp_verified_user_id' => (int) $admin->id,
+        ];
+
+        foreach ([
+            '/ops/content-overview',
+            '/ops/content-workspace',
+            '/ops/content-release',
+        ] as $path) {
+            $this->withSession($session)
+                ->actingAs($admin, (string) config('admin.guard', 'admin'))
+                ->get($path)
+                ->assertRedirectContains('/ops/select-org');
+        }
+    }
+
+    public function test_navigation_groups_match_cms_bootstrap_blueprint(): void
+    {
+        $this->assertSame(__('ops.group.content_overview'), ContentOverviewPage::getNavigationGroup());
+        $this->assertSame(__('ops.group.content_overview'), ContentWorkspacePage::getNavigationGroup());
+        $this->assertSame(__('ops.group.editorial'), ArticleResource::getNavigationGroup());
+        $this->assertSame(__('ops.group.editorial'), CareerGuideResource::getNavigationGroup());
+        $this->assertSame(__('ops.group.editorial'), CareerJobResource::getNavigationGroup());
+        $this->assertSame(__('ops.group.taxonomy'), ArticleCategoryResource::getNavigationGroup());
+        $this->assertSame(__('ops.group.taxonomy'), ArticleTagResource::getNavigationGroup());
+        $this->assertSame(__('ops.group.content_release'), ContentReleasePage::getNavigationGroup());
+        $this->assertSame(__('ops.group.content_control_plane'), ContentPackVersionResource::getNavigationGroup());
+        $this->assertSame(__('ops.group.content_control_plane'), ContentPackReleaseResource::getNavigationGroup());
+        $this->assertFalse(Route::has('filament.ops.resources.content-releases.index'));
+    }
+
+    public function test_article_and_taxonomy_resources_are_scoped_to_selected_org_only(): void
+    {
+        $selectedOrg = Organization::query()->create([
+            'name' => 'Scoped Org',
+            'owner_user_id' => 9111,
+            'status' => 'active',
+            'domain' => 'scoped-org.example.test',
+            'timezone' => 'Asia/Shanghai',
+            'locale' => 'en',
+        ]);
+
+        $otherOrg = Organization::query()->create([
+            'name' => 'Other Org',
+            'owner_user_id' => 9222,
+            'status' => 'active',
+            'domain' => 'other-org.example.test',
+            'timezone' => 'Asia/Shanghai',
+            'locale' => 'en',
+        ]);
+
+        $selectedArticle = Article::query()->create([
+            'org_id' => $selectedOrg->id,
+            'slug' => 'selected-article',
+            'locale' => 'en',
+            'title' => 'Selected Article',
+            'content_md' => 'Selected article body',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+        ]);
+        $otherArticle = Article::query()->create([
+            'org_id' => $otherOrg->id,
+            'slug' => 'other-article',
+            'locale' => 'en',
+            'title' => 'Other Article',
+            'content_md' => 'Other article body',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+        ]);
+        $selectedCategory = ArticleCategory::query()->create([
+            'org_id' => $selectedOrg->id,
+            'slug' => 'selected-category',
+            'name' => 'Selected Category',
+            'is_active' => true,
+        ]);
+        $otherCategory = ArticleCategory::query()->create([
+            'org_id' => $otherOrg->id,
+            'slug' => 'other-category',
+            'name' => 'Other Category',
+            'is_active' => true,
+        ]);
+        $selectedTag = ArticleTag::query()->create([
+            'org_id' => $selectedOrg->id,
+            'slug' => 'selected-tag',
+            'name' => 'Selected Tag',
+            'is_active' => true,
+        ]);
+        $otherTag = ArticleTag::query()->create([
+            'org_id' => $otherOrg->id,
+            'slug' => 'other-tag',
+            'name' => 'Other Tag',
+            'is_active' => true,
+        ]);
+
+        $request = Request::create('/ops/articles', 'GET');
+        app()->instance('request', $request);
+
+        $context = app(OrgContext::class);
+        $context->set((int) $selectedOrg->id, 9001, 'admin');
+        app()->instance(OrgContext::class, $context);
+
+        $articleIds = ArticleResource::getEloquentQuery()->pluck('id')->all();
+        $categoryIds = ArticleCategoryResource::getEloquentQuery()->pluck('id')->all();
+        $tagIds = ArticleTagResource::getEloquentQuery()->pluck('id')->all();
+
+        $this->assertSame([(int) $selectedArticle->id], $articleIds);
+        $this->assertNotContains((int) $otherArticle->id, $articleIds);
+        $this->assertSame([(int) $selectedCategory->id], $categoryIds);
+        $this->assertNotContains((int) $otherCategory->id, $categoryIds);
+        $this->assertSame([(int) $selectedTag->id], $tagIds);
+        $this->assertNotContains((int) $otherTag->id, $tagIds);
     }
 
     /**
@@ -264,40 +498,11 @@ final class ContentCmsProductLayerTest extends TestCase
         ];
     }
 
-    private function seedReleaseSurface(): void
+    private function seedCmsSurface(): void
     {
-        $version = ContentPackVersion::query()->create([
-            'id' => (string) Str::uuid(),
-            'region' => 'CN_MAINLAND',
-            'locale' => 'zh-CN',
-            'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
-            'content_package_version' => 'content_2026_03',
-            'dir_version_alias' => 'MBTI-CN-v0.3-cms-workspace',
-            'source_type' => 'upload',
-            'source_ref' => 'private://content/cms-workspace/version.zip',
-            'sha256' => str_repeat('a', 64),
-            'manifest_json' => ['pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3'],
-            'extracted_rel_path' => 'content/cms-workspace/version',
-            'created_by' => 'ops_admin',
-        ]);
-
-        ContentPackRelease::query()->create([
-            'id' => (string) Str::uuid(),
-            'org_id' => 1,
-            'action' => 'release',
-            'region' => 'CN_MAINLAND',
-            'locale' => 'zh-CN',
-            'dir_alias' => 'MBTI-CN-v0.3-cms-workspace',
-            'from_version_id' => $version->id,
-            'to_version_id' => $version->id,
-            'from_pack_id' => $version->pack_id,
-            'to_pack_id' => $version->pack_id,
-            'status' => 'pending',
-            'probe_ok' => true,
-            'probe_json' => ['ok' => true],
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        $this->seedArticle();
+        $this->seedGuide();
+        $this->seedJob();
     }
 
     /**

@@ -47,7 +47,7 @@ class ContentPackVersionResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.content_release');
+        return __('ops.group.content_control_plane');
     }
 
     public static function getNavigationLabel(): string

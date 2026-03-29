@@ -54,7 +54,7 @@ class ArticleCategoryResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.content_data');
+        return __('ops.group.taxonomy');
     }
 
     public static function getNavigationLabel(): string
@@ -134,17 +134,12 @@ class ArticleCategoryResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->whereIn('org_id', self::tenantOrgIds());
+            ->where('org_id', self::currentOrgId());
     }
 
-    /**
-     * @return array<int,int>
-     */
-    private static function tenantOrgIds(): array
+    private static function currentOrgId(): int
     {
-        $orgId = max(0, (int) app(OrgContext::class)->orgId());
-
-        return $orgId > 0 ? [0, $orgId] : [0];
+        return max(0, (int) app(OrgContext::class)->orgId());
     }
 
     private static function canRead(): bool

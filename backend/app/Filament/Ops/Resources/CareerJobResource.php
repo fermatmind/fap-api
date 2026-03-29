@@ -60,7 +60,7 @@ class CareerJobResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.content_workspace');
+        return __('ops.group.editorial');
     }
 
     public static function getNavigationLabel(): string
@@ -689,6 +689,7 @@ class CareerJobResource extends Resource
 
         $record->forceFill([
             'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => true,
             'published_at' => $record->published_at ?? now(),
         ])->save();
 

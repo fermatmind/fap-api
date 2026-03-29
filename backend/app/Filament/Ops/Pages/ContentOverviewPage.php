@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Pages;
 
+use App\Filament\Ops\Resources\ArticleCategoryResource;
 use App\Filament\Ops\Resources\ArticleResource;
+use App\Filament\Ops\Resources\ArticleTagResource;
 use App\Filament\Ops\Resources\CareerGuideResource;
 use App\Filament\Ops\Resources\CareerJobResource;
-use App\Filament\Ops\Resources\ContentPackReleaseResource;
-use App\Filament\Ops\Resources\ContentPackVersionResource;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\ArticleTag;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
-use App\Models\ContentPackRelease;
-use App\Models\ContentPackVersion;
 use App\Support\OrgContext;
 use Filament\Pages\Page;
 
@@ -24,7 +22,7 @@ class ContentOverviewPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
 
-    protected static ?string $navigationGroup = 'Content Workspace';
+    protected static ?string $navigationGroup = 'Content Overview';
 
     protected static ?string $navigationLabel = 'Content Overview';
 
@@ -42,65 +40,67 @@ class ContentOverviewPage extends Page
 
     public function mount(): void
     {
-        $tenantOrgIds = $this->tenantOrgIds();
+        $currentOrgIds = $this->currentOrgIds();
 
-        $articleCount = Article::query()->whereIn('org_id', $tenantOrgIds)->count();
+        $articleCount = Article::query()->whereIn('org_id', $currentOrgIds)->count();
         $publishedArticleCount = Article::query()
-            ->whereIn('org_id', $tenantOrgIds)
+            ->whereIn('org_id', $currentOrgIds)
             ->where('status', 'published')
             ->count();
-        $categoryCount = ArticleCategory::query()->whereIn('org_id', $tenantOrgIds)->count();
-        $tagCount = ArticleTag::query()->whereIn('org_id', $tenantOrgIds)->count();
-        $guideCount = CareerGuide::query()->count();
-        $jobCount = CareerJob::query()->count();
-        $versionCount = ContentPackVersion::query()->count();
-        $releaseCount = ContentPackRelease::query()->count();
+        $categoryCount = ArticleCategory::query()->whereIn('org_id', $currentOrgIds)->count();
+        $tagCount = ArticleTag::query()->whereIn('org_id', $currentOrgIds)->count();
+        $guideCount = CareerGuide::query()->where('org_id', 0)->count();
+        $jobCount = CareerJob::query()->where('org_id', 0)->count();
+        $draftEditorialCount = Article::query()
+            ->whereIn('org_id', $currentOrgIds)
+            ->where('status', 'draft')
+            ->count()
+            + CareerGuide::query()->where('org_id', 0)->where('status', CareerGuide::STATUS_DRAFT)->count()
+            + CareerJob::query()->where('org_id', 0)->where('status', CareerJob::STATUS_DRAFT)->count();
+        $publishedEditorialCount = $publishedArticleCount
+            + CareerGuide::query()->where('org_id', 0)->where('status', CareerGuide::STATUS_PUBLISHED)->count()
+            + CareerJob::query()->where('org_id', 0)->where('status', CareerJob::STATUS_PUBLISHED)->count();
 
         $this->summaryFields = [
             [
-                'label' => 'Editorial objects',
-                'value' => (string) ($articleCount + $guideCount + $jobCount),
-                'hint' => 'Articles, career guides, and career jobs currently managed inside the Ops CMS layer.',
+                'label' => 'Current org editorial',
+                'value' => (string) $articleCount,
+                'hint' => 'Article records bound to the currently selected Ops organization.',
             ],
             [
-                'label' => 'Published articles',
-                'value' => (string) $publishedArticleCount,
-                'hint' => 'Org-aware article count that is already in a published state.',
-            ],
-            [
-                'label' => 'Taxonomy records',
+                'label' => 'Current org taxonomy',
                 'value' => (string) ($categoryCount + $tagCount),
-                'hint' => 'Article categories and tags that shape editorial organization.',
+                'hint' => 'Categories and tags available to the currently selected organization.',
             ],
             [
-                'label' => 'Career objects',
+                'label' => 'Global career content',
                 'value' => (string) ($guideCount + $jobCount),
-                'hint' => 'Global career content managed independently of org-specific article content.',
+                'hint' => 'Career guides and jobs remain global content objects with org_id=0 authoring semantics.',
             ],
             [
-                'label' => 'Content versions',
-                'value' => (string) $versionCount,
-                'hint' => 'Version rows that feed the content release surface and rollout review.',
+                'label' => 'Draft release queue',
+                'value' => (string) $draftEditorialCount,
+                'hint' => 'Draft editorial records visible to the lightweight content release workspace.',
             ],
             [
-                'label' => 'Release records',
-                'value' => (string) $releaseCount,
-                'hint' => 'Historical release queue records visible from the release workspace.',
+                'label' => 'Published editorial',
+                'value' => (string) $publishedEditorialCount,
+                'hint' => 'Published article, guide, and job records managed through the CMS workspace.',
             ],
         ];
 
         $this->recentItems = array_values(array_filter([
-            $this->latestItem('Latest article', Article::query()->whereIn('org_id', $tenantOrgIds)->latest('updated_at')->first(), 'title', ArticleResource::getUrl()),
-            $this->latestItem('Latest career guide', CareerGuide::query()->latest('updated_at')->first(), 'title', CareerGuideResource::getUrl()),
-            $this->latestItem('Latest career job', CareerJob::query()->latest('updated_at')->first(), 'title', CareerJobResource::getUrl()),
-            $this->latestItem('Latest version', ContentPackVersion::query()->latest('updated_at')->first(), 'content_package_version', ContentPackVersionResource::getUrl()),
-            $this->latestItem('Latest release', ContentPackRelease::query()->latest('updated_at')->first(), 'status', ContentPackReleaseResource::getUrl()),
+            $this->latestItem('Latest article', Article::query()->whereIn('org_id', $currentOrgIds)->latest('updated_at')->first(), 'title', ArticleResource::getUrl()),
+            $this->latestItem('Latest category', ArticleCategory::query()->whereIn('org_id', $currentOrgIds)->latest('updated_at')->first(), 'name', ArticleCategoryResource::getUrl()),
+            $this->latestItem('Latest tag', ArticleTag::query()->whereIn('org_id', $currentOrgIds)->latest('updated_at')->first(), 'name', ArticleTagResource::getUrl()),
+            $this->latestItem('Latest career guide', CareerGuide::query()->where('org_id', 0)->latest('updated_at')->first(), 'title', CareerGuideResource::getUrl()),
+            $this->latestItem('Latest career job', CareerJob::query()->where('org_id', 0)->latest('updated_at')->first(), 'title', CareerJobResource::getUrl()),
         ]));
     }
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.content_workspace');
+        return __('ops.group.content_overview');
     }
 
     public static function getNavigationLabel(): string
@@ -116,11 +116,11 @@ class ContentOverviewPage extends Page
     /**
      * @return array<int, int>
      */
-    private function tenantOrgIds(): array
+    private function currentOrgIds(): array
     {
         $orgId = max(0, (int) app(OrgContext::class)->orgId());
 
-        return $orgId > 0 ? [0, $orgId] : [0];
+        return $orgId > 0 ? [$orgId] : [];
     }
 
     /**
