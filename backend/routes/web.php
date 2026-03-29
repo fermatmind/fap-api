@@ -1,13 +1,20 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SitemapController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $requestHost = strtolower((string) request()->getHost());
     $opsAllowedHost = strtolower(trim((string) config('ops.allowed_host', '')));
+    $opsAdminUrlHost = strtolower((string) parse_url((string) config('admin.url', ''), PHP_URL_HOST));
 
-    if (config('admin.panel_enabled') && $opsAllowedHost !== '' && $requestHost === $opsAllowedHost) {
+    $isOpsEntryHost = config('admin.panel_enabled') && (
+        ($opsAllowedHost !== '' && $requestHost === $opsAllowedHost)
+        || ($opsAdminUrlHost !== '' && $requestHost === $opsAdminUrlHost)
+        || str_starts_with($requestHost, 'ops.')
+    );
+
+    if ($isOpsEntryHost) {
         return redirect('/ops');
     }
 
@@ -27,13 +34,13 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])
 
 if (config('admin.panel_enabled')) {
     Route::permanentRedirect('/admin', '/ops');
-    Route::get('/admin/{path}', fn (string $path) => redirect('/ops/' . $path, 301))
+    Route::get('/admin/{path}', fn (string $path) => redirect('/ops/'.$path, 301))
         ->where('path', '.*');
 } else {
     Route::get('/admin', fn () => abort(404));
     Route::get('/ops', fn () => abort(404));
 }
 
-if (!config('tenant.panel_enabled')) {
+if (! config('tenant.panel_enabled')) {
     Route::get('/tenant', fn () => abort(404));
 }

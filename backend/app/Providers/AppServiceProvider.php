@@ -27,6 +27,7 @@ use App\Services\Content\ContentPack;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\ContentStore;
 use App\Services\ContentPackResolver;
+use App\Services\Ops\OpsDistributedLimiter;
 use App\Support\Logging\RedactProcessor;
 use App\Support\OrgContext;
 use App\Support\Security\ExternalKmsPiiEnvelopeAdapter;
@@ -524,6 +525,13 @@ class AppServiceProvider extends ServiceProvider
             $ip = request()?->ip() ?? 'unknown';
             $key = 'ops:admin-login:'.$ip;
             RateLimiter::clear($key);
+
+            $routeName = (string) optional(request()?->route())->getName();
+            $routeKey = $routeName !== '' ? $routeName : 'filament.ops.auth.login';
+            $identifier = trim((string) (request()?->input('email') ?? request()?->input('username') ?? 'anonymous'));
+            OpsDistributedLimiter::clear('ops:login:ip:'.$ip);
+            OpsDistributedLimiter::clear('ops:login:route:'.$routeKey);
+            OpsDistributedLimiter::clear('ops:login:user:'.$identifier);
 
             $user = $event->user;
             if (is_object($user) && method_exists($user, 'forceFill') && method_exists($user, 'save')) {

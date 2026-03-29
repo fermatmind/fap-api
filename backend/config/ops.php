@@ -1,12 +1,37 @@
 <?php
 
-return [
-    'allowed_host' => env('OPS_ALLOWED_HOST', ''),
+$opsIpAllowlist = array_values(array_filter(array_map(
+    static fn (string $value): string => trim($value),
+    explode(',', (string) env('OPS_IP_ALLOWLIST', ''))
+)));
 
-    'ip_allowlist' => array_values(array_filter(array_map(
-        static fn (string $value): string => trim($value),
-        explode(',', (string) env('OPS_IP_ALLOWLIST', ''))
-    ))),
+$opsAccessControl = [
+    'enabled' => (bool) env('OPS_ACCESS_CONTROL_ENABLED', true),
+    'fail_open' => (bool) env('OPS_ACCESS_FAIL_OPEN', true),
+    'emergency_disable' => (bool) env('OPS_EMERGENCY_DISABLE', false),
+    'allowed_host' => env('OPS_ALLOWED_HOST', ''),
+    'ip_allowlist' => $opsIpAllowlist,
+    'admin_login_max_attempts' => (int) env('OPS_ADMIN_LOGIN_MAX_ATTEMPTS', 5),
+    'audit_log' => true,
+    'rate_limit' => [
+        'login' => (int) env('OPS_LOGIN_RATE_LIMIT', (int) env('OPS_ADMIN_LOGIN_MAX_ATTEMPTS', 5)),
+        'global' => (int) env('OPS_GLOBAL_RATE_LIMIT', 100),
+    ],
+    'risk' => [
+        'enabled' => (bool) env('OPS_RISK_ENGINE_ENABLED', true),
+    ],
+];
+
+return [
+    'allowed_host' => $opsAccessControl['allowed_host'],
+
+    'ip_allowlist' => $opsAccessControl['ip_allowlist'],
+
+    'access_control' => $opsAccessControl,
+
+    'alert' => [
+        'webhook' => env('OPS_ALERT_WEBHOOK'),
+    ],
 
     'go_live_gate' => [
         // enabled_only: only validate providers that are enabled in payments.providers.*
@@ -28,7 +53,7 @@ return [
     ],
 
     'security' => [
-        'admin_login_max_attempts' => (int) env('OPS_ADMIN_LOGIN_MAX_ATTEMPTS', 5),
+        'admin_login_max_attempts' => $opsAccessControl['admin_login_max_attempts'],
         'admin_login_decay_seconds' => (int) env('OPS_ADMIN_LOGIN_DECAY_SECONDS', 300),
     ],
 
