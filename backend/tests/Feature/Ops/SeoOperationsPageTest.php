@@ -409,6 +409,65 @@ final class SeoOperationsPageTest extends TestCase
         $this->assertSame('Fix Guide', $guideSeo->seo_title);
     }
 
+    public function test_social_only_gap_stays_seo_ready_but_remains_operable_in_issue_queue(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+        $selectedOrg = $this->createOrganization('SEO Social Gap Org');
+
+        $article = Article::query()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'slug' => 'social-gap-article',
+            'locale' => 'en',
+            'title' => 'Social Gap Article',
+            'excerpt' => 'Social gap article excerpt',
+            'content_md' => 'Social gap body',
+            'cover_image_url' => 'https://example.test/images/social-gap-article.png',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::now()->subDay(),
+        ]);
+        ArticleSeoMeta::query()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'article_id' => (int) $article->id,
+            'locale' => 'en',
+            'seo_title' => 'Social Gap Article Title',
+            'seo_description' => 'Social Gap Article Description',
+            'canonical_url' => 'https://example.test/en/articles/social-gap-article',
+            'og_title' => 'Social Gap OG Title',
+            'og_description' => 'Social Gap OG Description',
+            'og_image_url' => '',
+            'robots' => 'index,follow',
+            'is_indexable' => true,
+        ]);
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        app()->instance('request', Request::create('/ops/seo-operations', 'POST'));
+
+        $context = app(OrgContext::class);
+        $context->set((int) $selectedOrg->id, (int) $admin->id, 'admin');
+        app()->instance(OrgContext::class, $context);
+
+        Livewire::test(SeoOperationsPage::class)
+            ->assertSet('headlineFields.0.value', '100% (1/1)')
+            ->set('issueFilter', SeoOperationsService::ISSUE_SOCIAL)
+            ->assertCount('issueQueue', 1)
+            ->assertSee('Social preview gaps')
+            ->set('selectedTargets', [
+                'article:'.$article->id,
+            ])
+            ->set('bulkAction', SeoOperationsService::ACTION_FILL_METADATA)
+            ->call('applyBulkAction')
+            ->assertSet('selectedTargets', [])
+            ->assertCount('issueQueue', 0);
+
+        $articleSeo = $article->seoMeta()->firstOrFail();
+
+        $this->assertSame('https://example.test/images/social-gap-article.png', $articleSeo->og_image_url);
+    }
+
     private function createOrganization(string $name): Organization
     {
         return Organization::query()->create([

@@ -343,7 +343,12 @@ class SeoOperationsPage extends Page
      */
     private function countCanonicalCoverage(SeoOperationsService $service, string $type, Collection $records): int
     {
-        return $records->filter(fn (object $record): bool => trim((string) data_get($record, 'seoMeta.canonical_url', '')) === ($service->expectedCanonical($type, $record) ?? ''))->count();
+        return $records->filter(function (object $record) use ($service, $type): bool {
+            $expectedCanonical = $service->expectedCanonical($type, $record);
+
+            return $expectedCanonical !== null
+                && trim((string) data_get($record, 'seoMeta.canonical_url', '')) === $expectedCanonical;
+        })->count();
     }
 
     /**

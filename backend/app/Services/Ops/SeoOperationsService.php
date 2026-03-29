@@ -39,6 +39,16 @@ final class SeoOperationsService
 
     public const ISSUE_GROWTH = 'growth';
 
+    /**
+     * @var list<string>
+     */
+    private const CORE_SEO_ISSUES = [
+        self::ISSUE_METADATA,
+        self::ISSUE_CANONICAL,
+        self::ISSUE_ROBOTS,
+        self::ISSUE_INDEXABILITY,
+    ];
+
     public function __construct(
         private readonly ArticleSeoService $articleSeoService,
         private readonly CareerGuideSeoService $careerGuideSeoService,
@@ -154,7 +164,7 @@ final class SeoOperationsService
             $issues[] = [
                 'code' => self::ISSUE_SOCIAL,
                 'label' => 'Social preview gaps',
-                'autofix' => [self::ACTION_FILL_METADATA],
+                'autofix' => $this->socialAutofixActions($type, $record, $seoMeta),
             ];
         }
 
@@ -173,7 +183,10 @@ final class SeoOperationsService
 
     public function isSeoReady(string $type, object $record): bool
     {
-        return $this->issuesFor($type, $record) === [];
+        return collect($this->issuesFor($type, $record))
+            ->pluck('code')
+            ->intersect(self::CORE_SEO_ISSUES)
+            ->isEmpty();
     }
 
     public function isGrowthReady(string $type, object $record): bool
@@ -234,6 +247,7 @@ final class SeoOperationsService
             $fallbackDescription = Str::limit($descriptionSource, 160, '');
             $fallbackOgTitle = Str::limit(trim((string) $record->title), 90, '');
             $fallbackOgDescription = Str::limit($descriptionSource, 200, '');
+            $fallbackOgImage = trim((string) ($record->cover_image_url ?? ''));
             $fallbackCanonical = $this->expectedCanonical('article', $record) ?? '';
             $fallbackRobots = $this->expectedRobots('article', $record);
             $meta = ArticleSeoMeta::query()->withoutGlobalScopes()->firstOrNew([
@@ -248,6 +262,7 @@ final class SeoOperationsService
                 'canonical_url' => $this->preserveOrFill($meta->canonical_url, $fallbackCanonical),
                 'og_title' => $this->preserveOrFill($meta->og_title, $fallbackOgTitle),
                 'og_description' => $this->preserveOrFill($meta->og_description, $fallbackOgDescription),
+                'og_image_url' => $this->preserveOrFill($meta->og_image_url, $fallbackOgImage),
                 'robots' => $this->preserveOrFill($meta->robots, $fallbackRobots),
                 'is_indexable' => (bool) $record->is_indexable,
             ]);
@@ -521,6 +536,36 @@ final class SeoOperationsService
         }
 
         return 'Discoverable now';
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function socialAutofixActions(string $type, object $record, ?object $seoMeta): array
+    {
+        $missingCoreSocialFields = [
+            trim((string) data_get($seoMeta, 'og_title', '')) === '',
+            trim((string) data_get($seoMeta, 'og_description', '')) === '',
+        ];
+
+        if ($type !== 'article') {
+            $missingCoreSocialFields[] = trim((string) data_get($seoMeta, 'twitter_title', '')) === '';
+            $missingCoreSocialFields[] = trim((string) data_get($seoMeta, 'twitter_description', '')) === '';
+        }
+
+        $canFillTextualSocialFields = in_array(true, $missingCoreSocialFields, true);
+
+        $missingSocialImage = trim((string) data_get($seoMeta, 'og_image_url', '')) === '';
+        $hasImageSource = trim((string) match ($type) {
+            'article', 'job' => data_get($record, 'cover_image_url', ''),
+            default => '',
+        }) !== '';
+
+        if ($canFillTextualSocialFields || ($missingSocialImage && $hasImageSource)) {
+            return [self::ACTION_FILL_METADATA];
+        }
+
+        return [];
     }
 
     private function ensureSeoMeta(string $type, object $record): ?object
