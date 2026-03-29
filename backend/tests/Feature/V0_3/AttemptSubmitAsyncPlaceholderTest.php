@@ -36,8 +36,8 @@ class AttemptSubmitAsyncPlaceholderTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr17SimpleScoreDemoSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr17SimpleScoreDemoSeeder)->run();
     }
 
     public function test_report_returns_generating_placeholder_when_async_submission_is_pending(): void

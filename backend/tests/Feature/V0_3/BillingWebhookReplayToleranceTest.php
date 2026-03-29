@@ -14,7 +14,7 @@ class BillingWebhookReplayToleranceTest extends TestCase
 
     public function test_billing_replay_tolerance_contract(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
 
         config([
             'services.billing.webhook_secret' => 'billing_secret_pr65',
@@ -109,7 +109,7 @@ class BillingWebhookReplayToleranceTest extends TestCase
     private function encodePayload(array $payload): string
     {
         $raw = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        if (!is_string($raw)) {
+        if (! is_string($raw)) {
             self::fail('json_encode payload failed.');
         }
 

@@ -174,7 +174,7 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
     private function encodePayload(array $payload): string
     {
         $rawBody = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        if (!is_string($rawBody)) {
+        if (! is_string($rawBody)) {
             self::fail('json_encode payload failed.');
         }
 

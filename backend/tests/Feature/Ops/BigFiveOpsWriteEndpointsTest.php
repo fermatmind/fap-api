@@ -118,7 +118,6 @@ final class BigFiveOpsWriteEndpointsTest extends TestCase
         $this->assertSame('success', (string) ($rollbackAudit->result ?? ''));
     }
 
-
     public function test_publish_rejects_path_traversal_inputs(): void
     {
         $owner = $this->createUserWithToken('ops-write-validate@big5.test');

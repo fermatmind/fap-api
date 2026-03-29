@@ -15,12 +15,12 @@ use Tests\TestCase;
 
 final class Sds20ReportPaywallTest extends TestCase
 {
-    use RefreshDatabase;
     use BuildsSds20ScorerInput;
+    use RefreshDatabase;
 
     public function test_locked_report_only_returns_free_sections(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $attemptId = $this->createAttemptWithResult('zh-CN', false, 'anon_sds_paywall');
 

@@ -18,7 +18,7 @@ class OrgIsolationAttemptsTest extends TestCase
     {
         $now = now();
         $userId = DB::table('users')->insertGetId([
-            'name' => 'User ' . $email,
+            'name' => 'User '.$email,
             'email' => $email,
             'password' => bcrypt('secret'),
             'created_at' => $now,
@@ -35,8 +35,8 @@ class OrgIsolationAttemptsTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr17SimpleScoreDemoSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr17SimpleScoreDemoSeeder)->run();
     }
 
     public function test_cross_org_attempt_access_returns_404(): void
@@ -80,24 +80,24 @@ class OrgIsolationAttemptsTest extends TestCase
         $this->grantScaleForOrg((int) $orgId1, 'SIMPLE_SCORE_DEMO');
 
         $start = $this->withHeaders([
-    'Authorization' => 'Bearer ' . $user['token'],
-    'X-Org-Id' => (string) $orgId1,
-])->postJson('/api/v0.3/attempts/start', [
-    'anon_id' => 'org_iso_001',
-    'scale_code' => 'SIMPLE_SCORE_DEMO',
-    'scale_version' => 'v0.3',
-    'question_count' => 1,
-    'client_platform' => 'test',
-    'region' => 'CN_MAINLAND',
-    'locale' => 'zh-CN',
-]);
+            'Authorization' => 'Bearer '.$user['token'],
+            'X-Org-Id' => (string) $orgId1,
+        ])->postJson('/api/v0.3/attempts/start', [
+            'anon_id' => 'org_iso_001',
+            'scale_code' => 'SIMPLE_SCORE_DEMO',
+            'scale_version' => 'v0.3',
+            'question_count' => 1,
+            'client_platform' => 'test',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+        ]);
 
         $start->assertStatus(200);
         $attemptId = (string) $start->json('attempt_id');
         $this->assertNotSame('', $attemptId);
 
         $cross = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $user['token'],
+            'Authorization' => 'Bearer '.$user['token'],
             'X-Org-Id' => (string) $orgId2,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/result");
 

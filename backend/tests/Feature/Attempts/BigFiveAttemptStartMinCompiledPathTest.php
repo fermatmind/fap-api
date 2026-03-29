@@ -17,7 +17,7 @@ final class BigFiveAttemptStartMinCompiledPathTest extends TestCase
     public function test_big5_start_uses_min_compiled_question_index_when_full_questions_payload_is_missing(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         /** @var BigFivePackLoader $loader */
         $loader = app(BigFivePackLoader::class);
@@ -48,4 +48,3 @@ final class BigFiveAttemptStartMinCompiledPathTest extends TestCase
         }
     }
 }
-

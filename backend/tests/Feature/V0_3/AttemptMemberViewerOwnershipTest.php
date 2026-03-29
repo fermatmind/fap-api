@@ -17,15 +17,15 @@ class AttemptMemberViewerOwnershipTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr17SimpleScoreDemoSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr17SimpleScoreDemoSeeder)->run();
     }
 
     private function createUserWithToken(string $email): array
     {
         $now = now();
         $userId = DB::table('users')->insertGetId([
-            'name' => 'User ' . $email,
+            'name' => 'User '.$email,
             'email' => $email,
             'password' => bcrypt('secret'),
             'created_at' => $now,
@@ -43,7 +43,7 @@ class AttemptMemberViewerOwnershipTest extends TestCase
     private function createOrg(int $ownerUserId): int
     {
         return (int) DB::table('organizations')->insertGetId([
-            'name' => 'Org ' . Str::lower(Str::random(8)),
+            'name' => 'Org '.Str::lower(Str::random(8)),
             'owner_user_id' => $ownerUserId,
             'created_at' => now(),
             'updated_at' => now(),
@@ -89,7 +89,7 @@ class AttemptMemberViewerOwnershipTest extends TestCase
     private function startAttempt(int $orgId, string $token, string $anonId): string
     {
         $headers = [
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
             'X-Org-Id' => (string) $orgId,
             'X-Anon-Id' => $anonId,
         ];
@@ -137,7 +137,7 @@ class AttemptMemberViewerOwnershipTest extends TestCase
         $attemptId = $this->startAttempt($orgId, $memberA['token'], 'high3-member-a-anon');
 
         $headersB = [
-            'Authorization' => 'Bearer ' . $memberB['token'],
+            'Authorization' => 'Bearer '.$memberB['token'],
             'X-Org-Id' => (string) $orgId,
             'X-Anon-Id' => 'high3-member-b-anon',
         ];

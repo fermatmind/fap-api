@@ -15,7 +15,7 @@ class AssessmentsProgressSummaryTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
     }
 
     private function createUser(string $email): int
@@ -32,6 +32,7 @@ class AssessmentsProgressSummaryTest extends TestCase
     private function issueToken(int $userId): string
     {
         $issued = app(FmTokenService::class)->issueForUser((string) $userId);
+
         return (string) ($issued['token'] ?? '');
     }
 
@@ -59,7 +60,7 @@ class AssessmentsProgressSummaryTest extends TestCase
         $token = $this->issueToken($adminId);
 
         $create = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson("/api/v0.4/orgs/{$orgId}/assessments", [
             'scale_code' => 'MBTI',
             'title' => 'Team MBTI',
@@ -78,7 +79,7 @@ class AssessmentsProgressSummaryTest extends TestCase
         }
 
         $invite = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson("/api/v0.4/orgs/{$orgId}/assessments/{$assessmentId}/invite", [
             'subjects' => $subjects,
         ]);
@@ -96,7 +97,7 @@ class AssessmentsProgressSummaryTest extends TestCase
             $attemptId = (string) Str::uuid();
             DB::table('attempts')->insert([
                 'id' => $attemptId,
-                'anon_id' => 'anon_' . $attemptId,
+                'anon_id' => 'anon_'.$attemptId,
                 'user_id' => (string) $adminId,
                 'org_id' => $orgId,
                 'scale_code' => 'MBTI',
@@ -153,7 +154,7 @@ class AssessmentsProgressSummaryTest extends TestCase
         }
 
         $progress = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson("/api/v0.4/orgs/{$orgId}/assessments/{$assessmentId}/progress");
         $progress->assertStatus(200);
         $progress->assertJson([
@@ -164,7 +165,7 @@ class AssessmentsProgressSummaryTest extends TestCase
         ]);
 
         $summary = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson("/api/v0.4/orgs/{$orgId}/assessments/{$assessmentId}/summary");
         $summary->assertStatus(200);
         $summary->assertJson([

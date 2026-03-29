@@ -10,9 +10,9 @@ use App\Services\Commerce\EntitlementManager;
 use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Testing\TestResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
 final class MbtiReportContentEnhancementContractTest extends TestCase
@@ -40,13 +40,13 @@ final class MbtiReportContentEnhancementContractTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
     }
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
 
         DB::table('fm_tokens')->insert([
             'token' => $token,
@@ -155,7 +155,7 @@ final class MbtiReportContentEnhancementContractTest extends TestCase
 
             $resp = $this->withHeaders([
                 'X-Anon-Id' => $anonId,
-                'Authorization' => 'Bearer ' . $token,
+                'Authorization' => 'Bearer '.$token,
             ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
 
             $resp->assertStatus(200);
@@ -181,7 +181,7 @@ final class MbtiReportContentEnhancementContractTest extends TestCase
 
         $locked = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
 
         $locked->assertStatus(200);
@@ -212,7 +212,7 @@ final class MbtiReportContentEnhancementContractTest extends TestCase
 
         $unlocked = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
 
         $unlocked->assertStatus(200);
@@ -237,7 +237,7 @@ final class MbtiReportContentEnhancementContractTest extends TestCase
 
         $locked = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
 
         $locked->assertStatus(200);
@@ -260,7 +260,7 @@ final class MbtiReportContentEnhancementContractTest extends TestCase
 
         $unlocked = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
 
         $unlocked->assertStatus(200);
@@ -284,7 +284,7 @@ final class MbtiReportContentEnhancementContractTest extends TestCase
     }
 
     /**
-     * @param array<string,mixed> $cta
+     * @param  array<string,mixed>  $cta
      */
     private function assertStableCtaShape(array $cta): void
     {
@@ -309,7 +309,7 @@ final class MbtiReportContentEnhancementContractTest extends TestCase
     }
 
     /**
-     * @param array<string,mixed> $item
+     * @param  array<string,mixed>  $item
      */
     private function assertStableRecommendedReadShape(array $item): void
     {

@@ -17,7 +17,7 @@ final class AttemptContentPackErrorTest extends TestCase
 
     public function test_attempt_start_returns_500_with_content_pack_error_code_when_pack_resolution_fails(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $brokenPackId = 'PACK_DOES_NOT_EXIST';
         $brokenDirVersion = 'DIR_VERSION_DOES_NOT_EXIST';
@@ -47,7 +47,7 @@ final class AttemptContentPackErrorTest extends TestCase
             ->withArgs(function ($message, $context) use ($brokenPackId, $brokenDirVersion): bool {
                 $this->assertIsString($message);
                 $this->assertIsArray($context);
-                if (!str_starts_with($message, 'QUESTIONS_')) {
+                if (! str_starts_with($message, 'QUESTIONS_')) {
                     return false;
                 }
                 $this->assertSame($brokenPackId, $context['pack_id'] ?? null);

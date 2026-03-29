@@ -16,7 +16,7 @@ final class AuthPhoneNoPlaintextWriteTest extends TestCase
 
     public function test_phone_verify_writes_encrypted_phone_fields_without_plaintext_column(): void
     {
-        $phone = '+86139' . str_pad((string) random_int(0, 99999999), 8, '0', STR_PAD_LEFT);
+        $phone = '+86139'.str_pad((string) random_int(0, 99999999), 8, '0', STR_PAD_LEFT);
 
         $send = $this->postJson('/api/v0.3/auth/phone/send_code', [
             'phone' => $phone,

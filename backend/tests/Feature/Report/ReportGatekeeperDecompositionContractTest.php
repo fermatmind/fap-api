@@ -18,12 +18,12 @@ use Tests\TestCase;
 
 final class ReportGatekeeperDecompositionContractTest extends TestCase
 {
-    use RefreshDatabase;
     use BuildsSds20ScorerInput;
+    use RefreshDatabase;
 
     public function test_free_state_contract_is_preserved(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
         $this->configureSdsCommercialOffers();
 
         $anonId = 'anon_decomp_free';
@@ -42,7 +42,7 @@ final class ReportGatekeeperDecompositionContractTest extends TestCase
 
     public function test_full_state_contract_is_preserved(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
         $this->configureSdsCommercialOffers();
 
         $anonId = 'anon_decomp_full';
@@ -80,7 +80,7 @@ final class ReportGatekeeperDecompositionContractTest extends TestCase
 
     public function test_crisis_state_contract_is_preserved(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
         $this->configureSdsCommercialOffers();
 
         $anonId = 'anon_decomp_crisis';

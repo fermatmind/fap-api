@@ -79,4 +79,3 @@ final class BackfillAttemptAnswerSetsScaleIdentityCommandTest extends TestCase
         $this->assertNull($after->scale_uid);
     }
 }
-

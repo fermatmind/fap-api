@@ -23,7 +23,7 @@ final class Eq60ReportPaywallTest extends TestCase
     public function test_locked_report_only_contains_free_sections(): void
     {
         $this->artisan('content:compile --pack=EQ_60 --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $attemptId = $this->createAttemptWithResult('zh-CN', 'anon_eq_paywall_locked');
 
@@ -59,7 +59,7 @@ final class Eq60ReportPaywallTest extends TestCase
     public function test_unlocked_report_contains_paid_sections(): void
     {
         $this->artisan('content:compile --pack=EQ_60 --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $anonId = 'anon_eq_paywall_unlocked';
         $attemptId = $this->createAttemptWithResult('zh-CN', $anonId);

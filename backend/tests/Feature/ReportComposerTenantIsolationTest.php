@@ -64,7 +64,7 @@ final class ReportComposerTenantIsolationTest extends TestCase
         return Attempt::create([
             'id' => (string) Str::uuid(),
             'org_id' => $orgId,
-            'anon_id' => 'tenant_iso_anon_' . $orgId,
+            'anon_id' => 'tenant_iso_anon_'.$orgId,
             'user_id' => '1001',
             'scale_code' => 'MBTI',
             'scale_version' => 'v0.3',

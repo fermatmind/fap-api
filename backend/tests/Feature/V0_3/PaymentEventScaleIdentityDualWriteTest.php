@@ -24,8 +24,8 @@ final class PaymentEventScaleIdentityDualWriteTest extends TestCase
     public function test_webhook_dual_mode_writes_payment_event_scale_identity_columns(): void
     {
         config()->set('scale_identity.write_mode', 'dual');
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $anonId = 'anon_payevt_dual';
         $attemptId = $this->createSdsAttemptWithResult($anonId);
@@ -56,8 +56,8 @@ final class PaymentEventScaleIdentityDualWriteTest extends TestCase
     public function test_webhook_legacy_mode_keeps_payment_event_scale_identity_columns_nullable(): void
     {
         config()->set('scale_identity.write_mode', 'legacy');
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $anonId = 'anon_payevt_legacy';
         $attemptId = $this->createSdsAttemptWithResult($anonId);
@@ -183,4 +183,3 @@ final class PaymentEventScaleIdentityDualWriteTest extends TestCase
         ]);
     }
 }
-

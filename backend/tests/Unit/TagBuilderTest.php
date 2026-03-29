@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
 use App\Services\Report\TagBuilder;
+use Tests\TestCase;
 
 class TagBuilderTest extends TestCase
 {

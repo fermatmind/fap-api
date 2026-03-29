@@ -11,8 +11,8 @@ use App\Support\OrgContext;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
-use ReflectionClass;
 use Illuminate\Support\Str;
+use ReflectionClass;
 use Tests\TestCase;
 
 final class TenantDashboardTeamDynamicsTest extends TestCase
@@ -21,7 +21,7 @@ final class TenantDashboardTeamDynamicsTest extends TestCase
 
     public function test_tenant_dashboard_widget_resolves_team_dynamics_for_single_org_member(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $user = TenantUser::query()->create([
             'name' => 'Tenant Member',

@@ -11,7 +11,7 @@ final class SeoSurfaceContractServiceTest extends TestCase
 {
     public function test_it_builds_a_backend_owned_seo_surface_contract(): void
     {
-        $service = new SeoSurfaceContractService();
+        $service = new SeoSurfaceContractService;
 
         $contract = $service->build([
             'metadata_scope' => 'public_indexable_detail',
@@ -61,7 +61,7 @@ final class SeoSurfaceContractServiceTest extends TestCase
 
     public function test_it_defaults_non_indexable_states_from_robots_policy(): void
     {
-        $service = new SeoSurfaceContractService();
+        $service = new SeoSurfaceContractService;
 
         $contract = $service->build([
             'metadata_scope' => 'public_share_safe',

@@ -21,7 +21,7 @@ final class ClinicalSdsTelemetryContractTest extends TestCase
     {
         config(['fap.features.clinical_consent_enforce' => true]);
         $this->artisan('content:compile --pack=CLINICAL_COMBO_68 --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $anonId = 'anon_clinical_telemetry_contract';
         $consent = $this->fetchConsentPayload('CLINICAL_COMBO_68');
@@ -90,8 +90,8 @@ final class ClinicalSdsTelemetryContractTest extends TestCase
     public function test_sds_events_include_unlock_and_avoid_answers_payload(): void
     {
         $this->artisan('content:compile --pack=SDS_20 --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $anonId = 'anon_sds_telemetry_contract';
         $consent = $this->fetchConsentPayload('SDS_20');

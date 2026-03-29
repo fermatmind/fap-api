@@ -119,4 +119,3 @@ final class AnswerStorageScaleIdentityDualWriteTest extends TestCase
         ];
     }
 }
-

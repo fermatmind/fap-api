@@ -65,7 +65,7 @@ final class BigFiveRolloutGateTest extends TestCase
         $token = $this->issueAnonToken($anonId);
         $response = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => [
@@ -79,11 +79,11 @@ final class BigFiveRolloutGateTest extends TestCase
     }
 
     /**
-     * @param array<string,mixed> $rollout
+     * @param  array<string,mixed>  $rollout
      */
     private function seedBigFiveWithRollout(array $rollout): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         DB::table('scales_registry')
             ->where('code', 'BIG5_OCEAN')
@@ -95,7 +95,7 @@ final class BigFiveRolloutGateTest extends TestCase
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),
@@ -111,4 +111,3 @@ final class BigFiveRolloutGateTest extends TestCase
         return $token;
     }
 }
-

@@ -63,4 +63,3 @@ final class ClinicalComboGoldenCasesTest extends TestCase
         }
     }
 }
-

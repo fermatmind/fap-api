@@ -36,4 +36,3 @@ final class LocaleSwitcherComponentTest extends TestCase
         $this->assertSame('en', session('ops_locale'));
     }
 }
-

@@ -41,8 +41,8 @@ final class ResolveAnonIdMiddlewareTest extends TestCase
 
     public function test_attempt_start_prefers_client_anon_id_over_payload_anon_id(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr17SimpleScoreDemoSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr17SimpleScoreDemoSeeder)->run();
 
         $response = $this->withHeader('X-Anon-Id', 'anon_header_start')
             ->postJson('/api/v0.3/attempts/start', [

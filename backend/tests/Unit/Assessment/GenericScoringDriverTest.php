@@ -9,7 +9,7 @@ class GenericScoringDriverTest extends TestCase
 {
     public function test_scores_mbti_dichotomy_with_type_rules(): void
     {
-        $driver = new GenericScoringDriver();
+        $driver = new GenericScoringDriver;
 
         $spec = [
             'dimensions' => [
@@ -61,7 +61,7 @@ class GenericScoringDriverTest extends TestCase
 
     public function test_scores_trait_dimensions(): void
     {
-        $driver = new GenericScoringDriver();
+        $driver = new GenericScoringDriver;
 
         $spec = [
             'dimensions' => [

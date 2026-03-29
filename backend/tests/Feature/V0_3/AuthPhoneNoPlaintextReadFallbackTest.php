@@ -17,7 +17,7 @@ final class AuthPhoneNoPlaintextReadFallbackTest extends TestCase
 
     public function test_phone_verify_does_not_read_plaintext_phone_when_encrypted_value_missing(): void
     {
-        $phone = '+86138' . str_pad((string) random_int(0, 99999999), 8, '0', STR_PAD_LEFT);
+        $phone = '+86138'.str_pad((string) random_int(0, 99999999), 8, '0', STR_PAD_LEFT);
         $pii = app(PiiCipher::class);
 
         $insert = [
@@ -29,7 +29,7 @@ final class AuthPhoneNoPlaintextReadFallbackTest extends TestCase
         ];
 
         if (Schema::hasColumn('users', 'uid')) {
-            $insert['uid'] = 'u_' . bin2hex(random_bytes(5));
+            $insert['uid'] = 'u_'.bin2hex(random_bytes(5));
         }
         if (Schema::hasColumn('users', 'phone_e164')) {
             $insert['phone_e164'] = $phone;

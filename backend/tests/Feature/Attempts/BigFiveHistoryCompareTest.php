@@ -19,8 +19,8 @@ final class BigFiveHistoryCompareTest extends TestCase
 
     public function test_me_attempts_big5_returns_history_compare_summary(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $userId = 8101;
         $anonId = 'anon_big5_history';
@@ -150,7 +150,7 @@ final class BigFiveHistoryCompareTest extends TestCase
 
         Attempt::create([
             'id' => $attemptId,
-            'ticket_code' => 'FMT-' . strtoupper(substr(str_replace('-', '', (string) Str::uuid()), 0, 8)),
+            'ticket_code' => 'FMT-'.strtoupper(substr(str_replace('-', '', (string) Str::uuid()), 0, 8)),
             'org_id' => 0,
             'anon_id' => $anonId,
             'user_id' => $userId,
@@ -175,7 +175,7 @@ final class BigFiveHistoryCompareTest extends TestCase
     }
 
     /**
-     * @param array{O:float,C:float,E:float,A:float,N:float} $domainsMean
+     * @param  array{O:float,C:float,E:float,A:float,N:float}  $domainsMean
      */
     private function seedBigFiveResult(string $attemptId, array $domainsMean, array $overrides = []): void
     {
@@ -267,7 +267,7 @@ final class BigFiveHistoryCompareTest extends TestCase
 
     private function seedFmToken(string $anonId, int $userId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
 
         DB::table('fm_tokens')->insert([
             'token' => $token,

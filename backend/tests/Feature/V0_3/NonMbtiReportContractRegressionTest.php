@@ -13,20 +13,20 @@ use App\Services\Report\ReportAccess;
 use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Testing\TestResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Testing\TestResponse;
 use Tests\Feature\Sds20\Concerns\BuildsSds20ScorerInput;
 use Tests\TestCase;
 
 final class NonMbtiReportContractRegressionTest extends TestCase
 {
-    use RefreshDatabase;
     use BuildsSds20ScorerInput;
+    use RefreshDatabase;
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
 
         DB::table('fm_tokens')->insert([
             'token' => $token,
@@ -236,8 +236,8 @@ final class NonMbtiReportContractRegressionTest extends TestCase
     public function test_big5_report_contract_does_not_gain_mbti_only_fields_in_free_or_full_variants(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $anonId = 'anon_non_mbti_big5';
         $token = $this->issueAnonToken($anonId);
@@ -245,8 +245,8 @@ final class NonMbtiReportContractRegressionTest extends TestCase
 
         $locked = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
-        ])->getJson('/api/v0.3/attempts/' . $attemptId . '/report');
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/report');
 
         $locked->assertStatus(200);
         $locked->assertJson([
@@ -289,8 +289,8 @@ final class NonMbtiReportContractRegressionTest extends TestCase
 
         $unlocked = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
-        ])->getJson('/api/v0.3/attempts/' . $attemptId . '/report');
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/report');
 
         $unlocked->assertStatus(200);
         $unlocked->assertJson([
@@ -323,8 +323,8 @@ final class NonMbtiReportContractRegressionTest extends TestCase
 
     public function test_sds20_report_contract_does_not_gain_mbti_only_fields_in_free_or_full_variants(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
         $this->configureSdsCommercialOffers();
 
         $anonId = 'anon_non_mbti_sds';
@@ -333,8 +333,8 @@ final class NonMbtiReportContractRegressionTest extends TestCase
 
         $locked = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
-        ])->getJson('/api/v0.3/attempts/' . $attemptId . '/report');
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/report');
 
         $locked->assertStatus(200);
         $locked->assertJson([
@@ -370,8 +370,8 @@ final class NonMbtiReportContractRegressionTest extends TestCase
 
         $unlocked = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
-        ])->getJson('/api/v0.3/attempts/' . $attemptId . '/report');
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/report');
 
         $unlocked->assertStatus(200);
         $unlocked->assertJson([

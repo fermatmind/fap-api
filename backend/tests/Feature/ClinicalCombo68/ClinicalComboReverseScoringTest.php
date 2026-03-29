@@ -30,4 +30,3 @@ final class ClinicalComboReverseScoringTest extends TestCase
         $this->assertSame(0, (int) data_get($allE, 'scores.stress.raw'));
     }
 }
-

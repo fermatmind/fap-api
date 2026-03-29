@@ -6,8 +6,8 @@ namespace Tests\Feature\Content;
 
 use App\Models\Attempt;
 use App\Models\Result;
-use App\Services\Report\ReportComposer;
 use App\Services\Report\ReportAccess;
+use App\Services\Report\ReportComposer;
 use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -27,8 +27,8 @@ final class ContentPackCoverageMatrixTest extends TestCase
 
     public function test_mbti_coverage_matrix_for_free_and_full_variants(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $attempt = Attempt::create([
             'id' => (string) Str::uuid(),
@@ -138,7 +138,7 @@ final class ContentPackCoverageMatrixTest extends TestCase
         $seen = [];
         foreach ($sections as $sectionKey => $sectionNode) {
             foreach ((array) ($sectionNode['cards'] ?? []) as $card) {
-                if (!is_array($card)) {
+                if (! is_array($card)) {
                     continue;
                 }
                 $id = (string) ($card['id'] ?? '');

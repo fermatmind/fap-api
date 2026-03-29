@@ -91,9 +91,10 @@ final class CiScalesRegistrySeederToggleTest extends TestCase
     {
         if ($previous === false) {
             putenv($name);
+
             return;
         }
 
-        putenv($name . '=' . $previous);
+        putenv($name.'='.$previous);
     }
 }

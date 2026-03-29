@@ -15,10 +15,11 @@ final class SelfCheckRunnerOrderTest extends TestCase
     public function test_runner_preserves_order_and_marks_overall_failure(): void
     {
         $ctx = SelfCheckContext::fromCommandOptions([]);
-        $runner = new SelfCheckRunner(new SelfCheckIo());
+        $runner = new SelfCheckRunner(new SelfCheckIo);
 
         $checks = [
-            new class {
+            new class
+            {
                 public function name(): string
                 {
                     return 'first';
@@ -28,10 +29,12 @@ final class SelfCheckRunnerOrderTest extends TestCase
                 {
                     $result = new SelfCheckResult('first');
                     $result->addNote('ok');
+
                     return $result;
                 }
             },
-            new class {
+            new class
+            {
                 public function name(): string
                 {
                     return 'second';
@@ -41,6 +44,7 @@ final class SelfCheckRunnerOrderTest extends TestCase
                 {
                     $result = new SelfCheckResult('second');
                     $result->addError('boom');
+
                     return $result;
                 }
             },

@@ -46,7 +46,7 @@ class PaymentWebhookTrustBoundaryTest extends TestCase
 
     public function test_processor_rejects_invalid_signature_before_any_state_transition(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
         $orderNo = 'ord_trust_sig_1';
         $this->seedOrder($orderNo);
 
@@ -77,7 +77,7 @@ class PaymentWebhookTrustBoundaryTest extends TestCase
 
     public function test_processor_rejects_amount_mismatch(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
         $orderNo = 'ord_trust_amt_1';
         $this->seedOrder($orderNo);
 
@@ -106,7 +106,7 @@ class PaymentWebhookTrustBoundaryTest extends TestCase
 
     public function test_processor_rejects_event_type_outside_whitelist(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
         $orderNo = 'ord_trust_evt_1';
         $this->seedOrder($orderNo);
 

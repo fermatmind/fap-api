@@ -10,8 +10,8 @@ use App\Services\Content\Sds20PackLoader;
 trait BuildsSds20ScorerInput
 {
     /**
-     * @param array<int|string,string> $overrides
-     * @param array<string,mixed> $ctx
+     * @param  array<int|string,string>  $overrides
+     * @param  array<string,mixed>  $ctx
      * @return array<string,mixed>
      */
     protected function scoreSds(array $overrides = [], array $ctx = []): array
@@ -29,8 +29,8 @@ trait BuildsSds20ScorerInput
     }
 
     /**
-     * @param array<int,string> $answers
-     * @param array<string,mixed> $ctx
+     * @param  array<int,string>  $answers
+     * @param  array<string,mixed>  $ctx
      * @return array<string,mixed>
      */
     protected function scoreSdsFromAnswers(array $answers, array $ctx = []): array
@@ -65,7 +65,7 @@ trait BuildsSds20ScorerInput
     protected function buildAnswers(string $code = 'A'): array
     {
         $code = strtoupper(trim($code));
-        if (!in_array($code, ['A', 'B', 'C', 'D'], true)) {
+        if (! in_array($code, ['A', 'B', 'C', 'D'], true)) {
             $code = 'A';
         }
 

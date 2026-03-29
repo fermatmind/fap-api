@@ -38,7 +38,7 @@ final class BackfillPaymentEventsScaleIdentityCommandTest extends TestCase
             'updated_at' => now(),
         ]);
 
-        $orderNo = 'ord_ops_backfill_payments_known_' . Str::lower(Str::random(8));
+        $orderNo = 'ord_ops_backfill_payments_known_'.Str::lower(Str::random(8));
         DB::table('orders')->insert([
             'id' => (string) Str::uuid(),
             'order_no' => $orderNo,
@@ -74,7 +74,7 @@ final class BackfillPaymentEventsScaleIdentityCommandTest extends TestCase
             'id' => $eventId,
             'org_id' => 0,
             'provider' => 'stub',
-            'provider_event_id' => 'evt_backfill_' . Str::lower(Str::random(10)),
+            'provider_event_id' => 'evt_backfill_'.Str::lower(Str::random(10)),
             'order_id' => (string) Str::uuid(),
             'event_type' => 'payment_succeeded',
             'order_no' => $orderNo,
@@ -122,10 +122,10 @@ final class BackfillPaymentEventsScaleIdentityCommandTest extends TestCase
             'id' => $eventId,
             'org_id' => 0,
             'provider' => 'stub',
-            'provider_event_id' => 'evt_backfill_unknown_' . Str::lower(Str::random(10)),
+            'provider_event_id' => 'evt_backfill_unknown_'.Str::lower(Str::random(10)),
             'order_id' => (string) Str::uuid(),
             'event_type' => 'payment_succeeded',
-            'order_no' => 'missing_order_no_' . Str::lower(Str::random(8)),
+            'order_no' => 'missing_order_no_'.Str::lower(Str::random(8)),
             'payload_json' => json_encode(['seed' => true], JSON_UNESCAPED_UNICODE),
             'signature_ok' => 1,
             'status' => 'received',

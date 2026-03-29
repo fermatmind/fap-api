@@ -15,7 +15,7 @@ class BillingWebhookSignatureTest extends TestCase
 
     public function test_billing_signature_requires_timestamp_and_within_tolerance(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
         Log::spy();
 
         config([
@@ -112,7 +112,7 @@ class BillingWebhookSignatureTest extends TestCase
 
     public function test_legacy_payload_only_signature_is_rejected_even_when_flag_enabled(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
 
         config([
             'services.billing.webhook_secret' => 'billing_secret_legacy_blocked',
@@ -178,7 +178,7 @@ class BillingWebhookSignatureTest extends TestCase
     private function encodePayload(array $payload): string
     {
         $raw = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        if (!is_string($raw)) {
+        if (! is_string($raw)) {
             self::fail('json_encode payload failed.');
         }
 

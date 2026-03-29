@@ -51,4 +51,3 @@ final class AssessmentScaleIdentityDualWriteTest extends TestCase
         $this->assertNull($row->scale_uid);
     }
 }
-

@@ -51,7 +51,7 @@ final class PaymentWebhookPayloadLimitTest extends TestCase
 
     public function test_small_payload_persists_digest_and_small_summary_json(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
         Storage::fake('s3');
         config([
             'services.stripe.webhook_secret' => 'whsec_payload_limit_v03',

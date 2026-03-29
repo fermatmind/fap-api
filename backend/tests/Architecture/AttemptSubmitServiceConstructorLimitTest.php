@@ -14,13 +14,14 @@ final class AttemptSubmitServiceConstructorLimitTest extends TestCase
     {
         $source = (string) file_get_contents(base_path('app/Services/Attempts/AttemptSubmitService.php'));
 
-        if (!preg_match('/function\s+__construct\s*\((.*?)\)\s*\{/s', $source, $matches)) {
+        if (! preg_match('/function\s+__construct\s*\((.*?)\)\s*\{/s', $source, $matches)) {
             self::fail('AttemptSubmitService::__construct not found.');
         }
 
         $rawParams = trim((string) ($matches[1] ?? ''));
         if ($rawParams === '') {
             self::assertTrue(true);
+
             return;
         }
 

@@ -38,8 +38,8 @@ class ReportSnapshotScaleIdentityDualWriteTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr16IqRavenDemoSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr16IqRavenDemoSeeder)->run();
     }
 
     public function test_submit_and_snapshot_job_dual_write_snapshot_identity_columns(): void
@@ -132,4 +132,3 @@ class ReportSnapshotScaleIdentityDualWriteTest extends TestCase
         $this->assertNull($pending->scale_uid);
     }
 }
-

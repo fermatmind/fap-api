@@ -27,7 +27,7 @@ final class BigFiveResultEngineFoundationTest extends TestCase
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
         $this->artisan('norms:import --scale=BIG5_OCEAN --csv=resources/norms/big5/big5_norm_stats_seed.csv --activate=1')
             ->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $anonId = 'anon_big5_foundation';
         $attemptId = $this->seedAttempt($anonId);

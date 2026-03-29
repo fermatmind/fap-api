@@ -21,7 +21,7 @@ final class Eq60PdfDeliveryTest extends TestCase
     public function test_eq60_report_pdf_endpoint_returns_pdf_payload(): void
     {
         $this->artisan('content:compile --pack=EQ_60 --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $anonId = 'anon_eq_pdf';
         $token = $this->issueAnonToken($anonId);
@@ -137,4 +137,3 @@ final class Eq60PdfDeliveryTest extends TestCase
         return $attemptId;
     }
 }
-

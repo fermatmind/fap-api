@@ -119,7 +119,7 @@ final class BigFiveTelemetrySummaryCommandTest extends TestCase
     }
 
     /**
-     * @param array<string,mixed> $meta
+     * @param  array<string,mixed>  $meta
      */
     private function insertEvent(string $eventCode, array $meta, mixed $timestamp): void
     {
@@ -150,7 +150,7 @@ final class BigFiveTelemetrySummaryCommandTest extends TestCase
     private function decodeLastJsonLine(string $output): ?array
     {
         $lines = preg_split('/\R/', trim($output));
-        if (!is_array($lines)) {
+        if (! is_array($lines)) {
             return null;
         }
 

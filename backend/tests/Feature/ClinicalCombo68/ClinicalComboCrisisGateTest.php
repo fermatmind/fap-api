@@ -36,4 +36,3 @@ final class ClinicalComboCrisisGateTest extends TestCase
         $this->assertSame(0, (int) data_get($dto, 'scores.ocd.raw'));
     }
 }
-

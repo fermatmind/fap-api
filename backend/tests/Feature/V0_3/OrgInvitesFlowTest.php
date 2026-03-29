@@ -15,7 +15,7 @@ class OrgInvitesFlowTest extends TestCase
     {
         $now = now();
         $userId = DB::table('users')->insertGetId([
-            'name' => 'User ' . $email,
+            'name' => 'User '.$email,
             'email' => $email,
             'password' => bcrypt('secret'),
             'created_at' => $now,
@@ -38,7 +38,7 @@ class OrgInvitesFlowTest extends TestCase
         $userB = $this->createUserWithToken('b@org.test');
 
         $create = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $userB['token'],
+            'Authorization' => 'Bearer '.$userB['token'],
         ])->postJson('/api/v0.3/orgs', [
             'name' => 'Org Two',
         ]);
@@ -48,7 +48,7 @@ class OrgInvitesFlowTest extends TestCase
         $this->assertNotSame(0, $orgId);
 
         $invite = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $userB['token'],
+            'Authorization' => 'Bearer '.$userB['token'],
             'X-Org-Id' => (string) $orgId,
         ])->postJson("/api/v0.3/orgs/{$orgId}/invites", [
             'email' => 'a@org.test',
@@ -59,7 +59,7 @@ class OrgInvitesFlowTest extends TestCase
         $this->assertNotSame('', $token);
 
         $accept = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $userA['token'],
+            'Authorization' => 'Bearer '.$userA['token'],
             'X-Org-Id' => '0',
         ])->postJson('/api/v0.3/orgs/invites/accept', [
             'token' => $token,
@@ -72,7 +72,7 @@ class OrgInvitesFlowTest extends TestCase
         ]);
 
         $me = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $userA['token'],
+            'Authorization' => 'Bearer '.$userA['token'],
         ])->getJson('/api/v0.3/orgs/me');
 
         $me->assertStatus(200);

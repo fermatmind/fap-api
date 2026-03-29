@@ -26,7 +26,7 @@ final class RbacServiceTest extends TestCase
             ->with('admin.events.read')
             ->andReturn(false);
 
-        $service = new RbacService();
+        $service = new RbacService;
 
         $this->expectException(NotFoundHttpException::class);
         $service->assertCan($user, 'admin.events.read');
@@ -40,7 +40,7 @@ final class RbacServiceTest extends TestCase
             ->with('admin.events.read')
             ->andReturn(true);
 
-        $service = new RbacService();
+        $service = new RbacService;
 
         $service->assertCan($user, 'admin.events.read');
 

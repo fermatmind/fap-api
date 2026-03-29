@@ -15,7 +15,7 @@ final class ClinicalComboQuestionsLocaleSplitTest extends TestCase
     public function test_questions_api_returns_68_items_for_zh_and_en(): void
     {
         $this->artisan('content:compile --pack=CLINICAL_COMBO_68 --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $zh = $this->getJson('/api/v0.3/scales/CLINICAL_COMBO_68/questions?locale=zh-CN');
         $zh->assertStatus(200);
@@ -30,4 +30,3 @@ final class ClinicalComboQuestionsLocaleSplitTest extends TestCase
         $this->assertCount(68, (array) data_get($en->json(), 'questions.items', []));
     }
 }
-

@@ -24,7 +24,7 @@ class ExperimentExposureContractTest extends TestCase
 
         $boot = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $anonToken,
+            'Authorization' => 'Bearer '.$anonToken,
         ])->getJson('/api/v0.3/boot');
         $boot->assertStatus(200);
         $variant = trim((string) $boot->json('experiments.PR23_STICKY_BUCKET'));
@@ -32,17 +32,17 @@ class ExperimentExposureContractTest extends TestCase
 
         $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $anonToken,
+            'Authorization' => 'Bearer '.$anonToken,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/result")->assertStatus(200);
 
         $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $anonToken,
+            'Authorization' => 'Bearer '.$anonToken,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report")->assertStatus(200);
 
         foreach (['result_view', 'report_view'] as $eventCode) {
             $event = $this->findLatestEventByAttempt($eventCode, $attemptId);
-            $this->assertNotNull($event, 'missing event row: ' . $eventCode);
+            $this->assertNotNull($event, 'missing event row: '.$eventCode);
 
             $experiments = json_decode((string) ($event->experiments_json ?? '{}'), true) ?: [];
             $this->assertSame($variant, (string) ($experiments['PR23_STICKY_BUCKET'] ?? ''));
@@ -72,12 +72,12 @@ class ExperimentExposureContractTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
     }
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),
@@ -203,7 +203,7 @@ class ExperimentExposureContractTest extends TestCase
                     return;
                 }
 
-                $inner->orWhereRaw('meta_json like ?', ['%"attempt_id":"' . $attemptId . '"%']);
+                $inner->orWhereRaw('meta_json like ?', ['%"attempt_id":"'.$attemptId.'"%']);
             });
 
         return $query->orderByDesc('occurred_at')->first();

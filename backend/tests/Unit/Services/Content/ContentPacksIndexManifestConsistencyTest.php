@@ -18,7 +18,7 @@ final class ContentPacksIndexManifestConsistencyTest extends TestCase
     {
         parent::setUp();
 
-        $this->packsRoot = sys_get_temp_dir() . '/pr53_content_packs_' . uniqid('', true);
+        $this->packsRoot = sys_get_temp_dir().'/pr53_content_packs_'.uniqid('', true);
         File::ensureDirectoryExists($this->packsRoot);
 
         config()->set('content_packs.driver', 'local');
@@ -85,10 +85,10 @@ final class ContentPacksIndexManifestConsistencyTest extends TestCase
 
     private function makePackDir(string $dirVersion): string
     {
-        $packDir = $this->packsRoot . DIRECTORY_SEPARATOR . 'default'
-            . DIRECTORY_SEPARATOR . 'CN_MAINLAND'
-            . DIRECTORY_SEPARATOR . 'zh-CN'
-            . DIRECTORY_SEPARATOR . $dirVersion;
+        $packDir = $this->packsRoot.DIRECTORY_SEPARATOR.'default'
+            .DIRECTORY_SEPARATOR.'CN_MAINLAND'
+            .DIRECTORY_SEPARATOR.'zh-CN'
+            .DIRECTORY_SEPARATOR.$dirVersion;
 
         File::ensureDirectoryExists($packDir);
 
@@ -105,7 +105,7 @@ final class ContentPacksIndexManifestConsistencyTest extends TestCase
         $versionContentVersion = $versionContentVersion ?? $manifestContentVersion;
 
         file_put_contents(
-            $packDir . DIRECTORY_SEPARATOR . 'manifest.json',
+            $packDir.DIRECTORY_SEPARATOR.'manifest.json',
             json_encode([
                 'schema_version' => 'pack-manifest@v1',
                 'pack_id' => $packId,
@@ -120,7 +120,7 @@ final class ContentPacksIndexManifestConsistencyTest extends TestCase
         );
 
         file_put_contents(
-            $packDir . DIRECTORY_SEPARATOR . 'version.json',
+            $packDir.DIRECTORY_SEPARATOR.'version.json',
             json_encode([
                 'pack_id' => $packId,
                 'content_package_version' => $versionContentVersion,
@@ -129,7 +129,7 @@ final class ContentPacksIndexManifestConsistencyTest extends TestCase
         );
 
         file_put_contents(
-            $packDir . DIRECTORY_SEPARATOR . 'questions.json',
+            $packDir.DIRECTORY_SEPARATOR.'questions.json',
             json_encode([
                 [
                     'question_id' => 'q1',

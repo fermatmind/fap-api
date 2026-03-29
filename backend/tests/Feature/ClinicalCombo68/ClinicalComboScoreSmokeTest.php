@@ -33,4 +33,3 @@ final class ClinicalComboScoreSmokeTest extends TestCase
         $this->assertIsArray($dto['version_snapshot'] ?? null);
     }
 }
-

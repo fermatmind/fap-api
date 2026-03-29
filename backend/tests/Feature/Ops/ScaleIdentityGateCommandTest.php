@@ -118,7 +118,7 @@ final class ScaleIdentityGateCommandTest extends TestCase
     {
         $payload = [
             'id' => (string) Str::uuid(),
-            'anon_id' => 'gate_' . strtolower(Str::random(10)),
+            'anon_id' => 'gate_'.strtolower(Str::random(10)),
             'user_id' => null,
             'scale_code' => strtoupper(trim($scaleCode)),
             'scale_version' => 'v0.3',
@@ -148,9 +148,10 @@ final class ScaleIdentityGateCommandTest extends TestCase
     {
         if ($value === false) {
             putenv($name);
+
             return;
         }
 
-        putenv($name . '=' . $value);
+        putenv($name.'='.$value);
     }
 }

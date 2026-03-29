@@ -19,7 +19,7 @@ final class ContentStoreContractTest extends TestCase
     {
         parent::setUp();
 
-        $this->packsRoot = storage_path('framework/testing/content_store_contract_' . uniqid('', true));
+        $this->packsRoot = storage_path('framework/testing/content_store_contract_'.uniqid('', true));
         File::ensureDirectoryExists($this->packsRoot);
 
         config()->set('content_packs.root', $this->packsRoot);
@@ -68,7 +68,7 @@ final class ContentStoreContractTest extends TestCase
         $store = app(ContentStore::class);
         $first = $store->loadHighlights();
 
-        $path = $this->packPath('MBTI-CN-v0.3-A') . '/report_highlights_templates.json';
+        $path = $this->packPath('MBTI-CN-v0.3-A').'/report_highlights_templates.json';
         file_put_contents($path, json_encode([
             'schema' => 'fap.report.highlights.v1',
             'templates' => ['v' => 'mutated'],
@@ -141,7 +141,7 @@ final class ContentStoreContractTest extends TestCase
             'region' => 'CN_MAINLAND',
             'locale' => 'zh-CN',
             'content_package_version' => $version,
-            'pack_id' => 'MBTI.cn-mainland.zh-CN.' . $version,
+            'pack_id' => 'MBTI.cn-mainland.zh-CN.'.$version,
             'assets' => [
                 'highlights' => $includeHighlights ? ['report_highlights_templates.json'] : [],
             ],
@@ -151,25 +151,25 @@ final class ContentStoreContractTest extends TestCase
         ];
 
         file_put_contents(
-            $packDir . '/manifest.json',
+            $packDir.'/manifest.json',
             json_encode($manifest, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
         );
 
         if ($includeHighlights && is_array($highlightsDoc)) {
             file_put_contents(
-                $packDir . '/report_highlights_templates.json',
+                $packDir.'/report_highlights_templates.json',
                 json_encode($highlightsDoc, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
             );
         }
 
         file_put_contents(
-            $packDir . '/report_cards_traits.json',
+            $packDir.'/report_cards_traits.json',
             json_encode(['items' => [], 'rules' => ['min_cards' => 2, 'target_cards' => 3, 'max_cards' => 6]], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
         );
     }
 
     private function packPath(string $version): string
     {
-        return $this->packsRoot . '/default/CN_MAINLAND/zh-CN/' . $version;
+        return $this->packsRoot.'/default/CN_MAINLAND/zh-CN/'.$version;
     }
 }

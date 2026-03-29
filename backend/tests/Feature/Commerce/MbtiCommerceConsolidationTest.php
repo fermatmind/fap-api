@@ -84,8 +84,8 @@ final class MbtiCommerceConsolidationTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
     }
 
     private function issueAnonToken(string $anonId): string

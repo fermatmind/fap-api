@@ -10,8 +10,8 @@ use App\Services\Content\ClinicalComboPackLoader;
 trait BuildsClinicalComboScorerInput
 {
     /**
-     * @param array<int,string> $overrides
-     * @param array<string,mixed> $ctx
+     * @param  array<int,string>  $overrides
+     * @param  array<string,mixed>  $ctx
      * @return array<string,mixed>
      */
     protected function scoreClinical(array $overrides = [], array $ctx = []): array
@@ -51,7 +51,7 @@ trait BuildsClinicalComboScorerInput
     protected function buildAnswers(string $code = 'A'): array
     {
         $code = strtoupper(trim($code));
-        if (!in_array($code, ['A', 'B', 'C', 'D', 'E'], true)) {
+        if (! in_array($code, ['A', 'B', 'C', 'D', 'E'], true)) {
             $code = 'A';
         }
 
@@ -63,4 +63,3 @@ trait BuildsClinicalComboScorerInput
         return $out;
     }
 }
-

@@ -25,7 +25,7 @@ final class GuardedCreateMigrationsNoDropTest extends TestCase
         $this->assertSame(
             [],
             $violations,
-            "Found guarded-create rollback risk migrations:\n" . implode("\n", $violations)
+            "Found guarded-create rollback risk migrations:\n".implode("\n", $violations)
         );
     }
 
@@ -36,7 +36,7 @@ final class GuardedCreateMigrationsNoDropTest extends TestCase
     {
         $files = glob(base_path('database/migrations/*.php'));
 
-        if (!is_array($files)) {
+        if (! is_array($files)) {
             return [];
         }
 

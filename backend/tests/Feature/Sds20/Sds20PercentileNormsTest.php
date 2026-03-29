@@ -10,8 +10,8 @@ use Tests\TestCase;
 
 final class Sds20PercentileNormsTest extends TestCase
 {
-    use RefreshDatabase;
     use BuildsSds20ScorerInput;
+    use RefreshDatabase;
 
     public function test_percentile_and_norms_are_populated_when_active_norms_exist(): void
     {

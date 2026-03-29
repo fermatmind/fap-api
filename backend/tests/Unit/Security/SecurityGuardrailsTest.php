@@ -81,7 +81,7 @@ final class SecurityGuardrailsTest extends TestCase
             }
 
             $uri = '/'.ltrim((string) $route->uri(), '/');
-            if (!str_starts_with($uri, '/api/')) {
+            if (! str_starts_with($uri, '/api/')) {
                 continue;
             }
 
@@ -133,7 +133,7 @@ final class SecurityGuardrailsTest extends TestCase
         $violations = [];
 
         foreach ($scanRoots as $root) {
-            if (!is_dir($root)) {
+            if (! is_dir($root)) {
                 continue;
             }
 
@@ -143,13 +143,13 @@ final class SecurityGuardrailsTest extends TestCase
 
             /** @var SplFileInfo $file */
             foreach ($iterator as $file) {
-                if (!$file->isFile() || strtolower($file->getExtension()) !== 'php') {
+                if (! $file->isFile() || strtolower($file->getExtension()) !== 'php') {
                     continue;
                 }
 
                 $path = $file->getPathname();
                 $source = file_get_contents($path);
-                if (!is_string($source)) {
+                if (! is_string($source)) {
                     continue;
                 }
 
@@ -191,12 +191,12 @@ final class SecurityGuardrailsTest extends TestCase
 
         foreach (self::OWNERSHIP_404_PATHS as $relativePath) {
             $absolute = base_path($relativePath);
-            if (!is_file($absolute)) {
+            if (! is_file($absolute)) {
                 continue;
             }
 
             $source = file_get_contents($absolute);
-            if (!is_string($source)) {
+            if (! is_string($source)) {
                 continue;
             }
 
@@ -259,15 +259,16 @@ final class SecurityGuardrailsTest extends TestCase
 
         foreach (self::FM_TOKEN_MIDDLEWARE_PATHS as $relativePath) {
             $source = file_get_contents(base_path($relativePath));
-            if (!is_string($source)) {
+            if (! is_string($source)) {
                 $missing[] = "{$relativePath}:unreadable";
+
                 continue;
             }
 
-            if (!preg_match('/revoked_at/', $source)) {
+            if (! preg_match('/revoked_at/', $source)) {
                 $missing[] = "{$relativePath}:revoked_at_check";
             }
-            if (!preg_match('/expires_at/', $source)) {
+            if (! preg_match('/expires_at/', $source)) {
                 $missing[] = "{$relativePath}:expires_at_check";
             }
         }
@@ -315,7 +316,7 @@ final class SecurityGuardrailsTest extends TestCase
     }
 
     /**
-     * @param array<int, string> $methods
+     * @param  array<int, string>  $methods
      */
     private function hasMutatingMethod(array $methods): bool
     {
@@ -323,7 +324,7 @@ final class SecurityGuardrailsTest extends TestCase
     }
 
     /**
-     * @param array<int, string> $middlewares
+     * @param  array<int, string>  $middlewares
      */
     private function hasAuthMiddleware(array $middlewares): bool
     {

@@ -18,8 +18,8 @@ final class NormsPayloadBatchQueryTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
     }
 
     private function issueAnonToken(string $anonId): string
@@ -182,7 +182,7 @@ final class NormsPayloadBatchQueryTest extends TestCase
         $this->assertCount(
             1,
             $normsTableQueries,
-            "Expected one batched norms_table query, got ".count($normsTableQueries)."."
+            'Expected one batched norms_table query, got '.count($normsTableQueries).'.'
         );
     }
 }

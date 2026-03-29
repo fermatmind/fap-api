@@ -17,7 +17,7 @@ final class Eq60SubmitQualityContractTest extends TestCase
     public function test_submit_returns_quality_norms_scores_and_version_snapshot_contract(): void
     {
         $this->artisan('content:compile --pack=EQ_60 --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $anonId = 'anon_eq60_contract';
         $token = $this->issueAnonToken($anonId);

@@ -68,7 +68,6 @@ final class AuthGuestTokenTest extends TestCase
         $this->assertMatchesRegularExpression('/^anon_[0-9a-fA-F-]{36}$/', $anonId);
     }
 
-
     public function test_guest_token_does_not_use_numeric_body_anon_id(): void
     {
         $response = $this->postJson('/api/v0.3/auth/guest', [

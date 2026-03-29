@@ -17,7 +17,7 @@ final class MigrationSafetyTest extends TestCase
 
             foreach ($this->extractCatchBodies($source) as $catchBlock) {
                 $signature = $catchBlock['signature'];
-                if (!$this->isThrowableOrExceptionCatch($signature)) {
+                if (! $this->isThrowableOrExceptionCatch($signature)) {
                     continue;
                 }
 
@@ -31,7 +31,7 @@ final class MigrationSafetyTest extends TestCase
     public function pseudo_create_migrations_must_not_drop_tables_in_down(): void
     {
         foreach ($this->migrationFiles() as $filePath) {
-            if (!str_contains(basename($filePath), 'create_')) {
+            if (! str_contains(basename($filePath), 'create_')) {
                 continue;
             }
 
@@ -66,7 +66,7 @@ final class MigrationSafetyTest extends TestCase
     {
         $files = glob(base_path('database/migrations/*.php'));
 
-        if (!is_array($files)) {
+        if (! is_array($files)) {
             return [];
         }
 
@@ -86,7 +86,7 @@ final class MigrationSafetyTest extends TestCase
 
         for ($i = 0; $i < $count; $i++) {
             $token = $tokens[$i];
-            if (!is_array($token) || $token[0] !== T_CATCH) {
+            if (! is_array($token) || $token[0] !== T_CATCH) {
                 continue;
             }
 
@@ -111,6 +111,7 @@ final class MigrationSafetyTest extends TestCase
                 if ($text === '{') {
                     $braceDepth++;
                     $body .= $text;
+
                     continue;
                 }
 
@@ -120,6 +121,7 @@ final class MigrationSafetyTest extends TestCase
                         break;
                     }
                     $body .= $text;
+
                     continue;
                 }
 
@@ -142,7 +144,7 @@ final class MigrationSafetyTest extends TestCase
 
         for ($i = 0; $i < $count; $i++) {
             $token = $tokens[$i];
-            if (!is_array($token) || $token[0] !== T_FUNCTION) {
+            if (! is_array($token) || $token[0] !== T_FUNCTION) {
                 continue;
             }
 
@@ -178,6 +180,7 @@ final class MigrationSafetyTest extends TestCase
                 if ($text === '{') {
                     $braceDepth++;
                     $body .= $text;
+
                     continue;
                 }
 
@@ -187,6 +190,7 @@ final class MigrationSafetyTest extends TestCase
                         return $body;
                     }
                     $body .= $text;
+
                     continue;
                 }
 
@@ -200,7 +204,7 @@ final class MigrationSafetyTest extends TestCase
     }
 
     /**
-     * @param string|array{int, string, int} $token
+     * @param  string|array{int, string, int}  $token
      */
     private function tokenText(string|array $token): string
     {
@@ -225,6 +229,7 @@ final class MigrationSafetyTest extends TestCase
         foreach ($tokens as $token) {
             if (is_string($token)) {
                 $output .= $token;
+
                 continue;
             }
 

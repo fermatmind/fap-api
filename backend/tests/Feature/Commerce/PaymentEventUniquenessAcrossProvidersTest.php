@@ -16,7 +16,7 @@ class PaymentEventUniquenessAcrossProvidersTest extends TestCase
 
     public function test_same_provider_event_id_can_exist_across_providers_and_duplicate_path_stays_provider_scoped(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
 
         config([
             'services.stripe.webhook_secret' => 'whsec_pr65',

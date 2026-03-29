@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Services\Report\HighlightBuilder;
+use Tests\TestCase;
 
 class HighlightBuilderBlindspotIdTemplatesDocTest extends TestCase
 {
@@ -14,8 +14,8 @@ class HighlightBuilderBlindspotIdTemplatesDocTest extends TestCase
 
         $report = [
             'profile' => ['type_code' => 'ESTJ-A'],
-            'scores_pct' => ['EI'=>64,'SN'=>55,'TF'=>71,'JP'=>62,'AT'=>52],
-            'axis_states' => ['EI'=>'clear','SN'=>'borderline','TF'=>'clear','JP'=>'clear','AT'=>'borderline'],
+            'scores_pct' => ['EI' => 64, 'SN' => 55, 'TF' => 71, 'JP' => 62, 'AT' => 52],
+            'axis_states' => ['EI' => 'clear', 'SN' => 'borderline', 'TF' => 'clear', 'JP' => 'clear', 'AT' => 'borderline'],
         ];
 
         // ✅ 最小 doc：直接复制你 tinker 里的
@@ -23,11 +23,11 @@ class HighlightBuilderBlindspotIdTemplatesDocTest extends TestCase
             'schema' => 'fap.report.highlights.templates.v1',
             'pools' => [
                 'templates' => [
-                    'EI' => ['E' => ['clear' => ['id'=>'hl.EI.E.clear','title'=>'表达推进','text'=>'你更习惯外放推进，把节奏带起来。']]],
-                    'SN' => ['S' => ['borderline' => ['id'=>'hl.SN.S.border','title'=>'务实 落地','text'=>'你更看重现实约束与可落地步骤。']]],
-                    'TF' => ['T' => ['clear' => ['id'=>'hl.TF.T.clear','title'=>'理性判断','text'=>'你会用标准与逻辑做决策。']]],
-                    'JP' => ['J' => ['clear' => ['id'=>'hl.JP.J.clear','title'=>'结构掌控','text'=>'你倾向先定规则再执行。']]],
-                    'AT' => ['A' => ['borderline' => ['id'=>'hl.AT.A.border','title'=>'自信 稳定','text'=>'整体更偏自信，但仍会受情境影响。']]],
+                    'EI' => ['E' => ['clear' => ['id' => 'hl.EI.E.clear', 'title' => '表达推进', 'text' => '你更习惯外放推进，把节奏带起来。']]],
+                    'SN' => ['S' => ['borderline' => ['id' => 'hl.SN.S.border', 'title' => '务实 落地', 'text' => '你更看重现实约束与可落地步骤。']]],
+                    'TF' => ['T' => ['clear' => ['id' => 'hl.TF.T.clear', 'title' => '理性判断', 'text' => '你会用标准与逻辑做决策。']]],
+                    'JP' => ['J' => ['clear' => ['id' => 'hl.JP.J.clear', 'title' => '结构掌控', 'text' => '你倾向先定规则再执行。']]],
+                    'AT' => ['A' => ['borderline' => ['id' => 'hl.AT.A.border', 'title' => '自信 稳定', 'text' => '整体更偏自信，但仍会受情境影响。']]],
                 ],
                 'rules' => [
                     'allow_empty' => true,
@@ -50,13 +50,13 @@ class HighlightBuilderBlindspotIdTemplatesDocTest extends TestCase
         $this->assertLessThanOrEqual(4, count($out['items']));
 
         // 2) 核心防回归：禁止 hl.blindspot.hl.xxx
-        $ids = array_values(array_filter(array_map(fn($x) => $x['id'] ?? null, $out['items'])));
+        $ids = array_values(array_filter(array_map(fn ($x) => $x['id'] ?? null, $out['items'])));
         foreach ($ids as $id) {
             $this->assertStringNotContainsString('hl.blindspot.hl.', $id, "bad id found: {$id}");
         }
 
         // 3) 必须包含 blindspot/action
-        $kinds = array_map(fn($x) => $x['kind'] ?? null, $out['items']);
+        $kinds = array_map(fn ($x) => $x['kind'] ?? null, $out['items']);
         $this->assertTrue(in_array('blindspot', $kinds, true), 'must contain blindspot');
         $this->assertTrue(in_array('action', $kinds, true), 'must contain action');
 
@@ -74,7 +74,7 @@ class HighlightBuilderBlindspotIdTemplatesDocTest extends TestCase
         }
         $this->assertIsArray($blindspot, 'blindspot item must exist');
 
-        $blindspotId = (string)($blindspot['id'] ?? '');
+        $blindspotId = (string) ($blindspot['id'] ?? '');
         $this->assertNotSame('', $blindspotId, 'blindspot id must not be empty');
 
         // B) blindspot id 不允许包含 "borderline"

@@ -51,4 +51,3 @@ final class AttemptStartPersistenceTest extends TestCase
         $this->assertNotNull($attempt->started_at);
     }
 }
-

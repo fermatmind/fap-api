@@ -25,8 +25,8 @@ final class Eq60UnlockFlowTest extends TestCase
     public function test_paid_webhook_unlocks_eq60_full_report(): void
     {
         $this->artisan('content:compile --pack=EQ_60 --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $anonId = 'anon_eq_unlock';
         $attemptId = $this->createEqAttemptWithResult($anonId);
@@ -165,4 +165,3 @@ final class Eq60UnlockFlowTest extends TestCase
         ]);
     }
 }
-

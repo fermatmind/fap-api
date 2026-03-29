@@ -18,8 +18,8 @@ final class ReportQueryFootprintTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
     }
 
     private function createMbtiAttemptWithResult(string $anonId): string

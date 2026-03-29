@@ -17,7 +17,7 @@ final class Eq60StartSubmitTest extends TestCase
     public function test_eq60_start_submit_returns_dimension_scores(): void
     {
         $this->artisan('content:compile --pack=EQ_60 --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $anonId = 'anon_eq60_owner';
         $token = $this->issueAnonToken($anonId);
@@ -48,7 +48,7 @@ final class Eq60StartSubmitTest extends TestCase
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $answers,
@@ -71,7 +71,7 @@ final class Eq60StartSubmitTest extends TestCase
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),

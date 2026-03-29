@@ -11,7 +11,7 @@ final class GenericLikertDriverTest extends TestCase
 {
     public function test_reverse_and_weight_are_applied(): void
     {
-        $driver = new GenericLikertDriver();
+        $driver = new GenericLikertDriver;
 
         $spec = [
             'options_score_map' => ['A' => 1, 'B' => 2, 'C' => 3, 'D' => 4, 'E' => 5],

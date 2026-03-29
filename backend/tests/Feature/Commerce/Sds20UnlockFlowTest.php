@@ -18,14 +18,14 @@ use Tests\TestCase;
 
 final class Sds20UnlockFlowTest extends TestCase
 {
+    use BuildsSds20ScorerInput;
     use RefreshDatabase;
     use SignedBillingWebhook;
-    use BuildsSds20ScorerInput;
 
     public function test_paid_webhook_unlocks_sds_full_report(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $anonId = 'anon_sds_unlock';
         $attemptId = $this->createSdsAttemptWithResult($anonId);

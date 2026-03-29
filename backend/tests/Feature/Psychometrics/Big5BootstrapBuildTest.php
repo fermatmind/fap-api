@@ -59,7 +59,7 @@ final class Big5BootstrapBuildTest extends TestCase
     private function writeAttemptInput(string $path): void
     {
         $dir = dirname($path);
-        if (!is_dir($dir)) {
+        if (! is_dir($dir)) {
             File::makeDirectory($dir, 0755, true);
         }
 
@@ -102,14 +102,14 @@ final class Big5BootstrapBuildTest extends TestCase
 
         try {
             $header = fgetcsv($handle);
-            if (!is_array($header)) {
+            if (! is_array($header)) {
                 return [];
             }
             $header = array_map(static fn ($value): string => trim((string) $value), $header);
 
             $rows = [];
             while (($raw = fgetcsv($handle)) !== false) {
-                if (!is_array($raw)) {
+                if (! is_array($raw)) {
                     continue;
                 }
                 $assoc = [];

@@ -21,8 +21,8 @@ class CommerceRefundWebhookTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
     }
 
     private function seedOrgWithToken(): array
@@ -55,11 +55,11 @@ class CommerceRefundWebhookTest extends TestCase
             'updated_at' => now(),
         ]);
 
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),
-            'anon_id' => 'anon_' . $userId,
+            'anon_id' => 'anon_'.$userId,
             'user_id' => $userId,
             'expires_at' => now()->addDays(1),
             'created_at' => now(),
@@ -169,7 +169,7 @@ class CommerceRefundWebhookTest extends TestCase
             'order_no' => $orderNo,
             'org_id' => $orgId,
             'user_id' => (string) $userId,
-            'anon_id' => 'anon_' . $userId,
+            'anon_id' => 'anon_'.$userId,
             'sku' => 'MBTI_REPORT_FULL',
             'quantity' => 1,
             'target_attempt_id' => $attemptId,
@@ -202,7 +202,7 @@ class CommerceRefundWebhookTest extends TestCase
 
         $paid = $this->postSignedBillingWebhook($payload, [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $paid->assertStatus(200);
         $paid->assertJson(['ok' => true]);
@@ -216,7 +216,7 @@ class CommerceRefundWebhookTest extends TestCase
 
         $report = $this->getJson("/api/v0.3/attempts/{$attemptId}/report", [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $report->assertStatus(200);
         $report->assertJson([
@@ -234,14 +234,14 @@ class CommerceRefundWebhookTest extends TestCase
 
         $refund = $this->postSignedBillingWebhook($refundPayload, [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $refund->assertStatus(200);
         $refund->assertJson(['ok' => true]);
 
         $reportAfter = $this->getJson("/api/v0.3/attempts/{$attemptId}/report", [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $reportAfter->assertStatus(200);
         $reportAfter->assertJson([

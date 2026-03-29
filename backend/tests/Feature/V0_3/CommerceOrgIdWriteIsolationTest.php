@@ -16,7 +16,7 @@ final class CommerceOrgIdWriteIsolationTest extends TestCase
     public function test_create_order_rejects_client_tenant_identity_fields(): void
     {
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $this->issueAnonToken(),
+            'Authorization' => 'Bearer '.$this->issueAnonToken(),
         ])->postJson('/api/v0.3/orders', [
             'sku' => 'MBTI_CREDIT',
             'org_id' => 999,
@@ -36,12 +36,12 @@ final class CommerceOrgIdWriteIsolationTest extends TestCase
 
     private function issueAnonToken(): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),
             'user_id' => null,
-            'anon_id' => 'isolation_anon_' . Str::random(8),
+            'anon_id' => 'isolation_anon_'.Str::random(8),
             'org_id' => 0,
             'role' => 'public',
             'created_at' => now(),

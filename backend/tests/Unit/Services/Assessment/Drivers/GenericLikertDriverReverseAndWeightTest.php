@@ -12,7 +12,7 @@ final class GenericLikertDriverReverseAndWeightTest extends TestCase
 {
     public function test_reverse_scoring_maps_raw_five_to_one_on_five_point_scale(): void
     {
-        $driver = new GenericLikertDriver();
+        $driver = new GenericLikertDriver;
 
         $spec = [
             'scale_code' => 'MBTI',
@@ -40,7 +40,7 @@ final class GenericLikertDriverReverseAndWeightTest extends TestCase
 
     public function test_reverse_uses_min_plus_max_minus_raw_on_non_linear_scale(): void
     {
-        $driver = new GenericLikertDriver();
+        $driver = new GenericLikertDriver;
 
         $spec = [
             'scale_code' => 'MBTI',
@@ -69,7 +69,7 @@ final class GenericLikertDriverReverseAndWeightTest extends TestCase
 
     public function test_weighting_multiplies_dimension_score(): void
     {
-        $driver = new GenericLikertDriver();
+        $driver = new GenericLikertDriver;
 
         $spec = [
             'scale_code' => 'MBTI',
@@ -108,7 +108,7 @@ final class GenericLikertDriverReverseAndWeightTest extends TestCase
                 return true;
             });
 
-        $driver = new GenericLikertDriver();
+        $driver = new GenericLikertDriver;
 
         $spec = [
             'scale_code' => 'MBTI',

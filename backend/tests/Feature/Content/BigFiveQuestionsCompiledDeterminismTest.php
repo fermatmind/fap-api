@@ -40,7 +40,7 @@ final class BigFiveQuestionsCompiledDeterminismTest extends TestCase
     }
 
     /**
-     * @param array<string,mixed>|list<mixed> $node
+     * @param  array<string,mixed>|list<mixed>  $node
      * @return array<string,mixed>|list<mixed>
      */
     private function stripTimestamps(array $node): array
@@ -71,7 +71,7 @@ final class BigFiveQuestionsCompiledDeterminismTest extends TestCase
     }
 
     /**
-     * @param array<string,mixed>|list<mixed> $node
+     * @param  array<string,mixed>|list<mixed>  $node
      */
     private function stableHash(array $node): string
     {

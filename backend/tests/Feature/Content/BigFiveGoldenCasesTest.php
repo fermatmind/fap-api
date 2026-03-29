@@ -36,7 +36,7 @@ final class BigFiveGoldenCasesTest extends TestCase
 
         $questionIndex = [];
         foreach ((array) ($questions['question_index'] ?? []) as $qid => $row) {
-            if (!is_array($row)) {
+            if (! is_array($row)) {
                 continue;
             }
             $questionIndex[(int) $qid] = $row;
@@ -57,7 +57,7 @@ final class BigFiveGoldenCasesTest extends TestCase
 
             $answersById = [];
             foreach ((array) ($case['answers'] ?? []) as $answer) {
-                if (!is_array($answer)) {
+                if (! is_array($answer)) {
                     continue;
                 }
                 $qid = (int) ($answer['question_id'] ?? 0);

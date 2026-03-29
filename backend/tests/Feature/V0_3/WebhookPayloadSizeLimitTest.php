@@ -14,8 +14,8 @@ use Tests\TestCase;
 
 final class WebhookPayloadSizeLimitTest extends TestCase
 {
-    use RefreshDatabase;
     use MockeryPHPUnitIntegration;
+    use RefreshDatabase;
 
     public function test_v03_payment_webhook_route_contains_payload_limit_middleware(): void
     {

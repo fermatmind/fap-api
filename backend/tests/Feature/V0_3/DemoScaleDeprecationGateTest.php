@@ -18,7 +18,7 @@ class DemoScaleDeprecationGateTest extends TestCase
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),
@@ -36,8 +36,8 @@ class DemoScaleDeprecationGateTest extends TestCase
 
     private function seedDemoScales(): void
     {
-        (new Pr21AnswerDemoSeeder())->run();
-        (new Pr17SimpleScoreDemoSeeder())->run();
+        (new Pr21AnswerDemoSeeder)->run();
+        (new Pr17SimpleScoreDemoSeeder)->run();
     }
 
     public function test_start_returns_410_when_demo_answers_scale_is_disabled(): void
@@ -81,7 +81,7 @@ class DemoScaleDeprecationGateTest extends TestCase
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => [
@@ -119,4 +119,3 @@ class DemoScaleDeprecationGateTest extends TestCase
         $response->assertJsonPath('details.replacement_scale_code_v2', 'IQ_INTELLIGENCE_QUOTIENT');
     }
 }
-

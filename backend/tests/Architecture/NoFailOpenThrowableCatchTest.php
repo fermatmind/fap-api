@@ -38,12 +38,12 @@ final class NoFailOpenThrowableCatchTest extends TestCase
         $offenders = [];
 
         foreach ($targets as $target) {
-            if (!is_dir($target)) {
+            if (! is_dir($target)) {
                 continue;
             }
 
             foreach ($this->phpFiles($target) as $filePath) {
-                $relative = ltrim(str_replace(base_path() . DIRECTORY_SEPARATOR, '', $filePath), DIRECTORY_SEPARATOR);
+                $relative = ltrim(str_replace(base_path().DIRECTORY_SEPARATOR, '', $filePath), DIRECTORY_SEPARATOR);
                 $source = (string) file_get_contents($filePath);
 
                 foreach ($this->extractThrowableCatchBlocks($source) as $block) {
@@ -52,11 +52,12 @@ final class NoFailOpenThrowableCatchTest extends TestCase
 
                     if (str_contains($body, 'return true;')) {
                         $offenders[] = "{$relative}:{$line} return true forbidden";
+
                         continue;
                     }
 
                     $hasFallback = str_contains($body, 'return null;') || str_contains($body, 'continue;');
-                    if ($hasFallback && !str_contains($body, 'Log::')) {
+                    if ($hasFallback && ! str_contains($body, 'Log::')) {
                         $offenders[] = "{$relative}:{$line} fallback without Log::";
                     }
                 }
@@ -65,7 +66,7 @@ final class NoFailOpenThrowableCatchTest extends TestCase
 
         if ($offenders !== []) {
             sort($offenders);
-            self::fail("Throwable catch rule violations:\n" . implode("\n", $offenders));
+            self::fail("Throwable catch rule violations:\n".implode("\n", $offenders));
         }
 
         self::assertTrue(true);
@@ -82,7 +83,7 @@ final class NoFailOpenThrowableCatchTest extends TestCase
 
         for ($i = 0; $i < $count; $i++) {
             $token = $tokens[$i];
-            if (!is_array($token) || $token[0] !== T_CATCH) {
+            if (! is_array($token) || $token[0] !== T_CATCH) {
                 continue;
             }
 
@@ -111,7 +112,7 @@ final class NoFailOpenThrowableCatchTest extends TestCase
             }
 
             $normalized = preg_replace('/\s+/', '', $signature);
-            if (!is_string($normalized) || preg_match('/^\(\\?Throwable(?:\$[A-Za-z_][A-Za-z0-9_]*)?\)$/', $normalized) !== 1) {
+            if (! is_string($normalized) || preg_match('/^\(\\?Throwable(?:\$[A-Za-z_][A-Za-z0-9_]*)?\)$/', $normalized) !== 1) {
                 continue;
             }
 
@@ -130,6 +131,7 @@ final class NoFailOpenThrowableCatchTest extends TestCase
                 if ($text === '{') {
                     $braceDepth++;
                     $body .= $text;
+
                     continue;
                 }
                 if ($text === '}') {
@@ -138,6 +140,7 @@ final class NoFailOpenThrowableCatchTest extends TestCase
                         break;
                     }
                     $body .= $text;
+
                     continue;
                 }
                 $body .= $text;
@@ -163,7 +166,7 @@ final class NoFailOpenThrowableCatchTest extends TestCase
 
         /** @var SplFileInfo $file */
         foreach ($iterator as $file) {
-            if (!$file->isFile() || strtolower($file->getExtension()) !== 'php') {
+            if (! $file->isFile() || strtolower($file->getExtension()) !== 'php') {
                 continue;
             }
             $files[] = $file->getPathname();
@@ -175,7 +178,7 @@ final class NoFailOpenThrowableCatchTest extends TestCase
     }
 
     /**
-     * @param string|array{int, string, int} $token
+     * @param  string|array{int, string, int}  $token
      */
     private function tokenText(string|array $token): string
     {

@@ -25,4 +25,3 @@ final class ClinicalComboOptionSetMappingTest extends TestCase
         $this->assertSame(135, (int) data_get($allE, 'scores.perfectionism.raw'));
     }
 }
-

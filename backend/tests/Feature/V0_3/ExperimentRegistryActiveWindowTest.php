@@ -81,10 +81,9 @@ class ExperimentRegistryActiveWindowTest extends TestCase
     private function expectedConfigVariant(string $anonId, int $orgId): string
     {
         $salt = (string) config('fap_experiments.salt', '');
-        $subjectKey = 'anon:' . $anonId;
-        $bucket = StableBucket::bucket($subjectKey . '|' . $orgId . '|PR23_STICKY_BUCKET|' . $salt, 100);
+        $subjectKey = 'anon:'.$anonId;
+        $bucket = StableBucket::bucket($subjectKey.'|'.$orgId.'|PR23_STICKY_BUCKET|'.$salt, 100);
 
         return $bucket < 50 ? 'A' : 'B';
     }
 }
-

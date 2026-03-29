@@ -17,7 +17,7 @@ final class BigFiveMetricsContractTest extends TestCase
     public function test_big5_events_include_pack_and_norms_contract_keys(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $anonId = 'anon_big5_metrics_contract';
         $start = $this->postJson('/api/v0.3/attempts/start', [
@@ -86,7 +86,7 @@ final class BigFiveMetricsContractTest extends TestCase
         if (is_array($raw)) {
             return $raw;
         }
-        if (!is_string($raw) || trim($raw) === '') {
+        if (! is_string($raw) || trim($raw) === '') {
             return [];
         }
 

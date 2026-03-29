@@ -31,4 +31,3 @@ final class ClinicalComboMaskedDepressionTest extends TestCase
         $this->assertContains('masked_depression', (array) data_get($dto, 'scores.depression.flags', []));
     }
 }
-

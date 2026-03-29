@@ -22,14 +22,14 @@ final class AttemptReportPaymentUnlockFlowTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr17SimpleScoreDemoSeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr17SimpleScoreDemoSeeder)->run();
+        (new Pr19CommerceSeeder)->run();
     }
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),
@@ -102,7 +102,7 @@ final class AttemptReportPaymentUnlockFlowTest extends TestCase
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $anonToken,
+            'Authorization' => 'Bearer '.$anonToken,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $this->simpleScoreAnswers(),
@@ -137,7 +137,7 @@ final class AttemptReportPaymentUnlockFlowTest extends TestCase
 
         $order = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $anonToken,
+            'Authorization' => 'Bearer '.$anonToken,
         ])->postJson('/api/v0.3/orders', [
             // keep webhook scale guard strict: sku scale must match attempt scale.
             'sku' => self::SIMPLE_SCORE_UNLOCK_SKU,

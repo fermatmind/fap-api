@@ -27,7 +27,7 @@ final class UnifiedAccessProjectionDualWriteTest extends TestCase
     public function test_submit_and_entitlement_writes_refresh_the_unified_access_projection(): void
     {
         $attemptId = (string) Str::uuid();
-        $ctx = new OrgContext();
+        $ctx = new OrgContext;
         $ctx->set(42, null, null, 'anon_projection', OrgContext::KIND_TENANT);
 
         /** @var AttemptSubmitSideEffects $sideEffects */

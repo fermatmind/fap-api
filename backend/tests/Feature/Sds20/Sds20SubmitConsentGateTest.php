@@ -20,7 +20,7 @@ final class Sds20SubmitConsentGateTest extends TestCase
 
     public function test_submit_requires_sds_consent_snapshot(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $attempt = Attempt::create([
             'id' => (string) Str::uuid(),

@@ -11,33 +11,34 @@ use Tests\TestCase;
 final class LegacyMbtiReportPayloadBuilderTest extends TestCase
 {
     private string $packsRoot;
+
     private string $contentDir;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->packsRoot = storage_path('framework/testing/legacy_mbti_builder_' . uniqid('', true));
+        $this->packsRoot = storage_path('framework/testing/legacy_mbti_builder_'.uniqid('', true));
         File::ensureDirectoryExists($this->packsRoot);
 
         config()->set('content_packs.root', $this->packsRoot);
 
-        $packDir = $this->packsRoot . '/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3';
+        $packDir = $this->packsRoot.'/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3';
         $this->contentDir = 'default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3';
         File::ensureDirectoryExists($packDir);
 
-        $this->writeJson($packDir . '/report_highlights_templates.json', [
+        $this->writeJson($packDir.'/report_highlights_templates.json', [
             'templates' => [],
             'rules' => [
                 'min_items' => 3,
             ],
         ]);
 
-        $this->writeJson($packDir . '/report_highlights_overrides.json', [
+        $this->writeJson($packDir.'/report_highlights_overrides.json', [
             'items' => [],
         ]);
 
-        $this->writeJson($packDir . '/report_highlights.json', [
+        $this->writeJson($packDir.'/report_highlights.json', [
             'items' => [
                 'INTJ-A' => [
                     [
@@ -54,7 +55,7 @@ final class LegacyMbtiReportPayloadBuilderTest extends TestCase
             ],
         ]);
 
-        $this->writeJson($packDir . '/report_borderline_templates.json', [
+        $this->writeJson($packDir.'/report_borderline_templates.json', [
             'items' => [
                 'EI' => ['title' => 'EI', 'text' => 'ei', 'examples' => [], 'suggestions' => []],
                 'SN' => ['title' => 'SN', 'text' => 'sn', 'examples' => [], 'suggestions' => []],
@@ -64,20 +65,20 @@ final class LegacyMbtiReportPayloadBuilderTest extends TestCase
             ],
         ]);
 
-        $this->writeJson($packDir . '/report_roles.json', [
+        $this->writeJson($packDir.'/report_roles.json', [
             'items' => [
                 'NT' => ['code' => 'NT', 'title' => 'Role NT'],
             ],
         ]);
 
-        $this->writeJson($packDir . '/report_strategies.json', [
+        $this->writeJson($packDir.'/report_strategies.json', [
             'items' => [
                 'IA' => ['code' => 'IA', 'title' => 'Strategy IA'],
                 'IT' => ['code' => 'IT', 'title' => 'Strategy IT'],
             ],
         ]);
 
-        $this->writeJson($packDir . '/report_recommended_reads.json', [
+        $this->writeJson($packDir.'/report_recommended_reads.json', [
             'items' => [
                 'by_type' => [
                     'INTJ-A' => [
@@ -97,7 +98,7 @@ final class LegacyMbtiReportPayloadBuilderTest extends TestCase
         ]);
 
         foreach (['traits', 'career', 'growth', 'relationships'] as $section) {
-            $this->writeJson($packDir . '/report_cards_' . $section . '.json', [
+            $this->writeJson($packDir.'/report_cards_'.$section.'.json', [
                 'items' => [],
                 'rules' => [
                     'min_cards' => 1,

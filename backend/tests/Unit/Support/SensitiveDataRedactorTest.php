@@ -11,7 +11,7 @@ final class SensitiveDataRedactorTest extends TestCase
 {
     public function test_top_level_sensitive_key_is_redacted(): void
     {
-        $redactor = new SensitiveDataRedactor();
+        $redactor = new SensitiveDataRedactor;
 
         $data = [
             'api_key' => 'sk_test_123',
@@ -26,7 +26,7 @@ final class SensitiveDataRedactorTest extends TestCase
 
     public function test_nested_sensitive_key_is_redacted(): void
     {
-        $redactor = new SensitiveDataRedactor();
+        $redactor = new SensitiveDataRedactor;
 
         $data = [
             'meta' => [
@@ -51,7 +51,7 @@ final class SensitiveDataRedactorTest extends TestCase
 
     public function test_non_sensitive_keys_are_kept(): void
     {
-        $redactor = new SensitiveDataRedactor();
+        $redactor = new SensitiveDataRedactor;
 
         $data = [
             'age' => 28,
@@ -69,7 +69,7 @@ final class SensitiveDataRedactorTest extends TestCase
 
     public function test_psych_privacy_array_key_is_replaced_with_summary(): void
     {
-        $redactor = new SensitiveDataRedactor();
+        $redactor = new SensitiveDataRedactor;
 
         $data = [
             'meta' => [
@@ -89,7 +89,7 @@ final class SensitiveDataRedactorTest extends TestCase
 
     public function test_redact_with_meta_reports_count_and_version_for_psych_keys(): void
     {
-        $redactor = new SensitiveDataRedactor();
+        $redactor = new SensitiveDataRedactor;
 
         $data = [
             'report_json' => 'very sensitive report content',
@@ -111,7 +111,7 @@ final class SensitiveDataRedactorTest extends TestCase
 
     public function test_exception_and_error_message_keys_are_redacted(): void
     {
-        $redactor = new SensitiveDataRedactor();
+        $redactor = new SensitiveDataRedactor;
 
         $data = [
             'exception' => 'SQLSTATE[HY000] ...',
@@ -130,7 +130,7 @@ final class SensitiveDataRedactorTest extends TestCase
 
     public function test_error_message_and_err_keys_are_redacted(): void
     {
-        $redactor = new SensitiveDataRedactor();
+        $redactor = new SensitiveDataRedactor;
 
         $data = [
             'error' => 'sqlstate[hy000] token=abc',

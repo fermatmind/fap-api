@@ -19,13 +19,13 @@ final class ReportLockedVariantLeakTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
     }
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
 
         DB::table('fm_tokens')->insert([
             'token' => $token,
@@ -108,7 +108,7 @@ final class ReportLockedVariantLeakTest extends TestCase
 
         $resp = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
 
         $resp->assertStatus(200);
@@ -152,7 +152,7 @@ final class ReportLockedVariantLeakTest extends TestCase
     }
 
     /**
-     * @param array<int, mixed> $cards
+     * @param  array<int, mixed>  $cards
      */
     private function hasRicherCopy(array $cards): bool
     {

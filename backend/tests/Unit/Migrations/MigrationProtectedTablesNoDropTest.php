@@ -61,7 +61,7 @@ final class MigrationProtectedTablesNoDropTest extends TestCase
     private function migrationFiles(): array
     {
         $files = glob(base_path('database/migrations/*.php'));
-        if (!is_array($files)) {
+        if (! is_array($files)) {
             return [];
         }
 
@@ -77,7 +77,7 @@ final class MigrationProtectedTablesNoDropTest extends TestCase
 
         for ($i = 0; $i < $count; $i++) {
             $token = $tokens[$i];
-            if (!is_array($token) || $token[0] !== T_FUNCTION) {
+            if (! is_array($token) || $token[0] !== T_FUNCTION) {
                 continue;
             }
 
@@ -113,6 +113,7 @@ final class MigrationProtectedTablesNoDropTest extends TestCase
                 if ($text === '{') {
                     $braceDepth++;
                     $body .= $text;
+
                     continue;
                 }
 
@@ -122,6 +123,7 @@ final class MigrationProtectedTablesNoDropTest extends TestCase
                         return $body;
                     }
                     $body .= $text;
+
                     continue;
                 }
 
@@ -135,7 +137,7 @@ final class MigrationProtectedTablesNoDropTest extends TestCase
     }
 
     /**
-     * @param string|array{int, string, int} $token
+     * @param  string|array{int, string, int}  $token
      */
     private function tokenText(string|array $token): string
     {
@@ -155,6 +157,7 @@ final class MigrationProtectedTablesNoDropTest extends TestCase
         foreach ($tokens as $token) {
             if (is_string($token)) {
                 $output .= $token;
+
                 continue;
             }
 

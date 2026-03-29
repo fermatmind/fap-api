@@ -35,8 +35,8 @@ class ScoringModelRoutingExperimentTest extends TestCase
 
     private function seedScale(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr17SimpleScoreDemoSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr17SimpleScoreDemoSeeder)->run();
     }
 
     public function test_submit_uses_experiment_routed_scoring_model_when_rollout_matches(): void

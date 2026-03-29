@@ -11,7 +11,7 @@ final class LandingSurfaceContractServiceTest extends TestCase
 {
     public function test_it_builds_a_backend_owned_landing_surface_contract(): void
     {
-        $service = new LandingSurfaceContractService();
+        $service = new LandingSurfaceContractService;
 
         $contract = $service->build([
             'landing_scope' => 'public_indexable_detail',

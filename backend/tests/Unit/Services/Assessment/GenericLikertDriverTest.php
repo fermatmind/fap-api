@@ -9,9 +9,9 @@ use Tests\TestCase;
 
 final class GenericLikertDriverTest extends TestCase
 {
-    public function testReverseWeightObjectRuleUsesLikertReverseMapping(): void
+    public function test_reverse_weight_object_rule_uses_likert_reverse_mapping(): void
     {
-        $driver = new GenericLikertDriver();
+        $driver = new GenericLikertDriver;
 
         $answers = [
             'q1' => 'A',
@@ -45,7 +45,7 @@ final class GenericLikertDriverTest extends TestCase
 
     public function test_items_map_supports_reverse_and_weight_object_rule(): void
     {
-        $driver = new GenericLikertDriver();
+        $driver = new GenericLikertDriver;
 
         $spec = [
             'options_score_map' => ['A' => 1, 'B' => 2, 'C' => 3, 'D' => 4],
@@ -79,7 +79,7 @@ final class GenericLikertDriverTest extends TestCase
 
     public function test_items_map_numeric_rule_is_weight_only(): void
     {
-        $driver = new GenericLikertDriver();
+        $driver = new GenericLikertDriver;
 
         $spec = [
             'option_scores' => ['A' => 1, 'B' => 2, 'C' => 3, 'D' => 4],

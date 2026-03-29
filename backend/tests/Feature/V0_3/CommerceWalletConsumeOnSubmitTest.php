@@ -6,8 +6,8 @@ use Database\Seeders\Pr17SimpleScoreDemoSeeder;
 use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tests\Concerns\SignedBillingWebhook;
 use Tests\TestCase;
@@ -19,9 +19,9 @@ class CommerceWalletConsumeOnSubmitTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr17SimpleScoreDemoSeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr17SimpleScoreDemoSeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $row = DB::table('scales_registry')
             ->where('org_id', 0)
@@ -34,7 +34,7 @@ class CommerceWalletConsumeOnSubmitTest extends TestCase
                 $decoded = json_decode($commercial, true);
                 $commercial = is_array($decoded) ? $decoded : null;
             }
-            if (!is_array($commercial)) {
+            if (! is_array($commercial)) {
                 $commercial = [];
             }
 
@@ -87,11 +87,11 @@ class CommerceWalletConsumeOnSubmitTest extends TestCase
             'updated_at' => now(),
         ]);
 
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),
-            'anon_id' => 'anon_' . $userId,
+            'anon_id' => 'anon_'.$userId,
             'user_id' => $userId,
             'expires_at' => now()->addDays(1),
             'created_at' => now(),
@@ -113,7 +113,7 @@ class CommerceWalletConsumeOnSubmitTest extends TestCase
             'order_no' => $orderNo,
             'org_id' => $orgId,
             'user_id' => (string) $userId,
-            'anon_id' => 'anon_' . $userId,
+            'anon_id' => 'anon_'.$userId,
             'sku' => 'MBTI_CREDIT',
             'quantity' => 1,
             'target_attempt_id' => null,
@@ -146,7 +146,7 @@ class CommerceWalletConsumeOnSubmitTest extends TestCase
 
         $webhook = $this->postSignedBillingWebhook($payload, [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $webhook->assertStatus(200);
         $webhook->assertJson(['ok' => true]);
@@ -161,7 +161,7 @@ class CommerceWalletConsumeOnSubmitTest extends TestCase
             'scale_code' => 'SIMPLE_SCORE_DEMO',
         ], [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $start->assertStatus(200);
         $attemptId = (string) $start->json('attempt_id');
@@ -180,7 +180,7 @@ class CommerceWalletConsumeOnSubmitTest extends TestCase
             'duration_ms' => 120000,
         ], [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $submit->assertStatus(200);
         $submit->assertJson(['ok' => true]);
@@ -199,7 +199,7 @@ class CommerceWalletConsumeOnSubmitTest extends TestCase
             'duration_ms' => 120000,
         ], [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $dup->assertStatus(200);
         $dup->assertJson([

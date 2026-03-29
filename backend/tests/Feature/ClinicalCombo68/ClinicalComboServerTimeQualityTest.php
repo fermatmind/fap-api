@@ -31,4 +31,3 @@ final class ClinicalComboServerTimeQualityTest extends TestCase
         $this->assertSame(315, (int) data_get($b, 'quality.completion_time_seconds'));
     }
 }
-

@@ -48,4 +48,3 @@ final class SetOpsLocaleMiddlewareTest extends TestCase
             ->assertJsonPath('session', 'en');
     }
 }
-

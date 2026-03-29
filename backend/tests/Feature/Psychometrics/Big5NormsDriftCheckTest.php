@@ -95,4 +95,3 @@ final class Big5NormsDriftCheckTest extends TestCase
         DB::table('scale_norm_stats')->insert($rows);
     }
 }
-

@@ -13,7 +13,7 @@ final class BigFiveTemplateWhitelistTest extends TestCase
 {
     public function test_unknown_variable_fails_lint(): void
     {
-        $engine = new TemplateEngine(new TemplateVariableRegistry());
+        $engine = new TemplateEngine(new TemplateVariableRegistry);
         $lint = $engine->lintString('Hello {{unknown.field}}', TemplateContext::fromArray([]));
 
         $this->assertContains('unknown.field', (array) ($lint['unknown'] ?? []));
@@ -21,7 +21,7 @@ final class BigFiveTemplateWhitelistTest extends TestCase
 
     public function test_big5_allowlist_variable_can_render(): void
     {
-        $engine = new TemplateEngine(new TemplateVariableRegistry());
+        $engine = new TemplateEngine(new TemplateVariableRegistry);
         $context = TemplateContext::fromArray([
             'quality' => [
                 'level' => 'A',

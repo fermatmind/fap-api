@@ -33,7 +33,7 @@ final class CreateMigrationsMustConvergeTest extends TestCase
             }
 
             foreach ($matches[1] as $tableName) {
-                $tablePattern = "/Schema::table\\s*\\(\\s*'" . preg_quote((string) $tableName, '/') . "'\\s*,/m";
+                $tablePattern = "/Schema::table\\s*\\(\\s*'".preg_quote((string) $tableName, '/')."'\\s*,/m";
                 if (preg_match($tablePattern, $upBody) !== 1) {
                     $violations[] = "{$filePath} -> {$tableName}";
                 }
@@ -43,7 +43,7 @@ final class CreateMigrationsMustConvergeTest extends TestCase
         $this->assertSame(
             [],
             $violations,
-            "Found non-convergent guarded create migrations (missing Schema::table patch in up()):\n" . implode("\n", $violations)
+            "Found non-convergent guarded create migrations (missing Schema::table patch in up()):\n".implode("\n", $violations)
         );
     }
 
@@ -54,7 +54,7 @@ final class CreateMigrationsMustConvergeTest extends TestCase
     {
         $files = glob(base_path('database/migrations/*.php'));
 
-        if (!is_array($files)) {
+        if (! is_array($files)) {
             return [];
         }
 
@@ -70,7 +70,7 @@ final class CreateMigrationsMustConvergeTest extends TestCase
 
         for ($i = 0; $i < $count; $i++) {
             $token = $tokens[$i];
-            if (!is_array($token) || $token[0] !== T_FUNCTION) {
+            if (! is_array($token) || $token[0] !== T_FUNCTION) {
                 continue;
             }
 
@@ -106,6 +106,7 @@ final class CreateMigrationsMustConvergeTest extends TestCase
                 if ($text === '{') {
                     $braceDepth++;
                     $body .= $text;
+
                     continue;
                 }
 
@@ -115,6 +116,7 @@ final class CreateMigrationsMustConvergeTest extends TestCase
                         return $body;
                     }
                     $body .= $text;
+
                     continue;
                 }
 
@@ -128,7 +130,7 @@ final class CreateMigrationsMustConvergeTest extends TestCase
     }
 
     /**
-     * @param string|array{int, string, int} $token
+     * @param  string|array{int, string, int}  $token
      */
     private function tokenText(string|array $token): string
     {

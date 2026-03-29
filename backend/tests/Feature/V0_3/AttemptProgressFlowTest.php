@@ -13,8 +13,8 @@ class AttemptProgressFlowTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr21AnswerDemoSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr21AnswerDemoSeeder)->run();
     }
 
     public function test_progress_resume_flow(): void

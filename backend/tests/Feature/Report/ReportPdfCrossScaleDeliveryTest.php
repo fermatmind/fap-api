@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Report;
 
+use App\Models\Attempt;
+use App\Models\Result;
 use App\Services\Assessment\Scorers\ClinicalCombo68ScorerV1;
 use App\Services\Assessment\Scorers\Sds20ScorerV2FactorLogic;
 use App\Services\Content\ClinicalComboPackLoader;
 use App\Services\Content\Sds20PackLoader;
-use App\Models\Attempt;
-use App\Models\Result;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -25,7 +25,7 @@ final class ReportPdfCrossScaleDeliveryTest extends TestCase
     {
         $this->artisan('content:compile --pack=CLINICAL_COMBO_68 --pack-version=v1')->assertExitCode(0);
         $this->artisan('content:compile --pack=SDS_20 --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
         Storage::fake('local');
 
         $clinicalAnon = 'anon_pdf_clinical_delivery';

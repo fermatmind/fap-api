@@ -69,4 +69,3 @@ final class BigFiveQuestionsMinCompiledEvidenceContractTest extends TestCase
         return trim((string) $node);
     }
 }
-

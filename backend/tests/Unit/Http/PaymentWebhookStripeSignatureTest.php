@@ -17,7 +17,7 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
 
         $payload = '{"type":"ping"}';
         $ts = time();
-        $sig = hash_hmac('sha256', $ts . '.' . $payload, 'whsec_test');
+        $sig = hash_hmac('sha256', $ts.'.'.$payload, 'whsec_test');
         $header = "t={$ts},v1={$sig}";
 
         $req = Request::create('/api/v0.3/webhooks/payment/stripe', 'POST', [], [], [], [
@@ -25,7 +25,7 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
             'CONTENT_TYPE' => 'application/json',
         ], $payload);
 
-        $ok = (new StripeGateway())->verifySignature($req);
+        $ok = (new StripeGateway)->verifySignature($req);
         $this->assertTrue($ok);
     }
 
@@ -36,7 +36,7 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
 
         $payload = '{"type":"ping"}';
         $ts = time() - 9999;
-        $sig = hash_hmac('sha256', $ts . '.' . $payload, 'whsec_test');
+        $sig = hash_hmac('sha256', $ts.'.'.$payload, 'whsec_test');
         $header = "t={$ts},v1={$sig}";
 
         $req = Request::create('/api/v0.3/webhooks/payment/stripe', 'POST', [], [], [], [
@@ -44,7 +44,7 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
             'CONTENT_TYPE' => 'application/json',
         ], $payload);
 
-        $ok = (new StripeGateway())->verifySignature($req);
+        $ok = (new StripeGateway)->verifySignature($req);
         $this->assertFalse($ok);
     }
 }
