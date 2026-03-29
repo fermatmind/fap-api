@@ -19,6 +19,10 @@ class OpsAccessControl
             return $next($request);
         }
 
+        if (str_starts_with($routeName, 'filament.ops.auth.')) {
+            return $next($request);
+        }
+
         if (
             $routeName === 'filament.ops.auth.login'
             && $request->isMethod('post')
@@ -40,7 +44,15 @@ class OpsAccessControl
             $allowedHost = trim((string) config('ops.allowed_host', ''));
             if ($allowedHost !== '') {
                 $requestHost = trim((string) $request->getHost());
-                if ($requestHost !== $allowedHost) {
+                if ($allowedHost !== '' && ! str_contains($requestHost, $allowedHost)) {
+                    if (app()->environment('production')) {
+                        Log::warning('OPS_ACCESS_DEBUG', [
+                            'route' => $routeName,
+                            'host' => $request->getHost(),
+                            'ip' => $request->ip(),
+                        ]);
+                    }
+
                     Log::warning('OPS_ACCESS_HOST_BLOCKED', [
                         'request_host' => $requestHost,
                         'allowed_host' => $allowedHost,
@@ -56,9 +68,17 @@ class OpsAccessControl
                 (array) config('ops.ip_allowlist', [])
             )));
 
-            if ($allowlist !== []) {
+            if (! empty($allowlist)) {
                 $ip = (string) $request->ip();
                 if (! in_array($ip, $allowlist, true)) {
+                    if (app()->environment('production')) {
+                        Log::warning('OPS_ACCESS_DEBUG', [
+                            'route' => $routeName,
+                            'host' => $request->getHost(),
+                            'ip' => $request->ip(),
+                        ]);
+                    }
+
                     Log::warning('OPS_ACCESS_IP_BLOCKED', [
                         'ip' => $ip,
                         'path' => $request->path(),
