@@ -300,13 +300,20 @@ class ContentReleasePage extends Page
             return EditorialReviewAudit::STATE_APPROVED;
         }
 
+        $checklistReady = EditorialReviewChecklist::missing($type, $record) === [];
         $decision = EditorialReviewAudit::latestState($type, $record);
 
         if (is_array($decision) && ($decision['state'] ?? null) !== null) {
-            return (string) $decision['state'];
+            $state = (string) $decision['state'];
+
+            if ($state === EditorialReviewAudit::STATE_READY && ! $checklistReady) {
+                return EditorialReviewAudit::STATE_NEEDS_ATTENTION;
+            }
+
+            return $state;
         }
 
-        return EditorialReviewChecklist::missing($type, $record) === []
+        return $checklistReady
             ? EditorialReviewAudit::STATE_READY
             : EditorialReviewAudit::STATE_NEEDS_ATTENTION;
     }

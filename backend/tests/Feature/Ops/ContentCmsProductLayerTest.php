@@ -24,7 +24,9 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTag;
 use App\Models\AuditLog;
 use App\Models\CareerGuide;
+use App\Models\CareerGuideSeoMeta;
 use App\Models\CareerJob;
+use App\Models\CareerJobSeoMeta;
 use App\Models\EditorialReview;
 use App\Models\Organization;
 use App\Models\Permission;
@@ -575,6 +577,125 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->assertTrue($article->is_public);
     }
 
+    public function test_reassigning_reviewer_invalidates_existing_approval_until_resubmitted(): void
+    {
+        $owner = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+        $reviewer = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+        ]);
+        $replacementReviewer = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+        ]);
+        $publisher = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+
+        $session = $this->opsSession((int) $owner->id);
+        $selectedOrgId = (int) $session['ops_org_id'];
+
+        $article = $this->seedArticle([
+            'org_id' => $selectedOrgId,
+            'title' => 'Reviewer Reassignment Article',
+            'excerpt' => 'Ready excerpt',
+            'content_md' => 'Ready body',
+            'status' => 'draft',
+            'is_public' => false,
+            'published_at' => null,
+        ]);
+
+        ArticleSeoMeta::query()->create([
+            'org_id' => $selectedOrgId,
+            'article_id' => (int) $article->id,
+            'locale' => 'en',
+            'seo_title' => 'Reviewer Reassignment Article SEO Title',
+            'seo_description' => 'Reviewer Reassignment Article SEO Description',
+            'canonical_url' => 'https://example.test/articles/reviewer-reassignment-article',
+            'og_title' => 'Reviewer Reassignment Article OG Title',
+            'og_description' => 'Reviewer Reassignment Article OG Description',
+            'og_image_url' => 'https://example.test/images/reviewer-reassignment-article.png',
+            'robots' => 'index,follow',
+            'is_indexable' => true,
+        ]);
+
+        $this->routeRecordIntoReview($selectedOrgId, $owner, $reviewer, 'article', $article);
+        $this->setOpsContext($selectedOrgId, $reviewer, '/ops/editorial-review');
+        EditorialReviewAudit::mark(EditorialReviewAudit::STATE_APPROVED, 'article', $article);
+
+        $this->setOpsContext($selectedOrgId, $replacementReviewer, '/ops/editorial-review');
+        EditorialReviewAudit::assignReviewer((int) $replacementReviewer->id, 'article', $article);
+
+        $workflow = EditorialReview::withoutGlobalScopes()
+            ->where('content_type', 'article')
+            ->where('content_id', (int) $article->id)
+            ->first();
+
+        $this->assertNotNull($workflow);
+        $this->assertSame(EditorialReviewAudit::STATE_READY, (string) $workflow->workflow_state);
+        $this->assertNull($workflow->reviewed_at);
+        $this->assertNull($workflow->reviewed_by_admin_user_id);
+        $this->assertSame((int) $replacementReviewer->id, (int) $workflow->reviewer_admin_user_id);
+
+        $this->withSession($this->opsSessionForOrg((int) $publisher->id, $selectedOrgId))
+            ->actingAs($publisher, (string) config('admin.guard', 'admin'))
+            ->get('/ops/content-release')
+            ->assertOk()
+            ->assertSee('Ready')
+            ->assertSee('Reviewer Reassignment Article');
+
+        $this->setOpsContext($selectedOrgId, $publisher, '/ops/content-release');
+
+        $this->expectException(AuthorizationException::class);
+
+        ArticleResource::releaseRecord($article);
+    }
+
+    public function test_editorial_review_cannot_approve_record_before_submission(): void
+    {
+        $owner = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+        $reviewer = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+        ]);
+
+        $session = $this->opsSession((int) $owner->id);
+        $selectedOrgId = (int) $session['ops_org_id'];
+
+        $article = $this->seedArticle([
+            'org_id' => $selectedOrgId,
+            'title' => 'Premature Approval Article',
+            'excerpt' => 'Ready excerpt',
+            'content_md' => 'Ready body',
+            'status' => 'draft',
+        ]);
+
+        ArticleSeoMeta::query()->create([
+            'org_id' => $selectedOrgId,
+            'article_id' => (int) $article->id,
+            'locale' => 'en',
+            'seo_title' => 'Premature Approval Article SEO Title',
+            'seo_description' => 'Premature Approval Article SEO Description',
+            'canonical_url' => 'https://example.test/articles/premature-approval-article',
+            'og_title' => 'Premature Approval Article OG Title',
+            'og_description' => 'Premature Approval Article OG Description',
+            'og_image_url' => 'https://example.test/images/premature-approval-article.png',
+            'robots' => 'index,follow',
+            'is_indexable' => true,
+        ]);
+
+        $this->setOpsContext($selectedOrgId, $owner, '/ops/editorial-review');
+        EditorialReviewAudit::assignOwner((int) $owner->id, 'article', $article);
+
+        $this->setOpsContext($selectedOrgId, $reviewer, '/ops/editorial-review');
+        EditorialReviewAudit::assignReviewer((int) $reviewer->id, 'article', $article);
+
+        $this->expectException(AuthorizationException::class);
+
+        EditorialReviewAudit::mark(EditorialReviewAudit::STATE_APPROVED, 'article', $article);
+    }
+
     public function test_editorial_review_requires_real_seo_meta_before_marking_record_ready(): void
     {
         $admin = $this->createAdminWithPermissions([
@@ -834,10 +955,10 @@ final class ContentCmsProductLayerTest extends TestCase
         ]);
 
         foreach ($permissions as $permissionName) {
-            $permission = Permission::query()->firstOrCreate([
-                'name' => $permissionName,
-                'guard_name' => (string) config('admin.guard', 'admin'),
-            ]);
+            $permission = Permission::query()->firstOrCreate(
+                ['name' => $permissionName],
+                ['guard_name' => (string) config('admin.guard', 'admin')]
+            );
 
             $role->permissions()->syncWithoutDetaching([$permission->id]);
         }
@@ -876,13 +997,28 @@ final class ContentCmsProductLayerTest extends TestCase
 
     private function approveRecord(AdminUser $admin, int $orgId, string $type, object $record): void
     {
-        $this->routeRecordIntoReview($orgId, $admin, $admin, $type, $record);
+        $this->ensureSeoReady($orgId, $type, $record);
+
+        $owner = $admin;
+        if (
+            ! $admin->hasPermission(PermissionNames::ADMIN_CONTENT_WRITE)
+            && ! $admin->hasPermission(PermissionNames::ADMIN_CONTENT_PUBLISH)
+            && ! $admin->hasPermission(PermissionNames::ADMIN_OWNER)
+        ) {
+            $owner = $this->createAdminWithPermissions([
+                PermissionNames::ADMIN_CONTENT_WRITE,
+            ]);
+        }
+
+        $this->routeRecordIntoReview($orgId, $owner, $admin, $type, $record);
         $this->setOpsContext($orgId, $admin, '/ops/editorial-review');
         EditorialReviewAudit::mark(EditorialReviewAudit::STATE_APPROVED, $type, $record);
     }
 
     private function routeRecordIntoReview(int $orgId, AdminUser $owner, AdminUser $reviewer, string $type, object $record): void
     {
+        $this->ensureSeoReady($orgId, $type, $record);
+
         $this->setOpsContext($orgId, $owner, '/ops/editorial-review');
         EditorialReviewAudit::assignOwner((int) $owner->id, $type, $record);
 
@@ -891,6 +1027,80 @@ final class ContentCmsProductLayerTest extends TestCase
 
         $this->setOpsContext($orgId, $owner, '/ops/editorial-review');
         EditorialReviewAudit::submit($type, $record);
+    }
+
+    private function ensureSeoReady(int $orgId, string $type, object $record): void
+    {
+        $bodyField = match ($type) {
+            'article' => 'content_md',
+            'guide', 'job' => 'body_md',
+            default => 'content_md',
+        };
+
+        $bodyHtmlField = match ($type) {
+            'article' => 'content_html',
+            'guide', 'job' => 'body_html',
+            default => 'content_html',
+        };
+
+        if (
+            ! filled(data_get($record, 'excerpt'))
+            || ! filled(data_get($record, $bodyField))
+        ) {
+            $record->forceFill([
+                'excerpt' => filled(data_get($record, 'excerpt')) ? data_get($record, 'excerpt') : 'Ready excerpt',
+                $bodyField => filled(data_get($record, $bodyField)) ? data_get($record, $bodyField) : 'Ready body',
+                $bodyHtmlField => filled(data_get($record, $bodyHtmlField)) ? data_get($record, $bodyHtmlField) : '<p>Ready body</p>',
+            ])->save();
+        }
+
+        if ($type === 'article' && ! $record->seoMeta()->exists()) {
+            ArticleSeoMeta::query()->create([
+                'org_id' => $orgId,
+                'article_id' => (int) data_get($record, 'id'),
+                'locale' => (string) data_get($record, 'locale', 'en'),
+                'seo_title' => trim((string) data_get($record, 'title', 'Article')).' SEO Title',
+                'seo_description' => trim((string) data_get($record, 'excerpt', 'Article excerpt')).' SEO Description',
+                'canonical_url' => 'https://example.test/articles/'.trim((string) data_get($record, 'slug', 'article')),
+                'og_title' => trim((string) data_get($record, 'title', 'Article')).' OG Title',
+                'og_description' => trim((string) data_get($record, 'excerpt', 'Article excerpt')).' OG Description',
+                'og_image_url' => 'https://example.test/images/'.trim((string) data_get($record, 'slug', 'article')).'.png',
+                'robots' => 'index,follow',
+                'is_indexable' => true,
+            ]);
+        }
+
+        if ($type === 'guide' && ! $record->seoMeta()->exists()) {
+            CareerGuideSeoMeta::query()->create([
+                'career_guide_id' => (int) data_get($record, 'id'),
+                'seo_title' => trim((string) data_get($record, 'title', 'Guide')).' SEO Title',
+                'seo_description' => trim((string) data_get($record, 'excerpt', 'Guide excerpt')).' SEO Description',
+                'canonical_url' => 'https://example.test/guides/'.trim((string) data_get($record, 'slug', 'guide')),
+                'og_title' => trim((string) data_get($record, 'title', 'Guide')).' OG Title',
+                'og_description' => trim((string) data_get($record, 'excerpt', 'Guide excerpt')).' OG Description',
+                'og_image_url' => 'https://example.test/images/'.trim((string) data_get($record, 'slug', 'guide')).'.png',
+                'twitter_title' => trim((string) data_get($record, 'title', 'Guide')).' Twitter Title',
+                'twitter_description' => trim((string) data_get($record, 'excerpt', 'Guide excerpt')).' Twitter Description',
+                'twitter_image_url' => 'https://example.test/images/'.trim((string) data_get($record, 'slug', 'guide')).'-twitter.png',
+                'robots' => 'index,follow',
+            ]);
+        }
+
+        if ($type === 'job' && ! $record->seoMeta()->exists()) {
+            CareerJobSeoMeta::query()->create([
+                'job_id' => (int) data_get($record, 'id'),
+                'seo_title' => trim((string) data_get($record, 'title', 'Job')).' SEO Title',
+                'seo_description' => trim((string) data_get($record, 'excerpt', 'Job excerpt')).' SEO Description',
+                'canonical_url' => 'https://example.test/jobs/'.trim((string) data_get($record, 'slug', 'job')),
+                'og_title' => trim((string) data_get($record, 'title', 'Job')).' OG Title',
+                'og_description' => trim((string) data_get($record, 'excerpt', 'Job excerpt')).' OG Description',
+                'og_image_url' => 'https://example.test/images/'.trim((string) data_get($record, 'slug', 'job')).'.png',
+                'twitter_title' => trim((string) data_get($record, 'title', 'Job')).' Twitter Title',
+                'twitter_description' => trim((string) data_get($record, 'excerpt', 'Job excerpt')).' Twitter Description',
+                'twitter_image_url' => 'https://example.test/images/'.trim((string) data_get($record, 'slug', 'job')).'-twitter.png',
+                'robots' => 'index,follow',
+            ]);
+        }
     }
 
     private function setOpsContext(int $orgId, AdminUser $admin, string $path, string $method = 'POST'): void

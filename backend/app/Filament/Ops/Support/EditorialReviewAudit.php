@@ -7,6 +7,7 @@ namespace App\Filament\Ops\Support;
 use App\Models\AdminUser;
 use App\Models\EditorialReview;
 use App\Services\Audit\AuditLogger;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -26,8 +27,19 @@ final class EditorialReviewAudit
 
     public static function assignOwner(int $ownerAdminId, string $type, object $record): EditorialReview
     {
+        if (! ContentAccess::canAssignOwner()) {
+            throw new AuthorizationException('You do not have permission to assign an owner.');
+        }
+
+        $owner = self::resolveOwnerCandidate($ownerAdminId);
         $workflow = self::workflowFor($type, $record);
+
+        if ((int) $workflow->owner_admin_user_id === $ownerAdminId) {
+            return $workflow;
+        }
+
         $workflow->owner_admin_user_id = $ownerAdminId;
+        self::resetWorkflowState($workflow);
         $workflow->last_transition_at = now();
         $workflow->save();
 
@@ -37,7 +49,7 @@ final class EditorialReviewAudit
             record: $record,
             meta: [
                 'owner_admin_user_id' => $ownerAdminId,
-                'owner_label' => self::adminLabel($ownerAdminId),
+                'owner_label' => trim($owner->name !== '' ? $owner->name : $owner->email),
             ],
         );
 
@@ -46,8 +58,19 @@ final class EditorialReviewAudit
 
     public static function assignReviewer(int $reviewerAdminId, string $type, object $record): EditorialReview
     {
+        if (! ContentAccess::canAssignReviewer()) {
+            throw new AuthorizationException('You do not have permission to assign a reviewer.');
+        }
+
+        $reviewer = self::resolveReviewerCandidate($reviewerAdminId);
         $workflow = self::workflowFor($type, $record);
+
+        if ((int) $workflow->reviewer_admin_user_id === $reviewerAdminId) {
+            return $workflow;
+        }
+
         $workflow->reviewer_admin_user_id = $reviewerAdminId;
+        self::resetWorkflowState($workflow);
         $workflow->last_transition_at = now();
         $workflow->save();
 
@@ -57,7 +80,7 @@ final class EditorialReviewAudit
             record: $record,
             meta: [
                 'reviewer_admin_user_id' => $reviewerAdminId,
-                'reviewer_label' => self::adminLabel($reviewerAdminId),
+                'reviewer_label' => trim($reviewer->name !== '' ? $reviewer->name : $reviewer->email),
             ],
         );
 
@@ -67,11 +90,13 @@ final class EditorialReviewAudit
     public static function submit(string $type, object $record): EditorialReview
     {
         $workflow = self::workflowFor($type, $record);
-        $actorAdminId = self::actorAdminId();
+        self::assertCanSubmit($workflow, $type, $record);
 
         $workflow->workflow_state = self::STATE_IN_REVIEW;
-        $workflow->submitted_by_admin_user_id = $actorAdminId;
+        $workflow->submitted_by_admin_user_id = self::actorAdminId();
         $workflow->submitted_at = now();
+        $workflow->reviewed_by_admin_user_id = null;
+        $workflow->reviewed_at = null;
         $workflow->last_transition_at = now();
         $workflow->save();
 
@@ -89,6 +114,9 @@ final class EditorialReviewAudit
 
     public static function mark(string $decision, string $type, object $record): void
     {
+        $workflow = self::workflowFor($type, $record);
+        self::assertCanMark($workflow, $decision, $type, $record);
+
         $action = match ($decision) {
             self::STATE_APPROVED => 'editorial_review_approved',
             self::STATE_CHANGES_REQUESTED => 'editorial_review_changes_requested',
@@ -96,7 +124,6 @@ final class EditorialReviewAudit
             default => throw new \InvalidArgumentException('Unsupported review decision.'),
         };
 
-        $workflow = self::workflowFor($type, $record);
         $workflow->workflow_state = $decision;
         $workflow->reviewed_by_admin_user_id = self::actorAdminId();
         $workflow->reviewed_at = now();
@@ -198,7 +225,8 @@ final class EditorialReviewAudit
             return;
         }
 
-        $workflow->workflow_state = self::STATE_READY;
+        self::resetWorkflowState($workflow);
+        $workflow->last_transition_at = now();
         $workflow->save();
     }
 
@@ -239,6 +267,69 @@ final class EditorialReviewAudit
         return EditorialReview::withoutGlobalScopes();
     }
 
+    private static function assertCanSubmit(EditorialReview $workflow, string $type, object $record): void
+    {
+        if ((int) $workflow->owner_admin_user_id <= 0 || (int) $workflow->reviewer_admin_user_id <= 0) {
+            throw new AuthorizationException('Assign both an owner and reviewer before submitting for review.');
+        }
+
+        if (EditorialReviewChecklist::missing($type, $record) !== []) {
+            throw new AuthorizationException('Fix the review checklist gaps before submitting for review.');
+        }
+
+        if ($workflow->workflow_state === self::STATE_IN_REVIEW && ! self::hasNewerEdits($workflow, $record)) {
+            throw new AuthorizationException('This record is already in review.');
+        }
+
+        if ($workflow->workflow_state === self::STATE_APPROVED && ! self::hasNewerEdits($workflow, $record)) {
+            throw new AuthorizationException('This record is already approved and has no newer edits to resubmit.');
+        }
+
+        if (! ContentAccess::isOwner() && self::actorAdminId() !== (int) $workflow->owner_admin_user_id) {
+            throw new AuthorizationException('Only the assigned owner can submit this record for review.');
+        }
+    }
+
+    private static function assertCanMark(EditorialReview $workflow, string $decision, string $type, object $record): void
+    {
+        if (self::hasNewerEdits($workflow, $record)) {
+            throw new AuthorizationException('This record changed after submission and must be resubmitted before review can continue.');
+        }
+
+        if ($workflow->workflow_state !== self::STATE_IN_REVIEW) {
+            throw new AuthorizationException('This record is not currently in review.');
+        }
+
+        $actorAdminId = self::actorAdminId();
+        $isAssignedReviewer = $actorAdminId !== null && $actorAdminId === (int) $workflow->reviewer_admin_user_id;
+
+        if (! ContentAccess::isOwner() && (! ContentAccess::canReview() || ! $isAssignedReviewer)) {
+            throw new AuthorizationException('Only the assigned reviewer can decide this record.');
+        }
+
+        if ($decision === self::STATE_APPROVED && EditorialReviewChecklist::missing($type, $record) !== []) {
+            throw new AuthorizationException('A record with checklist gaps cannot be approved.');
+        }
+    }
+
+    private static function hasNewerEdits(EditorialReview $workflow, object $record): bool
+    {
+        $updatedAt = data_get($record, 'updated_at');
+
+        return $updatedAt instanceof \DateTimeInterface
+            && $workflow->last_transition_at instanceof \DateTimeInterface
+            && $workflow->last_transition_at < $updatedAt;
+    }
+
+    private static function resetWorkflowState(EditorialReview $workflow): void
+    {
+        $workflow->workflow_state = self::STATE_READY;
+        $workflow->submitted_by_admin_user_id = null;
+        $workflow->reviewed_by_admin_user_id = null;
+        $workflow->submitted_at = null;
+        $workflow->reviewed_at = null;
+    }
+
     private static function actorAdminId(): ?int
     {
         $guard = (string) config('admin.guard', 'admin');
@@ -275,15 +366,44 @@ final class EditorialReviewAudit
         );
     }
 
-    private static function adminLabel(int $adminUserId): string
+    private static function resolveOwnerCandidate(int $adminUserId): AdminUser
     {
         /** @var AdminUser|null $admin */
         $admin = AdminUser::query()->find($adminUserId);
 
         if (! $admin instanceof AdminUser) {
-            return '';
+            throw new AuthorizationException('The selected owner does not exist.');
         }
 
-        return trim($admin->name !== '' ? $admin->name : $admin->email);
+        if (
+            ! $admin->hasPermission(\App\Support\Rbac\PermissionNames::ADMIN_CONTENT_WRITE)
+            && ! $admin->hasPermission(\App\Support\Rbac\PermissionNames::ADMIN_CONTENT_PUBLISH)
+            && ! $admin->hasPermission(\App\Support\Rbac\PermissionNames::ADMIN_OWNER)
+        ) {
+            throw new AuthorizationException('The selected owner cannot own editorial records.');
+        }
+
+        return $admin;
+    }
+
+    private static function resolveReviewerCandidate(int $adminUserId): AdminUser
+    {
+        /** @var AdminUser|null $admin */
+        $admin = AdminUser::query()->find($adminUserId);
+
+        if (! $admin instanceof AdminUser) {
+            throw new AuthorizationException('The selected reviewer does not exist.');
+        }
+
+        if (
+            ! $admin->hasPermission(\App\Support\Rbac\PermissionNames::ADMIN_APPROVAL_REVIEW)
+            && ! $admin->hasPermission(\App\Support\Rbac\PermissionNames::ADMIN_CONTENT_RELEASE)
+            && ! $admin->hasPermission(\App\Support\Rbac\PermissionNames::ADMIN_CONTENT_PUBLISH)
+            && ! $admin->hasPermission(\App\Support\Rbac\PermissionNames::ADMIN_OWNER)
+        ) {
+            throw new AuthorizationException('The selected reviewer cannot review editorial records.');
+        }
+
+        return $admin;
     }
 }
