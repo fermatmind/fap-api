@@ -15,7 +15,7 @@ class CommerceKpiWidget extends BaseWidget
 
     protected function getHeading(): ?string
     {
-        return 'Today in Commerce';
+        return 'Commerce Overview';
     }
 
     protected function getStats(): array
@@ -30,8 +30,8 @@ class CommerceKpiWidget extends BaseWidget
                 $this->noOrgStat('Pending unresolved', __('ops.widgets.select_org_to_view_metrics')),
                 $this->noOrgStat('Paid without grant', __('ops.widgets.select_org_to_view_metrics')),
                 $this->noOrgStat('Compensated today', __('ops.widgets.select_org_to_view_metrics')),
-                $this->noOrgStat(__('ops.widgets.refund_count'), __('ops.widgets.no_org_selected')),
-                $this->noOrgStat(__('ops.widgets.webhook_failures'), __('ops.widgets.no_org_selected')),
+                $this->noOrgStat(__('ops.widgets.refund_count'), __('ops.widgets.select_org_to_view_metrics')),
+                $this->noOrgStat(__('ops.widgets.webhook_failures'), __('ops.widgets.select_org_to_view_metrics')),
             ];
         }
 

@@ -13,7 +13,7 @@ class WebhookFailureWidget extends BaseWidget
 {
     protected function getHeading(): ?string
     {
-        return 'Webhook Risk';
+        return 'Webhook Monitoring';
     }
 
     protected function getStats(): array
@@ -22,7 +22,7 @@ class WebhookFailureWidget extends BaseWidget
         if ($orgId <= 0) {
             return [
                 Stat::make(__('ops.widgets.webhook_failures_15m'), '0')->description(__('ops.widgets.select_org_to_view_metrics')),
-                Stat::make(__('ops.widgets.webhook_failures_all'), '0')->description(__('ops.widgets.no_org_selected')),
+                Stat::make(__('ops.widgets.webhook_failures_all'), '0')->description(__('ops.widgets.select_org_to_view_metrics')),
             ];
         }
 

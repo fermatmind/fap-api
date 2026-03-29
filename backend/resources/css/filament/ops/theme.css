@@ -1207,6 +1207,17 @@
         gap: 0.5rem;
     }
 
+    .ops-field-grid__flat-item {
+        display: grid;
+        gap: 0.4rem;
+        align-content: start;
+        min-height: 100%;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.68);
+        padding: 0.85rem 0.95rem;
+        box-shadow: inset 0 0 0 1px rgba(229, 231, 235, 0.82);
+    }
+
     .ops-field-grid__code {
         max-height: 20rem;
         overflow: auto;
@@ -1221,24 +1232,24 @@
         box-shadow: inset 0 0 0 1px rgba(229, 231, 235, 0.96);
     }
 
-    .ops-monitor-table-shell {
+    .ops-table-shell {
         overflow: hidden;
         border-radius: 14px;
         box-shadow: inset 0 0 0 1px rgba(229, 231, 235, 0.96);
     }
 
-    .ops-monitor-table {
+    .ops-table {
         width: 100%;
         border-collapse: collapse;
         background: rgba(255, 255, 255, 0.96);
     }
 
-    .ops-monitor-table thead {
+    .ops-table thead {
         background: var(--ops-bg-surface-subtle);
     }
 
-    .ops-monitor-table th,
-    .ops-monitor-table td {
+    .ops-table th,
+    .ops-table td {
         padding: 0.85rem 0.95rem;
         text-align: left;
         vertical-align: top;
@@ -1248,7 +1259,7 @@
         line-height: 1.55;
     }
 
-    .ops-monitor-table th {
+    .ops-table th {
         color: var(--ops-text-tertiary);
         font-size: 0.6875rem;
         font-weight: 700;
@@ -1256,11 +1267,11 @@
         text-transform: uppercase;
     }
 
-    .ops-monitor-table tbody tr:hover {
+    .ops-table tbody tr:hover {
         background: rgba(var(--primary-50), 0.5);
     }
 
-    .ops-monitor-table__status {
+    .ops-table__status {
         white-space: nowrap;
     }
 

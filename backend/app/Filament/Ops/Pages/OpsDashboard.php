@@ -30,7 +30,7 @@ class OpsDashboard extends Dashboard
         return __('ops.dashboard.title');
     }
 
-    public function getColumns(): int | string | array
+    public function getColumns(): int|string|array
     {
         return 2;
     }
@@ -39,10 +39,10 @@ class OpsDashboard extends Dashboard
     {
         return [
             CommerceKpiWidget::class,
+            FunnelWidget::class,
             WebhookFailureWidget::class,
             QueueFailureWidget::class,
             HealthzStatusWidget::class,
-            FunnelWidget::class,
         ];
     }
 

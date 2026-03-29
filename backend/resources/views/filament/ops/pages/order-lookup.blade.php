@@ -132,6 +132,7 @@
                             </x-slot>
 
                             <x-filament-ops::ops-field-grid
+                                cardless
                                 :fields="$toFields((array) $event)"
                                 empty-description="This event has no visible fields."
                                 empty-eyebrow="Payment events"
@@ -167,6 +168,7 @@
                             </x-slot>
 
                             <x-filament-ops::ops-field-grid
+                                cardless
                                 :fields="$toFields((array) $grant)"
                                 empty-description="This grant has no visible fields."
                                 empty-eyebrow="Benefit grants"
