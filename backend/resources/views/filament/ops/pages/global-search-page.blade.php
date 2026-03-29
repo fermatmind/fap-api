@@ -8,67 +8,54 @@
     @endphp
 
     <div class="ops-shell-page">
-        <x-filament::section>
-            <div class="ops-workbench-toolbar ops-workbench-toolbar--split">
-                <div class="ops-workbench-toolbar__main">
-                    <div class="ops-shell-inline-intro">
-                        <span class="ops-shell-inline-intro__eyebrow">Support workspace</span>
-                        <p class="ops-shell-inline-intro__meta">
-                            Jump directly to orders, attempts, shares, or user records without leaving the current ops context.
-                        </p>
-                    </div>
-
-                    <div class="ops-control-stack">
-                        <label class="ops-control-label" for="ops-global-search-input">Search by order_no / attempt_id / share_id / user_email</label>
-                        <input
-                            id="ops-global-search-input"
-                            type="text"
-                            wire:model.defer="query"
-                            placeholder="ord_..., attempt..., share..., email"
-                            class="ops-input"
-                        />
-                        <p class="ops-control-hint">The search stays read-only here. Open a result to continue in its native workspace.</p>
-                    </div>
+        <x-filament-ops::ops-section
+            eyebrow="Support workspace"
+            title="Global search"
+            description="Jump directly to orders, attempts, shares, or user records without leaving the current Ops shell."
+        >
+            <x-filament-ops::ops-toolbar>
+                <div class="ops-control-stack">
+                    <label class="ops-control-label" for="ops-global-search-input">Search by order_no / attempt_id / share_id / user_email</label>
+                    <input
+                        id="ops-global-search-input"
+                        type="text"
+                        wire:model.defer="query"
+                        placeholder="ord_..., attempt..., share..., email"
+                        class="ops-input"
+                    />
+                    <p class="ops-control-hint">The search stays read-only here. Open a result to continue in its native workspace.</p>
                 </div>
 
-                <div class="ops-workbench-toolbar__actions">
+                <x-slot name="actions">
                     <x-filament::button color="primary" wire:click="runSearch">
                         Search
                     </x-filament::button>
-                </div>
-            </div>
-        </x-filament::section>
+                </x-slot>
+            </x-filament-ops::ops-toolbar>
+        </x-filament-ops::ops-section>
 
-        <x-filament::section>
-            <div class="ops-results-header">
-                <div>
-                    <h3 class="ops-results-header__title">Results</h3>
-                    <p class="ops-results-header__meta">Shared result cards keep support actions readable even when records come from different domains.</p>
-                </div>
+        <x-filament-ops::ops-section
+            title="Results"
+            description="Shared result cards keep support actions readable even when records come from different domains."
+        >
+            <x-slot name="actions">
                 <span class="ops-results-header__meta">{{ $elapsedMs }} ms</span>
-            </div>
+            </x-slot>
 
-            <div class="ops-card-list mt-4">
+            <div class="ops-card-list">
                 @forelse ($items as $item)
-                    <div class="ops-result-card">
-                        <div class="ops-result-card__header">
-                            <div>
-                                <p class="ops-result-card__title">{{ (string) ($item['label'] ?? '-') }}</p>
-                                <p class="ops-result-card__meta">
-                                    {{ (string) ($item['type'] ?? '-') }}
-                                    @if ((int) ($item['org_id'] ?? 0) > 0)
-                                        | org={{ (int) ($item['org_id'] ?? 0) }}
-                                    @endif
-                                    | {{ (string) ($item['subtitle'] ?? '') }}
-                                </p>
-                            </div>
+                    <x-filament-ops::ops-result-card
+                        :title="(string) ($item['label'] ?? '-')"
+                        :meta="(string) ($item['type'] ?? '-') . (((int) ($item['org_id'] ?? 0) > 0) ? ' | org='.(int) ($item['org_id'] ?? 0) : '') . (((string) ($item['subtitle'] ?? '')) !== '' ? ' | '.(string) ($item['subtitle'] ?? '') : '')"
+                    >
+                        <x-slot name="actions">
                             <x-filament::button size="xs" color="gray" tag="a" href="{{ (string) ($item['url'] ?? '/ops') }}">
                                 Open
                             </x-filament::button>
-                        </div>
-                    </div>
+                        </x-slot>
+                    </x-filament-ops::ops-result-card>
                 @empty
-                    <x-filament.ops.shared.empty-state
+                    <x-filament-ops::ops-empty-state
                         eyebrow="Support search"
                         icon="heroicon-o-magnifying-glass"
                         :title="$emptyTitle"
@@ -76,6 +63,6 @@
                     />
                 @endforelse
             </div>
-        </x-filament::section>
+        </x-filament-ops::ops-section>
     </div>
 </x-filament-panels::page>
