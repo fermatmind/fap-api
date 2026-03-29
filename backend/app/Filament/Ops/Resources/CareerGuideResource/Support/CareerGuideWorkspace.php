@@ -658,6 +658,32 @@ final class CareerGuideWorkspace
         return $article instanceof Article ? self::articleOptionLabel($article) : null;
     }
 
+    public static function legacyRelatedArticleSummary(?CareerGuide $record): string
+    {
+        if (! $record instanceof CareerGuide || ! $record->exists) {
+            return 'Legacy global article links can still render at runtime, but new links are intentionally excluded from the production CMS bootstrap.';
+        }
+
+        $labels = $record->relatedArticles()
+            ->withoutGlobalScopes()
+            ->get(['articles.title', 'articles.slug'])
+            ->map(static function (Article $article): string {
+                $title = trim((string) $article->title);
+                $slug = trim((string) $article->slug);
+
+                return $title !== '' ? $title.' ('.$slug.')' : $slug;
+            })
+            ->filter()
+            ->values()
+            ->all();
+
+        if ($labels === []) {
+            return 'No legacy global article links are attached to this guide.';
+        }
+
+        return 'Existing runtime links: '.implode(' | ', $labels);
+    }
+
     /**
      * @return array<int, string>
      */

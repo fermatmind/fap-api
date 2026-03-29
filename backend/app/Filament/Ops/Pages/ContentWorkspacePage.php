@@ -43,13 +43,13 @@ class ContentWorkspacePage extends Page
 
     public function mount(): void
     {
-        $tenantOrgIds = $this->tenantOrgIds();
+        $currentOrgIds = $this->currentOrgIds();
 
         $this->editorialCards = [
             $this->workspaceCard(
                 'Articles',
                 'Org-aware editorial workspace for long-form CMS publishing, SEO metadata, and visibility state.',
-                Article::query()->whereIn('org_id', $tenantOrgIds)->count(),
+                Article::query()->whereIn('org_id', $currentOrgIds)->count(),
                 ArticleResource::getUrl(),
                 ArticleResource::getUrl('create')
             ),
@@ -73,14 +73,14 @@ class ContentWorkspacePage extends Page
             $this->workspaceCard(
                 'Categories',
                 'Taxonomy records that shape article organization and filtering inside the editorial workspace.',
-                ArticleCategory::query()->whereIn('org_id', $tenantOrgIds)->count(),
+                ArticleCategory::query()->whereIn('org_id', $currentOrgIds)->count(),
                 ArticleCategoryResource::getUrl(),
                 ArticleCategoryResource::getUrl('create')
             ),
             $this->workspaceCard(
                 'Tags',
                 'Lightweight metadata used to cluster related editorial records and speed up operator discovery.',
-                ArticleTag::query()->whereIn('org_id', $tenantOrgIds)->count(),
+                ArticleTag::query()->whereIn('org_id', $currentOrgIds)->count(),
                 ArticleTagResource::getUrl(),
                 ArticleTagResource::getUrl('create')
             ),
@@ -129,11 +129,11 @@ class ContentWorkspacePage extends Page
     /**
      * @return array<int, int>
      */
-    private function tenantOrgIds(): array
+    private function currentOrgIds(): array
     {
         $orgId = max(0, (int) app(OrgContext::class)->orgId());
 
-        return [$orgId];
+        return $orgId > 0 ? [$orgId] : [];
     }
 
     /**

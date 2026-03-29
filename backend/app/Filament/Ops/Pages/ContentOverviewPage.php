@@ -120,7 +120,7 @@ class ContentOverviewPage extends Page
     {
         $orgId = max(0, (int) app(OrgContext::class)->orgId());
 
-        return [$orgId];
+        return $orgId > 0 ? [$orgId] : [];
     }
 
     /**

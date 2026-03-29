@@ -689,6 +689,7 @@ class CareerJobResource extends Resource
 
         $record->forceFill([
             'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => true,
             'published_at' => $record->published_at ?? now(),
         ])->save();
 

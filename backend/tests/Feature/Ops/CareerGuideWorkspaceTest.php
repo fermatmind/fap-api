@@ -74,6 +74,8 @@ final class CareerGuideWorkspaceTest extends TestCase
             ->assertOk()
             ->assertSee('ops-career-job-workspace-layout', false)
             ->assertSee('Create Career Guide')
+            ->assertSee('Article linking remains a legacy global-only runtime surface and is intentionally read-only in the production CMS bootstrap.')
+            ->assertDontSee('Add related article')
             ->assertDontSee('Open Public URL');
 
         $this->withSession([
@@ -85,6 +87,7 @@ final class CareerGuideWorkspaceTest extends TestCase
             ->assertSee('ops-career-job-workspace-layout', false)
             ->assertSee('Planned public URL')
             ->assertSee('Planned canonical')
+            ->assertSee('Existing runtime links:')
             ->assertDontSee('Open Public URL');
     }
 

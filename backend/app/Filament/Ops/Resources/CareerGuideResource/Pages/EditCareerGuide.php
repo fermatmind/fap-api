@@ -20,11 +20,6 @@ class EditCareerGuide extends EditRecord
     protected array $workspaceRelatedJobsState = [];
 
     /**
-     * @var array<int, array{article_id: int}>
-     */
-    protected array $workspaceRelatedArticlesState = [];
-
-    /**
      * @var array<int, array{personality_profile_id: int}>
      */
     protected array $workspaceRelatedPersonalityProfilesState = [];
@@ -78,7 +73,6 @@ class EditCareerGuide extends EditRecord
         return [
             ...$data,
             'workspace_related_jobs' => CareerGuideWorkspace::workspaceRelatedJobsFromRecord($this->getRecord()),
-            'workspace_related_articles' => CareerGuideWorkspace::workspaceRelatedArticlesFromRecord($this->getRecord()),
             'workspace_related_personality_profiles' => CareerGuideWorkspace::workspaceRelatedPersonalityProfilesFromRecord($this->getRecord()),
             'workspace_seo' => CareerGuideWorkspace::workspaceSeoFromRecord($this->getRecord()),
         ];
@@ -96,10 +90,6 @@ class EditCareerGuide extends EditRecord
             is_array($data['workspace_related_jobs'] ?? null) ? $data['workspace_related_jobs'] : [],
             $locale,
         );
-        $this->workspaceRelatedArticlesState = CareerGuideWorkspace::normalizeRelatedArticleRows(
-            is_array($data['workspace_related_articles'] ?? null) ? $data['workspace_related_articles'] : [],
-            $locale,
-        );
         $this->workspaceRelatedPersonalityProfilesState = CareerGuideWorkspace::normalizeRelatedPersonalityRows(
             is_array($data['workspace_related_personality_profiles'] ?? null) ? $data['workspace_related_personality_profiles'] : [],
             $locale,
@@ -108,7 +98,6 @@ class EditCareerGuide extends EditRecord
 
         unset(
             $data['workspace_related_jobs'],
-            $data['workspace_related_articles'],
             $data['workspace_related_personality_profiles'],
             $data['workspace_seo'],
         );
@@ -131,7 +120,6 @@ class EditCareerGuide extends EditRecord
     protected function afterSave(): void
     {
         CareerGuideWorkspace::syncRelatedJobs($this->getRecord(), $this->workspaceRelatedJobsState);
-        CareerGuideWorkspace::syncRelatedArticles($this->getRecord(), $this->workspaceRelatedArticlesState);
         CareerGuideWorkspace::syncRelatedPersonalityProfiles($this->getRecord(), $this->workspaceRelatedPersonalityProfilesState);
         CareerGuideWorkspace::syncWorkspaceSeo($this->getRecord(), $this->workspaceSeoState);
         CareerGuideWorkspace::createRevision($this->getRecord(), 'Workspace update');

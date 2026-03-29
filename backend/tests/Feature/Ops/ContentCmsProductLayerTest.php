@@ -28,6 +28,7 @@ use App\Support\Rbac\PermissionNames;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -204,16 +205,21 @@ final class ContentCmsProductLayerTest extends TestCase
         $job->refresh();
 
         $this->assertSame('published', $article->status);
-        $this->assertFalse($article->is_public);
+        $this->assertTrue($article->is_public);
         $this->assertNotNull($article->published_at);
 
         $this->assertSame(CareerGuide::STATUS_PUBLISHED, $guide->status);
-        $this->assertFalse($guide->is_public);
+        $this->assertTrue($guide->is_public);
         $this->assertNotNull($guide->published_at);
 
         $this->assertSame(CareerJob::STATUS_PUBLISHED, $job->status);
-        $this->assertFalse($job->is_public);
+        $this->assertTrue($job->is_public);
         $this->assertNotNull($job->published_at);
+
+        $this->getJson('/api/v0.5/articles/'.$article->slug.'?locale=en&org_id=0')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('article.slug', $article->slug);
     }
 
     public function test_content_write_admin_cannot_release_draft_content_records(): void
@@ -320,6 +326,28 @@ final class ContentCmsProductLayerTest extends TestCase
             ->assertDontSee('Global Article');
     }
 
+    public function test_cms_workspace_pages_require_org_selection_before_rendering(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+
+        $session = [
+            'ops_admin_totp_verified_user_id' => (int) $admin->id,
+        ];
+
+        foreach ([
+            '/ops/content-overview',
+            '/ops/content-workspace',
+            '/ops/content-release',
+        ] as $path) {
+            $this->withSession($session)
+                ->actingAs($admin, (string) config('admin.guard', 'admin'))
+                ->get($path)
+                ->assertRedirectContains('/ops/select-org');
+        }
+    }
+
     public function test_navigation_groups_match_cms_bootstrap_blueprint(): void
     {
         $this->assertSame(__('ops.group.content_overview'), ContentOverviewPage::getNavigationGroup());
@@ -332,6 +360,7 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->assertSame(__('ops.group.content_release'), ContentReleasePage::getNavigationGroup());
         $this->assertSame(__('ops.group.content_control_plane'), ContentPackVersionResource::getNavigationGroup());
         $this->assertSame(__('ops.group.content_control_plane'), ContentPackReleaseResource::getNavigationGroup());
+        $this->assertFalse(Route::has('filament.ops.resources.content-releases.index'));
     }
 
     public function test_article_and_taxonomy_resources_are_scoped_to_selected_org_only(): void

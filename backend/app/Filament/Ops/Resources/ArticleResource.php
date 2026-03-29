@@ -350,6 +350,7 @@ class ArticleResource extends Resource
 
         $record->forceFill([
             'status' => 'published',
+            'is_public' => true,
             'published_at' => $record->published_at ?? now(),
         ])->save();
 

@@ -20,11 +20,6 @@ class CreateCareerGuide extends CreateRecord
     protected array $workspaceRelatedJobsState = [];
 
     /**
-     * @var array<int, array{article_id: int}>
-     */
-    protected array $workspaceRelatedArticlesState = [];
-
-    /**
      * @var array<int, array{personality_profile_id: int}>
      */
     protected array $workspaceRelatedPersonalityProfilesState = [];
@@ -97,10 +92,6 @@ class CreateCareerGuide extends CreateRecord
             is_array($data['workspace_related_jobs'] ?? null) ? $data['workspace_related_jobs'] : [],
             $locale,
         );
-        $this->workspaceRelatedArticlesState = CareerGuideWorkspace::normalizeRelatedArticleRows(
-            is_array($data['workspace_related_articles'] ?? null) ? $data['workspace_related_articles'] : [],
-            $locale,
-        );
         $this->workspaceRelatedPersonalityProfilesState = CareerGuideWorkspace::normalizeRelatedPersonalityRows(
             is_array($data['workspace_related_personality_profiles'] ?? null) ? $data['workspace_related_personality_profiles'] : [],
             $locale,
@@ -109,7 +100,6 @@ class CreateCareerGuide extends CreateRecord
 
         unset(
             $data['workspace_related_jobs'],
-            $data['workspace_related_articles'],
             $data['workspace_related_personality_profiles'],
             $data['workspace_seo'],
         );
@@ -132,7 +122,6 @@ class CreateCareerGuide extends CreateRecord
     protected function afterCreate(): void
     {
         CareerGuideWorkspace::syncRelatedJobs($this->getRecord(), $this->workspaceRelatedJobsState);
-        CareerGuideWorkspace::syncRelatedArticles($this->getRecord(), $this->workspaceRelatedArticlesState);
         CareerGuideWorkspace::syncRelatedPersonalityProfiles($this->getRecord(), $this->workspaceRelatedPersonalityProfilesState);
         CareerGuideWorkspace::syncWorkspaceSeo($this->getRecord(), $this->workspaceSeoState);
         CareerGuideWorkspace::createRevision($this->getRecord(), 'Initial workspace snapshot');

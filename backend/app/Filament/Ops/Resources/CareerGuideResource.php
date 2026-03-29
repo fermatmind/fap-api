@@ -158,28 +158,11 @@ class CareerGuideResource extends Resource
                                             ]),
                                         Forms\Components\Tabs\Tab::make('Related articles')
                                             ->schema([
-                                                Forms\Components\Repeater::make('workspace_related_articles')
+                                                Forms\Components\Placeholder::make('workspace_related_articles_notice')
                                                     ->label('Related articles')
-                                                    ->default([])
-                                                    ->addActionLabel('Add related article')
-                                                    ->helperText('Only global articles in the current guide locale are searchable here.')
-                                                    ->itemLabel(fn (array $state): ?string => CareerGuideWorkspace::articleOptionLabelById($state['article_id'] ?? null))
-                                                    ->reorderableWithButtons()
-                                                    ->collapsible()
-                                                    ->columnSpanFull()
-                                                    ->schema([
-                                                        Forms\Components\Select::make('article_id')
-                                                            ->label('Article')
-                                                            ->required()
-                                                            ->native(false)
-                                                            ->searchable()
-                                                            ->getSearchResultsUsing(fn (string $search, Forms\Get $get, ?CareerGuide $record): array => CareerGuideWorkspace::articleSearchResults(
-                                                                $search,
-                                                                CareerGuideWorkspace::relationLocaleFromGet($get, $record),
-                                                            ))
-                                                            ->getOptionLabelUsing(fn (int|string|null $value): ?string => CareerGuideWorkspace::articleOptionLabelById($value))
-                                                            ->helperText('This replaces the current frontend hardcode with explicit workspace relations.'),
-                                                    ]),
+                                                    ->content(fn (?CareerGuide $record): string => CareerGuideWorkspace::legacyRelatedArticleSummary($record))
+                                                    ->helperText('Article linking remains a legacy global-only runtime surface and is intentionally read-only in the production CMS bootstrap.')
+                                                    ->columnSpanFull(),
                                             ]),
                                         Forms\Components\Tabs\Tab::make('Related personality profiles')
                                             ->schema([
@@ -491,6 +474,7 @@ class CareerGuideResource extends Resource
 
         $record->forceFill([
             'status' => CareerGuide::STATUS_PUBLISHED,
+            'is_public' => true,
             'published_at' => $record->published_at ?? now(),
         ])->save();
 

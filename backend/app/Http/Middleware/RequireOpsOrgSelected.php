@@ -47,6 +47,9 @@ class RequireOpsOrgSelected
      * @var list<string>
      */
     private array $orgScopedPages = [
+        'filament.ops.pages.content-overview',
+        'filament.ops.pages.content-workspace',
+        'filament.ops.pages.content-release',
         'filament.ops.pages.order-lookup',
         'filament.ops.pages.delivery-tools',
         'filament.ops.pages.secure-link',
@@ -62,9 +65,8 @@ class RequireOpsOrgSelected
         'filament.ops.resources.skus.',
         'filament.ops.resources.audit-logs.',
         'filament.ops.resources.admin-approvals.',
-        'filament.ops.resources.content-pack-releases.',
         'filament.ops.resources.content-pack-versions.',
-        'filament.ops.resources.content-releases.',
+        'filament.ops.resources.content-pack-releases.',
     ];
 
     public function handle(Request $request, Closure $next): Response
