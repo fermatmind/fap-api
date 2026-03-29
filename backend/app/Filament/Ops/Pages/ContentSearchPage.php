@@ -6,10 +6,12 @@ namespace App\Filament\Ops\Pages;
 
 use App\Filament\Ops\Support\ContentAccess;
 use App\Services\Audit\AuditLogger;
+use App\Services\Ops\ContentLifecycleService;
 use App\Services\Ops\ContentSearchService;
 use App\Support\OrgContext;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class ContentSearchPage extends Page
 {
@@ -29,6 +31,15 @@ class ContentSearchPage extends Page
 
     public string $typeFilter = 'all';
 
+    public string $lifecycleFilter = 'all';
+
+    public string $staleFilter = 'all';
+
+    public string $bulkAction = ContentLifecycleService::ACTION_ARCHIVE;
+
+    /** @var list<string> */
+    public array $selectedTargets = [];
+
     /** @var list<array<string, mixed>> */
     public array $items = [];
 
@@ -40,13 +51,21 @@ class ContentSearchPage extends Page
         if ($needle === '') {
             $this->items = [];
             $this->elapsedMs = 0;
+            $this->selectedTargets = [];
 
             return;
         }
 
-        $result = $service->search($needle, $this->currentOrgIds(), $this->typeFilter);
+        $result = $service->search(
+            $needle,
+            $this->currentOrgIds(),
+            $this->typeFilter,
+            $this->lifecycleFilter,
+            $this->staleFilter
+        );
         $this->items = $result['items'] ?? [];
         $this->elapsedMs = (int) ($result['elapsed_ms'] ?? 0);
+        $this->selectedTargets = [];
 
         $audit->log(
             request(),
@@ -56,6 +75,8 @@ class ContentSearchPage extends Page
             [
                 'query' => $needle,
                 'type_filter' => $this->typeFilter,
+                'lifecycle_filter' => $this->lifecycleFilter,
+                'stale_filter' => $this->staleFilter,
                 'result_count' => count($this->items),
             ]
         );
@@ -66,6 +87,45 @@ class ContentSearchPage extends Page
                 ->warning()
                 ->send();
         }
+    }
+
+    public function applyBulkAction(ContentLifecycleService $service, AuditLogger $audit): void
+    {
+        if (! ContentAccess::canRelease()) {
+            throw new AuthorizationException('You do not have permission to manage content lifecycle actions.');
+        }
+
+        $targets = array_values(array_filter($this->selectedTargets, static fn (mixed $value): bool => is_string($value) && trim($value) !== ''));
+        if ($targets === []) {
+            Notification::make()
+                ->title('Select at least one editorial record')
+                ->warning()
+                ->send();
+
+            return;
+        }
+
+        $result = $service->applyBulk($this->bulkAction, $targets, $this->currentOrgIds());
+
+        $audit->log(
+            request(),
+            'content_lifecycle_batch',
+            'content_lifecycle_batch',
+            null,
+            [
+                'action' => $this->bulkAction,
+                'processed_count' => (int) ($result['processed_count'] ?? 0),
+                'targets' => $targets,
+            ]
+        );
+
+        Notification::make()
+            ->title('Lifecycle action applied')
+            ->body((string) ($result['processed_count'] ?? 0).' record(s) updated.')
+            ->success()
+            ->send();
+
+        $this->runSearch(app(ContentSearchService::class), $audit);
     }
 
     public static function getNavigationGroup(): ?string

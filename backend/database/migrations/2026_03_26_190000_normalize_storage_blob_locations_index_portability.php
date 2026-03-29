@@ -37,16 +37,14 @@ return new class extends Migration
             });
         }
 
-        Schema::table(self::TABLE, function (Blueprint $table): void {
-            $table->string('disk', 32)
-                ->charset('ascii')
-                ->collation('ascii_bin')
-                ->change();
-            $table->string('storage_path', 1024)
-                ->charset('ascii')
-                ->collation('ascii_bin')
-                ->change();
-        });
+        DB::statement(sprintf(
+            'ALTER TABLE `%s` MODIFY `disk` VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin NOT NULL',
+            self::TABLE
+        ));
+        DB::statement(sprintf(
+            'ALTER TABLE `%s` MODIFY `storage_path` VARCHAR(1024) CHARACTER SET ascii COLLATE ascii_bin NOT NULL',
+            self::TABLE
+        ));
 
         if (! SchemaIndex::indexExists(self::TABLE, self::UNIQUE_INDEX)) {
             Schema::table(self::TABLE, function (Blueprint $table): void {

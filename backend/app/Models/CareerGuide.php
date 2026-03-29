@@ -38,6 +38,10 @@ class CareerGuide extends Model
         'body_html',
         'related_industry_slugs_json',
         'status',
+        'lifecycle_state',
+        'lifecycle_changed_at',
+        'lifecycle_changed_by_admin_user_id',
+        'lifecycle_note',
         'is_public',
         'is_indexable',
         'sort_order',
@@ -48,9 +52,11 @@ class CareerGuide extends Model
 
     protected $casts = [
         'org_id' => 'integer',
+        'lifecycle_changed_by_admin_user_id' => 'integer',
         'related_industry_slugs_json' => 'array',
         'is_public' => 'boolean',
         'is_indexable' => 'boolean',
+        'lifecycle_changed_at' => 'datetime',
         'sort_order' => 'integer',
         'published_at' => 'datetime',
         'scheduled_at' => 'datetime',
