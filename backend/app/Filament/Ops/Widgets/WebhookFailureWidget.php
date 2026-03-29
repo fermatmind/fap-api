@@ -13,7 +13,7 @@ class WebhookFailureWidget extends BaseWidget
 {
     protected function getHeading(): ?string
     {
-        return __('ops.widgets.webhook_risk');
+        return 'Webhook Risk';
     }
 
     protected function getStats(): array

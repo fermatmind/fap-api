@@ -34,11 +34,9 @@
     };
 @endphp
 
-<div class="ops-topbar-context hidden lg:flex">
-    <span class="ops-topbar-context__eyebrow">{{ $sectionLabel }}</span>
-
-    <div class="ops-topbar-context__body">
-        <span class="ops-topbar-context__title">Fermat Ops</span>
-        <span class="ops-topbar-context__meta">Operations shell</span>
-    </div>
-</div>
+<x-filament-ops::ops-context-bar
+    class="hidden lg:flex"
+    :eyebrow="$sectionLabel"
+    meta="Operations shell"
+    title="Fermat Ops"
+/>

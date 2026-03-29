@@ -1,14 +1,14 @@
 <x-filament-panels::page>
     <div class="ops-shell-page ops-select-org-page space-y-6">
         @if (session()->has('ops_org_required_message'))
-            <x-filament::section>
+            <x-filament-ops::ops-section>
                 <p class="ops-shell-callout ops-shell-callout--warning">
                     {{ (string) session('ops_org_required_message') }}
                 </p>
-            </x-filament::section>
+            </x-filament-ops::ops-section>
         @endif
 
-        <x-filament::section>
+        <x-filament-ops::ops-section>
             <div class="ops-select-org-shell">
                 <div class="ops-select-org-shell__hero">
                     <div class="ops-shell-inline-intro">
@@ -46,8 +46,8 @@
                     </div>
                 </div>
 
-                <div class="ops-workbench-toolbar ops-workbench-toolbar--split ops-select-org-toolbar">
-                    <div class="ops-workbench-toolbar__main md:col-span-2">
+                <x-filament-ops::ops-toolbar class="ops-select-org-toolbar">
+                    <div class="md:col-span-2">
                         <div class="ops-control-stack">
                             <label class="ops-control-label" for="ops-org-search">Search organizations</label>
                             <input
@@ -60,50 +60,46 @@
                             <p class="ops-control-hint">Search the current admin-visible organization list by name or exact org id.</p>
                         </div>
                     </div>
-                    <div class="ops-workbench-toolbar__actions ops-select-org-actions">
-                        @if ($this->canCreateOrganization())
-                            <x-filament::button color="primary" wire:click="createOrganization">
-                                Create Organization
+
+                    <x-slot name="actions">
+                        <div class="ops-select-org-actions">
+                            @if ($this->canCreateOrganization())
+                                <x-filament::button color="primary" wire:click="createOrganization">
+                                    Create Organization
+                                </x-filament::button>
+                            @endif
+                            <x-filament::button color="gray" wire:click="goToImport">
+                                Import/Sync Organizations
                             </x-filament::button>
-                        @endif
-                        <x-filament::button color="gray" wire:click="goToImport">
-                            Import/Sync Organizations
-                        </x-filament::button>
-                    </div>
-                </div>
+                        </div>
+                    </x-slot>
+                </x-filament-ops::ops-toolbar>
             </div>
-        </x-filament::section>
+        </x-filament-ops::ops-section>
 
-        <x-filament::section>
-            <div class="ops-results-header">
-                <div>
-                    <h3 class="ops-results-header__title">Organizations</h3>
-                    <p class="ops-results-header__meta">
-                        {{ $this->visibleOrganizationsCount() }} workspace{{ $this->visibleOrganizationsCount() === 1 ? '' : 's' }} visible.
-                        Select one to continue inside the current Fermat Ops shell.
-                    </p>
-                </div>
-
-                @if ($returnTo !== '')
+        <x-filament-ops::ops-section
+            title="Organizations"
+            :description="$this->visibleOrganizationsCount().' workspace'.($this->visibleOrganizationsCount() === 1 ? '' : 's').' visible. Select one to continue inside the current Fermat Ops shell.'"
+        >
+            @if ($returnTo !== '')
+                <x-slot name="actions">
                     <div class="ops-select-org-return">
                         <span class="ops-select-org-return__label">Return to</span>
                         <span class="ops-select-org-return__value">{{ $returnTo }}</span>
                     </div>
-                @endif
-            </div>
+                </x-slot>
+            @endif
 
             @forelse ($organizations as $organization)
-                <div class="ops-result-card ops-select-org-card">
-                    <div class="ops-select-org-card__header">
-                        <div class="ops-select-org-row__primary">
-                            <p class="ops-result-card__title">{{ $organization['name'] }}</p>
-                            <p class="ops-result-card__meta">org id: {{ $organization['id'] }}</p>
-                        </div>
-
+                <x-filament-ops::ops-result-card class="ops-select-org-card">
+                    <x-slot name="actions">
                         <x-filament::button color="primary" wire:click="selectOrg({{ $organization['id'] }})">
                             Select
                         </x-filament::button>
-                    </div>
+                    </x-slot>
+
+                    <p class="ops-result-card__title">{{ $organization['name'] }}</p>
+                    <p class="ops-result-card__meta">org id: {{ $organization['id'] }}</p>
 
                     <div class="ops-select-org-card__facts">
                         <div>
@@ -123,9 +119,9 @@
                             <p class="ops-select-org-row__value">{{ $organization['updated_at'] !== '' ? $organization['updated_at'] : '-' }}</p>
                         </div>
                     </div>
-                </div>
+                </x-filament-ops::ops-result-card>
             @empty
-                <x-filament.ops.shared.empty-state
+                <x-filament-ops::ops-empty-state
                     class="ops-select-org-empty"
                     eyebrow="Organization scope"
                     icon="heroicon-o-building-office-2"
@@ -142,8 +138,8 @@
                             Import/Sync Organizations
                         </x-filament::button>
                     </x-slot>
-                </x-filament.ops.shared.empty-state>
+                </x-filament-ops::ops-empty-state>
             @endforelse
-        </x-filament::section>
+        </x-filament-ops::ops-section>
     </div>
 </x-filament-panels::page>

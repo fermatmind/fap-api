@@ -5,25 +5,24 @@ namespace App\Filament\Ops\Widgets;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class HealthzStatusWidget extends BaseWidget
 {
     protected function getHeading(): ?string
     {
-        return __('ops.widgets.healthz_status');
+        return 'Service Health';
     }
 
     protected function getStats(): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('ops_healthz_snapshots')) {
+        if (! \App\Support\SchemaBaseline::hasTable('ops_healthz_snapshots')) {
             return [
                 Stat::make(__('ops.widgets.healthz'), __('ops.widgets.no_data'))->color('gray'),
             ];
         }
 
         $row = DB::table('ops_healthz_snapshots')->orderByDesc('created_at')->first();
-        if (!$row) {
+        if (! $row) {
             return [
                 Stat::make(__('ops.widgets.healthz'), __('ops.widgets.no_data'))->color('gray'),
             ];
@@ -42,7 +41,7 @@ class HealthzStatusWidget extends BaseWidget
         foreach ($deps as $dep) {
             if (is_array($dep)) {
                 $depOk = (bool) ($dep['ok'] ?? true);
-                if (!$depOk) {
+                if (! $depOk) {
                     $failedDeps++;
                 }
             }

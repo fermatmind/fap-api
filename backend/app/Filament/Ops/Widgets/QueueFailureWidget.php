@@ -13,7 +13,7 @@ class QueueFailureWidget extends BaseWidget
 {
     protected function getHeading(): ?string
     {
-        return __('ops.widgets.stability_risk');
+        return 'Queue & Approval Risk';
     }
 
     protected function getStats(): array

@@ -5,13 +5,12 @@ namespace App\Filament\Ops\Widgets;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class FunnelWidget extends BaseWidget
 {
     protected function getHeading(): ?string
     {
-        return __('ops.widgets.funnel_7d');
+        return '7-Day Funnel';
     }
 
     protected function getStats(): array

@@ -163,7 +163,7 @@ final class SelectOrgFlowTest extends TestCase
             ->get(route('filament.ops.pages.organizations-import'))
             ->assertOk()
             ->assertSee((new OrganizationsImportPage)->getNavigationLabel())
-            ->assertSee('runbook-driven import')
+            ->assertSee('Runbook-driven import only')
             ->assertSee('Back to Select Org');
     }
 
