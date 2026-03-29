@@ -17,8 +17,8 @@ class CommerceOrderIdempotencyTest extends TestCase
     {
         DB::table('users')->insert([
             'id' => $userId,
-            'name' => 'Commerce User ' . $userId,
-            'email' => 'commerce_' . $userId . '@example.com',
+            'name' => 'Commerce User '.$userId,
+            'email' => 'commerce_'.$userId.'@example.com',
             'password' => 'secret',
             'created_at' => now(),
             'updated_at' => now(),
@@ -26,7 +26,7 @@ class CommerceOrderIdempotencyTest extends TestCase
 
         DB::table('organizations')->insert([
             'id' => $orgId,
-            'name' => 'Commerce Org ' . $orgId,
+            'name' => 'Commerce Org '.$orgId,
             'owner_user_id' => $userId,
             'created_at' => now(),
             'updated_at' => now(),
@@ -41,11 +41,11 @@ class CommerceOrderIdempotencyTest extends TestCase
             'updated_at' => now(),
         ]);
 
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),
-            'anon_id' => 'anon_' . $userId,
+            'anon_id' => 'anon_'.$userId,
             'user_id' => $userId,
             'expires_at' => now()->addDays(1),
             'created_at' => now(),
@@ -57,8 +57,8 @@ class CommerceOrderIdempotencyTest extends TestCase
 
     public function test_order_create_idempotent(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         [$orgId, $userId, $token] = $this->seedOrgWithToken(9101, 9101);
 
@@ -72,7 +72,7 @@ class CommerceOrderIdempotencyTest extends TestCase
 
         $first = $this->postJson('/api/v0.3/orders', $payload, [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
             'Idempotency-Key' => $idempotencyKey,
         ]);
         $first->assertStatus(200);
@@ -82,7 +82,7 @@ class CommerceOrderIdempotencyTest extends TestCase
 
         $second = $this->postJson('/api/v0.3/orders', $payload, [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
             'Idempotency-Key' => $idempotencyKey,
         ]);
         $second->assertStatus(200);
@@ -101,8 +101,8 @@ class CommerceOrderIdempotencyTest extends TestCase
 
     public function test_order_create_idempotency_key_scoped_by_provider(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         [$orgId, $userId, $token] = $this->seedOrgWithToken(9102, 9102);
         $this->assertIsInt($userId);
@@ -115,7 +115,7 @@ class CommerceOrderIdempotencyTest extends TestCase
 
         $stripeResp = $this->postJson('/api/v0.3/orders/stripe', $payload, [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
             'Idempotency-Key' => $idempotencyKey,
         ]);
         $stripeResp->assertStatus(200);
@@ -124,7 +124,7 @@ class CommerceOrderIdempotencyTest extends TestCase
 
         $billingResp = $this->postJson('/api/v0.3/orders/billing', $payload, [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
             'Idempotency-Key' => $idempotencyKey,
         ]);
         $billingResp->assertStatus(200);
@@ -134,7 +134,7 @@ class CommerceOrderIdempotencyTest extends TestCase
 
         $billingSecondResp = $this->postJson('/api/v0.3/orders/billing', $payload, [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
             'Idempotency-Key' => $idempotencyKey,
         ]);
         $billingSecondResp->assertStatus(200);
@@ -160,8 +160,8 @@ class CommerceOrderIdempotencyTest extends TestCase
 
     public function test_order_without_provider_uses_region_primary_provider(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         [$orgId, $userId, $token] = $this->seedOrgWithToken(9103, 9103);
         $this->assertIsInt($userId);
@@ -171,7 +171,7 @@ class CommerceOrderIdempotencyTest extends TestCase
             'quantity' => 1,
         ], [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
 
         $response->assertStatus(200);
@@ -182,7 +182,7 @@ class CommerceOrderIdempotencyTest extends TestCase
 
     public function test_cross_org_order_lookup_returns_404(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
 
         [$orgA, $userA, $tokenA] = $this->seedOrgWithToken(9201, 9201);
         [$orgB, $userB, $tokenB] = $this->seedOrgWithToken(9202, 9202);
@@ -193,7 +193,7 @@ class CommerceOrderIdempotencyTest extends TestCase
             'order_no' => $orderNo,
             'org_id' => $orgA,
             'user_id' => (string) $userA,
-            'anon_id' => 'anon_' . $userA,
+            'anon_id' => 'anon_'.$userA,
             'sku' => 'MBTI_CREDIT',
             'quantity' => 1,
             'target_attempt_id' => null,
@@ -216,9 +216,9 @@ class CommerceOrderIdempotencyTest extends TestCase
             'refunded_at' => null,
         ]);
 
-        $res = $this->getJson('/api/v0.3/orders/' . $orderNo, [
+        $res = $this->getJson('/api/v0.3/orders/'.$orderNo, [
             'X-Org-Id' => (string) $orgB,
-            'Authorization' => 'Bearer ' . $tokenB,
+            'Authorization' => 'Bearer '.$tokenB,
         ]);
 
         $res->assertStatus(404);
@@ -230,8 +230,8 @@ class CommerceOrderIdempotencyTest extends TestCase
 
     public function test_stub_order_entrypoints_are_rejected(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         [$orgId, $userId, $token] = $this->seedOrgWithToken(9301, 9301);
         $this->assertIsInt($userId);
@@ -245,7 +245,7 @@ class CommerceOrderIdempotencyTest extends TestCase
 
         $bodyProvider = $this->postJson('/api/v0.3/orders', $payload, [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
 
         $routeProvider = $this->postJson('/api/v0.3/orders/stub', [
@@ -253,7 +253,7 @@ class CommerceOrderIdempotencyTest extends TestCase
             'quantity' => 1,
         ], [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
 
         if ($stubEnabled) {

@@ -21,8 +21,8 @@ final class ClinicalCombo68WebhookIdempotencyTest extends TestCase
 
     public function test_webhook_replay_is_idempotent_for_clinical_unlock(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $anonId = 'anon_cc68_webhook';
         $attemptId = $this->createClinicalAttemptWithResult($anonId);
@@ -59,8 +59,8 @@ final class ClinicalCombo68WebhookIdempotencyTest extends TestCase
 
     public function test_owner_mismatch_attempt_is_not_unlocked(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $attemptId = $this->createClinicalAttemptWithResult('anon_attempt_owner');
         $orderNo = 'ord_cc68_owner_mismatch_1';

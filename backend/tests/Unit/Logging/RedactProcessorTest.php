@@ -13,7 +13,7 @@ final class RedactProcessorTest extends TestCase
 {
     public function test_redacts_sensitive_keys_recursively_in_context_and_extra(): void
     {
-        $processor = new RedactProcessor();
+        $processor = new RedactProcessor;
 
         $record = [
             'message' => 'demo',
@@ -51,7 +51,7 @@ final class RedactProcessorTest extends TestCase
 
     public function test_key_matching_is_case_insensitive(): void
     {
-        $processor = new RedactProcessor();
+        $processor = new RedactProcessor;
 
         $record = [
             'context' => [
@@ -72,7 +72,7 @@ final class RedactProcessorTest extends TestCase
 
     public function test_non_sensitive_fields_remain_unchanged(): void
     {
-        $processor = new RedactProcessor();
+        $processor = new RedactProcessor;
 
         $record = [
             'context' => [
@@ -94,7 +94,7 @@ final class RedactProcessorTest extends TestCase
 
     public function test_redacts_sensitive_keys_for_monolog_log_record(): void
     {
-        $processor = new RedactProcessor();
+        $processor = new RedactProcessor;
 
         $record = new LogRecord(
             datetime: new \DateTimeImmutable('2026-02-08T00:00:00+00:00'),

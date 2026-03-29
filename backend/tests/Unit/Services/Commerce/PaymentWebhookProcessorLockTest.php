@@ -49,7 +49,7 @@ final class PaymentWebhookProcessorLockTest extends TestCase
             Mockery::mock(BenefitWalletService::class),
             Mockery::mock(EntitlementManager::class),
             Mockery::mock(ReportSnapshotStore::class),
-            new EventRecorder(new ExperimentAssigner()),
+            new EventRecorder(new ExperimentAssigner),
         );
 
         $result = $processor->handle('billing', [

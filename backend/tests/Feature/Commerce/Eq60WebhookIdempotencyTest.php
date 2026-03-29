@@ -24,8 +24,8 @@ final class Eq60WebhookIdempotencyTest extends TestCase
     public function test_webhook_replay_is_idempotent_for_eq_unlock(): void
     {
         $this->artisan('content:compile --pack=EQ_60 --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $anonId = 'anon_eq_webhook';
         $attemptId = $this->createEqAttemptWithResult($anonId);
@@ -62,8 +62,8 @@ final class Eq60WebhookIdempotencyTest extends TestCase
 
     public function test_scale_mismatch_attempt_is_not_unlocked_for_eq_sku(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $attemptId = $this->createMbtiAttempt('anon_eq_order_mismatch');
         $orderNo = 'ord_eq_scale_mismatch_1';

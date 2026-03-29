@@ -29,7 +29,7 @@ class BillingWebhookMisconfiguredSecretTest extends TestCase
             'provider_event_id' => 'evt_pr57_missing_secret',
             'order_no' => 'ord_pr57_missing_secret',
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        if (!is_string($raw)) {
+        if (! is_string($raw)) {
             self::fail('json_encode payload failed.');
         }
 

@@ -17,7 +17,7 @@ final class BigFiveQuestionsMinReadPathTest extends TestCase
     public function test_big5_questions_endpoint_uses_min_compiled_payload_when_full_questions_file_is_missing(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         /** @var BigFivePackLoader $loader */
         $loader = app(BigFivePackLoader::class);

@@ -16,14 +16,14 @@ use Tests\TestCase;
 
 final class ClinicalComboReportPaywallTest extends TestCase
 {
-    use RefreshDatabase;
     use BuildsClinicalComboScorerInput;
+    use RefreshDatabase;
 
     public function test_locked_report_does_not_leak_paid_blocks(): void
     {
         $this->artisan('content:compile --pack=CLINICAL_COMBO_68 --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $attemptId = $this->createAttemptWithResult('zh-CN', false);
 

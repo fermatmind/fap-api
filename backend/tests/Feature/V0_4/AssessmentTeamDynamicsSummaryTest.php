@@ -17,7 +17,7 @@ final class AssessmentTeamDynamicsSummaryTest extends TestCase
 
     public function test_mbti_assessment_summary_exposes_team_dynamics_v1(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $adminId = $this->createUser('team-dynamics-admin@test.local');
         $orgId = $this->createOrg($adminId, 'Team Dynamics Org');
@@ -59,7 +59,7 @@ final class AssessmentTeamDynamicsSummaryTest extends TestCase
 
     public function test_summary_team_dynamics_respects_org_boundary(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $ownerId = $this->createUser('owner@test.local');
         $orgId = $this->createOrg($ownerId, 'Primary Org');

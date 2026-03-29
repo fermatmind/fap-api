@@ -15,7 +15,7 @@ final class BigFiveQuestionsLocaleSplitTest extends TestCase
     public function test_big5_questions_are_split_by_locale(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $zh = $this->getJson('/api/v0.3/scales/BIG5_OCEAN/questions?locale=zh-CN');
         $zh->assertStatus(200);
@@ -30,4 +30,3 @@ final class BigFiveQuestionsLocaleSplitTest extends TestCase
         $en->assertJsonPath('questions.items.0.text', 'I tend to worry a lot.');
     }
 }
-

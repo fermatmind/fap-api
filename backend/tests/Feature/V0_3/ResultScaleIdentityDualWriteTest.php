@@ -36,8 +36,8 @@ class ResultScaleIdentityDualWriteTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr16IqRavenDemoSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr16IqRavenDemoSeeder)->run();
     }
 
     public function test_submit_dual_write_persists_result_identity_columns_for_v2_input(): void
@@ -121,4 +121,3 @@ class ResultScaleIdentityDualWriteTest extends TestCase
         $this->assertNull($row->scale_uid);
     }
 }
-

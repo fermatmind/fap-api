@@ -18,7 +18,7 @@ final class ManifestContractCheckTest extends TestCase
     {
         parent::setUp();
 
-        $this->workDir = storage_path('framework/testing/selfcheck_manifest_' . uniqid('', true));
+        $this->workDir = storage_path('framework/testing/selfcheck_manifest_'.uniqid('', true));
         File::ensureDirectoryExists($this->workDir);
 
         $manifest = [
@@ -34,7 +34,7 @@ final class ManifestContractCheckTest extends TestCase
             'fallback' => [],
         ];
 
-        file_put_contents($this->workDir . '/manifest.json', json_encode($manifest, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        file_put_contents($this->workDir.'/manifest.json', json_encode($manifest, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
 
     protected function tearDown(): void
@@ -45,14 +45,14 @@ final class ManifestContractCheckTest extends TestCase
 
     public function test_manifest_contract_check_passes_for_minimal_valid_manifest(): void
     {
-        $manifestPath = $this->workDir . '/manifest.json';
+        $manifestPath = $this->workDir.'/manifest.json';
         $manifest = json_decode((string) file_get_contents($manifestPath), true);
 
         $ctx = SelfCheckContext::fromCommandOptions(['path' => $manifestPath]);
         $ctx->withManifestPath($manifestPath)->withManifest(is_array($manifest) ? $manifest : []);
 
-        $check = new ManifestContractCheck();
-        $io = new SelfCheckIo();
+        $check = new ManifestContractCheck;
+        $io = new SelfCheckIo;
 
         $result = $check->run($ctx, $io);
 

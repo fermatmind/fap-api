@@ -229,7 +229,7 @@ final class MbtiReadPathParityContractTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
     }
 
     private function createMbtiAttemptWithResult(string $anonId): string
@@ -322,7 +322,7 @@ final class MbtiReadPathParityContractTest extends TestCase
 
     private function invokeController(string $method, string $attemptId, string $anonId): \Illuminate\Http\JsonResponse
     {
-        $path = "/api/v0.3/attempts/{$attemptId}/" . ($method === 'report' ? 'report' : 'result');
+        $path = "/api/v0.3/attempts/{$attemptId}/".($method === 'report' ? 'report' : 'result');
         $request = Request::create($path, 'GET');
         $request->headers->set('X-Anon-Id', $anonId);
         $request->attributes->set('anon_id', $anonId);

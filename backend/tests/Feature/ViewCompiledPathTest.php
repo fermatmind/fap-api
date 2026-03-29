@@ -10,6 +10,6 @@ class ViewCompiledPathTest extends TestCase
     {
         $path = (string) config('view.compiled');
         $this->assertNotSame('', $path);
-        $this->assertTrue(is_dir($path), 'view.compiled directory missing: ' . $path);
+        $this->assertTrue(is_dir($path), 'view.compiled directory missing: '.$path);
     }
 }

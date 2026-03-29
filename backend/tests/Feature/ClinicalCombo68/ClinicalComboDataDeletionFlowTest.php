@@ -123,4 +123,3 @@ final class ClinicalComboDataDeletionFlowTest extends TestCase
         return [$attemptId, $token, $anonId];
     }
 }
-

@@ -16,7 +16,7 @@ final class QuestionsNo500FallbackTest extends TestCase
     public function test_questions_endpoint_does_not_500_when_legacy_registry_is_unavailable(): void
     {
         $this->artisan('migrate', ['--force' => true]);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         Schema::dropIfExists('scales_registry');
 

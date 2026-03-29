@@ -18,7 +18,7 @@ final class BigFiveValidityItemsTest extends TestCase
     public function test_big5_questions_include_validity_items_meta(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $response = $this->getJson('/api/v0.3/scales/BIG5_OCEAN/questions?locale=zh-CN');
         $response->assertStatus(200);
@@ -33,7 +33,7 @@ final class BigFiveValidityItemsTest extends TestCase
     public function test_attention_check_failed_adds_flag_and_downgrades_quality(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
         $this->artisan('norms:import --scale=BIG5_OCEAN --csv=resources/norms/big5/big5_norm_stats_seed.csv --activate=1')
             ->assertExitCode(0);
 
@@ -63,7 +63,7 @@ final class BigFiveValidityItemsTest extends TestCase
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $answers,
@@ -91,7 +91,7 @@ final class BigFiveValidityItemsTest extends TestCase
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),

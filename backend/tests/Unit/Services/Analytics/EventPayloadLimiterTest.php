@@ -16,7 +16,7 @@ final class EventPayloadLimiterTest extends TestCase
         config()->set('fap.events.max_list_length', 50);
         config()->set('fap.events.max_string_length', 5);
 
-        $limiter = new EventPayloadLimiter();
+        $limiter = new EventPayloadLimiter;
         $limited = $limiter->limit([
             'title' => 'abcdefgh',
             'nested' => [
@@ -35,7 +35,7 @@ final class EventPayloadLimiterTest extends TestCase
         config()->set('fap.events.max_list_length', 2);
         config()->set('fap.events.max_string_length', 2048);
 
-        $limiter = new EventPayloadLimiter();
+        $limiter = new EventPayloadLimiter;
         $limited = $limiter->limit([
             'a' => 1,
             'b' => [
@@ -55,7 +55,7 @@ final class EventPayloadLimiterTest extends TestCase
         config()->set('fap.events.max_list_length', 50);
         config()->set('fap.events.max_string_length', 2048);
 
-        $limiter = new EventPayloadLimiter();
+        $limiter = new EventPayloadLimiter;
         $limited = $limiter->limit([
             'level1' => [
                 'level2' => [

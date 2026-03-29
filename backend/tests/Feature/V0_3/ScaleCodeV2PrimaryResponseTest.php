@@ -36,8 +36,8 @@ final class ScaleCodeV2PrimaryResponseTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr16IqRavenDemoSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr16IqRavenDemoSeeder)->run();
     }
 
     public function test_v03_scale_read_endpoints_return_v2_primary_scale_code_when_mode_is_v2(): void
@@ -119,4 +119,3 @@ final class ScaleCodeV2PrimaryResponseTest extends TestCase
         $result->assertJsonPath('result.scale_code_v2', 'IQ_INTELLIGENCE_QUOTIENT');
     }
 }
-

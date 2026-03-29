@@ -57,7 +57,7 @@ final class Eq60GoldenCasesTest extends TestCase
             $this->assertSame(
                 strtoupper((string) ($case['expected_quality_level'] ?? '')),
                 strtoupper((string) data_get($payload, 'quality.level', '')),
-                'golden case quality level mismatch: ' . $caseId
+                'golden case quality level mismatch: '.$caseId
             );
 
             $expectedFlags = array_values(array_unique(array_map(
@@ -75,7 +75,7 @@ final class Eq60GoldenCasesTest extends TestCase
             $this->assertSame(
                 $expectedFlags,
                 $actualFlags,
-                'golden case quality flags mismatch: ' . $caseId
+                'golden case quality flags mismatch: '.$caseId
             );
 
             $expectedPrimaryProfile = trim((string) ($case['expected_primary_profile'] ?? ''));
@@ -83,7 +83,7 @@ final class Eq60GoldenCasesTest extends TestCase
             $this->assertSame(
                 $expectedPrimaryProfile,
                 $actualPrimaryProfile,
-                'golden case primary profile mismatch: ' . $caseId
+                'golden case primary profile mismatch: '.$caseId
             );
 
             $actualTags = array_values(array_filter(
@@ -95,7 +95,7 @@ final class Eq60GoldenCasesTest extends TestCase
                 if ($tag === '') {
                     continue;
                 }
-                $this->assertContains($tag, $actualTags, 'golden case missing expected report tag: ' . $caseId . ' -> ' . $tag);
+                $this->assertContains($tag, $actualTags, 'golden case missing expected report tag: '.$caseId.' -> '.$tag);
             }
 
             $expectedDimLevels = is_array($case['expected_dim_levels'] ?? null) ? $case['expected_dim_levels'] : [];
@@ -107,8 +107,8 @@ final class Eq60GoldenCasesTest extends TestCase
 
                 $this->assertSame(
                     $expectedLevel,
-                    strtolower((string) data_get($payload, 'scores.' . $dimension . '.level', '')),
-                    'golden case dimension level mismatch: ' . $caseId . ' -> ' . $dimension
+                    strtolower((string) data_get($payload, 'scores.'.$dimension.'.level', '')),
+                    'golden case dimension level mismatch: '.$caseId.' -> '.$dimension
                 );
             }
 
@@ -117,7 +117,7 @@ final class Eq60GoldenCasesTest extends TestCase
                 $this->assertSame(
                     $expectedGlobalLevel,
                     strtolower((string) data_get($payload, 'scores.global.level', '')),
-                    'golden case global level mismatch: ' . $caseId
+                    'golden case global level mismatch: '.$caseId
                 );
             }
 
@@ -143,7 +143,7 @@ final class Eq60GoldenCasesTest extends TestCase
                 ReportAccess::VARIANT_FREE,
                 ['modules_allowed' => [ReportAccess::MODULE_EQ_CORE]]
             );
-            $this->assertTrue((bool) ($freeReport['ok'] ?? false), 'golden case free report compose failed: ' . $caseId);
+            $this->assertTrue((bool) ($freeReport['ok'] ?? false), 'golden case free report compose failed: '.$caseId);
 
             $freeKeys = array_values(array_map(
                 static fn (array $section): string => (string) ($section['key'] ?? ''),
@@ -153,7 +153,7 @@ final class Eq60GoldenCasesTest extends TestCase
             $this->assertSame(
                 array_values(array_map('strval', (array) ($case['expected_free_sections'] ?? []))),
                 $freeKeys,
-                'golden case free sections mismatch: ' . $caseId
+                'golden case free sections mismatch: '.$caseId
             );
 
             $fullReport = $composer->composeVariant(
@@ -168,7 +168,7 @@ final class Eq60GoldenCasesTest extends TestCase
                     ],
                 ]
             );
-            $this->assertTrue((bool) ($fullReport['ok'] ?? false), 'golden case full report compose failed: ' . $caseId);
+            $this->assertTrue((bool) ($fullReport['ok'] ?? false), 'golden case full report compose failed: '.$caseId);
 
             $fullKeys = array_values(array_map(
                 static fn (array $section): string => (string) ($section['key'] ?? ''),
@@ -178,13 +178,13 @@ final class Eq60GoldenCasesTest extends TestCase
             $this->assertSame(
                 array_values(array_map('strval', (array) ($case['expected_full_sections'] ?? []))),
                 $fullKeys,
-                'golden case full sections mismatch: ' . $caseId
+                'golden case full sections mismatch: '.$caseId
             );
         }
     }
 
     /**
-     * @param array<string,mixed> $case
+     * @param  array<string,mixed>  $case
      * @return array<int,string>
      */
     private function resolveAnswersMap(array $case): array
@@ -195,7 +195,7 @@ final class Eq60GoldenCasesTest extends TestCase
             foreach ($answersByQid as $qidRaw => $codeRaw) {
                 $qid = (int) $qidRaw;
                 $code = strtoupper(trim((string) $codeRaw));
-                if ($qid < 1 || $qid > 60 || !in_array($code, ['A', 'B', 'C', 'D', 'E'], true)) {
+                if ($qid < 1 || $qid > 60 || ! in_array($code, ['A', 'B', 'C', 'D', 'E'], true)) {
                     continue;
                 }
                 $normalized[$qid] = $code;

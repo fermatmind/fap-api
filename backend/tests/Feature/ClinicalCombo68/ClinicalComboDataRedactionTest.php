@@ -90,4 +90,3 @@ final class ClinicalComboDataRedactionTest extends TestCase
         $this->assertTrue((bool) data_get($meta, 'answers.__redacted__', false));
     }
 }
-

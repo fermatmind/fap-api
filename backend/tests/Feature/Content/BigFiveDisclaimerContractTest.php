@@ -31,7 +31,7 @@ final class BigFiveDisclaimerContractTest extends TestCase
 
         $questionIndex = [];
         foreach ((array) ($questions['question_index'] ?? []) as $qid => $row) {
-            if (!is_array($row)) {
+            if (! is_array($row)) {
                 continue;
             }
             $questionIndex[(int) $qid] = $row;
@@ -101,7 +101,7 @@ final class BigFiveDisclaimerContractTest extends TestCase
     }
 
     /**
-     * @param list<array<string,mixed>> $sections
+     * @param  list<array<string,mixed>>  $sections
      */
     private function assertDisclaimerContract(array $sections): void
     {
@@ -121,7 +121,7 @@ final class BigFiveDisclaimerContractTest extends TestCase
         $this->assertSame(count($keys) - 1, (int) $bottomIndex);
 
         foreach ($sections as $section) {
-            if (!in_array((string) ($section['key'] ?? ''), ['disclaimer_top', 'disclaimer'], true)) {
+            if (! in_array((string) ($section['key'] ?? ''), ['disclaimer_top', 'disclaimer'], true)) {
                 continue;
             }
             $this->assertSame('free', (string) ($section['access_level'] ?? ''));
@@ -129,10 +129,9 @@ final class BigFiveDisclaimerContractTest extends TestCase
                 $this->assertIsArray($block);
                 $title = (string) ($block['title'] ?? '');
                 $body = (string) ($block['body'] ?? '');
-                $this->assertStringNotContainsString('{{', $title . $body);
-                $this->assertStringNotContainsString('}}', $title . $body);
+                $this->assertStringNotContainsString('{{', $title.$body);
+                $this->assertStringNotContainsString('}}', $title.$body);
             }
         }
     }
 }
-

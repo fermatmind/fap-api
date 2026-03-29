@@ -47,7 +47,7 @@ final class WebhookPayloadSizeLimitTest extends TestCase
 
     public function test_normal_webhook_writes_payload_forensics_without_full_payload_json(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
         config([
             'services.stripe.webhook_secret' => 'whsec_payload_limit',
             'services.stripe.webhook_tolerance_seconds' => 300,

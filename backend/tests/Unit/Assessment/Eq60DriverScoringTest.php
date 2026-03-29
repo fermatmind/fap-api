@@ -46,7 +46,7 @@ final class Eq60DriverScoringTest extends TestCase
     }
 
     /**
-     * @param array<int,string> $overrides
+     * @param  array<int,string>  $overrides
      * @return list<array{question_id:string,code:string}>
      */
     private function buildAnswers(string $defaultCode, array $overrides = []): array

@@ -18,7 +18,7 @@ final class NoRuntimeSchemaIntrospectionTest extends TestCase
         $offenders = [];
 
         foreach ($this->appPhpFiles() as $filePath) {
-            $relative = ltrim(str_replace(base_path() . DIRECTORY_SEPARATOR, '', $filePath), DIRECTORY_SEPARATOR);
+            $relative = ltrim(str_replace(base_path().DIRECTORY_SEPARATOR, '', $filePath), DIRECTORY_SEPARATOR);
             if (str_starts_with($relative, 'app/Console/Commands/')) {
                 continue;
             }
@@ -34,7 +34,7 @@ final class NoRuntimeSchemaIntrospectionTest extends TestCase
 
         if ($offenders !== []) {
             sort($offenders);
-            self::fail("Runtime schema introspection is forbidden:\n" . implode("\n", $offenders));
+            self::fail("Runtime schema introspection is forbidden:\n".implode("\n", $offenders));
         }
 
         self::assertTrue(true);
@@ -50,7 +50,7 @@ final class NoRuntimeSchemaIntrospectionTest extends TestCase
 
         /** @var SplFileInfo $file */
         foreach ($iterator as $file) {
-            if (!$file->isFile() || strtolower($file->getExtension()) !== 'php') {
+            if (! $file->isFile() || strtolower($file->getExtension()) !== 'php') {
                 continue;
             }
             $files[] = $file->getPathname();

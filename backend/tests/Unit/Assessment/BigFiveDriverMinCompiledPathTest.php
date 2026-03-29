@@ -17,7 +17,7 @@ final class BigFiveDriverMinCompiledPathTest extends TestCase
 
     public function test_big5_submit_uses_min_compiled_question_index_when_full_compiled_file_is_missing(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
         $this->artisan('norms:import --scale=BIG5_OCEAN --csv=resources/norms/big5/big5_norm_stats_seed.csv --activate=1')
             ->assertExitCode(0);
@@ -56,7 +56,7 @@ final class BigFiveDriverMinCompiledPathTest extends TestCase
         try {
             $submit = $this->withHeaders([
                 'X-Anon-Id' => $anonId,
-                'Authorization' => 'Bearer ' . $token,
+                'Authorization' => 'Bearer '.$token,
             ])->postJson('/api/v0.3/attempts/submit', [
                 'attempt_id' => $attemptId,
                 'answers' => $answers,
@@ -76,7 +76,7 @@ final class BigFiveDriverMinCompiledPathTest extends TestCase
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),
@@ -92,4 +92,3 @@ final class BigFiveDriverMinCompiledPathTest extends TestCase
         return $token;
     }
 }
-

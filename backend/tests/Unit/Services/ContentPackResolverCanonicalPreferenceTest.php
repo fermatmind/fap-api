@@ -22,7 +22,7 @@ final class ContentPackResolverCanonicalPreferenceTest extends TestCase
             'MBTI' => ['MBTI_PERSONALITY_TEST_16_TYPES-CN-v0.3'],
         ]);
 
-        $resolver = new ContentPackResolver();
+        $resolver = new ContentPackResolver;
 
         $canonical = $this->makePayload('MBTI-CN-v0.3', '/tmp/canonical');
         $compat = $this->makePayload('MBTI_PERSONALITY_TEST_16_TYPES-CN-v0.3', '/tmp/compat');
@@ -49,7 +49,7 @@ final class ContentPackResolverCanonicalPreferenceTest extends TestCase
             'MBTI' => ['MBTI_PERSONALITY_TEST_16_TYPES-CN-v0.3'],
         ]);
 
-        $resolver = new ContentPackResolver();
+        $resolver = new ContentPackResolver;
 
         $canonical = $this->makePayload('MBTI-CN-v0.3', '/tmp/canonical');
         $compat = $this->makePayload('MBTI_PERSONALITY_TEST_16_TYPES-CN-v0.3', '/tmp/compat');
@@ -71,14 +71,14 @@ final class ContentPackResolverCanonicalPreferenceTest extends TestCase
 
     public function test_default_pack_id_fallback_uses_canonical_mbti_dir_when_duplicate_pack_ids_exist(): void
     {
-        $root = sys_get_temp_dir() . '/mbti_content_pack_pref_' . uniqid('', true);
-        $canonicalDir = $root . '/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3';
-        $compatDir = $root . '/default/CN_MAINLAND/zh-CN/MBTI_PERSONALITY_TEST_16_TYPES-CN-v0.3';
+        $root = sys_get_temp_dir().'/mbti_content_pack_pref_'.uniqid('', true);
+        $canonicalDir = $root.'/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3';
+        $compatDir = $root.'/default/CN_MAINLAND/zh-CN/MBTI_PERSONALITY_TEST_16_TYPES-CN-v0.3';
 
         File::ensureDirectoryExists($canonicalDir);
         File::ensureDirectoryExists($compatDir);
 
-        file_put_contents($canonicalDir . '/manifest.json', json_encode([
+        file_put_contents($canonicalDir.'/manifest.json', json_encode([
             'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
             'scale_code' => 'MBTI',
             'region' => 'CN_MAINLAND',
@@ -87,7 +87,7 @@ final class ContentPackResolverCanonicalPreferenceTest extends TestCase
             'fallback' => [],
         ], JSON_UNESCAPED_UNICODE));
 
-        file_put_contents($compatDir . '/manifest.json', json_encode([
+        file_put_contents($compatDir.'/manifest.json', json_encode([
             'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
             'scale_code' => 'MBTI',
             'region' => 'CN_MAINLAND',
@@ -109,7 +109,7 @@ final class ContentPackResolverCanonicalPreferenceTest extends TestCase
                 'MBTI' => ['MBTI_PERSONALITY_TEST_16_TYPES-CN-v0.3'],
             ]);
 
-            $resolver = new ContentPackResolver();
+            $resolver = new ContentPackResolver;
             $picked = $resolver->resolve('MBTI', 'UNKNOWN_REGION', 'fr-FR', 'v9.9');
 
             $this->assertSame($canonicalDir, $picked->baseDir);
@@ -155,7 +155,7 @@ final class ContentPackResolverCanonicalPreferenceTest extends TestCase
     }
 
     /**
-     * @param list<array<string,mixed>> $matches
+     * @param  list<array<string,mixed>>  $matches
      */
     private function injectResolverState(ContentPackResolver $resolver, array $matches): void
     {

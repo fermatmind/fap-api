@@ -1,9 +1,10 @@
 <?php
+
 // file: backend/config/content_packs.php
 
-$defaultPacksRoot = realpath(dirname(base_path()) . '/content_packages');
+$defaultPacksRoot = realpath(dirname(base_path()).'/content_packages');
 if ($defaultPacksRoot === false || $defaultPacksRoot === '') {
-    $defaultPacksRoot = dirname(base_path()) . '/content_packages';
+    $defaultPacksRoot = dirname(base_path()).'/content_packages';
 }
 
 return [
@@ -24,7 +25,7 @@ return [
     // - driver=s3：源来自 disk/prefix；实际读取落到 cache_dir（由 PackCache 保证目录存在/更新）
     // - cache_ttl_seconds：到期触发一次 etag 校验与刷新
     'cache_dir' => env('FAP_PACKS_CACHE_DIR', storage_path('app/private/content_packs_cache')),
-    'cache_ttl_seconds' => (int)env('FAP_PACKS_CACHE_TTL_SECONDS', 3600),
+    'cache_ttl_seconds' => (int) env('FAP_PACKS_CACHE_TTL_SECONDS', 3600),
     'loader_cache_store' => env('CONTENT_LOADER_CACHE_STORE', 'array'),
     'loader_cache_ttl_seconds' => (int) env('CONTENT_LOADER_CACHE_TTL_SECONDS', 300),
     'debug_log' => (bool) env('FAP_PACKS_DEBUG_LOG', false),
@@ -62,7 +63,7 @@ return [
         'MO' => ['CN_MAINLAND', 'GLOBAL'],
         'TW' => ['CN_MAINLAND', 'GLOBAL'],
         // 未知 region 默认兜底（最后仍会走 default_region）
-        '*'  => ['GLOBAL'],
+        '*' => ['GLOBAL'],
     ],
 
     // locale 降级（baseLocale）

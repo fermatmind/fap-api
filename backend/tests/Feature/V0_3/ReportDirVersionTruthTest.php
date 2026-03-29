@@ -119,7 +119,7 @@ class ReportDirVersionTruthTest extends TestCase
 
         $manifestPath = (string) ($found['item']['manifest_path'] ?? '');
         $baseDir = $manifestPath !== '' ? dirname($manifestPath) : '';
-        $versionPath = $baseDir !== '' ? $baseDir . DIRECTORY_SEPARATOR . 'version.json' : '';
+        $versionPath = $baseDir !== '' ? $baseDir.DIRECTORY_SEPARATOR.'version.json' : '';
         $this->assertNotSame('', $versionPath);
         $this->assertTrue(File::isFile($versionPath));
 

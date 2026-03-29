@@ -11,7 +11,7 @@ final class ReportOverridesMergerTest extends TestCase
 {
     public function test_merge_respects_bucket_order_and_keeps_src_chain(): void
     {
-        $merger = new ReportOverridesMerger();
+        $merger = new ReportOverridesMerger;
 
         $docs = [
             [
@@ -45,7 +45,7 @@ final class ReportOverridesMergerTest extends TestCase
 
     public function test_apply_keeps_base_report_and_attaches_override_meta(): void
     {
-        $merger = new ReportOverridesMerger();
+        $merger = new ReportOverridesMerger;
 
         $base = ['ok' => true, 'report' => ['foo' => 'bar']];
         $doc = [

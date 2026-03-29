@@ -19,7 +19,7 @@ final class AttemptSubmitRefactorParityTest extends TestCase
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),
@@ -78,14 +78,14 @@ final class AttemptSubmitRefactorParityTest extends TestCase
     }
 
     /**
-     * @param array<int, array{question_id:string,code:string}> $answers
+     * @param  array<int, array{question_id:string,code:string}>  $answers
      * @return array<string,mixed>
      */
     private function submitPayload(string $anonId, string $anonToken, string $attemptId, array $answers): array
     {
         $response = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $anonToken,
+            'Authorization' => 'Bearer '.$anonToken,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $answers,
@@ -99,8 +99,8 @@ final class AttemptSubmitRefactorParityTest extends TestCase
     }
 
     /**
-     * @param array<string,mixed> $first
-     * @param array<string,mixed> $replay
+     * @param  array<string,mixed>  $first
+     * @param  array<string,mixed>  $replay
      */
     private function assertStableContract(array $first, array $replay): void
     {
@@ -130,7 +130,7 @@ final class AttemptSubmitRefactorParityTest extends TestCase
         ];
 
         foreach ($stablePaths as $path) {
-            $this->assertSame(data_get($first, $path), data_get($replay, $path), 'mismatch on path: ' . $path);
+            $this->assertSame(data_get($first, $path), data_get($replay, $path), 'mismatch on path: '.$path);
         }
     }
 
@@ -157,8 +157,8 @@ final class AttemptSubmitRefactorParityTest extends TestCase
 
     public function test_same_digest_replay_keeps_submit_contract_stable(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr17SimpleScoreDemoSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr17SimpleScoreDemoSeeder)->run();
 
         $anonId = 'refactor-parity-anon';
         $anonToken = $this->issueAnonToken($anonId);
@@ -189,8 +189,8 @@ final class AttemptSubmitRefactorParityTest extends TestCase
 
     public function test_different_digest_replay_returns_409_conflict(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr17SimpleScoreDemoSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr17SimpleScoreDemoSeeder)->run();
 
         $anonId = 'refactor-parity-conflict';
         $anonToken = $this->issueAnonToken($anonId);

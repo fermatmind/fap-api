@@ -3,8 +3,6 @@
 namespace Tests\Feature\V0_3;
 
 use App\Jobs\GenerateReportSnapshotJob;
-use App\Models\Attempt;
-use App\Models\Result;
 use App\Services\Report\ReportSnapshotStore;
 use Database\Seeders\Pr17SimpleScoreDemoSeeder;
 use Database\Seeders\Pr19CommerceSeeder;
@@ -23,9 +21,9 @@ class ReportSnapshotB2BTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr17SimpleScoreDemoSeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr17SimpleScoreDemoSeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $row = DB::table('scales_registry')
             ->where('org_id', 0)
@@ -38,7 +36,7 @@ class ReportSnapshotB2BTest extends TestCase
                 $decoded = json_decode($commercial, true);
                 $commercial = is_array($decoded) ? $decoded : null;
             }
-            if (!is_array($commercial)) {
+            if (! is_array($commercial)) {
                 $commercial = [];
             }
 
@@ -91,11 +89,11 @@ class ReportSnapshotB2BTest extends TestCase
             'updated_at' => now(),
         ]);
 
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),
-            'anon_id' => 'anon_' . $userId,
+            'anon_id' => 'anon_'.$userId,
             'user_id' => $userId,
             'expires_at' => now()->addDays(1),
             'created_at' => now(),
@@ -111,7 +109,7 @@ class ReportSnapshotB2BTest extends TestCase
             'scale_code' => 'SIMPLE_SCORE_DEMO',
         ], [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $start->assertStatus(200);
         $attemptId = (string) $start->json('attempt_id');
@@ -130,7 +128,7 @@ class ReportSnapshotB2BTest extends TestCase
             'duration_ms' => 120000,
         ], [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $submit->assertStatus(200);
 
@@ -149,7 +147,7 @@ class ReportSnapshotB2BTest extends TestCase
             'order_no' => $orderNo,
             'org_id' => $orgId,
             'user_id' => (string) $userId,
-            'anon_id' => 'anon_' . $userId,
+            'anon_id' => 'anon_'.$userId,
             'sku' => 'MBTI_CREDIT',
             'quantity' => 1,
             'target_attempt_id' => null,
@@ -182,7 +180,7 @@ class ReportSnapshotB2BTest extends TestCase
 
         $webhook = $this->postSignedBillingWebhook($payload, [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $webhook->assertStatus(200);
         $webhook->assertJson(['ok' => true]);
@@ -212,7 +210,7 @@ class ReportSnapshotB2BTest extends TestCase
             'duration_ms' => 120000,
         ], [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $dupSubmit->assertStatus(200);
         $dupSubmit->assertJson([
@@ -226,7 +224,7 @@ class ReportSnapshotB2BTest extends TestCase
 
         $report = $this->getJson("/api/v0.3/attempts/{$attemptId}/report", [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $report->assertStatus(200);
         $report->assertJson([

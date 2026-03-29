@@ -18,7 +18,7 @@ class PaymentWebhookIdempotencyTest extends TestCase
 
     private function seedCommerce(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
     }
 
     private function createMbtiAttemptWithResult(): string

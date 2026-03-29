@@ -13,7 +13,7 @@ final class MigrationRollbackSafetyTest extends TestCase
     public function create_migrations_with_has_table_guard_must_not_drop_in_down(): void
     {
         foreach ($this->migrationFiles() as $filePath) {
-            if (!str_contains(basename($filePath), 'create_')) {
+            if (! str_contains(basename($filePath), 'create_')) {
                 continue;
             }
 
@@ -44,7 +44,7 @@ final class MigrationRollbackSafetyTest extends TestCase
     {
         $files = glob(base_path('database/migrations/*.php'));
 
-        if (!is_array($files)) {
+        if (! is_array($files)) {
             return [];
         }
 
@@ -60,7 +60,7 @@ final class MigrationRollbackSafetyTest extends TestCase
 
         for ($i = 0; $i < $count; $i++) {
             $token = $tokens[$i];
-            if (!is_array($token) || $token[0] !== T_FUNCTION) {
+            if (! is_array($token) || $token[0] !== T_FUNCTION) {
                 continue;
             }
 
@@ -96,6 +96,7 @@ final class MigrationRollbackSafetyTest extends TestCase
                 if ($text === '{') {
                     $braceDepth++;
                     $body .= $text;
+
                     continue;
                 }
 
@@ -105,6 +106,7 @@ final class MigrationRollbackSafetyTest extends TestCase
                         return $body;
                     }
                     $body .= $text;
+
                     continue;
                 }
 
@@ -118,7 +120,7 @@ final class MigrationRollbackSafetyTest extends TestCase
     }
 
     /**
-     * @param string|array{int, string, int} $token
+     * @param  string|array{int, string, int}  $token
      */
     private function tokenText(string|array $token): string
     {

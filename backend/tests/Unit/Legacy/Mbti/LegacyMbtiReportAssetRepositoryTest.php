@@ -11,22 +11,23 @@ use Tests\TestCase;
 final class LegacyMbtiReportAssetRepositoryTest extends TestCase
 {
     private string $packsRoot;
+
     private string $contentDir;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->packsRoot = storage_path('framework/testing/legacy_mbti_asset_repo_' . uniqid('', true));
+        $this->packsRoot = storage_path('framework/testing/legacy_mbti_asset_repo_'.uniqid('', true));
         File::ensureDirectoryExists($this->packsRoot);
 
         config()->set('content_packs.root', $this->packsRoot);
 
-        $packDir = $this->packsRoot . '/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3';
+        $packDir = $this->packsRoot.'/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3';
         $this->contentDir = 'default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3';
         File::ensureDirectoryExists($packDir);
 
-        file_put_contents($packDir . '/report_cards_traits.json', json_encode([
+        file_put_contents($packDir.'/report_cards_traits.json', json_encode([
             'items' => [
                 [
                     'id' => 'traits_1',
@@ -37,7 +38,7 @@ final class LegacyMbtiReportAssetRepositoryTest extends TestCase
             ],
         ], JSON_UNESCAPED_UNICODE));
 
-        file_put_contents($packDir . '/report_highlights_templates.json', json_encode([
+        file_put_contents($packDir.'/report_highlights_templates.json', json_encode([
             'schema' => 'fap.report.highlights.v1',
             'templates' => [],
             'rules' => [],

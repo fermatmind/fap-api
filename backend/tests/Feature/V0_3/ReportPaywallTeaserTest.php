@@ -38,9 +38,9 @@ class ReportPaywallTeaserTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr17SimpleScoreDemoSeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr17SimpleScoreDemoSeeder)->run();
+        (new Pr19CommerceSeeder)->run();
     }
 
     private function createMbtiAttemptWithResult(): string

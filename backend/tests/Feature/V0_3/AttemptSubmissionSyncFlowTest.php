@@ -35,8 +35,8 @@ class AttemptSubmissionSyncFlowTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr17SimpleScoreDemoSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr17SimpleScoreDemoSeeder)->run();
     }
 
     public function test_sync_legacy_submit_records_succeeded_submission_and_status_endpoint_reads_it(): void

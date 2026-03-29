@@ -15,12 +15,12 @@ use Tests\TestCase;
 
 final class Sds20ReportLocaleTest extends TestCase
 {
-    use RefreshDatabase;
     use BuildsSds20ScorerInput;
+    use RefreshDatabase;
 
     public function test_report_uses_english_locale_copy_when_attempt_locale_is_en(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $attemptId = $this->createAttemptWithResult('en', false, 'anon_sds_en');
 

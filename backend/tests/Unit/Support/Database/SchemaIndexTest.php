@@ -13,13 +13,14 @@ use Tests\TestCase;
 final class SchemaIndexTest extends TestCase
 {
     private string $tableName = 'schema_index_test_rows';
+
     private bool $dropAuditTableAfterTest = false;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        if (!Schema::hasTable('migration_index_audits')) {
+        if (! Schema::hasTable('migration_index_audits')) {
             Schema::create('migration_index_audits', function (Blueprint $table): void {
                 $table->bigIncrements('id');
                 $table->string('migration_name', 191)->nullable();
@@ -88,6 +89,7 @@ final class SchemaIndexTest extends TestCase
             });
         } catch (\Throwable $e) {
             $this->assertTrue(SchemaIndex::isDuplicateIndexException($e, $indexName));
+
             return;
         }
 
@@ -104,6 +106,7 @@ final class SchemaIndexTest extends TestCase
             });
         } catch (\Throwable $e) {
             $this->assertTrue(SchemaIndex::isMissingIndexException($e, $indexName));
+
             return;
         }
 

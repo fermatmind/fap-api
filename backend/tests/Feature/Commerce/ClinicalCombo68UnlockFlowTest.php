@@ -22,8 +22,8 @@ final class ClinicalCombo68UnlockFlowTest extends TestCase
 
     public function test_paid_webhook_unlocks_clinical_combo_full_report(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $anonId = 'anon_cc68_unlock';
         $attemptId = $this->createClinicalAttemptWithResult($anonId);
@@ -163,4 +163,3 @@ final class ClinicalCombo68UnlockFlowTest extends TestCase
         ]);
     }
 }
-

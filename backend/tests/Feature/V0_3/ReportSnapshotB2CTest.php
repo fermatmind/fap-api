@@ -21,8 +21,8 @@ class ReportSnapshotB2CTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
     }
 
     private function seedOrgWithToken(): array
@@ -55,11 +55,11 @@ class ReportSnapshotB2CTest extends TestCase
             'updated_at' => now(),
         ]);
 
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),
-            'anon_id' => 'anon_' . $userId,
+            'anon_id' => 'anon_'.$userId,
             'user_id' => $userId,
             'expires_at' => now()->addDays(1),
             'created_at' => now(),
@@ -169,7 +169,7 @@ class ReportSnapshotB2CTest extends TestCase
             'order_no' => $orderNo,
             'org_id' => $orgId,
             'user_id' => (string) $userId,
-            'anon_id' => 'anon_' . $userId,
+            'anon_id' => 'anon_'.$userId,
             'sku' => 'MBTI_REPORT_FULL',
             'quantity' => 1,
             'target_attempt_id' => $attemptId,
@@ -202,7 +202,7 @@ class ReportSnapshotB2CTest extends TestCase
 
         $webhook = $this->postSignedBillingWebhook($payload, [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $webhook->assertStatus(200);
         $webhook->assertJson(['ok' => true]);
@@ -218,7 +218,7 @@ class ReportSnapshotB2CTest extends TestCase
 
         $report = $this->getJson("/api/v0.3/attempts/{$attemptId}/report", [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $report->assertStatus(200);
         $report->assertJson([
@@ -240,7 +240,7 @@ class ReportSnapshotB2CTest extends TestCase
 
         $reportAfter = $this->getJson("/api/v0.3/attempts/{$attemptId}/report", [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $reportAfter->assertStatus(200);
         $reportAfter->assertJson([

@@ -17,14 +17,14 @@ use Tests\TestCase;
 
 final class Sds20WebhookIdempotencyTest extends TestCase
 {
+    use BuildsSds20ScorerInput;
     use RefreshDatabase;
     use SignedBillingWebhook;
-    use BuildsSds20ScorerInput;
 
     public function test_webhook_replay_is_idempotent_for_sds_unlock(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $anonId = 'anon_sds_webhook';
         $attemptId = $this->createSdsAttemptWithResult($anonId);
@@ -61,8 +61,8 @@ final class Sds20WebhookIdempotencyTest extends TestCase
 
     public function test_scale_mismatch_attempt_is_not_unlocked(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $attemptId = $this->createMbtiAttempt('anon_sds_order_mismatch');
         $orderNo = 'ord_sds_scale_mismatch_1';

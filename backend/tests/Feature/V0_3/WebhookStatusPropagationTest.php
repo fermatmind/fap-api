@@ -13,8 +13,8 @@ use Tests\TestCase;
 
 final class WebhookStatusPropagationTest extends TestCase
 {
-    use RefreshDatabase;
     use MockeryPHPUnitIntegration;
+    use RefreshDatabase;
 
     #[DataProvider('errorStatuses')]
     public function test_controller_uses_processor_status_for_error_responses(int $status): void
@@ -128,7 +128,7 @@ final class WebhookStatusPropagationTest extends TestCase
     private function encodePayload(array $payload): string
     {
         $raw = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        if (!is_string($raw)) {
+        if (! is_string($raw)) {
             self::fail('json_encode payload failed.');
         }
 

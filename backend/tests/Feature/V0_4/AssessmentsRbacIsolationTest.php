@@ -14,7 +14,7 @@ class AssessmentsRbacIsolationTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
     }
 
     private function createUser(string $email): int
@@ -31,6 +31,7 @@ class AssessmentsRbacIsolationTest extends TestCase
     private function issueToken(int $userId): string
     {
         $issued = app(FmTokenService::class)->issueForUser((string) $userId);
+
         return (string) ($issued['token'] ?? '');
     }
 
@@ -81,7 +82,7 @@ class AssessmentsRbacIsolationTest extends TestCase
         $viewerToken = $this->issueToken($viewerId);
 
         $create = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $adminToken,
+            'Authorization' => 'Bearer '.$adminToken,
         ])->postJson("/api/v0.4/orgs/{$orgId}/assessments", [
             'scale_code' => 'MBTI',
             'title' => 'Q1 MBTI',
@@ -93,12 +94,12 @@ class AssessmentsRbacIsolationTest extends TestCase
         $this->assertGreaterThan(0, $assessmentId);
 
         $memberProgress = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $memberToken,
+            'Authorization' => 'Bearer '.$memberToken,
         ])->getJson("/api/v0.4/orgs/{$orgId}/assessments/{$assessmentId}/progress");
         $memberProgress->assertStatus(404);
 
         $viewerSummary = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $viewerToken,
+            'Authorization' => 'Bearer '.$viewerToken,
         ])->getJson("/api/v0.4/orgs/{$orgId}/assessments/{$assessmentId}/summary");
         $viewerSummary->assertStatus(404);
 
@@ -110,7 +111,7 @@ class AssessmentsRbacIsolationTest extends TestCase
         ]);
 
         $cross = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $adminToken,
+            'Authorization' => 'Bearer '.$adminToken,
         ])->getJson("/api/v0.4/orgs/{$otherOrgId}/assessments/{$assessmentId}/progress");
         $cross->assertStatus(404);
     }

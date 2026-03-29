@@ -46,7 +46,7 @@ final class Big5RebuildFilterValidityTest extends TestCase
     }
 
     /**
-     * @param list<string> $flags
+     * @param  list<string>  $flags
      */
     private function insertAttemptResult(
         string $anonId,

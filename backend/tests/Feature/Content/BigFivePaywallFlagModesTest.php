@@ -108,8 +108,8 @@ final class BigFivePaywallFlagModesTest extends TestCase
 
     private function seedBigFiveWithPaywallMode(string $mode): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $row = DB::table('scales_registry')->where('org_id', 0)->where('code', 'BIG5_OCEAN')->first();
         $caps = [];

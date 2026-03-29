@@ -11,7 +11,7 @@ final class AnswerSurfaceContractServiceTest extends TestCase
 {
     public function test_it_builds_a_backend_owned_answer_surface_contract(): void
     {
-        $service = new AnswerSurfaceContractService();
+        $service = new AnswerSurfaceContractService;
 
         $contract = $service->build([
             'answer_scope' => 'public_indexable_detail',
@@ -73,7 +73,7 @@ final class AnswerSurfaceContractServiceTest extends TestCase
 
     public function test_it_defaults_share_safe_answer_surfaces_to_noindex(): void
     {
-        $service = new AnswerSurfaceContractService();
+        $service = new AnswerSurfaceContractService;
 
         $contract = $service->build([
             'answer_scope' => 'public_share_safe',

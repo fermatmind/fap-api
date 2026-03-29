@@ -21,7 +21,7 @@ final class Eq60HistoryListTest extends TestCase
     public function test_me_attempts_eq60_returns_history_items(): void
     {
         $this->artisan('content:compile --pack=EQ_60 --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $userId = 9601;
         $anonId = 'anon_eq_history';
@@ -147,4 +147,3 @@ final class Eq60HistoryListTest extends TestCase
         return $token;
     }
 }
-

@@ -126,4 +126,3 @@ final class Big5NormsRebuildDedupTest extends TestCase
         ];
     }
 }
-

@@ -35,7 +35,7 @@ final class Big5RetakeCooldownTest extends TestCase
 
     public function test_big5_retake_cooldown_blocks_recent_restart(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $anonId = 'anon_big5_cooldown';
         $this->createAttempt($anonId, now()->subHours(1));
@@ -53,7 +53,7 @@ final class Big5RetakeCooldownTest extends TestCase
 
     public function test_big5_retake_limit_blocks_when_max_attempts_reached_in_30_days(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $anonId = 'anon_big5_retake_limit';
         $this->createAttempt($anonId, now()->subDays(2));
@@ -73,7 +73,7 @@ final class Big5RetakeCooldownTest extends TestCase
 
     public function test_big5_retake_policy_reads_mapped_raw_policy_when_content_path_mode_is_v2(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         config()->set('scale_identity.content_path_mode', 'v2');
         DB::table('content_path_aliases')->updateOrInsert(

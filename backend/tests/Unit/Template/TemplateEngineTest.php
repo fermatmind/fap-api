@@ -13,7 +13,7 @@ final class TemplateEngineTest extends TestCase
 {
     private function engine(): TemplateEngine
     {
-        return new TemplateEngine(new TemplateVariableRegistry());
+        return new TemplateEngine(new TemplateVariableRegistry);
     }
 
     public function test_unknown_variable_is_rejected(): void

@@ -62,14 +62,14 @@ return [
         // content_packages 里的三个资产文件名（与你创建的文件一致）
         'assets' => [
             'policy' => env('REPORT_HIGHLIGHTS_POLICY_FILE', 'report_highlights_policy.json'),
-            'pools'  => env('REPORT_HIGHLIGHTS_POOLS_FILE', 'report_highlights_pools.json'),
-            'rules'  => env('REPORT_HIGHLIGHTS_RULES_FILE', 'report_highlights_rules.json'),
+            'pools' => env('REPORT_HIGHLIGHTS_POOLS_FILE', 'report_highlights_pools.json'),
+            'rules' => env('REPORT_HIGHLIGHTS_RULES_FILE', 'report_highlights_rules.json'),
         ],
 
         // 产出层的一些策略默认值（同样可被 policy 覆盖）
         'dedupe' => [
             'by_template_id' => true,
-            'by_group_id'    => true,
+            'by_group_id' => true,
         ],
 
         // 当规则没选够时的补齐策略（实现时会用到）

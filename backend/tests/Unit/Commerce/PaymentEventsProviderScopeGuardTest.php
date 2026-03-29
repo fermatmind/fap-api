@@ -20,13 +20,13 @@ final class PaymentEventsProviderScopeGuardTest extends TestCase
             foreach ($this->methodBodies($source) as $methodName => $body) {
                 $hasProviderEventFilter = str_contains($body, "where('provider_event_id'")
                     || str_contains($body, 'where("provider_event_id"');
-                if (!$hasProviderEventFilter) {
+                if (! $hasProviderEventFilter) {
                     continue;
                 }
 
                 $referencesPaymentEvents = str_contains($body, "'payment_events'")
                     || str_contains($body, '"payment_events"');
-                if (!$referencesPaymentEvents) {
+                if (! $referencesPaymentEvents) {
                     continue;
                 }
 
@@ -43,7 +43,7 @@ final class PaymentEventsProviderScopeGuardTest extends TestCase
         $this->assertSame(
             [],
             $violations,
-            "Found payment_events provider_event_id queries without provider scope:\n" . implode("\n", $violations)
+            "Found payment_events provider_event_id queries without provider scope:\n".implode("\n", $violations)
         );
     }
 
@@ -59,7 +59,7 @@ final class PaymentEventsProviderScopeGuardTest extends TestCase
 
         $files = [];
         foreach ($iterator as $item) {
-            if (!$item->isFile()) {
+            if (! $item->isFile()) {
                 continue;
             }
 
@@ -85,7 +85,7 @@ final class PaymentEventsProviderScopeGuardTest extends TestCase
 
         for ($i = 0; $i < $count; $i++) {
             $token = $tokens[$i];
-            if (!is_array($token) || $token[0] !== T_FUNCTION) {
+            if (! is_array($token) || $token[0] !== T_FUNCTION) {
                 continue;
             }
 
@@ -121,6 +121,7 @@ final class PaymentEventsProviderScopeGuardTest extends TestCase
                 if ($text === '{') {
                     $braceDepth++;
                     $body .= $text;
+
                     continue;
                 }
 
@@ -131,6 +132,7 @@ final class PaymentEventsProviderScopeGuardTest extends TestCase
                         break;
                     }
                     $body .= $text;
+
                     continue;
                 }
 
@@ -142,7 +144,7 @@ final class PaymentEventsProviderScopeGuardTest extends TestCase
     }
 
     /**
-     * @param string|array{int, string, int} $token
+     * @param  string|array{int, string, int}  $token
      */
     private function tokenText(string|array $token): string
     {

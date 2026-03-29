@@ -68,7 +68,7 @@ final class ContentPackResolverParityTest extends TestCase
     private function bootstrapDefaultPackConfig(): array
     {
         $root = (string) config('content_packs.root', base_path('../content_packages'));
-        if (!is_dir($root)) {
+        if (! is_dir($root)) {
             $root = base_path('../content_packages');
         }
 
@@ -77,11 +77,11 @@ final class ContentPackResolverParityTest extends TestCase
         $dirVersion = (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.3');
 
         $manifestPath = $root
-            . DIRECTORY_SEPARATOR . 'default'
-            . DIRECTORY_SEPARATOR . $region
-            . DIRECTORY_SEPARATOR . $locale
-            . DIRECTORY_SEPARATOR . $dirVersion
-            . DIRECTORY_SEPARATOR . 'manifest.json';
+            .DIRECTORY_SEPARATOR.'default'
+            .DIRECTORY_SEPARATOR.$region
+            .DIRECTORY_SEPARATOR.$locale
+            .DIRECTORY_SEPARATOR.$dirVersion
+            .DIRECTORY_SEPARATOR.'manifest.json';
 
         $this->assertTrue(File::exists($manifestPath), "default pack manifest missing: {$manifestPath}");
         $manifest = json_decode((string) file_get_contents($manifestPath), true);

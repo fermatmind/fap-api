@@ -94,6 +94,7 @@ final class MbtiContentGovernanceContractTest extends TestCase
                 foreach ($iterator as $fileInfo) {
                     if ($fileInfo->isDir()) {
                         rmdir($fileInfo->getPathname());
+
                         continue;
                     }
 

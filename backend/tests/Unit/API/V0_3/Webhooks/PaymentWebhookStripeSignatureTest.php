@@ -17,14 +17,14 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
 
         $payload = '{"id":"evt_test","type":"payment_intent.succeeded"}';
         $timestamp = time();
-        $header = 't=' . $timestamp . ',v1=' . hash_hmac('sha256', $timestamp . '.' . $payload, 'whsec_test');
+        $header = 't='.$timestamp.',v1='.hash_hmac('sha256', $timestamp.'.'.$payload, 'whsec_test');
 
         $request = Request::create('/api/v0.3/webhooks/payment/stripe', 'POST', [], [], [], [
             'HTTP_STRIPE_SIGNATURE' => $header,
             'CONTENT_TYPE' => 'application/json',
         ], $payload);
 
-        $ok = (new StripeGateway())->verifySignature($request);
+        $ok = (new StripeGateway)->verifySignature($request);
 
         $this->assertTrue($ok);
     }
@@ -36,14 +36,14 @@ final class PaymentWebhookStripeSignatureTest extends TestCase
 
         $payload = '{"id":"evt_test","type":"payment_intent.succeeded"}';
         $timestamp = time() - 1000;
-        $header = 't=' . $timestamp . ',v1=' . hash_hmac('sha256', $timestamp . '.' . $payload, 'whsec_test');
+        $header = 't='.$timestamp.',v1='.hash_hmac('sha256', $timestamp.'.'.$payload, 'whsec_test');
 
         $request = Request::create('/api/v0.3/webhooks/payment/stripe', 'POST', [], [], [], [
             'HTTP_STRIPE_SIGNATURE' => $header,
             'CONTENT_TYPE' => 'application/json',
         ], $payload);
 
-        $ok = (new StripeGateway())->verifySignature($request);
+        $ok = (new StripeGateway)->verifySignature($request);
 
         $this->assertFalse($ok);
     }

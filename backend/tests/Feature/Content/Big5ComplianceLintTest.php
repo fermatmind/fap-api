@@ -50,4 +50,3 @@ final class Big5ComplianceLintTest extends TestCase
         }
     }
 }
-

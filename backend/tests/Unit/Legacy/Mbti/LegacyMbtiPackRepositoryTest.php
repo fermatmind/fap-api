@@ -16,7 +16,7 @@ final class LegacyMbtiPackRepositoryTest extends TestCase
     {
         parent::setUp();
 
-        $this->packsRoot = storage_path('framework/testing/legacy_mbti_pack_repo_' . uniqid('', true));
+        $this->packsRoot = storage_path('framework/testing/legacy_mbti_pack_repo_'.uniqid('', true));
         File::ensureDirectoryExists($this->packsRoot);
 
         config()->set('content_packs.root', $this->packsRoot);
@@ -24,10 +24,10 @@ final class LegacyMbtiPackRepositoryTest extends TestCase
         config()->set('content_packs.default_locale', 'zh-CN');
         config()->set('content_packs.default_dir_version', 'MBTI-CN-v0.3');
 
-        $packDir = $this->packsRoot . '/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3';
+        $packDir = $this->packsRoot.'/default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3';
         File::ensureDirectoryExists($packDir);
 
-        file_put_contents($packDir . '/manifest.json', json_encode([
+        file_put_contents($packDir.'/manifest.json', json_encode([
             'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
             'content_package_version' => 'v0.3',
             'assets' => [
@@ -35,7 +35,7 @@ final class LegacyMbtiPackRepositoryTest extends TestCase
             ],
         ], JSON_UNESCAPED_UNICODE));
 
-        file_put_contents($packDir . '/questions.json', json_encode([
+        file_put_contents($packDir.'/questions.json', json_encode([
             'items' => [
                 [
                     'question_id' => 'q1',

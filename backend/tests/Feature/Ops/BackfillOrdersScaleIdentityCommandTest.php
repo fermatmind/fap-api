@@ -39,7 +39,7 @@ final class BackfillOrdersScaleIdentityCommandTest extends TestCase
         ]);
 
         $orderId = (string) Str::uuid();
-        $orderNo = 'ord_ops_backfill_known_' . Str::lower(Str::random(8));
+        $orderNo = 'ord_ops_backfill_known_'.Str::lower(Str::random(8));
         DB::table('orders')->insert([
             'id' => $orderId,
             'order_no' => $orderNo,
@@ -86,7 +86,7 @@ final class BackfillOrdersScaleIdentityCommandTest extends TestCase
         $this->artisan('fap:scales:seed-default');
 
         $orderId = (string) Str::uuid();
-        $orderNo = 'ord_ops_backfill_unknown_' . Str::lower(Str::random(8));
+        $orderNo = 'ord_ops_backfill_unknown_'.Str::lower(Str::random(8));
         DB::table('orders')->insert([
             'id' => $orderId,
             'order_no' => $orderNo,

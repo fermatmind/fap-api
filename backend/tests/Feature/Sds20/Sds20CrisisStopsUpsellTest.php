@@ -17,12 +17,12 @@ use Tests\TestCase;
 
 final class Sds20CrisisStopsUpsellTest extends TestCase
 {
-    use RefreshDatabase;
     use BuildsSds20ScorerInput;
+    use RefreshDatabase;
 
     public function test_crisis_state_clears_offers_and_forces_free_variant(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         DB::table('scales_registry')
             ->where('org_id', 0)

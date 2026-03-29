@@ -2,12 +2,12 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use PHPUnit\Framework\Attributes\DataProvider;
-use App\Services\Report\HighlightBuilder;
-use App\Services\Content\ContentStore;
 use App\Services\Content\ContentPackResolver;
+use App\Services\Content\ContentStore;
 use App\Services\ContentPackage;
+use App\Services\Report\HighlightBuilder;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\TestCase;
 
 class HighlightBuilderBuildFromStoreTest extends TestCase
 {
@@ -16,16 +16,16 @@ class HighlightBuilderBuildFromStoreTest extends TestCase
         parent::setUp();
 
         // 旧 resolver / AppServiceProvider 默认值用的是 content_packs.*（不设就会 GLOBAL/en）
-config()->set('content_packs.default_region', 'CN_MAINLAND');
-config()->set('content_packs.default_locale', 'zh-CN');
+        config()->set('content_packs.default_region', 'CN_MAINLAND');
+        config()->set('content_packs.default_locale', 'zh-CN');
 
-// forget 旧 resolver（你现在只 forget 了 App\Services\Content\ContentPackResolver）
-$this->app->forgetInstance(\App\Services\ContentPackResolver::class);
+        // forget 旧 resolver（你现在只 forget 了 App\Services\Content\ContentPackResolver）
+        $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
 
         // 固定住 locale + pack 选择（避免跑去 default/GLOBAL/en）
-        $scale   = 'default';
-        $region  = 'CN_MAINLAND';
-        $locale  = 'zh-CN';
+        $scale = 'default';
+        $region = 'CN_MAINLAND';
+        $locale = 'zh-CN';
         $version = 'MBTI-CN-v0.3';
 
         // ✅ 关键：很多 legacy 代码/Service 仍然从 env('MBTI_CONTENT_PACKAGE') 取 pack
@@ -114,7 +114,7 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
         $this->assertStringNotContainsString('borderline', $bid, "blindspot id must not contain borderline: {$bid}");
 
         // 只有在“AT borderline 场景”才强约束 AT_ 前缀（避免把逻辑写死）
-        if (!empty($expect['require_blindspot_at_prefix'])) {
+        if (! empty($expect['require_blindspot_at_prefix'])) {
             $this->assertMatchesRegularExpression('/^hl\\.blindspot\\.AT_/', $bid, "blindspot id must match format hl.blindspot.AT_* : {$bid}");
         }
 
@@ -124,11 +124,11 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
             fn ($x) => is_array($x) && (($x['kind'] ?? '') === 'strength')
         ));
 
-        if (!empty($expect['require_strength'])) {
+        if (! empty($expect['require_strength'])) {
             $this->assertNotEmpty($strengths, 'must contain at least 1 strength');
         }
 
-        if (!empty($expect['require_strength_from_template'])) {
+        if (! empty($expect['require_strength_from_template'])) {
             $this->assertNotEmpty($strengths, 'must contain at least 1 strength');
 
             $strengthIds = array_values(array_filter(array_map(fn ($x) => $x['id'] ?? null, $strengths)));
@@ -194,23 +194,23 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
     public function test_store_must_throw_when_asset_missing_and_fallbacks_forbidden(): void
     {
         $origRoot = base_path('../content_packages');
-        $tmpRoot  = rtrim(sys_get_temp_dir(), DIRECTORY_SEPARATOR)
-            . DIRECTORY_SEPARATOR . 'fap_content_packages_' . uniqid('', true);
+        $tmpRoot = rtrim(sys_get_temp_dir(), DIRECTORY_SEPARATOR)
+            .DIRECTORY_SEPARATOR.'fap_content_packages_'.uniqid('', true);
 
-        $scale   = (string) config('fap.content.scale', 'default');
-        $region  = (string) config('fap.content.region', 'CN_MAINLAND');
-        $locale  = (string) config('fap.content.locale', 'zh-CN');
+        $scale = (string) config('fap.content.scale', 'default');
+        $region = (string) config('fap.content.region', 'CN_MAINLAND');
+        $locale = (string) config('fap.content.locale', 'zh-CN');
         $version = (string) config('fap.content.content_package_version', 'MBTI-CN-v0.3');
 
-        $srcPackDir = $origRoot . DIRECTORY_SEPARATOR . $scale . DIRECTORY_SEPARATOR . $region . DIRECTORY_SEPARATOR . $locale . DIRECTORY_SEPARATOR . $version;
-        $dstPackDir = $tmpRoot  . DIRECTORY_SEPARATOR . $scale . DIRECTORY_SEPARATOR . $region . DIRECTORY_SEPARATOR . $locale . DIRECTORY_SEPARATOR . $version;
+        $srcPackDir = $origRoot.DIRECTORY_SEPARATOR.$scale.DIRECTORY_SEPARATOR.$region.DIRECTORY_SEPARATOR.$locale.DIRECTORY_SEPARATOR.$version;
+        $dstPackDir = $tmpRoot.DIRECTORY_SEPARATOR.$scale.DIRECTORY_SEPARATOR.$region.DIRECTORY_SEPARATOR.$locale.DIRECTORY_SEPARATOR.$version;
 
-        if (!is_file($srcPackDir . DIRECTORY_SEPARATOR . 'manifest.json')) {
-            throw new \RuntimeException('source manifest.json not found: ' . $srcPackDir . DIRECTORY_SEPARATOR . 'manifest.json');
+        if (! is_file($srcPackDir.DIRECTORY_SEPARATOR.'manifest.json')) {
+            throw new \RuntimeException('source manifest.json not found: '.$srcPackDir.DIRECTORY_SEPARATOR.'manifest.json');
         }
 
         $this->copyDir($srcPackDir, $dstPackDir);
-        $this->breakOneAssetPathInManifest($dstPackDir . DIRECTORY_SEPARATOR . 'manifest.json');
+        $this->breakOneAssetPathInManifest($dstPackDir.DIRECTORY_SEPARATOR.'manifest.json');
 
         config()->set('content.packs_root', $tmpRoot);
         config()->set('content_packs.root', $tmpRoot);
@@ -245,10 +245,10 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
         $src = rtrim($src, DIRECTORY_SEPARATOR);
         $dst = rtrim($dst, DIRECTORY_SEPARATOR);
 
-        if (!is_dir($src)) {
+        if (! is_dir($src)) {
             throw new \RuntimeException("copyDir: src not found: {$src}");
         }
-        if (!is_dir($dst) && !mkdir($dst, 0777, true) && !is_dir($dst)) {
+        if (! is_dir($dst) && ! mkdir($dst, 0777, true) && ! is_dir($dst)) {
             throw new \RuntimeException("copyDir: cannot mkdir: {$dst}");
         }
 
@@ -260,21 +260,22 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
         foreach ($it as $item) {
             // Build a stable relative path without relying on getSubPathname()/getSubPathName().
             $rel = substr($item->getPathname(), strlen($src) + 1);
-            $target = $dst . DIRECTORY_SEPARATOR . $rel;
+            $target = $dst.DIRECTORY_SEPARATOR.$rel;
 
             if ($item->isDir()) {
-                if (!is_dir($target) && !mkdir($target, 0777, true) && !is_dir($target)) {
+                if (! is_dir($target) && ! mkdir($target, 0777, true) && ! is_dir($target)) {
                     throw new \RuntimeException("copyDir: cannot mkdir: {$target}");
                 }
+
                 continue;
             }
 
             $parent = dirname($target);
-            if (!is_dir($parent) && !mkdir($parent, 0777, true) && !is_dir($parent)) {
+            if (! is_dir($parent) && ! mkdir($parent, 0777, true) && ! is_dir($parent)) {
                 throw new \RuntimeException("copyDir: cannot mkdir parent: {$parent}");
             }
 
-            if (!copy($item->getPathname(), $target)) {
+            if (! copy($item->getPathname(), $target)) {
                 throw new \RuntimeException("copyDir: copy failed: {$item->getPathname()} -> {$target}");
             }
         }
@@ -282,7 +283,9 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
 
     private function rmDir(string $dir): void
     {
-        if (!is_dir($dir)) return;
+        if (! is_dir($dir)) {
+            return;
+        }
 
         $it = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator($dir, \FilesystemIterator::SKIP_DOTS),
@@ -307,20 +310,20 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
         }
 
         $json = json_decode($raw, true);
-        if (!is_array($json)) {
+        if (! is_array($json)) {
             throw new \RuntimeException("manifest json invalid: {$manifestPath}");
         }
 
-        if (!isset($json['assets']) || !is_array($json['assets'])) {
+        if (! isset($json['assets']) || ! is_array($json['assets'])) {
             throw new \RuntimeException("manifest has no assets{}: {$manifestPath}");
         }
 
-        if (!array_key_exists('highlights', $json['assets'])) {
+        if (! array_key_exists('highlights', $json['assets'])) {
             throw new \RuntimeException("manifest.assets.highlights missing: {$manifestPath}");
         }
 
         $h = $json['assets']['highlights'];
-        if (!is_array($h)) {
+        if (! is_array($h)) {
             throw new \RuntimeException("manifest.assets.highlights is not array/list or object/map: {$manifestPath}");
         }
 
@@ -333,7 +336,7 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
             }
 
             foreach ($h as $i => $entry) {
-                if (!$this->assetEntryMatchesBasename($entry, $targetBasename)) {
+                if (! $this->assetEntryMatchesBasename($entry, $targetBasename)) {
                     continue;
                 }
 
@@ -342,7 +345,7 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
                 break;
             }
 
-            if (!$brokeTarget) {
+            if (! $brokeTarget) {
                 $h[0] = $this->breakAssetEntry($h[0]);
                 $brokeTarget = true;
             }
@@ -353,7 +356,7 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
             }
 
             foreach ($h as $key => $entry) {
-                if (!$this->assetEntryMatchesBasename($entry, $targetBasename)) {
+                if (! $this->assetEntryMatchesBasename($entry, $targetBasename)) {
                     continue;
                 }
 
@@ -362,13 +365,13 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
                 break;
             }
 
-            if (!$brokeTarget) {
+            if (! $brokeTarget) {
                 $h[$k] = $this->breakAssetEntry($h[$k]);
                 $brokeTarget = true;
             }
         }
 
-        if (!$brokeTarget) {
+        if (! $brokeTarget) {
             throw new \RuntimeException("failed to break highlights asset entry: {$manifestPath}");
         }
 
@@ -395,6 +398,7 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
             foreach (['path', 'file'] as $key) {
                 if (array_key_exists($key, $entry) && is_string($entry[$key])) {
                     $entry[$key] = $broken;
+
                     return $entry;
                 }
             }
@@ -402,10 +406,12 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
             foreach ($entry as $k => $v) {
                 if (is_string($v) && (str_contains($v, '/') || str_ends_with($v, '.json'))) {
                     $entry[$k] = $broken;
+
                     return $entry;
                 }
                 if (is_array($v)) {
                     $entry[$k] = $this->breakAssetEntry($v);
+
                     return $entry;
                 }
             }
@@ -420,12 +426,12 @@ $this->app->forgetInstance(\App\Services\ContentPackResolver::class);
             return basename($entry) === $basename;
         }
 
-        if (!is_array($entry)) {
+        if (! is_array($entry)) {
             return false;
         }
 
         foreach (['path', 'file'] as $key) {
-            if (!array_key_exists($key, $entry) || !is_string($entry[$key])) {
+            if (! array_key_exists($key, $entry) || ! is_string($entry[$key])) {
                 continue;
             }
 

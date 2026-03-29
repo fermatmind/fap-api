@@ -22,14 +22,14 @@ final class NoEnvUsageOutsideConfigTest extends TestCase
             foreach ($this->phpFiles($root) as $filePath) {
                 $source = (string) file_get_contents($filePath);
                 if (str_contains($source, 'env(') || str_contains($source, 'getenv(')) {
-                    $offenders[] = ltrim(str_replace(base_path() . DIRECTORY_SEPARATOR, '', $filePath), DIRECTORY_SEPARATOR);
+                    $offenders[] = ltrim(str_replace(base_path().DIRECTORY_SEPARATOR, '', $filePath), DIRECTORY_SEPARATOR);
                 }
             }
         }
 
         if ($offenders !== []) {
             sort($offenders);
-            self::fail("env/getenv usage is forbidden outside config/bootstrap:\n" . implode("\n", $offenders));
+            self::fail("env/getenv usage is forbidden outside config/bootstrap:\n".implode("\n", $offenders));
         }
 
         self::assertTrue(true);
@@ -41,14 +41,14 @@ final class NoEnvUsageOutsideConfigTest extends TestCase
     private function phpFiles(string $root): array
     {
         $files = [];
-        if (!is_dir($root)) {
+        if (! is_dir($root)) {
             return $files;
         }
 
         $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($root));
         /** @var SplFileInfo $file */
         foreach ($iterator as $file) {
-            if (!$file->isFile() || strtolower($file->getExtension()) !== 'php') {
+            if (! $file->isFile() || strtolower($file->getExtension()) !== 'php') {
                 continue;
             }
             $files[] = $file->getPathname();

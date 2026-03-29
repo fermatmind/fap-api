@@ -38,8 +38,8 @@ class AttemptSubmissionAsyncFlowTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr17SimpleScoreDemoSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr17SimpleScoreDemoSeeder)->run();
     }
 
     public function test_submit_async_ack_and_status_endpoint(): void
@@ -120,4 +120,3 @@ class AttemptSubmissionAsyncFlowTest extends TestCase
         $this->assertTrue((bool) data_get($status->json(), 'result.ok'));
     }
 }
-

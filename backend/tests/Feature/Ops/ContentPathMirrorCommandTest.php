@@ -35,18 +35,18 @@ final class ContentPathMirrorCommandTest extends TestCase
     {
         parent::setUp();
 
-        $this->suffix = 'test_mirror_' . strtolower(bin2hex(random_bytes(4)));
-        $this->backendLegacyRel = 'content_packs/TEST_MIRROR_SRC_' . $this->suffix;
-        $this->backendMappedRel = 'content_packs/TEST_MIRROR_DST_' . $this->suffix;
-        $this->contentLegacyRel = 'default/CN_MAINLAND/zh-CN/TEST_MIRROR_SRC_' . $this->suffix;
-        $this->contentMappedRel = 'default/CN_MAINLAND/zh-CN/TEST_MIRROR_DST_' . $this->suffix;
+        $this->suffix = 'test_mirror_'.strtolower(bin2hex(random_bytes(4)));
+        $this->backendLegacyRel = 'content_packs/TEST_MIRROR_SRC_'.$this->suffix;
+        $this->backendMappedRel = 'content_packs/TEST_MIRROR_DST_'.$this->suffix;
+        $this->contentLegacyRel = 'default/CN_MAINLAND/zh-CN/TEST_MIRROR_SRC_'.$this->suffix;
+        $this->contentMappedRel = 'default/CN_MAINLAND/zh-CN/TEST_MIRROR_DST_'.$this->suffix;
 
         $this->backendLegacyAbs = base_path($this->backendLegacyRel);
         $this->backendMappedAbs = base_path($this->backendMappedRel);
 
         $contentRoot = rtrim((string) config('content_packs.root', base_path('../content_packages')), DIRECTORY_SEPARATOR);
-        $this->contentLegacyAbs = $contentRoot . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $this->contentLegacyRel);
-        $this->contentMappedAbs = $contentRoot . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $this->contentMappedRel);
+        $this->contentLegacyAbs = $contentRoot.DIRECTORY_SEPARATOR.str_replace('/', DIRECTORY_SEPARATOR, $this->contentLegacyRel);
+        $this->contentMappedAbs = $contentRoot.DIRECTORY_SEPARATOR.str_replace('/', DIRECTORY_SEPARATOR, $this->contentMappedRel);
 
         File::deleteDirectory($this->backendLegacyAbs);
         File::deleteDirectory($this->backendMappedAbs);
@@ -76,16 +76,16 @@ final class ContentPathMirrorCommandTest extends TestCase
             ->expectsOutputToContain('content_path_mirror')
             ->assertExitCode(0);
 
-        $this->assertTrue(is_file($this->backendMappedAbs . DIRECTORY_SEPARATOR . 'v1' . DIRECTORY_SEPARATOR . 'compiled' . DIRECTORY_SEPARATOR . 'manifest.json'));
-        $this->assertTrue(is_file($this->contentMappedAbs . DIRECTORY_SEPARATOR . 'compiled' . DIRECTORY_SEPARATOR . 'questions.compiled.json'));
+        $this->assertTrue(is_file($this->backendMappedAbs.DIRECTORY_SEPARATOR.'v1'.DIRECTORY_SEPARATOR.'compiled'.DIRECTORY_SEPARATOR.'manifest.json'));
+        $this->assertTrue(is_file($this->contentMappedAbs.DIRECTORY_SEPARATOR.'compiled'.DIRECTORY_SEPARATOR.'questions.compiled.json'));
 
         $this->assertSame(
-            hash_file('sha256', $this->backendLegacyAbs . DIRECTORY_SEPARATOR . 'v1' . DIRECTORY_SEPARATOR . 'compiled' . DIRECTORY_SEPARATOR . 'questions.compiled.json'),
-            hash_file('sha256', $this->backendMappedAbs . DIRECTORY_SEPARATOR . 'v1' . DIRECTORY_SEPARATOR . 'compiled' . DIRECTORY_SEPARATOR . 'questions.compiled.json')
+            hash_file('sha256', $this->backendLegacyAbs.DIRECTORY_SEPARATOR.'v1'.DIRECTORY_SEPARATOR.'compiled'.DIRECTORY_SEPARATOR.'questions.compiled.json'),
+            hash_file('sha256', $this->backendMappedAbs.DIRECTORY_SEPARATOR.'v1'.DIRECTORY_SEPARATOR.'compiled'.DIRECTORY_SEPARATOR.'questions.compiled.json')
         );
         $this->assertSame(
-            hash_file('sha256', $this->contentLegacyAbs . DIRECTORY_SEPARATOR . 'manifest.json'),
-            hash_file('sha256', $this->contentMappedAbs . DIRECTORY_SEPARATOR . 'manifest.json')
+            hash_file('sha256', $this->contentLegacyAbs.DIRECTORY_SEPARATOR.'manifest.json'),
+            hash_file('sha256', $this->contentMappedAbs.DIRECTORY_SEPARATOR.'manifest.json')
         );
     }
 
@@ -133,16 +133,16 @@ final class ContentPathMirrorCommandTest extends TestCase
 
     private function seedSourceTrees(): void
     {
-        File::ensureDirectoryExists($this->backendLegacyAbs . DIRECTORY_SEPARATOR . 'v1' . DIRECTORY_SEPARATOR . 'compiled');
-        File::put($this->backendLegacyAbs . DIRECTORY_SEPARATOR . 'v1' . DIRECTORY_SEPARATOR . 'manifest.json', json_encode(['pack' => 'backend', 'kind' => 'manifest'], JSON_UNESCAPED_UNICODE));
-        File::put($this->backendLegacyAbs . DIRECTORY_SEPARATOR . 'v1' . DIRECTORY_SEPARATOR . 'questions.json', json_encode([['id' => 'B1']], JSON_UNESCAPED_UNICODE));
-        File::put($this->backendLegacyAbs . DIRECTORY_SEPARATOR . 'v1' . DIRECTORY_SEPARATOR . 'compiled' . DIRECTORY_SEPARATOR . 'manifest.json', json_encode(['compiled' => true], JSON_UNESCAPED_UNICODE));
-        File::put($this->backendLegacyAbs . DIRECTORY_SEPARATOR . 'v1' . DIRECTORY_SEPARATOR . 'compiled' . DIRECTORY_SEPARATOR . 'questions.compiled.json', json_encode(['question_index' => [['id' => 'B1']]], JSON_UNESCAPED_UNICODE));
+        File::ensureDirectoryExists($this->backendLegacyAbs.DIRECTORY_SEPARATOR.'v1'.DIRECTORY_SEPARATOR.'compiled');
+        File::put($this->backendLegacyAbs.DIRECTORY_SEPARATOR.'v1'.DIRECTORY_SEPARATOR.'manifest.json', json_encode(['pack' => 'backend', 'kind' => 'manifest'], JSON_UNESCAPED_UNICODE));
+        File::put($this->backendLegacyAbs.DIRECTORY_SEPARATOR.'v1'.DIRECTORY_SEPARATOR.'questions.json', json_encode([['id' => 'B1']], JSON_UNESCAPED_UNICODE));
+        File::put($this->backendLegacyAbs.DIRECTORY_SEPARATOR.'v1'.DIRECTORY_SEPARATOR.'compiled'.DIRECTORY_SEPARATOR.'manifest.json', json_encode(['compiled' => true], JSON_UNESCAPED_UNICODE));
+        File::put($this->backendLegacyAbs.DIRECTORY_SEPARATOR.'v1'.DIRECTORY_SEPARATOR.'compiled'.DIRECTORY_SEPARATOR.'questions.compiled.json', json_encode(['question_index' => [['id' => 'B1']]], JSON_UNESCAPED_UNICODE));
 
-        File::ensureDirectoryExists($this->contentLegacyAbs . DIRECTORY_SEPARATOR . 'compiled');
-        File::put($this->contentLegacyAbs . DIRECTORY_SEPARATOR . 'manifest.json', json_encode(['pack' => 'content', 'kind' => 'manifest'], JSON_UNESCAPED_UNICODE));
-        File::put($this->contentLegacyAbs . DIRECTORY_SEPARATOR . 'questions.json', json_encode([['id' => 'C1']], JSON_UNESCAPED_UNICODE));
-        File::put($this->contentLegacyAbs . DIRECTORY_SEPARATOR . 'compiled' . DIRECTORY_SEPARATOR . 'manifest.json', json_encode(['compiled' => true], JSON_UNESCAPED_UNICODE));
-        File::put($this->contentLegacyAbs . DIRECTORY_SEPARATOR . 'compiled' . DIRECTORY_SEPARATOR . 'questions.compiled.json', json_encode(['question_index' => [['id' => 'C1']]], JSON_UNESCAPED_UNICODE));
+        File::ensureDirectoryExists($this->contentLegacyAbs.DIRECTORY_SEPARATOR.'compiled');
+        File::put($this->contentLegacyAbs.DIRECTORY_SEPARATOR.'manifest.json', json_encode(['pack' => 'content', 'kind' => 'manifest'], JSON_UNESCAPED_UNICODE));
+        File::put($this->contentLegacyAbs.DIRECTORY_SEPARATOR.'questions.json', json_encode([['id' => 'C1']], JSON_UNESCAPED_UNICODE));
+        File::put($this->contentLegacyAbs.DIRECTORY_SEPARATOR.'compiled'.DIRECTORY_SEPARATOR.'manifest.json', json_encode(['compiled' => true], JSON_UNESCAPED_UNICODE));
+        File::put($this->contentLegacyAbs.DIRECTORY_SEPARATOR.'compiled'.DIRECTORY_SEPARATOR.'questions.compiled.json', json_encode(['question_index' => [['id' => 'C1']]], JSON_UNESCAPED_UNICODE));
     }
 }

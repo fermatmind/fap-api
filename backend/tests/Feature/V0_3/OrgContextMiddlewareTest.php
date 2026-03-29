@@ -16,7 +16,7 @@ class OrgContextMiddlewareTest extends TestCase
     {
         $now = now();
         $userId = DB::table('users')->insertGetId([
-            'name' => 'User ' . $email,
+            'name' => 'User '.$email,
             'email' => $email,
             'password' => bcrypt('secret'),
             'created_at' => $now,
@@ -34,7 +34,7 @@ class OrgContextMiddlewareTest extends TestCase
     public function test_non_member_with_org_header_returns_404(): void
     {
         $this->artisan('migrate', ['--force' => true]);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $orgId = DB::table('organizations')->insertGetId([
             'name' => 'Org A',
@@ -46,7 +46,7 @@ class OrgContextMiddlewareTest extends TestCase
         $user = $this->createUserWithToken('a@example.com');
 
         $resp = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $user['token'],
+            'Authorization' => 'Bearer '.$user['token'],
             'X-Org-Id' => (string) $orgId,
         ])->getJson('/api/v0.3/scales');
 
@@ -60,7 +60,7 @@ class OrgContextMiddlewareTest extends TestCase
     public function test_member_with_org_header_passes(): void
     {
         $this->artisan('migrate', ['--force' => true]);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $orgId = DB::table('organizations')->insertGetId([
             'name' => 'Org B',
@@ -81,7 +81,7 @@ class OrgContextMiddlewareTest extends TestCase
         ]);
 
         $resp = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $user['token'],
+            'Authorization' => 'Bearer '.$user['token'],
             'X-Org-Id' => (string) $orgId,
         ])->getJson('/api/v0.3/scales');
 

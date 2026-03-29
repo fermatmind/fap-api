@@ -18,15 +18,15 @@ class AttemptOwnershipAnd404Test extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr17SimpleScoreDemoSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr17SimpleScoreDemoSeeder)->run();
     }
 
     private function createUserWithToken(string $email): array
     {
         $now = now();
         $userId = DB::table('users')->insertGetId([
-            'name' => 'User ' . $email,
+            'name' => 'User '.$email,
             'email' => $email,
             'password' => bcrypt('secret'),
             'created_at' => $now,
@@ -44,7 +44,7 @@ class AttemptOwnershipAnd404Test extends TestCase
     private function createOrg(int $ownerUserId): int
     {
         return (int) DB::table('organizations')->insertGetId([
-            'name' => 'Org ' . Str::lower(Str::random(8)),
+            'name' => 'Org '.Str::lower(Str::random(8)),
             'owner_user_id' => $ownerUserId,
             'created_at' => now(),
             'updated_at' => now(),
@@ -80,7 +80,7 @@ class AttemptOwnershipAnd404Test extends TestCase
         $this->ensureCreditWallet($orgId);
 
         $headers = [
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
             'X-Org-Id' => (string) $orgId,
             'X-Anon-Id' => $anonId,
         ];
@@ -205,7 +205,7 @@ class AttemptOwnershipAnd404Test extends TestCase
         $attemptId = $this->createSubmittedAttempt($orgId, $memberA['token'], 'member-a-anon');
 
         $headersB = [
-            'Authorization' => 'Bearer ' . $memberB['token'],
+            'Authorization' => 'Bearer '.$memberB['token'],
             'X-Org-Id' => (string) $orgId,
             'X-Anon-Id' => 'member-b-anon',
         ];
@@ -236,7 +236,7 @@ class AttemptOwnershipAnd404Test extends TestCase
         $attemptId = $this->createSubmittedAttempt($orgId, $memberA['token'], 'member-a-viewer-anon');
 
         $headersB = [
-            'Authorization' => 'Bearer ' . $viewerB['token'],
+            'Authorization' => 'Bearer '.$viewerB['token'],
             'X-Org-Id' => (string) $orgId,
             'X-Anon-Id' => 'viewer-b-anon',
         ];
@@ -264,7 +264,7 @@ class AttemptOwnershipAnd404Test extends TestCase
 
         $missingAttemptId = (string) Str::uuid();
         $headers = [
-            'Authorization' => 'Bearer ' . $member['token'],
+            'Authorization' => 'Bearer '.$member['token'],
             'X-Org-Id' => (string) $orgId,
             'X-Anon-Id' => 'member-nonexistent-anon',
         ];
@@ -295,11 +295,11 @@ class AttemptOwnershipAnd404Test extends TestCase
         $attemptId = $this->createSubmittedAttempt($orgId, $memberA['token'], 'member-a-admin-anon');
 
         $ownerHeaders = [
-            'Authorization' => 'Bearer ' . $owner['token'],
+            'Authorization' => 'Bearer '.$owner['token'],
             'X-Org-Id' => (string) $orgId,
         ];
         $adminHeaders = [
-            'Authorization' => 'Bearer ' . $admin['token'],
+            'Authorization' => 'Bearer '.$admin['token'],
             'X-Org-Id' => (string) $orgId,
         ];
 
@@ -336,11 +336,11 @@ class AttemptOwnershipAnd404Test extends TestCase
         ]));
 
         $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/result", [
-            'Authorization' => 'Bearer ' . $memberB['token'],
+            'Authorization' => 'Bearer '.$memberB['token'],
             'X-Org-Id' => (string) $org2,
         ]));
         $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/report.pdf", [
-            'Authorization' => 'Bearer ' . $memberB['token'],
+            'Authorization' => 'Bearer '.$memberB['token'],
             'X-Org-Id' => (string) $org2,
         ]));
     }

@@ -133,7 +133,7 @@ final class SelfCheckContractTest extends TestCase
     }
 
     /**
-     * @param array<string,mixed> $deps
+     * @param  array<string,mixed>  $deps
      */
     private function mockDeps(array $deps): void
     {

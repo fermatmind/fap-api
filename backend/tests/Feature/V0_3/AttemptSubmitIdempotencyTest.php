@@ -15,8 +15,8 @@ class AttemptSubmitIdempotencyTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
-        (new Pr21AnswerDemoSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr21AnswerDemoSeeder)->run();
     }
 
     private function seedOrgWithToken(): array
@@ -49,11 +49,11 @@ class AttemptSubmitIdempotencyTest extends TestCase
             'updated_at' => now(),
         ]);
 
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         $tokenRow = [
             'token' => $token,
             'token_hash' => hash('sha256', $token),
-            'anon_id' => 'anon_' . $userId,
+            'anon_id' => 'anon_'.$userId,
             'user_id' => $userId,
             'expires_at' => now()->addDays(1),
             'created_at' => now(),
@@ -85,7 +85,7 @@ class AttemptSubmitIdempotencyTest extends TestCase
             'scale_code' => 'DEMO_ANSWERS',
         ], [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $start->assertStatus(200);
         $attemptId = (string) $start->json('attempt_id');
@@ -120,7 +120,7 @@ class AttemptSubmitIdempotencyTest extends TestCase
             'duration_ms' => 30000,
         ], [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $submit->assertStatus(200);
         $submit->assertJson(['ok' => true]);
@@ -135,7 +135,7 @@ class AttemptSubmitIdempotencyTest extends TestCase
             'duration_ms' => 30000,
         ], [
             'X-Org-Id' => (string) $orgId,
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ]);
         $dup->assertStatus(200);
         $dup->assertJson(['ok' => true, 'idempotent' => true]);

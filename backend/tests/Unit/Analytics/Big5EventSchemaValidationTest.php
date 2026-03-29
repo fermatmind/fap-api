@@ -12,7 +12,7 @@ final class Big5EventSchemaValidationTest extends TestCase
 {
     public function test_valid_big5_scored_event_passes_validation(): void
     {
-        $schema = new Big5EventSchema();
+        $schema = new Big5EventSchema;
 
         $validated = $schema->validate('big5_scored', $this->validMeta([
             'locale' => 'zh-CN',
@@ -30,7 +30,7 @@ final class Big5EventSchemaValidationTest extends TestCase
 
     public function test_missing_required_value_throws_exception(): void
     {
-        $schema = new Big5EventSchema();
+        $schema = new Big5EventSchema;
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Missing BIG5 required meta value: norms_version');
@@ -48,7 +48,7 @@ final class Big5EventSchemaValidationTest extends TestCase
 
     public function test_unknown_big5_event_throws_exception(): void
     {
-        $schema = new Big5EventSchema();
+        $schema = new Big5EventSchema;
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Unsupported BIG5 event code');

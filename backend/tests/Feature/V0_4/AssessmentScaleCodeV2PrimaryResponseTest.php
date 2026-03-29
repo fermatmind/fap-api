@@ -17,7 +17,7 @@ final class AssessmentScaleCodeV2PrimaryResponseTest extends TestCase
 
     private function seedScales(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
     }
 
     private function createUser(string $email): int
@@ -86,4 +86,3 @@ final class AssessmentScaleCodeV2PrimaryResponseTest extends TestCase
         $response->assertJsonPath('assessment.scale_uid', '11111111-1111-4111-8111-111111111111');
     }
 }
-

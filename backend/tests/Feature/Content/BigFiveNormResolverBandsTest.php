@@ -69,4 +69,3 @@ final class BigFiveNormResolverBandsTest extends TestCase
         $this->assertSame('CALIBRATED', $resolved['status']);
     }
 }
-

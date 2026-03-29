@@ -64,11 +64,12 @@ class ExperimentStickyAssignmentTest extends TestCase
         $firstVariant = null;
 
         for ($i = 0; $i < 200; $i++) {
-            $anonId = $base . $i;
+            $anonId = $base.$i;
             $variant = $this->variantForAnon($anonId, $orgId);
             if ($first === null) {
                 $first = $anonId;
                 $firstVariant = $variant;
+
                 continue;
             }
             if ($variant !== $firstVariant) {
@@ -76,14 +77,14 @@ class ExperimentStickyAssignmentTest extends TestCase
             }
         }
 
-        return [$base . '0', $base . '1', 'A', 'B'];
+        return [$base.'0', $base.'1', 'A', 'B'];
     }
 
     private function variantForAnon(string $anonId, int $orgId): string
     {
         $salt = (string) config('fap_experiments.salt', '');
-        $subjectKey = 'anon:' . $anonId;
-        $bucket = StableBucket::bucket($subjectKey . '|' . $orgId . '|PR23_STICKY_BUCKET|' . $salt, 100);
+        $subjectKey = 'anon:'.$anonId;
+        $bucket = StableBucket::bucket($subjectKey.'|'.$orgId.'|PR23_STICKY_BUCKET|'.$salt, 100);
 
         return $bucket < 50 ? 'A' : 'B';
     }

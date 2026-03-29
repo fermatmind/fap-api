@@ -55,7 +55,7 @@ final class Eq60ContentGateTest extends TestCase
         $this->assertCount(102, (array) data_get($report, 'blocks', []));
         $this->assertNotEmpty((array) data_get($report, 'variables_allowlist.allowed', []));
 
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $zh = $this->getJson('/api/v0.3/scales/EQ_60/questions?locale=zh-CN&region=CN_MAINLAND');
         $zh->assertStatus(200);

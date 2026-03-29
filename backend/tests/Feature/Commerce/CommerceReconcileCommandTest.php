@@ -191,7 +191,7 @@ final class CommerceReconcileCommandTest extends TestCase
 
         $mismatchMap = [];
         foreach ((array) ($payload['mismatches'] ?? []) as $row) {
-            if (!is_array($row)) {
+            if (! is_array($row)) {
                 continue;
             }
             $mismatchMap[(string) ($row['order_no'] ?? '')] = (string) ($row['reason'] ?? '');

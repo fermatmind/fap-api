@@ -16,14 +16,14 @@ use Tests\TestCase;
 
 final class ClinicalComboReportLocaleTest extends TestCase
 {
-    use RefreshDatabase;
     use BuildsClinicalComboScorerInput;
+    use RefreshDatabase;
 
     public function test_report_uses_english_content_when_attempt_locale_is_en(): void
     {
         $this->artisan('content:compile --pack=CLINICAL_COMBO_68 --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $attemptId = $this->createAttemptWithResult('en');
 

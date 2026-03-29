@@ -16,7 +16,7 @@ final class BigFiveTelemetryTest extends TestCase
 
     public function test_big5_start_emits_attempt_started_telemetry(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $response = $this->postJson('/api/v0.3/attempts/start', [
             'scale_code' => 'BIG5_OCEAN',
@@ -43,7 +43,7 @@ final class BigFiveTelemetryTest extends TestCase
     public function test_big5_submit_emits_scored_submit_and_report_telemetry(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $anonId = 'anon_big5_telemetry_submit';
         $start = $this->postJson('/api/v0.3/attempts/start', [
@@ -67,7 +67,7 @@ final class BigFiveTelemetryTest extends TestCase
         }
 
         $submit = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
             'X-Anon-Id' => $anonId,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
@@ -108,17 +108,18 @@ final class BigFiveTelemetryTest extends TestCase
         if (is_array($raw)) {
             return $raw;
         }
-        if (!is_string($raw) || trim($raw) === '') {
+        if (! is_string($raw) || trim($raw) === '') {
             return [];
         }
 
         $decoded = json_decode($raw, true);
+
         return is_array($decoded) ? $decoded : [];
     }
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
 
         DB::table('fm_tokens')->insert([
             'token' => $token,

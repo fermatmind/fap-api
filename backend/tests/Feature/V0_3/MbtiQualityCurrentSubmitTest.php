@@ -18,7 +18,7 @@ final class MbtiQualityCurrentSubmitTest extends TestCase
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
         DB::table('fm_tokens')->insert([
             'token' => $token,
             'token_hash' => hash('sha256', $token),
@@ -41,7 +41,7 @@ final class MbtiQualityCurrentSubmitTest extends TestCase
     {
         $packRoot = rtrim((string) config('content_packs.root'), DIRECTORY_SEPARATOR);
         $dirVersion = trim((string) config('content_packs.default_dir_version', 'MBTI-CN-v0.3'));
-        $questionsPath = $packRoot . DIRECTORY_SEPARATOR . 'default/CN_MAINLAND/zh-CN/' . $dirVersion . DIRECTORY_SEPARATOR . 'questions.json';
+        $questionsPath = $packRoot.DIRECTORY_SEPARATOR.'default/CN_MAINLAND/zh-CN/'.$dirVersion.DIRECTORY_SEPARATOR.'questions.json';
 
         $decoded = json_decode((string) file_get_contents($questionsPath), true);
         $items = is_array($decoded['items'] ?? null) ? $decoded['items'] : [];
@@ -70,7 +70,7 @@ final class MbtiQualityCurrentSubmitTest extends TestCase
 
     public function test_mbti_current_submit_writes_quality_truth_without_attempt_quality_mirror(): void
     {
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $anonId = 'mbti-quality-current-anon';
         $anonToken = $this->issueAnonToken($anonId);
@@ -91,7 +91,7 @@ final class MbtiQualityCurrentSubmitTest extends TestCase
 
         $submit = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $anonToken,
+            'Authorization' => 'Bearer '.$anonToken,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
             'answers' => $answers,
@@ -125,7 +125,7 @@ final class MbtiQualityCurrentSubmitTest extends TestCase
 
         $resultRead = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $anonToken,
+            'Authorization' => 'Bearer '.$anonToken,
         ])->getJson("/api/v0.3/attempts/{$attemptId}/result");
 
         $resultRead->assertStatus(200);

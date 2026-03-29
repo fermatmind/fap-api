@@ -131,4 +131,3 @@ final class Big5NormsRebuildCommandTest extends TestCase
         ];
     }
 }
-

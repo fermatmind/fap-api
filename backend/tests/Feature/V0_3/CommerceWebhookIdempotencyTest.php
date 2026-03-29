@@ -15,7 +15,7 @@ class CommerceWebhookIdempotencyTest extends TestCase
 
     public function test_webhook_idempotent_topup(): void
     {
-        (new Pr19CommerceSeeder())->run();
+        (new Pr19CommerceSeeder)->run();
 
         $orgId = 0;
         $orderNo = 'ord_test_1';

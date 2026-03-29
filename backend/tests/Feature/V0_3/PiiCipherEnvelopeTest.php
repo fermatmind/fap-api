@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Tests\Feature\V0_3;
 
 use App\Contracts\Security\PiiEnvelopeAdapter;
+use App\Support\PiiCipher;
 use App\Support\Security\ExternalKmsContractException;
 use App\Support\Security\ExternalKmsPiiEnvelopeAdapter;
 use App\Support\Security\LocalPiiEnvelopeAdapter;
-use App\Support\PiiCipher;
 use Illuminate\Support\Facades\Crypt;
 use Tests\TestCase;
 

@@ -9,8 +9,8 @@ use App\Models\Result;
 use App\Services\Assessment\Scorers\BigFiveScorerV3;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Content\BigFivePackLoader;
-use Database\Seeders\ScaleRegistrySeeder;
 use Database\Seeders\Pr19CommerceSeeder;
+use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -22,7 +22,7 @@ final class BigFivePdfDeliveryTest extends TestCase
 
     private function issueAnonToken(string $anonId): string
     {
-        $token = 'fm_' . (string) Str::uuid();
+        $token = 'fm_'.(string) Str::uuid();
 
         DB::table('fm_tokens')->insert([
             'token' => $token,
@@ -56,7 +56,7 @@ final class BigFivePdfDeliveryTest extends TestCase
 
         $questionIndex = [];
         foreach ((array) ($questions['question_index'] ?? []) as $qid => $meta) {
-            if (!is_array($meta)) {
+            if (! is_array($meta)) {
                 continue;
             }
             $questionIndex[(int) $qid] = $meta;
@@ -90,7 +90,7 @@ final class BigFivePdfDeliveryTest extends TestCase
     public function test_big5_report_pdf_endpoint_returns_pdf_payload(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
 
         $anonId = 'anon_big5_pdf';
         $token = $this->issueAnonToken($anonId);
@@ -145,8 +145,8 @@ final class BigFivePdfDeliveryTest extends TestCase
 
         $response = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
-        ])->get('/api/v0.3/attempts/' . $attemptId . '/report.pdf');
+            'Authorization' => 'Bearer '.$token,
+        ])->get('/api/v0.3/attempts/'.$attemptId.'/report.pdf');
 
         $response->assertStatus(200);
         $response->assertHeader('Content-Type', 'application/pdf');
@@ -173,8 +173,8 @@ final class BigFivePdfDeliveryTest extends TestCase
     public function test_big5_report_pdf_headers_switch_after_unlock(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
-        (new Pr19CommerceSeeder())->run();
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
 
         $anonId = 'anon_big5_pdf_unlock';
         $token = $this->issueAnonToken($anonId);
@@ -228,8 +228,8 @@ final class BigFivePdfDeliveryTest extends TestCase
 
         $before = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
-        ])->get('/api/v0.3/attempts/' . $attemptId . '/report.pdf');
+            'Authorization' => 'Bearer '.$token,
+        ])->get('/api/v0.3/attempts/'.$attemptId.'/report.pdf');
         $before->assertStatus(200);
         $before->assertHeader('X-Report-Variant', 'free');
         $before->assertHeader('X-Report-Locked', 'true');
@@ -251,8 +251,8 @@ final class BigFivePdfDeliveryTest extends TestCase
 
         $after = $this->withHeaders([
             'X-Anon-Id' => $anonId,
-            'Authorization' => 'Bearer ' . $token,
-        ])->get('/api/v0.3/attempts/' . $attemptId . '/report.pdf?inline=1');
+            'Authorization' => 'Bearer '.$token,
+        ])->get('/api/v0.3/attempts/'.$attemptId.'/report.pdf?inline=1');
         $after->assertStatus(200);
         $after->assertHeader('X-Report-Variant', 'full');
         $after->assertHeader('X-Report-Locked', 'false');

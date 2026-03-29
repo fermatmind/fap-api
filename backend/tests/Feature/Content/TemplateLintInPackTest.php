@@ -18,11 +18,11 @@ final class TemplateLintInPackTest extends TestCase
     {
         parent::setUp();
 
-        $this->tmpRoot = storage_path('framework/testing/content_lint_' . uniqid('', true));
-        $packDir = $this->tmpRoot . '/default/CN_MAINLAND/zh-CN/TEMPLATE-LINT-v1';
+        $this->tmpRoot = storage_path('framework/testing/content_lint_'.uniqid('', true));
+        $packDir = $this->tmpRoot.'/default/CN_MAINLAND/zh-CN/TEMPLATE-LINT-v1';
         File::ensureDirectoryExists($packDir);
 
-        file_put_contents($packDir . '/manifest.json', json_encode([
+        file_put_contents($packDir.'/manifest.json', json_encode([
             'schema_version' => 'pack-manifest@v1',
             'pack_id' => 'TEST.template.lint.v1',
             'scale_code' => 'MBTI',
@@ -36,7 +36,7 @@ final class TemplateLintInPackTest extends TestCase
             'fallback' => [],
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 
-        file_put_contents($packDir . '/report_section_policies.json', json_encode([
+        file_put_contents($packDir.'/report_section_policies.json', json_encode([
             'schema' => 'fap.report.section_policies.v1',
             'items' => [
                 'traits' => [
@@ -47,7 +47,7 @@ final class TemplateLintInPackTest extends TestCase
             ],
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
 
-        file_put_contents($packDir . '/report_cards_traits.json', json_encode([
+        file_put_contents($packDir.'/report_cards_traits.json', json_encode([
             'schema' => 'fap.report.cards.v1',
             'items' => [
                 [
