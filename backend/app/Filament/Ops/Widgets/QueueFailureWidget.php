@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 class QueueFailureWidget extends BaseWidget
 {
+    protected static bool $isLazy = false;
+
     protected function getHeading(): ?string
     {
         return 'Operational Stability';

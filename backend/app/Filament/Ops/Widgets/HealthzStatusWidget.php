@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 class HealthzStatusWidget extends BaseWidget
 {
+    protected static bool $isLazy = false;
+
     protected function getHeading(): ?string
     {
         return 'Service Health Snapshot';

@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Ops;
 
+use App\Filament\Ops\Widgets\CommerceKpiWidget;
+use App\Filament\Ops\Widgets\FunnelWidget;
+use App\Filament\Ops\Widgets\HealthzStatusWidget;
+use App\Filament\Ops\Widgets\QueueFailureWidget;
+use App\Filament\Ops\Widgets\WebhookFailureWidget;
 use App\Http\Middleware\EnsureAdminTotpVerified;
 use App\Http\Middleware\OpsAccessControl;
 use App\Http\Middleware\RequireOpsOrgSelected;
@@ -59,5 +64,14 @@ final class OpsDashboardOrgContextInheritanceTest extends TestCase
         $this->assertContains(EnsureAdminTotpVerified::class, $persistent);
         $this->assertContains(RequireOpsOrgSelected::class, $persistent);
         $this->assertContains(OpsAccessControl::class, $persistent);
+    }
+
+    public function test_ops_dashboard_widgets_render_on_initial_request_instead_of_lazy_livewire_updates(): void
+    {
+        $this->assertFalse(CommerceKpiWidget::isLazy());
+        $this->assertFalse(FunnelWidget::isLazy());
+        $this->assertFalse(WebhookFailureWidget::isLazy());
+        $this->assertFalse(QueueFailureWidget::isLazy());
+        $this->assertFalse(HealthzStatusWidget::isLazy());
     }
 }

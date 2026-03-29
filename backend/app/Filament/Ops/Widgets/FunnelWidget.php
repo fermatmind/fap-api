@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 class FunnelWidget extends BaseWidget
 {
+    protected static bool $isLazy = false;
+
     protected function getHeading(): ?string
     {
         return '7-Day Funnel Snapshot';
