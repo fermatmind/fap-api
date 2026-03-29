@@ -13,8 +13,7 @@ final class SelfCheckContext
         public bool $strictAssets,
         public ?string $manifestPath = null,
         public array $manifest = [],
-    ) {
-    }
+    ) {}
 
     public static function fromCommandOptions(array $opts): self
     {
@@ -37,13 +36,14 @@ final class SelfCheckContext
         }
 
         if (is_string($this->pkgPath) && $this->pkgPath !== '') {
-            return (string) base_path('../content_packages/' . ltrim($this->pkgPath, '/'));
+            return (string) base_path('../content_packages/'.ltrim($this->pkgPath, '/'));
         }
 
         if (is_string($this->basePath) && $this->basePath !== '') {
             if (str_ends_with(strtolower($this->basePath), 'manifest.json')) {
                 return dirname($this->basePath);
             }
+
             return $this->basePath;
         }
 
@@ -58,22 +58,25 @@ final class SelfCheckContext
     public function withManifestPath(string $manifestPath): self
     {
         $this->manifestPath = $manifestPath;
+
         return $this;
     }
 
     public function withManifest(array $manifest): self
     {
         $this->manifest = $manifest;
+
         return $this;
     }
 
     private static function toNullableString(mixed $value): ?string
     {
-        if (!is_string($value)) {
+        if (! is_string($value)) {
             return null;
         }
 
         $v = trim($value);
+
         return $v === '' ? null : $v;
     }
 }

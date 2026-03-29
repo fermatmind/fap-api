@@ -10,17 +10,17 @@ class GenericScoringDriver implements DriverInterface
     public function score(array $answers, array $spec, array $ctx): ScoreResult
     {
         $questionsDoc = $ctx['questions'] ?? null;
-        if (!is_array($questionsDoc)) {
+        if (! is_array($questionsDoc)) {
             throw new RuntimeException('questions missing');
         }
 
         $items = $questionsDoc['items'] ?? ($questionsDoc['questions']['items'] ?? null);
-        if (!is_array($items) || empty($items)) {
+        if (! is_array($items) || empty($items)) {
             throw new RuntimeException('questions.items missing');
         }
 
         $dimensionsSpec = $spec['dimensions'] ?? null;
-        if (!is_array($dimensionsSpec) || empty($dimensionsSpec)) {
+        if (! is_array($dimensionsSpec) || empty($dimensionsSpec)) {
             throw new RuntimeException('scoring_spec.dimensions missing');
         }
 
@@ -61,7 +61,7 @@ class GenericScoringDriver implements DriverInterface
         $answerCount = 0;
 
         foreach ($answers as $answer) {
-            if (!is_array($answer)) {
+            if (! is_array($answer)) {
                 continue;
             }
 
@@ -72,25 +72,28 @@ class GenericScoringDriver implements DriverInterface
             }
 
             $meta = $questionIndex[$qid] ?? null;
-            if (!is_array($meta)) {
+            if (! is_array($meta)) {
                 $skipped[] = ['question_id' => $qid, 'reason' => 'unknown_question'];
+
                 continue;
             }
 
             $dim = (string) ($meta['dimension'] ?? '');
-            if ($dim === '' || !isset($dimensions[$dim])) {
+            if ($dim === '' || ! isset($dimensions[$dim])) {
                 $skipped[] = ['question_id' => $qid, 'reason' => 'unknown_dimension', 'dimension' => $dim];
+
                 continue;
             }
 
             $scoreMap = $meta['scores'] ?? [];
-            if (!is_array($scoreMap)) {
+            if (! is_array($scoreMap)) {
                 $scoreMap = [];
             }
 
             $score = $scoreMap[$code] ?? null;
-            if (!is_numeric($score)) {
+            if (! is_numeric($score)) {
                 $skipped[] = ['question_id' => $qid, 'reason' => 'unknown_option', 'dimension' => $dim];
+
                 continue;
             }
 
@@ -105,7 +108,7 @@ class GenericScoringDriver implements DriverInterface
                 $towardP1 = ($keyPole !== '' && $p2 !== '' && $keyPole === $p2) ? -$signed : $signed;
 
                 $range = $meta['toward_range'] ?? null;
-                if (!is_array($range)) {
+                if (! is_array($range)) {
                     $range = $this->computeTowardRange($scoreMap, $direction, $keyPole, $p2);
                 }
 
@@ -124,8 +127,9 @@ class GenericScoringDriver implements DriverInterface
             } else {
                 $minScore = $meta['min_score'] ?? null;
                 $maxScore = $meta['max_score'] ?? null;
-                if (!is_numeric($minScore) || !is_numeric($maxScore) || (float) $maxScore === (float) $minScore) {
+                if (! is_numeric($minScore) || ! is_numeric($maxScore) || (float) $maxScore === (float) $minScore) {
                     $skipped[] = ['question_id' => $qid, 'reason' => 'invalid_score_range', 'dimension' => $dim];
+
                     continue;
                 }
 
@@ -153,7 +157,7 @@ class GenericScoringDriver implements DriverInterface
         $pciAxes = [];
 
         foreach ($dichotomyDims as $dim => $conf) {
-            if (!isset($countTotal[$dim]) || $countTotal[$dim] <= 0) {
+            if (! isset($countTotal[$dim]) || $countTotal[$dim] <= 0) {
                 continue;
             }
 
@@ -203,7 +207,7 @@ class GenericScoringDriver implements DriverInterface
 
         $traitScores = [];
         foreach ($traitDims as $dim => $conf) {
-            if (!isset($traitCount[$dim]) || $traitCount[$dim] <= 0) {
+            if (! isset($traitCount[$dim]) || $traitCount[$dim] <= 0) {
                 continue;
             }
 
@@ -219,7 +223,7 @@ class GenericScoringDriver implements DriverInterface
         }
 
         $pciOverall = null;
-        if (!empty($pciAxes)) {
+        if (! empty($pciAxes)) {
             $sum = 0.0;
             $n = 0;
             foreach ($pciAxes as $row) {
@@ -305,14 +309,14 @@ class GenericScoringDriver implements DriverInterface
 
     private function normalizeScoreMap(mixed $scoreMap): array
     {
-        if (!is_array($scoreMap)) {
+        if (! is_array($scoreMap)) {
             return [];
         }
 
         $out = [];
         foreach ($scoreMap as $code => $score) {
             $key = strtoupper((string) $code);
-            if ($key === '' || !is_numeric($score)) {
+            if ($key === '' || ! is_numeric($score)) {
                 continue;
             }
             $out[$key] = (float) $score;
@@ -325,7 +329,7 @@ class GenericScoringDriver implements DriverInterface
     {
         $index = [];
         foreach ($items as $item) {
-            if (!is_array($item)) {
+            if (! is_array($item)) {
                 continue;
             }
 
@@ -347,7 +351,7 @@ class GenericScoringDriver implements DriverInterface
             $minScore = null;
             $maxScore = null;
             foreach ($scores as $val) {
-                if (!is_numeric($val)) {
+                if (! is_numeric($val)) {
                     continue;
                 }
                 $minScore = $minScore === null ? (float) $val : min($minScore, (float) $val);
@@ -383,11 +387,11 @@ class GenericScoringDriver implements DriverInterface
         $scores = [];
         if (is_array($options)) {
             foreach ($options as $opt) {
-                if (!is_array($opt)) {
+                if (! is_array($opt)) {
                     continue;
                 }
                 $code = strtoupper((string) ($opt['code'] ?? ($opt['option_code'] ?? '')));
-                if ($code === '' || !is_numeric($opt['score'] ?? null)) {
+                if ($code === '' || ! is_numeric($opt['score'] ?? null)) {
                     continue;
                 }
                 $scores[$code] = (float) ($opt['score'] ?? 0);
@@ -407,7 +411,7 @@ class GenericScoringDriver implements DriverInterface
         $min = null;
         $max = null;
         foreach ($scores as $val) {
-            if (!is_numeric($val)) {
+            if (! is_numeric($val)) {
                 continue;
             }
             $signed = (float) $val * $direction;
@@ -426,12 +430,12 @@ class GenericScoringDriver implements DriverInterface
     private function resolveTypeCode(array $spec, array $winningPoles): ?string
     {
         $rules = $spec['type_rules'] ?? null;
-        if (!is_array($rules)) {
+        if (! is_array($rules)) {
             return null;
         }
 
         $baseAxes = $rules['base_axes'] ?? null;
-        if (!is_array($baseAxes) || empty($baseAxes)) {
+        if (! is_array($baseAxes) || empty($baseAxes)) {
             return null;
         }
 
@@ -439,7 +443,7 @@ class GenericScoringDriver implements DriverInterface
         foreach ($baseAxes as $axis) {
             $axisCode = strtoupper((string) $axis);
             $pole = $winningPoles[$axisCode] ?? null;
-            if (!is_string($pole) || $pole === '') {
+            if (! is_string($pole) || $pole === '') {
                 return null;
             }
             $letters[] = $pole;
@@ -451,7 +455,7 @@ class GenericScoringDriver implements DriverInterface
             $suffixPole = $winningPoles[$suffixAxis] ?? null;
             if (is_string($suffixPole) && $suffixPole !== '') {
                 $delimiter = (string) ($rules['delimiter'] ?? '');
-                $typeCode .= $delimiter . $suffixPole;
+                $typeCode .= $delimiter.$suffixPole;
             }
         }
 
@@ -461,7 +465,7 @@ class GenericScoringDriver implements DriverInterface
     private function resolvePciLevels(array $spec): array
     {
         $levels = $spec['pci_levels'] ?? ($spec['pci']['levels'] ?? null);
-        if (!is_array($levels) || empty($levels)) {
+        if (! is_array($levels) || empty($levels)) {
             return [
                 ['code' => 'slight', 'min' => 0, 'max' => 14],
                 ['code' => 'moderate', 'min' => 15, 'max' => 30],
@@ -469,29 +473,32 @@ class GenericScoringDriver implements DriverInterface
                 ['code' => 'very_clear', 'min' => 51, 'max' => 100],
             ];
         }
+
         return $levels;
     }
 
     private function pciLevel(float $clarity, array $levels): string
     {
         foreach ($levels as $level) {
-            if (!is_array($level)) {
+            if (! is_array($level)) {
                 continue;
             }
             $min = isset($level['min']) ? (float) $level['min'] : 0.0;
             $max = isset($level['max']) ? (float) $level['max'] : 100.0;
             if ($clarity >= $min && $clarity <= $max) {
                 $code = (string) ($level['code'] ?? '');
+
                 return $code !== '' ? $code : 'unknown';
             }
         }
+
         return 'unknown';
     }
 
     private function resolveTieDefaults(array $spec): array
     {
         $defaults = $spec['tie_break']['defaults'] ?? null;
-        if (!is_array($defaults)) {
+        if (! is_array($defaults)) {
             return [];
         }
 

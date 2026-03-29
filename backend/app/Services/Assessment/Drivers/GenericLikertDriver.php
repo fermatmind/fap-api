@@ -12,8 +12,8 @@ class GenericLikertDriver implements DriverInterface
     /**
      * Backward-compatible compute API used by legacy tests/specs.
      *
-     * @param array<int|string,mixed> $answers
-     * @param array<string,mixed> $spec
+     * @param  array<int|string,mixed>  $answers
+     * @param  array<string,mixed>  $spec
      * @return array<string,mixed>
      */
     public function compute(array $answers, array $spec): array
@@ -32,7 +32,7 @@ class GenericLikertDriver implements DriverInterface
         $debugItems = [];
 
         foreach ($this->normalizeComputeAnswers($answers) as $qid => $code) {
-            if (!array_key_exists($qid, $itemsMap)) {
+            if (! array_key_exists($qid, $itemsMap)) {
                 continue;
             }
 
@@ -44,15 +44,16 @@ class GenericLikertDriver implements DriverInterface
             $matchedDimension = false;
 
             foreach ($dimensionsMap as $dimension => $questionIds) {
-                if (!$this->dimensionContainsQuestion($questionIds, $qid)) {
+                if (! $this->dimensionContainsQuestion($questionIds, $qid)) {
                     continue;
                 }
 
                 $matchedDimension = true;
                 $dimension = (string) $dimension;
 
-                if (!$isValidRaw) {
+                if (! $isValidRaw) {
                     $this->logInvalidAnswer($qid, $code);
+
                     continue;
                 }
 
@@ -61,7 +62,7 @@ class GenericLikertDriver implements DriverInterface
                 $dimensionScores[$dimension] = ($dimensionScores[$dimension] ?? 0.0) + $weighted;
             }
 
-            if (!$isValidRaw && !$matchedDimension) {
+            if (! $isValidRaw && ! $matchedDimension) {
                 $this->logInvalidAnswer($qid, $code);
             }
 
@@ -98,7 +99,7 @@ class GenericLikertDriver implements DriverInterface
         [$minScore, $maxScore] = $this->resolveScoreBounds($optionScores, $defaultValue);
 
         $dimensions = $spec['dimensions'] ?? [];
-        if (!is_array($dimensions)) {
+        if (! is_array($dimensions)) {
             $dimensions = [];
         }
 
@@ -107,7 +108,7 @@ class GenericLikertDriver implements DriverInterface
         $items = [];
 
         foreach ($answers as $answer) {
-            if (!is_array($answer)) {
+            if (! is_array($answer)) {
                 continue;
             }
 
@@ -125,12 +126,12 @@ class GenericLikertDriver implements DriverInterface
             $matchedDimension = false;
 
             foreach ($dimensions as $dim => $conf) {
-                if (!is_array($conf)) {
+                if (! is_array($conf)) {
                     continue;
                 }
 
                 [$itemsMap, $legacySignedWeight] = $this->resolveDimensionItemsMap($conf);
-                if (!array_key_exists($qid, $itemsMap)) {
+                if (! array_key_exists($qid, $itemsMap)) {
                     continue;
                 }
 
@@ -163,7 +164,7 @@ class GenericLikertDriver implements DriverInterface
                 ];
             }
 
-            if (!$isValidRaw && !$matchedDimension) {
+            if (! $isValidRaw && ! $matchedDimension) {
                 $this->logInvalidAnswer($qid, $code);
             }
         }
@@ -199,7 +200,7 @@ class GenericLikertDriver implements DriverInterface
     }
 
     /**
-     * @param mixed $itemConf
+     * @param  mixed  $itemConf
      * @return array{0:float,1:bool}
      */
     private function resolveItemRule($itemConf, bool $legacySignedWeight = false): array
@@ -213,7 +214,7 @@ class GenericLikertDriver implements DriverInterface
             return [$weight, false];
         }
 
-        if (!is_array($itemConf)) {
+        if (! is_array($itemConf)) {
             return [1.0, false];
         }
 
@@ -237,14 +238,14 @@ class GenericLikertDriver implements DriverInterface
     }
 
     /**
-     * @param array<string,mixed> $optionScores
+     * @param  array<string,mixed>  $optionScores
      * @return array{0:float,1:float}
      */
     private function resolveScoreBounds(array $optionScores, float $defaultValue): array
     {
         $values = [];
         foreach ($optionScores as $score) {
-            if (!is_numeric($score)) {
+            if (! is_numeric($score)) {
                 continue;
             }
             $values[] = (float) $score;
@@ -258,7 +259,7 @@ class GenericLikertDriver implements DriverInterface
     }
 
     /**
-     * @param mixed $value
+     * @param  mixed  $value
      */
     private function toBool($value): bool
     {
@@ -270,7 +271,7 @@ class GenericLikertDriver implements DriverInterface
             return ((int) $value) !== 0;
         }
 
-        if (!is_string($value)) {
+        if (! is_string($value)) {
             return false;
         }
 
@@ -278,18 +279,18 @@ class GenericLikertDriver implements DriverInterface
     }
 
     /**
-     * @param mixed $rawOptionScores
+     * @param  mixed  $rawOptionScores
      * @return array<string,float>
      */
     private function normalizeOptionScores($rawOptionScores): array
     {
-        if (!is_array($rawOptionScores)) {
+        if (! is_array($rawOptionScores)) {
             return [];
         }
 
         $normalized = [];
         foreach ($rawOptionScores as $code => $score) {
-            if (!is_numeric($score)) {
+            if (! is_numeric($score)) {
                 continue;
             }
 
@@ -300,13 +301,13 @@ class GenericLikertDriver implements DriverInterface
     }
 
     /**
-     * @param array<string,mixed> $spec
-     * @param array<string,mixed> $ctx
+     * @param  array<string,mixed>  $spec
+     * @param  array<string,mixed>  $ctx
      */
     private function resolveScaleCode(array $spec, array $ctx): ?string
     {
         foreach ([$spec['scale_code'] ?? null, $spec['code'] ?? null, $ctx['scale_code'] ?? null] as $candidate) {
-            if (!is_string($candidate) && !is_numeric($candidate)) {
+            if (! is_string($candidate) && ! is_numeric($candidate)) {
                 continue;
             }
 
@@ -328,17 +329,17 @@ class GenericLikertDriver implements DriverInterface
     }
 
     /**
-     * @param array<string,float> $optionScores
+     * @param  array<string,float>  $optionScores
      * @return array{0:float,1:bool}
      */
     private function resolveRawValue(array $optionScores, string $code): array
     {
-        if (!array_key_exists($code, $optionScores)) {
+        if (! array_key_exists($code, $optionScores)) {
             return [0.0, false];
         }
 
         $raw = $optionScores[$code];
-        if (!is_numeric($raw)) {
+        if (! is_numeric($raw)) {
             return [0.0, false];
         }
 
@@ -346,7 +347,7 @@ class GenericLikertDriver implements DriverInterface
     }
 
     /**
-     * @param array<string,mixed> $dimensionConf
+     * @param  array<string,mixed>  $dimensionConf
      * @return array{0:array<string,mixed>,1:bool}
      */
     private function resolveDimensionItemsMap(array $dimensionConf): array
@@ -365,7 +366,7 @@ class GenericLikertDriver implements DriverInterface
     }
 
     /**
-     * @param array<int|string,mixed> $answers
+     * @param  array<int|string,mixed>  $answers
      * @return array<string,string>
      */
     private function normalizeComputeAnswers(array $answers): array
@@ -379,6 +380,7 @@ class GenericLikertDriver implements DriverInterface
                     continue;
                 }
                 $normalized[$qid] = $code;
+
                 continue;
             }
 
@@ -395,11 +397,11 @@ class GenericLikertDriver implements DriverInterface
     }
 
     /**
-     * @param mixed $questionIds
+     * @param  mixed  $questionIds
      */
     private function dimensionContainsQuestion($questionIds, string $qid): bool
     {
-        if (!is_array($questionIds)) {
+        if (! is_array($questionIds)) {
             return false;
         }
 

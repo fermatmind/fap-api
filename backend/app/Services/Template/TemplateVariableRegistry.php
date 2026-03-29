@@ -48,9 +48,7 @@ final class TemplateVariableRegistry
     public function __construct(
         private readonly ?BigFivePackLoader $bigFivePackLoader = null,
         private readonly ?ClinicalComboPackLoader $clinicalPackLoader = null,
-    )
-    {
-    }
+    ) {}
 
     /**
      * @return array<string,string>
@@ -100,7 +98,7 @@ final class TemplateVariableRegistry
     }
 
     /**
-     * @param list<string> $requiredList
+     * @param  list<string>  $requiredList
      * @return list<string>
      */
     public function missingRequired(array $requiredList, TemplateContext $context): array
@@ -109,8 +107,9 @@ final class TemplateVariableRegistry
 
         $missing = [];
         foreach ($requiredList as $varName) {
-            if (!$this->isAllowed($varName)) {
+            if (! $this->isAllowed($varName)) {
                 $missing[] = $varName;
+
                 continue;
             }
 
@@ -119,10 +118,11 @@ final class TemplateVariableRegistry
                 if ($dot === '' || $context->getCtx($dot) === null) {
                     $missing[] = $varName;
                 }
+
                 continue;
             }
 
-            if (!$context->has($varName) || $context->get($varName) === null) {
+            if (! $context->has($varName) || $context->get($varName) === null) {
                 $missing[] = $varName;
             }
         }
@@ -171,15 +171,15 @@ final class TemplateVariableRegistry
         }
 
         foreach ($paths as $path) {
-            if (!is_file($path)) {
+            if (! is_file($path)) {
                 continue;
             }
             $raw = file_get_contents($path);
-            if (!is_string($raw) || $raw === '') {
+            if (! is_string($raw) || $raw === '') {
                 continue;
             }
             $decoded = json_decode($raw, true);
-            if (!is_array($decoded)) {
+            if (! is_array($decoded)) {
                 continue;
             }
 
@@ -235,15 +235,15 @@ final class TemplateVariableRegistry
         }
 
         foreach ($paths as $path) {
-            if (!is_file($path)) {
+            if (! is_file($path)) {
                 continue;
             }
             $raw = file_get_contents($path);
-            if (!is_string($raw) || $raw === '') {
+            if (! is_string($raw) || $raw === '') {
                 continue;
             }
             $decoded = json_decode($raw, true);
-            if (!is_array($decoded)) {
+            if (! is_array($decoded)) {
                 continue;
             }
 

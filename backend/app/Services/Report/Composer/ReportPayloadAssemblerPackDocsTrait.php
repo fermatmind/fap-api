@@ -29,7 +29,7 @@ trait ReportPayloadAssemblerPackDocsTrait
         $fbs = $rp->fallbackChain ?? [];
         if (is_array($fbs)) {
             foreach ($fbs as $fb) {
-                if (!is_array($fb)) {
+                if (! is_array($fb)) {
                     continue;
                 }
                 $m = is_array($fb['manifest'] ?? null) ? $fb['manifest'] : [];
@@ -51,22 +51,22 @@ trait ReportPayloadAssemblerPackDocsTrait
         string $legacyContentPackageDir
     ): ?array {
         foreach ($chain as $p) {
-            if (!$p instanceof ContentPack) {
+            if (! $p instanceof ContentPack) {
                 continue;
             }
 
             $paths = $this->flattenAssetPaths($p->assets()[$assetKey] ?? null);
 
             foreach ($paths as $rel) {
-                if (!is_string($rel) || trim($rel) === '') {
+                if (! is_string($rel) || trim($rel) === '') {
                     continue;
                 }
                 if (basename($rel) !== $wantedBasename) {
                     continue;
                 }
 
-                $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $rel;
-                if (!is_file($abs)) {
+                $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$rel;
+                if (! is_file($abs)) {
                     continue;
                 }
 
@@ -80,6 +80,7 @@ trait ReportPayloadAssemblerPackDocsTrait
                         'path' => $abs,
                         'schema' => $json['schema'] ?? null,
                     ]);
+
                     return $json;
                 }
             }
@@ -115,17 +116,17 @@ trait ReportPayloadAssemblerPackDocsTrait
     private function loadReportRulesDocFromPackChain(array $chain): ?array
     {
         foreach ($chain as $p) {
-            if (!$p instanceof ContentPack) {
+            if (! $p instanceof ContentPack) {
                 continue;
             }
 
-            $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'report_rules.json';
-            if (!is_file($abs)) {
+            $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'report_rules.json';
+            if (! is_file($abs)) {
                 continue;
             }
 
             $j = json_decode((string) file_get_contents($abs), true);
-            if (!is_array($j)) {
+            if (! is_array($j)) {
                 continue;
             }
 
@@ -145,7 +146,7 @@ trait ReportPayloadAssemblerPackDocsTrait
 
     private function flattenAssetPaths($assetVal): array
     {
-        if (!is_array($assetVal)) {
+        if (! is_array($assetVal)) {
             return [];
         }
 
@@ -171,28 +172,29 @@ trait ReportPayloadAssemblerPackDocsTrait
 
     private function normalizeAssemblerMetaSections($sectionsMeta): array
     {
-        if (!is_array($sectionsMeta) || $sectionsMeta === []) {
+        if (! is_array($sectionsMeta) || $sectionsMeta === []) {
             return [];
         }
 
         $isList = array_keys($sectionsMeta) === range(0, count($sectionsMeta) - 1);
 
-        if (!$isList) {
+        if (! $isList) {
             $out = [];
             foreach ($sectionsMeta as $k => $v) {
-                if (!is_string($k) || $k === '') {
+                if (! is_string($k) || $k === '') {
                     continue;
                 }
                 if (is_array($v)) {
                     $out[$k] = $v;
                 }
             }
+
             return $out;
         }
 
         $out = [];
         foreach ($sectionsMeta as $node) {
-            if (!is_array($node)) {
+            if (! is_array($node)) {
                 continue;
             }
 
@@ -241,10 +243,10 @@ trait ReportPayloadAssemblerPackDocsTrait
 
             $policy = $this->pickSectionPolicy($policyDoc, $secKey, $defaults);
 
-            if (!isset($policy['min']) && isset($policy['min_cards'])) {
+            if (! isset($policy['min']) && isset($policy['min_cards'])) {
                 $policy['min'] = $policy['min_cards'];
             }
-            if (!isset($policy['min_cards']) && isset($policy['min'])) {
+            if (! isset($policy['min_cards']) && isset($policy['min'])) {
                 $policy['min_cards'] = $policy['min'];
             }
 
@@ -278,17 +280,17 @@ trait ReportPayloadAssemblerPackDocsTrait
     private function loadSectionPoliciesDocFromPackChain(array $chain): ?array
     {
         foreach ($chain as $p) {
-            if (!$p instanceof ContentPack) {
+            if (! $p instanceof ContentPack) {
                 continue;
             }
 
-            $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'report_section_policies.json';
-            if (!is_file($abs)) {
+            $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'report_section_policies.json';
+            if (! is_file($abs)) {
                 continue;
             }
 
             $j = json_decode((string) file_get_contents($abs), true);
-            if (!is_array($j)) {
+            if (! is_array($j)) {
                 continue;
             }
 
@@ -299,6 +301,7 @@ trait ReportPayloadAssemblerPackDocsTrait
                 'rel' => 'report_section_policies.json',
                 'path' => $abs,
             ];
+
             return $j;
         }
 
@@ -307,7 +310,7 @@ trait ReportPayloadAssemblerPackDocsTrait
 
     private function pickSectionPolicy(?array $doc, string $secKey, array $defaults): array
     {
-        if (!is_array($doc)) {
+        if (! is_array($doc)) {
             return $defaults;
         }
 
@@ -319,7 +322,7 @@ trait ReportPayloadAssemblerPackDocsTrait
         ];
 
         foreach ($candidates as $c) {
-            if (!is_array($c)) {
+            if (! is_array($c)) {
                 continue;
             }
 
@@ -344,6 +347,7 @@ trait ReportPayloadAssemblerPackDocsTrait
             }
 
             $out['min'] = $out['min_cards'];
+
             return $out;
         }
 
@@ -355,6 +359,7 @@ trait ReportPayloadAssemblerPackDocsTrait
         if ($a === []) {
             return true;
         }
+
         return array_keys($a) === range(0, count($a) - 1);
     }
 }

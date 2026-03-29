@@ -7,8 +7,8 @@ namespace App\Services\Legacy\Mbti\Report\V2\Contracts;
 interface SectionBuilderInterface
 {
     /**
-     * @param array<string,mixed> $legacyPayload
-     * @param array<string,mixed> $input
+     * @param  array<string,mixed>  $legacyPayload
+     * @param  array<string,mixed>  $input
      * @return array<string,mixed>
      */
     public function build(array $legacyPayload, array $input): array;

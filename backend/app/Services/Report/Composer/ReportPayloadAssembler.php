@@ -13,14 +13,14 @@ use App\Services\Report\TagBuilder;
 
 class ReportPayloadAssembler
 {
-    use ReportPayloadAssemblerComposeEntryTrait;
     use ReportPayloadAssemblerComposeBuildTrait;
+    use ReportPayloadAssemblerComposeEntryTrait;
     use ReportPayloadAssemblerComposeFinalizeTrait;
+    use ReportPayloadAssemblerContentGraphTrait;
     use ReportPayloadAssemblerNormsAndContextTrait;
+    use ReportPayloadAssemblerOverridesTrait;
     use ReportPayloadAssemblerPackDocsTrait;
     use ReportPayloadAssemblerProfilesTrait;
-    use ReportPayloadAssemblerContentGraphTrait;
-    use ReportPayloadAssemblerOverridesTrait;
 
     public function __construct(
         private TagBuilder $tagBuilder,
@@ -31,8 +31,7 @@ class ReportPayloadAssembler
         private ContentPackResolver $resolver,
         private ContentPacksIndex $packsIndex,
         private MbtiResultPersonalizationService $mbtiResultPersonalizationService,
-    ) {
-    }
+    ) {}
 
     public function assemble(ReportComposeContext $context): array
     {

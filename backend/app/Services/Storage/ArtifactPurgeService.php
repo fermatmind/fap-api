@@ -8,7 +8,6 @@ use App\Models\ReportArtifactVersion;
 use App\Models\StorageBlob;
 use App\Models\StorageBlobLocation;
 use App\Support\SchemaBaseline;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,8 +21,6 @@ final class ArtifactPurgeService
     ) {}
 
     /**
-     * @param  object  $attempt
-     * @param  object|null  $result
      * @param  array<string,mixed>  $context
      * @return array<string,mixed>
      */
@@ -103,8 +100,6 @@ final class ArtifactPurgeService
     }
 
     /**
-     * @param  object  $attempt
-     * @param  object|null  $result
      * @return array<string,mixed>
      */
     public function describeAttemptArtifacts(object $attempt, ?object $result = null): array
@@ -307,8 +302,6 @@ final class ArtifactPurgeService
     }
 
     /**
-     * @param  object  $attempt
-     * @param  object|null  $result
      * @param  array<string,mixed>  $extra
      * @return array<string,mixed>
      */
@@ -358,10 +351,6 @@ final class ArtifactPurgeService
         ];
     }
 
-    /**
-     * @param  object  $attempt
-     * @param  object|null  $result
-     */
     private function resolveManifestHash(object $attempt, ?object $result = null): string
     {
         $summary = $this->decodeArray($attempt->answers_summary_json ?? null);

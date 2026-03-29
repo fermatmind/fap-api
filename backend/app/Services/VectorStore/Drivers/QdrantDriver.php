@@ -23,7 +23,7 @@ final class QdrantDriver implements VectorStoreInterface
         }
 
         try {
-            $resp = ResilientClient::get($endpoint . '/healthz');
+            $resp = ResilientClient::get($endpoint.'/healthz');
             if ($resp->ok()) {
                 return [
                     'ok' => true,

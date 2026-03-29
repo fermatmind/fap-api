@@ -14,8 +14,7 @@ class AssessmentEngine
         private ContentPacksIndex $packsIndex,
         private ScaleRegistry $scaleRegistry,
         private ScoringModelRouter $modelRouter,
-    ) {
-    }
+    ) {}
 
     public function score(array $attempt, array $answers, array $ctx = []): array
     {
@@ -32,7 +31,7 @@ class AssessmentEngine
         }
 
         $scaleRow = $this->scaleRegistry->getByCode($scaleCode, $orgId);
-        if (!$scaleRow) {
+        if (! $scaleRow) {
             return $this->error('SCALE_NOT_FOUND', 'scale not found.');
         }
 
@@ -68,7 +67,7 @@ class AssessmentEngine
             || $scaleCode === 'EQ_60'
         ) {
             $driver = $this->resolveDriver($selectedDriverType);
-            if (!$driver) {
+            if (! $driver) {
                 return $this->error('UNSUPPORTED_DRIVER', "unsupported driver_type={$selectedDriverType}");
             }
 
@@ -95,6 +94,7 @@ class AssessmentEngine
                 if ($e instanceof \InvalidArgumentException) {
                     return $this->error('SCORING_INPUT_INVALID', $e->getMessage());
                 }
+
                 return $this->error('SCORING_FAILED', 'scoring failed.');
             }
 
@@ -113,7 +113,7 @@ class AssessmentEngine
         }
 
         $pack = $this->resolvePack($packId, $dirVersion);
-        if (!($pack['ok'] ?? false)) {
+        if (! ($pack['ok'] ?? false)) {
             return $this->error('PACK_NOT_FOUND', 'content pack not found.');
         }
 
@@ -123,7 +123,7 @@ class AssessmentEngine
             (string) ($pack['base_dir'] ?? ''),
             'scoring_spec.json'
         );
-        if (!is_array($scoringSpec)) {
+        if (! is_array($scoringSpec)) {
             return $this->error('SCORING_SPEC_NOT_FOUND', 'scoring_spec.json not found or invalid.');
         }
 
@@ -157,7 +157,7 @@ class AssessmentEngine
         }
 
         $driver = $this->resolveDriver($selectedDriverType);
-        if (!$driver) {
+        if (! $driver) {
             return $this->error('UNSUPPORTED_DRIVER', "unsupported driver_type={$selectedDriverType}");
         }
 
@@ -167,6 +167,7 @@ class AssessmentEngine
             if ($e instanceof \InvalidArgumentException) {
                 return $this->error('SCORING_INPUT_INVALID', $e->getMessage());
             }
+
             return $this->error('SCORING_FAILED', 'scoring failed.');
         }
 
@@ -260,7 +261,7 @@ class AssessmentEngine
     private function resolvePack(string $packId, string $dirVersion): array
     {
         $found = $this->packsIndex->find($packId, $dirVersion);
-        if (!($found['ok'] ?? false)) {
+        if (! ($found['ok'] ?? false)) {
             return ['ok' => false];
         }
 
@@ -294,8 +295,8 @@ class AssessmentEngine
             return null;
         }
 
-        $path = rtrim($baseDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $filename;
-        if (!File::exists($path) || !File::isFile($path)) {
+        $path = rtrim($baseDir, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$filename;
+        if (! File::exists($path) || ! File::isFile($path)) {
             return null;
         }
 
@@ -306,6 +307,7 @@ class AssessmentEngine
         }
 
         $decoded = json_decode($raw, true);
+
         return is_array($decoded) ? $decoded : null;
     }
 
@@ -317,12 +319,12 @@ class AssessmentEngine
         }
 
         $map = config('fap.assessment_drivers', []);
-        if (!is_array($map)) {
+        if (! is_array($map)) {
             $map = [];
         }
 
         $class = $map[$driverType] ?? null;
-        if (!is_string($class) || $class === '') {
+        if (! is_string($class) || $class === '') {
             return null;
         }
 

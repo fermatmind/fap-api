@@ -25,8 +25,8 @@ final class Big5BootstrapCalculator
     }
 
     /**
-     * @param list<array<string,mixed>> $rows
-     * @param list<string> $qualityFilters
+     * @param  list<array<string,mixed>>  $rows
+     * @param  list<string>  $qualityFilters
      * @return array{
      *   ok: bool,
      *   errors: list<string>,
@@ -56,7 +56,7 @@ final class Big5BootstrapCalculator
         $errors = [];
         foreach ($rows as $index => $row) {
             $qualityLevel = strtoupper(trim((string) ($row['quality_level'] ?? 'A')));
-            if (!in_array($qualityLevel, $filters, true)) {
+            if (! in_array($qualityLevel, $filters, true)) {
                 continue;
             }
 
@@ -65,10 +65,12 @@ final class Big5BootstrapCalculator
                 $rawValue = $row[$code] ?? null;
                 if ($rawValue === null || trim((string) $rawValue) === '') {
                     $errors[] = sprintf('row %d missing metric=%s', $index + 2, $code);
+
                     continue 2;
                 }
-                if (!is_numeric($rawValue)) {
+                if (! is_numeric($rawValue)) {
                     $errors[] = sprintf('row %d non-numeric metric=%s value=%s', $index + 2, $code, (string) $rawValue);
+
                     continue 2;
                 }
                 $values[$code] = (float) $rawValue;
@@ -88,6 +90,7 @@ final class Big5BootstrapCalculator
         foreach (self::DOMAINS as $domain) {
             if (($samples[$domain] ?? []) === []) {
                 $errors[] = sprintf('coverage missing for domain=%s', $domain);
+
                 continue;
             }
             $domainStats[$domain] = $this->toStat($samples[$domain]);
@@ -97,6 +100,7 @@ final class Big5BootstrapCalculator
         foreach (self::FACETS as $facet) {
             if (($samples[$facet] ?? []) === []) {
                 $errors[] = sprintf('coverage missing for facet=%s', $facet);
+
                 continue;
             }
             $facetStats[$facet] = $this->toStat($samples[$facet]);
@@ -122,7 +126,7 @@ final class Big5BootstrapCalculator
     }
 
     /**
-     * @param list<array<string,mixed>> $rows
+     * @param  list<array<string,mixed>>  $rows
      * @return array{
      *   ok: bool,
      *   errors: list<string>,
@@ -142,10 +146,10 @@ final class Big5BootstrapCalculator
             $level = strtolower(trim((string) ($row['metric_level'] ?? '')));
             $code = strtoupper(trim((string) ($row['metric_code'] ?? '')));
 
-            if (!in_array($level, ['domain', 'facet'], true)) {
+            if (! in_array($level, ['domain', 'facet'], true)) {
                 continue;
             }
-            if (!in_array($code, self::metricCodes(), true)) {
+            if (! in_array($code, self::metricCodes(), true)) {
                 continue;
             }
 
@@ -155,6 +159,7 @@ final class Big5BootstrapCalculator
 
             if ($mean === null || $sd === null || $sample === null) {
                 $errors[] = sprintf('invalid norm row for %s:%s', $level, $code);
+
                 continue;
             }
 
@@ -173,12 +178,12 @@ final class Big5BootstrapCalculator
         }
 
         foreach (self::DOMAINS as $domain) {
-            if (!isset($domainStats[$domain])) {
+            if (! isset($domainStats[$domain])) {
                 $errors[] = sprintf('coverage missing for domain=%s', $domain);
             }
         }
         foreach (self::FACETS as $facet) {
-            if (!isset($facetStats[$facet])) {
+            if (! isset($facetStats[$facet])) {
                 $errors[] = sprintf('coverage missing for facet=%s', $facet);
             }
         }
@@ -203,7 +208,7 @@ final class Big5BootstrapCalculator
     }
 
     /**
-     * @param list<float> $values
+     * @param  list<float>  $values
      * @return array{mean: float, sd: float, sample_n: int}
      */
     private function toStat(array $values): array

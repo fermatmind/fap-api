@@ -23,7 +23,7 @@ class SectionAssembler
      */
     public function apply(array $report, ContentStore $store, array $ctx = []): array
     {
-        if (!isset($report['sections']) || !is_array($report['sections'])) {
+        if (! isset($report['sections']) || ! is_array($report['sections'])) {
             return $report;
         }
 
@@ -44,13 +44,15 @@ class SectionAssembler
             $sectionsPolicy = $rawItems;                   // 形态 A
         }
 
-        if (!is_array($sectionsPolicy)) $sectionsPolicy = [];
+        if (! is_array($sectionsPolicy)) {
+            $sectionsPolicy = [];
+        }
 
         // policies 文件里如果你还想放 defaults，这里也兼容
         $defaults = is_array($policiesDoc['defaults'] ?? null) ? $policiesDoc['defaults'] : [];
 
         // ✅ explain 开关（建议仅本地/验收开）
-        $captureExplain = (bool)($ctx['capture_explain'] ?? false);
+        $captureExplain = (bool) ($ctx['capture_explain'] ?? false);
 
         /**
          * policies 为空：必须显式发射全局 meta，否则 composer 会认为 “assembler_did_not_emit_meta”
@@ -98,10 +100,12 @@ class SectionAssembler
 
         if ($isAssoc) {
             foreach ($sections as $sectionKey => $sec) {
-                if (!is_array($sec)) continue;
+                if (! is_array($sec)) {
+                    continue;
+                }
 
                 [$sec2, $secExplain] = $this->applyOneSection(
-                    (string)$sectionKey,
+                    (string) $sectionKey,
                     $sec,
                     $sectionsPolicy,
                     $store,
@@ -110,17 +114,19 @@ class SectionAssembler
 
                 $sections[$sectionKey] = $sec2;
                 if (is_array($secExplain)) {
-                    $fullExplain['by_section'][(string)$sectionKey] = $secExplain;
+                    $fullExplain['by_section'][(string) $sectionKey] = $secExplain;
                 }
             }
         } else {
             foreach ($sections as $i => $sec) {
-                if (!is_array($sec)) continue;
+                if (! is_array($sec)) {
+                    continue;
+                }
 
-                $sectionKey = $this->extractSectionKey($sec) ?? (string)$i;
+                $sectionKey = $this->extractSectionKey($sec) ?? (string) $i;
 
                 [$sec2, $secExplain] = $this->applyOneSection(
-                    (string)$sectionKey,
+                    (string) $sectionKey,
                     $sec,
                     $sectionsPolicy,
                     $store,
@@ -129,7 +135,7 @@ class SectionAssembler
 
                 $sections[$i] = $sec2;
                 if (is_array($secExplain)) {
-                    $fullExplain['by_section'][(string)$sectionKey] = $secExplain;
+                    $fullExplain['by_section'][(string) $sectionKey] = $secExplain;
                 }
             }
         }
@@ -142,8 +148,10 @@ class SectionAssembler
 
         // ✅ 逐 section 写入 assembler meta（这是 composer 验收用的核心字段）
         foreach (($fullExplain['by_section'] ?? []) as $secKey => $secExplain) {
-            if (!is_array($secExplain)) continue;
-            $secKey = (string)$secKey;
+            if (! is_array($secExplain)) {
+                continue;
+            }
+            $secKey = (string) $secKey;
 
             $report['_meta']['sections'][$secKey] = $report['_meta']['sections'][$secKey] ?? [];
             $report['_meta']['sections'][$secKey]['assembler'] = $secExplain;
@@ -185,34 +193,48 @@ class SectionAssembler
         $policy = $sectionsPolicy[$sectionKey] ?? null;
 
         $policyMissing = false;
-        if (!is_array($policy)) {
+        if (! is_array($policy)) {
             $policyMissing = true;
             $policy = [];
         }
 
         // ✅ 兼容 key：min/min_cards, target/target_cards, max/max_cards
-        $target = (int)($policy['target_cards'] ?? $policy['target'] ?? 0);
-        $min    = (int)($policy['min_cards'] ?? $policy['min'] ?? 0);
-        $max    = (int)($policy['max_cards'] ?? $policy['max'] ?? 0);
+        $target = (int) ($policy['target_cards'] ?? $policy['target'] ?? 0);
+        $min = (int) ($policy['min_cards'] ?? $policy['min'] ?? 0);
+        $max = (int) ($policy['max_cards'] ?? $policy['max'] ?? 0);
 
         $allowFallback = $policy['allow_fallback'] ?? true;
-        $allowFallback = is_bool($allowFallback) ? $allowFallback : (bool)$allowFallback;
+        $allowFallback = is_bool($allowFallback) ? $allowFallback : (bool) $allowFallback;
 
         // 防御性修正
-        if ($min < 0) $min = 0;
-        if ($target < 0) $target = 0;
-        if ($max < 0) $max = 0;
+        if ($min < 0) {
+            $min = 0;
+        }
+        if ($target < 0) {
+            $target = 0;
+        }
+        if ($max < 0) {
+            $max = 0;
+        }
 
         // cap by max
-        if ($max > 0 && $target > 0) $target = min($target, $max);
-        if ($max > 0 && $min > 0)    $min    = min($min, $max);
+        if ($max > 0 && $target > 0) {
+            $target = min($target, $max);
+        }
+        if ($max > 0 && $min > 0) {
+            $min = min($min, $max);
+        }
 
         // ✅ want：补齐目标 = max(min, target)，并且不超过 max（若 max>0）
         $want = max($min, $target);
-        if ($max > 0) $want = min($want, $max);
+        if ($max > 0) {
+            $want = min($want, $max);
+        }
 
         $cards = $sec['cards'] ?? [];
-        if (!is_array($cards)) $cards = [];
+        if (! is_array($cards)) {
+            $cards = [];
+        }
 
         $beforeN = count($cards);
 
@@ -252,16 +274,20 @@ class SectionAssembler
             }
 
             // dedupe
-            $dedupeKey = (string)($defaults['dedupe_by'] ?? 'id');
+            $dedupeKey = (string) ($defaults['dedupe_by'] ?? 'id');
             $existingIds = $this->collectIds($cards, $dedupeKey);
 
             foreach ($fallbackPool as $item) {
-                if (!is_array($item)) continue;
+                if (! is_array($item)) {
+                    continue;
+                }
 
                 $id = $item[$dedupeKey] ?? null;
 
                 if (is_string($id) && $id !== '') {
-                    if (isset($existingIds[$id])) continue;
+                    if (isset($existingIds[$id])) {
+                        continue;
+                    }
                     $existingIds[$id] = true;
                     $addedIds[] = $id;
                 }
@@ -274,19 +300,21 @@ class SectionAssembler
             }
 
             // optional repeat (default false)
-            $allowRepeat = (bool)($defaults['allow_repeat_fallback'] ?? false);
+            $allowRepeat = (bool) ($defaults['allow_repeat_fallback'] ?? false);
             if ($allowRepeat && ($afterTrimN + count($added)) < $want && count($fallbackPool) > 0) {
                 $idx = 0;
                 while (($afterTrimN + count($added)) < $want && $idx < 2000) {
                     $item = $fallbackPool[$idx % count($fallbackPool)];
-                    if (is_array($item)) $added[] = $item;
+                    if (is_array($item)) {
+                        $added[] = $item;
+                    }
                     $idx++;
                 }
             }
 
             if (count($added) > 0) {
                 $fallbackUsed = true;
-                $appendMode = (string)($defaults['fallback_append_mode'] ?? 'append_after_existing');
+                $appendMode = (string) ($defaults['fallback_append_mode'] ?? 'append_after_existing');
                 if ($appendMode === 'prepend_before_existing') {
                     $cards = array_merge($added, $cards);
                 } else {
@@ -307,7 +335,7 @@ class SectionAssembler
                     'final' => count($cards),
                     'short' => $shortAfterFill,
                     'pool_count' => is_array($fallbackPool) ? count($fallbackPool) : -1,
-                    'allow_repeat_fallback' => (bool)($defaults['allow_repeat_fallback'] ?? false),
+                    'allow_repeat_fallback' => (bool) ($defaults['allow_repeat_fallback'] ?? false),
                 ]);
             }
         }
@@ -321,28 +349,28 @@ class SectionAssembler
         $sec['cards'] = $cards;
 
         $secExplain = [
-            'ok' => !$policyMissing,
+            'ok' => ! $policyMissing,
             'policy_missing' => $policyMissing,
             'policy' => [
-                'target_cards'   => $target,
-                'min_cards'      => $min,
-                'max_cards'      => $max,
-                'want_cards'     => $want,
+                'target_cards' => $target,
+                'min_cards' => $min,
+                'max_cards' => $max,
+                'want_cards' => $want,
                 'allow_fallback' => $allowFallback,
-                'fallback_file'  => $policy['fallback_file'] ?? "report_cards_fallback_{$sectionKey}.json",
+                'fallback_file' => $policy['fallback_file'] ?? "report_cards_fallback_{$sectionKey}.json",
             ],
             'counts' => [
-                'before'           => $beforeN,
-                'after_trim'       => $afterTrimN,
-                'fallback_added'   => count($added),
-                'final'            => count($cards),
+                'before' => $beforeN,
+                'after_trim' => $afterTrimN,
+                'fallback_added' => count($added),
+                'final' => count($cards),
                 'short_after_fill' => $shortAfterFill,
             ],
             'actions' => [
-                'trimmed_to_max'  => $trimmedToMax,
+                'trimmed_to_max' => $trimmedToMax,
                 'trimmed_to_want' => $trimmedToWant,
-                'fallback_allowed'=> $allowFallback,
-                'fallback_used'   => $fallbackUsed,
+                'fallback_allowed' => $allowFallback,
+                'fallback_used' => $fallbackUsed,
             ],
             'fallback_added_ids' => $addedIds,
         ];
@@ -357,6 +385,7 @@ class SectionAssembler
                 return $sec[$k];
             }
         }
+
         return null;
     }
 
@@ -367,18 +396,24 @@ class SectionAssembler
     {
         $set = [];
         foreach ($cards as $c) {
-            if (!is_array($c)) continue;
+            if (! is_array($c)) {
+                continue;
+            }
             $id = $c[$dedupeKey] ?? null;
             if (is_string($id) && $id !== '') {
                 $set[$id] = true;
             }
         }
+
         return $set;
     }
 
     private function isAssocArray(array $arr): bool
     {
-        if ($arr === []) return false;
+        if ($arr === []) {
+            return false;
+        }
+
         return array_keys($arr) !== range(0, count($arr) - 1);
     }
 }

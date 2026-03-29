@@ -5,13 +5,10 @@ namespace App\Services\Psychometrics;
 use App\Services\ContentPackResolver;
 use App\Support\Stats\JsonSchemaGuard;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class NormsRegistry
 {
-    public function __construct(private ContentPackResolver $resolver)
-    {
-    }
+    public function __construct(private ContentPackResolver $resolver) {}
 
     public function resolve(
         string $scaleCode,
@@ -22,7 +19,7 @@ class NormsRegistry
         ?string $pinnedVersion = null
     ): array {
         $norms = $this->loadNormsFile($scaleCode, $region, $locale, $dirVersion);
-        if (!is_array($norms)) {
+        if (! is_array($norms)) {
             return [
                 'ok' => false,
                 'error' => 'NORMS_NOT_FOUND',
@@ -30,7 +27,7 @@ class NormsRegistry
         }
 
         $errors = JsonSchemaGuard::validateNormsFile($norms);
-        if (!empty($errors)) {
+        if (! empty($errors)) {
             return [
                 'ok' => false,
                 'error' => 'NORMS_INVALID',
@@ -42,8 +39,8 @@ class NormsRegistry
         $bucketKeys = is_array($meta['bucket_keys'] ?? null) ? $meta['bucket_keys'] : [];
 
         $selectedVersion = $pinnedVersion
-            ?? $this->resolveLatestDbVersion($scaleCode, $region, $locale, (string)($meta['norm_id'] ?? ''))
-            ?? (string)($meta['version'] ?? '');
+            ?? $this->resolveLatestDbVersion($scaleCode, $region, $locale, (string) ($meta['norm_id'] ?? ''))
+            ?? (string) ($meta['version'] ?? '');
 
         $bucket = $this->pickBucket($norms, $region, $locale, $demographics ?? []);
 
@@ -115,11 +112,12 @@ class NormsRegistry
         }
 
         $loader = $resolved->loaders['readJson'] ?? null;
-        if (!is_callable($loader)) {
+        if (! is_callable($loader)) {
             return null;
         }
 
         $norms = $loader('norms.json');
+
         return is_array($norms) ? $norms : null;
     }
 
@@ -141,7 +139,7 @@ class NormsRegistry
         $bestScore = -1;
 
         foreach ($buckets as $bucket) {
-            if (!is_array($bucket)) {
+            if (! is_array($bucket)) {
                 continue;
             }
 
@@ -150,7 +148,7 @@ class NormsRegistry
             $ok = true;
 
             foreach ($keys as $k => $v) {
-                if (!array_key_exists($k, $query)) {
+                if (! array_key_exists($k, $query)) {
                     $ok = false;
                     break;
                 }
@@ -182,7 +180,7 @@ class NormsRegistry
         $defaultKeys = is_array($meta['default_bucket'] ?? null) ? $meta['default_bucket'] : [];
 
         foreach ($buckets as $bucket) {
-            if (!is_array($bucket)) {
+            if (! is_array($bucket)) {
                 continue;
             }
             $keys = is_array($bucket['keys'] ?? null) ? $bucket['keys'] : [];
@@ -196,7 +194,7 @@ class NormsRegistry
 
     private function resolveLatestDbVersion(string $scaleCode, string $region, string $locale, string $normId): ?string
     {
-        if (!\App\Support\SchemaBaseline::hasTable('scale_norms_versions')) {
+        if (! \App\Support\SchemaBaseline::hasTable('scale_norms_versions')) {
             return null;
         }
 
@@ -251,6 +249,7 @@ class NormsRegistry
             if ($vc !== 0) {
                 return $vc;
             }
+
             return strcmp($b['created_at'], $a['created_at']);
         });
 
@@ -277,6 +276,7 @@ class NormsRegistry
     private function normRegion(string $region): string
     {
         $region = strtoupper(trim($region));
+
         return str_replace('-', '_', $region);
     }
 
@@ -293,6 +293,6 @@ class NormsRegistry
             return strtolower($parts[0]);
         }
 
-        return strtolower($parts[0]) . '-' . strtoupper($parts[1]);
+        return strtolower($parts[0]).'-'.strtoupper($parts[1]);
     }
 }

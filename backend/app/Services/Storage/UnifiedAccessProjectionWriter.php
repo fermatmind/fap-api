@@ -26,6 +26,7 @@ final class UnifiedAccessProjectionWriter
         }
 
         $now = now();
+
         return DB::transaction(function () use ($attemptId, $patch, $meta, $now): UnifiedAccessProjection {
             $existing = UnifiedAccessProjection::query()
                 ->where('attempt_id', $attemptId)

@@ -26,25 +26,25 @@ class ContentProbeService
 
         $errors = [];
 
-        $health = $this->fetchJson($baseUrl . '/api/healthz');
+        $health = $this->fetchJson($baseUrl.'/api/healthz');
         if ($health['ok'] ?? false) {
             $probes['health'] = (bool) (($health['json']['ok'] ?? false) === true);
         }
-        if (!$probes['health']) {
+        if (! $probes['health']) {
             $errors[] = 'health_failed';
         }
 
-        $questionsUrl = $baseUrl . '/api/v0.3/scales/MBTI/questions?region=' . urlencode($region) . '&locale=' . urlencode($locale);
+        $questionsUrl = $baseUrl.'/api/v0.3/scales/MBTI/questions?region='.urlencode($region).'&locale='.urlencode($locale);
         $questions = $this->fetchJson($questionsUrl);
         if ($questions['ok'] ?? false) {
             $probes['questions'] = (bool) (($questions['json']['ok'] ?? false) === true);
         }
-        if (!$probes['questions']) {
+        if (! $probes['questions']) {
             $errors[] = 'questions_failed';
         }
 
         $packs = $this->fetchJson(
-            $baseUrl . '/api/v0.3/scales/lookup?slug=mbti-personality-test-16-personality-types'
+            $baseUrl.'/api/v0.3/scales/lookup?slug=mbti-personality-test-16-personality-types'
         );
         if ($packs['ok'] ?? false) {
             $ok = (bool) (($packs['json']['ok'] ?? false) === true);
@@ -55,7 +55,7 @@ class ContentProbeService
             }
             $probes['content_packs'] = $ok && $hasPackId;
         }
-        if (!$probes['content_packs']) {
+        if (! $probes['content_packs']) {
             $errors[] = 'content_packs_failed';
         }
 
@@ -104,24 +104,24 @@ class ContentProbeService
 
     private function tryLocalRequest(string $url): ?array
     {
-        if (!str_starts_with($url, 'http://localhost') && !str_starts_with($url, 'http://127.0.0.1')) {
+        if (! str_starts_with($url, 'http://localhost') && ! str_starts_with($url, 'http://127.0.0.1')) {
             return null;
         }
 
         $parts = parse_url($url);
-        if (!is_array($parts)) {
+        if (! is_array($parts)) {
             return null;
         }
 
         $host = $parts['host'] ?? '';
         $port = $parts['port'] ?? 80;
-        $path = ($parts['path'] ?? '/') . (isset($parts['query']) ? ('?' . $parts['query']) : '');
+        $path = ($parts['path'] ?? '/').(isset($parts['query']) ? ('?'.$parts['query']) : '');
         if ($host === '') {
             return null;
         }
 
         $fp = @fsockopen($host, (int) $port, $errno, $errstr, 3);
-        if (!$fp) {
+        if (! $fp) {
             return [
                 'ok' => false,
                 'error' => 'LOCAL_CONNECT_FAILED',
@@ -134,7 +134,7 @@ class ContentProbeService
         $resp = stream_get_contents($fp);
         fclose($fp);
 
-        if (!is_string($resp) || $resp === '') {
+        if (! is_string($resp) || $resp === '') {
             return [
                 'ok' => false,
                 'error' => 'LOCAL_EMPTY_RESPONSE',

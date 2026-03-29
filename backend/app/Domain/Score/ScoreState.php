@@ -13,10 +13,19 @@ final class ScoreState
         $pct = max(50, min(100, $pct));
 
         // 你给的阈值（先定死，后面可配置化）
-        if ($pct >= 80) return 'very_strong';
-        if ($pct >= 70) return 'strong';
-        if ($pct >= 60) return 'clear';
-        if ($pct >= 55) return 'weak';
+        if ($pct >= 80) {
+            return 'very_strong';
+        }
+        if ($pct >= 70) {
+            return 'strong';
+        }
+        if ($pct >= 60) {
+            return 'clear';
+        }
+        if ($pct >= 55) {
+            return 'weak';
+        }
+
         return 'very_weak'; // 50-54
     }
 
@@ -24,12 +33,14 @@ final class ScoreState
     {
         // pct >= 50 的约定下，borderline = pct <= 50 + threshold
         $pct = max(50, min(100, $pct));
+
         return $pct <= (50 + $threshold);
     }
 
     public static function deltaFromPct(int $pct): int
     {
         $pct = max(50, min(100, $pct));
+
         return $pct - 50;
     }
 }

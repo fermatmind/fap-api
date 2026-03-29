@@ -7,9 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 final class AssetsMapper
 {
-    public function __construct(private AssetUrlResolver $resolver)
-    {
-    }
+    public function __construct(private AssetUrlResolver $resolver) {}
 
     /**
      * Map questions document assets to full URLs without changing structure.
@@ -26,16 +24,19 @@ final class AssetsMapper
 
         if (isset($doc['items']) && is_array($doc['items'])) {
             $doc['items'] = $this->mapQuestionsList($doc['items'], $packId, $dirVersion, $assetsBaseUrl);
+
             return $doc;
         }
 
         if (isset($doc['questions']) && is_array($doc['questions'])) {
             $doc['questions'] = $this->mapQuestionsList($doc['questions'], $packId, $dirVersion, $assetsBaseUrl);
+
             return $doc;
         }
 
         if (isset($doc['data']) && is_array($doc['data'])) {
             $doc['data'] = $this->mapQuestionsList($doc['data'], $packId, $dirVersion, $assetsBaseUrl);
+
             return $doc;
         }
 
@@ -50,8 +51,9 @@ final class AssetsMapper
     ): array {
         $out = [];
         foreach ($items as $i => $q) {
-            if (!is_array($q)) {
+            if (! is_array($q)) {
                 $out[$i] = $q;
+
                 continue;
             }
 
@@ -106,7 +108,9 @@ final class AssetsMapper
         $opts = $q['options'] ?? null;
         if (is_array($opts)) {
             foreach ($opts as $i => $opt) {
-                if (!is_array($opt) || !array_key_exists('assets', $opt)) continue;
+                if (! is_array($opt) || ! array_key_exists('assets', $opt)) {
+                    continue;
+                }
                 $opt['assets'] = $this->mapAssetsNode(
                     $opt['assets'],
                     "options[{$i}].assets (qid={$qidLabel})",
@@ -129,13 +133,13 @@ final class AssetsMapper
         string $dirVersion,
         ?string $assetsBaseUrl
     ): array {
-        if (!is_array($assets)) {
+        if (! is_array($assets)) {
             throw new \RuntimeException("{$context} must be object(map)");
         }
 
         $out = [];
         foreach ($assets as $k => $v) {
-            if (!is_string($v)) {
+            if (! is_string($v)) {
                 throw new \RuntimeException("{$context}.{$k} must be string");
             }
             $out[$k] = $this->resolver->resolve($packId, $dirVersion, $v, null, $assetsBaseUrl);

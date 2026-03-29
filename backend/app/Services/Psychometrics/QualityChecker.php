@@ -13,7 +13,7 @@ class QualityChecker
         $results = [];
 
         foreach ($checks as $check) {
-            if (!is_array($check)) {
+            if (! is_array($check)) {
                 continue;
             }
             $results[] = $this->evaluateCheck($check, $answers, $answerMap, $scoringSpec);
@@ -31,7 +31,7 @@ class QualityChecker
     {
         $map = [];
         foreach ($answers as $a) {
-            if (!is_array($a)) {
+            if (! is_array($a)) {
                 continue;
             }
             $qid = (string) ($a['question_id'] ?? '');
@@ -40,6 +40,7 @@ class QualityChecker
                 $map[$qid] = $code;
             }
         }
+
         return $map;
     }
 
@@ -122,7 +123,7 @@ class QualityChecker
         $mismatch = 0;
 
         foreach ($pairs as $pair) {
-            if (!is_array($pair)) {
+            if (! is_array($pair)) {
                 continue;
             }
 
@@ -133,7 +134,7 @@ class QualityChecker
                 continue;
             }
 
-            if (!isset($answerMap[$a]) || !isset($answerMap[$b])) {
+            if (! isset($answerMap[$a]) || ! isset($answerMap[$b])) {
                 continue;
             }
 
@@ -141,7 +142,7 @@ class QualityChecker
             $codeA = $answerMap[$a];
             $codeB = $answerMap[$b];
 
-            if (!$this->isReverseMatch($codeA, $codeB)) {
+            if (! $this->isReverseMatch($codeA, $codeB)) {
                 $mismatch += 1;
             }
         }
@@ -197,7 +198,7 @@ class QualityChecker
 
         $failedIds = [];
         foreach ($checks as $check) {
-            if (!is_array($check)) {
+            if (! is_array($check)) {
                 continue;
             }
             if (($check['passed'] ?? true) === false) {
@@ -208,7 +209,7 @@ class QualityChecker
         $failCount = count($failedIds);
 
         foreach ($downgrade as $rule) {
-            if (!is_array($rule)) {
+            if (! is_array($rule)) {
                 continue;
             }
 

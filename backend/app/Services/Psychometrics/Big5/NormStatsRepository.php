@@ -33,7 +33,7 @@ class NormStatsRepository
             ->orderByDesc('created_at')
             ->first();
 
-        if (!$version) {
+        if (! $version) {
             return null;
         }
 
@@ -67,7 +67,7 @@ class NormStatsRepository
             }
         }
 
-        if (!$this->hasFullCoverage($domains, $facets)) {
+        if (! $this->hasFullCoverage($domains, $facets)) {
             return null;
         }
 

@@ -7,7 +7,6 @@ namespace App\Services\Storage;
 use App\Models\ArtifactLifecycleEvent;
 use App\Models\ArtifactLifecycleJob;
 use App\Support\SchemaBaseline;
-use Illuminate\Support\Facades\DB;
 
 final class ArtifactLifecycleFrontDoor
 {

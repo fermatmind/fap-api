@@ -4,7 +4,6 @@ namespace App\Services\VectorStore\Drivers;
 
 use App\Services\VectorStore\VectorStoreInterface;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 final class MySqlFallbackDriver implements VectorStoreInterface
@@ -16,7 +15,7 @@ final class MySqlFallbackDriver implements VectorStoreInterface
 
     public function health(): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('embeddings')) {
+        if (! \App\Support\SchemaBaseline::hasTable('embeddings')) {
             return [
                 'ok' => false,
                 'error' => 'embeddings_table_missing',
@@ -40,7 +39,7 @@ final class MySqlFallbackDriver implements VectorStoreInterface
 
     public function upsert(string $namespace, array $items): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('embeddings')) {
+        if (! \App\Support\SchemaBaseline::hasTable('embeddings')) {
             return [
                 'ok' => false,
                 'error' => 'embeddings_table_missing',
@@ -85,7 +84,7 @@ final class MySqlFallbackDriver implements VectorStoreInterface
 
     public function query(string $namespace, array $vector, int $topK, array $filters = []): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('embeddings')) {
+        if (! \App\Support\SchemaBaseline::hasTable('embeddings')) {
             return [
                 'ok' => false,
                 'error' => 'embeddings_table_missing',
@@ -97,13 +96,13 @@ final class MySqlFallbackDriver implements VectorStoreInterface
         $topK = min(50, max(1, $topK));
 
         $query = DB::table('embeddings')->where('namespace', $namespace);
-        if (!empty($filters['owner_type'])) {
+        if (! empty($filters['owner_type'])) {
             $query->where('owner_type', (string) $filters['owner_type']);
         }
-        if (!empty($filters['owner_id'])) {
+        if (! empty($filters['owner_id'])) {
             $query->where('owner_id', (string) $filters['owner_id']);
         }
-        if (!empty($filters['content_hash'])) {
+        if (! empty($filters['content_hash'])) {
             $query->where('content_hash', (string) $filters['content_hash']);
         }
 
@@ -116,7 +115,7 @@ final class MySqlFallbackDriver implements VectorStoreInterface
             }
 
             $meta = $this->decodeMeta($row->meta_json ?? null);
-            if (!empty($filters['user_id'])) {
+            if (! empty($filters['user_id'])) {
                 $metaUser = (string) ($meta['user_id'] ?? '');
                 if ($metaUser !== (string) $filters['user_id']) {
                     continue;
@@ -135,7 +134,7 @@ final class MySqlFallbackDriver implements VectorStoreInterface
         }
 
         usort($matches, function ($a, $b) {
-            return ($b['score'] <=> $a['score']);
+            return $b['score'] <=> $a['score'];
         });
 
         return [
@@ -147,7 +146,7 @@ final class MySqlFallbackDriver implements VectorStoreInterface
 
     public function delete(string $namespace, array $ids): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('embeddings')) {
+        if (! \App\Support\SchemaBaseline::hasTable('embeddings')) {
             return [
                 'ok' => false,
                 'error' => 'embeddings_table_missing',
@@ -182,7 +181,7 @@ final class MySqlFallbackDriver implements VectorStoreInterface
         }
 
         $decoded = json_decode((string) $raw, true);
-        if (!is_array($decoded)) {
+        if (! is_array($decoded)) {
             return [];
         }
 
@@ -196,7 +195,7 @@ final class MySqlFallbackDriver implements VectorStoreInterface
         }
 
         $decoded = json_decode((string) $raw, true);
-        if (!is_array($decoded)) {
+        if (! is_array($decoded)) {
             return [];
         }
 

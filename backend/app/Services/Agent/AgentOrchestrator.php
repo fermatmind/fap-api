@@ -14,32 +14,33 @@ use App\Services\AI\BudgetLedger;
 use App\Services\AI\BudgetLedgerException;
 use App\Services\Analytics\EventRecorder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 final class AgentOrchestrator
 {
     public function runForUser(int $userId, array $settings = []): array
     {
-        if (!(bool) config('agent.enabled', false)) {
+        if (! (bool) config('agent.enabled', false)) {
             return ['ok' => false, 'error' => 'agent_disabled'];
         }
 
         $consent = app(ConsentPolicy::class)->check($userId);
-        if (!($consent['allowed'] ?? false)) {
+        if (! ($consent['allowed'] ?? false)) {
             $this->recordDecision($userId, null, 'suppress', $consent['reason'] ?? 'consent_missing');
             app(EventRecorder::class)->record('agent_suppressed_by_policy', $userId, [
                 'reason' => $consent['reason'] ?? 'consent_missing',
             ], ['channel' => 'agent']);
+
             return ['ok' => true, 'suppressed' => true, 'reason' => $consent['reason'] ?? 'consent_missing'];
         }
 
         $throttle = app(ThrottlePolicy::class)->check($userId, $settings);
-        if (!($throttle['allowed'] ?? false)) {
+        if (! ($throttle['allowed'] ?? false)) {
             $this->recordDecision($userId, null, 'suppress', $throttle['reason'] ?? 'throttled');
             app(EventRecorder::class)->record('agent_suppressed_by_policy', $userId, [
                 'reason' => $throttle['reason'] ?? 'throttled',
             ], ['channel' => 'agent']);
+
             return ['ok' => true, 'suppressed' => true, 'reason' => $throttle['reason'] ?? 'throttled'];
         }
 
@@ -97,13 +98,14 @@ final class AgentOrchestrator
         }
 
         $budget = $this->checkBudget();
-        if (!($budget['ok'] ?? false)) {
+        if (! ($budget['ok'] ?? false)) {
             $payload = $this->applyBudgetDegrade($payload, $budget);
             if ((bool) config('agent.breaker.suppress_on_budget_exceeded', true)) {
                 app(EventRecorder::class)->record('agent_suppressed_by_policy', $userId, [
                     'reason' => 'budget_exceeded',
                     'error_code' => $budget['error_code'] ?? null,
                 ], ['channel' => 'agent']);
+
                 return ['ok' => true, 'suppressed' => true, 'reason' => 'budget_exceeded'];
             }
 
@@ -132,7 +134,7 @@ final class AgentOrchestrator
         $notifier = app(InAppNotifier::class);
         $message = $notifier->send($userId, $payload);
 
-        if (($message['ok'] ?? false) && !empty($message['id'])) {
+        if (($message['ok'] ?? false) && ! empty($message['id'])) {
             app(EventRecorder::class)->record('agent_message_sent', $userId, [
                 'message_id' => $message['id'],
                 'decision_id' => $decisionId,
@@ -150,11 +152,11 @@ final class AgentOrchestrator
 
     private function recordTrigger(int $userId, array $trigger): ?string
     {
-        if (!\App\Support\SchemaBaseline::hasTable('agent_triggers')) {
+        if (! \App\Support\SchemaBaseline::hasTable('agent_triggers')) {
             return null;
         }
 
-        $idempotencyKey = hash('sha256', $userId . ':' . ($trigger['trigger_type'] ?? '') . ':' . date('Y-m-d'));
+        $idempotencyKey = hash('sha256', $userId.':'.($trigger['trigger_type'] ?? '').':'.date('Y-m-d'));
         $existing = DB::table('agent_triggers')->where('idempotency_key', $idempotencyKey)->first();
         if ($existing) {
             return (string) ($existing->id ?? '');
@@ -185,11 +187,11 @@ final class AgentOrchestrator
 
     private function recordDecision(int $userId, ?string $triggerId, string $decision, string $reason): ?string
     {
-        if (!\App\Support\SchemaBaseline::hasTable('agent_decisions')) {
+        if (! \App\Support\SchemaBaseline::hasTable('agent_decisions')) {
             return null;
         }
 
-        $idempotencyKey = hash('sha256', $userId . ':' . ($triggerId ?? '') . ':' . $decision);
+        $idempotencyKey = hash('sha256', $userId.':'.($triggerId ?? '').':'.$decision);
         $existing = DB::table('agent_decisions')->where('idempotency_key', $idempotencyKey)->first();
         if ($existing) {
             return (string) ($existing->id ?? '');
@@ -229,6 +231,7 @@ final class AgentOrchestrator
         try {
             $ledger->checkAndThrow($provider, $model, $subject, 0, $cost, 'day');
             $ledger->incrementTokens($provider, $model, $subject, 0, 0, $cost);
+
             return ['ok' => true];
         } catch (BudgetLedgerException $e) {
             $failOpen = (bool) config('agent.breaker.fail_open', false);
@@ -249,13 +252,14 @@ final class AgentOrchestrator
             $template = config('agent.risk_templates.high');
             $title = $template['title'] ?? '我们注意到你可能需要支持';
             $body = $template['body'] ?? '如果你正在经历困难时刻，请考虑联系可信赖的人或专业支持。';
+
             return [
                 'decision_id' => $decisionId,
                 'title' => $title,
                 'body' => $body,
                 'template_key' => 'risk_high',
-                'content_hash' => hash('sha256', $title . $body),
-                'idempotency_key' => 'decision:' . $decisionId,
+                'content_hash' => hash('sha256', $title.$body),
+                'idempotency_key' => 'decision:'.$decisionId,
                 'why_json' => $why,
             ];
         }
@@ -269,8 +273,8 @@ final class AgentOrchestrator
             'title' => $title,
             'body' => $body,
             'template_key' => 'agent_default',
-            'content_hash' => hash('sha256', $title . $body),
-            'idempotency_key' => 'decision:' . $decisionId,
+            'content_hash' => hash('sha256', $title.$body),
+            'idempotency_key' => 'decision:'.$decisionId,
             'why_json' => $why,
         ];
     }
@@ -281,16 +285,18 @@ final class AgentOrchestrator
             $stddev = $metrics['stddev'] ?? null;
             $mean = $metrics['mean'] ?? null;
             if ($stddev !== null && $mean !== null) {
-                return '过去一周的睡眠波动较大（均值 ' . $mean . 'h，波动 ' . $stddev . '）。如需支持，请告诉我们。';
+                return '过去一周的睡眠波动较大（均值 '.$mean.'h，波动 '.$stddev.'）。如需支持，请告诉我们。';
             }
+
             return '过去一周的睡眠波动较大，如需支持请告诉我们。';
         }
 
         if ($triggerType === 'low_mood_streak') {
             $lowDays = $metrics['low_days'] ?? null;
             if ($lowDays !== null) {
-                return '最近 ' . $lowDays . ' 天情绪偏低，如果需要支持我们在这里。';
+                return '最近 '.$lowDays.' 天情绪偏低，如果需要支持我们在这里。';
             }
+
             return '最近情绪偏低，如需支持我们在这里。';
         }
 
@@ -310,7 +316,7 @@ final class AgentOrchestrator
         $payload['title'] = $title;
         $payload['body'] = $body;
         $payload['template_key'] = 'budget_degraded';
-        $payload['content_hash'] = hash('sha256', $title . $body);
+        $payload['content_hash'] = hash('sha256', $title.$body);
         $payload['budget_error'] = $budget['error_code'] ?? null;
 
         return $payload;

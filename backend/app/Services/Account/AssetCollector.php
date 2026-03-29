@@ -9,8 +9,7 @@ class AssetCollector
 {
     public function __construct(
         private readonly OrgContext $orgContext,
-    ) {
-    }
+    ) {}
 
     /**
      * MVP：APPEND 归集（anon_id -> user_id）
@@ -44,6 +43,7 @@ class AssetCollector
 
     /**
      * 可选：device_key_hash -> user_id（你后面有 device_key 再启用）
+     *
      * @return array {updated:int}
      */
     public function appendByDeviceKeyHash(string $userId, string $deviceKeyHash): array

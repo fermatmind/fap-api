@@ -12,8 +12,7 @@ final class AttemptAnswerPersistence
     public function __construct(
         private AnswerSetStore $answerSets,
         private AnswerRowWriter $answerRowWriter,
-    ) {
-    }
+    ) {}
 
     public function canonicalJson(array $answers): string
     {
@@ -23,7 +22,7 @@ final class AttemptAnswerPersistence
     public function persist(Attempt $attempt, array $answers, ?int $durationMs, string $scoringSpecVersion): void
     {
         $stored = $this->answerSets->storeFinalAnswers($attempt, $answers, $durationMs, $scoringSpecVersion);
-        if (!($stored['ok'] ?? false)) {
+        if (! ($stored['ok'] ?? false)) {
             throw new ApiProblemException(
                 500,
                 'INTERNAL_ERROR',
@@ -32,7 +31,7 @@ final class AttemptAnswerPersistence
         }
 
         $rowsWritten = $this->answerRowWriter->writeRows($attempt, $answers, $durationMs);
-        if (!($rowsWritten['ok'] ?? false)) {
+        if (! ($rowsWritten['ok'] ?? false)) {
             throw new ApiProblemException(
                 500,
                 'INTERNAL_ERROR',

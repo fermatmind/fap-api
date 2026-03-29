@@ -6,7 +6,6 @@ namespace App\Services\Analytics;
 
 use App\Support\SchemaBaseline;
 use Carbon\CarbonImmutable;
-use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -774,7 +773,6 @@ final class QuestionAnalyticsDailyBuilder
     }
 
     /**
-     * @param  object  $row
      * @return array{
      *     day:string,
      *     org_id:int,

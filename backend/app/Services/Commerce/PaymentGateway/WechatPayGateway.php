@@ -46,7 +46,7 @@ class WechatPayGateway implements PaymentGatewayInterface
         $providerEventId = $this->resolveString($data, ['provider_event_id', 'id']);
         if ($providerEventId === '') {
             $eventTail = $externalTradeNo !== '' ? $externalTradeNo : $orderNo;
-            $providerEventId = strtolower($eventType) . ':' . $eventTail;
+            $providerEventId = strtolower($eventType).':'.$eventTail;
         }
 
         $amountCents = $this->resolveAmountCents($amount, ['total', 'payer_total']);

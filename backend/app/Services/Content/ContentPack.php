@@ -15,13 +15,40 @@ class ContentPack
     ) {}
 
     // ======== meta getters ========
-    public function packId(): string { return $this->packId; }
-    public function scaleCode(): string { return $this->scaleCode; }
-    public function region(): string { return $this->region; }
-    public function locale(): string { return $this->locale; }
-    public function version(): string { return $this->version; }
-    public function basePath(): string { return $this->basePath; }
-    public function manifest(): array { return $this->manifest; }
+    public function packId(): string
+    {
+        return $this->packId;
+    }
+
+    public function scaleCode(): string
+    {
+        return $this->scaleCode;
+    }
+
+    public function region(): string
+    {
+        return $this->region;
+    }
+
+    public function locale(): string
+    {
+        return $this->locale;
+    }
+
+    public function version(): string
+    {
+        return $this->version;
+    }
+
+    public function basePath(): string
+    {
+        return $this->basePath;
+    }
+
+    public function manifest(): array
+    {
+        return $this->manifest;
+    }
 
     // ======== core contract ========
 
@@ -31,6 +58,7 @@ class ContentPack
     public function assets(): array
     {
         $assets = $this->manifest['assets'] ?? [];
+
         return is_array($assets) ? $assets : [];
     }
 
@@ -40,6 +68,7 @@ class ContentPack
     public function schemas(): array
     {
         $schemas = $this->manifest['schemas'] ?? [];
+
         return is_array($schemas) ? $schemas : [];
     }
 
@@ -49,6 +78,7 @@ class ContentPack
     public function capabilities(): array
     {
         $caps = $this->manifest['capabilities'] ?? [];
+
         return is_array($caps) ? $caps : [];
     }
 
@@ -58,13 +88,18 @@ class ContentPack
     public function fallback(): array
     {
         $fb = $this->manifest['fallback'] ?? [];
-        if (!is_array($fb)) return [];
+        if (! is_array($fb)) {
+            return [];
+        }
 
         // 只保留非空字符串
         $out = [];
         foreach ($fb as $x) {
-            if (is_string($x) && trim($x) !== '') $out[] = trim($x);
+            if (is_string($x) && trim($x) !== '') {
+                $out[] = trim($x);
+            }
         }
+
         return $out;
     }
 

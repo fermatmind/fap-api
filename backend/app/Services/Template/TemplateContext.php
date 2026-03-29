@@ -10,14 +10,12 @@ use App\Models\Result;
 final class TemplateContext
 {
     /**
-     * @param array<string,mixed> $data
+     * @param  array<string,mixed>  $data
      */
-    private function __construct(private readonly array $data)
-    {
-    }
+    private function __construct(private readonly array $data) {}
 
     /**
-     * @param array<string,mixed> $options
+     * @param  array<string,mixed>  $options
      */
     public static function fromReportCompose(Attempt $attempt, ?Result $result, array $options = []): self
     {
@@ -46,7 +44,7 @@ final class TemplateContext
     }
 
     /**
-     * @param array<string,mixed> $data
+     * @param  array<string,mixed>  $data
      */
     public static function fromArray(array $data): self
     {
@@ -99,7 +97,7 @@ final class TemplateContext
         $current = $source;
 
         foreach ($segments as $segment) {
-            if (!is_array($current) || !array_key_exists($segment, $current)) {
+            if (! is_array($current) || ! array_key_exists($segment, $current)) {
                 return ['exists' => false, 'value' => null];
             }
             $current = $current[$segment];

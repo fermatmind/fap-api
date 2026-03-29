@@ -5,19 +5,18 @@ namespace App\Services\Audit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class LookupEventLogger
 {
     public function log(string $method, bool $success, Request $request, ?string $userId = null, array $meta = []): void
     {
-        if (!\App\Support\SchemaBaseline::hasTable('lookup_events')) {
+        if (! \App\Support\SchemaBaseline::hasTable('lookup_events')) {
             return;
         }
 
         $metaJson = null;
-        if (!empty($meta)) {
+        if (! empty($meta)) {
             $metaJson = json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         }
 

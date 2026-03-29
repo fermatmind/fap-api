@@ -18,9 +18,7 @@ final class ContentCacheAdapter implements CacheAdapterInterface
      */
     private static array $lastFailureLogAt = [];
 
-    public function __construct(private readonly string $store = 'hot_redis')
-    {
-    }
+    public function __construct(private readonly string $store = 'hot_redis') {}
 
     public function get(string $key): mixed
     {
@@ -29,7 +27,7 @@ final class ContentCacheAdapter implements CacheAdapterInterface
                 return Cache::store($this->store)->get($key);
             } catch (Throwable $e) {
                 $this->tripHotRedisBreaker();
-                $this->logCacheFailure('get@' . $this->store, $key, $e);
+                $this->logCacheFailure('get@'.$this->store, $key, $e);
             }
         }
 
@@ -49,7 +47,7 @@ final class ContentCacheAdapter implements CacheAdapterInterface
                 return (bool) Cache::store($this->store)->put($key, $value, $ttlSeconds);
             } catch (Throwable $e) {
                 $this->tripHotRedisBreaker();
-                $this->logCacheFailure('put@' . $this->store, $key, $e);
+                $this->logCacheFailure('put@'.$this->store, $key, $e);
             }
         }
 
@@ -69,7 +67,7 @@ final class ContentCacheAdapter implements CacheAdapterInterface
                 return (bool) Cache::store($this->store)->forget($key);
             } catch (Throwable $e) {
                 $this->tripHotRedisBreaker();
-                $this->logCacheFailure('forget@' . $this->store, $key, $e);
+                $this->logCacheFailure('forget@'.$this->store, $key, $e);
             }
         }
 
@@ -103,7 +101,7 @@ final class ContentCacheAdapter implements CacheAdapterInterface
         $parts = explode('@', $op, 2);
         $operation = $parts[0] ?? $op;
         $store = $parts[1] ?? $this->store;
-        $bucket = $operation . '@' . $store;
+        $bucket = $operation.'@'.$store;
         $now = time();
 
         $lastLoggedAt = self::$lastFailureLogAt[$bucket] ?? 0;

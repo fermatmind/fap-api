@@ -101,25 +101,28 @@ class Big5Standardizer
         }
 
         $path = base_path((string) config('big5_norms.standardizer.cdf_file', 'resources/stats/normal_cdf_0p01.csv'));
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             self::$cdfTable = [];
+
             return self::$cdfTable;
         }
 
         $fp = fopen($path, 'rb');
         if ($fp === false) {
             self::$cdfTable = [];
+
             return self::$cdfTable;
         }
 
         $header = null;
         $table = [];
         while (($row = fgetcsv($fp, 0, ',', '"', '\\')) !== false) {
-            if (!is_array($row)) {
+            if (! is_array($row)) {
                 continue;
             }
             if ($header === null) {
                 $header = array_map(static fn ($v): string => trim((string) $v), $row);
+
                 continue;
             }
 

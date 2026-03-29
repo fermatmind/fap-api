@@ -33,8 +33,7 @@ final class ControlledGenerationRuntime
         private readonly BudgetLedger $budgetLedger,
         private readonly NullNarrativeProvider $nullProvider,
         private readonly MockNarrativeProvider $mockProvider,
-    ) {
-    }
+    ) {}
 
     /**
      * @param  array<string, mixed>  $authority
@@ -162,7 +161,7 @@ final class ControlledGenerationRuntime
 
     private function guardBudget(NarrativeGenerationRequest $request, string $providerName): void
     {
-        if (!(bool) config('ai.breaker_enabled', true)) {
+        if (! (bool) config('ai.breaker_enabled', true)) {
             return;
         }
 
@@ -177,7 +176,7 @@ final class ControlledGenerationRuntime
 
     private function incrementBudget(NarrativeGenerationRequest $request, NarrativeGenerationResponse $response): void
     {
-        if (!(bool) config('ai.breaker_enabled', true)) {
+        if (! (bool) config('ai.breaker_enabled', true)) {
             return;
         }
 

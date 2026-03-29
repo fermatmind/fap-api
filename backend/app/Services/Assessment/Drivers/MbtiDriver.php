@@ -8,30 +8,28 @@ use RuntimeException;
 
 class MbtiDriver implements DriverInterface
 {
-    public function __construct(private MbtiAttemptScorer $scorer)
-    {
-    }
+    public function __construct(private MbtiAttemptScorer $scorer) {}
 
     public function score(array $answers, array $spec, array $ctx): ScoreResult
     {
         $questionsDoc = $ctx['questions'] ?? null;
-        if (!is_array($questionsDoc)) {
+        if (! is_array($questionsDoc)) {
             throw new RuntimeException('MBTI questions missing');
         }
 
         $items = $questionsDoc['items'] ?? null;
-        if (!is_array($items)) {
+        if (! is_array($items)) {
             throw new RuntimeException('MBTI questions.items missing');
         }
 
         $defaultScoreMap = $spec['score_map'] ?? null;
-        if (!is_array($defaultScoreMap)) {
+        if (! is_array($defaultScoreMap)) {
             $defaultScoreMap = [];
         }
 
         $index = [];
         foreach ($items as $item) {
-            if (!is_array($item)) {
+            if (! is_array($item)) {
                 continue;
             }
 
@@ -44,7 +42,7 @@ class MbtiDriver implements DriverInterface
             $options = $item['options'] ?? null;
             if (is_array($options)) {
                 foreach ($options as $opt) {
-                    if (!is_array($opt)) {
+                    if (! is_array($opt)) {
                         continue;
                     }
                     $code = strtoupper((string) ($opt['code'] ?? ''));
@@ -55,7 +53,7 @@ class MbtiDriver implements DriverInterface
                 }
             }
 
-            if (empty($scoreMap) && !empty($defaultScoreMap)) {
+            if (empty($scoreMap) && ! empty($defaultScoreMap)) {
                 foreach ($defaultScoreMap as $k => $v) {
                     $code = strtoupper((string) $k);
                     if ($code === '') {

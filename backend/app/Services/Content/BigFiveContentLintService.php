@@ -240,8 +240,9 @@ final class BigFiveContentLintService
         }
 
         foreach ($validityItems as $idx => $item) {
-            if (!is_array($item)) {
+            if (! is_array($item)) {
                 $errors[] = $this->error($file, 1, "validity_items[{$idx}] must be object.");
+
                 continue;
             }
 

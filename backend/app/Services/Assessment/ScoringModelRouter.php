@@ -49,8 +49,8 @@ final class ScoringModelRouter
 
         if (
             $normalizedScaleCode === ''
-            || !SchemaBaseline::hasTable('scoring_models')
-            || !SchemaBaseline::hasTable('scoring_model_rollouts')
+            || ! SchemaBaseline::hasTable('scoring_models')
+            || ! SchemaBaseline::hasTable('scoring_model_rollouts')
         ) {
             return $fallback;
         }
@@ -63,7 +63,7 @@ final class ScoringModelRouter
         $subjectKey = $this->resolveSubjectKey($ctx, $orgId, $normalizedScaleCode);
 
         foreach ($rollouts as $rollout) {
-            if (!$this->isActiveTimeWindow($rollout)) {
+            if (! $this->isActiveTimeWindow($rollout)) {
                 continue;
             }
 
@@ -73,7 +73,7 @@ final class ScoringModelRouter
 
             if ($experimentKey !== '') {
                 $assignedVariant = $experiments[$experimentKey] ?? null;
-                if (!is_string($assignedVariant) || trim($assignedVariant) === '') {
+                if (! is_string($assignedVariant) || trim($assignedVariant) === '') {
                     continue;
                 }
                 $assignedVariant = trim($assignedVariant);
@@ -100,7 +100,7 @@ final class ScoringModelRouter
             }
 
             $model = $this->resolveModelRow($orgId, $normalizedScaleCode, $modelKey);
-            if (!$model) {
+            if (! $model) {
                 continue;
             }
 
@@ -238,7 +238,7 @@ final class ScoringModelRouter
      */
     private function normalizeExperiments(mixed $raw): array
     {
-        if (!is_array($raw)) {
+        if (! is_array($raw)) {
             return [];
         }
 

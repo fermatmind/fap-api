@@ -32,7 +32,7 @@ class MeMetricsService
 
     public function sleepData(?string $userId, int $days): array
     {
-        if (!$this->tables['sleep_samples']) {
+        if (! $this->tables['sleep_samples']) {
             return [
                 'items' => [],
                 'note' => 'sleep_samples table not found; sleep data empty.',
@@ -64,7 +64,7 @@ class MeMetricsService
 
     public function moodData(?string $userId, int $days): array
     {
-        if (!$this->tables['health_samples']) {
+        if (! $this->tables['health_samples']) {
             return [
                 'items' => [],
                 'note' => 'health_samples table not found; mood data empty.',
@@ -97,7 +97,7 @@ class MeMetricsService
 
     public function screenTimeData(?string $userId, int $days): array
     {
-        if (!$this->tables['screen_time_samples']) {
+        if (! $this->tables['screen_time_samples']) {
             return [
                 'items' => [],
                 'note' => 'screen_time_samples table not found; screen time data empty.',
@@ -128,7 +128,7 @@ class MeMetricsService
     }
 
     /**
-     * @param Collection<int, object> $rows
+     * @param  Collection<int, object>  $rows
      * @return array<int, array<string, mixed>>
      */
     private function aggregateByDay(Collection $rows, callable $valueExtractor, string $metricKey, bool $average): array
@@ -141,7 +141,7 @@ class MeMetricsService
                 continue;
             }
 
-            if (!isset($bucket[$day])) {
+            if (! isset($bucket[$day])) {
                 $bucket[$day] = [
                     'date' => $day,
                     'count' => 0,
@@ -185,8 +185,8 @@ class MeMetricsService
     }
 
     /**
-     * @param array<string, mixed> $value
-     * @param array<int, string> $keys
+     * @param  array<string, mixed>  $value
+     * @param  array<int, string>  $keys
      */
     private function extractNumeric(array $value, array $keys): ?float
     {

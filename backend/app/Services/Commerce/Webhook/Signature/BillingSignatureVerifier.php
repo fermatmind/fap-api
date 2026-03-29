@@ -17,6 +17,6 @@ final class BillingSignatureVerifier implements WebhookSignatureVerifierInterfac
 
     public function verify(Request $request): bool
     {
-        return (new BillingGateway())->verifySignature($request);
+        return (new BillingGateway)->verifySignature($request);
     }
 }

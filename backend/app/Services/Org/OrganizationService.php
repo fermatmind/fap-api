@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\DB;
 
 final class OrganizationService
 {
-    public function __construct(private MembershipService $memberships)
-    {
-    }
+    public function __construct(private MembershipService $memberships) {}
 
     public function createOrg(string $name, int $ownerUserId): int
     {

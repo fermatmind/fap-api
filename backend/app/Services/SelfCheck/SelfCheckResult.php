@@ -17,37 +17,38 @@ final class SelfCheckResult
     /** @var array<string, mixed> */
     public array $meta = [];
 
-    public function __construct(public string $section)
-    {
-    }
+    public function __construct(public string $section) {}
 
     public function addError(string $message): self
     {
         $this->ok = false;
         $this->errors[] = $message;
+
         return $this;
     }
 
     public function addWarning(string $message): self
     {
         $this->warnings[] = $message;
+
         return $this;
     }
 
     public function addNote(string $message): self
     {
         $notes = $this->meta['notes'] ?? [];
-        if (!is_array($notes)) {
+        if (! is_array($notes)) {
             $notes = [];
         }
         $notes[] = $message;
         $this->meta['notes'] = $notes;
+
         return $this;
     }
 
     public function merge(SelfCheckResult $other): self
     {
-        if (!$other->ok) {
+        if (! $other->ok) {
             $this->ok = false;
         }
 
@@ -72,6 +73,7 @@ final class SelfCheckResult
     public function notes(): array
     {
         $notes = $this->meta['notes'] ?? [];
+
         return is_array($notes) ? array_values(array_filter($notes, fn ($n) => is_string($n))) : [];
     }
 }

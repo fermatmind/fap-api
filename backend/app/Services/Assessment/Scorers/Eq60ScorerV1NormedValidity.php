@@ -398,7 +398,7 @@ final class Eq60ScorerV1NormedValidity
             $norms['status'] = 'PROVISIONAL';
         }
 
-        if (!$this->normGroupResolver instanceof NormGroupResolver) {
+        if (! $this->normGroupResolver instanceof NormGroupResolver) {
             return [
                 'mu_dim' => $fallbackMu,
                 'sigma_dim' => $fallbackSigma,
@@ -743,7 +743,7 @@ final class Eq60ScorerV1NormedValidity
         }
 
         foreach ($rules as $rule) {
-            if (!is_array($rule)) {
+            if (! is_array($rule)) {
                 continue;
             }
             $tag = trim((string) ($rule['tag'] ?? ''));
@@ -784,7 +784,7 @@ final class Eq60ScorerV1NormedValidity
         $allConditions = (array) ($when['all'] ?? []);
         if ($allConditions !== []) {
             foreach ($allConditions as $condition) {
-                if (!is_array($condition) || !$this->matchCrossCondition($scores, $condition)) {
+                if (! is_array($condition) || ! $this->matchCrossCondition($scores, $condition)) {
                     return false;
                 }
             }
@@ -927,7 +927,7 @@ final class Eq60ScorerV1NormedValidity
             return null;
         }
 
-        if (!is_numeric(data_get($scores, $path))) {
+        if (! is_numeric(data_get($scores, $path))) {
             return null;
         }
 

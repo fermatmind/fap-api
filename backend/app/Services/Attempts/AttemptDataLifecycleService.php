@@ -21,7 +21,7 @@ final class AttemptDataLifecycleService
     ) {}
 
     /**
-     * @param array<string,mixed> $context
+     * @param  array<string,mixed>  $context
      * @return array<string,mixed>
      */
     public function purgeAttempt(string $attemptId, int $orgId, array $context = []): array
@@ -214,8 +214,6 @@ final class AttemptDataLifecycleService
 
     /**
      * @param  array<string,mixed>  $context
-     * @param  object  $attempt
-     * @param  object|null  $result
      * @return array<string,mixed>
      */
     private function purgeAttemptLegacy(string $attemptId, int $orgId, array $context, object $attempt, ?object $result): array
@@ -412,8 +410,6 @@ final class AttemptDataLifecycleService
     }
 
     /**
-     * @param  object  $attempt
-     * @param  object|null  $result
      * @param  array<string,mixed>  $extra
      * @return array<string,mixed>
      */
@@ -463,10 +459,6 @@ final class AttemptDataLifecycleService
         ];
     }
 
-    /**
-     * @param  object  $attempt
-     * @param  object|null  $result
-     */
     private function resolveManifestHash(object $attempt, ?object $result = null): string
     {
         $summary = $this->decodeArray($attempt->answers_summary_json ?? null);

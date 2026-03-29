@@ -61,7 +61,7 @@ class IdentityService
         }
 
         $payload = null;
-        if (!empty($meta)) {
+        if (! empty($meta)) {
             $payload = json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         }
 
@@ -112,7 +112,9 @@ class IdentityService
     {
         $provider = strtolower(trim($provider));
         $providerUid = trim($providerUid);
-        if ($provider === '' || $providerUid === '') return null;
+        if ($provider === '' || $providerUid === '') {
+            return null;
+        }
 
         try {
             $row = DB::table('identities')
@@ -123,9 +125,12 @@ class IdentityService
             return null;
         }
 
-        if (!$row) return null;
+        if (! $row) {
+            return null;
+        }
 
         $uid = (string) ($row->user_id ?? '');
+
         return $uid !== '' ? $uid : null;
     }
 
@@ -135,7 +140,9 @@ class IdentityService
     public function listByUserId(string $userId): array
     {
         $userId = trim($userId);
-        if ($userId === '') return [];
+        if ($userId === '') {
+            return [];
+        }
 
         try {
             $rows = DB::table('identities')

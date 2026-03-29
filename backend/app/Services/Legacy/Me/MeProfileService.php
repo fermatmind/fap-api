@@ -6,9 +6,7 @@ use App\Support\OrgContext;
 
 class MeProfileService
 {
-    public function __construct(private readonly OrgContext $orgContext)
-    {
-    }
+    public function __construct(private readonly OrgContext $orgContext) {}
 
     public function profile(): array
     {

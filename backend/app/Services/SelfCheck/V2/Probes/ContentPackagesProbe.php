@@ -9,9 +9,7 @@ use App\Services\SelfCheck\V2\DTO\ProbeResult;
 
 final class ContentPackagesProbe implements ProbeInterface
 {
-    public function __construct(private readonly string $region, private readonly string $locale)
-    {
-    }
+    public function __construct(private readonly string $region, private readonly string $locale) {}
 
     public function name(): string
     {
@@ -20,9 +18,9 @@ final class ContentPackagesProbe implements ProbeInterface
 
     public function probe(bool $verbose = false): array
     {
-        $base = realpath(base_path('..' . DIRECTORY_SEPARATOR . 'content_packages'))
-            ?: base_path('..' . DIRECTORY_SEPARATOR . 'content_packages');
-        $defaultDir = rtrim($base, '/') . '/default/' . $this->region . '/' . $this->locale;
+        $base = realpath(base_path('..'.DIRECTORY_SEPARATOR.'content_packages'))
+            ?: base_path('..'.DIRECTORY_SEPARATOR.'content_packages');
+        $defaultDir = rtrim($base, '/').'/default/'.$this->region.'/'.$this->locale;
 
         $existsBase = is_dir($base);
         $existsDefault = is_dir($defaultDir);

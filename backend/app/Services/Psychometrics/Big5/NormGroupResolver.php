@@ -4,9 +4,7 @@ namespace App\Services\Psychometrics\Big5;
 
 class NormGroupResolver
 {
-    public function __construct(private readonly NormStatsRepository $repository)
-    {
-    }
+    public function __construct(private readonly NormStatsRepository $repository) {}
 
     public function resolve(string $scaleCode, array $ctx, array $compiledNorms = []): array
     {
@@ -93,7 +91,7 @@ class NormGroupResolver
             return strtolower($parts[0]);
         }
 
-        return strtolower($parts[0]) . '-' . strtoupper($parts[1]);
+        return strtolower($parts[0]).'-'.strtoupper($parts[1]);
     }
 
     private function normalizeRegion(string $region): string
@@ -110,7 +108,7 @@ class NormGroupResolver
     {
         $ageBand = trim((string) ($ctx['age_band'] ?? ''));
         $default = (string) config('big5_norms.resolver.default_age_band', '18-60');
-        if ($ageBand !== '' && !in_array(strtolower($ageBand), ['all', 'any', '*'], true)) {
+        if ($ageBand !== '' && ! in_array(strtolower($ageBand), ['all', 'any', '*'], true)) {
             return $ageBand;
         }
 
@@ -153,7 +151,7 @@ class NormGroupResolver
 
         $out = [];
         foreach ($templates as $template) {
-            if (!is_string($template) || trim($template) === '') {
+            if (! is_string($template) || trim($template) === '') {
                 continue;
             }
 
@@ -203,7 +201,7 @@ class NormGroupResolver
         $domainGroupId = '';
         foreach ($candidates as $candidate) {
             $resolvedCandidate = $this->matchCompiledGroupId($candidate, $groupLookup);
-            if ($resolvedCandidate === '' || !isset($groups[$resolvedCandidate]) || !is_array($groups[$resolvedCandidate])) {
+            if ($resolvedCandidate === '' || ! isset($groups[$resolvedCandidate]) || ! is_array($groups[$resolvedCandidate])) {
                 continue;
             }
             if ($this->hasCompiledDomainCoverage($groups[$resolvedCandidate])) {
@@ -235,7 +233,7 @@ class NormGroupResolver
         $normsVersion = '';
         $sourceId = '';
         foreach ($domains as $row) {
-            if (!is_array($row)) {
+            if (! is_array($row)) {
                 continue;
             }
             $normsVersion = (string) ($row['norms_version'] ?? '');
@@ -321,7 +319,7 @@ class NormGroupResolver
         $domains = $this->extractCompiledMetrics($group, 'domain');
         $required = ['O', 'C', 'E', 'A', 'N'];
         foreach ($required as $code) {
-            if (!isset($domains[$code])) {
+            if (! isset($domains[$code])) {
                 return false;
             }
             $sd = (float) ($domains[$code]['sd'] ?? 0.0);
@@ -347,7 +345,7 @@ class NormGroupResolver
         $slice = is_array($metrics[$level] ?? null) ? $metrics[$level] : [];
         $out = [];
         foreach ($slice as $code => $row) {
-            if (!is_array($row)) {
+            if (! is_array($row)) {
                 continue;
             }
             $metricCode = strtoupper(trim((string) $code));

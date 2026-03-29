@@ -15,10 +15,9 @@ class ReplayService
         string $batchId,
         ?int $actorUserId = null,
         ?string $actorRole = null
-    ): array
-    {
+    ): array {
         $requestedProvider = $this->normalizeProvider($provider);
-        if (!$this->isAllowedProvider($requestedProvider)) {
+        if (! $this->isAllowedProvider($requestedProvider)) {
             return [
                 'ok' => false,
                 'error' => 'NOT_FOUND',
@@ -27,7 +26,7 @@ class ReplayService
             ];
         }
 
-        if (!\App\Support\SchemaBaseline::hasTable('ingest_batches')) {
+        if (! \App\Support\SchemaBaseline::hasTable('ingest_batches')) {
             return [
                 'ok' => false,
                 'error' => 'MISSING_TABLE',
@@ -37,7 +36,7 @@ class ReplayService
         }
 
         $batch = DB::table('ingest_batches')->where('id', $batchId)->first();
-        if (!$batch) {
+        if (! $batch) {
             return [
                 'ok' => false,
                 'error' => 'NOT_FOUND',
@@ -47,7 +46,7 @@ class ReplayService
         }
 
         $batchProvider = $this->normalizeProvider((string) ($batch->provider ?? ''));
-        if ($batchProvider === '' || !hash_equals($batchProvider, $requestedProvider)) {
+        if ($batchProvider === '' || ! hash_equals($batchProvider, $requestedProvider)) {
             return [
                 'ok' => false,
                 'error' => 'NOT_FOUND',
@@ -56,7 +55,7 @@ class ReplayService
             ];
         }
 
-        if (!$this->hasReplayAccess($batch, $actorUserId, $actorRole)) {
+        if (! $this->hasReplayAccess($batch, $actorUserId, $actorRole)) {
             return [
                 'ok' => false,
                 'error' => 'NOT_FOUND',
@@ -68,7 +67,7 @@ class ReplayService
         $inserted = 0;
         $skipped = 0;
         $runId = (string) Str::uuid();
-        $store = new IdempotencyStore();
+        $store = new IdempotencyStore;
         $tables = [
             'sleep_samples' => \App\Support\SchemaBaseline::hasTable('sleep_samples'),
             'screen_time_samples' => \App\Support\SchemaBaseline::hasTable('screen_time_samples'),
@@ -134,9 +133,8 @@ class ReplayService
         array $tables,
         int &$inserted,
         int &$skipped
-    ): void
-    {
-        if (!($tables[$sourceTable] ?? false)) {
+    ): void {
+        if (! ($tables[$sourceTable] ?? false)) {
             return;
         }
 
@@ -232,9 +230,10 @@ class ReplayService
                 $insertedLookup = array_fill_keys($insertedExternalIds, true);
 
                 foreach ($samplePayloadsByExternalId as $sampleExternalId => $samplePayload) {
-                    if (!isset($insertedLookup[$sampleExternalId])) {
+                    if (! isset($insertedLookup[$sampleExternalId])) {
                         $skipped++;
                         $sourceSkipped++;
+
                         continue;
                     }
 
@@ -243,11 +242,13 @@ class ReplayService
 
                     if ($domain === 'sleep' && ($tables['sleep_samples'] ?? false)) {
                         $sleepInserts[] = $payload;
+
                         continue;
                     }
 
                     if ($domain === 'screen_time' && ($tables['screen_time_samples'] ?? false)) {
                         $screenTimeInserts[] = $payload;
+
                         continue;
                     }
 
@@ -255,6 +256,7 @@ class ReplayService
                         $healthPayload = $payload;
                         $healthPayload['domain'] = $domain !== '' ? $domain : 'unknown';
                         $healthInserts[] = $healthPayload;
+
                         continue;
                     }
 
@@ -362,7 +364,7 @@ class ReplayService
             return true;
         }
 
-        if (!is_numeric($batch->user_id ?? null)) {
+        if (! is_numeric($batch->user_id ?? null)) {
             return false;
         }
 

@@ -9,12 +9,12 @@ class SimpleScoreDriver implements DriverInterface
     public function score(array $answers, array $spec, array $ctx): ScoreResult
     {
         $answerScores = $spec['answer_scores'] ?? [];
-        if (!is_array($answerScores)) {
+        if (! is_array($answerScores)) {
             $answerScores = [];
         }
 
         $optionScores = $spec['options_score_map'] ?? [];
-        if (!is_array($optionScores)) {
+        if (! is_array($optionScores)) {
             $optionScores = [];
         }
 
@@ -23,7 +23,7 @@ class SimpleScoreDriver implements DriverInterface
         $maxScore = 0;
 
         foreach ($answers as $answer) {
-            if (!is_array($answer)) {
+            if (! is_array($answer)) {
                 continue;
             }
 
@@ -40,7 +40,7 @@ class SimpleScoreDriver implements DriverInterface
             } elseif (isset($answerScores['*']) && is_array($answerScores['*'])) {
                 $score = (int) ($answerScores['*'][$code] ?? 0);
                 $maxScore += $this->maxScoreForMap($answerScores['*']);
-            } elseif (!empty($optionScores)) {
+            } elseif (! empty($optionScores)) {
                 $score = (int) ($optionScores[$code] ?? 0);
                 $maxScore += $this->maxScoreForMap($optionScores);
             }
@@ -68,12 +68,12 @@ class SimpleScoreDriver implements DriverInterface
 
     private function resolveSeverity(int $score, array $levels): ?array
     {
-        if (!is_array($levels)) {
+        if (! is_array($levels)) {
             return null;
         }
 
         foreach ($levels as $level) {
-            if (!is_array($level)) {
+            if (! is_array($level)) {
                 continue;
             }
             $min = $level['min'] ?? null;
@@ -99,7 +99,7 @@ class SimpleScoreDriver implements DriverInterface
     {
         $max = null;
         foreach ($map as $val) {
-            if (!is_numeric($val)) {
+            if (! is_numeric($val)) {
                 continue;
             }
             $num = (int) $val;

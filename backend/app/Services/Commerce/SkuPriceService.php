@@ -23,7 +23,7 @@ final class SkuPriceService
             ->where('currency', $currency)
             ->where('is_active', 1)
             ->first();
-        if (!$row) {
+        if (! $row) {
             throw new InvalidSkuException($sku, $currency);
         }
 

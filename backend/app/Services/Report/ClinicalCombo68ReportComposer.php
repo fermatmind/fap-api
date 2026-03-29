@@ -17,11 +17,10 @@ final class ClinicalCombo68ReportComposer
         private readonly ClinicalComboPackLoader $packLoader,
         private readonly TemplateEngine $templateEngine,
         private readonly ClinicalComboBlockSelector $blockSelector,
-    ) {
-    }
+    ) {}
 
     /**
-     * @param array<string,mixed> $ctx
+     * @param  array<string,mixed>  $ctx
      * @return array{ok:bool,report?:array<string,mixed>,error?:string,message?:string,status?:int}
      */
     public function composeVariant(Attempt $attempt, Result $result, string $variant, array $ctx = []): array
@@ -41,7 +40,7 @@ final class ClinicalCombo68ReportComposer
         $allBlocks = $this->packLoader->loadBlocks($locale, $version);
 
         $score = $this->extractScoreResult($result);
-        if (!is_array($score)) {
+        if (! is_array($score)) {
             return [
                 'ok' => false,
                 'error' => 'REPORT_SCORE_RESULT_MISSING',
@@ -74,7 +73,7 @@ final class ClinicalCombo68ReportComposer
 
         $sections = [];
         foreach ($layoutSections as $sectionConfig) {
-            if (!is_array($sectionConfig)) {
+            if (! is_array($sectionConfig)) {
                 continue;
             }
 
@@ -84,7 +83,7 @@ final class ClinicalCombo68ReportComposer
             }
 
             $requiredVariants = $this->normalizeVariants((array) ($sectionConfig['required_in_variant'] ?? ['free', 'full']));
-            if ($requiredVariants !== [] && !in_array($variant, $requiredVariants, true)) {
+            if ($requiredVariants !== [] && ! in_array($variant, $requiredVariants, true)) {
                 continue;
             }
 
@@ -112,6 +111,7 @@ final class ClinicalCombo68ReportComposer
                 if (is_array($copy)) {
                     $sections[] = $copy;
                 }
+
                 continue;
             }
 
@@ -129,7 +129,7 @@ final class ClinicalCombo68ReportComposer
 
             $blocks = [];
             foreach ($selectedRows as $row) {
-                if (!is_array($row)) {
+                if (! is_array($row)) {
                     continue;
                 }
                 $body = trim((string) ($row['body_md'] ?? $row['body'] ?? ''));
@@ -208,7 +208,7 @@ final class ClinicalCombo68ReportComposer
         ];
 
         foreach ($candidates as $candidate) {
-            if (!is_array($candidate)) {
+            if (! is_array($candidate)) {
                 continue;
             }
             if (strtoupper((string) ($candidate['scale_code'] ?? '')) !== 'CLINICAL_COMBO_68') {
@@ -222,9 +222,9 @@ final class ClinicalCombo68ReportComposer
     }
 
     /**
-     * @param array<string,mixed> $landing
-     * @param list<string> $crisisReasons
-     * @param list<array<string,mixed>> $crisisResources
+     * @param  array<string,mixed>  $landing
+     * @param  list<string>  $crisisReasons
+     * @param  list<array<string,mixed>>  $crisisResources
      * @return array<string,mixed>|null
      */
     private function composeCopySection(
@@ -253,7 +253,7 @@ final class ClinicalCombo68ReportComposer
         }
 
         if ($sectionKey === 'crisis_banner') {
-            if (!$crisisAlert) {
+            if (! $crisisAlert) {
                 return null;
             }
 
@@ -277,7 +277,7 @@ final class ClinicalCombo68ReportComposer
     }
 
     /**
-     * @param list<array<string,mixed>> $sections
+     * @param  list<array<string,mixed>>  $sections
      * @return array{0:list<array<string,mixed>>,1:list<array<string,mixed>>}
      */
     private function buildCompatBlocks(array $sections): array
@@ -286,7 +286,7 @@ final class ClinicalCombo68ReportComposer
         $paid = [];
 
         foreach ($sections as $section) {
-            if (!is_array($section)) {
+            if (! is_array($section)) {
                 continue;
             }
 
@@ -295,7 +295,7 @@ final class ClinicalCombo68ReportComposer
             $blocks = is_array($section['blocks'] ?? null) ? $section['blocks'] : [];
 
             foreach ($blocks as $block) {
-                if (!is_array($block)) {
+                if (! is_array($block)) {
                     continue;
                 }
                 $payload = [
@@ -317,7 +317,7 @@ final class ClinicalCombo68ReportComposer
     }
 
     /**
-     * @param array<string,mixed> $landing
+     * @param  array<string,mixed>  $landing
      */
     private function resolveLandingText(array $landing, string $key, string $locale): string
     {
@@ -352,7 +352,7 @@ final class ClinicalCombo68ReportComposer
     }
 
     /**
-     * @param array<string,mixed> $score
+     * @param  array<string,mixed>  $score
      */
     private function buildTemplateContext(array $score, string $variant): TemplateContext
     {
@@ -386,12 +386,12 @@ final class ClinicalCombo68ReportComposer
     }
 
     /**
-     * @param list<string> $tags
+     * @param  list<string>  $tags
      */
     private function resolveDominantTraitTag(array $tags): string
     {
         foreach ($tags as $tag) {
-            if (!is_string($tag)) {
+            if (! is_string($tag)) {
                 continue;
             }
             if (str_starts_with($tag, 'trait:')) {
@@ -403,7 +403,7 @@ final class ClinicalCombo68ReportComposer
     }
 
     /**
-     * @param list<mixed> $variants
+     * @param  list<mixed>  $variants
      * @return list<string>
      */
     private function normalizeVariants(array $variants): array

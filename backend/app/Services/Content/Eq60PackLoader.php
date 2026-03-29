@@ -13,7 +13,7 @@ final class Eq60PackLoader
     public const PACK_VERSION = 'v1';
 
     public function __construct(
-        private ?ContentPackV2Resolver $v2Resolver = null,
+        private ?ContentPackV2Resolver $v2Resolver,
         private ContentPathAliasResolver $pathAliasResolver,
     ) {}
 
@@ -26,7 +26,7 @@ final class Eq60PackLoader
 
     public function rawDir(?string $version = null): string
     {
-        return $this->packRoot($version) . DIRECTORY_SEPARATOR . 'raw';
+        return $this->packRoot($version).DIRECTORY_SEPARATOR.'raw';
     }
 
     public function compiledDir(?string $version = null): string
@@ -37,17 +37,17 @@ final class Eq60PackLoader
             return $activePath;
         }
 
-        return $this->packRoot($version) . DIRECTORY_SEPARATOR . 'compiled';
+        return $this->packRoot($version).DIRECTORY_SEPARATOR.'compiled';
     }
 
     public function rawPath(string $file, ?string $version = null): string
     {
-        return $this->rawDir($version) . DIRECTORY_SEPARATOR . ltrim($file, DIRECTORY_SEPARATOR);
+        return $this->rawDir($version).DIRECTORY_SEPARATOR.ltrim($file, DIRECTORY_SEPARATOR);
     }
 
     public function compiledPath(string $file, ?string $version = null): string
     {
-        return $this->compiledDir($version) . DIRECTORY_SEPARATOR . ltrim($file, DIRECTORY_SEPARATOR);
+        return $this->compiledDir($version).DIRECTORY_SEPARATOR.ltrim($file, DIRECTORY_SEPARATOR);
     }
 
     public function normalizeLocale(string $locale): string
@@ -86,16 +86,16 @@ final class Eq60PackLoader
         $out = [];
         foreach ($index as $qidRaw => $meta) {
             $qid = (int) $qidRaw;
-            if ($qid <= 0 || !is_array($meta)) {
+            if ($qid <= 0 || ! is_array($meta)) {
                 continue;
             }
 
             $dimension = strtoupper(trim((string) ($meta['dimension'] ?? '')));
             $direction = (int) ($meta['direction'] ?? 0);
-            if (!in_array($dimension, ['SA', 'ER', 'EM', 'RM'], true)) {
+            if (! in_array($dimension, ['SA', 'ER', 'EM', 'RM'], true)) {
                 continue;
             }
-            if (!in_array($direction, [1, -1], true)) {
+            if (! in_array($direction, [1, -1], true)) {
                 continue;
             }
 
@@ -110,8 +110,8 @@ final class Eq60PackLoader
         if ($out === []) {
             $path = $this->compiledPath('questions.compiled.json', $version);
             throw new \RuntimeException(
-                'EQ_60 compiled question_index missing or empty at ' . $path
-                    . '. Run: php artisan content:compile --pack=EQ_60 --pack-version=' . $this->normalizeVersion($version)
+                'EQ_60 compiled question_index missing or empty at '.$path
+                    .'. Run: php artisan content:compile --pack=EQ_60 --pack-version='.$this->normalizeVersion($version)
             );
         }
 
@@ -127,11 +127,11 @@ final class Eq60PackLoader
         $compiled = $this->requireCompiledJson('questions.compiled.json', $version);
         $docs = is_array($compiled['questions_doc_by_locale'] ?? null) ? $compiled['questions_doc_by_locale'] : [];
         $doc = $docs[$localeResolved] ?? ($docs['zh-CN'] ?? null);
-        if (!is_array($doc)) {
+        if (! is_array($doc)) {
             $path = $this->compiledPath('questions.compiled.json', $version);
             throw new \RuntimeException(
-                'EQ_60 compiled questions_doc_by_locale missing at ' . $path
-                    . '. Run: php artisan content:compile --pack=EQ_60 --pack-version=' . $this->normalizeVersion($version)
+                'EQ_60 compiled questions_doc_by_locale missing at '.$path
+                    .'. Run: php artisan content:compile --pack=EQ_60 --pack-version='.$this->normalizeVersion($version)
             );
         }
 
@@ -192,17 +192,17 @@ final class Eq60PackLoader
         $compiled = $this->requireCompiledJson('options.compiled.json', $version);
         $anchorsByLocale = is_array($compiled['option_anchors_by_locale'] ?? null) ? $compiled['option_anchors_by_locale'] : [];
         $anchors = $anchorsByLocale[$localeResolved] ?? ($anchorsByLocale['zh-CN'] ?? []);
-        if (!is_array($anchors)) {
+        if (! is_array($anchors)) {
             $path = $this->compiledPath('options.compiled.json', $version);
             throw new \RuntimeException(
-                'EQ_60 compiled option_anchors_by_locale missing at ' . $path
-                    . '. Run: php artisan content:compile --pack=EQ_60 --pack-version=' . $this->normalizeVersion($version)
+                'EQ_60 compiled option_anchors_by_locale missing at '.$path
+                    .'. Run: php artisan content:compile --pack=EQ_60 --pack-version='.$this->normalizeVersion($version)
             );
         }
 
         $normalized = [];
         foreach ($anchors as $anchor) {
-            if (!is_array($anchor)) {
+            if (! is_array($anchor)) {
                 continue;
             }
 
@@ -217,8 +217,8 @@ final class Eq60PackLoader
         if ($normalized === []) {
             $path = $this->compiledPath('options.compiled.json', $version);
             throw new \RuntimeException(
-                'EQ_60 compiled option anchors are empty at ' . $path
-                    . '. Run: php artisan content:compile --pack=EQ_60 --pack-version=' . $this->normalizeVersion($version)
+                'EQ_60 compiled option anchors are empty at '.$path
+                    .'. Run: php artisan content:compile --pack=EQ_60 --pack-version='.$this->normalizeVersion($version)
             );
         }
 
@@ -238,8 +238,8 @@ final class Eq60PackLoader
 
         $path = $this->compiledPath('policy.compiled.json', $version);
         throw new \RuntimeException(
-            'EQ_60 compiled policy missing at ' . $path
-                . '. Run: php artisan content:compile --pack=EQ_60 --pack-version=' . $this->normalizeVersion($version)
+            'EQ_60 compiled policy missing at '.$path
+                .'. Run: php artisan content:compile --pack=EQ_60 --pack-version='.$this->normalizeVersion($version)
         );
     }
 
@@ -256,8 +256,8 @@ final class Eq60PackLoader
 
         $path = $this->compiledPath('landing.compiled.json', $version);
         throw new \RuntimeException(
-            'EQ_60 compiled landing missing at ' . $path
-                . '. Run: php artisan content:compile --pack=EQ_60 --pack-version=' . $this->normalizeVersion($version)
+            'EQ_60 compiled landing missing at '.$path
+                .'. Run: php artisan content:compile --pack=EQ_60 --pack-version='.$this->normalizeVersion($version)
         );
     }
 
@@ -280,7 +280,7 @@ final class Eq60PackLoader
     public function resolveManifestHash(?string $version = null): string
     {
         $manifest = $this->readCompiledJson('manifest.json', $version);
-        if (!is_array($manifest)) {
+        if (! is_array($manifest)) {
             return '';
         }
 
@@ -297,7 +297,7 @@ final class Eq60PackLoader
         ksort($hashes);
         $rows = [];
         foreach ($hashes as $name => $value) {
-            $rows[] = trim((string) $name) . ':' . trim((string) $value);
+            $rows[] = trim((string) $name).':'.trim((string) $value);
         }
 
         return hash('sha256', implode("\n", $rows));
@@ -324,8 +324,8 @@ final class Eq60PackLoader
         }
 
         throw new \RuntimeException(
-            'EQ_60 compiled content missing: ' . $path
-                . '. Run: php artisan content:compile --pack=EQ_60 --pack-version=' . $version
+            'EQ_60 compiled content missing: '.$path
+                .'. Run: php artisan content:compile --pack=EQ_60 --pack-version='.$version
         );
     }
 
@@ -334,7 +334,7 @@ final class Eq60PackLoader
      */
     public function readJson(string $path): ?array
     {
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             return null;
         }
 
@@ -354,7 +354,7 @@ final class Eq60PackLoader
      */
     public function readCsvWithLines(string $path): array
     {
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             return [];
         }
 
@@ -371,10 +371,11 @@ final class Eq60PackLoader
             $lineNo++;
             if ($lineNo === 1) {
                 $header = is_array($row) ? array_map(static fn ($v): string => trim((string) $v), $row) : [];
+
                 continue;
             }
 
-            if (!is_array($row) || $header === [] || $row === [null]) {
+            if (! is_array($row) || $header === [] || $row === [null]) {
                 continue;
             }
 

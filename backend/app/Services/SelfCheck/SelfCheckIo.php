@@ -18,7 +18,7 @@ class SelfCheckIo
 
     public function __construct(?SelfCheckContentEngine $content = null)
     {
-        $this->content = $content ?? new SelfCheckContentEngine();
+        $this->content = $content ?? new SelfCheckContentEngine;
     }
 
     public function applyContext(SelfCheckContext $ctx): void

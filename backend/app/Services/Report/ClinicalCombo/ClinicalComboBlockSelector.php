@@ -7,10 +7,10 @@ namespace App\Services\Report\ClinicalCombo;
 final class ClinicalComboBlockSelector
 {
     /**
-     * @param list<array<string,mixed>> $allBlocks
-     * @param list<string> $allowedAccessLevels
-     * @param array<string,mixed> $context
-     * @param array<string,mixed> $policy
+     * @param  list<array<string,mixed>>  $allBlocks
+     * @param  list<string>  $allowedAccessLevels
+     * @param  array<string,mixed>  $context
+     * @param  array<string,mixed>  $policy
      * @return list<array<string,mixed>>
      */
     public function select(
@@ -43,7 +43,7 @@ final class ClinicalComboBlockSelector
         foreach ($this->localeCandidates($locale) as $candidateLocale) {
             $rows = [];
             foreach ($allBlocks as $row) {
-                if (!is_array($row)) {
+                if (! is_array($row)) {
                     continue;
                 }
 
@@ -57,11 +57,11 @@ final class ClinicalComboBlockSelector
                 }
 
                 $accessLevel = strtolower(trim((string) ($row['access_level'] ?? 'free')));
-                if (!isset($allowedAccessSet[$accessLevel])) {
+                if (! isset($allowedAccessSet[$accessLevel])) {
                     continue;
                 }
 
-                if (!$this->matchesConditions($row, $context, $policy)) {
+                if (! $this->matchesConditions($row, $context, $policy)) {
                     continue;
                 }
 
@@ -91,9 +91,9 @@ final class ClinicalComboBlockSelector
     }
 
     /**
-     * @param array<string,mixed> $row
-     * @param array<string,mixed> $context
-     * @param array<string,mixed> $policy
+     * @param  array<string,mixed>  $row
+     * @param  array<string,mixed>  $context
+     * @param  array<string,mixed>  $policy
      */
     private function matchesConditions(array $row, array $context, array $policy): bool
     {
@@ -104,14 +104,15 @@ final class ClinicalComboBlockSelector
 
         $contentRules = is_array($policy['content_condition_rules'] ?? null) ? $policy['content_condition_rules'] : [];
         $logic = strtolower(trim((string) ($contentRules['logic_default'] ?? 'all')));
-        if (!in_array($logic, ['all', 'any'], true)) {
+        if (! in_array($logic, ['all', 'any'], true)) {
             $logic = 'all';
         }
 
         $results = [];
         foreach ($conditions as $condition) {
-            if (!is_array($condition)) {
+            if (! is_array($condition)) {
                 $results[] = false;
+
                 continue;
             }
             $results[] = $this->matchesCondition($condition, $context, $policy);
@@ -125,13 +126,13 @@ final class ClinicalComboBlockSelector
             return in_array(true, $results, true);
         }
 
-        return !in_array(false, $results, true);
+        return ! in_array(false, $results, true);
     }
 
     /**
-     * @param array<string,mixed> $condition
-     * @param array<string,mixed> $context
-     * @param array<string,mixed> $policy
+     * @param  array<string,mixed>  $condition
+     * @param  array<string,mixed>  $context
+     * @param  array<string,mixed>  $policy
      */
     private function matchesCondition(array $condition, array $context, array $policy): bool
     {
@@ -145,12 +146,12 @@ final class ClinicalComboBlockSelector
 
         $contentRules = is_array($policy['content_condition_rules'] ?? null) ? $policy['content_condition_rules'] : [];
         $allowedOps = array_values(array_unique(array_map(static fn ($v): string => strtolower(trim((string) $v)), (array) ($contentRules['allowed_ops'] ?? []))));
-        if ($allowedOps !== [] && !in_array($op, $allowedOps, true)) {
+        if ($allowedOps !== [] && ! in_array($op, $allowedOps, true)) {
             return false;
         }
 
         $allowedPaths = array_values(array_unique(array_map(static fn ($v): string => trim((string) $v), (array) ($contentRules['allowed_paths'] ?? []))));
-        if ($allowedPaths !== [] && !in_array($path, $allowedPaths, true)) {
+        if ($allowedPaths !== [] && ! in_array($path, $allowedPaths, true)) {
             return false;
         }
 
@@ -197,7 +198,7 @@ final class ClinicalComboBlockSelector
 
     private function opIn(mixed $actual, mixed $expected, string $path, array $policy): bool
     {
-        if (!is_array($expected)) {
+        if (! is_array($expected)) {
             return false;
         }
 
@@ -253,7 +254,7 @@ final class ClinicalComboBlockSelector
 
     private function opGte(mixed $actual, mixed $expected): bool
     {
-        if (!is_numeric($actual) || !is_numeric($expected)) {
+        if (! is_numeric($actual) || ! is_numeric($expected)) {
             return false;
         }
 
@@ -262,7 +263,7 @@ final class ClinicalComboBlockSelector
 
     private function opLte(mixed $actual, mixed $expected): bool
     {
-        if (!is_numeric($actual) || !is_numeric($expected)) {
+        if (! is_numeric($actual) || ! is_numeric($expected)) {
             return false;
         }
 
@@ -270,8 +271,8 @@ final class ClinicalComboBlockSelector
     }
 
     /**
-     * @param list<mixed> $values
-     * @param array<string,mixed> $policy
+     * @param  list<mixed>  $values
+     * @param  array<string,mixed>  $policy
      * @return list<string>
      */
     private function expandAliasValues(string $path, array $values, array $policy): array
@@ -297,6 +298,7 @@ final class ClinicalComboBlockSelector
                         $expanded[] = $aliasStr;
                     }
                 }
+
                 continue;
             }
             $expanded[] = $valueStr;
@@ -306,7 +308,7 @@ final class ClinicalComboBlockSelector
     }
 
     /**
-     * @param list<array<string,mixed>> $rows
+     * @param  list<array<string,mixed>>  $rows
      * @return list<array<string,mixed>>
      */
     private function enforceExclusiveGroup(array $rows): array
@@ -316,7 +318,7 @@ final class ClinicalComboBlockSelector
 
         foreach ($rows as $row) {
             $group = trim((string) ($row['exclusive_group'] ?? ''));
-            $key = $group !== '' ? $group : '__' . (string) ($row['block_id'] ?? '');
+            $key = $group !== '' ? $group : '__'.(string) ($row['block_id'] ?? '');
             if (isset($seen[$key])) {
                 continue;
             }
@@ -328,8 +330,8 @@ final class ClinicalComboBlockSelector
     }
 
     /**
-     * @param array<string,mixed> $a
-     * @param array<string,mixed> $b
+     * @param  array<string,mixed>  $a
+     * @param  array<string,mixed>  $b
      */
     private function comparePriority(array $a, array $b): int
     {

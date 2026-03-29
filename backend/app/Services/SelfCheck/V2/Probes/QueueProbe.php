@@ -23,18 +23,19 @@ final class QueueProbe implements ProbeInterface
         $connection = config("queue.connections.{$driver}");
 
         try {
-            if (!is_array($connection)) {
+            if (! is_array($connection)) {
                 return (new ProbeResult(false, 'QUEUE_CONFIG_MISSING', 'queue connection config missing'))
                     ->toArray($verbose);
             }
 
             if ($driver === 'database') {
                 $hasJobs = Schema::hasTable('jobs');
-                if (!$hasJobs) {
+                if (! $hasJobs) {
                     return (new ProbeResult(false, 'QUEUE_TABLE_MISSING', 'jobs table not found'))
                         ->toArray($verbose);
                 }
                 DB::select('select 1 as ok');
+
                 return (new ProbeResult(true, '', '', [
                     'driver' => $driver,
                     'connection' => (string) ($connection['connection'] ?? ''),

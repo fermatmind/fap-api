@@ -7,9 +7,7 @@ use App\Models\Attempt;
 
 class AttemptSubmitCanonicalizeService
 {
-    public function __construct(private AttemptSubmitService $core)
-    {
-    }
+    public function __construct(private AttemptSubmitService $core) {}
 
     public function handle(array $guarded): array
     {

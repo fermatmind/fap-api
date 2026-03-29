@@ -65,8 +65,7 @@ final class MbtiIntraTypeProfileService
         array $personalization,
         ?string $profileSeedKey = null,
         ?array $sameTypeDivergenceKeys = null
-    ): array
-    {
+    ): array {
         $profileSeedKey ??= $this->resolveProfileSeedKey($personalization);
         $sameTypeDivergenceKeys ??= $this->buildSameTypeDivergenceKeys($personalization, $profileSeedKey);
         $sectionSelectionKeys = $this->buildSectionSelectionKeys($personalization, $profileSeedKey);

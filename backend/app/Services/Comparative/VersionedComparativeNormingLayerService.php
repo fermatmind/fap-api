@@ -315,6 +315,7 @@ final class VersionedComparativeNormingLayerService
         $contrastAxis = strtoupper(trim((string) data_get($personalization, 'dominant_axes.0.axis', '')));
         if ($boundaryAxes !== []) {
             $axesLabel = implode(' / ', $boundaryAxes);
+
             return [
                 'key' => 'same_type.boundary_axes',
                 'label' => $locale === 'zh-CN' ? '同类中的边界型表达' : 'Boundary-leaning within the same type',
@@ -327,6 +328,7 @@ final class VersionedComparativeNormingLayerService
 
         if ($contrastAxis !== '') {
             $axisLabel = $this->mbtiMetricLabel($contrastAxis, $locale);
+
             return [
                 'key' => 'same_type.dominant_axis',
                 'label' => $locale === 'zh-CN' ? '同类中的主轴更集中' : 'More concentrated within the same type',

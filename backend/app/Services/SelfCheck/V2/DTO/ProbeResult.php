@@ -7,15 +7,14 @@ namespace App\Services\SelfCheck\V2\DTO;
 final class ProbeResult
 {
     /**
-     * @param array<string,mixed> $details
+     * @param  array<string,mixed>  $details
      */
     public function __construct(
         public readonly bool $ok,
         public readonly string $errorCode = '',
         public readonly string $message = '',
         public readonly array $details = [],
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string,mixed>

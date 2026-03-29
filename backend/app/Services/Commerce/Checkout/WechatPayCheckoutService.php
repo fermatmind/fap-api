@@ -7,6 +7,7 @@ namespace App\Services\Commerce\Checkout;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Yansongda\Pay\Pay;
+
 use function data_get;
 use function url;
 
@@ -165,10 +166,10 @@ class WechatPayCheckoutService
         }
 
         if (preg_match('/^ord_([0-9a-fA-F]{8})-([0-9a-fA-F]{4})-([0-9a-fA-F]{4})-([0-9a-fA-F]{4})-([0-9a-fA-F]{12})$/', $orderNo, $m) === 1) {
-            return strtolower($m[1] . $m[2] . $m[3] . $m[4] . $m[5]);
+            return strtolower($m[1].$m[2].$m[3].$m[4].$m[5]);
         }
 
-        return 'wx' . substr(hash('sha256', $orderNo), 0, 30);
+        return 'wx'.substr(hash('sha256', $orderNo), 0, 30);
     }
 
     private function resolvePersistedExternalTradeNo(string $orderNo): string

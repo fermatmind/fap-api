@@ -11,6 +11,7 @@ class RateLimiter
         $raw = \App\Support\RuntimeConfig::value($envKey);
         if (is_numeric($raw)) {
             $val = (int) $raw;
+
             return $val >= 0 ? $val : $default;
         }
 
@@ -23,13 +24,14 @@ class RateLimiter
             return true;
         }
 
-        $cacheKey = 'rate:' . $key;
+        $cacheKey = 'rate:'.$key;
         $current = (int) Cache::get($cacheKey, 0);
         if ($current >= $limit) {
             return false;
         }
 
         Cache::put($cacheKey, $current + 1, $seconds);
+
         return true;
     }
 }

@@ -7,7 +7,7 @@ namespace App\Services\Commerce\Webhook\DTO;
 final class NormalizedPaymentEvent
 {
     /**
-     * @param array<string,mixed> $raw
+     * @param  array<string,mixed>  $raw
      */
     public function __construct(
         public readonly string $provider,
@@ -21,8 +21,7 @@ final class NormalizedPaymentEvent
         public readonly int $refundAmountCents,
         public readonly ?string $refundReason,
         public readonly array $raw = [],
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string,mixed>

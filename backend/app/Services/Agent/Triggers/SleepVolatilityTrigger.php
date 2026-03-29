@@ -3,13 +3,12 @@
 namespace App\Services\Agent\Triggers;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 final class SleepVolatilityTrigger
 {
     public function evaluate(int $userId, array $settings = []): array
     {
-        if (!\App\Support\SchemaBaseline::hasTable('sleep_samples')) {
+        if (! \App\Support\SchemaBaseline::hasTable('sleep_samples')) {
             return ['ok' => false, 'fired' => false, 'reason' => 'sleep_samples_missing'];
         }
 

@@ -10,11 +10,15 @@ use Illuminate\Support\Facades\DB;
 class BenefitWalletService
 {
     private const WALLET_LOCK_TTL_SECONDS = 10;
+
     private const WALLET_LOCK_BLOCK_SECONDS = 1;
+
     private const WALLET_LOCK_MAX_ATTEMPTS = 8;
+
     private const WALLET_LOCK_BACKOFF_MS = 120;
 
     private const SQLITE_BUSY_MAX_ATTEMPTS = 8;
+
     private const SQLITE_BUSY_BACKOFF_MS = 120;
 
     public function topUp(int $orgId, string $benefitCode, int $delta, string $idempotencyKey, array $meta = []): array
@@ -45,6 +49,7 @@ class BenefitWalletService
 
         if ($already) {
             $wallet = $this->findWallet($orgId, $benefitCode);
+
             return [
                 'ok' => true,
                 'wallet' => $wallet,
@@ -72,8 +77,9 @@ class BenefitWalletService
                     'updated_at' => $now,
                 ]);
 
-                if (!$inserted) {
+                if (! $inserted) {
                     $wallet = $this->findWallet($orgId, $benefitCode);
+
                     return [
                         'ok' => true,
                         'wallet' => $wallet,
@@ -82,7 +88,7 @@ class BenefitWalletService
                 }
 
                 $wallet = $this->lockWallet($orgId, $benefitCode, true);
-                if (!$wallet) {
+                if (! $wallet) {
                     return $this->serverError('WALLET_LOCK_FAILED', 'wallet lock failed.');
                 }
 
@@ -130,6 +136,7 @@ class BenefitWalletService
 
         if ($already) {
             $wallet = $this->findWallet($orgId, $benefitCode);
+
             return [
                 'ok' => true,
                 'wallet' => $wallet,
@@ -149,8 +156,9 @@ class BenefitWalletService
                         'updated_at' => $now,
                     ]);
 
-                    if (!$insertedConsumption) {
+                    if (! $insertedConsumption) {
                         $wallet = $this->findWallet($orgId, $benefitCode);
+
                         return [
                             'ok' => true,
                             'wallet' => $wallet,
@@ -171,8 +179,9 @@ class BenefitWalletService
                         'updated_at' => $now,
                     ]);
 
-                    if (!$ledgerInserted) {
+                    if (! $ledgerInserted) {
                         $wallet = $this->findWallet($orgId, $benefitCode);
+
                         return [
                             'ok' => true,
                             'wallet' => $wallet,
@@ -182,7 +191,7 @@ class BenefitWalletService
 
                     // 统一创建钱包记录，避免“刚 topUp 未提交/并发创建”导致读不到钱包
                     $wallet = $this->lockWallet($orgId, $benefitCode, true);
-                    if (!$wallet) {
+                    if (! $wallet) {
                         return $this->serverError('WALLET_LOCK_FAILED', 'wallet lock failed.');
                     }
 
@@ -265,7 +274,7 @@ class BenefitWalletService
                     || str_contains($msg, 'sqlite_busy')
                     || str_contains($msg, 'busy');
 
-                if (!$isBusy) {
+                if (! $isBusy) {
                     throw $e;
                 }
 
@@ -288,7 +297,7 @@ class BenefitWalletService
             return $wallet;
         }
 
-        if (!$createWhenMissing) {
+        if (! $createWhenMissing) {
             return null;
         }
 

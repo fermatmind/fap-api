@@ -3,7 +3,6 @@
 namespace App\Services\Ingestion;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class IntegrationUserResolver
 {
@@ -15,7 +14,7 @@ class IntegrationUserResolver
             return null;
         }
 
-        if (!\App\Support\SchemaBaseline::hasTable('integration_user_bindings')) {
+        if (! \App\Support\SchemaBaseline::hasTable('integration_user_bindings')) {
             return null;
         }
 
@@ -25,7 +24,7 @@ class IntegrationUserResolver
             ->where('external_user_id', $externalUserId)
             ->first();
 
-        if (!$row || !is_numeric($row->user_id ?? null)) {
+        if (! $row || ! is_numeric($row->user_id ?? null)) {
             return null;
         }
 

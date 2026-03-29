@@ -48,7 +48,7 @@ final class BenefitModuleRuleCatalog
             ];
         }
 
-        if (!SchemaBaseline::hasTable('benefit_module_rules')) {
+        if (! SchemaBaseline::hasTable('benefit_module_rules')) {
             return [
                 'modules' => [],
                 'free_module' => ReportAccess::MODULE_CORE_FREE,
@@ -124,8 +124,9 @@ final class BenefitModuleRuleCatalog
             ];
 
             $existing = $selectedByModule[$moduleCode] ?? null;
-            if (!is_array($existing)) {
+            if (! is_array($existing)) {
                 $selectedByModule[$moduleCode] = $candidate;
+
                 continue;
             }
 
@@ -134,6 +135,7 @@ final class BenefitModuleRuleCatalog
 
             if ($candidate['org_rank'] > $existingRank) {
                 $selectedByModule[$moduleCode] = $candidate;
+
                 continue;
             }
 

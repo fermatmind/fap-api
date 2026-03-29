@@ -2,6 +2,4 @@
 
 namespace App\Services\Events;
 
-class EventRecorder extends \App\Services\Analytics\EventRecorder
-{
-}
+class EventRecorder extends \App\Services\Analytics\EventRecorder {}

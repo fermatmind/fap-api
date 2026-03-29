@@ -25,35 +25,35 @@ class ContentPackResolver
     public function resolve(string $scaleCode, string $region, string $locale, ?string $version = null): ContentPack
     {
         $version = $version ?: (config("content.default_versions.$scaleCode") ?? null);
-        if (!$version) {
+        if (! $version) {
             throw new RuntimeException("No default content_package_version configured for scale=$scaleCode");
         }
 
-        $packPath = $scaleCode . '/' . $region . '/' . $locale . '/' . $version;
+        $packPath = $scaleCode.'/'.$region.'/'.$locale.'/'.$version;
         $driver = config('content_packs.driver', 'local');
 
         if ($driver === 's3') {
             app(PackCache::class)->ensureCached($packPath);
-            $cacheRoot = rtrim((string)config('content_packs.cache_dir', ''), '/');
+            $cacheRoot = rtrim((string) config('content_packs.cache_dir', ''), '/');
             if ($cacheRoot === '') {
-                throw new RuntimeException("Missing config: content_packs.cache_dir");
+                throw new RuntimeException('Missing config: content_packs.cache_dir');
             }
-            $basePath = str_replace('/', DIRECTORY_SEPARATOR, $cacheRoot . '/' . $packPath);
+            $basePath = str_replace('/', DIRECTORY_SEPARATOR, $cacheRoot.'/'.$packPath);
         } else {
             $basePath = $this->packsRoot
-                . DIRECTORY_SEPARATOR . $scaleCode
-                . DIRECTORY_SEPARATOR . $region
-                . DIRECTORY_SEPARATOR . $locale
-                . DIRECTORY_SEPARATOR . $version;
+                .DIRECTORY_SEPARATOR.$scaleCode
+                .DIRECTORY_SEPARATOR.$region
+                .DIRECTORY_SEPARATOR.$locale
+                .DIRECTORY_SEPARATOR.$version;
         }
 
-        $manifestPath = $basePath . DIRECTORY_SEPARATOR . 'manifest.json';
-        if (!File::exists($manifestPath)) {
+        $manifestPath = $basePath.DIRECTORY_SEPARATOR.'manifest.json';
+        if (! File::exists($manifestPath)) {
             throw new RuntimeException("manifest.json not found: $manifestPath");
         }
 
         $manifest = json_decode(File::get($manifestPath), true);
-        if (!is_array($manifest)) {
+        if (! is_array($manifest)) {
             throw new RuntimeException("manifest.json invalid json: $manifestPath");
         }
 
@@ -61,7 +61,7 @@ class ContentPackResolver
         $this->assertManifestContract($manifest, $manifestPath);
 
         $packId = $manifest['pack_id'] ?? null;
-        if (!$packId) {
+        if (! $packId) {
             // 理论上 assertManifestContract 已经保证 pack_id 存在
             $packId = $this->makePackId($scaleCode, $region, $locale, $version);
         }
@@ -96,14 +96,20 @@ class ContentPackResolver
 
     private function expandFallback(ContentPack $pack, array &$chain, array &$seen, int $depthLeft): void
     {
-        if ($depthLeft <= 0) return;
+        if ($depthLeft <= 0) {
+            return;
+        }
 
         foreach ($pack->fallbackPackIds() as $fallbackPackId) {
-            if (isset($seen[$fallbackPackId])) continue;
+            if (isset($seen[$fallbackPackId])) {
+                continue;
+            }
             $seen[$fallbackPackId] = true;
 
             $parsed = $this->parsePackIdToPath($fallbackPackId);
-            if (!$parsed) continue;
+            if (! $parsed) {
+                continue;
+            }
 
             [$scale, $region, $locale, $version] = $parsed;
 
@@ -127,22 +133,22 @@ class ContentPackResolver
 
         $schema = $manifest['schema_version'] ?? null;
         if ($schema !== 'pack-manifest@v1') {
-            $errors[] = "schema_version must be 'pack-manifest@v1', got: " . var_export($schema, true);
+            $errors[] = "schema_version must be 'pack-manifest@v1', got: ".var_export($schema, true);
         }
 
         $required = ['scale_code', 'region', 'locale', 'content_package_version', 'pack_id', 'assets'];
         foreach ($required as $k) {
-            if (!array_key_exists($k, $manifest)) {
+            if (! array_key_exists($k, $manifest)) {
                 $errors[] = "Missing required field: {$k}";
             }
         }
 
         if (isset($manifest['fallback'])) {
-            if (!is_array($manifest['fallback'])) {
-                $errors[] = "fallback must be array(list of pack_id strings)";
+            if (! is_array($manifest['fallback'])) {
+                $errors[] = 'fallback must be array(list of pack_id strings)';
             } else {
                 foreach ($manifest['fallback'] as $i => $v) {
-                    if (!is_string($v) || trim($v) === '') {
+                    if (! is_string($v) || trim($v) === '') {
                         $errors[] = "fallback[{$i}] must be non-empty string";
                     }
                 }
@@ -150,73 +156,81 @@ class ContentPackResolver
         }
 
         $assets = $manifest['assets'] ?? null;
-        if (!is_array($assets)) {
-            $errors[] = "assets must be object(map) of key => [paths...]";
+        if (! is_array($assets)) {
+            $errors[] = 'assets must be object(map) of key => [paths...]';
         } else {
             $baseDir = dirname($manifestPath);
 
             foreach ($assets as $assetKey => $paths) {
-                if (!is_array($paths)) {
+                if (! is_array($paths)) {
                     $errors[] = "assets.{$assetKey} must be array(list) or object(map)";
+
                     continue;
                 }
 
                 // overrides 支持对象结构：{order:[], unified:"x.json", highlights_legacy:"y.json"}
                 if ($assetKey === 'overrides' && $this->isAssocArray($paths)) {
-                    if (isset($paths['order']) && !is_array($paths['order'])) {
-                        $errors[] = "assets.overrides.order must be array(list)";
+                    if (isset($paths['order']) && ! is_array($paths['order'])) {
+                        $errors[] = 'assets.overrides.order must be array(list)';
                     }
 
                     foreach ($paths as $k => $v) {
-                        if ($k === 'order') continue;
+                        if ($k === 'order') {
+                            continue;
+                        }
 
                         $list = is_array($v) ? $v : [$v];
                         foreach ($list as $i => $rel) {
-                            if (!is_string($rel) || trim($rel) === '') {
+                            if (! is_string($rel) || trim($rel) === '') {
                                 $errors[] = "assets.overrides.{$k}[{$i}] must be non-empty string path";
+
                                 continue;
                             }
-                            $abs = rtrim($baseDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $rel;
-                            if (!File::exists($abs) || !File::isFile($abs)) {
+                            $abs = rtrim($baseDir, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$rel;
+                            if (! File::exists($abs) || ! File::isFile($abs)) {
                                 $errors[] = "assets.overrides.{$k}[{$i}] file not found: {$abs}";
                             }
                         }
                     }
+
                     continue;
                 }
 
                 // 普通 assets：list of paths
                 foreach ($paths as $i => $rel) {
-                    if (!is_string($rel) || trim($rel) === '') {
+                    if (! is_string($rel) || trim($rel) === '') {
                         $errors[] = "assets.{$assetKey}[{$i}] must be non-empty string path";
+
                         continue;
                     }
 
-                    $abs = rtrim($baseDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $rel;
+                    $abs = rtrim($baseDir, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$rel;
 
                     // 目录 marker：以 / 结尾
                     if (str_ends_with($rel, '/') || str_ends_with($rel, DIRECTORY_SEPARATOR)) {
-                        if (!File::isDirectory($abs)) {
+                        if (! File::isDirectory($abs)) {
                             $errors[] = "assets.{$assetKey}[{$i}] dir not found: {$abs}";
                         }
+
                         continue;
                     }
 
-                    if (!File::isFile($abs)) {
+                    if (! File::isFile($abs)) {
                         $errors[] = "assets.{$assetKey}[{$i}] file not found: {$abs}";
                     }
                 }
             }
         }
 
-        if (!empty($errors)) {
-            throw new RuntimeException("manifest contract invalid: {$manifestPath}\n- " . implode("\n- ", $errors));
+        if (! empty($errors)) {
+            throw new RuntimeException("manifest contract invalid: {$manifestPath}\n- ".implode("\n- ", $errors));
         }
     }
 
     private function makePackId(string $scale, string $region, string $locale, string $version): string
     {
         $regionSlug = strtolower(str_replace('_', '-', $region));
+
         return "{$scale}.{$regionSlug}.{$locale}.{$version}";
     }
 
@@ -226,7 +240,9 @@ class ContentPackResolver
     private function parsePackIdToPath(string $packId): ?array
     {
         $parts = explode('.', $packId);
-        if (count($parts) < 4) return null;
+        if (count($parts) < 4) {
+            return null;
+        }
 
         $scale = $parts[0];
         $regionSlug = $parts[1];
@@ -234,12 +250,16 @@ class ContentPackResolver
         $version = implode('.', array_slice($parts, 3));
 
         $region = strtoupper(str_replace('-', '_', $regionSlug));
+
         return [$scale, $region, $locale, $version];
     }
 
     private function isAssocArray(array $a): bool
     {
-        if ($a === []) return false;
+        if ($a === []) {
+            return false;
+        }
+
         return array_keys($a) !== range(0, count($a) - 1);
     }
 
@@ -257,7 +277,7 @@ class ContentPackResolver
         }
 
         if ($root === '') {
-            throw new RuntimeException("Missing config: content_packs.root");
+            throw new RuntimeException('Missing config: content_packs.root');
         }
 
         return $root;

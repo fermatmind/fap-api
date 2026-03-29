@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Services\Content;
 
-use App\Services\Content\ContentPack;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
@@ -13,9 +12,7 @@ final class ContentCompileService
     public function __construct(
         private readonly ContentLintService $lint,
         private readonly MbtiContentGovernanceService $mbtiGovernance,
-    )
-    {
-    }
+    ) {}
 
     /**
      * @return array{ok:bool,packs:list<array<string,mixed>>}
@@ -30,7 +27,7 @@ final class ContentCompileService
         foreach ($packs as $pack) {
             $result = $this->compilePack($pack);
             $results[] = $result;
-            if (!($result['ok'] ?? false)) {
+            if (! ($result['ok'] ?? false)) {
                 $ok = false;
             }
         }
@@ -70,13 +67,13 @@ final class ContentCompileService
     }
 
     /**
-     * @param array<string,mixed> $pack
+     * @param  array<string,mixed>  $pack
      * @return array<string,mixed>
      */
     public function compilePack(array $pack): array
     {
         $lintResult = $this->lint->lintPack($pack);
-        if (!($lintResult['ok'] ?? false)) {
+        if (! ($lintResult['ok'] ?? false)) {
             return [
                 'pack_id' => (string) ($pack['pack_id'] ?? ''),
                 'version' => (string) ($pack['version'] ?? ''),
@@ -87,8 +84,8 @@ final class ContentCompileService
 
         $manifest = is_array($pack['manifest'] ?? null) ? $pack['manifest'] : [];
         $baseDir = (string) ($pack['base_dir'] ?? '');
-        $compiledDir = $baseDir . DIRECTORY_SEPARATOR . 'compiled';
-        if (!is_dir($compiledDir)) {
+        $compiledDir = $baseDir.DIRECTORY_SEPARATOR.'compiled';
+        if (! is_dir($compiledDir)) {
             mkdir($compiledDir, 0775, true);
         }
 
@@ -107,7 +104,7 @@ final class ContentCompileService
         $sections = [];
         $tagIndex = [];
 
-        $cardFiles = glob($baseDir . DIRECTORY_SEPARATOR . 'report_cards_*.json') ?: [];
+        $cardFiles = glob($baseDir.DIRECTORY_SEPARATOR.'report_cards_*.json') ?: [];
         sort($cardFiles);
         foreach ($cardFiles as $cardFile) {
             $base = basename($cardFile);
@@ -120,7 +117,7 @@ final class ContentCompileService
 
             $tagIndex[$section] = [];
             foreach ((array) ($doc['items'] ?? []) as $item) {
-                if (!is_array($item)) {
+                if (! is_array($item)) {
                     continue;
                 }
                 $id = trim((string) ($item['id'] ?? ''));
@@ -148,18 +145,18 @@ final class ContentCompileService
         $variablesUsed = array_values(array_unique(array_map('strval', (array) ($lintResult['variables_used'] ?? []))));
 
         $sourceFiles = array_merge(
-            [$baseDir . DIRECTORY_SEPARATOR . 'manifest.json'],
-            glob($baseDir . DIRECTORY_SEPARATOR . 'report_cards_*.json') ?: [],
-            glob($baseDir . DIRECTORY_SEPARATOR . 'report_select_rules.json') ?: [],
-            glob($baseDir . DIRECTORY_SEPARATOR . 'report_section_policies.json') ?: [],
-            glob($baseDir . DIRECTORY_SEPARATOR . 'report_dynamic_sections.json') ?: [],
-            glob($baseDir . DIRECTORY_SEPARATOR . 'report_recommended_reads.json') ?: [],
-            glob($baseDir . DIRECTORY_SEPARATOR . 'report_content_governance.json') ?: []
+            [$baseDir.DIRECTORY_SEPARATOR.'manifest.json'],
+            glob($baseDir.DIRECTORY_SEPARATOR.'report_cards_*.json') ?: [],
+            glob($baseDir.DIRECTORY_SEPARATOR.'report_select_rules.json') ?: [],
+            glob($baseDir.DIRECTORY_SEPARATOR.'report_section_policies.json') ?: [],
+            glob($baseDir.DIRECTORY_SEPARATOR.'report_dynamic_sections.json') ?: [],
+            glob($baseDir.DIRECTORY_SEPARATOR.'report_recommended_reads.json') ?: [],
+            glob($baseDir.DIRECTORY_SEPARATOR.'report_content_governance.json') ?: []
         );
         $checksum = $this->computeChecksum($sourceFiles);
         $generatedAt = now()->toIso8601String();
 
-        $this->writeJson($compiledDir . DIRECTORY_SEPARATOR . 'cards.normalized.json', [
+        $this->writeJson($compiledDir.DIRECTORY_SEPARATOR.'cards.normalized.json', [
             'schema' => 'fap.content.compiled.cards.v1',
             'pack_id' => (string) ($pack['pack_id'] ?? ''),
             'version' => (string) ($pack['version'] ?? ''),
@@ -167,7 +164,7 @@ final class ContentCompileService
             'sections' => $sections,
         ]);
 
-        $this->writeJson($compiledDir . DIRECTORY_SEPARATOR . 'cards.tag_index.json', [
+        $this->writeJson($compiledDir.DIRECTORY_SEPARATOR.'cards.tag_index.json', [
             'schema' => 'fap.content.compiled.tag_index.v1',
             'pack_id' => (string) ($pack['pack_id'] ?? ''),
             'version' => (string) ($pack['version'] ?? ''),
@@ -175,7 +172,7 @@ final class ContentCompileService
             'sections' => $tagIndex,
         ]);
 
-        $this->writeJson($compiledDir . DIRECTORY_SEPARATOR . 'rules.normalized.json', [
+        $this->writeJson($compiledDir.DIRECTORY_SEPARATOR.'rules.normalized.json', [
             'schema' => 'fap.content.compiled.rules.v1',
             'pack_id' => (string) ($pack['pack_id'] ?? ''),
             'version' => (string) ($pack['version'] ?? ''),
@@ -183,7 +180,7 @@ final class ContentCompileService
             'rules' => $rules,
         ]);
 
-        $this->writeJson($compiledDir . DIRECTORY_SEPARATOR . 'sections.spec.json', [
+        $this->writeJson($compiledDir.DIRECTORY_SEPARATOR.'sections.spec.json', [
             'schema' => (string) ($sectionsSpec['schema'] ?? 'fap.report.section_policies.v1'),
             'pack_id' => (string) ($pack['pack_id'] ?? ''),
             'version' => (string) ($pack['version'] ?? ''),
@@ -191,7 +188,7 @@ final class ContentCompileService
             'items' => (array) ($sectionsSpec['items'] ?? []),
         ]);
 
-        $this->writeJson($compiledDir . DIRECTORY_SEPARATOR . 'variables.used.json', [
+        $this->writeJson($compiledDir.DIRECTORY_SEPARATOR.'variables.used.json', [
             'schema' => 'fap.content.compiled.variables.v1',
             'pack_id' => (string) ($pack['pack_id'] ?? ''),
             'version' => (string) ($pack['version'] ?? ''),
@@ -210,7 +207,7 @@ final class ContentCompileService
         $inventoryDoc = $this->mbtiGovernance->loadInventoryDocument($baseDir);
         if (is_array($inventoryDoc)) {
             $this->writeJson(
-                $compiledDir . DIRECTORY_SEPARATOR . 'inventory.spec.json',
+                $compiledDir.DIRECTORY_SEPARATOR.'inventory.spec.json',
                 $this->mbtiGovernance->compileInventorySpec($pack, $inventoryDoc)
             );
             $compiledFiles[] = 'inventory.spec.json';
@@ -220,14 +217,14 @@ final class ContentCompileService
             $governanceDoc = $this->mbtiGovernance->loadDocument($baseDir);
             if (is_array($governanceDoc)) {
                 $this->writeJson(
-                    $compiledDir . DIRECTORY_SEPARATOR . 'governance.spec.json',
+                    $compiledDir.DIRECTORY_SEPARATOR.'governance.spec.json',
                     $this->mbtiGovernance->compileSpec($pack, $governanceDoc)
                 );
                 $compiledFiles[] = 'governance.spec.json';
             }
         }
 
-        $this->writeJson($compiledDir . DIRECTORY_SEPARATOR . 'manifest.json', [
+        $this->writeJson($compiledDir.DIRECTORY_SEPARATOR.'manifest.json', [
             'schema' => 'fap.content.compiled.manifest.v1',
             'pack_id' => (string) ($pack['pack_id'] ?? ''),
             'source_version' => (string) ($manifest['content_package_version'] ?? ''),
@@ -251,7 +248,7 @@ final class ContentCompileService
     private function discoverPacks(): array
     {
         $root = (string) config('content_packs.root', base_path('content_packages'));
-        if (!is_dir($root)) {
+        if (! is_dir($root)) {
             return [];
         }
 
@@ -274,11 +271,11 @@ final class ContentCompileService
             if (str_contains($normalizedPath, '/compiled/')) {
                 continue;
             }
-            if (!str_contains($normalizedPath, '/default/')) {
+            if (! str_contains($normalizedPath, '/default/')) {
                 continue;
             }
             $manifest = $this->readJsonFile($manifestPath);
-            if (!is_array($manifest)) {
+            if (! is_array($manifest)) {
                 continue;
             }
 
@@ -301,12 +298,12 @@ final class ContentCompileService
      */
     private function readJsonFile(string $path): ?array
     {
-        if (!is_file($path)) {
+        if (! is_file($path)) {
             return null;
         }
 
         $raw = file_get_contents($path);
-        if (!is_string($raw) || $raw === '') {
+        if (! is_string($raw) || $raw === '') {
             return null;
         }
 
@@ -316,13 +313,13 @@ final class ContentCompileService
     }
 
     /**
-     * @param list<string> $files
+     * @param  list<string>  $files
      */
     private function computeChecksum(array $files): string
     {
         $hash = hash_init('sha256');
         foreach ($files as $file) {
-            if (!is_file($file)) {
+            if (! is_file($file)) {
                 continue;
             }
             hash_update($hash, (string) $file);
@@ -333,7 +330,7 @@ final class ContentCompileService
     }
 
     /**
-     * @param array<string,mixed> $payload
+     * @param  array<string,mixed>  $payload
      */
     private function writeJson(string $path, array $payload): void
     {

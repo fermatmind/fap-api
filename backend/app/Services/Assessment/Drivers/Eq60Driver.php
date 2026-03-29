@@ -128,7 +128,7 @@ final class Eq60Driver implements DriverInterface
     }
 
     /**
-     * @param array<int|string,mixed> $answers
+     * @param  array<int|string,mixed>  $answers
      * @return array<int,mixed>
      */
     private function normalizeAnswers(array $answers): array
@@ -142,7 +142,7 @@ final class Eq60Driver implements DriverInterface
         $isList = array_keys($answers) === range(0, count($answers) - 1);
         if ($isList) {
             foreach ($answers as $answer) {
-                if (!is_array($answer)) {
+                if (! is_array($answer)) {
                     continue;
                 }
 
@@ -177,6 +177,7 @@ final class Eq60Driver implements DriverInterface
 
             if (is_array($value)) {
                 $out[$qid] = $value['code'] ?? ($value['value'] ?? ($value['answer'] ?? null));
+
                 continue;
             }
 

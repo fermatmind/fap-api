@@ -31,8 +31,7 @@ final class ReportComposeContext
         public readonly bool $persist,
         public readonly bool $strict,
         public readonly array $options,
-    ) {
-    }
+    ) {}
 
     public static function fromAttempt(Attempt $attempt, ?Result $result, array $opts): self
     {

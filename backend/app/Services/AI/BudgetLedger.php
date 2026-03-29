@@ -9,7 +9,9 @@ use Illuminate\Support\Carbon;
 final class BudgetLedger
 {
     private const DAY_TTL_SECONDS = 172800;   // 2 days
+
     private const MONTH_TTL_SECONDS = 3456000; // 40 days
+
     private ?\Redis $directClient = null;
 
     public function incrementTokens(
@@ -63,7 +65,7 @@ final class BudgetLedger
         string $period,
         ?\DateTimeInterface $now = null
     ): void {
-        if (!(bool) config('ai.breaker_enabled', true)) {
+        if (! (bool) config('ai.breaker_enabled', true)) {
             return;
         }
 
@@ -87,8 +89,8 @@ final class BudgetLedger
             ];
         }
 
-        $tokensLimit = (int) config('ai.budgets.' . ($period === 'month' ? 'monthly_tokens' : 'daily_tokens'), 0);
-        $costLimit = (float) config('ai.budgets.' . ($period === 'month' ? 'monthly_usd' : 'daily_usd'), 0);
+        $tokensLimit = (int) config('ai.budgets.'.($period === 'month' ? 'monthly_tokens' : 'daily_tokens'), 0);
+        $costLimit = (float) config('ai.budgets.'.($period === 'month' ? 'monthly_usd' : 'daily_usd'), 0);
 
         $tokensNow = (int) ($usage['tokens_in'] + $usage['tokens_out']);
         $costNow = (float) ($usage['cost_usd'] ?? 0.0);
@@ -111,6 +113,7 @@ final class BudgetLedger
                 return $this->incrementWith($this->directClient(), $key, $tokensIn, $tokensOut, $costUsd, $ttlSeconds);
             } catch (\Throwable $e2) {
                 $this->handleRedisFailure($e2);
+
                 return [
                     'ok' => false,
                     'tokens_in' => 0,
@@ -131,6 +134,7 @@ final class BudgetLedger
                 return $this->readWith($this->directClient(), $key);
             } catch (\Throwable $e2) {
                 $this->handleRedisFailure($e2);
+
                 return [
                     'ok' => false,
                     'tokens_in' => 0,
@@ -144,12 +148,12 @@ final class BudgetLedger
 
     private function handleRedisFailure(\Throwable $e): void
     {
-        if (!(bool) config('ai.breaker_enabled', true)) {
+        if (! (bool) config('ai.breaker_enabled', true)) {
             return;
         }
 
         $failOpen = (bool) config('ai.fail_open_when_redis_down', false);
-        if (!$failOpen) {
+        if (! $failOpen) {
             $env = \App\Support\RuntimeConfig::raw('AI_FAIL_OPEN_WHEN_REDIS_DOWN');
             if ($env !== false && $env !== '') {
                 $failOpen = filter_var($env, FILTER_VALIDATE_BOOLEAN);
@@ -171,7 +175,7 @@ final class BudgetLedger
         $model = $this->sanitizeSegment($model, 64);
         $subject = $this->sanitizeSegment($subject, 128);
 
-        return $prefix . ':' . $granularity . ':' . $period . ':' . $provider . ':' . $model . ':' . $subject;
+        return $prefix.':'.$granularity.':'.$period.':'.$provider.':'.$model.':'.$subject;
     }
 
     private function sanitizeSegment(string $value, int $maxLen): string
@@ -247,7 +251,7 @@ final class BudgetLedger
         }
         $database = (int) config('database.redis.default.database', 0);
 
-        $client = new \Redis();
+        $client = new \Redis;
         $client->connect($host, $port, 1.5);
 
         if ($password !== '') {

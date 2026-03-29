@@ -28,16 +28,17 @@ class StripeGateway implements PaymentGatewayInterface
 
         foreach (explode(',', $header) as $chunk) {
             $chunk = trim($chunk);
-            if ($chunk === '' || !str_contains($chunk, '=')) {
+            if ($chunk === '' || ! str_contains($chunk, '=')) {
                 continue;
             }
 
             [$key, $value] = array_map('trim', explode('=', $chunk, 2));
             if ($key === 't') {
-                if ($value === '' || !ctype_digit($value)) {
+                if ($value === '' || ! ctype_digit($value)) {
                     return false;
                 }
                 $timestamp = (int) $value;
+
                 continue;
             }
 

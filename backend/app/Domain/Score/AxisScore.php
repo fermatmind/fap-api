@@ -14,10 +14,11 @@ final class AxisScore
 
     /**
      * 用 counts 算轴分数（推荐）
-     * @param int $countA 例如 E 的票数
-     * @param int $countB 例如 I 的票数
-     * @param string $sideA 例如 'E'
-     * @param string $sideB 例如 'I'
+     *
+     * @param  int  $countA  例如 E 的票数
+     * @param  int  $countB  例如 I 的票数
+     * @param  string  $sideA  例如 'E'
+     * @param  string  $sideB  例如 'I'
      */
     public static function fromCounts(int $countA, int $countB, string $sideA, string $sideB): self
     {
@@ -29,6 +30,7 @@ final class AxisScore
         if ($total <= 0) {
             $pct = 50;
             $side = $sideA;
+
             return self::fromPctAndSide($pct, $side);
         }
 

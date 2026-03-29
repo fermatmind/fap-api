@@ -17,6 +17,6 @@ final class StripeSignatureVerifier implements WebhookSignatureVerifierInterface
 
     public function verify(Request $request): bool
     {
-        return (new StripeGateway())->verifySignature($request);
+        return (new StripeGateway)->verifySignature($request);
     }
 }

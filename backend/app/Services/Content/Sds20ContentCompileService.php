@@ -11,8 +11,7 @@ final class Sds20ContentCompileService
     public function __construct(
         private readonly Sds20PackLoader $loader,
         private readonly Sds20ContentLintService $lint,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{ok:bool,pack_id:string,version:string,compiled_dir:string,errors:list<array{file:string,line:int,message:string}>,hashes:array<string,string>}
@@ -21,7 +20,7 @@ final class Sds20ContentCompileService
     {
         $version = $this->loader->normalizeVersion($version);
         $lint = $this->lint->lint($version);
-        if (!($lint['ok'] ?? false)) {
+        if (! ($lint['ok'] ?? false)) {
             return [
                 'ok' => false,
                 'pack_id' => Sds20PackLoader::PACK_ID,
@@ -33,7 +32,7 @@ final class Sds20ContentCompileService
         }
 
         $compiledDir = $this->loader->compiledDir($version);
-        if (!is_dir($compiledDir)) {
+        if (! is_dir($compiledDir)) {
             File::makeDirectory($compiledDir, 0775, true, true);
         }
 
@@ -61,7 +60,7 @@ final class Sds20ContentCompileService
             $row = (array) ($entry['row'] ?? []);
             $qid = (int) ($row['question_id'] ?? 0);
             $direction = (int) ($row['direction'] ?? 0);
-            if ($qid <= 0 || !in_array($direction, [1, -1], true)) {
+            if ($qid <= 0 || ! in_array($direction, [1, -1], true)) {
                 continue;
             }
 
@@ -198,7 +197,7 @@ final class Sds20ContentCompileService
         $hashes = [];
         foreach ($files as $name => $payload) {
             $json = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
-            if (!is_string($json)) {
+            if (! is_string($json)) {
                 continue;
             }
             File::put($this->loader->compiledPath($name, $version), $json."\n");
@@ -234,19 +233,19 @@ final class Sds20ContentCompileService
     }
 
     /**
-     * @param array<string,mixed> $doc
+     * @param  array<string,mixed>  $doc
      * @return list<array<string,mixed>>
      */
     private function normalizeBlockRows(array $doc, string $locale, string $accessLevel): array
     {
         $rows = $doc[$locale] ?? [];
-        if (!is_array($rows)) {
+        if (! is_array($rows)) {
             return [];
         }
 
         $out = [];
         foreach ($rows as $row) {
-            if (!is_array($row)) {
+            if (! is_array($row)) {
                 continue;
             }
 
@@ -314,7 +313,7 @@ final class Sds20ContentCompileService
     }
 
     /**
-     * @param array<string,string> $hashes
+     * @param  array<string,string>  $hashes
      */
     private function hashMap(array $hashes): string
     {
@@ -329,7 +328,7 @@ final class Sds20ContentCompileService
 
     private function hashDirectory(string $dir): string
     {
-        if (!is_dir($dir)) {
+        if (! is_dir($dir)) {
             return '';
         }
 

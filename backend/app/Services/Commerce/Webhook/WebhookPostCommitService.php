@@ -8,9 +8,7 @@ use App\Jobs\GenerateReportSnapshotJob;
 
 class WebhookPostCommitService
 {
-    public function __construct(private PaymentWebhookHandlerCore $core)
-    {
-    }
+    public function __construct(private PaymentWebhookHandlerCore $core) {}
 
     public function handle(array $ctx): array
     {

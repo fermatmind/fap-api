@@ -20,7 +20,7 @@ final class Eq60ContentCompileService
     {
         $version = $this->loader->normalizeVersion($version);
         $lint = $this->lint->lint($version);
-        if (!($lint['ok'] ?? false)) {
+        if (! ($lint['ok'] ?? false)) {
             return [
                 'ok' => false,
                 'pack_id' => Eq60PackLoader::PACK_ID,
@@ -32,7 +32,7 @@ final class Eq60ContentCompileService
         }
 
         $compiledDir = $this->loader->compiledDir($version);
-        if (!is_dir($compiledDir)) {
+        if (! is_dir($compiledDir)) {
             File::makeDirectory($compiledDir, 0775, true, true);
         }
 
@@ -61,7 +61,7 @@ final class Eq60ContentCompileService
             $qid = (int) ($row['question_id'] ?? 0);
             $dimension = strtoupper(trim((string) ($row['dimension'] ?? '')));
             $direction = (int) ($row['direction'] ?? 0);
-            if ($qid <= 0 || !in_array($dimension, ['SA', 'ER', 'EM', 'RM'], true) || !in_array($direction, [1, -1], true)) {
+            if ($qid <= 0 || ! in_array($dimension, ['SA', 'ER', 'EM', 'RM'], true) || ! in_array($direction, [1, -1], true)) {
                 continue;
             }
 
@@ -196,11 +196,11 @@ final class Eq60ContentCompileService
         $hashes = [];
         foreach ($files as $name => $payload) {
             $json = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
-            if (!is_string($json)) {
+            if (! is_string($json)) {
                 continue;
             }
 
-            File::put($this->loader->compiledPath($name, $version), $json . "\n");
+            File::put($this->loader->compiledPath($name, $version), $json."\n");
             $hashes[$name] = hash('sha256', $json);
         }
 
@@ -218,7 +218,7 @@ final class Eq60ContentCompileService
 
         $manifestJson = json_encode($manifest, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
         if (is_string($manifestJson)) {
-            File::put($this->loader->compiledPath('manifest.json', $version), $manifestJson . "\n");
+            File::put($this->loader->compiledPath('manifest.json', $version), $manifestJson."\n");
             $hashes['manifest.json'] = hash('sha256', $manifestJson);
         }
 
@@ -233,8 +233,8 @@ final class Eq60ContentCompileService
     }
 
     /**
-     * @param list<string> $codes
-     * @param list<string> $labels
+     * @param  list<string>  $codes
+     * @param  list<string>  $labels
      * @return list<array{code:string,label:string}>
      */
     private function buildOptionAnchors(array $codes, array $labels): array
@@ -257,7 +257,7 @@ final class Eq60ContentCompileService
     }
 
     /**
-     * @param array<string,mixed> $raw
+     * @param  array<string,mixed>  $raw
      * @return array<string,mixed>
      */
     private function normalizePolicy(array $raw): array
@@ -271,9 +271,9 @@ final class Eq60ContentCompileService
 
         $dimensionMap = [];
         foreach ($dimensionKeyMap as $name => $code) {
-            $qids = array_map('intval', (array) data_get($raw, 'scoring.dimensions.' . $name . '.qids', []));
+            $qids = array_map('intval', (array) data_get($raw, 'scoring.dimensions.'.$name.'.qids', []));
             if ($qids === []) {
-                $qids = (array) data_get($raw, 'dimension_map.' . $code, []);
+                $qids = (array) data_get($raw, 'dimension_map.'.$code, []);
                 $qids = array_map('intval', $qids);
             }
             $dimensionMap[$code] = array_values(array_unique(array_filter($qids, static fn (int $qid): bool => $qid > 0)));
@@ -301,7 +301,7 @@ final class Eq60ContentCompileService
             'proficient_max' => 115.0,
         ];
         foreach ($bands as $band) {
-            if (!is_array($band)) {
+            if (! is_array($band)) {
                 continue;
             }
             $bucket = strtolower(trim((string) ($band['bucket'] ?? '')));
@@ -344,7 +344,7 @@ final class Eq60ContentCompileService
 
         $inconsistencyPairs = [];
         foreach ((array) data_get($raw, 'validity.inconsistency_pairs', []) as $pair) {
-            if (!is_array($pair) || count($pair) < 2) {
+            if (! is_array($pair) || count($pair) < 2) {
                 continue;
             }
             $a = (int) ($pair[0] ?? 0);
@@ -358,7 +358,7 @@ final class Eq60ContentCompileService
         $rawRules = (array) data_get($raw, 'tags.rules', []);
         $tagRules = [];
         foreach ($rawRules as $rule) {
-            if (!is_array($rule)) {
+            if (! is_array($rule)) {
                 continue;
             }
 
@@ -369,7 +369,7 @@ final class Eq60ContentCompileService
 
             $all = [];
             foreach ((array) data_get($rule, 'when.all', []) as $condition) {
-                if (!is_array($condition)) {
+                if (! is_array($condition)) {
                     continue;
                 }
                 $metric = strtoupper(trim((string) ($condition['metric'] ?? '')));
@@ -407,14 +407,14 @@ final class Eq60ContentCompileService
         foreach ($tagRules as $rule) {
             $when = [];
             foreach ((array) data_get($rule, 'when.all', []) as $condition) {
-                if (!is_array($condition)) {
+                if (! is_array($condition)) {
                     continue;
                 }
                 $metric = strtoupper(trim((string) ($condition['metric'] ?? '')));
                 $op = trim((string) ($condition['op'] ?? ''));
                 $value = (float) ($condition['value'] ?? 0.0);
 
-                if (!in_array($metric, ['SA', 'ER', 'EM', 'RM'], true)) {
+                if (! in_array($metric, ['SA', 'ER', 'EM', 'RM'], true)) {
                     continue;
                 }
 
@@ -427,7 +427,7 @@ final class Eq60ContentCompileService
                     continue;
                 }
 
-                $when[$metric . '_' . $suffix] = $value;
+                $when[$metric.'_'.$suffix] = $value;
             }
 
             if ($when === []) {
@@ -527,7 +527,7 @@ final class Eq60ContentCompileService
     }
 
     /**
-     * @param array<string,mixed> $raw
+     * @param  array<string,mixed>  $raw
      * @return array<string,mixed>
      */
     private function normalizeLayout(array $raw): array
@@ -538,7 +538,7 @@ final class Eq60ContentCompileService
 
         $normalizedSections = [];
         foreach ((array) $sections as $section) {
-            if (!is_array($section)) {
+            if (! is_array($section)) {
                 continue;
             }
 
@@ -556,12 +556,12 @@ final class Eq60ContentCompileService
             }
 
             $source = strtolower(trim((string) ($section['source'] ?? 'blocks')));
-            if (!in_array($source, ['copy', 'blocks'], true)) {
+            if (! in_array($source, ['copy', 'blocks'], true)) {
                 $source = 'blocks';
             }
 
             $accessLevel = strtolower(trim((string) ($section['access_level'] ?? 'free')));
-            if (!in_array($accessLevel, ['free', 'paid'], true)) {
+            if (! in_array($accessLevel, ['free', 'paid'], true)) {
                 $accessLevel = 'free';
             }
 
@@ -596,8 +596,8 @@ final class Eq60ContentCompileService
     }
 
     /**
-     * @param array<string,mixed> $freeDoc
-     * @param array<string,mixed> $paidDoc
+     * @param  array<string,mixed>  $freeDoc
+     * @param  array<string,mixed>  $paidDoc
      * @return list<array<string,mixed>>
      */
     private function normalizeBlocks(array $freeDoc, array $paidDoc): array
@@ -617,12 +617,12 @@ final class Eq60ContentCompileService
             } else {
                 foreach (['zh-CN', 'en'] as $locale) {
                     $rows = $doc[$locale] ?? null;
-                    if (!is_array($rows)) {
+                    if (! is_array($rows)) {
                         continue;
                     }
 
                     foreach ($rows as $row) {
-                        if (!is_array($row)) {
+                        if (! is_array($row)) {
                             continue;
                         }
 
@@ -654,8 +654,8 @@ final class Eq60ContentCompileService
                     static fn ($tag): string => trim((string) $tag),
                     (array) ($row['tags_all'] ?? [])
                 ))));
-                if (!in_array('section:' . $section, $tagsAll, true)) {
-                    $tagsAll[] = 'section:' . $section;
+                if (! in_array('section:'.$section, $tagsAll, true)) {
+                    $tagsAll[] = 'section:'.$section;
                 }
 
                 $all[] = array_filter([
@@ -704,7 +704,7 @@ final class Eq60ContentCompileService
     }
 
     /**
-     * @param array<string,mixed> $raw
+     * @param  array<string,mixed>  $raw
      * @return array{required:list<string>,allowed:list<string>}
      */
     private function normalizeVariablesAllowlist(array $raw): array
@@ -793,19 +793,19 @@ final class Eq60ContentCompileService
     private function parseAnswersJsonToMap(string $answersJson): array
     {
         $decoded = json_decode($answersJson, true);
-        if (!is_array($decoded)) {
+        if (! is_array($decoded)) {
             return [];
         }
 
         $out = [];
         foreach ($decoded as $item) {
-            if (!is_array($item)) {
+            if (! is_array($item)) {
                 continue;
             }
 
             $qid = (int) ($item['question_id'] ?? 0);
             $code = strtoupper(trim((string) ($item['code'] ?? '')));
-            if ($qid < 1 || $qid > 60 || !in_array($code, ['A', 'B', 'C', 'D', 'E'], true)) {
+            if ($qid < 1 || $qid > 60 || ! in_array($code, ['A', 'B', 'C', 'D', 'E'], true)) {
                 continue;
             }
 
@@ -834,14 +834,14 @@ final class Eq60ContentCompileService
     }
 
     /**
-     * @param array<string,string> $hashes
+     * @param  array<string,string>  $hashes
      */
     private function hashMap(array $hashes): string
     {
         ksort($hashes);
         $rows = [];
         foreach ($hashes as $name => $hash) {
-            $rows[] = $name . ':' . $hash;
+            $rows[] = $name.':'.$hash;
         }
 
         return hash('sha256', implode("\n", $rows));
@@ -849,19 +849,19 @@ final class Eq60ContentCompileService
 
     private function hashDirectory(string $dir): string
     {
-        if (!is_dir($dir)) {
+        if (! is_dir($dir)) {
             return '';
         }
 
         $files = File::allFiles($dir);
         usort($files, static fn (\SplFileInfo $a, \SplFileInfo $b): int => strcmp($a->getPathname(), $b->getPathname()));
 
-        $prefix = rtrim($dir, '/\\') . DIRECTORY_SEPARATOR;
+        $prefix = rtrim($dir, '/\\').DIRECTORY_SEPARATOR;
         $rows = [];
         foreach ($files as $file) {
             $path = $file->getPathname();
             $rel = str_starts_with($path, $prefix) ? substr($path, strlen($prefix)) : $file->getFilename();
-            $rows[] = $rel . ':' . hash_file('sha256', $path);
+            $rows[] = $rel.':'.hash_file('sha256', $path);
         }
 
         return hash('sha256', implode("\n", $rows));

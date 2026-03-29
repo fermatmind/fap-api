@@ -2,9 +2,8 @@
 
 namespace App\Services\Agent\Policies;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 final class ThrottlePolicy
 {
@@ -22,7 +21,7 @@ final class ThrottlePolicy
             ];
         }
 
-        if (!\App\Support\SchemaBaseline::hasTable('agent_messages')) {
+        if (! \App\Support\SchemaBaseline::hasTable('agent_messages')) {
             return [
                 'ok' => false,
                 'allowed' => false,
@@ -49,7 +48,7 @@ final class ThrottlePolicy
             ->orderByDesc('created_at')
             ->first();
 
-        if ($last && !empty($last->created_at)) {
+        if ($last && ! empty($last->created_at)) {
             $lastAt = Carbon::parse($last->created_at);
             $diff = $lastAt->diffInMinutes(now());
             if ($diff < $cooldownMinutes) {

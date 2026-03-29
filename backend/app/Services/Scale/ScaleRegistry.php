@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Schema;
 class ScaleRegistry
 {
     public const CACHE_TTL_SECONDS = 300;
+
     private const REGISTRY_V2_TABLE = 'scales_registry_v2';
+
     private const REGISTRY_LEGACY_TABLE = 'scales_registry';
 
     public function __construct(

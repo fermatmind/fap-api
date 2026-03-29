@@ -38,6 +38,7 @@ trait ReportPayloadAssemblerOverridesTrait
         foreach ($overridesOrderBuckets as $bucket) {
             if ($bucket === 'highlights_legacy') {
                 $highlights = $this->overridesApplier->apply($contentPackageDir, $typeCode, $highlights);
+
                 continue;
             }
             if ($bucket === 'unified') {
@@ -93,7 +94,7 @@ trait ReportPayloadAssemblerOverridesTrait
         ];
 
         foreach ($docs as $d) {
-            if (!is_array($d)) {
+            if (! is_array($d)) {
                 continue;
             }
 
@@ -106,10 +107,10 @@ trait ReportPayloadAssemblerOverridesTrait
 
             if (is_array($rules)) {
                 foreach ($rules as $r) {
-                    if (!is_array($r)) {
+                    if (! is_array($r)) {
                         continue;
                     }
-                    if (!isset($r['__src']) && is_array($d['__src'] ?? null)) {
+                    if (! isset($r['__src']) && is_array($d['__src'] ?? null)) {
                         $r['__src'] = $d['__src'];
                     }
                     $base['rules'][] = $r;
@@ -139,33 +140,33 @@ trait ReportPayloadAssemblerOverridesTrait
         $idx = 0;
 
         foreach ($chain as $p) {
-            if (!$p instanceof ContentPack) {
+            if (! $p instanceof ContentPack) {
                 continue;
             }
 
             $assetVal = $p->assets()['overrides'] ?? null;
-            if (!is_array($assetVal) || $assetVal === []) {
+            if (! is_array($assetVal) || $assetVal === []) {
                 continue;
             }
 
             $orderedPaths = $this->getOverridesOrderedPaths($assetVal);
 
             foreach ($orderedPaths as $rel) {
-                if (!is_string($rel) || trim($rel) === '') {
+                if (! is_string($rel) || trim($rel) === '') {
                     continue;
                 }
 
-                $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $rel;
-                if (!is_file($abs)) {
+                $abs = rtrim($p->basePath(), DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$rel;
+                if (! is_file($abs)) {
                     continue;
                 }
 
                 $json = json_decode((string) file_get_contents($abs), true);
-                if (!is_array($json)) {
+                if (! is_array($json)) {
                     continue;
                 }
 
-                if (!is_array($json['rules'] ?? null) && is_array($json['overrides'] ?? null)) {
+                if (! is_array($json['rules'] ?? null) && is_array($json['overrides'] ?? null)) {
                     $json['rules'] = $json['overrides'];
                 }
 
@@ -252,11 +253,11 @@ trait ReportPayloadAssemblerOverridesTrait
 
         if (is_array($order) && $order !== []) {
             foreach ($order as $bucket) {
-                if (!is_string($bucket) || $bucket === '') {
+                if (! is_string($bucket) || $bucket === '') {
                     continue;
                 }
                 $v = $assetVal[$bucket] ?? null;
-                if (!is_array($v)) {
+                if (! is_array($v)) {
                     continue;
                 }
 
@@ -266,6 +267,7 @@ trait ReportPayloadAssemblerOverridesTrait
                     }
                 }
             }
+
             return array_values(array_unique($out));
         }
 
@@ -273,7 +275,7 @@ trait ReportPayloadAssemblerOverridesTrait
             if ($k === 'order') {
                 continue;
             }
-            if (!is_array($v)) {
+            if (! is_array($v)) {
                 continue;
             }
             foreach ($v as $path) {
@@ -282,21 +284,24 @@ trait ReportPayloadAssemblerOverridesTrait
                 }
             }
         }
+
         return array_values(array_unique($out));
     }
 
     private function getOverridesOrderBucketsFromPackChain(array $chain): array
     {
         foreach ($chain as $p) {
-            if (!$p instanceof ContentPack) {
+            if (! $p instanceof ContentPack) {
                 continue;
             }
             $assetVal = $p->assets()['overrides'] ?? null;
-            if (!is_array($assetVal) || $assetVal === []) {
+            if (! is_array($assetVal) || $assetVal === []) {
                 continue;
             }
+
             return $this->getOverridesOrderBuckets($assetVal);
         }
+
         return ['highlights_legacy', 'unified'];
     }
 
@@ -314,6 +319,7 @@ trait ReportPayloadAssemblerOverridesTrait
                     $out[] = $x;
                 }
             }
+
             return $out ?: ['highlights_legacy', 'unified'];
         }
 
@@ -326,6 +332,7 @@ trait ReportPayloadAssemblerOverridesTrait
                 $out[] = $k;
             }
         }
+
         return $out ?: ['highlights_legacy', 'unified'];
     }
 
@@ -342,7 +349,7 @@ trait ReportPayloadAssemblerOverridesTrait
         ];
 
         foreach ($docs as $d) {
-            if (!is_array($d)) {
+            if (! is_array($d)) {
                 continue;
             }
 
@@ -375,6 +382,7 @@ trait ReportPayloadAssemblerOverridesTrait
             $region = strtoupper($parts[1] ?? 'GLOBAL');
             $locale = $parts[2] ?? 'en';
             $ver = implode('.', array_slice($parts, 3));
+
             return "{$scale}/{$region}/{$locale}/{$ver}";
         }
 

@@ -48,6 +48,7 @@ final class InsightGenerator
         if ($tokens < 1) {
             $tokens = 1;
         }
+
         return $tokens;
     }
 
@@ -59,6 +60,7 @@ final class InsightGenerator
         if ($tokensIn > 600) {
             return 180;
         }
+
         return 160;
     }
 
@@ -68,6 +70,7 @@ final class InsightGenerator
         if ($rate <= 0) {
             return 0.0;
         }
+
         return round(($totalTokens / 1000.0) * $rate, 6);
     }
 

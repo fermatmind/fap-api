@@ -11,10 +11,10 @@ class HighlightsOverridesApplier
      *   1) apply($contentPackageVersion, $typeCode, $baseHighlights, $ctx = [])   // canonical
      *   2) apply($baseHighlights, $ctx)                                          // compat (ctx must include content_package_version + type_code)
      *
-     * @param mixed $contentPackageVersionOrHighlights  string|array
-     * @param mixed $typeCodeOrCtx                      string|array|null
-     * @param mixed $baseHighlights                     array|null
-     * @param array $ctx                                Optional report ctx, e.g. ['tags'=> [...]]
+     * @param  mixed  $contentPackageVersionOrHighlights  string|array
+     * @param  mixed  $typeCodeOrCtx  string|array|null
+     * @param  mixed  $baseHighlights  array|null
+     * @param  array  $ctx  Optional report ctx, e.g. ['tags'=> [...]]
      */
     public function apply($contentPackageVersionOrHighlights, $typeCodeOrCtx = null, $baseHighlights = null, array $ctx = []): array
     {
@@ -24,10 +24,10 @@ class HighlightsOverridesApplier
         // ----------------------------
         if (is_array($contentPackageVersionOrHighlights) && is_array($typeCodeOrCtx) && $baseHighlights === null) {
             $baseHighlights = $contentPackageVersionOrHighlights;
-            $ctx            = $typeCodeOrCtx;
+            $ctx = $typeCodeOrCtx;
 
-            $contentPackageVersion = (string)($ctx['content_package_version'] ?? $ctx['contentPackageVersion'] ?? '');
-            $typeCode              = (string)($ctx['type_code'] ?? $ctx['typeCode'] ?? '');
+            $contentPackageVersion = (string) ($ctx['content_package_version'] ?? $ctx['contentPackageVersion'] ?? '');
+            $typeCode = (string) ($ctx['type_code'] ?? $ctx['typeCode'] ?? '');
 
             // 缺关键字段就不应用 overrides，直接返回原列表（保证主链路稳定）
             if ($contentPackageVersion === '' || $typeCode === '') {
@@ -35,9 +35,9 @@ class HighlightsOverridesApplier
             }
         } else {
             // canonical: apply($contentPackageVersion, $typeCode, $highlights, $ctx)
-            $contentPackageVersion = (string)$contentPackageVersionOrHighlights;
-            $typeCode              = is_string($typeCodeOrCtx) ? (string)$typeCodeOrCtx : '';
-            $baseHighlights         = is_array($baseHighlights) ? $baseHighlights : [];
+            $contentPackageVersion = (string) $contentPackageVersionOrHighlights;
+            $typeCode = is_string($typeCodeOrCtx) ? (string) $typeCodeOrCtx : '';
+            $baseHighlights = is_array($baseHighlights) ? $baseHighlights : [];
         }
 
         $ovr = $this->loadReportAssetJson($contentPackageVersion, 'report_highlights_overrides.json');
@@ -46,38 +46,44 @@ class HighlightsOverridesApplier
         if ($this->isRuleList($ovr['rules'] ?? null)) {
             $reportCtx = [
                 'type_code' => $typeCode,
-                'tags'      => $this->normalizeTags($ctx['tags'] ?? []),
+                'tags' => $this->normalizeTags($ctx['tags'] ?? []),
                 // cards 会用到 section，这里先留着兼容（highlights 可不传）
-                'section'   => is_string($ctx['section'] ?? null) ? (string)$ctx['section'] : null,
+                'section' => is_string($ctx['section'] ?? null) ? (string) $ctx['section'] : null,
             ];
 
             $out = $this->normalizeHighlightsList($baseHighlights);
 
             foreach ($ovr['rules'] as $rule) {
-                if (!is_array($rule)) continue;
+                if (! is_array($rule)) {
+                    continue;
+                }
 
                 // target gate（默认就是 highlights）
-                $target = (string)($rule['target'] ?? 'highlights');
-                if ($target !== '' && $target !== 'highlights') continue;
+                $target = (string) ($rule['target'] ?? 'highlights');
+                if ($target !== '' && $target !== 'highlights') {
+                    continue;
+                }
 
                 $match = is_array($rule['match'] ?? null) ? $rule['match'] : [];
 
                 // 1) report-level match
-                if (!$this->matchReport($match, $reportCtx)) {
+                if (! $this->matchReport($match, $reportCtx)) {
                     continue;
                 }
 
-                $mode = (string)($rule['mode'] ?? 'patch');
+                $mode = (string) ($rule['mode'] ?? 'patch');
 
                 // list-level items payload（只从 rule.items 读；match.item 不是插入 item）
-$ruleItems = [];
-if (is_array($rule['items'] ?? null)) {
-    $ruleItems = $this->normalizeHighlightsList($rule['items']);
-}
+                $ruleItems = [];
+                if (is_array($rule['items'] ?? null)) {
+                    $ruleItems = $this->normalizeHighlightsList($rule['items']);
+                }
 
                 // per-rule replace_fields
                 $replaceFields = $rule['replace_fields'] ?? null;
-                if (!is_array($replaceFields)) $replaceFields = [];
+                if (! is_array($replaceFields)) {
+                    $replaceFields = [];
+                }
 
                 // per-rule patch payload
                 $patch = is_array($rule['patch'] ?? null) ? $rule['patch'] : (is_array($rule['value'] ?? null) ? $rule['value'] : []);
@@ -87,6 +93,7 @@ if (is_array($rule['items'] ?? null)) {
 
                 if ($matchItem === null) {
                     $out = $this->applyListMode($out, $mode, $ruleItems, $patch, $replaceFields);
+
                     continue;
                 }
 
@@ -100,23 +107,27 @@ if (is_array($rule['items'] ?? null)) {
         // ---------- LEGACY FORMAT (existing behavior) ----------
         $rules = is_array($ovr['rules'] ?? null) ? $ovr['rules'] : [];
 
-        $overrideMode  = (string)($rules['override_mode'] ?? 'merge');
+        $overrideMode = (string) ($rules['override_mode'] ?? 'merge');
         $replaceFields = is_array($rules['replace_fields'] ?? null) ? $rules['replace_fields'] : ['tags', 'tips'];
 
-        $items   = is_array($ovr['items'] ?? null) ? $ovr['items'] : [];
+        $items = is_array($ovr['items'] ?? null) ? $ovr['items'] : [];
         $perType = is_array($items[$typeCode] ?? null) ? $items[$typeCode] : [];
 
-        if (empty($perType) || empty($baseHighlights)) return $baseHighlights;
+        if (empty($perType) || empty($baseHighlights)) {
+            return $baseHighlights;
+        }
 
         $out = [];
 
         foreach ($baseHighlights as $h) {
-            if (!is_array($h)) continue;
+            if (! is_array($h)) {
+                continue;
+            }
 
-            $id    = (string)($h['id'] ?? '');
-            $dim   = (string)($h['dim'] ?? '');
-            $side  = (string)($h['side'] ?? '');
-            $level = (string)($h['level'] ?? '');
+            $id = (string) ($h['id'] ?? '');
+            $dim = (string) ($h['dim'] ?? '');
+            $side = (string) ($h['side'] ?? '');
+            $level = (string) ($h['level'] ?? '');
 
             $override = null;
 
@@ -128,28 +139,38 @@ if (is_array($rule['items'] ?? null)) {
             // b) by dim/side/level
             if ($override === null && $dim !== '' && $side !== '' && $level !== '') {
                 $o2 = $perType[$dim][$side][$level] ?? null;
-                if (is_array($o2)) $override = $o2;
+                if (is_array($o2)) {
+                    $override = $o2;
+                }
             }
 
             if (is_array($override)) {
                 if ($overrideMode === 'merge') {
-    $h = $this->mergeNonNull($h, $override); // ignore null
-} else {
-    // 这个分支本身不会用 null 覆盖（+ 运算符不覆盖已有 key）
-    $h = $override + $h;
-}
+                    $h = $this->mergeNonNull($h, $override); // ignore null
+                } else {
+                    // 这个分支本身不会用 null 覆盖（+ 运算符不覆盖已有 key）
+                    $h = $override + $h;
+                }
 
                 foreach ($replaceFields as $rf) {
-                    if (!is_string($rf) || $rf === '') continue;
+                    if (! is_string($rf) || $rf === '') {
+                        continue;
+                    }
                     if (array_key_exists($rf, $override)) {
-    if ($override[$rf] === null) continue; // null 不清空
-    $h[$rf] = is_array($override[$rf]) ? $override[$rf] : [];
-}
+                        if ($override[$rf] === null) {
+                            continue;
+                        } // null 不清空
+                        $h[$rf] = is_array($override[$rf]) ? $override[$rf] : [];
+                    }
                 }
             }
 
-            if (!is_array($h['tags'] ?? null)) $h['tags'] = [];
-            if (!is_array($h['tips'] ?? null)) $h['tips'] = [];
+            if (! is_array($h['tags'] ?? null)) {
+                $h['tags'] = [];
+            }
+            if (! is_array($h['tips'] ?? null)) {
+                $h['tips'] = [];
+            }
 
             $out[] = $h;
         }
@@ -171,25 +192,29 @@ if (is_array($rule['items'] ?? null)) {
     // =========================
 
     private function isRuleList($rules): bool
-{
-    // rules 必须是 array 且是“列表”（从 0 开始的连续整数 key）
-    return is_array($rules) && array_is_list($rules);
-}
+    {
+        // rules 必须是 array 且是“列表”（从 0 开始的连续整数 key）
+        return is_array($rules) && array_is_list($rules);
+    }
 
     private function matchReport(array $match, array $ctx): bool
     {
         // type_code
         if (array_key_exists('type_code', $match)) {
             $want = $match['type_code'];
-            $got  = (string)($ctx['type_code'] ?? '');
-            if (!$this->inScalarOrList($got, $want)) return false;
+            $got = (string) ($ctx['type_code'] ?? '');
+            if (! $this->inScalarOrList($got, $want)) {
+                return false;
+            }
         }
 
         // section (cards 才用；highlights 一般不传)
         if (array_key_exists('section', $match)) {
             $want = $match['section'];
-            $got  = (string)($ctx['section'] ?? '');
-            if ($got === '' || !$this->inScalarOrList($got, $want)) return false;
+            $got = (string) ($ctx['section'] ?? '');
+            if ($got === '' || ! $this->inScalarOrList($got, $want)) {
+                return false;
+            }
         }
 
         $tags = $this->normalizeTags($ctx['tags'] ?? []);
@@ -197,13 +222,17 @@ if (is_array($rule['items'] ?? null)) {
         // tags_any
         if (array_key_exists('tags_any', $match)) {
             $want = $this->normalizeTags($match['tags_any']);
-            if (!$this->tagsAny($tags, $want)) return false;
+            if (! $this->tagsAny($tags, $want)) {
+                return false;
+            }
         }
 
         // tags_all
         if (array_key_exists('tags_all', $match)) {
             $want = $this->normalizeTags($match['tags_all']);
-            if (!$this->tagsAll($tags, $want)) return false;
+            if (! $this->tagsAll($tags, $want)) {
+                return false;
+            }
         }
 
         return true;
@@ -213,14 +242,18 @@ if (is_array($rule['items'] ?? null)) {
     {
         // id
         if (array_key_exists('id', $matchItem)) {
-            $got = (string)($item['id'] ?? '');
-            if ($got === '' || !$this->inScalarOrList($got, $matchItem['id'])) return false;
+            $got = (string) ($item['id'] ?? '');
+            if ($got === '' || ! $this->inScalarOrList($got, $matchItem['id'])) {
+                return false;
+            }
         }
 
         // kind
         if (array_key_exists('kind', $matchItem)) {
-            $got = (string)($item['kind'] ?? '');
-            if ($got === '' || !$this->inScalarOrList($got, $matchItem['kind'])) return false;
+            $got = (string) ($item['kind'] ?? '');
+            if ($got === '' || ! $this->inScalarOrList($got, $matchItem['kind'])) {
+                return false;
+            }
         }
 
         $tags = $this->normalizeTags($item['tags'] ?? []);
@@ -228,13 +261,17 @@ if (is_array($rule['items'] ?? null)) {
         // tags_any
         if (array_key_exists('tags_any', $matchItem)) {
             $want = $this->normalizeTags($matchItem['tags_any']);
-            if (!$this->tagsAny($tags, $want)) return false;
+            if (! $this->tagsAny($tags, $want)) {
+                return false;
+            }
         }
 
         // tags_all
         if (array_key_exists('tags_all', $matchItem)) {
             $want = $this->normalizeTags($matchItem['tags_all']);
-            if (!$this->tagsAll($tags, $want)) return false;
+            if (! $this->tagsAll($tags, $want)) {
+                return false;
+            }
         }
 
         return true;
@@ -262,6 +299,7 @@ if (is_array($rule['items'] ?? null)) {
             foreach ($list as $it) {
                 $out[] = $this->applyOneItem($it, $mode, $patch, $replaceFields);
             }
+
             return $out;
         }
 
@@ -288,9 +326,12 @@ if (is_array($rule['items'] ?? null)) {
         if ($mode === 'remove') {
             $out = [];
             foreach ($list as $it) {
-                if ($this->matchItem($matchItem, $it)) continue;
+                if ($this->matchItem($matchItem, $it)) {
+                    continue;
+                }
                 $out[] = $it;
             }
+
             return $out;
         }
 
@@ -303,33 +344,37 @@ if (is_array($rule['items'] ?? null)) {
                 }
                 $out[] = $it;
             }
+
             return $out;
         }
 
         // append/prepend：按约定只做“list-level”（不应该走到 item-level）
-// 这里直接 no-op，避免误用
-if ($mode === 'append' || $mode === 'prepend') {
-    return $list;
-}
+        // 这里直接 no-op，避免误用
+        if ($mode === 'append' || $mode === 'prepend') {
+            return $list;
+        }
 
         // default: no-op
         return $list;
     }
 
     private function mergeNonNull(array $base, array $override): array
-{
-    foreach ($override as $k => $v) {
-        // 关键：null 不覆盖
-        if ($v === null) continue;
+    {
+        foreach ($override as $k => $v) {
+            // 关键：null 不覆盖
+            if ($v === null) {
+                continue;
+            }
 
-        if (is_array($v) && is_array($base[$k] ?? null)) {
-            $base[$k] = $this->mergeNonNull($base[$k], $v);
-        } else {
-            $base[$k] = $v;
+            if (is_array($v) && is_array($base[$k] ?? null)) {
+                $base[$k] = $this->mergeNonNull($base[$k], $v);
+            } else {
+                $base[$k] = $v;
+            }
         }
+
+        return $base;
     }
-    return $base;
-}
 
     private function applyOneItem(array $item, string $mode, array $patch, array $replaceFields): array
     {
@@ -337,85 +382,125 @@ if ($mode === 'append' || $mode === 'prepend') {
             // replace entire item but keep id if patch misses it (optional)
             $id = $item['id'] ?? null;
             $item = $patch;
-            if (!isset($item['id']) && $id !== null) $item['id'] = $id;
+            if (! isset($item['id']) && $id !== null) {
+                $item['id'] = $id;
+            }
         } else {
             // patch (deep merge, but ignore null in patch)
-$item = $this->mergeNonNull($item, $patch);
+            $item = $this->mergeNonNull($item, $patch);
         }
 
         // replace_fields semantics (force replace arrays like tags/tips when patch provides them)
         foreach ($replaceFields as $rf) {
-            if (!is_string($rf) || $rf === '') continue;
+            if (! is_string($rf) || $rf === '') {
+                continue;
+            }
             if (array_key_exists($rf, $patch)) {
-    if ($patch[$rf] === null) {
-        continue; // 不允许用 null 清空
-    }
-    $item[$rf] = is_array($patch[$rf]) ? $patch[$rf] : [];
-}
+                if ($patch[$rf] === null) {
+                    continue; // 不允许用 null 清空
+                }
+                $item[$rf] = is_array($patch[$rf]) ? $patch[$rf] : [];
+            }
         }
 
         // normalize
-        if (!is_array($item['tags'] ?? null)) $item['tags'] = [];
-        if (!is_array($item['tips'] ?? null)) $item['tips'] = [];
+        if (! is_array($item['tags'] ?? null)) {
+            $item['tags'] = [];
+        }
+        if (! is_array($item['tips'] ?? null)) {
+            $item['tips'] = [];
+        }
 
         return $item;
     }
 
     private function normalizeHighlightsList($items): array
     {
-        if (!is_array($items)) return [];
+        if (! is_array($items)) {
+            return [];
+        }
         $out = [];
         foreach ($items as $it) {
-            if (!is_array($it)) continue;
-            if (!is_array($it['tags'] ?? null)) $it['tags'] = [];
-            if (!is_array($it['tips'] ?? null)) $it['tips'] = [];
+            if (! is_array($it)) {
+                continue;
+            }
+            if (! is_array($it['tags'] ?? null)) {
+                $it['tags'] = [];
+            }
+            if (! is_array($it['tips'] ?? null)) {
+                $it['tips'] = [];
+            }
             $out[] = $it;
         }
+
         return array_values($out);
     }
 
     private function inScalarOrList(string $got, $want): bool
     {
-        if (is_string($want)) return $got === $want;
+        if (is_string($want)) {
+            return $got === $want;
+        }
         if (is_array($want)) {
             foreach ($want as $x) {
-                if (is_string($x) && $x === $got) return true;
+                if (is_string($x) && $x === $got) {
+                    return true;
+                }
             }
+
             return false;
         }
+
         return false;
     }
 
     private function normalizeTags($v): array
     {
-        if (!is_array($v)) return [];
+        if (! is_array($v)) {
+            return [];
+        }
         $out = [];
         foreach ($v as $x) {
-            if (!is_string($x)) continue;
+            if (! is_string($x)) {
+                continue;
+            }
             $x = trim($x);
-            if ($x === '') continue;
+            if ($x === '') {
+                continue;
+            }
             $out[$x] = true;
         }
+
         return array_keys($out);
     }
 
     private function tagsAny(array $have, array $want): bool
     {
-        if (empty($want)) return true;
+        if (empty($want)) {
+            return true;
+        }
         $set = array_fill_keys($have, true);
         foreach ($want as $t) {
-            if (isset($set[$t])) return true;
+            if (isset($set[$t])) {
+                return true;
+            }
         }
+
         return false;
     }
 
     private function tagsAll(array $have, array $want): bool
     {
-        if (empty($want)) return true;
+        if (empty($want)) {
+            return true;
+        }
         $set = array_fill_keys($have, true);
         foreach ($want as $t) {
-            if (!isset($set[$t])) return false;
+            if (! isset($set[$t])) {
+                return false;
+            }
         }
+
         return true;
     }
 
@@ -427,24 +512,32 @@ $item = $this->mergeNonNull($item, $patch);
     {
         static $cache = [];
 
-        $key = $contentPackageVersion . '|' . $filename . '|RAW';
-        if (isset($cache[$key])) return $cache[$key];
+        $key = $contentPackageVersion.'|'.$filename.'|RAW';
+        if (isset($cache[$key])) {
+            return $cache[$key];
+        }
 
         $path = $this->resolvePackageFile($contentPackageVersion, $filename);
-        if ($path === null) return $cache[$key] = [];
+        if ($path === null) {
+            return $cache[$key] = [];
+        }
 
         $raw = @file_get_contents($path);
-        if ($raw === false || trim($raw) === '') return $cache[$key] = [];
+        if ($raw === false || trim($raw) === '') {
+            return $cache[$key] = [];
+        }
 
         $json = json_decode($raw, true);
-        if (!is_array($json)) return $cache[$key] = [];
+        if (! is_array($json)) {
+            return $cache[$key] = [];
+        }
 
         return $cache[$key] = $json;
     }
 
     private function resolvePackageFile(string $contentPackageVersion, string $filename): ?string
     {
-        $pkg = trim($contentPackageVersion, "/\\");
+        $pkg = trim($contentPackageVersion, '/\\');
 
         $envRoot = \App\Support\RuntimeConfig::value('FAP_CONTENT_PACKAGES_DIR');
         $envRoot = is_string($envRoot) && $envRoot !== '' ? rtrim($envRoot, '/') : null;
@@ -457,8 +550,11 @@ $item = $this->mergeNonNull($item, $patch);
         ]));
 
         foreach ($candidates as $p) {
-            if (is_string($p) && $p !== '' && file_exists($p)) return $p;
+            if (is_string($p) && $p !== '' && file_exists($p)) {
+                return $p;
+            }
         }
+
         return null;
     }
 }

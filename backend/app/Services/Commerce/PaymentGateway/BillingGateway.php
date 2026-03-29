@@ -100,7 +100,7 @@ class BillingGateway implements PaymentGatewayInterface
     private function resolvePaidAt(array $payload): ?string
     {
         foreach (['paid_at', 'paidAt', 'paid_time', 'paidTime'] as $key) {
-            if (!array_key_exists($key, $payload)) {
+            if (! array_key_exists($key, $payload)) {
                 continue;
             }
 

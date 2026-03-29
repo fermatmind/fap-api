@@ -12,12 +12,12 @@ final class SectionCardGenerator
     /**
      * ✅ 新入口：统一走 ContentStore（pack chain -> store -> 标准化 doc）
      *
-     * @param string $section traits/career/growth/relationships
-     * @param ContentPack[] $chain primary + fallback packs
-     * @param array $userTags TagBuilder 输出
-     * @param array $axisInfo 建议传 report.scores（含 delta/side/pct）；可选 axisInfo['attempt_id'] 用于稳定打散
-     * @param string|null $legacyContentPackageDir 仅用于日志/兜底信息（不会读取旧路径）
-     * @param int|null $wantN ✅ NEW：外部按 policy 算出来的“希望生成数量”（通常 = max(min_cards,target)）
+     * @param  string  $section  traits/career/growth/relationships
+     * @param  ContentPack[]  $chain  primary + fallback packs
+     * @param  array  $userTags  TagBuilder 输出
+     * @param  array  $axisInfo  建议传 report.scores（含 delta/side/pct）；可选 axisInfo['attempt_id'] 用于稳定打散
+     * @param  string|null  $legacyContentPackageDir  仅用于日志/兜底信息（不会读取旧路径）
+     * @param  int|null  $wantN  ✅ NEW：外部按 policy 算出来的“希望生成数量”（通常 = max(min_cards,target)）
      * @return array[] cards
      */
     public function generateFromPackChain(
@@ -33,17 +33,17 @@ final class SectionCardGenerator
     ): array {
         $store = new ContentStore($chain);
 
-        $doc   = $store->loadCardsDoc($section);
+        $doc = $store->loadCardsDoc($section);
         $items = is_array($doc['items'] ?? null) ? $doc['items'] : [];
         $rules = is_array($doc['rules'] ?? null) ? $doc['rules'] : [];
         $selectRules = $store->loadSelectRules(); // ✅ 统一 rules（含 target）
 
         Log::info('[CARDS] loaded_from_store', [
-            'section'    => $section,
-            'file'       => "report_cards_{$section}.json",
-            'items'      => count($items),
-            'rules'      => $rules,
-            'wantN'      => $wantN,
+            'section' => $section,
+            'file' => "report_cards_{$section}.json",
+            'items' => count($items),
+            'rules' => $rules,
+            'wantN' => $wantN,
             'legacy_dir' => $legacyContentPackageDir,
         ]);
 
@@ -66,7 +66,7 @@ final class SectionCardGenerator
      * ✅ 从 “已标准化的 items(+rules)” 生成 cards
      * 关键变化：选卡逻辑全部迁移到 RuleEngine::selectConstrained()
      *
-     * @param int|null $wantN ✅ NEW：外部传入的“希望生成数量”，会覆盖本次 target/min 的下限
+     * @param  int|null  $wantN  ✅ NEW：外部传入的“希望生成数量”，会覆盖本次 target/min 的下限
      */
     private function generateFromItems(
         string $section,
@@ -84,18 +84,18 @@ final class SectionCardGenerator
         // ==========
         // rules：强依赖 store 的标准输出
         // ==========
-        $minCardsVal    = $rules['min_cards'] ?? null;
+        $minCardsVal = $rules['min_cards'] ?? null;
         $targetCardsVal = $rules['target_cards'] ?? null;
-        $maxCardsVal    = $rules['max_cards'] ?? null;
-        $fallbackTags   = $rules['fallback_tags'] ?? null;
+        $maxCardsVal = $rules['max_cards'] ?? null;
+        $fallbackTags = $rules['fallback_tags'] ?? null;
 
-        if (!is_numeric($minCardsVal) || !is_numeric($targetCardsVal) || !is_numeric($maxCardsVal) || !is_array($fallbackTags)) {
+        if (! is_numeric($minCardsVal) || ! is_numeric($targetCardsVal) || ! is_numeric($maxCardsVal) || ! is_array($fallbackTags)) {
             throw new \RuntimeException('CARDS_RULES_NOT_NORMALIZED: generator expects store-normalized rules (min_cards/target_cards/max_cards/fallback_tags)');
         }
 
-        $minCards    = (int)$minCardsVal;
-        $targetCards = (int)$targetCardsVal;
-        $maxCards    = (int)$maxCardsVal;
+        $minCards = (int) $minCardsVal;
+        $targetCards = (int) $targetCardsVal;
+        $maxCards = (int) $maxCardsVal;
 
         // ==========
         // ✅ NEW：外部 wantN 覆盖本次配额（通常来自 report_section_policies）
@@ -108,17 +108,19 @@ final class SectionCardGenerator
         if (is_int($wantN)) {
             $want = $wantN;
         } elseif (is_numeric($wantN)) {
-            $want = (int)$wantN;
+            $want = (int) $wantN;
         }
 
         if ($want !== null) {
-            if ($want < 0) $want = 0;
+            if ($want < 0) {
+                $want = 0;
+            }
 
             // 不允许超过 hardCap
             $want = min($want, $hardCap);
 
             // 抬高 min/target 的下限到 want
-            $minCards    = min($hardCap, max($minCards, $want));
+            $minCards = min($hardCap, max($minCards, $want));
             $targetCards = min($hardCap, max($targetCards, $want));
 
             // 同时让本次最终输出最多 = want（否则可能跑到 max_cards）
@@ -126,8 +128,8 @@ final class SectionCardGenerator
 
             Log::info('[CARDS] quota_overridden_by_policy', [
                 'section' => $section,
-                'wantN'   => $want,
-                'quota'   => ['min' => $minCards, 'target' => $targetCards, 'max' => $maxCards],
+                'wantN' => $want,
+                'quota' => ['min' => $minCards, 'target' => $targetCards, 'max' => $maxCards],
                 'legacy_dir' => $legacyContentPackageDir,
             ]);
         }
@@ -140,9 +142,13 @@ final class SectionCardGenerator
         // normalize userTags set（这里仅做 userTags 的集合化）
         $userSet = [];
         foreach ($userTags as $t) {
-            if (!is_string($t)) continue;
+            if (! is_string($t)) {
+                continue;
+            }
             $t = trim($t);
-            if ($t !== '') $userSet[$t] = true;
+            if ($t !== '') {
+                $userSet[$t] = true;
+            }
         }
 
         // seed（用于 shuffle 稳定）
@@ -158,10 +164,10 @@ final class SectionCardGenerator
         // explain 开关
         $debugRE = app()->environment('local', 'development') && (
             (bool) \App\Support\RuntimeConfig::value('FAP_RE_DEBUG', false) ||
-            (bool) \App\Support\RuntimeConfig::value('RE_EXPLAIN', false)   ||
+            (bool) \App\Support\RuntimeConfig::value('RE_EXPLAIN', false) ||
             (bool) \App\Support\RuntimeConfig::value('RE_CTX_TAGS', false)
         );
-        $captureExplain = (bool)($axisInfo['capture_explain'] ?? $axisInfo['_capture_explain'] ?? false);
+        $captureExplain = (bool) ($axisInfo['capture_explain'] ?? $axisInfo['_capture_explain'] ?? false);
 
         // explain 收集器：ReportComposer 可以塞到 $scores(axisInfo) 里下传
         $explainCollector = null;
@@ -173,43 +179,43 @@ final class SectionCardGenerator
 
         // ========== 2.1 先按 rules 过滤（不截断，拿全量 kept）==========
         [$kept, $evals1] = $re->selectTargeted($items, $userSet, [
-            'target'    => 'cards',
-            'rules'     => $selectRules,
+            'target' => 'cards',
+            'rules' => $selectRules,
 
-            'ctx'       => $ctx,
-            'section'   => $section,
-            'seed'      => $seed,
+            'ctx' => $ctx,
+            'section' => $section,
+            'seed' => $seed,
 
             // 不截断
             'max_items' => is_array($items) ? count($items) : 0,
 
             'rejected_samples' => 6,
-            'debug'            => $debugRE,
-            'capture_explain'  => $captureExplain,
-            'explain_collector'=> $explainCollector,
+            'debug' => $debugRE,
+            'capture_explain' => $captureExplain,
+            'explain_collector' => $explainCollector,
 
             'global_rules' => [],
         ]);
 
         // ========== 2.2 再做 axis/non-axis/fallback 配额编排（这里才截断）==========
         [$selectedItems, $evals2] = $re->selectConstrained($kept, $userSet, [
-            'ctx'      => $ctx,
-            'section'  => $section,
-            'seed'     => $seed,
+            'ctx' => $ctx,
+            'section' => $section,
+            'seed' => $seed,
 
-            'debug'            => $debugRE,
-            'capture_explain'  => $captureExplain,
-            'explain_collector'=> $explainCollector,
+            'debug' => $debugRE,
+            'capture_explain' => $captureExplain,
+            'explain_collector' => $explainCollector,
             'rejected_samples' => 6,
 
             // 配额规则（已被 wantN 覆盖过）
-            'min_cards'     => $minCards,
-            'target_cards'  => $targetCards,
-            'max_cards'     => $maxCards,
+            'min_cards' => $minCards,
+            'target_cards' => $targetCards,
+            'max_cards' => $maxCards,
             'fallback_tags' => $fallbackTags,
 
             // axis match 需要
-            'axis_info'    => $axisInfo,
+            'axis_info' => $axisInfo,
 
             'global_rules' => [],
         ]);
@@ -229,9 +235,9 @@ final class SectionCardGenerator
             $out = $this->fallbackCards($section, $minCards);
 
             Log::info('[CARDS] selected (base)', [
-    'section'    => $section,
-    'ids'        => array_map(fn($x) => $x['id'] ?? null, $out),
-                'quota'      => ['min' => $minCards, 'target' => $targetCards, 'max' => $maxCards],
+                'section' => $section,
+                'ids' => array_map(fn ($x) => $x['id'] ?? null, $out),
+                'quota' => ['min' => $minCards, 'target' => $targetCards, 'max' => $maxCards],
                 'legacy_dir' => $legacyContentPackageDir,
             ]);
 
@@ -240,24 +246,26 @@ final class SectionCardGenerator
 
         // ✅ 映射成最终输出 cards（保持你原先输出结构）
         $out = array_map(function ($it) use ($section) {
-            if (!is_array($it)) return null;
+            if (! is_array($it)) {
+                return null;
+            }
 
             return [
-                'id'       => (string)($it['id'] ?? ''),
-                'section'  => (string)($it['section'] ?? $section),
-                'title'    => (string)($it['title'] ?? ''),
-                'desc'     => (string)($it['desc'] ?? ''),
-                'bullets'  => is_array($it['bullets'] ?? null) ? array_values($it['bullets']) : [],
-                'tips'     => is_array($it['tips'] ?? null) ? array_values($it['tips']) : [],
-                'tags'     => is_array($it['tags'] ?? null) ? $it['tags'] : [],
-                'priority' => (int)($it['priority'] ?? 0),
-                'match'    => $it['match'] ?? null,
+                'id' => (string) ($it['id'] ?? ''),
+                'section' => (string) ($it['section'] ?? $section),
+                'title' => (string) ($it['title'] ?? ''),
+                'desc' => (string) ($it['desc'] ?? ''),
+                'bullets' => is_array($it['bullets'] ?? null) ? array_values($it['bullets']) : [],
+                'tips' => is_array($it['tips'] ?? null) ? array_values($it['tips']) : [],
+                'tags' => is_array($it['tags'] ?? null) ? $it['tags'] : [],
+                'priority' => (int) ($it['priority'] ?? 0),
+                'match' => $it['match'] ?? null,
                 'access_level' => ReportAccess::normalizeCardAccessLevel((string) ($it['access_level'] ?? '')),
                 'module_code' => trim((string) ($it['module_code'] ?? ReportAccess::defaultModuleCodeForSection($section))),
             ];
         }, $selectedItems);
 
-        $out = array_values(array_filter($out, fn($x) => is_array($x) && (string)($x['id'] ?? '') !== ''));
+        $out = array_values(array_filter($out, fn ($x) => is_array($x) && (string) ($x['id'] ?? '') !== ''));
 
         // 仍不足：补齐到 minCards
         if (count($out) < $minCards) {
@@ -268,10 +276,10 @@ final class SectionCardGenerator
         $out = array_slice(array_values($out), 0, $maxCards);
 
         Log::info('[CARDS] selected (base)', [
-    'section'    => $section,
-    'ids'        => array_map(fn($x) => $x['id'] ?? null, $out),
-    'count'      => count($out),
-            'quota'      => ['min' => $minCards, 'target' => $targetCards, 'max' => $maxCards],
+            'section' => $section,
+            'ids' => array_map(fn ($x) => $x['id'] ?? null, $out),
+            'count' => count($out),
+            'quota' => ['min' => $minCards, 'target' => $targetCards, 'max' => $maxCards],
             'legacy_dir' => $legacyContentPackageDir,
         ]);
 
@@ -281,7 +289,7 @@ final class SectionCardGenerator
     /**
      * ✅ 从 store 直接生成（保留）
      *
-     * @param int|null $wantN ✅ NEW：外部按 policy 算出来的“希望生成数量”
+     * @param  int|null  $wantN  ✅ NEW：外部按 policy 算出来的“希望生成数量”
      */
     public function generateFromStore(
         string $section,
@@ -342,18 +350,20 @@ final class SectionCardGenerator
         $tags = array_keys($userSet);
         sort($tags);
 
-        $dims = ['EI','SN','TF','JP','AT'];
+        $dims = ['EI', 'SN', 'TF', 'JP', 'AT'];
         $axes = [];
         foreach ($dims as $dim) {
             $v = (isset($axisInfo[$dim]) && is_array($axisInfo[$dim])) ? $axisInfo[$dim] : [];
-            $side  = (string)($v['side'] ?? '');
-            $delta = (int)($v['delta'] ?? 0);
-            $pct   = (int)($v['pct'] ?? 0);
+            $side = (string) ($v['side'] ?? '');
+            $delta = (int) ($v['delta'] ?? 0);
+            $pct = (int) ($v['pct'] ?? 0);
             $axes[] = "{$dim}:{$side}:{$delta}:{$pct}";
         }
 
         $payload = json_encode([$tags, $axes], JSON_UNESCAPED_UNICODE);
-        if (!is_string($payload)) $payload = '';
+        if (! is_string($payload)) {
+            $payload = '';
+        }
 
         return $this->ucrc32($payload);
     }
@@ -361,7 +371,8 @@ final class SectionCardGenerator
     private function ucrc32(string $s): int
     {
         $u = sprintf('%u', crc32($s));
-        return (int)$u;
+
+        return (int) $u;
     }
 
     private function fallbackCards(string $section, int $need): array
@@ -369,26 +380,27 @@ final class SectionCardGenerator
         $out = [];
         for ($i = 1; $i <= $need; $i++) {
             $out[] = [
-                'id'       => "{$section}_fallback_{$i}",
-                'section'  => $section,
-                'title'    => 'General Tip',
-                'desc'     => 'Content pack did not provide enough matched cards. Showing a safe fallback tip.',
-                'bullets'  => [
+                'id' => "{$section}_fallback_{$i}",
+                'section' => $section,
+                'title' => 'General Tip',
+                'desc' => 'Content pack did not provide enough matched cards. Showing a safe fallback tip.',
+                'bullets' => [
                     'Turn strengths into a repeatable template',
                     'Add one counter-check in key moments',
-                    'Weekly review: keep what works, remove what doesn’t'
+                    'Weekly review: keep what works, remove what doesn’t',
                 ],
-                'tips'     => [
+                'tips' => [
                     'Write your first instinct, then add one alternative',
-                    'Use checklists to reduce cognitive load'
+                    'Use checklists to reduce cognitive load',
                 ],
-                'tags'     => ['fallback'],
+                'tags' => ['fallback'],
                 'priority' => 0,
-                'match'    => null,
+                'match' => null,
                 'access_level' => ReportAccess::CARD_ACCESS_FREE,
                 'module_code' => ReportAccess::MODULE_CORE_FREE,
             ];
         }
+
         return $out;
     }
 
@@ -405,12 +417,12 @@ final class SectionCardGenerator
 
         $out = [];
         foreach ($items as $item) {
-            if (!is_array($item)) {
+            if (! is_array($item)) {
                 continue;
             }
 
             $accessLevel = ReportAccess::normalizeCardAccessLevel((string) ($item['access_level'] ?? ''));
-            if (!isset($levels[$accessLevel])) {
+            if (! isset($levels[$accessLevel])) {
                 continue;
             }
 
@@ -421,13 +433,13 @@ final class SectionCardGenerator
             $moduleCode = strtolower($moduleCode);
 
             $isModuleUnlocked = isset($allowedModules[$moduleCode]) || $moduleCode === ReportAccess::MODULE_CORE_FREE;
-            if ($accessLevel === ReportAccess::CARD_ACCESS_PAID && !$isModuleUnlocked) {
+            if ($accessLevel === ReportAccess::CARD_ACCESS_PAID && ! $isModuleUnlocked) {
                 continue;
             }
 
-            if ($accessLevel === ReportAccess::CARD_ACCESS_PREVIEW && !$isModuleUnlocked) {
+            if ($accessLevel === ReportAccess::CARD_ACCESS_PREVIEW && ! $isModuleUnlocked) {
                 $previewEnabled = empty($previewModules) || isset($previewModules[$moduleCode]);
-                if (!$previewEnabled) {
+                if (! $previewEnabled) {
                     continue;
                 }
             }

@@ -317,10 +317,10 @@ final class ExperimentKpiEvaluator
             if ($userId !== '' && preg_match('/^\d+$/', $userId) === 1 && isset($assignmentMap['user:'.$userId])) {
                 $matched = true;
             }
-            if (!$matched && $anonId !== '' && isset($assignmentMap['anon:'.$anonId])) {
+            if (! $matched && $anonId !== '' && isset($assignmentMap['anon:'.$anonId])) {
                 $matched = true;
             }
-            if (!$matched) {
+            if (! $matched) {
                 continue;
             }
 

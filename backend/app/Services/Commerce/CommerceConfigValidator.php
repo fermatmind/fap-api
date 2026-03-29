@@ -31,7 +31,7 @@ final class CommerceConfigValidator
     ];
 
     /**
-     * @param list<array<string,mixed>> $rows
+     * @param  list<array<string,mixed>>  $rows
      */
     public function validate(array $rows): void
     {
@@ -39,8 +39,9 @@ final class CommerceConfigValidator
         $seenSku = [];
 
         foreach ($rows as $index => $row) {
-            if (!is_array($row)) {
+            if (! is_array($row)) {
                 $errors[] = $this->err($index, null, 'row must be object-like array');
+
                 continue;
             }
 
@@ -54,11 +55,13 @@ final class CommerceConfigValidator
 
             if ($sku === '') {
                 $errors[] = $this->err($index, null, 'sku is required');
+
                 continue;
             }
 
             if (isset($seenSku[$sku])) {
                 $errors[] = $this->err($index, $sku, 'duplicate sku in seed data');
+
                 continue;
             }
             $seenSku[$sku] = true;
@@ -98,13 +101,13 @@ final class CommerceConfigValidator
                 }
 
                 foreach ($modules as $module) {
-                    if (!in_array($module, self::BIG5_ALLOWED_MODULES, true)) {
+                    if (! in_array($module, self::BIG5_ALLOWED_MODULES, true)) {
                         $errors[] = $this->err($index, $sku, "invalid BIG5 module: {$module}");
                     }
                 }
 
                 foreach ($this->expectedModulesByBenefit($benefitCode) as $requiredModule) {
-                    if (!in_array($requiredModule, $modules, true)) {
+                    if (! in_array($requiredModule, $modules, true)) {
                         $errors[] = $this->err(
                             $index,
                             $sku,
@@ -120,13 +123,13 @@ final class CommerceConfigValidator
                 }
 
                 foreach ($modules as $module) {
-                    if (!in_array($module, self::SDS_ALLOWED_MODULES, true)) {
+                    if (! in_array($module, self::SDS_ALLOWED_MODULES, true)) {
                         $errors[] = $this->err($index, $sku, "invalid SDS_20 module: {$module}");
                     }
                 }
 
                 foreach ($this->expectedModulesByBenefit($benefitCode) as $requiredModule) {
-                    if (!in_array($requiredModule, $modules, true)) {
+                    if (! in_array($requiredModule, $modules, true)) {
                         $errors[] = $this->err(
                             $index,
                             $sku,
@@ -142,13 +145,13 @@ final class CommerceConfigValidator
                 }
 
                 foreach ($modules as $module) {
-                    if (!in_array($module, self::EQ_ALLOWED_MODULES, true)) {
+                    if (! in_array($module, self::EQ_ALLOWED_MODULES, true)) {
                         $errors[] = $this->err($index, $sku, "invalid EQ_60 module: {$module}");
                     }
                 }
 
                 foreach ($this->expectedModulesByBenefit($benefitCode) as $requiredModule) {
-                    if (!in_array($requiredModule, $modules, true)) {
+                    if (! in_array($requiredModule, $modules, true)) {
                         $errors[] = $this->err(
                             $index,
                             $sku,
@@ -159,7 +162,7 @@ final class CommerceConfigValidator
             }
 
             $offerDisabled = array_key_exists('offer', $meta) && $meta['offer'] === false;
-            if ($isActive && !$offerDisabled) {
+            if ($isActive && ! $offerDisabled) {
                 $offerCode = trim((string) ($row['offer_code'] ?? ($meta['offer_code'] ?? '')));
                 if ($offerCode === '') {
                     $errors[] = $this->err($index, $sku, 'offer_code is required for active offer skus');
@@ -169,7 +172,7 @@ final class CommerceConfigValidator
 
         if ($errors !== []) {
             throw new \InvalidArgumentException(
-                "CommerceConfigValidator failed:\n- " . implode("\n- ", $errors)
+                "CommerceConfigValidator failed:\n- ".implode("\n- ", $errors)
             );
         }
     }
@@ -197,7 +200,7 @@ final class CommerceConfigValidator
             $decoded = json_decode($raw, true);
             $raw = is_array($decoded) ? $decoded : null;
         }
-        if (!is_array($raw)) {
+        if (! is_array($raw)) {
             return [];
         }
 
@@ -238,11 +241,11 @@ final class CommerceConfigValidator
 
     private function err(int $index, ?string $sku, string $message): string
     {
-        $label = 'row#' . ($index + 1);
+        $label = 'row#'.($index + 1);
         if ($sku !== null && $sku !== '') {
             $label .= " sku={$sku}";
         }
 
-        return $label . ': ' . $message;
+        return $label.': '.$message;
     }
 }

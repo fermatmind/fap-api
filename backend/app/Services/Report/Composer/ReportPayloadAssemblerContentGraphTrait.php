@@ -17,16 +17,16 @@ trait ReportPayloadAssemblerContentGraphTrait
         array $axisStates
     ): array {
         $pack = $this->resolveContentGraphPack($chain, $scaleCode, $region, $locale);
-        if (!$pack instanceof ContentPack) {
+        if (! $pack instanceof ContentPack) {
             return [[], false];
         }
 
-        if (!$this->packSupportsContentGraph($pack)) {
+        if (! $this->packSupportsContentGraph($pack)) {
             return [[], false];
         }
 
         $doc = $this->loadContentGraphDoc($pack->basePath());
-        if (!is_array($doc)) {
+        if (! is_array($doc)) {
             return [[], false];
         }
 
@@ -43,7 +43,7 @@ trait ReportPayloadAssemblerContentGraphTrait
         string $locale
     ): ?ContentPack {
         $primary = $chain[0] ?? null;
-        if (!$primary instanceof ContentPack) {
+        if (! $primary instanceof ContentPack) {
             return null;
         }
 
@@ -53,7 +53,7 @@ trait ReportPayloadAssemblerContentGraphTrait
         }
 
         $pinVersion = $this->normalizeRequestedVersion($pin);
-        if (!is_string($pinVersion) || $pinVersion === '') {
+        if (! is_string($pinVersion) || $pinVersion === '') {
             return $primary;
         }
 
@@ -80,13 +80,14 @@ trait ReportPayloadAssemblerContentGraphTrait
     private function packSupportsContentGraph(ContentPack $pack): bool
     {
         $caps = $pack->capabilities();
+
         return (bool) ($caps['content_graph'] ?? false);
     }
 
     private function loadContentGraphDoc(string $baseDir): ?array
     {
-        $path = rtrim($baseDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'content_graph.json';
-        if (!is_file($path)) {
+        $path = rtrim($baseDir, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'content_graph.json';
+        if (! is_file($path)) {
             return null;
         }
 
@@ -96,6 +97,7 @@ trait ReportPayloadAssemblerContentGraphTrait
         }
 
         $json = json_decode($raw, true);
+
         return is_array($json) ? $json : null;
     }
 
@@ -104,20 +106,20 @@ trait ReportPayloadAssemblerContentGraphTrait
         $baseDir = rtrim($baseDir, DIRECTORY_SEPARATOR);
 
         return [
-            'read' => $this->loadContentGraphNodesFromDir($baseDir . DIRECTORY_SEPARATOR . 'reads', 'read'),
-            'role_card' => $this->loadContentGraphNodesFromDir($baseDir . DIRECTORY_SEPARATOR . 'role_cards', 'role_card'),
-            'strategy_card' => $this->loadContentGraphNodesFromDir($baseDir . DIRECTORY_SEPARATOR . 'strategy_cards', 'strategy_card'),
+            'read' => $this->loadContentGraphNodesFromDir($baseDir.DIRECTORY_SEPARATOR.'reads', 'read'),
+            'role_card' => $this->loadContentGraphNodesFromDir($baseDir.DIRECTORY_SEPARATOR.'role_cards', 'role_card'),
+            'strategy_card' => $this->loadContentGraphNodesFromDir($baseDir.DIRECTORY_SEPARATOR.'strategy_cards', 'strategy_card'),
         ];
     }
 
     private function loadContentGraphNodesFromDir(string $dir, string $type): array
     {
-        if (!is_dir($dir)) {
+        if (! is_dir($dir)) {
             return [];
         }
 
-        $files = glob($dir . DIRECTORY_SEPARATOR . '*.json');
-        if (!is_array($files)) {
+        $files = glob($dir.DIRECTORY_SEPARATOR.'*.json');
+        if (! is_array($files)) {
             return [];
         }
 
@@ -131,7 +133,7 @@ trait ReportPayloadAssemblerContentGraphTrait
             }
 
             $json = json_decode($raw, true);
-            if (!is_array($json)) {
+            if (! is_array($json)) {
                 continue;
             }
 
@@ -191,7 +193,7 @@ trait ReportPayloadAssemblerContentGraphTrait
             if ($id === '' || isset($seen[$id])) {
                 return false;
             }
-            if (!isset($nodes[$type][$id]) || !is_array($nodes[$type][$id])) {
+            if (! isset($nodes[$type][$id]) || ! is_array($nodes[$type][$id])) {
                 return false;
             }
 
@@ -205,11 +207,12 @@ trait ReportPayloadAssemblerContentGraphTrait
                 'show_order' => 0,
             ];
             $seen[$id] = true;
+
             return true;
         };
 
         foreach ($roleRules as $rule) {
-            if (!is_array($rule)) {
+            if (! is_array($rule)) {
                 continue;
             }
             $tc = strtoupper(trim((string) ($rule['type_code'] ?? '')));
@@ -228,7 +231,7 @@ trait ReportPayloadAssemblerContentGraphTrait
         $readsCount = 0;
 
         foreach ($readRules as $rule) {
-            if (!is_array($rule)) {
+            if (! is_array($rule)) {
                 continue;
             }
             $tc = strtoupper(trim((string) ($rule['type_code'] ?? '')));
@@ -251,7 +254,7 @@ trait ReportPayloadAssemblerContentGraphTrait
         $strategyCards = [];
 
         foreach ($axisRules as $rule) {
-            if (!is_array($rule)) {
+            if (! is_array($rule)) {
                 continue;
             }
 
@@ -306,13 +309,13 @@ trait ReportPayloadAssemblerContentGraphTrait
 
     private function normalizeStringList($list): array
     {
-        if (!is_array($list)) {
+        if (! is_array($list)) {
             return [];
         }
 
         $out = [];
         foreach ($list as $v) {
-            if (!is_string($v)) {
+            if (! is_string($v)) {
                 continue;
             }
             $v = trim($v);
@@ -321,6 +324,7 @@ trait ReportPayloadAssemblerContentGraphTrait
             }
             $out[] = $v;
         }
+
         return $out;
     }
 
@@ -332,20 +336,21 @@ trait ReportPayloadAssemblerContentGraphTrait
 
         $set = [];
         foreach ($inputValues as $v) {
-            if (!is_string($v)) {
+            if (! is_string($v)) {
                 continue;
             }
             $set[$v] = true;
         }
 
         foreach ($ruleValues as $v) {
-            if (!is_string($v)) {
+            if (! is_string($v)) {
                 continue;
             }
             if (isset($set[$v])) {
                 return $v;
             }
         }
+
         return null;
     }
 
@@ -428,6 +433,7 @@ trait ReportPayloadAssemblerContentGraphTrait
         $t = $typeCode !== '' ? $typeCode : '-';
         $tb = $traitBucket !== '' ? $traitBucket : '-';
         $as = $axisState !== '' ? $axisState : '-';
+
         return "type_code:{$t} / trait_bucket:{$tb} / axis_state:{$as}";
     }
 }

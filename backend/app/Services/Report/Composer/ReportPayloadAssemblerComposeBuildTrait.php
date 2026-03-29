@@ -114,7 +114,7 @@ trait ReportPayloadAssemblerComposeBuildTrait
 
             $sectionModuleCode = ReportAccess::defaultModuleCodeForSection((string) $sectionKey);
             $sectionLocked = $sectionModuleCode !== ReportAccess::MODULE_CORE_FREE
-                && !in_array($sectionModuleCode, $modulesAllowed, true);
+                && ! in_array($sectionModuleCode, $modulesAllowed, true);
 
             $sections[$sectionKey] = [
                 'cards' => $finalCards,
@@ -479,8 +479,8 @@ trait ReportPayloadAssemblerComposeBuildTrait
             return [];
         }
 
-        $plain = $best['dim'] . ':' . $best['side'];
-        $prefixed = 'axis:' . $plain;
+        $plain = $best['dim'].':'.$best['side'];
+        $prefixed = 'axis:'.$plain;
         $format = trim((string) ($rules['axis_key_format'] ?? ''));
         $formatted = $format !== ''
             ? str_replace(['${DIM}', '${SIDE}'], [$best['dim'], $best['side']], $format)
@@ -624,9 +624,9 @@ trait ReportPayloadAssemblerComposeBuildTrait
 
         ksort($filtered);
         $queryString = http_build_query($filtered);
-        $key = $queryString !== '' ? ($path . '?' . $queryString) : $path;
+        $key = $queryString !== '' ? ($path.'?'.$queryString) : $path;
 
-        return $host !== '' ? ($host . $key) : $key;
+        return $host !== '' ? ($host.$key) : $key;
     }
 
     private function isMbtiReportContractScale(string $scaleCode, ?string $scaleCodeV2 = null): bool
