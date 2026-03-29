@@ -10,6 +10,7 @@ use App\Filament\Ops\Resources\ArticleResource;
 use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Models\AdminUser;
 use App\Models\Article;
+use App\Models\ArticleRevision;
 use App\Models\ArticleSeoMeta;
 use App\Models\AuditLog;
 use App\Models\CareerGuide;
@@ -85,6 +86,63 @@ final class PostReleaseObservabilityPageTest extends TestCase
             'is_public' => false,
             'is_indexable' => true,
         ]);
+
+        ArticleRevision::query()->withoutGlobalScopes()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'article_id' => (int) $article->id,
+            'revision_no' => 1,
+            'editor_admin_user_id' => (int) $admin->id,
+            'title' => 'Observability Article v1',
+            'excerpt' => 'Observability article excerpt',
+            'content_md' => 'Observability body v1',
+            'content_html' => '<p>Observability body v1</p>',
+            'change_note' => 'Initial publish candidate',
+            'payload_json' => [
+                'title' => 'Observability Article v1',
+                'excerpt' => 'Observability article excerpt',
+                'content_md' => 'Observability body v1',
+                'slug' => 'observability-article',
+                'locale' => 'en',
+                'is_public' => false,
+                'is_indexable' => true,
+                'seo_meta' => [
+                    'seo_title' => 'Observability Article SEO Title v1',
+                    'seo_description' => 'Observability Article SEO Description v1',
+                    'canonical_url' => 'https://example.test/articles/observability-article-v1',
+                    'robots' => 'noindex,nofollow',
+                ],
+            ],
+            'created_at' => now()->subDay(),
+        ]);
+
+        ArticleRevision::query()->withoutGlobalScopes()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'article_id' => (int) $article->id,
+            'revision_no' => 2,
+            'editor_admin_user_id' => (int) $admin->id,
+            'title' => 'Observability Article',
+            'excerpt' => 'Observability article excerpt',
+            'content_md' => 'Observability body',
+            'content_html' => '<p>Observability body</p>',
+            'change_note' => 'Ready for release',
+            'payload_json' => [
+                'title' => 'Observability Article',
+                'excerpt' => 'Observability article excerpt',
+                'content_md' => 'Observability body',
+                'slug' => 'observability-article',
+                'locale' => 'en',
+                'is_public' => true,
+                'is_indexable' => true,
+                'seo_meta' => [
+                    'seo_title' => 'Observability Article SEO Title',
+                    'seo_description' => 'Observability Article SEO Description',
+                    'canonical_url' => 'https://example.test/articles/observability-article',
+                    'robots' => 'index,follow',
+                ],
+            ],
+            'created_at' => now()->subHours(2),
+        ]);
+
         ArticleSeoMeta::query()->create([
             'org_id' => (int) $selectedOrg->id,
             'article_id' => (int) $article->id,
@@ -97,6 +155,26 @@ final class PostReleaseObservabilityPageTest extends TestCase
             'og_image_url' => 'https://example.test/images/observability-article.png',
             'robots' => 'index,follow',
             'is_indexable' => true,
+        ]);
+
+        AuditLog::withoutGlobalScopes()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'actor_admin_id' => (int) $admin->id,
+            'action' => 'content_release_publish',
+            'target_type' => 'article',
+            'target_id' => (string) $article->id,
+            'meta_json' => [
+                'title' => 'Observability Article v1',
+                'source' => 'release_workspace',
+                'published_at' => now()->subDays(2)->toIso8601String(),
+                'revision_no' => 1,
+            ],
+            'ip' => '127.0.0.1',
+            'user_agent' => 'phpunit',
+            'request_id' => 'prior-publish-audit',
+            'reason' => 'cms_release_workspace',
+            'result' => 'success',
+            'created_at' => now()->subDays(2),
         ]);
 
         $guide = CareerGuide::query()->create([
@@ -182,6 +260,7 @@ final class PostReleaseObservabilityPageTest extends TestCase
             ->where('action', 'content_release_publish')
             ->where('target_type', 'article')
             ->where('target_id', (string) $article->id)
+            ->latest('created_at')
             ->first();
 
         $cacheSignalAudit = AuditLog::query()
@@ -202,6 +281,10 @@ final class PostReleaseObservabilityPageTest extends TestCase
         $this->assertSame((int) $selectedOrg->id, (int) $publishAudit->org_id);
         $this->assertSame('success', $cacheSignalAudit->result);
         $this->assertSame('success', $broadcastAudit->result);
+        $this->assertSame(2, data_get($publishAudit->meta_json, 'revision_no'));
+        $this->assertSame(7, data_get($publishAudit->meta_json, 'diff_summary.changed_count'));
+        $this->assertSame(1, data_get($publishAudit->meta_json, 'rollback_target.revision_no'));
+        $this->assertSame('previous_publish', data_get($publishAudit->meta_json, 'rollback_target.kind'));
 
         Http::assertSentCount(2);
         Http::assertSent(function ($request): bool {
@@ -226,7 +309,9 @@ final class PostReleaseObservabilityPageTest extends TestCase
             ->assertSee('Recent release events')
             ->assertSee('Observability Article')
             ->assertSee('content_release_cache_signal')
-            ->assertSee('content_release_broadcast');
+            ->assertSee('content_release_broadcast')
+            ->assertSee('Revision #2')
+            ->assertSee('Rollback: rev 1 via release_workspace');
 
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
         app()->instance('request', Request::create('/ops/post-release-observability', 'GET'));
@@ -245,7 +330,7 @@ final class PostReleaseObservabilityPageTest extends TestCase
             ->assertSet('headlineFields.5.value', '2')
             ->assertSet('headlineFields.6.value', '1')
             ->assertSet('releaseCards.0.title', 'Observability Article')
-            ->assertCount('auditCards', 3);
+            ->assertCount('auditCards', 4);
     }
 
     public function test_resource_release_action_triggers_failure_alerts_and_observability_ignores_other_org_rows(): void

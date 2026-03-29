@@ -73,6 +73,7 @@
                         :meta="$card['meta']"
                     >
                         <p class="ops-control-hint">{{ $card['description'] }}</p>
+                        <p class="ops-control-hint">{{ $card['trace'] }}</p>
                         <p class="ops-control-hint">Audit time: {{ $card['latest_title'] }}</p>
                         <x-slot name="actions">
                             <x-filament.ops.shared.status-pill

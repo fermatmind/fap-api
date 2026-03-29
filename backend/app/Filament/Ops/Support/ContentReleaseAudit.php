@@ -37,7 +37,7 @@ final class ContentReleaseAudit
                 'published_at' => optional(data_get($record, 'published_at'))?->toISOString(),
                 'actor_email' => is_object($actor) ? trim((string) data_get($actor, 'email', '')) : '',
                 'source' => $source,
-            ],
+            ] + ContentReleaseTrace::meta($type, $record),
             reason: 'cms_release_workspace',
             result: 'success',
         );

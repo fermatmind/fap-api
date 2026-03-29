@@ -221,6 +221,7 @@ class PostReleaseObservabilityPage extends Page
                     'description' => 'Source: '.trim((string) data_get($meta, 'source', 'unknown'))
                         .' | Endpoint: '.trim((string) data_get($meta, 'endpoint', 'n/a'))
                         .' | Visibility: '.trim((string) data_get($meta, 'visibility', 'unknown')),
+                    'trace' => $this->traceSummary($meta),
                     'status' => $result,
                     'status_state' => $result === 'failed' ? 'danger' : 'success',
                     'latest_title' => optional($row->created_at)?->toDateTimeString() ?? 'Unknown',
@@ -277,5 +278,36 @@ class PostReleaseObservabilityPage extends Page
             })
             ->values()
             ->all();
+    }
+
+    /**
+     * @param  array<string, mixed>  $meta
+     */
+    private function traceSummary(array $meta): string
+    {
+        $traceParts = [];
+
+        $revisionNo = data_get($meta, 'revision_no');
+        if ($revisionNo !== null) {
+            $traceParts[] = 'Revision #'.$revisionNo;
+        }
+
+        $changedCount = (int) data_get($meta, 'diff_summary.changed_count', 0);
+        $changedFields = array_values(array_filter((array) data_get($meta, 'diff_summary.changed_fields', [])));
+        if ($changedCount > 0) {
+            $traceParts[] = 'Diff: '.$changedCount.' field'.($changedCount === 1 ? '' : 's')
+                .' changed'
+                .($changedFields !== [] ? ' ('.implode(', ', $changedFields).')' : '');
+        }
+
+        $rollbackRevision = data_get($meta, 'rollback_target.revision_no');
+        $rollbackSource = trim((string) data_get($meta, 'rollback_target.source', ''));
+        if ($rollbackRevision !== null || $rollbackSource !== '') {
+            $traceParts[] = 'Rollback: '
+                .($rollbackRevision !== null ? 'rev '.$rollbackRevision : 'history')
+                .($rollbackSource !== '' ? ' via '.$rollbackSource : '');
+        }
+
+        return $traceParts !== [] ? implode(' | ', $traceParts) : 'No diff or rollback trace recorded.';
     }
 }
