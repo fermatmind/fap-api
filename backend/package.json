@@ -3,9 +3,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "npm run build:app && npm run build:ops-theme",
+        "build": "npm run build:app",
         "build:app": "vite build",
-        "build:ops-theme": "node ./node_modules/tailwindcss-3/lib/cli.js --input ./resources/css/filament/ops/theme.css --output ./public/css/filament/ops/theme.css --config ./resources/css/filament/ops/tailwind.config.js --minify",
         "dev": "vite"
     },
     "devDependencies": {
