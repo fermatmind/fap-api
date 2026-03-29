@@ -33,6 +33,15 @@ return [
         'webhook' => env('OPS_ALERT_WEBHOOK'),
     ],
 
+    'content_release_observability' => [
+        'cache_invalidation_urls' => array_values(array_filter(array_map(
+            static fn (string $value): string => trim($value),
+            explode(',', (string) env('OPS_CONTENT_RELEASE_CACHE_INVALIDATION_URLS', ''))
+        ))),
+        'broadcast_webhook' => env('OPS_CONTENT_RELEASE_BROADCAST_WEBHOOK', ''),
+        'http_timeout_seconds' => (int) env('OPS_CONTENT_RELEASE_HTTP_TIMEOUT_SECONDS', 5),
+    ],
+
     'go_live_gate' => [
         // enabled_only: only validate providers that are enabled in payments.providers.*
         // all: validate all known providers regardless of enabled status.
