@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Pages;
 
 use App\Services\Ops\OrgVisibilityResolver;
+use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
@@ -287,6 +288,11 @@ class SelectOrgPage extends Page
 
     private function resolveSelectedOrgId(): int
     {
+        $contextOrgId = max(0, (int) app(OrgContext::class)->orgId());
+        if ($contextOrgId > 0) {
+            return $contextOrgId;
+        }
+
         $rawSessionOrgId = (string) session('ops_org_id', '');
         if ($rawSessionOrgId !== '' && preg_match('/^\d+$/', $rawSessionOrgId) === 1) {
             return max(0, (int) $rawSessionOrgId);

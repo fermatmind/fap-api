@@ -46,5 +46,6 @@ final class CurrentOrgSwitcherComponentTest extends TestCase
             ->assertRedirect('/ops/select-org');
 
         $this->assertNull(session('ops_org_id'));
+        $this->assertSame(0, (int) app(OrgContext::class)->orgId());
     }
 }

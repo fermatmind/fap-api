@@ -239,6 +239,26 @@ final class SelectOrgFlowTest extends TestCase
         $this->assertSame((string) $selectedOrg->id, $queuedCookie?->getValue());
     }
 
+    public function test_select_org_page_current_org_summary_prefers_org_context(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_OWNER,
+            PermissionNames::ADMIN_ORG_MANAGE,
+        ]);
+        $selectedOrg = $this->createOrganization('Context Summary Org');
+
+        session(['ops_admin_totp_verified_user_id' => (int) $admin->id]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        $context = app(OrgContext::class);
+        $context->set((int) $selectedOrg->id, (int) $admin->id, 'admin', null, OrgContext::KIND_TENANT);
+        app()->instance(OrgContext::class, $context);
+
+        Livewire::test(SelectOrgPage::class)
+            ->assertSet('currentOrgId', (int) $selectedOrg->id)
+            ->assertSet('currentOrgName', $selectedOrg->name);
+    }
+
     public function test_organizations_import_page_is_reachable_and_explains_runbook_status(): void
     {
         $admin = $this->createAdminWithPermissions([

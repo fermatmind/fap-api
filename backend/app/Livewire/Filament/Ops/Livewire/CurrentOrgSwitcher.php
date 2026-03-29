@@ -56,6 +56,16 @@ final class CurrentOrgSwitcher extends Component
 
         Cookie::queue(Cookie::forget('ops_org_id', '/ops'));
         Cookie::queue(Cookie::forget('ops_org_id', '/'));
+
+        $context = app(OrgContext::class);
+        $context->set(
+            0,
+            $context->userId(),
+            $context->role(),
+            $context->anonId(),
+            OrgContext::KIND_PUBLIC,
+        );
+        app()->instance(OrgContext::class, $context);
     }
 
     private function resolveOrgId(): ?int
