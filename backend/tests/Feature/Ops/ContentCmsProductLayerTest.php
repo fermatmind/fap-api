@@ -7,6 +7,8 @@ namespace Tests\Feature\Ops;
 use App\Filament\Ops\Pages\ContentOverviewPage;
 use App\Filament\Ops\Pages\ContentReleasePage;
 use App\Filament\Ops\Pages\ContentWorkspacePage;
+use App\Filament\Ops\Pages\EditorialOperationsPage;
+use App\Filament\Ops\Pages\EditorialReviewPage;
 use App\Filament\Ops\Resources\ArticleCategoryResource;
 use App\Filament\Ops\Resources\ArticleResource;
 use App\Filament\Ops\Resources\ArticleTagResource;
@@ -14,10 +16,13 @@ use App\Filament\Ops\Resources\CareerGuideResource;
 use App\Filament\Ops\Resources\CareerJobResource;
 use App\Filament\Ops\Resources\ContentPackReleaseResource;
 use App\Filament\Ops\Resources\ContentPackVersionResource;
+use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\ArticleCategory;
+use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTag;
+use App\Models\AuditLog;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\Organization;
@@ -25,16 +30,26 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
+use Filament\Facades\Filament;
+use Filament\PanelRegistry;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 final class ContentCmsProductLayerTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Filament::setCurrentPanel(app(PanelRegistry::class)->get('ops'));
+    }
 
     public function test_content_read_admin_can_open_workspace_pages_but_not_release_surface(): void
     {
@@ -62,7 +77,22 @@ final class ContentCmsProductLayerTest extends TestCase
 
         $this->withSession($session)
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/editorial-operations')
+            ->assertOk()
+            ->assertSee('Editorial operations')
+            ->assertSee('Operations snapshot')
+            ->assertSee('Articles')
+            ->assertSee('Career Guides')
+            ->assertSee('Career Jobs');
+
+        $this->withSession($session)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/content-release')
+            ->assertForbidden();
+
+        $this->withSession($session)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/editorial-review')
             ->assertForbidden();
     }
 
@@ -119,6 +149,7 @@ final class ContentCmsProductLayerTest extends TestCase
             ->assertSee('Legacy Publish Queue Article');
 
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $this->approveRecord($admin, (int) $session['ops_org_id'], 'article', $article);
         ArticleResource::releaseRecord($article);
 
         $article->refresh();
@@ -130,8 +161,10 @@ final class ContentCmsProductLayerTest extends TestCase
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_RELEASE,
         ]);
+        $session = $this->opsSession((int) $admin->id);
 
         $article = $this->seedArticle([
+            'org_id' => (int) $session['ops_org_id'],
             'title' => 'Release Queue Article',
             'status' => 'draft',
             'is_public' => false,
@@ -152,7 +185,21 @@ final class ContentCmsProductLayerTest extends TestCase
             'published_at' => null,
         ]);
 
-        $session = $this->opsSession((int) $admin->id);
+        $this->approveRecord($admin, (int) $session['ops_org_id'], 'article', $article);
+        $this->approveRecord($admin, (int) $session['ops_org_id'], 'guide', $guide);
+        $this->approveRecord($admin, (int) $session['ops_org_id'], 'job', $job);
+
+        $this->withSession($session)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/editorial-review')
+            ->assertOk()
+            ->assertSee('Editorial review')
+            ->assertSee('Review snapshot')
+            ->assertSee('Review queue')
+            ->assertSee('Release Queue')
+            ->assertSee('Release Queue Article')
+            ->assertSee('Release Queue Guide')
+            ->assertSee('Release Queue Job');
 
         $this->withSession($session)
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -163,6 +210,7 @@ final class ContentCmsProductLayerTest extends TestCase
             ->assertSee('Article')
             ->assertSee('Career Guide')
             ->assertSee('Career Job')
+            ->assertSee('Review state')
             ->assertDontSee('Content Pack Release')
             ->assertDontSee('Content Pack Version');
 
@@ -177,8 +225,10 @@ final class ContentCmsProductLayerTest extends TestCase
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_RELEASE,
         ]);
+        $session = $this->opsSession((int) $admin->id);
 
         $article = $this->seedArticle([
+            'org_id' => (int) $session['ops_org_id'],
             'status' => 'draft',
             'is_public' => false,
             'published_at' => null,
@@ -195,6 +245,9 @@ final class ContentCmsProductLayerTest extends TestCase
         ]);
 
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $this->approveRecord($admin, (int) $session['ops_org_id'], 'article', $article);
+        $this->approveRecord($admin, (int) $session['ops_org_id'], 'guide', $guide);
+        $this->approveRecord($admin, (int) $session['ops_org_id'], 'job', $job);
 
         ArticleResource::releaseRecord($article);
         CareerGuideResource::releaseRecord($guide);
@@ -216,7 +269,7 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->assertTrue($job->is_public);
         $this->assertNotNull($job->published_at);
 
-        $this->getJson('/api/v0.5/articles/'.$article->slug.'?locale=en&org_id=0')
+        $this->getJson('/api/v0.5/articles/'.$article->slug.'?locale=en&org_id='.(int) $session['ops_org_id'])
             ->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath('article.slug', $article->slug);
@@ -339,7 +392,9 @@ final class ContentCmsProductLayerTest extends TestCase
         foreach ([
             '/ops/content-overview',
             '/ops/content-workspace',
+            '/ops/editorial-review',
             '/ops/content-release',
+            '/ops/editorial-operations',
         ] as $path) {
             $this->withSession($session)
                 ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -352,6 +407,8 @@ final class ContentCmsProductLayerTest extends TestCase
     {
         $this->assertSame(__('ops.group.content_overview'), ContentOverviewPage::getNavigationGroup());
         $this->assertSame(__('ops.group.content_overview'), ContentWorkspacePage::getNavigationGroup());
+        $this->assertSame(__('ops.group.editorial'), EditorialOperationsPage::getNavigationGroup());
+        $this->assertSame(__('ops.group.content_release'), EditorialReviewPage::getNavigationGroup());
         $this->assertSame(__('ops.group.editorial'), ArticleResource::getNavigationGroup());
         $this->assertSame(__('ops.group.editorial'), CareerGuideResource::getNavigationGroup());
         $this->assertSame(__('ops.group.editorial'), CareerJobResource::getNavigationGroup());
@@ -361,6 +418,187 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->assertSame(__('ops.group.content_control_plane'), ContentPackVersionResource::getNavigationGroup());
         $this->assertSame(__('ops.group.content_control_plane'), ContentPackReleaseResource::getNavigationGroup());
         $this->assertFalse(Route::has('filament.ops.resources.content-releases.index'));
+    }
+
+    public function test_editorial_review_surface_marks_missing_inputs_for_attention(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+
+        $session = $this->opsSession((int) $admin->id);
+
+        $this->seedArticle([
+            'org_id' => (int) $session['ops_org_id'],
+            'title' => 'Review Article',
+            'excerpt' => null,
+            'content_md' => '',
+            'status' => 'draft',
+        ]);
+
+        $this->withSession($session)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/editorial-review')
+            ->assertOk()
+            ->assertSee('Review Article')
+            ->assertSee('Needs attention')
+            ->assertSee('Missing: body, excerpt');
+    }
+
+    public function test_editorial_review_approvals_are_persisted_and_gate_release_queue(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+
+        $session = $this->opsSession((int) $admin->id);
+        $selectedOrgId = (int) $session['ops_org_id'];
+
+        $article = $this->seedArticle([
+            'org_id' => $selectedOrgId,
+            'title' => 'Approved Release Article',
+            'excerpt' => 'Ready excerpt',
+            'content_md' => 'Ready body',
+            'status' => 'draft',
+            'is_public' => false,
+            'published_at' => null,
+        ]);
+
+        ArticleSeoMeta::query()->create([
+            'org_id' => $selectedOrgId,
+            'article_id' => (int) $article->id,
+            'locale' => 'en',
+            'seo_title' => 'Approved Release Article SEO Title',
+            'seo_description' => 'Approved Release Article SEO Description',
+            'canonical_url' => 'https://example.test/articles/approved-release-article',
+            'og_title' => 'Approved Release Article OG Title',
+            'og_description' => 'Approved Release Article OG Description',
+            'og_image_url' => 'https://example.test/images/approved-release-article.png',
+            'robots' => 'index,follow',
+            'is_indexable' => true,
+        ]);
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        app()->instance('request', Request::create('/ops/editorial-review', 'POST'));
+
+        $context = app(OrgContext::class);
+        $context->set($selectedOrgId, (int) $admin->id, 'admin');
+        app()->instance(OrgContext::class, $context);
+
+        Livewire::test(EditorialReviewPage::class)
+            ->assertOk()
+            ->call('approveItem', 'article', (int) $article->id);
+
+        $audit = AuditLog::query()
+            ->where('action', 'editorial_review_approved')
+            ->where('target_type', 'article')
+            ->where('target_id', (string) $article->id)
+            ->first();
+
+        $this->assertNotNull($audit);
+
+        $this->withSession($session)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/content-release')
+            ->assertOk()
+            ->assertSee('Approved')
+            ->assertSee('Publish');
+
+        app()->instance('request', Request::create('/ops/content-release', 'POST'));
+        app()->instance(OrgContext::class, $context);
+
+        Livewire::test(ContentReleasePage::class)
+            ->assertOk()
+            ->call('releaseItem', 'article', (int) $article->id);
+
+        $article->refresh();
+        $this->assertSame('published', $article->status);
+        $this->assertTrue($article->is_public);
+    }
+
+    public function test_editorial_review_requires_real_seo_meta_before_marking_record_ready(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+
+        $session = $this->opsSession((int) $admin->id);
+
+        $this->seedArticle([
+            'org_id' => (int) $session['ops_org_id'],
+            'title' => 'Seo Checklist Article',
+            'excerpt' => 'Seo excerpt',
+            'content_md' => 'Seo body',
+            'status' => 'draft',
+        ]);
+
+        $this->withSession($session)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/editorial-review')
+            ->assertOk()
+            ->assertSee('Seo Checklist Article')
+            ->assertSee('Needs attention')
+            ->assertSee('canonical url')
+            ->assertSee('og title');
+    }
+
+    public function test_editorial_review_can_request_changes_and_reject_records(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+
+        $session = $this->opsSession((int) $admin->id);
+
+        $changesRequested = $this->seedArticle([
+            'org_id' => (int) $session['ops_org_id'],
+            'title' => 'Changes Requested Article',
+            'excerpt' => 'Ready excerpt',
+            'content_md' => 'Ready body',
+            'status' => 'draft',
+        ]);
+        $rejected = $this->seedArticle([
+            'org_id' => (int) $session['ops_org_id'],
+            'title' => 'Rejected Article',
+            'excerpt' => 'Ready excerpt',
+            'content_md' => 'Ready body',
+            'status' => 'draft',
+        ]);
+
+        foreach ([$changesRequested, $rejected] as $record) {
+            ArticleSeoMeta::query()->create([
+                'org_id' => (int) $session['ops_org_id'],
+                'article_id' => (int) $record->id,
+                'locale' => 'en',
+                'seo_title' => $record->title.' SEO Title',
+                'seo_description' => $record->title.' SEO Description',
+                'canonical_url' => 'https://example.test/articles/'.Str::slug($record->title),
+                'og_title' => $record->title.' OG Title',
+                'og_description' => $record->title.' OG Description',
+                'og_image_url' => 'https://example.test/images/'.Str::slug($record->title).'.png',
+                'robots' => 'index,follow',
+                'is_indexable' => true,
+            ]);
+        }
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        app()->instance('request', Request::create('/ops/editorial-review', 'POST'));
+
+        $context = app(OrgContext::class);
+        $context->set((int) $session['ops_org_id'], (int) $admin->id, 'admin');
+        app()->instance(OrgContext::class, $context);
+
+        Livewire::test(EditorialReviewPage::class)
+            ->assertOk()
+            ->call('requestChangesItem', 'article', (int) $changesRequested->id)
+            ->call('rejectItem', 'article', (int) $rejected->id);
+
+        $this->withSession($session)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/editorial-review')
+            ->assertOk()
+            ->assertSee('Changes requested')
+            ->assertSee('Rejected');
     }
 
     public function test_article_and_taxonomy_resources_are_scoped_to_selected_org_only(): void
@@ -503,6 +741,19 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->seedArticle();
         $this->seedGuide();
         $this->seedJob();
+    }
+
+    private function approveRecord(AdminUser $admin, int $orgId, string $type, object $record): void
+    {
+        app()->instance('request', Request::create('/ops/editorial-review', 'POST'));
+
+        $context = app(OrgContext::class);
+        $context->set($orgId, (int) $admin->id, 'admin');
+        app()->instance(OrgContext::class, $context);
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        EditorialReviewAudit::mark(EditorialReviewAudit::STATE_APPROVED, $type, $record);
     }
 
     /**

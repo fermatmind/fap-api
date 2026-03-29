@@ -15,6 +15,9 @@
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentOverviewPage::getUrl() }}">
                         Overview
                     </x-filament::button>
+                    <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\EditorialOperationsPage::getUrl() }}">
+                        Editorial Ops
+                    </x-filament::button>
                     @if (\App\Filament\Ops\Support\ContentAccess::canRelease())
                         <x-filament::button color="primary" tag="a" href="{{ \App\Filament\Ops\Pages\ContentReleasePage::getUrl() }}">
                             Release Surface

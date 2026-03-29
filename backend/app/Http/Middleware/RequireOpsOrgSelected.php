@@ -48,8 +48,14 @@ class RequireOpsOrgSelected
      */
     private array $orgScopedPages = [
         'filament.ops.pages.content-overview',
+        'filament.ops.pages.content-metrics',
+        'filament.ops.pages.seo-operations',
+        'filament.ops.pages.content-search',
         'filament.ops.pages.content-workspace',
+        'filament.ops.pages.editorial-review',
         'filament.ops.pages.content-release',
+        'filament.ops.pages.post-release-observability',
+        'filament.ops.pages.editorial-operations',
         'filament.ops.pages.order-lookup',
         'filament.ops.pages.delivery-tools',
         'filament.ops.pages.secure-link',
