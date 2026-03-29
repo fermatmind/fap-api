@@ -1,20 +1,40 @@
 <x-filament-panels::page>
-    <div class="space-y-4">
-        <x-filament::button wire:click="refreshChecks">Refresh</x-filament::button>
-        <div class="text-xs text-gray-500">
-            Mailer card is a read-only summary. Credentials are never displayed.
-        </div>
-
-        <div class="grid gap-3 md:grid-cols-4">
-            @foreach ($checks as $name => $check)
-                <div class="rounded-lg border p-4">
-                    <div class="text-sm font-semibold">{{ strtoupper($name) }}</div>
-                    <div class="mt-1 text-xs {{ ($check['ok'] ?? false) ? 'text-green-600' : 'text-red-600' }}">
-                        {{ ($check['ok'] ?? false) ? 'OK' : 'FAIL' }}
-                    </div>
-                    <div class="mt-2 text-xs text-gray-600 break-all">{{ $check['message'] ?? '' }}</div>
+    <div class="ops-shell-page">
+        <x-filament-ops::ops-section
+            eyebrow="SRE status"
+            title="Health checks"
+            description="Read-only connectivity and service posture. Mailer details remain summary-only; credentials are never displayed."
+        >
+            <x-filament-ops::ops-toolbar :split="false">
+                <div class="ops-toolbar-inline">
+                    <p class="ops-control-hint">Refresh the latest database, redis, queue, and mailer health summary.</p>
                 </div>
-            @endforeach
-        </div>
+
+                <x-slot name="actions">
+                    <x-filament::button wire:click="refreshChecks">Refresh</x-filament::button>
+                </x-slot>
+            </x-filament-ops::ops-toolbar>
+        </x-filament-ops::ops-section>
+
+        <x-filament-ops::ops-section
+            title="Dependency cards"
+            description="Unified health cards for the currently configured runtime dependencies."
+        >
+            <div class="ops-page-grid ops-page-grid--4">
+                @foreach ($checks as $name => $check)
+                    <x-filament-ops::ops-result-card
+                        :title="strtoupper((string) $name)"
+                        :meta="(string) ($check['message'] ?? '')"
+                    >
+                        <x-slot name="badges">
+                            <x-filament.ops.shared.status-pill
+                                :state="($check['ok'] ?? false) ? 'success' : 'danger'"
+                                :label="($check['ok'] ?? false) ? 'OK' : 'FAIL'"
+                            />
+                        </x-slot>
+                    </x-filament-ops::ops-result-card>
+                @endforeach
+            </div>
+        </x-filament-ops::ops-section>
     </div>
 </x-filament-panels::page>

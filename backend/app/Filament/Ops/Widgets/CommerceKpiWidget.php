@@ -15,7 +15,7 @@ class CommerceKpiWidget extends BaseWidget
 
     protected function getHeading(): ?string
     {
-        return __('ops.widgets.today_business');
+        return 'Commerce Overview';
     }
 
     protected function getStats(): array
@@ -27,11 +27,11 @@ class CommerceKpiWidget extends BaseWidget
         if ($orgId <= 0) {
             return [
                 $this->noOrgStat(__('ops.widgets.paid_orders_today'), __('ops.widgets.select_org_to_view_metrics')),
-                $this->noOrgStat('Pending unresolved', __('ops.widgets.no_org_selected')),
-                $this->noOrgStat('Paid no grant', __('ops.widgets.no_org_selected')),
-                $this->noOrgStat('Compensated recently', __('ops.widgets.no_org_selected')),
-                $this->noOrgStat(__('ops.widgets.refund_count'), __('ops.widgets.no_org_selected')),
-                $this->noOrgStat(__('ops.widgets.webhook_failures'), __('ops.widgets.no_org_selected')),
+                $this->noOrgStat('Pending unresolved', __('ops.widgets.select_org_to_view_metrics')),
+                $this->noOrgStat('Paid without grant', __('ops.widgets.select_org_to_view_metrics')),
+                $this->noOrgStat('Compensated today', __('ops.widgets.select_org_to_view_metrics')),
+                $this->noOrgStat(__('ops.widgets.refund_count'), __('ops.widgets.select_org_to_view_metrics')),
+                $this->noOrgStat(__('ops.widgets.webhook_failures'), __('ops.widgets.select_org_to_view_metrics')),
             ];
         }
 
@@ -82,9 +82,9 @@ class CommerceKpiWidget extends BaseWidget
             Stat::make(__('ops.widgets.paid_orders_today'), (string) $paidOrders),
             Stat::make('Pending unresolved', (string) $pendingUnresolved)
                 ->color($pendingUnresolved > 0 ? 'warning' : 'success'),
-            Stat::make('Paid no grant', (string) $paidNoGrant)
+            Stat::make('Paid without grant', (string) $paidNoGrant)
                 ->color($paidNoGrant > 0 ? 'danger' : 'success'),
-            Stat::make('Compensated recently', (string) $compensatedRecently)
+            Stat::make('Compensated today', (string) $compensatedRecently)
                 ->color($compensatedRecently > 0 ? 'warning' : 'gray'),
             Stat::make(__('ops.widgets.refund_count'), (string) $refundCount)
                 ->color($refundCount > 0 ? 'warning' : 'success'),

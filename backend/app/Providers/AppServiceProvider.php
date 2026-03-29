@@ -39,6 +39,7 @@ use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route as IlluminateRoute;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
@@ -290,6 +291,8 @@ class AppServiceProvider extends ServiceProvider
         FilamentAsset::register([
             Theme::make('ops-theme', resource_path('css/filament/ops/theme.compiled.css')),
         ]);
+
+        Blade::anonymousComponentPath(resource_path('views/filament/ops/components'), 'filament-ops');
 
         Gate::policy(Attempt::class, AttemptPolicy::class);
         Gate::policy(Order::class, OrderPolicy::class);
