@@ -288,7 +288,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         FilamentAsset::register([
-            Theme::make('ops-theme', resource_path('css/filament/ops/theme.css')),
+            Theme::make('ops-theme', resource_path('css/filament/ops/theme.compiled.css')),
         ]);
 
         Gate::policy(Attempt::class, AttemptPolicy::class);
