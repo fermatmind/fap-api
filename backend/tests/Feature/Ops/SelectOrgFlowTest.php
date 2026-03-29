@@ -6,6 +6,7 @@ namespace Tests\Feature\Ops;
 
 use App\Filament\Ops\Pages\OrganizationsImportPage;
 use App\Filament\Ops\Pages\SelectOrgPage;
+use App\Filament\Ops\Resources\OrganizationResource\Pages\CreateOrganization;
 use App\Models\Organization;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
@@ -164,5 +165,38 @@ final class SelectOrgFlowTest extends TestCase
             ->assertSee((new OrganizationsImportPage)->getNavigationLabel())
             ->assertSee('runbook-driven import')
             ->assertSee('Back to Select Org');
+    }
+
+    public function test_organization_resource_create_uses_same_bootstrap_semantics_without_membership_side_effects(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_OWNER,
+            PermissionNames::ADMIN_ORG_MANAGE,
+        ]);
+
+        session(['ops_admin_totp_verified_user_id' => (int) $admin->id]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        Livewire::test(CreateOrganization::class)
+            ->fillForm([
+                'name' => 'Resource Created Org',
+                'status' => 'active',
+                'domain' => '',
+                'timezone' => 'UTC',
+                'locale' => 'en-US',
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $createdOrg = Organization::query()->where('name', 'Resource Created Org')->firstOrFail();
+
+        $this->assertSame(0, (int) $createdOrg->owner_user_id);
+        $this->assertSame('active', (string) $createdOrg->status);
+        $this->assertSame('UTC', (string) $createdOrg->timezone);
+        $this->assertSame('en-US', (string) $createdOrg->locale);
+        $this->assertNull($createdOrg->domain);
+        $this->assertDatabaseMissing('organization_members', [
+            'org_id' => (int) $createdOrg->id,
+        ]);
     }
 }
