@@ -8,9 +8,13 @@ use App\Filament\Ops\Support\ContentAccess;
 use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
+use App\Services\Audit\AuditLogger;
+use App\Services\Ops\SeoOperationsService;
 use App\Support\OrgContext;
+use Filament\Notifications\Notification;
 use Filament\Pages\Page;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Support\Collection;
 
 class SeoOperationsPage extends Page
 {
@@ -26,6 +30,15 @@ class SeoOperationsPage extends Page
 
     protected static string $view = 'filament.ops.pages.seo-operations';
 
+    public string $typeFilter = 'all';
+
+    public string $issueFilter = 'all';
+
+    public string $bulkAction = SeoOperationsService::ACTION_FILL_METADATA;
+
+    /** @var list<string> */
+    public array $selectedTargets = [];
+
     /** @var list<array<string, mixed>> */
     public array $headlineFields = [];
 
@@ -33,143 +46,74 @@ class SeoOperationsPage extends Page
     public array $coverageFields = [];
 
     /** @var list<array<string, mixed>> */
+    public array $growthFields = [];
+
+    /** @var list<array<string, mixed>> */
     public array $attentionCards = [];
 
-    public function mount(): void
+    /** @var list<array<string, mixed>> */
+    public array $issueQueue = [];
+
+    public int $issueQueueElapsedMs = 0;
+
+    public function mount(SeoOperationsService $service): void
     {
-        $currentOrgIds = $this->currentOrgIds();
+        $this->refreshDashboard($service);
+    }
 
-        $articleBaseQuery = Article::query()->whereIn('org_id', $currentOrgIds);
-        $guideBaseQuery = CareerGuide::query()
-            ->withoutGlobalScopes()
-            ->where('org_id', 0);
-        $jobBaseQuery = CareerJob::query()
-            ->withoutGlobalScopes()
-            ->where('org_id', 0);
+    public function updatedTypeFilter(): void
+    {
+        $this->selectedTargets = [];
+        $this->refreshDashboard(app(SeoOperationsService::class));
+    }
 
-        $articleTotal = (clone $articleBaseQuery)->count();
-        $guideTotal = (clone $guideBaseQuery)->count();
-        $jobTotal = (clone $jobBaseQuery)->count();
-        $careerTotal = $guideTotal + $jobTotal;
+    public function updatedIssueFilter(): void
+    {
+        $this->selectedTargets = [];
+        $this->refreshDashboard(app(SeoOperationsService::class));
+    }
 
-        $articleSeoReady = $this->countSeoReady(clone $articleBaseQuery);
-        $guideSeoReady = $this->countSeoReady(clone $guideBaseQuery);
-        $jobSeoReady = $this->countSeoReady(clone $jobBaseQuery);
-        $careerSeoReady = $guideSeoReady + $jobSeoReady;
+    public function applyBulkAction(SeoOperationsService $service, AuditLogger $audit): void
+    {
+        if (! ContentAccess::canWrite()) {
+            throw new AuthorizationException('You do not have permission to operate SEO actions.');
+        }
 
-        $articleCanonicalCoverage = $this->countCanonicalCoverage(clone $articleBaseQuery);
-        $guideCanonicalCoverage = $this->countCanonicalCoverage(clone $guideBaseQuery);
-        $jobCanonicalCoverage = $this->countCanonicalCoverage(clone $jobBaseQuery);
+        if ($this->selectedTargets === []) {
+            Notification::make()
+                ->title('Select at least one SEO issue row')
+                ->warning()
+                ->send();
 
-        $articleSocialCoverage = $this->countSocialCoverage(clone $articleBaseQuery);
-        $careerSocialCoverage = $this->countSocialCoverage(clone $guideBaseQuery) + $this->countSocialCoverage(clone $jobBaseQuery);
+            return;
+        }
 
-        $indexableFootprint = (clone $articleBaseQuery)->where('is_indexable', true)->count()
-            + (clone $guideBaseQuery)->where('is_indexable', true)->count()
-            + (clone $jobBaseQuery)->where('is_indexable', true)->count();
+        $result = $service->applyBulkAction($this->selectedTargets, $this->bulkAction, $this->currentOrgIds());
+        $updatedCount = (int) ($result['updated_count'] ?? 0);
 
-        $publicSeoReady = $this->countPublicSeoReady(clone $articleBaseQuery)
-            + $this->countPublicSeoReady(clone $guideBaseQuery)
-            + $this->countPublicSeoReady(clone $jobBaseQuery);
-
-        $seoAttentionQueue = ($articleTotal - $articleSeoReady)
-            + ($guideTotal - $guideSeoReady)
-            + ($jobTotal - $jobSeoReady);
-
-        $robotsGaps = $this->countRobotsGap(clone $articleBaseQuery)
-            + $this->countRobotsGap(clone $guideBaseQuery)
-            + $this->countRobotsGap(clone $jobBaseQuery);
-
-        $this->headlineFields = [
+        $audit->log(
+            request(),
+            'seo_operations_bulk_action',
+            'SeoOperations',
+            null,
             [
-                'label' => 'Current org article SEO-ready',
-                'value' => $this->ratioLabel($articleSeoReady, $articleTotal),
-                'hint' => 'Selected-org article coverage for title, description, canonical, OG, and robots fields.',
-            ],
-            [
-                'label' => 'Global career SEO-ready',
-                'value' => $this->ratioLabel($careerSeoReady, $careerTotal),
-                'hint' => 'Global guide and job coverage for the visible SEO authoring surface.',
-            ],
-            [
-                'label' => 'Indexable footprint',
-                'value' => (string) $indexableFootprint,
-                'hint' => 'Visible records currently marked indexable across article and global career surfaces.',
-            ],
-            [
-                'label' => 'Public SEO-ready records',
-                'value' => (string) $publicSeoReady,
-                'hint' => 'Published and public records that also satisfy the current SEO completeness checks.',
-            ],
-            [
-                'label' => 'SEO attention queue',
-                'value' => (string) $seoAttentionQueue,
-                'hint' => 'Visible content objects still missing at least one core SEO field.',
-            ],
-        ];
+                'action' => $this->bulkAction,
+                'type_filter' => $this->typeFilter,
+                'issue_filter' => $this->issueFilter,
+                'selection_count' => count($this->selectedTargets),
+                'updated_count' => $updatedCount,
+                'targets' => $result['updated_keys'] ?? [],
+            ]
+        );
 
-        $this->coverageFields = [
-            [
-                'label' => 'Article canonical coverage',
-                'value' => $this->ratioLabel($articleCanonicalCoverage, $articleTotal),
-                'hint' => 'Current-org article canonical URL coverage.',
-            ],
-            [
-                'label' => 'Article social coverage',
-                'value' => $this->ratioLabel($articleSocialCoverage, $articleTotal),
-                'hint' => 'Current-org Open Graph coverage for articles.',
-            ],
-            [
-                'label' => 'Guide canonical coverage',
-                'value' => $this->ratioLabel($guideCanonicalCoverage, $guideTotal),
-                'hint' => 'Global career guide canonical URL coverage.',
-            ],
-            [
-                'label' => 'Job canonical coverage',
-                'value' => $this->ratioLabel($jobCanonicalCoverage, $jobTotal),
-                'hint' => 'Global career job canonical URL coverage.',
-            ],
-            [
-                'label' => 'Robots gaps',
-                'value' => (string) $robotsGaps,
-                'kind' => 'pill',
-                'state' => $robotsGaps > 0 ? 'warning' : 'success',
-                'hint' => 'Records where robots is still blank in SEO metadata.',
-            ],
-        ];
+        $this->selectedTargets = [];
+        $this->refreshDashboard($service);
 
-        $this->attentionCards = [
-            $this->attentionCard(
-                'Article SEO gaps',
-                'Current-org articles that still need core SEO fields before the editorial surface is truly ready.',
-                $articleTotal - $articleSeoReady,
-                'Current org',
-                $this->latestSeoGapTitle(clone $articleBaseQuery)
-            ),
-            $this->attentionCard(
-                'Career guide SEO gaps',
-                'Global guides that still need SEO completion before they should be treated as SEO-ready inventory.',
-                $guideTotal - $guideSeoReady,
-                'Global content',
-                $this->latestSeoGapTitle(clone $guideBaseQuery)
-            ),
-            $this->attentionCard(
-                'Career job SEO gaps',
-                'Global jobs that still need SEO completion before they should be treated as SEO-ready inventory.',
-                $jobTotal - $jobSeoReady,
-                'Global content',
-                $this->latestSeoGapTitle(clone $jobBaseQuery)
-            ),
-            [
-                'title' => 'Career social gaps',
-                'description' => 'Open Graph coverage across global guides and jobs. This helps keep social previews consistent after release.',
-                'meta' => 'Global content | '.($careerTotal - $careerSocialCoverage).' records need OG work',
-                'value' => (string) ($careerTotal - $careerSocialCoverage),
-                'status' => ($careerTotal - $careerSocialCoverage) > 0 ? 'Needs attention' : 'Healthy',
-                'status_state' => ($careerTotal - $careerSocialCoverage) > 0 ? 'warning' : 'success',
-                'latest_title' => $this->latestSocialGapTitle(clone $guideBaseQuery) ?? $this->latestSocialGapTitle(clone $jobBaseQuery) ?? 'No recent record',
-            ],
-        ];
+        Notification::make()
+            ->title('SEO operations applied')
+            ->body('Updated '.$updatedCount.' records.')
+            ->success()
+            ->send();
     }
 
     public static function getNavigationGroup(): ?string
@@ -197,123 +141,298 @@ class SeoOperationsPage extends Page
         return $orgId > 0 ? [$orgId] : [];
     }
 
-    private function countSeoReady(Builder $query): int
+    private function refreshDashboard(SeoOperationsService $service): void
     {
-        return $query->whereHas('seoMeta', function (Builder $seoQuery): void {
-            $seoQuery
-                ->whereNotNull('seo_title')
-                ->where('seo_title', '!=', '')
-                ->whereNotNull('seo_description')
-                ->where('seo_description', '!=', '')
-                ->whereNotNull('canonical_url')
-                ->where('canonical_url', '!=', '')
-                ->whereNotNull('og_title')
-                ->where('og_title', '!=', '')
-                ->whereNotNull('og_description')
-                ->where('og_description', '!=', '')
-                ->whereNotNull('og_image_url')
-                ->where('og_image_url', '!=', '')
-                ->whereNotNull('robots')
-                ->where('robots', '!=', '');
-        })->count();
-    }
+        $currentOrgIds = $this->currentOrgIds();
 
-    private function countCanonicalCoverage(Builder $query): int
-    {
-        return $query->whereHas('seoMeta', function (Builder $seoQuery): void {
-            $seoQuery
-                ->whereNotNull('canonical_url')
-                ->where('canonical_url', '!=', '');
-        })->count();
-    }
-
-    private function countSocialCoverage(Builder $query): int
-    {
-        return $query->whereHas('seoMeta', function (Builder $seoQuery): void {
-            $seoQuery
-                ->whereNotNull('og_title')
-                ->where('og_title', '!=', '')
-                ->whereNotNull('og_description')
-                ->where('og_description', '!=', '')
-                ->whereNotNull('og_image_url')
-                ->where('og_image_url', '!=', '');
-        })->count();
-    }
-
-    private function countPublicSeoReady(Builder $query): int
-    {
-        return $this->countSeoReady(
-            $query
-                ->where('status', 'published')
-                ->where('is_public', true)
-        );
-    }
-
-    private function countRobotsGap(Builder $query): int
-    {
-        return $query->where(function (Builder $itemQuery): void {
-            $itemQuery
-                ->whereDoesntHave('seoMeta')
-                ->orWhereHas('seoMeta', function (Builder $seoQuery): void {
-                    $seoQuery
-                        ->whereNull('robots')
-                        ->orWhere('robots', '');
-                });
-        })->count();
-    }
-
-    private function latestSeoGapTitle(Builder $query): ?string
-    {
-        /** @var object|null $record */
-        $record = $query
-            ->where(function (Builder $itemQuery): void {
-                $itemQuery
-                    ->whereDoesntHave('seoMeta')
-                    ->orWhereHas('seoMeta', function (Builder $seoQuery): void {
-                        $seoQuery
-                            ->whereNull('seo_title')
-                            ->orWhere('seo_title', '')
-                            ->orWhereNull('seo_description')
-                            ->orWhere('seo_description', '')
-                            ->orWhereNull('canonical_url')
-                            ->orWhere('canonical_url', '')
-                            ->orWhereNull('og_title')
-                            ->orWhere('og_title', '')
-                            ->orWhereNull('og_description')
-                            ->orWhere('og_description', '')
-                            ->orWhereNull('og_image_url')
-                            ->orWhere('og_image_url', '')
-                            ->orWhereNull('robots')
-                            ->orWhere('robots', '');
-                    });
-            })
+        /** @var Collection<int, Article> $articles */
+        $articles = Article::query()
+            ->whereIn('org_id', $currentOrgIds)
+            ->with('seoMeta')
             ->latest('updated_at')
-            ->first();
+            ->get();
+        /** @var Collection<int, CareerGuide> $guides */
+        $guides = CareerGuide::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->with('seoMeta')
+            ->latest('updated_at')
+            ->get();
+        /** @var Collection<int, CareerJob> $jobs */
+        $jobs = CareerJob::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->with('seoMeta')
+            ->latest('updated_at')
+            ->get();
+
+        $articleTotal = $articles->count();
+        $guideTotal = $guides->count();
+        $jobTotal = $jobs->count();
+        $careerTotal = $guideTotal + $jobTotal;
+
+        $articleSeoReady = $this->countSeoReady($service, 'article', $articles);
+        $guideSeoReady = $this->countSeoReady($service, 'guide', $guides);
+        $jobSeoReady = $this->countSeoReady($service, 'job', $jobs);
+        $careerSeoReady = $guideSeoReady + $jobSeoReady;
+
+        $articleCanonicalCoverage = $this->countCanonicalCoverage($service, 'article', $articles);
+        $guideCanonicalCoverage = $this->countCanonicalCoverage($service, 'guide', $guides);
+        $jobCanonicalCoverage = $this->countCanonicalCoverage($service, 'job', $jobs);
+
+        $articleSocialCoverage = $this->countSocialCoverage($articles);
+        $careerSocialCoverage = $this->countSocialCoverage($guides) + $this->countSocialCoverage($jobs);
+
+        $indexableFootprint = $articles->where('is_indexable', true)->count()
+            + $guides->where('is_indexable', true)->count()
+            + $jobs->where('is_indexable', true)->count();
+
+        $publicSeoReady = $this->countGrowthReady($service, 'article', $articles)
+            + $this->countGrowthReady($service, 'guide', $guides)
+            + $this->countGrowthReady($service, 'job', $jobs);
+
+        $seoAttentionQueue = ($articleTotal - $articleSeoReady)
+            + ($guideTotal - $guideSeoReady)
+            + ($jobTotal - $jobSeoReady);
+
+        $robotsGaps = $this->countRobotsGaps($service, 'article', $articles)
+            + $this->countRobotsGaps($service, 'guide', $guides)
+            + $this->countRobotsGaps($service, 'job', $jobs);
+
+        $publishedDiscoveryBlocked = $this->countPublishedDiscoveryBlocked($service, 'article', $articles)
+            + $this->countPublishedDiscoveryBlocked($service, 'guide', $guides)
+            + $this->countPublishedDiscoveryBlocked($service, 'job', $jobs);
+
+        $socialPreviewBlocked = $this->countIssueCode($service, 'social', 'article', $articles)
+            + $this->countIssueCode($service, 'social', 'guide', $guides)
+            + $this->countIssueCode($service, 'social', 'job', $jobs);
+
+        $noindexInventory = $articles->where('is_indexable', false)->count()
+            + $guides->where('is_indexable', false)->count()
+            + $jobs->where('is_indexable', false)->count();
+
+        $this->headlineFields = [
+            [
+                'label' => 'Current org article SEO-ready',
+                'value' => $this->ratioLabel($articleSeoReady, $articleTotal),
+                'hint' => 'Selected-org article coverage for metadata, canonical, robots, indexability, and growth blockers.',
+            ],
+            [
+                'label' => 'Global career SEO-ready',
+                'value' => $this->ratioLabel($careerSeoReady, $careerTotal),
+                'hint' => 'Global guide and job coverage for the visible SEO authoring surface.',
+            ],
+            [
+                'label' => 'Indexable footprint',
+                'value' => (string) $indexableFootprint,
+                'hint' => 'Visible records currently marked indexable across article and global career surfaces.',
+            ],
+            [
+                'label' => 'Growth-ready records',
+                'value' => (string) $publicSeoReady,
+                'hint' => 'Published, public, indexable, and discovery-ready records.',
+            ],
+            [
+                'label' => 'SEO attention queue',
+                'value' => (string) $seoAttentionQueue,
+                'hint' => 'Visible content objects still missing at least one operational SEO requirement.',
+            ],
+        ];
+
+        $this->coverageFields = [
+            [
+                'label' => 'Article canonical coverage',
+                'value' => $this->ratioLabel($articleCanonicalCoverage, $articleTotal),
+                'hint' => 'Current-org article canonical URL alignment.',
+            ],
+            [
+                'label' => 'Article social coverage',
+                'value' => $this->ratioLabel($articleSocialCoverage, $articleTotal),
+                'hint' => 'Current-org Open Graph coverage for articles.',
+            ],
+            [
+                'label' => 'Guide canonical coverage',
+                'value' => $this->ratioLabel($guideCanonicalCoverage, $guideTotal),
+                'hint' => 'Global career guide canonical URL alignment.',
+            ],
+            [
+                'label' => 'Job canonical coverage',
+                'value' => $this->ratioLabel($jobCanonicalCoverage, $jobTotal),
+                'hint' => 'Global career job canonical URL alignment.',
+            ],
+            [
+                'label' => 'Robots gaps',
+                'value' => (string) $robotsGaps,
+                'kind' => 'pill',
+                'state' => $robotsGaps > 0 ? 'warning' : 'success',
+                'hint' => 'Records where robots still drift from the current indexability contract.',
+            ],
+        ];
+
+        $this->growthFields = [
+            [
+                'label' => 'Published discovery blockers',
+                'value' => (string) $publishedDiscoveryBlocked,
+                'hint' => 'Published and public records still blocked from SEO discovery.',
+            ],
+            [
+                'label' => 'Social preview blockers',
+                'value' => (string) $socialPreviewBlocked,
+                'hint' => 'Records missing Open Graph or Twitter preview support.',
+            ],
+            [
+                'label' => 'Noindex inventory',
+                'value' => (string) $noindexInventory,
+                'hint' => 'Visible records intentionally excluded from discovery today.',
+            ],
+            [
+                'label' => 'Growth-ready ratio',
+                'value' => $this->ratioLabel($publicSeoReady, $articleTotal + $careerTotal),
+                'hint' => 'Visible content already ready for search and social discovery.',
+            ],
+        ];
+
+        $this->attentionCards = [
+            $this->attentionCard(
+                'Article SEO gaps',
+                'Current-org articles that still need metadata, canonical, robots, or discoverability fixes.',
+                $articleTotal - $articleSeoReady,
+                'Current org',
+                $this->latestIssueTitle($service, 'article', $articles)
+            ),
+            $this->attentionCard(
+                'Career guide SEO gaps',
+                'Global guides that still need operational SEO fixes before they should be treated as growth inventory.',
+                $guideTotal - $guideSeoReady,
+                'Global content',
+                $this->latestIssueTitle($service, 'guide', $guides)
+            ),
+            $this->attentionCard(
+                'Career job SEO gaps',
+                'Global jobs that still need operational SEO fixes before they should be treated as growth inventory.',
+                $jobTotal - $jobSeoReady,
+                'Global content',
+                $this->latestIssueTitle($service, 'job', $jobs)
+            ),
+            [
+                'title' => 'Growth blockers',
+                'description' => 'Published records that are still blocked by noindex, canonical drift, robots drift, or missing metadata.',
+                'meta' => 'Visible content | '.$publishedDiscoveryBlocked.' records need discovery fixes',
+                'value' => (string) $publishedDiscoveryBlocked,
+                'status' => $publishedDiscoveryBlocked > 0 ? 'Needs attention' : 'Healthy',
+                'status_state' => $publishedDiscoveryBlocked > 0 ? 'warning' : 'success',
+                'latest_title' => $this->latestGrowthBlockedTitle($service, $articles, $guides, $jobs),
+            ],
+        ];
+
+        $issueQueue = $service->buildIssueQueue($currentOrgIds, $this->typeFilter, $this->issueFilter);
+        $this->issueQueue = $issueQueue['items'] ?? [];
+        $this->issueQueueElapsedMs = (int) ($issueQueue['elapsed_ms'] ?? 0);
+    }
+
+    /**
+     * @param  Collection<int, object>  $records
+     */
+    private function countSeoReady(SeoOperationsService $service, string $type, Collection $records): int
+    {
+        return $records->filter(fn (object $record): bool => $service->isSeoReady($type, $record))->count();
+    }
+
+    /**
+     * @param  Collection<int, object>  $records
+     */
+    private function countCanonicalCoverage(SeoOperationsService $service, string $type, Collection $records): int
+    {
+        return $records->filter(function (object $record) use ($service, $type): bool {
+            $expectedCanonical = $service->expectedCanonical($type, $record);
+
+            return $expectedCanonical !== null
+                && trim((string) data_get($record, 'seoMeta.canonical_url', '')) === $expectedCanonical;
+        })->count();
+    }
+
+    /**
+     * @param  Collection<int, object>  $records
+     */
+    private function countSocialCoverage(Collection $records): int
+    {
+        return $records->filter(function (object $record): bool {
+            return trim((string) data_get($record, 'seoMeta.og_title', '')) !== ''
+                && trim((string) data_get($record, 'seoMeta.og_description', '')) !== ''
+                && trim((string) data_get($record, 'seoMeta.og_image_url', '')) !== '';
+        })->count();
+    }
+
+    /**
+     * @param  Collection<int, object>  $records
+     */
+    private function countGrowthReady(SeoOperationsService $service, string $type, Collection $records): int
+    {
+        return $records->filter(fn (object $record): bool => $service->isGrowthReady($type, $record))->count();
+    }
+
+    /**
+     * @param  Collection<int, object>  $records
+     */
+    private function countRobotsGaps(SeoOperationsService $service, string $type, Collection $records): int
+    {
+        return $this->countIssueCode($service, SeoOperationsService::ISSUE_ROBOTS, $type, $records);
+    }
+
+    /**
+     * @param  Collection<int, object>  $records
+     */
+    private function countIssueCode(SeoOperationsService $service, string $issueCode, string $type, Collection $records): int
+    {
+        return $records->filter(function (object $record) use ($service, $issueCode, $type): bool {
+            return collect($service->issuesFor($type, $record))
+                ->contains(fn (array $issue): bool => ($issue['code'] ?? null) === $issueCode);
+        })->count();
+    }
+
+    /**
+     * @param  Collection<int, object>  $records
+     */
+    private function countPublishedDiscoveryBlocked(SeoOperationsService $service, string $type, Collection $records): int
+    {
+        return $records->filter(fn (object $record): bool => $service->growthSignal($type, $record) === 'Blocked by noindex'
+            || $service->growthSignal($type, $record) === 'Published with discovery blockers')->count();
+    }
+
+    /**
+     * @param  Collection<int, object>  $records
+     */
+    private function latestIssueTitle(SeoOperationsService $service, string $type, Collection $records): ?string
+    {
+        $record = $records->first(fn (object $item): bool => $service->issuesFor($type, $item) !== []);
 
         return is_object($record) ? trim((string) data_get($record, 'title', '')) : null;
     }
 
-    private function latestSocialGapTitle(Builder $query): ?string
-    {
-        /** @var object|null $record */
-        $record = $query
-            ->where(function (Builder $itemQuery): void {
-                $itemQuery
-                    ->whereDoesntHave('seoMeta')
-                    ->orWhereHas('seoMeta', function (Builder $seoQuery): void {
-                        $seoQuery
-                            ->whereNull('og_title')
-                            ->orWhere('og_title', '')
-                            ->orWhereNull('og_description')
-                            ->orWhere('og_description', '')
-                            ->orWhereNull('og_image_url')
-                            ->orWhere('og_image_url', '');
-                    });
-            })
-            ->latest('updated_at')
-            ->first();
+    /**
+     * @param  Collection<int, Article>  $articles
+     * @param  Collection<int, CareerGuide>  $guides
+     * @param  Collection<int, CareerJob>  $jobs
+     */
+    private function latestGrowthBlockedTitle(
+        SeoOperationsService $service,
+        Collection $articles,
+        Collection $guides,
+        Collection $jobs,
+    ): string {
+        $candidates = collect([
+            $articles->first(fn (Article $record): bool => str_contains($service->growthSignal('article', $record), 'Blocked')
+                || str_contains($service->growthSignal('article', $record), 'Published')),
+            $guides->first(fn (CareerGuide $record): bool => str_contains($service->growthSignal('guide', $record), 'Blocked')
+                || str_contains($service->growthSignal('guide', $record), 'Published')),
+            $jobs->first(fn (CareerJob $record): bool => str_contains($service->growthSignal('job', $record), 'Blocked')
+                || str_contains($service->growthSignal('job', $record), 'Published')),
+        ])->filter(fn ($record): bool => is_object($record));
 
-        return is_object($record) ? trim((string) data_get($record, 'title', '')) : null;
+        /** @var object|null $latest */
+        $latest = $candidates->sortByDesc(static fn (object $record): string => (string) optional(data_get($record, 'updated_at'))->toISOString())->first();
+
+        return trim((string) data_get($latest, 'title', '')) !== '' ? trim((string) data_get($latest, 'title', '')) : 'No recent record';
     }
 
     private function ratioLabel(int $value, int $total): string
