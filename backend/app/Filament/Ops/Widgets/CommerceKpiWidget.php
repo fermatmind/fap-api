@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 class CommerceKpiWidget extends BaseWidget
 {
+    protected static bool $isLazy = false;
+
     private const NO_ORG_PLACEHOLDER = '—';
 
     protected function getHeading(): ?string
