@@ -106,4 +106,12 @@ return [
         'pending_timeout_minutes' => (int) env('OPS_ATTEMPT_CHAIN_AUDIT_PENDING_TIMEOUT_MINUTES', 15),
         'strict_default' => (bool) env('OPS_ATTEMPT_CHAIN_AUDIT_STRICT_DEFAULT', false),
     ],
+
+    'attempt_submission_recovery' => [
+        'window_hours' => (int) env('OPS_ATTEMPT_SUBMISSION_RECOVERY_WINDOW_HOURS', 24),
+        'limit' => (int) env('OPS_ATTEMPT_SUBMISSION_RECOVERY_LIMIT', 200),
+        'pending_timeout_minutes' => (int) env('OPS_ATTEMPT_SUBMISSION_RECOVERY_PENDING_TIMEOUT_MINUTES', 15),
+        'strict_default' => (bool) env('OPS_ATTEMPT_SUBMISSION_RECOVERY_STRICT_DEFAULT', false),
+        'alert_default' => (bool) env('OPS_ATTEMPT_SUBMISSION_RECOVERY_ALERT_DEFAULT', true),
+    ],
 ];
