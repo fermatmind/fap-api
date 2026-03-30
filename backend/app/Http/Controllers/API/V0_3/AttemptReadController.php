@@ -77,14 +77,8 @@ class AttemptReadController extends Controller
      */
     public function submission(Request $request, string $attemptId): JsonResponse
     {
-        $this->ownedAttemptQuery($request, $attemptId)->firstOrFail();
-
-        $payload = $this->attemptSubmissionService->latestForAttempt(
-            $this->currentOrgContext(),
-            $attemptId,
-            $this->resolveUserId($request),
-            $this->resolveAnonId($request)
-        );
+        $attempt = $this->resolveAttemptForSubmissionRead($request, $attemptId);
+        $payload = $this->latestSubmissionPayload($request, $attemptId, $attempt);
 
         $status = (int) ($payload['http_status'] ?? 200);
         unset($payload['http_status']);
@@ -341,7 +335,7 @@ class AttemptReadController extends Controller
             $userId !== null ? (string) $userId : null,
             $anonId,
             $this->currentOrgContext()->role(),
-            false,
+            $this->shouldUsePublicArtifactFallback($request, $attempt),
             $forceRefresh,
         );
 
@@ -567,10 +561,20 @@ class AttemptReadController extends Controller
                 return $attempt;
             }
 
+            $attempt = $this->resolvePublicAttemptFromArtifacts($request, $this->currentOrgContext()->orgId(), $attemptId, $scaleCode);
+            if ($attempt instanceof Attempt) {
+                return $attempt;
+            }
+
             throw new ApiProblemException(404, 'ATTEMPT_NOT_FOUND', 'attempt not found.');
         }
 
         $attempt = $this->ownedAttemptQuery($request, $attemptId)->first();
+        if ($attempt instanceof Attempt) {
+            return $attempt;
+        }
+
+        $attempt = $this->resolvePublicAttemptFromArtifacts($request, $this->currentOrgContext()->orgId(), $attemptId);
         if ($attempt instanceof Attempt) {
             return $attempt;
         }
@@ -594,6 +598,11 @@ class AttemptReadController extends Controller
         }
 
         $attempt = $this->ownedAttemptQuery($request, $attemptId)->first();
+        if ($attempt instanceof Attempt) {
+            return $attempt;
+        }
+
+        $attempt = $this->resolvePublicAttemptFromArtifacts($request, $orgId, $attemptId);
         if ($attempt instanceof Attempt) {
             return $attempt;
         }
@@ -1451,23 +1460,129 @@ class AttemptReadController extends Controller
 
     private function latestReadableSubmission(Request $request, string $attemptId): ?array
     {
-        $attempt = $this->reportSubjects->findAttemptForCurrentContext($attemptId, $this->reportActor($request));
-        if (! $attempt instanceof Attempt) {
-            $attempt = $this->ownedAttemptQuery($request, $attemptId)->first();
-        }
+        $attempt = $this->resolveReadableAttemptForSubmissionPayload($request, $attemptId);
 
         if (! $attempt instanceof Attempt) {
             return null;
         }
 
+        $payload = $this->latestSubmissionPayload($request, $attemptId, $attempt);
+
+        return ($payload['ok'] ?? false) === true ? $payload : null;
+    }
+
+    private function resolveAttemptForSubmissionRead(Request $request, string $attemptId): Attempt
+    {
+        $attempt = $this->resolveReadableAttemptForSubmissionPayload($request, $attemptId);
+        if ($attempt instanceof Attempt) {
+            return $attempt;
+        }
+
+        throw new ApiProblemException(404, 'RESOURCE_NOT_FOUND', 'attempt not found.');
+    }
+
+    private function resolveReadableAttemptForSubmissionPayload(Request $request, string $attemptId): ?Attempt
+    {
+        $attempt = $this->reportSubjects->findAttemptForCurrentContext($attemptId, $this->reportActor($request));
+        if ($attempt instanceof Attempt) {
+            return $attempt;
+        }
+
+        $attempt = $this->ownedAttemptQuery($request, $attemptId)->first();
+        if ($attempt instanceof Attempt) {
+            return $attempt;
+        }
+
+        return $this->resolvePublicAttemptFromArtifacts($request, $this->currentOrgContext()->orgId(), $attemptId);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function latestSubmissionPayload(Request $request, string $attemptId, Attempt $attempt): array
+    {
         $payload = $this->attemptSubmissionService->latestForAttempt(
             $this->currentOrgContext(),
             $attemptId,
             $this->resolveUserId($request),
             $this->resolveAnonId($request)
         );
+        if (($payload['ok'] ?? false) === true) {
+            return $payload;
+        }
 
-        return ($payload['ok'] ?? false) === true ? $payload : null;
+        if (! $this->shouldUsePublicArtifactFallback($request, $attempt)) {
+            return $payload;
+        }
+
+        $fallbackUserId = isset($attempt->user_id) && $attempt->user_id !== null ? (string) $attempt->user_id : null;
+        $fallbackAnonId = isset($attempt->anon_id) && $attempt->anon_id !== null ? (string) $attempt->anon_id : null;
+        if ($fallbackUserId === null && $fallbackAnonId === null) {
+            return $payload;
+        }
+
+        $fallbackPayload = $this->attemptSubmissionService->latestForAttempt(
+            $this->currentOrgContext(),
+            $attemptId,
+            $fallbackUserId,
+            $fallbackAnonId
+        );
+
+        return ($fallbackPayload['ok'] ?? false) === true ? $fallbackPayload : $payload;
+    }
+
+    private function resolvePublicAttemptFromArtifacts(
+        Request $request,
+        int $orgId,
+        string $attemptId,
+        ?string $scaleCode = null
+    ): ?Attempt {
+        if ($this->hasResolvedReadActor($request)) {
+            return null;
+        }
+
+        $attempt = $this->reportSubjects->findAttemptForSystem($orgId, $attemptId);
+        if (! $attempt instanceof Attempt) {
+            return null;
+        }
+
+        $normalizedScaleCode = strtoupper(trim($scaleCode !== null ? $scaleCode : (string) ($attempt->scale_code ?? '')));
+        if (! $this->isPublicReportScale($normalizedScaleCode)) {
+            return null;
+        }
+
+        if (! $this->hasPublicReadableArtifact($orgId, $attemptId)) {
+            return null;
+        }
+
+        return $attempt;
+    }
+
+    private function shouldUsePublicArtifactFallback(Request $request, Attempt $attempt): bool
+    {
+        if ($this->hasResolvedReadActor($request)) {
+            return false;
+        }
+
+        if (! $this->isPublicReportScale(strtoupper(trim((string) ($attempt->scale_code ?? ''))))) {
+            return false;
+        }
+
+        return $this->hasPublicReadableArtifact((int) ($attempt->org_id ?? 0), (string) ($attempt->id ?? ''));
+    }
+
+    private function hasResolvedReadActor(Request $request): bool
+    {
+        return $this->resolveUserId($request) !== null || $this->resolveAnonId($request) !== null;
+    }
+
+    private function hasPublicReadableArtifact(int $orgId, string $attemptId): bool
+    {
+        if (Result::query()->where('org_id', $orgId)->where('attempt_id', $attemptId)->exists()) {
+            return true;
+        }
+
+        return UnifiedAccessProjection::query()->where('attempt_id', $attemptId)->exists();
     }
 
     private function pendingSubmissionResponse(string $attemptId, array $submissionPayload, bool $includeReport): JsonResponse
