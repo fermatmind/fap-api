@@ -15,7 +15,6 @@ use Illuminate\Http\JsonResponse;
 class AttemptWriteController extends Controller
 {
     public function __construct(
-        protected OrgContext $orgContext,
         private AttemptStartService $startService,
         private AttemptSubmissionService $submissionService,
     ) {}
@@ -25,6 +24,7 @@ class AttemptWriteController extends Controller
      */
     public function start(StartAttemptRequest $request): JsonResponse
     {
+        $context = app(OrgContext::class);
         $payload = $request->validated();
 
         $anonId = trim((string) ($request->attributes->get('client_anon_id') ?? $payload['anon_id'] ?? ''));
@@ -52,7 +52,7 @@ class AttemptWriteController extends Controller
             $payload['referrer'] = $referrer;
         }
 
-        $result = $this->startService->start($this->orgContext, StartAttemptDTO::fromArray($payload));
+        $result = $this->startService->start($context, StartAttemptDTO::fromArray($payload));
 
         return response()->json($result);
     }
@@ -62,12 +62,13 @@ class AttemptWriteController extends Controller
      */
     public function submit(SubmitAttemptRequest $request): JsonResponse
     {
+        $context = app(OrgContext::class);
         $payload = $request->validated();
         $attemptId = trim((string) ($payload['attempt_id'] ?? ''));
 
         $payload['user_id'] = $request->attributes->get('fm_user_id')
             ?? $request->attributes->get('user_id')
-            ?? $this->orgContext->userId();
+            ?? $context->userId();
 
         $attrAnonId = trim((string) (
             $request->attributes->get('anon_id')
@@ -78,7 +79,7 @@ class AttemptWriteController extends Controller
         // ✅ 必须从原始 request input 取，不能依赖 validated()，否则 rules 里没放 anon_id 就会被过滤掉
         $bodyAnonId = trim((string) ($request->input('anon_id') ?? ''));
 
-        $ctxAnonId = trim((string) ($this->orgContext->anonId() ?? ''));
+        $ctxAnonId = trim((string) ($context->anonId() ?? ''));
 
         $payload['anon_id'] = $attrAnonId !== ''
             ? $attrAnonId
@@ -89,7 +90,7 @@ class AttemptWriteController extends Controller
         $preferAsync = $asyncEnabled && $mode !== 'sync_legacy';
 
         $outcome = $this->submissionService->submit(
-            $this->orgContext,
+            $context,
             $attemptId,
             SubmitAttemptDTO::fromArray($payload),
             $preferAsync

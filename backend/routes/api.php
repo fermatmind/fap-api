@@ -37,6 +37,7 @@ use App\Http\Controllers\HealthzController;
 use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\EnsureCmsAdminAuthorized;
+use App\Http\Middleware\ForcePublicAttemptRealm;
 use App\Http\Middleware\HealthzAccessControl;
 use App\Http\Middleware\LimitWebhookPayloadSize;
 use App\Http\Middleware\NormalizeApiErrorContract;
@@ -144,7 +145,10 @@ Route::prefix('v0.3')->middleware([
             ->middleware(['uuid:id', 'throttle:api_auth']);
     });
 
-    Route::middleware([\App\Http\Middleware\ResolveAnonId::class, ResolveOrgContext::class])->group(function () use ($payProviders) {
+    Route::middleware([
+        \App\Http\Middleware\ResolveAnonId::class,
+        ResolveOrgContext::class,
+    ])->group(function () use ($payProviders) {
         // 0) Boot (flags + experiments)
         Route::get('/boot', [BootV0_3Controller::class, 'show']);
         Route::get('/flags', [BootV0_3Controller::class, 'flags']);
@@ -162,33 +166,45 @@ Route::prefix('v0.3')->middleware([
         Route::get('/scales/{scale_code}', [ScalesController::class, 'show']);
 
         // 2) Attempts lifecycle
-        Route::middleware('throttle:api_attempt_submit')->group(function () {
-            Route::post('/attempts/start', [AttemptWriteController::class, 'start']);
-            Route::post('/attempts/submit', [AttemptWriteController::class, 'submit'])
-                ->middleware(\App\Http\Middleware\FmTokenAuth::class);
+        Route::middleware(ForcePublicAttemptRealm::class)->group(function () {
+            Route::middleware('throttle:api_attempt_submit')->group(function () {
+                Route::post('/attempts/start', [AttemptWriteController::class, 'start'])
+                    ->defaults('public_realm', true)
+                    ->name('api.v0_3.attempts.start');
+                Route::post('/attempts/submit', [AttemptWriteController::class, 'submit'])
+                    ->middleware(\App\Http\Middleware\FmTokenAuth::class)
+                    ->defaults('public_realm', true)
+                    ->name('api.v0_3.attempts.submit');
+            });
+            Route::put('/attempts/{attempt_id}/progress', [AttemptProgressController::class, 'upsert'])
+                ->middleware('uuid:attempt_id');
+            Route::get('/attempts/{attempt_id}/progress', [AttemptProgressController::class, 'show'])
+                ->middleware('uuid:attempt_id');
+            Route::get('/attempts/{attempt_id}/submission', [AttemptReadController::class, 'submission'])
+                ->middleware('uuid:attempt_id')
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.submission');
+            Route::get('/attempts/{id}', [AttemptReadController::class, 'show'])
+                ->middleware('uuid:id')
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.show');
+            Route::get('/attempts/{id}/result', [AttemptReadController::class, 'result'])
+                ->middleware('uuid:id')
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.result');
+            Route::get('/attempts/{id}/report', [AttemptReadController::class, 'report'])
+                ->middleware('uuid:id')
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.report');
+            Route::get('/attempts/{id}/report-access', [AttemptReadController::class, 'reportAccess'])
+                ->middleware('uuid:id')
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.report_access');
+            Route::get('/attempts/{id}/report.pdf', [AttemptReadController::class, 'reportPdf'])
+                ->middleware('uuid:id')
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.report_pdf');
         });
-        Route::put('/attempts/{attempt_id}/progress', [AttemptProgressController::class, 'upsert'])
-            ->middleware('uuid:attempt_id');
-        Route::get('/attempts/{attempt_id}/progress', [AttemptProgressController::class, 'show'])
-            ->middleware('uuid:attempt_id');
-        Route::get('/attempts/{attempt_id}/submission', [AttemptReadController::class, 'submission'])
-            ->middleware('uuid:attempt_id')
-            ->name('api.v0_3.attempts.submission');
-        Route::get('/attempts/{id}', [AttemptReadController::class, 'show'])
-            ->middleware('uuid:id')
-            ->name('api.v0_3.attempts.show');
-        Route::get('/attempts/{id}/result', [AttemptReadController::class, 'result'])
-            ->middleware('uuid:id')
-            ->name('api.v0_3.attempts.result');
-        Route::get('/attempts/{id}/report', [AttemptReadController::class, 'report'])
-            ->middleware('uuid:id')
-            ->name('api.v0_3.attempts.report');
-        Route::get('/attempts/{id}/report-access', [AttemptReadController::class, 'reportAccess'])
-            ->middleware('uuid:id')
-            ->name('api.v0_3.attempts.report_access');
-        Route::get('/attempts/{id}/report.pdf', [AttemptReadController::class, 'reportPdf'])
-            ->middleware('uuid:id')
-            ->name('api.v0_3.attempts.report_pdf');
         // Share contract routes stay fixed; summary/click semantics are implemented in ShareController/services.
         Route::match(['GET', 'POST'], '/attempts/{id}/share', [ShareV03Controller::class, 'getShare'])
             ->middleware(\App\Http\Middleware\FmTokenAuth::class);
