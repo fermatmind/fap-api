@@ -114,4 +114,13 @@ return [
         'strict_default' => (bool) env('OPS_ATTEMPT_SUBMISSION_RECOVERY_STRICT_DEFAULT', false),
         'alert_default' => (bool) env('OPS_ATTEMPT_SUBMISSION_RECOVERY_ALERT_DEFAULT', true),
     ],
+
+    'deploy_queue_smoke' => [
+        'queue' => env('OPS_DEPLOY_QUEUE_SMOKE_QUEUE', 'default'),
+        'max_depth' => (int) env('OPS_DEPLOY_QUEUE_SMOKE_MAX_DEPTH', 5),
+        'stability_wait_seconds' => (int) env('OPS_DEPLOY_QUEUE_SMOKE_WAIT_SECONDS', 15),
+        'max_growth' => (int) env('OPS_DEPLOY_QUEUE_SMOKE_MAX_GROWTH', 1),
+        'pending_window_minutes' => (int) env('OPS_DEPLOY_QUEUE_SMOKE_PENDING_WINDOW_MINUTES', 30),
+        'max_recent_pending' => (int) env('OPS_DEPLOY_QUEUE_SMOKE_MAX_RECENT_PENDING', 3),
+    ],
 ];

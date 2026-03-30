@@ -36,7 +36,15 @@ Truth Source: `backend/composer.json` / `backend/package.json` / `backend/config
 - PHP-FPM（Laravel 应用）
 - MySQL（主库）
 - Redis（cache + queue lock）
-- Supervisor（驻留 queue workers）
+- Supervisor（唯一驻留 queue workers owner）
+
+### 3.1 Queue owner 单一化（正式基线）
+- 正式基线只保留 **Supervisor** 作为 queue worker manager。
+- 不允许 production/staging 同时存在：
+  - `supervisor` worker
+  - `systemd` 的 `fap-queue.service`
+- 若历史环境仍保留 `fap-queue.service`，deploy hook 会先执行 `php artisan queue:restart`，再重启 Supervisor programs，并停止/禁用遗留 `systemd` queue service。
+- 任何看到 `systemd + supervisor` 双跑的环境，都视为漂移环境，必须先收口再继续上线。
 
 ## 4. 配置清单（上线必填）
 以 `backend/.env.example` 为模板，生产必须由密钥系统注入。
@@ -127,6 +135,22 @@ php artisan event:cache
 # 6) 数据库迁移
 php artisan migrate --force
 
+# 6.1) queue worker reload（唯一 owner = supervisor）
+php artisan queue:restart
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl restart fap-queue-default-high:*
+sudo supervisorctl restart fap-queue-reports:*
+# 可选队列
+sudo supervisorctl restart fap-queue-ops:* || true
+sudo supervisorctl restart fap-queue-commerce:* || true
+sudo supervisorctl restart fap-queue-content:* || true
+sudo supervisorctl restart fap-queue-insights:* || true
+
+# 若历史环境存在遗留 systemd queue service，必须停用，避免双跑
+sudo systemctl stop fap-queue.service || true
+sudo systemctl disable fap-queue.service || true
+
 # 7) Ops 资产验收
 test -s public/css/app/ops-theme.css
 test -s public/css/filament/filament/app.css
@@ -161,6 +185,35 @@ curl -sSI https://staging.fermatmind.com/ops/login | rg '^HTTP/[0-9.]+ 200 '
 
 # 7.3) 基线校验
 php artisan fap:schema:verify
+
+# 7.4) queue smoke（deploy 后必须通过）
+php -r '
+require "vendor/autoload.php";
+$app = require "bootstrap/app.php";
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+$kernel->bootstrap();
+$queue = (string) config("ops.deploy_queue_smoke.queue", "default");
+$maxDepth = max(0, (int) config("ops.deploy_queue_smoke.max_depth", 5));
+$waitSeconds = max(1, (int) config("ops.deploy_queue_smoke.stability_wait_seconds", 15));
+$maxGrowth = max(0, (int) config("ops.deploy_queue_smoke.max_growth", 1));
+$pendingWindowMinutes = max(1, (int) config("ops.deploy_queue_smoke.pending_window_minutes", 30));
+$maxRecentPending = max(0, (int) config("ops.deploy_queue_smoke.max_recent_pending", 3));
+$queueConnectionName = (string) config("queue.default", "redis");
+$queueConnection = (array) config("queue.connections.".$queueConnectionName, []);
+$redisConnection = (string) ($queueConnection["connection"] ?? "default");
+$redis = Illuminate\Support\Facades\Redis::connection($redisConnection);
+$before = (int) $redis->llen("queues:".$queue);
+sleep($waitSeconds);
+$after = (int) $redis->llen("queues:".$queue);
+$recentPending = (int) Illuminate\Support\Facades\DB::table("attempt_submissions")
+  ->whereIn("state", ["pending", "running"])
+  ->where("updated_at", ">=", now()->subMinutes($pendingWindowMinutes))
+  ->count();
+dump(compact("queue","before","after","maxDepth","waitSeconds","maxGrowth","recentPending","maxRecentPending"));
+if ($after > $maxDepth || ($after - $before) > $maxGrowth || $recentPending > $maxRecentPending) {
+    exit(1);
+}
+'
 ```
 
 ### 5.1 Ops Theme Build in Deploy Pipeline
@@ -255,6 +308,7 @@ stopwaitsecs=360
 
 ### 6.4 生效命令
 ```bash
+php artisan queue:restart
 sudo supervisorctl reread
 sudo supervisorctl update
 sudo supervisorctl restart fap-queue-default-high:*
@@ -266,6 +320,19 @@ sudo supervisorctl restart fap-queue-content:*
 sudo supervisorctl restart fap-queue-insights:*
 ```
 
+### 6.5 遗留 systemd queue service 处理
+如果历史环境里存在 `fap-queue.service`，必须停用：
+
+```bash
+sudo systemctl stop fap-queue.service || true
+sudo systemctl disable fap-queue.service || true
+sudo systemctl is-active fap-queue.service
+```
+
+通过标准：
+- `systemctl is-active fap-queue.service` 返回非 `active`
+- 只保留 `supervisorctl status fap-queue-*` 里的 worker 作为正式 owner
+
 ## 7. 发布后验收
 ```bash
 cd /opt/fap-api/backend
@@ -276,6 +343,7 @@ curl -i http://127.0.0.1:8000/api/healthz
 curl -i http://127.0.0.1:8000/api/v0.4/boot
 curl -i -X POST http://127.0.0.1:8000/api/v0.3/auth/guest -H 'Content-Type: application/json' -d '{"anon_id":"deploy_contract_probe"}'
 curl -i -X POST http://127.0.0.1:8000/api/v0.3/attempts/start -H 'Content-Type: application/json' -d '{"scale_code":"MBTI"}'
+php artisan ops:attempt-submission-recovery --json=1 --alert=0 --strict=0 --window-hours=1 --limit=50
 
 cd /opt/fap-api
 bash backend/scripts/ci_verify_mbti.sh
@@ -295,3 +363,23 @@ bash backend/scripts/ci_verify_mbti.sh
    - 完成代码切换/配置恢复
    - 再按 `reports -> default/high -> 其他队列` 顺序启动
 5. 验收通过后恢复流量。
+
+## 9. Attempt Submission 补偿 Runbook
+当线上出现 “submit 返回 202，但结果页长期 pending / 404” 时，先不要直接重试前台页面，按下面顺序处置：
+
+```bash
+cd /opt/fap-api/backend
+
+# 1) 精确诊断一条 attempt
+php artisan ops:attempt-submission-recovery --json=1 --alert=0 --strict=0 --attempt-id=<attempt_id>
+
+# 2) recent 窗口巡检
+php artisan ops:attempt-submission-recovery --json=1 --alert=0 --strict=0 --window-hours=1 --limit=100
+
+# 3) 安全补偿（会重排队 stuck / result-missing submission，并修正 stale projection）
+php artisan ops:attempt-submission-recovery --json=1 --alert=0 --strict=0 --repair=1 --window-hours=1 --limit=100
+```
+
+适用边界：
+- `--repair=1` 只用于当前 release 已确认健康、queue worker 已按本 runbook 收口到 Supervisor 单 owner 后。
+- 如果 queue smoke 仍失败，先处理 worker owner/consumer 问题，再做补偿。
