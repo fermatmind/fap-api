@@ -52,6 +52,8 @@ final class OpsDashboardOrgContextInheritanceTest extends TestCase
             ->assertSee($selectedOrg->name)
             ->assertDontSee(__('ops.topbar.no_org_selected'))
             ->assertDontSee(__('ops.widgets.select_org_to_view_metrics'))
+            ->assertDontSee('@js(request()->fullUrl())', false)
+            ->assertSee('setLocale(', false)
             ->assertSee('window.__opsLivewirePageExpiredRecoveryHookInstalled', false)
             ->assertSee("const autoRefreshStorageKeyPrefix = 'ops-livewire-page-expired-at:'", false);
     }

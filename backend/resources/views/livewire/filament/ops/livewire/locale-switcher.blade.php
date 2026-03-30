@@ -1,6 +1,7 @@
 @php
     $localeLabel = $locales[$locale] ?? __('ops.locale.switcher_label');
     $localeCode = strtoupper(str_replace('_', '-', $locale));
+    $returnUrl = request()->fullUrl();
 @endphp
 
 <div class="ops-topbar-chip ops-topbar-chip--locale">
@@ -35,7 +36,11 @@
         <x-filament::dropdown.list>
             @foreach ($locales as $key => $label)
                 <x-filament::dropdown.list.item
-                    wire:click="setLocale('{{ $key }}', @js(request()->fullUrl()))"
+                    :wire:click="sprintf(
+                        'setLocale(%s, %s)',
+                        \Illuminate\Support\Js::from($key),
+                        \Illuminate\Support\Js::from($returnUrl),
+                    )"
                     :disabled="$locale === $key"
                 >
                     {{ $label }}
