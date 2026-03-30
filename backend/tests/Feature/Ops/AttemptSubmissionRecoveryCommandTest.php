@@ -108,6 +108,9 @@ final class AttemptSubmissionRecoveryCommandTest extends TestCase
             'attempt_id' => $missingResultAttemptId,
         ]);
 
+        $submittedWithoutSubmissionAttemptId = (string) Str::uuid();
+        $this->createAttempt($submittedWithoutSubmissionAttemptId, 'anon-missing-submission');
+
         $this->createAttempt($failedProjectionAttemptId, 'anon-failed');
         $this->createSubmission($failedProjectionAttemptId, 'anon-failed', 'failed', 2, [
             'ok' => false,
@@ -145,11 +148,12 @@ final class AttemptSubmissionRecoveryCommandTest extends TestCase
 
         $payload = json_decode(trim((string) Artisan::output()), true);
         $this->assertIsArray($payload);
-        $this->assertSame(5, (int) data_get($payload, 'summary.finding_total'));
+        $this->assertSame(6, (int) data_get($payload, 'summary.finding_total'));
         $this->assertSame(0, (int) data_get($payload, 'summary.repair_total'));
         $this->assertSame(1, (int) data_get($payload, 'summary.by_issue_code.submission_stuck_pending'));
         $this->assertSame(1, (int) data_get($payload, 'summary.by_issue_code.projection_stale_against_pending_submission'));
         $this->assertSame(1, (int) data_get($payload, 'summary.by_issue_code.submission_succeeded_result_missing'));
+        $this->assertSame(1, (int) data_get($payload, 'summary.by_issue_code.submission_missing_for_submitted_attempt'));
         $this->assertSame(1, (int) data_get($payload, 'summary.by_issue_code.projection_stale_against_failed_submission'));
         $this->assertSame(1, (int) data_get($payload, 'summary.by_issue_code.projection_missing_after_result'));
     }
@@ -233,5 +237,26 @@ final class AttemptSubmissionRecoveryCommandTest extends TestCase
             return $request->url() === 'https://alerts.example.test/ops'
                 && str_contains((string) $request->body(), 'ops:attempt-submission-recovery');
         });
+    }
+
+    public function test_strict_exact_attempt_diagnosis_fails_when_chain_is_absent(): void
+    {
+        $missingAttemptId = 'missing-attempt-demo';
+
+        $exitCode = Artisan::call('ops:attempt-submission-recovery', [
+            '--json' => 1,
+            '--strict' => 1,
+            '--alert' => 0,
+            '--attempt-id' => $missingAttemptId,
+        ]);
+
+        $this->assertSame(1, $exitCode);
+
+        $payload = json_decode(trim((string) Artisan::output()), true);
+        $this->assertIsArray($payload);
+        $this->assertSame($missingAttemptId, data_get($payload, 'scope.attempt_id'));
+        $this->assertSame(1, (int) data_get($payload, 'summary.finding_total'));
+        $this->assertSame(1, (int) data_get($payload, 'summary.by_issue_code.attempt_chain_absent'));
+        $this->assertFalse((bool) ($payload['pass'] ?? true));
     }
 }
