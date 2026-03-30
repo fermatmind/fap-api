@@ -21,7 +21,10 @@ class SitemapXmlTest extends TestCase
 
     public function test_sitemap_xml_is_cached_and_filtered(): void
     {
-        config(['services.seo.tests_url_prefix' => 'https://fermatmind.com/tests/']);
+        config([
+            'services.seo.public_sitemap_authority' => 'backend',
+            'services.seo.tests_url_prefix' => 'https://fermatmind.com/tests/',
+        ]);
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);
 
         $nowA = Carbon::create(2026, 1, 30, 10, 0, 0);
@@ -511,6 +514,13 @@ class SitemapXmlTest extends TestCase
         $second->assertHeader('ETag', $etag);
         $second->assertHeaderMissing('Set-Cookie');
         $this->assertSame('', (string) $second->getContent());
+    }
+
+    public function test_sitemap_xml_returns_404_when_frontend_is_public_authority(): void
+    {
+        config(['services.seo.public_sitemap_authority' => 'frontend']);
+
+        $this->get('/sitemap.xml')->assertNotFound();
     }
 
     /**
