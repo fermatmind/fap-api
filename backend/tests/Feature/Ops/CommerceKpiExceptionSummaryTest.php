@@ -73,12 +73,51 @@ final class CommerceKpiExceptionSummaryTest extends TestCase
         }
 
         $this->assertContains('Pending unresolved', $labels);
-        $this->assertContains('Paid no grant', $labels);
-        $this->assertContains('Compensated recently', $labels);
+        $this->assertContains('Paid without grant', $labels);
+        $this->assertContains('Compensated today', $labels);
         $this->assertSame('2', $valuesByLabel[__('ops.widgets.paid_orders_today')] ?? null);
         $this->assertSame('2', $valuesByLabel['Pending unresolved'] ?? null);
-        $this->assertSame('1', $valuesByLabel['Paid no grant'] ?? null);
-        $this->assertSame('1', $valuesByLabel['Compensated recently'] ?? null);
+        $this->assertSame('1', $valuesByLabel['Paid without grant'] ?? null);
+        $this->assertSame('1', $valuesByLabel['Compensated today'] ?? null);
+    }
+
+    public function test_commerce_kpi_widget_includes_public_realm_orders_in_selected_org_summary(): void
+    {
+        $orgId = 75;
+
+        $this->seedCommerceOpsChain($orgId, 'ord_tenant_paid_today_ops', [
+            'payment_state' => 'paid',
+            'grant_state' => 'granted',
+            'status' => 'paid',
+            'paid_at' => now()->subMinutes(12),
+        ]);
+
+        $this->seedCommerceOpsChain(0, 'ord_public_paid_today_ops', [
+            'payment_state' => 'paid',
+            'grant_state' => 'granted',
+            'status' => 'paid',
+            'paid_at' => now()->subMinutes(9),
+            'payment_event_status' => 'failed',
+            'payment_event_handle_status' => 'failed',
+            'signature_ok' => 0,
+        ]);
+
+        $context = app(OrgContext::class);
+        $context->set($orgId, null, null, null, OrgContext::KIND_TENANT);
+        app()->instance(OrgContext::class, $context);
+
+        $widget = app(CommerceKpiWidget::class);
+        $method = new ReflectionMethod($widget, 'getStats');
+        $method->setAccessible(true);
+        $stats = $method->invoke($widget);
+
+        $valuesByLabel = [];
+        foreach ($stats as $stat) {
+            $valuesByLabel[(string) $stat->getLabel()] = (string) $stat->getValue();
+        }
+
+        $this->assertSame('2', $valuesByLabel[__('ops.widgets.paid_orders_today')] ?? null);
+        $this->assertSame('1', $valuesByLabel[__('ops.widgets.webhook_failures')] ?? null);
     }
 
     public function test_commerce_kpi_widget_uses_placeholder_when_no_org_is_selected(): void
@@ -101,6 +140,6 @@ final class CommerceKpiExceptionSummaryTest extends TestCase
             $this->assertNotSame('0', (string) $stat->getValue());
         }
 
-        $this->assertSame(__('ops.widgets.no_org_selected'), (string) $stats[1]->getDescription());
+        $this->assertSame(__('ops.widgets.select_org_to_view_metrics'), (string) $stats[1]->getDescription());
     }
 }
