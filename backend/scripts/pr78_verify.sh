@@ -25,6 +25,7 @@ SUMMARY_TXT="${RUN_DIR}/summary.txt"
 DIFF_JSON="${RUN_DIR}/diff.json"
 DIFF_TXT="${RUN_DIR}/diff.txt"
 PREV_SUMMARY_JSON="${LATEST_DIR}/summary.json"
+IGNORE_JSON="${SCRIPT_DIR}/pr78_audit_ignores.json"
 
 mkdir -p "${RUN_DIR}" "${WEEKLY_DIR}" "${LATEST_DIR}"
 cd "${BACKEND_DIR}"
@@ -58,21 +59,73 @@ if [[ ! -s "${AUDIT_JSON}" ]]; then
   fail "composer audit did not produce JSON output after retries"
 fi
 
-AUDIT_JSON_PATH="${AUDIT_JSON}" NORMALIZED_JSON_PATH="${NORMALIZED_JSON}" SUMMARY_JSON_PATH="${SUMMARY_JSON}" php <<'PHP'
+AUDIT_JSON_PATH="${AUDIT_JSON}" NORMALIZED_JSON_PATH="${NORMALIZED_JSON}" SUMMARY_JSON_PATH="${SUMMARY_JSON}" IGNORE_JSON_PATH="${IGNORE_JSON}" LOCK_PATH="${BACKEND_DIR}/composer.lock" php <<'PHP'
 <?php
 declare(strict_types=1);
 
 $auditJsonPath = (string) getenv('AUDIT_JSON_PATH');
 $normalizedPath = (string) getenv('NORMALIZED_JSON_PATH');
 $summaryPath = (string) getenv('SUMMARY_JSON_PATH');
+$ignoreJsonPath = (string) getenv('IGNORE_JSON_PATH');
+$lockPath = (string) getenv('LOCK_PATH');
 $payload = json_decode((string) file_get_contents($auditJsonPath), true);
 if (!is_array($payload)) {
     fwrite(STDERR, "[PR78][VERIFY][FAIL] invalid composer audit JSON payload\n");
     exit(2);
 }
 
+$ignorePayload = json_decode((string) file_get_contents($ignoreJsonPath), true);
+if (!is_array($ignorePayload)) {
+    fwrite(STDERR, "[PR78][VERIFY][FAIL] invalid pr78 audit ignore list\n");
+    exit(2);
+}
+
+$lockPayload = json_decode((string) file_get_contents($lockPath), true);
+if (!is_array($lockPayload)) {
+    fwrite(STDERR, "[PR78][VERIFY][FAIL] invalid composer.lock payload\n");
+    exit(2);
+}
+
+$lockedVersions = [];
+foreach ($lockPayload['packages'] ?? [] as $package) {
+    if (!is_array($package)) {
+        continue;
+    }
+
+    $name = trim((string) ($package['name'] ?? ''));
+    if ($name === '') {
+        continue;
+    }
+
+    $lockedVersions[$name] = trim((string) ($package['version'] ?? ''));
+}
+
+$ignoreIndex = [];
+foreach ($ignorePayload as $row) {
+    if (!is_array($row)) {
+        continue;
+    }
+
+    $package = trim((string) ($row['package'] ?? ''));
+    $advisoryId = trim((string) ($row['advisory_id'] ?? ''));
+    $lockedVersion = trim((string) ($row['locked_version'] ?? ''));
+    if ($package === '' || $advisoryId === '' || $lockedVersion === '') {
+        continue;
+    }
+
+    $ignoreIndex[$package.'|'.$advisoryId] = [
+        'package' => $package,
+        'advisory_id' => $advisoryId,
+        'locked_version' => $lockedVersion,
+        'reason' => trim((string) ($row['reason'] ?? '')),
+        'reviewed_at' => trim((string) ($row['reviewed_at'] ?? '')),
+        'expires_at' => trim((string) ($row['expires_at'] ?? '')),
+    ];
+}
+
 $rawAdvisories = $payload['advisories'] ?? [];
 $normalized = [];
+$ignored = [];
 
 $appendRow = static function (array $row, string $defaultPackage) use (&$normalized): void {
     $severity = strtolower(trim((string) ($row['severity'] ?? 'unknown')));
@@ -92,10 +145,77 @@ $appendRow = static function (array $row, string $defaultPackage) use (&$normali
     ];
 };
 
+$appendIgnored = static function (array $normalizedRow, array $ignoreRule, string $lockedVersion) use (&$ignored): void {
+    $ignored[] = $normalizedRow + [
+        'ignored' => true,
+        'ignore_reason' => $ignoreRule['reason'],
+        'ignore_reviewed_at' => $ignoreRule['reviewed_at'],
+        'ignore_expires_at' => $ignoreRule['expires_at'],
+        'locked_version' => $lockedVersion,
+    ];
+};
+
+$normalizeRow = static function (array $row, string $defaultPackage): array {
+    $severity = strtolower(trim((string) ($row['severity'] ?? 'unknown')));
+    if ($severity === '') {
+        $severity = 'unknown';
+    }
+
+    return [
+        'package' => (string) ($row['packageName'] ?? $row['package'] ?? $defaultPackage),
+        'advisory_id' => (string) ($row['advisoryId'] ?? $row['advisory_id'] ?? ''),
+        'cve' => (string) ($row['cve'] ?? ''),
+        'title' => (string) ($row['title'] ?? ''),
+        'link' => (string) ($row['link'] ?? ''),
+        'severity' => $severity,
+        'affected_versions' => (string) ($row['affectedVersions'] ?? $row['affected_versions'] ?? ''),
+        'reported_at' => (string) ($row['reportedAt'] ?? $row['reported_at'] ?? ''),
+    ];
+};
+
+$shouldIgnore = static function (array $normalizedRow) use ($ignoreIndex, $lockedVersions): ?array {
+    $package = trim((string) ($normalizedRow['package'] ?? ''));
+    $advisoryId = trim((string) ($normalizedRow['advisory_id'] ?? ''));
+    if ($package === '' || $advisoryId === '') {
+        return null;
+    }
+
+    $rule = $ignoreIndex[$package.'|'.$advisoryId] ?? null;
+    if (!is_array($rule)) {
+        return null;
+    }
+
+    $lockedVersion = trim((string) ($lockedVersions[$package] ?? ''));
+    if ($lockedVersion === '' || $lockedVersion !== $rule['locked_version']) {
+        return null;
+    }
+
+    $expiresAt = trim((string) ($rule['expires_at'] ?? ''));
+    if ($expiresAt !== '') {
+        try {
+            $expiresDate = new DateTimeImmutable($expiresAt.' 23:59:59', new DateTimeZone('UTC'));
+            if ($expiresDate < new DateTimeImmutable('now', new DateTimeZone('UTC'))) {
+                return null;
+            }
+        } catch (Throwable) {
+            return null;
+        }
+    }
+
+    return $rule + ['locked_version' => $lockedVersion];
+};
+
 if (is_array($rawAdvisories)) {
     if (array_is_list($rawAdvisories)) {
         foreach ($rawAdvisories as $row) {
             if (is_array($row)) {
+                $normalizedRow = $normalizeRow($row, 'unknown-package');
+                $ignoreRule = $shouldIgnore($normalizedRow);
+                if ($ignoreRule !== null) {
+                    $appendIgnored($normalizedRow, $ignoreRule, (string) $ignoreRule['locked_version']);
+                    continue;
+                }
+
                 $appendRow($row, 'unknown-package');
             }
         }
@@ -106,6 +226,13 @@ if (is_array($rawAdvisories)) {
             }
             foreach ($rows as $row) {
                 if (is_array($row)) {
+                    $normalizedRow = $normalizeRow($row, (string) $package);
+                    $ignoreRule = $shouldIgnore($normalizedRow);
+                    if ($ignoreRule !== null) {
+                        $appendIgnored($normalizedRow, $ignoreRule, (string) $ignoreRule['locked_version']);
+                        continue;
+                    }
+
                     $appendRow($row, (string) $package);
                 }
             }
@@ -115,6 +242,14 @@ if (is_array($rawAdvisories)) {
 
 usort(
     $normalized,
+    static function (array $a, array $b): int {
+        return [$a['package'], $a['severity'], $a['advisory_id'], $a['cve'], $a['title']]
+            <=> [$b['package'], $b['severity'], $b['advisory_id'], $b['cve'], $b['title']];
+    }
+);
+
+usort(
+    $ignored,
     static function (array $a, array $b): int {
         return [$a['package'], $a['severity'], $a['advisory_id'], $a['cve'], $a['title']]
             <=> [$b['package'], $b['severity'], $b['advisory_id'], $b['cve'], $b['title']];
@@ -142,10 +277,13 @@ $abandonedCount = is_array($abandoned) ? count($abandoned) : 0;
 
 $summary = [
     'generated_at_utc' => gmdate('c'),
+    'raw_total' => count($normalized) + count($ignored),
     'total' => count($normalized),
     'high_or_critical' => $severityCounts['critical'] + $severityCounts['high'],
     'by_severity' => $severityCounts,
     'abandoned_count' => $abandonedCount,
+    'ignored_count' => count($ignored),
+    'ignored' => $ignored,
     'advisories' => $normalized,
 ];
 
@@ -307,20 +445,24 @@ cp "${DIFF_TXT}" "${LATEST_DIR}/diff.txt"
 TOTAL_ADVISORIES="$(php -r '$j=json_decode(file_get_contents($argv[1]), true); echo (string) ((int)($j["total"] ?? 0));' "${SUMMARY_JSON}")"
 HIGH_OR_CRITICAL="$(php -r '$j=json_decode(file_get_contents($argv[1]), true); echo (string) ((int)($j["high_or_critical"] ?? 0));' "${SUMMARY_JSON}")"
 ABANDONED_COUNT="$(php -r '$j=json_decode(file_get_contents($argv[1]), true); echo (string) ((int)($j["abandoned_count"] ?? 0));' "${SUMMARY_JSON}")"
+IGNORED_COUNT="$(php -r '$j=json_decode(file_get_contents($argv[1]), true); echo (string) ((int)($j["ignored_count"] ?? 0));' "${SUMMARY_JSON}")"
+RAW_TOTAL_ADVISORIES="$(php -r '$j=json_decode(file_get_contents($argv[1]), true); echo (string) ((int)($j["raw_total"] ?? 0));' "${SUMMARY_JSON}")"
 
 {
   echo "run_ts=${RUN_TS}"
   echo "week=${WEEK_TAG}"
   echo "audit_exit_code=${AUDIT_EXIT}"
+  echo "raw_total_advisories=${RAW_TOTAL_ADVISORIES}"
   echo "total_advisories=${TOTAL_ADVISORIES}"
   echo "high_or_critical=${HIGH_OR_CRITICAL}"
   echo "abandoned_count=${ABANDONED_COUNT}"
+  echo "ignored_count=${IGNORED_COUNT}"
   echo "artifact_run_dir=${RUN_DIR}"
   echo "artifact_weekly_dir=${WEEKLY_DIR}"
   echo "artifact_latest_dir=${LATEST_DIR}"
 } > "${SUMMARY_TXT}"
 
-echo "[PR78][VERIFY] total_advisories=${TOTAL_ADVISORIES} high_or_critical=${HIGH_OR_CRITICAL} abandoned=${ABANDONED_COUNT}"
+echo "[PR78][VERIFY] total_advisories=${TOTAL_ADVISORIES} high_or_critical=${HIGH_OR_CRITICAL} abandoned=${ABANDONED_COUNT} ignored=${IGNORED_COUNT}"
 echo "[PR78][VERIFY] artifacts=${RUN_DIR}"
 
 if [[ "${HIGH_OR_CRITICAL}" -gt 0 ]]; then
