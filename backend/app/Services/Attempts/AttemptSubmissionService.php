@@ -92,7 +92,32 @@ final class AttemptSubmissionService
                 ->first();
 
             if ($existing !== null) {
-                return ['row' => $existing, 'created' => false];
+                $existingState = strtolower(trim((string) ($existing->state ?? 'pending')));
+                if (in_array($existingState, ['pending', 'running', 'succeeded'], true)) {
+                    return ['row' => $existing, 'created' => false, 'reused' => true];
+                }
+
+                DB::table('attempt_submissions')
+                    ->where('id', (string) $existing->id)
+                    ->update([
+                        'actor_user_id' => $actorUserId !== null ? (int) $actorUserId : null,
+                        'actor_anon_id' => $actorAnonId,
+                        'mode' => 'async',
+                        'state' => 'pending',
+                        'error_code' => null,
+                        'error_message' => null,
+                        'request_payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                        'response_payload_json' => null,
+                        'started_at' => null,
+                        'finished_at' => null,
+                        'updated_at' => $now,
+                    ]);
+
+                $fresh = DB::table('attempt_submissions')
+                    ->where('id', (string) $existing->id)
+                    ->first();
+
+                return ['row' => $fresh, 'created' => false, 'restarted' => true];
             }
 
             $submissionId = (string) Str::uuid();
@@ -128,7 +153,7 @@ final class AttemptSubmissionService
             throw new ApiProblemException(500, 'INTERNAL_ERROR', 'submission creation failed.');
         }
 
-        if (($submission['created'] ?? false) === true) {
+        if (($submission['created'] ?? false) === true || ($submission['restarted'] ?? false) === true) {
             try {
                 ProcessAttemptSubmissionJob::dispatch((string) $row->id)->afterCommit();
             } catch (\Throwable $e) {
@@ -169,6 +194,23 @@ final class AttemptSubmissionService
             );
         }
 
+        $reused = (bool) ($submission['reused'] ?? false);
+        $restarted = (bool) ($submission['restarted'] ?? false);
+        if ($reused && $ackState === 'succeeded') {
+            $storedResult = data_get($durableAck, 'result');
+            if (is_array($storedResult) && $storedResult !== []) {
+                $storedResult['idempotent'] = true;
+                $storedResult['submission_id'] = $ackSubmissionId;
+                $storedResult['submission_state'] = $ackState;
+                $storedResult['mode'] = 'async';
+
+                return [
+                    'http_status' => 200,
+                    'payload' => $storedResult,
+                ];
+            }
+        }
+
         return [
             'http_status' => 202,
             'payload' => [
@@ -178,6 +220,7 @@ final class AttemptSubmissionService
                 'submission_state' => $ackState,
                 'generating' => in_array($ackState, ['pending', 'running'], true),
                 'mode' => 'async',
+                'idempotent' => $reused && ! $restarted,
             ],
         ];
     }
@@ -296,8 +339,12 @@ final class AttemptSubmissionService
             ->where('org_id', $orgId)
             ->where('attempt_id', $attemptId);
 
+        $role = (string) ($ctx->role() ?? '');
         if ($actorUserId !== null) {
             $query->where('actor_user_id', (int) $actorUserId);
+        } elseif (in_array($role, ['owner', 'admin'], true)) {
+            // Elevated org operators can inspect attempt submission state after the
+            // attempt itself has already been authorized.
         } elseif ($actorAnonId !== null) {
             $query->where('actor_anon_id', $actorAnonId);
         } else {
@@ -666,21 +713,6 @@ final class AttemptSubmissionService
         ?string $actorUserId,
         ?string $actorAnonId
     ): Builder {
-        $query = Attempt::onWriteConnection()
-            ->where('id', $attemptId)
-            ->where('org_id', $ctx->scopedOrgId());
-
-        $actorUserId = $this->normalizeUserId($actorUserId);
-        $actorAnonId = $this->normalizeAnonId($actorAnonId);
-
-        if ($actorUserId !== null) {
-            return $query->where('user_id', $actorUserId);
-        }
-
-        if ($actorAnonId !== null) {
-            return $query->where('anon_id', $actorAnonId);
-        }
-
-        throw new ApiProblemException(401, 'UNAUTHORIZED', 'actor identity missing.');
+        return $this->attemptSubmitService->ownedAttemptQuery($ctx, $attemptId, $actorUserId, $actorAnonId);
     }
 }

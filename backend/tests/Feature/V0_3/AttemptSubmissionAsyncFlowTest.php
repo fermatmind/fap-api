@@ -16,6 +16,20 @@ class AttemptSubmissionAsyncFlowTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * @return array<int,array<string,mixed>>
+     */
+    private function demoAnswers(): array
+    {
+        return [
+            ['question_id' => 'SS-001', 'code' => '5'],
+            ['question_id' => 'SS-002', 'code' => '4'],
+            ['question_id' => 'SS-003', 'code' => '3'],
+            ['question_id' => 'SS-004', 'code' => '2'],
+            ['question_id' => 'SS-005', 'code' => '1'],
+        ];
+    }
+
     private function issueAnonToken(string $anonId): string
     {
         $token = 'fm_'.(string) Str::uuid();
@@ -66,13 +80,7 @@ class AttemptSubmissionAsyncFlowTest extends TestCase
             'Authorization' => 'Bearer '.$token,
         ])->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
-            'answers' => [
-                ['question_id' => 'SS-001', 'code' => '5'],
-                ['question_id' => 'SS-002', 'code' => '4'],
-                ['question_id' => 'SS-003', 'code' => '3'],
-                ['question_id' => 'SS-004', 'code' => '2'],
-                ['question_id' => 'SS-005', 'code' => '1'],
-            ],
+            'answers' => $this->demoAnswers(),
             'duration_ms' => 120000,
         ]);
 
@@ -134,5 +142,187 @@ class AttemptSubmissionAsyncFlowTest extends TestCase
             ],
         ]);
         $this->assertTrue((bool) data_get($status->json(), 'result.ok'));
+    }
+
+    public function test_submit_async_reuses_pending_submission_without_requeueing(): void
+    {
+        config()->set('fap.features.submit_async_v2', true);
+        $this->seedScales();
+
+        $anonId = 'anon_async_submit_pending_reuse';
+        $token = $this->issueAnonToken($anonId);
+
+        $start = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+        ])->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'SIMPLE_SCORE_DEMO',
+            'anon_id' => $anonId,
+        ]);
+        $start->assertStatus(200);
+        $attemptId = (string) $start->json('attempt_id');
+
+        Queue::fake();
+
+        $first = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => $attemptId,
+            'answers' => $this->demoAnswers(),
+            'duration_ms' => 120000,
+        ]);
+
+        $first->assertStatus(202);
+        $submissionId = (string) $first->json('submission_id');
+
+        $replay = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => $attemptId,
+            'answers' => $this->demoAnswers(),
+            'duration_ms' => 120000,
+        ]);
+
+        $replay->assertStatus(202);
+        $replay->assertJson([
+            'ok' => true,
+            'attempt_id' => $attemptId,
+            'submission_id' => $submissionId,
+            'submission_state' => 'pending',
+            'generating' => true,
+            'mode' => 'async',
+            'idempotent' => true,
+        ]);
+
+        Queue::assertPushed(ProcessAttemptSubmissionJob::class, 1);
+    }
+
+    public function test_submit_async_retries_failed_submission_with_same_dedupe_key(): void
+    {
+        config()->set('fap.features.submit_async_v2', true);
+        $this->seedScales();
+
+        $anonId = 'anon_async_submit_failed_retry';
+        $token = $this->issueAnonToken($anonId);
+
+        $start = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+        ])->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'SIMPLE_SCORE_DEMO',
+            'anon_id' => $anonId,
+        ]);
+        $start->assertStatus(200);
+        $attemptId = (string) $start->json('attempt_id');
+
+        Queue::fake();
+
+        $first = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => $attemptId,
+            'answers' => $this->demoAnswers(),
+            'duration_ms' => 120000,
+        ]);
+
+        $first->assertStatus(202);
+        $submissionId = (string) $first->json('submission_id');
+
+        DB::table('attempt_submissions')
+            ->where('id', $submissionId)
+            ->update([
+                'state' => 'failed',
+                'error_code' => 'SUBMISSION_QUEUE_DISPATCH_FAILED',
+                'error_message' => 'dispatch failed',
+                'finished_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+        $retry = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => $attemptId,
+            'answers' => $this->demoAnswers(),
+            'duration_ms' => 120000,
+        ]);
+
+        $retry->assertStatus(202);
+        $retry->assertJson([
+            'ok' => true,
+            'attempt_id' => $attemptId,
+            'submission_id' => $submissionId,
+            'submission_state' => 'pending',
+            'generating' => true,
+            'mode' => 'async',
+            'idempotent' => false,
+        ]);
+
+        $reset = DB::table('attempt_submissions')->where('id', $submissionId)->first();
+        $this->assertNotNull($reset);
+        $this->assertSame('pending', (string) ($reset->state ?? ''));
+        $this->assertNull($reset->error_code ?? null);
+        $this->assertNull($reset->error_message ?? null);
+        $this->assertNull($reset->finished_at ?? null);
+
+        Queue::assertPushed(ProcessAttemptSubmissionJob::class, 2);
+    }
+
+    public function test_submit_async_replays_stored_result_when_submission_already_succeeded(): void
+    {
+        config()->set('fap.features.submit_async_v2', true);
+        $this->seedScales();
+
+        $anonId = 'anon_async_submit_succeeded_reuse';
+        $token = $this->issueAnonToken($anonId);
+
+        $start = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+        ])->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'SIMPLE_SCORE_DEMO',
+            'anon_id' => $anonId,
+        ]);
+        $start->assertStatus(200);
+        $attemptId = (string) $start->json('attempt_id');
+
+        Queue::fake();
+
+        $first = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => $attemptId,
+            'answers' => $this->demoAnswers(),
+            'duration_ms' => 120000,
+        ]);
+
+        $first->assertStatus(202);
+        $submissionId = (string) $first->json('submission_id');
+
+        $job = new ProcessAttemptSubmissionJob($submissionId);
+        $job->handle(app(AttemptSubmissionService::class));
+
+        $replay = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => $attemptId,
+            'answers' => $this->demoAnswers(),
+            'duration_ms' => 120000,
+        ]);
+
+        $replay->assertStatus(200);
+        $replay->assertJson([
+            'ok' => true,
+            'attempt_id' => $attemptId,
+            'idempotent' => true,
+            'submission_id' => $submissionId,
+            'submission_state' => 'succeeded',
+            'mode' => 'async',
+        ]);
+
+        Queue::assertPushed(ProcessAttemptSubmissionJob::class, 1);
+        $this->assertSame(1, DB::table('results')->where('attempt_id', $attemptId)->count());
     }
 }
