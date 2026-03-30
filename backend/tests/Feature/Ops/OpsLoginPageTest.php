@@ -23,10 +23,10 @@ final class OpsLoginPageTest extends TestCase
             ->assertSee('autocomplete="current-password"', false)
             ->assertSee("\$wire.set('data.email', emailInput.value)", false)
             ->assertSee("\$wire.set('data.password', passwordInput.value)", false)
-            ->assertSee('window.__opsLoginAutoRefreshHookInstalled', false)
-            ->assertSee("const autoRefreshStorageKey = 'ops-login-livewire-page-expired-at'", false)
+            ->assertSee('window.__opsLivewirePageExpiredRecoveryHookInstalled', false)
+            ->assertSee("const autoRefreshStorageKeyPrefix = 'ops-livewire-page-expired-at:'", false)
             ->assertSee("window.Livewire?.hook('request'", false)
-            ->assertSee('if (status !== 419 || window.location.pathname !== \'/ops/login\')', false)
+            ->assertSee("if (status !== 419 || ! pathname.startsWith('/ops'))", false)
             ->assertSee('window.location.reload()', false);
     }
 }
