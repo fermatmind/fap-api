@@ -203,6 +203,24 @@ final class AttemptPublicReportReadHotfixTest extends TestCase
         $this->assertStringNotContainsString('No query results for model', (string) $response->getContent());
     }
 
+    public function test_public_mbti_report_reads_public_result_without_actor_when_attempt_and_result_exist(): void
+    {
+        $this->seedScales();
+        config()->set('fap.features.report_snapshot_strict_v2', false);
+
+        $attemptId = (string) Str::uuid();
+        $this->createAttempt($attemptId, 'MBTI', 'anon_mbti_artifact_owner');
+        $this->createResult($attemptId, 'MBTI');
+
+        $response = $this->getJson("/api/v0.3/attempts/{$attemptId}/report");
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('scale_code', 'MBTI');
+        $response->assertJsonPath('meta.scale_code', 'MBTI');
+        $this->assertStringNotContainsString('ATTEMPT_NOT_FOUND', (string) $response->getContent());
+    }
+
     public function test_sds20_report_still_requires_existing_ownership_chain(): void
     {
         $this->seedScales();
