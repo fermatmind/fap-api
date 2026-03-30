@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Concerns\HasOrgScope;
+use App\Services\Cms\SeoSchemaPolicyService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -42,5 +43,19 @@ class ArticleSeoMeta extends Model
     public function article(): BelongsTo
     {
         return $this->belongsTo(Article::class, 'article_id', 'id');
+    }
+
+    public function setSchemaJsonAttribute(mixed $value): void
+    {
+        if (! is_array($value)) {
+            $this->attributes['schema_json'] = null;
+
+            return;
+        }
+
+        $sanitized = SeoSchemaPolicyService::sanitizeStoredOverrides($value);
+        $this->attributes['schema_json'] = $sanitized !== null
+            ? json_encode($sanitized, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+            : null;
     }
 }

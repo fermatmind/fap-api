@@ -113,30 +113,29 @@ final class ArticleSeoService
         $locale = $this->normalizeLocale((string) $article->locale);
         $seo = $this->resolveSeoMeta($article, $locale);
         $canonical = $this->buildCanonicalUrl((string) $article->slug, $locale);
-        $descriptionSource = (string) ($article->excerpt ?? $article->content_md);
+        $visibleTitle = trim((string) $article->title);
+        $visibleDescription = Str::limit(
+            $this->normalizeWhitespace(strip_tags((string) ($article->excerpt ?? $article->content_md))),
+            160
+        );
 
-        $jsonLd = [
-            '@context' => 'https://schema.org',
-            '@type' => 'Article',
-            'headline' => $seo?->seo_title ?? $article->title,
-            'description' => $seo?->seo_description
-                ?? Str::limit($this->normalizeWhitespace(strip_tags($descriptionSource)), 160),
-            'datePublished' => optional($article->published_at)->toAtomString(),
-            'dateModified' => optional($article->updated_at)->toAtomString(),
-            'author' => [
-                '@type' => 'Organization',
-                'name' => 'FermatMind',
-            ],
-            '@id' => $canonical,
-            'url' => $canonical,
-            'mainEntityOfPage' => $canonical,
-        ];
-
-        if ($seo instanceof ArticleSeoMeta && is_array($seo->schema_json)) {
-            $jsonLd = array_replace_recursive($jsonLd, $seo->schema_json);
-        }
-
-        return $this->normalizeJsonLdUrls($jsonLd, $canonical, (string) $article->slug);
+        return SeoSchemaPolicyService::finalize($article, [
+            'headline' => $visibleTitle,
+            'description' => $visibleDescription,
+            'image' => $seo?->og_image_url,
+        ], [
+            'page_type' => ContentGovernanceService::PAGE_TYPE_GUIDE,
+            'title' => $visibleTitle,
+            'description' => $visibleDescription,
+            'canonical' => $canonical,
+            'locale' => $locale,
+            'image' => $seo?->og_image_url,
+            'published_at' => $article->published_at,
+            'updated_at' => $article->updated_at,
+            'overrides' => $seo instanceof ArticleSeoMeta && is_array($seo->schema_json)
+                ? $this->normalizeJsonLdUrls($seo->schema_json, $canonical, (string) $article->slug)
+                : [],
+        ]);
     }
 
     public function buildCanonicalUrl(string $slug, string $locale): ?string

@@ -282,7 +282,7 @@ final class CareerGuidePublicApiTest extends TestCase
             ->assertJsonPath('error_code', 'NOT_FOUND');
     }
 
-    public function test_seo_endpoint_returns_localized_meta_real_alternates_and_webpage_jsonld(): void
+    public function test_seo_endpoint_returns_localized_meta_real_alternates_and_article_jsonld(): void
     {
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);
 
@@ -336,15 +336,17 @@ final class CareerGuidePublicApiTest extends TestCase
                 'meta.alternates.zh-CN',
                 'https://staging.fermatmind.com/zh/career/guides/from-mbti-to-job-fit'
             )
-            ->assertJsonPath('jsonld.@type', 'WebPage')
+            ->assertJsonPath('jsonld.@type', 'Article')
             ->assertJsonPath(
                 'jsonld.@id',
-                'https://staging.fermatmind.com/en/career/guides/from-mbti-to-job-fit#webpage'
+                'https://staging.fermatmind.com/en/career/guides/from-mbti-to-job-fit#article'
             )
             ->assertJsonPath(
                 'jsonld.mainEntityOfPage',
                 'https://staging.fermatmind.com/en/career/guides/from-mbti-to-job-fit'
-            );
+            )
+            ->assertJsonPath('jsonld.publisher.@type', 'Organization')
+            ->assertJsonPath('jsonld.publisher.name', 'FermatMind');
 
         $this->assertStringNotContainsString(
             'https://api.staging.fermatmind.com/career-guides/from-mbti-to-job-fit',

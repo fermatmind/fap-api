@@ -334,7 +334,7 @@ class SitemapGeneratorTest extends TestCase
             data_get($seoService->buildMeta($eligibleZh, $eligibleZhVariant), 'canonical'),
             data_get($seoService->buildJsonLd($eligibleZh, $eligibleZhVariant), 'mainEntityOfPage')
         );
-        $this->assertSame('AboutPage', data_get($seoService->buildJsonLd($eligibleEn, $eligibleEnVariant), '@type'));
+        $this->assertSame('ItemPage', data_get($seoService->buildJsonLd($eligibleEn, $eligibleEnVariant), '@type'));
         $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleEn, $eligibleEnVariant), 'canonical'), $xml);
         $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleZh, $eligibleZhVariant), 'canonical'), $xml);
     }
@@ -522,7 +522,7 @@ class SitemapGeneratorTest extends TestCase
             data_get($seoService->buildMeta($eligibleZh, 'zh-CN'), 'canonical'),
             data_get($seoService->buildJsonLd($eligibleZh, 'zh-CN'), 'mainEntityOfPage')
         );
-        $this->assertSame('Occupation', data_get($seoService->buildJsonLd($eligibleEn, 'en'), '@type'));
+        $this->assertSame('ItemPage', data_get($seoService->buildJsonLd($eligibleEn, 'en'), '@type'));
         $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleEn, 'en'), 'canonical'), $xml);
         $this->assertStringContainsString(data_get($seoService->buildMeta($eligibleZh, 'zh-CN'), 'canonical'), $xml);
     }

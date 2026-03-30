@@ -67,28 +67,38 @@ final class CareerJobSeoService
     {
         $resolvedLocale = $this->normalizeLocale($locale);
         $meta = $this->buildMeta($job, $resolvedLocale);
-
-        $jsonLd = [
-            '@context' => 'https://schema.org',
-            '@type' => 'Occupation',
-            'name' => (string) $job->title,
-            'description' => $meta['description'],
-            'inLanguage' => $resolvedLocale,
-            'url' => $meta['canonical'],
-            'mainEntityOfPage' => $meta['canonical'],
-        ];
+        $visibleTitle = trim((string) $job->title);
+        $visibleDescription = $this->fallbackText($job->excerpt, $job->subtitle, $job->title) ?? '';
 
         $skills = $this->flattenSkills($job->skills_json);
+        $mainEntity = [
+            '@type' => 'DefinedTerm',
+            'name' => $visibleTitle,
+            'description' => $visibleDescription,
+            'identifier' => trim((string) ($job->job_code ?: $job->slug)),
+        ];
         if ($skills !== []) {
-            $jsonLd['skills'] = $skills;
+            $mainEntity['skills'] = $skills;
         }
 
         $seoMeta = $this->resolveSeoMeta($job);
-        if ($seoMeta instanceof CareerJobSeoMeta && is_array($seoMeta->jsonld_overrides_json)) {
-            return array_replace_recursive($jsonLd, $seoMeta->jsonld_overrides_json);
-        }
 
-        return $jsonLd;
+        return SeoSchemaPolicyService::finalize($job, [
+            'name' => $visibleTitle,
+            'description' => $visibleDescription,
+            'mainEntity' => $mainEntity,
+        ], [
+            'page_type' => ContentGovernanceService::PAGE_TYPE_ENTITY,
+            'title' => $visibleTitle,
+            'description' => $visibleDescription,
+            'canonical' => $meta['canonical'] ?? null,
+            'locale' => $resolvedLocale,
+            'updated_at' => $job->updated_at,
+            'main_entity' => $mainEntity,
+            'overrides' => $seoMeta instanceof CareerJobSeoMeta && is_array($seoMeta->jsonld_overrides_json)
+                ? SeoSchemaPolicyService::sanitizeStoredOverrides($seoMeta->jsonld_overrides_json) ?? []
+                : [],
+        ]);
     }
 
     public function buildCanonicalUrl(CareerJob $job, string $locale): ?string

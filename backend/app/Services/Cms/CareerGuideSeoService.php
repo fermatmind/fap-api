@@ -102,23 +102,26 @@ final class CareerGuideSeoService
         $seoMeta = $this->resolveSeoMeta($guide);
         $canonical = $this->buildCanonicalUrl($guide);
         $payload = $this->buildSeoPayload($guide);
+        $visibleTitle = trim((string) $guide->title);
+        $visibleDescription = $this->fallbackText($guide->excerpt, $guide->title) ?? '';
 
-        $jsonLd = [
-            '@context' => 'https://schema.org',
-            '@type' => 'WebPage',
-            '@id' => $canonical !== null ? $canonical.'#webpage' : null,
-            'url' => $canonical,
-            'name' => $payload['title'],
-            'description' => $payload['description'],
-            'inLanguage' => $this->normalizeLocale((string) $guide->locale),
-            'mainEntityOfPage' => $canonical,
-        ];
-
-        if ($seoMeta instanceof CareerGuideSeoMeta && is_array($seoMeta->jsonld_overrides_json)) {
-            $jsonLd = array_replace_recursive($jsonLd, $seoMeta->jsonld_overrides_json);
-        }
-
-        return $this->normalizeJsonLdUrls($jsonLd, $canonical, $seoMeta?->canonical_url);
+        return SeoSchemaPolicyService::finalize($guide, [
+            'headline' => $visibleTitle,
+            'description' => $visibleDescription,
+            'image' => data_get($payload, 'og.image'),
+        ], [
+            'page_type' => ContentGovernanceService::PAGE_TYPE_GUIDE,
+            'title' => $visibleTitle,
+            'description' => $visibleDescription,
+            'canonical' => $canonical,
+            'locale' => $this->normalizeLocale((string) $guide->locale),
+            'image' => data_get($payload, 'og.image'),
+            'published_at' => $guide->published_at,
+            'updated_at' => $guide->updated_at,
+            'overrides' => $seoMeta instanceof CareerGuideSeoMeta && is_array($seoMeta->jsonld_overrides_json)
+                ? $this->normalizeJsonLdUrls($seoMeta->jsonld_overrides_json, $canonical, $seoMeta?->canonical_url)
+                : [],
+        ]);
     }
 
     /**

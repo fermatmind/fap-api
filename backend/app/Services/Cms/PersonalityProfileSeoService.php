@@ -81,27 +81,32 @@ final class PersonalityProfileSeoService
     {
         $projection = $this->personalityProfileService->buildPublicProjection($profile, $variant);
         $meta = $this->buildMeta($profile, $variant);
-        $jsonLd = [
-            '@context' => 'https://schema.org',
-            '@type' => 'AboutPage',
-            'name' => $meta['title'],
-            'description' => $meta['description'],
-            'about' => [
-                '@type' => 'DefinedTerm',
-                'name' => (string) data_get($projection, 'canonical_type_code', $profile->type_code),
-                'inDefinedTermSet' => (string) $profile->scale_code,
-            ],
-            'mainEntityOfPage' => $meta['canonical'],
+        $visibleTitle = trim((string) ($profile->title ?? ''));
+        $visibleDescription = trim((string) ($profile->excerpt ?? $profile->hero_summary_md ?? ''));
+        $mainEntity = [
+            '@type' => 'DefinedTerm',
+            'name' => (string) data_get($projection, 'canonical_type_code', $profile->type_code),
+            'alternateName' => $visibleTitle,
+            'description' => $visibleDescription,
+            'inDefinedTermSet' => (string) $profile->scale_code,
         ];
 
         $overrides = data_get($projection, 'seo.jsonld');
-        if (is_array($overrides) && $overrides !== []) {
-            $jsonLd = array_replace_recursive($jsonLd, $overrides);
-        }
 
-        $jsonLd['mainEntityOfPage'] = $meta['canonical'];
-
-        return $jsonLd;
+        return SeoSchemaPolicyService::finalize($profile, [
+            'name' => $visibleTitle,
+            'description' => $visibleDescription,
+            'mainEntity' => $mainEntity,
+        ], [
+            'page_type' => ContentGovernanceService::PAGE_TYPE_ENTITY,
+            'title' => $visibleTitle,
+            'description' => $visibleDescription,
+            'canonical' => $meta['canonical'] ?? null,
+            'locale' => (string) $profile->locale,
+            'updated_at' => $profile->updated_at,
+            'main_entity' => $mainEntity,
+            'overrides' => is_array($overrides) ? SeoSchemaPolicyService::sanitizeStoredOverrides($overrides) ?? [] : [],
+        ]);
     }
 
     public function buildCanonicalUrl(

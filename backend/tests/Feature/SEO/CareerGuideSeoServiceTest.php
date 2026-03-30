@@ -135,9 +135,9 @@ final class CareerGuideSeoServiceTest extends TestCase
 
         $jsonLd = app(CareerGuideSeoService::class)->buildJsonLd($guide);
 
-        $this->assertSame('WebPage', data_get($jsonLd, '@type'));
+        $this->assertSame('Article', data_get($jsonLd, '@type'));
         $this->assertSame(
-            'https://staging.fermatmind.com/en/career/guides/from-mbti-to-job-fit#webpage',
+            'https://staging.fermatmind.com/en/career/guides/from-mbti-to-job-fit#article',
             data_get($jsonLd, '@id')
         );
         $this->assertSame(

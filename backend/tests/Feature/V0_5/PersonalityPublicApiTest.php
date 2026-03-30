@@ -343,11 +343,12 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('meta.alternates.en', 'https://staging.fermatmind.com/en/personality/intj-a')
             ->assertJsonPath('meta.alternates.zh-CN', 'https://staging.fermatmind.com/zh/personality/intj-a')
             ->assertJsonPath('meta.robots', 'index,follow');
-        self::assertSame('AboutPage', data_get($enResponse->json(), 'jsonld.@type'));
+        self::assertSame('ItemPage', data_get($enResponse->json(), 'jsonld.@type'));
         self::assertSame(
             'https://staging.fermatmind.com/en/personality/intj-a',
             data_get($enResponse->json(), 'jsonld.mainEntityOfPage')
         );
+        self::assertSame('DefinedTerm', data_get($enResponse->json(), 'jsonld.mainEntity.@type'));
 
         $zhResponse = $this->getJson('/api/v0.5/personality/intj-t/seo?locale=zh-CN');
         $zhResponse->assertOk()
@@ -362,6 +363,7 @@ final class PersonalityPublicApiTest extends TestCase
             'https://staging.fermatmind.com/zh/personality/intj-t',
             data_get($zhResponse->json(), 'jsonld.mainEntityOfPage')
         );
+        self::assertSame('DefinedTerm', data_get($zhResponse->json(), 'jsonld.mainEntity.@type'));
     }
 
     public function test_detail_accepts_published_public_variants_after_canonical_cutover(): void

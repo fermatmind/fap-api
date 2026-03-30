@@ -114,8 +114,12 @@ final class ArticlePublicApiTest extends TestCase
             ->assertJsonPath('meta.alternates.en', $canonical)
             ->assertJsonPath('meta.alternates.zh', $zhCanonical)
             ->assertJsonPath('meta.alternates.zh-CN', $zhCanonical)
+            ->assertJsonPath('jsonld.headline', 'MBTI Basics')
+            ->assertJsonPath('jsonld.description', 'Learn the core concepts behind MBTI.')
             ->assertJsonPath('jsonld.url', $canonical)
-            ->assertJsonPath('jsonld.mainEntityOfPage', $canonical.'#webpage');
+            ->assertJsonPath('jsonld.mainEntityOfPage', $canonical)
+            ->assertJsonPath('jsonld.publisher.@type', 'Organization')
+            ->assertJsonPath('jsonld.publisher.name', 'FermatMind');
 
         $this->assertSame($canonical.'#article', data_get($response->json(), 'jsonld.@id'));
         $this->assertStringNotContainsString($legacyCanonical, (string) $response->getContent());

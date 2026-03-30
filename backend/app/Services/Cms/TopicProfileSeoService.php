@@ -65,21 +65,24 @@ final class TopicProfileSeoService
     public function buildJsonLd(TopicProfile $profile, string $locale): array
     {
         $meta = $this->buildMeta($profile, $locale);
-
-        $jsonLd = [
-            '@context' => 'https://schema.org',
-            '@type' => 'CollectionPage',
-            'name' => $meta['title'],
-            'description' => $meta['description'],
-            'mainEntityOfPage' => $meta['canonical'],
-        ];
-
         $seoMeta = $this->resolveSeoMeta($profile);
-        if ($seoMeta instanceof TopicProfileSeoMeta && is_array($seoMeta->jsonld_overrides_json)) {
-            return array_replace_recursive($jsonLd, $seoMeta->jsonld_overrides_json);
-        }
+        $visibleTitle = trim((string) $profile->title);
+        $visibleDescription = trim((string) ($profile->excerpt ?? ''));
 
-        return $jsonLd;
+        return SeoSchemaPolicyService::finalize($profile, [
+            'name' => $visibleTitle,
+            'description' => $visibleDescription,
+        ], [
+            'page_type' => ContentGovernanceService::PAGE_TYPE_HUB,
+            'title' => $visibleTitle,
+            'description' => $visibleDescription,
+            'canonical' => $meta['canonical'] ?? null,
+            'locale' => $this->normalizeLocale($locale),
+            'updated_at' => $profile->updated_at,
+            'overrides' => $seoMeta instanceof TopicProfileSeoMeta && is_array($seoMeta->jsonld_overrides_json)
+                ? SeoSchemaPolicyService::sanitizeStoredOverrides($seoMeta->jsonld_overrides_json) ?? []
+                : [],
+        ]);
     }
 
     public function buildCanonicalUrl(TopicProfile $profile, string $locale): ?string

@@ -10,6 +10,7 @@ use App\Models\PersonalityProfileRevision;
 use App\Models\PersonalityProfileSection;
 use App\Models\PersonalityProfileSeoMeta;
 use App\Services\Cms\PersonalityProfileSeoService;
+use App\Services\Cms\SeoSchemaPolicyService;
 use App\Support\Mbti\MbtiCanonicalSectionRegistry;
 use Filament\Forms\Get;
 use Illuminate\Contracts\Support\Htmlable;
@@ -397,10 +398,10 @@ final class PersonalityWorkspace
                 'twitter_description' => self::normalizeNullableText((string) ($state['twitter_description'] ?? '')),
                 'twitter_image_url' => self::normalizeNullableText((string) ($state['twitter_image_url'] ?? '')),
                 'robots' => self::normalizeNullableText((string) ($state['robots'] ?? '')),
-                'jsonld_overrides_json' => self::decodeJsonText(
+                'jsonld_overrides_json' => SeoSchemaPolicyService::sanitizeStoredOverrides(self::decodeJsonText(
                     $state['jsonld_overrides_json_text'] ?? null,
                     'workspace_seo.jsonld_overrides_json_text',
-                ),
+                )),
             ],
         );
 

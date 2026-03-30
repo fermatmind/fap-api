@@ -10,6 +10,7 @@ use App\Models\TopicProfileEntry;
 use App\Models\TopicProfileRevision;
 use App\Models\TopicProfileSection;
 use App\Models\TopicProfileSeoMeta;
+use App\Services\Cms\SeoSchemaPolicyService;
 use App\Services\Cms\TopicProfileSeoService;
 use Filament\Forms\Get;
 use Illuminate\Contracts\Support\Htmlable;
@@ -449,10 +450,10 @@ final class TopicWorkspace
                 'twitter_description' => self::normalizeNullableText((string) ($state['twitter_description'] ?? '')),
                 'twitter_image_url' => self::normalizeNullableText((string) ($state['twitter_image_url'] ?? '')),
                 'robots' => self::normalizeNullableText((string) ($state['robots'] ?? '')),
-                'jsonld_overrides_json' => self::decodeJsonText(
+                'jsonld_overrides_json' => SeoSchemaPolicyService::sanitizeStoredOverrides(self::decodeJsonText(
                     $state['jsonld_overrides_json_text'] ?? null,
                     'workspace_seo.jsonld_overrides_json_text',
-                ),
+                )),
             ],
         );
 
