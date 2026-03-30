@@ -10,6 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Throwable;
 
 class ProcessAttemptSubmissionJob implements ShouldQueue
 {
@@ -35,5 +36,17 @@ class ProcessAttemptSubmissionJob implements ShouldQueue
     public function handle(AttemptSubmissionService $service): void
     {
         $service->process($this->submissionId);
+    }
+
+    public function failed(Throwable $exception): void
+    {
+        app(AttemptSubmissionService::class)->recordTerminalJobFailure(
+            $this->submissionId,
+            $exception,
+            (int) $this->attempts(),
+            (int) $this->tries,
+            is_string($this->connection) ? $this->connection : null,
+            is_string($this->queue) ? $this->queue : null,
+        );
     }
 }
