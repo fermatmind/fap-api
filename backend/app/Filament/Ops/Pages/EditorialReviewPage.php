@@ -7,6 +7,10 @@ namespace App\Filament\Ops\Pages;
 use App\Filament\Ops\Resources\ArticleResource;
 use App\Filament\Ops\Resources\CareerGuideResource;
 use App\Filament\Ops\Resources\CareerJobResource;
+use App\Filament\Ops\Resources\DataPageResource;
+use App\Filament\Ops\Resources\MethodPageResource;
+use App\Filament\Ops\Resources\PersonalityProfileResource;
+use App\Filament\Ops\Resources\TopicProfileResource;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Filament\Ops\Support\EditorialReviewChecklist;
@@ -14,6 +18,10 @@ use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
+use App\Models\DataPage;
+use App\Models\MethodPage;
+use App\Models\PersonalityProfile;
+use App\Models\TopicProfile;
 use App\Support\OrgContext;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
@@ -256,10 +264,51 @@ class EditorialReviewPage extends Page
             ->get()
             ->map(fn (CareerJob $record): array => $this->reviewRowForJob($record));
 
+        $methods = MethodPage::query()
+            ->withoutGlobalScopes()
+            ->with(['seoMeta', 'governance'])
+            ->where('org_id', 0)
+            ->where('status', MethodPage::STATUS_DRAFT)
+            ->latest('updated_at')
+            ->get()
+            ->map(fn (MethodPage $record): array => $this->reviewRowForMethod($record));
+
+        $dataPages = DataPage::query()
+            ->withoutGlobalScopes()
+            ->with(['seoMeta', 'governance'])
+            ->where('org_id', 0)
+            ->where('status', DataPage::STATUS_DRAFT)
+            ->latest('updated_at')
+            ->get()
+            ->map(fn (DataPage $record): array => $this->reviewRowForData($record));
+
+        $personalities = PersonalityProfile::query()
+            ->withoutGlobalScopes()
+            ->with(['seoMeta', 'sections', 'governance'])
+            ->where('org_id', 0)
+            ->where('scale_code', PersonalityProfile::SCALE_CODE_MBTI)
+            ->where('status', 'draft')
+            ->latest('updated_at')
+            ->get()
+            ->map(fn (PersonalityProfile $record): array => $this->reviewRowForPersonality($record));
+
+        $topics = TopicProfile::query()
+            ->withoutGlobalScopes()
+            ->with(['seoMeta', 'sections', 'entries', 'governance'])
+            ->where('org_id', 0)
+            ->where('status', TopicProfile::STATUS_DRAFT)
+            ->latest('updated_at')
+            ->get()
+            ->map(fn (TopicProfile $record): array => $this->reviewRowForTopic($record));
+
         $allItems = collect()
             ->concat($articles)
             ->concat($guides)
-            ->concat($jobs);
+            ->concat($jobs)
+            ->concat($methods)
+            ->concat($dataPages)
+            ->concat($personalities)
+            ->concat($topics);
 
         $filteredItems = $this->typeFilter === 'all'
             ? $allItems
@@ -411,6 +460,110 @@ class EditorialReviewPage extends Page
     /**
      * @return array<string, mixed>
      */
+    private function reviewRowForMethod(MethodPage $record): array
+    {
+        $missing = EditorialReviewChecklist::missing('method', $record);
+        $snapshot = EditorialReviewAudit::latestState('method', $record);
+        $reviewState = $this->resolveReviewState($snapshot, $missing === []);
+
+        return $this->reviewRow(
+            type: 'method',
+            id: (int) $record->id,
+            typeLabel: 'Method',
+            title: (string) $record->title,
+            locale: (string) $record->locale,
+            reviewState: $reviewState,
+            ownerAdminId: (int) ($snapshot['owner_admin_user_id'] ?? 0),
+            ownerLabel: (string) ($snapshot['owner_label'] ?? ''),
+            reviewerAdminId: (int) ($snapshot['reviewer_admin_user_id'] ?? 0),
+            reviewerLabel: (string) ($snapshot['reviewer_label'] ?? ''),
+            checklistLabel: $missing === [] ? 'Content + SEO ready' : 'Missing: '.implode(', ', $missing),
+            updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
+            editUrl: MethodPageResource::getUrl('edit', ['record' => $record]),
+        );
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function reviewRowForData(DataPage $record): array
+    {
+        $missing = EditorialReviewChecklist::missing('data', $record);
+        $snapshot = EditorialReviewAudit::latestState('data', $record);
+        $reviewState = $this->resolveReviewState($snapshot, $missing === []);
+
+        return $this->reviewRow(
+            type: 'data',
+            id: (int) $record->id,
+            typeLabel: 'Data',
+            title: (string) $record->title,
+            locale: (string) $record->locale,
+            reviewState: $reviewState,
+            ownerAdminId: (int) ($snapshot['owner_admin_user_id'] ?? 0),
+            ownerLabel: (string) ($snapshot['owner_label'] ?? ''),
+            reviewerAdminId: (int) ($snapshot['reviewer_admin_user_id'] ?? 0),
+            reviewerLabel: (string) ($snapshot['reviewer_label'] ?? ''),
+            checklistLabel: $missing === [] ? 'Content + SEO ready' : 'Missing: '.implode(', ', $missing),
+            updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
+            editUrl: DataPageResource::getUrl('edit', ['record' => $record]),
+        );
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function reviewRowForPersonality(PersonalityProfile $record): array
+    {
+        $missing = EditorialReviewChecklist::missing('personality', $record);
+        $snapshot = EditorialReviewAudit::latestState('personality', $record);
+        $reviewState = $this->resolveReviewState($snapshot, $missing === []);
+
+        return $this->reviewRow(
+            type: 'personality',
+            id: (int) $record->id,
+            typeLabel: 'Personality',
+            title: (string) $record->title,
+            locale: (string) $record->locale,
+            reviewState: $reviewState,
+            ownerAdminId: (int) ($snapshot['owner_admin_user_id'] ?? 0),
+            ownerLabel: (string) ($snapshot['owner_label'] ?? ''),
+            reviewerAdminId: (int) ($snapshot['reviewer_admin_user_id'] ?? 0),
+            reviewerLabel: (string) ($snapshot['reviewer_label'] ?? ''),
+            checklistLabel: $missing === [] ? 'Content + SEO ready' : 'Missing: '.implode(', ', $missing),
+            updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
+            editUrl: PersonalityProfileResource::getUrl('edit', ['record' => $record]),
+        );
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function reviewRowForTopic(TopicProfile $record): array
+    {
+        $missing = EditorialReviewChecklist::missing('topic', $record);
+        $snapshot = EditorialReviewAudit::latestState('topic', $record);
+        $reviewState = $this->resolveReviewState($snapshot, $missing === []);
+
+        return $this->reviewRow(
+            type: 'topic',
+            id: (int) $record->id,
+            typeLabel: 'Topic',
+            title: (string) $record->title,
+            locale: (string) $record->locale,
+            reviewState: $reviewState,
+            ownerAdminId: (int) ($snapshot['owner_admin_user_id'] ?? 0),
+            ownerLabel: (string) ($snapshot['owner_label'] ?? ''),
+            reviewerAdminId: (int) ($snapshot['reviewer_admin_user_id'] ?? 0),
+            reviewerLabel: (string) ($snapshot['reviewer_label'] ?? ''),
+            checklistLabel: $missing === [] ? 'Content + SEO ready' : 'Missing: '.implode(', ', $missing),
+            updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
+            editUrl: TopicProfileResource::getUrl('edit', ['record' => $record]),
+        );
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
     private function reviewRow(
         string $type,
         int $id,
@@ -466,6 +619,10 @@ class EditorialReviewPage extends Page
             'article' => 'Article',
             'guide' => 'Career Guide',
             'job' => 'Career Job',
+            'method' => 'Method',
+            'data' => 'Data',
+            'personality' => 'Personality',
+            'topic' => 'Topic',
             EditorialReviewAudit::STATE_READY => EditorialReviewAudit::label(EditorialReviewAudit::STATE_READY),
             EditorialReviewAudit::STATE_IN_REVIEW => EditorialReviewAudit::label(EditorialReviewAudit::STATE_IN_REVIEW),
             EditorialReviewAudit::STATE_APPROVED => EditorialReviewAudit::label(EditorialReviewAudit::STATE_APPROVED),
@@ -498,6 +655,10 @@ class EditorialReviewPage extends Page
             'article' => Article::query()->whereIn('org_id', $this->currentOrgIds())->findOrFail($id),
             'guide' => CareerGuide::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
             'job' => CareerJob::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
+            'method' => MethodPage::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
+            'data' => DataPage::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
+            'personality' => PersonalityProfile::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
+            'topic' => TopicProfile::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
             default => throw new AuthorizationException('Unsupported review type.'),
         };
     }

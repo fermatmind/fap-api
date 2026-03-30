@@ -8,6 +8,8 @@ use App\Models\ArticleRevision;
 use App\Models\AuditLog;
 use App\Models\CareerGuideRevision;
 use App\Models\CareerJobRevision;
+use App\Models\DataPageRevision;
+use App\Models\MethodPageRevision;
 
 final class ContentReleaseTrace
 {
@@ -54,6 +56,18 @@ final class ContentReleaseTrace
                     ->latest('revision_no')
                     ->first()
             ),
+            'method' => self::mapSimpleRevision(
+                MethodPageRevision::query()
+                    ->where('method_page_id', (int) data_get($record, 'id', 0))
+                    ->latest('revision_no')
+                    ->first()
+            ),
+            'data' => self::mapSimpleRevision(
+                DataPageRevision::query()
+                    ->where('data_page_id', (int) data_get($record, 'id', 0))
+                    ->latest('revision_no')
+                    ->first()
+            ),
             default => null,
         };
     }
@@ -86,6 +100,20 @@ final class ContentReleaseTrace
             'job' => self::mapJobRevision(
                 CareerJobRevision::query()
                     ->where('job_id', (int) data_get($record, 'id', 0))
+                    ->when($currentRevisionNo > 0, fn ($query) => $query->where('revision_no', '<', $currentRevisionNo))
+                    ->latest('revision_no')
+                    ->first()
+            ),
+            'method' => self::mapSimpleRevision(
+                MethodPageRevision::query()
+                    ->where('method_page_id', (int) data_get($record, 'id', 0))
+                    ->when($currentRevisionNo > 0, fn ($query) => $query->where('revision_no', '<', $currentRevisionNo))
+                    ->latest('revision_no')
+                    ->first()
+            ),
+            'data' => self::mapSimpleRevision(
+                DataPageRevision::query()
+                    ->where('data_page_id', (int) data_get($record, 'id', 0))
                     ->when($currentRevisionNo > 0, fn ($query) => $query->where('revision_no', '<', $currentRevisionNo))
                     ->latest('revision_no')
                     ->first()
@@ -206,6 +234,39 @@ final class ContentReleaseTrace
                 'seo_meta.canonical_url' => 'Canonical URL',
                 'seo_meta.robots' => 'Robots',
             ],
+            'method' => [
+                'page.title' => 'Title',
+                'page.excerpt' => 'Excerpt',
+                'page.body_md' => 'Body',
+                'page.definition_summary_md' => 'Definition summary',
+                'page.boundary_notes_md' => 'Boundary notes',
+                'page.slug' => 'Slug',
+                'page.locale' => 'Locale',
+                'page.is_public' => 'Visibility',
+                'page.is_indexable' => 'Indexability',
+                'seo_meta.seo_title' => 'SEO Title',
+                'seo_meta.seo_description' => 'SEO Description',
+                'seo_meta.canonical_url' => 'Canonical URL',
+                'seo_meta.robots' => 'Robots',
+            ],
+            'data' => [
+                'page.title' => 'Title',
+                'page.excerpt' => 'Excerpt',
+                'page.body_md' => 'Body',
+                'page.sample_size_label' => 'Sample size',
+                'page.time_window_label' => 'Time window',
+                'page.methodology_md' => 'Methodology',
+                'page.limitations_md' => 'Limitations',
+                'page.summary_statement_md' => 'Summary statement',
+                'page.slug' => 'Slug',
+                'page.locale' => 'Locale',
+                'page.is_public' => 'Visibility',
+                'page.is_indexable' => 'Indexability',
+                'seo_meta.seo_title' => 'SEO Title',
+                'seo_meta.seo_description' => 'SEO Description',
+                'seo_meta.canonical_url' => 'Canonical URL',
+                'seo_meta.robots' => 'Robots',
+            ],
             default => [],
         };
     }
@@ -288,7 +349,30 @@ final class ContentReleaseTrace
             'article' => 'article',
             'guide' => 'career_guide',
             'job' => 'career_job',
+            'method' => 'method_page',
+            'data' => 'data_page',
+            'personality' => 'personality_profile',
+            'topic' => 'topic_profile',
             default => 'content',
         };
+    }
+
+    /**
+     * @return array<string, mixed>|null
+     */
+    private static function mapSimpleRevision(?object $revision): ?array
+    {
+        if (! is_object($revision) || ! property_exists($revision, 'revision_no')) {
+            return null;
+        }
+
+        $snapshot = is_array(data_get($revision, 'snapshot_json')) ? data_get($revision, 'snapshot_json') : [];
+
+        return [
+            'revision_no' => (int) data_get($revision, 'revision_no', 0),
+            'title' => trim((string) data_get($snapshot, 'page.title', '')),
+            'created_at' => optional(data_get($revision, 'created_at'))?->toIso8601String(),
+            'snapshot' => $snapshot,
+        ];
     }
 }

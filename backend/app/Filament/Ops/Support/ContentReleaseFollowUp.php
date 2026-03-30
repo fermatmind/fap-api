@@ -6,10 +6,18 @@ namespace App\Filament\Ops\Support;
 
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
+use App\Models\DataPage;
+use App\Models\MethodPage;
+use App\Models\PersonalityProfile;
+use App\Models\TopicProfile;
 use App\Services\Audit\AuditLogger;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\CareerGuideSeoService;
 use App\Services\Cms\CareerJobSeoService;
+use App\Services\Cms\DataPageSeoService;
+use App\Services\Cms\MethodPageSeoService;
+use App\Services\Cms\PersonalityProfileSeoService;
+use App\Services\Cms\TopicProfileSeoService;
 use App\Services\Ops\OpsAlertService;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Request;
@@ -114,6 +122,18 @@ final class ContentReleaseFollowUp
                 : [],
             'job' => $record instanceof CareerJob
                 ? [app(CareerJobSeoService::class)->buildCanonicalUrl($record, (string) data_get($record, 'locale', 'en'))]
+                : [],
+            'method' => $record instanceof MethodPage
+                ? [app(MethodPageSeoService::class)->buildCanonicalUrl($record, (string) data_get($record, 'locale', 'en'))]
+                : [],
+            'data' => $record instanceof DataPage
+                ? [app(DataPageSeoService::class)->buildCanonicalUrl($record, (string) data_get($record, 'locale', 'en'))]
+                : [],
+            'personality' => $record instanceof PersonalityProfile
+                ? [app(PersonalityProfileSeoService::class)->buildCanonicalUrl($record, (string) data_get($record, 'locale', 'en'))]
+                : [],
+            'topic' => $record instanceof TopicProfile
+                ? [app(TopicProfileSeoService::class)->buildCanonicalUrl($record, (string) data_get($record, 'locale', 'en'))]
                 : [],
             default => [],
         }));

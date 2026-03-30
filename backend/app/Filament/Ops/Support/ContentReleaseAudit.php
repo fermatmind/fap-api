@@ -15,6 +15,10 @@ final class ContentReleaseAudit
             'article' => 'article',
             'guide' => 'career_guide',
             'job' => 'career_job',
+            'method' => 'method_page',
+            'data' => 'data_page',
+            'personality' => 'personality_profile',
+            'topic' => 'topic_profile',
             default => 'content',
         };
 

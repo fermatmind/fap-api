@@ -10,6 +10,9 @@ use App\Models\Article;
 use App\Services\Cms\ArticlePublishService;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\ArticleService;
+use App\Services\Cms\ContentGovernanceService;
+use App\Services\Cms\ContentPublishGateService;
+use App\Services\Cms\IntentRegistryService;
 use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
@@ -466,9 +469,36 @@ class ArticleController extends Controller
             'category_id' => ['nullable', 'integer', 'min:1'],
             'tags' => ['nullable', 'array'],
             'tags.*' => ['integer', 'min:1'],
+            'governance' => ['sometimes', 'array'],
+            'governance.page_type' => ['nullable', 'string', 'max:32'],
+            'governance.primary_query' => ['nullable', 'string', 'max:255'],
+            'governance.canonical_target' => ['nullable', 'string', 'max:255'],
+            'governance.hub_ref' => ['nullable', 'string', 'max:255'],
+            'governance.test_binding' => ['nullable', 'string', 'max:255'],
+            'governance.method_binding' => ['nullable', 'string', 'max:255'],
+            'governance.cta_stage' => ['nullable', 'string', 'max:32'],
+            'governance.author_admin_user_id' => ['nullable', 'integer', 'min:1'],
+            'governance.reviewer_admin_user_id' => ['nullable', 'integer', 'min:1'],
+            'governance.publish_gate_state' => ['nullable', 'string', 'max:32'],
+            'governance.intent_exception_requested' => ['nullable', 'boolean'],
+            'governance.intent_exception_reason' => ['nullable', 'string'],
         ]);
 
+        $orgId = $this->resolveTrustedOrgId($request);
+        $governanceInput = is_array($payload['governance'] ?? null) ? $payload['governance'] : [];
+
         try {
+            IntentRegistryService::assertNoConflict(
+                Article::class,
+                $governanceInput,
+                [
+                    'title' => $payload['title'],
+                    'slug' => $payload['slug'] ?? null,
+                    'content_md' => $payload['content_md'],
+                ],
+                $orgId,
+            );
+
             $article = $this->articleService->createArticle(
                 (string) $payload['title'],
                 isset($payload['slug']) ? (string) $payload['slug'] : null,
@@ -476,8 +506,13 @@ class ArticleController extends Controller
                 (string) $payload['content_md'],
                 isset($payload['category_id']) ? (int) $payload['category_id'] : null,
                 isset($payload['tags']) && is_array($payload['tags']) ? $payload['tags'] : [],
-                $this->resolveTrustedOrgId($request)
+                $orgId
             );
+
+            if ($governanceInput !== []) {
+                ContentGovernanceService::sync($article, $governanceInput);
+                IntentRegistryService::sync($article, $governanceInput);
+            }
         } catch (InvalidArgumentException $e) {
             return $this->invalidArgument($e);
         } catch (RuntimeException $e) {
@@ -506,6 +541,18 @@ class ArticleController extends Controller
             ], 422);
         }
 
+        $releaseManagedFields = ['status', 'is_public', 'published_at'];
+        $attemptedReleaseFields = array_values(array_filter(
+            $releaseManagedFields,
+            static fn (string $field): bool => $request->exists($field)
+        ));
+
+        if ($attemptedReleaseFields !== []) {
+            return $this->invalidArgumentMessage(
+                'release-managed fields cannot be updated via cms update: '.implode(', ', $attemptedReleaseFields).'.'
+            );
+        }
+
         $payload = $request->validate([
             'title' => ['sometimes', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:127'],
@@ -516,13 +563,23 @@ class ArticleController extends Controller
             'excerpt' => ['nullable', 'string'],
             'content_html' => ['nullable', 'string'],
             'cover_image_url' => ['nullable', 'string', 'max:255'],
-            'status' => ['sometimes', 'string', 'max:32'],
-            'is_public' => ['sometimes', 'boolean'],
             'is_indexable' => ['sometimes', 'boolean'],
-            'published_at' => ['nullable', 'date'],
             'scheduled_at' => ['nullable', 'date'],
             'tags' => ['sometimes', 'array'],
             'tags.*' => ['integer', 'min:1'],
+            'governance' => ['sometimes', 'array'],
+            'governance.page_type' => ['nullable', 'string', 'max:32'],
+            'governance.primary_query' => ['nullable', 'string', 'max:255'],
+            'governance.canonical_target' => ['nullable', 'string', 'max:255'],
+            'governance.hub_ref' => ['nullable', 'string', 'max:255'],
+            'governance.test_binding' => ['nullable', 'string', 'max:255'],
+            'governance.method_binding' => ['nullable', 'string', 'max:255'],
+            'governance.cta_stage' => ['nullable', 'string', 'max:32'],
+            'governance.author_admin_user_id' => ['nullable', 'integer', 'min:1'],
+            'governance.reviewer_admin_user_id' => ['nullable', 'integer', 'min:1'],
+            'governance.publish_gate_state' => ['nullable', 'string', 'max:32'],
+            'governance.intent_exception_requested' => ['nullable', 'boolean'],
+            'governance.intent_exception_reason' => ['nullable', 'string'],
         ]);
 
         $fields = $payload;
@@ -534,8 +591,37 @@ class ArticleController extends Controller
         }
 
         try {
-            $this->assertArticleInOrgScope($articleId, $this->resolveTrustedOrgId($request));
+            $orgId = $this->resolveTrustedOrgId($request);
+            $this->assertArticleInOrgScope($articleId, $orgId);
+            $existingArticle = Article::query()
+                ->withoutGlobalScopes()
+                ->with(['governance', 'intentRegistry'])
+                ->findOrFail($articleId);
+            $governanceInput = is_array($payload['governance'] ?? null) ? $payload['governance'] : [];
+            $governanceState = array_merge(
+                ContentGovernanceService::stateFromRecord($existingArticle),
+                $governanceInput,
+            );
+
+            IntentRegistryService::assertNoConflict(
+                $existingArticle,
+                $governanceState,
+                [
+                    'title' => $fields['title'] ?? $existingArticle->title,
+                    'slug' => $fields['slug'] ?? $existingArticle->slug,
+                    'content_md' => $fields['content_md'] ?? $existingArticle->content_md,
+                ],
+                $orgId,
+                $existingArticle,
+            );
+
+            unset($fields['governance']);
             $article = $this->articleService->updateArticle($articleId, $fields, $tags);
+
+            if ($governanceInput !== [] || $existingArticle->governance()->exists()) {
+                ContentGovernanceService::sync($article, $governanceState);
+                IntentRegistryService::sync($article, $governanceState);
+            }
         } catch (InvalidArgumentException $e) {
             return $this->invalidArgument($e);
         } catch (RuntimeException $e) {
@@ -566,6 +652,14 @@ class ArticleController extends Controller
 
         try {
             $this->assertArticleInOrgScope($articleId, $this->resolveTrustedOrgId($request));
+            $article = Article::query()
+                ->withoutGlobalScopes()
+                ->with([
+                    'seoMeta' => static fn ($query) => $query->withoutGlobalScopes(),
+                    'governance',
+                ])
+                ->findOrFail($articleId);
+            ContentPublishGateService::assertReadyForRelease('article', $article);
             $article = $this->articlePublishService->publishArticle($articleId);
         } catch (InvalidArgumentException $e) {
             return $this->invalidArgument($e);

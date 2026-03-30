@@ -7,13 +7,24 @@ namespace App\Filament\Ops\Pages;
 use App\Filament\Ops\Resources\ArticleResource;
 use App\Filament\Ops\Resources\CareerGuideResource;
 use App\Filament\Ops\Resources\CareerJobResource;
+use App\Filament\Ops\Resources\DataPageResource;
+use App\Filament\Ops\Resources\MethodPageResource;
+use App\Filament\Ops\Resources\PersonalityProfileResource;
+use App\Filament\Ops\Resources\TopicProfileResource;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Filament\Ops\Support\EditorialReviewChecklist;
 use App\Models\Article;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
+use App\Models\DataPage;
+use App\Models\MethodPage;
+use App\Models\PersonalityProfile;
+use App\Models\TopicProfile;
+use App\Services\Audit\AuditLogger;
+use App\Services\Ops\SeoQualityAuditService;
 use App\Support\OrgContext;
+use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Collection;
@@ -85,6 +96,10 @@ class ContentReleasePage extends Page
             'article' => Article::query()->whereIn('org_id', $this->currentOrgIds())->findOrFail($id),
             'guide' => CareerGuide::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
             'job' => CareerJob::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
+            'method' => MethodPage::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
+            'data' => DataPage::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
+            'personality' => PersonalityProfile::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
+            'topic' => TopicProfile::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
             default => throw new AuthorizationException('Unsupported content type.'),
         };
 
@@ -96,14 +111,63 @@ class ContentReleasePage extends Page
             'article' => ArticleResource::releaseRecord($record, 'release_workspace'),
             'guide' => CareerGuideResource::releaseRecord($record, 'release_workspace'),
             'job' => CareerJobResource::releaseRecord($record, 'release_workspace'),
+            'method' => MethodPageResource::releaseRecord($record, 'release_workspace'),
+            'data' => DataPageResource::releaseRecord($record, 'release_workspace'),
+            'personality' => PersonalityProfileResource::releaseRecord($record, 'release_workspace'),
+            'topic' => TopicProfileResource::releaseRecord($record, 'release_workspace'),
         };
 
         $this->refreshWorkspace();
     }
 
+    public function runCitationQa(int $id): void
+    {
+        if (! ContentAccess::canRelease()) {
+            throw new AuthorizationException('You do not have permission to run citation QA.');
+        }
+
+        $record = DataPage::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->findOrFail($id);
+
+        $actorAdminId = (int) (data_get(auth((string) config('admin.guard', 'admin'))->user(), 'id') ?? 0);
+        $audit = app(SeoQualityAuditService::class)->runCitationQa($record, $actorAdminId > 0 ? $actorAdminId : null);
+
+        app(AuditLogger::class)->log(
+            request(),
+            'content_release_citation_qa',
+            'data_page',
+            (string) $record->getKey(),
+            [
+                'title' => trim((string) $record->title),
+                'locale' => trim((string) $record->locale),
+                'audit_id' => (int) $audit->getKey(),
+                'audit_status' => (string) $audit->status,
+                'audited_at' => optional($audit->audited_at)?->toISOString(),
+                'summary' => $audit->summary_json,
+            ],
+            reason: 'cms_release_workspace',
+            result: $audit->status === 'passed' ? 'success' : 'failed',
+        );
+
+        $this->refreshWorkspace();
+
+        $notification = Notification::make()
+            ->title('Citation QA completed')
+            ->body((string) data_get($audit->summary_json, 'summary', 'Citation QA recorded.'));
+
+        if ($audit->status === 'passed') {
+            $notification->success()->send();
+        } else {
+            $notification->warning()->send();
+        }
+    }
+
     private function refreshWorkspace(): void
     {
         $currentOrgIds = $this->currentOrgIds();
+        $citationQaService = app(SeoQualityAuditService::class);
 
         $articles = Article::query()
             ->whereIn('org_id', $currentOrgIds)
@@ -164,10 +228,96 @@ class ContentReleasePage extends Page
                 indexUrl: CareerJobResource::getUrl(),
             ));
 
+        $methods = MethodPage::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->when($this->statusFilter !== 'all', fn ($query) => $query->where('status', $this->statusFilter))
+            ->latest('updated_at')
+            ->get()
+            ->map(fn (MethodPage $record): array => $this->releaseRow(
+                type: 'method',
+                typeLabel: 'Method',
+                id: (int) $record->id,
+                title: $record->title,
+                status: (string) $record->status,
+                reviewState: $this->reviewState('method', $record),
+                locale: (string) $record->locale,
+                visibility: $record->is_public ? 'Public' : 'Private',
+                updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
+                editUrl: MethodPageResource::getUrl('edit', ['record' => $record]),
+                indexUrl: MethodPageResource::getUrl(),
+            ));
+
+        $dataPages = DataPage::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->when($this->statusFilter !== 'all', fn ($query) => $query->where('status', $this->statusFilter))
+            ->latest('updated_at')
+            ->get()
+            ->map(fn (DataPage $record): array => $this->releaseRow(
+                type: 'data',
+                typeLabel: 'Data',
+                id: (int) $record->id,
+                title: $record->title,
+                status: (string) $record->status,
+                reviewState: $this->reviewState('data', $record),
+                locale: (string) $record->locale,
+                visibility: $record->is_public ? 'Public' : 'Private',
+                updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
+                editUrl: DataPageResource::getUrl('edit', ['record' => $record]),
+                indexUrl: DataPageResource::getUrl(),
+                citationQa: $citationQaService->citationQaState($record),
+            ));
+
+        $personalities = PersonalityProfile::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->where('scale_code', PersonalityProfile::SCALE_CODE_MBTI)
+            ->when($this->statusFilter !== 'all', fn ($query) => $query->where('status', $this->statusFilter))
+            ->latest('updated_at')
+            ->get()
+            ->map(fn (PersonalityProfile $record): array => $this->releaseRow(
+                type: 'personality',
+                typeLabel: 'Personality',
+                id: (int) $record->id,
+                title: $record->title,
+                status: (string) $record->status,
+                reviewState: $this->reviewState('personality', $record),
+                locale: (string) $record->locale,
+                visibility: $record->is_public ? 'Public' : 'Private',
+                updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
+                editUrl: PersonalityProfileResource::getUrl('edit', ['record' => $record]),
+                indexUrl: PersonalityProfileResource::getUrl(),
+            ));
+
+        $topics = TopicProfile::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', 0)
+            ->when($this->statusFilter !== 'all', fn ($query) => $query->where('status', $this->statusFilter))
+            ->latest('updated_at')
+            ->get()
+            ->map(fn (TopicProfile $record): array => $this->releaseRow(
+                type: 'topic',
+                typeLabel: 'Topic',
+                id: (int) $record->id,
+                title: $record->title,
+                status: (string) $record->status,
+                reviewState: $this->reviewState('topic', $record),
+                locale: (string) $record->locale,
+                visibility: $record->is_public ? 'Public' : 'Private',
+                updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
+                editUrl: TopicProfileResource::getUrl('edit', ['record' => $record]),
+                indexUrl: TopicProfileResource::getUrl(),
+            ));
+
         $allItems = collect()
             ->concat($articles)
             ->concat($guides)
-            ->concat($jobs);
+            ->concat($jobs)
+            ->concat($methods)
+            ->concat($dataPages)
+            ->concat($personalities)
+            ->concat($topics);
 
         $filteredItems = $this->typeFilter === 'all'
             ? $allItems
@@ -181,6 +331,8 @@ class ContentReleasePage extends Page
         $draftCount = $allItems->where('status', 'draft')->count();
         $approvedCount = $allItems->where('review_state', EditorialReviewAudit::STATE_APPROVED)->count();
         $publishedCount = $allItems->where('status', 'published')->count();
+        $dataCitationReadyCount = $dataPages->where('citation_qa.passed', true)->count();
+        $dataCitationMissingCount = $dataPages->where('citation_qa.passed', false)->count();
 
         $this->releaseFields = [
             [
@@ -197,6 +349,16 @@ class ContentReleasePage extends Page
                 'label' => 'Published content',
                 'value' => (string) $publishedCount,
                 'hint' => 'Published records already cleared by a release-capable operator.',
+            ],
+            [
+                'label' => 'Data citation QA passed',
+                'value' => (string) $dataCitationReadyCount,
+                'hint' => 'Data pages that already passed the five-question citation QA gate.',
+            ],
+            [
+                'label' => 'Data citation QA backlog',
+                'value' => (string) $dataCitationMissingCount,
+                'hint' => 'Data pages still missing a passing citation QA result before release.',
             ],
             [
                 'label' => 'Current type filter',
@@ -221,6 +383,10 @@ class ContentReleasePage extends Page
             $this->surfaceCard('Articles', $articles, ArticleResource::getUrl()),
             $this->surfaceCard('Career Guides', $guides, CareerGuideResource::getUrl()),
             $this->surfaceCard('Career Jobs', $jobs, CareerJobResource::getUrl()),
+            $this->surfaceCard('Methods', $methods, MethodPageResource::getUrl()),
+            $this->surfaceCard('Data', $dataPages, DataPageResource::getUrl()),
+            $this->surfaceCard('Personality', $personalities, PersonalityProfileResource::getUrl()),
+            $this->surfaceCard('Topics', $topics, TopicProfileResource::getUrl()),
         ];
     }
 
@@ -249,6 +415,7 @@ class ContentReleasePage extends Page
         string $updatedAt,
         string $editUrl,
         string $indexUrl,
+        ?array $citationQa = null,
     ): array {
         return [
             'id' => $id,
@@ -263,7 +430,12 @@ class ContentReleasePage extends Page
             'updated_at_sort' => strtotime($updatedAt) ?: 0,
             'edit_url' => $editUrl,
             'index_url' => $indexUrl,
-            'releaseable' => $status === 'draft' && $reviewState === EditorialReviewAudit::STATE_APPROVED,
+            'citation_qa' => $citationQa,
+            'citation_qa_summary' => (string) ($citationQa['summary'] ?? ''),
+            'citation_qa_audited_at' => (string) ($citationQa['audited_at'] ?? ''),
+            'releaseable' => $status === 'draft'
+                && $reviewState === EditorialReviewAudit::STATE_APPROVED
+                && ($type !== 'data' || (bool) ($citationQa['passed'] ?? false)),
         ];
     }
 
@@ -288,6 +460,10 @@ class ContentReleasePage extends Page
             'article' => 'Article',
             'guide' => 'Career Guide',
             'job' => 'Career Job',
+            'method' => 'Method',
+            'data' => 'Data',
+            'personality' => 'Personality',
+            'topic' => 'Topic',
             'draft' => 'Draft',
             'published' => 'Published',
             default => ucfirst($value),

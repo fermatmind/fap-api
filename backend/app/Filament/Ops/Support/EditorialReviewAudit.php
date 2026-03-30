@@ -6,7 +6,10 @@ namespace App\Filament\Ops\Support;
 
 use App\Models\AdminUser;
 use App\Models\EditorialReview;
+use App\Models\PersonalityProfile;
+use App\Models\TopicProfile;
 use App\Services\Audit\AuditLogger;
+use App\Services\Cms\ContentGovernanceService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -74,6 +77,11 @@ final class EditorialReviewAudit
         $workflow->last_transition_at = now();
         $workflow->save();
 
+        self::syncGovernanceSnapshot($record, [
+            'reviewer_admin_user_id' => $reviewerAdminId,
+            'publish_gate_state' => self::STATE_READY,
+        ]);
+
         self::log(
             action: 'editorial_review_reviewer_assigned',
             type: $type,
@@ -99,6 +107,10 @@ final class EditorialReviewAudit
         $workflow->reviewed_at = null;
         $workflow->last_transition_at = now();
         $workflow->save();
+
+        self::syncGovernanceSnapshot($record, [
+            'publish_gate_state' => self::STATE_IN_REVIEW,
+        ]);
 
         self::log(
             action: 'editorial_review_submitted',
@@ -129,6 +141,11 @@ final class EditorialReviewAudit
         $workflow->reviewed_at = now();
         $workflow->last_transition_at = now();
         $workflow->save();
+
+        self::syncGovernanceSnapshot($record, [
+            'reviewer_admin_user_id' => (int) ($workflow->reviewer_admin_user_id ?: null),
+            'publish_gate_state' => $decision,
+        ]);
 
         self::log(
             action: $action,
@@ -228,6 +245,10 @@ final class EditorialReviewAudit
         self::resetWorkflowState($workflow);
         $workflow->last_transition_at = now();
         $workflow->save();
+
+        self::syncGovernanceSnapshot($record, [
+            'publish_gate_state' => self::STATE_READY,
+        ]);
     }
 
     private static function targetType(string $type): string
@@ -236,6 +257,10 @@ final class EditorialReviewAudit
             'article' => 'article',
             'guide' => 'career_guide',
             'job' => 'career_job',
+            'method' => 'method_page',
+            'data' => 'data_page',
+            'personality' => 'personality_profile',
+            'topic' => 'topic_profile',
             default => 'content',
         };
     }
@@ -405,5 +430,20 @@ final class EditorialReviewAudit
         }
 
         return $admin;
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private static function syncGovernanceSnapshot(object $record, array $overrides): void
+    {
+        if (! $record instanceof PersonalityProfile && ! $record instanceof TopicProfile && ! method_exists($record, 'governance')) {
+            return;
+        }
+
+        ContentGovernanceService::sync($record, array_merge(
+            ContentGovernanceService::stateFromRecord($record),
+            $overrides,
+        ));
     }
 }

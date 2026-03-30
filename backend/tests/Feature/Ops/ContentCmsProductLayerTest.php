@@ -16,6 +16,8 @@ use App\Filament\Ops\Resources\CareerGuideResource;
 use App\Filament\Ops\Resources\CareerJobResource;
 use App\Filament\Ops\Resources\ContentPackReleaseResource;
 use App\Filament\Ops\Resources\ContentPackVersionResource;
+use App\Filament\Ops\Resources\PersonalityProfileResource;
+use App\Filament\Ops\Resources\TopicProfileResource;
 use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Models\AdminUser;
 use App\Models\Article;
@@ -30,7 +32,13 @@ use App\Models\CareerJobSeoMeta;
 use App\Models\EditorialReview;
 use App\Models\Organization;
 use App\Models\Permission;
+use App\Models\PersonalityProfile;
+use App\Models\PersonalityProfileSeoMeta;
 use App\Models\Role;
+use App\Models\TopicProfile;
+use App\Models\TopicProfileSection;
+use App\Models\TopicProfileSeoMeta;
+use App\Services\Cms\ContentGovernanceService;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
@@ -219,10 +227,24 @@ final class ContentCmsProductLayerTest extends TestCase
             'is_public' => false,
             'published_at' => null,
         ]);
+        $personality = $this->seedPersonality([
+            'title' => 'Release Queue Personality',
+            'status' => 'draft',
+            'is_public' => false,
+            'published_at' => null,
+        ]);
+        $topic = $this->seedTopic([
+            'title' => 'Release Queue Topic',
+            'status' => TopicProfile::STATUS_DRAFT,
+            'is_public' => false,
+            'published_at' => null,
+        ]);
 
         $this->approveRecord($admin, (int) $session['ops_org_id'], 'article', $article);
         $this->approveRecord($admin, (int) $session['ops_org_id'], 'guide', $guide);
         $this->approveRecord($admin, (int) $session['ops_org_id'], 'job', $job);
+        $this->approveRecord($admin, (int) $session['ops_org_id'], 'personality', $personality);
+        $this->approveRecord($admin, (int) $session['ops_org_id'], 'topic', $topic);
 
         $this->withSession($session)
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -234,7 +256,9 @@ final class ContentCmsProductLayerTest extends TestCase
             ->assertSee('Release Queue')
             ->assertSee('Release Queue Article')
             ->assertSee('Release Queue Guide')
-            ->assertSee('Release Queue Job');
+            ->assertSee('Release Queue Job')
+            ->assertSee('Release Queue Personality')
+            ->assertSee('Release Queue Topic');
 
         $this->withSession($session)
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -245,6 +269,8 @@ final class ContentCmsProductLayerTest extends TestCase
             ->assertSee('Article')
             ->assertSee('Career Guide')
             ->assertSee('Career Job')
+            ->assertSee('Personality')
+            ->assertSee('Topic')
             ->assertSee('Review state')
             ->assertDontSee('Content Pack Release')
             ->assertDontSee('Content Pack Version');
@@ -278,19 +304,35 @@ final class ContentCmsProductLayerTest extends TestCase
             'is_public' => false,
             'published_at' => null,
         ]);
+        $personality = $this->seedPersonality([
+            'status' => 'draft',
+            'is_public' => false,
+            'published_at' => null,
+        ]);
+        $topic = $this->seedTopic([
+            'status' => TopicProfile::STATUS_DRAFT,
+            'is_public' => false,
+            'published_at' => null,
+        ]);
 
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
         $this->approveRecord($admin, (int) $session['ops_org_id'], 'article', $article);
         $this->approveRecord($admin, (int) $session['ops_org_id'], 'guide', $guide);
         $this->approveRecord($admin, (int) $session['ops_org_id'], 'job', $job);
+        $this->approveRecord($admin, (int) $session['ops_org_id'], 'personality', $personality);
+        $this->approveRecord($admin, (int) $session['ops_org_id'], 'topic', $topic);
 
         ArticleResource::releaseRecord($article);
         CareerGuideResource::releaseRecord($guide);
         CareerJobResource::releaseRecord($job);
+        PersonalityProfileResource::releaseRecord($personality);
+        TopicProfileResource::releaseRecord($topic);
 
         $article->refresh();
         $guide->refresh();
         $job->refresh();
+        $personality->refresh();
+        $topic->refresh();
 
         $this->assertSame('published', $article->status);
         $this->assertTrue($article->is_public);
@@ -303,6 +345,14 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->assertSame(CareerJob::STATUS_PUBLISHED, $job->status);
         $this->assertTrue($job->is_public);
         $this->assertNotNull($job->published_at);
+
+        $this->assertSame('published', $personality->status);
+        $this->assertTrue($personality->is_public);
+        $this->assertNotNull($personality->published_at);
+
+        $this->assertSame(TopicProfile::STATUS_PUBLISHED, $topic->status);
+        $this->assertTrue($topic->is_public);
+        $this->assertNotNull($topic->published_at);
 
         $this->getJson('/api/v0.5/articles/'.$article->slug.'?locale=en&org_id='.(int) $session['ops_org_id'])
             ->assertOk()
@@ -518,6 +568,7 @@ final class ContentCmsProductLayerTest extends TestCase
             'robots' => 'index,follow',
             'is_indexable' => true,
         ]);
+        $this->ensureSeoReady($selectedOrgId, 'article', $article);
 
         $this->setOpsContext($selectedOrgId, $owner, '/ops/editorial-review');
         Livewire::test(EditorialReviewPage::class)
@@ -814,6 +865,7 @@ final class ContentCmsProductLayerTest extends TestCase
             'robots' => 'index,follow',
             'is_indexable' => true,
         ]);
+        $this->ensureSeoReady($selectedOrgId, 'article', $article);
 
         $this->setOpsContext($selectedOrgId, $owner, '/ops/editorial-review');
         Livewire::test(EditorialReviewPage::class)
@@ -993,6 +1045,8 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->seedArticle();
         $this->seedGuide();
         $this->seedJob();
+        $this->seedPersonality();
+        $this->seedTopic();
     }
 
     private function approveRecord(AdminUser $admin, int $orgId, string $type, object $record): void
@@ -1034,24 +1088,36 @@ final class ContentCmsProductLayerTest extends TestCase
         $bodyField = match ($type) {
             'article' => 'content_md',
             'guide', 'job' => 'body_md',
+            'personality' => 'hero_summary_md',
+            'topic' => null,
             default => 'content_md',
         };
 
         $bodyHtmlField = match ($type) {
             'article' => 'content_html',
             'guide', 'job' => 'body_html',
+            'personality' => 'hero_summary_html',
+            'topic' => null,
             default => 'content_html',
         };
 
         if (
             ! filled(data_get($record, 'excerpt'))
-            || ! filled(data_get($record, $bodyField))
+            || ($bodyField !== null && ! filled(data_get($record, $bodyField)))
         ) {
-            $record->forceFill([
+            $payload = [
                 'excerpt' => filled(data_get($record, 'excerpt')) ? data_get($record, 'excerpt') : 'Ready excerpt',
-                $bodyField => filled(data_get($record, $bodyField)) ? data_get($record, $bodyField) : 'Ready body',
-                $bodyHtmlField => filled(data_get($record, $bodyHtmlField)) ? data_get($record, $bodyHtmlField) : '<p>Ready body</p>',
-            ])->save();
+            ];
+
+            if ($bodyField !== null) {
+                $payload[$bodyField] = filled(data_get($record, $bodyField)) ? data_get($record, $bodyField) : 'Ready body';
+            }
+
+            if ($bodyHtmlField !== null) {
+                $payload[$bodyHtmlField] = filled(data_get($record, $bodyHtmlField)) ? data_get($record, $bodyHtmlField) : '<p>Ready body</p>';
+            }
+
+            $record->forceFill($payload)->save();
         }
 
         if ($type === 'article' && ! $record->seoMeta()->exists()) {
@@ -1101,6 +1167,74 @@ final class ContentCmsProductLayerTest extends TestCase
                 'robots' => 'index,follow',
             ]);
         }
+
+        if ($type === 'personality' && ! $record->seoMeta()->exists()) {
+            PersonalityProfileSeoMeta::query()->create([
+                'profile_id' => (int) data_get($record, 'id'),
+                'seo_title' => trim((string) data_get($record, 'title', 'Personality')).' SEO Title',
+                'seo_description' => trim((string) data_get($record, 'excerpt', 'Personality excerpt')).' SEO Description',
+                'canonical_url' => 'https://example.test/personality/'.trim((string) data_get($record, 'slug', 'personality')),
+                'og_title' => trim((string) data_get($record, 'title', 'Personality')).' OG Title',
+                'og_description' => trim((string) data_get($record, 'excerpt', 'Personality excerpt')).' OG Description',
+                'og_image_url' => 'https://example.test/images/'.trim((string) data_get($record, 'slug', 'personality')).'.png',
+                'twitter_title' => trim((string) data_get($record, 'title', 'Personality')).' Twitter Title',
+                'twitter_description' => trim((string) data_get($record, 'excerpt', 'Personality excerpt')).' Twitter Description',
+                'twitter_image_url' => 'https://example.test/images/'.trim((string) data_get($record, 'slug', 'personality')).'-twitter.png',
+                'robots' => 'index,follow',
+            ]);
+        }
+
+        if ($type === 'topic' && ! $record->seoMeta()->exists()) {
+            TopicProfileSeoMeta::query()->create([
+                'profile_id' => (int) data_get($record, 'id'),
+                'seo_title' => trim((string) data_get($record, 'title', 'Topic')).' SEO Title',
+                'seo_description' => trim((string) data_get($record, 'excerpt', 'Topic excerpt')).' SEO Description',
+                'canonical_url' => 'https://example.test/topics/'.trim((string) data_get($record, 'slug', 'topic')),
+                'og_title' => trim((string) data_get($record, 'title', 'Topic')).' OG Title',
+                'og_description' => trim((string) data_get($record, 'excerpt', 'Topic excerpt')).' OG Description',
+                'og_image_url' => 'https://example.test/images/'.trim((string) data_get($record, 'slug', 'topic')).'.png',
+                'twitter_title' => trim((string) data_get($record, 'title', 'Topic')).' Twitter Title',
+                'twitter_description' => trim((string) data_get($record, 'excerpt', 'Topic excerpt')).' Twitter Description',
+                'twitter_image_url' => 'https://example.test/images/'.trim((string) data_get($record, 'slug', 'topic')).'-twitter.png',
+                'robots' => 'index,follow',
+            ]);
+        }
+
+        if ($type === 'topic' && ! $record->sections()->exists()) {
+            TopicProfileSection::query()->create([
+                'profile_id' => (int) data_get($record, 'id'),
+                'section_key' => 'overview',
+                'title' => 'Overview',
+                'render_variant' => 'rich_text',
+                'body_md' => 'Topic body',
+                'body_html' => '<p>Topic body</p>',
+                'sort_order' => 0,
+                'is_enabled' => true,
+            ]);
+        }
+
+        $pageType = match ($type) {
+            'topic' => ContentGovernanceService::PAGE_TYPE_HUB,
+            'personality', 'job' => ContentGovernanceService::PAGE_TYPE_ENTITY,
+            default => ContentGovernanceService::PAGE_TYPE_GUIDE,
+        };
+
+        ContentGovernanceService::sync($record, [
+            'page_type' => $pageType,
+            'primary_query' => trim((string) data_get($record, 'slug', 'content-query')),
+            'canonical_target' => data_get($record->seoMeta()->first(), 'canonical_url'),
+            'hub_ref' => $pageType === ContentGovernanceService::PAGE_TYPE_HUB ? null : 'topics/mbti',
+            'test_binding' => 'tests/mbti-personality-test-16-personality-types',
+            'method_binding' => 'methods/fermat-facet-matrix',
+            'cta_stage' => $pageType === ContentGovernanceService::PAGE_TYPE_HUB
+                ? ContentGovernanceService::CTA_STAGE_DISCOVER
+                : ContentGovernanceService::CTA_STAGE_COMPARE,
+            'author_admin_user_id' => (int) (data_get($record, 'author_admin_user_id')
+                ?: data_get($record, 'created_by_admin_user_id')
+                ?: data_get($record, 'updated_by_admin_user_id')
+                ?: 1),
+            'publish_gate_state' => EditorialReviewAudit::STATE_READY,
+        ]);
     }
 
     private function setOpsContext(int $orgId, AdminUser $admin, string $path, string $method = 'POST'): void
@@ -1184,6 +1318,54 @@ final class ContentCmsProductLayerTest extends TestCase
             'is_indexable' => true,
             'schema_version' => 'v1',
             'sort_order' => 0,
+        ], $overrides));
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function seedPersonality(array $overrides = []): PersonalityProfile
+    {
+        return PersonalityProfile::query()->create(array_merge([
+            'org_id' => 0,
+            'scale_code' => PersonalityProfile::SCALE_CODE_MBTI,
+            'type_code' => 'INTJ',
+            'canonical_type_code' => 'INTJ',
+            'slug' => 'release-personality-'.Str::lower(Str::random(6)),
+            'locale' => 'en',
+            'title' => 'Release Personality',
+            'type_name' => 'Architect',
+            'excerpt' => 'Personality release candidate.',
+            'hero_summary_md' => 'Personality body',
+            'hero_summary_html' => '<p>Personality body</p>',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+            'schema_version' => PersonalityProfile::SCHEMA_VERSION_V2,
+            'created_by_admin_user_id' => 1,
+            'updated_by_admin_user_id' => 1,
+        ], $overrides));
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function seedTopic(array $overrides = []): TopicProfile
+    {
+        return TopicProfile::query()->create(array_merge([
+            'org_id' => 0,
+            'topic_code' => 'release-topic-'.Str::lower(Str::random(6)),
+            'slug' => 'release-topic-'.Str::lower(Str::random(6)),
+            'locale' => 'en',
+            'title' => 'Release Topic',
+            'excerpt' => 'Topic release candidate.',
+            'status' => TopicProfile::STATUS_DRAFT,
+            'is_public' => false,
+            'is_indexable' => true,
+            'schema_version' => 'v1',
+            'sort_order' => 0,
+            'created_by_admin_user_id' => 1,
+            'updated_by_admin_user_id' => 1,
         ], $overrides));
     }
 }
