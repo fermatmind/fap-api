@@ -12,6 +12,11 @@ class SitemapController extends Controller
 
     public function index(Request $request, SitemapCache $cache, SitemapGenerator $generator)
     {
+        $authority = strtolower(trim((string) config('services.seo.public_sitemap_authority', 'frontend')));
+        if ($authority !== 'backend') {
+            abort(404);
+        }
+
         $cached = $cache->get();
         if ($cached) {
             $xml = $cached['xml'];
