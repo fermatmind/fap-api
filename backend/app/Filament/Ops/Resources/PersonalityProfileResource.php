@@ -6,15 +6,22 @@ namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\PersonalityProfileResource\Pages;
 use App\Filament\Ops\Resources\PersonalityProfileResource\Support\PersonalityWorkspace;
+use App\Filament\Ops\Support\ContentAccess;
+use App\Filament\Ops\Support\ContentGovernanceForm;
+use App\Filament\Ops\Support\ContentReleaseAudit;
+use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\PersonalityProfile;
+use App\Services\Cms\ContentPublishGateService;
 use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
@@ -258,17 +265,23 @@ class PersonalityProfileResource extends Resource
                                     ->native(false)
                                     ->options(self::statusOptions())
                                     ->default('draft')
-                                    ->helperText('Published profiles are eligible for the public read API once visibility and locale are aligned.'),
+                                    ->disabled()
+                                    ->dehydrated(false)
+                                    ->helperText('Managed by the release workflow. Use editorial review and release actions to change publish state.'),
                                 Forms\Components\Toggle::make('is_public')
                                     ->label('Public visibility')
                                     ->default(true)
-                                    ->helperText('Controls whether the public personality API can serve this profile.'),
+                                    ->disabled()
+                                    ->dehydrated(false)
+                                    ->helperText('Managed by the release workflow. Public visibility changes only through release actions.'),
                                 Forms\Components\Toggle::make('is_indexable')
                                     ->label('Search indexable')
                                     ->default(true)
                                     ->helperText('Used for SEO payload fallbacks and robots defaults.'),
                                 Forms\Components\DateTimePicker::make('published_at')
-                                    ->helperText('Timestamp shown in editorial cues and public profile responses.'),
+                                    ->disabled()
+                                    ->dehydrated(false)
+                                    ->helperText('Managed by the release workflow. Publish timestamps are written only during release.'),
                                 Forms\Components\DateTimePicker::make('scheduled_at')
                                     ->helperText('Optional future release time for editorial planning.'),
                             ]),
@@ -317,10 +330,14 @@ class PersonalityProfileResource extends Resource
                                 Forms\Components\Textarea::make('workspace_seo.jsonld_overrides_json_text')
                                     ->label('JSON-LD overrides')
                                     ->rows(5)
-                                    ->helperText('Optional advanced overrides merged into the public Personality JSON-LD payload.')
+                                    ->helperText('Optional limited overrides. Core schema fields like @type, author, publisher, canonical, and mainEntity are policy-managed and cannot be overridden.')
                                     ->rules(['nullable', 'json'])
                                     ->extraFieldWrapperAttributes(['class' => 'ops-personality-workspace-field ops-personality-workspace-field--payload']),
                             ]),
+                        ContentGovernanceForm::section(
+                            defaultPageType: 'entity',
+                            railClass: 'ops-personality-workspace-section ops-personality-workspace-section--rail',
+                        ),
                         Forms\Components\Section::make('Record cues')
                             ->description('Read-only context so editors can see what is planned, when the record changed, and how many revisions already exist.')
                             ->extraAttributes(['class' => 'ops-personality-workspace-section ops-personality-workspace-section--rail'])
@@ -467,6 +484,65 @@ class PersonalityProfileResource extends Resource
         ];
     }
 
+    private static function canRead(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && (
+                $user->hasPermission(PermissionNames::ADMIN_CONTENT_READ)
+                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
+                || $user->hasPermission(PermissionNames::ADMIN_CONTENT_PUBLISH)
+                || $user->hasPermission(PermissionNames::ADMIN_CONTENT_RELEASE)
+            );
+    }
+
+    private static function canPublish(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && (
+                $user->hasPermission(PermissionNames::ADMIN_CONTENT_PUBLISH)
+                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
+            );
+    }
+
+    public static function releaseRecord(PersonalityProfile $record, string $source = 'resource_table'): void
+    {
+        if (! ContentAccess::canRelease()) {
+            throw new AuthorizationException('You do not have permission to release personality profiles.');
+        }
+
+        if ((string) $record->status === 'published') {
+            return;
+        }
+
+        if ((EditorialReviewAudit::latestState('personality', $record)['state'] ?? null) !== EditorialReviewAudit::STATE_APPROVED) {
+            throw new AuthorizationException('This personality profile must be approved in editorial review before it can be published.');
+        }
+
+        ContentPublishGateService::assertReadyForRelease('personality', $record);
+
+        $record->forceFill([
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => $record->published_at ?? now(),
+        ])->save();
+
+        ContentReleaseAudit::log('personality', $record->fresh(), $source);
+
+        Notification::make()
+            ->title('Personality profile released')
+            ->body('The personality profile is now marked as published.')
+            ->success()
+            ->send();
+    }
+
     /**
      * @return array<string, string>
      */
@@ -540,31 +616,5 @@ class PersonalityProfileResource extends Resource
             })
             ->values()
             ->all();
-    }
-
-    private static function canRead(): bool
-    {
-        $guard = (string) config('admin.guard', 'admin');
-        $user = auth($guard)->user();
-
-        return is_object($user)
-            && method_exists($user, 'hasPermission')
-            && (
-                $user->hasPermission(PermissionNames::ADMIN_CONTENT_READ)
-                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
-            );
-    }
-
-    private static function canPublish(): bool
-    {
-        $guard = (string) config('admin.guard', 'admin');
-        $user = auth($guard)->user();
-
-        return is_object($user)
-            && method_exists($user, 'hasPermission')
-            && (
-                $user->hasPermission(PermissionNames::ADMIN_CONTENT_PUBLISH)
-                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
-            );
     }
 }

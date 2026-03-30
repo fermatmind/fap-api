@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Concerns\HasContentGovernance;
+use App\Models\Concerns\HasIntentRegistry;
 use App\Models\Concerns\HasOrgScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class PersonalityProfile extends Model
 {
-    use HasFactory, HasOrgScope;
+    use HasContentGovernance, HasFactory, HasIntentRegistry, HasOrgScope;
 
     public const SCALE_CODE_MBTI = 'MBTI';
 

@@ -6,15 +6,22 @@ namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\TopicProfileResource\Pages;
 use App\Filament\Ops\Resources\TopicProfileResource\Support\TopicWorkspace;
+use App\Filament\Ops\Support\ContentAccess;
+use App\Filament\Ops\Support\ContentGovernanceForm;
+use App\Filament\Ops\Support\ContentReleaseAudit;
+use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\TopicProfile;
+use App\Services\Cms\ContentPublishGateService;
 use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
@@ -211,17 +218,23 @@ class TopicProfileResource extends Resource
                                     ->native(false)
                                     ->options(self::statusOptions())
                                     ->default(TopicProfile::STATUS_DRAFT)
-                                    ->helperText('Published topics become eligible for public topic APIs once locale and visibility align.'),
+                                    ->disabled()
+                                    ->dehydrated(false)
+                                    ->helperText('Managed by the release workflow. Use editorial review and release actions to change publish state.'),
                                 Forms\Components\Toggle::make('is_public')
                                     ->label('Public visibility')
                                     ->default(true)
-                                    ->helperText('Controls whether public topic endpoints can serve this topic hub.'),
+                                    ->disabled()
+                                    ->dehydrated(false)
+                                    ->helperText('Managed by the release workflow. Public visibility changes only through release actions.'),
                                 Forms\Components\Toggle::make('is_indexable')
                                     ->label('Search indexable')
                                     ->default(true)
                                     ->helperText('Used for SEO payload fallbacks and future sitemap eligibility.'),
                                 Forms\Components\DateTimePicker::make('published_at')
-                                    ->helperText('Timestamp shown in editorial cues and public topic payloads.'),
+                                    ->disabled()
+                                    ->dehydrated(false)
+                                    ->helperText('Managed by the release workflow. Publish timestamps are written only during release.'),
                                 Forms\Components\DateTimePicker::make('scheduled_at')
                                     ->helperText('Optional scheduling hint for editorial planning.'),
                                 Forms\Components\TextInput::make('sort_order')
@@ -274,10 +287,14 @@ class TopicProfileResource extends Resource
                                 Forms\Components\Textarea::make('workspace_seo.jsonld_overrides_json_text')
                                     ->label('JSON-LD overrides')
                                     ->rows(5)
-                                    ->helperText('Optional advanced overrides merged into the public Topics JSON-LD payload.')
+                                    ->helperText('Optional limited overrides. Core schema fields like @type, author, publisher, canonical, and mainEntityOfPage are policy-managed and cannot be overridden.')
                                     ->rules(['nullable', 'json'])
                                     ->extraFieldWrapperAttributes(['class' => 'ops-topic-workspace-field ops-topic-workspace-field--payload']),
                             ]),
+                        ContentGovernanceForm::section(
+                            defaultPageType: 'hub',
+                            railClass: 'ops-topic-workspace-section ops-topic-workspace-section--rail',
+                        ),
                         Forms\Components\Section::make('Record cues')
                             ->description('Read-only context so editors can see the planned URL, revision trail, entry count, and SEO readiness before frontend cutover.')
                             ->extraAttributes(['class' => 'ops-topic-workspace-section ops-topic-workspace-section--rail'])
@@ -419,6 +436,65 @@ class TopicProfileResource extends Resource
             TopicProfile::STATUS_DRAFT => TopicProfile::STATUS_DRAFT,
             TopicProfile::STATUS_PUBLISHED => TopicProfile::STATUS_PUBLISHED,
         ];
+    }
+
+    private static function canRead(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && (
+                $user->hasPermission(PermissionNames::ADMIN_CONTENT_READ)
+                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
+                || $user->hasPermission(PermissionNames::ADMIN_CONTENT_PUBLISH)
+                || $user->hasPermission(PermissionNames::ADMIN_CONTENT_RELEASE)
+            );
+    }
+
+    private static function canPublish(): bool
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        return is_object($user)
+            && method_exists($user, 'hasPermission')
+            && (
+                $user->hasPermission(PermissionNames::ADMIN_CONTENT_PUBLISH)
+                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
+            );
+    }
+
+    public static function releaseRecord(TopicProfile $record, string $source = 'resource_table'): void
+    {
+        if (! ContentAccess::canRelease()) {
+            throw new AuthorizationException('You do not have permission to release topic profiles.');
+        }
+
+        if ($record->status === TopicProfile::STATUS_PUBLISHED) {
+            return;
+        }
+
+        if ((EditorialReviewAudit::latestState('topic', $record)['state'] ?? null) !== EditorialReviewAudit::STATE_APPROVED) {
+            throw new AuthorizationException('This topic profile must be approved in editorial review before it can be published.');
+        }
+
+        ContentPublishGateService::assertReadyForRelease('topic', $record);
+
+        $record->forceFill([
+            'status' => TopicProfile::STATUS_PUBLISHED,
+            'is_public' => true,
+            'published_at' => $record->published_at ?? now(),
+        ])->save();
+
+        ContentReleaseAudit::log('topic', $record->fresh(), $source);
+
+        Notification::make()
+            ->title('Topic profile released')
+            ->body('The topic profile is now marked as published.')
+            ->success()
+            ->send();
     }
 
     /**
@@ -566,31 +642,5 @@ class TopicProfileResource extends Resource
             })
             ->values()
             ->all();
-    }
-
-    private static function canRead(): bool
-    {
-        $guard = (string) config('admin.guard', 'admin');
-        $user = auth($guard)->user();
-
-        return is_object($user)
-            && method_exists($user, 'hasPermission')
-            && (
-                $user->hasPermission(PermissionNames::ADMIN_CONTENT_READ)
-                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
-            );
-    }
-
-    private static function canPublish(): bool
-    {
-        $guard = (string) config('admin.guard', 'admin');
-        $user = auth($guard)->user();
-
-        return is_object($user)
-            && method_exists($user, 'hasPermission')
-            && (
-                $user->hasPermission(PermissionNames::ADMIN_CONTENT_PUBLISH)
-                || $user->hasPermission(PermissionNames::ADMIN_OWNER)
-            );
     }
 }

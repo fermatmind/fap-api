@@ -7,9 +7,13 @@ namespace App\Filament\Ops\Resources\PersonalityProfileResource\Pages;
 use App\Filament\Ops\Resources\PersonalityProfileResource;
 use App\Filament\Ops\Resources\PersonalityProfileResource\Support\PersonalityWorkspace;
 use App\Models\PersonalityProfile;
+use App\Services\Cms\ContentGovernanceService;
+use App\Services\Cms\IntentRegistryService;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Validation\ValidationException;
+use InvalidArgumentException;
 
 class CreatePersonalityProfile extends CreateRecord
 {
@@ -25,6 +29,11 @@ class CreatePersonalityProfile extends CreateRecord
      */
     protected array $workspaceSeoState = [];
 
+    /**
+     * @var array<string, mixed>
+     */
+    protected array $workspaceGovernanceState = [];
+
     public function getTitle(): string|Htmlable
     {
         return 'Create Personality Profile';
@@ -39,7 +48,13 @@ class CreatePersonalityProfile extends CreateRecord
     {
         $this->callHook('beforeFill');
 
-        $this->form->fill(PersonalityWorkspace::defaultFormState());
+        $this->form->fill([
+            ...PersonalityWorkspace::defaultFormState(),
+            'workspace_governance' => ContentGovernanceService::defaultStateFor(
+                PersonalityProfileResource::getModel(),
+                $this->currentAdminId(),
+            ),
+        ]);
 
         $this->callHook('afterFill');
     }
@@ -84,8 +99,9 @@ class CreatePersonalityProfile extends CreateRecord
     {
         $this->workspaceSectionsState = is_array($data['workspace_sections'] ?? null) ? $data['workspace_sections'] : [];
         $this->workspaceSeoState = is_array($data['workspace_seo'] ?? null) ? $data['workspace_seo'] : [];
+        $this->workspaceGovernanceState = is_array($data['workspace_governance'] ?? null) ? $data['workspace_governance'] : [];
 
-        unset($data['workspace_sections'], $data['workspace_seo']);
+        unset($data['workspace_sections'], $data['workspace_seo'], $data['workspace_governance']);
 
         $typeCode = PersonalityWorkspace::normalizeTypeCode((string) ($data['type_code'] ?? ''));
 
@@ -104,13 +120,33 @@ class CreatePersonalityProfile extends CreateRecord
         $data['created_by_admin_user_id'] = $this->currentAdminId();
         $data['updated_by_admin_user_id'] = $this->currentAdminId();
 
-        return $data;
+        try {
+            IntentRegistryService::assertNoConflict(
+                PersonalityProfileResource::getModel(),
+                $this->workspaceGovernanceState,
+                [
+                    'title' => $data['title'] ?? null,
+                    'slug' => $data['slug'] ?? null,
+                    'hero_summary_md' => $data['hero_summary_md'] ?? null,
+                    'sections' => $this->workspaceSectionsState,
+                ],
+                0,
+            );
+        } catch (InvalidArgumentException $e) {
+            throw ValidationException::withMessages([
+                'workspace_governance.primary_query' => $e->getMessage(),
+            ]);
+        }
+
+        return ContentGovernanceService::enforceReleaseManagedDraft($data);
     }
 
     protected function afterCreate(): void
     {
         PersonalityWorkspace::syncWorkspaceSections($this->getRecord(), $this->workspaceSectionsState);
         PersonalityWorkspace::syncWorkspaceSeo($this->getRecord(), $this->workspaceSeoState);
+        ContentGovernanceService::sync($this->getRecord(), $this->workspaceGovernanceState);
+        IntentRegistryService::sync($this->getRecord(), $this->workspaceGovernanceState);
         $this->getRecord()->unsetRelation('sections');
         $this->getRecord()->unsetRelation('seoMeta');
         PersonalityWorkspace::createRevision($this->getRecord(), 'Initial workspace snapshot');

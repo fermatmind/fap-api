@@ -6,9 +6,13 @@ namespace App\Filament\Ops\Resources\CareerGuideResource\Pages;
 
 use App\Filament\Ops\Resources\CareerGuideResource;
 use App\Filament\Ops\Resources\CareerGuideResource\Support\CareerGuideWorkspace;
+use App\Services\Cms\ContentGovernanceService;
+use App\Services\Cms\IntentRegistryService;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Validation\ValidationException;
+use InvalidArgumentException;
 
 class CreateCareerGuide extends CreateRecord
 {
@@ -29,6 +33,11 @@ class CreateCareerGuide extends CreateRecord
      */
     protected array $workspaceSeoState = [];
 
+    /**
+     * @var array<string, mixed>
+     */
+    protected array $workspaceGovernanceState = [];
+
     public function getTitle(): string|Htmlable
     {
         return 'Create Career Guide';
@@ -43,7 +52,13 @@ class CreateCareerGuide extends CreateRecord
     {
         $this->callHook('beforeFill');
 
-        $this->form->fill(CareerGuideWorkspace::defaultFormState());
+        $this->form->fill([
+            ...CareerGuideWorkspace::defaultFormState(),
+            'workspace_governance' => ContentGovernanceService::defaultStateFor(
+                CareerGuideResource::getModel(),
+                $this->currentAdminId(),
+            ),
+        ]);
 
         $this->callHook('afterFill');
     }
@@ -97,11 +112,13 @@ class CreateCareerGuide extends CreateRecord
             $locale,
         );
         $this->workspaceSeoState = is_array($data['workspace_seo'] ?? null) ? $data['workspace_seo'] : [];
+        $this->workspaceGovernanceState = is_array($data['workspace_governance'] ?? null) ? $data['workspace_governance'] : [];
 
         unset(
             $data['workspace_related_jobs'],
             $data['workspace_related_personality_profiles'],
             $data['workspace_seo'],
+            $data['workspace_governance'],
         );
 
         $guideCode = CareerGuideWorkspace::normalizeGuideCode(
@@ -116,7 +133,24 @@ class CreateCareerGuide extends CreateRecord
         $data['related_industry_slugs_json'] = CareerGuideWorkspace::normalizeIndustrySlugs($data['related_industry_slugs_json'] ?? []);
         $data['schema_version'] = 'v1';
 
-        return $data;
+        try {
+            IntentRegistryService::assertNoConflict(
+                CareerGuideResource::getModel(),
+                $this->workspaceGovernanceState,
+                [
+                    'title' => $data['title'] ?? null,
+                    'slug' => $data['slug'] ?? null,
+                    'body_md' => $data['body_md'] ?? null,
+                ],
+                0,
+            );
+        } catch (InvalidArgumentException $e) {
+            throw ValidationException::withMessages([
+                'workspace_governance.primary_query' => $e->getMessage(),
+            ]);
+        }
+
+        return ContentGovernanceService::enforceReleaseManagedDraft($data);
     }
 
     protected function afterCreate(): void
@@ -124,6 +158,8 @@ class CreateCareerGuide extends CreateRecord
         CareerGuideWorkspace::syncRelatedJobs($this->getRecord(), $this->workspaceRelatedJobsState);
         CareerGuideWorkspace::syncRelatedPersonalityProfiles($this->getRecord(), $this->workspaceRelatedPersonalityProfilesState);
         CareerGuideWorkspace::syncWorkspaceSeo($this->getRecord(), $this->workspaceSeoState);
+        ContentGovernanceService::sync($this->getRecord(), $this->workspaceGovernanceState);
+        IntentRegistryService::sync($this->getRecord(), $this->workspaceGovernanceState);
         CareerGuideWorkspace::createRevision($this->getRecord(), 'Initial workspace snapshot');
     }
 
@@ -135,5 +171,17 @@ class CreateCareerGuide extends CreateRecord
     protected function getRedirectUrl(): string
     {
         return CareerGuideResource::getUrl('edit', ['record' => $this->getRecord()]);
+    }
+
+    private function currentAdminId(): ?int
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $user = auth($guard)->user();
+
+        if (! is_object($user) || ! method_exists($user, 'getAuthIdentifier')) {
+            return null;
+        }
+
+        return (int) $user->getAuthIdentifier();
     }
 }

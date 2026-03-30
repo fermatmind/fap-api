@@ -6,9 +6,13 @@ namespace App\Filament\Ops\Resources\CareerJobResource\Pages;
 
 use App\Filament\Ops\Resources\CareerJobResource;
 use App\Filament\Ops\Resources\CareerJobResource\Support\CareerJobWorkspace;
+use App\Services\Cms\ContentGovernanceService;
+use App\Services\Cms\IntentRegistryService;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Validation\ValidationException;
+use InvalidArgumentException;
 
 class EditCareerJob extends EditRecord
 {
@@ -23,6 +27,11 @@ class EditCareerJob extends EditRecord
      * @var array<string, mixed>
      */
     protected array $workspaceSeoState = [];
+
+    /**
+     * @var array<string, mixed>
+     */
+    protected array $workspaceGovernanceState = [];
 
     public function getTitle(): string|Htmlable
     {
@@ -69,6 +78,7 @@ class EditCareerJob extends EditRecord
             ...$data,
             'workspace_sections' => CareerJobWorkspace::workspaceSectionsFromRecord($this->getRecord()),
             'workspace_seo' => CareerJobWorkspace::workspaceSeoFromRecord($this->getRecord()),
+            'workspace_governance' => ContentGovernanceService::stateFromRecord($this->getRecord()),
         ];
     }
 
@@ -80,8 +90,9 @@ class EditCareerJob extends EditRecord
     {
         $this->workspaceSectionsState = is_array($data['workspace_sections'] ?? null) ? $data['workspace_sections'] : [];
         $this->workspaceSeoState = is_array($data['workspace_seo'] ?? null) ? $data['workspace_seo'] : [];
+        $this->workspaceGovernanceState = is_array($data['workspace_governance'] ?? null) ? $data['workspace_governance'] : [];
 
-        unset($data['workspace_sections'], $data['workspace_seo']);
+        unset($data['workspace_sections'], $data['workspace_seo'], $data['workspace_governance']);
 
         $jobCode = CareerJobWorkspace::normalizeJobCode(
             (string) ($data['job_code'] ?? ''),
@@ -94,13 +105,34 @@ class EditCareerJob extends EditRecord
         $data['locale'] = CareerJobWorkspace::normalizeLocale((string) ($data['locale'] ?? 'en'));
         $data['updated_by_admin_user_id'] = $this->currentAdminId();
 
-        return $data;
+        try {
+            IntentRegistryService::assertNoConflict(
+                $this->getRecord(),
+                $this->workspaceGovernanceState,
+                [
+                    'title' => $data['title'] ?? $this->getRecord()->title,
+                    'slug' => $data['slug'] ?? $this->getRecord()->slug,
+                    'body_md' => $data['body_md'] ?? $this->getRecord()->body_md,
+                    'sections' => $this->workspaceSectionsState,
+                ],
+                0,
+                $this->getRecord(),
+            );
+        } catch (InvalidArgumentException $e) {
+            throw ValidationException::withMessages([
+                'workspace_governance.primary_query' => $e->getMessage(),
+            ]);
+        }
+
+        return ContentGovernanceService::preserveReleaseManagedState($this->getRecord(), $data);
     }
 
     protected function afterSave(): void
     {
         CareerJobWorkspace::syncWorkspaceSections($this->getRecord(), $this->workspaceSectionsState);
         CareerJobWorkspace::syncWorkspaceSeo($this->getRecord(), $this->workspaceSeoState);
+        ContentGovernanceService::sync($this->getRecord(), $this->workspaceGovernanceState);
+        IntentRegistryService::sync($this->getRecord(), $this->workspaceGovernanceState);
         $this->getRecord()->unsetRelation('sections');
         $this->getRecord()->unsetRelation('seoMeta');
         CareerJobWorkspace::createRevision($this->getRecord(), 'Workspace update', auth((string) config('admin.guard', 'admin'))->user());

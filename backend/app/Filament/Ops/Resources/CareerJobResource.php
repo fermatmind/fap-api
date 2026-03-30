@@ -7,10 +7,12 @@ namespace App\Filament\Ops\Resources;
 use App\Filament\Ops\Resources\CareerJobResource\Pages;
 use App\Filament\Ops\Resources\CareerJobResource\Support\CareerJobWorkspace;
 use App\Filament\Ops\Support\ContentAccess;
+use App\Filament\Ops\Support\ContentGovernanceForm;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\CareerJob;
+use App\Services\Cms\ContentPublishGateService;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
@@ -213,14 +215,23 @@ class CareerJobResource extends Resource
                                     ->required()
                                     ->native(false)
                                     ->options(self::statusOptions())
-                                    ->default(CareerJob::STATUS_DRAFT),
+                                    ->default(CareerJob::STATUS_DRAFT)
+                                    ->disabled()
+                                    ->dehydrated(false)
+                                    ->helperText('Managed by the release workflow. Use editorial review and release actions to change publish state.'),
                                 Forms\Components\Toggle::make('is_public')
                                     ->label('Public visibility')
-                                    ->default(true),
+                                    ->default(true)
+                                    ->disabled()
+                                    ->dehydrated(false)
+                                    ->helperText('Managed by the release workflow. Public visibility changes only through release actions.'),
                                 Forms\Components\Toggle::make('is_indexable')
                                     ->label('Search indexable')
                                     ->default(true),
-                                Forms\Components\DateTimePicker::make('published_at'),
+                                Forms\Components\DateTimePicker::make('published_at')
+                                    ->disabled()
+                                    ->dehydrated(false)
+                                    ->helperText('Managed by the release workflow. Publish timestamps are written only during release.'),
                                 Forms\Components\DateTimePicker::make('scheduled_at'),
                                 Forms\Components\TextInput::make('sort_order')
                                     ->numeric()
@@ -270,6 +281,10 @@ class CareerJobResource extends Resource
                                     ->maxLength(64)
                                     ->helperText('Leave blank to derive robots from the current indexability toggle.'),
                             ]),
+                        ContentGovernanceForm::section(
+                            defaultPageType: 'entity',
+                            railClass: 'ops-career-job-workspace-section ops-career-job-workspace-section--rail',
+                        ),
                         Forms\Components\Section::make('Record cues')
                             ->description('Read-only context so editors can review the planned frontend route, timestamps, and revision trail before cutover.')
                             ->extraAttributes(['class' => 'ops-career-job-workspace-section ops-career-job-workspace-section--rail'])
@@ -694,6 +709,8 @@ class CareerJobResource extends Resource
         if ((EditorialReviewAudit::latestState('job', $record)['state'] ?? null) !== EditorialReviewAudit::STATE_APPROVED) {
             throw new AuthorizationException('This career job must be approved in editorial review before it can be published.');
         }
+
+        ContentPublishGateService::assertReadyForRelease('job', $record);
 
         $record->forceFill([
             'status' => CareerJob::STATUS_PUBLISHED,

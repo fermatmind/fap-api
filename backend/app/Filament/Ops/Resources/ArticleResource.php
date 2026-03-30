@@ -7,10 +7,12 @@ namespace App\Filament\Ops\Resources;
 use App\Filament\Ops\Resources\ArticleResource\Pages;
 use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
 use App\Filament\Ops\Support\ContentAccess;
+use App\Filament\Ops\Support\ContentGovernanceForm;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\Article;
+use App\Services\Cms\ContentPublishGateService;
 use App\Support\OrgContext;
 use Filament\Forms;
 use Filament\Forms\Components\BelongsToManyMultiSelect;
@@ -129,17 +131,23 @@ class ArticleResource extends Resource
                                     ->required()
                                     ->options(self::statusOptions())
                                     ->default('draft')
-                                    ->helperText('Published records are ready for release once visibility and scheduling are aligned.'),
+                                    ->disabled()
+                                    ->dehydrated(false)
+                                    ->helperText('Managed by the release workflow. Use editorial review and release actions to change publish state.'),
                                 Forms\Components\Toggle::make('is_public')
                                     ->label('Public visibility')
                                     ->default(false)
-                                    ->helperText('Controls whether the article can be served on the public experience.'),
+                                    ->disabled()
+                                    ->dehydrated(false)
+                                    ->helperText('Managed by the release workflow. Public visibility changes only through release or unpublish actions.'),
                                 Forms\Components\Toggle::make('is_indexable')
                                     ->label('Search indexable')
                                     ->default(true)
                                     ->helperText('Signals whether search engines should index this article.'),
                                 Forms\Components\DateTimePicker::make('published_at')
-                                    ->helperText('Set the publish timestamp used for editorial reporting and release cues.'),
+                                    ->disabled()
+                                    ->dehydrated(false)
+                                    ->helperText('Managed by the release workflow. Publish timestamps are written only during release.'),
                                 Forms\Components\DateTimePicker::make('scheduled_at')
                                     ->helperText('Optional future release time for editorial scheduling.'),
                             ]),
@@ -202,6 +210,10 @@ class ArticleResource extends Resource
                                     ->maxLength(255)
                                     ->helperText('Optional image URL for Open Graph and social previews.'),
                             ]),
+                        ContentGovernanceForm::section(
+                            defaultPageType: 'guide',
+                            railClass: 'ops-article-workspace-section ops-article-workspace-section--rail',
+                        ),
                         Forms\Components\Section::make('Record cues')
                             ->description('Read-only context to help editors understand what is already live and when it last changed.')
                             ->extraAttributes(['class' => 'ops-article-workspace-section ops-article-workspace-section--rail'])
@@ -355,6 +367,8 @@ class ArticleResource extends Resource
         if ((EditorialReviewAudit::latestState('article', $record)['state'] ?? null) !== EditorialReviewAudit::STATE_APPROVED) {
             throw new AuthorizationException('This article must be approved in editorial review before it can be published.');
         }
+
+        ContentPublishGateService::assertReadyForRelease('article', $record);
 
         $record->forceFill([
             'status' => 'published',
