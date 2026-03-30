@@ -100,6 +100,22 @@ class AttemptReadController extends Controller
         $orgId = $this->currentOrgContext()->orgId();
         $result = Result::query()->where('org_id', $orgId)->where('attempt_id', $id)->first();
         if (! $result instanceof Result) {
+            $submissionPayload = $this->latestReadableSubmission($request, $id);
+            if (($submissionPayload['ok'] ?? false) === true) {
+                $submissionState = strtolower(trim((string) data_get($submissionPayload, 'submission.state', 'pending')));
+                if (in_array($submissionState, ['pending', 'running'], true)) {
+                    return $this->pendingSubmissionResponse($id, $submissionPayload, includeReport: false);
+                }
+
+                if ($submissionState === 'failed') {
+                    return $this->failedSubmissionResponse($id, $submissionPayload, includeReport: false);
+                }
+
+                if ($submissionState === 'succeeded') {
+                    return $this->missingResultAfterSubmissionResponse($id, $submissionPayload, includeReport: false);
+                }
+            }
+
             throw new ApiProblemException(404, 'RESULT_NOT_FOUND', 'result not found.');
         }
 
@@ -291,23 +307,20 @@ class AttemptReadController extends Controller
         $anonId = $this->resolveAnonId($request);
         $result = Result::query()->where('org_id', $orgId)->where('attempt_id', $id)->first();
         if (! $result instanceof Result) {
-            $submissionPayload = $this->attemptSubmissionService->latestForAttempt(
-                $this->currentOrgContext(),
-                $id,
-                $userId !== null ? (string) $userId : null,
-                $anonId
-            );
+            $submissionPayload = $this->latestReadableSubmission($request, $id);
+            if (($submissionPayload['ok'] ?? false) === true) {
+                $submissionState = strtolower(trim((string) data_get($submissionPayload, 'submission.state', 'pending')));
+                if (in_array($submissionState, ['pending', 'running'], true)) {
+                    return $this->pendingSubmissionResponse($id, $submissionPayload, includeReport: true);
+                }
 
-            if (($submissionPayload['ok'] ?? false) === true && ($submissionPayload['generating'] ?? false) === true) {
-                return response()->json([
-                    'ok' => true,
-                    'attempt_id' => $id,
-                    'generating' => true,
-                    'submission_state' => (string) data_get($submissionPayload, 'submission.state', 'pending'),
-                    'submission' => is_array($submissionPayload['submission'] ?? null) ? $submissionPayload['submission'] : [],
-                    'result' => null,
-                    'report' => [],
-                ], 202);
+                if ($submissionState === 'failed') {
+                    return $this->failedSubmissionResponse($id, $submissionPayload, includeReport: true);
+                }
+
+                if ($submissionState === 'succeeded') {
+                    return $this->missingResultAfterSubmissionResponse($id, $submissionPayload, includeReport: true);
+                }
             }
 
             throw new ApiProblemException(404, 'RESULT_NOT_FOUND', 'result not found.');
@@ -487,11 +500,12 @@ class AttemptReadController extends Controller
     {
         $orgId = $this->currentOrgContext()->orgId();
         $attempt = $this->resolveAttemptForAccessRead($request, $orgId, $id);
+        $submissionPayload = $this->latestReadableSubmission($request, (string) $attempt->id);
         $projection = UnifiedAccessProjection::query()
             ->where('attempt_id', (string) $attempt->id)
             ->first();
 
-        $fallbackStates = $this->fallbackProjectionStates($orgId, (string) $attempt->id);
+        $fallbackStates = $this->fallbackProjectionStates($orgId, (string) $attempt->id, $submissionPayload);
         $accessState = trim((string) ($projection?->access_state ?? $fallbackStates['access_state']));
         $reportState = trim((string) ($projection?->report_state ?? $fallbackStates['report_state']));
         $pdfState = trim((string) ($projection?->pdf_state ?? $fallbackStates['pdf_state']));
@@ -568,12 +582,58 @@ class AttemptReadController extends Controller
     /**
      * @return array{access_state:string,report_state:string,pdf_state:string,reason_code:string,payload_json:array<string,mixed>}
      */
-    private function fallbackProjectionStates(int $orgId, string $attemptId): array
+    private function fallbackProjectionStates(int $orgId, string $attemptId, ?array $submissionPayload = null): array
     {
         $resultExists = Result::query()
             ->where('org_id', $orgId)
             ->where('attempt_id', $attemptId)
             ->exists();
+
+        if (! $resultExists && ($submissionPayload['ok'] ?? false) === true) {
+            $submissionState = strtolower(trim((string) data_get($submissionPayload, 'submission.state', 'pending')));
+            if (in_array($submissionState, ['pending', 'running'], true)) {
+                return [
+                    'access_state' => 'locked',
+                    'report_state' => 'pending',
+                    'pdf_state' => 'missing',
+                    'reason_code' => 'submission_pending',
+                    'payload_json' => [
+                        'fallback' => true,
+                        'result_exists' => false,
+                        'submission' => is_array($submissionPayload['submission'] ?? null) ? $submissionPayload['submission'] : [],
+                    ],
+                ];
+            }
+
+            if ($submissionState === 'failed') {
+                return [
+                    'access_state' => 'locked',
+                    'report_state' => 'unavailable',
+                    'pdf_state' => 'missing',
+                    'reason_code' => 'submission_failed',
+                    'payload_json' => [
+                        'fallback' => true,
+                        'result_exists' => false,
+                        'submission' => is_array($submissionPayload['submission'] ?? null) ? $submissionPayload['submission'] : [],
+                        'result' => is_array($submissionPayload['result'] ?? null) ? $submissionPayload['result'] : null,
+                    ],
+                ];
+            }
+
+            if ($submissionState === 'succeeded') {
+                return [
+                    'access_state' => 'locked',
+                    'report_state' => 'restoring',
+                    'pdf_state' => 'missing',
+                    'reason_code' => 'submission_succeeded_result_missing',
+                    'payload_json' => [
+                        'fallback' => true,
+                        'result_exists' => false,
+                        'submission' => is_array($submissionPayload['submission'] ?? null) ? $submissionPayload['submission'] : [],
+                    ],
+                ];
+            }
+        }
 
         return [
             'access_state' => $resultExists ? 'locked' : 'pending',
@@ -1309,6 +1369,87 @@ class AttemptReadController extends Controller
     private function currentOrgContext(): OrgContext
     {
         return app(OrgContext::class);
+    }
+
+    private function latestReadableSubmission(Request $request, string $attemptId): ?array
+    {
+        $attempt = $this->reportSubjects->findAttemptForCurrentContext($attemptId, $this->reportActor($request));
+        if (! $attempt instanceof Attempt) {
+            $attempt = $this->ownedAttemptQuery($request, $attemptId)->first();
+        }
+
+        if (! $attempt instanceof Attempt) {
+            return null;
+        }
+
+        $payload = $this->attemptSubmissionService->latestForAttempt(
+            $this->currentOrgContext(),
+            $attemptId,
+            $this->resolveUserId($request),
+            $this->resolveAnonId($request)
+        );
+
+        return ($payload['ok'] ?? false) === true ? $payload : null;
+    }
+
+    private function pendingSubmissionResponse(string $attemptId, array $submissionPayload, bool $includeReport): JsonResponse
+    {
+        $payload = [
+            'ok' => true,
+            'attempt_id' => $attemptId,
+            'generating' => true,
+            'submission_state' => (string) data_get($submissionPayload, 'submission.state', 'pending'),
+            'submission' => is_array($submissionPayload['submission'] ?? null) ? $submissionPayload['submission'] : [],
+            'result' => null,
+        ];
+        if ($includeReport) {
+            $payload['report'] = [];
+        }
+
+        return response()->json($payload, 202);
+    }
+
+    private function failedSubmissionResponse(string $attemptId, array $submissionPayload, bool $includeReport): JsonResponse
+    {
+        $message = trim((string) data_get($submissionPayload, 'submission.error_message', ''));
+        if ($message === '') {
+            $message = trim((string) data_get($submissionPayload, 'result.message', 'submission failed.'));
+        }
+
+        $payload = [
+            'ok' => false,
+            'attempt_id' => $attemptId,
+            'error_code' => 'SUBMISSION_FAILED',
+            'message' => $message !== '' ? $message : 'submission failed.',
+            'generating' => false,
+            'submission_state' => (string) data_get($submissionPayload, 'submission.state', 'failed'),
+            'submission' => is_array($submissionPayload['submission'] ?? null) ? $submissionPayload['submission'] : [],
+            'result' => is_array($submissionPayload['result'] ?? null) ? $submissionPayload['result'] : null,
+        ];
+        if ($includeReport) {
+            $payload['report'] = [];
+        }
+
+        return response()->json($payload);
+    }
+
+    private function missingResultAfterSubmissionResponse(string $attemptId, array $submissionPayload, bool $includeReport): JsonResponse
+    {
+        $payload = [
+            'ok' => false,
+            'attempt_id' => $attemptId,
+            'error_code' => 'SUBMISSION_SUCCEEDED_RESULT_MISSING',
+            'message' => 'submission succeeded but result is not readable yet.',
+            'generating' => false,
+            'submission_state' => (string) data_get($submissionPayload, 'submission.state', 'succeeded'),
+            'submission' => is_array($submissionPayload['submission'] ?? null) ? $submissionPayload['submission'] : [],
+            'result' => null,
+        ];
+        if ($includeReport) {
+            $payload['report'] = [];
+        }
+
+        return response()->json($payload);
     }
 
     private function resolveAttemptId(Result $result, ?Attempt $attempt, string $fallbackAttemptId): string
