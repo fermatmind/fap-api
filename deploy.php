@@ -206,6 +206,25 @@ task('artisan:config:cache', function () {
     run('{{bin/php}} {{release_path}}/backend/artisan config:cache --ansi');
 });
 
+task('guard:sitemap-authority', function () {
+    within('{{release_path}}/backend', function () {
+        run(<<<'BASH'
+{{bin/php}} -r '
+require "vendor/autoload.php";
+$app = require "bootstrap/app.php";
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+$kernel->bootstrap();
+$authority = strtolower(trim((string) config("services.seo.public_sitemap_authority", "frontend")));
+if ($authority !== "backend") {
+    fwrite(STDERR, "SEO_PUBLIC_SITEMAP_AUTHORITY must resolve to backend; got [{$authority}]\n");
+    exit(1);
+}
+echo "SEO sitemap authority: {$authority}\n";
+'
+BASH);
+    });
+});
+
 task('artisan:route:cache', function () {
     run('{{bin/php}} {{release_path}}/backend/artisan route:cache --ansi');
 });
@@ -417,6 +436,7 @@ after('deploy:shared', 'ensure:healthz-deps');
 after('deploy:vendors', 'artisan:filament:assets');
 after('artisan:filament:assets', 'guard:ops-theme-asset');
 after('artisan:filament:assets', 'guard:filament-assets');
+after('artisan:config:cache', 'guard:sitemap-authority');
 after('artisan:migrate', 'ensure:release-runtime-perms');
 
 after('deploy:symlink', 'reload:php-fpm');
