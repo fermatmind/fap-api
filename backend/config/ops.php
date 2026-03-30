@@ -99,4 +99,11 @@ return [
             ],
         ],
     ],
+
+    'attempt_chain_audit' => [
+        'window_hours' => (int) env('OPS_ATTEMPT_CHAIN_AUDIT_WINDOW_HOURS', 24),
+        'limit' => (int) env('OPS_ATTEMPT_CHAIN_AUDIT_LIMIT', 200),
+        'pending_timeout_minutes' => (int) env('OPS_ATTEMPT_CHAIN_AUDIT_PENDING_TIMEOUT_MINUTES', 15),
+        'strict_default' => (bool) env('OPS_ATTEMPT_CHAIN_AUDIT_STRICT_DEFAULT', false),
+    ],
 ];
