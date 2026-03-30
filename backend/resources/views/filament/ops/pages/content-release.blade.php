@@ -54,6 +54,10 @@
                                 <option value="article">Article</option>
                                 <option value="guide">Career Guide</option>
                                 <option value="job">Career Job</option>
+                                <option value="method">Method</option>
+                                <option value="data">Data</option>
+                                <option value="personality">Personality</option>
+                                <option value="topic">Topic</option>
                             </select>
                         </label>
 
@@ -83,6 +87,7 @@
                         <th>Review state</th>
                         <th>Locale</th>
                         <th>Visibility</th>
+                        <th>Citation QA</th>
                         <th>Updated</th>
                         <th>Actions</th>
                     </tr>
@@ -111,12 +116,41 @@
                         </td>
                         <td>{{ $item['locale'] }}</td>
                         <td>{{ $item['visibility'] }}</td>
+                        <td class="ops-table__status">
+                            @if ($item['type'] === 'data')
+                                <div class="ops-control-stack">
+                                    <x-filament.ops.shared.status-pill
+                                        :state="(string) ($item['citation_qa']['state'] ?? 'warning')"
+                                        :label="(string) ($item['citation_qa']['label'] ?? 'Missing')"
+                                    />
+                                    <span class="ops-control-hint">
+                                        {{ (string) ($item['citation_qa_summary'] ?? 'Run Citation QA before release.') }}
+                                    </span>
+                                    @if (!empty($item['citation_qa_audited_at']))
+                                        <span class="ops-control-hint">Last run: {{ $item['citation_qa_audited_at'] }}</span>
+                                    @endif
+                                </div>
+                            @else
+                                <span class="ops-control-hint">N/A</span>
+                            @endif
+                        </td>
                         <td>{{ $item['updated_at'] }}</td>
                         <td>
                             <div class="ops-toolbar-inline">
                                 <x-filament::button size="xs" color="gray" tag="a" href="{{ $item['edit_url'] }}">
                                     Open
                                 </x-filament::button>
+
+                                @if ($item['type'] === 'data')
+                                    <x-filament::button
+                                        size="xs"
+                                        color="gray"
+                                        type="button"
+                                        wire:click="runCitationQa({{ $item['id'] }})"
+                                    >
+                                        Run Citation QA
+                                    </x-filament::button>
+                                @endif
 
                                 @if ($item['releaseable'])
                                     <x-filament::button
@@ -129,7 +163,7 @@
                                     </x-filament::button>
                                 @elseif ($item['status'] === 'draft')
                                     <x-filament::button size="xs" color="warning" disabled>
-                                        Needs Workflow
+                                        {{ $item['type'] === 'data' && empty($item['citation_qa']['passed']) ? 'Needs Citation QA' : 'Needs Workflow' }}
                                     </x-filament::button>
                                 @else
                                     <x-filament::button size="xs" color="success" disabled>

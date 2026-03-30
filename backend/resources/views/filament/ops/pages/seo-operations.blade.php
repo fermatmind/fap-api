@@ -14,6 +14,10 @@
                             <option value="article">Articles</option>
                             <option value="guide">Career guides</option>
                             <option value="job">Career jobs</option>
+                            <option value="method">Methods</option>
+                            <option value="data">Data pages</option>
+                            <option value="personality">Personality</option>
+                            <option value="topic">Topics</option>
                         </select>
                     </label>
 
@@ -26,6 +30,8 @@
                             <option value="robots">Robots</option>
                             <option value="indexability">Indexability</option>
                             <option value="social">Social previews</option>
+                            <option value="schema">Schema consistency</option>
+                            <option value="sitemap">Sitemap eligibility</option>
                             <option value="growth">Growth blockers</option>
                         </select>
                     </label>
@@ -69,6 +75,9 @@
                         </x-filament::button>
                     @endif
                     @if (\App\Filament\Ops\Support\ContentAccess::canWrite())
+                        <x-filament::button color="gray" type="button" wire:click="runMonthlyPatrol">
+                            Run Monthly Patrol
+                        </x-filament::button>
                         <x-filament::button color="primary" type="button" wire:click="applyBulkAction">
                             Apply SEO Action
                         </x-filament::button>
@@ -96,6 +105,28 @@
             description="Discovery readiness and growth blockers derived from the current public content contract."
         >
             <x-filament-ops::ops-field-grid :fields="$growthFields" />
+        </x-filament-ops::ops-section>
+
+        <x-filament-ops::ops-section
+            title="Monthly patrol"
+            description="Track the latest cannibalization report, data citation QA backlog, and sitemap / canonical / schema consistency patrol."
+        >
+            <x-filament-ops::ops-field-grid :fields="$monthlyPatrolFields" />
+
+            @if (count($monthlyPatrolFindings) > 0)
+                <div class="ops-card-list">
+                    @foreach ($monthlyPatrolFindings as $finding)
+                        <x-filament-ops::ops-result-card
+                            :title="(string) ($finding['title'] ?? $finding['primary_query'] ?? $finding['kind'] ?? 'Finding')"
+                            :meta="strtoupper((string) ($finding['kind'] ?? 'patrol'))"
+                        >
+                            <p class="ops-control-hint">
+                                {{ (string) ($finding['summary'] ?? $finding['message'] ?? implode(', ', (array) ($finding['issue_labels'] ?? []))) }}
+                            </p>
+                        </x-filament-ops::ops-result-card>
+                    @endforeach
+                </div>
+            @endif
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section

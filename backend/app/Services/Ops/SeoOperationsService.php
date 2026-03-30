@@ -10,9 +10,22 @@ use App\Models\CareerGuide;
 use App\Models\CareerGuideSeoMeta;
 use App\Models\CareerJob;
 use App\Models\CareerJobSeoMeta;
+use App\Models\DataPage;
+use App\Models\DataPageSeoMeta;
+use App\Models\MethodPage;
+use App\Models\MethodPageSeoMeta;
+use App\Models\PersonalityProfile;
+use App\Models\PersonalityProfileSeoMeta;
+use App\Models\TopicProfile;
+use App\Models\TopicProfileSeoMeta;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\CareerGuideSeoService;
 use App\Services\Cms\CareerJobSeoService;
+use App\Services\Cms\ContentPublishGateService;
+use App\Services\Cms\DataPageSeoService;
+use App\Services\Cms\MethodPageSeoService;
+use App\Services\Cms\PersonalityProfileSeoService;
+use App\Services\Cms\TopicProfileSeoService;
 use Illuminate\Support\Str;
 
 final class SeoOperationsService
@@ -39,6 +52,10 @@ final class SeoOperationsService
 
     public const ISSUE_GROWTH = 'growth';
 
+    public const ISSUE_SCHEMA = 'schema';
+
+    public const ISSUE_SITEMAP = 'sitemap';
+
     /**
      * @var list<string>
      */
@@ -47,12 +64,17 @@ final class SeoOperationsService
         self::ISSUE_CANONICAL,
         self::ISSUE_ROBOTS,
         self::ISSUE_INDEXABILITY,
+        self::ISSUE_SCHEMA,
     ];
 
     public function __construct(
         private readonly ArticleSeoService $articleSeoService,
         private readonly CareerGuideSeoService $careerGuideSeoService,
         private readonly CareerJobSeoService $careerJobSeoService,
+        private readonly MethodPageSeoService $methodPageSeoService,
+        private readonly DataPageSeoService $dataPageSeoService,
+        private readonly PersonalityProfileSeoService $personalityProfileSeoService,
+        private readonly TopicProfileSeoService $topicProfileSeoService,
     ) {}
 
     /**
@@ -168,6 +190,22 @@ final class SeoOperationsService
             ];
         }
 
+        if ($this->hasSchemaGap($type, $record)) {
+            $issues[] = [
+                'code' => self::ISSUE_SCHEMA,
+                'label' => 'Schema consistency',
+                'autofix' => [self::ACTION_FILL_METADATA, self::ACTION_SYNC_CANONICAL],
+            ];
+        }
+
+        if ($this->hasSitemapGap($type, $record, $seoMeta)) {
+            $issues[] = [
+                'code' => self::ISSUE_SITEMAP,
+                'label' => 'Sitemap eligibility drift',
+                'autofix' => [self::ACTION_SYNC_CANONICAL, self::ACTION_SYNC_ROBOTS],
+            ];
+        }
+
         if ($isPublishedPublic && (! $isIndexable || $this->hasGrowthBlocker($type, $record, $seoMeta))) {
             $issues[] = [
                 'code' => self::ISSUE_GROWTH,
@@ -205,6 +243,22 @@ final class SeoOperationsService
             ),
             'guide' => $record instanceof CareerGuide ? $this->careerGuideSeoService->buildCanonicalUrl($record) : null,
             'job' => $record instanceof CareerJob ? $this->careerJobSeoService->buildCanonicalUrl(
+                $record,
+                (string) data_get($record, 'locale', 'en'),
+            ) : null,
+            'method' => $record instanceof MethodPage ? $this->methodPageSeoService->buildCanonicalUrl(
+                $record,
+                (string) data_get($record, 'locale', 'en'),
+            ) : null,
+            'data' => $record instanceof DataPage ? $this->dataPageSeoService->buildCanonicalUrl(
+                $record,
+                (string) data_get($record, 'locale', 'en'),
+            ) : null,
+            'personality' => $record instanceof PersonalityProfile ? $this->personalityProfileSeoService->buildCanonicalUrl(
+                $record,
+                (string) data_get($record, 'locale', 'en'),
+            ) : null,
+            'topic' => $record instanceof TopicProfile ? $this->topicProfileSeoService->buildCanonicalUrl(
                 $record,
                 (string) data_get($record, 'locale', 'en'),
             ) : null,
@@ -313,6 +367,98 @@ final class SeoOperationsService
                 'robots' => $this->preserveOrFill($meta->robots, (string) data_get($payload, 'robots', '')),
             ]);
             $meta->save();
+
+            return;
+        }
+
+        if ($type === 'method' && $record instanceof MethodPage) {
+            $payload = $this->methodPageSeoService->buildMeta($record, (string) $record->locale);
+            $meta = MethodPageSeoMeta::query()->firstOrNew([
+                'method_page_id' => (int) $record->id,
+            ]);
+
+            $meta->fill([
+                'seo_title' => $this->preserveOrFill($meta->seo_title, (string) data_get($payload, 'title', '')),
+                'seo_description' => $this->preserveOrFill($meta->seo_description, (string) data_get($payload, 'description', '')),
+                'canonical_url' => $this->preserveOrFill($meta->canonical_url, (string) data_get($payload, 'canonical', '')),
+                'og_title' => $this->preserveOrFill($meta->og_title, (string) data_get($payload, 'og.title', '')),
+                'og_description' => $this->preserveOrFill($meta->og_description, (string) data_get($payload, 'og.description', '')),
+                'og_image_url' => $this->preserveOrFill($meta->og_image_url, (string) data_get($payload, 'og.image', '')),
+                'twitter_title' => $this->preserveOrFill($meta->twitter_title, (string) data_get($payload, 'twitter.title', '')),
+                'twitter_description' => $this->preserveOrFill($meta->twitter_description, (string) data_get($payload, 'twitter.description', '')),
+                'twitter_image_url' => $this->preserveOrFill($meta->twitter_image_url, (string) data_get($payload, 'twitter.image', '')),
+                'robots' => $this->preserveOrFill($meta->robots, (string) data_get($payload, 'robots', '')),
+            ]);
+            $meta->save();
+
+            return;
+        }
+
+        if ($type === 'data' && $record instanceof DataPage) {
+            $payload = $this->dataPageSeoService->buildMeta($record, (string) $record->locale);
+            $meta = DataPageSeoMeta::query()->firstOrNew([
+                'data_page_id' => (int) $record->id,
+            ]);
+
+            $meta->fill([
+                'seo_title' => $this->preserveOrFill($meta->seo_title, (string) data_get($payload, 'title', '')),
+                'seo_description' => $this->preserveOrFill($meta->seo_description, (string) data_get($payload, 'description', '')),
+                'canonical_url' => $this->preserveOrFill($meta->canonical_url, (string) data_get($payload, 'canonical', '')),
+                'og_title' => $this->preserveOrFill($meta->og_title, (string) data_get($payload, 'og.title', '')),
+                'og_description' => $this->preserveOrFill($meta->og_description, (string) data_get($payload, 'og.description', '')),
+                'og_image_url' => $this->preserveOrFill($meta->og_image_url, (string) data_get($payload, 'og.image', '')),
+                'twitter_title' => $this->preserveOrFill($meta->twitter_title, (string) data_get($payload, 'twitter.title', '')),
+                'twitter_description' => $this->preserveOrFill($meta->twitter_description, (string) data_get($payload, 'twitter.description', '')),
+                'twitter_image_url' => $this->preserveOrFill($meta->twitter_image_url, (string) data_get($payload, 'twitter.image', '')),
+                'robots' => $this->preserveOrFill($meta->robots, (string) data_get($payload, 'robots', '')),
+            ]);
+            $meta->save();
+
+            return;
+        }
+
+        if ($type === 'personality' && $record instanceof PersonalityProfile) {
+            $payload = $this->personalityProfileSeoService->buildMeta($record);
+            $meta = PersonalityProfileSeoMeta::query()->firstOrNew([
+                'profile_id' => (int) $record->id,
+            ]);
+
+            $meta->fill([
+                'seo_title' => $this->preserveOrFill($meta->seo_title, (string) data_get($payload, 'title', '')),
+                'seo_description' => $this->preserveOrFill($meta->seo_description, (string) data_get($payload, 'description', '')),
+                'canonical_url' => $this->preserveOrFill($meta->canonical_url, (string) data_get($payload, 'canonical', '')),
+                'og_title' => $this->preserveOrFill($meta->og_title, (string) data_get($payload, 'og.title', '')),
+                'og_description' => $this->preserveOrFill($meta->og_description, (string) data_get($payload, 'og.description', '')),
+                'og_image_url' => $this->preserveOrFill($meta->og_image_url, (string) data_get($payload, 'og.image', '')),
+                'twitter_title' => $this->preserveOrFill($meta->twitter_title, (string) data_get($payload, 'twitter.title', '')),
+                'twitter_description' => $this->preserveOrFill($meta->twitter_description, (string) data_get($payload, 'twitter.description', '')),
+                'twitter_image_url' => $this->preserveOrFill($meta->twitter_image_url, (string) data_get($payload, 'twitter.image', '')),
+                'robots' => $this->preserveOrFill($meta->robots, (string) data_get($payload, 'robots', '')),
+            ]);
+            $meta->save();
+
+            return;
+        }
+
+        if ($type === 'topic' && $record instanceof TopicProfile) {
+            $payload = $this->topicProfileSeoService->buildMeta($record, (string) $record->locale);
+            $meta = TopicProfileSeoMeta::query()->firstOrNew([
+                'profile_id' => (int) $record->id,
+            ]);
+
+            $meta->fill([
+                'seo_title' => $this->preserveOrFill($meta->seo_title, (string) data_get($payload, 'title', '')),
+                'seo_description' => $this->preserveOrFill($meta->seo_description, (string) data_get($payload, 'description', '')),
+                'canonical_url' => $this->preserveOrFill($meta->canonical_url, (string) data_get($payload, 'canonical', '')),
+                'og_title' => $this->preserveOrFill($meta->og_title, (string) data_get($payload, 'og.title', '')),
+                'og_description' => $this->preserveOrFill($meta->og_description, (string) data_get($payload, 'og.description', '')),
+                'og_image_url' => $this->preserveOrFill($meta->og_image_url, (string) data_get($payload, 'og.image', '')),
+                'twitter_title' => $this->preserveOrFill($meta->twitter_title, (string) data_get($payload, 'twitter.title', '')),
+                'twitter_description' => $this->preserveOrFill($meta->twitter_description, (string) data_get($payload, 'twitter.description', '')),
+                'twitter_image_url' => $this->preserveOrFill($meta->twitter_image_url, (string) data_get($payload, 'twitter.image', '')),
+                'robots' => $this->preserveOrFill($meta->robots, (string) data_get($payload, 'robots', '')),
+            ]);
+            $meta->save();
         }
     }
 
@@ -401,6 +547,58 @@ final class SeoOperationsService
                 yield ['job', $record];
             }
         }
+
+        if (in_array($typeFilter, ['all', 'method'], true)) {
+            $records = MethodPage::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', 0)
+                ->with('seoMeta')
+                ->latest('updated_at')
+                ->get();
+
+            foreach ($records as $record) {
+                yield ['method', $record];
+            }
+        }
+
+        if (in_array($typeFilter, ['all', 'data'], true)) {
+            $records = DataPage::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', 0)
+                ->with('seoMeta')
+                ->latest('updated_at')
+                ->get();
+
+            foreach ($records as $record) {
+                yield ['data', $record];
+            }
+        }
+
+        if (in_array($typeFilter, ['all', 'personality'], true)) {
+            $records = PersonalityProfile::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', 0)
+                ->with('seoMeta')
+                ->latest('updated_at')
+                ->get();
+
+            foreach ($records as $record) {
+                yield ['personality', $record];
+            }
+        }
+
+        if (in_array($typeFilter, ['all', 'topic'], true)) {
+            $records = TopicProfile::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', 0)
+                ->with('seoMeta')
+                ->latest('updated_at')
+                ->get();
+
+            foreach ($records as $record) {
+                yield ['topic', $record];
+            }
+        }
     }
 
     /**
@@ -428,6 +626,22 @@ final class SeoOperationsService
             'job' => [
                 'job',
                 CareerJob::query()->withoutGlobalScopes()->where('org_id', 0)->with('seoMeta')->find($id),
+            ],
+            'method' => [
+                'method',
+                MethodPage::query()->withoutGlobalScopes()->where('org_id', 0)->with('seoMeta')->find($id),
+            ],
+            'data' => [
+                'data',
+                DataPage::query()->withoutGlobalScopes()->where('org_id', 0)->with('seoMeta')->find($id),
+            ],
+            'personality' => [
+                'personality',
+                PersonalityProfile::query()->withoutGlobalScopes()->where('org_id', 0)->with('seoMeta')->find($id),
+            ],
+            'topic' => [
+                'topic',
+                TopicProfile::query()->withoutGlobalScopes()->where('org_id', 0)->with('seoMeta')->find($id),
             ],
             default => [$type, null],
         };
@@ -460,6 +674,7 @@ final class SeoOperationsService
             'status' => trim((string) data_get($record, 'status', 'draft')),
             'is_public' => (bool) data_get($record, 'is_public'),
             'is_indexable' => (bool) data_get($record, 'is_indexable'),
+            'issue_codes' => array_values(array_map(static fn (array $issue): string => (string) $issue['code'], $issues)),
             'issue_labels' => array_values(array_map(static fn (array $issue): string => $issue['label'], $issues)),
             'issue_count' => count($issues),
             'autofix_actions' => $autofixActions,
@@ -507,6 +722,29 @@ final class SeoOperationsService
         return $this->hasMetadataGap($type, $record, $seoMeta)
             || trim((string) data_get($seoMeta, 'canonical_url', '')) !== $this->expectedCanonical($type, $record)
             || trim((string) data_get($seoMeta, 'robots', '')) !== $this->expectedRobots($type, $record);
+    }
+
+    private function hasSchemaGap(string $type, object $record): bool
+    {
+        return in_array('schema consistency', ContentPublishGateService::missing($type, $record), true);
+    }
+
+    private function hasSitemapGap(string $type, object $record, ?object $seoMeta): bool
+    {
+        if (! $this->isPublishedPublic($type, $record) || ! (bool) data_get($record, 'is_indexable')) {
+            return false;
+        }
+
+        $expectedCanonical = $this->expectedCanonical($type, $record);
+        if ($expectedCanonical === null || $expectedCanonical === '') {
+            return false;
+        }
+
+        $robots = strtolower(trim((string) data_get($seoMeta, 'robots', '')));
+
+        return trim((string) data_get($seoMeta, 'canonical_url', '')) !== $expectedCanonical
+            || $robots === ''
+            || str_contains($robots, 'noindex');
     }
 
     private function isPublishedPublic(string $type, object $record): bool
@@ -577,7 +815,17 @@ final class SeoOperationsService
 
         $this->fillMetadata($type, $record);
 
-        return $this->seoMetaFor($record instanceof Article || $record instanceof CareerGuide || $record instanceof CareerJob ? $record->fresh('seoMeta') : $record);
+        return $this->seoMetaFor(
+            $record instanceof Article
+            || $record instanceof CareerGuide
+            || $record instanceof CareerJob
+            || $record instanceof MethodPage
+            || $record instanceof DataPage
+            || $record instanceof PersonalityProfile
+            || $record instanceof TopicProfile
+                ? $record->fresh('seoMeta')
+                : $record
+        );
     }
 
     private function seoMetaFor(object $record): ?object
@@ -603,11 +851,19 @@ final class SeoOperationsService
 
     private function editUrl(string $type, int $id): string
     {
-        return match ($type) {
-            'article' => \App\Filament\Ops\Resources\ArticleResource::getUrl('edit', ['record' => $id]),
-            'guide' => \App\Filament\Ops\Resources\CareerGuideResource::getUrl('edit', ['record' => $id]),
-            'job' => \App\Filament\Ops\Resources\CareerJobResource::getUrl('edit', ['record' => $id]),
-            default => '#',
-        };
+        try {
+            return match ($type) {
+                'article' => \App\Filament\Ops\Resources\ArticleResource::getUrl('edit', ['record' => $id]),
+                'guide' => \App\Filament\Ops\Resources\CareerGuideResource::getUrl('edit', ['record' => $id]),
+                'job' => \App\Filament\Ops\Resources\CareerJobResource::getUrl('edit', ['record' => $id]),
+                'method' => \App\Filament\Ops\Resources\MethodPageResource::getUrl('edit', ['record' => $id]),
+                'data' => \App\Filament\Ops\Resources\DataPageResource::getUrl('edit', ['record' => $id]),
+                'personality' => \App\Filament\Ops\Resources\PersonalityProfileResource::getUrl('edit', ['record' => $id]),
+                'topic' => \App\Filament\Ops\Resources\TopicProfileResource::getUrl('edit', ['record' => $id]),
+                default => '#',
+            };
+        } catch (\Throwable) {
+            return '#';
+        }
     }
 }

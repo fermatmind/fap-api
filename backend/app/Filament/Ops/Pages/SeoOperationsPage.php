@@ -10,6 +10,7 @@ use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Services\Audit\AuditLogger;
 use App\Services\Ops\SeoOperationsService;
+use App\Services\Ops\SeoQualityAuditService;
 use App\Support\OrgContext;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
@@ -55,6 +56,12 @@ class SeoOperationsPage extends Page
     public array $issueQueue = [];
 
     public int $issueQueueElapsedMs = 0;
+
+    /** @var list<array<string, mixed>> */
+    public array $monthlyPatrolFields = [];
+
+    /** @var list<array<string, mixed>> */
+    public array $monthlyPatrolFindings = [];
 
     public function mount(SeoOperationsService $service): void
     {
@@ -112,6 +119,38 @@ class SeoOperationsPage extends Page
         Notification::make()
             ->title('SEO operations applied')
             ->body('Updated '.$updatedCount.' records.')
+            ->success()
+            ->send();
+    }
+
+    public function runMonthlyPatrol(SeoQualityAuditService $service, AuditLogger $audit): void
+    {
+        if (! ContentAccess::canWrite()) {
+            throw new AuthorizationException('You do not have permission to operate SEO actions.');
+        }
+
+        $actorAdminId = (int) (data_get(auth((string) config('admin.guard', 'admin'))->user(), 'id') ?? 0);
+        $result = $service->runMonthlyPatrol($this->currentOrgIds(), $actorAdminId > 0 ? $actorAdminId : null);
+
+        $audit->log(
+            request(),
+            'seo_monthly_patrol',
+            'SeoOperations',
+            (string) $result->id,
+            [
+                'scope_key' => $result->scope_key,
+                'status' => $result->status,
+                'summary' => $result->summary_json,
+            ],
+            reason: 'seo_operations_patrol',
+            result: 'success',
+        );
+
+        $this->refreshDashboard(app(SeoOperationsService::class));
+
+        Notification::make()
+            ->title('Monthly SEO patrol completed')
+            ->body((string) data_get($result->summary_json, 'summary', 'Monthly patrol recorded.'))
             ->success()
             ->send();
     }
@@ -328,6 +367,72 @@ class SeoOperationsPage extends Page
         $issueQueue = $service->buildIssueQueue($currentOrgIds, $this->typeFilter, $this->issueFilter);
         $this->issueQueue = $issueQueue['items'] ?? [];
         $this->issueQueueElapsedMs = (int) ($issueQueue['elapsed_ms'] ?? 0);
+
+        $this->hydrateMonthlyPatrol(app(SeoQualityAuditService::class)->latestMonthlyPatrol($currentOrgIds));
+    }
+
+    private function hydrateMonthlyPatrol(?\App\Models\SeoQualityAudit $audit): void
+    {
+        if ($audit === null) {
+            $this->monthlyPatrolFields = [
+                [
+                    'label' => 'Latest monthly patrol',
+                    'value' => 'Not run yet',
+                    'hint' => 'Run the patrol to capture cannibalization, sitemap, canonical, schema, and citation backlog findings.',
+                ],
+            ];
+            $this->monthlyPatrolFindings = [];
+
+            return;
+        }
+
+        $summary = is_array($audit->summary_json) ? $audit->summary_json : [];
+        $findings = is_array($audit->findings_json) ? $audit->findings_json : [];
+
+        $this->monthlyPatrolFields = [
+            [
+                'label' => 'Latest monthly patrol',
+                'value' => ucfirst((string) $audit->status),
+                'kind' => 'pill',
+                'state' => $audit->status === 'passed' ? 'success' : 'warning',
+                'hint' => (string) ($summary['summary'] ?? 'Monthly patrol result recorded.'),
+            ],
+            [
+                'label' => 'Patrol month',
+                'value' => (string) ($summary['month'] ?? optional($audit->audited_at)?->format('Y-m') ?? 'Unknown'),
+                'hint' => 'The patrol window for the currently visible org scope.',
+            ],
+            [
+                'label' => 'SEO issue queue',
+                'value' => (string) ($summary['issue_count'] ?? 0),
+                'hint' => 'Visible records with open SEO issues at patrol time.',
+            ],
+            [
+                'label' => 'Cannibalization findings',
+                'value' => (string) ($summary['cannibalization_count'] ?? 0),
+                'hint' => 'Primary queries mapped to more than one URL.',
+            ],
+            [
+                'label' => 'Citation QA backlog',
+                'value' => (string) ($summary['citation_backlog_count'] ?? 0),
+                'hint' => 'Data pages still missing a passing citation QA record.',
+            ],
+            [
+                'label' => 'Canonical / schema / sitemap',
+                'value' => implode(' / ', [
+                    'C '.(string) ($summary['canonical_issue_count'] ?? 0),
+                    'S '.(string) ($summary['schema_issue_count'] ?? 0),
+                    'M '.(string) ($summary['sitemap_issue_count'] ?? 0),
+                ]),
+                'hint' => 'Counts for canonical, schema, and sitemap eligibility drift in the latest patrol.',
+            ],
+        ];
+
+        $this->monthlyPatrolFindings = array_values(array_merge(
+            array_slice((array) ($findings['cannibalization'] ?? []), 0, 5),
+            array_slice((array) ($findings['citation_backlog'] ?? []), 0, 5),
+            array_slice((array) ($findings['seo_issue_queue'] ?? []), 0, 5),
+        ));
     }
 
     /**
