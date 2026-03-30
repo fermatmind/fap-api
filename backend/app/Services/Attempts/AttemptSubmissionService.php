@@ -129,7 +129,44 @@ final class AttemptSubmissionService
         }
 
         if (($submission['created'] ?? false) === true) {
-            ProcessAttemptSubmissionJob::dispatch((string) $row->id)->afterCommit();
+            try {
+                ProcessAttemptSubmissionJob::dispatch((string) $row->id)->afterCommit();
+            } catch (\Throwable $e) {
+                $this->markFailed(
+                    (string) $row->id,
+                    'SUBMISSION_QUEUE_DISPATCH_FAILED',
+                    $e::class.': '.$e->getMessage()
+                );
+
+                throw new ApiProblemException(503, 'SUBMISSION_QUEUE_DISPATCH_FAILED', 'submission queue dispatch failed.');
+            }
+        }
+
+        $durableAck = $this->latestForAttempt($ctx, $attemptId, $actorUserId, $actorAnonId);
+        if (! ($durableAck['ok'] ?? false)) {
+            throw new ApiProblemException(
+                503,
+                'SUBMISSION_DURABILITY_NOT_CONFIRMED',
+                'submission durability gate failed.'
+            );
+        }
+
+        $ackSubmissionId = trim((string) data_get($durableAck, 'submission.id', ''));
+        $ackState = strtolower(trim((string) data_get($durableAck, 'submission.state', 'pending')));
+        if ($ackSubmissionId === '' || $ackSubmissionId !== (string) ($row->id ?? '')) {
+            throw new ApiProblemException(
+                503,
+                'SUBMISSION_DURABILITY_NOT_CONFIRMED',
+                'submission durability gate failed.'
+            );
+        }
+
+        if (! in_array($ackState, ['pending', 'running', 'succeeded'], true)) {
+            throw new ApiProblemException(
+                503,
+                'SUBMISSION_DURABILITY_NOT_CONFIRMED',
+                'submission durability gate failed.'
+            );
         }
 
         return [
@@ -137,9 +174,9 @@ final class AttemptSubmissionService
             'payload' => [
                 'ok' => true,
                 'attempt_id' => $attemptId,
-                'submission_id' => (string) ($row->id ?? ''),
-                'submission_state' => strtolower(trim((string) ($row->state ?? 'pending'))),
-                'generating' => true,
+                'submission_id' => $ackSubmissionId,
+                'submission_state' => $ackState,
+                'generating' => in_array($ackState, ['pending', 'running'], true),
                 'mode' => 'async',
             ],
         ];

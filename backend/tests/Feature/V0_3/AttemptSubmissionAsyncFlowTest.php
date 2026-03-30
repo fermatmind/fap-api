@@ -94,6 +94,22 @@ class AttemptSubmissionAsyncFlowTest extends TestCase
         $pending = DB::table('attempt_submissions')->where('id', $submissionId)->first();
         $this->assertNotNull($pending);
         $this->assertSame('pending', (string) ($pending->state ?? ''));
+        $this->assertSame($attemptId, (string) ($pending->attempt_id ?? ''));
+
+        $pendingStatus = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/submission');
+
+        $pendingStatus->assertStatus(202);
+        $pendingStatus->assertJson([
+            'ok' => true,
+            'attempt_id' => $attemptId,
+            'generating' => true,
+            'submission' => [
+                'id' => $submissionId,
+                'state' => 'pending',
+            ],
+        ]);
 
         $job = new ProcessAttemptSubmissionJob($submissionId);
         $job->handle(app(AttemptSubmissionService::class));
