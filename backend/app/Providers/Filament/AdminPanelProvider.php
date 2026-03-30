@@ -102,6 +102,10 @@ class AdminPanelProvider extends PanelProvider
                 fn () => view('filament.ops.hooks.topbar-controls')
             )
             ->renderHook(
+                PanelsRenderHook::BODY_END,
+                fn () => view('filament.ops.hooks.livewire-page-expired-recovery')
+            )
+            ->renderHook(
                 PanelsRenderHook::SIDEBAR_FOOTER,
                 fn () => view('filament.ops.hooks.sidebar-footer')
             )

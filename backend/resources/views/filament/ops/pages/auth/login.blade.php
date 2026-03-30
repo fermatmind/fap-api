@@ -62,36 +62,4 @@
     </form>
 
     {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::AUTH_LOGIN_FORM_AFTER, scopes: $this->getRenderHookScopes()) }}
-
-    <script>
-        document.addEventListener('livewire:init', () => {
-            if (window.__opsLoginAutoRefreshHookInstalled) {
-                return
-            }
-
-            window.__opsLoginAutoRefreshHookInstalled = true
-
-            const autoRefreshStorageKey = 'ops-login-livewire-page-expired-at'
-            const autoRefreshCooldownMs = 30_000
-
-            window.Livewire?.hook('request', ({ fail }) => {
-                fail(({ status, preventDefault }) => {
-                    if (status !== 419 || window.location.pathname !== '/ops/login') {
-                        return
-                    }
-
-                    const lastAutoRefreshAt = Number(window.sessionStorage.getItem(autoRefreshStorageKey) || '0')
-                    const now = Date.now()
-
-                    if (Number.isFinite(lastAutoRefreshAt) && (now - lastAutoRefreshAt) < autoRefreshCooldownMs) {
-                        return
-                    }
-
-                    window.sessionStorage.setItem(autoRefreshStorageKey, String(now))
-                    preventDefault()
-                    window.location.reload()
-                })
-            })
-        })
-    </script>
 </x-filament-panels::page.simple>
