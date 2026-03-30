@@ -108,7 +108,7 @@ return [
         'public_sitemap_authority' => env('SEO_PUBLIC_SITEMAP_AUTHORITY', 'frontend'),
         'tests_url_prefix' => env(
             'SEO_TESTS_URL_PREFIX',
-            rtrim((string) env('APP_URL', 'http://localhost'), '/').'/tests/'
+            rtrim((string) env('FRONTEND_URL', env('APP_URL', 'http://localhost')), '/').'/tests/'
         ),
         'articles_url_prefix' => env(
             'SEO_ARTICLES_PREFIX',

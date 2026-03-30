@@ -523,6 +523,112 @@ class SitemapXmlTest extends TestCase
         $this->get('/sitemap.xml')->assertNotFound();
     }
 
+    public function test_sitemap_xml_defaults_tests_urls_to_frontend_host_when_prefix_is_not_explicitly_configured(): void
+    {
+        config([
+            'services.seo.public_sitemap_authority' => 'backend',
+            'services.seo.tests_url_prefix' => '',
+            'app.url' => 'https://api.fermatmind.com',
+            'app.frontend_url' => 'https://fermatmind.com',
+        ]);
+
+        DB::table('scales_registry')->insert([
+            'code' => 'PR24_HOST',
+            'org_id' => 0,
+            'primary_slug' => 'host-check',
+            'slugs_json' => json_encode(['host-check-alt']),
+            'driver_type' => 'MBTI',
+            'default_pack_id' => null,
+            'default_region' => null,
+            'default_locale' => null,
+            'default_dir_version' => null,
+            'capabilities_json' => null,
+            'view_policy_json' => null,
+            'commercial_json' => null,
+            'seo_schema_json' => null,
+            'is_public' => 1,
+            'is_active' => 1,
+            'created_at' => Carbon::create(2026, 1, 31, 9, 0, 0),
+            'updated_at' => Carbon::create(2026, 1, 31, 9, 0, 0),
+        ]);
+
+        $body = (string) $this->get('/sitemap.xml')->getContent();
+
+        $this->assertStringContainsString('<loc>https://fermatmind.com/tests/host-check</loc>', $body);
+        $this->assertStringContainsString('<loc>https://fermatmind.com/tests/host-check-alt</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://api.fermatmind.com/tests/host-check</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://api.fermatmind.com/tests/host-check-alt</loc>', $body);
+    }
+
+    public function test_sitemap_xml_reads_public_tests_from_v2_registry_when_legacy_registry_is_empty(): void
+    {
+        config([
+            'services.seo.public_sitemap_authority' => 'backend',
+            'services.seo.tests_url_prefix' => 'https://fermatmind.com/tests/',
+        ]);
+
+        DB::table('scales_registry')->delete();
+        DB::table('scales_registry_v2')->delete();
+
+        DB::table('scales_registry_v2')->insert([
+            [
+                'org_id' => 0,
+                'code' => 'PR24_V2_PUBLIC',
+                'primary_slug' => 'v2-public',
+                'slugs_json' => json_encode(['v2-public-alt']),
+                'driver_type' => 'MBTI',
+                'assessment_driver' => null,
+                'default_pack_id' => null,
+                'default_region' => null,
+                'default_locale' => null,
+                'default_dir_version' => null,
+                'capabilities_json' => null,
+                'view_policy_json' => null,
+                'commercial_json' => null,
+                'seo_schema_json' => null,
+                'seo_i18n_json' => null,
+                'content_i18n_json' => null,
+                'report_summary_i18n_json' => null,
+                'is_public' => 1,
+                'is_active' => 1,
+                'is_indexable' => 1,
+                'created_at' => Carbon::create(2026, 1, 31, 9, 5, 0),
+                'updated_at' => Carbon::create(2026, 1, 31, 9, 5, 0),
+            ],
+            [
+                'org_id' => 0,
+                'code' => 'PR24_V2_NOINDEX',
+                'primary_slug' => 'v2-noindex',
+                'slugs_json' => json_encode(['v2-noindex-alt']),
+                'driver_type' => 'MBTI',
+                'assessment_driver' => null,
+                'default_pack_id' => null,
+                'default_region' => null,
+                'default_locale' => null,
+                'default_dir_version' => null,
+                'capabilities_json' => null,
+                'view_policy_json' => null,
+                'commercial_json' => null,
+                'seo_schema_json' => null,
+                'seo_i18n_json' => null,
+                'content_i18n_json' => null,
+                'report_summary_i18n_json' => null,
+                'is_public' => 1,
+                'is_active' => 1,
+                'is_indexable' => 0,
+                'created_at' => Carbon::create(2026, 1, 31, 9, 10, 0),
+                'updated_at' => Carbon::create(2026, 1, 31, 9, 10, 0),
+            ],
+        ]);
+
+        $body = (string) $this->get('/sitemap.xml')->getContent();
+
+        $this->assertStringContainsString('<loc>https://fermatmind.com/tests/v2-public</loc>', $body);
+        $this->assertStringContainsString('<loc>https://fermatmind.com/tests/v2-public-alt</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://fermatmind.com/tests/v2-noindex</loc>', $body);
+        $this->assertStringNotContainsString('<loc>https://fermatmind.com/tests/v2-noindex-alt</loc>', $body);
+    }
+
     /**
      * @param  array<string, mixed>  $overrides
      */

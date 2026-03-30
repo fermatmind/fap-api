@@ -13,8 +13,8 @@ use App\Services\Cms\CareerJobSeoService;
 use App\Services\Cms\PersonalityProfileSeoService;
 use App\Services\Cms\PersonalityProfileService;
 use App\Services\Cms\TopicProfileSeoService;
+use App\Services\Scale\ScaleRegistry;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 
 class SitemapGenerator
 {
@@ -27,10 +27,11 @@ class SitemapGenerator
         private readonly PersonalityProfileService $personalityProfileService,
         private readonly PersonalityProfileSeoService $personalityProfileSeoService,
         private readonly TopicProfileSeoService $topicProfileSeoService,
+        private readonly ScaleRegistry $scaleRegistry,
     ) {
         $configuredPrefix = trim((string) config('services.seo.tests_url_prefix', ''));
         if ($configuredPrefix === '') {
-            $configuredPrefix = rtrim((string) config('app.url', 'http://localhost'), '/').'/tests/';
+            $configuredPrefix = rtrim((string) config('app.frontend_url', config('app.url', 'http://localhost')), '/').'/tests/';
         }
 
         $this->urlPrefix = rtrim($configuredPrefix, '/').'/';
@@ -90,23 +91,26 @@ class SitemapGenerator
 
     private function getScaleUrls(string $locale): array
     {
-        $rows = DB::table('scales_registry')
-            ->select('primary_slug', 'slugs_json', 'view_policy_json', 'updated_at')
-            ->where('is_active', 1)
-            ->where('is_public', 1)
-            ->where('org_id', 0)
-            ->get();
+        $rows = $this->scaleRegistry->listActivePublic(0);
 
         $slugDates = [];
 
         foreach ($rows as $row) {
-            if (! $this->isIndexablePublic($row->view_policy_json ?? null)) {
+            if (! is_array($row)) {
                 continue;
             }
 
-            $updatedAt = $this->parseUpdatedAt($row->updated_at ?? null);
+            if (array_key_exists('is_indexable', $row) && ! (bool) ($row['is_indexable'] ?? true)) {
+                continue;
+            }
 
-            $slugs = $this->collectSlugs($row->primary_slug ?? null, $row->slugs_json ?? null);
+            if (! $this->isIndexablePublic($row['view_policy_json'] ?? null)) {
+                continue;
+            }
+
+            $updatedAt = $this->parseUpdatedAt($row['updated_at'] ?? null);
+
+            $slugs = $this->collectSlugs($row['primary_slug'] ?? null, $row['slugs_json'] ?? null);
             foreach ($slugs as $slug) {
                 $slug = trim((string) $slug);
                 if ($slug === '') {

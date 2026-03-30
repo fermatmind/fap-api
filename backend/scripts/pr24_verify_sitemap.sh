@@ -9,9 +9,11 @@ export NO_COLOR=1
 
 SERVE_PORT="${SERVE_PORT:-1824}"
 API_BASE="http://127.0.0.1:${SERVE_PORT}"
+HEALTH_URL="${HEALTH_URL:-${API_BASE}/api/healthz}"
 URL_PREFIX="${SEO_TESTS_URL_PREFIX:-https://fermatmind.com/tests/}"
 URL_PREFIX="${URL_PREFIX%/}/"
 export SEO_TESTS_URL_PREFIX="${URL_PREFIX}"
+export SEO_PUBLIC_SITEMAP_AUTHORITY="${SEO_PUBLIC_SITEMAP_AUTHORITY:-backend}"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
@@ -43,6 +45,7 @@ log "Clearing application cache"
 (
   cd "$BACKEND_DIR"
   php artisan cache:clear >/dev/null 2>&1 || true
+  php artisan config:clear >/dev/null 2>&1 || true
 )
 
 SERVER_PID=""
@@ -68,7 +71,7 @@ log "Waiting for health"
 health_code=""
 health_body="$ART_DIR/health_body.txt"
 for _i in $(seq 1 40); do
-  health_code="$(curl -s -o "$health_body" -w "%{http_code}" "$API_BASE/" || true)"
+  health_code="$(curl -s -o "$health_body" -w "%{http_code}" "$HEALTH_URL" || true)"
   if [[ "$health_code" == "200" ]]; then
     break
   fi
@@ -167,23 +170,39 @@ if [[ "$loc_count" != "100" ]]; then
   exit 1
 fi
 
-lastmod_count="$(grep -E '<lastmod>[0-9]{4}-[0-9]{2}-[0-9]{2}</lastmod>' "$body_200" | wc -l | tr -d ' ')"
-if [[ "$lastmod_count" != "100" ]]; then
-  log "Expected 100 lastmod entries, got $lastmod_count"
-  exit 1
-fi
+python3 - "$body_200" "$URL_PREFIX" <<'PY'
+import re
+import sys
+import xml.etree.ElementTree as ET
 
-changefreq_count="$(grep -E '<changefreq>weekly</changefreq>' "$body_200" | wc -l | tr -d ' ')"
-if [[ "$changefreq_count" != "100" ]]; then
-  log "Expected 100 changefreq entries, got $changefreq_count"
-  exit 1
-fi
+body_path, prefix = sys.argv[1], sys.argv[2]
+tree = ET.parse(body_path)
+root = tree.getroot()
+ns = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+urls = root.findall('sm:url', ns)
+matching = []
 
-priority_count="$(grep -E '<priority>0.7</priority>' "$body_200" | wc -l | tr -d ' ')"
-if [[ "$priority_count" != "100" ]]; then
-  log "Expected 100 priority entries, got $priority_count"
-  exit 1
-fi
+for node in urls:
+    loc = (node.findtext('sm:loc', default='', namespaces=ns) or '').strip()
+    if loc.startswith(prefix + 'pr24-'):
+        matching.append(node)
+
+if len(matching) != 100:
+    raise SystemExit(f'Expected 100 matching <url> nodes for prefix {prefix}, got {len(matching)}')
+
+for node in matching:
+    loc = (node.findtext('sm:loc', default='', namespaces=ns) or '').strip()
+    lastmod = (node.findtext('sm:lastmod', default='', namespaces=ns) or '').strip()
+    changefreq = (node.findtext('sm:changefreq', default='', namespaces=ns) or '').strip()
+    priority = (node.findtext('sm:priority', default='', namespaces=ns) or '').strip()
+
+    if not re.fullmatch(r'\d{4}-\d{2}-\d{2}', lastmod):
+        raise SystemExit(f'Invalid lastmod for {loc}: {lastmod!r}')
+    if changefreq != 'weekly':
+        raise SystemExit(f'Invalid changefreq for {loc}: {changefreq!r}')
+    if priority != '0.7':
+        raise SystemExit(f'Invalid priority for {loc}: {priority!r}')
+PY
 
 headers_304="$ART_DIR/headers_304.txt"
 body_304="$ART_DIR/body_304.txt"
