@@ -11,8 +11,11 @@ use App\Models\Attempt;
 use App\Support\OrgContext;
 use App\Support\SchemaBaseline;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Queue\MaxAttemptsExceededException;
+use Illuminate\Queue\TimeoutExceededException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Throwable;
 
 final class AttemptSubmissionService
 {
@@ -243,7 +246,7 @@ final class AttemptSubmissionService
             }
 
             $state = strtolower(trim((string) ($row->state ?? 'pending')));
-            if (in_array($state, ['running', 'succeeded'], true)) {
+            if (in_array($state, ['running', 'succeeded', 'failed'], true)) {
                 return ['state' => $state];
             }
 
@@ -390,6 +393,76 @@ final class AttemptSubmissionService
             'generating' => in_array($state, ['pending', 'running'], true),
             'http_status' => in_array($state, ['pending', 'running'], true) ? 202 : 200,
         ];
+    }
+
+    public function recordTerminalJobFailure(
+        string $submissionId,
+        Throwable $exception,
+        int $attempts = 0,
+        int $maxTries = 0,
+        ?string $connection = null,
+        ?string $queue = null
+    ): void {
+        $submissionId = trim($submissionId);
+        if ($submissionId === '' || ! SchemaBaseline::hasTable('attempt_submissions')) {
+            return;
+        }
+
+        $errorCode = 'SUBMISSION_JOB_RETRY_EXHAUSTED';
+        $message = 'submission job retry exhausted.';
+        if ($exception instanceof TimeoutExceededException) {
+            $errorCode = 'SUBMISSION_JOB_TIMEOUT';
+            $message = 'submission job timed out.';
+        } elseif (! $exception instanceof MaxAttemptsExceededException) {
+            $errorCode = 'SUBMISSION_JOB_TERMINAL_FAILURE';
+            $message = 'submission job terminal failure.';
+        }
+
+        $exceptionMessage = trim($exception->getMessage());
+        if ($exceptionMessage !== '') {
+            $message .= ' '.$exceptionMessage;
+        }
+
+        $payload = [
+            'ok' => false,
+            'error_code' => $errorCode,
+            'message' => $this->truncate($message, 255),
+            'terminal_failure' => true,
+            'job' => [
+                'attempts' => max(0, $attempts),
+                'max_tries' => max(0, $maxTries),
+                'connection' => $this->nullableString($connection),
+                'queue' => $this->nullableString($queue),
+                'exception' => $this->truncate($exception::class.': '.$exceptionMessage, 255),
+            ],
+        ];
+
+        DB::transaction(function () use ($submissionId, $errorCode, $payload): void {
+            $row = DB::table('attempt_submissions')
+                ->where('id', $submissionId)
+                ->lockForUpdate()
+                ->first();
+
+            if ($row === null) {
+                return;
+            }
+
+            $state = strtolower(trim((string) ($row->state ?? 'pending')));
+            if (in_array($state, ['succeeded', 'failed'], true)) {
+                return;
+            }
+
+            DB::table('attempt_submissions')
+                ->where('id', $submissionId)
+                ->update([
+                    'state' => 'failed',
+                    'error_code' => $errorCode,
+                    'error_message' => $this->truncate((string) ($payload['message'] ?? ''), 255),
+                    'response_payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                    'finished_at' => now(),
+                    'updated_at' => now(),
+                ]);
+        });
     }
 
     private function markSucceeded(string $submissionId, array $payload): void
