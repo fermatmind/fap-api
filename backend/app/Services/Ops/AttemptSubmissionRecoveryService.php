@@ -42,13 +42,36 @@ final class AttemptSubmissionRecoveryService
         $repairs = [];
 
         foreach ($this->candidateAttemptIds($attemptId, $windowHours, $limit) as $candidateAttemptId) {
+            $attempt = Schema::hasTable('attempts')
+                ? DB::table('attempts')->where('id', $candidateAttemptId)->first()
+                : null;
             $submission = $this->latestSubmissionRow($candidateAttemptId);
             $resultExists = Result::query()->where('attempt_id', $candidateAttemptId)->exists();
             $projection = Schema::hasTable('unified_access_projections')
                 ? DB::table('unified_access_projections')->where('attempt_id', $candidateAttemptId)->first()
                 : null;
 
+            if ($attempt === null && $submission === null && ! $resultExists && $projection === null) {
+                $findings[] = $this->finding($candidateAttemptId, 'attempt_chain_absent', 'critical', [
+                    'attempt_exists' => false,
+                    'submission_exists' => false,
+                    'result_exists' => false,
+                    'projection_exists' => false,
+                ]);
+
+                continue;
+            }
+
             if ($submission === null) {
+                if ($attempt !== null && $this->toCarbon($attempt->submitted_at ?? null) instanceof Carbon) {
+                    $findings[] = $this->finding($candidateAttemptId, 'submission_missing_for_submitted_attempt', 'critical', [
+                        'attempt_exists' => true,
+                        'submitted_at' => $this->toCarbon($attempt->submitted_at ?? null)?->toIso8601String(),
+                        'result_exists' => $resultExists,
+                        'projection_exists' => $projection !== null,
+                    ]);
+                }
+
                 if ($resultExists) {
                     $findings[] = $this->finding($candidateAttemptId, 'submission_missing_with_result_present', 'critical', [
                         'result_exists' => true,
@@ -238,6 +261,26 @@ final class AttemptSubmissionRecoveryService
                 ->orderByDesc('updated_at')
                 ->limit($limit)
                 ->pluck('attempt_id');
+
+            foreach ($rows as $value) {
+                $candidate = trim((string) $value);
+                if ($candidate !== '') {
+                    $attemptIds[$candidate] = true;
+                }
+            }
+        }
+
+        if (Schema::hasTable('attempts')) {
+            $rows = DB::table('attempts')
+                ->select('id')
+                ->whereNotNull('submitted_at')
+                ->where(function ($query) use ($windowStart): void {
+                    $query->where('submitted_at', '>=', $windowStart)
+                        ->orWhere('updated_at', '>=', $windowStart);
+                })
+                ->orderByDesc('submitted_at')
+                ->limit($limit)
+                ->pluck('id');
 
             foreach ($rows as $value) {
                 $candidate = trim((string) $value);
