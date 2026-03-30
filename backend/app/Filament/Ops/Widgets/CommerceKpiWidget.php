@@ -23,6 +23,7 @@ class CommerceKpiWidget extends BaseWidget
     protected function getStats(): array
     {
         $orgId = max(0, (int) app(OrgContext::class)->orgId());
+        $currentOrgIds = $this->currentOrgIds($orgId);
         $start = now()->startOfDay();
         $end = (clone $start)->addDay();
 
@@ -38,39 +39,39 @@ class CommerceKpiWidget extends BaseWidget
         }
 
         $paidOrders = (int) DB::table('orders')
-            ->where('org_id', $orgId)
+            ->whereIn('org_id', $currentOrgIds)
             ->where('payment_state', 'paid')
             ->where('paid_at', '>=', $start)
             ->where('paid_at', '<', $end)
             ->count();
 
         $pendingUnresolved = (int) DB::table('orders')
-            ->where('org_id', $orgId)
+            ->whereIn('org_id', $currentOrgIds)
             ->whereIn('payment_state', ['created', 'pending'])
             ->count();
 
         $paidNoGrant = (int) DB::table('orders')
-            ->where('org_id', $orgId)
+            ->whereIn('org_id', $currentOrgIds)
             ->where('payment_state', 'paid')
             ->where('grant_state', '!=', 'granted')
             ->count();
 
         $compensatedRecently = (int) DB::table('orders')
-            ->where('org_id', $orgId)
+            ->whereIn('org_id', $currentOrgIds)
             ->whereNotNull('last_reconciled_at')
             ->where('last_reconciled_at', '>=', $start)
             ->where('last_reconciled_at', '<', $end)
             ->count();
 
         $refundCount = (int) DB::table('orders')
-            ->where('org_id', $orgId)
+            ->whereIn('org_id', $currentOrgIds)
             ->where('payment_state', 'refunded')
             ->where('refunded_at', '>=', $start)
             ->where('refunded_at', '<', $end)
             ->count();
 
         $webhookFailures = (int) DB::table('payment_events')
-            ->where('org_id', $orgId)
+            ->whereIn('org_id', $currentOrgIds)
             ->where('created_at', '>=', $start)
             ->where('created_at', '<', $end)
             ->where(function ($query): void {
@@ -100,5 +101,13 @@ class CommerceKpiWidget extends BaseWidget
         return Stat::make($label, self::NO_ORG_PLACEHOLDER)
             ->description($description)
             ->color('gray');
+    }
+
+    /**
+     * @return list<int>
+     */
+    private function currentOrgIds(int $orgId): array
+    {
+        return $orgId > 0 ? [0, $orgId] : [0];
     }
 }
