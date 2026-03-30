@@ -62,6 +62,20 @@ set('healthcheck_scheme', 'https');
 set('healthcheck_use_resolve', true);
 set('nginx_site', '/etc/nginx/sites-enabled/fap-api');
 set('php_fpm_service', 'php8.4-fpm');
+set('queue_manager', 'supervisor');
+set('queue_supervisorctl', '/usr/bin/supervisorctl');
+set('queue_supervisor_required_programs', [
+    'fap-queue-default-high',
+    'fap-queue-reports',
+]);
+set('queue_supervisor_optional_programs', [
+    'fap-queue-ops',
+    'fap-queue-commerce',
+    'fap-queue-content',
+    'fap-queue-insights',
+]);
+set('legacy_queue_systemd_service', 'fap-queue.service');
+set('legacy_queue_systemd_disable', true);
 
 /**
  * ======================================================
@@ -263,6 +277,62 @@ task('reload:nginx', function () {
     run('sudo -n /usr/bin/systemctl reload nginx');
 });
 
+task('queue:reload-workers', function () {
+    $manager = strtolower(trim((string) get('queue_manager', 'supervisor')));
+
+    if ($manager === 'supervisor') {
+        $supervisorctl = trim((string) get('queue_supervisorctl', '/usr/bin/supervisorctl'));
+        $requiredPrograms = array_values(array_filter((array) get('queue_supervisor_required_programs', []), static fn (mixed $value): bool => trim((string) $value) !== ''));
+        $optionalPrograms = array_values(array_filter((array) get('queue_supervisor_optional_programs', []), static fn (mixed $value): bool => trim((string) $value) !== ''));
+        $legacySystemdService = trim((string) get('legacy_queue_systemd_service', ''));
+        $disableLegacySystemd = (bool) get('legacy_queue_systemd_disable', true);
+
+        within('{{current_path}}/backend', function () {
+            run('{{bin/php}} artisan queue:restart --ansi');
+        });
+
+        run("sudo -n {$supervisorctl} reread");
+        run("sudo -n {$supervisorctl} update");
+
+        foreach ($requiredPrograms as $program) {
+            run("sudo -n {$supervisorctl} restart {$program}:* >/dev/null 2>&1 || sudo -n {$supervisorctl} restart {$program}");
+        }
+
+        foreach ($optionalPrograms as $program) {
+            run("sudo -n {$supervisorctl} restart {$program}:* >/dev/null 2>&1 || sudo -n {$supervisorctl} restart {$program} >/dev/null 2>&1 || true");
+        }
+
+        if ($legacySystemdService !== '') {
+            $quotedService = escapeshellarg($legacySystemdService);
+            run("if sudo -n /usr/bin/systemctl list-unit-files {$quotedService} >/dev/null 2>&1; then sudo -n /usr/bin/systemctl stop {$quotedService} >/dev/null 2>&1 || true; fi");
+
+            if ($disableLegacySystemd) {
+                run("if sudo -n /usr/bin/systemctl list-unit-files {$quotedService} >/dev/null 2>&1; then sudo -n /usr/bin/systemctl disable {$quotedService} >/dev/null 2>&1 || true; fi");
+            }
+
+            run("if sudo -n /usr/bin/systemctl list-unit-files {$quotedService} >/dev/null 2>&1 && sudo -n /usr/bin/systemctl is-active --quiet {$quotedService}; then echo 'legacy queue systemd service still active: {$legacySystemdService}' >&2; exit 1; fi");
+        }
+
+        return;
+    }
+
+    if ($manager === 'systemd') {
+        $systemdService = trim((string) get('legacy_queue_systemd_service', ''));
+        if ($systemdService === '') {
+            throw new \RuntimeException('queue manager systemd requires legacy_queue_systemd_service');
+        }
+
+        within('{{current_path}}/backend', function () {
+            run('{{bin/php}} artisan queue:restart --ansi');
+        });
+        run('sudo -n /usr/bin/systemctl restart ' . $systemdService);
+
+        return;
+    }
+
+    throw new \RuntimeException('unsupported queue_manager [' . $manager . ']');
+});
+
 /**
  * ======================================================
  * 固化权限修复（关键）
@@ -404,6 +474,73 @@ task('healthcheck:ops-entry-contract', function () {
     );
 });
 
+task('healthcheck:queue-smoke', function () {
+    within('{{current_path}}/backend', function () {
+        run(<<<'BASH'
+{{bin/php}} -r '
+require "vendor/autoload.php";
+$app = require "bootstrap/app.php";
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+$kernel->bootstrap();
+
+$queue = (string) config("ops.deploy_queue_smoke.queue", "default");
+$maxDepth = max(0, (int) config("ops.deploy_queue_smoke.max_depth", 5));
+$waitSeconds = max(1, (int) config("ops.deploy_queue_smoke.stability_wait_seconds", 15));
+$maxGrowth = max(0, (int) config("ops.deploy_queue_smoke.max_growth", 1));
+$pendingWindowMinutes = max(1, (int) config("ops.deploy_queue_smoke.pending_window_minutes", 30));
+$maxRecentPending = max(0, (int) config("ops.deploy_queue_smoke.max_recent_pending", 3));
+
+$queueConnectionName = (string) config("queue.default", "redis");
+$queueConnection = (array) config("queue.connections." . $queueConnectionName, []);
+if (($queueConnection["driver"] ?? "") !== "redis") {
+    fwrite(STDERR, "deploy queue smoke requires redis queue driver\n");
+    exit(1);
+}
+
+$redisConnection = (string) ($queueConnection["connection"] ?? "default");
+$redis = Illuminate\Support\Facades\Redis::connection($redisConnection);
+$queueKey = "queues:" . $queue;
+$before = (int) $redis->llen($queueKey);
+sleep($waitSeconds);
+$after = (int) $redis->llen($queueKey);
+$recentPending = (int) Illuminate\Support\Facades\DB::table("attempt_submissions")
+    ->whereIn("state", ["pending", "running"])
+    ->where("updated_at", ">=", now()->subMinutes($pendingWindowMinutes))
+    ->count();
+
+$payload = [
+    "queue" => $queue,
+    "before" => $before,
+    "after" => $after,
+    "max_depth" => $maxDepth,
+    "wait_seconds" => $waitSeconds,
+    "max_growth" => $maxGrowth,
+    "recent_pending_window_minutes" => $pendingWindowMinutes,
+    "recent_pending" => $recentPending,
+    "max_recent_pending" => $maxRecentPending,
+];
+
+if ($after > $maxDepth) {
+    fwrite(STDERR, "deploy queue smoke failed: queue depth exceeds threshold: " . json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n");
+    exit(1);
+}
+
+if (($after - $before) > $maxGrowth) {
+    fwrite(STDERR, "deploy queue smoke failed: queue depth still growing: " . json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n");
+    exit(1);
+}
+
+if ($recentPending > $maxRecentPending) {
+    fwrite(STDERR, "deploy queue smoke failed: recent pending submissions exceed threshold: " . json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n");
+    exit(1);
+}
+
+echo json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL;
+'
+BASH);
+    });
+});
+
 /**
  * ======================================================
  * Seed shared content_packages
@@ -441,9 +578,11 @@ after('artisan:migrate', 'ensure:release-runtime-perms');
 
 after('deploy:symlink', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');
+after('deploy:symlink', 'queue:reload-workers');
 after('deploy:symlink', 'healthcheck:public');
 after('deploy:symlink', 'healthcheck:auth-guest-contract');
 after('deploy:symlink', 'healthcheck:ops-entry-contract');
+after('deploy:symlink', 'healthcheck:queue-smoke');
 
 after('rollback', 'bootstrap-cache:rebuild-current');
 after('bootstrap-cache:rebuild-current', 'rollback:healthcheck');

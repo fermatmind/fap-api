@@ -22,7 +22,16 @@ Truth Source: `config/queue.php`, `app/Jobs/*`, `Phase C snapshot chain`
 | 通用任务 | default connection | high/default | 平台保底 worker |
 
 ## 2. Worker 驻留规范
-生产建议使用 Supervisor 分组驻留，不使用 horizon。
+生产正式基线：使用 Supervisor 分组驻留，不使用 horizon，也不允许与 `systemd` queue service 双跑。
+
+### 2.0 单一 owner 规则
+- 当前唯一允许的 queue worker owner 是 **Supervisor**。
+- `fap-queue.service` 这类历史 `systemd` worker 只能作为迁移遗留，不允许与 `supervisorctl status fap-queue-*` 同时 active。
+- deploy 后必须执行：
+  1. `php artisan queue:restart`
+  2. `supervisorctl reread/update`
+  3. `supervisorctl restart fap-queue-*`
+  4. `systemctl stop/disable fap-queue.service`（若存在）
 
 ### 2.1 推荐 Supervisor 样例
 ```ini
@@ -63,6 +72,7 @@ command=/usr/bin/php artisan queue:work redis --queue=insights --sleep=1 --tries
 
 ### 2.2 发布后生效
 ```bash
+php artisan queue:restart
 sudo supervisorctl reread
 sudo supervisorctl update
 sudo supervisorctl restart fap-queue-default-high:*
@@ -72,6 +82,17 @@ sudo supervisorctl restart fap-queue-commerce:*
 sudo supervisorctl restart fap-queue-content:*
 sudo supervisorctl restart fap-queue-insights:*
 ```
+
+若历史环境仍保留 `systemd` queue service：
+```bash
+sudo systemctl stop fap-queue.service || true
+sudo systemctl disable fap-queue.service || true
+sudo systemctl is-active fap-queue.service
+```
+
+通过标准：
+- `systemctl is-active fap-queue.service` 非 `active`
+- `supervisorctl status fap-queue-*` 中的程序均为 `RUNNING`
 
 ## 3. 报告生成卡住（重点）
 现象：用户提交后报告长期 loading，或 `report_snapshots.status` 长时间 `pending`。
@@ -86,6 +107,49 @@ sudo supervisorctl restart fap-queue-insights:*
 5. 检查应用日志关键字：
    - `REPORT_SNAPSHOT_GENERATE_FAILED`
 6. 若 payment 链触发，额外检查 `payment_events.handle_status` 是否 `reprocess_failed/failed`。
+
+### 3.1 attempt submission stuck / result 404（当前线上重点）
+当现象是：
+- submit 返回 `202`
+- `/submission` 长时间 `pending`
+- `/result` / `/report-access` 仍然 404
+
+按下面顺序执行：
+
+```bash
+cd /opt/fap-api/backend
+
+# 1) 确认 deploy 后 queue smoke
+php -r '
+require "vendor/autoload.php";
+$app = require "bootstrap/app.php";
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+$kernel->bootstrap();
+$queue = (string) config("ops.deploy_queue_smoke.queue", "default");
+$redis = Illuminate\Support\Facades\Redis::connection((string) ((array) config("queue.connections.".config("queue.default", "redis")))["connection"] ?? "default");
+$before = (int) $redis->llen("queues:".$queue);
+sleep((int) config("ops.deploy_queue_smoke.stability_wait_seconds", 15));
+$after = (int) $redis->llen("queues:".$queue);
+$recentPending = (int) Illuminate\Support\Facades\DB::table("attempt_submissions")
+  ->whereIn("state", ["pending", "running"])
+  ->where("updated_at", ">=", now()->subMinutes((int) config("ops.deploy_queue_smoke.pending_window_minutes", 30)))
+  ->count();
+dump(compact("queue","before","after","recentPending"));
+'
+
+# 2) 精确诊断
+php artisan ops:attempt-submission-recovery --json=1 --alert=0 --strict=0 --attempt-id=<attempt_id>
+
+# 3) recent 巡检
+php artisan ops:attempt-submission-recovery --json=1 --alert=0 --strict=0 --window-hours=1 --limit=100
+
+# 4) 当前 release/queue 已健康时，执行安全补偿
+php artisan ops:attempt-submission-recovery --json=1 --alert=0 --strict=0 --repair=1 --window-hours=1 --limit=100
+```
+
+不要跳过顺序：
+- 如果 queue smoke 失败，先修 worker owner / consumer，不要直接 `--repair=1`
+- 只有 queue smoke 通过后，补偿命令才有意义
 
 ## 4. 失败任务重试标准操作
 ```bash
@@ -177,6 +241,7 @@ cd /opt/fap-api/backend
 php artisan queue:failed
 php artisan queue:work --once --queue=reports
 php artisan queue:work --once --queue=ops
+php artisan ops:attempt-submission-recovery --json=1 --alert=0 --strict=0 --window-hours=1 --limit=100
 php artisan tinker
 # 在 tinker 中可查询 jobs/failed_jobs/report_snapshots/admin_approvals
 ```
