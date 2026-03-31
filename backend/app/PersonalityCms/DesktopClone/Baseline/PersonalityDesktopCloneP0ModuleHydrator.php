@@ -42,6 +42,42 @@ final class PersonalityDesktopCloneP0ModuleHydrator
         $overviewSection = is_array($sectionMap['overview'] ?? null) ? $sectionMap['overview'] : [];
         $careerSummarySection = is_array($sectionMap['career.summary'] ?? null) ? $sectionMap['career.summary'] : [];
         $careerSummaryParagraph = $this->firstParagraph($careerSummarySection['body_md'] ?? null);
+        $careerIdeasSection = $this->requiredSection(
+            $sectionMap,
+            'career.preferred_roles',
+            $fullCode,
+            $locale,
+        );
+        $workStylesSection = $this->requiredSection(
+            $sectionMap,
+            'career.upgrade_suggestions',
+            $fullCode,
+            $locale,
+        );
+        $whatEnergizesSection = $this->requiredSection(
+            $sectionMap,
+            'growth.motivators',
+            $fullCode,
+            $locale,
+        );
+        $whatDrainsSection = $this->requiredSection(
+            $sectionMap,
+            'growth.drainers',
+            $fullCode,
+            $locale,
+        );
+        $superpowersSection = $this->requiredSection(
+            $sectionMap,
+            'relationships.rel_advantages',
+            $fullCode,
+            $locale,
+        );
+        $pitfallsSection = $this->requiredSection(
+            $sectionMap,
+            'relationships.rel_risks',
+            $fullCode,
+            $locale,
+        );
 
         $content['letters_intro'] = $this->buildLettersIntro(
             is_array($sectionMap['letters_intro'] ?? null) ? $sectionMap['letters_intro'] : [],
@@ -74,6 +110,35 @@ final class PersonalityDesktopCloneP0ModuleHydrator
 
         $chapters['career']['matched_jobs'] = $this->buildMatchedJobs($baselineRoot, $locale, $baseCode, $careerSummaryParagraph);
         $chapters['career']['matched_guides'] = $this->buildMatchedGuides($baselineRoot, $locale, $baseCode, $careerSummaryParagraph);
+        $chapters['career']['career_ideas'] = $this->buildPreferredRoleModule(
+            $careerIdeasSection,
+            $this->fallbackChapterModuleTitle('career', 'career_ideas', $locale),
+            $locale,
+        );
+        $chapters['career']['work_styles'] = $this->buildBulletModule(
+            $workStylesSection,
+            $this->fallbackChapterModuleTitle('career', 'work_styles', $locale),
+        );
+        $chapters['growth']['what_energizes'] = $this->buildPremiumTeaserModule(
+            $whatEnergizesSection,
+            $this->fallbackChapterModuleTitle('growth', 'what_energizes', $locale),
+            $this->fallbackChapterModuleItemTitle('growth', 'what_energizes', $locale),
+        );
+        $chapters['growth']['what_drains'] = $this->buildPremiumTeaserModule(
+            $whatDrainsSection,
+            $this->fallbackChapterModuleTitle('growth', 'what_drains', $locale),
+            $this->fallbackChapterModuleItemTitle('growth', 'what_drains', $locale),
+        );
+        $chapters['relationships']['superpowers'] = $this->buildPremiumTeaserModule(
+            $superpowersSection,
+            $this->fallbackChapterModuleTitle('relationships', 'superpowers', $locale),
+            $this->fallbackChapterModuleItemTitle('relationships', 'superpowers', $locale),
+        );
+        $chapters['relationships']['pitfalls'] = $this->buildPremiumTeaserModule(
+            $pitfallsSection,
+            $this->fallbackChapterModuleTitle('relationships', 'pitfalls', $locale),
+            $this->fallbackChapterModuleItemTitle('relationships', 'pitfalls', $locale),
+        );
 
         $content['chapters'] = $chapters;
         $row['content_json'] = $content;
@@ -180,6 +245,77 @@ final class PersonalityDesktopCloneP0ModuleHydrator
             $items[] = [
                 'title' => $title,
                 'description' => $description,
+            ];
+        }
+
+        return [
+            'title' => $this->fallbackText($this->nullableText($section['title'] ?? null), $fallbackTitle),
+            'items' => $items,
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function buildPreferredRoleModule(array $section, string $fallbackTitle, string $locale): array
+    {
+        $payload = is_array($section['payload_json'] ?? null) ? $section['payload_json'] : [];
+        $items = [];
+
+        foreach ((array) ($payload['groups'] ?? []) as $group) {
+            if (! is_array($group)) {
+                continue;
+            }
+
+            $title = trim((string) ($group['group_title'] ?? $group['title'] ?? ''));
+            $description = trim((string) ($group['description'] ?? ''));
+            $examples = array_values(array_filter(array_map(static function (mixed $example): string {
+                return is_scalar($example) ? trim((string) $example) : '';
+            }, (array) ($group['examples'] ?? [])), static fn (string $example): bool => $example !== ''));
+
+            if ($examples !== []) {
+                $description = trim($this->fallbackText(
+                    $description,
+                    $this->localeCopy($locale, 'Recommended roles for your profile.', '适合你的人格倾向的方向建议。'),
+                ));
+                $description .= "\n".$this->localeCopy($locale, 'Examples: ', '示例：').implode('；', $examples);
+            }
+
+            if ($title === '' || $description === '') {
+                continue;
+            }
+
+            $items[] = [
+                'title' => $title,
+                'description' => $description,
+            ];
+        }
+
+        return [
+            'title' => $this->fallbackText($this->nullableText($section['title'] ?? null), $fallbackTitle),
+            'items' => $items,
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function buildPremiumTeaserModule(
+        array $section,
+        string $fallbackTitle,
+        string $fallbackItemTitle,
+    ): array {
+        $payload = is_array($section['payload_json'] ?? null) ? $section['payload_json'] : [];
+        $teaser = $this->fallbackText(
+            $this->nullableText($payload['teaser'] ?? null),
+            $this->firstParagraph($section['body_md'] ?? null),
+        );
+
+        $items = [];
+        if ($teaser !== '') {
+            $items[] = [
+                'title' => $fallbackItemTitle,
+                'description' => $teaser,
             ];
         }
 
@@ -494,12 +630,60 @@ final class PersonalityDesktopCloneP0ModuleHydrator
         return match ($chapterKey.'.'.$moduleKey) {
             'career.strengths' => $isZh ? '职业优势' : 'Career Strengths',
             'career.weaknesses' => $isZh ? '职业短板' : 'Career Weaknesses',
+            'career.career_ideas' => $isZh ? '职业方向建议' : 'Career Ideas',
+            'career.work_styles' => $isZh ? '工作风格建议' : 'Work Styles',
             'growth.strengths' => $isZh ? '成长优势' : 'Growth Strengths',
             'growth.weaknesses' => $isZh ? '成长短板' : 'Growth Weaknesses',
+            'growth.what_energizes' => $isZh ? '什么让你充电' : 'What Energizes You',
+            'growth.what_drains' => $isZh ? '什么让你消耗' : 'What Drains You',
             'relationships.strengths' => $isZh ? '关系优势' : 'Relationship Strengths',
             'relationships.weaknesses' => $isZh ? '关系短板' : 'Relationship Weaknesses',
+            'relationships.superpowers' => $isZh ? '关系超级优势' : 'Relationship Superpowers',
+            'relationships.pitfalls' => $isZh ? '关系潜在陷阱' : 'Relationship Pitfalls',
             default => $moduleKey,
         };
+    }
+
+    private function fallbackChapterModuleItemTitle(string $chapterKey, string $moduleKey, string $locale): string
+    {
+        $isZh = $locale === 'zh-CN';
+
+        return match ($chapterKey.'.'.$moduleKey) {
+            'growth.what_energizes' => $isZh ? '你的核心充电源' : 'Your Core Energizer',
+            'growth.what_drains' => $isZh ? '你的主要消耗源' : 'Your Main Drainer',
+            'relationships.superpowers' => $isZh ? '你的关系优势' : 'Your Relationship Strength',
+            'relationships.pitfalls' => $isZh ? '你的关系风险点' : 'Your Relationship Risk',
+            default => $isZh ? '核心提示' : 'Key Insight',
+        };
+    }
+
+    /**
+     * @param  array<string, mixed>  $sectionMap
+     * @return array<string, mixed>
+     */
+    private function requiredSection(array $sectionMap, string $sectionKey, string $fullCode, string $locale): array
+    {
+        $section = $sectionMap[$sectionKey] ?? null;
+        if (! is_array($section)) {
+            throw new RuntimeException(sprintf(
+                'Missing required source section %s for %s (%s).',
+                $sectionKey,
+                $fullCode,
+                $locale,
+            ));
+        }
+
+        $isEnabled = $section['is_enabled'] ?? null;
+        if ($isEnabled === false || $isEnabled === 0 || $isEnabled === '0') {
+            throw new RuntimeException(sprintf(
+                'Required source section %s is disabled for %s (%s).',
+                $sectionKey,
+                $fullCode,
+                $locale,
+            ));
+        }
+
+        return $section;
     }
 
     private function localeCopy(string $locale, string $en, string $zhCn): string

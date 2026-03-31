@@ -66,6 +66,15 @@ MBTI Desktop clone 正文 owner 挂在现有 personality owner 域内：
 - `chapters.career.matched_jobs`
 - `chapters.career.matched_guides`
 
+当前 P1 深层模块已 authoritative 挂载：
+
+- `chapters.career.career_ideas`
+- `chapters.career.work_styles`
+- `chapters.growth.what_energizes`
+- `chapters.growth.what_drains`
+- `chapters.relationships.superpowers`
+- `chapters.relationships.pitfalls`
+
 `asset_slots_json` 为 desktop clone 资产引用 owner（挂在 clone content owner 内，不另起平台）：
 
 - `slot_id`
@@ -148,17 +157,16 @@ MBTI Desktop clone 正文 owner 挂在现有 personality owner 域内：
 - 32 个 fullCode（A/T）
 - `zh-CN`
 - `template_key = mbti_desktop_clone_v1`
-- P0 模块完整性门禁（缺 fullCode / 缺关键模块直接失败）
+- P0 + P1 模块完整性门禁（缺 fullCode / 缺关键模块直接失败）
 
 导入来源：`fap-web` 当前已 authored 32 型 desktop clone 内容，转存为 `fap-api` 仓内 baseline（JSON）。
 
 ## 8. 当前未覆盖
 - `en` locale backfill
 - 真实 AI 资产生成/上传与批处理
-- `fap-web` asset slot consumption cutover
-- P1/P2 扩展模块（`Career Ideas` / `Work Styles` / `What Energizes` / `What Drains` / `Relationship Superpowers` / `Relationship Pitfalls`）
+- runtime personalization（`selection_fingerprint` / `evidence` / `adaptive` / `memory`）
 
 ## 9. 下一步 PR 顺序
-1. `fap-web`：desktop clone P0 新增模块消费接入（`letters_intro` / `overview` / `strengths|weaknesses` / `matched_*`）
-2. `fap-web`：desktop clone asset slot consumption cutover（前端开始消费 `asset_slots`）
+1. `fap-web`：desktop clone P1 深层模块消费接入（`career_ideas/work_styles`、`what_energizes/what_drains`、`superpowers/pitfalls`）
+2. `fap-api` 或 runtime 管线：同型内 runtime personalization 挂载（不改静态 owner）
 3. `fap-api` 或离线管线：AI 资产生成 + asset_ref 回填（仅数据替换，不改 schema）

@@ -15,7 +15,7 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_published_desktop_clone_is_readable_by_full_code_and_exposes_p0_modules(): void
+    public function test_published_desktop_clone_is_readable_by_full_code_and_exposes_p0_and_p1_modules(): void
     {
         $infjProfile = $this->createProfile([
             'type_code' => 'INFJ',
@@ -29,6 +29,14 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
         $entjProfile = $this->createProfile([
             'type_code' => 'ENTJ',
             'slug' => 'entj',
+            'locale' => 'zh-CN',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $istpProfile = $this->createProfile([
+            'type_code' => 'ISTP',
+            'slug' => 'istp',
             'locale' => 'zh-CN',
             'status' => 'published',
             'is_public' => true,
@@ -56,10 +64,18 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             'is_published' => true,
             'published_at' => now()->subMinute(),
         ]);
+        $istpA = $this->createVariant($istpProfile, [
+            'canonical_type_code' => 'ISTP',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'ISTP-A',
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
 
         $this->createCloneContent($infjA, 'infj-a', PersonalityProfileVariantCloneContent::STATUS_PUBLISHED);
         $this->createCloneContent($infjT, 'infj-t', PersonalityProfileVariantCloneContent::STATUS_PUBLISHED);
         $this->createCloneContent($entjT, 'entj-t', PersonalityProfileVariantCloneContent::STATUS_PUBLISHED);
+        $this->createCloneContent($istpA, 'istp-a', PersonalityProfileVariantCloneContent::STATUS_PUBLISHED);
 
         $response = $this->getJson('/api/v0.5/personality/infj-a/desktop-clone?locale=zh-CN')
             ->assertOk()
@@ -83,6 +99,12 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('content.chapters.relationships.weaknesses.items.0.description', 'relationships weaknesses description 1 infj-a')
             ->assertJsonPath('content.chapters.career.matched_jobs.fit_bucket', 'primary')
             ->assertJsonPath('content.chapters.career.matched_guides.fit_reason', 'career fit reason infj-a')
+            ->assertJsonPath('content.chapters.career.career_ideas.title', 'career ideas infj-a')
+            ->assertJsonPath('content.chapters.career.work_styles.items.0.description', 'work styles description 1 infj-a')
+            ->assertJsonPath('content.chapters.growth.what_energizes.title', 'what energizes infj-a')
+            ->assertJsonPath('content.chapters.growth.what_drains.items.0.description', 'what drains description 1 infj-a')
+            ->assertJsonPath('content.chapters.relationships.superpowers.title', 'superpowers infj-a')
+            ->assertJsonPath('content.chapters.relationships.pitfalls.items.0.description', 'pitfalls description 1 infj-a')
             ->assertJsonPath('asset_slots.0.slot_id', PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_HERO_ILLUSTRATION)
             ->assertJsonPath('asset_slots.0.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER)
             ->assertJsonPath('asset_slots.0.asset_ref', null)
@@ -113,7 +135,68 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('full_code', 'ENTJ-T')
             ->assertJsonPath('content.letters_intro.headline', 'letters headline entj-t')
-            ->assertJsonPath('content.chapters.career.matched_jobs.job_examples.0', 'job example 1 entj-t');
+            ->assertJsonPath('content.chapters.career.matched_jobs.job_examples.0', 'job example 1 entj-t')
+            ->assertJsonPath('content.chapters.growth.what_energizes.items.0.description', 'what energizes description 1 entj-t');
+
+        $this->getJson('/api/v0.5/personality/istp-a/desktop-clone?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('full_code', 'ISTP-A')
+            ->assertJsonPath('content.chapters.relationships.superpowers.items.0.description', 'superpowers description 1 istp-a')
+            ->assertJsonPath('content.chapters.relationships.pitfalls.items.0.description', 'pitfalls description 1 istp-a');
+    }
+
+    public function test_imported_baseline_public_api_exposes_p1_modules_for_sample_full_codes(): void
+    {
+        $this->seedZhVariantsForAllMbtiBaseTypes();
+
+        $this->artisan('personality:import-desktop-clone-baseline', [
+            '--locale' => ['zh-CN'],
+            '--status' => 'published',
+            '--upsert' => true,
+        ])->assertExitCode(0);
+
+        foreach (['INFJ-A', 'ENTJ-T', 'ISTP-A'] as $fullCode) {
+            $response = $this->getJson('/api/v0.5/personality/'.strtolower($fullCode).'/desktop-clone?locale=zh-CN')
+                ->assertOk()
+                ->assertJsonPath('ok', true)
+                ->assertJsonPath('full_code', $fullCode)
+                ->assertJsonPath('template_key', PersonalityProfileVariantCloneContent::TEMPLATE_KEY_MBTI_DESKTOP_CLONE_V1);
+
+            $content = $response->json('content');
+            $this->assertIsArray($content);
+
+            $this->assertItemModuleShape(
+                $content,
+                'chapters.career.career_ideas',
+                $fullCode,
+            );
+            $this->assertItemModuleShape(
+                $content,
+                'chapters.career.work_styles',
+                $fullCode,
+            );
+            $this->assertItemModuleShape(
+                $content,
+                'chapters.growth.what_energizes',
+                $fullCode,
+            );
+            $this->assertItemModuleShape(
+                $content,
+                'chapters.growth.what_drains',
+                $fullCode,
+            );
+            $this->assertItemModuleShape(
+                $content,
+                'chapters.relationships.superpowers',
+                $fullCode,
+            );
+            $this->assertItemModuleShape(
+                $content,
+                'chapters.relationships.pitfalls',
+                $fullCode,
+            );
+        }
     }
 
     public function test_draft_content_is_hidden_and_endpoint_has_no_base_code_fallback(): void
@@ -281,7 +364,7 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
      */
     private function validChapter(string $chapter, string $tag): array
     {
-        return [
+        $payload = [
             'intro' => [
                 $chapter.' intro 1 '.$tag,
                 $chapter.' intro 2 '.$tag,
@@ -327,6 +410,53 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
                 ],
             ],
         ];
+
+        if ($chapter === 'career') {
+            $payload['career_ideas'] = [
+                'title' => 'career ideas '.$tag,
+                'items' => [
+                    ['title' => 'career ideas title 1 '.$tag, 'description' => 'career ideas description 1 '.$tag],
+                ],
+            ];
+            $payload['work_styles'] = [
+                'title' => 'work styles '.$tag,
+                'items' => [
+                    ['title' => 'work styles title 1 '.$tag, 'description' => 'work styles description 1 '.$tag],
+                ],
+            ];
+        }
+
+        if ($chapter === 'growth') {
+            $payload['what_energizes'] = [
+                'title' => 'what energizes '.$tag,
+                'items' => [
+                    ['title' => 'what energizes title 1 '.$tag, 'description' => 'what energizes description 1 '.$tag],
+                ],
+            ];
+            $payload['what_drains'] = [
+                'title' => 'what drains '.$tag,
+                'items' => [
+                    ['title' => 'what drains title 1 '.$tag, 'description' => 'what drains description 1 '.$tag],
+                ],
+            ];
+        }
+
+        if ($chapter === 'relationships') {
+            $payload['superpowers'] = [
+                'title' => 'superpowers '.$tag,
+                'items' => [
+                    ['title' => 'superpowers title 1 '.$tag, 'description' => 'superpowers description 1 '.$tag],
+                ],
+            ];
+            $payload['pitfalls'] = [
+                'title' => 'pitfalls '.$tag,
+                'items' => [
+                    ['title' => 'pitfalls title 1 '.$tag, 'description' => 'pitfalls description 1 '.$tag],
+                ],
+            ];
+        }
+
+        return $payload;
     }
 
     /**
@@ -451,5 +581,83 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
                 'meta' => null,
             ],
         ];
+    }
+
+    private function seedZhVariantsForAllMbtiBaseTypes(): void
+    {
+        foreach ($this->mbtiBaseTypes() as $baseCode) {
+            $profile = $this->createProfile([
+                'type_code' => $baseCode,
+                'slug' => strtolower($baseCode),
+                'locale' => 'zh-CN',
+                'status' => 'published',
+                'is_public' => true,
+                'published_at' => now()->subMinute(),
+            ]);
+
+            foreach (['A', 'T'] as $variantCode) {
+                $this->createVariant($profile, [
+                    'canonical_type_code' => $baseCode,
+                    'variant_code' => $variantCode,
+                    'runtime_type_code' => sprintf('%s-%s', $baseCode, $variantCode),
+                    'is_published' => true,
+                    'published_at' => now()->subMinute(),
+                ]);
+            }
+        }
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    private function mbtiBaseTypes(): array
+    {
+        return [
+            'INTJ',
+            'INTP',
+            'ENTJ',
+            'ENTP',
+            'INFJ',
+            'INFP',
+            'ENFJ',
+            'ENFP',
+            'ISTJ',
+            'ISFJ',
+            'ESTJ',
+            'ESFJ',
+            'ISTP',
+            'ISFP',
+            'ESTP',
+            'ESFP',
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $content
+     */
+    private function assertItemModuleShape(array $content, string $modulePath, string $fullCode): void
+    {
+        $module = data_get($content, $modulePath);
+        $this->assertIsArray($module, sprintf('%s missing module %s', $fullCode, $modulePath));
+
+        $title = trim((string) data_get($module, 'title'));
+        $this->assertNotSame('', $title, sprintf('%s has empty %s.title', $fullCode, $modulePath));
+
+        $items = (array) data_get($module, 'items');
+        $this->assertNotEmpty($items, sprintf('%s has empty %s.items', $fullCode, $modulePath));
+
+        foreach ($items as $index => $item) {
+            $this->assertIsArray($item, sprintf('%s has invalid %s.items[%d]', $fullCode, $modulePath, $index));
+            $this->assertNotSame(
+                '',
+                trim((string) data_get($item, 'title')),
+                sprintf('%s has empty %s.items[%d].title', $fullCode, $modulePath, $index),
+            );
+            $this->assertNotSame(
+                '',
+                trim((string) data_get($item, 'description')),
+                sprintf('%s has empty %s.items[%d].description', $fullCode, $modulePath, $index),
+            );
+        }
     }
 }
