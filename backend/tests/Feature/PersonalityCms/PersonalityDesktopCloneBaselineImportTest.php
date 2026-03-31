@@ -70,9 +70,17 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
         $this->assertIsString(data_get($infjAContent, 'content_json.chapters.career.matched_jobs.fit_bucket'));
         $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.career.matched_jobs.job_examples'));
         $this->assertIsString(data_get($infjAContent, 'content_json.chapters.career.matched_guides.summary'));
+        $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.career.career_ideas.items'));
+        $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.career.work_styles.items'));
+        $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.growth.what_energizes.items'));
+        $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.growth.what_drains.items'));
+        $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.relationships.superpowers.items'));
+        $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.relationships.pitfalls.items'));
 
         $this->assertNotSame('', trim((string) data_get($entjTContent, 'content_json.letters_intro.headline')));
         $this->assertNotSame('', trim((string) data_get($istpAContent, 'content_json.chapters.career.matched_jobs.summary')));
+        $this->assertNotSame('', trim((string) data_get($entjTContent, 'content_json.chapters.growth.what_energizes.title')));
+        $this->assertNotSame('', trim((string) data_get($istpAContent, 'content_json.chapters.relationships.superpowers.title')));
 
         $first = PersonalityProfileVariantCloneContent::query()->orderBy('id')->firstOrFail();
         $slotIds = array_column((array) $first->asset_slots_json, 'slot_id');
@@ -220,6 +228,73 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
             '--source-dir' => $tempDir,
         ])
             ->expectsOutputToContain('Desktop clone baseline locale zh-CN is missing full_code entries: INFJ-A')
+            ->assertExitCode(1);
+
+        $this->assertSame(0, PersonalityProfileVariantCloneContent::query()->count());
+    }
+
+    public function test_import_fails_when_personality_source_is_missing_required_p1_section(): void
+    {
+        $this->seedZhVariantsForAllMbtiBaseTypes();
+
+        $sourceFile = base_path('../content_baselines/personality/mbti.zh-CN.json');
+        $raw = file_get_contents($sourceFile);
+        $this->assertIsString($raw);
+
+        $decoded = json_decode($raw, true);
+        $this->assertIsArray($decoded);
+        $this->assertIsArray($decoded['variants'] ?? null);
+
+        $decoded['variants'] = array_map(static function (mixed $variant): mixed {
+            if (! is_array($variant)) {
+                return $variant;
+            }
+
+            if (strtoupper(trim((string) ($variant['runtime_type_code'] ?? ''))) !== 'INFJ-A') {
+                return $variant;
+            }
+
+            $variant['section_overrides'] = array_values(array_filter(
+                (array) ($variant['section_overrides'] ?? []),
+                static fn (mixed $section): bool => ! (
+                    is_array($section)
+                    && trim((string) ($section['section_key'] ?? '')) === 'growth.motivators'
+                ),
+            ));
+
+            return $variant;
+        }, $decoded['variants']);
+
+        $tempRoot = sys_get_temp_dir().DIRECTORY_SEPARATOR.'desktop-clone-p1-source-'.uniqid('', true);
+        $tempDir = $tempRoot.DIRECTORY_SEPARATOR.'personality_clone';
+        mkdir($tempDir, 0777, true);
+        mkdir($tempRoot.DIRECTORY_SEPARATOR.'personality', 0777, true);
+        mkdir($tempRoot.DIRECTORY_SEPARATOR.'career_jobs', 0777, true);
+        mkdir($tempRoot.DIRECTORY_SEPARATOR.'career_guides', 0777, true);
+        file_put_contents(
+            $tempDir.DIRECTORY_SEPARATOR.'mbti_desktop_clone.zh-CN.json',
+            file_get_contents(base_path('../content_baselines/personality_clone/mbti_desktop_clone.zh-CN.json')) ?: '',
+        );
+        file_put_contents(
+            $tempRoot.DIRECTORY_SEPARATOR.'personality'.DIRECTORY_SEPARATOR.'mbti.zh-CN.json',
+            json_encode($decoded, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES),
+        );
+        copy(
+            base_path('../content_baselines/career_jobs/career_jobs.zh-CN.json'),
+            $tempRoot.DIRECTORY_SEPARATOR.'career_jobs'.DIRECTORY_SEPARATOR.'career_jobs.zh-CN.json',
+        );
+        copy(
+            base_path('../content_baselines/career_guides/career_guides.zh-CN.json'),
+            $tempRoot.DIRECTORY_SEPARATOR.'career_guides'.DIRECTORY_SEPARATOR.'career_guides.zh-CN.json',
+        );
+
+        $this->artisan('personality:import-desktop-clone-baseline', [
+            '--locale' => ['zh-CN'],
+            '--status' => 'published',
+            '--upsert' => true,
+            '--source-dir' => $tempDir,
+        ])
+            ->expectsOutputToContain('Missing required source section growth.motivators for INFJ-A (zh-CN).')
             ->assertExitCode(1);
 
         $this->assertSame(0, PersonalityProfileVariantCloneContent::query()->count());

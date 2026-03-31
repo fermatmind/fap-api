@@ -86,7 +86,7 @@ final class PersonalityDesktopCloneBaselineNormalizer
                     $normalized,
                     $this->resolveBaselineRootFromDocumentPath($file),
                 );
-                $this->assertP0ModulesComplete($normalized, $file, $index);
+                $this->assertP0AndP1ModulesComplete($normalized, $file, $index);
 
                 $fullCode = (string) $normalized['full_code'];
                 if ($normalizedTypes !== [] && ! in_array($fullCode, $normalizedTypes, true)) {
@@ -247,7 +247,7 @@ final class PersonalityDesktopCloneBaselineNormalizer
     /**
      * @param  array<string, mixed>  $row
      */
-    private function assertP0ModulesComplete(array $row, string $file, int $index): void
+    private function assertP0AndP1ModulesComplete(array $row, string $file, int $index): void
     {
         $context = sprintf('%s variants[%d] (%s)', $file, $index, (string) ($row['full_code'] ?? 'unknown'));
         $content = is_array($row['content_json'] ?? null) ? $row['content_json'] : [];
@@ -349,6 +349,46 @@ final class PersonalityDesktopCloneBaselineNormalizer
         $this->requiredString($matchedGuides, ['title'], $context);
         $this->requiredString($matchedGuides, ['summary'], $context);
         $this->requiredString($matchedGuides, ['fit_reason'], $context);
+
+        $requiredP1Modules = [
+            'career' => ['career_ideas', 'work_styles'],
+            'growth' => ['what_energizes', 'what_drains'],
+            'relationships' => ['superpowers', 'pitfalls'],
+        ];
+
+        foreach ($requiredP1Modules as $chapterKey => $moduleKeys) {
+            $chapter = $this->requiredArray($chapters, [$chapterKey], $context);
+
+            foreach ($moduleKeys as $moduleKey) {
+                $module = $this->requiredArray($chapter, [$moduleKey], $context);
+                $this->requiredString($module, ['title'], $context);
+                $items = $this->requiredArray($module, ['items'], $context);
+
+                if ($items === []) {
+                    throw new RuntimeException(sprintf(
+                        '%s is missing chapters.%s.%s.items entries.',
+                        $context,
+                        $chapterKey,
+                        $moduleKey,
+                    ));
+                }
+
+                foreach ($items as $itemIndex => $item) {
+                    if (! is_array($item)) {
+                        throw new RuntimeException(sprintf(
+                            '%s has invalid chapters.%s.%s.items[%d].',
+                            $context,
+                            $chapterKey,
+                            $moduleKey,
+                            $itemIndex,
+                        ));
+                    }
+
+                    $this->requiredString($item, ['title'], $context);
+                    $this->requiredString($item, ['description'], $context);
+                }
+            }
+        }
     }
 
     /**
