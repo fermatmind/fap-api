@@ -1,4 +1,4 @@
-# MBTI Desktop Clone Content Owner (32 FullCode)
+# MBTI Desktop Clone Content + Asset Slot Owner (32 FullCode)
 
 ## 1. Owner 挂载位置
 MBTI Desktop clone 正文 owner 挂在现有 personality owner 域内：
@@ -37,7 +37,7 @@ MBTI Desktop clone 正文 owner 挂在现有 personality owner 域内：
 
 - unique(`personality_profile_variant_id`, `template_key`)
 
-## 4. Storage Owner 负责字段
+## 4. Storage Owner 负责字段（正文 vs 资产）
 `content_json` 仅承载 desktop clone authored 内容，覆盖：
 
 - `hero.summary`
@@ -49,15 +49,38 @@ MBTI Desktop clone 正文 owner 挂在现有 personality owner 域内：
 - `chapters.relationships`
 - `finalOffer`
 
-`asset_slots_json` 为后续真实资产 owner 预留结构：
+`asset_slots_json` 为 desktop clone 资产引用 owner（挂在 clone content owner 内，不另起平台）：
 
-- `slotId`
+- `slot_id`
 - `label`
-- `aspectRatio`
+- `aspect_ratio`
 - `status`
-- `assetRef`（nullable）
+- `asset_ref`（nullable）
 - `alt`（nullable）
 - `meta`（nullable）
+
+`status` 语义：
+
+- `placeholder`：槽位存在，但还未绑定真实资产 ref（允许 `asset_ref = null`）
+- `ready`：槽位已可用，必须绑定合法 `asset_ref`
+- `disabled`：槽位暂不对外投放（可保留历史 ref，也可为 null）
+
+`asset_ref` 最小结构：
+
+- `provider`（`oss` / `cdn` / `internal` / `placeholder`）
+- `path` 或 `url`（`ready` 至少一个非空）
+- `version`（nullable）
+- `checksum`（nullable）
+
+固定 slot_id（v1 白名单）：
+
+- `hero-illustration`
+- `traits-illustration`
+- `traits-summary-illustration`
+- `career-illustration`
+- `growth-illustration`
+- `relationships-illustration`
+- `final-offer-illustration`
 
 ## 5. 继续属于 Runtime 的字段
 以下仍由结果 runtime/projection 提供，不进入 clone content owner：
@@ -93,6 +116,14 @@ MBTI Desktop clone 正文 owner 挂在现有 personality owner 域内：
 - `asset_slots`
 - `_meta`（authority_source / route_mode / route type 等）
 
+`asset_slots` 发布契约：
+
+- published only
+- fullCode exact
+- no baseCode fallback
+- placeholder slot 也必须完整返回，不吞字段
+- ready slot 返回可消费 `asset_ref`
+
 ## 7. Seed 覆盖范围
 当前基线导入覆盖：
 
@@ -104,10 +135,9 @@ MBTI Desktop clone 正文 owner 挂在现有 personality owner 域内：
 
 ## 8. 当前未覆盖
 - `en` locale backfill
-- 真实 asset refs（对象存储接入）
+- 真实 AI 资产生成/上传与批处理
+- `fap-web` asset slot consumption cutover
 
-## 9. 下一步 PR
-下一张卡在 `fap-web` 执行 consumer 切换：
-
-- resolver 切到上述 published read contract
-- 前端本地 registry 从 runtime owner 降级为迁移遗留/参考源
+## 9. 下一步 PR 顺序
+1. `fap-web`：desktop clone asset slot consumption cutover（前端开始消费 `asset_slots`）
+2. `fap-api` 或离线管线：AI 资产生成 + asset_ref 回填（仅数据替换，不改 schema）

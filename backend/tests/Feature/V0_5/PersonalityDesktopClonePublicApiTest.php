@@ -7,6 +7,7 @@ namespace Tests\Feature\V0_5;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantCloneContent;
+use App\PersonalityCms\DesktopClone\PersonalityDesktopCloneAssetSlotSupport;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -43,7 +44,7 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
         $this->createCloneContent($infjA, 'infj-a', PersonalityProfileVariantCloneContent::STATUS_PUBLISHED);
         $this->createCloneContent($infjT, 'infj-t', PersonalityProfileVariantCloneContent::STATUS_PUBLISHED);
 
-        $this->getJson('/api/v0.5/personality/infj-a/desktop-clone?locale=zh-CN')
+        $response = $this->getJson('/api/v0.5/personality/infj-a/desktop-clone?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath('template_key', PersonalityProfileVariantCloneContent::TEMPLATE_KEY_MBTI_DESKTOP_CLONE_V1)
@@ -52,10 +53,24 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('base_code', 'INFJ')
             ->assertJsonPath('locale', 'zh-CN')
             ->assertJsonPath('content.hero.summary', 'hero summary infj-a')
-            ->assertJsonPath('asset_slots.0.slotId', 'hero.cover')
+            ->assertJsonPath('asset_slots.0.slot_id', PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_HERO_ILLUSTRATION)
+            ->assertJsonPath('asset_slots.0.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER)
+            ->assertJsonPath('asset_slots.0.asset_ref', null)
+            ->assertJsonPath('asset_slots.1.slot_id', PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_TRAITS_ILLUSTRATION)
+            ->assertJsonPath('asset_slots.1.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_READY)
+            ->assertJsonPath('asset_slots.1.asset_ref.provider', PersonalityDesktopCloneAssetSlotSupport::ASSET_PROVIDER_CDN)
+            ->assertJsonPath('asset_slots.1.asset_ref.path', 'mbti/desktop/traits/infj-a/v1.webp')
             ->assertJsonPath('_meta.authority_source', 'personality_profile_variant_clone_contents')
             ->assertJsonPath('_meta.route_mode', 'full_code_exact')
             ->assertJsonPath('_meta.public_route_type', '32-type');
+
+        $assetSlots = $response->json('asset_slots');
+        $this->assertIsArray($assetSlots);
+        $this->assertCount(7, $assetSlots);
+        $this->assertSame(
+            PersonalityDesktopCloneAssetSlotSupport::allowedSlotIds(),
+            array_column($assetSlots, 'slot_id'),
+        );
 
         $this->getJson('/api/v0.5/personality/infj-t/desktop-clone?locale=zh-CN')
             ->assertOk()
@@ -261,20 +276,73 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
     {
         return [
             [
-                'slotId' => 'hero.cover',
-                'label' => 'Hero cover image',
-                'aspectRatio' => '16:9',
-                'status' => 'placeholder',
-                'assetRef' => null,
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_HERO_ILLUSTRATION,
+                'label' => 'Hero illustration',
+                'aspect_ratio' => '236:160',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
                 'alt' => null,
                 'meta' => null,
             ],
             [
-                'slotId' => 'chapter.career.banner',
-                'label' => 'Career chapter banner',
-                'aspectRatio' => '4:3',
-                'status' => 'placeholder',
-                'assetRef' => null,
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_TRAITS_ILLUSTRATION,
+                'label' => 'Traits illustration',
+                'aspect_ratio' => '636:148',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_READY,
+                'asset_ref' => [
+                    'provider' => PersonalityDesktopCloneAssetSlotSupport::ASSET_PROVIDER_CDN,
+                    'path' => 'mbti/desktop/traits/infj-a/v1.webp',
+                    'url' => null,
+                    'version' => 'v1',
+                    'checksum' => 'sha256:abc123',
+                ],
+                'alt' => 'Traits illustration',
+                'meta' => [
+                    'source' => 'seed',
+                ],
+            ],
+            [
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_TRAITS_SUMMARY_ILLUSTRATION,
+                'label' => 'Traits summary illustration',
+                'aspect_ratio' => '240:118',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_CAREER_ILLUSTRATION,
+                'label' => 'Career illustration',
+                'aspect_ratio' => '636:148',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_GROWTH_ILLUSTRATION,
+                'label' => 'Growth illustration',
+                'aspect_ratio' => '636:148',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_RELATIONSHIPS_ILLUSTRATION,
+                'label' => 'Relationships illustration',
+                'aspect_ratio' => '636:148',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_FINAL_OFFER_ILLUSTRATION,
+                'label' => 'Final offer illustration',
+                'aspect_ratio' => '252:220',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
                 'alt' => null,
                 'meta' => null,
             ],
