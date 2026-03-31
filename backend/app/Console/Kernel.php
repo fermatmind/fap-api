@@ -61,6 +61,7 @@ use App\Console\Commands\Packs2Rollback;
 use App\Console\Commands\PacksPublish;
 use App\Console\Commands\PacksRollback;
 use App\Console\Commands\PaymentsPruneEvents;
+use App\Console\Commands\PersonalityImportDesktopCloneBaseline;
 use App\Console\Commands\QualityDailySummary;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
@@ -90,6 +91,7 @@ class Kernel extends ConsoleKernel
         FapSelfCheck::class,
         FapValidateReport::class,
         FapWeeklyReport::class,
+        PersonalityImportDesktopCloneBaseline::class,
         MetricsWeeklyValidity::class,
         MbtiUpgradeLegacyPartialUnlocks::class,
         AdminBootstrapOwner::class,

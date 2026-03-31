@@ -32,6 +32,7 @@ use App\Http\Controllers\API\V0_5\Cms\CareerGuideController;
 use App\Http\Controllers\API\V0_5\Cms\CareerJobController;
 use App\Http\Controllers\API\V0_5\Cms\CareerRecommendationController;
 use App\Http\Controllers\API\V0_5\Cms\PersonalityController;
+use App\Http\Controllers\API\V0_5\Cms\PersonalityDesktopCloneController;
 use App\Http\Controllers\API\V0_5\Cms\TopicController;
 use App\Http\Controllers\HealthzController;
 use App\Http\Middleware\AdminAuth;
@@ -386,6 +387,7 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/career-recommendations/mbti', [CareerRecommendationController::class, 'index']);
     Route::get('/career-recommendations/mbti/{type}', [CareerRecommendationController::class, 'show']);
     Route::get('/personality', [PersonalityController::class, 'index']);
+    Route::get('/personality/{type}/desktop-clone', [PersonalityDesktopCloneController::class, 'show']);
     Route::get('/personality/{type}/seo', [PersonalityController::class, 'seo']);
     Route::get('/personality/{type}', [PersonalityController::class, 'show']);
     Route::get('/topics', [TopicController::class, 'index']);
