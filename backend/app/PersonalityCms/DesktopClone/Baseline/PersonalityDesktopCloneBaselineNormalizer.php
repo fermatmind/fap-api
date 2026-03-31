@@ -11,6 +11,10 @@ use RuntimeException;
 
 final class PersonalityDesktopCloneBaselineNormalizer
 {
+    public function __construct(
+        private readonly PersonalityDesktopCloneP0ModuleHydrator $p0Hydrator,
+    ) {}
+
     /**
      * @param  array<int, array{file: string, payload: array<string, mixed>}>  $documents
      * @param  array<int, string>  $selectedTypes
@@ -78,6 +82,11 @@ final class PersonalityDesktopCloneBaselineNormalizer
                     'template_key' => $templateKey,
                     'schema_version' => $schemaVersion,
                 ]);
+                $normalized = $this->p0Hydrator->hydrate(
+                    $normalized,
+                    $this->resolveBaselineRootFromDocumentPath($file),
+                );
+                $this->assertP0ModulesComplete($normalized, $file, $index);
 
                 $fullCode = (string) $normalized['full_code'];
                 if ($normalizedTypes !== [] && ! in_array($fullCode, $normalizedTypes, true)) {
@@ -101,6 +110,7 @@ final class PersonalityDesktopCloneBaselineNormalizer
 
         $records = array_values($recordsByLocaleCode);
         usort($records, static fn (array $left, array $right): int => [$left['locale'], $left['full_code']] <=> [$right['locale'], $right['full_code']]);
+        $this->assertFullCodeCoverage($records, $normalizedTypes);
 
         return $records;
     }
@@ -208,5 +218,217 @@ final class PersonalityDesktopCloneBaselineNormalizer
         }
 
         return array_values(array_unique($normalized));
+    }
+
+    private function resolveBaselineRootFromDocumentPath(string $file): string
+    {
+        $resolvedFile = realpath($file);
+        if ($resolvedFile === false) {
+            throw new RuntimeException(sprintf(
+                'Unable to resolve desktop clone baseline file path: %s',
+                $file,
+            ));
+        }
+
+        $personalityCloneDir = dirname($resolvedFile);
+        $baselineRoot = dirname($personalityCloneDir);
+        $resolvedRoot = realpath($baselineRoot);
+
+        if ($resolvedRoot === false || ! is_dir($resolvedRoot)) {
+            throw new RuntimeException(sprintf(
+                'Unable to resolve desktop clone baseline root from %s.',
+                $file,
+            ));
+        }
+
+        return $resolvedRoot;
+    }
+
+    /**
+     * @param  array<string, mixed>  $row
+     */
+    private function assertP0ModulesComplete(array $row, string $file, int $index): void
+    {
+        $context = sprintf('%s variants[%d] (%s)', $file, $index, (string) ($row['full_code'] ?? 'unknown'));
+        $content = is_array($row['content_json'] ?? null) ? $row['content_json'] : [];
+
+        $lettersIntro = $this->requiredArray($content, ['letters_intro'], $context);
+        $this->requiredString($lettersIntro, ['headline'], $context);
+        $letters = $this->requiredArray($lettersIntro, ['letters'], $context);
+        if ($letters === []) {
+            throw new RuntimeException(sprintf('%s is missing letters_intro.letters entries.', $context));
+        }
+
+        foreach ($letters as $letterIndex => $letter) {
+            if (! is_array($letter)) {
+                throw new RuntimeException(sprintf('%s has invalid letters_intro.letters[%d].', $context, $letterIndex));
+            }
+
+            $this->requiredString($letter, ['letter'], $context);
+            $this->requiredString($letter, ['title'], $context);
+            $this->requiredString($letter, ['description'], $context);
+        }
+
+        $overview = $this->requiredArray($content, ['overview'], $context);
+        $this->requiredString($overview, ['title'], $context);
+        $paragraphs = $this->requiredArray($overview, ['paragraphs'], $context);
+        if ($paragraphs === []) {
+            throw new RuntimeException(sprintf('%s is missing overview.paragraphs entries.', $context));
+        }
+
+        foreach ($paragraphs as $paragraphIndex => $paragraph) {
+            if (! is_string($paragraph) || trim($paragraph) === '') {
+                throw new RuntimeException(sprintf('%s has invalid overview.paragraphs[%d].', $context, $paragraphIndex));
+            }
+        }
+
+        $chapters = $this->requiredArray($content, ['chapters'], $context);
+        foreach (['career', 'growth', 'relationships'] as $chapterKey) {
+            $chapter = $this->requiredArray($chapters, [$chapterKey], $context);
+
+            foreach (['strengths', 'weaknesses'] as $module) {
+                $payload = $this->requiredArray($chapter, [$module], $context);
+                $this->requiredString($payload, ['title'], $context);
+                $items = $this->requiredArray($payload, ['items'], $context);
+
+                if ($items === []) {
+                    throw new RuntimeException(sprintf(
+                        '%s is missing chapters.%s.%s.items entries.',
+                        $context,
+                        $chapterKey,
+                        $module,
+                    ));
+                }
+
+                foreach ($items as $itemIndex => $item) {
+                    if (! is_array($item)) {
+                        throw new RuntimeException(sprintf(
+                            '%s has invalid chapters.%s.%s.items[%d].',
+                            $context,
+                            $chapterKey,
+                            $module,
+                            $itemIndex,
+                        ));
+                    }
+
+                    $this->requiredString($item, ['title'], $context);
+                    $this->requiredString($item, ['description'], $context);
+                }
+            }
+        }
+
+        $career = $this->requiredArray($chapters, ['career'], $context);
+        $matchedJobs = $this->requiredArray($career, ['matched_jobs'], $context);
+        $this->requiredString($matchedJobs, ['title'], $context);
+        $this->requiredString($matchedJobs, ['fit_bucket'], $context);
+        $this->requiredString($matchedJobs, ['summary'], $context);
+        $this->requiredString($matchedJobs, ['fit_reason'], $context);
+        $jobExamples = $this->requiredArray($matchedJobs, ['job_examples'], $context);
+        if ($jobExamples === []) {
+            throw new RuntimeException(sprintf('%s is missing chapters.career.matched_jobs.job_examples entries.', $context));
+        }
+
+        foreach ($jobExamples as $jobExampleIndex => $jobExample) {
+            if (! is_string($jobExample) || trim($jobExample) === '') {
+                throw new RuntimeException(sprintf(
+                    '%s has invalid chapters.career.matched_jobs.job_examples[%d].',
+                    $context,
+                    $jobExampleIndex,
+                ));
+            }
+        }
+
+        $matchedGuides = $this->requiredArray($career, ['matched_guides'], $context);
+        $this->requiredString($matchedGuides, ['title'], $context);
+        $this->requiredString($matchedGuides, ['summary'], $context);
+        $this->requiredString($matchedGuides, ['fit_reason'], $context);
+    }
+
+    /**
+     * @param  array<int, array<string, mixed>>  $records
+     * @param  array<int, string>  $normalizedTypes
+     */
+    private function assertFullCodeCoverage(array $records, array $normalizedTypes): void
+    {
+        if ($normalizedTypes !== []) {
+            return;
+        }
+
+        $expected = [];
+        foreach (PersonalityProfile::TYPE_CODES as $baseCode) {
+            foreach (['A', 'T'] as $variantCode) {
+                $fullCode = strtoupper((string) $baseCode).'-'.$variantCode;
+                $expected[$fullCode] = $fullCode;
+            }
+        }
+
+        $actualByLocale = [];
+        foreach ($records as $record) {
+            $locale = trim((string) ($record['locale'] ?? ''));
+            $fullCode = strtoupper(trim((string) ($record['full_code'] ?? '')));
+
+            if ($locale === '' || $fullCode === '') {
+                continue;
+            }
+
+            $actualByLocale[$locale][$fullCode] = $fullCode;
+        }
+
+        foreach ($actualByLocale as $locale => $actual) {
+            $missing = array_values(array_diff(array_values($expected), array_values($actual)));
+
+            if ($missing !== []) {
+                throw new RuntimeException(sprintf(
+                    'Desktop clone baseline locale %s is missing full_code entries: %s',
+                    $locale,
+                    implode(',', $missing),
+                ));
+            }
+        }
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @param  array<int, string>  $path
+     * @return array<string, mixed>|array<int, mixed>
+     */
+    private function requiredArray(array $payload, array $path, string $context): array
+    {
+        $cursor = $payload;
+        $renderedPath = implode('.', $path);
+
+        foreach ($path as $segment) {
+            if (! is_array($cursor) || ! array_key_exists($segment, $cursor) || ! is_array($cursor[$segment])) {
+                throw new RuntimeException(sprintf('%s is missing required array %s.', $context, $renderedPath));
+            }
+
+            $cursor = $cursor[$segment];
+        }
+
+        return $cursor;
+    }
+
+    /**
+     * @param  array<string, mixed>|array<int, mixed>  $payload
+     * @param  array<int, string>  $path
+     */
+    private function requiredString(array $payload, array $path, string $context): string
+    {
+        $cursor = $payload;
+        $renderedPath = implode('.', $path);
+
+        foreach ($path as $segment) {
+            if (! is_array($cursor) || ! array_key_exists($segment, $cursor)) {
+                throw new RuntimeException(sprintf('%s is missing required string %s.', $context, $renderedPath));
+            }
+
+            $cursor = $cursor[$segment];
+        }
+
+        if (! is_string($cursor) || trim($cursor) === '') {
+            throw new RuntimeException(sprintf('%s has invalid required string %s.', $context, $renderedPath));
+        }
+
+        return trim($cursor);
     }
 }

@@ -15,9 +15,9 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_published_desktop_clone_is_readable_by_full_code_for_infj_a_and_infj_t(): void
+    public function test_published_desktop_clone_is_readable_by_full_code_and_exposes_p0_modules(): void
     {
-        $profile = $this->createProfile([
+        $infjProfile = $this->createProfile([
             'type_code' => 'INFJ',
             'slug' => 'infj',
             'locale' => 'zh-CN',
@@ -26,23 +26,40 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             'published_at' => now()->subMinute(),
         ]);
 
-        $infjA = $this->createVariant($profile, [
+        $entjProfile = $this->createProfile([
+            'type_code' => 'ENTJ',
+            'slug' => 'entj',
+            'locale' => 'zh-CN',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+
+        $infjA = $this->createVariant($infjProfile, [
             'canonical_type_code' => 'INFJ',
             'variant_code' => 'A',
             'runtime_type_code' => 'INFJ-A',
             'is_published' => true,
             'published_at' => now()->subMinute(),
         ]);
-        $infjT = $this->createVariant($profile, [
+        $infjT = $this->createVariant($infjProfile, [
             'canonical_type_code' => 'INFJ',
             'variant_code' => 'T',
             'runtime_type_code' => 'INFJ-T',
             'is_published' => true,
             'published_at' => now()->subMinute(),
         ]);
+        $entjT = $this->createVariant($entjProfile, [
+            'canonical_type_code' => 'ENTJ',
+            'variant_code' => 'T',
+            'runtime_type_code' => 'ENTJ-T',
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
 
         $this->createCloneContent($infjA, 'infj-a', PersonalityProfileVariantCloneContent::STATUS_PUBLISHED);
         $this->createCloneContent($infjT, 'infj-t', PersonalityProfileVariantCloneContent::STATUS_PUBLISHED);
+        $this->createCloneContent($entjT, 'entj-t', PersonalityProfileVariantCloneContent::STATUS_PUBLISHED);
 
         $response = $this->getJson('/api/v0.5/personality/infj-a/desktop-clone?locale=zh-CN')
             ->assertOk()
@@ -53,6 +70,16 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('base_code', 'INFJ')
             ->assertJsonPath('locale', 'zh-CN')
             ->assertJsonPath('content.hero.summary', 'hero summary infj-a')
+            ->assertJsonPath('content.letters_intro.headline', 'letters headline infj-a')
+            ->assertJsonPath('content.overview.title', 'overview title infj-a')
+            ->assertJsonPath('content.chapters.career.strengths.items.0.description', 'career strengths description 1 infj-a')
+            ->assertJsonPath('content.chapters.career.weaknesses.items.0.description', 'career weaknesses description 1 infj-a')
+            ->assertJsonPath('content.chapters.growth.strengths.items.0.description', 'growth strengths description 1 infj-a')
+            ->assertJsonPath('content.chapters.growth.weaknesses.items.0.description', 'growth weaknesses description 1 infj-a')
+            ->assertJsonPath('content.chapters.relationships.strengths.items.0.description', 'relationships strengths description 1 infj-a')
+            ->assertJsonPath('content.chapters.relationships.weaknesses.items.0.description', 'relationships weaknesses description 1 infj-a')
+            ->assertJsonPath('content.chapters.career.matched_jobs.fit_bucket', 'primary')
+            ->assertJsonPath('content.chapters.career.matched_guides.fit_reason', 'career fit reason infj-a')
             ->assertJsonPath('asset_slots.0.slot_id', PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_HERO_ILLUSTRATION)
             ->assertJsonPath('asset_slots.0.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER)
             ->assertJsonPath('asset_slots.0.asset_ref', null)
@@ -77,6 +104,13 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('full_code', 'INFJ-T')
             ->assertJsonPath('content.hero.summary', 'hero summary infj-t');
+
+        $this->getJson('/api/v0.5/personality/entj-t/desktop-clone?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('full_code', 'ENTJ-T')
+            ->assertJsonPath('content.letters_intro.headline', 'letters headline entj-t')
+            ->assertJsonPath('content.chapters.career.matched_jobs.job_examples.0', 'job example 1 entj-t');
     }
 
     public function test_draft_content_is_hidden_and_endpoint_has_no_base_code_fallback(): void
@@ -175,6 +209,14 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
      */
     private function validContent(string $tag): array
     {
+        $chapters = [
+            'career' => $this->validChapter('career', $tag),
+            'growth' => $this->validChapter('growth', $tag),
+            'relationships' => $this->validChapter('relationships', $tag),
+        ];
+        $chapters['career']['matched_jobs'] = $this->validMatchedJobs($tag);
+        $chapters['career']['matched_guides'] = $this->validMatchedGuides($tag);
+
         return [
             'hero' => [
                 'summary' => 'hero summary '.$tag,
@@ -183,6 +225,28 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
                 'paragraphs' => [
                     'intro paragraph 1 '.$tag,
                     'intro paragraph 2 '.$tag,
+                ],
+            ],
+            'letters_intro' => [
+                'headline' => 'letters headline '.$tag,
+                'letters' => [
+                    [
+                        'letter' => 'E',
+                        'title' => 'letters title E '.$tag,
+                        'description' => 'letters description E '.$tag,
+                    ],
+                    [
+                        'letter' => 'N',
+                        'title' => 'letters title N '.$tag,
+                        'description' => 'letters description N '.$tag,
+                    ],
+                ],
+            ],
+            'overview' => [
+                'title' => 'overview title '.$tag,
+                'paragraphs' => [
+                    'overview paragraph 1 '.$tag,
+                    'overview paragraph 2 '.$tag,
                 ],
             ],
             'traits' => [
@@ -197,11 +261,7 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
                     'traits body line 2 '.$tag,
                 ],
             ],
-            'chapters' => [
-                'career' => $this->validChapter('career', $tag),
-                'growth' => $this->validChapter('growth', $tag),
-                'relationships' => $this->validChapter('relationships', $tag),
-            ],
+            'chapters' => $chapters,
             'finalOffer' => [
                 'eyebrow' => 'offer eyebrow '.$tag,
                 'headline' => 'offer headline '.$tag,
@@ -251,6 +311,47 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
                     'blurredItems' => $this->chapterItems($chapter.' locked2 item', $tag),
                 ],
             ],
+            'strengths' => [
+                'title' => $chapter.' strengths '.$tag,
+                'items' => [
+                    ['title' => $chapter.' strengths title 1 '.$tag, 'description' => $chapter.' strengths description 1 '.$tag],
+                ],
+            ],
+            'weaknesses' => [
+                'title' => $chapter.' weaknesses '.$tag,
+                'items' => [
+                    ['title' => $chapter.' weaknesses title 1 '.$tag, 'description' => $chapter.' weaknesses description 1 '.$tag],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function validMatchedJobs(string $tag): array
+    {
+        return [
+            'title' => 'matched jobs title '.$tag,
+            'fit_bucket' => 'primary',
+            'summary' => 'matched jobs summary '.$tag,
+            'fit_reason' => 'career fit reason '.$tag,
+            'job_examples' => [
+                'job example 1 '.$tag,
+                'job example 2 '.$tag,
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function validMatchedGuides(string $tag): array
+    {
+        return [
+            'title' => 'matched guides title '.$tag,
+            'summary' => 'matched guides summary '.$tag,
+            'fit_reason' => 'career fit reason '.$tag,
         ];
     }
 

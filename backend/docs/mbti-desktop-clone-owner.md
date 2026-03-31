@@ -42,12 +42,29 @@ MBTI Desktop clone 正文 owner 挂在现有 personality owner 域内：
 
 - `hero.summary`
 - `intro.paragraphs`
+- `letters_intro.headline`
+- `letters_intro.letters[]`
+- `overview.title`
+- `overview.paragraphs[]`
 - `traits.summaryPane.*`
 - `traits.body`
 - `chapters.career`
 - `chapters.growth`
 - `chapters.relationships`
 - `finalOffer`
+
+当前 P0 主链已 authoritative 挂载（本 PR）：
+
+- `letters_intro`
+- `overview`
+- `chapters.career.strengths`
+- `chapters.career.weaknesses`
+- `chapters.growth.strengths`
+- `chapters.growth.weaknesses`
+- `chapters.relationships.strengths`
+- `chapters.relationships.weaknesses`
+- `chapters.career.matched_jobs`
+- `chapters.career.matched_guides`
 
 `asset_slots_json` 为 desktop clone 资产引用 owner（挂在 clone content owner 内，不另起平台）：
 
@@ -92,6 +109,7 @@ MBTI Desktop clone 正文 owner 挂在现有 personality owner 域内：
 - unlock/purchase handlers
 - runtime price
 - attempt/user-scoped 状态
+- runtime personalization（`selection_fingerprint` / `evidence` / `adaptive` / `memory`）
 
 ## 6. Public Read Contract
 新增 public endpoint：
@@ -130,6 +148,7 @@ MBTI Desktop clone 正文 owner 挂在现有 personality owner 域内：
 - 32 个 fullCode（A/T）
 - `zh-CN`
 - `template_key = mbti_desktop_clone_v1`
+- P0 模块完整性门禁（缺 fullCode / 缺关键模块直接失败）
 
 导入来源：`fap-web` 当前已 authored 32 型 desktop clone 内容，转存为 `fap-api` 仓内 baseline（JSON）。
 
@@ -137,7 +156,9 @@ MBTI Desktop clone 正文 owner 挂在现有 personality owner 域内：
 - `en` locale backfill
 - 真实 AI 资产生成/上传与批处理
 - `fap-web` asset slot consumption cutover
+- P1/P2 扩展模块（`Career Ideas` / `Work Styles` / `What Energizes` / `What Drains` / `Relationship Superpowers` / `Relationship Pitfalls`）
 
 ## 9. 下一步 PR 顺序
-1. `fap-web`：desktop clone asset slot consumption cutover（前端开始消费 `asset_slots`）
-2. `fap-api` 或离线管线：AI 资产生成 + asset_ref 回填（仅数据替换，不改 schema）
+1. `fap-web`：desktop clone P0 新增模块消费接入（`letters_intro` / `overview` / `strengths|weaknesses` / `matched_*`）
+2. `fap-web`：desktop clone asset slot consumption cutover（前端开始消费 `asset_slots`）
+3. `fap-api` 或离线管线：AI 资产生成 + asset_ref 回填（仅数据替换，不改 schema）

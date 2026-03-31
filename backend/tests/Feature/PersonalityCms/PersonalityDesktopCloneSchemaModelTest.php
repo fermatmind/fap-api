@@ -72,6 +72,24 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
         ]);
     }
 
+    public function test_missing_p0_modules_are_rejected(): void
+    {
+        $variant = $this->seedVariant('INFJ', 'A', 'zh-CN');
+        $content = $this->validContent('infj-a');
+        unset($content['letters_intro']);
+
+        $this->expectException(ValidationException::class);
+
+        PersonalityProfileVariantCloneContent::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'template_key' => PersonalityProfileVariantCloneContent::TEMPLATE_KEY_MBTI_DESKTOP_CLONE_V1,
+            'status' => PersonalityProfileVariantCloneContent::STATUS_PUBLISHED,
+            'schema_version' => 'v1',
+            'content_json' => $content,
+            'asset_slots_json' => $this->validAssetSlots(),
+        ]);
+    }
+
     public function test_invalid_asset_slots_json_cannot_be_published(): void
     {
         $variant = $this->seedVariant('ENTP', 'A', 'zh-CN');
@@ -219,6 +237,14 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
      */
     private function validContent(string $tag): array
     {
+        $chapters = [
+            'career' => $this->validChapter('career', $tag),
+            'growth' => $this->validChapter('growth', $tag),
+            'relationships' => $this->validChapter('relationships', $tag),
+        ];
+        $chapters['career']['matched_jobs'] = $this->validMatchedJobs($tag);
+        $chapters['career']['matched_guides'] = $this->validMatchedGuides($tag);
+
         return [
             'hero' => [
                 'summary' => 'hero summary '.$tag,
@@ -227,6 +253,28 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
                 'paragraphs' => [
                     'intro paragraph 1 '.$tag,
                     'intro paragraph 2 '.$tag,
+                ],
+            ],
+            'letters_intro' => [
+                'headline' => 'letters headline '.$tag,
+                'letters' => [
+                    [
+                        'letter' => 'E',
+                        'title' => 'letters title E '.$tag,
+                        'description' => 'letters description E '.$tag,
+                    ],
+                    [
+                        'letter' => 'N',
+                        'title' => 'letters title N '.$tag,
+                        'description' => 'letters description N '.$tag,
+                    ],
+                ],
+            ],
+            'overview' => [
+                'title' => 'overview title '.$tag,
+                'paragraphs' => [
+                    'overview paragraph 1 '.$tag,
+                    'overview paragraph 2 '.$tag,
                 ],
             ],
             'traits' => [
@@ -241,11 +289,7 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
                     'traits body line 2 '.$tag,
                 ],
             ],
-            'chapters' => [
-                'career' => $this->validChapter('career', $tag),
-                'growth' => $this->validChapter('growth', $tag),
-                'relationships' => $this->validChapter('relationships', $tag),
-            ],
+            'chapters' => $chapters,
             'finalOffer' => [
                 'eyebrow' => 'offer eyebrow '.$tag,
                 'headline' => 'offer headline '.$tag,
@@ -295,6 +339,47 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
                     'blurredItems' => $this->chapterItems($chapter.' locked2 item', $tag),
                 ],
             ],
+            'strengths' => [
+                'title' => $chapter.' strengths '.$tag,
+                'items' => [
+                    ['title' => $chapter.' strengths title 1 '.$tag, 'description' => $chapter.' strengths description 1 '.$tag],
+                ],
+            ],
+            'weaknesses' => [
+                'title' => $chapter.' weaknesses '.$tag,
+                'items' => [
+                    ['title' => $chapter.' weaknesses title 1 '.$tag, 'description' => $chapter.' weaknesses description 1 '.$tag],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function validMatchedJobs(string $tag): array
+    {
+        return [
+            'title' => 'matched jobs title '.$tag,
+            'fit_bucket' => 'primary',
+            'summary' => 'matched jobs summary '.$tag,
+            'fit_reason' => 'career fit reason '.$tag,
+            'job_examples' => [
+                'job example 1 '.$tag,
+                'job example 2 '.$tag,
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function validMatchedGuides(string $tag): array
+    {
+        return [
+            'title' => 'matched guides title '.$tag,
+            'summary' => 'matched guides summary '.$tag,
+            'fit_reason' => 'career fit reason '.$tag,
         ];
     }
 
