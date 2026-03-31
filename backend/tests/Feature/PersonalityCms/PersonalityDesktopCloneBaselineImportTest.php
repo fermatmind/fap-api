@@ -100,6 +100,65 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
         $this->assertSame(32, PersonalityProfileVariantCloneContent::query()->count());
     }
 
+    public function test_import_selected_type_does_not_overwrite_unselected_rows(): void
+    {
+        $this->seedZhVariantsForAllMbtiBaseTypes();
+
+        $this->artisan('personality:import-desktop-clone-baseline', [
+            '--locale' => ['zh-CN'],
+            '--status' => 'published',
+            '--upsert' => true,
+            '--source-dir' => '../content_baselines/personality_clone',
+        ])->assertExitCode(0);
+
+        $infjRecord = $this->cloneContentModelByRuntimeType('INFJ-A');
+        $infjContent = is_array($infjRecord->content_json) ? $infjRecord->content_json : [];
+        $infjContent['hero']['summary'] = 'manually changed summary';
+        $infjRecord->forceFill([
+            'content_json' => $infjContent,
+        ])->save();
+
+        $entjBefore = $this->cloneContentModelByRuntimeType('ENTJ-T');
+        $entjBeforeSnapshot = [
+            'content_json' => $entjBefore->content_json,
+            'asset_slots_json' => $entjBefore->asset_slots_json,
+            'meta_json' => $entjBefore->meta_json,
+            'schema_version' => $entjBefore->schema_version,
+            'status' => $entjBefore->status,
+            'published_at' => $entjBefore->published_at?->toISOString(),
+        ];
+
+        $this->artisan('personality:import-desktop-clone-baseline', [
+            '--locale' => ['zh-CN'],
+            '--type' => ['INFJ-A'],
+            '--status' => 'published',
+            '--upsert' => true,
+            '--source-dir' => '../content_baselines/personality_clone',
+        ])
+            ->expectsOutputToContain('rows_found=1')
+            ->expectsOutputToContain('will_create=0')
+            ->expectsOutputToContain('will_update=1')
+            ->expectsOutputToContain('will_skip=0')
+            ->assertExitCode(0);
+
+        $infjAfter = $this->cloneContentModelByRuntimeType('INFJ-A');
+        $this->assertNotSame(
+            'manually changed summary',
+            trim((string) data_get($infjAfter->content_json, 'hero.summary')),
+        );
+
+        $entjAfter = $this->cloneContentModelByRuntimeType('ENTJ-T');
+        $entjAfterSnapshot = [
+            'content_json' => $entjAfter->content_json,
+            'asset_slots_json' => $entjAfter->asset_slots_json,
+            'meta_json' => $entjAfter->meta_json,
+            'schema_version' => $entjAfter->schema_version,
+            'status' => $entjAfter->status,
+            'published_at' => $entjAfter->published_at?->toISOString(),
+        ];
+        $this->assertSame($entjBeforeSnapshot, $entjAfterSnapshot);
+    }
+
     public function test_import_fails_when_target_variant_is_missing(): void
     {
         $this->artisan('personality:import-desktop-clone-baseline', [
@@ -248,5 +307,19 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
             'locale' => (string) $row->locale,
             'content_json' => is_array($content) ? $content : [],
         ];
+    }
+
+    private function cloneContentModelByRuntimeType(string $runtimeTypeCode): PersonalityProfileVariantCloneContent
+    {
+        /** @var PersonalityProfileVariantCloneContent|null $record */
+        $record = PersonalityProfileVariantCloneContent::query()
+            ->whereHas('variant', function ($query) use ($runtimeTypeCode): void {
+                $query->where('runtime_type_code', strtoupper(trim($runtimeTypeCode)));
+            })
+            ->first();
+
+        $this->assertNotNull($record);
+
+        return $record;
     }
 }

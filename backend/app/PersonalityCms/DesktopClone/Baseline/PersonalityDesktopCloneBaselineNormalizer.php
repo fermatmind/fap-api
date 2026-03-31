@@ -320,7 +320,14 @@ final class PersonalityDesktopCloneBaselineNormalizer
         $career = $this->requiredArray($chapters, ['career'], $context);
         $matchedJobs = $this->requiredArray($career, ['matched_jobs'], $context);
         $this->requiredString($matchedJobs, ['title'], $context);
-        $this->requiredString($matchedJobs, ['fit_bucket'], $context);
+        $fitBucket = $this->requiredString($matchedJobs, ['fit_bucket'], $context);
+        if (! in_array($fitBucket, ['primary', 'secondary'], true)) {
+            throw new RuntimeException(sprintf(
+                '%s has invalid chapters.career.matched_jobs.fit_bucket=%s.',
+                $context,
+                $fitBucket,
+            ));
+        }
         $this->requiredString($matchedJobs, ['summary'], $context);
         $this->requiredString($matchedJobs, ['fit_reason'], $context);
         $jobExamples = $this->requiredArray($matchedJobs, ['job_examples'], $context);
