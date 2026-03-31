@@ -6,6 +6,7 @@ namespace App\PersonalityCms\DesktopClone;
 
 use App\Models\PersonalityProfileVariantCloneContent;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 final class PersonalityVariantCloneContentValidator
@@ -13,10 +14,12 @@ final class PersonalityVariantCloneContentValidator
     /**
      * @param  array<string, mixed>  $contentJson
      * @param  array<int, array<string, mixed>>  $assetSlotsJson
+     * @return array<int, array<string, mixed>>
      */
-    public function assertValid(array $contentJson, array $assetSlotsJson, string $status): void
+    public function assertValid(array $contentJson, array $assetSlotsJson, string $status): array
     {
         $normalizedStatus = strtolower(trim($status));
+        $normalizedAssetSlots = PersonalityDesktopCloneAssetSlotSupport::normalizeAssetSlots($assetSlotsJson);
 
         if (! in_array($normalizedStatus, [
             PersonalityProfileVariantCloneContent::STATUS_DRAFT,
@@ -29,7 +32,7 @@ final class PersonalityVariantCloneContentValidator
 
         $validator = Validator::make([
             'content' => $contentJson,
-            'asset_slots' => $assetSlotsJson,
+            'asset_slots' => $normalizedAssetSlots,
         ], [
             'content' => ['required', 'array'],
             'content.hero' => ['required', 'array'],
@@ -137,19 +140,76 @@ final class PersonalityVariantCloneContentValidator
             'content.finalOffer.guarantee' => ['required', 'string'],
 
             'asset_slots' => ['required', 'array', 'min:1'],
-            'asset_slots.*.slotId' => ['required', 'string'],
+            'asset_slots.*.slot_id' => ['required', 'string', Rule::in(PersonalityDesktopCloneAssetSlotSupport::allowedSlotIds()), 'distinct:strict'],
             'asset_slots.*.label' => ['required', 'string'],
-            'asset_slots.*.aspectRatio' => ['required', 'string'],
-            'asset_slots.*.status' => ['required', 'in:placeholder,ready'],
-            'asset_slots.*.assetRef' => ['present', 'nullable', 'array'],
+            'asset_slots.*.aspect_ratio' => ['required', 'string', 'regex:/^[1-9]\d{0,3}:[1-9]\d{0,3}$/'],
+            'asset_slots.*.status' => ['required', Rule::in(PersonalityDesktopCloneAssetSlotSupport::allowedStatuses())],
+            'asset_slots.*.asset_ref' => ['present', 'nullable', 'array'],
+            'asset_slots.*.asset_ref.provider' => ['nullable', 'string', Rule::in(PersonalityDesktopCloneAssetSlotSupport::allowedAssetProviders())],
+            'asset_slots.*.asset_ref.path' => ['nullable', 'string'],
+            'asset_slots.*.asset_ref.url' => ['nullable', 'string'],
+            'asset_slots.*.asset_ref.version' => ['nullable', 'string'],
+            'asset_slots.*.asset_ref.checksum' => ['nullable', 'string'],
             'asset_slots.*.alt' => ['present', 'nullable', 'string'],
             'asset_slots.*.meta' => ['present', 'nullable', 'array'],
         ]);
 
-        if (! $validator->fails()) {
-            return;
+        $validator->after(function ($validator) use ($normalizedAssetSlots): void {
+            $slotIds = [];
+
+            foreach ($normalizedAssetSlots as $index => $slot) {
+                $slotId = strtolower(trim((string) ($slot['slot_id'] ?? '')));
+                $slotIds[] = $slotId;
+
+                $status = strtolower(trim((string) ($slot['status'] ?? '')));
+                $assetRef = is_array($slot['asset_ref'] ?? null) ? $slot['asset_ref'] : null;
+
+                if ($status === PersonalityDesktopCloneAssetSlotSupport::STATUS_READY) {
+                    if ($assetRef === null) {
+                        $validator->errors()->add(
+                            sprintf('asset_slots.%d.asset_ref', $index),
+                            'Ready asset slot must contain asset_ref.',
+                        );
+
+                        continue;
+                    }
+
+                    $provider = trim((string) ($assetRef['provider'] ?? ''));
+                    $path = trim((string) ($assetRef['path'] ?? ''));
+                    $url = trim((string) ($assetRef['url'] ?? ''));
+
+                    if ($provider === '') {
+                        $validator->errors()->add(
+                            sprintf('asset_slots.%d.asset_ref.provider', $index),
+                            'Ready asset slot requires asset_ref.provider.',
+                        );
+                    }
+
+                    if ($path === '' && $url === '') {
+                        $validator->errors()->add(
+                            sprintf('asset_slots.%d.asset_ref', $index),
+                            'Ready asset slot requires asset_ref.path or asset_ref.url.',
+                        );
+                    }
+                }
+            }
+
+            sort($slotIds);
+            $required = PersonalityDesktopCloneAssetSlotSupport::allowedSlotIds();
+            sort($required);
+
+            if ($slotIds !== $required) {
+                $validator->errors()->add(
+                    'asset_slots',
+                    'Asset slots must contain the exact allowed slot_id set for mbti_desktop_clone_v1.',
+                );
+            }
+        });
+
+        if ($validator->fails()) {
+            throw ValidationException::withMessages($validator->errors()->toArray());
         }
 
-        throw ValidationException::withMessages($validator->errors()->toArray());
+        return PersonalityDesktopCloneAssetSlotSupport::sortAssetSlotsBySchemaOrder($normalizedAssetSlots);
     }
 }

@@ -9,6 +9,7 @@ use App\Filament\Ops\Support\StatusBadge;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantCloneContent;
+use App\PersonalityCms\DesktopClone\PersonalityDesktopCloneAssetSlotSupport;
 use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -91,14 +92,60 @@ class PersonalityVariantCloneContentResource extends Resource
                 ->formatStateUsing(fn (mixed $state): string => self::encodeJson($state))
                 ->dehydrateStateUsing(fn (mixed $state): array => self::decodeJsonText($state, 'content_json') ?? [])
                 ->helperText('Authoritative desktop clone content JSON for this fullCode variant.'),
-            Forms\Components\Textarea::make('asset_slots_json')
+            Forms\Components\Repeater::make('asset_slots_json')
                 ->required()
-                ->rules(['required', 'json'])
-                ->rows(14)
-                ->default('[]')
-                ->formatStateUsing(fn (mixed $state): string => self::encodeJson($state))
-                ->dehydrateStateUsing(fn (mixed $state): array => self::decodeJsonText($state, 'asset_slots_json') ?? [])
-                ->helperText('Asset slot owner structure (slotId/label/aspectRatio/status/assetRef/alt/meta).'),
+                ->default(self::defaultAssetSlots())
+                ->formatStateUsing(fn (mixed $state): array => PersonalityDesktopCloneAssetSlotSupport::normalizeAssetSlots(
+                    is_array($state) ? $state : [],
+                ))
+                ->dehydrateStateUsing(fn (mixed $state): array => PersonalityDesktopCloneAssetSlotSupport::normalizeAssetSlots(
+                    is_array($state) ? $state : [],
+                ))
+                ->itemLabel(static fn (array $state): string => (string) ($state['slot_id'] ?? 'asset-slot'))
+                ->schema([
+                    Forms\Components\Select::make('slot_id')
+                        ->required()
+                        ->native(false)
+                        ->options(PersonalityDesktopCloneAssetSlotSupport::slotIdOptions())
+                        ->helperText('slot_id is fixed by desktop clone template schema.'),
+                    Forms\Components\TextInput::make('label')
+                        ->required()
+                        ->maxLength(120),
+                    Forms\Components\TextInput::make('aspect_ratio')
+                        ->required()
+                        ->maxLength(16)
+                        ->helperText('Use ratio format like 236:160 / 636:148.'),
+                    Forms\Components\Select::make('status')
+                        ->required()
+                        ->native(false)
+                        ->options(self::assetStatusOptions()),
+                    Forms\Components\TextInput::make('asset_ref.provider')
+                        ->label('asset_ref.provider')
+                        ->maxLength(32),
+                    Forms\Components\TextInput::make('asset_ref.path')
+                        ->label('asset_ref.path')
+                        ->maxLength(2048),
+                    Forms\Components\TextInput::make('asset_ref.url')
+                        ->label('asset_ref.url')
+                        ->maxLength(2048),
+                    Forms\Components\TextInput::make('asset_ref.version')
+                        ->label('asset_ref.version')
+                        ->maxLength(120),
+                    Forms\Components\TextInput::make('asset_ref.checksum')
+                        ->label('asset_ref.checksum')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('alt')
+                        ->label('alt')
+                        ->maxLength(255),
+                    Forms\Components\KeyValue::make('meta')
+                        ->label('meta')
+                        ->keyLabel('key')
+                        ->valueLabel('value'),
+                ])
+                ->columns(2)
+                ->reorderable(false)
+                ->collapsible()
+                ->helperText('Authoritative asset slot owner fields: slot_id/label/aspect_ratio/status/asset_ref/alt/meta.'),
             Forms\Components\Textarea::make('meta_json')
                 ->rules(['nullable', 'json'])
                 ->rows(8)
@@ -189,6 +236,17 @@ class PersonalityVariantCloneContentResource extends Resource
     }
 
     /**
+     * @return array<string, string>
+     */
+    private static function assetStatusOptions(): array
+    {
+        return array_combine(
+            PersonalityDesktopCloneAssetSlotSupport::allowedStatuses(),
+            PersonalityDesktopCloneAssetSlotSupport::allowedStatuses(),
+        ) ?: [];
+    }
+
+    /**
      * @return array<int, string>
      */
     private static function variantOptions(): array
@@ -212,6 +270,78 @@ class PersonalityVariantCloneContentResource extends Resource
                 ];
             })
             ->all();
+    }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    private static function defaultAssetSlots(): array
+    {
+        return [
+            [
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_HERO_ILLUSTRATION,
+                'label' => 'Hero illustration',
+                'aspect_ratio' => '236:160',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_TRAITS_ILLUSTRATION,
+                'label' => 'Traits illustration',
+                'aspect_ratio' => '636:148',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_TRAITS_SUMMARY_ILLUSTRATION,
+                'label' => 'Traits summary illustration',
+                'aspect_ratio' => '240:118',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_CAREER_ILLUSTRATION,
+                'label' => 'Career illustration',
+                'aspect_ratio' => '636:148',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_GROWTH_ILLUSTRATION,
+                'label' => 'Growth illustration',
+                'aspect_ratio' => '636:148',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_RELATIONSHIPS_ILLUSTRATION,
+                'label' => 'Relationships illustration',
+                'aspect_ratio' => '636:148',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_FINAL_OFFER_ILLUSTRATION,
+                'label' => 'Final offer illustration',
+                'aspect_ratio' => '252:220',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+        ];
     }
 
     private static function encodeJson(mixed $value): string

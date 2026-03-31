@@ -53,7 +53,7 @@ class PersonalityProfileVariantCloneContent extends Model
             $content->asset_slots_json = is_array($content->asset_slots_json) ? $content->asset_slots_json : [];
             $content->meta_json = is_array($content->meta_json) ? $content->meta_json : null;
 
-            app(PersonalityVariantCloneContentValidator::class)->assertValid(
+            $content->asset_slots_json = app(PersonalityVariantCloneContentValidator::class)->assertValid(
                 $content->content_json,
                 $content->asset_slots_json,
                 $content->status,

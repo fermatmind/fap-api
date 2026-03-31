@@ -7,6 +7,7 @@ namespace Tests\Feature\PersonalityCms;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantCloneContent;
+use App\PersonalityCms\DesktopClone\PersonalityDesktopCloneAssetSlotSupport;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
@@ -50,6 +51,17 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
                 )
                 ->distinct('personality_profile_variants.runtime_type_code')
                 ->count('personality_profile_variants.runtime_type_code'),
+        );
+
+        $first = PersonalityProfileVariantCloneContent::query()->orderBy('id')->firstOrFail();
+        $slotIds = array_column((array) $first->asset_slots_json, 'slot_id');
+
+        $this->assertSame(PersonalityDesktopCloneAssetSlotSupport::allowedSlotIds(), $slotIds);
+        $this->assertSame(
+            0,
+            collect((array) $first->asset_slots_json)
+                ->where('status', PersonalityDesktopCloneAssetSlotSupport::STATUS_READY)
+                ->count(),
         );
 
         $this->artisan('personality:import-desktop-clone-baseline', [

@@ -7,6 +7,7 @@ namespace Tests\Feature\PersonalityCms;
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
 use App\Models\PersonalityProfileVariantCloneContent;
+use App\PersonalityCms\DesktopClone\PersonalityDesktopCloneAssetSlotSupport;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Schema;
@@ -85,10 +86,54 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
             'content_json' => $this->validContent('entp-a'),
             'asset_slots_json' => [
                 [
-                    'slotId' => 'hero-cover',
-                    // missing required keys label/aspectRatio/status + nullable fields with present rule
+                    'slot_id' => 'hero-cover',
+                    'label' => 'Hero',
+                    'aspect_ratio' => '16:9',
+                    'status' => 'placeholder',
+                    'asset_ref' => null,
+                    'alt' => null,
+                    'meta' => null,
                 ],
             ],
+        ]);
+    }
+
+    public function test_ready_slot_requires_asset_ref(): void
+    {
+        $variant = $this->seedVariant('ENTJ', 'A', 'zh-CN');
+
+        $this->expectException(ValidationException::class);
+
+        $assetSlots = $this->validAssetSlots();
+        $assetSlots[0]['status'] = PersonalityDesktopCloneAssetSlotSupport::STATUS_READY;
+        $assetSlots[0]['asset_ref'] = null;
+
+        PersonalityProfileVariantCloneContent::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'template_key' => PersonalityProfileVariantCloneContent::TEMPLATE_KEY_MBTI_DESKTOP_CLONE_V1,
+            'status' => PersonalityProfileVariantCloneContent::STATUS_PUBLISHED,
+            'schema_version' => 'v1',
+            'content_json' => $this->validContent('entj-a'),
+            'asset_slots_json' => $assetSlots,
+        ]);
+    }
+
+    public function test_invalid_aspect_ratio_is_rejected(): void
+    {
+        $variant = $this->seedVariant('ENFP', 'T', 'zh-CN');
+
+        $this->expectException(ValidationException::class);
+
+        $assetSlots = $this->validAssetSlots();
+        $assetSlots[0]['aspect_ratio'] = '0:160';
+
+        PersonalityProfileVariantCloneContent::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'template_key' => PersonalityProfileVariantCloneContent::TEMPLATE_KEY_MBTI_DESKTOP_CLONE_V1,
+            'status' => PersonalityProfileVariantCloneContent::STATUS_PUBLISHED,
+            'schema_version' => 'v1',
+            'content_json' => $this->validContent('enfp-t'),
+            'asset_slots_json' => $assetSlots,
         ]);
     }
 
@@ -245,20 +290,65 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
     {
         return [
             [
-                'slotId' => 'hero.cover',
-                'label' => 'Hero cover image',
-                'aspectRatio' => '16:9',
-                'status' => 'placeholder',
-                'assetRef' => null,
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_HERO_ILLUSTRATION,
+                'label' => 'Hero illustration',
+                'aspect_ratio' => '236:160',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
                 'alt' => null,
                 'meta' => null,
             ],
             [
-                'slotId' => 'chapter.career.banner',
-                'label' => 'Career chapter banner',
-                'aspectRatio' => '4:3',
-                'status' => 'placeholder',
-                'assetRef' => null,
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_TRAITS_ILLUSTRATION,
+                'label' => 'Traits illustration',
+                'aspect_ratio' => '636:148',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_TRAITS_SUMMARY_ILLUSTRATION,
+                'label' => 'Traits summary illustration',
+                'aspect_ratio' => '240:118',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_CAREER_ILLUSTRATION,
+                'label' => 'Career illustration',
+                'aspect_ratio' => '636:148',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_GROWTH_ILLUSTRATION,
+                'label' => 'Growth illustration',
+                'aspect_ratio' => '636:148',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_RELATIONSHIPS_ILLUSTRATION,
+                'label' => 'Relationships illustration',
+                'aspect_ratio' => '636:148',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slot_id' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_FINAL_OFFER_ILLUSTRATION,
+                'label' => 'Final offer illustration',
+                'aspect_ratio' => '252:220',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'asset_ref' => null,
                 'alt' => null,
                 'meta' => null,
             ],

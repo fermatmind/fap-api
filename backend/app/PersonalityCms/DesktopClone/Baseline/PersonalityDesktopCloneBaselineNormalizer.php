@@ -6,6 +6,7 @@ namespace App\PersonalityCms\DesktopClone\Baseline;
 
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariantCloneContent;
+use App\PersonalityCms\DesktopClone\PersonalityDesktopCloneAssetSlotSupport;
 use RuntimeException;
 
 final class PersonalityDesktopCloneBaselineNormalizer
@@ -157,7 +158,7 @@ final class PersonalityDesktopCloneBaselineNormalizer
             'full_code' => $fullCode,
             'base_code' => (string) $matches['base'],
             'content_json' => $contentJson,
-            'asset_slots_json' => array_values($assetSlotsJson),
+            'asset_slots_json' => PersonalityDesktopCloneAssetSlotSupport::normalizeAssetSlots(array_values($assetSlotsJson)),
             'meta_json' => $metaJson,
         ];
     }

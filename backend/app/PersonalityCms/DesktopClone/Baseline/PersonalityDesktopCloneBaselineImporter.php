@@ -43,11 +43,12 @@ final class PersonalityDesktopCloneBaselineImporter
         ];
 
         foreach ($rows as $row) {
-            $this->validator->assertValid(
+            $normalizedAssetSlots = $this->validator->assertValid(
                 (array) ($row['content_json'] ?? []),
                 (array) ($row['asset_slots_json'] ?? []),
                 $status,
             );
+            $row['asset_slots_json'] = $normalizedAssetSlots;
 
             $variant = $this->resolveVariant($row);
             $templateKey = (string) ($row['template_key'] ?? PersonalityProfileVariantCloneContent::TEMPLATE_KEY_MBTI_DESKTOP_CLONE_V1);

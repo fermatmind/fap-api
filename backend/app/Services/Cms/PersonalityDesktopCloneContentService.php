@@ -6,6 +6,7 @@ namespace App\Services\Cms;
 
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariantCloneContent;
+use App\PersonalityCms\DesktopClone\PersonalityDesktopCloneAssetSlotSupport;
 use App\Repositories\PersonalityVariantCloneContentRepository;
 
 final class PersonalityDesktopCloneContentService
@@ -57,7 +58,9 @@ final class PersonalityDesktopCloneContentService
             'base_code' => $baseCode,
             'locale' => (string) $profile->locale,
             'content' => is_array($record->content_json) ? $record->content_json : [],
-            'asset_slots' => is_array($record->asset_slots_json) ? $record->asset_slots_json : [],
+            'asset_slots' => PersonalityDesktopCloneAssetSlotSupport::normalizeAssetSlots(
+                is_array($record->asset_slots_json) ? $record->asset_slots_json : [],
+            ),
             '_meta' => [
                 'authority_source' => 'personality_profile_variant_clone_contents',
                 'route_mode' => 'full_code_exact',
