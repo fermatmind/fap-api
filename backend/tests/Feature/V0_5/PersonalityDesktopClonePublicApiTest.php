@@ -44,7 +44,7 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
         $this->createCloneContent($infjA, 'infj-a', PersonalityProfileVariantCloneContent::STATUS_PUBLISHED);
         $this->createCloneContent($infjT, 'infj-t', PersonalityProfileVariantCloneContent::STATUS_PUBLISHED);
 
-        $this->getJson('/api/v0.5/personality/infj-a/desktop-clone?locale=zh-CN')
+        $response = $this->getJson('/api/v0.5/personality/infj-a/desktop-clone?locale=zh-CN')
             ->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath('template_key', PersonalityProfileVariantCloneContent::TEMPLATE_KEY_MBTI_DESKTOP_CLONE_V1)
@@ -63,6 +63,14 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('_meta.authority_source', 'personality_profile_variant_clone_contents')
             ->assertJsonPath('_meta.route_mode', 'full_code_exact')
             ->assertJsonPath('_meta.public_route_type', '32-type');
+
+        $assetSlots = $response->json('asset_slots');
+        $this->assertIsArray($assetSlots);
+        $this->assertCount(7, $assetSlots);
+        $this->assertSame(
+            PersonalityDesktopCloneAssetSlotSupport::allowedSlotIds(),
+            array_column($assetSlots, 'slot_id'),
+        );
 
         $this->getJson('/api/v0.5/personality/infj-t/desktop-clone?locale=zh-CN')
             ->assertOk()

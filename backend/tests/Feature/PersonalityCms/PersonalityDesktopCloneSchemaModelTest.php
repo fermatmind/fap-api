@@ -153,6 +153,36 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
         ]);
     }
 
+    public function test_legacy_asset_slot_shape_is_normalized_to_canonical_schema(): void
+    {
+        $variant = $this->seedVariant('ISTJ', 'T', 'zh-CN');
+
+        $record = PersonalityProfileVariantCloneContent::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'template_key' => PersonalityProfileVariantCloneContent::TEMPLATE_KEY_MBTI_DESKTOP_CLONE_V1,
+            'status' => PersonalityProfileVariantCloneContent::STATUS_PUBLISHED,
+            'schema_version' => 'v1',
+            'content_json' => $this->validContent('istj-t'),
+            'asset_slots_json' => $this->legacyAssetSlots(),
+        ])->fresh();
+
+        $this->assertNotNull($record);
+
+        $assetSlots = is_array($record->asset_slots_json) ? $record->asset_slots_json : [];
+        $this->assertCount(7, $assetSlots);
+        $this->assertSame(
+            PersonalityDesktopCloneAssetSlotSupport::allowedSlotIds(),
+            array_column($assetSlots, 'slot_id'),
+        );
+
+        $hero = $assetSlots[0];
+        $this->assertArrayHasKey('slot_id', $hero);
+        $this->assertArrayNotHasKey('slotId', $hero);
+        $this->assertSame('236:160', $hero['aspect_ratio']);
+        $this->assertArrayHasKey('asset_ref', $hero);
+        $this->assertArrayNotHasKey('assetRef', $hero);
+    }
+
     private function seedVariant(string $baseCode, string $variantCode, string $locale): PersonalityProfileVariant
     {
         $normalizedBase = strtoupper($baseCode);
@@ -349,6 +379,78 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
                 'aspect_ratio' => '252:220',
                 'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
                 'asset_ref' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+        ];
+    }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    private function legacyAssetSlots(): array
+    {
+        return [
+            [
+                'slotId' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_HERO_ILLUSTRATION,
+                'label' => 'Hero illustration',
+                'aspectRatio' => '236:160',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'assetRef' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slotId' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_TRAITS_ILLUSTRATION,
+                'label' => 'Traits illustration',
+                'aspectRatio' => '636:148',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'assetRef' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slotId' => 'traits-summary-asset',
+                'label' => 'Traits summary illustration',
+                'aspectRatio' => '240:118',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'assetRef' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slotId' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_CAREER_ILLUSTRATION,
+                'label' => 'Career illustration',
+                'aspectRatio' => '636:148',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'assetRef' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slotId' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_GROWTH_ILLUSTRATION,
+                'label' => 'Growth illustration',
+                'aspectRatio' => '636:148',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'assetRef' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slotId' => PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_RELATIONSHIPS_ILLUSTRATION,
+                'label' => 'Relationships illustration',
+                'aspectRatio' => '636:148',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'assetRef' => null,
+                'alt' => null,
+                'meta' => null,
+            ],
+            [
+                'slotId' => 'final-offer-asset',
+                'label' => 'Final offer illustration',
+                'aspectRatio' => '252:220',
+                'status' => PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+                'assetRef' => null,
                 'alt' => null,
                 'meta' => null,
             ],
