@@ -102,6 +102,19 @@ class PersonalityProfileVariant extends Model
             ->orderByDesc('id');
     }
 
+    public function cloneContents(): HasMany
+    {
+        return $this->hasMany(PersonalityProfileVariantCloneContent::class, 'personality_profile_variant_id', 'id')
+            ->orderBy('template_key')
+            ->orderBy('id');
+    }
+
+    public function desktopCloneContent(): HasOne
+    {
+        return $this->hasOne(PersonalityProfileVariantCloneContent::class, 'personality_profile_variant_id', 'id')
+            ->where('template_key', PersonalityProfileVariantCloneContent::TEMPLATE_KEY_MBTI_DESKTOP_CLONE_V1);
+    }
+
     /**
      * @return array<int, string>
      */
