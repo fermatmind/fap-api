@@ -146,6 +146,59 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('content.chapters.relationships.pitfalls.items.0.description', 'pitfalls description 1 istp-a');
     }
 
+    public function test_imported_baseline_public_api_exposes_p1_modules_for_sample_full_codes(): void
+    {
+        $this->seedZhVariantsForAllMbtiBaseTypes();
+
+        $this->artisan('personality:import-desktop-clone-baseline', [
+            '--locale' => ['zh-CN'],
+            '--status' => 'published',
+            '--upsert' => true,
+        ])->assertExitCode(0);
+
+        foreach (['INFJ-A', 'ENTJ-T', 'ISTP-A'] as $fullCode) {
+            $response = $this->getJson('/api/v0.5/personality/'.strtolower($fullCode).'/desktop-clone?locale=zh-CN')
+                ->assertOk()
+                ->assertJsonPath('ok', true)
+                ->assertJsonPath('full_code', $fullCode)
+                ->assertJsonPath('template_key', PersonalityProfileVariantCloneContent::TEMPLATE_KEY_MBTI_DESKTOP_CLONE_V1);
+
+            $content = $response->json('content');
+            $this->assertIsArray($content);
+
+            $this->assertItemModuleShape(
+                $content,
+                'chapters.career.career_ideas',
+                $fullCode,
+            );
+            $this->assertItemModuleShape(
+                $content,
+                'chapters.career.work_styles',
+                $fullCode,
+            );
+            $this->assertItemModuleShape(
+                $content,
+                'chapters.growth.what_energizes',
+                $fullCode,
+            );
+            $this->assertItemModuleShape(
+                $content,
+                'chapters.growth.what_drains',
+                $fullCode,
+            );
+            $this->assertItemModuleShape(
+                $content,
+                'chapters.relationships.superpowers',
+                $fullCode,
+            );
+            $this->assertItemModuleShape(
+                $content,
+                'chapters.relationships.pitfalls',
+                $fullCode,
+            );
+        }
+    }
+
     public function test_draft_content_is_hidden_and_endpoint_has_no_base_code_fallback(): void
     {
         $profile = $this->createProfile([
@@ -528,5 +581,83 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
                 'meta' => null,
             ],
         ];
+    }
+
+    private function seedZhVariantsForAllMbtiBaseTypes(): void
+    {
+        foreach ($this->mbtiBaseTypes() as $baseCode) {
+            $profile = $this->createProfile([
+                'type_code' => $baseCode,
+                'slug' => strtolower($baseCode),
+                'locale' => 'zh-CN',
+                'status' => 'published',
+                'is_public' => true,
+                'published_at' => now()->subMinute(),
+            ]);
+
+            foreach (['A', 'T'] as $variantCode) {
+                $this->createVariant($profile, [
+                    'canonical_type_code' => $baseCode,
+                    'variant_code' => $variantCode,
+                    'runtime_type_code' => sprintf('%s-%s', $baseCode, $variantCode),
+                    'is_published' => true,
+                    'published_at' => now()->subMinute(),
+                ]);
+            }
+        }
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    private function mbtiBaseTypes(): array
+    {
+        return [
+            'INTJ',
+            'INTP',
+            'ENTJ',
+            'ENTP',
+            'INFJ',
+            'INFP',
+            'ENFJ',
+            'ENFP',
+            'ISTJ',
+            'ISFJ',
+            'ESTJ',
+            'ESFJ',
+            'ISTP',
+            'ISFP',
+            'ESTP',
+            'ESFP',
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $content
+     */
+    private function assertItemModuleShape(array $content, string $modulePath, string $fullCode): void
+    {
+        $module = data_get($content, $modulePath);
+        $this->assertIsArray($module, sprintf('%s missing module %s', $fullCode, $modulePath));
+
+        $title = trim((string) data_get($module, 'title'));
+        $this->assertNotSame('', $title, sprintf('%s has empty %s.title', $fullCode, $modulePath));
+
+        $items = (array) data_get($module, 'items');
+        $this->assertNotEmpty($items, sprintf('%s has empty %s.items', $fullCode, $modulePath));
+
+        foreach ($items as $index => $item) {
+            $this->assertIsArray($item, sprintf('%s has invalid %s.items[%d]', $fullCode, $modulePath, $index));
+            $this->assertNotSame(
+                '',
+                trim((string) data_get($item, 'title')),
+                sprintf('%s has empty %s.items[%d].title', $fullCode, $modulePath, $index),
+            );
+            $this->assertNotSame(
+                '',
+                trim((string) data_get($item, 'description')),
+                sprintf('%s has empty %s.items[%d].description', $fullCode, $modulePath, $index),
+            );
+        }
     }
 }
