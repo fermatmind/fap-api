@@ -16,7 +16,7 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_import_publishes_32_full_code_zh_clone_content_and_is_idempotent(): void
+    public function test_import_publishes_32_full_code_zh_clone_content_with_compatibility_fields_and_is_idempotent(): void
     {
         $this->seedZhVariantsForAllMbtiBaseTypes();
 
@@ -70,6 +70,8 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
         $this->assertIsString(data_get($infjAContent, 'content_json.chapters.career.matched_jobs.fit_bucket'));
         $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.career.matched_jobs.job_examples'));
         $this->assertIsString(data_get($infjAContent, 'content_json.chapters.career.matched_guides.summary'));
+        // These modules are compatibility transition fields and must remain present
+        // until removal gates are satisfied across import/consumer/tests.
         $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.career.career_ideas.items'));
         $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.career.work_styles.items'));
         $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.growth.what_energizes.items'));
@@ -233,7 +235,7 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
         $this->assertSame(0, PersonalityProfileVariantCloneContent::query()->count());
     }
 
-    public function test_import_fails_when_personality_source_is_missing_required_p1_section(): void
+    public function test_import_fails_when_personality_source_is_missing_required_compatibility_section(): void
     {
         $this->seedZhVariantsForAllMbtiBaseTypes();
 
