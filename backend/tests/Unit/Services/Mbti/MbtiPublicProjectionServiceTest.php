@@ -266,6 +266,33 @@ final class MbtiPublicProjectionServiceTest extends TestCase
         );
         $this->assertSame('I', data_get($projection, 'dimensions.0.side'));
         $this->assertSame('clear', data_get($projection, 'dimensions.0.state'));
+        $this->assertSame('EI', data_get($projection, 'dimensions.0.axis_code'));
+        $this->assertSame('Energy', data_get($projection, 'dimensions.0.axis_title'));
+        $this->assertSame('Extraversion', data_get($projection, 'dimensions.0.left_pole'));
+        $this->assertSame('Introversion', data_get($projection, 'dimensions.0.right_pole'));
+        $this->assertSame('E', data_get($projection, 'dimensions.0.left_code'));
+        $this->assertSame('I', data_get($projection, 'dimensions.0.right_code'));
+        $this->assertSame(35, data_get($projection, 'dimensions.0.raw_first_pole_pct'));
+        $this->assertSame('I', data_get($projection, 'dimensions.0.dominant_pole'));
+        $this->assertSame('Introversion', data_get($projection, 'dimensions.0.dominant_label'));
+        $this->assertSame(65, data_get($projection, 'dimensions.0.dominant_pct'));
+        $this->assertSame(35, data_get($projection, 'dimensions.0.opposite_pct'));
+        $this->assertSame('clear', data_get($projection, 'dimensions.0.strength_band'));
+        $this->assertSame('AT', data_get($projection, 'dimensions.4.axis_code'));
+        $this->assertSame('Identity', data_get($projection, 'dimensions.4.axis_title'));
+        $this->assertSame('Assertive', data_get($projection, 'dimensions.4.left_pole'));
+        $this->assertSame('Turbulent', data_get($projection, 'dimensions.4.right_pole'));
+        $this->assertSame('A', data_get($projection, 'dimensions.4.left_code'));
+        $this->assertSame('T', data_get($projection, 'dimensions.4.right_code'));
+        $this->assertSame(58, data_get($projection, 'dimensions.4.raw_first_pole_pct'));
+        $this->assertSame('A', data_get($projection, 'dimensions.4.dominant_pole'));
+        $this->assertSame('Assertive', data_get($projection, 'dimensions.4.dominant_label'));
+        $this->assertSame(58, data_get($projection, 'dimensions.4.dominant_pct'));
+        $this->assertSame(42, data_get($projection, 'dimensions.4.opposite_pct'));
+        $this->assertSame('boundary', data_get($projection, 'dimensions.4.strength_band'));
+        $this->assertSame(58, data_get($projection, 'dimensions.4.score_pct'));
+        $this->assertSame('A', data_get($projection, 'dimensions.4.side'));
+        $this->assertSame(58, data_get($projection, 'dimensions.4.pct'));
         $this->assertSame('MBTI_REPORT_FULL', data_get($projection, 'offer_set.cta.target_sku'));
     }
 
