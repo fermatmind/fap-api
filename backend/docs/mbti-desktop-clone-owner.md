@@ -53,7 +53,7 @@ MBTI Desktop clone 正文 owner 挂在现有 personality owner 域内：
 - `chapters.relationships`
 - `finalOffer`
 
-当前 P0 主链已 authoritative 挂载（本 PR）：
+当前 canonical 主链已 authoritative 挂载（desktop main flow 以这些模块为准）：
 
 - `letters_intro`
 - `overview`
@@ -66,7 +66,7 @@ MBTI Desktop clone 正文 owner 挂在现有 personality owner 域内：
 - `chapters.career.matched_jobs`
 - `chapters.career.matched_guides`
 
-当前 P1 深层模块已 authoritative 挂载：
+以下字段为 deprecated transition fields（compatibility retained）：
 
 - `chapters.career.career_ideas`
 - `chapters.career.work_styles`
@@ -74,6 +74,14 @@ MBTI Desktop clone 正文 owner 挂在现有 personality owner 域内：
 - `chapters.growth.what_drains`
 - `chapters.relationships.superpowers`
 - `chapters.relationships.pitfalls`
+
+过渡语义（必须同时成立）：
+
+1. 以上 6 个字段仍由 authoritative owner 持有。
+2. 以上 6 个字段仍由 public API 返回。
+3. 当前 `fap-web` desktop main flow 已不再主链渲染这些字段。
+4. 保留目的仅为兼容与过渡，不代表当前 canonical 展示系统。
+5. 未来若进入 hard convergence，必须先完成 consumer/tests/import chain 清理。
 
 `asset_slots_json` 为 desktop clone 资产引用 owner（挂在 clone content owner 内，不另起平台）：
 
@@ -151,13 +159,19 @@ MBTI Desktop clone 正文 owner 挂在现有 personality owner 域内：
 - placeholder slot 也必须完整返回，不吞字段
 - ready slot 返回可消费 `asset_ref`
 
+compatibility 字段契约（当前阶段）：
+
+- `career_ideas` / `work_styles` / `what_energizes` / `what_drains` / `superpowers` / `pitfalls` 继续返回
+- 返回仅用于兼容过渡，不能据此推断前端主链仍渲染
+
 ## 7. Seed 覆盖范围
 当前基线导入覆盖：
 
 - 32 个 fullCode（A/T）
 - `zh-CN`
 - `template_key = mbti_desktop_clone_v1`
-- P0 + P1 模块完整性门禁（缺 fullCode / 缺关键模块直接失败）
+- canonical 主链 + compatibility 字段完整性门禁（缺 fullCode / 缺关键模块直接失败）
+- 当前 import required path 仍包含上述 6 个兼容字段，removal gate 尚未满足
 
 导入来源：`fap-web` 当前已 authored 32 型 desktop clone 内容，转存为 `fap-api` 仓内 baseline（JSON）。
 
@@ -166,7 +180,7 @@ MBTI Desktop clone 正文 owner 挂在现有 personality owner 域内：
 - 真实 AI 资产生成/上传与批处理
 - runtime personalization（`selection_fingerprint` / `evidence` / `adaptive` / `memory`）
 
-## 9. 下一步 PR 顺序
-1. `fap-web`：desktop clone P1 深层模块消费接入（`career_ideas/work_styles`、`what_energizes/what_drains`、`superpowers/pitfalls`）
-2. `fap-api` 或 runtime 管线：同型内 runtime personalization 挂载（不改静态 owner）
-3. `fap-api` 或离线管线：AI 资产生成 + asset_ref 回填（仅数据替换，不改 schema）
+## 9. 后续 hard convergence 前置条件
+1. 清理 `fap-web` 对上述 6 个兼容字段的 consumer 与契约语义依赖。
+2. 清理 `fap-api` 测试与 baseline import required chain 对上述 6 个字段的 removal 阻塞。
+3. 在 consumer/tests/import chain 全部收敛后，单独发起 hard convergence PR。
