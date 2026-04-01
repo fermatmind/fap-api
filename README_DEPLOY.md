@@ -49,6 +49,14 @@ Truth Source: `backend/composer.json` / `backend/package.json` / `backend/config
 ## 4. 配置清单（上线必填）
 以 `backend/.env.example` 为模板，生产必须由密钥系统注入。
 
+Deployer SSH 约定：
+- 默认 production 仍走 `DEPLOY_HOST_PROD=122.152.221.126`、`DEPLOY_USER_PROD=ubuntu`
+- 若本机存在 `~/.ssh/fap_prod` 或 `~/.ssh/fap_api_gha`，`deploy.php` 会自动将其作为 production `IdentityFile`
+- staging 若本机存在 `~/.ssh/fap_actions_staging`，会自动作为 staging `IdentityFile`
+- 如需显式覆盖，使用：
+  - `DEPLOY_IDENTITY_FILE_PROD=/abs/path/to/key`
+  - `DEPLOY_IDENTITY_FILE_STG=/abs/path/to/key`
+
 ### 4.1 基础与数据库
 - `APP_ENV=production`
 - `APP_DEBUG=false`
@@ -233,8 +241,10 @@ if ($after > $maxDepth || ($after - $before) > $maxGrowth || $recentPending > $m
 
 ### 5.2 Deployer rerun / failed release hygiene
 - Deployer release name 必须唯一；若上一轮失败残留了 `releases/93`，下一次 rerun 必须使用新的 `release_name`，例如：
-  - `vendor/bin/dep deploy production -o release_name=94`
-  - 或 `vendor/bin/dep deploy production -o release_name=$(date +%Y%m%d%H%M%S)`
+- `vendor/bin/dep deploy production -o release_name=94`
+- 或 `vendor/bin/dep deploy production -o release_name=$(date +%Y%m%d%H%M%S)`
+- 如需显式指定 key：
+  - `DEPLOY_IDENTITY_FILE_PROD=~/.ssh/fap_prod vendor/bin/dep deploy production -o release_name=$(date +%Y%m%d%H%M%S)`
 - `release 93 already exists` 不是成功上线，只表示失败残留目录未被复用。
 - 若 `releases/93` 不是 `current` 指向目标，且该 release 从未成功切换为 active release，则可安全清理：
   - `test "$(readlink -f current)" != "$(readlink -f releases/93)"`
