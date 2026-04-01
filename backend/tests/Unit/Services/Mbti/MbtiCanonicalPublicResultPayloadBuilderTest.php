@@ -108,6 +108,27 @@ final class MbtiCanonicalPublicResultPayloadBuilderTest extends TestCase
         );
         $this->assertSame('SN', $payload['dimensions'][1]['id']);
         $this->assertSame('TF', $payload['dimensions'][2]['id']);
+        $this->assertSame('EI', data_get($payload, 'dimensions.0.axis_code'));
+        $this->assertSame('Energy', data_get($payload, 'dimensions.0.axis_title'));
+        $this->assertSame('Extraversion', data_get($payload, 'dimensions.0.left_pole'));
+        $this->assertSame('Introversion', data_get($payload, 'dimensions.0.right_pole'));
+        $this->assertSame('E', data_get($payload, 'dimensions.0.left_code'));
+        $this->assertSame('I', data_get($payload, 'dimensions.0.right_code'));
+        $this->assertSame(62, data_get($payload, 'dimensions.0.raw_first_pole_pct'));
+        $this->assertSame('E', data_get($payload, 'dimensions.0.dominant_pole'));
+        $this->assertSame('Extraversion', data_get($payload, 'dimensions.0.dominant_label'));
+        $this->assertSame(62, data_get($payload, 'dimensions.0.dominant_pct'));
+        $this->assertSame(38, data_get($payload, 'dimensions.0.opposite_pct'));
+        $this->assertSame('clear', data_get($payload, 'dimensions.0.strength_band'));
+        $this->assertSame(49, data_get($payload, 'dimensions.4.raw_first_pole_pct'));
+        $this->assertSame('T', data_get($payload, 'dimensions.4.dominant_pole'));
+        $this->assertSame('Turbulent', data_get($payload, 'dimensions.4.dominant_label'));
+        $this->assertSame(51, data_get($payload, 'dimensions.4.dominant_pct'));
+        $this->assertSame(49, data_get($payload, 'dimensions.4.opposite_pct'));
+        $this->assertSame('boundary', data_get($payload, 'dimensions.4.strength_band'));
+        $this->assertSame(49, data_get($payload, 'dimensions.4.score_pct'));
+        $this->assertSame('T', data_get($payload, 'dimensions.4.side'));
+        $this->assertSame(51, data_get($payload, 'dimensions.4.pct'));
     }
 
     public function test_builder_rejects_base_type_only_resolution_without_silent_fallback(): void

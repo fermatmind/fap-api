@@ -9,6 +9,7 @@ use App\Models\PersonalityProfileVariant;
 use App\Models\Result;
 use App\Services\Mbti\Adapters\MbtiPersonalityProfileAuthoritySourceAdapter;
 use App\Services\Mbti\Adapters\MbtiReportAuthoritySourceAdapter;
+use App\Support\Mbti\MbtiAxisStrengthBand;
 use App\Support\Mbti\MbtiPublicTypeIdentity;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -704,7 +705,7 @@ final class MbtiPublicProjectionService
                 $dimensions[$axisId]['pct'] = $scorePct >= 50 ? $scorePct : 100 - $scorePct;
             }
 
-            $ordered[] = $dimensions[$axisId];
+            $ordered[] = $this->enrichCanonicalDimension($dimensions[$axisId]);
         }
 
         return $ordered;
@@ -750,6 +751,7 @@ final class MbtiPublicProjectionService
                 ?? $dimensions[$index]['pct'];
             $dimensions[$index]['state'] = $this->nullableText($legacy['state'] ?? null)
                 ?? $dimensions[$index]['state'];
+            $dimensions[$index] = $this->enrichCanonicalDimension($dimensions[$index]);
         }
 
         return $dimensions;
@@ -783,6 +785,46 @@ final class MbtiPublicProjectionService
             'JP' => ['J', 'P'],
             default => ['A', 'T'],
         };
+    }
+
+    /**
+     * @param  array<string, mixed>  $dimension
+     * @return array<string, mixed>
+     */
+    private function enrichCanonicalDimension(array $dimension): array
+    {
+        $axisId = strtoupper(trim((string) ($dimension['id'] ?? $dimension['code'] ?? '')));
+        if ($axisId === '') {
+            return $dimension;
+        }
+
+        [$leftCode, $rightCode] = $this->axisLetters($axisId);
+        $axisTitle = $this->nullableText($dimension['label'] ?? $dimension['name'] ?? null) ?? $axisId;
+        $leftPole = $this->nullableText($dimension['axis_left'] ?? null);
+        $rightPole = $this->nullableText($dimension['axis_right'] ?? null);
+        $rawFirstPolePct = $this->normalizePercent($dimension['score_pct'] ?? null);
+        $dominantPole = $this->nullableText($dimension['side'] ?? null);
+        $dominantPct = $this->normalizePercent($dimension['pct'] ?? null);
+        $state = $this->nullableText($dimension['state'] ?? null);
+        $dominantLabel = $this->nullableText($dimension['side_label'] ?? null);
+        if ($dominantLabel === null && $dominantPole !== null) {
+            $dominantLabel = strtoupper($dominantPole) === $leftCode ? $leftPole : $rightPole;
+        }
+
+        return array_merge($dimension, [
+            'axis_code' => $axisId,
+            'axis_title' => $axisTitle,
+            'left_pole' => $leftPole,
+            'right_pole' => $rightPole,
+            'left_code' => $leftCode,
+            'right_code' => $rightCode,
+            'raw_first_pole_pct' => $rawFirstPolePct,
+            'dominant_pole' => $dominantPole,
+            'dominant_label' => $dominantLabel,
+            'dominant_pct' => $dominantPct,
+            'opposite_pct' => is_int($dominantPct) ? max(0, min(100, 100 - $dominantPct)) : null,
+            'strength_band' => MbtiAxisStrengthBand::fromDominantPercent($dominantPct, $state),
+        ]);
     }
 
     private function normalizeLocale(string $locale): string

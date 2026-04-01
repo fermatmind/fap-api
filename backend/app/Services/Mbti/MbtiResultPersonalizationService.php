@@ -9,6 +9,7 @@ use App\Services\AI\ControlledNarrativeLayerService;
 use App\Services\Comparative\VersionedComparativeNormingLayerService;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\CulturalCalibrationLayerService;
+use App\Support\Mbti\MbtiAxisStrengthBand;
 
 final class MbtiResultPersonalizationService
 {
@@ -1684,19 +1685,7 @@ final class MbtiResultPersonalizationService
 
     private function resolveBand(int $delta, string $state): string
     {
-        if ($delta < 12) {
-            return 'boundary';
-        }
-
-        if ($delta >= 40 || str_contains(strtolower($state), 'very')) {
-            return 'very_strong';
-        }
-
-        if ($delta >= 25 || strtolower($state) === 'strong') {
-            return 'strong';
-        }
-
-        return 'clear';
+        return MbtiAxisStrengthBand::fromDeltaAndState($delta, $state);
     }
 
     /**

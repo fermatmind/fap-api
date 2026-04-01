@@ -6,6 +6,7 @@ namespace App\Services\Mbti;
 
 use App\Contracts\MbtiPublicResultAuthoritySource;
 use App\Contracts\MbtiPublicResultPayloadBuilder;
+use App\Support\Mbti\MbtiAxisStrengthBand;
 use App\Support\Mbti\MbtiCanonicalSectionRegistry;
 use App\Support\Mbti\MbtiPublicTypeIdentity;
 use InvalidArgumentException;
@@ -311,7 +312,7 @@ final class MbtiCanonicalPublicResultPayloadBuilder implements MbtiPublicResultP
                     $normalized[$axisId]['pct'] = $scorePct >= 50 ? $scorePct : 100 - $scorePct;
                 }
 
-                $ordered[] = $normalized[$axisId];
+                $ordered[] = $this->enrichCanonicalDimension($normalized[$axisId]);
             }
         }
 
@@ -543,6 +544,75 @@ final class MbtiCanonicalPublicResultPayloadBuilder implements MbtiPublicResultP
             'TF' => ['T', 'F'],
             'JP' => ['J', 'P'],
             default => ['A', 'T'],
+        };
+    }
+
+    /**
+     * @param  array<string, mixed>  $dimension
+     * @return array<string, mixed>
+     */
+    private function enrichCanonicalDimension(array $dimension): array
+    {
+        $axisId = strtoupper(trim((string) ($dimension['id'] ?? $dimension['code'] ?? '')));
+        if ($axisId === '') {
+            return $dimension;
+        }
+
+        [$leftCode, $rightCode] = $this->axisLetters($axisId);
+        $axisTitle = $this->nullableText($dimension['label'] ?? $dimension['name'] ?? null);
+        if ($axisTitle === null || strtoupper($axisTitle) === $axisId) {
+            $axisTitle = $this->defaultAxisTitle($axisId);
+        }
+        [$defaultLeftPole, $defaultRightPole] = $this->defaultAxisPoles($axisId);
+        $leftPole = $this->nullableText($dimension['axis_left'] ?? null) ?? $defaultLeftPole;
+        $rightPole = $this->nullableText($dimension['axis_right'] ?? null) ?? $defaultRightPole;
+        $rawFirstPolePct = $this->normalizePercent($dimension['score_pct'] ?? null);
+        $dominantPole = $this->nullableText($dimension['side'] ?? null);
+        $dominantPct = $this->normalizePercent($dimension['pct'] ?? null);
+        $state = $this->nullableText($dimension['state'] ?? null);
+        $dominantLabel = $this->nullableText($dimension['side_label'] ?? null);
+        if ($dominantLabel === null && $dominantPole !== null) {
+            $dominantLabel = strtoupper($dominantPole) === $leftCode ? $leftPole : $rightPole;
+        }
+
+        return array_merge($dimension, [
+            'axis_code' => $axisId,
+            'axis_title' => $axisTitle,
+            'left_pole' => $leftPole,
+            'right_pole' => $rightPole,
+            'left_code' => $leftCode,
+            'right_code' => $rightCode,
+            'raw_first_pole_pct' => $rawFirstPolePct,
+            'dominant_pole' => $dominantPole,
+            'dominant_label' => $dominantLabel,
+            'dominant_pct' => $dominantPct,
+            'opposite_pct' => is_int($dominantPct) ? max(0, min(100, 100 - $dominantPct)) : null,
+            'strength_band' => MbtiAxisStrengthBand::fromDominantPercent($dominantPct, $state),
+        ]);
+    }
+
+    private function defaultAxisTitle(string $axisId): string
+    {
+        return match ($axisId) {
+            'EI' => 'Energy',
+            'SN' => 'Information',
+            'TF' => 'Decision',
+            'JP' => 'Lifestyle',
+            default => 'Identity',
+        };
+    }
+
+    /**
+     * @return array{0:string,1:string}
+     */
+    private function defaultAxisPoles(string $axisId): array
+    {
+        return match ($axisId) {
+            'EI' => ['Extraversion', 'Introversion'],
+            'SN' => ['Sensing', 'Intuition'],
+            'TF' => ['Thinking', 'Feeling'],
+            'JP' => ['Judging', 'Perceiving'],
+            default => ['Assertive', 'Turbulent'],
         };
     }
 
