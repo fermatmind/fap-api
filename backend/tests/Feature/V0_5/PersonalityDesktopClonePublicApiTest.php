@@ -15,7 +15,7 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_published_desktop_clone_is_readable_by_full_code_and_exposes_p0_and_p1_modules(): void
+    public function test_published_desktop_clone_is_readable_by_full_code_and_keeps_compatibility_fields_exposed(): void
     {
         $infjProfile = $this->createProfile([
             'type_code' => 'INFJ',
@@ -99,6 +99,8 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('content.chapters.relationships.weaknesses.items.0.description', 'relationships weaknesses description 1 infj-a')
             ->assertJsonPath('content.chapters.career.matched_jobs.fit_bucket', 'primary')
             ->assertJsonPath('content.chapters.career.matched_guides.fit_reason', 'career fit reason infj-a')
+            // Compatibility transition fields stay exposed by public API.
+            // Their presence does not imply desktop main flow still renders them.
             ->assertJsonPath('content.chapters.career.career_ideas.title', 'career ideas infj-a')
             ->assertJsonPath('content.chapters.career.work_styles.items.0.description', 'work styles description 1 infj-a')
             ->assertJsonPath('content.chapters.growth.what_energizes.title', 'what energizes infj-a')
@@ -146,7 +148,7 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('content.chapters.relationships.pitfalls.items.0.description', 'pitfalls description 1 istp-a');
     }
 
-    public function test_imported_baseline_public_api_exposes_p1_modules_for_sample_full_codes(): void
+    public function test_imported_baseline_public_api_keeps_compatibility_fields_for_sample_full_codes(): void
     {
         $this->seedZhVariantsForAllMbtiBaseTypes();
 
@@ -166,6 +168,8 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             $content = $response->json('content');
             $this->assertIsArray($content);
 
+            // Compatibility transition fields are still required in the published API payload.
+            // This contract only verifies compatibility exposure, not frontend render priority.
             $this->assertItemModuleShape(
                 $content,
                 'chapters.career.career_ideas',
