@@ -57,6 +57,13 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             'is_published' => true,
             'published_at' => now()->subMinute(),
         ]);
+        $entjA = $this->createVariant($entjProfile, [
+            'canonical_type_code' => 'ENTJ',
+            'variant_code' => 'A',
+            'runtime_type_code' => 'ENTJ-A',
+            'is_published' => true,
+            'published_at' => now()->subMinute(),
+        ]);
         $entjT = $this->createVariant($entjProfile, [
             'canonical_type_code' => 'ENTJ',
             'variant_code' => 'T',
@@ -74,6 +81,7 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
 
         $this->createCloneContent($infjA, 'infj-a', PersonalityProfileVariantCloneContent::STATUS_PUBLISHED);
         $this->createCloneContent($infjT, 'infj-t', PersonalityProfileVariantCloneContent::STATUS_PUBLISHED);
+        $this->createCloneContent($entjA, 'entj-a', PersonalityProfileVariantCloneContent::STATUS_PUBLISHED);
         $this->createCloneContent($entjT, 'entj-t', PersonalityProfileVariantCloneContent::STATUS_PUBLISHED);
         $this->createCloneContent($istpA, 'istp-a', PersonalityProfileVariantCloneContent::STATUS_PUBLISHED);
 
@@ -107,6 +115,10 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('content.chapters.growth.what_drains.items.0.description', 'what drains description 1 infj-a')
             ->assertJsonPath('content.chapters.relationships.superpowers.title', 'superpowers infj-a')
             ->assertJsonPath('content.chapters.relationships.pitfalls.items.0.description', 'pitfalls description 1 infj-a')
+            ->assertJsonPath('content.chapters.career.traits_unlock.title', 'career traits unlock title infj-a')
+            ->assertJsonPath('content.chapters.career.traits_unlock.items.0.label', 'career trait 1 infj-a')
+            ->assertJsonPath('content.chapters.growth.traits_unlock.items.0.label', 'growth trait 1 infj-a')
+            ->assertJsonPath('content.chapters.relationships.traits_unlock.items.0.label', 'relationships trait 1 infj-a')
             ->assertJsonPath('asset_slots.0.slot_id', PersonalityDesktopCloneAssetSlotSupport::SLOT_ID_HERO_ILLUSTRATION)
             ->assertJsonPath('asset_slots.0.status', PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER)
             ->assertJsonPath('asset_slots.0.asset_ref', null)
@@ -130,7 +142,20 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath('full_code', 'INFJ-T')
-            ->assertJsonPath('content.hero.summary', 'hero summary infj-t');
+            ->assertJsonPath('content.hero.summary', 'hero summary infj-t')
+            ->assertJsonPath('content.chapters.career.traits_unlock.title', 'career traits unlock title infj-t')
+            ->assertJsonPath('content.chapters.career.traits_unlock.items.0.label', 'career trait 1 infj-t')
+            ->assertJsonPath('content.chapters.growth.traits_unlock.items.0.label', 'growth trait 1 infj-t')
+            ->assertJsonPath('content.chapters.relationships.traits_unlock.items.0.label', 'relationships trait 1 infj-t');
+
+        $this->getJson('/api/v0.5/personality/entj-a/desktop-clone?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('full_code', 'ENTJ-A')
+            ->assertJsonPath('content.chapters.career.traits_unlock.title', 'career traits unlock title entj-a')
+            ->assertJsonPath('content.chapters.career.traits_unlock.items.0.label', 'career trait 1 entj-a')
+            ->assertJsonPath('content.chapters.growth.traits_unlock.items.0.label', 'growth trait 1 entj-a')
+            ->assertJsonPath('content.chapters.relationships.traits_unlock.items.0.label', 'relationships trait 1 entj-a');
 
         $this->getJson('/api/v0.5/personality/entj-t/desktop-clone?locale=zh-CN')
             ->assertOk()
@@ -138,7 +163,11 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('full_code', 'ENTJ-T')
             ->assertJsonPath('content.letters_intro.headline', 'letters headline entj-t')
             ->assertJsonPath('content.chapters.career.matched_jobs.job_examples.0', 'job example 1 entj-t')
-            ->assertJsonPath('content.chapters.growth.what_energizes.items.0.description', 'what energizes description 1 entj-t');
+            ->assertJsonPath('content.chapters.growth.what_energizes.items.0.description', 'what energizes description 1 entj-t')
+            ->assertJsonPath('content.chapters.career.traits_unlock.title', 'career traits unlock title entj-t')
+            ->assertJsonPath('content.chapters.career.traits_unlock.items.0.label', 'career trait 1 entj-t')
+            ->assertJsonPath('content.chapters.growth.traits_unlock.items.0.label', 'growth trait 1 entj-t')
+            ->assertJsonPath('content.chapters.relationships.traits_unlock.items.0.label', 'relationships trait 1 entj-t');
 
         $this->getJson('/api/v0.5/personality/istp-a/desktop-clone?locale=zh-CN')
             ->assertOk()
@@ -158,7 +187,7 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             '--upsert' => true,
         ])->assertExitCode(0);
 
-        foreach (['INFJ-A', 'ENTJ-T', 'ISTP-A'] as $fullCode) {
+        foreach (['ENTJ-A', 'ENTJ-T', 'INFJ-A', 'INFJ-T'] as $fullCode) {
             $response = $this->getJson('/api/v0.5/personality/'.strtolower($fullCode).'/desktop-clone?locale=zh-CN')
                 ->assertOk()
                 ->assertJsonPath('ok', true)
@@ -199,6 +228,24 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
                 $content,
                 'chapters.relationships.pitfalls',
                 $fullCode,
+            );
+            $this->assertNotSame('', trim((string) data_get($content, 'chapters.career.traits_unlock.title')));
+            $this->assertNotSame('', trim((string) data_get($content, 'chapters.growth.traits_unlock.title')));
+            $this->assertNotSame('', trim((string) data_get($content, 'chapters.relationships.traits_unlock.title')));
+            $this->assertSame(
+                data_get($content, 'chapters.career.influentialTraits.0.label'),
+                data_get($content, 'chapters.career.traits_unlock.items.0.label'),
+                sprintf('%s career traits_unlock first label must align with row label', $fullCode),
+            );
+            $this->assertSame(
+                data_get($content, 'chapters.growth.influentialTraits.0.label'),
+                data_get($content, 'chapters.growth.traits_unlock.items.0.label'),
+                sprintf('%s growth traits_unlock first label must align with row label', $fullCode),
+            );
+            $this->assertSame(
+                data_get($content, 'chapters.relationships.influentialTraits.0.label'),
+                data_get($content, 'chapters.relationships.traits_unlock.items.0.label'),
+                sprintf('%s relationships traits_unlock first label must align with row label', $fullCode),
             );
         }
     }
@@ -385,6 +432,7 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
                     'items' => $this->chapterItems($chapter.' visible item', $tag),
                 ],
             ],
+            'traits_unlock' => $this->validTraitsUnlock($chapter, $tag),
             'lockedBlocks' => [
                 [
                     'title' => $chapter.' locked 1 '.$tag,
@@ -461,6 +509,60 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
         }
 
         return $payload;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function validTraitsUnlock(string $chapter, string $tag): array
+    {
+        $expressionField = match ($chapter) {
+            'career' => 'career_expression',
+            'growth' => 'growth_expression',
+            default => 'relationship_expression',
+        };
+        $advantageField = match ($chapter) {
+            'career' => 'career_advantage',
+            'growth' => 'growth_advantage',
+            default => 'relationship_advantage',
+        };
+        $links = match ($chapter) {
+            'career' => [
+                'summary' => ['career.summary'],
+                'strengths' => ['career.advantages'],
+                'weaknesses' => ['career.weaknesses'],
+            ],
+            'growth' => [
+                'summary' => ['growth.summary'],
+                'strengths' => ['growth.strengths'],
+                'weaknesses' => ['growth.weaknesses'],
+            ],
+            default => [
+                'summary' => ['relationships.summary'],
+                'strengths' => ['relationships.strengths'],
+                'weaknesses' => ['relationships.weaknesses'],
+            ],
+        };
+
+        return [
+            'title' => sprintf('%s traits unlock title %s', $chapter, $tag),
+            'intro' => sprintf('%s traits unlock intro %s', $chapter, $tag),
+            'items' => array_map(function (int $index) use ($chapter, $tag, $expressionField, $advantageField, $links): array {
+                return [
+                    'id' => sprintf('%s-trait-%d', $chapter, $index),
+                    'label' => sprintf('%s trait %d %s', $chapter, $index, $tag),
+                    'role' => sprintf('%s-role-%d', $chapter, $index),
+                    'definition' => sprintf('%s definition %d %s', $chapter, $index, $tag),
+                    'why_it_matters' => sprintf('%s why it matters %d %s', $chapter, $index, $tag),
+                    $expressionField => sprintf('%s expression %d %s', $chapter, $index, $tag),
+                    $advantageField => sprintf('%s advantage %d %s', $chapter, $index, $tag),
+                    'overuse_risk' => sprintf('%s overuse risk %d %s', $chapter, $index, $tag),
+                    'real_world_signal' => sprintf('%s signal %d %s', $chapter, $index, $tag),
+                    'upgrade_hint' => sprintf('%s upgrade hint %d %s', $chapter, $index, $tag),
+                    'links_to_existing_blocks' => $links,
+                ];
+            }, [1, 2, 3, 4]),
+        ];
     }
 
     /**

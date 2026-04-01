@@ -155,6 +155,52 @@ final class PersonalityVariantCloneContentValidator
             'content.chapters.growth.influentialTraits.*.colorKey' => ['nullable', 'in:blue,gold,green,purple,red'],
             'content.chapters.relationships.influentialTraits.*.colorKey' => ['nullable', 'in:blue,gold,green,purple,red'],
 
+            'content.chapters.career.traits_unlock' => ['required', 'array'],
+            'content.chapters.growth.traits_unlock' => ['required', 'array'],
+            'content.chapters.relationships.traits_unlock' => ['required', 'array'],
+            'content.chapters.career.traits_unlock.title' => ['required', 'string'],
+            'content.chapters.growth.traits_unlock.title' => ['required', 'string'],
+            'content.chapters.relationships.traits_unlock.title' => ['required', 'string'],
+            'content.chapters.career.traits_unlock.intro' => ['required', 'string'],
+            'content.chapters.growth.traits_unlock.intro' => ['required', 'string'],
+            'content.chapters.relationships.traits_unlock.intro' => ['required', 'string'],
+            'content.chapters.career.traits_unlock.items' => ['required', 'array', 'size:4'],
+            'content.chapters.growth.traits_unlock.items' => ['required', 'array', 'size:4'],
+            'content.chapters.relationships.traits_unlock.items' => ['required', 'array', 'size:4'],
+            'content.chapters.career.traits_unlock.items.*.id' => ['required', 'string'],
+            'content.chapters.growth.traits_unlock.items.*.id' => ['required', 'string'],
+            'content.chapters.relationships.traits_unlock.items.*.id' => ['required', 'string'],
+            'content.chapters.career.traits_unlock.items.*.label' => ['required', 'string'],
+            'content.chapters.growth.traits_unlock.items.*.label' => ['required', 'string'],
+            'content.chapters.relationships.traits_unlock.items.*.label' => ['required', 'string'],
+            'content.chapters.career.traits_unlock.items.*.role' => ['required', 'string'],
+            'content.chapters.growth.traits_unlock.items.*.role' => ['required', 'string'],
+            'content.chapters.relationships.traits_unlock.items.*.role' => ['required', 'string'],
+            'content.chapters.career.traits_unlock.items.*.definition' => ['required', 'string'],
+            'content.chapters.growth.traits_unlock.items.*.definition' => ['required', 'string'],
+            'content.chapters.relationships.traits_unlock.items.*.definition' => ['required', 'string'],
+            'content.chapters.career.traits_unlock.items.*.why_it_matters' => ['required', 'string'],
+            'content.chapters.growth.traits_unlock.items.*.why_it_matters' => ['required', 'string'],
+            'content.chapters.relationships.traits_unlock.items.*.why_it_matters' => ['required', 'string'],
+            'content.chapters.career.traits_unlock.items.*.career_expression' => ['required', 'string'],
+            'content.chapters.growth.traits_unlock.items.*.growth_expression' => ['required', 'string'],
+            'content.chapters.relationships.traits_unlock.items.*.relationship_expression' => ['required', 'string'],
+            'content.chapters.career.traits_unlock.items.*.career_advantage' => ['required', 'string'],
+            'content.chapters.growth.traits_unlock.items.*.growth_advantage' => ['required', 'string'],
+            'content.chapters.relationships.traits_unlock.items.*.relationship_advantage' => ['required', 'string'],
+            'content.chapters.career.traits_unlock.items.*.overuse_risk' => ['required', 'string'],
+            'content.chapters.growth.traits_unlock.items.*.overuse_risk' => ['required', 'string'],
+            'content.chapters.relationships.traits_unlock.items.*.overuse_risk' => ['required', 'string'],
+            'content.chapters.career.traits_unlock.items.*.real_world_signal' => ['required', 'string'],
+            'content.chapters.growth.traits_unlock.items.*.real_world_signal' => ['required', 'string'],
+            'content.chapters.relationships.traits_unlock.items.*.real_world_signal' => ['required', 'string'],
+            'content.chapters.career.traits_unlock.items.*.upgrade_hint' => ['required', 'string'],
+            'content.chapters.growth.traits_unlock.items.*.upgrade_hint' => ['required', 'string'],
+            'content.chapters.relationships.traits_unlock.items.*.upgrade_hint' => ['required', 'string'],
+            'content.chapters.career.traits_unlock.items.*.links_to_existing_blocks' => ['required', 'array', 'min:1'],
+            'content.chapters.growth.traits_unlock.items.*.links_to_existing_blocks' => ['required', 'array', 'min:1'],
+            'content.chapters.relationships.traits_unlock.items.*.links_to_existing_blocks' => ['required', 'array', 'min:1'],
+
             'content.chapters.career.visibleBlocks' => ['required', 'array', 'min:1', 'max:2'],
             'content.chapters.growth.visibleBlocks' => ['required', 'array', 'min:1', 'max:2'],
             'content.chapters.relationships.visibleBlocks' => ['required', 'array', 'min:1', 'max:2'],
@@ -235,7 +281,7 @@ final class PersonalityVariantCloneContentValidator
             'asset_slots.*.meta' => ['present', 'nullable', 'array'],
         ]);
 
-        $validator->after(function ($validator) use ($normalizedAssetSlots): void {
+        $validator->after(function ($validator) use ($normalizedAssetSlots, $contentJson): void {
             $slotIds = [];
 
             foreach ($normalizedAssetSlots as $index => $slot) {
@@ -285,6 +331,11 @@ final class PersonalityVariantCloneContentValidator
                     'Asset slots must contain the exact allowed slot_id set for mbti_desktop_clone_v1.',
                 );
             }
+
+            foreach (['career', 'growth', 'relationships'] as $chapterKey) {
+                $this->assertTraitsUnlockLabelsAligned($validator, $contentJson, $chapterKey);
+                $this->assertTraitsUnlockLinksShape($validator, $contentJson, $chapterKey);
+            }
         });
 
         if ($validator->fails()) {
@@ -292,5 +343,63 @@ final class PersonalityVariantCloneContentValidator
         }
 
         return PersonalityDesktopCloneAssetSlotSupport::sortAssetSlotsBySchemaOrder($normalizedAssetSlots);
+    }
+
+    /**
+     * @param  array<string, mixed>  $contentJson
+     */
+    private function assertTraitsUnlockLabelsAligned($validator, array $contentJson, string $chapterKey): void
+    {
+        $traitLabels = array_map(
+            static fn (mixed $trait): string => trim((string) (is_array($trait) ? ($trait['label'] ?? '') : '')),
+            (array) data_get($contentJson, sprintf('chapters.%s.influentialTraits', $chapterKey), []),
+        );
+        $unlockLabels = array_map(
+            static fn (mixed $item): string => trim((string) (is_array($item) ? ($item['label'] ?? '') : '')),
+            (array) data_get($contentJson, sprintf('chapters.%s.traits_unlock.items', $chapterKey), []),
+        );
+
+        if ($traitLabels !== $unlockLabels) {
+            $validator->errors()->add(
+                sprintf('content.chapters.%s.traits_unlock.items', $chapterKey),
+                sprintf('Traits unlock labels must match influentialTraits order for chapter %s.', $chapterKey),
+            );
+        }
+    }
+
+    /**
+     * @param  array<string, mixed>  $contentJson
+     */
+    private function assertTraitsUnlockLinksShape($validator, array $contentJson, string $chapterKey): void
+    {
+        $items = (array) data_get($contentJson, sprintf('chapters.%s.traits_unlock.items', $chapterKey), []);
+
+        foreach ($items as $index => $item) {
+            $links = is_array($item) ? ($item['links_to_existing_blocks'] ?? null) : null;
+
+            if (! is_array($links) || $links === []) {
+                continue;
+            }
+
+            foreach ($links as $linkKey => $paths) {
+                if (! is_array($paths) || $paths === []) {
+                    $validator->errors()->add(
+                        sprintf('content.chapters.%s.traits_unlock.items.%d.links_to_existing_blocks.%s', $chapterKey, $index, $linkKey),
+                        'Traits unlock link groups must be non-empty string arrays.',
+                    );
+
+                    continue;
+                }
+
+                foreach ($paths as $pathIndex => $path) {
+                    if (trim((string) $path) === '') {
+                        $validator->errors()->add(
+                            sprintf('content.chapters.%s.traits_unlock.items.%d.links_to_existing_blocks.%s.%d', $chapterKey, $index, $linkKey, $pathIndex),
+                            'Traits unlock link paths must be non-empty strings.',
+                        );
+                    }
+                }
+            }
+        }
     }
 }
