@@ -79,10 +79,42 @@ set('legacy_queue_systemd_disable', true);
 
 /**
  * ======================================================
+ * SSH identity helpers
+ * ======================================================
+ */
+function resolveDeployIdentityFile(string $envKey, array $candidates = []): ?string
+{
+    $fromEnv = getenv($envKey);
+    if (is_string($fromEnv) && trim($fromEnv) !== '') {
+        return trim($fromEnv);
+    }
+
+    foreach ($candidates as $candidate) {
+        $expanded = preg_replace('/^~/', getenv('HOME') ?: '', $candidate);
+        if (is_string($expanded) && $expanded !== '' && is_file($expanded)) {
+            return $candidate;
+        }
+    }
+
+    return null;
+}
+
+$productionIdentityFile = resolveDeployIdentityFile('DEPLOY_IDENTITY_FILE_PROD', [
+    '~/.ssh/fap_prod',
+    '~/.ssh/fap_api_gha',
+]);
+
+$stagingIdentityFile = resolveDeployIdentityFile('DEPLOY_IDENTITY_FILE_STG', [
+    '~/.ssh/fap_actions_staging',
+]);
+
+/**
+ * ======================================================
  * Hosts
  * ======================================================
  */
-host('production')
+/** @var \Deployer\Host\Host $productionHost */
+$productionHost = host('production')
     ->setHostname(getenv('DEPLOY_HOST_PROD') ?: '122.152.221.126')
     ->setRemoteUser(getenv('DEPLOY_USER_PROD') ?: 'ubuntu')
     ->setPort((int)(getenv('DEPLOY_PORT_PROD') ?: 22))
@@ -92,7 +124,12 @@ host('production')
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api')
     ->set('php_fpm_service', getenv('PHP_FPM_SERVICE_PROD') ?: 'php8.4-fpm');
 
-host('staging')
+if ($productionIdentityFile !== null) {
+    $productionHost->setIdentityFile($productionIdentityFile);
+}
+
+/** @var \Deployer\Host\Host $stagingHost */
+$stagingHost = host('staging')
     ->setHostname(getenv('DEPLOY_HOST_STG') ?: 'staging.fermatmind.com')
     ->setRemoteUser(getenv('DEPLOY_USER_STG') ?: 'ubuntu')
     ->setPort((int)(getenv('DEPLOY_PORT_STG') ?: 22))
@@ -101,6 +138,10 @@ host('staging')
     ->set('ops_entry_host', getenv('OPS_ENTRY_HOST_STG') ?: '')
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api-staging')
     ->set('php_fpm_service', getenv('PHP_FPM_SERVICE_STG') ?: 'php8.4-fpm');
+
+if ($stagingIdentityFile !== null) {
+    $stagingHost->setIdentityFile($stagingIdentityFile);
+}
 
 task('guard:ops-theme-asset', function () {
     $asset = '{{release_path}}/backend/public/css/app/ops-theme.css';
