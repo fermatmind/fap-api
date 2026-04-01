@@ -78,6 +78,21 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
         $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.growth.what_drains.items'));
         $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.relationships.superpowers.items'));
         $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.relationships.pitfalls.items'));
+        $this->assertNotSame('', trim((string) data_get($infjAContent, 'content_json.chapters.career.traits_unlock.title')));
+        $this->assertNotSame('', trim((string) data_get($infjAContent, 'content_json.chapters.growth.traits_unlock.title')));
+        $this->assertNotSame('', trim((string) data_get($infjAContent, 'content_json.chapters.relationships.traits_unlock.title')));
+        $this->assertSame(
+            data_get($infjAContent, 'content_json.chapters.career.influentialTraits.0.label'),
+            data_get($infjAContent, 'content_json.chapters.career.traits_unlock.items.0.label'),
+        );
+        $this->assertSame(
+            data_get($infjAContent, 'content_json.chapters.growth.influentialTraits.0.label'),
+            data_get($infjAContent, 'content_json.chapters.growth.traits_unlock.items.0.label'),
+        );
+        $this->assertSame(
+            data_get($infjAContent, 'content_json.chapters.relationships.influentialTraits.0.label'),
+            data_get($infjAContent, 'content_json.chapters.relationships.traits_unlock.items.0.label'),
+        );
 
         $this->assertNotSame('', trim((string) data_get($entjTContent, 'content_json.letters_intro.headline')));
         $this->assertNotSame('', trim((string) data_get($istpAContent, 'content_json.chapters.career.matched_jobs.summary')));
