@@ -38,7 +38,7 @@ class AlipayCheckoutService
         if ($notifyUrl === '') {
             $notifyUrl = url('/api/v0.3/webhooks/payment/alipay');
         }
-        $returnUrl = trim((string) data_get(config('pay.alipay.default', []), 'return_url', ''));
+        $returnUrl = trim((string) ($order['return_url'] ?? data_get(config('pay.alipay.default', []), 'return_url', '')));
 
         $amountCents = max(0, (int) ($order['amount_cents'] ?? 0));
         $totalAmount = number_format($amountCents / 100, 2, '.', '');
