@@ -90,6 +90,24 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
         ]);
     }
 
+    public function test_missing_profile_identity_is_rejected(): void
+    {
+        $variant = $this->seedVariant('ENFJ', 'T', 'zh-CN');
+        $content = $this->validContent('enfj-t');
+        unset($content['hero']['profile_identity']);
+
+        $this->expectException(ValidationException::class);
+
+        PersonalityProfileVariantCloneContent::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'template_key' => PersonalityProfileVariantCloneContent::TEMPLATE_KEY_MBTI_DESKTOP_CLONE_V1,
+            'status' => PersonalityProfileVariantCloneContent::STATUS_PUBLISHED,
+            'schema_version' => 'v1',
+            'content_json' => $content,
+            'asset_slots_json' => $this->validAssetSlots(),
+        ]);
+    }
+
     public function test_missing_p1_modules_are_rejected(): void
     {
         $variant = $this->seedVariant('ENTJ', 'A', 'zh-CN');
@@ -302,6 +320,7 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
         return [
             'hero' => [
                 'summary' => 'hero summary '.$tag,
+                'profile_identity' => $this->validProfileIdentity($tag),
             ],
             'intro' => [
                 'paragraphs' => [
@@ -352,6 +371,29 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
                 'priceLabel' => 'offer price '.$tag,
                 'ctaLabel' => 'offer cta '.$tag,
                 'guarantee' => 'offer guarantee '.$tag,
+            ],
+        ];
+    }
+
+    /**
+     * @return array{code: string, name: string, nickname: string, rarity: string, keywords: array<int, string>}
+     */
+    private function validProfileIdentity(string $tag): array
+    {
+        $normalizedTag = strtoupper(str_replace('_', '-', trim($tag)));
+
+        return [
+            'code' => $normalizedTag,
+            'name' => 'name '.$tag,
+            'nickname' => 'nickname '.$tag,
+            'rarity' => '约 2–5%',
+            'keywords' => [
+                'keyword 1 '.$tag,
+                'keyword 2 '.$tag,
+                'keyword 3 '.$tag,
+                'keyword 4 '.$tag,
+                'keyword 5 '.$tag,
+                'keyword 6 '.$tag,
             ],
         ];
     }

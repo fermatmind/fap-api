@@ -56,10 +56,27 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
         $infjAContent = $this->cloneContentByRuntimeType('INFJ-A');
         $entjTContent = $this->cloneContentByRuntimeType('ENTJ-T');
         $istpAContent = $this->cloneContentByRuntimeType('ISTP-A');
+        $entjAContent = $this->cloneContentByRuntimeType('ENTJ-A');
+        $enfpTContent = $this->cloneContentByRuntimeType('ENFP-T');
+        $enfjTContent = $this->cloneContentByRuntimeType('ENFJ-T');
 
         $this->assertSame('zh-CN', $infjAContent['locale']);
         $this->assertIsString(data_get($infjAContent, 'content_json.letters_intro.headline'));
         $this->assertNotSame('', trim((string) data_get($infjAContent, 'content_json.letters_intro.headline')));
+        $this->assertSame('ENTJ-A', data_get($entjAContent, 'content_json.hero.profile_identity.code'));
+        $this->assertSame('ENFP-T', data_get($enfpTContent, 'content_json.hero.profile_identity.code'));
+        $this->assertSame('ENFJ-T', data_get($enfjTContent, 'content_json.hero.profile_identity.code'));
+        $this->assertSame('主人公型', data_get($enfjTContent, 'content_json.hero.profile_identity.name'));
+        $this->assertSame('温柔引路人', data_get($enfjTContent, 'content_json.hero.profile_identity.nickname'));
+        $this->assertSame('约 2–5%', data_get($enfjTContent, 'content_json.hero.profile_identity.rarity'));
+        $this->assertSame([
+            '共情',
+            '愿景感',
+            '协调者',
+            '服务型领导',
+            '价值驱动',
+            '自我反思',
+        ], data_get($enfjTContent, 'content_json.hero.profile_identity.keywords'));
         $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.overview.paragraphs'));
         $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.career.strengths.items'));
         $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.career.weaknesses.items'));
