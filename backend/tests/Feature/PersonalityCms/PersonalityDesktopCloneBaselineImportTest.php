@@ -78,6 +78,18 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
         $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.growth.what_drains.items'));
         $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.relationships.superpowers.items'));
         $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.relationships.pitfalls.items'));
+        $this->assertSame(
+            '你明显更容易被外部世界激活，但这种外倾仍保留着收回来整理自己的能力；你不是一直要热闹，而是更容易在互动中启动状态。',
+            data_get($infjAContent, 'content_json.traits.axis_explainers.EI.E.light.band_nuance'),
+        );
+        $this->assertSame(
+            '你的直觉倾向已经比较明确。你通常会比别人更早想到模式、方向和潜在空间，而不只盯着眼前事实。',
+            data_get($infjAContent, 'content_json.traits.axis_explainers.SN.N.clear.band_nuance'),
+        );
+        $this->assertSame(
+            '你的敏感倾向非常清楚。你会天然保持较高的自我要求和环境警觉度，这会带来推进力与精细度，但也更容易让你长期紧绷、难以彻底放松。',
+            data_get($infjAContent, 'content_json.traits.axis_explainers.AT.T.strong.band_nuance'),
+        );
         $this->assertNotSame('', trim((string) data_get($infjAContent, 'content_json.chapters.career.traits_unlock.title')));
         $this->assertNotSame('', trim((string) data_get($infjAContent, 'content_json.chapters.growth.traits_unlock.title')));
         $this->assertNotSame('', trim((string) data_get($infjAContent, 'content_json.chapters.relationships.traits_unlock.title')));

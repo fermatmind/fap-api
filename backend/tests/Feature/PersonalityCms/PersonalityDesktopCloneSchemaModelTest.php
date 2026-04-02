@@ -108,6 +108,24 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
         ]);
     }
 
+    public function test_invalid_axis_explainers_shape_is_rejected(): void
+    {
+        $variant = $this->seedVariant('INTJ', 'A', 'zh-CN');
+        $content = $this->validContent('intj-a');
+        unset($content['traits']['axis_explainers']['SN']['N']['clear']['band_nuance']);
+
+        $this->expectException(ValidationException::class);
+
+        PersonalityProfileVariantCloneContent::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'template_key' => PersonalityProfileVariantCloneContent::TEMPLATE_KEY_MBTI_DESKTOP_CLONE_V1,
+            'status' => PersonalityProfileVariantCloneContent::STATUS_PUBLISHED,
+            'schema_version' => 'v1',
+            'content_json' => $content,
+            'asset_slots_json' => $this->validAssetSlots(),
+        ]);
+    }
+
     public function test_p1_module_items_cannot_be_empty(): void
     {
         $variant = $this->seedVariant('ISTP', 'T', 'zh-CN');
@@ -324,6 +342,7 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
                     'traits body line 1 '.$tag,
                     'traits body line 2 '.$tag,
                 ],
+                'axis_explainers' => $this->validAxisExplainers(),
             ],
             'chapters' => $chapters,
             'finalOffer' => [
@@ -333,6 +352,75 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
                 'priceLabel' => 'offer price '.$tag,
                 'ctaLabel' => 'offer cta '.$tag,
                 'guarantee' => 'offer guarantee '.$tag,
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string, array<string, array<string, array<string, string>>>>
+     */
+    private function validAxisExplainers(): array
+    {
+        return [
+            'EI' => [
+                'E' => [
+                    'light' => ['band_nuance' => '你明显更容易被外部世界激活，但这种外倾仍保留着收回来整理自己的能力；你不是一直要热闹，而是更容易在互动中启动状态。'],
+                    'clear' => ['band_nuance' => '你的外倾已经比较明确。和人碰撞、即时反馈、现场感与变化感，通常会比独自封闭处理更能让你进入状态。'],
+                    'strong' => ['band_nuance' => '你的外倾倾向非常清楚。你往往需要通过对话、行动、连接与现场推进来保持能量，一旦长期被关在低反馈环境里，就很容易迅速失活。'],
+                ],
+                'I' => [
+                    'light' => ['band_nuance' => '你更偏向把能量收回到内在世界，但这种内倾并不排斥连接；在合适的关系和话题里，你依然愿意打开自己。'],
+                    'clear' => ['band_nuance' => '你的内倾已经比较明确。独处、沉淀、内在加工和低刺激环境，会更稳定地帮助你恢复专注和判断。'],
+                    'strong' => ['band_nuance' => '你的内倾倾向非常清楚。你通常需要较大的心理空间来整理体验和形成观点，过多社交或持续外部打断会明显削弱你的能量质量。'],
+                ],
+            ],
+            'SN' => [
+                'S' => [
+                    'light' => ['band_nuance' => '你更偏向从可见事实和现实线索出发，但并不是拒绝想象；你只是更相信脚下能落地的东西。'],
+                    'clear' => ['band_nuance' => '你的实感倾向已经比较明确。你更容易先抓住证据、细节、步骤和现实限制，再决定怎么行动。'],
+                    'strong' => ['band_nuance' => '你的实感倾向非常清楚。你天然会优先信任眼前可验证的信息，对脱离现实支点的推演和空泛设想会更快失去耐心。'],
+                ],
+                'N' => [
+                    'light' => ['band_nuance' => '你更偏向看见趋势、含义和可能性，但仍保留对现实条件的基本感知；你不是脱离地面，只是更容易先看到远方。'],
+                    'clear' => ['band_nuance' => '你的直觉倾向已经比较明确。你通常会比别人更早想到模式、方向和潜在空间，而不只盯着眼前事实。'],
+                    'strong' => ['band_nuance' => '你的直觉倾向非常清楚。你天然会沿着意义、隐含结构和未来可能性去理解世界，单纯停留在表层信息里会让你很快感到局促。'],
+                ],
+            ],
+            'TF' => [
+                'T' => [
+                    'light' => ['band_nuance' => '你更常从逻辑、效果和一致性切入判断，但并不是忽略感受；只是你会先问这件事是否合理、是否有效。'],
+                    'clear' => ['band_nuance' => '你的思考倾向已经比较明确。你在决策时更容易优先考虑结构、效率、边界和结果，而不是先被情绪牵引。'],
+                    'strong' => ['band_nuance' => '你的思考倾向非常清楚。你往往会本能地把问题拆开、排序、判断利弊，再决定行动方向；当环境过度情绪化时，你会更想把它拉回理性轨道。'],
+                ],
+                'F' => [
+                    'light' => ['band_nuance' => '你更常从感受、关系与价值切入判断，但并不是没有逻辑；你只是更在意这件事对人意味着什么。'],
+                    'clear' => ['band_nuance' => '你的情感倾向已经比较明确。你在决策时更容易优先考虑关系质量、价值一致与情绪承接，而不只看表面的效率。'],
+                    'strong' => ['band_nuance' => '你的情感倾向非常清楚。你会天然把人的处境、关系影响和内在价值放进判断核心，因此很难长期接受只讲结果、不顾人感受的做法。'],
+                ],
+            ],
+            'JP' => [
+                'J' => [
+                    'light' => ['band_nuance' => '你更偏向先形成框架和判断，但仍保留一定弹性；你喜欢知道大致怎么走，只是不一定把一切都锁死。'],
+                    'clear' => ['band_nuance' => '你的判断倾向已经比较明确。你通常更安心于有计划、有节点、有预期的推进方式，不喜欢长期处在悬而未决的状态。'],
+                    'strong' => ['band_nuance' => '你的判断倾向非常清楚。你会自然追求结构、秩序、提前安排和收束感，长期模糊、频繁改动或毫无边界的节奏会很快消耗你。'],
+                ],
+                'P' => [
+                    'light' => ['band_nuance' => '你更偏向保留空间和灵活应对，但并不是无法规划；你只是更希望计划能跟着现实一起调整。'],
+                    'clear' => ['band_nuance' => '你的感知倾向已经比较明确。你通常更自在于边走边看、动态修正和根据现场反馈调整节奏，而不是过早把一切定死。'],
+                    'strong' => ['band_nuance' => '你的感知倾向非常清楚。你会天然保留探索空间和变招余地，过度僵硬的规则、过细的预设和无法调整的流程会明显压缩你的状态。'],
+                ],
+            ],
+            'AT' => [
+                'A' => [
+                    'light' => ['band_nuance' => '你更偏向内在稳定和自我信任，但并不是完全不受波动影响；只是你比较容易在起伏里重新站稳。'],
+                    'clear' => ['band_nuance' => '你的果断倾向已经比较明确。你通常更容易保持心理重心，不会因为一时反馈就迅速推翻自己。'],
+                    'strong' => ['band_nuance' => '你的果断倾向非常清楚。你往往能在压力下维持较稳定的内在秩序和自我判断，不容易长期被外部噪音牵着走。'],
+                ],
+                'T' => [
+                    'light' => ['band_nuance' => '你更偏向警觉、自我校准和反复审视，但这种敏感也让你保留了细腻与修正空间。'],
+                    'clear' => ['band_nuance' => '你的敏感倾向已经比较明确。你通常更容易察觉风险、缺口和未完成之处，因此会持续调整自己和周围环境。'],
+                    'strong' => ['band_nuance' => '你的敏感倾向非常清楚。你会天然保持较高的自我要求和环境警觉度，这会带来推进力与精细度，但也更容易让你长期紧绷、难以彻底放松。'],
+                ],
             ],
         ];
     }
@@ -387,6 +475,16 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
                     ['title' => $chapter.' weaknesses title 1 '.$tag, 'description' => $chapter.' weaknesses description 1 '.$tag],
                 ],
             ],
+            'traits_unlock' => [
+                'title' => $chapter.' traits unlock title '.$tag,
+                'intro' => $chapter.' traits unlock intro '.$tag,
+                'items' => [
+                    $this->validTraitsUnlockItem($chapter, 1, $tag),
+                    $this->validTraitsUnlockItem($chapter, 2, $tag),
+                    $this->validTraitsUnlockItem($chapter, 3, $tag),
+                    $this->validTraitsUnlockItem($chapter, 4, $tag),
+                ],
+            ],
         ];
 
         if ($chapter === 'career') {
@@ -435,6 +533,35 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
         }
 
         return $payload;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function validTraitsUnlockItem(string $chapter, int $index, string $tag): array
+    {
+        $expressionKey = $chapter === 'career'
+            ? 'career_expression'
+            : ($chapter === 'growth' ? 'growth_expression' : 'relationship_expression');
+        $advantageKey = $chapter === 'career'
+            ? 'career_advantage'
+            : ($chapter === 'growth' ? 'growth_advantage' : 'relationship_advantage');
+
+        return [
+            'id' => sprintf('%s-trait-%d', $chapter, $index),
+            'label' => sprintf('%s trait %d %s', $chapter, $index, $tag),
+            'role' => sprintf('%s role %d %s', $chapter, $index, $tag),
+            'definition' => sprintf('%s definition %d %s', $chapter, $index, $tag),
+            'why_it_matters' => sprintf('%s why %d %s', $chapter, $index, $tag),
+            $expressionKey => sprintf('%s expression %d %s', $chapter, $index, $tag),
+            $advantageKey => sprintf('%s advantage %d %s', $chapter, $index, $tag),
+            'overuse_risk' => sprintf('%s overuse %d %s', $chapter, $index, $tag),
+            'real_world_signal' => sprintf('%s signal %d %s', $chapter, $index, $tag),
+            'upgrade_hint' => sprintf('%s hint %d %s', $chapter, $index, $tag),
+            'links_to_existing_blocks' => [
+                'summary' => [sprintf('%s.summary', $chapter)],
+            ],
+        ];
     }
 
     /**
