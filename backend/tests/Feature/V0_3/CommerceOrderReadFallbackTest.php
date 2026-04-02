@@ -83,6 +83,19 @@ final class CommerceOrderReadFallbackTest extends TestCase
         $attemptId = (string) Str::uuid();
         $this->insertAttempt($attemptId, self::ANON_OWNER, 'MBTI');
         $this->insertOrderForOwner($orderNo, $attemptId, 'paid');
+        $this->insertResult($attemptId);
+        $this->insertProjection($attemptId, [
+            'access_state' => 'ready',
+            'report_state' => 'ready',
+            'pdf_state' => 'ready',
+            'reason_code' => 'entitlement_granted',
+            'payload_json' => [
+                'access_level' => 'full',
+                'variant' => 'full',
+                'modules_allowed' => ['core_full', 'career', 'relationships'],
+                'modules_preview' => [],
+            ],
+        ]);
 
         $token = $this->issueAnonToken(self::ANON_OWNER);
         $response = $this->withHeaders([
@@ -95,17 +108,50 @@ final class CommerceOrderReadFallbackTest extends TestCase
             ->assertJsonPath('mbti_access_hub_v1.report_access.attempt_id', $attemptId)
             ->assertJsonPath('mbti_access_hub_v1.report_access.order_no', $orderNo)
             ->assertJsonPath('mbti_access_hub_v1.report_access.report_url', "/api/v0.3/attempts/{$attemptId}/report")
-            ->assertJsonPath('mbti_access_hub_v1.report_access.source', 'order_delivery')
+            ->assertJsonPath('mbti_access_hub_v1.report_access.source', 'report_gate')
             ->assertJsonPath('mbti_access_hub_v1.pdf_access.can_download_pdf', true)
             ->assertJsonPath('mbti_access_hub_v1.pdf_access.report_pdf_url', "/api/v0.3/attempts/{$attemptId}/report.pdf")
-            ->assertJsonPath('mbti_access_hub_v1.pdf_access.source', 'order_delivery')
+            ->assertJsonPath('mbti_access_hub_v1.pdf_access.source', 'report_gate')
             ->assertJsonPath('mbti_access_hub_v1.recovery.can_lookup_order', true)
             ->assertJsonPath('mbti_access_hub_v1.recovery.can_request_claim_email', false)
             ->assertJsonPath('mbti_access_hub_v1.recovery.can_resend', false)
             ->assertJsonPath('mbti_access_hub_v1.recovery.attempt_id', $attemptId)
             ->assertJsonPath('mbti_access_hub_v1.workspace_lite.has_entry', true)
             ->assertJsonPath('mbti_access_hub_v1.workspace_lite.entry_kind', 'mbti_history')
-            ->assertJsonPath('mbti_access_hub_v1.workspace_lite.attempt_id', $attemptId);
+            ->assertJsonPath('mbti_access_hub_v1.workspace_lite.attempt_id', $attemptId)
+            ->assertJsonPath('mbti_access_hub_v1.exact_result_entry.attempt_id', $attemptId)
+            ->assertJsonPath('mbti_access_hub_v1.exact_result_entry.access_state', 'ready')
+            ->assertJsonPath('mbti_access_hub_v1.exact_result_entry.report_state', 'ready')
+            ->assertJsonPath('mbti_access_hub_v1.exact_result_entry.ready_to_enter', true)
+            ->assertJsonPath('mbti_access_hub_v1.exact_result_entry.actions.page_href', "/result/{$attemptId}")
+            ->assertJsonPath('exact_result_entry.attempt_id', $attemptId)
+            ->assertJsonPath('exact_result_entry.ready_to_enter', true)
+            ->assertJsonPath('exact_result_entry.actions.page_href', "/result/{$attemptId}");
+    }
+
+    public function test_paid_mbti_order_exposes_exact_result_entry_without_claiming_ready_before_projection_unlocks(): void
+    {
+        $orderNo = 'ord_fallback_mbti_pending_'.Str::lower(Str::random(10));
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, self::ANON_OWNER, 'MBTI');
+        $this->insertOrderForOwner($orderNo, $attemptId, 'paid');
+
+        $token = $this->issueAnonToken(self::ANON_OWNER);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/orders/'.$orderNo);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('status', 'paid')
+            ->assertJsonPath('grant_state', 'not_started')
+            ->assertJsonPath('exact_result_entry.attempt_id', $attemptId)
+            ->assertJsonPath('exact_result_entry.access_state', 'pending')
+            ->assertJsonPath('exact_result_entry.report_state', 'pending')
+            ->assertJsonPath('exact_result_entry.ready_to_enter', false)
+            ->assertJsonPath('exact_result_entry.actions.page_href', "/result/{$attemptId}")
+            ->assertJsonPath('exact_result_entry.actions.wait_href', "/result/{$attemptId}")
+            ->assertJsonPath('mbti_access_hub_v1.access_state', 'pending')
+            ->assertJsonPath('mbti_access_hub_v1.report_access.can_view_report', false);
     }
 
     public function test_valid_payment_recovery_token_reads_pending_order_without_owner_identity(): void
@@ -259,6 +305,58 @@ final class CommerceOrderReadFallbackTest extends TestCase
             'dir_version' => 'v1',
             'content_package_version' => 'v1',
             'scoring_spec_version' => 'big5_spec_2026Q1_v1',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    private function insertResult(string $attemptId): void
+    {
+        DB::table('results')->insert([
+            'id' => (string) Str::uuid(),
+            'attempt_id' => $attemptId,
+            'org_id' => 0,
+            'scale_code' => 'MBTI',
+            'scale_version' => 'v0.3',
+            'type_code' => 'INTJ-A',
+            'scores_json' => json_encode([], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'scores_pct' => json_encode([], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'axis_states' => json_encode([], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'content_package_version' => 'result-v1',
+            'result_json' => json_encode(['summary' => 'seed'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'pack_id' => (string) config('content_packs.default_pack_id'),
+            'dir_version' => 'MBTI-CN-v0.3',
+            'scoring_spec_version' => 'result-score-v1',
+            'report_engine_version' => 'v1.2',
+            'is_valid' => true,
+            'computed_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    /**
+     * @param array{
+     *   access_state:string,
+     *   report_state:string,
+     *   pdf_state:string,
+     *   reason_code:string,
+     *   payload_json:array<string,mixed>
+     * } $overrides
+     */
+    private function insertProjection(string $attemptId, array $overrides): void
+    {
+        DB::table('unified_access_projections')->insert([
+            'attempt_id' => $attemptId,
+            'access_state' => $overrides['access_state'],
+            'report_state' => $overrides['report_state'],
+            'pdf_state' => $overrides['pdf_state'],
+            'reason_code' => $overrides['reason_code'],
+            'projection_version' => 1,
+            'actions_json' => json_encode(['report' => true], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'payload_json' => json_encode($overrides['payload_json'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'produced_at' => now(),
+            'refreshed_at' => now(),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
