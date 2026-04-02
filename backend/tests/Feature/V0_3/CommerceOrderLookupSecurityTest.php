@@ -81,6 +81,19 @@ final class CommerceOrderLookupSecurityTest extends TestCase
                 'compare_invite_id' => $compareInviteId,
             ],
         ]);
+        $this->insertResult($attemptId);
+        $this->insertProjection($attemptId, [
+            'access_state' => 'ready',
+            'report_state' => 'ready',
+            'pdf_state' => 'ready',
+            'reason_code' => 'entitlement_granted',
+            'payload_json' => [
+                'access_level' => 'full',
+                'variant' => 'full',
+                'modules_allowed' => ['core_full', 'career', 'relationships'],
+                'modules_preview' => [],
+            ],
+        ]);
 
         $response = $this->postJson('/api/v0.3/orders/lookup', [
             'order_no' => $orderNo,
@@ -92,9 +105,9 @@ final class CommerceOrderLookupSecurityTest extends TestCase
             ->assertJsonPath('mbti_access_hub_v1.report_access.can_view_report', true)
             ->assertJsonPath('mbti_access_hub_v1.report_access.attempt_id', $attemptId)
             ->assertJsonPath('mbti_access_hub_v1.report_access.order_no', $orderNo)
-            ->assertJsonPath('mbti_access_hub_v1.report_access.source', 'order_delivery')
+            ->assertJsonPath('mbti_access_hub_v1.report_access.source', 'report_gate')
             ->assertJsonPath('mbti_access_hub_v1.pdf_access.can_download_pdf', true)
-            ->assertJsonPath('mbti_access_hub_v1.pdf_access.source', 'order_delivery')
+            ->assertJsonPath('mbti_access_hub_v1.pdf_access.source', 'report_gate')
             ->assertJsonPath('mbti_access_hub_v1.recovery.can_lookup_order', true)
             ->assertJsonPath('mbti_access_hub_v1.recovery.can_request_claim_email', true)
             ->assertJsonPath('mbti_access_hub_v1.recovery.can_resend', true)
@@ -103,7 +116,10 @@ final class CommerceOrderLookupSecurityTest extends TestCase
             ->assertJsonPath('mbti_access_hub_v1.recovery.compare_invite_id', $compareInviteId)
             ->assertJsonPath('mbti_access_hub_v1.workspace_lite.has_entry', true)
             ->assertJsonPath('mbti_access_hub_v1.workspace_lite.entry_kind', 'mbti_history')
-            ->assertJsonPath('mbti_access_hub_v1.workspace_lite.attempt_id', $attemptId);
+            ->assertJsonPath('mbti_access_hub_v1.workspace_lite.attempt_id', $attemptId)
+            ->assertJsonPath('exact_result_entry.attempt_id', $attemptId)
+            ->assertJsonPath('exact_result_entry.ready_to_enter', true)
+            ->assertJsonPath('exact_result_entry.actions.page_href', "/result/{$attemptId}");
     }
 
     public function test_lookup_with_token_owner_works_without_email(): void
@@ -212,6 +228,58 @@ final class CommerceOrderLookupSecurityTest extends TestCase
             'dir_version' => 'v1',
             'content_package_version' => 'v1',
             'scoring_spec_version' => 'big5_spec_2026Q1_v1',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    private function insertResult(string $attemptId): void
+    {
+        DB::table('results')->insert([
+            'id' => (string) Str::uuid(),
+            'attempt_id' => $attemptId,
+            'org_id' => 0,
+            'scale_code' => 'MBTI',
+            'scale_version' => 'v0.3',
+            'type_code' => 'INTJ-A',
+            'scores_json' => json_encode([], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'scores_pct' => json_encode([], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'axis_states' => json_encode([], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'content_package_version' => 'result-v1',
+            'result_json' => json_encode(['summary' => 'seed'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'pack_id' => (string) config('content_packs.default_pack_id'),
+            'dir_version' => 'MBTI-CN-v0.3',
+            'scoring_spec_version' => 'result-score-v1',
+            'report_engine_version' => 'v1.2',
+            'is_valid' => true,
+            'computed_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    /**
+     * @param array{
+     *   access_state:string,
+     *   report_state:string,
+     *   pdf_state:string,
+     *   reason_code:string,
+     *   payload_json:array<string,mixed>
+     * } $overrides
+     */
+    private function insertProjection(string $attemptId, array $overrides): void
+    {
+        DB::table('unified_access_projections')->insert([
+            'attempt_id' => $attemptId,
+            'access_state' => $overrides['access_state'],
+            'report_state' => $overrides['report_state'],
+            'pdf_state' => $overrides['pdf_state'],
+            'reason_code' => $overrides['reason_code'],
+            'projection_version' => 1,
+            'actions_json' => json_encode(['report' => true], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'payload_json' => json_encode($overrides['payload_json'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'produced_at' => now(),
+            'refreshed_at' => now(),
             'created_at' => now(),
             'updated_at' => now(),
         ]);

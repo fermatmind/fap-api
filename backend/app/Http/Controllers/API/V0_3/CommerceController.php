@@ -184,6 +184,7 @@ class CommerceController extends Controller
             $status === 'pending' && ($request->boolean('include_payment_action') || $paymentRecoveryVerified),
             $paymentRecoveryToken
         );
+        $exactResultEntry = $this->mbtiAccessHubBuilder->buildExactResultEntryForOrder($order);
         if ($status === 'pending') {
             $order = $this->orders->findOrderByOrderNo((string) ($order->order_no ?? ''), $orgId) ?? $order;
             $status = $this->resolvePublicOrderStatus($order);
@@ -212,6 +213,7 @@ class CommerceController extends Controller
             'payment_attempts_count' => $paymentAttemptSummary['count'],
             'latest_payment_attempt' => $paymentAttemptSummary['latest'],
             'delivery' => $delivery['delivery'],
+            'exact_result_entry' => $exactResultEntry,
         ];
 
         if ($ownershipVerified) {
@@ -579,6 +581,7 @@ class CommerceController extends Controller
             $status === 'pending',
             $paymentRecoveryToken
         );
+        $exactResultEntry = $this->mbtiAccessHubBuilder->buildExactResultEntryForOrder($order);
         if ($status === 'pending') {
             $order = $this->orders->findOrderByOrderNo((string) ($order->order_no ?? $orderNo), $orgId) ?? $order;
             $status = $this->resolvePublicOrderStatus($order);
@@ -606,6 +609,7 @@ class CommerceController extends Controller
             'payment_attempts_count' => $paymentAttemptSummary['count'],
             'latest_payment_attempt' => $paymentAttemptSummary['latest'],
             'delivery' => $delivery['delivery'],
+            'exact_result_entry' => $exactResultEntry,
         ];
 
         $mbtiAccessHub = $this->mbtiAccessHubBuilder->buildForLookupHit($order);
@@ -1310,6 +1314,11 @@ class CommerceController extends Controller
     private function isProviderEnabled(string $provider): bool
     {
         return $this->paymentProviders->isEnabled($provider);
+    }
+
+    private function isStubEnabled(): bool
+    {
+        return app()->environment(['local', 'testing']) && config('payments.allow_stub') === true;
     }
 
     private function resolveRequestId(Request $request): string
