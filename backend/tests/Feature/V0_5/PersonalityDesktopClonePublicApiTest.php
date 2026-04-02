@@ -94,6 +94,11 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('base_code', 'INFJ')
             ->assertJsonPath('locale', 'zh-CN')
             ->assertJsonPath('content.hero.summary', 'hero summary infj-a')
+            ->assertJsonPath('content.hero.profile_identity.code', 'INFJ-A')
+            ->assertJsonPath('content.hero.profile_identity.name', 'name infj-a')
+            ->assertJsonPath('content.hero.profile_identity.nickname', 'nickname infj-a')
+            ->assertJsonPath('content.hero.profile_identity.rarity', '约 2–5%')
+            ->assertJsonPath('content.hero.profile_identity.keywords.0', 'keyword 1 infj-a')
             ->assertJsonPath('content.intro.paragraphs.0', 'intro paragraph 1 infj-a')
             ->assertJsonPath('content.traits.summaryPane.title', 'traits title infj-a')
             ->assertJsonPath('content.traits.axis_explainers.EI.E.light.band_nuance', '你明显更容易被外部世界激活，但这种外倾仍保留着收回来整理自己的能力；你不是一直要热闹，而是更容易在互动中启动状态。')
@@ -253,6 +258,29 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
                 sprintf('%s relationships traits_unlock first label must align with row label', $fullCode),
             );
         }
+
+        $this->getJson('/api/v0.5/personality/enfj-t/desktop-clone?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('content.hero.profile_identity.code', 'ENFJ-T')
+            ->assertJsonPath('content.hero.profile_identity.name', '主人公型')
+            ->assertJsonPath('content.hero.profile_identity.nickname', '温柔引路人')
+            ->assertJsonPath('content.hero.profile_identity.rarity', '约 2–5%')
+            ->assertJsonPath('content.hero.profile_identity.keywords', [
+                '共情',
+                '愿景感',
+                '协调者',
+                '服务型领导',
+                '价值驱动',
+                '自我反思',
+            ]);
+
+        $this->getJson('/api/v0.5/personality/enfp-t/desktop-clone?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('content.hero.profile_identity.code', 'ENFP-T');
+
+        $this->getJson('/api/v0.5/personality/entj-a/desktop-clone?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('content.hero.profile_identity.code', 'ENTJ-A');
     }
 
     public function test_draft_content_is_hidden_and_endpoint_has_no_base_code_fallback(): void
@@ -362,6 +390,7 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
         return [
             'hero' => [
                 'summary' => 'hero summary '.$tag,
+                'profile_identity' => $this->validProfileIdentity($tag),
             ],
             'intro' => [
                 'paragraphs' => [
@@ -412,6 +441,29 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
                 'priceLabel' => 'offer price '.$tag,
                 'ctaLabel' => 'offer cta '.$tag,
                 'guarantee' => 'offer guarantee '.$tag,
+            ],
+        ];
+    }
+
+    /**
+     * @return array{code: string, name: string, nickname: string, rarity: string, keywords: array<int, string>}
+     */
+    private function validProfileIdentity(string $tag): array
+    {
+        $normalizedTag = strtoupper(str_replace('_', '-', trim($tag)));
+
+        return [
+            'code' => $normalizedTag,
+            'name' => 'name '.$tag,
+            'nickname' => 'nickname '.$tag,
+            'rarity' => '约 2–5%',
+            'keywords' => [
+                'keyword 1 '.$tag,
+                'keyword 2 '.$tag,
+                'keyword 3 '.$tag,
+                'keyword 4 '.$tag,
+                'keyword 5 '.$tag,
+                'keyword 6 '.$tag,
             ],
         ];
     }
