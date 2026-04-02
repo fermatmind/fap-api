@@ -11,6 +11,16 @@ use Illuminate\Validation\ValidationException;
 
 final class PersonalityVariantCloneContentValidator
 {
+    private const AXIS_EXPLAINER_POLES = [
+        'EI' => ['E', 'I'],
+        'SN' => ['S', 'N'],
+        'TF' => ['T', 'F'],
+        'JP' => ['J', 'P'],
+        'AT' => ['A', 'T'],
+    ];
+
+    private const AXIS_EXPLAINER_BANDS = ['light', 'clear', 'strong'];
+
     /**
      * @param  array<string, mixed>  $contentJson
      * @param  array<int, array<string, mixed>>  $assetSlotsJson
@@ -58,6 +68,7 @@ final class PersonalityVariantCloneContentValidator
             'content.traits.summaryPane.body' => ['required', 'string'],
             'content.traits.body' => ['required', 'array', 'size:2'],
             'content.traits.body.*' => ['required', 'string'],
+            'content.traits.axis_explainers' => ['required', 'array'],
             'content.chapters' => ['required', 'array'],
 
             'content.chapters.career' => ['required', 'array'],
@@ -336,6 +347,8 @@ final class PersonalityVariantCloneContentValidator
                 $this->assertTraitsUnlockLabelsAligned($validator, $contentJson, $chapterKey);
                 $this->assertTraitsUnlockLinksShape($validator, $contentJson, $chapterKey);
             }
+
+            $this->assertAxisExplainersShape($validator, $contentJson);
         });
 
         if ($validator->fails()) {
@@ -396,6 +409,103 @@ final class PersonalityVariantCloneContentValidator
                         $validator->errors()->add(
                             sprintf('content.chapters.%s.traits_unlock.items.%d.links_to_existing_blocks.%s.%d', $chapterKey, $index, $linkKey, $pathIndex),
                             'Traits unlock link paths must be non-empty strings.',
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * @param  array<string, mixed>  $contentJson
+     */
+    private function assertAxisExplainersShape($validator, array $contentJson): void
+    {
+        $axisExplainers = data_get($contentJson, 'traits.axis_explainers');
+
+        if (! is_array($axisExplainers)) {
+            $validator->errors()->add(
+                'content.traits.axis_explainers',
+                'Traits axis_explainers must be an object keyed by axis code.',
+            );
+
+            return;
+        }
+
+        $axisKeys = array_map(static fn (mixed $key): string => strtoupper(trim((string) $key)), array_keys($axisExplainers));
+        sort($axisKeys);
+        $expectedAxisKeys = array_keys(self::AXIS_EXPLAINER_POLES);
+        sort($expectedAxisKeys);
+
+        if ($axisKeys !== $expectedAxisKeys) {
+            $validator->errors()->add(
+                'content.traits.axis_explainers',
+                'Traits axis_explainers must contain the exact EI,SN,TF,JP,AT axis set.',
+            );
+        }
+
+        foreach (self::AXIS_EXPLAINER_POLES as $axisCode => $poles) {
+            $axisPayload = $axisExplainers[$axisCode] ?? null;
+            if (! is_array($axisPayload)) {
+                $validator->errors()->add(
+                    sprintf('content.traits.axis_explainers.%s', $axisCode),
+                    sprintf('Traits axis_explainers.%s must be an object keyed by pole.', $axisCode),
+                );
+
+                continue;
+            }
+
+            $expectedPoles = $poles;
+            sort($expectedPoles);
+            $actualPoles = array_map(static fn (mixed $key): string => strtoupper(trim((string) $key)), array_keys($axisPayload));
+            sort($actualPoles);
+
+            if ($actualPoles !== $expectedPoles) {
+                $validator->errors()->add(
+                    sprintf('content.traits.axis_explainers.%s', $axisCode),
+                    sprintf('Traits axis_explainers.%s must contain the exact %s pole set.', $axisCode, implode(',', $poles)),
+                );
+            }
+
+            foreach ($poles as $pole) {
+                $polePayload = $axisPayload[$pole] ?? null;
+                if (! is_array($polePayload)) {
+                    $validator->errors()->add(
+                        sprintf('content.traits.axis_explainers.%s.%s', $axisCode, $pole),
+                        sprintf('Traits axis_explainers.%s.%s must be an object keyed by band.', $axisCode, $pole),
+                    );
+
+                    continue;
+                }
+
+                $actualBands = array_map(static fn (mixed $key): string => strtolower(trim((string) $key)), array_keys($polePayload));
+                sort($actualBands);
+                $expectedBands = self::AXIS_EXPLAINER_BANDS;
+                sort($expectedBands);
+
+                if ($actualBands !== $expectedBands) {
+                    $validator->errors()->add(
+                        sprintf('content.traits.axis_explainers.%s.%s', $axisCode, $pole),
+                        sprintf('Traits axis_explainers.%s.%s must contain the exact light,clear,strong band set.', $axisCode, $pole),
+                    );
+                }
+
+                foreach (self::AXIS_EXPLAINER_BANDS as $band) {
+                    $bandPayload = $polePayload[$band] ?? null;
+                    if (! is_array($bandPayload)) {
+                        $validator->errors()->add(
+                            sprintf('content.traits.axis_explainers.%s.%s.%s', $axisCode, $pole, $band),
+                            sprintf('Traits axis_explainers.%s.%s.%s must be an object with band_nuance.', $axisCode, $pole, $band),
+                        );
+
+                        continue;
+                    }
+
+                    $bandNuance = trim((string) ($bandPayload['band_nuance'] ?? ''));
+                    if ($bandNuance === '') {
+                        $validator->errors()->add(
+                            sprintf('content.traits.axis_explainers.%s.%s.%s.band_nuance', $axisCode, $pole, $band),
+                            sprintf('Traits axis_explainers.%s.%s.%s.band_nuance must be a non-empty string.', $axisCode, $pole, $band),
                         );
                     }
                 }
