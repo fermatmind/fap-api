@@ -6,6 +6,7 @@ namespace App\Services\Commerce;
 
 use App\Models\Attempt;
 use App\Models\UnifiedAccessProjection;
+use App\Services\Access\AttemptUnlockProjectionRepairService;
 use App\Services\Report\ReportAccess;
 use Illuminate\Support\Facades\DB;
 
@@ -13,6 +14,7 @@ final class MbtiAccessHubBuilder
 {
     public function __construct(
         private OrderManager $orders,
+        private AttemptUnlockProjectionRepairService $projectionRepair,
     ) {}
 
     /**
@@ -264,6 +266,10 @@ final class MbtiAccessHubBuilder
             ->where('org_id', $orgId)
             ->where('attempt_id', $attemptId)
             ->exists();
+        if ($resultExists) {
+            $this->projectionRepair->repairResultReadyProjectionIfNeeded($orgId, $attemptId);
+        }
+
         $projection = UnifiedAccessProjection::query()->where('attempt_id', $attemptId)->first();
         $payload = is_array($projection?->payload_json) ? $projection->payload_json : [];
         $accessState = $this->normalizeProjectionState(

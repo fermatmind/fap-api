@@ -154,6 +154,40 @@ final class CommerceOrderReadFallbackTest extends TestCase
             ->assertJsonPath('mbti_access_hub_v1.report_access.can_view_report', false);
     }
 
+    public function test_paid_mbti_order_repairs_exact_result_entry_when_result_exists_and_active_grant_is_present(): void
+    {
+        $orderNo = 'ord_fallback_mbti_repair_'.Str::lower(Str::random(10));
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, self::ANON_OWNER, 'MBTI');
+        $this->insertOrderForOwner($orderNo, $attemptId, 'paid');
+        $this->insertResult($attemptId);
+        $this->insertActiveGrant($attemptId, $orderNo);
+
+        $token = $this->issueAnonToken(self::ANON_OWNER);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/orders/'.$orderNo);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('status', 'paid')
+            ->assertJsonPath('grant_state', 'not_started')
+            ->assertJsonPath('exact_result_entry.attempt_id', $attemptId)
+            ->assertJsonPath('exact_result_entry.access_state', 'ready')
+            ->assertJsonPath('exact_result_entry.report_state', 'ready')
+            ->assertJsonPath('exact_result_entry.reason_code', 'projection_repaired_from_entitlement')
+            ->assertJsonPath('exact_result_entry.ready_to_enter', true)
+            ->assertJsonPath('exact_result_entry.actions.page_href', "/result/{$attemptId}")
+            ->assertJsonPath('mbti_access_hub_v1.access_state', 'ready')
+            ->assertJsonPath('mbti_access_hub_v1.report_access.can_view_report', true);
+
+        $this->assertDatabaseHas('unified_access_projections', [
+            'attempt_id' => $attemptId,
+            'access_state' => 'ready',
+            'report_state' => 'ready',
+            'reason_code' => 'projection_repaired_from_entitlement',
+        ]);
+    }
+
     public function test_valid_payment_recovery_token_reads_pending_order_without_owner_identity(): void
     {
         config([
@@ -357,6 +391,27 @@ final class CommerceOrderReadFallbackTest extends TestCase
             'payload_json' => json_encode($overrides['payload_json'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             'produced_at' => now(),
             'refreshed_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    private function insertActiveGrant(string $attemptId, string $orderNo): void
+    {
+        DB::table('benefit_grants')->insert([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'user_id' => self::ANON_OWNER,
+            'benefit_code' => 'MBTI_REPORT_FULL',
+            'scope' => 'attempt',
+            'attempt_id' => $attemptId,
+            'order_no' => $orderNo,
+            'status' => 'active',
+            'expires_at' => null,
+            'benefit_ref' => self::ANON_OWNER,
+            'benefit_type' => 'report_unlock',
+            'source_order_id' => (string) Str::uuid(),
+            'source_event_id' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

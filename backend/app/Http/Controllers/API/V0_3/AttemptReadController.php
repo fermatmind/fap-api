@@ -13,6 +13,7 @@ use App\Repositories\Report\ReportSubjectRepository;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\BigFive\BigFivePublicProjectionService;
+use App\Services\Access\AttemptUnlockProjectionRepairService;
 use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Mbti\MbtiActionJourneyContractService;
 use App\Services\Mbti\MbtiAdaptiveSelectionService;
@@ -62,6 +63,7 @@ class AttemptReadController extends Controller
         private EventRecorder $eventRecorder,
         private ScaleCodeResponseProjector $responseProjector,
         private ReportSubjectRepository $reportSubjects,
+        private AttemptUnlockProjectionRepairService $projectionRepair,
     ) {}
 
     /**
@@ -505,6 +507,10 @@ class AttemptReadController extends Controller
             ->where('org_id', $orgId)
             ->where('attempt_id', (string) $attempt->id)
             ->exists();
+        if ($resultExists && strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI') {
+            $this->projectionRepair->repairResultReadyProjectionIfNeeded($orgId, (string) $attempt->id);
+        }
+
         $projection = UnifiedAccessProjection::query()
             ->where('attempt_id', (string) $attempt->id)
             ->first();

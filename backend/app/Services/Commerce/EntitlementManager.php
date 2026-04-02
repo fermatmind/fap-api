@@ -5,6 +5,7 @@ namespace App\Services\Commerce;
 use App\Services\Report\ReportAccess;
 use App\Services\Storage\UnifiedAccessProjectionWriter;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class EntitlementManager
@@ -387,7 +388,7 @@ class EntitlementManager
     private function refreshAccessProjection(string $attemptId, array $meta): void
     {
         try {
-            $this->accessProjections->refreshAttemptProjection(
+            $projection = $this->accessProjections->refreshAttemptProjection(
                 $attemptId,
                 [
                     'access_state' => 'ready',
@@ -399,8 +400,25 @@ class EntitlementManager
                 ],
                 $meta
             );
-        } catch (\Throwable) {
-            // Best-effort sidecar only. Preserve entitlement grant behavior.
+
+            if ($projection === null) {
+                Log::warning('ENTITLEMENT_ACCESS_PROJECTION_REFRESH_SKIPPED', [
+                    'attempt_id' => $attemptId,
+                    'source_ref' => $meta['source_ref'] ?? null,
+                    'source_system' => $meta['source_system'] ?? 'entitlement_manager',
+                    'actor_type' => $meta['actor_type'] ?? null,
+                    'actor_id' => $meta['actor_id'] ?? null,
+                ]);
+            }
+        } catch (\Throwable $e) {
+            Log::error('ENTITLEMENT_ACCESS_PROJECTION_REFRESH_FAILED', [
+                'attempt_id' => $attemptId,
+                'source_ref' => $meta['source_ref'] ?? null,
+                'source_system' => $meta['source_system'] ?? 'entitlement_manager',
+                'actor_type' => $meta['actor_type'] ?? null,
+                'actor_id' => $meta['actor_id'] ?? null,
+                'exception' => $e,
+            ]);
         }
     }
 

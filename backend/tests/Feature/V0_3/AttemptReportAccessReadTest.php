@@ -85,6 +85,27 @@ final class AttemptReportAccessReadTest extends TestCase
         ]);
     }
 
+    private function createActiveGrant(string $attemptId, string $anonId): void
+    {
+        DB::table('benefit_grants')->insert([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'user_id' => $anonId,
+            'benefit_code' => 'MBTI_REPORT_FULL',
+            'scope' => 'attempt',
+            'attempt_id' => $attemptId,
+            'order_no' => 'ORDER-'.$attemptId,
+            'status' => 'active',
+            'expires_at' => null,
+            'benefit_ref' => $anonId,
+            'benefit_type' => 'report_unlock',
+            'source_order_id' => (string) Str::uuid(),
+            'source_event_id' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
     public function test_it_reads_consumer_report_access_projection_without_changing_report_contracts(): void
     {
         $this->seedScales();
@@ -128,5 +149,175 @@ final class AttemptReportAccessReadTest extends TestCase
         $response->assertJsonPath('actions.history_href', '/history/mbti');
         $response->assertJsonPath('actions.lookup_href', '/orders/lookup');
         $response->assertJsonPath('payload.has_active_grant', true);
+    }
+
+    public function test_it_repairs_missing_ready_projection_from_active_entitlement_when_result_exists(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_access_repair';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId);
+        $this->createResult($attemptId);
+        $this->createActiveGrant($attemptId, $anonId);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('attempt_id', $attemptId);
+        $response->assertJsonPath('access_state', 'ready');
+        $response->assertJsonPath('report_state', 'ready');
+        $response->assertJsonPath('reason_code', 'projection_repaired_from_entitlement');
+        $response->assertJsonPath('actions.page_href', "/result/{$attemptId}");
+        $response->assertJsonPath('payload.has_active_grant', true);
+        $response->assertJsonPath('payload.result_exists', true);
+        $response->assertJsonPath('payload.access_level', 'full');
+        $response->assertJsonPath('payload.variant', 'full');
+        $this->assertDatabaseHas('unified_access_projections', [
+            'attempt_id' => $attemptId,
+            'access_state' => 'ready',
+            'report_state' => 'ready',
+            'reason_code' => 'projection_repaired_from_entitlement',
+        ]);
+    }
+
+    public function test_it_keeps_result_ready_projection_missing_locked_when_no_active_grant_exists(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_access_no_grant';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId);
+        $this->createResult($attemptId);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('attempt_id', $attemptId);
+        $response->assertJsonPath('access_state', 'locked');
+        $response->assertJsonPath('report_state', 'ready');
+        $response->assertJsonPath('reason_code', 'projection_missing_result_ready');
+        $response->assertJsonPath('payload.result_exists', true);
+        $response->assertJsonPath('payload.has_active_grant', null);
+        $this->assertDatabaseMissing('unified_access_projections', [
+            'attempt_id' => $attemptId,
+            'reason_code' => 'projection_repaired_from_entitlement',
+        ]);
+    }
+
+    public function test_it_keeps_projection_missing_pending_when_active_grant_exists_but_result_does_not_exist(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_access_no_result';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId);
+        $this->createActiveGrant($attemptId, $anonId);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('attempt_id', $attemptId);
+        $response->assertJsonPath('access_state', 'pending');
+        $response->assertJsonPath('report_state', 'pending');
+        $response->assertJsonPath('reason_code', 'projection_missing_result_pending');
+        $response->assertJsonPath('payload.result_exists', false);
+        $this->assertDatabaseMissing('unified_access_projections', [
+            'attempt_id' => $attemptId,
+            'reason_code' => 'projection_repaired_from_entitlement',
+        ]);
+    }
+
+    public function test_it_does_not_repair_non_mbti_attempts_from_projection_missing_result_ready(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_access_non_mbti';
+        $token = $this->issueAnonToken($anonId);
+
+        Attempt::create([
+            'id' => $attemptId,
+            'org_id' => 0,
+            'anon_id' => $anonId,
+            'scale_code' => 'BIG5_OCEAN',
+            'scale_version' => 'v0.3',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'question_count' => 120,
+            'client_platform' => 'test',
+            'answers_summary_json' => ['stage' => 'seed'],
+            'started_at' => now(),
+            'submitted_at' => now(),
+            'pack_id' => 'BIG5_OCEAN',
+            'dir_version' => 'v1',
+            'content_package_version' => 'attempt-v1',
+            'scoring_spec_version' => 'attempt-score-v1',
+        ]);
+
+        Result::create([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'attempt_id' => $attemptId,
+            'scale_code' => 'BIG5_OCEAN',
+            'scale_version' => 'v0.3',
+            'type_code' => '',
+            'scores_json' => [],
+            'scores_pct' => [],
+            'axis_states' => [],
+            'content_package_version' => 'result-v1',
+            'result_json' => ['variant' => 'free'],
+            'pack_id' => 'BIG5_OCEAN',
+            'dir_version' => 'v1',
+            'scoring_spec_version' => 'result-score-v1',
+            'report_engine_version' => 'v1.2',
+            'is_valid' => true,
+            'computed_at' => now(),
+        ]);
+
+        DB::table('benefit_grants')->insert([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'user_id' => $anonId,
+            'benefit_code' => 'BIG5_FULL_REPORT',
+            'scope' => 'attempt',
+            'attempt_id' => $attemptId,
+            'order_no' => 'ORDER-'.$attemptId,
+            'status' => 'active',
+            'expires_at' => null,
+            'benefit_ref' => $anonId,
+            'benefit_type' => 'report_unlock',
+            'source_order_id' => (string) Str::uuid(),
+            'source_event_id' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('attempt_id', $attemptId);
+        $response->assertJsonPath('access_state', 'locked');
+        $response->assertJsonPath('report_state', 'ready');
+        $response->assertJsonPath('reason_code', 'projection_missing_result_ready');
+        $this->assertDatabaseMissing('unified_access_projections', [
+            'attempt_id' => $attemptId,
+            'reason_code' => 'projection_repaired_from_entitlement',
+        ]);
     }
 }
