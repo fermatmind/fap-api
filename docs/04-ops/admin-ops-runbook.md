@@ -7,6 +7,10 @@
 - 不要把 `App\Models\User` 当成 Ops 登录账号
 - 不要把 `/ops/organizations-import` 当成已自动化完成的 org import 流程
 
+## 专项 Runbook
+
+- MBTI desktop clone 顶部身份 `profile_identity` 线上缺失 / production republish：`backend/docs/ops/mbti-desktop-clone-profile-identity-republish.md`
+
 ## 健康检查（Healthz Snapshot）
 1) API：`GET /api/v0.3/admin/healthz/snapshot`
 2) 预期：返回最新 `ops_healthz_snapshots` 记录，`ok=true` 为绿色
