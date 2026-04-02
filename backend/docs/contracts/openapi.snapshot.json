@@ -1030,6 +1030,28 @@
                 ]
             }
         },
+        "/api/v0.3/orders/{order_no}/recover/alipay-return": {
+            "get": {
+                "operationId": "api.v0_3.orders.recover_alipay_return",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\CommerceController@recoverAlipayReturn",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ],
+                "x-laravel-name": "api.v0_3.orders.recover_alipay_return"
+            }
+        },
         "/api/v0.3/orders/{order_no}/resend": {
             "post": {
                 "operationId": "post_api_v0_3_orders_order_no_resend",

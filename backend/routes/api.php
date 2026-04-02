@@ -216,6 +216,8 @@ Route::prefix('v0.3')->middleware([
         Route::post('/orders/checkout', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@checkout')
             ->middleware(\App\Http\Middleware\FmTokenOptional::class)
             ->name('api.v0_3.orders.checkout');
+        Route::get('/orders/{order_no}/recover/alipay-return', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@recoverAlipayReturn')
+            ->name('api.v0_3.orders.recover_alipay_return');
         Route::post('/orders/lookup', 'App\\Http\\Controllers\\API\\V0_3\\CommerceController@lookup')
             ->middleware([\App\Http\Middleware\FmTokenOptional::class, 'throttle:api_order_lookup'])
             ->name('api.v0_3.orders.lookup');
