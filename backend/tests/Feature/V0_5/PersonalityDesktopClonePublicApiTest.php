@@ -121,10 +121,15 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             // Their presence does not imply desktop main flow still renders them.
             ->assertJsonPath('content.chapters.career.career_ideas.title', 'career ideas infj-a')
             ->assertJsonPath('content.chapters.career.work_styles.items.0.description', 'work styles description 1 infj-a')
+            ->assertJsonPath('content.chapters.growth.what_energizes.schema_version', 'insight_list_v1')
             ->assertJsonPath('content.chapters.growth.what_energizes.title', 'what energizes infj-a')
+            ->assertJsonPath('content.chapters.growth.what_energizes.intro', 'what energizes intro infj-a')
             ->assertJsonPath('content.chapters.growth.what_drains.items.0.description', 'what drains description 1 infj-a')
+            ->assertJsonPath('content.chapters.growth.what_drains.items.0.body', 'what drains body 1 infj-a')
             ->assertJsonPath('content.chapters.relationships.superpowers.title', 'superpowers infj-a')
+            ->assertJsonPath('content.chapters.relationships.superpowers.items.0.why_it_matters', 'superpowers why it matters 1 infj-a')
             ->assertJsonPath('content.chapters.relationships.pitfalls.items.0.description', 'pitfalls description 1 infj-a')
+            ->assertJsonPath('content.chapters.relationships.pitfalls.items.0.actions.do', 'pitfalls do 1 infj-a')
             ->assertJsonPath('content.chapters.career.traits_unlock.title', 'career traits unlock title infj-a')
             ->assertJsonPath('content.chapters.career.traits_unlock.items.0.label', 'career trait 1 infj-a')
             ->assertJsonPath('content.chapters.growth.traits_unlock.items.0.label', 'growth trait 1 infj-a')
@@ -174,6 +179,7 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('content.letters_intro.headline', 'letters headline entj-t')
             ->assertJsonPath('content.chapters.career.matched_jobs.job_examples.0', 'job example 1 entj-t')
             ->assertJsonPath('content.chapters.growth.what_energizes.items.0.description', 'what energizes description 1 entj-t')
+            ->assertJsonPath('content.chapters.growth.what_energizes.items.0.signals.0', 'what energizes signal 1 1 entj-t')
             ->assertJsonPath('content.chapters.career.traits_unlock.title', 'career traits unlock title entj-t')
             ->assertJsonPath('content.chapters.career.traits_unlock.items.0.label', 'career trait 1 entj-t')
             ->assertJsonPath('content.chapters.growth.traits_unlock.items.0.label', 'growth trait 1 entj-t')
@@ -184,7 +190,8 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('full_code', 'ISTP-A')
             ->assertJsonPath('content.chapters.relationships.superpowers.items.0.description', 'superpowers description 1 istp-a')
-            ->assertJsonPath('content.chapters.relationships.pitfalls.items.0.description', 'pitfalls description 1 istp-a');
+            ->assertJsonPath('content.chapters.relationships.pitfalls.items.0.description', 'pitfalls description 1 istp-a')
+            ->assertJsonPath('content.chapters.relationships.pitfalls.items.0.tags.0', 'relationships');
     }
 
     public function test_imported_baseline_public_api_keeps_compatibility_fields_for_sample_full_codes(): void
@@ -219,22 +226,22 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
                 'chapters.career.work_styles',
                 $fullCode,
             );
-            $this->assertItemModuleShape(
+            $this->assertInsightListModuleShape(
                 $content,
                 'chapters.growth.what_energizes',
                 $fullCode,
             );
-            $this->assertItemModuleShape(
+            $this->assertInsightListModuleShape(
                 $content,
                 'chapters.growth.what_drains',
                 $fullCode,
             );
-            $this->assertItemModuleShape(
+            $this->assertInsightListModuleShape(
                 $content,
                 'chapters.relationships.superpowers',
                 $fullCode,
             );
-            $this->assertItemModuleShape(
+            $this->assertInsightListModuleShape(
                 $content,
                 'chapters.relationships.pitfalls',
                 $fullCode,
@@ -606,33 +613,13 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
         }
 
         if ($chapter === 'growth') {
-            $payload['what_energizes'] = [
-                'title' => 'what energizes '.$tag,
-                'items' => [
-                    ['title' => 'what energizes title 1 '.$tag, 'description' => 'what energizes description 1 '.$tag],
-                ],
-            ];
-            $payload['what_drains'] = [
-                'title' => 'what drains '.$tag,
-                'items' => [
-                    ['title' => 'what drains title 1 '.$tag, 'description' => 'what drains description 1 '.$tag],
-                ],
-            ];
+            $payload['what_energizes'] = $this->validInsightListModule('what energizes', $tag);
+            $payload['what_drains'] = $this->validInsightListModule('what drains', $tag);
         }
 
         if ($chapter === 'relationships') {
-            $payload['superpowers'] = [
-                'title' => 'superpowers '.$tag,
-                'items' => [
-                    ['title' => 'superpowers title 1 '.$tag, 'description' => 'superpowers description 1 '.$tag],
-                ],
-            ];
-            $payload['pitfalls'] = [
-                'title' => 'pitfalls '.$tag,
-                'items' => [
-                    ['title' => 'pitfalls title 1 '.$tag, 'description' => 'pitfalls description 1 '.$tag],
-                ],
-            ];
+            $payload['superpowers'] = $this->validInsightListModule('superpowers', $tag);
+            $payload['pitfalls'] = $this->validInsightListModule('pitfalls', $tag);
         }
 
         return $payload;
@@ -687,6 +674,39 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
                     'real_world_signal' => sprintf('%s signal %d %s', $chapter, $index, $tag),
                     'upgrade_hint' => sprintf('%s upgrade hint %d %s', $chapter, $index, $tag),
                     'links_to_existing_blocks' => $links,
+                ];
+            }, [1, 2, 3, 4]),
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function validInsightListModule(string $module, string $tag): array
+    {
+        return [
+            'schema_version' => 'insight_list_v1',
+            'title' => $module.' '.$tag,
+            'intro' => $module.' intro '.$tag,
+            'items' => array_map(function (int $index) use ($module, $tag): array {
+                return [
+                    'id' => sprintf('%s-%d', str_replace(' ', '-', $module), $index),
+                    'title' => sprintf('%s title %d %s', $module, $index, $tag),
+                    'description' => sprintf('%s description %d %s', $module, $index, $tag),
+                    'body' => sprintf('%s body %d %s', $module, $index, $tag),
+                    'why_it_matters' => sprintf('%s why it matters %d %s', $module, $index, $tag),
+                    'signals' => [
+                        sprintf('%s signal 1 %d %s', $module, $index, $tag),
+                        sprintf('%s signal 2 %d %s', $module, $index, $tag),
+                    ],
+                    'actions' => [
+                        'do' => sprintf('%s do %d %s', $module, $index, $tag),
+                        'avoid' => sprintf('%s avoid %d %s', $module, $index, $tag),
+                    ],
+                    'tags' => [
+                        $module === 'superpowers' || $module === 'pitfalls' ? 'relationships' : 'growth',
+                        str_replace(' ', '-', $module),
+                    ],
                 ];
             }, [1, 2, 3, 4]),
         ];
@@ -891,6 +911,33 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
                 trim((string) data_get($item, 'description')),
                 sprintf('%s has empty %s.items[%d].description', $fullCode, $modulePath, $index),
             );
+        }
+    }
+
+    /**
+     * @param  array<string, mixed>  $content
+     */
+    private function assertInsightListModuleShape(array $content, string $modulePath, string $fullCode): void
+    {
+        $module = data_get($content, $modulePath);
+        $this->assertIsArray($module, sprintf('%s missing module %s', $fullCode, $modulePath));
+        $this->assertSame('insight_list_v1', data_get($module, 'schema_version'), sprintf('%s has invalid %s.schema_version', $fullCode, $modulePath));
+        $this->assertNotSame('', trim((string) data_get($module, 'intro')), sprintf('%s has empty %s.intro', $fullCode, $modulePath));
+
+        $items = (array) data_get($module, 'items');
+        $this->assertGreaterThanOrEqual(4, count($items), sprintf('%s has insufficient %s.items', $fullCode, $modulePath));
+
+        foreach ($items as $index => $item) {
+            $this->assertIsArray($item, sprintf('%s has invalid %s.items[%d]', $fullCode, $modulePath, $index));
+            $this->assertNotSame('', trim((string) data_get($item, 'id')), sprintf('%s has empty %s.items[%d].id', $fullCode, $modulePath, $index));
+            $this->assertNotSame('', trim((string) data_get($item, 'title')), sprintf('%s has empty %s.items[%d].title', $fullCode, $modulePath, $index));
+            $this->assertNotSame('', trim((string) data_get($item, 'description')), sprintf('%s has empty %s.items[%d].description', $fullCode, $modulePath, $index));
+            $this->assertNotSame('', trim((string) data_get($item, 'body')), sprintf('%s has empty %s.items[%d].body', $fullCode, $modulePath, $index));
+            $this->assertNotSame('', trim((string) data_get($item, 'why_it_matters')), sprintf('%s has empty %s.items[%d].why_it_matters', $fullCode, $modulePath, $index));
+            $this->assertGreaterThanOrEqual(2, count((array) data_get($item, 'signals')), sprintf('%s has insufficient %s.items[%d].signals', $fullCode, $modulePath, $index));
+            $this->assertNotSame('', trim((string) data_get($item, 'actions.do')), sprintf('%s has empty %s.items[%d].actions.do', $fullCode, $modulePath, $index));
+            $this->assertNotSame('', trim((string) data_get($item, 'actions.avoid')), sprintf('%s has empty %s.items[%d].actions.avoid', $fullCode, $modulePath, $index));
+            $this->assertNotEmpty((array) data_get($item, 'tags'), sprintf('%s has empty %s.items[%d].tags', $fullCode, $modulePath, $index));
         }
     }
 }

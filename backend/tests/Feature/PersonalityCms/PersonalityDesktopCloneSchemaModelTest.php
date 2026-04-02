@@ -162,6 +162,24 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
         ]);
     }
 
+    public function test_insight_list_modules_require_full_schema_fields(): void
+    {
+        $variant = $this->seedVariant('ENFP', 'T', 'zh-CN');
+        $content = $this->validContent('enfp-t');
+        unset($content['chapters']['relationships']['pitfalls']['items'][0]['actions']['avoid']);
+
+        $this->expectException(ValidationException::class);
+
+        PersonalityProfileVariantCloneContent::query()->create([
+            'personality_profile_variant_id' => (int) $variant->id,
+            'template_key' => PersonalityProfileVariantCloneContent::TEMPLATE_KEY_MBTI_DESKTOP_CLONE_V1,
+            'status' => PersonalityProfileVariantCloneContent::STATUS_PUBLISHED,
+            'schema_version' => 'v1',
+            'content_json' => $content,
+            'asset_slots_json' => $this->validAssetSlots(),
+        ]);
+    }
+
     public function test_invalid_asset_slots_json_cannot_be_published(): void
     {
         $variant = $this->seedVariant('ENTP', 'A', 'zh-CN');
@@ -545,36 +563,49 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
         }
 
         if ($chapter === 'growth') {
-            $payload['what_energizes'] = [
-                'title' => 'what energizes '.$tag,
-                'items' => [
-                    ['title' => 'what energizes title 1 '.$tag, 'description' => 'what energizes description 1 '.$tag],
-                ],
-            ];
-            $payload['what_drains'] = [
-                'title' => 'what drains '.$tag,
-                'items' => [
-                    ['title' => 'what drains title 1 '.$tag, 'description' => 'what drains description 1 '.$tag],
-                ],
-            ];
+            $payload['what_energizes'] = $this->validInsightListModule('what energizes', $tag);
+            $payload['what_drains'] = $this->validInsightListModule('what drains', $tag);
         }
 
         if ($chapter === 'relationships') {
-            $payload['superpowers'] = [
-                'title' => 'superpowers '.$tag,
-                'items' => [
-                    ['title' => 'superpowers title 1 '.$tag, 'description' => 'superpowers description 1 '.$tag],
-                ],
-            ];
-            $payload['pitfalls'] = [
-                'title' => 'pitfalls '.$tag,
-                'items' => [
-                    ['title' => 'pitfalls title 1 '.$tag, 'description' => 'pitfalls description 1 '.$tag],
-                ],
-            ];
+            $payload['superpowers'] = $this->validInsightListModule('superpowers', $tag);
+            $payload['pitfalls'] = $this->validInsightListModule('pitfalls', $tag);
         }
 
         return $payload;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function validInsightListModule(string $module, string $tag): array
+    {
+        return [
+            'schema_version' => 'insight_list_v1',
+            'title' => $module.' '.$tag,
+            'intro' => $module.' intro '.$tag,
+            'items' => array_map(function (int $index) use ($module, $tag): array {
+                return [
+                    'id' => sprintf('%s-%d', str_replace(' ', '-', $module), $index),
+                    'title' => sprintf('%s title %d %s', $module, $index, $tag),
+                    'description' => sprintf('%s description %d %s', $module, $index, $tag),
+                    'body' => sprintf('%s body %d %s', $module, $index, $tag),
+                    'why_it_matters' => sprintf('%s why it matters %d %s', $module, $index, $tag),
+                    'signals' => [
+                        sprintf('%s signal 1 %d %s', $module, $index, $tag),
+                        sprintf('%s signal 2 %d %s', $module, $index, $tag),
+                    ],
+                    'actions' => [
+                        'do' => sprintf('%s do %d %s', $module, $index, $tag),
+                        'avoid' => sprintf('%s avoid %d %s', $module, $index, $tag),
+                    ],
+                    'tags' => [
+                        $module === 'superpowers' || $module === 'pitfalls' ? 'relationships' : 'growth',
+                        str_replace(' ', '-', $module),
+                    ],
+                ];
+            }, [1, 2, 3, 4]),
+        ];
     }
 
     /**
