@@ -594,15 +594,30 @@ final class CommerceCheckoutPayActionTest extends TestCase
 
         $orderNo = 'ord_alipay_recovery_checkout_1';
         $this->insertPendingOrder($orderNo, 'alipay', 'anon_alipay_recovery_checkout_1');
+        $token = app(PaymentRecoveryToken::class)->issue($orderNo);
 
         $service = Mockery::mock(\App\Services\Commerce\Checkout\AlipayCheckoutService::class);
         $service->shouldReceive('launch')
             ->once()
-            ->with(Mockery::type('array'), 'desktop')
+            ->withArgs(function (array $order, string $scene) use ($orderNo, $token): bool {
+                $this->assertSame('desktop', $scene);
+                $this->assertArrayHasKey('return_url', $order);
+
+                $returnUrl = (string) ($order['return_url'] ?? '');
+                $parsedQuery = [];
+                parse_str((string) parse_url($returnUrl, PHP_URL_QUERY), $parsedQuery);
+
+                $this->assertSame($orderNo, (string) ($parsedQuery['order_no'] ?? ''));
+                $this->assertSame($token, (string) ($parsedQuery['payment_recovery_token'] ?? ''));
+                $this->assertStringContainsString(
+                    '/pay/wait?order_no='.$orderNo.'&payment_recovery_token='.$token,
+                    (string) ($parsedQuery['wait_url'] ?? '')
+                );
+
+                return true;
+            })
             ->andReturn('<html>pay</html>');
         $this->app->instance(\App\Services\Commerce\Checkout\AlipayCheckoutService::class, $service);
-
-        $token = app(PaymentRecoveryToken::class)->issue($orderNo);
 
         $response = $this->get('/api/v0.3/orders/'.$orderNo.'/pay/alipay?scene=desktop&paymentRecoveryToken='.urlencode($token));
 

@@ -655,13 +655,14 @@ class CommerceController extends Controller
         $orgId = $this->orgContext->orgId();
         $userId = $this->orgContext->userId();
         $anonId = $this->resolveAnonId($request);
+        $requestedPaymentRecoveryToken = $this->resolvePaymentRecoveryToken($request);
         $found = $this->orders->getOrder(
             $orgId,
             $userId !== null ? (string) $userId : null,
             $anonId,
             $order_no,
             false,
-            $this->resolvePaymentRecoveryToken($request)
+            $requestedPaymentRecoveryToken
         );
         if (! ($found['ok'] ?? false)) {
             $errorCode = (string) data_get($found, 'error_code', data_get($found, 'error', ''));
@@ -682,9 +683,27 @@ class CommerceController extends Controller
         if (! in_array($scene, ['desktop', 'mobile'], true)) {
             $scene = 'desktop';
         }
+        $paymentRecoveryVerified = (bool) ($found['payment_recovery_verified'] ?? false);
+        $paymentRecoveryToken = $paymentRecoveryVerified && $requestedPaymentRecoveryToken !== null
+            ? $requestedPaymentRecoveryToken
+            : $this->orders->issuePaymentRecoveryToken($order);
+        $recoveryUrls = $this->orders->presentPaymentRecoveryUrls(
+            $order,
+            $paymentRecoveryToken,
+            $this->resolveRequestedLocale($request)
+        );
+        $launchOrder = (array) $order;
+        $enrichedReturnUrl = $this->buildAlipayReturnUrl(
+            $order,
+            $paymentRecoveryToken,
+            $recoveryUrls
+        );
+        if ($enrichedReturnUrl !== null) {
+            $launchOrder['return_url'] = $enrichedReturnUrl;
+        }
 
         try {
-            $launch = $this->alipayCheckout->launch((array) $order, $scene);
+            $launch = $this->alipayCheckout->launch($launchOrder, $scene);
             $response = $this->toHttpResponse($launch);
             if ($response instanceof Response) {
                 return $response;
@@ -1466,6 +1485,90 @@ class CommerceController extends Controller
         $normalized = trim((string) $value);
 
         return $normalized !== '' ? $normalized : null;
+    }
+
+    /**
+     * @param  array{wait_url:?string,result_url:?string}  $recoveryUrls
+     */
+    private function buildAlipayReturnUrl(object $order, ?string $paymentRecoveryToken, array $recoveryUrls): ?string
+    {
+        $baseReturnUrl = $this->trimNullableString(data_get(config('pay.alipay.default', []), 'return_url', ''))
+            ?? $this->deriveDefaultAlipayReturnUrl($recoveryUrls);
+        $orderNo = $this->trimNullableString($order->order_no ?? null);
+
+        if ($baseReturnUrl === null || $orderNo === null) {
+            return $baseReturnUrl;
+        }
+
+        $waitUrl = $this->trimNullableString($recoveryUrls['wait_url'] ?? null);
+        $resultUrl = $this->trimNullableString($recoveryUrls['result_url'] ?? null);
+        $fragment = parse_url($baseReturnUrl, PHP_URL_FRAGMENT);
+        $query = [];
+        $existingQuery = parse_url($baseReturnUrl, PHP_URL_QUERY);
+        if (is_string($existingQuery) && $existingQuery !== '') {
+            parse_str($existingQuery, $query);
+        }
+
+        $query['order_no'] = $orderNo;
+        if ($paymentRecoveryToken !== null) {
+            $query['payment_recovery_token'] = $paymentRecoveryToken;
+        }
+        if ($waitUrl !== null) {
+            $query['wait_url'] = $waitUrl;
+        }
+        if ($resultUrl !== null) {
+            $query['result_url'] = $resultUrl;
+        }
+
+        $baseWithoutQuery = preg_replace('/[?#].*$/', '', $baseReturnUrl) ?: $baseReturnUrl;
+        $built = $baseWithoutQuery;
+        if ($query !== []) {
+            $built .= '?'.http_build_query($query);
+        }
+        if (is_string($fragment) && $fragment !== '') {
+            $built .= '#'.$fragment;
+        }
+
+        return $built;
+    }
+
+    /**
+     * @param  array{wait_url:?string,result_url:?string}  $recoveryUrls
+     */
+    private function deriveDefaultAlipayReturnUrl(array $recoveryUrls): ?string
+    {
+        foreach ([
+            $this->trimNullableString($recoveryUrls['wait_url'] ?? null),
+            $this->trimNullableString($recoveryUrls['result_url'] ?? null),
+        ] as $candidateUrl) {
+            if ($candidateUrl === null) {
+                continue;
+            }
+
+            $scheme = parse_url($candidateUrl, PHP_URL_SCHEME);
+            $host = parse_url($candidateUrl, PHP_URL_HOST);
+            $port = parse_url($candidateUrl, PHP_URL_PORT);
+            $path = trim((string) parse_url($candidateUrl, PHP_URL_PATH));
+
+            if (! is_string($scheme) || $scheme === '' || ! is_string($host) || $host === '' || $path === '') {
+                continue;
+            }
+
+            $segments = explode('/', ltrim($path, '/'));
+            $locale = in_array($segments[0] ?? '', ['en', 'zh'], true) ? $segments[0] : null;
+            if ($locale === null) {
+                continue;
+            }
+
+            $base = $scheme.'://'.$host;
+            if (is_int($port)) {
+                $base .= ':'.$port;
+            }
+
+            return $base.'/'.$locale.'/pay/return/alipay';
+        }
+
+        return null;
     }
 
     /**
