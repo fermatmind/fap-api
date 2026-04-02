@@ -91,10 +91,16 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
         // until removal gates are satisfied across import/consumer/tests.
         $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.career.career_ideas.items'));
         $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.career.work_styles.items'));
-        $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.growth.what_energizes.items'));
-        $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.growth.what_drains.items'));
-        $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.relationships.superpowers.items'));
-        $this->assertNotEmpty((array) data_get($infjAContent, 'content_json.chapters.relationships.pitfalls.items'));
+        $this->assertInsightListModuleShape($infjAContent['content_json'], 'chapters.growth.what_energizes', 'INFJ-A');
+        $this->assertInsightListModuleShape($infjAContent['content_json'], 'chapters.growth.what_drains', 'INFJ-A');
+        $this->assertInsightListModuleShape($infjAContent['content_json'], 'chapters.relationships.superpowers', 'INFJ-A');
+        $this->assertInsightListModuleShape($infjAContent['content_json'], 'chapters.relationships.pitfalls', 'INFJ-A');
+        $this->assertSame('insight_list_v1', data_get($enfpTContent, 'content_json.chapters.growth.what_energizes.schema_version'));
+        $this->assertSame('好奇心强，学习速度快', data_get($enfpTContent, 'content_json.chapters.growth.what_energizes.items.0.title'));
+        $this->assertNotSame('', trim((string) data_get($enfpTContent, 'content_json.chapters.growth.what_drains.items.0.actions.do')));
+        $this->assertSame('insight_list_v1', data_get($infjAContent, 'content_json.chapters.relationships.superpowers.schema_version'));
+        $this->assertSame('深度共情与理解力', data_get($infjAContent, 'content_json.chapters.relationships.superpowers.items.0.title'));
+        $this->assertGreaterThanOrEqual(2, count((array) data_get($infjAContent, 'content_json.chapters.relationships.pitfalls.items.0.signals')));
         $this->assertSame(
             '你明显更容易被外部世界激活，但这种外倾仍保留着收回来整理自己的能力；你不是一直要热闹，而是更容易在互动中启动状态。',
             data_get($infjAContent, 'content_json.traits.axis_explainers.EI.E.light.band_nuance'),
@@ -442,5 +448,32 @@ final class PersonalityDesktopCloneBaselineImportTest extends TestCase
         $this->assertNotNull($record);
 
         return $record;
+    }
+
+    /**
+     * @param  array<string, mixed>  $content
+     */
+    private function assertInsightListModuleShape(array $content, string $modulePath, string $fullCode): void
+    {
+        $module = data_get($content, $modulePath);
+        $this->assertIsArray($module, sprintf('%s missing %s', $fullCode, $modulePath));
+        $this->assertSame('insight_list_v1', data_get($module, 'schema_version'), sprintf('%s invalid %s.schema_version', $fullCode, $modulePath));
+        $this->assertNotSame('', trim((string) data_get($module, 'intro')), sprintf('%s empty %s.intro', $fullCode, $modulePath));
+
+        $items = (array) data_get($module, 'items');
+        $this->assertGreaterThanOrEqual(4, count($items), sprintf('%s insufficient %s.items', $fullCode, $modulePath));
+
+        foreach ($items as $index => $item) {
+            $this->assertIsArray($item, sprintf('%s invalid %s.items[%d]', $fullCode, $modulePath, $index));
+            $this->assertNotSame('', trim((string) data_get($item, 'id')), sprintf('%s empty %s.items[%d].id', $fullCode, $modulePath, $index));
+            $this->assertNotSame('', trim((string) data_get($item, 'title')), sprintf('%s empty %s.items[%d].title', $fullCode, $modulePath, $index));
+            $this->assertNotSame('', trim((string) data_get($item, 'description')), sprintf('%s empty %s.items[%d].description', $fullCode, $modulePath, $index));
+            $this->assertNotSame('', trim((string) data_get($item, 'body')), sprintf('%s empty %s.items[%d].body', $fullCode, $modulePath, $index));
+            $this->assertNotSame('', trim((string) data_get($item, 'why_it_matters')), sprintf('%s empty %s.items[%d].why_it_matters', $fullCode, $modulePath, $index));
+            $this->assertGreaterThanOrEqual(2, count((array) data_get($item, 'signals')), sprintf('%s insufficient %s.items[%d].signals', $fullCode, $modulePath, $index));
+            $this->assertNotSame('', trim((string) data_get($item, 'actions.do')), sprintf('%s empty %s.items[%d].actions.do', $fullCode, $modulePath, $index));
+            $this->assertNotSame('', trim((string) data_get($item, 'actions.avoid')), sprintf('%s empty %s.items[%d].actions.avoid', $fullCode, $modulePath, $index));
+            $this->assertNotEmpty((array) data_get($item, 'tags'), sprintf('%s empty %s.items[%d].tags', $fullCode, $modulePath, $index));
+        }
     }
 }

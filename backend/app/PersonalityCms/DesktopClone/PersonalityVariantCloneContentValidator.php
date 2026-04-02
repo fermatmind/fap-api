@@ -21,6 +21,13 @@ final class PersonalityVariantCloneContentValidator
 
     private const AXIS_EXPLAINER_BANDS = ['light', 'clear', 'strong'];
 
+    private const INSIGHT_LIST_MODULE_PATHS = [
+        'content.chapters.growth.what_energizes',
+        'content.chapters.growth.what_drains',
+        'content.chapters.relationships.superpowers',
+        'content.chapters.relationships.pitfalls',
+    ];
+
     /**
      * @param  array<string, mixed>  $contentJson
      * @param  array<int, array<string, mixed>>  $assetSlotsJson
@@ -40,10 +47,7 @@ final class PersonalityVariantCloneContentValidator
             ]);
         }
 
-        $validator = Validator::make([
-            'content' => $contentJson,
-            'asset_slots' => $normalizedAssetSlots,
-        ], [
+        $rules = [
             'content' => ['required', 'array'],
             'content.hero' => ['required', 'array'],
             'content.hero.summary' => ['required', 'string'],
@@ -297,7 +301,28 @@ final class PersonalityVariantCloneContentValidator
             'asset_slots.*.asset_ref.checksum' => ['nullable', 'string'],
             'asset_slots.*.alt' => ['present', 'nullable', 'string'],
             'asset_slots.*.meta' => ['present', 'nullable', 'array'],
-        ]);
+        ];
+
+        foreach (self::INSIGHT_LIST_MODULE_PATHS as $modulePath) {
+            $rules[$modulePath.'.schema_version'] = ['required', 'in:insight_list_v1'];
+            $rules[$modulePath.'.intro'] = ['required', 'string'];
+            $rules[$modulePath.'.items'] = ['required', 'array', 'min:4'];
+            $rules[$modulePath.'.items.*.id'] = ['required', 'string'];
+            $rules[$modulePath.'.items.*.body'] = ['required', 'string'];
+            $rules[$modulePath.'.items.*.why_it_matters'] = ['required', 'string'];
+            $rules[$modulePath.'.items.*.signals'] = ['required', 'array', 'min:2'];
+            $rules[$modulePath.'.items.*.signals.*'] = ['required', 'string'];
+            $rules[$modulePath.'.items.*.actions'] = ['required', 'array'];
+            $rules[$modulePath.'.items.*.actions.do'] = ['required', 'string'];
+            $rules[$modulePath.'.items.*.actions.avoid'] = ['required', 'string'];
+            $rules[$modulePath.'.items.*.tags'] = ['required', 'array', 'min:1'];
+            $rules[$modulePath.'.items.*.tags.*'] = ['required', 'string'];
+        }
+
+        $validator = Validator::make([
+            'content' => $contentJson,
+            'asset_slots' => $normalizedAssetSlots,
+        ], $rules);
 
         $validator->after(function ($validator) use ($normalizedAssetSlots, $contentJson): void {
             $slotIds = [];

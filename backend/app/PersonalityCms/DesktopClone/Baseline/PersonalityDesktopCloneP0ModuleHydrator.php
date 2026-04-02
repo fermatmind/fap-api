@@ -119,22 +119,22 @@ final class PersonalityDesktopCloneP0ModuleHydrator
             $workStylesSection,
             $this->fallbackChapterModuleTitle('career', 'work_styles', $locale),
         );
-        $chapters['growth']['what_energizes'] = $this->buildPremiumTeaserModule(
+        $chapters['growth']['what_energizes'] = $this->buildInsightListModule(
             $whatEnergizesSection,
             $this->fallbackChapterModuleTitle('growth', 'what_energizes', $locale),
             $this->fallbackChapterModuleItemTitle('growth', 'what_energizes', $locale),
         );
-        $chapters['growth']['what_drains'] = $this->buildPremiumTeaserModule(
+        $chapters['growth']['what_drains'] = $this->buildInsightListModule(
             $whatDrainsSection,
             $this->fallbackChapterModuleTitle('growth', 'what_drains', $locale),
             $this->fallbackChapterModuleItemTitle('growth', 'what_drains', $locale),
         );
-        $chapters['relationships']['superpowers'] = $this->buildPremiumTeaserModule(
+        $chapters['relationships']['superpowers'] = $this->buildInsightListModule(
             $superpowersSection,
             $this->fallbackChapterModuleTitle('relationships', 'superpowers', $locale),
             $this->fallbackChapterModuleItemTitle('relationships', 'superpowers', $locale),
         );
-        $chapters['relationships']['pitfalls'] = $this->buildPremiumTeaserModule(
+        $chapters['relationships']['pitfalls'] = $this->buildInsightListModule(
             $pitfallsSection,
             $this->fallbackChapterModuleTitle('relationships', 'pitfalls', $locale),
             $this->fallbackChapterModuleItemTitle('relationships', 'pitfalls', $locale),
@@ -321,6 +321,81 @@ final class PersonalityDesktopCloneP0ModuleHydrator
 
         return [
             'title' => $this->fallbackText($this->nullableText($section['title'] ?? null), $fallbackTitle),
+            'items' => $items,
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function buildInsightListModule(
+        array $section,
+        string $fallbackTitle,
+        string $fallbackItemTitle,
+    ): array {
+        $payload = is_array($section['payload_json'] ?? null) ? $section['payload_json'] : [];
+        $schemaVersion = trim((string) ($payload['schema_version'] ?? ''));
+
+        if ($schemaVersion !== 'insight_list_v1') {
+            return $this->buildPremiumTeaserModule($section, $fallbackTitle, $fallbackItemTitle);
+        }
+
+        $items = [];
+
+        foreach ((array) ($payload['items'] ?? []) as $index => $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+
+            $title = trim((string) ($item['title'] ?? ''));
+            $description = trim((string) ($item['description'] ?? ''));
+            $body = trim((string) ($item['body'] ?? ''));
+            $whyItMatters = trim((string) ($item['why_it_matters'] ?? ''));
+            $actions = is_array($item['actions'] ?? null) ? $item['actions'] : [];
+            $do = trim((string) ($actions['do'] ?? ''));
+            $avoid = trim((string) ($actions['avoid'] ?? ''));
+            $signals = $this->normalizeStringList($item['signals'] ?? []);
+            $tags = $this->normalizeStringList($item['tags'] ?? []);
+
+            if (
+                $title === ''
+                || $description === ''
+                || $body === ''
+                || $whyItMatters === ''
+                || $do === ''
+                || $avoid === ''
+                || $signals === []
+                || $tags === []
+            ) {
+                continue;
+            }
+
+            $items[] = [
+                'id' => trim((string) ($item['id'] ?? sprintf('item-%d', $index + 1))),
+                'title' => $title,
+                'description' => $description,
+                'body' => $body,
+                'why_it_matters' => $whyItMatters,
+                'signals' => $signals,
+                'actions' => [
+                    'do' => $do,
+                    'avoid' => $avoid,
+                ],
+                'tags' => $tags,
+            ];
+        }
+
+        if ($items === []) {
+            return $this->buildPremiumTeaserModule($section, $fallbackTitle, $fallbackItemTitle);
+        }
+
+        return [
+            'schema_version' => 'insight_list_v1',
+            'title' => $this->fallbackText($this->nullableText($section['title'] ?? null), $fallbackTitle),
+            'intro' => $this->fallbackText(
+                $this->nullableText($payload['intro'] ?? null),
+                $this->firstParagraph($section['body_md'] ?? null),
+            ),
             'items' => $items,
         ];
     }
@@ -618,6 +693,29 @@ final class PersonalityDesktopCloneP0ModuleHydrator
             }
 
             $normalized[$value] = $value;
+        }
+
+        return array_values($normalized);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function normalizeStringList(mixed $values): array
+    {
+        $normalized = [];
+
+        foreach ((array) $values as $value) {
+            if (! is_scalar($value)) {
+                continue;
+            }
+
+            $item = trim((string) $value);
+            if ($item === '') {
+                continue;
+            }
+
+            $normalized[$item] = $item;
         }
 
         return array_values($normalized);
