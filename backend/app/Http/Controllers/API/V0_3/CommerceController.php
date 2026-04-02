@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Yansongda\Pay\Pay;
 
 class CommerceController extends Controller
 {
@@ -226,6 +227,78 @@ class CommerceController extends Controller
         }
 
         return response()->json($payload);
+    }
+
+    /**
+     * GET /api/v0.3/orders/{order_no}/recover/alipay-return
+     */
+    public function recoverAlipayReturn(Request $request, string $order_no): JsonResponse
+    {
+        if (! $this->paymentProviders->isEnabled('alipay')) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'PROVIDER_DISABLED',
+                'message' => 'provider not enabled.',
+            ], 404);
+        }
+
+        if (! class_exists(Pay::class)) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'PAYMENT_PROVIDER_NOT_INSTALLED',
+                'message' => 'alipay sdk is not installed.',
+            ], 503);
+        }
+
+        try {
+            Pay::config(config('pay'));
+            $payload = $this->normalizeSdkPayload(Pay::alipay()->callback($request->query()));
+        } catch (\Throwable $e) {
+            Log::warning('ALIPAY_RETURN_RECOVERY_INVALID_SIGNATURE', [
+                'order_no' => $order_no,
+                'exception' => $e->getMessage(),
+            ]);
+
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'INVALID_SIGNATURE',
+                'message' => 'invalid signature.',
+            ], 400);
+        }
+
+        $normalizedRouteOrderNo = trim($order_no);
+        $normalizedReturnOrderNo = $this->trimNullableString($payload['out_trade_no'] ?? null);
+        if ($normalizedRouteOrderNo === '' || $normalizedReturnOrderNo === null || $normalizedRouteOrderNo !== $normalizedReturnOrderNo) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'ORDER_MISMATCH',
+                'message' => 'returned order does not match the requested order.',
+            ], 422);
+        }
+
+        $order = $this->orders->findOrderByOrderNo($normalizedRouteOrderNo, $this->orgContext->orgId());
+        if ($order === null) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'ORDER_NOT_FOUND',
+                'message' => 'order not found.',
+            ], 404);
+        }
+
+        $paymentRecoveryToken = $this->orders->issuePaymentRecoveryToken($order);
+        $recoveryUrls = $this->orders->presentPaymentRecoveryUrls(
+            $order,
+            $paymentRecoveryToken,
+            $this->resolveRequestedLocale($request)
+        );
+
+        return response()->json([
+            'ok' => true,
+            'order_no' => $normalizedRouteOrderNo,
+            'payment_recovery_token' => $paymentRecoveryToken,
+            'wait_url' => $recoveryUrls['wait_url'],
+            'result_url' => $recoveryUrls['result_url'],
+        ]);
     }
 
     /**
@@ -1485,6 +1558,31 @@ class CommerceController extends Controller
         $normalized = trim((string) $value);
 
         return $normalized !== '' ? $normalized : null;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function normalizeSdkPayload(mixed $payload): array
+    {
+        if (is_array($payload)) {
+            return $payload;
+        }
+
+        if ($payload instanceof \JsonSerializable) {
+            $serialized = $payload->jsonSerialize();
+            if (is_array($serialized)) {
+                return $serialized;
+            }
+        }
+
+        if ($payload instanceof PsrResponseInterface) {
+            $decoded = json_decode((string) $payload->getBody(), true);
+
+            return is_array($decoded) ? $decoded : [];
+        }
+
+        return [];
     }
 
     /**
