@@ -122,6 +122,39 @@ final class CommerceOrderLookupSecurityTest extends TestCase
             ->assertJsonPath('exact_result_entry.actions.page_href', "/result/{$attemptId}");
     }
 
+    public function test_lookup_repairs_exact_result_entry_when_result_exists_and_active_grant_is_present(): void
+    {
+        $orderNo = 'ord_lookup_mbti_repair_'.Str::lower(Str::random(8));
+        $userId = $this->createUser('owner@example.com');
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, self::ANON_OWNER, (string) $userId, 'MBTI');
+        $this->insertOrderForLookup($orderNo, 'owner@example.com', $attemptId, 'paid', (string) $userId);
+        $this->insertResult($attemptId);
+        $this->insertActiveGrant($attemptId, $orderNo, (string) $userId);
+
+        $response = $this->postJson('/api/v0.3/orders/lookup', [
+            'order_no' => $orderNo,
+            'email' => 'owner@example.com',
+        ]);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('mbti_access_hub_v1.access_state', 'ready')
+            ->assertJsonPath('mbti_access_hub_v1.report_access.can_view_report', true)
+            ->assertJsonPath('exact_result_entry.attempt_id', $attemptId)
+            ->assertJsonPath('exact_result_entry.access_state', 'ready')
+            ->assertJsonPath('exact_result_entry.report_state', 'ready')
+            ->assertJsonPath('exact_result_entry.reason_code', 'projection_repaired_from_entitlement')
+            ->assertJsonPath('exact_result_entry.ready_to_enter', true)
+            ->assertJsonPath('exact_result_entry.actions.page_href', "/result/{$attemptId}");
+
+        $this->assertDatabaseHas('unified_access_projections', [
+            'attempt_id' => $attemptId,
+            'access_state' => 'ready',
+            'report_state' => 'ready',
+            'reason_code' => 'projection_repaired_from_entitlement',
+        ]);
+    }
+
     public function test_lookup_with_token_owner_works_without_email(): void
     {
         $orderNo = 'ord_lookup_'.Str::lower(Str::random(8));
@@ -280,6 +313,27 @@ final class CommerceOrderLookupSecurityTest extends TestCase
             'payload_json' => json_encode($overrides['payload_json'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             'produced_at' => now(),
             'refreshed_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    private function insertActiveGrant(string $attemptId, string $orderNo, string $userId): void
+    {
+        DB::table('benefit_grants')->insert([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'user_id' => $userId,
+            'benefit_code' => 'MBTI_REPORT_FULL',
+            'scope' => 'attempt',
+            'attempt_id' => $attemptId,
+            'order_no' => $orderNo,
+            'status' => 'active',
+            'expires_at' => null,
+            'benefit_ref' => self::ANON_OWNER,
+            'benefit_type' => 'report_unlock',
+            'source_order_id' => (string) Str::uuid(),
+            'source_event_id' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
