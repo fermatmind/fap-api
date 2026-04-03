@@ -74,10 +74,26 @@ final class BigFiveScorerV3
         array $policy,
         array $ctx = []
     ): array {
+        if ($questionIndex === []) {
+            throw new \InvalidArgumentException('question index missing.');
+        }
+        ksort($questionIndex, SORT_NUMERIC);
+
         $facetValues = [];
         $rawSequence = [];
+        $expectedQuestionIds = [];
+        foreach ($questionIndex as $metaQuestionId => $meta) {
+            $id = (int) $metaQuestionId;
+            if ($id <= 0 || ! is_array($meta)) {
+                throw new \InvalidArgumentException("question meta missing: {$metaQuestionId}");
+            }
+            $expectedQuestionIds[] = $id;
+        }
+        if ($expectedQuestionIds === []) {
+            throw new \InvalidArgumentException('question index empty.');
+        }
 
-        for ($id = 1; $id <= 120; $id++) {
+        foreach ($expectedQuestionIds as $id) {
             if (! array_key_exists($id, $answersByQuestionId)) {
                 throw new \InvalidArgumentException("missing answer: {$id}");
             }
@@ -112,11 +128,11 @@ final class BigFiveScorerV3
         $facetSd = [];
         foreach (self::FACET_ORDER_30 as $facet) {
             $vals = $facetValues[$facet] ?? [];
-            if (count($vals) !== 4) {
+            if ($vals === []) {
                 throw new \InvalidArgumentException("facet item count invalid: {$facet}");
             }
 
-            $mean = array_sum($vals) / 4.0;
+            $mean = array_sum($vals) / count($vals);
             $sd = $this->populationSd($vals, $mean);
             $facetMeans[$facet] = round($mean, 2);
             $facetSd[$facet] = round($sd, 3);
@@ -204,7 +220,14 @@ final class BigFiveScorerV3
         $topStrength = $this->sortFacetByPercentile($facetsPercentile, true);
         $topGrowth = $this->sortFacetByPercentile($facetsPercentile, false);
 
-        $quality = $this->buildQuality($rawSequence, $facetValues, $facetMeans, $policy, $ctx);
+        $quality = $this->buildQuality(
+            $rawSequence,
+            $facetValues,
+            $facetMeans,
+            $policy,
+            $ctx,
+            count($expectedQuestionIds)
+        );
         if ($normStatus === 'MISSING') {
             $flags = is_array($quality['flags'] ?? null) ? $quality['flags'] : [];
             $flags[] = 'NORM_MISSING';
@@ -252,6 +275,7 @@ final class BigFiveScorerV3
 
         return [
             'scale_code' => 'BIG5_OCEAN',
+            'score_method' => (string) ($policy['score_method'] ?? 'big5_ipipneo120_v3'),
             'engine_version' => (string) ($policy['engine_version'] ?? 'big5_ipipneo120_v3.0.0'),
             'spec_version' => (string) ($policy['spec_version'] ?? 'big5_spec_2026Q1_v1'),
             'item_bank_version' => (string) ($policy['item_bank_version'] ?? 'big5_ipipneo120_bilingual_v1'),
@@ -471,6 +495,7 @@ final class BigFiveScorerV3
      * @param  array<string,float>  $facetMeans
      * @param  array<string,mixed>  $policy
      * @param  array<string,mixed>  $ctx
+     * @param  int  $expectedQuestionCount
      * @return array<string,mixed>
      */
     private function buildQuality(
@@ -478,13 +503,15 @@ final class BigFiveScorerV3
         array $facetValues,
         array $facetMeans,
         array $policy,
-        array $ctx
+        array $ctx,
+        int $expectedQuestionCount = 120
     ): array {
+        $expectedQuestionCount = max(1, $expectedQuestionCount);
         $answeredCount = count($rawSequence);
-        $completionRate = $answeredCount > 0 ? $answeredCount / 120.0 : 0.0;
+        $completionRate = $answeredCount > 0 ? $answeredCount / $expectedQuestionCount : 0.0;
 
         $timeSecondsTotal = $this->resolveTimeSecondsTotal($ctx);
-        $timePerItemAvg = $answeredCount > 0 ? ($timeSecondsTotal / 120.0) : 0.0;
+        $timePerItemAvg = $answeredCount > 0 ? ($timeSecondsTotal / $expectedQuestionCount) : 0.0;
 
         $neutralCount = 0;
         $extremeCount = 0;
@@ -497,8 +524,8 @@ final class BigFiveScorerV3
             }
         }
 
-        $neutralRate = $answeredCount > 0 ? ($neutralCount / 120.0) : 0.0;
-        $extremeRate = $answeredCount > 0 ? ($extremeCount / 120.0) : 0.0;
+        $neutralRate = $answeredCount > 0 ? ($neutralCount / $expectedQuestionCount) : 0.0;
+        $extremeRate = $answeredCount > 0 ? ($extremeCount / $expectedQuestionCount) : 0.0;
 
         $longstringMax = 0;
         $currLen = 0;

@@ -92,6 +92,49 @@ return [
             ],
         ],
     ],
+    'big5_forms' => [
+        'default_form_code' => 'big5_120',
+        'forms' => [
+            'big5_120' => [
+                'dir_version' => 'v1',
+                'question_count' => 120,
+                'aliases' => [
+                    '120',
+                    'standard_120',
+                ],
+                'public' => [
+                    'label' => [
+                        'zh' => '120题完整版',
+                        'en' => '120-question full version',
+                    ],
+                    'short_label' => [
+                        'zh' => '120题',
+                        'en' => '120 questions',
+                    ],
+                    'estimated_minutes' => 15,
+                ],
+            ],
+            'big5_90' => [
+                'dir_version' => 'v1-form-90',
+                'question_count' => 90,
+                'aliases' => [
+                    '90',
+                    'standard_90',
+                ],
+                'public' => [
+                    'label' => [
+                        'zh' => '90题标准版',
+                        'en' => '90-question standard version',
+                    ],
+                    'short_label' => [
+                        'zh' => '90题',
+                        'en' => '90 questions',
+                    ],
+                    'estimated_minutes' => 11,
+                ],
+            ],
+        ],
+    ],
 
     // ✅ 默认 region/locale 也钉死到 CN_MAINLAND/zh-CN（仍保留 fallback 机制）
     'default_region' => env('FAP_DEFAULT_REGION', 'CN_MAINLAND'),

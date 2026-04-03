@@ -6,6 +6,7 @@ use App\DTO\Attempts\StartAttemptDTO;
 use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use App\Services\Analytics\EventRecorder;
+use App\Services\BigFive\BigFiveFormCatalog;
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\ClinicalComboPackLoader;
 use App\Services\Content\ContentPacksIndex;
@@ -101,6 +102,8 @@ class AttemptStartService
         $resolvedFormCode = null;
         $resolvedNormVersion = null;
         $resolvedScoringSpecVersion = null;
+        $resolvedQualityVersion = null;
+        $resolvedQuestionCount = null;
         $contentPackageVersion = '';
 
         if (strtoupper($scaleCode) === 'MBTI') {
@@ -125,13 +128,30 @@ class AttemptStartService
             $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'mbti_144');
             $resolvedNormVersion = trim((string) ($resolvedForm['norm_version'] ?? ''));
             $resolvedScoringSpecVersion = trim((string) ($resolvedForm['scoring_spec_version'] ?? ''));
+            $resolvedQualityVersion = trim((string) ($resolvedForm['quality_version'] ?? ''));
+            $resolvedQuestionCount = (int) ($resolvedForm['question_count'] ?? 0);
+        } elseif (strtoupper($scaleCode) === 'BIG5_OCEAN') {
+            $resolvedForm = $this->bigFiveFormCatalog()->resolve($dto->formCode, $packId);
+            $packId = (string) ($resolvedForm['pack_id'] ?? $packId);
+            $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
+            $contentPackageVersion = (string) ($resolvedForm['content_package_version'] ?? '');
+            $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'big5_120');
+            $resolvedNormVersion = trim((string) ($resolvedForm['norm_version'] ?? ''));
+            $resolvedScoringSpecVersion = trim((string) ($resolvedForm['scoring_spec_version'] ?? ''));
+            $resolvedQualityVersion = trim((string) ($resolvedForm['quality_version'] ?? ''));
+            $resolvedQuestionCount = (int) ($resolvedForm['question_count'] ?? 0);
         }
 
         if ($packId === '' || $dirVersion === '') {
             throw new ApiProblemException(500, 'CONTENT_PACK_ERROR', 'scale pack not configured.');
         }
 
-        $questionCount = $this->resolveQuestionCount($scaleCode, $packId, $dirVersion);
+        $questionCount = $this->resolveQuestionCount(
+            $scaleCode,
+            $packId,
+            $dirVersion,
+            is_int($resolvedQuestionCount) ? $resolvedQuestionCount : null
+        );
         if ($contentPackageVersion === '') {
             $contentPackageVersion = $this->resolveContentPackageVersion($packId, $dirVersion);
         }
@@ -235,6 +255,9 @@ class AttemptStartService
         $answersMeta = is_array($answersSummaryMeta) ? $answersSummaryMeta : [];
         if ($resolvedFormCode !== null && $resolvedFormCode !== '') {
             $answersMeta['form_code'] = $resolvedFormCode;
+        }
+        if ($resolvedQualityVersion !== null && $resolvedQualityVersion !== '') {
+            $answersMeta['quality_version'] = $resolvedQualityVersion;
         }
         $manifestHash = $this->resolveScaleManifestHash($scaleCode, $dirVersion);
         if ($manifestHash !== '') {
@@ -419,6 +442,11 @@ class AttemptStartService
         return app(MbtiFormCatalog::class);
     }
 
+    private function bigFiveFormCatalog(): BigFiveFormCatalog
+    {
+        return app(BigFiveFormCatalog::class);
+    }
+
     private function identityWriteProjector(): ScaleIdentityWriteProjector
     {
         return app(ScaleIdentityWriteProjector::class);
@@ -429,12 +457,18 @@ class AttemptStartService
         return app(ScaleCodeInputGuard::class);
     }
 
-    private function resolveQuestionCount(string $scaleCode, string $packId, string $dirVersion): int
+    private function resolveQuestionCount(string $scaleCode, string $packId, string $dirVersion, ?int $expectedCount = null): int
     {
         if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
-            $questionIndex = $this->bigFivePackLoader->readQuestionIndexPreferred($dirVersion, 120);
+            $expected = is_int($expectedCount) && $expectedCount > 0 ? $expectedCount : 0;
+            $questionIndex = $this->bigFivePackLoader->readQuestionIndexPreferred($dirVersion, $expected);
             if (is_array($questionIndex)) {
-                return count($questionIndex);
+                $count = count($questionIndex);
+                if ($expected > 0 && $count !== $expected) {
+                    $this->logAndThrowContentPackError('BIG5_COMPILED_QUESTION_COUNT_MISMATCH', $packId, $dirVersion, 'questions.min.compiled.json');
+                }
+
+                return $count;
             }
 
             $compiled = $this->bigFivePackLoader->readCompiledJson('questions.compiled.json', $dirVersion);
@@ -445,6 +479,9 @@ class AttemptStartService
             $items = is_array($doc['items'] ?? null) ? $doc['items'] : null;
             if (! is_array($items)) {
                 $this->logAndThrowContentPackError('BIG5_COMPILED_QUESTIONS_INVALID', $packId, $dirVersion, 'questions.compiled.json');
+            }
+            if ($expected > 0 && count($items) !== $expected) {
+                $this->logAndThrowContentPackError('BIG5_COMPILED_QUESTION_COUNT_MISMATCH', $packId, $dirVersion, 'questions.compiled.json');
             }
 
             return count($items);
