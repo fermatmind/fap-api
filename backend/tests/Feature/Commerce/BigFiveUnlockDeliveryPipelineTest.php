@@ -267,6 +267,9 @@ final class BigFiveUnlockDeliveryPipelineTest extends TestCase
             ->assertJsonPath('order_no', $orderNo)
             ->assertJsonPath('attempt_id', $attemptId)
             ->assertJsonPath('status', 'paid')
+            ->assertJsonPath('big5_form_v1.form_code', 'big5_120')
+            ->assertJsonPath('big5_form_v1.question_count', 120)
+            ->assertJsonPath('big5_form_v1.scale_code', 'BIG5_OCEAN')
             ->assertJsonPath('delivery.can_view_report', true)
             ->assertJsonPath('delivery.report_url', "/api/v0.3/attempts/{$attemptId}/report")
             ->assertJsonPath('delivery.can_download_pdf', true)
@@ -287,6 +290,7 @@ final class BigFiveUnlockDeliveryPipelineTest extends TestCase
 
         $sentOrderRead->assertStatus(200)
             ->assertJsonPath('ok', true)
+            ->assertJsonPath('big5_form_v1.form_code', 'big5_120')
             ->assertJsonPath('delivery.contact_email_present', true)
             ->assertJsonPath('delivery.can_request_claim_email', true);
         $this->assertNotNull($sentOrderRead->json('delivery.last_delivery_email_sent_at'));

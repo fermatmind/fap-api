@@ -13,6 +13,7 @@ use App\Repositories\Report\ReportSubjectRepository;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\BigFive\BigFivePublicProjectionService;
+use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
 use App\Services\Access\AttemptUnlockProjectionRepairService;
 use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Mbti\MbtiActionJourneyContractService;
@@ -50,6 +51,7 @@ class AttemptReadController extends Controller
         private ReportGatekeeper $reportGatekeeper,
         private ReportPdfDocumentService $reportPdfDocumentService,
         private BigFivePublicProjectionService $bigFivePublicProjectionService,
+        private BigFivePublicFormSummaryBuilder $bigFivePublicFormSummaryBuilder,
         private MbtiPrivacyConsentContractService $mbtiPrivacyConsentContractService,
         private MbtiPublicProjectionService $mbtiPublicProjectionService,
         private MbtiPublicFormSummaryBuilder $mbtiPublicFormSummaryBuilder,
@@ -132,6 +134,9 @@ class AttemptReadController extends Controller
         $mbtiFormSummary = $scaleCode === 'MBTI'
             ? $this->resolveMbtiFormSummary($request, $attempt, $result)
             : null;
+        $big5FormSummary = $scaleCode === 'BIG5_OCEAN'
+            ? $this->resolveBigFiveFormSummary($request, $attempt, $result)
+            : null;
 
         if ($scaleCode === 'CLINICAL_COMBO_68') {
             $gate = $this->reportGatekeeper->resolve(
@@ -179,6 +184,7 @@ class AttemptReadController extends Controller
                 'attempt_id' => $attemptId,
                 'locked' => (bool) ($gate['locked'] ?? true),
                 ...$this->mbtiFormEventMeta($mbtiFormSummary),
+                ...$this->big5FormEventMeta($big5FormSummary),
             ]);
 
             $responsePayload = [
@@ -258,6 +264,7 @@ class AttemptReadController extends Controller
             'attempt_id' => $attemptId,
             ...$mbtiEventMeta,
             ...$this->mbtiFormEventMeta($mbtiFormSummary),
+            ...$this->big5FormEventMeta($big5FormSummary),
             ...$big5EventMeta,
         ]);
 
@@ -304,6 +311,9 @@ class AttemptReadController extends Controller
         if (is_array($mbtiFormSummary)) {
             $responsePayload['mbti_form_v1'] = $mbtiFormSummary;
         }
+        if (is_array($big5FormSummary)) {
+            $responsePayload['big5_form_v1'] = $big5FormSummary;
+        }
 
         return response()->json($responsePayload);
     }
@@ -347,6 +357,9 @@ class AttemptReadController extends Controller
         $attempt = $this->resolveAttemptForReportRead($request, $id, $scaleCode);
         $mbtiFormSummary = $scaleCode === 'MBTI'
             ? $this->resolveMbtiFormSummary($request, $attempt, $result)
+            : null;
+        $big5FormSummary = $scaleCode === 'BIG5_OCEAN'
+            ? $this->resolveBigFiveFormSummary($request, $attempt, $result)
             : null;
 
         $gate = $this->resolveReportGate(
@@ -423,6 +436,9 @@ class AttemptReadController extends Controller
                 $responsePayload['mbti_form_v1'] = $mbtiFormSummary;
             }
         } elseif ($scaleCode === 'BIG5_OCEAN') {
+            if (is_array($big5FormSummary)) {
+                $responsePayload['big5_form_v1'] = $big5FormSummary;
+            }
             $projection = data_get($responsePayload, 'report._meta.big5_public_projection_v1');
             if (! is_array($projection)) {
                 $projection = $this->bigFivePublicProjectionService->buildFromResult(
@@ -511,6 +527,7 @@ class AttemptReadController extends Controller
             'locked' => (bool) ($gate['locked'] ?? false),
             ...$mbtiEventMeta,
             ...$this->mbtiFormEventMeta($mbtiFormSummary),
+            ...$this->big5FormEventMeta($big5FormSummary),
             ...$big5EventMeta,
         ]);
 
@@ -562,6 +579,9 @@ class AttemptReadController extends Controller
         $mbtiFormSummary = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI'
             ? $this->resolveMbtiFormSummary($request, $attempt)
             : null;
+        $big5FormSummary = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'BIG5_OCEAN'
+            ? $this->resolveBigFiveFormSummary($request, $attempt)
+            : null;
         $responsePayload = [
             'ok' => true,
             'attempt_id' => (string) $attempt->id,
@@ -579,6 +599,9 @@ class AttemptReadController extends Controller
         ];
         if (is_array($mbtiFormSummary)) {
             $responsePayload['mbti_form_v1'] = $mbtiFormSummary;
+        }
+        if (is_array($big5FormSummary)) {
+            $responsePayload['big5_form_v1'] = $big5FormSummary;
         }
 
         return response()->json($responsePayload);
@@ -1725,6 +1748,9 @@ class AttemptReadController extends Controller
         $mbtiFormSummary = $scaleCode === 'MBTI'
             ? $this->resolveMbtiFormSummary($request, $attempt, $result)
             : null;
+        $big5FormSummary = $scaleCode === 'BIG5_OCEAN'
+            ? $this->resolveBigFiveFormSummary($request, $attempt, $result)
+            : null;
 
         $gate = $this->reportGatekeeper->resolve(
             $orgId,
@@ -1766,6 +1792,7 @@ class AttemptReadController extends Controller
             'locked' => $locked,
             'variant' => $variant,
             ...$this->mbtiFormEventMeta($mbtiFormSummary),
+            ...$this->big5FormEventMeta($big5FormSummary),
         ]);
 
         $generated = $this->reportPdfDocumentService->getOrGenerate($attempt, $gate, $result);
@@ -1796,10 +1823,33 @@ class AttemptReadController extends Controller
     }
 
     /**
+     * @return array<string,mixed>|null
+     */
+    private function resolveBigFiveFormSummary(Request $request, ?Attempt $attempt, ?Result $result = null): ?array
+    {
+        return $this->bigFivePublicFormSummaryBuilder->summarizeForAttempt(
+            $attempt,
+            $result,
+            $this->resolvePublicReadLocale($request, $attempt?->locale)
+        );
+    }
+
+    /**
      * @param  array<string,mixed>|null  $summary
      * @return array<string,string>
      */
     private function mbtiFormEventMeta(?array $summary): array
+    {
+        $formCode = trim((string) ($summary['form_code'] ?? ''));
+
+        return $formCode !== '' ? ['form_code' => $formCode] : [];
+    }
+
+    /**
+     * @param  array<string,mixed>|null  $summary
+     * @return array<string,string>
+     */
+    private function big5FormEventMeta(?array $summary): array
     {
         $formCode = trim((string) ($summary['form_code'] ?? ''));
 
