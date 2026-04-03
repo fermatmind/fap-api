@@ -82,6 +82,13 @@ final class CommerceOrderLookupSecurityTest extends TestCase
             ],
         ]);
         $this->insertResult($attemptId);
+        DB::table('attempts')->where('id', $attemptId)->update([
+            'question_count' => 93,
+            'answers_summary_json' => json_encode(['stage' => 'seed'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'dir_version' => 'MBTI-CN-v0.3-form-93',
+            'content_package_version' => 'v0.3-form-93',
+            'scoring_spec_version' => '2026.01.mbti_93',
+        ]);
         $this->insertProjection($attemptId, [
             'access_state' => 'ready',
             'report_state' => 'ready',
@@ -101,7 +108,10 @@ final class CommerceOrderLookupSecurityTest extends TestCase
         ]);
 
         $response->assertStatus(200)
+            ->assertJsonPath('mbti_form_v1.form_code', 'mbti_93')
+            ->assertJsonPath('mbti_form_v1.question_count', 93)
             ->assertJsonPath('mbti_access_hub_v1.access_state', 'ready')
+            ->assertJsonPath('mbti_access_hub_v1.mbti_form_v1.form_code', 'mbti_93')
             ->assertJsonPath('mbti_access_hub_v1.report_access.can_view_report', true)
             ->assertJsonPath('mbti_access_hub_v1.report_access.attempt_id', $attemptId)
             ->assertJsonPath('mbti_access_hub_v1.report_access.order_no', $orderNo)
@@ -118,6 +128,7 @@ final class CommerceOrderLookupSecurityTest extends TestCase
             ->assertJsonPath('mbti_access_hub_v1.workspace_lite.entry_kind', 'mbti_history')
             ->assertJsonPath('mbti_access_hub_v1.workspace_lite.attempt_id', $attemptId)
             ->assertJsonPath('exact_result_entry.attempt_id', $attemptId)
+            ->assertJsonPath('exact_result_entry.mbti_form_v1.form_code', 'mbti_93')
             ->assertJsonPath('exact_result_entry.ready_to_enter', true)
             ->assertJsonPath('exact_result_entry.actions.page_href', "/result/{$attemptId}");
     }
@@ -240,6 +251,8 @@ final class CommerceOrderLookupSecurityTest extends TestCase
         ?string $userId = null,
         string $scaleCode = 'BIG5_OCEAN'
     ): void {
+        $isMbti = strtoupper($scaleCode) === 'MBTI';
+
         DB::table('attempts')->insert([
             'id' => $attemptId,
             'ticket_code' => 'FMT-'.strtoupper(substr(str_replace('-', '', $attemptId), 0, 8)),
@@ -250,17 +263,17 @@ final class CommerceOrderLookupSecurityTest extends TestCase
             'scale_version' => 'v0.3',
             'region' => 'CN_MAINLAND',
             'locale' => 'zh-CN',
-            'question_count' => 120,
+            'question_count' => $isMbti ? 144 : 120,
             'answers_summary_json' => json_encode(['stage' => 'seed'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
             'client_platform' => 'test',
             'client_version' => '1.0.0',
             'channel' => 'test',
             'started_at' => now()->subMinute(),
             'submitted_at' => now(),
-            'pack_id' => 'BIG5_OCEAN',
-            'dir_version' => 'v1',
-            'content_package_version' => 'v1',
-            'scoring_spec_version' => 'big5_spec_2026Q1_v1',
+            'pack_id' => $isMbti ? (string) config('content_packs.default_pack_id') : 'BIG5_OCEAN',
+            'dir_version' => $isMbti ? 'MBTI-CN-v0.3' : 'v1',
+            'content_package_version' => $isMbti ? 'v0.3' : 'v1',
+            'scoring_spec_version' => $isMbti ? '2026.01.mbti_144' : 'big5_spec_2026Q1_v1',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

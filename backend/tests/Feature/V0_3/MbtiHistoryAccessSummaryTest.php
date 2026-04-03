@@ -28,14 +28,14 @@ final class MbtiHistoryAccessSummaryTest extends TestCase
         $this->seedUser($userId);
         $token = $this->seedFmToken($anonId, $userId);
 
-        $previewAttemptId = $this->seedMbtiAttempt($anonId, (string) $userId, 'ENFP-T', now()->subDay());
-        $fullAttemptId = $this->seedMbtiAttempt($anonId, (string) $userId, 'INTJ-A', now());
+        $previewAttemptId = $this->seedMbtiAttempt($anonId, (string) $userId, 'ENFP-T', now()->subDay(), 'mbti_93');
+        $fullAttemptId = $this->seedMbtiAttempt($anonId, (string) $userId, 'INTJ-A', now(), 'mbti_144');
         $processingAttemptId = $this->seedMbtiAttempt($anonId, (string) $userId, 'ISTP-A', now()->subDays(2));
         $restoringAttemptId = $this->seedMbtiAttempt($anonId, (string) $userId, 'INFJ-T', now()->subDays(3));
         $unavailableAttemptId = $this->seedMbtiAttempt($anonId, (string) $userId, 'INFP-T', now()->subDays(4));
 
-        $this->seedMbtiResult($previewAttemptId, 'ENFP-T');
-        $this->seedMbtiResult($fullAttemptId, 'INTJ-A');
+        $this->seedMbtiResult($previewAttemptId, 'ENFP-T', 'mbti_93');
+        $this->seedMbtiResult($fullAttemptId, 'INTJ-A', 'mbti_144');
         $this->seedMbtiResult($processingAttemptId, 'ISTP-A');
         $this->seedMbtiResult($restoringAttemptId, 'INFJ-T');
         $this->seedMbtiResult($unavailableAttemptId, 'INFP-T');
@@ -124,6 +124,8 @@ final class MbtiHistoryAccessSummaryTest extends TestCase
         $response->assertJsonPath('items.0.access_summary.actions.wait_href', null);
         $response->assertJsonPath('items.0.access_summary.actions.history_href', '/history/mbti');
         $response->assertJsonPath('items.0.access_summary.actions.lookup_href', '/orders/lookup');
+        $response->assertJsonPath('items.0.mbti_form_v1.form_code', 'mbti_144');
+        $response->assertJsonPath('items.0.mbti_form_v1.short_label', '144题');
 
         $response->assertJsonPath('items.1.attempt_id', $previewAttemptId);
         $response->assertJsonPath('items.1.type_code', 'ENFP-T');
@@ -141,6 +143,8 @@ final class MbtiHistoryAccessSummaryTest extends TestCase
         $response->assertJsonPath('items.1.access_summary.actions.wait_href', null);
         $response->assertJsonPath('items.1.access_summary.actions.history_href', '/history/mbti');
         $response->assertJsonPath('items.1.access_summary.actions.lookup_href', '/orders/lookup');
+        $response->assertJsonPath('items.1.mbti_form_v1.form_code', 'mbti_93');
+        $response->assertJsonPath('items.1.mbti_form_v1.short_label', '93题');
 
         $response->assertJsonPath('items.2.attempt_id', $processingAttemptId);
         $response->assertJsonPath('items.2.type_code', 'ISTP-A');
@@ -179,9 +183,16 @@ final class MbtiHistoryAccessSummaryTest extends TestCase
         $response->assertJsonPath('items.4.access_summary.actions.lookup_href', '/orders/lookup');
     }
 
-    private function seedMbtiAttempt(string $anonId, string $userId, string $typeCode, \DateTimeInterface $submittedAt): string
+    private function seedMbtiAttempt(
+        string $anonId,
+        string $userId,
+        string $typeCode,
+        \DateTimeInterface $submittedAt,
+        string $formCode = 'mbti_144'
+    ): string
     {
         $attemptId = (string) Str::uuid();
+        $is93 = $formCode === 'mbti_93';
 
         Attempt::create([
             'id' => $attemptId,
@@ -194,25 +205,27 @@ final class MbtiHistoryAccessSummaryTest extends TestCase
             'scale_version' => 'v0.3',
             'region' => 'CN_MAINLAND',
             'locale' => 'zh-CN',
-            'question_count' => 144,
-            'answers_summary_json' => ['seed' => true],
+            'question_count' => $is93 ? 93 : 144,
+            'answers_summary_json' => ['seed' => true, 'meta' => ['form_code' => $formCode]],
             'client_platform' => 'test',
             'client_version' => '1.0.0',
             'channel' => 'test',
             'started_at' => (clone $submittedAt)->modify('-10 minutes'),
             'submitted_at' => $submittedAt,
             'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
-            'dir_version' => 'MBTI-CN-v0.3',
-            'content_package_version' => 'v0.3',
-            'scoring_spec_version' => '2026.01',
+            'dir_version' => $is93 ? 'MBTI-CN-v0.3-form-93' : 'MBTI-CN-v0.3',
+            'content_package_version' => $is93 ? 'v0.3-form-93' : 'v0.3',
+            'scoring_spec_version' => $is93 ? '2026.01.mbti_93' : '2026.01.mbti_144',
             'type_code' => $typeCode,
         ]);
 
         return $attemptId;
     }
 
-    private function seedMbtiResult(string $attemptId, string $typeCode): void
+    private function seedMbtiResult(string $attemptId, string $typeCode, string $formCode = 'mbti_144'): void
     {
+        $is93 = $formCode === 'mbti_93';
+
         Result::create([
             'id' => (string) Str::uuid(),
             'org_id' => 0,
@@ -230,11 +243,11 @@ final class MbtiHistoryAccessSummaryTest extends TestCase
             ],
             'scores_pct' => ['EI' => 50, 'SN' => 50, 'TF' => 50, 'JP' => 50, 'AT' => 50],
             'axis_states' => ['EI' => 'clear', 'SN' => 'clear', 'TF' => 'clear', 'JP' => 'clear', 'AT' => 'clear'],
-            'content_package_version' => 'v0.3',
-            'result_json' => ['type_code' => $typeCode],
+            'content_package_version' => $is93 ? 'v0.3-form-93' : 'v0.3',
+            'result_json' => ['type_code' => $typeCode, 'meta' => ['form_code' => $formCode]],
             'pack_id' => 'MBTI.cn-mainland.zh-CN.v0.3',
-            'dir_version' => 'MBTI-CN-v0.3',
-            'scoring_spec_version' => '2026.01',
+            'dir_version' => $is93 ? 'MBTI-CN-v0.3-form-93' : 'MBTI-CN-v0.3',
+            'scoring_spec_version' => $is93 ? '2026.01.mbti_93' : '2026.01.mbti_144',
             'report_engine_version' => 'v1.2',
             'is_valid' => true,
             'computed_at' => now(),

@@ -40,9 +40,10 @@ final class AttemptPublicReportReadHotfixTest extends TestCase
         return $token;
     }
 
-    private function createAttempt(string $attemptId, string $scaleCode, string $anonId): void
+    private function createAttempt(string $attemptId, string $scaleCode, string $anonId, string $formCode = 'mbti_144'): void
     {
         $isMbti = $scaleCode === 'MBTI';
+        $isMbti93 = $isMbti && $formCode === 'mbti_93';
 
         Attempt::create([
             'id' => $attemptId,
@@ -52,21 +53,22 @@ final class AttemptPublicReportReadHotfixTest extends TestCase
             'scale_version' => 'v0.3',
             'region' => 'CN_MAINLAND',
             'locale' => 'zh-CN',
-            'question_count' => $isMbti ? 144 : 20,
+            'question_count' => $isMbti ? ($isMbti93 ? 93 : 144) : 20,
             'client_platform' => 'test',
-            'answers_summary_json' => ['stage' => 'seed'],
+            'answers_summary_json' => $isMbti ? ['stage' => 'seed', 'meta' => ['form_code' => $formCode]] : ['stage' => 'seed'],
             'started_at' => now(),
             'submitted_at' => now(),
             'pack_id' => $isMbti ? (string) config('content_packs.default_pack_id') : "{$scaleCode}.pack",
-            'dir_version' => $isMbti ? 'MBTI-CN-v0.3' : "{$scaleCode}.dir",
-            'content_package_version' => 'attempt-v1',
-            'scoring_spec_version' => 'attempt-score-v1',
+            'dir_version' => $isMbti ? ($isMbti93 ? 'MBTI-CN-v0.3-form-93' : 'MBTI-CN-v0.3') : "{$scaleCode}.dir",
+            'content_package_version' => $isMbti ? ($isMbti93 ? 'v0.3-form-93' : 'v0.3') : 'attempt-v1',
+            'scoring_spec_version' => $isMbti ? ($isMbti93 ? '2026.01.mbti_93' : '2026.01.mbti_144') : 'attempt-score-v1',
         ]);
     }
 
-    private function createResult(string $attemptId, string $scaleCode): void
+    private function createResult(string $attemptId, string $scaleCode, string $formCode = 'mbti_144'): void
     {
         $isMbti = $scaleCode === 'MBTI';
+        $isMbti93 = $isMbti && $formCode === 'mbti_93';
 
         Result::create([
             'id' => (string) Str::uuid(),
@@ -102,7 +104,7 @@ final class AttemptPublicReportReadHotfixTest extends TestCase
                     'AT' => 'clear',
                 ]
                 : [],
-            'content_package_version' => 'result-v1',
+            'content_package_version' => $isMbti ? ($isMbti93 ? 'v0.3-form-93' : 'v0.3') : 'result-v1',
             'result_json' => $isMbti
                 ? [
                     'raw_score' => 0,
@@ -125,6 +127,7 @@ final class AttemptPublicReportReadHotfixTest extends TestCase
                             'AT' => 'clear',
                         ],
                     ],
+                    'meta' => ['form_code' => $formCode],
                 ]
                 : [
                     'scale_code' => 'SDS_20',
@@ -134,8 +137,8 @@ final class AttemptPublicReportReadHotfixTest extends TestCase
                     'sections' => [],
                 ],
             'pack_id' => $isMbti ? (string) config('content_packs.default_pack_id') : "{$scaleCode}.pack",
-            'dir_version' => $isMbti ? 'MBTI-CN-v0.3' : "{$scaleCode}.dir",
-            'scoring_spec_version' => 'result-score-v1',
+            'dir_version' => $isMbti ? ($isMbti93 ? 'MBTI-CN-v0.3-form-93' : 'MBTI-CN-v0.3') : "{$scaleCode}.dir",
+            'scoring_spec_version' => $isMbti ? ($isMbti93 ? '2026.01.mbti_93' : '2026.01.mbti_144') : 'result-score-v1',
             'report_engine_version' => 'v1.2',
             'is_valid' => true,
             'computed_at' => now(),
@@ -218,6 +221,9 @@ final class AttemptPublicReportReadHotfixTest extends TestCase
         $response->assertJsonPath('ok', true);
         $response->assertJsonPath('scale_code', 'MBTI');
         $response->assertJsonPath('meta.scale_code', 'MBTI');
+        $response->assertJsonPath('mbti_form_v1.form_code', 'mbti_144');
+        $response->assertJsonPath('mbti_form_v1.question_count', 144);
+        $response->assertJsonPath('mbti_form_v1.scale_code', 'MBTI');
         $this->assertStringNotContainsString('ATTEMPT_NOT_FOUND', (string) $response->getContent());
     }
 

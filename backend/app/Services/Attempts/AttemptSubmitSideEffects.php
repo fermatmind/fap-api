@@ -261,6 +261,7 @@ final class AttemptSubmitSideEffects
             'scale_uid' => (string) ($postCommitCtx['scale_uid'] ?? ''),
             'pack_id' => (string) ($postCommitCtx['pack_id'] ?? ''),
             'dir_version' => (string) ($postCommitCtx['dir_version'] ?? ''),
+            'form_code' => (string) ($postCommitCtx['form_code'] ?? ''),
             'attempt_id' => $attemptId,
         ], [
             'org_id' => $ctx->orgId(),
@@ -271,6 +272,7 @@ final class AttemptSubmitSideEffects
             'scale_uid' => (string) ($postCommitCtx['scale_uid'] ?? ''),
             'pack_id' => (string) ($postCommitCtx['pack_id'] ?? ''),
             'dir_version' => (string) ($postCommitCtx['dir_version'] ?? ''),
+            'form_code' => (string) ($postCommitCtx['form_code'] ?? ''),
         ]);
     }
 

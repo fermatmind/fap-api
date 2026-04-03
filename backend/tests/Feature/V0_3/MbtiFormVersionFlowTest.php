@@ -106,6 +106,14 @@ final class MbtiFormVersionFlowTest extends TestCase
         $this->assertSame('mbti.cn-mainland.zh-CN.2026.form93.provisional', (string) $attempt->norm_version);
         $this->assertSame(93, (int) $attempt->question_count);
         $this->assertSame('mbti_93', data_get($attempt->answers_summary_json, 'meta.form_code'));
+
+        $startEvent = DB::table('events')
+            ->where('event_code', 'test_start')
+            ->where('attempt_id', $attemptId)
+            ->latest('created_at')
+            ->first();
+        $this->assertNotNull($startEvent);
+        $this->assertSame('mbti_93', (string) data_get(json_decode((string) ($startEvent->meta_json ?? '{}'), true), 'form_code'));
     }
 
     public function test_mbti_submit_scores_against_93_source(): void
@@ -171,5 +179,13 @@ final class MbtiFormVersionFlowTest extends TestCase
         $this->assertSame('MBTI-CN-v0.3-form-93', (string) ($result->dir_version ?? ''));
         $this->assertSame('v0.3-form-93', (string) ($result->content_package_version ?? ''));
         $this->assertSame('2026.01.mbti_93', (string) ($result->scoring_spec_version ?? ''));
+
+        $submitEvent = DB::table('events')
+            ->where('event_code', 'test_submit')
+            ->where('attempt_id', $attemptId)
+            ->latest('created_at')
+            ->first();
+        $this->assertNotNull($submitEvent);
+        $this->assertSame('mbti_93', (string) data_get(json_decode((string) ($submitEvent->meta_json ?? '{}'), true), 'form_code'));
     }
 }

@@ -120,6 +120,7 @@ class AttemptSubmitTxService
                             'pack_id' => (string) ($locked->pack_id ?? $packId),
                             'dir_version' => (string) ($locked->dir_version ?? $dirVersion),
                             'scoring_spec_version' => (string) ($locked->scoring_spec_version ?? $scoringSpecVersion),
+                            'form_code' => $this->extractStoredFormCode($locked->answers_summary_json, (string) ($locked->dir_version ?? $dirVersion)),
                             'invite_token' => $inviteToken,
                             'share_id' => $shareId,
                             'compare_invite_id' => $compareInviteId,
@@ -152,6 +153,7 @@ class AttemptSubmitTxService
                         'pack_id' => (string) ($locked->pack_id ?? $packId),
                         'dir_version' => (string) ($locked->dir_version ?? $dirVersion),
                         'scoring_spec_version' => (string) ($locked->scoring_spec_version ?? $scoringSpecVersion),
+                        'form_code' => $this->extractStoredFormCode($locked->answers_summary_json, (string) ($locked->dir_version ?? $dirVersion)),
                         'invite_token' => $inviteToken,
                         'share_id' => $shareId,
                         'compare_invite_id' => $compareInviteId,
@@ -448,6 +450,7 @@ class AttemptSubmitTxService
                 'pack_id' => $packId,
                 'dir_version' => $dirVersion,
                 'scoring_spec_version' => $scoringSpecVersion,
+                'form_code' => $this->extractStoredFormCode($locked->answers_summary_json, $dirVersion),
                 'invite_token' => $inviteToken,
                 'share_id' => $shareId,
                 'compare_invite_id' => $compareInviteId,
@@ -469,5 +472,30 @@ class AttemptSubmitTxService
             'response_payload' => $responsePayload,
             'post_commit_ctx' => $postCommitCtx,
         ];
+    }
+
+    private function extractStoredFormCode(mixed $answersSummaryJson, string $dirVersion): string
+    {
+        $stored = trim((string) data_get($answersSummaryJson, 'meta.form_code', ''));
+        if ($stored !== '') {
+            return $stored;
+        }
+
+        $forms = config('content_packs.mbti_forms.forms', []);
+        if (! is_array($forms)) {
+            return '';
+        }
+
+        $normalizedDirVersion = trim($dirVersion);
+        foreach ($forms as $formCode => $config) {
+            if (! is_array($config)) {
+                continue;
+            }
+            if ($normalizedDirVersion !== '' && $normalizedDirVersion === trim((string) ($config['dir_version'] ?? ''))) {
+                return trim((string) $formCode);
+            }
+        }
+
+        return '';
     }
 }
