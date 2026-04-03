@@ -15,6 +15,10 @@ class StartAttemptRequest extends FormRequest
     {
         $meta = $this->input('meta');
         $meta = is_array($meta) ? $meta : [];
+        $formCode = $this->normalizeString(
+            $this->input('form_code', $this->input('form')),
+            64
+        );
 
         $normalizedUtm = $this->normalizeUtm($this->input('utm'));
         $flatUtm = $this->normalizeFlatUtm();
@@ -44,9 +48,14 @@ class StartAttemptRequest extends FormRequest
             $meta['referrer'] = $referrer;
         }
 
-        $this->merge([
+        $merged = [
             'meta' => $this->filterMeta($meta),
-        ]);
+        ];
+        if ($formCode !== null) {
+            $merged['form_code'] = $formCode;
+        }
+
+        $this->merge($merged);
     }
 
     public function rules(): array
@@ -60,6 +69,7 @@ class StartAttemptRequest extends FormRequest
             'client_version' => ['nullable', 'string', 'max:32'],
             'channel' => ['nullable', 'string', 'max:32'],
             'referrer' => ['nullable', 'string', 'max:255'],
+            'form_code' => ['nullable', 'string', 'max:64'],
             'meta' => ['sometimes', 'array'],
             'share_id' => ['nullable', 'string', 'max:128'],
             'compare_invite_id' => ['nullable', 'string', 'max:128'],

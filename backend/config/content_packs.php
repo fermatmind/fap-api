@@ -50,6 +50,26 @@ return [
             'MBTI_PERSONALITY_TEST_16_TYPES-CN-v0.3',
         ],
     ],
+    'mbti_forms' => [
+        'default_form_code' => 'mbti_144',
+        'forms' => [
+            'mbti_144' => [
+                'dir_version' => 'MBTI-CN-v0.3',
+                'aliases' => [
+                    '144',
+                    'standard_144',
+                    'pro_144',
+                ],
+            ],
+            'mbti_93' => [
+                'dir_version' => 'MBTI-CN-v0.3-form-93',
+                'aliases' => [
+                    '93',
+                    'standard_93',
+                ],
+            ],
+        ],
+    ],
 
     // ✅ 默认 region/locale 也钉死到 CN_MAINLAND/zh-CN（仍保留 fallback 机制）
     'default_region' => env('FAP_DEFAULT_REGION', 'CN_MAINLAND'),

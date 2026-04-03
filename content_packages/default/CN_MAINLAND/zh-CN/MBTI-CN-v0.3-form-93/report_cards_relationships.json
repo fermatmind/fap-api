@@ -1,0 +1,675 @@
+{
+  "schema": "fap.report.cards.v1",
+  "engine": "v1.2",
+  "section": "relationships",
+  "meta": {
+    "package": "MBTI-CN-v0.3",
+    "updated_at": "2025-12-21",
+    "change_id": "LAUNCH-V1-REPORT-CARDS-RELATIONSHIPS",
+    "notes": "Launch v1.0: relationships cards production pool (23). 10 axis directional strong-only (min_delta=12) + 6 axis intro guardrail-friendly (min_delta=0, AT split A/T) + 7 core fallback-safe. Tags are primary selector hooks; match rules are optional constraints."
+  },
+  "rules": {
+    "min_cards": 2,
+    "target_cards": 3,
+    "max_cards": 6,
+    "fallback_tags": [
+      "kind:core"
+    ],
+    "sort": [
+      "priority_desc"
+    ]
+  },
+  "items": [
+    {
+      "id": "rel_axis_EI_E_strong",
+      "section": "relationships",
+      "title": "E 偏好较强：通过表达与互动建立关系温度",
+      "desc": "你更容易通过主动交流、即时回应和在场感建立连接，关系里的节奏通常由互动带动。",
+      "bullets": [
+        "你习惯在对话里确认彼此状态",
+        "你会用回应速度表达重视",
+        "关系热度通常来自持续互动"
+      ],
+      "tips": [
+        "高频沟通也要留出倾听空间",
+        "重要关系里别只顾推进，也记得总结感受"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:EI:E",
+        "state:strong",
+        "topic:connection"
+      ],
+      "priority": 96,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "E",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_axis_EI_I_strong",
+      "section": "relationships",
+      "title": "I 偏好较强：通过深度与稳定建立关系信任",
+      "desc": "你更偏好低噪音、高质量的连接方式，关系通常在长期理解与稳定陪伴中慢慢变深。",
+      "bullets": [
+        "你不靠高频互动维持关系",
+        "你更看重被真正理解的感觉",
+        "深度交流比表层热闹更能打动你"
+      ],
+      "tips": [
+        "把真实想法说出来，不要只停在心里",
+        "给重要关系一个固定的深聊窗口"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:EI:I",
+        "state:strong",
+        "topic:boundary"
+      ],
+      "priority": 96,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "I",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_axis_SN_S_strong",
+      "section": "relationships",
+      "title": "S 偏好较强：通过实际照顾与具体行动表达在意",
+      "desc": "你更容易用现实行动、日常细节和稳定兑现来建立信任，关系中的可靠感很强。",
+      "bullets": [
+        "你会记得具体需要和承诺",
+        "实际帮助比空泛表态更自然",
+        "你重视关系里的稳定与秩序"
+      ],
+      "tips": [
+        "照顾别人时也要表达自己的需要",
+        "别只做事，也记得说明你的心意"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:SN:S",
+        "state:strong",
+        "topic:security"
+      ],
+      "priority": 95,
+      "match": {
+        "axis": {
+          "dim": "SN",
+          "side": "S",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_axis_SN_N_strong",
+      "section": "relationships",
+      "title": "N 偏好较强：通过理解深意与未来可能建立连接",
+      "desc": "你更关注关系背后的意义、方向与成长感，愿意在精神共鸣里建立更深的链接。",
+      "bullets": [
+        "你会在意关系是否有共同愿景",
+        "深层理解比表面配合更重要",
+        "你容易从细节里读出更深含义"
+      ],
+      "tips": [
+        "深度理解之外，也要确认现实期待",
+        "把想象中的关系样子讲得更具体"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:SN:N",
+        "state:strong",
+        "topic:meaning"
+      ],
+      "priority": 95,
+      "match": {
+        "axis": {
+          "dim": "SN",
+          "side": "N",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_axis_TF_T_strong",
+      "section": "relationships",
+      "title": "T 偏好较强：通过清晰边界与问题解决维持关系稳定",
+      "desc": "你更习惯通过说清规则、责任和解决办法来保护关系，希望关系能经得起现实检验。",
+      "bullets": [
+        "你会先问问题到底出在哪里",
+        "边界清晰会让你更安心",
+        "你重视关系里的公平与一致性"
+      ],
+      "tips": [
+        "表达判断时补一句感受层面的理解",
+        "不要只修问题，也记得修复情绪余波"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:TF:T",
+        "state:strong",
+        "topic:conflict"
+      ],
+      "priority": 94,
+      "match": {
+        "axis": {
+          "dim": "TF",
+          "side": "T",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_axis_TF_F_strong",
+      "section": "relationships",
+      "title": "F 偏好较强：通过感受共鸣与体贴回应建立安全感",
+      "desc": "你更容易从情绪、体验和价值一致性出发理解关系，因此很重视被看见和被理解。",
+      "bullets": [
+        "你会细致感知关系中的温度变化",
+        "被理解会显著提高你的投入度",
+        "你擅长用体贴维护关系连接"
+      ],
+      "tips": [
+        "别只照顾别人，也把自己的边界说清",
+        "把委屈翻译成清楚请求，而不是靠猜测"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:TF:F",
+        "state:strong",
+        "topic:care"
+      ],
+      "priority": 94,
+      "match": {
+        "axis": {
+          "dim": "TF",
+          "side": "F",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_axis_JP_J_strong",
+      "section": "relationships",
+      "title": "J 偏好较强：通过稳定承诺和明确节奏建立信任",
+      "desc": "你更重视回应一致性、时间安排和关系里的可预期感，稳定会让你更安心。",
+      "bullets": [
+        "说到做到会是你建立关系的核心方式",
+        "关系有秩序时，你会更放松",
+        "你重视约定、节奏和长期一致性"
+      ],
+      "tips": [
+        "给关系留一点弹性，不必事事一次定型",
+        "重要承诺量力而行，少承诺多兑现"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:JP:J",
+        "state:strong",
+        "topic:commitment"
+      ],
+      "priority": 93,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "J",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_axis_JP_P_strong",
+      "section": "relationships",
+      "title": "P 偏好较强：通过自发性和开放空间维持关系活力",
+      "desc": "你更喜欢关系里保有呼吸感和新鲜度，太硬的规则会削弱你的自在和投入。",
+      "bullets": [
+        "弹性空间会让你更愿意靠近",
+        "你很在意关系里的真实流动感",
+        "临场交流通常比预设流程更自然"
+      ],
+      "tips": [
+        "自由和回应都重要，别只保留前者",
+        "把“之后再说”变成一个明确时间点"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:JP:P",
+        "state:strong",
+        "topic:freedom"
+      ],
+      "priority": 93,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "P",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_axis_AT_A_strong",
+      "section": "relationships",
+      "title": "A 偏好较强：通过稳定情绪给关系带来安全感",
+      "desc": "你通常更能在关系波动时维持基本冷静，因此容易成为情绪上的稳定器。",
+      "bullets": [
+        "你不容易被短期起伏彻底带走",
+        "关系紧张时，你更能先稳住场面",
+        "稳定回应会增强别人对你的信任"
+      ],
+      "tips": [
+        "稳定之外，也要主动表达脆弱和需要",
+        "不要因为能扛，就让很多事都压后处理"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:AT:A",
+        "state:strong",
+        "topic:stability"
+      ],
+      "priority": 92,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "A",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_axis_AT_T_strong",
+      "section": "relationships",
+      "title": "T 偏好较强：通过敏锐感受提前察觉关系变化",
+      "desc": "你对细微情绪和关系张力更敏感，因此往往比别人更早意识到问题正在积累。",
+      "bullets": [
+        "你很会察觉语气、距离和反馈变化",
+        "你会不断校准自己在关系中的位置",
+        "细微失衡也容易触发你的关注"
+      ],
+      "tips": [
+        "把不安说成事实和需求，而不是反复猜测",
+        "只先讨论一个最重要的问题，避免情绪堆叠"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:AT:T",
+        "state:strong",
+        "topic:repair"
+      ],
+      "priority": 92,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "T",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_axis_EI_E_intro",
+      "section": "relationships",
+      "title": "E 这一倾向已出现：通过表达与互动建立关系温度",
+      "desc": "这一倾向已经开始稳定显现。你更容易通过主动交流、即时回应和在场感建立连接，关系里的节奏通常由互动带动。",
+      "bullets": [
+        "你习惯在对话里确认彼此状态",
+        "你会用回应速度表达重视",
+        "关系热度通常来自持续互动"
+      ],
+      "tips": [
+        "高频沟通也要留出倾听空间",
+        "重要关系里别只顾推进，也记得总结感受"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:EI:E",
+        "state:clear"
+      ],
+      "priority": 60,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "E",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_axis_EI_I_intro",
+      "section": "relationships",
+      "title": "I 这一倾向已出现：通过深度与稳定建立关系信任",
+      "desc": "这一倾向已经开始稳定显现。你更偏好低噪音、高质量的连接方式，关系通常在长期理解与稳定陪伴中慢慢变深。",
+      "bullets": [
+        "你不靠高频互动维持关系",
+        "你更看重被真正理解的感觉",
+        "深度交流比表层热闹更能打动你"
+      ],
+      "tips": [
+        "把真实想法说出来，不要只停在心里",
+        "给重要关系一个固定的深聊窗口"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:EI:I",
+        "state:clear"
+      ],
+      "priority": 60,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "I",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_axis_JP_J_intro",
+      "section": "relationships",
+      "title": "J 这一倾向已出现：通过稳定承诺和明确节奏建立信任",
+      "desc": "这一倾向已经开始稳定显现。你更重视回应一致性、时间安排和关系里的可预期感，稳定会让你更安心。",
+      "bullets": [
+        "说到做到会是你建立关系的核心方式",
+        "关系有秩序时，你会更放松",
+        "你重视约定、节奏和长期一致性"
+      ],
+      "tips": [
+        "给关系留一点弹性，不必事事一次定型",
+        "重要承诺量力而行，少承诺多兑现"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:JP:J",
+        "state:clear"
+      ],
+      "priority": 58,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "J",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_axis_JP_P_intro",
+      "section": "relationships",
+      "title": "P 这一倾向已出现：通过自发性和开放空间维持关系活力",
+      "desc": "这一倾向已经开始稳定显现。你更喜欢关系里保有呼吸感和新鲜度，太硬的规则会削弱你的自在和投入。",
+      "bullets": [
+        "弹性空间会让你更愿意靠近",
+        "你很在意关系里的真实流动感",
+        "临场交流通常比预设流程更自然"
+      ],
+      "tips": [
+        "自由和回应都重要，别只保留前者",
+        "把“之后再说”变成一个明确时间点"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:JP:P",
+        "state:clear"
+      ],
+      "priority": 58,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "P",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_axis_AT_A_intro",
+      "section": "relationships",
+      "title": "A 这一倾向已出现：通过稳定情绪给关系带来安全感",
+      "desc": "这一倾向已经开始稳定显现。你通常更能在关系波动时维持基本冷静，因此容易成为情绪上的稳定器。",
+      "bullets": [
+        "你不容易被短期起伏彻底带走",
+        "关系紧张时，你更能先稳住场面",
+        "稳定回应会增强别人对你的信任"
+      ],
+      "tips": [
+        "稳定之外，也要主动表达脆弱和需要",
+        "不要因为能扛，就让很多事都压后处理"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:AT:A",
+        "state:clear"
+      ],
+      "priority": 56,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "A",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_axis_AT_T_intro",
+      "section": "relationships",
+      "title": "T 这一倾向已出现：通过敏锐感受提前察觉关系变化",
+      "desc": "这一倾向已经开始稳定显现。你对细微情绪和关系张力更敏感，因此往往比别人更早意识到问题正在积累。",
+      "bullets": [
+        "你很会察觉语气、距离和反馈变化",
+        "你会不断校准自己在关系中的位置",
+        "细微失衡也容易触发你的关注"
+      ],
+      "tips": [
+        "把不安说成事实和需求，而不是反复猜测",
+        "只先讨论一个最重要的问题，避免情绪堆叠"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:AT:T",
+        "state:clear"
+      ],
+      "priority": 56,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "T",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_core_01",
+      "section": "relationships",
+      "title": "关系底盘：把期待说清楚，比让对方猜更有效",
+      "desc": "很多关系里的摩擦并不是不在乎，而是期待没有被翻译成具体、可理解、可回应的话。",
+      "bullets": [
+        "期待越具体，误会越少",
+        "关系质量常取决于表达清晰度",
+        "让对方猜测通常成本很高"
+      ],
+      "tips": [
+        "用“我希望”替代“你应该懂”",
+        "先说事实和感受，再说具体请求"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "topic:communication"
+      ],
+      "priority": 100,
+      "access_level": "preview",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_core_02",
+      "section": "relationships",
+      "title": "冲突并不可怕，关键是能否把它带回真正的问题",
+      "desc": "成熟关系不是没有矛盾，而是遇到分歧时仍能把注意力放回要解决的核心问题。",
+      "bullets": [
+        "先降温，才能真正讨论问题",
+        "复述对方诉求会明显降低误解",
+        "把问题说清比赢下争论更重要"
+      ],
+      "tips": [
+        "先确认彼此在意什么，再谈方案",
+        "冲突后留一次简短复盘，而不是只求翻篇"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:warm",
+        "topic:conflict"
+      ],
+      "priority": 96,
+      "access_level": "preview",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_core_03",
+      "section": "relationships",
+      "title": "边界感不是冷漠，而是让关系可以长期稳定",
+      "desc": "越能说明什么可以、什么不可以、什么会消耗你，关系越不容易被隐形压力拖垮。",
+      "bullets": [
+        "提前说边界比事后爆炸更温和",
+        "边界会保护双方，而不是只保护自己",
+        "长期关系尤其需要边界和规则"
+      ],
+      "tips": [
+        "把不舒服说成具体边界",
+        "用“我需要”替代“你总是”"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "topic:boundary"
+      ],
+      "priority": 94,
+      "access_level": "preview",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_core_04",
+      "section": "relationships",
+      "title": "亲密感常常来自稳定的小投入，而不是一次性的高峰",
+      "desc": "关系真正稳下来，依赖的是频率、回应和可被感知的在场感，而不是偶尔一次高强度表达。",
+      "bullets": [
+        "稳定回应会显著增强安全感",
+        "小而持续的投入更能拉近距离",
+        "可预测性会降低关系焦虑"
+      ],
+      "tips": [
+        "固定一个简单可持续的小仪式",
+        "再忙也给出一个明确回应时间"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:warm",
+        "topic:intimacy"
+      ],
+      "priority": 92,
+      "access_level": "preview",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_core_05",
+      "section": "relationships",
+      "title": "减少误会，往往靠及时确认，而不是默默测试",
+      "desc": "沉默、试探和冷处理很容易放大误读，真正有效的是把疑问和需求尽早说开。",
+      "bullets": [
+        "把担心说成问题，比憋着等答案更有效",
+        "及时确认能显著降低脑补成本",
+        "不必用读心来证明关系质量"
+      ],
+      "tips": [
+        "不确定时直接确认对方意思",
+        "把不满翻译成一个可回应的请求"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "topic:misunderstanding"
+      ],
+      "priority": 90,
+      "access_level": "preview",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_core_06",
+      "section": "relationships",
+      "title": "真正成熟的关系，一定包含修复能力",
+      "desc": "关系不是永远不出错，而是出错后能否道歉、复盘、调整，并重新回到信任轨道。",
+      "bullets": [
+        "修复机制比完美状态更重要",
+        "道歉的完整度会决定修复质量",
+        "只争对错会阻断真正修复"
+      ],
+      "tips": [
+        "道歉时说清行为、影响和下次做法",
+        "复盘只讨论行为，不攻击人格"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:warm",
+        "topic:repair"
+      ],
+      "priority": 88,
+      "access_level": "preview",
+      "module_code": "relationships"
+    },
+    {
+      "id": "rel_core_07",
+      "section": "relationships",
+      "title": "安全感来自一致性，而不是偶尔的热烈",
+      "desc": "说到做到、回应稳定、情绪不过度失控，这些长期一致的表现，才是关系里最能建立信任的部分。",
+      "bullets": [
+        "一致性能稳定降低关系焦虑",
+        "可预测感会让亲密关系更放心",
+        "长期兑现比短期热烈更能沉淀信任"
+      ],
+      "tips": [
+        "承诺量力而行，少承诺多兑现",
+        "情绪上来时先暂停，再回到问题本身"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "topic:security"
+      ],
+      "priority": 86,
+      "access_level": "preview",
+      "module_code": "relationships"
+    }
+  ]
+}

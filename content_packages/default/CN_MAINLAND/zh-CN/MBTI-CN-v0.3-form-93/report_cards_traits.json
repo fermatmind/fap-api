@@ -1,0 +1,730 @@
+{
+  "schema": "fap.report.cards.v1",
+  "engine": "v1.2",
+  "section": "traits",
+  "meta": {
+    "package": "MBTI-CN-v0.3",
+    "updated_at": "2025-12-21",
+    "change_id": "LAUNCH-V1-REPORT-CARDS-TRAITS",
+    "notes": "Launch v1.0: traits cards production pool (23). 10 axis directional strong-only (min_delta=12), 6 axis intro guardrail-friendly (min_delta=0, AT split into A/T), 7 core cards fallback-safe. Designed for 'Top3 strongest + guardrail(EI else JP)'."
+  },
+  "rules": {
+    "min_cards": 2,
+    "target_cards": 3,
+    "max_cards": 6,
+    "fallback_tags": [
+      "kind:core"
+    ],
+    "sort": [
+      "priority_desc"
+    ]
+  },
+  "items": [
+    {
+      "id": "traits_axis_EI_E_strong",
+      "section": "traits",
+      "title": "E 偏好较强：在互动中形成判断与推进",
+      "desc": "你更容易在交流现场整理思路，并通过互动迅速建立共识与行动节奏。",
+      "bullets": [
+        "讨论会明显提升你的判断速度",
+        "你习惯先把人和信息拉到同一场域",
+        "一旦连接建立，推进往往会随之提速"
+      ],
+      "tips": [
+        "重要议题先说结论，再补充细节",
+        "高频沟通后留一段独立整理时间"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:EI:E",
+        "state:strong"
+      ],
+      "priority": 96,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "E",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_axis_EI_I_strong",
+      "section": "traits",
+      "title": "I 偏好较强：在沉淀中形成清晰判断",
+      "desc": "你更依赖安静和独处完成信息整合，深度思考会显著提高你的判断质量。",
+      "bullets": [
+        "独立推演能让你更快抓住结构",
+        "你偏好先想透再表达",
+        "边界清晰时，你的稳定性会更强"
+      ],
+      "tips": [
+        "先输出结论提纲，再展开推理过程",
+        "为自己保留低打扰的整块时间"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:EI:I",
+        "state:strong"
+      ],
+      "priority": 96,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "I",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_axis_SN_S_strong",
+      "section": "traits",
+      "title": "S 偏好较强：以事实和细节稳住判断",
+      "desc": "你更信任可验证经验和当下事实，因此更容易把事情做得扎实、清楚、可复制。",
+      "bullets": [
+        "你会自然关注步骤与证据",
+        "细节到位能显著提升你的安全感",
+        "现实约束通常会先进入你的判断"
+      ],
+      "tips": [
+        "先确认目标，再展开细节执行",
+        "定期抬头看一次全局方向"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:SN:S",
+        "state:strong"
+      ],
+      "priority": 96,
+      "match": {
+        "axis": {
+          "dim": "SN",
+          "side": "S",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_axis_SN_N_strong",
+      "section": "traits",
+      "title": "N 偏好较强：以趋势和模式理解问题",
+      "desc": "你更容易从线索中提炼模式与长期走向，判断时会自然关注更大的图景。",
+      "bullets": [
+        "你会从细节里看到背后的结构",
+        "新路径和替代方案很容易进入你的脑海",
+        "面对不确定时，你常能先看到可能性"
+      ],
+      "tips": [
+        "给每个新想法补一个现实锚点",
+        "在发散后明确一个收束节点"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:SN:N",
+        "state:strong"
+      ],
+      "priority": 96,
+      "match": {
+        "axis": {
+          "dim": "SN",
+          "side": "N",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_axis_TF_T_strong",
+      "section": "traits",
+      "title": "T 偏好较强：以标准和逻辑做判断",
+      "desc": "你更习惯先澄清标准、因果和边界，结论通常建立在结构化推理之上。",
+      "bullets": [
+        "你会先问规则是否一致",
+        "问题一旦被讲清结构，你会很快做出判断",
+        "可复盘性对你很重要"
+      ],
+      "tips": [
+        "表达结论时同步说明判断标准",
+        "在讲逻辑之外，也补一句对人的影响"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:TF:T",
+        "state:strong"
+      ],
+      "priority": 95,
+      "match": {
+        "axis": {
+          "dim": "TF",
+          "side": "T",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_axis_TF_F_strong",
+      "section": "traits",
+      "title": "F 偏好较强：以感受和价值做判断",
+      "desc": "你会自然把人的体验、关系影响和价值一致性纳入判断，因此很重视决定的真实感受。",
+      "bullets": [
+        "你会先看这件事对人意味着什么",
+        "关系是否被照顾会影响你的判断",
+        "价值一致性是你投入的重要前提"
+      ],
+      "tips": [
+        "把感受翻译成具体需求会更容易落地",
+        "体贴之外，也要把边界说明白"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:TF:F",
+        "state:strong"
+      ],
+      "priority": 95,
+      "match": {
+        "axis": {
+          "dim": "TF",
+          "side": "F",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_axis_JP_J_strong",
+      "section": "traits",
+      "title": "J 偏好较强：以计划和秩序推进事情",
+      "desc": "你更偏好清晰节奏、明确节点和可预期推进，做事通常会先把路径立住。",
+      "bullets": [
+        "计划感能显著提高你的安全感",
+        "你会自然排优先级和完成标准",
+        "秩序一旦清楚，执行效率会明显提升"
+      ],
+      "tips": [
+        "在计划里预留一个调整窗口",
+        "把完成线说清楚，避免反复加码"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:JP:J",
+        "state:strong"
+      ],
+      "priority": 95,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "J",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_axis_JP_P_strong",
+      "section": "traits",
+      "title": "P 偏好较强：以弹性和试探寻找路径",
+      "desc": "你更愿意保留调整空间，通过观察变化和试做反馈来修正路径。",
+      "bullets": [
+        "你对新信息反应很快",
+        "灵活选择能帮你看到更多机会",
+        "你更愿意边做边校准，而不是一次定死"
+      ],
+      "tips": [
+        "先确认底线，再保留弹性",
+        "为关键事项设一个最晚收束时间"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:JP:P",
+        "state:strong"
+      ],
+      "priority": 95,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "P",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_axis_AT_A_strong",
+      "section": "traits",
+      "title": "A 偏好较强：以稳定心态守住节奏",
+      "desc": "面对压力和波动时，你通常更能维持基本节奏，较少被短期起伏带偏。",
+      "bullets": [
+        "你更容易把注意力拉回当前重点",
+        "稳定感会提高别人对你的信任",
+        "在压力场景里，你常是节奏稳定器"
+      ],
+      "tips": [
+        "状态越稳，越要主动做一次风险盘点",
+        "顺手推进后也记得留出复盘动作"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:AT:A",
+        "state:strong"
+      ],
+      "priority": 93,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "A",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_axis_AT_T_strong",
+      "section": "traits",
+      "title": "T 偏好较强：以高敏感度持续校准",
+      "desc": "你对风险、反馈和微小变化更敏感，因此往往会更早发现偏差并主动修正。",
+      "bullets": [
+        "你对细节变化的察觉速度很快",
+        "你会持续修正做法以追求更好结果",
+        "压力也会更直接地进入你的判断系统"
+      ],
+      "tips": [
+        "把担心写成可验证的问题",
+        "只先处理一个最关键的风险点"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:AT:T",
+        "state:strong"
+      ],
+      "priority": 93,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "T",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_axis_EI_E_intro",
+      "section": "traits",
+      "title": "E 这一倾向已出现：在互动中形成判断与推进",
+      "desc": "这一倾向已经开始稳定显现。你更容易在交流现场整理思路，并通过互动迅速建立共识与行动节奏。",
+      "bullets": [
+        "讨论会明显提升你的判断速度",
+        "你习惯先把人和信息拉到同一场域",
+        "一旦连接建立，推进往往会随之提速"
+      ],
+      "tips": [
+        "重要议题先说结论，再补充细节",
+        "高频沟通后留一段独立整理时间"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:EI:E",
+        "state:clear"
+      ],
+      "priority": 60,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "E",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_axis_EI_I_intro",
+      "section": "traits",
+      "title": "I 这一倾向已出现：在沉淀中形成清晰判断",
+      "desc": "这一倾向已经开始稳定显现。你更依赖安静和独处完成信息整合，深度思考会显著提高你的判断质量。",
+      "bullets": [
+        "独立推演能让你更快抓住结构",
+        "你偏好先想透再表达",
+        "边界清晰时，你的稳定性会更强"
+      ],
+      "tips": [
+        "先输出结论提纲，再展开推理过程",
+        "为自己保留低打扰的整块时间"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:EI:I",
+        "state:clear"
+      ],
+      "priority": 60,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "I",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_axis_JP_J_intro",
+      "section": "traits",
+      "title": "J 这一倾向已出现：以计划和秩序推进事情",
+      "desc": "这一倾向已经开始稳定显现。你更偏好清晰节奏、明确节点和可预期推进，做事通常会先把路径立住。",
+      "bullets": [
+        "计划感能显著提高你的安全感",
+        "你会自然排优先级和完成标准",
+        "秩序一旦清楚，执行效率会明显提升"
+      ],
+      "tips": [
+        "在计划里预留一个调整窗口",
+        "把完成线说清楚，避免反复加码"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:JP:J",
+        "state:clear"
+      ],
+      "priority": 58,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "J",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_axis_JP_P_intro",
+      "section": "traits",
+      "title": "P 这一倾向已出现：以弹性和试探寻找路径",
+      "desc": "这一倾向已经开始稳定显现。你更愿意保留调整空间，通过观察变化和试做反馈来修正路径。",
+      "bullets": [
+        "你对新信息反应很快",
+        "灵活选择能帮你看到更多机会",
+        "你更愿意边做边校准，而不是一次定死"
+      ],
+      "tips": [
+        "先确认底线，再保留弹性",
+        "为关键事项设一个最晚收束时间"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:JP:P",
+        "state:clear"
+      ],
+      "priority": 58,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "P",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_axis_AT_A_intro",
+      "section": "traits",
+      "title": "A 这一倾向已出现：以稳定心态守住节奏",
+      "desc": "这一倾向已经开始稳定显现。面对压力和波动时，你通常更能维持基本节奏，较少被短期起伏带偏。",
+      "bullets": [
+        "你更容易把注意力拉回当前重点",
+        "稳定感会提高别人对你的信任",
+        "在压力场景里，你常是节奏稳定器"
+      ],
+      "tips": [
+        "状态越稳，越要主动做一次风险盘点",
+        "顺手推进后也记得留出复盘动作"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:AT:A",
+        "state:clear"
+      ],
+      "priority": 56,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "A",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_axis_AT_T_intro",
+      "section": "traits",
+      "title": "T 这一倾向已出现：以高敏感度持续校准",
+      "desc": "这一倾向已经开始稳定显现。你对风险、反馈和微小变化更敏感，因此往往会更早发现偏差并主动修正。",
+      "bullets": [
+        "你对细节变化的察觉速度很快",
+        "你会持续修正做法以追求更好结果",
+        "压力也会更直接地进入你的判断系统"
+      ],
+      "tips": [
+        "把担心写成可验证的问题",
+        "只先处理一个最关键的风险点"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:AT:T",
+        "state:clear"
+      ],
+      "priority": 56,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "T",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_core_01",
+      "section": "traits",
+      "title": "人格底盘：你会先为事情建立自己的判断框架",
+      "desc": "无论外部节奏如何变化，你通常都会先形成一个属于自己的理解结构，再决定如何投入。",
+      "bullets": [
+        "你不太会完全照搬别人的判断",
+        "先理解再投入，是你的稳定习惯",
+        "清楚知道自己为什么这么做，会让你更安心"
+      ],
+      "tips": [
+        "定期回看自己的判断是否仍适配当前情境",
+        "框架立住后，也给新信息留入口"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "scope:general"
+      ],
+      "priority": 100,
+      "access_level": "preview",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_core_02",
+      "section": "traits",
+      "title": "你重视“做法是否站得住脚”",
+      "desc": "比起只看表面结果，你更在意一件事的逻辑、边界或价值是否能够成立。",
+      "bullets": [
+        "你会关心方法是否一致",
+        "你不太喜欢含糊其辞的推进方式",
+        "站得住脚比一时看起来漂亮更重要"
+      ],
+      "tips": [
+        "把你的判断标准说出来，别人会更容易理解你",
+        "别只看对错，也补充关系与体验层面的考虑"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "topic:execution"
+      ],
+      "priority": 97,
+      "access_level": "preview",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_core_03",
+      "section": "traits",
+      "title": "你通常带着稳定的责任感进入关系与任务",
+      "desc": "一旦把某件事视为自己的责任，你往往会持续跟进，不太喜欢半途而废。",
+      "bullets": [
+        "你对承诺有较强认真度",
+        "你会自然关注后续是否真正落地",
+        "可靠感通常来自长期兑现"
+      ],
+      "tips": [
+        "给自己划清责任边界，避免把所有事都揽下来",
+        "让责任感服务长期，而不是变成持续紧绷"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "topic:quality"
+      ],
+      "priority": 95,
+      "access_level": "preview",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_core_04",
+      "section": "traits",
+      "title": "你对秩序、边界和节奏有自己的要求",
+      "desc": "无论这种要求表现在计划、标准还是关系方式上，它都会影响你是否感到安心和稳定。",
+      "bullets": [
+        "边界清楚时，你会发挥得更稳",
+        "节奏混乱会显著增加你的消耗",
+        "你会自然关注什么是可持续的安排"
+      ],
+      "tips": [
+        "先说清期待和边界，再进入推进",
+        "在秩序之外，也给变化留一点空间"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:warm",
+        "topic:collaboration"
+      ],
+      "priority": 93,
+      "access_level": "preview",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_core_05",
+      "section": "traits",
+      "title": "你更愿意把注意力放在真正影响结果的部分",
+      "desc": "当事情变复杂时，你通常会开始识别主线、重点和最值得投入的部分。",
+      "bullets": [
+        "你不喜欢把时间耗在无关紧要处",
+        "优先级会很影响你的行动质量",
+        "知道重点后，你的推进会明显更稳"
+      ],
+      "tips": [
+        "把当前最关键的一件事写下来",
+        "避免同时给自己开太多并行任务"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "topic:longterm"
+      ],
+      "priority": 92,
+      "access_level": "preview",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_core_06",
+      "section": "traits",
+      "title": "你对“是否真实、是否一致”很敏感",
+      "desc": "不论是做事还是相处，你都更在意表面之下是否真正一致，而不是只停留在形式上。",
+      "bullets": [
+        "你会观察表态和行为是否一致",
+        "真实感比空泛口号更能打动你",
+        "长期不一致会迅速消耗你的耐心"
+      ],
+      "tips": [
+        "当你感到别扭时，尽量尽早说清具体原因",
+        "把“真实感受”翻译成具体需求"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "topic:risk"
+      ],
+      "priority": 90,
+      "access_level": "preview",
+      "module_code": "core_full"
+    },
+    {
+      "id": "traits_core_07",
+      "section": "traits",
+      "title": "你的稳定优势往往来自持续投入，而不是一时冲刺",
+      "desc": "你更容易通过长期累积形成可信度和成果，而不是靠短期爆发维持表现。",
+      "bullets": [
+        "长期主义会给你更高质量的结果",
+        "你的节奏一旦形成，复利会很明显",
+        "别人对你的信任也常建立在持续性上"
+      ],
+      "tips": [
+        "保留适度休息，避免长期输出变成透支",
+        "把有效动作沉淀成可复用习惯"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:warm",
+        "topic:energy"
+      ],
+      "priority": 88,
+      "access_level": "preview",
+      "module_code": "core_full"
+    },
+    {
+      "id": "card.canary.rules_on",
+      "section": "traits",
+      "title": "CANARY_RULES_ON",
+      "desc": "如果你看到这张卡，说明 item.rules(require_all) 已生效",
+      "bullets": [],
+      "tips": [],
+      "tags": [
+        "role:SJ",
+        "topic:canary"
+      ],
+      "priority": 9999,
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "card.canary.rules_off",
+      "section": "traits",
+      "title": "CANARY_RULES_OFF",
+      "desc": "如果你看到这张卡，说明 rules 没生效（它应该被过滤掉）",
+      "bullets": [],
+      "tips": [],
+      "tags": [
+        "role:SJ",
+        "topic:canary"
+      ],
+      "rules": {
+        "require_all": [
+          "role:__NOT_EXIST__"
+        ]
+      },
+      "priority": 9998,
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "card.canary.rule_engine",
+      "section": "traits",
+      "title": "CANARY_CARD_SELECTED",
+      "desc": "如果你看到这张卡，说明 cards 走了 templates + rules 选择器",
+      "bullets": [],
+      "tips": [],
+      "tags": [
+        "canary:card",
+        "role:SJ"
+      ],
+      "rules": {
+        "require_any": [],
+        "require_all": [],
+        "forbid": [
+          "role:SJ"
+        ],
+        "min_match": 0
+      },
+      "priority": 999,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "E",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    }
+  ]
+}

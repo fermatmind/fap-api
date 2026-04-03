@@ -1,0 +1,541 @@
+{
+    "schema": "fap.mbti.content_governance.compiled.v1",
+    "pack_id": "MBTI.cn-mainland.zh-CN.v0.3",
+    "version": "v0.3-form-93",
+    "generated_at": "2026-04-03T03:44:21+00:00",
+    "required_layers": [
+        "skeleton",
+        "intensity",
+        "boundary",
+        "scene",
+        "explainability",
+        "action"
+    ],
+    "taxonomy": {
+        "layers": {
+            "action": {
+                "label": "行动层",
+                "description": "Action plan, weekly experiments, work experiments, watchouts, and practice-oriented content.",
+                "block_kinds": [
+                    "next_action",
+                    "weekly_experiment",
+                    "relationship_practice",
+                    "work_experiment",
+                    "watchout",
+                    "action_experiment",
+                    "action_reset",
+                    "action_resistance_break",
+                    "action_momentum_start",
+                    "action_bridge_step",
+                    "action_low_pressure_step",
+                    "watchout_overextension",
+                    "watchout_people_pleasing",
+                    "watchout_overcontrol",
+                    "watchout_energy_leak",
+                    "watchout_avoidant_delay",
+                    "watchout_recovery_gap",
+                    "recovery_reset",
+                    "recovery_reentry",
+                    "revisit_resume",
+                    "adaptive_retry",
+                    "adaptive_reduce_pressure"
+                ]
+            },
+            "boundary": {
+                "label": "边界层",
+                "description": "Boundary notes and near-axis interpretation that explains borderline behavior.",
+                "block_kinds": [
+                    "boundary",
+                    "borderline_axis"
+                ]
+            },
+            "explainability": {
+                "label": "解释层",
+                "description": "Why-this-type, adjacent contrast, and stability explanation content.",
+                "block_kinds": [
+                    "why_this_type",
+                    "misunderstanding_fix",
+                    "adjacent_type_contrast",
+                    "stability_explanation",
+                    "stability_reframe"
+                ]
+            },
+            "intensity": {
+                "label": "强度分层",
+                "description": "Axis strength, highlight, and core strength-layer content.",
+                "block_kinds": [
+                    "axis_strength"
+                ]
+            },
+            "scene": {
+                "label": "场景层",
+                "description": "Scene application, work/relationship/communication bridges, and scenario execution surfaces.",
+                "block_kinds": [
+                    "scene",
+                    "work_style",
+                    "role_fit",
+                    "collaboration_fit",
+                    "work_env",
+                    "career_next_step",
+                    "decision",
+                    "stress_recovery",
+                    "communication",
+                    "work_scene_execution",
+                    "work_scene_collaboration",
+                    "work_scene_pacing",
+                    "work_scene_role_fit",
+                    "work_scene_transition",
+                    "work_scene_promotion_readiness",
+                    "work_scene_team_friction",
+                    "work_scene_focus_recovery",
+                    "relationship_bridge",
+                    "relationship_boundary_negotiation",
+                    "relationship_misread_repair",
+                    "relationship_conflict_recovery",
+                    "relationship_try_this_week",
+                    "relationship_low_intensity_reconnect"
+                ]
+            },
+            "skeleton": {
+                "label": "类型骨架",
+                "description": "Type skeleton, identity, roles, and stable type profile copy.",
+                "block_kinds": [
+                    "type_skeleton",
+                    "identity"
+                ]
+            }
+        },
+        "block_kind_index": {
+            "action_bridge_step": "action",
+            "action_experiment": "action",
+            "action_low_pressure_step": "action",
+            "action_momentum_start": "action",
+            "action_reset": "action",
+            "action_resistance_break": "action",
+            "adaptive_reduce_pressure": "action",
+            "adaptive_retry": "action",
+            "adjacent_type_contrast": "explainability",
+            "axis_strength": "intensity",
+            "borderline_axis": "boundary",
+            "boundary": "boundary",
+            "career_next_step": "scene",
+            "collaboration_fit": "scene",
+            "communication": "scene",
+            "decision": "scene",
+            "identity": "skeleton",
+            "misunderstanding_fix": "explainability",
+            "next_action": "action",
+            "recovery_reentry": "action",
+            "recovery_reset": "action",
+            "relationship_boundary_negotiation": "scene",
+            "relationship_bridge": "scene",
+            "relationship_conflict_recovery": "scene",
+            "relationship_low_intensity_reconnect": "scene",
+            "relationship_misread_repair": "scene",
+            "relationship_practice": "action",
+            "relationship_try_this_week": "scene",
+            "revisit_resume": "action",
+            "role_fit": "scene",
+            "scene": "scene",
+            "stability_explanation": "explainability",
+            "stability_reframe": "explainability",
+            "stress_recovery": "scene",
+            "type_skeleton": "skeleton",
+            "watchout": "action",
+            "watchout_avoidant_delay": "action",
+            "watchout_energy_leak": "action",
+            "watchout_overcontrol": "action",
+            "watchout_overextension": "action",
+            "watchout_people_pleasing": "action",
+            "watchout_recovery_gap": "action",
+            "weekly_experiment": "action",
+            "why_this_type": "explainability",
+            "work_env": "scene",
+            "work_experiment": "action",
+            "work_scene_collaboration": "scene",
+            "work_scene_execution": "scene",
+            "work_scene_focus_recovery": "scene",
+            "work_scene_pacing": "scene",
+            "work_scene_promotion_readiness": "scene",
+            "work_scene_role_fit": "scene",
+            "work_scene_team_friction": "scene",
+            "work_scene_transition": "scene",
+            "work_style": "scene"
+        }
+    },
+    "tier_policies": {
+        "stable": {
+            "label": "Canonical stable content",
+            "is_canonical": true,
+            "requires_experiment_key": false,
+            "description": "Stable authored content that is allowed to define canonical MBTI result truth."
+        },
+        "experiment": {
+            "label": "Experiment overlay",
+            "is_canonical": false,
+            "requires_experiment_key": true,
+            "description": "Short-lived experimentation content that must never overwrite canonical truth.",
+            "allowed_files": [
+                "report_dynamic_sections.json",
+                "report_recommended_reads.json"
+            ]
+        },
+        "commercial_overlay": {
+            "label": "Commercial CTA overlay",
+            "is_canonical": false,
+            "requires_experiment_key": false,
+            "description": "Commercial ranking or CTA overlays that can wrap the result experience without mutating MBTI truth.",
+            "allowed_targets": [
+                "unlock_full_report",
+                "career_bridge",
+                "workspace_lite",
+                "share_result"
+            ]
+        }
+    },
+    "file_policies": {
+        "commercial_spec.json": {
+            "layers": [
+                "action"
+            ],
+            "content_tier": "commercial_overlay",
+            "is_canonical": false,
+            "experiment_key": null,
+            "targets": [
+                "unlock_full_report",
+                "career_bridge",
+                "workspace_lite",
+                "share_result"
+            ],
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "high"
+        },
+        "identity_layers.json": {
+            "layers": [
+                "skeleton"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "medium"
+        },
+        "report_borderline_notes.json": {
+            "layers": [
+                "boundary"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "high"
+        },
+        "report_borderline_templates.json": {
+            "layers": [
+                "boundary"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "high"
+        },
+        "report_cards_career.json": {
+            "layers": [
+                "scene",
+                "action"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "high"
+        },
+        "report_cards_fallback_career.json": {
+            "layers": [
+                "scene",
+                "action"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "medium"
+        },
+        "report_cards_fallback_growth.json": {
+            "layers": [
+                "action",
+                "scene"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "medium"
+        },
+        "report_cards_fallback_relationships.json": {
+            "layers": [
+                "scene",
+                "action"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "medium"
+        },
+        "report_cards_fallback_stress_recovery.json": {
+            "layers": [
+                "scene",
+                "action"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "medium"
+        },
+        "report_cards_fallback_traits.json": {
+            "layers": [
+                "intensity",
+                "boundary"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "medium"
+        },
+        "report_cards_growth.json": {
+            "layers": [
+                "action",
+                "scene"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "high"
+        },
+        "report_cards_relationships.json": {
+            "layers": [
+                "scene",
+                "action"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "high"
+        },
+        "report_cards_stress_recovery.json": {
+            "layers": [
+                "scene",
+                "action"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "high"
+        },
+        "report_cards_traits.json": {
+            "layers": [
+                "intensity",
+                "boundary"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "high"
+        },
+        "report_dynamic_sections.json": {
+            "layers": [
+                "skeleton",
+                "intensity",
+                "boundary",
+                "scene",
+                "explainability",
+                "action"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "high"
+        },
+        "report_highlights.json": {
+            "layers": [
+                "intensity"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "high"
+        },
+        "report_highlights_policy.json": {
+            "layers": [
+                "intensity"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "low"
+        },
+        "report_highlights_pools.json": {
+            "layers": [
+                "intensity"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "low"
+        },
+        "report_highlights_rules.json": {
+            "layers": [
+                "intensity"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "low"
+        },
+        "report_identity_cards.json": {
+            "layers": [
+                "skeleton"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "medium"
+        },
+        "report_overrides.json": {
+            "layers": [
+                "skeleton",
+                "intensity",
+                "boundary",
+                "scene",
+                "explainability",
+                "action"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "medium"
+        },
+        "report_recommended_reads.json": {
+            "layers": [
+                "scene",
+                "action"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "supports_experiment_overlay": true,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "high"
+        },
+        "report_roles.json": {
+            "layers": [
+                "skeleton"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "low"
+        },
+        "report_rules.json": {
+            "layers": [
+                "skeleton",
+                "intensity",
+                "boundary",
+                "scene",
+                "explainability",
+                "action"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "medium"
+        },
+        "report_section_policies.json": {
+            "layers": [
+                "intensity",
+                "scene",
+                "action",
+                "explainability"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "medium"
+        },
+        "report_select_rules.json": {
+            "layers": [
+                "intensity",
+                "scene",
+                "action",
+                "explainability"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "medium"
+        },
+        "report_strategies.json": {
+            "layers": [
+                "skeleton",
+                "scene"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "medium"
+        },
+        "type_profiles.json": {
+            "layers": [
+                "skeleton"
+            ],
+            "content_tier": "stable",
+            "is_canonical": true,
+            "experiment_key": null,
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "feedback_weight": "medium"
+        }
+    },
+    "locale_guardrails": {
+        "region": "CN_MAINLAND",
+        "locale": "zh-CN",
+        "fallback": [
+            "MBTI.cn-mainland.zh-CN.v0.3",
+            "MBTI.global.en.default"
+        ]
+    },
+    "snapshot_fixtures": {
+        "representative_types": [
+            "INTJ-A",
+            "ENFP-T",
+            "ISFJ-A"
+        ],
+        "guarded_fields": [
+            "variant_keys",
+            "scene_fingerprint",
+            "action_plan_summary",
+            "ordered_recommendation_keys",
+            "ordered_action_keys",
+            "continuity"
+        ]
+    }
+}
