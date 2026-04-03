@@ -75,7 +75,7 @@ final class BigFiveOceanDriver implements DriverInterface
             rawScore: (float) array_sum(array_map('floatval', (array) ($dto['raw_scores']['domains_mean'] ?? []))),
             finalScore: (float) array_sum(array_map('floatval', (array) ($dto['scores_0_100']['domains_percentile'] ?? []))),
             breakdownJson: [
-                'score_method' => 'big5_ipipneo120_v3',
+                'score_method' => (string) ($dto['score_method'] ?? ($policy['score_method'] ?? 'big5_ipipneo120_v3')),
                 'answer_count' => count($answersById),
                 'score_result' => $dto,
             ],
@@ -139,11 +139,35 @@ final class BigFiveOceanDriver implements DriverInterface
      */
     private function resolveQuestionIndex(string $version): array
     {
-        $questionIndex = $this->packLoader->readQuestionIndexPreferred($version, 120);
-        if (! is_array($questionIndex)) {
+        $questionIndex = $this->packLoader->readQuestionIndexPreferred($version, 0);
+        if (! is_array($questionIndex) || $questionIndex === []) {
             throw new RuntimeException('BIG5_OCEAN compiled questions missing. Run content:compile --pack=BIG5_OCEAN --version='.$version);
         }
 
-        return $questionIndex;
+        ksort($questionIndex, SORT_NUMERIC);
+
+        $resolved = [];
+        $position = 1;
+        foreach ($questionIndex as $indexKey => $meta) {
+            if (! is_array($meta)) {
+                throw new RuntimeException("BIG5_OCEAN question_index invalid: key={$indexKey}");
+            }
+
+            $qid = (int) ($meta['question_id'] ?? $indexKey);
+            if ($qid <= 0) {
+                throw new RuntimeException("BIG5_OCEAN question_id invalid: key={$indexKey}");
+            }
+            if (isset($resolved[$qid])) {
+                throw new RuntimeException("BIG5_OCEAN question_id duplicate: {$qid}");
+            }
+
+            $meta['question_index'] = $position;
+            $resolved[$qid] = $meta;
+            $position++;
+        }
+
+        ksort($resolved, SORT_NUMERIC);
+
+        return $resolved;
     }
 }

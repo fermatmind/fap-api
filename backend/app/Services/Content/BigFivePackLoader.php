@@ -170,7 +170,7 @@ final class BigFivePackLoader
             $questionIndex = is_array($compiledMin['question_index'] ?? null)
                 ? $compiledMin['question_index']
                 : [];
-            if (count($questionIndex) === $expectedCount) {
+            if ($expectedCount <= 0 || count($questionIndex) === $expectedCount) {
                 return $questionIndex;
             }
         }
@@ -183,7 +183,7 @@ final class BigFivePackLoader
         $questionIndex = is_array($compiledFull['question_index'] ?? null)
             ? $compiledFull['question_index']
             : [];
-        if (count($questionIndex) === $expectedCount) {
+        if ($expectedCount <= 0 || count($questionIndex) === $expectedCount) {
             return $questionIndex;
         }
 

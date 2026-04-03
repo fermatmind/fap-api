@@ -75,8 +75,9 @@ final class BigFiveContentLintService
     {
         $file = $this->loader->rawPath('questions_big5_bilingual.csv', $version);
         $rows = $this->loader->readCsvWithLines($file);
-        if (count($rows) !== 120) {
-            $errors[] = $this->error($file, 1, 'rows must be exactly 120.');
+        $expectedQuestionCount = $this->expectedQuestionCount($version);
+        if (count($rows) !== $expectedQuestionCount) {
+            $errors[] = $this->error($file, 1, "rows must be exactly {$expectedQuestionCount}.");
         }
 
         $seen = [];
@@ -90,6 +91,9 @@ final class BigFiveContentLintService
 
                 continue;
             }
+            if (isset($seen[$qid])) {
+                $errors[] = $this->error($file, $line, "question_id duplicated: {$qid}");
+            }
             $seen[$qid] = true;
 
             $dimension = strtoupper((string) ($row['dimension'] ?? ''));
@@ -102,11 +106,8 @@ final class BigFiveContentLintService
                 $errors[] = $this->error($file, $line, 'direction must be 1 or -1.');
             }
         }
-
-        for ($i = 1; $i <= 120; $i++) {
-            if (! isset($seen[$i])) {
-                $errors[] = $this->error($file, 1, "missing question_id={$i}");
-            }
+        if (count($seen) !== $expectedQuestionCount) {
+            $errors[] = $this->error($file, 1, "unique question_id count must be {$expectedQuestionCount}.");
         }
     }
 
@@ -117,9 +118,12 @@ final class BigFiveContentLintService
     {
         $file = $this->loader->rawPath('facet_map.csv', $version);
         $rows = $this->loader->readCsvWithLines($file);
-        if (count($rows) !== 120) {
-            $errors[] = $this->error($file, 1, 'rows must be exactly 120.');
+        $expectedQuestionCount = $this->expectedQuestionCount($version);
+        if (count($rows) !== $expectedQuestionCount) {
+            $errors[] = $this->error($file, 1, "rows must be exactly {$expectedQuestionCount}.");
         }
+        $expectedFacetCount = $this->expectedFacetItemCount($version);
+        $expectedDomainCount = $this->expectedDomainItemCount($version);
 
         $qCount = [];
         $facetCount = [];
@@ -158,21 +162,24 @@ final class BigFiveContentLintService
             }
         }
 
-        for ($i = 1; $i <= 120; $i++) {
-            if (($qCount[$i] ?? 0) !== 1) {
-                $errors[] = $this->error($file, 1, "question_id={$i} must map exactly once.");
+        foreach ($qCount as $qid => $mappedCount) {
+            if ($mappedCount !== 1) {
+                $errors[] = $this->error($file, 1, "question_id={$qid} must map exactly once.");
             }
+        }
+        if (count($qCount) !== $expectedQuestionCount) {
+            $errors[] = $this->error($file, 1, "mapped question_id count must be {$expectedQuestionCount}.");
         }
 
         foreach (self::FACETS as $facet) {
-            if (($facetCount[$facet] ?? 0) !== 4) {
-                $errors[] = $this->error($file, 1, "facet {$facet} must map exactly 4 items.");
+            if (($facetCount[$facet] ?? 0) !== $expectedFacetCount) {
+                $errors[] = $this->error($file, 1, "facet {$facet} must map exactly {$expectedFacetCount} items.");
             }
         }
 
         foreach (self::DOMAINS as $domain) {
-            if (($domainCount[$domain] ?? 0) !== 24) {
-                $errors[] = $this->error($file, 1, "domain {$domain} must map exactly 24 items.");
+            if (($domainCount[$domain] ?? 0) !== $expectedDomainCount) {
+                $errors[] = $this->error($file, 1, "domain {$domain} must map exactly {$expectedDomainCount} items.");
             }
         }
     }
@@ -660,6 +667,7 @@ final class BigFiveContentLintService
     {
         $file = $this->loader->rawPath('golden_cases.csv', $version);
         $rows = $this->loader->readCsvWithLines($file);
+        $expectedQuestionCount = $this->expectedQuestionCount($version);
         if ($rows === []) {
             $errors[] = $this->error($file, 1, 'golden_cases empty.');
 
@@ -676,8 +684,8 @@ final class BigFiveContentLintService
 
             $answersJson = (string) ($row['answers_json'] ?? '');
             $answers = json_decode($answersJson, true);
-            if (! is_array($answers) || count($answers) !== 120) {
-                $errors[] = $this->error($file, $line, 'answers_json must decode to 120 answers.');
+            if (! is_array($answers) || count($answers) !== $expectedQuestionCount) {
+                $errors[] = $this->error($file, $line, "answers_json must decode to {$expectedQuestionCount} answers.");
             }
 
             $expectedTags = json_decode((string) ($row['expected_tags_json'] ?? ''), true);
@@ -1086,6 +1094,48 @@ final class BigFiveContentLintService
         $version = trim((string) $version);
 
         return $version !== '' ? $version : BigFivePackLoader::PACK_VERSION;
+    }
+
+    private function expectedQuestionCount(string $version): int
+    {
+        $forms = config('content_packs.big5_forms.forms', []);
+        if (is_array($forms)) {
+            foreach ($forms as $form) {
+                if (! is_array($form)) {
+                    continue;
+                }
+                if ($version !== trim((string) ($form['dir_version'] ?? ''))) {
+                    continue;
+                }
+
+                $configured = (int) ($form['question_count'] ?? 0);
+                if ($configured > 0) {
+                    return $configured;
+                }
+            }
+        }
+
+        return 120;
+    }
+
+    private function expectedFacetItemCount(string $version): int
+    {
+        $questionCount = $this->expectedQuestionCount($version);
+        if ($questionCount % count(self::FACETS) === 0) {
+            return (int) ($questionCount / count(self::FACETS));
+        }
+
+        return 4;
+    }
+
+    private function expectedDomainItemCount(string $version): int
+    {
+        $questionCount = $this->expectedQuestionCount($version);
+        if ($questionCount % count(self::DOMAINS) === 0) {
+            return (int) ($questionCount / count(self::DOMAINS));
+        }
+
+        return 24;
     }
 
     /**

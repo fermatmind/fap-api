@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V0_3;
 
 use App\Exceptions\Api\ApiProblemException;
 use App\Http\Controllers\Controller;
+use App\Services\BigFive\BigFiveFormCatalog;
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\ClinicalComboPackLoader;
 use App\Services\Content\Eq60PackLoader;
@@ -27,6 +28,7 @@ class ScalesController extends Controller
         private ScaleCodeInputGuard $inputGuard,
         private OrgContext $orgContext,
         private MbtiFormCatalog $mbtiFormCatalog,
+        private BigFiveFormCatalog $bigFiveFormCatalog,
     ) {}
 
     /**
@@ -115,14 +117,24 @@ class ScalesController extends Controller
             $packId = (string) ($row['default_pack_id'] ?? '');
             $dirVersion = (string) ($row['default_dir_version'] ?? '');
             $resolvedFormCode = null;
+            $resolvedQuestionCount = 0;
             if ($resolvedScaleCode === 'MBTI') {
                 $resolvedForm = $this->mbtiFormCatalog->resolve(
-                    $this->requestedMbtiFormCode($request),
+                    $this->requestedFormCode($request),
                     $packId
                 );
                 $packId = (string) ($resolvedForm['pack_id'] ?? $packId);
                 $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
                 $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'mbti_144');
+            } elseif ($resolvedScaleCode === 'BIG5_OCEAN') {
+                $resolvedForm = $this->bigFiveFormCatalog->resolve(
+                    $this->requestedFormCode($request),
+                    $packId
+                );
+                $packId = (string) ($resolvedForm['pack_id'] ?? $packId);
+                $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
+                $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'big5_120');
+                $resolvedQuestionCount = (int) ($resolvedForm['question_count'] ?? 0);
             }
             if ($packId === '' || $dirVersion === '') {
                 return response()->json([
@@ -136,7 +148,7 @@ class ScalesController extends Controller
             $locale = (string) ($request->query('locale') ?? $row['default_locale'] ?? config('content_packs.default_locale', ''));
 
             if ($resolvedScaleCode === 'BIG5_OCEAN') {
-                $version = (string) ($row['default_dir_version'] ?? BigFivePackLoader::PACK_VERSION);
+                $version = $dirVersion !== '' ? $dirVersion : (string) ($row['default_dir_version'] ?? BigFivePackLoader::PACK_VERSION);
                 $normalizedLocale = $this->normalizeBigFiveLocale($locale);
                 $compiledMin = $bigFivePackLoader->readCompiledJson('questions.min.compiled.json', $version);
                 $compiled = null;
@@ -146,7 +158,7 @@ class ScalesController extends Controller
                 $legalCompiled = $bigFivePackLoader->readCompiledJson('legal.compiled.json', $version);
 
                 if (is_array($compiledMin)) {
-                    $questionsDoc = $this->buildBigFiveQuestionsDocFromMin($compiledMin, $normalizedLocale);
+                    $questionsDoc = $this->buildBigFiveQuestionsDocFromMin($compiledMin, $normalizedLocale, $resolvedQuestionCount);
                     $contentPackageVersion = (string) ($compiledMin['pack_version'] ?? $version);
                 }
 
@@ -221,6 +233,7 @@ class ScalesController extends Controller
                     'pack_id' => $packId,
                     'dir_version' => $dirVersion,
                     'content_package_version' => $contentPackageVersion,
+                    'form_code' => $resolvedFormCode,
                     'questions' => $questionsDoc,
                     'meta' => [
                         'validity_items' => $validityItems,
@@ -379,7 +392,7 @@ class ScalesController extends Controller
         return str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en';
     }
 
-    private function requestedMbtiFormCode(Request $request): ?string
+    private function requestedFormCode(Request $request): ?string
     {
         foreach (['form_code', 'form'] as $key) {
             $value = $request->query($key);
@@ -400,7 +413,11 @@ class ScalesController extends Controller
      * @param  array<string,mixed>  $compiledMin
      * @return array<string,mixed>|null
      */
-    private function buildBigFiveQuestionsDocFromMin(array $compiledMin, string $normalizedLocale): ?array
+    private function buildBigFiveQuestionsDocFromMin(
+        array $compiledMin,
+        string $normalizedLocale,
+        int $expectedCount = 0
+    ): ?array
     {
         $questionIndex = is_array($compiledMin['question_index'] ?? null) ? $compiledMin['question_index'] : [];
         $textsByLocale = is_array($compiledMin['texts_by_locale'] ?? null) ? $compiledMin['texts_by_locale'] : [];
@@ -412,25 +429,51 @@ class ScalesController extends Controller
         $zhTexts = is_array($textsByLocale['zh-CN'] ?? null) ? $textsByLocale['zh-CN'] : [];
         $enTexts = is_array($textsByLocale['en'] ?? null) ? $textsByLocale['en'] : [];
 
-        if (count($questionIndex) !== 120 || count($zhTexts) !== 120 || count($enTexts) !== 120) {
+        if ($questionIndex === [] || $zhTexts === [] || $enTexts === []) {
+            return null;
+        }
+        if ($expectedCount > 0 && count($questionIndex) !== $expectedCount) {
             return null;
         }
 
         ksort($questionIndex, SORT_NUMERIC);
 
-        $items = [];
-        foreach ($questionIndex as $qidRaw => $meta) {
-            $qid = (int) $qidRaw;
-            if ($qid <= 0 || ! is_array($meta)) {
+        $normalizedIndex = [];
+        $seenQuestionIds = [];
+        foreach ($questionIndex as $indexKeyRaw => $meta) {
+            if (! is_array($meta)) {
                 return null;
             }
+
+            $qid = (int) ($meta['question_id'] ?? $indexKeyRaw);
+            if ($qid <= 0 || isset($seenQuestionIds[$qid])) {
+                return null;
+            }
+            $seenQuestionIds[$qid] = true;
+
+            $normalizedIndex[] = [
+                'question_id' => $qid,
+                'index_key' => (string) $indexKeyRaw,
+                'meta' => $meta,
+            ];
+        }
+        if ($normalizedIndex === []) {
+            return null;
+        }
+
+        $items = [];
+        $order = 1;
+        foreach ($normalizedIndex as $row) {
+            $qid = (int) ($row['question_id'] ?? 0);
+            $indexKey = (string) ($row['index_key'] ?? '');
+            $meta = is_array($row['meta'] ?? null) ? $row['meta'] : [];
 
             $dimension = strtoupper(trim((string) ($meta['dimension'] ?? '')));
             $facetCode = strtoupper(trim((string) ($meta['facet_code'] ?? '')));
             $direction = (int) ($meta['direction'] ?? 0);
 
-            $textZh = trim((string) ($zhTexts[(string) $qid] ?? $zhTexts[$qid] ?? ''));
-            $textEn = trim((string) ($enTexts[(string) $qid] ?? $enTexts[$qid] ?? ''));
+            $textZh = trim((string) ($zhTexts[(string) $qid] ?? $zhTexts[$qid] ?? $zhTexts[$indexKey] ?? ''));
+            $textEn = trim((string) ($enTexts[(string) $qid] ?? $enTexts[$qid] ?? $enTexts[$indexKey] ?? ''));
             if (
                 $textZh === ''
                 || $textEn === ''
@@ -441,7 +484,12 @@ class ScalesController extends Controller
                 return null;
             }
 
-            $setId = (string) ($questionOptionSetRef[(string) $qid] ?? $questionOptionSetRef[$qid] ?? 'LIKERT5');
+            $setId = (string) (
+                $questionOptionSetRef[(string) $qid]
+                ?? $questionOptionSetRef[$qid]
+                ?? $questionOptionSetRef[$indexKey]
+                ?? 'LIKERT5'
+            );
             $rawOptionSet = is_array($optionSets[$setId] ?? null) ? $optionSets[$setId] : [];
             $options = $this->buildBigFiveQuestionOptionsForLocale($rawOptionSet, $normalizedLocale);
             if ($options === []) {
@@ -450,7 +498,7 @@ class ScalesController extends Controller
 
             $items[] = [
                 'question_id' => (string) $qid,
-                'order' => $qid,
+                'order' => $order,
                 'dimension' => $dimension,
                 'facet_code' => $facetCode,
                 'text' => $normalizedLocale === 'zh-CN' ? $textZh : $textEn,
@@ -459,6 +507,7 @@ class ScalesController extends Controller
                 'direction' => $direction,
                 'options' => $options,
             ];
+            $order++;
         }
 
         return [

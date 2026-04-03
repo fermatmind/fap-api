@@ -481,18 +481,20 @@ class AttemptSubmitTxService
             return $stored;
         }
 
-        $forms = config('content_packs.mbti_forms.forms', []);
-        if (! is_array($forms)) {
-            return '';
-        }
-
         $normalizedDirVersion = trim($dirVersion);
-        foreach ($forms as $formCode => $config) {
-            if (! is_array($config)) {
+        foreach (['mbti_forms', 'big5_forms'] as $formsConfigKey) {
+            $forms = config("content_packs.{$formsConfigKey}.forms", []);
+            if (! is_array($forms)) {
                 continue;
             }
-            if ($normalizedDirVersion !== '' && $normalizedDirVersion === trim((string) ($config['dir_version'] ?? ''))) {
-                return trim((string) $formCode);
+
+            foreach ($forms as $formCode => $config) {
+                if (! is_array($config)) {
+                    continue;
+                }
+                if ($normalizedDirVersion !== '' && $normalizedDirVersion === trim((string) ($config['dir_version'] ?? ''))) {
+                    return trim((string) $formCode);
+                }
             }
         }
 
