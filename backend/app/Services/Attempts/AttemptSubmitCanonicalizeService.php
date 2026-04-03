@@ -46,6 +46,8 @@ class AttemptSubmitCanonicalizeService
         $packReleaseManifestHash = trim((string) ($attemptMeta['pack_release_manifest_hash'] ?? ''));
         $policyHash = trim((string) ($attemptMeta['policy_hash'] ?? ''));
         $engineVersion = trim((string) ($attemptMeta['engine_version'] ?? ''));
+        $scoringSpecVersion = trim((string) ($attempt->scoring_spec_version ?? ''));
+        $normVersion = trim((string) ($attempt->norm_version ?? ''));
         $submittedAt = now();
         $serverDurationSeconds = $this->core->durationResolver()->resolveServerSecondsFromValues($attempt->started_at, $submittedAt);
         $experiments = $this->core->resolveScoreExperiments($orgId, $actorAnonId, $actorUserId);
@@ -67,6 +69,8 @@ class AttemptSubmitCanonicalizeService
             'content_manifest_hash' => $packReleaseManifestHash,
             'policy_hash' => $policyHash,
             'engine_version' => $engineVersion,
+            'scoring_spec_version' => $scoringSpecVersion,
+            'norm_version' => $normVersion,
             'experiments_json' => $experiments,
         ];
 

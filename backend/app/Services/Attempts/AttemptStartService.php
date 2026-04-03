@@ -11,6 +11,7 @@ use App\Services\Content\ClinicalComboPackLoader;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\Eq60PackLoader;
 use App\Services\Content\Sds20PackLoader;
+use App\Services\Mbti\MbtiFormCatalog;
 use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
@@ -95,12 +96,45 @@ class AttemptStartService
 
         $packId = (string) ($row['default_pack_id'] ?? '');
         $dirVersion = (string) ($row['default_dir_version'] ?? '');
+        $registryPackId = $packId;
+        $registryDirVersion = $dirVersion;
+        $resolvedFormCode = null;
+        $resolvedNormVersion = null;
+        $resolvedScoringSpecVersion = null;
+        $contentPackageVersion = '';
+
+        if (strtoupper($scaleCode) === 'MBTI') {
+            try {
+                $resolvedForm = $this->mbtiFormCatalog()->resolve($dto->formCode, $packId);
+            } catch (ApiProblemException $e) {
+                if ($e->errorCode() === 'CONTENT_PACK_ERROR') {
+                    Log::error('QUESTIONS_INDEX_FIND_FAILED', [
+                        'pack_id' => $registryPackId,
+                        'dir_version' => $registryDirVersion,
+                        'questions_path' => '',
+                        'exception_message' => $e->getMessage(),
+                        'json_error' => json_last_error_msg(),
+                    ]);
+                }
+
+                throw $e;
+            }
+            $packId = (string) ($resolvedForm['pack_id'] ?? $packId);
+            $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
+            $contentPackageVersion = (string) ($resolvedForm['content_package_version'] ?? '');
+            $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'mbti_144');
+            $resolvedNormVersion = trim((string) ($resolvedForm['norm_version'] ?? ''));
+            $resolvedScoringSpecVersion = trim((string) ($resolvedForm['scoring_spec_version'] ?? ''));
+        }
+
         if ($packId === '' || $dirVersion === '') {
             throw new ApiProblemException(500, 'CONTENT_PACK_ERROR', 'scale pack not configured.');
         }
 
         $questionCount = $this->resolveQuestionCount($scaleCode, $packId, $dirVersion);
-        $contentPackageVersion = $this->resolveContentPackageVersion($packId, $dirVersion);
+        if ($contentPackageVersion === '') {
+            $contentPackageVersion = $this->resolveContentPackageVersion($packId, $dirVersion);
+        }
         $answersSummaryMeta = $dto->meta;
 
         if (strtoupper($scaleCode) === 'CLINICAL_COMBO_68') {
@@ -199,6 +233,9 @@ class AttemptStartService
         }
 
         $answersMeta = is_array($answersSummaryMeta) ? $answersSummaryMeta : [];
+        if ($resolvedFormCode !== null && $resolvedFormCode !== '') {
+            $answersMeta['form_code'] = $resolvedFormCode;
+        }
         $manifestHash = $this->resolveScaleManifestHash($scaleCode, $dirVersion);
         if ($manifestHash !== '') {
             $answersMeta['pack_release_manifest_hash'] = $manifestHash;
@@ -230,6 +267,8 @@ class AttemptStartService
             'pack_id' => $packId,
             'dir_version' => $dirVersion,
             'content_package_version' => $contentPackageVersion !== '' ? $contentPackageVersion : null,
+            'scoring_spec_version' => $resolvedScoringSpecVersion !== '' ? $resolvedScoringSpecVersion : null,
+            'norm_version' => $resolvedNormVersion !== '' ? $resolvedNormVersion : null,
             'answers_summary_json' => [
                 'stage' => 'start',
                 'created_at_ms' => (int) round(microtime(true) * 1000),
@@ -287,6 +326,8 @@ class AttemptStartService
             'pack_id' => $packId,
             'dir_version' => $dirVersion,
             'content_package_version' => $contentPackageVersion,
+            'form_code' => $resolvedFormCode,
+            'norm_version' => $resolvedNormVersion !== '' ? $resolvedNormVersion : null,
             'attempt_id' => (string) $attempt->id,
         ], [
             'org_id' => $orgId,
@@ -297,6 +338,8 @@ class AttemptStartService
             'scale_uid' => $scaleUid,
             'pack_id' => $packId,
             'dir_version' => $dirVersion,
+            'form_code' => $resolvedFormCode,
+            'norm_version' => $resolvedNormVersion !== '' ? $resolvedNormVersion : null,
             'channel' => $channel !== '' ? $channel : null,
         ]);
 
@@ -339,6 +382,10 @@ class AttemptStartService
             'resolved_from_alias' => $requestedScaleCode !== $scaleCode,
             'pack_id' => $packId,
             'dir_version' => $dirVersion,
+            'content_package_version' => $contentPackageVersion,
+            'form_code' => $resolvedFormCode,
+            'scoring_spec_version' => $resolvedScoringSpecVersion !== '' ? $resolvedScoringSpecVersion : null,
+            'norm_version' => $resolvedNormVersion !== '' ? $resolvedNormVersion : null,
             'region' => $region,
             'locale' => $locale,
             'question_count' => $questionCount,
@@ -365,6 +412,11 @@ class AttemptStartService
     private function responseProjector(): ScaleCodeResponseProjector
     {
         return app(ScaleCodeResponseProjector::class);
+    }
+
+    private function mbtiFormCatalog(): MbtiFormCatalog
+    {
+        return app(MbtiFormCatalog::class);
     }
 
     private function identityWriteProjector(): ScaleIdentityWriteProjector

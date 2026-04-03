@@ -9,6 +9,7 @@ use App\Services\Content\ClinicalComboPackLoader;
 use App\Services\Content\Eq60PackLoader;
 use App\Services\Content\QuestionsService;
 use App\Services\Content\Sds20PackLoader;
+use App\Services\Mbti\MbtiFormCatalog;
 use App\Services\Scale\ScaleCodeInputGuard;
 use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Services\Scale\ScaleIdentityResolver;
@@ -25,6 +26,7 @@ class ScalesController extends Controller
         private ScaleCodeResponseProjector $responseProjector,
         private ScaleCodeInputGuard $inputGuard,
         private OrgContext $orgContext,
+        private MbtiFormCatalog $mbtiFormCatalog,
     ) {}
 
     /**
@@ -112,6 +114,16 @@ class ScalesController extends Controller
 
             $packId = (string) ($row['default_pack_id'] ?? '');
             $dirVersion = (string) ($row['default_dir_version'] ?? '');
+            $resolvedFormCode = null;
+            if ($resolvedScaleCode === 'MBTI') {
+                $resolvedForm = $this->mbtiFormCatalog->resolve(
+                    $this->requestedMbtiFormCode($request),
+                    $packId
+                );
+                $packId = (string) ($resolvedForm['pack_id'] ?? $packId);
+                $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
+                $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'mbti_144');
+            }
             if ($packId === '' || $dirVersion === '') {
                 return response()->json([
                     'ok' => false,
@@ -343,6 +355,7 @@ class ScalesController extends Controller
                 'pack_id' => $packId,
                 'dir_version' => $dirVersion,
                 'content_package_version' => (string) ($loaded['content_package_version'] ?? ''),
+                'form_code' => $resolvedFormCode,
                 'questions' => $loaded['questions'],
             ] + $scaleCodeMeta);
         } catch (\Throwable $e) {
@@ -364,6 +377,23 @@ class ScalesController extends Controller
     private function normalizeBigFiveLocale(string $locale): string
     {
         return str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en';
+    }
+
+    private function requestedMbtiFormCode(Request $request): ?string
+    {
+        foreach (['form_code', 'form'] as $key) {
+            $value = $request->query($key);
+            if (! is_scalar($value)) {
+                continue;
+            }
+
+            $normalized = trim((string) $value);
+            if ($normalized !== '') {
+                return $normalized;
+            }
+        }
+
+        return null;
     }
 
     /**

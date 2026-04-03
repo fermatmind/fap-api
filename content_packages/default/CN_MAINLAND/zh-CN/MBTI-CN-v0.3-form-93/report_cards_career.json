@@ -1,0 +1,737 @@
+{
+  "schema": "fap.report.cards.v1",
+  "engine": "v1.2",
+  "section": "career",
+  "meta": {
+    "package": "MBTI-CN-v0.3",
+    "updated_at": "2025-12-21",
+    "change_id": "LAUNCH-V1-REPORT-CARDS-CAREER",
+    "notes": "Launch v1.0: career cards production pool (23). 8 axis directional strong-only (min_delta=12) + 4 role directional + 4 axis intro (min_delta=0) + 7 core fallback-safe. Tags are primary selector hooks; match rules are optional constraints."
+  },
+  "rules": {
+    "min_cards": 2,
+    "target_cards": 3,
+    "max_cards": 6,
+    "fallback_tags": [
+      "kind:core"
+    ],
+    "sort": [
+      "priority_desc"
+    ]
+  },
+  "items": [
+    {
+      "id": "career_role_SJ",
+      "section": "career",
+      "title": "SJ 职业底盘：把秩序与责任做成长期竞争力",
+      "desc": "你更适合规则清晰、职责明确、重视稳定交付的环境，能把流程和质量持续做稳。",
+      "bullets": [
+        "你擅长让标准真正落地执行",
+        "长期可靠是你很强的职业信用",
+        "秩序感会直接提升你的产出质量"
+      ],
+      "tips": [
+        "把经验沉淀成模板与规范",
+        "注意在稳定之外也保留小范围试新空间"
+      ],
+      "tags": [
+        "kind:role",
+        "role:SJ",
+        "career:operations",
+        "career:process"
+      ],
+      "priority": 94,
+      "match": {
+        "tags_any": [
+          "role:SJ"
+        ]
+      },
+      "access_level": "paid",
+      "module_code": "career"
+    },
+    {
+      "id": "career_role_SP",
+      "section": "career",
+      "title": "SP 职业底盘：在变化与现场反馈中迅速创造机会",
+      "desc": "你更适合节奏快、反馈快、允许试做和及时调整的环境，行动本身就是你的优势来源。",
+      "bullets": [
+        "你能在真实场景里迅速找到切入口",
+        "反馈越及时，你越容易进入状态",
+        "你擅长把问题当场推进到可行动状态"
+      ],
+      "tips": [
+        "优先选择反馈周期短的岗位",
+        "给临场能力补一个轻量复盘动作"
+      ],
+      "tags": [
+        "kind:role",
+        "role:SP",
+        "career:execution",
+        "career:field"
+      ],
+      "priority": 94,
+      "match": {
+        "tags_any": [
+          "role:SP"
+        ]
+      },
+      "access_level": "paid",
+      "module_code": "career"
+    },
+    {
+      "id": "career_role_NT",
+      "section": "career",
+      "title": "NT 职业底盘：用结构、模型与策略处理复杂问题",
+      "desc": "你更适合高复杂度、高自主度、重视分析与系统设计的环境，能把抽象判断转成长期优势。",
+      "bullets": [
+        "你擅长从复杂局面里提炼结构",
+        "需要思考空间的岗位更能放大你的价值",
+        "方法论一旦成形，会形成强复利"
+      ],
+      "tips": [
+        "把框架讲成别人也能执行的语言",
+        "沟通时先对齐目标，再展开推理"
+      ],
+      "tags": [
+        "kind:role",
+        "role:NT",
+        "career:strategy",
+        "career:analysis"
+      ],
+      "priority": 94,
+      "match": {
+        "tags_any": [
+          "role:NT"
+        ]
+      },
+      "access_level": "paid",
+      "module_code": "career"
+    },
+    {
+      "id": "career_role_NF",
+      "section": "career",
+      "title": "NF 职业底盘：用影响力、理解力与价值感带动人",
+      "desc": "你更适合人和关系重要、需要共情与引导的环境，能把意义感转成真实行动意愿。",
+      "bullets": [
+        "你擅长在关系中建立信任和方向",
+        "价值感会显著影响你的职业耐力",
+        "你能把分歧拉回更有温度的共识"
+      ],
+      "tips": [
+        "先守住边界，再继续照顾别人",
+        "选择文化与你价值感相容的组织"
+      ],
+      "tags": [
+        "kind:role",
+        "role:NF",
+        "career:people",
+        "career:impact"
+      ],
+      "priority": 94,
+      "match": {
+        "tags_any": [
+          "role:NF"
+        ]
+      },
+      "access_level": "paid",
+      "module_code": "career"
+    },
+    {
+      "id": "career_axis_EI_E_strong",
+      "section": "career",
+      "title": "E 偏好较强：在协作密度高的岗位更易发挥",
+      "desc": "你更适合需要频繁沟通、资源调动和对外协同的工作场景，互动会显著提高你的推进效率。",
+      "bullets": [
+        "你能在讨论中快速对齐方向",
+        "高协作环境会放大你的带动能力",
+        "对外连接通常会给你带来资源和机会"
+      ],
+      "tips": [
+        "选岗位时优先看协作密度与决策节奏",
+        "给高频沟通留出总结窗口"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:EI:E",
+        "state:strong",
+        "career:collaboration"
+      ],
+      "priority": 96,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "E",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "career"
+    },
+    {
+      "id": "career_axis_EI_I_strong",
+      "section": "career",
+      "title": "I 偏好较强：在深度工作场景更易建立优势",
+      "desc": "你更适合需要独立思考、深度分析和低噪输出的岗位，安静空间会显著提升你的质量。",
+      "bullets": [
+        "深度任务更容易拉开你的差距",
+        "你适合先思考再表达的节奏",
+        "复杂议题会激发你的专注度"
+      ],
+      "tips": [
+        "优先选择能保护专注时间的环境",
+        "把重要结论写成结构化输出"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:EI:I",
+        "state:strong",
+        "career:deepwork"
+      ],
+      "priority": 96,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "I",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "career"
+    },
+    {
+      "id": "career_axis_SN_S_strong",
+      "section": "career",
+      "title": "S 偏好较强：在注重细节与稳定交付的岗位更有优势",
+      "desc": "你更容易在流程清晰、标准明确、需要细节把关的场景里建立长期口碑。",
+      "bullets": [
+        "你能显著降低返工和执行误差",
+        "对质量、规范和落地细节更敏感",
+        "你适合把工作做成可复制体系"
+      ],
+      "tips": [
+        "优先关注交付标准是否清晰",
+        "把经验沉淀成模板会更快形成护城河"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:SN:S",
+        "state:strong",
+        "career:operations"
+      ],
+      "priority": 95,
+      "match": {
+        "axis": {
+          "dim": "SN",
+          "side": "S",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "career"
+    },
+    {
+      "id": "career_axis_SN_N_strong",
+      "section": "career",
+      "title": "N 偏好较强：在需要洞察趋势与提出新解法的岗位更有优势",
+      "desc": "你更适合处理复杂问题、长期策略和新方向探索，能把抽象判断转成新的增长路径。",
+      "bullets": [
+        "你擅长发现模式和长期机会",
+        "高自由度场景更能放大你的价值",
+        "新议题和新方向更容易激发你的投入"
+      ],
+      "tips": [
+        "选岗位时重点看问题复杂度",
+        "给远见判断补一段落地验证链"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:SN:N",
+        "state:strong",
+        "career:strategy"
+      ],
+      "priority": 95,
+      "match": {
+        "axis": {
+          "dim": "SN",
+          "side": "N",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "career"
+    },
+    {
+      "id": "career_axis_TF_T_strong",
+      "section": "career",
+      "title": "T 偏好较强：在强调标准、决策和问题分析的岗位更有优势",
+      "desc": "你更适合需要结构判断、逻辑推演和规则清晰的岗位，能为团队提供稳定决策质量。",
+      "bullets": [
+        "你能把复杂问题讲成可判断的结构",
+        "你擅长在分歧里守住标准",
+        "分析和策略场景会显著放大你的长项"
+      ],
+      "tips": [
+        "沟通方案时同步补充影响层面",
+        "把判断标准整理成团队可复用语言"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:TF:T",
+        "state:strong",
+        "career:decision"
+      ],
+      "priority": 94,
+      "match": {
+        "axis": {
+          "dim": "TF",
+          "side": "T",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "career"
+    },
+    {
+      "id": "career_axis_TF_F_strong",
+      "section": "career",
+      "title": "F 偏好较强：在强调人、关系和体验的岗位更有优势",
+      "desc": "你更适合需要共情、协作引导和价值传递的工作场景，能把关系质量转成实际结果。",
+      "bullets": [
+        "你会自然关注体验和感受差异",
+        "你擅长建立信任与合作氛围",
+        "以人为中心的岗位更容易给你成就感"
+      ],
+      "tips": [
+        "把“体贴”同步翻译成可执行动作",
+        "避免长期承担超出边界的情绪劳动"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:TF:F",
+        "state:strong",
+        "career:people"
+      ],
+      "priority": 94,
+      "match": {
+        "axis": {
+          "dim": "TF",
+          "side": "F",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "career"
+    },
+    {
+      "id": "career_axis_JP_J_strong",
+      "section": "career",
+      "title": "J 偏好较强：在节奏明确、责任清晰的岗位更能稳定产出",
+      "desc": "你更适合目标、节点和交付标准清楚的环境，计划感会让你的执行优势持续放大。",
+      "bullets": [
+        "你擅长把事情拆成阶段目标",
+        "有秩序的环境会提升你的效率和确定性",
+        "你通常能把团队带回稳定节奏"
+      ],
+      "tips": [
+        "评估岗位时看是否有清楚的优先级",
+        "给计划留一格调整空间，以免过早锁死"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:JP:J",
+        "state:strong",
+        "career:management"
+      ],
+      "priority": 94,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "J",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "career"
+    },
+    {
+      "id": "career_axis_JP_P_strong",
+      "section": "career",
+      "title": "P 偏好较强：在变化快、反馈快的岗位更能放大优势",
+      "desc": "你更适合高弹性、高反馈、允许试做和快速迭代的工作场景，变化越快越能看见你的反应力。",
+      "bullets": [
+        "你擅长根据新信息及时换挡",
+        "反馈周期越短，你的投入感越强",
+        "开放式问题比固定流程更能激发你"
+      ],
+      "tips": [
+        "选岗位时重点看反馈速度",
+        "给自由度配一条最小交付标准"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:JP:P",
+        "state:strong",
+        "career:agile"
+      ],
+      "priority": 94,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "P",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "career"
+    },
+    {
+      "id": "career_axis_AT_A_strong",
+      "section": "career",
+      "title": "A 偏好较强：在压力环境中更能维持稳定输出",
+      "desc": "你更适合需要连续推进、节奏较强但要求稳定交付的岗位，能为团队提供确定性。",
+      "bullets": [
+        "你不容易被短期波动打散节奏",
+        "压力场景里更能保持判断清晰",
+        "你的稳定感会增强他人信任"
+      ],
+      "tips": [
+        "继续保留稳定节奏，也定期做风险盘点",
+        "别因为顺手就跳过过程复盘"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:AT:A",
+        "state:strong",
+        "career:stress",
+        "career:delivery"
+      ],
+      "priority": 94,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "A",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "career"
+    },
+    {
+      "id": "career_axis_AT_T_strong",
+      "section": "career",
+      "title": "T 偏好较强：在需要精细校准和风险意识的岗位更有优势",
+      "desc": "你更适合需要高敏感度、审慎把关和持续优化的岗位，能较早发现潜在问题。",
+      "bullets": [
+        "你对细小异常的察觉速度很快",
+        "优化、审校和风险判断会放大你的价值",
+        "你会主动对细节做额外校准"
+      ],
+      "tips": [
+        "把高敏感度聚焦到关键指标上",
+        "为校准动作设置明确边界，避免过度消耗"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:AT:T",
+        "state:strong",
+        "career:quality",
+        "career:review"
+      ],
+      "priority": 94,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "T",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "career"
+    },
+    {
+      "id": "career_axis_EI_E_intro",
+      "section": "career",
+      "title": "E 这一倾向已出现：在协作密度高的岗位更易发挥",
+      "desc": "这一倾向已经开始稳定显现。你更适合需要频繁沟通、资源调动和对外协同的工作场景，互动会显著提高你的推进效率。",
+      "bullets": [
+        "你能在讨论中快速对齐方向",
+        "高协作环境会放大你的带动能力",
+        "对外连接通常会给你带来资源和机会"
+      ],
+      "tips": [
+        "选岗位时优先看协作密度与决策节奏",
+        "给高频沟通留出总结窗口"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:EI:E",
+        "state:clear",
+        "career:collaboration"
+      ],
+      "priority": 60,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "E",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "career"
+    },
+    {
+      "id": "career_axis_EI_I_intro",
+      "section": "career",
+      "title": "I 这一倾向已出现：在深度工作场景更易建立优势",
+      "desc": "这一倾向已经开始稳定显现。你更适合需要独立思考、深度分析和低噪输出的岗位，安静空间会显著提升你的质量。",
+      "bullets": [
+        "深度任务更容易拉开你的差距",
+        "你适合先思考再表达的节奏",
+        "复杂议题会激发你的专注度"
+      ],
+      "tips": [
+        "优先选择能保护专注时间的环境",
+        "把重要结论写成结构化输出"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:EI:I",
+        "state:clear",
+        "career:deepwork"
+      ],
+      "priority": 60,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "I",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "career"
+    },
+    {
+      "id": "career_axis_JP_J_intro",
+      "section": "career",
+      "title": "J 这一倾向已出现：在节奏明确、责任清晰的岗位更能稳定产出",
+      "desc": "这一倾向已经开始稳定显现。你更适合目标、节点和交付标准清楚的环境，计划感会让你的执行优势持续放大。",
+      "bullets": [
+        "你擅长把事情拆成阶段目标",
+        "有秩序的环境会提升你的效率和确定性",
+        "你通常能把团队带回稳定节奏"
+      ],
+      "tips": [
+        "评估岗位时看是否有清楚的优先级",
+        "给计划留一格调整空间，以免过早锁死"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:JP:J",
+        "state:clear",
+        "career:management"
+      ],
+      "priority": 58,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "J",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "career"
+    },
+    {
+      "id": "career_axis_JP_P_intro",
+      "section": "career",
+      "title": "P 这一倾向已出现：在变化快、反馈快的岗位更能放大优势",
+      "desc": "这一倾向已经开始稳定显现。你更适合高弹性、高反馈、允许试做和快速迭代的工作场景，变化越快越能看见你的反应力。",
+      "bullets": [
+        "你擅长根据新信息及时换挡",
+        "反馈周期越短，你的投入感越强",
+        "开放式问题比固定流程更能激发你"
+      ],
+      "tips": [
+        "选岗位时重点看反馈速度",
+        "给自由度配一条最小交付标准"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:JP:P",
+        "state:clear",
+        "career:agile"
+      ],
+      "priority": 58,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "P",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "career"
+    },
+    {
+      "id": "career_core_01",
+      "section": "career",
+      "title": "职业判断的底层问题：这份工作是否匹配你的天然驱动力",
+      "desc": "对你来说，岗位不只是任务集合，更是你会不会长期愿意投入、愿不愿意持续做好的问题。",
+      "bullets": [
+        "匹配度会显著影响你的耐力",
+        "做得来和做得久不是同一回事",
+        "天然驱动力匹配时，复利会更明显"
+      ],
+      "tips": [
+        "看岗位时同时看任务、节奏和文化",
+        "别只看头衔，也看自己长期是否愿意投入"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "career:strategy"
+      ],
+      "priority": 100,
+      "access_level": "preview",
+      "module_code": "career"
+    },
+    {
+      "id": "career_core_02",
+      "section": "career",
+      "title": "适配你的工作，不只是“会做”，还要“做得不耗”",
+      "desc": "很多职业选择的问题，不在能力够不够，而在这种工作方式是否会持续消耗你的判断和状态。",
+      "bullets": [
+        "长期状态决定长期成绩",
+        "不耗竭的工作方式更容易做出深度",
+        "节奏、边界和反馈方式都很关键"
+      ],
+      "tips": [
+        "回顾你在哪类任务后会明显恢复而不是透支",
+        "优先选择能保护关键工作方式的环境"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "career:portfolio"
+      ],
+      "priority": 97,
+      "access_level": "preview",
+      "module_code": "career"
+    },
+    {
+      "id": "career_core_03",
+      "section": "career",
+      "title": "你需要一个能接住你优势的组织环境",
+      "desc": "即使岗位名相同，不同组织的目标、流程和沟通方式，也会让你的发挥空间完全不同。",
+      "bullets": [
+        "环境会直接放大或压缩你的长处",
+        "文化匹配会影响你是否愿意持续贡献",
+        "组织节奏和边界清晰度都值得重点看"
+      ],
+      "tips": [
+        "面试时多问真实协作方式和决策流程",
+        "判断岗位时别忽略团队文化是否相容"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "career:collaboration"
+      ],
+      "priority": 95,
+      "access_level": "preview",
+      "module_code": "career"
+    },
+    {
+      "id": "career_core_04",
+      "section": "career",
+      "title": "职业成长要看“可积累性”而不是只看当前热度",
+      "desc": "那些能不断沉淀方法、关系、作品或判断力的工作，更容易让你在几年后拉开差距。",
+      "bullets": [
+        "可积累性会决定你后劲多大",
+        "短期热度不一定能沉淀长期资产",
+        "方法和口碑都属于职业资产"
+      ],
+      "tips": [
+        "回看这份工作一年后会留下什么",
+        "优先选择能沉淀作品、方法或影响力的路径"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "career:growth"
+      ],
+      "priority": 94,
+      "access_level": "preview",
+      "module_code": "career"
+    },
+    {
+      "id": "career_core_05",
+      "section": "career",
+      "title": "职业选择也需要边界感",
+      "desc": "并不是所有能做的事都值得长期承担，真正稳的职业路径通常也很依赖取舍能力。",
+      "bullets": [
+        "边界能保护你的长期产能",
+        "会取舍比什么都接更重要",
+        "角色清晰时，你更容易建立专业信用"
+      ],
+      "tips": [
+        "列出你愿意长期承担和不愿长期承担的部分",
+        "尽早说清角色边界，避免长期错位投入"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:warm",
+        "career:learning"
+      ],
+      "priority": 92,
+      "access_level": "preview",
+      "module_code": "career"
+    },
+    {
+      "id": "career_core_06",
+      "section": "career",
+      "title": "你的职业价值，往往来自“别人很难稳定做到，而你能长期做到”",
+      "desc": "真正有竞争力的部分，不一定最显眼，却往往是你长期、稳定、可复用地做到位的那一块。",
+      "bullets": [
+        "稳定兑现会慢慢变成职业信用",
+        "别人偶尔能做到，不等于能长期做到",
+        "可复用的长处最容易形成护城河"
+      ],
+      "tips": [
+        "写下你最稳定的三项职业能力",
+        "继续强化那些最能被长期识别和信任的部分"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:warm",
+        "career:stress"
+      ],
+      "priority": 90,
+      "access_level": "preview",
+      "module_code": "career"
+    },
+    {
+      "id": "career_core_07",
+      "section": "career",
+      "title": "职业升级的关键，不只是做更多，而是做得更有选择",
+      "desc": "当你的判断开始从“我能做什么”转向“什么最值得我做”，职业路径才会真正变清晰。",
+      "bullets": [
+        "更多选择不等于更清晰",
+        "真正的升级来自有意识的取舍",
+        "把时间投向关键问题会更快形成差距"
+      ],
+      "tips": [
+        "每个阶段都回看一次当前最值得投入的方向",
+        "减少那些只忙不长的事务占比"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "career:moat"
+      ],
+      "priority": 88,
+      "access_level": "preview",
+      "module_code": "career"
+    }
+  ]
+}

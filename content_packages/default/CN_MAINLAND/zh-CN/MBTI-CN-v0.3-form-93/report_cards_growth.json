@@ -1,0 +1,675 @@
+{
+  "schema": "fap.report.cards.v1",
+  "engine": "v1.2",
+  "section": "growth",
+  "meta": {
+    "package": "MBTI-CN-v0.3",
+    "updated_at": "2025-12-21",
+    "change_id": "LAUNCH-V1-REPORT-CARDS-GROWTH",
+    "notes": "Launch v1.0: growth cards production pool (23). 10 axis directional strong-only (min_delta=12) + 6 axis intro guardrail-friendly (min_delta=0, AT split A/T) + 7 core fallback-safe. Tags are primary selector hooks; match rules are optional constraints."
+  },
+  "rules": {
+    "min_cards": 2,
+    "target_cards": 3,
+    "max_cards": 6,
+    "fallback_tags": [
+      "kind:core"
+    ],
+    "sort": [
+      "priority_desc"
+    ]
+  },
+  "items": [
+    {
+      "id": "growth_axis_EI_E_strong",
+      "section": "growth",
+      "title": "E 偏好较强：在反馈与碰撞中加速成长",
+      "desc": "你更容易在互动、协作和即时反馈中完成校准，成长通常发生在真实讨论之后。",
+      "bullets": [
+        "反馈越及时，你越能快速调整",
+        "在团队里更容易被激发行动感",
+        "边做边学对你通常更有效"
+      ],
+      "tips": [
+        "每次讨论后留下一个行动结论",
+        "把外部反馈和自我判断分开记录"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:EI:E",
+        "state:strong",
+        "topic:feedback"
+      ],
+      "priority": 96,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "E",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_axis_EI_I_strong",
+      "section": "growth",
+      "title": "I 偏好较强：在深度沉淀中完成升级",
+      "desc": "你更适合通过独立学习、安静推演和持续沉淀拉开差距，成长往往发生在低噪环境里。",
+      "bullets": [
+        "独立学习的吸收效率更高",
+        "你会在沉淀后形成更完整的方法",
+        "深度时间块对你很重要"
+      ],
+      "tips": [
+        "把学习输出成简短笔记或卡片",
+        "先给自己完整思考时间，再进入讨论"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:EI:I",
+        "state:strong",
+        "topic:deepwork"
+      ],
+      "priority": 96,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "I",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_axis_SN_S_strong",
+      "section": "growth",
+      "title": "S 偏好较强：通过打磨细节积累成长优势",
+      "desc": "你更擅长在经验复盘、流程优化和细节打磨中稳步升级，成长路径通常较务实。",
+      "bullets": [
+        "你会通过重复实践建立稳定能力",
+        "经验一旦沉淀成模板，会形成长期复利",
+        "实际验证能显著提高你的信心"
+      ],
+      "tips": [
+        "把经验写成可复用清单",
+        "周期性回看哪些步骤已经可以简化"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:SN:S",
+        "state:strong",
+        "topic:practice"
+      ],
+      "priority": 95,
+      "match": {
+        "axis": {
+          "dim": "SN",
+          "side": "S",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_axis_SN_N_strong",
+      "section": "growth",
+      "title": "N 偏好较强：通过理解模式扩展成长上限",
+      "desc": "你更容易通过新框架、新视角和长期趋势判断完成升级，成长往往先从认知扩容开始。",
+      "bullets": [
+        "你会通过抽象理解拉高能力上限",
+        "新模型和新概念能快速激发你",
+        "看到趋势后，你更愿意持续投入"
+      ],
+      "tips": [
+        "给每个大想法配一个小实验",
+        "在发散之后补一条落地验证线"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:SN:N",
+        "state:strong",
+        "topic:framework"
+      ],
+      "priority": 95,
+      "match": {
+        "axis": {
+          "dim": "SN",
+          "side": "N",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_axis_TF_T_strong",
+      "section": "growth",
+      "title": "T 偏好较强：通过校准标准提升成长质量",
+      "desc": "你更适合借助明确标准、结构化复盘和逻辑推演来升级自己，知道为什么有效对你很重要。",
+      "bullets": [
+        "你会主动复盘因果和机制",
+        "清晰标准能帮你减少盲目重复",
+        "你愿意为了更优解持续修正"
+      ],
+      "tips": [
+        "建立一份自己的复盘模板",
+        "把“感受不好”拆成具体机制问题"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:TF:T",
+        "state:strong",
+        "topic:decision"
+      ],
+      "priority": 94,
+      "match": {
+        "axis": {
+          "dim": "TF",
+          "side": "T",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_axis_TF_F_strong",
+      "section": "growth",
+      "title": "F 偏好较强：通过价值一致性保持成长动力",
+      "desc": "当成长方向与价值感、关系感一致时，你的持续性会更强，也更容易获得真正的投入感。",
+      "bullets": [
+        "被理解和被认可会增强你的行动力",
+        "你会从关系反馈里修正自己",
+        "一件事是否有意义会影响你的耐力"
+      ],
+      "tips": [
+        "把成长目标写成你真正在乎的原因",
+        "在照顾别人前，先确认自己的边界"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:TF:F",
+        "state:strong",
+        "topic:boundary"
+      ],
+      "priority": 94,
+      "match": {
+        "axis": {
+          "dim": "TF",
+          "side": "F",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_axis_JP_J_strong",
+      "section": "growth",
+      "title": "J 偏好较强：通过稳定节奏构建成长曲线",
+      "desc": "你更适合用阶段目标、固定节奏和持续跟进来形成成长复利，规律性对你很关键。",
+      "bullets": [
+        "持续推进会给你明显的成就感",
+        "有节奏的复盘比临时冲刺更适合你",
+        "你擅长把目标拆成阶段节点"
+      ],
+      "tips": [
+        "把成长目标拆成月度与周度节点",
+        "保留一个弹性时段处理变化"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:JP:J",
+        "state:strong",
+        "topic:plan"
+      ],
+      "priority": 94,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "J",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_axis_JP_P_strong",
+      "section": "growth",
+      "title": "P 偏好较强：通过试探与迭代打开成长空间",
+      "desc": "你更适合在真实变化里边做边学，通过快速试探找到更适合自己的成长路径。",
+      "bullets": [
+        "新鲜反馈会显著提高你的投入度",
+        "弹性空间能帮助你保持探索欲",
+        "你擅长在实践中调整方向"
+      ],
+      "tips": [
+        "同时保留不超过三个成长重点",
+        "给每次尝试设一个最晚复盘点"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:JP:P",
+        "state:strong",
+        "topic:explore"
+      ],
+      "priority": 94,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "P",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_axis_AT_A_strong",
+      "section": "growth",
+      "title": "A 偏好较强：通过稳定状态扩大长期复利",
+      "desc": "你的成长优势来自节奏稳定、恢复较快和能长期持续，因此更适合做长线积累。",
+      "bullets": [
+        "你能把训练保持在可持续强度",
+        "状态稳定时，复利更容易显现",
+        "你不容易因短期波动放弃长期目标"
+      ],
+      "tips": [
+        "顺手时也主动做一次难点盘点",
+        "不要只靠惯性，给自己加一条升级挑战"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:AT:A",
+        "state:strong",
+        "topic:confidence"
+      ],
+      "priority": 92,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "A",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_axis_AT_T_strong",
+      "section": "growth",
+      "title": "T 偏好较强：通过敏锐反馈持续修正做法",
+      "desc": "你更容易从细微信号里发现不足，因此一旦方法对了，成长速度会很快。",
+      "bullets": [
+        "你对偏差的感知很灵敏",
+        "你会主动寻找优化空间",
+        "细小反馈也会进入你的学习系统"
+      ],
+      "tips": [
+        "把高敏感度收束到一个关键问题上",
+        "给每轮优化设定明确的停止标准"
+      ],
+      "tags": [
+        "kind:axis",
+        "axis:AT:T",
+        "state:strong",
+        "topic:calibration"
+      ],
+      "priority": 92,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "T",
+          "min_delta": 12
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_axis_EI_E_intro",
+      "section": "growth",
+      "title": "E 这一倾向已出现：在反馈与碰撞中加速成长",
+      "desc": "这一倾向已经开始稳定显现。你更容易在互动、协作和即时反馈中完成校准，成长通常发生在真实讨论之后。",
+      "bullets": [
+        "反馈越及时，你越能快速调整",
+        "在团队里更容易被激发行动感",
+        "边做边学对你通常更有效"
+      ],
+      "tips": [
+        "每次讨论后留下一个行动结论",
+        "把外部反馈和自我判断分开记录"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:EI:E",
+        "state:clear"
+      ],
+      "priority": 60,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "E",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_axis_EI_I_intro",
+      "section": "growth",
+      "title": "I 这一倾向已出现：在深度沉淀中完成升级",
+      "desc": "这一倾向已经开始稳定显现。你更适合通过独立学习、安静推演和持续沉淀拉开差距，成长往往发生在低噪环境里。",
+      "bullets": [
+        "独立学习的吸收效率更高",
+        "你会在沉淀后形成更完整的方法",
+        "深度时间块对你很重要"
+      ],
+      "tips": [
+        "把学习输出成简短笔记或卡片",
+        "先给自己完整思考时间，再进入讨论"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:EI:I",
+        "state:clear"
+      ],
+      "priority": 60,
+      "match": {
+        "axis": {
+          "dim": "EI",
+          "side": "I",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_axis_JP_J_intro",
+      "section": "growth",
+      "title": "J 这一倾向已出现：通过稳定节奏构建成长曲线",
+      "desc": "这一倾向已经开始稳定显现。你更适合用阶段目标、固定节奏和持续跟进来形成成长复利，规律性对你很关键。",
+      "bullets": [
+        "持续推进会给你明显的成就感",
+        "有节奏的复盘比临时冲刺更适合你",
+        "你擅长把目标拆成阶段节点"
+      ],
+      "tips": [
+        "把成长目标拆成月度与周度节点",
+        "保留一个弹性时段处理变化"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:JP:J",
+        "state:clear"
+      ],
+      "priority": 58,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "J",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_axis_JP_P_intro",
+      "section": "growth",
+      "title": "P 这一倾向已出现：通过试探与迭代打开成长空间",
+      "desc": "这一倾向已经开始稳定显现。你更适合在真实变化里边做边学，通过快速试探找到更适合自己的成长路径。",
+      "bullets": [
+        "新鲜反馈会显著提高你的投入度",
+        "弹性空间能帮助你保持探索欲",
+        "你擅长在实践中调整方向"
+      ],
+      "tips": [
+        "同时保留不超过三个成长重点",
+        "给每次尝试设一个最晚复盘点"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:JP:P",
+        "state:clear"
+      ],
+      "priority": 58,
+      "match": {
+        "axis": {
+          "dim": "JP",
+          "side": "P",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_axis_AT_A_intro",
+      "section": "growth",
+      "title": "A 这一倾向已出现：通过稳定状态扩大长期复利",
+      "desc": "这一倾向已经开始稳定显现。你的成长优势来自节奏稳定、恢复较快和能长期持续，因此更适合做长线积累。",
+      "bullets": [
+        "你能把训练保持在可持续强度",
+        "状态稳定时，复利更容易显现",
+        "你不容易因短期波动放弃长期目标"
+      ],
+      "tips": [
+        "顺手时也主动做一次难点盘点",
+        "不要只靠惯性，给自己加一条升级挑战"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:AT:A",
+        "state:clear"
+      ],
+      "priority": 56,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "A",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_axis_AT_T_intro",
+      "section": "growth",
+      "title": "T 这一倾向已出现：通过敏锐反馈持续修正做法",
+      "desc": "这一倾向已经开始稳定显现。你更容易从细微信号里发现不足，因此一旦方法对了，成长速度会很快。",
+      "bullets": [
+        "你对偏差的感知很灵敏",
+        "你会主动寻找优化空间",
+        "细小反馈也会进入你的学习系统"
+      ],
+      "tips": [
+        "把高敏感度收束到一个关键问题上",
+        "给每轮优化设定明确的停止标准"
+      ],
+      "tags": [
+        "kind:axis_intro",
+        "axis:AT:T",
+        "state:clear"
+      ],
+      "priority": 56,
+      "match": {
+        "axis": {
+          "dim": "AT",
+          "side": "T",
+          "min_delta": 0
+        }
+      },
+      "access_level": "paid",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_core_01",
+      "section": "growth",
+      "title": "成长底盘：你适合走“持续校准”而不是“短期冲刺”",
+      "desc": "对你来说，真正有效的成长往往来自长期稳定投入和阶段性复盘，而不是一时靠狠劲推进。",
+      "bullets": [
+        "规律节奏比情绪驱动更可靠",
+        "你适合建立自己的复盘机制",
+        "小步但持续的升级更容易被你守住"
+      ],
+      "tips": [
+        "给成长目标设固定回看时间",
+        "把每次进步写成可复用的方法"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "topic:assets"
+      ],
+      "priority": 100,
+      "access_level": "preview",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_core_02",
+      "section": "growth",
+      "title": "你需要一个能长期维持的成长节奏",
+      "desc": "一旦节奏过满、过乱或过度受外部牵引，你的成长质量就会明显下降。",
+      "bullets": [
+        "节奏稳定时，你的吸收效率更高",
+        "被持续打断会放大你的消耗",
+        "边界感会直接影响你的成长速度"
+      ],
+      "tips": [
+        "先保护关键学习时间，再安排其他事务",
+        "给高强度阶段配一个恢复窗口"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "topic:levelup"
+      ],
+      "priority": 97,
+      "access_level": "preview",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_core_03",
+      "section": "growth",
+      "title": "对你而言，成长要同时经过“理解”和“实践”",
+      "desc": "仅靠知道或者仅靠做，都不够；把理解与实践接起来，才会让进步真正稳住。",
+      "bullets": [
+        "理解会决定方向感",
+        "实践会决定真实掌握度",
+        "两者之间的来回会构成你的复利"
+      ],
+      "tips": [
+        "每学一个点，都补一个实践动作",
+        "每做一件事，都补一句方法结论"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:warm",
+        "topic:energy"
+      ],
+      "priority": 95,
+      "access_level": "preview",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_core_04",
+      "section": "growth",
+      "title": "你适合建立属于自己的判断标准",
+      "desc": "当成长只靠外部评价驱动时，你容易失去稳定感；有自己的标准，进步会更扎实。",
+      "bullets": [
+        "外部反馈重要，但不能替代内在标准",
+        "知道自己为什么要变强，会提升持续性",
+        "标准清楚后，取舍会更容易"
+      ],
+      "tips": [
+        "写下你当前最看重的三个成长指标",
+        "别让所有反馈都拥有同等权重"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "topic:learning"
+      ],
+      "priority": 94,
+      "access_level": "preview",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_core_05",
+      "section": "growth",
+      "title": "你需要把优势练成方法，而不是只停留在感觉好用",
+      "desc": "很多长项之所以稳定，是因为它们被重复、被总结、被刻意保留下来。",
+      "bullets": [
+        "优势一旦方法化，复利会明显变快",
+        "好感觉需要被沉淀成好方法",
+        "会用和会教自己复用，是两个层次"
+      ],
+      "tips": [
+        "把一次做得好的经验写成步骤",
+        "隔一段时间复看是否还能继续适用"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "topic:communication"
+      ],
+      "priority": 92,
+      "access_level": "preview",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_core_06",
+      "section": "growth",
+      "title": "成长不只是补短板，也包括放大正确的长板",
+      "desc": "一味盯着不足会让你失去节奏，知道哪些部分值得继续放大同样重要。",
+      "bullets": [
+        "优势放大能给你更稳定的成就感",
+        "长板经常决定你能走多远",
+        "先做强几个关键点，比平均用力更有效"
+      ],
+      "tips": [
+        "明确一项你要持续强化的核心优势",
+        "别让补短板吞掉所有时间和精力"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:warm",
+        "topic:stress"
+      ],
+      "priority": 90,
+      "access_level": "preview",
+      "module_code": "core_full"
+    },
+    {
+      "id": "growth_core_07",
+      "section": "growth",
+      "title": "真正让你进步的，往往是愿意面对反馈后的第二次动作",
+      "desc": "能否在收到信息后再做一次调整，决定了成长是否从“知道”走向“真正变化”。",
+      "bullets": [
+        "第一次尝试很重要，第二次修正更关键",
+        "反馈本身不是结果，调整才是",
+        "持续迭代会让你越来越稳"
+      ],
+      "tips": [
+        "收到反馈后，立刻写下一个下一步动作",
+        "只挑一个关键点先改，避免同时修太多"
+      ],
+      "tags": [
+        "kind:core",
+        "tone:neutral",
+        "topic:visibility"
+      ],
+      "priority": 88,
+      "access_level": "preview",
+      "module_code": "core_full"
+    }
+  ]
+}

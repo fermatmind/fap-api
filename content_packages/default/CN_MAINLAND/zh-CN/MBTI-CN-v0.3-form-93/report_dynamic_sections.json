@@ -1,0 +1,704 @@
+{
+    "schema": "fap.mbti.dynamic_sections.v1",
+    "version": "phase9d.v1",
+  "labels": {
+    "block_kinds": {
+      "type_skeleton": "类型骨架",
+      "axis_strength": "强度层",
+      "boundary": "边界深解释",
+      "identity": "身份层",
+      "scene": "场景应用",
+      "work_style": "工作风格桥接",
+      "role_fit": "角色匹配桥接",
+      "collaboration_fit": "协作匹配桥接",
+      "work_env": "工作环境桥接",
+      "career_next_step": "职业下一步桥接",
+      "next_action": "下一步动作",
+      "weekly_experiment": "本周实验",
+      "relationship_practice": "本周关系练习",
+      "work_experiment": "工作实验",
+      "watchout": "风险提醒",
+      "action_experiment": "行动实验",
+      "action_reset": "动作重置",
+      "action_resistance_break": "阻力拆解",
+      "action_momentum_start": "起步动量",
+      "action_bridge_step": "桥接动作",
+      "action_low_pressure_step": "低压动作",
+      "watchout_overextension": "过度拉伸提醒",
+      "watchout_people_pleasing": "讨好风险提醒",
+      "watchout_overcontrol": "过度控制提醒",
+      "watchout_energy_leak": "能量泄漏提醒",
+      "watchout_avoidant_delay": "回避延迟提醒",
+      "watchout_recovery_gap": "恢复断档提醒",
+      "work_scene_execution": "执行场景",
+      "work_scene_collaboration": "协作场景",
+      "work_scene_pacing": "节奏场景",
+      "work_scene_role_fit": "角色匹配场景",
+      "work_scene_transition": "过渡场景",
+      "work_scene_promotion_readiness": "晋升准备场景",
+      "work_scene_team_friction": "团队摩擦场景",
+      "work_scene_focus_recovery": "注意力恢复场景",
+      "relationship_bridge": "关系桥接",
+      "relationship_boundary_negotiation": "边界协商",
+      "relationship_misread_repair": "误读修复",
+      "relationship_conflict_recovery": "冲突恢复",
+      "relationship_try_this_week": "本周关系尝试",
+      "relationship_low_intensity_reconnect": "低强度重新连接",
+      "recovery_reset": "恢复重置",
+      "recovery_reentry": "恢复重入",
+      "revisit_resume": "复访继续",
+      "adaptive_retry": "自适应重试",
+      "adaptive_reduce_pressure": "减压自适应",
+      "decision": "决策场景",
+      "stress_recovery": "压力恢复场景",
+      "communication": "沟通协作场景",
+      "why_this_type": "为什么是这个类型",
+      "misunderstanding_fix": "误读修正",
+      "borderline_axis": "边界轴解释",
+      "adjacent_type_contrast": "相邻类型对照",
+      "stability_explanation": "稳定性解释",
+      "stability_reframe": "稳定性重释"
+    },
+        "band": {
+            "boundary": "边界带",
+            "clear": "清晰偏好",
+            "strong": "强偏好",
+            "very_strong": "极强偏好"
+        }
+    },
+    "scene_titles": {
+        "work": "你的工作模式",
+        "relationships": "你的关系模式",
+        "growth": "你的成长模式",
+        "decision": "你的决策模式",
+        "stress_recovery": "你的压力恢复模式",
+        "communication": "你的沟通模式"
+    },
+    "axis_strength_templates": {
+        "overview": {
+            "boundary": "在{{axis_label}}上，你现在更接近均衡区间。{{side_label}}仍然是主方向，但另一侧会在不同场景里频繁参与，所以这不是“绝对单向”的结果。",
+            "clear": "在{{axis_label}}上，你已经呈现出稳定的{{side_label}}倾向；它会解释你多数第一反应，但不会压扁另一侧的可用性。",
+            "strong": "在{{axis_label}}上，你的{{side_label}}偏好已经很鲜明。你通常不会先停在中间，而会自然把注意力和行动拉向这一侧。",
+            "very_strong": "在{{axis_label}}上，你呈现出非常鲜明的{{side_label}}偏好。这会让你的风格高度一致，也让别人更容易快速感受到你的主导方式。"
+        },
+        "growth": {
+            "boundary": "成长上，最有效的动作不是把自己推向极端，而是学会识别什么时候该让另一侧补位。",
+            "clear": "成长上，你更适合先放大这条已经清晰的{{side_label}}优势，再为它补一条低成本的对侧校正动作。",
+            "strong": "成长上，你不缺方向感，缺的是校正机制。因为{{side_label}}已经很强，真正有价值的是给它加上稳定的对侧检查点。",
+            "very_strong": "成长上，你最需要防的不是“不够像自己”，而是把{{side_label}}一路推到底。越强的偏好，越需要可重复的反向校正。"
+        },
+        "relationships": {
+            "boundary": "在人际里，这条轴接近边界，意味着你不会一直用同一种方式靠近别人；不同关系会唤起你不同侧的表达。",
+            "clear": "在人际里，{{side_label}}已经是你更常见的默认方式。别人感受到你的节奏时，通常会先接收到这一侧。",
+            "strong": "在人际里，{{side_label}}已经很鲜明。它会带来明显优势，也会让误读更容易围绕这一侧发生。",
+            "very_strong": "在人际里，你的{{side_label}}风格非常稳定。好处是边界清楚、识别度高，代价是别人更容易把你的主导方式当作全部的你。"
+        },
+        "career": {
+            "boundary": "在工作里，这条轴更像弹性档位而不是固定齿轮；不同任务会把你拉向不同侧，因此环境匹配比职位名称更重要。",
+            "clear": "在工作里，{{side_label}}已经是你较稳定的默认操作方式。它会影响你更顺手的工作节奏、协作方式和反馈偏好。",
+            "strong": "在工作里，{{side_label}}已经很鲜明。你通常不是“什么环境都行”，而是会在某类节奏里明显更快进入高质量输出。",
+            "very_strong": "在工作里，你的{{side_label}}偏好非常强。这会让你在适配环境里效率极高，但也会放大与不匹配环境之间的摩擦感。"
+        },
+        "work": {
+            "boundary": "在工作场景里，这条轴靠近中线，意味着你会根据任务、人和节奏切换挡位；真正关键的是你何时切换，以及团队是否读得懂这种切换。",
+            "clear": "在工作场景里，{{side_label}}已经是你较稳定的默认工作方式。它会影响你启动任务、协作和接收反馈的第一反应。",
+            "strong": "在工作场景里，{{side_label}}已经很鲜明。匹配环境会放大你的效率，不匹配环境也会更快放大摩擦。",
+            "very_strong": "在工作场景里，你的{{side_label}}风格极其稳定。优势是输出速度和风格识别度都很高，代价是环境不合拍时不适感也会非常明显。"
+        },
+        "decision": {
+            "boundary": "做决定时，这条轴靠近中线，所以你不是单一路径地下判断，而是会在两套入口之间切换。",
+            "clear": "做决定时，{{side_label}}已经是你更常见的默认入口，但另一侧仍然会在复核和收尾阶段发挥作用。",
+            "strong": "做决定时，{{side_label}}已经很鲜明。你往往会先沿着这一侧推进，再决定是否需要另一侧补位。",
+            "very_strong": "做决定时，你的{{side_label}}倾向非常强。这会让判断更快更稳，也会让别人更容易把你理解成“只会这样判断的人”。"
+        },
+        "stress_recovery": {
+            "boundary": "在压力与恢复上，这条轴靠近中线，意味着你在过载时和恢复时可能会切到不同挡位。",
+            "clear": "在压力与恢复上，{{side_label}}已经是你更稳定的应对入口，但恢复阶段通常还需要另一侧来重新平衡。",
+            "strong": "在压力与恢复上，{{side_label}}已经很鲜明。你容易先用这一侧救火，所以更需要一条固定的恢复回路。",
+            "very_strong": "在压力与恢复上，你的{{side_label}}风格非常强。优势是应对快，风险是过度依赖同一套自救方式。"
+        },
+        "communication": {
+            "boundary": "在沟通里，这条轴靠近中线，所以你不是只会一种表达方式；你会根据对象、氛围和目标来切换。",
+            "clear": "在沟通里，{{side_label}}已经是你更常见的起手方式，但当场景变化时，另一侧仍会迅速进场补位。",
+            "strong": "在沟通里，{{side_label}}已经很鲜明。别人通常会先感受到这一侧，因此误读也往往从这里开始。",
+            "very_strong": "在沟通里，你的{{side_label}}风格非常稳定。优势是辨识度高，风险是别人容易把你的表达方式误读成你的全部意图。"
+        }
+    },
+    "scene_templates": {
+        "overview": "放到日常场景里，这条主轴通常会表现成：{{scene_side_hint}}。这会决定别人首先从哪里理解你。",
+        "growth": "把它放进成长情境时，更有效的做法不是否定这条主轴，而是让它在{{axis_label}}上多带一个反向校正动作：{{scene_side_hint}}。",
+        "relationships": "放到关系里，这条主轴通常会变成一种相处节奏：{{scene_side_hint}}。如果对方没有读懂这一点，就容易把你的方式误解成距离感、迟疑或控制感。",
+        "career": "放到工作里，这条主轴更像你的默认操作系统：{{scene_side_hint}}。它会直接影响你更适配的岗位节奏与协作环境。",
+        "work": "放到工作里，这条主轴更像你的默认操作系统：{{scene_side_hint}}。它会直接影响你更适配的岗位节奏与协作环境。",
+        "decision": "放到决策里，这条主轴会决定你先用哪一种入口缩小范围：{{scene_side_hint}}。",
+        "stress_recovery": "放到压力与恢复里，这条主轴通常会变成你最先启动的自救方式：{{scene_side_hint}}。",
+        "communication": "放到沟通里，这条主轴通常会变成你的起手表达方式：{{scene_side_hint}}。",
+        "work_style": "放到工作方式上，这条主轴会决定你默认怎么开工、怎么协作、怎么接收反馈：{{scene_side_hint}}。",
+        "role_fit": "放到岗位匹配上，这条主轴最容易让你在某类角色里快速进入状态：{{scene_side_hint}}。",
+        "collaboration_fit": "放到团队协作里，这条主轴会决定你更自然的对齐、配合与修正方式：{{scene_side_hint}}。",
+        "work_env": "放到工作环境里，这条主轴会决定你更需要哪类节奏、边界和反馈方式：{{scene_side_hint}}。",
+        "career_next_step": "放到职业下一步，这条主轴提示你先去试一个更贴近自己的动作：{{scene_side_hint}}。",
+        "next_action": "把它翻译成下一步动作，最值得先做的是：{{scene_side_hint}}。先让这个动作小到一周内能重复，而不是一次做成大的自我改造。",
+        "weekly_experiment": "放到这周可执行实验，这条主轴最适合变成一个低成本重复动作：{{scene_side_hint}}。目标不是证明你是谁，而是观察哪种做法让你更稳。",
+        "relationship_practice": "放到本周关系练习，这条主轴最适合变成一个可见的小动作：{{scene_side_hint}}。重点不是表现完美，而是让对方更容易读懂你的真实节奏。",
+        "work_experiment": "放到工作实验，这条主轴最适合先试一个可逆动作：{{scene_side_hint}}。先用小范围验证环境、协作或节奏是否更贴近你。",
+        "watchout": "放到风险提醒，这条主轴最容易在高压时把你推向一种默认反应：{{scene_side_hint}}。真正要防的不是做错一次，而是在没察觉的情况下反复复制同一种失衡。"
+    },
+    "scene_hints": {
+        "EI": {
+            "E": "你更容易先把能量投向外部互动、讨论与现场反馈",
+            "I": "你更容易先在内部整理，再挑选更精准的表达时机"
+        },
+        "SN": {
+            "S": "你更容易先抓住事实、细节和可验证的信息",
+            "N": "你更容易先抓住趋势、隐含线索和整体意义"
+        },
+        "TF": {
+            "T": "你更容易先按逻辑、标准和可比性来判断",
+            "F": "你更容易先按感受、关系和价值影响来判断"
+        },
+        "JP": {
+            "J": "你更容易先建立结构、节奏和明确的推进顺序",
+            "P": "你更容易先保留弹性、边试边调，再决定最后定版"
+        }
+    },
+    "boundary_templates": {
+        "EI": "E / I 这一轴离中线较近，所以你更像“会因场景切换能量入口的人”，而不是永远固定在单一社交档位。",
+        "SN": "S / N 这一轴离中线较近，所以你既会看具体事实，也会快速跳到模式与意义；关键在于任务当下需要哪一种入口。",
+        "TF": "T / F 这一轴离中线较近，所以你并不是单纯“理性”或“感性”，而是会在标准与关系之间反复校准。",
+        "JP": "J / P 这一轴离中线较近，所以你既需要一定结构，也需要一定弹性；节奏感比绝对规则更重要。",
+        "AT": "A / T 这一轴离中线较近，所以你的稳定感和敏感度都在参与结果，不适合把自己读成单一的“稳”或“紧”。"
+    },
+    "scene_fingerprint_templates": {
+        "work": "在工作里，你通常先用{{primary_hint}}开局，再用{{support_hint}}把节奏拉回可执行。{{identity_clause}} {{boundary_clause}}",
+        "relationships": "在关系里，你常先以{{primary_hint}}让别人感受到你，再通过{{support_hint}}决定要靠近、回应还是设边界。{{identity_clause}} {{boundary_clause}}",
+        "growth": "成长上，你的高杠杆点通常来自{{primary_hint}}；当你再补上{{support_hint}}时，进步会更稳定。{{identity_clause}} {{boundary_clause}}",
+        "decision": "做决定时，你通常先靠{{primary_hint}}缩小范围，再用{{support_hint}}确认是否值得推进。{{identity_clause}} {{boundary_clause}}",
+        "stress_recovery": "压力升高时，你容易先滑向{{primary_hint}}来求快或求稳；恢复阶段则更需要{{support_hint}}把你拉回可用区。{{identity_clause}} {{boundary_clause}}",
+        "communication": "沟通里，你通常先以{{primary_hint}}发起，再用{{support_hint}}修正对齐。{{identity_clause}} {{boundary_clause}}"
+    },
+    "explainability_summary_templates": {
+        "stable": "你的结果主要由{{dominant_axis_label}}上的{{dominant_side_label}}偏好拉开差距，因此主类型较稳定。真正最接近边界的是{{close_axis_label}}，它会决定你在哪些场景下更像相邻类型。",
+        "mixed": "你的结果已经有清晰主轴，但仍保留几条会随场景切换的近边界轴。{{dominant_axis_label}}上的{{dominant_side_label}}解释了“你为什么是这个类型”，而{{close_axis_label}}解释了“你为什么又不像刻板印象里的那种类型”。",
+        "context_sensitive": "你的结果不是模糊，而是有几条非常接近边界的轴在一起工作。{{dominant_axis_label}}上的{{dominant_side_label}}仍然决定了主类型，但{{close_axis_label}}会显著影响你在不同情境里看起来像哪一类人。"
+    },
+    "why_this_type_templates": {
+        "boundary": "主类型之所以仍然成立，不是因为所有轴都很极端，而是因为{{dominant_axis_label}}上的主方向最后仍然赢了出来。{{close_axis_label}}离中线很近，所以你会在气质和场景表现上保留更多弹性。{{identity_clause}}",
+        "clear": "主类型之所以成立，是因为{{dominant_axis_label}}上的{{dominant_side_label}}已经形成稳定拉力。它决定了你大多数第一反应的方向，而{{close_axis_label}}则解释了你为什么不会像这个类型的刻板印象那样单一。{{identity_clause}}",
+        "strong": "主类型之所以成立，是因为{{dominant_axis_label}}上的{{dominant_side_label}}偏好已经足够鲜明，会自然拉高你的默认判断和表达节奏。真正让你显得不像标准模板的，是{{close_axis_label}}这种近边界轴。{{identity_clause}}",
+        "very_strong": "主类型之所以成立，是因为{{dominant_axis_label}}上的{{dominant_side_label}}几乎已经成为默认底层模式。别人通常很快就能识别这一点，而{{close_axis_label}}只会在更具体的情境里改变你看起来像谁。{{identity_clause}}"
+    },
+    "misunderstanding_fix_templates": {
+        "why_this_type": {
+            "boundary": {
+                "zh-CN": "别人之所以会误读你，往往不是因为主类型不成立，而是{{close_axis_label}}和{{identity_clause}}让你在外显风格上保留了更多弹性。你看起来不像刻板印象里的{{dominant_side_label}}，但主判断还是会回到{{dominant_side_label}}。",
+                "en": "People misread you not because the core type is invalid, but because {{close_axis_label}} and {{identity_clause}} keep more elasticity in your surface style. You do not look like a stereotype of {{dominant_side_label}}, but your final judgment still returns there."
+            },
+            "clear": {
+                "zh-CN": "你会被误读成别的样子，常常是因为{{close_axis_label}}仍会在不同情境里借用另一侧节奏；但主类型成立的真正原因，是{{dominant_axis_label}}上的{{dominant_side_label}}已经形成稳定拉力。{{identity_clause}}",
+                "en": "You can be misread because {{close_axis_label}} still borrows the rhythm of the opposite side across contexts; the real reason the core type stands is that {{dominant_axis_label}} and {{dominant_side_label}} already create a stable pull. {{identity_clause}}"
+            },
+            "strong": {
+                "zh-CN": "你会被误读成别的样子，通常是因为{{dominant_axis_label}}上的{{dominant_side_label}}已经很强，但{{close_axis_label}}仍会让外显节奏带着一点另一侧的影子。主类型成立，不代表表达方式只有一种。{{identity_clause}}",
+                "en": "You can be misread because {{dominant_axis_label}} and {{dominant_side_label}} are already strong, while {{close_axis_label}} still lets your surface rhythm borrow some of the opposite side. The core type still stands, but expression does not collapse into one shape."
+            },
+            "very_strong": {
+                "zh-CN": "你会被误读成别的样子，更多是因为{{dominant_axis_label}}上的{{dominant_side_label}}太强，以至于别人会把你的局部切换当成整体变化。{{close_axis_label}}解释的是外显波动，不是主类型失效。{{identity_clause}}",
+                "en": "You can be misread because {{dominant_axis_label}} and {{dominant_side_label}} are so strong that people treat local switching as a full type change. {{close_axis_label}} explains surface fluctuation, not a failed core type. {{identity_clause}}"
+            }
+        },
+        "adjacent_type_contrast": {
+            "boundary": {
+                "zh-CN": "最容易把你看成{{neighbor_type}}，是因为{{axis_label}}离中线太近，外显风格会借用{{opposite_side_label}}的节奏；但真正的差异在于你最终仍会回到{{side_label}}做主判断。{{identity_clause}}",
+                "en": "The easiest mistake is to read you as {{neighbor_type}}, because {{axis_label}} sits close enough to the middle that your surface style borrows the rhythm of {{opposite_side_label}}; the real difference is that you still return to {{side_label}} for final judgment. {{identity_clause}}"
+            },
+            "clear": {
+                "zh-CN": "最容易把你看成{{neighbor_type}}，通常不是因为结果错了，而是{{axis_label}}上的{{side_label}}还没有把外显节奏完全锁死，所以你看起来会借一点{{opposite_side_label}}的影子。真正拉开差异的是最后你仍然会回到{{side_label}}来收尾。{{identity_clause}}",
+                "en": "The easiest mistake is to read you as {{neighbor_type}}, usually not because the result is wrong but because the {{side_label}} on {{axis_label}} has not fully locked your surface rhythm, so you can look like you are borrowing a bit of {{opposite_side_label}}. The real split is that you still return to {{side_label}} to close the loop. {{identity_clause}}"
+            },
+            "strong": {
+                "zh-CN": "如果只看最接近边界的外显部分，别人最容易把你看成{{neighbor_type}}。原因不是你“测错了”，而是{{axis_label}}上的{{side_label}}会在表达上短暂借用{{opposite_side_label}}的节奏。真正区分你们的，不是表面像不像，而是你最终仍会回到{{side_label}}来做主判断和收尾。{{identity_clause}}",
+                "en": "If someone only looks at your closest-boundary surface, they are most likely to read you as {{neighbor_type}}. That is not because the result is wrong; it is because the {{side_label}} on {{axis_label}} may borrow the rhythm of {{opposite_side_label}} in expression. The real difference is that you still return to {{side_label}} for judgment and closure. {{identity_clause}}"
+            },
+            "very_strong": {
+                "zh-CN": "你最容易被看成{{neighbor_type}}的时刻，往往来自{{axis_label}}上的{{side_label}}已经很强，却仍保留了足够的近边界弹性，让外显风格偶尔像{{opposite_side_label}}。但真正决定你是谁的，仍然是最后回到{{side_label}}的那一步。{{identity_clause}}",
+                "en": "The moments when you are most likely to be read as {{neighbor_type}} come from a strong {{side_label}} on {{axis_label}} that still keeps enough near-boundary elasticity to look a bit like {{opposite_side_label}}. What still decides who you are, though, is the final return to {{side_label}}. {{identity_clause}}"
+            }
+        }
+    },
+    "close_call_axis_templates": {
+        "default": "在{{axis_label}}上，你最后仍偏向{{side_label}}，但和另一侧只拉开了{{delta}}个点差。也就是说，这条轴更像“近身拉扯”而不是绝对定型：熟悉情境下你常会先用{{side_label}}，而高压、误解或角色变化时，{{opposite_side_label}}会很快进场补位。"
+    },
+    "adjacent_type_contrast_templates": {
+        "default": "如果只看最接近边界的部分，别人最容易把你看成{{neighbor_type}}。原因不是你“测错了”，而是{{axis_label}}离中线太近，导致你在外显风格上经常会借用{{opposite_side_label}}那一面的节奏。真正区分你们的，不是表面像不像，而是你最终仍会回到{{side_label}}来做主判断和收尾。"
+    },
+    "stability_explanation_templates": {
+        "stable": "这一份结果整体比较稳定。主类型不会因为普通情境波动就频繁改写，真正需要留意的，是在{{close_axis_label}}上什么时候需要主动给另一侧留一点空间。",
+        "mixed": "这一份结果整体属于“主类型明确，但局部会随场景切换”。你不是不稳定，而是有几条轴会根据任务、人际和压力负荷切换表达入口。{{identity_clause}}",
+        "context_sensitive": "这一份结果最需要读成“情境敏感型稳定”，而不是简单稳定或简单摇摆。主类型仍然成立，但近边界轴太多时，你在不同场景里会更明显地表现出不同的切换模式。{{identity_clause}}"
+    },
+    "stability_reframe_templates": {
+        "stable": {
+            "zh-CN": "稳定性不是“一直一样”，而是你在{{close_axis_label}}附近仍能保持主类型的回弹能力。{{identity_clause}}",
+            "en": "Stability is not “staying the same”; it is the ability to bounce back to the core type even around {{close_axis_label}}. {{identity_clause}}"
+        },
+        "mixed": {
+            "zh-CN": "你的稳定更像“可校准”：主类型会保留，但压力一上来，你会在{{close_axis_label}}和{{identity_clause}}之间重新分配注意力与恢复资源。",
+            "en": "Your stability is more like something you can recalibrate: the core type remains, but under pressure you redistribute attention and recovery resources between {{close_axis_label}} and {{identity_clause}}."
+        },
+        "context_sensitive": {
+            "zh-CN": "你是情境敏感型稳定：不是不稳，而是面对不同压力源时会切换不同的恢复入口。最重要的是把这种切换看成可复用的恢复机制，而不是自我怀疑。{{identity_clause}}",
+            "en": "You are context-sensitive in a stable way: not unstable, but switching recovery entry points as different pressure sources appear. The key is to treat that switching as a reusable recovery mechanism, not as self-doubt. {{identity_clause}}"
+        }
+    },
+    "action_plan_summary_templates": {
+        "stable": "接下来最值得做的，不是继续解释自己，而是把{{growth_hint}}、{{relationship_hint}}和{{work_hint}}分别变成一个小动作。因为你的结果整体较稳定，重点是把高匹配动作重复出来。",
+        "mixed": "接下来最值得做的，是把{{growth_hint}}、{{relationship_hint}}和{{work_hint}}变成低成本可重复的动作。你的主类型已清楚，但局部会随情境切换，所以动作要小、可见、可复盘。",
+        "context_sensitive": "接下来最值得做的，是用更小的动作去验证自己在不同情境里的切换。先从{{growth_hint}}、{{relationship_hint}}和{{work_hint}}各做一个一周内能重复的版本，不要一次想定终局。"
+    },
+    "action_support_templates": {
+        "growth.next_actions": {
+            "action_experiment": "把它收成一个可逆的小实验：{{action_hint}}。先用一周验证，不要一次改造全部。",
+            "action_reset": "把它收成一个重置动作：{{recovery_hint}}。先把状态拉回可继续前进的区间。",
+            "action_resistance_break": "把它收成一个破阻动作：{{action_hint}}。先拆开最卡的那一环，而不是继续硬推。",
+            "action_momentum_start": "把它收成一个起步动作：{{action_hint}}。先让动作连续两次，再谈更大的变化。",
+            "action_bridge_step": "把它收成一个桥接动作：{{action_hint}}。先搭起从现在到下一步之间最短的桥。",
+            "action_low_pressure_step": "把它收成一个低压力动作：{{action_hint}}。先用不费力的版本建立连续性。",
+            "recovery_reset": "把它收成一个恢复重置：{{recovery_hint}}。先把耗损降下来，再继续推进。",
+            "revisit_resume": "把它收成一个复访继续动作：{{recovery_hint}}。先回到上一次中断的位置，再恢复节奏。",
+            "adaptive_retry": "把它收成一个自适应重试：{{action_hint}}。先换一种更容易成功的入口，不要硬碰硬。",
+            "adaptive_reduce_pressure": "把它收成一个减压动作：{{recovery_hint}}。先把压力降下来，动作才会重新可用。"
+        },
+        "growth.watchouts": {
+            "watchout_overextension": "放到风险提醒里，你最需要警惕的是过度拉伸输出：{{watchout_hint}}。先识别什么时候已经超载，再决定要不要继续。",
+            "watchout_people_pleasing": "放到风险提醒里，你最需要警惕的是为了维持关系而过度让步：{{watchout_hint}}。边界先清楚，关系才更稳。",
+            "watchout_overcontrol": "放到风险提醒里，你最需要警惕的是把不确定感变成过度控制：{{watchout_hint}}。先让流程可用，不必把一切锁死。",
+            "watchout_energy_leak": "放到风险提醒里，你最需要警惕的是能量被持续泄漏：{{watchout_hint}}。先找出最耗电的一步，把它减轻。",
+            "watchout_avoidant_delay": "放到风险提醒里，你最需要警惕的是把延迟包装成准备：{{watchout_hint}}。先做一个最小动作，别让等待继续扩大。",
+            "watchout_recovery_gap": "放到风险提醒里，你最需要警惕的是恢复环节断掉：{{watchout_hint}}。先补上恢复动作，再继续推进。"
+        },
+        "career.next_step": {
+            "work_scene_execution": "把它翻译成一个执行动作：{{work_hint}}。先确认你在真实工作里的推进方式。",
+            "work_scene_collaboration": "把它翻译成一个协作动作：{{work_hint}}。先看团队节奏是否更适合你。",
+            "work_scene_pacing": "把它翻译成一个节奏动作：{{work_hint}}。先把速度调到可持续，而不是一口气冲到底。",
+            "work_scene_role_fit": "把它翻译成一个角色验证动作：{{work_hint}}。比起职位名，更重要的是角色的节奏与责任边界。",
+            "work_scene_transition": "把它翻译成一个过渡动作：{{work_hint}}。先确认从当前状态切到下一步时你需要什么支撑。",
+            "work_scene_promotion_readiness": "把它翻译成一个准备动作：{{work_hint}}。不是更拼，而是更稳定、更可被看见。",
+            "work_scene_team_friction": "把它翻译成一个摩擦识别动作：{{work_hint}}。先把卡点从人身上移回节奏和协作方式。",
+            "work_scene_focus_recovery": "把它翻译成一个注意力恢复动作：{{work_hint}}。先让你回到稳定输出，而不是硬撑。"
+        },
+        "career.work_experiments": {
+            "work_scene_execution": "放到工作实验里，先试一个可逆执行动作：{{work_hint}}。",
+            "work_scene_collaboration": "放到工作实验里，先试一次协作调整：{{work_hint}}。",
+            "work_scene_pacing": "放到工作实验里，先试一次节奏微调：{{work_hint}}。",
+            "work_scene_role_fit": "放到工作实验里，先试一次角色适配验证：{{work_hint}}。",
+            "work_scene_transition": "放到工作实验里，先试一次过渡验证：{{work_hint}}。",
+            "work_scene_promotion_readiness": "放到工作实验里，先试一次晋升准备验证：{{work_hint}}。",
+            "work_scene_team_friction": "放到工作实验里，先试一次团队摩擦降噪：{{work_hint}}。",
+            "work_scene_focus_recovery": "放到工作实验里，先试一次注意力恢复：{{work_hint}}。"
+        },
+        "relationships.try_this_week": {
+            "relationship_bridge": "本周可以试一个关系桥接动作：{{relationship_hint}}。",
+            "relationship_boundary_negotiation": "本周可以试一个边界协商动作：{{relationship_hint}}。",
+            "relationship_misread_repair": "本周可以试一个误读修复动作：{{relationship_hint}}。",
+            "relationship_conflict_recovery": "本周可以试一个冲突恢复动作：{{relationship_hint}}。",
+            "relationship_try_this_week": "本周可以试一个低强度关系尝试：{{relationship_hint}}。",
+            "relationship_low_intensity_reconnect": "本周可以试一个低强度重新连接动作：{{relationship_hint}}。"
+        }
+    },
+    "tone_templates": {
+        "traits.why_this_type": {
+            "supportive": {
+                "why_this_type": {
+                    "zh-CN": "你会落在这个类型上，不是因为你必须像刻板印象那样一直稳定输出同一种样子，而是{{dominant_axis_label}}上的{{dominant_side_label}}确实最常把你拉回熟悉的判断入口。{{close_axis_label}}仍会让你的外显节奏保留弹性，这也是你看起来比模板更有层次的原因。{{identity_clause}}",
+                    "en": "You land in this type not because you must perform like a stereotype at all times, but because {{dominant_axis_label}} and {{dominant_side_label}} keep pulling you back to the same judgment entry point. {{close_axis_label}} still gives your surface rhythm elasticity, which is why you look more layered than a template. {{identity_clause}}"
+                },
+                "misunderstanding_fix": {
+                    "zh-CN": "如果别人偶尔读不准你，通常不是因为结果失真，而是{{close_axis_label}}让你的表达保留了切换空间。你表面上可能没有那么像典型的{{dominant_side_label}}，但真正做判断时，你还是会回到这条主轴。{{identity_clause}}",
+                    "en": "When people occasionally misread you, it is usually not because the result is wrong, but because {{close_axis_label}} leaves room for your expression to switch. You may not look like a textbook {{dominant_side_label}} on the surface, but your actual judgment still returns there. {{identity_clause}}"
+                }
+            },
+            "direct": {
+                "why_this_type": {
+                    "zh-CN": "主类型成立的核心证据很简单：{{dominant_axis_label}}上的{{dominant_side_label}}持续占上风。{{close_axis_label}}会影响你看起来像谁，但不会改写你最终怎么判断。{{identity_clause}}",
+                    "en": "The core evidence is simple: {{dominant_axis_label}} and {{dominant_side_label}} keep winning. {{close_axis_label}} can change how you look on the surface, but not how you close judgment. {{identity_clause}}"
+                },
+                "misunderstanding_fix": {
+                    "zh-CN": "别人误读你，多半是把{{close_axis_label}}上的波动当成主类型变化。真正要抓住的是：你最终还是回到{{dominant_side_label}}的判断入口，而不是一直停在摇摆里。{{identity_clause}}",
+                    "en": "People usually misread you by treating movement around {{close_axis_label}} as a type change. The real point is that you still come back to {{dominant_side_label}} for final judgment instead of staying in drift. {{identity_clause}}"
+                }
+            },
+            "reflective": {
+                "why_this_type": {
+                    "zh-CN": "如果你回头看自己在不同阶段的表现，会发现外显方式可以变，但{{dominant_axis_label}}上的{{dominant_side_label}}仍然是你最稳定的回流路径。{{close_axis_label}}解释的是你为什么不像单一模板，而不是你为什么不属于这个类型。{{identity_clause}}",
+                    "en": "If you look back across phases of your life, the outer expression can shift, but {{dominant_axis_label}} and {{dominant_side_label}} still remain your most stable return path. {{close_axis_label}} explains why you do not look like a single template, not why you do not belong here. {{identity_clause}}"
+                },
+                "misunderstanding_fix": {
+                    "zh-CN": "你之所以会在不同情境里看起来不太一样，不代表核心类型在反复变化，更像是{{close_axis_label}}在不同阶段借用了不同节奏。真正持续稳定的，是你最后还是会回到{{dominant_side_label}}这条主判断线上。{{identity_clause}}",
+                    "en": "Looking somewhat different across contexts does not mean the core type keeps changing. It is closer to {{close_axis_label}} borrowing different rhythms at different times. What stays stable is that you still return to {{dominant_side_label}} as the main judgment line. {{identity_clause}}"
+                }
+            },
+            "stabilizing": {
+                "why_this_type": {
+                    "zh-CN": "当你最近状态起伏更大时，最重要的不是重新怀疑主类型，而是抓住真正稳定的主轴：{{dominant_axis_label}}上的{{dominant_side_label}}仍然在。{{close_axis_label}}会让你的外显更容易波动，但它解释的是切换方式，不是主骨架失效。{{identity_clause}}",
+                    "en": "When your recent state has felt more volatile, the important thing is not to re-doubt the core type, but to hold onto the stable axis: {{dominant_axis_label}} and {{dominant_side_label}} are still here. {{close_axis_label}} can make your surface behavior fluctuate, but that explains switching, not a broken core. {{identity_clause}}"
+                },
+                "misunderstanding_fix": {
+                    "zh-CN": "现在更需要防的是把状态波动误读成类型失真。{{close_axis_label}}确实会让你的表现摇摆一点，但真正决定你是谁的判断入口没有消失。{{identity_clause}}",
+                    "en": "The main risk right now is treating state fluctuation as type distortion. {{close_axis_label}} can absolutely make your expression wobble, but the judgment entry point that defines you has not disappeared. {{identity_clause}}"
+                }
+            }
+        },
+        "traits.adjacent_type_contrast": {
+            "supportive": {
+                "adjacent_type_contrast": {
+                    "zh-CN": "你会和{{neighbor_type}}看起来有点像，是因为{{axis_label}}离中线不远，外显节奏会偶尔借用{{opposite_side_label}}。但真正把你和对方拉开的，是你最后仍会回到{{side_label}}来收尾判断。",
+                    "en": "You can look a little like {{neighbor_type}} because {{axis_label}} sits close enough to the middle that your surface rhythm occasionally borrows {{opposite_side_label}}. What separates you is that you still come back to {{side_label}} to close judgment."
+                },
+                "misunderstanding_fix": {
+                    "zh-CN": "所以别急着把这种相似感读成“结果测错了”。它更像是一条近边界轴让你保留了更多表达弹性，而不是主类型被推翻。{{identity_clause}}",
+                    "en": "So there is no need to read that similarity as “the result must be wrong.” It is closer to a near-boundary axis preserving expressive elasticity than to the core type being overturned. {{identity_clause}}"
+                }
+            },
+            "direct": {
+                "adjacent_type_contrast": {
+                    "zh-CN": "别人把你看成{{neighbor_type}}，关键原因就是{{axis_label}}太靠近中线，外显风格会短暂像{{opposite_side_label}}。但真正决定类型归属的，是你最后还是回到{{side_label}}完成判断。",
+                    "en": "People read you as {{neighbor_type}} mainly because {{axis_label}} sits too close to the middle, so the surface briefly looks like {{opposite_side_label}}. What decides the type is that you still return to {{side_label}} for closure."
+                },
+                "misunderstanding_fix": {
+                    "zh-CN": "别把表面像不像当成核心证据。真正有效的判断标准，是你最后用哪一侧完成决策和收尾。{{identity_clause}}",
+                    "en": "Do not treat surface resemblance as the decisive evidence. The real standard is which side you use to complete judgment and closure. {{identity_clause}}"
+                }
+            },
+            "reflective": {
+                "adjacent_type_contrast": {
+                    "zh-CN": "如果你回头看不同阶段，最容易被看成{{neighbor_type}}的时刻，往往都和{{axis_label}}这条近边界轴有关。它会改变你看起来像谁，但不会改变你最后仍偏向{{side_label}}来完成判断。",
+                    "en": "If you look back across different stages, the times when you were most easily read as {{neighbor_type}} usually trace back to {{axis_label}} being near the boundary. It changes who you resemble on the surface, but not the fact that you still end up leaning on {{side_label}} to complete judgment."
+                },
+                "misunderstanding_fix": {
+                    "zh-CN": "这类误读更像是阶段性的外显切换，而不是核心类型在来回变动。你看起来会有波动，但底层判断并没有换轨。{{identity_clause}}",
+                    "en": "This kind of misread is closer to a phase-dependent surface shift than to the core type constantly changing. The look can vary, but the underlying judgment track does not. {{identity_clause}}"
+                }
+            },
+            "stabilizing": {
+                "adjacent_type_contrast": {
+                    "zh-CN": "在状态不太稳的时候，你更容易被看成{{neighbor_type}}，因为{{axis_label}}这条近边界轴会先把外显风格推向{{opposite_side_label}}。但真正保底的是：你最后仍会回到{{side_label}}完成判断。",
+                    "en": "When your state is less steady, you are more likely to look like {{neighbor_type}} because the near-boundary {{axis_label}} pushes your surface style toward {{opposite_side_label}} first. The stabilizing fact is that you still return to {{side_label}} to complete judgment."
+                },
+                "misunderstanding_fix": {
+                    "zh-CN": "现在更重要的不是纠结自己是不是“变了类型”，而是识别哪条近边界轴在放大这种错觉。那条轴解释的是外显波动，不是身份漂移。{{identity_clause}}",
+                    "en": "The important thing now is not to obsess over whether you “changed type,” but to notice which near-boundary axis is amplifying that illusion. That axis explains surface fluctuation, not identity drift. {{identity_clause}}"
+                }
+            }
+        },
+        "growth.stability_confidence": {
+            "supportive": {
+                "stability_explanation": {
+                    "zh-CN": "你的稳定感更像一种可被照顾的能力，而不是要求自己永远没有波动。{{close_axis_label}}提醒你：主类型依然在，只是不同情境会把你推向不同入口。{{identity_clause}}",
+                    "en": "Your stability is better understood as a capacity you can care for, not as a demand to never fluctuate. {{close_axis_label}} is the reminder that the core type remains, while different contexts can still push you into different entry points. {{identity_clause}}"
+                },
+                "stability_reframe": {
+                    "zh-CN": "所以更有用的读法不是“我怎么又不稳了”，而是“我现在需要哪种恢复方式，才能回到主类型最自然的节奏里”。{{identity_clause}}",
+                    "en": "So the more useful reading is not “why am I unstable again,” but “what kind of recovery will let me return to the core type’s most natural rhythm.” {{identity_clause}}"
+                },
+                "stress_recovery": {
+                    "zh-CN": "放到恢复上，你更适合先用一个温和入口把自己拉回可用区：{{scene_side_hint}}。",
+                    "en": "In recovery, a gentler entry point tends to work best first: {{scene_side_hint}}."
+                }
+            },
+            "direct": {
+                "stability_explanation": {
+                    "zh-CN": "这份结果的关键不是你稳不稳，而是你在哪条轴最容易被情境拉偏。{{close_axis_label}}就是那条需要优先管理的地方。{{identity_clause}}",
+                    "en": "The key is not whether you are stable in the abstract, but which axis gets pulled off course by context first. {{close_axis_label}} is the place to manage first. {{identity_clause}}"
+                },
+                "stability_reframe": {
+                    "zh-CN": "真正有效的做法不是继续硬扛，而是更早识别失衡信号，让恢复动作在你完全过载之前就启动。{{identity_clause}}",
+                    "en": "What works is not pushing harder, but spotting imbalance sooner and starting recovery before full overload. {{identity_clause}}"
+                },
+                "stress_recovery": {
+                    "zh-CN": "压力上来时，先别解释自己，先做一个能立刻把状态拉回来的动作：{{scene_side_hint}}。",
+                    "en": "When pressure rises, do not explain first; do one move that brings you back online quickly: {{scene_side_hint}}."
+                }
+            },
+            "reflective": {
+                "stability_explanation": {
+                    "zh-CN": "如果你回头看过往状态，会发现你不是随机摇摆，而是会在某些情境下重复走向同一种切换。{{close_axis_label}}解释的是这种可复现的切换轨迹。{{identity_clause}}",
+                    "en": "If you look back at earlier states, you will notice this is not random wobbling but a repeated switch in certain situations. {{close_axis_label}} explains that repeatable switching pattern. {{identity_clause}}"
+                },
+                "stability_reframe": {
+                    "zh-CN": "所以稳定感不一定来自完全不变，更可能来自你越来越早认出自己正在切换，然后更快把自己带回来。{{identity_clause}}",
+                    "en": "So stability does not always mean staying unchanged; it often means noticing the switch earlier and bringing yourself back faster. {{identity_clause}}"
+                },
+                "stress_recovery": {
+                    "zh-CN": "恢复时，先回到你以前已经证明确实有用的入口：{{scene_side_hint}}。",
+                    "en": "In recovery, return first to an entry point that has already worked for you before: {{scene_side_hint}}."
+                }
+            },
+            "stabilizing": {
+                "stability_explanation": {
+                    "zh-CN": "现在最重要的是把这份结果读成“可稳定化”，而不是把每次波动都当成身份失真。{{close_axis_label}}说明的是敏感入口，不是主类型失效。{{identity_clause}}",
+                    "en": "What matters most right now is reading this result as something that can be stabilized, not treating every fluctuation as identity distortion. {{close_axis_label}} marks a sensitive entry point, not a failed core type. {{identity_clause}}"
+                },
+                "stability_reframe": {
+                    "zh-CN": "与其纠结自己为什么又被拉偏，不如先把恢复动作标准化。你需要的是可重复的回稳方式，而不是再证明一次自己应该没有波动。{{identity_clause}}",
+                    "en": "Instead of asking why you got pulled off again, standardize the recovery move first. You need a repeatable way back to steadiness, not another proof that you should never fluctuate. {{identity_clause}}"
+                },
+                "stress_recovery": {
+                    "zh-CN": "恢复上先走稳态入口：{{scene_side_hint}}。先把神经系统拉回可用区，再谈更大的调整。",
+                    "en": "Use a stabilizing entry point first in recovery: {{scene_side_hint}}. Get yourself back into a usable zone before attempting anything bigger."
+                }
+            }
+        },
+        "growth.next_actions": {
+            "supportive": {
+                "next_action": {
+                    "zh-CN": "下一步不用一下做很大。先从一个更容易维持的小动作开始：{{scene_side_hint}}。",
+                    "en": "Your next move does not need to be huge. Start with a smaller action you can actually maintain: {{scene_side_hint}}."
+                },
+                "action_experiment": {
+                    "zh-CN": "把它当成一个对自己友好的小实验：{{action_hint}}。先做出一次可见变化，再决定要不要放大。",
+                    "en": "Treat this as a self-supportive small experiment: {{action_hint}}. Make one visible shift before deciding whether to scale it up."
+                },
+                "action_bridge_step": {
+                    "zh-CN": "先做桥接动作，不要求一步到位：{{action_hint}}。重点是把起点和下一步连起来。",
+                    "en": "Start with a bridge step instead of demanding instant completion: {{action_hint}}. The goal is simply to connect the current state to the next step."
+                },
+                "revisit_resume": {
+                    "zh-CN": "如果你之前已经停过一次，先从上次最接近完成的位置重新接上：{{recovery_hint}}。",
+                    "en": "If you have already paused once before, resume from the point that was closest to completion last time: {{recovery_hint}}."
+                }
+            },
+            "direct": {
+                "next_action": {
+                    "zh-CN": "下一步别再继续想，先做一个能立刻验证方向的动作：{{scene_side_hint}}。",
+                    "en": "Do not keep thinking about the next step; do one move that validates direction immediately: {{scene_side_hint}}."
+                },
+                "action_experiment": {
+                    "zh-CN": "把它压成一个能今天启动的实验：{{action_hint}}。先得到反馈，再决定是否继续扩大。",
+                    "en": "Compress this into an experiment you can start today: {{action_hint}}. Get feedback first, then decide whether to expand."
+                },
+                "action_resistance_break": {
+                    "zh-CN": "现在最有效的不是再做计划，而是先拆掉最卡的那一环：{{action_hint}}。",
+                    "en": "What works best now is not more planning, but breaking the most stuck point first: {{action_hint}}."
+                },
+                "action_momentum_start": {
+                    "zh-CN": "先把动量拉起来：{{action_hint}}。连续完成两次，比一次做得很大更重要。",
+                    "en": "Build momentum first: {{action_hint}}. Two consecutive completions matter more than one oversized push."
+                }
+            },
+            "reflective": {
+                "next_action": {
+                    "zh-CN": "下一步更适合接在你已经看见过有效的模式后面：{{scene_side_hint}}。",
+                    "en": "The next step is best attached to a pattern you have already seen work before: {{scene_side_hint}}."
+                },
+                "action_experiment": {
+                    "zh-CN": "把它收成一个可回看、可复盘的小实验：{{action_hint}}。重点不是快，而是让你下次还能接得上。",
+                    "en": "Turn it into a small experiment you can revisit and review: {{action_hint}}. The point is not speed, but making the next resumption easier."
+                },
+                "revisit_resume": {
+                    "zh-CN": "如果你已经做过类似动作，这次不要从零开始，直接接上曾经有效的版本：{{recovery_hint}}。",
+                    "en": "If you have done something similar before, do not restart from zero; reconnect to the version that already worked: {{recovery_hint}}."
+                },
+                "adaptive_retry": {
+                    "zh-CN": "如果之前的做法卡住了，先换一种更适合现在状态的重试入口：{{action_hint}}。",
+                    "en": "If the earlier approach got stuck, switch to a retry path that fits your current state better: {{action_hint}}."
+                }
+            },
+            "stabilizing": {
+                "next_action": {
+                    "zh-CN": "现在的下一步要先帮你回稳，而不是继续往前冲：{{scene_side_hint}}。",
+                    "en": "Your next step right now should stabilize you before it pushes you forward: {{scene_side_hint}}."
+                },
+                "action_reset": {
+                    "zh-CN": "先做重置动作：{{recovery_hint}}。动作能不能继续，取决于你先不先把状态拉回来。",
+                    "en": "Start with a reset move: {{recovery_hint}}. Whether the action can continue depends on bringing your state back first."
+                },
+                "adaptive_reduce_pressure": {
+                    "zh-CN": "把动作先降压：{{recovery_hint}}。先让它重新变得可用，再谈效率。",
+                    "en": "Lower the pressure on the action first: {{recovery_hint}}. Make it usable again before you worry about efficiency."
+                },
+                "recovery_reset": {
+                    "zh-CN": "先补上恢复动作：{{recovery_hint}}。恢复不是绕路，是让后面的动作不再崩掉。",
+                    "en": "Add the recovery move first: {{recovery_hint}}. Recovery is not detouring; it is what keeps the next action from collapsing."
+                }
+            },
+            "low_pressure": {
+                "next_action": {
+                    "zh-CN": "下一步尽量轻一点：{{scene_side_hint}}。先让动作重新发生，不要求立刻很像“认真执行”。",
+                    "en": "Keep the next step lighter: {{scene_side_hint}}. The first goal is to make the action happen again, not to perform it perfectly."
+                },
+                "action_low_pressure_step": {
+                    "zh-CN": "先做一个低压版本：{{action_hint}}。动作越轻，你越容易重新建立连续性。",
+                    "en": "Start with a lower-pressure version: {{action_hint}}. The lighter it feels, the easier it is to rebuild continuity."
+                },
+                "adaptive_reduce_pressure": {
+                    "zh-CN": "如果现在一想到要推进就更累，先把动作缩到几乎不会触发抗拒：{{recovery_hint}}。",
+                    "en": "If moving forward already feels draining, shrink the step until it barely triggers resistance: {{recovery_hint}}."
+                },
+                "revisit_resume": {
+                    "zh-CN": "复访时也不用一次追回全部进度，先接回一个最轻的版本就够了：{{recovery_hint}}。",
+                    "en": "On a revisit, you do not need to catch up on everything at once; reconnecting with the lightest version is enough first: {{recovery_hint}}."
+                }
+            }
+        },
+        "growth.watchouts": {
+            "supportive": {
+                "watchout": {
+                    "zh-CN": "这部分更像温和提醒：高压时你最容易在这里失衡。先看见它，再决定怎么修正：{{scene_side_hint}}。",
+                    "en": "This section works best as a gentle reminder: under pressure, this is where you are most likely to get off balance. Notice it first, then decide how to correct it: {{scene_side_hint}}."
+                },
+                "watchout_recovery_gap": {
+                    "zh-CN": "如果最近总觉得动作断掉，先别怪自己不够坚持，先补上恢复环节：{{watchout_hint}}。",
+                    "en": "If actions keep breaking lately, do not blame yourself for lacking discipline first; repair the recovery gap first: {{watchout_hint}}."
+                },
+                "recovery_reset": {
+                    "zh-CN": "恢复动作不是奖励，而是让你重新有余量继续前进的前提：{{recovery_hint}}。",
+                    "en": "Recovery is not a reward; it is the prerequisite that gives you enough margin to move forward again: {{recovery_hint}}."
+                }
+            },
+            "direct": {
+                "watchout": {
+                    "zh-CN": "这里是当前最容易把你拖偏的位置。别等它变大，先处理：{{scene_side_hint}}。",
+                    "en": "This is the place most likely to pull you off course right now. Do not wait for it to grow; address it first: {{scene_side_hint}}."
+                },
+                "watchout_overcontrol": {
+                    "zh-CN": "你现在更要防的是过度控制。流程够用就行，不必把每一环都锁死：{{watchout_hint}}。",
+                    "en": "The bigger risk right now is overcontrol. Let the process be usable; it does not have to be fully locked down: {{watchout_hint}}."
+                },
+                "watchout_avoidant_delay": {
+                    "zh-CN": "别再把延迟包装成准备。先做一个最小动作，把等待打断：{{watchout_hint}}。",
+                    "en": "Do not keep dressing delay up as preparation. Do one minimal move and break the waiting loop: {{watchout_hint}}."
+                }
+            },
+            "stabilizing": {
+                "watchout": {
+                    "zh-CN": "这里最需要的不是逼自己更猛，而是更早识别失衡苗头，避免把状态一路推到崩掉：{{scene_side_hint}}。",
+                    "en": "What matters here is not pushing yourself harder, but noticing imbalance earlier so the state does not spiral into collapse: {{scene_side_hint}}."
+                },
+                "watchout_recovery_gap": {
+                    "zh-CN": "现在最危险的不是动作慢，而是恢复环节继续缺席。没有恢复，你后面的努力会更快失真：{{watchout_hint}}。",
+                    "en": "The bigger danger now is not slower action, but letting recovery stay absent. Without recovery, the effort that follows will distort faster: {{watchout_hint}}."
+                },
+                "recovery_reset": {
+                    "zh-CN": "把恢复当成正经步骤，而不是失败后的补救：{{recovery_hint}}。",
+                    "en": "Treat recovery as a real step in the process, not as damage control after failure: {{recovery_hint}}."
+                }
+            }
+        },
+        "career.next_step": {
+            "supportive": {
+                "career_next_step": {
+                    "zh-CN": "职业下一步不一定要一下定很大，先试一个更贴近你工作节奏的小验证：{{scene_side_hint}}。",
+                    "en": "Your next career step does not need to be huge. Start by testing a smaller move that fits your work rhythm better: {{scene_side_hint}}."
+                },
+                "work_scene_role_fit": {
+                    "zh-CN": "先确认角色匹配感：{{work_hint}}。适配感比头衔更能决定你能不能长期做稳。",
+                    "en": "Check role fit first: {{work_hint}}. Fit matters more than title when it comes to sustaining good work."
+                },
+                "work_scene_transition": {
+                    "zh-CN": "如果你正站在变化前面，先做一个过渡验证动作：{{work_hint}}。",
+                    "en": "If you are standing in front of a change, begin with one transition-validation move: {{work_hint}}."
+                }
+            },
+            "direct": {
+                "career_next_step": {
+                    "zh-CN": "职业下一步先别再抽象化，直接验证一个最可能推进现实的动作：{{scene_side_hint}}。",
+                    "en": "Do not keep the next career step abstract. Validate the move most likely to change reality first: {{scene_side_hint}}."
+                },
+                "work_scene_execution": {
+                    "zh-CN": "先看执行方式能不能匹配你：{{work_hint}}。如果推进方式不合拍，再好的机会也会消耗你。",
+                    "en": "Check whether the execution style fits you first: {{work_hint}}. If the way of moving work forward mismatches you, even a good opportunity will drain you."
+                },
+                "work_scene_pacing": {
+                    "zh-CN": "节奏不对时，职业判断也会失真。先把速度调回你能长期维持的区间：{{work_hint}}。",
+                    "en": "When pacing is off, career judgment distorts too. Bring the speed back to a range you can sustain: {{work_hint}}."
+                }
+            },
+            "reflective": {
+                "career_next_step": {
+                    "zh-CN": "职业下一步更适合接在你已经验证过的高匹配经验后面：{{scene_side_hint}}。",
+                    "en": "The next career step is best attached to a high-fit pattern you have already verified before: {{scene_side_hint}}."
+                },
+                "work_scene_transition": {
+                    "zh-CN": "如果你之前换过环境或角色，先回看当时真正帮助你稳住的支撑条件：{{work_hint}}。",
+                    "en": "If you have changed environments or roles before, look back first at the conditions that actually helped you stabilize then: {{work_hint}}."
+                },
+                "work_scene_role_fit": {
+                    "zh-CN": "别只看“能不能做”，也回看“做了之后有没有持续更顺”。这个差别才是真正的角色匹配：{{work_hint}}。",
+                    "en": "Do not only ask whether you can do it; look back at whether doing it kept feeling smoother over time. That difference is real role fit: {{work_hint}}."
+                }
+            }
+        },
+        "relationships.try_this_week": {
+            "supportive": {
+                "relationship_practice": {
+                    "zh-CN": "这周的关系动作可以先温和一点：{{scene_side_hint}}。重点不是一次说到最完整，而是让对方更容易接住你的真实节奏。",
+                    "en": "Keep this week’s relationship move a little gentler: {{scene_side_hint}}. The goal is not perfect expression, but making your real rhythm easier for the other person to receive."
+                },
+                "relationship_bridge": {
+                    "zh-CN": "先搭桥，不急着一次解决全部问题：{{relationship_hint}}。",
+                    "en": "Build the bridge first; there is no need to solve everything at once: {{relationship_hint}}."
+                },
+                "relationship_low_intensity_reconnect": {
+                    "zh-CN": "如果最近有点疏离，先用低强度重新连接就够了：{{relationship_hint}}。",
+                    "en": "If things have felt distant lately, a low-intensity reconnection is enough to start: {{relationship_hint}}."
+                }
+            },
+            "direct": {
+                "relationship_practice": {
+                    "zh-CN": "这周别再等气氛自己变好，先主动做一个关系动作：{{scene_side_hint}}。",
+                    "en": "Do not wait for the atmosphere to improve on its own this week; make one relationship move yourself: {{scene_side_hint}}."
+                },
+                "relationship_boundary_negotiation": {
+                    "zh-CN": "边界别再只放在心里，直接说出来：{{relationship_hint}}。",
+                    "en": "Do not keep the boundary in your head only; say it directly: {{relationship_hint}}."
+                },
+                "relationship_misread_repair": {
+                    "zh-CN": "如果已经出现误读，先修正误读本身，不要继续让猜测扩大：{{relationship_hint}}。",
+                    "en": "If a misread has already happened, repair the misread itself first instead of letting guesswork expand: {{relationship_hint}}."
+                }
+            },
+            "reflective": {
+                "relationship_practice": {
+                    "zh-CN": "这周的关系动作更适合接在你已经看见有效的互动方式后面：{{scene_side_hint}}。",
+                    "en": "This week’s relationship move is best attached to an interaction pattern you already know can work: {{scene_side_hint}}."
+                },
+                "relationship_misread_repair": {
+                    "zh-CN": "如果类似误会以前也出现过，这次先从你们曾经最容易重新对齐的方式重新打开：{{relationship_hint}}。",
+                    "en": "If a similar misunderstanding has happened before, reopen the conversation through the path that helped you realign most easily last time: {{relationship_hint}}."
+                },
+                "relationship_low_intensity_reconnect": {
+                    "zh-CN": "重新连接不一定要很重，先回到你们以前最自然的一种小互动：{{relationship_hint}}。",
+                    "en": "Reconnection does not have to be heavy; begin with a small interaction that used to feel natural for both of you: {{relationship_hint}}."
+                }
+            },
+            "stabilizing": {
+                "relationship_practice": {
+                    "zh-CN": "如果最近关系上的负荷比较高，这周的动作先以回稳为主：{{scene_side_hint}}。",
+                    "en": "If relationship load has felt high lately, let this week’s move prioritize stabilization first: {{scene_side_hint}}."
+                },
+                "relationship_conflict_recovery": {
+                    "zh-CN": "先处理冲突后的回稳，而不是立刻推进更多议题：{{relationship_hint}}。",
+                    "en": "Handle the post-conflict stabilization first instead of immediately moving into more issues: {{relationship_hint}}."
+                },
+                "relationship_boundary_negotiation": {
+                    "zh-CN": "边界仍然要说，但先用能降低误伤的方式说：{{relationship_hint}}。",
+                    "en": "The boundary still needs to be spoken, but speak it in a way that reduces collateral damage first: {{relationship_hint}}."
+                }
+            }
+        }
+    },
+    "boundary_narrative_templates": {
+        "overview": "{{axis_label}}靠近中线时，你不是“有点像两边”，而是会在不同情境下切换入口。熟悉场景里你可能先用{{side_label}}，压力或高风险情境里又会迅速调动{{opposite_side_label}}。别人如果只看到其中一面，就容易把你误读成忽冷忽热、摇摆或前后不一。",
+        "relationships": "在人际里，{{axis_label}}靠近中线意味着你不会永远只走{{side_label}}这一条路。你可能先用{{side_label}}靠近，遇到压力或误解时又改用{{opposite_side_label}}保护自己。别人如果只看到其中一段，就会误判你到底是在拉近、保持距离，还是突然变得难以捉摸。",
+        "growth": "成长上，{{axis_label}}靠近中线意味着你真正要学的不是选边站，而是识别什么时候该让{{side_label}}先开路，什么时候该让{{opposite_side_label}}接手收尾。会切换并不可怕，不知道自己在什么时候切换才会让你觉得“我怎么又变了”。",
+        "work": "在工作里，{{axis_label}}靠近中线会让你在任务、协作和压力场景下切换齿轮。你有时像{{side_label}}，有时又会突然拉出{{opposite_side_label}}来修正，所以团队很容易只记住其中一面。真正有价值的是让别人知道：你在什么信号下会切换，以及切换后需要怎样的协作方式。",
+        "decision": "做决定时，{{axis_label}}靠近中线意味着你并不是摇摆不定，而是在两套判断入口之间来回校准。你可能先用{{side_label}}开路，再用{{opposite_side_label}}复核；场景一变，顺序也会反过来。别人会以为你前后矛盾，其实你是在同时守住速度与准确度、标准与关系，或结构与弹性。",
+        "stress_recovery": "压力上来时，{{axis_label}}靠近中线意味着你可能先滑向{{side_label}}来保住当下，再在恢复阶段调回{{opposite_side_label}}重新平衡。它的难点不是“你为什么不稳定”，而是如果你没意识到自己在切换，就会把这种来回误读成状态失控。",
+        "communication": "沟通里，{{axis_label}}靠近中线意味着你不会永远只用一种表达方式。你可能先用{{side_label}}出手，但一旦对方反馈变化，又迅速调动{{opposite_side_label}}补位。别人如果只看到前半段，常会误读你的真实意图；而你自己则会觉得“我明明已经说清楚了”。"
+    },
+    "identity_templates": {
+        "A": "A 身份层会让你在当前类型骨架上更容易保持稳定推进、少被短期波动牵着走。",
+        "T": "T 身份层会让你在当前类型骨架上更容易放大细节波动与结果质量，因此同一类型也会表现出更高的自我校准和压力感知。"
+    }
+}

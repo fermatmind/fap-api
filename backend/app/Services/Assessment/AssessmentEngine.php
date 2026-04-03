@@ -43,7 +43,10 @@ class AssessmentEngine
             $driverType = 'generic_scoring';
         }
 
-        $defaultSpecVersion = $this->defaultSpecVersionFor($scaleCode, $driverType);
+        $defaultSpecVersion = trim((string) ($ctx['scoring_spec_version'] ?? ''));
+        if ($defaultSpecVersion === '') {
+            $defaultSpecVersion = $this->defaultSpecVersionFor($scaleCode, $driverType);
+        }
         $modelRouterEnabled = (bool) config('fap.features.model_router_v2', true);
         $modelSelection = $modelRouterEnabled
             ? $this->modelRouter->select(
