@@ -7,6 +7,7 @@ namespace App\Services\Commerce;
 use App\Models\Attempt;
 use App\Models\UnifiedAccessProjection;
 use App\Services\Access\AttemptUnlockProjectionRepairService;
+use App\Services\Mbti\MbtiPublicFormSummaryBuilder;
 use App\Services\Report\ReportAccess;
 use Illuminate\Support\Facades\DB;
 
@@ -15,6 +16,7 @@ final class MbtiAccessHubBuilder
     public function __construct(
         private OrderManager $orders,
         private AttemptUnlockProjectionRepairService $projectionRepair,
+        private MbtiPublicFormSummaryBuilder $mbtiPublicFormSummaryBuilder,
     ) {}
 
     /**
@@ -44,6 +46,7 @@ final class MbtiAccessHubBuilder
             'access_state' => $locked
                 ? ReportAccess::ACCESS_HUB_STATE_LOCKED
                 : ReportAccess::ACCESS_HUB_STATE_READY,
+            'mbti_form_v1' => $this->mbtiPublicFormSummaryBuilder->summarizeForAttempt($attempt),
             'report_access' => [
                 'can_view_report' => $reportUrl !== null,
                 'attempt_id' => $attemptId,
@@ -110,6 +113,10 @@ final class MbtiAccessHubBuilder
         return [
             'access_state' => $this->stringOrNull($exactResultEntry['access_state'] ?? null)
                 ?? $this->resolveDeliveryAccessState($order, $canViewReport, $canRequestClaimEmail, $canResend),
+            'mbti_form_v1' => $this->mbtiPublicFormSummaryBuilder->summarizeForAttemptId(
+                $attemptId,
+                (int) ($order->org_id ?? 0)
+            ),
             'report_access' => [
                 'can_view_report' => $canViewReport,
                 'attempt_id' => $attemptId,
@@ -291,6 +298,7 @@ final class MbtiAccessHubBuilder
 
         return [
             'attempt_id' => $attemptId,
+            'mbti_form_v1' => $this->mbtiPublicFormSummaryBuilder->summarizeForAttemptId($attemptId, $orgId),
             'access_state' => $accessState,
             'report_state' => $reportState,
             'pdf_state' => $pdfState,

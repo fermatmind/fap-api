@@ -40,8 +40,10 @@ final class AttemptReportAccessReadTest extends TestCase
         return $token;
     }
 
-    private function createAttempt(string $attemptId, string $anonId): void
+    private function createAttempt(string $attemptId, string $anonId, string $formCode = 'mbti_144'): void
     {
+        $isMbti93 = $formCode === 'mbti_93';
+
         Attempt::create([
             'id' => $attemptId,
             'org_id' => 0,
@@ -50,20 +52,22 @@ final class AttemptReportAccessReadTest extends TestCase
             'scale_version' => 'v0.3',
             'region' => 'CN_MAINLAND',
             'locale' => 'zh-CN',
-            'question_count' => 144,
+            'question_count' => $isMbti93 ? 93 : 144,
             'client_platform' => 'test',
-            'answers_summary_json' => ['stage' => 'seed'],
+            'answers_summary_json' => ['stage' => 'seed', 'meta' => ['form_code' => $formCode]],
             'started_at' => now(),
             'submitted_at' => now(),
             'pack_id' => (string) config('content_packs.default_pack_id'),
-            'dir_version' => 'MBTI-CN-v0.3',
-            'content_package_version' => 'attempt-v1',
-            'scoring_spec_version' => 'attempt-score-v1',
+            'dir_version' => $isMbti93 ? 'MBTI-CN-v0.3-form-93' : 'MBTI-CN-v0.3',
+            'content_package_version' => $isMbti93 ? 'v0.3-form-93' : 'v0.3',
+            'scoring_spec_version' => $isMbti93 ? '2026.01.mbti_93' : '2026.01.mbti_144',
         ]);
     }
 
-    private function createResult(string $attemptId): void
+    private function createResult(string $attemptId, string $formCode = 'mbti_144'): void
     {
+        $isMbti93 = $formCode === 'mbti_93';
+
         Result::create([
             'id' => (string) Str::uuid(),
             'org_id' => 0,
@@ -74,11 +78,11 @@ final class AttemptReportAccessReadTest extends TestCase
             'scores_json' => [],
             'scores_pct' => [],
             'axis_states' => [],
-            'content_package_version' => 'result-v1',
-            'result_json' => ['type_code' => 'INTJ-A'],
+            'content_package_version' => $isMbti93 ? 'v0.3-form-93' : 'v0.3',
+            'result_json' => ['type_code' => 'INTJ-A', 'meta' => ['form_code' => $formCode]],
             'pack_id' => (string) config('content_packs.default_pack_id'),
-            'dir_version' => 'MBTI-CN-v0.3',
-            'scoring_spec_version' => 'result-score-v1',
+            'dir_version' => $isMbti93 ? 'MBTI-CN-v0.3-form-93' : 'MBTI-CN-v0.3',
+            'scoring_spec_version' => $isMbti93 ? '2026.01.mbti_93' : '2026.01.mbti_144',
             'report_engine_version' => 'v1.2',
             'is_valid' => true,
             'computed_at' => now(),
@@ -113,8 +117,8 @@ final class AttemptReportAccessReadTest extends TestCase
         $attemptId = (string) Str::uuid();
         $anonId = 'anon_access_reader';
         $token = $this->issueAnonToken($anonId);
-        $this->createAttempt($attemptId, $anonId);
-        $this->createResult($attemptId);
+        $this->createAttempt($attemptId, $anonId, 'mbti_93');
+        $this->createResult($attemptId, 'mbti_93');
 
         DB::table('unified_access_projections')->insert([
             'attempt_id' => $attemptId,
@@ -149,6 +153,9 @@ final class AttemptReportAccessReadTest extends TestCase
         $response->assertJsonPath('actions.history_href', '/history/mbti');
         $response->assertJsonPath('actions.lookup_href', '/orders/lookup');
         $response->assertJsonPath('payload.has_active_grant', true);
+        $response->assertJsonPath('mbti_form_v1.form_code', 'mbti_93');
+        $response->assertJsonPath('mbti_form_v1.question_count', 93);
+        $response->assertJsonPath('mbti_form_v1.scale_code', 'MBTI');
     }
 
     public function test_it_repairs_missing_ready_projection_from_active_entitlement_when_result_exists(): void

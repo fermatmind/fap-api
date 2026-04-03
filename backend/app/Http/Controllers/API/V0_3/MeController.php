@@ -13,7 +13,12 @@ class MeController extends Controller
 
     public function attempts(MeAttemptsIndexRequest $request): JsonResponse
     {
-        $result = $this->me->listAttempts($request->pageSize(), $request->page(), $request->scaleCode());
+        $result = $this->me->listAttempts(
+            $request->pageSize(),
+            $request->page(),
+            $request->scaleCode(),
+            is_string($request->query('locale')) ? $request->query('locale') : null
+        );
 
         return response()->json(array_merge(['ok' => true], $result), 200);
     }

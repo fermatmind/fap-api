@@ -11,6 +11,7 @@ use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Commerce\OrderManager;
 use App\Services\Commerce\SkuCatalog;
 use App\Services\Email\EmailCaptureService;
+use App\Services\Mbti\MbtiPublicFormSummaryBuilder;
 use App\Services\Payments\PaymentProviderRegistry;
 use App\Services\Payments\PaymentRouter;
 use App\Services\Report\ReportAccess;
@@ -36,6 +37,7 @@ class CommerceController extends Controller
         private PaymentRouter $paymentRouter,
         private PaymentProviderRegistry $paymentProviders,
         private MbtiAccessHubBuilder $mbtiAccessHubBuilder,
+        private MbtiPublicFormSummaryBuilder $mbtiPublicFormSummaryBuilder,
         private LemonSqueezyCheckoutService $lemonSqueezyCheckout,
         private WechatPayCheckoutService $wechatPayCheckout,
         private AlipayCheckoutService $alipayCheckout,
@@ -215,6 +217,7 @@ class CommerceController extends Controller
             'latest_payment_attempt' => $paymentAttemptSummary['latest'],
             'delivery' => $delivery['delivery'],
             'exact_result_entry' => $exactResultEntry,
+            'mbti_form_v1' => $this->mbtiFormSummaryForOrder($order, $request),
         ];
 
         if ($ownershipVerified) {
@@ -683,6 +686,7 @@ class CommerceController extends Controller
             'latest_payment_attempt' => $paymentAttemptSummary['latest'],
             'delivery' => $delivery['delivery'],
             'exact_result_entry' => $exactResultEntry,
+            'mbti_form_v1' => $this->mbtiFormSummaryForOrder($order, $request),
         ];
 
         $mbtiAccessHub = $this->mbtiAccessHubBuilder->buildForLookupHit($order);
@@ -1349,6 +1353,23 @@ class CommerceController extends Controller
         }
 
         return null;
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function mbtiFormSummaryForOrder(object $order, Request $request): ?array
+    {
+        $attemptId = $this->trimNullableString($order->target_attempt_id ?? null);
+        if ($attemptId === null) {
+            return null;
+        }
+
+        return $this->mbtiPublicFormSummaryBuilder->summarizeForAttemptId(
+            $attemptId,
+            (int) ($order->org_id ?? $this->orgContext->orgId()),
+            $this->resolveRequestedLocale($request)
+        );
     }
 
     private function resolveIdempotencyKey(Request $request, array $payload): ?string

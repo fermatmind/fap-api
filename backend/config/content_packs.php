@@ -60,12 +60,34 @@ return [
                     'standard_144',
                     'pro_144',
                 ],
+                'public' => [
+                    'label' => [
+                        'zh' => '144题完整版',
+                        'en' => '144-question full version',
+                    ],
+                    'short_label' => [
+                        'zh' => '144题',
+                        'en' => '144 questions',
+                    ],
+                    'estimated_minutes' => 15,
+                ],
             ],
             'mbti_93' => [
                 'dir_version' => 'MBTI-CN-v0.3-form-93',
                 'aliases' => [
                     '93',
                     'standard_93',
+                ],
+                'public' => [
+                    'label' => [
+                        'zh' => '93题标准版',
+                        'en' => '93-question standard version',
+                    ],
+                    'short_label' => [
+                        'zh' => '93题',
+                        'en' => '93 questions',
+                    ],
+                    'estimated_minutes' => 10,
                 ],
             ],
         ],

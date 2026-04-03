@@ -6,6 +6,7 @@ use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Models\UnifiedAccessProjection;
+use App\Services\Mbti\MbtiPublicFormSummaryBuilder;
 use App\Services\Report\Resolvers\OfferResolver;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
@@ -57,6 +58,7 @@ class MeAttemptsService
     public function __construct(
         private readonly ScaleRegistry $scaleRegistry,
         private readonly OfferResolver $offerResolver,
+        private readonly MbtiPublicFormSummaryBuilder $mbtiPublicFormSummaryBuilder,
     ) {}
 
     public function list(
@@ -65,7 +67,8 @@ class MeAttemptsService
         ?string $anonId,
         int $pageSize,
         int $page,
-        ?string $scaleCode = null
+        ?string $scaleCode = null,
+        ?string $locale = null
     ): array {
         if ($userId === null && $anonId === null) {
             throw new ApiProblemException(401, 'UNAUTHORIZED', 'Missing or invalid fm_token.');
@@ -142,7 +145,11 @@ class MeAttemptsService
         foreach ($attemptModels as $attempt) {
             $attemptId = (string) ($attempt->id ?? '');
             $result = $resultByAttemptId[$attemptId] ?? null;
-            $items[] = $this->presentAttempt($attempt, $result, $projectionByAttemptId[$attemptId] ?? null);
+            $presented = $this->presentAttempt($attempt, $result, $projectionByAttemptId[$attemptId] ?? null);
+            if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI') {
+                $presented['mbti_form_v1'] = $this->mbtiPublicFormSummaryBuilder->summarizeForAttempt($attempt, $result, $locale);
+            }
+            $items[] = $presented;
         }
 
         $paginator->setCollection(collect($items));

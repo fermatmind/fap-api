@@ -30,7 +30,7 @@ class MeFacadeService
         private readonly PiiCipher $piiCipher,
     ) {}
 
-    public function listAttempts(int $pageSize, int $page = 1, ?string $scaleCode = null): array
+    public function listAttempts(int $pageSize, int $page = 1, ?string $scaleCode = null, ?string $locale = null): array
     {
         $userId = $this->orgContext->userId();
 
@@ -40,7 +40,8 @@ class MeFacadeService
             $this->orgContext->anonId(),
             $this->normalizePageSize($pageSize),
             max(1, $page),
-            $scaleCode
+            $scaleCode,
+            $locale
         );
     }
 

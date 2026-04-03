@@ -41,6 +41,7 @@ class MbtiResultTelemetryContractTest extends TestCase
 
             $meta = json_decode((string) ($event->meta_json ?? '{}'), true) ?: [];
             $eventMeta[$eventCode] = $meta;
+            $this->assertSame('mbti_144', (string) ($meta['form_code'] ?? ''));
             $this->assertSame('INTJ-A', (string) ($meta['type_code'] ?? ''));
             $this->assertSame('A', (string) ($meta['identity'] ?? ''));
             $this->assertSame('report_phase4a_contract', (string) ($meta['engine_version'] ?? ''));

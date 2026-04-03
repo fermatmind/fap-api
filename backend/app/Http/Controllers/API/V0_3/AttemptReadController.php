@@ -20,6 +20,7 @@ use App\Services\Mbti\MbtiAdaptiveSelectionService;
 use App\Services\Mbti\MbtiIntraTypeProfileService;
 use App\Services\Mbti\MbtiPrivacyConsentContractService;
 use App\Services\Mbti\MbtiPublicProjectionService;
+use App\Services\Mbti\MbtiPublicFormSummaryBuilder;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use App\Services\Mbti\MbtiReadModelContractService;
 use App\Services\Mbti\MbtiUserStateOrchestrationService;
@@ -51,6 +52,7 @@ class AttemptReadController extends Controller
         private BigFivePublicProjectionService $bigFivePublicProjectionService,
         private MbtiPrivacyConsentContractService $mbtiPrivacyConsentContractService,
         private MbtiPublicProjectionService $mbtiPublicProjectionService,
+        private MbtiPublicFormSummaryBuilder $mbtiPublicFormSummaryBuilder,
         private MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
         private MbtiUserStateOrchestrationService $mbtiUserStateOrchestrationService,
         private MbtiActionJourneyContractService $mbtiActionJourneyContractService,
@@ -127,6 +129,9 @@ class AttemptReadController extends Controller
         $contentPackageVersion = $this->preferredStringField($result, $attempt, 'content_package_version');
         $scoringSpecVersion = $this->preferredStringField($result, $attempt, 'scoring_spec_version');
         $reportEngineVersion = $this->preferredStringField($result, null, 'report_engine_version', 'v1.2');
+        $mbtiFormSummary = $scaleCode === 'MBTI'
+            ? $this->resolveMbtiFormSummary($request, $attempt, $result)
+            : null;
 
         if ($scaleCode === 'CLINICAL_COMBO_68') {
             $gate = $this->reportGatekeeper->resolve(
@@ -173,9 +178,10 @@ class AttemptReadController extends Controller
                 'type_code' => (string) ($result->type_code ?? ''),
                 'attempt_id' => $attemptId,
                 'locked' => (bool) ($gate['locked'] ?? true),
+                ...$this->mbtiFormEventMeta($mbtiFormSummary),
             ]);
 
-            return response()->json([
+            $responsePayload = [
                 'ok' => true,
                 'attempt_id' => $attemptId,
                 'type_code' => '',
@@ -194,7 +200,12 @@ class AttemptReadController extends Controller
                     'scoring_spec_version' => $scoringSpecVersion,
                     'report_engine_version' => $reportEngineVersion,
                 ],
-            ]);
+            ];
+            if (is_array($mbtiFormSummary)) {
+                $responsePayload['mbti_form_v1'] = $mbtiFormSummary;
+            }
+
+            return response()->json($responsePayload);
         }
 
         $payload = $result->result_json;
@@ -246,6 +257,7 @@ class AttemptReadController extends Controller
             'type_code' => (string) ($result->type_code ?? ''),
             'attempt_id' => $attemptId,
             ...$mbtiEventMeta,
+            ...$this->mbtiFormEventMeta($mbtiFormSummary),
             ...$big5EventMeta,
         ]);
 
@@ -289,6 +301,9 @@ class AttemptReadController extends Controller
                 $responsePayload['comparative_v1'] = $comparative;
             }
         }
+        if (is_array($mbtiFormSummary)) {
+            $responsePayload['mbti_form_v1'] = $mbtiFormSummary;
+        }
 
         return response()->json($responsePayload);
     }
@@ -330,6 +345,9 @@ class AttemptReadController extends Controller
         $responseCodes = $this->resolveResponseScaleCodes($result);
         $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
         $attempt = $this->resolveAttemptForReportRead($request, $id, $scaleCode);
+        $mbtiFormSummary = $scaleCode === 'MBTI'
+            ? $this->resolveMbtiFormSummary($request, $attempt, $result)
+            : null;
 
         $gate = $this->resolveReportGate(
             $orgId,
@@ -401,6 +419,9 @@ class AttemptReadController extends Controller
             $responsePayload[MbtiPreviewContractBuilder::KEY] = $this->mbtiPreviewContractBuilder->buildFromReportEnvelope(
                 $responsePayload
             );
+            if (is_array($mbtiFormSummary)) {
+                $responsePayload['mbti_form_v1'] = $mbtiFormSummary;
+            }
         } elseif ($scaleCode === 'BIG5_OCEAN') {
             $projection = data_get($responsePayload, 'report._meta.big5_public_projection_v1');
             if (! is_array($projection)) {
@@ -489,6 +510,7 @@ class AttemptReadController extends Controller
             'attempt_id' => (string) $attempt->id,
             'locked' => (bool) ($gate['locked'] ?? false),
             ...$mbtiEventMeta,
+            ...$this->mbtiFormEventMeta($mbtiFormSummary),
             ...$big5EventMeta,
         ]);
 
@@ -537,7 +559,10 @@ class AttemptReadController extends Controller
             $refreshedAt = optional($projection?->refreshed_at)->toIso8601String();
         }
 
-        return response()->json([
+        $mbtiFormSummary = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI'
+            ? $this->resolveMbtiFormSummary($request, $attempt)
+            : null;
+        $responsePayload = [
             'ok' => true,
             'attempt_id' => (string) $attempt->id,
             'access_state' => $accessState,
@@ -551,7 +576,12 @@ class AttemptReadController extends Controller
                 'produced_at' => $producedAt,
                 'refreshed_at' => $refreshedAt,
             ],
-        ]);
+        ];
+        if (is_array($mbtiFormSummary)) {
+            $responsePayload['mbti_form_v1'] = $mbtiFormSummary;
+        }
+
+        return response()->json($responsePayload);
     }
 
     private function resolveAttemptForReportRead(
@@ -1692,6 +1722,9 @@ class AttemptReadController extends Controller
         $responseCodes = $this->resolveResponseScaleCodes($result);
         $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
         $attempt = $this->resolveAttemptForReportRead($request, $id, $scaleCode);
+        $mbtiFormSummary = $scaleCode === 'MBTI'
+            ? $this->resolveMbtiFormSummary($request, $attempt, $result)
+            : null;
 
         $gate = $this->reportGatekeeper->resolve(
             $orgId,
@@ -1732,6 +1765,7 @@ class AttemptReadController extends Controller
             'attempt_id' => (string) $attempt->id,
             'locked' => $locked,
             'variant' => $variant,
+            ...$this->mbtiFormEventMeta($mbtiFormSummary),
         ]);
 
         $generated = $this->reportPdfDocumentService->getOrGenerate($attempt, $gate, $result);
@@ -1747,5 +1781,47 @@ class AttemptReadController extends Controller
             'X-Report-Variant' => $variant,
             'X-Report-Locked' => $locked ? 'true' : 'false',
         ]);
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function resolveMbtiFormSummary(Request $request, ?Attempt $attempt, ?Result $result = null): ?array
+    {
+        return $this->mbtiPublicFormSummaryBuilder->summarizeForAttempt(
+            $attempt,
+            $result,
+            $this->resolvePublicReadLocale($request, $attempt?->locale)
+        );
+    }
+
+    /**
+     * @param  array<string,mixed>|null  $summary
+     * @return array<string,string>
+     */
+    private function mbtiFormEventMeta(?array $summary): array
+    {
+        $formCode = trim((string) ($summary['form_code'] ?? ''));
+
+        return $formCode !== '' ? ['form_code' => $formCode] : [];
+    }
+
+    private function resolvePublicReadLocale(Request $request, ?string $fallback = null): ?string
+    {
+        foreach ([
+            $request->query('locale'),
+            $request->header('X-Fap-Locale', ''),
+            $request->header('X-Locale', ''),
+            $request->getLocale(),
+            $fallback,
+            config('content_packs.default_locale', 'zh-CN'),
+        ] as $candidate) {
+            $normalized = trim((string) $candidate);
+            if ($normalized !== '') {
+                return $normalized;
+            }
+        }
+
+        return null;
     }
 }
