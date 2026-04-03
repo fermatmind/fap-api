@@ -6,6 +6,7 @@ use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Models\UnifiedAccessProjection;
+use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
 use App\Services\Mbti\MbtiPublicFormSummaryBuilder;
 use App\Services\Report\Resolvers\OfferResolver;
 use App\Services\Scale\ScaleRegistry;
@@ -59,6 +60,7 @@ class MeAttemptsService
         private readonly ScaleRegistry $scaleRegistry,
         private readonly OfferResolver $offerResolver,
         private readonly MbtiPublicFormSummaryBuilder $mbtiPublicFormSummaryBuilder,
+        private readonly BigFivePublicFormSummaryBuilder $bigFivePublicFormSummaryBuilder,
     ) {}
 
     public function list(
@@ -148,6 +150,8 @@ class MeAttemptsService
             $presented = $this->presentAttempt($attempt, $result, $projectionByAttemptId[$attemptId] ?? null);
             if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI') {
                 $presented['mbti_form_v1'] = $this->mbtiPublicFormSummaryBuilder->summarizeForAttempt($attempt, $result, $locale);
+            } elseif (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'BIG5_OCEAN') {
+                $presented['big5_form_v1'] = $this->bigFivePublicFormSummaryBuilder->summarizeForAttempt($attempt, $result, $locale);
             }
             $items[] = $presented;
         }

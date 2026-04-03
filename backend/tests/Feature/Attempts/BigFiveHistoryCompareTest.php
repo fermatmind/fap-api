@@ -114,6 +114,9 @@ final class BigFiveHistoryCompareTest extends TestCase
         $response->assertJsonPath('items.0.access_summary.reason_code', 'entitlement_granted');
         $response->assertJsonPath('items.0.access_summary.access_level', 'full');
         $response->assertJsonPath('items.0.access_summary.variant', 'full');
+        $response->assertJsonPath('items.0.big5_form_v1.form_code', 'big5_120');
+        $response->assertJsonPath('items.0.big5_form_v1.question_count', 120);
+        $response->assertJsonPath('items.0.big5_form_v1.scale_code', 'BIG5_OCEAN');
         $response->assertJsonPath('items.0.access_summary.actions.page_href', "/result/{$latestAttemptId}");
         $response->assertJsonPath('items.0.access_summary.actions.pdf_href', "/api/v0.3/attempts/{$latestAttemptId}/report.pdf");
         $response->assertJsonPath('items.0.top_facets_summary_v1.items.0.key', 'O5');

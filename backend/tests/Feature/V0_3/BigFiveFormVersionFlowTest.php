@@ -129,6 +129,13 @@ final class BigFiveFormVersionFlowTest extends TestCase
         $this->assertSame(90, (int) $attempt90->question_count);
         $this->assertSame('big5_90', data_get($attempt90->answers_summary_json, 'meta.form_code'));
         $this->assertSame('big5_quality_2026Q2_form90_v1', data_get($attempt90->answers_summary_json, 'meta.quality_version'));
+        $startEvent90 = DB::table('events')
+            ->where('event_code', 'test_start')
+            ->where('attempt_id', $attemptId90)
+            ->latest('created_at')
+            ->first();
+        $this->assertNotNull($startEvent90);
+        $this->assertSame('big5_90', (string) data_get(json_decode((string) ($startEvent90->meta_json ?? '{}'), true), 'form_code'));
 
         $questions90 = $this->getJson('/api/v0.3/scales/BIG5_OCEAN/questions?form=big5_90');
         $questions90->assertStatus(200);
@@ -152,6 +159,13 @@ final class BigFiveFormVersionFlowTest extends TestCase
         $this->assertSame('v1-form-90', (string) ($result90->content_package_version ?? ''));
         $this->assertSame('big5_spec_2026Q2_form90_v1', (string) ($result90->scoring_spec_version ?? ''));
         $this->assertSame('big5.norms.2026Q2.form90.v1', (string) data_get($result90->result_json, 'norms.norms_version'));
+        $submitEvent90 = DB::table('events')
+            ->where('event_code', 'test_submit')
+            ->where('attempt_id', $attemptId90)
+            ->latest('created_at')
+            ->first();
+        $this->assertNotNull($submitEvent90);
+        $this->assertSame('big5_90', (string) data_get(json_decode((string) ($submitEvent90->meta_json ?? '{}'), true), 'form_code'));
 
         $anon120 = 'big5-form-120-anon';
         $token120 = $this->issueAnonToken($anon120);
@@ -194,5 +208,78 @@ final class BigFiveFormVersionFlowTest extends TestCase
         $attempt120 = Attempt::query()->findOrFail($attemptId120);
         $this->assertSame('big5_120', data_get($attempt120->answers_summary_json, 'meta.form_code'));
         $this->assertSame('big5_spec_2026Q1_v1', data_get($attempt120->answers_summary_json, 'meta.quality_version'));
+    }
+
+    public function test_big5_read_paths_expose_big5_form_v1_summary(): void
+    {
+        $this->seedScales();
+
+        $anonId = 'big5-form-read-anon';
+        $token = $this->issueAnonToken($anonId);
+
+        $start = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+        ])->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'BIG5_OCEAN',
+            'anon_id' => $anonId,
+            'form_code' => 'big5_90',
+        ]);
+        $start->assertStatus(200);
+        $attemptId = (string) $start->json('attempt_id');
+
+        $questions = $this->getJson('/api/v0.3/scales/BIG5_OCEAN/questions?form=big5_90');
+        $questions->assertStatus(200);
+        $answers = $this->buildAnswersFromItems((array) $questions->json('questions.items'));
+        $this->assertCount(90, $answers);
+
+        $submit = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => $attemptId,
+            'answers' => $answers,
+            'duration_ms' => 180000,
+        ]);
+        $submit->assertStatus(200);
+        $submit->assertJsonPath('ok', true);
+
+        $headers = [
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ];
+
+        $resultResponse = $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/result");
+        $resultResponse->assertStatus(200);
+        $resultResponse->assertJsonPath('big5_form_v1.form_code', 'big5_90');
+        $resultResponse->assertJsonPath('big5_form_v1.question_count', 90);
+        $resultResponse->assertJsonPath('big5_form_v1.scale_code', 'BIG5_OCEAN');
+
+        $reportResponse = $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/report");
+        $reportResponse->assertStatus(200);
+        $reportResponse->assertJsonPath('big5_form_v1.form_code', 'big5_90');
+        $reportResponse->assertJsonPath('big5_form_v1.question_count', 90);
+        $reportResponse->assertJsonPath('big5_form_v1.scale_code', 'BIG5_OCEAN');
+
+        $reportAccessResponse = $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+        $reportAccessResponse->assertStatus(200);
+        $reportAccessResponse->assertJsonPath('big5_form_v1.form_code', 'big5_90');
+        $reportAccessResponse->assertJsonPath('big5_form_v1.question_count', 90);
+        $reportAccessResponse->assertJsonPath('big5_form_v1.scale_code', 'BIG5_OCEAN');
+
+        $resultViewEvent = DB::table('events')
+            ->where('event_code', 'result_view')
+            ->where('attempt_id', $attemptId)
+            ->latest('created_at')
+            ->first();
+        $this->assertNotNull($resultViewEvent);
+        $this->assertSame('big5_90', (string) data_get(json_decode((string) ($resultViewEvent->meta_json ?? '{}'), true), 'form_code'));
+
+        $reportViewEvent = DB::table('events')
+            ->where('event_code', 'report_view')
+            ->where('attempt_id', $attemptId)
+            ->latest('created_at')
+            ->first();
+        $this->assertNotNull($reportViewEvent);
+        $this->assertSame('big5_90', (string) data_get(json_decode((string) ($reportViewEvent->meta_json ?? '{}'), true), 'form_code'));
     }
 }

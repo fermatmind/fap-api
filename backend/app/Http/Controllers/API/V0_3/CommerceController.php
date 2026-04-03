@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Services\Commerce\Checkout\AlipayCheckoutService;
 use App\Services\Commerce\Checkout\LemonSqueezyCheckoutService;
 use App\Services\Commerce\Checkout\WechatPayCheckoutService;
+use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
 use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Commerce\OrderManager;
 use App\Services\Commerce\SkuCatalog;
@@ -38,6 +39,7 @@ class CommerceController extends Controller
         private PaymentProviderRegistry $paymentProviders,
         private MbtiAccessHubBuilder $mbtiAccessHubBuilder,
         private MbtiPublicFormSummaryBuilder $mbtiPublicFormSummaryBuilder,
+        private BigFivePublicFormSummaryBuilder $bigFivePublicFormSummaryBuilder,
         private LemonSqueezyCheckoutService $lemonSqueezyCheckout,
         private WechatPayCheckoutService $wechatPayCheckout,
         private AlipayCheckoutService $alipayCheckout,
@@ -188,6 +190,10 @@ class CommerceController extends Controller
             $paymentRecoveryToken
         );
         $exactResultEntry = $this->mbtiAccessHubBuilder->buildExactResultEntryForOrder($order);
+        $big5FormSummary = $this->big5FormSummaryForOrder($order, $request);
+        if (is_array($exactResultEntry) && is_array($big5FormSummary)) {
+            $exactResultEntry['big5_form_v1'] = $big5FormSummary;
+        }
         if ($status === 'pending') {
             $order = $this->orders->findOrderByOrderNo((string) ($order->order_no ?? ''), $orgId) ?? $order;
             $status = $this->resolvePublicOrderStatus($order);
@@ -218,6 +224,7 @@ class CommerceController extends Controller
             'delivery' => $delivery['delivery'],
             'exact_result_entry' => $exactResultEntry,
             'mbti_form_v1' => $this->mbtiFormSummaryForOrder($order, $request),
+            'big5_form_v1' => $big5FormSummary,
         ];
 
         if ($ownershipVerified) {
@@ -658,6 +665,10 @@ class CommerceController extends Controller
             $paymentRecoveryToken
         );
         $exactResultEntry = $this->mbtiAccessHubBuilder->buildExactResultEntryForOrder($order);
+        $big5FormSummary = $this->big5FormSummaryForOrder($order, $request);
+        if (is_array($exactResultEntry) && is_array($big5FormSummary)) {
+            $exactResultEntry['big5_form_v1'] = $big5FormSummary;
+        }
         if ($status === 'pending') {
             $order = $this->orders->findOrderByOrderNo((string) ($order->order_no ?? $orderNo), $orgId) ?? $order;
             $status = $this->resolvePublicOrderStatus($order);
@@ -687,6 +698,7 @@ class CommerceController extends Controller
             'delivery' => $delivery['delivery'],
             'exact_result_entry' => $exactResultEntry,
             'mbti_form_v1' => $this->mbtiFormSummaryForOrder($order, $request),
+            'big5_form_v1' => $big5FormSummary,
         ];
 
         $mbtiAccessHub = $this->mbtiAccessHubBuilder->buildForLookupHit($order);
@@ -1366,6 +1378,23 @@ class CommerceController extends Controller
         }
 
         return $this->mbtiPublicFormSummaryBuilder->summarizeForAttemptId(
+            $attemptId,
+            (int) ($order->org_id ?? $this->orgContext->orgId()),
+            $this->resolveRequestedLocale($request)
+        );
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function big5FormSummaryForOrder(object $order, Request $request): ?array
+    {
+        $attemptId = $this->trimNullableString($order->target_attempt_id ?? null);
+        if ($attemptId === null) {
+            return null;
+        }
+
+        return $this->bigFivePublicFormSummaryBuilder->summarizeForAttemptId(
             $attemptId,
             (int) ($order->org_id ?? $this->orgContext->orgId()),
             $this->resolveRequestedLocale($request)
