@@ -28,6 +28,7 @@ final class AttemptSubmitSideEffects
         private EventRecorder $eventRecorder,
         private ReportGatekeeper $reportGatekeeper,
         private MbtiCompareInviteService $mbtiCompareInvites,
+        private AttemptInviteUnlockCompletionService $inviteUnlockCompletions,
         private UnifiedAccessProjectionWriter $accessProjections,
     ) {}
 
@@ -48,6 +49,7 @@ final class AttemptSubmitSideEffects
         $inviteToken = trim((string) ($payload['invite_token'] ?? ''));
         $shareId = trim((string) ($payload['share_id'] ?? ''));
         $compareInviteId = trim((string) ($payload['compare_invite_id'] ?? ''));
+        $inviteUnlockCode = trim((string) ($payload['invite_unlock_code'] ?? ''));
         $creditBenefitCode = strtoupper(trim((string) ($payload['credit_benefit_code'] ?? '')));
         $entitlementBenefitCode = strtoupper(trim((string) ($payload['entitlement_benefit_code'] ?? '')));
 
@@ -68,6 +70,34 @@ final class AttemptSubmitSideEffects
                 $this->resolveAnonId($ctx, $actorAnonId),
                 $this->resolveUserId($ctx, $actorUserId)
             );
+        }
+
+        if ($inviteUnlockCode !== '') {
+            try {
+                $completion = $this->inviteUnlockCompletions->recordCompletionForInvite(
+                    $inviteUnlockCode,
+                    $attemptId,
+                    $this->resolveUserId($ctx, $actorUserId),
+                    $this->resolveAnonId($ctx, $actorAnonId)
+                );
+
+                if (! ($completion['ok'] ?? false)) {
+                    Log::warning('SUBMIT_POST_COMMIT_INVITE_UNLOCK_COMPLETION_REJECTED', [
+                        'org_id' => $orgId,
+                        'attempt_id' => $attemptId,
+                        'invite_unlock_code' => $inviteUnlockCode,
+                        'error_code' => (string) ($completion['error_code'] ?? 'INVITE_UNLOCK_COMPLETION_REJECTED'),
+                        'message' => (string) ($completion['message'] ?? 'invite unlock completion rejected.'),
+                    ]);
+                }
+            } catch (\Throwable $e) {
+                Log::error('SUBMIT_POST_COMMIT_INVITE_UNLOCK_COMPLETION_FAILED', [
+                    'org_id' => $orgId,
+                    'attempt_id' => $attemptId,
+                    'invite_unlock_code' => $inviteUnlockCode,
+                    'exception' => $e,
+                ]);
+            }
         }
 
         $consumeB2BCredit = false;

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\V0_3\AttemptInviteUnlockController;
 use App\Http\Controllers\API\V0_3\AttemptProgressController;
 use App\Http\Controllers\API\V0_3\AttemptReadController;
 use App\Http\Controllers\API\V0_3\AttemptWriteController;
@@ -205,6 +206,14 @@ Route::prefix('v0.3')->middleware([
                 ->middleware('uuid:id')
                 ->defaults('public_realm', true)
                 ->name('api.v0_3.attempts.report_pdf');
+            Route::post('/attempts/{id}/invite-unlocks', [AttemptInviteUnlockController::class, 'store'])
+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.invite_unlocks.store');
+            Route::get('/attempts/{id}/invite-unlocks', [AttemptInviteUnlockController::class, 'show'])
+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.invite_unlocks.show');
         });
         // Share contract routes stay fixed; summary/click semantics are implemented in ShareController/services.
         Route::match(['GET', 'POST'], '/attempts/{id}/share', [ShareV03Controller::class, 'getShare'])

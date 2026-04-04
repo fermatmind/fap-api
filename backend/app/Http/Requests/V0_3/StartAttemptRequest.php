@@ -30,6 +30,7 @@ class StartAttemptRequest extends FormRequest
         foreach ([
             'share_id' => 128,
             'compare_invite_id' => 128,
+            'invite_unlock_code' => 64,
             'share_click_id' => 128,
             'entrypoint' => 128,
             'landing_path' => 2048,
@@ -73,6 +74,7 @@ class StartAttemptRequest extends FormRequest
             'meta' => ['sometimes', 'array'],
             'share_id' => ['nullable', 'string', 'max:128'],
             'compare_invite_id' => ['nullable', 'string', 'max:128'],
+            'invite_unlock_code' => ['nullable', 'string', 'max:64'],
             'share_click_id' => ['nullable', 'string', 'max:128'],
             'entrypoint' => ['nullable', 'string', 'max:128'],
             'landing_path' => ['nullable', 'string', 'max:2048'],

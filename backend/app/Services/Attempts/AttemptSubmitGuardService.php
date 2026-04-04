@@ -24,6 +24,7 @@ class AttemptSubmitGuardService
         $inviteToken = $dto->inviteToken;
         $shareId = $dto->shareId;
         $compareInviteId = $dto->compareInviteId;
+        $inviteUnlockCode = $dto->inviteUnlockCode;
         $shareClickId = $dto->shareClickId;
         $entrypoint = $dto->entrypoint;
         $referrer = $dto->referrer;
@@ -43,6 +44,14 @@ class AttemptSubmitGuardService
         if ($scaleCode === '') {
             throw new ApiProblemException(400, 'VALIDATION_FAILED', 'scale_code missing on attempt.');
         }
+
+        if ($inviteUnlockCode === null || trim($inviteUnlockCode) === '') {
+            $storedCode = trim((string) data_get($attempt->answers_summary_json, 'meta.invite_unlock_code', ''));
+            if ($storedCode !== '') {
+                $inviteUnlockCode = $storedCode;
+            }
+        }
+
         $this->core->assertDemoScaleAllowed($scaleCode, $attemptId);
 
         $this->core->enforceConsentOnSubmit($scaleCode, $attempt, $dto);
@@ -83,6 +92,7 @@ class AttemptSubmitGuardService
             'invite_token' => $inviteToken,
             'share_id' => $shareId,
             'compare_invite_id' => $compareInviteId,
+            'invite_unlock_code' => $inviteUnlockCode,
             'share_click_id' => $shareClickId,
             'entrypoint' => $entrypoint,
             'referrer' => $referrer,

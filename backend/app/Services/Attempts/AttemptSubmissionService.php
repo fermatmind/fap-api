@@ -652,6 +652,7 @@ final class AttemptSubmissionService
             'anon_id' => $actorAnonId,
             'share_id' => $dto->shareId,
             'compare_invite_id' => $dto->compareInviteId,
+            'invite_unlock_code' => $dto->inviteUnlockCode,
             'share_click_id' => $dto->shareClickId,
             'entrypoint' => $dto->entrypoint,
             'referrer' => $dto->referrer,
