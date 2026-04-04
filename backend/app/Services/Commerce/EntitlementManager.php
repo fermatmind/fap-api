@@ -425,13 +425,22 @@ class EntitlementManager
             'payload_json' => $payload,
         ];
 
-        $this->accessProjections->refreshAttemptProjection($attemptId, $patch, [
+        $projection = $this->accessProjections->refreshAttemptProjection($attemptId, $patch, [
             'source_system' => trim((string) ($meta['source_system'] ?? 'entitlement_manager')),
             'source_ref' => trim((string) ($meta['source_ref'] ?? $attemptId)),
             'actor_type' => isset($meta['actor_type']) ? (string) $meta['actor_type'] : null,
             'actor_id' => isset($meta['actor_id']) ? (string) $meta['actor_id'] : null,
             'reason_code' => (string) $patch['reason_code'],
         ]);
+        if ($projection === null) {
+            Log::warning('ENTITLEMENT_ACCESS_PROJECTION_REFRESH_SKIPPED', [
+                'attempt_id' => $attemptId,
+                'source_ref' => $meta['source_ref'] ?? $attemptId,
+                'source_system' => $meta['source_system'] ?? 'entitlement_manager',
+                'actor_type' => $meta['actor_type'] ?? null,
+                'actor_id' => $meta['actor_id'] ?? null,
+            ]);
+        }
 
         return $state;
     }
