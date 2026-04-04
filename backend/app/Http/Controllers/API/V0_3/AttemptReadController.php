@@ -6,6 +6,7 @@ use App\Exceptions\Api\ApiProblemException;
 use App\Http\Controllers\API\V0_3\Concerns\ResolvesAttemptOwnership;
 use App\Http\Controllers\Controller;
 use App\Models\Attempt;
+use App\Models\AttemptInviteUnlock;
 use App\Models\Result;
 use App\Models\UnifiedAccessProjection;
 use App\Repositories\Report\ReportAccessActor;
@@ -29,6 +30,7 @@ use App\Services\Mbti\MbtiWorkingLifeConsolidationService;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
 use App\Services\Report\MbtiPreviewContractBuilder;
+use App\Services\Report\InviteUnlockSummaryBuilder;
 use App\Services\Report\Pdf\ReportPdfDocumentService;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportGatekeeper;
@@ -64,6 +66,7 @@ class AttemptReadController extends Controller
         private MbtiWorkingLifeConsolidationService $mbtiWorkingLifeConsolidationService,
         private MbtiAccessHubBuilder $mbtiAccessHubBuilder,
         private MbtiPreviewContractBuilder $mbtiPreviewContractBuilder,
+        private InviteUnlockSummaryBuilder $inviteUnlockSummaryBuilder,
         private EventRecorder $eventRecorder,
         private ScaleCodeResponseProjector $responseProjector,
         private ReportSubjectRepository $reportSubjects,
@@ -636,9 +639,44 @@ class AttemptReadController extends Controller
         ));
         $responsePayload['unlock_stage'] = $unlockStage;
         $responsePayload['unlock_source'] = $unlockSource;
+        $inviteSnapshot = $this->resolveInviteSnapshot((int) ($attempt->org_id ?? 0), (string) ($attempt->id ?? ''));
+        $inviteSummary = $this->inviteUnlockSummaryBuilder->build(
+            (string) ($attempt->scale_code ?? ''),
+            $unlockStage,
+            $unlockSource,
+            (int) ($inviteSnapshot['completed_invitees'] ?? 0),
+            (int) ($inviteSnapshot['required_invitees'] ?? 2)
+        );
+        $responsePayload['invite_unlock_v1'] = $inviteSummary;
+        $payloadJson['invite_unlock_v1'] = $inviteSummary;
         $responsePayload['payload'] = $payloadJson;
 
         return response()->json($responsePayload);
+    }
+
+    /**
+     * @return array{completed_invitees:int,required_invitees:int}|null
+     */
+    private function resolveInviteSnapshot(int $orgId, string $attemptId): ?array
+    {
+        $attemptId = trim($attemptId);
+        if ($attemptId === '') {
+            return null;
+        }
+
+        $invite = AttemptInviteUnlock::query()
+            ->where('target_org_id', $orgId)
+            ->where('target_attempt_id', $attemptId)
+            ->first(['required_invitees', 'completed_invitees']);
+
+        if (! $invite instanceof AttemptInviteUnlock) {
+            return null;
+        }
+
+        return [
+            'required_invitees' => max(1, (int) ($invite->required_invitees ?? 2)),
+            'completed_invitees' => max(0, (int) ($invite->completed_invitees ?? 0)),
+        ];
     }
 
     private function resolveAttemptForReportRead(

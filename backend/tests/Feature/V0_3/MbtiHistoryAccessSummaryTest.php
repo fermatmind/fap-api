@@ -115,8 +115,12 @@ final class MbtiHistoryAccessSummaryTest extends TestCase
         $response->assertJsonPath('items.0.access_summary.report_state', 'ready');
         $response->assertJsonPath('items.0.access_summary.pdf_state', 'ready');
         $response->assertJsonPath('items.0.access_summary.reason_code', 'entitlement_granted');
+        $response->assertJsonPath('items.0.access_summary.unlock_stage', 'full');
+        $response->assertJsonPath('items.0.access_summary.unlock_source', 'none');
         $response->assertJsonPath('items.0.access_summary.access_level', 'full');
         $response->assertJsonPath('items.0.access_summary.variant', 'full');
+        $response->assertJsonPath('items.0.access_summary.invite_unlock_v1.unlock_stage', 'full');
+        $response->assertJsonPath('items.0.access_summary.invite_unlock_v1.unlock_source', 'none');
         $response->assertJsonPath('items.0.access_summary.modules_allowed.0', 'core_full');
         $response->assertJsonPath('items.0.access_summary.modules_preview', []);
         $response->assertJsonPath('items.0.access_summary.actions.page_href', "/result/{$fullAttemptId}");
@@ -133,8 +137,13 @@ final class MbtiHistoryAccessSummaryTest extends TestCase
         $response->assertJsonPath('items.1.access_summary.report_state', 'ready');
         $response->assertJsonPath('items.1.access_summary.pdf_state', 'unavailable');
         $response->assertJsonPath('items.1.access_summary.reason_code', 'preview_visible_report_ready');
+        $response->assertJsonPath('items.1.access_summary.unlock_stage', 'locked');
+        $response->assertJsonPath('items.1.access_summary.unlock_source', 'none');
         $response->assertJsonPath('items.1.access_summary.access_level', 'free');
         $response->assertJsonPath('items.1.access_summary.variant', 'free');
+        $response->assertJsonPath('items.1.access_summary.invite_unlock_v1.completed_invitees', 0);
+        $response->assertJsonPath('items.1.access_summary.invite_unlock_v1.required_invitees', 2);
+        $response->assertJsonPath('items.1.access_summary.invite_unlock_v1.partial_scope', 'career');
         $response->assertJsonPath('items.1.access_summary.modules_allowed.0', 'core_free');
         $response->assertJsonPath('items.1.access_summary.modules_preview.0', 'core_full');
         $response->assertJsonPath('items.1.access_summary.modules_preview.1', 'career');

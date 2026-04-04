@@ -8,6 +8,7 @@ use App\Models\Attempt;
 use App\Models\AttemptInviteUnlock;
 use App\Models\AttemptInviteUnlockCompletion;
 use App\Models\Result;
+use App\Services\Analytics\EventRecorder;
 use App\Services\Commerce\EntitlementManager;
 use App\Services\Attempts\InviteUnlock\InviteUnlockCompletionStatus;
 use App\Services\Attempts\InviteUnlock\InviteUnlockStatus;
@@ -24,6 +25,7 @@ final class AttemptInviteUnlockCompletionService
     public function __construct(
         private readonly AttemptInviteUnlockService $inviteService,
         private readonly EntitlementManager $entitlements,
+        private readonly EventRecorder $eventRecorder,
     ) {}
 
     /**
@@ -508,6 +510,7 @@ final class AttemptInviteUnlockCompletionService
         bool $idempotent
     ): array {
         $entitlementState = $this->syncStagedEntitlementsForInvite($invite);
+        $this->emitCompletionTelemetry($completion, $invite, $entitlementState, $idempotent);
 
         return [
             'ok' => true,
@@ -523,6 +526,73 @@ final class AttemptInviteUnlockCompletionService
             'unlock_stage' => (string) ($entitlementState['unlock_stage'] ?? 'locked'),
             'unlock_source' => (string) ($entitlementState['unlock_source'] ?? 'none'),
         ];
+    }
+
+    /**
+     * @param  array{unlock_stage:string,unlock_source:string}  $entitlementState
+     */
+    private function emitCompletionTelemetry(
+        AttemptInviteUnlockCompletion $completion,
+        AttemptInviteUnlock $invite,
+        array $entitlementState,
+        bool $idempotent
+    ): void {
+        if ($idempotent) {
+            return;
+        }
+
+        $orgId = (int) ($invite->target_org_id ?? 0);
+        $attemptId = trim((string) ($invite->target_attempt_id ?? ''));
+        if ($attemptId === '') {
+            return;
+        }
+
+        $inviterUserId = $this->normalizeUserId((string) ($invite->inviter_user_id ?? ''));
+        $inviterAnonId = $this->normalizeString((string) ($invite->inviter_anon_id ?? ''));
+        $unlockStage = (string) ($entitlementState['unlock_stage'] ?? 'locked');
+        $unlockSource = (string) ($entitlementState['unlock_source'] ?? 'none');
+        $scaleCode = strtoupper(trim((string) ($invite->target_scale_code ?? '')));
+        $completedInvitees = (int) ($invite->completed_invitees ?? 0);
+        $requiredInvitees = max(1, (int) ($invite->required_invitees ?? 2));
+        $baseMeta = [
+            'target_attempt_id' => $attemptId,
+            'scale_code' => $scaleCode,
+            'invite_id' => (string) ($invite->id ?? ''),
+            'invite_code' => (string) ($invite->invite_code ?? ''),
+            'completion_id' => (string) ($completion->id ?? ''),
+            'unlock_stage' => $unlockStage,
+            'unlock_source' => $unlockSource,
+            'completed_invitees' => $completedInvitees,
+            'required_invitees' => $requiredInvitees,
+            'qualified' => (bool) ($completion->qualified ?? false),
+            'counted' => (bool) ($completion->counted ?? false),
+            'qualification_status' => (string) ($completion->qualification_status ?? ''),
+            'qualified_reason' => (string) ($completion->qualified_reason ?? ''),
+            'invitee_attempt_id' => $this->normalizeString((string) ($completion->invitee_attempt_id ?? '')),
+            'invitee_identity_key' => $this->normalizeString((string) ($completion->invitee_identity_key ?? '')),
+        ];
+        $context = [
+            'org_id' => $orgId,
+            'anon_id' => $inviterAnonId,
+            'attempt_id' => $attemptId,
+            'scale_code' => $scaleCode,
+        ];
+        $inviterUserIdInt = $inviterUserId !== null ? (int) $inviterUserId : null;
+
+        if ((bool) ($completion->qualified ?? false) && (bool) ($completion->counted ?? false)) {
+            $this->eventRecorder->record('invite_unlock_completion_qualified', $inviterUserIdInt, $baseMeta, $context);
+        } else {
+            $this->eventRecorder->record('invite_unlock_completion_rejected', $inviterUserIdInt, $baseMeta, $context);
+        }
+
+        if ($unlockStage === 'partial') {
+            $this->eventRecorder->record('invite_unlock_partial_granted', $inviterUserIdInt, $baseMeta, $context);
+        } elseif ($unlockStage === 'full') {
+            $this->eventRecorder->record('invite_unlock_full_granted', $inviterUserIdInt, $baseMeta, $context);
+            if ($unlockSource === 'mixed') {
+                $this->eventRecorder->record('invite_unlock_mixed_confirmed', $inviterUserIdInt, $baseMeta, $context);
+            }
+        }
     }
 
     /**

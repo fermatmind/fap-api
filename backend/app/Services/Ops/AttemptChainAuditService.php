@@ -91,6 +91,7 @@ final class AttemptChainAuditService
         $submission = $this->findLatestSubmission($attemptId);
         $result = $this->findResult($attemptId);
         $projection = $this->findProjection($attemptId);
+        $inviteDiagnostic = $this->inviteUnlockDiagnosticPayload($attempt, $projection);
 
         $findings = [];
 
@@ -198,6 +199,7 @@ final class AttemptChainAuditService
             'submission' => $this->submissionPayload($submission),
             'result' => $this->resultPayload($result),
             'projection' => $this->projectionPayload($projection),
+            'invite_unlock_diagnostic_v1' => $inviteDiagnostic,
             'findings' => $findings,
         ];
     }
@@ -232,6 +234,7 @@ final class AttemptChainAuditService
                 'submission' => $this->submissionPayload($row),
                 'result' => $this->resultPayload($this->findResult((string) ($row->attempt_id ?? ''))),
                 'projection' => $this->projectionPayload($this->findProjection((string) ($row->attempt_id ?? ''))),
+                'invite_unlock_diagnostic_v1' => null,
                 'findings' => [
                     $this->finding(
                         'orphan_submission_without_attempt',
@@ -276,6 +279,7 @@ final class AttemptChainAuditService
                 'submission' => $this->submissionPayload($this->findLatestSubmission((string) ($row->attempt_id ?? ''))),
                 'result' => $this->resultPayload($row),
                 'projection' => $this->projectionPayload($this->findProjection((string) ($row->attempt_id ?? ''))),
+                'invite_unlock_diagnostic_v1' => null,
                 'findings' => [
                     $this->finding(
                         'orphan_result_without_attempt',
@@ -320,6 +324,7 @@ final class AttemptChainAuditService
                 'submission' => $this->submissionPayload($this->findLatestSubmission((string) ($row->attempt_id ?? ''))),
                 'result' => $this->resultPayload($this->findResult((string) ($row->attempt_id ?? ''))),
                 'projection' => $this->projectionPayload($row),
+                'invite_unlock_diagnostic_v1' => null,
                 'findings' => [
                     $this->finding(
                         'orphan_projection_without_attempt',
@@ -502,6 +507,169 @@ final class AttemptChainAuditService
             'refreshed_at' => $this->formatTimestamp($row?->refreshed_at ?? null),
             'created_at' => $this->formatTimestamp($row?->created_at ?? null),
             'updated_at' => $this->formatTimestamp($row?->updated_at ?? null),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function inviteUnlockDiagnosticPayload(?object $attempt, ?object $projection): ?array
+    {
+        if ($attempt === null || ! Schema::hasTable('attempt_invite_unlocks')) {
+            return null;
+        }
+
+        $attemptId = $this->normalizeString($attempt->id ?? null);
+        $orgId = $this->nullableInt($attempt->org_id ?? null);
+        if ($attemptId === null || $orgId === null) {
+            return null;
+        }
+
+        $invite = DB::table('attempt_invite_unlocks')
+            ->where('target_org_id', $orgId)
+            ->where('target_attempt_id', $attemptId)
+            ->first();
+
+        $payloadJson = null;
+        if (is_string($projection?->payload_json ?? null)) {
+            $decoded = json_decode((string) $projection->payload_json, true);
+            $payloadJson = is_array($decoded) ? $decoded : null;
+        } elseif (is_array($projection?->payload_json ?? null)) {
+            $payloadJson = $projection->payload_json;
+        }
+
+        $unlockStage = strtolower(trim((string) data_get($payloadJson, 'unlock_stage', 'locked')));
+        if (! in_array($unlockStage, ['locked', 'partial', 'full'], true)) {
+            $unlockStage = 'locked';
+        }
+        $unlockSource = strtolower(trim((string) data_get($payloadJson, 'unlock_source', 'none')));
+        if (! in_array($unlockSource, ['none', 'invite', 'payment', 'mixed'], true)) {
+            $unlockSource = 'none';
+        }
+
+        if (! $invite) {
+            return [
+                'has_invite' => false,
+                'invite_id' => null,
+                'invite_code' => null,
+                'invite_status' => null,
+                'completed_invitees' => 0,
+                'required_invitees' => 2,
+                'projection_unlock_stage' => $unlockStage,
+                'projection_unlock_source' => $unlockSource,
+                'grants' => [],
+                'counted_completions' => [],
+                'rejected_completions' => [],
+                'rejections_by_status' => [],
+            ];
+        }
+
+        $inviteId = $this->normalizeString($invite->id ?? null);
+        $countedRows = collect();
+        $rejectedRows = collect();
+        $rejectionsByStatus = [];
+        if ($inviteId !== null && Schema::hasTable('attempt_invite_unlock_completions')) {
+            $countedRows = DB::table('attempt_invite_unlock_completions')
+                ->where('invite_id', $inviteId)
+                ->where('counted', true)
+                ->orderBy('created_at')
+                ->get([
+                    'id',
+                    'invitee_attempt_id',
+                    'invitee_identity_key',
+                    'qualified_reason',
+                    'qualification_status',
+                    'created_at',
+                ]);
+
+            $rejectedRows = DB::table('attempt_invite_unlock_completions')
+                ->where('invite_id', $inviteId)
+                ->where('counted', false)
+                ->orderByDesc('created_at')
+                ->limit(20)
+                ->get([
+                    'id',
+                    'invitee_attempt_id',
+                    'invitee_identity_key',
+                    'qualified_reason',
+                    'qualification_status',
+                    'created_at',
+                ]);
+
+            $grouped = DB::table('attempt_invite_unlock_completions')
+                ->where('invite_id', $inviteId)
+                ->where('counted', false)
+                ->selectRaw('qualification_status, COUNT(*) as total')
+                ->groupBy('qualification_status')
+                ->get();
+            foreach ($grouped as $group) {
+                $status = $this->normalizeString($group->qualification_status ?? null);
+                if ($status === null) {
+                    continue;
+                }
+                $rejectionsByStatus[$status] = (int) ($group->total ?? 0);
+            }
+        }
+
+        $grants = [];
+        if (Schema::hasTable('benefit_grants')) {
+            $grantRows = DB::table('benefit_grants')
+                ->where('org_id', $orgId)
+                ->where('attempt_id', $attemptId)
+                ->where('status', 'active')
+                ->where('benefit_type', 'report_unlock')
+                ->orderByDesc('created_at')
+                ->get(['benefit_code', 'order_no', 'meta_json', 'created_at']);
+            foreach ($grantRows as $grant) {
+                $meta = null;
+                if (is_string($grant->meta_json ?? null)) {
+                    $decoded = json_decode((string) $grant->meta_json, true);
+                    $meta = is_array($decoded) ? $decoded : null;
+                } elseif (is_array($grant->meta_json ?? null)) {
+                    $meta = $grant->meta_json;
+                }
+
+                $grants[] = [
+                    'benefit_code' => $this->normalizeString($grant->benefit_code ?? null),
+                    'order_no' => $this->normalizeString($grant->order_no ?? null),
+                    'granted_via' => $this->normalizeString(data_get($meta, 'granted_via')),
+                    'invite_unlock_stage' => $this->normalizeString(data_get($meta, 'invite_unlock_stage')),
+                    'created_at' => $this->formatTimestamp($grant->created_at ?? null),
+                ];
+            }
+        }
+
+        return [
+            'has_invite' => true,
+            'invite_id' => $inviteId,
+            'invite_code' => $this->normalizeString($invite->invite_code ?? null),
+            'invite_status' => $this->normalizeString($invite->status ?? null),
+            'completed_invitees' => max(0, (int) ($invite->completed_invitees ?? 0)),
+            'required_invitees' => max(1, (int) ($invite->required_invitees ?? 2)),
+            'projection_unlock_stage' => $unlockStage,
+            'projection_unlock_source' => $unlockSource,
+            'grants' => $grants,
+            'counted_completions' => $countedRows->map(function (object $row): array {
+                return [
+                    'completion_id' => $this->normalizeString($row->id ?? null),
+                    'invitee_attempt_id' => $this->normalizeString($row->invitee_attempt_id ?? null),
+                    'invitee_identity_key' => $this->normalizeString($row->invitee_identity_key ?? null),
+                    'qualified_reason' => $this->normalizeString($row->qualified_reason ?? null),
+                    'qualification_status' => $this->normalizeString($row->qualification_status ?? null),
+                    'created_at' => $this->formatTimestamp($row->created_at ?? null),
+                ];
+            })->values()->all(),
+            'rejected_completions' => $rejectedRows->map(function (object $row): array {
+                return [
+                    'completion_id' => $this->normalizeString($row->id ?? null),
+                    'invitee_attempt_id' => $this->normalizeString($row->invitee_attempt_id ?? null),
+                    'invitee_identity_key' => $this->normalizeString($row->invitee_identity_key ?? null),
+                    'qualified_reason' => $this->normalizeString($row->qualified_reason ?? null),
+                    'qualification_status' => $this->normalizeString($row->qualification_status ?? null),
+                    'created_at' => $this->formatTimestamp($row->created_at ?? null),
+                ];
+            })->values()->all(),
+            'rejections_by_status' => $rejectionsByStatus,
         ];
     }
 

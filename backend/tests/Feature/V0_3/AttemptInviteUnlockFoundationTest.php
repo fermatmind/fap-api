@@ -33,10 +33,13 @@ final class AttemptInviteUnlockFoundationTest extends TestCase
         $post->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath('has_invite', true)
+            ->assertJsonPath('created', true)
             ->assertJsonPath('target_attempt_id', $attemptId)
             ->assertJsonPath('status', InviteUnlockStatus::PENDING)
             ->assertJsonPath('required_invitees', 2)
-            ->assertJsonPath('completed_invitees', 0);
+            ->assertJsonPath('completed_invitees', 0)
+            ->assertJsonPath('unlock_stage', 'locked')
+            ->assertJsonPath('unlock_source', 'none');
 
         $inviteCode = (string) $post->json('invite_code');
         $this->assertNotSame('', $inviteCode);
@@ -45,10 +48,15 @@ final class AttemptInviteUnlockFoundationTest extends TestCase
         $get->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath('has_invite', true)
+            ->assertJsonPath('created', false)
             ->assertJsonPath('invite_code', $inviteCode)
             ->assertJsonPath('completed_invitees', 0);
 
         $this->assertSame(1, AttemptInviteUnlock::query()->count());
+        $this->assertDatabaseHas('events', [
+            'event_code' => 'invite_unlock_created',
+            'attempt_id' => $attemptId,
+        ]);
     }
 
     public function test_post_invite_unlock_reuses_same_target_attempt_record(): void
@@ -209,6 +217,22 @@ final class AttemptInviteUnlockFoundationTest extends TestCase
                 ->where('counted', true)
                 ->count()
         );
+        $this->assertGreaterThanOrEqual(2, DB::table('events')
+            ->where('event_code', 'invite_unlock_completion_qualified')
+            ->where('attempt_id', $targetAttemptId)
+            ->count());
+        $this->assertGreaterThanOrEqual(1, DB::table('events')
+            ->where('event_code', 'invite_unlock_completion_rejected')
+            ->where('attempt_id', $targetAttemptId)
+            ->count());
+        $this->assertGreaterThanOrEqual(1, DB::table('events')
+            ->where('event_code', 'invite_unlock_partial_granted')
+            ->where('attempt_id', $targetAttemptId)
+            ->count());
+        $this->assertGreaterThanOrEqual(1, DB::table('events')
+            ->where('event_code', 'invite_unlock_full_granted')
+            ->where('attempt_id', $targetAttemptId)
+            ->count());
     }
 
     public function test_submit_side_effect_records_completion_and_syncs_partial_stage_entitlement(): void
