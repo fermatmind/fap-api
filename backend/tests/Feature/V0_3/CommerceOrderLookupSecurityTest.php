@@ -114,6 +114,8 @@ final class CommerceOrderLookupSecurityTest extends TestCase
             ->assertJsonPath('mbti_form_v1.form_code', 'mbti_93')
             ->assertJsonPath('mbti_form_v1.question_count', 93)
             ->assertJsonPath('mbti_access_hub_v1.access_state', 'ready')
+            ->assertJsonPath('mbti_access_hub_v1.unlock_stage', 'full')
+            ->assertJsonPath('mbti_access_hub_v1.unlock_source', 'none')
             ->assertJsonPath('mbti_access_hub_v1.mbti_form_v1.form_code', 'mbti_93')
             ->assertJsonPath('mbti_access_hub_v1.report_access.can_view_report', true)
             ->assertJsonPath('mbti_access_hub_v1.report_access.attempt_id', $attemptId)
@@ -131,6 +133,9 @@ final class CommerceOrderLookupSecurityTest extends TestCase
             ->assertJsonPath('mbti_access_hub_v1.workspace_lite.entry_kind', 'mbti_history')
             ->assertJsonPath('mbti_access_hub_v1.workspace_lite.attempt_id', $attemptId)
             ->assertJsonPath('exact_result_entry.attempt_id', $attemptId)
+            ->assertJsonPath('exact_result_entry.unlock_stage', 'full')
+            ->assertJsonPath('exact_result_entry.unlock_source', 'none')
+            ->assertJsonPath('exact_result_entry.invite_unlock_v1.unlock_stage', 'full')
             ->assertJsonPath('exact_result_entry.mbti_form_v1.form_code', 'mbti_93')
             ->assertJsonPath('exact_result_entry.ready_to_enter', true)
             ->assertJsonPath('exact_result_entry.actions.page_href', "/result/{$attemptId}");

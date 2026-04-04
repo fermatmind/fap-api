@@ -8,6 +8,7 @@ use App\Models\Attempt;
 use App\Models\UnifiedAccessProjection;
 use App\Services\Access\AttemptUnlockProjectionRepairService;
 use App\Services\Mbti\MbtiPublicFormSummaryBuilder;
+use App\Services\Report\InviteUnlockSummaryBuilder;
 use App\Services\Report\ReportAccess;
 use Illuminate\Support\Facades\DB;
 
@@ -17,6 +18,7 @@ final class MbtiAccessHubBuilder
         private OrderManager $orders,
         private AttemptUnlockProjectionRepairService $projectionRepair,
         private MbtiPublicFormSummaryBuilder $mbtiPublicFormSummaryBuilder,
+        private InviteUnlockSummaryBuilder $inviteUnlockSummaryBuilder,
     ) {}
 
     /**
@@ -41,11 +43,32 @@ final class MbtiAccessHubBuilder
         $reportUrl = $this->attemptReportUrl($attemptId);
         $reportPdfUrl = $this->attemptReportPdfUrl($attemptId);
         $locked = (bool) ($gate['locked'] ?? false);
+        $unlockStage = ReportAccess::normalizeUnlockStage((string) data_get(
+            $gate,
+            'unlock_stage',
+            $locked ? ReportAccess::UNLOCK_STAGE_LOCKED : ReportAccess::UNLOCK_STAGE_FULL
+        ));
+        $unlockSource = ReportAccess::normalizeUnlockSource((string) data_get(
+            $gate,
+            'unlock_source',
+            ReportAccess::UNLOCK_SOURCE_NONE
+        ));
+        $inviteSnapshot = $attemptId !== null ? $this->resolveInviteProgressSnapshot($orgId, $attemptId) : null;
+        $inviteUnlockSummary = $this->inviteUnlockSummaryBuilder->build(
+            (string) ($attempt->scale_code ?? ''),
+            $unlockStage,
+            $unlockSource,
+            (int) ($inviteSnapshot['completed_invitees'] ?? 0),
+            (int) ($inviteSnapshot['required_invitees'] ?? 2)
+        );
 
         return [
             'access_state' => $locked
                 ? ReportAccess::ACCESS_HUB_STATE_LOCKED
                 : ReportAccess::ACCESS_HUB_STATE_READY,
+            'unlock_stage' => $unlockStage,
+            'unlock_source' => $unlockSource,
+            'invite_unlock_v1' => $inviteUnlockSummary,
             'mbti_form_v1' => $this->mbtiPublicFormSummaryBuilder->summarizeForAttempt($attempt),
             'report_access' => [
                 'can_view_report' => $reportUrl !== null,
@@ -113,6 +136,13 @@ final class MbtiAccessHubBuilder
         return [
             'access_state' => $this->stringOrNull($exactResultEntry['access_state'] ?? null)
                 ?? $this->resolveDeliveryAccessState($order, $canViewReport, $canRequestClaimEmail, $canResend),
+            'unlock_stage' => $this->stringOrNull($exactResultEntry['unlock_stage'] ?? null)
+                ?? ReportAccess::UNLOCK_STAGE_LOCKED,
+            'unlock_source' => $this->stringOrNull($exactResultEntry['unlock_source'] ?? null)
+                ?? ReportAccess::UNLOCK_SOURCE_NONE,
+            'invite_unlock_v1' => is_array($exactResultEntry['invite_unlock_v1'] ?? null)
+                ? $exactResultEntry['invite_unlock_v1']
+                : null,
             'mbti_form_v1' => $this->mbtiPublicFormSummaryBuilder->summarizeForAttemptId(
                 $attemptId,
                 (int) ($order->org_id ?? 0)
@@ -295,6 +325,20 @@ final class MbtiAccessHubBuilder
             ? $this->resultPagePathForAttemptId($attemptId)
             : null;
         $readyToEnter = $accessState === 'ready' && $reportState === 'ready' && $pageHref !== null;
+        $unlockStage = ReportAccess::normalizeUnlockStage((string) ($payload['unlock_stage'] ?? (
+            $accessState === 'ready'
+                ? ReportAccess::UNLOCK_STAGE_FULL
+                : ReportAccess::UNLOCK_STAGE_LOCKED
+        )));
+        $unlockSource = ReportAccess::normalizeUnlockSource((string) ($payload['unlock_source'] ?? ReportAccess::UNLOCK_SOURCE_NONE));
+        $inviteSnapshot = $this->resolveInviteProgressSnapshot($orgId, $attemptId);
+        $inviteUnlockSummary = $this->inviteUnlockSummaryBuilder->build(
+            (string) ($attempt->scale_code ?? ''),
+            $unlockStage,
+            $unlockSource,
+            (int) ($inviteSnapshot['completed_invitees'] ?? 0),
+            (int) ($inviteSnapshot['required_invitees'] ?? 2)
+        );
 
         return [
             'attempt_id' => $attemptId,
@@ -302,6 +346,8 @@ final class MbtiAccessHubBuilder
             'access_state' => $accessState,
             'report_state' => $reportState,
             'pdf_state' => $pdfState,
+            'unlock_stage' => $unlockStage,
+            'unlock_source' => $unlockSource,
             'reason_code' => $this->stringOrNull(
                 $projection?->reason_code ?? ($resultExists ? 'projection_missing_result_ready' : 'projection_missing_result_pending')
             ),
@@ -310,6 +356,7 @@ final class MbtiAccessHubBuilder
             'projection_version' => (int) ($projection?->projection_version ?? 1),
             'modules_allowed' => $this->normalizeStringArray($payload['modules_allowed'] ?? null),
             'modules_preview' => $this->normalizeStringArray($payload['modules_preview'] ?? null),
+            'invite_unlock_v1' => $inviteUnlockSummary,
             'ready_to_enter' => $readyToEnter,
             'source' => ReportAccess::ACCESS_HUB_SOURCE_REPORT_GATE,
             'actions' => [
@@ -325,6 +372,30 @@ final class MbtiAccessHubBuilder
                 'produced_at' => optional($projection?->produced_at)->toIso8601String(),
                 'refreshed_at' => optional($projection?->refreshed_at)->toIso8601String(),
             ],
+        ];
+    }
+
+    /**
+     * @return array{required_invitees:int,completed_invitees:int}|null
+     */
+    private function resolveInviteProgressSnapshot(int $orgId, string $attemptId): ?array
+    {
+        if (! DB::getSchemaBuilder()->hasTable('attempt_invite_unlocks')) {
+            return null;
+        }
+
+        $row = DB::table('attempt_invite_unlocks')
+            ->where('target_org_id', $orgId)
+            ->where('target_attempt_id', $attemptId)
+            ->first(['required_invitees', 'completed_invitees']);
+
+        if (! $row) {
+            return null;
+        }
+
+        return [
+            'required_invitees' => max(1, (int) ($row->required_invitees ?? 2)),
+            'completed_invitees' => max(0, (int) ($row->completed_invitees ?? 0)),
         ];
     }
 

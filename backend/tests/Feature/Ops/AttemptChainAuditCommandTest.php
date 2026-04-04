@@ -258,7 +258,10 @@ final class AttemptChainAuditCommandTest extends TestCase
                 'reason_code' => null,
                 'projection_version' => 1,
                 'actions_json' => null,
-                'payload_json' => null,
+                'payload_json' => json_encode([
+                    'unlock_stage' => 'partial',
+                    'unlock_source' => 'invite',
+                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
                 'produced_at' => $now->copy()->subMinutes(38),
                 'refreshed_at' => $now->copy()->subMinutes(38),
                 'created_at' => $now->copy()->subMinutes(38),
@@ -278,6 +281,88 @@ final class AttemptChainAuditCommandTest extends TestCase
                 'created_at' => $now->copy()->subMinutes(8),
                 'updated_at' => $now->copy()->subMinutes(8),
             ],
+        ]);
+
+        DB::table('attempt_invite_unlocks')->insert([
+            'id' => (string) Str::uuid(),
+            'target_org_id' => 0,
+            'invite_code' => 'iul_audit_test_001',
+            'target_attempt_id' => 'attempt-healthy',
+            'target_scale_code' => 'MBTI',
+            'inviter_user_id' => null,
+            'inviter_anon_id' => 'anon-healthy',
+            'status' => 'in_progress',
+            'required_invitees' => 2,
+            'completed_invitees' => 1,
+            'qualification_rule_version' => 'v1',
+            'meta_json' => null,
+            'created_at' => $now->copy()->subMinutes(38),
+            'updated_at' => $now->copy()->subMinutes(5),
+        ]);
+
+        $inviteRow = DB::table('attempt_invite_unlocks')->where('invite_code', 'iul_audit_test_001')->first();
+        $this->assertNotNull($inviteRow);
+
+        DB::table('attempt_invite_unlock_completions')->insert([
+            [
+                'id' => (string) Str::uuid(),
+                'invite_id' => (string) $inviteRow->id,
+                'invite_code' => 'iul_audit_test_001',
+                'target_attempt_id' => 'attempt-healthy',
+                'invitee_attempt_id' => 'attempt-result-no-projection',
+                'invitee_org_id' => 0,
+                'invitee_user_id' => null,
+                'invitee_anon_id' => 'anon-rnp',
+                'invitee_identity_key' => 'anon:anon-rnp',
+                'qualified' => 1,
+                'qualified_reason' => 'qualified_counted',
+                'qualification_status' => 'qualified_counted',
+                'counted' => 1,
+                'counted_identity_key' => 'anon:anon-rnp',
+                'idempotency_key' => 'invite_completion:'.hash('sha256', 'attempt-healthy|attempt-result-no-projection'),
+                'meta_json' => null,
+                'created_at' => $now->copy()->subMinutes(4),
+                'updated_at' => $now->copy()->subMinutes(4),
+            ],
+            [
+                'id' => (string) Str::uuid(),
+                'invite_id' => (string) $inviteRow->id,
+                'invite_code' => 'iul_audit_test_001',
+                'target_attempt_id' => 'attempt-healthy',
+                'invitee_attempt_id' => null,
+                'invitee_org_id' => null,
+                'invitee_user_id' => null,
+                'invitee_anon_id' => 'anon-healthy',
+                'invitee_identity_key' => 'anon:anon-healthy',
+                'qualified' => 0,
+                'qualified_reason' => 'rejected_self_referral',
+                'qualification_status' => 'rejected_self_referral',
+                'counted' => 0,
+                'counted_identity_key' => null,
+                'idempotency_key' => 'rejected_self_referral:'.hash('sha256', 'attempt-healthy|self'),
+                'meta_json' => null,
+                'created_at' => $now->copy()->subMinutes(3),
+                'updated_at' => $now->copy()->subMinutes(3),
+            ],
+        ]);
+
+        DB::table('benefit_grants')->insert([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'user_id' => 'anon-healthy',
+            'benefit_code' => 'MBTI_CAREER',
+            'scope' => 'attempt',
+            'attempt_id' => 'attempt-healthy',
+            'order_no' => null,
+            'status' => 'active',
+            'expires_at' => null,
+            'benefit_ref' => 'anon-healthy',
+            'benefit_type' => 'report_unlock',
+            'meta_json' => json_encode(['granted_via' => 'invite_unlock', 'invite_unlock_stage' => 'partial'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'source_order_id' => (string) Str::uuid(),
+            'source_event_id' => null,
+            'created_at' => $now->copy()->subMinutes(4),
+            'updated_at' => $now->copy()->subMinutes(4),
         ]);
 
         $exitCode = Artisan::call('ops:attempt-chain-audit', [
@@ -302,6 +387,15 @@ final class AttemptChainAuditCommandTest extends TestCase
         $this->assertSame(1, (int) data_get($payload, 'summary.by_issue_code.orphan_submission_without_attempt', -1));
         $this->assertSame(1, (int) data_get($payload, 'summary.by_issue_code.orphan_result_without_attempt', -1));
         $this->assertSame(1, (int) data_get($payload, 'summary.by_issue_code.orphan_projection_without_attempt', -1));
+        $inspectionForHealthy = collect((array) data_get($payload, 'inspections', []))
+            ->first(fn ($inspection) => (bool) data_get($inspection, 'invite_unlock_diagnostic_v1.has_invite', false));
+        $this->assertIsArray($inspectionForHealthy);
+        $this->assertTrue((bool) data_get($inspectionForHealthy, 'invite_unlock_diagnostic_v1.has_invite', false));
+        $this->assertSame('partial', (string) data_get($inspectionForHealthy, 'invite_unlock_diagnostic_v1.projection_unlock_stage', ''));
+        $this->assertSame('invite', (string) data_get($inspectionForHealthy, 'invite_unlock_diagnostic_v1.projection_unlock_source', ''));
+        $this->assertSame(1, (int) data_get($inspectionForHealthy, 'invite_unlock_diagnostic_v1.completed_invitees', -1));
+        $this->assertSame(1, (int) data_get($inspectionForHealthy, 'invite_unlock_diagnostic_v1.rejections_by_status.rejected_self_referral', -1));
+        $this->assertSame('MBTI_CAREER', (string) data_get($inspectionForHealthy, 'invite_unlock_diagnostic_v1.grants.0.benefit_code', ''));
     }
 
     public function test_command_exact_attempt_mode_reports_chain_absent_and_strict_fails(): void

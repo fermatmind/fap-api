@@ -9,13 +9,21 @@ use App\Models\Attempt;
 use App\Models\AttemptInviteUnlock;
 use App\Models\AttemptInviteUnlockCompletion;
 use App\Models\Result;
+use App\Services\Commerce\EntitlementManager;
 use App\Services\Attempts\InviteUnlock\InviteUnlockStatus;
+use App\Services\Report\InviteUnlockSummaryBuilder;
+use App\Services\Report\ReportAccess;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 final class AttemptInviteUnlockService
 {
+    public function __construct(
+        private readonly EntitlementManager $entitlements,
+        private readonly InviteUnlockSummaryBuilder $inviteUnlockSummaryBuilder,
+    ) {}
+
     private const DEFAULT_REQUIRED_INVITEES = 2;
 
     private const RULE_VERSION = 'v1';
@@ -72,7 +80,7 @@ final class AttemptInviteUnlockService
 
                     $fresh = $this->refreshProgressSnapshot($existing);
 
-                    return $this->buildInvitePayload($fresh);
+                    return $this->buildInvitePayload($fresh, false);
                 }
 
                 $invite = new AttemptInviteUnlock;
@@ -90,7 +98,7 @@ final class AttemptInviteUnlockService
                 $invite->meta_json = null;
                 $invite->saveOrFail();
 
-                return $this->buildInvitePayload($invite);
+                return $this->buildInvitePayload($invite, true);
             });
         } catch (QueryException $e) {
             if (! $this->isDuplicateKey($e)) {
@@ -108,7 +116,7 @@ final class AttemptInviteUnlockService
 
             $fresh = $this->refreshProgressSnapshot($existing);
 
-            return $this->buildInvitePayload($fresh);
+            return $this->buildInvitePayload($fresh, false);
         }
     }
 
@@ -133,6 +141,7 @@ final class AttemptInviteUnlockService
         if (! $existing instanceof AttemptInviteUnlock) {
             return [
                 'has_invite' => false,
+                'created' => false,
                 'invite_id' => null,
                 'invite_code' => null,
                 'target_org_id' => $targetOrgId,
@@ -143,12 +152,21 @@ final class AttemptInviteUnlockService
                 'completed_invitees' => 0,
                 'qualification_rule_version' => self::RULE_VERSION,
                 'expires_at' => null,
+                'unlock_stage' => ReportAccess::UNLOCK_STAGE_LOCKED,
+                'unlock_source' => ReportAccess::UNLOCK_SOURCE_NONE,
+                'invite_unlock_v1' => $this->inviteUnlockSummaryBuilder->build(
+                    $targetScaleCode,
+                    ReportAccess::UNLOCK_STAGE_LOCKED,
+                    ReportAccess::UNLOCK_SOURCE_NONE,
+                    0,
+                    self::DEFAULT_REQUIRED_INVITEES
+                ),
             ];
         }
 
         $fresh = $this->refreshProgressSnapshot($existing);
 
-        return $this->buildInvitePayload($fresh);
+        return $this->buildInvitePayload($fresh, false);
     }
 
     public function refreshProgressSnapshot(AttemptInviteUnlock $invite): AttemptInviteUnlock
@@ -199,20 +217,39 @@ final class AttemptInviteUnlockService
     /**
      * @return array<string,mixed>
      */
-    public function buildInvitePayload(AttemptInviteUnlock $invite): array
+    public function buildInvitePayload(AttemptInviteUnlock $invite, bool $created = false): array
     {
+        $requiredInvitees = max(1, (int) ($invite->required_invitees ?? self::DEFAULT_REQUIRED_INVITEES));
+        $completedInvitees = max(0, min($requiredInvitees, (int) ($invite->completed_invitees ?? 0)));
+        $unlockState = $this->entitlements->resolveAttemptUnlockState(
+            (int) ($invite->target_org_id ?? 0),
+            (string) ($invite->target_attempt_id ?? '')
+        );
+        $unlockStage = ReportAccess::normalizeUnlockStage((string) ($unlockState['unlock_stage'] ?? ReportAccess::UNLOCK_STAGE_LOCKED));
+        $unlockSource = ReportAccess::normalizeUnlockSource((string) ($unlockState['unlock_source'] ?? ReportAccess::UNLOCK_SOURCE_NONE));
+
         return [
             'has_invite' => true,
+            'created' => $created,
             'invite_id' => (string) $invite->id,
             'invite_code' => (string) $invite->invite_code,
             'target_org_id' => (int) ($invite->target_org_id ?? 0),
             'target_attempt_id' => (string) ($invite->target_attempt_id ?? ''),
             'target_scale_code' => (string) ($invite->target_scale_code ?? ''),
             'status' => (string) ($invite->status ?? InviteUnlockStatus::PENDING),
-            'required_invitees' => (int) ($invite->required_invitees ?? self::DEFAULT_REQUIRED_INVITEES),
-            'completed_invitees' => (int) ($invite->completed_invitees ?? 0),
+            'required_invitees' => $requiredInvitees,
+            'completed_invitees' => $completedInvitees,
             'qualification_rule_version' => (string) ($invite->qualification_rule_version ?? self::RULE_VERSION),
             'expires_at' => $invite->expires_at?->toISOString(),
+            'unlock_stage' => $unlockStage,
+            'unlock_source' => $unlockSource,
+            'invite_unlock_v1' => $this->inviteUnlockSummaryBuilder->build(
+                (string) ($invite->target_scale_code ?? ''),
+                $unlockStage,
+                $unlockSource,
+                $completedInvitees,
+                $requiredInvitees
+            ),
         ];
     }
 

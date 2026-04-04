@@ -8,10 +8,13 @@ use App\Models\Result;
 use App\Models\UnifiedAccessProjection;
 use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
 use App\Services\Mbti\MbtiPublicFormSummaryBuilder;
+use App\Services\Report\InviteUnlockSummaryBuilder;
+use App\Services\Report\ReportAccess;
 use App\Services\Report\Resolvers\OfferResolver;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
 use App\Support\ApiPagination;
+use Illuminate\Support\Facades\DB;
 
 class MeAttemptsService
 {
@@ -61,6 +64,7 @@ class MeAttemptsService
         private readonly OfferResolver $offerResolver,
         private readonly MbtiPublicFormSummaryBuilder $mbtiPublicFormSummaryBuilder,
         private readonly BigFivePublicFormSummaryBuilder $bigFivePublicFormSummaryBuilder,
+        private readonly InviteUnlockSummaryBuilder $inviteUnlockSummaryBuilder,
     ) {}
 
     public function list(
@@ -119,6 +123,7 @@ class MeAttemptsService
         }
 
         $projectionByAttemptId = [];
+        $inviteByAttemptId = [];
         $needsAccessSummary = false;
         foreach ($attemptModels as $attempt) {
             if ($attempt instanceof Attempt && $this->shouldIncludeAccessSummary($attempt)) {
@@ -141,13 +146,37 @@ class MeAttemptsService
                 }
                 $projectionByAttemptId[$attemptId] = $projection;
             }
+
+            if (DB::getSchemaBuilder()->hasTable('attempt_invite_unlocks')) {
+                $inviteRows = DB::table('attempt_invite_unlocks')
+                    ->where('target_org_id', $orgId)
+                    ->whereIn('target_attempt_id', $attemptIds)
+                    ->select(['target_attempt_id', 'required_invitees', 'completed_invitees'])
+                    ->get();
+                foreach ($inviteRows as $invite) {
+                    $attemptId = (string) ($invite->target_attempt_id ?? '');
+                    if ($attemptId === '') {
+                        continue;
+                    }
+
+                    $inviteByAttemptId[$attemptId] = [
+                        'required_invitees' => max(1, (int) ($invite->required_invitees ?? 2)),
+                        'completed_invitees' => max(0, (int) ($invite->completed_invitees ?? 0)),
+                    ];
+                }
+            }
         }
 
         $items = [];
         foreach ($attemptModels as $attempt) {
             $attemptId = (string) ($attempt->id ?? '');
             $result = $resultByAttemptId[$attemptId] ?? null;
-            $presented = $this->presentAttempt($attempt, $result, $projectionByAttemptId[$attemptId] ?? null);
+            $presented = $this->presentAttempt(
+                $attempt,
+                $result,
+                $projectionByAttemptId[$attemptId] ?? null,
+                $inviteByAttemptId[$attemptId] ?? null
+            );
             if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI') {
                 $presented['mbti_form_v1'] = $this->mbtiPublicFormSummaryBuilder->summarizeForAttempt($attempt, $result, $locale);
             } elseif (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'BIG5_OCEAN') {
@@ -178,7 +207,8 @@ class MeAttemptsService
     private function presentAttempt(
         Attempt $attempt,
         ?Result $result = null,
-        ?UnifiedAccessProjection $projection = null
+        ?UnifiedAccessProjection $projection = null,
+        ?array $inviteSnapshot = null
     ): array {
         $attemptId = (string) ($attempt->id ?? '');
         $domainsMean = $this->extractDomainsMean($result?->result_json);
@@ -218,7 +248,8 @@ class MeAttemptsService
             $accessSummary = $this->buildAccessSummary(
                 $attempt,
                 $projection,
-                $result instanceof Result
+                $result instanceof Result,
+                $inviteSnapshot
             );
             $output['access_summary'] = $accessSummary;
             $output = array_merge($output, $this->buildBigFiveRowSummary($attempt, $result, $accessSummary));
@@ -233,10 +264,13 @@ class MeAttemptsService
      *   report_state:string,
      *   pdf_state:string,
      *   reason_code:?string,
+     *   unlock_stage:string,
+     *   unlock_source:string,
      *   access_level:?string,
      *   variant:?string,
      *   modules_allowed:list<string>,
      *   modules_preview:list<string>,
+     *   invite_unlock_v1:array<string,mixed>,
      *   actions:array{
      *     page_href:?string,
      *     pdf_href:?string,
@@ -249,7 +283,8 @@ class MeAttemptsService
     private function buildAccessSummary(
         Attempt $attempt,
         ?UnifiedAccessProjection $projection,
-        bool $resultExists
+        bool $resultExists,
+        ?array $inviteSnapshot = null
     ): array {
         $payload = is_array($projection?->payload_json) ? $projection->payload_json : [];
         $accessState = $this->normalizeProjectionState(
@@ -267,16 +302,33 @@ class MeAttemptsService
         $reasonCode = $this->nullableText(
             $projection?->reason_code ?? ($resultExists ? 'projection_missing_result_ready' : 'projection_missing_result_pending')
         );
+        $unlockStage = ReportAccess::normalizeUnlockStage((string) ($payload['unlock_stage'] ?? (
+            $accessState === 'ready'
+                ? ReportAccess::UNLOCK_STAGE_FULL
+                : ReportAccess::UNLOCK_STAGE_LOCKED
+        )));
+        $unlockSource = ReportAccess::normalizeUnlockSource((string) ($payload['unlock_source'] ?? ReportAccess::UNLOCK_SOURCE_NONE));
+        $requiredInvitees = max(1, (int) ($inviteSnapshot['required_invitees'] ?? 2));
+        $completedInvitees = max(0, min($requiredInvitees, (int) ($inviteSnapshot['completed_invitees'] ?? 0)));
 
         return [
             'access_state' => $accessState,
             'report_state' => $reportState,
             'pdf_state' => $pdfState,
             'reason_code' => $reasonCode,
+            'unlock_stage' => $unlockStage,
+            'unlock_source' => $unlockSource,
             'access_level' => $this->nullableText($payload['access_level'] ?? null),
             'variant' => $this->nullableText($payload['variant'] ?? null),
             'modules_allowed' => $this->normalizeStringArray($payload['modules_allowed'] ?? null),
             'modules_preview' => $this->normalizeStringArray($payload['modules_preview'] ?? null),
+            'invite_unlock_v1' => $this->inviteUnlockSummaryBuilder->build(
+                (string) ($attempt->scale_code ?? ''),
+                $unlockStage,
+                $unlockSource,
+                $completedInvitees,
+                $requiredInvitees
+            ),
             'actions' => $this->buildAccessSummaryActions($attempt, $accessState, $reportState, $pdfState),
         ];
     }
