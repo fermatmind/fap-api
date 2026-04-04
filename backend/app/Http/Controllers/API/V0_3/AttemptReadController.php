@@ -604,6 +604,40 @@ class AttemptReadController extends Controller
             $responsePayload['big5_form_v1'] = $big5FormSummary;
         }
 
+        $unlockStage = ReportAccess::normalizeUnlockStage((string) data_get(
+            $payloadJson,
+            'unlock_stage',
+            $accessState === 'ready' ? ReportAccess::UNLOCK_STAGE_FULL : ReportAccess::UNLOCK_STAGE_LOCKED
+        ));
+        $unlockSource = ReportAccess::normalizeUnlockSource((string) data_get(
+            $payloadJson,
+            'unlock_source',
+            ReportAccess::UNLOCK_SOURCE_NONE
+        ));
+        $payloadJson['unlock_stage'] = $unlockStage;
+        $payloadJson['unlock_source'] = $unlockSource;
+        $payloadJson['access_level'] = ReportAccess::normalizeReportAccessLevel((string) data_get(
+            $payloadJson,
+            'access_level',
+            $unlockStage === ReportAccess::UNLOCK_STAGE_PARTIAL
+                ? ReportAccess::REPORT_ACCESS_PARTIAL
+                : ($unlockStage === ReportAccess::UNLOCK_STAGE_FULL
+                    ? ReportAccess::REPORT_ACCESS_FULL
+                    : ReportAccess::REPORT_ACCESS_FREE)
+        ));
+        $payloadJson['variant'] = ReportAccess::normalizeVariant((string) data_get(
+            $payloadJson,
+            'variant',
+            $unlockStage === ReportAccess::UNLOCK_STAGE_PARTIAL
+                ? ReportAccess::VARIANT_PARTIAL
+                : ($unlockStage === ReportAccess::UNLOCK_STAGE_FULL
+                    ? ReportAccess::VARIANT_FULL
+                    : ReportAccess::VARIANT_FREE)
+        ));
+        $responsePayload['unlock_stage'] = $unlockStage;
+        $responsePayload['unlock_source'] = $unlockSource;
+        $responsePayload['payload'] = $payloadJson;
+
         return response()->json($responsePayload);
     }
 

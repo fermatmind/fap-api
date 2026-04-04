@@ -8,6 +8,7 @@ use App\Models\Attempt;
 use App\Models\AttemptInviteUnlock;
 use App\Models\AttemptInviteUnlockCompletion;
 use App\Models\Result;
+use App\Services\Commerce\EntitlementManager;
 use App\Services\Attempts\InviteUnlock\InviteUnlockCompletionStatus;
 use App\Services\Attempts\InviteUnlock\InviteUnlockStatus;
 use Illuminate\Database\QueryException;
@@ -16,8 +17,13 @@ use Illuminate\Support\Str;
 
 final class AttemptInviteUnlockCompletionService
 {
+    private const MBTI_PARTIAL_BENEFIT_CODE = 'MBTI_CAREER';
+
+    private const MBTI_FULL_BENEFIT_CODE = 'MBTI_REPORT_FULL';
+
     public function __construct(
         private readonly AttemptInviteUnlockService $inviteService,
+        private readonly EntitlementManager $entitlements,
     ) {}
 
     /**
@@ -501,6 +507,8 @@ final class AttemptInviteUnlockCompletionService
         AttemptInviteUnlock $invite,
         bool $idempotent
     ): array {
+        $entitlementState = $this->syncStagedEntitlementsForInvite($invite);
+
         return [
             'ok' => true,
             'idempotent' => $idempotent,
@@ -512,6 +520,94 @@ final class AttemptInviteUnlockCompletionService
             'qualified' => (bool) ($completion->qualified ?? false),
             'counted' => (bool) ($completion->counted ?? false),
             'progress' => $this->inviteService->buildInvitePayload($invite),
+            'unlock_stage' => (string) ($entitlementState['unlock_stage'] ?? 'locked'),
+            'unlock_source' => (string) ($entitlementState['unlock_source'] ?? 'none'),
+        ];
+    }
+
+    /**
+     * @return array{unlock_stage:string,unlock_source:string}
+     */
+    private function syncStagedEntitlementsForInvite(AttemptInviteUnlock $invite): array
+    {
+        $orgId = (int) ($invite->target_org_id ?? 0);
+        $attemptId = trim((string) ($invite->target_attempt_id ?? ''));
+        $scaleCode = strtoupper(trim((string) ($invite->target_scale_code ?? '')));
+        if ($orgId < 0 || $attemptId === '' || $scaleCode !== 'MBTI') {
+            return [
+                'unlock_stage' => 'locked',
+                'unlock_source' => 'none',
+            ];
+        }
+
+        $inviterUserId = $this->normalizeUserId((string) ($invite->inviter_user_id ?? ''));
+        $inviterAnonId = $this->normalizeString((string) ($invite->inviter_anon_id ?? ''));
+
+        $completedInvitees = max(0, (int) ($invite->completed_invitees ?? 0));
+        $fullAlready = $this->entitlements->hasActiveGrantForAttemptBenefitCode(
+            $orgId,
+            $attemptId,
+            self::MBTI_FULL_BENEFIT_CODE
+        );
+        $partialAlready = $this->entitlements->hasActiveGrantForAttemptBenefitCode(
+            $orgId,
+            $attemptId,
+            self::MBTI_PARTIAL_BENEFIT_CODE
+        );
+
+        if ($completedInvitees >= 2 && ! $fullAlready) {
+            $this->entitlements->grantAttemptUnlock(
+                $orgId,
+                $inviterUserId,
+                $inviterAnonId,
+                self::MBTI_FULL_BENEFIT_CODE,
+                $attemptId,
+                null,
+                'attempt',
+                null,
+                null,
+                [
+                    'granted_via' => 'invite_unlock',
+                    'invite_unlock_code' => (string) ($invite->invite_code ?? ''),
+                    'invite_unlock_id' => (string) ($invite->id ?? ''),
+                    'invite_unlock_stage' => 'full',
+                ]
+            );
+        } elseif ($completedInvitees >= 1 && ! $fullAlready && ! $partialAlready) {
+            $this->entitlements->grantAttemptUnlock(
+                $orgId,
+                $inviterUserId,
+                $inviterAnonId,
+                self::MBTI_PARTIAL_BENEFIT_CODE,
+                $attemptId,
+                null,
+                'attempt',
+                null,
+                null,
+                [
+                    'granted_via' => 'invite_unlock',
+                    'invite_unlock_code' => (string) ($invite->invite_code ?? ''),
+                    'invite_unlock_id' => (string) ($invite->id ?? ''),
+                    'invite_unlock_stage' => 'partial',
+                ]
+            );
+        }
+
+        $state = $this->entitlements->syncAttemptProjectionFromEntitlements(
+            $orgId,
+            $attemptId,
+            [
+                'source_system' => 'invite_unlock_completion',
+                'source_ref' => (string) ($invite->invite_code ?? $attemptId),
+                'actor_type' => $inviterUserId !== null ? 'user' : 'anon',
+                'actor_id' => $inviterUserId ?? $inviterAnonId,
+                'reason_code' => 'invite_unlock_stage_synced',
+            ]
+        );
+
+        return [
+            'unlock_stage' => (string) ($state['unlock_stage'] ?? 'locked'),
+            'unlock_source' => (string) ($state['unlock_source'] ?? 'none'),
         ];
     }
 

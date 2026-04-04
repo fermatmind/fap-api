@@ -38,11 +38,29 @@ final class ReportAccess
 
     public const VARIANT_FREE = 'free';
 
+    public const VARIANT_PARTIAL = 'partial';
+
     public const VARIANT_FULL = 'full';
 
     public const REPORT_ACCESS_FREE = 'free';
 
+    public const REPORT_ACCESS_PARTIAL = 'partial';
+
     public const REPORT_ACCESS_FULL = 'full';
+
+    public const UNLOCK_STAGE_LOCKED = 'locked';
+
+    public const UNLOCK_STAGE_PARTIAL = 'partial';
+
+    public const UNLOCK_STAGE_FULL = 'full';
+
+    public const UNLOCK_SOURCE_NONE = 'none';
+
+    public const UNLOCK_SOURCE_INVITE = 'invite';
+
+    public const UNLOCK_SOURCE_PAYMENT = 'payment';
+
+    public const UNLOCK_SOURCE_MIXED = 'mixed';
 
     public const CARD_ACCESS_FREE = 'free';
 
@@ -212,18 +230,53 @@ final class ReportAccess
     {
         $variant = strtolower(trim((string) $variant));
 
-        return $variant === self::VARIANT_FREE
-            ? self::VARIANT_FREE
-            : self::VARIANT_FULL;
+        if ($variant === self::VARIANT_FREE) {
+            return self::VARIANT_FREE;
+        }
+
+        if ($variant === self::VARIANT_PARTIAL) {
+            return self::VARIANT_PARTIAL;
+        }
+
+        return self::VARIANT_FULL;
     }
 
     public static function normalizeReportAccessLevel(?string $level): string
     {
         $level = strtolower(trim((string) $level));
 
-        return $level === self::REPORT_ACCESS_FREE
-            ? self::REPORT_ACCESS_FREE
-            : self::REPORT_ACCESS_FULL;
+        if ($level === self::REPORT_ACCESS_FREE) {
+            return self::REPORT_ACCESS_FREE;
+        }
+
+        if ($level === self::REPORT_ACCESS_PARTIAL) {
+            return self::REPORT_ACCESS_PARTIAL;
+        }
+
+        return self::REPORT_ACCESS_FULL;
+    }
+
+    public static function normalizeUnlockStage(?string $stage): string
+    {
+        $stage = strtolower(trim((string) $stage));
+
+        return match ($stage) {
+            self::UNLOCK_STAGE_PARTIAL => self::UNLOCK_STAGE_PARTIAL,
+            self::UNLOCK_STAGE_FULL => self::UNLOCK_STAGE_FULL,
+            default => self::UNLOCK_STAGE_LOCKED,
+        };
+    }
+
+    public static function normalizeUnlockSource(?string $source): string
+    {
+        $source = strtolower(trim((string) $source));
+
+        return match ($source) {
+            self::UNLOCK_SOURCE_INVITE => self::UNLOCK_SOURCE_INVITE,
+            self::UNLOCK_SOURCE_PAYMENT => self::UNLOCK_SOURCE_PAYMENT,
+            self::UNLOCK_SOURCE_MIXED => self::UNLOCK_SOURCE_MIXED,
+            default => self::UNLOCK_SOURCE_NONE,
+        };
     }
 
     public static function normalizeCardAccessLevel(?string $level): string

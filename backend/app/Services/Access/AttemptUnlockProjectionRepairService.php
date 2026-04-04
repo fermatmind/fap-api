@@ -30,40 +30,48 @@ final class AttemptUnlockProjectionRepairService
             ->where('attempt_id', $attemptId)
             ->first();
 
-        if ($this->isProjectionReady($existing)) {
-            return $existing;
-        }
-
         if (! $this->resultExists($orgId, $attemptId)) {
             return $existing;
         }
 
-        if (! $this->hasActiveUnlockGrant($orgId, $attemptId)) {
+        $unlockState = $this->entitlements->resolveAttemptUnlockState($orgId, $attemptId);
+        $unlockStage = ReportAccess::normalizeUnlockStage((string) ($unlockState['unlock_stage'] ?? ReportAccess::UNLOCK_STAGE_LOCKED));
+        if ($unlockStage === ReportAccess::UNLOCK_STAGE_LOCKED) {
+            return $existing;
+        }
+        if ($this->isProjectionReady($existing) && $this->projectionMatchesUnlockState($existing, $unlockState)) {
             return $existing;
         }
 
-        $modulesAllowed = $this->entitlements->getAllowedModulesForAttempt($orgId, $attemptId);
+        $modulesAllowed = ReportAccess::normalizeModules((array) ($unlockState['modules_allowed'] ?? []));
         $pdfReady = $this->isPdfReady($existing, $attemptId);
+        $accessLevel = ReportAccess::normalizeReportAccessLevel((string) ($unlockState['access_level'] ?? ReportAccess::REPORT_ACCESS_FREE));
+        $variant = ReportAccess::normalizeVariant((string) ($unlockState['variant'] ?? ReportAccess::VARIANT_FREE));
+        $unlockSource = ReportAccess::normalizeUnlockSource((string) ($unlockState['unlock_source'] ?? ReportAccess::UNLOCK_SOURCE_NONE));
+        $existingPayload = is_array($existing?->payload_json) ? $existing->payload_json : [];
+        $existingActions = is_array($existing?->actions_json) ? $existing->actions_json : [];
         $patch = [
             'access_state' => 'ready',
             'report_state' => 'ready',
             'pdf_state' => $pdfReady ? 'ready' : 'missing',
             'reason_code' => 'projection_repaired_from_entitlement',
-            'actions_json' => [
+            'actions_json' => array_merge($existingActions, [
                 'report' => true,
                 'pdf' => $pdfReady,
                 'unlock' => true,
-            ],
-            'payload_json' => [
+            ]),
+            'payload_json' => array_merge($existingPayload, [
                 'attempt_id' => $attemptId,
                 'has_active_grant' => true,
                 'result_exists' => true,
                 'repair_source' => 'attempt_unlock_projection_repair',
-                'access_level' => ReportAccess::REPORT_ACCESS_FULL,
-                'variant' => ReportAccess::VARIANT_FULL,
+                'unlock_stage' => $unlockStage,
+                'unlock_source' => $unlockSource,
+                'access_level' => $accessLevel,
+                'variant' => $variant,
                 'modules_allowed' => $modulesAllowed,
-                'modules_preview' => [],
-            ],
+                'modules_preview' => $modulesAllowed,
+            ]),
         ];
         $meta = [
             'source_system' => 'attempt_unlock_projection_repair',
@@ -90,6 +98,7 @@ final class AttemptUnlockProjectionRepairService
                 'attempt_id' => $attemptId,
                 'existing_reason_code' => $existing?->reason_code,
                 'pdf_ready' => $pdfReady,
+                'unlock_stage' => $unlockStage,
             ]);
 
             return $projection ?? $existing;
@@ -115,28 +124,33 @@ final class AttemptUnlockProjectionRepairService
             && strtolower(trim((string) ($projection->report_state ?? ''))) === 'ready';
     }
 
+    /**
+     * @param  array<string,mixed>  $unlockState
+     */
+    private function projectionMatchesUnlockState(?UnifiedAccessProjection $projection, array $unlockState): bool
+    {
+        if (! $projection instanceof UnifiedAccessProjection) {
+            return false;
+        }
+
+        $payload = is_array($projection->payload_json) ? $projection->payload_json : [];
+        $existingStage = ReportAccess::normalizeUnlockStage((string) ($payload['unlock_stage'] ?? ReportAccess::UNLOCK_STAGE_LOCKED));
+        $targetStage = ReportAccess::normalizeUnlockStage((string) ($unlockState['unlock_stage'] ?? ReportAccess::UNLOCK_STAGE_LOCKED));
+        if ($existingStage !== $targetStage) {
+            return false;
+        }
+
+        $existingSource = ReportAccess::normalizeUnlockSource((string) ($payload['unlock_source'] ?? ReportAccess::UNLOCK_SOURCE_NONE));
+        $targetSource = ReportAccess::normalizeUnlockSource((string) ($unlockState['unlock_source'] ?? ReportAccess::UNLOCK_SOURCE_NONE));
+
+        return $existingSource === $targetSource;
+    }
+
     private function resultExists(int $orgId, string $attemptId): bool
     {
         return DB::table('results')
             ->where('org_id', $orgId)
             ->where('attempt_id', $attemptId)
-            ->exists();
-    }
-
-    private function hasActiveUnlockGrant(int $orgId, string $attemptId): bool
-    {
-        return DB::table('benefit_grants')
-            ->where('org_id', $orgId)
-            ->where('benefit_type', 'report_unlock')
-            ->where('status', 'active')
-            ->where(function ($query) use ($attemptId): void {
-                $query->where('attempt_id', $attemptId)
-                    ->orWhere('scope', 'org');
-            })
-            ->where(function ($query): void {
-                $query->whereNull('expires_at')
-                    ->orWhere('expires_at', '>', now());
-            })
             ->exists();
     }
 

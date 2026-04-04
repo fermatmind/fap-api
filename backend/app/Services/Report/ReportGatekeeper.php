@@ -182,12 +182,23 @@ class ReportGatekeeper
         $modulesPreview = (array) ($crisisState['modules_preview'] ?? $modulesPreview);
         $hasFullAccess = (bool) ($crisisState['has_full_access'] ?? $hasFullAccess);
         $hasPaidModuleAccess = (bool) ($crisisState['has_paid_module_access'] ?? $hasPaidModuleAccess);
-
-        $variant = $hasPaidModuleAccess ? ReportAccess::VARIANT_FULL : ReportAccess::VARIANT_FREE;
-        $reportAccessLevel = $variant === ReportAccess::VARIANT_FREE
-            ? ReportAccess::REPORT_ACCESS_FREE
-            : ReportAccess::REPORT_ACCESS_FULL;
-        $locked = $variant === ReportAccess::VARIANT_FREE;
+        $unlockStage = $hasFullAccess
+            ? ReportAccess::UNLOCK_STAGE_FULL
+            : ($hasPaidModuleAccess ? ReportAccess::UNLOCK_STAGE_PARTIAL : ReportAccess::UNLOCK_STAGE_LOCKED);
+        $renderVariant = $unlockStage === ReportAccess::UNLOCK_STAGE_LOCKED
+            ? ReportAccess::VARIANT_FREE
+            : ReportAccess::VARIANT_FULL;
+        $variant = match ($unlockStage) {
+            ReportAccess::UNLOCK_STAGE_PARTIAL => ReportAccess::VARIANT_PARTIAL,
+            ReportAccess::UNLOCK_STAGE_FULL => ReportAccess::VARIANT_FULL,
+            default => ReportAccess::VARIANT_FREE,
+        };
+        $reportAccessLevel = match ($unlockStage) {
+            ReportAccess::UNLOCK_STAGE_PARTIAL => ReportAccess::REPORT_ACCESS_PARTIAL,
+            ReportAccess::UNLOCK_STAGE_FULL => ReportAccess::REPORT_ACCESS_FULL,
+            default => ReportAccess::REPORT_ACCESS_FREE,
+        };
+        $locked = $unlockStage === ReportAccess::UNLOCK_STAGE_LOCKED;
 
         $shouldUseSnapshot = $hasFullAccess && $this->offerResolver->modulesCoverOffered($modulesAllowed, $modulesOffered);
         $snapshotStrictMode = $this->strictSnapshotModeEnabled();
@@ -301,7 +312,7 @@ class ReportGatekeeper
                     );
                 }
 
-                $report = $this->snapshotReportForVariant($snapshotRow, $variant);
+                $report = $this->snapshotReportForVariant($snapshotRow, $renderVariant);
                 if ($report !== []) {
                     return $this->responsePayload(
                         $locked,
@@ -372,7 +383,7 @@ class ReportGatekeeper
             $scaleCode,
             $attempt,
             $result,
-            $variant,
+            $renderVariant,
             $modulesAllowed,
             $modulesPreview
         );
@@ -391,7 +402,7 @@ class ReportGatekeeper
             $report = $this->applyTeaser($report, $viewPolicy);
         }
 
-        if ($shouldUseSnapshot && $variant === ReportAccess::VARIANT_FULL) {
+        if ($shouldUseSnapshot && $renderVariant === ReportAccess::VARIANT_FULL) {
             $reportFreeBuilt = $this->buildReportVariant(
                 $scaleCode,
                 $attempt,
@@ -671,7 +682,9 @@ class ReportGatekeeper
         array $modulesPreview = [],
         array $norms = [],
         array $quality = [],
-        bool $isMbtiContract = false
+        bool $isMbtiContract = false,
+        ?string $unlockStage = null,
+        ?string $unlockSource = null
     ): array {
         $generating = (bool) ($meta['generating'] ?? false);
         $snapshotError = (bool) ($meta['snapshot_error'] ?? false);
@@ -690,14 +703,25 @@ class ReportGatekeeper
             }
         }
 
+        $normalizedAccessLevel = ReportAccess::normalizeReportAccessLevel($accessLevel);
+        $normalizedUnlockStage = ReportAccess::normalizeUnlockStage(
+            $unlockStage
+                ?? match ($normalizedAccessLevel) {
+                    ReportAccess::REPORT_ACCESS_PARTIAL => ReportAccess::UNLOCK_STAGE_PARTIAL,
+                    ReportAccess::REPORT_ACCESS_FULL => ReportAccess::UNLOCK_STAGE_FULL,
+                    default => ReportAccess::UNLOCK_STAGE_LOCKED,
+                }
+        );
         $payload = [
             'ok' => true,
             'generating' => $generating,
             'snapshot_error' => $snapshotError,
             'retry_after_seconds' => $retryAfterSeconds,
             'locked' => $locked,
-            'access_level' => ReportAccess::normalizeReportAccessLevel($accessLevel),
+            'access_level' => $normalizedAccessLevel,
             'variant' => ReportAccess::normalizeVariant($variant),
+            'unlock_stage' => $normalizedUnlockStage,
+            'unlock_source' => ReportAccess::normalizeUnlockSource($unlockSource ?? ReportAccess::UNLOCK_SOURCE_NONE),
             'upgrade_sku' => $paywall['upgrade_sku'] ?? ($viewPolicy['upgrade_sku'] ?? null),
             'upgrade_sku_effective' => $paywall['upgrade_sku_effective'] ?? ($viewPolicy['upgrade_sku'] ?? null),
             'offers' => $paywall['offers'] ?? [],
