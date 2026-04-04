@@ -89,22 +89,29 @@ final class AttemptReportAccessReadTest extends TestCase
         ]);
     }
 
-    private function createActiveGrant(string $attemptId, string $anonId): void
+    private function createActiveGrant(
+        string $attemptId,
+        string $anonId,
+        string $benefitCode = 'MBTI_REPORT_FULL',
+        ?string $orderNo = null,
+        ?array $meta = null,
+    ): void
     {
         DB::table('benefit_grants')->insert([
             'id' => (string) Str::uuid(),
             'org_id' => 0,
             'user_id' => $anonId,
-            'benefit_code' => 'MBTI_REPORT_FULL',
+            'benefit_code' => $benefitCode,
             'scope' => 'attempt',
             'attempt_id' => $attemptId,
-            'order_no' => 'ORDER-'.$attemptId,
+            'order_no' => $orderNo ?? 'ORDER-'.$attemptId,
             'status' => 'active',
             'expires_at' => null,
             'benefit_ref' => $anonId,
             'benefit_type' => 'report_unlock',
             'source_order_id' => (string) Str::uuid(),
             'source_event_id' => null,
+            'meta_json' => $meta !== null ? json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) : null,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -182,6 +189,10 @@ final class AttemptReportAccessReadTest extends TestCase
         $response->assertJsonPath('actions.page_href', "/result/{$attemptId}");
         $response->assertJsonPath('payload.has_active_grant', true);
         $response->assertJsonPath('payload.result_exists', true);
+        $response->assertJsonPath('unlock_stage', 'full');
+        $response->assertJsonPath('unlock_source', 'payment');
+        $response->assertJsonPath('payload.unlock_stage', 'full');
+        $response->assertJsonPath('payload.unlock_source', 'payment');
         $response->assertJsonPath('payload.access_level', 'full');
         $response->assertJsonPath('payload.variant', 'full');
         $this->assertDatabaseHas('unified_access_projections', [
@@ -213,6 +224,10 @@ final class AttemptReportAccessReadTest extends TestCase
         $response->assertJsonPath('report_state', 'ready');
         $response->assertJsonPath('reason_code', 'projection_missing_result_ready');
         $response->assertJsonPath('payload.result_exists', true);
+        $response->assertJsonPath('unlock_stage', 'locked');
+        $response->assertJsonPath('unlock_source', 'none');
+        $response->assertJsonPath('payload.unlock_stage', 'locked');
+        $response->assertJsonPath('payload.unlock_source', 'none');
         $response->assertJsonPath('payload.has_active_grant', null);
         $this->assertDatabaseMissing('unified_access_projections', [
             'attempt_id' => $attemptId,
@@ -326,5 +341,47 @@ final class AttemptReportAccessReadTest extends TestCase
             'attempt_id' => $attemptId,
             'reason_code' => 'projection_repaired_from_entitlement',
         ]);
+    }
+
+    public function test_it_repairs_partial_projection_from_invite_partial_grant_without_escalating_to_full(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_access_partial_repair';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId);
+        $this->createResult($attemptId);
+        $this->createActiveGrant(
+            $attemptId,
+            $anonId,
+            'MBTI_CAREER',
+            '',
+            [
+                'granted_via' => 'invite_unlock',
+                'invite_unlock_stage' => 'partial',
+            ]
+        );
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('attempt_id', $attemptId);
+        $response->assertJsonPath('access_state', 'ready');
+        $response->assertJsonPath('report_state', 'ready');
+        $response->assertJsonPath('reason_code', 'projection_repaired_from_entitlement');
+        $response->assertJsonPath('unlock_stage', 'partial');
+        $response->assertJsonPath('unlock_source', 'invite');
+        $response->assertJsonPath('payload.unlock_stage', 'partial');
+        $response->assertJsonPath('payload.unlock_source', 'invite');
+        $response->assertJsonPath('payload.access_level', 'partial');
+        $response->assertJsonPath('payload.variant', 'partial');
+        $response->assertJsonPath('actions.page_href', "/result/{$attemptId}");
+        $modulesAllowed = (array) $response->json('payload.modules_allowed');
+        $this->assertContains('core_free', $modulesAllowed);
+        $this->assertContains('career', $modulesAllowed);
     }
 }

@@ -88,6 +88,19 @@ final class AttemptInviteUnlockFoundationTest extends TestCase
         );
         $this->assertSame(1, (int) data_get($qualifiedOne, 'progress.completed_invitees'));
         $this->assertSame(InviteUnlockStatus::IN_PROGRESS, (string) data_get($qualifiedOne, 'progress.status'));
+        $this->assertSame('partial', (string) ($qualifiedOne['unlock_stage'] ?? ''));
+        $this->assertDatabaseHas('benefit_grants', [
+            'org_id' => 0,
+            'attempt_id' => $targetAttemptId,
+            'benefit_code' => 'MBTI_CAREER',
+            'status' => 'active',
+        ]);
+        $this->assertDatabaseMissing('benefit_grants', [
+            'org_id' => 0,
+            'attempt_id' => $targetAttemptId,
+            'benefit_code' => 'MBTI_REPORT_FULL',
+            'status' => 'active',
+        ]);
 
         $selfReferralAttempt = $this->createAttemptWithOptionalResult($inviterAnonId, 'MBTI', true, true);
         $selfReferral = $completionService->recordCompletionForInvite($inviteCode, $selfReferralAttempt, null, $inviterAnonId);
@@ -139,6 +152,13 @@ final class AttemptInviteUnlockFoundationTest extends TestCase
         );
         $this->assertSame(2, (int) data_get($qualifiedTwo, 'progress.completed_invitees'));
         $this->assertSame(InviteUnlockStatus::COMPLETED, (string) data_get($qualifiedTwo, 'progress.status'));
+        $this->assertSame('full', (string) ($qualifiedTwo['unlock_stage'] ?? ''));
+        $this->assertDatabaseHas('benefit_grants', [
+            'org_id' => 0,
+            'attempt_id' => $targetAttemptId,
+            'benefit_code' => 'MBTI_REPORT_FULL',
+            'status' => 'active',
+        ]);
 
         $lateSelfAttempt = $this->createAttemptWithOptionalResult($inviterAnonId, 'MBTI', true, true);
         $lateSelfReferral = $completionService->recordCompletionForInvite($inviteCode, $lateSelfAttempt, null, $inviterAnonId);
@@ -166,6 +186,18 @@ final class AttemptInviteUnlockFoundationTest extends TestCase
             (string) ($overflow['qualification_status'] ?? '')
         );
         $this->assertSame(2, (int) data_get($overflow, 'progress.completed_invitees'));
+        $this->assertSame(1, DB::table('benefit_grants')
+            ->where('org_id', 0)
+            ->where('attempt_id', $targetAttemptId)
+            ->where('benefit_code', 'MBTI_CAREER')
+            ->where('status', 'active')
+            ->count());
+        $this->assertSame(1, DB::table('benefit_grants')
+            ->where('org_id', 0)
+            ->where('attempt_id', $targetAttemptId)
+            ->where('benefit_code', 'MBTI_REPORT_FULL')
+            ->where('status', 'active')
+            ->count());
 
         $inviteRow = AttemptInviteUnlock::query()->where('invite_code', $inviteCode)->firstOrFail();
         $this->assertSame(2, (int) $inviteRow->completed_invitees);
@@ -179,7 +211,7 @@ final class AttemptInviteUnlockFoundationTest extends TestCase
         );
     }
 
-    public function test_submit_side_effect_records_completion_without_grants(): void
+    public function test_submit_side_effect_records_completion_and_syncs_partial_stage_entitlement(): void
     {
         $inviteService = app(AttemptInviteUnlockService::class);
         $sideEffects = app(AttemptSubmitSideEffects::class);
@@ -222,7 +254,18 @@ final class AttemptInviteUnlockFoundationTest extends TestCase
             InviteUnlockCompletionStatus::QUALIFIED_COUNTED,
             (string) ($completion->qualification_status ?? '')
         );
-        $this->assertSame(0, DB::table('benefit_grants')->count());
+        $this->assertDatabaseHas('benefit_grants', [
+            'org_id' => 0,
+            'attempt_id' => $targetAttemptId,
+            'benefit_code' => 'MBTI_CAREER',
+            'status' => 'active',
+        ]);
+        $this->assertDatabaseMissing('benefit_grants', [
+            'org_id' => 0,
+            'attempt_id' => $targetAttemptId,
+            'benefit_code' => 'MBTI_REPORT_FULL',
+            'status' => 'active',
+        ]);
     }
 
     /**

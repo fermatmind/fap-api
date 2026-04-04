@@ -37,7 +37,7 @@ class AccessResolver
 
     /**
      * @param  list<string>  $modulesOffered
-     * @return array{modules_allowed:list<string>,modules_preview:list<string>,has_paid_module_access:bool}
+     * @return array{modules_allowed:list<string>,modules_preview:list<string>,has_paid_module_access:bool,unlock_stage:string}
      */
     public function resolveModules(
         string $scaleCode,
@@ -74,11 +74,15 @@ class AccessResolver
 
         $modulesPreview = ReportAccess::normalizeModules($modulesOffered);
         $hasPaidModuleAccess = count(array_diff($modulesAllowed, [$freeModule])) > 0;
+        $unlockStage = $hasFullAccess
+            ? ReportAccess::UNLOCK_STAGE_FULL
+            : ($hasPaidModuleAccess ? ReportAccess::UNLOCK_STAGE_PARTIAL : ReportAccess::UNLOCK_STAGE_LOCKED);
 
         return [
             'modules_allowed' => $modulesAllowed,
             'modules_preview' => $modulesPreview,
             'has_paid_module_access' => $hasPaidModuleAccess,
+            'unlock_stage' => $unlockStage,
         ];
     }
 

@@ -138,8 +138,9 @@ final class ModulesGateReportTest extends TestCase
 
         $after->assertStatus(200);
         $after->assertJson([
-            'variant' => 'full',
-            'access_level' => 'full',
+            'variant' => 'partial',
+            'access_level' => 'partial',
+            'unlock_stage' => 'partial',
         ]);
 
         $sections = $after->json('report.sections');
