@@ -25,6 +25,7 @@ class SubmitAttemptRequest extends FormRequest
         foreach ([
             'share_id' => 128,
             'compare_invite_id' => 128,
+            'invite_unlock_code' => 64,
             'share_click_id' => 128,
             'entrypoint' => 128,
             'referrer' => 2048,
@@ -60,6 +61,7 @@ class SubmitAttemptRequest extends FormRequest
             'invite_token' => ['nullable', 'string', 'max:64'],
             'share_id' => ['nullable', 'string', 'max:128'],
             'compare_invite_id' => ['nullable', 'string', 'max:128'],
+            'invite_unlock_code' => ['nullable', 'string', 'max:64'],
             'share_click_id' => ['nullable', 'string', 'max:128'],
             'entrypoint' => ['nullable', 'string', 'max:128'],
             'referrer' => ['nullable', 'string', 'max:2048'],

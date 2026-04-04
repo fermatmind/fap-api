@@ -27,6 +27,7 @@ class AttemptSubmitTxService
         $inviteToken = (string) ($canonicalized['invite_token'] ?? '');
         $shareId = trim((string) ($canonicalized['share_id'] ?? ''));
         $compareInviteId = trim((string) ($canonicalized['compare_invite_id'] ?? ''));
+        $inviteUnlockCode = trim((string) ($canonicalized['invite_unlock_code'] ?? ''));
         $shareClickId = trim((string) ($canonicalized['share_click_id'] ?? ''));
         $entrypoint = trim((string) ($canonicalized['entrypoint'] ?? ''));
         $referrer = trim((string) ($canonicalized['referrer'] ?? ''));
@@ -77,6 +78,7 @@ class AttemptSubmitTxService
             $inviteToken,
             $shareId,
             $compareInviteId,
+            $inviteUnlockCode,
             $shareClickId,
             $entrypoint,
             $referrer,
@@ -124,6 +126,7 @@ class AttemptSubmitTxService
                             'invite_token' => $inviteToken,
                             'share_id' => $shareId,
                             'compare_invite_id' => $compareInviteId,
+                            'invite_unlock_code' => $inviteUnlockCode,
                             'share_click_id' => $shareClickId,
                             'entrypoint' => $entrypoint,
                             'referrer' => $referrer,
@@ -157,6 +160,7 @@ class AttemptSubmitTxService
                         'invite_token' => $inviteToken,
                         'share_id' => $shareId,
                         'compare_invite_id' => $compareInviteId,
+                        'invite_unlock_code' => $inviteUnlockCode,
                         'share_click_id' => $shareClickId,
                         'entrypoint' => $entrypoint,
                         'referrer' => $referrer,
@@ -339,6 +343,7 @@ class AttemptSubmitTxService
             foreach ([
                 'share_id' => $shareId,
                 'compare_invite_id' => $compareInviteId,
+                'invite_unlock_code' => $inviteUnlockCode,
                 'share_click_id' => $shareClickId,
                 'entrypoint' => $entrypoint,
                 'referrer' => $referrer,
@@ -454,6 +459,7 @@ class AttemptSubmitTxService
                 'invite_token' => $inviteToken,
                 'share_id' => $shareId,
                 'compare_invite_id' => $compareInviteId,
+                'invite_unlock_code' => $inviteUnlockCode,
                 'share_click_id' => $shareClickId,
                 'entrypoint' => $entrypoint,
                 'referrer' => $referrer,
