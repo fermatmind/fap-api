@@ -83,18 +83,6 @@ class AttemptStartService
 
         ScaleRolloutGate::assertEnabled($scaleCode, $row, $region, $anonId);
 
-        if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
-            $retakePolicy = $this->resolveBigFiveRetakePolicy((string) ($row['default_dir_version'] ?? 'v1'));
-            $this->attemptRateLimitService->assertRetakeAllowed(
-                $orgId,
-                $scaleCode,
-                $ctx->userId(),
-                $anonId,
-                (int) ($retakePolicy['cooldown_hours'] ?? 24),
-                (int) ($retakePolicy['max_attempts_per_30_days'] ?? 3)
-            );
-        }
-
         $packId = (string) ($row['default_pack_id'] ?? '');
         $dirVersion = (string) ($row['default_dir_version'] ?? '');
         $registryPackId = $packId;
@@ -144,6 +132,19 @@ class AttemptStartService
 
         if ($packId === '' || $dirVersion === '') {
             throw new ApiProblemException(500, 'CONTENT_PACK_ERROR', 'scale pack not configured.');
+        }
+
+        if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
+            $retakePolicy = $this->resolveBigFiveRetakePolicy($dirVersion !== '' ? $dirVersion : 'v1');
+            $this->attemptRateLimitService->assertRetakeAllowed(
+                $orgId,
+                $scaleCode,
+                $ctx->userId(),
+                $anonId,
+                (int) ($retakePolicy['cooldown_hours'] ?? 24),
+                (int) ($retakePolicy['max_attempts_per_30_days'] ?? 3),
+                $resolvedFormCode
+            );
         }
 
         $questionCount = $this->resolveQuestionCount(

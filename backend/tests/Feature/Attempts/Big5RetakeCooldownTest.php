@@ -38,7 +38,7 @@ final class Big5RetakeCooldownTest extends TestCase
         (new ScaleRegistrySeeder)->run();
 
         $anonId = 'anon_big5_cooldown';
-        $this->createAttempt($anonId, now()->subHours(1));
+        $this->createAttempt($anonId, now()->subHours(1), 'big5_120');
 
         $response = $this->postJson('/api/v0.3/attempts/start', [
             'scale_code' => 'BIG5_OCEAN',
@@ -49,6 +49,11 @@ final class Big5RetakeCooldownTest extends TestCase
 
         $response->assertStatus(429);
         $response->assertJsonPath('error_code', 'RETAKE_COOLDOWN');
+        $response->assertJsonPath('details.code', 'RETAKE_COOLDOWN');
+        $response->assertJsonPath('details.reason_code', 'RETAKE_COOLDOWN');
+        $response->assertJsonPath('details.form_code', 'big5_120');
+        $response->assertJsonPath('details.scope_key', 'org+scale+identity+form');
+        $this->assertGreaterThan(0, (int) $response->json('details.retry_after_seconds'));
     }
 
     public function test_big5_retake_limit_blocks_when_max_attempts_reached_in_30_days(): void
@@ -56,9 +61,9 @@ final class Big5RetakeCooldownTest extends TestCase
         (new ScaleRegistrySeeder)->run();
 
         $anonId = 'anon_big5_retake_limit';
-        $this->createAttempt($anonId, now()->subDays(2));
-        $this->createAttempt($anonId, now()->subDays(10));
-        $this->createAttempt($anonId, now()->subDays(20));
+        $this->createAttempt($anonId, now()->subDays(2), 'big5_120');
+        $this->createAttempt($anonId, now()->subDays(10), 'big5_120');
+        $this->createAttempt($anonId, now()->subDays(20), 'big5_120');
 
         $response = $this->postJson('/api/v0.3/attempts/start', [
             'scale_code' => 'BIG5_OCEAN',
@@ -69,6 +74,91 @@ final class Big5RetakeCooldownTest extends TestCase
 
         $response->assertStatus(429);
         $response->assertJsonPath('error_code', 'RETAKE_LIMIT_EXCEEDED');
+        $response->assertJsonPath('details.code', 'RETAKE_LIMIT_EXCEEDED');
+        $response->assertJsonPath('details.reason_code', 'RETAKE_LIMIT_EXCEEDED');
+        $response->assertJsonPath('details.form_code', 'big5_120');
+        $response->assertJsonPath('details.scope_key', 'org+scale+identity+form');
+        $response->assertJsonPath('details.limit_window', '30_days');
+        $response->assertJsonPath('details.retry_after_seconds', null);
+    }
+
+    public function test_big5_retake_cooldown_is_form_aware_from_120_to_90(): void
+    {
+        (new ScaleRegistrySeeder)->run();
+
+        $anonId = 'anon_big5_form_aware_120_to_90';
+
+        $start120 = $this->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'BIG5_OCEAN',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'anon_id' => $anonId,
+            'form_code' => 'big5_120',
+        ]);
+        $start120->assertStatus(200);
+        $start120->assertJsonPath('form_code', 'big5_120');
+
+        $start90 = $this->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'BIG5_OCEAN',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'anon_id' => $anonId,
+            'form_code' => 'big5_90',
+        ]);
+        $start90->assertStatus(200);
+        $start90->assertJsonPath('form_code', 'big5_90');
+    }
+
+    public function test_big5_retake_cooldown_is_form_aware_from_90_to_120(): void
+    {
+        (new ScaleRegistrySeeder)->run();
+
+        $anonId = 'anon_big5_form_aware_90_to_120';
+
+        $start90 = $this->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'BIG5_OCEAN',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'anon_id' => $anonId,
+            'form_code' => 'big5_90',
+        ]);
+        $start90->assertStatus(200);
+        $start90->assertJsonPath('form_code', 'big5_90');
+
+        $start120 = $this->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'BIG5_OCEAN',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'anon_id' => $anonId,
+            'form_code' => 'big5_120',
+        ]);
+        $start120->assertStatus(200);
+        $start120->assertJsonPath('form_code', 'big5_120');
+    }
+
+    public function test_non_big5_scales_keep_start_behavior_unchanged(): void
+    {
+        (new ScaleRegistrySeeder)->run();
+
+        $anonId = 'anon_mbti_retake_control';
+
+        $first = $this->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'MBTI',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'anon_id' => $anonId,
+        ]);
+        $first->assertStatus(200);
+        $first->assertJsonPath('ok', true);
+
+        $second = $this->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'MBTI',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'anon_id' => $anonId,
+        ]);
+        $second->assertStatus(200);
+        $second->assertJsonPath('ok', true);
     }
 
     public function test_big5_retake_policy_reads_mapped_raw_policy_when_content_path_mode_is_v2(): void
@@ -108,8 +198,15 @@ final class Big5RetakeCooldownTest extends TestCase
         $this->assertSame(1, (int) ($policy['max_attempts_per_30_days'] ?? -1));
     }
 
-    private function createAttempt(string $anonId, \DateTimeInterface $startedAt): void
+    private function createAttempt(string $anonId, \DateTimeInterface $startedAt, string $formCode = 'big5_120'): void
     {
+        $normalizedFormCode = strtolower(trim($formCode)) === 'big5_90' ? 'big5_90' : 'big5_120';
+        $dirVersion = $normalizedFormCode === 'big5_90' ? 'v1-form-90' : 'v1';
+        $questionCount = $normalizedFormCode === 'big5_90' ? 90 : 120;
+        $scoringSpecVersion = $normalizedFormCode === 'big5_90'
+            ? 'big5_spec_2026Q2_form90_v1'
+            : 'big5_spec_2026Q1_v1';
+
         Attempt::query()->create([
             'id' => (string) Str::uuid(),
             'org_id' => 0,
@@ -118,15 +215,20 @@ final class Big5RetakeCooldownTest extends TestCase
             'scale_version' => 'v0.3',
             'region' => 'CN_MAINLAND',
             'locale' => 'zh-CN',
-            'question_count' => 120,
+            'question_count' => $questionCount,
             'client_platform' => 'test',
             'started_at' => $startedAt,
             'submitted_at' => $startedAt,
             'pack_id' => 'BIG5_OCEAN',
-            'dir_version' => 'v1',
-            'content_package_version' => 'v1',
-            'scoring_spec_version' => 'big5_spec_2026Q1_v1',
-            'answers_summary_json' => ['stage' => 'seed'],
+            'dir_version' => $dirVersion,
+            'content_package_version' => $dirVersion,
+            'scoring_spec_version' => $scoringSpecVersion,
+            'answers_summary_json' => [
+                'stage' => 'seed',
+                'meta' => [
+                    'form_code' => $normalizedFormCode,
+                ],
+            ],
         ]);
     }
 }
