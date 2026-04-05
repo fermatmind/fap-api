@@ -338,15 +338,37 @@ task('queue:reload-workers', function () {
             run('{{bin/php}} artisan queue:restart --ansi');
         });
 
-        run("sudo -n {$supervisorctl} reread");
-        run("sudo -n {$supervisorctl} update");
+        $supervisorctlAvailable = test('[ -x ' . escapeshellarg($supervisorctl) . ' ] || command -v supervisorctl >/dev/null 2>&1');
+        if (! $supervisorctlAvailable) {
+            if ($legacySystemdService !== '') {
+                $quotedService = escapeshellarg($legacySystemdService);
+                writeln('<comment>supervisorctl not found; fallback to legacy systemd queue service</comment>');
+                run("if sudo -n /usr/bin/systemctl list-unit-files {$quotedService} >/dev/null 2>&1; then sudo -n /usr/bin/systemctl restart {$quotedService}; else echo 'legacy queue systemd service not found: {$legacySystemdService}' >&2; fi");
+                return;
+            }
+
+            writeln('<comment>supervisorctl not found and no legacy systemd service configured; skip manager-specific queue reload</comment>');
+            return;
+        }
+
+        $resolvedSupervisorctl = trim((string) run(
+            'if [ -x ' . escapeshellarg($supervisorctl) . ' ]; then echo ' . escapeshellarg($supervisorctl) . '; else command -v supervisorctl; fi'
+        ));
+        $quotedSupervisorctl = escapeshellarg($resolvedSupervisorctl);
+
+        run("sudo -n {$quotedSupervisorctl} reread");
+        run("sudo -n {$quotedSupervisorctl} update");
 
         foreach ($requiredPrograms as $program) {
-            run("sudo -n {$supervisorctl} restart {$program}:* >/dev/null 2>&1 || sudo -n {$supervisorctl} restart {$program}");
+            $quotedProgramAll = escapeshellarg($program . ':*');
+            $quotedProgram = escapeshellarg($program);
+            run("sudo -n {$quotedSupervisorctl} restart {$quotedProgramAll} >/dev/null 2>&1 || sudo -n {$quotedSupervisorctl} restart {$quotedProgram}");
         }
 
         foreach ($optionalPrograms as $program) {
-            run("sudo -n {$supervisorctl} restart {$program}:* >/dev/null 2>&1 || sudo -n {$supervisorctl} restart {$program} >/dev/null 2>&1 || true");
+            $quotedProgramAll = escapeshellarg($program . ':*');
+            $quotedProgram = escapeshellarg($program);
+            run("sudo -n {$quotedSupervisorctl} restart {$quotedProgramAll} >/dev/null 2>&1 || sudo -n {$quotedSupervisorctl} restart {$quotedProgram} >/dev/null 2>&1 || true");
         }
 
         if ($legacySystemdService !== '') {
