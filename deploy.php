@@ -52,6 +52,7 @@ set('writable_dirs', [
 set('writable_mode', 'chmod');
 set('writable_chmod_mode', '0775');
 set('writable_use_sudo', false);
+set('cleanup_use_sudo', true);
 
 /**
  * ======================================================
