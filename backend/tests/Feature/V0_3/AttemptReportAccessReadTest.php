@@ -7,10 +7,12 @@ namespace Tests\Feature\V0_3;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Commerce\EntitlementManager;
+use App\Support\SchemaBaseline;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Mockery\MockInterface;
 use Tests\TestCase;
@@ -478,6 +480,94 @@ final class AttemptReportAccessReadTest extends TestCase
             ->withArgs(function (string $message, array $context) use ($attemptId): bool {
                 return $message === 'ATTEMPT_UNLOCK_PROJECTION_REPAIR_FALLBACK_APPLIED'
                     && (string) ($context['attempt_id'] ?? '') === $attemptId;
+            });
+    }
+
+    public function test_it_keeps_report_access_200_when_invite_snapshot_table_is_missing(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_access_invite_table_missing';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId, 'mbti_144');
+        $this->createResult($attemptId, 'mbti_144');
+
+        if (Schema::hasTable('attempt_invite_unlocks')) {
+            Schema::drop('attempt_invite_unlocks');
+        }
+        SchemaBaseline::clearCache();
+
+        Log::spy();
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('attempt_id', $attemptId);
+        $response->assertJsonPath('access_state', 'locked');
+        $response->assertJsonPath('report_state', 'ready');
+        $response->assertJsonPath('actions.page_href', "/result/{$attemptId}");
+        $response->assertJsonPath('payload.fallback', true);
+        $response->assertJsonPath('payload.result_exists', true);
+        $response->assertJsonPath('payload.invite_snapshot_fallback', true);
+        $response->assertJsonPath('payload.invite_snapshot_error_code', 'invite_snapshot_table_missing');
+        $response->assertJsonPath('unlock_stage', 'locked');
+        $response->assertJsonPath('unlock_source', 'none');
+
+        Log::shouldHaveReceived('warning')
+            ->atLeast()->once()
+            ->withArgs(function (string $message, array $context) use ($attemptId): bool {
+                return $message === 'REPORT_ACCESS_INVITE_SNAPSHOT_FAILED'
+                    && (string) ($context['attempt_id'] ?? '') === $attemptId
+                    && (string) ($context['failure_code'] ?? '') === 'invite_snapshot_table_missing';
+            });
+    }
+
+    public function test_it_keeps_report_access_200_when_projection_table_is_missing(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_access_projection_table_missing';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId, 'mbti_144');
+        $this->createResult($attemptId, 'mbti_144');
+
+        if (Schema::hasTable('unified_access_projections')) {
+            Schema::drop('unified_access_projections');
+        }
+        SchemaBaseline::clearCache();
+
+        Log::spy();
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('attempt_id', $attemptId);
+        $response->assertJsonPath('access_state', 'locked');
+        $response->assertJsonPath('report_state', 'ready');
+        $this->assertContains((string) $response->json('reason_code'), [
+            'projection_read_failed_result_ready_fallback',
+            'projection_repair_failed_result_ready_fallback',
+        ]);
+        $response->assertJsonPath('actions.page_href', "/result/{$attemptId}");
+        $response->assertJsonPath('payload.fallback', true);
+        $response->assertJsonPath('payload.result_exists', true);
+        $response->assertJsonPath('payload.projection_read_fallback', true);
+        $response->assertJsonPath('payload.projection_error_code', 'projection_table_missing');
+        $response->assertJsonPath('unlock_stage', 'locked');
+        $response->assertJsonPath('unlock_source', 'none');
+
+        Log::shouldHaveReceived('warning')
+            ->atLeast()->once()
+            ->withArgs(function (string $message, array $context) use ($attemptId): bool {
+                return $message === 'REPORT_ACCESS_PROJECTION_READ_FAILED'
+                    && (string) ($context['attempt_id'] ?? '') === $attemptId
+                    && (string) ($context['failure_code'] ?? '') === 'projection_table_missing';
             });
     }
 }

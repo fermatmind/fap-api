@@ -36,9 +36,11 @@ use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportGatekeeper;
 use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Support\OrgContext;
+use App\Support\SchemaBaseline;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 
 class AttemptReadController extends Controller
@@ -566,9 +568,14 @@ class AttemptReadController extends Controller
             }
         }
 
-        $projection = UnifiedAccessProjection::query()
-            ->where('attempt_id', (string) $attempt->id)
-            ->first();
+        $projectionReadFailed = false;
+        $projectionReadFailureCode = null;
+        $projection = $this->resolveProjectionForReportAccess(
+            $orgId,
+            (string) $attempt->id,
+            $projectionReadFailed,
+            $projectionReadFailureCode
+        );
         $submissionProjectionStates = $this->submissionProjectionStates($resultExists, $submissionPayload);
 
         if ($submissionProjectionStates !== null) {
@@ -610,6 +617,21 @@ class AttemptReadController extends Controller
                 'access_state' => $accessState,
                 'report_state' => $reportState,
                 'pdf_state' => $pdfState,
+            ]);
+        }
+
+        if ($projectionReadFailed) {
+            if (in_array($reasonCode, ['', 'projection_missing_result_ready', 'projection_missing_result_pending'], true)) {
+                $reasonCode = $resultExists
+                    ? 'projection_read_failed_result_ready_fallback'
+                    : 'projection_read_failed_result_pending_fallback';
+            }
+
+            $payloadJson = array_merge($payloadJson, [
+                'fallback' => true,
+                'projection_read_fallback' => true,
+                'projection_error_code' => $projectionReadFailureCode,
+                'result_exists' => $resultExists,
             ]);
         }
 
@@ -673,7 +695,20 @@ class AttemptReadController extends Controller
         ));
         $responsePayload['unlock_stage'] = $unlockStage;
         $responsePayload['unlock_source'] = $unlockSource;
-        $inviteSnapshot = $this->resolveInviteSnapshot((int) ($attempt->org_id ?? 0), (string) ($attempt->id ?? ''));
+        $inviteSnapshotFailureCode = null;
+        $inviteSnapshot = $this->resolveInviteSnapshot(
+            (int) ($attempt->org_id ?? 0),
+            (string) ($attempt->id ?? ''),
+            $inviteSnapshotFailureCode
+        );
+        if ($inviteSnapshotFailureCode !== null) {
+            $payloadJson = array_merge($payloadJson, [
+                'fallback' => true,
+                'invite_snapshot_fallback' => true,
+                'invite_snapshot_error_code' => $inviteSnapshotFailureCode,
+                'result_exists' => $resultExists,
+            ]);
+        }
         $inviteSummary = $this->inviteUnlockSummaryBuilder->build(
             (string) ($attempt->scale_code ?? ''),
             $unlockStage,
@@ -691,17 +726,82 @@ class AttemptReadController extends Controller
     /**
      * @return array{completed_invitees:int,required_invitees:int}|null
      */
-    private function resolveInviteSnapshot(int $orgId, string $attemptId): ?array
+    private function resolveInviteSnapshot(int $orgId, string $attemptId, ?string &$failureCode = null): ?array
     {
+        $failureCode = null;
         $attemptId = trim($attemptId);
         if ($attemptId === '') {
             return null;
         }
 
-        $invite = AttemptInviteUnlock::query()
-            ->where('target_org_id', $orgId)
-            ->where('target_attempt_id', $attemptId)
-            ->first(['required_invitees', 'completed_invitees']);
+        $table = 'attempt_invite_unlocks';
+        if (! SchemaBaseline::hasTable($table)) {
+            $failureCode = 'invite_snapshot_table_missing';
+            Log::warning('REPORT_ACCESS_INVITE_SNAPSHOT_FAILED', [
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'branch' => 'schema_guard',
+                'source' => __METHOD__,
+                'failure_code' => $failureCode,
+            ]);
+
+            return null;
+        }
+
+        $requiredColumns = ['target_org_id', 'target_attempt_id', 'required_invitees', 'completed_invitees'];
+        $missingColumns = [];
+        foreach ($requiredColumns as $column) {
+            if (! SchemaBaseline::hasColumn($table, $column)) {
+                $missingColumns[] = $column;
+            }
+        }
+        if ($missingColumns !== []) {
+            $failureCode = 'invite_snapshot_columns_missing';
+            Log::warning('REPORT_ACCESS_INVITE_SNAPSHOT_FAILED', [
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'branch' => 'schema_guard',
+                'source' => __METHOD__,
+                'failure_code' => $failureCode,
+                'missing_columns' => $missingColumns,
+            ]);
+
+            return null;
+        }
+
+        try {
+            $invite = AttemptInviteUnlock::query()
+                ->where('target_org_id', $orgId)
+                ->where('target_attempt_id', $attemptId)
+                ->first(['required_invitees', 'completed_invitees']);
+        } catch (QueryException $e) {
+            $failureCode = 'invite_snapshot_query_exception';
+            Log::error('REPORT_ACCESS_INVITE_SNAPSHOT_FAILED', [
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'branch' => 'query_exception',
+                'source' => __METHOD__,
+                'failure_code' => $failureCode,
+                'exception_class' => $e::class,
+                'message' => $e->getMessage(),
+                'sql_state' => $e->errorInfo[0] ?? null,
+            ]);
+
+            return null;
+        } catch (\Throwable $e) {
+            $failureCode = 'invite_snapshot_runtime_exception';
+            Log::error('REPORT_ACCESS_INVITE_SNAPSHOT_FAILED', [
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'branch' => 'runtime_exception',
+                'source' => __METHOD__,
+                'failure_code' => $failureCode,
+                'exception_class' => $e::class,
+                'message' => $e->getMessage(),
+            ]);
+
+            return null;
+        }
 
         if (! $invite instanceof AttemptInviteUnlock) {
             return null;
@@ -711,6 +811,85 @@ class AttemptReadController extends Controller
             'required_invitees' => max(1, (int) ($invite->required_invitees ?? 2)),
             'completed_invitees' => max(0, (int) ($invite->completed_invitees ?? 0)),
         ];
+    }
+
+    private function resolveProjectionForReportAccess(
+        int $orgId,
+        string $attemptId,
+        bool &$readFailed = false,
+        ?string &$failureCode = null
+    ): ?UnifiedAccessProjection {
+        $readFailed = false;
+        $failureCode = null;
+        $attemptId = trim($attemptId);
+        if ($attemptId === '') {
+            return null;
+        }
+
+        $table = 'unified_access_projections';
+        if (! SchemaBaseline::hasTable($table)) {
+            $readFailed = true;
+            $failureCode = 'projection_table_missing';
+            Log::warning('REPORT_ACCESS_PROJECTION_READ_FAILED', [
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'branch' => 'schema_guard',
+                'source' => __METHOD__,
+                'failure_code' => $failureCode,
+            ]);
+
+            return null;
+        }
+
+        if (! SchemaBaseline::hasColumn($table, 'attempt_id')) {
+            $readFailed = true;
+            $failureCode = 'projection_attempt_id_column_missing';
+            Log::warning('REPORT_ACCESS_PROJECTION_READ_FAILED', [
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'branch' => 'schema_guard',
+                'source' => __METHOD__,
+                'failure_code' => $failureCode,
+                'missing_columns' => ['attempt_id'],
+            ]);
+
+            return null;
+        }
+
+        try {
+            return UnifiedAccessProjection::query()
+                ->where('attempt_id', $attemptId)
+                ->first();
+        } catch (QueryException $e) {
+            $readFailed = true;
+            $failureCode = 'projection_query_exception';
+            Log::error('REPORT_ACCESS_PROJECTION_READ_FAILED', [
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'branch' => 'query_exception',
+                'source' => __METHOD__,
+                'failure_code' => $failureCode,
+                'exception_class' => $e::class,
+                'message' => $e->getMessage(),
+                'sql_state' => $e->errorInfo[0] ?? null,
+            ]);
+
+            return null;
+        } catch (\Throwable $e) {
+            $readFailed = true;
+            $failureCode = 'projection_runtime_exception';
+            Log::error('REPORT_ACCESS_PROJECTION_READ_FAILED', [
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'branch' => 'runtime_exception',
+                'source' => __METHOD__,
+                'failure_code' => $failureCode,
+                'exception_class' => $e::class,
+                'message' => $e->getMessage(),
+            ]);
+
+            return null;
+        }
     }
 
     private function resolveAttemptForReportRead(
