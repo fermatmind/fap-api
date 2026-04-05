@@ -396,7 +396,7 @@ jobs:
           esac
 
           LOGIN_URL="https://${OPS_HOST}/ops/login"
-          THEME_URL="https://${OPS_HOST}/css/filament/ops/theme.css"
+          THEME_URL="https://${OPS_HOST}/css/app/ops-theme.css"
           APP_CSS_URL="https://${OPS_HOST}/css/filament/filament/app.css"
           FORMS_URL="https://${OPS_HOST}/css/filament/forms/forms.css"
           SUPPORT_URL="https://${OPS_HOST}/css/filament/support/support.css"
@@ -450,7 +450,7 @@ jobs:
           retry "Ops theme content assertion" 5 ssh_remote "if curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${THEME_URL}' | grep -Eq '@tailwind|@config|vendor/filament/filament/resources/css/base\\.css'; then exit 1; fi"
 
           echo "Ops login reference assertion"
-          retry "Ops theme reference assertion" 5 ssh_remote "curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${LOGIN_URL}' | grep -q 'css/filament/ops/theme.css'"
+          retry "Ops theme reference assertion" 5 ssh_remote "curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${LOGIN_URL}' | grep -q 'css/app/ops-theme.css'"
           retry "Ops app.css reference assertion" 5 ssh_remote "curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${LOGIN_URL}' | grep -q 'css/filament/filament/app.css'"
           retry "Ops forms.css reference assertion" 5 ssh_remote "curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${LOGIN_URL}' | grep -q 'css/filament/forms/forms.css'"
           retry "Ops support.css reference assertion" 5 ssh_remote "curl -fsS --resolve '${OPS_HOST}:443:127.0.0.1' '${LOGIN_URL}' | grep -q 'css/filament/support/support.css'"
