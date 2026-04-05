@@ -39,6 +39,7 @@ use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class AttemptReadController extends Controller
 {
@@ -549,8 +550,20 @@ class AttemptReadController extends Controller
             ->where('org_id', $orgId)
             ->where('attempt_id', (string) $attempt->id)
             ->exists();
+        $repairFailed = false;
+        $repairFailureCode = null;
         if ($resultExists && strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI') {
-            $this->projectionRepair->repairResultReadyProjectionIfNeeded($orgId, (string) $attempt->id);
+            try {
+                $this->projectionRepair->repairResultReadyProjectionIfNeeded($orgId, (string) $attempt->id);
+            } catch (\Throwable $e) {
+                $repairFailed = true;
+                $repairFailureCode = 'projection_repair_runtime_exception';
+                Log::error('REPORT_ACCESS_PROJECTION_REPAIR_FAILED', [
+                    'org_id' => $orgId,
+                    'attempt_id' => (string) $attempt->id,
+                    'exception' => $e,
+                ]);
+            }
         }
 
         $projection = UnifiedAccessProjection::query()
@@ -577,6 +590,27 @@ class AttemptReadController extends Controller
             $payloadJson = is_array($projection?->payload_json) ? $projection->payload_json : $fallbackStates['payload_json'];
             $producedAt = optional($projection?->produced_at)->toIso8601String();
             $refreshedAt = optional($projection?->refreshed_at)->toIso8601String();
+        }
+
+        if ($repairFailed && $resultExists) {
+            $reasonCode = in_array($reasonCode, ['', 'projection_missing_result_ready'], true)
+                ? 'projection_repair_failed_result_ready_fallback'
+                : $reasonCode;
+            $payloadJson = array_merge($payloadJson, [
+                'fallback' => true,
+                'result_exists' => true,
+                'repair_fallback' => true,
+                'repair_error_code' => $repairFailureCode,
+            ]);
+
+            Log::warning('REPORT_ACCESS_PROJECTION_REPAIR_FALLBACK_APPLIED', [
+                'org_id' => $orgId,
+                'attempt_id' => (string) $attempt->id,
+                'reason_code' => $reasonCode,
+                'access_state' => $accessState,
+                'report_state' => $reportState,
+                'pdf_state' => $pdfState,
+            ]);
         }
 
         $mbtiFormSummary = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI'
