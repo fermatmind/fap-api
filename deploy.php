@@ -561,9 +561,16 @@ $maxRecentPending = max(0, (int) config("ops.deploy_queue_smoke.max_recent_pendi
 
 $queueConnectionName = (string) config("queue.default", "redis");
 $queueConnection = (array) config("queue.connections." . $queueConnectionName, []);
-if (($queueConnection["driver"] ?? "") !== "redis") {
-    fwrite(STDERR, "deploy queue smoke requires redis queue driver\n");
-    exit(1);
+$queueDriver = (string) ($queueConnection["driver"] ?? "");
+if ($queueDriver !== "redis") {
+    echo json_encode([
+        "queue" => $queue,
+        "queue_connection" => $queueConnectionName,
+        "queue_driver" => $queueDriver === "" ? "unknown" : $queueDriver,
+        "skipped" => true,
+        "reason" => "non_redis_queue_driver",
+    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL;
+    exit(0);
 }
 
 $redisConnection = (string) ($queueConnection["connection"] ?? "default");
