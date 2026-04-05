@@ -34,7 +34,23 @@ final class AttemptUnlockProjectionRepairService
             return $existing;
         }
 
-        $unlockState = $this->entitlements->resolveAttemptUnlockState($orgId, $attemptId);
+        try {
+            $unlockState = $this->entitlements->resolveAttemptUnlockState($orgId, $attemptId);
+        } catch (\Throwable $e) {
+            Log::error('ATTEMPT_UNLOCK_PROJECTION_REPAIR_UNLOCK_STATE_FAILED', [
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'existing_reason_code' => $existing?->reason_code,
+                'exception' => $e,
+            ]);
+
+            if ($existing instanceof UnifiedAccessProjection) {
+                return $existing;
+            }
+
+            return $this->persistConservativeFallbackProjection($attemptId, $existing);
+        }
+
         $unlockStage = ReportAccess::normalizeUnlockStage((string) ($unlockState['unlock_stage'] ?? ReportAccess::UNLOCK_STAGE_LOCKED));
         if ($unlockStage === ReportAccess::UNLOCK_STAGE_LOCKED) {
             return $existing;
@@ -105,6 +121,76 @@ final class AttemptUnlockProjectionRepairService
         } catch (\Throwable $e) {
             Log::error('ATTEMPT_UNLOCK_PROJECTION_REPAIR_FAILED', [
                 'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'existing_reason_code' => $existing?->reason_code,
+                'exception' => $e,
+            ]);
+
+            return $existing;
+        }
+    }
+
+    private function persistConservativeFallbackProjection(
+        string $attemptId,
+        ?UnifiedAccessProjection $existing
+    ): ?UnifiedAccessProjection {
+        $existingPayload = is_array($existing?->payload_json) ? $existing->payload_json : [];
+        $existingActions = is_array($existing?->actions_json) ? $existing->actions_json : [];
+        $pdfReady = strtolower(trim((string) ($existing?->pdf_state ?? ''))) === 'ready';
+        $reasonCode = 'projection_repair_failed_fallback_locked';
+        $patch = [
+            'access_state' => 'locked',
+            'report_state' => 'ready',
+            'pdf_state' => $pdfReady ? 'ready' : 'missing',
+            'reason_code' => $reasonCode,
+            'actions_json' => array_merge($existingActions, [
+                'report' => true,
+                'pdf' => $pdfReady,
+                'unlock' => false,
+            ]),
+            'payload_json' => array_merge($existingPayload, [
+                'attempt_id' => $attemptId,
+                'fallback' => true,
+                'result_exists' => true,
+                'repair_fallback' => true,
+                'repair_source' => 'attempt_unlock_projection_repair',
+                'repair_error_code' => 'unlock_state_resolution_failed',
+                'unlock_stage' => ReportAccess::UNLOCK_STAGE_LOCKED,
+                'unlock_source' => ReportAccess::UNLOCK_SOURCE_NONE,
+                'access_level' => ReportAccess::REPORT_ACCESS_FREE,
+                'variant' => ReportAccess::VARIANT_FREE,
+                'modules_allowed' => ReportAccess::defaultModulesAllowedForLocked(ReportAccess::SCALE_MBTI),
+                'modules_preview' => ReportAccess::allDefaultModulesOffered(ReportAccess::SCALE_MBTI),
+            ]),
+        ];
+        $meta = [
+            'source_system' => 'attempt_unlock_projection_repair',
+            'source_ref' => 'result#'.$attemptId,
+            'actor_type' => 'system',
+            'actor_id' => 'attempt_unlock_projection_repair',
+            'reason_code' => $reasonCode,
+        ];
+
+        try {
+            $projection = $this->projectionWriter->refreshAttemptProjection($attemptId, $patch, $meta);
+
+            if (! $projection instanceof UnifiedAccessProjection) {
+                $projection = $this->persistProjectionPatch($attemptId, $patch, $existing);
+                Log::warning('ATTEMPT_UNLOCK_PROJECTION_REPAIR_FALLBACK_WRITER_UNAVAILABLE', [
+                    'attempt_id' => $attemptId,
+                    'existing_reason_code' => $existing?->reason_code,
+                ]);
+            }
+
+            Log::warning('ATTEMPT_UNLOCK_PROJECTION_REPAIR_FALLBACK_APPLIED', [
+                'attempt_id' => $attemptId,
+                'reason_code' => $reasonCode,
+                'pdf_ready' => $pdfReady,
+            ]);
+
+            return $projection;
+        } catch (\Throwable $e) {
+            Log::error('ATTEMPT_UNLOCK_PROJECTION_REPAIR_FALLBACK_FAILED', [
                 'attempt_id' => $attemptId,
                 'existing_reason_code' => $existing?->reason_code,
                 'exception' => $e,

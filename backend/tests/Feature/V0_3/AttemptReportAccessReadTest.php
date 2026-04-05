@@ -6,10 +6,13 @@ namespace Tests\Feature\V0_3;
 
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\Commerce\EntitlementManager;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Mockery\MockInterface;
 use Tests\TestCase;
 
 final class AttemptReportAccessReadTest extends TestCase
@@ -383,5 +386,98 @@ final class AttemptReportAccessReadTest extends TestCase
         $modulesAllowed = (array) $response->json('payload.modules_allowed');
         $this->assertContains('core_free', $modulesAllowed);
         $this->assertContains('career', $modulesAllowed);
+    }
+
+    public function test_it_keeps_result_ready_report_access_available_for_mbti_144_when_projection_is_missing(): void
+    {
+        $this->assertReportAccessAvailableForMbtiForm('mbti_144');
+    }
+
+    public function test_it_keeps_result_ready_report_access_available_for_mbti_93_when_projection_is_missing(): void
+    {
+        $this->assertReportAccessAvailableForMbtiForm('mbti_93');
+    }
+
+    private function assertReportAccessAvailableForMbtiForm(string $formCode): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_access_form_'.$formCode;
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId, $formCode);
+        $this->createResult($attemptId, $formCode);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('attempt_id', $attemptId);
+        $response->assertJsonPath('access_state', 'locked');
+        $response->assertJsonPath('report_state', 'ready');
+        $response->assertJsonPath('reason_code', 'projection_missing_result_ready');
+        $response->assertJsonPath('actions.page_href', "/result/{$attemptId}");
+        $response->assertJsonPath('payload.fallback', true);
+        $response->assertJsonPath('payload.result_exists', true);
+        $response->assertJsonPath('mbti_form_v1.form_code', $formCode);
+    }
+
+    public function test_it_returns_conservative_report_access_fallback_when_unlock_state_resolution_fails(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $anonId = 'anon_access_repair_fallback';
+        $token = $this->issueAnonToken($anonId);
+        $this->createAttempt($attemptId, $anonId, 'mbti_144');
+        $this->createResult($attemptId, 'mbti_144');
+        $this->createActiveGrant($attemptId, $anonId);
+
+        Log::spy();
+        $this->mock(EntitlementManager::class, function (MockInterface $mock): void {
+            $mock->shouldReceive('resolveAttemptUnlockState')
+                ->once()
+                ->andThrow(new \RuntimeException('simulated unlock-state failure'));
+        });
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('attempt_id', $attemptId);
+        $response->assertJsonPath('access_state', 'locked');
+        $response->assertJsonPath('report_state', 'ready');
+        $response->assertJsonPath('reason_code', 'projection_repair_failed_fallback_locked');
+        $response->assertJsonPath('actions.page_href', "/result/{$attemptId}");
+        $response->assertJsonPath('payload.fallback', true);
+        $response->assertJsonPath('payload.result_exists', true);
+        $response->assertJsonPath('payload.repair_fallback', true);
+        $response->assertJsonPath('payload.repair_error_code', 'unlock_state_resolution_failed');
+        $response->assertJsonPath('unlock_stage', 'locked');
+        $response->assertJsonPath('unlock_source', 'none');
+        $response->assertJsonPath('payload.access_level', 'free');
+        $response->assertJsonPath('payload.variant', 'free');
+        $response->assertJsonPath('mbti_form_v1.form_code', 'mbti_144');
+        $this->assertDatabaseHas('unified_access_projections', [
+            'attempt_id' => $attemptId,
+            'reason_code' => 'projection_repair_failed_fallback_locked',
+        ]);
+
+        Log::shouldHaveReceived('error')
+            ->once()
+            ->withArgs(function (string $message, array $context) use ($attemptId): bool {
+                return $message === 'ATTEMPT_UNLOCK_PROJECTION_REPAIR_UNLOCK_STATE_FAILED'
+                    && (string) ($context['attempt_id'] ?? '') === $attemptId;
+            });
+        Log::shouldHaveReceived('warning')
+            ->atLeast()->once()
+            ->withArgs(function (string $message, array $context) use ($attemptId): bool {
+                return $message === 'ATTEMPT_UNLOCK_PROJECTION_REPAIR_FALLBACK_APPLIED'
+                    && (string) ($context['attempt_id'] ?? '') === $attemptId;
+            });
     }
 }
