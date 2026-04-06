@@ -77,6 +77,26 @@ final class AttemptInviteUnlockFoundationTest extends TestCase
         $this->assertSame(1, AttemptInviteUnlock::query()->count());
     }
 
+    public function test_get_invite_unlock_progress_without_invite_row_reuses_entitlement_unlock_state(): void
+    {
+        $anonId = 'anon_invite_progress_no_row';
+        $attemptId = $this->createAttemptWithOptionalResult($anonId, 'MBTI', true, true);
+        $this->createActiveGrant($attemptId, $anonId, 'MBTI_REPORT_FULL');
+        $headers = $this->authHeaders($anonId);
+
+        $response = $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/invite-unlocks");
+        $response->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('has_invite', false)
+            ->assertJsonPath('required_invitees', 2)
+            ->assertJsonPath('completed_invitees', 0)
+            ->assertJsonPath('unlock_stage', 'full')
+            ->assertJsonPath('unlock_source', 'payment')
+            ->assertJsonPath('invite_unlock_v1.unlock_stage', 'full')
+            ->assertJsonPath('invite_unlock_v1.unlock_source', 'payment')
+            ->assertJsonPath('invite_unlock_diag_v1.status', 'full_unlock');
+    }
+
     public function test_completion_service_applies_minimum_anti_abuse_and_stable_012_progress(): void
     {
         $inviteService = app(AttemptInviteUnlockService::class);
@@ -306,6 +326,33 @@ final class AttemptInviteUnlockFoundationTest extends TestCase
             'Authorization' => 'Bearer '.$this->issueAnonToken($anonId),
             'X-Anon-Id' => $anonId,
         ];
+    }
+
+    private function createActiveGrant(
+        string $attemptId,
+        string $anonId,
+        string $benefitCode = 'MBTI_REPORT_FULL',
+        ?string $orderNo = null,
+        ?array $meta = null,
+    ): void {
+        DB::table('benefit_grants')->insert([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'user_id' => $anonId,
+            'benefit_code' => $benefitCode,
+            'scope' => 'attempt',
+            'attempt_id' => $attemptId,
+            'order_no' => $orderNo ?? 'ORDER-'.$attemptId,
+            'status' => 'active',
+            'expires_at' => null,
+            'benefit_ref' => $anonId,
+            'benefit_type' => 'report_unlock',
+            'source_order_id' => (string) Str::uuid(),
+            'source_event_id' => null,
+            'meta_json' => $meta !== null ? json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) : null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 
     private function issueAnonToken(string $anonId): string
