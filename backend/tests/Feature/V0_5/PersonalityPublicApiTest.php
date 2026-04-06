@@ -206,6 +206,8 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('answer_surface_v1.answer_scope', 'public_indexable_detail')
             ->assertJsonPath('answer_surface_v1.surface_type', 'personality_public_detail')
             ->assertJsonPath('answer_surface_v1.summary_blocks.0.key', 'type_summary')
+            ->assertJsonPath('answer_surface_v1.scene_summary_blocks.0.key', 'career_direction')
+            ->assertJsonPath('answer_surface_v1.scene_summary_blocks.0.href', '/en/career/recommendations')
             ->assertJsonPath('answer_surface_v1.next_step_blocks.0.key', 'start_test')
             ->assertJsonPath('mbti_public_projection_v1.display_type', 'INTJ')
             ->assertJsonPath('mbti_public_projection_v1.canonical_type_code', 'INTJ')

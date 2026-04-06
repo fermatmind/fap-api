@@ -242,6 +242,8 @@ final class TopicsPublicApiTest extends TestCase
             ->assertJsonPath('answer_surface_v1.answer_scope', 'public_indexable_detail')
             ->assertJsonPath('answer_surface_v1.surface_type', 'topic_public_detail')
             ->assertJsonPath('answer_surface_v1.summary_blocks.0.key', 'topic_summary')
+            ->assertJsonPath('answer_surface_v1.scene_summary_blocks.0.key', 'career_direction')
+            ->assertJsonPath('answer_surface_v1.scene_summary_blocks.0.href', '/en/career/recommendations')
             ->assertJsonPath('answer_surface_v1.next_step_blocks.0.key', 'featured')
             ->assertJsonPath('entry_groups.featured.0.entry_type', 'personality_profile')
             ->assertJsonPath('entry_groups.featured.0.title', (string) $personality->title)
