@@ -33,6 +33,10 @@ class StartAttemptRequest extends FormRequest
             'invite_unlock_code' => 64,
             'share_click_id' => 128,
             'entrypoint' => 128,
+            'entry_surface' => 128,
+            'source_page_type' => 64,
+            'target_action' => 128,
+            'test_slug' => 128,
             'landing_path' => 2048,
         ] as $field => $maxLength) {
             $value = $this->normalizeString($this->input($field), $maxLength);
@@ -77,6 +81,10 @@ class StartAttemptRequest extends FormRequest
             'invite_unlock_code' => ['nullable', 'string', 'max:64'],
             'share_click_id' => ['nullable', 'string', 'max:128'],
             'entrypoint' => ['nullable', 'string', 'max:128'],
+            'entry_surface' => ['nullable', 'string', 'max:128'],
+            'source_page_type' => ['nullable', 'string', 'max:64'],
+            'target_action' => ['nullable', 'string', 'max:128'],
+            'test_slug' => ['nullable', 'string', 'max:128'],
             'landing_path' => ['nullable', 'string', 'max:2048'],
             'utm' => ['nullable'],
             'utm_source' => ['nullable', 'string', 'max:512'],

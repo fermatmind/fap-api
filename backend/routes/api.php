@@ -14,6 +14,7 @@ use App\Http\Controllers\API\V0_3\ComplianceDsarController;
 use App\Http\Controllers\API\V0_3\EmailCaptureController;
 use App\Http\Controllers\API\V0_3\EmailPreferenceController;
 use App\Http\Controllers\API\V0_3\MbtiCompareInviteController;
+use App\Http\Controllers\API\V0_3\MbtiAttributionEventController;
 use App\Http\Controllers\API\V0_3\MeController as MeV03Controller;
 use App\Http\Controllers\API\V0_3\OrgInvitesController;
 use App\Http\Controllers\API\V0_3\OrgsController;
@@ -280,6 +281,12 @@ Route::prefix('v0.3')->middleware([
                 'throttle:api_track',
             ])
             ->where('shareId', '[A-Za-z0-9_-]{6,128}');
+        Route::post('/analytics/mbti-attribution-events', [MbtiAttributionEventController::class, 'store'])
+            ->middleware([
+                \App\Http\Middleware\LimitApiPublicPayloadSize::class,
+                'throttle:api_track',
+            ])
+            ->name('api.v0_3.analytics.mbti_attribution_events.store');
         Route::get('/compare/mbti/{inviteId}', [MbtiCompareInviteController::class, 'show'])
             ->middleware([
                 \App\Http\Middleware\FmTokenOptional::class,
