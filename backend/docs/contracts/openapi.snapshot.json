@@ -147,6 +147,30 @@
                 ]
             }
         },
+        "/api/v0.3/analytics/mbti-attribution-events": {
+            "post": {
+                "operationId": "api.v0_3.analytics.mbti_attribution_events.store",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\MbtiAttributionEventController@store",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\LimitApiPublicPayloadSize",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_track"
+                ],
+                "x-laravel-name": "api.v0_3.analytics.mbti_attribution_events.store"
+            }
+        },
         "/api/v0.3/attempts/start": {
             "post": {
                 "operationId": "api.v0_3.attempts.start",
