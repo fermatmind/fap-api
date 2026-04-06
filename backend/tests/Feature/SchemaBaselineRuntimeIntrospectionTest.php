@@ -35,8 +35,18 @@ final class SchemaBaselineRuntimeIntrospectionTest extends TestCase
 
     public function test_has_table_and_column_reflect_runtime_schema_truth(): void
     {
+        $tableReason = null;
+        $tableException = null;
+        $columnReason = null;
+        $columnException = null;
         $this->assertFalse(SchemaBaseline::hasTable($this->tableName));
+        $this->assertFalse(SchemaBaseline::hasTableWithMeta($this->tableName, $tableReason, $tableException));
+        $this->assertSame('table_missing', $tableReason);
+        $this->assertNull($tableException);
         $this->assertFalse(SchemaBaseline::hasColumn($this->tableName, 'alpha'));
+        $this->assertFalse(SchemaBaseline::hasColumnWithMeta($this->tableName, 'alpha', $columnReason, $columnException));
+        $this->assertSame('table_missing', $columnReason);
+        $this->assertNull($columnException);
 
         Schema::create($this->tableName, function (Blueprint $table): void {
             $table->bigIncrements('id');
@@ -46,8 +56,17 @@ final class SchemaBaselineRuntimeIntrospectionTest extends TestCase
         SchemaBaseline::clearCache();
 
         $this->assertTrue(SchemaBaseline::hasTable($this->tableName));
+        $this->assertTrue(SchemaBaseline::hasTableWithMeta($this->tableName, $tableReason, $tableException));
+        $this->assertSame('exists', $tableReason);
+        $this->assertNull($tableException);
         $this->assertTrue(SchemaBaseline::hasColumn($this->tableName, 'alpha'));
+        $this->assertTrue(SchemaBaseline::hasColumnWithMeta($this->tableName, 'alpha', $columnReason, $columnException));
+        $this->assertSame('exists', $columnReason);
+        $this->assertNull($columnException);
         $this->assertFalse(SchemaBaseline::hasColumn($this->tableName, 'beta'));
+        $this->assertFalse(SchemaBaseline::hasColumnWithMeta($this->tableName, 'beta', $columnReason, $columnException));
+        $this->assertSame('column_missing', $columnReason);
+        $this->assertNull($columnException);
 
         Schema::dropIfExists($this->tableName);
         SchemaBaseline::clearCache();
@@ -81,9 +100,14 @@ final class SchemaBaselineRuntimeIntrospectionTest extends TestCase
 
     public function test_feature_gate_still_applies_before_runtime_schema_truth(): void
     {
+        $tableReason = null;
+        $tableException = null;
         config()->set('fap.features.analytics', false);
         SchemaBaseline::clearCache();
         $this->assertFalse(SchemaBaseline::hasTable('events'));
+        $this->assertFalse(SchemaBaseline::hasTableWithMeta('events', $tableReason, $tableException));
+        $this->assertSame('feature_disabled', $tableReason);
+        $this->assertNull($tableException);
 
         config()->set('fap.features.analytics', true);
         SchemaBaseline::clearCache();

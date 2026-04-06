@@ -735,14 +735,20 @@ class AttemptReadController extends Controller
         }
 
         $table = 'attempt_invite_unlocks';
-        if (! SchemaBaseline::hasTable($table)) {
-            $failureCode = 'invite_snapshot_table_missing';
+        $tableCheckReason = null;
+        $tableCheckExceptionClass = null;
+        if (! SchemaBaseline::hasTableWithMeta($table, $tableCheckReason, $tableCheckExceptionClass)) {
+            $failureCode = $tableCheckReason === 'schema_query_exception'
+                ? 'invite_snapshot_schema_guard_exception'
+                : 'invite_snapshot_table_missing';
             Log::warning('REPORT_ACCESS_INVITE_SNAPSHOT_FAILED', [
                 'org_id' => $orgId,
                 'attempt_id' => $attemptId,
                 'branch' => 'schema_guard',
                 'source' => __METHOD__,
                 'failure_code' => $failureCode,
+                'schema_guard_reason' => $tableCheckReason,
+                'schema_guard_exception_class' => $tableCheckExceptionClass,
             ]);
 
             return null;
@@ -750,10 +756,36 @@ class AttemptReadController extends Controller
 
         $requiredColumns = ['target_org_id', 'target_attempt_id', 'required_invitees', 'completed_invitees'];
         $missingColumns = [];
+        $columnGuardException = null;
         foreach ($requiredColumns as $column) {
-            if (! SchemaBaseline::hasColumn($table, $column)) {
+            $columnCheckReason = null;
+            $columnCheckExceptionClass = null;
+            if (! SchemaBaseline::hasColumnWithMeta($table, $column, $columnCheckReason, $columnCheckExceptionClass)) {
+                if (in_array($columnCheckReason, ['table_check_exception', 'column_listing_exception'], true)) {
+                    $columnGuardException = [
+                        'column' => $column,
+                        'reason' => $columnCheckReason,
+                        'exception_class' => $columnCheckExceptionClass,
+                    ];
+                    break;
+                }
                 $missingColumns[] = $column;
             }
+        }
+        if (is_array($columnGuardException)) {
+            $failureCode = 'invite_snapshot_schema_guard_exception';
+            Log::warning('REPORT_ACCESS_INVITE_SNAPSHOT_FAILED', [
+                'org_id' => $orgId,
+                'attempt_id' => $attemptId,
+                'branch' => 'schema_guard',
+                'source' => __METHOD__,
+                'failure_code' => $failureCode,
+                'schema_guard_column' => $columnGuardException['column'],
+                'schema_guard_reason' => $columnGuardException['reason'],
+                'schema_guard_exception_class' => $columnGuardException['exception_class'],
+            ]);
+
+            return null;
         }
         if ($missingColumns !== []) {
             $failureCode = 'invite_snapshot_columns_missing';
