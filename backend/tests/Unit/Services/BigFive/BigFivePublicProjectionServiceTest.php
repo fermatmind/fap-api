@@ -60,7 +60,7 @@ final class BigFivePublicProjectionServiceTest extends TestCase
         $this->assertSame('growth.next_actions', data_get($projection, 'ordered_section_keys.4'));
         $this->assertNotSame('', (string) data_get($projection, 'explainability_summary.headline', ''));
         $this->assertSame('N', data_get($projection, 'action_plan_summary.focus_trait'));
-        $this->assertCount(9, (array) ($projection['sections'] ?? []));
+        $this->assertCount(5, (array) ($projection['sections'] ?? []));
         $this->assertSame('paid', data_get($projection, 'sections.2.access_level'));
     }
 

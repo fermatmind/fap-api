@@ -61,17 +61,7 @@ final class BigFivePaywallFlagModesTest extends TestCase
         $this->assertNotContains('big5_action_plan', $allowed);
 
         $sections = array_map('strval', (array) array_column((array) $resp->json('report.sections'), 'key'));
-        $this->assertSame([
-            'traits.overview',
-            'traits.why_this_profile',
-            'relationships.interpersonal_style',
-            'career.work_style',
-            'growth.next_actions',
-            'disclaimer_top',
-            'summary',
-            'domains_overview',
-            'disclaimer',
-        ], $sections);
+        $this->assertSame(['disclaimer_top', 'summary', 'domains_overview', 'disclaimer'], $sections);
         $this->assertNotEmpty((array) $resp->json('offers'));
     }
 

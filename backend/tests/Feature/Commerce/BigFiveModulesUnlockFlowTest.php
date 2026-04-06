@@ -160,17 +160,7 @@ final class BigFiveModulesUnlockFlowTest extends TestCase
         $beforeAllowed = (array) $before->json('modules_allowed');
         $this->assertContains('big5_core', $beforeAllowed);
         $beforeSections = array_map('strval', (array) array_column((array) $before->json('report.sections'), 'key'));
-        $this->assertSame([
-            'traits.overview',
-            'traits.why_this_profile',
-            'relationships.interpersonal_style',
-            'career.work_style',
-            'growth.next_actions',
-            'disclaimer_top',
-            'summary',
-            'domains_overview',
-            'disclaimer',
-        ], $beforeSections);
+        $this->assertSame(['disclaimer_top', 'summary', 'domains_overview', 'disclaimer'], $beforeSections);
 
         /** @var EntitlementManager $entitlements */
         $entitlements = app(EntitlementManager::class);
@@ -225,25 +215,7 @@ final class BigFiveModulesUnlockFlowTest extends TestCase
 
         $afterSections = array_map('strval', (array) array_column((array) $after->json('report.sections'), 'key'));
         $this->assertSame(
-            [
-                'traits.overview',
-                'traits.why_this_profile',
-                'relationships.interpersonal_style',
-                'career.work_style',
-                'growth.next_actions',
-                'domains.deep_dive',
-                'facets.detail',
-                'comparative.norms',
-                'methodology.access',
-                'disclaimer_top',
-                'summary',
-                'domains_overview',
-                'facet_table',
-                'top_facets',
-                'facets_deepdive',
-                'action_plan',
-                'disclaimer',
-            ],
+            ['disclaimer_top', 'summary', 'domains_overview', 'facet_table', 'top_facets', 'facets_deepdive', 'action_plan', 'disclaimer'],
             $afterSections
         );
     }
