@@ -241,16 +241,18 @@ final class AnswerSurfaceContractService
             $key = $this->normalizeString($block['key'] ?? null);
             $title = $this->normalizeString($block['title'] ?? null);
             $body = $this->normalizeString($block['body'] ?? null);
+            $href = $this->normalizeString($block['href'] ?? null);
             $kind = $this->normalizeString($block['kind'] ?? null);
 
-            if ($key === null && $title === null && $body === null) {
+            if ($key === null && $title === null && $body === null && $href === null) {
                 continue;
             }
 
             $normalized[] = [
-                'key' => $key ?? $title ?? $body,
+                'key' => $key ?? $title ?? $href ?? $body,
                 'title' => $title,
                 'body' => $body,
+                'href' => $href,
                 'kind' => $kind,
             ];
         }

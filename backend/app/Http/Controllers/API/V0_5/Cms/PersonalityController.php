@@ -269,6 +269,9 @@ class PersonalityController extends Controller
             is_array($projection['dimensions'] ?? null) ? $projection['dimensions'] : [],
             2
         );
+        $routeSlug = $this->resolveRouteSlug($profile, $variant);
+        $isMbtiScale = strtoupper((string) ($profile->scale_code ?? '')) === 'MBTI';
+        $sceneSummaryBlocks = $isMbtiScale ? $this->buildMbtiSceneSummaryBlocks($locale, $routeSlug) : [];
 
         return $this->answerSurfaceContractService->build([
             'answer_scope' => ($profile->is_indexable ?? false) ? 'public_indexable_detail' : 'public_noindex_detail',
@@ -291,6 +294,7 @@ class PersonalityController extends Controller
             ])),
             'faq_blocks' => $this->answerSurfaceContractService->extractFaqBlocksFromSectionPayloads($sections),
             'compare_blocks' => $compareBlocks,
+            'scene_summary_blocks' => $sceneSummaryBlocks,
             'next_step_blocks' => $this->answerSurfaceContractService->buildNextStepBlocksFromCtas(
                 is_array($landingSurface['cta_bundle'] ?? null) ? $landingSurface['cta_bundle'] : [],
                 3
@@ -305,6 +309,7 @@ class PersonalityController extends Controller
                 'mbti_public_projection_v1',
                 count($compareBlocks) > 0 ? 'projection_dimensions' : '',
                 count($sections) > 0 ? 'personality_sections' : '',
+                $sceneSummaryBlocks !== [] ? 'scene_summary_blocks' : '',
             ])),
             'public_safety_state' => 'public_indexable',
             'indexability_state' => ($profile->is_indexable ?? false) ? 'indexable' : 'noindex',
@@ -368,6 +373,64 @@ class PersonalityController extends Controller
             'related_surface_keys' => ['personality_detail', 'topic_cluster'],
             'fingerprint_seed' => ['locale' => $locale],
         ]);
+    }
+
+    /**
+     * @return list<array<string,string>>
+     */
+    private function buildMbtiSceneSummaryBlocks(string $locale, string $routeSlug): array
+    {
+        $segment = $this->frontendLocaleSegment($locale);
+        $startTestPath = '/'.$segment.'/tests/mbti-personality-test-16-personality-types';
+        $profilePath = '/'.$segment.'/personality/'.rawurlencode($routeSlug);
+
+        return [
+            [
+                'key' => 'career_direction',
+                'title' => $locale === 'zh-CN' ? '职业方向' : 'Career direction',
+                'body' => $locale === 'zh-CN'
+                    ? '先看职业推荐入口，再回到类型页做验证。'
+                    : 'Review career recommendations first, then validate from the type page.',
+                'href' => '/'.$segment.'/career/recommendations',
+                'kind' => 'scene_entry',
+            ],
+            [
+                'key' => 'major_selection',
+                'title' => $locale === 'zh-CN' ? '专业选择' : 'Major selection',
+                'body' => $locale === 'zh-CN'
+                    ? '先回 MBTI 主题页整理判断框架，再做路径选择。'
+                    : 'Use the MBTI topic hub as the decision frame before choosing a major path.',
+                'href' => '/'.$segment.'/topics/mbti',
+                'kind' => 'scene_entry',
+            ],
+            [
+                'key' => 'team_collaboration',
+                'title' => $locale === 'zh-CN' ? '团队协作' : 'Team collaboration',
+                'body' => $locale === 'zh-CN'
+                    ? '保留当前类型页，继续对照团队协作特征。'
+                    : 'Keep this type page as reference when comparing collaboration patterns.',
+                'href' => $profilePath,
+                'kind' => 'scene_entry',
+            ],
+            [
+                'key' => 'relationship_patterns',
+                'title' => $locale === 'zh-CN' ? '关系相处' : 'Relationship patterns',
+                'body' => $locale === 'zh-CN'
+                    ? '从类型页回到主题页，补齐关系场景解释。'
+                    : 'Jump from type detail back to topic context for relationship cues.',
+                'href' => '/'.$segment.'/topics/mbti',
+                'kind' => 'scene_entry',
+            ],
+            [
+                'key' => 'growth_planning',
+                'title' => $locale === 'zh-CN' ? '成长建议' : 'Growth planning',
+                'body' => $locale === 'zh-CN'
+                    ? '直接开始测试，拿到结构化成长建议。'
+                    : 'Start the test directly to generate structured growth suggestions.',
+                'href' => $startTestPath,
+                'kind' => 'scene_entry',
+            ],
+        ];
     }
 
     private function resolveRouteSlug(PersonalityProfile $profile, ?PersonalityProfileVariant $variant): string

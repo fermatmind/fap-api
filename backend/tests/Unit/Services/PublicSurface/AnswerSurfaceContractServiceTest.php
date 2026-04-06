@@ -37,6 +37,14 @@ final class AnswerSurfaceContractServiceTest extends TestCase
                     'body' => 'This profile leans inward before acting.',
                 ],
             ],
+            'scene_summary_blocks' => [
+                [
+                    'key' => 'career_direction',
+                    'title' => 'Career direction',
+                    'body' => 'Use role-fit content to anchor your next decision.',
+                    'href' => '/en/career/recommendations',
+                ],
+            ],
             'next_step_blocks' => [
                 [
                     'key' => 'start_test',
@@ -65,6 +73,8 @@ final class AnswerSurfaceContractServiceTest extends TestCase
         $this->assertCount(1, $contract['summary_blocks']);
         $this->assertCount(1, $contract['faq_blocks']);
         $this->assertCount(1, $contract['compare_blocks']);
+        $this->assertCount(1, $contract['scene_summary_blocks']);
+        $this->assertSame('/en/career/recommendations', $contract['scene_summary_blocks'][0]['href']);
         $this->assertCount(1, $contract['next_step_blocks']);
         $this->assertSame(['mbti_public_projection_v1', 'landing_surface_v1'], $contract['evidence_refs']);
         $this->assertIsString($contract['answer_fingerprint']);

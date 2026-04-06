@@ -310,6 +310,8 @@ final class CareerRecommendationPublicApiTest extends TestCase
             ->assertJsonPath('answer_surface_v1.surface_type', 'career_recommendation_public_detail')
             ->assertJsonPath('answer_surface_v1.summary_blocks.0.key', 'answer_first')
             ->assertJsonPath('answer_surface_v1.compare_blocks.0.key', 'authority_route')
+            ->assertJsonPath('answer_surface_v1.scene_summary_blocks.0.key', 'career_direction')
+            ->assertJsonPath('answer_surface_v1.scene_summary_blocks.0.href', '/en/career/recommendations/mbti/intj-a')
             ->assertJsonPath('answer_surface_v1.next_step_blocks.0.key', 'start_test')
             ->assertJsonPath('canonical_type_code', 'INTJ')
             ->assertJsonPath('public_route_slug', 'intj-a')

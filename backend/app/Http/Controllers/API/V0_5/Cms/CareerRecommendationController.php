@@ -214,6 +214,7 @@ final class CareerRecommendationController extends Controller
             is_array($landingSurface['cta_bundle'] ?? null) ? $landingSurface['cta_bundle'] : [],
             3
         );
+        $sceneSummaryBlocks = $this->buildMbtiSceneSummaryBlocks($locale, trim((string) data_get($payload, 'public_route_slug', '')));
 
         if ($nextStepBlocks === [] && $preferredRoles !== []) {
             foreach ($preferredRoles as $index => $group) {
@@ -254,6 +255,7 @@ final class CareerRecommendationController extends Controller
             ],
             'faq_blocks' => $faqBlocks,
             'compare_blocks' => $compareBlocks,
+            'scene_summary_blocks' => $sceneSummaryBlocks,
             'next_step_blocks' => $nextStepBlocks,
             'evidence_refs' => array_values(array_filter([
                 (string) ($seoSurface['metadata_fingerprint'] ?? ''),
@@ -261,6 +263,7 @@ final class CareerRecommendationController extends Controller
                 'career.summary',
                 $matchedJobs !== [] ? 'matched_jobs' : '',
                 $matchedGuides !== [] ? 'matched_guides' : '',
+                $sceneSummaryBlocks !== [] ? 'scene_summary_blocks' : '',
             ])),
             'public_safety_state' => 'public_indexable',
             'indexability_state' => 'indexable',
@@ -275,6 +278,66 @@ final class CareerRecommendationController extends Controller
                 'locale' => $locale,
             ],
         ]);
+    }
+
+    /**
+     * @return list<array<string,string>>
+     */
+    private function buildMbtiSceneSummaryBlocks(string $locale, string $publicRouteSlug): array
+    {
+        $segment = $this->frontendLocaleSegment($locale);
+        $startTestPath = '/'.$segment.'/tests/mbti-personality-test-16-personality-types';
+        $recommendationPath = $publicRouteSlug !== ''
+            ? '/'.$segment.'/career/recommendations/mbti/'.rawurlencode($publicRouteSlug)
+            : '/'.$segment.'/career/recommendations';
+
+        return [
+            [
+                'key' => 'career_direction',
+                'title' => $locale === 'zh-CN' ? '职业方向' : 'Career direction',
+                'body' => $locale === 'zh-CN'
+                    ? '保留当前职业推荐页，继续对照高匹配岗位。'
+                    : 'Keep this recommendation page open while comparing highest-fit roles.',
+                'href' => $recommendationPath,
+                'kind' => 'scene_entry',
+            ],
+            [
+                'key' => 'major_selection',
+                'title' => $locale === 'zh-CN' ? '专业选择' : 'Major selection',
+                'body' => $locale === 'zh-CN'
+                    ? '先回 MBTI 主题页搭建判断框架，再看职业路径。'
+                    : 'Use the MBTI topic hub to frame major decisions before role-level choices.',
+                'href' => '/'.$segment.'/topics/mbti',
+                'kind' => 'scene_entry',
+            ],
+            [
+                'key' => 'team_collaboration',
+                'title' => $locale === 'zh-CN' ? '团队协作' : 'Team collaboration',
+                'body' => $locale === 'zh-CN'
+                    ? '结合人格类型页，补齐协作偏好线索。'
+                    : 'Pair this with personality type detail to validate collaboration preferences.',
+                'href' => '/'.$segment.'/personality',
+                'kind' => 'scene_entry',
+            ],
+            [
+                'key' => 'relationship_patterns',
+                'title' => $locale === 'zh-CN' ? '关系相处' : 'Relationship patterns',
+                'body' => $locale === 'zh-CN'
+                    ? '从主题页继续阅读关系与沟通场景。'
+                    : 'Continue from topic-level guidance for relationship and communication scenarios.',
+                'href' => '/'.$segment.'/topics/mbti',
+                'kind' => 'scene_entry',
+            ],
+            [
+                'key' => 'growth_planning',
+                'title' => $locale === 'zh-CN' ? '成长建议' : 'Growth planning',
+                'body' => $locale === 'zh-CN'
+                    ? '开始测试，拿到完整个性化成长建议。'
+                    : 'Start the test to unlock complete personalized growth guidance.',
+                'href' => $startTestPath,
+                'kind' => 'scene_entry',
+            ],
+        ];
     }
 
     /**

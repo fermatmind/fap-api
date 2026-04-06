@@ -284,18 +284,23 @@ final class TopicController extends Controller
             ];
         }
 
+        $isMbtiTopic = strtolower((string) ($profile->topic_code ?? $profile->slug ?? '')) === 'mbti';
+        $sceneSummaryBlocks = $isMbtiTopic ? $this->buildMbtiSceneSummaryBlocks($locale) : [];
+
         return $this->answerSurfaceContractService->build([
             'answer_scope' => $profile->is_indexable ? 'public_indexable_detail' : 'public_noindex_detail',
             'surface_type' => 'topic_public_detail',
             'summary_blocks' => $summaryBlocks,
             'faq_blocks' => $this->answerSurfaceContractService->extractFaqBlocksFromSectionPayloads($sections),
             'compare_blocks' => $compareBlocks,
+            'scene_summary_blocks' => $sceneSummaryBlocks,
             'next_step_blocks' => array_slice($nextStepBlocks, 0, 4),
             'evidence_refs' => array_values(array_filter([
                 (string) ($seoSurface['metadata_fingerprint'] ?? ''),
                 (string) ($landingSurface['landing_fingerprint'] ?? ''),
                 count($entryGroups) > 0 ? 'topic_entry_groups' : '',
                 count($sections) > 0 ? 'topic_sections' : '',
+                $sceneSummaryBlocks !== [] ? 'scene_summary_blocks' : '',
             ])),
             'public_safety_state' => 'public_indexable',
             'indexability_state' => $profile->is_indexable ? 'indexable' : 'noindex',
@@ -310,6 +315,63 @@ final class TopicController extends Controller
                 'entry_group_count' => count($entryGroups),
             ],
         ]);
+    }
+
+    /**
+     * @return list<array<string,string>>
+     */
+    private function buildMbtiSceneSummaryBlocks(string $locale): array
+    {
+        $segment = $this->frontendLocaleSegment($locale);
+        $startTestPath = '/'.$segment.'/tests/mbti-personality-test-16-personality-types';
+
+        return [
+            [
+                'key' => 'career_direction',
+                'title' => $locale === 'zh-CN' ? '职业方向' : 'Career direction',
+                'body' => $locale === 'zh-CN'
+                    ? '先看职业推荐入口，快速判断高匹配岗位。'
+                    : 'Start from career recommendations to identify higher-fit roles quickly.',
+                'href' => '/'.$segment.'/career/recommendations',
+                'kind' => 'scene_entry',
+            ],
+            [
+                'key' => 'major_selection',
+                'title' => $locale === 'zh-CN' ? '专业选择' : 'Major selection',
+                'body' => $locale === 'zh-CN'
+                    ? '先建立 MBTI 框架，再把专业方向放进同一判断路径。'
+                    : 'Build an MBTI frame first, then evaluate majors against the same path.',
+                'href' => '/'.$segment.'/topics/mbti',
+                'kind' => 'scene_entry',
+            ],
+            [
+                'key' => 'team_collaboration',
+                'title' => $locale === 'zh-CN' ? '团队协作' : 'Team collaboration',
+                'body' => $locale === 'zh-CN'
+                    ? '回到人格类型索引，比较协作风格差异。'
+                    : 'Return to personality types to compare collaboration styles.',
+                'href' => '/'.$segment.'/personality',
+                'kind' => 'scene_entry',
+            ],
+            [
+                'key' => 'relationship_patterns',
+                'title' => $locale === 'zh-CN' ? '关系相处' : 'Relationship patterns',
+                'body' => $locale === 'zh-CN'
+                    ? '从 MBTI 主题页继续阅读关系线索。'
+                    : 'Continue from the MBTI topic hub for relationship pattern cues.',
+                'href' => '/'.$segment.'/topics/mbti',
+                'kind' => 'scene_entry',
+            ],
+            [
+                'key' => 'growth_planning',
+                'title' => $locale === 'zh-CN' ? '成长建议' : 'Growth planning',
+                'body' => $locale === 'zh-CN'
+                    ? '直接开始测试，获取个性化成长线索。'
+                    : 'Start the test directly to unlock personalized growth cues.',
+                'href' => $startTestPath,
+                'kind' => 'scene_entry',
+            ],
+        ];
     }
 
     /**

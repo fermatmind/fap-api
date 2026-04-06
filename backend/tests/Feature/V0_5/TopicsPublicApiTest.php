@@ -242,6 +242,8 @@ final class TopicsPublicApiTest extends TestCase
             ->assertJsonPath('answer_surface_v1.answer_scope', 'public_indexable_detail')
             ->assertJsonPath('answer_surface_v1.surface_type', 'topic_public_detail')
             ->assertJsonPath('answer_surface_v1.summary_blocks.0.key', 'topic_summary')
+            ->assertJsonPath('answer_surface_v1.scene_summary_blocks.0.key', 'career_direction')
+            ->assertJsonPath('answer_surface_v1.scene_summary_blocks.0.href', '/en/career/recommendations')
             ->assertJsonPath('answer_surface_v1.next_step_blocks.0.key', 'featured')
             ->assertJsonPath('entry_groups.featured.0.entry_type', 'personality_profile')
             ->assertJsonPath('entry_groups.featured.0.title', (string) $personality->title)
@@ -331,6 +333,37 @@ final class TopicsPublicApiTest extends TestCase
             ->assertJsonMissingPath('entry_groups.articles')
             ->assertJsonMissingPath('entry_groups.related')
             ->assertJsonMissingPath('entry_groups.tests');
+    }
+
+    public function test_non_mbti_topic_does_not_emit_mbti_scene_summary_blocks(): void
+    {
+        $topic = $this->createTopicProfile([
+            'topic_code' => 'big-five',
+            'slug' => 'big-five',
+            'title' => 'Big Five',
+            'excerpt' => 'Big Five topic detail.',
+            'status' => TopicProfile::STATUS_PUBLISHED,
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+
+        TopicProfileSection::query()->create([
+            'profile_id' => (int) $topic->id,
+            'section_key' => 'overview',
+            'title' => 'Overview',
+            'render_variant' => 'rich_text',
+            'body_md' => 'Big Five overview body.',
+            'sort_order' => 10,
+            'is_enabled' => true,
+        ]);
+
+        $response = $this->getJson('/api/v0.5/topics/big-five?locale=en');
+
+        $response->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('profile.topic_code', 'big-five')
+            ->assertJsonPath('answer_surface_v1.surface_type', 'topic_public_detail')
+            ->assertJsonPath('answer_surface_v1.scene_summary_blocks', []);
     }
 
     public function test_seo_endpoint_returns_locale_aware_meta_and_jsonld(): void
