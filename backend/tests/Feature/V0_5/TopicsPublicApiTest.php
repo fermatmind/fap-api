@@ -335,6 +335,37 @@ final class TopicsPublicApiTest extends TestCase
             ->assertJsonMissingPath('entry_groups.tests');
     }
 
+    public function test_non_mbti_topic_does_not_emit_mbti_scene_summary_blocks(): void
+    {
+        $topic = $this->createTopicProfile([
+            'topic_code' => 'big-five',
+            'slug' => 'big-five',
+            'title' => 'Big Five',
+            'excerpt' => 'Big Five topic detail.',
+            'status' => TopicProfile::STATUS_PUBLISHED,
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+
+        TopicProfileSection::query()->create([
+            'profile_id' => (int) $topic->id,
+            'section_key' => 'overview',
+            'title' => 'Overview',
+            'render_variant' => 'rich_text',
+            'body_md' => 'Big Five overview body.',
+            'sort_order' => 10,
+            'is_enabled' => true,
+        ]);
+
+        $response = $this->getJson('/api/v0.5/topics/big-five?locale=en');
+
+        $response->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('profile.topic_code', 'big-five')
+            ->assertJsonPath('answer_surface_v1.surface_type', 'topic_public_detail')
+            ->assertJsonPath('answer_surface_v1.scene_summary_blocks', []);
+    }
+
     public function test_seo_endpoint_returns_locale_aware_meta_and_jsonld(): void
     {
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);
