@@ -426,6 +426,13 @@ final class CareerGuidePublicApiTest extends TestCase
             '--status' => 'published',
         ])->assertExitCode(0);
 
+        $this->artisan('articles:import-local-baseline', [
+            '--locale' => ['en', 'zh-CN'],
+            '--upsert' => true,
+            '--status' => 'published',
+            '--source-dir' => '../content_baselines/articles',
+        ])->assertExitCode(0);
+
         $this->artisan('career-guides:import-local-baseline', [
             '--locale' => ['en'],
             '--guide' => ['intj-career-playbook'],
