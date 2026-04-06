@@ -13,6 +13,7 @@ use App\Repositories\Report\ReportAccessActor;
 use App\Repositories\Report\ReportSubjectRepository;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Attempts\AttemptSubmissionService;
+use App\Services\Attempts\InviteUnlock\InviteUnlockDiagnostics;
 use App\Services\BigFive\BigFivePublicProjectionService;
 use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
 use App\Services\Access\AttemptUnlockProjectionRepairService;
@@ -545,6 +546,7 @@ class AttemptReadController extends Controller
      */
     public function reportAccess(Request $request, string $id): JsonResponse
     {
+        $startedAt = hrtime(true);
         $orgId = $this->currentOrgContext()->orgId();
         $attempt = $this->resolveAttemptForAccessRead($request, $orgId, $id);
         $submissionPayload = $this->latestReadableSubmission($request, (string) $attempt->id);
@@ -716,9 +718,38 @@ class AttemptReadController extends Controller
             (int) ($inviteSnapshot['completed_invitees'] ?? 0),
             (int) ($inviteSnapshot['required_invitees'] ?? 2)
         );
+        $inviteDiagnostics = InviteUnlockDiagnostics::build(
+            (int) ($inviteSnapshot['completed_invitees'] ?? 0),
+            (int) ($inviteSnapshot['required_invitees'] ?? 2),
+            $unlockStage,
+            $unlockSource,
+            null
+        );
         $responsePayload['invite_unlock_v1'] = $inviteSummary;
+        $responsePayload['invite_unlock_diag_v1'] = $inviteDiagnostics;
         $payloadJson['invite_unlock_v1'] = $inviteSummary;
+        $payloadJson['invite_unlock_diag_v1'] = $inviteDiagnostics;
         $responsePayload['payload'] = $payloadJson;
+        $durationMs = (int) floor((hrtime(true) - $startedAt) / 1_000_000);
+        Log::info('REPORT_ACCESS_INVITE_UNLOCK_DIAGNOSTIC', [
+            'org_id' => $orgId,
+            'attempt_id' => (string) ($attempt->id ?? ''),
+            'source' => __METHOD__,
+            'access_state' => $accessState,
+            'report_state' => $reportState,
+            'pdf_state' => $pdfState,
+            'reason_code' => $reasonCode !== '' ? $reasonCode : null,
+            'invite_snapshot_failure_code' => $inviteSnapshotFailureCode,
+            'diagnostic_status' => (string) ($inviteDiagnostics['status'] ?? 'locked'),
+            'diagnostic_status_reason' => (string) ($inviteDiagnostics['status_reason'] ?? 'unlock_stage_locked'),
+            'unlock_stage' => (string) ($inviteDiagnostics['unlock_stage'] ?? 'locked'),
+            'unlock_source' => (string) ($inviteDiagnostics['unlock_source'] ?? 'none'),
+            'completed_invitees' => (int) ($inviteDiagnostics['completed_invitees'] ?? 0),
+            'required_invitees' => (int) ($inviteDiagnostics['required_invitees'] ?? 2),
+            'remaining_invitees' => (int) ($inviteDiagnostics['remaining_invitees'] ?? 2),
+            'progress_percent' => (int) ($inviteDiagnostics['progress_percent'] ?? 0),
+            'duration_ms' => $durationMs,
+        ]);
 
         return response()->json($responsePayload);
     }

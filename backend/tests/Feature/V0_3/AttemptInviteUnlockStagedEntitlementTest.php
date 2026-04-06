@@ -34,7 +34,8 @@ final class AttemptInviteUnlockStagedEntitlementTest extends TestCase
             ->getJson("/api/v0.3/attempts/{$targetAttemptId}/report-access")
             ->assertOk()
             ->assertJsonPath('unlock_stage', 'locked')
-            ->assertJsonPath('unlock_source', 'none');
+            ->assertJsonPath('unlock_source', 'none')
+            ->assertJsonPath('invite_unlock_diag_v1.status', 'locked');
 
         $inviteeAttemptOne = $this->createAttemptWithResult('anon_stage_invitee_one');
         $completionService->recordCompletionForInvite($inviteCode, $inviteeAttemptOne, null, 'anon_stage_invitee_one');
@@ -45,7 +46,8 @@ final class AttemptInviteUnlockStagedEntitlementTest extends TestCase
             ->assertJsonPath('unlock_stage', 'partial')
             ->assertJsonPath('unlock_source', 'invite')
             ->assertJsonPath('payload.access_level', 'partial')
-            ->assertJsonPath('payload.variant', 'partial');
+            ->assertJsonPath('payload.variant', 'partial')
+            ->assertJsonPath('invite_unlock_diag_v1.status', 'partial_unlock');
 
         $inviteeAttemptTwo = $this->createAttemptWithResult('anon_stage_invitee_two');
         $completionService->recordCompletionForInvite($inviteCode, $inviteeAttemptTwo, null, 'anon_stage_invitee_two');
@@ -56,7 +58,8 @@ final class AttemptInviteUnlockStagedEntitlementTest extends TestCase
             ->assertJsonPath('unlock_stage', 'full')
             ->assertJsonPath('unlock_source', 'invite')
             ->assertJsonPath('payload.access_level', 'full')
-            ->assertJsonPath('payload.variant', 'full');
+            ->assertJsonPath('payload.variant', 'full')
+            ->assertJsonPath('invite_unlock_diag_v1.status', 'full_unlock');
 
         $this->assertSame(1, DB::table('benefit_grants')
             ->where('attempt_id', $targetAttemptId)
@@ -101,7 +104,8 @@ final class AttemptInviteUnlockStagedEntitlementTest extends TestCase
             ->getJson("/api/v0.3/attempts/{$paymentFirstAttemptId}/report-access")
             ->assertOk()
             ->assertJsonPath('unlock_stage', 'full')
-            ->assertJsonPath('unlock_source', 'payment');
+            ->assertJsonPath('unlock_source', 'payment')
+            ->assertJsonPath('invite_unlock_diag_v1.status', 'full_unlock');
 
         // invite partial first, then payment full should converge to full and source=mixed
         $partialFirstAnon = 'anon_stage_partial_first';
@@ -128,7 +132,8 @@ final class AttemptInviteUnlockStagedEntitlementTest extends TestCase
             ->getJson("/api/v0.3/attempts/{$partialFirstAttemptId}/report-access")
             ->assertOk()
             ->assertJsonPath('unlock_stage', 'full')
-            ->assertJsonPath('unlock_source', 'mixed');
+            ->assertJsonPath('unlock_source', 'mixed')
+            ->assertJsonPath('invite_unlock_diag_v1.status', 'mixed_unlock');
     }
 
     /**
