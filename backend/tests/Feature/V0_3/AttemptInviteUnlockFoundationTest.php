@@ -39,7 +39,9 @@ final class AttemptInviteUnlockFoundationTest extends TestCase
             ->assertJsonPath('required_invitees', 2)
             ->assertJsonPath('completed_invitees', 0)
             ->assertJsonPath('unlock_stage', 'locked')
-            ->assertJsonPath('unlock_source', 'none');
+            ->assertJsonPath('unlock_source', 'none')
+            ->assertJsonPath('invite_unlock_diag_v1.status', 'locked')
+            ->assertJsonPath('invite_unlock_diag_v1.progress_percent', 0);
 
         $inviteCode = (string) $post->json('invite_code');
         $this->assertNotSame('', $inviteCode);
@@ -50,7 +52,8 @@ final class AttemptInviteUnlockFoundationTest extends TestCase
             ->assertJsonPath('has_invite', true)
             ->assertJsonPath('created', false)
             ->assertJsonPath('invite_code', $inviteCode)
-            ->assertJsonPath('completed_invitees', 0);
+            ->assertJsonPath('completed_invitees', 0)
+            ->assertJsonPath('invite_unlock_diag_v1.status', 'locked');
 
         $this->assertSame(1, AttemptInviteUnlock::query()->count());
         $this->assertDatabaseHas('events', [
@@ -97,6 +100,7 @@ final class AttemptInviteUnlockFoundationTest extends TestCase
         $this->assertSame(1, (int) data_get($qualifiedOne, 'progress.completed_invitees'));
         $this->assertSame(InviteUnlockStatus::IN_PROGRESS, (string) data_get($qualifiedOne, 'progress.status'));
         $this->assertSame('partial', (string) ($qualifiedOne['unlock_stage'] ?? ''));
+        $this->assertSame('partial_unlock', (string) data_get($qualifiedOne, 'progress.invite_unlock_diag_v1.status'));
         $this->assertDatabaseHas('benefit_grants', [
             'org_id' => 0,
             'attempt_id' => $targetAttemptId,
@@ -161,6 +165,7 @@ final class AttemptInviteUnlockFoundationTest extends TestCase
         $this->assertSame(2, (int) data_get($qualifiedTwo, 'progress.completed_invitees'));
         $this->assertSame(InviteUnlockStatus::COMPLETED, (string) data_get($qualifiedTwo, 'progress.status'));
         $this->assertSame('full', (string) ($qualifiedTwo['unlock_stage'] ?? ''));
+        $this->assertSame('full_unlock', (string) data_get($qualifiedTwo, 'progress.invite_unlock_diag_v1.status'));
         $this->assertDatabaseHas('benefit_grants', [
             'org_id' => 0,
             'attempt_id' => $targetAttemptId,

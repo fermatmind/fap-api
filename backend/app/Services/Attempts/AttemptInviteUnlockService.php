@@ -10,6 +10,7 @@ use App\Models\AttemptInviteUnlock;
 use App\Models\AttemptInviteUnlockCompletion;
 use App\Models\Result;
 use App\Services\Commerce\EntitlementManager;
+use App\Services\Attempts\InviteUnlock\InviteUnlockDiagnostics;
 use App\Services\Attempts\InviteUnlock\InviteUnlockStatus;
 use App\Services\Report\InviteUnlockSummaryBuilder;
 use App\Services\Report\ReportAccess;
@@ -139,6 +140,14 @@ final class AttemptInviteUnlockService
             ->first();
 
         if (! $existing instanceof AttemptInviteUnlock) {
+            $diagnostics = InviteUnlockDiagnostics::build(
+                0,
+                self::DEFAULT_REQUIRED_INVITEES,
+                ReportAccess::UNLOCK_STAGE_LOCKED,
+                ReportAccess::UNLOCK_SOURCE_NONE,
+                null
+            );
+
             return [
                 'has_invite' => false,
                 'created' => false,
@@ -161,6 +170,7 @@ final class AttemptInviteUnlockService
                     0,
                     self::DEFAULT_REQUIRED_INVITEES
                 ),
+                'invite_unlock_diag_v1' => $diagnostics,
             ];
         }
 
@@ -227,6 +237,14 @@ final class AttemptInviteUnlockService
         );
         $unlockStage = ReportAccess::normalizeUnlockStage((string) ($unlockState['unlock_stage'] ?? ReportAccess::UNLOCK_STAGE_LOCKED));
         $unlockSource = ReportAccess::normalizeUnlockSource((string) ($unlockState['unlock_source'] ?? ReportAccess::UNLOCK_SOURCE_NONE));
+        $inviteStatus = (string) ($invite->status ?? InviteUnlockStatus::PENDING);
+        $diagnostics = InviteUnlockDiagnostics::build(
+            $completedInvitees,
+            $requiredInvitees,
+            $unlockStage,
+            $unlockSource,
+            $inviteStatus
+        );
 
         return [
             'has_invite' => true,
@@ -236,7 +254,7 @@ final class AttemptInviteUnlockService
             'target_org_id' => (int) ($invite->target_org_id ?? 0),
             'target_attempt_id' => (string) ($invite->target_attempt_id ?? ''),
             'target_scale_code' => (string) ($invite->target_scale_code ?? ''),
-            'status' => (string) ($invite->status ?? InviteUnlockStatus::PENDING),
+            'status' => $inviteStatus,
             'required_invitees' => $requiredInvitees,
             'completed_invitees' => $completedInvitees,
             'qualification_rule_version' => (string) ($invite->qualification_rule_version ?? self::RULE_VERSION),
@@ -250,6 +268,7 @@ final class AttemptInviteUnlockService
                 $completedInvitees,
                 $requiredInvitees
             ),
+            'invite_unlock_diag_v1' => $diagnostics,
         ];
     }
 

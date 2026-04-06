@@ -10,10 +10,12 @@ use App\Models\AttemptInviteUnlockCompletion;
 use App\Models\Result;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Commerce\EntitlementManager;
+use App\Services\Attempts\InviteUnlock\InviteUnlockDiagnostics;
 use App\Services\Attempts\InviteUnlock\InviteUnlockCompletionStatus;
 use App\Services\Attempts\InviteUnlock\InviteUnlockStatus;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 final class AttemptInviteUnlockCompletionService
@@ -37,17 +39,27 @@ final class AttemptInviteUnlockCompletionService
         ?string $inviteeUserId,
         ?string $inviteeAnonId,
     ): array {
+        $startedAt = hrtime(true);
         $normalizedInviteCode = trim($inviteCode);
         $normalizedAttemptId = trim($inviteeAttemptId);
         if ($normalizedInviteCode === '' || $normalizedAttemptId === '') {
-            return [
+            $invalidInputPayload = [
                 'ok' => false,
                 'error_code' => 'INVITE_UNLOCK_COMPLETION_INVALID_INPUT',
                 'message' => 'invite_code and invitee_attempt_id are required.',
             ];
+
+            $this->logCompletionDiagnostic(
+                $normalizedInviteCode,
+                $normalizedAttemptId,
+                $invalidInputPayload,
+                $startedAt
+            );
+
+            return $invalidInputPayload;
         }
 
-        return DB::transaction(function () use (
+        $result = DB::transaction(function () use (
             $normalizedInviteCode,
             $normalizedAttemptId,
             $inviteeUserId,
@@ -353,6 +365,15 @@ final class AttemptInviteUnlockCompletionService
 
             return $this->buildCompletionPayload($completion, $refreshedInvite, false);
         });
+
+        $this->logCompletionDiagnostic(
+            $normalizedInviteCode,
+            $normalizedAttemptId,
+            $result,
+            $startedAt
+        );
+
+        return $result;
     }
 
     /**
@@ -593,6 +614,61 @@ final class AttemptInviteUnlockCompletionService
                 $this->eventRecorder->record('invite_unlock_mixed_confirmed', $inviterUserIdInt, $baseMeta, $context);
             }
         }
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function logCompletionDiagnostic(
+        string $inviteCode,
+        string $inviteeAttemptId,
+        array $payload,
+        int $startedAt
+    ): void {
+        $progress = is_array($payload['progress'] ?? null) ? $payload['progress'] : [];
+        $diagnostics = is_array($progress['invite_unlock_diag_v1'] ?? null)
+            ? $progress['invite_unlock_diag_v1']
+            : InviteUnlockDiagnostics::build(
+                (int) ($progress['completed_invitees'] ?? 0),
+                (int) ($progress['required_invitees'] ?? 2),
+                (string) ($payload['unlock_stage'] ?? ($progress['unlock_stage'] ?? 'locked')),
+                (string) ($payload['unlock_source'] ?? ($progress['unlock_source'] ?? 'none')),
+                isset($progress['status']) ? (string) $progress['status'] : null
+            );
+        $durationMs = (int) floor((hrtime(true) - $startedAt) / 1_000_000);
+        $logPayload = [
+            'source' => __METHOD__,
+            'invite_code' => $inviteCode,
+            'invitee_attempt_id' => $inviteeAttemptId,
+            'ok' => (bool) ($payload['ok'] ?? false),
+            'idempotent' => (bool) ($payload['idempotent'] ?? false),
+            'invite_id' => (string) ($payload['invite_id'] ?? ''),
+            'completion_id' => (string) ($payload['completion_id'] ?? ''),
+            'qualification_status' => (string) ($payload['qualification_status'] ?? ''),
+            'qualified_reason' => (string) ($payload['qualified_reason'] ?? ''),
+            'qualified' => (bool) ($payload['qualified'] ?? false),
+            'counted' => (bool) ($payload['counted'] ?? false),
+            'diagnostic_status' => (string) ($diagnostics['status'] ?? 'locked'),
+            'diagnostic_status_reason' => (string) ($diagnostics['status_reason'] ?? 'unlock_stage_locked'),
+            'unlock_stage' => (string) ($diagnostics['unlock_stage'] ?? 'locked'),
+            'unlock_source' => (string) ($diagnostics['unlock_source'] ?? 'none'),
+            'completed_invitees' => (int) ($diagnostics['completed_invitees'] ?? 0),
+            'required_invitees' => (int) ($diagnostics['required_invitees'] ?? 2),
+            'remaining_invitees' => (int) ($diagnostics['remaining_invitees'] ?? 2),
+            'progress_percent' => (int) ($diagnostics['progress_percent'] ?? 0),
+            'duration_ms' => $durationMs,
+        ];
+
+        if ((bool) ($payload['ok'] ?? false) === true) {
+            Log::info('INVITE_UNLOCK_COMPLETION_DIAGNOSTIC', $logPayload);
+
+            return;
+        }
+
+        Log::warning('INVITE_UNLOCK_COMPLETION_DIAGNOSTIC', array_merge($logPayload, [
+            'error_code' => (string) ($payload['error_code'] ?? 'INVITE_UNLOCK_COMPLETION_REJECTED'),
+            'message' => (string) ($payload['message'] ?? 'invite unlock completion rejected'),
+        ]));
     }
 
     /**
