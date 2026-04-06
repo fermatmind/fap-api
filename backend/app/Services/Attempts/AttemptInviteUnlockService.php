@@ -140,11 +140,17 @@ final class AttemptInviteUnlockService
             ->first();
 
         if (! $existing instanceof AttemptInviteUnlock) {
+            $unlockState = $this->entitlements->resolveAttemptUnlockState(
+                $targetOrgId,
+                $targetAttemptId
+            );
+            $unlockStage = ReportAccess::normalizeUnlockStage((string) ($unlockState['unlock_stage'] ?? ReportAccess::UNLOCK_STAGE_LOCKED));
+            $unlockSource = ReportAccess::normalizeUnlockSource((string) ($unlockState['unlock_source'] ?? ReportAccess::UNLOCK_SOURCE_NONE));
             $diagnostics = InviteUnlockDiagnostics::build(
                 0,
                 self::DEFAULT_REQUIRED_INVITEES,
-                ReportAccess::UNLOCK_STAGE_LOCKED,
-                ReportAccess::UNLOCK_SOURCE_NONE,
+                $unlockStage,
+                $unlockSource,
                 null
             );
 
@@ -161,12 +167,12 @@ final class AttemptInviteUnlockService
                 'completed_invitees' => 0,
                 'qualification_rule_version' => self::RULE_VERSION,
                 'expires_at' => null,
-                'unlock_stage' => ReportAccess::UNLOCK_STAGE_LOCKED,
-                'unlock_source' => ReportAccess::UNLOCK_SOURCE_NONE,
+                'unlock_stage' => $unlockStage,
+                'unlock_source' => $unlockSource,
                 'invite_unlock_v1' => $this->inviteUnlockSummaryBuilder->build(
                     $targetScaleCode,
-                    ReportAccess::UNLOCK_STAGE_LOCKED,
-                    ReportAccess::UNLOCK_SOURCE_NONE,
+                    $unlockStage,
+                    $unlockSource,
                     0,
                     self::DEFAULT_REQUIRED_INVITEES
                 ),
