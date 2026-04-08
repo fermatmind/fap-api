@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Career;
 
+use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Scoring\CareerScoreResult;
 use App\Domain\Career\Scoring\ClaimPermissionsCompiler;
 use App\Domain\Career\Scoring\IntegrityState;
@@ -37,5 +38,31 @@ final class ClaimPermissionsCompilerTest extends CareerScoringTestCase
         $this->assertTrue($permissions['allow_transition_recommendation']);
         $this->assertFalse($permissions['allow_cross_market_pay_copy']);
         $this->assertNotEmpty($permissions['reason_codes']);
+    }
+
+    public function test_it_blocks_strong_claims_when_index_state_is_not_exposure_eligible(): void
+    {
+        $permissions = (new ClaimPermissionsCompiler)->compile(
+            [
+                'fit_score' => new CareerScoreResult(81, IntegrityState::FULL, [], 90, 'fit', [], [], 1.0),
+                'strain_score' => new CareerScoreResult(36, IntegrityState::FULL, [], 90, 'strain', [], [], 1.0),
+                'ai_survival_score' => new CareerScoreResult(64, IntegrityState::FULL, [], 88, 'ai', [], [], 1.0),
+                'mobility_score' => new CareerScoreResult(69, IntegrityState::FULL, [], 88, 'mobility', [], [], 1.0),
+                'confidence_score' => new CareerScoreResult(79, IntegrityState::FULL, [], 88, 'confidence', [], [], 1.0),
+            ],
+            [
+                'red_flags' => [],
+                'amber_flags' => ['index_state_restricted'],
+                'blocked_claims' => ['strong_claim'],
+            ],
+            $this->sampleContext([
+                'index_state' => IndexStateValue::TRUST_LIMITED,
+                'index_eligible' => false,
+            ]),
+        );
+
+        $this->assertFalse($permissions['allow_strong_claim']);
+        $this->assertTrue($permissions['allow_ai_strategy']);
+        $this->assertContains('index_state_restricted', $permissions['reason_codes']);
     }
 }

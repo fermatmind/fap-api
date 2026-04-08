@@ -6,6 +6,8 @@ namespace App\Domain\Career\Scoring;
 
 final class ClaimReasonCode
 {
+    public const INDEX_STATE_RESTRICTED = 'index_state_restricted';
+
     public const STRONG_CLAIM_BLOCKED = 'strong_claim_blocked';
 
     public const SALARY_COMPARISON_BLOCKED = 'salary_comparison_blocked';

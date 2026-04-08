@@ -56,6 +56,13 @@ final class CareerScoringInputResolver
         $taskOverlap = $this->graphAverage($skillGraph?->task_overlap_graph);
         $toolOverlap = $this->graphAverage($skillGraph?->tool_overlap_graph);
         $crosswalkConfidence = $this->crosswalkConfidence($crosswalks->all());
+        $crosswalkIds = array_values(array_map(
+            static fn (OccupationCrosswalk $crosswalk): string => $crosswalk->id,
+            array_values(array_filter(
+                $crosswalks->all(),
+                static fn (mixed $crosswalk): bool => $crosswalk instanceof OccupationCrosswalk
+            ))
+        ));
         $sourceTrace = $truthMetric?->sourceTrace;
         $quality = is_array($trustManifest?->quality ?? null) ? $trustManifest->quality : [];
         $methodology = is_array($trustManifest?->methodology ?? null) ? $trustManifest->methodology : [];
@@ -68,6 +75,9 @@ final class CareerScoringInputResolver
             'index_state_id' => $indexState?->id,
             'truth_metric_id' => $truthMetric?->id,
             'source_trace_id' => $sourceTrace?->id,
+            'skill_graph_id' => $skillGraph?->id,
+            'crosswalk_ids' => $crosswalkIds,
+            'occupation_state_hash' => $this->occupationStateHash($occupation, $skillGraph?->id, $crosswalkIds),
             'trust_manifest' => $trustManifest instanceof TrustManifest,
             'reviewer_status' => $trustManifest?->reviewer_status,
             'quality_confidence' => $quality['confidence'] ?? $quality['confidence_score'] ?? null,
@@ -171,5 +181,33 @@ final class CareerScoringInputResolver
             $months > 0 => 0.38,
             default => 0.5,
         };
+    }
+
+    /**
+     * @param  list<string>  $crosswalkIds
+     */
+    private function occupationStateHash(Occupation $occupation, ?string $skillGraphId, array $crosswalkIds): string
+    {
+        $payload = [
+            'occupation_id' => $occupation->id,
+            'canonical_slug' => $occupation->canonical_slug,
+            'truth_market' => $occupation->truth_market,
+            'display_market' => $occupation->display_market,
+            'crosswalk_mode' => $occupation->crosswalk_mode,
+            'structural_stability' => $occupation->structural_stability,
+            'task_prototype_signature' => $occupation->task_prototype_signature,
+            'market_semantics_gap' => $occupation->market_semantics_gap,
+            'regulatory_divergence' => $occupation->regulatory_divergence,
+            'toolchain_divergence' => $occupation->toolchain_divergence,
+            'skill_gap_threshold' => $occupation->skill_gap_threshold,
+            'trust_inheritance_scope' => $occupation->trust_inheritance_scope,
+            'skill_graph_id' => $skillGraphId,
+            'crosswalk_ids' => $crosswalkIds,
+            'updated_at' => optional($occupation->updated_at)?->toISOString(),
+        ];
+
+        $encoded = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+        return hash('sha256', $encoded === false ? serialize($payload) : $encoded);
     }
 }

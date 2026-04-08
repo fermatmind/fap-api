@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Career\Scoring;
 
+use App\Domain\Career\IndexStateValue;
+
 final class ClaimPermissionsCompiler
 {
     /**
@@ -18,26 +20,35 @@ final class ClaimPermissionsCompiler
         $confidenceScore = $scoreBundle['confidence_score'] ?? null;
         $aiScore = $scoreBundle['ai_survival_score'] ?? null;
         $mobilityScore = $scoreBundle['mobility_score'] ?? null;
+        $indexState = (string) ($context['index_state'] ?? '');
+        $indexEligible = (bool) ($context['index_eligible'] ?? false);
+        $indexRestricted = ! $indexEligible || in_array($indexState, [IndexStateValue::TRUST_LIMITED, IndexStateValue::NOINDEX, IndexStateValue::UNAVAILABLE], true);
+        $indexBlocked = in_array($indexState, [IndexStateValue::NOINDEX, IndexStateValue::UNAVAILABLE], true);
 
         $allowStrongClaim = ! isset($blocked['strong_claim'])
+            && ! $indexRestricted
             && $confidenceScore instanceof CareerScoreResult
             && $confidenceScore->value >= 65
             && ! in_array($confidenceScore->integrityState, [IntegrityState::RESTRICTED, IntegrityState::BLOCKED], true);
 
         $allowSalaryComparison = ! isset($blocked['salary_comparison'])
+            && ! $indexBlocked
             && ($context['median_pay_usd_annual'] ?? null) !== null
             && ! ((bool) ($context['cross_market_mismatch'] ?? false) && ! (bool) ($context['allow_pay_direct_inheritance'] ?? false));
 
         $allowAiStrategy = ! isset($blocked['ai_strategy'])
+            && ! $indexBlocked
             && $aiScore instanceof CareerScoreResult
             && $aiScore->integrityState !== IntegrityState::BLOCKED;
 
         $allowTransitionRecommendation = ! isset($blocked['transition_recommendation'])
+            && ! $indexBlocked
             && $mobilityScore instanceof CareerScoreResult
             && $mobilityScore->integrityState !== IntegrityState::BLOCKED
             && $mobilityScore->value >= 40;
 
         $allowCrossMarketPayCopy = ! isset($blocked['cross_market_pay_copy'])
+            && ! $indexBlocked
             && ! (bool) ($context['cross_market_mismatch'] ?? false);
 
         $reasonCodes = array_merge(

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\IndexStateValue;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Schema;
@@ -31,6 +32,9 @@ final class CareerRecommendationCompilerTest extends TestCase
         $this->assertSame($chain['truthMetric']->id, $snapshot->truth_metric_id);
         $this->assertNotNull($snapshot->compiled_at);
         $this->assertSame(CareerRecommendationCompiler::COMPILER_VERSION, data_get($payload, 'compile_refs.compiler_version'));
+        $this->assertSame($chain['skillGraph']->id, data_get($payload, 'compile_refs.skill_graph_id'));
+        $this->assertSame([$chain['crosswalk']->id], data_get($payload, 'compile_refs.crosswalk_ids'));
+        $this->assertIsString(data_get($payload, 'compile_refs.occupation_state_hash'));
         $this->assertArrayHasKey('fit_score', (array) data_get($payload, 'score_bundle'));
         $this->assertArrayHasKey('warnings', $payload);
         $this->assertArrayHasKey('claim_permissions', $payload);
@@ -70,6 +74,27 @@ final class CareerRecommendationCompilerTest extends TestCase
         $this->assertFalse((bool) data_get($payload, 'claim_permissions.allow_ai_strategy'));
         $this->assertFalse((bool) data_get($payload, 'claim_permissions.allow_salary_comparison'));
         $this->assertContains('missing_ai_exposure', (array) data_get($payload, 'warnings.red_flags'));
+    }
+
+    public function test_it_blocks_strong_claims_when_index_state_is_noindex_even_with_otherwise_healthy_inputs(): void
+    {
+        $chain = CareerFoundationFixture::seedHighTrustCompleteChain([
+            'slug' => 'backend-architect-noindex',
+            'index_state' => IndexStateValue::NOINDEX,
+            'index_eligible' => false,
+        ]);
+
+        $snapshot = app(CareerRecommendationCompiler::class)->compile(
+            $chain['childProjection'],
+            $chain['occupation'],
+        );
+
+        $payload = $snapshot->snapshot_payload;
+
+        $this->assertFalse((bool) data_get($payload, 'claim_permissions.allow_strong_claim'));
+        $this->assertFalse((bool) data_get($payload, 'claim_permissions.allow_salary_comparison'));
+        $this->assertContains('index_state_restricted', (array) data_get($payload, 'warnings.red_flags'));
+        $this->assertContains('strong_claim', (array) data_get($payload, 'warnings.blocked_claims'));
     }
 
     public function test_it_keeps_compile_persistence_append_friendly(): void

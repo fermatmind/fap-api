@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Career;
 
+use App\Domain\Career\IndexStateValue;
 use Tests\TestCase;
 
 abstract class CareerScoringTestCase extends TestCase
@@ -50,10 +51,15 @@ abstract class CareerScoringTestCase extends TestCase
             'truth_manifest' => true,
             'truth_metric_id' => 'truth-1',
             'source_trace_id' => 'source-1',
+            'skill_graph_id' => 'graph-1',
+            'crosswalk_ids' => ['crosswalk-1'],
+            'occupation_state_hash' => 'hash-1',
             'cross_market_mismatch' => false,
             'allow_pay_direct_inheritance' => true,
             'editorial_patch_required' => false,
             'editorial_patch_complete' => true,
+            'index_state' => IndexStateValue::INDEXABLE,
+            'index_eligible' => true,
             'last_substantive_update_at' => now()->subDays(7),
             'truth_reviewed_at' => now()->subDays(7),
             'methodology_key_count' => 4,

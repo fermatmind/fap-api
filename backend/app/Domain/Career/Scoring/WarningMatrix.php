@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Career\Scoring;
 
+use App\Domain\Career\IndexStateValue;
+
 final class WarningMatrix
 {
     /**
@@ -20,6 +22,8 @@ final class WarningMatrix
         $redFlags = [];
         $amberFlags = [];
         $blockedClaims = [];
+        $indexState = (string) ($context['index_state'] ?? '');
+        $indexEligible = (bool) ($context['index_eligible'] ?? false);
 
         if (($context['median_pay_usd_annual'] ?? null) === null) {
             $redFlags[] = ClaimReasonCode::MISSING_MEDIAN_PAY;
@@ -53,6 +57,18 @@ final class WarningMatrix
             $redFlags[] = ClaimReasonCode::EDITORIAL_PATCH_REQUIRED;
             $blockedClaims[] = 'strong_claim';
             $blockedClaims[] = 'transition_recommendation';
+        }
+
+        if (in_array($indexState, [IndexStateValue::NOINDEX, IndexStateValue::UNAVAILABLE], true)) {
+            $redFlags[] = ClaimReasonCode::INDEX_STATE_RESTRICTED;
+            $blockedClaims[] = 'strong_claim';
+            $blockedClaims[] = 'salary_comparison';
+            $blockedClaims[] = 'ai_strategy';
+            $blockedClaims[] = 'transition_recommendation';
+            $blockedClaims[] = 'cross_market_pay_copy';
+        } elseif ($indexState === IndexStateValue::TRUST_LIMITED || ! $indexEligible) {
+            $amberFlags[] = ClaimReasonCode::INDEX_STATE_RESTRICTED;
+            $blockedClaims[] = 'strong_claim';
         }
 
         foreach ($scoreBundle as $scoreType => $scoreResult) {

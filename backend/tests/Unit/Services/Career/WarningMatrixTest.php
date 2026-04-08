@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Career;
 
+use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Scoring\CareerScoreResult;
 use App\Domain\Career\Scoring\IntegrityState;
 use App\Domain\Career\Scoring\WarningMatrix;
@@ -34,5 +35,28 @@ final class WarningMatrixTest extends CareerScoringTestCase
         $this->assertContains('cross_market_mismatch', $warnings['amber_flags']);
         $this->assertContains('salary_comparison', $warnings['blocked_claims']);
         $this->assertContains('strong_claim', $warnings['blocked_claims']);
+    }
+
+    public function test_it_blocks_exposure_claims_for_noindex_or_unavailable_states(): void
+    {
+        $warnings = (new WarningMatrix)->build(
+            $this->sampleContext([
+                'index_state' => IndexStateValue::NOINDEX,
+                'index_eligible' => false,
+            ]),
+            [
+                'fit_score' => new CareerScoreResult(80, IntegrityState::FULL, [], 88, 'fit', [], [], 1.0),
+                'strain_score' => new CareerScoreResult(32, IntegrityState::FULL, [], 88, 'strain', [], [], 1.0),
+                'ai_survival_score' => new CareerScoreResult(61, IntegrityState::FULL, [], 88, 'ai', [], [], 1.0),
+                'mobility_score' => new CareerScoreResult(66, IntegrityState::FULL, [], 88, 'mobility', [], [], 1.0),
+                'confidence_score' => new CareerScoreResult(77, IntegrityState::FULL, [], 88, 'confidence', [], [], 1.0),
+            ]
+        );
+
+        $this->assertContains('index_state_restricted', $warnings['red_flags']);
+        $this->assertContains('strong_claim', $warnings['blocked_claims']);
+        $this->assertContains('salary_comparison', $warnings['blocked_claims']);
+        $this->assertContains('ai_strategy', $warnings['blocked_claims']);
+        $this->assertContains('transition_recommendation', $warnings['blocked_claims']);
     }
 }
