@@ -4,31 +4,24 @@ declare(strict_types=1);
 
 namespace App\Services\Career;
 
+use App\Models\IndexState;
 use App\Models\Occupation;
 use App\Models\OccupationCrosswalk;
+use App\Models\OccupationTruthMetric;
 use App\Models\ProfileProjection;
 use App\Models\TrustManifest;
 
 final class CareerScoringInputResolver
 {
     /**
+     * @param  array<string, mixed>  $preferredRefs
      * @return array<string,mixed>
      */
-    public function resolve(ProfileProjection $profileProjection, Occupation $occupation): array
+    public function resolve(ProfileProjection $profileProjection, Occupation $occupation, array $preferredRefs = []): array
     {
-        $truthMetric = $occupation->truthMetrics()
-            ->orderByDesc('reviewed_at')
-            ->orderByDesc('effective_at')
-            ->orderByDesc('created_at')
-            ->first();
-        $trustManifest = $occupation->trustManifests()
-            ->orderByDesc('reviewed_at')
-            ->orderByDesc('created_at')
-            ->first();
-        $indexState = $occupation->indexStates()
-            ->orderByDesc('changed_at')
-            ->orderByDesc('updated_at')
-            ->first();
+        $truthMetric = $this->resolveTruthMetric($occupation, $preferredRefs['truth_metric_id'] ?? null);
+        $trustManifest = $this->resolveTrustManifest($occupation, $preferredRefs['trust_manifest_id'] ?? null);
+        $indexState = $this->resolveIndexState($occupation, $preferredRefs['index_state_id'] ?? null);
         $editorialPatch = $occupation->editorialPatches()
             ->orderByDesc('updated_at')
             ->orderByDesc('created_at')
@@ -125,6 +118,43 @@ final class CareerScoringInputResolver
                 ? min(1.0, max(0.0, ((float) $truthMetric->ai_exposure) / 10.0))
                 : null,
         ];
+    }
+
+    private function resolveTruthMetric(Occupation $occupation, mixed $truthMetricId): ?OccupationTruthMetric
+    {
+        if (is_string($truthMetricId) && $truthMetricId !== '') {
+            return $occupation->truthMetrics()->whereKey($truthMetricId)->first();
+        }
+
+        return $occupation->truthMetrics()
+            ->orderByDesc('reviewed_at')
+            ->orderByDesc('effective_at')
+            ->orderByDesc('created_at')
+            ->first();
+    }
+
+    private function resolveTrustManifest(Occupation $occupation, mixed $trustManifestId): ?TrustManifest
+    {
+        if (is_string($trustManifestId) && $trustManifestId !== '') {
+            return $occupation->trustManifests()->whereKey($trustManifestId)->first();
+        }
+
+        return $occupation->trustManifests()
+            ->orderByDesc('reviewed_at')
+            ->orderByDesc('created_at')
+            ->first();
+    }
+
+    private function resolveIndexState(Occupation $occupation, mixed $indexStateId): ?IndexState
+    {
+        if (is_string($indexStateId) && $indexStateId !== '') {
+            return $occupation->indexStates()->whereKey($indexStateId)->first();
+        }
+
+        return $occupation->indexStates()
+            ->orderByDesc('changed_at')
+            ->orderByDesc('updated_at')
+            ->first();
     }
 
     private function graphAverage(mixed $graph): ?float

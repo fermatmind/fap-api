@@ -77,4 +77,16 @@ class Occupation extends CareerFoundationModel
     {
         return $this->hasMany(RecommendationSnapshot::class, 'occupation_id', 'id');
     }
+
+    public function sourceTraces(): HasMany
+    {
+        return $this->hasManyThrough(
+            SourceTrace::class,
+            OccupationTruthMetric::class,
+            'occupation_id',
+            'id',
+            'id',
+            'source_trace_id'
+        );
+    }
 }

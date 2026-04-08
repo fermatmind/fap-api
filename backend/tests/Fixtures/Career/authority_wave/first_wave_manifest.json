@@ -1,0 +1,18 @@
+{
+  "dataset_version": "2026.04.08.test",
+  "defaults": {
+    "truth_market": "US",
+    "display_market": "US",
+    "mapping_mode": "exact"
+  },
+  "occupations": {
+    "administrative-services-managers": {
+      "mapping_mode": "trust_inheritance",
+      "display_market": "CN",
+      "trust_inheritance_scope": {
+        "allow_task_truth": true,
+        "allow_pay_direct_inheritance": false
+      }
+    }
+  }
+}

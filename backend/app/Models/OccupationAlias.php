@@ -26,4 +26,9 @@ class OccupationAlias extends CareerFoundationModel
     {
         return $this->belongsTo(OccupationFamily::class, 'family_id', 'id');
     }
+
+    public function importRun(): BelongsTo
+    {
+        return $this->belongsTo(CareerImportRun::class, 'import_run_id', 'id');
+    }
 }

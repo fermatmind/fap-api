@@ -20,4 +20,9 @@ class OccupationCrosswalk extends CareerFoundationModel
     {
         return $this->belongsTo(Occupation::class, 'occupation_id', 'id');
     }
+
+    public function importRun(): BelongsTo
+    {
+        return $this->belongsTo(CareerImportRun::class, 'import_run_id', 'id');
+    }
 }
