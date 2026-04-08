@@ -13,6 +13,7 @@ class RecommendationSnapshot extends CareerImmutableFoundationModel
 
     protected $casts = [
         'snapshot_payload' => 'array',
+        'compiled_at' => 'datetime',
         'created_at' => 'datetime',
     ];
 
@@ -29,6 +30,21 @@ class RecommendationSnapshot extends CareerImmutableFoundationModel
     public function occupation(): BelongsTo
     {
         return $this->belongsTo(Occupation::class, 'occupation_id', 'id');
+    }
+
+    public function trustManifest(): BelongsTo
+    {
+        return $this->belongsTo(TrustManifest::class, 'trust_manifest_id', 'id');
+    }
+
+    public function indexState(): BelongsTo
+    {
+        return $this->belongsTo(IndexState::class, 'index_state_id', 'id');
+    }
+
+    public function truthMetric(): BelongsTo
+    {
+        return $this->belongsTo(OccupationTruthMetric::class, 'truth_metric_id', 'id');
     }
 
     public function transitionPaths(): HasMany
