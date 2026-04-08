@@ -13,6 +13,8 @@ use App\Console\Commands\CommerceCompensatePendingOrders;
 use App\Console\Commands\CommerceReconcile;
 use App\Console\Commands\CommerceRepairPaidOrders;
 use App\Console\Commands\CommerceRepairPostCommitFailed;
+use App\Console\Commands\CareerCompileAuthorityWave;
+use App\Console\Commands\CareerImportAuthorityWave;
 use App\Console\Commands\ContentCompile;
 use App\Console\Commands\ContentLint;
 use App\Console\Commands\Eq60PsychometricsReport;
@@ -123,6 +125,8 @@ class Kernel extends ConsoleKernel
         CommerceCompensatePendingOrders::class,
         CommerceRepairPaidOrders::class,
         CommerceRepairPostCommitFailed::class,
+        CareerImportAuthorityWave::class,
+        CareerCompileAuthorityWave::class,
         PacksPublish::class,
         PacksRollback::class,
         Packs2Publish::class,

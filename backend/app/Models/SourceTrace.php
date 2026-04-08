@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SourceTrace extends CareerFoundationModel
@@ -21,5 +22,10 @@ class SourceTrace extends CareerFoundationModel
     public function truthMetrics(): HasMany
     {
         return $this->hasMany(OccupationTruthMetric::class, 'source_trace_id', 'id');
+    }
+
+    public function importRun(): BelongsTo
+    {
+        return $this->belongsTo(CareerImportRun::class, 'import_run_id', 'id');
     }
 }

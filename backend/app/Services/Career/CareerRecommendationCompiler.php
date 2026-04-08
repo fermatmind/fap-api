@@ -18,16 +18,21 @@ final class CareerRecommendationCompiler
         private readonly ScoringEngine5D $scoringEngine,
     ) {}
 
-    public function compile(ProfileProjection $profileProjection, Occupation $occupation): RecommendationSnapshot
+    /**
+     * @param  array<string, mixed>  $options
+     */
+    public function compile(ProfileProjection $profileProjection, Occupation $occupation, array $options = []): RecommendationSnapshot
     {
-        $resolved = $this->inputResolver->resolve($profileProjection, $occupation);
+        $resolved = $this->inputResolver->resolve($profileProjection, $occupation, $options);
         $compiled = $this->scoringEngine->compile($resolved);
         $compiledAt = now();
+        $extraCompileRefs = is_array($options['compile_refs'] ?? null) ? $options['compile_refs'] : [];
 
         return RecommendationSnapshot::query()->create([
             'profile_projection_id' => $profileProjection->id,
             'context_snapshot_id' => $profileProjection->context_snapshot_id,
             'occupation_id' => $occupation->id,
+            'compile_run_id' => $options['compile_run_id'] ?? null,
             'compiler_version' => self::COMPILER_VERSION,
             'trust_manifest_id' => $resolved['trust_manifest_id'],
             'index_state_id' => $resolved['index_state_id'],
@@ -51,6 +56,7 @@ final class CareerRecommendationCompiler
                     'crosswalk_ids' => $resolved['crosswalk_ids'],
                     'occupation_state_hash' => $resolved['occupation_state_hash'],
                     'compiled_at' => $compiledAt->toISOString(),
+                    ...$extraCompileRefs,
                 ],
             ],
         ]);

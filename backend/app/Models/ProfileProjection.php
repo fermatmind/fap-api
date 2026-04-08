@@ -37,4 +37,9 @@ class ProfileProjection extends CareerImmutableFoundationModel
     {
         return $this->hasMany(RecommendationSnapshot::class, 'profile_projection_id', 'id');
     }
+
+    public function compileRun(): BelongsTo
+    {
+        return $this->belongsTo(CareerCompileRun::class, 'compile_run_id', 'id');
+    }
 }

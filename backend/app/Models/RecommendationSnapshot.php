@@ -47,6 +47,11 @@ class RecommendationSnapshot extends CareerImmutableFoundationModel
         return $this->belongsTo(OccupationTruthMetric::class, 'truth_metric_id', 'id');
     }
 
+    public function compileRun(): BelongsTo
+    {
+        return $this->belongsTo(CareerCompileRun::class, 'compile_run_id', 'id');
+    }
+
     public function transitionPaths(): HasMany
     {
         return $this->hasMany(TransitionPath::class, 'recommendation_snapshot_id', 'id');

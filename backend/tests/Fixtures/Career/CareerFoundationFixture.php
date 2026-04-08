@@ -25,6 +25,16 @@ use App\Models\TrustManifest;
 
 final class CareerFoundationFixture
 {
+    public static function firstWaveCsvPath(): string
+    {
+        return base_path('tests/Fixtures/Career/authority_wave/first_wave_rows.csv');
+    }
+
+    public static function firstWaveManifestPath(): string
+    {
+        return base_path('tests/Fixtures/Career/authority_wave/first_wave_manifest.json');
+    }
+
     /**
      * @return array<string, mixed>
      */
