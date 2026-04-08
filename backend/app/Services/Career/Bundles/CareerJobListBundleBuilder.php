@@ -46,11 +46,24 @@ final class CareerJobListBundleBuilder
             })
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
-            ->get()
-            ->unique('occupation_id')
+            ->get();
+
+        $selectedSnapshots = $snapshots
+            ->groupBy('occupation_id')
+            ->map(function (Collection $group) use ($includeNonIndexable): ?RecommendationSnapshot {
+                /** @var RecommendationSnapshot|null $selected */
+                $selected = $group
+                    ->sort(function (RecommendationSnapshot $left, RecommendationSnapshot $right) use ($includeNonIndexable): int {
+                        return $this->compareSnapshots($left, $right, $includeNonIndexable);
+                    })
+                    ->first();
+
+                return $selected;
+            })
+            ->filter()
             ->values();
 
-        $items = $snapshots
+        $items = $selectedSnapshots
             ->map(function (RecommendationSnapshot $snapshot) use ($includeNonIndexable): ?CareerJobListItemBundle {
                 $occupation = $snapshot->occupation;
                 if (! $occupation instanceof Occupation) {
@@ -74,6 +87,25 @@ final class CareerJobListBundleBuilder
         ])->values();
 
         return $items->all();
+    }
+
+    private function compareSnapshots(RecommendationSnapshot $left, RecommendationSnapshot $right, bool $includeNonIndexable): int
+    {
+        if (! $includeNonIndexable) {
+            $leftEligible = (bool) ($left->indexState?->index_eligible ?? false);
+            $rightEligible = (bool) ($right->indexState?->index_eligible ?? false);
+            if ($leftEligible !== $rightEligible) {
+                return $leftEligible ? -1 : 1;
+            }
+        }
+
+        $leftCompiled = optional($left->compiled_at)?->getTimestamp() ?? 0;
+        $rightCompiled = optional($right->compiled_at)?->getTimestamp() ?? 0;
+        if ($leftCompiled !== $rightCompiled) {
+            return $rightCompiled <=> $leftCompiled;
+        }
+
+        return strcmp((string) $left->id, (string) $right->id);
     }
 
     private function buildItem(RecommendationSnapshot $snapshot, Occupation $occupation): CareerJobListItemBundle

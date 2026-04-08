@@ -59,11 +59,40 @@ final class CareerJobListBundleBuilderTest extends TestCase
         ));
     }
 
+    public function test_it_prefers_an_older_indexable_snapshot_over_a_newer_non_indexable_snapshot_for_the_same_job(): void
+    {
+        $chain = CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-stable']);
+        $this->compileJobChain($chain, now()->subMinutes(5));
+
+        $chain['occupation']->indexStates()->create([
+            'index_state' => 'trust_limited',
+            'index_eligible' => false,
+            'canonical_path' => '/career/jobs/backend-architect-stable',
+            'canonical_target' => null,
+            'reason_codes' => ['trust_limited'],
+            'changed_at' => now()->subSeconds(30),
+        ]);
+
+        $this->compileJobChain($chain, now()->subMinute());
+
+        $items = app(CareerJobListBundleBuilder::class)->build();
+
+        $this->assertCount(1, $items);
+        $payload = $items[0]->toArray();
+
+        $this->assertSame('backend-architect-stable', data_get($payload, 'identity.canonical_slug'));
+        $this->assertTrue((bool) data_get($payload, 'seo_contract.index_eligible'));
+        $this->assertContains(
+            data_get($payload, 'trust_summary.reviewer_status'),
+            ['approved', 'reviewed']
+        );
+    }
+
     /**
      * @param  array<string, mixed>  $chain
      * @return array<string, mixed>
      */
-    private function compileJobChain(array $chain): array
+    private function compileJobChain(array $chain, ?\Illuminate\Support\Carbon $compiledAt = null): array
     {
         $importRun = CareerImportRun::query()->create([
             'dataset_name' => 'fixture',
@@ -97,14 +126,19 @@ final class CareerJobListBundleBuilderTest extends TestCase
             ),
         ]);
 
-        app(CareerRecommendationCompiler::class)->compile($chain['childProjection'], $chain['occupation'], [
+        $snapshot = app(CareerRecommendationCompiler::class)->compile($chain['childProjection'], $chain['occupation'], [
             'compile_run_id' => $compileRun->id,
             'import_run_id' => $importRun->id,
         ]);
 
+        if ($compiledAt !== null) {
+            $snapshot->forceFill(['compiled_at' => $compiledAt])->save();
+        }
+
         return [
             'importRun' => $importRun,
             'compileRun' => $compileRun,
+            'snapshot' => $snapshot,
         ] + $chain;
     }
 }
