@@ -72,4 +72,9 @@ class Occupation extends CareerFoundationModel
     {
         return $this->hasMany(IndexState::class, 'occupation_id', 'id');
     }
+
+    public function recommendationSnapshots(): HasMany
+    {
+        return $this->hasMany(RecommendationSnapshot::class, 'occupation_id', 'id');
+    }
 }
