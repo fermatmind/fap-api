@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Models\CareerCompileRun;
+use App\Models\CareerImportRun;
 use App\Models\CareerJob;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -17,7 +19,40 @@ final class CareerJobDetailApiTest extends TestCase
     public function test_it_returns_a_resource_backed_job_detail_bundle_with_explicit_sections(): void
     {
         $chain = CareerFoundationFixture::seedHighTrustCompleteChain();
-        app(CareerRecommendationCompiler::class)->compile($chain['childProjection'], $chain['occupation']);
+        $importRun = CareerImportRun::query()->create([
+            'dataset_name' => 'fixture',
+            'dataset_version' => 'v1',
+            'dataset_checksum' => 'checksum-job-api',
+            'scope_mode' => 'first_wave_exact',
+            'dry_run' => false,
+            'status' => 'completed',
+            'started_at' => now()->subMinutes(10),
+            'finished_at' => now()->subMinutes(9),
+        ]);
+        $compileRun = CareerCompileRun::query()->create([
+            'import_run_id' => $importRun->id,
+            'compiler_version' => CareerRecommendationCompiler::COMPILER_VERSION,
+            'scope_mode' => 'first_wave_exact',
+            'dry_run' => false,
+            'status' => 'completed',
+            'started_at' => now()->subMinutes(8),
+            'finished_at' => now()->subMinutes(7),
+        ]);
+        $chain['contextSnapshot']->update([
+            'compile_run_id' => $compileRun->id,
+            'context_payload' => ['materialization' => 'career_first_wave'],
+        ]);
+        $chain['childProjection']->update([
+            'compile_run_id' => $compileRun->id,
+            'projection_payload' => array_merge(
+                is_array($chain['childProjection']->projection_payload) ? $chain['childProjection']->projection_payload : [],
+                ['materialization' => 'career_first_wave']
+            ),
+        ]);
+        app(CareerRecommendationCompiler::class)->compile($chain['childProjection'], $chain['occupation'], [
+            'compile_run_id' => $compileRun->id,
+            'import_run_id' => $importRun->id,
+        ]);
 
         $this->getJson('/api/v0.5/career/jobs/backend-architect')
             ->assertOk()

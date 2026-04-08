@@ -16,7 +16,8 @@ final class CareerRecommendationDetailBundleBuilder
 
     public function buildByType(string $type): ?CareerRecommendationDetailBundle
     {
-        $normalizedType = strtoupper(trim($type));
+        $requestedType = trim($type);
+        $normalizedType = strtoupper($requestedType);
         if ($normalizedType === '') {
             return null;
         }
@@ -34,6 +35,13 @@ final class CareerRecommendationDetailBundleBuilder
                 'compileRun',
             ])
             ->whereNotNull('compiled_at')
+            ->whereNotNull('compile_run_id')
+            ->whereHas('contextSnapshot', static function ($query): void {
+                $query->where('context_payload->materialization', 'career_first_wave');
+            })
+            ->whereHas('profileProjection', static function ($query): void {
+                $query->where('projection_payload->materialization', 'career_first_wave');
+            })
             ->whereHas('profileProjection', function ($query) use ($normalizedType, $canonicalType): void {
                 $query->where(function ($inner) use ($normalizedType, $canonicalType): void {
                     $inner->where('projection_payload->recommendation_subject_meta->type_code', $normalizedType)
@@ -103,7 +111,7 @@ final class CareerRecommendationDetailBundleBuilder
                 'locale_context' => is_array($trustManifest?->locale_context) ? $trustManifest->locale_context : [],
                 'methodology' => is_array($trustManifest?->methodology) ? $trustManifest->methodology : [],
             ],
-            seoContract: $this->buildSeoContract($snapshot, $subjectMeta),
+            seoContract: $this->buildSeoContract($snapshot, $subjectMeta, $requestedType),
             provenanceMeta: [
                 'content_version' => $trustManifest?->content_version,
                 'data_version' => $trustManifest?->data_version,
@@ -126,13 +134,11 @@ final class CareerRecommendationDetailBundleBuilder
      * @param  array<string, mixed>  $subjectMeta
      * @return array<string, mixed>
      */
-    private function buildSeoContract(RecommendationSnapshot $snapshot, array $subjectMeta): array
+    private function buildSeoContract(RecommendationSnapshot $snapshot, array $subjectMeta, string $requestedType): array
     {
         $indexState = $snapshot->indexState;
-        $typeCode = strtolower((string) ($subjectMeta['type_code'] ?? $subjectMeta['canonical_type_code'] ?? ''));
-        $canonicalPath = is_string($indexState?->canonical_path) && $typeCode !== ''
-            ? '/career/recommendations/mbti/'.$typeCode
-            : '/career/recommendations/mbti/'.$typeCode;
+        $routeSubject = $this->routeSubject($subjectMeta, $requestedType);
+        $canonicalPath = '/career/recommendations/mbti/'.$routeSubject;
         $indexEligible = (bool) ($indexState?->index_eligible ?? false);
         $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
         $surface = $this->seoSurfaceContractService->build([
@@ -165,5 +171,32 @@ final class CareerRecommendationDetailBundleBuilder
     private function normalizeArray(mixed $value): array
     {
         return is_array($value) ? $value : [];
+    }
+
+    /**
+     * @param  array<string, mixed>  $subjectMeta
+     */
+    private function routeSubject(array $subjectMeta, string $requestedType): string
+    {
+        $candidates = [
+            $requestedType,
+            is_scalar($subjectMeta['public_route_slug'] ?? null) ? (string) $subjectMeta['public_route_slug'] : null,
+            is_scalar($subjectMeta['route_type'] ?? null) ? (string) $subjectMeta['route_type'] : null,
+            is_scalar($subjectMeta['canonical_type_code'] ?? null) ? (string) $subjectMeta['canonical_type_code'] : null,
+            is_scalar($subjectMeta['type_code'] ?? null) ? (string) $subjectMeta['type_code'] : null,
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (! is_string($candidate)) {
+                continue;
+            }
+
+            $normalized = strtolower(trim($candidate));
+            if ($normalized !== '') {
+                return $normalized;
+            }
+        }
+
+        return 'unknown';
     }
 }

@@ -47,6 +47,13 @@ final class CareerJobDetailBundleBuilder
             ])
             ->where('occupation_id', $occupation->id)
             ->whereNotNull('compiled_at')
+            ->whereNotNull('compile_run_id')
+            ->whereHas('contextSnapshot', static function ($query): void {
+                $query->where('context_payload->materialization', 'career_first_wave');
+            })
+            ->whereHas('profileProjection', static function ($query): void {
+                $query->where('projection_payload->materialization', 'career_first_wave');
+            })
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
             ->first();
