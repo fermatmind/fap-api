@@ -39,6 +39,7 @@ final class CareerAuthorityRunLedgerTest extends TestCase
         $this->assertSame('completed', $compileRun->status);
         $this->assertTrue($compileRun->dry_run);
         $this->assertSame(2, $compileRun->subjects_seen);
-        $this->assertSame(2, $compileRun->snapshots_created);
+        $this->assertSame(0, $compileRun->snapshots_created);
+        $this->assertSame(2, (int) ($compileRun->output_counts['snapshots_planned'] ?? 0));
     }
 }

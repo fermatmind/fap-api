@@ -37,6 +37,13 @@ final class CareerCompileAuthorityWave extends Command
             }
 
             $importRun = CareerImportRun::query()->findOrFail($importRunId);
+            if ($importRun->dry_run) {
+                throw new \RuntimeException('Cannot compile from a dry-run import ledger.');
+            }
+            if ($importRun->status !== RunStatus::COMPLETED) {
+                throw new \RuntimeException('Import run must be completed before compile.');
+            }
+
             $occupationIds = OccupationTruthMetric::query()
                 ->where('import_run_id', $importRun->id)
                 ->orderBy('created_at')
@@ -45,6 +52,13 @@ final class CareerCompileAuthorityWave extends Command
                 ->unique()
                 ->values()
                 ->all();
+            $priorRunId = CareerCompileRun::query()
+                ->where('import_run_id', $importRun->id)
+                ->where('compiler_version', CareerRecommendationCompiler::COMPILER_VERSION)
+                ->where('scope_mode', $importRun->scope_mode)
+                ->where('status', RunStatus::COMPLETED)
+                ->latest('started_at')
+                ->value('id');
 
             $compileRun = CareerCompileRun::query()->create([
                 'import_run_id' => $importRun->id,
@@ -55,12 +69,14 @@ final class CareerCompileAuthorityWave extends Command
                 'started_at' => now(),
                 'meta' => [
                     'manifest_supplied' => $this->option('manifest') !== null,
+                    'replay_of_run_id' => is_string($priorRunId) ? $priorRunId : null,
                 ],
             ]);
 
             $summary = [
                 'subjects_seen' => count($occupationIds),
                 'snapshots_created' => 0,
+                'snapshots_planned' => 0,
                 'snapshots_skipped' => 0,
                 'snapshots_failed' => 0,
                 'output_counts' => [],
@@ -89,7 +105,7 @@ final class CareerCompileAuthorityWave extends Command
                 }
 
                 if ($compileRun->dry_run) {
-                    $summary['snapshots_created']++;
+                    $summary['snapshots_planned']++;
 
                     continue;
                 }
@@ -114,7 +130,9 @@ final class CareerCompileAuthorityWave extends Command
                 'snapshots_created' => $summary['snapshots_created'],
                 'snapshots_skipped' => $summary['snapshots_skipped'],
                 'snapshots_failed' => $summary['snapshots_failed'],
-                'output_counts' => $summary['output_counts'],
+                'output_counts' => array_merge($summary['output_counts'], [
+                    'snapshots_planned' => $summary['snapshots_planned'],
+                ]),
                 'error_summary' => array_slice($summary['errors'], 0, 50),
             ])->save();
 
@@ -123,8 +141,10 @@ final class CareerCompileAuthorityWave extends Command
             $this->line('compiler_version='.$compileRun->compiler_version);
             $this->line('scope_mode='.$compileRun->scope_mode);
             $this->line('dry_run='.($compileRun->dry_run ? '1' : '0'));
+            $this->line('replay_of_run_id='.(is_string($priorRunId) ? $priorRunId : ''));
             $this->line('subjects_seen='.$compileRun->subjects_seen);
             $this->line('snapshots_created='.$compileRun->snapshots_created);
+            $this->line('snapshots_planned='.(int) ($compileRun->output_counts['snapshots_planned'] ?? 0));
             $this->line('snapshots_skipped='.$compileRun->snapshots_skipped);
             $this->line('snapshots_failed='.$compileRun->snapshots_failed);
             $this->line('status='.$compileRun->status);

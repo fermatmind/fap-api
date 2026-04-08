@@ -41,6 +41,13 @@ final class CareerImportAuthorityWave extends Command
                 $this->option('manifest') !== null ? (string) $this->option('manifest') : null,
                 $this->limitValue(),
             );
+            $priorRunId = CareerImportRun::query()
+                ->where('dataset_name', $dataset['dataset_name'])
+                ->where('dataset_checksum', $dataset['dataset_checksum'])
+                ->where('scope_mode', ImportScopeMode::ledgerValue($allowedModes))
+                ->where('status', RunStatus::COMPLETED)
+                ->latest('started_at')
+                ->value('id');
 
             $run = CareerImportRun::query()->create([
                 'dataset_name' => $dataset['dataset_name'],
@@ -54,6 +61,7 @@ final class CareerImportAuthorityWave extends Command
                 'meta' => [
                     'allowed_modes' => $allowedModes,
                     'manifest_supplied' => $this->option('manifest') !== null,
+                    'replay_of_run_id' => is_string($priorRunId) ? $priorRunId : null,
                 ],
             ]);
 
@@ -78,6 +86,7 @@ final class CareerImportAuthorityWave extends Command
             $this->line('dataset_checksum='.$run->dataset_checksum);
             $this->line('scope_mode='.$run->scope_mode);
             $this->line('dry_run='.($run->dry_run ? '1' : '0'));
+            $this->line('replay_of_run_id='.(is_string($priorRunId) ? $priorRunId : ''));
             $this->line('rows_seen='.$run->rows_seen);
             $this->line('rows_accepted='.$run->rows_accepted);
             $this->line('rows_skipped='.$run->rows_skipped);
