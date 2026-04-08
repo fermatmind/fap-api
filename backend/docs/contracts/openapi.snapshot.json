@@ -2345,6 +2345,40 @@
                 ]
             }
         },
+        "/api/v0.5/career/jobs/{slug}": {
+            "get": {
+                "operationId": "get_api_v0_5_career_jobs_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerJobDetailController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/career/recommendations/mbti/{type}": {
+            "get": {
+                "operationId": "get_api_v0_5_career_recommendations_mbti_type_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerRecommendationDetailController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/cms/articles": {
             "post": {
                 "operationId": "post_api_v0_5_cms_articles",

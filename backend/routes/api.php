@@ -13,8 +13,8 @@ use App\Http\Controllers\API\V0_3\ClaimController as ClaimV03Controller;
 use App\Http\Controllers\API\V0_3\ComplianceDsarController;
 use App\Http\Controllers\API\V0_3\EmailCaptureController;
 use App\Http\Controllers\API\V0_3\EmailPreferenceController;
-use App\Http\Controllers\API\V0_3\MbtiCompareInviteController;
 use App\Http\Controllers\API\V0_3\MbtiAttributionEventController;
+use App\Http\Controllers\API\V0_3\MbtiCompareInviteController;
 use App\Http\Controllers\API\V0_3\MeController as MeV03Controller;
 use App\Http\Controllers\API\V0_3\OrgInvitesController;
 use App\Http\Controllers\API\V0_3\OrgsController;
@@ -29,6 +29,8 @@ use App\Http\Controllers\API\V0_4\BootController;
 use App\Http\Controllers\API\V0_4\ExperimentGovernanceController;
 use App\Http\Controllers\API\V0_4\PartnerController;
 use App\Http\Controllers\API\V0_4\RotationAuditController;
+use App\Http\Controllers\API\V0_5\Career\CareerJobDetailController;
+use App\Http\Controllers\API\V0_5\Career\CareerRecommendationDetailController;
 use App\Http\Controllers\API\V0_5\Cms\ArticleController;
 use App\Http\Controllers\API\V0_5\Cms\CareerGuideController;
 use App\Http\Controllers\API\V0_5\Cms\CareerJobController;
@@ -393,6 +395,8 @@ Route::prefix('v0.4')->middleware(NormalizeApiErrorContract::class)->group(funct
 });
 
 Route::prefix('v0.5')->group(function () {
+    Route::get('/career/jobs/{slug}', [CareerJobDetailController::class, 'show']);
+    Route::get('/career/recommendations/mbti/{type}', [CareerRecommendationDetailController::class, 'show']);
     Route::get('/articles', [ArticleController::class, 'index']);
     Route::get('/articles/{slug}', [ArticleController::class, 'show']);
     Route::get('/articles/{slug}/seo', [ArticleController::class, 'seo']);
