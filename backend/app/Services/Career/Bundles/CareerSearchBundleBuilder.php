@@ -14,7 +14,7 @@ use Illuminate\Support\Collection;
 
 final class CareerSearchBundleBuilder
 {
-    private const SAFE_CROSSWALK_MODES = ['exact', 'trust_inheritance', 'direct_match'];
+    private const SAFE_CROSSWALK_MODES = ['exact', 'trust_inheritance'];
 
     /**
      * @var array<string, int>

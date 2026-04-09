@@ -22,9 +22,11 @@ final class CareerSearchBundleBuilderTest extends TestCase
     {
         $exact = $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain([
             'slug' => 'backend-architect',
+            'crosswalk_mode' => 'exact',
         ]));
         $prefix = $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain([
             'slug' => 'backend-architect-lead',
+            'crosswalk_mode' => 'exact',
         ]));
 
         $results = app(CareerSearchBundleBuilder::class)->build('backend-architect');
@@ -42,9 +44,11 @@ final class CareerSearchBundleBuilderTest extends TestCase
     {
         $exact = $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain([
             'slug' => 'distributed-platform-architect',
+            'crosswalk_mode' => 'exact',
         ]));
         $prefix = $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain([
             'slug' => 'distributed-platform-lead',
+            'crosswalk_mode' => 'exact',
         ]));
 
         $exact['occupation']->update([
@@ -69,9 +73,11 @@ final class CareerSearchBundleBuilderTest extends TestCase
     {
         $exact = $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain([
             'slug' => 'platform-ops-architect',
+            'crosswalk_mode' => 'exact',
         ]));
         $prefix = $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain([
             'slug' => 'platform-ops-specialist',
+            'crosswalk_mode' => 'exact',
         ]));
 
         OccupationAlias::query()->create([
@@ -110,11 +116,13 @@ final class CareerSearchBundleBuilderTest extends TestCase
     {
         $canonical = $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain([
             'slug' => 'backend-architect-canonical',
+            'crosswalk_mode' => 'exact',
         ]));
         $canonical['occupation']->update(['canonical_title_en' => 'Backend Architect']);
 
         $aliasOnly = $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain([
             'slug' => 'platform-architecture-specialist',
+            'crosswalk_mode' => 'exact',
         ]));
         $aliasOnly['occupation']->update(['canonical_title_en' => 'Platform Architecture Specialist']);
         OccupationAlias::query()->create([
@@ -141,6 +149,7 @@ final class CareerSearchBundleBuilderTest extends TestCase
     {
         $visible = $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain([
             'slug' => 'backend-architect-visible-search',
+            'crosswalk_mode' => 'exact',
         ]));
         OccupationAlias::query()->create([
             'occupation_id' => $visible['occupation']->id,
@@ -180,9 +189,11 @@ final class CareerSearchBundleBuilderTest extends TestCase
     {
         $en = $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain([
             'slug' => 'cloud-architect-en',
+            'crosswalk_mode' => 'exact',
         ]));
         $zh = $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain([
             'slug' => 'cloud-architect-zh',
+            'crosswalk_mode' => 'exact',
         ]));
 
         OccupationAlias::query()->create([
@@ -218,6 +229,28 @@ final class CareerSearchBundleBuilderTest extends TestCase
         $this->assertCount(1, $zhResults);
         $this->assertSame('cloud-architect-zh', $zhResults[0]->identity['canonical_slug']);
         $this->assertSame('alias_exact', $zhResults[0]->matchKind);
+    }
+
+    public function test_it_excludes_direct_match_rows_from_public_safe_search_scope(): void
+    {
+        $direct = $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain([
+            'slug' => 'direct-match-architect',
+            'crosswalk_mode' => 'direct_match',
+        ]));
+
+        OccupationAlias::query()->create([
+            'occupation_id' => $direct['occupation']->id,
+            'alias' => 'Direct Match Architect',
+            'normalized' => 'direct match architect',
+            'lang' => 'en-US',
+            'register' => 'alias',
+            'intent_scope' => 'specialized',
+            'target_kind' => 'leaf_or_child',
+            'precision_score' => 0.95,
+            'confidence_score' => 0.95,
+        ]);
+
+        $this->assertSame([], app(CareerSearchBundleBuilder::class)->build('direct match architect'));
     }
 
     /**

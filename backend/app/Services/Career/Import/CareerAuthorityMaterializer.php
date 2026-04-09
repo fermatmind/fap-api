@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Career\Import;
 
 use App\Domain\Career\Import\CrosswalkSeedPolicy;
+use App\Domain\Career\Import\FirstWaveAliasHardeningService;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
 use App\Models\ContextSnapshot;
@@ -31,6 +32,7 @@ final class CareerAuthorityMaterializer
     public function __construct(
         private readonly CrosswalkSeedPolicy $crosswalkSeedPolicy,
         private readonly CareerRecommendationCompiler $compiler,
+        private readonly FirstWaveAliasHardeningService $firstWaveAliasHardeningService,
     ) {}
 
     /**
@@ -409,6 +411,13 @@ final class CareerAuthorityMaterializer
         CareerImportRun $importRun
     ): array {
         $payloads = [];
+        $hardening = $this->firstWaveAliasHardeningService->resolveAliasPayloads(
+            (string) $normalized['canonical_slug'],
+            $occupation,
+            $family,
+            $importRun,
+        );
+        $blockedSet = array_fill_keys($hardening['blocked_aliases'], true);
 
         foreach ([
             [
@@ -424,6 +433,9 @@ final class CareerAuthorityMaterializer
         ] as $candidate) {
             $alias = trim((string) ($candidate['alias'] ?? ''));
             if ($alias === '') {
+                continue;
+            }
+            if (isset($blockedSet[mb_strtolower($alias, 'UTF-8')])) {
                 continue;
             }
 
@@ -445,11 +457,28 @@ final class CareerAuthorityMaterializer
             ];
         }
 
+        $payloads = [...$payloads, ...$hardening['alias_payloads']];
+
+        $deduped = [];
+        $seen = [];
+        foreach ($payloads as $payload) {
+            $normalizedAlias = mb_strtolower(trim((string) ($payload['normalized'] ?? '')), 'UTF-8');
+            $lang = strtolower(trim((string) ($payload['lang'] ?? '')));
+            $dedupeKey = sprintf('%s|%s', $lang, $normalizedAlias);
+
+            if ($normalizedAlias === '' || isset($seen[$dedupeKey])) {
+                continue;
+            }
+
+            $seen[$dedupeKey] = true;
+            $deduped[] = $payload;
+        }
+
         return array_map(function (array $payload): array {
             $payload['row_fingerprint'] = $this->fingerprint(Arr::except($payload, ['occupation_id', 'family_id', 'import_run_id', 'row_fingerprint']));
 
             return $payload;
-        }, $payloads);
+        }, $deduped);
     }
 
     /**
