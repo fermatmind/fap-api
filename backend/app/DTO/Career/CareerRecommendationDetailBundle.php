@@ -15,6 +15,7 @@ final class CareerRecommendationDetailBundle
      * @param  array<string, mixed>  $claimPermissions
      * @param  array<string, mixed>  $integritySummary
      * @param  array<string, mixed>  $trustManifest
+     * @param  list<array<string, mixed>>  $matchedJobs
      * @param  array<string, mixed>  $seoContract
      * @param  array<string, mixed>  $provenanceMeta
      */
@@ -27,6 +28,7 @@ final class CareerRecommendationDetailBundle
         public readonly array $claimPermissions,
         public readonly array $integritySummary,
         public readonly array $trustManifest,
+        public readonly array $matchedJobs,
         public readonly array $seoContract,
         public readonly array $provenanceMeta,
     ) {}
@@ -47,6 +49,7 @@ final class CareerRecommendationDetailBundle
             'claim_permissions' => $this->claimPermissions,
             'integrity_summary' => $this->integritySummary,
             'trust_manifest' => $this->trustManifest,
+            'matched_jobs' => $this->matchedJobs,
             'seo_contract' => $this->seoContract,
             'provenance_meta' => $this->provenanceMeta,
         ];
