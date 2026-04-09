@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Import;
 
+use App\Domain\Career\Import\FirstWaveAuthorityOverrideReader;
 use App\Domain\Career\Import\ImportScopeMode;
 use App\Domain\Career\Import\RunStatus;
 use App\Domain\Career\Publish\FirstWaveManifestReader;
@@ -24,6 +25,7 @@ final class FirstWaveAuthorityMaterializationService
     public function __construct(
         private readonly FirstWaveManifestReader $manifestReader,
         private readonly CareerAuthorityDatasetReader $datasetReader,
+        private readonly FirstWaveAuthorityOverrideReader $authorityOverrideReader,
         private readonly CareerAuthorityWaveImporter $importer,
         private readonly FirstWavePublishSeedMaterializer $publishSeedMaterializer,
         private readonly CareerAuthorityMaterializer $materializer,
@@ -38,8 +40,12 @@ final class FirstWaveAuthorityMaterializationService
      *   issues_by_slug:array<string,list<string>>
      * }
      */
-    public function materialize(string $sourcePath, bool $compileMissing = false, bool $repairSafePartials = false): array
-    {
+    public function materialize(
+        string $sourcePath,
+        bool $compileMissing = false,
+        bool $repairSafePartials = false,
+        ?string $authorityOverridePath = null,
+    ): array {
         $manifest = $this->manifestReader->read();
         $manifestOccupations = is_array($manifest['occupations']) ? $manifest['occupations'] : [];
         $manifestBySlug = [];
@@ -51,6 +57,7 @@ final class FirstWaveAuthorityMaterializationService
             $manifestBySlug[(string) $occupation['canonical_slug']] = $occupation;
         }
 
+        $authorityOverrides = $this->authorityOverrideReader->bySlug($authorityOverridePath);
         $dataset = $this->datasetReader->read($sourcePath);
         $rowsBySlug = [];
         foreach ($dataset['rows'] as $row) {
@@ -170,6 +177,7 @@ final class FirstWaveAuthorityMaterializationService
                         'truth_market' => 'US',
                         'display_market' => 'US',
                     ],
+                    'authority_overrides_by_slug' => $authorityOverrides,
                     'occupations' => $importManifestOccupations,
                 ],
             ], $allowedModes);

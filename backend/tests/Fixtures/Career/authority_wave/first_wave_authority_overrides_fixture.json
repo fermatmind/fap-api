@@ -1,0 +1,28 @@
+{
+  "version": "test.first_wave_authority_overrides.v1",
+  "wave_name": "career_first_wave_10",
+  "scope_source": "first_wave_manifest",
+  "count_expected": 2,
+  "count_actual": 2,
+  "policy": {
+    "supported_fields": [
+      "crosswalk_source_code"
+    ]
+  },
+  "items": [
+    {
+      "canonical_slug": "software-developers",
+      "occupation_uuid": "664c2c76-4ee7-41c4-98fd-ffd1dc3ad308",
+      "overrides": {
+        "crosswalk_source_code": "15-1252"
+      }
+    },
+    {
+      "canonical_slug": "financial-analysts",
+      "occupation_uuid": "2c9477ed-73bb-489b-9ef2-b52c5b10f086",
+      "overrides": {
+        "crosswalk_source_code": "13-2051"
+      }
+    }
+  ]
+}

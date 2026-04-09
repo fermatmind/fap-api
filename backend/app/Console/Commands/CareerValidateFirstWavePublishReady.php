@@ -12,6 +12,8 @@ final class CareerValidateFirstWavePublishReady extends Command
 {
     protected $signature = 'career:validate-first-wave-publish-ready
         {--source= : Optional dataset source path for first-wave materialization}
+        {--blocked-registry= : Optional blocked registry path for first-wave governance}
+        {--authority-overrides= : Optional authority override path for first-wave source-code overrides}
         {--json : Emit JSON output}
         {--materialize-missing : Materialize manifest-scoped rows from the provided source}
         {--compile-missing : Compile materialized first-wave rows after import}
@@ -27,6 +29,8 @@ final class CareerValidateFirstWavePublishReady extends Command
         $compile = (bool) $this->option('compile-missing');
         $repairSafePartials = (bool) $this->option('repair-safe-partials');
         $source = trim((string) $this->option('source'));
+        $blockedRegistryPath = trim((string) $this->option('blocked-registry'));
+        $authorityOverridePath = trim((string) $this->option('authority-overrides'));
 
         if ($compile) {
             $materialize = true;
@@ -46,10 +50,19 @@ final class CareerValidateFirstWavePublishReady extends Command
         ];
 
         if ($materialize) {
-            $materialization = $materializationService->materialize($source, $compile, $repairSafePartials);
+            $materialization = $materializationService->materialize(
+                $source,
+                $compile,
+                $repairSafePartials,
+                $authorityOverridePath !== '' ? $authorityOverridePath : null,
+            );
         }
 
-        $report = $validator->validate($materialization['issues_by_slug']);
+        $report = $validator->validate(
+            $materialization['issues_by_slug'],
+            $blockedRegistryPath !== '' ? $blockedRegistryPath : null,
+            $authorityOverridePath !== '' ? $authorityOverridePath : null,
+        );
         $report['materialization'] = [
             'import_run_id' => $materialization['import_run_id'],
             'compile_run_id' => $materialization['compile_run_id'],

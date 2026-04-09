@@ -1,0 +1,57 @@
+{
+  "version": "2026.04.09.first_wave_blocked_registry.v1",
+  "wave_name": "career_first_wave_10",
+  "scope_source": "first_wave_manifest",
+  "count_expected": 4,
+  "count_actual": 4,
+  "items": [
+    {
+      "canonical_slug": "software-developers",
+      "occupation_uuid": "664c2c76-4ee7-41c4-98fd-ffd1dc3ad308",
+      "blocker_type": "missing_crosswalk_source_code",
+      "override_eligible": true,
+      "remediation_class": "authority_override_possible",
+      "notes": [
+        "Exact dataset row exists but SOC Code is blank.",
+        "Only an explicit authority-owned source-code override may resolve this blocker."
+      ],
+      "review_required": true
+    },
+    {
+      "canonical_slug": "financial-analysts",
+      "occupation_uuid": "2c9477ed-73bb-489b-9ef2-b52c5b10f086",
+      "blocker_type": "missing_crosswalk_source_code",
+      "override_eligible": true,
+      "remediation_class": "authority_override_possible",
+      "notes": [
+        "Exact dataset row exists but SOC Code is blank.",
+        "Only an explicit authority-owned source-code override may resolve this blocker."
+      ],
+      "review_required": true
+    },
+    {
+      "canonical_slug": "marketing-managers",
+      "occupation_uuid": "b4d2f69d-399e-4642-9693-ae8cb9e01bf2",
+      "blocker_type": "source_row_missing",
+      "override_eligible": false,
+      "remediation_class": "not_safely_remediable",
+      "notes": [
+        "No exact dataset row exists for this manifest slug.",
+        "Nearby aggregate rows must not be used as silent substitutes."
+      ],
+      "review_required": true
+    },
+    {
+      "canonical_slug": "elementary-school-teachers-except-special-education",
+      "occupation_uuid": "2dd747a0-bbb4-41d0-8936-7d5a72850312",
+      "blocker_type": "source_row_missing",
+      "override_eligible": false,
+      "remediation_class": "not_safely_remediable",
+      "notes": [
+        "No exact dataset row exists for this manifest slug.",
+        "Nearby teacher rows must not be composed into a guessed proxy."
+      ],
+      "review_required": true
+    }
+  ]
+}

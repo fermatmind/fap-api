@@ -20,6 +20,7 @@ final class FirstWavePublishReadyValidator
     public function __construct(
         private readonly FirstWaveManifestReader $manifestReader,
         private readonly FirstWaveAliasCatalogReader $aliasCatalogReader,
+        private readonly FirstWaveBlockedGovernancePolicy $blockedGovernancePolicy,
         private readonly FirstWavePublishGate $publishGate,
         private readonly CareerJobDetailBundleBuilder $jobDetailBundleBuilder,
         private readonly CareerJobListBundleBuilder $jobListBundleBuilder,
@@ -34,8 +35,11 @@ final class FirstWavePublishReadyValidator
      *   occupations:list<array<string,mixed>>
      * }
      */
-    public function validate(array $externalIssuesBySlug = []): array
-    {
+    public function validate(
+        array $externalIssuesBySlug = [],
+        ?string $blockedRegistryPath = null,
+        ?string $authorityOverridePath = null,
+    ): array {
         $manifest = $this->manifestReader->read();
         $aliasCatalog = $this->aliasCatalogReader->bySlug();
 
@@ -157,6 +161,13 @@ final class FirstWavePublishReadyValidator
 
             $missing = array_values(array_unique(array_filter($missing)));
             $status = $this->statusFor($occupation, $truthMetric, $trustManifest, $indexState, $snapshot, $missing);
+            $governance = $this->blockedGovernancePolicy->classify(
+                $slug,
+                $status,
+                $blockedRegistryPath,
+                $authorityOverridePath,
+            );
+            $notes = array_values(array_unique(array_merge($notes, $governance['notes'])));
             $counts[$status]++;
 
             $items[] = [
@@ -172,6 +183,12 @@ final class FirstWavePublishReadyValidator
                 'index_eligible' => (bool) ($indexState?->index_eligible ?? false),
                 'alias_count' => $this->uniqueAliasCount($occupation),
                 'compiled_snapshot_present' => $snapshot?->compiled_at !== null,
+                'blocker_type' => $governance['blocker_type'],
+                'override_eligible' => $governance['override_eligible'],
+                'remediation_class' => $governance['remediation_class'],
+                'blocked_governance_status' => $governance['blocked_governance_status'],
+                'authority_override_supplied' => $governance['authority_override_supplied'],
+                'review_required' => $governance['review_required'],
             ];
         }
 

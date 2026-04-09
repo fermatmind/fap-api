@@ -34,6 +34,15 @@ final class FirstWavePublishReadyValidatorTest extends TestCase
         $this->assertSame(0, $report['counts']['partial']);
         $this->assertSame(10, $report['counts']['blocked']);
         $this->assertContains('occupation_missing', $report['occupations'][0]['missing_requirements']);
+
+        $software = collect($report['occupations'])->firstWhere('canonical_slug', 'software-developers');
+        $marketing = collect($report['occupations'])->firstWhere('canonical_slug', 'marketing-managers');
+        $this->assertIsArray($software);
+        $this->assertSame('blocked_override_eligible', $software['blocked_governance_status']);
+        $this->assertTrue($software['override_eligible']);
+        $this->assertIsArray($marketing);
+        $this->assertSame('blocked_not_safely_remediable', $marketing['blocked_governance_status']);
+        $this->assertFalse($marketing['override_eligible']);
     }
 
     public function test_it_reports_a_manifest_subject_as_publish_ready_when_the_full_chain_is_materialized(): void

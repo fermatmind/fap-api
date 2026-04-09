@@ -77,6 +77,34 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B12
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b12-first-wave-blocked-governance
+    base: main
+    depends_on: ["PR-B8"]
+    mode: execute
+    scope: >
+      Career first-wave blocked evidence-gap governance + narrow source-code override path.
+      Add an auditable blocked registry, a narrow authority-owned source-code override path,
+      and explicit validator/report semantics for first-wave blocked occupations without
+      inventing source rows or broadening public API contracts.
+    checks:
+      - "python3 -m json.tool docs/career/first_wave_blocked_registry.json >/dev/null"
+      - "python3 -m json.tool docs/career/first_wave_authority_overrides.json >/dev/null"
+      - "vendor/bin/pint --test app/Console/Commands/CareerValidateFirstWavePublishReady.php app/Domain/Career/Import/FirstWaveAuthorityOverrideReader.php app/Domain/Career/Publish/FirstWaveBlockedGovernancePolicy.php app/Domain/Career/Publish/FirstWaveBlockedRegistryReader.php app/Domain/Career/Publish/FirstWavePublishReadyValidator.php app/Services/Career/Import/CareerAuthorityRowNormalizer.php app/Services/Career/Import/FirstWaveAuthorityMaterializationService.php tests/Feature/Career/FirstWavePublishReadyCommandTest.php tests/Unit/Services/Career/FirstWaveAuthorityOverrideReaderTest.php tests/Unit/Services/Career/FirstWaveBlockedGovernancePolicyTest.php tests/Unit/Services/Career/FirstWavePublishReadyValidatorTest.php"
+      - "php artisan test tests/Unit/Services/Career/FirstWaveAuthorityOverrideReaderTest.php tests/Unit/Services/Career/FirstWaveBlockedGovernancePolicyTest.php tests/Unit/Services/Career/FirstWavePublishReadyValidatorTest.php tests/Feature/Career/FirstWavePublishReadyCommandTest.php tests/Feature/Career/CareerRecommendationDetailApiTest.php tests/Feature/Career/CareerJobDetailApiTest.php tests/Feature/Career/CareerJobListApiTest.php tests/Feature/Career/CareerSearchApiTest.php"
+      - "php artisan career:validate-first-wave-publish-ready --source=/Users/rainie/Desktop/AI_Exposure_342_Occupations.xlsx --materialize-missing --compile-missing --repair-safe-partials --json"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web

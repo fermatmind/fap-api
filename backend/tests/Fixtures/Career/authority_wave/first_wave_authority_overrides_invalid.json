@@ -1,0 +1,21 @@
+{
+  "version": "test.first_wave_authority_overrides.invalid",
+  "wave_name": "career_first_wave_10",
+  "scope_source": "first_wave_manifest",
+  "count_expected": 1,
+  "count_actual": 1,
+  "policy": {
+    "supported_fields": [
+      "crosswalk_source_code"
+    ]
+  },
+  "items": [
+    {
+      "canonical_slug": "software-developers",
+      "occupation_uuid": "664c2c76-4ee7-41c4-98fd-ffd1dc3ad308",
+      "overrides": {
+        "canonical_title_en": "Software Developers"
+      }
+    }
+  ]
+}

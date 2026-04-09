@@ -115,14 +115,66 @@ final class FirstWavePublishReadyCommandTest extends TestCase
 
         $this->assertIsArray($software);
         $this->assertSame('blocked', $software['status']);
+        $this->assertSame('blocked_override_eligible', $software['blocked_governance_status']);
+        $this->assertTrue($software['override_eligible']);
+        $this->assertFalse($software['authority_override_supplied']);
+        $this->assertSame('authority_override_possible', $software['remediation_class']);
 
         $this->assertIsArray($financial);
         $this->assertSame('blocked', $financial['status']);
+        $this->assertSame('blocked_override_eligible', $financial['blocked_governance_status']);
+        $this->assertTrue($financial['override_eligible']);
+        $this->assertFalse($financial['authority_override_supplied']);
 
         $this->assertIsArray($marketing);
         $this->assertSame('blocked', $marketing['status']);
+        $this->assertSame('blocked_not_safely_remediable', $marketing['blocked_governance_status']);
+        $this->assertFalse($marketing['override_eligible']);
 
         $this->assertIsArray($elementary);
         $this->assertSame('blocked', $elementary['status']);
+        $this->assertSame('blocked_not_safely_remediable', $elementary['blocked_governance_status']);
+        $this->assertFalse($elementary['override_eligible']);
+    }
+
+    public function test_it_can_resolve_missing_crosswalk_source_code_only_when_explicit_overrides_are_supplied(): void
+    {
+        $exitCode = Artisan::call('career:validate-first-wave-publish-ready', [
+            '--source' => base_path('tests/Fixtures/Career/authority_wave/first_wave_override_subset.csv'),
+            '--authority-overrides' => base_path('tests/Fixtures/Career/authority_wave/first_wave_authority_overrides_fixture.json'),
+            '--materialize-missing' => true,
+            '--compile-missing' => true,
+            '--json' => true,
+        ]);
+        $report = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exitCode);
+
+        $software = collect($report['occupations'])->firstWhere('canonical_slug', 'software-developers');
+        $financial = collect($report['occupations'])->firstWhere('canonical_slug', 'financial-analysts');
+        $marketing = collect($report['occupations'])->firstWhere('canonical_slug', 'marketing-managers');
+        $elementary = collect($report['occupations'])->firstWhere('canonical_slug', 'elementary-school-teachers-except-special-education');
+
+        $this->assertIsArray($software);
+        $this->assertSame('publish_ready', $software['status']);
+        $this->assertTrue($software['authority_override_supplied']);
+        $this->assertNull($software['blocked_governance_status']);
+        $this->assertNull($software['blocker_type']);
+        $this->assertSame([], $software['notes']);
+
+        $this->assertIsArray($financial);
+        $this->assertSame('publish_ready', $financial['status']);
+        $this->assertTrue($financial['authority_override_supplied']);
+        $this->assertNull($financial['blocked_governance_status']);
+        $this->assertNull($financial['blocker_type']);
+        $this->assertSame([], $financial['notes']);
+
+        $this->assertIsArray($marketing);
+        $this->assertSame('blocked', $marketing['status']);
+        $this->assertSame('blocked_not_safely_remediable', $marketing['blocked_governance_status']);
+
+        $this->assertIsArray($elementary);
+        $this->assertSame('blocked', $elementary['status']);
+        $this->assertSame('blocked_not_safely_remediable', $elementary['blocked_governance_status']);
     }
 }
