@@ -2345,6 +2345,23 @@
                 ]
             }
         },
+        "/api/v0.5/career/first-wave/readiness": {
+            "get": {
+                "operationId": "get_api_v0_5_career_first_wave_readiness",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerFirstWaveReadinessController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/career/jobs": {
             "get": {
                 "operationId": "get_api_v0_5_career_jobs",
