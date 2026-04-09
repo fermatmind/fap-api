@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-09T09:27:37Z",
+  "updated_at": "2026-04-10T00:00:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -143,6 +143,36 @@
             "status": "pending"
           }
         ]
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B14": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/pr-b14-first-wave-readiness-summary",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "vendor/bin/pint --test app/DTO/Career/FirstWaveReadinessSummary.php app/Domain/Career/Publish/FirstWaveReadinessSummaryService.php app/Http/Resources/Career/FirstWaveReadinessSummaryResource.php app/Http/Controllers/API/V0_5/Career/CareerFirstWaveReadinessController.php routes/api.php tests/Unit/Services/Career/FirstWaveReadinessSummaryServiceTest.php tests/Feature/Career/FirstWaveReadinessApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/FirstWaveReadinessSummaryServiceTest.php tests/Feature/Career/FirstWaveReadinessApiTest.php tests/Feature/Career/CareerJobDetailApiTest.php tests/Feature/Career/CareerJobListApiTest.php tests/Feature/Career/CareerRecommendationDetailApiTest.php tests/Feature/Career/CareerRecommendationIndexApiTest.php tests/Feature/Career/CareerSearchApiTest.php tests/Feature/OpenApiDiffTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:validate-first-wave-publish-ready --source=/Users/rainie/Desktop/AI_Exposure_342_Occupations.xlsx --materialize-missing --compile-missing --repair-safe-partials --json",
+            "status": "passed"
+          }
+        ],
+        "github": []
       },
       "failure_reason": "",
       "resume_policy": "manual_only",

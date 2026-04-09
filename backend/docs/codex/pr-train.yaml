@@ -134,6 +134,32 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B14
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b14-first-wave-readiness-summary
+    base: main
+    depends_on: ["PR-B13"]
+    mode: execute
+    scope: >
+      Career first-wave readiness summary + release read-model API.
+      Add a reusable first-wave readiness summary service and a thin
+      machine-readable API endpoint without changing existing career
+      jobs/recommendations/search payload contracts.
+    checks:
+      - "vendor/bin/pint --test app/DTO/Career/FirstWaveReadinessSummary.php app/Domain/Career/Publish/FirstWaveReadinessSummaryService.php app/Http/Resources/Career/FirstWaveReadinessSummaryResource.php app/Http/Controllers/API/V0_5/Career/CareerFirstWaveReadinessController.php routes/api.php tests/Unit/Services/Career/FirstWaveReadinessSummaryServiceTest.php tests/Feature/Career/FirstWaveReadinessApiTest.php"
+      - "php artisan test tests/Unit/Services/Career/FirstWaveReadinessSummaryServiceTest.php tests/Feature/Career/FirstWaveReadinessApiTest.php tests/Feature/Career/CareerJobDetailApiTest.php tests/Feature/Career/CareerJobListApiTest.php tests/Feature/Career/CareerRecommendationDetailApiTest.php tests/Feature/Career/CareerRecommendationIndexApiTest.php tests/Feature/Career/CareerSearchApiTest.php tests/Feature/OpenApiDiffTest.php"
+      - "php artisan career:validate-first-wave-publish-ready --source=/Users/rainie/Desktop/AI_Exposure_342_Occupations.xlsx --materialize-missing --compile-missing --repair-safe-partials --json"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web

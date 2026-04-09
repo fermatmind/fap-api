@@ -29,6 +29,7 @@ use App\Http\Controllers\API\V0_4\BootController;
 use App\Http\Controllers\API\V0_4\ExperimentGovernanceController;
 use App\Http\Controllers\API\V0_4\PartnerController;
 use App\Http\Controllers\API\V0_4\RotationAuditController;
+use App\Http\Controllers\API\V0_5\Career\CareerFirstWaveReadinessController;
 use App\Http\Controllers\API\V0_5\Career\CareerJobDetailController;
 use App\Http\Controllers\API\V0_5\Career\CareerJobListController;
 use App\Http\Controllers\API\V0_5\Career\CareerRecommendationDetailController;
@@ -398,6 +399,7 @@ Route::prefix('v0.4')->middleware(NormalizeApiErrorContract::class)->group(funct
 });
 
 Route::prefix('v0.5')->group(function () {
+    Route::get('/career/first-wave/readiness', [CareerFirstWaveReadinessController::class, 'show']);
     Route::get('/career/jobs', [CareerJobListController::class, 'index']);
     Route::get('/career/jobs/{slug}', [CareerJobDetailController::class, 'show']);
     Route::get('/career/recommendations/mbti', [CareerRecommendationIndexController::class, 'index']);
