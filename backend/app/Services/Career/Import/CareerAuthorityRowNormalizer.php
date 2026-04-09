@@ -21,6 +21,7 @@ final class CareerAuthorityRowNormalizer
         $category = $this->stringValue($row, 'Category');
         $manifestOccupation = $this->manifestOccupation($manifest, $slug);
         $manifestDefaults = is_array($manifest['defaults'] ?? null) ? $manifest['defaults'] : [];
+        $authorityOverride = $this->authorityOverride($manifest, $slug);
         $familySlug = (string) ($manifestOccupation['family_slug']
             ?? $this->slugValue($category));
         $familyTitleEn = (string) ($manifestOccupation['family_title_en']
@@ -45,6 +46,10 @@ final class CareerAuthorityRowNormalizer
                 ?? $row['Canonical Title ZH']
                 ?? null
         );
+        $crosswalkSourceCode = $this->stringValue($row, 'SOC Code');
+        if ($crosswalkSourceCode === '') {
+            $crosswalkSourceCode = $this->nullableString($authorityOverride['overrides']['crosswalk_source_code'] ?? null) ?? '';
+        }
 
         return [
             'row_number' => (int) ($row['_row_number'] ?? 0),
@@ -62,7 +67,7 @@ final class CareerAuthorityRowNormalizer
             'crosswalk_mode' => $mappingMode,
             'canonical_path' => '/career/jobs/'.($slug !== '' ? $slug : Str::slug($canonicalTitleEn)),
             'crosswalk_source_system' => 'us_soc',
-            'crosswalk_source_code' => $this->stringValue($row, 'SOC Code'),
+            'crosswalk_source_code' => $crosswalkSourceCode,
             'crosswalk_source_title' => $canonicalTitleEn,
             'ai_exposure' => $this->nullableFloat($row['AI Exposure (0-10)'] ?? null),
             'median_pay_usd_annual' => $this->nullableInt($row['Median Pay Annual (USD)'] ?? null),
@@ -114,6 +119,20 @@ final class CareerAuthorityRowNormalizer
         }
 
         return is_array($occupation) ? $occupation : [];
+    }
+
+    /**
+     * @param  array<string, mixed>  $manifest
+     * @return array<string, mixed>
+     */
+    private function authorityOverride(array $manifest, string $slug): array
+    {
+        $overrides = $manifest['authority_overrides_by_slug'] ?? null;
+        if (is_array($overrides) && is_array($overrides[$slug] ?? null)) {
+            return $overrides[$slug];
+        }
+
+        return [];
     }
 
     /**

@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
-  "started_at": "",
-  "updated_at": "",
+  "started_at": "2026-04-09T00:00:00Z",
+  "updated_at": "2026-04-09T16:55:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -49,6 +49,44 @@
       "pr_url": "",
       "checks": {
         "local": [],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B12": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/pr-b12-first-wave-blocked-governance",
+      "commit_sha": "17bcdef3da55f217d76bf42c39f0b361dd034751",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/852",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/career/first_wave_blocked_registry.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool docs/career/first_wave_authority_overrides.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/CareerValidateFirstWavePublishReady.php app/Domain/Career/Import/FirstWaveAuthorityOverrideReader.php app/Domain/Career/Publish/FirstWaveBlockedGovernancePolicy.php app/Domain/Career/Publish/FirstWaveBlockedRegistryReader.php app/Domain/Career/Publish/FirstWavePublishReadyValidator.php app/Services/Career/Import/CareerAuthorityRowNormalizer.php app/Services/Career/Import/FirstWaveAuthorityMaterializationService.php tests/Feature/Career/FirstWavePublishReadyCommandTest.php tests/Unit/Services/Career/FirstWaveAuthorityOverrideReaderTest.php tests/Unit/Services/Career/FirstWaveBlockedGovernancePolicyTest.php tests/Unit/Services/Career/FirstWavePublishReadyValidatorTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/FirstWaveAuthorityOverrideReaderTest.php tests/Unit/Services/Career/FirstWaveBlockedGovernancePolicyTest.php tests/Unit/Services/Career/FirstWavePublishReadyValidatorTest.php tests/Feature/Career/FirstWavePublishReadyCommandTest.php tests/Feature/Career/CareerRecommendationDetailApiTest.php tests/Feature/Career/CareerJobDetailApiTest.php tests/Feature/Career/CareerJobListApiTest.php tests/Feature/Career/CareerSearchApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:validate-first-wave-publish-ready --source=/Users/rainie/Desktop/AI_Exposure_342_Occupations.xlsx --materialize-missing --compile-missing --repair-safe-partials --json",
+            "status": "passed"
+          }
+        ],
         "github": []
       },
       "failure_reason": "",
