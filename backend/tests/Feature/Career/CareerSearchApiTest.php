@@ -20,6 +20,7 @@ final class CareerSearchApiTest extends TestCase
     {
         $chain = $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain([
             'slug' => 'backend-architect-search-api',
+            'crosswalk_mode' => 'exact',
         ]));
         $chain['occupation']->update([
             'canonical_title_en' => 'Backend Search Architect',

@@ -1,0 +1,300 @@
+{
+  "version": "first_wave_aliases_v1",
+  "wave_name": "career_first_wave_10",
+  "scope_source": "backend/docs/career/first_wave_manifest.json",
+  "count_expected": 10,
+  "count_actual": 10,
+  "policy": {
+    "allowed_match_scope": [
+      "canonical_slug_exact",
+      "canonical_slug_prefix",
+      "canonical_title_exact",
+      "canonical_title_prefix",
+      "alias_exact",
+      "alias_prefix"
+    ],
+    "disallowed_scope": [
+      "fuzzy_matching",
+      "semantic_retrieval",
+      "crosswalk_public_discovery",
+      "broad_slang_discovery"
+    ],
+    "rules": [
+      "Only aliases explicitly listed here are approved for first-wave hardening.",
+      "Do not derive public aliases from crosswalk titles or source codes.",
+      "Do not add broad slang family aliases in B8.",
+      "Chinese aliases must remain conservative and role-specific."
+    ]
+  },
+  "items": [
+    {
+      "canonical_slug": "software-developers",
+      "approved_alias_rows": [
+        {
+          "alias": "Software Developer",
+          "normalized": "software developer",
+          "lang": "en",
+          "register": "canonical_variant",
+          "precision": 0.99,
+          "confidence": 0.99
+        },
+        {
+          "alias": "Software Developers",
+          "normalized": "software developers",
+          "lang": "en",
+          "register": "canonical",
+          "precision": 1.0,
+          "confidence": 1.0
+        },
+        {
+          "alias": "Application Developer",
+          "normalized": "application developer",
+          "lang": "en",
+          "register": "nearby_professional",
+          "precision": 0.88,
+          "confidence": 0.86
+        },
+        {
+          "alias": "软件开发工程师",
+          "normalized": "软件开发工程师",
+          "lang": "zh-CN",
+          "register": "canonical_translation",
+          "precision": 0.96,
+          "confidence": 0.95
+        },
+        {
+          "alias": "软件工程师",
+          "normalized": "软件工程师",
+          "lang": "zh-CN",
+          "register": "market_title",
+          "precision": 0.82,
+          "confidence": 0.8
+        }
+      ],
+      "blocked_aliases": [
+        "码农",
+        "程序员",
+        "开发"
+      ]
+    },
+    {
+      "canonical_slug": "data-scientists",
+      "approved_alias_rows": [
+        {
+          "alias": "Data Scientist",
+          "normalized": "data scientist",
+          "lang": "en",
+          "register": "canonical_variant",
+          "precision": 0.99,
+          "confidence": 0.99
+        },
+        {
+          "alias": "Data Scientists",
+          "normalized": "data scientists",
+          "lang": "en",
+          "register": "canonical",
+          "precision": 1.0,
+          "confidence": 1.0
+        },
+        {
+          "alias": "数据科学家",
+          "normalized": "数据科学家",
+          "lang": "zh-CN",
+          "register": "canonical_translation",
+          "precision": 0.98,
+          "confidence": 0.98
+        }
+      ],
+      "blocked_aliases": [
+        "算法",
+        "AI scientist",
+        "机器学习工程师"
+      ]
+    },
+    {
+      "canonical_slug": "accountants-and-auditors",
+      "approved_alias_rows": [
+        {
+          "alias": "Accountant",
+          "normalized": "accountant",
+          "lang": "en",
+          "register": "role_variant",
+          "precision": 0.9,
+          "confidence": 0.89
+        },
+        {
+          "alias": "Auditor",
+          "normalized": "auditor",
+          "lang": "en",
+          "register": "role_variant",
+          "precision": 0.9,
+          "confidence": 0.89
+        },
+        {
+          "alias": "Accountants and Auditors",
+          "normalized": "accountants and auditors",
+          "lang": "en",
+          "register": "canonical",
+          "precision": 1.0,
+          "confidence": 1.0
+        },
+        {
+          "alias": "会计师",
+          "normalized": "会计师",
+          "lang": "zh-CN",
+          "register": "canonical_translation",
+          "precision": 0.94,
+          "confidence": 0.93
+        },
+        {
+          "alias": "审计师",
+          "normalized": "审计师",
+          "lang": "zh-CN",
+          "register": "canonical_translation",
+          "precision": 0.94,
+          "confidence": 0.93
+        }
+      ],
+      "blocked_aliases": [
+        "财务",
+        "会计",
+        "审计"
+      ]
+    },
+    {
+      "canonical_slug": "financial-analysts",
+      "approved_alias_rows": [
+        {
+          "alias": "Financial Analyst",
+          "normalized": "financial analyst",
+          "lang": "en",
+          "register": "canonical_variant",
+          "precision": 0.99,
+          "confidence": 0.99
+        },
+        {
+          "alias": "金融分析师",
+          "normalized": "金融分析师",
+          "lang": "zh-CN",
+          "register": "canonical_translation",
+          "precision": 0.98,
+          "confidence": 0.97
+        },
+        {
+          "alias": "投资分析师",
+          "normalized": "投资分析师",
+          "lang": "zh-CN",
+          "register": "nearby_professional",
+          "precision": 0.83,
+          "confidence": 0.81
+        }
+      ],
+      "blocked_aliases": [
+        "证券分析师",
+        "商业分析师"
+      ]
+    },
+    {
+      "canonical_slug": "project-management-specialists",
+      "approved_alias_rows": [
+        {
+          "alias": "Project Management Specialist",
+          "normalized": "project management specialist",
+          "lang": "en",
+          "register": "canonical_variant",
+          "precision": 0.99,
+          "confidence": 0.99
+        },
+        {
+          "alias": "Project Management Specialists",
+          "normalized": "project management specialists",
+          "lang": "en",
+          "register": "canonical",
+          "precision": 1.0,
+          "confidence": 1.0
+        },
+        {
+          "alias": "项目管理专员",
+          "normalized": "项目管理专员",
+          "lang": "zh-CN",
+          "register": "canonical_translation",
+          "precision": 0.97,
+          "confidence": 0.96
+        },
+        {
+          "alias": "项目管理专家",
+          "normalized": "项目管理专家",
+          "lang": "zh-CN",
+          "register": "market_title",
+          "precision": 0.84,
+          "confidence": 0.82
+        }
+      ],
+      "blocked_aliases": [
+        "项目经理",
+        "PM"
+      ]
+    },
+    {
+      "canonical_slug": "human-resources-specialists",
+      "approved_alias_rows": [],
+      "blocked_aliases": []
+    },
+    {
+      "canonical_slug": "marketing-managers",
+      "approved_alias_rows": [],
+      "blocked_aliases": []
+    },
+    {
+      "canonical_slug": "registered-nurses",
+      "approved_alias_rows": [],
+      "blocked_aliases": []
+    },
+    {
+      "canonical_slug": "elementary-school-teachers-except-special-education",
+      "approved_alias_rows": [],
+      "blocked_aliases": []
+    },
+    {
+      "canonical_slug": "management-analysts",
+      "approved_alias_rows": [
+        {
+          "alias": "Management Analyst",
+          "normalized": "management analyst",
+          "lang": "en",
+          "register": "canonical_variant",
+          "precision": 0.99,
+          "confidence": 0.99
+        },
+        {
+          "alias": "Management Analysts",
+          "normalized": "management analysts",
+          "lang": "en",
+          "register": "canonical",
+          "precision": 1.0,
+          "confidence": 1.0
+        },
+        {
+          "alias": "管理分析师",
+          "normalized": "管理分析师",
+          "lang": "zh-CN",
+          "register": "canonical_translation",
+          "precision": 0.97,
+          "confidence": 0.96
+        },
+        {
+          "alias": "管理咨询分析师",
+          "normalized": "管理咨询分析师",
+          "lang": "zh-CN",
+          "register": "professional_variant",
+          "precision": 0.9,
+          "confidence": 0.88
+        }
+      ],
+      "blocked_aliases": [
+        "咨询顾问",
+        "商业分析师"
+      ]
+    }
+  ]
+}
