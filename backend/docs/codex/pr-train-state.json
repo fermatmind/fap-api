@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-10T00:00:00Z",
+  "updated_at": "2026-04-10T10:25:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -153,10 +153,10 @@
     "PR-B14": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "github_checks_failed",
       "branch": "codex/pr-b14-first-wave-readiness-summary",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "7070a4be858ff4e86aa7a2112ad1f1a79e1940a3",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/854",
       "checks": {
         "local": [
           {
@@ -172,9 +172,18 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub hygiene check failed because CAE/H-02 guard reported backend/.env exists in workspace.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
