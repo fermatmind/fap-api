@@ -14,7 +14,8 @@ final class CareerValidateFirstWavePublishReady extends Command
         {--source= : Optional dataset source path for first-wave materialization}
         {--json : Emit JSON output}
         {--materialize-missing : Materialize manifest-scoped rows from the provided source}
-        {--compile-missing : Compile materialized first-wave rows after import}';
+        {--compile-missing : Compile materialized first-wave rows after import}
+        {--repair-safe-partials : Repair safely remediable manifest-scoped identity drift before rematerialization}';
 
     protected $description = 'Validate first-wave Career occupations as publish-ready, partial, or blocked, with optional first-wave-scoped materialization and compile.';
 
@@ -24,6 +25,7 @@ final class CareerValidateFirstWavePublishReady extends Command
     ): int {
         $materialize = (bool) $this->option('materialize-missing');
         $compile = (bool) $this->option('compile-missing');
+        $repairSafePartials = (bool) $this->option('repair-safe-partials');
         $source = trim((string) $this->option('source'));
 
         if ($compile) {
@@ -44,7 +46,7 @@ final class CareerValidateFirstWavePublishReady extends Command
         ];
 
         if ($materialize) {
-            $materialization = $materializationService->materialize($source, $compile);
+            $materialization = $materializationService->materialize($source, $compile, $repairSafePartials);
         }
 
         $report = $validator->validate($materialization['issues_by_slug']);

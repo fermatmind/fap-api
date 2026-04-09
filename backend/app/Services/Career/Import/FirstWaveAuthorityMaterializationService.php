@@ -27,6 +27,7 @@ final class FirstWaveAuthorityMaterializationService
         private readonly CareerAuthorityWaveImporter $importer,
         private readonly FirstWavePublishSeedMaterializer $publishSeedMaterializer,
         private readonly CareerAuthorityMaterializer $materializer,
+        private readonly FirstWaveAuthorityRepairService $repairService,
     ) {}
 
     /**
@@ -37,7 +38,7 @@ final class FirstWaveAuthorityMaterializationService
      *   issues_by_slug:array<string,list<string>>
      * }
      */
-    public function materialize(string $sourcePath, bool $compileMissing = false): array
+    public function materialize(string $sourcePath, bool $compileMissing = false, bool $repairSafePartials = false): array
     {
         $manifest = $this->manifestReader->read();
         $manifestOccupations = is_array($manifest['occupations']) ? $manifest['occupations'] : [];
@@ -81,9 +82,20 @@ final class FirstWaveAuthorityMaterializationService
 
             $existingOccupation = Occupation::query()->where('canonical_slug', $slug)->first();
             if ($existingOccupation instanceof Occupation && $existingOccupation->id !== (string) $occupation['occupation_uuid']) {
-                $issuesBySlug[$slug][] = 'occupation_uuid_conflict';
+                if (! $repairSafePartials) {
+                    $issuesBySlug[$slug][] = 'occupation_uuid_conflict';
 
-                continue;
+                    continue;
+                }
+
+                $repair = $this->repairService->repair($occupation, $row);
+                foreach ($repair['issues'] as $issue) {
+                    $issuesBySlug[$slug][] = $issue;
+                }
+
+                if (! $repair['repaired']) {
+                    continue;
+                }
             }
 
             $familyMeta = $familyMetaByUuid[(string) $occupation['family_uuid']] ?? null;
