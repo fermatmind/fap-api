@@ -1,0 +1,83 @@
+{
+  "manifest_version": "career_batch_manifest.template.v1",
+  "manifest_kind": "career_batch_draft_template",
+  "generated_from": "docs/career/career-batch-manifest.template.json",
+  "generated_at": "2026-04-09T00:00:00Z",
+  "wave_name": "career_batch_draft",
+  "batch_id": "<batch_id>",
+  "scope": {
+    "intended_count": 0,
+    "first_wave_overlap_allowed": false,
+    "authority_owner": "laravel_engine"
+  },
+  "engine_boundary": {
+    "engine_owned_truth_fields": [
+      "crosswalk_mode",
+      "wave_classification",
+      "publish_reason_codes",
+      "trust_seed",
+      "reviewer_seed",
+      "index_seed",
+      "claim_seed",
+      "score_summary",
+      "trust_summary",
+      "claim_permissions",
+      "seo_contract",
+      "provenance_meta"
+    ],
+    "authoring_rule": "Codex may draft structure, alias candidates, and editorial placeholders only. Truth, scores, trust, claims, and publish state must be computed by the Laravel authority layer.",
+    "forbidden_actions": [
+      "truth_compute",
+      "score_compute",
+      "trust_compile",
+      "claim_compile",
+      "publish_state_inference"
+    ]
+  },
+  "occupations": [
+    {
+      "draft_id": "<draft_id>",
+      "occupation_uuid": "<occupation_uuid>",
+      "canonical_slug": "<canonical_slug>",
+      "canonical_title_en": "<canonical_title_en>",
+      "canonical_title_zh": "<canonical_title_zh_or_null>",
+      "family_uuid": "<family_uuid>",
+      "source_refs": [
+        {
+          "kind": "raw_truth_seed",
+          "ref": "<source_reference>"
+        }
+      ],
+      "alias_candidates": [
+        {
+          "alias": "<alias>",
+          "lang": "<lang>",
+          "register": "<register>",
+          "notes": "<why_this_alias_is_conservative>"
+        }
+      ],
+      "editorial_patch": {
+        "summary_seed": "<editorial_summary_seed>",
+        "audience_notes": [
+          "<audience_note>"
+        ],
+        "risk_notes": [
+          "<risk_note>"
+        ],
+        "cta_notes": [
+          "<cta_note>"
+        ]
+      },
+      "human_moat_tags": [
+        "<human_moat_tag>"
+      ],
+      "task_prototype_signature": {
+        "prototype_version": "<prototype_version>",
+        "draft_prompt_version": "<draft_prompt_version>",
+        "review_profile": "<review_profile>"
+      },
+      "authoring_status": "draft",
+      "notes": "<optional_notes>"
+    }
+  ]
+}
