@@ -239,6 +239,7 @@ final class CareerAuthorityDatasetReader
 
     private function cellValue(SimpleXMLElement $cell, array $sharedStrings): string
     {
+        $cell->registerXPathNamespace('a', 'http://schemas.openxmlformats.org/spreadsheetml/2006/main');
         $type = (string) ($cell['t'] ?? '');
 
         if ($type === 'inlineStr') {

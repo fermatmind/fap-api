@@ -42,36 +42,66 @@ final class CareerAuthorityMaterializer
     public function materializeImportRow(array $normalized, CareerImportRun $importRun): array
     {
         return DB::transaction(function () use ($normalized, $importRun): array {
-            $family = OccupationFamily::query()->updateOrCreate(
-                ['canonical_slug' => (string) $normalized['family_slug']],
-                [
-                    'title_en' => (string) $normalized['family_title_en'],
-                    'title_zh' => $normalized['family_title_zh'] ?? (string) $normalized['family_title_en'],
-                ],
-            );
+            $familyAttributes = [
+                'canonical_slug' => (string) $normalized['family_slug'],
+                'title_en' => (string) $normalized['family_title_en'],
+                'title_zh' => $normalized['family_title_zh'] ?? '',
+            ];
+            $family = null;
+            if (($normalized['family_uuid'] ?? null) !== null) {
+                $family = OccupationFamily::query()->find((string) $normalized['family_uuid']);
+            }
+            if (! $family instanceof OccupationFamily) {
+                $family = OccupationFamily::query()
+                    ->where('canonical_slug', (string) $normalized['family_slug'])
+                    ->first();
+            }
+            if ($family instanceof OccupationFamily) {
+                $family->forceFill($familyAttributes)->save();
+            } else {
+                $family = OccupationFamily::query()->create([
+                    'id' => $normalized['family_uuid'] ?? null,
+                    ...$familyAttributes,
+                ]);
+            }
 
-            $occupation = Occupation::query()->updateOrCreate(
-                ['canonical_slug' => (string) $normalized['canonical_slug']],
-                [
-                    'family_id' => $family->id,
-                    'entity_level' => 'market_child',
-                    'truth_market' => (string) $normalized['truth_market'],
-                    'display_market' => (string) $normalized['display_market'],
-                    'crosswalk_mode' => (string) $normalized['crosswalk_mode'],
-                    'canonical_title_en' => (string) $normalized['canonical_title_en'],
-                    'canonical_title_zh' => $normalized['canonical_title_zh'],
-                    'search_h1_zh' => $normalized['canonical_title_zh'] !== null
-                        ? $normalized['canonical_title_zh'].'职业诊断'
-                        : (string) $normalized['canonical_title_en'],
-                    'structural_stability' => $normalized['structural_stability'],
-                    'task_prototype_signature' => $normalized['task_prototype_signature'],
-                    'market_semantics_gap' => $normalized['market_semantics_gap'],
-                    'regulatory_divergence' => $normalized['regulatory_divergence'],
-                    'toolchain_divergence' => $normalized['toolchain_divergence'],
-                    'skill_gap_threshold' => $normalized['skill_gap_threshold'],
-                    'trust_inheritance_scope' => $normalized['trust_inheritance_scope'],
-                ],
-            );
+            $occupationAttributes = [
+                'family_id' => $family->id,
+                'entity_level' => 'market_child',
+                'truth_market' => (string) $normalized['truth_market'],
+                'display_market' => (string) $normalized['display_market'],
+                'crosswalk_mode' => (string) $normalized['crosswalk_mode'],
+                'canonical_slug' => (string) $normalized['canonical_slug'],
+                'canonical_title_en' => (string) $normalized['canonical_title_en'],
+                'canonical_title_zh' => $normalized['canonical_title_zh'] ?? '',
+                'search_h1_zh' => ($normalized['canonical_title_zh'] ?? null) !== null
+                    ? (string) $normalized['canonical_title_zh'].'职业诊断'
+                    : (string) $normalized['canonical_title_en'],
+                'structural_stability' => $normalized['structural_stability'],
+                'task_prototype_signature' => $normalized['task_prototype_signature'],
+                'market_semantics_gap' => $normalized['market_semantics_gap'],
+                'regulatory_divergence' => $normalized['regulatory_divergence'],
+                'toolchain_divergence' => $normalized['toolchain_divergence'],
+                'skill_gap_threshold' => $normalized['skill_gap_threshold'],
+                'trust_inheritance_scope' => $normalized['trust_inheritance_scope'],
+            ];
+            $occupation = null;
+            if (($normalized['occupation_uuid'] ?? null) !== null) {
+                $occupation = Occupation::query()->find((string) $normalized['occupation_uuid']);
+            }
+            if (! $occupation instanceof Occupation) {
+                $occupation = Occupation::query()
+                    ->where('canonical_slug', (string) $normalized['canonical_slug'])
+                    ->first();
+            }
+            if ($occupation instanceof Occupation) {
+                $occupation->forceFill($occupationAttributes)->save();
+            } else {
+                $occupation = Occupation::query()->create([
+                    'id' => $normalized['occupation_uuid'] ?? null,
+                    ...$occupationAttributes,
+                ]);
+            }
 
             $counts = [
                 'families_upserted' => 1,
