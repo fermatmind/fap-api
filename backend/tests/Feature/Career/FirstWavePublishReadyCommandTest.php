@@ -45,5 +45,20 @@ final class FirstWavePublishReadyCommandTest extends TestCase
         $this->assertDatabaseHas('occupations', ['canonical_slug' => 'human-resources-specialists']);
         $this->assertDatabaseHas('occupations', ['canonical_slug' => 'management-analysts']);
         $this->assertDatabaseMissing('occupations', ['canonical_slug' => 'civil-engineers']);
+
+        $repeatExitCode = Artisan::call('career:validate-first-wave-publish-ready', [
+            '--source' => base_path('tests/Fixtures/Career/authority_wave/first_wave_publish_subset.csv'),
+            '--materialize-missing' => true,
+            '--compile-missing' => true,
+            '--json' => true,
+        ]);
+        $repeatReport = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $repeatExitCode);
+        $firstDataScientists = collect($report['occupations'])->firstWhere('canonical_slug', 'data-scientists');
+        $repeatDataScientists = collect($repeatReport['occupations'])->firstWhere('canonical_slug', 'data-scientists');
+        $this->assertIsArray($firstDataScientists);
+        $this->assertIsArray($repeatDataScientists);
+        $this->assertSame($firstDataScientists['alias_count'], $repeatDataScientists['alias_count']);
     }
 }

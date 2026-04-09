@@ -170,7 +170,7 @@ final class FirstWavePublishReadyValidator
                 'reviewer_status' => $trustManifest?->reviewer_status,
                 'index_state' => $indexState?->index_state,
                 'index_eligible' => (bool) ($indexState?->index_eligible ?? false),
-                'alias_count' => $occupation?->aliases->count() ?? 0,
+                'alias_count' => $this->uniqueAliasCount($occupation),
                 'compiled_snapshot_present' => $snapshot?->compiled_at !== null,
             ];
         }
@@ -229,6 +229,30 @@ final class FirstWavePublishReadyValidator
                 }
             }
         }
+    }
+
+    private function uniqueAliasCount(?Occupation $occupation): int
+    {
+        if (! $occupation instanceof Occupation) {
+            return 0;
+        }
+
+        $seen = [];
+        foreach (($occupation->aliases ?? collect()) as $alias) {
+            if (! $alias instanceof OccupationAlias) {
+                continue;
+            }
+
+            $normalized = trim((string) $alias->normalized);
+            $lang = strtolower(trim((string) $alias->lang));
+            if ($normalized === '' || $lang === '') {
+                continue;
+            }
+
+            $seen[$lang.'|'.$normalized] = true;
+        }
+
+        return count($seen);
     }
 
     /**
