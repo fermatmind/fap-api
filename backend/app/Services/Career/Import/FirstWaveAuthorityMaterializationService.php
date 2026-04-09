@@ -11,12 +11,23 @@ use App\Domain\Career\Publish\FirstWaveManifestReader;
 use App\Domain\Career\Publish\FirstWavePublishSeedMaterializer;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
+use App\Models\ContextSnapshot;
+use App\Models\EditorialPatch;
 use App\Models\IndexState;
 use App\Models\Occupation;
+use App\Models\OccupationAlias;
+use App\Models\OccupationCrosswalk;
 use App\Models\OccupationFamily;
+use App\Models\OccupationSkillGraph;
 use App\Models\OccupationTruthMetric;
+use App\Models\ProfileProjection;
+use App\Models\ProjectionLineage;
+use App\Models\RecommendationSnapshot;
+use App\Models\SourceTrace;
+use App\Models\TransitionPath;
 use App\Models\TrustManifest;
 use App\Services\Career\CareerRecommendationCompiler;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Throwable;
 
@@ -56,6 +67,8 @@ final class FirstWaveAuthorityMaterializationService
 
             $manifestBySlug[(string) $occupation['canonical_slug']] = $occupation;
         }
+
+        $this->resetManifestAuthorityState($manifestOccupations);
 
         $authorityOverrides = $this->authorityOverrideReader->bySlug($authorityOverridePath);
         $dataset = $this->datasetReader->read($sourcePath);
@@ -300,6 +313,122 @@ final class FirstWaveAuthorityMaterializationService
         }
 
         return $metadata;
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $manifestOccupations
+     */
+    private function resetManifestAuthorityState(array $manifestOccupations): void
+    {
+        $slugs = array_values(array_unique(array_filter(array_map(
+            static fn (mixed $occupation): string => is_array($occupation)
+                ? trim((string) ($occupation['canonical_slug'] ?? ''))
+                : '',
+            $manifestOccupations
+        ))));
+
+        if ($slugs === []) {
+            return;
+        }
+
+        $occupationIds = Occupation::query()
+            ->whereIn('canonical_slug', $slugs)
+            ->pluck('id')
+            ->filter(static fn (mixed $id): bool => is_string($id) && $id !== '')
+            ->values()
+            ->all();
+
+        if ($occupationIds === []) {
+            return;
+        }
+
+        DB::transaction(function () use ($occupationIds): void {
+            $snapshotIds = RecommendationSnapshot::query()
+                ->whereIn('occupation_id', $occupationIds)
+                ->whereHas('contextSnapshot', function ($query): void {
+                    $query->where('context_payload->materialization', 'career_first_wave');
+                })
+                ->whereHas('profileProjection', function ($query): void {
+                    $query->where('projection_payload->materialization', 'career_first_wave');
+                })
+                ->pluck('id')
+                ->filter(static fn (mixed $id): bool => is_string($id) && $id !== '')
+                ->values()
+                ->all();
+
+            $contextIds = array_values(array_unique(array_merge(
+                RecommendationSnapshot::query()
+                    ->whereIn('id', $snapshotIds)
+                    ->pluck('context_snapshot_id')
+                    ->filter(static fn (mixed $id): bool => is_string($id) && $id !== '')
+                    ->values()
+                    ->all(),
+                ContextSnapshot::query()
+                    ->whereIn('current_occupation_id', $occupationIds)
+                    ->where('context_payload->materialization', 'career_first_wave')
+                    ->pluck('id')
+                    ->filter(static fn (mixed $id): bool => is_string($id) && $id !== '')
+                    ->values()
+                    ->all(),
+            )));
+
+            $projectionIds = array_values(array_unique(array_merge(
+                RecommendationSnapshot::query()
+                    ->whereIn('id', $snapshotIds)
+                    ->pluck('profile_projection_id')
+                    ->filter(static fn (mixed $id): bool => is_string($id) && $id !== '')
+                    ->values()
+                    ->all(),
+                ProfileProjection::query()
+                    ->whereIn('context_snapshot_id', $contextIds)
+                    ->pluck('id')
+                    ->filter(static fn (mixed $id): bool => is_string($id) && $id !== '')
+                    ->values()
+                    ->all(),
+            )));
+
+            $sourceTraceIds = OccupationTruthMetric::query()
+                ->whereIn('occupation_id', $occupationIds)
+                ->pluck('source_trace_id')
+                ->filter(static fn (mixed $id): bool => is_string($id) && $id !== '')
+                ->unique()
+                ->values()
+                ->all();
+
+            if ($snapshotIds !== []) {
+                TransitionPath::query()->whereIn('recommendation_snapshot_id', $snapshotIds)->delete();
+                RecommendationSnapshot::query()->whereIn('id', $snapshotIds)->delete();
+            }
+
+            if ($projectionIds !== []) {
+                ProjectionLineage::query()
+                    ->whereIn('child_projection_id', $projectionIds)
+                    ->orWhereIn('parent_projection_id', $projectionIds)
+                    ->delete();
+                ProfileProjection::query()->whereIn('id', $projectionIds)->delete();
+            }
+
+            if ($contextIds !== []) {
+                ContextSnapshot::query()->whereIn('id', $contextIds)->delete();
+            }
+
+            OccupationAlias::query()->whereIn('occupation_id', $occupationIds)->delete();
+            OccupationCrosswalk::query()->whereIn('occupation_id', $occupationIds)->delete();
+            OccupationSkillGraph::query()->whereIn('occupation_id', $occupationIds)->delete();
+            EditorialPatch::query()->whereIn('occupation_id', $occupationIds)->delete();
+            IndexState::query()->whereIn('occupation_id', $occupationIds)->delete();
+            TrustManifest::query()->whereIn('occupation_id', $occupationIds)->delete();
+            OccupationTruthMetric::query()->whereIn('occupation_id', $occupationIds)->delete();
+
+            if ($sourceTraceIds !== []) {
+                SourceTrace::query()
+                    ->whereIn('id', $sourceTraceIds)
+                    ->whereNotIn('id', OccupationTruthMetric::query()
+                        ->select('source_trace_id')
+                        ->whereNotNull('source_trace_id'))
+                    ->delete();
+            }
+        });
     }
 
     /**

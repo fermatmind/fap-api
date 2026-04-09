@@ -177,4 +177,81 @@ final class FirstWavePublishReadyCommandTest extends TestCase
         $this->assertSame('blocked', $elementary['status']);
         $this->assertSame('blocked_not_safely_remediable', $elementary['blocked_governance_status']);
     }
+
+    public function test_it_rebuilds_from_committed_truth_instead_of_reusing_stale_first_wave_state(): void
+    {
+        CareerFoundationFixture::seedHighTrustCompleteChain([
+            'slug' => 'software-developers',
+            'crosswalk_mode' => 'exact',
+        ]);
+
+        $firstExitCode = Artisan::call('career:validate-first-wave-publish-ready', [
+            '--source' => base_path('tests/Fixtures/Career/authority_wave/first_wave_override_subset.csv'),
+            '--materialize-missing' => true,
+            '--compile-missing' => true,
+            '--json' => true,
+        ]);
+        $firstReport = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $secondExitCode = Artisan::call('career:validate-first-wave-publish-ready', [
+            '--source' => base_path('tests/Fixtures/Career/authority_wave/first_wave_override_subset.csv'),
+            '--materialize-missing' => true,
+            '--compile-missing' => true,
+            '--json' => true,
+        ]);
+        $secondReport = json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $firstExitCode);
+        $this->assertSame(0, $secondExitCode);
+
+        $firstSoftware = collect($firstReport['occupations'])->firstWhere('canonical_slug', 'software-developers');
+        $firstFinancial = collect($firstReport['occupations'])->firstWhere('canonical_slug', 'financial-analysts');
+        $firstMarketing = collect($firstReport['occupations'])->firstWhere('canonical_slug', 'marketing-managers');
+        $firstElementary = collect($firstReport['occupations'])->firstWhere('canonical_slug', 'elementary-school-teachers-except-special-education');
+
+        $this->assertIsArray($firstSoftware);
+        $this->assertSame('blocked', $firstSoftware['status']);
+        $this->assertSame('blocked_override_eligible', $firstSoftware['blocked_governance_status']);
+        $this->assertFalse($firstSoftware['authority_override_supplied']);
+
+        $this->assertIsArray($firstFinancial);
+        $this->assertSame('blocked', $firstFinancial['status']);
+        $this->assertSame('blocked_override_eligible', $firstFinancial['blocked_governance_status']);
+        $this->assertFalse($firstFinancial['authority_override_supplied']);
+
+        $this->assertIsArray($firstMarketing);
+        $this->assertSame('blocked', $firstMarketing['status']);
+        $this->assertSame('blocked_not_safely_remediable', $firstMarketing['blocked_governance_status']);
+
+        $this->assertIsArray($firstElementary);
+        $this->assertSame('blocked', $firstElementary['status']);
+        $this->assertSame('blocked_not_safely_remediable', $firstElementary['blocked_governance_status']);
+
+        $this->assertSame(
+            [
+                'counts' => $firstReport['counts'],
+                'occupations' => collect($firstReport['occupations'])
+                    ->map(static fn (array $occupation): array => [
+                        'canonical_slug' => $occupation['canonical_slug'],
+                        'status' => $occupation['status'],
+                        'missing_requirements' => $occupation['missing_requirements'],
+                        'blocked_governance_status' => $occupation['blocked_governance_status'],
+                        'authority_override_supplied' => $occupation['authority_override_supplied'],
+                    ])
+                    ->all(),
+            ],
+            [
+                'counts' => $secondReport['counts'],
+                'occupations' => collect($secondReport['occupations'])
+                    ->map(static fn (array $occupation): array => [
+                        'canonical_slug' => $occupation['canonical_slug'],
+                        'status' => $occupation['status'],
+                        'missing_requirements' => $occupation['missing_requirements'],
+                        'blocked_governance_status' => $occupation['blocked_governance_status'],
+                        'authority_override_supplied' => $occupation['authority_override_supplied'],
+                    ])
+                    ->all(),
+            ]
+        );
+    }
 }

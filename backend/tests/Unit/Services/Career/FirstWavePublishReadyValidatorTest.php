@@ -232,6 +232,9 @@ final class FirstWavePublishReadyValidatorTest extends TestCase
 
         $this->assertSame('publish_ready', $row['status']);
         $this->assertSame([], $row['missing_requirements']);
+        $this->assertNull($row['blocked_governance_status']);
+        $this->assertNull($row['blocker_type']);
+        $this->assertFalse($row['authority_override_supplied']);
         $this->assertSame(1, $report['counts']['publish_ready']);
         $this->assertSame(9, $report['counts']['blocked']);
     }
