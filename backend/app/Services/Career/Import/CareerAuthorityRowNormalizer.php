@@ -21,6 +21,10 @@ final class CareerAuthorityRowNormalizer
         $category = $this->stringValue($row, 'Category');
         $manifestOccupation = $this->manifestOccupation($manifest, $slug);
         $manifestDefaults = is_array($manifest['defaults'] ?? null) ? $manifest['defaults'] : [];
+        $familySlug = (string) ($manifestOccupation['family_slug']
+            ?? $this->slugValue($category));
+        $familyTitleEn = (string) ($manifestOccupation['family_title_en']
+            ?? Str::of(str_replace('-', ' ', $category))->title()->toString());
 
         $mappingMode = (string) ($manifestOccupation['mapping_mode']
             ?? $row['Mapping Mode']
@@ -44,11 +48,13 @@ final class CareerAuthorityRowNormalizer
 
         return [
             'row_number' => (int) ($row['_row_number'] ?? 0),
+            'occupation_uuid' => $this->nullableString($manifestOccupation['occupation_uuid'] ?? null),
             'canonical_title_en' => $canonicalTitleEn,
             'canonical_title_zh' => $canonicalTitleZh,
             'canonical_slug' => $slug !== '' ? $slug : Str::slug($canonicalTitleEn),
-            'family_slug' => $this->slugValue($category),
-            'family_title_en' => Str::of(str_replace('-', ' ', $category))->title()->toString(),
+            'family_uuid' => $this->nullableString($manifestOccupation['family_uuid'] ?? null),
+            'family_slug' => $familySlug,
+            'family_title_en' => $familyTitleEn,
             'family_title_zh' => $this->nullableString($manifestOccupation['family_title_zh'] ?? null),
             'mapping_mode' => $mappingMode,
             'truth_market' => $truthMarket,
@@ -92,7 +98,20 @@ final class CareerAuthorityRowNormalizer
     private function manifestOccupation(array $manifest, string $slug): array
     {
         $occupations = is_array($manifest['occupations'] ?? null) ? $manifest['occupations'] : [];
-        $occupation = $occupations[$slug] ?? [];
+        $occupation = $occupations[$slug] ?? null;
+
+        if (! is_array($occupation)) {
+            foreach ($occupations as $candidate) {
+                if (! is_array($candidate)) {
+                    continue;
+                }
+
+                if ((string) ($candidate['canonical_slug'] ?? '') === $slug) {
+                    $occupation = $candidate;
+                    break;
+                }
+            }
+        }
 
         return is_array($occupation) ? $occupation : [];
     }
