@@ -17,11 +17,88 @@ final class CareerRecommendationDetailApiTest extends TestCase
 
     public function test_it_returns_a_resource_backed_recommendation_detail_bundle_with_provenance_and_claims(): void
     {
-        $chain = CareerFoundationFixture::seedTrustLimitedCrossMarketChain();
+        $this->compileRecommendationChain(CareerFoundationFixture::seedTrustLimitedCrossMarketChain());
+
+        $response = $this->getJson('/api/v0.5/career/recommendations/mbti/intj')
+            ->assertOk()
+            ->assertJsonPath('bundle_kind', 'career_recommendation_detail')
+            ->assertJsonPath('recommendation_subject_meta.type_code', 'INTJ-A')
+            ->assertJsonPath('claim_permissions.allow_salary_comparison', false)
+            ->assertJsonPath('seo_contract.canonical_path', '/career/recommendations/mbti/intj')
+            ->assertJsonPath('seo_contract.index_eligible', false)
+            ->assertJsonPath('matched_jobs.0.canonical_slug', 'backend-architect-cn-market')
+            ->assertJsonPath('matched_jobs.0.seo_contract.index_eligible', false)
+            ->assertJsonPath('matched_jobs.0.seo_contract.index_state', 'trust_limited')
+            ->assertJsonPath('matched_jobs.0.trust_summary.reviewer_status', 'pending')
+            ->assertJsonStructure([
+                'identity',
+                'recommendation_subject_meta',
+                'supporting_truth_summary',
+                'score_bundle' => ['fit_score'],
+                'warnings',
+                'claim_permissions',
+                'integrity_summary',
+                'trust_manifest',
+                'matched_jobs' => [[
+                    'occupation_uuid',
+                    'canonical_slug',
+                    'title',
+                    'seo_contract' => ['canonical_path', 'canonical_target', 'index_state', 'index_eligible', 'reason_codes'],
+                    'trust_summary' => ['reviewer_status'],
+                ]],
+                'seo_contract',
+                'provenance_meta' => ['compiler_version', 'compile_refs'],
+            ]);
+
+        $this->assertIsString((string) $response->json('matched_jobs.0.occupation_uuid'));
+        $this->assertNotSame('', (string) $response->json('matched_jobs.0.occupation_uuid'));
+    }
+
+    public function test_it_returns_authority_owned_matched_jobs_without_using_heavy_job_payload_fields(): void
+    {
+        $this->compileRecommendationChain(
+            CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-intj-api'])
+        );
+        $this->compileRecommendationChain(CareerFoundationFixture::seedTrustLimitedCrossMarketChain());
+
+        $response = $this->getJson('/api/v0.5/career/recommendations/mbti/intj')
+            ->assertOk();
+
+        $matchedJobs = (array) $response->json('matched_jobs');
+
+        $this->assertCount(2, $matchedJobs);
+        $this->assertSame(
+            ['backend-architect-cn-market', 'backend-architect-intj-api'],
+            array_map(
+                static fn (array $job): string => (string) ($job['canonical_slug'] ?? ''),
+                $matchedJobs
+            )
+        );
+        $this->assertArrayNotHasKey('summary', $matchedJobs[0]);
+        $this->assertArrayNotHasKey('fit_bucket', $matchedJobs[0]);
+        $this->assertArrayNotHasKey('score_bundle', $matchedJobs[0]);
+    }
+
+    public function test_it_returns_conservative_not_found_when_subject_meta_bundle_is_unavailable(): void
+    {
+        $chain = CareerFoundationFixture::seedHighTrustCompleteChain();
+        app(CareerRecommendationCompiler::class)->compile($chain['childProjection'], $chain['occupation']);
+
+        $this->getJson('/api/v0.5/career/recommendations/mbti/intj')
+            ->assertStatus(404)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
+    }
+
+    /**
+     * @param  array<string, mixed>  $chain
+     */
+    private function compileRecommendationChain(array $chain): void
+    {
         $importRun = CareerImportRun::query()->create([
             'dataset_name' => 'fixture',
             'dataset_version' => 'v1',
-            'dataset_checksum' => 'checksum-rec-api',
+            'dataset_checksum' => 'checksum-rec-api-'.$chain['occupation']->canonical_slug,
             'scope_mode' => 'first_wave_trust_inheritance',
             'dry_run' => false,
             'status' => 'completed',
@@ -60,36 +137,5 @@ final class CareerRecommendationDetailApiTest extends TestCase
             'compile_run_id' => $compileRun->id,
             'import_run_id' => $importRun->id,
         ]);
-
-        $this->getJson('/api/v0.5/career/recommendations/mbti/intj')
-            ->assertOk()
-            ->assertJsonPath('bundle_kind', 'career_recommendation_detail')
-            ->assertJsonPath('recommendation_subject_meta.type_code', 'INTJ-A')
-            ->assertJsonPath('claim_permissions.allow_salary_comparison', false)
-            ->assertJsonPath('seo_contract.canonical_path', '/career/recommendations/mbti/intj')
-            ->assertJsonPath('seo_contract.index_eligible', false)
-            ->assertJsonStructure([
-                'identity',
-                'recommendation_subject_meta',
-                'supporting_truth_summary',
-                'score_bundle' => ['fit_score'],
-                'warnings',
-                'claim_permissions',
-                'integrity_summary',
-                'trust_manifest',
-                'seo_contract',
-                'provenance_meta' => ['compiler_version', 'compile_refs'],
-            ]);
-    }
-
-    public function test_it_returns_conservative_not_found_when_subject_meta_bundle_is_unavailable(): void
-    {
-        $chain = CareerFoundationFixture::seedHighTrustCompleteChain();
-        app(CareerRecommendationCompiler::class)->compile($chain['childProjection'], $chain['occupation']);
-
-        $this->getJson('/api/v0.5/career/recommendations/mbti/intj')
-            ->assertStatus(404)
-            ->assertJsonPath('ok', false)
-            ->assertJsonPath('error_code', 'NOT_FOUND');
     }
 }

@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Services\Career\Bundles;
 
 use App\DTO\Career\CareerRecommendationDetailBundle;
+use App\Models\Occupation;
 use App\Models\RecommendationSnapshot;
 use App\Services\PublicSurface\SeoSurfaceContractService;
+use Illuminate\Support\Collection;
 
 final class CareerRecommendationDetailBundleBuilder
 {
@@ -24,34 +26,9 @@ final class CareerRecommendationDetailBundleBuilder
 
         $canonicalType = strtoupper(strtok($normalizedType, '-') ?: $normalizedType);
 
-        $snapshot = RecommendationSnapshot::query()
-            ->with([
-                'occupation.family',
-                'truthMetric.sourceTrace',
-                'trustManifest',
-                'indexState',
-                'profileProjection',
-                'contextSnapshot',
-                'compileRun',
-            ])
-            ->whereNotNull('compiled_at')
-            ->whereNotNull('compile_run_id')
-            ->whereHas('contextSnapshot', static function ($query): void {
-                $query->where('context_payload->materialization', 'career_first_wave');
-            })
-            ->whereHas('profileProjection', static function ($query): void {
-                $query->where('projection_payload->materialization', 'career_first_wave');
-            })
-            ->whereHas('profileProjection', function ($query) use ($normalizedType, $canonicalType): void {
-                $query->where(function ($inner) use ($normalizedType, $canonicalType): void {
-                    $inner->where('projection_payload->recommendation_subject_meta->type_code', $normalizedType)
-                        ->orWhere('projection_payload->recommendation_subject_meta->canonical_type_code', $normalizedType)
-                        ->orWhere('projection_payload->recommendation_subject_meta->canonical_type_code', $canonicalType);
-                });
-            })
-            ->orderByDesc('compiled_at')
-            ->orderByDesc('created_at')
-            ->first();
+        $snapshots = $this->matchingSnapshots($normalizedType, $canonicalType);
+        /** @var RecommendationSnapshot|null $snapshot */
+        $snapshot = $snapshots->first();
 
         if (! $snapshot instanceof RecommendationSnapshot || ! $snapshot->occupation) {
             return null;
@@ -111,6 +88,7 @@ final class CareerRecommendationDetailBundleBuilder
                 'locale_context' => is_array($trustManifest?->locale_context) ? $trustManifest->locale_context : [],
                 'methodology' => is_array($trustManifest?->methodology) ? $trustManifest->methodology : [],
             ],
+            matchedJobs: $this->buildMatchedJobs($snapshots),
             seoContract: $this->buildSeoContract($snapshot, $subjectMeta, $requestedType),
             provenanceMeta: [
                 'content_version' => $trustManifest?->content_version,
@@ -128,6 +106,103 @@ final class CareerRecommendationDetailBundleBuilder
                 'compile_refs' => $this->normalizeArray($payload['compile_refs'] ?? []),
             ],
         );
+    }
+
+    /**
+     * @return Collection<int, RecommendationSnapshot>
+     */
+    private function matchingSnapshots(string $normalizedType, string $canonicalType): Collection
+    {
+        /** @var Collection<int, RecommendationSnapshot> $snapshots */
+        $snapshots = RecommendationSnapshot::query()
+            ->with([
+                'occupation.family',
+                'truthMetric.sourceTrace',
+                'trustManifest',
+                'indexState',
+                'profileProjection',
+                'contextSnapshot',
+                'compileRun',
+            ])
+            ->whereNotNull('compiled_at')
+            ->whereNotNull('compile_run_id')
+            ->whereHas('contextSnapshot', static function ($query): void {
+                $query->where('context_payload->materialization', 'career_first_wave');
+            })
+            ->whereHas('profileProjection', static function ($query): void {
+                $query->where('projection_payload->materialization', 'career_first_wave');
+            })
+            ->whereHas('profileProjection', function ($query) use ($normalizedType, $canonicalType): void {
+                $query->where(function ($inner) use ($normalizedType, $canonicalType): void {
+                    $inner->where('projection_payload->recommendation_subject_meta->type_code', $normalizedType)
+                        ->orWhere('projection_payload->recommendation_subject_meta->canonical_type_code', $normalizedType)
+                        ->orWhere('projection_payload->recommendation_subject_meta->canonical_type_code', $canonicalType);
+                });
+            })
+            ->orderByDesc('compiled_at')
+            ->orderByDesc('created_at')
+            ->get();
+
+        return $snapshots;
+    }
+
+    /**
+     * @param  Collection<int, RecommendationSnapshot>  $snapshots
+     * @return list<array<string, mixed>>
+     */
+    private function buildMatchedJobs(Collection $snapshots): array
+    {
+        $items = $snapshots
+            ->groupBy('occupation_id')
+            ->map(function (Collection $group): ?RecommendationSnapshot {
+                /** @var RecommendationSnapshot|null $selected */
+                $selected = $group
+                    ->sort(function (RecommendationSnapshot $left, RecommendationSnapshot $right): int {
+                        return $this->compareSnapshots($left, $right);
+                    })
+                    ->first();
+
+                return $selected;
+            })
+            ->filter(static fn (mixed $snapshot): bool => $snapshot instanceof RecommendationSnapshot)
+            ->map(function (RecommendationSnapshot $snapshot): ?array {
+                $occupation = $snapshot->occupation;
+                if (! $occupation instanceof Occupation || $snapshot->indexState === null || $snapshot->trustManifest === null) {
+                    return null;
+                }
+
+                return [
+                    'occupation_uuid' => $occupation->id,
+                    'canonical_slug' => $occupation->canonical_slug,
+                    'title' => $occupation->canonical_title_en,
+                    'seo_contract' => $this->buildMatchedJobSeoContract($occupation, $snapshot),
+                    'trust_summary' => [
+                        'reviewer_status' => $snapshot->trustManifest?->reviewer_status,
+                    ],
+                ];
+            })
+            ->filter()
+            ->sortBy(static fn (array $item): array => [
+                strtolower((string) ($item['title'] ?? '')),
+                strtolower((string) ($item['canonical_slug'] ?? '')),
+            ])
+            ->values();
+
+        /** @var list<array<string, mixed>> $matchedJobs */
+        $matchedJobs = $items->all();
+
+        return $matchedJobs;
+    }
+
+    private function compareSnapshots(RecommendationSnapshot $left, RecommendationSnapshot $right): int
+    {
+        $leftCompiled = optional($left->compiled_at)?->getTimestamp() ?? 0;
+        $rightCompiled = optional($right->compiled_at)?->getTimestamp() ?? 0;
+        if ($leftCompiled !== $rightCompiled) {
+            return $rightCompiled <=> $leftCompiled;
+        }
+
+        return strcmp((string) $left->id, (string) $right->id);
     }
 
     /**
@@ -162,6 +237,23 @@ final class CareerRecommendationDetailBundleBuilder
             'surface_type' => $surface['surface_type'] ?? null,
             'robots_policy' => $surface['robots_policy'] ?? $robotsPolicy,
             'metadata_fingerprint' => $surface['metadata_fingerprint'] ?? null,
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function buildMatchedJobSeoContract(Occupation $occupation, RecommendationSnapshot $snapshot): array
+    {
+        $indexState = $snapshot->indexState;
+        $canonicalPath = is_string($indexState?->canonical_path) ? $indexState->canonical_path : '/career/jobs/'.$occupation->canonical_slug;
+
+        return [
+            'canonical_path' => $canonicalPath,
+            'canonical_target' => $indexState?->canonical_target,
+            'index_state' => $indexState?->index_state,
+            'index_eligible' => (bool) ($indexState?->index_eligible ?? false),
+            'reason_codes' => is_array($indexState?->reason_codes) ? $indexState->reason_codes : [],
         ];
     }
 
