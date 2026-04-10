@@ -8,13 +8,13 @@ use App\Console\Commands\ArchiveColdData;
 use App\Console\Commands\Big5AttemptPurge;
 use App\Console\Commands\Big5PsychometricsReport;
 use App\Console\Commands\Big5TelemetrySummary;
+use App\Console\Commands\CareerCompileAuthorityWave;
+use App\Console\Commands\CareerImportAuthorityWave;
 use App\Console\Commands\CiScaleImpact;
 use App\Console\Commands\CommerceCompensatePendingOrders;
 use App\Console\Commands\CommerceReconcile;
 use App\Console\Commands\CommerceRepairPaidOrders;
 use App\Console\Commands\CommerceRepairPostCommitFailed;
-use App\Console\Commands\CareerCompileAuthorityWave;
-use App\Console\Commands\CareerImportAuthorityWave;
 use App\Console\Commands\ContentCompile;
 use App\Console\Commands\ContentLint;
 use App\Console\Commands\Eq60PsychometricsReport;
@@ -26,6 +26,7 @@ use App\Console\Commands\FapValidateReport;
 use App\Console\Commands\FapWeeklyReport;
 use App\Console\Commands\MbtiUpgradeLegacyPartialUnlocks;
 use App\Console\Commands\MetricsWeeklyValidity;
+use App\Console\Commands\MbtiPrewarm;
 use App\Console\Commands\NormsBig5BootstrapBuild;
 use App\Console\Commands\NormsBig5DriftCheck;
 use App\Console\Commands\NormsBig5MonthlyDriftCheck;
@@ -65,6 +66,7 @@ use App\Console\Commands\PacksRollback;
 use App\Console\Commands\PaymentsPruneEvents;
 use App\Console\Commands\PersonalityImportDesktopCloneBaseline;
 use App\Console\Commands\QualityDailySummary;
+use App\Console\Commands\RefreshCareerAttributionDailyCommand;
 use App\Console\Commands\SdsPsychometricsReport;
 use App\Console\Commands\SeedScaleRegistry;
 use App\Console\Commands\StorageControlPlaneSnapshot;
@@ -95,6 +97,7 @@ class Kernel extends ConsoleKernel
         FapWeeklyReport::class,
         PersonalityImportDesktopCloneBaseline::class,
         MetricsWeeklyValidity::class,
+        MbtiPrewarm::class,
         MbtiUpgradeLegacyPartialUnlocks::class,
         AdminBootstrapOwner::class,
         OpsDeployEvent::class,
@@ -127,6 +130,7 @@ class Kernel extends ConsoleKernel
         CommerceRepairPostCommitFailed::class,
         CareerImportAuthorityWave::class,
         CareerCompileAuthorityWave::class,
+        RefreshCareerAttributionDailyCommand::class,
         PacksPublish::class,
         PacksRollback::class,
         Packs2Publish::class,
