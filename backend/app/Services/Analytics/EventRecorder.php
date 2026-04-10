@@ -48,6 +48,7 @@ final class EventRecorder
             $context['scale_uid'] ?? null,
         ], false);
 
+        $occurredAt = $this->resolveOccurredAt($context['occurred_at'] ?? null);
         $now = now();
         $payload = [
             'id' => (string) Str::uuid(),
@@ -65,7 +66,9 @@ final class EventRecorder
             'dir_version' => $context['dir_version'] ?? null,
             'pack_semver' => $context['pack_semver'] ?? null,
             'meta_json' => $meta,
-            'occurred_at' => $now,
+            'occurred_at' => $occurredAt,
+            'region' => $context['region'] ?? null,
+            'locale' => $context['locale'] ?? null,
             'created_at' => $now,
             'updated_at' => $now,
         ];
@@ -100,6 +103,23 @@ final class EventRecorder
                 'exception' => $e,
             ]);
         }
+    }
+
+    private function resolveOccurredAt(mixed $value): Carbon
+    {
+        if ($value instanceof Carbon) {
+            return $value;
+        }
+
+        if ($value instanceof \DateTimeInterface) {
+            return Carbon::instance(\DateTimeImmutable::createFromInterface($value));
+        }
+
+        if (is_string($value) && trim($value) !== '') {
+            return Carbon::parse($value);
+        }
+
+        return now();
     }
 
     public function recordFromRequest(Request $request, string $eventCode, ?int $userId, array $meta = []): void
