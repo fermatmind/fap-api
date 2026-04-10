@@ -7,12 +7,17 @@ use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Services\Scale\ScaleIdentityResolver;
 use App\Services\Scale\ScaleRegistry;
+use App\Support\CacheKeys;
 use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class ScalesLookupController extends Controller
 {
+    private const CACHE_DEBUG_HEADER = 'X-FAP-Cache';
+
     public function __construct(
         private ScaleRegistry $registry,
         private ScaleIdentityResolver $identityResolver,
@@ -45,6 +50,26 @@ class ScalesLookupController extends Controller
         }
 
         $allowAlias = config('scales_lookup.alias_mode', 'compat') !== 'canonical_only';
+        $requestedLocale = $this->resolveRequestedLocale(
+            $request,
+            (string) config('content_packs.default_locale', 'en')
+        );
+        // We cannot reliably derive content version before registry resolution, so keep
+        // a request-shape key here and pair it with a short TTL.
+        $cacheKey = CacheKeys::mbtiLookup($orgId, $requestedSlug, $requestedLocale, $allowAlias);
+        $cacheStore = Cache::store((string) config('content_packs.mbti_response_cache_store', 'hot_redis'));
+        $cacheTtl = max(1, (int) config('content_packs.mbti_lookup_cache_ttl_seconds', 600));
+        $cached = $cacheStore->get($cacheKey);
+        if (is_array($cached)) {
+            $this->logCacheEvent('lookup_hit', $cacheKey, [
+                'org_id' => $orgId,
+                'slug' => $requestedSlug,
+                'locale' => $requestedLocale,
+            ]);
+
+            return $this->cacheableJson($cached, 'hit');
+        }
+
         $row = $this->registry->lookupBySlug($requestedSlug, $orgId, $allowAlias);
         if (! $row) {
             return response()->json([
@@ -69,8 +94,7 @@ class ScalesLookupController extends Controller
         $locale = $this->resolveRequestedLocale($request, (string) ($row['default_locale'] ?? 'en'));
         $seo = $this->resolveSeoByLocale($row, $locale);
         $isIndexable = $this->resolveIsIndexable($row);
-
-        return response()->json([
+        $payload = [
             'ok' => true,
             'scale_code' => $scaleCodeMeta['scale_code'],
             'scale_code_legacy' => $scaleCodeMeta['scale_code_legacy'],
@@ -105,7 +129,19 @@ class ScalesLookupController extends Controller
                 $seo,
                 $isIndexable
             ),
-        ]);
+        ];
+
+        if (($payload['scale_code'] ?? null) === 'MBTI') {
+            $cacheStore->put($cacheKey, $payload, $cacheTtl);
+            $this->logCacheEvent('lookup_miss', $cacheKey, [
+                'org_id' => $orgId,
+                'slug' => $requestedSlug,
+                'locale' => $locale,
+                'ttl' => $cacheTtl,
+            ]);
+        }
+
+        return $this->cacheableJson($payload, 'miss');
     }
 
     /**
@@ -376,5 +412,35 @@ class ScalesLookupController extends Controller
             'pack_id_v2' => $packIdV2 ?? $this->trimOrNull($row['default_pack_id'] ?? null),
             'dir_version_v2' => $dirVersionV2 ?? $this->trimOrNull($row['default_dir_version'] ?? null),
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function cacheableJson(array $payload, string $state): JsonResponse
+    {
+        $response = response()->json($payload);
+        if ($this->shouldExposeCacheState()) {
+            $response->headers->set(self::CACHE_DEBUG_HEADER, $state);
+        }
+
+        return $response;
+    }
+
+    private function shouldExposeCacheState(): bool
+    {
+        return app()->environment(['local', 'testing']) || (bool) config('app.debug', false);
+    }
+
+    /**
+     * @param  array<string,mixed>  $context
+     */
+    private function logCacheEvent(string $event, string $cacheKey, array $context = []): void
+    {
+        if (! (bool) config('content_packs.debug_log', false)) {
+            return;
+        }
+
+        Log::info('mbti.lookup.cache.'.$event, ['cache_key' => $cacheKey] + $context);
     }
 }

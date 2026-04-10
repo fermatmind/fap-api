@@ -47,12 +47,36 @@ final class CacheKeys
         return self::base().':content_packs:questions:'.$packId.':'.$dirVersion;
     }
 
-    public static function mbtiQuestions(string $packId, string $dirVersion): string
+    public static function mbtiLookup(int $orgId, string $requestedSlug, string $locale, bool $allowAlias): string
     {
-        $packId = trim($packId);
-        $dirVersion = trim($dirVersion);
+        return self::base().':mbti:lookup'
+            .':org='.self::normalizeSegment((string) $orgId)
+            .':slug='.self::normalizeSegment($requestedSlug)
+            .':locale='.self::normalizeSegment($locale)
+            .':alias='.(int) $allowAlias;
+    }
 
-        return self::base().':mbti:questions:'.$packId.':'.$dirVersion;
+    public static function mbtiQuestions(
+        int $orgId,
+        string $packId,
+        string $dirVersion,
+        string $resolvedFormCode,
+        string $locale,
+        string $region,
+        ?string $assetsBaseUrlOverride = null,
+    ): string {
+        $assetsMarker = $assetsBaseUrlOverride === null || trim($assetsBaseUrlOverride) === ''
+            ? 'default'
+            : substr(hash('sha256', trim($assetsBaseUrlOverride)), 0, 12);
+
+        return self::base().':mbti:questions'
+            .':org='.self::normalizeSegment((string) $orgId)
+            .':pack='.self::normalizeSegment($packId)
+            .':dir='.self::normalizeSegment($dirVersion)
+            .':form='.self::normalizeSegment($resolvedFormCode)
+            .':locale='.self::normalizeSegment($locale)
+            .':region='.self::normalizeSegment($region)
+            .':assets='.$assetsMarker;
     }
 
     public static function contentAsset(string $packPath, string $relPath): string
@@ -85,5 +109,17 @@ final class CacheKeys
     private static function base(): string
     {
         return self::PREFIX.':v='.self::versionTag();
+    }
+
+    private static function normalizeSegment(string $value): string
+    {
+        $value = trim($value);
+        if ($value === '') {
+            return 'na';
+        }
+
+        $normalized = preg_replace('/[^a-z0-9._-]+/i', '_', $value);
+
+        return $normalized !== null && $normalized !== '' ? strtolower($normalized) : 'na';
     }
 }
