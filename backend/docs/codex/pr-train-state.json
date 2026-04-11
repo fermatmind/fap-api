@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-11T17:24:00Z",
+  "updated_at": "2026-04-11T23:46:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -518,10 +518,10 @@
     "PR-B25": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_verified",
+      "status": "github_checks_failed",
       "branch": "codex/pr-b25-career-family-target-alias-hardening-family-fallback-authority",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "7eedb2b0a3d27cd580c5c7522b1871d1a1a420a6",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/867",
       "checks": {
         "local": [
           {
@@ -537,9 +537,20 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24285913530/job/70915119095"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24285913530/job/70915121673"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub Actions jobs failed immediately on hygiene, matching the current repository workflow-start failure pattern rather than a locally reproducible B25 regression.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
