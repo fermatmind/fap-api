@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-11T16:20:00Z",
+  "updated_at": "2026-04-11T17:00:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -465,6 +465,51 @@
         ]
       },
       "failure_reason": "GitHub hygiene failed immediately again and the MBTI matrix job was skipped; local B23 verification passed and the failure pattern matches the current repository workflow-start issue rather than a locally reproducible regression.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B24": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "github_checks_failed",
+      "branch": "codex/pr-b24-career-alias-disambiguation-authority-api",
+      "commit_sha": "1d56325aec05f20f885a5c636ede6e37385ae0d9",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/866",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/Bundles/CareerAliasResolutionBundleBuilder.php app/DTO/Career/CareerAliasResolutionBundle.php app/Http/Resources/Career/CareerAliasResolutionResource.php app/Http/Controllers/API/V0_5/Career/CareerAliasResolutionController.php routes/api.php tests/Unit/Services/Career/CareerAliasResolutionBundleBuilderTest.php tests/Feature/Career/CareerAliasResolutionApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerAliasResolutionBundleBuilderTest.php tests/Feature/Career/CareerAliasResolutionApiTest.php tests/Feature/Career/CareerSearchApiTest.php tests/Feature/Career/CareerFamilyHubApiTest.php tests/Feature/Career/CareerJobListApiTest.php tests/Feature/Career/FirstWaveReadinessApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/OpenApiDiffTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24278993342/job/70897714342"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24278993342/job/70897716268"
+          }
+        ]
+      },
+      "failure_reason": "GitHub hygiene failed immediately again and the MBTI matrix job was skipped; local B24 verification passed and the failure pattern matches the repository's current workflow-start issue rather than a locally reproducible alias-resolution regression.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
