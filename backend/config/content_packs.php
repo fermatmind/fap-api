@@ -28,6 +28,9 @@ return [
     'cache_ttl_seconds' => (int) env('FAP_PACKS_CACHE_TTL_SECONDS', 3600),
     'loader_cache_store' => env('CONTENT_LOADER_CACHE_STORE', 'array'),
     'loader_cache_ttl_seconds' => (int) env('CONTENT_LOADER_CACHE_TTL_SECONDS', 300),
+    'mbti_response_cache_store' => env('MBTI_RESPONSE_CACHE_STORE', 'hot_redis'),
+    'mbti_lookup_cache_ttl_seconds' => (int) env('MBTI_LOOKUP_CACHE_TTL_SECONDS', 600),
+    'mbti_questions_cache_ttl_seconds' => (int) env('MBTI_QUESTIONS_CACHE_TTL_SECONDS', 600),
     'debug_log' => (bool) env('FAP_PACKS_DEBUG_LOG', false),
 
     // ✅ CI/服务器建议强约束：默认 pack_id 明确指向你的主包，避免回退到 GLOBAL/en

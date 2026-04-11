@@ -15,12 +15,17 @@ use App\Services\Scale\ScaleCodeInputGuard;
 use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Services\Scale\ScaleIdentityResolver;
 use App\Services\Scale\ScaleRegistry;
+use App\Support\CacheKeys;
 use App\Support\OrgContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class ScalesController extends Controller
 {
+    private const CACHE_DEBUG_HEADER = 'X-FAP-Cache';
+
     public function __construct(
         private ScaleRegistry $registry,
         private ScaleIdentityResolver $identityResolver,
@@ -348,6 +353,32 @@ class ScalesController extends Controller
             $assetsBaseUrlOverride = $request->attributes->get('assets_base_url');
             $assetsBaseUrlOverride = is_string($assetsBaseUrlOverride) ? $assetsBaseUrlOverride : null;
 
+            $cacheStore = Cache::store((string) config('content_packs.mbti_response_cache_store', 'hot_redis'));
+            $cacheTtl = max(1, (int) config('content_packs.mbti_questions_cache_ttl_seconds', 600));
+            $cacheKey = null;
+            if ($resolvedScaleCode === 'MBTI' && $resolvedFormCode !== null) {
+                $cacheKey = CacheKeys::mbtiQuestions(
+                    $orgId,
+                    $packId,
+                    $dirVersion,
+                    $resolvedFormCode,
+                    $locale,
+                    $region,
+                    $assetsBaseUrlOverride
+                );
+                $cached = $cacheStore->get($cacheKey);
+                if (is_array($cached)) {
+                    $this->logCacheEvent('questions_hit', $cacheKey, [
+                        'org_id' => $orgId,
+                        'form_code' => $resolvedFormCode,
+                        'locale' => $locale,
+                        'region' => $region,
+                    ]);
+
+                    return $this->cacheableJson($cached, 'hit');
+                }
+            }
+
             $loaded = $questionsService->loadByPack($packId, $dirVersion, $assetsBaseUrlOverride);
             if (! ($loaded['ok'] ?? false)) {
                 $error = (string) ($loaded['error_code'] ?? $loaded['error'] ?? 'READ_FAILED');
@@ -360,7 +391,7 @@ class ScalesController extends Controller
                 ], $status);
             }
 
-            return response()->json([
+            $payload = [
                 'ok' => true,
                 'scale_code' => $scaleCodeMeta['scale_code'],
                 'region' => $region,
@@ -370,7 +401,20 @@ class ScalesController extends Controller
                 'content_package_version' => (string) ($loaded['content_package_version'] ?? ''),
                 'form_code' => $resolvedFormCode,
                 'questions' => $loaded['questions'],
-            ] + $scaleCodeMeta);
+            ] + $scaleCodeMeta;
+
+            if ($cacheKey !== null) {
+                $cacheStore->put($cacheKey, $payload, $cacheTtl);
+                $this->logCacheEvent('questions_miss', $cacheKey, [
+                    'org_id' => $orgId,
+                    'form_code' => $resolvedFormCode,
+                    'locale' => $locale,
+                    'region' => $region,
+                    'ttl' => $cacheTtl,
+                ]);
+            }
+
+            return $this->cacheableJson($payload, 'miss');
         } catch (\Throwable $e) {
             if ($e instanceof ApiProblemException) {
                 throw $e;
@@ -615,5 +659,35 @@ class ScalesController extends Controller
         $trimmed = trim((string) $value);
 
         return $trimmed !== '' ? $trimmed : null;
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     */
+    private function cacheableJson(array $payload, string $state): JsonResponse
+    {
+        $response = response()->json($payload);
+        if ($this->shouldExposeCacheState()) {
+            $response->headers->set(self::CACHE_DEBUG_HEADER, $state);
+        }
+
+        return $response;
+    }
+
+    private function shouldExposeCacheState(): bool
+    {
+        return app()->environment(['local', 'testing']) || (bool) config('app.debug', false);
+    }
+
+    /**
+     * @param  array<string,mixed>  $context
+     */
+    private function logCacheEvent(string $event, string $cacheKey, array $context = []): void
+    {
+        if (! (bool) config('content_packs.debug_log', false)) {
+            return;
+        }
+
+        Log::info('mbti.questions.cache.'.$event, ['cache_key' => $cacheKey] + $context);
     }
 }
