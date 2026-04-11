@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Services\Career;
 
 use App\Domain\Career\Publish\FirstWaveReadinessSummaryService;
+use App\Models\Occupation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
@@ -60,6 +61,11 @@ final class FirstWaveReadinessSummaryServiceTest extends TestCase
         $this->assertSame('approved', $dataScientists['reviewer_status']);
         $this->assertSame('indexable', $dataScientists['index_state']);
         $this->assertTrue($dataScientists['index_eligible']);
+
+        $occupation = Occupation::query()->where('canonical_slug', 'data-scientists')->firstOrFail();
+        $latestIndexState = $occupation->indexStates()->orderByDesc('changed_at')->orderByDesc('updated_at')->firstOrFail();
+        $this->assertSame('indexed', $latestIndexState->index_state);
+        $this->assertTrue($latestIndexState->index_eligible);
     }
 
     public function test_it_keeps_partial_only_as_a_raw_summary_count_when_present(): void

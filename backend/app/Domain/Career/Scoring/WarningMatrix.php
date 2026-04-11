@@ -59,14 +59,14 @@ final class WarningMatrix
             $blockedClaims[] = 'transition_recommendation';
         }
 
-        if (in_array($indexState, [IndexStateValue::NOINDEX, IndexStateValue::UNAVAILABLE], true)) {
+        if (IndexStateValue::isIndexBlocked($indexState, $indexEligible)) {
             $redFlags[] = ClaimReasonCode::INDEX_STATE_RESTRICTED;
             $blockedClaims[] = 'strong_claim';
             $blockedClaims[] = 'salary_comparison';
             $blockedClaims[] = 'ai_strategy';
             $blockedClaims[] = 'transition_recommendation';
             $blockedClaims[] = 'cross_market_pay_copy';
-        } elseif ($indexState === IndexStateValue::TRUST_LIMITED || ! $indexEligible) {
+        } elseif (IndexStateValue::isIndexRestricted($indexState, $indexEligible)) {
             $amberFlags[] = ClaimReasonCode::INDEX_STATE_RESTRICTED;
             $blockedClaims[] = 'strong_claim';
         }

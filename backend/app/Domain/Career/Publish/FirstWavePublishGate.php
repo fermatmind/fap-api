@@ -57,7 +57,7 @@ final class FirstWavePublishGate
             $reasons[] = PublishReasonCode::REVIEWER_BLOCKED;
         }
 
-        if ($indexEligible && $indexState === IndexStateValue::INDEXABLE) {
+        if (IndexStateValue::isIndexedLike($indexState, $indexEligible)) {
             $reasons[] = PublishReasonCode::INDEX_ELIGIBLE;
         } else {
             $reasons[] = PublishReasonCode::INDEX_INELIGIBLE;
@@ -73,8 +73,7 @@ final class FirstWavePublishGate
             in_array($crosswalkMode, ['exact', 'trust_inheritance'], true)
             && $confidenceScore >= 75
             && $reviewerStatus === ReviewerStatus::APPROVED
-            && $indexEligible
-            && $indexState === IndexStateValue::INDEXABLE
+            && IndexStateValue::isIndexedLike($indexState, $indexEligible)
             && $allowStrongClaim
         ) {
             $reasons[] = PublishReasonCode::STABLE_PUBLISH_READY;
@@ -89,7 +88,7 @@ final class FirstWavePublishGate
         if (
             $confidenceScore < 60
             || $reviewerStatus === ReviewerStatus::CHANGES_REQUIRED
-            || $indexState === IndexStateValue::UNAVAILABLE
+            || in_array($indexState, [IndexStateValue::UNAVAILABLE, IndexStateValue::DEMOTED], true)
         ) {
             $reasons[] = PublishReasonCode::HOLD_SCOPE_RESTRICTED;
 

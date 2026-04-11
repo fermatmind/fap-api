@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Transition\TransitionPathType;
 use App\DTO\Career\CareerTransitionPreviewBundle;
 use App\Models\RecommendationSnapshot;
@@ -142,7 +143,10 @@ final class CareerTransitionPreviewBundleBuilder
             seoContract: [
                 'canonical_path' => '/career/jobs/'.$targetOccupation->canonical_slug,
                 'canonical_target' => null,
-                'index_state' => $readiness['index_state'] ?? null,
+                'index_state' => IndexStateValue::publicFacing(
+                    (string) ($readiness['index_state'] ?? ''),
+                    true,
+                ),
                 'index_eligible' => true,
                 'reason_codes' => $seoReasonCodes,
             ],

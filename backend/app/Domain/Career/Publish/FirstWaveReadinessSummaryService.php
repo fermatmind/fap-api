@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Career\Publish;
 
+use App\Domain\Career\IndexStateValue;
 use App\DTO\Career\FirstWaveReadinessSummary;
 
 final class FirstWaveReadinessSummaryService
@@ -73,7 +74,10 @@ final class FirstWaveReadinessSummaryService
                 'review_required' => (bool) ($row['review_required'] ?? false),
                 'crosswalk_mode' => $row['crosswalk_mode'] ?? null,
                 'reviewer_status' => $row['reviewer_status'] ?? null,
-                'index_state' => $row['index_state'] ?? null,
+                'index_state' => IndexStateValue::publicFacing(
+                    (string) ($row['index_state'] ?? ''),
+                    (bool) ($row['index_eligible'] ?? false),
+                ),
                 'index_eligible' => (bool) ($row['index_eligible'] ?? false),
                 'reason_codes' => $this->reasonCodesFor($row, $normalizedStatus),
             ];

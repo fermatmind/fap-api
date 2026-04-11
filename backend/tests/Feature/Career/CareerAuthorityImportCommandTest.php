@@ -56,6 +56,6 @@ final class CareerAuthorityImportCommandTest extends TestCase
         $this->assertDatabaseHas('occupation_truth_metrics', ['import_run_id' => $run->id]);
         $this->assertDatabaseHas('trust_manifests', ['import_run_id' => $run->id]);
         $this->assertDatabaseHas('index_states', ['import_run_id' => $run->id, 'index_state' => 'noindex']);
-        $this->assertDatabaseHas('index_states', ['import_run_id' => $run->id, 'index_state' => 'trust_limited']);
+        $this->assertDatabaseHas('index_states', ['import_run_id' => $run->id, 'index_state' => 'promotion_candidate']);
     }
 }

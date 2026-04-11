@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\IndexStateValue;
 use App\DTO\Career\CareerRecommendationIndexItemBundle;
 use App\Models\RecommendationSnapshot;
 use App\Services\PublicSurface\SeoSurfaceContractService;
@@ -177,6 +178,7 @@ final class CareerRecommendationIndexBundleBuilder
         $routeSubject = $this->routeSubject($subjectMeta) ?? 'unknown';
         $canonicalPath = '/career/recommendations/mbti/'.$routeSubject;
         $indexEligible = (bool) ($indexState?->index_eligible ?? false);
+        $publicIndexState = IndexStateValue::publicFacing((string) ($indexState?->index_state ?? ''), $indexEligible);
         $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
         $surface = $this->seoSurfaceContractService->build([
             'metadata_scope' => 'career_protocol_bundle',
@@ -185,14 +187,14 @@ final class CareerRecommendationIndexBundleBuilder
             'robots_policy' => $robotsPolicy,
             'title' => (string) ($subjectMeta['display_title'] ?? $subjectMeta['type_code'] ?? $routeSubject),
             'description' => (string) ($subjectMeta['display_title'] ?? $routeSubject),
-            'indexability_state' => $indexEligible ? 'indexable' : ((string) ($indexState?->index_state ?? 'noindex')),
+            'indexability_state' => $publicIndexState,
             'sitemap_state' => $indexEligible ? 'included' : 'excluded',
         ]);
 
         return [
             'canonical_path' => $canonicalPath,
             'canonical_target' => $indexState?->canonical_target,
-            'index_state' => $indexState?->index_state,
+            'index_state' => $publicIndexState,
             'index_eligible' => $indexEligible,
             'reason_codes' => is_array($indexState?->reason_codes) ? $indexState->reason_codes : [],
             'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,

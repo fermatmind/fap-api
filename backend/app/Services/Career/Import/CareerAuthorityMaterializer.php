@@ -6,6 +6,7 @@ namespace App\Services\Career\Import;
 
 use App\Domain\Career\Import\CrosswalkSeedPolicy;
 use App\Domain\Career\Import\FirstWaveAliasHardeningService;
+use App\Domain\Career\Publish\CareerIndexLifecycleCompiler;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
 use App\Models\ContextSnapshot;
@@ -35,6 +36,7 @@ final class CareerAuthorityMaterializer
         private readonly CareerRecommendationCompiler $compiler,
         private readonly FirstWaveAliasHardeningService $firstWaveAliasHardeningService,
         private readonly CareerTransitionPathWriter $transitionPathWriter,
+        private readonly CareerIndexLifecycleCompiler $indexLifecycleCompiler,
     ) {}
 
     /**
@@ -236,6 +238,20 @@ final class CareerAuthorityMaterializer
             $counts['skill_graphs_created'] += $skillGraph->wasRecentlyCreated ? 1 : 0;
 
             $seed = $this->crosswalkSeedPolicy->seed($normalized);
+            $previousIndexState = $occupation->indexStates()
+                ->orderByDesc('changed_at')
+                ->orderByDesc('updated_at')
+                ->first();
+            $lifecycle = $this->indexLifecycleCompiler->compile([
+                'crosswalk_mode' => $occupation->crosswalk_mode,
+                'confidence_score' => (string) $normalized['mapping_mode'] === 'exact' ? 74 : 58,
+                'reviewer_status' => 'pending',
+                'raw_index_state' => $seed['index_state'],
+                'index_eligible' => $seed['index_eligible'],
+                'allow_strong_claim' => false,
+                'previous_index_state' => $previousIndexState?->index_state,
+                'reason_codes' => $seed['reason_codes'],
+            ]);
 
             $trustManifestPayload = [
                 'occupation_id' => $occupation->id,
@@ -310,19 +326,19 @@ final class CareerAuthorityMaterializer
 
             $indexStatePayload = [
                 'occupation_id' => $occupation->id,
-                'index_state' => $seed['index_state'],
-                'index_eligible' => $seed['index_eligible'],
+                'index_state' => $lifecycle['index_state'],
+                'index_eligible' => $lifecycle['index_eligible'],
                 'canonical_path' => (string) $normalized['canonical_path'],
                 'canonical_target' => null,
-                'reason_codes' => $seed['reason_codes'],
+                'reason_codes' => $lifecycle['reason_codes'],
                 'changed_at' => $importRun->started_at,
                 'import_run_id' => $importRun->id,
                 'row_fingerprint' => $this->fingerprint([
                     'occupation_slug' => $occupation->canonical_slug,
-                    'index_state' => $seed['index_state'],
-                    'index_eligible' => $seed['index_eligible'],
+                    'index_state' => $lifecycle['index_state'],
+                    'index_eligible' => $lifecycle['index_eligible'],
                     'canonical_path' => $normalized['canonical_path'],
-                    'reason_codes' => $seed['reason_codes'],
+                    'reason_codes' => $lifecycle['reason_codes'],
                 ]),
             ];
             $indexState = IndexState::query()->firstOrCreate(
