@@ -123,8 +123,10 @@ final class FirstWaveTransitionPathMaterializationTest extends TestCase
         $this->getJson('/api/v0.5/career/transition-preview?type=intj')
             ->assertOk()
             ->assertJsonPath('path_type', 'stable_upside')
+            ->assertJsonPath('steps.0', TransitionPathPayload::STEP_SKILL_OVERLAP)
+            ->assertJsonPath('steps.1', TransitionPathPayload::STEP_TASK_OVERLAP)
+            ->assertJsonPath('steps.2', TransitionPathPayload::STEP_TOOL_OVERLAP)
             ->assertJsonPath('target_job.canonical_slug', $path->toOccupation?->canonical_slug)
-            ->assertJsonMissingPath('steps')
             ->assertJsonMissingPath('why_this_path')
             ->assertJsonMissingPath('what_is_lost')
             ->assertJsonMissingPath('bridge_steps_90d');

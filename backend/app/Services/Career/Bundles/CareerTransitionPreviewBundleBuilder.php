@@ -114,8 +114,9 @@ final class CareerTransitionPreviewBundleBuilder
             return null;
         }
 
-        // Normalize internal authority payloads before any future richer transition surfaces consume them.
-        $normalizedPathPayload->toArray();
+        $publicSteps = $normalizedPathPayload->steps === []
+            ? null
+            : array_values($normalizedPathPayload->steps);
 
         $scoreBundle = is_array($payload['score_bundle'] ?? null) ? $payload['score_bundle'] : [];
         $reasonCodes = is_array($claimPermissions['reason_codes'] ?? null) ? array_values($claimPermissions['reason_codes']) : [];
@@ -123,6 +124,7 @@ final class CareerTransitionPreviewBundleBuilder
 
         return new CareerTransitionPreviewBundle(
             pathType: $pathType->value,
+            steps: $publicSteps,
             targetJob: [
                 'occupation_uuid' => $targetOccupation->id,
                 'canonical_slug' => $targetOccupation->canonical_slug,
