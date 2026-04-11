@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-11T12:30:00Z",
+  "updated_at": "2026-04-11T16:20:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -432,10 +432,10 @@
     "PR-B23": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_verified",
+      "status": "github_checks_failed",
       "branch": "codex/pr-b23-career-family-hub-authority-bundle-api",
-      "commit_sha": "aa1b7944736e83878aec038a3caec0a4b763d310",
-      "pr_url": "",
+      "commit_sha": "773937fa6044c35366d2a6b2b6a9e01f3cc5f3f6",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/865",
       "checks": {
         "local": [
           {
@@ -451,9 +451,20 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24278341877/job/70895992139"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24278341877/job/70895994155"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub hygiene failed immediately again and the MBTI matrix job was skipped; local B23 verification passed and the failure pattern matches the current repository workflow-start issue rather than a locally reproducible regression.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
