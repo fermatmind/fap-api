@@ -338,6 +338,33 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B24
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b24-career-alias-disambiguation-authority-api
+    base: main
+    depends_on: ["PR-B23"]
+    mode: execute
+    scope: >
+      Career alias / disambiguation authority API.
+      Add a dedicated backend-owned alias resolution endpoint with explicit
+      occupation/family/ambiguous/none states, strict public-safety gating,
+      and no changes to existing career search semantics, frontend, or SEO surfaces.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Services/Career/Bundles/CareerAliasResolutionBundleBuilder.php app/DTO/Career/CareerAliasResolutionBundle.php app/Http/Resources/Career/CareerAliasResolutionResource.php app/Http/Controllers/API/V0_5/Career/CareerAliasResolutionController.php routes/api.php tests/Unit/Services/Career/CareerAliasResolutionBundleBuilderTest.php tests/Feature/Career/CareerAliasResolutionApiTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerAliasResolutionBundleBuilderTest.php tests/Feature/Career/CareerAliasResolutionApiTest.php tests/Feature/Career/CareerSearchApiTest.php tests/Feature/Career/CareerFamilyHubApiTest.php tests/Feature/Career/CareerJobListApiTest.php tests/Feature/Career/FirstWaveReadinessApiTest.php"
+      - "php artisan test tests/Feature/OpenApiDiffTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web

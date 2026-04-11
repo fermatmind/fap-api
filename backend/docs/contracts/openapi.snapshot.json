@@ -2464,6 +2464,23 @@
                 ]
             }
         },
+        "/api/v0.5/career/resolve": {
+            "get": {
+                "operationId": "get_api_v0_5_career_resolve",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerAliasResolutionController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/career/search": {
             "get": {
                 "operationId": "get_api_v0_5_career_search",
