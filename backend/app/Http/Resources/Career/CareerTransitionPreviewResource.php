@@ -22,10 +22,11 @@ final class CareerTransitionPreviewResource extends JsonResource
     {
         /** @var CareerTransitionPreviewBundle $bundle */
         $bundle = $this->resource;
+        $publicKeys = CareerTransitionPreviewBundle::publicTopLevelKeys();
 
         return array_intersect_key(
             $bundle->toArray(),
-            array_flip(CareerTransitionPreviewBundle::publicTopLevelKeys()),
+            array_flip($publicKeys),
         );
     }
 }

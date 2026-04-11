@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Transition\TransitionPathPayload;
 use App\DTO\Career\CareerTransitionPreviewBundle;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
@@ -34,7 +35,13 @@ final class CareerTransitionPreviewApiTest extends TestCase
             'from_occupation_id' => $snapshot->occupation_id,
             'to_occupation_id' => $target->id,
             'path_type' => 'stable_upside',
-            'path_payload' => ['steps' => ['fixture-only transition evidence']],
+            'path_payload' => [
+                'steps' => [
+                    TransitionPathPayload::STEP_SKILL_OVERLAP,
+                    TransitionPathPayload::STEP_TASK_OVERLAP,
+                    TransitionPathPayload::STEP_TOOL_OVERLAP,
+                ],
+            ],
         ]);
 
         $response = $this->getJson('/api/v0.5/career/transition-preview?type=intj')
@@ -42,11 +49,15 @@ final class CareerTransitionPreviewApiTest extends TestCase
             ->assertJsonPath('bundle_kind', 'career_transition_preview')
             ->assertJsonPath('bundle_version', 'career.protocol.transition_preview.v1')
             ->assertJsonPath('path_type', 'stable_upside')
+            ->assertJsonPath('steps.0', TransitionPathPayload::STEP_SKILL_OVERLAP)
+            ->assertJsonPath('steps.1', TransitionPathPayload::STEP_TASK_OVERLAP)
+            ->assertJsonPath('steps.2', TransitionPathPayload::STEP_TOOL_OVERLAP)
             ->assertJsonPath('target_job.canonical_slug', 'registered-nurses')
             ->assertJsonPath('trust_summary.allow_transition_recommendation', true)
             ->assertJsonPath('seo_contract.index_eligible', true)
             ->assertJsonStructure([
                 'path_type',
+                'steps',
                 'target_job' => ['occupation_uuid', 'canonical_slug', 'title'],
                 'score_summary' => [
                     'mobility_score' => ['value', 'integrity_state', 'band'],
@@ -56,7 +67,6 @@ final class CareerTransitionPreviewApiTest extends TestCase
                 'seo_contract' => ['canonical_path', 'canonical_target', 'index_state', 'index_eligible', 'reason_codes'],
                 'provenance_meta' => ['recommendation_snapshot_id', 'transition_path_id', 'compiler_version', 'compile_run_id'],
             ])
-            ->assertJsonMissingPath('steps')
             ->assertJsonMissingPath('why_this_path')
             ->assertJsonMissingPath('what_is_lost')
             ->assertJsonMissingPath('bridge_steps_90d');
@@ -64,6 +74,7 @@ final class CareerTransitionPreviewApiTest extends TestCase
         /** @var array<string, mixed> $payload */
         $payload = $response->json();
         $this->assertSame(CareerTransitionPreviewBundle::publicTopLevelKeys(), array_keys($payload));
+        $this->assertSame(TransitionPathPayload::allowedStepLabels(), $payload['steps']);
     }
 
     public function test_it_returns_not_found_when_no_safe_preview_exists(): void
@@ -79,7 +90,9 @@ final class CareerTransitionPreviewApiTest extends TestCase
             'from_occupation_id' => $snapshot->occupation_id,
             'to_occupation_id' => $target->id,
             'path_type' => 'stable_upside',
-            'path_payload' => ['steps' => ['fixture-only transition evidence']],
+            'path_payload' => [
+                'steps' => [TransitionPathPayload::STEP_SKILL_OVERLAP],
+            ],
         ]);
 
         $this->getJson('/api/v0.5/career/transition-preview?type=intj')
@@ -109,7 +122,9 @@ final class CareerTransitionPreviewApiTest extends TestCase
             'from_occupation_id' => $snapshot->occupation_id,
             'to_occupation_id' => $target->id,
             'path_type' => 'bridge_path',
-            'path_payload' => ['steps' => ['fixture-only transition evidence']],
+            'path_payload' => [
+                'steps' => [TransitionPathPayload::STEP_SKILL_OVERLAP],
+            ],
         ]);
 
         $this->getJson('/api/v0.5/career/transition-preview?type=intj')
