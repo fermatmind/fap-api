@@ -22,6 +22,7 @@ use App\Models\RecommendationSnapshot;
 use App\Models\SourceTrace;
 use App\Models\TrustManifest;
 use App\Services\Career\CareerRecommendationCompiler;
+use App\Services\Career\Transition\CareerTransitionPathWriter;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
@@ -33,6 +34,7 @@ final class CareerAuthorityMaterializer
         private readonly CrosswalkSeedPolicy $crosswalkSeedPolicy,
         private readonly CareerRecommendationCompiler $compiler,
         private readonly FirstWaveAliasHardeningService $firstWaveAliasHardeningService,
+        private readonly CareerTransitionPathWriter $transitionPathWriter,
     ) {}
 
     /**
@@ -223,32 +225,15 @@ final class CareerAuthorityMaterializer
             );
             $counts['truth_metrics_created'] += $truthMetric->wasRecentlyCreated ? 1 : 0;
 
-            $skillGraph = null;
-            if (is_array($normalized['skill_graph'] ?? null) && $normalized['skill_graph'] !== []) {
-                $skillGraphPayload = [
-                    'occupation_id' => $occupation->id,
-                    'stack_key' => (string) ($normalized['skill_graph']['stack_key'] ?? 'core'),
-                    'skill_overlap_graph' => $normalized['skill_graph']['skill_overlap_graph'] ?? [],
-                    'task_overlap_graph' => $normalized['skill_graph']['task_overlap_graph'] ?? null,
-                    'tool_overlap_graph' => $normalized['skill_graph']['tool_overlap_graph'] ?? null,
+            $skillGraphPayload = $this->skillGraphPayload($normalized, $occupation, $importRun);
+            $skillGraph = OccupationSkillGraph::query()->firstOrCreate(
+                [
                     'import_run_id' => $importRun->id,
-                    'row_fingerprint' => $this->fingerprint([
-                        'occupation_slug' => $occupation->canonical_slug,
-                        'stack_key' => $normalized['skill_graph']['stack_key'] ?? 'core',
-                        'skill_overlap_graph' => $normalized['skill_graph']['skill_overlap_graph'] ?? [],
-                        'task_overlap_graph' => $normalized['skill_graph']['task_overlap_graph'] ?? null,
-                        'tool_overlap_graph' => $normalized['skill_graph']['tool_overlap_graph'] ?? null,
-                    ]),
-                ];
-                $skillGraph = OccupationSkillGraph::query()->firstOrCreate(
-                    [
-                        'import_run_id' => $importRun->id,
-                        'row_fingerprint' => $skillGraphPayload['row_fingerprint'],
-                    ],
-                    $skillGraphPayload,
-                );
-                $counts['skill_graphs_created'] += $skillGraph->wasRecentlyCreated ? 1 : 0;
-            }
+                    'row_fingerprint' => $skillGraphPayload['row_fingerprint'],
+                ],
+                $skillGraphPayload,
+            );
+            $counts['skill_graphs_created'] += $skillGraph->wasRecentlyCreated ? 1 : 0;
 
             $seed = $this->crosswalkSeedPolicy->seed($normalized);
 
@@ -415,7 +400,7 @@ final class CareerAuthorityMaterializer
                 ],
             ]);
 
-            return $this->compiler->compile($profileProjection, $occupation, [
+            $snapshot = $this->compiler->compile($profileProjection, $occupation, [
                 'compile_run_id' => $compileRun->id,
                 'trust_manifest_id' => $resolved['trust_manifest_id'] ?? null,
                 'index_state_id' => $resolved['index_state_id'] ?? null,
@@ -427,7 +412,47 @@ final class CareerAuthorityMaterializer
                     'scope_mode' => $compileRun->scope_mode,
                 ],
             ]);
+
+            $this->transitionPathWriter->rewriteForSnapshot($snapshot);
+
+            return $snapshot;
         });
+    }
+
+    /**
+     * @param  array<string, mixed>  $normalized
+     * @return array<string, mixed>
+     */
+    private function skillGraphPayload(array $normalized, Occupation $occupation, CareerImportRun $importRun): array
+    {
+        $input = is_array($normalized['skill_graph'] ?? null) ? $normalized['skill_graph'] : [];
+        $explicit = $input !== [];
+        $stackKey = (string) ($input['stack_key'] ?? ($explicit ? 'core' : 'authority_self_baseline'));
+        $skillOverlapGraph = is_array($input['skill_overlap_graph'] ?? null)
+            ? $input['skill_overlap_graph']
+            : ['self_baseline' => 1.0];
+        $taskOverlapGraph = is_array($input['task_overlap_graph'] ?? null)
+            ? $input['task_overlap_graph']
+            : ['self_baseline' => 1.0];
+        $toolOverlapGraph = is_array($input['tool_overlap_graph'] ?? null)
+            ? $input['tool_overlap_graph']
+            : ['self_baseline' => 1.0];
+
+        return [
+            'occupation_id' => $occupation->id,
+            'stack_key' => $stackKey,
+            'skill_overlap_graph' => $skillOverlapGraph,
+            'task_overlap_graph' => $taskOverlapGraph,
+            'tool_overlap_graph' => $toolOverlapGraph,
+            'import_run_id' => $importRun->id,
+            'row_fingerprint' => $this->fingerprint([
+                'occupation_slug' => $occupation->canonical_slug,
+                'stack_key' => $stackKey,
+                'skill_overlap_graph' => $skillOverlapGraph,
+                'task_overlap_graph' => $taskOverlapGraph,
+                'tool_overlap_graph' => $toolOverlapGraph,
+            ]),
+        ];
     }
 
     /**

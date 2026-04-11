@@ -210,6 +210,32 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B19
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b19-career-transition-path-materialization-writer-compiler-integration
+    base: main
+    depends_on: ["PR-B18"]
+    mode: execute
+    scope: >
+      Career transition path materialization writer + compiler integration.
+      Introduce a production transition path writer, wire it into the first-wave
+      compile/materialization pipeline, keep the contract minimal and publish-ready
+      gated, and leave the B16 public preview API unchanged.
+    checks:
+      - "vendor/bin/pint --test app/Services/Career/Transition/CareerTransitionPathWriter.php app/Services/Career/Import/CareerAuthorityMaterializer.php tests/Unit/Services/Career/Transition/CareerTransitionPathWriterTest.php tests/Feature/Career/CareerAuthorityCompileCommandTest.php tests/Feature/Career/CareerAuthorityReplaySafetyTest.php tests/Feature/Career/CareerTransitionPreviewApiTest.php tests/Feature/Career/FirstWaveTransitionPathMaterializationTest.php"
+      - "php artisan test tests/Unit/Services/Career/Transition/CareerTransitionPathWriterTest.php tests/Feature/Career/CareerAuthorityCompileCommandTest.php tests/Feature/Career/CareerAuthorityReplaySafetyTest.php tests/Feature/Career/CareerTransitionPreviewApiTest.php tests/Feature/Career/FirstWaveTransitionPathMaterializationTest.php"
+      - "php artisan test tests/Feature/Career/FirstWavePublishReadyCommandTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web
