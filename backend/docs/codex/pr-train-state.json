@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-11T08:10:00Z",
+  "updated_at": "2026-04-11T12:30:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -424,6 +424,36 @@
         ]
       },
       "failure_reason": "required_github_checks_failed",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B23": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_verified",
+      "branch": "codex/pr-b23-career-family-hub-authority-bundle-api",
+      "commit_sha": "aa1b7944736e83878aec038a3caec0a4b763d310",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/Bundles/CareerFamilyHubBundleBuilder.php app/DTO/Career/CareerFamilyHubBundle.php app/Http/Resources/Career/CareerFamilyHubResource.php app/Http/Controllers/API/V0_5/Career/CareerFamilyHubController.php routes/api.php tests/Unit/Services/Career/CareerFamilyHubBundleBuilderTest.php tests/Feature/Career/CareerFamilyHubApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerFamilyHubBundleBuilderTest.php tests/Feature/Career/CareerFamilyHubApiTest.php tests/Feature/Career/CareerJobListApiTest.php tests/Feature/Career/CareerJobDetailApiTest.php tests/Feature/Career/CareerSearchApiTest.php tests/Feature/Career/FirstWaveReadinessApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/OpenApiDiffTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
