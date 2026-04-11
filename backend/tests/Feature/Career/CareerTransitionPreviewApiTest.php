@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\DTO\Career\CareerTransitionPreviewBundle;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
 use App\Models\Occupation;
@@ -36,7 +37,7 @@ final class CareerTransitionPreviewApiTest extends TestCase
             'path_payload' => ['steps' => ['fixture-only transition evidence']],
         ]);
 
-        $this->getJson('/api/v0.5/career/transition-preview?type=intj')
+        $response = $this->getJson('/api/v0.5/career/transition-preview?type=intj')
             ->assertOk()
             ->assertJsonPath('bundle_kind', 'career_transition_preview')
             ->assertJsonPath('bundle_version', 'career.protocol.transition_preview.v1')
@@ -59,6 +60,10 @@ final class CareerTransitionPreviewApiTest extends TestCase
             ->assertJsonMissingPath('why_this_path')
             ->assertJsonMissingPath('what_is_lost')
             ->assertJsonMissingPath('bridge_steps_90d');
+
+        /** @var array<string, mixed> $payload */
+        $payload = $response->json();
+        $this->assertSame(CareerTransitionPreviewBundle::publicTopLevelKeys(), array_keys($payload));
     }
 
     public function test_it_returns_not_found_when_no_safe_preview_exists(): void

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Career;
 
+use App\DTO\Career\CareerTransitionPreviewBundle;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
 use App\Models\Occupation;
@@ -39,6 +40,7 @@ final class CareerTransitionPreviewBundleBuilderTest extends TestCase
 
         $payload = app(CareerTransitionPreviewBundleBuilder::class)->buildByType('intj')?->toArray() ?? [];
 
+        $this->assertSame(CareerTransitionPreviewBundle::publicTopLevelKeys(), array_keys($payload));
         $this->assertSame('career_transition_preview', $payload['bundle_kind']);
         $this->assertSame('career.protocol.transition_preview.v1', $payload['bundle_version']);
         $this->assertSame('stable_upside', $payload['path_type']);
@@ -156,6 +158,7 @@ final class CareerTransitionPreviewBundleBuilderTest extends TestCase
 
         $payload = app(CareerTransitionPreviewBundleBuilder::class)->buildByType('intj')?->toArray() ?? [];
 
+        $this->assertSame(CareerTransitionPreviewBundle::publicTopLevelKeys(), array_keys($payload));
         $this->assertSame('stable_upside', $payload['path_type'] ?? null);
         $this->assertArrayNotHasKey('steps', $payload);
         $this->assertArrayNotHasKey('why_this_path', $payload);

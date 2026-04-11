@@ -6,6 +6,24 @@ namespace App\DTO\Career;
 
 final class CareerTransitionPreviewBundle
 {
+    private const BUNDLE_KIND = 'career_transition_preview';
+
+    private const BUNDLE_VERSION = 'career.protocol.transition_preview.v1';
+
+    /**
+     * @var list<string>
+     */
+    private const PUBLIC_TOP_LEVEL_KEYS = [
+        'bundle_kind',
+        'bundle_version',
+        'path_type',
+        'target_job',
+        'score_summary',
+        'trust_summary',
+        'seo_contract',
+        'provenance_meta',
+    ];
+
     /**
      * @param  array<string, mixed>  $targetJob
      * @param  array<string, mixed>  $scoreSummary
@@ -27,9 +45,9 @@ final class CareerTransitionPreviewBundle
      */
     public function toArray(): array
     {
-        return [
-            'bundle_kind' => 'career_transition_preview',
-            'bundle_version' => 'career.protocol.transition_preview.v1',
+        $payload = [
+            'bundle_kind' => self::BUNDLE_KIND,
+            'bundle_version' => self::BUNDLE_VERSION,
             'path_type' => $this->pathType,
             'target_job' => $this->targetJob,
             'score_summary' => $this->scoreSummary,
@@ -37,5 +55,18 @@ final class CareerTransitionPreviewBundle
             'seo_contract' => $this->seoContract,
             'provenance_meta' => $this->provenanceMeta,
         ];
+
+        /** @var array<string, mixed> $publicPayload */
+        $publicPayload = array_intersect_key($payload, array_flip(self::PUBLIC_TOP_LEVEL_KEYS));
+
+        return $publicPayload;
+    }
+
+    /**
+     * @return list<string>
+     */
+    public static function publicTopLevelKeys(): array
+    {
+        return self::PUBLIC_TOP_LEVEL_KEYS;
     }
 }

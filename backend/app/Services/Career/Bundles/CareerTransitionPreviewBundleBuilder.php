@@ -89,6 +89,10 @@ final class CareerTransitionPreviewBundleBuilder
             return null;
         }
 
+        if (! $this->isPublicPathTypeAllowed($pathType)) {
+            return null;
+        }
+
         if (! $path->hasValidPathPayloadShape()) {
             return null;
         }
@@ -169,5 +173,10 @@ final class CareerTransitionPreviewBundleBuilder
             'integrity_state' => $value['integrity_state'] ?? null,
             'band' => $value['band'] ?? null,
         ];
+    }
+
+    private function isPublicPathTypeAllowed(TransitionPathType $pathType): bool
+    {
+        return $pathType === TransitionPathType::StableUpside;
     }
 }
