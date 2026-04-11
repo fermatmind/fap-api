@@ -36,6 +36,7 @@ use App\Http\Controllers\API\V0_5\Career\CareerJobListController;
 use App\Http\Controllers\API\V0_5\Career\CareerRecommendationDetailController;
 use App\Http\Controllers\API\V0_5\Career\CareerRecommendationIndexController;
 use App\Http\Controllers\API\V0_5\Career\CareerSearchController;
+use App\Http\Controllers\API\V0_5\Career\CareerTransitionPreviewController;
 use App\Http\Controllers\API\V0_5\Cms\ArticleController;
 use App\Http\Controllers\API\V0_5\Cms\CareerGuideController;
 use App\Http\Controllers\API\V0_5\Cms\CareerJobController;
@@ -406,6 +407,7 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/career/jobs/{slug}', [CareerJobDetailController::class, 'show']);
     Route::get('/career/recommendations/mbti', [CareerRecommendationIndexController::class, 'index']);
     Route::get('/career/recommendations/mbti/{type}', [CareerRecommendationDetailController::class, 'show']);
+    Route::get('/career/transition-preview', [CareerTransitionPreviewController::class, 'show']);
     Route::get('/career/search', [CareerSearchController::class, 'index']);
     Route::get('/articles', [ArticleController::class, 'index']);
     Route::get('/articles/{slug}', [ArticleController::class, 'show']);
