@@ -19,13 +19,14 @@ final class TransitionPathPayloadTest extends TestCase
     public function test_it_accepts_steps_as_a_list_of_strings(): void
     {
         $payload = TransitionPathPayload::from([
-            'steps' => [' deepen system design ', 'lead more cross-team decisions'],
+            'steps' => [' skill_overlap ', 'task_overlap', 'tool_overlap'],
         ]);
 
         $this->assertSame([
             'steps' => [
-                'deepen system design',
-                'lead more cross-team decisions',
+                'skill_overlap',
+                'task_overlap',
+                'tool_overlap',
             ],
         ], $payload->toArray());
     }
@@ -33,7 +34,7 @@ final class TransitionPathPayloadTest extends TestCase
     public function test_it_strips_invalid_steps_and_ignores_richer_narrative_fields(): void
     {
         $payload = TransitionPathPayload::from([
-            'steps' => ['valid step', 42, '', null, ' second step '],
+            'steps' => ['skill_overlap', 'deepen system design', 42, '', null, ' task_overlap ', 'skill_overlap'],
             'why_this_path' => 'fixture-only narrative',
             'what_is_lost' => 'fixture-only tradeoff copy',
             'bridge_steps_90d' => ['not authoritative'],
@@ -41,8 +42,8 @@ final class TransitionPathPayloadTest extends TestCase
 
         $this->assertSame([
             'steps' => [
-                'valid step',
-                'second step',
+                'skill_overlap',
+                'task_overlap',
             ],
         ], $payload->toArray());
     }

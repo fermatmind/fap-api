@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Domain\Career\Transition\TransitionPathPayload;
 use App\Models\ProfileProjection;
 use App\Models\TransitionPath;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -33,7 +34,9 @@ final class FirstWaveTransitionPathMaterializationTest extends TestCase
         $path = TransitionPath::query()->with(['recommendationSnapshot', 'fromOccupation', 'toOccupation'])->latest('created_at')->firstOrFail();
         $this->assertSame('stable_upside', $path->path_type);
         $this->assertSame($path->from_occupation_id, $path->to_occupation_id);
-        $this->assertSame([], $path->normalizedPathPayload()->toArray());
+        $this->assertSame([
+            'steps' => TransitionPathPayload::allowedStepLabels(),
+        ], $path->normalizedPathPayload()->toArray());
         $this->assertNotNull($path->recommendationSnapshot?->compile_run_id);
     }
 
@@ -67,6 +70,16 @@ final class FirstWaveTransitionPathMaterializationTest extends TestCase
         $this->assertSame(
             TransitionPath::query()->count(),
             TransitionPath::query()->distinct('recommendation_snapshot_id')->count('recommendation_snapshot_id')
+        );
+        $this->assertSame(
+            array_fill(0, TransitionPath::query()->count(), [
+                'steps' => TransitionPathPayload::allowedStepLabels(),
+            ]),
+            TransitionPath::query()
+                ->orderBy('recommendation_snapshot_id')
+                ->get()
+                ->map(static fn (TransitionPath $path): array => $path->normalizedPathPayload()->toArray())
+                ->all()
         );
         $this->assertNotSame($firstFingerprints, TransitionPath::query()
             ->orderBy('recommendation_snapshot_id')

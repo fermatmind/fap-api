@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Career\Transition;
 
+use App\Domain\Career\Transition\TransitionPathPayload;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
 use App\Models\RecommendationSnapshot;
@@ -32,7 +33,9 @@ final class CareerTransitionPathWriterTest extends TestCase
         $this->assertSame($snapshot->occupation_id, $path->from_occupation_id);
         $this->assertSame($snapshot->occupation_id, $path->to_occupation_id);
         $this->assertSame('stable_upside', $path->path_type);
-        $this->assertSame([], $path->normalizedPathPayload()->toArray());
+        $this->assertSame([
+            'steps' => TransitionPathPayload::allowedStepLabels(),
+        ], $path->normalizedPathPayload()->toArray());
     }
 
     public function test_it_rewrites_stale_rows_for_the_same_snapshot_without_duplicates(): void
@@ -54,7 +57,9 @@ final class CareerTransitionPathWriterTest extends TestCase
         $this->assertSame(1, TransitionPath::query()->where('recommendation_snapshot_id', $snapshot->id)->count());
         $path = TransitionPath::query()->where('recommendation_snapshot_id', $snapshot->id)->sole();
         $this->assertSame('stable_upside', $path->path_type);
-        $this->assertSame([], $path->normalizedPathPayload()->toArray());
+        $this->assertSame([
+            'steps' => TransitionPathPayload::allowedStepLabels(),
+        ], $path->normalizedPathPayload()->toArray());
     }
 
     public function test_it_rejects_snapshots_without_transition_claim_permission(): void
