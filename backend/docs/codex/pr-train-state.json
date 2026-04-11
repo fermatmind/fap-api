@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-11T07:55:00Z",
+  "updated_at": "2026-04-11T08:10:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -391,10 +391,10 @@
     "PR-B22": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_verified",
+      "status": "pr_open",
       "branch": "codex/pr-b22-career-transition-preview-public-raw-steps-exposure",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "6cc2ae5135e659e1efab9e09c53bf1969ba45d72",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/864",
       "checks": {
         "local": [
           {
@@ -410,9 +410,20 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24277615957/job/70894141660"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24277615957/job/70894144282"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "required_github_checks_failed",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
