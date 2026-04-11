@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\IndexStateValue;
 use App\DTO\Career\CareerJobListItemBundle;
 use App\Models\Occupation;
 use App\Models\RecommendationSnapshot;
@@ -185,6 +186,7 @@ final class CareerJobListBundleBuilder
         $canonicalPath = is_string($indexState?->canonical_path) ? $indexState->canonical_path : '/career/jobs/'.$occupation->canonical_slug;
         $canonicalTarget = $indexState?->canonical_target;
         $indexEligible = (bool) ($indexState?->index_eligible ?? false);
+        $publicIndexState = IndexStateValue::publicFacing((string) ($indexState?->index_state ?? ''), $indexEligible);
         $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
         $surface = $this->seoSurfaceContractService->build([
             'metadata_scope' => 'career_protocol_bundle',
@@ -193,14 +195,14 @@ final class CareerJobListBundleBuilder
             'robots_policy' => $robotsPolicy,
             'title' => $occupation->canonical_title_en,
             'description' => $occupation->canonical_title_en,
-            'indexability_state' => $indexEligible ? 'indexable' : ((string) ($indexState?->index_state ?? 'noindex')),
+            'indexability_state' => $publicIndexState,
             'sitemap_state' => $indexEligible ? 'included' : 'excluded',
         ]);
 
         return [
             'canonical_path' => $canonicalPath,
             'canonical_target' => $canonicalTarget,
-            'index_state' => $indexState?->index_state,
+            'index_state' => $publicIndexState,
             'index_eligible' => $indexEligible,
             'reason_codes' => is_array($indexState?->reason_codes) ? $indexState->reason_codes : [],
             'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,

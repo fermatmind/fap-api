@@ -22,8 +22,8 @@ final class ClaimPermissionsCompiler
         $mobilityScore = $scoreBundle['mobility_score'] ?? null;
         $indexState = (string) ($context['index_state'] ?? '');
         $indexEligible = (bool) ($context['index_eligible'] ?? false);
-        $indexRestricted = ! $indexEligible || in_array($indexState, [IndexStateValue::TRUST_LIMITED, IndexStateValue::NOINDEX, IndexStateValue::UNAVAILABLE], true);
-        $indexBlocked = in_array($indexState, [IndexStateValue::NOINDEX, IndexStateValue::UNAVAILABLE], true);
+        $indexRestricted = IndexStateValue::isIndexRestricted($indexState, $indexEligible);
+        $indexBlocked = IndexStateValue::isIndexBlocked($indexState, $indexEligible);
 
         $allowStrongClaim = ! isset($blocked['strong_claim'])
             && ! $indexRestricted

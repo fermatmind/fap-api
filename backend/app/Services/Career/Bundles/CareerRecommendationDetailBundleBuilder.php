@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\IndexStateValue;
 use App\DTO\Career\CareerRecommendationDetailBundle;
 use App\Models\Occupation;
 use App\Models\RecommendationSnapshot;
@@ -215,6 +216,7 @@ final class CareerRecommendationDetailBundleBuilder
         $routeSubject = $this->routeSubject($subjectMeta, $requestedType);
         $canonicalPath = '/career/recommendations/mbti/'.$routeSubject;
         $indexEligible = (bool) ($indexState?->index_eligible ?? false);
+        $publicIndexState = IndexStateValue::publicFacing((string) ($indexState?->index_state ?? ''), $indexEligible);
         $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
         $surface = $this->seoSurfaceContractService->build([
             'metadata_scope' => 'career_protocol_bundle',
@@ -223,14 +225,14 @@ final class CareerRecommendationDetailBundleBuilder
             'robots_policy' => $robotsPolicy,
             'title' => (string) ($subjectMeta['display_title'] ?? $subjectMeta['type_code'] ?? $snapshot->occupation?->canonical_title_en ?? ''),
             'description' => (string) ($snapshot->occupation?->canonical_title_en ?? ''),
-            'indexability_state' => $indexEligible ? 'indexable' : ((string) ($indexState?->index_state ?? 'noindex')),
+            'indexability_state' => $publicIndexState,
             'sitemap_state' => $indexEligible ? 'included' : 'excluded',
         ]);
 
         return [
             'canonical_path' => $canonicalPath,
             'canonical_target' => $indexState?->canonical_target,
-            'index_state' => $indexState?->index_state,
+            'index_state' => $publicIndexState,
             'index_eligible' => $indexEligible,
             'reason_codes' => is_array($indexState?->reason_codes) ? $indexState->reason_codes : [],
             'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,
@@ -247,12 +249,14 @@ final class CareerRecommendationDetailBundleBuilder
     {
         $indexState = $snapshot->indexState;
         $canonicalPath = is_string($indexState?->canonical_path) ? $indexState->canonical_path : '/career/jobs/'.$occupation->canonical_slug;
+        $indexEligible = (bool) ($indexState?->index_eligible ?? false);
+        $publicIndexState = IndexStateValue::publicFacing((string) ($indexState?->index_state ?? ''), $indexEligible);
 
         return [
             'canonical_path' => $canonicalPath,
             'canonical_target' => $indexState?->canonical_target,
-            'index_state' => $indexState?->index_state,
-            'index_eligible' => (bool) ($indexState?->index_eligible ?? false),
+            'index_state' => $publicIndexState,
+            'index_eligible' => $indexEligible,
             'reason_codes' => is_array($indexState?->reason_codes) ? $indexState->reason_codes : [],
         ];
     }

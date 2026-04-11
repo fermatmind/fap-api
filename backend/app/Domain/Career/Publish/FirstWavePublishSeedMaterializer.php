@@ -13,6 +13,10 @@ use App\Services\Career\CareerRecommendationCompiler;
 
 final class FirstWavePublishSeedMaterializer
 {
+    public function __construct(
+        private readonly CareerIndexLifecycleCompiler $indexLifecycleCompiler,
+    ) {}
+
     /**
      * @param  list<array<string, mixed>>  $occupations
      * @return array{applied:int,skipped:int,issues_by_slug:array<string,list<string>>}
@@ -71,8 +75,8 @@ final class FirstWavePublishSeedMaterializer
             $confidenceScore = (int) round((float) ($trustSeed['confidence_score'] ?? 0));
             $reviewerStatus = strtolower(trim((string) ($reviewerSeed['status'] ?? 'pending')));
             $reviewedAt = in_array($reviewerStatus, ['approved', 'reviewed'], true) ? now() : null;
-            $indexState = strtolower(trim((string) ($indexSeed['state'] ?? IndexStateValue::NOINDEX)));
-            $indexEligible = (bool) ($indexSeed['index_eligible'] ?? false);
+            $rawIndexState = strtolower(trim((string) ($indexSeed['state'] ?? IndexStateValue::NOINDEX)));
+            $rawIndexEligible = (bool) ($indexSeed['index_eligible'] ?? false);
             $reasonCodes = array_values(array_unique(array_filter([
                 ...((array) ($manifestOccupation['publish_reason_codes'] ?? [])),
                 ...((array) ($indexSeed['reason_codes'] ?? [])),
@@ -124,20 +128,35 @@ final class FirstWavePublishSeedMaterializer
                 $trustPayload,
             );
 
+            $previousIndexState = $occupation->indexStates()
+                ->orderByDesc('changed_at')
+                ->orderByDesc('updated_at')
+                ->first();
+            $lifecycle = $this->indexLifecycleCompiler->compile([
+                'crosswalk_mode' => $occupation->crosswalk_mode,
+                'confidence_score' => $confidenceScore,
+                'reviewer_status' => $reviewerStatus,
+                'raw_index_state' => $rawIndexState,
+                'index_eligible' => $rawIndexEligible,
+                'allow_strong_claim' => (bool) ($claimSeed['allow_strong_claim'] ?? false),
+                'previous_index_state' => $previousIndexState?->index_state,
+                'reason_codes' => $reasonCodes,
+            ]);
+
             $indexPayload = [
                 'occupation_id' => $occupation->id,
-                'index_state' => $indexState,
-                'index_eligible' => $indexEligible,
+                'index_state' => $lifecycle['index_state'],
+                'index_eligible' => $lifecycle['index_eligible'],
                 'canonical_path' => '/career/jobs/'.$occupation->canonical_slug,
                 'canonical_target' => null,
-                'reason_codes' => $reasonCodes,
+                'reason_codes' => $lifecycle['reason_codes'],
                 'changed_at' => now(),
                 'import_run_id' => $importRun->id,
                 'row_fingerprint' => $this->fingerprint([
                     'occupation_id' => $occupation->id,
-                    'index_state' => $indexState,
-                    'index_eligible' => $indexEligible,
-                    'reason_codes' => $reasonCodes,
+                    'index_state' => $lifecycle['index_state'],
+                    'index_eligible' => $lifecycle['index_eligible'],
+                    'reason_codes' => $lifecycle['reason_codes'],
                 ]),
             ];
 
