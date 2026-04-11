@@ -185,6 +185,31 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B18
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b18-career-transition-path-taxonomy-typed-payload-hardening
+    base: main
+    depends_on: ["PR-B17"]
+    mode: execute
+    scope: >
+      Career transition path taxonomy + typed payload hardening.
+      Introduce internal typed transition taxonomy/payload normalization behind
+      the existing B16 preview surface without expanding the public API,
+      changing schema, or adding narrative transition fields.
+    checks:
+      - "vendor/bin/pint --test app/Domain/Career/Transition/TransitionPathType.php app/Domain/Career/Transition/TransitionPathPayload.php app/Models/TransitionPath.php app/Services/Career/Bundles/CareerTransitionPreviewBundleBuilder.php tests/Unit/Domain/Career/Transition/TransitionPathTypeTest.php tests/Unit/Domain/Career/Transition/TransitionPathPayloadTest.php tests/Unit/Services/Career/CareerTransitionPreviewBundleBuilderTest.php tests/Feature/Career/CareerTransitionPreviewApiTest.php"
+      - "php artisan test tests/Unit/Domain/Career/Transition/TransitionPathTypeTest.php tests/Unit/Domain/Career/Transition/TransitionPathPayloadTest.php tests/Unit/Services/Career/CareerTransitionPreviewBundleBuilderTest.php tests/Feature/Career/CareerTransitionPreviewApiTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web

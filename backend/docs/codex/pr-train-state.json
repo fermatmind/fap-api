@@ -242,6 +242,43 @@
       "merged_at": "",
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "PR-B18": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/pr-b18-career-transition-path-taxonomy-typed-payload-hardening",
+      "commit_sha": "ea7193830652f08805388e2c5bc782235e3462b5",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/860",
+      "checks": {
+        "local": [
+          {
+            "command": "vendor/bin/pint --test app/Domain/Career/Transition/TransitionPathType.php app/Domain/Career/Transition/TransitionPathPayload.php app/Models/TransitionPath.php app/Services/Career/Bundles/CareerTransitionPreviewBundleBuilder.php tests/Unit/Domain/Career/Transition/TransitionPathTypeTest.php tests/Unit/Domain/Career/Transition/TransitionPathPayloadTest.php tests/Unit/Services/Career/CareerTransitionPreviewBundleBuilderTest.php tests/Feature/Career/CareerTransitionPreviewApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Domain/Career/Transition/TransitionPathTypeTest.php tests/Unit/Domain/Career/Transition/TransitionPathPayloadTest.php tests/Unit/Services/Career/CareerTransitionPreviewBundleBuilderTest.php tests/Feature/Career/CareerTransitionPreviewApiTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24276237349/job/70890571627"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24276237349/job/70890574237"
+          }
+        ]
+      },
+      "failure_reason": "GitHub hygiene failed immediately with no executable steps and the verify-mbti matrix job was skipped, matching the current repository workflow-start failure pattern rather than a locally reproducible B18 regression.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   }
 }
