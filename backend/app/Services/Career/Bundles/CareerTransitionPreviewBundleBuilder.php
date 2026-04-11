@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\Transition\TransitionPathType;
 use App\DTO\Career\CareerTransitionPreviewBundle;
 use App\Models\RecommendationSnapshot;
 use App\Models\TransitionPath;
@@ -83,10 +84,16 @@ final class CareerTransitionPreviewBundleBuilder
             return null;
         }
 
-        $pathType = trim((string) $path->path_type);
-        if ($pathType === '') {
+        $pathType = $path->transitionPathType();
+        if (! $pathType instanceof TransitionPathType) {
             return null;
         }
+
+        if (! $path->hasValidPathPayloadShape()) {
+            return null;
+        }
+
+        $normalizedPathPayload = $path->normalizedPathPayload();
 
         $payload = is_array($snapshot->snapshot_payload) ? $snapshot->snapshot_payload : [];
         $claimPermissions = is_array($payload['claim_permissions'] ?? null) ? $payload['claim_permissions'] : [];
@@ -103,12 +110,15 @@ final class CareerTransitionPreviewBundleBuilder
             return null;
         }
 
+        // Normalize internal authority payloads before any future richer transition surfaces consume them.
+        $normalizedPathPayload->toArray();
+
         $scoreBundle = is_array($payload['score_bundle'] ?? null) ? $payload['score_bundle'] : [];
         $reasonCodes = is_array($claimPermissions['reason_codes'] ?? null) ? array_values($claimPermissions['reason_codes']) : [];
         $seoReasonCodes = is_array($readiness['reason_codes'] ?? null) ? array_values($readiness['reason_codes']) : [];
 
         return new CareerTransitionPreviewBundle(
-            pathType: $pathType,
+            pathType: $pathType->value,
             targetJob: [
                 'occupation_uuid' => $targetOccupation->id,
                 'canonical_slug' => $targetOccupation->canonical_slug,

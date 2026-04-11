@@ -55,6 +55,7 @@ final class CareerTransitionPreviewApiTest extends TestCase
                 'seo_contract' => ['canonical_path', 'canonical_target', 'index_state', 'index_eligible', 'reason_codes'],
                 'provenance_meta' => ['recommendation_snapshot_id', 'transition_path_id', 'compiler_version', 'compile_run_id'],
             ])
+            ->assertJsonMissingPath('steps')
             ->assertJsonMissingPath('why_this_path')
             ->assertJsonMissingPath('what_is_lost')
             ->assertJsonMissingPath('bridge_steps_90d');
@@ -88,6 +89,50 @@ final class CareerTransitionPreviewApiTest extends TestCase
             ->assertStatus(422)
             ->assertJsonPath('ok', false)
             ->assertJsonPath('error_code', 'VALIDATION_FAILED');
+    }
+
+    public function test_it_returns_not_found_for_unknown_internal_path_taxonomy_even_when_transition_rows_exist(): void
+    {
+        $snapshot = $this->compileRecommendationChain('transition-api-invalid-taxonomy');
+        $target = $this->seedTargetOccupation('registered-nurses', 'Registered Nurses');
+        $this->mockReadinessSummary([
+            $this->readinessRow('registered-nurses', 'publish_ready', true, 'indexable', 'approved'),
+        ]);
+
+        TransitionPath::query()->create([
+            'recommendation_snapshot_id' => $snapshot->id,
+            'from_occupation_id' => $snapshot->occupation_id,
+            'to_occupation_id' => $target->id,
+            'path_type' => 'bridge_path',
+            'path_payload' => ['steps' => ['fixture-only transition evidence']],
+        ]);
+
+        $this->getJson('/api/v0.5/career/transition-preview?type=intj')
+            ->assertStatus(404)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
+    }
+
+    public function test_it_returns_not_found_for_invalid_non_array_payload_shape_even_when_transition_rows_exist(): void
+    {
+        $snapshot = $this->compileRecommendationChain('transition-api-invalid-payload-shape');
+        $target = $this->seedTargetOccupation('registered-nurses', 'Registered Nurses');
+        $this->mockReadinessSummary([
+            $this->readinessRow('registered-nurses', 'publish_ready', true, 'indexable', 'approved'),
+        ]);
+
+        TransitionPath::query()->create([
+            'recommendation_snapshot_id' => $snapshot->id,
+            'from_occupation_id' => $snapshot->occupation_id,
+            'to_occupation_id' => $target->id,
+            'path_type' => 'stable_upside',
+            'path_payload' => 'invalid-string-payload',
+        ]);
+
+        $this->getJson('/api/v0.5/career/transition-preview?type=intj')
+            ->assertStatus(404)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
     }
 
     private function seedTargetOccupation(string $slug, string $title): Occupation

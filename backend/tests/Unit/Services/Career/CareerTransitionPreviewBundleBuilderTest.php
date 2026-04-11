@@ -114,6 +114,74 @@ final class CareerTransitionPreviewBundleBuilderTest extends TestCase
         $this->assertNull(app(CareerTransitionPreviewBundleBuilder::class)->buildByType('intj'));
     }
 
+    public function test_it_excludes_paths_with_blank_or_unknown_internal_path_taxonomy(): void
+    {
+        $snapshot = $this->compileRecommendationChain('transition-source-invalid-taxonomy');
+        $target = $this->seedTargetOccupation('registered-nurses', 'Registered Nurses');
+        $this->mockReadinessSummary([
+            $this->readinessRow('registered-nurses', 'publish_ready', true, 'indexable', 'approved'),
+        ]);
+
+        TransitionPath::query()->create([
+            'recommendation_snapshot_id' => $snapshot->id,
+            'from_occupation_id' => $snapshot->occupation_id,
+            'to_occupation_id' => $target->id,
+            'path_type' => 'bridge_path',
+            'path_payload' => ['steps' => ['fixture-only transition evidence']],
+        ]);
+
+        $this->assertNull(app(CareerTransitionPreviewBundleBuilder::class)->buildByType('intj'));
+    }
+
+    public function test_it_sanitizes_internal_path_payload_without_expanding_public_preview_fields(): void
+    {
+        $snapshot = $this->compileRecommendationChain('transition-source-sanitized-payload');
+        $target = $this->seedTargetOccupation('registered-nurses', 'Registered Nurses');
+        $this->mockReadinessSummary([
+            $this->readinessRow('registered-nurses', 'publish_ready', true, 'indexable', 'approved'),
+        ]);
+
+        TransitionPath::query()->create([
+            'recommendation_snapshot_id' => $snapshot->id,
+            'from_occupation_id' => $snapshot->occupation_id,
+            'to_occupation_id' => $target->id,
+            'path_type' => 'stable_upside',
+            'path_payload' => [
+                'steps' => ['first valid step', 99, ' second valid step '],
+                'why_this_path' => 'fixture-only narrative',
+                'what_is_lost' => 'fixture-only tradeoff',
+                'bridge_steps_90d' => ['not authoritative'],
+            ],
+        ]);
+
+        $payload = app(CareerTransitionPreviewBundleBuilder::class)->buildByType('intj')?->toArray() ?? [];
+
+        $this->assertSame('stable_upside', $payload['path_type'] ?? null);
+        $this->assertArrayNotHasKey('steps', $payload);
+        $this->assertArrayNotHasKey('why_this_path', $payload);
+        $this->assertArrayNotHasKey('what_is_lost', $payload);
+        $this->assertArrayNotHasKey('bridge_steps_90d', $payload);
+    }
+
+    public function test_it_excludes_paths_with_invalid_non_array_payload_shape(): void
+    {
+        $snapshot = $this->compileRecommendationChain('transition-source-invalid-payload-shape');
+        $target = $this->seedTargetOccupation('registered-nurses', 'Registered Nurses');
+        $this->mockReadinessSummary([
+            $this->readinessRow('registered-nurses', 'publish_ready', true, 'indexable', 'approved'),
+        ]);
+
+        TransitionPath::query()->create([
+            'recommendation_snapshot_id' => $snapshot->id,
+            'from_occupation_id' => $snapshot->occupation_id,
+            'to_occupation_id' => $target->id,
+            'path_type' => 'stable_upside',
+            'path_payload' => 'invalid-string-payload',
+        ]);
+
+        $this->assertNull(app(CareerTransitionPreviewBundleBuilder::class)->buildByType('intj'));
+    }
+
     private function seedTargetOccupation(string $slug, string $title): Occupation
     {
         $chain = CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => $slug]);

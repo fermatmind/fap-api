@@ -242,6 +242,32 @@
       "merged_at": "",
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "PR-B18": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_verified",
+      "branch": "codex/pr-b18-career-transition-path-taxonomy-typed-payload-hardening",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "vendor/bin/pint --test app/Domain/Career/Transition/TransitionPathType.php app/Domain/Career/Transition/TransitionPathPayload.php app/Models/TransitionPath.php app/Services/Career/Bundles/CareerTransitionPreviewBundleBuilder.php tests/Unit/Domain/Career/Transition/TransitionPathTypeTest.php tests/Unit/Domain/Career/Transition/TransitionPathPayloadTest.php tests/Unit/Services/Career/CareerTransitionPreviewBundleBuilderTest.php tests/Feature/Career/CareerTransitionPreviewApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Domain/Career/Transition/TransitionPathTypeTest.php tests/Unit/Domain/Career/Transition/TransitionPathPayloadTest.php tests/Unit/Services/Career/CareerTransitionPreviewBundleBuilderTest.php tests/Feature/Career/CareerTransitionPreviewApiTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   }
 }
