@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-11T04:59:00Z",
+  "updated_at": "2026-04-11T06:31:30Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -275,6 +275,51 @@
         ]
       },
       "failure_reason": "GitHub hygiene failed immediately with no executable steps and the verify-mbti matrix job was skipped, matching the current repository workflow-start failure pattern rather than a locally reproducible B18 regression.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B19": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/pr-b19-career-transition-path-materialization-writer-compiler-integration",
+      "commit_sha": "7ba6267b526f771cf6c980227ffe9bce619f5d7f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/861",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/Transition/CareerTransitionPathWriter.php app/Services/Career/Import/CareerAuthorityMaterializer.php tests/Unit/Services/Career/Transition/CareerTransitionPathWriterTest.php tests/Feature/Career/CareerAuthorityCompileCommandTest.php tests/Feature/Career/CareerAuthorityReplaySafetyTest.php tests/Feature/Career/CareerTransitionPreviewApiTest.php tests/Feature/Career/FirstWaveTransitionPathMaterializationTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/Transition/CareerTransitionPathWriterTest.php tests/Feature/Career/CareerAuthorityCompileCommandTest.php tests/Feature/Career/CareerAuthorityReplaySafetyTest.php tests/Feature/Career/CareerTransitionPreviewApiTest.php tests/Feature/Career/FirstWaveTransitionPathMaterializationTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Career/FirstWavePublishReadyCommandTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24276709773/job/70891813082"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24276709773/job/70891815368"
+          }
+        ]
+      },
+      "failure_reason": "GitHub hygiene failed immediately again and the MBTI matrix job was skipped; local B19 verification passed and the failure pattern matches the current repository workflow-start issue rather than a locally reproducible regression.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
