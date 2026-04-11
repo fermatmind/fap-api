@@ -58,10 +58,24 @@ final class CareerAttributionDailyBuilderTest extends TestCase
             'subject_key' => 'intj',
             'query_mode' => 'non_query',
         ], 'anon_d', 'session_d');
+        $this->insertCareerEvent($orgId, 'career_transition_preview_view', $day->copy()->addMinutes(5), [
+            'entry_surface' => 'career_recommendation_detail_transition_preview',
+            'route_family' => 'recommendation_detail',
+            'subject_kind' => 'job_slug',
+            'subject_key' => 'registered-nurses',
+            'query_mode' => 'non_query',
+        ], 'anon_e', 'session_e');
+        $this->insertCareerEvent($orgId, 'career_transition_preview_target_click', $day->copy()->addMinutes(6), [
+            'entry_surface' => 'career_recommendation_detail_transition_preview',
+            'route_family' => 'recommendation_detail',
+            'subject_kind' => 'job_slug',
+            'subject_key' => 'registered-nurses',
+            'query_mode' => 'non_query',
+        ], 'anon_f', 'session_f');
 
         $result = app(CareerAttributionDailyBuilder::class)->refresh($day, $day, [$orgId], false);
 
-        $this->assertSame(4, (int) ($result['upserted_rows'] ?? 0));
+        $this->assertSame(6, (int) ($result['upserted_rows'] ?? 0));
 
         $readyRow = DB::table('analytics_career_attribution_daily')
             ->where('day', $day->toDateString())
@@ -103,6 +117,28 @@ final class CareerAttributionDailyBuilderTest extends TestCase
         $this->assertNotNull($recommendationRow);
         $this->assertSame('recommendation_type', $recommendationRow->subject_kind);
         $this->assertSame('unknown', $recommendationRow->readiness_class);
+
+        $transitionPreviewViewRow = DB::table('analytics_career_attribution_daily')
+            ->where('event_name', 'career_transition_preview_view')
+            ->where('subject_key', 'registered-nurses')
+            ->first();
+
+        $this->assertNotNull($transitionPreviewViewRow);
+        $this->assertSame('career_recommendation_detail_transition_preview', $transitionPreviewViewRow->surface);
+        $this->assertSame('recommendation_detail', $transitionPreviewViewRow->route_family);
+        $this->assertSame('job_slug', $transitionPreviewViewRow->subject_kind);
+        $this->assertSame('publish_ready', $transitionPreviewViewRow->readiness_class);
+
+        $transitionPreviewClickRow = DB::table('analytics_career_attribution_daily')
+            ->where('event_name', 'career_transition_preview_target_click')
+            ->where('subject_key', 'registered-nurses')
+            ->first();
+
+        $this->assertNotNull($transitionPreviewClickRow);
+        $this->assertSame('career_recommendation_detail_transition_preview', $transitionPreviewClickRow->surface);
+        $this->assertSame('recommendation_detail', $transitionPreviewClickRow->route_family);
+        $this->assertSame('job_slug', $transitionPreviewClickRow->subject_kind);
+        $this->assertSame('publish_ready', $transitionPreviewClickRow->readiness_class);
     }
 
     private function materializeCurrentFirstWaveFixture(): void

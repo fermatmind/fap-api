@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-10T10:25:00Z",
+  "updated_at": "2026-04-11T04:59:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -184,6 +184,43 @@
         ]
       },
       "failure_reason": "GitHub hygiene check failed because CAE/H-02 guard reported backend/.env exists in workspace.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B17": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/pr-b17-career-transition-preview-attribution-daily-extension",
+      "commit_sha": "0025ed318a6b077b1d059b58d6fcce718605b60e",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/859",
+      "checks": {
+        "local": [
+          {
+            "command": "vendor/bin/pint --test app/Services/Analytics/CareerAttributionEventMapper.php tests/Feature/Analytics/CareerAttributionEventIngestTest.php tests/Feature/Analytics/CareerAttributionDailyBuilderTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Analytics/CareerAttributionEventIngestTest.php tests/Feature/Analytics/CareerAttributionDailyBuilderTest.php tests/Feature/Career/CareerTransitionPreviewApiTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24274977919/job/70887163190"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24274977919/job/70887166440"
+          }
+        ]
+      },
+      "failure_reason": "GitHub Actions jobs were not started successfully; hygiene failed immediately and MBTI verification was skipped, consistent with the current repository CI/billing blockage.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
