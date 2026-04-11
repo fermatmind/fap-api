@@ -23,6 +23,8 @@ final class CareerAttributionEventMapper
         'career_job_detail_cta_click',
         'career_recommendation_result_click',
         'career_recommendation_matched_job_click',
+        'career_transition_preview_view',
+        'career_transition_preview_target_click',
         'career_ready_surface_exposed',
         'career_blocked_surface_exposed',
     ];
