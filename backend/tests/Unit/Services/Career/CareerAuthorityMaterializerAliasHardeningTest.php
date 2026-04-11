@@ -6,6 +6,8 @@ namespace Tests\Unit\Services\Career;
 
 use App\Models\CareerImportRun;
 use App\Models\Occupation;
+use App\Models\OccupationAlias;
+use App\Models\OccupationFamily;
 use App\Services\Career\Import\CareerAuthorityMaterializer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -60,17 +62,75 @@ final class CareerAuthorityMaterializerAliasHardeningTest extends TestCase
         $this->assertSame(['marketing managers', 'marketing managers 中文'], $normalizedAliases);
     }
 
+    public function test_it_materializes_explicit_family_target_alias_rows_without_promoting_leaf_aliases(): void
+    {
+        $run = CareerImportRun::query()->create([
+            'dataset_name' => 'fixture',
+            'dataset_version' => 'v1',
+            'dataset_checksum' => 'checksum-b25-family-materializer',
+            'scope_mode' => 'first_wave_exact',
+            'dry_run' => false,
+            'status' => 'completed',
+            'started_at' => now()->subMinute(),
+            'finished_at' => now(),
+        ]);
+
+        app(CareerAuthorityMaterializer::class)->materializeImportRow(
+            $this->normalizedRow(
+                'data-scientists',
+                'Data Scientists',
+                'computer-and-information-technology',
+                'Computer and Information Technology',
+                '计算机与信息技术',
+            ),
+            $run
+        );
+
+        $family = OccupationFamily::query()->where('canonical_slug', 'computer-and-information-technology')->firstOrFail();
+        $familyAliases = OccupationAlias::query()
+            ->where('family_id', $family->id)
+            ->where('target_kind', 'family')
+            ->orderBy('normalized')
+            ->get();
+
+        $this->assertSame(
+            [
+                'computer and information technology careers',
+                'information technology careers',
+                '信息技术职业',
+            ],
+            $familyAliases->pluck('normalized')->all()
+        );
+        $this->assertSame([null, null, null], $familyAliases->pluck('occupation_id')->all());
+
+        $leafAliases = OccupationAlias::query()
+            ->where('family_id', $family->id)
+            ->whereNotNull('occupation_id')
+            ->pluck('target_kind')
+            ->unique()
+            ->values()
+            ->all();
+
+        $this->assertContains('occupation', $leafAliases);
+        $this->assertNotContains('family', $leafAliases);
+    }
+
     /**
      * @return array<string, mixed>
      */
-    private function normalizedRow(string $slug, string $title): array
-    {
+    private function normalizedRow(
+        string $slug,
+        string $title,
+        ?string $familySlug = null,
+        ?string $familyTitleEn = null,
+        ?string $familyTitleZh = null,
+    ): array {
         $titleZh = $title.' 中文';
 
         return [
-            'family_slug' => 'test-family-'.$slug,
-            'family_title_en' => 'Test Family',
-            'family_title_zh' => '测试家族',
+            'family_slug' => $familySlug ?? 'test-family-'.$slug,
+            'family_title_en' => $familyTitleEn ?? 'Test Family',
+            'family_title_zh' => $familyTitleZh ?? '测试家族',
             'canonical_slug' => $slug,
             'truth_market' => 'US',
             'display_market' => 'US',

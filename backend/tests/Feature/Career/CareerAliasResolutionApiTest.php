@@ -66,6 +66,18 @@ final class CareerAliasResolutionApiTest extends TestCase
             ->assertJsonMissingPath('resolution.candidates');
     }
 
+    public function test_it_returns_family_for_a_curated_family_target_alias(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+
+        $this->getJson('/api/v0.5/career/resolve?q=information%20technology%20careers&locale=en')
+            ->assertOk()
+            ->assertJsonPath('resolution.resolved_kind', 'family')
+            ->assertJsonPath('resolution.family.canonical_slug', 'computer-and-information-technology')
+            ->assertJsonMissingPath('resolution.occupation')
+            ->assertJsonMissingPath('resolution.candidates');
+    }
+
     public function test_it_returns_ambiguous_with_public_safe_candidates_only(): void
     {
         $this->materializeCurrentFirstWaveFixture();
@@ -139,6 +151,35 @@ final class CareerAliasResolutionApiTest extends TestCase
             ->assertStatus(422)
             ->assertJsonPath('ok', false)
             ->assertJsonPath('error_code', 'VALIDATION_FAILED');
+    }
+
+    public function test_it_does_not_return_family_for_explicit_family_aliases_when_the_family_has_no_visible_children(): void
+    {
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'empty-family-api-resolution',
+            'title_en' => 'Empty Family Api Resolution',
+            'title_zh' => '空家族接口解析',
+        ]);
+
+        OccupationAlias::query()->create([
+            'occupation_id' => null,
+            'family_id' => $family->id,
+            'alias' => 'Empty Family Api Careers',
+            'normalized' => 'empty family api careers',
+            'lang' => 'en',
+            'register' => 'family_market_title',
+            'intent_scope' => 'exact',
+            'target_kind' => 'family',
+            'precision_score' => 0.95,
+            'confidence_score' => 0.95,
+        ]);
+
+        $this->getJson('/api/v0.5/career/resolve?q=empty%20family%20api%20careers&locale=en')
+            ->assertOk()
+            ->assertJsonPath('resolution.resolved_kind', 'none')
+            ->assertJsonMissingPath('resolution.occupation')
+            ->assertJsonMissingPath('resolution.family')
+            ->assertJsonMissingPath('resolution.candidates');
     }
 
     /**

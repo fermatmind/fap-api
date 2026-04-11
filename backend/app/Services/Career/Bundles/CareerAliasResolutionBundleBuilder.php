@@ -20,6 +20,7 @@ final class CareerAliasResolutionBundleBuilder
     public function __construct(
         private readonly FirstWaveReadinessSummaryService $readinessSummaryService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
+        private readonly CareerFamilyHubBundleBuilder $familyHubBundleBuilder,
     ) {}
 
     public function build(string $query, ?string $locale = null): CareerAliasResolutionBundle
@@ -319,6 +320,10 @@ final class CareerAliasResolutionBundleBuilder
                 continue;
             }
 
+            if (! $this->familyHasVisibleChildren($family)) {
+                continue;
+            }
+
             $matchTier = $this->resolveFamilyMatchTier($family, $normalizedQuery, $rawQuery, $normalizedLocale, $exactOnly);
             if ($matchTier === null) {
                 continue;
@@ -409,6 +414,16 @@ final class CareerAliasResolutionBundleBuilder
         }
 
         return false;
+    }
+
+    private function familyHasVisibleChildren(OccupationFamily $family): bool
+    {
+        $bundle = $this->familyHubBundleBuilder->buildBySlug((string) $family->canonical_slug);
+        if ($bundle === null) {
+            return false;
+        }
+
+        return count($bundle->visibleChildren) > 0;
     }
 
     /**

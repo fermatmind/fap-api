@@ -512,7 +512,11 @@ final class CareerAuthorityMaterializer
             ];
         }
 
-        $payloads = [...$payloads, ...$hardening['alias_payloads']];
+        $payloads = [
+            ...$payloads,
+            ...$hardening['alias_payloads'],
+            ...((array) ($hardening['family_alias_payloads'] ?? [])),
+        ];
 
         $deduped = [];
         $seen = [];
