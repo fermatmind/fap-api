@@ -17,13 +17,15 @@ final class FirstWaveAliasHardeningService
 
     public function __construct(
         private readonly FirstWaveAliasCatalogReader $catalogReader,
+        private readonly FirstWaveFamilyAliasPolicy $familyAliasPolicy,
     ) {}
 
     /**
      * @return array{
      *   in_scope:bool,
      *   blocked_aliases:list<string>,
-     *   alias_payloads:list<array<string,mixed>>
+     *   alias_payloads:list<array<string,mixed>>,
+     *   family_alias_payloads:list<array<string,mixed>>
      * }
      */
     public function resolveAliasPayloads(
@@ -38,6 +40,7 @@ final class FirstWaveAliasHardeningService
                 'in_scope' => false,
                 'blocked_aliases' => [],
                 'alias_payloads' => [],
+                'family_alias_payloads' => [],
             ];
         }
 
@@ -89,10 +92,13 @@ final class FirstWaveAliasHardeningService
             $seen[$dedupeKey] = true;
         }
 
+        $familyAliases = $this->familyAliasPolicy->resolveFamilyAliasPayloads($family, $importRun);
+
         return [
             'in_scope' => true,
             'blocked_aliases' => $blockedAliases,
             'alias_payloads' => $payloads,
+            'family_alias_payloads' => $familyAliases['alias_payloads'],
         ];
     }
 

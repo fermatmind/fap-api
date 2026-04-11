@@ -1,0 +1,79 @@
+{
+  "version": "first_wave_family_aliases_v1",
+  "wave_name": "career_first_wave_10",
+  "scope_source": "backend/docs/career/first_wave_manifest.json",
+  "count_expected": 2,
+  "count_actual": 2,
+  "policy": {
+    "allowed_match_scope": [
+      "explicit_family_slug_variant",
+      "explicit_family_title_variant",
+      "explicit_family_market_title"
+    ],
+    "disallowed_scope": [
+      "broad_slang_family_alias",
+      "crosswalk_derived_family_alias",
+      "leaf_title_promotion",
+      "short_ambiguous_umbrella"
+    ],
+    "rules": [
+      "Only aliases explicitly listed here may be authored as target_kind=family.",
+      "Do not promote nearby-professional or leaf job titles into family-target aliases.",
+      "Do not author family-target aliases for families without stable public-safe intent.",
+      "Chinese family aliases must remain narrow umbrella titles, not broad generic shorthand."
+    ]
+  },
+  "items": [
+    {
+      "family_slug": "computer-and-information-technology",
+      "approved_family_alias_rows": [
+        {
+          "alias": "Computer and Information Technology Careers",
+          "normalized": "computer and information technology careers",
+          "lang": "en",
+          "register": "family_title_variant",
+          "precision": 0.98,
+          "confidence": 0.98
+        },
+        {
+          "alias": "Information Technology Careers",
+          "normalized": "information technology careers",
+          "lang": "en",
+          "register": "family_market_title",
+          "precision": 0.9,
+          "confidence": 0.88
+        },
+        {
+          "alias": "信息技术职业",
+          "normalized": "信息技术职业",
+          "lang": "zh-CN",
+          "register": "family_market_title",
+          "precision": 0.92,
+          "confidence": 0.9
+        }
+      ],
+      "blocked_aliases": [
+        "technology",
+        "tech",
+        "it"
+      ]
+    },
+    {
+      "family_slug": "business-and-financial-operations",
+      "approved_family_alias_rows": [
+        {
+          "alias": "Business and Financial Operations Careers",
+          "normalized": "business and financial operations careers",
+          "lang": "en",
+          "register": "family_title_variant",
+          "precision": 0.97,
+          "confidence": 0.96
+        }
+      ],
+      "blocked_aliases": [
+        "business",
+        "finance"
+      ]
+    }
+  ]
+}

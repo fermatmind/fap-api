@@ -69,6 +69,21 @@ final class CareerAliasResolutionBundleBuilderTest extends TestCase
         $this->assertSame($family->title_en, data_get($payload, 'resolution.family.title_en'));
     }
 
+    public function test_it_returns_family_for_explicit_family_target_aliases_when_the_family_has_visible_children(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+
+        $payload = app(CareerAliasResolutionBundleBuilder::class)
+            ->build('information technology careers', 'en')
+            ->toArray();
+
+        $this->assertSame('family', data_get($payload, 'resolution.resolved_kind'));
+        $this->assertSame(
+            'computer-and-information-technology',
+            data_get($payload, 'resolution.family.canonical_slug')
+        );
+    }
+
     public function test_it_returns_ambiguous_when_multiple_public_safe_leaf_candidates_share_the_same_alias(): void
     {
         $this->materializeCurrentFirstWaveFixture();
@@ -148,6 +163,34 @@ final class CareerAliasResolutionBundleBuilderTest extends TestCase
     {
         $payload = app(CareerAliasResolutionBundleBuilder::class)
             ->build('query-with-no-career-match', 'en')
+            ->toArray();
+
+        $this->assertSame('none', data_get($payload, 'resolution.resolved_kind'));
+    }
+
+    public function test_it_omits_family_target_aliases_when_the_family_has_no_visible_public_safe_children(): void
+    {
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'empty-family-resolution',
+            'title_en' => 'Empty Family Resolution',
+            'title_zh' => '空家族解析',
+        ]);
+
+        OccupationAlias::query()->create([
+            'occupation_id' => null,
+            'family_id' => $family->id,
+            'alias' => 'Empty Family Careers',
+            'normalized' => 'empty family careers',
+            'lang' => 'en',
+            'register' => 'family_market_title',
+            'intent_scope' => 'exact',
+            'target_kind' => 'family',
+            'precision_score' => 0.95,
+            'confidence_score' => 0.95,
+        ]);
+
+        $payload = app(CareerAliasResolutionBundleBuilder::class)
+            ->build('empty family careers', 'en')
             ->toArray();
 
         $this->assertSame('none', data_get($payload, 'resolution.resolved_kind'));

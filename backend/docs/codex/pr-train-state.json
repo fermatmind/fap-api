@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-11T17:00:00Z",
+  "updated_at": "2026-04-11T23:47:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -510,6 +510,47 @@
         ]
       },
       "failure_reason": "GitHub hygiene failed immediately again and the MBTI matrix job was skipped; local B24 verification passed and the failure pattern matches the repository's current workflow-start issue rather than a locally reproducible alias-resolution regression.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B25": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "github_checks_failed",
+      "branch": "codex/pr-b25-career-family-target-alias-hardening-family-fallback-authority",
+      "commit_sha": "9359b10472bb0d31e5e5cda5d34941cb8c721083",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/867",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Domain/Career/Import/FirstWaveFamilyAliasPolicy.php app/Domain/Career/Import/FirstWaveAliasHardeningService.php app/Services/Career/Import/CareerAuthorityMaterializer.php app/Services/Career/Bundles/CareerAliasResolutionBundleBuilder.php tests/Unit/Services/Career/FirstWaveFamilyAliasPolicyTest.php tests/Unit/Services/Career/FirstWaveAliasHardeningServiceTest.php tests/Unit/Services/Career/CareerAuthorityMaterializerAliasHardeningTest.php tests/Unit/Services/Career/CareerAliasResolutionBundleBuilderTest.php tests/Feature/Career/CareerAliasResolutionApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/FirstWaveFamilyAliasPolicyTest.php tests/Unit/Services/Career/FirstWaveAliasHardeningServiceTest.php tests/Unit/Services/Career/CareerAuthorityMaterializerAliasHardeningTest.php tests/Unit/Services/Career/CareerAliasResolutionBundleBuilderTest.php tests/Feature/Career/CareerAliasResolutionApiTest.php tests/Feature/Career/CareerFamilyHubApiTest.php tests/Feature/Career/FirstWaveReadinessApiTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24285926777/job/70915150031"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24285926777/job/70915152259"
+          }
+        ]
+      },
+      "failure_reason": "GitHub Actions jobs failed immediately on hygiene, matching the current repository workflow-start failure pattern rather than a locally reproducible B25 regression.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
