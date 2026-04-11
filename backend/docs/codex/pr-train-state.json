@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-11T07:00:00Z",
+  "updated_at": "2026-04-11T07:20:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -357,6 +357,32 @@
         ]
       },
       "failure_reason": "GitHub hygiene failed immediately again and the MBTI matrix job was skipped; local B20 verification passed and the failure pattern matches the current repository workflow-start issue rather than a locally reproducible regression.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B21": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_verified",
+      "branch": "codex/pr-b21-career-transition-path-internal-step-authoring-production-payload-enrichment",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/Transition/CareerTransitionStepAuthor.php app/Services/Career/Transition/CareerTransitionPathWriter.php app/Domain/Career/Transition/TransitionPathPayload.php tests/Unit/Services/Career/Transition/CareerTransitionStepAuthorTest.php tests/Unit/Services/Career/Transition/CareerTransitionPathWriterTest.php tests/Unit/Domain/Career/Transition/TransitionPathPayloadTest.php tests/Feature/Career/FirstWaveTransitionPathMaterializationTest.php tests/Feature/Career/CareerTransitionPreviewApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/Transition/CareerTransitionStepAuthorTest.php tests/Unit/Services/Career/Transition/CareerTransitionPathWriterTest.php tests/Unit/Domain/Career/Transition/TransitionPathPayloadTest.php tests/Feature/Career/FirstWaveTransitionPathMaterializationTest.php tests/Feature/Career/CareerTransitionPreviewApiTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,

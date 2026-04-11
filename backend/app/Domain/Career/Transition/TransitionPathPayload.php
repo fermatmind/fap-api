@@ -6,6 +6,12 @@ namespace App\Domain\Career\Transition;
 
 final class TransitionPathPayload
 {
+    public const STEP_SKILL_OVERLAP = 'skill_overlap';
+
+    public const STEP_TASK_OVERLAP = 'task_overlap';
+
+    public const STEP_TOOL_OVERLAP = 'tool_overlap';
+
     /**
      * @param  list<string>  $steps
      */
@@ -26,14 +32,14 @@ final class TransitionPathPayload
             }
 
             $normalized = trim($step);
-            if ($normalized === '') {
+            if ($normalized === '' || ! in_array($normalized, self::allowedStepLabels(), true)) {
                 continue;
             }
 
             $steps[] = $normalized;
         }
 
-        return new self(array_values($steps));
+        return new self(array_values(array_unique($steps)));
     }
 
     /**
@@ -47,6 +53,18 @@ final class TransitionPathPayload
 
         return [
             'steps' => $this->steps,
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public static function allowedStepLabels(): array
+    {
+        return [
+            self::STEP_SKILL_OVERLAP,
+            self::STEP_TASK_OVERLAP,
+            self::STEP_TOOL_OVERLAP,
         ];
     }
 }

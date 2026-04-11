@@ -16,6 +16,7 @@ final class CareerTransitionPathWriter
 {
     public function __construct(
         private readonly CareerTransitionPreviewReadinessLookup $readinessLookup,
+        private readonly CareerTransitionStepAuthor $stepAuthor,
     ) {}
 
     public function rewriteForSnapshot(RecommendationSnapshot $snapshot): int
@@ -43,7 +44,9 @@ final class CareerTransitionPathWriter
                 return 0;
             }
 
-            $pathPayload = TransitionPathPayload::from(null);
+            $pathPayload = TransitionPathPayload::from([
+                'steps' => $this->stepAuthor->authorForOccupation($sourceOccupation),
+            ]);
 
             TransitionPath::query()->create([
                 'recommendation_snapshot_id' => $snapshot->id,
