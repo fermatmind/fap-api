@@ -16,7 +16,15 @@ final class CareerFirstWaveRecommendationCompanionLinksSummaryResource extends J
     public static $wrap = null;
 
     /**
-     * @return array<string, mixed>
+     * @return array{
+     *     summary_kind:string,
+     *     summary_version:string,
+     *     scope:string,
+     *     subject_kind:string,
+     *     subject_identity:array<string, mixed>,
+     *     counts:array<string, int>,
+     *     companion_links:list<array<string, mixed>>
+     * }
      */
     public function toArray(Request $request): array
     {

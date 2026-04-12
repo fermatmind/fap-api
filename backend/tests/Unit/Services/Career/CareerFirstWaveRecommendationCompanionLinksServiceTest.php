@@ -47,24 +47,31 @@ final class CareerFirstWaveRecommendationCompanionLinksServiceTest extends TestC
         $this->assertSame('INTJ-A', data_get($summary, 'subject_identity.type_code'));
         $this->assertSame('INTJ', data_get($summary, 'subject_identity.canonical_type_code'));
         $this->assertSame('intj', data_get($summary, 'subject_identity.public_route_slug'));
-        $this->assertSame(3, data_get($summary, 'counts.total'));
+        $this->assertSame(4, data_get($summary, 'counts.total'));
         $this->assertSame(2, data_get($summary, 'counts.job_detail'));
         $this->assertSame(1, data_get($summary, 'counts.family_hub'));
+        $this->assertSame(1, data_get($summary, 'counts.test_landing'));
 
         $links = collect($summary['companion_links']);
         $this->assertSame(
-            ['career_family_hub', 'career_job_detail'],
+            ['career_family_hub', 'career_job_detail', 'test_landing'],
             $links->pluck('route_kind')->unique()->sort()->values()->all()
         );
 
         $targetJob = $links->first(static fn (array $row): bool => ($row['canonical_slug'] ?? null) === 'accountants-and-auditors');
         $familyLink = $links->firstWhere('route_kind', 'career_family_hub');
         $jobLinks = $links->where('route_kind', 'career_job_detail')->values();
+        $testLanding = $links->firstWhere('route_kind', 'test_landing');
 
         $this->assertSame('target_job_detail_companion', $targetJob['link_reason_code']);
         $this->assertSame('/career/jobs/accountants-and-auditors', $targetJob['canonical_path']);
         $this->assertSame('/career/family/business-and-financial-37ec69bd', $familyLink['canonical_path']);
         $this->assertSame('target_family_hub_companion', $familyLink['link_reason_code']);
+        $this->assertSame('/en/tests/mbti-personality-test-16-personality-types', $testLanding['canonical_path']);
+        $this->assertSame('recommendation_test_support', $testLanding['link_reason_code']);
+        $this->assertSame('MBTI', $testLanding['scale_code']);
+        $this->assertArrayNotHasKey('source_of_truth', $testLanding);
+        $this->assertArrayNotHasKey('is_active', $testLanding);
         $this->assertSame(
             ['accountants-and-auditors', 'human-resources-specialists'],
             $jobLinks->pluck('canonical_slug')->sort()->values()->all()
@@ -72,6 +79,7 @@ final class CareerFirstWaveRecommendationCompanionLinksServiceTest extends TestC
         $this->assertTrue($jobLinks->contains(static fn (array $row): bool => ($row['canonical_slug'] ?? null) === 'human-resources-specialists'
             && ($row['link_reason_code'] ?? null) === 'matched_job_detail_companion'));
         $this->assertFalse($links->contains(static fn (array $row): bool => ($row['canonical_slug'] ?? null) === 'backend-architect-cn-market'));
+        $this->assertFalse($links->contains(static fn (array $row): bool => ($row['route_kind'] ?? null) === 'topic_detail'));
         $this->assertSame(1, $jobLinks->where('canonical_slug', 'accountants-and-auditors')->count());
     }
 
