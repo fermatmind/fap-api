@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-12T01:30:00Z",
+  "updated_at": "2026-04-12T01:46:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -600,10 +600,10 @@
     "PR-B27": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_verified",
+      "status": "github_checks_failed",
       "branch": "codex/pr-b27-career-first-wave-lifecycle-summary-read-model-api",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "34767bd256862592b42022d6bd2d024828b6a275",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/869",
       "checks": {
         "local": [
           {
@@ -623,9 +623,25 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24295685724/job/70940197295"
+          },
+          {
+            "name": "hygiene",
+            "status": "pending",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24295690614/job/70940211184"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24295685724/job/70940199502"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub hygiene failed immediately on the initial run and a newer rerun is still pending; local B27 verification passed and the failure pattern matches the repository's current workflow-start issue rather than a locally reproducible lifecycle-summary regression.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
