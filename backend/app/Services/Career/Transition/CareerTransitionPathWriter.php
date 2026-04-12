@@ -18,6 +18,7 @@ final class CareerTransitionPathWriter
         private readonly CareerTransitionPreviewReadinessLookup $readinessLookup,
         private readonly CareerTransitionStepAuthor $stepAuthor,
         private readonly CareerTransitionTargetSelector $targetSelector,
+        private readonly CareerTransitionRationaleBuilder $rationaleBuilder,
     ) {}
 
     public function rewriteForSnapshot(RecommendationSnapshot $snapshot): int
@@ -50,9 +51,18 @@ final class CareerTransitionPathWriter
                 return 0;
             }
 
-            $pathPayload = TransitionPathPayload::from([
-                'steps' => $this->stepAuthor->authorForOccupation($sourceOccupation),
-            ]);
+            $steps = $this->stepAuthor->authorForOccupation($sourceOccupation);
+            $targetReadiness = $this->readinessLookup->bySlug($targetOccupation->canonical_slug);
+
+            $pathPayload = TransitionPathPayload::from(array_merge(
+                ['steps' => $steps],
+                $this->rationaleBuilder->build(
+                    $sourceOccupation,
+                    $targetOccupation,
+                    $steps,
+                    is_array($targetReadiness) ? $targetReadiness : [],
+                ),
+            ));
 
             TransitionPath::query()->create([
                 'recommendation_snapshot_id' => $snapshot->id,

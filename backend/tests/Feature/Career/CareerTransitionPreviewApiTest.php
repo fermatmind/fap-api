@@ -41,6 +41,20 @@ final class CareerTransitionPreviewApiTest extends TestCase
                     TransitionPathPayload::STEP_TASK_OVERLAP,
                     TransitionPathPayload::STEP_TOOL_OVERLAP,
                 ],
+                'rationale_codes' => [
+                    TransitionPathPayload::RATIONALE_SAME_FAMILY_TARGET,
+                    TransitionPathPayload::RATIONALE_PUBLISH_READY_TARGET,
+                ],
+                'tradeoff_codes' => [
+                    TransitionPathPayload::TRADEOFF_HIGHER_ENTRY_EDUCATION_REQUIRED,
+                ],
+                'delta' => [
+                    TransitionPathPayload::DELTA_ENTRY_EDUCATION => [
+                        'source_value' => "Bachelor's degree",
+                        'target_value' => "Master's degree",
+                        'direction' => TransitionPathPayload::DELTA_DIRECTION_HIGHER,
+                    ],
+                ],
             ],
         ]);
 
@@ -69,7 +83,10 @@ final class CareerTransitionPreviewApiTest extends TestCase
             ])
             ->assertJsonMissingPath('why_this_path')
             ->assertJsonMissingPath('what_is_lost')
-            ->assertJsonMissingPath('bridge_steps_90d');
+            ->assertJsonMissingPath('bridge_steps_90d')
+            ->assertJsonMissingPath('rationale_codes')
+            ->assertJsonMissingPath('tradeoff_codes')
+            ->assertJsonMissingPath('delta');
 
         /** @var array<string, mixed> $payload */
         $payload = $response->json();

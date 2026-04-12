@@ -45,9 +45,10 @@ final class FirstWaveTransitionPathMaterializationTest extends TestCase
         $this->assertNotSame($path->from_occupation_id, $path->to_occupation_id);
         $this->assertSame($path->fromOccupation?->family_id, $path->toOccupation?->family_id);
         $this->assertSame($target->canonical_slug, $path->toOccupation?->canonical_slug);
-        $this->assertSame([
-            'steps' => TransitionPathPayload::allowedStepLabels(),
-        ], $path->normalizedPathPayload()->toArray());
+        $this->assertSame(TransitionPathPayload::allowedStepLabels(), $path->normalizedPathPayload()->steps);
+        $this->assertContains('same_family_target', $path->normalizedPathPayload()->rationaleCodes);
+        $this->assertArrayNotHasKey('why_this_path', $path->normalizedPathPayload()->toArray());
+        $this->assertArrayNotHasKey('bridge_steps_90d', $path->normalizedPathPayload()->toArray());
         $this->assertNotNull($path->recommendationSnapshot?->compile_run_id);
     }
 
@@ -83,16 +84,17 @@ final class FirstWaveTransitionPathMaterializationTest extends TestCase
             TransitionPath::query()->count(),
             TransitionPath::query()->distinct('recommendation_snapshot_id')->count('recommendation_snapshot_id')
         );
-        $this->assertSame(
-            array_fill(0, TransitionPath::query()->count(), [
-                'steps' => TransitionPathPayload::allowedStepLabels(),
-            ]),
-            TransitionPath::query()
-                ->orderBy('recommendation_snapshot_id')
-                ->get()
-                ->map(static fn (TransitionPath $path): array => $path->normalizedPathPayload()->toArray())
-                ->all()
-        );
+        TransitionPath::query()
+            ->orderBy('recommendation_snapshot_id')
+            ->get()
+            ->each(function (TransitionPath $path): void {
+                $payload = $path->normalizedPathPayload()->toArray();
+                $this->assertSame(TransitionPathPayload::allowedStepLabels(), $path->normalizedPathPayload()->steps);
+                $this->assertContains('same_family_target', $path->normalizedPathPayload()->rationaleCodes);
+                $this->assertArrayNotHasKey('why_this_path', $payload);
+                $this->assertArrayNotHasKey('what_is_lost', $payload);
+                $this->assertArrayNotHasKey('bridge_steps_90d', $payload);
+            });
         $this->assertSame(
             $firstFingerprints,
             TransitionPath::query()

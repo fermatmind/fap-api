@@ -20,6 +20,15 @@ final class TransitionPathPayloadTest extends TestCase
     {
         $payload = TransitionPathPayload::from([
             'steps' => [' skill_overlap ', 'task_overlap', 'tool_overlap'],
+            'rationale_codes' => ['skill_overlap', 'same_family_target'],
+            'tradeoff_codes' => ['higher_entry_education_required'],
+            'delta' => [
+                'entry_education_delta' => [
+                    'source_value' => "Bachelor's degree",
+                    'target_value' => "Master's degree",
+                    'direction' => 'higher',
+                ],
+            ],
         ]);
 
         $this->assertSame([
@@ -28,13 +37,41 @@ final class TransitionPathPayloadTest extends TestCase
                 'task_overlap',
                 'tool_overlap',
             ],
+            'rationale_codes' => [
+                'skill_overlap',
+                'same_family_target',
+            ],
+            'tradeoff_codes' => [
+                'higher_entry_education_required',
+            ],
+            'delta' => [
+                'entry_education_delta' => [
+                    'source_value' => "Bachelor's degree",
+                    'target_value' => "Master's degree",
+                    'direction' => 'higher',
+                ],
+            ],
         ], $payload->toArray());
     }
 
-    public function test_it_strips_invalid_steps_and_ignores_richer_narrative_fields(): void
+    public function test_it_strips_invalid_steps_and_ignores_unsupported_or_narrative_fields(): void
     {
         $payload = TransitionPathPayload::from([
             'steps' => ['skill_overlap', 'deepen system design', 42, '', null, ' task_overlap ', 'skill_overlap'],
+            'rationale_codes' => ['same_family_target', 'best_next_move', null],
+            'tradeoff_codes' => ['higher_entry_education_required', 'sacrifice_salary'],
+            'delta' => [
+                'entry_education_delta' => [
+                    'source_value' => "Bachelor's degree",
+                    'target_value' => "Master's degree",
+                    'direction' => 'higher',
+                ],
+                'salary_delta' => [
+                    'source_value' => '100000',
+                    'target_value' => '90000',
+                    'direction' => 'lower',
+                ],
+            ],
             'why_this_path' => 'fixture-only narrative',
             'what_is_lost' => 'fixture-only tradeoff copy',
             'bridge_steps_90d' => ['not authoritative'],
@@ -44,6 +81,19 @@ final class TransitionPathPayloadTest extends TestCase
             'steps' => [
                 'skill_overlap',
                 'task_overlap',
+            ],
+            'rationale_codes' => [
+                'same_family_target',
+            ],
+            'tradeoff_codes' => [
+                'higher_entry_education_required',
+            ],
+            'delta' => [
+                'entry_education_delta' => [
+                    'source_value' => "Bachelor's degree",
+                    'target_value' => "Master's degree",
+                    'direction' => 'higher',
+                ],
             ],
         ], $payload->toArray());
     }

@@ -7,7 +7,9 @@ namespace Tests\Unit\Services\Career\Transition;
 use App\Domain\Career\Transition\TransitionPathPayload;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
+use App\Models\OccupationTruthMetric;
 use App\Models\RecommendationSnapshot;
+use App\Models\SourceTrace;
 use App\Models\TransitionPath;
 use App\Services\Career\CareerRecommendationCompiler;
 use App\Services\Career\CareerTransitionPreviewReadinessLookup;
@@ -24,7 +26,14 @@ final class CareerTransitionPathWriterTest extends TestCase
     public function test_it_materializes_a_minimal_stable_upside_path_for_a_publish_ready_first_wave_snapshot(): void
     {
         $snapshot = $this->compiledFirstWaveSnapshot();
-        $target = $this->createSameFamilyTarget($snapshot, 'backend-platform-engineer', 'Backend Platform Engineer');
+        $target = $this->createSameFamilyTarget(
+            $snapshot,
+            'backend-platform-engineer',
+            'Backend Platform Engineer',
+            "Master's degree",
+            '5 years or more',
+            'Moderate-term on-the-job training',
+        );
         $this->mockReadinessRows([
             $this->readinessRow($snapshot->occupation?->canonical_slug ?? '', 'publish_ready', true, 'indexable', 'approved'),
             $this->readinessRow($target->canonical_slug, 'publish_ready', true, 'indexable', 'approved'),
@@ -38,8 +47,56 @@ final class CareerTransitionPathWriterTest extends TestCase
         $this->assertSame($target->id, $path->to_occupation_id);
         $this->assertNotSame($path->from_occupation_id, $path->to_occupation_id);
         $this->assertSame('stable_upside', $path->path_type);
+        $this->assertSame(TransitionPathPayload::allowedStepLabels(), $path->normalizedPathPayload()->steps);
+        $this->assertSame([
+            'skill_overlap',
+            'task_overlap',
+            'tool_overlap',
+            'same_family_target',
+            'publish_ready_target',
+            'index_eligible_target',
+            'approved_reviewer_target',
+            'safe_crosswalk_target',
+        ], $path->normalizedPathPayload()->rationaleCodes);
+        $this->assertSame([
+            'higher_entry_education_required',
+            'higher_work_experience_required',
+            'higher_training_required',
+        ], $path->normalizedPathPayload()->tradeoffCodes);
         $this->assertSame([
             'steps' => TransitionPathPayload::allowedStepLabels(),
+            'rationale_codes' => [
+                'skill_overlap',
+                'task_overlap',
+                'tool_overlap',
+                'same_family_target',
+                'publish_ready_target',
+                'index_eligible_target',
+                'approved_reviewer_target',
+                'safe_crosswalk_target',
+            ],
+            'tradeoff_codes' => [
+                'higher_entry_education_required',
+                'higher_work_experience_required',
+                'higher_training_required',
+            ],
+            'delta' => [
+                'entry_education_delta' => [
+                    'source_value' => "Bachelor's degree",
+                    'target_value' => "Master's degree",
+                    'direction' => 'higher',
+                ],
+                'work_experience_delta' => [
+                    'source_value' => 'None',
+                    'target_value' => '5 years or more',
+                    'direction' => 'higher',
+                ],
+                'training_delta' => [
+                    'source_value' => 'None',
+                    'target_value' => 'Moderate-term on-the-job training',
+                    'direction' => 'higher',
+                ],
+            ],
         ], $path->normalizedPathPayload()->toArray());
     }
 
@@ -68,9 +125,8 @@ final class CareerTransitionPathWriterTest extends TestCase
         $this->assertSame('stable_upside', $path->path_type);
         $this->assertSame($target->id, $path->to_occupation_id);
         $this->assertNotSame($path->from_occupation_id, $path->to_occupation_id);
-        $this->assertSame([
-            'steps' => TransitionPathPayload::allowedStepLabels(),
-        ], $path->normalizedPathPayload()->toArray());
+        $this->assertSame(TransitionPathPayload::allowedStepLabels(), $path->normalizedPathPayload()->steps);
+        $this->assertContains('same_family_target', $path->normalizedPathPayload()->rationaleCodes);
     }
 
     public function test_it_rejects_snapshots_without_transition_claim_permission(): void
@@ -210,11 +266,17 @@ final class CareerTransitionPathWriterTest extends TestCase
         ]);
     }
 
-    private function createSameFamilyTarget(RecommendationSnapshot $snapshot, string $slug, string $title): \App\Models\Occupation
-    {
+    private function createSameFamilyTarget(
+        RecommendationSnapshot $snapshot,
+        string $slug,
+        string $title,
+        ?string $entryEducation = null,
+        ?string $workExperience = null,
+        ?string $training = null,
+    ): \App\Models\Occupation {
         $source = $snapshot->occupation()->firstOrFail();
 
-        return \App\Models\Occupation::query()->create([
+        $target = \App\Models\Occupation::query()->create([
             'family_id' => $source->family_id,
             'parent_id' => null,
             'canonical_slug' => $slug,
@@ -233,6 +295,40 @@ final class CareerTransitionPathWriterTest extends TestCase
             'skill_gap_threshold' => $source->skill_gap_threshold,
             'trust_inheritance_scope' => $source->trust_inheritance_scope,
         ]);
+
+        $sourceTruthMetric = $source->truthMetrics()->latest('id')->first();
+        if ($sourceTruthMetric instanceof OccupationTruthMetric) {
+            $sourceTrace = SourceTrace::query()->create([
+                'source_id' => 'source_'.$slug,
+                'source_type' => 'fixture_dataset',
+                'title' => 'Transition writer fixture source',
+                'url' => 'https://example.test/sources/'.$slug,
+                'fields_used' => ['entry_education', 'work_experience', 'on_the_job_training'],
+                'retrieved_at' => now()->subDay(),
+                'evidence_strength' => 0.93,
+            ]);
+
+            OccupationTruthMetric::query()->create([
+                'occupation_id' => $target->id,
+                'source_trace_id' => $sourceTrace->id,
+                'median_pay_usd_annual' => $sourceTruthMetric->median_pay_usd_annual,
+                'jobs_2024' => $sourceTruthMetric->jobs_2024,
+                'projected_jobs_2034' => $sourceTruthMetric->projected_jobs_2034,
+                'employment_change' => $sourceTruthMetric->employment_change,
+                'outlook_pct_2024_2034' => $sourceTruthMetric->outlook_pct_2024_2034,
+                'outlook_description' => $sourceTruthMetric->outlook_description,
+                'entry_education' => $entryEducation ?? $sourceTruthMetric->entry_education,
+                'work_experience' => $workExperience ?? $sourceTruthMetric->work_experience,
+                'on_the_job_training' => $training ?? $sourceTruthMetric->on_the_job_training,
+                'ai_exposure' => $sourceTruthMetric->ai_exposure,
+                'ai_rationale' => 'fixture',
+                'truth_market' => $sourceTruthMetric->truth_market,
+                'effective_at' => now()->subDays(5),
+                'reviewed_at' => now()->subDay(),
+            ]);
+        }
+
+        return $target;
     }
 
     /**
