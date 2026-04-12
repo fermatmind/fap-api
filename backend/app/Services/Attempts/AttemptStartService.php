@@ -23,13 +23,19 @@ use App\Services\Scale\ScaleIdentityWriteProjector;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
 use App\Support\OrgContext;
+use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class AttemptStartService
 {
+    private const START_REUSE_LOCK_TTL_SECONDS = 5;
+
+    private const START_REUSE_LOCK_WAIT_SECONDS = 2;
+
     public function __construct(
         private ScaleRegistry $registry,
         private ContentPacksIndex $packsIndex,
@@ -132,19 +138,6 @@ class AttemptStartService
 
         if ($packId === '' || $dirVersion === '') {
             throw new ApiProblemException(500, 'CONTENT_PACK_ERROR', 'scale pack not configured.');
-        }
-
-        if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
-            $retakePolicy = $this->resolveBigFiveRetakePolicy($dirVersion !== '' ? $dirVersion : 'v1');
-            $this->attemptRateLimitService->assertRetakeAllowed(
-                $orgId,
-                $scaleCode,
-                $ctx->userId(),
-                $anonId,
-                (int) ($retakePolicy['cooldown_hours'] ?? 24),
-                (int) ($retakePolicy['max_attempts_per_30_days'] ?? 3),
-                $resolvedFormCode
-            );
         }
 
         $questionCount = $this->resolveQuestionCount(
@@ -315,82 +308,334 @@ class AttemptStartService
         }
 
         $writeConnectionName = Attempt::onWriteConnection()->getModel()->getConnectionName();
+        $persisted = $this->persistStartedAttempt(
+            orgId: $orgId,
+            scaleCode: $scaleCode,
+            actorUserId: $ctx->userId(),
+            anonId: $anonId,
+            packId: $packId,
+            dirVersion: $dirVersion,
+            contentPackageVersion: $contentPackageVersion,
+            resolvedFormCode: $resolvedFormCode,
+            attemptPayload: $attemptPayload,
+            writeConnectionName: $writeConnectionName
+        );
 
-        $persisted = DB::connection($writeConnectionName)->transaction(function () use ($attemptPayload, $writeConnectionName): array {
-            $attempt = new Attempt;
+        /** @var Attempt $attempt */
+        $attempt = $persisted['attempt'];
+        $draft = is_array($persisted['draft'] ?? null) ? $persisted['draft'] : [];
+        $reused = (bool) ($persisted['reused'] ?? false);
 
-            // ✅ 保证 start / submit / report 都使用同一套写库连接
-            $attempt->setConnection($writeConnectionName);
+        if (! $reused) {
+            $this->eventRecorder()->record('test_start', $ctx->userId(), [
+                'scale_code' => $scaleCode,
+                'scale_code_v2' => $scaleCodeV2,
+                'scale_uid' => $scaleUid,
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+                'content_package_version' => $contentPackageVersion,
+                'form_code' => $resolvedFormCode,
+                'norm_version' => $resolvedNormVersion !== '' ? $resolvedNormVersion : null,
+                'attempt_id' => (string) $attempt->id,
+            ], [
+                'org_id' => $orgId,
+                'anon_id' => $anonId,
+                'attempt_id' => (string) $attempt->id,
+                'scale_code' => $scaleCode,
+                'scale_code_v2' => $scaleCodeV2,
+                'scale_uid' => $scaleUid,
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+                'form_code' => $resolvedFormCode,
+                'norm_version' => $resolvedNormVersion !== '' ? $resolvedNormVersion : null,
+                'channel' => $channel !== '' ? $channel : null,
+            ]);
 
-            // keep model casts/mutators for json columns
-            $attempt->forceFill($attemptPayload);
-            $attempt->saveOrFail();
+            if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
+                $this->bigFiveTelemetry()->recordAttemptStarted(
+                    $orgId,
+                    $ctx->userId(),
+                    $anonId,
+                    (string) $attempt->id,
+                    $locale,
+                    $region,
+                    $packId,
+                    $dirVersion
+                );
+            } elseif (strtoupper($scaleCode) === 'CLINICAL_COMBO_68') {
+                app(ClinicalComboTelemetry::class)->attemptStarted($attempt, [
+                    'variant' => 'free',
+                    'locked' => true,
+                ]);
+            } elseif (strtoupper($scaleCode) === 'SDS_20') {
+                app(Sds20Telemetry::class)->attemptStarted($attempt, [
+                    'variant' => 'free',
+                    'locked' => true,
+                ]);
+            }
+        } else {
+            Log::info('ATTEMPT_START_REUSED', [
+                'org_id' => $orgId,
+                'anon_id' => $anonId,
+                'user_id' => $ctx->userId(),
+                'attempt_id' => (string) $attempt->id,
+                'scale_code' => $scaleCode,
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+                'form_code' => $resolvedFormCode,
+            ]);
+        }
 
-            $draft = $this->progressService->createDraftForAttempt($attempt);
+        $responseCodes = $this->responseProjector()->project($scaleCode, $scaleCodeV2, $scaleUid);
 
-            if (! empty($draft['expires_at'])) {
-                $attempt->resume_expires_at = $draft['expires_at'];
-                $attempt->save();
+        return $this->buildStartResponse(
+            orgId: $orgId,
+            anonId: $anonId,
+            attempt: $attempt,
+            draft: $draft,
+            responseCodes: $responseCodes,
+            requestedScaleCode: $requestedScaleCode,
+            resolvedFormCode: $resolvedFormCode
+        );
+    }
+
+    /**
+     * @param  array<string,mixed>  $attemptPayload
+     * @return array{attempt:Attempt,draft:array<string,mixed>,reused:bool}
+     */
+    private function persistStartedAttempt(
+        int $orgId,
+        string $scaleCode,
+        ?int $actorUserId,
+        string $anonId,
+        string $packId,
+        string $dirVersion,
+        string $contentPackageVersion,
+        ?string $resolvedFormCode,
+        array $attemptPayload,
+        ?string $writeConnectionName,
+    ): array {
+        $runner = function () use (
+            $orgId,
+            $scaleCode,
+            $actorUserId,
+            $anonId,
+            $packId,
+            $dirVersion,
+            $contentPackageVersion,
+            $resolvedFormCode,
+            $attemptPayload,
+            $writeConnectionName
+        ): array {
+            if ($this->supportsLightweightAttemptReuse($scaleCode)) {
+                $reused = $this->findReusableAttempt(
+                    orgId: $orgId,
+                    scaleCode: $scaleCode,
+                    actorUserId: $actorUserId,
+                    anonId: $anonId,
+                    packId: $packId,
+                    dirVersion: $dirVersion,
+                    contentPackageVersion: $contentPackageVersion,
+                    resolvedFormCode: $resolvedFormCode,
+                    writeConnectionName: $writeConnectionName
+                );
+                if ($reused !== null) {
+                    return [
+                        'attempt' => $reused['attempt'],
+                        'draft' => $reused['draft'],
+                        'reused' => true,
+                    ];
+                }
+            }
+
+            if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
+                $retakePolicy = $this->resolveBigFiveRetakePolicy($dirVersion !== '' ? $dirVersion : 'v1');
+                $this->attemptRateLimitService->assertRetakeAllowed(
+                    $orgId,
+                    $scaleCode,
+                    $actorUserId,
+                    $anonId,
+                    (int) ($retakePolicy['cooldown_hours'] ?? 24),
+                    (int) ($retakePolicy['max_attempts_per_30_days'] ?? 3),
+                    $resolvedFormCode
+                );
+            }
+
+            return DB::connection($writeConnectionName)->transaction(function () use ($attemptPayload, $writeConnectionName): array {
+                $attempt = new Attempt;
+                $attempt->setConnection($writeConnectionName);
+                $attempt->forceFill($attemptPayload);
+                $attempt->saveOrFail();
+
+                $draft = $this->progressService->createDraftForAttempt($attempt);
+
+                if (! empty($draft['expires_at'])) {
+                    $attempt->resume_expires_at = $draft['expires_at'];
+                    $attempt->save();
+                }
+
+                return [
+                    'attempt' => $attempt,
+                    'draft' => $draft,
+                    'reused' => false,
+                ];
+            });
+        };
+
+        if (! $this->supportsLightweightAttemptReuse($scaleCode)) {
+            return $runner();
+        }
+
+        return $this->withStartReuseLock(
+            $orgId,
+            $actorUserId,
+            $anonId,
+            $scaleCode,
+            $packId,
+            $dirVersion,
+            $contentPackageVersion,
+            $resolvedFormCode,
+            $runner
+        );
+    }
+
+    /**
+     * @return array{attempt:Attempt,draft:array<string,mixed>}|null
+     */
+    private function findReusableAttempt(
+        int $orgId,
+        string $scaleCode,
+        ?int $actorUserId,
+        string $anonId,
+        string $packId,
+        string $dirVersion,
+        string $contentPackageVersion,
+        ?string $resolvedFormCode,
+        ?string $writeConnectionName,
+    ): ?array {
+        $now = now();
+        $query = Attempt::on($writeConnectionName)
+            ->where('org_id', $orgId)
+            ->where('scale_code', $scaleCode)
+            ->where('pack_id', $packId)
+            ->where('dir_version', $dirVersion)
+            ->whereNull('submitted_at')
+            ->whereNotNull('resume_expires_at')
+            ->where('resume_expires_at', '>', $now)
+            ->whereExists(function ($drafts) use ($now) {
+                $drafts->select(DB::raw(1))
+                    ->from('attempt_drafts')
+                    ->whereColumn('attempt_drafts.attempt_id', 'attempts.id')
+                    ->whereNotNull('attempt_drafts.expires_at')
+                    ->where('attempt_drafts.expires_at', '>', $now);
+            })
+            ->orderByDesc('started_at')
+            ->limit(8);
+
+        if ($actorUserId !== null) {
+            $query->where('user_id', $actorUserId);
+        } else {
+            $query->whereNull('user_id')->where('anon_id', $anonId);
+        }
+
+        if ($contentPackageVersion !== '') {
+            $query->where('content_package_version', $contentPackageVersion);
+        } else {
+            $query->whereNull('content_package_version');
+        }
+
+        /** @var \Illuminate\Support\Collection<int,Attempt> $candidates */
+        $candidates = $query->get()->filter(function (Attempt $attempt) use ($resolvedFormCode): bool {
+            return $this->normalizeFormCode(data_get($attempt->answers_summary_json, 'meta.form_code'))
+                === $this->normalizeFormCode($resolvedFormCode);
+        })->values();
+        foreach ($candidates as $attempt) {
+            $draft = $this->progressService->reissueDraftForAttempt($attempt);
+            if ($draft === null) {
+                continue;
             }
 
             return [
                 'attempt' => $attempt,
                 'draft' => $draft,
             ];
-        });
-
-        /** @var Attempt $attempt */
-        $attempt = $persisted['attempt'];
-        $draft = is_array($persisted['draft'] ?? null) ? $persisted['draft'] : [];
-
-        $this->eventRecorder()->record('test_start', $ctx->userId(), [
-            'scale_code' => $scaleCode,
-            'scale_code_v2' => $scaleCodeV2,
-            'scale_uid' => $scaleUid,
-            'pack_id' => $packId,
-            'dir_version' => $dirVersion,
-            'content_package_version' => $contentPackageVersion,
-            'form_code' => $resolvedFormCode,
-            'norm_version' => $resolvedNormVersion !== '' ? $resolvedNormVersion : null,
-            'attempt_id' => (string) $attempt->id,
-        ], [
-            'org_id' => $orgId,
-            'anon_id' => $anonId,
-            'attempt_id' => (string) $attempt->id,
-            'scale_code' => $scaleCode,
-            'scale_code_v2' => $scaleCodeV2,
-            'scale_uid' => $scaleUid,
-            'pack_id' => $packId,
-            'dir_version' => $dirVersion,
-            'form_code' => $resolvedFormCode,
-            'norm_version' => $resolvedNormVersion !== '' ? $resolvedNormVersion : null,
-            'channel' => $channel !== '' ? $channel : null,
-        ]);
-
-        if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
-            $this->bigFiveTelemetry()->recordAttemptStarted(
-                $orgId,
-                $ctx->userId(),
-                $anonId,
-                (string) $attempt->id,
-                $locale,
-                $region,
-                $packId,
-                $dirVersion
-            );
-        } elseif (strtoupper($scaleCode) === 'CLINICAL_COMBO_68') {
-            app(ClinicalComboTelemetry::class)->attemptStarted($attempt, [
-                'variant' => 'free',
-                'locked' => true,
-            ]);
-        } elseif (strtoupper($scaleCode) === 'SDS_20') {
-            app(Sds20Telemetry::class)->attemptStarted($attempt, [
-                'variant' => 'free',
-                'locked' => true,
-            ]);
         }
 
-        $responseCodes = $this->responseProjector()->project($scaleCode, $scaleCodeV2, $scaleUid);
+        return null;
+    }
+
+    private function supportsLightweightAttemptReuse(string $scaleCode): bool
+    {
+        return in_array(strtoupper($scaleCode), ['MBTI', 'BIG5_OCEAN'], true);
+    }
+
+    private function normalizeFormCode(?string $formCode): string
+    {
+        return strtolower(trim((string) $formCode));
+    }
+
+    /**
+     * @param  callable():array{attempt:Attempt,draft:array<string,mixed>,reused:bool}  $callback
+     * @return array{attempt:Attempt,draft:array<string,mixed>,reused:bool}
+     */
+    private function withStartReuseLock(
+        int $orgId,
+        ?int $actorUserId,
+        string $anonId,
+        string $scaleCode,
+        string $packId,
+        string $dirVersion,
+        string $contentPackageVersion,
+        ?string $resolvedFormCode,
+        callable $callback,
+    ): array {
+        $actorKey = $actorUserId !== null ? 'user:'.$actorUserId : 'anon:'.$anonId;
+        $fingerprint = implode('|', [
+            $orgId,
+            $actorKey,
+            strtoupper($scaleCode),
+            $this->normalizeFormCode($resolvedFormCode),
+            $packId,
+            $dirVersion,
+            $contentPackageVersion,
+        ]);
+        $lockKey = 'attempt_start:'.sha1($fingerprint);
+
+        try {
+            return Cache::lock($lockKey, self::START_REUSE_LOCK_TTL_SECONDS)
+                ->block(self::START_REUSE_LOCK_WAIT_SECONDS, $callback);
+        } catch (LockTimeoutException $e) {
+            Log::warning('ATTEMPT_START_REUSE_LOCK_TIMEOUT', [
+                'org_id' => $orgId,
+                'actor_key' => $actorKey,
+                'scale_code' => $scaleCode,
+                'form_code' => $resolvedFormCode,
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+            ]);
+
+            return $callback();
+        }
+    }
+
+    /**
+     * @param  array<string,string|null>  $responseCodes
+     * @param  array<string,mixed>  $draft
+     * @return array<string,mixed>
+     */
+    private function buildStartResponse(
+        int $orgId,
+        string $anonId,
+        Attempt $attempt,
+        array $draft,
+        array $responseCodes,
+        string $requestedScaleCode,
+        ?string $resolvedFormCode,
+    ): array {
+        $resumeExpiresAt = $draft['expires_at'] ?? null;
+        if ($resumeExpiresAt instanceof \DateTimeInterface) {
+            $resumeExpiresAt = $resumeExpiresAt->format(\DateTimeInterface::ATOM);
+        }
 
         return [
             'ok' => true,
@@ -403,18 +648,20 @@ class AttemptStartService
             'scale_code_v2' => $responseCodes['scale_code_v2'],
             'scale_uid' => $responseCodes['scale_uid'],
             'requested_scale_code' => $requestedScaleCode,
-            'resolved_from_alias' => $requestedScaleCode !== $scaleCode,
-            'pack_id' => $packId,
-            'dir_version' => $dirVersion,
-            'content_package_version' => $contentPackageVersion,
-            'form_code' => $resolvedFormCode,
-            'scoring_spec_version' => $resolvedScoringSpecVersion !== '' ? $resolvedScoringSpecVersion : null,
-            'norm_version' => $resolvedNormVersion !== '' ? $resolvedNormVersion : null,
-            'region' => $region,
-            'locale' => $locale,
-            'question_count' => $questionCount,
+            'resolved_from_alias' => $requestedScaleCode !== (string) ($attempt->scale_code ?? ''),
+            'pack_id' => (string) ($attempt->pack_id ?? ''),
+            'dir_version' => (string) ($attempt->dir_version ?? ''),
+            'content_package_version' => (string) ($attempt->content_package_version ?? ''),
+            'form_code' => $this->normalizeFormCode(data_get($attempt->answers_summary_json, 'meta.form_code')) !== ''
+                ? data_get($attempt->answers_summary_json, 'meta.form_code')
+                : $resolvedFormCode,
+            'scoring_spec_version' => ($attempt->scoring_spec_version ?? null) !== '' ? $attempt->scoring_spec_version : null,
+            'norm_version' => ($attempt->norm_version ?? null) !== '' ? $attempt->norm_version : null,
+            'region' => (string) ($attempt->region ?? ''),
+            'locale' => (string) ($attempt->locale ?? ''),
+            'question_count' => (int) ($attempt->question_count ?? 0),
             'resume_token' => (string) ($draft['token'] ?? ''),
-            'resume_expires_at' => ! empty($draft['expires_at']) ? $draft['expires_at']->toISOString() : null,
+            'resume_expires_at' => $resumeExpiresAt,
         ];
     }
 
