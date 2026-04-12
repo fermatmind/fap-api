@@ -403,6 +403,30 @@ task('queue:reload-workers', function () {
     throw new \RuntimeException('unsupported queue_manager [' . $manager . ']');
 });
 
+function deploySharedPath(string $base, string $relative): string
+{
+    return rtrim($base, '/').'/'.ltrim($relative, '/');
+}
+
+function ensureOwnedWritableTree(string $path, string $owner = 'ubuntu', string $group = 'www-data'): void
+{
+    $quotedPath = escapeshellarg($path);
+
+    run("sudo -n /usr/bin/mkdir -p {$quotedPath}");
+    run("sudo -n /usr/bin/chown -R {$owner}:{$group} {$quotedPath}");
+    run("sudo -n /usr/bin/find {$quotedPath} -type d -exec chmod 2775 {} \\;");
+    run("sudo -n /usr/bin/find {$quotedPath} -type f -exec chmod 664 {} \\;");
+}
+
+function ensureOwnedWritableDir(string $path, string $owner = 'ubuntu', string $group = 'www-data'): void
+{
+    $quotedPath = escapeshellarg($path);
+
+    run("sudo -n /usr/bin/mkdir -p {$quotedPath}");
+    run("sudo -n /usr/bin/chown {$owner}:{$group} {$quotedPath}");
+    run("sudo -n /usr/bin/chmod 2775 {$quotedPath}");
+}
+
 /**
  * ======================================================
  * 固化权限修复（关键）
@@ -410,25 +434,33 @@ task('queue:reload-workers', function () {
  */
 task('ensure:shared-perms', function () {
     $base = get('deploy_path');
+    $owner = currentHost()->getRemoteUser() ?: 'ubuntu';
 
-    run("sudo -n /usr/bin/chown -R ubuntu:www-data {$base}/shared/backend/storage");
-    run("sudo -n /usr/bin/chown -R ubuntu:www-data {$base}/shared/content_packages");
+    // Limit deploy-time permission repair to the runtime/shared dirs the release
+    // actively needs. app/private/artifacts is governed by the storage lifecycle
+    // control plane and may contain historical evidence trees that should not be
+    // rewritten on every deploy.
+    $sharedWritableDirs = [
+        'shared/backend/storage/framework/cache',
+        'shared/backend/storage/framework/sessions',
+        'shared/backend/storage/framework/views',
+        'shared/backend/storage/logs',
+        'shared/backend/storage/app/content-packs',
+        'shared/backend/storage/app/private/packs_v2_materialized',
+    ];
 
-    run("find {$base}/shared/backend/storage -type d -exec chmod 2775 {} \\;");
-    run("find {$base}/shared/backend/storage -type f -exec chmod 664 {} \\;");
+    foreach ($sharedWritableDirs as $relativePath) {
+        ensureOwnedWritableTree(deploySharedPath($base, $relativePath), $owner, 'www-data');
+    }
 
-    run("find {$base}/shared/content_packages -type d -exec chmod 2775 {} \\;");
-    run("find {$base}/shared/content_packages -type f -exec chmod 664 {} \\;");
+    ensureOwnedWritableTree(deploySharedPath($base, 'shared/content_packages'), $owner, 'www-data');
 });
 
 task('ensure:release-runtime-perms', function () {
     $owner = currentHost()->getRemoteUser() ?: 'ubuntu';
     $cacheDir = '{{release_path}}/backend/bootstrap/cache';
 
-    run("mkdir -p {$cacheDir}");
-    run("sudo -n /usr/bin/chown -R {$owner}:www-data {$cacheDir}");
-    run("find {$cacheDir} -type d -exec chmod 2775 {} \\;");
-    run("find {$cacheDir} -type f -exec chmod 664 {} \\;");
+    ensureOwnedWritableTree($cacheDir, $owner, 'www-data');
 });
 
 /**
@@ -438,15 +470,14 @@ task('ensure:release-runtime-perms', function () {
  */
 task('ensure:healthz-deps', function () {
     $base = get('deploy_path') . '/shared/backend/storage';
+    $owner = currentHost()->getRemoteUser() ?: 'ubuntu';
 
-    run("mkdir -p {$base}/app/content-packs");
-    run("chmod 2775 {$base}/app/content-packs");
-
-    run("mkdir -p {$base}/app/private/packs_v2_materialized");
-    run("chmod 2775 {$base}/app/private/packs_v2_materialized");
-
-    run("mkdir -p {$base}/framework/cache {$base}/framework/sessions {$base}/framework/views {$base}/logs");
-    run("chmod 2775 {$base}/framework/cache {$base}/framework/sessions {$base}/framework/views {$base}/logs");
+    ensureOwnedWritableDir("{$base}/app/content-packs", $owner, 'www-data');
+    ensureOwnedWritableDir("{$base}/app/private/packs_v2_materialized", $owner, 'www-data');
+    ensureOwnedWritableDir("{$base}/framework/cache", $owner, 'www-data');
+    ensureOwnedWritableDir("{$base}/framework/sessions", $owner, 'www-data');
+    ensureOwnedWritableDir("{$base}/framework/views", $owner, 'www-data');
+    ensureOwnedWritableDir("{$base}/logs", $owner, 'www-data');
 });
 
 /**
