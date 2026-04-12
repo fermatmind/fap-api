@@ -10,6 +10,7 @@ use App\Models\CareerImportRun;
 use App\Models\ContextSnapshot;
 use App\Models\Occupation;
 use App\Models\ProfileProjection;
+use App\Models\TopicProfile;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -23,6 +24,7 @@ final class CareerFirstWaveRecommendationCompanionLinksApiTest extends TestCase
     public function test_it_exposes_a_first_wave_recommendation_companion_links_summary_for_supported_route_kinds_only(): void
     {
         $this->materializeCurrentFirstWaveFixture();
+        $this->createPublishedTopicProfile('mbti', 'mbti', 'en');
 
         $subjectMeta = [
             'type_code' => 'INTJ-A',
@@ -47,17 +49,18 @@ final class CareerFirstWaveRecommendationCompanionLinksApiTest extends TestCase
             ->assertJsonPath('subject_identity.type_code', 'INTJ-A')
             ->assertJsonPath('subject_identity.canonical_type_code', 'INTJ')
             ->assertJsonPath('subject_identity.public_route_slug', 'intj')
-            ->assertJsonPath('counts.total', 4)
+            ->assertJsonPath('counts.total', 5)
             ->assertJsonPath('counts.job_detail', 2)
             ->assertJsonPath('counts.family_hub', 1)
             ->assertJsonPath('counts.test_landing', 1)
+            ->assertJsonPath('counts.topic_detail', 1)
             ->assertJsonStructure([
                 'summary_kind',
                 'summary_version',
                 'scope',
                 'subject_kind',
                 'subject_identity' => ['type_code', 'canonical_type_code', 'public_route_slug', 'display_title'],
-                'counts' => ['total', 'job_detail', 'family_hub', 'test_landing'],
+                'counts' => ['total', 'job_detail', 'family_hub', 'test_landing', 'topic_detail'],
                 'companion_links' => [[
                     'route_kind',
                     'canonical_path',
@@ -71,22 +74,31 @@ final class CareerFirstWaveRecommendationCompanionLinksApiTest extends TestCase
         $links = collect($response->json('companion_links'));
 
         $this->assertSame(
-            ['career_family_hub', 'career_job_detail', 'test_landing'],
+            ['career_family_hub', 'career_job_detail', 'test_landing', 'topic_detail'],
             $links->pluck('route_kind')->unique()->sort()->values()->all()
         );
         $testLanding = $links->firstWhere('route_kind', 'test_landing');
+        $topicDetail = $links->firstWhere('route_kind', 'topic_detail');
         $this->assertSame('/en/tests/mbti-personality-test-16-personality-types', $testLanding['canonical_path']);
         $this->assertSame('recommendation_test_support', $testLanding['link_reason_code']);
         $this->assertSame('MBTI', $testLanding['scale_code']);
+        $this->assertSame('/en/topics/mbti', $topicDetail['canonical_path']);
+        $this->assertSame('recommendation_topic_support', $topicDetail['link_reason_code']);
+        $this->assertSame('mbti', $topicDetail['topic_code']);
         $this->assertArrayNotHasKey('source_of_truth', $testLanding);
         $this->assertArrayNotHasKey('is_active', $testLanding);
+        $this->assertArrayNotHasKey('source_of_truth', $topicDetail);
+        $this->assertArrayNotHasKey('is_active', $topicDetail);
         $this->assertFalse($links->contains(static fn (array $row): bool => str_starts_with((string) ($row['canonical_path'] ?? ''), '/career/recommendations')));
         $this->assertFalse($links->contains(static fn (array $row): bool => str_starts_with((string) ($row['canonical_path'] ?? ''), '/career/search')));
         $this->assertFalse($links->contains(static fn (array $row): bool => str_contains((string) ($row['canonical_path'] ?? ''), '/career/tests/')));
-        $this->assertFalse($links->contains(static fn (array $row): bool => str_contains((string) ($row['canonical_path'] ?? ''), '/topics/')));
         $this->assertFalse($links->contains(static fn (array $row): bool => str_ends_with((string) ($row['canonical_path'] ?? ''), '/take')));
         $this->assertFalse($links->contains(static fn (array $row): bool => ($row['canonical_slug'] ?? null) === 'backend-architect-cn-market'));
         $this->assertSame(1, $links->where('canonical_slug', 'accountants-and-auditors')->count());
+        $this->assertFalse($links->contains(static fn (array $row): bool => str_contains((string) ($row['canonical_path'] ?? ''), '/articles/')));
+        $this->assertFalse($links->contains(static fn (array $row): bool => str_contains((string) ($row['canonical_path'] ?? ''), '/guides/')));
+        $this->assertFalse($links->contains(static fn (array $row): bool => ($row['canonical_slug'] ?? null) === 'mbti-personality-test-16-personality-types'
+            && ($row['route_kind'] ?? null) === 'topic_detail'));
     }
 
     public function test_it_returns_not_found_for_unknown_recommendation_subjects(): void
@@ -102,6 +114,7 @@ final class CareerFirstWaveRecommendationCompanionLinksApiTest extends TestCase
     public function test_it_resolves_test_landing_paths_with_request_locale(): void
     {
         $this->materializeCurrentFirstWaveFixture();
+        $this->createPublishedTopicProfile('mbti', 'mbti', 'zh-CN');
 
         $subjectMeta = [
             'type_code' => 'INTJ-A',
@@ -124,6 +137,32 @@ final class CareerFirstWaveRecommendationCompanionLinksApiTest extends TestCase
         $this->assertSame('/zh/tests/mbti-personality-test-16-personality-types', $testLanding['canonical_path']);
     }
 
+    public function test_it_resolves_topic_detail_paths_with_request_locale(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+        $this->createPublishedTopicProfile('mbti', 'mbti', 'zh-CN');
+
+        $subjectMeta = [
+            'type_code' => 'INTJ-A',
+            'canonical_type_code' => 'INTJ',
+            'display_title' => 'INTJ-A Career Match',
+            'public_route_slug' => 'intj',
+        ];
+
+        CareerFoundationFixture::seedTrustLimitedCrossMarketChain();
+
+        $this->compileRecommendationSnapshotForOccupation('accountants-and-auditors', $subjectMeta, 1);
+
+        $response = $this->getJson('/api/v0.5/career/first-wave/recommendations/mbti/intj/companion-links?locale=zh-CN');
+
+        $response->assertOk();
+
+        $links = collect($response->json('companion_links'));
+        $topicDetail = $links->firstWhere('route_kind', 'topic_detail');
+
+        $this->assertSame('/zh/topics/mbti', $topicDetail['canonical_path']);
+    }
+
     private function materializeCurrentFirstWaveFixture(): void
     {
         $exitCode = Artisan::call('career:validate-first-wave-publish-ready', [
@@ -135,6 +174,22 @@ final class CareerFirstWaveRecommendationCompanionLinksApiTest extends TestCase
         ]);
 
         $this->assertSame(0, $exitCode, Artisan::output());
+    }
+
+    private function createPublishedTopicProfile(string $topicCode, string $slug, string $locale): void
+    {
+        TopicProfile::query()->create([
+            'org_id' => 0,
+            'topic_code' => $topicCode,
+            'slug' => $slug,
+            'locale' => $locale,
+            'title' => strtoupper($topicCode).' Topic',
+            'status' => TopicProfile::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => 'v1',
+        ]);
     }
 
     /**

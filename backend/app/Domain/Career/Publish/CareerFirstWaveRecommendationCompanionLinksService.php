@@ -125,24 +125,44 @@ final class CareerFirstWaveRecommendationCompanionLinksService
 
         $supportLinkage = $this->recommendationSupportLinkageBuilder->buildByType($normalizedType, $locale);
         $supportLinks = collect((array) data_get($supportLinkage, 'support_links', []))
-            ->filter(static fn (mixed $row): bool => is_array($row))
-            ->filter(static fn (array $row): bool => ($row['route_kind'] ?? null) === 'test_landing');
+            ->filter(static fn (mixed $row): bool => is_array($row));
 
         foreach ($supportLinks as $supportLink) {
             $canonicalPath = trim((string) ($supportLink['canonical_path'] ?? ''));
             $canonicalSlug = trim((string) ($supportLink['canonical_slug'] ?? ''));
+            $routeKind = trim((string) ($supportLink['route_kind'] ?? ''));
 
             if ($canonicalPath === '' || $canonicalSlug === '') {
                 continue;
             }
 
-            $companionLinks[] = [
-                'route_kind' => 'test_landing',
-                'canonical_path' => $canonicalPath,
-                'canonical_slug' => $canonicalSlug,
-                'link_reason_code' => 'recommendation_test_support',
-                'scale_code' => 'MBTI',
-            ];
+            if ($routeKind === 'test_landing') {
+                $companionLinks[] = [
+                    'route_kind' => 'test_landing',
+                    'canonical_path' => $canonicalPath,
+                    'canonical_slug' => $canonicalSlug,
+                    'link_reason_code' => 'recommendation_test_support',
+                    'scale_code' => 'MBTI',
+                ];
+
+                continue;
+            }
+
+            if ($routeKind === 'topic_detail') {
+                $topicCode = trim((string) data_get($supportLink, 'topic_code', $canonicalSlug));
+
+                if ($topicCode === '') {
+                    $topicCode = $canonicalSlug;
+                }
+
+                $companionLinks[] = [
+                    'route_kind' => 'topic_detail',
+                    'canonical_path' => $canonicalPath,
+                    'canonical_slug' => $canonicalSlug,
+                    'link_reason_code' => 'recommendation_topic_support',
+                    'topic_code' => $topicCode,
+                ];
+            }
         }
 
         $dedupedLinks = collect($companionLinks)
@@ -160,6 +180,7 @@ final class CareerFirstWaveRecommendationCompanionLinksService
             'job_detail' => count(array_filter($dedupedLinks, static fn (array $row): bool => ($row['route_kind'] ?? null) === 'career_job_detail')),
             'family_hub' => count(array_filter($dedupedLinks, static fn (array $row): bool => ($row['route_kind'] ?? null) === 'career_family_hub')),
             'test_landing' => count(array_filter($dedupedLinks, static fn (array $row): bool => ($row['route_kind'] ?? null) === 'test_landing')),
+            'topic_detail' => count(array_filter($dedupedLinks, static fn (array $row): bool => ($row['route_kind'] ?? null) === 'topic_detail')),
         ];
 
         return new CareerFirstWaveRecommendationCompanionLinksSummary(

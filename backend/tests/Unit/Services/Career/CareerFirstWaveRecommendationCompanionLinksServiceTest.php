@@ -10,6 +10,7 @@ use App\Models\CareerImportRun;
 use App\Models\ContextSnapshot;
 use App\Models\Occupation;
 use App\Models\ProfileProjection;
+use App\Models\TopicProfile;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -23,6 +24,7 @@ final class CareerFirstWaveRecommendationCompanionLinksServiceTest extends TestC
     public function test_it_builds_machine_safe_companion_links_for_a_first_wave_recommendation_subject(): void
     {
         $this->materializeCurrentFirstWaveFixture();
+        $this->createPublishedTopicProfile('mbti', 'mbti', 'en');
 
         $subjectMeta = [
             'type_code' => 'INTJ-A',
@@ -47,14 +49,15 @@ final class CareerFirstWaveRecommendationCompanionLinksServiceTest extends TestC
         $this->assertSame('INTJ-A', data_get($summary, 'subject_identity.type_code'));
         $this->assertSame('INTJ', data_get($summary, 'subject_identity.canonical_type_code'));
         $this->assertSame('intj', data_get($summary, 'subject_identity.public_route_slug'));
-        $this->assertSame(4, data_get($summary, 'counts.total'));
+        $this->assertSame(5, data_get($summary, 'counts.total'));
         $this->assertSame(2, data_get($summary, 'counts.job_detail'));
         $this->assertSame(1, data_get($summary, 'counts.family_hub'));
         $this->assertSame(1, data_get($summary, 'counts.test_landing'));
+        $this->assertSame(1, data_get($summary, 'counts.topic_detail'));
 
         $links = collect($summary['companion_links']);
         $this->assertSame(
-            ['career_family_hub', 'career_job_detail', 'test_landing'],
+            ['career_family_hub', 'career_job_detail', 'test_landing', 'topic_detail'],
             $links->pluck('route_kind')->unique()->sort()->values()->all()
         );
 
@@ -62,6 +65,7 @@ final class CareerFirstWaveRecommendationCompanionLinksServiceTest extends TestC
         $familyLink = $links->firstWhere('route_kind', 'career_family_hub');
         $jobLinks = $links->where('route_kind', 'career_job_detail')->values();
         $testLanding = $links->firstWhere('route_kind', 'test_landing');
+        $topicDetail = $links->firstWhere('route_kind', 'topic_detail');
 
         $this->assertSame('target_job_detail_companion', $targetJob['link_reason_code']);
         $this->assertSame('/career/jobs/accountants-and-auditors', $targetJob['canonical_path']);
@@ -70,8 +74,13 @@ final class CareerFirstWaveRecommendationCompanionLinksServiceTest extends TestC
         $this->assertSame('/en/tests/mbti-personality-test-16-personality-types', $testLanding['canonical_path']);
         $this->assertSame('recommendation_test_support', $testLanding['link_reason_code']);
         $this->assertSame('MBTI', $testLanding['scale_code']);
+        $this->assertSame('/en/topics/mbti', $topicDetail['canonical_path']);
+        $this->assertSame('recommendation_topic_support', $topicDetail['link_reason_code']);
+        $this->assertSame('mbti', $topicDetail['topic_code']);
         $this->assertArrayNotHasKey('source_of_truth', $testLanding);
         $this->assertArrayNotHasKey('is_active', $testLanding);
+        $this->assertArrayNotHasKey('source_of_truth', $topicDetail);
+        $this->assertArrayNotHasKey('is_active', $topicDetail);
         $this->assertSame(
             ['accountants-and-auditors', 'human-resources-specialists'],
             $jobLinks->pluck('canonical_slug')->sort()->values()->all()
@@ -79,8 +88,37 @@ final class CareerFirstWaveRecommendationCompanionLinksServiceTest extends TestC
         $this->assertTrue($jobLinks->contains(static fn (array $row): bool => ($row['canonical_slug'] ?? null) === 'human-resources-specialists'
             && ($row['link_reason_code'] ?? null) === 'matched_job_detail_companion'));
         $this->assertFalse($links->contains(static fn (array $row): bool => ($row['canonical_slug'] ?? null) === 'backend-architect-cn-market'));
-        $this->assertFalse($links->contains(static fn (array $row): bool => ($row['route_kind'] ?? null) === 'topic_detail'));
         $this->assertSame(1, $jobLinks->where('canonical_slug', 'accountants-and-auditors')->count());
+    }
+
+    public function test_it_excludes_support_links_for_non_mbti_recommendation_subjects_while_preserving_career_companions(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+        $this->createPublishedTopicProfile('mbti', 'mbti', 'en');
+
+        $subjectMeta = [
+            'type_code' => 'DISC-A',
+            'canonical_type_code' => 'DISC',
+            'display_title' => 'DISC-A Career Match',
+            'public_route_slug' => 'disc',
+        ];
+
+        CareerFoundationFixture::seedTrustLimitedCrossMarketChain();
+
+        $this->compileRecommendationSnapshotForOccupation('accountants-and-auditors', $subjectMeta, 1);
+
+        $summary = app(CareerFirstWaveRecommendationCompanionLinksService::class)->buildByType('disc')?->toArray();
+
+        $this->assertIsArray($summary);
+        $this->assertSame(2, data_get($summary, 'counts.total'));
+        $this->assertSame(1, data_get($summary, 'counts.job_detail'));
+        $this->assertSame(1, data_get($summary, 'counts.family_hub'));
+        $this->assertSame(0, data_get($summary, 'counts.test_landing'));
+        $this->assertSame(0, data_get($summary, 'counts.topic_detail'));
+
+        $links = collect($summary['companion_links']);
+        $this->assertFalse($links->contains(static fn (array $row): bool => ($row['route_kind'] ?? null) === 'test_landing'));
+        $this->assertFalse($links->contains(static fn (array $row): bool => ($row['route_kind'] ?? null) === 'topic_detail'));
     }
 
     public function test_it_returns_null_for_unknown_or_unavailable_recommendation_subjects(): void
@@ -104,6 +142,22 @@ final class CareerFirstWaveRecommendationCompanionLinksServiceTest extends TestC
         ]);
 
         $this->assertSame(0, $exitCode, Artisan::output());
+    }
+
+    private function createPublishedTopicProfile(string $topicCode, string $slug, string $locale): void
+    {
+        TopicProfile::query()->create([
+            'org_id' => 0,
+            'topic_code' => $topicCode,
+            'slug' => $slug,
+            'locale' => $locale,
+            'title' => strtoupper($topicCode).' Topic',
+            'status' => TopicProfile::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+            'schema_version' => 'v1',
+        ]);
     }
 
     /**
