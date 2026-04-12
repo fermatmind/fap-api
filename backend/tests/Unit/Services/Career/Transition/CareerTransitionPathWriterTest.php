@@ -24,14 +24,19 @@ final class CareerTransitionPathWriterTest extends TestCase
     public function test_it_materializes_a_minimal_stable_upside_path_for_a_publish_ready_first_wave_snapshot(): void
     {
         $snapshot = $this->compiledFirstWaveSnapshot();
-        $this->mockReadinessRow($snapshot->occupation?->canonical_slug ?? '', 'publish_ready', true, 'indexable', 'approved');
+        $target = $this->createSameFamilyTarget($snapshot, 'backend-platform-engineer', 'Backend Platform Engineer');
+        $this->mockReadinessRows([
+            $this->readinessRow($snapshot->occupation?->canonical_slug ?? '', 'publish_ready', true, 'indexable', 'approved'),
+            $this->readinessRow($target->canonical_slug, 'publish_ready', true, 'indexable', 'approved'),
+        ]);
 
         $written = app(CareerTransitionPathWriter::class)->rewriteForSnapshot($snapshot);
 
         $this->assertSame(1, $written);
         $path = TransitionPath::query()->where('recommendation_snapshot_id', $snapshot->id)->sole();
         $this->assertSame($snapshot->occupation_id, $path->from_occupation_id);
-        $this->assertSame($snapshot->occupation_id, $path->to_occupation_id);
+        $this->assertSame($target->id, $path->to_occupation_id);
+        $this->assertNotSame($path->from_occupation_id, $path->to_occupation_id);
         $this->assertSame('stable_upside', $path->path_type);
         $this->assertSame([
             'steps' => TransitionPathPayload::allowedStepLabels(),
@@ -41,7 +46,11 @@ final class CareerTransitionPathWriterTest extends TestCase
     public function test_it_rewrites_stale_rows_for_the_same_snapshot_without_duplicates(): void
     {
         $snapshot = $this->compiledFirstWaveSnapshot();
-        $this->mockReadinessRow($snapshot->occupation?->canonical_slug ?? '', 'publish_ready', true, 'indexable', 'approved');
+        $target = $this->createSameFamilyTarget($snapshot, 'backend-site-reliability-engineer', 'Backend Site Reliability Engineer');
+        $this->mockReadinessRows([
+            $this->readinessRow($snapshot->occupation?->canonical_slug ?? '', 'publish_ready', true, 'indexable', 'approved'),
+            $this->readinessRow($target->canonical_slug, 'publish_ready', true, 'indexable', 'approved'),
+        ]);
 
         TransitionPath::query()->create([
             'recommendation_snapshot_id' => $snapshot->id,
@@ -57,6 +66,8 @@ final class CareerTransitionPathWriterTest extends TestCase
         $this->assertSame(1, TransitionPath::query()->where('recommendation_snapshot_id', $snapshot->id)->count());
         $path = TransitionPath::query()->where('recommendation_snapshot_id', $snapshot->id)->sole();
         $this->assertSame('stable_upside', $path->path_type);
+        $this->assertSame($target->id, $path->to_occupation_id);
+        $this->assertNotSame($path->from_occupation_id, $path->to_occupation_id);
         $this->assertSame([
             'steps' => TransitionPathPayload::allowedStepLabels(),
         ], $path->normalizedPathPayload()->toArray());
@@ -68,7 +79,11 @@ final class CareerTransitionPathWriterTest extends TestCase
         $payload = is_array($snapshot->snapshot_payload) ? $snapshot->snapshot_payload : [];
         $payload['claim_permissions']['allow_transition_recommendation'] = false;
         $snapshot->forceFill(['snapshot_payload' => $payload])->save();
-        $this->mockReadinessRow($snapshot->occupation?->canonical_slug ?? '', 'publish_ready', true, 'indexable', 'approved');
+        $target = $this->createSameFamilyTarget($snapshot, 'backend-analytics-engineer', 'Backend Analytics Engineer');
+        $this->mockReadinessRows([
+            $this->readinessRow($snapshot->occupation?->canonical_slug ?? '', 'publish_ready', true, 'indexable', 'approved'),
+            $this->readinessRow($target->canonical_slug, 'publish_ready', true, 'indexable', 'approved'),
+        ]);
 
         $written = app(CareerTransitionPathWriter::class)->rewriteForSnapshot($snapshot);
 
@@ -76,10 +91,22 @@ final class CareerTransitionPathWriterTest extends TestCase
         $this->assertSame(0, TransitionPath::query()->where('recommendation_snapshot_id', $snapshot->id)->count());
     }
 
-    public function test_it_rejects_non_publish_ready_targets(): void
+    public function test_it_writes_zero_rows_when_no_safe_non_self_target_exists(): void
     {
         $snapshot = $this->compiledFirstWaveSnapshot();
-        $this->mockReadinessRow($snapshot->occupation?->canonical_slug ?? '', 'partial_raw', false, 'noindex', 'pending');
+        $target = $this->createSameFamilyTarget($snapshot, 'backend-ops-engineer', 'Backend Ops Engineer');
+        $this->mockReadinessRows([
+            $this->readinessRow($snapshot->occupation?->canonical_slug ?? '', 'publish_ready', true, 'indexable', 'approved'),
+            $this->readinessRow($target->canonical_slug, 'partial_raw', false, 'noindex', 'pending'),
+        ]);
+
+        TransitionPath::query()->create([
+            'recommendation_snapshot_id' => $snapshot->id,
+            'from_occupation_id' => $snapshot->occupation_id,
+            'to_occupation_id' => $snapshot->occupation_id,
+            'path_type' => 'stable_upside',
+            'path_payload' => ['steps' => ['legacy self row']],
+        ]);
 
         $written = app(CareerTransitionPathWriter::class)->rewriteForSnapshot($snapshot);
 
@@ -90,7 +117,11 @@ final class CareerTransitionPathWriterTest extends TestCase
     public function test_it_rejects_blocked_targets_including_override_eligible_and_not_safely_remediable(): void
     {
         $overrideSnapshot = $this->compiledFirstWaveSnapshot(['slug' => 'software-developers']);
-        $this->mockReadinessRow($overrideSnapshot->occupation?->canonical_slug ?? '', 'blocked_override_eligible', false, 'noindex', 'approved');
+        $overrideTarget = $this->createSameFamilyTarget($overrideSnapshot, 'software-developers-staff', 'Software Developers Staff');
+        $this->mockReadinessRows([
+            $this->readinessRow($overrideSnapshot->occupation?->canonical_slug ?? '', 'publish_ready', true, 'indexable', 'approved'),
+            $this->readinessRow($overrideTarget->canonical_slug, 'blocked_override_eligible', false, 'noindex', 'approved'),
+        ]);
 
         $overrideWritten = app(CareerTransitionPathWriter::class)->rewriteForSnapshot($overrideSnapshot);
 
@@ -98,12 +129,40 @@ final class CareerTransitionPathWriterTest extends TestCase
         $this->assertSame(0, TransitionPath::query()->where('recommendation_snapshot_id', $overrideSnapshot->id)->count());
 
         $blockedSnapshot = $this->compiledFirstWaveSnapshot(['slug' => 'marketing-managers']);
-        $this->mockReadinessRow($blockedSnapshot->occupation?->canonical_slug ?? '', 'blocked_not_safely_remediable', false, 'noindex', 'pending');
+        $blockedTarget = $this->createSameFamilyTarget($blockedSnapshot, 'marketing-managers-staff', 'Marketing Managers Staff');
+        $this->mockReadinessRows([
+            $this->readinessRow($blockedSnapshot->occupation?->canonical_slug ?? '', 'publish_ready', true, 'indexable', 'approved'),
+            $this->readinessRow($blockedTarget->canonical_slug, 'blocked_not_safely_remediable', false, 'noindex', 'pending'),
+        ]);
 
         $blockedWritten = app(CareerTransitionPathWriter::class)->rewriteForSnapshot($blockedSnapshot);
 
         $this->assertSame(0, $blockedWritten);
         $this->assertSame(0, TransitionPath::query()->where('recommendation_snapshot_id', $blockedSnapshot->id)->count());
+    }
+
+    public function test_it_selects_the_same_non_self_target_deterministically_on_rewrite(): void
+    {
+        $snapshot = $this->compiledFirstWaveSnapshot(['slug' => 'backend-architect-deterministic']);
+        $alpha = $this->createSameFamilyTarget($snapshot, 'backend-alpha', 'Backend Alpha');
+        $omega = $this->createSameFamilyTarget($snapshot, 'backend-omega', 'Backend Omega');
+
+        $this->mockReadinessRows([
+            $this->readinessRow($snapshot->occupation?->canonical_slug ?? '', 'publish_ready', true, 'indexable', 'approved'),
+            $this->readinessRow($alpha->canonical_slug, 'publish_ready', true, 'indexable', 'approved', 'exact'),
+            $this->readinessRow($omega->canonical_slug, 'publish_ready', true, 'indexable', 'approved', 'trust_inheritance'),
+        ]);
+
+        $firstWritten = app(CareerTransitionPathWriter::class)->rewriteForSnapshot($snapshot);
+        $firstTarget = TransitionPath::query()->where('recommendation_snapshot_id', $snapshot->id)->sole()->to_occupation_id;
+
+        $secondWritten = app(CareerTransitionPathWriter::class)->rewriteForSnapshot($snapshot);
+        $secondTarget = TransitionPath::query()->where('recommendation_snapshot_id', $snapshot->id)->sole()->to_occupation_id;
+
+        $this->assertSame(1, $firstWritten);
+        $this->assertSame(1, $secondWritten);
+        $this->assertSame($alpha->id, $firstTarget);
+        $this->assertSame($alpha->id, $secondTarget);
     }
 
     /**
@@ -151,33 +210,72 @@ final class CareerTransitionPathWriterTest extends TestCase
         ]);
     }
 
-    private function mockReadinessRow(
+    private function createSameFamilyTarget(RecommendationSnapshot $snapshot, string $slug, string $title): \App\Models\Occupation
+    {
+        $source = $snapshot->occupation()->firstOrFail();
+
+        return \App\Models\Occupation::query()->create([
+            'family_id' => $source->family_id,
+            'parent_id' => null,
+            'canonical_slug' => $slug,
+            'entity_level' => 'market_child',
+            'truth_market' => $source->truth_market,
+            'display_market' => $source->display_market,
+            'crosswalk_mode' => 'exact',
+            'canonical_title_en' => $title,
+            'canonical_title_zh' => $title,
+            'search_h1_zh' => $title,
+            'structural_stability' => $source->structural_stability,
+            'task_prototype_signature' => $source->task_prototype_signature,
+            'market_semantics_gap' => $source->market_semantics_gap,
+            'regulatory_divergence' => $source->regulatory_divergence,
+            'toolchain_divergence' => $source->toolchain_divergence,
+            'skill_gap_threshold' => $source->skill_gap_threshold,
+            'trust_inheritance_scope' => $source->trust_inheritance_scope,
+        ]);
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $rows
+     */
+    private function mockReadinessRows(array $rows): void
+    {
+        $lookup = Mockery::mock(CareerTransitionPreviewReadinessLookup::class);
+        foreach ($rows as $row) {
+            $lookup->shouldReceive('bySlug')
+                ->with((string) ($row['canonical_slug'] ?? ''))
+                ->andReturn($row);
+        }
+        $lookup->shouldReceive('bySlug')->andReturn(null);
+
+        $this->app->instance(CareerTransitionPreviewReadinessLookup::class, $lookup);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function readinessRow(
         string $canonicalSlug,
         string $status,
         bool $indexEligible,
         string $indexState,
         string $reviewerStatus,
-    ): void {
-        $lookup = Mockery::mock(CareerTransitionPreviewReadinessLookup::class);
-        $lookup->shouldReceive('bySlug')
-            ->with($canonicalSlug)
-            ->andReturn([
-                'occupation_uuid' => 'uuid-'.$canonicalSlug,
-                'canonical_slug' => $canonicalSlug,
-                'canonical_title_en' => $canonicalSlug,
-                'status' => $status,
-                'blocker_type' => null,
-                'remediation_class' => null,
-                'authority_override_supplied' => false,
-                'review_required' => false,
-                'crosswalk_mode' => 'exact',
-                'reviewer_status' => $reviewerStatus,
-                'index_state' => $indexState,
-                'index_eligible' => $indexEligible,
-                'reason_codes' => [$status],
-            ]);
-        $lookup->shouldReceive('bySlug')->andReturn(null);
-
-        $this->app->instance(CareerTransitionPreviewReadinessLookup::class, $lookup);
+        string $crosswalkMode = 'exact',
+    ): array {
+        return [
+            'occupation_uuid' => 'uuid-'.$canonicalSlug,
+            'canonical_slug' => $canonicalSlug,
+            'canonical_title_en' => $canonicalSlug,
+            'status' => $status,
+            'blocker_type' => null,
+            'remediation_class' => null,
+            'authority_override_supplied' => false,
+            'review_required' => false,
+            'crosswalk_mode' => $crosswalkMode,
+            'reviewer_status' => $reviewerStatus,
+            'index_state' => $indexState,
+            'index_eligible' => $indexEligible,
+            'reason_codes' => [$status],
+        ];
     }
 }
