@@ -69,9 +69,15 @@ final class CareerTransitionPreviewApiTest extends TestCase
             ->assertJsonPath('target_job.canonical_slug', 'registered-nurses')
             ->assertJsonPath('trust_summary.allow_transition_recommendation', true)
             ->assertJsonPath('seo_contract.index_eligible', true)
+            ->assertJsonPath('delta.entry_education_delta.source_value', "Bachelor's degree")
+            ->assertJsonPath('delta.entry_education_delta.target_value', "Master's degree")
+            ->assertJsonPath('delta.entry_education_delta.direction', TransitionPathPayload::DELTA_DIRECTION_HIGHER)
             ->assertJsonStructure([
                 'path_type',
                 'steps',
+                'delta' => [
+                    'entry_education_delta' => ['source_value', 'target_value', 'direction'],
+                ],
                 'target_job' => ['occupation_uuid', 'canonical_slug', 'title'],
                 'score_summary' => [
                     'mobility_score' => ['value', 'integrity_state', 'band'],
@@ -85,13 +91,16 @@ final class CareerTransitionPreviewApiTest extends TestCase
             ->assertJsonMissingPath('what_is_lost')
             ->assertJsonMissingPath('bridge_steps_90d')
             ->assertJsonMissingPath('rationale_codes')
-            ->assertJsonMissingPath('tradeoff_codes')
-            ->assertJsonMissingPath('delta');
+            ->assertJsonMissingPath('tradeoff_codes');
 
         /** @var array<string, mixed> $payload */
         $payload = $response->json();
         $this->assertSame(CareerTransitionPreviewBundle::publicTopLevelKeys(), array_keys($payload));
         $this->assertSame(TransitionPathPayload::allowedStepLabels(), $payload['steps']);
+        $this->assertContains(
+            data_get($payload, 'delta.entry_education_delta.direction'),
+            TransitionPathPayload::allowedDeltaDirections(),
+        );
     }
 
     public function test_it_returns_not_found_when_no_safe_preview_exists(): void

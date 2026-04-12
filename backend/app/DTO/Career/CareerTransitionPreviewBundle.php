@@ -18,6 +18,7 @@ final class CareerTransitionPreviewBundle
         'bundle_version',
         'path_type',
         'steps',
+        'delta',
         'target_job',
         'score_summary',
         'trust_summary',
@@ -32,10 +33,12 @@ final class CareerTransitionPreviewBundle
      * @param  array<string, mixed>  $seoContract
      * @param  array<string, mixed>  $provenanceMeta
      * @param  list<string>|null  $steps
+     * @param  array<string, array{source_value:string,target_value:string,direction:string}>|null  $delta
      */
     public function __construct(
         public readonly string $pathType,
         public readonly ?array $steps,
+        public readonly ?array $delta,
         public readonly array $targetJob,
         public readonly array $scoreSummary,
         public readonly array $trustSummary,
@@ -53,6 +56,7 @@ final class CareerTransitionPreviewBundle
             'bundle_version' => self::BUNDLE_VERSION,
             'path_type' => $this->pathType,
             'steps' => $this->steps,
+            'delta' => $this->delta,
             'target_job' => $this->targetJob,
             'score_summary' => $this->scoreSummary,
             'trust_summary' => $this->trustSummary,
@@ -62,6 +66,10 @@ final class CareerTransitionPreviewBundle
 
         if ($payload['steps'] === null) {
             unset($payload['steps']);
+        }
+
+        if ($payload['delta'] === null) {
+            unset($payload['delta']);
         }
 
         /** @var array<string, mixed> $publicPayload */
