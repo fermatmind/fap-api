@@ -417,6 +417,33 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B27
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b27-career-first-wave-lifecycle-summary-read-model-api
+    base: main
+    depends_on: ["PR-B26"]
+    mode: execute
+    scope: >
+      Career first-wave lifecycle summary read-model + API.
+      Add a dedicated first-wave-scoped lifecycle summary endpoint that exposes
+      counts and per-occupation lifecycle rows from persisted B26 lifecycle truth
+      without changing existing public bundle shapes, frontend, schema, or scoring.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/DTO/Career/CareerFirstWaveLifecycleSummary.php app/Domain/Career/Publish/CareerFirstWaveLifecycleSummaryService.php app/Http/Resources/Career/CareerFirstWaveLifecycleSummaryResource.php app/Http/Controllers/API/V0_5/Career/CareerFirstWaveLifecycleController.php routes/api.php tests/Unit/Services/Career/CareerFirstWaveLifecycleSummaryServiceTest.php tests/Feature/Career/CareerFirstWaveLifecycleApiTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerFirstWaveLifecycleSummaryServiceTest.php tests/Feature/Career/CareerFirstWaveLifecycleApiTest.php tests/Feature/Career/FirstWaveReadinessApiTest.php tests/Feature/Career/CareerJobListApiTest.php tests/Feature/Career/CareerSearchApiTest.php tests/Feature/Career/CareerFamilyHubApiTest.php tests/Feature/Career/CareerAliasResolutionApiTest.php"
+      - "php artisan test tests/Feature/OpenApiDiffTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web

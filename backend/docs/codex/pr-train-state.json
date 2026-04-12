@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-12T00:49:00Z",
+  "updated_at": "2026-04-12T01:30:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -592,6 +592,40 @@
         ]
       },
       "failure_reason": "GitHub hygiene failed immediately again and the MBTI matrix job was skipped; local B26 verification passed and the failure pattern matches the current repository workflow-start issue rather than a locally reproducible regression.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B27": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_verified",
+      "branch": "codex/pr-b27-career-first-wave-lifecycle-summary-read-model-api",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/DTO/Career/CareerFirstWaveLifecycleSummary.php app/Domain/Career/Publish/CareerFirstWaveLifecycleSummaryService.php app/Http/Resources/Career/CareerFirstWaveLifecycleSummaryResource.php app/Http/Controllers/API/V0_5/Career/CareerFirstWaveLifecycleController.php routes/api.php tests/Unit/Services/Career/CareerFirstWaveLifecycleSummaryServiceTest.php tests/Feature/Career/CareerFirstWaveLifecycleApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerFirstWaveLifecycleSummaryServiceTest.php tests/Feature/Career/CareerFirstWaveLifecycleApiTest.php tests/Feature/Career/FirstWaveReadinessApiTest.php tests/Feature/Career/CareerJobListApiTest.php tests/Feature/Career/CareerSearchApiTest.php tests/Feature/Career/CareerFamilyHubApiTest.php tests/Feature/Career/CareerAliasResolutionApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/OpenApiDiffTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
