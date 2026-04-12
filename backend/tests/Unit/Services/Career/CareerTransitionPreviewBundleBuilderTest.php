@@ -47,7 +47,13 @@ final class CareerTransitionPreviewBundleBuilderTest extends TestCase
 
         $payload = app(CareerTransitionPreviewBundleBuilder::class)->buildByType('intj')?->toArray() ?? [];
 
-        $this->assertSame(CareerTransitionPreviewBundle::publicTopLevelKeys(), array_keys($payload));
+        $this->assertSame(
+            array_values(array_filter(
+                CareerTransitionPreviewBundle::publicTopLevelKeys(),
+                static fn (string $key): bool => $key !== 'delta'
+            )),
+            array_keys($payload)
+        );
         $this->assertSame('career_transition_preview', $payload['bundle_kind']);
         $this->assertSame('career.protocol.transition_preview.v1', $payload['bundle_version']);
         $this->assertSame('stable_upside', $payload['path_type']);
@@ -57,6 +63,7 @@ final class CareerTransitionPreviewBundleBuilderTest extends TestCase
         $this->assertSame(true, data_get($payload, 'seo_contract.index_eligible'));
         $this->assertSame($snapshot->id, data_get($payload, 'provenance_meta.recommendation_snapshot_id'));
         $this->assertNotNull(data_get($payload, 'score_summary.mobility_score.value'));
+        $this->assertNull(data_get($payload, 'delta'));
         $this->assertNull(data_get($payload, 'why_this_path'));
         $this->assertNull(data_get($payload, 'what_is_lost'));
         $this->assertNull(data_get($payload, 'bridge_steps_90d'));
@@ -142,7 +149,7 @@ final class CareerTransitionPreviewBundleBuilderTest extends TestCase
         $this->assertNull(app(CareerTransitionPreviewBundleBuilder::class)->buildByType('intj'));
     }
 
-    public function test_it_sanitizes_internal_path_payload_without_expanding_public_preview_fields(): void
+    public function test_it_exposes_only_allowlisted_delta_fields_without_expanding_other_public_preview_fields(): void
     {
         $snapshot = $this->compileRecommendationChain('transition-source-sanitized-payload');
         $target = $this->seedTargetOccupation('registered-nurses', 'Registered Nurses');
@@ -186,12 +193,60 @@ final class CareerTransitionPreviewBundleBuilderTest extends TestCase
         $this->assertSame($expectedKeys, array_keys($payload));
         $this->assertSame('stable_upside', $payload['path_type'] ?? null);
         $this->assertArrayNotHasKey('steps', $payload);
+        $this->assertSame([
+            'entry_education_delta' => [
+                'source_value' => "Bachelor's degree",
+                'target_value' => "Master's degree",
+                'direction' => 'higher',
+            ],
+        ], $payload['delta'] ?? null);
         $this->assertArrayNotHasKey('why_this_path', $payload);
         $this->assertArrayNotHasKey('what_is_lost', $payload);
         $this->assertArrayNotHasKey('bridge_steps_90d', $payload);
         $this->assertArrayNotHasKey('rationale_codes', $payload);
         $this->assertArrayNotHasKey('tradeoff_codes', $payload);
+    }
+
+    public function test_it_omits_delta_when_internal_truth_is_missing_or_unrankable(): void
+    {
+        $snapshot = $this->compileRecommendationChain('transition-source-thin-delta');
+        $target = $this->seedTargetOccupation('registered-nurses', 'Registered Nurses');
+        $this->mockReadinessSummary([
+            $this->readinessRow('registered-nurses', 'publish_ready', true, 'indexable', 'approved'),
+        ]);
+
+        TransitionPath::query()->create([
+            'recommendation_snapshot_id' => $snapshot->id,
+            'from_occupation_id' => $snapshot->occupation_id,
+            'to_occupation_id' => $target->id,
+            'path_type' => 'stable_upside',
+            'path_payload' => [
+                'delta' => [
+                    TransitionPathPayload::DELTA_ENTRY_EDUCATION => [
+                        'source_value' => '',
+                        'target_value' => "Master's degree",
+                        'direction' => TransitionPathPayload::DELTA_DIRECTION_HIGHER,
+                    ],
+                    TransitionPathPayload::DELTA_WORK_EXPERIENCE => [
+                        'source_value' => 'None',
+                        'target_value' => '5 years or more',
+                        'direction' => 'unsafe',
+                    ],
+                ],
+                'rationale_codes' => [
+                    TransitionPathPayload::RATIONALE_SAME_FAMILY_TARGET,
+                ],
+                'tradeoff_codes' => [
+                    TransitionPathPayload::TRADEOFF_HIGHER_WORK_EXPERIENCE_REQUIRED,
+                ],
+            ],
+        ]);
+
+        $payload = app(CareerTransitionPreviewBundleBuilder::class)->buildByType('intj')?->toArray() ?? [];
+
         $this->assertArrayNotHasKey('delta', $payload);
+        $this->assertArrayNotHasKey('rationale_codes', $payload);
+        $this->assertArrayNotHasKey('tradeoff_codes', $payload);
     }
 
     public function test_it_excludes_paths_with_invalid_non_array_payload_shape(): void

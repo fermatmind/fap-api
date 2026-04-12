@@ -23,9 +23,10 @@ final class CareerTransitionPreviewResource extends JsonResource
         /** @var CareerTransitionPreviewBundle $bundle */
         $bundle = $this->resource;
         $publicKeys = CareerTransitionPreviewBundle::publicTopLevelKeys();
+        $payload = $bundle->toArray();
 
         return array_intersect_key(
-            $bundle->toArray(),
+            $payload,
             array_flip($publicKeys),
         );
     }

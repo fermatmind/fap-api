@@ -118,6 +118,7 @@ final class CareerTransitionPreviewBundleBuilder
         $publicSteps = $normalizedPathPayload->steps === []
             ? null
             : array_values($normalizedPathPayload->steps);
+        $publicDelta = $this->publicDelta($normalizedPathPayload->delta);
 
         $scoreBundle = is_array($payload['score_bundle'] ?? null) ? $payload['score_bundle'] : [];
         $reasonCodes = is_array($claimPermissions['reason_codes'] ?? null) ? array_values($claimPermissions['reason_codes']) : [];
@@ -126,6 +127,7 @@ final class CareerTransitionPreviewBundleBuilder
         return new CareerTransitionPreviewBundle(
             pathType: $pathType->value,
             steps: $publicSteps,
+            delta: $publicDelta,
             targetJob: [
                 'occupation_uuid' => $targetOccupation->id,
                 'canonical_slug' => $targetOccupation->canonical_slug,
@@ -184,5 +186,43 @@ final class CareerTransitionPreviewBundleBuilder
     private function isPublicPathTypeAllowed(TransitionPathType $pathType): bool
     {
         return $pathType === TransitionPathType::StableUpside;
+    }
+
+    /**
+     * @param  array<string, array{source_value:string,target_value:string,direction:string}>  $delta
+     * @return array<string, array{source_value:string,target_value:string,direction:string}>|null
+     */
+    private function publicDelta(array $delta): ?array
+    {
+        if ($delta === []) {
+            return null;
+        }
+
+        $publicDelta = [];
+        foreach ($delta as $key => $value) {
+            if (! in_array($key, \App\Domain\Career\Transition\TransitionPathPayload::allowedDeltaKeys(), true)) {
+                continue;
+            }
+
+            $sourceValue = is_scalar($value['source_value'] ?? null) ? trim((string) $value['source_value']) : '';
+            $targetValue = is_scalar($value['target_value'] ?? null) ? trim((string) $value['target_value']) : '';
+            $direction = is_scalar($value['direction'] ?? null) ? trim((string) $value['direction']) : '';
+
+            if (
+                $sourceValue === ''
+                || $targetValue === ''
+                || ! in_array($direction, \App\Domain\Career\Transition\TransitionPathPayload::allowedDeltaDirections(), true)
+            ) {
+                continue;
+            }
+
+            $publicDelta[$key] = [
+                'source_value' => $sourceValue,
+                'target_value' => $targetValue,
+                'direction' => $direction,
+            ];
+        }
+
+        return $publicDelta === [] ? null : $publicDelta;
     }
 }
