@@ -9,6 +9,7 @@ final class CareerExplainabilitySummary
     /**
      * @param  array<string, mixed>  $subjectIdentity
      * @param  array<string, array<string, mixed>>  $scoreBundle
+     * @param  array<string, mixed>|null  $strainRadar
      * @param  array<string, mixed>  $warnings
      * @param  array<string, mixed>  $claimPermissions
      * @param  array<string, mixed>  $integritySummary
@@ -17,6 +18,7 @@ final class CareerExplainabilitySummary
         public readonly string $subjectKind,
         public readonly array $subjectIdentity,
         public readonly array $scoreBundle,
+        public readonly ?array $strainRadar,
         public readonly array $warnings,
         public readonly array $claimPermissions,
         public readonly array $integritySummary = [],
@@ -33,6 +35,7 @@ final class CareerExplainabilitySummary
             'subject_kind' => $this->subjectKind,
             'subject_identity' => $this->subjectIdentity,
             'score_bundle' => $this->scoreBundle,
+            'strain_radar' => $this->strainRadar,
             'warnings' => $this->warnings,
             'claim_permissions' => $this->claimPermissions,
             'integrity_summary' => $this->integritySummary,
