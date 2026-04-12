@@ -2379,6 +2379,23 @@
                 ]
             }
         },
+        "/api/v0.5/career/first-wave/launch-tier": {
+            "get": {
+                "operationId": "get_api_v0_5_career_first_wave_launch_tier",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerFirstWaveLaunchTierController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/career/first-wave/lifecycle": {
             "get": {
                 "operationId": "get_api_v0_5_career_first_wave_lifecycle",
