@@ -2481,6 +2481,23 @@
                 ]
             }
         },
+        "/api/v0.5/career/first-wave/recommendations/mbti/{type}/companion-links": {
+            "get": {
+                "operationId": "get_api_v0_5_career_first_wave_recommendations_mbti_type_companion_links",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerFirstWaveRecommendationCompanionLinksController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/career/first-wave/rollout-queue": {
             "get": {
                 "operationId": "get_api_v0_5_career_first_wave_rollout_queue",

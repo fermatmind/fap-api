@@ -38,6 +38,7 @@ use App\Http\Controllers\API\V0_5\Career\CareerFirstWaveLifecycleController;
 use App\Http\Controllers\API\V0_5\Career\CareerFirstWaveNextStepLinksController;
 use App\Http\Controllers\API\V0_5\Career\CareerFirstWaveOccupationCompanionLinksController;
 use App\Http\Controllers\API\V0_5\Career\CareerFirstWaveReadinessController;
+use App\Http\Controllers\API\V0_5\Career\CareerFirstWaveRecommendationCompanionLinksController;
 use App\Http\Controllers\API\V0_5\Career\CareerFirstWaveRolloutQueueController;
 use App\Http\Controllers\API\V0_5\Career\CareerJobDetailController;
 use App\Http\Controllers\API\V0_5\Career\CareerJobExplainabilityController;
@@ -416,6 +417,7 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/career/first-wave/discoverability-manifest', [CareerFirstWaveDiscoverabilityManifestController::class, 'show']);
     Route::get('/career/first-wave/jobs/{slug}/next-step-links', [CareerFirstWaveNextStepLinksController::class, 'show']);
     Route::get('/career/first-wave/jobs/{slug}/companion-links', [CareerFirstWaveOccupationCompanionLinksController::class, 'show']);
+    Route::get('/career/first-wave/recommendations/mbti/{type}/companion-links', [CareerFirstWaveRecommendationCompanionLinksController::class, 'show']);
     Route::get('/career/first-wave/launch-tier', [CareerFirstWaveLaunchTierController::class, 'show']);
     Route::get('/career/resolve', [CareerAliasResolutionController::class, 'show']);
     Route::get('/career/first-wave/lifecycle', [CareerFirstWaveLifecycleController::class, 'show']);

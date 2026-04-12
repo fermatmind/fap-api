@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-12T02:05:00Z",
+  "updated_at": "2026-04-12T13:02:05Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -647,6 +647,36 @@
         ]
       },
       "failure_reason": "GitHub Actions jobs were not started successfully because account payments failed or the spending limit needs to be increased; both hygiene runs failed immediately and MBTI verification was skipped, while local B27 verification passed.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B38": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/pr-b38-career-recommendation-detail-companion-links-authority-api",
+      "commit_sha": "248a882ef7a97fda70a0a287acbee26d3e18df25",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/883",
+      "checks": {
+        "local": [
+          {
+            "command": "vendor/bin/pint --test app/DTO/Career/CareerFirstWaveRecommendationCompanionLinksSummary.php app/Domain/Career/Publish/CareerFirstWaveRecommendationCompanionLinksService.php app/Http/Resources/Career/CareerFirstWaveRecommendationCompanionLinksSummaryResource.php app/Http/Controllers/API/V0_5/Career/CareerFirstWaveRecommendationCompanionLinksController.php routes/api.php tests/Unit/Services/Career/CareerFirstWaveRecommendationCompanionLinksServiceTest.php tests/Feature/Career/CareerFirstWaveRecommendationCompanionLinksApiTest.php docs/contracts/openapi.snapshot.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerFirstWaveRecommendationCompanionLinksServiceTest.php tests/Feature/Career/CareerFirstWaveRecommendationCompanionLinksApiTest.php tests/Feature/Career/CareerRecommendationDetailApiTest.php tests/Feature/Career/CareerTransitionPreviewApiTest.php tests/Feature/Career/CareerFamilyHubApiTest.php tests/Feature/Career/CareerFirstWaveDiscoverabilityManifestApiTest.php tests/Feature/Career/CareerFirstWaveNextStepLinksApiTest.php tests/Feature/Career/CareerFirstWaveOccupationCompanionLinksApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/OpenApiDiffTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
