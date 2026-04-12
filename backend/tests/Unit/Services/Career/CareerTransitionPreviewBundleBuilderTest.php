@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Services\Career;
 
+use App\Domain\Career\Transition\TransitionPathPayload;
 use App\DTO\Career\CareerTransitionPreviewBundle;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
@@ -156,6 +157,20 @@ final class CareerTransitionPreviewBundleBuilderTest extends TestCase
             'path_type' => 'stable_upside',
             'path_payload' => [
                 'steps' => ['first valid step', 99, ' second valid step '],
+                'rationale_codes' => [
+                    TransitionPathPayload::RATIONALE_SAME_FAMILY_TARGET,
+                    TransitionPathPayload::RATIONALE_PUBLISH_READY_TARGET,
+                ],
+                'tradeoff_codes' => [
+                    TransitionPathPayload::TRADEOFF_HIGHER_ENTRY_EDUCATION_REQUIRED,
+                ],
+                'delta' => [
+                    TransitionPathPayload::DELTA_ENTRY_EDUCATION => [
+                        'source_value' => "Bachelor's degree",
+                        'target_value' => "Master's degree",
+                        'direction' => TransitionPathPayload::DELTA_DIRECTION_HIGHER,
+                    ],
+                ],
                 'why_this_path' => 'fixture-only narrative',
                 'what_is_lost' => 'fixture-only tradeoff',
                 'bridge_steps_90d' => ['not authoritative'],
@@ -174,6 +189,9 @@ final class CareerTransitionPreviewBundleBuilderTest extends TestCase
         $this->assertArrayNotHasKey('why_this_path', $payload);
         $this->assertArrayNotHasKey('what_is_lost', $payload);
         $this->assertArrayNotHasKey('bridge_steps_90d', $payload);
+        $this->assertArrayNotHasKey('rationale_codes', $payload);
+        $this->assertArrayNotHasKey('tradeoff_codes', $payload);
+        $this->assertArrayNotHasKey('delta', $payload);
     }
 
     public function test_it_excludes_paths_with_invalid_non_array_payload_shape(): void
