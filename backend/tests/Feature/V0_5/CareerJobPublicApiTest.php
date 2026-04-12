@@ -310,6 +310,34 @@ final class CareerJobPublicApiTest extends TestCase
             ->assertJsonPath('error_code', 'NOT_FOUND');
     }
 
+    public function test_detail_and_seo_null_blocked_media_urls(): void
+    {
+        $job = $this->createJob([
+            'job_code' => 'product-manager',
+            'slug' => 'product-manager',
+            'title' => 'Product Manager',
+            'cover_image_url' => 'https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com/job.png',
+            'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $this->createSeoMeta($job, [
+            'og_image_url' => 'https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com/job-og.png',
+            'twitter_image_url' => 'https://ci.example.test/job.png?ci-process=thumb',
+        ]);
+
+        $this->getJson('/api/v0.5/career-jobs/product-manager?locale=en')
+            ->assertOk()
+            ->assertJsonPath('job.cover_image_url', null)
+            ->assertJsonPath('seo_meta.og_image_url', null)
+            ->assertJsonPath('seo_meta.twitter_image_url', null);
+
+        $this->getJson('/api/v0.5/career-jobs/product-manager/seo?locale=en')
+            ->assertOk()
+            ->assertJsonPath('meta.og.image', null)
+            ->assertJsonPath('meta.twitter.image', null);
+    }
+
     public function test_imported_local_baseline_publishes_family_jobs_for_en_and_zh_cn(): void
     {
         $this->artisan('career-jobs:import-local-baseline', [

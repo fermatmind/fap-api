@@ -15,6 +15,7 @@ use App\Services\Cms\TopicProfileService;
 use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
+use App\Support\PublicMediaUrlGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -85,7 +86,9 @@ final class TopicController extends Controller
             return $this->notFoundResponse('topic not found.');
         }
 
-        $meta = $this->topicProfileSeoService->buildMeta($profile, $validated['locale']);
+        $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
+            $this->topicProfileSeoService->buildMeta($profile, $validated['locale'])
+        );
         $jsonLd = $this->topicProfileSeoService->buildJsonLd($profile, $validated['locale']);
         $entryGroups = $this->topicEntryResolverService->resolveGroupedEntries($profile, $validated['locale']);
         $sections = array_map(
@@ -131,7 +134,9 @@ final class TopicController extends Controller
             return response()->json(['error' => 'not found'], 404);
         }
 
-        $meta = $this->topicProfileSeoService->buildMeta($profile, $validated['locale']);
+        $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
+            $this->topicProfileSeoService->buildMeta($profile, $validated['locale'])
+        );
         $jsonLd = $this->topicProfileSeoService->buildJsonLd($profile, $validated['locale']);
 
         return response()->json([
@@ -485,7 +490,7 @@ final class TopicController extends Controller
             'excerpt' => $profile->excerpt,
             'hero_kicker' => $profile->hero_kicker,
             'hero_quote' => $profile->hero_quote,
-            'cover_image_url' => $profile->cover_image_url,
+            'cover_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($profile->cover_image_url),
             'status' => (string) $profile->status,
             'is_public' => (bool) $profile->is_public,
             'is_indexable' => (bool) $profile->is_indexable,
@@ -526,10 +531,10 @@ final class TopicController extends Controller
             'canonical_url' => $seoMeta->canonical_url,
             'og_title' => $seoMeta->og_title,
             'og_description' => $seoMeta->og_description,
-            'og_image_url' => $seoMeta->og_image_url,
+            'og_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($seoMeta->og_image_url),
             'twitter_title' => $seoMeta->twitter_title,
             'twitter_description' => $seoMeta->twitter_description,
-            'twitter_image_url' => $seoMeta->twitter_image_url,
+            'twitter_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($seoMeta->twitter_image_url),
             'robots' => $seoMeta->robots,
             'jsonld_overrides_json' => $seoMeta->jsonld_overrides_json,
         ];

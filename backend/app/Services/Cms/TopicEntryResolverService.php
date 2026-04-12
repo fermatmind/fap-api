@@ -8,6 +8,7 @@ use App\Models\Article;
 use App\Models\PersonalityProfile;
 use App\Models\TopicProfile;
 use App\Models\TopicProfileEntry;
+use App\Support\PublicMediaUrlGuard;
 use Illuminate\Support\Facades\DB;
 
 final class TopicEntryResolverService
@@ -219,7 +220,7 @@ final class TopicEntryResolverService
                 $entry->cta_label,
                 $this->defaultCtaLabel((string) $entry->entry_type, $resolvedLocale)
             ),
-            'image_url' => $imageUrl,
+            'image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($imageUrl),
             'is_featured' => (bool) $entry->is_featured,
         ];
     }

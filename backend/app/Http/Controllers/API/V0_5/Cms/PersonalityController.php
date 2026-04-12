@@ -17,6 +17,7 @@ use App\Services\Cms\PersonalityProfileService;
 use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
+use App\Support\PublicMediaUrlGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -93,7 +94,9 @@ class PersonalityController extends Controller
         /** @var PersonalityProfileVariant|null $variant */
         $variant = $routeProfile['variant'];
         $projection = $this->personalityProfileService->buildPublicProjection($profile, $variant);
-        $meta = $this->personalityProfileSeoService->buildMeta($profile, $variant);
+        $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
+            $this->personalityProfileSeoService->buildMeta($profile, $variant)
+        );
         $jsonLd = $this->personalityProfileSeoService->buildJsonLd($profile, $variant);
         $sections = $this->publicSectionPayloads($profile, $variant);
         $seoSurface = $this->buildSeoSurface($meta, $jsonLd, 'mbti_personality_public_detail');
@@ -141,7 +144,9 @@ class PersonalityController extends Controller
         $profile = $routeProfile['profile'];
         /** @var PersonalityProfileVariant|null $variant */
         $variant = $routeProfile['variant'];
-        $meta = $this->personalityProfileSeoService->buildMeta($profile, $variant);
+        $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
+            $this->personalityProfileSeoService->buildMeta($profile, $variant)
+        );
         $jsonLd = $this->personalityProfileSeoService->buildJsonLd($profile, $variant);
 
         return response()->json([
@@ -489,7 +494,7 @@ class PersonalityController extends Controller
             'excerpt' => $profile->excerpt,
             'hero_kicker' => $profile->hero_kicker,
             'hero_quote' => $profile->hero_quote,
-            'hero_image_url' => $profile->hero_image_url,
+            'hero_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($profile->hero_image_url),
             'status' => (string) $profile->status,
             'is_public' => (bool) $profile->is_public,
             'is_indexable' => (bool) $profile->is_indexable,
@@ -532,10 +537,10 @@ class PersonalityController extends Controller
             'canonical_url' => $this->personalityProfileSeoService->buildCanonicalUrl($profile, (string) $profile->locale, $variant),
             'og_title' => $seoMeta?->og_title,
             'og_description' => $seoMeta?->og_description,
-            'og_image_url' => $seoMeta?->og_image_url,
+            'og_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($seoMeta?->og_image_url),
             'twitter_title' => $seoMeta?->twitter_title,
             'twitter_description' => $seoMeta?->twitter_description,
-            'twitter_image_url' => $seoMeta?->twitter_image_url,
+            'twitter_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($seoMeta?->twitter_image_url),
             'robots' => $seoMeta?->robots,
             'jsonld_overrides_json' => $seoMeta?->jsonld_overrides_json,
         ];
@@ -554,7 +559,9 @@ class PersonalityController extends Controller
                 'robots',
             ] as $field) {
                 if ($variantSeoMeta->{$field} !== null) {
-                    $meta[$field] = $variantSeoMeta->{$field};
+                    $meta[$field] = in_array($field, ['og_image_url', 'twitter_image_url'], true)
+                        ? PublicMediaUrlGuard::sanitizeNullableUrl($variantSeoMeta->{$field})
+                        : $variantSeoMeta->{$field};
                 }
             }
 
