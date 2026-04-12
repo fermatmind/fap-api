@@ -2464,6 +2464,23 @@
                 ]
             }
         },
+        "/api/v0.5/career/jobs/{slug}/explainability": {
+            "get": {
+                "operationId": "get_api_v0_5_career_jobs_slug_explainability",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerJobExplainabilityController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/career/recommendations/mbti": {
             "get": {
                 "operationId": "get_api_v0_5_career_recommendations_mbti",
@@ -2493,6 +2510,23 @@
                     }
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerRecommendationDetailController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/career/recommendations/mbti/{type}/explainability": {
+            "get": {
+                "operationId": "get_api_v0_5_career_recommendations_mbti_type_explainability",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerRecommendationExplainabilityController@show",
                 "x-laravel-middleware": [
                     "api"
                 ]
