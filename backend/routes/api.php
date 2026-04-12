@@ -32,6 +32,7 @@ use App\Http\Controllers\API\V0_4\RotationAuditController;
 use App\Http\Controllers\API\V0_5\Career\CareerAliasResolutionController;
 use App\Http\Controllers\API\V0_5\Career\CareerAttributionEventController;
 use App\Http\Controllers\API\V0_5\Career\CareerFamilyHubController;
+use App\Http\Controllers\API\V0_5\Career\CareerFirstWaveLifecycleController;
 use App\Http\Controllers\API\V0_5\Career\CareerFirstWaveReadinessController;
 use App\Http\Controllers\API\V0_5\Career\CareerJobDetailController;
 use App\Http\Controllers\API\V0_5\Career\CareerJobListController;
@@ -406,6 +407,7 @@ Route::prefix('v0.5')->group(function () {
     Route::post('/career/attribution/events', [CareerAttributionEventController::class, 'store']);
     Route::get('/career/family/{slug}', [CareerFamilyHubController::class, 'show']);
     Route::get('/career/resolve', [CareerAliasResolutionController::class, 'show']);
+    Route::get('/career/first-wave/lifecycle', [CareerFirstWaveLifecycleController::class, 'show']);
     Route::get('/career/first-wave/readiness', [CareerFirstWaveReadinessController::class, 'show']);
     Route::get('/career/jobs', [CareerJobListController::class, 'index']);
     Route::get('/career/jobs/{slug}', [CareerJobDetailController::class, 'show']);
