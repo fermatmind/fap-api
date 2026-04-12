@@ -35,7 +35,13 @@ final class CareerTransitionPreviewBundleBuilderTest extends TestCase
             'from_occupation_id' => $snapshot->occupation_id,
             'to_occupation_id' => $target->id,
             'path_type' => 'stable_upside',
-            'path_payload' => ['steps' => ['fixture-only transition evidence']],
+            'path_payload' => [
+                'steps' => [
+                    \App\Domain\Career\Transition\TransitionPathPayload::STEP_SKILL_OVERLAP,
+                    \App\Domain\Career\Transition\TransitionPathPayload::STEP_TASK_OVERLAP,
+                    \App\Domain\Career\Transition\TransitionPathPayload::STEP_TOOL_OVERLAP,
+                ],
+            ],
         ]);
 
         $payload = app(CareerTransitionPreviewBundleBuilder::class)->buildByType('intj')?->toArray() ?? [];
@@ -158,7 +164,11 @@ final class CareerTransitionPreviewBundleBuilderTest extends TestCase
 
         $payload = app(CareerTransitionPreviewBundleBuilder::class)->buildByType('intj')?->toArray() ?? [];
 
-        $this->assertSame(CareerTransitionPreviewBundle::publicTopLevelKeys(), array_keys($payload));
+        $expectedKeys = array_values(array_filter(
+            CareerTransitionPreviewBundle::publicTopLevelKeys(),
+            static fn (string $key): bool => $key !== 'steps'
+        ));
+        $this->assertSame($expectedKeys, array_keys($payload));
         $this->assertSame('stable_upside', $payload['path_type'] ?? null);
         $this->assertArrayNotHasKey('steps', $payload);
         $this->assertArrayNotHasKey('why_this_path', $payload);

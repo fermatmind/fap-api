@@ -5,10 +5,19 @@ declare(strict_types=1);
 namespace Tests\Feature\Career;
 
 use App\Domain\Career\Transition\TransitionPathPayload;
+use App\Models\CareerCompileRun;
+use App\Models\CareerImportRun;
+use App\Models\Occupation;
 use App\Models\ProfileProjection;
+use App\Models\RecommendationSnapshot;
 use App\Models\TransitionPath;
+use App\Services\Career\CareerRecommendationCompiler;
+use App\Services\Career\CareerTransitionPreviewReadinessLookup;
+use App\Services\Career\Transition\CareerTransitionPathWriter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Mockery;
+use Tests\Fixtures\Career\CareerFoundationFixture;
 use Tests\TestCase;
 
 final class FirstWaveTransitionPathMaterializationTest extends TestCase
@@ -17,23 +26,25 @@ final class FirstWaveTransitionPathMaterializationTest extends TestCase
 
     public function test_it_materializes_publish_ready_transition_paths_from_the_first_wave_pipeline(): void
     {
-        $exitCode = Artisan::call('career:validate-first-wave-publish-ready', [
-            '--source' => base_path('tests/Fixtures/Career/authority_wave/first_wave_publish_subset.csv'),
-            '--materialize-missing' => true,
-            '--compile-missing' => true,
-            '--json' => true,
+        $snapshot = $this->compileRecommendationChain('transition-materialization-source');
+        $target = $this->createSameFamilyTarget($snapshot, 'transition-materialization-target', 'Transition Materialization Target');
+        $this->mockReadinessSummary([
+            $this->readinessRow($snapshot->occupation?->canonical_slug ?? '', 'publish_ready', true, 'indexable', 'approved'),
+            $this->readinessRow($target->canonical_slug, 'publish_ready', true, 'indexable', 'approved'),
         ]);
 
-        $this->assertSame(0, $exitCode);
-        $this->assertGreaterThan(0, TransitionPath::query()->count());
-        $this->assertSame(
-            TransitionPath::query()->count(),
-            TransitionPath::query()->distinct('recommendation_snapshot_id')->count('recommendation_snapshot_id')
-        );
+        $written = app(CareerTransitionPathWriter::class)->rewriteForSnapshot($snapshot);
 
-        $path = TransitionPath::query()->with(['recommendationSnapshot', 'fromOccupation', 'toOccupation'])->latest('created_at')->firstOrFail();
+        $this->assertSame(1, $written);
+        $this->assertSame(1, TransitionPath::query()->where('recommendation_snapshot_id', $snapshot->id)->count());
+        $path = TransitionPath::query()
+            ->with(['recommendationSnapshot', 'fromOccupation', 'toOccupation'])
+            ->where('recommendation_snapshot_id', $snapshot->id)
+            ->sole();
         $this->assertSame('stable_upside', $path->path_type);
-        $this->assertSame($path->from_occupation_id, $path->to_occupation_id);
+        $this->assertNotSame($path->from_occupation_id, $path->to_occupation_id);
+        $this->assertSame($path->fromOccupation?->family_id, $path->toOccupation?->family_id);
+        $this->assertSame($target->canonical_slug, $path->toOccupation?->canonical_slug);
         $this->assertSame([
             'steps' => TransitionPathPayload::allowedStepLabels(),
         ], $path->normalizedPathPayload()->toArray());
@@ -52,13 +63,14 @@ final class FirstWaveTransitionPathMaterializationTest extends TestCase
         $firstExitCode = Artisan::call('career:validate-first-wave-publish-ready', $command);
         $firstCount = TransitionPath::query()->count();
         $firstFingerprints = TransitionPath::query()
+            ->with(['fromOccupation', 'toOccupation'])
             ->orderBy('recommendation_snapshot_id')
             ->get()
             ->map(static fn (TransitionPath $path): array => [
-                'snapshot_id' => $path->recommendation_snapshot_id,
+                'from_slug' => $path->fromOccupation?->canonical_slug,
+                'to_slug' => $path->toOccupation?->canonical_slug,
                 'path_type' => $path->path_type,
-                'from' => $path->from_occupation_id,
-                'to' => $path->to_occupation_id,
+                'same_family' => $path->fromOccupation?->family_id === $path->toOccupation?->family_id,
             ])
             ->all();
 
@@ -81,30 +93,38 @@ final class FirstWaveTransitionPathMaterializationTest extends TestCase
                 ->map(static fn (TransitionPath $path): array => $path->normalizedPathPayload()->toArray())
                 ->all()
         );
-        $this->assertNotSame($firstFingerprints, TransitionPath::query()
-            ->orderBy('recommendation_snapshot_id')
-            ->get()
-            ->map(static fn (TransitionPath $path): array => [
-                'snapshot_id' => $path->recommendation_snapshot_id,
-                'path_type' => $path->path_type,
-                'from' => $path->from_occupation_id,
-                'to' => $path->to_occupation_id,
-            ])
-            ->all());
+        $this->assertSame(
+            $firstFingerprints,
+            TransitionPath::query()
+                ->with(['fromOccupation', 'toOccupation'])
+                ->orderBy('recommendation_snapshot_id')
+                ->get()
+                ->map(static fn (TransitionPath $path): array => [
+                    'from_slug' => $path->fromOccupation?->canonical_slug,
+                    'to_slug' => $path->toOccupation?->canonical_slug,
+                    'path_type' => $path->path_type,
+                    'same_family' => $path->fromOccupation?->family_id === $path->toOccupation?->family_id,
+                ])
+                ->all()
+        );
     }
 
     public function test_preview_api_can_read_production_written_transition_rows_without_expanding_public_contract(): void
     {
-        $exitCode = Artisan::call('career:validate-first-wave-publish-ready', [
-            '--source' => base_path('tests/Fixtures/Career/authority_wave/first_wave_publish_subset.csv'),
-            '--materialize-missing' => true,
-            '--compile-missing' => true,
-            '--json' => true,
+        $snapshot = $this->compileRecommendationChain('transition-preview-source');
+        $target = $this->createSameFamilyTarget($snapshot, 'registered-nurses', 'Registered Nurses');
+        $this->mockReadinessSummary([
+            $this->readinessRow($snapshot->occupation?->canonical_slug ?? '', 'publish_ready', true, 'indexable', 'approved'),
+            $this->readinessRow($target->canonical_slug, 'publish_ready', true, 'indexable', 'approved'),
         ]);
 
-        $this->assertSame(0, $exitCode);
+        $written = app(CareerTransitionPathWriter::class)->rewriteForSnapshot($snapshot);
+        $this->assertSame(1, $written);
 
-        $path = TransitionPath::query()->with(['recommendationSnapshot.profileProjection', 'toOccupation'])->latest('created_at')->firstOrFail();
+        $path = TransitionPath::query()
+            ->with(['recommendationSnapshot.profileProjection', 'toOccupation'])
+            ->where('recommendation_snapshot_id', $snapshot->id)
+            ->sole();
         $projection = $path->recommendationSnapshot?->profileProjection;
         $this->assertInstanceOf(ProfileProjection::class, $projection);
 
@@ -130,5 +150,117 @@ final class FirstWaveTransitionPathMaterializationTest extends TestCase
             ->assertJsonMissingPath('why_this_path')
             ->assertJsonMissingPath('what_is_lost')
             ->assertJsonMissingPath('bridge_steps_90d');
+
+        $this->assertNotSame($path->from_occupation_id, $path->to_occupation_id);
+    }
+
+    private function compileRecommendationChain(string $slug): RecommendationSnapshot
+    {
+        $chain = CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => $slug]);
+
+        $importRun = CareerImportRun::query()->create([
+            'dataset_name' => 'fixture',
+            'dataset_version' => 'v1',
+            'dataset_checksum' => 'checksum-transition-materialization-'.$slug,
+            'scope_mode' => 'first_wave_exact',
+            'dry_run' => false,
+            'status' => 'completed',
+            'started_at' => now()->subMinutes(10),
+            'finished_at' => now()->subMinutes(9),
+        ]);
+        $compileRun = CareerCompileRun::query()->create([
+            'import_run_id' => $importRun->id,
+            'compiler_version' => CareerRecommendationCompiler::COMPILER_VERSION,
+            'scope_mode' => 'first_wave_exact',
+            'dry_run' => false,
+            'status' => 'completed',
+            'started_at' => now()->subMinutes(8),
+            'finished_at' => now()->subMinutes(7),
+        ]);
+
+        $chain['contextSnapshot']->update([
+            'compile_run_id' => $compileRun->id,
+            'context_payload' => ['materialization' => 'career_first_wave'],
+        ]);
+        $chain['childProjection']->update([
+            'compile_run_id' => $compileRun->id,
+            'projection_payload' => array_merge(
+                is_array($chain['childProjection']->projection_payload) ? $chain['childProjection']->projection_payload : [],
+                ['materialization' => 'career_first_wave'],
+            ),
+        ]);
+
+        return app(CareerRecommendationCompiler::class)->compile($chain['childProjection'], $chain['occupation'], [
+            'compile_run_id' => $compileRun->id,
+            'import_run_id' => $importRun->id,
+        ]);
+    }
+
+    private function createSameFamilyTarget(RecommendationSnapshot $snapshot, string $slug, string $title): Occupation
+    {
+        $source = $snapshot->occupation()->firstOrFail();
+
+        return Occupation::query()->create([
+            'family_id' => $source->family_id,
+            'parent_id' => null,
+            'canonical_slug' => $slug,
+            'entity_level' => 'market_child',
+            'truth_market' => $source->truth_market,
+            'display_market' => $source->display_market,
+            'crosswalk_mode' => 'exact',
+            'canonical_title_en' => $title,
+            'canonical_title_zh' => $title,
+            'search_h1_zh' => $title,
+            'structural_stability' => $source->structural_stability,
+            'task_prototype_signature' => $source->task_prototype_signature,
+            'market_semantics_gap' => $source->market_semantics_gap,
+            'regulatory_divergence' => $source->regulatory_divergence,
+            'toolchain_divergence' => $source->toolchain_divergence,
+            'skill_gap_threshold' => $source->skill_gap_threshold,
+            'trust_inheritance_scope' => $source->trust_inheritance_scope,
+        ]);
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $occupations
+     */
+    private function mockReadinessSummary(array $occupations): void
+    {
+        $lookup = Mockery::mock(CareerTransitionPreviewReadinessLookup::class);
+        foreach ($occupations as $row) {
+            $lookup->shouldReceive('bySlug')
+                ->with((string) ($row['canonical_slug'] ?? ''))
+                ->andReturn($row);
+        }
+        $lookup->shouldReceive('bySlug')->andReturn(null);
+
+        $this->app->instance(CareerTransitionPreviewReadinessLookup::class, $lookup);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function readinessRow(
+        string $canonicalSlug,
+        string $status,
+        bool $indexEligible,
+        string $indexState,
+        string $reviewerStatus,
+    ): array {
+        return [
+            'occupation_uuid' => 'uuid-'.$canonicalSlug,
+            'canonical_slug' => $canonicalSlug,
+            'canonical_title_en' => $canonicalSlug,
+            'status' => $status,
+            'blocker_type' => null,
+            'remediation_class' => null,
+            'authority_override_supplied' => false,
+            'review_required' => false,
+            'crosswalk_mode' => 'exact',
+            'reviewer_status' => $reviewerStatus,
+            'index_state' => $indexState,
+            'index_eligible' => $indexEligible,
+            'reason_codes' => [$status],
+        ];
     }
 }
