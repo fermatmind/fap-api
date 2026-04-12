@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Career\Publish;
 
+use App\Domain\Career\Links\CareerRecommendationSupportLinkageBuilder;
 use App\DTO\Career\CareerFirstWaveRecommendationCompanionLinksSummary;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
@@ -18,9 +19,10 @@ final class CareerFirstWaveRecommendationCompanionLinksService
     public function __construct(
         private readonly CareerRecommendationDetailBundleBuilder $recommendationDetailBundleBuilder,
         private readonly CareerFirstWaveDiscoverabilityManifestService $discoverabilityManifestService,
+        private readonly CareerRecommendationSupportLinkageBuilder $recommendationSupportLinkageBuilder,
     ) {}
 
-    public function buildByType(string $type): ?CareerFirstWaveRecommendationCompanionLinksSummary
+    public function buildByType(string $type, string $locale = 'en'): ?CareerFirstWaveRecommendationCompanionLinksSummary
     {
         $normalizedType = trim($type);
         if ($normalizedType === '') {
@@ -121,6 +123,28 @@ final class CareerFirstWaveRecommendationCompanionLinksService
             ];
         }
 
+        $supportLinkage = $this->recommendationSupportLinkageBuilder->buildByType($normalizedType, $locale);
+        $supportLinks = collect((array) data_get($supportLinkage, 'support_links', []))
+            ->filter(static fn (mixed $row): bool => is_array($row))
+            ->filter(static fn (array $row): bool => ($row['route_kind'] ?? null) === 'test_landing');
+
+        foreach ($supportLinks as $supportLink) {
+            $canonicalPath = trim((string) ($supportLink['canonical_path'] ?? ''));
+            $canonicalSlug = trim((string) ($supportLink['canonical_slug'] ?? ''));
+
+            if ($canonicalPath === '' || $canonicalSlug === '') {
+                continue;
+            }
+
+            $companionLinks[] = [
+                'route_kind' => 'test_landing',
+                'canonical_path' => $canonicalPath,
+                'canonical_slug' => $canonicalSlug,
+                'link_reason_code' => 'recommendation_test_support',
+                'scale_code' => 'MBTI',
+            ];
+        }
+
         $dedupedLinks = collect($companionLinks)
             ->unique(static fn (array $row): string => sprintf(
                 '%s|%s|%s',
@@ -135,6 +159,7 @@ final class CareerFirstWaveRecommendationCompanionLinksService
             'total' => count($dedupedLinks),
             'job_detail' => count(array_filter($dedupedLinks, static fn (array $row): bool => ($row['route_kind'] ?? null) === 'career_job_detail')),
             'family_hub' => count(array_filter($dedupedLinks, static fn (array $row): bool => ($row['route_kind'] ?? null) === 'career_family_hub')),
+            'test_landing' => count(array_filter($dedupedLinks, static fn (array $row): bool => ($row['route_kind'] ?? null) === 'test_landing')),
         ];
 
         return new CareerFirstWaveRecommendationCompanionLinksSummary(

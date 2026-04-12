@@ -9,6 +9,7 @@ use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Career\CareerFirstWaveRecommendationCompanionLinksSummaryResource;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 final class CareerFirstWaveRecommendationCompanionLinksController extends Controller
 {
@@ -18,14 +19,30 @@ final class CareerFirstWaveRecommendationCompanionLinksController extends Contro
         private readonly CareerFirstWaveRecommendationCompanionLinksService $summaryService,
     ) {}
 
-    public function show(string $type): JsonResponse|CareerFirstWaveRecommendationCompanionLinksSummaryResource
+    /**
+     * Existing B38 endpoint, additively extended for public-safe recommendation support links.
+     */
+    public function show(Request $request, string $type): JsonResponse|CareerFirstWaveRecommendationCompanionLinksSummaryResource
     {
-        $summary = $this->summaryService->buildByType($type);
+        $summary = $this->summaryService->buildByType($type, $this->resolveLocale($request));
 
         if ($summary === null) {
             return $this->notFoundResponse('career recommendation companion links unavailable.');
         }
 
         return new CareerFirstWaveRecommendationCompanionLinksSummaryResource($summary);
+    }
+
+    private function resolveLocale(Request $request): string
+    {
+        $raw = trim((string) (
+            $request->query('locale')
+            ?? $request->header('X-FAP-Locale')
+            ?? 'en'
+        ));
+
+        $normalized = strtolower(str_replace('_', '-', $raw));
+
+        return str_starts_with($normalized, 'zh') ? 'zh-CN' : 'en';
     }
 }

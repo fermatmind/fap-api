@@ -9,7 +9,17 @@ final class CareerFirstWaveRecommendationCompanionLinksSummary
     /**
      * @param  array<string, mixed>  $subjectIdentity
      * @param  array<string, int>  $counts
-     * @param  list<array<string, mixed>>  $companionLinks
+     * @param  list<array{
+     *     route_kind:'career_job_detail'|'career_family_hub'|'test_landing',
+     *     canonical_path:string,
+     *     canonical_slug:string,
+     *     link_reason_code:string,
+     *     occupation_uuid?:string,
+     *     canonical_title_en?:string,
+     *     family_uuid?:string,
+     *     title_en?:string,
+     *     scale_code?:string
+     * }>  $companionLinks
      */
     public function __construct(
         public readonly string $summaryVersion,
