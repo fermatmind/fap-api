@@ -42,16 +42,38 @@ final class CareerExplainabilityApiTest extends TestCase
                         'degradation_factor',
                     ],
                 ],
+                'strain_radar' => [
+                    'integrity_state',
+                    'confidence_cap',
+                    'degradation_factor',
+                    'formula_version',
+                    'axes' => [
+                        'people_friction' => ['value'],
+                        'context_switch_load' => ['value'],
+                        'political_load' => ['value'],
+                        'uncertainty_load' => ['value'],
+                        'low_autonomy_trap' => ['value'],
+                        'repetition_mismatch' => ['value'],
+                    ],
+                ],
                 'warnings',
                 'claim_permissions',
                 'integrity_summary',
             ]);
 
-        $this->assertArrayNotHasKey('strain_radar', $response->json());
+        $this->assertSame([
+            'people_friction',
+            'context_switch_load',
+            'political_load',
+            'uncertainty_load',
+            'low_autonomy_trap',
+            'repetition_mismatch',
+        ], array_keys((array) data_get($response->json(), 'strain_radar.axes')));
+        $this->assertNull(data_get($response->json(), 'strain_radar.axes.environment_fit'));
         $this->assertArrayNotHasKey('why_this_is_right_for_you', $response->json());
     }
 
-    public function test_it_returns_a_recommendation_explainability_payload_without_narrative_or_radar_fields(): void
+    public function test_it_returns_a_recommendation_explainability_payload_with_public_safe_radar_only(): void
     {
         $chain = CareerFoundationFixture::seedTrustLimitedCrossMarketChain();
         $this->compileChain($chain, [
@@ -74,9 +96,42 @@ final class CareerExplainabilityApiTest extends TestCase
 
         $payload = $response->json();
 
-        $this->assertArrayNotHasKey('strain_radar', $payload);
+        $this->assertSame([
+            'people_friction',
+            'context_switch_load',
+            'political_load',
+            'uncertainty_load',
+            'low_autonomy_trap',
+            'repetition_mismatch',
+        ], array_keys((array) data_get($payload, 'strain_radar.axes')));
         $this->assertArrayNotHasKey('people_friction', $payload);
         $this->assertArrayNotHasKey('bridge_steps_90d', $payload);
+    }
+
+    public function test_it_keeps_strain_radar_machine_safe_for_missing_truth_cases(): void
+    {
+        $chain = CareerFoundationFixture::seedMissingTruthChain();
+        $this->compileChain($chain, [
+            'materialization' => 'career_first_wave',
+        ]);
+
+        $response = $this->getJson('/api/v0.5/career/jobs/backend-architect-missing-truth/explainability')
+            ->assertOk()
+            ->assertJsonPath('score_bundle.strain_score.integrity_state', 'restricted')
+            ->assertJsonPath('strain_radar.integrity_state', 'restricted');
+
+        $payload = $response->json();
+
+        $this->assertSame([
+            'people_friction',
+            'context_switch_load',
+            'political_load',
+            'uncertainty_load',
+            'low_autonomy_trap',
+            'repetition_mismatch',
+        ], array_keys((array) data_get($payload, 'strain_radar.axes')));
+        $this->assertNull(data_get($payload, 'strain_radar.axes.environment_fit'));
+        $this->assertNull(data_get($payload, 'strain_radar.axes.weights'));
     }
 
     /**

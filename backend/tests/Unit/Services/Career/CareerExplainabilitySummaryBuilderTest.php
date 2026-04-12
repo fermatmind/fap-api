@@ -46,7 +46,23 @@ final class CareerExplainabilitySummaryBuilderTest extends TestCase
         $this->assertArrayHasKey('warnings', $payload);
         $this->assertArrayHasKey('claim_permissions', $payload);
         $this->assertArrayHasKey('integrity_summary', $payload);
-        $this->assertArrayNotHasKey('strain_radar', $payload);
+        $this->assertSame([
+            'integrity_state',
+            'confidence_cap',
+            'degradation_factor',
+            'formula_version',
+            'axes',
+        ], array_keys((array) data_get($payload, 'strain_radar')));
+        $this->assertSame([
+            'people_friction',
+            'context_switch_load',
+            'political_load',
+            'uncertainty_load',
+            'low_autonomy_trap',
+            'repetition_mismatch',
+        ], array_keys((array) data_get($payload, 'strain_radar.axes')));
+        $this->assertNull(data_get($payload, 'strain_radar.axes.environment_fit'));
+        $this->assertNull(data_get($payload, 'strain_radar.axes.environment_mismatch'));
         $this->assertArrayNotHasKey('why_this_path', $payload);
     }
 
@@ -75,7 +91,11 @@ final class CareerExplainabilitySummaryBuilderTest extends TestCase
         $this->assertFalse((bool) data_get($payload, 'claim_permissions.allow_salary_comparison'));
         $this->assertContains('cross_market_mismatch', (array) data_get($payload, 'warnings.amber_flags'));
         $this->assertArrayHasKey('strain_score', (array) data_get($payload, 'score_bundle'));
-        $this->assertNull(data_get($payload, 'strain_radar'));
+        $this->assertSame('career.strain_v1.2', data_get($payload, 'strain_radar.formula_version'));
+        $this->assertSame(
+            ['people_friction', 'context_switch_load', 'political_load', 'uncertainty_load', 'low_autonomy_trap', 'repetition_mismatch'],
+            array_keys((array) data_get($payload, 'strain_radar.axes'))
+        );
         $this->assertNull(data_get($payload, 'bridge_steps_90d'));
     }
 

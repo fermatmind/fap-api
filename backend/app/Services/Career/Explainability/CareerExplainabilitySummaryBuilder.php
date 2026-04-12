@@ -15,6 +15,7 @@ final class CareerExplainabilitySummaryBuilder
     public function __construct(
         private readonly CareerJobDetailBundleBuilder $jobDetailBundleBuilder,
         private readonly CareerRecommendationDetailBundleBuilder $recommendationDetailBundleBuilder,
+        private readonly StrainRadarBuilder $strainRadarBuilder,
     ) {}
 
     public function buildForJobSlug(string $slug): ?CareerExplainabilitySummary
@@ -33,6 +34,9 @@ final class CareerExplainabilitySummaryBuilder
                 'canonical_title_en' => $bundle->titles['canonical_en'] ?? null,
             ],
             scoreBundle: $this->normalizeScoreBundle($bundle->scoreBundle),
+            strainRadar: $this->strainRadarBuilder->build(
+                is_array($bundle->scoreBundle['strain_score'] ?? null) ? $bundle->scoreBundle['strain_score'] : []
+            ),
             warnings: $this->normalizeArray($bundle->warnings),
             claimPermissions: $this->normalizeArray($bundle->claimPermissions),
             integritySummary: $this->normalizeArray($bundle->integritySummary),
@@ -61,6 +65,9 @@ final class CareerExplainabilitySummaryBuilder
                 'canonical_title_en' => $bundle->identity['canonical_title_en'] ?? null,
             ],
             scoreBundle: $this->normalizeScoreBundle($bundle->scoreBundle),
+            strainRadar: $this->strainRadarBuilder->build(
+                is_array($bundle->scoreBundle['strain_score'] ?? null) ? $bundle->scoreBundle['strain_score'] : []
+            ),
             warnings: $this->normalizeArray($bundle->warnings),
             claimPermissions: $this->normalizeArray($bundle->claimPermissions),
             integritySummary: $this->normalizeArray($bundle->integritySummary),
