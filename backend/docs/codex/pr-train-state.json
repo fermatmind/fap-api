@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-12T01:46:00Z",
+  "updated_at": "2026-04-12T02:05:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -627,21 +627,26 @@
           {
             "name": "hygiene",
             "status": "failed",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24295685724/job/70940197295"
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24295699853/job/70940236283"
           },
           {
             "name": "hygiene",
-            "status": "pending",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24295690614/job/70940211184"
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24295700608/job/70940237961"
           },
           {
             "name": "verify-mbti-${{ matrix.mode }}",
             "status": "skipped",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24295685724/job/70940199502"
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24295699853/job/70940238560"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24295700608/job/70940239700"
           }
         ]
       },
-      "failure_reason": "GitHub hygiene failed immediately on the initial run and a newer rerun is still pending; local B27 verification passed and the failure pattern matches the repository's current workflow-start issue rather than a locally reproducible lifecycle-summary regression.",
+      "failure_reason": "GitHub Actions jobs were not started successfully because account payments failed or the spending limit needs to be increased; both hygiene runs failed immediately and MBTI verification was skipped, while local B27 verification passed.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
