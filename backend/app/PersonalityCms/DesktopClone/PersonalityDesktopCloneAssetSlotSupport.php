@@ -116,6 +116,10 @@ final class PersonalityDesktopCloneAssetSlotSupport
         $alt = self::normalizeNullableText($slot['alt'] ?? null);
         $meta = is_array($slot['meta'] ?? null) ? $slot['meta'] : null;
 
+        if ($status === self::STATUS_READY && $assetRef === null) {
+            $status = self::STATUS_PLACEHOLDER;
+        }
+
         return [
             'slot_id' => $slotId,
             'label' => $label,
@@ -140,10 +144,13 @@ final class PersonalityDesktopCloneAssetSlotSupport
         $provider = self::normalizeNullableText($assetRef['provider'] ?? null);
         $path = self::normalizeNullableText($assetRef['path'] ?? null);
         $url = self::normalizeNullableText($assetRef['url'] ?? null);
+        if (self::isTencentAssetUrl($url)) {
+            $url = null;
+        }
         $version = self::normalizeNullableText($assetRef['version'] ?? null);
         $checksum = self::normalizeNullableText($assetRef['checksum'] ?? null);
 
-        if ($provider === null && $path === null && $url === null && $version === null && $checksum === null) {
+        if ($path === null && $url === null) {
             return null;
         }
 
@@ -154,6 +161,30 @@ final class PersonalityDesktopCloneAssetSlotSupport
             'version' => $version,
             'checksum' => $checksum,
         ];
+    }
+
+    public static function isTencentAssetUrl(?string $url): bool
+    {
+        $normalized = strtolower(trim((string) $url));
+        if ($normalized === '') {
+            return false;
+        }
+
+        foreach ([
+            'myqcloud.com',
+            '.qcloud.com',
+            'qcloud',
+            'cos.',
+            'ci-process',
+            'imagemogr2',
+            'watermark',
+        ] as $marker) {
+            if (str_contains($normalized, $marker)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static function normalizeSlotId(mixed $slotId): string

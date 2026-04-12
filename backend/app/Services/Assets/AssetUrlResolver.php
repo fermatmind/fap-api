@@ -35,18 +35,23 @@ final class AssetUrlResolver
         string $region
     ): string {
         $override = is_string($override) ? trim($override) : '';
-        if ($override !== '') {
+        if ($override !== '' && ! $this->isBlockedTencentBaseUrl($override)) {
             return $override;
         }
 
         $cdnBase = $this->resolveCdnBaseUrl($region);
-        if ($cdnBase !== '') {
+        if ($cdnBase !== '' && ! $this->isBlockedTencentBaseUrl($cdnBase)) {
             return $cdnBase;
         }
 
         $versionBase = $this->readAssetsBaseUrlFromVersion($packId, $dirVersion);
-        if ($versionBase !== '') {
+        if ($versionBase !== '' && ! $this->isBlockedTencentBaseUrl($versionBase)) {
             return $versionBase;
+        }
+
+        $fallbackBase = trim((string) config('cdn_map.fallback_assets_base_url', ''));
+        if ($fallbackBase !== '') {
+            return rtrim($fallbackBase, '/');
         }
 
         $appUrl = trim((string) config('app.url', ''));
@@ -142,6 +147,23 @@ final class AssetUrlResolver
         }
 
         return $baseUrl.'/'.implode('/', $clean);
+    }
+
+    private function isBlockedTencentBaseUrl(string $url): bool
+    {
+        $normalized = strtolower(trim($url));
+        if ($normalized === '') {
+            return false;
+        }
+
+        foreach ((array) config('cdn_map.blocked_asset_base_markers', []) as $marker) {
+            $marker = strtolower(trim((string) $marker));
+            if ($marker !== '' && str_contains($normalized, $marker)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function assertStrictAssetPath(string $path): void

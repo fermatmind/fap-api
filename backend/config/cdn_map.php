@@ -7,6 +7,16 @@ $localAssets = $appUrl.'/storage/content_assets';
 
 return [
     'default_region' => env('FAP_DEFAULT_REGION', 'CN_MAINLAND'),
+    'fallback_assets_base_url' => env('FAP_LOCAL_ASSETS_BASE_URL', $localAssets),
+    'blocked_asset_base_markers' => [
+        'myqcloud.com',
+        '.qcloud.com',
+        'qcloud',
+        'cos.',
+        'ci-process',
+        'imagemogr2',
+        'watermark',
+    ],
 
     'map' => [
         'CN_MAINLAND' => [
