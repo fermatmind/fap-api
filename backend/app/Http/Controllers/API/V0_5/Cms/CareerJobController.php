@@ -13,6 +13,7 @@ use App\Services\Cms\CareerJobService;
 use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
+use App\Support\PublicMediaUrlGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -81,7 +82,9 @@ final class CareerJobController extends Controller
             return $this->notFoundResponse('career job not found.');
         }
 
-        $meta = $this->careerJobSeoService->buildMeta($job, $validated['locale']);
+        $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
+            $this->careerJobSeoService->buildMeta($job, $validated['locale'])
+        );
         $jsonLd = $this->careerJobSeoService->buildJsonLd($job, $validated['locale']);
         $sections = array_map(
             fn (CareerJobSection $section): array => $this->careerJobService->sectionPayload($section),
@@ -118,7 +121,9 @@ final class CareerJobController extends Controller
             return response()->json(['error' => 'not found'], 404);
         }
 
-        $meta = $this->careerJobSeoService->buildMeta($job, $validated['locale']);
+        $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
+            $this->careerJobSeoService->buildMeta($job, $validated['locale'])
+        );
         $jsonLd = $this->careerJobSeoService->buildJsonLd($job, $validated['locale']);
 
         return response()->json([

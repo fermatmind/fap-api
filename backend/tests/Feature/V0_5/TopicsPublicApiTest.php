@@ -298,6 +298,72 @@ final class TopicsPublicApiTest extends TestCase
             ->assertJsonPath('error_code', 'NOT_FOUND');
     }
 
+    public function test_detail_and_seo_null_blocked_media_urls_and_entry_images(): void
+    {
+        $topic = $this->createTopicProfile([
+            'topic_code' => 'mbti',
+            'slug' => 'mbti',
+            'title' => 'MBTI',
+            'cover_image_url' => 'https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com/topic.png',
+            'status' => TopicProfile::STATUS_PUBLISHED,
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $this->createTopicSeoMeta($topic, [
+            'og_image_url' => 'https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com/og.png',
+            'twitter_image_url' => 'https://ci.example.test/card.png?ci-process=thumb',
+        ]);
+
+        $article = $this->createArticle([
+            'slug' => 'mbti-article',
+            'locale' => 'en',
+            'title' => 'MBTI article',
+            'excerpt' => 'Excerpt',
+            'cover_image_url' => 'https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com/article.png',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+
+        $personality = $this->createPersonalityProfile([
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'title' => 'INTJ',
+            'hero_image_url' => 'https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com/personality.png',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+
+        $this->createTopicEntry($topic, [
+            'entry_type' => 'article',
+            'group_key' => 'articles',
+            'target_key' => (string) $article->slug,
+            'target_locale' => 'en',
+            'sort_order' => 10,
+        ]);
+        $this->createTopicEntry($topic, [
+            'entry_type' => 'personality_profile',
+            'group_key' => 'featured',
+            'target_key' => (string) $personality->type_code,
+            'target_locale' => 'en',
+            'sort_order' => 20,
+        ]);
+
+        $this->getJson('/api/v0.5/topics/mbti?locale=en')
+            ->assertOk()
+            ->assertJsonPath('profile.cover_image_url', null)
+            ->assertJsonPath('seo_meta.og_image_url', null)
+            ->assertJsonPath('seo_meta.twitter_image_url', null)
+            ->assertJsonPath('entry_groups.articles.0.image_url', null)
+            ->assertJsonPath('entry_groups.featured.0.image_url', null);
+
+        $this->getJson('/api/v0.5/topics/mbti/seo?locale=en')
+            ->assertOk()
+            ->assertJsonPath('meta.og.image', null)
+            ->assertJsonPath('meta.twitter.image', null);
+    }
+
     public function test_resolver_skips_invalid_targets_safely(): void
     {
         $topic = $this->createTopicProfile([

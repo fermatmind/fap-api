@@ -259,6 +259,34 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('error_code', 'NOT_FOUND');
     }
 
+    public function test_detail_and_seo_null_blocked_media_urls(): void
+    {
+        $profile = $this->createProfile([
+            'type_code' => 'INTJ',
+            'slug' => 'intj',
+            'title' => 'INTJ - Architect',
+            'hero_image_url' => 'https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com/profile.png',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $this->createSeoMeta($profile, [
+            'og_image_url' => 'https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com/og.png',
+            'twitter_image_url' => 'https://ci.example.test/image.png?ci-process=cover',
+        ]);
+
+        $this->getJson('/api/v0.5/personality/intj?locale=en')
+            ->assertOk()
+            ->assertJsonPath('profile.hero_image_url', null)
+            ->assertJsonPath('seo_meta.og_image_url', null)
+            ->assertJsonPath('seo_meta.twitter_image_url', null);
+
+        $this->getJson('/api/v0.5/personality/intj/seo?locale=en')
+            ->assertOk()
+            ->assertJsonPath('meta.og.image', null)
+            ->assertJsonPath('meta.twitter.image', null);
+    }
+
     public function test_seo_endpoint_returns_locale_aware_meta_and_jsonld(): void
     {
         config(['app.frontend_url' => 'https://staging.fermatmind.com']);

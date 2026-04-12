@@ -8,6 +8,7 @@ use App\Models\CareerJob;
 use App\Models\CareerJobSection;
 use App\Models\CareerJobSeoMeta;
 use App\Models\Scopes\TenantScope;
+use App\Support\PublicMediaUrlGuard;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -139,7 +140,7 @@ final class CareerJobService
             'excerpt' => $job->excerpt,
             'hero_kicker' => $job->hero_kicker,
             'hero_quote' => $job->hero_quote,
-            'cover_image_url' => $job->cover_image_url,
+            'cover_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($job->cover_image_url),
             'industry_slug' => $job->industry_slug,
             'industry_label' => $job->industry_label,
             'body_md' => $job->body_md,
@@ -184,10 +185,10 @@ final class CareerJobService
             'canonical_url' => $seoMeta->canonical_url,
             'og_title' => $seoMeta->og_title,
             'og_description' => $seoMeta->og_description,
-            'og_image_url' => $seoMeta->og_image_url,
+            'og_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($seoMeta->og_image_url),
             'twitter_title' => $seoMeta->twitter_title,
             'twitter_description' => $seoMeta->twitter_description,
-            'twitter_image_url' => $seoMeta->twitter_image_url,
+            'twitter_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($seoMeta->twitter_image_url),
             'robots' => $seoMeta->robots,
             'jsonld_overrides_json' => $seoMeta->jsonld_overrides_json,
         ];

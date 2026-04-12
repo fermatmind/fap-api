@@ -13,6 +13,7 @@ use App\Services\Cms\ArticleService;
 use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
+use App\Support\PublicMediaUrlGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -127,7 +128,9 @@ class ArticleController extends Controller
 
         $article->loadMissing($this->articleRelations());
 
-        $meta = $this->articleSeoService->buildSeoPayload($article);
+        $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
+            $this->articleSeoService->buildSeoPayload($article)
+        );
         $jsonLd = $this->articleSeoService->generateJsonLd($article);
 
         return response()->json([
@@ -176,7 +179,9 @@ class ArticleController extends Controller
             return response()->json(['error' => 'not found'], 404);
         }
 
-        $meta = $this->articleSeoService->buildSeoPayload($article);
+        $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
+            $this->articleSeoService->buildSeoPayload($article)
+        );
         $jsonLd = $this->articleSeoService->generateJsonLd($article);
 
         return response()->json([
@@ -778,7 +783,7 @@ class ArticleController extends Controller
             'excerpt' => $article->excerpt,
             'content_md' => (string) $article->content_md,
             'content_html' => $article->content_html,
-            'cover_image_url' => $article->cover_image_url,
+            'cover_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($article->cover_image_url),
             'status' => (string) $article->status,
             'is_public' => (bool) $article->is_public,
             'is_indexable' => (bool) $article->is_indexable,
@@ -788,7 +793,9 @@ class ArticleController extends Controller
             'updated_at' => $article->updated_at?->toISOString(),
             'category' => $article->relationLoaded('category') ? $article->category : null,
             'tags' => $article->relationLoaded('tags') ? $article->tags : [],
-            'seo_meta' => $article->relationLoaded('seoMeta') ? $article->seoMeta : null,
+            'seo_meta' => $article->relationLoaded('seoMeta')
+                ? PublicMediaUrlGuard::sanitizeArrayFields($article->seoMeta?->toArray(), ['og_image_url', 'twitter_image_url'])
+                : null,
         ];
     }
 

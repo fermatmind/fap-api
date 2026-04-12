@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\PersonalityCms\DesktopClone;
 
+use App\Support\PublicMediaUrlGuard;
+
 final class PersonalityDesktopCloneAssetSlotSupport
 {
     public const SLOT_ID_HERO_ILLUSTRATION = 'hero-illustration';
@@ -165,26 +167,7 @@ final class PersonalityDesktopCloneAssetSlotSupport
 
     public static function isTencentAssetUrl(?string $url): bool
     {
-        $normalized = strtolower(trim((string) $url));
-        if ($normalized === '') {
-            return false;
-        }
-
-        foreach ([
-            'myqcloud.com',
-            '.qcloud.com',
-            'qcloud',
-            'cos.',
-            'ci-process',
-            'imagemogr2',
-            'watermark',
-        ] as $marker) {
-            if (str_contains($normalized, $marker)) {
-                return true;
-            }
-        }
-
-        return false;
+        return PublicMediaUrlGuard::isBlockedUrl($url);
     }
 
     public static function normalizeSlotId(mixed $slotId): string

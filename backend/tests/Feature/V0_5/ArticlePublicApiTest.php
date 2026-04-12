@@ -174,6 +174,29 @@ final class ArticlePublicApiTest extends TestCase
         $this->assertNull(data_get($response->json(), 'meta.alternates.zh-CN'));
     }
 
+    public function test_detail_and_seo_null_blocked_media_urls(): void
+    {
+        $article = $this->createArticle([
+            'slug' => 'guarded-article',
+            'locale' => 'en',
+            'title' => 'Guarded article',
+            'cover_image_url' => 'https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com/article.png',
+        ]);
+        $this->createSeoMeta($article, [
+            'og_image_url' => 'https://ci.example.test/article.png?ci-process=cover',
+        ]);
+
+        $this->getJson('/api/v0.5/articles/guarded-article?locale=en')
+            ->assertOk()
+            ->assertJsonPath('article.cover_image_url', null)
+            ->assertJsonPath('article.seo_meta.og_image_url', null);
+
+        $this->getJson('/api/v0.5/articles/guarded-article/seo?locale=en')
+            ->assertOk()
+            ->assertJsonPath('meta.og.image', null)
+            ->assertJsonPath('meta.twitter.image', null);
+    }
+
     /**
      * @param  array<string, mixed>  $overrides
      */
