@@ -198,6 +198,30 @@ class AttemptProgressService
         DB::table('attempt_drafts')->where('attempt_id', $attemptId)->delete();
     }
 
+    public function reissueDraftForAttempt(Attempt $attempt): ?array
+    {
+        $draft = $this->loadDraft((string) $attempt->id);
+        if (! $draft) {
+            return null;
+        }
+
+        $expiresAt = $this->parseExpiresAt($draft['expires_at'] ?? null);
+        if (! $expiresAt || $expiresAt->isPast()) {
+            return null;
+        }
+
+        $token = $this->generateToken();
+        $draft['resume_token_hash'] = $this->hashToken($token);
+
+        $this->persistDraft($draft, false);
+        $this->storeCache($draft, $expiresAt);
+
+        return [
+            'token' => $token,
+            'expires_at' => $expiresAt,
+        ];
+    }
+
     public function loadDraftAnswers(Attempt $attempt): array
     {
         $row = DB::table('attempt_drafts')->where('attempt_id', (string) $attempt->id)->first();
