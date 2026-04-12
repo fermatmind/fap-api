@@ -22,7 +22,7 @@ final class CareerFirstWaveRecommendationCompanionLinksSummaryResource extends J
      *     scope:string,
      *     subject_kind:string,
      *     subject_identity:array<string, mixed>,
-     *     counts:array<string, int>,
+     *     counts:array{total:int,job_detail:int,family_hub:int,test_landing:int,topic_detail:int},
      *     companion_links:list<array<string, mixed>>
      * }
      */

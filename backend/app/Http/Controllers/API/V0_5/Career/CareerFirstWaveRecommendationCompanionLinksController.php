@@ -20,7 +20,8 @@ final class CareerFirstWaveRecommendationCompanionLinksController extends Contro
     ) {}
 
     /**
-     * Existing B38 endpoint, additively extended for public-safe recommendation support links.
+     * Existing B38 endpoint, additively extended for public-safe recommendation support links,
+     * including canonical topic support rows for recommendation subjects only.
      */
     public function show(Request $request, string $type): JsonResponse|CareerFirstWaveRecommendationCompanionLinksSummaryResource
     {
