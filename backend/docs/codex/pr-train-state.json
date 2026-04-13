@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-13T11:40:00Z",
+  "updated_at": "2026-04-14T00:44:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -221,6 +221,61 @@
         ]
       },
       "failure_reason": "GitHub Actions jobs were not started successfully; hygiene failed immediately and MBTI verification was skipped, consistent with the current repository CI/billing blockage.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B45": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "github_checks_failed",
+      "branch": "codex/pr-b45-career-family-hub-structured-data-public-additive-extension",
+      "commit_sha": "3250d77dc3afe4429acad4966ae5ed0e8ce130ad",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/891",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Http/Resources/Career/CareerFamilyHubResource.php tests/Feature/Career/CareerFamilyHubApiTest.php tests/Unit/Services/Career/CareerFamilyHubStructuredDataPublicProjectionTest.php docs/contracts/openapi.snapshot.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Career/CareerFamilyHubApiTest.php tests/Unit/Services/Career/CareerStructuredDataBuilderTest.php tests/Unit/Services/Career/CareerBreadcrumbBuilderTest.php tests/Unit/Services/Career/CareerFamilyHubStructuredDataPublicProjectionTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/OpenApiDiffTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24354786650/job/71118740099"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24354788883/job/71118747602"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24354786650/job/71118751195"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24354788883/job/71118758571"
+          }
+        ]
+      },
+      "failure_reason": "GitHub Actions hygiene jobs failed immediately on PR-B45; local validation passed, but the remote CI run is currently not green.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
