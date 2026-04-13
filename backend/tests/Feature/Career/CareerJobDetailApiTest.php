@@ -60,6 +60,14 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonPath('identity.canonical_slug', 'backend-architect')
             ->assertJsonPath('trust_manifest.content_version', 'v4.1')
             ->assertJsonPath('seo_contract.canonical_path', '/career/jobs/backend-architect')
+            ->assertJsonPath('structured_data.occupation.@type', 'Occupation')
+            ->assertJsonPath('structured_data.breadcrumb_list.@type', 'BreadcrumbList')
+            ->assertJsonMissingPath('structured_data.dataset')
+            ->assertJsonMissingPath('structured_data.article')
+            ->assertJsonMissingPath('structured_data.route_kind')
+            ->assertJsonMissingPath('structured_data.canonical_path')
+            ->assertJsonMissingPath('structured_data.canonical_title')
+            ->assertJsonMissingPath('structured_data.breadcrumb_nodes')
             ->assertJsonStructure([
                 'identity',
                 'locale_policy',
@@ -73,6 +81,10 @@ final class CareerJobDetailApiTest extends TestCase
                 'claim_permissions',
                 'integrity_summary',
                 'seo_contract',
+                'structured_data' => [
+                    'occupation',
+                    'breadcrumb_list',
+                ],
                 'provenance_meta' => ['compiler_version', 'compile_refs'],
             ]);
     }
