@@ -53,6 +53,31 @@ final class CareerAttributionEventMapper
     /**
      * @var list<string>
      */
+    private const ALLOWED_SOURCE_PAGE_TYPES = [
+        'landing',
+        'job_index',
+        'job_detail',
+        'recommendation_index',
+        'recommendation_detail',
+        'family_hub',
+        'alias_disambiguation',
+    ];
+
+    /**
+     * @var array<string, string>
+     */
+    private const SOURCE_PAGE_TYPE_ALIASES = [
+        'career_job_index' => 'job_index',
+        'career_job_detail' => 'job_detail',
+        'career_recommendation_index' => 'recommendation_index',
+        'career_recommendation_detail' => 'recommendation_detail',
+        'career_family_hub' => 'family_hub',
+        'career_alias_disambiguation' => 'alias_disambiguation',
+    ];
+
+    /**
+     * @var list<string>
+     */
     private const ALLOWED_QUERY_MODES = [
         'query',
         'non_query',
@@ -101,6 +126,7 @@ final class CareerAttributionEventMapper
             self::ALLOWED_SUBJECT_KINDS,
             'subject_kind'
         );
+        $sourcePageType = $this->normalizeSourcePageType($payload['source_page_type'] ?? null);
         $queryMode = $this->normalizeEnum(
             $payload['query_mode'] ?? null,
             self::ALLOWED_QUERY_MODES,
@@ -110,7 +136,7 @@ final class CareerAttributionEventMapper
 
         $meta = [
             'entry_surface' => $this->normalizeOptionalString($payload['entry_surface'] ?? null, 128) ?? 'unknown',
-            'source_page_type' => $this->normalizeOptionalString($payload['source_page_type'] ?? null, 64) ?? 'unknown',
+            'source_page_type' => $sourcePageType,
             'target_action' => $this->normalizeOptionalString($payload['target_action'] ?? null, 128),
             'landing_path' => $this->normalizePath($payload['landing_path'] ?? null) ?? $path,
             'route_family' => $routeFamily,
@@ -167,6 +193,24 @@ final class CareerAttributionEventMapper
         if ($normalized === null) {
             throw ValidationException::withMessages([
                 'payload.subject_key' => 'payload.subject_key is required when subject_kind is not none.',
+            ]);
+        }
+
+        return $normalized;
+    }
+
+    private function normalizeSourcePageType(mixed $value): string
+    {
+        $normalized = strtolower((string) $this->normalizeOptionalString($value, 64));
+        if ($normalized === '') {
+            return 'unknown';
+        }
+
+        $normalized = self::SOURCE_PAGE_TYPE_ALIASES[$normalized] ?? $normalized;
+
+        if (! in_array($normalized, self::ALLOWED_SOURCE_PAGE_TYPES, true)) {
+            throw ValidationException::withMessages([
+                'payload.source_page_type' => 'payload.source_page_type is not supported by career attribution ingest.',
             ]);
         }
 

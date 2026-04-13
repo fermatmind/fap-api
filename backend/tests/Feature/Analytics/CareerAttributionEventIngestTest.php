@@ -56,10 +56,165 @@ final class CareerAttributionEventIngestTest extends TestCase
             : (json_decode((string) ($row->meta_json ?? '{}'), true) ?: []);
 
         $this->assertSame('career_job_index', $meta['entry_surface'] ?? null);
+        $this->assertSame('job_index', $meta['source_page_type'] ?? null);
         $this->assertSame('jobs_search', $meta['route_family'] ?? null);
         $this->assertSame('query', $meta['query_mode'] ?? null);
         $this->assertArrayNotHasKey('query_text', $meta);
         $this->assertArrayNotHasKey('raw_payload', $meta);
+    }
+
+    public function test_ingest_endpoint_accepts_the_current_stable_career_event_set_without_collapsing_it_into_generic_buckets(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        $cases = [
+            [
+                'event' => 'career_job_detail_view',
+                'anon' => 'anon_b42_job_detail',
+                'path' => '/en/career/jobs/data-scientist',
+                'payload' => [
+                    'entry_surface' => 'career_job_detail',
+                    'source_page_type' => 'career_job_detail',
+                    'target_action' => 'view_job_detail',
+                    'landing_path' => '/en/career/jobs/data-scientist',
+                    'route_family' => 'job_detail',
+                    'subject_kind' => 'job_slug',
+                    'subject_key' => 'data-scientist',
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                ],
+                'expected_source_page_type' => 'job_detail',
+            ],
+            [
+                'event' => 'career_recommendation_detail_view',
+                'anon' => 'anon_b42_recommendation_detail',
+                'path' => '/en/career/recommendations/mbti/intj-a',
+                'payload' => [
+                    'entry_surface' => 'career_recommendation_detail',
+                    'source_page_type' => 'career_recommendation_detail',
+                    'target_action' => 'view_recommendation_detail',
+                    'landing_path' => '/en/career/recommendations/mbti/intj-a',
+                    'route_family' => 'recommendation_detail',
+                    'subject_kind' => 'recommendation_type',
+                    'subject_key' => 'intj',
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                ],
+                'expected_source_page_type' => 'recommendation_detail',
+            ],
+            [
+                'event' => 'career_transition_preview_view',
+                'anon' => 'anon_b42_transition_view',
+                'path' => '/en/career/recommendations/mbti/intj-a',
+                'payload' => [
+                    'entry_surface' => 'career_recommendation_detail_transition_preview',
+                    'source_page_type' => 'career_recommendation_detail',
+                    'target_action' => 'view_transition_preview',
+                    'landing_path' => '/en/career/recommendations/mbti/intj-a',
+                    'route_family' => 'recommendation_detail',
+                    'subject_kind' => 'job_slug',
+                    'subject_key' => 'registered-nurses',
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                ],
+                'expected_source_page_type' => 'recommendation_detail',
+            ],
+            [
+                'event' => 'career_transition_preview_target_click',
+                'anon' => 'anon_b42_transition_click',
+                'path' => '/en/career/recommendations/mbti/intj-a',
+                'payload' => [
+                    'entry_surface' => 'career_recommendation_detail_transition_preview',
+                    'source_page_type' => 'career_recommendation_detail',
+                    'target_action' => 'open_transition_target_job',
+                    'landing_path' => '/en/career/recommendations/mbti/intj-a',
+                    'route_family' => 'recommendation_detail',
+                    'subject_kind' => 'job_slug',
+                    'subject_key' => 'registered-nurses',
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                ],
+                'expected_source_page_type' => 'recommendation_detail',
+            ],
+            [
+                'event' => 'career_job_search_submit',
+                'anon' => 'anon_b42_search_submit',
+                'path' => '/en/career/jobs?q=data',
+                'payload' => [
+                    'entry_surface' => 'career_job_index',
+                    'source_page_type' => 'job_index',
+                    'target_action' => 'submit_search',
+                    'landing_path' => '/en/career/jobs?q=data',
+                    'route_family' => 'jobs_search',
+                    'subject_kind' => 'none',
+                    'query_mode' => 'query',
+                    'locale' => 'en',
+                ],
+                'expected_source_page_type' => 'job_index',
+            ],
+            [
+                'event' => 'career_job_search_result_click',
+                'anon' => 'anon_b42_search_click',
+                'path' => '/en/career/jobs?q=data',
+                'payload' => [
+                    'entry_surface' => 'career_job_search',
+                    'source_page_type' => 'job_index',
+                    'target_action' => 'open_search_result',
+                    'landing_path' => '/en/career/jobs?q=data',
+                    'route_family' => 'jobs_search',
+                    'subject_kind' => 'job_slug',
+                    'subject_key' => 'data-scientists',
+                    'query_mode' => 'query',
+                    'locale' => 'en',
+                ],
+                'expected_source_page_type' => 'job_index',
+            ],
+            [
+                'event' => 'career_blocked_surface_exposed',
+                'anon' => 'anon_b42_blocked_surface',
+                'path' => '/en/career/jobs/software-developers',
+                'payload' => [
+                    'entry_surface' => 'career_job_detail',
+                    'source_page_type' => 'career_job_detail',
+                    'target_action' => 'expose_blocked_surface',
+                    'landing_path' => '/en/career/jobs/software-developers',
+                    'route_family' => 'job_detail',
+                    'subject_kind' => 'job_slug',
+                    'subject_key' => 'software-developers',
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                ],
+                'expected_source_page_type' => 'job_detail',
+            ],
+        ];
+
+        foreach ($cases as $case) {
+            $response = $this->withHeaders([
+                'Authorization' => 'Bearer ingest_test_token',
+            ])->postJson('/api/v0.5/career/attribution/events', [
+                'eventName' => $case['event'],
+                'anonymousId' => $case['anon'],
+                'path' => $case['path'],
+                'timestamp' => '2026-04-12T10:00:00+08:00',
+                'payload' => $case['payload'],
+            ]);
+
+            $response->assertStatus(202)
+                ->assertJsonPath('event_code', $case['event']);
+
+            $row = DB::table('events')
+                ->where('event_code', $case['event'])
+                ->where('anon_id', $case['anon'])
+                ->first();
+
+            $this->assertNotNull($row);
+
+            $meta = is_array($row->meta_json ?? null)
+                ? $row->meta_json
+                : (json_decode((string) ($row->meta_json ?? '{}'), true) ?: []);
+
+            $this->assertSame($case['expected_source_page_type'], $meta['source_page_type'] ?? null);
+        }
     }
 
     public function test_ingest_endpoint_keeps_recommendation_interactions_distinct_from_job_interactions(): void
@@ -181,29 +336,54 @@ final class CareerAttributionEventIngestTest extends TestCase
             : (json_decode((string) ($clickRow->meta_json ?? '{}'), true) ?: []);
 
         $this->assertSame('career_recommendation_detail_transition_preview', $viewMeta['entry_surface'] ?? null);
+        $this->assertSame('recommendation_detail', $viewMeta['source_page_type'] ?? null);
         $this->assertSame('view_transition_preview', $viewMeta['target_action'] ?? null);
         $this->assertSame('job_slug', $viewMeta['subject_kind'] ?? null);
         $this->assertSame('registered-nurses', $viewMeta['subject_key'] ?? null);
 
         $this->assertSame('career_recommendation_detail_transition_preview', $clickMeta['entry_surface'] ?? null);
+        $this->assertSame('recommendation_detail', $clickMeta['source_page_type'] ?? null);
         $this->assertSame('open_transition_target_job', $clickMeta['target_action'] ?? null);
         $this->assertSame('job_slug', $clickMeta['subject_kind'] ?? null);
         $this->assertSame('registered-nurses', $clickMeta['subject_key'] ?? null);
     }
 
-    public function test_ingest_endpoint_rejects_invalid_event_name(): void
+    public function test_ingest_endpoint_rejects_invalid_or_deferred_event_names(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        foreach (['career_unknown_event', 'career_view', 'career_alias_search', 'career_shortlist_add'] as $eventName) {
+            $response = $this->withHeaders([
+                'Authorization' => 'Bearer ingest_test_token',
+            ])->postJson('/api/v0.5/career/attribution/events', [
+                'eventName' => $eventName,
+                'payload' => [
+                    'entry_surface' => 'career_job_index',
+                    'source_page_type' => 'job_index',
+                    'route_family' => 'jobs',
+                    'subject_kind' => 'none',
+                    'query_mode' => 'non_query',
+                ],
+            ]);
+
+            $response->assertStatus(422);
+        }
+    }
+
+    public function test_ingest_endpoint_rejects_unsupported_source_page_type_values(): void
     {
         config()->set('fap.events.ingest_token', 'ingest_test_token');
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ingest_test_token',
         ])->postJson('/api/v0.5/career/attribution/events', [
-            'eventName' => 'career_unknown_event',
+            'eventName' => 'career_job_detail_view',
             'payload' => [
-                'entry_surface' => 'career_job_index',
-                'source_page_type' => 'job_index',
-                'route_family' => 'jobs',
-                'subject_kind' => 'none',
+                'entry_surface' => 'career_job_detail',
+                'source_page_type' => 'editorial_detail',
+                'route_family' => 'job_detail',
+                'subject_kind' => 'job_slug',
+                'subject_key' => 'data-scientist',
                 'query_mode' => 'non_query',
             ],
         ]);
