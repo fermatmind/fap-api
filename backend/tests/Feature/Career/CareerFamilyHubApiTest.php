@@ -25,6 +25,14 @@ final class CareerFamilyHubApiTest extends TestCase
             ->assertJsonPath('bundle_version', 'career.protocol.family_hub.v1')
             ->assertJsonPath('family.family_uuid', $family->id)
             ->assertJsonPath('family.canonical_slug', 'computer-and-information-technology')
+            ->assertJsonPath('structured_data.collection_page.@type', 'CollectionPage')
+            ->assertJsonPath('structured_data.item_list.@type', 'ItemList')
+            ->assertJsonPath('structured_data.breadcrumb_list.@type', 'BreadcrumbList')
+            ->assertJsonPath('structured_data.collection_page.numberOfItems', 1)
+            ->assertJsonPath('structured_data.item_list.numberOfItems', 1)
+            ->assertJsonPath('structured_data.item_list.itemListElement.0.position', 1)
+            ->assertJsonPath('structured_data.item_list.itemListElement.0.name', 'Data scientists')
+            ->assertJsonPath('structured_data.item_list.itemListElement.0.url', '/career/jobs/data-scientists')
             ->assertJsonPath('counts.visible_children_count', 1)
             ->assertJsonPath('counts.publish_ready_count', 1)
             ->assertJsonPath('counts.blocked_override_eligible_count', 0)
@@ -33,6 +41,13 @@ final class CareerFamilyHubApiTest extends TestCase
             ->assertJsonPath('visible_children.0.canonical_slug', 'data-scientists')
             ->assertJsonPath('visible_children.0.seo_contract.index_eligible', true)
             ->assertJsonPath('visible_children.0.trust_summary.reviewer_status', 'approved')
+            ->assertJsonMissingPath('structured_data.route_kind')
+            ->assertJsonMissingPath('structured_data.canonical_path')
+            ->assertJsonMissingPath('structured_data.canonical_title')
+            ->assertJsonMissingPath('structured_data.breadcrumb_nodes')
+            ->assertJsonMissingPath('structured_data.dataset')
+            ->assertJsonMissingPath('structured_data.article')
+            ->assertJsonMissingPath('structured_data.defined_term_set')
             ->assertJsonMissingPath('visible_children.1')
             ->assertJsonStructure([
                 'bundle_kind',
@@ -57,6 +72,27 @@ final class CareerFamilyHubApiTest extends TestCase
                     'blocked_override_eligible_count',
                     'blocked_not_safely_remediable_count',
                     'blocked_total',
+                ],
+                'structured_data' => [
+                    'collection_page' => [
+                        '@context',
+                        '@type',
+                        'name',
+                        'url',
+                        'mainEntityOfPage',
+                        'numberOfItems',
+                    ],
+                    'item_list' => [
+                        '@context',
+                        '@type',
+                        'numberOfItems',
+                        'itemListElement',
+                    ],
+                    'breadcrumb_list' => [
+                        '@context',
+                        '@type',
+                        'itemListElement',
+                    ],
                 ],
             ]);
     }
@@ -87,6 +123,12 @@ final class CareerFamilyHubApiTest extends TestCase
             ->assertJsonPath('counts.blocked_override_eligible_count', 0)
             ->assertJsonPath('counts.blocked_not_safely_remediable_count', 0)
             ->assertJsonPath('counts.blocked_total', 0)
+            ->assertJsonPath('structured_data.collection_page.@type', 'CollectionPage')
+            ->assertJsonPath('structured_data.item_list.@type', 'ItemList')
+            ->assertJsonPath('structured_data.breadcrumb_list.@type', 'BreadcrumbList')
+            ->assertJsonPath('structured_data.collection_page.numberOfItems', 0)
+            ->assertJsonPath('structured_data.item_list.numberOfItems', 0)
+            ->assertJsonPath('structured_data.item_list.itemListElement', [])
             ->assertJsonPath('visible_children', []);
     }
 

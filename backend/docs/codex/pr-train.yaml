@@ -500,6 +500,35 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B45
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b45-career-family-hub-structured-data-public-additive-extension
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      Career family-hub structured-data public additive extension.
+      Publicize only family hub structured_data.collection_page,
+      structured_data.item_list, and structured_data.breadcrumb_list
+      as a narrow additive extension of the existing Career family hub API,
+      with no new endpoint and no DefinedTermSet, Dataset, Article,
+      recommendation, search, alias, support-link, or editorial expansion.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Http/Resources/Career/CareerFamilyHubResource.php tests/Feature/Career/CareerFamilyHubApiTest.php tests/Unit/Services/Career/CareerFamilyHubStructuredDataPublicProjectionTest.php docs/contracts/openapi.snapshot.json"
+      - "php artisan test tests/Feature/Career/CareerFamilyHubApiTest.php tests/Unit/Services/Career/CareerStructuredDataBuilderTest.php tests/Unit/Services/Career/CareerBreadcrumbBuilderTest.php tests/Unit/Services/Career/CareerFamilyHubStructuredDataPublicProjectionTest.php"
+      - "php artisan test tests/Feature/OpenApiDiffTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web
