@@ -42,11 +42,27 @@ final class CareerJobDetailStructuredDataPublicProjectionTest extends TestCase
 
         $this->assertSame('Occupation', data_get($payload, 'structured_data.occupation.@type'));
         $this->assertSame('BreadcrumbList', data_get($payload, 'structured_data.breadcrumb_list.@type'));
+        $this->assertSame([
+            '@context',
+            '@type',
+            'name',
+            'url',
+            'mainEntityOfPage',
+            'educationRequirements',
+            'experienceRequirements',
+        ], array_keys((array) data_get($payload, 'structured_data.occupation')));
+        $this->assertSame([
+            '@context',
+            '@type',
+            'itemListElement',
+        ], array_keys((array) data_get($payload, 'structured_data.breadcrumb_list')));
         $this->assertArrayNotHasKey('route_kind', (array) data_get($payload, 'structured_data'));
         $this->assertArrayNotHasKey('canonical_path', (array) data_get($payload, 'structured_data'));
         $this->assertArrayNotHasKey('canonical_title', (array) data_get($payload, 'structured_data'));
         $this->assertArrayNotHasKey('breadcrumb_nodes', (array) data_get($payload, 'structured_data'));
         $this->assertArrayNotHasKey('dataset', (array) data_get($payload, 'structured_data'));
         $this->assertArrayNotHasKey('article', (array) data_get($payload, 'structured_data'));
+        $this->assertArrayNotHasKey('description', (array) data_get($payload, 'structured_data.occupation'));
+        $this->assertArrayNotHasKey('occupationalExperienceRequirements', (array) data_get($payload, 'structured_data.occupation'));
     }
 }

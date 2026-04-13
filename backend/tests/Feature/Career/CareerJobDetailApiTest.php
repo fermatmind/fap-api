@@ -62,6 +62,8 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonPath('seo_contract.canonical_path', '/career/jobs/backend-architect')
             ->assertJsonPath('structured_data.occupation.@type', 'Occupation')
             ->assertJsonPath('structured_data.breadcrumb_list.@type', 'BreadcrumbList')
+            ->assertJsonMissingPath('structured_data.occupation.description')
+            ->assertJsonMissingPath('structured_data.occupation.occupationalExperienceRequirements')
             ->assertJsonMissingPath('structured_data.dataset')
             ->assertJsonMissingPath('structured_data.article')
             ->assertJsonMissingPath('structured_data.route_kind')

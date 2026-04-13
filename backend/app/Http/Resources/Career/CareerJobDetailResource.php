@@ -38,8 +38,44 @@ final class CareerJobDetailResource extends JsonResource
         $fragments = is_array($payload['fragments'] ?? null) ? $payload['fragments'] : [];
 
         return [
-            'occupation' => is_array($fragments['occupation'] ?? null) ? $fragments['occupation'] : [],
-            'breadcrumb_list' => is_array($fragments['breadcrumb_list'] ?? null) ? $fragments['breadcrumb_list'] : [],
+            'occupation' => $this->projectOccupationFragment($fragments['occupation'] ?? null),
+            'breadcrumb_list' => $this->projectBreadcrumbListFragment($fragments['breadcrumb_list'] ?? null),
         ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function projectOccupationFragment(mixed $fragment): array
+    {
+        if (! is_array($fragment)) {
+            return [];
+        }
+
+        return array_filter([
+            '@context' => $fragment['@context'] ?? null,
+            '@type' => $fragment['@type'] ?? null,
+            'name' => $fragment['name'] ?? null,
+            'url' => $fragment['url'] ?? null,
+            'mainEntityOfPage' => $fragment['mainEntityOfPage'] ?? null,
+            'educationRequirements' => $fragment['educationRequirements'] ?? null,
+            'experienceRequirements' => $fragment['experienceRequirements'] ?? null,
+        ], static fn (mixed $value): bool => $value !== null);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function projectBreadcrumbListFragment(mixed $fragment): array
+    {
+        if (! is_array($fragment)) {
+            return [];
+        }
+
+        return array_filter([
+            '@context' => $fragment['@context'] ?? null,
+            '@type' => $fragment['@type'] ?? null,
+            'itemListElement' => is_array($fragment['itemListElement'] ?? null) ? $fragment['itemListElement'] : null,
+        ], static fn (mixed $value): bool => $value !== null);
     }
 }
