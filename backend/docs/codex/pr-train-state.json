@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-12T13:02:05Z",
+  "updated_at": "2026-04-13T09:30:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -671,6 +671,36 @@
           },
           {
             "command": "php artisan test tests/Feature/OpenApiDiffTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B43": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_verified",
+      "branch": "codex/pr-b43-career-structured-data-authority-readiness",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/StructuredData/CareerBreadcrumbBuilder.php app/Services/Career/StructuredData/CareerJobDetailStructuredDataBuilder.php app/Services/Career/StructuredData/CareerFamilyHubStructuredDataBuilder.php app/Services/Career/StructuredData/CareerStructuredDataBuilder.php tests/Unit/Services/Career/CareerBreadcrumbBuilderTest.php tests/Unit/Services/Career/CareerStructuredDataBuilderTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerBreadcrumbBuilderTest.php tests/Unit/Services/Career/CareerStructuredDataBuilderTest.php",
             "status": "passed"
           }
         ],
