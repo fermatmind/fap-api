@@ -32,6 +32,7 @@ final class RefreshCareerAttributionDailyCommandTest extends TestCase
             'attempt_id' => null,
             'meta_json' => json_encode([
                 'entry_surface' => 'career_job_index',
+                'source_page_type' => 'job_index',
                 'route_family' => 'jobs',
                 'subject_kind' => 'job_slug',
                 'subject_key' => 'data-scientists',
@@ -66,6 +67,7 @@ final class RefreshCareerAttributionDailyCommandTest extends TestCase
 
         $this->assertNotNull($row);
         $this->assertSame('publish_ready', $row->readiness_class);
+        $this->assertSame('job_index', $row->source_page_type);
     }
 
     private function materializeCurrentFirstWaveFixture(): void

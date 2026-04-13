@@ -56,6 +56,7 @@ final class CareerAttributionDailyBuilder
                 : (json_decode((string) ($event->meta_json ?? '{}'), true) ?: []);
 
             $surface = $this->normalizeDimension($meta['entry_surface'] ?? null, 128, 'unknown');
+            $sourcePageType = $this->normalizeSourcePageType($meta['source_page_type'] ?? null);
             $routeFamily = $this->normalizeDimension($meta['route_family'] ?? null, 64, 'unknown');
             $subjectKind = $this->normalizeDimension($meta['subject_kind'] ?? null, 32, 'none');
             $subjectKey = $subjectKind === 'none'
@@ -75,6 +76,7 @@ final class CareerAttributionDailyBuilder
                 max(0, (int) ($event->org_id ?? 0)),
                 $locale,
                 $surface,
+                $sourcePageType,
                 $routeFamily,
                 $eventName,
                 $subjectKind,
@@ -89,6 +91,7 @@ final class CareerAttributionDailyBuilder
                     'org_id' => max(0, (int) ($event->org_id ?? 0)),
                     'locale' => $locale,
                     'surface' => $surface,
+                    'source_page_type' => $sourcePageType,
                     'route_family' => $routeFamily,
                     'event_name' => $eventName,
                     'subject_kind' => $subjectKind,
@@ -161,7 +164,7 @@ final class CareerAttributionDailyBuilder
 
                 DB::table('analytics_career_attribution_daily')->upsert(
                     $rows,
-                    ['day', 'org_id', 'locale', 'surface', 'route_family', 'event_name', 'subject_kind', 'subject_key', 'readiness_class', 'query_mode'],
+                    ['day', 'org_id', 'locale', 'surface', 'source_page_type', 'route_family', 'event_name', 'subject_kind', 'subject_key', 'readiness_class', 'query_mode'],
                     ['event_count', 'unique_anon_count', 'unique_session_count', 'last_refreshed_at', 'updated_at']
                 );
 
@@ -243,6 +246,21 @@ final class CareerAttributionDailyBuilder
         }
 
         return $normalized;
+    }
+
+    private function normalizeSourcePageType(mixed $value): string
+    {
+        $normalized = strtolower($this->normalizeDimension($value, 64, 'unknown'));
+
+        return match ($normalized) {
+            'career_job_index' => 'job_index',
+            'career_job_detail' => 'job_detail',
+            'career_recommendation_index' => 'recommendation_index',
+            'career_recommendation_detail' => 'recommendation_detail',
+            'career_family_hub' => 'family_hub',
+            'career_alias_disambiguation' => 'alias_disambiguation',
+            default => $normalized,
+        };
     }
 
     /**
