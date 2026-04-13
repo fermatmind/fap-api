@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-13T09:40:00Z",
+  "updated_at": "2026-04-13T11:40:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -701,6 +701,40 @@
           },
           {
             "command": "php artisan test tests/Unit/Services/Career/CareerBreadcrumbBuilderTest.php tests/Unit/Services/Career/CareerStructuredDataBuilderTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B44": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/pr-b44-career-job-detail-structured-data-public-additive-extension",
+      "commit_sha": "86971ea08e8873df4f5dd6abcf801f47ab329720",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/890",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Http/Resources/Career/CareerJobDetailResource.php app/DTO/Career/CareerJobDetailBundle.php app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php app/Services/Career/StructuredData/CareerStructuredDataBuilder.php tests/Feature/Career/CareerJobDetailApiTest.php tests/Unit/Services/Career/CareerJobDetailStructuredDataPublicProjectionTest.php docs/contracts/openapi.snapshot.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Career/CareerJobDetailApiTest.php tests/Unit/Services/Career/CareerStructuredDataBuilderTest.php tests/Unit/Services/Career/CareerBreadcrumbBuilderTest.php tests/Unit/Services/Career/CareerJobDetailStructuredDataPublicProjectionTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/OpenApiDiffTest.php",
             "status": "passed"
           }
         ],
