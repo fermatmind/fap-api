@@ -10,6 +10,7 @@ use App\DTO\Career\CareerFamilyHubBundle;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
 use App\Models\RecommendationSnapshot;
+use App\Services\Career\StructuredData\CareerStructuredDataBuilder;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Support\Collection;
 
@@ -20,6 +21,7 @@ final class CareerFamilyHubBundleBuilder
     public function __construct(
         private readonly FirstWaveReadinessSummaryService $readinessSummaryService,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
+        private readonly CareerStructuredDataBuilder $structuredDataBuilder,
     ) {}
 
     public function buildBySlug(string $slug): ?CareerFamilyHubBundle
@@ -47,7 +49,7 @@ final class CareerFamilyHubBundleBuilder
         $visibleChildren = $this->buildVisibleChildren($occupations, $readinessBySlug);
         $counts['visible_children_count'] = count($visibleChildren);
 
-        return new CareerFamilyHubBundle(
+        $bundle = new CareerFamilyHubBundle(
             family: [
                 'family_uuid' => $family->id,
                 'canonical_slug' => $family->canonical_slug,
@@ -56,6 +58,14 @@ final class CareerFamilyHubBundleBuilder
             ],
             visibleChildren: $visibleChildren,
             counts: $counts,
+            seoContract: [],
+        );
+
+        return new CareerFamilyHubBundle(
+            family: $bundle->family,
+            visibleChildren: $bundle->visibleChildren,
+            counts: $bundle->counts,
+            seoContract: $this->buildFamilySeoContract($bundle),
         );
     }
 
@@ -238,5 +248,96 @@ final class CareerFamilyHubBundleBuilder
             'robots_policy' => $surface['robots_policy'] ?? $robotsPolicy,
             'metadata_fingerprint' => $surface['metadata_fingerprint'] ?? null,
         ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function buildFamilySeoContract(CareerFamilyHubBundle $bundle): array
+    {
+        $canonicalSlug = $this->normalizeString($bundle->family['canonical_slug'] ?? null);
+        $canonicalPath = $canonicalSlug !== null ? '/career/family/'.$canonicalSlug : null;
+        $canonicalTitle = $this->resolveFamilyTitle($bundle);
+        $indexEligible = (int) ($bundle->counts['visible_children_count'] ?? 0) > 0;
+        $indexState = $indexEligible ? 'index' : IndexStateValue::NOINDEX;
+        $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
+        $reasonCodes = $indexEligible ? ['visible_children_present'] : ['excluded_zero_visible_children'];
+        $structuredData = $this->structuredDataBuilder->build('career_family_hub', $bundle);
+        $structuredDataKeys = $this->extractTopLevelStructuredDataTypes(
+            is_array($structuredData['fragments'] ?? null) ? $structuredData['fragments'] : []
+        );
+        $surface = $this->seoSurfaceContractService->build([
+            'metadata_scope' => 'career_protocol_bundle',
+            'surface_type' => 'career_family_hub_bundle',
+            'canonical_url' => $canonicalPath,
+            'robots_policy' => $robotsPolicy,
+            'title' => $canonicalTitle,
+            'description' => $canonicalTitle,
+            'structured_data' => array_map(
+                static fn (string $type): array => ['@type' => $type],
+                $structuredDataKeys,
+            ),
+            'indexability_state' => $indexEligible ? IndexStateValue::INDEXABLE : IndexStateValue::NOINDEX,
+            'sitemap_state' => $indexEligible ? 'included' : 'excluded',
+        ]);
+
+        return [
+            'canonical_path' => $canonicalPath,
+            'canonical_title' => $canonicalTitle,
+            'index_state' => $indexState,
+            'index_eligible' => $indexEligible,
+            'reason_codes' => $reasonCodes,
+            'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,
+            'surface_type' => $surface['surface_type'] ?? null,
+            'robots_policy' => $surface['robots_policy'] ?? $robotsPolicy,
+            'metadata_fingerprint' => $surface['metadata_fingerprint'] ?? null,
+            'structured_data_keys' => $structuredDataKeys,
+        ];
+    }
+
+    private function resolveFamilyTitle(CareerFamilyHubBundle $bundle): string
+    {
+        return $this->normalizeString($bundle->family['title_en'] ?? null)
+            ?? $this->normalizeString($bundle->family['title_zh'] ?? null)
+            ?? $this->normalizeString($bundle->family['canonical_slug'] ?? null)
+            ?? 'Career family';
+    }
+
+    private function normalizeString(mixed $value): ?string
+    {
+        if (! is_scalar($value)) {
+            return null;
+        }
+
+        $normalized = trim((string) $value);
+
+        return $normalized === '' ? null : $normalized;
+    }
+
+    /**
+     * @param  array<string, mixed>  $fragments
+     * @return list<string>
+     */
+    private function extractTopLevelStructuredDataTypes(array $fragments): array
+    {
+        $types = [];
+
+        foreach ($fragments as $fragment) {
+            if (! is_array($fragment) || ! is_string($fragment['@type'] ?? null)) {
+                continue;
+            }
+
+            $type = trim((string) $fragment['@type']);
+            if ($type === '') {
+                continue;
+            }
+
+            $types[] = $type;
+        }
+
+        $types = array_values(array_unique($types));
+        sort($types);
+
+        return $types;
     }
 }

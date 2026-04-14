@@ -10,11 +10,13 @@ final class CareerFamilyHubBundle
      * @param  array<string, mixed>  $family
      * @param  list<array<string, mixed>>  $visibleChildren
      * @param  array<string, int>  $counts
+     * @param  array<string, mixed>  $seoContract
      */
     public function __construct(
         public readonly array $family,
         public readonly array $visibleChildren,
         public readonly array $counts,
+        public readonly array $seoContract,
     ) {}
 
     /**
@@ -28,6 +30,7 @@ final class CareerFamilyHubBundle
             'family' => $this->family,
             'visible_children' => $this->visibleChildren,
             'counts' => $this->counts,
+            'seo_contract' => $this->seoContract,
         ];
     }
 }

@@ -34,6 +34,7 @@ final class CareerFamilyHubStructuredDataPublicProjectionTest extends TestCase
                 'blocked_not_safely_remediable_count' => 0,
                 'blocked_total' => 0,
             ],
+            seoContract: [],
         );
 
         $payload = (new CareerFamilyHubResource($bundle))->toArray(Request::create('/api/v0.5/career/family/computer-and-information-technology', 'GET'));

@@ -87,6 +87,7 @@ final class CareerStructuredDataBuilderTest extends TestCase
             counts: [
                 'visible_children_count' => 3,
             ],
+            seoContract: [],
         );
 
         $payload = app(CareerStructuredDataBuilder::class)->build('career_family_hub', $bundle);
