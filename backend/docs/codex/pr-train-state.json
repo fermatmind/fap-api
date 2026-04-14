@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-14T13:13:52Z",
+  "updated_at": "2026-04-14T13:14:41Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -335,9 +335,9 @@
     "PR-B47": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "github_checks_failed",
       "branch": "codex/pr-b47-career-dataset-metadata-contract-readiness-internal-only-first",
-      "commit_sha": "51124756e58d07ac1e0078fb186ebcaf95db097a",
+      "commit_sha": "8abff748cefa592bd6c9e6a3b68ab2c63746e476",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/893",
       "checks": {
         "local": [
@@ -354,9 +354,25 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24401002096/job/71271278436"
+          },
+          {
+            "name": "hygiene",
+            "status": "queued",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24401004025/job/71271284760"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24401002096/job/71271292060"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub Actions hygiene failed immediately on PR-B47; local validation passed, but required remote checks are not green.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
