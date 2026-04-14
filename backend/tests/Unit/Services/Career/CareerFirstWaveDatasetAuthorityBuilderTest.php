@@ -34,6 +34,23 @@ final class CareerFirstWaveDatasetAuthorityBuilderTest extends TestCase
             'tests/Fixtures/Career/authority_wave/first_wave_readiness_summary_subset.csv',
             (string) data_get($authority, 'descriptor.source_path')
         );
+        $this->assertSame('career_first_wave_10', data_get($authority, 'metadata.coverage.dataset_scope'));
+        $this->assertSame('career_first_wave_10', data_get($authority, 'metadata.coverage.wave_name'));
+        $this->assertSame('career_job_detail', data_get($authority, 'metadata.coverage.member_kind'));
+        $this->assertSame(10, data_get($authority, 'metadata.coverage.member_count'));
+        $this->assertSame(10, data_get($authority, 'metadata.coverage.count_expected'));
+        $this->assertSame(10, data_get($authority, 'metadata.coverage.count_actual'));
+        $this->assertSame(['career_job_detail'], data_get($authority, 'metadata.coverage.included_route_kinds'));
+        $this->assertFalse((bool) data_get($authority, 'metadata.coverage.family_hubs_included'));
+        $this->assertSame('first_wave_readiness_summary_subset.csv', data_get($authority, 'metadata.provenance.dataset_name'));
+        $this->assertNotNull(data_get($authority, 'metadata.provenance.import_run_id'));
+        $this->assertNotNull(data_get($authority, 'metadata.provenance.compile_run_id'));
+        $this->assertArrayHasKey('content_version', $authority['metadata']['provenance']);
+        $this->assertArrayHasKey('data_version', $authority['metadata']['provenance']);
+        $this->assertArrayHasKey('logic_version', $authority['metadata']['provenance']);
+        $this->assertNotNull(data_get($authority, 'metadata.freshness.compiled_at'));
+        $this->assertNotNull(data_get($authority, 'metadata.freshness.last_substantive_update_at'));
+        $this->assertSame('2026-04-09T00:00:00Z', data_get($authority, 'metadata.freshness.manifest_generated_at'));
         $this->assertSame('career_job_detail', data_get($authority, 'aggregate.member_kind'));
         $this->assertSame(10, data_get($authority, 'aggregate.member_count'));
         $this->assertSame(6, data_get($authority, 'aggregate.counts.stable'));
@@ -81,6 +98,13 @@ final class CareerFirstWaveDatasetAuthorityBuilderTest extends TestCase
         $this->assertArrayNotHasKey('license', $authority['descriptor']);
         $this->assertArrayNotHasKey('distribution', $authority['descriptor']);
         $this->assertArrayNotHasKey('download_url', $authority['descriptor']);
+        $this->assertArrayNotHasKey('publisher', $authority['metadata']);
+        $this->assertArrayNotHasKey('license', $authority['metadata']);
+        $this->assertArrayNotHasKey('terms_of_use', $authority['metadata']);
+        $this->assertArrayNotHasKey('distribution', $authority['metadata']);
+        $this->assertArrayNotHasKey('download_url', $authority['metadata']);
+        $this->assertArrayNotHasKey('description', $authority['metadata']);
+        $this->assertArrayNotHasKey('methodology', $authority['metadata']);
         $this->assertStringNotContainsString('Dataset', json_encode($authority, JSON_THROW_ON_ERROR));
         $this->assertStringNotContainsString('DataCatalog', json_encode($authority, JSON_THROW_ON_ERROR));
         $this->assertStringNotContainsString('DefinedTermSet', json_encode($authority, JSON_THROW_ON_ERROR));

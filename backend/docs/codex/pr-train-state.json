@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-14T12:37:02Z",
+  "updated_at": "2026-04-14T13:10:43Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -327,6 +327,36 @@
         ]
       },
       "failure_reason": "GitHub Actions hygiene jobs failed immediately on PR-B46; local validation passed, but the remote CI run is currently not green.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B47": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "in_progress",
+      "branch": "codex/pr-b47-career-dataset-metadata-contract-readiness-internal-only-first",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/Dataset/*.php app/DTO/Career/CareerFirstWaveDataset*.php tests/Unit/Services/Career/CareerFirstWaveDatasetAuthorityBuilderTest.php tests/Unit/Services/Career/CareerFirstWaveDatasetMetadataBuilderTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerFirstWaveDatasetAuthorityBuilderTest.php tests/Unit/Services/Career/CareerFirstWaveDatasetMetadataBuilderTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,

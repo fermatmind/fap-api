@@ -26,6 +26,7 @@ final class CareerFirstWaveDatasetAuthorityBuilder
         private readonly FirstWaveManifestReader $manifestReader,
         private readonly CareerFirstWaveLaunchTierSummaryService $launchTierSummaryService,
         private readonly CareerFirstWaveDiscoverabilityManifestService $discoverabilityManifestService,
+        private readonly CareerFirstWaveDatasetMetadataBuilder $metadataBuilder,
     ) {}
 
     public function build(): CareerFirstWaveDatasetAuthority
@@ -43,18 +44,22 @@ final class CareerFirstWaveDatasetAuthorityBuilder
             discoverabilityRoutes: (array) ($discoverabilityManifest['routes'] ?? []),
         );
 
+        $descriptor = new CareerFirstWaveDatasetDescriptor(
+            datasetKey: self::DATASET_KEY,
+            datasetScope: $waveName,
+            manifestVersion: (string) ($manifest['manifest_version'] ?? 'unknown'),
+            selectionPolicyVersion: (string) ($manifest['selection_policy_version'] ?? 'unknown'),
+            datasetName: $this->normalizeString($importRun?->dataset_name),
+            datasetVersion: $this->normalizeString($importRun?->dataset_version),
+            datasetChecksum: $this->normalizeString($importRun?->dataset_checksum),
+            sourcePath: $this->normalizeString(data_get($importRun?->meta, 'source_path')),
+        );
+        $aggregate = $this->buildAggregate($members, $importRun, $compileRun);
+
         return new CareerFirstWaveDatasetAuthority(
-            descriptor: new CareerFirstWaveDatasetDescriptor(
-                datasetKey: self::DATASET_KEY,
-                datasetScope: $waveName,
-                manifestVersion: (string) ($manifest['manifest_version'] ?? 'unknown'),
-                selectionPolicyVersion: (string) ($manifest['selection_policy_version'] ?? 'unknown'),
-                datasetName: $this->normalizeString($importRun?->dataset_name),
-                datasetVersion: $this->normalizeString($importRun?->dataset_version),
-                datasetChecksum: $this->normalizeString($importRun?->dataset_checksum),
-                sourcePath: $this->normalizeString(data_get($importRun?->meta, 'source_path')),
-            ),
-            aggregate: $this->buildAggregate($members, $importRun, $compileRun),
+            descriptor: $descriptor,
+            metadata: $this->metadataBuilder->build($descriptor, $aggregate, $members, $importRun, $compileRun),
+            aggregate: $aggregate,
             members: $members,
         );
     }
