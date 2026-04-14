@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-14T00:44:00Z",
+  "updated_at": "2026-04-14T12:37:02Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -276,6 +276,57 @@
         ]
       },
       "failure_reason": "GitHub Actions hygiene jobs failed immediately on PR-B45; local validation passed, but the remote CI run is currently not green.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B46": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "github_checks_failed",
+      "branch": "codex/pr-b46-career-dataset-authority-readiness-internal-only-first",
+      "commit_sha": "a9358a00af858b0e13323b350bdc0391565e7698",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/892",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/Dataset/*.php app/DTO/Career/CareerFirstWaveDataset*.php tests/Unit/Services/Career/CareerFirstWaveDatasetAuthorityBuilderTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerFirstWaveDatasetAuthorityBuilderTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24399257490/job/71265107771"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24399259235/job/71265113563"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24399257490/job/71265118498"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24399259235/job/71265123384"
+          }
+        ]
+      },
+      "failure_reason": "GitHub Actions hygiene jobs failed immediately on PR-B46; local validation passed, but the remote CI run is currently not green.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
