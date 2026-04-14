@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-14T00:44:00Z",
+  "updated_at": "2026-04-14T12:36:03Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -284,12 +284,25 @@
     "PR-B46": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "in_progress",
+      "status": "pr_open",
       "branch": "codex/pr-b46-career-dataset-authority-readiness-internal-only-first",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "8b8de77ca2065f8ac3b2e9bc44571b9408fab82b",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/892",
       "checks": {
-        "local": [],
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/Dataset/*.php app/DTO/Career/CareerFirstWaveDataset*.php tests/Unit/Services/Career/CareerFirstWaveDatasetAuthorityBuilderTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerFirstWaveDatasetAuthorityBuilderTest.php",
+            "status": "passed"
+          }
+        ],
         "github": []
       },
       "failure_reason": "",
