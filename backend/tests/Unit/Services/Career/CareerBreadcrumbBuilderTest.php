@@ -57,6 +57,7 @@ final class CareerBreadcrumbBuilderTest extends TestCase
             ],
             visibleChildren: [],
             counts: [],
+            seoContract: [],
         );
 
         $builder = app(CareerBreadcrumbBuilder::class);
