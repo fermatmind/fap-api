@@ -978,6 +978,33 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B63
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b63-career-claim-blocked-attribution-taxonomy-refinement-backend-first
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      Career claim-blocked attribution taxonomy refinement (backend first).
+      Keep the broad blocked-surface exposure bucket for compatibility and add
+      an additive, backend-owned claim-blocked taxonomy layer for salary,
+      strong-claim, AI-strategy, and transition-recommendation claim-permission
+      gates, without public API/OpenAPI/frontend changes.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Services/Analytics/CareerAttributionEventMapper.php app/Services/Analytics/CareerAttributionDailyBuilder.php tests/Feature/Analytics/CareerAttributionEventIngestTest.php tests/Feature/Analytics/CareerAttributionDailyBuilderTest.php"
+      - "php artisan test tests/Feature/Analytics/CareerAttributionEventIngestTest.php tests/Feature/Analytics/CareerAttributionDailyBuilderTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web

@@ -220,6 +220,24 @@ final class CareerAttributionEventIngestTest extends TestCase
                 ],
                 'expected_source_page_type' => 'job_detail',
             ],
+            [
+                'event' => 'career_claim_blocked_surface_exposed',
+                'anon' => 'anon_b63_claim_blocked_surface',
+                'path' => '/en/career/jobs/software-developers',
+                'payload' => [
+                    'entry_surface' => 'career_job_detail',
+                    'source_page_type' => 'career_job_detail',
+                    'target_action' => 'expose_claim_blocked_surface',
+                    'landing_path' => '/en/career/jobs/software-developers',
+                    'route_family' => 'job_detail',
+                    'subject_kind' => 'job_slug',
+                    'subject_key' => 'software-developers',
+                    'query_mode' => 'non_query',
+                    'blocked_claim_kind' => 'salary',
+                    'locale' => 'en',
+                ],
+                'expected_source_page_type' => 'job_detail',
+            ],
         ];
 
         foreach ($cases as $case) {
@@ -594,6 +612,214 @@ final class CareerAttributionEventIngestTest extends TestCase
                     'subject_kind' => 'none',
                     'query_mode' => 'non_query',
                 ],
+            ]);
+
+            $response->assertStatus(422);
+        }
+    }
+
+    public function test_ingest_endpoint_accepts_claim_blocked_surface_event_with_restricted_blocked_claim_kind(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        foreach ([
+            [
+                'anon' => 'anon_b63_claim_salary',
+                'route_family' => 'job_detail',
+                'source_page_type' => 'career_job_detail',
+                'subject_kind' => 'job_slug',
+                'subject_key' => 'software-developers',
+                'blocked_claim_kind' => 'salary',
+            ],
+            [
+                'anon' => 'anon_b63_claim_strong',
+                'route_family' => 'job_detail',
+                'source_page_type' => 'career_job_detail',
+                'subject_kind' => 'job_slug',
+                'subject_key' => 'software-developers',
+                'blocked_claim_kind' => 'strong_claim',
+            ],
+            [
+                'anon' => 'anon_b63_claim_ai',
+                'route_family' => 'recommendation_detail',
+                'source_page_type' => 'career_recommendation_detail',
+                'subject_kind' => 'job_slug',
+                'subject_key' => 'software-developers',
+                'blocked_claim_kind' => 'ai_strategy',
+            ],
+            [
+                'anon' => 'anon_b63_claim_transition',
+                'route_family' => 'recommendation_detail',
+                'source_page_type' => 'career_recommendation_detail',
+                'subject_kind' => 'job_slug',
+                'subject_key' => 'software-developers',
+                'blocked_claim_kind' => 'transition_recommendation',
+            ],
+            [
+                'anon' => 'anon_b63_claim_none_subject',
+                'route_family' => 'recommendation_detail',
+                'source_page_type' => 'career_recommendation_detail',
+                'subject_kind' => 'none',
+                'subject_key' => '',
+                'blocked_claim_kind' => 'ai_strategy',
+            ],
+        ] as $case) {
+            $response = $this->withHeaders([
+                'Authorization' => 'Bearer ingest_test_token',
+            ])->postJson('/api/v0.5/career/attribution/events', [
+                'eventName' => 'career_claim_blocked_surface_exposed',
+                'anonymousId' => $case['anon'],
+                'path' => '/en/career/jobs/software-developers',
+                'timestamp' => '2026-04-15T12:00:00+08:00',
+                'payload' => [
+                    'entry_surface' => 'career_claim_blocked_surface',
+                    'source_page_type' => $case['source_page_type'],
+                    'target_action' => 'expose_claim_blocked_surface',
+                    'landing_path' => '/en/career/jobs/software-developers',
+                    'route_family' => $case['route_family'],
+                    'subject_kind' => $case['subject_kind'],
+                    'subject_key' => $case['subject_key'],
+                    'query_mode' => 'non_query',
+                    'blocked_claim_kind' => $case['blocked_claim_kind'],
+                    'locale' => 'en',
+                ],
+            ]);
+
+            $response->assertStatus(202)
+                ->assertJsonPath('event_code', 'career_claim_blocked_surface_exposed');
+
+            $row = DB::table('events')
+                ->where('event_code', 'career_claim_blocked_surface_exposed')
+                ->where('anon_id', $case['anon'])
+                ->first();
+
+            $this->assertNotNull($row);
+
+            $meta = is_array($row->meta_json ?? null)
+                ? $row->meta_json
+                : (json_decode((string) ($row->meta_json ?? '{}'), true) ?: []);
+
+            $this->assertSame($case['blocked_claim_kind'], $meta['blocked_claim_kind'] ?? null);
+        }
+    }
+
+    public function test_ingest_endpoint_rejects_invalid_or_missing_blocked_claim_kind_for_claim_blocked_event(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        foreach ([
+            ['anon' => 'anon_b63_missing_claim_kind', 'blocked_claim_kind' => null],
+            ['anon' => 'anon_b63_invalid_claim_kind', 'blocked_claim_kind' => 'warning'],
+        ] as $case) {
+            $payload = [
+                'entry_surface' => 'career_claim_blocked_surface',
+                'source_page_type' => 'career_job_detail',
+                'target_action' => 'expose_claim_blocked_surface',
+                'landing_path' => '/en/career/jobs/software-developers',
+                'route_family' => 'job_detail',
+                'subject_kind' => 'job_slug',
+                'subject_key' => 'software-developers',
+                'query_mode' => 'non_query',
+                'locale' => 'en',
+            ];
+
+            if ($case['blocked_claim_kind'] !== null) {
+                $payload['blocked_claim_kind'] = $case['blocked_claim_kind'];
+            }
+
+            $response = $this->withHeaders([
+                'Authorization' => 'Bearer ingest_test_token',
+            ])->postJson('/api/v0.5/career/attribution/events', [
+                'eventName' => 'career_claim_blocked_surface_exposed',
+                'anonymousId' => $case['anon'],
+                'path' => '/en/career/jobs/software-developers',
+                'timestamp' => '2026-04-15T12:05:00+08:00',
+                'payload' => $payload,
+            ]);
+
+            $response->assertStatus(422);
+        }
+    }
+
+    public function test_ingest_endpoint_rejects_blocked_claim_kind_on_non_claim_blocked_events(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ingest_test_token',
+        ])->postJson('/api/v0.5/career/attribution/events', [
+            'eventName' => 'career_blocked_surface_exposed',
+            'anonymousId' => 'anon_b63_broad_with_claim_kind',
+            'path' => '/en/career/jobs/software-developers',
+            'timestamp' => '2026-04-15T12:10:00+08:00',
+            'payload' => [
+                'entry_surface' => 'career_blocked_surface',
+                'source_page_type' => 'career_job_detail',
+                'target_action' => 'expose_blocked_surface',
+                'landing_path' => '/en/career/jobs/software-developers',
+                'route_family' => 'job_detail',
+                'subject_kind' => 'job_slug',
+                'subject_key' => 'software-developers',
+                'query_mode' => 'non_query',
+                'blocked_claim_kind' => 'salary',
+                'locale' => 'en',
+            ],
+        ]);
+
+        $response->assertStatus(422);
+    }
+
+    public function test_ingest_endpoint_rejects_claim_blocked_event_outside_supported_scope_boundaries(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        foreach ([
+            [
+                'anon' => 'anon_b63_claim_invalid_source_page_type',
+                'source_page_type' => 'job_index',
+                'route_family' => 'job_detail',
+                'subject_kind' => 'job_slug',
+            ],
+            [
+                'anon' => 'anon_b63_claim_invalid_route_family',
+                'source_page_type' => 'career_job_detail',
+                'route_family' => 'jobs',
+                'subject_kind' => 'job_slug',
+            ],
+            [
+                'anon' => 'anon_b63_claim_misaligned_source_route',
+                'source_page_type' => 'career_recommendation_detail',
+                'route_family' => 'job_detail',
+                'subject_kind' => 'job_slug',
+            ],
+            [
+                'anon' => 'anon_b63_claim_invalid_subject_kind',
+                'source_page_type' => 'career_recommendation_detail',
+                'route_family' => 'recommendation_detail',
+                'subject_kind' => 'family_slug',
+            ],
+        ] as $case) {
+            $payload = [
+                'entry_surface' => 'career_claim_blocked_surface',
+                'source_page_type' => $case['source_page_type'],
+                'target_action' => 'expose_claim_blocked_surface',
+                'landing_path' => '/en/career/jobs/software-developers',
+                'route_family' => $case['route_family'],
+                'subject_kind' => $case['subject_kind'],
+                'subject_key' => $case['subject_kind'] === 'none' ? '' : 'software-developers',
+                'query_mode' => 'non_query',
+                'blocked_claim_kind' => 'salary',
+                'locale' => 'en',
+            ];
+
+            $response = $this->withHeaders([
+                'Authorization' => 'Bearer ingest_test_token',
+            ])->postJson('/api/v0.5/career/attribution/events', [
+                'eventName' => 'career_claim_blocked_surface_exposed',
+                'anonymousId' => $case['anon'],
+                'path' => '/en/career/jobs/software-developers',
+                'timestamp' => '2026-04-15T12:20:00+08:00',
+                'payload' => $payload,
             ]);
 
             $response->assertStatus(422);

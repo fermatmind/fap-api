@@ -143,10 +143,28 @@ final class CareerAttributionDailyBuilderTest extends TestCase
             'subject_key' => '',
             'query_mode' => 'query',
         ], 'anon_alias_no_result', 'session_alias_no_result');
+        $this->insertCareerEvent($orgId, 'career_claim_blocked_surface_exposed', $day->copy()->addMinutes(14), [
+            'entry_surface' => 'career_claim_blocked_surface',
+            'source_page_type' => 'career_job_detail',
+            'route_family' => 'job_detail',
+            'subject_kind' => 'job_slug',
+            'subject_key' => 'data-scientists',
+            'query_mode' => 'non_query',
+            'blocked_claim_kind' => 'salary',
+        ], 'anon_claim_blocked_job', 'session_claim_blocked_job');
+        $this->insertCareerEvent($orgId, 'career_claim_blocked_surface_exposed', $day->copy()->addMinutes(15), [
+            'entry_surface' => 'career_claim_blocked_surface',
+            'source_page_type' => 'career_recommendation_detail',
+            'route_family' => 'recommendation_detail',
+            'subject_kind' => 'none',
+            'subject_key' => '',
+            'query_mode' => 'non_query',
+            'blocked_claim_kind' => 'ai_strategy',
+        ], 'anon_claim_blocked_none', 'session_claim_blocked_none');
 
         $result = app(CareerAttributionDailyBuilder::class)->refresh($day, $day, [$orgId], false);
 
-        $this->assertSame(14, (int) ($result['upserted_rows'] ?? 0));
+        $this->assertSame(16, (int) ($result['upserted_rows'] ?? 0));
 
         $readyRow = DB::table('analytics_career_attribution_daily')
             ->where('day', $day->toDateString())
@@ -302,6 +320,25 @@ final class CareerAttributionDailyBuilderTest extends TestCase
         $this->assertSame('alias_resolution', $aliasNoResultRow->route_family);
         $this->assertSame('unknown', $aliasNoResultRow->readiness_class);
         $this->assertSame('query', $aliasNoResultRow->query_mode);
+
+        $claimBlockedJobRow = DB::table('analytics_career_attribution_daily')
+            ->where('event_name', 'career_claim_blocked_surface_exposed')
+            ->where('subject_kind', 'job_slug')
+            ->where('subject_key', 'data-scientists')
+            ->first();
+
+        $claimBlockedNoneRow = DB::table('analytics_career_attribution_daily')
+            ->where('event_name', 'career_claim_blocked_surface_exposed')
+            ->where('subject_kind', 'none')
+            ->where('subject_key', '')
+            ->first();
+
+        $this->assertNotNull($claimBlockedJobRow);
+        $this->assertNotNull($claimBlockedNoneRow);
+        $this->assertSame('job_detail', $claimBlockedJobRow->source_page_type);
+        $this->assertSame('publish_ready', $claimBlockedJobRow->readiness_class);
+        $this->assertSame('recommendation_detail', $claimBlockedNoneRow->source_page_type);
+        $this->assertSame('unknown', $claimBlockedNoneRow->readiness_class);
     }
 
     private function materializeCurrentFirstWaveFixture(): void
