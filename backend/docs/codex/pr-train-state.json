@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-15T08:32:49Z",
+  "updated_at": "2026-04-15T09:00:56Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1433,9 +1433,9 @@
     "PR-B59": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_checks_failed",
+      "status": "merged",
       "branch": "codex/pr-b59-career-first-wave-rollout-wave-plan-artifact-materialization-export-command",
-      "commit_sha": "fd42bdd5624a297cacd38599b630d3f667fa17ab",
+      "commit_sha": "6b816a246f8ce547c17025b4af261559a4c5d6ee",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/904",
       "checks": {
         "local": [
@@ -1479,7 +1479,41 @@
           }
         ]
       },
-      "failure_reason": "GitHub Actions reported account billing/spending-limit blockage; hygiene failed before execution and MBTI matrix jobs were skipped, while local PR-B59 verification passed.",
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "2026-04-15T08:55:44Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-B60": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_verified",
+      "branch": "codex/pr-b60-career-first-wave-rollout-bundle-cohort-whitelist-projection",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "name": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "name": "vendor/bin/pint --test app/Domain/Career/Publish/CareerFirstWaveRolloutBundleProjectionService.php app/DTO/Career/CareerFirstWaveRolloutBundleArtifact.php app/DTO/Career/CareerFirstWaveRolloutCohortListArtifact.php tests/Unit/Services/Career/CareerFirstWaveRolloutBundleProjectionServiceTest.php",
+            "status": "passed"
+          },
+          {
+            "name": "php artisan test tests/Unit/Services/Career/CareerFirstWaveRolloutBundleProjectionServiceTest.php",
+            "status": "passed"
+          },
+          {
+            "name": "php artisan test tests/Unit/Services/Career/CareerFirstWaveRolloutWavePlanServiceTest.php tests/Unit/Services/Career/CareerFirstWaveRolloutWavePlanArtifactProjectionServiceTest.php tests/Unit/Services/Career/CareerFirstWaveRolloutWavePlanArtifactMaterializationServiceTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
