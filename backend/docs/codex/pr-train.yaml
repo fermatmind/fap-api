@@ -754,6 +754,34 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B55
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b55-career-first-wave-release-artifact-export-whitelist-projection
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      Career first-wave release artifact export / whitelist projection.
+      Add an internal-only projection/export layer on top of the first-wave launch
+      manifest authority that emits narrowed release artifacts for launch-manifest and
+      smoke-matrix consumption, keeps family hubs as supporting evidence only, and
+      limits smoke truth to backend-owned authority presence rather than runtime success.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Domain/Career/Publish/CareerFirstWaveReleaseArtifactProjectionService.php app/DTO/Career/CareerFirstWave*Artifact*.php tests/Unit/Services/Career/CareerFirstWaveReleaseArtifactProjectionServiceTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerFirstWaveReleaseArtifactProjectionServiceTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditV2ServiceTest.php tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web
