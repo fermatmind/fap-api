@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T08:40:00Z",
+  "updated_at": "2026-04-16T08:42:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -60,7 +60,7 @@
     "PR-B12": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "github_checks_failed",
       "branch": "codex/pr-b12-first-wave-blocked-governance",
       "commit_sha": "17bcdef3da55f217d76bf42c39f0b361dd034751",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/852",
@@ -87,9 +87,30 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24466409378/job/71494604425"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24466407656/job/71494598217"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24466409378/job/71494617337"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24466407656/job/71494608215"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub Actions jobs were blocked by repository billing/spending-limit failure; hygiene failed before execution and MBTI jobs were skipped while local validation passed.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
