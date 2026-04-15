@@ -642,6 +642,35 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B51
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b51-career-first-wave-launch-readiness-audit-contract-consolidation
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      Career first-wave launch readiness audit / contract consolidation.
+      Add an internal-only first-wave launch readiness audit layer for career_job_detail
+      members that consolidates existing launch tier, readiness, lifecycle/index posture,
+      reviewer/claim/crosswalk/governance blockers, next-step links count, and family-hub
+      supporting-route evidence without adding public APIs, OpenAPI changes, family-hub
+      audited members, or unsupported promotion-scoring semantics.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Domain/Career/Publish/*.php app/DTO/Career/CareerFirstWaveLaunchReadinessAudit*.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditServiceTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditServiceTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerFirstWaveLaunchTierSummaryServiceTest.php tests/Unit/Services/Career/FirstWaveReadinessSummaryServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLifecycleSummaryServiceTest.php tests/Unit/Services/Career/CareerFirstWaveNextStepLinksServiceTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web
