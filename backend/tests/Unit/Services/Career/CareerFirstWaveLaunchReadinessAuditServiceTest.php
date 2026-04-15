@@ -66,7 +66,7 @@ final class CareerFirstWaveLaunchReadinessAuditServiceTest extends TestCase
         $this->assertArrayNotHasKey('demand_signal', $registeredNurses);
         $this->assertArrayNotHasKey('novelty_score', $registeredNurses);
         $this->assertArrayNotHasKey('canonical_conflict', $registeredNurses);
-        $this->assertArrayNotHasKey('trust_freshness_state', $registeredNurses);
+        $this->assertArrayNotHasKey('trust_freshness', $registeredNurses);
     }
 
     public function test_it_projects_candidate_review_without_claiming_family_hubs_as_members(): void
