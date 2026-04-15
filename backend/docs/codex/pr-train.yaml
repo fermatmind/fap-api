@@ -1005,6 +1005,36 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B64
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b64-career-white-box-score-payload-completion
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      Career white-box score payload completion.
+      Add a unified backend-owned white_box_scores payload builder and wire it
+      additively into career job-detail and recommendation-detail bundles so
+      formula breakdown, penalties, degradation factor, component weights, and
+      warnings are machine-consumable without inventing new formulas or exposing
+      internal debug-only traces.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Services/Career/Scoring/CareerWhiteBoxScorePayloadBuilder.php tests/Unit/Services/Career/CareerWhiteBoxScorePayloadBuilderTest.php tests/Feature/Career/CareerJobDetailApiTest.php tests/Feature/Career/CareerRecommendation*.php"
+      - "php artisan test tests/Unit/Services/Career/CareerWhiteBoxScorePayloadBuilderTest.php"
+      - "php artisan test tests/Feature/Career/CareerJobDetailApiTest.php tests/Feature/Career/CareerRecommendation*.php"
+      - "php artisan test tests/Feature/OpenApiDiffTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web

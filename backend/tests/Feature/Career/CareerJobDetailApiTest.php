@@ -54,7 +54,7 @@ final class CareerJobDetailApiTest extends TestCase
             'import_run_id' => $importRun->id,
         ]);
 
-        $this->getJson('/api/v0.5/career/jobs/backend-architect')
+        $response = $this->getJson('/api/v0.5/career/jobs/backend-architect')
             ->assertOk()
             ->assertJsonPath('bundle_kind', 'career_job_detail')
             ->assertJsonPath('identity.canonical_slug', 'backend-architect')
@@ -79,6 +79,17 @@ final class CareerJobDetailApiTest extends TestCase
                 'truth_layer',
                 'trust_manifest',
                 'score_bundle' => ['fit_score'],
+                'white_box_scores' => [
+                    'fit_score' => [
+                        'score',
+                        'integrity_state',
+                        'degradation_factor',
+                        'formula_breakdown',
+                        'component_weights',
+                        'penalties',
+                        'warnings',
+                    ],
+                ],
                 'warnings',
                 'claim_permissions',
                 'integrity_summary',
@@ -88,7 +99,13 @@ final class CareerJobDetailApiTest extends TestCase
                     'breadcrumb_list',
                 ],
                 'provenance_meta' => ['compiler_version', 'compile_refs'],
-            ]);
+            ])
+            ->assertJsonMissingPath('white_box_scores.fit_score.formula_ref')
+            ->assertJsonMissingPath('white_box_scores.fit_score.critical_missing_fields');
+
+        $this->assertIsNumeric($response->json('white_box_scores.fit_score.score'));
+        $this->assertIsString((string) $response->json('white_box_scores.fit_score.integrity_state'));
+        $this->assertIsNumeric($response->json('white_box_scores.fit_score.degradation_factor'));
     }
 
     public function test_it_remains_conservative_and_does_not_fall_back_to_legacy_cms_jobs(): void

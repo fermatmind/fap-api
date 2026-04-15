@@ -8,6 +8,7 @@ use App\Domain\Career\IndexStateValue;
 use App\DTO\Career\CareerRecommendationDetailBundle;
 use App\Models\Occupation;
 use App\Models\RecommendationSnapshot;
+use App\Services\Career\Scoring\CareerWhiteBoxScorePayloadBuilder;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Support\Collection;
 
@@ -15,6 +16,7 @@ final class CareerRecommendationDetailBundleBuilder
 {
     public function __construct(
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
+        private readonly CareerWhiteBoxScorePayloadBuilder $whiteBoxScorePayloadBuilder,
     ) {}
 
     public function buildByType(string $type): ?CareerRecommendationDetailBundle
@@ -50,6 +52,9 @@ final class CareerRecommendationDetailBundleBuilder
             ?? $trustManifest?->import_run_id
             ?? $indexState?->import_run_id;
 
+        $scoreBundle = $this->normalizeArray($payload['score_bundle'] ?? []);
+        $warnings = $this->normalizeArray($payload['warnings'] ?? []);
+
         return new CareerRecommendationDetailBundle(
             identity: [
                 'occupation_uuid' => $snapshot->occupation->id,
@@ -75,8 +80,9 @@ final class CareerRecommendationDetailBundleBuilder
                     'evidence_strength' => $sourceTrace->evidence_strength,
                 ] : null,
             ],
-            scoreBundle: $this->normalizeArray($payload['score_bundle'] ?? []),
-            warnings: $this->normalizeArray($payload['warnings'] ?? []),
+            scoreBundle: $scoreBundle,
+            whiteBoxScores: $this->whiteBoxScorePayloadBuilder->build($scoreBundle, $warnings),
+            warnings: $warnings,
             claimPermissions: $this->normalizeArray($payload['claim_permissions'] ?? []),
             integritySummary: $this->normalizeArray($payload['integrity_summary'] ?? []),
             trustManifest: [

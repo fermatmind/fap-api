@@ -29,6 +29,7 @@ final class CareerJobDetailStructuredDataPublicProjectionTest extends TestCase
             ],
             trustManifest: [],
             scoreBundle: [],
+            whiteBoxScores: [],
             warnings: [],
             claimPermissions: [],
             integritySummary: [],

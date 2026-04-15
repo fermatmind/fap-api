@@ -11,6 +11,7 @@ final class CareerRecommendationDetailBundle
      * @param  array<string, mixed>  $recommendationSubjectMeta
      * @param  array<string, mixed>  $supportingTruthSummary
      * @param  array<string, mixed>  $scoreBundle
+     * @param  array<string, mixed>  $whiteBoxScores
      * @param  array<string, mixed>  $warnings
      * @param  array<string, mixed>  $claimPermissions
      * @param  array<string, mixed>  $integritySummary
@@ -24,6 +25,7 @@ final class CareerRecommendationDetailBundle
         public readonly array $recommendationSubjectMeta,
         public readonly array $supportingTruthSummary,
         public readonly array $scoreBundle,
+        public readonly array $whiteBoxScores,
         public readonly array $warnings,
         public readonly array $claimPermissions,
         public readonly array $integritySummary,
@@ -45,6 +47,7 @@ final class CareerRecommendationDetailBundle
             'recommendation_subject_meta' => $this->recommendationSubjectMeta,
             'supporting_truth_summary' => $this->supportingTruthSummary,
             'score_bundle' => $this->scoreBundle,
+            'white_box_scores' => $this->whiteBoxScores,
             'warnings' => $this->warnings,
             'claim_permissions' => $this->claimPermissions,
             'integrity_summary' => $this->integritySummary,

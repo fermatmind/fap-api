@@ -35,6 +35,17 @@ final class CareerRecommendationDetailApiTest extends TestCase
                 'recommendation_subject_meta',
                 'supporting_truth_summary',
                 'score_bundle' => ['fit_score'],
+                'white_box_scores' => [
+                    'strain_score' => [
+                        'score',
+                        'integrity_state',
+                        'degradation_factor',
+                        'formula_breakdown',
+                        'component_weights',
+                        'penalties',
+                        'warnings',
+                    ],
+                ],
                 'warnings',
                 'claim_permissions',
                 'integrity_summary',
@@ -48,10 +59,15 @@ final class CareerRecommendationDetailApiTest extends TestCase
                 ]],
                 'seo_contract',
                 'provenance_meta' => ['compiler_version', 'compile_refs'],
-            ]);
+            ])
+            ->assertJsonPath('white_box_scores.strain_score.radar_dimensions.0.dimension', 'people_friction')
+            ->assertJsonMissingPath('white_box_scores.strain_score.formula_ref')
+            ->assertJsonMissingPath('white_box_scores.strain_score.critical_missing_fields');
 
         $this->assertIsString((string) $response->json('matched_jobs.0.occupation_uuid'));
         $this->assertNotSame('', (string) $response->json('matched_jobs.0.occupation_uuid'));
+        $this->assertIsNumeric($response->json('white_box_scores.strain_score.score'));
+        $this->assertIsString((string) $response->json('white_box_scores.strain_score.integrity_state'));
     }
 
     public function test_it_returns_authority_owned_matched_jobs_without_using_heavy_job_payload_fields(): void
