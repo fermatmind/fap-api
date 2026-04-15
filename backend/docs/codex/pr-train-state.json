@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-15T05:25:36Z",
+  "updated_at": "2026-04-15T05:30:06Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1223,10 +1223,10 @@
     "PR-B55": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_verified",
+      "status": "pr_open_checks_failed",
       "branch": "codex/pr-b55-career-first-wave-release-artifact-export-whitelist-projection",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "c685909057fbe500e4c6a86f1744fc704fdbfbb7",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/900",
       "checks": {
         "local": [
           {
@@ -1246,9 +1246,30 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24438102348/job/71396735151"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24438102348/job/71396739937"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24438111543/job/71396762439"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24438111543/job/71396767325"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub hygiene failed immediately on both PR-B55 runs and the MBTI matrix jobs were skipped; local verification passed, but the remote CI run is currently not green.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
