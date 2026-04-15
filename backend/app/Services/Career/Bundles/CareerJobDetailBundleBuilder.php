@@ -8,12 +8,14 @@ use App\Domain\Career\IndexStateValue;
 use App\DTO\Career\CareerJobDetailBundle;
 use App\Models\Occupation;
 use App\Models\RecommendationSnapshot;
+use App\Services\Career\Scoring\CareerWhiteBoxScorePayloadBuilder;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 
 final class CareerJobDetailBundleBuilder
 {
     public function __construct(
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
+        private readonly CareerWhiteBoxScorePayloadBuilder $whiteBoxScorePayloadBuilder,
     ) {}
 
     public function buildBySlug(string $slug): ?CareerJobDetailBundle
@@ -72,6 +74,9 @@ final class CareerJobDetailBundleBuilder
         $importRunId = $truthMetric?->import_run_id
             ?? $trustManifest?->import_run_id
             ?? $indexState?->import_run_id;
+
+        $scoreBundle = $this->normalizeArray($payload['score_bundle'] ?? []);
+        $warnings = $this->normalizeArray($payload['warnings'] ?? []);
 
         return new CareerJobDetailBundle(
             identity: [
@@ -179,8 +184,9 @@ final class CareerJobDetailBundleBuilder
                     'notes' => is_array($editorialPatch?->notes) ? $editorialPatch->notes : [],
                 ],
             ],
-            scoreBundle: $this->normalizeArray($payload['score_bundle'] ?? []),
-            warnings: $this->normalizeArray($payload['warnings'] ?? []),
+            scoreBundle: $scoreBundle,
+            whiteBoxScores: $this->whiteBoxScorePayloadBuilder->build($scoreBundle, $warnings),
+            warnings: $warnings,
             claimPermissions: $this->normalizeArray($payload['claim_permissions'] ?? []),
             integritySummary: $this->normalizeArray($payload['integrity_summary'] ?? []),
             seoContract: $this->buildSeoContract($occupation, $snapshot),

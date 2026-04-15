@@ -31,6 +31,7 @@ final class CareerStructuredDataBuilderTest extends TestCase
             ],
             trustManifest: [],
             scoreBundle: [],
+            whiteBoxScores: [],
             warnings: [],
             claimPermissions: [],
             integritySummary: [],

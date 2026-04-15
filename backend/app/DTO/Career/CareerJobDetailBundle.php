@@ -15,6 +15,7 @@ final class CareerJobDetailBundle
      * @param  array<string, mixed>  $truthLayer
      * @param  array<string, mixed>  $trustManifest
      * @param  array<string, mixed>  $scoreBundle
+     * @param  array<string, mixed>  $whiteBoxScores
      * @param  array<string, mixed>  $warnings
      * @param  array<string, mixed>  $claimPermissions
      * @param  array<string, mixed>  $integritySummary
@@ -30,6 +31,7 @@ final class CareerJobDetailBundle
         public readonly array $truthLayer,
         public readonly array $trustManifest,
         public readonly array $scoreBundle,
+        public readonly array $whiteBoxScores,
         public readonly array $warnings,
         public readonly array $claimPermissions,
         public readonly array $integritySummary,
@@ -53,6 +55,7 @@ final class CareerJobDetailBundle
             'truth_layer' => $this->truthLayer,
             'trust_manifest' => $this->trustManifest,
             'score_bundle' => $this->scoreBundle,
+            'white_box_scores' => $this->whiteBoxScores,
             'warnings' => $this->warnings,
             'claim_permissions' => $this->claimPermissions,
             'integrity_summary' => $this->integritySummary,

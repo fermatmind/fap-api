@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-15T13:22:00Z",
+  "updated_at": "2026-04-16T08:28:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1644,9 +1644,9 @@
     "PR-B63": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_checks_failed",
+      "status": "merged",
       "branch": "codex/pr-b63-career-claim-blocked-attribution-taxonomy-refinement-backend-first",
-      "commit_sha": "5c2c632f29de3bf7f15dc7f3cd22f846663fd6cf",
+      "commit_sha": "e0c52d948be3dff0c581610a510b3e23e4bc51ae",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/908",
       "checks": {
         "local": [
@@ -1663,30 +1663,47 @@
             "status": "passed"
           }
         ],
-        "github": [
-          {
-            "name": "hygiene",
-            "status": "failed",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24456551260/job/71458725029"
-          },
-          {
-            "name": "hygiene",
-            "status": "failed",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24456553680/job/71458732251"
-          },
-          {
-            "name": "verify-mbti-${{ matrix.mode }}",
-            "status": "skipped",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24456551260/job/71458737558"
-          },
-          {
-            "name": "verify-mbti-${{ matrix.mode }}",
-            "status": "skipped",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24456553680/job/71458745737"
-          }
-        ]
+        "github": []
       },
-      "failure_reason": "GitHub Actions jobs were blocked by repository billing/spending-limit failure; hygiene failed before execution and MBTI jobs were skipped while local validation passed.",
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "2026-04-15T13:15:27Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-B64": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_verified",
+      "branch": "codex/pr-b64-career-white-box-score-payload-completion",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "name": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "name": "vendor/bin/pint --test app/Services/Career/Scoring/CareerWhiteBoxScorePayloadBuilder.php tests/Unit/Services/Career/CareerWhiteBoxScorePayloadBuilderTest.php tests/Feature/Career/CareerJobDetailApiTest.php tests/Feature/Career/CareerRecommendation*.php",
+            "status": "passed"
+          },
+          {
+            "name": "php artisan test tests/Unit/Services/Career/CareerWhiteBoxScorePayloadBuilderTest.php",
+            "status": "passed"
+          },
+          {
+            "name": "php artisan test tests/Feature/Career/CareerJobDetailApiTest.php tests/Feature/Career/CareerRecommendation*.php",
+            "status": "passed"
+          },
+          {
+            "name": "php artisan test tests/Feature/OpenApiDiffTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
