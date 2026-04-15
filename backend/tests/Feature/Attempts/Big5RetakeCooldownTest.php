@@ -33,7 +33,7 @@ final class Big5RetakeCooldownTest extends TestCase
         parent::tearDown();
     }
 
-    public function test_big5_retake_cooldown_blocks_recent_restart(): void
+    public function test_big5_retake_cooldown_is_disabled_and_allows_recent_restart(): void
     {
         (new ScaleRegistrySeeder)->run();
 
@@ -47,16 +47,12 @@ final class Big5RetakeCooldownTest extends TestCase
             'anon_id' => $anonId,
         ]);
 
-        $response->assertStatus(429);
-        $response->assertJsonPath('error_code', 'RETAKE_COOLDOWN');
-        $response->assertJsonPath('details.code', 'RETAKE_COOLDOWN');
-        $response->assertJsonPath('details.reason_code', 'RETAKE_COOLDOWN');
-        $response->assertJsonPath('details.form_code', 'big5_120');
-        $response->assertJsonPath('details.scope_key', 'org+scale+identity+form');
-        $this->assertGreaterThan(0, (int) $response->json('details.retry_after_seconds'));
+        $response->assertStatus(200);
+        $response->assertJsonPath('ok', true);
+        $this->assertNotEmpty((string) $response->json('attempt_id'));
     }
 
-    public function test_big5_retake_limit_blocks_when_max_attempts_reached_in_30_days(): void
+    public function test_big5_retake_limit_is_disabled_and_allows_repeated_attempts_in_30_days(): void
     {
         (new ScaleRegistrySeeder)->run();
 
@@ -72,14 +68,9 @@ final class Big5RetakeCooldownTest extends TestCase
             'anon_id' => $anonId,
         ]);
 
-        $response->assertStatus(429);
-        $response->assertJsonPath('error_code', 'RETAKE_LIMIT_EXCEEDED');
-        $response->assertJsonPath('details.code', 'RETAKE_LIMIT_EXCEEDED');
-        $response->assertJsonPath('details.reason_code', 'RETAKE_LIMIT_EXCEEDED');
-        $response->assertJsonPath('details.form_code', 'big5_120');
-        $response->assertJsonPath('details.scope_key', 'org+scale+identity+form');
-        $response->assertJsonPath('details.limit_window', '30_days');
-        $response->assertJsonPath('details.retry_after_seconds', null);
+        $response->assertStatus(200);
+        $response->assertJsonPath('ok', true);
+        $this->assertNotEmpty((string) $response->json('attempt_id'));
     }
 
     public function test_big5_retake_cooldown_is_form_aware_from_120_to_90(): void
