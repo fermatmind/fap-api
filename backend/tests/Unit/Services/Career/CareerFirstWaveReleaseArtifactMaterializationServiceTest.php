@@ -155,6 +155,85 @@ final class CareerFirstWaveReleaseArtifactMaterializationServiceTest extends Tes
         }
     }
 
+    public function test_it_accepts_same_slug_set_even_when_member_order_differs_between_artifacts(): void
+    {
+        $service = new class(app(CareerFirstWaveReleaseArtifactProjectionService::class)) extends CareerFirstWaveReleaseArtifactMaterializationService
+        {
+            /**
+             * @return array<string, object>
+             */
+            protected function projectedArtifacts(): array
+            {
+                return [
+                    'career-launch-manifest.json' => new CareerFirstWaveLaunchManifestArtifact(
+                        scope: 'career_first_wave_10',
+                        counts: ['total' => 2, 'stable' => 2, 'candidate' => 0, 'hold' => 0, 'blocked' => 0],
+                        groups: ['stable' => ['registered-nurses', 'software-developers'], 'candidate' => [], 'hold' => [], 'blocked' => []],
+                        members: [
+                            [
+                                'canonical_slug' => 'registered-nurses',
+                                'launch_tier' => 'stable',
+                                'readiness_status' => 'publish_ready',
+                                'lifecycle_state' => 'indexed',
+                                'public_index_state' => 'indexable',
+                                'supporting_routes' => ['family_hub' => true, 'next_step_links_count' => 1],
+                                'trust_freshness' => ['review_due_known' => false, 'review_staleness_state' => 'unknown_due_date'],
+                            ],
+                            [
+                                'canonical_slug' => 'software-developers',
+                                'launch_tier' => 'stable',
+                                'readiness_status' => 'publish_ready',
+                                'lifecycle_state' => 'indexed',
+                                'public_index_state' => 'indexable',
+                                'supporting_routes' => ['family_hub' => true, 'next_step_links_count' => 1],
+                                'trust_freshness' => ['review_due_known' => false, 'review_staleness_state' => 'unknown_due_date'],
+                            ],
+                        ],
+                    ),
+                    'career-smoke-matrix.json' => new CareerFirstWaveSmokeMatrixArtifact(
+                        scope: 'career_first_wave_10',
+                        members: [
+                            [
+                                'canonical_slug' => 'software-developers',
+                                'smoke_matrix' => [
+                                    'job_detail_route_known' => true,
+                                    'discoverable_route_known' => true,
+                                    'seo_contract_present' => true,
+                                    'structured_data_authority_present' => true,
+                                    'trust_freshness_present' => true,
+                                    'family_support_route_present' => true,
+                                    'next_step_support_present' => true,
+                                ],
+                            ],
+                            [
+                                'canonical_slug' => 'registered-nurses',
+                                'smoke_matrix' => [
+                                    'job_detail_route_known' => true,
+                                    'discoverable_route_known' => true,
+                                    'seo_contract_present' => true,
+                                    'structured_data_authority_present' => true,
+                                    'trust_freshness_present' => true,
+                                    'family_support_route_present' => true,
+                                    'next_step_support_present' => true,
+                                ],
+                            ],
+                        ],
+                    ),
+                ];
+            }
+        };
+
+        $timestamp = '20260415T090300Z';
+        $finalDir = $this->rootDir.DIRECTORY_SEPARATOR.$timestamp;
+
+        $result = $service->materialize($timestamp);
+
+        $this->assertSame('materialized', $result['status']);
+        $this->assertDirectoryExists($finalDir);
+        $this->assertFileExists($finalDir.DIRECTORY_SEPARATOR.'career-launch-manifest.json');
+        $this->assertFileExists($finalDir.DIRECTORY_SEPARATOR.'career-smoke-matrix.json');
+    }
+
     private function materializeCurrentFirstWaveFixture(): void
     {
         $exitCode = Artisan::call('career:validate-first-wave-publish-ready', [

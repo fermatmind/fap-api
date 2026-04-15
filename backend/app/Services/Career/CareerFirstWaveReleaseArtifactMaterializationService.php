@@ -139,7 +139,18 @@ class CareerFirstWaveReleaseArtifactMaterializationService
             ->values()
             ->all();
 
-        if ($launchMemberSlugs !== $smokeMemberSlugs) {
+        $launchUniqueSlugs = array_values(array_unique($launchMemberSlugs));
+        $smokeUniqueSlugs = array_values(array_unique($smokeMemberSlugs));
+        if (count($launchUniqueSlugs) !== count($launchMemberSlugs)) {
+            throw new \RuntimeException('launch manifest contains duplicate member slugs');
+        }
+        if (count($smokeUniqueSlugs) !== count($smokeMemberSlugs)) {
+            throw new \RuntimeException('smoke matrix contains duplicate member slugs');
+        }
+
+        sort($launchUniqueSlugs);
+        sort($smokeUniqueSlugs);
+        if ($launchUniqueSlugs !== $smokeUniqueSlugs) {
             throw new \RuntimeException('launch/smoke member slug sets are inconsistent');
         }
 
