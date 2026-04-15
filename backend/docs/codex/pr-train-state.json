@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-15T05:30:06Z",
+  "updated_at": "2026-04-15T05:30:45Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1225,7 +1225,7 @@
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "pr_open_checks_failed",
       "branch": "codex/pr-b55-career-first-wave-release-artifact-export-whitelist-projection",
-      "commit_sha": "c685909057fbe500e4c6a86f1744fc704fdbfbb7",
+      "commit_sha": "5dc0d3c7dd1bb534fab98d4ff82f4f09992fae25",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/900",
       "checks": {
         "local": [
@@ -1250,22 +1250,22 @@
           {
             "name": "hygiene",
             "status": "failed",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24438102348/job/71396735151"
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24438129290/job/71396820599"
           },
           {
             "name": "verify-mbti-${{ matrix.mode }}",
             "status": "skipped",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24438102348/job/71396739937"
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24438129290/job/71396825273"
           },
           {
             "name": "hygiene",
             "status": "failed",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24438111543/job/71396762439"
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24438130379/job/71396823671"
           },
           {
             "name": "verify-mbti-${{ matrix.mode }}",
             "status": "skipped",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24438111543/job/71396767325"
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24438130379/job/71396828500"
           }
         ]
       },
