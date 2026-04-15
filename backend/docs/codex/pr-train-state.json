@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-15T12:05:00Z",
+  "updated_at": "2026-04-15T13:18:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1644,10 +1644,10 @@
     "PR-B63": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_verified",
+      "status": "github_checks_failed",
       "branch": "codex/pr-b63-career-claim-blocked-attribution-taxonomy-refinement-backend-first",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "0e807070524b01445ebdf8febf1cd30228447cd7",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/908",
       "checks": {
         "local": [
           {
@@ -1663,9 +1663,30 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24456472569/job/71458444771"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24456491332/job/71458509656"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24456472569/job/71458455189"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24456491332/job/71458521439"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub Actions jobs were blocked by repository billing/spending-limit failure; hygiene failed before execution and MBTI jobs were skipped while local validation passed.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
