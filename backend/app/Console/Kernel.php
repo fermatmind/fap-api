@@ -10,6 +10,7 @@ use App\Console\Commands\Big5PsychometricsReport;
 use App\Console\Commands\Big5TelemetrySummary;
 use App\Console\Commands\CareerCompileAuthorityWave;
 use App\Console\Commands\CareerExportFirstWaveReleaseArtifacts;
+use App\Console\Commands\CareerExportFirstWaveRolloutWavePlanArtifact;
 use App\Console\Commands\CareerImportAuthorityWave;
 use App\Console\Commands\CiScaleImpact;
 use App\Console\Commands\CommerceCompensatePendingOrders;
@@ -132,6 +133,7 @@ class Kernel extends ConsoleKernel
         CareerImportAuthorityWave::class,
         CareerCompileAuthorityWave::class,
         CareerExportFirstWaveReleaseArtifacts::class,
+        CareerExportFirstWaveRolloutWavePlanArtifact::class,
         RefreshCareerAttributionDailyCommand::class,
         PacksPublish::class,
         PacksRollback::class,

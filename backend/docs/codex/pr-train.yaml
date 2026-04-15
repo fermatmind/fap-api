@@ -866,6 +866,34 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B59
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b59-career-first-wave-rollout-wave-plan-artifact-materialization-export-command
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      Career first-wave rollout wave-plan artifact materialization / export command.
+      Add an internal-only materialization service and export command that persist
+      the B58 projected rollout wave-plan artifact to internal storage with
+      temp-directory validation and atomic finalize semantics, without changing B58
+      payload shape or introducing public API/OpenAPI/frontend surfaces.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Services/Career/CareerFirstWaveRolloutWavePlanArtifactMaterializationService.php app/Console/Commands/CareerExportFirstWaveRolloutWavePlanArtifact.php tests/Unit/Services/Career/CareerFirstWaveRolloutWavePlanArtifactMaterializationServiceTest.php tests/Feature/Console/CareerExportFirstWaveRolloutWavePlanArtifactCommandTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerFirstWaveRolloutWavePlanArtifactMaterializationServiceTest.php tests/Feature/Console/CareerExportFirstWaveRolloutWavePlanArtifactCommandTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerFirstWaveRolloutWavePlanArtifactProjectionServiceTest.php tests/Unit/Services/Career/CareerFirstWaveRolloutWavePlanServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditV2ServiceTest.php tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web

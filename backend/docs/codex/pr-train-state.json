@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-15T08:04:13Z",
+  "updated_at": "2026-04-15T08:26:51Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1378,9 +1378,9 @@
     "PR-B58": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_checks_failed",
+      "status": "merged",
       "branch": "codex/pr-b58-career-first-wave-rollout-wave-plan-artifact-projection-cohort-whitelist-projection",
-      "commit_sha": "e9c05c17948381ad1117cacc6588d0382386e4a3",
+      "commit_sha": "0540b40b1dbf131517cf32d2e6332c9f564db87e",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/903",
       "checks": {
         "local": [
@@ -1424,7 +1424,41 @@
           }
         ]
       },
-      "failure_reason": "GitHub Actions reported account billing/spending-limit blockage; hygiene failed before execution and MBTI matrix jobs were skipped, while local PR-B58 verification passed.",
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "2026-04-15T08:20:41Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-B59": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_verified",
+      "branch": "codex/pr-b59-career-first-wave-rollout-wave-plan-artifact-materialization-export-command",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "name": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "name": "vendor/bin/pint --test app/Services/Career/CareerFirstWaveRolloutWavePlanArtifactMaterializationService.php app/Console/Commands/CareerExportFirstWaveRolloutWavePlanArtifact.php tests/Unit/Services/Career/CareerFirstWaveRolloutWavePlanArtifactMaterializationServiceTest.php tests/Feature/Console/CareerExportFirstWaveRolloutWavePlanArtifactCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "name": "php artisan test tests/Unit/Services/Career/CareerFirstWaveRolloutWavePlanArtifactMaterializationServiceTest.php tests/Feature/Console/CareerExportFirstWaveRolloutWavePlanArtifactCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "name": "php artisan test tests/Unit/Services/Career/CareerFirstWaveRolloutWavePlanArtifactProjectionServiceTest.php tests/Unit/Services/Career/CareerFirstWaveRolloutWavePlanServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditV2ServiceTest.php tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
