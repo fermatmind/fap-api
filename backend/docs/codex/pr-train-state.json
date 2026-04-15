@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T08:46:00Z",
+  "updated_at": "2026-04-15T23:53:35Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1695,7 +1695,7 @@
     "PR-B64": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/pr-b64-career-white-box-score-payload-completion",
       "commit_sha": "2ea1e88afa5b71e7805acbdb82ba60a7574fbbc3",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/911",
@@ -1719,6 +1719,44 @@
           },
           {
             "name": "php artisan test tests/Feature/OpenApiDiffTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "2026-04-15T16:42:53Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-B65": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "in_progress",
+      "branch": "codex/pr-b65-career-transition-engine-contract-expansion",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/Transition/*.php app/DTO/Career/CareerTransition*.php tests/Unit/Services/Career/CareerTransitionContractBuilderTest.php tests/Feature/Career/CareerRecommendation*.php tests/Feature/Career/CareerTransitionPreview*.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerTransitionContractBuilderTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Career/CareerRecommendation*.php tests/Feature/Career/CareerTransitionPreview*.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/OpenApiDiffTest.php",
             "status": "passed"
           }
         ],

@@ -6,6 +6,7 @@ namespace App\Services\Career\Bundles;
 
 use App\Domain\Career\IndexStateValue;
 use App\DTO\Career\CareerRecommendationDetailBundle;
+use App\DTO\Career\CareerTransitionPreviewBundle;
 use App\Models\Occupation;
 use App\Models\RecommendationSnapshot;
 use App\Services\Career\Scoring\CareerWhiteBoxScorePayloadBuilder;
@@ -17,6 +18,7 @@ final class CareerRecommendationDetailBundleBuilder
     public function __construct(
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
         private readonly CareerWhiteBoxScorePayloadBuilder $whiteBoxScorePayloadBuilder,
+        private readonly CareerTransitionPreviewBundleBuilder $transitionPreviewBundleBuilder,
     ) {}
 
     public function buildByType(string $type): ?CareerRecommendationDetailBundle
@@ -54,6 +56,8 @@ final class CareerRecommendationDetailBundleBuilder
 
         $scoreBundle = $this->normalizeArray($payload['score_bundle'] ?? []);
         $warnings = $this->normalizeArray($payload['warnings'] ?? []);
+        $routeSubject = $this->routeSubject($subjectMeta, $requestedType);
+        $transitionPath = $this->recommendationTransitionPath($routeSubject);
 
         return new CareerRecommendationDetailBundle(
             identity: [
@@ -96,7 +100,8 @@ final class CareerRecommendationDetailBundleBuilder
                 'methodology' => is_array($trustManifest?->methodology) ? $trustManifest->methodology : [],
             ],
             matchedJobs: $this->buildMatchedJobs($snapshots),
-            seoContract: $this->buildSeoContract($snapshot, $subjectMeta, $requestedType),
+            transitionPath: $transitionPath,
+            seoContract: $this->buildSeoContract($snapshot, $routeSubject),
             provenanceMeta: [
                 'content_version' => $trustManifest?->content_version,
                 'data_version' => $trustManifest?->data_version,
@@ -216,10 +221,9 @@ final class CareerRecommendationDetailBundleBuilder
      * @param  array<string, mixed>  $subjectMeta
      * @return array<string, mixed>
      */
-    private function buildSeoContract(RecommendationSnapshot $snapshot, array $subjectMeta, string $requestedType): array
+    private function buildSeoContract(RecommendationSnapshot $snapshot, string $routeSubject): array
     {
         $indexState = $snapshot->indexState;
-        $routeSubject = $this->routeSubject($subjectMeta, $requestedType);
         $canonicalPath = '/career/recommendations/mbti/'.$routeSubject;
         $indexEligible = (bool) ($indexState?->index_eligible ?? false);
         $publicIndexState = IndexStateValue::publicFacing((string) ($indexState?->index_state ?? ''), $indexEligible);
@@ -246,6 +250,22 @@ final class CareerRecommendationDetailBundleBuilder
             'robots_policy' => $surface['robots_policy'] ?? $robotsPolicy,
             'metadata_fingerprint' => $surface['metadata_fingerprint'] ?? null,
         ];
+    }
+
+    /**
+     * @return array<string, mixed>|null
+     */
+    private function recommendationTransitionPath(string $routeSubject): ?array
+    {
+        $bundle = $this->transitionPreviewBundleBuilder->buildByType($routeSubject);
+        if (! $bundle instanceof CareerTransitionPreviewBundle) {
+            return null;
+        }
+
+        $payload = $bundle->toArray();
+        unset($payload['bundle_kind'], $payload['bundle_version'], $payload['seo_contract'], $payload['provenance_meta']);
+
+        return $payload === [] ? null : $payload;
     }
 
     /**
