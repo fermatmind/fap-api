@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-15T06:20:14Z",
+  "updated_at": "2026-04-15T06:21:26Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1278,10 +1278,10 @@
     "PR-B56": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_verified",
+      "status": "pr_open_checks_failed",
       "branch": "codex/pr-b56-career-first-wave-release-artifact-materialization-export-command",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "9706d443b42d8cc39bdc730c37211dba7e62b64b",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/901",
       "checks": {
         "local": [
           {
@@ -1301,9 +1301,30 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24439651568/job/71401463954"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24439651568/job/71401471679"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24439666796/job/71401512226"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24439666796/job/71401518185"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub hygiene failed immediately on both PR-B56 runs and the MBTI matrix jobs were skipped; local verification passed, but the remote CI run is currently not green.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
