@@ -111,10 +111,42 @@ final class CareerAttributionDailyBuilderTest extends TestCase
             'subject_key' => 'data-scientists',
             'query_mode' => 'non_query',
         ], 'anon_h', 'session_h');
+        $this->insertCareerEvent($orgId, 'career_alias_resolution_submit', $day->copy()->addMinutes(10), [
+            'entry_surface' => 'career_alias_disambiguation',
+            'source_page_type' => 'career_alias_disambiguation',
+            'route_family' => 'alias_resolution',
+            'subject_kind' => 'none',
+            'subject_key' => '',
+            'query_mode' => 'query',
+        ], 'anon_alias_submit', 'session_alias_submit');
+        $this->insertCareerEvent($orgId, 'career_alias_resolution_target_click', $day->copy()->addMinutes(11), [
+            'entry_surface' => 'career_alias_disambiguation',
+            'source_page_type' => 'career_alias_disambiguation',
+            'route_family' => 'alias_resolution',
+            'subject_kind' => 'job_slug',
+            'subject_key' => 'data-scientists',
+            'query_mode' => 'query',
+        ], 'anon_alias_target_job', 'session_alias_target_job');
+        $this->insertCareerEvent($orgId, 'career_alias_resolution_target_click', $day->copy()->addMinutes(12), [
+            'entry_surface' => 'career_alias_disambiguation',
+            'source_page_type' => 'career_alias_disambiguation',
+            'route_family' => 'alias_resolution',
+            'subject_kind' => 'family_slug',
+            'subject_key' => 'computer-and-information-technology',
+            'query_mode' => 'query',
+        ], 'anon_alias_target_family', 'session_alias_target_family');
+        $this->insertCareerEvent($orgId, 'career_alias_resolution_no_result', $day->copy()->addMinutes(13), [
+            'entry_surface' => 'career_alias_disambiguation',
+            'source_page_type' => 'career_alias_disambiguation',
+            'route_family' => 'alias_resolution',
+            'subject_kind' => 'none',
+            'subject_key' => '',
+            'query_mode' => 'query',
+        ], 'anon_alias_no_result', 'session_alias_no_result');
 
         $result = app(CareerAttributionDailyBuilder::class)->refresh($day, $day, [$orgId], false);
 
-        $this->assertSame(10, (int) ($result['upserted_rows'] ?? 0));
+        $this->assertSame(14, (int) ($result['upserted_rows'] ?? 0));
 
         $readyRow = DB::table('analytics_career_attribution_daily')
             ->where('day', $day->toDateString())
@@ -225,6 +257,51 @@ final class CareerAttributionDailyBuilderTest extends TestCase
         $this->assertNotNull($recommendationBlockedRow);
         $this->assertSame(1, (int) $jobBlockedRow->event_count);
         $this->assertSame(1, (int) $recommendationBlockedRow->event_count);
+
+        $aliasSubmitRow = DB::table('analytics_career_attribution_daily')
+            ->where('event_name', 'career_alias_resolution_submit')
+            ->first();
+
+        $aliasJobClickRow = DB::table('analytics_career_attribution_daily')
+            ->where('event_name', 'career_alias_resolution_target_click')
+            ->where('subject_kind', 'job_slug')
+            ->where('subject_key', 'data-scientists')
+            ->first();
+
+        $aliasFamilyClickRow = DB::table('analytics_career_attribution_daily')
+            ->where('event_name', 'career_alias_resolution_target_click')
+            ->where('subject_kind', 'family_slug')
+            ->where('subject_key', 'computer-and-information-technology')
+            ->first();
+
+        $aliasNoResultRow = DB::table('analytics_career_attribution_daily')
+            ->where('event_name', 'career_alias_resolution_no_result')
+            ->first();
+
+        $this->assertNotNull($aliasSubmitRow);
+        $this->assertNotNull($aliasJobClickRow);
+        $this->assertNotNull($aliasFamilyClickRow);
+        $this->assertNotNull($aliasNoResultRow);
+
+        $this->assertSame('alias_disambiguation', $aliasSubmitRow->source_page_type);
+        $this->assertSame('alias_resolution', $aliasSubmitRow->route_family);
+        $this->assertSame('unknown', $aliasSubmitRow->readiness_class);
+        $this->assertSame('query', $aliasSubmitRow->query_mode);
+
+        $this->assertSame('alias_disambiguation', $aliasJobClickRow->source_page_type);
+        $this->assertSame('alias_resolution', $aliasJobClickRow->route_family);
+        $this->assertSame('publish_ready', $aliasJobClickRow->readiness_class);
+        $this->assertSame('query', $aliasJobClickRow->query_mode);
+
+        $this->assertSame('alias_disambiguation', $aliasFamilyClickRow->source_page_type);
+        $this->assertSame('alias_resolution', $aliasFamilyClickRow->route_family);
+        $this->assertSame('unknown', $aliasFamilyClickRow->readiness_class);
+        $this->assertSame('query', $aliasFamilyClickRow->query_mode);
+
+        $this->assertSame('alias_disambiguation', $aliasNoResultRow->source_page_type);
+        $this->assertSame('alias_resolution', $aliasNoResultRow->route_family);
+        $this->assertSame('unknown', $aliasNoResultRow->readiness_class);
+        $this->assertSame('query', $aliasNoResultRow->query_mode);
     }
 
     private function materializeCurrentFirstWaveFixture(): void

@@ -27,6 +27,9 @@ final class CareerAttributionEventMapper
         'career_recommendation_matched_job_click',
         'career_transition_preview_view',
         'career_transition_preview_target_click',
+        'career_alias_resolution_submit',
+        'career_alias_resolution_target_click',
+        'career_alias_resolution_no_result',
         'career_ready_surface_exposed',
         'career_blocked_surface_exposed',
     ];
@@ -40,6 +43,7 @@ final class CareerAttributionEventMapper
         'jobs_search',
         'job_detail',
         'family_hub',
+        'alias_resolution',
         'recommendations',
         'recommendation_detail',
     ];

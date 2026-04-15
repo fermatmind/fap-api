@@ -326,6 +326,120 @@ final class CareerAttributionEventIngestTest extends TestCase
         }
     }
 
+    public function test_ingest_endpoint_accepts_alias_resolution_events_with_backend_owned_identity_mapping(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        $cases = [
+            [
+                'event' => 'career_alias_resolution_submit',
+                'anon' => 'anon_b62_alias_submit',
+                'payload' => [
+                    'entry_surface' => 'career_alias_disambiguation',
+                    'source_page_type' => 'career_alias_disambiguation',
+                    'target_action' => 'submit_alias_resolution',
+                    'landing_path' => '/en/career/resolve?q=data+science',
+                    'route_family' => 'alias_resolution',
+                    'subject_kind' => 'none',
+                    'subject_key' => '',
+                    'query_mode' => 'query',
+                    'locale' => 'en',
+                ],
+                'expected_subject_kind' => 'none',
+                'expected_subject_key' => '',
+                'expected_target_action' => 'submit_alias_resolution',
+            ],
+            [
+                'event' => 'career_alias_resolution_target_click',
+                'anon' => 'anon_b62_alias_target_job',
+                'payload' => [
+                    'entry_surface' => 'career_alias_disambiguation',
+                    'source_page_type' => 'career_alias_disambiguation',
+                    'target_action' => 'open_alias_resolution_target',
+                    'landing_path' => '/en/career/resolve?q=data+science',
+                    'route_family' => 'alias_resolution',
+                    'subject_kind' => 'job_slug',
+                    'subject_key' => 'data-scientists',
+                    'query_mode' => 'query',
+                    'locale' => 'en',
+                ],
+                'expected_subject_kind' => 'job_slug',
+                'expected_subject_key' => 'data-scientists',
+                'expected_target_action' => 'open_alias_resolution_target',
+            ],
+            [
+                'event' => 'career_alias_resolution_target_click',
+                'anon' => 'anon_b62_alias_target_family',
+                'payload' => [
+                    'entry_surface' => 'career_alias_disambiguation',
+                    'source_page_type' => 'career_alias_disambiguation',
+                    'target_action' => 'open_alias_resolution_target',
+                    'landing_path' => '/en/career/resolve?q=data+science',
+                    'route_family' => 'alias_resolution',
+                    'subject_kind' => 'family_slug',
+                    'subject_key' => 'computer-and-information-technology',
+                    'query_mode' => 'query',
+                    'locale' => 'en',
+                ],
+                'expected_subject_kind' => 'family_slug',
+                'expected_subject_key' => 'computer-and-information-technology',
+                'expected_target_action' => 'open_alias_resolution_target',
+            ],
+            [
+                'event' => 'career_alias_resolution_no_result',
+                'anon' => 'anon_b62_alias_no_result',
+                'payload' => [
+                    'entry_surface' => 'career_alias_disambiguation',
+                    'source_page_type' => 'career_alias_disambiguation',
+                    'target_action' => 'no_alias_resolution_match',
+                    'landing_path' => '/en/career/resolve?q=unknown+job',
+                    'route_family' => 'alias_resolution',
+                    'subject_kind' => 'none',
+                    'subject_key' => '',
+                    'query_mode' => 'query',
+                    'locale' => 'en',
+                ],
+                'expected_subject_kind' => 'none',
+                'expected_subject_key' => '',
+                'expected_target_action' => 'no_alias_resolution_match',
+            ],
+        ];
+
+        foreach ($cases as $case) {
+            $response = $this->withHeaders([
+                'Authorization' => 'Bearer ingest_test_token',
+            ])->postJson('/api/v0.5/career/attribution/events', [
+                'eventName' => $case['event'],
+                'anonymousId' => $case['anon'],
+                'path' => '/en/career/resolve?q=data+science',
+                'timestamp' => '2026-04-15T10:00:00+08:00',
+                'payload' => $case['payload'],
+            ]);
+
+            $response->assertStatus(202)
+                ->assertJsonPath('event_code', $case['event']);
+
+            $row = DB::table('events')
+                ->where('event_code', $case['event'])
+                ->where('anon_id', $case['anon'])
+                ->first();
+
+            $this->assertNotNull($row);
+
+            $meta = is_array($row->meta_json ?? null)
+                ? $row->meta_json
+                : (json_decode((string) ($row->meta_json ?? '{}'), true) ?: []);
+
+            $this->assertSame('career_alias_disambiguation', $meta['entry_surface'] ?? null);
+            $this->assertSame('alias_disambiguation', $meta['source_page_type'] ?? null);
+            $this->assertSame('alias_resolution', $meta['route_family'] ?? null);
+            $this->assertSame('query', $meta['query_mode'] ?? null);
+            $this->assertSame($case['expected_subject_kind'], $meta['subject_kind'] ?? null);
+            $this->assertSame($case['expected_subject_key'], $meta['subject_key'] ?? null);
+            $this->assertSame($case['expected_target_action'], $meta['target_action'] ?? null);
+        }
+    }
+
     public function test_ingest_endpoint_keeps_recommendation_interactions_distinct_from_job_interactions(): void
     {
         config()->set('fap.events.ingest_token', 'ingest_test_token');
