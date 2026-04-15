@@ -9,6 +9,7 @@ use App\Console\Commands\Big5AttemptPurge;
 use App\Console\Commands\Big5PsychometricsReport;
 use App\Console\Commands\Big5TelemetrySummary;
 use App\Console\Commands\CareerCompileAuthorityWave;
+use App\Console\Commands\CareerExportFirstWaveRolloutBundleArtifacts;
 use App\Console\Commands\CareerExportFirstWaveReleaseArtifacts;
 use App\Console\Commands\CareerExportFirstWaveRolloutWavePlanArtifact;
 use App\Console\Commands\CareerImportAuthorityWave;
@@ -132,6 +133,7 @@ class Kernel extends ConsoleKernel
         CommerceRepairPostCommitFailed::class,
         CareerImportAuthorityWave::class,
         CareerCompileAuthorityWave::class,
+        CareerExportFirstWaveRolloutBundleArtifacts::class,
         CareerExportFirstWaveReleaseArtifacts::class,
         CareerExportFirstWaveRolloutWavePlanArtifact::class,
         RefreshCareerAttributionDailyCommand::class,
