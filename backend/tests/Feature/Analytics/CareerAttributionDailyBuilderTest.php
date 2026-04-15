@@ -47,7 +47,23 @@ final class CareerAttributionDailyBuilderTest extends TestCase
             'subject_key' => 'software-developers',
             'query_mode' => 'query',
         ], 'anon_b', 'session_b');
-        $this->insertCareerEvent($orgId, 'career_recommendation_matched_job_click', $day->copy()->addMinutes(3), [
+        $this->insertCareerEvent($orgId, 'career_family_hub_view', $day->copy()->addMinutes(2), [
+            'entry_surface' => 'career_family_hub',
+            'source_page_type' => 'career_family_hub',
+            'route_family' => 'family_hub',
+            'subject_kind' => 'family_slug',
+            'subject_key' => 'data-and-ai',
+            'query_mode' => 'non_query',
+        ], 'anon_family_view', 'session_family_view');
+        $this->insertCareerEvent($orgId, 'career_family_hub_child_click', $day->copy()->addMinutes(3), [
+            'entry_surface' => 'career_family_hub',
+            'source_page_type' => 'career_family_hub',
+            'route_family' => 'family_hub',
+            'subject_kind' => 'job_slug',
+            'subject_key' => 'registered-nurses',
+            'query_mode' => 'non_query',
+        ], 'anon_family_click', 'session_family_click');
+        $this->insertCareerEvent($orgId, 'career_recommendation_matched_job_click', $day->copy()->addMinutes(4), [
             'entry_surface' => 'career_recommendation_detail',
             'source_page_type' => 'recommendation_detail',
             'route_family' => 'recommendation_detail',
@@ -55,7 +71,7 @@ final class CareerAttributionDailyBuilderTest extends TestCase
             'subject_key' => 'marketing-managers',
             'query_mode' => 'non_query',
         ], 'anon_c', 'session_c');
-        $this->insertCareerEvent($orgId, 'career_recommendation_result_click', $day->copy()->addMinutes(4), [
+        $this->insertCareerEvent($orgId, 'career_recommendation_result_click', $day->copy()->addMinutes(5), [
             'entry_surface' => 'career_recommendation_index',
             'source_page_type' => 'recommendation_index',
             'route_family' => 'recommendations',
@@ -63,7 +79,7 @@ final class CareerAttributionDailyBuilderTest extends TestCase
             'subject_key' => 'intj',
             'query_mode' => 'non_query',
         ], 'anon_d', 'session_d');
-        $this->insertCareerEvent($orgId, 'career_transition_preview_view', $day->copy()->addMinutes(5), [
+        $this->insertCareerEvent($orgId, 'career_transition_preview_view', $day->copy()->addMinutes(6), [
             'entry_surface' => 'career_recommendation_detail_transition_preview',
             'source_page_type' => 'career_recommendation_detail',
             'route_family' => 'recommendation_detail',
@@ -71,7 +87,7 @@ final class CareerAttributionDailyBuilderTest extends TestCase
             'subject_key' => 'registered-nurses',
             'query_mode' => 'non_query',
         ], 'anon_e', 'session_e');
-        $this->insertCareerEvent($orgId, 'career_transition_preview_target_click', $day->copy()->addMinutes(6), [
+        $this->insertCareerEvent($orgId, 'career_transition_preview_target_click', $day->copy()->addMinutes(7), [
             'entry_surface' => 'career_recommendation_detail_transition_preview',
             'source_page_type' => 'career_recommendation_detail',
             'route_family' => 'recommendation_detail',
@@ -79,7 +95,7 @@ final class CareerAttributionDailyBuilderTest extends TestCase
             'subject_key' => 'registered-nurses',
             'query_mode' => 'non_query',
         ], 'anon_f', 'session_f');
-        $this->insertCareerEvent($orgId, 'career_blocked_surface_exposed', $day->copy()->addMinutes(7), [
+        $this->insertCareerEvent($orgId, 'career_blocked_surface_exposed', $day->copy()->addMinutes(8), [
             'entry_surface' => 'career_blocked_surface',
             'source_page_type' => 'job_detail',
             'route_family' => 'job_detail',
@@ -87,7 +103,7 @@ final class CareerAttributionDailyBuilderTest extends TestCase
             'subject_key' => 'data-scientists',
             'query_mode' => 'non_query',
         ], 'anon_g', 'session_g');
-        $this->insertCareerEvent($orgId, 'career_blocked_surface_exposed', $day->copy()->addMinutes(8), [
+        $this->insertCareerEvent($orgId, 'career_blocked_surface_exposed', $day->copy()->addMinutes(9), [
             'entry_surface' => 'career_blocked_surface',
             'source_page_type' => 'recommendation_detail',
             'route_family' => 'job_detail',
@@ -98,7 +114,7 @@ final class CareerAttributionDailyBuilderTest extends TestCase
 
         $result = app(CareerAttributionDailyBuilder::class)->refresh($day, $day, [$orgId], false);
 
-        $this->assertSame(8, (int) ($result['upserted_rows'] ?? 0));
+        $this->assertSame(10, (int) ($result['upserted_rows'] ?? 0));
 
         $readyRow = DB::table('analytics_career_attribution_daily')
             ->where('day', $day->toDateString())
@@ -124,6 +140,30 @@ final class CareerAttributionDailyBuilderTest extends TestCase
         $this->assertSame('job_index', $blockedRow->source_page_type);
         $this->assertSame('query', $blockedRow->query_mode);
         $this->assertSame('jobs_search', $blockedRow->route_family);
+
+        $familyHubViewRow = DB::table('analytics_career_attribution_daily')
+            ->where('event_name', 'career_family_hub_view')
+            ->where('subject_key', 'data-and-ai')
+            ->first();
+
+        $this->assertNotNull($familyHubViewRow);
+        $this->assertSame('career_family_hub', $familyHubViewRow->surface);
+        $this->assertSame('family_hub', $familyHubViewRow->source_page_type);
+        $this->assertSame('family_hub', $familyHubViewRow->route_family);
+        $this->assertSame('family_slug', $familyHubViewRow->subject_kind);
+        $this->assertSame('unknown', $familyHubViewRow->readiness_class);
+
+        $familyHubChildClickRow = DB::table('analytics_career_attribution_daily')
+            ->where('event_name', 'career_family_hub_child_click')
+            ->where('subject_key', 'registered-nurses')
+            ->first();
+
+        $this->assertNotNull($familyHubChildClickRow);
+        $this->assertSame('career_family_hub', $familyHubChildClickRow->surface);
+        $this->assertSame('family_hub', $familyHubChildClickRow->source_page_type);
+        $this->assertSame('family_hub', $familyHubChildClickRow->route_family);
+        $this->assertSame('job_slug', $familyHubChildClickRow->subject_kind);
+        $this->assertSame('publish_ready', $familyHubChildClickRow->readiness_class);
 
         $matchedJobRow = DB::table('analytics_career_attribution_daily')
             ->where('event_name', 'career_recommendation_matched_job_click')

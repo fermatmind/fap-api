@@ -214,6 +214,10 @@ final class CareerAttributionDailyBuilder
      */
     private function deriveReadinessClass(string $subjectKind, string $subjectKey, array $readinessBySlug): string
     {
+        if ($subjectKind === 'family_slug') {
+            return 'unknown';
+        }
+
         if ($subjectKind !== 'job_slug' || $subjectKey === '') {
             return 'unknown';
         }

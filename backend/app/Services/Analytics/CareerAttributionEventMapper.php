@@ -15,11 +15,13 @@ final class CareerAttributionEventMapper
         'career_landing_view',
         'career_job_index_view',
         'career_job_detail_view',
+        'career_family_hub_view',
         'career_recommendation_index_view',
         'career_recommendation_detail_view',
         'career_job_search_submit',
         'career_job_search_result_click',
         'career_job_index_result_click',
+        'career_family_hub_child_click',
         'career_job_detail_cta_click',
         'career_recommendation_result_click',
         'career_recommendation_matched_job_click',
@@ -37,6 +39,7 @@ final class CareerAttributionEventMapper
         'jobs',
         'jobs_search',
         'job_detail',
+        'family_hub',
         'recommendations',
         'recommendation_detail',
     ];
@@ -46,6 +49,7 @@ final class CareerAttributionEventMapper
      */
     private const ALLOWED_SUBJECT_KINDS = [
         'none',
+        'family_slug',
         'job_slug',
         'recommendation_type',
     ];

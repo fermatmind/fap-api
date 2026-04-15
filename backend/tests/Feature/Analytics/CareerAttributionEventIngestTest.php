@@ -103,6 +103,23 @@ final class CareerAttributionEventIngestTest extends TestCase
                 'expected_source_page_type' => 'recommendation_detail',
             ],
             [
+                'event' => 'career_family_hub_view',
+                'anon' => 'anon_b50_family_hub_view',
+                'path' => '/en/career/family/data-and-ai',
+                'payload' => [
+                    'entry_surface' => 'career_family_hub',
+                    'source_page_type' => 'career_family_hub',
+                    'target_action' => 'view_family_hub',
+                    'landing_path' => '/en/career/family/data-and-ai',
+                    'route_family' => 'family_hub',
+                    'subject_kind' => 'family_slug',
+                    'subject_key' => 'data-and-ai',
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                ],
+                'expected_source_page_type' => 'family_hub',
+            ],
+            [
                 'event' => 'career_transition_preview_view',
                 'anon' => 'anon_b42_transition_view',
                 'path' => '/en/career/recommendations/mbti/intj-a',
@@ -170,6 +187,23 @@ final class CareerAttributionEventIngestTest extends TestCase
                 'expected_source_page_type' => 'job_index',
             ],
             [
+                'event' => 'career_family_hub_child_click',
+                'anon' => 'anon_b50_family_hub_child_click',
+                'path' => '/en/career/family/data-and-ai',
+                'payload' => [
+                    'entry_surface' => 'career_family_hub',
+                    'source_page_type' => 'career_family_hub',
+                    'target_action' => 'open_family_hub_child',
+                    'landing_path' => '/en/career/family/data-and-ai',
+                    'route_family' => 'family_hub',
+                    'subject_kind' => 'job_slug',
+                    'subject_key' => 'data-scientists',
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                ],
+                'expected_source_page_type' => 'family_hub',
+            ],
+            [
                 'event' => 'career_blocked_surface_exposed',
                 'anon' => 'anon_b42_blocked_surface',
                 'path' => '/en/career/jobs/software-developers',
@@ -214,6 +248,81 @@ final class CareerAttributionEventIngestTest extends TestCase
                 : (json_decode((string) ($row->meta_json ?? '{}'), true) ?: []);
 
             $this->assertSame($case['expected_source_page_type'], $meta['source_page_type'] ?? null);
+        }
+    }
+
+    public function test_ingest_endpoint_normalizes_family_hub_view_and_child_click_dimensions(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        $cases = [
+            [
+                'event' => 'career_family_hub_view',
+                'anon' => 'anon_b50_family_hub_view_dimensions',
+                'payload' => [
+                    'entry_surface' => 'career_family_hub',
+                    'source_page_type' => 'career_family_hub',
+                    'target_action' => 'view_family_hub',
+                    'landing_path' => '/en/career/family/business-and-finance',
+                    'route_family' => 'family_hub',
+                    'subject_kind' => 'family_slug',
+                    'subject_key' => 'business-and-finance',
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                ],
+                'expected_subject_kind' => 'family_slug',
+                'expected_subject_key' => 'business-and-finance',
+            ],
+            [
+                'event' => 'career_family_hub_child_click',
+                'anon' => 'anon_b50_family_hub_child_dimensions',
+                'payload' => [
+                    'entry_surface' => 'career_family_hub',
+                    'source_page_type' => 'career_family_hub',
+                    'target_action' => 'open_family_hub_child',
+                    'landing_path' => '/en/career/family/business-and-finance',
+                    'route_family' => 'family_hub',
+                    'subject_kind' => 'job_slug',
+                    'subject_key' => 'financial-managers',
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                ],
+                'expected_subject_kind' => 'job_slug',
+                'expected_subject_key' => 'financial-managers',
+            ],
+        ];
+
+        foreach ($cases as $case) {
+            $response = $this->withHeaders([
+                'Authorization' => 'Bearer ingest_test_token',
+            ])->postJson('/api/v0.5/career/attribution/events', [
+                'eventName' => $case['event'],
+                'anonymousId' => $case['anon'],
+                'path' => '/en/career/family/business-and-finance',
+                'timestamp' => '2026-04-14T10:00:00+08:00',
+                'payload' => $case['payload'],
+            ]);
+
+            $response->assertStatus(202)
+                ->assertJsonPath('event_code', $case['event']);
+
+            $row = DB::table('events')
+                ->where('event_code', $case['event'])
+                ->where('anon_id', $case['anon'])
+                ->first();
+
+            $this->assertNotNull($row);
+
+            $meta = is_array($row->meta_json ?? null)
+                ? $row->meta_json
+                : (json_decode((string) ($row->meta_json ?? '{}'), true) ?: []);
+
+            $this->assertSame('career_family_hub', $meta['entry_surface'] ?? null);
+            $this->assertSame('family_hub', $meta['source_page_type'] ?? null);
+            $this->assertSame('family_hub', $meta['route_family'] ?? null);
+            $this->assertSame($case['expected_subject_kind'], $meta['subject_kind'] ?? null);
+            $this->assertSame($case['expected_subject_key'], $meta['subject_key'] ?? null);
+            $this->assertSame('non_query', $meta['query_mode'] ?? null);
         }
     }
 
@@ -352,7 +461,14 @@ final class CareerAttributionEventIngestTest extends TestCase
     {
         config()->set('fap.events.ingest_token', 'ingest_test_token');
 
-        foreach (['career_unknown_event', 'career_view', 'career_alias_search', 'career_shortlist_add'] as $eventName) {
+        foreach ([
+            'career_unknown_event',
+            'career_view',
+            'career_alias_search',
+            'career_shortlist_add',
+            'career_family_hub_ready_surface_exposed',
+            'career_family_hub_blocked_surface_exposed',
+        ] as $eventName) {
             $response = $this->withHeaders([
                 'Authorization' => 'Bearer ingest_test_token',
             ])->postJson('/api/v0.5/career/attribution/events', [
