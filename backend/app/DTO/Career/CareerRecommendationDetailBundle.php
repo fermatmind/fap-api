@@ -19,6 +19,7 @@ final class CareerRecommendationDetailBundle
      * @param  list<array<string, mixed>>  $matchedJobs
      * @param  array<string, mixed>  $seoContract
      * @param  array<string, mixed>  $provenanceMeta
+     * @param  array<string, mixed>|null  $transitionPath
      */
     public function __construct(
         public readonly array $identity,
@@ -31,6 +32,7 @@ final class CareerRecommendationDetailBundle
         public readonly array $integritySummary,
         public readonly array $trustManifest,
         public readonly array $matchedJobs,
+        public readonly ?array $transitionPath,
         public readonly array $seoContract,
         public readonly array $provenanceMeta,
     ) {}
@@ -40,7 +42,7 @@ final class CareerRecommendationDetailBundle
      */
     public function toArray(): array
     {
-        return [
+        $payload = [
             'bundle_kind' => 'career_recommendation_detail',
             'bundle_version' => 'career.protocol.recommendation_detail.v1',
             'identity' => $this->identity,
@@ -53,8 +55,15 @@ final class CareerRecommendationDetailBundle
             'integrity_summary' => $this->integritySummary,
             'trust_manifest' => $this->trustManifest,
             'matched_jobs' => $this->matchedJobs,
+            'transition_path' => $this->transitionPath,
             'seo_contract' => $this->seoContract,
             'provenance_meta' => $this->provenanceMeta,
         ];
+
+        if ($payload['transition_path'] === null || $payload['transition_path'] === []) {
+            unset($payload['transition_path']);
+        }
+
+        return $payload;
     }
 }

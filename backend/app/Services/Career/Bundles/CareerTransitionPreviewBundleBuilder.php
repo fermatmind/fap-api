@@ -10,12 +10,14 @@ use App\DTO\Career\CareerTransitionPreviewBundle;
 use App\Models\RecommendationSnapshot;
 use App\Models\TransitionPath;
 use App\Services\Career\CareerTransitionPreviewReadinessLookup;
+use App\Services\Career\Transition\CareerTransitionContractBuilder;
 use Illuminate\Support\Collection;
 
 final class CareerTransitionPreviewBundleBuilder
 {
     public function __construct(
         private readonly CareerTransitionPreviewReadinessLookup $readinessLookup,
+        private readonly CareerTransitionContractBuilder $transitionContractBuilder,
     ) {}
 
     public function buildByType(string $type): ?CareerTransitionPreviewBundle
@@ -119,6 +121,7 @@ final class CareerTransitionPreviewBundleBuilder
             ? null
             : array_values($normalizedPathPayload->steps);
         $publicDelta = $this->publicDelta($normalizedPathPayload->delta);
+        $transitionExpansion = $this->transitionContractBuilder->build($normalizedPathPayload);
 
         $scoreBundle = is_array($payload['score_bundle'] ?? null) ? $payload['score_bundle'] : [];
         $reasonCodes = is_array($claimPermissions['reason_codes'] ?? null) ? array_values($claimPermissions['reason_codes']) : [];
@@ -142,6 +145,21 @@ final class CareerTransitionPreviewBundleBuilder
                 'reviewer_status' => $readiness['reviewer_status'] ?? null,
                 'reason_codes' => $reasonCodes,
             ],
+            whyThisPath: is_string($transitionExpansion['why_this_path'] ?? null)
+                ? $transitionExpansion['why_this_path']
+                : null,
+            whatIsLost: is_string($transitionExpansion['what_is_lost'] ?? null)
+                ? $transitionExpansion['what_is_lost']
+                : null,
+            bridgeSteps90d: is_array($transitionExpansion['bridge_steps_90d'] ?? null)
+                ? $transitionExpansion['bridge_steps_90d']
+                : null,
+            rationaleCodes: is_array($transitionExpansion['rationale_codes'] ?? null)
+                ? $transitionExpansion['rationale_codes']
+                : null,
+            tradeoffCodes: is_array($transitionExpansion['tradeoff_codes'] ?? null)
+                ? $transitionExpansion['tradeoff_codes']
+                : null,
             seoContract: [
                 'canonical_path' => '/career/jobs/'.$targetOccupation->canonical_slug,
                 'canonical_target' => null,

@@ -64,9 +64,13 @@ final class CareerTransitionPreviewBundleBuilderTest extends TestCase
         $this->assertSame($snapshot->id, data_get($payload, 'provenance_meta.recommendation_snapshot_id'));
         $this->assertNotNull(data_get($payload, 'score_summary.mobility_score.value'));
         $this->assertNull(data_get($payload, 'delta'));
-        $this->assertNull(data_get($payload, 'why_this_path'));
-        $this->assertNull(data_get($payload, 'what_is_lost'));
-        $this->assertNull(data_get($payload, 'bridge_steps_90d'));
+        $this->assertArrayNotHasKey('why_this_path', $payload);
+        $this->assertArrayNotHasKey('what_is_lost', $payload);
+        $this->assertSame([
+            \App\Services\Career\Transition\CareerTransitionContractBuilder::TIME_HORIZON_DAYS_0_30,
+            \App\Services\Career\Transition\CareerTransitionContractBuilder::TIME_HORIZON_DAYS_31_60,
+            \App\Services\Career\Transition\CareerTransitionContractBuilder::TIME_HORIZON_DAYS_61_90,
+        ], array_column((array) ($payload['bridge_steps_90d'] ?? []), 'time_horizon'));
     }
 
     public function test_it_excludes_blocked_override_eligible_targets(): void
@@ -188,7 +192,7 @@ final class CareerTransitionPreviewBundleBuilderTest extends TestCase
 
         $expectedKeys = array_values(array_filter(
             CareerTransitionPreviewBundle::publicTopLevelKeys(),
-            static fn (string $key): bool => $key !== 'steps'
+            static fn (string $key): bool => ! in_array($key, ['steps', 'bridge_steps_90d'], true)
         ));
         $this->assertSame($expectedKeys, array_keys($payload));
         $this->assertSame('stable_upside', $payload['path_type'] ?? null);
@@ -200,11 +204,16 @@ final class CareerTransitionPreviewBundleBuilderTest extends TestCase
                 'direction' => 'higher',
             ],
         ], $payload['delta'] ?? null);
-        $this->assertArrayNotHasKey('why_this_path', $payload);
-        $this->assertArrayNotHasKey('what_is_lost', $payload);
+        $this->assertSame([
+            TransitionPathPayload::RATIONALE_SAME_FAMILY_TARGET,
+            TransitionPathPayload::RATIONALE_PUBLISH_READY_TARGET,
+        ], $payload['rationale_codes'] ?? null);
+        $this->assertSame([
+            TransitionPathPayload::TRADEOFF_HIGHER_ENTRY_EDUCATION_REQUIRED,
+        ], $payload['tradeoff_codes'] ?? null);
+        $this->assertIsString($payload['why_this_path'] ?? null);
+        $this->assertIsString($payload['what_is_lost'] ?? null);
         $this->assertArrayNotHasKey('bridge_steps_90d', $payload);
-        $this->assertArrayNotHasKey('rationale_codes', $payload);
-        $this->assertArrayNotHasKey('tradeoff_codes', $payload);
     }
 
     public function test_it_omits_delta_when_internal_truth_is_missing_or_unrankable(): void
@@ -245,8 +254,14 @@ final class CareerTransitionPreviewBundleBuilderTest extends TestCase
         $payload = app(CareerTransitionPreviewBundleBuilder::class)->buildByType('intj')?->toArray() ?? [];
 
         $this->assertArrayNotHasKey('delta', $payload);
-        $this->assertArrayNotHasKey('rationale_codes', $payload);
-        $this->assertArrayNotHasKey('tradeoff_codes', $payload);
+        $this->assertSame([
+            TransitionPathPayload::RATIONALE_SAME_FAMILY_TARGET,
+        ], $payload['rationale_codes'] ?? null);
+        $this->assertSame([
+            TransitionPathPayload::TRADEOFF_HIGHER_WORK_EXPERIENCE_REQUIRED,
+        ], $payload['tradeoff_codes'] ?? null);
+        $this->assertIsString($payload['why_this_path'] ?? null);
+        $this->assertIsString($payload['what_is_lost'] ?? null);
     }
 
     public function test_it_excludes_paths_with_invalid_non_array_payload_shape(): void

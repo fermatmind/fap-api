@@ -72,6 +72,11 @@ final class CareerTransitionPreviewApiTest extends TestCase
             ->assertJsonPath('delta.entry_education_delta.source_value', "Bachelor's degree")
             ->assertJsonPath('delta.entry_education_delta.target_value', "Master's degree")
             ->assertJsonPath('delta.entry_education_delta.direction', TransitionPathPayload::DELTA_DIRECTION_HIGHER)
+            ->assertJsonPath('rationale_codes.0', TransitionPathPayload::RATIONALE_SAME_FAMILY_TARGET)
+            ->assertJsonPath('rationale_codes.1', TransitionPathPayload::RATIONALE_PUBLISH_READY_TARGET)
+            ->assertJsonPath('tradeoff_codes.0', TransitionPathPayload::TRADEOFF_HIGHER_ENTRY_EDUCATION_REQUIRED)
+            ->assertJsonPath('bridge_steps_90d.0.step_key', TransitionPathPayload::STEP_SKILL_OVERLAP)
+            ->assertJsonPath('bridge_steps_90d.0.time_horizon', \App\Services\Career\Transition\CareerTransitionContractBuilder::TIME_HORIZON_DAYS_0_30)
             ->assertJsonStructure([
                 'path_type',
                 'steps',
@@ -84,14 +89,19 @@ final class CareerTransitionPreviewApiTest extends TestCase
                     'confidence_score' => ['value', 'integrity_state', 'band'],
                 ],
                 'trust_summary' => ['allow_transition_recommendation', 'reviewer_status', 'reason_codes'],
+                'why_this_path',
+                'what_is_lost',
+                'bridge_steps_90d' => [[
+                    'step_key',
+                    'title',
+                    'description',
+                    'time_horizon',
+                ]],
+                'rationale_codes',
+                'tradeoff_codes',
                 'seo_contract' => ['canonical_path', 'canonical_target', 'index_state', 'index_eligible', 'reason_codes'],
                 'provenance_meta' => ['recommendation_snapshot_id', 'transition_path_id', 'compiler_version', 'compile_run_id'],
-            ])
-            ->assertJsonMissingPath('why_this_path')
-            ->assertJsonMissingPath('what_is_lost')
-            ->assertJsonMissingPath('bridge_steps_90d')
-            ->assertJsonMissingPath('rationale_codes')
-            ->assertJsonMissingPath('tradeoff_codes');
+            ]);
 
         /** @var array<string, mixed> $payload */
         $payload = $response->json();
