@@ -1164,6 +1164,40 @@
       "merged_at": "",
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "PR-B54": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_verified",
+      "branch": "codex/pr-b54-career-first-wave-launch-manifest-smoke-matrix-authority",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "name": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "name": "vendor/bin/pint --test app/Domain/Career/Publish/CareerFirstWaveLaunchManifestService.php app/DTO/Career/CareerFirstWaveLaunchManifest*.php tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php",
+            "status": "passed"
+          },
+          {
+            "name": "php artisan test tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php",
+            "status": "passed"
+          },
+          {
+            "name": "php artisan test tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditV2ServiceTest.php tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   }
 }
