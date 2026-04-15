@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-15T09:30:38Z",
+  "updated_at": "2026-04-15T10:24:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -517,10 +517,10 @@
     "PR-B21": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_verified",
+      "status": "pr_open_checks_failed",
       "branch": "codex/pr-b21-career-transition-path-internal-step-authoring-production-payload-enrichment",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "612f8b26b0f1f590e95c8582f1841f3aad43afb6",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/907",
       "checks": {
         "local": [
           {
@@ -532,9 +532,25 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24448703214/job/71431774028"
+          },
+          {
+            "name": "hygiene",
+            "status": "queued",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24448719504/job/71431829615"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24448703214/job/71431783202"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub Actions hygiene check is currently failing in CI while one rerun remains queued; local B62 checks are all passing.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
@@ -1590,6 +1606,36 @@
         ]
       },
       "failure_reason": "GitHub Actions reported account billing/spending-limit blockage; hygiene failed before execution and MBTI matrix jobs were skipped, while local PR-B61 verification passed.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B62": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_verified",
+      "branch": "codex/pr-b62-career-alias-search-attribution-taxonomy-resolution-flow-alignment-backend-first",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "name": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "name": "vendor/bin/pint --test app/Services/Analytics/CareerAttributionEventMapper.php app/Services/Analytics/CareerAttributionDailyBuilder.php tests/Feature/Analytics/CareerAttributionEventIngestTest.php tests/Feature/Analytics/CareerAttributionDailyBuilderTest.php",
+            "status": "passed"
+          },
+          {
+            "name": "php artisan test tests/Feature/Analytics/CareerAttributionEventIngestTest.php tests/Feature/Analytics/CareerAttributionDailyBuilderTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
