@@ -671,6 +671,34 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B52
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b52-career-trust-freshness-review-staleness-authority
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      Career trust freshness / review staleness authority.
+      Add an internal-only first-wave career_job_detail trust freshness authority that
+      normalizes current trust/review timestamps and conservative due-date states
+      without introducing public APIs, OpenAPI changes, family-hub members, or
+      release-grade stale/expired semantics.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Domain/Career/Publish/CareerTrustFreshnessAuthorityService.php app/DTO/Career/CareerTrustFreshness*.php tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditServiceTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web

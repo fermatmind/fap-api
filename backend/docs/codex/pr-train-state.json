@@ -1058,6 +1058,61 @@
       "merged_at": "",
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "PR-B52": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open_checks_failed",
+      "branch": "codex/pr-b52-career-trust-freshness-review-staleness-authority",
+      "commit_sha": "55ba3fb6d67e87571613f7f5b63a7b817826bba9",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/897",
+      "checks": {
+        "local": [
+          {
+            "name": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "name": "vendor/bin/pint --test app/Domain/Career/Publish/CareerTrustFreshnessAuthorityService.php app/DTO/Career/CareerTrustFreshness*.php tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php",
+            "status": "passed"
+          },
+          {
+            "name": "php artisan test tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php",
+            "status": "passed"
+          },
+          {
+            "name": "php artisan test tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditServiceTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24436564121/job/71391926471"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24436564121/job/71391930671"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24436565063/job/71391929193"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24436565063/job/71391932912"
+          }
+        ]
+      },
+      "failure_reason": "GitHub hygiene failed immediately on both PR-B52 runs and the MBTI matrix jobs were skipped; local verification passed, but the remote CI run is currently not green.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   }
 }
