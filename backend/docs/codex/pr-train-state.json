@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-15T23:53:35Z",
+  "updated_at": "2026-04-15T23:56:47Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1733,10 +1733,10 @@
     "PR-B65": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "in_progress",
+      "status": "github_checks_failed",
       "branch": "codex/pr-b65-career-transition-engine-contract-expansion",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "74a5beaf99783a476cd034cc50d4bd11bd767003",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/912",
       "checks": {
         "local": [
           {
@@ -1760,9 +1760,20 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details": "https://github.com/fermatmind/fap-api/actions/runs/24484495060/job/71556197635"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details": "https://github.com/fermatmind/fap-api/actions/runs/24484495060/job/71556201760"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub Actions hygiene job failed immediately on PR-B65; local validation passed, but required remote checks are not green.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
