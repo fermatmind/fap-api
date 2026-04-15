@@ -13,6 +13,7 @@ class AccessResolver
      * @return array{benefit_code:?string,has_full_access:bool}
      */
     public function resolveAccess(
+        string $scaleCode,
         int $orgId,
         ?string $userId,
         ?string $anonId,
@@ -20,13 +21,17 @@ class AccessResolver
         array $commercial,
         bool $forceFreeOnly
     ): array {
+        $scaleCode = strtoupper(trim($scaleCode));
         $benefitCode = $this->resolveBenefitCode($commercial);
         $hasFullAccess = $benefitCode !== ''
             ? $this->entitlements->hasFullAccess($orgId, $userId, $anonId, $attemptId, $benefitCode)
             : false;
 
-        if ($forceFreeOnly) {
+        if ($forceFreeOnly && $scaleCode !== ReportAccess::SCALE_BIG5_OCEAN) {
             $hasFullAccess = false;
+        }
+        if ($forceFreeOnly && $scaleCode === ReportAccess::SCALE_BIG5_OCEAN) {
+            $hasFullAccess = true;
         }
 
         return [
@@ -48,6 +53,19 @@ class AccessResolver
         array $modulesOffered
     ): array {
         $scaleCode = strtoupper(trim($scaleCode));
+        if ($forceFreeOnly && $scaleCode === ReportAccess::SCALE_BIG5_OCEAN) {
+            $modulesAllowed = ReportAccess::normalizeModules(array_merge(
+                ReportAccess::defaultModulesAllowedForLocked($scaleCode),
+                ReportAccess::allDefaultModulesOffered($scaleCode)
+            ));
+
+            return [
+                'modules_allowed' => $modulesAllowed,
+                'modules_preview' => [],
+                'has_paid_module_access' => true,
+                'unlock_stage' => ReportAccess::UNLOCK_STAGE_FULL,
+            ];
+        }
 
         $modulesAllowed = $this->entitlements->getAllowedModulesForAttempt($orgId, $attemptId);
         $modulesAllowed = $this->filterModulesForScale($scaleCode, $modulesAllowed);

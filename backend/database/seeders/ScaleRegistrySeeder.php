@@ -119,13 +119,13 @@ final class ScaleRegistrySeeder extends Seeder
                 'enabled_in_prod' => true,
                 'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
                 'rollout_ratio' => 1.0,
-                'paywall_mode' => 'full',
+                'paywall_mode' => 'free_only',
             ],
             'view_policy_json' => [
                 'free_sections' => ['disclaimer_top', 'summary', 'domains_overview', 'disclaimer'],
                 'blur_others' => false,
                 'teaser_percent' => 0.0,
-                'upgrade_sku' => 'SKU_BIG5_FULL_REPORT_299',
+                'upgrade_sku' => null,
             ],
             'commercial_json' => [
                 'price_tier' => 'PAID',

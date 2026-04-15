@@ -151,16 +151,23 @@ final class BigFiveModulesUnlockFlowTest extends TestCase
 
         $before->assertStatus(200);
         $before->assertJson([
-            'locked' => true,
-            'variant' => 'free',
+            'locked' => false,
+            'access_level' => 'full',
+            'variant' => 'full',
         ]);
         $before->assertJsonPath('norms.status', (string) ($scorePayload['norms']['status'] ?? ''));
         $before->assertJsonPath('quality.level', (string) ($scorePayload['quality']['level'] ?? ''));
 
         $beforeAllowed = (array) $before->json('modules_allowed');
         $this->assertContains('big5_core', $beforeAllowed);
+        $this->assertContains('big5_full', $beforeAllowed);
+        $this->assertContains('big5_action_plan', $beforeAllowed);
+        $this->assertSame([], (array) $before->json('offers'));
         $beforeSections = array_map('strval', (array) array_column((array) $before->json('report.sections'), 'key'));
-        $this->assertSame(['disclaimer_top', 'summary', 'domains_overview', 'disclaimer'], $beforeSections);
+        $this->assertSame(
+            ['traits.overview', 'traits.why_this_profile', 'relationships.interpersonal_style', 'career.work_style', 'growth.next_actions', 'disclaimer_top', 'summary', 'domains_overview', 'facet_table', 'top_facets', 'facets_deepdive', 'action_plan', 'disclaimer'],
+            $beforeSections
+        );
 
         /** @var EntitlementManager $entitlements */
         $entitlements = app(EntitlementManager::class);
@@ -194,29 +201,22 @@ final class BigFiveModulesUnlockFlowTest extends TestCase
         $this->assertContains('big5_action_plan', $afterAllowed);
 
         $offers = (array) $after->json('offers');
-        $this->assertNotEmpty($offers);
-        foreach ($offers as $offer) {
-            $this->assertIsArray($offer);
-            $this->assertArrayHasKey('sku', $offer);
-            $this->assertNotSame('', (string) ($offer['sku'] ?? ''));
-            $this->assertArrayHasKey('sku_code', $offer);
-            $this->assertSame((string) $offer['sku'], (string) $offer['sku_code']);
-            $this->assertArrayHasKey('benefit_code', $offer);
-            $this->assertNotSame('', (string) ($offer['benefit_code'] ?? ''));
-            $this->assertArrayHasKey('offer_code', $offer);
-            $this->assertNotSame('', (string) ($offer['offer_code'] ?? ''));
-            $this->assertArrayHasKey('price_cents', $offer);
-            $this->assertIsInt($offer['price_cents']);
-            $this->assertArrayHasKey('currency', $offer);
-            $this->assertNotSame('', (string) ($offer['currency'] ?? ''));
-            $this->assertArrayHasKey('modules_included', $offer);
-            $this->assertIsArray($offer['modules_included']);
-        }
+        $this->assertSame([], $offers);
 
         $afterSections = array_map('strval', (array) array_column((array) $after->json('report.sections'), 'key'));
         $this->assertSame(
-            ['disclaimer_top', 'summary', 'domains_overview', 'facet_table', 'top_facets', 'facets_deepdive', 'action_plan', 'disclaimer'],
+            ['traits.overview', 'traits.why_this_profile', 'relationships.interpersonal_style', 'career.work_style', 'growth.next_actions', 'disclaimer_top', 'summary', 'domains_overview', 'facet_table', 'top_facets', 'facets_deepdive', 'action_plan', 'disclaimer'],
             $afterSections
         );
+
+        $reportAccess = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/report-access');
+
+        $reportAccess->assertStatus(200);
+        $reportAccess->assertJsonPath('access_state', 'ready');
+        $reportAccess->assertJsonPath('pdf_state', 'ready');
+        $reportAccess->assertJsonPath('actions.pdf_href', "/api/v0.3/attempts/{$attemptId}/report.pdf");
     }
 }

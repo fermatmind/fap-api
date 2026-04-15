@@ -69,7 +69,14 @@ class OfferResolver
         return is_array($raw) ? $raw : [];
     }
 
-    public function buildPaywall(array $viewPolicy, array $commercial, array $commercialSpec, string $scaleCode, int $orgId): array
+    public function buildPaywall(
+        array $viewPolicy,
+        array $commercial,
+        array $commercialSpec,
+        string $scaleCode,
+        int $orgId,
+        bool $forceFreeOnly = false
+    ): array
     {
         $scaleCode = strtoupper(trim($scaleCode));
         $effectiveSku = strtoupper(trim((string) ($viewPolicy['upgrade_sku'] ?? '')));
@@ -89,6 +96,18 @@ class OfferResolver
             $offers = $this->normalizeOffers($commercial['offers'] ?? null);
         }
         $offers = $this->filterOffersForScale($scaleCode, $offers);
+
+        if ($forceFreeOnly && $scaleCode === ReportAccess::SCALE_BIG5_OCEAN) {
+            $viewPolicy['upgrade_sku'] = null;
+
+            return [
+                'upgrade_sku' => null,
+                'upgrade_sku_effective' => null,
+                'offers' => [],
+                'cta_copy' => null,
+                'view_policy' => $viewPolicy,
+            ];
+        }
 
         return [
             'upgrade_sku' => $anchorSku,
