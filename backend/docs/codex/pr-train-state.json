@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-15T05:30:45Z",
+  "updated_at": "2026-04-15T06:21:26Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1270,6 +1270,51 @@
         ]
       },
       "failure_reason": "GitHub hygiene failed immediately on both PR-B55 runs and the MBTI matrix jobs were skipped; local verification passed, but the remote CI run is currently not green.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B56": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open_checks_failed",
+      "branch": "codex/pr-b56-career-first-wave-release-artifact-materialization-export-command",
+      "commit_sha": "2aa00d18754c03430312bac19c6691554188ef97",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/901",
+      "checks": {
+        "local": [
+          {
+            "name": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "name": "vendor/bin/pint --test app/Services/Career/CareerFirstWaveReleaseArtifactMaterializationService.php app/Console/Commands/CareerExportFirstWaveReleaseArtifacts.php tests/Unit/Services/Career/CareerFirstWaveReleaseArtifactMaterializationServiceTest.php tests/Feature/Console/CareerExportFirstWaveReleaseArtifactsCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "name": "php artisan test tests/Unit/Services/Career/CareerFirstWaveReleaseArtifactMaterializationServiceTest.php tests/Feature/Console/CareerExportFirstWaveReleaseArtifactsCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "name": "php artisan test tests/Unit/Services/Career/CareerFirstWaveReleaseArtifactProjectionServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditV2ServiceTest.php tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24439981758/job/71402487374"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24439981758/job/71402492975"
+          }
+        ]
+      },
+      "failure_reason": "GitHub Actions reported account billing/spending-limit blockage; both hygiene runs failed before execution and MBTI matrix jobs were skipped, while local PR-B56 verification passed.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
