@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-15T07:35:35Z",
+  "updated_at": "2026-04-15T07:38:20Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -517,10 +517,10 @@
     "PR-B21": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_verified",
+      "status": "pr_open_checks_failed",
       "branch": "codex/pr-b21-career-transition-path-internal-step-authoring-production-payload-enrichment",
       "commit_sha": "",
-      "pr_url": "",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/902",
       "checks": {
         "local": [
           {
@@ -532,9 +532,30 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24442366542/job/71410205139"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24442366542/job/71410213072"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24442310771/job/71410016909"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24442310771/job/71410023962"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub Actions reported account billing/spending-limit blockage; hygiene failed before execution and MBTI matrix jobs were skipped, while local PR-B57 verification passed.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
