@@ -601,6 +601,17 @@ class AttemptReadController extends Controller
             $refreshedAt = optional($projection?->refreshed_at)->toIso8601String();
         }
 
+        $isBigFive = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_BIG5_OCEAN;
+        if ($isBigFive && $resultExists) {
+            $accessState = 'ready';
+            $reportState = 'ready';
+            $pdfState = 'ready';
+            $payloadJson['access_level'] = ReportAccess::REPORT_ACCESS_FULL;
+            $payloadJson['variant'] = ReportAccess::VARIANT_FULL;
+            $payloadJson['unlock_stage'] = ReportAccess::UNLOCK_STAGE_FULL;
+            $payloadJson['unlock_source'] = ReportAccess::UNLOCK_SOURCE_NONE;
+        }
+
         if ($repairFailed && $resultExists) {
             $reasonCode = in_array($reasonCode, ['', 'projection_missing_result_ready'], true)
                 ? 'projection_repair_failed_result_ready_fallback'

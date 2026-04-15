@@ -74,8 +74,10 @@ class ReportGatekeeper
 
         $commercial = $this->offerResolver->normalizeCommercial($registry['commercial_json'] ?? null);
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
-        $forceFreeOnly = in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
+        $forceFreeOnly = strtoupper($scaleCode) === ReportAccess::SCALE_BIG5_OCEAN
+            || in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
         $accessState = $this->accessResolver->resolveAccess(
+            $scaleCode,
             $effectiveOrgId,
             $userId,
             $anonId,
@@ -132,11 +134,20 @@ class ReportGatekeeper
         $commercial = $this->offerResolver->normalizeCommercial($registry['commercial_json'] ?? null);
         $commercialSpec = $isMbtiContract ? $this->loadCommercialSpecForAttempt($attempt, $result) : [];
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
-        $forceFreeOnly = in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
-        $paywall = $this->offerResolver->buildPaywall($viewPolicy, $commercial, $commercialSpec, $scaleCode, $effectiveOrgId);
+        $forceFreeOnly = $scaleCode === ReportAccess::SCALE_BIG5_OCEAN
+            || in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
+        $paywall = $this->offerResolver->buildPaywall(
+            $viewPolicy,
+            $commercial,
+            $commercialSpec,
+            $scaleCode,
+            $effectiveOrgId,
+            $forceFreeOnly
+        );
         $viewPolicy = $paywall['view_policy'] ?? $viewPolicy;
 
         $accessState = $this->accessResolver->resolveAccess(
+            $scaleCode,
             $effectiveOrgId,
             $userId,
             $anonId,

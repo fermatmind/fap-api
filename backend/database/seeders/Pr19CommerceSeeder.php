@@ -132,13 +132,16 @@ class Pr19CommerceSeeder extends Seeder
 
                 $commercial['report_benefit_code'] = $benefits['report_benefit_code'];
                 $commercial['credit_benefit_code'] = $benefits['credit_benefit_code'];
-                if ($defaultEffective) {
+                if ($scaleCode !== 'BIG5_OCEAN' && $defaultEffective) {
                     $commercial['report_unlock_sku'] = $defaultEffective;
                 }
-                if ($defaultAnchor) {
+                if ($scaleCode !== 'BIG5_OCEAN' && $defaultAnchor) {
                     $commercial['upgrade_sku_anchor'] = $defaultAnchor;
                 }
-                if (count($offers) > 0) {
+                if ($scaleCode === 'BIG5_OCEAN') {
+                    $commercial['offers'] = [];
+                    unset($commercial['report_unlock_sku'], $commercial['upgrade_sku_anchor']);
+                } elseif (count($offers) > 0) {
                     $commercial['offers'] = $offers;
                 }
 

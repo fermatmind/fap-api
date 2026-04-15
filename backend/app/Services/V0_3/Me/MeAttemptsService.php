@@ -310,6 +310,16 @@ class MeAttemptsService
         $unlockSource = ReportAccess::normalizeUnlockSource((string) ($payload['unlock_source'] ?? ReportAccess::UNLOCK_SOURCE_NONE));
         $requiredInvitees = max(1, (int) ($inviteSnapshot['required_invitees'] ?? 2));
         $completedInvitees = max(0, min($requiredInvitees, (int) ($inviteSnapshot['completed_invitees'] ?? 0)));
+        $isBigFive = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_BIG5_OCEAN;
+        if ($isBigFive && $resultExists) {
+            $accessState = 'ready';
+            $reportState = 'ready';
+            $pdfState = 'ready';
+            $unlockStage = ReportAccess::UNLOCK_STAGE_FULL;
+            $unlockSource = ReportAccess::UNLOCK_SOURCE_NONE;
+            $payload['access_level'] = ReportAccess::REPORT_ACCESS_FULL;
+            $payload['variant'] = ReportAccess::VARIANT_FULL;
+        }
 
         return [
             'access_state' => $accessState,
@@ -580,6 +590,10 @@ class MeAttemptsService
      */
     private function buildOfferSummary(Attempt $attempt, ?array $accessSummary): array
     {
+        if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_BIG5_OCEAN) {
+            return ['primary_offer' => null];
+        }
+
         $accessState = strtolower(trim((string) ($accessSummary['access_state'] ?? '')));
         $reportState = strtolower(trim((string) ($accessSummary['report_state'] ?? '')));
 

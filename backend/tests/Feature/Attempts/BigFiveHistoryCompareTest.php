@@ -128,22 +128,19 @@ final class BigFiveHistoryCompareTest extends TestCase
         $response->assertJsonPath('items.0.offer_summary.primary_offer', null);
         $response->assertJsonPath('items.0.share_summary.enabled', true);
         $response->assertJsonPath('items.0.share_summary.share_kind', 'big5_result');
-        $response->assertJsonPath('items.1.access_summary.access_state', 'locked');
+        $response->assertJsonPath('items.1.access_summary.access_state', 'ready');
         $response->assertJsonPath('items.1.access_summary.report_state', 'ready');
-        $response->assertJsonPath('items.1.access_summary.pdf_state', 'unavailable');
-        $response->assertJsonPath('items.1.access_summary.access_level', 'preview');
-        $response->assertJsonPath('items.1.access_summary.variant', 'free');
+        $response->assertJsonPath('items.1.access_summary.pdf_state', 'ready');
+        $response->assertJsonPath('items.1.access_summary.access_level', 'full');
+        $response->assertJsonPath('items.1.access_summary.variant', 'full');
         $response->assertJsonPath('items.1.access_summary.actions.page_href', "/result/{$olderAttemptId}");
-        $response->assertJsonPath('items.1.access_summary.actions.pdf_href', null);
+        $response->assertJsonPath('items.1.access_summary.actions.pdf_href', "/api/v0.3/attempts/{$olderAttemptId}/report.pdf");
         $response->assertJsonPath('items.1.top_facets_summary_v1.items.0.key', 'N1');
         $response->assertJsonPath('items.1.quality_summary.level', 'B');
         $response->assertJsonPath('items.1.quality_summary.grade', 'B');
         $response->assertJsonPath('items.1.norms_summary.status', 'CALIBRATED');
         $response->assertJsonPath('items.1.norms_summary.norms_version', '2025Q4');
-        $response->assertJsonPath('items.1.offer_summary.primary_offer.sku', 'SKU_BIG5_FULL_REPORT_299');
-        $response->assertJsonPath('items.1.offer_summary.primary_offer.benefit_code', 'BIG5_FULL_REPORT');
-        $response->assertJsonPath('items.1.offer_summary.primary_offer.formatted_price', '¥2.99');
-        $response->assertJsonPath('items.1.offer_summary.primary_offer.modules_included.0', 'big5_full');
+        $response->assertJsonPath('items.1.offer_summary.primary_offer', null);
         $response->assertJsonPath('items.1.share_summary.enabled', true);
     }
 

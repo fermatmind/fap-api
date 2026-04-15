@@ -20,7 +20,7 @@ final class BigFivePaywallFlagModesTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_free_only_mode_forces_free_variant_even_with_entitlement(): void
+    public function test_free_only_mode_forces_full_readable_variant_and_removes_offers(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
         $this->seedBigFiveWithPaywallMode('free_only');
@@ -51,21 +51,27 @@ final class BigFivePaywallFlagModesTest extends TestCase
 
         $resp->assertStatus(200);
         $resp->assertJson([
-            'locked' => true,
-            'variant' => 'free',
+            'locked' => false,
+            'access_level' => 'full',
+            'variant' => 'full',
         ]);
 
         $allowed = array_map('strval', (array) $resp->json('modules_allowed'));
         $this->assertContains('big5_core', $allowed);
-        $this->assertNotContains('big5_full', $allowed);
-        $this->assertNotContains('big5_action_plan', $allowed);
+        $this->assertContains('big5_full', $allowed);
+        $this->assertContains('big5_action_plan', $allowed);
 
         $sections = array_map('strval', (array) array_column((array) $resp->json('report.sections'), 'key'));
-        $this->assertSame(['disclaimer_top', 'summary', 'domains_overview', 'disclaimer'], $sections);
-        $this->assertNotEmpty((array) $resp->json('offers'));
+        $this->assertSame(
+            ['traits.overview', 'traits.why_this_profile', 'relationships.interpersonal_style', 'career.work_style', 'growth.next_actions', 'disclaimer_top', 'summary', 'domains_overview', 'facet_table', 'top_facets', 'facets_deepdive', 'action_plan', 'disclaimer'],
+            $sections
+        );
+        $this->assertSame([], (array) $resp->json('offers'));
+        $this->assertNull($resp->json('upgrade_sku'));
+        $this->assertNull($resp->json('upgrade_sku_effective'));
     }
 
-    public function test_full_mode_allows_full_variant_after_entitlement(): void
+    public function test_runtime_override_keeps_big5_full_readable_even_when_registry_mode_is_full(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
         $this->seedBigFiveWithPaywallMode('full');
@@ -73,21 +79,6 @@ final class BigFivePaywallFlagModesTest extends TestCase
         $anonId = 'anon_big5_paywall_full';
         $token = $this->issueAnonToken($anonId);
         $attemptId = $this->createSubmittedBigFiveAttemptWithResult($anonId);
-
-        /** @var EntitlementManager $entitlements */
-        $entitlements = app(EntitlementManager::class);
-        $grant = $entitlements->grantAttemptUnlock(
-            0,
-            null,
-            $anonId,
-            'BIG5_FULL_REPORT',
-            $attemptId,
-            'order_big5_paywall_full',
-            'attempt',
-            null,
-            ['big5_full', 'big5_action_plan']
-        );
-        $this->assertTrue((bool) ($grant['ok'] ?? false));
 
         $resp = $this->withHeaders([
             'X-Anon-Id' => $anonId,
@@ -97,6 +88,7 @@ final class BigFivePaywallFlagModesTest extends TestCase
         $resp->assertStatus(200);
         $resp->assertJson([
             'locked' => false,
+            'access_level' => 'full',
             'variant' => 'full',
         ]);
 
@@ -104,6 +96,7 @@ final class BigFivePaywallFlagModesTest extends TestCase
         $this->assertContains('big5_core', $allowed);
         $this->assertContains('big5_full', $allowed);
         $this->assertContains('big5_action_plan', $allowed);
+        $this->assertSame([], (array) $resp->json('offers'));
     }
 
     private function seedBigFiveWithPaywallMode(string $mode): void

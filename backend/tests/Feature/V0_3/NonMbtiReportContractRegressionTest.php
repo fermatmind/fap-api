@@ -251,9 +251,9 @@ final class NonMbtiReportContractRegressionTest extends TestCase
         $locked->assertStatus(200);
         $locked->assertJson([
             'ok' => true,
-            'locked' => true,
-            'access_level' => 'free',
-            'variant' => 'free',
+            'locked' => false,
+            'access_level' => 'full',
+            'variant' => 'full',
         ]);
         $this->assertSharedNonMbtiEnvelope($locked);
         $this->assertMbtiOnlyFieldsAreMissing($locked);
@@ -267,10 +267,15 @@ final class NonMbtiReportContractRegressionTest extends TestCase
                 'disclaimer_top',
                 'summary',
                 'domains_overview',
+                'facet_table',
+                'top_facets',
+                'facets_deepdive',
+                'action_plan',
                 'disclaimer',
             ],
             array_map('strval', (array) array_column((array) $locked->json('report.sections'), 'key'))
         );
+        $this->assertSame([], (array) $locked->json('offers'));
 
         /** @var EntitlementManager $entitlements */
         $entitlements = app(EntitlementManager::class);
@@ -319,6 +324,7 @@ final class NonMbtiReportContractRegressionTest extends TestCase
             ],
             array_map('strval', (array) array_column((array) $unlocked->json('report.sections'), 'key'))
         );
+        $this->assertSame([], (array) $unlocked->json('offers'));
     }
 
     public function test_sds20_report_contract_does_not_gain_mbti_only_fields_in_free_or_full_variants(): void
