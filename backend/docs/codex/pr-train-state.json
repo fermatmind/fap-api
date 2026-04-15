@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-15T00:48:10Z",
+  "updated_at": "2026-04-15T04:15:44Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -999,6 +999,61 @@
         ]
       },
       "failure_reason": "GitHub hygiene failed immediately on both PR-B50 runs and the MBTI matrix jobs were skipped; local verification passed, but the remote CI run is currently not green.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B51": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/pr-b51-career-first-wave-launch-readiness-audit-contract-consolidation",
+      "commit_sha": "d9f4c8a7d3b925f52e67b871820f2464f1c27e3c",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/896",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Domain/Career/Publish/*.php app/DTO/Career/CareerFirstWaveLaunchReadinessAudit*.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditServiceTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditServiceTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerFirstWaveLaunchTierSummaryServiceTest.php tests/Unit/Services/Career/FirstWaveReadinessSummaryServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLifecycleSummaryServiceTest.php tests/Unit/Services/Career/CareerFirstWaveNextStepLinksServiceTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24436073628/job/71390491727"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24436074577/job/71390494612"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24436073628/job/71390495807"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24436074577/job/71390498296"
+          }
+        ]
+      },
+      "failure_reason": "GitHub hygiene failed immediately on both PR-B51 runs and the MBTI matrix jobs were skipped; local verification passed, but the remote CI run is currently not green.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
