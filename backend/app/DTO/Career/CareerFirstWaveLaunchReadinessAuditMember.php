@@ -9,6 +9,7 @@ final class CareerFirstWaveLaunchReadinessAuditMember
     /**
      * @param  list<string>  $blockers
      * @param  array<string, array<string, string>>  $evidenceRefs
+     * @param  array<string, mixed>|null  $trustFreshness
      */
     public function __construct(
         public readonly string $occupationUuid,
@@ -28,6 +29,7 @@ final class CareerFirstWaveLaunchReadinessAuditMember
         public readonly bool $familyHubSupportingRoute,
         public readonly array $blockers,
         public readonly array $evidenceRefs,
+        public readonly ?array $trustFreshness = null,
     ) {}
 
     /**
@@ -35,7 +37,7 @@ final class CareerFirstWaveLaunchReadinessAuditMember
      */
     public function toArray(): array
     {
-        return [
+        $payload = [
             'member_kind' => 'career_job_detail',
             'occupation_uuid' => $this->occupationUuid,
             'canonical_slug' => $this->canonicalSlug,
@@ -55,5 +57,11 @@ final class CareerFirstWaveLaunchReadinessAuditMember
             'blockers' => $this->blockers,
             'evidence_refs' => $this->evidenceRefs,
         ];
+
+        if ($this->trustFreshness !== null) {
+            $payload['trust_freshness'] = $this->trustFreshness;
+        }
+
+        return $payload;
     }
 }
