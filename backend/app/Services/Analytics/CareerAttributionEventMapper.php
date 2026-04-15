@@ -32,6 +32,7 @@ final class CareerAttributionEventMapper
         'career_alias_resolution_no_result',
         'career_ready_surface_exposed',
         'career_blocked_surface_exposed',
+        'career_claim_blocked_surface_exposed',
     ];
 
     /**
@@ -92,6 +93,16 @@ final class CareerAttributionEventMapper
     ];
 
     /**
+     * @var list<string>
+     */
+    private const ALLOWED_BLOCKED_CLAIM_KINDS = [
+        'salary',
+        'strong_claim',
+        'ai_strategy',
+        'transition_recommendation',
+    ];
+
+    /**
      * @param  array<string, mixed>  $envelope
      * @return array{event_code:string,meta:array<string,mixed>,context:array<string,mixed>}
      */
@@ -141,6 +152,8 @@ final class CareerAttributionEventMapper
             'query_mode'
         );
         $subjectKey = $this->normalizeSubjectKey($payload['subject_key'] ?? null, $subjectKind);
+        $blockedClaimKind = $this->normalizeBlockedClaimKind($eventCode, $payload['blocked_claim_kind'] ?? null);
+        $this->validateClaimBlockedEventScope($eventCode, $sourcePageType, $routeFamily, $subjectKind);
 
         $meta = [
             'entry_surface' => $this->normalizeOptionalString($payload['entry_surface'] ?? null, 128) ?? 'unknown',
@@ -152,6 +165,10 @@ final class CareerAttributionEventMapper
             'subject_key' => $subjectKey,
             'query_mode' => $queryMode,
         ];
+
+        if ($blockedClaimKind !== null) {
+            $meta['blocked_claim_kind'] = $blockedClaimKind;
+        }
 
         return [
             'event_code' => $eventCode,
@@ -189,6 +206,70 @@ final class CareerAttributionEventMapper
         }
 
         return $normalized;
+    }
+
+    private function normalizeBlockedClaimKind(string $eventCode, mixed $value): ?string
+    {
+        $normalized = strtolower((string) $this->normalizeOptionalString($value, 64));
+        if ($eventCode !== 'career_claim_blocked_surface_exposed') {
+            if ($normalized === '') {
+                return null;
+            }
+
+            throw ValidationException::withMessages([
+                'payload.blocked_claim_kind' => 'payload.blocked_claim_kind is only allowed for career_claim_blocked_surface_exposed.',
+            ]);
+        }
+
+        if ($normalized === '') {
+            throw ValidationException::withMessages([
+                'payload.blocked_claim_kind' => 'payload.blocked_claim_kind is required for career_claim_blocked_surface_exposed.',
+            ]);
+        }
+
+        if (! in_array($normalized, self::ALLOWED_BLOCKED_CLAIM_KINDS, true)) {
+            throw ValidationException::withMessages([
+                'payload.blocked_claim_kind' => 'payload.blocked_claim_kind is not supported by career attribution ingest.',
+            ]);
+        }
+
+        return $normalized;
+    }
+
+    private function validateClaimBlockedEventScope(
+        string $eventCode,
+        string $sourcePageType,
+        string $routeFamily,
+        string $subjectKind,
+    ): void {
+        if ($eventCode !== 'career_claim_blocked_surface_exposed') {
+            return;
+        }
+
+        if (! in_array($sourcePageType, ['job_detail', 'recommendation_detail'], true)) {
+            throw ValidationException::withMessages([
+                'payload.source_page_type' => 'payload.source_page_type is not supported for career_claim_blocked_surface_exposed.',
+            ]);
+        }
+
+        if (! in_array($routeFamily, ['job_detail', 'recommendation_detail'], true)) {
+            throw ValidationException::withMessages([
+                'payload.route_family' => 'payload.route_family is not supported for career_claim_blocked_surface_exposed.',
+            ]);
+        }
+
+        if (($sourcePageType === 'job_detail' && $routeFamily !== 'job_detail')
+            || ($sourcePageType === 'recommendation_detail' && $routeFamily !== 'recommendation_detail')) {
+            throw ValidationException::withMessages([
+                'payload.route_family' => 'payload.route_family must align with payload.source_page_type for career_claim_blocked_surface_exposed.',
+            ]);
+        }
+
+        if (! in_array($subjectKind, ['job_slug', 'none'], true)) {
+            throw ValidationException::withMessages([
+                'payload.subject_kind' => 'payload.subject_kind is not supported for career_claim_blocked_surface_exposed.',
+            ]);
+        }
     }
 
     private function normalizeSubjectKey(mixed $value, string $subjectKind): string
