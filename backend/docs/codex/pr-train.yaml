@@ -810,6 +810,34 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B57
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b57-career-first-wave-rollout-wave-plan-authority
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      Career first-wave rollout wave-plan authority.
+      Add an internal-only rollout wave-plan authority for first-wave career_job_detail
+      members that reuses existing B54/B53 backend truth for stable/candidate/hold/blocked
+      primary cohorts and an advisory-only manual_review_needed cohort, while keeping
+      family hubs as supporting evidence only and avoiding public API/OpenAPI/frontend changes.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Domain/Career/Publish/CareerFirstWaveRolloutWavePlanService.php app/DTO/Career/CareerFirstWaveRolloutWavePlan*.php tests/Unit/Services/Career/CareerFirstWaveRolloutWavePlanServiceTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerFirstWaveRolloutWavePlanServiceTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditV2ServiceTest.php tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php tests/Unit/Services/Career/CareerFirstWaveReleaseArtifactProjectionServiceTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web
