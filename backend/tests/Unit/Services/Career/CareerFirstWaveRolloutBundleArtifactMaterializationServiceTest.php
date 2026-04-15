@@ -183,6 +183,92 @@ final class CareerFirstWaveRolloutBundleArtifactMaterializationServiceTest exten
         }
     }
 
+    public function test_it_rejects_bundle_members_with_unexpected_rollout_cohort_without_finalizing(): void
+    {
+        $badService = new class(app(CareerFirstWaveRolloutBundleProjectionService::class)) extends CareerFirstWaveRolloutBundleArtifactMaterializationService
+        {
+            /**
+             * @return array<string, object>
+             */
+            protected function projectedArtifacts(): array
+            {
+                return [
+                    'career-rollout-bundle.json' => new CareerFirstWaveRolloutBundleArtifact(
+                        scope: 'career_first_wave_10',
+                        counts: [
+                            'stable' => 0,
+                            'candidate' => 0,
+                            'hold' => 0,
+                            'blocked' => 0,
+                            'manual_review_needed' => 0,
+                        ],
+                        cohorts: [
+                            'stable' => [],
+                            'candidate' => [],
+                            'hold' => [],
+                            'blocked' => [],
+                        ],
+                        advisory: [
+                            'manual_review_needed' => [],
+                        ],
+                        members: [
+                            [
+                                'canonical_slug' => 'registered-nurses',
+                                'rollout_cohort' => 'manual_review_needed',
+                                'launch_tier' => 'stable',
+                                'readiness_status' => 'publish_ready',
+                                'lifecycle_state' => 'indexed',
+                                'public_index_state' => 'indexable',
+                                'supporting_routes' => [
+                                    'family_hub' => true,
+                                    'next_step_links_count' => 2,
+                                ],
+                                'trust_freshness' => [
+                                    'review_due_known' => true,
+                                    'review_staleness_state' => 'review_scheduled',
+                                ],
+                            ],
+                        ],
+                    ),
+                    'career-stable-whitelist.json' => new CareerFirstWaveRolloutCohortListArtifact(
+                        scope: 'career_first_wave_10',
+                        cohort: 'stable',
+                        members: [],
+                    ),
+                    'career-candidate-whitelist.json' => new CareerFirstWaveRolloutCohortListArtifact(
+                        scope: 'career_first_wave_10',
+                        cohort: 'candidate',
+                        members: [],
+                    ),
+                    'career-hold-list.json' => new CareerFirstWaveRolloutCohortListArtifact(
+                        scope: 'career_first_wave_10',
+                        cohort: 'hold',
+                        members: [],
+                    ),
+                    'career-blocked-list.json' => new CareerFirstWaveRolloutCohortListArtifact(
+                        scope: 'career_first_wave_10',
+                        cohort: 'blocked',
+                        members: [],
+                    ),
+                ];
+            }
+        };
+
+        $timestamp = '20260415T130300Z';
+        $finalDir = $this->rootDir.DIRECTORY_SEPARATOR.$timestamp;
+        $tmpDir = $finalDir.'.tmp';
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('unexpected rollout_cohort values');
+
+        try {
+            $badService->materialize($timestamp);
+        } finally {
+            $this->assertDirectoryDoesNotExist($finalDir);
+            $this->assertDirectoryDoesNotExist($tmpDir);
+        }
+    }
+
     private function materializeCurrentFirstWaveFixture(): void
     {
         $exitCode = Artisan::call('career:validate-first-wave-publish-ready', [

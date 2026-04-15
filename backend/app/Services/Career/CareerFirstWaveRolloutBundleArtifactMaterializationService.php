@@ -169,7 +169,17 @@ class CareerFirstWaveRolloutBundleArtifactMaterializationService
             throw new \RuntimeException('bundle/list slug mismatch for blocked cohort');
         }
 
-        $membersByCohort = collect((array) ($bundle['members'] ?? []))
+        $allowedCohorts = ['stable', 'candidate', 'hold', 'blocked'];
+        $memberRows = (array) ($bundle['members'] ?? []);
+        $memberRolloutCohorts = collect($memberRows)
+            ->map(static fn (array $member): string => trim((string) ($member['rollout_cohort'] ?? '')))
+            ->values();
+
+        if ($memberRolloutCohorts->contains(static fn (string $cohort): bool => ! in_array($cohort, $allowedCohorts, true))) {
+            throw new \RuntimeException('bundle contains unexpected rollout_cohort values');
+        }
+
+        $membersByCohort = collect($memberRows)
             ->groupBy(static fn (array $member): string => (string) ($member['rollout_cohort'] ?? ''))
             ->map(static function ($rows): array {
                 return collect($rows)
