@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T09:27:59.916317Z",
+  "updated_at": "2026-04-16T12:43:01Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -2356,6 +2356,36 @@
         ]
       },
       "failure_reason": "GitHub Actions checks failed at workflow startup in CI (hygiene failed, MBTI matrix skipped) while all required local checks passed.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B80": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/pr-b80-career-full-342-release-ledger-authority",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/DTO/Career/CareerFullReleaseLedger*.php app/Domain/Career/Publish/CareerFullReleaseLedger*.php app/Console/Commands/CareerExportFullReleaseLedger.php tests/Unit/Services/Career/CareerFullReleaseLedgerServiceTest.php tests/Feature/Console/CareerExportFullReleaseLedgerCommandTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerFullReleaseLedgerServiceTest.php tests/Feature/Console/CareerExportFullReleaseLedgerCommandTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,

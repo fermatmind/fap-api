@@ -10,11 +10,12 @@ use App\Console\Commands\Big5PsychometricsReport;
 use App\Console\Commands\Big5TelemetrySummary;
 use App\Console\Commands\CareerCompileAuthorityWave;
 use App\Console\Commands\CareerCrosswalkOps;
-use App\Console\Commands\CareerRunAssetBatch;
-use App\Console\Commands\CareerExportFirstWaveRolloutBundleArtifacts;
 use App\Console\Commands\CareerExportFirstWaveReleaseArtifacts;
+use App\Console\Commands\CareerExportFirstWaveRolloutBundleArtifacts;
 use App\Console\Commands\CareerExportFirstWaveRolloutWavePlanArtifact;
+use App\Console\Commands\CareerExportFullReleaseLedger;
 use App\Console\Commands\CareerImportAuthorityWave;
+use App\Console\Commands\CareerRunAssetBatch;
 use App\Console\Commands\CiScaleImpact;
 use App\Console\Commands\CommerceCompensatePendingOrders;
 use App\Console\Commands\CommerceReconcile;
@@ -29,9 +30,9 @@ use App\Console\Commands\FapResolvePack;
 use App\Console\Commands\FapSelfCheck;
 use App\Console\Commands\FapValidateReport;
 use App\Console\Commands\FapWeeklyReport;
+use App\Console\Commands\MbtiPrewarm;
 use App\Console\Commands\MbtiUpgradeLegacyPartialUnlocks;
 use App\Console\Commands\MetricsWeeklyValidity;
-use App\Console\Commands\MbtiPrewarm;
 use App\Console\Commands\NormsBig5BootstrapBuild;
 use App\Console\Commands\NormsBig5DriftCheck;
 use App\Console\Commands\NormsBig5MonthlyDriftCheck;
@@ -136,6 +137,7 @@ class Kernel extends ConsoleKernel
         CareerImportAuthorityWave::class,
         CareerCompileAuthorityWave::class,
         CareerCrosswalkOps::class,
+        CareerExportFullReleaseLedger::class,
         CareerRunAssetBatch::class,
         CareerExportFirstWaveRolloutBundleArtifacts::class,
         CareerExportFirstWaveReleaseArtifacts::class,
