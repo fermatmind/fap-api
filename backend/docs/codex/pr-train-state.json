@@ -2521,6 +2521,36 @@
       "merged_at": "",
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "PR-B83": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/pr-b83-career-full-342-dataset-public-scope-completion",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/Dataset/*.php app/DTO/Career/CareerFullDataset*.php app/Services/Career/StructuredData/*.php app/Http/Resources/Career/CareerDataset*.php tests/Unit/Services/Career/*Dataset*.php tests/Feature/Career/*Dataset*.php tests/Feature/SEO/*Dataset*.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/*Dataset*.php tests/Feature/Career/*Dataset*.php tests/Feature/SEO/*Dataset*.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   }
 }

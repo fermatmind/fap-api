@@ -41,7 +41,12 @@ final class CareerDatasetHubResource extends JsonResource
 
         $structuredPayload = [
             'dataset_name' => $contract['dataset_name'] ?? null,
-            'description' => (string) data_get($contract, 'collection_summary.member_kind', 'career_job_detail').' public dataset hub',
+            'description' => sprintf(
+                '%s public dataset hub (%d members, scope: %s)',
+                (string) data_get($contract, 'collection_summary.member_kind', 'career_tracked_occupation'),
+                (int) data_get($contract, 'collection_summary.member_count', 0),
+                (string) data_get($contract, 'dataset_scope', 'career_all_342'),
+            ),
             'url' => $distribution['documentation_url'] ?? null,
             'license' => $publication['license'] ?? null,
             'publisher' => $publication['publisher'] ?? null,

@@ -10,6 +10,8 @@ final class CareerPublicDatasetMethodContract
      * @param  list<string>  $included
      * @param  list<string>  $excluded
      * @param  list<string>  $boundaryNotes
+     * @param  array<string, mixed>  $scopeSummary
+     * @param  array<string, mixed>  $publication
      */
     public function __construct(
         public readonly string $datasetKey,
@@ -23,6 +25,8 @@ final class CareerPublicDatasetMethodContract
         public readonly array $included,
         public readonly array $excluded,
         public readonly array $boundaryNotes,
+        public readonly array $scopeSummary,
+        public readonly array $publication,
     ) {}
 
     /**
@@ -44,6 +48,8 @@ final class CareerPublicDatasetMethodContract
             'included' => $this->included,
             'excluded' => $this->excluded,
             'boundary_notes' => $this->boundaryNotes,
+            'scope_summary' => $this->scopeSummary,
+            'publication' => $this->publication,
         ];
     }
 }
