@@ -7,6 +7,7 @@ namespace App\Domain\Career\Publish;
 use App\DTO\Career\CareerFirstWaveLaunchManifest;
 use App\DTO\Career\CareerFirstWaveLaunchManifestMember;
 use App\DTO\Career\CareerFirstWaveLaunchReadinessAuditMember;
+use App\DTO\Career\CareerFirstWaveIndexPolicyMember;
 use App\Services\Career\Bundles\CareerFamilyHubBundleBuilder;
 use App\Services\Career\Bundles\CareerJobDetailBundleBuilder;
 use App\Services\Career\StructuredData\CareerStructuredDataBuilder;
@@ -20,6 +21,7 @@ final class CareerFirstWaveLaunchManifestService
         private readonly CareerJobDetailBundleBuilder $jobDetailBundleBuilder,
         private readonly CareerFamilyHubBundleBuilder $familyHubBundleBuilder,
         private readonly CareerStructuredDataBuilder $structuredDataBuilder,
+        private readonly CareerFirstWaveIndexPolicyEngine $indexPolicyEngine,
     ) {}
 
     public function build(): CareerFirstWaveLaunchManifest
@@ -56,10 +58,34 @@ final class CareerFirstWaveLaunchManifestService
             'hold' => [],
             'blocked' => [],
         ];
+        $policyAuthority = $this->indexPolicyEngine->build(array_map(
+            function (CareerFirstWaveLaunchReadinessAuditMember $member): array {
+                return [
+                    'canonical_slug' => $member->canonicalSlug,
+                    'current_index_state' => $member->lifecycleState,
+                    'public_index_state' => $member->publicIndexState,
+                    'index_eligible' => $member->indexEligible,
+                    'reviewer_status' => $member->reviewerStatus,
+                    'crosswalk_mode' => $member->crosswalkMode,
+                    'allow_strong_claim' => $member->allowStrongClaim,
+                    'confidence_score' => $member->confidenceScore,
+                    'blocked_governance_status' => $member->blockedGovernanceStatus,
+                    'next_step_links_count' => $member->nextStepLinksCount,
+                    'trust_freshness' => $member->trustFreshness ?? [],
+                ];
+            },
+            $audit->members,
+        ), $audit->scope);
+        $policyBySlug = [];
+        foreach ($policyAuthority->members as $policyMember) {
+            $policyBySlug[$policyMember->canonicalSlug] = $policyMember;
+        }
+
         $members = [];
 
         foreach ($audit->members as $auditMember) {
-            $group = $this->classifyGroup($auditMember);
+            $policyMember = $policyBySlug[$auditMember->canonicalSlug] ?? null;
+            $group = $this->classifyGroup($auditMember, $policyMember);
             $supportingRoute = $this->buildSupportingRoutes($auditMember);
             $smokeMatrix = $this->buildSmokeMatrix(
                 auditMember: $auditMember,
@@ -76,8 +102,8 @@ final class CareerFirstWaveLaunchManifestService
                 canonicalTitleEn: $auditMember->canonicalTitleEn,
                 launchTier: $auditMember->launchTier,
                 readinessStatus: $auditMember->readinessStatus,
-                lifecycleState: $auditMember->lifecycleState,
-                publicIndexState: $auditMember->publicIndexState,
+                lifecycleState: $policyMember?->policyState ?? $auditMember->lifecycleState,
+                publicIndexState: $policyMember?->publicIndexState ?? $auditMember->publicIndexState,
                 blockers: $auditMember->blockers,
                 trustFreshness: is_array($auditMember->trustFreshness) ? $auditMember->trustFreshness : [],
                 supportingRoutes: $supportingRoute,
@@ -160,7 +186,10 @@ final class CareerFirstWaveLaunchManifestService
         ];
     }
 
-    private function classifyGroup(CareerFirstWaveLaunchReadinessAuditMember $member): string
+    private function classifyGroup(
+        CareerFirstWaveLaunchReadinessAuditMember $member,
+        ?CareerFirstWaveIndexPolicyMember $policyMember = null,
+    ): string
     {
         if (
             $member->blockedGovernanceStatus !== null
@@ -175,7 +204,7 @@ final class CareerFirstWaveLaunchManifestService
 
         if (
             $member->launchTier === WaveClassification::CANDIDATE
-            || $member->lifecycleState === CareerIndexLifecycleState::PROMOTION_CANDIDATE
+            || ($policyMember?->policyState ?? $member->lifecycleState) === CareerIndexLifecycleState::PROMOTION_CANDIDATE
         ) {
             return 'candidate';
         }

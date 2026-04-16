@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Career\Publish;
 
 use App\Domain\Career\IndexStateValue;
+use App\DTO\Career\CareerFirstWaveIndexPolicyMember;
 use App\DTO\Career\CareerFirstWaveLifecycleSummary;
 
 final class CareerFirstWaveLifecycleSummaryService
@@ -16,6 +17,7 @@ final class CareerFirstWaveLifecycleSummaryService
     public function __construct(
         private readonly FirstWaveManifestReader $manifestReader,
         private readonly FirstWavePublishReadyValidator $validator,
+        private readonly CareerFirstWaveIndexPolicyEngine $indexPolicyEngine,
     ) {}
 
     public function build(): CareerFirstWaveLifecycleSummary
@@ -37,14 +39,8 @@ final class CareerFirstWaveLifecycleSummaryService
             $rowsBySlug[$slug] = $row;
         }
 
-        $counts = [
-            'total' => 0,
-            CareerIndexLifecycleState::NOINDEX => 0,
-            CareerIndexLifecycleState::PROMOTION_CANDIDATE => 0,
-            CareerIndexLifecycleState::INDEXED => 0,
-            CareerIndexLifecycleState::DEMOTED => 0,
-        ];
-        $occupations = [];
+        $subjects = [];
+        $manifestRowsBySlug = [];
 
         foreach ((array) ($manifest['occupations'] ?? []) as $occupation) {
             if (! is_array($occupation)) {
@@ -56,31 +52,48 @@ final class CareerFirstWaveLifecycleSummaryService
                 continue;
             }
 
+            $manifestRowsBySlug[$slug] = $occupation;
             $row = $rowsBySlug[$slug] ?? [];
-            $lifecycleState = $this->normalizeLifecycleState((string) ($row['index_state'] ?? ''));
             $indexEligible = (bool) ($row['index_eligible'] ?? false);
             $publicIndexState = IndexStateValue::publicFacing((string) ($row['index_state'] ?? ''), $indexEligible);
-            $reviewerStatus = $this->normalizeNullableString($row['reviewer_status'] ?? null);
-            $trustStatus = strtolower(trim((string) ($row['trust_status'] ?? '')));
-
-            $counts['total']++;
-            $counts[$lifecycleState]++;
-
-            $occupations[] = [
-                'occupation_uuid' => (string) ($occupation['occupation_uuid'] ?? ''),
+            $subjects[] = [
                 'canonical_slug' => $slug,
-                'canonical_title_en' => (string) ($occupation['canonical_title_en'] ?? ''),
-                'lifecycle_state' => $lifecycleState,
+                'current_index_state' => (string) ($row['index_state'] ?? ''),
                 'public_index_state' => $publicIndexState,
                 'index_eligible' => $indexEligible,
-                'reviewer_status' => $reviewerStatus,
-                'reason_codes' => $this->curateReasonCodes(
-                    lifecycleState: $lifecycleState,
-                    publicIndexState: $publicIndexState,
-                    indexEligible: $indexEligible,
-                    reviewerStatus: $reviewerStatus,
-                    trustStatus: $trustStatus,
-                ),
+                'reviewer_status' => $row['reviewer_status'] ?? null,
+                'crosswalk_mode' => $row['crosswalk_mode'] ?? null,
+                'allow_strong_claim' => (bool) ($row['allow_strong_claim'] ?? false),
+                'confidence_score' => $row['confidence_score'] ?? null,
+                'blocked_governance_status' => $row['blocked_governance_status'] ?? null,
+                'next_step_links_count' => $row['next_step_links_count'] ?? 0,
+                'trust_status' => $row['trust_status'] ?? null,
+            ];
+        }
+
+        $authority = $this->indexPolicyEngine->build($subjects, self::SCOPE);
+
+        $counts = [
+            'total' => count($authority->members),
+            CareerIndexLifecycleState::NOINDEX => $authority->counts[CareerIndexLifecycleState::NOINDEX] ?? 0,
+            CareerIndexLifecycleState::PROMOTION_CANDIDATE => $authority->counts[CareerIndexLifecycleState::PROMOTION_CANDIDATE] ?? 0,
+            CareerIndexLifecycleState::INDEXED => $authority->counts[CareerIndexLifecycleState::INDEXED] ?? 0,
+            CareerIndexLifecycleState::DEMOTED => $authority->counts[CareerIndexLifecycleState::DEMOTED] ?? 0,
+        ];
+        $occupations = [];
+
+        foreach ($authority->members as $member) {
+            $manifestRow = $manifestRowsBySlug[$member->canonicalSlug] ?? [];
+
+            $occupations[] = [
+                'occupation_uuid' => (string) ($manifestRow['occupation_uuid'] ?? ''),
+                'canonical_slug' => $member->canonicalSlug,
+                'canonical_title_en' => (string) ($manifestRow['canonical_title_en'] ?? ''),
+                'lifecycle_state' => $member->policyState,
+                'public_index_state' => $member->publicIndexState,
+                'index_eligible' => $member->indexEligible,
+                'reviewer_status' => $member->policyEvidence['reviewer_status'] ?? null,
+                'reason_codes' => $this->projectLifecycleReasonCodes($member),
             ];
         }
 
@@ -92,83 +105,48 @@ final class CareerFirstWaveLifecycleSummaryService
         );
     }
 
-    private function normalizeLifecycleState(string $state): string
-    {
-        $normalized = strtolower(trim($state));
-
-        return match ($normalized) {
-            CareerIndexLifecycleState::NOINDEX,
-            CareerIndexLifecycleState::PROMOTION_CANDIDATE,
-            CareerIndexLifecycleState::INDEXED,
-            CareerIndexLifecycleState::DEMOTED => $normalized,
-            default => CareerIndexLifecycleState::NOINDEX,
-        };
-    }
-
     /**
      * @return list<string>
      */
-    private function curateReasonCodes(
-        string $lifecycleState,
-        string $publicIndexState,
-        bool $indexEligible,
-        ?string $reviewerStatus,
-        string $trustStatus,
-    ): array {
+    private function projectLifecycleReasonCodes(CareerFirstWaveIndexPolicyMember $member): array
+    {
         $reasonCodes = [];
-        $reviewApproved = in_array($reviewerStatus, ['approved', 'reviewed'], true);
+        $has = array_flip($member->policyReasons);
 
-        switch ($lifecycleState) {
+        switch ($member->policyState) {
             case CareerIndexLifecycleState::INDEXED:
                 $reasonCodes[] = 'indexed_ready';
                 break;
-
             case CareerIndexLifecycleState::PROMOTION_CANDIDATE:
                 $reasonCodes[] = 'publish_gate_candidate';
-                if (! $reviewApproved) {
-                    $reasonCodes[] = 'review_pending';
-                }
                 break;
-
             case CareerIndexLifecycleState::DEMOTED:
-                if (! $reviewApproved) {
+                if (isset($has['demoted_review_regression'])) {
                     $reasonCodes[] = 'demoted_review_regression';
                 }
-                if (! $indexEligible || $publicIndexState !== IndexStateValue::INDEXABLE) {
+                if (isset($has['demoted_trust_regression'])) {
                     $reasonCodes[] = 'demoted_trust_regression';
                 }
                 break;
-
             default:
-                if ($trustStatus === WaveClassification::HOLD) {
+                if (isset($has['publish_gate_hold'])) {
                     $reasonCodes[] = 'publish_gate_hold';
                 }
                 break;
         }
 
-        if (! $indexEligible && $lifecycleState !== CareerIndexLifecycleState::INDEXED) {
+        if (isset($has['not_index_eligible']) && $member->policyState !== CareerIndexLifecycleState::INDEXED) {
             $reasonCodes[] = 'not_index_eligible';
         }
 
-        if ($publicIndexState === IndexStateValue::TRUST_LIMITED) {
+        if (isset($has['trust_limited'])) {
             $reasonCodes[] = 'trust_limited';
         }
 
-        if ($reasonCodes === [] && $lifecycleState === CareerIndexLifecycleState::NOINDEX) {
+        if ($reasonCodes === [] && $member->policyState === CareerIndexLifecycleState::NOINDEX) {
             $reasonCodes[] = 'not_index_eligible';
         }
 
         return array_values(array_unique($reasonCodes));
-    }
-
-    private function normalizeNullableString(mixed $value): ?string
-    {
-        if (! is_string($value)) {
-            return null;
-        }
-
-        $normalized = trim($value);
-
-        return $normalized !== '' ? $normalized : null;
     }
 }

@@ -1064,6 +1064,35 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B66
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b66-career-index-policy-engine-formalization
+    base: main
+    depends_on: ["PR-B65"]
+    mode: execute
+    scope: >
+      Career index policy engine formalization.
+      Consolidate first-wave career_job_detail index policy truth into a single backend-owned
+      authority/engine for noindex, promotion_candidate, indexed, and demoted states with
+      reason/evidence outputs, while keeping trust_freshness evidence-only and excluding family-hub
+      from primary members.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Domain/Career/Publish/CareerFirstWaveIndexPolicyEngine.php app/DTO/Career/CareerFirstWaveIndexPolicy*.php tests/Unit/Services/Career/CareerFirstWaveIndexPolicyEngineTest.php tests/Unit/Services/Career/CareerFirstWaveLifecycleSummaryServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerFirstWaveIndexPolicyEngineTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerFirstWaveLifecycleSummaryServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditV2ServiceTest.php"
+      - "php artisan test tests/Feature/OpenApiDiffTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web
