@@ -1290,6 +1290,31 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B77X
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b77x-career-threshold-experiment-authority
+    base: main
+    depends_on: ["PR-B76X"]
+    mode: execute
+    scope: >
+      Career threshold config + experiment authority (backend).
+      Formalize confidence/warning/promotion thresholds and minimal experiment flags
+      into a single backend-owned runtime config authority with additive read contract.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Services/Career/Config/*.php app/DTO/Career/CareerThresholdExperiment*.php app/Http/Controllers/API/V0_5/Career/CareerRuntimeConfigController.php app/Http/Resources/Career/CareerRuntimeConfigResource.php tests/Unit/Services/Career/*Threshold*Test.php tests/Feature/Career/*RuntimeConfig*Test.php"
+      - "php artisan test tests/Unit/Services/Career/*Threshold*Test.php tests/Feature/Career/*RuntimeConfig*Test.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web

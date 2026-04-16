@@ -5,9 +5,14 @@ declare(strict_types=1);
 namespace App\Domain\Career\Scoring;
 
 use App\Domain\Career\IndexStateValue;
+use App\Services\Career\Config\CareerThresholdExperimentAuthorityService;
 
 final class WarningMatrix
 {
+    public function __construct(
+        private readonly CareerThresholdExperimentAuthorityService $runtimeConfigAuthority,
+    ) {}
+
     /**
      * @param  array<string,mixed>  $context
      * @param  array<string,CareerScoreResult>  $scoreBundle
@@ -48,7 +53,8 @@ final class WarningMatrix
             $blockedClaims[] = 'strong_claim';
         }
 
-        if (ScoreMath::normalizeNullable($context['quality_confidence'] ?? null, 0.7) < 0.72) {
+        $qualityConfidenceThreshold = ((float) $this->runtimeConfigAuthority->warningLowConfidenceThreshold()) / 100.0;
+        if (ScoreMath::normalizeNullable($context['quality_confidence'] ?? null, 0.7) < $qualityConfidenceThreshold) {
             $amberFlags[] = ClaimReasonCode::LOW_QUALITY_CONFIDENCE;
             $blockedClaims[] = 'strong_claim';
         }
