@@ -23,6 +23,8 @@ final class CareerAttributionEventMapper
         'career_job_index_result_click',
         'career_family_hub_child_click',
         'career_job_detail_cta_click',
+        'career_shortlist_add',
+        'career_support_link_click',
         'career_recommendation_result_click',
         'career_recommendation_matched_job_click',
         'career_transition_preview_view',
@@ -154,6 +156,14 @@ final class CareerAttributionEventMapper
         $subjectKey = $this->normalizeSubjectKey($payload['subject_key'] ?? null, $subjectKind);
         $blockedClaimKind = $this->normalizeBlockedClaimKind($eventCode, $payload['blocked_claim_kind'] ?? null);
         $this->validateClaimBlockedEventScope($eventCode, $sourcePageType, $routeFamily, $subjectKind);
+        $this->validateConversionEventScope(
+            $eventCode,
+            $sourcePageType,
+            $routeFamily,
+            $subjectKind,
+            $queryMode,
+            (string) ($payload['target_action'] ?? '')
+        );
 
         $meta = [
             'entry_surface' => $this->normalizeOptionalString($payload['entry_surface'] ?? null, 128) ?? 'unknown',
@@ -185,6 +195,113 @@ final class CareerAttributionEventMapper
                 'scale_code_v2' => 'CAREER',
             ],
         ];
+    }
+
+    private function validateConversionEventScope(
+        string $eventCode,
+        string $sourcePageType,
+        string $routeFamily,
+        string $subjectKind,
+        string $queryMode,
+        string $targetActionRaw,
+    ): void {
+        $targetAction = strtolower(trim($targetActionRaw));
+
+        if ($eventCode === 'career_shortlist_add') {
+            if (! in_array($sourcePageType, ['job_detail', 'recommendation_detail'], true)) {
+                throw ValidationException::withMessages([
+                    'payload.source_page_type' => 'payload.source_page_type is not supported for career_shortlist_add.',
+                ]);
+            }
+            if (! in_array($routeFamily, ['job_detail', 'recommendation_detail'], true)) {
+                throw ValidationException::withMessages([
+                    'payload.route_family' => 'payload.route_family is not supported for career_shortlist_add.',
+                ]);
+            }
+            if (($sourcePageType === 'job_detail' && $routeFamily !== 'job_detail')
+                || ($sourcePageType === 'recommendation_detail' && $routeFamily !== 'recommendation_detail')) {
+                throw ValidationException::withMessages([
+                    'payload.route_family' => 'payload.route_family must align with payload.source_page_type for career_shortlist_add.',
+                ]);
+            }
+            if ($subjectKind !== 'job_slug') {
+                throw ValidationException::withMessages([
+                    'payload.subject_kind' => 'payload.subject_kind must be job_slug for career_shortlist_add.',
+                ]);
+            }
+            if ($queryMode !== 'non_query') {
+                throw ValidationException::withMessages([
+                    'payload.query_mode' => 'payload.query_mode must be non_query for career_shortlist_add.',
+                ]);
+            }
+            if ($targetAction !== 'add_shortlist') {
+                throw ValidationException::withMessages([
+                    'payload.target_action' => 'payload.target_action must be add_shortlist for career_shortlist_add.',
+                ]);
+            }
+        }
+
+        if ($eventCode === 'career_job_detail_cta_click') {
+            if ($sourcePageType !== 'job_detail') {
+                throw ValidationException::withMessages([
+                    'payload.source_page_type' => 'payload.source_page_type must be career_job_detail for career_job_detail_cta_click.',
+                ]);
+            }
+            if ($routeFamily !== 'job_detail') {
+                throw ValidationException::withMessages([
+                    'payload.route_family' => 'payload.route_family must be job_detail for career_job_detail_cta_click.',
+                ]);
+            }
+            if ($subjectKind !== 'job_slug') {
+                throw ValidationException::withMessages([
+                    'payload.subject_kind' => 'payload.subject_kind must be job_slug for career_job_detail_cta_click.',
+                ]);
+            }
+            if ($queryMode !== 'non_query') {
+                throw ValidationException::withMessages([
+                    'payload.query_mode' => 'payload.query_mode must be non_query for career_job_detail_cta_click.',
+                ]);
+            }
+            if (! in_array($targetAction, ['open_next_step_link', 'open_transition_cta', 'open_primary_cta'], true)) {
+                throw ValidationException::withMessages([
+                    'payload.target_action' => 'payload.target_action is not supported for career_job_detail_cta_click.',
+                ]);
+            }
+        }
+
+        if ($eventCode === 'career_support_link_click') {
+            if (! in_array($sourcePageType, ['job_detail', 'recommendation_detail'], true)) {
+                throw ValidationException::withMessages([
+                    'payload.source_page_type' => 'payload.source_page_type is not supported for career_support_link_click.',
+                ]);
+            }
+            if (! in_array($routeFamily, ['job_detail', 'recommendation_detail'], true)) {
+                throw ValidationException::withMessages([
+                    'payload.route_family' => 'payload.route_family is not supported for career_support_link_click.',
+                ]);
+            }
+            if (($sourcePageType === 'job_detail' && $routeFamily !== 'job_detail')
+                || ($sourcePageType === 'recommendation_detail' && $routeFamily !== 'recommendation_detail')) {
+                throw ValidationException::withMessages([
+                    'payload.route_family' => 'payload.route_family must align with payload.source_page_type for career_support_link_click.',
+                ]);
+            }
+            if (! in_array($subjectKind, ['job_slug', 'none'], true)) {
+                throw ValidationException::withMessages([
+                    'payload.subject_kind' => 'payload.subject_kind is not supported for career_support_link_click.',
+                ]);
+            }
+            if ($queryMode !== 'non_query') {
+                throw ValidationException::withMessages([
+                    'payload.query_mode' => 'payload.query_mode must be non_query for career_support_link_click.',
+                ]);
+            }
+            if ($targetAction !== 'open_support_link') {
+                throw ValidationException::withMessages([
+                    'payload.target_action' => 'payload.target_action must be open_support_link for career_support_link_click.',
+                ]);
+            }
+        }
     }
 
     /**

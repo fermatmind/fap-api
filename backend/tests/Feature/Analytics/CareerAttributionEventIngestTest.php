@@ -238,6 +238,57 @@ final class CareerAttributionEventIngestTest extends TestCase
                 ],
                 'expected_source_page_type' => 'job_detail',
             ],
+            [
+                'event' => 'career_job_detail_cta_click',
+                'anon' => 'anon_b79_job_detail_cta',
+                'path' => '/en/career/jobs/software-developers',
+                'payload' => [
+                    'entry_surface' => 'career_job_detail',
+                    'source_page_type' => 'career_job_detail',
+                    'target_action' => 'open_next_step_link',
+                    'landing_path' => '/en/career/jobs/software-developers',
+                    'route_family' => 'job_detail',
+                    'subject_kind' => 'job_slug',
+                    'subject_key' => 'software-developers',
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                ],
+                'expected_source_page_type' => 'job_detail',
+            ],
+            [
+                'event' => 'career_support_link_click',
+                'anon' => 'anon_b79_support_click',
+                'path' => '/en/career/recommendations/mbti/intj-a',
+                'payload' => [
+                    'entry_surface' => 'career_recommendation_detail',
+                    'source_page_type' => 'career_recommendation_detail',
+                    'target_action' => 'open_support_link',
+                    'landing_path' => '/en/career/recommendations/mbti/intj-a',
+                    'route_family' => 'recommendation_detail',
+                    'subject_kind' => 'job_slug',
+                    'subject_key' => 'software-developers',
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                ],
+                'expected_source_page_type' => 'recommendation_detail',
+            ],
+            [
+                'event' => 'career_shortlist_add',
+                'anon' => 'anon_b79_shortlist_add',
+                'path' => '/en/career/recommendations/mbti/intj-a',
+                'payload' => [
+                    'entry_surface' => 'career_recommendation_detail',
+                    'source_page_type' => 'career_recommendation_detail',
+                    'target_action' => 'add_shortlist',
+                    'landing_path' => '/en/career/recommendations/mbti/intj-a',
+                    'route_family' => 'recommendation_detail',
+                    'subject_kind' => 'job_slug',
+                    'subject_key' => 'software-developers',
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                ],
+                'expected_source_page_type' => 'recommendation_detail',
+            ],
         ];
 
         foreach ($cases as $case) {
@@ -597,7 +648,6 @@ final class CareerAttributionEventIngestTest extends TestCase
             'career_unknown_event',
             'career_view',
             'career_alias_search',
-            'career_shortlist_add',
             'career_family_hub_ready_surface_exposed',
             'career_family_hub_blocked_surface_exposed',
         ] as $eventName) {
@@ -612,6 +662,70 @@ final class CareerAttributionEventIngestTest extends TestCase
                     'subject_kind' => 'none',
                     'query_mode' => 'non_query',
                 ],
+            ]);
+
+            $response->assertStatus(422);
+        }
+    }
+
+    public function test_ingest_endpoint_rejects_conversion_events_outside_supported_minimal_scope(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        $cases = [
+            [
+                'eventName' => 'career_job_detail_cta_click',
+                'payload' => [
+                    'entry_surface' => 'career_recommendation_detail',
+                    'source_page_type' => 'career_recommendation_detail',
+                    'target_action' => 'open_next_step_link',
+                    'landing_path' => '/en/career/recommendations/mbti/intj-a',
+                    'route_family' => 'recommendation_detail',
+                    'subject_kind' => 'job_slug',
+                    'subject_key' => 'software-developers',
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                ],
+            ],
+            [
+                'eventName' => 'career_shortlist_add',
+                'payload' => [
+                    'entry_surface' => 'career_job_detail',
+                    'source_page_type' => 'career_job_detail',
+                    'target_action' => 'add_shortlist',
+                    'landing_path' => '/en/career/jobs/software-developers',
+                    'route_family' => 'job_detail',
+                    'subject_kind' => 'job_slug',
+                    'subject_key' => 'software-developers',
+                    'query_mode' => 'query',
+                    'locale' => 'en',
+                ],
+            ],
+            [
+                'eventName' => 'career_support_link_click',
+                'payload' => [
+                    'entry_surface' => 'career_job_detail',
+                    'source_page_type' => 'career_job_detail',
+                    'target_action' => 'open_primary_cta',
+                    'landing_path' => '/en/career/jobs/software-developers',
+                    'route_family' => 'job_detail',
+                    'subject_kind' => 'job_slug',
+                    'subject_key' => 'software-developers',
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                ],
+            ],
+        ];
+
+        foreach ($cases as $index => $case) {
+            $response = $this->withHeaders([
+                'Authorization' => 'Bearer ingest_test_token',
+            ])->postJson('/api/v0.5/career/attribution/events', [
+                'eventName' => $case['eventName'],
+                'anonymousId' => "anon_b79_invalid_{$index}",
+                'path' => '/en/career/jobs/software-developers',
+                'timestamp' => '2026-04-16T10:00:00+08:00',
+                'payload' => $case['payload'],
             ]);
 
             $response->assertStatus(422);
