@@ -19,6 +19,10 @@ final class CareerGuideSeoService
         'zh-CN',
     ];
 
+    public function __construct(
+        private readonly CareerArticleStructuredDataBuilder $careerArticleStructuredDataBuilder,
+    ) {}
+
     public function generateSeoMeta(int $guideId): CareerGuideSeoMeta
     {
         if ($guideId <= 0) {
@@ -328,6 +332,3 @@ final class CareerGuideSeoService
         return $normalized;
     }
 }
-    public function __construct(
-        private readonly CareerArticleStructuredDataBuilder $careerArticleStructuredDataBuilder,
-    ) {}
