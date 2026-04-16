@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T02:25:30Z",
+  "updated_at": "2026-04-16T04:42:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -2024,9 +2024,9 @@
     "PR-B70": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/pr-b70-crosswalk-editorial-operations-baseline",
-      "commit_sha": "213ccb0fa188108713fe6c8cbbe9174b890a421c",
+      "commit_sha": "387100310f48a9f85e6c3b79c796e94490406204",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/917",
       "checks": {
         "local": [
@@ -2048,6 +2048,63 @@
           },
           {
             "command": "php artisan test tests/Unit/Services/Career/CareerAssetBatchPipelineTest.php tests/Unit/Services/Career/CareerFirstWavePromotionCandidateEngineTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details": "https://github.com/fermatmind/fap-api/actions/runs/24487990431/job/71567007090"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details": "https://github.com/fermatmind/fap-api/actions/runs/24487990431/job/71567010932"
+          }
+        ]
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "2026-04-16T02:02:37Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-B71X": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/pr-b71x-career-batch-2-4-production-execution-full-342-asset-completion",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Domain/Career/Production/*.php app/Domain/Career/Operations/*.php app/DTO/Career/CareerAssetBatch*.php app/DTO/Career/CareerCrosswalk*.php app/Console/Commands/CareerRunAssetBatch.php app/Console/Commands/CareerCrosswalkOps.php tests/Unit/Services/Career/CareerAssetBatchPipelineTest.php tests/Feature/Console/CareerRunAssetBatchCommandTest.php tests/Unit/Services/Career/CareerCrosswalkReviewQueueServiceTest.php tests/Unit/Services/Career/CareerCrosswalkOverrideResolverTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerAssetBatchPipelineTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/CareerRunAssetBatchCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerCrosswalkReviewQueueServiceTest.php tests/Unit/Services/Career/CareerCrosswalkOverrideResolverTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerAssetBatchExecutionB2B3B4Test.php tests/Unit/Services/Career/CareerAssetBatchCombinedSummaryTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:run-asset-batch --set=docs/career/batches/b71x_batch_set.json --mode=full --json",
             "status": "passed"
           }
         ],

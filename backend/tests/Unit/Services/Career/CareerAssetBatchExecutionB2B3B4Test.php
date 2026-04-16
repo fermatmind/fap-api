@@ -1,0 +1,128 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Unit\Services\Career;
+
+use App\Domain\Career\Production\CareerAssetBatchManifestBuilder;
+use App\Domain\Career\Production\CareerAssetBatchPipeline;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use Tests\TestCase;
+
+final class CareerAssetBatchExecutionB2B3B4Test extends TestCase
+{
+    use RefreshDatabase;
+
+    /**
+     * @var list<string>
+     */
+    private array $manifestPaths = [];
+
+    protected function tearDown(): void
+    {
+        foreach ($this->manifestPaths as $path) {
+            File::delete($path);
+        }
+
+        parent::tearDown();
+    }
+
+    public function test_it_executes_batch_2_3_4_with_conservative_policy_boundaries(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+
+        $batch2Manifest = $this->createManifest(
+            CareerAssetBatchManifestBuilder::BATCH_KIND_2,
+            30,
+            'exact',
+            'candidate',
+        );
+        $batch3Manifest = $this->createManifest(
+            CareerAssetBatchManifestBuilder::BATCH_KIND_3,
+            80,
+            'functional_equivalent',
+            'candidate',
+        );
+        $batch4Manifest = $this->createManifest(
+            CareerAssetBatchManifestBuilder::BATCH_KIND_4,
+            222,
+            'local_heavy_interpretation',
+            'hold',
+        );
+
+        $batch2 = app(CareerAssetBatchPipeline::class)->run($batch2Manifest, CareerAssetBatchPipeline::MODE_FULL);
+        $batch3 = app(CareerAssetBatchPipeline::class)->run($batch3Manifest, CareerAssetBatchPipeline::MODE_FULL);
+        $batch4 = app(CareerAssetBatchPipeline::class)->run($batch4Manifest, CareerAssetBatchPipeline::MODE_FULL);
+
+        $this->assertSame('completed', $batch2['status'] ?? null);
+        $this->assertSame('completed', $batch3['status'] ?? null);
+        $this->assertSame('completed', $batch4['status'] ?? null);
+
+        $this->assertTrue((bool) data_get($batch3, 'stages.publish_candidate.policy_flags.default_noindex'));
+        $this->assertTrue((bool) data_get($batch3, 'stages.publish_candidate.policy_flags.manual_review_bias'));
+        $this->assertSame(0, data_get($batch3, 'stages.publish_candidate.production_state_summary.stable'));
+
+        $this->assertTrue((bool) data_get($batch4, 'stages.publish_candidate.passed'));
+        $this->assertTrue((bool) data_get($batch4, 'stages.publish_candidate.policy_flags.review_queue_only'));
+        $this->assertGreaterThan(0, (int) data_get($batch4, 'stages.publish_candidate.production_state_summary.review_needed'));
+        $this->assertGreaterThan(0, (int) data_get($batch4, 'stages.review_queue_handoff.counts.queue_total'));
+    }
+
+    private function materializeCurrentFirstWaveFixture(): void
+    {
+        $exitCode = Artisan::call('career:validate-first-wave-publish-ready', [
+            '--source' => base_path('tests/Fixtures/Career/authority_wave/first_wave_readiness_summary_subset.csv'),
+            '--materialize-missing' => true,
+            '--compile-missing' => true,
+            '--repair-safe-partials' => true,
+            '--json' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode, Artisan::output());
+    }
+
+    private function createManifest(string $batchKind, int $memberCount, string $mode, string $track): string
+    {
+        $members = [];
+
+        for ($i = 1; $i <= $memberCount; $i++) {
+            $slug = sprintf('%s-exec-%03d', str_replace('career_asset_', 'b', $batchKind), $i);
+            $members[] = [
+                'occupation_uuid' => sprintf('30000000-0000-0000-0000-%012d', $i),
+                'canonical_slug' => $slug,
+                'canonical_title_en' => Str::of($slug)->replace('-', ' ')->title()->toString(),
+                'family_slug' => 'batch-family-'.$batchKind,
+                'crosswalk_mode' => $mode,
+                'batch_role' => $track === 'stable' ? 'stable_seed' : ($track === 'candidate' ? 'candidate_seed' : 'hold_seed'),
+                'stable_seed' => $track === 'stable',
+                'candidate_seed' => $track === 'candidate',
+                'hold_seed' => $track !== 'stable' && $track !== 'candidate',
+                'expected_publish_track' => $track,
+            ];
+        }
+
+        $payload = [
+            'batch_kind' => $batchKind,
+            'batch_version' => 'career.asset_batch.manifest.v2',
+            'batch_key' => $batchKind.'-execution-test',
+            'scope' => match ($batchKind) {
+                CareerAssetBatchManifestBuilder::BATCH_KIND_2 => 'career_batch_2_30',
+                CareerAssetBatchManifestBuilder::BATCH_KIND_3 => 'career_batch_3_80',
+                CareerAssetBatchManifestBuilder::BATCH_KIND_4 => 'career_batch_4_222',
+                default => 'career_batch_misc',
+            },
+            'member_count' => count($members),
+            'members' => $members,
+        ];
+
+        $path = storage_path('app/private/testing/'.$payload['batch_key'].'.json');
+        File::ensureDirectoryExists(dirname($path));
+        File::put($path, (string) json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        $this->manifestPaths[] = $path;
+
+        return $path;
+    }
+}
