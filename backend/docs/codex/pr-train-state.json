@@ -2272,6 +2272,43 @@
       "merged_at": "",
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "PR-B78X": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open_checks_failed",
+      "branch": "codex/pr-b78x-crosswalk-editorial-ops-console-baseline",
+      "commit_sha": "a97c21af0e64065288bcd5cd5f9318fd7dff28f2",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/923",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Domain/Career/Operations/*.php app/Http/Controllers/API/V0_5/Internal/Career/*.php app/Http/Resources/Career/Internal/*.php tests/Unit/Services/Career/*Crosswalk*Test.php tests/Feature/Internal/Career/*Crosswalk*Test.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/*Crosswalk*Test.php tests/Feature/Internal/Career/*Crosswalk*Test.php",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "CI / hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24501733333/job/71609969428",
+            "reason": "The job was not started because recent account payments have failed or spending limit needs to be increased."
+          }
+        ]
+      },
+      "failure_reason": "github_checks_failed_billing_block",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   }
 }

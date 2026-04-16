@@ -52,6 +52,9 @@ use App\Http\Controllers\API\V0_5\Career\CareerRecommendationIndexController;
 use App\Http\Controllers\API\V0_5\Career\CareerRuntimeConfigController;
 use App\Http\Controllers\API\V0_5\Career\CareerSearchController;
 use App\Http\Controllers\API\V0_5\Career\CareerTransitionPreviewController;
+use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkOverrideController;
+use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkPatchController;
+use App\Http\Controllers\API\V0_5\Internal\Career\CareerCrosswalkReviewQueueController;
 use App\Http\Controllers\API\V0_5\Cms\ArticleController;
 use App\Http\Controllers\API\V0_5\Cms\CareerGuideController;
 use App\Http\Controllers\API\V0_5\Cms\CareerJobController;
@@ -482,5 +485,18 @@ Route::prefix('v0.5')->group(function () {
     ])->group(function () {
         Route::post('/cms/articles/{id}/publish', [ArticleController::class, 'publish']);
         Route::post('/cms/articles/{id}/unpublish', [ArticleController::class, 'unpublish']);
+    });
+
+    Route::middleware([
+        ...$cmsAdminMiddleware,
+        EnsureCmsAdminAuthorized::class.':write',
+    ])->prefix('internal/career/crosswalk')->group(function () {
+        Route::get('/review-queue', [CareerCrosswalkReviewQueueController::class, 'index']);
+        Route::get('/review-queue/{slug}', [CareerCrosswalkReviewQueueController::class, 'show']);
+        Route::get('/patches/{slug}', [CareerCrosswalkPatchController::class, 'history']);
+        Route::get('/override/{slug}', [CareerCrosswalkOverrideController::class, 'show']);
+        Route::post('/patches', [CareerCrosswalkPatchController::class, 'store']);
+        Route::post('/patches/{patchKey}/approve', [CareerCrosswalkPatchController::class, 'approve']);
+        Route::post('/patches/{patchKey}/reject', [CareerCrosswalkPatchController::class, 'reject']);
     });
 });

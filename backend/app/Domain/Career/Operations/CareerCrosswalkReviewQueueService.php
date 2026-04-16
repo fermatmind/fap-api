@@ -16,6 +16,7 @@ final class CareerCrosswalkReviewQueueService
         'local_heavy_interpretation' => true,
         'family_proxy' => true,
         'functional_equivalent' => true,
+        'unmapped' => true,
     ];
 
     /**
@@ -61,7 +62,8 @@ final class CareerCrosswalkReviewQueueService
             $queueReasons = match ($mode) {
                 'local_heavy_interpretation' => ['local_heavy_requires_editorial_patch'],
                 'family_proxy' => ['family_proxy_requires_editorial_patch'],
-                default => ['functional_equivalent_requires_editorial_review'],
+                'functional_equivalent' => ['functional_equivalent_requires_editorial_review'],
+                default => ['unmapped_requires_editorial_patch'],
             };
 
             $blockingFlags = [];
