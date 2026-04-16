@@ -1093,6 +1093,35 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B67
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b67-career-promotion-candidate-rule-narrowing
+    base: main
+    depends_on: ["PR-B66"]
+    mode: execute
+    scope: >
+      Career promotion-candidate rule narrowing.
+      Add a conservative internal-only first-wave career_job_detail promotion candidate
+      authority/engine that formalizes auto_nominate/manual_review_only/not_eligible decisions
+      from existing backend truth, keeps trust freshness evidence-only, excludes family-hub
+      from primary members, and avoids demand/novelty/canonical-conflict inputs.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Domain/Career/Publish/CareerFirstWavePromotionCandidateEngine.php app/DTO/Career/CareerFirstWavePromotionCandidate*.php tests/Unit/Services/Career/CareerFirstWavePromotionCandidateEngineTest.php tests/Unit/Services/Career/CareerFirstWaveIndexPolicyEngineTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php tests/Unit/Services/Career/CareerFirstWaveRolloutWavePlanServiceTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerFirstWavePromotionCandidateEngineTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerFirstWaveIndexPolicyEngineTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php tests/Unit/Services/Career/CareerFirstWaveRolloutWavePlanServiceTest.php tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php"
+      - "php artisan test tests/Feature/OpenApiDiffTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web
