@@ -1150,6 +1150,35 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B69
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b69-career-asset-batch-pipeline-batch1-2-production-line
+    base: main
+    depends_on: ["PR-B68"]
+    mode: execute
+    scope: >
+      Career asset batch pipeline / batch-1~2 production line.
+      Introduce an internal-only reusable batch pipeline with explicit manifest,
+      staged validate/compile-trust/publish-candidate/regression flow, and a single
+      CLI entrypoint to run Batch 1 (10) and framework-compatible Batch 2 (30)
+      orchestration without inventing truth outside existing backend authorities.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Domain/Career/Production/*.php app/DTO/Career/CareerAssetBatchManifest.php app/Console/Commands/CareerRunAssetBatch.php tests/Unit/Services/Career/CareerAssetBatchPipelineTest.php tests/Feature/Console/CareerRunAssetBatchCommandTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerAssetBatchPipelineTest.php"
+      - "php artisan test tests/Feature/Console/CareerRunAssetBatchCommandTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php tests/Unit/Services/Career/CareerFirstWavePromotionCandidateEngineTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web
