@@ -1179,6 +1179,34 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B70
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b70-crosswalk-editorial-operations-baseline
+    base: main
+    depends_on: ["PR-B69"]
+    mode: execute
+    scope: >
+      Crosswalk / editorial operations baseline.
+      Add internal-only patch/versioning authority, review queue contract, and
+      override resolution baseline for local_heavy_interpretation/family_proxy with
+      CLI entrypoints, while reusing existing backend truth and keeping public surfaces unchanged.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Domain/Career/Operations/*.php app/DTO/Career/CareerCrosswalk*.php app/DTO/Career/CareerEditorialPatchAuthority.php app/Console/Commands/CareerCrosswalkOps.php tests/Unit/Services/Career/CareerCrosswalkReviewQueueServiceTest.php tests/Unit/Services/Career/CareerCrosswalkOverrideResolverTest.php tests/Feature/Console/CareerCrosswalkOpsCommandTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerCrosswalkReviewQueueServiceTest.php tests/Unit/Services/Career/CareerCrosswalkOverrideResolverTest.php"
+      - "php artisan test tests/Feature/Console/CareerCrosswalkOpsCommandTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerAssetBatchPipelineTest.php tests/Unit/Services/Career/CareerFirstWavePromotionCandidateEngineTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web
