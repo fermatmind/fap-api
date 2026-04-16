@@ -1,0 +1,25 @@
+{
+  "set_key": "b71x_batch_2_3_4",
+  "set_version": "career.asset_batch.execution_set.v1",
+  "manifests": [
+    "docs/career/batches/batch_2_manifest.json",
+    "docs/career/batches/batch_3_manifest.json",
+    "docs/career/batches/batch_4_manifest.json"
+  ],
+  "coverage_baseline": {
+    "source": "AI_Exposure_342_Occupations.xlsx + B71X Attachment 2 first-wave list",
+    "expected_total_occupations": 342,
+    "excluded_first_wave_slugs": [
+      "software-developers",
+      "data-scientists",
+      "computer-systems-analysts",
+      "database-administrators-and-architects",
+      "computer-network-architects",
+      "information-security-analysts",
+      "financial-analysts",
+      "accountants-and-auditors",
+      "project-management-specialists",
+      "management-analysts"
+    ]
+  }
+}

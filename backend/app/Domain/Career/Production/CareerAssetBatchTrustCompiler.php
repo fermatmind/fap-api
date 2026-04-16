@@ -12,8 +12,11 @@ final class CareerAssetBatchTrustCompiler
      * @param  array<string, array<string, mixed>>  $trustFreshnessBySlug
      * @return array<string, mixed>
      */
-    public function compile(CareerAssetBatchManifest $manifest, array $trustFreshnessBySlug): array
-    {
+    public function compile(
+        CareerAssetBatchManifest $manifest,
+        array $trustFreshnessBySlug,
+        bool $strict = true,
+    ): array {
         $members = [];
         $compileSuccess = 0;
         $compileFailed = 0;
@@ -46,7 +49,9 @@ final class CareerAssetBatchTrustCompiler
 
         return [
             'stage' => 'compile_trust',
-            'passed' => $compileFailed === 0,
+            'passed' => $strict ? $compileFailed === 0 : true,
+            'strict' => $strict,
+            'trust_mode' => $strict ? 'strict' : 'conservative',
             'counts' => [
                 'total' => count($members),
                 'compile_success' => $compileSuccess,

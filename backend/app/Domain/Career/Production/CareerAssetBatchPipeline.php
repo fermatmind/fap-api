@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace App\Domain\Career\Production;
 
+use App\Domain\Career\Operations\CareerCrosswalkOverrideResolver;
+use App\Domain\Career\Operations\CareerCrosswalkReviewQueueService;
+use App\Domain\Career\Operations\CareerEditorialPatchAuthorityService;
 use App\Domain\Career\Publish\CareerFirstWaveLaunchReadinessAuditV2Service;
 use App\Domain\Career\Publish\CareerFirstWavePromotionCandidateEngine;
 use App\Domain\Career\Publish\CareerTrustFreshnessAuthorityService;
+use App\DTO\Career\CareerAssetBatchManifest;
 use RuntimeException;
 
 final class CareerAssetBatchPipeline
@@ -30,6 +34,9 @@ final class CareerAssetBatchPipeline
         private readonly CareerFirstWaveLaunchReadinessAuditV2Service $auditV2Service,
         private readonly CareerTrustFreshnessAuthorityService $trustFreshnessAuthorityService,
         private readonly CareerFirstWavePromotionCandidateEngine $promotionCandidateEngine,
+        private readonly CareerCrosswalkReviewQueueService $crosswalkReviewQueueService,
+        private readonly CareerCrosswalkOverrideResolver $crosswalkOverrideResolver,
+        private readonly CareerEditorialPatchAuthorityService $patchAuthorityService,
     ) {}
 
     /**
@@ -42,6 +49,7 @@ final class CareerAssetBatchPipeline
 
         $truthBySlug = $this->truthBySlug();
         $stages = [];
+        $strictTrustCompile = $manifest->batchKind === CareerAssetBatchManifestBuilder::BATCH_KIND_1;
 
         $validate = $this->validator->validate($manifest, $truthBySlug);
         $stages['validate'] = $validate;
@@ -64,7 +72,7 @@ final class CareerAssetBatchPipeline
         }
 
         $trustFreshnessBySlug = $this->trustFreshnessBySlug();
-        $compileTrust = $this->trustCompiler->compile($manifest, $trustFreshnessBySlug);
+        $compileTrust = $this->trustCompiler->compile($manifest, $trustFreshnessBySlug, $strictTrustCompile);
         $stages['compile_trust'] = $compileTrust;
 
         if ($normalizedMode === self::MODE_COMPILE_TRUST) {
@@ -78,13 +86,27 @@ final class CareerAssetBatchPipeline
             return $this->result('aborted', $normalizedMode, $manifest->toArray(), $stages);
         }
 
-        $promotionBySlug = $this->promotionBySlug($truthBySlug, $manifest->scope);
-        $publishCandidate = $this->publishCandidateService->project(
-            $manifest,
-            $truthBySlug,
-            $promotionBySlug,
-        );
-        $stages['publish_candidate'] = $publishCandidate;
+        if ($manifest->batchKind === CareerAssetBatchManifestBuilder::BATCH_KIND_4) {
+            $promotionBySlug = $this->promotionBySlug($truthBySlug, $manifest->scope);
+            $publishCandidate = $this->publishCandidateService->project(
+                $manifest,
+                $truthBySlug,
+                $promotionBySlug,
+            );
+            $stages['publish_candidate'] = $publishCandidate;
+            $stages['review_queue_handoff'] = $this->reviewQueueHandoff($manifest, $truthBySlug);
+        } else {
+            $promotionBySlug = $this->promotionBySlug($truthBySlug, $manifest->scope);
+            $publishCandidate = $this->publishCandidateService->project(
+                $manifest,
+                $truthBySlug,
+                $promotionBySlug,
+            );
+            $stages['publish_candidate'] = $publishCandidate;
+            if ($manifest->batchKind === CareerAssetBatchManifestBuilder::BATCH_KIND_3) {
+                $stages['review_queue_handoff'] = $this->reviewQueueHandoff($manifest, $truthBySlug);
+            }
+        }
 
         if ($normalizedMode === self::MODE_PUBLISH_CANDIDATE) {
             return $this->result('completed', $normalizedMode, $manifest->toArray(), $stages);
@@ -108,7 +130,7 @@ final class CareerAssetBatchPipeline
     {
         return [
             'pipeline_kind' => 'career_asset_batch_pipeline',
-            'pipeline_version' => 'career.asset_batch_pipeline.v1',
+            'pipeline_version' => 'career.asset_batch_pipeline.v2',
             'status' => $status,
             'mode' => $mode,
             'manifest' => $manifest,
@@ -228,5 +250,99 @@ final class CareerAssetBatchPipeline
                 ]),
             )),
         };
+    }
+
+    /**
+     * @param  array<string, array<string, mixed>>  $truthBySlug
+     * @return array<string, mixed>
+     */
+    private function reviewQueueHandoff(CareerAssetBatchManifest $manifest, array $truthBySlug): array
+    {
+        $patches = $this->patchAuthorityService->build()->toArray();
+        $approvedPatchesBySlug = $this->approvedPatchesBySlug((array) ($patches['patches'] ?? []));
+        $subjects = [];
+        $batchContextBySlug = [];
+
+        foreach ($manifest->members as $member) {
+            $slug = trim((string) $member->canonicalSlug);
+            if ($slug === '') {
+                continue;
+            }
+            $truth = $truthBySlug[$slug] ?? [];
+            $subjects[] = [
+                'canonical_slug' => $slug,
+                'crosswalk_mode' => (string) ($member->crosswalkMode ?: ($truth['crosswalk_mode'] ?? 'unmapped')),
+                'readiness_status' => (string) ($truth['readiness_status'] ?? 'blocked_override_eligible'),
+                'blocked_governance_status' => $truth['blocked_governance_status'] ?? null,
+            ];
+            $batchContextBySlug[$slug] = [
+                'batch_origin' => $manifest->batchKey,
+                'publish_track' => (string) ($member->expectedPublishTrack ?: 'hold'),
+                'family_slug' => trim((string) $member->familySlug) !== ''
+                    ? (string) $member->familySlug
+                    : null,
+            ];
+        }
+
+        $queue = $this->crosswalkReviewQueueService->build(
+            $subjects,
+            $approvedPatchesBySlug,
+            $batchContextBySlug,
+            $manifest->scope !== '' ? $manifest->scope : 'career_crosswalk_editorial_ops',
+        )->toArray();
+
+        $resolvedCrosswalk = $this->crosswalkOverrideResolver->resolve($subjects, $approvedPatchesBySlug);
+        $familyHandoffCount = collect((array) ($queue['items'] ?? []))
+            ->where('candidate_target_kind', 'family')
+            ->count();
+        $unmappedCount = collect($subjects)
+            ->where('crosswalk_mode', 'unmapped')
+            ->count();
+
+        return [
+            'stage' => 'review_queue_handoff',
+            'passed' => true,
+            'review_queue' => $queue,
+            'resolved_crosswalk' => $resolvedCrosswalk,
+            'counts' => [
+                'queue_total' => (int) data_get($queue, 'counts.total', 0),
+                'family_handoff' => $familyHandoffCount,
+                'unmapped' => $unmappedCount,
+                'approved_patch_applied' => (int) data_get($resolvedCrosswalk, 'counts.override_applied', 0),
+            ],
+        ];
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $patches
+     * @return array<string, array<string, mixed>>
+     */
+    private function approvedPatchesBySlug(array $patches): array
+    {
+        $grouped = [];
+        foreach ($patches as $patch) {
+            if (! is_array($patch)) {
+                continue;
+            }
+            $status = strtolower(trim((string) ($patch['patch_status'] ?? '')));
+            $slug = trim((string) ($patch['subject_slug'] ?? ''));
+            if ($status !== 'approved' || $slug === '') {
+                continue;
+            }
+            $grouped[$slug][] = $patch;
+        }
+
+        $approved = [];
+        foreach ($grouped as $slug => $items) {
+            usort($items, function (array $a, array $b): int {
+                $at = strtotime((string) ($a['reviewed_at'] ?? $a['created_at'] ?? '')) ?: 0;
+                $bt = strtotime((string) ($b['reviewed_at'] ?? $b['created_at'] ?? '')) ?: 0;
+
+                return $bt <=> $at;
+            });
+            $approved[$slug] = $items[0];
+        }
+
+        return $approved;
     }
 }

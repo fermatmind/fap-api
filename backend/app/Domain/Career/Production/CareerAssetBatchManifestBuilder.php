@@ -14,6 +14,10 @@ final class CareerAssetBatchManifestBuilder
 
     public const BATCH_KIND_2 = 'career_asset_batch_2';
 
+    public const BATCH_KIND_3 = 'career_asset_batch_3';
+
+    public const BATCH_KIND_4 = 'career_asset_batch_4';
+
     public function fromPath(string $path): CareerAssetBatchManifest
     {
         $resolved = str_starts_with($path, '/')

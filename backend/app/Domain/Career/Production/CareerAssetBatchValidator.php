@@ -37,6 +37,8 @@ final class CareerAssetBatchValidator
         'stable' => true,
         'candidate' => true,
         'hold' => true,
+        'explorer_only' => true,
+        'review_needed' => true,
     ];
 
     /**
@@ -51,6 +53,7 @@ final class CareerAssetBatchValidator
 
         foreach ($manifest->members as $member) {
             $errors = [];
+            $warnings = [];
             $slug = $member->canonicalSlug;
             $occupationId = $member->occupationUuid;
 
@@ -87,13 +90,14 @@ final class CareerAssetBatchValidator
             }
 
             if (! isset($truthBySlug[$slug])) {
-                $errors[] = 'missing_backend_truth';
+                $warnings[] = 'missing_backend_truth';
             }
 
             $members[] = [
                 'canonical_slug' => $slug,
                 'valid' => $errors === [],
                 'errors' => $errors,
+                'warnings' => $warnings,
             ];
         }
 
@@ -104,6 +108,12 @@ final class CareerAssetBatchValidator
         if ($manifest->batchKind === CareerAssetBatchManifestBuilder::BATCH_KIND_2 && $manifest->memberCount !== 30) {
             $errors[] = 'batch_2_member_count_must_equal_30';
         }
+        if ($manifest->batchKind === CareerAssetBatchManifestBuilder::BATCH_KIND_3 && $manifest->memberCount !== 80) {
+            $errors[] = 'batch_3_member_count_must_equal_80';
+        }
+        if ($manifest->batchKind === CareerAssetBatchManifestBuilder::BATCH_KIND_4 && $manifest->memberCount !== 222) {
+            $errors[] = 'batch_4_member_count_must_equal_222';
+        }
 
         return [
             'stage' => 'validate',
@@ -113,6 +123,7 @@ final class CareerAssetBatchValidator
                 'total' => count($members),
                 'valid' => collect($members)->where('valid', true)->count(),
                 'invalid' => collect($members)->where('valid', false)->count(),
+                'warnings' => collect($members)->sum(static fn (array $row): int => count((array) ($row['warnings'] ?? []))),
             ],
             'members' => $members,
         ];

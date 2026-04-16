@@ -50,7 +50,7 @@ final class CareerAssetBatchPipelineTest extends TestCase
         $this->assertTrue((bool) data_get($result, 'stages.regression.passed'));
     }
 
-    public function test_it_supports_batch_2_manifest_shape_for_30_members_and_fails_fast_on_missing_truth(): void
+    public function test_it_supports_batch_2_manifest_shape_for_30_members_and_reports_missing_truth_as_warnings(): void
     {
         $this->materializeCurrentFirstWaveFixture();
         $manifestPath = $this->createBatchManifest(
@@ -61,11 +61,12 @@ final class CareerAssetBatchPipelineTest extends TestCase
 
         $result = app(CareerAssetBatchPipeline::class)->run($manifestPath, CareerAssetBatchPipeline::MODE_VALIDATE);
 
-        $this->assertSame('aborted', $result['status'] ?? null);
+        $this->assertSame('completed', $result['status'] ?? null);
         $this->assertSame(CareerAssetBatchPipeline::MODE_VALIDATE, $result['mode'] ?? null);
         $this->assertSame(30, data_get($result, 'manifest.member_count'));
         $this->assertSame(30, data_get($result, 'stages.validate.counts.total'));
-        $this->assertSame(20, data_get($result, 'stages.validate.counts.invalid'));
+        $this->assertSame(0, data_get($result, 'stages.validate.counts.invalid'));
+        $this->assertSame(20, data_get($result, 'stages.validate.counts.warnings'));
     }
 
     private function materializeCurrentFirstWaveFixture(): void
@@ -124,11 +125,15 @@ final class CareerAssetBatchPipelineTest extends TestCase
 
         $payload = [
             'batch_kind' => $batchKind,
-            'batch_version' => 'career.asset_batch.manifest.v1',
+            'batch_version' => 'career.asset_batch.manifest.v2',
             'batch_key' => $batchKind.'-test',
-            'scope' => $batchKind === CareerAssetBatchManifestBuilder::BATCH_KIND_1
-                ? 'career_batch_1_first_wave_10'
-                : 'career_batch_2_first_wave_30_framework',
+            'scope' => match ($batchKind) {
+                CareerAssetBatchManifestBuilder::BATCH_KIND_1 => 'career_batch_1_first_wave_10',
+                CareerAssetBatchManifestBuilder::BATCH_KIND_2 => 'career_batch_2_30',
+                CareerAssetBatchManifestBuilder::BATCH_KIND_3 => 'career_batch_3_80',
+                CareerAssetBatchManifestBuilder::BATCH_KIND_4 => 'career_batch_4_222',
+                default => 'career_batch_misc',
+            },
             'member_count' => count($members),
             'members' => $members,
         ];
