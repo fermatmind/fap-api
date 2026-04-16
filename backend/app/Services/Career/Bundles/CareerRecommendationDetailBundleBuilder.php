@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\Feedback\CareerFeedbackTimelineAuthorityService;
 use App\Domain\Career\IndexStateValue;
 use App\DTO\Career\CareerRecommendationDetailBundle;
 use App\DTO\Career\CareerTransitionPreviewBundle;
@@ -19,6 +20,7 @@ final class CareerRecommendationDetailBundleBuilder
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
         private readonly CareerWhiteBoxScorePayloadBuilder $whiteBoxScorePayloadBuilder,
         private readonly CareerTransitionPreviewBundleBuilder $transitionPreviewBundleBuilder,
+        private readonly CareerFeedbackTimelineAuthorityService $feedbackTimelineAuthorityService,
     ) {}
 
     public function buildByType(string $type): ?CareerRecommendationDetailBundle
@@ -58,6 +60,7 @@ final class CareerRecommendationDetailBundleBuilder
         $warnings = $this->normalizeArray($payload['warnings'] ?? []);
         $routeSubject = $this->routeSubject($subjectMeta, $requestedType);
         $transitionPath = $this->recommendationTransitionPath($routeSubject);
+        $lifecycle = $this->feedbackTimelineAuthorityService->buildForRecommendationSnapshot($snapshot);
 
         return new CareerRecommendationDetailBundle(
             identity: [
@@ -101,6 +104,9 @@ final class CareerRecommendationDetailBundleBuilder
             ],
             matchedJobs: $this->buildMatchedJobs($snapshots),
             transitionPath: $transitionPath,
+            feedbackCheckin: is_array($lifecycle['feedback_checkin'] ?? null) ? $lifecycle['feedback_checkin'] : null,
+            projectionTimeline: is_array($lifecycle['projection_timeline'] ?? null) ? $lifecycle['projection_timeline'] : [],
+            projectionDeltaSummary: is_array($lifecycle['projection_delta_summary'] ?? null) ? $lifecycle['projection_delta_summary'] : [],
             seoContract: $this->buildSeoContract($snapshot, $routeSubject),
             provenanceMeta: [
                 'content_version' => $trustManifest?->content_version,

@@ -1263,6 +1263,33 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B76X
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b76x-career-feedback-time-travel-baseline
+    base: main
+    depends_on: ["PR-B74X"]
+    mode: execute
+    scope: >
+      Career feedback + time-travel system baseline (backend).
+      Add append-only feedback check-in authority and projection timeline/delta read
+      contract on career recommendation/job detail bundles without changing public API
+      families outside career detail surfaces.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Domain/Career/Feedback/*.php app/DTO/Career/CareerFeedback*.php app/DTO/Career/CareerProjection*.php tests/Unit/Services/Career/*Feedback*.php tests/Unit/Services/Career/*Timeline*.php tests/Feature/Career/*Recommendation*.php tests/Feature/Career/*JobDetail*.php"
+      - "php artisan test tests/Unit/Services/Career/*Feedback*.php tests/Unit/Services/Career/*Timeline*.php"
+      - "php artisan test tests/Feature/Career/*Recommendation*.php tests/Feature/Career/*JobDetail*.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web

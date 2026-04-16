@@ -56,4 +56,9 @@ class RecommendationSnapshot extends CareerImmutableFoundationModel
     {
         return $this->hasMany(TransitionPath::class, 'recommendation_snapshot_id', 'id');
     }
+
+    public function feedbackRecords(): HasMany
+    {
+        return $this->hasMany(CareerFeedbackRecord::class, 'recommendation_snapshot_id', 'id');
+    }
 }

@@ -47,6 +47,7 @@ use App\Http\Controllers\API\V0_5\Career\CareerJobExplainabilityController;
 use App\Http\Controllers\API\V0_5\Career\CareerJobListController;
 use App\Http\Controllers\API\V0_5\Career\CareerRecommendationDetailController;
 use App\Http\Controllers\API\V0_5\Career\CareerRecommendationExplainabilityController;
+use App\Http\Controllers\API\V0_5\Career\CareerRecommendationFeedbackController;
 use App\Http\Controllers\API\V0_5\Career\CareerRecommendationIndexController;
 use App\Http\Controllers\API\V0_5\Career\CareerSearchController;
 use App\Http\Controllers\API\V0_5\Career\CareerTransitionPreviewController;
@@ -431,6 +432,7 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/career/recommendations/mbti', [CareerRecommendationIndexController::class, 'index']);
     Route::get('/career/recommendations/mbti/{type}', [CareerRecommendationDetailController::class, 'show']);
     Route::get('/career/recommendations/mbti/{type}/explainability', [CareerRecommendationExplainabilityController::class, 'show']);
+    Route::post('/career/recommendations/mbti/{type}/feedback', [CareerRecommendationFeedbackController::class, 'store']);
     Route::get('/career/transition-preview', [CareerTransitionPreviewController::class, 'show']);
     Route::get('/career/search', [CareerSearchController::class, 'index']);
     Route::get('/career/datasets/occupations', [CareerDatasetHubController::class, 'show']);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\Feedback\CareerFeedbackTimelineAuthorityService;
 use App\Domain\Career\IndexStateValue;
 use App\DTO\Career\CareerJobDetailBundle;
 use App\Models\Occupation;
@@ -16,6 +17,7 @@ final class CareerJobDetailBundleBuilder
     public function __construct(
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
         private readonly CareerWhiteBoxScorePayloadBuilder $whiteBoxScorePayloadBuilder,
+        private readonly CareerFeedbackTimelineAuthorityService $feedbackTimelineAuthorityService,
     ) {}
 
     public function buildBySlug(string $slug): ?CareerJobDetailBundle
@@ -204,6 +206,7 @@ final class CareerJobDetailBundleBuilder
                 'source_trace_id' => $truthMetric?->source_trace_id,
                 'compile_refs' => $this->normalizeArray($payload['compile_refs'] ?? []),
             ],
+            lifecycleCompanion: $this->feedbackTimelineAuthorityService->buildCompanionForJobSnapshot($snapshot),
         );
     }
 
