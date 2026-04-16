@@ -14,6 +14,7 @@ use App\Console\Commands\CareerExportFirstWaveReleaseArtifacts;
 use App\Console\Commands\CareerExportFirstWaveRolloutBundleArtifacts;
 use App\Console\Commands\CareerExportFirstWaveRolloutWavePlanArtifact;
 use App\Console\Commands\CareerExportFullReleaseLedger;
+use App\Console\Commands\CareerExportStrongIndexEligibility;
 use App\Console\Commands\CareerImportAuthorityWave;
 use App\Console\Commands\CareerRunAssetBatch;
 use App\Console\Commands\CiScaleImpact;
@@ -138,6 +139,7 @@ class Kernel extends ConsoleKernel
         CareerCompileAuthorityWave::class,
         CareerCrosswalkOps::class,
         CareerExportFullReleaseLedger::class,
+        CareerExportStrongIndexEligibility::class,
         CareerRunAssetBatch::class,
         CareerExportFirstWaveRolloutBundleArtifacts::class,
         CareerExportFirstWaveReleaseArtifacts::class,
