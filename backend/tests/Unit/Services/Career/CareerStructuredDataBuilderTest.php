@@ -39,6 +39,10 @@ final class CareerStructuredDataBuilderTest extends TestCase
                 'canonical_path' => '/career/jobs/backend-architect',
             ],
             provenanceMeta: [],
+            lifecycleCompanion: [],
+            lifecycleOperational: [],
+            shortlistContract: [],
+            conversionClosure: [],
         );
 
         $payload = app(CareerStructuredDataBuilder::class)->build('career_job_detail', $bundle);

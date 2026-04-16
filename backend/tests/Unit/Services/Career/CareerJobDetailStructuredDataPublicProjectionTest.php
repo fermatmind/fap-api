@@ -37,6 +37,10 @@ final class CareerJobDetailStructuredDataPublicProjectionTest extends TestCase
                 'canonical_path' => '/career/jobs/backend-architect',
             ],
             provenanceMeta: [],
+            lifecycleCompanion: [],
+            lifecycleOperational: [],
+            shortlistContract: [],
+            conversionClosure: [],
         );
 
         $payload = (new CareerJobDetailResource($bundle))->toArray(Request::create('/api/v0.5/career/jobs/backend-architect', 'GET'));

@@ -6,9 +6,11 @@ namespace App\Services\Career\Bundles;
 
 use App\Domain\Career\Feedback\CareerFeedbackTimelineAuthorityService;
 use App\Domain\Career\IndexStateValue;
+use App\Domain\Career\Publish\CareerLifecycleOperationalSummaryService;
 use App\DTO\Career\CareerJobDetailBundle;
 use App\Models\Occupation;
 use App\Models\RecommendationSnapshot;
+use App\Services\Analytics\CareerConversionClosureBuilder;
 use App\Services\Career\Scoring\CareerWhiteBoxScorePayloadBuilder;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 
@@ -18,6 +20,8 @@ final class CareerJobDetailBundleBuilder
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
         private readonly CareerWhiteBoxScorePayloadBuilder $whiteBoxScorePayloadBuilder,
         private readonly CareerFeedbackTimelineAuthorityService $feedbackTimelineAuthorityService,
+        private readonly CareerLifecycleOperationalSummaryService $lifecycleOperationalSummaryService,
+        private readonly CareerConversionClosureBuilder $conversionClosureBuilder,
     ) {}
 
     public function buildBySlug(string $slug): ?CareerJobDetailBundle
@@ -79,6 +83,9 @@ final class CareerJobDetailBundleBuilder
 
         $scoreBundle = $this->normalizeArray($payload['score_bundle'] ?? []);
         $warnings = $this->normalizeArray($payload['warnings'] ?? []);
+        $subjectSlug = strtolower((string) $occupation->canonical_slug);
+        $lifecycleOperational = $this->lifecycleOperationalSummaryService->buildForSlug($subjectSlug);
+        $conversionClosure = $this->conversionClosureBuilder->buildForSubjectSlug($subjectSlug);
 
         return new CareerJobDetailBundle(
             identity: [
@@ -207,6 +214,16 @@ final class CareerJobDetailBundleBuilder
                 'compile_refs' => $this->normalizeArray($payload['compile_refs'] ?? []),
             ],
             lifecycleCompanion: $this->feedbackTimelineAuthorityService->buildCompanionForJobSnapshot($snapshot),
+            lifecycleOperational: $lifecycleOperational,
+            shortlistContract: [
+                'enabled' => true,
+                'subject_kind' => 'job_slug',
+                'subject_slug' => $subjectSlug,
+                'source_page_type' => 'career_job_detail',
+                'state_endpoint' => '/api/v0.5/career/shortlist/state',
+                'write_endpoint' => '/api/v0.5/career/shortlist',
+            ],
+            conversionClosure: $conversionClosure,
         );
     }
 

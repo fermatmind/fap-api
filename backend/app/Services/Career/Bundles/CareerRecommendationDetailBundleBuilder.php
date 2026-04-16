@@ -6,10 +6,12 @@ namespace App\Services\Career\Bundles;
 
 use App\Domain\Career\Feedback\CareerFeedbackTimelineAuthorityService;
 use App\Domain\Career\IndexStateValue;
+use App\Domain\Career\Publish\CareerLifecycleOperationalSummaryService;
 use App\DTO\Career\CareerRecommendationDetailBundle;
 use App\DTO\Career\CareerTransitionPreviewBundle;
 use App\Models\Occupation;
 use App\Models\RecommendationSnapshot;
+use App\Services\Analytics\CareerConversionClosureBuilder;
 use App\Services\Career\Scoring\CareerWhiteBoxScorePayloadBuilder;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Support\Collection;
@@ -21,6 +23,8 @@ final class CareerRecommendationDetailBundleBuilder
         private readonly CareerWhiteBoxScorePayloadBuilder $whiteBoxScorePayloadBuilder,
         private readonly CareerTransitionPreviewBundleBuilder $transitionPreviewBundleBuilder,
         private readonly CareerFeedbackTimelineAuthorityService $feedbackTimelineAuthorityService,
+        private readonly CareerLifecycleOperationalSummaryService $lifecycleOperationalSummaryService,
+        private readonly CareerConversionClosureBuilder $conversionClosureBuilder,
     ) {}
 
     public function buildByType(string $type): ?CareerRecommendationDetailBundle
@@ -61,6 +65,9 @@ final class CareerRecommendationDetailBundleBuilder
         $routeSubject = $this->routeSubject($subjectMeta, $requestedType);
         $transitionPath = $this->recommendationTransitionPath($routeSubject);
         $lifecycle = $this->feedbackTimelineAuthorityService->buildForRecommendationSnapshot($snapshot);
+        $subjectSlug = strtolower((string) ($snapshot->occupation->canonical_slug ?? ''));
+        $lifecycleOperational = $this->lifecycleOperationalSummaryService->buildForSlug($subjectSlug);
+        $conversionClosure = $this->conversionClosureBuilder->buildForSubjectSlug($subjectSlug);
 
         return new CareerRecommendationDetailBundle(
             identity: [
@@ -107,6 +114,16 @@ final class CareerRecommendationDetailBundleBuilder
             feedbackCheckin: is_array($lifecycle['feedback_checkin'] ?? null) ? $lifecycle['feedback_checkin'] : null,
             projectionTimeline: is_array($lifecycle['projection_timeline'] ?? null) ? $lifecycle['projection_timeline'] : [],
             projectionDeltaSummary: is_array($lifecycle['projection_delta_summary'] ?? null) ? $lifecycle['projection_delta_summary'] : [],
+            lifecycleOperational: $lifecycleOperational,
+            shortlistContract: [
+                'enabled' => true,
+                'subject_kind' => 'job_slug',
+                'subject_slug' => $subjectSlug,
+                'source_page_type' => 'career_recommendation_detail',
+                'state_endpoint' => '/api/v0.5/career/shortlist/state',
+                'write_endpoint' => '/api/v0.5/career/shortlist',
+            ],
+            conversionClosure: $conversionClosure,
             seoContract: $this->buildSeoContract($snapshot, $routeSubject),
             provenanceMeta: [
                 'content_version' => $trustManifest?->content_version,
