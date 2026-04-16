@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T04:42:00Z",
+  "updated_at": "2026-04-16T05:10:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -2073,10 +2073,10 @@
     "PR-B71X": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/pr-b71x-career-batch-2-4-production-execution-full-342-asset-completion",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "495a19108d96786bef3c3bb135c5f5d7aabbb1a3",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/919",
       "checks": {
         "local": [
           {
@@ -2108,7 +2108,28 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details": "https://github.com/fermatmind/fap-api/actions/runs/24491128516/job/71576164900"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details": "https://github.com/fermatmind/fap-api/actions/runs/24491117752/job/71576134869"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details": "https://github.com/fermatmind/fap-api/actions/runs/24491128516/job/71576169389"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details": "https://github.com/fermatmind/fap-api/actions/runs/24491117752/job/71576138541"
+          }
+        ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
