@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-15T23:56:47Z",
+  "updated_at": "2026-04-16T00:27:05Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1733,9 +1733,9 @@
     "PR-B65": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_checks_failed",
+      "status": "merged",
       "branch": "codex/pr-b65-career-transition-engine-contract-expansion",
-      "commit_sha": "74a5beaf99783a476cd034cc50d4bd11bd767003",
+      "commit_sha": "d2915e1edaf43811ea0dc49f0a71de983027f117",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/912",
       "checks": {
         "local": [
@@ -1773,7 +1773,61 @@
           }
         ]
       },
-      "failure_reason": "GitHub Actions hygiene job failed immediately on PR-B65; local validation passed, but required remote checks are not green.",
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "2026-04-15T23:58:03Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-B66": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open_checks_failed",
+      "branch": "codex/pr-b66-career-index-policy-engine-formalization",
+      "commit_sha": "7edc96b3402997dd7c464dab08302dc446e73fef",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/913",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Domain/Career/Publish/CareerFirstWaveIndexPolicyEngine.php app/DTO/Career/CareerFirstWaveIndexPolicy*.php tests/Unit/Services/Career/CareerFirstWaveIndexPolicyEngineTest.php tests/Unit/Services/Career/CareerFirstWaveLifecycleSummaryServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerFirstWaveIndexPolicyEngineTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerFirstWaveLifecycleSummaryServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditV2ServiceTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/OpenApiDiffTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details": "https://github.com/fermatmind/fap-api/actions/runs/24485372348/job/71558931698"
+          },
+          {
+            "name": "hygiene",
+            "status": "queued",
+            "details": "https://github.com/fermatmind/fap-api/actions/runs/24485382634/job/71558966323"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details": "https://github.com/fermatmind/fap-api/actions/runs/24485372348/job/71558936274"
+          }
+        ]
+      },
+      "failure_reason": "GitHub hygiene check failed on first CI run; rerun is queued.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
