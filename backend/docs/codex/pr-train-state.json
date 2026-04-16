@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T15:07:52Z",
+  "updated_at": "2026-04-16T15:09:55Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -2576,7 +2576,7 @@
     "PR-B84": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "github_checks_failed",
       "branch": "codex/pr-b84-career-lifecycle-conversion-closure",
       "commit_sha": "4acf88d7480d4c9fbe42349baf5d6b9e4dff6159",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/929",
@@ -2587,10 +2587,10 @@
           "php artisan test tests/Unit/Services/Career/*Lifecycle*Test.php tests/Unit/Services/Career/*Shortlist*Test.php tests/Feature/Career/*Feedback*.php tests/Feature/Career/*Shortlist*.php tests/Feature/Analytics/*CareerAttribution*.php"
         ],
         "github": [
-          "pending"
+          "hygiene:FAILURE"
         ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub Actions billing/spending limit blocked job start: 'recent account payments have failed or your spending limit needs to be increased'.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
