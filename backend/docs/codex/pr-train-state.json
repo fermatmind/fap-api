@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T15:09:55Z",
+  "updated_at": "2026-04-16T16:20:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -2385,9 +2385,9 @@
     "PR-B80": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_checks_failed",
+      "status": "merged",
       "branch": "codex/pr-b80-career-full-342-release-ledger-authority",
-      "commit_sha": "8bf0f9f78bcb7521fbb264daf62069afb6f28d8f",
+      "commit_sha": "18a8218d1ec3700fe6df7e4e2cf9875fd2ea1104",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/925",
       "checks": {
         "local": [
@@ -2427,18 +2427,18 @@
           }
         ]
       },
-      "failure_reason": "GitHub Actions checks failed at workflow startup in CI (hygiene failed, MBTI matrix skipped) while all required local checks passed.",
+      "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-04-16T12:45:43Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "PR-B81": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_checks_failed",
+      "status": "merged",
       "branch": "codex/pr-b81-career-strong-index-gate-completion",
-      "commit_sha": "883bec0bfdc684353cb4ad983364d24f596c6b89",
+      "commit_sha": "eb00100378f7f79d9fff36ef2d11e1de8109fe38",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/926",
       "checks": {
         "local": [
@@ -2482,19 +2482,19 @@
           }
         ]
       },
-      "failure_reason": "GitHub Actions checks failed at workflow startup in CI (hygiene failed, MBTI matrix skipped) while all required local checks passed.",
+      "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-04-16T13:14:12Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "PR-B82": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "merged",
       "branch": "codex/pr-b82-career-crosswalk-backlog-convergence-authority",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "ad56a7e90bba16539f0f1df556078159cab6e7c4",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/927",
       "checks": {
         "local": [
           {
@@ -2518,16 +2518,16 @@
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-04-16T13:39:31Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "PR-B83": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_checks_failed",
+      "status": "merged",
       "branch": "codex/pr-b83-career-full-342-dataset-public-scope-completion",
-      "commit_sha": "d29b037ddcc23029f23308fb79aa37d35c8e1571",
+      "commit_sha": "3ccb0ee74d304009e49a96af8463d774fae99668",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/928",
       "checks": {
         "local": [
@@ -2567,18 +2567,18 @@
           }
         ]
       },
-      "failure_reason": "GitHub Actions checks failed at workflow startup in CI (hygiene failed, MBTI matrix skipped) while all required local checks passed.",
+      "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-04-16T14:19:13Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "PR-B84": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_checks_failed",
+      "status": "merged",
       "branch": "codex/pr-b84-career-lifecycle-conversion-closure",
-      "commit_sha": "4acf88d7480d4c9fbe42349baf5d6b9e4dff6159",
+      "commit_sha": "f5244149872bab57fef586e0aa6ce046a384d7c7",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/929",
       "checks": {
         "local": [
@@ -2590,7 +2590,41 @@
           "hygiene:FAILURE"
         ]
       },
-      "failure_reason": "GitHub Actions billing/spending limit blocked job start: 'recent account payments have failed or your spending limit needs to be increased'.",
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "2026-04-16T15:14:12Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-B85": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/pr-b85-career-launch-governance-closure",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/DTO/Career/CareerLaunchGovernanceClosure*.php app/Domain/Career/Publish/CareerLaunchGovernanceClosure*.php app/Console/Commands/CareerExportLaunchGovernanceClosure.php tests/Unit/Services/Career/CareerLaunchGovernanceClosureServiceTest.php tests/Feature/Console/CareerExportLaunchGovernanceClosureCommandTest.php app/Console/Kernel.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerLaunchGovernanceClosureServiceTest.php tests/Feature/Console/CareerExportLaunchGovernanceClosureCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerFullReleaseLedgerServiceTest.php tests/Unit/Services/Career/CareerStrongIndexEligibilityServiceTest.php tests/Unit/Services/Career/CareerCrosswalkBacklogConvergenceServiceTest.php tests/Unit/Services/Career/CareerLifecycleOperationalSummaryServiceTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,

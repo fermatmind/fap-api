@@ -15,6 +15,7 @@ use App\Console\Commands\CareerExportFirstWaveReleaseArtifacts;
 use App\Console\Commands\CareerExportFirstWaveRolloutBundleArtifacts;
 use App\Console\Commands\CareerExportFirstWaveRolloutWavePlanArtifact;
 use App\Console\Commands\CareerExportFullReleaseLedger;
+use App\Console\Commands\CareerExportLaunchGovernanceClosure;
 use App\Console\Commands\CareerExportStrongIndexEligibility;
 use App\Console\Commands\CareerImportAuthorityWave;
 use App\Console\Commands\CareerRunAssetBatch;
@@ -141,6 +142,7 @@ class Kernel extends ConsoleKernel
         CareerCrosswalkOps::class,
         CareerExportCrosswalkBacklogConvergence::class,
         CareerExportFullReleaseLedger::class,
+        CareerExportLaunchGovernanceClosure::class,
         CareerExportStrongIndexEligibility::class,
         CareerRunAssetBatch::class,
         CareerExportFirstWaveRolloutBundleArtifacts::class,
