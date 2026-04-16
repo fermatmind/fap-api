@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T05:10:00Z",
+  "updated_at": "2026-04-16T15:28:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -2183,6 +2183,40 @@
         ]
       },
       "failure_reason": "GitHub hygiene checks failed before logs were available from the runs; local validation is fully green and the PR is waiting on remote CI status.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B76X": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/pr-b76x-career-feedback-time-travel-baseline",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Domain/Career/Feedback/*.php app/DTO/Career/CareerFeedback*.php app/DTO/Career/CareerProjection*.php tests/Unit/Services/Career/*Feedback*.php tests/Unit/Services/Career/*Timeline*.php tests/Feature/Career/*Recommendation*.php tests/Feature/Career/*JobDetail*.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/*Feedback*.php tests/Unit/Services/Career/*Timeline*.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Career/*Recommendation*.php tests/Feature/Career/*JobDetail*.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,

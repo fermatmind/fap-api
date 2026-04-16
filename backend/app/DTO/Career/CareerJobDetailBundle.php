@@ -21,6 +21,7 @@ final class CareerJobDetailBundle
      * @param  array<string, mixed>  $integritySummary
      * @param  array<string, mixed>  $seoContract
      * @param  array<string, mixed>  $provenanceMeta
+     * @param  array<string, mixed>  $lifecycleCompanion
      */
     public function __construct(
         public readonly array $identity,
@@ -37,6 +38,7 @@ final class CareerJobDetailBundle
         public readonly array $integritySummary,
         public readonly array $seoContract,
         public readonly array $provenanceMeta,
+        public readonly array $lifecycleCompanion,
     ) {}
 
     /**
@@ -61,6 +63,7 @@ final class CareerJobDetailBundle
             'integrity_summary' => $this->integritySummary,
             'seo_contract' => $this->seoContract,
             'provenance_meta' => $this->provenanceMeta,
+            'lifecycle_companion' => $this->lifecycleCompanion,
         ];
     }
 }

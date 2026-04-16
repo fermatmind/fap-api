@@ -99,6 +99,7 @@ final class CareerJobDetailApiTest extends TestCase
                     'breadcrumb_list',
                 ],
                 'provenance_meta' => ['compiler_version', 'compile_refs'],
+                'lifecycle_companion',
             ])
             ->assertJsonMissingPath('white_box_scores.fit_score.formula_ref')
             ->assertJsonMissingPath('white_box_scores.fit_score.critical_missing_fields');

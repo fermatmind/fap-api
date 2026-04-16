@@ -62,6 +62,17 @@ final class CareerRecommendationDetailApiTest extends TestCase
                     'seo_contract' => ['canonical_path', 'canonical_target', 'index_state', 'index_eligible', 'reason_codes'],
                     'trust_summary' => ['reviewer_status'],
                 ]],
+                'feedback_checkin',
+                'projection_timeline' => [
+                    'timeline_kind',
+                    'timeline_version',
+                    'entries',
+                ],
+                'projection_delta_summary' => [
+                    'delta_available',
+                    'score_deltas',
+                    'feedback_deltas',
+                ],
                 'seo_contract',
                 'provenance_meta' => ['compiler_version', 'compile_refs'],
             ])
