@@ -10,6 +10,7 @@ use App\Console\Commands\Big5PsychometricsReport;
 use App\Console\Commands\Big5TelemetrySummary;
 use App\Console\Commands\CareerCompileAuthorityWave;
 use App\Console\Commands\CareerCrosswalkOps;
+use App\Console\Commands\CareerExportCrosswalkBacklogConvergence;
 use App\Console\Commands\CareerExportFirstWaveReleaseArtifacts;
 use App\Console\Commands\CareerExportFirstWaveRolloutBundleArtifacts;
 use App\Console\Commands\CareerExportFirstWaveRolloutWavePlanArtifact;
@@ -138,6 +139,7 @@ class Kernel extends ConsoleKernel
         CareerImportAuthorityWave::class,
         CareerCompileAuthorityWave::class,
         CareerCrosswalkOps::class,
+        CareerExportCrosswalkBacklogConvergence::class,
         CareerExportFullReleaseLedger::class,
         CareerExportStrongIndexEligibility::class,
         CareerRunAssetBatch::class,
