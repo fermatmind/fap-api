@@ -22,6 +22,9 @@ final class CareerJobDetailBundle
      * @param  array<string, mixed>  $seoContract
      * @param  array<string, mixed>  $provenanceMeta
      * @param  array<string, mixed>  $lifecycleCompanion
+     * @param  array<string, mixed>  $lifecycleOperational
+     * @param  array<string, mixed>  $shortlistContract
+     * @param  array<string, mixed>  $conversionClosure
      */
     public function __construct(
         public readonly array $identity,
@@ -39,6 +42,9 @@ final class CareerJobDetailBundle
         public readonly array $seoContract,
         public readonly array $provenanceMeta,
         public readonly array $lifecycleCompanion,
+        public readonly array $lifecycleOperational,
+        public readonly array $shortlistContract,
+        public readonly array $conversionClosure,
     ) {}
 
     /**
@@ -64,6 +70,9 @@ final class CareerJobDetailBundle
             'seo_contract' => $this->seoContract,
             'provenance_meta' => $this->provenanceMeta,
             'lifecycle_companion' => $this->lifecycleCompanion,
+            'lifecycle_operational' => $this->lifecycleOperational,
+            'shortlist_contract' => $this->shortlistContract,
+            'conversion_closure' => $this->conversionClosure,
         ];
     }
 }

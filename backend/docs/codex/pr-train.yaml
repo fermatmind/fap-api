@@ -1494,3 +1494,29 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: PR-B84
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b84-career-lifecycle-conversion-closure
+    base: main
+    depends_on: ["PR-B83", "PR-F49"]
+    mode: execute
+    scope: >
+      Career lifecycle + conversion closure (backend).
+      Add full-342 lifecycle operational summary authority, shortlist write/read/persistence
+      closure, and internal conversion closure contract wiring shortlist/cta/support/feedback
+      without expanding family/dataset/dashboard/paid surfaces.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/DTO/Career/CareerLifecycleOperational*.php app/DTO/Career/CareerConversionClosureSummary.php app/Models/CareerShortlist*.php app/Services/Analytics/CareerConversionClosureBuilder.php app/Domain/Career/Publish/CareerLifecycleOperationalSummaryService.php app/Http/Controllers/API/V0_5/Career/*.php tests/Unit/Services/Career/*Lifecycle*Test.php tests/Unit/Services/Career/*Shortlist*Test.php tests/Feature/Career/*Feedback*.php tests/Feature/Career/*Shortlist*.php tests/Feature/Analytics/*CareerAttribution*.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Unit/Services/Career/*Lifecycle*Test.php tests/Unit/Services/Career/*Shortlist*Test.php tests/Feature/Career/*Feedback*.php tests/Feature/Career/*Shortlist*.php tests/Feature/Analytics/*CareerAttribution*.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true

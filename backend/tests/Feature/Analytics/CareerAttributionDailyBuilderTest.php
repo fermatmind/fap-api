@@ -188,10 +188,19 @@ final class CareerAttributionDailyBuilderTest extends TestCase
             'subject_key' => 'registered-nurses',
             'query_mode' => 'non_query',
         ], 'anon_shortlist_add', 'session_shortlist_add');
+        $this->insertCareerEvent($orgId, 'career_feedback_submit', $day->copy()->addMinutes(19), [
+            'entry_surface' => 'career_recommendation_detail',
+            'source_page_type' => 'career_recommendation_detail',
+            'target_action' => 'submit_feedback',
+            'route_family' => 'recommendation_detail',
+            'subject_kind' => 'recommendation_type',
+            'subject_key' => 'intj',
+            'query_mode' => 'non_query',
+        ], 'anon_feedback_submit', 'session_feedback_submit');
 
         $result = app(CareerAttributionDailyBuilder::class)->refresh($day, $day, [$orgId], false);
 
-        $this->assertSame(19, (int) ($result['upserted_rows'] ?? 0));
+        $this->assertSame(20, (int) ($result['upserted_rows'] ?? 0));
 
         $readyRow = DB::table('analytics_career_attribution_daily')
             ->where('day', $day->toDateString())
@@ -285,6 +294,16 @@ final class CareerAttributionDailyBuilderTest extends TestCase
         $this->assertSame('recommendation_detail', $transitionPreviewClickRow->route_family);
         $this->assertSame('job_slug', $transitionPreviewClickRow->subject_kind);
         $this->assertSame('publish_ready', $transitionPreviewClickRow->readiness_class);
+
+        $feedbackSubmitRow = DB::table('analytics_career_attribution_daily')
+            ->where('event_name', 'career_feedback_submit')
+            ->where('subject_kind', 'recommendation_type')
+            ->where('subject_key', 'intj')
+            ->first();
+
+        $this->assertNotNull($feedbackSubmitRow);
+        $this->assertSame('recommendation_detail', $feedbackSubmitRow->source_page_type);
+        $this->assertSame('recommendation_detail', $feedbackSubmitRow->route_family);
 
         $jobBlockedRow = DB::table('analytics_career_attribution_daily')
             ->where('event_name', 'career_blocked_surface_exposed')

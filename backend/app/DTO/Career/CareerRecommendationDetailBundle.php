@@ -23,6 +23,9 @@ final class CareerRecommendationDetailBundle
      * @param  array<string, mixed>|null  $feedbackCheckin
      * @param  array<string, mixed>  $projectionTimeline
      * @param  array<string, mixed>  $projectionDeltaSummary
+     * @param  array<string, mixed>  $lifecycleOperational
+     * @param  array<string, mixed>  $shortlistContract
+     * @param  array<string, mixed>  $conversionClosure
      */
     public function __construct(
         public readonly array $identity,
@@ -39,6 +42,9 @@ final class CareerRecommendationDetailBundle
         public readonly ?array $feedbackCheckin,
         public readonly array $projectionTimeline,
         public readonly array $projectionDeltaSummary,
+        public readonly array $lifecycleOperational,
+        public readonly array $shortlistContract,
+        public readonly array $conversionClosure,
         public readonly array $seoContract,
         public readonly array $provenanceMeta,
     ) {}
@@ -65,6 +71,9 @@ final class CareerRecommendationDetailBundle
             'feedback_checkin' => $this->feedbackCheckin,
             'projection_timeline' => $this->projectionTimeline,
             'projection_delta_summary' => $this->projectionDeltaSummary,
+            'lifecycle_operational' => $this->lifecycleOperational,
+            'shortlist_contract' => $this->shortlistContract,
+            'conversion_closure' => $this->conversionClosure,
             'seo_contract' => $this->seoContract,
             'provenance_meta' => $this->provenanceMeta,
         ];

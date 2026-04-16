@@ -34,6 +34,10 @@ final class CareerBreadcrumbBuilderTest extends TestCase
                 'canonical_path' => '/career/jobs/backend-architect',
             ],
             provenanceMeta: [],
+            lifecycleCompanion: [],
+            lifecycleOperational: [],
+            shortlistContract: [],
+            conversionClosure: [],
         );
 
         $builder = app(CareerBreadcrumbBuilder::class);

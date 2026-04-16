@@ -289,6 +289,23 @@ final class CareerAttributionEventIngestTest extends TestCase
                 ],
                 'expected_source_page_type' => 'recommendation_detail',
             ],
+            [
+                'event' => 'career_feedback_submit',
+                'anon' => 'anon_b84_feedback_submit',
+                'path' => '/en/career/recommendations/mbti/intj-a',
+                'payload' => [
+                    'entry_surface' => 'career_recommendation_detail',
+                    'source_page_type' => 'career_recommendation_detail',
+                    'target_action' => 'submit_feedback',
+                    'landing_path' => '/en/career/recommendations/mbti/intj-a',
+                    'route_family' => 'recommendation_detail',
+                    'subject_kind' => 'recommendation_type',
+                    'subject_key' => 'intj',
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                ],
+                'expected_source_page_type' => 'recommendation_detail',
+            ],
         ];
 
         foreach ($cases as $case) {

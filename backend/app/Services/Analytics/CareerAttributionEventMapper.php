@@ -25,6 +25,7 @@ final class CareerAttributionEventMapper
         'career_job_detail_cta_click',
         'career_shortlist_add',
         'career_support_link_click',
+        'career_feedback_submit',
         'career_recommendation_result_click',
         'career_recommendation_matched_job_click',
         'career_transition_preview_view',
@@ -299,6 +300,34 @@ final class CareerAttributionEventMapper
             if ($targetAction !== 'open_support_link') {
                 throw ValidationException::withMessages([
                     'payload.target_action' => 'payload.target_action must be open_support_link for career_support_link_click.',
+                ]);
+            }
+        }
+
+        if ($eventCode === 'career_feedback_submit') {
+            if ($sourcePageType !== 'recommendation_detail') {
+                throw ValidationException::withMessages([
+                    'payload.source_page_type' => 'payload.source_page_type must be career_recommendation_detail for career_feedback_submit.',
+                ]);
+            }
+            if ($routeFamily !== 'recommendation_detail') {
+                throw ValidationException::withMessages([
+                    'payload.route_family' => 'payload.route_family must be recommendation_detail for career_feedback_submit.',
+                ]);
+            }
+            if ($subjectKind !== 'recommendation_type') {
+                throw ValidationException::withMessages([
+                    'payload.subject_kind' => 'payload.subject_kind must be recommendation_type for career_feedback_submit.',
+                ]);
+            }
+            if ($queryMode !== 'non_query') {
+                throw ValidationException::withMessages([
+                    'payload.query_mode' => 'payload.query_mode must be non_query for career_feedback_submit.',
+                ]);
+            }
+            if ($targetAction !== 'submit_feedback') {
+                throw ValidationException::withMessages([
+                    'payload.target_action' => 'payload.target_action must be submit_feedback for career_feedback_submit.',
                 ]);
             }
         }
