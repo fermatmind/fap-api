@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T15:28:00+08:00",
+  "updated_at": "2026-04-16T07:55:52.360319Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -2225,10 +2225,10 @@
     "PR-B77X": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "github_checks_failed",
       "branch": "codex/pr-b77x-career-threshold-experiment-authority",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "f82ba907",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/922",
       "checks": {
         "local": [
           {
@@ -2244,9 +2244,30 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24498764362/job/71599946364"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24498750966/job/71599904494"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24498764362/job/71599956092"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24498750966/job/71599911148"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub checks failed: hygiene jobs failed and verify-mbti jobs skipped on PR #922; local checks passed.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
