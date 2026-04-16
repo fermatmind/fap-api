@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T09:23:55.316865Z",
+  "updated_at": "2026-04-16T09:26:24.672849Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -2313,10 +2313,10 @@
     "PR-B79X": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "in_progress",
+      "status": "github_checks_failed",
       "branch": "codex/pr-b79x-career-conversion-attribution-taxonomy",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "98ec509e446b196719ccfbee5d6e48805ca405e8",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/924",
       "checks": {
         "local": [
           {
@@ -2332,9 +2332,30 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24502626278/job/71613039201"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24502594921/job/71612933619"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24502626278/job/71613046208"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24502594921/job/71612942879"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub Actions checks failed at workflow startup in CI (hygiene failed, MBTI matrix skipped) while all required local checks passed.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
