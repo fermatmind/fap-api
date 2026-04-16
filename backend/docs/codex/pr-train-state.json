@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T00:27:05Z",
+  "updated_at": "2026-04-16T00:41:58Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1782,9 +1782,9 @@
     "PR-B66": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open_checks_failed",
+      "status": "merged",
       "branch": "codex/pr-b66-career-index-policy-engine-formalization",
-      "commit_sha": "7edc96b3402997dd7c464dab08302dc446e73fef",
+      "commit_sha": "96c0d606c8b866b0ee690b2efef6492b7367fc82",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/913",
       "checks": {
         "local": [
@@ -1827,7 +1827,45 @@
           }
         ]
       },
-      "failure_reason": "GitHub hygiene check failed on first CI run; rerun is queued.",
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "2026-04-16T00:29:06Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-B67": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_verified",
+      "branch": "codex/pr-b67-career-promotion-candidate-rule-narrowing",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Domain/Career/Publish/CareerFirstWavePromotionCandidateEngine.php app/DTO/Career/CareerFirstWavePromotionCandidate*.php tests/Unit/Services/Career/CareerFirstWavePromotionCandidateEngineTest.php tests/Unit/Services/Career/CareerFirstWaveIndexPolicyEngineTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php tests/Unit/Services/Career/CareerFirstWaveRolloutWavePlanServiceTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerFirstWavePromotionCandidateEngineTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerFirstWaveIndexPolicyEngineTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php tests/Unit/Services/Career/CareerFirstWaveRolloutWavePlanServiceTest.php tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/OpenApiDiffTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
