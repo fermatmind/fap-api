@@ -2276,10 +2276,10 @@
     "PR-B78X": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "pr_open_checks_failed",
       "branch": "codex/pr-b78x-crosswalk-editorial-ops-console-baseline",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "a97c21af0e64065288bcd5cd5f9318fd7dff28f2",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/923",
       "checks": {
         "local": [
           {
@@ -2295,9 +2295,16 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "CI / hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24501733333/job/71609969428",
+            "reason": "The job was not started because recent account payments have failed or spending limit needs to be increased."
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "github_checks_failed_billing_block",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
