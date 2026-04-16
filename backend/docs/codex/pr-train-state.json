@@ -2140,15 +2140,49 @@
     "PR-B74X": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "in_progress",
+      "status": "pr_open",
       "branch": "codex/pr-b74x-career-dataset-publication-metadata-authority-public-contract",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "ed1bd43a780859e8252b52442830a65c1490ee3b",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/920",
       "checks": {
-        "local": [],
-        "github": []
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/Dataset/*.php app/DTO/Career/CareerPublicDataset*.php app/DTO/Career/CareerDatasetPublicationMetadata.php app/Services/Career/StructuredData/*.php tests/Unit/Services/Career/*Dataset*.php tests/Feature/Career/*Dataset*.php tests/Feature/SEO/*Dataset*.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/*Dataset*.php tests/Feature/Career/*Dataset*.php tests/Feature/SEO/*Dataset*.php",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details": "https://github.com/fermatmind/fap-api/actions/runs/24491840199/job/71578277373"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details": "https://github.com/fermatmind/fap-api/actions/runs/24491828874/job/71578244998"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details": "https://github.com/fermatmind/fap-api/actions/runs/24491840199/job/71578281289"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details": "https://github.com/fermatmind/fap-api/actions/runs/24491828874/job/71578249008"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub hygiene checks failed before logs were available from the runs; local validation is fully green and the PR is waiting on remote CI status.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
