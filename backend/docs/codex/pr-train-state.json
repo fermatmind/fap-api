@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T12:44:50Z",
+  "updated_at": "2026-04-16T13:13:19Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -2403,6 +2403,61 @@
             "name": "verify-mbti-${{ matrix.mode }}",
             "status": "skipped",
             "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24510890697/job/71641453307"
+          }
+        ]
+      },
+      "failure_reason": "GitHub Actions checks failed at workflow startup in CI (hygiene failed, MBTI matrix skipped) while all required local checks passed.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B81": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "github_checks_failed",
+      "branch": "codex/pr-b81-career-strong-index-gate-completion",
+      "commit_sha": "883bec0bfdc684353cb4ad983364d24f596c6b89",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/926",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/DTO/Career/CareerStrongIndexEligibility*.php app/Domain/Career/Publish/CareerStrongIndexEligibility*.php app/Console/Commands/CareerExportStrongIndexEligibility.php tests/Unit/Services/Career/CareerStrongIndexEligibilityServiceTest.php tests/Feature/Console/CareerExportStrongIndexEligibilityCommandTest.php app/Console/Kernel.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerStrongIndexEligibilityServiceTest.php tests/Feature/Console/CareerExportStrongIndexEligibilityCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerFirstWaveIndexPolicyEngineTest.php tests/Unit/Services/Career/CareerFirstWavePromotionCandidateEngineTest.php tests/Unit/Services/Career/CareerFullReleaseLedgerServiceTest.php tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24512216563/job/71646157150"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24512218500/job/71646162794"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24512216563/job/71646166738"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24512218500/job/71646172210"
           }
         ]
       },

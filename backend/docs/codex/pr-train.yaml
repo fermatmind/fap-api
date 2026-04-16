@@ -1391,6 +1391,33 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B81
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b81-career-strong-index-gate-completion
+    base: main
+    depends_on: ["PR-B80"]
+    mode: execute
+    scope: >
+      Career strong-index gate completion (internal-only).
+      Add full-342 strong-index eligibility authority + projection + export command,
+      formalizing strong_index_ready/indexable_but_not_strong_ready/manual_only/not_eligible
+      from existing backend truth while keeping trust freshness soft/manual and weak signals deferred.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/DTO/Career/CareerStrongIndexEligibility*.php app/Domain/Career/Publish/CareerStrongIndexEligibility*.php app/Console/Commands/CareerExportStrongIndexEligibility.php tests/Unit/Services/Career/CareerStrongIndexEligibilityServiceTest.php tests/Feature/Console/CareerExportStrongIndexEligibilityCommandTest.php app/Console/Kernel.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Unit/Services/Career/CareerStrongIndexEligibilityServiceTest.php tests/Feature/Console/CareerExportStrongIndexEligibilityCommandTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerFirstWaveIndexPolicyEngineTest.php tests/Unit/Services/Career/CareerFirstWavePromotionCandidateEngineTest.php tests/Unit/Services/Career/CareerFullReleaseLedgerServiceTest.php tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web
