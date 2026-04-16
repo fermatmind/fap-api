@@ -111,11 +111,16 @@ final class ArticlePublicApiTest extends TestCase
             ->assertJsonPath('meta.canonical', $canonical)
             ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
             ->assertJsonPath('seo_surface_v1.surface_type', 'article_public_detail')
+            ->assertJsonPath('jsonld.@type', 'Article')
             ->assertJsonPath('meta.alternates.en', $canonical)
             ->assertJsonPath('meta.alternates.zh', $zhCanonical)
             ->assertJsonPath('meta.alternates.zh-CN', $zhCanonical)
             ->assertJsonPath('jsonld.url', $canonical)
-            ->assertJsonPath('jsonld.mainEntityOfPage', $canonical.'#webpage');
+            ->assertJsonPath('jsonld.mainEntityOfPage', $canonical.'#webpage')
+            ->assertJsonMissingPath('jsonld.publisher')
+            ->assertJsonMissingPath('jsonld.license')
+            ->assertJsonMissingPath('jsonld.distribution')
+            ->assertJsonMissingPath('jsonld.downloadUrl');
 
         $this->assertSame($canonical.'#article', data_get($response->json(), 'jsonld.@id'));
         $this->assertStringNotContainsString($legacyCanonical, (string) $response->getContent());

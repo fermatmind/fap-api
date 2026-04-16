@@ -121,4 +121,39 @@ final class CareerStructuredDataBuilderTest extends TestCase
         $this->assertNull($builder->build('topic_detail', []));
         $this->assertNull($builder->build('article_public_detail', []));
     }
+
+    public function test_it_builds_article_structured_data_for_article_and_career_guide_routes_without_dataset_schema(): void
+    {
+        $builder = app(CareerStructuredDataBuilder::class);
+
+        $articlePayload = $builder->build('article_public_detail', [
+            'headline' => 'MBTI Basics',
+            'description' => 'Learn the core concepts behind MBTI.',
+            'url' => 'https://staging.fermatmind.com/en/articles/mbti-basics',
+            'main_entity_of_page' => 'https://staging.fermatmind.com/en/articles/mbti-basics',
+            'date_published' => '2026-03-12T08:00:00+00:00',
+            'date_modified' => '2026-03-12T09:00:00+00:00',
+            'article_section' => 'personality',
+            'keywords' => ['mbti', 'article'],
+        ]);
+        $guidePayload = $builder->build('career_guide_public_detail', [
+            'headline' => 'From MBTI to Job Fit',
+            'description' => 'Translate personality insights into career decisions.',
+            'url' => 'https://staging.fermatmind.com/en/career/guides/from-mbti-to-job-fit',
+            'main_entity_of_page' => 'https://staging.fermatmind.com/en/career/guides/from-mbti-to-job-fit',
+            'date_published' => '2026-03-05T08:00:00+00:00',
+            'date_modified' => '2026-03-05T09:00:00+00:00',
+            'article_section' => 'assessment-usage',
+            'keywords' => ['career', 'guide'],
+        ]);
+
+        $this->assertNotNull($articlePayload);
+        $this->assertNotNull($guidePayload);
+        $this->assertSame('Article', data_get($articlePayload, 'fragments.article.@type'));
+        $this->assertSame('Article', data_get($guidePayload, 'fragments.article.@type'));
+        $this->assertSame('BreadcrumbList', data_get($articlePayload, 'fragments.breadcrumb_list.@type'));
+        $this->assertSame('BreadcrumbList', data_get($guidePayload, 'fragments.breadcrumb_list.@type'));
+        $this->assertArrayNotHasKey('dataset', (array) data_get($articlePayload, 'fragments'));
+        $this->assertArrayNotHasKey('dataset', (array) data_get($guidePayload, 'fragments'));
+    }
 }
