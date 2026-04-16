@@ -15,8 +15,8 @@ final class CareerDatasetPublicationMetadataServiceTest extends TestCase
 
         $this->assertSame('career_dataset_publication_metadata', $payload['authority_kind']);
         $this->assertSame('career.dataset_publication.v1', $payload['authority_version']);
-        $this->assertSame('career_first_wave_job_detail_dataset', $payload['dataset_key']);
-        $this->assertSame('career_first_wave_10', $payload['dataset_scope']);
+        $this->assertSame('career_all_342_occupations_dataset', $payload['dataset_key']);
+        $this->assertSame('career_all_342', $payload['dataset_scope']);
         $this->assertSame('FermatMind', data_get($payload, 'publisher.name'));
         $this->assertSame('https://www.fermatmind.com', data_get($payload, 'publisher.url'));
         $this->assertSame('Proprietary Dataset License', data_get($payload, 'license.name'));

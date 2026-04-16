@@ -8,9 +8,9 @@ use App\DTO\Career\CareerDatasetPublicationMetadata;
 
 final class CareerDatasetPublicationMetadataService
 {
-    public const DATASET_KEY = 'career_first_wave_job_detail_dataset';
+    public const DATASET_KEY = CareerFullDatasetAuthorityBuilder::DATASET_KEY;
 
-    public const DATASET_SCOPE = 'career_first_wave_10';
+    public const DATASET_SCOPE = CareerFullDatasetAuthorityBuilder::DATASET_SCOPE;
 
     public function build(): CareerDatasetPublicationMetadata
     {

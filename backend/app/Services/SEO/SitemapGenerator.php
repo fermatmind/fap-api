@@ -7,6 +7,7 @@ use App\Models\CareerGuide;
 use App\Models\CareerJob;
 use App\Models\PersonalityProfileVariant;
 use App\Models\TopicProfile;
+use App\Services\Career\Dataset\CareerDatasetPublicationMetadataService;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\CareerGuideSeoService;
 use App\Services\Cms\CareerJobSeoService;
@@ -28,6 +29,7 @@ class SitemapGenerator
         private readonly PersonalityProfileSeoService $personalityProfileSeoService,
         private readonly TopicProfileSeoService $topicProfileSeoService,
         private readonly ScaleRegistry $scaleRegistry,
+        private readonly CareerDatasetPublicationMetadataService $datasetPublicationMetadataService,
     ) {
         $configuredPrefix = trim((string) config('services.seo.tests_url_prefix', ''));
         if ($configuredPrefix === '') {
@@ -46,6 +48,7 @@ class SitemapGenerator
             $this->getArticleUrls(),
             $this->getCareerJobUrls(),
             $this->getCareerGuideUrls(),
+            $this->getCareerDatasetUrls(),
             $this->getPersonalityUrls(),
             $this->getTopicUrls()
         );
@@ -287,6 +290,38 @@ class SitemapGenerator
             $this->getCareerJobListUrls(),
             $this->getCareerJobDetailUrls()
         );
+    }
+
+    private function getCareerDatasetUrls(): array
+    {
+        $publication = $this->datasetPublicationMetadataService->build()->toArray();
+        $distribution = (array) ($publication['distribution'] ?? []);
+
+        $hubUrl = trim((string) ($distribution['documentation_url'] ?? ''));
+        $methodUrl = trim((string) ($distribution['methodology_url'] ?? ''));
+
+        $updatedAt = now('UTC');
+        $entries = [];
+
+        if ($hubUrl !== '') {
+            $entries[] = [
+                'loc' => $hubUrl,
+                'lastmod' => $updatedAt->toAtomString(),
+                'slug' => 'career-dataset-hub',
+                'updated_at' => $updatedAt->toDateTimeString(),
+            ];
+        }
+
+        if ($methodUrl !== '') {
+            $entries[] = [
+                'loc' => $methodUrl,
+                'lastmod' => $updatedAt->toAtomString(),
+                'slug' => 'career-dataset-method',
+                'updated_at' => $updatedAt->toDateTimeString(),
+            ];
+        }
+
+        return $entries;
     }
 
     private function getCareerJobListUrls(): array
