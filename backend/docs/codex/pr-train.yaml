@@ -1340,6 +1340,31 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-B79X
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b79x-career-conversion-attribution-taxonomy
+    base: main
+    depends_on: ["PR-B78X"]
+    mode: execute
+    scope: >
+      Career conversion attribution baseline (backend taxonomy).
+      Add minimal conversion event taxonomy for shortlist add, job detail CTA click,
+      and support-link click with ingest + daily compatibility under existing schema.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Services/Analytics/CareerAttributionEventMapper.php app/Services/Analytics/CareerAttributionDailyBuilder.php tests/Feature/Analytics/CareerAttributionEventIngestTest.php tests/Feature/Analytics/CareerAttributionDailyBuilderTest.php"
+      - "php artisan test tests/Feature/Analytics/CareerAttributionEventIngestTest.php tests/Feature/Analytics/CareerAttributionDailyBuilderTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-D1
     repo: fap-web
     repo_path: /Users/rainie/Desktop/GitHub/fap-web

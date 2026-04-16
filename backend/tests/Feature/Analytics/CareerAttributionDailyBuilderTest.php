@@ -161,10 +161,37 @@ final class CareerAttributionDailyBuilderTest extends TestCase
             'query_mode' => 'non_query',
             'blocked_claim_kind' => 'ai_strategy',
         ], 'anon_claim_blocked_none', 'session_claim_blocked_none');
+        $this->insertCareerEvent($orgId, 'career_job_detail_cta_click', $day->copy()->addMinutes(16), [
+            'entry_surface' => 'career_job_detail',
+            'source_page_type' => 'career_job_detail',
+            'target_action' => 'open_next_step_link',
+            'route_family' => 'job_detail',
+            'subject_kind' => 'job_slug',
+            'subject_key' => 'registered-nurses',
+            'query_mode' => 'non_query',
+        ], 'anon_job_detail_cta', 'session_job_detail_cta');
+        $this->insertCareerEvent($orgId, 'career_support_link_click', $day->copy()->addMinutes(17), [
+            'entry_surface' => 'career_recommendation_detail',
+            'source_page_type' => 'career_recommendation_detail',
+            'target_action' => 'open_support_link',
+            'route_family' => 'recommendation_detail',
+            'subject_kind' => 'job_slug',
+            'subject_key' => 'registered-nurses',
+            'query_mode' => 'non_query',
+        ], 'anon_support_click', 'session_support_click');
+        $this->insertCareerEvent($orgId, 'career_shortlist_add', $day->copy()->addMinutes(18), [
+            'entry_surface' => 'career_recommendation_detail',
+            'source_page_type' => 'career_recommendation_detail',
+            'target_action' => 'add_shortlist',
+            'route_family' => 'recommendation_detail',
+            'subject_kind' => 'job_slug',
+            'subject_key' => 'registered-nurses',
+            'query_mode' => 'non_query',
+        ], 'anon_shortlist_add', 'session_shortlist_add');
 
         $result = app(CareerAttributionDailyBuilder::class)->refresh($day, $day, [$orgId], false);
 
-        $this->assertSame(16, (int) ($result['upserted_rows'] ?? 0));
+        $this->assertSame(19, (int) ($result['upserted_rows'] ?? 0));
 
         $readyRow = DB::table('analytics_career_attribution_daily')
             ->where('day', $day->toDateString())
@@ -339,6 +366,29 @@ final class CareerAttributionDailyBuilderTest extends TestCase
         $this->assertSame('publish_ready', $claimBlockedJobRow->readiness_class);
         $this->assertSame('recommendation_detail', $claimBlockedNoneRow->source_page_type);
         $this->assertSame('unknown', $claimBlockedNoneRow->readiness_class);
+
+        $jobDetailCtaRow = DB::table('analytics_career_attribution_daily')
+            ->where('event_name', 'career_job_detail_cta_click')
+            ->where('subject_key', 'registered-nurses')
+            ->first();
+        $supportLinkRow = DB::table('analytics_career_attribution_daily')
+            ->where('event_name', 'career_support_link_click')
+            ->where('subject_key', 'registered-nurses')
+            ->first();
+        $shortlistRow = DB::table('analytics_career_attribution_daily')
+            ->where('event_name', 'career_shortlist_add')
+            ->where('subject_key', 'registered-nurses')
+            ->first();
+
+        $this->assertNotNull($jobDetailCtaRow);
+        $this->assertNotNull($supportLinkRow);
+        $this->assertNotNull($shortlistRow);
+        $this->assertSame('job_detail', $jobDetailCtaRow->source_page_type);
+        $this->assertSame('recommendation_detail', $supportLinkRow->source_page_type);
+        $this->assertSame('recommendation_detail', $shortlistRow->source_page_type);
+        $this->assertSame('publish_ready', $jobDetailCtaRow->readiness_class);
+        $this->assertSame('publish_ready', $supportLinkRow->readiness_class);
+        $this->assertSame('publish_ready', $shortlistRow->readiness_class);
     }
 
     private function materializeCurrentFirstWaveFixture(): void

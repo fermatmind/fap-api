@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T07:55:52.360319Z",
+  "updated_at": "2026-04-16T09:23:55.316865Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -2305,6 +2305,36 @@
         ]
       },
       "failure_reason": "github_checks_failed_billing_block",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B79X": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "in_progress",
+      "branch": "codex/pr-b79x-career-conversion-attribution-taxonomy",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Analytics/CareerAttributionEventMapper.php app/Services/Analytics/CareerAttributionDailyBuilder.php tests/Feature/Analytics/CareerAttributionEventIngestTest.php tests/Feature/Analytics/CareerAttributionDailyBuilderTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Analytics/CareerAttributionEventIngestTest.php tests/Feature/Analytics/CareerAttributionDailyBuilderTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
