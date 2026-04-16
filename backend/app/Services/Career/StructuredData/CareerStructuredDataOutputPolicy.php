@@ -37,6 +37,14 @@ final class CareerStructuredDataOutputPolicy
                 self::SCHEMA_ARTICLE,
                 self::SCHEMA_BREADCRUMB_LIST,
             ],
+            'career_dataset_hub' => [
+                self::SCHEMA_DATASET,
+                self::SCHEMA_BREADCRUMB_LIST,
+            ],
+            'career_dataset_method' => [
+                self::SCHEMA_ARTICLE,
+                self::SCHEMA_BREADCRUMB_LIST,
+            ],
             default => [],
         };
     }

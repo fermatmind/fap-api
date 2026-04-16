@@ -156,4 +156,40 @@ final class CareerStructuredDataBuilderTest extends TestCase
         $this->assertArrayNotHasKey('dataset', (array) data_get($articlePayload, 'fragments'));
         $this->assertArrayNotHasKey('dataset', (array) data_get($guidePayload, 'fragments'));
     }
+
+    public function test_it_builds_dataset_and_method_structured_data_only_for_dataset_routes(): void
+    {
+        $builder = app(CareerStructuredDataBuilder::class);
+
+        $hubPayload = $builder->build('career_dataset_hub', [
+            'dataset_name' => 'FermatMind Career Occupations Dataset (First Wave)',
+            'description' => 'Public dataset hub',
+            'url' => 'https://www.fermatmind.com/datasets/occupations',
+            'publisher' => [
+                'name' => 'FermatMind',
+                'url' => 'https://www.fermatmind.com',
+            ],
+            'license' => [
+                'url' => 'https://www.fermatmind.com/datasets/occupations/license',
+            ],
+            'distribution' => [
+                'download_url' => 'https://www.fermatmind.com/datasets/occupations/download',
+                'format' => ['json', 'csv'],
+            ],
+        ]);
+        $methodPayload = $builder->build('career_dataset_method', [
+            'title' => 'Occupations dataset method',
+            'summary' => 'Method summary',
+            'url' => 'https://www.fermatmind.com/datasets/occupations/method',
+        ]);
+
+        $this->assertSame('Dataset', data_get($hubPayload, 'fragments.dataset.@type'));
+        $this->assertSame('BreadcrumbList', data_get($hubPayload, 'fragments.breadcrumb_list.@type'));
+        $this->assertSame('Article', data_get($methodPayload, 'fragments.article.@type'));
+        $this->assertSame('BreadcrumbList', data_get($methodPayload, 'fragments.breadcrumb_list.@type'));
+        $this->assertNull($builder->build('career_recommendation_detail', [
+            'title' => 'Should not render',
+            'url' => 'https://www.fermatmind.com/datasets/occupations/method',
+        ]));
+    }
 }

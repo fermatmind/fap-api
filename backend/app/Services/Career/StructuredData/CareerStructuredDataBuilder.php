@@ -13,6 +13,7 @@ final class CareerStructuredDataBuilder
         private readonly CareerJobDetailStructuredDataBuilder $jobDetailBuilder,
         private readonly CareerFamilyHubStructuredDataBuilder $familyHubBuilder,
         private readonly CareerArticleStructuredDataBuilder $articleBuilder,
+        private readonly CareerDatasetStructuredDataBuilder $datasetBuilder,
         private readonly CareerStructuredDataOutputPolicy $outputPolicy,
     ) {}
 
@@ -21,6 +22,19 @@ final class CareerStructuredDataBuilder
      */
     public function build(string $routeKind, mixed $payload): ?array
     {
+        if (
+            $this->outputPolicy->allows($routeKind, CareerStructuredDataOutputPolicy::SCHEMA_DATASET)
+            || in_array(
+                $routeKind,
+                ['career_dataset_method'],
+                true
+            )
+        ) {
+            return is_array($payload)
+                ? $this->datasetBuilder->build($routeKind, $payload)
+                : null;
+        }
+
         if ($this->outputPolicy->allows($routeKind, CareerStructuredDataOutputPolicy::SCHEMA_ARTICLE)) {
             return is_array($payload)
                 ? $this->articleBuilder->build($routeKind, $payload)
