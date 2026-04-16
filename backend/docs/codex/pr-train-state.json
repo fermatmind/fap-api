@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T01:39:25Z",
+  "updated_at": "2026-04-16T02:25:30Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1965,9 +1965,9 @@
     "PR-B69": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_checks_failed",
+      "status": "merged",
       "branch": "codex/pr-b69-career-asset-batch-pipeline-batch1-2-production-line",
-      "commit_sha": "2022025951aec2c9e88ef653b5afe83e35e12a9f",
+      "commit_sha": "bc84adaf1b7fab042f92552c5cd91c92294d49f6",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/916",
       "checks": {
         "local": [
@@ -2015,7 +2015,45 @@
           }
         ]
       },
-      "failure_reason": "GitHub hygiene checks failed immediately on PR-B69 and MBTI verify jobs were skipped; local validation is green but required remote checks are not green.",
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "2026-04-16T01:41:11Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-B70": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/pr-b70-crosswalk-editorial-operations-baseline",
+      "commit_sha": "213ccb0fa188108713fe6c8cbbe9174b890a421c",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/917",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Domain/Career/Operations/*.php app/DTO/Career/CareerCrosswalk*.php app/DTO/Career/CareerEditorialPatchAuthority.php app/Console/Commands/CareerCrosswalkOps.php tests/Unit/Services/Career/CareerCrosswalkReviewQueueServiceTest.php tests/Unit/Services/Career/CareerCrosswalkOverrideResolverTest.php tests/Feature/Console/CareerCrosswalkOpsCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerCrosswalkReviewQueueServiceTest.php tests/Unit/Services/Career/CareerCrosswalkOverrideResolverTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/CareerCrosswalkOpsCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerAssetBatchPipelineTest.php tests/Unit/Services/Career/CareerFirstWavePromotionCandidateEngineTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchManifestServiceTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
