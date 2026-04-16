@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T00:25:41Z",
+  "updated_at": "2026-04-16T00:27:05Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1782,10 +1782,10 @@
     "PR-B66": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_verified",
+      "status": "pr_open_checks_failed",
       "branch": "codex/pr-b66-career-index-policy-engine-formalization",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "7edc96b3402997dd7c464dab08302dc446e73fef",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/913",
       "checks": {
         "local": [
           {
@@ -1809,9 +1809,25 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details": "https://github.com/fermatmind/fap-api/actions/runs/24485372348/job/71558931698"
+          },
+          {
+            "name": "hygiene",
+            "status": "queued",
+            "details": "https://github.com/fermatmind/fap-api/actions/runs/24485382634/job/71558966323"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details": "https://github.com/fermatmind/fap-api/actions/runs/24485372348/job/71558936274"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub hygiene check failed on first CI run; rerun is queued.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
