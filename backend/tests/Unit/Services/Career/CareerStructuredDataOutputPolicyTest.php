@@ -33,11 +33,21 @@ final class CareerStructuredDataOutputPolicyTest extends TestCase
             [CareerStructuredDataOutputPolicy::SCHEMA_ARTICLE, CareerStructuredDataOutputPolicy::SCHEMA_BREADCRUMB_LIST],
             $policy->allowedSchemaFamiliesFor('article_public_detail'),
         );
+        $this->assertSame(
+            [CareerStructuredDataOutputPolicy::SCHEMA_DATASET, CareerStructuredDataOutputPolicy::SCHEMA_BREADCRUMB_LIST],
+            $policy->allowedSchemaFamiliesFor('career_dataset_hub'),
+        );
+        $this->assertSame(
+            [CareerStructuredDataOutputPolicy::SCHEMA_ARTICLE, CareerStructuredDataOutputPolicy::SCHEMA_BREADCRUMB_LIST],
+            $policy->allowedSchemaFamiliesFor('career_dataset_method'),
+        );
 
         $this->assertFalse($policy->allows('career_job_detail', CareerStructuredDataOutputPolicy::SCHEMA_DATASET));
         $this->assertFalse($policy->allows('career_family_hub', CareerStructuredDataOutputPolicy::SCHEMA_DATASET));
         $this->assertFalse($policy->allows('career_guide_public_detail', CareerStructuredDataOutputPolicy::SCHEMA_DATASET));
         $this->assertFalse($policy->allows('career_recommendation_detail', CareerStructuredDataOutputPolicy::SCHEMA_DATASET));
+        $this->assertFalse($policy->allows('career_search', CareerStructuredDataOutputPolicy::SCHEMA_DATASET));
+        $this->assertFalse($policy->allows('career_alias_resolution', CareerStructuredDataOutputPolicy::SCHEMA_DATASET));
         $this->assertFalse($policy->allows('career_search', CareerStructuredDataOutputPolicy::SCHEMA_ARTICLE));
         $this->assertFalse($policy->allows('career_alias_resolution', CareerStructuredDataOutputPolicy::SCHEMA_ARTICLE));
     }

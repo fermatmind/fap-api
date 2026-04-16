@@ -31,6 +31,8 @@ use App\Http\Controllers\API\V0_4\PartnerController;
 use App\Http\Controllers\API\V0_4\RotationAuditController;
 use App\Http\Controllers\API\V0_5\Career\CareerAliasResolutionController;
 use App\Http\Controllers\API\V0_5\Career\CareerAttributionEventController;
+use App\Http\Controllers\API\V0_5\Career\CareerDatasetHubController;
+use App\Http\Controllers\API\V0_5\Career\CareerDatasetMethodController;
 use App\Http\Controllers\API\V0_5\Career\CareerFamilyHubController;
 use App\Http\Controllers\API\V0_5\Career\CareerFirstWaveDiscoverabilityManifestController;
 use App\Http\Controllers\API\V0_5\Career\CareerFirstWaveLaunchTierController;
@@ -431,6 +433,8 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/career/recommendations/mbti/{type}/explainability', [CareerRecommendationExplainabilityController::class, 'show']);
     Route::get('/career/transition-preview', [CareerTransitionPreviewController::class, 'show']);
     Route::get('/career/search', [CareerSearchController::class, 'index']);
+    Route::get('/career/datasets/occupations', [CareerDatasetHubController::class, 'show']);
+    Route::get('/career/datasets/occupations/method', [CareerDatasetMethodController::class, 'show']);
     Route::get('/articles', [ArticleController::class, 'index']);
     Route::get('/articles/{slug}', [ArticleController::class, 'show']);
     Route::get('/articles/{slug}/seo', [ArticleController::class, 'seo']);
