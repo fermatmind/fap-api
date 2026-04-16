@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T13:13:19Z",
+  "updated_at": "2026-04-16T14:36:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -2462,6 +2462,40 @@
         ]
       },
       "failure_reason": "GitHub Actions checks failed at workflow startup in CI (hygiene failed, MBTI matrix skipped) while all required local checks passed.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-B82": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/pr-b82-career-crosswalk-backlog-convergence-authority",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/DTO/Career/CareerCrosswalkBacklogConvergence*.php app/Domain/Career/Operations/CareerCrosswalkBacklogConvergence*.php app/Console/Commands/CareerExportCrosswalkBacklogConvergence.php tests/Unit/Services/Career/CareerCrosswalkBacklogConvergenceServiceTest.php tests/Feature/Console/CareerExportCrosswalkBacklogConvergenceCommandTest.php app/Console/Kernel.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerCrosswalkBacklogConvergenceServiceTest.php tests/Feature/Console/CareerExportCrosswalkBacklogConvergenceCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerCrosswalkReadModelsTest.php tests/Unit/Services/Career/CareerCrosswalkPatchMutationServiceTest.php tests/Unit/Services/Career/CareerCrosswalkOverrideResolverTest.php tests/Feature/Internal/Career/CareerCrosswalkOpsApiTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
