@@ -1520,3 +1520,30 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: PR-B85
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b85-career-launch-governance-closure
+    base: main
+    depends_on: ["PR-B84", "PR-F50"]
+    mode: execute
+    scope: >
+      Career launch governance closure (backend).
+      Add unified launch governance closure authority + projection + internal export command,
+      formalize external claim boundary from existing B80/B81/B82/B83/B84 authorities,
+      and align train/docs merged-state truth to current repository reality.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/DTO/Career/CareerLaunchGovernanceClosure*.php app/Domain/Career/Publish/CareerLaunchGovernanceClosure*.php app/Http/Controllers/API/V0_5/Career/CareerLaunchGovernanceClosureController.php app/Console/Commands/CareerExportLaunchGovernanceClosure.php tests/Unit/Services/Career/CareerLaunchGovernanceClosureServiceTest.php tests/Feature/Console/CareerExportLaunchGovernanceClosureCommandTest.php app/Console/Kernel.php routes/api.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Unit/Services/Career/CareerLaunchGovernanceClosureServiceTest.php tests/Feature/Console/CareerExportLaunchGovernanceClosureCommandTest.php"
+      - "php artisan test tests/Unit/Services/Career/CareerFullReleaseLedgerServiceTest.php tests/Unit/Services/Career/CareerStrongIndexEligibilityServiceTest.php tests/Unit/Services/Career/CareerCrosswalkBacklogConvergenceServiceTest.php tests/Unit/Services/Career/CareerLifecycleOperationalSummaryServiceTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
