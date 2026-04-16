@@ -186,6 +186,8 @@ final class CareerFeedbackTimelineAuthorityService
                 'compile_run_id' => $snapshot->compile_run_id,
             ]);
 
+            $this->cloneTransitionPaths($snapshot, $newRecommendationSnapshot);
+
             CareerFeedbackRecord::query()->create([
                 'subject_kind' => 'recommendation_type',
                 'subject_slug' => strtolower(trim((string) ($input['subject_slug'] ?? ''))),
@@ -201,6 +203,25 @@ final class CareerFeedbackTimelineAuthorityService
         });
 
         return $createdSnapshot->fresh(['profileProjection', 'contextSnapshot']) ?? $createdSnapshot;
+    }
+
+    private function cloneTransitionPaths(
+        RecommendationSnapshot $sourceSnapshot,
+        RecommendationSnapshot $targetSnapshot,
+    ): void {
+        $paths = TransitionPath::query()
+            ->where('recommendation_snapshot_id', $sourceSnapshot->id)
+            ->get();
+
+        foreach ($paths as $path) {
+            TransitionPath::query()->create([
+                'recommendation_snapshot_id' => $targetSnapshot->id,
+                'from_occupation_id' => $path->from_occupation_id,
+                'to_occupation_id' => $path->to_occupation_id,
+                'path_type' => $path->path_type,
+                'path_payload' => $path->path_payload,
+            ]);
+        }
     }
 
     private function buildTimeline(RecommendationSnapshot $snapshot): CareerProjectionTimeline

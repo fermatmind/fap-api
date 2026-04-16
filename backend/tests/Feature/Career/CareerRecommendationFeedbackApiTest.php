@@ -9,6 +9,7 @@ use App\Models\CareerImportRun;
 use App\Models\ContextSnapshot;
 use App\Models\ProfileProjection;
 use App\Models\RecommendationSnapshot;
+use App\Models\TransitionPath;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Fixtures\Career\CareerFoundationFixture;
@@ -21,9 +22,19 @@ final class CareerRecommendationFeedbackApiTest extends TestCase
     public function test_it_appends_feedback_as_new_lifecycle_state_and_keeps_previous_snapshots_immutable(): void
     {
         $snapshot = $this->compileRecommendationChainBySlug('feedback-api-case');
+        TransitionPath::query()->create([
+            'recommendation_snapshot_id' => $snapshot->id,
+            'from_occupation_id' => $snapshot->occupation_id,
+            'to_occupation_id' => $snapshot->occupation_id,
+            'path_type' => 'bridge',
+            'path_payload' => [
+                'steps' => [],
+            ],
+        ]);
         $beforeSnapshotCount = RecommendationSnapshot::query()->count();
         $beforeProjectionCount = ProfileProjection::query()->count();
         $beforeContextCount = ContextSnapshot::query()->count();
+        $beforePathCount = TransitionPath::query()->count();
 
         $response = $this->postJson('/api/v0.5/career/recommendations/mbti/intj/feedback', [
             'burnout_checkin' => 5,
@@ -34,11 +45,13 @@ final class CareerRecommendationFeedbackApiTest extends TestCase
             ->assertJsonPath('data.feedback_checkin.burnout_checkin', 5)
             ->assertJsonPath('data.feedback_checkin.career_satisfaction', 2)
             ->assertJsonPath('data.feedback_checkin.switch_urgency', 4)
-            ->assertJsonPath('data.projection_delta_summary.delta_available', true);
+            ->assertJsonPath('data.projection_delta_summary.delta_available', true)
+            ->assertJsonPath('data.projection_delta_summary.transition_changed', false);
 
         $this->assertSame($beforeSnapshotCount + 1, RecommendationSnapshot::query()->count());
         $this->assertSame($beforeProjectionCount + 1, ProfileProjection::query()->count());
         $this->assertSame($beforeContextCount + 1, ContextSnapshot::query()->count());
+        $this->assertSame($beforePathCount + 1, TransitionPath::query()->count());
         $this->assertNotNull(RecommendationSnapshot::query()->find($snapshot->id));
 
         $entries = (array) data_get($response->json(), 'data.projection_timeline.entries', []);

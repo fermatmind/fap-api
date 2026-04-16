@@ -8,6 +8,7 @@ use App\Domain\Career\Feedback\CareerFeedbackTimelineAuthorityService;
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
 use App\Models\RecommendationSnapshot;
+use App\Models\TransitionPath;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Fixtures\Career\CareerFoundationFixture;
@@ -20,6 +21,16 @@ final class CareerFeedbackTimelineAuthorityServiceTest extends TestCase
     public function test_it_builds_timeline_and_appends_feedback_refresh_without_mutating_previous_snapshot(): void
     {
         $snapshot = $this->compileRecommendationChainBySlug('feedback-timeline-unit');
+        $beforeTransitionPathCount = TransitionPath::query()->count();
+        TransitionPath::query()->create([
+            'recommendation_snapshot_id' => $snapshot->id,
+            'from_occupation_id' => $snapshot->occupation_id,
+            'to_occupation_id' => $snapshot->occupation_id,
+            'path_type' => 'bridge',
+            'path_payload' => [
+                'steps' => [],
+            ],
+        ]);
         $service = app(CareerFeedbackTimelineAuthorityService::class);
 
         $before = $service->buildForRecommendationSnapshot($snapshot);
@@ -43,7 +54,9 @@ final class CareerFeedbackTimelineAuthorityServiceTest extends TestCase
         $this->assertSame(2, data_get($after, 'feedback_checkin.career_satisfaction'));
         $this->assertSame(5, data_get($after, 'feedback_checkin.switch_urgency'));
         $this->assertSame(true, data_get($after, 'projection_delta_summary.delta_available'));
+        $this->assertSame(false, data_get($after, 'projection_delta_summary.transition_changed'));
         $this->assertGreaterThanOrEqual(2, count((array) data_get($after, 'projection_timeline.entries', [])));
+        $this->assertSame($beforeTransitionPathCount + 2, TransitionPath::query()->count());
     }
 
     private function compileRecommendationChainBySlug(string $slug): RecommendationSnapshot
