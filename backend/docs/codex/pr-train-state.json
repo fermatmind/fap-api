@@ -2525,10 +2525,10 @@
     "PR-B83": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "github_checks_failed",
       "branch": "codex/pr-b83-career-full-342-dataset-public-scope-completion",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "d29b037ddcc23029f23308fb79aa37d35c8e1571",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/928",
       "checks": {
         "local": [
           {
@@ -2536,7 +2536,7 @@
             "status": "passed"
           },
           {
-            "command": "vendor/bin/pint --test app/Services/Career/Dataset/*.php app/DTO/Career/CareerFullDataset*.php app/Services/Career/StructuredData/*.php app/Http/Resources/Career/CareerDataset*.php tests/Unit/Services/Career/*Dataset*.php tests/Feature/Career/*Dataset*.php tests/Feature/SEO/*Dataset*.php",
+            "command": "vendor/bin/pint --test app/Services/Career/Dataset/*.php app/DTO/Career/CareerFullDataset*.php app/Services/Career/StructuredData/*.php app/Http/Resources/Career/CareerDataset*.php tests/Unit/Services/Career/*Dataset*.php tests/Feature/Career/*Dataset*.php tests/Feature/SEO/*Dataset*.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
             "status": "passed"
           },
           {
@@ -2544,9 +2544,30 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24515210168/job/71657091304"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24515193285/job/71657031082"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24515210168/job/71657108850"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24515193285/job/71657050387"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub Actions checks failed at workflow startup in CI (hygiene failed, MBTI matrix skipped) while all required local checks passed.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
