@@ -2221,6 +2221,36 @@
       "merged_at": "",
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "PR-B77X": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/pr-b77x-career-threshold-experiment-authority",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/Config/*.php app/DTO/Career/CareerThresholdExperiment*.php app/Http/Controllers/API/V0_5/Career/CareerRuntimeConfigController.php app/Http/Resources/Career/CareerRuntimeConfigResource.php tests/Unit/Services/Career/*Threshold*Test.php tests/Feature/Career/*RuntimeConfig*Test.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/*Threshold*Test.php tests/Feature/Career/*RuntimeConfig*Test.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   }
 }

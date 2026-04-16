@@ -7,6 +7,7 @@ namespace App\Domain\Career\Publish;
 use App\Domain\Career\IndexStateValue;
 use App\DTO\Career\CareerFirstWavePromotionCandidateAuthority;
 use App\DTO\Career\CareerFirstWavePromotionCandidateMember;
+use App\Services\Career\Config\CareerThresholdExperimentAuthorityService;
 
 final class CareerFirstWavePromotionCandidateEngine
 {
@@ -17,10 +18,6 @@ final class CareerFirstWavePromotionCandidateEngine
     public const DECISION_MANUAL_REVIEW_ONLY = 'manual_review_only';
 
     public const DECISION_NOT_ELIGIBLE = 'not_eligible';
-
-    private const CONFIDENCE_THRESHOLD = 70;
-
-    private const MIN_NEXT_STEP_LINKS = 2;
 
     /**
      * @var array<string, true>
@@ -38,6 +35,10 @@ final class CareerFirstWavePromotionCandidateEngine
         'family_proxy' => true,
         'unmapped' => true,
     ];
+
+    public function __construct(
+        private readonly CareerThresholdExperimentAuthorityService $runtimeConfigAuthority,
+    ) {}
 
     /**
      * @param  list<array<string, mixed>>  $subjects
@@ -106,10 +107,12 @@ final class CareerFirstWavePromotionCandidateEngine
             ],
         ];
 
-        $isConfidenceEligible = $confidenceScore !== null && $confidenceScore >= self::CONFIDENCE_THRESHOLD;
+        $isConfidenceEligible = $confidenceScore !== null
+            && $confidenceScore >= $this->runtimeConfigAuthority->confidencePromotionCandidateMin();
         $isReviewerApproved = $reviewerStatus === 'approved';
         $isCrosswalkAutoSafe = $crosswalkMode !== null && isset(self::AUTO_CROSSWALK_MODES[$crosswalkMode]);
         $isNotEligibleCrosswalk = $crosswalkMode !== null && isset(self::NOT_ELIGIBLE_CROSSWALK_MODES[$crosswalkMode]);
+        $strongClaimRequired = $this->runtimeConfigAuthority->promotionStrongClaimRequired();
 
         $decision = self::DECISION_MANUAL_REVIEW_ONLY;
         $decisionReasons = [];
@@ -135,7 +138,7 @@ final class CareerFirstWavePromotionCandidateEngine
             $decisionReasons[] = 'confidence_at_or_above_threshold';
         }
 
-        if (! $allowStrongClaim) {
+        if ($strongClaimRequired && ! $allowStrongClaim) {
             $decision = self::DECISION_NOT_ELIGIBLE;
             $decisionReasons[] = 'strong_claim_blocked';
         } else {
@@ -149,7 +152,7 @@ final class CareerFirstWavePromotionCandidateEngine
             $decisionReasons[] = 'not_governance_blocked';
         }
 
-        if ($nextStepLinksCount < self::MIN_NEXT_STEP_LINKS) {
+        if ($nextStepLinksCount < $this->runtimeConfigAuthority->promotionNextStepLinksMin()) {
             $decision = self::DECISION_NOT_ELIGIBLE;
             $decisionReasons[] = 'next_step_links_insufficient';
         } else {

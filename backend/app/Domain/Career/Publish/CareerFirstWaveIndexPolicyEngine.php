@@ -7,10 +7,15 @@ namespace App\Domain\Career\Publish;
 use App\Domain\Career\IndexStateValue;
 use App\DTO\Career\CareerFirstWaveIndexPolicyAuthority;
 use App\DTO\Career\CareerFirstWaveIndexPolicyMember;
+use App\Services\Career\Config\CareerThresholdExperimentAuthorityService;
 
 final class CareerFirstWaveIndexPolicyEngine
 {
     public const SCOPE = 'career_first_wave_10';
+
+    public function __construct(
+        private readonly CareerThresholdExperimentAuthorityService $runtimeConfigAuthority,
+    ) {}
 
     /**
      * @param  list<array<string, mixed>>  $subjects
@@ -106,7 +111,7 @@ final class CareerFirstWaveIndexPolicyEngine
             $policyReasons[] = 'insufficient_next_step_links';
         }
 
-        if ($confidenceScore !== null && $confidenceScore < 60) {
+        if ($confidenceScore !== null && $confidenceScore < $this->runtimeConfigAuthority->confidencePublishMin()) {
             $policyReasons[] = 'confidence_below_threshold';
         }
 
