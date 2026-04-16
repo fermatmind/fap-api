@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T01:06:31Z",
+  "updated_at": "2026-04-16T01:07:47Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1635,10 +1635,10 @@
     "PR-B62": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_verified",
+      "status": "github_checks_failed",
       "branch": "codex/pr-b62-career-alias-search-attribution-taxonomy-resolution-flow-alignment-backend-first",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "53c468d30bdfc4cf09936f2bea932f21774e812a",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/915",
       "checks": {
         "local": [
           {
@@ -1654,9 +1654,30 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "url": "https://github.com/fermatmind/fap-api/actions/runs/24486502777/job/71562524871"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "url": "https://github.com/fermatmind/fap-api/actions/runs/24486512143/job/71562550862"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "url": "https://github.com/fermatmind/fap-api/actions/runs/24486502777/job/71562529576"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "url": "https://github.com/fermatmind/fap-api/actions/runs/24486512143/job/71562555119"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub hygiene checks failed immediately on PR-B68 and MBTI verify jobs were skipped; local validation is green but required remote checks are not green.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
