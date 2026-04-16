@@ -6,6 +6,7 @@ namespace App\Services\Cms;
 
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
+use App\Services\Career\StructuredData\CareerArticleStructuredDataBuilder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
@@ -14,6 +15,10 @@ use RuntimeException;
 final class ArticleSeoService
 {
     public const SUPPORTED_LOCALES = ['en', 'zh-CN'];
+
+    public function __construct(
+        private readonly CareerArticleStructuredDataBuilder $careerArticleStructuredDataBuilder,
+    ) {}
 
     public function generateSeoMeta(int $articleId): ArticleSeoMeta
     {
@@ -114,23 +119,20 @@ final class ArticleSeoService
         $seo = $this->resolveSeoMeta($article, $locale);
         $canonical = $this->buildCanonicalUrl((string) $article->slug, $locale);
         $descriptionSource = (string) ($article->excerpt ?? $article->content_md);
-
-        $jsonLd = [
-            '@context' => 'https://schema.org',
-            '@type' => 'Article',
+        $structured = $this->careerArticleStructuredDataBuilder->build('article_public_detail', [
+            'id' => $canonical !== null ? $canonical.'#article' : null,
             'headline' => $seo?->seo_title ?? $article->title,
             'description' => $seo?->seo_description
                 ?? Str::limit($this->normalizeWhitespace(strip_tags($descriptionSource)), 160),
-            'datePublished' => optional($article->published_at)->toAtomString(),
-            'dateModified' => optional($article->updated_at)->toAtomString(),
-            'author' => [
-                '@type' => 'Organization',
-                'name' => 'FermatMind',
-            ],
-            '@id' => $canonical,
             'url' => $canonical,
-            'mainEntityOfPage' => $canonical,
-        ];
+            'main_entity_of_page' => $canonical,
+            'date_published' => $article->published_at?->toAtomString(),
+            'date_modified' => $article->updated_at?->toAtomString(),
+            'article_section' => $this->normalizeString($article->category?->name),
+        ]);
+        $jsonLd = is_array($structured)
+            ? (array) data_get($structured, 'fragments.article', [])
+            : [];
 
         if ($seo instanceof ArticleSeoMeta && is_array($seo->schema_json)) {
             $jsonLd = array_replace_recursive($jsonLd, $seo->schema_json);
@@ -311,5 +313,16 @@ final class ArticleSeoService
     private function normalizeLocale(string $locale): string
     {
         return trim($locale) === 'zh-CN' ? 'zh-CN' : 'en';
+    }
+
+    private function normalizeString(?string $value): ?string
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        $normalized = trim($value);
+
+        return $normalized !== '' ? $normalized : null;
     }
 }

@@ -111,7 +111,7 @@ final class FirstWaveTransitionPathMaterializationTest extends TestCase
         );
     }
 
-    public function test_preview_api_can_read_production_written_transition_rows_without_expanding_public_contract(): void
+    public function test_preview_api_can_read_production_written_transition_rows_with_expanded_public_contract(): void
     {
         $snapshot = $this->compileRecommendationChain('transition-preview-source');
         $target = $this->createSameFamilyTarget($snapshot, 'registered-nurses', 'Registered Nurses');
@@ -142,16 +142,26 @@ final class FirstWaveTransitionPathMaterializationTest extends TestCase
             ]),
         ])->save();
 
-        $this->getJson('/api/v0.5/career/transition-preview?type=intj')
+        $response = $this->getJson('/api/v0.5/career/transition-preview?type=intj')
             ->assertOk()
             ->assertJsonPath('path_type', 'stable_upside')
             ->assertJsonPath('steps.0', TransitionPathPayload::STEP_SKILL_OVERLAP)
             ->assertJsonPath('steps.1', TransitionPathPayload::STEP_TASK_OVERLAP)
             ->assertJsonPath('steps.2', TransitionPathPayload::STEP_TOOL_OVERLAP)
             ->assertJsonPath('target_job.canonical_slug', $path->toOccupation?->canonical_slug)
-            ->assertJsonMissingPath('why_this_path')
-            ->assertJsonMissingPath('what_is_lost')
-            ->assertJsonMissingPath('bridge_steps_90d');
+            ->assertJsonPath('bridge_steps_90d.0.step_key', TransitionPathPayload::STEP_SKILL_OVERLAP)
+            ->assertJsonPath('bridge_steps_90d.0.time_horizon', \App\Services\Career\Transition\CareerTransitionContractBuilder::TIME_HORIZON_DAYS_0_30);
+
+        /** @var array<string, mixed> $payload */
+        $payload = $response->json();
+        $this->assertArrayHasKey('why_this_path', $payload);
+        $this->assertIsString($payload['why_this_path']);
+        $this->assertNotSame('', trim((string) $payload['why_this_path']));
+        if (array_key_exists('tradeoff_codes', $payload)) {
+            $this->assertArrayHasKey('what_is_lost', $payload);
+            $this->assertIsString($payload['what_is_lost']);
+            $this->assertNotSame('', trim((string) $payload['what_is_lost']));
+        }
 
         $this->assertNotSame($path->from_occupation_id, $path->to_occupation_id);
     }

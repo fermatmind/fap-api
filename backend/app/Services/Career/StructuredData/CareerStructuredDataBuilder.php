@@ -12,6 +12,8 @@ final class CareerStructuredDataBuilder
     public function __construct(
         private readonly CareerJobDetailStructuredDataBuilder $jobDetailBuilder,
         private readonly CareerFamilyHubStructuredDataBuilder $familyHubBuilder,
+        private readonly CareerArticleStructuredDataBuilder $articleBuilder,
+        private readonly CareerStructuredDataOutputPolicy $outputPolicy,
     ) {}
 
     /**
@@ -19,6 +21,12 @@ final class CareerStructuredDataBuilder
      */
     public function build(string $routeKind, mixed $payload): ?array
     {
+        if ($this->outputPolicy->allows($routeKind, CareerStructuredDataOutputPolicy::SCHEMA_ARTICLE)) {
+            return is_array($payload)
+                ? $this->articleBuilder->build($routeKind, $payload)
+                : null;
+        }
+
         return match ($routeKind) {
             'career_job_detail' => $payload instanceof CareerJobDetailBundle
                 ? $this->jobDetailBuilder->build($payload)

@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T00:43:00Z",
+  "updated_at": "2026-04-16T01:06:31Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1836,9 +1836,9 @@
     "PR-B67": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open_checks_failed",
+      "status": "merged",
       "branch": "codex/pr-b67-career-promotion-candidate-rule-narrowing",
-      "commit_sha": "118fc62591b8208b5361d7b6444326892d6865ad",
+      "commit_sha": "a62eb743f9d98768312b14c0feb8c3f0f82ab328",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/914",
       "checks": {
         "local": [
@@ -1886,7 +1886,45 @@
           }
         ]
       },
-      "failure_reason": "GitHub hygiene checks failed on PR-B67; local validation passed.",
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "2026-04-16T00:43:54Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-B68": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_verified",
+      "branch": "codex/pr-b68-career-dataset-article-structured-data-completion",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/StructuredData/*.php tests/Unit/Services/Career/CareerArticleStructuredDataBuilderTest.php tests/Unit/Services/Career/CareerStructuredData*.php tests/Feature/Career/*.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerArticleStructuredDataBuilderTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerStructuredData*.php tests/Feature/Career/*.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/OpenApiDiffTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,

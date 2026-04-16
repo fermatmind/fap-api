@@ -6,6 +6,7 @@ namespace App\Services\Cms;
 
 use App\Models\CareerGuide;
 use App\Models\CareerGuideSeoMeta;
+use App\Services\Career\StructuredData\CareerArticleStructuredDataBuilder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
@@ -102,17 +103,19 @@ final class CareerGuideSeoService
         $seoMeta = $this->resolveSeoMeta($guide);
         $canonical = $this->buildCanonicalUrl($guide);
         $payload = $this->buildSeoPayload($guide);
-
-        $jsonLd = [
-            '@context' => 'https://schema.org',
-            '@type' => 'WebPage',
-            '@id' => $canonical !== null ? $canonical.'#webpage' : null,
+        $structured = $this->careerArticleStructuredDataBuilder->build('career_guide_public_detail', [
+            'headline' => $payload['title'] ?? null,
+            'description' => $payload['description'] ?? null,
             'url' => $canonical,
-            'name' => $payload['title'],
-            'description' => $payload['description'],
-            'inLanguage' => $this->normalizeLocale((string) $guide->locale),
-            'mainEntityOfPage' => $canonical,
-        ];
+            'main_entity_of_page' => $canonical,
+            'date_published' => $guide->published_at?->toAtomString(),
+            'date_modified' => $guide->updated_at?->toAtomString(),
+            'article_section' => $this->normalizeNullableString($guide->category_slug ?? null),
+            'keywords' => is_array($guide->related_industry_slugs_json ?? null) ? $guide->related_industry_slugs_json : [],
+        ]);
+        $jsonLd = is_array($structured)
+            ? (array) data_get($structured, 'fragments.article', [])
+            : [];
 
         if ($seoMeta instanceof CareerGuideSeoMeta && is_array($seoMeta->jsonld_overrides_json)) {
             $jsonLd = array_replace_recursive($jsonLd, $seoMeta->jsonld_overrides_json);
@@ -325,3 +328,6 @@ final class CareerGuideSeoService
         return $normalized;
     }
 }
+    public function __construct(
+        private readonly CareerArticleStructuredDataBuilder $careerArticleStructuredDataBuilder,
+    ) {}
