@@ -25,7 +25,7 @@ class SitemapGeneratorTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_generate_only_includes_public_global_scales(): void
+    public function test_generate_includes_dataset_urls_and_only_public_global_scales(): void
     {
         config(['services.seo.tests_url_prefix' => 'https://fermatmind.com/tests/']);
 
@@ -98,10 +98,12 @@ class SitemapGeneratorTest extends TestCase
         $slugList = (array) ($payload['slug_list'] ?? []);
         sort($slugList, SORT_STRING);
 
-        $this->assertSame(['public-global', 'public-global-alt'], $slugList);
+        $this->assertSame(['career-dataset-hub', 'career-dataset-method', 'public-global', 'public-global-alt'], $slugList);
 
         $xml = (string) ($payload['xml'] ?? '');
         $prefix = rtrim((string) config('services.seo.tests_url_prefix'), '/').'/';
+        $this->assertStringContainsString('https://www.fermatmind.com/datasets/occupations', $xml);
+        $this->assertStringContainsString('https://www.fermatmind.com/datasets/occupations/method', $xml);
         $this->assertStringContainsString($prefix.'public-global', $xml);
         $this->assertStringContainsString($prefix.'public-global-alt', $xml);
         $this->assertStringNotContainsString($prefix.'private-global', $xml);

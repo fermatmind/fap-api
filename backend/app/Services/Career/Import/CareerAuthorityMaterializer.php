@@ -436,6 +436,91 @@ final class CareerAuthorityMaterializer
     }
 
     /**
+     * @param  array<string, mixed>  $resolved
+     * @param  array{type_code: string, canonical_type_code: string, display_title: string, public_route_slug: string}  $subject
+     */
+    public function materializeRecommendationSubjectSnapshot(
+        Occupation $occupation,
+        CareerCompileRun $compileRun,
+        CareerImportRun $importRun,
+        array $resolved,
+        array $subject
+    ): RecommendationSnapshot {
+        return DB::transaction(function () use ($occupation, $compileRun, $importRun, $resolved, $subject): RecommendationSnapshot {
+            $visitorId = sprintf(
+                'career-rec:%s:%s:%s',
+                $subject['canonical_type_code'],
+                $compileRun->id,
+                $occupation->canonical_slug,
+            );
+
+            $contextSnapshot = ContextSnapshot::query()->create([
+                'compile_run_id' => $compileRun->id,
+                'visitor_id' => $visitorId,
+                'captured_at' => $compileRun->started_at,
+                'current_occupation_id' => $occupation->id,
+                'employment_status' => 'recommendation_subject_baseline',
+                'monthly_comp_band' => 'unknown',
+                'burnout_level' => 0.35,
+                'switch_urgency' => 0.42,
+                'risk_tolerance' => 0.55,
+                'geo_region' => (string) ($resolved['display_market'] ?? $occupation->display_market),
+                'family_constraint_level' => 0.4,
+                'manager_track_preference' => 0.5,
+                'time_horizon_months' => 12,
+                'context_payload' => [
+                    'materialization' => 'career_first_wave',
+                    'materialization_kind' => 'mbti_recommendation_subject',
+                    'import_run_id' => $importRun->id,
+                    'compile_run_id' => $compileRun->id,
+                    'scope_mode' => $compileRun->scope_mode,
+                    'recommendation_subject_meta' => $subject,
+                ],
+            ]);
+
+            $profileProjection = ProfileProjection::query()->create([
+                'compile_run_id' => $compileRun->id,
+                'visitor_id' => $visitorId,
+                'context_snapshot_id' => $contextSnapshot->id,
+                'projection_version' => self::PROJECTION_VERSION,
+                'psychometric_axis_coverage' => 0.66,
+                'projection_payload' => [
+                    'fit_axes' => [
+                        'abstraction' => 0.72,
+                        'autonomy' => 0.65,
+                        'collaboration' => 0.5,
+                        'variability' => 0.58,
+                        'variant_trigger_load' => 0.12,
+                    ],
+                    'materialization' => 'career_first_wave',
+                    'materialization_kind' => 'mbti_recommendation_subject',
+                    'compile_run_id' => $compileRun->id,
+                    'recommendation_subject_meta' => $subject,
+                ],
+            ]);
+
+            $snapshot = $this->compiler->compile($profileProjection, $occupation, [
+                'compile_run_id' => $compileRun->id,
+                'trust_manifest_id' => $resolved['trust_manifest_id'] ?? null,
+                'index_state_id' => $resolved['index_state_id'] ?? null,
+                'truth_metric_id' => $resolved['truth_metric_id'] ?? null,
+                'import_run_id' => $importRun->id,
+                'compile_refs' => [
+                    'import_run_id' => $importRun->id,
+                    'compile_run_id' => $compileRun->id,
+                    'scope_mode' => $compileRun->scope_mode,
+                    'materialization_kind' => 'mbti_recommendation_subject',
+                    'recommendation_subject_meta' => $subject,
+                ],
+            ]);
+
+            $this->transitionPathWriter->rewriteForSnapshot($snapshot);
+
+            return $snapshot;
+        });
+    }
+
+    /**
      * @param  array<string, mixed>  $normalized
      * @return array<string, mixed>
      */

@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('context_snapshots', function (Blueprint $table): void {
             $table->uuid('id')->primary();
             $table->string('identity_id', 64)->nullable();
-            $table->string('visitor_id', 64)->nullable();
+            $table->string('visitor_id', 191)->nullable();
             $table->timestamp('captured_at');
             $table->foreignUuid('current_occupation_id')->nullable();
             $table->string('employment_status', 64)->nullable();

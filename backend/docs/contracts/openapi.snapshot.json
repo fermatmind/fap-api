@@ -2362,6 +2362,40 @@
                 ]
             }
         },
+        "/api/v0.5/career/datasets/occupations": {
+            "get": {
+                "operationId": "get_api_v0_5_career_datasets_occupations",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerDatasetHubController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/career/datasets/occupations/method": {
+            "get": {
+                "operationId": "get_api_v0_5_career_datasets_occupations_method",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerDatasetMethodController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/career/family/{slug}": {
             "get": {
                 "operationId": "get_api_v0_5_career_family_slug_",
@@ -2566,6 +2600,40 @@
                 ]
             }
         },
+        "/api/v0.5/career/launch-governance-closure": {
+            "get": {
+                "operationId": "get_api_v0_5_career_launch_governance_closure",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerLaunchGovernanceClosureController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/career/lifecycle/operational-summary": {
+            "get": {
+                "operationId": "get_api_v0_5_career_lifecycle_operational_summary",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerLifecycleOperationalSummaryController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/career/recommendations/mbti": {
             "get": {
                 "operationId": "get_api_v0_5_career_recommendations_mbti",
@@ -2617,6 +2685,23 @@
                 ]
             }
         },
+        "/api/v0.5/career/recommendations/mbti/{type}/feedback": {
+            "post": {
+                "operationId": "post_api_v0_5_career_recommendations_mbti_type_feedback",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerRecommendationFeedbackController@store",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/career/resolve": {
             "get": {
                 "operationId": "get_api_v0_5_career_resolve",
@@ -2634,6 +2719,23 @@
                 ]
             }
         },
+        "/api/v0.5/career/runtime-config": {
+            "get": {
+                "operationId": "get_api_v0_5_career_runtime_config",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerRuntimeConfigController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/career/search": {
             "get": {
                 "operationId": "get_api_v0_5_career_search",
@@ -2646,6 +2748,40 @@
                     }
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerSearchController@index",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/career/shortlist": {
+            "post": {
+                "operationId": "post_api_v0_5_career_shortlist",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerShortlistController@store",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/career/shortlist/state": {
+            "get": {
+                "operationId": "get_api_v0_5_career_shortlist_state",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerShortlistController@show",
                 "x-laravel-middleware": [
                     "api"
                 ]
@@ -2785,6 +2921,174 @@
                     "App\\Http\\Middleware\\AdminAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:release"
+                ]
+            }
+        },
+        "/api/v0.5/internal/career/crosswalk/override/{slug}": {
+            "get": {
+                "operationId": "get_api_v0_5_internal_career_crosswalk_override_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Internal\\Career\\CareerCrosswalkOverrideController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:write"
+                ]
+            }
+        },
+        "/api/v0.5/internal/career/crosswalk/patches": {
+            "post": {
+                "operationId": "post_api_v0_5_internal_career_crosswalk_patches",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Internal\\Career\\CareerCrosswalkPatchController@store",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:write"
+                ]
+            }
+        },
+        "/api/v0.5/internal/career/crosswalk/patches/{patchKey}/approve": {
+            "post": {
+                "operationId": "post_api_v0_5_internal_career_crosswalk_patches_patchkey_approve",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Internal\\Career\\CareerCrosswalkPatchController@approve",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:write"
+                ]
+            }
+        },
+        "/api/v0.5/internal/career/crosswalk/patches/{patchKey}/reject": {
+            "post": {
+                "operationId": "post_api_v0_5_internal_career_crosswalk_patches_patchkey_reject",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Internal\\Career\\CareerCrosswalkPatchController@reject",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:write"
+                ]
+            }
+        },
+        "/api/v0.5/internal/career/crosswalk/patches/{slug}": {
+            "get": {
+                "operationId": "get_api_v0_5_internal_career_crosswalk_patches_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Internal\\Career\\CareerCrosswalkPatchController@history",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:write"
+                ]
+            }
+        },
+        "/api/v0.5/internal/career/crosswalk/review-queue": {
+            "get": {
+                "operationId": "get_api_v0_5_internal_career_crosswalk_review_queue",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Internal\\Career\\CareerCrosswalkReviewQueueController@index",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:write"
+                ]
+            }
+        },
+        "/api/v0.5/internal/career/crosswalk/review-queue/{slug}": {
+            "get": {
+                "operationId": "get_api_v0_5_internal_career_crosswalk_review_queue_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Internal\\Career\\CareerCrosswalkReviewQueueController@show",
+                "x-laravel-middleware": [
+                    "api",
+                    "App\\Http\\Middleware\\EncryptCookies",
+                    "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+                    "Illuminate\\Session\\Middleware\\StartSession",
+                    "App\\Http\\Middleware\\SetOpsRequestContext",
+                    "App\\Http\\Middleware\\AdminAuth",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:write"
                 ]
             }
         },

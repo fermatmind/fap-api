@@ -42,8 +42,13 @@ final class PartnerApiService
             'requested_at' => now()->toISOString(),
         ];
 
+        $container = app();
+        $previousOrgContext = $container->bound(OrgContext::class)
+            ? $container->make(OrgContext::class)
+            : null;
         $ctx = new OrgContext;
         $ctx->set($orgId, null, 'partner', $anonId);
+        $container->instance(OrgContext::class, $ctx);
 
         $startPayload = [
             'scale_code' => $scaleCode,
@@ -58,7 +63,15 @@ final class PartnerApiService
             'consent' => is_array($payload['consent'] ?? null) ? $payload['consent'] : [],
         ];
 
-        $started = $this->attemptStartService->start($ctx, StartAttemptDTO::fromArray($startPayload));
+        try {
+            $started = $this->attemptStartService->start($ctx, StartAttemptDTO::fromArray($startPayload));
+        } finally {
+            if ($previousOrgContext instanceof OrgContext) {
+                $container->instance(OrgContext::class, $previousOrgContext);
+            } else {
+                $container->forgetInstance(OrgContext::class);
+            }
+        }
         $attemptId = trim((string) ($started['attempt_id'] ?? ''));
         if ($attemptId === '') {
             throw new \RuntimeException('attempt creation failed.');

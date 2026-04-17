@@ -295,6 +295,28 @@ task('artisan:event:cache', function () {
     run('{{bin/php}} {{release_path}}/backend/artisan event:cache --ansi');
 });
 
+task('artisan:migrate', function () {
+    run('{{bin/php}} {{release_path}}/backend/artisan migrate --force --no-interaction --ansi');
+});
+
+task('guard:no-pending-migrations', function () {
+    within('{{release_path}}/backend', function () {
+        run(<<<'BASH'
+set -euo pipefail
+status_output="$({{bin/php}} artisan migrate:status --no-interaction --no-ansi)"
+printf '%s\n' "$status_output"
+if printf '%s\n' "$status_output" | grep -Eq '(^|[[:space:]])Pending($|[[:space:]])'; then
+  echo "pending migrations remain after deploy migrate" >&2
+  exit 1
+fi
+BASH);
+    });
+});
+
+task('career:warm-public-authority-cache', function () {
+    run('{{bin/php}} {{release_path}}/backend/artisan career:warm-public-authority-cache --no-interaction --ansi');
+});
+
 task('artisan:view:cache', function () {
     writeln('<comment>Skip artisan:view:cache (no views)</comment>');
 });
@@ -682,7 +704,9 @@ after('deploy:vendors', 'artisan:filament:assets');
 after('artisan:filament:assets', 'guard:ops-theme-asset');
 after('artisan:filament:assets', 'guard:filament-assets');
 after('artisan:config:cache', 'guard:sitemap-authority');
-after('artisan:migrate', 'ensure:release-runtime-perms');
+after('artisan:migrate', 'guard:no-pending-migrations');
+after('guard:no-pending-migrations', 'career:warm-public-authority-cache');
+after('career:warm-public-authority-cache', 'ensure:release-runtime-perms');
 
 after('deploy:symlink', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');

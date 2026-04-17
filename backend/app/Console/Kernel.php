@@ -9,6 +9,7 @@ use App\Console\Commands\Big5AttemptPurge;
 use App\Console\Commands\Big5PsychometricsReport;
 use App\Console\Commands\Big5TelemetrySummary;
 use App\Console\Commands\CareerCompileAuthorityWave;
+use App\Console\Commands\CareerCompileRecommendationSubjects;
 use App\Console\Commands\CareerCrosswalkOps;
 use App\Console\Commands\CareerExportCrosswalkBacklogConvergence;
 use App\Console\Commands\CareerExportFirstWaveReleaseArtifacts;
@@ -19,6 +20,7 @@ use App\Console\Commands\CareerExportLaunchGovernanceClosure;
 use App\Console\Commands\CareerExportStrongIndexEligibility;
 use App\Console\Commands\CareerImportAuthorityWave;
 use App\Console\Commands\CareerRunAssetBatch;
+use App\Console\Commands\CareerWarmPublicAuthorityCache;
 use App\Console\Commands\CiScaleImpact;
 use App\Console\Commands\CommerceCompensatePendingOrders;
 use App\Console\Commands\CommerceReconcile;
@@ -139,12 +141,14 @@ class Kernel extends ConsoleKernel
         CommerceRepairPostCommitFailed::class,
         CareerImportAuthorityWave::class,
         CareerCompileAuthorityWave::class,
+        CareerCompileRecommendationSubjects::class,
         CareerCrosswalkOps::class,
         CareerExportCrosswalkBacklogConvergence::class,
         CareerExportFullReleaseLedger::class,
         CareerExportLaunchGovernanceClosure::class,
         CareerExportStrongIndexEligibility::class,
         CareerRunAssetBatch::class,
+        CareerWarmPublicAuthorityCache::class,
         CareerExportFirstWaveRolloutBundleArtifacts::class,
         CareerExportFirstWaveReleaseArtifacts::class,
         CareerExportFirstWaveRolloutWavePlanArtifact::class,

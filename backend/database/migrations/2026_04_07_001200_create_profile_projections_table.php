@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('profile_projections', function (Blueprint $table): void {
             $table->uuid('id')->primary();
             $table->string('identity_id', 64)->nullable();
-            $table->string('visitor_id', 64)->nullable();
+            $table->string('visitor_id', 191)->nullable();
             $table->foreignUuid('context_snapshot_id');
             $table->string('projection_version', 64);
             $table->decimal('psychometric_axis_coverage', 6, 2)->nullable();

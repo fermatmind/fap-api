@@ -1547,3 +1547,40 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: PR-B86
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-b86-career-production-authority-hardening
+    base: main
+    depends_on: ["PR-B85"]
+    mode: execute
+    scope: >
+      Career production authority hardening.
+      Formalize the production schema hotfixes for career trust/context/profile tables,
+      add MBTI recommendation-subject materialization for recommendation detail pages,
+      cache public dataset/governance authority responses for web ISR safety, and harden
+      deployment migration/cache warmup gates without changing public API contracts.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Console/Commands/CareerCompileRecommendationSubjects.php app/Console/Commands/CareerWarmPublicAuthorityCache.php app/Console/Kernel.php app/Http/Controllers/API/V0_5/Career/CareerDatasetHubController.php app/Http/Controllers/API/V0_5/Career/CareerDatasetMethodController.php app/Http/Controllers/API/V0_5/Career/CareerLaunchGovernanceClosureController.php app/Services/Career/Import/CareerAuthorityMaterializer.php app/Services/Career/PublicCareerAuthorityResponseCache.php app/Services/Partners/PartnerApiService.php database/migrations/2026_04_07_000800_create_trust_manifests_table.php database/migrations/2026_04_07_001100_create_context_snapshots_table.php database/migrations/2026_04_07_001200_create_profile_projections_table.php database/migrations/2026_04_13_000100_add_source_page_type_to_analytics_career_attribution_daily_table.php database/migrations/2026_04_17_001000_harden_career_production_schema.php tests/Feature/Career/CareerDatasetPublicApiTest.php tests/Feature/Career/CareerRecommendationSubjectCompileCommandTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Unit/Migrations/CareerFoundationMigrationDefinitionTest.php"
+      - "php artisan migrate --force --no-interaction"
+      - "php artisan fap:schema:verify"
+      - "php artisan career:warm-public-authority-cache --json"
+      - "php artisan test --filter 'CareerFoundationMigrationDefinitionTest|CareerRecommendationSubjectCompileCommandTest|CareerDatasetPublicApiTest|CareerWarmPublicAuthorityCacheCommandTest|CareerExportLaunchGovernanceClosureCommandTest'"
+      - "php artisan test --filter 'CareerRecommendationDetailApiTest|CareerRecommendationDetailBundleBuilderTest|CareerAuthorityCompileCommandTest|CareerAuthorityCompileGuardTest|CareerDatasetStructuredDataPolicyTest|CareerDatasetSitemapDiscoverabilityTest'"
+      - "php artisan test --filter 'MigrationSafetyTest|MigrationRollbackSafetyTest|MigrationsNoSilentCatchTest|MigrationProtectedTablesNoDropTest'"
+      - "php artisan test --filter PartnerApiMvpTest"
+      - "php artisan test --filter SitemapGeneratorTest"
+      - "bash scripts/export_openapi.sh --check"
+      - "bash scripts/pr78_verify.sh"
+      - "bash scripts/ci_verify_mbti.sh"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
