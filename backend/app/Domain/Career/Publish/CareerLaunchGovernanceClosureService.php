@@ -38,9 +38,10 @@ final class CareerLaunchGovernanceClosureService
     public function build(): CareerLaunchGovernanceClosure
     {
         $releaseLedger = $this->fullReleaseLedgerService->build()->toArray();
-        $strongIndexSnapshot = $this->strongIndexEligibilityService->build()->toArray();
-        $backlogConvergence = $this->crosswalkBacklogConvergenceService->build()->toArray();
-        $lifecycleSummary = $this->lifecycleOperationalSummaryService->build()->toArray();
+        $strongIndexSnapshot = $this->strongIndexEligibilityService->buildFromReleaseLedger($releaseLedger)->toArray();
+        $backlogConvergence = $this->crosswalkBacklogConvergenceService->buildFromReleaseLedger($releaseLedger)->toArray();
+        $trackedSlugs = $this->trackedSlugsFromReleaseLedger($releaseLedger);
+        $lifecycleSummary = $this->lifecycleOperationalSummaryService->buildForTrackedSlugs($trackedSlugs)->toArray();
         $conversionClosure = $this->conversionClosureBuilder->build()->toArray();
 
         $strongIndexBySlug = $this->mapBySlug((array) ($strongIndexSnapshot['members'] ?? []), 'canonical_slug');
@@ -330,6 +331,29 @@ final class CareerLaunchGovernanceClosureService
         }
 
         return $mapped;
+    }
+
+    /**
+     * @param  array<string, mixed>  $releaseLedger
+     * @return list<string>
+     */
+    private function trackedSlugsFromReleaseLedger(array $releaseLedger): array
+    {
+        $slugs = [];
+        foreach ((array) ($releaseLedger['members'] ?? []) as $member) {
+            if (! is_array($member)) {
+                continue;
+            }
+
+            $slug = trim(strtolower((string) ($member['canonical_slug'] ?? '')));
+            if ($slug === '') {
+                continue;
+            }
+
+            $slugs[$slug] = true;
+        }
+
+        return array_keys($slugs);
     }
 
     private function normalizeState(mixed $value): ?string

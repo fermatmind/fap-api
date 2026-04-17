@@ -2700,5 +2700,77 @@
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
     }
+  },
+  "prs": {
+    "PR-B87": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "status": "pr_open",
+      "branch": "codex/pr-b87-career-launch-governance-runtime-cache-hardening",
+      "commit_sha": "995935c6548987c92dd7142ee716c3accff7c5b1",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/932",
+      "checks": {
+        "local": [
+          {
+            "command": "cd backend && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && vendor/bin/pint --test app/Domain/Career/Publish/CareerLifecycleOperationalSummaryService.php app/Domain/Career/Publish/CareerLaunchGovernanceClosureService.php app/Domain/Career/Publish/CareerStrongIndexEligibilityService.php app/Domain/Career/Operations/CareerCrosswalkBacklogConvergenceService.php database/migrations/2026_04_17_002000_add_career_authority_runtime_indexes.php tests/Unit/Services/Career/CareerLifecycleOperationalSummaryServiceTest.php tests/Unit/Services/Career/CareerLaunchGovernanceClosureServiceTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan migrate --force --no-interaction",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan fap:schema:verify",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan career:warm-public-authority-cache --json",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan test tests/Unit/Services/Career/CareerLifecycleOperationalSummaryServiceTest.php tests/Unit/Services/Career/CareerLaunchGovernanceClosureServiceTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php tests/Feature/Console/CareerExportLaunchGovernanceClosureCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan test tests/Unit/Services/Career/CareerStrongIndexEligibilityServiceTest.php tests/Unit/Services/Career/CareerCrosswalkBacklogConvergenceServiceTest.php tests/Unit/Services/Career/CareerFullReleaseLedgerServiceTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan test --filter 'MigrationSafetyTest|MigrationRollbackSafetyTest|MigrationsNoSilentCatchTest|MigrationProtectedTablesNoDropTest'",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan test --filter 'CareerDatasetPublicApiTest|CareerRecommendationDetailApiTest|CareerDatasetStructuredDataPolicyTest|CareerDatasetSitemapDiscoverabilityTest'",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && bash scripts/export_openapi.sh --check",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && bash scripts/ci_verify_mbti.sh",
+            "status": "passed"
+          },
+          {
+            "command": "php -l deploy.php",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    }
   }
 }

@@ -1584,3 +1584,33 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: PR-B87
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api
+    branch: codex/pr-b87-career-launch-governance-runtime-cache-hardening
+    base: main
+    depends_on: ["PR-B86"]
+    mode: execute
+    scope: >
+      Career launch-governance runtime cache hardening.
+      Remove production timeout risk from public launch-governance authority warmup
+      and frontend ISR/build paths by adding authority runtime indexes, batching lifecycle
+      aggregation, and bounding deploy warmup execution without changing public API contracts
+      or frontend attribution/SEO semantics.
+    checks:
+      - "cd backend && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "cd backend && vendor/bin/pint --test app/Domain/Career/Publish/CareerLifecycleOperationalSummaryService.php app/Domain/Career/Publish/CareerLaunchGovernanceClosureService.php app/Domain/Career/Publish/CareerStrongIndexEligibilityService.php app/Domain/Career/Operations/CareerCrosswalkBacklogConvergenceService.php database/migrations/2026_04_17_002000_add_career_authority_runtime_indexes.php tests/Unit/Services/Career/CareerLifecycleOperationalSummaryServiceTest.php tests/Unit/Services/Career/CareerLaunchGovernanceClosureServiceTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php"
+      - "cd backend && php artisan migrate --force --no-interaction"
+      - "cd backend && php artisan fap:schema:verify"
+      - "cd backend && php artisan career:warm-public-authority-cache --json"
+      - "cd backend && php artisan test tests/Unit/Services/Career/CareerLifecycleOperationalSummaryServiceTest.php tests/Unit/Services/Career/CareerLaunchGovernanceClosureServiceTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php tests/Feature/Console/CareerExportLaunchGovernanceClosureCommandTest.php"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
