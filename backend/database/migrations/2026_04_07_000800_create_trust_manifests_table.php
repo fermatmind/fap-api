@@ -27,7 +27,7 @@ return new class extends Migration
             $table->timestamp('reviewed_at')->nullable();
             $table->json('ai_assistance')->nullable();
             $table->json('quality')->nullable();
-            $table->timestamp('last_substantive_update_at');
+            $table->timestamp('last_substantive_update_at')->nullable();
             $table->timestamp('next_review_due_at')->nullable();
             $table->timestamp('created_at')->useCurrent();
 

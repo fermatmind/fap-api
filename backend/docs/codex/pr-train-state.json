@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-16T16:20:00Z",
+  "updated_at": "2026-04-17T01:02:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -2599,10 +2599,10 @@
     "PR-B85": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "merged",
       "branch": "codex/pr-b85-career-launch-governance-closure",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "b7e75a7440287258e9d046ae9b22e6166280a21c",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/930",
       "checks": {
         "local": [
           {
@@ -2619,6 +2619,76 @@
           },
           {
             "command": "php artisan test tests/Unit/Services/Career/CareerFullReleaseLedgerServiceTest.php tests/Unit/Services/Career/CareerStrongIndexEligibilityServiceTest.php tests/Unit/Services/Career/CareerCrosswalkBacklogConvergenceServiceTest.php tests/Unit/Services/Career/CareerLifecycleOperationalSummaryServiceTest.php",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "2026-04-16T16:02:05Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-B86": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/pr-b86-career-production-authority-hardening",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/CareerCompileRecommendationSubjects.php app/Console/Commands/CareerWarmPublicAuthorityCache.php app/Console/Kernel.php app/Http/Controllers/API/V0_5/Career/CareerDatasetHubController.php app/Http/Controllers/API/V0_5/Career/CareerDatasetMethodController.php app/Http/Controllers/API/V0_5/Career/CareerLaunchGovernanceClosureController.php app/Services/Career/Import/CareerAuthorityMaterializer.php app/Services/Career/PublicCareerAuthorityResponseCache.php app/Services/Partners/PartnerApiService.php database/migrations/2026_04_07_000800_create_trust_manifests_table.php database/migrations/2026_04_07_001100_create_context_snapshots_table.php database/migrations/2026_04_07_001200_create_profile_projections_table.php database/migrations/2026_04_13_000100_add_source_page_type_to_analytics_career_attribution_daily_table.php database/migrations/2026_04_17_001000_harden_career_production_schema.php tests/Feature/Career/CareerDatasetPublicApiTest.php tests/Feature/Career/CareerRecommendationSubjectCompileCommandTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php tests/Feature/SEO/SitemapGeneratorTest.php tests/Unit/Migrations/CareerFoundationMigrationDefinitionTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan migrate --force --no-interaction",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan fap:schema:verify",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:warm-public-authority-cache --json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test --filter 'CareerFoundationMigrationDefinitionTest|CareerRecommendationSubjectCompileCommandTest|CareerDatasetPublicApiTest|CareerWarmPublicAuthorityCacheCommandTest|CareerExportLaunchGovernanceClosureCommandTest'",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test --filter 'CareerRecommendationDetailApiTest|CareerRecommendationDetailBundleBuilderTest|CareerAuthorityCompileCommandTest|CareerAuthorityCompileGuardTest|CareerDatasetStructuredDataPolicyTest|CareerDatasetSitemapDiscoverabilityTest'",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test --filter 'MigrationSafetyTest|MigrationRollbackSafetyTest|MigrationsNoSilentCatchTest|MigrationProtectedTablesNoDropTest'",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test --filter PartnerApiMvpTest",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test --filter SitemapGeneratorTest",
+            "status": "passed"
+          },
+          {
+            "command": "bash scripts/export_openapi.sh --check",
+            "status": "passed"
+          },
+          {
+            "command": "bash scripts/pr78_verify.sh",
+            "status": "passed"
+          },
+          {
+            "command": "bash scripts/ci_verify_mbti.sh",
             "status": "passed"
           }
         ],

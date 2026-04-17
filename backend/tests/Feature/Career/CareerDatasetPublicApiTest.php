@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Career;
 
+use App\Services\Career\PublicCareerAuthorityResponseCache;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Cache;
 use Tests\TestCase;
 
 final class CareerDatasetPublicApiTest extends TestCase
@@ -33,6 +35,8 @@ final class CareerDatasetPublicApiTest extends TestCase
             ->assertJsonPath('structured_data.dataset.@type', 'Dataset')
             ->assertJsonPath('structured_data.breadcrumb_list.@type', 'BreadcrumbList')
             ->assertJsonMissingPath('structured_data.article');
+
+        $this->assertTrue(Cache::has(PublicCareerAuthorityResponseCache::DATASET_HUB_CACHE_KEY));
     }
 
     public function test_it_returns_public_dataset_method_contract_with_article_structured_data(): void
@@ -51,10 +55,15 @@ final class CareerDatasetPublicApiTest extends TestCase
             ->assertJsonPath('structured_data.article.@type', 'Article')
             ->assertJsonPath('structured_data.breadcrumb_list.@type', 'BreadcrumbList')
             ->assertJsonMissingPath('structured_data.dataset');
+
+        $this->assertTrue(Cache::has(PublicCareerAuthorityResponseCache::DATASET_METHOD_CACHE_KEY));
     }
 
     private function materializeCurrentFirstWaveFixture(): void
     {
+        Cache::forget(PublicCareerAuthorityResponseCache::DATASET_HUB_CACHE_KEY);
+        Cache::forget(PublicCareerAuthorityResponseCache::DATASET_METHOD_CACHE_KEY);
+
         $exitCode = Artisan::call('career:validate-first-wave-publish-ready', [
             '--source' => base_path('tests/Fixtures/Career/authority_wave/first_wave_readiness_summary_subset.csv'),
             '--materialize-missing' => true,

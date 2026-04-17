@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace App\Http\Controllers\API\V0_5\Career;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Career\CareerDatasetMethodResource;
-use App\Services\Career\Dataset\CareerPublicDatasetContractBuilder;
+use App\Services\Career\PublicCareerAuthorityResponseCache;
+use Illuminate\Http\JsonResponse;
 
 final class CareerDatasetMethodController extends Controller
 {
     public function __construct(
-        private readonly CareerPublicDatasetContractBuilder $contractBuilder,
+        private readonly PublicCareerAuthorityResponseCache $responseCache,
     ) {}
 
-    public function show(): CareerDatasetMethodResource
+    public function show(): JsonResponse
     {
-        return new CareerDatasetMethodResource($this->contractBuilder->buildMethodContract());
+        return response()->json($this->responseCache->datasetMethodPayload());
     }
 }

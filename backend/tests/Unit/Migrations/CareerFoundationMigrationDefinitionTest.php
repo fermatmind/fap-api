@@ -100,4 +100,16 @@ final class CareerFoundationMigrationDefinitionTest extends TestCase
             $this->assertStringNotContainsString("unique(['attempt_id']", $source, "Immutable table {$table} must not copy attempt-style overwrite semantics");
         }
     }
+
+    #[Test]
+    public function career_foundation_schema_keeps_production_materialization_columns_safe(): void
+    {
+        $trustManifestSource = (string) file_get_contents($this->migrationFiles()['trust_manifests']);
+        $contextSnapshotSource = (string) file_get_contents($this->migrationFiles()['context_snapshots']);
+        $profileProjectionSource = (string) file_get_contents($this->migrationFiles()['profile_projections']);
+
+        $this->assertStringContainsString("timestamp('last_substantive_update_at')->nullable()", $trustManifestSource);
+        $this->assertStringContainsString("string('visitor_id', 191)->nullable()", $contextSnapshotSource);
+        $this->assertStringContainsString("string('visitor_id', 191)->nullable()", $profileProjectionSource);
+    }
 }

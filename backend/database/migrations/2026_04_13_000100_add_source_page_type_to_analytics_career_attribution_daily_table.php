@@ -1,5 +1,6 @@
 <?php
 
+use App\Support\Database\SchemaIndex;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,14 +22,18 @@ return new class extends Migration
         Schema::table('analytics_career_attribution_daily', function (Blueprint $table): void {
             try {
                 $table->dropUnique('analytics_career_attr_daily_unique');
-            } catch (\Throwable) {
-                // Index may not exist yet in some local or CI states.
+            } catch (\Throwable $e) {
+                if (! SchemaIndex::isMissingIndexException($e, 'analytics_career_attr_daily_unique')) {
+                    throw $e;
+                }
             }
 
             try {
                 $table->dropIndex('analytics_career_attr_daily_surface_event_idx');
-            } catch (\Throwable) {
-                // Index may not exist yet in some local or CI states.
+            } catch (\Throwable $e) {
+                if (! SchemaIndex::isMissingIndexException($e, 'analytics_career_attr_daily_surface_event_idx')) {
+                    throw $e;
+                }
             }
         });
 
