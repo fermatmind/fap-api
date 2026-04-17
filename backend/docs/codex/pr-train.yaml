@@ -1614,3 +1614,34 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: PR-B88
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api
+    branch: codex/pr-b88-career-first-wave-authority-runtime-hardening
+    base: main
+    depends_on: ["PR-B87"]
+    mode: execute
+    scope: >
+      Career first-wave authority runtime hardening.
+      Remove remaining production timeout risk from launch-governance release-ledger
+      and strong-index dependencies by caching first-wave discoverability route assembly
+      within next-step link projection and deriving trust freshness from batched authority
+      tables instead of per-slug job detail bundle construction.
+    checks:
+      - "cd backend && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "cd backend && vendor/bin/pint --test app/Domain/Career/Publish/CareerFirstWaveNextStepLinksService.php app/Domain/Career/Publish/CareerTrustFreshnessAuthorityService.php app/Domain/Career/Publish/CareerFirstWaveLaunchReadinessAuditService.php app/Domain/Career/Publish/CareerFirstWaveLaunchReadinessAuditV2Service.php app/Domain/Career/Publish/CareerStrongIndexEligibilityService.php app/Domain/Career/Publish/CareerLaunchGovernanceClosureService.php tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditV2ServiceTest.php tests/Unit/Services/Career/CareerLaunchGovernanceClosureServiceTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php"
+      - "cd backend && php artisan fap:schema:verify"
+      - "cd backend && php artisan career:warm-public-authority-cache --json"
+      - "cd backend && php artisan test tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditV2ServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditServiceTest.php tests/Unit/Services/Career/CareerStrongIndexEligibilityServiceTest.php tests/Unit/Services/Career/CareerLaunchGovernanceClosureServiceTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php"
+      - "cd backend && bash scripts/export_openapi.sh --check"
+      - "cd backend && bash scripts/ci_verify_mbti.sh"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true

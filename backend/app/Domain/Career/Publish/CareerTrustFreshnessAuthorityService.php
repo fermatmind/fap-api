@@ -6,7 +6,10 @@ namespace App\Domain\Career\Publish;
 
 use App\DTO\Career\CareerTrustFreshnessAuthority;
 use App\DTO\Career\CareerTrustFreshnessMember;
-use App\Services\Career\Bundles\CareerJobDetailBundleBuilder;
+use App\Models\Occupation;
+use App\Models\OccupationTruthMetric;
+use App\Models\TrustManifest;
+use Carbon\CarbonInterface;
 
 final class CareerTrustFreshnessAuthorityService
 {
@@ -20,24 +23,28 @@ final class CareerTrustFreshnessAuthorityService
 
     public function __construct(
         private readonly CareerFirstWaveLaunchReadinessAuditService $launchReadinessAuditService,
-        private readonly CareerJobDetailBundleBuilder $jobDetailBundleBuilder,
     ) {}
 
     public function build(): CareerTrustFreshnessAuthority
     {
         $audit = $this->launchReadinessAuditService->build();
+        $slugs = array_values(array_unique(array_filter(array_map(
+            static fn (mixed $member): string => $member instanceof \App\DTO\Career\CareerFirstWaveLaunchReadinessAuditMember
+                ? trim((string) $member->canonicalSlug)
+                : '',
+            $audit->members,
+        ))));
+        $profiles = $this->freshnessProfilesBySlug($slugs);
         $members = [];
 
         foreach ($audit->members as $auditMember) {
-            $bundle = $this->jobDetailBundleBuilder->buildBySlug($auditMember->canonicalSlug);
-            $trustManifest = $bundle?->trustManifest ?? [];
-            $truthLayer = $bundle?->truthLayer ?? [];
+            $profile = $profiles[$auditMember->canonicalSlug] ?? [];
 
-            $reviewerStatus = $this->normalizeNullableString($trustManifest['reviewer_status'] ?? null);
-            $reviewedAt = $this->normalizeNullableString($trustManifest['reviewed_at'] ?? null);
-            $lastSubstantiveUpdateAt = $this->normalizeNullableString($trustManifest['last_substantive_update_at'] ?? null);
-            $nextReviewDueAt = $this->normalizeNullableString($trustManifest['next_review_due_at'] ?? null);
-            $truthLastReviewedAt = $this->normalizeNullableString($truthLayer['truth_last_reviewed_at'] ?? null);
+            $reviewerStatus = $this->normalizeNullableString($profile['reviewer_status'] ?? null);
+            $reviewedAt = $this->normalizeDateString($profile['reviewed_at'] ?? null);
+            $lastSubstantiveUpdateAt = $this->normalizeDateString($profile['last_substantive_update_at'] ?? null);
+            $nextReviewDueAt = $this->normalizeDateString($profile['next_review_due_at'] ?? null);
+            $truthLastReviewedAt = $this->normalizeDateString($profile['truth_last_reviewed_at'] ?? null);
 
             $members[] = new CareerTrustFreshnessMember(
                 canonicalSlug: $auditMember->canonicalSlug,
@@ -70,6 +77,100 @@ final class CareerTrustFreshnessAuthorityService
             scope: $audit->scope,
             members: $members,
         );
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     * @return array<string, array<string, mixed>>
+     */
+    private function freshnessProfilesBySlug(array $slugs): array
+    {
+        if ($slugs === []) {
+            return [];
+        }
+
+        $occupations = Occupation::query()
+            ->whereIn('canonical_slug', $slugs)
+            ->get(['id', 'canonical_slug']);
+
+        $slugByOccupationId = [];
+        foreach ($occupations as $occupation) {
+            $occupationId = (string) $occupation->id;
+            $slug = trim((string) $occupation->canonical_slug);
+            if ($occupationId === '' || $slug === '') {
+                continue;
+            }
+
+            $slugByOccupationId[$occupationId] = $slug;
+        }
+
+        $profiles = [];
+        foreach ($slugs as $slug) {
+            $profiles[$slug] = [];
+        }
+
+        if ($slugByOccupationId === []) {
+            return $profiles;
+        }
+
+        $occupationIds = array_keys($slugByOccupationId);
+
+        $seenTrust = [];
+        TrustManifest::query()
+            ->whereIn('occupation_id', $occupationIds)
+            ->orderBy('occupation_id')
+            ->orderByDesc('reviewed_at')
+            ->orderByDesc('created_at')
+            ->get([
+                'occupation_id',
+                'reviewer_status',
+                'reviewed_at',
+                'last_substantive_update_at',
+                'next_review_due_at',
+                'created_at',
+            ])
+            ->each(function (TrustManifest $manifest) use (&$profiles, &$seenTrust, $slugByOccupationId): void {
+                $occupationId = (string) $manifest->occupation_id;
+                if (isset($seenTrust[$occupationId])) {
+                    return;
+                }
+
+                $slug = $slugByOccupationId[$occupationId] ?? null;
+                if ($slug === null || ! isset($profiles[$slug])) {
+                    return;
+                }
+
+                $seenTrust[$occupationId] = true;
+                $profiles[$slug]['reviewer_status'] = $manifest->reviewer_status;
+                $profiles[$slug]['reviewed_at'] = $manifest->reviewed_at;
+                $profiles[$slug]['last_substantive_update_at'] = $manifest->last_substantive_update_at;
+                $profiles[$slug]['next_review_due_at'] = $manifest->next_review_due_at;
+            });
+
+        $seenTruth = [];
+        OccupationTruthMetric::query()
+            ->whereIn('occupation_id', $occupationIds)
+            ->orderBy('occupation_id')
+            ->orderByDesc('reviewed_at')
+            ->orderByDesc('effective_at')
+            ->orderByDesc('updated_at')
+            ->get(['occupation_id', 'reviewed_at', 'effective_at', 'updated_at'])
+            ->each(function (OccupationTruthMetric $metric) use (&$profiles, &$seenTruth, $slugByOccupationId): void {
+                $occupationId = (string) $metric->occupation_id;
+                if (isset($seenTruth[$occupationId])) {
+                    return;
+                }
+
+                $slug = $slugByOccupationId[$occupationId] ?? null;
+                if ($slug === null || ! isset($profiles[$slug])) {
+                    return;
+                }
+
+                $seenTruth[$occupationId] = true;
+                $profiles[$slug]['truth_last_reviewed_at'] = $metric->reviewed_at;
+            });
+
+        return $profiles;
     }
 
     private function resolveFreshnessBasis(
@@ -120,5 +221,14 @@ final class CareerTrustFreshnessAuthorityService
         $normalized = trim($value);
 
         return $normalized === '' ? null : $normalized;
+    }
+
+    private function normalizeDateString(mixed $value): ?string
+    {
+        if ($value instanceof CarbonInterface) {
+            return $value->toISOString();
+        }
+
+        return $this->normalizeNullableString($value);
     }
 }
