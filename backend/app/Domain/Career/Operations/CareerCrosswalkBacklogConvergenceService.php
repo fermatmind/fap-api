@@ -47,7 +47,14 @@ final class CareerCrosswalkBacklogConvergenceService
 
     public function build(): CareerCrosswalkBacklogConvergenceSnapshot
     {
-        $ledger = $this->fullReleaseLedgerService->build()->toArray();
+        return $this->buildFromReleaseLedger($this->fullReleaseLedgerService->build()->toArray());
+    }
+
+    /**
+     * @param  array<string, mixed>  $ledger
+     */
+    public function buildFromReleaseLedger(array $ledger): CareerCrosswalkBacklogConvergenceSnapshot
+    {
         $trackedBySlug = $this->mapBySlug((array) ($ledger['members'] ?? []), 'canonical_slug');
 
         $patches = (array) (($this->patchAuthorityService->build(self::SCOPE)->toArray())['patches'] ?? []);

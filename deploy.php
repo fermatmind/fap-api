@@ -314,7 +314,7 @@ BASH);
 });
 
 task('career:warm-public-authority-cache', function () {
-    run('{{bin/php}} {{release_path}}/backend/artisan career:warm-public-authority-cache --no-interaction --ansi');
+    run('timeout 180 {{bin/php}} {{release_path}}/backend/artisan career:warm-public-authority-cache --no-interaction --ansi');
 });
 
 task('artisan:view:cache', function () {

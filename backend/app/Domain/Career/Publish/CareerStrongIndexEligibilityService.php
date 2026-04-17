@@ -50,7 +50,14 @@ final class CareerStrongIndexEligibilityService
 
     public function build(): CareerStrongIndexEligibilitySnapshot
     {
-        $ledger = $this->fullReleaseLedgerService->build()->toArray();
+        return $this->buildFromReleaseLedger($this->fullReleaseLedgerService->build()->toArray());
+    }
+
+    /**
+     * @param  array<string, mixed>  $ledger
+     */
+    public function buildFromReleaseLedger(array $ledger): CareerStrongIndexEligibilitySnapshot
+    {
         $firstWaveAuditBySlug = $this->safeFirstWaveAuditBySlug();
 
         $stableConfidenceThreshold = $this->thresholdAuthorityService->confidenceStableMin();
