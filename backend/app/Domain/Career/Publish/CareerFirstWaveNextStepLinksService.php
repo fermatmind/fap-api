@@ -14,6 +14,11 @@ final class CareerFirstWaveNextStepLinksService
 
     public const SCOPE = 'career_first_wave_10';
 
+    /**
+     * @var list<array<string, mixed>>|null
+     */
+    private ?array $discoverabilityRoutes = null;
+
     public function __construct(
         private readonly CareerFirstWaveDiscoverabilityManifestService $discoverabilityManifestService,
     ) {}
@@ -34,9 +39,7 @@ final class CareerFirstWaveNextStepLinksService
             return null;
         }
 
-        $manifest = $this->discoverabilityManifestService->build()->toArray();
-        $routes = collect((array) ($manifest['routes'] ?? []))
-            ->filter(static fn (mixed $row): bool => is_array($row));
+        $routes = collect($this->discoverabilityRoutes());
 
         $jobRoutes = $routes
             ->where('route_kind', 'career_job_detail')
@@ -121,5 +124,23 @@ final class CareerFirstWaveNextStepLinksService
             counts: $counts,
             nextStepLinks: $dedupedLinks,
         );
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    private function discoverabilityRoutes(): array
+    {
+        if ($this->discoverabilityRoutes !== null) {
+            return $this->discoverabilityRoutes;
+        }
+
+        $manifest = $this->discoverabilityManifestService->build()->toArray();
+        $this->discoverabilityRoutes = collect((array) ($manifest['routes'] ?? []))
+            ->filter(static fn (mixed $row): bool => is_array($row))
+            ->values()
+            ->all();
+
+        return $this->discoverabilityRoutes;
     }
 }

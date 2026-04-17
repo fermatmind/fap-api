@@ -2705,7 +2705,7 @@
     "PR-B87": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/pr-b87-career-launch-governance-runtime-cache-hardening",
       "commit_sha": "995935c6548987c92dd7142ee716c3accff7c5b1",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/932",
@@ -2757,6 +2757,60 @@
           },
           {
             "command": "php -l deploy.php",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "2026-04-17T01:51:54Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-B88": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "status": "pr_open",
+      "branch": "codex/pr-b88-career-first-wave-authority-runtime-hardening",
+      "commit_sha": "9c3269263d076dbddc07e47f53de65f99e2bca8f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/933",
+      "checks": {
+        "local": [
+          {
+            "command": "cd backend && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && vendor/bin/pint --test app/Domain/Career/Publish/CareerFirstWaveNextStepLinksService.php app/Domain/Career/Publish/CareerTrustFreshnessAuthorityService.php app/Domain/Career/Publish/CareerFirstWaveLaunchReadinessAuditService.php app/Domain/Career/Publish/CareerFirstWaveLaunchReadinessAuditV2Service.php app/Domain/Career/Publish/CareerStrongIndexEligibilityService.php app/Domain/Career/Publish/CareerLaunchGovernanceClosureService.php tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditV2ServiceTest.php tests/Unit/Services/Career/CareerLaunchGovernanceClosureServiceTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan fap:schema:verify",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan career:warm-public-authority-cache --json",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan test tests/Unit/Services/Career/CareerTrustFreshnessAuthorityServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditV2ServiceTest.php tests/Unit/Services/Career/CareerFirstWaveLaunchReadinessAuditServiceTest.php tests/Unit/Services/Career/CareerStrongIndexEligibilityServiceTest.php tests/Unit/Services/Career/CareerLaunchGovernanceClosureServiceTest.php tests/Feature/Console/CareerWarmPublicAuthorityCacheCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan test --filter 'CareerDatasetPublicApiTest|CareerRecommendationDetailApiTest|CareerDatasetStructuredDataPolicyTest|CareerDatasetSitemapDiscoverabilityTest'",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && bash scripts/export_openapi.sh --check",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && bash scripts/ci_verify_mbti.sh",
             "status": "passed"
           },
           {
