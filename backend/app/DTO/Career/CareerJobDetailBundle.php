@@ -13,6 +13,7 @@ final class CareerJobDetailBundle
      * @param  list<array<string, mixed>>  $aliasIndex
      * @param  array<string, mixed>  $ontology
      * @param  array<string, mixed>  $truthLayer
+     * @param  list<array<string, mixed>>  $contentSections
      * @param  array<string, mixed>  $trustManifest
      * @param  array<string, mixed>  $scoreBundle
      * @param  array<string, mixed>  $whiteBoxScores
@@ -33,6 +34,7 @@ final class CareerJobDetailBundle
         public readonly array $aliasIndex,
         public readonly array $ontology,
         public readonly array $truthLayer,
+        public readonly array $contentSections,
         public readonly array $trustManifest,
         public readonly array $scoreBundle,
         public readonly array $whiteBoxScores,
@@ -61,6 +63,7 @@ final class CareerJobDetailBundle
             'alias_index' => $this->aliasIndex,
             'ontology' => $this->ontology,
             'truth_layer' => $this->truthLayer,
+            'content_sections' => $this->contentSections,
             'trust_manifest' => $this->trustManifest,
             'score_bundle' => $this->scoreBundle,
             'white_box_scores' => $this->whiteBoxScores,
