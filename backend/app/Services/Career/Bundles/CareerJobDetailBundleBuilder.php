@@ -182,6 +182,7 @@ final class CareerJobDetailBundleBuilder
                 'truth_last_reviewed_at' => optional($truthMetric?->reviewed_at)->toISOString(),
             ],
             contentSections: $docxJob instanceof CareerJob ? $this->contentSectionsFromCareerJob($docxJob) : [],
+            contentBodyMd: $docxJob instanceof CareerJob ? $this->contentBodyMdFromCareerJob($docxJob) : null,
             trustManifest: [
                 'content_version' => $trustManifest?->content_version,
                 'data_version' => $trustManifest?->data_version,
@@ -324,6 +325,7 @@ final class CareerJobDetailBundleBuilder
                 'truth_last_reviewed_at' => optional($job->updated_at)->toISOString(),
             ],
             contentSections: $this->contentSectionsFromCareerJob($job),
+            contentBodyMd: $this->contentBodyMdFromCareerJob($job),
             trustManifest: [
                 'manifest_version' => 'trust_manifest.v1',
                 'entity_id' => $subjectSlug,
@@ -486,6 +488,13 @@ final class CareerJobDetailBundleBuilder
                 'sort_order' => $section->sort_order,
             ])
             ->all();
+    }
+
+    private function contentBodyMdFromCareerJob(CareerJob $job): ?string
+    {
+        $body = trim((string) $job->body_md);
+
+        return $body === '' ? null : $body;
     }
 
     /**
