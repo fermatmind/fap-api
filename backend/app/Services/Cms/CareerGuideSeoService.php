@@ -274,6 +274,17 @@ final class CareerGuideSeoService
         return is_string($normalized) ? $normalized : trim($value);
     }
 
+    private function normalizeNullableString(mixed $value): ?string
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        $normalized = $this->normalizeWhitespace((string) $value);
+
+        return $normalized !== '' ? $normalized : null;
+    }
+
     private function fallbackText(?string ...$candidates): ?string
     {
         foreach ($candidates as $candidate) {
