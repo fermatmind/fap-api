@@ -27,6 +27,7 @@ final class CareerJobDetailStructuredDataPublicProjectionTest extends TestCase
                 'entry_education' => 'Bachelor\'s degree',
                 'work_experience' => '5 years or more',
             ],
+            contentSections: [],
             trustManifest: [],
             scoreBundle: [],
             whiteBoxScores: [],

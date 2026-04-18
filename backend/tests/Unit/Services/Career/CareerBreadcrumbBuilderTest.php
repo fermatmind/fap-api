@@ -24,6 +24,7 @@ final class CareerBreadcrumbBuilderTest extends TestCase
             aliasIndex: [],
             ontology: [],
             truthLayer: [],
+            contentSections: [],
             trustManifest: [],
             scoreBundle: [],
             whiteBoxScores: [],
