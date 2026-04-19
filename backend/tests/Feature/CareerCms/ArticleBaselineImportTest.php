@@ -21,8 +21,8 @@ final class ArticleBaselineImportTest extends TestCase
             '--source-dir' => '../content_baselines/articles',
         ])
             ->expectsOutputToContain('files_found=2')
-            ->expectsOutputToContain('articles_found=6')
-            ->expectsOutputToContain('will_create=6')
+            ->expectsOutputToContain('articles_found=26')
+            ->expectsOutputToContain('will_create=26')
             ->assertExitCode(0);
 
         $this->assertSame(0, Article::query()->withoutGlobalScopes()->count());
@@ -36,13 +36,13 @@ final class ArticleBaselineImportTest extends TestCase
             '--source-dir' => '../content_baselines/articles',
         ])
             ->expectsOutputToContain('files_found=2')
-            ->expectsOutputToContain('articles_found=6')
-            ->expectsOutputToContain('will_create=6')
+            ->expectsOutputToContain('articles_found=26')
+            ->expectsOutputToContain('will_create=26')
             ->assertExitCode(0);
 
-        $this->assertSame(6, Article::query()->withoutGlobalScopes()->count());
+        $this->assertSame(26, Article::query()->withoutGlobalScopes()->count());
         $this->assertSame(
-            6,
+            26,
             Article::query()
                 ->withoutGlobalScopes()
                 ->where('status', 'published')
@@ -71,10 +71,10 @@ final class ArticleBaselineImportTest extends TestCase
             '--status' => 'published',
             '--source-dir' => '../content_baselines/articles',
         ])
-            ->expectsOutputToContain('articles_found=6')
-            ->expectsOutputToContain('will_skip=6')
+            ->expectsOutputToContain('articles_found=26')
+            ->expectsOutputToContain('will_skip=26')
             ->assertExitCode(0);
 
-        $this->assertSame(6, Article::query()->withoutGlobalScopes()->count());
+        $this->assertSame(26, Article::query()->withoutGlobalScopes()->count());
     }
 }
