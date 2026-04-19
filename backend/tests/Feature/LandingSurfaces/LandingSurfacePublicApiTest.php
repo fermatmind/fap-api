@@ -36,6 +36,11 @@ final class LandingSurfacePublicApiTest extends TestCase
 
         $this->assertSame('published', (string) $home->status);
         $this->assertSame('FermatMind / 费马测试', (string) data_get($home->payload_json, 'hero.brand'));
+        $this->assertSame('看清自己，走好每一步', (string) data_get($home->payload_json, 'hero.title'));
+        $this->assertSame(
+            '费马测试把自我认知、职业探索与能力成长，做成可测量、可训练、可复盘的成长系统。',
+            (string) data_get($home->payload_json, 'hero.subhead')
+        );
         $this->assertCount(6, data_get($home->payload_json, 'quickStart.items'));
         $this->assertContains('霍兰德职业兴趣测试', array_column(data_get($home->payload_json, 'quickStart.items'), 'title'));
         $this->assertContains('抑郁焦虑综合症测试', array_column(data_get($home->payload_json, 'quickStart.items'), 'title'));
@@ -106,6 +111,11 @@ final class LandingSurfacePublicApiTest extends TestCase
             ->assertJsonPath('surface.surface_key', 'home')
             ->assertJsonPath('surface.locale', 'zh-CN')
             ->assertJsonPath('surface.payload_json.hero.brand', 'FermatMind / 费马测试')
+            ->assertJsonPath('surface.payload_json.hero.title', '看清自己，走好每一步')
+            ->assertJsonPath(
+                'surface.payload_json.hero.subhead',
+                '费马测试把自我认知、职业探索与能力成长，做成可测量、可训练、可复盘的成长系统。'
+            )
             ->assertJsonCount(6, 'surface.payload_json.quickStart.items')
             ->assertJsonPath('surface.payload_json.quickStart.items.3.title', '霍兰德职业兴趣测试')
             ->assertJsonPath('surface.payload_json.quickStart.items.3.href', '/career/tests/riasec')

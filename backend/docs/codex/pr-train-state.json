@@ -2775,9 +2775,9 @@
     "PR-B88": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/pr-b88-career-first-wave-authority-runtime-hardening",
-      "commit_sha": "9c3269263d076dbddc07e47f53de65f99e2bca8f",
+      "commit_sha": "7c93d38190411cbef7a020322d050b4078830d7e",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/933",
       "checks": {
         "local": [
@@ -2811,6 +2811,44 @@
           },
           {
             "command": "cd backend && bash scripts/ci_verify_mbti.sh",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "2026-04-17T02:06:59Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-CMS1": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "status": "local_verified",
+      "branch": "codex/pr-cms1-home-surface-deploy-import",
+      "commit_sha": "4bd14ef927b7fb9f82b26059c05910b64f0a1569",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "cd backend && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && vendor/bin/pint --test tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan test tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php -l deploy.php",
             "status": "passed"
           },
           {
