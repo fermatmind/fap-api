@@ -43,6 +43,11 @@ return [
         'forbid_missing_overrides' => (bool) env('FAP_FORBID_MISSING_OVERRIDES', false),
     ],
 
+    'media' => [
+        'asset_origin' => env('FAP_MEDIA_ASSET_ORIGIN', 'https://assets.fermatmind.com'),
+        'public_storage_prefix' => env('FAP_MEDIA_PUBLIC_STORAGE_PREFIX', '/storage'),
+    ],
+
     'scales_registry' => [
         'use_v2' => (bool) env('FAP_SCALES_REGISTRY_USE_V2', true),
     ],

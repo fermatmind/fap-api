@@ -1,11 +1,45 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-19T22:59:16+08:00",
+  "updated_at": "2026-04-20T00:07:05+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "PR-V4-P5B": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "in_progress",
+      "branch": "codex/pr-v4-p5b-media-asset-origin",
+      "commit_sha": null,
+      "pr_url": null,
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test config/fap.php app/Support/PublicMediaUrlGuard.php app/Services/Cms/MediaVariantGenerator.php app/Http/Controllers/API/V0_5/Cms/MediaLibraryController.php app/Console/Commands/MediaAssetsImportLocalBaseline.php tests/Feature/MediaLibrary/MediaLibraryPublicApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/MediaLibrary/MediaLibraryPublicApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": null,
+      "resume_policy": "manual_only",
+      "merged_at": null,
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
     "PR-V4-A1": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
