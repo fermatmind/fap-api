@@ -10,6 +10,7 @@ final class CareerPublicDatasetContract
      * @param  array<string, mixed>  $publication
      * @param  array<string, mixed>  $collectionSummary
      * @param  array<string, mixed>  $filters
+     * @param  list<array<string, mixed>>  $members
      */
     public function __construct(
         public readonly string $datasetKey,
@@ -20,6 +21,7 @@ final class CareerPublicDatasetContract
         public readonly array $collectionSummary,
         public readonly array $filters,
         public readonly string $methodUrl,
+        public readonly array $members = [],
     ) {}
 
     /**
@@ -38,6 +40,7 @@ final class CareerPublicDatasetContract
             'collection_summary' => $this->collectionSummary,
             'filters' => $this->filters,
             'method_url' => $this->methodUrl,
+            'members' => $this->members,
         ];
     }
 }

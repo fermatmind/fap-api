@@ -17,6 +17,12 @@ final class CareerSearchBundleBuilder
 {
     private const SAFE_CROSSWALK_MODES = ['exact', 'trust_inheritance'];
 
+    private const DIRECTORY_DRAFT_CROSSWALK_MODE = 'directory_draft';
+
+    private const DIRECTORY_DRAFT_CONTENT_VERSION = 'occupation_directory_draft';
+
+    private const DIRECTORY_DRAFT_DATA_VERSION = 'china_us_occupation_directories_2026';
+
     /**
      * @var array<string, int>
      */
@@ -104,7 +110,7 @@ final class CareerSearchBundleBuilder
             ->orderByDesc('created_at')
             ->get();
 
-        $results = $snapshots
+        $rankedRows = $snapshots
             ->groupBy('occupation_id')
             ->map(function (Collection $group) use ($normalizedQuery, $rawQuery, $normalizedLocale, $mode): ?array {
                 /** @var RecommendationSnapshot|null $snapshot */
@@ -136,14 +142,33 @@ final class CareerSearchBundleBuilder
 
                 return [
                     'priority' => self::MATCH_PRIORITY[$match['kind']] ?? 999,
+                    'source_priority' => 0,
                     'sort_title' => strtolower((string) ($occupation->canonical_title_en ?? '')),
                     'sort_slug' => strtolower((string) ($occupation->canonical_slug ?? '')),
                     'bundle' => $this->buildItem($snapshot, $occupation, $match['kind'], $match['text']),
                 ];
             })
             ->filter()
+            ->values();
+
+        $safeSlugs = $rankedRows
+            ->map(static fn (array $row): string => (string) ($row['bundle']->identity['canonical_slug'] ?? ''))
+            ->filter()
+            ->all();
+
+        $directoryDraftRows = $this->buildDirectoryDraftSearchRows(
+            $normalizedQuery,
+            $rawQuery,
+            $normalizedLocale,
+            $mode,
+            $safeSlugs,
+        );
+
+        $results = $rankedRows
+            ->concat($directoryDraftRows)
             ->sortBy([
                 ['priority', 'asc'],
+                ['source_priority', 'asc'],
                 ['sort_title', 'asc'],
                 ['sort_slug', 'asc'],
             ])
@@ -153,6 +178,74 @@ final class CareerSearchBundleBuilder
             ->all();
 
         return $results;
+    }
+
+    /**
+     * @param  list<string>  $excludedSlugs
+     * @return Collection<int, array{priority:int,source_priority:int,sort_title:string,sort_slug:string,bundle:CareerSearchResultBundle}>
+     */
+    private function buildDirectoryDraftSearchRows(
+        string $normalizedQuery,
+        string $rawQuery,
+        ?string $normalizedLocale,
+        string $mode,
+        array $excludedSlugs,
+    ): Collection {
+        $excluded = array_flip(array_filter($excludedSlugs));
+        $prefixQuery = $normalizedQuery.'%';
+        $rawPrefixQuery = $rawQuery.'%';
+
+        return Occupation::query()
+            ->with([
+                'aliases',
+                'crosswalks' => fn ($query) => $query->orderByDesc('created_at'),
+            ])
+            ->where('crosswalk_mode', self::DIRECTORY_DRAFT_CROSSWALK_MODE)
+            ->where(function (Builder $query) use ($mode, $normalizedQuery, $prefixQuery, $rawQuery, $rawPrefixQuery, $normalizedLocale): void {
+                $query->where(function (Builder $matchQuery) use ($mode, $normalizedQuery, $prefixQuery, $rawQuery, $rawPrefixQuery): void {
+                    $matchQuery->where('canonical_slug', $normalizedQuery)
+                        ->orWhereRaw('LOWER(canonical_title_en) = ?', [$normalizedQuery])
+                        ->orWhere('canonical_title_zh', $rawQuery);
+
+                    if ($mode !== 'exact') {
+                        $matchQuery->orWhere('canonical_slug', 'like', $prefixQuery)
+                            ->orWhereRaw('LOWER(canonical_title_en) LIKE ?', [$prefixQuery])
+                            ->orWhere('canonical_title_zh', 'like', $rawPrefixQuery);
+                    }
+                })->orWhereHas('aliases', function (Builder $aliasQuery) use ($mode, $normalizedQuery, $prefixQuery, $normalizedLocale): void {
+                    if ($normalizedLocale !== null) {
+                        $aliasQuery->where('lang', 'like', $normalizedLocale.'%');
+                    }
+
+                    $aliasQuery->where(function (Builder $matchQuery) use ($mode, $normalizedQuery, $prefixQuery): void {
+                        $matchQuery->where('normalized', $normalizedQuery);
+
+                        if ($mode !== 'exact') {
+                            $matchQuery->orWhere('normalized', 'like', $prefixQuery);
+                        }
+                    });
+                });
+            })
+            ->orderBy('canonical_title_en')
+            ->orderBy('canonical_slug')
+            ->get()
+            ->filter(fn (Occupation $occupation): bool => ! isset($excluded[(string) $occupation->canonical_slug]))
+            ->map(function (Occupation $occupation) use ($normalizedQuery, $rawQuery, $normalizedLocale, $mode): ?array {
+                $match = $this->resolveMatch($occupation, $normalizedQuery, $rawQuery, $normalizedLocale, $mode);
+                if ($match === null) {
+                    return null;
+                }
+
+                return [
+                    'priority' => self::MATCH_PRIORITY[$match['kind']] ?? 999,
+                    'source_priority' => 1,
+                    'sort_title' => strtolower((string) ($occupation->canonical_title_en ?? '')),
+                    'sort_slug' => strtolower((string) ($occupation->canonical_slug ?? '')),
+                    'bundle' => $this->buildDirectoryDraftItem($occupation, $match['kind'], $match['text']),
+                ];
+            })
+            ->filter()
+            ->values();
     }
 
     /**
@@ -259,6 +352,49 @@ final class CareerSearchBundleBuilder
         );
     }
 
+    private function buildDirectoryDraftItem(Occupation $occupation, string $matchKind, string $matchedText): CareerSearchResultBundle
+    {
+        $importRunId = $occupation->crosswalks
+            ->map(static fn ($crosswalk): mixed => $crosswalk->import_run_id)
+            ->filter()
+            ->first();
+
+        return new CareerSearchResultBundle(
+            matchKind: $matchKind,
+            matchedText: $matchedText,
+            identity: [
+                'occupation_uuid' => $occupation->id,
+                'canonical_slug' => $occupation->canonical_slug,
+            ],
+            titles: [
+                'canonical_en' => $occupation->canonical_title_en,
+                'canonical_zh' => $occupation->canonical_title_zh,
+                'search_h1_zh' => $occupation->search_h1_zh,
+            ],
+            seoContract: $this->buildDirectoryDraftSeoContract($occupation),
+            trustSummary: [
+                'status' => 'unavailable',
+                'reviewer_status' => 'directory_draft_pending_detail',
+                'reviewed_at' => null,
+                'content_version' => self::DIRECTORY_DRAFT_CONTENT_VERSION,
+                'data_version' => self::DIRECTORY_DRAFT_DATA_VERSION,
+                'logic_version' => 'career.protocol.search.directory_draft.v1',
+                'cross_market_notice' => null,
+            ],
+            provenanceMeta: [
+                'compiler_version' => null,
+                'compiled_at' => null,
+                'trust_manifest_id' => null,
+                'index_state_id' => null,
+                'compile_run_id' => null,
+                'import_run_id' => $importRunId,
+                'content_version' => self::DIRECTORY_DRAFT_CONTENT_VERSION,
+                'data_version' => self::DIRECTORY_DRAFT_DATA_VERSION,
+                'logic_version' => 'career.protocol.search.directory_draft.v1',
+            ],
+        );
+    }
+
     /**
      * @return array<string, mixed>
      */
@@ -287,6 +423,40 @@ final class CareerSearchBundleBuilder
             'index_state' => $publicIndexState,
             'index_eligible' => $indexEligible,
             'reason_codes' => is_array($indexState?->reason_codes) ? $indexState->reason_codes : [],
+            'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,
+            'surface_type' => $surface['surface_type'] ?? null,
+            'robots_policy' => $surface['robots_policy'] ?? $robotsPolicy,
+            'metadata_fingerprint' => $surface['metadata_fingerprint'] ?? null,
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function buildDirectoryDraftSeoContract(Occupation $occupation): array
+    {
+        $canonicalPath = '/career/jobs';
+        $indexEligible = false;
+        $publicIndexState = IndexStateValue::NOINDEX;
+        $robotsPolicy = 'noindex,follow';
+        $reasonCodes = ['directory_draft_detail_pending', 'detail_page_unavailable'];
+        $surface = $this->seoSurfaceContractService->build([
+            'metadata_scope' => 'career_protocol_bundle',
+            'surface_type' => 'career_search_result_bundle',
+            'canonical_url' => $canonicalPath,
+            'robots_policy' => $robotsPolicy,
+            'title' => $occupation->canonical_title_en,
+            'description' => $occupation->canonical_title_en,
+            'indexability_state' => $publicIndexState,
+            'sitemap_state' => 'excluded',
+        ]);
+
+        return [
+            'canonical_path' => $canonicalPath,
+            'canonical_target' => null,
+            'index_state' => $publicIndexState,
+            'index_eligible' => $indexEligible,
+            'reason_codes' => $reasonCodes,
             'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,
             'surface_type' => $surface['surface_type'] ?? null,
             'robots_policy' => $surface['robots_policy'] ?? $robotsPolicy,

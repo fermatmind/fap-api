@@ -18,7 +18,7 @@ final class CareerFullDatasetAuthorityBuilder
 {
     public const AUTHORITY_KIND = 'career_full_dataset_authority';
 
-    public const AUTHORITY_VERSION = 'career.dataset_authority.full_342.v1';
+    public const AUTHORITY_VERSION = 'career.dataset_authority.full_342_plus_directory_drafts.v1';
 
     public const DATASET_KEY = 'career_all_342_occupations_dataset';
 
@@ -39,7 +39,10 @@ final class CareerFullDatasetAuthorityBuilder
     private const PUBLIC_INCLUDED_RELEASE_COHORTS = [
         'public_detail_indexable' => true,
         'public_detail_conservative' => true,
+        'directory_draft_pending_detail' => true,
     ];
+
+    private const DIRECTORY_DRAFT_CROSSWALK_MODE = 'directory_draft';
 
     public function __construct(
         private readonly CareerFullReleaseLedgerService $fullReleaseLedgerService,
@@ -67,6 +70,7 @@ final class CareerFullDatasetAuthorityBuilder
             $ledgerMembers,
         ));
         $publishedDocxJobSlugs = $this->publishedDocxCareerJobSlugs();
+        $ledgerSlugs = [];
 
         $releaseCohortCounts = [];
         $strongDecisionCounts = [];
@@ -85,6 +89,7 @@ final class CareerFullDatasetAuthorityBuilder
             if ($slug === '') {
                 continue;
             }
+            $ledgerSlugs[$slug] = true;
 
             $releaseCohort = $this->normalizeNullableString($ledgerMember['release_cohort'] ?? null);
             $publicIndexState = $this->normalizeNullableString($ledgerMember['public_index_state'] ?? null);
@@ -151,6 +156,7 @@ final class CareerFullDatasetAuthorityBuilder
                 memberKind: 'career_tracked_occupation',
                 canonicalSlug: $slug,
                 canonicalTitleEn: $this->normalizeNullableString($ledgerMember['canonical_title_en'] ?? null),
+                canonicalTitleZh: $this->loadOccupationTitleZhBySlug($slug),
                 familySlug: $familySlug,
                 publishTrack: $publishTrack,
                 batchOrigin: $this->normalizeNullableString($ledgerMember['batch_origin'] ?? null),
@@ -169,6 +175,23 @@ final class CareerFullDatasetAuthorityBuilder
             );
         }
 
+        foreach ($this->loadDirectoryDraftMembers(array_keys($ledgerSlugs)) as $directoryDraftMember) {
+            $releaseCohort = 'directory_draft_pending_detail';
+            $publicIndexState = 'noindex';
+            $strongIndexDecision = 'directory_draft_detail_pending';
+            $familySlug = $directoryDraftMember->familySlug ?? '__unknown__';
+            $publishTrack = $directoryDraftMember->publishTrack ?? 'directory_draft';
+
+            $includedCount++;
+            $releaseCohortCounts[$releaseCohort] = (int) ($releaseCohortCounts[$releaseCohort] ?? 0) + 1;
+            $includedReleaseCohortCounts[$releaseCohort] = (int) ($includedReleaseCohortCounts[$releaseCohort] ?? 0) + 1;
+            $publicIndexStateCounts[$publicIndexState] = (int) ($publicIndexStateCounts[$publicIndexState] ?? 0) + 1;
+            $strongDecisionCounts[$strongIndexDecision] = (int) ($strongDecisionCounts[$strongIndexDecision] ?? 0) + 1;
+            $familyDistribution[$familySlug] = (int) ($familyDistribution[$familySlug] ?? 0) + 1;
+            $publishTrackDistribution[$publishTrack] = (int) ($publishTrackDistribution[$publishTrack] ?? 0) + 1;
+            $members[] = $directoryDraftMember;
+        }
+
         usort($members, static fn (CareerFullDatasetMember $left, CareerFullDatasetMember $right): int => strcmp(
             $left->canonicalSlug,
             $right->canonicalSlug,
@@ -185,6 +208,10 @@ final class CareerFullDatasetAuthorityBuilder
         $memberCount = count($members);
         $expectedTotal = (int) ($trackingCounts['expected_total_occupations'] ?? $memberCount);
         $trackedTotal = (int) ($trackingCounts['tracked_total_occupations'] ?? $memberCount);
+        if ($memberCount > $trackedTotal) {
+            $expectedTotal = $memberCount;
+            $trackedTotal = $memberCount;
+        }
 
         return new CareerFullDatasetAuthority(
             authorityKind: self::AUTHORITY_KIND,
@@ -224,6 +251,56 @@ final class CareerFullDatasetAuthorityBuilder
             publication: $this->publicationMetadataService->build()->toArray(),
             members: $members,
         );
+    }
+
+    /**
+     * @param  list<string>  $excludedSlugs
+     * @return list<CareerFullDatasetMember>
+     */
+    private function loadDirectoryDraftMembers(array $excludedSlugs): array
+    {
+        $excluded = array_flip(array_filter($excludedSlugs));
+
+        return Occupation::query()
+            ->with('family:id,canonical_slug')
+            ->where('crosswalk_mode', self::DIRECTORY_DRAFT_CROSSWALK_MODE)
+            ->orderBy('canonical_slug')
+            ->get()
+            ->filter(fn (Occupation $occupation): bool => ! isset($excluded[(string) $occupation->canonical_slug]))
+            ->map(function (Occupation $occupation): CareerFullDatasetMember {
+                $familySlug = $occupation->family?->canonical_slug;
+
+                return new CareerFullDatasetMember(
+                    memberKind: 'career_tracked_occupation',
+                    canonicalSlug: (string) $occupation->canonical_slug,
+                    canonicalTitleEn: $this->normalizeNullableString($occupation->canonical_title_en),
+                    canonicalTitleZh: $this->normalizeNullableString($occupation->canonical_title_zh),
+                    familySlug: $this->normalizeNullableString($familySlug),
+                    publishTrack: 'directory_draft',
+                    batchOrigin: 'china_us_occupation_directories_2026',
+                    releaseCohort: 'directory_draft_pending_detail',
+                    publicIndexState: 'noindex',
+                    strongIndexDecision: 'directory_draft_detail_pending',
+                    includedInPublicDataset: true,
+                    exclusionReasons: ['detail_page_unavailable'],
+                    publicFacets: [
+                        'release_cohort' => 'directory_draft_pending_detail',
+                        'public_index_state' => 'noindex',
+                        'strong_index_decision' => 'directory_draft_detail_pending',
+                        'family_slug' => $this->normalizeNullableString($familySlug),
+                        'publish_track' => 'directory_draft',
+                    ],
+                );
+            })
+            ->values()
+            ->all();
+    }
+
+    private function loadOccupationTitleZhBySlug(string $slug): ?string
+    {
+        return Occupation::query()
+            ->where('canonical_slug', $slug)
+            ->value('canonical_title_zh');
     }
 
     /**

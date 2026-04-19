@@ -19,6 +19,8 @@ use Illuminate\Support\Arr;
 
 final class CareerJobDetailBundleBuilder
 {
+    private const DIRECTORY_DRAFT_CROSSWALK_MODE = 'directory_draft';
+
     public function __construct(
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
         private readonly CareerWhiteBoxScorePayloadBuilder $whiteBoxScorePayloadBuilder,
@@ -46,6 +48,10 @@ final class CareerJobDetailBundleBuilder
 
         if (! $occupation instanceof Occupation) {
             return $this->buildFromPublishedDocxCareerJob($normalizedSlug);
+        }
+
+        if ($occupation->crosswalk_mode === self::DIRECTORY_DRAFT_CROSSWALK_MODE) {
+            return null;
         }
 
         $snapshot = RecommendationSnapshot::query()

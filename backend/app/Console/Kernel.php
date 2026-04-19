@@ -8,6 +8,7 @@ use App\Console\Commands\ArchiveColdData;
 use App\Console\Commands\Big5AttemptPurge;
 use App\Console\Commands\Big5PsychometricsReport;
 use App\Console\Commands\Big5TelemetrySummary;
+use App\Console\Commands\CareerApplyOccupationDirectoryReviewDecisions;
 use App\Console\Commands\CareerCompileAuthorityWave;
 use App\Console\Commands\CareerCompileRecommendationSubjects;
 use App\Console\Commands\CareerCrosswalkOps;
@@ -17,9 +18,14 @@ use App\Console\Commands\CareerExportFirstWaveRolloutBundleArtifacts;
 use App\Console\Commands\CareerExportFirstWaveRolloutWavePlanArtifact;
 use App\Console\Commands\CareerExportFullReleaseLedger;
 use App\Console\Commands\CareerExportLaunchGovernanceClosure;
+use App\Console\Commands\CareerExportOccupationDirectoryReviewQueues;
 use App\Console\Commands\CareerExportStrongIndexEligibility;
 use App\Console\Commands\CareerImportAuthorityWave;
+use App\Console\Commands\CareerImportOccupationDirectoryDrafts;
+use App\Console\Commands\CareerImportOccupationDirectoryDryRun;
 use App\Console\Commands\CareerRunAssetBatch;
+use App\Console\Commands\CareerSyncOccupationDirectoryDisplay;
+use App\Console\Commands\CareerValidateOccupationDirectoryReviewQueues;
 use App\Console\Commands\CareerWarmPublicAuthorityCache;
 use App\Console\Commands\CiScaleImpact;
 use App\Console\Commands\CommerceCompensatePendingOrders;
@@ -139,15 +145,21 @@ class Kernel extends ConsoleKernel
         CommerceCompensatePendingOrders::class,
         CommerceRepairPaidOrders::class,
         CommerceRepairPostCommitFailed::class,
+        CareerApplyOccupationDirectoryReviewDecisions::class,
         CareerImportAuthorityWave::class,
+        CareerImportOccupationDirectoryDrafts::class,
+        CareerImportOccupationDirectoryDryRun::class,
         CareerCompileAuthorityWave::class,
         CareerCompileRecommendationSubjects::class,
         CareerCrosswalkOps::class,
         CareerExportCrosswalkBacklogConvergence::class,
         CareerExportFullReleaseLedger::class,
         CareerExportLaunchGovernanceClosure::class,
+        CareerExportOccupationDirectoryReviewQueues::class,
         CareerExportStrongIndexEligibility::class,
         CareerRunAssetBatch::class,
+        CareerSyncOccupationDirectoryDisplay::class,
+        CareerValidateOccupationDirectoryReviewQueues::class,
         CareerWarmPublicAuthorityCache::class,
         CareerExportFirstWaveRolloutBundleArtifacts::class,
         CareerExportFirstWaveReleaseArtifacts::class,
