@@ -52,6 +52,18 @@ final class LandingSurfacePublicApiTest extends TestCase
             '/tests/clinical-depression-anxiety-assessment-professional-edition',
             array_column(data_get($home->payload_json, 'quickStart.items'), 'href')
         );
+        $this->assertSame(
+            ['免费测试、免费结果', '我们高度重视您的隐私。', '百万用户进行了多次测试'],
+            array_column(data_get($home->payload_json, 'trust.items'), 'title')
+        );
+        $this->assertSame(
+            [
+                '核心测评围绕自我认知、职业判断与能力成长设计，并提供清晰结果。',
+                '无需先注册账号，你可以先完成测试，再决定是否保存或继续深入。',
+                '从人格、能力到情绪状态，多个入口帮助你持续复盘自己的变化。',
+            ],
+            array_column(data_get($home->payload_json, 'trust.items'), 'summary')
+        );
 
         $quickStartBlock = PageBlock::query()
             ->where('landing_surface_id', $home->id)
@@ -120,7 +132,22 @@ final class LandingSurfacePublicApiTest extends TestCase
             ->assertJsonPath('surface.payload_json.quickStart.items.3.title', '霍兰德职业兴趣测试')
             ->assertJsonPath('surface.payload_json.quickStart.items.3.href', '/career/tests/riasec')
             ->assertJsonPath('surface.payload_json.quickStart.items.5.title', '抑郁焦虑综合症测试')
-            ->assertJsonPath('surface.payload_json.quickStart.items.5.href', '/tests/clinical-depression-anxiety-assessment-professional-edition');
+            ->assertJsonPath('surface.payload_json.quickStart.items.5.href', '/tests/clinical-depression-anxiety-assessment-professional-edition')
+            ->assertJsonPath('surface.payload_json.trust.items.0.title', '免费测试、免费结果')
+            ->assertJsonPath(
+                'surface.payload_json.trust.items.0.summary',
+                '核心测评围绕自我认知、职业判断与能力成长设计，并提供清晰结果。'
+            )
+            ->assertJsonPath('surface.payload_json.trust.items.1.title', '我们高度重视您的隐私。')
+            ->assertJsonPath(
+                'surface.payload_json.trust.items.1.summary',
+                '无需先注册账号，你可以先完成测试，再决定是否保存或继续深入。'
+            )
+            ->assertJsonPath('surface.payload_json.trust.items.2.title', '百万用户进行了多次测试')
+            ->assertJsonPath(
+                'surface.payload_json.trust.items.2.summary',
+                '从人格、能力到情绪状态，多个入口帮助你持续复盘自己的变化。'
+            );
 
         $this->putJson('/api/v0.5/internal/landing-surfaces/home', [
             'locale' => 'zh-CN',
