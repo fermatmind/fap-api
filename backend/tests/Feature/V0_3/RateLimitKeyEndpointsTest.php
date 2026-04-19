@@ -31,6 +31,14 @@ final class RateLimitKeyEndpointsTest extends TestCase
 
         $paymentWebhook = $this->findRoute('POST', 'api/v0.3/webhooks/payment/{provider}');
         $this->assertContains('throttle:api_webhook', $paymentWebhook->gatherMiddleware());
+
+        $attemptStart = $this->findRoute('POST', 'api/v0.3/attempts/start');
+        $this->assertContains('throttle:api_attempt_start', $attemptStart->gatherMiddleware());
+        $this->assertNotContains('throttle:api_attempt_submit', $attemptStart->gatherMiddleware());
+
+        $attemptSubmit = $this->findRoute('POST', 'api/v0.3/attempts/submit');
+        $this->assertContains('throttle:api_attempt_submit', $attemptSubmit->gatherMiddleware());
+        $this->assertNotContains('throttle:api_attempt_start', $attemptSubmit->gatherMiddleware());
     }
 
     public function test_auth_guest_rate_limit_returns_429_error_contract(): void
@@ -162,6 +170,8 @@ final class RateLimitKeyEndpointsTest extends TestCase
             'fap.rate_limits.api_auth_per_minute' => 30,
             'fap.rate_limits.api_order_lookup_per_minute' => 20,
             'fap.rate_limits.api_track_per_minute' => 60,
+            'fap.rate_limits.api_attempt_start_per_minute' => 60,
+            'fap.rate_limits.api_attempt_submit_per_minute' => 20,
             'fap.rate_limits.api_webhook_per_minute' => 60,
         ], $overrides));
     }

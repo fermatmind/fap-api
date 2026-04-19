@@ -6,6 +6,34 @@ require_clean_worktree: true
 execution_mode: local_clone_preferred
 
 prs:
+  - id: PR-V4-A2
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-v4-a2-attempt-start-submit-buckets
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      Final V4 A2 attempts start/submit throttle bucket separation. Add a
+      dedicated api_attempt_start limiter and keep attempts/submit on
+      api_attempt_submit so start traffic no longer consumes submit quota,
+      without changing attempt write controller behavior or auth semantics.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "python3 -m json.tool docs/contracts/openapi.snapshot.json >/dev/null"
+      - "vendor/bin/pint --test routes/api.php config/fap.php app/Providers/AppServiceProvider.php tests/Feature/V0_3/RateLimitKeyEndpointsTest.php"
+      - "php artisan test tests/Feature/V0_3/RateLimitKeyEndpointsTest.php"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-V4-0B
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

@@ -443,7 +443,29 @@ class AppServiceProvider extends ServiceProvider
                 ->response($response('RATE_LIMIT_TRACK', 'Too many tracking requests. Please retry later.'));
         });
 
-        RateLimiter::for('api_attempt_submit', function (Request $request) use ($response, $shouldBypassRateLimits) {
+        $attemptRateLimitKey = function (Request $request): string {
+            $userId = (string) ($request->attributes->get('fm_user_id') ?? '');
+            if ($userId === '' && $request->user()) {
+                $userId = (string) $request->user()->getAuthIdentifier();
+            }
+
+            return $userId !== '' ? ('user:'.$userId) : ('ip:'.$request->ip());
+        };
+
+        RateLimiter::for('api_attempt_start', function (Request $request) use ($response, $shouldBypassRateLimits, $attemptRateLimitKey) {
+            if ($shouldBypassRateLimits()) {
+                return Limit::none();
+            }
+
+            $limit = (int) config('fap.rate_limits.api_attempt_start_per_minute', 60);
+            $limit = max(1, $limit);
+
+            return Limit::perMinute($limit)
+                ->by($attemptRateLimitKey($request))
+                ->response($response('RATE_LIMIT_ATTEMPT_START', 'Too many attempt start requests. Please retry later.'));
+        });
+
+        RateLimiter::for('api_attempt_submit', function (Request $request) use ($response, $shouldBypassRateLimits, $attemptRateLimitKey) {
             if ($shouldBypassRateLimits()) {
                 return Limit::none();
             }
@@ -451,15 +473,8 @@ class AppServiceProvider extends ServiceProvider
             $limit = (int) config('fap.rate_limits.api_attempt_submit_per_minute', 20);
             $limit = max(1, $limit);
 
-            $userId = (string) ($request->attributes->get('fm_user_id') ?? '');
-            if ($userId === '' && $request->user()) {
-                $userId = (string) $request->user()->getAuthIdentifier();
-            }
-
-            $key = $userId !== '' ? ('user:'.$userId) : ('ip:'.$request->ip());
-
             return Limit::perMinute($limit)
-                ->by($key)
+                ->by($attemptRateLimitKey($request))
                 ->response($response('RATE_LIMIT_ATTEMPT_SUBMIT', 'Too many attempt submissions. Please retry later.'));
         });
 

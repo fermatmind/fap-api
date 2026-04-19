@@ -203,15 +203,14 @@ Route::prefix('v0.3')->middleware([
 
         // 2) Attempts lifecycle
         Route::middleware(ForcePublicAttemptRealm::class)->group(function () {
-            Route::middleware('throttle:api_attempt_submit')->group(function () {
-                Route::post('/attempts/start', [AttemptWriteController::class, 'start'])
-                    ->defaults('public_realm', true)
-                    ->name('api.v0_3.attempts.start');
-                Route::post('/attempts/submit', [AttemptWriteController::class, 'submit'])
-                    ->middleware(\App\Http\Middleware\FmTokenAuth::class)
-                    ->defaults('public_realm', true)
-                    ->name('api.v0_3.attempts.submit');
-            });
+            Route::post('/attempts/start', [AttemptWriteController::class, 'start'])
+                ->middleware('throttle:api_attempt_start')
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.start');
+            Route::post('/attempts/submit', [AttemptWriteController::class, 'submit'])
+                ->middleware(['throttle:api_attempt_submit', \App\Http\Middleware\FmTokenAuth::class])
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.submit');
             Route::put('/attempts/{attempt_id}/progress', [AttemptProgressController::class, 'upsert'])
                 ->middleware('uuid:attempt_id');
             Route::get('/attempts/{attempt_id}/progress', [AttemptProgressController::class, 'show'])

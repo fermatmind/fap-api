@@ -1,11 +1,49 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-19T22:10:10+08:00",
+  "updated_at": "2026-04-19T22:13:14+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "PR-V4-A2": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/pr-v4-a2-attempt-start-submit-buckets",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool docs/contracts/openapi.snapshot.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test routes/api.php config/fap.php app/Providers/AppServiceProvider.php tests/Feature/V0_3/RateLimitKeyEndpointsTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/V0_3/RateLimitKeyEndpointsTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
     "PR-V4-0B": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
