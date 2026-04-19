@@ -1645,3 +1645,31 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: PR-CMS1
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api
+    branch: codex/pr-cms1-home-surface-deploy-import
+    base: main
+    depends_on: ["PR-B88"]
+    mode: execute
+    scope: >
+      CMS landing surface deploy import.
+      Import published landing surface baselines during deploy so the backend CMS API remains
+      the homepage authority, and lock the zh-CN homepage hero copy to the current production
+      wording without reintroducing frontend fallback content.
+    checks:
+      - "cd backend && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "cd backend && vendor/bin/pint --test tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php"
+      - "cd backend && php artisan test tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php"
+      - "php -l deploy.php"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true

@@ -317,6 +317,10 @@ task('career:warm-public-authority-cache', function () {
     run('timeout 180 {{bin/php}} {{release_path}}/backend/artisan career:warm-public-authority-cache --no-interaction --ansi');
 });
 
+task('cms:import-landing-surface-baselines', function () {
+    run('{{bin/php}} {{release_path}}/backend/artisan landing-surfaces:import-local-baseline --upsert --status=published --source-dir={{release_path}}/content_baselines/landing_surfaces --no-interaction --ansi');
+});
+
 task('artisan:view:cache', function () {
     writeln('<comment>Skip artisan:view:cache (no views)</comment>');
 });
@@ -705,7 +709,8 @@ after('artisan:filament:assets', 'guard:ops-theme-asset');
 after('artisan:filament:assets', 'guard:filament-assets');
 after('artisan:config:cache', 'guard:sitemap-authority');
 after('artisan:migrate', 'guard:no-pending-migrations');
-after('guard:no-pending-migrations', 'career:warm-public-authority-cache');
+after('guard:no-pending-migrations', 'cms:import-landing-surface-baselines');
+after('cms:import-landing-surface-baselines', 'career:warm-public-authority-cache');
 after('career:warm-public-authority-cache', 'ensure:release-runtime-perms');
 
 after('deploy:symlink', 'reload:php-fpm');
