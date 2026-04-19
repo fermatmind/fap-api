@@ -6,8 +6,10 @@ namespace App\Services\Career\Bundles;
 
 use App\Domain\Career\IndexStateValue;
 use App\DTO\Career\CareerJobListItemBundle;
+use App\Models\CareerJob;
 use App\Models\Occupation;
 use App\Models\RecommendationSnapshot;
+use App\Models\Scopes\TenantScope;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Support\Collection;
 
@@ -81,6 +83,16 @@ final class CareerJobListBundleBuilder
             ->filter()
             ->values();
 
+        $compiledSlugs = $items
+            ->map(static fn (CareerJobListItemBundle $item): string => (string) ($item->identity['canonical_slug'] ?? ''))
+            ->filter()
+            ->all();
+
+        $docxItems = $this->buildPublishedDocxCareerJobItems($compiledSlugs);
+        if ($docxItems !== []) {
+            $items = $items->concat($docxItems)->values();
+        }
+
         /** @var Collection<int, CareerJobListItemBundle> $items */
         $items = $items->sortBy(static fn (CareerJobListItemBundle $item): array => [
             strtolower((string) ($item->titles['canonical_en'] ?? '')),
@@ -88,6 +100,34 @@ final class CareerJobListBundleBuilder
         ])->values();
 
         return $items->all();
+    }
+
+    /**
+     * @param  list<string>  $excludedSlugs
+     * @return list<CareerJobListItemBundle>
+     */
+    private function buildPublishedDocxCareerJobItems(array $excludedSlugs): array
+    {
+        $excluded = array_flip(array_filter($excludedSlugs));
+
+        return CareerJob::query()
+            ->withoutGlobalScope(TenantScope::class)
+            ->with('seoMeta')
+            ->where('org_id', 0)
+            ->where('locale', 'zh-CN')
+            ->where('status', CareerJob::STATUS_PUBLISHED)
+            ->where('is_public', true)
+            ->where(static function ($query): void {
+                $query->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            })
+            ->orderBy('subtitle')
+            ->orderBy('slug')
+            ->get()
+            ->filter(fn (CareerJob $job): bool => ! isset($excluded[(string) $job->slug]) && $this->isDocxCareerJob($job))
+            ->values()
+            ->map(fn (CareerJob $job): CareerJobListItemBundle => $this->buildDocxCareerJobItem($job))
+            ->all();
     }
 
     private function compareSnapshots(RecommendationSnapshot $left, RecommendationSnapshot $right, bool $includeNonIndexable): int
@@ -177,6 +217,72 @@ final class CareerJobListBundleBuilder
         );
     }
 
+    private function buildDocxCareerJobItem(CareerJob $job): CareerJobListItemBundle
+    {
+        $salary = is_array($job->salary_json) ? $job->salary_json : [];
+        $outlook = is_array($job->outlook_json) ? $job->outlook_json : [];
+        $market = is_array($job->market_demand_json) ? $job->market_demand_json : [];
+
+        return new CareerJobListItemBundle(
+            identity: [
+                'occupation_uuid' => 'career_job:'.(string) $job->slug,
+                'canonical_slug' => (string) $job->slug,
+                'entity_level' => 'career_job_detail',
+                'family_uuid' => null,
+            ],
+            titles: [
+                'canonical_en' => $job->subtitle,
+                'canonical_zh' => (string) $job->title,
+                'search_h1_zh' => (string) $job->title,
+            ],
+            truthSummary: [
+                'truth_market' => 'US',
+                'median_pay_usd_annual' => $salary['annual_median_usd'] ?? null,
+                'outlook_pct_2024_2034' => $outlook['outlook_pct_2024_2034'] ?? null,
+                'outlook_description' => $outlook['outlook_raw'] ?? null,
+                'ai_exposure' => $market['ai_exposure_score_10'] ?? null,
+            ],
+            trustSummary: [
+                'reviewer_status' => 'docx_baseline_imported',
+                'reviewed_at' => optional($job->updated_at)->toISOString(),
+                'content_version' => 'docx_342_career_batch',
+                'data_version' => 'docx_342_career_batch',
+                'logic_version' => 'career.protocol.job_detail.docx_baseline.v1',
+                'editorial_patch_required' => false,
+                'editorial_patch_status' => null,
+                'allow_strong_claim' => true,
+                'allow_salary_comparison' => true,
+                'allow_ai_strategy' => true,
+                'reason_codes' => [],
+            ],
+            scoreSummary: [
+                'fit_score' => [
+                    'value' => null,
+                    'integrity_state' => 'docx_baseline_without_fit_score',
+                    'band' => null,
+                ],
+                'confidence_score' => [
+                    'value' => null,
+                    'integrity_state' => 'docx_baseline_without_confidence_score',
+                    'band' => null,
+                ],
+            ],
+            seoContract: $this->buildDocxSeoContract($job),
+            provenanceMeta: [
+                'content_version' => 'docx_342_career_batch',
+                'data_version' => 'docx_342_career_batch',
+                'logic_version' => 'career.protocol.job_detail.docx_baseline.v1',
+                'compiler_version' => null,
+                'compiled_at' => null,
+                'truth_metric_id' => null,
+                'trust_manifest_id' => null,
+                'index_state_id' => null,
+                'compile_run_id' => null,
+                'import_run_id' => null,
+            ],
+        );
+    }
+
     /**
      * @return array<string, mixed>
      */
@@ -215,6 +321,39 @@ final class CareerJobListBundleBuilder
     /**
      * @return array<string, mixed>
      */
+    private function buildDocxSeoContract(CareerJob $job): array
+    {
+        $canonicalPath = '/career/jobs/'.(string) $job->slug;
+        $indexEligible = (bool) $job->is_indexable;
+        $publicIndexState = $indexEligible ? IndexStateValue::INDEXABLE : IndexStateValue::NOINDEX;
+        $robotsPolicy = $indexEligible ? 'index,follow' : 'noindex,follow';
+        $surface = $this->seoSurfaceContractService->build([
+            'metadata_scope' => 'career_protocol_bundle',
+            'surface_type' => 'career_job_list_item_bundle',
+            'canonical_url' => $canonicalPath,
+            'robots_policy' => $robotsPolicy,
+            'title' => (string) ($job->subtitle ?? $job->title),
+            'description' => (string) ($job->excerpt ?? $job->title),
+            'indexability_state' => $publicIndexState,
+            'sitemap_state' => $indexEligible ? 'included' : 'excluded',
+        ]);
+
+        return [
+            'canonical_path' => $canonicalPath,
+            'canonical_target' => null,
+            'index_state' => $publicIndexState,
+            'index_eligible' => $indexEligible,
+            'reason_codes' => [],
+            'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,
+            'surface_type' => $surface['surface_type'] ?? null,
+            'robots_policy' => $surface['robots_policy'] ?? $robotsPolicy,
+            'metadata_fingerprint' => $surface['metadata_fingerprint'] ?? null,
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
     private function compactScore(mixed $value): array
     {
         if (! is_array($value)) {
@@ -230,5 +369,11 @@ final class CareerJobListBundleBuilder
             'integrity_state' => $value['integrity_state'] ?? null,
             'band' => $value['band'] ?? null,
         ];
+    }
+
+    private function isDocxCareerJob(CareerJob $job): bool
+    {
+        return is_string(data_get($job->seoMeta?->jsonld_overrides_json, 'source_docx'))
+            && data_get($job->market_demand_json, 'source_refs.0.url') !== null;
     }
 }

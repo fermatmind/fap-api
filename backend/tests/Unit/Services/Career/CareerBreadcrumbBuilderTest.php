@@ -25,6 +25,7 @@ final class CareerBreadcrumbBuilderTest extends TestCase
             ontology: [],
             truthLayer: [],
             contentSections: [],
+            contentBodyMd: null,
             trustManifest: [],
             scoreBundle: [],
             whiteBoxScores: [],

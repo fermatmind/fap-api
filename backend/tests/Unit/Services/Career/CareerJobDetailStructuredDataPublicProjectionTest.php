@@ -28,6 +28,7 @@ final class CareerJobDetailStructuredDataPublicProjectionTest extends TestCase
                 'work_experience' => '5 years or more',
             ],
             contentSections: [],
+            contentBodyMd: null,
             trustManifest: [],
             scoreBundle: [],
             whiteBoxScores: [],

@@ -10,7 +10,9 @@ use App\Domain\Career\Publish\CareerStrongIndexEligibilityService;
 use App\Domain\Career\Publish\FirstWaveManifestReader;
 use App\DTO\Career\CareerFullDatasetAuthority;
 use App\DTO\Career\CareerFullDatasetMember;
+use App\Models\CareerJob;
 use App\Models\Occupation;
+use App\Models\Scopes\TenantScope;
 
 final class CareerFullDatasetAuthorityBuilder
 {
@@ -64,6 +66,7 @@ final class CareerFullDatasetAuthorityBuilder
             static fn (array $member): string => (string) ($member['canonical_slug'] ?? ''),
             $ledgerMembers,
         ));
+        $publishedDocxJobSlugs = $this->publishedDocxCareerJobSlugs();
 
         $releaseCohortCounts = [];
         $strongDecisionCounts = [];
@@ -85,11 +88,18 @@ final class CareerFullDatasetAuthorityBuilder
 
             $releaseCohort = $this->normalizeNullableString($ledgerMember['release_cohort'] ?? null);
             $publicIndexState = $this->normalizeNullableString($ledgerMember['public_index_state'] ?? null);
+            $hasPublishedDocxJob = isset($publishedDocxJobSlugs[$slug]);
 
             $strongIndexRow = $strongIndexBySlug[$slug] ?? null;
             $strongIndexDecision = is_array($strongIndexRow)
                 ? $this->normalizeNullableString($strongIndexRow['strong_index_decision'] ?? null)
                 : null;
+
+            if ($hasPublishedDocxJob) {
+                $releaseCohort = 'public_detail_indexable';
+                $publicIndexState = 'indexable';
+                $strongIndexDecision = 'strong_index_ready';
+            }
 
             $batchContext = $batchContextBySlug[$slug] ?? null;
             $familySlug = is_array($batchContext)
@@ -214,6 +224,32 @@ final class CareerFullDatasetAuthorityBuilder
             publication: $this->publicationMetadataService->build()->toArray(),
             members: $members,
         );
+    }
+
+    /**
+     * @return array<string, true>
+     */
+    private function publishedDocxCareerJobSlugs(): array
+    {
+        return CareerJob::query()
+            ->withoutGlobalScope(TenantScope::class)
+            ->where('org_id', 0)
+            ->where('locale', 'zh-CN')
+            ->where('status', CareerJob::STATUS_PUBLISHED)
+            ->where('is_public', true)
+            ->where('is_indexable', true)
+            ->where(static function ($query): void {
+                $query->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            })
+            ->pluck('slug')
+            ->map(static fn (mixed $slug): string => trim((string) $slug))
+            ->filter()
+            ->flatMap(static fn (string $slug): array => $slug === 'database-administrators'
+                ? [$slug, 'database-administrators-and-architects']
+                : [$slug])
+            ->mapWithKeys(static fn (string $slug): array => [$slug => true])
+            ->all();
     }
 
     /**

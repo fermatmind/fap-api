@@ -142,6 +142,7 @@ final class CareerJobDetailApiTest extends TestCase
             'title' => '会计师和审计师',
             'subtitle' => 'Accountants and Auditors',
             'excerpt' => 'Prepare and examine financial records.',
+            'body_md' => "# 会计师和审计师\n\n会计师和审计师不是单纯处理数字的岗位。",
             'status' => CareerJob::STATUS_PUBLISHED,
             'is_public' => true,
             'is_indexable' => true,
@@ -202,6 +203,7 @@ final class CareerJobDetailApiTest extends TestCase
             ->assertJsonPath('truth_layer.median_pay_usd_annual', 81350)
             ->assertJsonPath('content_sections.0.title', '01 你通常会在这些工作场景里接触这份职业')
             ->assertJsonPath('content_sections.0.body_md', '• 处理需要准确记录、核对或解释的财务与经营信息。')
+            ->assertJsonPath('content_body_md', "# 会计师和审计师\n\n会计师和审计师不是单纯处理数字的岗位。")
             ->assertJsonPath('seo_contract.canonical_path', '/career/jobs/accountants-and-auditors')
             ->assertJsonPath('claim_permissions.allow_strong_claim', true)
             ->assertJsonPath('provenance_meta.compile_refs.source_docx', '01_会计师和审计师_accountants-and-auditors.docx');

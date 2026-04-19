@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Cache;
 
 final class PublicCareerAuthorityResponseCache
 {
-    public const DATASET_HUB_CACHE_KEY = 'career:public-authority:dataset-hub:v1';
+    public const DATASET_HUB_CACHE_KEY = 'career:public-authority:dataset-hub:v2';
 
-    public const DATASET_METHOD_CACHE_KEY = 'career:public-authority:dataset-method:v1';
+    public const DATASET_METHOD_CACHE_KEY = 'career:public-authority:dataset-method:v2';
 
     public const LAUNCH_GOVERNANCE_CLOSURE_CACHE_KEY = 'career:public-authority:launch-governance-closure:v1';
 

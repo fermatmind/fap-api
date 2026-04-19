@@ -30,6 +30,7 @@ final class CareerStructuredDataBuilderTest extends TestCase
                 'outlook_description' => 'Designs and maintains backend systems.',
             ],
             contentSections: [],
+            contentBodyMd: null,
             trustManifest: [],
             scoreBundle: [],
             whiteBoxScores: [],
