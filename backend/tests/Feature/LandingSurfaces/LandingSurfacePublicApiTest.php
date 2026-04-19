@@ -149,6 +149,29 @@ final class LandingSurfacePublicApiTest extends TestCase
                 '从人格、能力到情绪状态，多个入口帮助你持续复盘自己的变化。'
             );
 
+        $this->getJson('/api/v0.5/landing-surfaces/tests?locale=zh-CN&org_id=0')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('surface.surface_key', 'tests')
+            ->assertJsonPath('surface.locale', 'zh-CN')
+            ->assertJsonCount(5, 'surface.payload_json.quickStart.items')
+            ->assertJsonPath('surface.payload_json.quickStart.items.0.href', '/zh/tests/category/career')
+            ->assertJsonPath('surface.payload_json.quickStart.items.2.href', '/zh/tests#family-emotion-state')
+            ->assertJsonCount(5, 'surface.payload_json.families.items')
+            ->assertJsonPath('surface.payload_json.families.items.2.id', 'family-emotion-state')
+            ->assertJsonPath(
+                'surface.payload_json.families.items.2.tests.0.href',
+                '/zh/tests/depression-screening-test-standard-edition/take'
+            )
+            ->assertJsonPath(
+                'surface.payload_json.families.items.2.tests.1.href',
+                '/zh/tests/clinical-depression-anxiety-assessment-professional-edition/take'
+            )
+            ->assertJsonPath(
+                'surface.payload_json.families.items.3.tests.0.href',
+                '/zh/tests/iq-test-intelligence-quotient-assessment/take'
+            );
+
         $this->putJson('/api/v0.5/internal/landing-surfaces/home', [
             'locale' => 'zh-CN',
             'title' => '首页更新',
