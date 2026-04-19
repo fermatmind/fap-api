@@ -36,6 +36,60 @@ final class LandingSurfacePublicApiTest extends TestCase
 
         $this->assertSame('published', (string) $home->status);
         $this->assertSame('FermatMind / 费马测试', (string) data_get($home->payload_json, 'hero.brand'));
+        $this->assertCount(6, data_get($home->payload_json, 'quickStart.items'));
+        $this->assertContains('霍兰德职业兴趣测试', array_column(data_get($home->payload_json, 'quickStart.items'), 'title'));
+        $this->assertContains('抑郁焦虑综合症测试', array_column(data_get($home->payload_json, 'quickStart.items'), 'title'));
+        $this->assertContains(
+            '/career/tests/riasec',
+            array_column(data_get($home->payload_json, 'quickStart.items'), 'href')
+        );
+        $this->assertContains(
+            '/tests/clinical-depression-anxiety-assessment-professional-edition',
+            array_column(data_get($home->payload_json, 'quickStart.items'), 'href')
+        );
+
+        $quickStartBlock = PageBlock::query()
+            ->where('landing_surface_id', $home->id)
+            ->where('block_key', 'quickstart')
+            ->firstOrFail();
+
+        $this->assertCount(6, data_get($quickStartBlock->payload_json, 'items'));
+        $this->assertContains('霍兰德职业兴趣测试', array_column(data_get($quickStartBlock->payload_json, 'items'), 'title'));
+        $this->assertContains('抑郁焦虑综合症测试', array_column(data_get($quickStartBlock->payload_json, 'items'), 'title'));
+        $this->assertContains(
+            '/career/tests/riasec',
+            array_column(data_get($quickStartBlock->payload_json, 'items'), 'href')
+        );
+        $this->assertContains(
+            '/tests/clinical-depression-anxiety-assessment-professional-edition',
+            array_column(data_get($quickStartBlock->payload_json, 'items'), 'href')
+        );
+
+        $tests = LandingSurface::query()
+            ->withoutGlobalScopes()
+            ->where('surface_key', 'tests')
+            ->where('locale', 'zh-CN')
+            ->firstOrFail();
+
+        $emotionFamily = collect(data_get($tests->payload_json, 'families.items'))
+            ->firstWhere('id', 'family-emotion-state');
+
+        $this->assertContains(
+            'depression-screening-test-standard-edition',
+            array_column(data_get($emotionFamily, 'tests'), 'key')
+        );
+        $this->assertContains(
+            '/zh/tests/depression-screening-test-standard-edition/take',
+            array_column(data_get($emotionFamily, 'tests'), 'href')
+        );
+        $this->assertContains(
+            'clinical-depression-anxiety-assessment-professional-edition',
+            array_column(data_get($emotionFamily, 'tests'), 'key')
+        );
+        $this->assertContains(
+            '/zh/tests/clinical-depression-anxiety-assessment-professional-edition/take',
+            array_column(data_get($emotionFamily, 'tests'), 'href')
+        );
     }
 
     public function test_public_and_internal_api_return_surface_payloads(): void
@@ -51,7 +105,12 @@ final class LandingSurfacePublicApiTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('surface.surface_key', 'home')
             ->assertJsonPath('surface.locale', 'zh-CN')
-            ->assertJsonPath('surface.payload_json.hero.brand', 'FermatMind / 费马测试');
+            ->assertJsonPath('surface.payload_json.hero.brand', 'FermatMind / 费马测试')
+            ->assertJsonCount(6, 'surface.payload_json.quickStart.items')
+            ->assertJsonPath('surface.payload_json.quickStart.items.3.title', '霍兰德职业兴趣测试')
+            ->assertJsonPath('surface.payload_json.quickStart.items.3.href', '/career/tests/riasec')
+            ->assertJsonPath('surface.payload_json.quickStart.items.5.title', '抑郁焦虑综合症测试')
+            ->assertJsonPath('surface.payload_json.quickStart.items.5.href', '/tests/clinical-depression-anxiety-assessment-professional-edition');
 
         $this->putJson('/api/v0.5/internal/landing-surfaces/home', [
             'locale' => 'zh-CN',
