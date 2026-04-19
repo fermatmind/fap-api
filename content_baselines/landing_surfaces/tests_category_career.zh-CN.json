@@ -1,0 +1,611 @@
+{
+  "surface_key": "tests_category_career",
+  "locale": "zh-CN",
+  "title": "职业与方向测评",
+  "description": "围绕职业兴趣、工作风格与职业决策线索的测评聚合页，帮助你更快判断从哪一个入口开始。",
+  "schema_version": "tests-category.v1",
+  "status": "published",
+  "is_public": true,
+  "is_indexable": true,
+  "payload_json": {
+    "slug": "career",
+    "seo": {
+      "title": "职业与方向测评",
+      "description": "围绕职业兴趣、工作风格与职业决策线索的测评聚合页，帮助你更快判断从哪一个入口开始。"
+    },
+    "breadcrumb": [
+      {
+        "label": "测评入口",
+        "href": "/zh/tests",
+        "path": "/zh/tests"
+      },
+      {
+        "label": "职业与方向",
+        "path": "/zh/tests/category/career"
+      }
+    ],
+    "hero": {
+      "eyebrow": "Category Hub",
+      "title": "职业与方向测评",
+      "body": "适合把职业兴趣、工作风格与能力线索组合起来，用于专业选择、岗位判断与下一步职业探索。",
+      "points": [
+        "兴趣先回答方向感",
+        "人格与风格帮助判断工作方式",
+        "能力类结果更适合作为补充信号"
+      ]
+    },
+    "featured": {
+      "kicker": "Featured Tests",
+      "title": "先从最能帮助职业决策的入口开始。",
+      "body": "职业方向不是只看一个分数，而是先拼出兴趣、风格与能力线索。",
+      "items": [
+        {
+          "key": "career-riasec",
+          "title": "霍兰德职业兴趣测试（RIASEC）",
+          "description": "当你最想知道自己更偏向哪类职业活动、任务环境与工作内容时。",
+          "questionsLabel": "36 题",
+          "durationLabel": "约 6-8 分钟",
+          "outputLabel": "兴趣结构、主次代码与职业方向线索",
+          "href": "/zh/career/tests/riasec",
+          "detailsHref": "/zh/career/tests",
+          "primaryLabel": "开始测试",
+          "secondaryLabel": "查看职业测试",
+          "scientificBasis": "Based on Holland Code",
+          "previewVariant": "matrix"
+        },
+        {
+          "key": "big-five-personality-test-ocean-model",
+          "title": "大五人格测试",
+          "description": "当你需要更稳定、维度化地理解自己在工作、压力与关系中的特质结构时。",
+          "questionsLabel": "60-120 题",
+          "durationLabel": "约 10-18 分钟",
+          "outputLabel": "五维特质分布、强弱项与应用建议",
+          "detailsHref": "/zh/tests/big-five-personality-test-ocean-model",
+          "secondaryLabel": "查看详情",
+          "scientificBasis": "Based on Big Five",
+          "previewVariant": "radar",
+          "href": "/zh/tests/big-five-personality-test-ocean-model/take?variant=standard",
+          "primaryActions": [
+            {
+              "href": "/zh/tests/big-five-personality-test-ocean-model/take?variant=standard",
+              "label": "标准版",
+              "meta": "适合快速了解大五维度。"
+            },
+            {
+              "href": "/zh/tests/big-five-personality-test-ocean-model/take?variant=pro",
+              "label": "专业版",
+              "meta": "适合更细的维度解释。"
+            }
+          ],
+          "primaryLabel": "标准版"
+        },
+        {
+          "key": "mbti-personality-test-16-personality-types",
+          "title": "MBTI 性格测试",
+          "description": "当你想先看整体人格风格、偏好模式与协作中的自然倾向时。",
+          "questionsLabel": "93-144 题",
+          "durationLabel": "约 12-20 分钟",
+          "outputLabel": "类型画像、偏好说明与场景化解释",
+          "detailsHref": "/zh/tests/mbti-personality-test-16-personality-types",
+          "secondaryLabel": "查看详情",
+          "scientificBasis": "Based on Jungian-inspired typology",
+          "previewVariant": "summary",
+          "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+          "primaryActions": [
+            {
+              "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+              "label": "标准版",
+              "meta": "适合快速了解类型偏好。"
+            },
+            {
+              "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+              "label": "专业版",
+              "meta": "适合更完整的类型解释。"
+            }
+          ],
+          "primaryLabel": "标准版"
+        }
+      ]
+    },
+    "allTests": {
+      "kicker": "All Tests in Category",
+      "title": "这类判断常用到的全部测试",
+      "body": "这里既包括直接的职业兴趣入口，也包括对职业判断有帮助的支撑型测试。",
+      "items": [
+        {
+          "key": "career-riasec",
+          "title": "霍兰德职业兴趣测试（RIASEC）",
+          "description": "当你需要先判断职业兴趣方向、行业偏好与起步线索时。",
+          "questionsLabel": "36 题",
+          "durationLabel": "约 6-8 分钟",
+          "outputLabel": "RIASEC 兴趣结构与主次代码",
+          "href": "/zh/career/tests/riasec",
+          "detailsHref": "/zh/career/tests",
+          "primaryLabel": "开始测试",
+          "secondaryLabel": "查看职业测试",
+          "scientificBasis": "Based on Holland Code",
+          "previewVariant": "matrix"
+        },
+        {
+          "key": "big-five-personality-test-ocean-model",
+          "title": "大五人格测试",
+          "description": "当你需要更稳定、维度化地理解自己在工作、压力与关系中的特质结构时。",
+          "questionsLabel": "60-120 题",
+          "durationLabel": "约 10-18 分钟",
+          "outputLabel": "五维特质分布、强弱项与应用建议",
+          "detailsHref": "/zh/tests/big-five-personality-test-ocean-model",
+          "secondaryLabel": "查看详情",
+          "scientificBasis": "Based on Big Five",
+          "previewVariant": "radar",
+          "href": "/zh/tests/big-five-personality-test-ocean-model/take?variant=standard",
+          "primaryActions": [
+            {
+              "href": "/zh/tests/big-five-personality-test-ocean-model/take?variant=standard",
+              "label": "标准版",
+              "meta": "适合快速了解大五维度。"
+            },
+            {
+              "href": "/zh/tests/big-five-personality-test-ocean-model/take?variant=pro",
+              "label": "专业版",
+              "meta": "适合更细的维度解释。"
+            }
+          ],
+          "primaryLabel": "标准版"
+        },
+        {
+          "key": "mbti-personality-test-16-personality-types",
+          "title": "MBTI 性格测试",
+          "description": "当你想先看整体人格风格、偏好模式与协作中的自然倾向时。",
+          "questionsLabel": "93-144 题",
+          "durationLabel": "约 12-20 分钟",
+          "outputLabel": "类型画像、偏好说明与场景化解释",
+          "detailsHref": "/zh/tests/mbti-personality-test-16-personality-types",
+          "secondaryLabel": "查看详情",
+          "scientificBasis": "Based on Jungian-inspired typology",
+          "previewVariant": "summary",
+          "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+          "primaryActions": [
+            {
+              "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+              "label": "标准版",
+              "meta": "适合快速了解类型偏好。"
+            },
+            {
+              "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+              "label": "专业版",
+              "meta": "适合更完整的类型解释。"
+            }
+          ],
+          "primaryLabel": "标准版"
+        },
+        {
+          "key": "iq-test-intelligence-quotient-assessment",
+          "title": "智商测试",
+          "description": "当你想看推理表现、问题处理速度与认知优势线索时。",
+          "questionsLabel": "40 题",
+          "durationLabel": "约 20 分钟",
+          "outputLabel": "能力基线、推理表现与后续参考",
+          "detailsHref": "/zh/tests/iq-test-intelligence-quotient-assessment",
+          "secondaryLabel": "查看详情",
+          "previewVariant": "matrix",
+          "href": "/zh/tests/iq-test-intelligence-quotient-assessment/take",
+          "primaryLabel": "开始测试"
+        },
+        {
+          "key": "eq-test-emotional-intelligence-assessment",
+          "title": "情商测试",
+          "description": "当你想看情绪调节、沟通表达与关系协作中的关键能力环节时。",
+          "questionsLabel": "60 题",
+          "durationLabel": "约 10 分钟",
+          "outputLabel": "情绪能力结构、沟通提示与成长方向",
+          "detailsHref": "/zh/tests/eq-test-emotional-intelligence-assessment",
+          "secondaryLabel": "查看详情",
+          "scientificBasis": "Based on EQ framework",
+          "previewVariant": "bars",
+          "href": "/zh/tests/eq-test-emotional-intelligence-assessment/take",
+          "primaryLabel": "开始测试"
+        }
+      ]
+    },
+    "differences": {
+      "kicker": "How These Tests Differ",
+      "title": "同是职业方向相关测试，作用层级并不一样。",
+      "body": "先理解每个测试回答的是哪一个问题，选择会更稳。",
+      "items": [
+        {
+          "title": "RIASEC 更偏兴趣结构",
+          "description": "它更适合回答“我更容易被哪类职业活动吸引”，是职业入口中最直接的一层。"
+        },
+        {
+          "title": "Big Five 与 MBTI 更偏工作风格和长期倾向",
+          "description": "它们更适合辅助判断工作环境、协作方式与岗位适配感，而不是单独决定职业方向。"
+        },
+        {
+          "title": "IQ 与 EQ 更偏补充信号",
+          "description": "能力与情绪能力结果更适合用来修正判断，帮助你看见执行、沟通与问题处理层面的现实差异。"
+        }
+      ]
+    },
+    "resources": {
+      "kicker": "Related Guides",
+      "title": "帮助职业判断的延伸内容",
+      "body": "把测试结果放回真实职业语境，通常比只看分数更重要。",
+      "items": [
+        {
+          "key": "how-to-find-right-career-direction",
+          "typeLabel": "指南",
+          "title": "如何找到更适合自己的职业方向",
+          "description": "把兴趣、能力与现实约束放进同一个职业判断框架。",
+          "href": "/zh/career/guides/how-to-find-right-career-direction"
+        },
+        {
+          "key": "from-mbti-to-job-fit",
+          "typeLabel": "指南",
+          "title": "如何将 MBTI 用于职业匹配",
+          "description": "把人格语言翻译成岗位与工作环境的匹配判断。",
+          "href": "/zh/career/guides/from-mbti-to-job-fit"
+        },
+        {
+          "key": "big5-for-career-decisions",
+          "typeLabel": "指南",
+          "title": "如何用 Big Five 支持职业决策",
+          "description": "如果你更偏好维度化的人格解释，这篇内容更适合作为职业判断补充。",
+          "href": "/zh/career/guides/big5-for-career-decisions"
+        }
+      ]
+    },
+    "trust": {
+      "title": "方法、边界与使用方式",
+      "items": [
+        {
+          "title": "结果用于支持判断，不定义一个人",
+          "body": "报告更适合用来组织讨论、澄清倾向与形成下一步行动，而不是给人下结论。"
+        },
+        {
+          "title": "可匿名开始",
+          "body": "可以先从问题和测试版本开始，匿名完成后再决定是否继续留下更多信息。"
+        },
+        {
+          "title": "不替代医疗、法律或诊断意见",
+          "body": "情绪与状态类结果只作为结构化参考，不能替代专业诊疗、法律意见或高风险决策中的正式评估。"
+        },
+        {
+          "title": "结果可以被复盘，也可以被放进真实场景",
+          "body": "适合放进学习规划、职业讨论、合作磨合与阶段性复盘，而不是只看一次分数就结束。"
+        }
+      ]
+    },
+    "finalCta": {
+      "title": "先从职业兴趣开始，再叠加风格与能力信号。",
+      "body": "如果你只想先做一个最直接的职业入口，RIASEC 通常是更好的开始。",
+      "primaryLabel": "开始职业方向测评",
+      "primaryHref": "/zh/career/tests/riasec"
+    }
+  },
+  "page_blocks": [
+    {
+      "block_key": "breadcrumb",
+      "block_type": "tests_category_section",
+      "title": "breadcrumb",
+      "payload_json": [
+        {
+          "label": "测评入口",
+          "href": "/zh/tests",
+          "path": "/zh/tests"
+        },
+        {
+          "label": "职业与方向",
+          "path": "/zh/tests/category/career"
+        }
+      ],
+      "sort_order": 0,
+      "is_enabled": true
+    },
+    {
+      "block_key": "hero",
+      "block_type": "tests_category_section",
+      "title": "职业与方向测评",
+      "payload_json": {
+        "eyebrow": "Category Hub",
+        "title": "职业与方向测评",
+        "body": "适合把职业兴趣、工作风格与能力线索组合起来，用于专业选择、岗位判断与下一步职业探索。",
+        "points": [
+          "兴趣先回答方向感",
+          "人格与风格帮助判断工作方式",
+          "能力类结果更适合作为补充信号"
+        ]
+      },
+      "sort_order": 1,
+      "is_enabled": true
+    },
+    {
+      "block_key": "featured",
+      "block_type": "tests_category_section",
+      "title": "先从最能帮助职业决策的入口开始。",
+      "payload_json": {
+        "kicker": "Featured Tests",
+        "title": "先从最能帮助职业决策的入口开始。",
+        "body": "职业方向不是只看一个分数，而是先拼出兴趣、风格与能力线索。",
+        "items": [
+          {
+            "key": "career-riasec",
+            "title": "霍兰德职业兴趣测试（RIASEC）",
+            "description": "当你最想知道自己更偏向哪类职业活动、任务环境与工作内容时。",
+            "questionsLabel": "36 题",
+            "durationLabel": "约 6-8 分钟",
+            "outputLabel": "兴趣结构、主次代码与职业方向线索",
+            "href": "/zh/career/tests/riasec",
+            "detailsHref": "/zh/career/tests",
+            "primaryLabel": "开始测试",
+            "secondaryLabel": "查看职业测试",
+            "scientificBasis": "Based on Holland Code",
+            "previewVariant": "matrix"
+          },
+          {
+            "key": "big-five-personality-test-ocean-model",
+            "title": "大五人格测试",
+            "description": "当你需要更稳定、维度化地理解自己在工作、压力与关系中的特质结构时。",
+            "questionsLabel": "60-120 题",
+            "durationLabel": "约 10-18 分钟",
+            "outputLabel": "五维特质分布、强弱项与应用建议",
+            "detailsHref": "/zh/tests/big-five-personality-test-ocean-model",
+            "secondaryLabel": "查看详情",
+            "scientificBasis": "Based on Big Five",
+            "previewVariant": "radar",
+            "href": "/zh/tests/big-five-personality-test-ocean-model/take?variant=standard",
+            "primaryActions": [
+              {
+                "href": "/zh/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                "label": "标准版",
+                "meta": "适合快速了解大五维度。"
+              },
+              {
+                "href": "/zh/tests/big-five-personality-test-ocean-model/take?variant=pro",
+                "label": "专业版",
+                "meta": "适合更细的维度解释。"
+              }
+            ],
+            "primaryLabel": "标准版"
+          },
+          {
+            "key": "mbti-personality-test-16-personality-types",
+            "title": "MBTI 性格测试",
+            "description": "当你想先看整体人格风格、偏好模式与协作中的自然倾向时。",
+            "questionsLabel": "93-144 题",
+            "durationLabel": "约 12-20 分钟",
+            "outputLabel": "类型画像、偏好说明与场景化解释",
+            "detailsHref": "/zh/tests/mbti-personality-test-16-personality-types",
+            "secondaryLabel": "查看详情",
+            "scientificBasis": "Based on Jungian-inspired typology",
+            "previewVariant": "summary",
+            "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+            "primaryActions": [
+              {
+                "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                "label": "标准版",
+                "meta": "适合快速了解类型偏好。"
+              },
+              {
+                "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                "label": "专业版",
+                "meta": "适合更完整的类型解释。"
+              }
+            ],
+            "primaryLabel": "标准版"
+          }
+        ]
+      },
+      "sort_order": 2,
+      "is_enabled": true
+    },
+    {
+      "block_key": "allTests",
+      "block_type": "tests_category_section",
+      "title": "这类判断常用到的全部测试",
+      "payload_json": {
+        "kicker": "All Tests in Category",
+        "title": "这类判断常用到的全部测试",
+        "body": "这里既包括直接的职业兴趣入口，也包括对职业判断有帮助的支撑型测试。",
+        "items": [
+          {
+            "key": "career-riasec",
+            "title": "霍兰德职业兴趣测试（RIASEC）",
+            "description": "当你需要先判断职业兴趣方向、行业偏好与起步线索时。",
+            "questionsLabel": "36 题",
+            "durationLabel": "约 6-8 分钟",
+            "outputLabel": "RIASEC 兴趣结构与主次代码",
+            "href": "/zh/career/tests/riasec",
+            "detailsHref": "/zh/career/tests",
+            "primaryLabel": "开始测试",
+            "secondaryLabel": "查看职业测试",
+            "scientificBasis": "Based on Holland Code",
+            "previewVariant": "matrix"
+          },
+          {
+            "key": "big-five-personality-test-ocean-model",
+            "title": "大五人格测试",
+            "description": "当你需要更稳定、维度化地理解自己在工作、压力与关系中的特质结构时。",
+            "questionsLabel": "60-120 题",
+            "durationLabel": "约 10-18 分钟",
+            "outputLabel": "五维特质分布、强弱项与应用建议",
+            "detailsHref": "/zh/tests/big-five-personality-test-ocean-model",
+            "secondaryLabel": "查看详情",
+            "scientificBasis": "Based on Big Five",
+            "previewVariant": "radar",
+            "href": "/zh/tests/big-five-personality-test-ocean-model/take?variant=standard",
+            "primaryActions": [
+              {
+                "href": "/zh/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                "label": "标准版",
+                "meta": "适合快速了解大五维度。"
+              },
+              {
+                "href": "/zh/tests/big-five-personality-test-ocean-model/take?variant=pro",
+                "label": "专业版",
+                "meta": "适合更细的维度解释。"
+              }
+            ],
+            "primaryLabel": "标准版"
+          },
+          {
+            "key": "mbti-personality-test-16-personality-types",
+            "title": "MBTI 性格测试",
+            "description": "当你想先看整体人格风格、偏好模式与协作中的自然倾向时。",
+            "questionsLabel": "93-144 题",
+            "durationLabel": "约 12-20 分钟",
+            "outputLabel": "类型画像、偏好说明与场景化解释",
+            "detailsHref": "/zh/tests/mbti-personality-test-16-personality-types",
+            "secondaryLabel": "查看详情",
+            "scientificBasis": "Based on Jungian-inspired typology",
+            "previewVariant": "summary",
+            "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+            "primaryActions": [
+              {
+                "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                "label": "标准版",
+                "meta": "适合快速了解类型偏好。"
+              },
+              {
+                "href": "/zh/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                "label": "专业版",
+                "meta": "适合更完整的类型解释。"
+              }
+            ],
+            "primaryLabel": "标准版"
+          },
+          {
+            "key": "iq-test-intelligence-quotient-assessment",
+            "title": "智商测试",
+            "description": "当你想看推理表现、问题处理速度与认知优势线索时。",
+            "questionsLabel": "40 题",
+            "durationLabel": "约 20 分钟",
+            "outputLabel": "能力基线、推理表现与后续参考",
+            "detailsHref": "/zh/tests/iq-test-intelligence-quotient-assessment",
+            "secondaryLabel": "查看详情",
+            "previewVariant": "matrix",
+            "href": "/zh/tests/iq-test-intelligence-quotient-assessment/take",
+            "primaryLabel": "开始测试"
+          },
+          {
+            "key": "eq-test-emotional-intelligence-assessment",
+            "title": "情商测试",
+            "description": "当你想看情绪调节、沟通表达与关系协作中的关键能力环节时。",
+            "questionsLabel": "60 题",
+            "durationLabel": "约 10 分钟",
+            "outputLabel": "情绪能力结构、沟通提示与成长方向",
+            "detailsHref": "/zh/tests/eq-test-emotional-intelligence-assessment",
+            "secondaryLabel": "查看详情",
+            "scientificBasis": "Based on EQ framework",
+            "previewVariant": "bars",
+            "href": "/zh/tests/eq-test-emotional-intelligence-assessment/take",
+            "primaryLabel": "开始测试"
+          }
+        ]
+      },
+      "sort_order": 3,
+      "is_enabled": true
+    },
+    {
+      "block_key": "differences",
+      "block_type": "tests_category_section",
+      "title": "同是职业方向相关测试，作用层级并不一样。",
+      "payload_json": {
+        "kicker": "How These Tests Differ",
+        "title": "同是职业方向相关测试，作用层级并不一样。",
+        "body": "先理解每个测试回答的是哪一个问题，选择会更稳。",
+        "items": [
+          {
+            "title": "RIASEC 更偏兴趣结构",
+            "description": "它更适合回答“我更容易被哪类职业活动吸引”，是职业入口中最直接的一层。"
+          },
+          {
+            "title": "Big Five 与 MBTI 更偏工作风格和长期倾向",
+            "description": "它们更适合辅助判断工作环境、协作方式与岗位适配感，而不是单独决定职业方向。"
+          },
+          {
+            "title": "IQ 与 EQ 更偏补充信号",
+            "description": "能力与情绪能力结果更适合用来修正判断，帮助你看见执行、沟通与问题处理层面的现实差异。"
+          }
+        ]
+      },
+      "sort_order": 4,
+      "is_enabled": true
+    },
+    {
+      "block_key": "resources",
+      "block_type": "tests_category_section",
+      "title": "帮助职业判断的延伸内容",
+      "payload_json": {
+        "kicker": "Related Guides",
+        "title": "帮助职业判断的延伸内容",
+        "body": "把测试结果放回真实职业语境，通常比只看分数更重要。",
+        "items": [
+          {
+            "key": "how-to-find-right-career-direction",
+            "typeLabel": "指南",
+            "title": "如何找到更适合自己的职业方向",
+            "description": "把兴趣、能力与现实约束放进同一个职业判断框架。",
+            "href": "/zh/career/guides/how-to-find-right-career-direction"
+          },
+          {
+            "key": "from-mbti-to-job-fit",
+            "typeLabel": "指南",
+            "title": "如何将 MBTI 用于职业匹配",
+            "description": "把人格语言翻译成岗位与工作环境的匹配判断。",
+            "href": "/zh/career/guides/from-mbti-to-job-fit"
+          },
+          {
+            "key": "big5-for-career-decisions",
+            "typeLabel": "指南",
+            "title": "如何用 Big Five 支持职业决策",
+            "description": "如果你更偏好维度化的人格解释，这篇内容更适合作为职业判断补充。",
+            "href": "/zh/career/guides/big5-for-career-decisions"
+          }
+        ]
+      },
+      "sort_order": 5,
+      "is_enabled": true
+    },
+    {
+      "block_key": "trust",
+      "block_type": "tests_category_section",
+      "title": "方法、边界与使用方式",
+      "payload_json": {
+        "title": "方法、边界与使用方式",
+        "items": [
+          {
+            "title": "结果用于支持判断，不定义一个人",
+            "body": "报告更适合用来组织讨论、澄清倾向与形成下一步行动，而不是给人下结论。"
+          },
+          {
+            "title": "可匿名开始",
+            "body": "可以先从问题和测试版本开始，匿名完成后再决定是否继续留下更多信息。"
+          },
+          {
+            "title": "不替代医疗、法律或诊断意见",
+            "body": "情绪与状态类结果只作为结构化参考，不能替代专业诊疗、法律意见或高风险决策中的正式评估。"
+          },
+          {
+            "title": "结果可以被复盘，也可以被放进真实场景",
+            "body": "适合放进学习规划、职业讨论、合作磨合与阶段性复盘，而不是只看一次分数就结束。"
+          }
+        ]
+      },
+      "sort_order": 6,
+      "is_enabled": true
+    },
+    {
+      "block_key": "finalCta",
+      "block_type": "tests_category_section",
+      "title": "先从职业兴趣开始，再叠加风格与能力信号。",
+      "payload_json": {
+        "title": "先从职业兴趣开始，再叠加风格与能力信号。",
+        "body": "如果你只想先做一个最直接的职业入口，RIASEC 通常是更好的开始。",
+        "primaryLabel": "开始职业方向测评",
+        "primaryHref": "/zh/career/tests/riasec"
+      },
+      "sort_order": 7,
+      "is_enabled": true
+    }
+  ]
+}

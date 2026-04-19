@@ -18,6 +18,8 @@ class ScalesLookupController extends Controller
 {
     private const CACHE_DEBUG_HEADER = 'X-FAP-Cache';
 
+    private const CATALOG_FALLBACK_IMAGE = 'https://api.fermatmind.com/static/share/mbti_square_600x600.png';
+
     public function __construct(
         private ScaleRegistry $registry,
         private ScaleIdentityResolver $identityResolver,
@@ -145,6 +147,52 @@ class ScalesLookupController extends Controller
     }
 
     /**
+     * GET /api/v0.3/scales/catalog?locale=en|zh
+     */
+    public function catalog(Request $request): JsonResponse
+    {
+        $locale = $this->resolveRequestedLocale(
+            $request,
+            (string) config('content_packs.default_locale', 'en')
+        );
+        $rows = $this->registry->listActivePublic(0);
+        $items = [];
+
+        foreach ($rows as $row) {
+            if (! is_array($row)) {
+                $row = (array) $row;
+            }
+
+            $primarySlug = trim((string) ($row['primary_slug'] ?? ''));
+            if ($primarySlug === '') {
+                continue;
+            }
+
+            if (! $this->hasCatalogMetadata($row, $locale)) {
+                continue;
+            }
+
+            $items[] = $this->projectCatalogItem($row, $locale);
+        }
+
+        usort($items, static function (array $a, array $b): int {
+            $priorityA = (int) ($a['highlight_priority'] ?? 0);
+            $priorityB = (int) ($b['highlight_priority'] ?? 0);
+            if ($priorityA !== $priorityB) {
+                return $priorityB <=> $priorityA;
+            }
+
+            return strcmp((string) ($a['title'] ?? ''), (string) ($b['title'] ?? ''));
+        });
+
+        return response()->json([
+            'ok' => true,
+            'locale' => $locale,
+            'items' => $items,
+        ]);
+    }
+
+    /**
      * GET /api/v0.3/scales/sitemap-source?locale=en|zh
      */
     public function sitemapSource(Request $request): JsonResponse
@@ -209,6 +257,101 @@ class ScalesLookupController extends Controller
         }
 
         return true;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     * @return array<string,mixed>
+     */
+    private function projectCatalogItem(array $row, string $locale): array
+    {
+        $scaleCodeMeta = $this->resolveScaleCodeMeta($row);
+        $seo = $this->resolveSeoByLocale($row, $locale);
+        $contentI18n = $this->toArray($row['content_i18n_json'] ?? null);
+        $lang = $this->localeToLanguage($locale);
+        $localizedContent = $this->toArray($contentI18n[$lang] ?? null);
+        $englishContent = $this->toArray($contentI18n['en'] ?? null);
+        $zhContent = $this->toArray($contentI18n['zh'] ?? null);
+        $catalog = $this->toArray($localizedContent['catalog'] ?? null);
+        $fallbackCatalog = $this->toArray($englishContent['catalog'] ?? null);
+        $card = $this->toArray($localizedContent['card'] ?? null);
+        $fallbackCard = $this->toArray($englishContent['card'] ?? null);
+        $highlight = $this->toArray($localizedContent['highlight'] ?? null);
+        $fallbackHighlight = $this->toArray($englishContent['highlight'] ?? null);
+
+        $title = $this->trimOrNull($localizedContent['title'] ?? null)
+            ?? $seo['title']
+            ?? $this->trimOrNull($englishContent['title'] ?? null)
+            ?? $scaleCodeMeta['scale_code'];
+        $description = $this->trimOrNull($localizedContent['description'] ?? null)
+            ?? $seo['description']
+            ?? $this->trimOrNull($englishContent['description'] ?? null)
+            ?? '';
+
+        return [
+            'slug' => trim((string) ($row['primary_slug'] ?? '')),
+            'scale_code' => $scaleCodeMeta['scale_code_legacy'],
+            'scale_code_v2' => $scaleCodeMeta['scale_code_v2'],
+            'scale_uid' => $scaleCodeMeta['scale_uid'],
+            'title' => $title,
+            'title_i18n' => [
+                'en' => $this->trimOrNull($englishContent['title'] ?? null) ?? $title,
+                'zh' => $this->trimOrNull($zhContent['title'] ?? null) ?? $title,
+            ],
+            'description' => $description,
+            'description_i18n' => [
+                'en' => $this->trimOrNull($englishContent['description'] ?? null) ?? $description,
+                'zh' => $this->trimOrNull($zhContent['description'] ?? null) ?? $description,
+            ],
+            'cover_image' => $this->trimOrNull($catalog['cover_image'] ?? null)
+                ?? $this->trimOrNull($fallbackCatalog['cover_image'] ?? null)
+                ?? $seo['og_image_url']
+                ?? self::CATALOG_FALLBACK_IMAGE,
+            'questions_count' => $this->positiveInt($catalog['questions_count'] ?? $fallbackCatalog['questions_count'] ?? null),
+            'time_minutes' => $this->positiveInt($catalog['time_minutes'] ?? $fallbackCatalog['time_minutes'] ?? null),
+            'card_visual' => $this->trimOrNull($card['visual'] ?? null) ?? $this->trimOrNull($fallbackCard['visual'] ?? null),
+            'card_tone' => $this->trimOrNull($card['tone'] ?? null) ?? $this->trimOrNull($fallbackCard['tone'] ?? null),
+            'card_seed' => $this->trimOrNull($card['seed'] ?? null) ?? $this->trimOrNull($fallbackCard['seed'] ?? null),
+            'card_density' => $this->trimOrNull($card['density'] ?? null) ?? $this->trimOrNull($fallbackCard['density'] ?? null),
+            'card_tagline_i18n' => [
+                'en' => $this->trimOrNull($this->toArray($englishContent['card'] ?? null)['tagline'] ?? null) ?? '',
+                'zh' => $this->trimOrNull($this->toArray($zhContent['card'] ?? null)['tagline'] ?? null) ?? '',
+            ],
+            'highlight_priority' => $this->positiveInt($highlight['priority'] ?? $fallbackHighlight['priority'] ?? null),
+            'highlight_rating' => $this->positiveInt($highlight['rating'] ?? $fallbackHighlight['rating'] ?? null),
+            'highlight_excerpt_i18n' => [
+                'en' => $this->trimOrNull($this->toArray($englishContent['highlight'] ?? null)['excerpt'] ?? null) ?? '',
+                'zh' => $this->trimOrNull($this->toArray($zhContent['highlight'] ?? null)['excerpt'] ?? null) ?? '',
+            ],
+            'highlight_seo_copy_i18n' => [
+                'en' => $this->trimOrNull($this->toArray($englishContent['highlight'] ?? null)['seo_copy'] ?? null) ?? '',
+                'zh' => $this->trimOrNull($this->toArray($zhContent['highlight'] ?? null)['seo_copy'] ?? null) ?? '',
+            ],
+            'is_public' => (bool) ($row['is_public'] ?? true),
+            'is_active' => (bool) ($row['is_active'] ?? true),
+            'is_indexable' => $this->resolveIsIndexable($row),
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     */
+    private function hasCatalogMetadata(array $row, string $locale): bool
+    {
+        $contentI18n = $this->toArray($row['content_i18n_json'] ?? null);
+        $lang = $this->localeToLanguage($locale);
+        $localizedCatalog = $this->toArray($this->toArray($contentI18n[$lang] ?? null)['catalog'] ?? null);
+        $fallbackCatalog = $this->toArray($this->toArray($contentI18n['en'] ?? null)['catalog'] ?? null);
+
+        return $this->positiveInt($localizedCatalog['questions_count'] ?? $fallbackCatalog['questions_count'] ?? null) > 0
+            && $this->positiveInt($localizedCatalog['time_minutes'] ?? $fallbackCatalog['time_minutes'] ?? null) > 0;
+    }
+
+    private function positiveInt(mixed $value): int
+    {
+        $int = (int) $value;
+
+        return $int > 0 ? $int : 0;
     }
 
     private function resolveRequestedLocale(Request $request, string $defaultLocale): string

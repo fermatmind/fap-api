@@ -4,6 +4,7 @@ namespace Tests\Feature\V0_3;
 
 use App\Services\Scale\ScaleRegistryWriter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -81,6 +82,59 @@ class ScalesLookupTest extends TestCase
         }
     }
 
+    public function test_catalog_returns_backend_owned_test_landing_metadata(): void
+    {
+        $this->artisan('migrate', ['--force' => true]);
+        $this->artisan('fap:scales:seed-default');
+        $this->artisan('fap:scales:sync-slugs');
+
+        $response = $this->getJson('/api/v0.3/scales/catalog?locale=zh');
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('ok', true);
+        $response->assertJsonPath('locale', 'zh-CN');
+        $response->assertJsonStructure([
+            'items' => [
+                [
+                    'slug',
+                    'scale_code',
+                    'scale_code_v2',
+                    'title',
+                    'title_i18n',
+                    'description',
+                    'description_i18n',
+                    'cover_image',
+                    'questions_count',
+                    'time_minutes',
+                    'card_visual',
+                    'card_tone',
+                    'card_seed',
+                    'card_density',
+                    'card_tagline_i18n',
+                    'highlight_priority',
+                    'highlight_rating',
+                    'highlight_excerpt_i18n',
+                    'highlight_seo_copy_i18n',
+                    'is_public',
+                    'is_active',
+                    'is_indexable',
+                ],
+            ],
+        ]);
+
+        $items = collect($response->json('items'));
+        $this->assertCount(6, $items);
+        $mbti = $items->firstWhere('slug', 'mbti-personality-test-16-personality-types');
+        $this->assertIsArray($mbti);
+        $this->assertSame('MBTI', $mbti['scale_code']);
+        $this->assertSame('MBTI 性格测试（16型人格测试）', $mbti['title']);
+        $this->assertSame(144, $mbti['questions_count']);
+        $this->assertSame(15, $mbti['time_minutes']);
+        $this->assertSame('spark_minimal', $mbti['card_visual']);
+        $this->assertSame('类型轴线综合', $mbti['card_tagline_i18n']['zh']);
+        $this->assertSame(100, $mbti['highlight_priority']);
+    }
+
     public function test_lookup_alias_mode_canonical_only_rejects_alias_but_allows_canonical(): void
     {
         $this->artisan('migrate', ['--force' => true]);
@@ -113,6 +167,8 @@ class ScalesLookupTest extends TestCase
         $this->artisan('fap:scales:sync-slugs');
 
         Config::set('scale_identity.api_response_scale_code_mode', 'v2');
+        Cache::flush();
+        Cache::store((string) config('content_packs.mbti_response_cache_store', 'hot_redis'))->flush();
 
         $response = $this->getJson('/api/v0.3/scales/lookup?slug=mbti-test');
         $response->assertStatus(200);

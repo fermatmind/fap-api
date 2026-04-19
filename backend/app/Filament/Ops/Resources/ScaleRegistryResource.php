@@ -142,12 +142,49 @@ class ScaleRegistryResource extends Resource
                             Forms\Components\Textarea::make('content_i18n_json.en.landing_copy')
                                 ->label('Landing Copy')
                                 ->rows(4),
+                            Forms\Components\Textarea::make('content_i18n_json.en.when_to_use')
+                                ->label('When To Use')
+                                ->rows(3),
+                            Forms\Components\TagsInput::make('content_i18n_json.en.audience')
+                                ->label('Audience'),
+                            Forms\Components\TagsInput::make('content_i18n_json.en.how_it_works')
+                                ->label('How It Works'),
                             Forms\Components\Textarea::make('content_i18n_json.en.faq')
-                                ->label('FAQ (JSON/Text)')
+                                ->label('FAQ JSON')
                                 ->rows(4),
                             Forms\Components\Textarea::make('content_i18n_json.en.disclaimer')
                                 ->label('Disclaimer')
                                 ->rows(3),
+                            Forms\Components\Section::make('Catalog Card')
+                                ->schema([
+                                    Forms\Components\Grid::make(2)
+                                        ->schema([
+                                            Forms\Components\TextInput::make('content_i18n_json.en.catalog.cover_image')
+                                                ->label('Cover Image URL')
+                                                ->maxLength(255),
+                                            Forms\Components\TextInput::make('content_i18n_json.en.catalog.questions_count')
+                                                ->label('Questions')
+                                                ->numeric(),
+                                            Forms\Components\TextInput::make('content_i18n_json.en.catalog.time_minutes')
+                                                ->label('Minutes')
+                                                ->numeric(),
+                                            Forms\Components\TextInput::make('content_i18n_json.en.card.tagline')
+                                                ->label('Card Tagline')
+                                                ->maxLength(120),
+                                            Forms\Components\TextInput::make('content_i18n_json.en.highlight.priority')
+                                                ->label('Highlight Priority')
+                                                ->numeric(),
+                                            Forms\Components\TextInput::make('content_i18n_json.en.highlight.rating')
+                                                ->label('Highlight Rating')
+                                                ->numeric(),
+                                        ]),
+                                    Forms\Components\Textarea::make('content_i18n_json.en.highlight.excerpt')
+                                        ->label('Highlight Excerpt')
+                                        ->rows(3),
+                                    Forms\Components\Textarea::make('content_i18n_json.en.highlight.seo_copy')
+                                        ->label('Highlight SEO Copy')
+                                        ->rows(3),
+                                ]),
                             Forms\Components\Textarea::make('report_summary_i18n_json.en.summary')
                                 ->label('Report Summary')
                                 ->rows(3),
@@ -157,12 +194,49 @@ class ScaleRegistryResource extends Resource
                             Forms\Components\Textarea::make('content_i18n_json.zh.landing_copy')
                                 ->label('落地页文案')
                                 ->rows(4),
+                            Forms\Components\Textarea::make('content_i18n_json.zh.when_to_use')
+                                ->label('适用场景')
+                                ->rows(3),
+                            Forms\Components\TagsInput::make('content_i18n_json.zh.audience')
+                                ->label('适用人群'),
+                            Forms\Components\TagsInput::make('content_i18n_json.zh.how_it_works')
+                                ->label('流程说明'),
                             Forms\Components\Textarea::make('content_i18n_json.zh.faq')
-                                ->label('FAQ（JSON/文本）')
+                                ->label('FAQ JSON')
                                 ->rows(4),
                             Forms\Components\Textarea::make('content_i18n_json.zh.disclaimer')
                                 ->label('免责声明')
                                 ->rows(3),
+                            Forms\Components\Section::make('目录卡片')
+                                ->schema([
+                                    Forms\Components\Grid::make(2)
+                                        ->schema([
+                                            Forms\Components\TextInput::make('content_i18n_json.zh.catalog.cover_image')
+                                                ->label('封面图 URL')
+                                                ->maxLength(255),
+                                            Forms\Components\TextInput::make('content_i18n_json.zh.catalog.questions_count')
+                                                ->label('题数')
+                                                ->numeric(),
+                                            Forms\Components\TextInput::make('content_i18n_json.zh.catalog.time_minutes')
+                                                ->label('分钟')
+                                                ->numeric(),
+                                            Forms\Components\TextInput::make('content_i18n_json.zh.card.tagline')
+                                                ->label('卡片短语')
+                                                ->maxLength(120),
+                                            Forms\Components\TextInput::make('content_i18n_json.zh.highlight.priority')
+                                                ->label('推荐优先级')
+                                                ->numeric(),
+                                            Forms\Components\TextInput::make('content_i18n_json.zh.highlight.rating')
+                                                ->label('推荐评分')
+                                                ->numeric(),
+                                        ]),
+                                    Forms\Components\Textarea::make('content_i18n_json.zh.highlight.excerpt')
+                                        ->label('推荐摘要')
+                                        ->rows(3),
+                                    Forms\Components\Textarea::make('content_i18n_json.zh.highlight.seo_copy')
+                                        ->label('SEO 补充文案')
+                                        ->rows(3),
+                                ]),
                             Forms\Components\Textarea::make('report_summary_i18n_json.zh.summary')
                                 ->label('报告摘要')
                                 ->rows(3),

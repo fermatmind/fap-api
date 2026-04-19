@@ -1,0 +1,637 @@
+{
+  "surface_key": "home",
+  "locale": "en",
+  "title": "FermatMind",
+  "description": "FermatMind provides clear, reusable assessment results for personality, ability, and career direction.",
+  "schema_version": "home.v1",
+  "status": "published",
+  "is_public": true,
+  "is_indexable": true,
+  "payload_json": {
+    "hero": {
+      "eyebrow": "FermatMind",
+      "brand": "FermatMind",
+      "title": "Understand yourself before the next step.",
+      "subhead": "Start with a clear, reusable assessment result for personality, ability, and career direction.",
+      "body": "Begin with the most-used entry points, then use the result for learning, collaboration, and career judgment.",
+      "primaryCta": "Start MBTI test",
+      "primaryHref": "/tests/mbti-personality-test-16-personality-types",
+      "secondaryCta": "View all assessments",
+      "secondaryHref": "/tests",
+      "tertiaryCta": "Explore careers",
+      "tertiaryHref": "/career",
+      "trustRail": [
+        "Clear result structure",
+        "Transparent method boundaries",
+        "Anonymous start available"
+      ]
+    },
+    "quickStart": {
+      "kicker": "CORE TESTS",
+      "title": "Start from one clear question.",
+      "body": "Six common entry points stay visible. Question-count and version choices move to each test page.",
+      "items": [
+        {
+          "title": "MBTI Personality Test",
+          "description": "Understand your type preference and decision style quickly.",
+          "href": "/tests/mbti-personality-test-16-personality-types",
+          "label": "Start test",
+          "meta": "Personality test"
+        },
+        {
+          "title": "Big Five Personality Test",
+          "description": "Read your stable traits across five dimensions.",
+          "href": "/tests/big-five-personality-test-ocean-model",
+          "label": "Start test",
+          "meta": "Personality test"
+        },
+        {
+          "title": "Enneagram Test",
+          "description": "Understand behavior patterns through motivation and stress response.",
+          "href": "/tests",
+          "label": "Start test",
+          "meta": "Personality test"
+        },
+        {
+          "title": "EQ Test",
+          "description": "Review emotional recognition and collaboration skills.",
+          "href": "/tests/eq-test-emotional-intelligence-assessment",
+          "label": "Start test",
+          "meta": "Emotional ability"
+        },
+        {
+          "title": "IQ Test",
+          "description": "Get a quick baseline for cognitive ability.",
+          "href": "/tests/iq-test-intelligence-quotient-assessment",
+          "label": "Start test",
+          "meta": "Ability assessment"
+        }
+      ]
+    },
+    "families": {
+      "kicker": "MORE PATHS",
+      "title": "Keep exploring without delaying the start.",
+      "body": "Secondary paths stay lightweight instead of taking over the homepage.",
+      "items": [
+        {
+          "title": "All assessments",
+          "description": "See every available assessment entry.",
+          "exploreLabel": "View all assessments",
+          "exploreHref": "/tests",
+          "links": [
+            {
+              "title": "View all assessments",
+              "href": "/tests"
+            }
+          ]
+        },
+        {
+          "title": "Career exploration",
+          "description": "Put results back into career direction.",
+          "exploreLabel": "Explore careers",
+          "exploreHref": "/career",
+          "links": [
+            {
+              "title": "Explore careers",
+              "href": "/career"
+            }
+          ]
+        },
+        {
+          "title": "Fun experiments",
+          "description": "SBTI and lightweight experiments live here.",
+          "exploreLabel": "More tests / fun experiments",
+          "exploreHref": "/fun/sbti",
+          "links": [
+            {
+              "title": "More tests / fun experiments",
+              "href": "/fun/sbti"
+            }
+          ]
+        },
+        {
+          "title": "Data method",
+          "description": "Read method, boundary, and privacy notes.",
+          "exploreLabel": "View data method",
+          "exploreHref": "/about",
+          "links": [
+            {
+              "title": "View data method",
+              "href": "/about"
+            }
+          ]
+        }
+      ]
+    },
+    "results": {
+      "kicker": "RESULT PROMISE",
+      "title": "What you get back is more than a label.",
+      "body": "The result brings type, differences, and next-step suggestions onto one page so you can keep judging clearly.",
+      "exampleLabel": "View result example",
+      "exampleHref": "/personality",
+      "previews": [
+        {
+          "title": "Type",
+          "metrics": [
+            "Type preference"
+          ],
+          "tone": "traits"
+        },
+        {
+          "title": "Differences",
+          "metrics": [
+            "Key differences"
+          ],
+          "tone": "career"
+        },
+        {
+          "title": "Next step",
+          "metrics": [
+            "Action guidance"
+          ],
+          "tone": "state"
+        }
+      ]
+    },
+    "trust": {
+      "kicker": "TRUST",
+      "title": "Start first, go deeper when needed.",
+      "body": "The homepage keeps only essential trust information. Method and privacy details are one step away.",
+      "methodHref": "/about",
+      "methodLabel": "View method and privacy",
+      "items": [
+        {
+          "title": "Free and reliable",
+          "summary": "Core assessments are built around self-knowledge, career judgment, and capability growth.",
+          "paragraphs": [
+            "Free and reliable"
+          ]
+        },
+        {
+          "title": "We take your privacy seriously.",
+          "summary": "Start without an account, then decide whether to save results or go deeper.",
+          "paragraphs": [
+            "We take your privacy seriously."
+          ],
+          "href": "/about",
+          "hrefLabel": "Read method notes"
+        },
+        {
+          "title": "Many users take multiple tests",
+          "summary": "Personality, ability, and state entries help you review change over time.",
+          "paragraphs": [
+            "Many users take multiple tests"
+          ],
+          "href": "/privacy",
+          "hrefLabel": "View privacy policy"
+        }
+      ]
+    },
+    "secondaryExplore": {
+      "kicker": "Keep browsing",
+      "title": "Use these only when you need a different path.",
+      "items": [
+        {
+          "title": "View all assessments",
+          "description": "Complete assessment entry",
+          "href": "/tests"
+        },
+        {
+          "title": "Explore careers",
+          "description": "Career direction and paths",
+          "href": "/career"
+        },
+        {
+          "title": "More tests / fun experiments",
+          "description": "SBTI and lightweight experiments",
+          "href": "/fun/sbti"
+        },
+        {
+          "title": "View data method",
+          "description": "Method, boundaries, and privacy",
+          "href": "/about"
+        }
+      ]
+    },
+    "header": {
+      "testsLabel": "Assessments",
+      "testsTitle": "Start from one assessment.",
+      "testsBody": "Personality, ability, emotion, and career direction all begin here.",
+      "browseAllLabel": "View all assessments",
+      "browseAllHref": "/tests",
+      "groups": [
+        {
+          "title": "Core assessments",
+          "links": [
+            {
+              "title": "MBTI",
+              "href": "/tests/mbti-personality-test-16-personality-types"
+            },
+            {
+              "title": "Big Five",
+              "href": "/tests/big-five-personality-test-ocean-model"
+            },
+            {
+              "title": "IQ",
+              "href": "/tests/iq-test-intelligence-quotient-assessment"
+            },
+            {
+              "title": "EQ",
+              "href": "/tests/eq-test-emotional-intelligence-assessment"
+            }
+          ]
+        }
+      ]
+    },
+    "footer": {
+      "groups": [
+        {
+          "title": "Top assessments",
+          "links": [
+            {
+              "label": "MBTI",
+              "href": "/tests/mbti-personality-test-16-personality-types"
+            },
+            {
+              "label": "Big Five",
+              "href": "/tests/big-five-personality-test-ocean-model"
+            },
+            {
+              "label": "IQ",
+              "href": "/tests/iq-test-intelligence-quotient-assessment"
+            },
+            {
+              "label": "EQ",
+              "href": "/tests/eq-test-emotional-intelligence-assessment"
+            }
+          ]
+        },
+        {
+          "title": "Support and policy",
+          "links": [
+            {
+              "label": "Help Center",
+              "href": "/help"
+            },
+            {
+              "label": "Privacy policy",
+              "href": "/privacy"
+            },
+            {
+              "label": "Terms",
+              "href": "/terms"
+            }
+          ]
+        }
+      ],
+      "supportEmailLabel": "Support",
+      "tailnote": "See the Micro. Lead the Macro."
+    },
+    "seo": {
+      "title": "FermatMind",
+      "description": "FermatMind provides clear, reusable assessment results for personality, ability, and career direction.",
+      "quickStartListTitle": "FermatMind core assessment entry points",
+      "quickStartListDescription": "Core homepage entry points including MBTI, Big Five, IQ, EQ, Enneagram, and emotional state check.",
+      "familyListTitle": "FermatMind lightweight exploration paths",
+      "familyListDescription": "Lightweight homepage paths for all assessments, career exploration, fun experiments, and data method notes.",
+      "organizationDescription": "FermatMind provides structured assessments for self-understanding, ability review, career direction, and collaboration judgment."
+    }
+  },
+  "page_blocks": [
+    {
+      "block_key": "hero",
+      "block_type": "homepage_section",
+      "title": "Understand yourself before the next step.",
+      "payload_json": {
+        "eyebrow": "FermatMind",
+        "brand": "FermatMind",
+        "title": "Understand yourself before the next step.",
+        "subhead": "Start with a clear, reusable assessment result for personality, ability, and career direction.",
+        "body": "Begin with the most-used entry points, then use the result for learning, collaboration, and career judgment.",
+        "primaryCta": "Start MBTI test",
+        "primaryHref": "/tests/mbti-personality-test-16-personality-types",
+        "secondaryCta": "View all assessments",
+        "secondaryHref": "/tests",
+        "tertiaryCta": "Explore careers",
+        "tertiaryHref": "/career",
+        "trustRail": [
+          "Clear result structure",
+          "Transparent method boundaries",
+          "Anonymous start available"
+        ]
+      },
+      "sort_order": 0,
+      "is_enabled": true
+    },
+    {
+      "block_key": "quickStart",
+      "block_type": "homepage_section",
+      "title": "Start from one clear question.",
+      "payload_json": {
+        "kicker": "CORE TESTS",
+        "title": "Start from one clear question.",
+        "body": "Six common entry points stay visible. Question-count and version choices move to each test page.",
+        "items": [
+          {
+            "title": "MBTI Personality Test",
+            "description": "Understand your type preference and decision style quickly.",
+            "href": "/tests/mbti-personality-test-16-personality-types",
+            "label": "Start test",
+            "meta": "Personality test"
+          },
+          {
+            "title": "Big Five Personality Test",
+            "description": "Read your stable traits across five dimensions.",
+            "href": "/tests/big-five-personality-test-ocean-model",
+            "label": "Start test",
+            "meta": "Personality test"
+          },
+          {
+            "title": "Enneagram Test",
+            "description": "Understand behavior patterns through motivation and stress response.",
+            "href": "/tests",
+            "label": "Start test",
+            "meta": "Personality test"
+          },
+          {
+            "title": "EQ Test",
+            "description": "Review emotional recognition and collaboration skills.",
+            "href": "/tests/eq-test-emotional-intelligence-assessment",
+            "label": "Start test",
+            "meta": "Emotional ability"
+          },
+          {
+            "title": "IQ Test",
+            "description": "Get a quick baseline for cognitive ability.",
+            "href": "/tests/iq-test-intelligence-quotient-assessment",
+            "label": "Start test",
+            "meta": "Ability assessment"
+          }
+        ]
+      },
+      "sort_order": 1,
+      "is_enabled": true
+    },
+    {
+      "block_key": "families",
+      "block_type": "homepage_section",
+      "title": "Keep exploring without delaying the start.",
+      "payload_json": {
+        "kicker": "MORE PATHS",
+        "title": "Keep exploring without delaying the start.",
+        "body": "Secondary paths stay lightweight instead of taking over the homepage.",
+        "items": [
+          {
+            "title": "All assessments",
+            "description": "See every available assessment entry.",
+            "exploreLabel": "View all assessments",
+            "exploreHref": "/tests",
+            "links": [
+              {
+                "title": "View all assessments",
+                "href": "/tests"
+              }
+            ]
+          },
+          {
+            "title": "Career exploration",
+            "description": "Put results back into career direction.",
+            "exploreLabel": "Explore careers",
+            "exploreHref": "/career",
+            "links": [
+              {
+                "title": "Explore careers",
+                "href": "/career"
+              }
+            ]
+          },
+          {
+            "title": "Fun experiments",
+            "description": "SBTI and lightweight experiments live here.",
+            "exploreLabel": "More tests / fun experiments",
+            "exploreHref": "/fun/sbti",
+            "links": [
+              {
+                "title": "More tests / fun experiments",
+                "href": "/fun/sbti"
+              }
+            ]
+          },
+          {
+            "title": "Data method",
+            "description": "Read method, boundary, and privacy notes.",
+            "exploreLabel": "View data method",
+            "exploreHref": "/about",
+            "links": [
+              {
+                "title": "View data method",
+                "href": "/about"
+              }
+            ]
+          }
+        ]
+      },
+      "sort_order": 2,
+      "is_enabled": true
+    },
+    {
+      "block_key": "results",
+      "block_type": "homepage_section",
+      "title": "What you get back is more than a label.",
+      "payload_json": {
+        "kicker": "RESULT PROMISE",
+        "title": "What you get back is more than a label.",
+        "body": "The result brings type, differences, and next-step suggestions onto one page so you can keep judging clearly.",
+        "exampleLabel": "View result example",
+        "exampleHref": "/personality",
+        "previews": [
+          {
+            "title": "Type",
+            "metrics": [
+              "Type preference"
+            ],
+            "tone": "traits"
+          },
+          {
+            "title": "Differences",
+            "metrics": [
+              "Key differences"
+            ],
+            "tone": "career"
+          },
+          {
+            "title": "Next step",
+            "metrics": [
+              "Action guidance"
+            ],
+            "tone": "state"
+          }
+        ]
+      },
+      "sort_order": 3,
+      "is_enabled": true
+    },
+    {
+      "block_key": "trust",
+      "block_type": "homepage_section",
+      "title": "Start first, go deeper when needed.",
+      "payload_json": {
+        "kicker": "TRUST",
+        "title": "Start first, go deeper when needed.",
+        "body": "The homepage keeps only essential trust information. Method and privacy details are one step away.",
+        "methodHref": "/about",
+        "methodLabel": "View method and privacy",
+        "items": [
+          {
+            "title": "Free and reliable",
+            "summary": "Core assessments are built around self-knowledge, career judgment, and capability growth.",
+            "paragraphs": [
+              "Free and reliable"
+            ]
+          },
+          {
+            "title": "We take your privacy seriously.",
+            "summary": "Start without an account, then decide whether to save results or go deeper.",
+            "paragraphs": [
+              "We take your privacy seriously."
+            ],
+            "href": "/about",
+            "hrefLabel": "Read method notes"
+          },
+          {
+            "title": "Many users take multiple tests",
+            "summary": "Personality, ability, and state entries help you review change over time.",
+            "paragraphs": [
+              "Many users take multiple tests"
+            ],
+            "href": "/privacy",
+            "hrefLabel": "View privacy policy"
+          }
+        ]
+      },
+      "sort_order": 4,
+      "is_enabled": true
+    },
+    {
+      "block_key": "secondaryExplore",
+      "block_type": "homepage_section",
+      "title": "Use these only when you need a different path.",
+      "payload_json": {
+        "kicker": "Keep browsing",
+        "title": "Use these only when you need a different path.",
+        "items": [
+          {
+            "title": "View all assessments",
+            "description": "Complete assessment entry",
+            "href": "/tests"
+          },
+          {
+            "title": "Explore careers",
+            "description": "Career direction and paths",
+            "href": "/career"
+          },
+          {
+            "title": "More tests / fun experiments",
+            "description": "SBTI and lightweight experiments",
+            "href": "/fun/sbti"
+          },
+          {
+            "title": "View data method",
+            "description": "Method, boundaries, and privacy",
+            "href": "/about"
+          }
+        ]
+      },
+      "sort_order": 5,
+      "is_enabled": true
+    },
+    {
+      "block_key": "header",
+      "block_type": "homepage_section",
+      "title": "header",
+      "payload_json": {
+        "testsLabel": "Assessments",
+        "testsTitle": "Start from one assessment.",
+        "testsBody": "Personality, ability, emotion, and career direction all begin here.",
+        "browseAllLabel": "View all assessments",
+        "browseAllHref": "/tests",
+        "groups": [
+          {
+            "title": "Core assessments",
+            "links": [
+              {
+                "title": "MBTI",
+                "href": "/tests/mbti-personality-test-16-personality-types"
+              },
+              {
+                "title": "Big Five",
+                "href": "/tests/big-five-personality-test-ocean-model"
+              },
+              {
+                "title": "IQ",
+                "href": "/tests/iq-test-intelligence-quotient-assessment"
+              },
+              {
+                "title": "EQ",
+                "href": "/tests/eq-test-emotional-intelligence-assessment"
+              }
+            ]
+          }
+        ]
+      },
+      "sort_order": 6,
+      "is_enabled": true
+    },
+    {
+      "block_key": "footer",
+      "block_type": "homepage_section",
+      "title": "footer",
+      "payload_json": {
+        "groups": [
+          {
+            "title": "Top assessments",
+            "links": [
+              {
+                "label": "MBTI",
+                "href": "/tests/mbti-personality-test-16-personality-types"
+              },
+              {
+                "label": "Big Five",
+                "href": "/tests/big-five-personality-test-ocean-model"
+              },
+              {
+                "label": "IQ",
+                "href": "/tests/iq-test-intelligence-quotient-assessment"
+              },
+              {
+                "label": "EQ",
+                "href": "/tests/eq-test-emotional-intelligence-assessment"
+              }
+            ]
+          },
+          {
+            "title": "Support and policy",
+            "links": [
+              {
+                "label": "Help Center",
+                "href": "/help"
+              },
+              {
+                "label": "Privacy policy",
+                "href": "/privacy"
+              },
+              {
+                "label": "Terms",
+                "href": "/terms"
+              }
+            ]
+          }
+        ],
+        "supportEmailLabel": "Support",
+        "tailnote": "See the Micro. Lead the Macro."
+      },
+      "sort_order": 7,
+      "is_enabled": true
+    }
+  ]
+}

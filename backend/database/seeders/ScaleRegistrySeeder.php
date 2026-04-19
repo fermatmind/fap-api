@@ -82,6 +82,38 @@ final class ScaleRegistrySeeder extends Seeder
                 'name' => 'MBTI Personality Test',
                 'description' => 'MBTI personality test (demo).',
             ],
+            'seo_i18n_json' => [
+                'en' => [
+                    'title' => 'MBTI Personality Test (16 Personality Types)',
+                    'description' => 'Discover your MBTI profile across 16 personality types with a structured assessment.',
+                    'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
+                ],
+                'zh' => [
+                    'title' => 'MBTI 性格测试（16型人格测试）',
+                    'description' => '通过结构化测评了解你的 MBTI 类型、偏好强度与沟通协作方式。',
+                    'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
+                ],
+            ],
+            'content_i18n_json' => $this->catalogContent(
+                enTitle: 'MBTI Personality Test (16 Personality Types)',
+                zhTitle: 'MBTI 性格测试（16型人格测试）',
+                enDescription: 'Discover your MBTI profile across 16 personality types with a structured assessment.',
+                zhDescription: '通过结构化测评了解你的 MBTI 类型、偏好强度与沟通协作方式。',
+                questions: 144,
+                minutes: 15,
+                cardVisual: 'spark_minimal',
+                cardTone: 'editorial',
+                cardSeed: 'mbti',
+                cardDensity: 'regular',
+                enTagline: 'Type axis synthesis',
+                zhTagline: '类型轴线综合',
+                priority: 100,
+                rating: 5,
+                enExcerpt: 'Discover the inner drivers that make your personality uniquely yours. Get a full read on your preference patterns and core strengths, plus tailored guidance for career growth and communication.',
+                zhExcerpt: '探索造就你独特个性的内在动力。全面解析你的性格偏好与核心优势，并获取为你量身定制的职业发展与人际沟通指南。',
+                enSeoCopy: 'The MBTI flow is built on Jungian type dimensions and structured preference scoring. It helps users interpret E/I, S/N, T/F, and J/P patterns for communication, planning, and role-fit decisions.',
+                zhSeoCopy: '该 MBTI 测评基于荣格类型维度与结构化偏好评分，帮助你理解 E/I、S/N、T/F、J/P 模式，并用于沟通协作、计划习惯与岗位匹配决策。'
+            ),
 
             'is_public' => true,
             'is_active' => true,
@@ -139,6 +171,38 @@ final class ScaleRegistrySeeder extends Seeder
                 'name' => 'BIG5 OCEAN Personality Test',
                 'description' => 'BIG5 OCEAN personality test (IPIP-NEO-120).',
             ],
+            'seo_i18n_json' => [
+                'en' => [
+                    'title' => 'Big Five Personality Test (OCEAN Model)',
+                    'description' => 'Measure your Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism in one assessment.',
+                    'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
+                ],
+                'zh' => [
+                    'title' => '大五人格测试（OCEAN 模型）',
+                    'description' => '用一次测评了解开放性、尽责性、外倾性、宜人性与神经质。',
+                    'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
+                ],
+            ],
+            'content_i18n_json' => $this->catalogContent(
+                enTitle: 'Big Five Personality Test (OCEAN Model)',
+                zhTitle: '大五人格测试（OCEAN 模型）',
+                enDescription: 'Measure your Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism in one assessment.',
+                zhDescription: '用一次测评了解开放性、尽责性、外倾性、宜人性与神经质。',
+                questions: 120,
+                minutes: 20,
+                cardVisual: 'bars_ocean',
+                cardTone: 'editorial',
+                cardSeed: 'big-five',
+                cardDensity: 'regular',
+                enTagline: 'Trait distribution profile',
+                zhTagline: '特质分布画像',
+                priority: 95,
+                rating: 5,
+                enExcerpt: 'Using a scientifically validated framework, uncover the traits at the core of your personality. See how the Big Five can shape your life, career path, and close relationships.',
+                zhExcerpt: '借助学术界公认的科学量表，解码你的底层性格特征。深入了解这五大特质将如何深刻影响你的生活、工作轨迹与亲密关系。',
+                enSeoCopy: 'Big Five is one of the most validated personality frameworks in modern psychology. The report translates Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism into practical growth decisions.',
+                zhSeoCopy: '大五人格是现代心理学验证度最高的模型之一。报告将开放性、尽责性、外倾性、宜人性与神经质转化为可执行的成长建议。'
+            ),
 
             'is_public' => true,
             'is_active' => true,
@@ -189,6 +253,38 @@ final class ScaleRegistrySeeder extends Seeder
                 'name' => 'Comprehensive Depression and Anxiety Inventory',
                 'description' => 'Clinical combo assessment with 68 items.',
             ],
+            'seo_i18n_json' => [
+                'en' => [
+                    'title' => 'Clinical Depression & Anxiety Assessment (Professional Edition)',
+                    'description' => 'A 68-item multidomain mental health screening covering depression, anxiety, OCD, stress, and perfectionism traits.',
+                    'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
+                ],
+                'zh' => [
+                    'title' => '抑郁焦虑综合检测【学术专业版】',
+                    'description' => '覆盖抑郁、焦虑、强迫、压力与完美主义倾向的 68 题多维筛查。',
+                    'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
+                ],
+            ],
+            'content_i18n_json' => $this->catalogContent(
+                enTitle: 'Clinical Depression & Anxiety Assessment (Professional Edition)',
+                zhTitle: '抑郁焦虑综合检测【学术专业版】',
+                enDescription: 'A 68-item multidomain mental health screening covering depression, anxiety, OCD, stress, and perfectionism traits.',
+                zhDescription: '覆盖抑郁、焦虑、强迫、压力与完美主义倾向的 68 题多维筛查。',
+                questions: 68,
+                minutes: 12,
+                cardVisual: 'wave_clinical',
+                cardTone: 'clinical',
+                cardSeed: 'cc68',
+                cardDensity: 'dense',
+                enTagline: 'Multidomain screening',
+                zhTagline: '多维筛查',
+                priority: 90,
+                rating: 4,
+                enExcerpt: 'Gain a comprehensive view of your current mental and emotional load. Identify potential stressors and anxiety triggers more clearly, with self-awareness-centered guidance for recovery planning.',
+                zhExcerpt: '全面透视你当前的心理与情绪负荷。帮助你更清晰地识别可能的压力源与焦虑触发点，并提供以自我觉察为核心的恢复方向参考。',
+                enSeoCopy: 'Clinical Combo 68 evaluates multiple symptom domains in one unified flow. It is intended for self-awareness and support routing, and does not replace professional diagnosis.',
+                zhSeoCopy: 'Clinical Combo 68 在一次流程中覆盖多个症状维度，面向自我觉察与支持分流，不替代专业诊断。'
+            ),
             'is_public' => true,
             'is_active' => true,
         ]);
@@ -237,6 +333,38 @@ final class ScaleRegistrySeeder extends Seeder
                 'name' => 'SDS-20 Depression Screening',
                 'description' => 'SDS-20 self-rating depression screening scale.',
             ],
+            'seo_i18n_json' => [
+                'en' => [
+                    'title' => 'Depression Screening Test (Standard Edition)',
+                    'description' => 'A 20-item self-report screening questionnaire for recent depressive symptom burden.',
+                    'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
+                ],
+                'zh' => [
+                    'title' => '抑郁测评【标准版】',
+                    'description' => '用于了解近期抑郁症状负担的 20 题自评筛查问卷。',
+                    'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
+                ],
+            ],
+            'content_i18n_json' => $this->catalogContent(
+                enTitle: 'Depression Screening Test (Standard Edition)',
+                zhTitle: '抑郁测评【标准版】',
+                enDescription: 'A 20-item self-report screening questionnaire for recent depressive symptom burden.',
+                zhDescription: '用于了解近期抑郁症状负担的 20 题自评筛查问卷。',
+                questions: 20,
+                minutes: 5,
+                cardVisual: 'wave_clinical',
+                cardTone: 'clinical',
+                cardSeed: 'sds20',
+                cardDensity: 'compact',
+                enTagline: 'Mood burden snapshot',
+                zhTagline: '情绪负担快照',
+                priority: 85,
+                rating: 4,
+                enExcerpt: 'Quickly assess your recent emotional baseline and fatigue level. See your current state more objectively, so you can pause when needed and gradually return to balance.',
+                zhExcerpt: '快速评估你近期的情绪基线与疲劳状态。更客观地了解内心状态，帮助你适时按下生活中的“暂停键”，逐步找回内在平衡。',
+                enSeoCopy: 'SDS-20 offers a lightweight symptom screening snapshot with structured factor outputs. It supports early self-observation and should be interpreted with professional clinical guidance when needed.',
+                zhSeoCopy: 'SDS-20 提供轻量化症状筛查与结构化因子输出，适合早期自我观察；如需诊疗请结合专业临床建议解读。'
+            ),
             'is_public' => true,
             'is_active' => true,
         ]);
@@ -287,11 +415,35 @@ final class ScaleRegistrySeeder extends Seeder
             'seo_i18n_json' => [
                 'en' => [
                     'title' => 'IQ Test (Intelligence Quotient Assessment)',
+                    'description' => 'Assess your matrix reasoning, pattern recognition, and abstract problem-solving ability.',
+                    'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
                 ],
                 'zh' => [
                     'title' => '智商（IQ）测试',
+                    'description' => '评估矩阵推理、模式识别与抽象问题解决能力。',
+                    'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
                 ],
             ],
+            'content_i18n_json' => $this->catalogContent(
+                enTitle: 'IQ Test (Intelligence Quotient Assessment)',
+                zhTitle: '智商（IQ）测试',
+                enDescription: 'Assess your matrix reasoning, pattern recognition, and abstract problem-solving ability.',
+                zhDescription: '评估矩阵推理、模式识别与抽象问题解决能力。',
+                questions: 60,
+                minutes: 12,
+                cardVisual: 'spark_minimal',
+                cardTone: 'editorial',
+                cardSeed: 'iq',
+                cardDensity: 'regular',
+                enTagline: 'Cognitive reasoning profile',
+                zhTagline: '认知推理画像',
+                priority: 80,
+                rating: 4,
+                enExcerpt: 'Explore your true cognitive potential. Through rigorous logic and spatial-reasoning challenges, pinpoint your intellectual strengths and core problem-solving ability.',
+                zhExcerpt: '探索你大脑的真实认知潜能。通过严谨的逻辑与空间推理挑战，精准定位你的智力优势与核心解决问题能力。',
+                enSeoCopy: 'This IQ assessment focuses on matrix reasoning and pattern analysis for educational self-evaluation.',
+                zhSeoCopy: '该 IQ 测试聚焦矩阵推理与模式分析，用于学习与认知能力自评参考。'
+            ),
             'is_public' => true,
             'is_active' => true,
         ]);
@@ -340,17 +492,222 @@ final class ScaleRegistrySeeder extends Seeder
             'seo_i18n_json' => [
                 'en' => [
                     'title' => 'EQ Test (Emotional Intelligence Assessment)',
+                    'description' => 'Measure emotional awareness, regulation, empathy, and interpersonal communication tendencies.',
+                    'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
                 ],
                 'zh' => [
                     'title' => '情商（EQ）测试',
+                    'description' => '评估情绪觉察、情绪调节、共情与人际沟通倾向。',
+                    'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
                 ],
             ],
+            'content_i18n_json' => $this->catalogContent(
+                enTitle: 'EQ Test (Emotional Intelligence Assessment)',
+                zhTitle: '情商（EQ）测试',
+                enDescription: 'Measure emotional awareness, regulation, empathy, and interpersonal communication tendencies.',
+                zhDescription: '评估情绪觉察、情绪调节、共情与人际沟通倾向。',
+                questions: 50,
+                minutes: 10,
+                cardVisual: 'spark_minimal',
+                cardTone: 'warm',
+                cardSeed: 'eq',
+                cardDensity: 'regular',
+                enTagline: 'Emotional capability map',
+                zhTagline: '情绪能力图谱',
+                priority: 79,
+                rating: 4,
+                enExcerpt: 'Unlock your strengths in handling emotions and relationships. Deeply assess self-awareness and empathy to build stronger emotional connection and influence at work and in life.',
+                zhExcerpt: '解锁你处理情绪与人际关系的天赋。深度评估自我觉察与共情能力，助你在职场与生活中建立更深度的情感连接与影响力。',
+                enSeoCopy: 'This EQ assessment emphasizes emotional regulation and relationship communication for practical growth planning.',
+                zhSeoCopy: '该 EQ 测评强调情绪调节与关系沟通能力，用于实际成长计划参考。'
+            ),
             'is_public' => true,
             'is_active' => true,
         ]);
 
         $writer->syncSlugsForScale($eq60);
         $this->command?->info('ScaleRegistrySeeder: EQ_60 scale upserted.');
+    }
+
+    /**
+     * @return array<string,array<string,mixed>>
+     */
+    private function catalogContent(
+        string $enTitle,
+        string $zhTitle,
+        string $enDescription,
+        string $zhDescription,
+        int $questions,
+        int $minutes,
+        string $cardVisual,
+        string $cardTone,
+        string $cardSeed,
+        string $cardDensity,
+        string $enTagline,
+        string $zhTagline,
+        int $priority,
+        int $rating,
+        string $enExcerpt,
+        string $zhExcerpt,
+        string $enSeoCopy,
+        string $zhSeoCopy,
+    ): array {
+        return [
+            'en' => $this->catalogLocaleContent(
+                title: $enTitle,
+                description: $enDescription,
+                questions: $questions,
+                minutes: $minutes,
+                cardVisual: $cardVisual,
+                cardTone: $cardTone,
+                cardSeed: $cardSeed,
+                cardDensity: $cardDensity,
+                tagline: $enTagline,
+                priority: $priority,
+                rating: $rating,
+                excerpt: $enExcerpt,
+                seoCopy: $enSeoCopy,
+            ),
+            'zh' => $this->catalogLocaleContent(
+                title: $zhTitle,
+                description: $zhDescription,
+                questions: $questions,
+                minutes: $minutes,
+                cardVisual: $cardVisual,
+                cardTone: $cardTone,
+                cardSeed: $cardSeed,
+                cardDensity: $cardDensity,
+                tagline: $zhTagline,
+                priority: $priority,
+                rating: $rating,
+                excerpt: $zhExcerpt,
+                seoCopy: $zhSeoCopy,
+            ),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function catalogLocaleContent(
+        string $title,
+        string $description,
+        int $questions,
+        int $minutes,
+        string $cardVisual,
+        string $cardTone,
+        string $cardSeed,
+        string $cardDensity,
+        string $tagline,
+        int $priority,
+        int $rating,
+        string $excerpt,
+        string $seoCopy,
+    ): array {
+        $isZh = preg_match('/\p{Han}/u', $title) === 1;
+
+        return [
+            'title' => $title,
+            'description' => $description,
+            'landing_copy' => $description,
+            'when_to_use' => $this->genericWhenToUse($questions, $minutes, $isZh),
+            'audience' => $this->genericAudience($questions, $isZh),
+            'how_it_works' => $this->genericHowItWorks($questions, $isZh),
+            'faq' => $this->genericFaq($questions, $minutes, $isZh),
+            'catalog' => [
+                'cover_image' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
+                'questions_count' => $questions,
+                'time_minutes' => $minutes,
+            ],
+            'card' => [
+                'visual' => $cardVisual,
+                'tone' => $cardTone,
+                'seed' => $cardSeed,
+                'density' => $cardDensity,
+                'tagline' => $tagline,
+            ],
+            'highlight' => [
+                'priority' => $priority,
+                'rating' => $rating,
+                'excerpt' => $excerpt,
+                'seo_copy' => $seoCopy,
+            ],
+        ];
+    }
+
+    private function genericWhenToUse(int $questions, int $minutes, bool $isZh): string
+    {
+        if ($isZh) {
+            return "当你希望用约 {$minutes} 分钟完成 {$questions} 题，并获得更清晰的下一步判断时，适合使用这份测评。";
+        }
+
+        return "Use this {$questions}-item assessment when you want a structured result in about {$minutes} minutes and need a clearer next step.";
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function genericAudience(int $questions, bool $isZh): array
+    {
+        if ($isZh) {
+            return [
+                $questions >= 90 ? '想获得较完整结构化画像，而不是只看一个快速标签的人。' : '想先做一次聚焦筛查，再决定是否深入查看的人。',
+                '正在把个人模式与工作、学习、关系或状态管理放在一起比较的人。',
+                '希望结果页之后仍能继续复盘和阅读的人。',
+            ];
+        }
+
+        return [
+            $questions >= 90
+                ? 'People who want a deeper structured profile rather than a quick label.'
+                : 'People who want a focused first-pass read before deciding whether to go deeper.',
+            'People comparing personal patterns with work, learning, relationship, or wellbeing decisions.',
+            'People who want an interpretation they can revisit after the result page.',
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function genericHowItWorks(int $questions, bool $isZh): array
+    {
+        if ($isZh) {
+            return [
+                "在一次专注会话中完成 {$questions} 题。",
+                '提交答案后立即查看生成的结果摘要。',
+                '根据核心结果选择更深入的报告、指南或关联内容。',
+                '当你的处境发生变化后，可以再次测试并与早期基线比较。',
+            ];
+        }
+
+        return [
+            "Complete {$questions} questions in one focused session.",
+            'Submit your answers and review the generated summary.',
+            'Use the core result to decide which deeper report, guide, or related content to open next.',
+            'Retake later when your context changes and compare the result with your earlier baseline.',
+        ];
+    }
+
+    /**
+     * @return list<array{q:string,a:string}>
+     */
+    private function genericFaq(int $questions, int $minutes, bool $isZh): array
+    {
+        if ($isZh) {
+            return [
+                ['q' => '需要多久？', 'a' => "大多数用户会在 {$minutes} 分钟左右完成。"],
+                ['q' => '每道题都要回答吗？', 'a' => "是的。完整结果依赖全部 {$questions} 题。"],
+                ['q' => '可以重复测试吗？', 'a' => '可以。重复测试有助于比较不同时间或不同处境下的变化。'],
+                ['q' => '这是诊断吗？', 'a' => '不是。本测评用于教育性自我理解，不替代专业建议。'],
+            ];
+        }
+
+        return [
+            ['q' => 'How long does it take?', 'a' => "Most users finish in about {$minutes} minutes."],
+            ['q' => 'Do I need to answer every question?', 'a' => "Yes. The scoring flow expects all {$questions} items for a complete result."],
+            ['q' => 'Can I retake it?', 'a' => 'Yes. Retaking can help you compare changes across time or context.'],
+            ['q' => 'Is this a diagnosis?', 'a' => 'No. This is an educational self-understanding tool and does not replace professional advice.'],
+        ];
     }
 
     private function resolveSkuDefaults(): array
