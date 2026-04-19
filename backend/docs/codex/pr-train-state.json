@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-20T00:12:47+08:00",
+  "updated_at": "2026-04-20T00:14:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,9 +9,9 @@
     "PR-V4-P5C": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "in_progress",
+      "status": "merged",
       "branch": "codex/pr-v4-p5c-media-url-audit",
-      "commit_sha": "17383d9f87c143994dbdf948265a58b469d012fd",
+      "commit_sha": "3867c1a1e167e61d080e8ba3347803b5abb324be",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/947",
       "checks": {
         "local": [
@@ -57,9 +57,9 @@
       },
       "failure_reason": "GitHub Actions hygiene failed immediately on PR #947 and verify-mbti matrix was skipped. Local manifest checks passed and the merge policy does not require GitHub checks for this read-only media URL audit PR.",
       "resume_policy": "manual_only",
-      "merged_at": null,
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-04-19T16:13:34Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "PR-V4-P5B": {
       "repo": "fap-api",
