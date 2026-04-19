@@ -1,0 +1,147 @@
+{
+  "surface_key": "career_home",
+  "locale": "en",
+  "title": "Career Library and Explorer",
+  "description": "Enter career profiles through the full occupation library, industry directories, and personality-based recommendations.",
+  "schema_version": "career-home.v1",
+  "status": "published",
+  "is_public": true,
+  "is_indexable": true,
+  "payload_json": {
+    "seo": {
+      "title": "Career Library and Explorer",
+      "description": "Enter career profiles through the full occupation library, industry directories, and personality-based recommendations."
+    },
+    "hero": {
+      "eyebrow": "Career",
+      "title": "Start with the library, then narrow the path",
+      "body": "Enter career exploration through the full directory, industry pathways, or assessment-based recommendations."
+    },
+    "pathways": [
+      {
+        "id": "jobs",
+        "eyebrow": "All occupations",
+        "title": "Browse 342 occupations",
+        "description": "Start with the full directory, then narrow by industry or keyword.",
+        "href": "/career/jobs",
+        "ctaLabel": "Search all occupations",
+        "searchPlaceholder": "Enter a role or direction"
+      },
+      {
+        "id": "industries",
+        "eyebrow": "Industry entry",
+        "title": "Browse roles by industry",
+        "description": "Use this when you know the broad field but not the exact role.",
+        "href": "/career/industries",
+        "ctaLabel": "View industries"
+      },
+      {
+        "id": "recommendations",
+        "eyebrow": "From assessment",
+        "title": "Use personality results",
+        "description": "If you already have MBTI or Big Five results, start with recommendation paths.",
+        "href": "/career/recommendations",
+        "ctaLabel": "View recommendations"
+      }
+    ],
+    "support": {
+      "title": "Support material for later",
+      "links": [
+        {
+          "label": "Career development articles",
+          "href": "/career/guides"
+        },
+        {
+          "label": "Career tests",
+          "href": "/career/tests"
+        },
+        {
+          "label": "Data source",
+          "href": "/datasets/occupations"
+        },
+        {
+          "label": "Method notes",
+          "href": "/datasets/occupations/method"
+        }
+      ]
+    }
+  },
+  "page_blocks": [
+    {
+      "block_key": "hero",
+      "block_type": "career_home_section",
+      "title": "Start with the library, then narrow the path",
+      "payload_json": {
+        "eyebrow": "Career",
+        "title": "Start with the library, then narrow the path",
+        "body": "Enter career exploration through the full directory, industry pathways, or assessment-based recommendations."
+      },
+      "sort_order": 0,
+      "is_enabled": true
+    },
+    {
+      "block_key": "pathways",
+      "block_type": "career_home_section",
+      "title": "Pathways",
+      "payload_json": {
+        "items": [
+          {
+            "id": "jobs",
+            "eyebrow": "All occupations",
+            "title": "Browse 342 occupations",
+            "description": "Start with the full directory, then narrow by industry or keyword.",
+            "href": "/career/jobs",
+            "ctaLabel": "Search all occupations",
+            "searchPlaceholder": "Enter a role or direction"
+          },
+          {
+            "id": "industries",
+            "eyebrow": "Industry entry",
+            "title": "Browse roles by industry",
+            "description": "Use this when you know the broad field but not the exact role.",
+            "href": "/career/industries",
+            "ctaLabel": "View industries"
+          },
+          {
+            "id": "recommendations",
+            "eyebrow": "From assessment",
+            "title": "Use personality results",
+            "description": "If you already have MBTI or Big Five results, start with recommendation paths.",
+            "href": "/career/recommendations",
+            "ctaLabel": "View recommendations"
+          }
+        ]
+      },
+      "sort_order": 1,
+      "is_enabled": true
+    },
+    {
+      "block_key": "support",
+      "block_type": "career_home_section",
+      "title": "Support material for later",
+      "payload_json": {
+        "title": "Support material for later",
+        "links": [
+          {
+            "label": "Career development articles",
+            "href": "/career/guides"
+          },
+          {
+            "label": "Career tests",
+            "href": "/career/tests"
+          },
+          {
+            "label": "Data source",
+            "href": "/datasets/occupations"
+          },
+          {
+            "label": "Method notes",
+            "href": "/datasets/occupations/method"
+          }
+        ]
+      },
+      "sort_order": 2,
+      "is_enabled": true
+    }
+  ]
+}

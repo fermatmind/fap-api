@@ -1,0 +1,529 @@
+{
+  "surface_key": "tests_category_personality",
+  "locale": "en",
+  "title": "Personality & Style Tests",
+  "description": "A category hub for personality style, stable traits, and collaboration preferences with a clearer path into the right test.",
+  "schema_version": "tests-category.v1",
+  "status": "published",
+  "is_public": true,
+  "is_indexable": true,
+  "payload_json": {
+    "slug": "personality",
+    "seo": {
+      "title": "Personality & Style Tests",
+      "description": "A category hub for personality style, stable traits, and collaboration preferences with a clearer path into the right test."
+    },
+    "breadcrumb": [
+      {
+        "label": "Tests",
+        "href": "/en/tests",
+        "path": "/en/tests"
+      },
+      {
+        "label": "Personality & Style",
+        "path": "/en/tests/category/personality"
+      }
+    ],
+    "hero": {
+      "eyebrow": "Personality & Style",
+      "title": "Personality & Style Tests",
+      "body": "Best for reading preference patterns, stable traits, and collaboration style before applying them to learning, career, and relationship decisions.",
+      "points": [
+        "A strong first entry into personality-focused assessment",
+        "Helps build a more stable self-understanding baseline",
+        "Best used for discussion and review, not fixed labeling"
+      ]
+    },
+    "featured": {
+      "kicker": "Featured Tests",
+      "title": "Start with the most useful representative tests first.",
+      "body": "Start with MBTI for a discussable type frame, or Big Five for a more dimensional trait read.",
+      "items": [
+        {
+          "key": "mbti-personality-test-16-personality-types",
+          "title": "MBTI Personality Test",
+          "description": "When you want a quick read on personality style, preference patterns, and collaboration tendencies.",
+          "questionsLabel": "93-144 questions",
+          "durationLabel": "12-20 min",
+          "outputLabel": "Type profile, preference map, and scenario interpretation",
+          "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+          "secondaryLabel": "View details",
+          "scientificBasis": "Based on Jungian-inspired typology",
+          "previewVariant": "summary",
+          "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+          "primaryActions": [
+            {
+              "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+              "label": "Standard",
+              "meta": "A fast type preference read."
+            },
+            {
+              "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+              "label": "Pro",
+              "meta": "A more complete type read."
+            }
+          ],
+          "primaryLabel": "Standard"
+        },
+        {
+          "key": "big-five-personality-test-ocean-model",
+          "title": "Big Five Personality Test",
+          "description": "When you need a more dimensional view of how stable traits shape work, stress, and relationships.",
+          "questionsLabel": "60-120 questions",
+          "durationLabel": "10-18 min",
+          "outputLabel": "Five-factor trait profile with strengths and application notes",
+          "detailsHref": "/en/tests/big-five-personality-test-ocean-model",
+          "secondaryLabel": "View details",
+          "scientificBasis": "Based on Big Five",
+          "previewVariant": "radar",
+          "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+          "primaryActions": [
+            {
+              "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+              "label": "Standard",
+              "meta": "A quick Big Five read."
+            },
+            {
+              "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=pro",
+              "label": "Pro",
+              "meta": "A deeper trait read."
+            }
+          ],
+          "primaryLabel": "Standard"
+        }
+      ]
+    },
+    "allTests": {
+      "kicker": "All Tests in Category",
+      "title": "All tests in this category",
+      "body": "If you already know what kind of read you want, jump directly into the specific test here.",
+      "items": [
+        {
+          "key": "mbti-personality-test-16-personality-types",
+          "title": "MBTI Personality Test",
+          "description": "When you want a quick read on personality style, preference patterns, and collaboration tendencies.",
+          "questionsLabel": "93-144 questions",
+          "durationLabel": "12-20 min",
+          "outputLabel": "Type profile, preference map, and scenario interpretation",
+          "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+          "secondaryLabel": "View details",
+          "scientificBasis": "Based on Jungian-inspired typology",
+          "previewVariant": "summary",
+          "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+          "primaryActions": [
+            {
+              "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+              "label": "Standard",
+              "meta": "A fast type preference read."
+            },
+            {
+              "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+              "label": "Pro",
+              "meta": "A more complete type read."
+            }
+          ],
+          "primaryLabel": "Standard"
+        },
+        {
+          "key": "big-five-personality-test-ocean-model",
+          "title": "Big Five Personality Test",
+          "description": "When you need a more dimensional view of how stable traits shape work, stress, and relationships.",
+          "questionsLabel": "60-120 questions",
+          "durationLabel": "10-18 min",
+          "outputLabel": "Five-factor trait profile with strengths and application notes",
+          "detailsHref": "/en/tests/big-five-personality-test-ocean-model",
+          "secondaryLabel": "View details",
+          "scientificBasis": "Based on Big Five",
+          "previewVariant": "radar",
+          "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+          "primaryActions": [
+            {
+              "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+              "label": "Standard",
+              "meta": "A quick Big Five read."
+            },
+            {
+              "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=pro",
+              "label": "Pro",
+              "meta": "A deeper trait read."
+            }
+          ],
+          "primaryLabel": "Standard"
+        },
+        {
+          "key": "eq-test-emotional-intelligence-assessment",
+          "title": "EQ Test",
+          "description": "When you want to review emotional regulation, communication, and collaboration skills.",
+          "questionsLabel": "60 questions",
+          "durationLabel": "10 min",
+          "outputLabel": "Emotional skill profile, communication cues, and growth direction",
+          "detailsHref": "/en/tests/eq-test-emotional-intelligence-assessment",
+          "secondaryLabel": "View details",
+          "scientificBasis": "Based on EQ framework",
+          "previewVariant": "bars",
+          "href": "/en/tests/eq-test-emotional-intelligence-assessment/take",
+          "primaryLabel": "Start test"
+        }
+      ]
+    },
+    "differences": {
+      "kicker": "How These Tests Differ",
+      "title": "Tests in the same family do not solve the same problem.",
+      "body": "Choosing the right lens matters more than scanning every title.",
+      "items": [
+        {
+          "title": "MBTI is often the easiest first entry",
+          "description": "It works well when you want personality language that is easier to discuss, remember, and share."
+        },
+        {
+          "title": "Big Five is more dimensional",
+          "description": "Choose it when you want stable trait ranges and less type-based interpretation."
+        },
+        {
+          "title": "EQ is stronger for real interaction patterns",
+          "description": "It is more useful for communication, conflict, feedback, and collaboration than for full personality mapping."
+        }
+      ]
+    },
+    "resources": {
+      "kicker": "Related Resources",
+      "title": "Three useful reads to deepen the choice",
+      "body": "Read these if you want more context before choosing.",
+      "items": [
+        {
+          "key": "mbti-basics",
+          "typeLabel": "Article",
+          "title": "MBTI Basics",
+          "description": "Understand what MBTI is good for before deciding whether it is your best starting point.",
+          "href": "/en/articles/mbti-basics"
+        },
+        {
+          "key": "mbti-growth-guide",
+          "typeLabel": "Article",
+          "title": "MBTI Growth Guide",
+          "description": "Translate personality results into concrete growth and collaboration actions.",
+          "href": "/en/articles/mbti-growth-guide"
+        },
+        {
+          "key": "big-five-tool-guide",
+          "typeLabel": "Article",
+          "title": "Big Five Tool Guide",
+          "description": "A better entry if you prefer dimensional interpretation over type language.",
+          "href": "/en/articles/big-five-tool-guide"
+        }
+      ]
+    },
+    "trust": {
+      "title": "Method, boundary, and use",
+      "items": [
+        {
+          "title": "Results support judgment. They do not define a person.",
+          "body": "Use reports to structure discussion, clarify tendencies, and decide the next move instead of treating them as final labels."
+        },
+        {
+          "title": "You can start anonymously",
+          "body": "You can start from the question and the right test version first, then decide later whether to share more information."
+        },
+        {
+          "title": "Not a substitute for medical, legal, or diagnostic advice",
+          "body": "State-oriented results are structured references, not formal diagnosis, treatment, or legal guidance."
+        },
+        {
+          "title": "Results should be reviewed in context",
+          "body": "The strongest use cases are learning plans, career conversations, collaboration review, and recurring reflection."
+        }
+      ]
+    },
+    "finalCta": {
+      "title": "Start with the personality entry that fits your decision style.",
+      "body": "Start with MBTI for a more discussable type framework, or Big Five for a more dimensional read.",
+      "primaryLabel": "Start personality tests",
+      "primaryHref": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard"
+    }
+  },
+  "page_blocks": [
+    {
+      "block_key": "breadcrumb",
+      "block_type": "tests_category_section",
+      "title": "breadcrumb",
+      "payload_json": [
+        {
+          "label": "Tests",
+          "href": "/en/tests",
+          "path": "/en/tests"
+        },
+        {
+          "label": "Personality & Style",
+          "path": "/en/tests/category/personality"
+        }
+      ],
+      "sort_order": 0,
+      "is_enabled": true
+    },
+    {
+      "block_key": "hero",
+      "block_type": "tests_category_section",
+      "title": "Personality & Style Tests",
+      "payload_json": {
+        "eyebrow": "Personality & Style",
+        "title": "Personality & Style Tests",
+        "body": "Best for reading preference patterns, stable traits, and collaboration style before applying them to learning, career, and relationship decisions.",
+        "points": [
+          "A strong first entry into personality-focused assessment",
+          "Helps build a more stable self-understanding baseline",
+          "Best used for discussion and review, not fixed labeling"
+        ]
+      },
+      "sort_order": 1,
+      "is_enabled": true
+    },
+    {
+      "block_key": "featured",
+      "block_type": "tests_category_section",
+      "title": "Start with the most useful representative tests first.",
+      "payload_json": {
+        "kicker": "Featured Tests",
+        "title": "Start with the most useful representative tests first.",
+        "body": "Start with MBTI for a discussable type frame, or Big Five for a more dimensional trait read.",
+        "items": [
+          {
+            "key": "mbti-personality-test-16-personality-types",
+            "title": "MBTI Personality Test",
+            "description": "When you want a quick read on personality style, preference patterns, and collaboration tendencies.",
+            "questionsLabel": "93-144 questions",
+            "durationLabel": "12-20 min",
+            "outputLabel": "Type profile, preference map, and scenario interpretation",
+            "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+            "secondaryLabel": "View details",
+            "scientificBasis": "Based on Jungian-inspired typology",
+            "previewVariant": "summary",
+            "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+            "primaryActions": [
+              {
+                "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                "label": "Standard",
+                "meta": "A fast type preference read."
+              },
+              {
+                "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                "label": "Pro",
+                "meta": "A more complete type read."
+              }
+            ],
+            "primaryLabel": "Standard"
+          },
+          {
+            "key": "big-five-personality-test-ocean-model",
+            "title": "Big Five Personality Test",
+            "description": "When you need a more dimensional view of how stable traits shape work, stress, and relationships.",
+            "questionsLabel": "60-120 questions",
+            "durationLabel": "10-18 min",
+            "outputLabel": "Five-factor trait profile with strengths and application notes",
+            "detailsHref": "/en/tests/big-five-personality-test-ocean-model",
+            "secondaryLabel": "View details",
+            "scientificBasis": "Based on Big Five",
+            "previewVariant": "radar",
+            "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+            "primaryActions": [
+              {
+                "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                "label": "Standard",
+                "meta": "A quick Big Five read."
+              },
+              {
+                "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=pro",
+                "label": "Pro",
+                "meta": "A deeper trait read."
+              }
+            ],
+            "primaryLabel": "Standard"
+          }
+        ]
+      },
+      "sort_order": 2,
+      "is_enabled": true
+    },
+    {
+      "block_key": "allTests",
+      "block_type": "tests_category_section",
+      "title": "All tests in this category",
+      "payload_json": {
+        "kicker": "All Tests in Category",
+        "title": "All tests in this category",
+        "body": "If you already know what kind of read you want, jump directly into the specific test here.",
+        "items": [
+          {
+            "key": "mbti-personality-test-16-personality-types",
+            "title": "MBTI Personality Test",
+            "description": "When you want a quick read on personality style, preference patterns, and collaboration tendencies.",
+            "questionsLabel": "93-144 questions",
+            "durationLabel": "12-20 min",
+            "outputLabel": "Type profile, preference map, and scenario interpretation",
+            "detailsHref": "/en/tests/mbti-personality-test-16-personality-types",
+            "secondaryLabel": "View details",
+            "scientificBasis": "Based on Jungian-inspired typology",
+            "previewVariant": "summary",
+            "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+            "primaryActions": [
+              {
+                "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard",
+                "label": "Standard",
+                "meta": "A fast type preference read."
+              },
+              {
+                "href": "/en/tests/mbti-personality-test-16-personality-types/take?variant=pro",
+                "label": "Pro",
+                "meta": "A more complete type read."
+              }
+            ],
+            "primaryLabel": "Standard"
+          },
+          {
+            "key": "big-five-personality-test-ocean-model",
+            "title": "Big Five Personality Test",
+            "description": "When you need a more dimensional view of how stable traits shape work, stress, and relationships.",
+            "questionsLabel": "60-120 questions",
+            "durationLabel": "10-18 min",
+            "outputLabel": "Five-factor trait profile with strengths and application notes",
+            "detailsHref": "/en/tests/big-five-personality-test-ocean-model",
+            "secondaryLabel": "View details",
+            "scientificBasis": "Based on Big Five",
+            "previewVariant": "radar",
+            "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+            "primaryActions": [
+              {
+                "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=standard",
+                "label": "Standard",
+                "meta": "A quick Big Five read."
+              },
+              {
+                "href": "/en/tests/big-five-personality-test-ocean-model/take?variant=pro",
+                "label": "Pro",
+                "meta": "A deeper trait read."
+              }
+            ],
+            "primaryLabel": "Standard"
+          },
+          {
+            "key": "eq-test-emotional-intelligence-assessment",
+            "title": "EQ Test",
+            "description": "When you want to review emotional regulation, communication, and collaboration skills.",
+            "questionsLabel": "60 questions",
+            "durationLabel": "10 min",
+            "outputLabel": "Emotional skill profile, communication cues, and growth direction",
+            "detailsHref": "/en/tests/eq-test-emotional-intelligence-assessment",
+            "secondaryLabel": "View details",
+            "scientificBasis": "Based on EQ framework",
+            "previewVariant": "bars",
+            "href": "/en/tests/eq-test-emotional-intelligence-assessment/take",
+            "primaryLabel": "Start test"
+          }
+        ]
+      },
+      "sort_order": 3,
+      "is_enabled": true
+    },
+    {
+      "block_key": "differences",
+      "block_type": "tests_category_section",
+      "title": "Tests in the same family do not solve the same problem.",
+      "payload_json": {
+        "kicker": "How These Tests Differ",
+        "title": "Tests in the same family do not solve the same problem.",
+        "body": "Choosing the right lens matters more than scanning every title.",
+        "items": [
+          {
+            "title": "MBTI is often the easiest first entry",
+            "description": "It works well when you want personality language that is easier to discuss, remember, and share."
+          },
+          {
+            "title": "Big Five is more dimensional",
+            "description": "Choose it when you want stable trait ranges and less type-based interpretation."
+          },
+          {
+            "title": "EQ is stronger for real interaction patterns",
+            "description": "It is more useful for communication, conflict, feedback, and collaboration than for full personality mapping."
+          }
+        ]
+      },
+      "sort_order": 4,
+      "is_enabled": true
+    },
+    {
+      "block_key": "resources",
+      "block_type": "tests_category_section",
+      "title": "Three useful reads to deepen the choice",
+      "payload_json": {
+        "kicker": "Related Resources",
+        "title": "Three useful reads to deepen the choice",
+        "body": "Read these if you want more context before choosing.",
+        "items": [
+          {
+            "key": "mbti-basics",
+            "typeLabel": "Article",
+            "title": "MBTI Basics",
+            "description": "Understand what MBTI is good for before deciding whether it is your best starting point.",
+            "href": "/en/articles/mbti-basics"
+          },
+          {
+            "key": "mbti-growth-guide",
+            "typeLabel": "Article",
+            "title": "MBTI Growth Guide",
+            "description": "Translate personality results into concrete growth and collaboration actions.",
+            "href": "/en/articles/mbti-growth-guide"
+          },
+          {
+            "key": "big-five-tool-guide",
+            "typeLabel": "Article",
+            "title": "Big Five Tool Guide",
+            "description": "A better entry if you prefer dimensional interpretation over type language.",
+            "href": "/en/articles/big-five-tool-guide"
+          }
+        ]
+      },
+      "sort_order": 5,
+      "is_enabled": true
+    },
+    {
+      "block_key": "trust",
+      "block_type": "tests_category_section",
+      "title": "Method, boundary, and use",
+      "payload_json": {
+        "title": "Method, boundary, and use",
+        "items": [
+          {
+            "title": "Results support judgment. They do not define a person.",
+            "body": "Use reports to structure discussion, clarify tendencies, and decide the next move instead of treating them as final labels."
+          },
+          {
+            "title": "You can start anonymously",
+            "body": "You can start from the question and the right test version first, then decide later whether to share more information."
+          },
+          {
+            "title": "Not a substitute for medical, legal, or diagnostic advice",
+            "body": "State-oriented results are structured references, not formal diagnosis, treatment, or legal guidance."
+          },
+          {
+            "title": "Results should be reviewed in context",
+            "body": "The strongest use cases are learning plans, career conversations, collaboration review, and recurring reflection."
+          }
+        ]
+      },
+      "sort_order": 6,
+      "is_enabled": true
+    },
+    {
+      "block_key": "finalCta",
+      "block_type": "tests_category_section",
+      "title": "Start with the personality entry that fits your decision style.",
+      "payload_json": {
+        "title": "Start with the personality entry that fits your decision style.",
+        "body": "Start with MBTI for a more discussable type framework, or Big Five for a more dimensional read.",
+        "primaryLabel": "Start personality tests",
+        "primaryHref": "/en/tests/mbti-personality-test-16-personality-types/take?variant=standard"
+      },
+      "sort_order": 7,
+      "is_enabled": true
+    }
+  ]
+}

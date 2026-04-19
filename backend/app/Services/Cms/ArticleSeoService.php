@@ -85,6 +85,7 @@ final class ArticleSeoService
         $description = $seo?->seo_description
             ?? Str::limit($this->normalizeWhitespace(strip_tags($descriptionSource)), 160);
         $canonical = $this->buildCanonicalUrl((string) $article->slug, $locale);
+        $image = $seo?->og_image_url ?? $this->resolveArticleImageUrl($article);
 
         return [
             'title' => $title,
@@ -95,7 +96,7 @@ final class ArticleSeoService
             'og' => [
                 'title' => $seo?->og_title ?? $title,
                 'description' => $seo?->og_description ?? $description,
-                'image' => $seo?->og_image_url,
+                'image' => $image,
                 'type' => 'article',
             ],
 
@@ -103,7 +104,7 @@ final class ArticleSeoService
                 'card' => 'summary_large_image',
                 'title' => $title,
                 'description' => $description,
-                'image' => $seo?->og_image_url,
+                'image' => $image,
             ],
 
             'robots' => $seo?->robots ?? ((bool) $article->is_indexable ? 'index,follow' : 'noindex,nofollow'),
@@ -129,6 +130,10 @@ final class ArticleSeoService
             'date_published' => $article->published_at?->toAtomString(),
             'date_modified' => $article->updated_at?->toAtomString(),
             'article_section' => $this->normalizeString($article->category?->name),
+            'author_name' => $this->normalizeString($article->author_name),
+            'keywords' => $article->relationLoaded('tags')
+                ? $article->tags->pluck('name')->all()
+                : null,
         ]);
         $jsonLd = is_array($structured)
             ? (array) data_get($structured, 'fragments.article', [])
@@ -214,6 +219,26 @@ final class ArticleSeoService
             ->where('article_id', (int) $article->id)
             ->where('locale', $locale)
             ->first();
+    }
+
+    private function resolveArticleImageUrl(Article $article): ?string
+    {
+        $variants = is_array($article->cover_image_variants) ? $article->cover_image_variants : [];
+
+        foreach (['og', 'hero', 'card', 'thumbnail'] as $key) {
+            $variant = $variants[$key] ?? null;
+            if (is_string($variant) && trim($variant) !== '') {
+                return trim($variant);
+            }
+            if (is_array($variant)) {
+                $url = $this->normalizeString($variant['url'] ?? null);
+                if ($url !== null) {
+                    return $url;
+                }
+            }
+        }
+
+        return $this->normalizeString($article->cover_image_url);
     }
 
     /**

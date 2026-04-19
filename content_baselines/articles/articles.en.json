@@ -1,110 +1,353 @@
 {
   "meta": {
-    "schema_version": "v1",
+    "schema_version": "v3",
     "locale": "en",
-    "source": "cms_article_committed_baseline",
-    "generated_at": "2026-04-18T00:00:00Z"
+    "source": "fap_web_content_blog_migration",
+    "generated_at": "2026-04-19T00:00:00Z"
   },
   "articles": [
-    {
-      "slug": "mbti-basics",
-      "title": "MBTI Personality Test (16 Types) | Tool Guide",
-      "excerpt": "A practical, non-mythical guide to MBTI: what it measures, what it does not, and how to use results for better decisions in work, relationships, and self-management.",
-      "content_md": "This is FermatMind's tool-level guide to MBTI. The goal is not to romanticize four letters, but to convert personality signals into reusable decision rules.\n\n## What this assessment does\nMBTI does not answer the lifetime question of who you truly are. It maps default preferences across energy restore, information sampling, decision validation, and structure preference under uncertainty.\n\n## How to use results in real life\nUse MBTI as a working hypothesis, not a label. Track high-energy and high-friction situations for two weeks, then test one behavior change and review outcome quality.",
-      "status": "published",
-      "is_public": true,
-      "is_indexable": true,
-      "published_at": "2026-02-25T00:00:00Z"
-    },
-    {
-      "slug": "mbti-growth-guide",
-      "title": "MBTI Personality Test (16 Types) | Growth Guide",
-      "excerpt": "A growth-focused playbook for MBTI users: convert preference signals into better communication, energy management, and career decisions.",
-      "content_md": "This article translates assessment output into practical actions for daily decisions.\n\n## Growth loop\nPick one real scenario, choose one behavior change from the report, run it for 2-4 weeks, and review measurable outcomes.\n\n## Practical boundaries\nAssessment output should support reflection and communication, not replace clinical, legal, or high-stakes professional judgment.",
-      "status": "published",
-      "is_public": true,
-      "is_indexable": true,
-      "published_at": "2026-02-25T00:00:00Z"
-    },
-    {
-      "slug": "mbti-narrative-portrait",
-      "title": "MBTI Personality Test (16 Types) | Narrative Portrait",
-      "excerpt": "A narrative interpretation of MBTI output to help identify recurring life scripts and redesign daily choices with less friction.",
-      "content_md": "Think of daily life as a stream of interruptions, tasks, relationships, and choices. MBTI can be used as a repeatable map for how you sample the world and make decisions.\n\n## Narrative use\nTurn the report into an experiment: choose one scenario, adjust one variable, and run a short retrospective cycle.\n\n## Warning\nDo not treat type as a fixed identity label or as a way to classify others.",
-      "status": "published",
-      "is_public": true,
-      "is_indexable": true,
-      "published_at": "2026-02-25T00:00:00Z"
-    },
-    {
-      "slug": "big-five-tool-guide",
-      "title": "Big Five Personality Test (OCEAN) | Tool Guide",
-      "excerpt": "A practical guide to Big Five results: what each trait means, how trait combinations affect outcomes, and how to convert scores into concrete behavior changes.",
-      "content_md": "The Big Five is best treated as a coordinate system, not a type badge. It captures your position on five continuous dimensions and helps explain stable behavior tendencies over time.\n\n## What this assessment does\nThe model measures Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism as continuous traits. That keeps signal granularity and makes the output suitable for long-term tracking.\n\n## Model logic: from input to output\nInput items sample stable tendencies in cognition, motivation, social interaction, and stress reactivity. Output combines those dimensions into behavior forecasts: where you perform with lower friction, where overload is likely, and which adjustments are trainable.\n\n## Turning scores into decisions\nUse results for two tasks:\n- **environment fit**: place yourself in workflows where your trait profile naturally performs;\n- **skill compensation**: pick one weak link and build an external structure around it.\n\nExample: if Conscientiousness is low, improve task decomposition and accountability before blaming willpower.\n\n## Combination effects matter\nSingle scores are less useful than trait interactions. Openness × Conscientiousness affects innovation-to-delivery balance. Neuroticism × Conscientiousness affects stress resilience versus burnout risk.\n\n## Scientific boundaries\nBig Five has strong research support, but still reflects probabilistic measurement. Self-report is sensitive to context and social desirability. Use trend + behavioral evidence, not one-time numbers.\n\n## References\n[1] John, O. P., & Srivastava, S. (1999). The Big-Five trait taxonomy.\n[2] Barrick, M. R., & Mount, M. K. (1991). The Big Five personality dimensions and job performance.",
-      "status": "published",
-      "is_public": true,
-      "is_indexable": true,
-      "published_at": "2026-02-25T00:00:00Z"
-    },
     {
       "slug": "big-five-growth-guide",
       "title": "Big Five Personality Test (OCEAN) | Growth Guide",
       "excerpt": "How to use Big Five trait results for practical growth: environment fit, behavior experiments, and sustainable capability building.",
       "content_md": "This article translates assessment output into practical actions for daily decisions.\n\n## What this assessment does\nIt provides structured signals about tendencies and patterns. The output is most useful when treated as a working model, not a final identity label.\n\n## Model logic\nThe questionnaire captures repeated input-output tendencies: how you process information, make tradeoffs, and react under pressure. Scores are proxies for patterns, not absolute truths.\n\n## How to use it for growth\nUse a short validation cycle:\n- pick one real scenario (work, relationship, learning);\n- choose one behavior change derived from the report;\n- run it for 2-4 weeks and review outcomes.\n\n## Practical boundaries\nAssessment output should support reflection and communication, not replace clinical, legal, or high-stakes professional judgment.\n\n## Common misuse\nAvoid two traps: treating scores as permanent labels, or using them to judge others. Better use is iterative self-observation plus behavior evidence.\n\n## References\nPlease use the references above as baseline reading and combine them with real-world observation over time.",
+      "author_name": "FermatMind Editorial",
+      "reading_minutes": 1,
+      "tags": [
+        "Big Five",
+        "Growth"
+      ],
       "status": "published",
       "is_public": true,
       "is_indexable": true,
-      "published_at": "2026-02-25T00:00:00Z"
+      "published_at": "2026-02-25T00:00:00Z",
+      "related_test_slug": "big-five-personality-test-ocean-model",
+      "voice": "growth",
+      "voice_order": 2
     },
     {
       "slug": "big-five-narrative-portrait",
       "title": "Big Five Personality Test (OCEAN) | Narrative Portrait",
       "excerpt": "A narrative lens for Big Five results: understanding your default operating style across pressure, collaboration, and long-cycle growth.",
       "content_md": "This article translates assessment output into practical actions for daily decisions.\n\n## What this assessment does\nIt provides structured signals about tendencies and patterns. The output is most useful when treated as a working model, not a final identity label.\n\n## Model logic\nThe questionnaire captures repeated input-output tendencies: how you process information, make tradeoffs, and react under pressure. Scores are proxies for patterns, not absolute truths.\n\n## How to use it for growth\nUse a short validation cycle:\n- pick one real scenario (work, relationship, learning);\n- choose one behavior change derived from the report;\n- run it for 2-4 weeks and review outcomes.\n\n## Practical boundaries\nAssessment output should support reflection and communication, not replace clinical, legal, or high-stakes professional judgment.\n\n## Common misuse\nAvoid two traps: treating scores as permanent labels, or using them to judge others. Better use is iterative self-observation plus behavior evidence.\n\n## References\nPlease use the references above as baseline reading and combine them with real-world observation over time.",
+      "author_name": "FermatMind Editorial",
+      "reading_minutes": 1,
+      "tags": [
+        "Big Five",
+        "Narrative"
+      ],
       "status": "published",
       "is_public": true,
       "is_indexable": true,
-      "published_at": "2026-02-25T00:00:00Z"
+      "published_at": "2026-02-25T00:00:00Z",
+      "related_test_slug": "big-five-personality-test-ocean-model",
+      "voice": "narrative",
+      "voice_order": 3
     },
     {
-      "slug": "iq-test-tool-guide",
-      "title": "IQ Test | Tool Guide",
-      "excerpt": "How to interpret online IQ-style scores responsibly: as a constrained cognitive signal for strategy design, not as total human value.",
-      "content_md": "A useful way to read IQ-style output is as a constrained cognitive signal, not as identity ranking.\n\n## What this assessment does\nStandard IQ frameworks compare your performance on structured tasks against a norm group. Online variants cannot fully reproduce controlled clinical conditions, but can still provide directional insights when design and scoring are disciplined.\n\n## Model logic: from input to output\nInput tasks often sample abstract reasoning and pattern discovery under time and complexity constraints. Output converts raw performance into standardized indicators such as percentile or score bands.\n\n## Practical use\nUse results to optimize learning/work strategy:\n- choose task structure that matches your reasoning style;\n- reduce avoidable performance loss through sleep, focus hygiene, and pacing.\n\n## Common misuse\nDo not treat one score as total intelligence or personal worth. Creativity, motivation, domain knowledge, and social capability are not captured by a single IQ index.\n\n## Scientific boundaries\nTreat online IQ output as trend/reference, especially when administration conditions are uncontrolled.\n\n## References\n[1] Raven, J. C. (2000). The Raven's Progressive Matrices.\n[2] Neisser, U., et al. (1996). Intelligence: Knowns and unknowns.",
+      "slug": "big-five-tool-guide",
+      "title": "Big Five Personality Test (OCEAN) | Tool Guide",
+      "excerpt": "A practical guide to Big Five results: what each trait means, how trait combinations affect outcomes, and how to convert scores into concrete behavior changes.",
+      "content_md": "The Big Five is best treated as a coordinate system, not a type badge. It captures your position on five continuous dimensions and helps explain stable behavior tendencies over time.\n\n## What this assessment does\nThe model measures Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism as continuous traits. That keeps signal granularity and makes the output suitable for long-term tracking.\n\n## Model logic: from input to output\nInput items sample stable tendencies in cognition, motivation, social interaction, and stress reactivity. Output combines those dimensions into behavior forecasts: where you perform with lower friction, where overload is likely, and which adjustments are trainable.\n\n## Turning scores into decisions\nUse results for two tasks:\n- **environment fit**: place yourself in workflows where your trait profile naturally performs;\n- **skill compensation**: pick one weak link and build an external structure around it.\n\nExample: if Conscientiousness is low, improve task decomposition and accountability before blaming willpower.\n\n## Combination effects matter\nSingle scores are less useful than trait interactions. Openness × Conscientiousness affects innovation-to-delivery balance. Neuroticism × Conscientiousness affects stress resilience versus burnout risk.\n\n## Scientific boundaries\nBig Five has strong research support, but still reflects probabilistic measurement. Self-report is sensitive to context and social desirability. Use trend + behavioral evidence, not one-time numbers.\n\n## References\n[1] John, O. P., & Srivastava, S. (1999). The Big-Five trait taxonomy.\n[2] Barrick, M. R., & Mount, M. K. (1991). The Big Five personality dimensions and job performance.",
+      "author_name": "FermatMind Editorial",
+      "reading_minutes": 2,
+      "tags": [
+        "Big Five",
+        "Tool Guide"
+      ],
       "status": "published",
       "is_public": true,
       "is_indexable": true,
-      "published_at": "2026-02-25T00:00:00Z"
+      "published_at": "2026-02-25T00:00:00Z",
+      "related_test_slug": "big-five-personality-test-ocean-model",
+      "voice": "tool",
+      "voice_order": 1
     },
     {
-      "slug": "iq-test-growth-guide",
-      "title": "IQ Test | Growth Guide",
-      "excerpt": "A growth guide for IQ-style assessment results: use cognitive signals to design better learning strategy instead of identity ranking.",
+      "slug": "clinical-depression-anxiety-pro-growth-guide",
+      "title": "Depression & Anxiety Combined Assessment (Professional) | Growth Guide",
+      "excerpt": "A recovery-oriented guide to screening results: how to track symptoms over time, act early, and integrate professional support.",
       "content_md": "This article translates assessment output into practical actions for daily decisions.\n\n## What this assessment does\nIt provides structured signals about tendencies and patterns. The output is most useful when treated as a working model, not a final identity label.\n\n## Model logic\nThe questionnaire captures repeated input-output tendencies: how you process information, make tradeoffs, and react under pressure. Scores are proxies for patterns, not absolute truths.\n\n## How to use it for growth\nUse a short validation cycle:\n- pick one real scenario (work, relationship, learning);\n- choose one behavior change derived from the report;\n- run it for 2-4 weeks and review outcomes.\n\n## Practical boundaries\nAssessment output should support reflection and communication, not replace clinical, legal, or high-stakes professional judgment.\n\n## Common misuse\nAvoid two traps: treating scores as permanent labels, or using them to judge others. Better use is iterative self-observation plus behavior evidence.\n\n## References\nPlease use the references above as baseline reading and combine them with real-world observation over time.",
+      "author_name": "FermatMind Editorial",
+      "reading_minutes": 1,
+      "tags": [
+        "Mental Health",
+        "Growth"
+      ],
       "status": "published",
       "is_public": true,
       "is_indexable": true,
-      "published_at": "2026-02-25T00:00:00Z"
+      "published_at": "2026-02-25T00:00:00Z",
+      "related_test_slug": "clinical-depression-anxiety-assessment-professional-edition",
+      "voice": "growth",
+      "voice_order": 2
     },
     {
-      "slug": "iq-test-narrative-portrait",
-      "title": "IQ Test | Narrative Portrait",
-      "excerpt": "A narrative portrait of your cognitive style from IQ-like tasks, focused on practical adaptation under real-world constraints.",
+      "slug": "clinical-depression-anxiety-pro-narrative-portrait",
+      "title": "Depression & Anxiety Combined Assessment (Professional) | Narrative Portrait",
+      "excerpt": "A narrative portrait for people navigating depression and anxiety signals, focused on practical self-observation and safer next steps.",
       "content_md": "This article translates assessment output into practical actions for daily decisions.\n\n## What this assessment does\nIt provides structured signals about tendencies and patterns. The output is most useful when treated as a working model, not a final identity label.\n\n## Model logic\nThe questionnaire captures repeated input-output tendencies: how you process information, make tradeoffs, and react under pressure. Scores are proxies for patterns, not absolute truths.\n\n## How to use it for growth\nUse a short validation cycle:\n- pick one real scenario (work, relationship, learning);\n- choose one behavior change derived from the report;\n- run it for 2-4 weeks and review outcomes.\n\n## Practical boundaries\nAssessment output should support reflection and communication, not replace clinical, legal, or high-stakes professional judgment.\n\n## Common misuse\nAvoid two traps: treating scores as permanent labels, or using them to judge others. Better use is iterative self-observation plus behavior evidence.\n\n## References\nPlease use the references above as baseline reading and combine them with real-world observation over time.",
+      "author_name": "FermatMind Editorial",
+      "reading_minutes": 1,
+      "tags": [
+        "Mental Health",
+        "Narrative"
+      ],
       "status": "published",
       "is_public": true,
       "is_indexable": true,
-      "published_at": "2026-02-25T00:00:00Z"
+      "published_at": "2026-02-25T00:00:00Z",
+      "related_test_slug": "clinical-depression-anxiety-assessment-professional-edition",
+      "voice": "narrative",
+      "voice_order": 3
+    },
+    {
+      "slug": "clinical-depression-anxiety-pro-tool-guide",
+      "title": "Depression & Anxiety Combined Assessment (Professional) | Tool Guide",
+      "excerpt": "How to use PHQ-9/GAD-7 style screening output correctly: as symptom signal and severity tracking, not a diagnosis label.",
+      "content_md": "This assessment should be used as **screening + severity quantification**. It translates hard-to-describe emotional and somatic experiences into structured signals you can communicate and track.\n\n## What this assessment does\nThe tool samples symptom frequency over a recent time window (often two weeks), usually aligned with validated frameworks such as PHQ-9 and GAD-7.\n\n## Model logic: from input to output\nInput captures symptom clusters such as mood, anhedonia, sleep, energy, concentration, tension, and worry. Output maps to severity bands and helps decide action level: observe, intervene, or seek urgent professional care.\n\n## Practical use in care pathways\nUse scores to improve communication with clinicians and to monitor trend over time. Repeated measurement is especially useful when you are in treatment and need to evaluate whether recovery is stable or fluctuating with stress events.\n\n## Critical boundary\nScreening is not diagnosis. If you have suicidal ideation, self-harm risk, or immediate safety concerns, contact local emergency services or crisis support immediately.\n\n## Ethical use\nDo not use mental-health screening scores for hiring, elimination, or punitive evaluation in organizations.\n\n## References\n[1] Kroenke, K., Spitzer, R. L., & Williams, J. B. W. (2001). The PHQ-9.\n[2] Spitzer, R. L., Kroenke, K., Williams, J. B. W., & Lowe, B. (2006). The GAD-7.",
+      "author_name": "FermatMind Editorial",
+      "reading_minutes": 1,
+      "tags": [
+        "Depression",
+        "Anxiety",
+        "Tool Guide"
+      ],
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "2026-02-25T00:00:00Z",
+      "related_test_slug": "clinical-depression-anxiety-assessment-professional-edition",
+      "voice": "tool",
+      "voice_order": 1
+    },
+    {
+      "slug": "depression-screening-standard-growth-guide",
+      "title": "Depression Screening (Standard) | Growth Guide",
+      "excerpt": "A practical guide for early-stage depression screening: identify trends, protect daily function, and choose timely support.",
+      "content_md": "This article translates assessment output into practical actions for daily decisions.\n\n## What this assessment does\nIt provides structured signals about tendencies and patterns. The output is most useful when treated as a working model, not a final identity label.\n\n## Model logic\nThe questionnaire captures repeated input-output tendencies: how you process information, make tradeoffs, and react under pressure. Scores are proxies for patterns, not absolute truths.\n\n## How to use it for growth\nUse a short validation cycle:\n- pick one real scenario (work, relationship, learning);\n- choose one behavior change derived from the report;\n- run it for 2-4 weeks and review outcomes.\n\n## Practical boundaries\nAssessment output should support reflection and communication, not replace clinical, legal, or high-stakes professional judgment.\n\n## Common misuse\nAvoid two traps: treating scores as permanent labels, or using them to judge others. Better use is iterative self-observation plus behavior evidence.\n\n## References\nPlease use the references above as baseline reading and combine them with real-world observation over time.",
+      "author_name": "FermatMind Editorial",
+      "reading_minutes": 1,
+      "tags": [
+        "Depression",
+        "Growth"
+      ],
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "2026-02-25T00:00:00Z",
+      "related_test_slug": "depression-screening-test-standard-edition",
+      "voice": "growth",
+      "voice_order": 2
+    },
+    {
+      "slug": "depression-screening-standard-narrative-portrait",
+      "title": "Depression Screening (Standard) | Narrative Portrait",
+      "excerpt": "A narrative interpretation of standard depression screening results, turning difficult feelings into observable patterns and action steps.",
+      "content_md": "This article translates assessment output into practical actions for daily decisions.\n\n## What this assessment does\nIt provides structured signals about tendencies and patterns. The output is most useful when treated as a working model, not a final identity label.\n\n## Model logic\nThe questionnaire captures repeated input-output tendencies: how you process information, make tradeoffs, and react under pressure. Scores are proxies for patterns, not absolute truths.\n\n## How to use it for growth\nUse a short validation cycle:\n- pick one real scenario (work, relationship, learning);\n- choose one behavior change derived from the report;\n- run it for 2-4 weeks and review outcomes.\n\n## Practical boundaries\nAssessment output should support reflection and communication, not replace clinical, legal, or high-stakes professional judgment.\n\n## Common misuse\nAvoid two traps: treating scores as permanent labels, or using them to judge others. Better use is iterative self-observation plus behavior evidence.\n\n## References\nPlease use the references above as baseline reading and combine them with real-world observation over time.",
+      "author_name": "FermatMind Editorial",
+      "reading_minutes": 1,
+      "tags": [
+        "Depression",
+        "Narrative"
+      ],
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "2026-02-25T00:00:00Z",
+      "related_test_slug": "depression-screening-test-standard-edition",
+      "voice": "narrative",
+      "voice_order": 3
+    },
+    {
+      "slug": "depression-screening-standard-tool-guide",
+      "title": "Depression Screening (Standard) | Tool Guide",
+      "excerpt": "A lightweight depression screening guide for early signal detection, trend tracking, and deciding when to seek professional evaluation.",
+      "content_md": "A standard depression screener is an early-warning instrument. It is useful when you feel persistently “off” but cannot yet describe the pattern clearly.\n\n## What this assessment does\nThe tool converts subjective discomfort into observable symptom signals, often around low mood, anhedonia, sleep, energy, appetite, concentration, and guilt/self-worth.\n\n## Model logic: from input to output\nInput samples symptom frequency across a short period. Output returns a risk/severity band to support next-step decisions: continue observation, start lifestyle intervention, or seek professional care.\n\n## Turning score into action\nDo not overfocus on a single score. Combine score with function impact: work, study, social connection, and daily self-care. If function is declining, escalation is warranted even when uncertainty remains.\n\n## Trend > one-time result\nThe highest utility comes from repeated measurement and context linkage: sleep changes, stress events, physical illness, and medication shifts.\n\n## Scientific boundaries\nScreening does not equal diagnosis. Use this tool as a decision aid and communication bridge, not as a final judgment about identity or worth.\n\n## References\n[1] Kroenke, K., Spitzer, R. L., & Williams, J. B. W. (2001). The PHQ-9.\n[2] Kroenke, K., Spitzer, R. L., & Williams, J. B. W. (2003). The PHQ-2.",
+      "author_name": "FermatMind Editorial",
+      "reading_minutes": 1,
+      "tags": [
+        "Depression",
+        "Tool Guide"
+      ],
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "2026-02-25T00:00:00Z",
+      "related_test_slug": "depression-screening-test-standard-edition",
+      "voice": "tool",
+      "voice_order": 1
+    },
+    {
+      "slug": "eq-test-growth-guide",
+      "title": "EQ Test | Growth Guide",
+      "excerpt": "A growth guide for emotional intelligence results: convert emotion signals into trainable communication and regulation habits.",
+      "content_md": "This article translates assessment output into practical actions for daily decisions.\n\n## What this assessment does\nIt provides structured signals about tendencies and patterns. The output is most useful when treated as a working model, not a final identity label.\n\n## Model logic\nThe questionnaire captures repeated input-output tendencies: how you process information, make tradeoffs, and react under pressure. Scores are proxies for patterns, not absolute truths.\n\n## How to use it for growth\nUse a short validation cycle:\n- pick one real scenario (work, relationship, learning);\n- choose one behavior change derived from the report;\n- run it for 2-4 weeks and review outcomes.\n\n## Practical boundaries\nAssessment output should support reflection and communication, not replace clinical, legal, or high-stakes professional judgment.\n\n## Common misuse\nAvoid two traps: treating scores as permanent labels, or using them to judge others. Better use is iterative self-observation plus behavior evidence.\n\n## References\nPlease use the references above as baseline reading and combine them with real-world observation over time.",
+      "author_name": "FermatMind Editorial",
+      "reading_minutes": 1,
+      "tags": [
+        "EQ",
+        "Growth"
+      ],
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "2026-02-25T00:00:00Z",
+      "related_test_slug": "eq-test-emotional-intelligence-assessment",
+      "voice": "growth",
+      "voice_order": 2
+    },
+    {
+      "slug": "eq-test-narrative-portrait",
+      "title": "EQ Test | Narrative Portrait",
+      "excerpt": "A narrative reading of EQ output to reveal repeated emotional scripts and help redesign conflict and collaboration patterns.",
+      "content_md": "This article translates assessment output into practical actions for daily decisions.\n\n## What this assessment does\nIt provides structured signals about tendencies and patterns. The output is most useful when treated as a working model, not a final identity label.\n\n## Model logic\nThe questionnaire captures repeated input-output tendencies: how you process information, make tradeoffs, and react under pressure. Scores are proxies for patterns, not absolute truths.\n\n## How to use it for growth\nUse a short validation cycle:\n- pick one real scenario (work, relationship, learning);\n- choose one behavior change derived from the report;\n- run it for 2-4 weeks and review outcomes.\n\n## Practical boundaries\nAssessment output should support reflection and communication, not replace clinical, legal, or high-stakes professional judgment.\n\n## Common misuse\nAvoid two traps: treating scores as permanent labels, or using them to judge others. Better use is iterative self-observation plus behavior evidence.\n\n## References\nPlease use the references above as baseline reading and combine them with real-world observation over time.",
+      "author_name": "FermatMind Editorial",
+      "reading_minutes": 1,
+      "tags": [
+        "EQ",
+        "Narrative"
+      ],
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "2026-02-25T00:00:00Z",
+      "related_test_slug": "eq-test-emotional-intelligence-assessment",
+      "voice": "narrative",
+      "voice_order": 3
     },
     {
       "slug": "eq-test-tool-guide",
       "title": "EQ Test | Tool Guide",
       "excerpt": "A practical guide to emotional intelligence measurement: what is assessed, where self-report can bias, and how to turn results into trainable behavior.",
       "content_md": "Emotional intelligence (EI/EQ) is not a single construct. Some models measure emotional ability; others measure self-reported emotional tendencies.\n\n## What this assessment does\nAn EQ test typically evaluates how you identify, interpret, and regulate emotional signals in yourself and others. The first interpretation step is to confirm whether the instrument is ability-based or self-report based.\n\n## Model logic: from input to output\nInput samples emotional recognition, appraisal, regulation, and expression patterns. Output highlights likely weak links in your emotional workflow, such as delayed recognition, impulsive response, or poor need articulation.\n\n## Turning result into skill growth\nUse results as a training map, not a social label. Start with one micro-practice:\n- naming emotion before reacting;\n- adding a pause in conflict before response;\n- expressing need without blame.\n\n## Common misuse\n“High EQ” is not people-pleasing and not manipulation skill. Healthy emotional intelligence includes boundaries, clarity, and regulation under pressure.\n\n## Scientific boundaries\nSelf-report EQ can be affected by self-image bias and context. Use repeated observation and behavioral outcomes to validate progress.\n\n## References\n[1] Mayer, J. D., Salovey, P., & Caruso, D. R. (2008). Emotional intelligence: New ability or eclectic traits?\n[2] Petrides, K. V., et al. (2007). Trait emotional intelligence and criterion validity.",
+      "author_name": "FermatMind Editorial",
+      "reading_minutes": 1,
+      "tags": [
+        "EQ",
+        "Tool Guide"
+      ],
       "status": "published",
       "is_public": true,
       "is_indexable": true,
-      "published_at": "2026-02-25T00:00:00Z"
+      "published_at": "2026-02-25T00:00:00Z",
+      "related_test_slug": "eq-test-emotional-intelligence-assessment",
+      "voice": "tool",
+      "voice_order": 1
+    },
+    {
+      "slug": "iq-test-growth-guide",
+      "title": "IQ Test | Growth Guide",
+      "excerpt": "A growth guide for IQ-style assessment results: use cognitive signals to design better learning strategy instead of identity ranking.",
+      "content_md": "This article translates assessment output into practical actions for daily decisions.\n\n## What this assessment does\nIt provides structured signals about tendencies and patterns. The output is most useful when treated as a working model, not a final identity label.\n\n## Model logic\nThe questionnaire captures repeated input-output tendencies: how you process information, make tradeoffs, and react under pressure. Scores are proxies for patterns, not absolute truths.\n\n## How to use it for growth\nUse a short validation cycle:\n- pick one real scenario (work, relationship, learning);\n- choose one behavior change derived from the report;\n- run it for 2-4 weeks and review outcomes.\n\n## Practical boundaries\nAssessment output should support reflection and communication, not replace clinical, legal, or high-stakes professional judgment.\n\n## Common misuse\nAvoid two traps: treating scores as permanent labels, or using them to judge others. Better use is iterative self-observation plus behavior evidence.\n\n## References\nPlease use the references above as baseline reading and combine them with real-world observation over time.",
+      "author_name": "FermatMind Editorial",
+      "reading_minutes": 1,
+      "tags": [
+        "IQ",
+        "Growth"
+      ],
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "2026-02-25T00:00:00Z",
+      "related_test_slug": "iq-test-intelligence-quotient-assessment",
+      "voice": "growth",
+      "voice_order": 2
+    },
+    {
+      "slug": "iq-test-narrative-portrait",
+      "title": "IQ Test | Narrative Portrait",
+      "excerpt": "A narrative portrait of your cognitive style from IQ-like tasks, focused on practical adaptation under real-world constraints.",
+      "content_md": "This article translates assessment output into practical actions for daily decisions.\n\n## What this assessment does\nIt provides structured signals about tendencies and patterns. The output is most useful when treated as a working model, not a final identity label.\n\n## Model logic\nThe questionnaire captures repeated input-output tendencies: how you process information, make tradeoffs, and react under pressure. Scores are proxies for patterns, not absolute truths.\n\n## How to use it for growth\nUse a short validation cycle:\n- pick one real scenario (work, relationship, learning);\n- choose one behavior change derived from the report;\n- run it for 2-4 weeks and review outcomes.\n\n## Practical boundaries\nAssessment output should support reflection and communication, not replace clinical, legal, or high-stakes professional judgment.\n\n## Common misuse\nAvoid two traps: treating scores as permanent labels, or using them to judge others. Better use is iterative self-observation plus behavior evidence.\n\n## References\nPlease use the references above as baseline reading and combine them with real-world observation over time.",
+      "author_name": "FermatMind Editorial",
+      "reading_minutes": 1,
+      "tags": [
+        "IQ",
+        "Narrative"
+      ],
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "2026-02-25T00:00:00Z",
+      "related_test_slug": "iq-test-intelligence-quotient-assessment",
+      "voice": "narrative",
+      "voice_order": 3
+    },
+    {
+      "slug": "iq-test-tool-guide",
+      "title": "IQ Test | Tool Guide",
+      "excerpt": "How to interpret online IQ-style scores responsibly: as a constrained cognitive signal for strategy design, not as total human value.",
+      "content_md": "A useful way to read IQ-style output is as a constrained cognitive signal, not as identity ranking.\n\n## What this assessment does\nStandard IQ frameworks compare your performance on structured tasks against a norm group. Online variants cannot fully reproduce controlled clinical conditions, but can still provide directional insights when design and scoring are disciplined.\n\n## Model logic: from input to output\nInput tasks often sample abstract reasoning and pattern discovery under time and complexity constraints. Output converts raw performance into standardized indicators such as percentile or score bands.\n\n## Practical use\nUse results to optimize learning/work strategy:\n- choose task structure that matches your reasoning style;\n- reduce avoidable performance loss through sleep, focus hygiene, and pacing.\n\n## Common misuse\nDo not treat one score as total intelligence or personal worth. Creativity, motivation, domain knowledge, and social capability are not captured by a single IQ index.\n\n## Scientific boundaries\nTreat online IQ output as trend/reference, especially when administration conditions are uncontrolled.\n\n## References\n[1] Raven, J. C. (2000). The Raven's Progressive Matrices.\n[2] Neisser, U., et al. (1996). Intelligence: Knowns and unknowns.",
+      "author_name": "FermatMind Editorial",
+      "reading_minutes": 1,
+      "tags": [
+        "IQ",
+        "Tool Guide"
+      ],
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "2026-02-25T00:00:00Z",
+      "related_test_slug": "iq-test-intelligence-quotient-assessment",
+      "voice": "tool",
+      "voice_order": 1
+    },
+    {
+      "slug": "mbti-basics",
+      "title": "MBTI Personality Test (16 Types) | Tool Guide",
+      "excerpt": "A practical, non-mythical guide to MBTI: what it measures, what it does not, and how to use results for better decisions in work, relationships, and self-management.",
+      "content_md": "This is FermatMind's tool-level guide to MBTI. The goal is not to romanticize four letters, but to convert personality signals into reusable decision rules.\n\n## What this assessment does\nMBTI does not answer the lifetime question of “who you truly are.” It maps your default preferences across four dimensions: where you restore energy, how you collect information, how you validate decisions, and how much structure you prefer in uncertain environments.\n\n## Model logic: from input to output\nAt the input layer, MBTI observes your tendency in **E/I** and **S/N**. That describes your natural channel for stimulation and pattern recognition. At the output layer, **T/F** and **J/P** describe your decision validation and execution rhythm. The dimensions are linked, not isolated.\n\n## How to use results in real life\nUse MBTI as a working hypothesis, not a label. Track three high-energy situations and three high-friction situations over two weeks. Then test one behavioral change, such as:\n- changing conflict sequence from “solution first” to “emotion first, then solution”;\n- reducing planning granularity from “perfect plan” to “minimum executable plan.”\n\n## Common misuse to avoid\nTwo patterns create harm:\n- using type as an excuse (“I am just like this”);\n- using type as a weapon (classifying others instead of understanding them).\n\n## Scientific boundaries\nMBTI has practical value for communication and reflection, but also known psychometric limitations, especially around binary category cuts and retest stability near boundaries. Treat dimension strength and behavioral evidence as primary, not the type code itself.\n\n## References\n[1] Myers, I. B., McCaulley, M. H., Quenk, N. L., & Hammer, A. L. (1998). *MBTI Manual: A Guide to the Development and Use of the Myers-Briggs Type Indicator* (3rd ed.).\n[2] McCrae, R. R., & Costa, P. T., Jr. (1989). Reinterpreting the Myers-Briggs Type Indicator from the perspective of the five-factor model of personality.",
+      "author_name": "FermatMind Editorial",
+      "reading_minutes": 2,
+      "tags": [
+        "MBTI",
+        "Tool Guide"
+      ],
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "2026-02-25T00:00:00Z",
+      "related_test_slug": "mbti-personality-test-16-personality-types",
+      "voice": "tool",
+      "voice_order": 1
+    },
+    {
+      "slug": "mbti-growth-guide",
+      "title": "MBTI Personality Test (16 Types) | Growth Guide",
+      "excerpt": "A growth-focused playbook for MBTI users: how to convert preference signals into better communication, energy management, and career decisions.",
+      "content_md": "This article translates assessment output into practical actions for daily decisions.\n\n## What this assessment does\nIt provides structured signals about tendencies and patterns. The output is most useful when treated as a working model, not a final identity label.\n\n## Model logic\nThe questionnaire captures repeated input-output tendencies: how you process information, make tradeoffs, and react under pressure. Scores are proxies for patterns, not absolute truths.\n\n## How to use it for growth\nUse a short validation cycle:\n- pick one real scenario (work, relationship, learning);\n- choose one behavior change derived from the report;\n- run it for 2-4 weeks and review outcomes.\n\n## Practical boundaries\nAssessment output should support reflection and communication, not replace clinical, legal, or high-stakes professional judgment.\n\n## Common misuse\nAvoid two traps: treating scores as permanent labels, or using them to judge others. Better use is iterative self-observation plus behavior evidence.\n\n## References\nPlease use the references above as baseline reading and combine them with real-world observation over time.",
+      "author_name": "FermatMind Editorial",
+      "reading_minutes": 1,
+      "tags": [
+        "MBTI",
+        "Growth"
+      ],
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "2026-02-25T00:00:00Z",
+      "related_test_slug": "mbti-personality-test-16-personality-types",
+      "voice": "growth",
+      "voice_order": 2
+    },
+    {
+      "slug": "mbti-narrative-portrait",
+      "title": "MBTI Personality Test (16 Types) | Narrative Portrait",
+      "excerpt": "A narrative interpretation of MBTI output to help you identify recurring life scripts and redesign daily choices with less friction.",
+      "content_md": "This article translates assessment output into practical actions for daily decisions.\n\n## What this assessment does\nIt provides structured signals about tendencies and patterns. The output is most useful when treated as a working model, not a final identity label.\n\n## Model logic\nThe questionnaire captures repeated input-output tendencies: how you process information, make tradeoffs, and react under pressure. Scores are proxies for patterns, not absolute truths.\n\n## How to use it for growth\nUse a short validation cycle:\n- pick one real scenario (work, relationship, learning);\n- choose one behavior change derived from the report;\n- run it for 2-4 weeks and review outcomes.\n\n## Practical boundaries\nAssessment output should support reflection and communication, not replace clinical, legal, or high-stakes professional judgment.\n\n## Common misuse\nAvoid two traps: treating scores as permanent labels, or using them to judge others. Better use is iterative self-observation plus behavior evidence.\n\n## References\nPlease use the references above as baseline reading and combine them with real-world observation over time.",
+      "author_name": "FermatMind Editorial",
+      "reading_minutes": 1,
+      "tags": [
+        "MBTI",
+        "Narrative"
+      ],
+      "status": "published",
+      "is_public": true,
+      "is_indexable": true,
+      "published_at": "2026-02-25T00:00:00Z",
+      "related_test_slug": "mbti-personality-test-16-personality-types",
+      "voice": "narrative",
+      "voice_order": 3
     }
   ]
 }

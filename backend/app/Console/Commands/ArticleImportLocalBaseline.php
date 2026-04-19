@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Models\Article;
+use App\Models\ArticleCategory;
+use App\Models\ArticleTag;
 use App\Services\Cms\ArticlePublishService;
 use App\Services\Cms\ArticleService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use RuntimeException;
 
 final class ArticleImportLocalBaseline extends Command
@@ -282,6 +285,7 @@ final class ArticleImportLocalBaseline extends Command
         }
 
         $publishedAt = $this->normalizeNullableDateString($row['published_at'] ?? null, $file, $slug);
+        $coverImageVariants = $this->normalizeImageVariants($row['cover_image_variants'] ?? null, $file, $slug);
 
         return [
             'org_id' => 0,
@@ -290,6 +294,19 @@ final class ArticleImportLocalBaseline extends Command
             'title' => $title,
             'excerpt' => $excerpt,
             'content_md' => $contentMd,
+            'author_name' => $this->normalizeNullableString($row['author_name'] ?? null),
+            'reviewer_name' => $this->normalizeNullableString($row['reviewer_name'] ?? null),
+            'reading_minutes' => $this->normalizeNullablePositiveInteger($row['reading_minutes'] ?? null, $file, $slug, 'reading_minutes'),
+            'cover_image_url' => $this->normalizeNullableString($row['cover_image_url'] ?? null),
+            'cover_image_alt' => $this->normalizeNullableString($row['cover_image_alt'] ?? null),
+            'cover_image_width' => $this->normalizeNullablePositiveInteger($row['cover_image_width'] ?? null, $file, $slug, 'cover_image_width'),
+            'cover_image_height' => $this->normalizeNullablePositiveInteger($row['cover_image_height'] ?? null, $file, $slug, 'cover_image_height'),
+            'cover_image_variants' => $coverImageVariants,
+            'related_test_slug' => $this->normalizeNullableSlug($row['related_test_slug'] ?? null),
+            'voice' => $this->normalizeNullableString($row['voice'] ?? null),
+            'voice_order' => $this->normalizeNullablePositiveInteger($row['voice_order'] ?? null, $file, $slug, 'voice_order'),
+            'category' => $this->normalizeNullableString($row['category'] ?? null),
+            'tags' => $this->normalizeStringList($row['tags'] ?? []),
             'status' => $this->normalizeStatus($row['status'] ?? 'published', $file, $slug),
             'is_public' => (bool) ($row['is_public'] ?? true),
             'is_indexable' => (bool) ($row['is_indexable'] ?? true),
@@ -364,26 +381,42 @@ final class ArticleImportLocalBaseline extends Command
             $existing = $operation['existing'] instanceof Article ? $operation['existing'] : null;
 
             if (! $existing instanceof Article) {
+                $categoryId = $this->resolveCategoryId($row);
+                $tagIds = $this->resolveTagIds($row);
                 $existing = $articleService->createArticle(
                     (string) $row['title'],
                     (string) $row['slug'],
                     (string) $row['locale'],
                     (string) $row['content_md'],
-                    null,
-                    [],
+                    $categoryId,
+                    $tagIds,
                     0,
                 );
             }
 
+            $categoryId = $this->resolveCategoryId($row);
+            $tagIds = $this->resolveTagIds($row);
             $article = $articleService->updateArticle((int) $existing->id, [
                 'title' => (string) $desired['title'],
                 'slug' => (string) $desired['slug'],
                 'locale' => (string) $desired['locale'],
+                'category_id' => $categoryId,
                 'excerpt' => (string) $desired['excerpt'],
                 'content_md' => (string) $desired['content_md'],
                 'content_html' => null,
+                'author_name' => $desired['author_name'],
+                'reviewer_name' => $desired['reviewer_name'],
+                'reading_minutes' => $desired['reading_minutes'],
+                'cover_image_url' => $desired['cover_image_url'],
+                'cover_image_alt' => $desired['cover_image_alt'],
+                'cover_image_width' => $desired['cover_image_width'],
+                'cover_image_height' => $desired['cover_image_height'],
+                'cover_image_variants' => $desired['cover_image_variants'],
+                'related_test_slug' => $desired['related_test_slug'],
+                'voice' => $desired['voice'],
+                'voice_order' => $desired['voice_order'],
                 'is_indexable' => (bool) $desired['is_indexable'],
-            ]);
+            ], $tagIds);
 
             if ((string) $desired['status'] === 'published') {
                 if ((string) $article->status !== 'published' || ! (bool) $article->is_public) {
@@ -427,6 +460,19 @@ final class ArticleImportLocalBaseline extends Command
             'title' => (string) $row['title'],
             'excerpt' => (string) $row['excerpt'],
             'content_md' => (string) $row['content_md'],
+            'author_name' => $row['author_name'],
+            'reviewer_name' => $row['reviewer_name'],
+            'reading_minutes' => $row['reading_minutes'],
+            'cover_image_url' => $row['cover_image_url'],
+            'cover_image_alt' => $row['cover_image_alt'],
+            'cover_image_width' => $row['cover_image_width'],
+            'cover_image_height' => $row['cover_image_height'],
+            'cover_image_variants' => $row['cover_image_variants'],
+            'related_test_slug' => $row['related_test_slug'],
+            'voice' => $row['voice'],
+            'voice_order' => $row['voice_order'],
+            'category' => $row['category'],
+            'tags' => $row['tags'],
             'status' => $status,
             'is_public' => $isPublic,
             'is_indexable' => (bool) $row['is_indexable'],
@@ -448,6 +494,45 @@ final class ArticleImportLocalBaseline extends Command
             return false;
         }
         if ((string) $article->content_md !== (string) $desired['content_md']) {
+            return false;
+        }
+        if ((string) ($article->author_name ?? '') !== (string) ($desired['author_name'] ?? '')) {
+            return false;
+        }
+        if ((string) ($article->reviewer_name ?? '') !== (string) ($desired['reviewer_name'] ?? '')) {
+            return false;
+        }
+        if (($article->reading_minutes !== null ? (int) $article->reading_minutes : null) !== ($desired['reading_minutes'] ?? null)) {
+            return false;
+        }
+        if ((string) ($article->cover_image_url ?? '') !== (string) ($desired['cover_image_url'] ?? '')) {
+            return false;
+        }
+        if ((string) ($article->cover_image_alt ?? '') !== (string) ($desired['cover_image_alt'] ?? '')) {
+            return false;
+        }
+        if (($article->cover_image_width !== null ? (int) $article->cover_image_width : null) !== ($desired['cover_image_width'] ?? null)) {
+            return false;
+        }
+        if (($article->cover_image_height !== null ? (int) $article->cover_image_height : null) !== ($desired['cover_image_height'] ?? null)) {
+            return false;
+        }
+        if (($article->cover_image_variants ?? null) !== ($desired['cover_image_variants'] ?? null)) {
+            return false;
+        }
+        if ((string) ($article->related_test_slug ?? '') !== (string) ($desired['related_test_slug'] ?? '')) {
+            return false;
+        }
+        if ((string) ($article->voice ?? '') !== (string) ($desired['voice'] ?? '')) {
+            return false;
+        }
+        if (($article->voice_order !== null ? (int) $article->voice_order : null) !== ($desired['voice_order'] ?? null)) {
+            return false;
+        }
+        if ($this->currentCategoryName($article) !== ($desired['category'] ?? null)) {
+            return false;
+        }
+        if ($this->currentTagNames($article) !== ($desired['tags'] ?? [])) {
             return false;
         }
         if ((bool) $article->is_indexable !== (bool) $desired['is_indexable']) {
@@ -474,6 +559,112 @@ final class ArticleImportLocalBaseline extends Command
             ->where('slug', $slug)
             ->where('locale', $locale)
             ->first();
+    }
+
+    private function resolveCategoryId(array $row): ?int
+    {
+        $name = $this->normalizeNullableString($row['category'] ?? null);
+        if ($name === null) {
+            return null;
+        }
+
+        $category = ArticleCategory::query()
+            ->withoutGlobalScopes()
+            ->firstOrCreate(
+                [
+                    'org_id' => 0,
+                    'name' => $name,
+                ],
+                [
+                    'slug' => $this->resolveUniqueTaxonomySlug(ArticleCategory::class, $name),
+                    'description' => null,
+                    'sort_order' => 0,
+                    'is_active' => true,
+                ],
+            );
+
+        return (int) $category->id;
+    }
+
+    /**
+     * @return list<int>
+     */
+    private function resolveTagIds(array $row): array
+    {
+        $ids = [];
+        foreach ($this->normalizeStringList($row['tags'] ?? []) as $name) {
+            $tag = ArticleTag::query()
+                ->withoutGlobalScopes()
+                ->firstOrCreate(
+                    [
+                        'org_id' => 0,
+                        'name' => $name,
+                    ],
+                    [
+                        'slug' => $this->resolveUniqueTaxonomySlug(ArticleTag::class, $name),
+                        'is_active' => true,
+                    ],
+                );
+            $ids[] = (int) $tag->id;
+        }
+
+        return array_values(array_unique($ids));
+    }
+
+    /**
+     * @param  class-string<ArticleCategory|ArticleTag>  $modelClass
+     */
+    private function resolveUniqueTaxonomySlug(string $modelClass, string $name): string
+    {
+        $base = Str::slug($name);
+        if ($base === '') {
+            $base = substr(md5($name), 0, 12);
+        }
+
+        $base = substr($base, 0, 127);
+        $candidate = $base;
+        $suffix = 2;
+
+        while ($modelClass::query()->withoutGlobalScopes()->where('org_id', 0)->where('slug', $candidate)->exists()) {
+            $suffixPart = '-'.$suffix;
+            $candidate = substr($base, 0, max(1, 127 - strlen($suffixPart))).$suffixPart;
+            $suffix++;
+        }
+
+        return $candidate;
+    }
+
+    private function currentCategoryName(Article $article): ?string
+    {
+        if ($article->category_id === null) {
+            return null;
+        }
+
+        $name = ArticleCategory::query()
+            ->withoutGlobalScopes()
+            ->where('id', (int) $article->category_id)
+            ->value('name');
+
+        return $this->normalizeNullableString($name);
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function currentTagNames(Article $article): array
+    {
+        return ArticleTag::query()
+            ->withoutGlobalScopes()
+            ->select('article_tags.name')
+            ->join('article_tag_map', 'article_tag_map.tag_id', '=', 'article_tags.id')
+            ->where('article_tag_map.org_id', 0)
+            ->where('article_tag_map.article_id', (int) $article->id)
+            ->orderBy('article_tags.name')
+            ->pluck('article_tags.name')
+            ->map(fn ($name): string => (string) $name)
+            ->filter(fn (string $name): bool => trim($name) !== '')
+            ->values()
+            ->all();
     }
 
     /**
@@ -573,5 +764,81 @@ final class ArticleImportLocalBaseline extends Command
                 $slug,
             ));
         }
+    }
+
+    private function normalizeNullableString(mixed $value): ?string
+    {
+        $normalized = trim((string) ($value ?? ''));
+
+        return $normalized !== '' ? $normalized : null;
+    }
+
+    private function normalizeNullableSlug(mixed $value): ?string
+    {
+        $normalized = $this->normalizeNullableString($value);
+
+        return $normalized !== null ? strtolower($normalized) : null;
+    }
+
+    private function normalizeNullablePositiveInteger(mixed $value, string $file, string $slug, string $field): ?int
+    {
+        $candidate = trim((string) ($value ?? ''));
+        if ($candidate === '') {
+            return null;
+        }
+
+        if (preg_match('/^\d+$/', $candidate) !== 1 || (int) $candidate <= 0) {
+            throw new RuntimeException(sprintf(
+                'Baseline file %s has invalid %s=%s for slug=%s.',
+                $file,
+                $field,
+                $candidate,
+                $slug,
+            ));
+        }
+
+        return (int) $candidate;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function normalizeStringList(mixed $value): array
+    {
+        if (! is_array($value)) {
+            return [];
+        }
+
+        $items = [];
+        foreach ($value as $item) {
+            $normalized = $this->normalizeNullableString($item);
+            if ($normalized === null) {
+                continue;
+            }
+            $items[$normalized] = $normalized;
+        }
+
+        sort($items);
+
+        return array_values($items);
+    }
+
+    /**
+     * @return array<string, mixed>|null
+     */
+    private function normalizeImageVariants(mixed $value, string $file, string $slug): ?array
+    {
+        if ($value === null || $value === '') {
+            return null;
+        }
+        if (! is_array($value)) {
+            throw new RuntimeException(sprintf(
+                'Baseline file %s has invalid cover_image_variants for slug=%s.',
+                $file,
+                $slug,
+            ));
+        }
+
+        return $value !== [] ? $value : null;
     }
 }

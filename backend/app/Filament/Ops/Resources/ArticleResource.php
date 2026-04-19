@@ -106,11 +106,36 @@ class ArticleResource extends Resource
                                     ->columnSpanFull()
                                     ->helperText('This markdown body is the source content for article rendering and editorial review.')
                                     ->extraFieldWrapperAttributes(['class' => 'ops-article-workspace-field ops-article-workspace-field--editor']),
+                                Forms\Components\TextInput::make('author_name')
+                                    ->maxLength(128)
+                                    ->helperText('Public byline shown on the article surface when present.'),
+                                Forms\Components\TextInput::make('reviewer_name')
+                                    ->maxLength(128)
+                                    ->helperText('Optional public reviewer attribution.'),
+                                Forms\Components\TextInput::make('reading_minutes')
+                                    ->numeric()
+                                    ->minValue(1)
+                                    ->maxValue(1440)
+                                    ->helperText('Optional editorial read-time override in minutes.'),
                                 Forms\Components\TextInput::make('cover_image_url')
                                     ->maxLength(255)
-                                    ->columnSpanFull()
                                     ->helperText('Optional lead image URL used for cards, previews, and Open Graph fallback.'),
-                            ]),
+                                Forms\Components\TextInput::make('cover_image_alt')
+                                    ->maxLength(255)
+                                    ->helperText('Accessible description for the lead image.'),
+                                Forms\Components\TextInput::make('cover_image_width')
+                                    ->numeric()
+                                    ->minValue(1)
+                                    ->helperText('Intrinsic lead image width in pixels.'),
+                                Forms\Components\TextInput::make('cover_image_height')
+                                    ->numeric()
+                                    ->minValue(1)
+                                    ->helperText('Intrinsic lead image height in pixels.'),
+                                Forms\Components\KeyValue::make('cover_image_variants')
+                                    ->columnSpanFull()
+                                    ->helperText('Optional responsive image variant map. Use keys such as hero, card, thumbnail, square, og, and preload.'),
+                            ])
+                            ->columns(2),
                     ])
                         ->columnSpan([
                             'xl' => 8,
@@ -171,6 +196,17 @@ class ArticleResource extends Resource
                                     ->searchable()
                                     ->preload()
                                     ->helperText('Tags help content operators slice the workspace and power discovery.'),
+                                Forms\Components\TextInput::make('related_test_slug')
+                                    ->maxLength(127)
+                                    ->helperText('Optional assessment slug used to place this article on a test detail page.'),
+                                Forms\Components\TextInput::make('voice')
+                                    ->maxLength(32)
+                                    ->helperText('Optional editorial voice slot, such as tool, growth, narrative, or editorial.'),
+                                Forms\Components\TextInput::make('voice_order')
+                                    ->numeric()
+                                    ->minValue(0)
+                                    ->maxValue(65535)
+                                    ->helperText('Ordering within a related content placement.'),
                             ]),
                         Forms\Components\Section::make('SEO')
                             ->relationship('seoMeta')

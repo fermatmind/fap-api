@@ -59,6 +59,9 @@ use App\Http\Controllers\API\V0_5\Cms\ArticleController;
 use App\Http\Controllers\API\V0_5\Cms\CareerGuideController;
 use App\Http\Controllers\API\V0_5\Cms\CareerJobController;
 use App\Http\Controllers\API\V0_5\Cms\CareerRecommendationController;
+use App\Http\Controllers\API\V0_5\Cms\ContentPageController;
+use App\Http\Controllers\API\V0_5\Cms\LandingSurfaceController;
+use App\Http\Controllers\API\V0_5\Cms\MediaLibraryController;
 use App\Http\Controllers\API\V0_5\Cms\PersonalityController;
 use App\Http\Controllers\API\V0_5\Cms\PersonalityDesktopCloneController;
 use App\Http\Controllers\API\V0_5\Cms\TopicController;
@@ -188,6 +191,7 @@ Route::prefix('v0.3')->middleware([
 
         // 1) Scale registry
         Route::get('/scales', [ScalesController::class, 'index']);
+        Route::get('/scales/catalog', [ScalesLookupController::class, 'catalog']);
         Route::get('/scales/lookup', [ScalesLookupController::class, 'lookup']);
         Route::get('/scales/sitemap-source', [ScalesSitemapSourceController::class, 'index']);
         Route::get('/public-gateways/home', [PublicGatewaySurfaceController::class, 'home']);
@@ -452,6 +456,17 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/articles', [ArticleController::class, 'index']);
     Route::get('/articles/{slug}', [ArticleController::class, 'show']);
     Route::get('/articles/{slug}/seo', [ArticleController::class, 'seo']);
+    Route::get('/content-pages/{slug}', [ContentPageController::class, 'show']);
+    Route::get('/internal/content-pages', [ContentPageController::class, 'internalIndex']);
+    Route::put('/internal/content-pages/{slug}', [ContentPageController::class, 'internalUpdate']);
+    Route::get('/landing-surfaces/{surfaceKey}', [LandingSurfaceController::class, 'show']);
+    Route::get('/internal/landing-surfaces', [LandingSurfaceController::class, 'internalIndex']);
+    Route::put('/internal/landing-surfaces/{surfaceKey}', [LandingSurfaceController::class, 'internalUpdate']);
+    Route::get('/media-assets', [MediaLibraryController::class, 'index']);
+    Route::get('/media-assets/{assetKey}', [MediaLibraryController::class, 'show']);
+    Route::get('/internal/media-assets', [MediaLibraryController::class, 'internalIndex']);
+    Route::put('/internal/media-assets/{assetKey}', [MediaLibraryController::class, 'internalUpdate']);
+    Route::post('/internal/media-assets/{assetKey}/upload', [MediaLibraryController::class, 'internalUpload']);
     Route::get('/career-guides', [CareerGuideController::class, 'index']);
     Route::get('/career-guides/{slug}/seo', [CareerGuideController::class, 'seo']);
     Route::get('/career-guides/{slug}', [CareerGuideController::class, 'show']);

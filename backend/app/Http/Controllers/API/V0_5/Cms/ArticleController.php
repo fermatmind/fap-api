@@ -50,8 +50,16 @@ class ArticleController extends Controller
         if ($validated['locale'] !== null) {
             $query->where('locale', $validated['locale']);
         }
+        if ($validated['related_test_slug'] !== null) {
+            $query->where('related_test_slug', $validated['related_test_slug']);
+        }
+        if ($validated['voice'] !== null) {
+            $query->where('voice', $validated['voice']);
+        }
 
         $paginator = $query
+            ->orderByRaw('voice_order is null')
+            ->orderBy('voice_order')
             ->orderByDesc('published_at')
             ->orderByDesc('id')
             ->paginate(20, ['*'], 'page', $validated['page']);
@@ -178,6 +186,8 @@ class ArticleController extends Controller
         if (! $article instanceof Article || (string) $article->status !== 'published' || ! (bool) $article->is_public) {
             return response()->json(['error' => 'not found'], 404);
         }
+
+        $article->loadMissing($this->articleRelations());
 
         $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
             $this->articleSeoService->buildSeoPayload($article)
@@ -518,9 +528,19 @@ class ArticleController extends Controller
             'content_md' => ['sometimes', 'string'],
             'category_id' => ['nullable', 'integer', 'min:1'],
             'author_admin_user_id' => ['nullable', 'integer', 'min:1'],
+            'author_name' => ['nullable', 'string', 'max:128'],
+            'reviewer_name' => ['nullable', 'string', 'max:128'],
+            'reading_minutes' => ['nullable', 'integer', 'min:1', 'max:1440'],
             'excerpt' => ['nullable', 'string'],
             'content_html' => ['nullable', 'string'],
             'cover_image_url' => ['nullable', 'string', 'max:255'],
+            'cover_image_alt' => ['nullable', 'string', 'max:255'],
+            'cover_image_width' => ['nullable', 'integer', 'min:1'],
+            'cover_image_height' => ['nullable', 'integer', 'min:1'],
+            'cover_image_variants' => ['nullable', 'array'],
+            'related_test_slug' => ['nullable', 'string', 'max:127'],
+            'voice' => ['nullable', 'string', 'max:32'],
+            'voice_order' => ['nullable', 'integer', 'min:0', 'max:65535'],
             'status' => ['sometimes', 'string', 'max:32'],
             'is_public' => ['sometimes', 'boolean'],
             'is_indexable' => ['sometimes', 'boolean'],
@@ -673,13 +693,15 @@ class ArticleController extends Controller
     }
 
     /**
-     * @return array{org_id:int,locale:?string,page:int}|JsonResponse
+     * @return array{org_id:int,locale:?string,related_test_slug:?string,voice:?string,page:int}|JsonResponse
      */
     private function validateListQuery(Request $request): array|JsonResponse
     {
         $validator = Validator::make($request->query(), [
             'org_id' => ['nullable', 'integer', 'min:0'],
             'locale' => ['nullable', 'in:en,zh-CN'],
+            'related_test_slug' => ['nullable', 'string', 'max:127'],
+            'voice' => ['nullable', 'string', 'max:32'],
             'page' => ['nullable', 'integer', 'min:1'],
         ]);
 
@@ -692,6 +714,8 @@ class ArticleController extends Controller
         return [
             'org_id' => (int) ($validated['org_id'] ?? 0),
             'locale' => isset($validated['locale']) ? (string) $validated['locale'] : null,
+            'related_test_slug' => isset($validated['related_test_slug']) ? trim((string) $validated['related_test_slug']) : null,
+            'voice' => isset($validated['voice']) ? trim((string) $validated['voice']) : null,
             'page' => (int) ($validated['page'] ?? 1),
         ];
     }
@@ -777,6 +801,9 @@ class ArticleController extends Controller
             'org_id' => (int) $article->org_id,
             'category_id' => $article->category_id !== null ? (int) $article->category_id : null,
             'author_admin_user_id' => $article->author_admin_user_id !== null ? (int) $article->author_admin_user_id : null,
+            'author_name' => $article->author_name,
+            'reviewer_name' => $article->reviewer_name,
+            'reading_minutes' => $article->reading_minutes !== null ? (int) $article->reading_minutes : null,
             'slug' => (string) $article->slug,
             'locale' => (string) $article->locale,
             'title' => (string) $article->title,
@@ -784,6 +811,13 @@ class ArticleController extends Controller
             'content_md' => (string) $article->content_md,
             'content_html' => $article->content_html,
             'cover_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($article->cover_image_url),
+            'cover_image_alt' => $article->cover_image_alt,
+            'cover_image_width' => $article->cover_image_width !== null ? (int) $article->cover_image_width : null,
+            'cover_image_height' => $article->cover_image_height !== null ? (int) $article->cover_image_height : null,
+            'cover_image_variants' => PublicMediaUrlGuard::sanitizeArrayFields($article->cover_image_variants, ['url']),
+            'related_test_slug' => $article->related_test_slug,
+            'voice' => $article->voice,
+            'voice_order' => $article->voice_order !== null ? (int) $article->voice_order : null,
             'status' => (string) $article->status,
             'is_public' => (bool) $article->is_public,
             'is_indexable' => (bool) $article->is_indexable,

@@ -1,0 +1,147 @@
+{
+  "surface_key": "career_home",
+  "locale": "zh-CN",
+  "title": "职业库与职业探索",
+  "description": "从全部职业库、行业目录和测评结果进入职业详情与职业推荐。",
+  "schema_version": "career-home.v1",
+  "status": "published",
+  "is_public": true,
+  "is_indexable": true,
+  "payload_json": {
+    "seo": {
+      "title": "职业库与职业探索",
+      "description": "从全部职业库、行业目录和测评结果进入职业详情与职业推荐。"
+    },
+    "hero": {
+      "eyebrow": "职业",
+      "title": "从职业库开始，逐层缩小选择",
+      "body": "从完整职业目录、行业入口和测评结果三条路径进入职业探索。"
+    },
+    "pathways": [
+      {
+        "id": "jobs",
+        "eyebrow": "全部职业库",
+        "title": "浏览 342 个职业",
+        "description": "先看完整职业目录，再按行业或关键词缩小范围。",
+        "href": "/career/jobs",
+        "ctaLabel": "搜索全部职业库",
+        "searchPlaceholder": "输入职业名或方向"
+      },
+      {
+        "id": "industries",
+        "eyebrow": "行业入口",
+        "title": "按行业看职业裂变",
+        "description": "适合还不确定具体岗位，但知道大致行业方向的人。",
+        "href": "/career/industries",
+        "ctaLabel": "查看行业目录"
+      },
+      {
+        "id": "recommendations",
+        "eyebrow": "基于测评",
+        "title": "用人格结果看推荐",
+        "description": "如果已经有 MBTI 或大五结果，可以先看推荐方向。",
+        "href": "/career/recommendations",
+        "ctaLabel": "查看职业推荐"
+      }
+    ],
+    "support": {
+      "title": "需要更多背景时再看",
+      "links": [
+        {
+          "label": "职业发展文章",
+          "href": "/career/guides"
+        },
+        {
+          "label": "职业测试",
+          "href": "/career/tests"
+        },
+        {
+          "label": "数据来源",
+          "href": "/datasets/occupations"
+        },
+        {
+          "label": "方法说明",
+          "href": "/datasets/occupations/method"
+        }
+      ]
+    }
+  },
+  "page_blocks": [
+    {
+      "block_key": "hero",
+      "block_type": "career_home_section",
+      "title": "从职业库开始，逐层缩小选择",
+      "payload_json": {
+        "eyebrow": "职业",
+        "title": "从职业库开始，逐层缩小选择",
+        "body": "从完整职业目录、行业入口和测评结果三条路径进入职业探索。"
+      },
+      "sort_order": 0,
+      "is_enabled": true
+    },
+    {
+      "block_key": "pathways",
+      "block_type": "career_home_section",
+      "title": "Pathways",
+      "payload_json": {
+        "items": [
+          {
+            "id": "jobs",
+            "eyebrow": "全部职业库",
+            "title": "浏览 342 个职业",
+            "description": "先看完整职业目录，再按行业或关键词缩小范围。",
+            "href": "/career/jobs",
+            "ctaLabel": "搜索全部职业库",
+            "searchPlaceholder": "输入职业名或方向"
+          },
+          {
+            "id": "industries",
+            "eyebrow": "行业入口",
+            "title": "按行业看职业裂变",
+            "description": "适合还不确定具体岗位，但知道大致行业方向的人。",
+            "href": "/career/industries",
+            "ctaLabel": "查看行业目录"
+          },
+          {
+            "id": "recommendations",
+            "eyebrow": "基于测评",
+            "title": "用人格结果看推荐",
+            "description": "如果已经有 MBTI 或大五结果，可以先看推荐方向。",
+            "href": "/career/recommendations",
+            "ctaLabel": "查看职业推荐"
+          }
+        ]
+      },
+      "sort_order": 1,
+      "is_enabled": true
+    },
+    {
+      "block_key": "support",
+      "block_type": "career_home_section",
+      "title": "需要更多背景时再看",
+      "payload_json": {
+        "title": "需要更多背景时再看",
+        "links": [
+          {
+            "label": "职业发展文章",
+            "href": "/career/guides"
+          },
+          {
+            "label": "职业测试",
+            "href": "/career/tests"
+          },
+          {
+            "label": "数据来源",
+            "href": "/datasets/occupations"
+          },
+          {
+            "label": "方法说明",
+            "href": "/datasets/occupations/method"
+          }
+        ]
+      },
+      "sort_order": 2,
+      "is_enabled": true
+    }
+  ]
+}
