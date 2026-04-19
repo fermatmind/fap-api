@@ -148,4 +148,57 @@ final class MediaLibraryPublicApiTest extends TestCase
             ->assertJsonPath('asset.url', null)
             ->assertJsonPath('asset.variants.0.url', null);
     }
+
+    public function test_legacy_media_url_audit_reports_findings_without_writes(): void
+    {
+        $asset = MediaAsset::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'asset_key' => 'articles.legacy-audit',
+            'disk' => 'public_static',
+            'path' => null,
+            'url' => 'https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com/article.jpg',
+            'status' => MediaAsset::STATUS_PUBLISHED,
+            'is_public' => true,
+            'payload_json' => [],
+        ]);
+
+        $asset->variants()->create([
+            'variant_key' => 'card',
+            'path' => null,
+            'url' => 'https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com/card.jpg',
+            'payload_json' => [],
+        ]);
+
+        $this->artisan('media-assets:audit-legacy-urls')
+            ->expectsOutputToContain('dry_run=1')
+            ->expectsOutputToContain('media_asset_legacy_url_count=1')
+            ->expectsOutputToContain('media_variant_legacy_url_count=1')
+            ->expectsOutputToContain('legacy_url_count=2')
+            ->assertExitCode(0);
+
+        $this->artisan('media-assets:audit-legacy-urls', ['--fail-on-findings' => true])
+            ->assertExitCode(1);
+
+        $asset->refresh();
+        $this->assertSame('https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com/article.jpg', (string) $asset->url);
+    }
+
+    public function test_legacy_media_url_audit_passes_when_no_findings_exist(): void
+    {
+        MediaAsset::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'asset_key' => 'articles.clean-audit',
+            'disk' => 'public_static',
+            'path' => '/static/articles/clean.jpg',
+            'url' => 'https://assets.fermatmind.com/static/articles/clean.jpg',
+            'status' => MediaAsset::STATUS_PUBLISHED,
+            'is_public' => true,
+            'payload_json' => [],
+        ]);
+
+        $this->artisan('media-assets:audit-legacy-urls', ['--fail-on-findings' => true])
+            ->expectsOutputToContain('legacy_url_count=0')
+            ->expectsOutputToContain('no legacy media URLs found')
+            ->assertExitCode(0);
+    }
 }

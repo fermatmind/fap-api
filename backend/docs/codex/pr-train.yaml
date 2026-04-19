@@ -6,6 +6,33 @@ require_clean_worktree: true
 execution_mode: local_clone_preferred
 
 prs:
+  - id: PR-V4-P5C
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-v4-p5c-media-url-audit
+    base: main
+    depends_on: ["PR-V4-P5B"]
+    mode: execute
+    scope: >
+      Final V4 Phase 5C Media Library legacy URL dry-run audit. Add a
+      read-only command that reports legacy Tencent/COS URLs in media_assets
+      and media_variants, with an optional fail-on-findings gate, without
+      mutating database records or adding cleanup migrations.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Console/Commands/MediaAssetsAuditLegacyUrls.php tests/Feature/MediaLibrary/MediaLibraryPublicApiTest.php"
+      - "php artisan test tests/Feature/MediaLibrary/MediaLibraryPublicApiTest.php"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-V4-P5B
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
