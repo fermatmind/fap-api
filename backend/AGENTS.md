@@ -71,3 +71,21 @@
 - Codex may draft, refactor, and open PRs.
 - Laravel/backend or the declared authority layer remains the source of truth where the manifest says so.
 - Never replace an authority layer with frontend or CMS fallback logic.
+
+## Content authority rules
+- CMS/backend is the source of truth for publishable content, operational metadata, mutable media references, public SEO fields, and publishing state.
+- Article content, article SEO, covers, categories/tags, related placement, and publication state must be managed through backend Article resources and APIs.
+- Homepage, tests hub, test category, career center, CTA text, module ordering, featured items, and landing SEO must be managed through `landing_surfaces` / `page_blocks`.
+- Help, policy, company, brand, careers, about, charter, foundation, privacy, terms, refund, support, and similar static-content pages must be managed through `content_pages`.
+- Career guides, career jobs, career recommendations, personality profiles, topic pages, FAQ, sections, and SEO must be managed through backend CMS resources and public APIs.
+- Mutable editorial, marketing, social, article, landing page, and SEO images must be uploaded to Media Library and referenced by CMS metadata or generated variants.
+- Public APIs must not emit historical Tencent/COS media URLs or ad hoc raw media URLs for CMS-backed surfaces.
+
+## Final V4 backend protocols
+- `content_baselines` may exist only for new environment initialization, DB recovery, baseline imports, disaster recovery, and dry-run validation. They must not be used as runtime page-rendering authority.
+- Large content imports must include schema validation and dry-run support before import, especially career DOCX conversion, slugs, sections, SEO fields, media references, and publication state.
+- CMS/API contracts must support frontend local development against local API, test/staging API, or mock API flows without requiring production CMS access.
+- Experimental surfaces, SBTI, and heavily interactive product experiences may remain product-code-side unless explicitly converted into operational content.
+- High-traffic CMS-backed entry pages must be served through an API/cache strategy that supports CMS/API content, stale last-known-good cache, then minimal shell behavior in the frontend. Do not rely on frontend hardcoded editorial copy as fallback.
+- Business priority is fixed as L1 MBTI, L2 Big Five, and L3 SBTI/articles/topics/career recommendations/non-core tests. API resource isolation, throttling, cache refresh, and degradation policies must preserve this order.
+- Long-term API resource isolation should separate lookup/questions read paths, auth/start/submit/result write paths, and non-core CMS/API paths.
