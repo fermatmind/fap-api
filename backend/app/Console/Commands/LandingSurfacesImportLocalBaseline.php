@@ -111,8 +111,9 @@ final class LandingSurfacesImportLocalBaseline extends Command
 
     private function resolveSourceDir(string $override): string
     {
-        $candidate = trim($override) !== ''
-            ? base_path(trim($override))
+        $override = trim($override);
+        $candidate = $override !== ''
+            ? ($this->isAbsolutePath($override) ? $override : base_path($override))
             : base_path('../content_baselines/landing_surfaces');
 
         $real = realpath($candidate);
@@ -121,6 +122,12 @@ final class LandingSurfacesImportLocalBaseline extends Command
         }
 
         return $real;
+    }
+
+    private function isAbsolutePath(string $path): bool
+    {
+        return str_starts_with($path, DIRECTORY_SEPARATOR)
+            || preg_match('/^[A-Za-z]:[\\\\\\/]/', $path) === 1;
     }
 
     /**

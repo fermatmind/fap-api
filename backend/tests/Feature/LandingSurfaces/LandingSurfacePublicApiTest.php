@@ -109,6 +109,24 @@ final class LandingSurfacePublicApiTest extends TestCase
         );
     }
 
+    public function test_baseline_import_accepts_absolute_source_directory(): void
+    {
+        $sourceDir = realpath(base_path('../content_baselines/landing_surfaces'));
+        $this->assertIsString($sourceDir);
+
+        $this->artisan('landing-surfaces:import-local-baseline', [
+            '--upsert' => true,
+            '--status' => 'published',
+            '--source-dir' => $sourceDir,
+        ])
+            ->expectsOutputToContain('baseline_source_dir='.$sourceDir)
+            ->expectsOutputToContain('files_found=10')
+            ->expectsOutputToContain('will_create=10')
+            ->assertExitCode(0);
+
+        $this->assertSame(10, LandingSurface::query()->withoutGlobalScopes()->count());
+    }
+
     public function test_public_and_internal_api_return_surface_payloads(): void
     {
         $this->artisan('landing-surfaces:import-local-baseline', [

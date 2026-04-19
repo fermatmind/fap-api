@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-19T00:00:00Z",
+  "updated_at": "2026-04-19T13:20:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -2829,9 +2829,9 @@
     "PR-CMS1": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/pr-cms1-home-surface-deploy-import",
-      "commit_sha": "144d4234ec299ba75183c593f7adeeb9feda47a5",
+      "commit_sha": "febceb06eea1e37901da02dd13f0aed9d547715c",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/941",
       "checks": {
         "local": [
@@ -2849,6 +2849,44 @@
           },
           {
             "command": "php -l deploy.php",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "2026-04-19T13:06:00Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-CMS2": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "status": "local_checks_passed",
+      "branch": "codex/landing-surface-absolute-source-dir",
+      "commit_sha": "5abebcc637f8fb38af1aaae7dcf86f3d8634e9bf",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "cd backend && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && vendor/bin/pint --test app/Console/Commands/LandingSurfacesImportLocalBaseline.php tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan test tests/Feature/LandingSurfaces/LandingSurfacePublicApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php -l backend/app/Console/Commands/LandingSurfacesImportLocalBaseline.php",
             "status": "passed"
           },
           {
