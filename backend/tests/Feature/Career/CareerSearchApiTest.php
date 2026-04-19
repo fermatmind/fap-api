@@ -6,7 +6,10 @@ namespace Tests\Feature\Career;
 
 use App\Models\CareerCompileRun;
 use App\Models\CareerImportRun;
+use App\Models\Occupation;
 use App\Models\OccupationAlias;
+use App\Models\OccupationCrosswalk;
+use App\Models\OccupationFamily;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Fixtures\Career\CareerFoundationFixture;
@@ -77,6 +80,33 @@ final class CareerSearchApiTest extends TestCase
             ->assertJsonPath('error_code', 'VALIDATION_FAILED');
     }
 
+    public function test_it_exposes_directory_draft_jobs_in_search_without_opening_detail_pages(): void
+    {
+        $occupation = $this->createDirectoryDraftOccupation([
+            'canonical_slug' => 'us-ai-compliance-analyst',
+            'canonical_title_en' => 'AI Compliance Analyst',
+            'canonical_title_zh' => 'AI 合规分析师',
+            'search_h1_zh' => 'AI 合规分析师',
+        ]);
+
+        $this->getJson('/api/v0.5/career/search?q=AI%20Compliance&limit=5&mode=prefix&locale=en-US')
+            ->assertOk()
+            ->assertJsonPath('bundle_kind', 'career_search_results')
+            ->assertJsonCount(1, 'items')
+            ->assertJsonPath('items.0.identity.occupation_uuid', $occupation->id)
+            ->assertJsonPath('items.0.identity.canonical_slug', 'us-ai-compliance-analyst')
+            ->assertJsonPath('items.0.match_kind', 'canonical_title_prefix')
+            ->assertJsonPath('items.0.trust_summary.status', 'unavailable')
+            ->assertJsonPath('items.0.trust_summary.reviewer_status', 'directory_draft_pending_detail')
+            ->assertJsonPath('items.0.seo_contract.canonical_path', '/career/jobs')
+            ->assertJsonPath('items.0.seo_contract.index_eligible', false)
+            ->assertJsonPath('items.0.seo_contract.index_state', 'noindex');
+
+        $this->getJson('/api/v0.5/career/jobs/us-ai-compliance-analyst')
+            ->assertStatus(404)
+            ->assertJsonPath('error_code', 'NOT_FOUND');
+    }
+
     /**
      * @param  array<string, mixed>  $chain
      * @return array<string, mixed>
@@ -125,5 +155,64 @@ final class CareerSearchApiTest extends TestCase
             'compileRun' => $compileRun,
             'snapshot' => $snapshot,
         ] + $chain;
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createDirectoryDraftOccupation(array $overrides = []): Occupation
+    {
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'directory-draft-search-family',
+            'title_en' => 'Directory Draft Search Family',
+            'title_zh' => '目录草稿搜索职业族',
+        ]);
+        $occupation = Occupation::query()->create(array_merge([
+            'family_id' => $family->id,
+            'canonical_slug' => 'directory-draft-search-specialist',
+            'entity_level' => 'dataset_candidate',
+            'truth_market' => 'US',
+            'display_market' => 'US',
+            'crosswalk_mode' => 'directory_draft',
+            'canonical_title_en' => 'Directory Draft Search Specialist',
+            'canonical_title_zh' => '目录草稿搜索专员',
+            'search_h1_zh' => '目录草稿搜索专员',
+        ], $overrides));
+        $importRun = CareerImportRun::query()->create([
+            'dataset_name' => 'china_us_occupation_directories_2026',
+            'dataset_version' => '2026',
+            'dataset_checksum' => 'directory-draft-search-checksum',
+            'scope_mode' => 'occupation_directory_draft',
+            'dry_run' => false,
+            'status' => 'completed',
+            'started_at' => now()->subMinutes(10),
+            'finished_at' => now()->subMinutes(9),
+        ]);
+
+        OccupationCrosswalk::query()->create([
+            'occupation_id' => $occupation->id,
+            'source_system' => 'US_ONET',
+            'source_code' => 'US-TEST-001',
+            'source_title' => (string) $occupation->canonical_title_en,
+            'mapping_type' => 'directory_draft',
+            'confidence_score' => 0.5,
+            'import_run_id' => $importRun->id,
+            'row_fingerprint' => hash('sha256', 'directory-draft-search-crosswalk'),
+        ]);
+        OccupationAlias::query()->create([
+            'occupation_id' => $occupation->id,
+            'alias' => (string) $occupation->canonical_title_en,
+            'normalized' => strtolower((string) $occupation->canonical_title_en),
+            'lang' => 'en-US',
+            'register' => 'canonical',
+            'intent_scope' => 'specialized',
+            'target_kind' => 'leaf_or_child',
+            'precision_score' => 1,
+            'confidence_score' => 1,
+            'import_run_id' => $importRun->id,
+            'row_fingerprint' => hash('sha256', 'directory-draft-search-alias'),
+        ]);
+
+        return $occupation->fresh();
     }
 }

@@ -50,8 +50,8 @@ final class CareerPublicDatasetContractBuilder
         return new CareerPublicDatasetContract(
             datasetKey: (string) data_get($authority, 'dataset_key', CareerDatasetPublicationMetadataService::DATASET_KEY),
             datasetScope: (string) data_get($authority, 'dataset_scope', CareerDatasetPublicationMetadataService::DATASET_SCOPE),
-            datasetName: 'FermatMind Career Occupations Dataset (All 342 Tracked Occupations)',
-            datasetNameZh: '费马测试职业数据库（342 全量职业范围）',
+            datasetName: 'FermatMind Career Occupations Dataset',
+            datasetNameZh: '费马测试职业数据库',
             publication: $publication,
             collectionSummary: $collectionSummary,
             filters: [
@@ -61,6 +61,10 @@ final class CareerPublicDatasetContractBuilder
                 'included_excluded' => true,
             ],
             methodUrl: (string) data_get($publication, 'distribution.methodology_url', 'https://www.fermatmind.com/datasets/occupations/method'),
+            members: array_values(array_filter(
+                (array) data_get($authority, 'members', []),
+                static fn (mixed $member): bool => is_array($member)
+            )),
         );
     }
 
@@ -75,11 +79,11 @@ final class CareerPublicDatasetContractBuilder
             methodUrl: (string) data_get($publication, 'distribution.methodology_url', 'https://www.fermatmind.com/datasets/occupations/method'),
             hubUrl: (string) data_get($publication, 'distribution.documentation_url', 'https://www.fermatmind.com/datasets/occupations'),
             title: 'Occupations dataset method',
-            summary: 'This dataset is compiled from backend-owned full-342 career authorities with explicit included/excluded public scope boundaries.',
-            sourceSummary: 'Members are derived from career_tracked_occupation scope (career_all_342) and reconciled with release ledger, strong-index eligibility, and publication metadata authorities.',
+            summary: 'This dataset is compiled from backend-owned career authorities with explicit public scope boundaries.',
+            sourceSummary: 'Members are derived from career_tracked_occupation scope and reconciled with release ledger, strong-index eligibility, directory-draft, and publication metadata authorities.',
             reviewDisciplineSummary: 'Updates follow validate, trust compile, release-ledger reconciliation, and conservative publicization discipline. Internal queue internals remain private.',
             included: [
-                'career_tracked_occupation members in career_all_342 scope',
+                'career_tracked_occupation members in public career dataset scope',
                 'public-safe publication metadata (publisher, license, usage, distribution)',
                 'public-safe included/excluded, cohort, index-posture, and publish-track summaries',
             ],
@@ -89,7 +93,7 @@ final class CareerPublicDatasetContractBuilder
                 'internal storage/source paths and debug-only provenance fields',
             ],
             boundaryNotes: [
-                'Dataset scope is career_all_342 with explicit included/excluded publication boundaries.',
+                'Dataset scope has explicit included/excluded publication boundaries and keeps draft detail pages closed until authored.',
                 'Crosswalk and editorial overrides remain backend-owned and are not exposed as raw operational records.',
                 'This page is a public method summary, not an internal authority dump.',
             ],

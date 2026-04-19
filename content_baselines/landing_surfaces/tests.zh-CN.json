@@ -14,8 +14,8 @@
     },
     "hero": {
       "eyebrow": "测评入口",
-      "title": "从一个更清晰的问题开始，找到适合你的测评。",
-      "body": "围绕自我认知、学习、职业方向与协作判断的精选入口，帮你更快开始，也更容易选对。",
+      "title": "帮助青年人看清自己、理解真实世界",
+      "body": "让每一次选择和努力都更有依据、更可执行、可持续复盘。",
       "primaryLabel": "开始选择",
       "primaryHref": "#tests-quick-start",
       "secondaryLabel": "浏览全部测评",
@@ -113,7 +113,8 @@
           "representativeLabels": [
             "MBTI 93Q",
             "MBTI 144Q",
-            "Big Five 120Q"
+            "Big Five 120Q",
+            "九型人格"
           ],
           "tests": [
             {
@@ -167,6 +168,20 @@
                 }
               ],
               "primaryLabel": "标准版"
+            },
+            {
+              "key": "enneagram-personality-test",
+              "title": "九型人格测试",
+              "description": "从核心动机、压力反应与防御模式理解你的行为模式。",
+              "questionsLabel": "待上线",
+              "durationLabel": "待补充",
+              "outputLabel": "核心动机、压力反应与成长线索",
+              "href": "/zh/tests",
+              "detailsHref": "/zh/tests",
+              "secondaryLabel": "查看详情",
+              "scientificBasis": "Enneagram framework",
+              "previewVariant": "summary",
+              "primaryLabel": "查看入口"
             },
             {
               "key": "eq-test-emotional-intelligence-assessment",
@@ -467,11 +482,11 @@
     {
       "block_key": "hero",
       "block_type": "tests_hub_section",
-      "title": "从一个更清晰的问题开始，找到适合你的测评。",
+      "title": "帮助青年人看清自己、理解真实世界",
       "payload_json": {
         "eyebrow": "测评入口",
-        "title": "从一个更清晰的问题开始，找到适合你的测评。",
-        "body": "围绕自我认知、学习、职业方向与协作判断的精选入口，帮你更快开始，也更容易选对。",
+        "title": "帮助青年人看清自己、理解真实世界",
+        "body": "让每一次选择和努力都更有依据、更可执行、可持续复盘。",
         "primaryLabel": "开始选择",
         "primaryHref": "#tests-quick-start",
         "secondaryLabel": "浏览全部测评",
@@ -583,7 +598,8 @@
             "representativeLabels": [
               "MBTI 93Q",
               "MBTI 144Q",
-              "Big Five 120Q"
+              "Big Five 120Q",
+              "九型人格"
             ],
             "tests": [
               {
@@ -637,6 +653,20 @@
                   }
                 ],
                 "primaryLabel": "标准版"
+              },
+              {
+                "key": "enneagram-personality-test",
+                "title": "九型人格测试",
+                "description": "从核心动机、压力反应与防御模式理解你的行为模式。",
+                "questionsLabel": "待上线",
+                "durationLabel": "待补充",
+                "outputLabel": "核心动机、压力反应与成长线索",
+                "href": "/zh/tests",
+                "detailsHref": "/zh/tests",
+                "secondaryLabel": "查看详情",
+                "scientificBasis": "Enneagram framework",
+                "previewVariant": "summary",
+                "primaryLabel": "查看入口"
               },
               {
                 "key": "eq-test-emotional-intelligence-assessment",

@@ -26,6 +26,7 @@ final class CareerDatasetPublicApiTest extends TestCase
             ->assertJsonPath('dataset_scope', 'career_all_342')
             ->assertJsonPath('collection_summary.member_count', 342)
             ->assertJsonPath('collection_summary.tracking_counts.tracked_total_occupations', 342)
+            ->assertJsonCount(342, 'members')
             ->assertJsonPath('publication.publisher.name', 'FermatMind')
             ->assertJsonPath('publication.license.name', 'Proprietary Dataset License')
             ->assertJsonPath('publication.usage.allowed_for_public_display', true)
