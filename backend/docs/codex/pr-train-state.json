@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-19T22:08:47+08:00",
+  "updated_at": "2026-04-19T22:10:10+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,9 +9,9 @@
     "PR-V4-0B": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_checks_failed",
+      "status": "merged",
       "branch": "codex/pr-content-authority-v4-backend-rules",
-      "commit_sha": "6e9661677033fbff74852c930019568d6568231e",
+      "commit_sha": "ceb4ef0719da597f9ababba821f36a467a6fff5f",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/943",
       "checks": {
         "local": [
@@ -39,9 +39,9 @@
       },
       "failure_reason": "GitHub Actions hygiene failed immediately on PR #943 with no job steps and log not found; verify-mbti matrix was skipped. Local validation passed, matching the repository's existing CI startup failure pattern rather than a locally reproducible backend rules-doc regression.",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-04-19T14:09:22Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "PR-B7": {
       "repo": "fap-api",
