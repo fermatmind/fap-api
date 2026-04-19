@@ -6,6 +6,31 @@ require_clean_worktree: true
 execution_mode: local_clone_preferred
 
 prs:
+  - id: PR-V4-0B
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-content-authority-v4-backend-rules
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      Final V4 backend rules synchronization. Document backend/CMS content
+      authority, content_baselines runtime limits, importer validation,
+      Media Library ownership, fallback support, and MBTI priority/resource
+      isolation principles without changing Laravel runtime behavior.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-B7
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
