@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-20T00:07:05+08:00",
+  "updated_at": "2026-04-20T00:08:35+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -11,8 +11,8 @@
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "in_progress",
       "branch": "codex/pr-v4-p5b-media-asset-origin",
-      "commit_sha": null,
-      "pr_url": null,
+      "commit_sha": "5fc9ad3f25278bd0242c179eeee7c0da04ad3e8f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/946",
       "checks": {
         "local": [
           {
@@ -32,9 +32,30 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24633335557/job/72024357508"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24633341097/job/72024372675"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24633335557/job/72024359877"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24633341097/job/72024375563"
+          }
+        ]
       },
-      "failure_reason": null,
+      "failure_reason": "GitHub Actions hygiene failed immediately on PR #946 and verify-mbti matrix was skipped. Local manifest checks passed and the merge policy does not require GitHub checks for this media URL contract PR.",
       "resume_policy": "manual_only",
       "merged_at": null,
       "remote_branch_deleted": false,
