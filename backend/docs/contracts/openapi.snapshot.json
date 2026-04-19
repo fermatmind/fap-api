@@ -190,7 +190,7 @@
                     "App\\Http\\Middleware\\ResolveAnonId",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\ForcePublicAttemptRealm",
-                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_attempt_submit"
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_attempt_start"
                 ],
                 "x-laravel-name": "api.v0_3.attempts.start"
             }
