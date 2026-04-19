@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Cms;
 
 use App\Models\MediaAsset;
+use App\Support\PublicMediaUrlGuard;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -237,9 +238,14 @@ final class MediaVariantGenerator
 
     private function publicUrl(string $disk, string $path): ?string
     {
+        $canonical = PublicMediaUrlGuard::publicMediaUrlForPath($disk, $path);
+        if ($canonical !== null) {
+            return $canonical;
+        }
+
         $url = Storage::disk($disk)->url($path);
 
-        return is_string($url) && $url !== '' ? $url : null;
+        return PublicMediaUrlGuard::sanitizeNullableUrl(is_string($url) ? $url : null);
     }
 
     private function detectMime(string $binary): ?string

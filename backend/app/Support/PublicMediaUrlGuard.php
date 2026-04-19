@@ -6,6 +6,8 @@ namespace App\Support;
 
 final class PublicMediaUrlGuard
 {
+    public const DEFAULT_ASSET_ORIGIN = 'https://assets.fermatmind.com';
+
     /**
      * @var list<string>
      */
@@ -28,6 +30,47 @@ final class PublicMediaUrlGuard
         }
 
         return self::isBlockedUrl($normalized) ? null : $normalized;
+    }
+
+    public static function canonicalAssetOrigin(): string
+    {
+        $origin = trim((string) config('fap.media.asset_origin', self::DEFAULT_ASSET_ORIGIN));
+        $origin = rtrim($origin, '/');
+
+        if ($origin === '' || ! preg_match('/^https?:\/\//i', $origin)) {
+            return self::DEFAULT_ASSET_ORIGIN;
+        }
+
+        return $origin;
+    }
+
+    public static function publicMediaUrlForPath(?string $disk, mixed $path): ?string
+    {
+        $normalizedPath = trim((string) $path);
+        if ($normalizedPath === '') {
+            return null;
+        }
+
+        if (preg_match('/^https?:\/\//i', $normalizedPath)) {
+            return self::sanitizeNullableUrl($normalizedPath);
+        }
+
+        $publicPath = self::publicPathForDisk($disk, $normalizedPath);
+        if ($publicPath === '') {
+            return null;
+        }
+
+        return self::canonicalAssetOrigin().$publicPath;
+    }
+
+    public static function canonicalMediaUrl(?string $disk, mixed $path, mixed $url): ?string
+    {
+        $fromPath = self::publicMediaUrlForPath($disk, $path);
+        if ($fromPath !== null) {
+            return $fromPath;
+        }
+
+        return self::sanitizeNullableUrl($url);
     }
 
     /**
@@ -83,5 +126,26 @@ final class PublicMediaUrlGuard
         }
 
         return false;
+    }
+
+    private static function publicPathForDisk(?string $disk, string $path): string
+    {
+        $trimmed = trim($path);
+        if ($trimmed === '') {
+            return '';
+        }
+
+        if (str_starts_with($trimmed, '/')) {
+            return $trimmed;
+        }
+
+        if (trim((string) $disk) === 'public') {
+            $prefix = trim((string) config('fap.media.public_storage_prefix', '/storage'));
+            $prefix = $prefix === '' ? '/storage' : '/'.trim($prefix, '/');
+
+            return $prefix.'/'.ltrim($trimmed, '/');
+        }
+
+        return '/'.ltrim($trimmed, '/');
     }
 }

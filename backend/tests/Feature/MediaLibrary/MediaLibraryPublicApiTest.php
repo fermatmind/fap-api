@@ -43,11 +43,12 @@ final class MediaLibraryPublicApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath('asset.asset_key', 'share.mbti.default')
+            ->assertJsonPath('asset.url', 'https://assets.fermatmind.com/static/share/mbti_cover_source.png')
             ->assertJsonPath('asset.variants.0.variant_key', 'card');
 
         $this->putJson('/api/v0.5/internal/media-assets/share.mbti.default', [
             'path' => '/static/share/mbti_wide_1200x630.png',
-            'url' => 'https://api.fermatmind.com/static/share/mbti_wide_1200x630.png',
+            'url' => 'https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com/static/share/mbti_wide_1200x630.png',
             'mime_type' => 'image/jpeg',
             'width' => 1200,
             'height' => 630,
@@ -58,7 +59,7 @@ final class MediaLibraryPublicApiTest extends TestCase
                 [
                     'variant_key' => 'og',
                     'path' => '/static/share/mbti_wide_1200x630.png',
-                    'url' => 'https://api.fermatmind.com/static/share/mbti_wide_1200x630.png',
+                    'url' => 'https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com/static/share/mbti_wide_1200x630.png',
                     'mime_type' => 'image/jpeg',
                     'width' => 1200,
                     'height' => 630,
@@ -68,6 +69,8 @@ final class MediaLibraryPublicApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath('asset.alt', 'Updated share image')
+            ->assertJsonPath('asset.url', 'https://assets.fermatmind.com/static/share/mbti_wide_1200x630.png')
+            ->assertJsonPath('asset.variants.0.url', 'https://assets.fermatmind.com/static/share/mbti_wide_1200x630.png')
             ->assertJsonPath('asset.variants.0.variant_key', 'og');
     }
 
@@ -102,6 +105,7 @@ final class MediaLibraryPublicApiTest extends TestCase
 
         $this->assertSame(1800, (int) $asset->width);
         $this->assertSame(1200, (int) $asset->height);
+        $this->assertStringStartsWith('https://assets.fermatmind.com/storage/media-library/sources/articleshero/', (string) $asset->url);
         $this->assertSame(6, $asset->variants()->count());
 
         foreach (['hero', 'card', 'thumbnail', 'og', 'preload'] as $variantKey) {
@@ -112,7 +116,36 @@ final class MediaLibraryPublicApiTest extends TestCase
 
             $this->assertSame('image/jpeg', (string) $variant->mime_type);
             $this->assertNotEmpty($variant->path);
+            $this->assertStringStartsWith('https://assets.fermatmind.com/storage/media-library/variants/articleshero/', (string) $variant->url);
             Storage::disk('public')->assertExists((string) $variant->path);
         }
+    }
+
+    public function test_media_library_filters_legacy_url_when_no_path_can_be_canonicalized(): void
+    {
+        $this->putJson('/api/v0.5/internal/media-assets/articles.legacy', [
+            'url' => 'https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com/article.jpg',
+            'alt' => 'Legacy article image',
+            'status' => 'published',
+            'is_public' => true,
+            'variants' => [
+                [
+                    'variant_key' => 'card',
+                    'url' => 'https://fermatmind-1316873116.cos.ap-shanghai.myqcloud.com/card.jpg',
+                    'mime_type' => 'image/jpeg',
+                    'width' => 800,
+                    'height' => 450,
+                ],
+            ],
+        ])
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('asset.url', null)
+            ->assertJsonPath('asset.variants.0.url', null);
+
+        $this->getJson('/api/v0.5/media-assets/articles.legacy?org_id=0')
+            ->assertOk()
+            ->assertJsonPath('asset.url', null)
+            ->assertJsonPath('asset.variants.0.url', null);
     }
 }

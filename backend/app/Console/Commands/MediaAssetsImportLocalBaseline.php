@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Models\MediaAsset;
+use App\Support\PublicMediaUrlGuard;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use RuntimeException;
@@ -145,7 +146,11 @@ final class MediaAssetsImportLocalBaseline extends Command
             $variants[] = [
                 'variant_key' => $variantKey,
                 'path' => $this->nullableString($variant['path'] ?? null),
-                'url' => $this->nullableString($variant['url'] ?? null),
+                'url' => PublicMediaUrlGuard::canonicalMediaUrl(
+                    $this->nullableString($row['disk'] ?? null) ?? 'public_static',
+                    $this->nullableString($variant['path'] ?? null),
+                    $this->nullableString($variant['url'] ?? null)
+                ),
                 'mime_type' => $this->nullableString($variant['mimeType'] ?? $variant['mime_type'] ?? null),
                 'width' => $variant['width'] ?? null,
                 'height' => $variant['height'] ?? null,
@@ -162,7 +167,11 @@ final class MediaAssetsImportLocalBaseline extends Command
                 'asset_key' => $assetKey,
                 'disk' => $this->nullableString($row['disk'] ?? null) ?? 'public_static',
                 'path' => $this->nullableString($row['path'] ?? null),
-                'url' => $this->nullableString($row['url'] ?? null),
+                'url' => PublicMediaUrlGuard::canonicalMediaUrl(
+                    $this->nullableString($row['disk'] ?? null) ?? 'public_static',
+                    $this->nullableString($row['path'] ?? null),
+                    $this->nullableString($row['url'] ?? null)
+                ),
                 'mime_type' => $this->nullableString($row['mimeType'] ?? $row['mime_type'] ?? null),
                 'width' => $row['width'] ?? null,
                 'height' => $row['height'] ?? null,

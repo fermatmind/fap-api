@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MediaAsset;
 use App\Models\MediaVariant;
 use App\Services\Cms\MediaVariantGenerator;
+use App\Support\PublicMediaUrlGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -147,7 +148,11 @@ final class MediaLibraryController extends Controller
             $asset->fill([
                 'disk' => $this->nullableString($validated['disk'] ?? null) ?? 'public_static',
                 'path' => $this->nullableString($validated['path'] ?? null),
-                'url' => $this->nullableString($validated['url'] ?? null),
+                'url' => PublicMediaUrlGuard::canonicalMediaUrl(
+                    $this->nullableString($validated['disk'] ?? null) ?? 'public_static',
+                    $this->nullableString($validated['path'] ?? null),
+                    $this->nullableString($validated['url'] ?? null)
+                ),
                 'mime_type' => $this->nullableString($validated['mime_type'] ?? null),
                 'width' => $validated['width'] ?? null,
                 'height' => $validated['height'] ?? null,
@@ -167,7 +172,11 @@ final class MediaLibraryController extends Controller
                     $asset->variants()->create([
                         'variant_key' => $this->normalizeKey((string) $variant['variant_key']),
                         'path' => $this->nullableString($variant['path'] ?? null),
-                        'url' => $this->nullableString($variant['url'] ?? null),
+                        'url' => PublicMediaUrlGuard::canonicalMediaUrl(
+                            $this->nullableString($validated['disk'] ?? null) ?? 'public_static',
+                            $this->nullableString($variant['path'] ?? null),
+                            $this->nullableString($variant['url'] ?? null)
+                        ),
                         'mime_type' => $this->nullableString($variant['mime_type'] ?? null),
                         'width' => $variant['width'] ?? null,
                         'height' => $variant['height'] ?? null,
@@ -272,7 +281,11 @@ final class MediaLibraryController extends Controller
             'asset_key' => (string) $asset->asset_key,
             'disk' => (string) $asset->disk,
             'path' => $asset->path,
-            'url' => $asset->url,
+            'url' => PublicMediaUrlGuard::canonicalMediaUrl(
+                (string) $asset->disk,
+                $asset->path,
+                $asset->url
+            ),
             'mime_type' => $asset->mime_type,
             'width' => $asset->width,
             'height' => $asset->height,
@@ -284,7 +297,7 @@ final class MediaLibraryController extends Controller
             'is_public' => (bool) $asset->is_public,
             'payload_json' => is_array($asset->payload_json) ? $asset->payload_json : [],
             'variants' => $asset->variants
-                ->map(fn (MediaVariant $variant): array => $this->variantPayload($variant))
+                ->map(fn (MediaVariant $variant): array => $this->variantPayload($variant, (string) $asset->disk))
                 ->values()
                 ->all(),
         ];
@@ -293,12 +306,16 @@ final class MediaLibraryController extends Controller
     /**
      * @return array<string,mixed>
      */
-    private function variantPayload(MediaVariant $variant): array
+    private function variantPayload(MediaVariant $variant, ?string $disk): array
     {
         return [
             'variant_key' => (string) $variant->variant_key,
             'path' => $variant->path,
-            'url' => $variant->url,
+            'url' => PublicMediaUrlGuard::canonicalMediaUrl(
+                $disk,
+                $variant->path,
+                $variant->url
+            ),
             'mime_type' => $variant->mime_type,
             'width' => $variant->width,
             'height' => $variant->height,

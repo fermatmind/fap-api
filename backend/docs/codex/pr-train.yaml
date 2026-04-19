@@ -6,6 +6,34 @@ require_clean_worktree: true
 execution_mode: local_clone_preferred
 
 prs:
+  - id: PR-V4-P5B
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-v4-p5b-media-asset-origin
+    base: main
+    depends_on: ["PR-V4-A2"]
+    mode: execute
+    scope: >
+      Final V4 Phase 5B backend media URL contract. Add the canonical
+      mutable media asset origin, generate Media Library upload/variant URLs
+      on that origin, and filter known legacy Tencent/COS URLs from manual
+      updates, baseline imports, and public payloads without changing CDN
+      provisioning or historical migration scripts.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test config/fap.php app/Support/PublicMediaUrlGuard.php app/Services/Cms/MediaVariantGenerator.php app/Http/Controllers/API/V0_5/Cms/MediaLibraryController.php app/Console/Commands/MediaAssetsImportLocalBaseline.php tests/Feature/MediaLibrary/MediaLibraryPublicApiTest.php"
+      - "php artisan test tests/Feature/MediaLibrary/MediaLibraryPublicApiTest.php"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-V4-A1
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
