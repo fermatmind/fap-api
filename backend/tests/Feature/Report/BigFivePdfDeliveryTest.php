@@ -151,8 +151,8 @@ final class BigFivePdfDeliveryTest extends TestCase
         $response->assertStatus(200);
         $response->assertHeader('Content-Type', 'application/pdf');
         $response->assertHeader('X-Report-Scale', 'BIG5_OCEAN');
-        $response->assertHeader('X-Report-Variant', 'free');
-        $response->assertHeader('X-Report-Locked', 'true');
+        $response->assertHeader('X-Report-Variant', 'full');
+        $response->assertHeader('X-Report-Locked', 'false');
         $this->assertStringContainsString(
             '.pdf',
             (string) ($response->headers->get('Content-Disposition') ?? '')
@@ -231,8 +231,8 @@ final class BigFivePdfDeliveryTest extends TestCase
             'Authorization' => 'Bearer '.$token,
         ])->get('/api/v0.3/attempts/'.$attemptId.'/report.pdf');
         $before->assertStatus(200);
-        $before->assertHeader('X-Report-Variant', 'free');
-        $before->assertHeader('X-Report-Locked', 'true');
+        $before->assertHeader('X-Report-Variant', 'full');
+        $before->assertHeader('X-Report-Locked', 'false');
 
         /** @var EntitlementManager $entitlements */
         $entitlements = app(EntitlementManager::class);

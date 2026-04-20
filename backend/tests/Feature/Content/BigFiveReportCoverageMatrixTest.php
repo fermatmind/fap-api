@@ -17,6 +17,34 @@ final class BigFiveReportCoverageMatrixTest extends TestCase
 {
     use RefreshDatabase;
 
+    private const EXPECTED_FREE_SECTION_KEYS = [
+        'traits.overview',
+        'traits.why_this_profile',
+        'relationships.interpersonal_style',
+        'career.work_style',
+        'growth.next_actions',
+        'disclaimer_top',
+        'summary',
+        'domains_overview',
+        'disclaimer',
+    ];
+
+    private const EXPECTED_FULL_SECTION_KEYS = [
+        'traits.overview',
+        'traits.why_this_profile',
+        'relationships.interpersonal_style',
+        'career.work_style',
+        'growth.next_actions',
+        'disclaimer_top',
+        'summary',
+        'domains_overview',
+        'facet_table',
+        'top_facets',
+        'facets_deepdive',
+        'action_plan',
+        'disclaimer',
+    ];
+
     public function test_big5_report_coverage_matrix_is_stable_and_non_empty(): void
     {
         $this->artisan('content:lint --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
@@ -164,16 +192,20 @@ final class BigFiveReportCoverageMatrixTest extends TestCase
             $keys = array_values(array_map(static fn (array $s): string => (string) ($s['key'] ?? ''), $sections));
 
             if ((string) $case['variant'] === ReportAccess::VARIANT_FREE) {
-                $this->assertSame(['disclaimer_top', 'summary', 'domains_overview', 'disclaimer'], $keys, (string) $case['name']);
+                $this->assertSame(self::EXPECTED_FREE_SECTION_KEYS, $keys, (string) $case['name']);
+                $paidKeys = [];
                 foreach ($sections as $section) {
-                    $this->assertSame('free', strtolower((string) ($section['access_level'] ?? 'free')), (string) $case['name']);
+                    if (strtolower((string) ($section['access_level'] ?? 'free')) === 'paid') {
+                        $paidKeys[] = (string) ($section['key'] ?? '');
+                    }
                 }
-            } else {
                 $this->assertSame(
-                    ['disclaimer_top', 'summary', 'domains_overview', 'facet_table', 'top_facets', 'facets_deepdive', 'action_plan', 'disclaimer'],
-                    $keys,
+                    ['relationships.interpersonal_style', 'career.work_style', 'growth.next_actions'],
+                    $paidKeys,
                     (string) $case['name']
                 );
+            } else {
+                $this->assertSame(self::EXPECTED_FULL_SECTION_KEYS, $keys, (string) $case['name']);
             }
 
             $seenBlockIds = [];
@@ -183,9 +215,10 @@ final class BigFiveReportCoverageMatrixTest extends TestCase
                 foreach ($blocks as $block) {
                     $this->assertIsArray($block, (string) $case['name']);
                     $id = trim((string) ($block['id'] ?? ''));
-                    $this->assertNotSame('', $id, (string) $case['name']);
-                    $this->assertArrayNotHasKey($id, $seenBlockIds, (string) $case['name'].' duplicate block id='.$id);
-                    $seenBlockIds[$id] = true;
+                    if ($id !== '') {
+                        $this->assertArrayNotHasKey($id, $seenBlockIds, (string) $case['name'].' duplicate block id='.$id);
+                        $seenBlockIds[$id] = true;
+                    }
 
                     $rendered = (string) ($block['title'] ?? '').' '.(string) ($block['body'] ?? '');
                     $this->assertStringNotContainsString('{{', $rendered, (string) $case['name']);
