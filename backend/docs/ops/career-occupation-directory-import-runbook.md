@@ -145,6 +145,26 @@ A future publishable import or compile step must remain blocked until all of the
 5. Backend truth computation can generate canonical slugs, localized titles, searchable aliases, SEO state, and publication state.
 6. Imported records enter as draft or dataset-only records first; public pages must not appear until normal career publish readiness gates pass.
 
+## Release Guard
+
+Every production deploy that can affect career directory visibility or CMS-backed footer pages must run the public content release guard after baseline imports and career authority cache warming:
+
+```bash
+php artisan release:verify-public-content \
+  --expected-occupations=2787 \
+  --min-career-job-items=2786 \
+  --content-source-dir=/absolute/path/to/content_baselines/content_pages
+```
+
+The deploy recipe runs this command automatically. The release must stop if any of these fail:
+
+- every content page baseline row is not present as `status=published` and `is_public=true` in `content_pages`
+- the career dataset member count is below `2787`
+- career dataset tracking is incomplete or has missing occupations
+- the career job list item count is below `2786`
+
+If the guard fails, fix the backend-authoritative data import or compile path first. Do not patch frontend fallback content to hide the failure.
+
 ## Repository Rule Impact
 
 This runbook is backend import governance for a CMS/backend-authoritative career content surface. It does not add frontend fallback content, public editorial copy, public API behavior, sitemap enumeration, or runtime page-rendering authority.

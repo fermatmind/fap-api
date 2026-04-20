@@ -317,8 +317,16 @@ task('career:warm-public-authority-cache', function () {
     run('timeout 180 {{bin/php}} {{release_path}}/backend/artisan career:warm-public-authority-cache --no-interaction --ansi');
 });
 
+task('guard:public-content-release', function () {
+    run('timeout 180 {{bin/php}} {{release_path}}/backend/artisan release:verify-public-content --content-source-dir={{release_path}}/content_baselines/content_pages --no-interaction --ansi');
+});
+
 task('cms:import-landing-surface-baselines', function () {
     run('{{bin/php}} {{release_path}}/backend/artisan landing-surfaces:import-local-baseline --upsert --status=published --source-dir={{release_path}}/content_baselines/landing_surfaces --no-interaction --ansi');
+});
+
+task('cms:import-content-page-baselines', function () {
+    run('{{bin/php}} {{release_path}}/backend/artisan content-pages:import-local-baseline --upsert --status=published --source-dir={{release_path}}/content_baselines/content_pages --no-interaction --ansi');
 });
 
 task('artisan:view:cache', function () {
@@ -710,8 +718,10 @@ after('artisan:filament:assets', 'guard:filament-assets');
 after('artisan:config:cache', 'guard:sitemap-authority');
 after('artisan:migrate', 'guard:no-pending-migrations');
 after('guard:no-pending-migrations', 'cms:import-landing-surface-baselines');
-after('cms:import-landing-surface-baselines', 'career:warm-public-authority-cache');
-after('career:warm-public-authority-cache', 'ensure:release-runtime-perms');
+after('cms:import-landing-surface-baselines', 'cms:import-content-page-baselines');
+after('cms:import-content-page-baselines', 'career:warm-public-authority-cache');
+after('career:warm-public-authority-cache', 'guard:public-content-release');
+after('guard:public-content-release', 'ensure:release-runtime-perms');
 
 after('deploy:symlink', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');

@@ -1430,8 +1430,9 @@ final class OccupationDirectoryDisplayNormalizer
         }
 
         $result = implode('', array_values(array_filter($translated, static fn (?string $part): bool => $part !== null && $part !== '')));
+        $result = preg_replace('/^(?:、|和)+|(?:、|和)+$/u', '', $result) ?? $result;
 
-        return trim($result, '、和');
+        return trim($result);
     }
 
     private function isWeakChineseTitle(string $title): bool
