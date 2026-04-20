@@ -417,6 +417,14 @@ final class BigFiveCanonicalTruthFixturesTest extends TestCase
             foreach ($value as $key => $item) {
                 $normalized[(string) $key] = $this->sanitizeForFixture($item);
             }
+            // Runtime timing metrics can fluctuate by machine load and second-level scheduling.
+            // Keep canonical fixtures stable by treating these as non-contractual.
+            if (array_key_exists('time_per_item_avg', $normalized)) {
+                $normalized['time_per_item_avg'] = 0;
+            }
+            if (array_key_exists('time_seconds_total', $normalized)) {
+                $normalized['time_seconds_total'] = 0;
+            }
             ksort($normalized);
 
             return $normalized;
