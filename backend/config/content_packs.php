@@ -138,6 +138,53 @@ return [
             ],
         ],
     ],
+    'enneagram_forms' => [
+        'default_form_code' => 'enneagram_likert_105',
+        'forms' => [
+            'enneagram_likert_105' => [
+                'dir_version' => 'v1-likert-105',
+                'question_count' => 105,
+                'form_kind' => 'likert',
+                'aliases' => [
+                    '105',
+                    'likert_105',
+                    'standard_105',
+                ],
+                'public' => [
+                    'label' => [
+                        'zh' => '105题李克特版',
+                        'en' => '105-question Likert version',
+                    ],
+                    'short_label' => [
+                        'zh' => '105题',
+                        'en' => '105 questions',
+                    ],
+                    'estimated_minutes' => 12,
+                ],
+            ],
+            'enneagram_forced_choice_144' => [
+                'dir_version' => 'v1-forced-choice-144',
+                'question_count' => 144,
+                'form_kind' => 'forced_choice',
+                'aliases' => [
+                    '144',
+                    'forced_choice_144',
+                    'rheti_style_144',
+                ],
+                'public' => [
+                    'label' => [
+                        'zh' => '144题迫选版',
+                        'en' => '144-question forced-choice version',
+                    ],
+                    'short_label' => [
+                        'zh' => '144题',
+                        'en' => '144 questions',
+                    ],
+                    'estimated_minutes' => 18,
+                ],
+            ],
+        ],
+    ],
 
     // ✅ 默认 region/locale 也钉死到 CN_MAINLAND/zh-CN（仍保留 fallback 机制）
     'default_region' => env('FAP_DEFAULT_REGION', 'CN_MAINLAND'),

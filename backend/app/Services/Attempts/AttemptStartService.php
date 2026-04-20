@@ -10,8 +10,10 @@ use App\Services\BigFive\BigFiveFormCatalog;
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\ClinicalComboPackLoader;
 use App\Services\Content\ContentPacksIndex;
+use App\Services\Content\EnneagramPackLoader;
 use App\Services\Content\Eq60PackLoader;
 use App\Services\Content\Sds20PackLoader;
+use App\Services\Enneagram\EnneagramFormCatalog;
 use App\Services\Mbti\MbtiFormCatalog;
 use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Observability\ClinicalComboTelemetry;
@@ -24,9 +26,9 @@ use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
 use App\Support\OrgContext;
 use Illuminate\Contracts\Cache\LockTimeoutException;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -43,6 +45,7 @@ class AttemptStartService
         private ClinicalComboPackLoader $clinicalPackLoader,
         private Sds20PackLoader $sds20PackLoader,
         private Eq60PackLoader $eq60PackLoader,
+        private EnneagramPackLoader $enneagramPackLoader,
         private AttemptRateLimitService $attemptRateLimitService,
         private AttemptProgressService $progressService,
     ) {}
@@ -130,6 +133,16 @@ class AttemptStartService
             $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
             $contentPackageVersion = (string) ($resolvedForm['content_package_version'] ?? '');
             $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'big5_120');
+            $resolvedNormVersion = trim((string) ($resolvedForm['norm_version'] ?? ''));
+            $resolvedScoringSpecVersion = trim((string) ($resolvedForm['scoring_spec_version'] ?? ''));
+            $resolvedQualityVersion = trim((string) ($resolvedForm['quality_version'] ?? ''));
+            $resolvedQuestionCount = (int) ($resolvedForm['question_count'] ?? 0);
+        } elseif (strtoupper($scaleCode) === 'ENNEAGRAM') {
+            $resolvedForm = $this->enneagramFormCatalog()->resolve($dto->formCode, $packId);
+            $packId = (string) ($resolvedForm['pack_id'] ?? $packId);
+            $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
+            $contentPackageVersion = (string) ($resolvedForm['content_package_version'] ?? '');
+            $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'enneagram_likert_105');
             $resolvedNormVersion = trim((string) ($resolvedForm['norm_version'] ?? ''));
             $resolvedScoringSpecVersion = trim((string) ($resolvedForm['scoring_spec_version'] ?? ''));
             $resolvedQualityVersion = trim((string) ($resolvedForm['quality_version'] ?? ''));
@@ -685,6 +698,11 @@ class AttemptStartService
         return app(BigFiveFormCatalog::class);
     }
 
+    private function enneagramFormCatalog(): EnneagramFormCatalog
+    {
+        return app(EnneagramFormCatalog::class);
+    }
+
     private function identityWriteProjector(): ScaleIdentityWriteProjector
     {
         return app(ScaleIdentityWriteProjector::class);
@@ -748,6 +766,18 @@ class AttemptStartService
             $count = $this->eq60PackLoader->getQuestionCount($dirVersion);
             if ($count <= 0) {
                 $this->logAndThrowContentPackError('EQ60_QUESTIONS_MISSING', $packId, $dirVersion, 'questions_eq60_bilingual.csv');
+            }
+
+            return $count;
+        }
+
+        if (strtoupper($scaleCode) === 'ENNEAGRAM') {
+            $count = $this->enneagramPackLoader->getQuestionCount($dirVersion);
+            if ($count <= 0) {
+                $this->logAndThrowContentPackError('ENNEAGRAM_QUESTIONS_MISSING', $packId, $dirVersion, 'questions.compiled.json');
+            }
+            if (is_int($expectedCount) && $expectedCount > 0 && $count !== $expectedCount) {
+                $this->logAndThrowContentPackError('ENNEAGRAM_QUESTION_COUNT_MISMATCH', $packId, $dirVersion, 'questions.compiled.json');
             }
 
             return $count;
@@ -818,6 +848,7 @@ class AttemptStartService
             'CLINICAL_COMBO_68' => $this->clinicalPackLoader->resolveManifestHash($dirVersion),
             'SDS_20' => $this->sds20PackLoader->resolveManifestHash($dirVersion),
             'EQ_60' => $this->eq60PackLoader->resolveManifestHash($dirVersion),
+            'ENNEAGRAM' => $this->enneagramPackLoader->resolveManifestHash($dirVersion),
             default => '',
         };
     }
@@ -829,6 +860,7 @@ class AttemptStartService
             'CLINICAL_COMBO_68' => 'v1.0_2026',
             'SDS_20' => 'v2.0_Factor_Logic',
             'EQ_60' => 'v1.0_normed_validity',
+            'ENNEAGRAM' => 'enneagram_v1.0.0',
             default => '',
         };
     }

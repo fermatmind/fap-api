@@ -376,7 +376,7 @@ class AttemptSubmitTxService
             $axisStates = $axisScores['axis_states'] ?? null;
 
             $resultJson = $scoreResult->toArray();
-            if (in_array($scaleCode, ['BIG5_OCEAN', 'SDS_20', 'EQ_60'], true) && is_array($resultJson['normed_json'] ?? null)) {
+            if (in_array($scaleCode, ['BIG5_OCEAN', 'SDS_20', 'EQ_60', 'ENNEAGRAM'], true) && is_array($resultJson['normed_json'] ?? null)) {
                 $resultJson = array_merge($resultJson, $resultJson['normed_json']);
             }
             if (
@@ -488,7 +488,7 @@ class AttemptSubmitTxService
         }
 
         $normalizedDirVersion = trim($dirVersion);
-        foreach (['mbti_forms', 'big5_forms'] as $formsConfigKey) {
+        foreach (['mbti_forms', 'big5_forms', 'enneagram_forms'] as $formsConfigKey) {
             $forms = config("content_packs.{$formsConfigKey}.forms", []);
             if (! is_array($forms)) {
                 continue;

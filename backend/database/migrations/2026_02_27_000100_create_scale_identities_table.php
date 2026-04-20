@@ -104,6 +104,18 @@ return new class extends Migration
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
+            [
+                'scale_uid' => '77777777-7777-4777-8777-777777777777',
+                'scale_code_v1' => 'ENNEAGRAM',
+                'scale_code_v2' => 'ENNEAGRAM_PERSONALITY_TEST',
+                'pack_id_v1' => 'ENNEAGRAM',
+                'pack_id_v2' => 'ENNEAGRAM_PERSONALITY_TEST',
+                'dir_version_v1' => 'v1-likert-105',
+                'dir_version_v2' => 'v1-likert-105',
+                'status' => 'active',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
         ], ['scale_code_v1'], [
             'scale_uid',
             'scale_code_v2',

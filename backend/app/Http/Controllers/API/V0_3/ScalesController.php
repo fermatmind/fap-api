@@ -7,9 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Services\BigFive\BigFiveFormCatalog;
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\ClinicalComboPackLoader;
+use App\Services\Content\EnneagramPackLoader;
 use App\Services\Content\Eq60PackLoader;
 use App\Services\Content\QuestionsService;
 use App\Services\Content\Sds20PackLoader;
+use App\Services\Enneagram\EnneagramFormCatalog;
 use App\Services\Mbti\MbtiFormCatalog;
 use App\Services\Scale\ScaleCodeInputGuard;
 use App\Services\Scale\ScaleCodeResponseProjector;
@@ -34,6 +36,7 @@ class ScalesController extends Controller
         private OrgContext $orgContext,
         private MbtiFormCatalog $mbtiFormCatalog,
         private BigFiveFormCatalog $bigFiveFormCatalog,
+        private EnneagramFormCatalog $enneagramFormCatalog,
     ) {}
 
     /**
@@ -94,7 +97,8 @@ class ScalesController extends Controller
         BigFivePackLoader $bigFivePackLoader,
         ClinicalComboPackLoader $clinicalPackLoader,
         Sds20PackLoader $sds20PackLoader,
-        Eq60PackLoader $eq60PackLoader
+        Eq60PackLoader $eq60PackLoader,
+        EnneagramPackLoader $enneagramPackLoader
     ): JsonResponse {
         try {
             $orgId = $this->orgContext->orgId();
@@ -139,6 +143,15 @@ class ScalesController extends Controller
                 $packId = (string) ($resolvedForm['pack_id'] ?? $packId);
                 $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
                 $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'big5_120');
+                $resolvedQuestionCount = (int) ($resolvedForm['question_count'] ?? 0);
+            } elseif ($resolvedScaleCode === 'ENNEAGRAM') {
+                $resolvedForm = $this->enneagramFormCatalog->resolve(
+                    $this->requestedFormCode($request),
+                    $packId
+                );
+                $packId = (string) ($resolvedForm['pack_id'] ?? $packId);
+                $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
+                $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'enneagram_likert_105');
                 $resolvedQuestionCount = (int) ($resolvedForm['question_count'] ?? 0);
             }
             if ($packId === '' || $dirVersion === '') {
@@ -245,6 +258,32 @@ class ScalesController extends Controller
                         'disclaimer_version' => $disclaimerVersion,
                         'disclaimer_hash' => $disclaimerHash,
                         'disclaimer_text' => $disclaimerText,
+                    ],
+                ] + $scaleCodeMeta);
+            }
+
+            if ($resolvedScaleCode === 'ENNEAGRAM') {
+                $version = $dirVersion !== '' ? $dirVersion : EnneagramPackLoader::PACK_VERSION;
+                $doc = $enneagramPackLoader->loadQuestionsDoc($locale, $version);
+                $localeResolved = (string) ($doc['locale_resolved'] ?? $enneagramPackLoader->normalizeLocale($locale));
+
+                return response()->json([
+                    'ok' => true,
+                    'scale_code' => $scaleCodeMeta['scale_code'],
+                    'region' => $region,
+                    'locale' => $localeResolved,
+                    'pack_id' => $packId,
+                    'dir_version' => $dirVersion,
+                    'content_package_version' => $version,
+                    'form_code' => $resolvedFormCode,
+                    'questions' => [
+                        'schema' => 'fap.questions.v1',
+                        'items' => is_array($doc['items'] ?? null) ? $doc['items'] : [],
+                    ],
+                    'meta' => [
+                        'locale_requested' => (string) ($doc['locale_requested'] ?? $locale),
+                        'locale_resolved' => $localeResolved,
+                        'question_count' => $resolvedQuestionCount,
                     ],
                 ] + $scaleCodeMeta);
             }
@@ -461,8 +500,7 @@ class ScalesController extends Controller
         array $compiledMin,
         string $normalizedLocale,
         int $expectedCount = 0
-    ): ?array
-    {
+    ): ?array {
         $questionIndex = is_array($compiledMin['question_index'] ?? null) ? $compiledMin['question_index'] : [];
         $textsByLocale = is_array($compiledMin['texts_by_locale'] ?? null) ? $compiledMin['texts_by_locale'] : [];
         $questionOptionSetRef = is_array($compiledMin['question_option_set_ref'] ?? null)

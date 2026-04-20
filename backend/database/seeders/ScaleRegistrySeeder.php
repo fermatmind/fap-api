@@ -211,6 +211,90 @@ final class ScaleRegistrySeeder extends Seeder
         $writer->syncSlugsForScale($big5);
         $this->command?->info('ScaleRegistrySeeder: BIG5_OCEAN scale upserted.');
 
+        $enneagram = $writer->upsertScale([
+            'code' => 'ENNEAGRAM',
+            'org_id' => 0,
+            'primary_slug' => 'enneagram-personality-test-nine-types',
+            'slugs_json' => [
+                'enneagram-personality-test-nine-types',
+                'enneagram-personality-test',
+                'enneagram-test',
+                'nine-types-personality-test',
+                'enneagram',
+            ],
+            'driver_type' => 'enneagram',
+            'assessment_driver' => 'enneagram',
+            'default_pack_id' => 'ENNEAGRAM',
+            'default_region' => $defaultRegion,
+            'default_locale' => $defaultLocale,
+            'default_dir_version' => 'v1-likert-105',
+            'capabilities_json' => [
+                'assets' => false,
+                'questions' => true,
+                'enabled_in_prod' => true,
+                'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
+                'rollout_ratio' => 1.0,
+                'paywall_mode' => 'free_only',
+                'forms' => ['enneagram_likert_105', 'enneagram_forced_choice_144'],
+            ],
+            'view_policy_json' => [
+                'free_sections' => ['summary', 'scores'],
+                'blur_others' => false,
+                'teaser_percent' => 0.0,
+                'upgrade_sku' => null,
+            ],
+            'commercial_json' => [
+                'price_tier' => 'FREE',
+                'report_benefit_code' => 'ENNEAGRAM_REPORT',
+                'credit_benefit_code' => 'ENNEAGRAM_REPORT',
+                'report_unlock_sku' => null,
+                'offers' => [],
+            ],
+            'seo_schema_json' => [
+                '@context' => 'https://schema.org',
+                '@type' => 'Quiz',
+                'name' => 'Enneagram Personality Test',
+                'description' => 'Enneagram personality assessment with 105-item Likert and 144-item forced-choice forms.',
+            ],
+            'seo_i18n_json' => [
+                'en' => [
+                    'title' => 'Enneagram Personality Test (Nine Types)',
+                    'description' => 'Explore your Enneagram profile across the nine personality types.',
+                    'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
+                ],
+                'zh' => [
+                    'title' => '九型人格测试',
+                    'description' => '通过结构化测评了解你的九型人格类型排序。',
+                    'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
+                ],
+            ],
+            'content_i18n_json' => $this->catalogContent(
+                enTitle: 'Enneagram Personality Test (Nine Types)',
+                zhTitle: '九型人格测试',
+                enDescription: 'Explore your Enneagram profile across the nine personality types.',
+                zhDescription: '通过结构化测评了解你的九型人格类型排序。',
+                questions: 105,
+                minutes: 12,
+                cardVisual: 'nine_grid',
+                cardTone: 'editorial',
+                cardSeed: 'enneagram',
+                cardDensity: 'regular',
+                enTagline: 'Nine-type profile',
+                zhTagline: '九型人格画像',
+                priority: 90,
+                rating: 5,
+                enExcerpt: 'Map your strongest Enneagram patterns and see how the nine types rank in your profile.',
+                zhExcerpt: '了解你的九型人格主导类型与九个类型的完整排序。',
+                enSeoCopy: 'The Enneagram backend assessment supports a 105-item Likert form and a 144-item forced-choice form under one scale, with scoring owned by the submit pipeline.',
+                zhSeoCopy: '九型人格后端测评在同一个 scale 下支持 105 题李克特与 144 题迫选两个 form，评分真值由 submit pipeline 持有。'
+            ),
+            'is_public' => true,
+            'is_active' => true,
+        ]);
+
+        $writer->syncSlugsForScale($enneagram);
+        $this->command?->info('ScaleRegistrySeeder: ENNEAGRAM scale upserted.');
+
         $clinical = $writer->upsertScale([
             'code' => 'CLINICAL_COMBO_68',
             'org_id' => 0,
