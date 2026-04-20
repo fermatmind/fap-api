@@ -4,6 +4,10 @@
 
 - `backend/scripts/release_freeze_verify.sh`
 
+Big Five API-side QA baseline and stop-ship mapping are documented in:
+
+- `docs/verify/big5-qa-baseline.md`
+
 它显式串起四层证据：
 
 1. legacy isolation
