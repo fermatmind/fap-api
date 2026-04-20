@@ -322,9 +322,6 @@ final class CareerFullDatasetAuthorityBuilder
             ->pluck('slug')
             ->map(static fn (mixed $slug): string => trim((string) $slug))
             ->filter()
-            ->flatMap(static fn (string $slug): array => $slug === 'database-administrators'
-                ? [$slug, 'database-administrators-and-architects']
-                : [$slug])
             ->mapWithKeys(static fn (string $slug): array => [$slug => true])
             ->all();
     }
