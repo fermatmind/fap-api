@@ -41,6 +41,8 @@ return new class extends Migration
             ['scale_uid' => '55555555-5555-4555-8555-555555555555', 'alias_code' => 'IQ_INTELLIGENCE_QUOTIENT', 'alias_type' => 'v2', 'is_primary' => false],
             ['scale_uid' => '66666666-6666-4666-8666-666666666666', 'alias_code' => 'EQ_60', 'alias_type' => 'v1', 'is_primary' => true],
             ['scale_uid' => '66666666-6666-4666-8666-666666666666', 'alias_code' => 'EQ_EMOTIONAL_INTELLIGENCE', 'alias_type' => 'v2', 'is_primary' => false],
+            ['scale_uid' => '77777777-7777-4777-8777-777777777777', 'alias_code' => 'ENNEAGRAM', 'alias_type' => 'v1', 'is_primary' => true],
+            ['scale_uid' => '77777777-7777-4777-8777-777777777777', 'alias_code' => 'ENNEAGRAM_PERSONALITY_TEST', 'alias_type' => 'v2', 'is_primary' => false],
         ];
 
         foreach ($aliases as $alias) {

@@ -1,0 +1,78 @@
+{
+  "policy": {
+    "answer_range": [
+      -2,
+      -1,
+      0,
+      1,
+      2
+    ],
+    "confidence_thresholds": {
+      "high": 0.3,
+      "medium": 0.15
+    },
+    "engine_version": "enneagram_likert_105_v1.0.0",
+    "form_code": "enneagram_likert_105",
+    "quality_version": "enneagram_likert_105_quality_v1",
+    "scale_code": "ENNEAGRAM",
+    "scoring_mode": "likert_weighted",
+    "scoring_spec_version": "enneagram_likert_105_spec_v1",
+    "types": {
+      "1": {
+        "code": "T1",
+        "name_en": "Reformer",
+        "name_zh": "完美型",
+        "slug": "reformer"
+      },
+      "2": {
+        "code": "T2",
+        "name_en": "Helper",
+        "name_zh": "助人型",
+        "slug": "helper"
+      },
+      "3": {
+        "code": "T3",
+        "name_en": "Achiever",
+        "name_zh": "成就型",
+        "slug": "achiever"
+      },
+      "4": {
+        "code": "T4",
+        "name_en": "Individualist",
+        "name_zh": "自我型",
+        "slug": "individualist"
+      },
+      "5": {
+        "code": "T5",
+        "name_en": "Investigator",
+        "name_zh": "理智型",
+        "slug": "investigator"
+      },
+      "6": {
+        "code": "T6",
+        "name_en": "Loyalist",
+        "name_zh": "忠诚型",
+        "slug": "loyalist"
+      },
+      "7": {
+        "code": "T7",
+        "name_en": "Enthusiast",
+        "name_zh": "活跃型",
+        "slug": "enthusiast"
+      },
+      "8": {
+        "code": "T8",
+        "name_en": "Challenger",
+        "name_zh": "领袖型",
+        "slug": "challenger"
+      },
+      "9": {
+        "code": "T9",
+        "name_en": "Peacemaker",
+        "name_zh": "和平型",
+        "slug": "peacemaker"
+      }
+    }
+  },
+  "schema": "fap.enneagram.policy.v1"
+}

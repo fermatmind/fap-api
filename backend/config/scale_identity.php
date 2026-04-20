@@ -45,6 +45,7 @@ return [
         'SDS_20' => 'DEPRESSION_SCREENING_STANDARD',
         'IQ_RAVEN' => 'IQ_INTELLIGENCE_QUOTIENT',
         'EQ_60' => 'EQ_EMOTIONAL_INTELLIGENCE',
+        'ENNEAGRAM' => 'ENNEAGRAM_PERSONALITY_TEST',
     ],
 
     'code_map_v2_to_v1' => [
@@ -54,6 +55,7 @@ return [
         'DEPRESSION_SCREENING_STANDARD' => 'SDS_20',
         'IQ_INTELLIGENCE_QUOTIENT' => 'IQ_RAVEN',
         'EQ_EMOTIONAL_INTELLIGENCE' => 'EQ_60',
+        'ENNEAGRAM_PERSONALITY_TEST' => 'ENNEAGRAM',
     ],
 
     'scale_uid_map' => [
@@ -63,6 +65,7 @@ return [
         'SDS_20' => '44444444-4444-4444-8444-444444444444',
         'IQ_RAVEN' => '55555555-5555-4555-8555-555555555555',
         'EQ_60' => '66666666-6666-4666-8666-666666666666',
+        'ENNEAGRAM' => '77777777-7777-4777-8777-777777777777',
     ],
 
     'pack_id_map_v1' => [
@@ -72,6 +75,7 @@ return [
         'SDS_20' => 'SDS_20',
         'IQ_RAVEN' => 'default',
         'EQ_60' => 'EQ_60',
+        'ENNEAGRAM' => 'ENNEAGRAM',
     ],
 
     // v2 pack/dir maps are compat aliases for dual-code/read-path migration.
@@ -83,6 +87,7 @@ return [
         'SDS_20' => 'DEPRESSION_SCREENING_STANDARD',
         'IQ_RAVEN' => 'default',
         'EQ_60' => 'EQ_EMOTIONAL_INTELLIGENCE',
+        'ENNEAGRAM' => 'ENNEAGRAM_PERSONALITY_TEST',
     ],
 
     'dir_version_map_v1' => [
@@ -92,6 +97,7 @@ return [
         'SDS_20' => 'v1',
         'IQ_RAVEN' => 'IQ-RAVEN-CN-v0.3.0-DEMO',
         'EQ_60' => 'v1',
+        'ENNEAGRAM' => 'v1-likert-105',
     ],
 
     'dir_version_map_v2' => [
@@ -101,6 +107,7 @@ return [
         'SDS_20' => 'v1',
         'IQ_RAVEN' => 'IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO',
         'EQ_60' => 'v1',
+        'ENNEAGRAM' => 'v1-likert-105',
     ],
 
     'demo_replacement_map' => [

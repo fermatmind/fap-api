@@ -54,6 +54,12 @@ return new class extends Migration
                 'scale_uid' => '66666666-6666-4666-8666-666666666666',
             ],
             [
+                'scope' => 'backend_content_packs',
+                'old_path' => 'content_packs/ENNEAGRAM',
+                'new_path' => 'content_packs/ENNEAGRAM_PERSONALITY_TEST',
+                'scale_uid' => '77777777-7777-4777-8777-777777777777',
+            ],
+            [
                 'scope' => 'content_packages',
                 'old_path' => 'default/CN_MAINLAND/zh-CN/MBTI-CN-v0.3',
                 'new_path' => 'default/CN_MAINLAND/zh-CN/MBTI_PERSONALITY_TEST_16_TYPES-CN-v0.3',
