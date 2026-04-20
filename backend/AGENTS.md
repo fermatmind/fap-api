@@ -9,7 +9,16 @@
 ## Branch discipline
 - Always start from the latest `main`.
 - Always pull with `git pull --ff-only origin main` before creating a PR.
-- Stop if the worktree is dirty before starting a PR.
+- A dirty worktree does not automatically block a PR start if unrelated changes are clearly isolated from the current PR.
+- “Clearly isolated” means at least one of:
+  - the unrelated changes are in files outside the declared PR scope, and the current PR can avoid touching them
+  - the current PR can be staged with an explicit path-limited file list
+  - the unrelated changes are already committed on another branch and are not part of the current branch diff
+- Stop if the worktree is dirty and the current PR scope cannot be isolated cleanly from those existing changes.
+- If scoped changes were made on `main` before a PR branch was created, Codex may still create the correct PR branch immediately, provided:
+  - the changes are fully within the declared scope
+  - the worktree contains no unrelated modifications
+  - the branch is created before commit, push, or PR creation
 - Stop if the target branch already exists locally or remotely with unrelated commits.
 
 ## Dependency discipline

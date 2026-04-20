@@ -228,6 +228,175 @@ final class OccupationDirectoryDisplayNormalizer
         'Sound Engineering Technicians' => '音响工程技术员',
         'Talent Directors' => '选角与艺人总监',
         'Acupuncturists' => '针灸师',
+        'Accountants and auditors' => '会计师与审计师',
+        'Acute Care Nurses' => '急症护理护士',
+        'Agricultural Inspectors' => '农业检查员',
+        'Air Crew Officers' => '空勤军官',
+        'Airfield Operations Specialists' => '机场运行专员',
+        'Airline Pilots, Copilots, And Flight Engineers' => '航空公司飞行员、副驾驶和飞行工程师',
+        'Anesthesiologist Assistants' => '麻醉医师助理',
+        'Animal Scientists' => '动物科学家',
+        'Appraisers Of Personal And Business Property' => '个人与商业财产评估师',
+        'Art Therapists' => '艺术治疗师',
+        'Atmospheric And Space Scientists' => '大气与空间科学家',
+        'Automotive Engineers' => '汽车工程师',
+        'Avionics Technicians' => '航空电子技术员',
+        'Advertising And Promotions Managers' => '广告与促销经理',
+        'Agents And Business Managers Of Artists, Performers, And Athletes' => '艺人、表演者和运动员经纪人与商务经理',
+        'Amusement And Recreation Attendants' => '娱乐与休闲服务员',
+        'Bicycle Repairers' => '自行车修理工',
+        'Biofuels Processing Technicians' => '生物燃料加工技术员',
+        'Bioinformatics Scientists' => '生物信息学科学家',
+        'Bioinformatics Technicians' => '生物信息技术员',
+        'Biological Science Teachers, Postsecondary' => '高校生物科学教师',
+        'Biological Scientists, All Other' => '其他生物科学家',
+        'Biomass Plant Technicians' => '生物质电厂技术员',
+        'Blockchain Engineers' => '区块链工程师',
+        'Bridge And Lock Tenders' => '桥梁与船闸操作员',
+        'Business Continuity Planners' => '业务连续性规划师',
+        'Business Intelligence Analysts' => '商业智能分析师',
+        'Business Operations Specialists, All Other' => '其他业务运营专员',
+        'Business Teachers, Postsecondary' => '高校商科教师',
+        'Chemistry Teachers, Postsecondary' => '高校化学教师',
+        'Child, Family, And School Social Workers' => '儿童、家庭与学校社会工作者',
+        'Climate Change Policy Analysts' => '气候变化政策分析师',
+        'Commercial And Industrial Designers' => '商业与工业设计师',
+        'Commercial Pilots' => '商业飞行员',
+        'Computer Numerically Controlled Tool Programmers' => '数控机床程序员',
+        'Computer Occupations, All Other' => '其他计算机职业',
+        'Cooks, Fast Food' => '快餐厨师',
+        'Cooks, Private Household' => '私人家庭厨师',
+        'Cooks, Restaurant' => '餐厅厨师',
+        'Cooks, Short Order' => '简餐厨师',
+        'Craft Artists' => '工艺艺术家',
+        'Credit Analysts' => '信用分析师',
+        'Crematory Operators' => '火化设备操作员',
+        'Criminal Justice And Law Enforcement Teachers, Postsecondary' => '高校刑事司法与执法教师',
+        'Critical Care Nurses' => '重症护理护士',
+        'Data Entry Keyers' => '数据录入员',
+        'Data scientists' => '数据科学家',
+        'Database Administrators' => '数据库管理员',
+        'Dental Laboratory Technicians' => '牙科技工室技术员',
+        'Designers, All Other' => '其他设计师',
+        'Dietetic Technicians' => '膳食技术员',
+        'Digital Forensics Analysts' => '数字取证分析师',
+        'Dredge Operators' => '挖泥船操作员',
+        'Economics Teachers, Postsecondary' => '高校经济学教师',
+        'Education Administrators, Postsecondary' => '高校教育行政管理者',
+        'Electrical Engineers' => '电气工程师',
+        'Endoscopy Technicians' => '内镜技术员',
+        'Energy Auditors' => '能源审计师',
+        'Energy Engineers, Except Wind And Solar' => '能源工程师（不含风能和太阳能）',
+        'Engineers, All Other' => '其他工程师',
+        'English Language And Literature Teachers, Postsecondary' => '高校英语语言文学教师',
+        'Environmental Science Teachers, Postsecondary' => '高校环境科学教师',
+        'Fire Prevention And Protection Engineers' => '消防预防与防护工程师',
+        'Food Batchmakers' => '食品批量制作工',
+        'Food Scientists And Technologists' => '食品科学家与食品技术专家',
+        'Food Servers, Nonrestaurant' => '非餐厅食品服务员',
+        'Foreign Language And Literature Teachers, Postsecondary' => '高校外语文学教师',
+        'Fraud Examiners, Investigators And Analysts' => '欺诈审查员、调查员和分析师',
+        'Fuel Cell Engineers' => '燃料电池工程师',
+        'Fundraising Managers' => '筹款经理',
+        'Geography Teachers, Postsecondary' => '高校地理教师',
+        'Geological Technicians, Except Hydrologic Technicians' => '地质技术员（不含水文技术员）',
+        'Geoscientists, Except Hydrologists And Geographers' => '地球科学家（不含水文学家和地理学家）',
+        'Geothermal Technicians' => '地热技术员',
+        'Health And Safety Engineers, Except Mining Safety Engineers And Inspectors' => '健康与安全工程师（不含矿山安全工程师和检查员）',
+        'Health Specialties Teachers, Postsecondary' => '高校健康专业教师',
+        'Hearing Aid Specialists' => '助听器验配专员',
+        'Helpers Electricians' => '电工帮工',
+        'Histology Technicians' => '组织学技术员',
+        'History Teachers, Postsecondary' => '高校历史教师',
+        'Home Appliance Repairers' => '家电维修工',
+        'Human Factors Engineers And Ergonomists' => '人因工程师与人体工效学专家',
+        'Human resources specialists' => '人力资源专员',
+        'Hydroelectric Plant Technicians' => '水电站技术员',
+        'Hydrologic Technicians' => '水文技术员',
+        'Infantry Officers' => '步兵军官',
+        'Information Security Engineers' => '信息安全工程师',
+        'Insulation Workers, Mechanical' => '机械绝缘工',
+        'Intelligence Analysts' => '情报分析师',
+        'Investment Fund Managers' => '投资基金经理',
+        'Law Teachers, Postsecondary' => '高校法学教师',
+        'Library Assistants, Clerical' => '图书馆文书助理',
+        'Library Science Teachers, Postsecondary' => '高校图书馆学教师',
+        'Library Technicians' => '图书馆技术员',
+        'Life Scientists, All Other' => '其他生命科学家',
+        'Locomotive Engineers' => '机车工程师',
+        'Logistics Analysts' => '物流分析师',
+        'Logistics Engineers' => '物流工程师',
+        'Loss Prevention Managers' => '损失预防经理',
+        'Management analysts' => '管理分析师',
+        'Manufacturing Engineers' => '制造工程师',
+        'Materials Scientists' => '材料科学家',
+        'Mechanical Door Repairers' => '机械门维修工',
+        'Mechanical Drafters' => '机械制图员',
+        'Mechatronics Engineers' => '机电一体化工程师',
+        'Media Programming Directors' => '媒体节目编排总监',
+        'Medical Scientists, Except Epidemiologists' => '医学科学家（不含流行病学家）',
+        'Microsystems Engineers' => '微系统工程师',
+        'Mining And Geological Engineers, Including Mining Safety Engineers' => '采矿与地质工程师（含矿山安全工程师）',
+        'Motorboat Operators' => '机动船操作员',
+        'Music Therapists' => '音乐治疗师',
+        'Nanosystems Engineers' => '纳米系统工程师',
+        'Non Destructive Testing Specialists' => '无损检测专员',
+        'Nuclear Monitoring Technicians' => '核监测技术员',
+        'Nurse Anesthetists' => '麻醉护士',
+        'Ophthalmic Laboratory Technicians' => '眼科技工室技术员',
+        'Photonics Engineers' => '光子学工程师',
+        'Photonics Technicians' => '光子学技术员',
+        'Physical Scientists, All Other' => '其他物理科学家',
+        'Physical Therapist Assistants' => '物理治疗师助理',
+        'Physics Teachers, Postsecondary' => '高校物理教师',
+        'Pile Driver Operators' => '打桩机操作员',
+        'Political Science Teachers, Postsecondary' => '高校政治学教师',
+        'Postsecondary Teachers, All Other' => '其他高校教师',
+        'Potters, Manufacturing' => '陶器制造工',
+        'Precision Agriculture Technicians' => '精准农业技术员',
+        'Printing Press Operators' => '印刷机操作员',
+        'Project management specialists' => '项目管理专员',
+        'Psychology Teachers, Postsecondary' => '高校心理学教师',
+        'Quality Control Analysts' => '质量控制分析师',
+        'Range Managers' => '牧场资源经理',
+        'Recreation And Fitness Studies Teachers, Postsecondary' => '高校休闲与健身研究教师',
+        'Recreational Vehicle Service Technicians' => '休闲车辆服务技术员',
+        'Registered nurses' => '注册护士',
+        'Regulatory Affairs Managers' => '法规事务经理',
+        'Regulatory Affairs Specialists' => '法规事务专员',
+        'Remote Sensing Scientists And Technologists' => '遥感科学家与遥感技术专家',
+        'Remote Sensing Technicians' => '遥感技术员',
+        'Robotics Engineers' => '机器人工程师',
+        'Robotics Technicians' => '机器人技术员',
+        'Search Marketing Strategists' => '搜索营销策略师',
+        'Self Enrichment Teachers' => '自我提升课程教师',
+        'Ship Engineers' => '船舶工程师',
+        'Social Sciences Teachers, Postsecondary, All Other' => '其他高校社会科学教师',
+        'Social Work Teachers, Postsecondary' => '高校社会工作教师',
+        'Sociology Teachers, Postsecondary' => '高校社会学教师',
+        'Soil And Plant Scientists' => '土壤与植物科学家',
+        'Solar Energy Systems Engineers' => '太阳能系统工程师',
+        'Spa Managers' => '水疗中心经理',
+        'Special Forces Officers' => '特种部队军官',
+        'Statistical Assistants' => '统计助理',
+        'Supply Chain Managers' => '供应链经理',
+        'Surgical Assistants' => '手术助理',
+        'Switchboard Operators, Including Answering Service' => '总机接线员（含应答服务）',
+        'Teaching Assistants, Postsecondary' => '高校教学助理',
+        'Telephone Operators' => '电话接线员',
+        'Therapists, All Other' => '其他治疗师',
+        'Traffic Technicians' => '交通技术员',
+        'Validation Engineers' => '验证工程师',
+        'Video Game Designers' => '电子游戏设计师',
+        'Waiters and waitresses' => '餐厅服务员',
+        'Watch And Clock Repairers' => '钟表维修工',
+        'Water Resource Specialists' => '水资源专员',
+        'Water/Wastewater Engineers' => '给排水与废水工程师',
+        'Web And Digital Interface Designers' => '网页与数字界面设计师',
+        'Wind Energy Development Managers' => '风能开发经理',
+        'Wind Energy Engineers' => '风能工程师',
+        'Wind Energy Operations Managers' => '风能运营经理',
+        'Wind Turbine Service Technicians' => '风力涡轮机服务技术员',
         'Tile And Stone Setters' => '瓷砖和石材铺设工',
         'Timing Device Assemblers And Adjusters' => '计时装置装配与调校工',
         'Tire Builders' => '轮胎制造工',
@@ -1189,6 +1358,9 @@ final class OccupationDirectoryDisplayNormalizer
             if ($segment === '') {
                 continue;
             }
+            if (preg_replace('/[^a-z0-9]+/', ' ', strtolower($segment)) === 'all other') {
+                continue;
+            }
 
             $segmentZh = $this->translateEnglishSegmentToChinese($segment);
             if ($segmentZh !== '') {
@@ -1198,6 +1370,7 @@ final class OccupationDirectoryDisplayNormalizer
 
         $result = implode('、', array_values(array_unique($translated)));
         $result = str_replace(['和和', '其他其他', '人员员', '工工'], ['和', '其他', '人员', '工'], $result);
+        $result = preg_replace('/、其他$/u', '', $result) ?? $result;
 
         return $result !== '' ? $result : '其他职业';
     }
@@ -1229,7 +1402,7 @@ final class OccupationDirectoryDisplayNormalizer
             }
 
             $word = $words[$index];
-            if (in_array($word, ['a', 'an', 'as', 'at', 'by', 'except', 'for', 'from', 'in', 'of', 'or', 'the', 'through', 'to', 'with'], true)) {
+            if (in_array($word, ['a', 'an', 'and', 'as', 'at', 'by', 'except', 'for', 'from', 'in', 'of', 'or', 'the', 'through', 'to', 'with'], true)) {
                 $index++;
 
                 continue;
@@ -1256,7 +1429,9 @@ final class OccupationDirectoryDisplayNormalizer
             $index++;
         }
 
-        return implode('', array_values(array_filter($translated, static fn (?string $part): bool => $part !== null && $part !== '')));
+        $result = implode('', array_values(array_filter($translated, static fn (?string $part): bool => $part !== null && $part !== '')));
+
+        return trim($result, '、和');
     }
 
     private function isWeakChineseTitle(string $title): bool
@@ -1266,7 +1441,11 @@ final class OccupationDirectoryDisplayNormalizer
             return true;
         }
 
-        return in_array($normalized, ['技术员', '操作员', '经理', '工人', '工程', '专员', '人员'], true)
+        if (str_starts_with($normalized, '和') || str_ends_with($normalized, '和')) {
+            return true;
+        }
+
+        return in_array($normalized, ['其他', '其他职业', '简餐订单', '技术员', '操作员', '经理', '工人', '工程', '专员', '人员', '科学家', '分析师', '助理', '护士', '教师', '设计师'], true)
             || mb_strlen($normalized) <= 2;
     }
 
