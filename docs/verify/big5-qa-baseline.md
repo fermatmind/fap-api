@@ -45,6 +45,13 @@ Current CI source:
 - `.github/workflows/deploy.yml` sets `RUN_BIG5_OCEAN_GATE=1` before deploy verification.
 - `backend/scripts/ci_verify_mbti.sh` runs the Big Five gate by executing `content:lint`, `content:compile`, `verify_big5_norms.sh`, and `php artisan test --filter '(BigFive|Big5|NonMbtiReportContractRegressionTest)'`.
 
+Release-freeze relationship:
+
+- `backend/scripts/release_freeze_verify.sh` remains the mixed MBTI + Big Five release-freeze evidence entry.
+- It currently covers Big Five disclaimer, metrics, min-compiled evidence, performance, result foundation, history, and PDF delivery.
+- It is not the full Big Five QA baseline by itself. The full P0 Big Five baseline is the default Big Five gate in `backend/scripts/ci_verify_mbti.sh` with `RUN_BIG5_OCEAN_GATE=1`.
+- For Big Five release approval, use this document as the stop-ship authority and use `backend/scripts/release_freeze_verify.sh` as the release-freeze evidence bundle.
+
 ## 4. P1 Automatic Warning Items
 
 P1 means release warning. These checks should be reviewed before release, but they are not the Big Five P0 stop-ship baseline unless explicitly enabled in the release gate.
@@ -90,6 +97,7 @@ These fixtures are backend truth fixtures. Frontend heavy fixtures should map to
 | PDF/history/access | `BigFivePdfDeliveryTest.php`; `BigFiveHistoryCompareTest.php` | readable/full access and PDF contracts | `backend/scripts/ci_verify_mbti.sh` | CI and deploy Big Five gate | P0 stop-ship |
 | Non-MBTI isolation | `NonMbtiReportContractRegressionTest.php` | Big Five/SDS non-MBTI contract shape | `backend/scripts/ci_verify_mbti.sh` | CI and deploy Big Five gate | P0 stop-ship |
 | Telemetry/perf/reconcile | scale-level telemetry/perf/reconcile checks | operational evidence | `backend/scripts/ci_verify_scales.sh` | release evidence when invoked | P1 warning unless promoted |
+| Release-freeze evidence bundle | `Big5DisclaimerAcceptanceTest.php`; `BigFiveMetricsContractTest.php`; `BigFiveQuestionsMinCompiledEvidenceContractTest.php`; `Big5PerfBudgetTest.php`; `BigFiveResultEngineFoundationTest.php`; `BigFiveHistoryCompareTest.php`; `BigFivePdfDeliveryTest.php` | release smoke, evidence, access, history, PDF | `backend/scripts/release_freeze_verify.sh` | manual release-freeze run | P0 for release-freeze execution; not a replacement for full P0 baseline |
 | Manual sample review | release owner checklist | 120Q, 90Q, degraded samples | none | release owner record | P2 manual |
 
 ## 8. Release Failure Handling
