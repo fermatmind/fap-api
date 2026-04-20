@@ -314,7 +314,13 @@ BASH);
 });
 
 task('career:warm-public-authority-cache', function () {
-    run('timeout 180 {{bin/php}} {{release_path}}/backend/artisan career:warm-public-authority-cache --no-interaction --ansi');
+    $timeoutSeconds = (int) (getenv('DEPLOY_CAREER_WARM_CACHE_TIMEOUT') ?: 600);
+    $timeoutSeconds = max(180, $timeoutSeconds);
+
+    run(sprintf(
+        'timeout %d {{bin/php}} {{release_path}}/backend/artisan career:warm-public-authority-cache --no-interaction --ansi',
+        $timeoutSeconds,
+    ));
 });
 
 task('guard:public-content-release', function () {

@@ -68,8 +68,7 @@ final class PublicCareerAuthorityResponseCache
      */
     public function warm(): array
     {
-        $datasetHub = $this->refreshDatasetHubPayload();
-        $datasetMethod = $this->refreshDatasetMethodPayload();
+        [$datasetHub, $datasetMethod] = $this->refreshDatasetPayloads();
         $launchGovernance = $this->refreshLaunchGovernanceClosurePayload();
 
         return [
@@ -89,6 +88,23 @@ final class PublicCareerAuthorityResponseCache
                 'member_count' => count((array) data_get($launchGovernance, 'members', [])),
             ],
         ];
+    }
+
+    /**
+     * @return array{0: array<string, mixed>, 1: array<string, mixed>}
+     */
+    private function refreshDatasetPayloads(): array
+    {
+        $contracts = $this->datasetContractBuilder->buildPublicContracts();
+        $datasetHub = (new CareerDatasetHubResource($contracts['hub']))
+            ->toArray(Request::create('/api/v0.5/career/datasets/occupations', 'GET'));
+        $datasetMethod = (new CareerDatasetMethodResource($contracts['method']))
+            ->toArray(Request::create('/api/v0.5/career/datasets/occupations/method', 'GET'));
+
+        Cache::forever(self::DATASET_HUB_CACHE_KEY, $datasetHub);
+        Cache::forever(self::DATASET_METHOD_CACHE_KEY, $datasetMethod);
+
+        return [$datasetHub, $datasetMethod];
     }
 
     /**

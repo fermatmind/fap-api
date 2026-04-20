@@ -19,6 +19,37 @@ final class CareerPublicDatasetContractBuilder
         $publication = $this->publicationMetadataService->build()->toArray();
         $authority = $this->datasetAuthorityBuilder->build()->toArray();
 
+        return $this->buildHubContractFromAuthority($publication, $authority);
+    }
+
+    public function buildMethodContract(): CareerPublicDatasetMethodContract
+    {
+        $publication = $this->publicationMetadataService->build()->toArray();
+        $authority = $this->datasetAuthorityBuilder->build()->toArray();
+
+        return $this->buildMethodContractFromAuthority($publication, $authority);
+    }
+
+    /**
+     * @return array{hub: CareerPublicDatasetContract, method: CareerPublicDatasetMethodContract}
+     */
+    public function buildPublicContracts(): array
+    {
+        $publication = $this->publicationMetadataService->build()->toArray();
+        $authority = $this->datasetAuthorityBuilder->build()->toArray();
+
+        return [
+            'hub' => $this->buildHubContractFromAuthority($publication, $authority),
+            'method' => $this->buildMethodContractFromAuthority($publication, $authority),
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $publication
+     * @param  array<string, mixed>  $authority
+     */
+    private function buildHubContractFromAuthority(array $publication, array $authority): CareerPublicDatasetContract
+    {
         $summary = (array) data_get($authority, 'summary', []);
         $facetDistributions = (array) data_get($authority, 'facet_distributions', []);
         $releaseCohortCounts = (array) data_get($summary, 'release_cohort_counts', []);
@@ -68,11 +99,12 @@ final class CareerPublicDatasetContractBuilder
         );
     }
 
-    public function buildMethodContract(): CareerPublicDatasetMethodContract
+    /**
+     * @param  array<string, mixed>  $publication
+     * @param  array<string, mixed>  $authority
+     */
+    private function buildMethodContractFromAuthority(array $publication, array $authority): CareerPublicDatasetMethodContract
     {
-        $publication = $this->publicationMetadataService->build()->toArray();
-        $authority = $this->datasetAuthorityBuilder->build()->toArray();
-
         return new CareerPublicDatasetMethodContract(
             datasetKey: (string) data_get($authority, 'dataset_key', CareerDatasetPublicationMetadataService::DATASET_KEY),
             datasetScope: (string) data_get($authority, 'dataset_scope', CareerDatasetPublicationMetadataService::DATASET_SCOPE),
