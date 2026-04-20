@@ -271,6 +271,7 @@ return [
         'sds_20' => App\Services\Assessment\Drivers\Sds20Driver::class,
         'eq_60' => App\Services\Assessment\Drivers\Eq60Driver::class,
         'eq_test' => App\Services\Assessment\Drivers\Eq60Driver::class,
+        'enneagram' => App\Services\Assessment\Drivers\EnneagramDriver::class,
     ],
 
     // Persist raw answers (audit)

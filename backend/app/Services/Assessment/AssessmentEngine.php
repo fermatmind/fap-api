@@ -101,6 +101,14 @@ class AssessmentEngine
                 return $this->error('SCORING_FAILED', 'scoring failed.');
             }
 
+            $actualScoringSpecVersion = trim((string) data_get($result->normedJson, 'version_snapshot.scoring_spec_version', ''));
+            if ($actualScoringSpecVersion === '') {
+                $actualScoringSpecVersion = trim((string) data_get($result->normedJson, 'scoring_spec_version', ''));
+            }
+            if ($actualScoringSpecVersion !== '') {
+                $scoringSpecVersion = $actualScoringSpecVersion;
+            }
+
             return [
                 'ok' => true,
                 'result' => $result,
@@ -208,6 +216,11 @@ class AssessmentEngine
             return 'eq60_spec_2026_v2';
         }
 
+        $isEnneagram = $scaleCode === 'ENNEAGRAM' || $driverType === 'enneagram';
+        if ($isEnneagram) {
+            return 'enneagram_likert_105_spec_v1';
+        }
+
         return 'big5_spec_2026Q1_v1';
     }
 
@@ -215,7 +228,7 @@ class AssessmentEngine
     {
         return in_array(
             strtolower(trim($driverType)),
-            ['big5_ocean', 'clinical_combo_68', 'sds_20', 'eq_60', 'eq_test'],
+            ['big5_ocean', 'clinical_combo_68', 'sds_20', 'eq_60', 'eq_test', 'enneagram'],
             true
         );
     }
