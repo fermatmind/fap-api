@@ -26,3 +26,22 @@
 1. `bash scripts/audit_smoke.sh dist/fap-api-release.zip`
 2. `bash scripts/release_hygiene_gate.sh ./_audit/fap-api-0212-5/`
 3. `bash scripts/supply_chain_gate.sh ./_audit/fap-api-0212-5`
+
+## 生产内容发布守卫（必做）
+
+生产发布必须在迁移、CMS baseline import、职业 authority cache warm 之后执行：
+
+```bash
+php artisan release:verify-public-content \
+  --expected-occupations=2787 \
+  --min-career-job-items=2786 \
+  --content-source-dir=/absolute/path/to/content_baselines/content_pages
+```
+
+`deploy.php` 已自动串联该守卫。该命令失败时，本次发布不得标记成功；必须先修复 backend/CMS 权威数据，不允许用前端 fallback 内容掩盖。
+
+守卫覆盖：
+
+- `content_pages` 中公司、政策、帮助页 baseline 均已发布且公开
+- 职业完整数据集达到 2787 个追踪职业，且 tracking complete
+- 职业列表 API 对应的 backend bundle 至少有 2786 个可展示条目

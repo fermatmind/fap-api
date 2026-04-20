@@ -115,13 +115,14 @@ final class CareerImportOccupationDirectoryDrafts extends Command
                     'status' => RunStatus::FAILED,
                     'finished_at' => now(),
                     'error_summary' => [[
-                        'message' => $throwable->getMessage(),
+                        'message' => $this->jsonSafeString($throwable->getMessage()),
                         'type' => 'fatal',
+                        'exception' => $throwable::class,
                     ]],
                 ])->save();
             }
 
-            $this->error($throwable->getMessage());
+            $this->error($this->jsonSafeString($throwable->getMessage()));
 
             return self::FAILURE;
         }
@@ -654,6 +655,20 @@ final class CareerImportOccupationDirectoryDrafts extends Command
             ->lower()
             ->squish()
             ->toString();
+    }
+
+    private function jsonSafeString(string $value): string
+    {
+        if (mb_check_encoding($value, 'UTF-8')) {
+            return $value;
+        }
+
+        $converted = @iconv('UTF-8', 'UTF-8//IGNORE', $value);
+        if (is_string($converted) && $converted !== '') {
+            return $converted;
+        }
+
+        return 'Non-UTF-8 exception message: '.bin2hex($value);
     }
 
     /**
