@@ -26,6 +26,7 @@ class ReportSnapshotStore
         private ClinicalCombo68ReportComposer $clinicalCombo68ReportComposer,
         private Sds20ReportComposer $sds20ReportComposer,
         private Eq60ReportComposer $eq60ReportComposer,
+        private EnneagramReportComposer $enneagramReportComposer,
         private GenericReportBuilder $genericReportBuilder,
         private EventRecorder $eventRecorder,
         private ScaleIdentityWriteProjector $identityProjector,
@@ -401,6 +402,24 @@ class ReportSnapshotStore
 
         if ($scaleCode === 'EQ_60') {
             $composed = $this->eq60ReportComposer->composeVariant($attempt, $result, $variant, [
+                'org_id' => (int) ($attempt->org_id ?? 0),
+                'variant' => $variant,
+                'report_access_level' => $variant === ReportAccess::VARIANT_FREE
+                    ? ReportAccess::REPORT_ACCESS_FREE
+                    : ReportAccess::REPORT_ACCESS_FULL,
+                'modules_allowed' => $modulesAllowed,
+                'modules_preview' => $modulesPreview,
+            ]);
+            if (! ($composed['ok'] ?? false)) {
+                return null;
+            }
+            $report = $composed['report'] ?? null;
+
+            return is_array($report) ? $report : null;
+        }
+
+        if ($scaleCode === 'ENNEAGRAM') {
+            $composed = $this->enneagramReportComposer->composeVariant($attempt, $result, $variant, [
                 'org_id' => (int) ($attempt->org_id ?? 0),
                 'variant' => $variant,
                 'report_access_level' => $variant === ReportAccess::VARIANT_FREE

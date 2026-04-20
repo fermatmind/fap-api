@@ -16,6 +16,7 @@ final class ReportComposerRegistry
         private readonly ClinicalCombo68ReportComposer $clinicalCombo68ReportComposer,
         private readonly Sds20ReportComposer $sds20ReportComposer,
         private readonly Eq60ReportComposer $eq60ReportComposer,
+        private readonly EnneagramReportComposer $enneagramReportComposer,
         private readonly GenericReportBuilder $genericReportBuilder,
     ) {}
 
@@ -38,6 +39,7 @@ final class ReportComposerRegistry
             'CLINICAL_COMBO_68' => $this->clinicalCombo68ReportComposer->composeVariant($attempt, $result, $variant, $ctx),
             'SDS_20' => $this->sds20ReportComposer->composeVariant($attempt, $result, $variant, $ctx),
             'EQ_60' => $this->eq60ReportComposer->composeVariant($attempt, $result, $variant, $ctx),
+            'ENNEAGRAM' => $this->enneagramReportComposer->composeVariant($attempt, $result, $variant, $ctx),
             default => [
                 'ok' => true,
                 'report' => $this->genericReportBuilder->build($attempt, $result),

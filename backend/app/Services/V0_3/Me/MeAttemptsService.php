@@ -7,6 +7,7 @@ use App\Models\Attempt;
 use App\Models\Result;
 use App\Models\UnifiedAccessProjection;
 use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
+use App\Services\Enneagram\EnneagramPublicFormSummaryBuilder;
 use App\Services\Mbti\MbtiPublicFormSummaryBuilder;
 use App\Services\Report\InviteUnlockSummaryBuilder;
 use App\Services\Report\ReportAccess;
@@ -64,6 +65,7 @@ class MeAttemptsService
         private readonly OfferResolver $offerResolver,
         private readonly MbtiPublicFormSummaryBuilder $mbtiPublicFormSummaryBuilder,
         private readonly BigFivePublicFormSummaryBuilder $bigFivePublicFormSummaryBuilder,
+        private readonly EnneagramPublicFormSummaryBuilder $enneagramPublicFormSummaryBuilder,
         private readonly InviteUnlockSummaryBuilder $inviteUnlockSummaryBuilder,
     ) {}
 
@@ -181,6 +183,8 @@ class MeAttemptsService
                 $presented['mbti_form_v1'] = $this->mbtiPublicFormSummaryBuilder->summarizeForAttempt($attempt, $result, $locale);
             } elseif (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'BIG5_OCEAN') {
                 $presented['big5_form_v1'] = $this->bigFivePublicFormSummaryBuilder->summarizeForAttempt($attempt, $result, $locale);
+            } elseif (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'ENNEAGRAM') {
+                $presented['enneagram_form_v1'] = $this->enneagramPublicFormSummaryBuilder->summarizeForAttempt($attempt, $result, $locale);
             }
             $items[] = $presented;
         }
@@ -191,6 +195,8 @@ class MeAttemptsService
         $historyCompare = null;
         if ($normalizedScaleCode === 'BIG5_OCEAN') {
             $historyCompare = $this->buildBigFiveHistoryCompare($attemptModels, $resultByAttemptId);
+        } elseif ($normalizedScaleCode === 'ENNEAGRAM') {
+            $historyCompare = $this->buildEnneagramHistorySummary($attemptModels, $resultByAttemptId);
         }
 
         return [
@@ -253,6 +259,7 @@ class MeAttemptsService
             );
             $output['access_summary'] = $accessSummary;
             $output = array_merge($output, $this->buildBigFiveRowSummary($attempt, $result, $accessSummary));
+            $output = array_merge($output, $this->buildEnneagramRowSummary($attempt, $result, $accessSummary));
         }
 
         return $output;
@@ -311,7 +318,8 @@ class MeAttemptsService
         $requiredInvitees = max(1, (int) ($inviteSnapshot['required_invitees'] ?? 2));
         $completedInvitees = max(0, min($requiredInvitees, (int) ($inviteSnapshot['completed_invitees'] ?? 0)));
         $isBigFive = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_BIG5_OCEAN;
-        if ($isBigFive && $resultExists) {
+        $isEnneagram = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_ENNEAGRAM;
+        if (($isBigFive || $isEnneagram) && $resultExists) {
             $accessState = 'ready';
             $reportState = 'ready';
             $pdfState = 'ready';
@@ -424,6 +432,49 @@ class MeAttemptsService
     }
 
     /**
+     * @param  list<Attempt>  $attemptModels
+     * @param  array<string,Result>  $resultByAttemptId
+     * @return array<string,mixed>|null
+     */
+    private function buildEnneagramHistorySummary(array $attemptModels, array $resultByAttemptId): ?array
+    {
+        if ($attemptModels === []) {
+            return null;
+        }
+
+        $latest = $attemptModels[0];
+        $latestId = (string) ($latest->id ?? '');
+        if ($latestId === '') {
+            return null;
+        }
+
+        $latestScore = $this->extractEnneagramScoreResult($resultByAttemptId[$latestId] ?? null);
+        if ($latestScore === []) {
+            return null;
+        }
+
+        $payload = [
+            'scale_code' => 'ENNEAGRAM',
+            'current_attempt_id' => $latestId,
+            'current_primary_type' => (string) ($latestScore['primary_type'] ?? ''),
+            'current_top_types' => is_array($latestScore['top_types'] ?? null) ? array_values($latestScore['top_types']) : [],
+        ];
+
+        $previous = $attemptModels[1] ?? null;
+        if ($previous instanceof Attempt) {
+            $previousId = (string) ($previous->id ?? '');
+            $previousScore = $this->extractEnneagramScoreResult($resultByAttemptId[$previousId] ?? null);
+            if ($previousId !== '' && $previousScore !== []) {
+                $payload['previous_attempt_id'] = $previousId;
+                $payload['previous_primary_type'] = (string) ($previousScore['primary_type'] ?? '');
+                $payload['primary_type_changed'] = $payload['previous_primary_type'] !== $payload['current_primary_type'];
+            }
+        }
+
+        return $payload;
+    }
+
+    /**
      * @return array<string,float>
      */
     private function extractDomainsMean(mixed $resultJson): array
@@ -460,6 +511,10 @@ class MeAttemptsService
      */
     private function buildBigFiveRowSummary(Attempt $attempt, ?Result $result, ?array $accessSummary): array
     {
+        if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) !== ReportAccess::SCALE_BIG5_OCEAN) {
+            return [];
+        }
+
         $scoreResult = $this->extractBigFiveScoreResult($result);
 
         return [
@@ -469,6 +524,58 @@ class MeAttemptsService
             'offer_summary' => $this->buildOfferSummary($attempt, $accessSummary),
             'share_summary' => $this->buildShareSummary($result, $accessSummary),
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>|null  $accessSummary
+     * @return array<string,mixed>
+     */
+    private function buildEnneagramRowSummary(Attempt $attempt, ?Result $result, ?array $accessSummary): array
+    {
+        if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) !== ReportAccess::SCALE_ENNEAGRAM) {
+            return [];
+        }
+
+        $scoreResult = $this->extractEnneagramScoreResult($result);
+
+        return [
+            'enneagram_summary_v1' => [
+                'primary_type' => (string) ($scoreResult['primary_type'] ?? ''),
+                'top_types' => is_array($scoreResult['top_types'] ?? null) ? array_values($scoreResult['top_types']) : [],
+                'confidence' => is_array($scoreResult['confidence'] ?? null) ? $scoreResult['confidence'] : [],
+            ],
+            'quality_summary' => $this->buildQualitySummary($scoreResult),
+            'share_summary' => [
+                'enabled' => $result instanceof Result && strtolower(trim((string) ($accessSummary['report_state'] ?? ''))) === 'ready',
+                'share_kind' => 'enneagram_result',
+            ],
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function extractEnneagramScoreResult(?Result $result): array
+    {
+        if (! $result instanceof Result) {
+            return [];
+        }
+
+        $resultJson = $this->decodeResultJson($result->result_json);
+        $candidates = [
+            $resultJson['normed_json'] ?? null,
+            $resultJson,
+            data_get($resultJson, 'breakdown_json.score_result'),
+            data_get($resultJson, 'axis_scores_json.score_result'),
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (is_array($candidate) && strtoupper(trim((string) ($candidate['scale_code'] ?? ''))) === 'ENNEAGRAM') {
+                return $candidate;
+            }
+        }
+
+        return [];
     }
 
     /**
@@ -698,7 +805,7 @@ class MeAttemptsService
 
     private function shouldIncludeAccessSummary(Attempt $attempt): bool
     {
-        return in_array(strtoupper(trim((string) ($attempt->scale_code ?? ''))), ['BIG5_OCEAN', 'MBTI'], true);
+        return in_array(strtoupper(trim((string) ($attempt->scale_code ?? ''))), ['BIG5_OCEAN', 'MBTI', 'ENNEAGRAM'], true);
     }
 
     private function supportsPageEntry(string $accessState, string $reportState): bool

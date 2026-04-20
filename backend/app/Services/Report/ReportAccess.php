@@ -36,6 +36,8 @@ final class ReportAccess
 
     public const SCALE_EQ_60 = 'EQ_60';
 
+    public const SCALE_ENNEAGRAM = 'ENNEAGRAM';
+
     public const VARIANT_FREE = 'free';
 
     public const VARIANT_PARTIAL = 'partial';
@@ -108,6 +110,10 @@ final class ReportAccess
 
     public const MODULE_EQ_GROWTH_PLAN = 'eq_growth_plan';
 
+    public const MODULE_ENNEAGRAM_CORE = 'enneagram_core';
+
+    public const MODULE_ENNEAGRAM_FULL = 'enneagram_full';
+
     /**
      * Growth/traits/stress_recovery are part of core_full by default.
      */
@@ -136,6 +142,9 @@ final class ReportAccess
         }
         if ($scaleCode === self::SCALE_EQ_60) {
             return [self::MODULE_EQ_CORE];
+        }
+        if ($scaleCode === self::SCALE_ENNEAGRAM) {
+            return [self::MODULE_ENNEAGRAM_CORE];
         }
 
         return [self::MODULE_CORE_FREE];
@@ -192,6 +201,11 @@ final class ReportAccess
                 self::MODULE_EQ_GROWTH_PLAN,
             ];
         }
+        if ($scaleCode === self::SCALE_ENNEAGRAM) {
+            return [
+                self::MODULE_ENNEAGRAM_FULL,
+            ];
+        }
 
         return [
             self::MODULE_CORE_FULL,
@@ -209,6 +223,7 @@ final class ReportAccess
             self::SCALE_CLINICAL_COMBO_68 => self::MODULE_CLINICAL_CORE,
             self::SCALE_SDS_20 => self::MODULE_SDS_CORE,
             self::SCALE_EQ_60 => self::MODULE_EQ_CORE,
+            self::SCALE_ENNEAGRAM => self::MODULE_ENNEAGRAM_CORE,
             default => self::MODULE_CORE_FREE,
         };
     }
@@ -222,6 +237,7 @@ final class ReportAccess
             self::SCALE_CLINICAL_COMBO_68 => self::MODULE_CLINICAL_FULL,
             self::SCALE_SDS_20 => self::MODULE_SDS_FULL,
             self::SCALE_EQ_60 => self::MODULE_EQ_FULL,
+            self::SCALE_ENNEAGRAM => self::MODULE_ENNEAGRAM_FULL,
             default => self::MODULE_CORE_FULL,
         };
     }
