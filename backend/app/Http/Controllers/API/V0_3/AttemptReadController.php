@@ -18,6 +18,8 @@ use App\Services\Attempts\InviteUnlock\InviteUnlockDiagnostics;
 use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
 use App\Services\BigFive\BigFivePublicProjectionService;
 use App\Services\Commerce\MbtiAccessHubBuilder;
+use App\Services\Enneagram\EnneagramPublicFormSummaryBuilder;
+use App\Services\Enneagram\EnneagramPublicProjectionService;
 use App\Services\Mbti\MbtiActionJourneyContractService;
 use App\Services\Mbti\MbtiAdaptiveSelectionService;
 use App\Services\Mbti\MbtiIntraTypeProfileService;
@@ -58,6 +60,8 @@ class AttemptReadController extends Controller
         private ReportPdfDocumentService $reportPdfDocumentService,
         private BigFivePublicProjectionService $bigFivePublicProjectionService,
         private BigFivePublicFormSummaryBuilder $bigFivePublicFormSummaryBuilder,
+        private EnneagramPublicProjectionService $enneagramPublicProjectionService,
+        private EnneagramPublicFormSummaryBuilder $enneagramPublicFormSummaryBuilder,
         private MbtiPrivacyConsentContractService $mbtiPrivacyConsentContractService,
         private MbtiPublicProjectionService $mbtiPublicProjectionService,
         private MbtiPublicFormSummaryBuilder $mbtiPublicFormSummaryBuilder,
@@ -143,6 +147,9 @@ class AttemptReadController extends Controller
             : null;
         $big5FormSummary = $scaleCode === 'BIG5_OCEAN'
             ? $this->resolveBigFiveFormSummary($request, $attempt, $result)
+            : null;
+        $enneagramFormSummary = $scaleCode === 'ENNEAGRAM'
+            ? $this->resolveEnneagramFormSummary($request, $attempt, $result)
             : null;
 
         if ($scaleCode === 'CLINICAL_COMBO_68') {
@@ -254,6 +261,12 @@ class AttemptReadController extends Controller
                 (string) ($attempt?->locale ?? config('content_packs.default_locale', 'zh-CN'))
             )
             : [];
+        $enneagramProjection = $scaleCode === 'ENNEAGRAM'
+            ? $this->enneagramPublicProjectionService->buildFromResult(
+                $result,
+                (string) ($attempt?->locale ?? config('content_packs.default_locale', 'zh-CN'))
+            )
+            : [];
 
         $mbtiEventMeta = $scaleCode === 'MBTI'
             ? $this->resolveMbtiResultViewEventMeta($request, $result, $attempt, $attemptId)
@@ -272,6 +285,7 @@ class AttemptReadController extends Controller
             ...$mbtiEventMeta,
             ...$this->mbtiFormEventMeta($mbtiFormSummary),
             ...$this->big5FormEventMeta($big5FormSummary),
+            ...$this->enneagramFormEventMeta($enneagramFormSummary),
             ...$big5EventMeta,
         ]);
 
@@ -321,6 +335,12 @@ class AttemptReadController extends Controller
         if (is_array($big5FormSummary)) {
             $responsePayload['big5_form_v1'] = $big5FormSummary;
         }
+        if ($enneagramProjection !== []) {
+            $responsePayload['enneagram_public_projection_v1'] = $enneagramProjection;
+        }
+        if (is_array($enneagramFormSummary)) {
+            $responsePayload['enneagram_form_v1'] = $enneagramFormSummary;
+        }
 
         return response()->json($responsePayload);
     }
@@ -367,6 +387,9 @@ class AttemptReadController extends Controller
             : null;
         $big5FormSummary = $scaleCode === 'BIG5_OCEAN'
             ? $this->resolveBigFiveFormSummary($request, $attempt, $result)
+            : null;
+        $enneagramFormSummary = $scaleCode === 'ENNEAGRAM'
+            ? $this->resolveEnneagramFormSummary($request, $attempt, $result)
             : null;
 
         $gate = $this->resolveReportGate(
@@ -474,6 +497,20 @@ class AttemptReadController extends Controller
             if ($comparative !== []) {
                 $responsePayload['comparative_v1'] = $comparative;
             }
+        } elseif ($scaleCode === 'ENNEAGRAM') {
+            if (is_array($enneagramFormSummary)) {
+                $responsePayload['enneagram_form_v1'] = $enneagramFormSummary;
+            }
+            $projection = data_get($responsePayload, 'report._meta.enneagram_public_projection_v1');
+            if (! is_array($projection)) {
+                $projection = $this->enneagramPublicProjectionService->buildFromResult(
+                    $result,
+                    (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')),
+                    strtolower(trim((string) ($gate['variant'] ?? 'free'))),
+                    (bool) ($gate['locked'] ?? false)
+                );
+            }
+            $responsePayload['enneagram_public_projection_v1'] = $projection;
         }
 
         $effectiveMbtiPersonalization = $scaleCode === 'MBTI'
@@ -535,6 +572,7 @@ class AttemptReadController extends Controller
             ...$mbtiEventMeta,
             ...$this->mbtiFormEventMeta($mbtiFormSummary),
             ...$this->big5FormEventMeta($big5FormSummary),
+            ...$this->enneagramFormEventMeta($enneagramFormSummary),
             ...$big5EventMeta,
         ]);
 
@@ -602,7 +640,8 @@ class AttemptReadController extends Controller
         }
 
         $isBigFive = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_BIG5_OCEAN;
-        if ($isBigFive && $resultExists) {
+        $isEnneagram = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_ENNEAGRAM;
+        if (($isBigFive || $isEnneagram) && $resultExists) {
             $accessState = 'ready';
             $reportState = 'ready';
             $pdfState = 'ready';
@@ -654,6 +693,9 @@ class AttemptReadController extends Controller
         $big5FormSummary = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'BIG5_OCEAN'
             ? $this->resolveBigFiveFormSummary($request, $attempt)
             : null;
+        $enneagramFormSummary = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'ENNEAGRAM'
+            ? $this->resolveEnneagramFormSummary($request, $attempt)
+            : null;
         $responsePayload = [
             'ok' => true,
             'attempt_id' => (string) $attempt->id,
@@ -674,6 +716,9 @@ class AttemptReadController extends Controller
         }
         if (is_array($big5FormSummary)) {
             $responsePayload['big5_form_v1'] = $big5FormSummary;
+        }
+        if (is_array($enneagramFormSummary)) {
+            $responsePayload['enneagram_form_v1'] = $enneagramFormSummary;
         }
 
         $unlockStage = ReportAccess::normalizeUnlockStage((string) data_get(
@@ -2110,6 +2155,9 @@ class AttemptReadController extends Controller
         $big5FormSummary = $scaleCode === 'BIG5_OCEAN'
             ? $this->resolveBigFiveFormSummary($request, $attempt, $result)
             : null;
+        $enneagramFormSummary = $scaleCode === 'ENNEAGRAM'
+            ? $this->resolveEnneagramFormSummary($request, $attempt, $result)
+            : null;
 
         $gate = $this->reportGatekeeper->resolve(
             $orgId,
@@ -2152,6 +2200,7 @@ class AttemptReadController extends Controller
             'variant' => $variant,
             ...$this->mbtiFormEventMeta($mbtiFormSummary),
             ...$this->big5FormEventMeta($big5FormSummary),
+            ...$this->enneagramFormEventMeta($enneagramFormSummary),
         ]);
 
         $generated = $this->reportPdfDocumentService->getOrGenerate($attempt, $gate, $result);
@@ -2194,6 +2243,18 @@ class AttemptReadController extends Controller
     }
 
     /**
+     * @return array<string,mixed>|null
+     */
+    private function resolveEnneagramFormSummary(Request $request, ?Attempt $attempt, ?Result $result = null): ?array
+    {
+        return $this->enneagramPublicFormSummaryBuilder->summarizeForAttempt(
+            $attempt,
+            $result,
+            $this->resolvePublicReadLocale($request, $attempt?->locale)
+        );
+    }
+
+    /**
      * @param  array<string,mixed>|null  $summary
      * @return array<string,string>
      */
@@ -2209,6 +2270,17 @@ class AttemptReadController extends Controller
      * @return array<string,string>
      */
     private function big5FormEventMeta(?array $summary): array
+    {
+        $formCode = trim((string) ($summary['form_code'] ?? ''));
+
+        return $formCode !== '' ? ['form_code' => $formCode] : [];
+    }
+
+    /**
+     * @param  array<string,mixed>|null  $summary
+     * @return array<string,string>
+     */
+    private function enneagramFormEventMeta(?array $summary): array
     {
         $formCode = trim((string) ($summary['form_code'] ?? ''));
 

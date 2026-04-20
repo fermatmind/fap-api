@@ -27,10 +27,10 @@ class AccessResolver
             ? $this->entitlements->hasFullAccess($orgId, $userId, $anonId, $attemptId, $benefitCode)
             : false;
 
-        if ($forceFreeOnly && $scaleCode !== ReportAccess::SCALE_BIG5_OCEAN) {
+        if ($forceFreeOnly && ! in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM], true)) {
             $hasFullAccess = false;
         }
-        if ($forceFreeOnly && $scaleCode === ReportAccess::SCALE_BIG5_OCEAN) {
+        if ($forceFreeOnly && in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM], true)) {
             $hasFullAccess = true;
         }
 
@@ -53,7 +53,7 @@ class AccessResolver
         array $modulesOffered
     ): array {
         $scaleCode = strtoupper(trim($scaleCode));
-        if ($forceFreeOnly && $scaleCode === ReportAccess::SCALE_BIG5_OCEAN) {
+        if ($forceFreeOnly && in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM], true)) {
             $modulesAllowed = ReportAccess::normalizeModules(array_merge(
                 ReportAccess::defaultModulesAllowedForLocked($scaleCode),
                 ReportAccess::allDefaultModulesOffered($scaleCode)
@@ -136,6 +136,10 @@ class AccessResolver
             ReportAccess::SCALE_EQ_60 => array_values(array_filter(
                 $modules,
                 static fn (string $module): bool => str_starts_with(strtolower($module), 'eq_')
+            )),
+            ReportAccess::SCALE_ENNEAGRAM => array_values(array_filter(
+                $modules,
+                static fn (string $module): bool => str_starts_with(strtolower($module), 'enneagram_')
             )),
             default => $modules,
         };

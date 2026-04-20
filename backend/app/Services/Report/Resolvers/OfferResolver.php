@@ -76,8 +76,7 @@ class OfferResolver
         string $scaleCode,
         int $orgId,
         bool $forceFreeOnly = false
-    ): array
-    {
+    ): array {
         $scaleCode = strtoupper(trim($scaleCode));
         $effectiveSku = strtoupper(trim((string) ($viewPolicy['upgrade_sku'] ?? '')));
         if ($effectiveSku === '' || $this->skus->isAnchorSku($effectiveSku, $scaleCode, $orgId)) {
@@ -97,7 +96,7 @@ class OfferResolver
         }
         $offers = $this->filterOffersForScale($scaleCode, $offers);
 
-        if ($forceFreeOnly && $scaleCode === ReportAccess::SCALE_BIG5_OCEAN) {
+        if ($forceFreeOnly && in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM], true)) {
             $viewPolicy['upgrade_sku'] = null;
 
             return [
