@@ -10,6 +10,12 @@
 - Do NOT mix multiple loops into one submission.
 - Do NOT break `backend/scripts/ci_verify_mbti.sh` core chain:
   - content pack / report / events funnel must stay green.
+- Draft PR exception: if `backend/scripts/ci_verify_mbti.sh` is already failing on paths clearly unrelated to the current declared PR scope, and the user explicitly asks to proceed, Codex may open a draft PR after:
+  - the scoped verification commands for the current PR pass
+  - the unrelated failing tests are listed in the PR body
+  - the PR body states the PR is not mergeable until those failures are fixed
+  - no unrelated files are staged into the PR
+- This exception does not permit merging with failed required checks.
 
 ### Rule 2 — Fixed change order (must follow)
 Changes must be made in this strict order:
