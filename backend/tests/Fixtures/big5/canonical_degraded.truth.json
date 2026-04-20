@@ -1,0 +1,4517 @@
+{
+    "form_code": "big5_120",
+    "history_payload": {
+        "anon_id": "anon_canonical_degraded",
+        "history_compare": null,
+        "items": [
+            {
+                "access_summary": {
+                    "access_level": "full",
+                    "access_state": "ready",
+                    "actions": {
+                        "history_href": null,
+                        "lookup_href": "/orders/lookup",
+                        "page_href": "/result/<uuid>",
+                        "pdf_href": "/api/v0.3/attempts/<uuid>/report.pdf",
+                        "wait_href": null
+                    },
+                    "invite_unlock_v1": {
+                        "completed_invitees": 0,
+                        "label": "Invite unlock completed 0/2",
+                        "partial_scope": null,
+                        "required_invitees": 2,
+                        "short_label": "Invite unlock completed",
+                        "unlock_source": "none",
+                        "unlock_stage": "full"
+                    },
+                    "modules_allowed": [],
+                    "modules_preview": [],
+                    "pdf_state": "ready",
+                    "reason_code": "projection_missing_result_ready",
+                    "report_state": "ready",
+                    "unlock_source": "none",
+                    "unlock_stage": "full",
+                    "variant": "full"
+                },
+                "attempt_id": "<uuid>",
+                "big5_form_v1": {
+                    "estimated_minutes": 15,
+                    "form_code": "big5_120",
+                    "label": "120题完整版",
+                    "question_count": 120,
+                    "scale_code": "BIG5_OCEAN",
+                    "short_label": "120题"
+                },
+                "locale": "zh-CN",
+                "lookup_key": "FMT-<ticket>",
+                "norms_summary": {
+                    "norms_version": "2026Q1_prod_v1",
+                    "status": "CALIBRATED"
+                },
+                "offer_summary": {
+                    "primary_offer": null
+                },
+                "quality_summary": {
+                    "grade": "D",
+                    "level": "D"
+                },
+                "region": "CN_MAINLAND",
+                "result_summary": {
+                    "domains_mean": {
+                        "A": 3.5,
+                        "C": 2.17,
+                        "E": 3,
+                        "N": 3.17,
+                        "O": 2.67
+                    }
+                },
+                "scale_code": "BIG5_OCEAN",
+                "scale_version": "v0.3",
+                "share_summary": {
+                    "enabled": true,
+                    "share_kind": "big5_result"
+                },
+                "submitted_at": "<timestamp>",
+                "ticket_code": "FMT-<ticket>",
+                "top_facets_summary_v1": {
+                    "items": [
+                        {
+                            "bucket": "high",
+                            "domain": "A",
+                            "key": "A2",
+                            "kind": "strength",
+                            "label": "A2 Morality",
+                            "percentile": 100
+                        },
+                        {
+                            "bucket": "high",
+                            "domain": "A",
+                            "key": "A4",
+                            "kind": "strength",
+                            "label": "A4 Cooperation",
+                            "percentile": 100
+                        },
+                        {
+                            "bucket": "high",
+                            "domain": "E",
+                            "key": "E5",
+                            "kind": "strength",
+                            "label": "E5 Excitement Seeking",
+                            "percentile": 100
+                        },
+                        {
+                            "bucket": "low",
+                            "domain": "N",
+                            "key": "N1",
+                            "kind": "growth",
+                            "label": "N1 Anxiety",
+                            "percentile": 0
+                        },
+                        {
+                            "bucket": "low",
+                            "domain": "O",
+                            "key": "O1",
+                            "kind": "growth",
+                            "label": "O1 Imagination",
+                            "percentile": 0
+                        },
+                        {
+                            "bucket": "low",
+                            "domain": "C",
+                            "key": "C1",
+                            "kind": "growth",
+                            "label": "C1 Self Efficacy",
+                            "percentile": 0
+                        }
+                    ]
+                },
+                "type_code": ""
+            }
+        ],
+        "links": {
+            "first": "http://127.0.0.1:18010/api/v0.3/me/attempts?page=1",
+            "last": "http://127.0.0.1:18010/api/v0.3/me/attempts?page=1",
+            "next": null,
+            "prev": null
+        },
+        "meta": {
+            "current_page": 1,
+            "last_page": 1,
+            "per_page": 20,
+            "total": 1
+        },
+        "ok": true,
+        "scale_code": "BIG5_OCEAN",
+        "user_id": "41003"
+    },
+    "pdf_contract": {
+        "content_type": "application/pdf",
+        "status": 200,
+        "x_report_locked": "false",
+        "x_report_scale": "BIG5_OCEAN",
+        "x_report_variant": "full"
+    },
+    "report_access_payload": {
+        "access_state": "ready",
+        "actions": {
+            "history_href": null,
+            "lookup_href": "/orders/lookup",
+            "page_href": "/result/<uuid>",
+            "pdf_href": "/api/v0.3/attempts/<uuid>/report.pdf",
+            "wait_href": null
+        },
+        "attempt_id": "<uuid>",
+        "big5_form_v1": {
+            "estimated_minutes": 15,
+            "form_code": "big5_120",
+            "label": "120-question full version",
+            "question_count": 120,
+            "scale_code": "BIG5_OCEAN",
+            "short_label": "120 questions"
+        },
+        "invite_unlock_diag_v1": {
+            "completed_invitees": 0,
+            "invite_status": null,
+            "progress_percent": 0,
+            "progress_ratio": 0,
+            "remaining_invitees": 2,
+            "required_invitees": 2,
+            "snapshot_at": "<timestamp>",
+            "status": "full_unlock",
+            "status_reason": "unlock_stage_full",
+            "unlock_source": "none",
+            "unlock_stage": "full"
+        },
+        "invite_unlock_v1": {
+            "completed_invitees": 0,
+            "label": "Invite unlock completed 0/2",
+            "partial_scope": null,
+            "required_invitees": 2,
+            "short_label": "Invite unlock completed",
+            "unlock_source": "none",
+            "unlock_stage": "full"
+        },
+        "meta": {
+            "produced_at": null,
+            "refreshed_at": null
+        },
+        "ok": true,
+        "payload": {
+            "access_level": "full",
+            "fallback": true,
+            "invite_unlock_diag_v1": {
+                "completed_invitees": 0,
+                "invite_status": null,
+                "progress_percent": 0,
+                "progress_ratio": 0,
+                "remaining_invitees": 2,
+                "required_invitees": 2,
+                "snapshot_at": "<timestamp>",
+                "status": "full_unlock",
+                "status_reason": "unlock_stage_full",
+                "unlock_source": "none",
+                "unlock_stage": "full"
+            },
+            "invite_unlock_v1": {
+                "completed_invitees": 0,
+                "label": "Invite unlock completed 0/2",
+                "partial_scope": null,
+                "required_invitees": 2,
+                "short_label": "Invite unlock completed",
+                "unlock_source": "none",
+                "unlock_stage": "full"
+            },
+            "result_exists": true,
+            "unlock_source": "none",
+            "unlock_stage": "full",
+            "variant": "full"
+        },
+        "pdf_state": "ready",
+        "projection_version": 1,
+        "reason_code": "projection_missing_result_ready",
+        "report_state": "ready",
+        "unlock_source": "none",
+        "unlock_stage": "full"
+    },
+    "report_payload": {
+        "access_level": "full",
+        "big5_form_v1": {
+            "estimated_minutes": 15,
+            "form_code": "big5_120",
+            "label": "120-question full version",
+            "question_count": 120,
+            "scale_code": "BIG5_OCEAN",
+            "short_label": "120 questions"
+        },
+        "big5_public_projection_v1": {
+            "_meta": {
+                "engine_version": "big5_ipipneo120_v3.0.0",
+                "narrative_runtime_contract_v1": {
+                    "cost_usd": 0,
+                    "error_code": null,
+                    "fail_open_mode": "off",
+                    "model_version": "mock-model",
+                    "narrative_fingerprint": "993eb1400bcb49e545cbf03a0c52717d97715a31453a2c5c0802ac1688e145ee",
+                    "output_present": {
+                        "narrative_intro": false,
+                        "narrative_summary": false,
+                        "section_narrative_keys": false
+                    },
+                    "prompt_version": "v1.0.0",
+                    "provider_name": "null",
+                    "request": {
+                        "authority_keys": [
+                            "schema_version",
+                            "explainability_summary",
+                            "action_plan_summary",
+                            "trait_vector",
+                            "trait_bands",
+                            "dominant_traits",
+                            "ordered_section_keys",
+                            "scene_fingerprint",
+                            "variant_keys"
+                        ],
+                        "locale": "zh-CN",
+                        "scale_code": "BIG5_OCEAN",
+                        "surface": "big5.report"
+                    },
+                    "response": {
+                        "narrative_intro": "",
+                        "narrative_summary": "",
+                        "section_narrative_keys": []
+                    },
+                    "runtime_mode": "off",
+                    "tokens_in": 0,
+                    "tokens_out": 0,
+                    "truth_guard_fields": [
+                        "type_code",
+                        "identity",
+                        "variant_keys",
+                        "trait_vector",
+                        "trait_bands",
+                        "dominant_traits",
+                        "scene_fingerprint",
+                        "working_life_v1",
+                        "cross_assessment_v1",
+                        "user_state",
+                        "orchestration",
+                        "continuity",
+                        "career_focus_key",
+                        "career_journey_keys",
+                        "career_action_priority_keys"
+                    ],
+                    "version": "narrative_runtime_contract.v1"
+                },
+                "scale_code": "BIG5_OCEAN"
+            },
+            "action_plan_summary": {
+                "actions": [
+                    "先搭一个最小稳定系统，而不是追求完美流程。",
+                    "把重复动作固定到同一个时间窗口。",
+                    "每周只追一项能看见进度的目标。"
+                ],
+                "focus_trait": "C",
+                "focus_trait_label": "尽责性",
+                "headline": "当前最值得优先经营的是 尽责性。",
+                "top_growth_facets": [
+                    "N1",
+                    "O1",
+                    "C1"
+                ]
+            },
+            "comparative_v1": {
+                "cohort_relative_position": {
+                    "key": "upper_mid",
+                    "label": "约高于 65% 的同范围样本",
+                    "summary": "在当前常模版本里，你的 宜人性 高于约 65% 的匿名样本。"
+                },
+                "comparative_contract_version": "comparative.norming.v1",
+                "comparative_fingerprint": "f5ba77d20a2348b217b8d3f9ff65e57e77350cfe95933daabb9700444cc8c999",
+                "enabled": true,
+                "norming_scope": "zh-CN_prod_all_18-60",
+                "norming_source": "FERMATMIND_PROD_ZHCN_2026Q1",
+                "norming_version": "2026Q1_prod_v1",
+                "percentile": {
+                    "metric_key": "A",
+                    "metric_label": "宜人性",
+                    "value": 65
+                },
+                "same_type_contrast": {
+                    "contrast_axes": [
+                        "A"
+                    ],
+                    "key": "same_type.profile_family",
+                    "label": "同类画像中的突出驱动",
+                    "summary": "在 相近画像 这一类画像里，宜人性 仍然是最突出的驱动维度。"
+                },
+                "truth_guard_fields": [
+                    "type_code",
+                    "identity",
+                    "variant_keys",
+                    "scene_fingerprint",
+                    "working_life_v1",
+                    "cross_assessment_v1",
+                    "user_state",
+                    "orchestration",
+                    "continuity",
+                    "trait_vector",
+                    "trait_bands",
+                    "dominant_traits",
+                    "action_plan_summary",
+                    "controlled_narrative_v1",
+                    "cultural_calibration_v1"
+                ],
+                "version": "comparative.norming.v1"
+            },
+            "controlled_narrative_v1": {
+                "enabled": false,
+                "fail_open_mode": "off",
+                "model_version": "mock-model",
+                "narrative_contract_version": "controlled_narrative.v1",
+                "narrative_fingerprint": "993eb1400bcb49e545cbf03a0c52717d97715a31453a2c5c0802ac1688e145ee",
+                "narrative_intro": "",
+                "narrative_summary": "",
+                "prompt_version": "v1.0.0",
+                "provider_name": "null",
+                "runtime_contract_version": "narrative_runtime_contract.v1",
+                "runtime_mode": "off",
+                "section_narrative_keys": [],
+                "truth_guard_fields": [
+                    "type_code",
+                    "identity",
+                    "variant_keys",
+                    "trait_vector",
+                    "trait_bands",
+                    "dominant_traits",
+                    "scene_fingerprint",
+                    "working_life_v1",
+                    "cross_assessment_v1",
+                    "user_state",
+                    "orchestration",
+                    "continuity",
+                    "career_focus_key",
+                    "career_journey_keys",
+                    "career_action_priority_keys"
+                ],
+                "version": "controlled_narrative.v1"
+            },
+            "cultural_calibration_v1": {
+                "calibrated_section_keys": [
+                    "result.summary",
+                    "traits.overview"
+                ],
+                "calibration_contract_version": "cultural_calibration.v1",
+                "calibration_fingerprint": "cbd47a8fcb250a46dbf82cce2d99bfaee8f2e68f1ccd3f63de44ace6ce1b0503",
+                "calibration_policy_version": "runtime.locale_policy.v1",
+                "calibration_source": "runtime_policy",
+                "cultural_context": "CN_MAINLAND.zh-CN",
+                "enabled": true,
+                "locale_context": "zh-CN",
+                "narrative_overrides": {
+                    "intro": "语境校准：把 Big Five 当成协作与环境偏好的线索，而不是固定标签。",
+                    "summary": "在中文工作语境里，更适合把 宜人性 理解成情境偏好与互动节奏，而不是一句定性判断。"
+                },
+                "section_overrides": {
+                    "traits.overview": {
+                        "body": "在当前语境里，先说明这些特质会怎样影响协作、边界和环境适配，通常比直接贴标签更容易被用户吸收。",
+                        "section_key": "traits.overview",
+                        "title": "语境校准：先讲协作含义，再讲特质名称"
+                    }
+                },
+                "truth_guard_fields": [
+                    "type_code",
+                    "identity",
+                    "variant_keys",
+                    "scene_fingerprint",
+                    "working_life_v1",
+                    "cross_assessment_v1",
+                    "user_state",
+                    "orchestration",
+                    "continuity",
+                    "trait_vector",
+                    "trait_bands",
+                    "dominant_traits",
+                    "action_plan_summary"
+                ],
+                "version": "cultural_calibration.v1",
+                "working_life_summary": ""
+            },
+            "dominant_traits": [
+                {
+                    "band": "mid",
+                    "key": "A",
+                    "label": "宜人性",
+                    "percentile": 65,
+                    "rank": 1
+                },
+                {
+                    "band": "mid",
+                    "key": "N",
+                    "label": "情绪性",
+                    "percentile": 65,
+                    "rank": 2
+                },
+                {
+                    "band": "mid",
+                    "key": "E",
+                    "label": "外向性",
+                    "percentile": 52,
+                    "rank": 3
+                }
+            ],
+            "explainability_summary": {
+                "headline": "这次画像主要由宜人性驱动。",
+                "reasons": [
+                    "宜人性位于第 65 百分位，形成了这次结果的第一主轴。",
+                    "情绪性作为第二主轴，解释了你在不同场景中的稳定表现。",
+                    "高分刻面集中在 A2 / A4 / E5，说明这不是单点波动，而是有结构的特征组合。"
+                ],
+                "top_strength_facets": [
+                    "A2",
+                    "A4",
+                    "E5"
+                ]
+            },
+            "facet_vector": [
+                {
+                    "bucket": "low",
+                    "domain": "N",
+                    "key": "N1",
+                    "label": "N1 Anxiety",
+                    "mean": 1,
+                    "percentile": 0,
+                    "slug": "anxiety"
+                },
+                {
+                    "bucket": "mid",
+                    "domain": "E",
+                    "key": "E1",
+                    "label": "E1 Friendliness",
+                    "mean": 3,
+                    "percentile": 57,
+                    "slug": "friendliness"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "O",
+                    "key": "O1",
+                    "label": "O1 Imagination",
+                    "mean": 1,
+                    "percentile": 0,
+                    "slug": "imagination"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "A",
+                    "key": "A1",
+                    "label": "A1 Trust",
+                    "mean": 4,
+                    "percentile": 91,
+                    "slug": "trust"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "C",
+                    "key": "C1",
+                    "label": "C1 Self Efficacy",
+                    "mean": 1,
+                    "percentile": 0,
+                    "slug": "self_efficacy"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "N",
+                    "key": "N2",
+                    "label": "N2 Anger",
+                    "mean": 4,
+                    "percentile": 97,
+                    "slug": "anger"
+                },
+                {
+                    "bucket": "mid",
+                    "domain": "E",
+                    "key": "E2",
+                    "label": "E2 Gregariousness",
+                    "mean": 3,
+                    "percentile": 53,
+                    "slug": "gregariousness"
+                },
+                {
+                    "bucket": "mid",
+                    "domain": "O",
+                    "key": "O2",
+                    "label": "O2 Artistic Interests",
+                    "mean": 3,
+                    "percentile": 46,
+                    "slug": "artistic_interests"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "A",
+                    "key": "A2",
+                    "label": "A2 Morality",
+                    "mean": 5,
+                    "percentile": 100,
+                    "slug": "morality"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "C",
+                    "key": "C2",
+                    "label": "C2 Orderliness",
+                    "mean": 2,
+                    "percentile": 3,
+                    "slug": "orderliness"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "N",
+                    "key": "N3",
+                    "label": "N3 Depression",
+                    "mean": 2,
+                    "percentile": 8,
+                    "slug": "depression"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "E",
+                    "key": "E3",
+                    "label": "E3 Assertiveness",
+                    "mean": 4,
+                    "percentile": 96,
+                    "slug": "assertiveness"
+                },
+                {
+                    "bucket": "mid",
+                    "domain": "O",
+                    "key": "O3",
+                    "label": "O3 Emotionality",
+                    "mean": 3,
+                    "percentile": 41,
+                    "slug": "emotionality"
+                },
+                {
+                    "bucket": "mid",
+                    "domain": "A",
+                    "key": "A3",
+                    "label": "A3 Altruism",
+                    "mean": 3,
+                    "percentile": 31,
+                    "slug": "altruism"
+                },
+                {
+                    "bucket": "mid",
+                    "domain": "C",
+                    "key": "C3",
+                    "label": "C3 Dutifulness",
+                    "mean": 3,
+                    "percentile": 33,
+                    "slug": "dutifulness"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "N",
+                    "key": "N4",
+                    "label": "N4 Self Consciousness",
+                    "mean": 4,
+                    "percentile": 97,
+                    "slug": "self_consciousness"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "E",
+                    "key": "E4",
+                    "label": "E4 Activity Level",
+                    "mean": 2,
+                    "percentile": 4,
+                    "slug": "activity_level"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "O",
+                    "key": "O4",
+                    "label": "O4 Adventurousness",
+                    "mean": 2,
+                    "percentile": 3,
+                    "slug": "adventurousness"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "A",
+                    "key": "A4",
+                    "label": "A4 Cooperation",
+                    "mean": 5,
+                    "percentile": 100,
+                    "slug": "cooperation"
+                },
+                {
+                    "bucket": "mid",
+                    "domain": "C",
+                    "key": "C4",
+                    "label": "C4 Achievement Striving",
+                    "mean": 3,
+                    "percentile": 31,
+                    "slug": "achievement_striving"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "N",
+                    "key": "N5",
+                    "label": "N5 Immoderation",
+                    "mean": 4,
+                    "percentile": 95,
+                    "slug": "immoderation"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "E",
+                    "key": "E5",
+                    "label": "E5 Excitement Seeking",
+                    "mean": 5,
+                    "percentile": 100,
+                    "slug": "excitement_seeking"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "O",
+                    "key": "O5",
+                    "label": "O5 Intellect",
+                    "mean": 4,
+                    "percentile": 89,
+                    "slug": "intellect"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "A",
+                    "key": "A5",
+                    "label": "A5 Modesty",
+                    "mean": 1,
+                    "percentile": 0,
+                    "slug": "modesty"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "C",
+                    "key": "C5",
+                    "label": "C5 Self Discipline",
+                    "mean": 3,
+                    "percentile": 29,
+                    "slug": "self_discipline"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "N",
+                    "key": "N6",
+                    "label": "N6 Vulnerability",
+                    "mean": 4,
+                    "percentile": 96,
+                    "slug": "vulnerability"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "E",
+                    "key": "E6",
+                    "label": "E6 Cheerfulness",
+                    "mean": 1,
+                    "percentile": 0,
+                    "slug": "cheerfulness"
+                },
+                {
+                    "bucket": "mid",
+                    "domain": "O",
+                    "key": "O6",
+                    "label": "O6 Liberalism",
+                    "mean": 3,
+                    "percentile": 31,
+                    "slug": "liberalism"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "A",
+                    "key": "A6",
+                    "label": "A6 Sympathy",
+                    "mean": 3,
+                    "percentile": 22,
+                    "slug": "sympathy"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "C",
+                    "key": "C6",
+                    "label": "C6 Cautiousness",
+                    "mean": 1,
+                    "percentile": 0,
+                    "slug": "cautiousness"
+                }
+            ],
+            "ordered_section_keys": [
+                "traits.overview",
+                "traits.why_this_profile",
+                "relationships.interpersonal_style",
+                "career.work_style",
+                "growth.next_actions"
+            ],
+            "scene_fingerprint": {
+                "cooperation": "balanced",
+                "novelty": "grounded",
+                "social_energy": "balanced",
+                "stress_posture": "responsive",
+                "structure": "adaptive"
+            },
+            "schema_version": "big5.public_projection.v1",
+            "sections": [
+                {
+                    "access_level": "free",
+                    "blocks": [
+                        {
+                            "body": "你这次的画像主要由宜人性和情绪性共同决定。它不是一句标签，而是五维组合的结果。",
+                            "kind": "paragraph",
+                            "title": "这份 Big Five 画像的主轴"
+                        },
+                        {
+                            "body": "开放性：第 26 百分位，当前更偏 更务实。\n尽责性：第 3 百分位，当前更偏 更灵活。\n外向性：第 52 百分位，当前更偏 相对平衡。\n宜人性：第 65 百分位，当前更偏 相对平衡。\n情绪性：第 65 百分位，当前更偏 相对敏感。",
+                            "kind": "bullets",
+                            "title": "五维带宽"
+                        }
+                    ],
+                    "key": "traits.overview",
+                    "module_code": "big5_core",
+                    "title": "人格总览"
+                },
+                {
+                    "access_level": "free",
+                    "blocks": [
+                        {
+                            "body": "这次画像主要由宜人性驱动。",
+                            "kind": "paragraph",
+                            "tags": [],
+                            "title": "解释主线"
+                        },
+                        {
+                            "body": "宜人性位于第 65 百分位，形成了这次结果的第一主轴。\n情绪性作为第二主轴，解释了你在不同场景中的稳定表现。\n高分刻面集中在 A2 / A4 / E5，说明这不是单点波动，而是有结构的特征组合。",
+                            "kind": "bullets",
+                            "title": "为什么会命中这组特征"
+                        }
+                    ],
+                    "key": "traits.why_this_profile",
+                    "module_code": "big5_core",
+                    "title": "为什么会是这个画像"
+                },
+                {
+                    "access_level": "paid",
+                    "blocks": [
+                        {
+                            "body": "在互动里，你更偏相对平衡的社交能量、相对平衡的合作方式，以及相对敏感的压力姿态。",
+                            "kind": "paragraph",
+                            "title": "互动场景画像"
+                        },
+                        {
+                            "body": "在关系里，你通常更偏相对平衡地处理互动。\n遇到分歧时，你更可能用相对平衡的方式推进沟通。\n压力上来时，关系体验会呈现相对敏感的姿态。",
+                            "kind": "bullets",
+                            "title": "关系提示"
+                        }
+                    ],
+                    "key": "relationships.interpersonal_style",
+                    "module_code": "big5_full",
+                    "title": "关系与互动风格"
+                },
+                {
+                    "access_level": "paid",
+                    "blocks": [
+                        {
+                            "body": "工作上，你更适合更务实的变化、更灵活的结构，以及相对平衡的对外节奏。",
+                            "kind": "paragraph",
+                            "title": "工作场景指纹"
+                        },
+                        {
+                            "body": "面对变化时，你更适合更务实的节奏。\n执行任务时，你更习惯更灵活的结构。\n协作节奏上，你通常会选择相对平衡的对外方式。",
+                            "kind": "bullets",
+                            "title": "工作提示"
+                        }
+                    ],
+                    "key": "career.work_style",
+                    "module_code": "big5_full",
+                    "title": "工作风格与场景"
+                },
+                {
+                    "access_level": "paid",
+                    "blocks": [
+                        {
+                            "body": "当前最值得优先经营的是 尽责性。",
+                            "kind": "paragraph",
+                            "title": "接下来优先修什么"
+                        },
+                        {
+                            "body": "先搭一个最小稳定系统，而不是追求完美流程。\n把重复动作固定到同一个时间窗口。\n每周只追一项能看见进度的目标。",
+                            "kind": "bullets",
+                            "title": "行动建议"
+                        }
+                    ],
+                    "key": "growth.next_actions",
+                    "module_code": "big5_action_plan",
+                    "title": "成长与下一步动作"
+                }
+            ],
+            "trait_bands": {
+                "A": "mid",
+                "C": "low",
+                "E": "mid",
+                "N": "mid",
+                "O": "low"
+            },
+            "trait_vector": [
+                {
+                    "band": "low",
+                    "band_label": "更务实",
+                    "key": "O",
+                    "label": "开放性",
+                    "mean": 2.67,
+                    "percentile": 26
+                },
+                {
+                    "band": "low",
+                    "band_label": "更灵活",
+                    "key": "C",
+                    "label": "尽责性",
+                    "mean": 2.17,
+                    "percentile": 3
+                },
+                {
+                    "band": "mid",
+                    "band_label": "相对平衡",
+                    "key": "E",
+                    "label": "外向性",
+                    "mean": 3,
+                    "percentile": 52
+                },
+                {
+                    "band": "mid",
+                    "band_label": "相对平衡",
+                    "key": "A",
+                    "label": "宜人性",
+                    "mean": 3.5,
+                    "percentile": 65
+                },
+                {
+                    "band": "mid",
+                    "band_label": "相对敏感",
+                    "key": "N",
+                    "label": "情绪性",
+                    "mean": 3.17,
+                    "percentile": 65
+                }
+            ],
+            "variant_keys": [
+                "big5:o_low",
+                "big5:c_low",
+                "big5:e_mid",
+                "big5:a_mid",
+                "big5:n_mid",
+                "band:o.low",
+                "band:c.low",
+                "band:e.mid",
+                "band:a.mid",
+                "band:n.mid"
+            ]
+        },
+        "comparative_v1": {
+            "cohort_relative_position": {
+                "key": "upper_mid",
+                "label": "约高于 65% 的同范围样本",
+                "summary": "在当前常模版本里，你的 宜人性 高于约 65% 的匿名样本。"
+            },
+            "comparative_contract_version": "comparative.norming.v1",
+            "comparative_fingerprint": "f5ba77d20a2348b217b8d3f9ff65e57e77350cfe95933daabb9700444cc8c999",
+            "enabled": true,
+            "norming_scope": "zh-CN_prod_all_18-60",
+            "norming_source": "FERMATMIND_PROD_ZHCN_2026Q1",
+            "norming_version": "2026Q1_prod_v1",
+            "percentile": {
+                "metric_key": "A",
+                "metric_label": "宜人性",
+                "value": 65
+            },
+            "same_type_contrast": {
+                "contrast_axes": [
+                    "A"
+                ],
+                "key": "same_type.profile_family",
+                "label": "同类画像中的突出驱动",
+                "summary": "在 相近画像 这一类画像里，宜人性 仍然是最突出的驱动维度。"
+            },
+            "truth_guard_fields": [
+                "type_code",
+                "identity",
+                "variant_keys",
+                "scene_fingerprint",
+                "working_life_v1",
+                "cross_assessment_v1",
+                "user_state",
+                "orchestration",
+                "continuity",
+                "trait_vector",
+                "trait_bands",
+                "dominant_traits",
+                "action_plan_summary",
+                "controlled_narrative_v1",
+                "cultural_calibration_v1"
+            ],
+            "version": "comparative.norming.v1"
+        },
+        "locked": false,
+        "modules_allowed": [
+            "big5_core",
+            "big5_full",
+            "big5_action_plan"
+        ],
+        "modules_offered": [
+            "big5_full",
+            "big5_action_plan"
+        ],
+        "modules_preview": [],
+        "norms": {
+            "group_id": "zh-CN_prod_all_18-60",
+            "norms_version": "2026Q1_prod_v1",
+            "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+            "status": "CALIBRATED"
+        },
+        "ok": true,
+        "quality": {
+            "client_duration_ms": 120000,
+            "flags": [
+                "SPEEDING",
+                "EXTREME_RESPONDING",
+                "ATTENTION_CHECK_FAILED"
+            ],
+            "level": "D",
+            "metrics": {
+                "acquiescence_index": 0,
+                "completion_rate": 1,
+                "extreme_rate": 1,
+                "facet_inconsistency_mean": 1.2167,
+                "longstring_max": 1,
+                "neutral_rate": 0,
+                "time_per_item_avg": 0,
+                "time_seconds_total": 0
+            }
+        },
+        "report": {
+            "_meta": {
+                "big5_public_projection_v1": {
+                    "_meta": {
+                        "engine_version": "big5_ipipneo120_v3.0.0",
+                        "locked": false,
+                        "narrative_runtime_contract_v1": {
+                            "cost_usd": 0,
+                            "error_code": null,
+                            "fail_open_mode": "off",
+                            "model_version": "mock-model",
+                            "narrative_fingerprint": "993eb1400bcb49e545cbf03a0c52717d97715a31453a2c5c0802ac1688e145ee",
+                            "output_present": {
+                                "narrative_intro": false,
+                                "narrative_summary": false,
+                                "section_narrative_keys": false
+                            },
+                            "prompt_version": "v1.0.0",
+                            "provider_name": "null",
+                            "request": {
+                                "authority_keys": [
+                                    "schema_version",
+                                    "explainability_summary",
+                                    "action_plan_summary",
+                                    "trait_vector",
+                                    "trait_bands",
+                                    "dominant_traits",
+                                    "ordered_section_keys",
+                                    "scene_fingerprint",
+                                    "variant_keys"
+                                ],
+                                "locale": "zh-CN",
+                                "scale_code": "BIG5_OCEAN",
+                                "surface": "big5.report"
+                            },
+                            "response": {
+                                "narrative_intro": "",
+                                "narrative_summary": "",
+                                "section_narrative_keys": []
+                            },
+                            "runtime_mode": "off",
+                            "tokens_in": 0,
+                            "tokens_out": 0,
+                            "truth_guard_fields": [
+                                "type_code",
+                                "identity",
+                                "variant_keys",
+                                "trait_vector",
+                                "trait_bands",
+                                "dominant_traits",
+                                "scene_fingerprint",
+                                "working_life_v1",
+                                "cross_assessment_v1",
+                                "user_state",
+                                "orchestration",
+                                "continuity",
+                                "career_focus_key",
+                                "career_journey_keys",
+                                "career_action_priority_keys"
+                            ],
+                            "version": "narrative_runtime_contract.v1"
+                        },
+                        "scale_code": "BIG5_OCEAN",
+                        "variant": "full"
+                    },
+                    "action_plan_summary": {
+                        "actions": [
+                            "先搭一个最小稳定系统，而不是追求完美流程。",
+                            "把重复动作固定到同一个时间窗口。",
+                            "每周只追一项能看见进度的目标。"
+                        ],
+                        "focus_trait": "C",
+                        "focus_trait_label": "尽责性",
+                        "headline": "当前最值得优先经营的是 尽责性。",
+                        "top_growth_facets": [
+                            "N1",
+                            "O1",
+                            "C1"
+                        ]
+                    },
+                    "comparative_v1": {
+                        "cohort_relative_position": {
+                            "key": "upper_mid",
+                            "label": "约高于 65% 的同范围样本",
+                            "summary": "在当前常模版本里，你的 宜人性 高于约 65% 的匿名样本。"
+                        },
+                        "comparative_contract_version": "comparative.norming.v1",
+                        "comparative_fingerprint": "f5ba77d20a2348b217b8d3f9ff65e57e77350cfe95933daabb9700444cc8c999",
+                        "enabled": true,
+                        "norming_scope": "zh-CN_prod_all_18-60",
+                        "norming_source": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "norming_version": "2026Q1_prod_v1",
+                        "percentile": {
+                            "metric_key": "A",
+                            "metric_label": "宜人性",
+                            "value": 65
+                        },
+                        "same_type_contrast": {
+                            "contrast_axes": [
+                                "A"
+                            ],
+                            "key": "same_type.profile_family",
+                            "label": "同类画像中的突出驱动",
+                            "summary": "在 相近画像 这一类画像里，宜人性 仍然是最突出的驱动维度。"
+                        },
+                        "truth_guard_fields": [
+                            "type_code",
+                            "identity",
+                            "variant_keys",
+                            "scene_fingerprint",
+                            "working_life_v1",
+                            "cross_assessment_v1",
+                            "user_state",
+                            "orchestration",
+                            "continuity",
+                            "trait_vector",
+                            "trait_bands",
+                            "dominant_traits",
+                            "action_plan_summary",
+                            "controlled_narrative_v1",
+                            "cultural_calibration_v1"
+                        ],
+                        "version": "comparative.norming.v1"
+                    },
+                    "controlled_narrative_v1": {
+                        "enabled": false,
+                        "fail_open_mode": "off",
+                        "model_version": "mock-model",
+                        "narrative_contract_version": "controlled_narrative.v1",
+                        "narrative_fingerprint": "993eb1400bcb49e545cbf03a0c52717d97715a31453a2c5c0802ac1688e145ee",
+                        "narrative_intro": "",
+                        "narrative_summary": "",
+                        "prompt_version": "v1.0.0",
+                        "provider_name": "null",
+                        "runtime_contract_version": "narrative_runtime_contract.v1",
+                        "runtime_mode": "off",
+                        "section_narrative_keys": [],
+                        "truth_guard_fields": [
+                            "type_code",
+                            "identity",
+                            "variant_keys",
+                            "trait_vector",
+                            "trait_bands",
+                            "dominant_traits",
+                            "scene_fingerprint",
+                            "working_life_v1",
+                            "cross_assessment_v1",
+                            "user_state",
+                            "orchestration",
+                            "continuity",
+                            "career_focus_key",
+                            "career_journey_keys",
+                            "career_action_priority_keys"
+                        ],
+                        "version": "controlled_narrative.v1"
+                    },
+                    "cultural_calibration_v1": {
+                        "calibrated_section_keys": [
+                            "result.summary",
+                            "traits.overview"
+                        ],
+                        "calibration_contract_version": "cultural_calibration.v1",
+                        "calibration_fingerprint": "cbd47a8fcb250a46dbf82cce2d99bfaee8f2e68f1ccd3f63de44ace6ce1b0503",
+                        "calibration_policy_version": "runtime.locale_policy.v1",
+                        "calibration_source": "runtime_policy",
+                        "cultural_context": "CN_MAINLAND.zh-CN",
+                        "enabled": true,
+                        "locale_context": "zh-CN",
+                        "narrative_overrides": {
+                            "intro": "语境校准：把 Big Five 当成协作与环境偏好的线索，而不是固定标签。",
+                            "summary": "在中文工作语境里，更适合把 宜人性 理解成情境偏好与互动节奏，而不是一句定性判断。"
+                        },
+                        "section_overrides": {
+                            "traits.overview": {
+                                "body": "在当前语境里，先说明这些特质会怎样影响协作、边界和环境适配，通常比直接贴标签更容易被用户吸收。",
+                                "section_key": "traits.overview",
+                                "title": "语境校准：先讲协作含义，再讲特质名称"
+                            }
+                        },
+                        "truth_guard_fields": [
+                            "type_code",
+                            "identity",
+                            "variant_keys",
+                            "scene_fingerprint",
+                            "working_life_v1",
+                            "cross_assessment_v1",
+                            "user_state",
+                            "orchestration",
+                            "continuity",
+                            "trait_vector",
+                            "trait_bands",
+                            "dominant_traits",
+                            "action_plan_summary"
+                        ],
+                        "version": "cultural_calibration.v1",
+                        "working_life_summary": ""
+                    },
+                    "dominant_traits": [
+                        {
+                            "band": "mid",
+                            "key": "A",
+                            "label": "宜人性",
+                            "percentile": 65,
+                            "rank": 1
+                        },
+                        {
+                            "band": "mid",
+                            "key": "N",
+                            "label": "情绪性",
+                            "percentile": 65,
+                            "rank": 2
+                        },
+                        {
+                            "band": "mid",
+                            "key": "E",
+                            "label": "外向性",
+                            "percentile": 52,
+                            "rank": 3
+                        }
+                    ],
+                    "explainability_summary": {
+                        "headline": "这次画像主要由宜人性驱动。",
+                        "reasons": [
+                            "宜人性位于第 65 百分位，形成了这次结果的第一主轴。",
+                            "情绪性作为第二主轴，解释了你在不同场景中的稳定表现。",
+                            "高分刻面集中在 A2 / A4 / E5，说明这不是单点波动，而是有结构的特征组合。"
+                        ],
+                        "top_strength_facets": [
+                            "A2",
+                            "A4",
+                            "E5"
+                        ]
+                    },
+                    "facet_vector": [
+                        {
+                            "bucket": "low",
+                            "domain": "N",
+                            "key": "N1",
+                            "label": "N1 Anxiety",
+                            "mean": 1,
+                            "percentile": 0,
+                            "slug": "anxiety"
+                        },
+                        {
+                            "bucket": "mid",
+                            "domain": "E",
+                            "key": "E1",
+                            "label": "E1 Friendliness",
+                            "mean": 3,
+                            "percentile": 57,
+                            "slug": "friendliness"
+                        },
+                        {
+                            "bucket": "low",
+                            "domain": "O",
+                            "key": "O1",
+                            "label": "O1 Imagination",
+                            "mean": 1,
+                            "percentile": 0,
+                            "slug": "imagination"
+                        },
+                        {
+                            "bucket": "high",
+                            "domain": "A",
+                            "key": "A1",
+                            "label": "A1 Trust",
+                            "mean": 4,
+                            "percentile": 91,
+                            "slug": "trust"
+                        },
+                        {
+                            "bucket": "low",
+                            "domain": "C",
+                            "key": "C1",
+                            "label": "C1 Self Efficacy",
+                            "mean": 1,
+                            "percentile": 0,
+                            "slug": "self_efficacy"
+                        },
+                        {
+                            "bucket": "high",
+                            "domain": "N",
+                            "key": "N2",
+                            "label": "N2 Anger",
+                            "mean": 4,
+                            "percentile": 97,
+                            "slug": "anger"
+                        },
+                        {
+                            "bucket": "mid",
+                            "domain": "E",
+                            "key": "E2",
+                            "label": "E2 Gregariousness",
+                            "mean": 3,
+                            "percentile": 53,
+                            "slug": "gregariousness"
+                        },
+                        {
+                            "bucket": "mid",
+                            "domain": "O",
+                            "key": "O2",
+                            "label": "O2 Artistic Interests",
+                            "mean": 3,
+                            "percentile": 46,
+                            "slug": "artistic_interests"
+                        },
+                        {
+                            "bucket": "high",
+                            "domain": "A",
+                            "key": "A2",
+                            "label": "A2 Morality",
+                            "mean": 5,
+                            "percentile": 100,
+                            "slug": "morality"
+                        },
+                        {
+                            "bucket": "low",
+                            "domain": "C",
+                            "key": "C2",
+                            "label": "C2 Orderliness",
+                            "mean": 2,
+                            "percentile": 3,
+                            "slug": "orderliness"
+                        },
+                        {
+                            "bucket": "low",
+                            "domain": "N",
+                            "key": "N3",
+                            "label": "N3 Depression",
+                            "mean": 2,
+                            "percentile": 8,
+                            "slug": "depression"
+                        },
+                        {
+                            "bucket": "high",
+                            "domain": "E",
+                            "key": "E3",
+                            "label": "E3 Assertiveness",
+                            "mean": 4,
+                            "percentile": 96,
+                            "slug": "assertiveness"
+                        },
+                        {
+                            "bucket": "mid",
+                            "domain": "O",
+                            "key": "O3",
+                            "label": "O3 Emotionality",
+                            "mean": 3,
+                            "percentile": 41,
+                            "slug": "emotionality"
+                        },
+                        {
+                            "bucket": "mid",
+                            "domain": "A",
+                            "key": "A3",
+                            "label": "A3 Altruism",
+                            "mean": 3,
+                            "percentile": 31,
+                            "slug": "altruism"
+                        },
+                        {
+                            "bucket": "mid",
+                            "domain": "C",
+                            "key": "C3",
+                            "label": "C3 Dutifulness",
+                            "mean": 3,
+                            "percentile": 33,
+                            "slug": "dutifulness"
+                        },
+                        {
+                            "bucket": "high",
+                            "domain": "N",
+                            "key": "N4",
+                            "label": "N4 Self Consciousness",
+                            "mean": 4,
+                            "percentile": 97,
+                            "slug": "self_consciousness"
+                        },
+                        {
+                            "bucket": "low",
+                            "domain": "E",
+                            "key": "E4",
+                            "label": "E4 Activity Level",
+                            "mean": 2,
+                            "percentile": 4,
+                            "slug": "activity_level"
+                        },
+                        {
+                            "bucket": "low",
+                            "domain": "O",
+                            "key": "O4",
+                            "label": "O4 Adventurousness",
+                            "mean": 2,
+                            "percentile": 3,
+                            "slug": "adventurousness"
+                        },
+                        {
+                            "bucket": "high",
+                            "domain": "A",
+                            "key": "A4",
+                            "label": "A4 Cooperation",
+                            "mean": 5,
+                            "percentile": 100,
+                            "slug": "cooperation"
+                        },
+                        {
+                            "bucket": "mid",
+                            "domain": "C",
+                            "key": "C4",
+                            "label": "C4 Achievement Striving",
+                            "mean": 3,
+                            "percentile": 31,
+                            "slug": "achievement_striving"
+                        },
+                        {
+                            "bucket": "high",
+                            "domain": "N",
+                            "key": "N5",
+                            "label": "N5 Immoderation",
+                            "mean": 4,
+                            "percentile": 95,
+                            "slug": "immoderation"
+                        },
+                        {
+                            "bucket": "high",
+                            "domain": "E",
+                            "key": "E5",
+                            "label": "E5 Excitement Seeking",
+                            "mean": 5,
+                            "percentile": 100,
+                            "slug": "excitement_seeking"
+                        },
+                        {
+                            "bucket": "high",
+                            "domain": "O",
+                            "key": "O5",
+                            "label": "O5 Intellect",
+                            "mean": 4,
+                            "percentile": 89,
+                            "slug": "intellect"
+                        },
+                        {
+                            "bucket": "low",
+                            "domain": "A",
+                            "key": "A5",
+                            "label": "A5 Modesty",
+                            "mean": 1,
+                            "percentile": 0,
+                            "slug": "modesty"
+                        },
+                        {
+                            "bucket": "low",
+                            "domain": "C",
+                            "key": "C5",
+                            "label": "C5 Self Discipline",
+                            "mean": 3,
+                            "percentile": 29,
+                            "slug": "self_discipline"
+                        },
+                        {
+                            "bucket": "high",
+                            "domain": "N",
+                            "key": "N6",
+                            "label": "N6 Vulnerability",
+                            "mean": 4,
+                            "percentile": 96,
+                            "slug": "vulnerability"
+                        },
+                        {
+                            "bucket": "low",
+                            "domain": "E",
+                            "key": "E6",
+                            "label": "E6 Cheerfulness",
+                            "mean": 1,
+                            "percentile": 0,
+                            "slug": "cheerfulness"
+                        },
+                        {
+                            "bucket": "mid",
+                            "domain": "O",
+                            "key": "O6",
+                            "label": "O6 Liberalism",
+                            "mean": 3,
+                            "percentile": 31,
+                            "slug": "liberalism"
+                        },
+                        {
+                            "bucket": "low",
+                            "domain": "A",
+                            "key": "A6",
+                            "label": "A6 Sympathy",
+                            "mean": 3,
+                            "percentile": 22,
+                            "slug": "sympathy"
+                        },
+                        {
+                            "bucket": "low",
+                            "domain": "C",
+                            "key": "C6",
+                            "label": "C6 Cautiousness",
+                            "mean": 1,
+                            "percentile": 0,
+                            "slug": "cautiousness"
+                        }
+                    ],
+                    "ordered_section_keys": [
+                        "traits.overview",
+                        "traits.why_this_profile",
+                        "relationships.interpersonal_style",
+                        "career.work_style",
+                        "growth.next_actions"
+                    ],
+                    "scene_fingerprint": {
+                        "cooperation": "balanced",
+                        "novelty": "grounded",
+                        "social_energy": "balanced",
+                        "stress_posture": "responsive",
+                        "structure": "adaptive"
+                    },
+                    "schema_version": "big5.public_projection.v1",
+                    "sections": [
+                        {
+                            "access_level": "free",
+                            "blocks": [
+                                {
+                                    "body": "你这次的画像主要由宜人性和情绪性共同决定。它不是一句标签，而是五维组合的结果。",
+                                    "kind": "paragraph",
+                                    "title": "这份 Big Five 画像的主轴"
+                                },
+                                {
+                                    "body": "开放性：第 26 百分位，当前更偏 更务实。\n尽责性：第 3 百分位，当前更偏 更灵活。\n外向性：第 52 百分位，当前更偏 相对平衡。\n宜人性：第 65 百分位，当前更偏 相对平衡。\n情绪性：第 65 百分位，当前更偏 相对敏感。",
+                                    "kind": "bullets",
+                                    "title": "五维带宽"
+                                }
+                            ],
+                            "key": "traits.overview",
+                            "module_code": "big5_core",
+                            "title": "人格总览"
+                        },
+                        {
+                            "access_level": "free",
+                            "blocks": [
+                                {
+                                    "body": "这次画像主要由宜人性驱动。",
+                                    "kind": "paragraph",
+                                    "tags": [],
+                                    "title": "解释主线"
+                                },
+                                {
+                                    "body": "宜人性位于第 65 百分位，形成了这次结果的第一主轴。\n情绪性作为第二主轴，解释了你在不同场景中的稳定表现。\n高分刻面集中在 A2 / A4 / E5，说明这不是单点波动，而是有结构的特征组合。",
+                                    "kind": "bullets",
+                                    "title": "为什么会命中这组特征"
+                                }
+                            ],
+                            "key": "traits.why_this_profile",
+                            "module_code": "big5_core",
+                            "title": "为什么会是这个画像"
+                        },
+                        {
+                            "access_level": "paid",
+                            "blocks": [
+                                {
+                                    "body": "在互动里，你更偏相对平衡的社交能量、相对平衡的合作方式，以及相对敏感的压力姿态。",
+                                    "kind": "paragraph",
+                                    "title": "互动场景画像"
+                                },
+                                {
+                                    "body": "在关系里，你通常更偏相对平衡地处理互动。\n遇到分歧时，你更可能用相对平衡的方式推进沟通。\n压力上来时，关系体验会呈现相对敏感的姿态。",
+                                    "kind": "bullets",
+                                    "title": "关系提示"
+                                }
+                            ],
+                            "key": "relationships.interpersonal_style",
+                            "module_code": "big5_full",
+                            "title": "关系与互动风格"
+                        },
+                        {
+                            "access_level": "paid",
+                            "blocks": [
+                                {
+                                    "body": "工作上，你更适合更务实的变化、更灵活的结构，以及相对平衡的对外节奏。",
+                                    "kind": "paragraph",
+                                    "title": "工作场景指纹"
+                                },
+                                {
+                                    "body": "面对变化时，你更适合更务实的节奏。\n执行任务时，你更习惯更灵活的结构。\n协作节奏上，你通常会选择相对平衡的对外方式。",
+                                    "kind": "bullets",
+                                    "title": "工作提示"
+                                }
+                            ],
+                            "key": "career.work_style",
+                            "module_code": "big5_full",
+                            "title": "工作风格与场景"
+                        },
+                        {
+                            "access_level": "paid",
+                            "blocks": [
+                                {
+                                    "body": "当前最值得优先经营的是 尽责性。",
+                                    "kind": "paragraph",
+                                    "title": "接下来优先修什么"
+                                },
+                                {
+                                    "body": "先搭一个最小稳定系统，而不是追求完美流程。\n把重复动作固定到同一个时间窗口。\n每周只追一项能看见进度的目标。",
+                                    "kind": "bullets",
+                                    "title": "行动建议"
+                                }
+                            ],
+                            "key": "growth.next_actions",
+                            "module_code": "big5_action_plan",
+                            "title": "成长与下一步动作"
+                        }
+                    ],
+                    "trait_bands": {
+                        "A": "mid",
+                        "C": "low",
+                        "E": "mid",
+                        "N": "mid",
+                        "O": "low"
+                    },
+                    "trait_vector": [
+                        {
+                            "band": "low",
+                            "band_label": "更务实",
+                            "key": "O",
+                            "label": "开放性",
+                            "mean": 2.67,
+                            "percentile": 26
+                        },
+                        {
+                            "band": "low",
+                            "band_label": "更灵活",
+                            "key": "C",
+                            "label": "尽责性",
+                            "mean": 2.17,
+                            "percentile": 3
+                        },
+                        {
+                            "band": "mid",
+                            "band_label": "相对平衡",
+                            "key": "E",
+                            "label": "外向性",
+                            "mean": 3,
+                            "percentile": 52
+                        },
+                        {
+                            "band": "mid",
+                            "band_label": "相对平衡",
+                            "key": "A",
+                            "label": "宜人性",
+                            "mean": 3.5,
+                            "percentile": 65
+                        },
+                        {
+                            "band": "mid",
+                            "band_label": "相对敏感",
+                            "key": "N",
+                            "label": "情绪性",
+                            "mean": 3.17,
+                            "percentile": 65
+                        }
+                    ],
+                    "variant_keys": [
+                        "big5:o_low",
+                        "big5:c_low",
+                        "big5:e_mid",
+                        "big5:a_mid",
+                        "big5:n_mid",
+                        "band:o.low",
+                        "band:c.low",
+                        "band:e.mid",
+                        "band:a.mid",
+                        "band:n.mid"
+                    ]
+                }
+            },
+            "generated_at": "<timestamp>",
+            "norms": {
+                "group_id": "zh-CN_prod_all_18-60",
+                "status": "CALIBRATED"
+            },
+            "quality": {
+                "level": "D"
+            },
+            "scale_code": "BIG5_OCEAN",
+            "schema_version": "big5.report.v1",
+            "sections": [
+                {
+                    "access_level": "free",
+                    "blocks": [
+                        {
+                            "body": "你这次的画像主要由宜人性和情绪性共同决定。它不是一句标签，而是五维组合的结果。",
+                            "kind": "paragraph",
+                            "title": "这份 Big Five 画像的主轴"
+                        },
+                        {
+                            "body": "开放性：第 26 百分位，当前更偏 更务实。\n尽责性：第 3 百分位，当前更偏 更灵活。\n外向性：第 52 百分位，当前更偏 相对平衡。\n宜人性：第 65 百分位，当前更偏 相对平衡。\n情绪性：第 65 百分位，当前更偏 相对敏感。",
+                            "kind": "bullets",
+                            "title": "五维带宽"
+                        }
+                    ],
+                    "key": "traits.overview",
+                    "module_code": "big5_core",
+                    "title": "人格总览"
+                },
+                {
+                    "access_level": "free",
+                    "blocks": [
+                        {
+                            "body": "这次画像主要由宜人性驱动。",
+                            "kind": "paragraph",
+                            "tags": [],
+                            "title": "解释主线"
+                        },
+                        {
+                            "body": "宜人性位于第 65 百分位，形成了这次结果的第一主轴。\n情绪性作为第二主轴，解释了你在不同场景中的稳定表现。\n高分刻面集中在 A2 / A4 / E5，说明这不是单点波动，而是有结构的特征组合。",
+                            "kind": "bullets",
+                            "title": "为什么会命中这组特征"
+                        }
+                    ],
+                    "key": "traits.why_this_profile",
+                    "module_code": "big5_core",
+                    "title": "为什么会是这个画像"
+                },
+                {
+                    "access_level": "paid",
+                    "blocks": [
+                        {
+                            "body": "在互动里，你更偏相对平衡的社交能量、相对平衡的合作方式，以及相对敏感的压力姿态。",
+                            "kind": "paragraph",
+                            "title": "互动场景画像"
+                        },
+                        {
+                            "body": "在关系里，你通常更偏相对平衡地处理互动。\n遇到分歧时，你更可能用相对平衡的方式推进沟通。\n压力上来时，关系体验会呈现相对敏感的姿态。",
+                            "kind": "bullets",
+                            "title": "关系提示"
+                        }
+                    ],
+                    "key": "relationships.interpersonal_style",
+                    "module_code": "big5_full",
+                    "title": "关系与互动风格"
+                },
+                {
+                    "access_level": "paid",
+                    "blocks": [
+                        {
+                            "body": "工作上，你更适合更务实的变化、更灵活的结构，以及相对平衡的对外节奏。",
+                            "kind": "paragraph",
+                            "title": "工作场景指纹"
+                        },
+                        {
+                            "body": "面对变化时，你更适合更务实的节奏。\n执行任务时，你更习惯更灵活的结构。\n协作节奏上，你通常会选择相对平衡的对外方式。",
+                            "kind": "bullets",
+                            "title": "工作提示"
+                        }
+                    ],
+                    "key": "career.work_style",
+                    "module_code": "big5_full",
+                    "title": "工作风格与场景"
+                },
+                {
+                    "access_level": "paid",
+                    "blocks": [
+                        {
+                            "body": "当前最值得优先经营的是 尽责性。",
+                            "kind": "paragraph",
+                            "title": "接下来优先修什么"
+                        },
+                        {
+                            "body": "先搭一个最小稳定系统，而不是追求完美流程。\n把重复动作固定到同一个时间窗口。\n每周只追一项能看见进度的目标。",
+                            "kind": "bullets",
+                            "title": "行动建议"
+                        }
+                    ],
+                    "key": "growth.next_actions",
+                    "module_code": "big5_action_plan",
+                    "title": "成长与下一步动作"
+                },
+                {
+                    "access_level": "free",
+                    "blocks": [
+                        {
+                            "access_level": "free",
+                            "body": "本人格报告仅用于自我了解，不构成医学或精神健康诊断。",
+                            "bucket": "all",
+                            "id": "disclaimer_top_zh",
+                            "metric_code": "disclaimer_top",
+                            "metric_level": "global",
+                            "title": "重要提示"
+                        }
+                    ],
+                    "key": "disclaimer_top",
+                    "module_code": "big5_core",
+                    "title": "重要提示"
+                },
+                {
+                    "access_level": "free",
+                    "blocks": [
+                        {
+                            "access_level": "free",
+                            "body": "总体画像可信度等级 D（常模状态：CALIBRATED）。",
+                            "bucket": "mid",
+                            "id": "summary_zh_mid",
+                            "metric_code": "overall",
+                            "metric_level": "domain",
+                            "title": "总结"
+                        }
+                    ],
+                    "key": "summary",
+                    "module_code": "big5_core",
+                    "title": "总结"
+                },
+                {
+                    "access_level": "free",
+                    "blocks": [
+                        {
+                            "access_level": "free",
+                            "body": "开放性当前处于第 26 百分位（low）。",
+                            "bucket": "low",
+                            "id": "domain_o_low_zh_cn",
+                            "metric_code": "O",
+                            "metric_level": "domain",
+                            "title": "开放性"
+                        },
+                        {
+                            "access_level": "free",
+                            "body": "尽责性当前处于第 3 百分位（low）。",
+                            "bucket": "low",
+                            "id": "domain_c_low_zh_cn",
+                            "metric_code": "C",
+                            "metric_level": "domain",
+                            "title": "尽责性"
+                        },
+                        {
+                            "access_level": "free",
+                            "body": "外向性当前处于第 52 百分位（mid）。",
+                            "bucket": "mid",
+                            "id": "domain_e_mid_zh_cn",
+                            "metric_code": "E",
+                            "metric_level": "domain",
+                            "title": "外向性"
+                        },
+                        {
+                            "access_level": "free",
+                            "body": "宜人性当前处于第 65 百分位（mid）。",
+                            "bucket": "mid",
+                            "id": "domain_a_mid_zh_cn",
+                            "metric_code": "A",
+                            "metric_level": "domain",
+                            "title": "宜人性"
+                        },
+                        {
+                            "access_level": "free",
+                            "body": "神经质当前处于第 65 百分位（mid）。",
+                            "bucket": "mid",
+                            "id": "domain_n_mid_zh_cn",
+                            "metric_code": "N",
+                            "metric_level": "domain",
+                            "title": "神经质"
+                        }
+                    ],
+                    "key": "domains_overview",
+                    "module_code": "big5_core",
+                    "title": "维度总览"
+                },
+                {
+                    "access_level": "paid",
+                    "blocks": [
+                        {
+                            "access_level": "paid",
+                            "body": "N1 百分位：0。",
+                            "bucket": "all",
+                            "id": "facet_table_n1_zh_cn",
+                            "metric_code": "N1",
+                            "metric_level": "facet",
+                            "title": "N1 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "E1 百分位：57。",
+                            "bucket": "all",
+                            "id": "facet_table_e1_zh_cn",
+                            "metric_code": "E1",
+                            "metric_level": "facet",
+                            "title": "E1 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "O1 百分位：0。",
+                            "bucket": "all",
+                            "id": "facet_table_o1_zh_cn",
+                            "metric_code": "O1",
+                            "metric_level": "facet",
+                            "title": "O1 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "A1 百分位：91。",
+                            "bucket": "all",
+                            "id": "facet_table_a1_zh_cn",
+                            "metric_code": "A1",
+                            "metric_level": "facet",
+                            "title": "A1 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "C1 百分位：0。",
+                            "bucket": "all",
+                            "id": "facet_table_c1_zh_cn",
+                            "metric_code": "C1",
+                            "metric_level": "facet",
+                            "title": "C1 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "N2 百分位：97。",
+                            "bucket": "all",
+                            "id": "facet_table_n2_zh_cn",
+                            "metric_code": "N2",
+                            "metric_level": "facet",
+                            "title": "N2 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "E2 百分位：53。",
+                            "bucket": "all",
+                            "id": "facet_table_e2_zh_cn",
+                            "metric_code": "E2",
+                            "metric_level": "facet",
+                            "title": "E2 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "O2 百分位：46。",
+                            "bucket": "all",
+                            "id": "facet_table_o2_zh_cn",
+                            "metric_code": "O2",
+                            "metric_level": "facet",
+                            "title": "O2 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "A2 百分位：100。",
+                            "bucket": "all",
+                            "id": "facet_table_a2_zh_cn",
+                            "metric_code": "A2",
+                            "metric_level": "facet",
+                            "title": "A2 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "C2 百分位：3。",
+                            "bucket": "all",
+                            "id": "facet_table_c2_zh_cn",
+                            "metric_code": "C2",
+                            "metric_level": "facet",
+                            "title": "C2 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "N3 百分位：8。",
+                            "bucket": "all",
+                            "id": "facet_table_n3_zh_cn",
+                            "metric_code": "N3",
+                            "metric_level": "facet",
+                            "title": "N3 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "E3 百分位：96。",
+                            "bucket": "all",
+                            "id": "facet_table_e3_zh_cn",
+                            "metric_code": "E3",
+                            "metric_level": "facet",
+                            "title": "E3 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "O3 百分位：41。",
+                            "bucket": "all",
+                            "id": "facet_table_o3_zh_cn",
+                            "metric_code": "O3",
+                            "metric_level": "facet",
+                            "title": "O3 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "A3 百分位：31。",
+                            "bucket": "all",
+                            "id": "facet_table_a3_zh_cn",
+                            "metric_code": "A3",
+                            "metric_level": "facet",
+                            "title": "A3 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "C3 百分位：33。",
+                            "bucket": "all",
+                            "id": "facet_table_c3_zh_cn",
+                            "metric_code": "C3",
+                            "metric_level": "facet",
+                            "title": "C3 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "N4 百分位：97。",
+                            "bucket": "all",
+                            "id": "facet_table_n4_zh_cn",
+                            "metric_code": "N4",
+                            "metric_level": "facet",
+                            "title": "N4 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "E4 百分位：4。",
+                            "bucket": "all",
+                            "id": "facet_table_e4_zh_cn",
+                            "metric_code": "E4",
+                            "metric_level": "facet",
+                            "title": "E4 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "O4 百分位：3。",
+                            "bucket": "all",
+                            "id": "facet_table_o4_zh_cn",
+                            "metric_code": "O4",
+                            "metric_level": "facet",
+                            "title": "O4 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "A4 百分位：100。",
+                            "bucket": "all",
+                            "id": "facet_table_a4_zh_cn",
+                            "metric_code": "A4",
+                            "metric_level": "facet",
+                            "title": "A4 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "C4 百分位：31。",
+                            "bucket": "all",
+                            "id": "facet_table_c4_zh_cn",
+                            "metric_code": "C4",
+                            "metric_level": "facet",
+                            "title": "C4 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "N5 百分位：95。",
+                            "bucket": "all",
+                            "id": "facet_table_n5_zh_cn",
+                            "metric_code": "N5",
+                            "metric_level": "facet",
+                            "title": "N5 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "E5 百分位：100。",
+                            "bucket": "all",
+                            "id": "facet_table_e5_zh_cn",
+                            "metric_code": "E5",
+                            "metric_level": "facet",
+                            "title": "E5 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "O5 百分位：89。",
+                            "bucket": "all",
+                            "id": "facet_table_o5_zh_cn",
+                            "metric_code": "O5",
+                            "metric_level": "facet",
+                            "title": "O5 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "A5 百分位：0。",
+                            "bucket": "all",
+                            "id": "facet_table_a5_zh_cn",
+                            "metric_code": "A5",
+                            "metric_level": "facet",
+                            "title": "A5 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "C5 百分位：29。",
+                            "bucket": "all",
+                            "id": "facet_table_c5_zh_cn",
+                            "metric_code": "C5",
+                            "metric_level": "facet",
+                            "title": "C5 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "N6 百分位：96。",
+                            "bucket": "all",
+                            "id": "facet_table_n6_zh_cn",
+                            "metric_code": "N6",
+                            "metric_level": "facet",
+                            "title": "N6 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "E6 百分位：0。",
+                            "bucket": "all",
+                            "id": "facet_table_e6_zh_cn",
+                            "metric_code": "E6",
+                            "metric_level": "facet",
+                            "title": "E6 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "O6 百分位：31。",
+                            "bucket": "all",
+                            "id": "facet_table_o6_zh_cn",
+                            "metric_code": "O6",
+                            "metric_level": "facet",
+                            "title": "O6 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "A6 百分位：22。",
+                            "bucket": "all",
+                            "id": "facet_table_a6_zh_cn",
+                            "metric_code": "A6",
+                            "metric_level": "facet",
+                            "title": "A6 刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "C6 百分位：0。",
+                            "bucket": "all",
+                            "id": "facet_table_c6_zh_cn",
+                            "metric_code": "C6",
+                            "metric_level": "facet",
+                            "title": "C6 刻面"
+                        }
+                    ],
+                    "key": "facet_table",
+                    "module_code": "big5_full",
+                    "title": "细分维度表"
+                },
+                {
+                    "access_level": "paid",
+                    "blocks": [
+                        {
+                            "access_level": "paid",
+                            "body": "A2 百分位 100，当前倾向 high。",
+                            "bucket": "high",
+                            "id": "top_facet_a2_high_zh_cn",
+                            "metric_code": "A2",
+                            "metric_level": "facet",
+                            "title": "A2 优势刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "A4 百分位 100，当前倾向 high。",
+                            "bucket": "high",
+                            "id": "top_facet_a4_high_zh_cn",
+                            "metric_code": "A4",
+                            "metric_level": "facet",
+                            "title": "A4 优势刻面"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "E5 百分位 100，当前倾向 high。",
+                            "bucket": "high",
+                            "id": "top_facet_e5_high_zh_cn",
+                            "metric_code": "E5",
+                            "metric_level": "facet",
+                            "title": "E5 优势刻面"
+                        }
+                    ],
+                    "key": "top_facets",
+                    "module_code": "big5_full",
+                    "title": "优势刻面"
+                },
+                {
+                    "access_level": "paid",
+                    "blocks": [
+                        {
+                            "access_level": "paid",
+                            "body": "A2 百分位为 100，反映 high 区间特征。",
+                            "bucket": "high",
+                            "id": "deep_facet_a2_high_zh_cn",
+                            "metric_code": "A2",
+                            "metric_level": "facet",
+                            "title": "A2 深度解读"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "A4 百分位为 100，反映 high 区间特征。",
+                            "bucket": "high",
+                            "id": "deep_facet_a4_high_zh_cn",
+                            "metric_code": "A4",
+                            "metric_level": "facet",
+                            "title": "A4 深度解读"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "E5 百分位为 100，反映 high 区间特征。",
+                            "bucket": "high",
+                            "id": "deep_facet_e5_high_zh_cn",
+                            "metric_code": "E5",
+                            "metric_level": "facet",
+                            "title": "E5 深度解读"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "N1 百分位为 0，反映 low 区间特征。",
+                            "bucket": "low",
+                            "id": "deep_facet_n1_low_zh_cn",
+                            "metric_code": "N1",
+                            "metric_level": "facet",
+                            "title": "N1 深度解读"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "O1 百分位为 0，反映 low 区间特征。",
+                            "bucket": "low",
+                            "id": "deep_facet_o1_low_zh_cn",
+                            "metric_code": "O1",
+                            "metric_level": "facet",
+                            "title": "O1 深度解读"
+                        },
+                        {
+                            "access_level": "paid",
+                            "body": "C1 百分位为 0，反映 low 区间特征。",
+                            "bucket": "low",
+                            "id": "deep_facet_c1_low_zh_cn",
+                            "metric_code": "C1",
+                            "metric_level": "facet",
+                            "title": "C1 深度解读"
+                        }
+                    ],
+                    "key": "facets_deepdive",
+                    "module_code": "big5_full",
+                    "title": "刻面深度解读"
+                },
+                {
+                    "access_level": "paid",
+                    "blocks": [
+                        {
+                            "access_level": "paid",
+                            "body": "优先关注成长面向：N1, O1, C1。",
+                            "bucket": "mid",
+                            "id": "plan_zh_mid",
+                            "metric_code": "overall",
+                            "metric_level": "domain",
+                            "title": "行动建议"
+                        }
+                    ],
+                    "key": "action_plan",
+                    "module_code": "big5_action_plan",
+                    "title": "行动建议"
+                },
+                {
+                    "access_level": "free",
+                    "blocks": [
+                        {
+                            "access_level": "free",
+                            "body": "本报告仅提供人格教育与自我反思参考，不构成临床评估、诊断或治疗建议。如你正处于心理困扰，请及时寻求专业帮助。",
+                            "bucket": "all",
+                            "id": "disclaimer_zh",
+                            "metric_code": "disclaimer",
+                            "metric_level": "global",
+                            "title": "免责声明"
+                        }
+                    ],
+                    "key": "disclaimer",
+                    "module_code": "big5_core",
+                    "title": "免责声明"
+                }
+            ],
+            "variant": "full"
+        },
+        "variant": "full"
+    },
+    "result_payload": {
+        "attempt_id": "<uuid>",
+        "big5_form_v1": {
+            "estimated_minutes": 15,
+            "form_code": "big5_120",
+            "label": "120-question full version",
+            "question_count": 120,
+            "scale_code": "BIG5_OCEAN",
+            "short_label": "120 questions"
+        },
+        "big5_public_projection_v1": {
+            "_meta": {
+                "engine_version": "big5_ipipneo120_v3.0.0",
+                "narrative_runtime_contract_v1": {
+                    "cost_usd": 0,
+                    "error_code": null,
+                    "fail_open_mode": "off",
+                    "model_version": "mock-model",
+                    "narrative_fingerprint": "993eb1400bcb49e545cbf03a0c52717d97715a31453a2c5c0802ac1688e145ee",
+                    "output_present": {
+                        "narrative_intro": false,
+                        "narrative_summary": false,
+                        "section_narrative_keys": false
+                    },
+                    "prompt_version": "v1.0.0",
+                    "provider_name": "null",
+                    "request": {
+                        "authority_keys": [
+                            "schema_version",
+                            "explainability_summary",
+                            "action_plan_summary",
+                            "trait_vector",
+                            "trait_bands",
+                            "dominant_traits",
+                            "ordered_section_keys",
+                            "scene_fingerprint",
+                            "variant_keys"
+                        ],
+                        "locale": "zh-CN",
+                        "scale_code": "BIG5_OCEAN",
+                        "surface": "big5.report"
+                    },
+                    "response": {
+                        "narrative_intro": "",
+                        "narrative_summary": "",
+                        "section_narrative_keys": []
+                    },
+                    "runtime_mode": "off",
+                    "tokens_in": 0,
+                    "tokens_out": 0,
+                    "truth_guard_fields": [
+                        "type_code",
+                        "identity",
+                        "variant_keys",
+                        "trait_vector",
+                        "trait_bands",
+                        "dominant_traits",
+                        "scene_fingerprint",
+                        "working_life_v1",
+                        "cross_assessment_v1",
+                        "user_state",
+                        "orchestration",
+                        "continuity",
+                        "career_focus_key",
+                        "career_journey_keys",
+                        "career_action_priority_keys"
+                    ],
+                    "version": "narrative_runtime_contract.v1"
+                },
+                "scale_code": "BIG5_OCEAN"
+            },
+            "action_plan_summary": {
+                "actions": [
+                    "先搭一个最小稳定系统，而不是追求完美流程。",
+                    "把重复动作固定到同一个时间窗口。",
+                    "每周只追一项能看见进度的目标。"
+                ],
+                "focus_trait": "C",
+                "focus_trait_label": "尽责性",
+                "headline": "当前最值得优先经营的是 尽责性。",
+                "top_growth_facets": [
+                    "N1",
+                    "O1",
+                    "C1"
+                ]
+            },
+            "comparative_v1": {
+                "cohort_relative_position": {
+                    "key": "upper_mid",
+                    "label": "约高于 65% 的同范围样本",
+                    "summary": "在当前常模版本里，你的 宜人性 高于约 65% 的匿名样本。"
+                },
+                "comparative_contract_version": "comparative.norming.v1",
+                "comparative_fingerprint": "f5ba77d20a2348b217b8d3f9ff65e57e77350cfe95933daabb9700444cc8c999",
+                "enabled": true,
+                "norming_scope": "zh-CN_prod_all_18-60",
+                "norming_source": "FERMATMIND_PROD_ZHCN_2026Q1",
+                "norming_version": "2026Q1_prod_v1",
+                "percentile": {
+                    "metric_key": "A",
+                    "metric_label": "宜人性",
+                    "value": 65
+                },
+                "same_type_contrast": {
+                    "contrast_axes": [
+                        "A"
+                    ],
+                    "key": "same_type.profile_family",
+                    "label": "同类画像中的突出驱动",
+                    "summary": "在 相近画像 这一类画像里，宜人性 仍然是最突出的驱动维度。"
+                },
+                "truth_guard_fields": [
+                    "type_code",
+                    "identity",
+                    "variant_keys",
+                    "scene_fingerprint",
+                    "working_life_v1",
+                    "cross_assessment_v1",
+                    "user_state",
+                    "orchestration",
+                    "continuity",
+                    "trait_vector",
+                    "trait_bands",
+                    "dominant_traits",
+                    "action_plan_summary",
+                    "controlled_narrative_v1",
+                    "cultural_calibration_v1"
+                ],
+                "version": "comparative.norming.v1"
+            },
+            "controlled_narrative_v1": {
+                "enabled": false,
+                "fail_open_mode": "off",
+                "model_version": "mock-model",
+                "narrative_contract_version": "controlled_narrative.v1",
+                "narrative_fingerprint": "993eb1400bcb49e545cbf03a0c52717d97715a31453a2c5c0802ac1688e145ee",
+                "narrative_intro": "",
+                "narrative_summary": "",
+                "prompt_version": "v1.0.0",
+                "provider_name": "null",
+                "runtime_contract_version": "narrative_runtime_contract.v1",
+                "runtime_mode": "off",
+                "section_narrative_keys": [],
+                "truth_guard_fields": [
+                    "type_code",
+                    "identity",
+                    "variant_keys",
+                    "trait_vector",
+                    "trait_bands",
+                    "dominant_traits",
+                    "scene_fingerprint",
+                    "working_life_v1",
+                    "cross_assessment_v1",
+                    "user_state",
+                    "orchestration",
+                    "continuity",
+                    "career_focus_key",
+                    "career_journey_keys",
+                    "career_action_priority_keys"
+                ],
+                "version": "controlled_narrative.v1"
+            },
+            "cultural_calibration_v1": {
+                "calibrated_section_keys": [
+                    "result.summary",
+                    "traits.overview"
+                ],
+                "calibration_contract_version": "cultural_calibration.v1",
+                "calibration_fingerprint": "cbd47a8fcb250a46dbf82cce2d99bfaee8f2e68f1ccd3f63de44ace6ce1b0503",
+                "calibration_policy_version": "runtime.locale_policy.v1",
+                "calibration_source": "runtime_policy",
+                "cultural_context": "CN_MAINLAND.zh-CN",
+                "enabled": true,
+                "locale_context": "zh-CN",
+                "narrative_overrides": {
+                    "intro": "语境校准：把 Big Five 当成协作与环境偏好的线索，而不是固定标签。",
+                    "summary": "在中文工作语境里，更适合把 宜人性 理解成情境偏好与互动节奏，而不是一句定性判断。"
+                },
+                "section_overrides": {
+                    "traits.overview": {
+                        "body": "在当前语境里，先说明这些特质会怎样影响协作、边界和环境适配，通常比直接贴标签更容易被用户吸收。",
+                        "section_key": "traits.overview",
+                        "title": "语境校准：先讲协作含义，再讲特质名称"
+                    }
+                },
+                "truth_guard_fields": [
+                    "type_code",
+                    "identity",
+                    "variant_keys",
+                    "scene_fingerprint",
+                    "working_life_v1",
+                    "cross_assessment_v1",
+                    "user_state",
+                    "orchestration",
+                    "continuity",
+                    "trait_vector",
+                    "trait_bands",
+                    "dominant_traits",
+                    "action_plan_summary"
+                ],
+                "version": "cultural_calibration.v1",
+                "working_life_summary": ""
+            },
+            "dominant_traits": [
+                {
+                    "band": "mid",
+                    "key": "A",
+                    "label": "宜人性",
+                    "percentile": 65,
+                    "rank": 1
+                },
+                {
+                    "band": "mid",
+                    "key": "N",
+                    "label": "情绪性",
+                    "percentile": 65,
+                    "rank": 2
+                },
+                {
+                    "band": "mid",
+                    "key": "E",
+                    "label": "外向性",
+                    "percentile": 52,
+                    "rank": 3
+                }
+            ],
+            "explainability_summary": {
+                "headline": "这次画像主要由宜人性驱动。",
+                "reasons": [
+                    "宜人性位于第 65 百分位，形成了这次结果的第一主轴。",
+                    "情绪性作为第二主轴，解释了你在不同场景中的稳定表现。",
+                    "高分刻面集中在 A2 / A4 / E5，说明这不是单点波动，而是有结构的特征组合。"
+                ],
+                "top_strength_facets": [
+                    "A2",
+                    "A4",
+                    "E5"
+                ]
+            },
+            "facet_vector": [
+                {
+                    "bucket": "low",
+                    "domain": "N",
+                    "key": "N1",
+                    "label": "N1 Anxiety",
+                    "mean": 1,
+                    "percentile": 0,
+                    "slug": "anxiety"
+                },
+                {
+                    "bucket": "mid",
+                    "domain": "E",
+                    "key": "E1",
+                    "label": "E1 Friendliness",
+                    "mean": 3,
+                    "percentile": 57,
+                    "slug": "friendliness"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "O",
+                    "key": "O1",
+                    "label": "O1 Imagination",
+                    "mean": 1,
+                    "percentile": 0,
+                    "slug": "imagination"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "A",
+                    "key": "A1",
+                    "label": "A1 Trust",
+                    "mean": 4,
+                    "percentile": 91,
+                    "slug": "trust"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "C",
+                    "key": "C1",
+                    "label": "C1 Self Efficacy",
+                    "mean": 1,
+                    "percentile": 0,
+                    "slug": "self_efficacy"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "N",
+                    "key": "N2",
+                    "label": "N2 Anger",
+                    "mean": 4,
+                    "percentile": 97,
+                    "slug": "anger"
+                },
+                {
+                    "bucket": "mid",
+                    "domain": "E",
+                    "key": "E2",
+                    "label": "E2 Gregariousness",
+                    "mean": 3,
+                    "percentile": 53,
+                    "slug": "gregariousness"
+                },
+                {
+                    "bucket": "mid",
+                    "domain": "O",
+                    "key": "O2",
+                    "label": "O2 Artistic Interests",
+                    "mean": 3,
+                    "percentile": 46,
+                    "slug": "artistic_interests"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "A",
+                    "key": "A2",
+                    "label": "A2 Morality",
+                    "mean": 5,
+                    "percentile": 100,
+                    "slug": "morality"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "C",
+                    "key": "C2",
+                    "label": "C2 Orderliness",
+                    "mean": 2,
+                    "percentile": 3,
+                    "slug": "orderliness"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "N",
+                    "key": "N3",
+                    "label": "N3 Depression",
+                    "mean": 2,
+                    "percentile": 8,
+                    "slug": "depression"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "E",
+                    "key": "E3",
+                    "label": "E3 Assertiveness",
+                    "mean": 4,
+                    "percentile": 96,
+                    "slug": "assertiveness"
+                },
+                {
+                    "bucket": "mid",
+                    "domain": "O",
+                    "key": "O3",
+                    "label": "O3 Emotionality",
+                    "mean": 3,
+                    "percentile": 41,
+                    "slug": "emotionality"
+                },
+                {
+                    "bucket": "mid",
+                    "domain": "A",
+                    "key": "A3",
+                    "label": "A3 Altruism",
+                    "mean": 3,
+                    "percentile": 31,
+                    "slug": "altruism"
+                },
+                {
+                    "bucket": "mid",
+                    "domain": "C",
+                    "key": "C3",
+                    "label": "C3 Dutifulness",
+                    "mean": 3,
+                    "percentile": 33,
+                    "slug": "dutifulness"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "N",
+                    "key": "N4",
+                    "label": "N4 Self Consciousness",
+                    "mean": 4,
+                    "percentile": 97,
+                    "slug": "self_consciousness"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "E",
+                    "key": "E4",
+                    "label": "E4 Activity Level",
+                    "mean": 2,
+                    "percentile": 4,
+                    "slug": "activity_level"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "O",
+                    "key": "O4",
+                    "label": "O4 Adventurousness",
+                    "mean": 2,
+                    "percentile": 3,
+                    "slug": "adventurousness"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "A",
+                    "key": "A4",
+                    "label": "A4 Cooperation",
+                    "mean": 5,
+                    "percentile": 100,
+                    "slug": "cooperation"
+                },
+                {
+                    "bucket": "mid",
+                    "domain": "C",
+                    "key": "C4",
+                    "label": "C4 Achievement Striving",
+                    "mean": 3,
+                    "percentile": 31,
+                    "slug": "achievement_striving"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "N",
+                    "key": "N5",
+                    "label": "N5 Immoderation",
+                    "mean": 4,
+                    "percentile": 95,
+                    "slug": "immoderation"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "E",
+                    "key": "E5",
+                    "label": "E5 Excitement Seeking",
+                    "mean": 5,
+                    "percentile": 100,
+                    "slug": "excitement_seeking"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "O",
+                    "key": "O5",
+                    "label": "O5 Intellect",
+                    "mean": 4,
+                    "percentile": 89,
+                    "slug": "intellect"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "A",
+                    "key": "A5",
+                    "label": "A5 Modesty",
+                    "mean": 1,
+                    "percentile": 0,
+                    "slug": "modesty"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "C",
+                    "key": "C5",
+                    "label": "C5 Self Discipline",
+                    "mean": 3,
+                    "percentile": 29,
+                    "slug": "self_discipline"
+                },
+                {
+                    "bucket": "high",
+                    "domain": "N",
+                    "key": "N6",
+                    "label": "N6 Vulnerability",
+                    "mean": 4,
+                    "percentile": 96,
+                    "slug": "vulnerability"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "E",
+                    "key": "E6",
+                    "label": "E6 Cheerfulness",
+                    "mean": 1,
+                    "percentile": 0,
+                    "slug": "cheerfulness"
+                },
+                {
+                    "bucket": "mid",
+                    "domain": "O",
+                    "key": "O6",
+                    "label": "O6 Liberalism",
+                    "mean": 3,
+                    "percentile": 31,
+                    "slug": "liberalism"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "A",
+                    "key": "A6",
+                    "label": "A6 Sympathy",
+                    "mean": 3,
+                    "percentile": 22,
+                    "slug": "sympathy"
+                },
+                {
+                    "bucket": "low",
+                    "domain": "C",
+                    "key": "C6",
+                    "label": "C6 Cautiousness",
+                    "mean": 1,
+                    "percentile": 0,
+                    "slug": "cautiousness"
+                }
+            ],
+            "ordered_section_keys": [
+                "traits.overview",
+                "traits.why_this_profile",
+                "relationships.interpersonal_style",
+                "career.work_style",
+                "growth.next_actions"
+            ],
+            "scene_fingerprint": {
+                "cooperation": "balanced",
+                "novelty": "grounded",
+                "social_energy": "balanced",
+                "stress_posture": "responsive",
+                "structure": "adaptive"
+            },
+            "schema_version": "big5.public_projection.v1",
+            "sections": [
+                {
+                    "access_level": "free",
+                    "blocks": [
+                        {
+                            "body": "你这次的画像主要由宜人性和情绪性共同决定。它不是一句标签，而是五维组合的结果。",
+                            "kind": "paragraph",
+                            "title": "这份 Big Five 画像的主轴"
+                        },
+                        {
+                            "body": "开放性：第 26 百分位，当前更偏 更务实。\n尽责性：第 3 百分位，当前更偏 更灵活。\n外向性：第 52 百分位，当前更偏 相对平衡。\n宜人性：第 65 百分位，当前更偏 相对平衡。\n情绪性：第 65 百分位，当前更偏 相对敏感。",
+                            "kind": "bullets",
+                            "title": "五维带宽"
+                        }
+                    ],
+                    "key": "traits.overview",
+                    "module_code": "big5_core",
+                    "title": "人格总览"
+                },
+                {
+                    "access_level": "free",
+                    "blocks": [
+                        {
+                            "body": "这次画像主要由宜人性驱动。",
+                            "kind": "paragraph",
+                            "tags": [],
+                            "title": "解释主线"
+                        },
+                        {
+                            "body": "宜人性位于第 65 百分位，形成了这次结果的第一主轴。\n情绪性作为第二主轴，解释了你在不同场景中的稳定表现。\n高分刻面集中在 A2 / A4 / E5，说明这不是单点波动，而是有结构的特征组合。",
+                            "kind": "bullets",
+                            "title": "为什么会命中这组特征"
+                        }
+                    ],
+                    "key": "traits.why_this_profile",
+                    "module_code": "big5_core",
+                    "title": "为什么会是这个画像"
+                },
+                {
+                    "access_level": "paid",
+                    "blocks": [
+                        {
+                            "body": "在互动里，你更偏相对平衡的社交能量、相对平衡的合作方式，以及相对敏感的压力姿态。",
+                            "kind": "paragraph",
+                            "title": "互动场景画像"
+                        },
+                        {
+                            "body": "在关系里，你通常更偏相对平衡地处理互动。\n遇到分歧时，你更可能用相对平衡的方式推进沟通。\n压力上来时，关系体验会呈现相对敏感的姿态。",
+                            "kind": "bullets",
+                            "title": "关系提示"
+                        }
+                    ],
+                    "key": "relationships.interpersonal_style",
+                    "module_code": "big5_full",
+                    "title": "关系与互动风格"
+                },
+                {
+                    "access_level": "paid",
+                    "blocks": [
+                        {
+                            "body": "工作上，你更适合更务实的变化、更灵活的结构，以及相对平衡的对外节奏。",
+                            "kind": "paragraph",
+                            "title": "工作场景指纹"
+                        },
+                        {
+                            "body": "面对变化时，你更适合更务实的节奏。\n执行任务时，你更习惯更灵活的结构。\n协作节奏上，你通常会选择相对平衡的对外方式。",
+                            "kind": "bullets",
+                            "title": "工作提示"
+                        }
+                    ],
+                    "key": "career.work_style",
+                    "module_code": "big5_full",
+                    "title": "工作风格与场景"
+                },
+                {
+                    "access_level": "paid",
+                    "blocks": [
+                        {
+                            "body": "当前最值得优先经营的是 尽责性。",
+                            "kind": "paragraph",
+                            "title": "接下来优先修什么"
+                        },
+                        {
+                            "body": "先搭一个最小稳定系统，而不是追求完美流程。\n把重复动作固定到同一个时间窗口。\n每周只追一项能看见进度的目标。",
+                            "kind": "bullets",
+                            "title": "行动建议"
+                        }
+                    ],
+                    "key": "growth.next_actions",
+                    "module_code": "big5_action_plan",
+                    "title": "成长与下一步动作"
+                }
+            ],
+            "trait_bands": {
+                "A": "mid",
+                "C": "low",
+                "E": "mid",
+                "N": "mid",
+                "O": "low"
+            },
+            "trait_vector": [
+                {
+                    "band": "low",
+                    "band_label": "更务实",
+                    "key": "O",
+                    "label": "开放性",
+                    "mean": 2.67,
+                    "percentile": 26
+                },
+                {
+                    "band": "low",
+                    "band_label": "更灵活",
+                    "key": "C",
+                    "label": "尽责性",
+                    "mean": 2.17,
+                    "percentile": 3
+                },
+                {
+                    "band": "mid",
+                    "band_label": "相对平衡",
+                    "key": "E",
+                    "label": "外向性",
+                    "mean": 3,
+                    "percentile": 52
+                },
+                {
+                    "band": "mid",
+                    "band_label": "相对平衡",
+                    "key": "A",
+                    "label": "宜人性",
+                    "mean": 3.5,
+                    "percentile": 65
+                },
+                {
+                    "band": "mid",
+                    "band_label": "相对敏感",
+                    "key": "N",
+                    "label": "情绪性",
+                    "mean": 3.17,
+                    "percentile": 65
+                }
+            ],
+            "variant_keys": [
+                "big5:o_low",
+                "big5:c_low",
+                "big5:e_mid",
+                "big5:a_mid",
+                "big5:n_mid",
+                "band:o.low",
+                "band:c.low",
+                "band:e.mid",
+                "band:a.mid",
+                "band:n.mid"
+            ]
+        },
+        "comparative_v1": {
+            "cohort_relative_position": {
+                "key": "upper_mid",
+                "label": "约高于 65% 的同范围样本",
+                "summary": "在当前常模版本里，你的 宜人性 高于约 65% 的匿名样本。"
+            },
+            "comparative_contract_version": "comparative.norming.v1",
+            "comparative_fingerprint": "f5ba77d20a2348b217b8d3f9ff65e57e77350cfe95933daabb9700444cc8c999",
+            "enabled": true,
+            "norming_scope": "zh-CN_prod_all_18-60",
+            "norming_source": "FERMATMIND_PROD_ZHCN_2026Q1",
+            "norming_version": "2026Q1_prod_v1",
+            "percentile": {
+                "metric_key": "A",
+                "metric_label": "宜人性",
+                "value": 65
+            },
+            "same_type_contrast": {
+                "contrast_axes": [
+                    "A"
+                ],
+                "key": "same_type.profile_family",
+                "label": "同类画像中的突出驱动",
+                "summary": "在 相近画像 这一类画像里，宜人性 仍然是最突出的驱动维度。"
+            },
+            "truth_guard_fields": [
+                "type_code",
+                "identity",
+                "variant_keys",
+                "scene_fingerprint",
+                "working_life_v1",
+                "cross_assessment_v1",
+                "user_state",
+                "orchestration",
+                "continuity",
+                "trait_vector",
+                "trait_bands",
+                "dominant_traits",
+                "action_plan_summary",
+                "controlled_narrative_v1",
+                "cultural_calibration_v1"
+            ],
+            "version": "comparative.norming.v1"
+        },
+        "controlled_narrative_v1": {
+            "enabled": false,
+            "fail_open_mode": "off",
+            "model_version": "mock-model",
+            "narrative_contract_version": "controlled_narrative.v1",
+            "narrative_fingerprint": "993eb1400bcb49e545cbf03a0c52717d97715a31453a2c5c0802ac1688e145ee",
+            "narrative_intro": "",
+            "narrative_summary": "",
+            "prompt_version": "v1.0.0",
+            "provider_name": "null",
+            "runtime_contract_version": "narrative_runtime_contract.v1",
+            "runtime_mode": "off",
+            "section_narrative_keys": [],
+            "truth_guard_fields": [
+                "type_code",
+                "identity",
+                "variant_keys",
+                "trait_vector",
+                "trait_bands",
+                "dominant_traits",
+                "scene_fingerprint",
+                "working_life_v1",
+                "cross_assessment_v1",
+                "user_state",
+                "orchestration",
+                "continuity",
+                "career_focus_key",
+                "career_journey_keys",
+                "career_action_priority_keys"
+            ],
+            "version": "controlled_narrative.v1"
+        },
+        "cultural_calibration_v1": {
+            "calibrated_section_keys": [
+                "result.summary",
+                "traits.overview"
+            ],
+            "calibration_contract_version": "cultural_calibration.v1",
+            "calibration_fingerprint": "cbd47a8fcb250a46dbf82cce2d99bfaee8f2e68f1ccd3f63de44ace6ce1b0503",
+            "calibration_policy_version": "runtime.locale_policy.v1",
+            "calibration_source": "runtime_policy",
+            "cultural_context": "CN_MAINLAND.zh-CN",
+            "enabled": true,
+            "locale_context": "zh-CN",
+            "narrative_overrides": {
+                "intro": "语境校准：把 Big Five 当成协作与环境偏好的线索，而不是固定标签。",
+                "summary": "在中文工作语境里，更适合把 宜人性 理解成情境偏好与互动节奏，而不是一句定性判断。"
+            },
+            "section_overrides": {
+                "traits.overview": {
+                    "body": "在当前语境里，先说明这些特质会怎样影响协作、边界和环境适配，通常比直接贴标签更容易被用户吸收。",
+                    "section_key": "traits.overview",
+                    "title": "语境校准：先讲协作含义，再讲特质名称"
+                }
+            },
+            "truth_guard_fields": [
+                "type_code",
+                "identity",
+                "variant_keys",
+                "scene_fingerprint",
+                "working_life_v1",
+                "cross_assessment_v1",
+                "user_state",
+                "orchestration",
+                "continuity",
+                "trait_vector",
+                "trait_bands",
+                "dominant_traits",
+                "action_plan_summary"
+            ],
+            "version": "cultural_calibration.v1",
+            "working_life_summary": ""
+        },
+        "meta": {
+            "content_package_version": "v1",
+            "dir_version": "v1",
+            "pack_id": "BIG5_OCEAN",
+            "report_engine_version": "v1.2",
+            "scale_code": "BIG5_OCEAN",
+            "scale_code_legacy": "BIG5_OCEAN",
+            "scale_code_v2": "BIG_FIVE_OCEAN_MODEL",
+            "scale_uid": "<uuid>",
+            "scoring_spec_version": "big5_spec_2026Q1_v1"
+        },
+        "ok": true,
+        "result": {
+            "axis_scores_json": {
+                "axis_states": [],
+                "score_result": {
+                    "engine_version": "big5_ipipneo120_v3.0.0",
+                    "facts": {
+                        "domain_buckets": {
+                            "A": "mid",
+                            "C": "low",
+                            "E": "mid",
+                            "N": "mid",
+                            "O": "low"
+                        },
+                        "domain_sd_of_facets": {
+                            "A": 1.384,
+                            "C": 0.898,
+                            "E": 1.291,
+                            "N": 1.213,
+                            "O": 0.943
+                        },
+                        "extreme_facets_high": [
+                            "A1",
+                            "N2",
+                            "A2",
+                            "E3",
+                            "N4",
+                            "A4",
+                            "N5",
+                            "E5",
+                            "N6"
+                        ],
+                        "extreme_facets_low": [
+                            "N1",
+                            "O1",
+                            "C1",
+                            "C2",
+                            "N3",
+                            "E4",
+                            "O4",
+                            "A5",
+                            "E6",
+                            "C6"
+                        ],
+                        "facet_buckets": {
+                            "A1": "high",
+                            "A2": "high",
+                            "A3": "mid",
+                            "A4": "high",
+                            "A5": "low",
+                            "A6": "low",
+                            "C1": "low",
+                            "C2": "low",
+                            "C3": "mid",
+                            "C4": "mid",
+                            "C5": "low",
+                            "C6": "low",
+                            "E1": "mid",
+                            "E2": "mid",
+                            "E3": "high",
+                            "E4": "low",
+                            "E5": "high",
+                            "E6": "low",
+                            "N1": "low",
+                            "N2": "high",
+                            "N3": "low",
+                            "N4": "high",
+                            "N5": "high",
+                            "N6": "high",
+                            "O1": "low",
+                            "O2": "mid",
+                            "O3": "mid",
+                            "O4": "low",
+                            "O5": "high",
+                            "O6": "mid"
+                        },
+                        "report_tone": "cautious",
+                        "top_growth_facets": [
+                            "N1",
+                            "O1",
+                            "C1"
+                        ],
+                        "top_growth_facets_text": "N1, O1, C1",
+                        "top_strength_facets": [
+                            "A2",
+                            "A4",
+                            "E5"
+                        ]
+                    },
+                    "item_bank_version": "big5_ipipneo120_bilingual_v1",
+                    "norms": {
+                        "group_id": "zh-CN_prod_all_18-60",
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "status": "CALIBRATED"
+                    },
+                    "quality": {
+                        "flags": [
+                            "SPEEDING",
+                            "EXTREME_RESPONDING",
+                            "ATTENTION_CHECK_FAILED"
+                        ],
+                        "level": "D",
+                        "metrics": {
+                            "acquiescence_index": 0,
+                            "completion_rate": 1,
+                            "extreme_rate": 1,
+                            "facet_inconsistency_mean": 1.2167,
+                            "longstring_max": 1,
+                            "neutral_rate": 0,
+                            "time_per_item_avg": 0,
+                            "time_seconds_total": 0
+                        }
+                    },
+                    "raw_scores": {
+                        "domains_mean": {
+                            "A": 3.5,
+                            "C": 2.17,
+                            "E": 3,
+                            "N": 3.17,
+                            "O": 2.67
+                        },
+                        "facets_mean": {
+                            "A1": 4,
+                            "A2": 5,
+                            "A3": 3,
+                            "A4": 5,
+                            "A5": 1,
+                            "A6": 3,
+                            "C1": 1,
+                            "C2": 2,
+                            "C3": 3,
+                            "C4": 3,
+                            "C5": 3,
+                            "C6": 1,
+                            "E1": 3,
+                            "E2": 3,
+                            "E3": 4,
+                            "E4": 2,
+                            "E5": 5,
+                            "E6": 1,
+                            "N1": 1,
+                            "N2": 4,
+                            "N3": 2,
+                            "N4": 4,
+                            "N5": 4,
+                            "N6": 4,
+                            "O1": 1,
+                            "O2": 3,
+                            "O3": 3,
+                            "O4": 2,
+                            "O5": 4,
+                            "O6": 3
+                        }
+                    },
+                    "scale_code": "BIG5_OCEAN",
+                    "score_method": "big5_ipipneo120_v3",
+                    "scores_0_100": {
+                        "domains_percentile": {
+                            "A": 65,
+                            "C": 3,
+                            "E": 52,
+                            "N": 65,
+                            "O": 26
+                        },
+                        "facets_percentile": {
+                            "A1": 91,
+                            "A2": 100,
+                            "A3": 31,
+                            "A4": 100,
+                            "A5": 0,
+                            "A6": 22,
+                            "C1": 0,
+                            "C2": 3,
+                            "C3": 33,
+                            "C4": 31,
+                            "C5": 29,
+                            "C6": 0,
+                            "E1": 57,
+                            "E2": 53,
+                            "E3": 96,
+                            "E4": 4,
+                            "E5": 100,
+                            "E6": 0,
+                            "N1": 0,
+                            "N2": 97,
+                            "N3": 8,
+                            "N4": 97,
+                            "N5": 95,
+                            "N6": 96,
+                            "O1": 0,
+                            "O2": 46,
+                            "O3": 41,
+                            "O4": 3,
+                            "O5": 89,
+                            "O6": 31
+                        }
+                    },
+                    "spec_version": "big5_spec_2026Q1_v1",
+                    "standardized_scores": {
+                        "domains_t": {
+                            "A": 54,
+                            "C": 31,
+                            "E": 51,
+                            "N": 54,
+                            "O": 43
+                        },
+                        "domains_z": {
+                            "A": 0.39,
+                            "C": -1.95,
+                            "E": 0.06,
+                            "N": 0.38,
+                            "O": -0.65
+                        },
+                        "facets_t": {
+                            "A1": 63,
+                            "A2": 78,
+                            "A3": 45,
+                            "A4": 77,
+                            "A5": 15,
+                            "A6": 42,
+                            "C1": 15,
+                            "C2": 31,
+                            "C3": 46,
+                            "C4": 45,
+                            "C5": 44,
+                            "C6": 15,
+                            "E1": 52,
+                            "E2": 51,
+                            "E3": 67,
+                            "E4": 33,
+                            "E5": 80,
+                            "E6": 15,
+                            "N1": 22,
+                            "N2": 69,
+                            "N3": 36,
+                            "N4": 69,
+                            "N5": 67,
+                            "N6": 68,
+                            "O1": 17,
+                            "O2": 49,
+                            "O3": 48,
+                            "O4": 31,
+                            "O5": 62,
+                            "O6": 45
+                        },
+                        "facets_z": {
+                            "A1": 1.33,
+                            "A2": 2.75,
+                            "A3": -0.5,
+                            "A4": 2.72,
+                            "A5": -3.5,
+                            "A6": -0.76,
+                            "C1": -3.5,
+                            "C2": -1.88,
+                            "C3": -0.45,
+                            "C4": -0.49,
+                            "C5": -0.56,
+                            "C6": -3.5,
+                            "E1": 0.16,
+                            "E2": 0.08,
+                            "E3": 1.72,
+                            "E4": -1.72,
+                            "E5": 2.97,
+                            "E6": -3.5,
+                            "N1": -2.82,
+                            "N2": 1.94,
+                            "N3": -1.41,
+                            "N4": 1.87,
+                            "N5": 1.69,
+                            "N6": 1.78,
+                            "O1": -3.33,
+                            "O2": -0.11,
+                            "O3": -0.22,
+                            "O4": -1.93,
+                            "O5": 1.2,
+                            "O6": -0.48
+                        }
+                    },
+                    "tags": [
+                        "big5:o_low",
+                        "big5:c_low",
+                        "big5:e_mid",
+                        "big5:a_mid",
+                        "big5:n_mid",
+                        "facet:n1_anxiety_extreme_low",
+                        "facet:e1_friendliness_mid",
+                        "facet:o1_imagination_extreme_low",
+                        "facet:a1_trust_extreme_high",
+                        "facet:c1_self_efficacy_extreme_low",
+                        "facet:n2_anger_extreme_high",
+                        "facet:e2_gregariousness_mid",
+                        "facet:o2_artistic_interests_mid",
+                        "facet:a2_morality_extreme_high",
+                        "facet:c2_orderliness_extreme_low",
+                        "facet:n3_depression_extreme_low",
+                        "facet:e3_assertiveness_extreme_high",
+                        "facet:o3_emotionality_mid",
+                        "facet:a3_altruism_mid",
+                        "facet:c3_dutifulness_mid",
+                        "facet:n4_self_consciousness_extreme_high",
+                        "facet:e4_activity_level_extreme_low",
+                        "facet:o4_adventurousness_extreme_low",
+                        "facet:a4_cooperation_extreme_high",
+                        "facet:c4_achievement_striving_mid",
+                        "facet:n5_immoderation_extreme_high",
+                        "facet:e5_excitement_seeking_extreme_high",
+                        "facet:o5_intellect_high",
+                        "facet:a5_modesty_extreme_low",
+                        "facet:c5_self_discipline_low",
+                        "facet:n6_vulnerability_extreme_high",
+                        "facet:e6_cheerfulness_extreme_low",
+                        "facet:o6_liberalism_mid",
+                        "facet:a6_sympathy_low",
+                        "facet:c6_cautiousness_extreme_low"
+                    ]
+                },
+                "scores_json": {
+                    "domains_mean": {
+                        "A": 3.5,
+                        "C": 2.17,
+                        "E": 3,
+                        "N": 3.17,
+                        "O": 2.67
+                    },
+                    "facets_mean": {
+                        "A1": 4,
+                        "A2": 5,
+                        "A3": 3,
+                        "A4": 5,
+                        "A5": 1,
+                        "A6": 3,
+                        "C1": 1,
+                        "C2": 2,
+                        "C3": 3,
+                        "C4": 3,
+                        "C5": 3,
+                        "C6": 1,
+                        "E1": 3,
+                        "E2": 3,
+                        "E3": 4,
+                        "E4": 2,
+                        "E5": 5,
+                        "E6": 1,
+                        "N1": 1,
+                        "N2": 4,
+                        "N3": 2,
+                        "N4": 4,
+                        "N5": 4,
+                        "N6": 4,
+                        "O1": 1,
+                        "O2": 3,
+                        "O3": 3,
+                        "O4": 2,
+                        "O5": 4,
+                        "O6": 3
+                    }
+                },
+                "scores_pct": {
+                    "A": 65,
+                    "C": 3,
+                    "E": 52,
+                    "N": 65,
+                    "O": 26
+                }
+            },
+            "breakdown_json": {
+                "answer_count": 120,
+                "score_method": "big5_ipipneo120_v3",
+                "score_result": {
+                    "engine_version": "big5_ipipneo120_v3.0.0",
+                    "facts": {
+                        "domain_buckets": {
+                            "A": "mid",
+                            "C": "low",
+                            "E": "mid",
+                            "N": "mid",
+                            "O": "low"
+                        },
+                        "domain_sd_of_facets": {
+                            "A": 1.384,
+                            "C": 0.898,
+                            "E": 1.291,
+                            "N": 1.213,
+                            "O": 0.943
+                        },
+                        "extreme_facets_high": [
+                            "A1",
+                            "N2",
+                            "A2",
+                            "E3",
+                            "N4",
+                            "A4",
+                            "N5",
+                            "E5",
+                            "N6"
+                        ],
+                        "extreme_facets_low": [
+                            "N1",
+                            "O1",
+                            "C1",
+                            "C2",
+                            "N3",
+                            "E4",
+                            "O4",
+                            "A5",
+                            "E6",
+                            "C6"
+                        ],
+                        "facet_buckets": {
+                            "A1": "high",
+                            "A2": "high",
+                            "A3": "mid",
+                            "A4": "high",
+                            "A5": "low",
+                            "A6": "low",
+                            "C1": "low",
+                            "C2": "low",
+                            "C3": "mid",
+                            "C4": "mid",
+                            "C5": "low",
+                            "C6": "low",
+                            "E1": "mid",
+                            "E2": "mid",
+                            "E3": "high",
+                            "E4": "low",
+                            "E5": "high",
+                            "E6": "low",
+                            "N1": "low",
+                            "N2": "high",
+                            "N3": "low",
+                            "N4": "high",
+                            "N5": "high",
+                            "N6": "high",
+                            "O1": "low",
+                            "O2": "mid",
+                            "O3": "mid",
+                            "O4": "low",
+                            "O5": "high",
+                            "O6": "mid"
+                        },
+                        "report_tone": "cautious",
+                        "top_growth_facets": [
+                            "N1",
+                            "O1",
+                            "C1"
+                        ],
+                        "top_growth_facets_text": "N1, O1, C1",
+                        "top_strength_facets": [
+                            "A2",
+                            "A4",
+                            "E5"
+                        ]
+                    },
+                    "item_bank_version": "big5_ipipneo120_bilingual_v1",
+                    "norms": {
+                        "group_id": "zh-CN_prod_all_18-60",
+                        "norms_version": "2026Q1_prod_v1",
+                        "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                        "status": "CALIBRATED"
+                    },
+                    "quality": {
+                        "flags": [
+                            "SPEEDING",
+                            "EXTREME_RESPONDING",
+                            "ATTENTION_CHECK_FAILED"
+                        ],
+                        "level": "D",
+                        "metrics": {
+                            "acquiescence_index": 0,
+                            "completion_rate": 1,
+                            "extreme_rate": 1,
+                            "facet_inconsistency_mean": 1.2167,
+                            "longstring_max": 1,
+                            "neutral_rate": 0,
+                            "time_per_item_avg": 0,
+                            "time_seconds_total": 0
+                        }
+                    },
+                    "raw_scores": {
+                        "domains_mean": {
+                            "A": 3.5,
+                            "C": 2.17,
+                            "E": 3,
+                            "N": 3.17,
+                            "O": 2.67
+                        },
+                        "facets_mean": {
+                            "A1": 4,
+                            "A2": 5,
+                            "A3": 3,
+                            "A4": 5,
+                            "A5": 1,
+                            "A6": 3,
+                            "C1": 1,
+                            "C2": 2,
+                            "C3": 3,
+                            "C4": 3,
+                            "C5": 3,
+                            "C6": 1,
+                            "E1": 3,
+                            "E2": 3,
+                            "E3": 4,
+                            "E4": 2,
+                            "E5": 5,
+                            "E6": 1,
+                            "N1": 1,
+                            "N2": 4,
+                            "N3": 2,
+                            "N4": 4,
+                            "N5": 4,
+                            "N6": 4,
+                            "O1": 1,
+                            "O2": 3,
+                            "O3": 3,
+                            "O4": 2,
+                            "O5": 4,
+                            "O6": 3
+                        }
+                    },
+                    "scale_code": "BIG5_OCEAN",
+                    "score_method": "big5_ipipneo120_v3",
+                    "scores_0_100": {
+                        "domains_percentile": {
+                            "A": 65,
+                            "C": 3,
+                            "E": 52,
+                            "N": 65,
+                            "O": 26
+                        },
+                        "facets_percentile": {
+                            "A1": 91,
+                            "A2": 100,
+                            "A3": 31,
+                            "A4": 100,
+                            "A5": 0,
+                            "A6": 22,
+                            "C1": 0,
+                            "C2": 3,
+                            "C3": 33,
+                            "C4": 31,
+                            "C5": 29,
+                            "C6": 0,
+                            "E1": 57,
+                            "E2": 53,
+                            "E3": 96,
+                            "E4": 4,
+                            "E5": 100,
+                            "E6": 0,
+                            "N1": 0,
+                            "N2": 97,
+                            "N3": 8,
+                            "N4": 97,
+                            "N5": 95,
+                            "N6": 96,
+                            "O1": 0,
+                            "O2": 46,
+                            "O3": 41,
+                            "O4": 3,
+                            "O5": 89,
+                            "O6": 31
+                        }
+                    },
+                    "spec_version": "big5_spec_2026Q1_v1",
+                    "standardized_scores": {
+                        "domains_t": {
+                            "A": 54,
+                            "C": 31,
+                            "E": 51,
+                            "N": 54,
+                            "O": 43
+                        },
+                        "domains_z": {
+                            "A": 0.39,
+                            "C": -1.95,
+                            "E": 0.06,
+                            "N": 0.38,
+                            "O": -0.65
+                        },
+                        "facets_t": {
+                            "A1": 63,
+                            "A2": 78,
+                            "A3": 45,
+                            "A4": 77,
+                            "A5": 15,
+                            "A6": 42,
+                            "C1": 15,
+                            "C2": 31,
+                            "C3": 46,
+                            "C4": 45,
+                            "C5": 44,
+                            "C6": 15,
+                            "E1": 52,
+                            "E2": 51,
+                            "E3": 67,
+                            "E4": 33,
+                            "E5": 80,
+                            "E6": 15,
+                            "N1": 22,
+                            "N2": 69,
+                            "N3": 36,
+                            "N4": 69,
+                            "N5": 67,
+                            "N6": 68,
+                            "O1": 17,
+                            "O2": 49,
+                            "O3": 48,
+                            "O4": 31,
+                            "O5": 62,
+                            "O6": 45
+                        },
+                        "facets_z": {
+                            "A1": 1.33,
+                            "A2": 2.75,
+                            "A3": -0.5,
+                            "A4": 2.72,
+                            "A5": -3.5,
+                            "A6": -0.76,
+                            "C1": -3.5,
+                            "C2": -1.88,
+                            "C3": -0.45,
+                            "C4": -0.49,
+                            "C5": -0.56,
+                            "C6": -3.5,
+                            "E1": 0.16,
+                            "E2": 0.08,
+                            "E3": 1.72,
+                            "E4": -1.72,
+                            "E5": 2.97,
+                            "E6": -3.5,
+                            "N1": -2.82,
+                            "N2": 1.94,
+                            "N3": -1.41,
+                            "N4": 1.87,
+                            "N5": 1.69,
+                            "N6": 1.78,
+                            "O1": -3.33,
+                            "O2": -0.11,
+                            "O3": -0.22,
+                            "O4": -1.93,
+                            "O5": 1.2,
+                            "O6": -0.48
+                        }
+                    },
+                    "tags": [
+                        "big5:o_low",
+                        "big5:c_low",
+                        "big5:e_mid",
+                        "big5:a_mid",
+                        "big5:n_mid",
+                        "facet:n1_anxiety_extreme_low",
+                        "facet:e1_friendliness_mid",
+                        "facet:o1_imagination_extreme_low",
+                        "facet:a1_trust_extreme_high",
+                        "facet:c1_self_efficacy_extreme_low",
+                        "facet:n2_anger_extreme_high",
+                        "facet:e2_gregariousness_mid",
+                        "facet:o2_artistic_interests_mid",
+                        "facet:a2_morality_extreme_high",
+                        "facet:c2_orderliness_extreme_low",
+                        "facet:n3_depression_extreme_low",
+                        "facet:e3_assertiveness_extreme_high",
+                        "facet:o3_emotionality_mid",
+                        "facet:a3_altruism_mid",
+                        "facet:c3_dutifulness_mid",
+                        "facet:n4_self_consciousness_extreme_high",
+                        "facet:e4_activity_level_extreme_low",
+                        "facet:o4_adventurousness_extreme_low",
+                        "facet:a4_cooperation_extreme_high",
+                        "facet:c4_achievement_striving_mid",
+                        "facet:n5_immoderation_extreme_high",
+                        "facet:e5_excitement_seeking_extreme_high",
+                        "facet:o5_intellect_high",
+                        "facet:a5_modesty_extreme_low",
+                        "facet:c5_self_discipline_low",
+                        "facet:n6_vulnerability_extreme_high",
+                        "facet:e6_cheerfulness_extreme_low",
+                        "facet:o6_liberalism_mid",
+                        "facet:a6_sympathy_low",
+                        "facet:c6_cautiousness_extreme_low"
+                    ]
+                }
+            },
+            "computed_at": "<timestamp>",
+            "content_package_version": "v1",
+            "dir_version": "v1",
+            "engine_version": "big5_ipipneo120_v3.0.0",
+            "experiments_json": {
+                "PR23_STICKY_BUCKET": "B"
+            },
+            "facts": {
+                "domain_buckets": {
+                    "A": "mid",
+                    "C": "low",
+                    "E": "mid",
+                    "N": "mid",
+                    "O": "low"
+                },
+                "domain_sd_of_facets": {
+                    "A": 1.384,
+                    "C": 0.898,
+                    "E": 1.291,
+                    "N": 1.213,
+                    "O": 0.943
+                },
+                "extreme_facets_high": [
+                    "A1",
+                    "N2",
+                    "A2",
+                    "E3",
+                    "N4",
+                    "A4",
+                    "N5",
+                    "E5",
+                    "N6"
+                ],
+                "extreme_facets_low": [
+                    "N1",
+                    "O1",
+                    "C1",
+                    "C2",
+                    "N3",
+                    "E4",
+                    "O4",
+                    "A5",
+                    "E6",
+                    "C6"
+                ],
+                "facet_buckets": {
+                    "A1": "high",
+                    "A2": "high",
+                    "A3": "mid",
+                    "A4": "high",
+                    "A5": "low",
+                    "A6": "low",
+                    "C1": "low",
+                    "C2": "low",
+                    "C3": "mid",
+                    "C4": "mid",
+                    "C5": "low",
+                    "C6": "low",
+                    "E1": "mid",
+                    "E2": "mid",
+                    "E3": "high",
+                    "E4": "low",
+                    "E5": "high",
+                    "E6": "low",
+                    "N1": "low",
+                    "N2": "high",
+                    "N3": "low",
+                    "N4": "high",
+                    "N5": "high",
+                    "N6": "high",
+                    "O1": "low",
+                    "O2": "mid",
+                    "O3": "mid",
+                    "O4": "low",
+                    "O5": "high",
+                    "O6": "mid"
+                },
+                "report_tone": "cautious",
+                "top_growth_facets": [
+                    "N1",
+                    "O1",
+                    "C1"
+                ],
+                "top_growth_facets_text": "N1, O1, C1",
+                "top_strength_facets": [
+                    "A2",
+                    "A4",
+                    "E5"
+                ]
+            },
+            "final_score": 211,
+            "item_bank_version": "big5_ipipneo120_bilingual_v1",
+            "model_selection": {
+                "driver_type": "big5_ocean",
+                "experiment_key": null,
+                "experiment_variant": null,
+                "experiments_json": {
+                    "PR23_STICKY_BUCKET": "B"
+                },
+                "model_id": null,
+                "model_key": "default",
+                "rollout_id": null,
+                "scoring_spec_version": "big5_spec_2026Q1_v1",
+                "source": "default"
+            },
+            "normed_json": {
+                "engine_version": "big5_ipipneo120_v3.0.0",
+                "facts": {
+                    "domain_buckets": {
+                        "A": "mid",
+                        "C": "low",
+                        "E": "mid",
+                        "N": "mid",
+                        "O": "low"
+                    },
+                    "domain_sd_of_facets": {
+                        "A": 1.384,
+                        "C": 0.898,
+                        "E": 1.291,
+                        "N": 1.213,
+                        "O": 0.943
+                    },
+                    "extreme_facets_high": [
+                        "A1",
+                        "N2",
+                        "A2",
+                        "E3",
+                        "N4",
+                        "A4",
+                        "N5",
+                        "E5",
+                        "N6"
+                    ],
+                    "extreme_facets_low": [
+                        "N1",
+                        "O1",
+                        "C1",
+                        "C2",
+                        "N3",
+                        "E4",
+                        "O4",
+                        "A5",
+                        "E6",
+                        "C6"
+                    ],
+                    "facet_buckets": {
+                        "A1": "high",
+                        "A2": "high",
+                        "A3": "mid",
+                        "A4": "high",
+                        "A5": "low",
+                        "A6": "low",
+                        "C1": "low",
+                        "C2": "low",
+                        "C3": "mid",
+                        "C4": "mid",
+                        "C5": "low",
+                        "C6": "low",
+                        "E1": "mid",
+                        "E2": "mid",
+                        "E3": "high",
+                        "E4": "low",
+                        "E5": "high",
+                        "E6": "low",
+                        "N1": "low",
+                        "N2": "high",
+                        "N3": "low",
+                        "N4": "high",
+                        "N5": "high",
+                        "N6": "high",
+                        "O1": "low",
+                        "O2": "mid",
+                        "O3": "mid",
+                        "O4": "low",
+                        "O5": "high",
+                        "O6": "mid"
+                    },
+                    "report_tone": "cautious",
+                    "top_growth_facets": [
+                        "N1",
+                        "O1",
+                        "C1"
+                    ],
+                    "top_growth_facets_text": "N1, O1, C1",
+                    "top_strength_facets": [
+                        "A2",
+                        "A4",
+                        "E5"
+                    ]
+                },
+                "item_bank_version": "big5_ipipneo120_bilingual_v1",
+                "norms": {
+                    "group_id": "zh-CN_prod_all_18-60",
+                    "norms_version": "2026Q1_prod_v1",
+                    "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                    "status": "CALIBRATED"
+                },
+                "quality": {
+                    "flags": [
+                        "SPEEDING",
+                        "EXTREME_RESPONDING",
+                        "ATTENTION_CHECK_FAILED"
+                    ],
+                    "level": "D",
+                    "metrics": {
+                        "acquiescence_index": 0,
+                        "completion_rate": 1,
+                        "extreme_rate": 1,
+                        "facet_inconsistency_mean": 1.2167,
+                        "longstring_max": 1,
+                        "neutral_rate": 0,
+                        "time_per_item_avg": 0,
+                        "time_seconds_total": 0
+                    }
+                },
+                "raw_scores": {
+                    "domains_mean": {
+                        "A": 3.5,
+                        "C": 2.17,
+                        "E": 3,
+                        "N": 3.17,
+                        "O": 2.67
+                    },
+                    "facets_mean": {
+                        "A1": 4,
+                        "A2": 5,
+                        "A3": 3,
+                        "A4": 5,
+                        "A5": 1,
+                        "A6": 3,
+                        "C1": 1,
+                        "C2": 2,
+                        "C3": 3,
+                        "C4": 3,
+                        "C5": 3,
+                        "C6": 1,
+                        "E1": 3,
+                        "E2": 3,
+                        "E3": 4,
+                        "E4": 2,
+                        "E5": 5,
+                        "E6": 1,
+                        "N1": 1,
+                        "N2": 4,
+                        "N3": 2,
+                        "N4": 4,
+                        "N5": 4,
+                        "N6": 4,
+                        "O1": 1,
+                        "O2": 3,
+                        "O3": 3,
+                        "O4": 2,
+                        "O5": 4,
+                        "O6": 3
+                    }
+                },
+                "scale_code": "BIG5_OCEAN",
+                "score_method": "big5_ipipneo120_v3",
+                "scores_0_100": {
+                    "domains_percentile": {
+                        "A": 65,
+                        "C": 3,
+                        "E": 52,
+                        "N": 65,
+                        "O": 26
+                    },
+                    "facets_percentile": {
+                        "A1": 91,
+                        "A2": 100,
+                        "A3": 31,
+                        "A4": 100,
+                        "A5": 0,
+                        "A6": 22,
+                        "C1": 0,
+                        "C2": 3,
+                        "C3": 33,
+                        "C4": 31,
+                        "C5": 29,
+                        "C6": 0,
+                        "E1": 57,
+                        "E2": 53,
+                        "E3": 96,
+                        "E4": 4,
+                        "E5": 100,
+                        "E6": 0,
+                        "N1": 0,
+                        "N2": 97,
+                        "N3": 8,
+                        "N4": 97,
+                        "N5": 95,
+                        "N6": 96,
+                        "O1": 0,
+                        "O2": 46,
+                        "O3": 41,
+                        "O4": 3,
+                        "O5": 89,
+                        "O6": 31
+                    }
+                },
+                "spec_version": "big5_spec_2026Q1_v1",
+                "standardized_scores": {
+                    "domains_t": {
+                        "A": 54,
+                        "C": 31,
+                        "E": 51,
+                        "N": 54,
+                        "O": 43
+                    },
+                    "domains_z": {
+                        "A": 0.39,
+                        "C": -1.95,
+                        "E": 0.06,
+                        "N": 0.38,
+                        "O": -0.65
+                    },
+                    "facets_t": {
+                        "A1": 63,
+                        "A2": 78,
+                        "A3": 45,
+                        "A4": 77,
+                        "A5": 15,
+                        "A6": 42,
+                        "C1": 15,
+                        "C2": 31,
+                        "C3": 46,
+                        "C4": 45,
+                        "C5": 44,
+                        "C6": 15,
+                        "E1": 52,
+                        "E2": 51,
+                        "E3": 67,
+                        "E4": 33,
+                        "E5": 80,
+                        "E6": 15,
+                        "N1": 22,
+                        "N2": 69,
+                        "N3": 36,
+                        "N4": 69,
+                        "N5": 67,
+                        "N6": 68,
+                        "O1": 17,
+                        "O2": 49,
+                        "O3": 48,
+                        "O4": 31,
+                        "O5": 62,
+                        "O6": 45
+                    },
+                    "facets_z": {
+                        "A1": 1.33,
+                        "A2": 2.75,
+                        "A3": -0.5,
+                        "A4": 2.72,
+                        "A5": -3.5,
+                        "A6": -0.76,
+                        "C1": -3.5,
+                        "C2": -1.88,
+                        "C3": -0.45,
+                        "C4": -0.49,
+                        "C5": -0.56,
+                        "C6": -3.5,
+                        "E1": 0.16,
+                        "E2": 0.08,
+                        "E3": 1.72,
+                        "E4": -1.72,
+                        "E5": 2.97,
+                        "E6": -3.5,
+                        "N1": -2.82,
+                        "N2": 1.94,
+                        "N3": -1.41,
+                        "N4": 1.87,
+                        "N5": 1.69,
+                        "N6": 1.78,
+                        "O1": -3.33,
+                        "O2": -0.11,
+                        "O3": -0.22,
+                        "O4": -1.93,
+                        "O5": 1.2,
+                        "O6": -0.48
+                    }
+                },
+                "tags": [
+                    "big5:o_low",
+                    "big5:c_low",
+                    "big5:e_mid",
+                    "big5:a_mid",
+                    "big5:n_mid",
+                    "facet:n1_anxiety_extreme_low",
+                    "facet:e1_friendliness_mid",
+                    "facet:o1_imagination_extreme_low",
+                    "facet:a1_trust_extreme_high",
+                    "facet:c1_self_efficacy_extreme_low",
+                    "facet:n2_anger_extreme_high",
+                    "facet:e2_gregariousness_mid",
+                    "facet:o2_artistic_interests_mid",
+                    "facet:a2_morality_extreme_high",
+                    "facet:c2_orderliness_extreme_low",
+                    "facet:n3_depression_extreme_low",
+                    "facet:e3_assertiveness_extreme_high",
+                    "facet:o3_emotionality_mid",
+                    "facet:a3_altruism_mid",
+                    "facet:c3_dutifulness_mid",
+                    "facet:n4_self_consciousness_extreme_high",
+                    "facet:e4_activity_level_extreme_low",
+                    "facet:o4_adventurousness_extreme_low",
+                    "facet:a4_cooperation_extreme_high",
+                    "facet:c4_achievement_striving_mid",
+                    "facet:n5_immoderation_extreme_high",
+                    "facet:e5_excitement_seeking_extreme_high",
+                    "facet:o5_intellect_high",
+                    "facet:a5_modesty_extreme_low",
+                    "facet:c5_self_discipline_low",
+                    "facet:n6_vulnerability_extreme_high",
+                    "facet:e6_cheerfulness_extreme_low",
+                    "facet:o6_liberalism_mid",
+                    "facet:a6_sympathy_low",
+                    "facet:c6_cautiousness_extreme_low"
+                ]
+            },
+            "norms": {
+                "group_id": "zh-CN_prod_all_18-60",
+                "norms_version": "2026Q1_prod_v1",
+                "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+                "status": "CALIBRATED"
+            },
+            "pack_id": "BIG5_OCEAN",
+            "quality": {
+                "client_duration_ms": 120000,
+                "flags": [
+                    "SPEEDING",
+                    "EXTREME_RESPONDING",
+                    "ATTENTION_CHECK_FAILED"
+                ],
+                "level": "D",
+                "metrics": {
+                    "acquiescence_index": 0,
+                    "completion_rate": 1,
+                    "extreme_rate": 1,
+                    "facet_inconsistency_mean": 1.2167,
+                    "longstring_max": 1,
+                    "neutral_rate": 0,
+                    "time_per_item_avg": 0,
+                    "time_seconds_total": 0
+                }
+            },
+            "raw_score": 14.51,
+            "raw_scores": {
+                "domains_mean": {
+                    "A": 3.5,
+                    "C": 2.17,
+                    "E": 3,
+                    "N": 3.17,
+                    "O": 2.67
+                },
+                "facets_mean": {
+                    "A1": 4,
+                    "A2": 5,
+                    "A3": 3,
+                    "A4": 5,
+                    "A5": 1,
+                    "A6": 3,
+                    "C1": 1,
+                    "C2": 2,
+                    "C3": 3,
+                    "C4": 3,
+                    "C5": 3,
+                    "C6": 1,
+                    "E1": 3,
+                    "E2": 3,
+                    "E3": 4,
+                    "E4": 2,
+                    "E5": 5,
+                    "E6": 1,
+                    "N1": 1,
+                    "N2": 4,
+                    "N3": 2,
+                    "N4": 4,
+                    "N5": 4,
+                    "N6": 4,
+                    "O1": 1,
+                    "O2": 3,
+                    "O3": 3,
+                    "O4": 2,
+                    "O5": 4,
+                    "O6": 3
+                }
+            },
+            "scale_code": "BIG5_OCEAN",
+            "scale_code_legacy": "BIG5_OCEAN",
+            "scale_code_v2": "BIG_FIVE_OCEAN_MODEL",
+            "scale_uid": "<uuid>",
+            "score_method": "big5_ipipneo120_v3",
+            "scores_0_100": {
+                "domains_percentile": {
+                    "A": 65,
+                    "C": 3,
+                    "E": 52,
+                    "N": 65,
+                    "O": 26
+                },
+                "facets_percentile": {
+                    "A1": 91,
+                    "A2": 100,
+                    "A3": 31,
+                    "A4": 100,
+                    "A5": 0,
+                    "A6": 22,
+                    "C1": 0,
+                    "C2": 3,
+                    "C3": 33,
+                    "C4": 31,
+                    "C5": 29,
+                    "C6": 0,
+                    "E1": 57,
+                    "E2": 53,
+                    "E3": 96,
+                    "E4": 4,
+                    "E5": 100,
+                    "E6": 0,
+                    "N1": 0,
+                    "N2": 97,
+                    "N3": 8,
+                    "N4": 97,
+                    "N5": 95,
+                    "N6": 96,
+                    "O1": 0,
+                    "O2": 46,
+                    "O3": 41,
+                    "O4": 3,
+                    "O5": 89,
+                    "O6": 31
+                }
+            },
+            "scoring_spec_version": "big5_spec_2026Q1_v1",
+            "spec_version": "big5_spec_2026Q1_v1",
+            "standardized_scores": {
+                "domains_t": {
+                    "A": 54,
+                    "C": 31,
+                    "E": 51,
+                    "N": 54,
+                    "O": 43
+                },
+                "domains_z": {
+                    "A": 0.39,
+                    "C": -1.95,
+                    "E": 0.06,
+                    "N": 0.38,
+                    "O": -0.65
+                },
+                "facets_t": {
+                    "A1": 63,
+                    "A2": 78,
+                    "A3": 45,
+                    "A4": 77,
+                    "A5": 15,
+                    "A6": 42,
+                    "C1": 15,
+                    "C2": 31,
+                    "C3": 46,
+                    "C4": 45,
+                    "C5": 44,
+                    "C6": 15,
+                    "E1": 52,
+                    "E2": 51,
+                    "E3": 67,
+                    "E4": 33,
+                    "E5": 80,
+                    "E6": 15,
+                    "N1": 22,
+                    "N2": 69,
+                    "N3": 36,
+                    "N4": 69,
+                    "N5": 67,
+                    "N6": 68,
+                    "O1": 17,
+                    "O2": 49,
+                    "O3": 48,
+                    "O4": 31,
+                    "O5": 62,
+                    "O6": 45
+                },
+                "facets_z": {
+                    "A1": 1.33,
+                    "A2": 2.75,
+                    "A3": -0.5,
+                    "A4": 2.72,
+                    "A5": -3.5,
+                    "A6": -0.76,
+                    "C1": -3.5,
+                    "C2": -1.88,
+                    "C3": -0.45,
+                    "C4": -0.49,
+                    "C5": -0.56,
+                    "C6": -3.5,
+                    "E1": 0.16,
+                    "E2": 0.08,
+                    "E3": 1.72,
+                    "E4": -1.72,
+                    "E5": 2.97,
+                    "E6": -3.5,
+                    "N1": -2.82,
+                    "N2": 1.94,
+                    "N3": -1.41,
+                    "N4": 1.87,
+                    "N5": 1.69,
+                    "N6": 1.78,
+                    "O1": -3.33,
+                    "O2": -0.11,
+                    "O3": -0.22,
+                    "O4": -1.93,
+                    "O5": 1.2,
+                    "O6": -0.48
+                }
+            },
+            "tags": [
+                "big5:o_low",
+                "big5:c_low",
+                "big5:e_mid",
+                "big5:a_mid",
+                "big5:n_mid",
+                "facet:n1_anxiety_extreme_low",
+                "facet:e1_friendliness_mid",
+                "facet:o1_imagination_extreme_low",
+                "facet:a1_trust_extreme_high",
+                "facet:c1_self_efficacy_extreme_low",
+                "facet:n2_anger_extreme_high",
+                "facet:e2_gregariousness_mid",
+                "facet:o2_artistic_interests_mid",
+                "facet:a2_morality_extreme_high",
+                "facet:c2_orderliness_extreme_low",
+                "facet:n3_depression_extreme_low",
+                "facet:e3_assertiveness_extreme_high",
+                "facet:o3_emotionality_mid",
+                "facet:a3_altruism_mid",
+                "facet:c3_dutifulness_mid",
+                "facet:n4_self_consciousness_extreme_high",
+                "facet:e4_activity_level_extreme_low",
+                "facet:o4_adventurousness_extreme_low",
+                "facet:a4_cooperation_extreme_high",
+                "facet:c4_achievement_striving_mid",
+                "facet:n5_immoderation_extreme_high",
+                "facet:e5_excitement_seeking_extreme_high",
+                "facet:o5_intellect_high",
+                "facet:a5_modesty_extreme_low",
+                "facet:c5_self_discipline_low",
+                "facet:n6_vulnerability_extreme_high",
+                "facet:e6_cheerfulness_extreme_low",
+                "facet:o6_liberalism_mid",
+                "facet:a6_sympathy_low",
+                "facet:c6_cautiousness_extreme_low"
+            ],
+            "type_code": null
+        },
+        "scores": {
+            "domains_mean": {
+                "A": 3.5,
+                "C": 2.17,
+                "E": 3,
+                "N": 3.17,
+                "O": 2.67
+            },
+            "facets_mean": {
+                "A1": 4,
+                "A2": 5,
+                "A3": 3,
+                "A4": 5,
+                "A5": 1,
+                "A6": 3,
+                "C1": 1,
+                "C2": 2,
+                "C3": 3,
+                "C4": 3,
+                "C5": 3,
+                "C6": 1,
+                "E1": 3,
+                "E2": 3,
+                "E3": 4,
+                "E4": 2,
+                "E5": 5,
+                "E6": 1,
+                "N1": 1,
+                "N2": 4,
+                "N3": 2,
+                "N4": 4,
+                "N5": 4,
+                "N6": 4,
+                "O1": 1,
+                "O2": 3,
+                "O3": 3,
+                "O4": 2,
+                "O5": 4,
+                "O6": 3
+            }
+        },
+        "scores_pct": {
+            "A": 65,
+            "C": 3,
+            "E": 52,
+            "N": 65,
+            "O": 26
+        },
+        "type_code": ""
+    },
+    "scenario_id": "canonical_degraded",
+    "start": {
+        "content_package_version": "v1",
+        "dir_version": "v1",
+        "form_code": "big5_120",
+        "norm_version": "2026Q1_v1",
+        "question_count": 120,
+        "scoring_spec_version": "big5_spec_2026Q1_v1"
+    },
+    "submit": {
+        "domains_percentile": {
+            "A": 65,
+            "C": 3,
+            "E": 52,
+            "N": 65,
+            "O": 26
+        },
+        "facet_percentile_count": 30,
+        "norms": {
+            "group_id": "zh-CN_prod_all_18-60",
+            "norms_version": "2026Q1_prod_v1",
+            "source_id": "FERMATMIND_PROD_ZHCN_2026Q1",
+            "status": "CALIBRATED"
+        },
+        "ok": true,
+        "quality": {
+            "client_duration_ms": 120000,
+            "flags": [
+                "SPEEDING",
+                "EXTREME_RESPONDING",
+                "ATTENTION_CHECK_FAILED"
+            ],
+            "level": "D",
+            "metrics": {
+                "acquiescence_index": 0,
+                "completion_rate": 1,
+                "extreme_rate": 1,
+                "facet_inconsistency_mean": 1.2167,
+                "longstring_max": 1,
+                "neutral_rate": 0,
+                "time_per_item_avg": 0,
+                "time_seconds_total": 0
+            }
+        }
+    }
+}

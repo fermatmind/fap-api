@@ -27,8 +27,26 @@ final class BigFiveHistoryCompareTest extends TestCase
         $this->seedUser($userId);
         $token = $this->seedFmToken($anonId, $userId);
 
-        $olderAttemptId = $this->seedBigFiveAttempt($anonId, (string) $userId, now()->subDays(2));
-        $latestAttemptId = $this->seedBigFiveAttempt($anonId, (string) $userId, now()->subDay());
+        $olderAttemptId = $this->seedBigFiveAttempt(
+            $anonId,
+            (string) $userId,
+            now()->subDays(2),
+            90,
+            'big5_90',
+            'v1-form-90',
+            'v1-form-90',
+            'big5_spec_2026Q2_form90_v1'
+        );
+        $latestAttemptId = $this->seedBigFiveAttempt(
+            $anonId,
+            (string) $userId,
+            now()->subDay(),
+            120,
+            'big5_120',
+            'v1',
+            'v1',
+            'big5_spec_2026Q1_v1'
+        );
 
         $this->seedBigFiveResult(
             $olderAttemptId,
@@ -65,15 +83,15 @@ final class BigFiveHistoryCompareTest extends TestCase
             ]
         );
         $this->seedAccessProjection($olderAttemptId, [
-            'access_state' => 'locked',
+            'access_state' => 'ready',
             'report_state' => 'ready',
-            'pdf_state' => 'missing',
-            'reason_code' => 'preview_only',
+            'pdf_state' => 'ready',
+            'reason_code' => 'entitlement_granted',
             'payload_json' => [
-                'access_level' => 'preview',
-                'variant' => 'free',
-                'modules_allowed' => ['summary'],
-                'modules_preview' => ['report.full'],
+                'access_level' => 'full',
+                'variant' => 'full',
+                'modules_allowed' => ['summary', 'report.full', 'pdf'],
+                'modules_preview' => [],
             ],
         ]);
         $this->seedAccessProjection($latestAttemptId, [
@@ -135,6 +153,8 @@ final class BigFiveHistoryCompareTest extends TestCase
         $response->assertJsonPath('items.1.access_summary.variant', 'full');
         $response->assertJsonPath('items.1.access_summary.actions.page_href', "/result/{$olderAttemptId}");
         $response->assertJsonPath('items.1.access_summary.actions.pdf_href', "/api/v0.3/attempts/{$olderAttemptId}/report.pdf");
+        $response->assertJsonPath('items.1.big5_form_v1.form_code', 'big5_90');
+        $response->assertJsonPath('items.1.big5_form_v1.question_count', 90);
         $response->assertJsonPath('items.1.top_facets_summary_v1.items.0.key', 'N1');
         $response->assertJsonPath('items.1.quality_summary.level', 'B');
         $response->assertJsonPath('items.1.quality_summary.grade', 'B');
@@ -144,8 +164,16 @@ final class BigFiveHistoryCompareTest extends TestCase
         $response->assertJsonPath('items.1.share_summary.enabled', true);
     }
 
-    private function seedBigFiveAttempt(string $anonId, string $userId, \DateTimeInterface $submittedAt): string
-    {
+    private function seedBigFiveAttempt(
+        string $anonId,
+        string $userId,
+        \DateTimeInterface $submittedAt,
+        int $questionCount,
+        string $formCode,
+        string $dirVersion,
+        string $contentPackageVersion,
+        string $scoringSpecVersion
+    ): string {
         $attemptId = (string) Str::uuid();
 
         Attempt::create([
@@ -158,17 +186,22 @@ final class BigFiveHistoryCompareTest extends TestCase
             'scale_version' => 'v1',
             'region' => 'CN_MAINLAND',
             'locale' => 'zh-CN',
-            'question_count' => 120,
-            'answers_summary_json' => ['seed' => true],
+            'question_count' => $questionCount,
+            'answers_summary_json' => [
+                'seed' => true,
+                'meta' => [
+                    'form_code' => $formCode,
+                ],
+            ],
             'client_platform' => 'test',
             'client_version' => '1.0.0',
             'channel' => 'test',
             'started_at' => (clone $submittedAt)->modify('-10 minutes'),
             'submitted_at' => $submittedAt,
             'pack_id' => 'BIG5_OCEAN',
-            'dir_version' => 'v1',
-            'content_package_version' => 'v1',
-            'scoring_spec_version' => 'big5_spec_2026Q1_v1',
+            'dir_version' => $dirVersion,
+            'content_package_version' => $contentPackageVersion,
+            'scoring_spec_version' => $scoringSpecVersion,
         ]);
 
         return $attemptId;

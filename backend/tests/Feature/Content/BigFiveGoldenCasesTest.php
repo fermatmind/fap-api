@@ -17,6 +17,34 @@ final class BigFiveGoldenCasesTest extends TestCase
 {
     use RefreshDatabase;
 
+    private const EXPECTED_FREE_SECTION_KEYS = [
+        'traits.overview',
+        'traits.why_this_profile',
+        'relationships.interpersonal_style',
+        'career.work_style',
+        'growth.next_actions',
+        'disclaimer_top',
+        'summary',
+        'domains_overview',
+        'disclaimer',
+    ];
+
+    private const EXPECTED_FULL_SECTION_KEYS = [
+        'traits.overview',
+        'traits.why_this_profile',
+        'relationships.interpersonal_style',
+        'career.work_style',
+        'growth.next_actions',
+        'disclaimer_top',
+        'summary',
+        'domains_overview',
+        'facet_table',
+        'top_facets',
+        'facets_deepdive',
+        'action_plan',
+        'disclaimer',
+    ];
+
     public function test_golden_cases_scores_and_report_variants_are_stable(): void
     {
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
@@ -126,7 +154,7 @@ final class BigFiveGoldenCasesTest extends TestCase
                 static fn (array $s): string => (string) ($s['key'] ?? ''),
                 (array) data_get($freeComposed, 'report.sections', [])
             );
-            $this->assertSame((array) ($case['expected_free_sections'] ?? []), $freeSections);
+            $this->assertSame(self::EXPECTED_FREE_SECTION_KEYS, $freeSections);
 
             $fullComposed = $composer->composeVariant($attempt, $result, ReportAccess::VARIANT_FULL, [
                 'modules_allowed' => [
@@ -140,7 +168,7 @@ final class BigFiveGoldenCasesTest extends TestCase
                 static fn (array $s): string => (string) ($s['key'] ?? ''),
                 (array) data_get($fullComposed, 'report.sections', [])
             );
-            $this->assertSame((array) ($case['expected_full_sections'] ?? []), $fullSections);
+            $this->assertSame(self::EXPECTED_FULL_SECTION_KEYS, $fullSections);
         }
     }
 }
