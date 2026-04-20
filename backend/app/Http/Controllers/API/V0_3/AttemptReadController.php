@@ -11,44 +11,44 @@ use App\Models\Result;
 use App\Models\UnifiedAccessProjection;
 use App\Repositories\Report\ReportAccessActor;
 use App\Repositories\Report\ReportSubjectRepository;
+use App\Services\Access\AttemptUnlockProjectionRepairService;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\Attempts\InviteUnlock\InviteUnlockDiagnostics;
-use App\Services\BigFive\BigFivePublicProjectionService;
 use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
-use App\Services\Access\AttemptUnlockProjectionRepairService;
+use App\Services\BigFive\BigFivePublicProjectionService;
 use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Mbti\MbtiActionJourneyContractService;
 use App\Services\Mbti\MbtiAdaptiveSelectionService;
 use App\Services\Mbti\MbtiIntraTypeProfileService;
 use App\Services\Mbti\MbtiPrivacyConsentContractService;
-use App\Services\Mbti\MbtiPublicProjectionService;
 use App\Services\Mbti\MbtiPublicFormSummaryBuilder;
+use App\Services\Mbti\MbtiPublicProjectionService;
 use App\Services\Mbti\MbtiPublicSummaryV1Builder;
 use App\Services\Mbti\MbtiReadModelContractService;
 use App\Services\Mbti\MbtiUserStateOrchestrationService;
 use App\Services\Mbti\MbtiWorkingLifeConsolidationService;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
-use App\Services\Report\MbtiPreviewContractBuilder;
 use App\Services\Report\InviteUnlockSummaryBuilder;
+use App\Services\Report\MbtiPreviewContractBuilder;
 use App\Services\Report\Pdf\ReportPdfDocumentService;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportGatekeeper;
 use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Support\OrgContext;
 use App\Support\SchemaBaseline;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 
 class AttemptReadController extends Controller
 {
     use ResolvesAttemptOwnership;
 
-    private const PUBLIC_RESULT_READ_SCALES = ['MBTI', 'BIG5_OCEAN', 'IQ_RAVEN', 'EQ_60'];
+    private const PUBLIC_RESULT_READ_SCALES = ['MBTI', 'BIG5_OCEAN', 'IQ_RAVEN', 'EQ_60', 'ENNEAGRAM'];
 
     private const SENSITIVE_RESULT_READ_SCALES = ['SDS_20', 'CLINICAL_COMBO_68'];
 
