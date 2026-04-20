@@ -57,7 +57,7 @@ php artisan key:generate --force >/dev/null 2>&1 || true
 bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
 php artisan fap:schema:verify
 
-RUN_BIG5_OCEAN_GATE="${RUN_BIG5_OCEAN_GATE:-0}"
+RUN_BIG5_OCEAN_GATE="${RUN_BIG5_OCEAN_GATE:-1}"
 RUN_CLINICAL_COMBO_68_GATE="${RUN_CLINICAL_COMBO_68_GATE:-0}"
 RUN_SDS_20_GATE="${RUN_SDS_20_GATE:-0}"
 RUN_EQ_60_GATE="${RUN_EQ_60_GATE:-0}"
@@ -111,7 +111,7 @@ if [[ "$RUN_BIG5_OCEAN_GATE" == "1" ]]; then
   bash "$BACKEND_DIR/scripts/ci/verify_big5_norms.sh"
   php artisan content:lint --pack=BIG5_OCEAN --pack-version=v1
   php artisan content:compile --pack=BIG5_OCEAN --pack-version=v1
-  php artisan test --filter BigFive
+  php artisan test --filter '(BigFive|Big5|NonMbtiReportContractRegressionTest)'
 
   echo "[CI] rebuilding sqlite baseline after BIG5_OCEAN gate"
   bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
