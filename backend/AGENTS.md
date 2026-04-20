@@ -30,6 +30,8 @@
 - If local checks fail, do not open a PR.
 - Record failed checks in `docs/codex/pr-train-state.json`.
 - Never continue to the next PR after a failed check.
+- Draft PR exception: when a local check fails only on behavior clearly outside the current declared PR scope, and the user explicitly asks to proceed, Codex may open a draft PR for the current scope if all scoped checks pass. The draft PR body must list the failed command, failed tests, why they are outside scope, and state that the PR is not mergeable until required checks are green.
+- This exception does not allow merging a PR with failed local or GitHub required checks.
 
 ## PR discipline
 - Open exactly one PR for the current task.
@@ -40,6 +42,8 @@
   - validation commands
   - intentionally deferred items
 - If a PR is open and checks are pending, wait; do not start the next PR.
+- Stacked draft PR exception: if the user explicitly asks to split the current task into multiple PRs, Codex may open multiple draft PRs for the same declared task only when each PR has a distinct scope, the dependency order is stated in every dependent PR body, and no PR contains files from another PR's scope.
+- This exception does not allow merging dependent PRs out of order or bypassing required checks.
 
 ## Merge discipline
 - Merge only when the current PR satisfies its `merge_policy`.
@@ -64,7 +68,7 @@
 ## Failure policy
 - Stop immediately on:
   - preflight failure
-  - failed local checks
+  - failed local checks, except for the documented draft PR exception above
   - failed required GitHub checks
   - merge block
   - review requirement block
