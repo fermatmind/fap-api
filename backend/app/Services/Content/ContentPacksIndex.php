@@ -22,7 +22,7 @@ final class ContentPacksIndex
             ? (string) config('content_packs.cache_dir', '')
             : (string) config('content_packs.root', '');
 
-        $packsRootFs = rtrim($packsRoot, '/\\');
+        $packsRootFs = $this->normalizeFilesystemRoot($packsRoot);
         $defaults = $this->defaults();
 
         $cacheKey = CacheKeys::packsIndex();
@@ -145,6 +145,34 @@ final class ContentPacksIndex
         } catch (\Throwable $e) {
             return Cache::store();
         }
+    }
+
+    private function normalizeFilesystemRoot(string $path): string
+    {
+        $path = trim($path);
+        if ($path === '') {
+            return '';
+        }
+
+        $normalized = rtrim($path, '/\\');
+        if ($this->isAbsolutePath($normalized)) {
+            return $normalized;
+        }
+
+        return rtrim(base_path($normalized), '/\\');
+    }
+
+    private function isAbsolutePath(string $path): bool
+    {
+        if ($path === '') {
+            return false;
+        }
+
+        if (str_starts_with($path, '/') || str_starts_with($path, '\\')) {
+            return true;
+        }
+
+        return (bool) preg_match('/^[A-Za-z]:[\/\\\\]/', $path);
     }
 
     private function debugLog(string $event, array $context = []): void
