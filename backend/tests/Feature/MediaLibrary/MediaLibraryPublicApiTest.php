@@ -74,6 +74,36 @@ final class MediaLibraryPublicApiTest extends TestCase
             ->assertJsonPath('asset.variants.0.variant_key', 'og');
     }
 
+    public function test_wechat_qr_baseline_assets_resolve_to_committed_static_media(): void
+    {
+        $this->artisan('media-assets:import-local-baseline', [
+            '--upsert' => true,
+            '--status' => 'published',
+            '--source-dir' => '../content_baselines/media_assets',
+        ])->assertExitCode(0);
+
+        $this->assertFileExists(base_path('public/static/social/wechat-qr-official-258.jpg'));
+        $this->assertFileExists(base_path('public/static/social/wechat-qr.jpg'));
+
+        $this->getJson('/api/v0.5/media-assets/social.wechat.official_qr?org_id=0')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('asset.asset_key', 'social.wechat.official_qr')
+            ->assertJsonPath('asset.path', '/static/social/wechat-qr-official-258.jpg')
+            ->assertJsonPath('asset.url', 'https://assets.fermatmind.com/static/social/wechat-qr-official-258.jpg')
+            ->assertJsonPath('asset.variants.0.variant_key', 'original')
+            ->assertJsonPath('asset.variants.0.path', '/static/social/wechat-qr-official-258.jpg');
+
+        $this->getJson('/api/v0.5/media-assets/social.wechat.qr?org_id=0')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('asset.asset_key', 'social.wechat.qr')
+            ->assertJsonPath('asset.path', '/static/social/wechat-qr.jpg')
+            ->assertJsonPath('asset.url', 'https://assets.fermatmind.com/static/social/wechat-qr.jpg')
+            ->assertJsonPath('asset.variants.0.variant_key', 'original')
+            ->assertJsonPath('asset.variants.0.path', '/static/social/wechat-qr.jpg');
+    }
+
     public function test_internal_upload_generates_standard_media_variants(): void
     {
         Storage::fake('public');
