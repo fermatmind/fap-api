@@ -560,6 +560,193 @@
       "is_enabled": true
     },
     {
+      "block_key": "recommended_articles",
+      "block_type": "json",
+      "title": "Recommended reading",
+      "subtitle": "Six CMS-curated articles for homepage exploration.",
+      "sort_order": 6,
+      "is_enabled": true,
+      "payload_json": {
+        "layout": "article_grid",
+        "source": "cms_baseline",
+        "min_items": 6,
+        "items": [
+          {
+            "display_order": 1,
+            "article": {
+              "slug": "mbti-basics",
+              "locale": "en",
+              "title": "MBTI Personality Test (16 Types) | Tool Guide",
+              "excerpt": "A practical, non-mythical guide to MBTI: what it measures, what it does not, and how to use results for better decisions in work, relationships, and self-management.",
+              "status": "published",
+              "is_public": true,
+              "is_indexable": true,
+              "cover_image_url": "https://api.fermatmind.com/static/articles/covers/mbti-basics.svg",
+              "cover_image_alt": "MBTI Personality Test (16 Types) | Tool Guide cover image",
+              "cover_image_width": 1200,
+              "cover_image_height": 675,
+              "cover_image_variants": {
+                "hero": "https://api.fermatmind.com/static/articles/covers/mbti-basics.svg",
+                "card": "https://api.fermatmind.com/static/articles/covers/mbti-basics.svg",
+                "thumbnail": "https://api.fermatmind.com/static/articles/covers/mbti-basics.svg",
+                "og": "https://api.fermatmind.com/static/articles/covers/mbti-basics.svg",
+                "preload": "https://api.fermatmind.com/static/articles/covers/mbti-basics.svg"
+              },
+              "tags": [
+                "MBTI",
+                "Tool Guide"
+              ],
+              "related_test_slug": "mbti-personality-test-16-personality-types"
+            }
+          },
+          {
+            "display_order": 2,
+            "article": {
+              "slug": "big-five-tool-guide",
+              "locale": "en",
+              "title": "Big Five Personality Test (OCEAN) | Tool Guide",
+              "excerpt": "A practical guide to Big Five results: what each trait means, how trait combinations affect outcomes, and how to convert scores into concrete behavior changes.",
+              "status": "published",
+              "is_public": true,
+              "is_indexable": true,
+              "cover_image_url": "https://api.fermatmind.com/static/articles/covers/big-five-tool-guide.svg",
+              "cover_image_alt": "Big Five Personality Test (OCEAN) | Tool Guide cover image",
+              "cover_image_width": 1200,
+              "cover_image_height": 675,
+              "cover_image_variants": {
+                "hero": "https://api.fermatmind.com/static/articles/covers/big-five-tool-guide.svg",
+                "card": "https://api.fermatmind.com/static/articles/covers/big-five-tool-guide.svg",
+                "thumbnail": "https://api.fermatmind.com/static/articles/covers/big-five-tool-guide.svg",
+                "og": "https://api.fermatmind.com/static/articles/covers/big-five-tool-guide.svg",
+                "preload": "https://api.fermatmind.com/static/articles/covers/big-five-tool-guide.svg"
+              },
+              "tags": [
+                "Big Five",
+                "Tool Guide"
+              ],
+              "related_test_slug": "big-five-personality-test-ocean-model"
+            }
+          },
+          {
+            "display_order": 3,
+            "article": {
+              "slug": "enneagram-test-tool-guide",
+              "locale": "en",
+              "title": "Enneagram Personality Test | Tool Guide",
+              "excerpt": "A practical guide to using the Enneagram as a self-observation tool for motivation patterns, stress reactions, and growth work without turning type into a fixed identity.",
+              "status": "published",
+              "is_public": true,
+              "is_indexable": true,
+              "cover_image_url": "https://api.fermatmind.com/static/articles/covers/enneagram-test-tool-guide.svg",
+              "cover_image_alt": "Enneagram Personality Test | Tool Guide cover image",
+              "cover_image_width": 1200,
+              "cover_image_height": 675,
+              "cover_image_variants": {
+                "hero": "https://api.fermatmind.com/static/articles/covers/enneagram-test-tool-guide.svg",
+                "card": "https://api.fermatmind.com/static/articles/covers/enneagram-test-tool-guide.svg",
+                "thumbnail": "https://api.fermatmind.com/static/articles/covers/enneagram-test-tool-guide.svg",
+                "og": "https://api.fermatmind.com/static/articles/covers/enneagram-test-tool-guide.svg",
+                "preload": "https://api.fermatmind.com/static/articles/covers/enneagram-test-tool-guide.svg"
+              },
+              "tags": [
+                "Enneagram",
+                "Nine Type",
+                "Tool Guide"
+              ],
+              "related_test_slug": "enneagram-personality-test"
+            }
+          },
+          {
+            "display_order": 4,
+            "article": {
+              "slug": "iq-test-tool-guide",
+              "locale": "en",
+              "title": "IQ Test | Tool Guide",
+              "excerpt": "How to interpret online IQ-style scores responsibly: as a constrained cognitive signal for strategy design, not as total human value.",
+              "status": "published",
+              "is_public": true,
+              "is_indexable": true,
+              "cover_image_url": "https://api.fermatmind.com/static/articles/covers/iq-test-tool-guide.svg",
+              "cover_image_alt": "IQ Test | Tool Guide cover image",
+              "cover_image_width": 1200,
+              "cover_image_height": 675,
+              "cover_image_variants": {
+                "hero": "https://api.fermatmind.com/static/articles/covers/iq-test-tool-guide.svg",
+                "card": "https://api.fermatmind.com/static/articles/covers/iq-test-tool-guide.svg",
+                "thumbnail": "https://api.fermatmind.com/static/articles/covers/iq-test-tool-guide.svg",
+                "og": "https://api.fermatmind.com/static/articles/covers/iq-test-tool-guide.svg",
+                "preload": "https://api.fermatmind.com/static/articles/covers/iq-test-tool-guide.svg"
+              },
+              "tags": [
+                "IQ",
+                "Tool Guide"
+              ],
+              "related_test_slug": "iq-test-intelligence-quotient-assessment"
+            }
+          },
+          {
+            "display_order": 5,
+            "article": {
+              "slug": "eq-test-tool-guide",
+              "locale": "en",
+              "title": "EQ Test | Tool Guide",
+              "excerpt": "A practical guide to emotional intelligence measurement: what is assessed, where self-report can bias, and how to turn results into trainable behavior.",
+              "status": "published",
+              "is_public": true,
+              "is_indexable": true,
+              "cover_image_url": "https://api.fermatmind.com/static/articles/covers/eq-test-tool-guide.svg",
+              "cover_image_alt": "EQ Test | Tool Guide cover image",
+              "cover_image_width": 1200,
+              "cover_image_height": 675,
+              "cover_image_variants": {
+                "hero": "https://api.fermatmind.com/static/articles/covers/eq-test-tool-guide.svg",
+                "card": "https://api.fermatmind.com/static/articles/covers/eq-test-tool-guide.svg",
+                "thumbnail": "https://api.fermatmind.com/static/articles/covers/eq-test-tool-guide.svg",
+                "og": "https://api.fermatmind.com/static/articles/covers/eq-test-tool-guide.svg",
+                "preload": "https://api.fermatmind.com/static/articles/covers/eq-test-tool-guide.svg"
+              },
+              "tags": [
+                "EQ",
+                "Tool Guide"
+              ],
+              "related_test_slug": "eq-test-emotional-intelligence-assessment"
+            }
+          },
+          {
+            "display_order": 6,
+            "article": {
+              "slug": "depression-screening-standard-tool-guide",
+              "locale": "en",
+              "title": "Depression Screening (Standard) | Tool Guide",
+              "excerpt": "A lightweight depression screening guide for early signal detection, trend tracking, and deciding when to seek professional evaluation.",
+              "status": "published",
+              "is_public": true,
+              "is_indexable": true,
+              "cover_image_url": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-tool-guide.svg",
+              "cover_image_alt": "Depression Screening (Standard) | Tool Guide cover image",
+              "cover_image_width": 1200,
+              "cover_image_height": 675,
+              "cover_image_variants": {
+                "hero": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-tool-guide.svg",
+                "card": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-tool-guide.svg",
+                "thumbnail": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-tool-guide.svg",
+                "og": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-tool-guide.svg",
+                "preload": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-tool-guide.svg"
+              },
+              "tags": [
+                "Depression",
+                "Tool Guide"
+              ],
+              "related_test_slug": "depression-screening-test-standard-edition"
+            }
+          }
+        ]
+      },
+      "visibility_rules": {
+        "requires_min_items": 6
+      }
+    },
+    {
       "block_key": "header",
       "block_type": "homepage_section",
       "title": "header",
@@ -593,7 +780,7 @@
           }
         ]
       },
-      "sort_order": 6,
+      "sort_order": 7,
       "is_enabled": true
     },
     {
@@ -644,7 +831,7 @@
         "supportEmailLabel": "Support",
         "tailnote": "See the Micro. Lead the Macro."
       },
-      "sort_order": 7,
+      "sort_order": 8,
       "is_enabled": true
     }
   ]

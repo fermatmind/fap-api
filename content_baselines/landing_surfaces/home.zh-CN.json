@@ -560,6 +560,193 @@
       "is_enabled": true
     },
     {
+      "block_key": "recommended_articles",
+      "block_type": "json",
+      "title": "推荐阅读",
+      "subtitle": "首页运营配置的 6 篇推荐文章。",
+      "sort_order": 6,
+      "is_enabled": true,
+      "payload_json": {
+        "layout": "article_grid",
+        "source": "cms_baseline",
+        "min_items": 6,
+        "items": [
+          {
+            "display_order": 1,
+            "article": {
+              "slug": "mbti-basics",
+              "locale": "zh-CN",
+              "title": "MBTI 性格测试（16型人格）｜工具说明版",
+              "excerpt": "你正在阅读的是费马测试（FermatMind）对该测评的“工具级说明”。我们会用尽量少的噱头，把它还原成一套可被复用的测量框架：它到底测什么、不测什么；结果如何转化为可执行的下一步；以及在什么边界内使用才不会被标签反噬。",
+              "status": "published",
+              "is_public": true,
+              "is_indexable": true,
+              "cover_image_url": "https://api.fermatmind.com/static/articles/covers/mbti-basics.svg",
+              "cover_image_alt": "《MBTI 性格测试（16型人格）｜工具说明版》封面图",
+              "cover_image_width": 1200,
+              "cover_image_height": 675,
+              "cover_image_variants": {
+                "hero": "https://api.fermatmind.com/static/articles/covers/mbti-basics.svg",
+                "card": "https://api.fermatmind.com/static/articles/covers/mbti-basics.svg",
+                "thumbnail": "https://api.fermatmind.com/static/articles/covers/mbti-basics.svg",
+                "og": "https://api.fermatmind.com/static/articles/covers/mbti-basics.svg",
+                "preload": "https://api.fermatmind.com/static/articles/covers/mbti-basics.svg"
+              },
+              "tags": [
+                "MBTI",
+                "工具说明"
+              ],
+              "related_test_slug": "mbti-personality-test-16-personality-types"
+            }
+          },
+          {
+            "display_order": 2,
+            "article": {
+              "slug": "big-five-tool-guide",
+              "locale": "zh-CN",
+              "title": "大五人格测试（OCEAN 模型）｜工具说明版",
+              "excerpt": "你正在阅读的是费马测试（FermatMind）对该测评的“工具级说明”。我们会用尽量少的噱头，把它还原成一套可被复用的测量框架：它到底测什么、不测什么；结果如何转化为可执行的下一步；以及在什么边界内使用才不会被标签反噬。",
+              "status": "published",
+              "is_public": true,
+              "is_indexable": true,
+              "cover_image_url": "https://api.fermatmind.com/static/articles/covers/big-five-tool-guide.svg",
+              "cover_image_alt": "《大五人格测试（OCEAN 模型）｜工具说明版》封面图",
+              "cover_image_width": 1200,
+              "cover_image_height": 675,
+              "cover_image_variants": {
+                "hero": "https://api.fermatmind.com/static/articles/covers/big-five-tool-guide.svg",
+                "card": "https://api.fermatmind.com/static/articles/covers/big-five-tool-guide.svg",
+                "thumbnail": "https://api.fermatmind.com/static/articles/covers/big-five-tool-guide.svg",
+                "og": "https://api.fermatmind.com/static/articles/covers/big-five-tool-guide.svg",
+                "preload": "https://api.fermatmind.com/static/articles/covers/big-five-tool-guide.svg"
+              },
+              "tags": [
+                "大五人格",
+                "工具说明"
+              ],
+              "related_test_slug": "big-five-personality-test-ocean-model"
+            }
+          },
+          {
+            "display_order": 3,
+            "article": {
+              "slug": "enneagram-test-tool-guide",
+              "locale": "zh-CN",
+              "title": "九型人格测试（Enneagram）｜工具说明版",
+              "excerpt": "把九型人格当作动机模式观察工具，而不是固定身份标签：理解你在压力、关系、控制感与价值感中的自动反应。",
+              "status": "published",
+              "is_public": true,
+              "is_indexable": true,
+              "cover_image_url": "https://api.fermatmind.com/static/articles/covers/enneagram-test-tool-guide.svg",
+              "cover_image_alt": "《九型人格测试（Enneagram）｜工具说明版》封面图",
+              "cover_image_width": 1200,
+              "cover_image_height": 675,
+              "cover_image_variants": {
+                "hero": "https://api.fermatmind.com/static/articles/covers/enneagram-test-tool-guide.svg",
+                "card": "https://api.fermatmind.com/static/articles/covers/enneagram-test-tool-guide.svg",
+                "thumbnail": "https://api.fermatmind.com/static/articles/covers/enneagram-test-tool-guide.svg",
+                "og": "https://api.fermatmind.com/static/articles/covers/enneagram-test-tool-guide.svg",
+                "preload": "https://api.fermatmind.com/static/articles/covers/enneagram-test-tool-guide.svg"
+              },
+              "tags": [
+                "九型人格",
+                "Enneagram",
+                "工具说明"
+              ],
+              "related_test_slug": "enneagram-personality-test"
+            }
+          },
+          {
+            "display_order": 4,
+            "article": {
+              "slug": "iq-test-tool-guide",
+              "locale": "zh-CN",
+              "title": "智商（IQ）测试｜工具说明版",
+              "excerpt": "你正在阅读的是费马测试（FermatMind）对该测评的“工具级说明”。我们会用尽量少的噱头，把它还原成一套可被复用的测量框架：它到底测什么、不测什么；结果如何转化为可执行的下一步；以及在什么边界内使用才不会被标签反噬。",
+              "status": "published",
+              "is_public": true,
+              "is_indexable": true,
+              "cover_image_url": "https://api.fermatmind.com/static/articles/covers/iq-test-tool-guide.svg",
+              "cover_image_alt": "《智商（IQ）测试｜工具说明版》封面图",
+              "cover_image_width": 1200,
+              "cover_image_height": 675,
+              "cover_image_variants": {
+                "hero": "https://api.fermatmind.com/static/articles/covers/iq-test-tool-guide.svg",
+                "card": "https://api.fermatmind.com/static/articles/covers/iq-test-tool-guide.svg",
+                "thumbnail": "https://api.fermatmind.com/static/articles/covers/iq-test-tool-guide.svg",
+                "og": "https://api.fermatmind.com/static/articles/covers/iq-test-tool-guide.svg",
+                "preload": "https://api.fermatmind.com/static/articles/covers/iq-test-tool-guide.svg"
+              },
+              "tags": [
+                "IQ",
+                "工具说明"
+              ],
+              "related_test_slug": "iq-test-intelligence-quotient-assessment"
+            }
+          },
+          {
+            "display_order": 5,
+            "article": {
+              "slug": "eq-test-tool-guide",
+              "locale": "zh-CN",
+              "title": "情商（EQ）测试｜工具说明版",
+              "excerpt": "你正在阅读的是费马测试（FermatMind）对该测评的“工具级说明”。我们会用尽量少的噱头，把它还原成一套可被复用的测量框架：它到底测什么、不测什么；结果如何转化为可执行的下一步；以及在什么边界内使用才不会被标签反噬。",
+              "status": "published",
+              "is_public": true,
+              "is_indexable": true,
+              "cover_image_url": "https://api.fermatmind.com/static/articles/covers/eq-test-tool-guide.svg",
+              "cover_image_alt": "《情商（EQ）测试｜工具说明版》封面图",
+              "cover_image_width": 1200,
+              "cover_image_height": 675,
+              "cover_image_variants": {
+                "hero": "https://api.fermatmind.com/static/articles/covers/eq-test-tool-guide.svg",
+                "card": "https://api.fermatmind.com/static/articles/covers/eq-test-tool-guide.svg",
+                "thumbnail": "https://api.fermatmind.com/static/articles/covers/eq-test-tool-guide.svg",
+                "og": "https://api.fermatmind.com/static/articles/covers/eq-test-tool-guide.svg",
+                "preload": "https://api.fermatmind.com/static/articles/covers/eq-test-tool-guide.svg"
+              },
+              "tags": [
+                "EQ",
+                "工具说明"
+              ],
+              "related_test_slug": "eq-test-emotional-intelligence-assessment"
+            }
+          },
+          {
+            "display_order": 6,
+            "article": {
+              "slug": "depression-screening-standard-tool-guide",
+              "locale": "zh-CN",
+              "title": "抑郁测评【标准版】｜工具说明版",
+              "excerpt": "你正在阅读的是费马测试（FermatMind）对该测评的“工具级说明”。我们会用尽量少的噱头，把它还原成一套可被复用的测量框架：它到底测什么、不测什么；结果如何转化为可执行的下一步；以及在什么边界内使用才不会被标签反噬。",
+              "status": "published",
+              "is_public": true,
+              "is_indexable": true,
+              "cover_image_url": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-tool-guide.svg",
+              "cover_image_alt": "《抑郁测评【标准版】｜工具说明版》封面图",
+              "cover_image_width": 1200,
+              "cover_image_height": 675,
+              "cover_image_variants": {
+                "hero": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-tool-guide.svg",
+                "card": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-tool-guide.svg",
+                "thumbnail": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-tool-guide.svg",
+                "og": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-tool-guide.svg",
+                "preload": "https://api.fermatmind.com/static/articles/covers/depression-screening-standard-tool-guide.svg"
+              },
+              "tags": [
+                "抑郁测评",
+                "工具说明"
+              ],
+              "related_test_slug": "depression-screening-test-standard-edition"
+            }
+          }
+        ]
+      },
+      "visibility_rules": {
+        "requires_min_items": 6
+      }
+    },
+    {
       "block_key": "header",
       "block_type": "homepage_section",
       "title": "header",
@@ -593,7 +780,7 @@
           }
         ]
       },
-      "sort_order": 6,
+      "sort_order": 7,
       "is_enabled": true
     },
     {
@@ -644,7 +831,7 @@
         "supportEmailLabel": "支持邮箱",
         "tailnote": "识微，见远。See the Micro. Lead the Macro."
       },
-      "sort_order": 7,
+      "sort_order": 8,
       "is_enabled": true
     }
   ]

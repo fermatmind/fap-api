@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-20T00:14:00+08:00",
+  "updated_at": "2026-04-21T12:43:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -3134,6 +3134,60 @@
       "merged_at": "",
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "PR-CMSOPS-6": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "status": "local_checks_passed",
+      "branch": "codex/cmsops-pr6-staging-baseline-content",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "jq empty content_baselines/articles/articles.en.json content_baselines/articles/articles.zh-CN.json content_baselines/landing_surfaces/home.en.json content_baselines/landing_surfaces/home.zh-CN.json content_baselines/content_pages/content_pages.en.json",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan route:list --path=api/v0.5 --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan migrate:status --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan articles:import-local-baseline --dry-run --upsert --status=published --source-dir=../content_baselines/articles --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan landing-surfaces:import-local-baseline --dry-run --upsert --status=published --source-dir=../content_baselines/landing_surfaces --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan content-pages:import-local-baseline --dry-run --upsert --status=published --source-dir=../content_baselines/content_pages --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && bash scripts/ci_verify_mbti.sh",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "deferred": [
+        "Deploy/import this baseline into staging after merge, then run the frontend staging baseline validator against the live API.",
+        "Frontend sitemap article enumeration QA remains scoped to PR-7."
+      ]
     }
   }
 }
