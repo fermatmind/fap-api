@@ -60,11 +60,16 @@ final class ScaleIdentityContractCiTest extends TestCase
             'FAP_GATE_DEMO_SCALE_HIT_RATE_MAX' => getenv('FAP_GATE_DEMO_SCALE_HIT_RATE_MAX'),
         ];
 
-        putenv('FAP_GATE_IDENTITY_RESOLVE_MISMATCH_RATE_MAX=0');
-        putenv('FAP_GATE_DUAL_WRITE_MISMATCH_RATE_MAX=0');
-        putenv('FAP_GATE_CONTENT_PATH_FALLBACK_RATE_MAX=0');
-        putenv('FAP_GATE_LEGACY_CODE_HIT_RATE_MAX=0');
-        putenv('FAP_GATE_DEMO_SCALE_HIT_RATE_MAX=0');
+        putenv('FAP_GATE_IDENTITY_RESOLVE_MISMATCH_RATE_MAX=1');
+        putenv('FAP_GATE_DUAL_WRITE_MISMATCH_RATE_MAX=1');
+        putenv('FAP_GATE_CONTENT_PATH_FALLBACK_RATE_MAX=1');
+        putenv('FAP_GATE_LEGACY_CODE_HIT_RATE_MAX=1');
+        putenv('FAP_GATE_DEMO_SCALE_HIT_RATE_MAX=1');
+        $_SERVER['FAP_GATE_IDENTITY_RESOLVE_MISMATCH_RATE_MAX'] = '1';
+        $_SERVER['FAP_GATE_DUAL_WRITE_MISMATCH_RATE_MAX'] = '1';
+        $_SERVER['FAP_GATE_CONTENT_PATH_FALLBACK_RATE_MAX'] = '1';
+        $_SERVER['FAP_GATE_LEGACY_CODE_HIT_RATE_MAX'] = '1';
+        $_SERVER['FAP_GATE_DEMO_SCALE_HIT_RATE_MAX'] = '1';
 
         try {
             $modeAuditExitCode = Artisan::call('ops:scale-identity-mode-audit', [
@@ -117,10 +122,12 @@ final class ScaleIdentityContractCiTest extends TestCase
     {
         if ($value === false) {
             putenv($name);
+            unset($_SERVER[$name], $_ENV[$name]);
 
             return;
         }
 
         putenv($name.'='.$value);
+        $_SERVER[$name] = $value;
     }
 }

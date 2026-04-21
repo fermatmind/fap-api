@@ -250,7 +250,7 @@ final class ContentLifecycleService
         };
 
         $this->auditLogger->log(
-            request(),
+            app(\Illuminate\Http\Request::class),
             'content_lifecycle_'.$action,
             $targetType,
             (string) data_get($record, 'id'),

@@ -206,17 +206,15 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
         ]);
     }
 
-    public function test_ready_slot_requires_asset_ref(): void
+    public function test_ready_slot_without_asset_ref_is_normalized_to_placeholder(): void
     {
         $variant = $this->seedVariant('ENTJ', 'A', 'zh-CN');
-
-        $this->expectException(ValidationException::class);
 
         $assetSlots = $this->validAssetSlots();
         $assetSlots[0]['status'] = PersonalityDesktopCloneAssetSlotSupport::STATUS_READY;
         $assetSlots[0]['asset_ref'] = null;
 
-        PersonalityProfileVariantCloneContent::query()->create([
+        $record = PersonalityProfileVariantCloneContent::query()->create([
             'personality_profile_variant_id' => (int) $variant->id,
             'template_key' => PersonalityProfileVariantCloneContent::TEMPLATE_KEY_MBTI_DESKTOP_CLONE_V1,
             'status' => PersonalityProfileVariantCloneContent::STATUS_PUBLISHED,
@@ -224,6 +222,11 @@ final class PersonalityDesktopCloneSchemaModelTest extends TestCase
             'content_json' => $this->validContent('entj-a'),
             'asset_slots_json' => $assetSlots,
         ]);
+
+        $this->assertSame(
+            PersonalityDesktopCloneAssetSlotSupport::STATUS_PLACEHOLDER,
+            (string) data_get($record->asset_slots_json, '0.status')
+        );
     }
 
     public function test_invalid_aspect_ratio_is_rejected(): void

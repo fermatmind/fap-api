@@ -104,7 +104,8 @@ final class CareerLifecycleOperationalSummaryService
             if ($slugs !== []) {
                 return array_values(array_unique($slugs));
             }
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
+            unset($e);
             // Fallback keeps the authority operational even if ledger bootstrapping fails in local/dev.
         }
 

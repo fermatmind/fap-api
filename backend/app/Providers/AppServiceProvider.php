@@ -159,7 +159,7 @@ class AppServiceProvider extends ServiceProvider
             $orgId = max(0, $orgId);
 
             if ($attemptId !== '') {
-                $attempt = Attempt::query()
+                $attempt = Attempt::withoutGlobalScopes()
                     ->where('id', $attemptId)
                     ->where('org_id', $orgId)
                     ->first();

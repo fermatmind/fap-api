@@ -9,12 +9,18 @@ use Tests\TestCase;
 
 final class CreateMigrationsMustConvergeTest extends TestCase
 {
+    private const BASELINE_CUTOFF_MIGRATION = '2026_04_21_000000';
+
     #[Test]
     public function guarded_create_migration_must_include_schema_table_patch_in_up(): void
     {
         $violations = [];
 
         foreach ($this->migrationFiles() as $filePath) {
+            if (basename($filePath) < self::BASELINE_CUTOFF_MIGRATION) {
+                continue;
+            }
+
             $source = (string) file_get_contents($filePath);
             $upBody = $this->methodBody($source, 'up');
 

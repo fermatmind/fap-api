@@ -6,6 +6,7 @@ namespace App\Services\Content;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Database\QueryException;
 use Throwable;
 
 final class ContentPackV2Resolver
@@ -23,10 +24,18 @@ final class ContentPackV2Resolver
             return null;
         }
 
-        $activation = DB::table('content_pack_activations')
-            ->where('pack_id', $packId)
-            ->where('pack_version', $packVersion)
-            ->first();
+        try {
+            $activation = DB::table('content_pack_activations')
+                ->where('pack_id', $packId)
+                ->where('pack_version', $packVersion)
+                ->first();
+        } catch (QueryException $e) {
+            if (str_contains($e->getMessage(), 'content_pack_activations')) {
+                return null;
+            }
+
+            throw $e;
+        }
 
         if (! $activation) {
             return null;

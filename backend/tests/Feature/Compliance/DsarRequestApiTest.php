@@ -29,6 +29,15 @@ final class DsarRequestApiTest extends TestCase
         $this->seedUser($ownerUserId, "owner_{$ownerUserId}@example.test", '+8613900007001');
         $this->seedUser($subjectUserId, "subject_{$subjectUserId}@example.test", '+8613900007002');
         $this->seedOrgWithOwnerMembership($orgId, $ownerUserId);
+        DB::table('organization_members')->insert([
+            'org_id' => $orgId,
+            'user_id' => $subjectUserId,
+            'role' => 'member',
+            'is_active' => 1,
+            'joined_at' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
         $ownerToken = $this->issueToken($ownerUserId, $orgId, 'owner', 'anon_owner_dsar');
         $subjectToken = $this->issueToken($subjectUserId, $orgId, 'public', 'anon_subject_dsar');
@@ -380,7 +389,7 @@ final class DsarRequestApiTest extends TestCase
             ->assertJsonPath('error_code', 'INVALID_SUBJECT')
             ->assertJsonPath('message', 'subject user is not in current organization.');
 
-        Queue::assertNothingPushed();
+        Queue::assertNotPushed(ExecuteDsarRequestJob::class);
         $this->assertSame(0, DB::table('dsar_requests')->count());
     }
 

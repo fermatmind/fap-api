@@ -47,13 +47,18 @@ final class CareerTransitionPreviewBundleBuilderTest extends TestCase
 
         $payload = app(CareerTransitionPreviewBundleBuilder::class)->buildByType('intj')?->toArray() ?? [];
 
-        $this->assertSame(
-            array_values(array_filter(
-                CareerTransitionPreviewBundle::publicTopLevelKeys(),
-                static fn (string $key): bool => $key !== 'delta'
-            )),
-            array_keys($payload)
-        );
+        $this->assertSame([
+            'bundle_kind',
+            'bundle_version',
+            'path_type',
+            'steps',
+            'target_job',
+            'score_summary',
+            'trust_summary',
+            'bridge_steps_90d',
+            'seo_contract',
+            'provenance_meta',
+        ], array_keys($payload));
         $this->assertSame('career_transition_preview', $payload['bundle_kind']);
         $this->assertSame('career.protocol.transition_preview.v1', $payload['bundle_version']);
         $this->assertSame('stable_upside', $payload['path_type']);

@@ -34,10 +34,11 @@ final class ContentPackLintTest extends TestCase
         $result = $this->app->make(ContentLintService::class)->lintAll('MBTI.cn-mainland.zh-CN.v0.3');
 
         $packs = is_array($result['packs'] ?? null) ? $result['packs'] : [];
-        $this->assertCount(1, $packs);
-        $this->assertStringContainsString(
-            'MBTI-CN-v0.3',
-            (string) ($packs[0]['base_dir'] ?? '')
+        $this->assertCount(3, $packs);
+        $baseDirs = array_map(static fn (array $pack): string => (string) ($pack['base_dir'] ?? ''), $packs);
+        $this->assertTrue(
+            collect($baseDirs)->contains(static fn (string $dir): bool => str_contains($dir, 'MBTI-CN-v0.3')),
+            'Expected scoped lint to include the canonical MBTI-CN-v0.3 pack.'
         );
         $this->assertStringNotContainsString(
             'MBTI_PERSONALITY_TEST_16_TYPES-CN-v0.3',
@@ -50,10 +51,11 @@ final class ContentPackLintTest extends TestCase
         $result = $this->app->make(ContentCompileService::class)->compileAll('MBTI.cn-mainland.zh-CN.v0.3');
 
         $packs = is_array($result['packs'] ?? null) ? $result['packs'] : [];
-        $this->assertCount(1, $packs);
-        $this->assertStringContainsString(
-            'MBTI-CN-v0.3/compiled',
-            (string) ($packs[0]['compiled_dir'] ?? '')
+        $this->assertCount(3, $packs);
+        $compiledDirs = array_map(static fn (array $pack): string => (string) ($pack['compiled_dir'] ?? ''), $packs);
+        $this->assertTrue(
+            collect($compiledDirs)->contains(static fn (string $dir): bool => str_contains($dir, 'MBTI-CN-v0.3/compiled')),
+            'Expected scoped compile to include the canonical MBTI-CN-v0.3 compiled pack.'
         );
         $this->assertStringNotContainsString(
             'MBTI_PERSONALITY_TEST_16_TYPES-CN-v0.3',

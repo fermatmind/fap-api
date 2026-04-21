@@ -428,10 +428,7 @@ final class ScaleIdentityGate extends Command
 
     private function floatEnv(string $name, float $default): float
     {
-        $raw = getenv($name);
-        if ($raw === false) {
-            return $default;
-        }
+        $raw = $_SERVER[$name] ?? $_ENV[$name] ?? null;
         $value = trim((string) $raw);
         if ($value === '' || ! is_numeric($value)) {
             return $default;

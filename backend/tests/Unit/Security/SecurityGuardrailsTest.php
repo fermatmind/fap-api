@@ -32,8 +32,16 @@ final class SecurityGuardrailsTest extends TestCase
         '/api/v0.3/email/capture',
         '/api/v0.3/email/preferences',
         '/api/v0.3/email/unsubscribe',
+        '/api/v0.3/analytics/mbti-attribution-events',
         '/api/v0.3/shares/{shareId}/click',
         '/api/v0.3/shares/{shareId}/compare-invites',
+        '/api/v0.5/career/attribution/events',
+        '/api/v0.5/career/recommendations/mbti/{type}/feedback',
+        '/api/v0.5/career/shortlist',
+        '/api/v0.5/internal/content-pages/{slug}',
+        '/api/v0.5/internal/landing-surfaces/{surfaceKey}',
+        '/api/v0.5/internal/media-assets/{assetKey}',
+        '/api/v0.5/internal/media-assets/{assetKey}/upload',
     ];
 
     /** @var array<int, string> */

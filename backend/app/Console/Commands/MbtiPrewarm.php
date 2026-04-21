@@ -8,6 +8,7 @@ use App\Http\Controllers\API\V0_3\ScalesController;
 use App\Http\Controllers\API\V0_3\ScalesLookupController;
 use App\Services\Content\BigFivePackLoader;
 use App\Services\Content\ClinicalComboPackLoader;
+use App\Services\Content\EnneagramPackLoader;
 use App\Services\Content\Eq60PackLoader;
 use App\Services\Content\QuestionsService;
 use App\Services\Content\Sds20PackLoader;
@@ -43,6 +44,7 @@ final class MbtiPrewarm extends Command
         $clinicalPackLoader = app(ClinicalComboPackLoader::class);
         $sds20PackLoader = app(Sds20PackLoader::class);
         $eq60PackLoader = app(Eq60PackLoader::class);
+        $enneagramPackLoader = app(EnneagramPackLoader::class);
 
         $failed = false;
 
@@ -83,7 +85,8 @@ final class MbtiPrewarm extends Command
                         $bigFivePackLoader,
                         $clinicalPackLoader,
                         $sds20PackLoader,
-                        $eq60PackLoader
+                        $eq60PackLoader,
+                        $enneagramPackLoader
                     );
                     $this->line(sprintf(
                         'questions locale=%s form=%s status=%d cache=%s',

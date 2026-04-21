@@ -551,7 +551,8 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->assertSame((int) $reviewer->id, (int) $workflow->reviewer_admin_user_id);
         $this->assertSame(EditorialReview::STATE_APPROVED, (string) $workflow->workflow_state);
 
-        $audit = AuditLog::query()
+        $audit = AuditLog::withoutGlobalScopes()
+            ->where('org_id', $selectedOrgId)
             ->where('action', 'editorial_review_approved')
             ->where('target_type', 'article')
             ->where('target_id', (string) $article->id)

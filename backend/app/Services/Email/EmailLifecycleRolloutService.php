@@ -617,7 +617,8 @@ class EmailLifecycleRolloutService
             if (is_string($nextEligibleAt) && trim($nextEligibleAt) !== '') {
                 try {
                     return Carbon::parse($nextEligibleAt)->lessThanOrEqualTo($this->now());
-                } catch (\Throwable) {
+                } catch (\Throwable $e) {
+                    unset($e);
                     // Fall through to legacy last sent timestamp.
                 }
             }
