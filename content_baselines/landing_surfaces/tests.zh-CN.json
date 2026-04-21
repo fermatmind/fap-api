@@ -170,18 +170,30 @@
               "primaryLabel": "标准版"
             },
             {
-              "key": "enneagram-personality-test",
+              "key": "enneagram-personality-test-nine-types",
               "title": "九型人格测试",
               "description": "从核心动机、压力反应与防御模式理解你的行为模式。",
-              "questionsLabel": "待上线",
-              "durationLabel": "待补充",
-              "outputLabel": "核心动机、压力反应与成长线索",
-              "href": "/zh/tests",
-              "detailsHref": "/zh/tests",
+              "questionsLabel": "105 / 144 题",
+              "durationLabel": "约 15 / 40 分钟",
+              "outputLabel": "九型特质光谱、核心动力与成长线索",
+              "detailsHref": "/zh/tests/enneagram-personality-test-nine-types",
               "secondaryLabel": "查看详情",
               "scientificBasis": "Enneagram framework",
               "previewVariant": "summary",
-              "primaryLabel": "查看入口"
+              "href": "/zh/tests/enneagram-personality-test-nine-types",
+              "primaryActions": [
+                {
+                  "href": "/zh/tests/enneagram-personality-test-nine-types/take?form=enneagram_likert_105",
+                  "label": "标准版",
+                  "meta": "105 题 ETI 标准特质画像。"
+                },
+                {
+                  "href": "/zh/tests/enneagram-personality-test-nine-types/take?form=enneagram_forced_choice_144",
+                  "label": "专家版",
+                  "meta": "144 题 EAM 核心动力矩阵。"
+                }
+              ],
+              "primaryLabel": "查看专属页"
             },
             {
               "key": "eq-test-emotional-intelligence-assessment",
@@ -655,18 +667,30 @@
                 "primaryLabel": "标准版"
               },
               {
-                "key": "enneagram-personality-test",
+                "key": "enneagram-personality-test-nine-types",
                 "title": "九型人格测试",
                 "description": "从核心动机、压力反应与防御模式理解你的行为模式。",
-                "questionsLabel": "待上线",
-                "durationLabel": "待补充",
-                "outputLabel": "核心动机、压力反应与成长线索",
-                "href": "/zh/tests",
-                "detailsHref": "/zh/tests",
+                "questionsLabel": "105 / 144 题",
+                "durationLabel": "约 15 / 40 分钟",
+                "outputLabel": "九型特质光谱、核心动力与成长线索",
+                "detailsHref": "/zh/tests/enneagram-personality-test-nine-types",
                 "secondaryLabel": "查看详情",
                 "scientificBasis": "Enneagram framework",
                 "previewVariant": "summary",
-                "primaryLabel": "查看入口"
+                "href": "/zh/tests/enneagram-personality-test-nine-types",
+                "primaryActions": [
+                  {
+                    "href": "/zh/tests/enneagram-personality-test-nine-types/take?form=enneagram_likert_105",
+                    "label": "标准版",
+                    "meta": "105 题 ETI 标准特质画像。"
+                  },
+                  {
+                    "href": "/zh/tests/enneagram-personality-test-nine-types/take?form=enneagram_forced_choice_144",
+                    "label": "专家版",
+                    "meta": "144 题 EAM 核心动力矩阵。"
+                  }
+                ],
+                "primaryLabel": "查看专属页"
               },
               {
                 "key": "eq-test-emotional-intelligence-assessment",
