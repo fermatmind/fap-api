@@ -13,7 +13,7 @@ final class WarningMatrixTest extends CareerScoringTestCase
 {
     public function test_it_emits_explicit_red_and_amber_flags_and_blocked_claims(): void
     {
-        $warnings = (new WarningMatrix)->build(
+        $warnings = app(WarningMatrix::class)->build(
             $this->sampleContext([
                 'median_pay_usd_annual' => null,
                 'cross_market_mismatch' => true,
@@ -39,7 +39,7 @@ final class WarningMatrixTest extends CareerScoringTestCase
 
     public function test_it_blocks_exposure_claims_for_noindex_or_unavailable_states(): void
     {
-        $warnings = (new WarningMatrix)->build(
+        $warnings = app(WarningMatrix::class)->build(
             $this->sampleContext([
                 'index_state' => IndexStateValue::NOINDEX,
                 'index_eligible' => false,

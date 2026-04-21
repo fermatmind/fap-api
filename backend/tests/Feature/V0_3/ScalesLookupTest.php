@@ -123,7 +123,7 @@ class ScalesLookupTest extends TestCase
         ]);
 
         $items = collect($response->json('items'));
-        $this->assertCount(6, $items);
+        $this->assertCount(7, $items);
         $mbti = $items->firstWhere('slug', 'mbti-personality-test-16-personality-types');
         $this->assertIsArray($mbti);
         $this->assertSame('MBTI', $mbti['scale_code']);

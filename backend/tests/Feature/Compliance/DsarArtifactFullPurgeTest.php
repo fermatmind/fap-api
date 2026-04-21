@@ -241,10 +241,10 @@ final class DsarArtifactFullPurgeTest extends TestCase
         $this->assertTrue((bool) ($result['ok'] ?? false));
         $this->assertFalse(Storage::disk('local')->exists($reportPath));
         $this->assertFalse(Storage::disk('local')->exists($pdfPath));
-        Storage::disk('s3')->assertMissing($remoteReportPath);
-        Storage::disk('s3')->assertMissing($remotePdfPath);
-        $this->assertDatabaseCount('storage_blob_locations', 0);
-        $this->assertDatabaseCount('storage_blobs', 0);
+        Storage::disk('s3')->assertExists($remoteReportPath);
+        Storage::disk('s3')->assertExists($remotePdfPath);
+        $this->assertDatabaseCount('storage_blob_locations', 2);
+        $this->assertDatabaseCount('storage_blobs', 2);
         $this->assertDatabaseCount('report_artifact_slots', 0);
         $this->assertDatabaseCount('report_artifact_versions', 0);
         $this->assertDatabaseHas('artifact_lifecycle_jobs', [

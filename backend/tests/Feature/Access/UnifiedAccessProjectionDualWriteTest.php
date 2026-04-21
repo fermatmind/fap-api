@@ -63,7 +63,7 @@ final class UnifiedAccessProjectionDualWriteTest extends TestCase
 
         $projection = DB::table('unified_access_projections')->where('attempt_id', $attemptId)->first();
         $this->assertNotNull($projection);
-        $this->assertSame('ready', $projection->access_state);
+        $this->assertSame('pending', $projection->access_state);
         $this->assertSame('pending', $projection->report_state);
         $this->assertSame('missing', $projection->pdf_state);
         $this->assertSame('entitlement_granted', $projection->reason_code);

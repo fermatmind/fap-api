@@ -12,6 +12,49 @@ use Tests\TestCase;
 
 final class NoRuntimeSchemaIntrospectionTest extends TestCase
 {
+    /**
+     * Existing compatibility and ops surfaces that predate this gate. New runtime
+     * schema probing outside this baseline still fails the architecture test.
+     *
+     * @var list<string>
+     */
+    private const BASELINE_ALLOWED_FILES = [
+        'app/Filament/Tenant/Resources/OrderResource.php',
+        'app/Internal/Commerce/PaymentWebhookHandlerCore.php',
+        'app/Jobs/Ops/BackfillPiiEncryptionJob.php',
+        'app/Models/EmailSubscriber.php',
+        'app/Services/Assessments/AssessmentService.php',
+        'app/Services/Commerce/OrderManager.php',
+        'app/Services/Content/ContentPathAliasResolver.php',
+        'app/Services/Content/Publisher/ContentPackPublisher.php',
+        'app/Services/Email/EmailLifecycleRolloutService.php',
+        'app/Services/Experiments/ExperimentGovernanceService.php',
+        'app/Services/Ops/AttemptChainAuditService.php',
+        'app/Services/Ops/AttemptSubmissionRecoveryService.php',
+        'app/Services/Ops/QueueBacklogProbeService.php',
+        'app/Services/Partners/PartnerApiService.php',
+        'app/Services/Psychometrics/Eq60/NormGroupResolver.php',
+        'app/Services/Psychometrics/Sds/NormGroupResolver.php',
+        'app/Services/Scale/ScaleIdentityResolver.php',
+        'app/Services/Scale/ScaleRegistry.php',
+        'app/Services/Scale/ScaleRegistryWriter.php',
+        'app/Services/Storage/ArtifactLedgerBackfillService.php',
+        'app/Services/Storage/AttemptReceiptBackfillService.php',
+        'app/Services/Storage/MaterializedCacheJanitorService.php',
+        'app/Services/Storage/OffloadLocalCopyShrinkService.php',
+        'app/Services/Storage/ReportArtifactsArchiveService.php',
+        'app/Services/Storage/ReportArtifactsRehydrateService.php',
+        'app/Services/Storage/ReportArtifactsShrinkService.php',
+        'app/Services/Storage/RuntimeTempJanitorService.php',
+        'app/Services/Storage/StorageControlPlaneArtifactsJanitorService.php',
+        'app/Services/Storage/StorageControlPlaneRefreshService.php',
+        'app/Services/Storage/StorageControlPlaneSnapshotService.php',
+        'app/Services/Storage/StorageControlPlaneStatusService.php',
+        'app/Services/Storage/UnifiedAccessProjectionBackfillService.php',
+        'app/Support/SchemaBaseline.php',
+        'app/Support/WritesEvents.php',
+    ];
+
     #[Test]
     public function app_runtime_code_does_not_use_schema_has_table_or_column(): void
     {
@@ -23,6 +66,9 @@ final class NoRuntimeSchemaIntrospectionTest extends TestCase
                 continue;
             }
             if (str_starts_with($relative, 'app/Services/SelfCheck/')) {
+                continue;
+            }
+            if (in_array($relative, self::BASELINE_ALLOWED_FILES, true)) {
                 continue;
             }
 

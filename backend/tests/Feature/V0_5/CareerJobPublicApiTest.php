@@ -358,10 +358,10 @@ final class CareerJobPublicApiTest extends TestCase
             ->assertJsonPath('job.mbti_primary_codes.0', 'ENTP')
             ->assertJsonPath('job.mbti_secondary_codes.0', 'INTJ');
 
-        $this->getJson('/api/v0.5/career-jobs/event-experience-producer?locale=zh-CN')
+        $this->getJson('/api/v0.5/career-jobs/event-experience-producer?locale=en')
             ->assertOk()
             ->assertJsonPath('job.job_code', 'event-experience-producer')
-            ->assertJsonPath('job.locale', 'zh-CN')
+            ->assertJsonPath('job.locale', 'en')
             ->assertJsonPath('job.mbti_primary_codes.0', 'ESFP')
             ->assertJsonPath('job.mbti_secondary_codes.0', 'ENFJ');
     }

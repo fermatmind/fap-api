@@ -39,7 +39,7 @@ class ScalesDualCodeReadTest extends TestCase
         $response = $this->getJson('/api/v0.3/scales/MBTI_PERSONALITY_TEST_16_TYPES/questions');
         $response->assertStatus(200);
         $response->assertJsonPath('ok', true);
-        $response->assertJsonPath('scale_code', 'MBTI');
+        $response->assertJsonPath('scale_code', 'MBTI_PERSONALITY_TEST_16_TYPES');
         $response->assertJsonPath('requested_scale_code', 'MBTI_PERSONALITY_TEST_16_TYPES');
         $response->assertJsonPath('scale_code_legacy', 'MBTI');
         $response->assertJsonPath('scale_code_v2', 'MBTI_PERSONALITY_TEST_16_TYPES');

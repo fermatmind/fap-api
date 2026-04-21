@@ -198,7 +198,7 @@ final class MbtiCompareInviteAttributionFlowTest extends TestCase
         $orderNo = (string) $checkout->json('order_no');
         $this->assertNotSame('', $orderNo);
 
-        $order = Order::query()->where('order_no', $orderNo)->firstOrFail();
+        $order = Order::withoutGlobalScopes()->where('order_no', $orderNo)->firstOrFail();
         $this->assertSame($shareId, data_get($order->meta_json, 'attribution.share_id'));
         $this->assertSame($inviteId, data_get($order->meta_json, 'attribution.compare_invite_id'));
         $this->assertSame('clk_flow_001', data_get($order->meta_json, 'attribution.share_click_id'));

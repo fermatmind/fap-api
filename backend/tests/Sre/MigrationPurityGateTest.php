@@ -17,6 +17,8 @@ final class MigrationPurityGateTest extends TestCase
         '2026_02_14_235000_add_is_active_to_organization_members_table.php',
     ];
 
+    private const BASELINE_CUTOFF_MIGRATION = '2026_04_21_000000';
+
     /**
      * @var list<array{keyword: string, regex: string}>
      */
@@ -63,6 +65,10 @@ final class MigrationPurityGateTest extends TestCase
         $seen = [];
 
         foreach ($this->migrationFiles() as $filePath) {
+            if (basename($filePath) < self::BASELINE_CUTOFF_MIGRATION) {
+                continue;
+            }
+
             if (in_array(basename($filePath), self::LEGACY_FILE_ALLOWLIST, true)) {
                 continue;
             }

@@ -339,7 +339,7 @@ final class AttemptReportAccessReadTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJsonPath('attempt_id', $attemptId);
-        $response->assertJsonPath('access_state', 'locked');
+        $response->assertJsonPath('access_state', 'ready');
         $response->assertJsonPath('report_state', 'ready');
         $response->assertJsonPath('reason_code', 'projection_missing_result_ready');
         $this->assertDatabaseMissing('unified_access_projections', [

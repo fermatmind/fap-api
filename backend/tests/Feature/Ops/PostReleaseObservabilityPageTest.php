@@ -266,20 +266,23 @@ final class PostReleaseObservabilityPageTest extends TestCase
         $this->assertTrue($article->is_public);
         $this->assertNotNull($article->published_at);
 
-        $publishAudit = AuditLog::query()
+        $publishAudit = AuditLog::withoutGlobalScopes()
+            ->where('org_id', (int) $selectedOrg->id)
             ->where('action', 'content_release_publish')
             ->where('target_type', 'article')
             ->where('target_id', (string) $article->id)
             ->latest('created_at')
             ->first();
 
-        $cacheSignalAudit = AuditLog::query()
+        $cacheSignalAudit = AuditLog::withoutGlobalScopes()
+            ->where('org_id', (int) $selectedOrg->id)
             ->where('action', 'content_release_cache_signal')
             ->where('target_type', 'article')
             ->where('target_id', (string) $article->id)
             ->first();
 
-        $broadcastAudit = AuditLog::query()
+        $broadcastAudit = AuditLog::withoutGlobalScopes()
+            ->where('org_id', (int) $selectedOrg->id)
             ->where('action', 'content_release_broadcast')
             ->where('target_type', 'article')
             ->where('target_id', (string) $article->id)
@@ -410,13 +413,15 @@ final class PostReleaseObservabilityPageTest extends TestCase
         $article->refresh();
         $this->assertSame('published', $article->status);
 
-        $failedSignalAudit = AuditLog::query()
+        $failedSignalAudit = AuditLog::withoutGlobalScopes()
+            ->where('org_id', (int) $selectedOrg->id)
             ->where('action', 'content_release_cache_signal')
             ->where('target_type', 'article')
             ->where('target_id', (string) $article->id)
             ->first();
 
-        $failureAlertAudit = AuditLog::query()
+        $failureAlertAudit = AuditLog::withoutGlobalScopes()
+            ->where('org_id', (int) $selectedOrg->id)
             ->where('action', 'content_release_failure_alert')
             ->where('target_type', 'article')
             ->where('target_id', (string) $article->id)

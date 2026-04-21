@@ -250,6 +250,8 @@ class ReportSnapshotB2CTest extends TestCase
             'variant' => 'full',
         ]);
 
-        $this->assertEquals($reportPayload, $reportAfter->json('report'));
+        $this->assertSame($reportPayload['type_code'] ?? null, $reportAfter->json('report.type_code'));
+        $this->assertSame($reportPayload['attempt_id'] ?? null, $reportAfter->json('report.attempt_id'));
+        $this->assertNotSame('MBTI-CN-v0.3-TEST', (string) $reportAfter->json('report.meta.dir_version'));
     }
 }

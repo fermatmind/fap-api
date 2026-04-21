@@ -127,7 +127,7 @@ final class CiScaleImpact extends Command
      */
     private function writeGithubOutput(array $payload): void
     {
-        $target = trim((string) getenv('GITHUB_OUTPUT'));
+        $target = trim((string) ($_SERVER['GITHUB_OUTPUT'] ?? $_ENV['GITHUB_OUTPUT'] ?? ''));
         if ($target === '') {
             return;
         }
