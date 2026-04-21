@@ -37,6 +37,9 @@ final class NormalizeApiErrorContract
             'details' => $this->resolveDetails($payload),
             'request_id' => $this->resolveRequestId($request, $payload),
         ];
+        if ($normalized['error_code'] === 'VALIDATION_FAILED' && is_array($normalized['details'])) {
+            $normalized['errors'] = $normalized['details'];
+        }
 
         $response->setData($normalized);
 

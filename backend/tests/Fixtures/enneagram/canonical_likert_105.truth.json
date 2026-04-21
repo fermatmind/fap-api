@@ -1,0 +1,340 @@
+{
+    "access_contract": {
+        "access_state": "ready",
+        "form_code": "enneagram_likert_105",
+        "ok": true,
+        "payload_variant": "full",
+        "pdf_state": "ready",
+        "report_state": "ready"
+    },
+    "form_code": "enneagram_likert_105",
+    "pdf_contract": {
+        "content_type": "application/pdf",
+        "status": 200,
+        "x_report_locked": "false",
+        "x_report_scale": "ENNEAGRAM",
+        "x_report_variant": "full"
+    },
+    "report_contract": {
+        "access_level": "full",
+        "form_code": "enneagram_likert_105",
+        "locked": false,
+        "ok": true,
+        "ordered_section_keys": [
+            "summary",
+            "scores"
+        ],
+        "primary_type": "T8",
+        "report_schema": "enneagram.report.v1",
+        "variant": "full"
+    },
+    "result_contract": {
+        "form_code": "enneagram_likert_105",
+        "ok": true,
+        "primary_type": "T8",
+        "projection_schema": "enneagram.public_projection.v1",
+        "question_count": 105,
+        "top_types": [
+            {
+                "band": "mid",
+                "label": "八号",
+                "rank": 1,
+                "score_pct": 54.17,
+                "type_code": "T8"
+            },
+            {
+                "band": "mid",
+                "label": "四号",
+                "rank": 2,
+                "score_pct": 53.65,
+                "type_code": "T4"
+            },
+            {
+                "band": "mid",
+                "label": "六号",
+                "rank": 3,
+                "score_pct": 51.47,
+                "type_code": "T6"
+            }
+        ],
+        "type_vector": [
+            {
+                "band": "mid",
+                "label": "一号",
+                "rank": 7,
+                "score_pct": 47.93,
+                "type_code": "T1"
+            },
+            {
+                "band": "mid",
+                "label": "二号",
+                "rank": 4,
+                "score_pct": 50.5,
+                "type_code": "T2"
+            },
+            {
+                "band": "mid",
+                "label": "三号",
+                "rank": 5,
+                "score_pct": 48.97,
+                "type_code": "T3"
+            },
+            {
+                "band": "mid",
+                "label": "四号",
+                "rank": 2,
+                "score_pct": 53.65,
+                "type_code": "T4"
+            },
+            {
+                "band": "mid",
+                "label": "五号",
+                "rank": 9,
+                "score_pct": 45.45,
+                "type_code": "T5"
+            },
+            {
+                "band": "mid",
+                "label": "六号",
+                "rank": 3,
+                "score_pct": 51.47,
+                "type_code": "T6"
+            },
+            {
+                "band": "mid",
+                "label": "七号",
+                "rank": 6,
+                "score_pct": 48.33,
+                "type_code": "T7"
+            },
+            {
+                "band": "mid",
+                "label": "八号",
+                "rank": 1,
+                "score_pct": 54.17,
+                "type_code": "T8"
+            },
+            {
+                "band": "mid",
+                "label": "九号",
+                "rank": 8,
+                "score_pct": 46.15,
+                "type_code": "T9"
+            }
+        ]
+    },
+    "scenario_id": "canonical_likert_105",
+    "start": {
+        "content_package_version": "v1-likert-105",
+        "dir_version": "v1-likert-105",
+        "form_code": "enneagram_likert_105",
+        "question_count": 105,
+        "scoring_spec_version": "enneagram_likert_105_spec_v1"
+    },
+    "stored_truth": {
+        "form_code": "enneagram_likert_105",
+        "primary_type": "T8",
+        "raw_scores": {
+            "dominance": {
+                "T1": -0.067735,
+                "T2": 0.034968,
+                "T3": -0.026254,
+                "T4": 0.161053,
+                "T5": -0.16675,
+                "T6": 0.073892,
+                "T7": -0.051811,
+                "T8": 0.181735,
+                "T9": -0.139099
+            },
+            "raw_intensity": {
+                "T1": -0.082803,
+                "T2": 0.0199,
+                "T3": -0.041322,
+                "T4": 0.145985,
+                "T5": -0.181818,
+                "T6": 0.058824,
+                "T7": -0.066879,
+                "T8": 0.166667,
+                "T9": -0.154167
+            },
+            "weight_sum": {
+                "T1": 15.7,
+                "T2": 10.05,
+                "T3": 12.1,
+                "T4": 13.7,
+                "T5": 11,
+                "T6": 17,
+                "T7": 15.7,
+                "T8": 10.8,
+                "T9": 12
+            },
+            "weighted_sum": {
+                "T1": -1.3,
+                "T2": 0.2,
+                "T3": -0.5,
+                "T4": 2,
+                "T5": -2,
+                "T6": 1,
+                "T7": -1.05,
+                "T8": 1.8,
+                "T9": -1.85
+            }
+        },
+        "scale_code": "ENNEAGRAM",
+        "score_method": "enneagram_likert_105_weighted_v1",
+        "scores_0_100": {
+            "T1": 47.93,
+            "T2": 50.5,
+            "T3": 48.97,
+            "T4": 53.65,
+            "T5": 45.45,
+            "T6": 51.47,
+            "T7": 48.33,
+            "T8": 54.17,
+            "T9": 46.15
+        },
+        "top3": [
+            "T8",
+            "T4",
+            "T6"
+        ],
+        "type_code": "T8",
+        "version_snapshot": {
+            "content_manifest_hash": "",
+            "content_package_version": "v1-likert-105",
+            "dir_version": "v1-likert-105",
+            "engine_version": "enneagram_likert_105_v1.0.0",
+            "pack_id": "ENNEAGRAM",
+            "report_engine_version": "v1.2",
+            "scoring_spec_version": "enneagram_likert_105_spec_v1"
+        }
+    },
+    "submit_truth": {
+        "confidence": {
+            "level": "low",
+            "top1_top2_gap": 0.020682
+        },
+        "form_code": "enneagram_likert_105",
+        "ok": true,
+        "primary_type": "T8",
+        "ranking": [
+            {
+                "dominance": 0.181735,
+                "rank": 1,
+                "raw_intensity": 0.166667,
+                "type_code": "T8"
+            },
+            {
+                "dominance": 0.161053,
+                "rank": 2,
+                "raw_intensity": 0.145985,
+                "type_code": "T4"
+            },
+            {
+                "dominance": 0.073892,
+                "rank": 3,
+                "raw_intensity": 0.058824,
+                "type_code": "T6"
+            },
+            {
+                "dominance": 0.034968,
+                "rank": 4,
+                "raw_intensity": 0.0199,
+                "type_code": "T2"
+            },
+            {
+                "dominance": -0.026254,
+                "rank": 5,
+                "raw_intensity": -0.041322,
+                "type_code": "T3"
+            },
+            {
+                "dominance": -0.051811,
+                "rank": 6,
+                "raw_intensity": -0.066879,
+                "type_code": "T7"
+            },
+            {
+                "dominance": -0.067735,
+                "rank": 7,
+                "raw_intensity": -0.082803,
+                "type_code": "T1"
+            },
+            {
+                "dominance": -0.139099,
+                "rank": 8,
+                "raw_intensity": -0.154167,
+                "type_code": "T9"
+            },
+            {
+                "dominance": -0.16675,
+                "rank": 9,
+                "raw_intensity": -0.181818,
+                "type_code": "T5"
+            }
+        ],
+        "raw_scores": {
+            "dominance": {
+                "T1": -0.067735,
+                "T2": 0.034968,
+                "T3": -0.026254,
+                "T4": 0.161053,
+                "T5": -0.16675,
+                "T6": 0.073892,
+                "T7": -0.051811,
+                "T8": 0.181735,
+                "T9": -0.139099
+            },
+            "raw_intensity": {
+                "T1": -0.082803,
+                "T2": 0.0199,
+                "T3": -0.041322,
+                "T4": 0.145985,
+                "T5": -0.181818,
+                "T6": 0.058824,
+                "T7": -0.066879,
+                "T8": 0.166667,
+                "T9": -0.154167
+            },
+            "weight_sum": {
+                "T1": 15.7,
+                "T2": 10.05,
+                "T3": 12.1,
+                "T4": 13.7,
+                "T5": 11,
+                "T6": 17,
+                "T7": 15.7,
+                "T8": 10.8,
+                "T9": 12
+            },
+            "weighted_sum": {
+                "T1": -1.3,
+                "T2": 0.2,
+                "T3": -0.5,
+                "T4": 2,
+                "T5": -2,
+                "T6": 1,
+                "T7": -1.05,
+                "T8": 1.8,
+                "T9": -1.85
+            }
+        },
+        "score_method": "enneagram_likert_105_weighted_v1",
+        "scores_0_100": {
+            "T1": 47.93,
+            "T2": 50.5,
+            "T3": 48.97,
+            "T4": 53.65,
+            "T5": 45.45,
+            "T6": 51.47,
+            "T7": 48.33,
+            "T8": 54.17,
+            "T9": 46.15
+        },
+        "top3": [
+            "T8",
+            "T4",
+            "T6"
+        ]
+    }
+}

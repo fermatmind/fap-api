@@ -45,7 +45,6 @@ class AttemptStartService
         private ClinicalComboPackLoader $clinicalPackLoader,
         private Sds20PackLoader $sds20PackLoader,
         private Eq60PackLoader $eq60PackLoader,
-        private EnneagramPackLoader $enneagramPackLoader,
         private AttemptRateLimitService $attemptRateLimitService,
         private AttemptProgressService $progressService,
     ) {}
@@ -772,7 +771,7 @@ class AttemptStartService
         }
 
         if (strtoupper($scaleCode) === 'ENNEAGRAM') {
-            $count = $this->enneagramPackLoader->getQuestionCount($dirVersion);
+            $count = $this->enneagramPackLoader()->getQuestionCount($dirVersion);
             if ($count <= 0) {
                 $this->logAndThrowContentPackError('ENNEAGRAM_QUESTIONS_MISSING', $packId, $dirVersion, 'questions.compiled.json');
             }
@@ -848,7 +847,7 @@ class AttemptStartService
             'CLINICAL_COMBO_68' => $this->clinicalPackLoader->resolveManifestHash($dirVersion),
             'SDS_20' => $this->sds20PackLoader->resolveManifestHash($dirVersion),
             'EQ_60' => $this->eq60PackLoader->resolveManifestHash($dirVersion),
-            'ENNEAGRAM' => $this->enneagramPackLoader->resolveManifestHash($dirVersion),
+            'ENNEAGRAM' => $this->enneagramPackLoader()->resolveManifestHash($dirVersion),
             default => '',
         };
     }
@@ -863,6 +862,11 @@ class AttemptStartService
             'ENNEAGRAM' => 'enneagram_v1.0.0',
             default => '',
         };
+    }
+
+    private function enneagramPackLoader(): EnneagramPackLoader
+    {
+        return app(EnneagramPackLoader::class);
     }
 
     private function logAndThrowContentPackError(

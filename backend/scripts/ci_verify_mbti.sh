@@ -58,6 +58,7 @@ bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
 php artisan fap:schema:verify
 
 RUN_BIG5_OCEAN_GATE="${RUN_BIG5_OCEAN_GATE:-1}"
+RUN_ENNEAGRAM_GATE="${RUN_ENNEAGRAM_GATE:-1}"
 RUN_CLINICAL_COMBO_68_GATE="${RUN_CLINICAL_COMBO_68_GATE:-0}"
 RUN_SDS_20_GATE="${RUN_SDS_20_GATE:-0}"
 RUN_EQ_60_GATE="${RUN_EQ_60_GATE:-0}"
@@ -105,7 +106,7 @@ restore_hard_cutover_env() {
   if [[ "$PREV_FAP_CONTENT_PUBLISH_MODE" == "__UNSET__" ]]; then unset FAP_CONTENT_PUBLISH_MODE; else export FAP_CONTENT_PUBLISH_MODE="$PREV_FAP_CONTENT_PUBLISH_MODE"; fi
 }
 SCALE_SCOPE="${SCALE_SCOPE:-mbti_only}"
-echo "[CI] scale_scope=${SCALE_SCOPE} run_big5_ocean_gate=${RUN_BIG5_OCEAN_GATE} run_clinical_combo_68_gate=${RUN_CLINICAL_COMBO_68_GATE} run_sds_20_gate=${RUN_SDS_20_GATE} run_eq_60_gate=${RUN_EQ_60_GATE} run_sds_norms_gate=${RUN_SDS_NORMS_GATE} run_full_scale_regression=${RUN_FULL_SCALE_REGRESSION} run_scale_identity_gate=${RUN_SCALE_IDENTITY_GATE} run_scale_identity_contract=${RUN_SCALE_IDENTITY_CONTRACT} run_scale_identity_hard_cutover=${RUN_SCALE_IDENTITY_HARD_CUTOVER} run_partner_api_smoke=${RUN_PARTNER_API_SMOKE} run_experiment_governance_gate=${RUN_EXPERIMENT_GOVERNANCE_GATE} run_openapi_diff_gate=${RUN_OPENAPI_DIFF_GATE} openapi_diff_allow_drift=${OPENAPI_DIFF_ALLOW_DRIFT}"
+echo "[CI] scale_scope=${SCALE_SCOPE} run_big5_ocean_gate=${RUN_BIG5_OCEAN_GATE} run_enneagram_gate=${RUN_ENNEAGRAM_GATE} run_clinical_combo_68_gate=${RUN_CLINICAL_COMBO_68_GATE} run_sds_20_gate=${RUN_SDS_20_GATE} run_eq_60_gate=${RUN_EQ_60_GATE} run_sds_norms_gate=${RUN_SDS_NORMS_GATE} run_full_scale_regression=${RUN_FULL_SCALE_REGRESSION} run_scale_identity_gate=${RUN_SCALE_IDENTITY_GATE} run_scale_identity_contract=${RUN_SCALE_IDENTITY_CONTRACT} run_scale_identity_hard_cutover=${RUN_SCALE_IDENTITY_HARD_CUTOVER} run_partner_api_smoke=${RUN_PARTNER_API_SMOKE} run_experiment_governance_gate=${RUN_EXPERIMENT_GOVERNANCE_GATE} run_openapi_diff_gate=${RUN_OPENAPI_DIFF_GATE} openapi_diff_allow_drift=${OPENAPI_DIFF_ALLOW_DRIFT}"
 if [[ "$RUN_BIG5_OCEAN_GATE" == "1" ]]; then
   echo "[CI] running BIG5_OCEAN content gates"
   bash "$BACKEND_DIR/scripts/ci/verify_big5_norms.sh"
@@ -114,6 +115,20 @@ if [[ "$RUN_BIG5_OCEAN_GATE" == "1" ]]; then
   php artisan test --filter '(BigFive|Big5|NonMbtiReportContractRegressionTest)'
 
   echo "[CI] rebuilding sqlite baseline after BIG5_OCEAN gate"
+  bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
+  php artisan fap:schema:verify
+fi
+
+if [[ "$RUN_ENNEAGRAM_GATE" == "1" ]]; then
+  echo "[CI] running ENNEAGRAM golden/read/report gates"
+  php artisan test \
+    tests/Feature/Content/EnneagramGoldenCasesTest.php \
+    tests/Feature/V0_3/EnneagramAssessmentFlowTest.php \
+    tests/Feature/V0_3/EnneagramReadReportContractTest.php \
+    tests/Feature/Attempts/EnneagramHistorySummaryTest.php \
+    tests/Feature/Report/EnneagramPdfDeliveryTest.php
+
+  echo "[CI] rebuilding sqlite baseline after ENNEAGRAM gate"
   bash "$BACKEND_DIR/scripts/ci/prepare_sqlite.sh"
   php artisan fap:schema:verify
 fi

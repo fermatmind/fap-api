@@ -67,6 +67,29 @@ class AttemptSubmitPostCommitService
             $scorePayload = is_array($responsePayload['result'] ?? null) ? $responsePayload['result'] : [];
             $normsPayload = is_array($scorePayload['norms'] ?? null) ? $scorePayload['norms'] : [];
             $qualityPayload = is_array($scorePayload['quality'] ?? null) ? $scorePayload['quality'] : [];
+            $report = is_array($reportPayload['report'] ?? null) ? $reportPayload['report'] : [];
+            $sections = is_array($report['sections'] ?? null) ? $report['sections'] : [];
+
+            if (($reportPayload['ok'] ?? false) === true) {
+                $this->core->bigFiveTelemetry()->recordReportComposed(
+                    $orgId,
+                    $this->core->numericUserId($actorUserId),
+                    $actorAnonId,
+                    $attemptId,
+                    $locale,
+                    $region,
+                    (string) ($normsPayload['status'] ?? 'MISSING'),
+                    (string) ($normsPayload['group_id'] ?? ''),
+                    (string) ($qualityPayload['level'] ?? 'D'),
+                    'free',
+                    true,
+                    count($sections),
+                    'BIG5_OCEAN',
+                    $dirVersion,
+                    (string) ($normsPayload['norms_version'] ?? ''),
+                    null
+                );
+            }
 
             $this->core->bigFiveTelemetry()->recordAttemptSubmitted(
                 $orgId,

@@ -1655,6 +1655,27 @@
                 ]
             }
         },
+        "/api/v0.3/scales/catalog": {
+            "get": {
+                "operationId": "get_api_v0_3_scales_catalog",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ScalesLookupController@catalog",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
         "/api/v0.3/scales/lookup": {
             "get": {
                 "operationId": "get_api_v0_3_scales_lookup",
@@ -2924,6 +2945,23 @@
                 ]
             }
         },
+        "/api/v0.5/content-pages/{slug}": {
+            "get": {
+                "operationId": "get_api_v0_5_content_pages_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ContentPageController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/internal/career/crosswalk/override/{slug}": {
             "get": {
                 "operationId": "get_api_v0_5_internal_career_crosswalk_override_slug_",
@@ -3089,6 +3127,176 @@
                     "App\\Http\\Middleware\\AdminAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
                     "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:write"
+                ]
+            }
+        },
+        "/api/v0.5/internal/content-pages": {
+            "get": {
+                "operationId": "get_api_v0_5_internal_content_pages",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ContentPageController@internalIndex",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/internal/content-pages/{slug}": {
+            "put": {
+                "operationId": "put_api_v0_5_internal_content_pages_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\ContentPageController@internalUpdate",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/internal/landing-surfaces": {
+            "get": {
+                "operationId": "get_api_v0_5_internal_landing_surfaces",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\LandingSurfaceController@internalIndex",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/internal/landing-surfaces/{surfaceKey}": {
+            "put": {
+                "operationId": "put_api_v0_5_internal_landing_surfaces_surfacekey_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\LandingSurfaceController@internalUpdate",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/internal/media-assets": {
+            "get": {
+                "operationId": "get_api_v0_5_internal_media_assets",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\MediaLibraryController@internalIndex",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/internal/media-assets/{assetKey}": {
+            "put": {
+                "operationId": "put_api_v0_5_internal_media_assets_assetkey_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\MediaLibraryController@internalUpdate",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/internal/media-assets/{assetKey}/upload": {
+            "post": {
+                "operationId": "post_api_v0_5_internal_media_assets_assetkey_upload",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\MediaLibraryController@internalUpload",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/landing-surfaces/{surfaceKey}": {
+            "get": {
+                "operationId": "get_api_v0_5_landing_surfaces_surfacekey_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\LandingSurfaceController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/media-assets": {
+            "get": {
+                "operationId": "get_api_v0_5_media_assets",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\MediaLibraryController@index",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/media-assets/{assetKey}": {
+            "get": {
+                "operationId": "get_api_v0_5_media_assets_assetkey_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\MediaLibraryController@show",
+                "x-laravel-middleware": [
+                    "api"
                 ]
             }
         },

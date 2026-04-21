@@ -263,7 +263,11 @@ final class BigFiveOpsActionService
     {
         $region = $this->normalizeRegion((string) ($input['region'] ?? 'CN_MAINLAND'));
         $locale = $this->normalizeLocale((string) ($input['locale'] ?? 'zh-CN'));
-        $dirAlias = $this->normalizeDirAlias((string) ($input['dir_alias'] ?? 'v1'));
+        $dirAliasInput = (string) ($input['dir_alias'] ?? 'v1');
+        if (! $this->isSafeDirAlias($dirAliasInput)) {
+            return $this->validationError('dir_alias');
+        }
+        $dirAlias = $this->normalizeDirAlias($dirAliasInput);
         $pack = trim((string) ($input['pack'] ?? 'BIG5_OCEAN'));
         $packVersion = trim((string) ($input['pack_version'] ?? 'v1'));
         $probe = $this->toBool($input['probe'] ?? false);
@@ -350,7 +354,11 @@ final class BigFiveOpsActionService
     {
         $region = $this->normalizeRegion((string) ($input['region'] ?? 'CN_MAINLAND'));
         $locale = $this->normalizeLocale((string) ($input['locale'] ?? 'zh-CN'));
-        $dirAlias = $this->normalizeDirAlias((string) ($input['dir_alias'] ?? 'v1'));
+        $dirAliasInput = (string) ($input['dir_alias'] ?? 'v1');
+        if (! $this->isSafeDirAlias($dirAliasInput)) {
+            return $this->validationError('dir_alias');
+        }
+        $dirAlias = $this->normalizeDirAlias($dirAliasInput);
         $probe = $this->toBool($input['probe'] ?? false);
         $baseUrl = trim((string) ($input['base_url'] ?? ''));
         $toReleaseId = trim((string) ($input['to_release_id'] ?? ''));
@@ -733,6 +741,33 @@ final class BigFiveOpsActionService
         }
 
         return $normalized;
+    }
+
+    private function isSafeDirAlias(string $dirAlias): bool
+    {
+        $normalized = trim($dirAlias);
+        if ($normalized === '') {
+            return true;
+        }
+
+        return preg_match('/\A(?!\.\.)[A-Za-z0-9_-]+\z/', $normalized) === 1;
+    }
+
+    /**
+     * @return array{status:int,payload:array<string,mixed>}
+     */
+    private function validationError(string $field): array
+    {
+        return [
+            'status' => 422,
+            'payload' => [
+                'error_code' => 'VALIDATION_FAILED',
+                'message' => 'The given data was invalid.',
+                'errors' => [
+                    $field => ['The '.$field.' field format is invalid.'],
+                ],
+            ],
+        ];
     }
 
     private function normalizeReleaseAction(string $action): string
