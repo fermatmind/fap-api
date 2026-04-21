@@ -45,6 +45,10 @@ final class LandingSurfacePublicApiTest extends TestCase
         $this->assertContains('霍兰德职业兴趣测试', array_column(data_get($home->payload_json, 'quickStart.items'), 'title'));
         $this->assertContains('抑郁焦虑综合症测试', array_column(data_get($home->payload_json, 'quickStart.items'), 'title'));
         $this->assertContains(
+            '/tests/enneagram-personality-test-nine-types',
+            array_column(data_get($home->payload_json, 'quickStart.items'), 'href')
+        );
+        $this->assertContains(
             '/career/tests/riasec',
             array_column(data_get($home->payload_json, 'quickStart.items'), 'href')
         );
@@ -73,6 +77,10 @@ final class LandingSurfacePublicApiTest extends TestCase
         $this->assertCount(6, data_get($quickStartBlock->payload_json, 'items'));
         $this->assertContains('霍兰德职业兴趣测试', array_column(data_get($quickStartBlock->payload_json, 'items'), 'title'));
         $this->assertContains('抑郁焦虑综合症测试', array_column(data_get($quickStartBlock->payload_json, 'items'), 'title'));
+        $this->assertContains(
+            '/tests/enneagram-personality-test-nine-types',
+            array_column(data_get($quickStartBlock->payload_json, 'items'), 'href')
+        );
         $this->assertContains(
             '/career/tests/riasec',
             array_column(data_get($quickStartBlock->payload_json, 'items'), 'href')
@@ -106,6 +114,26 @@ final class LandingSurfacePublicApiTest extends TestCase
         $this->assertContains(
             '/zh/tests/clinical-depression-anxiety-assessment-professional-edition/take',
             array_column(data_get($emotionFamily, 'tests'), 'href')
+        );
+
+        $personalityFamily = collect(data_get($tests->payload_json, 'families.items'))
+            ->firstWhere('id', 'family-personality-style');
+
+        $enneagramCard = collect(data_get($personalityFamily, 'tests'))
+            ->firstWhere('key', 'enneagram-personality-test-nine-types');
+
+        $this->assertIsArray($enneagramCard);
+        $this->assertSame('/zh/tests/enneagram-personality-test-nine-types', (string) data_get($enneagramCard, 'href'));
+        $this->assertSame('/zh/tests/enneagram-personality-test-nine-types', (string) data_get($enneagramCard, 'detailsHref'));
+        $this->assertSame('105 / 144 题', (string) data_get($enneagramCard, 'questionsLabel'));
+        $this->assertSame('约 15 / 40 分钟', (string) data_get($enneagramCard, 'durationLabel'));
+        $this->assertSame(
+            '/zh/tests/enneagram-personality-test-nine-types/take?form=enneagram_likert_105',
+            (string) data_get($enneagramCard, 'primaryActions.0.href')
+        );
+        $this->assertSame(
+            '/zh/tests/enneagram-personality-test-nine-types/take?form=enneagram_forced_choice_144',
+            (string) data_get($enneagramCard, 'primaryActions.1.href')
         );
     }
 
@@ -147,6 +175,8 @@ final class LandingSurfacePublicApiTest extends TestCase
                 '费马测试把自我认知、职业探索与能力成长，做成可测量、可训练、可复盘的成长系统。'
             )
             ->assertJsonCount(6, 'surface.payload_json.quickStart.items')
+            ->assertJsonPath('surface.payload_json.quickStart.items.2.title', '九型人格测试')
+            ->assertJsonPath('surface.payload_json.quickStart.items.2.href', '/tests/enneagram-personality-test-nine-types')
             ->assertJsonPath('surface.payload_json.quickStart.items.3.title', '霍兰德职业兴趣测试')
             ->assertJsonPath('surface.payload_json.quickStart.items.3.href', '/career/tests/riasec')
             ->assertJsonPath('surface.payload_json.quickStart.items.5.title', '抑郁焦虑综合症测试')
@@ -176,6 +206,18 @@ final class LandingSurfacePublicApiTest extends TestCase
             ->assertJsonPath('surface.payload_json.quickStart.items.0.href', '/zh/tests/category/career')
             ->assertJsonPath('surface.payload_json.quickStart.items.2.href', '/zh/tests#family-emotion-state')
             ->assertJsonCount(5, 'surface.payload_json.families.items')
+            ->assertJsonPath(
+                'surface.payload_json.families.items.0.tests.2.href',
+                '/zh/tests/enneagram-personality-test-nine-types'
+            )
+            ->assertJsonPath(
+                'surface.payload_json.families.items.0.tests.2.questionsLabel',
+                '105 / 144 题'
+            )
+            ->assertJsonPath(
+                'surface.payload_json.families.items.0.tests.2.durationLabel',
+                '约 15 / 40 分钟'
+            )
             ->assertJsonPath('surface.payload_json.families.items.2.id', 'family-emotion-state')
             ->assertJsonPath(
                 'surface.payload_json.families.items.2.tests.0.href',
@@ -189,6 +231,26 @@ final class LandingSurfacePublicApiTest extends TestCase
                 'surface.payload_json.families.items.3.tests.0.href',
                 '/zh/tests/iq-test-intelligence-quotient-assessment/take'
             );
+
+        $this->getJson('/api/v0.5/landing-surfaces/tests_category_personality?locale=zh-CN&org_id=0')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('surface.surface_key', 'tests_category_personality')
+            ->assertJsonPath('surface.locale', 'zh-CN')
+            ->assertJsonPath('surface.payload_json.featured.items.2.key', 'enneagram-personality-test-nine-types')
+            ->assertJsonPath('surface.payload_json.featured.items.2.href', '/zh/tests/enneagram-personality-test-nine-types')
+            ->assertJsonPath('surface.payload_json.featured.items.2.questionsLabel', '105 / 144 题')
+            ->assertJsonPath('surface.payload_json.featured.items.2.durationLabel', '约 15 / 40 分钟')
+            ->assertJsonPath(
+                'surface.payload_json.featured.items.2.primaryActions.0.href',
+                '/zh/tests/enneagram-personality-test-nine-types/take?form=enneagram_likert_105'
+            )
+            ->assertJsonPath(
+                'surface.payload_json.featured.items.2.primaryActions.1.href',
+                '/zh/tests/enneagram-personality-test-nine-types/take?form=enneagram_forced_choice_144'
+            )
+            ->assertJsonPath('surface.payload_json.allTests.items.2.key', 'enneagram-personality-test-nine-types')
+            ->assertJsonPath('surface.payload_json.allTests.items.2.href', '/zh/tests/enneagram-personality-test-nine-types');
 
         $this->putJson('/api/v0.5/internal/landing-surfaces/home', [
             'locale' => 'zh-CN',
