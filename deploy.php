@@ -84,6 +84,15 @@ set('required_public_static_media_assets', [
     'backend/public/static/share/mbti_wide_1200x630.png',
     'backend/public/static/share/mbti_square_600x600.png',
 ]);
+set('required_public_scale_lookup_slugs', [
+    'mbti-personality-test-16-personality-types',
+    'big-five-personality-test-ocean-model',
+    'enneagram-personality-test-nine-types',
+    'iq-test-intelligence-quotient-assessment',
+    'clinical-depression-anxiety-assessment-professional-edition',
+]);
+set('scale_lookup_healthcheck_host', 'api.fermatmind.com');
+set('scale_lookup_healthcheck_use_resolve', false);
 
 /**
  * ======================================================
@@ -129,6 +138,7 @@ $productionHost = host('production')
     ->set('deploy_path', getenv('DEPLOY_PATH_PROD') ?: '/var/www/fap-api')
     ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_PROD') ?: 'fermatmind.com')
     ->set('static_media_healthcheck_host', getenv('STATIC_MEDIA_HEALTHCHECK_HOST_PROD') ?: 'api.fermatmind.com')
+    ->set('scale_lookup_healthcheck_host', getenv('SCALE_LOOKUP_HEALTHCHECK_HOST_PROD') ?: 'api.fermatmind.com')
     ->set('ops_entry_host', getenv('OPS_ENTRY_HOST_PROD') ?: 'ops.fermatmind.com')
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api')
     ->set('php_fpm_service', getenv('PHP_FPM_SERVICE_PROD') ?: 'php8.4-fpm')
@@ -148,6 +158,7 @@ $stagingHost = host('staging')
     ->set('deploy_path', getenv('DEPLOY_PATH_STG') ?: '/var/www/fap-api-staging')
     ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_STG') ?: 'staging.fermatmind.com')
     ->set('static_media_healthcheck_host', getenv('STATIC_MEDIA_HEALTHCHECK_HOST_STG') ?: 'staging-api.fermatmind.com')
+    ->set('scale_lookup_healthcheck_host', getenv('SCALE_LOOKUP_HEALTHCHECK_HOST_STG') ?: 'staging-api.fermatmind.com')
     ->set('ops_entry_host', getenv('OPS_ENTRY_HOST_STG') ?: '')
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api-staging')
     ->set('php_fpm_service', getenv('PHP_FPM_SERVICE_STG') ?: 'php8.4-fpm')
@@ -321,6 +332,10 @@ if printf '%s\n' "$status_output" | grep -Eq '(^|[[:space:]])Pending($|[[:space:
 fi
 BASH);
     });
+});
+
+task('artisan:scales:seed-default', function () {
+    run('{{bin/php}} {{release_path}}/backend/artisan fap:scales:seed-default --no-interaction --ansi');
 });
 
 task('career:warm-public-authority-cache', function () {
@@ -595,6 +610,28 @@ task('healthcheck:public-static-media-assets', function () {
     }
 });
 
+task('healthcheck:scale-lookup', function () {
+    $host = trim((string) (get('scale_lookup_healthcheck_host') ?: get('healthcheck_host')));
+    $resolveArg = (bool) get('scale_lookup_healthcheck_use_resolve', false)
+        ? "--resolve {$host}:443:127.0.0.1 "
+        : '';
+    $slugs = (array) get('required_public_scale_lookup_slugs', []);
+
+    foreach ($slugs as $slug) {
+        $slug = trim((string) $slug);
+
+        if ($slug === '') {
+            continue;
+        }
+
+        $url = escapeshellarg("https://{$host}/api/v0.3/scales/lookup?slug={$slug}&locale=zh-CN");
+        $slugArg = escapeshellarg($slug);
+        $jq = escapeshellarg('.ok==true and .primary_slug==$slug');
+
+        run("curl -fsS {$resolveArg}{$url} | jq -e --arg slug {$slugArg} {$jq} >/dev/null");
+    }
+});
+
 task('healthcheck:ops-entry-contract', function () {
     $host = trim((string) get('ops_entry_host', ''));
 
@@ -766,7 +803,8 @@ after('artisan:filament:assets', 'guard:filament-assets');
 after('artisan:filament:assets', 'guard:required-public-static-media-assets');
 after('artisan:config:cache', 'guard:sitemap-authority');
 after('artisan:migrate', 'guard:no-pending-migrations');
-after('guard:no-pending-migrations', 'cms:import-landing-surface-baselines');
+after('guard:no-pending-migrations', 'artisan:scales:seed-default');
+after('artisan:scales:seed-default', 'cms:import-landing-surface-baselines');
 after('cms:import-landing-surface-baselines', 'cms:import-content-page-baselines');
 after('cms:import-content-page-baselines', 'career:warm-public-authority-cache');
 after('career:warm-public-authority-cache', 'guard:public-content-release');
@@ -778,6 +816,7 @@ after('deploy:symlink', 'queue:reload-workers');
 after('deploy:symlink', 'healthcheck:public');
 after('deploy:symlink', 'healthcheck:auth-guest-contract');
 after('deploy:symlink', 'healthcheck:public-static-media-assets');
+after('deploy:symlink', 'healthcheck:scale-lookup');
 after('deploy:symlink', 'healthcheck:ops-entry-contract');
 after('deploy:symlink', 'healthcheck:queue-smoke');
 
