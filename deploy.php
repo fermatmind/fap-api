@@ -61,6 +61,7 @@ set('cleanup_use_sudo', true);
  */
 set('healthcheck_scheme', 'https');
 set('healthcheck_use_resolve', true);
+set('static_media_healthcheck_use_resolve', false);
 set('nginx_site', '/etc/nginx/sites-enabled/fap-api');
 set('php_fpm_service', 'php8.4-fpm');
 set('queue_manager', 'supervisor');
@@ -77,6 +78,12 @@ set('queue_supervisor_optional_programs', [
 ]);
 set('legacy_queue_systemd_service', 'fap-queue.service');
 set('legacy_queue_systemd_disable', true);
+set('required_public_static_media_assets', [
+    'backend/public/static/social/wechat-qr-official-258.jpg',
+    'backend/public/static/social/wechat-qr.jpg',
+    'backend/public/static/share/mbti_wide_1200x630.png',
+    'backend/public/static/share/mbti_square_600x600.png',
+]);
 
 /**
  * ======================================================
@@ -121,6 +128,7 @@ $productionHost = host('production')
     ->setPort((int)(getenv('DEPLOY_PORT_PROD') ?: 22))
     ->set('deploy_path', getenv('DEPLOY_PATH_PROD') ?: '/var/www/fap-api')
     ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_PROD') ?: 'fermatmind.com')
+    ->set('static_media_healthcheck_host', getenv('STATIC_MEDIA_HEALTHCHECK_HOST_PROD') ?: 'api.fermatmind.com')
     ->set('ops_entry_host', getenv('OPS_ENTRY_HOST_PROD') ?: 'ops.fermatmind.com')
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api')
     ->set('php_fpm_service', getenv('PHP_FPM_SERVICE_PROD') ?: 'php8.4-fpm')
@@ -139,6 +147,7 @@ $stagingHost = host('staging')
     ->setPort((int)(getenv('DEPLOY_PORT_STG') ?: 22))
     ->set('deploy_path', getenv('DEPLOY_PATH_STG') ?: '/var/www/fap-api-staging')
     ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_STG') ?: 'staging.fermatmind.com')
+    ->set('static_media_healthcheck_host', getenv('STATIC_MEDIA_HEALTHCHECK_HOST_STG') ?: 'staging-api.fermatmind.com')
     ->set('ops_entry_host', getenv('OPS_ENTRY_HOST_STG') ?: '')
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api-staging')
     ->set('php_fpm_service', getenv('PHP_FPM_SERVICE_STG') ?: 'php8.4-fpm')
@@ -239,6 +248,7 @@ task('rollback:healthcheck', [
     'reload:nginx',
     'healthcheck:public',
     'healthcheck:auth-guest-contract',
+    'healthcheck:public-static-media-assets',
     'healthcheck:ops-entry-contract',
 ]);
 
@@ -532,6 +542,20 @@ task('ensure:phpredis', function () {
     }
 });
 
+task('guard:required-public-static-media-assets', function () {
+    $assets = (array) get('required_public_static_media_assets', []);
+
+    foreach ($assets as $asset) {
+        $path = trim((string) $asset);
+
+        if ($path === '') {
+            continue;
+        }
+
+        run("test -s {{release_path}}/{$path}");
+    }
+});
+
 /**
  * ======================================================
  * Healthcheck
@@ -551,6 +575,24 @@ task('healthcheck:auth-guest-contract', function () {
 
     $cmd = "curl -fsS --resolve {$host}:443:127.0.0.1 -H 'Content-Type: application/json' -X POST https://{$host}/api/v0.3/auth/guest --data {$payload} | jq -e '.ok==true and .anon_id==\"deploy_contract_probe\"'";
     run($cmd);
+});
+
+task('healthcheck:public-static-media-assets', function () {
+    $host = trim((string) (get('static_media_healthcheck_host') ?: get('healthcheck_host')));
+    $resolveArg = (bool) get('static_media_healthcheck_use_resolve', false)
+        ? "--resolve {$host}:443:127.0.0.1 "
+        : '';
+    $assets = (array) get('required_public_static_media_assets', []);
+
+    foreach ($assets as $asset) {
+        $path = '/' . ltrim(preg_replace('#^backend/public/#', '', trim((string) $asset)) ?? '', '/');
+
+        if ($path === '/') {
+            continue;
+        }
+
+        run("curl -fsSI {$resolveArg}https://{$host}{$path} | grep -Ei '^content-type: image/' >/dev/null");
+    }
 });
 
 task('healthcheck:ops-entry-contract', function () {
@@ -721,6 +763,7 @@ after('deploy:shared', 'ensure:healthz-deps');
 after('deploy:vendors', 'artisan:filament:assets');
 after('artisan:filament:assets', 'guard:ops-theme-asset');
 after('artisan:filament:assets', 'guard:filament-assets');
+after('artisan:filament:assets', 'guard:required-public-static-media-assets');
 after('artisan:config:cache', 'guard:sitemap-authority');
 after('artisan:migrate', 'guard:no-pending-migrations');
 after('guard:no-pending-migrations', 'cms:import-landing-surface-baselines');
@@ -734,6 +777,7 @@ after('deploy:symlink', 'reload:nginx');
 after('deploy:symlink', 'queue:reload-workers');
 after('deploy:symlink', 'healthcheck:public');
 after('deploy:symlink', 'healthcheck:auth-guest-contract');
+after('deploy:symlink', 'healthcheck:public-static-media-assets');
 after('deploy:symlink', 'healthcheck:ops-entry-contract');
 after('deploy:symlink', 'healthcheck:queue-smoke');
 

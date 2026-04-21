@@ -191,6 +191,16 @@ curl -sSI --max-redirs 0 https://staging.fermatmind.com/ops | rg '^HTTP/[0-9.]+ 
 curl -sSI --max-redirs 0 https://staging.fermatmind.com/ops | rg -i '^Location: (/ops/login|https://staging\.fermatmind\.com/ops/login)\r?$'
 curl -sSI https://staging.fermatmind.com/ops/login | rg '^HTTP/[0-9.]+ 200 '
 
+# 7.2.1) public static media smoke
+# production: frontend footer and social previews currently consume /static media through the public API host.
+curl -fsSI https://api.fermatmind.com/static/social/wechat-qr-official-258.jpg | rg -i '^content-type: image/'
+curl -fsSI https://api.fermatmind.com/static/social/wechat-qr.jpg | rg -i '^content-type: image/'
+curl -fsSI https://api.fermatmind.com/static/share/mbti_wide_1200x630.png | rg -i '^content-type: image/'
+
+# staging:
+curl -fsSI https://staging-api.fermatmind.com/static/social/wechat-qr-official-258.jpg | rg -i '^content-type: image/'
+curl -fsSI https://staging-api.fermatmind.com/static/share/mbti_wide_1200x630.png | rg -i '^content-type: image/'
+
 # 7.3) 基线校验
 php artisan fap:schema:verify
 
