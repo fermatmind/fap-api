@@ -43,7 +43,7 @@ class ScalesLookupTest extends TestCase
         $response->assertJsonPath('landing_surface_v1.entry_type', 'test_landing');
     }
 
-    public function test_lookup_aliases_resolve_to_canonical_for_all_six_models(): void
+    public function test_lookup_aliases_resolve_to_canonical_for_all_public_models(): void
     {
         $this->artisan('migrate', ['--force' => true]);
         $this->artisan('fap:scales:seed-default');
@@ -62,6 +62,8 @@ class ScalesLookupTest extends TestCase
             ['slug' => 'iq-test', 'scale_code' => 'IQ_RAVEN', 'scale_code_v2' => 'IQ_INTELLIGENCE_QUOTIENT', 'primary_slug' => 'iq-test-intelligence-quotient-assessment', 'resolved_from_alias' => true],
             ['slug' => 'eq-test-emotional-intelligence-assessment', 'scale_code' => 'EQ_60', 'scale_code_v2' => 'EQ_EMOTIONAL_INTELLIGENCE', 'primary_slug' => 'eq-test-emotional-intelligence-assessment', 'resolved_from_alias' => false],
             ['slug' => 'eq-test', 'scale_code' => 'EQ_60', 'scale_code_v2' => 'EQ_EMOTIONAL_INTELLIGENCE', 'primary_slug' => 'eq-test-emotional-intelligence-assessment', 'resolved_from_alias' => true],
+            ['slug' => 'enneagram-personality-test-nine-types', 'scale_code' => 'ENNEAGRAM', 'scale_code_v2' => 'ENNEAGRAM_PERSONALITY_TEST', 'primary_slug' => 'enneagram-personality-test-nine-types', 'resolved_from_alias' => false],
+            ['slug' => 'enneagram-test', 'scale_code' => 'ENNEAGRAM', 'scale_code_v2' => 'ENNEAGRAM_PERSONALITY_TEST', 'primary_slug' => 'enneagram-personality-test-nine-types', 'resolved_from_alias' => true],
         ];
 
         foreach ($cases as $case) {

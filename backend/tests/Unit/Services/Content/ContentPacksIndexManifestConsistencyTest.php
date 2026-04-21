@@ -13,6 +13,7 @@ use Tests\TestCase;
 final class ContentPacksIndexManifestConsistencyTest extends TestCase
 {
     private string $packsRoot;
+    private ?string $relativePacksRoot = null;
 
     protected function setUp(): void
     {
@@ -35,7 +36,39 @@ final class ContentPacksIndexManifestConsistencyTest extends TestCase
     {
         Cache::forget(CacheKeys::packsIndex());
         File::deleteDirectory($this->packsRoot);
+        if ($this->relativePacksRoot !== null) {
+            File::deleteDirectory($this->relativePacksRoot);
+        }
         parent::tearDown();
+    }
+
+    public function test_relative_packs_root_is_resolved_from_backend_base_path(): void
+    {
+        $relativeRoot = 'tmp_content_packs_'.uniqid('', true);
+        $this->relativePacksRoot = base_path($relativeRoot);
+        $dirVersion = 'MBTI-CN-v-relative';
+        $packDir = $this->relativePacksRoot.DIRECTORY_SEPARATOR.'default'
+            .DIRECTORY_SEPARATOR.'CN_MAINLAND'
+            .DIRECTORY_SEPARATOR.'zh-CN'
+            .DIRECTORY_SEPARATOR.$dirVersion;
+
+        File::ensureDirectoryExists($packDir);
+        $this->writePack($packDir, 'PACK_RELATIVE', $dirVersion, 'v-relative');
+
+        config()->set('content_packs.root', $relativeRoot);
+        config()->set('content_packs.default_pack_id', 'PACK_RELATIVE');
+        config()->set('content_packs.default_dir_version', $dirVersion);
+        Cache::forget(CacheKeys::packsIndex());
+
+        /** @var ContentPacksIndex $index */
+        $index = app(ContentPacksIndex::class);
+
+        $found = $index->find('PACK_RELATIVE', $dirVersion);
+        $this->assertTrue((bool) ($found['ok'] ?? false));
+        $this->assertSame(
+            $this->relativePacksRoot.DIRECTORY_SEPARATOR.'default'.DIRECTORY_SEPARATOR.'CN_MAINLAND'.DIRECTORY_SEPARATOR.'zh-CN'.DIRECTORY_SEPARATOR.$dirVersion.DIRECTORY_SEPARATOR.'manifest.json',
+            (string) ($found['item']['manifest_path'] ?? '')
+        );
     }
 
     public function test_find_refreshes_when_cached_manifest_becomes_stale(): void
