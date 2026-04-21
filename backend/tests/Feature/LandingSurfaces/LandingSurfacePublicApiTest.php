@@ -89,6 +89,40 @@ final class LandingSurfacePublicApiTest extends TestCase
             '/tests/clinical-depression-anxiety-assessment-professional-edition',
             array_column(data_get($quickStartBlock->payload_json, 'items'), 'href')
         );
+        $this->assertSame(
+            [
+                '/tests/mbti-personality-test-16-personality-types',
+                '/tests/big-five-personality-test-ocean-model',
+                '/tests/enneagram-personality-test-nine-types',
+                '/career/tests/riasec',
+                '/tests/iq-test-intelligence-quotient-assessment',
+                '/tests/clinical-depression-anxiety-assessment-professional-edition',
+            ],
+            array_column(data_get($quickStartBlock->payload_json, 'items'), 'href')
+        );
+
+        $recommendedArticlesBlock = PageBlock::query()
+            ->where('landing_surface_id', $home->id)
+            ->where('block_key', 'recommended_articles')
+            ->firstOrFail();
+        $recommendedArticleSlugs = array_map(
+            static fn ($item): string => (string) data_get($item, 'article.slug'),
+            data_get($recommendedArticlesBlock->payload_json, 'items', [])
+        );
+
+        $this->assertSame(
+            [
+                'which-love-script-fits-you-best',
+                'how-personality-shapes-attitude-toward-ai',
+                'how-16-personality-types-talk-to-an-ai-coach',
+                'childhood-dream-job-still-shapes-career-choice',
+                'best-valentines-date-by-personality-and-relationship-science',
+                'are-infj-men-rare-or-socially-silenced',
+            ],
+            $recommendedArticleSlugs
+        );
+        $this->assertNotContains('mbti-basics', $recommendedArticleSlugs);
+        $this->assertNotContains('big-five-tool-guide', $recommendedArticleSlugs);
 
         $tests = LandingSurface::query()
             ->withoutGlobalScopes()
@@ -175,10 +209,13 @@ final class LandingSurfacePublicApiTest extends TestCase
                 '费马测试把自我认知、职业探索与能力成长，做成可测量、可训练、可复盘的成长系统。'
             )
             ->assertJsonCount(6, 'surface.payload_json.quickStart.items')
+            ->assertJsonPath('surface.payload_json.quickStart.items.0.href', '/tests/mbti-personality-test-16-personality-types')
+            ->assertJsonPath('surface.payload_json.quickStart.items.1.href', '/tests/big-five-personality-test-ocean-model')
             ->assertJsonPath('surface.payload_json.quickStart.items.2.title', '九型人格测试')
             ->assertJsonPath('surface.payload_json.quickStart.items.2.href', '/tests/enneagram-personality-test-nine-types')
             ->assertJsonPath('surface.payload_json.quickStart.items.3.title', '霍兰德职业兴趣测试')
             ->assertJsonPath('surface.payload_json.quickStart.items.3.href', '/career/tests/riasec')
+            ->assertJsonPath('surface.payload_json.quickStart.items.4.href', '/tests/iq-test-intelligence-quotient-assessment')
             ->assertJsonPath('surface.payload_json.quickStart.items.5.title', '抑郁焦虑综合症测试')
             ->assertJsonPath('surface.payload_json.quickStart.items.5.href', '/tests/clinical-depression-anxiety-assessment-professional-edition')
             ->assertJsonPath('surface.payload_json.trust.items.0.title', '免费测试、免费结果')
