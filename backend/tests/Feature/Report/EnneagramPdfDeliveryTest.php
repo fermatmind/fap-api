@@ -8,19 +8,20 @@ use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class EnneagramPdfDeliveryTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_enneagram_report_pdf_endpoint_returns_pdf_payload(): void
+    #[DataProvider('enneagramFormsProvider')]
+    public function test_enneagram_report_pdf_endpoint_returns_pdf_payload(string $formCode, string $anonId): void
     {
         (new ScaleRegistrySeeder)->run();
 
-        $anonId = 'anon_enneagram_pdf';
         $token = $this->issueAnonToken($anonId);
-        $attemptId = $this->createSubmittedEnneagramAttempt($anonId, $token);
+        $attemptId = $this->createSubmittedEnneagramAttempt($anonId, $token, $formCode);
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
@@ -39,19 +40,28 @@ final class EnneagramPdfDeliveryTest extends TestCase
         ]);
     }
 
-    private function createSubmittedEnneagramAttempt(string $anonId, string $token): string
+    /**
+     * @return iterable<string,array{string,string}>
+     */
+    public static function enneagramFormsProvider(): iterable
+    {
+        yield '105 likert' => ['enneagram_likert_105', 'anon_enneagram_pdf_105'];
+        yield '144 forced choice' => ['enneagram_forced_choice_144', 'anon_enneagram_pdf_144'];
+    }
+
+    private function createSubmittedEnneagramAttempt(string $anonId, string $token, string $formCode): string
     {
         $start = $this->withHeaders(['X-Anon-Id' => $anonId])->postJson('/api/v0.3/attempts/start', [
             'scale_code' => 'ENNEAGRAM',
             'anon_id' => $anonId,
             'locale' => 'zh-CN',
             'region' => 'CN_MAINLAND',
-            'form_code' => 'enneagram_likert_105',
+            'form_code' => $formCode,
         ]);
         $start->assertStatus(200);
         $attemptId = (string) $start->json('attempt_id');
 
-        $questions = $this->getJson('/api/v0.3/scales/ENNEAGRAM/questions?form_code=enneagram_likert_105');
+        $questions = $this->getJson('/api/v0.3/scales/ENNEAGRAM/questions?form_code='.$formCode);
         $questions->assertStatus(200);
         $answers = $this->buildAnswersFromItems((array) $questions->json('questions.items'));
 

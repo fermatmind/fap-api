@@ -9,17 +9,22 @@ use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 final class EnneagramReadReportContractTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_enneagram_result_report_and_access_expose_formal_public_projection(): void
-    {
+    #[DataProvider('enneagramFormsProvider')]
+    public function test_enneagram_result_report_and_access_expose_formal_public_projection(
+        string $formCode,
+        int $questionCount,
+        string $anonId
+    ): void {
         (new ScaleRegistrySeeder)->run();
 
-        [$attemptId, $anonId, $token] = $this->createSubmittedEnneagramAttempt('enneagram_read_report', 'enneagram_likert_105');
+        [$attemptId, $anonId, $token] = $this->createSubmittedEnneagramAttempt($anonId, $formCode);
         $stored = Result::query()->where('attempt_id', $attemptId)->firstOrFail();
         $storedComputedAt = (string) data_get($stored->result_json, 'computed_at');
 
@@ -33,8 +38,8 @@ final class EnneagramReadReportContractTest extends TestCase
         $result->assertJsonPath('ok', true);
         $result->assertJsonPath('meta.scale_code', 'ENNEAGRAM');
         $result->assertJsonPath('result.computed_at', $storedComputedAt);
-        $result->assertJsonPath('enneagram_form_v1.form_code', 'enneagram_likert_105');
-        $result->assertJsonPath('enneagram_form_v1.question_count', 105);
+        $result->assertJsonPath('enneagram_form_v1.form_code', $formCode);
+        $result->assertJsonPath('enneagram_form_v1.question_count', $questionCount);
         $result->assertJsonPath('enneagram_public_projection_v1.schema_version', 'enneagram.public_projection.v1');
         $result->assertJsonPath('enneagram_public_projection_v1.scale_code', 'ENNEAGRAM');
         $this->assertNotSame('', (string) $result->json('enneagram_public_projection_v1.primary_type'));
@@ -49,7 +54,7 @@ final class EnneagramReadReportContractTest extends TestCase
         $report->assertJsonPath('variant', 'full');
         $report->assertJsonPath('report.schema_version', 'enneagram.report.v1');
         $report->assertJsonPath('report.scale_code', 'ENNEAGRAM');
-        $report->assertJsonPath('enneagram_form_v1.form_code', 'enneagram_likert_105');
+        $report->assertJsonPath('enneagram_form_v1.form_code', $formCode);
         $report->assertJsonPath('enneagram_public_projection_v1.schema_version', 'enneagram.public_projection.v1');
         $this->assertSame(
             $result->json('enneagram_public_projection_v1.primary_type'),
@@ -64,9 +69,18 @@ final class EnneagramReadReportContractTest extends TestCase
         $access->assertJsonPath('pdf_state', 'ready');
         $access->assertJsonPath('payload.access_level', 'full');
         $access->assertJsonPath('payload.variant', 'full');
-        $access->assertJsonPath('enneagram_form_v1.form_code', 'enneagram_likert_105');
+        $access->assertJsonPath('enneagram_form_v1.form_code', $formCode);
         $access->assertJsonPath('actions.page_href', "/result/{$attemptId}");
         $access->assertJsonPath('actions.pdf_href', "/api/v0.3/attempts/{$attemptId}/report.pdf");
+    }
+
+    /**
+     * @return iterable<string,array{string,int,string}>
+     */
+    public static function enneagramFormsProvider(): iterable
+    {
+        yield '105 likert' => ['enneagram_likert_105', 105, 'enneagram_read_report_105'];
+        yield '144 forced choice' => ['enneagram_forced_choice_144', 144, 'enneagram_read_report_144'];
     }
 
     /**

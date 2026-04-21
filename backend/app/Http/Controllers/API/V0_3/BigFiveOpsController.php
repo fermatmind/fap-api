@@ -59,14 +59,14 @@ final class BigFiveOpsController extends Controller
 
     public function publish(BigFiveOpsRequest $request, int $org_id): JsonResponse
     {
-        $result = $this->actionService->publish($org_id, $request->validated(), $this->requestContext($request));
+        $result = $this->actionService->publish($org_id, $this->validatedInputWithRawDirAlias($request), $this->requestContext($request));
 
         return response()->json($result['payload'], $result['status']);
     }
 
     public function rollback(BigFiveOpsRequest $request, int $org_id): JsonResponse
     {
-        $result = $this->actionService->rollback($org_id, $request->validated());
+        $result = $this->actionService->rollback($org_id, $this->validatedInputWithRawDirAlias($request));
 
         return response()->json($result['payload'], $result['status']);
     }
@@ -103,5 +103,19 @@ final class BigFiveOpsController extends Controller
             'user_agent' => (string) $request->userAgent(),
             'request_id' => (string) $request->headers->get('X-Request-Id', ''),
         ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function validatedInputWithRawDirAlias(BigFiveOpsRequest $request): array
+    {
+        $input = $request->validated();
+        $rawInput = $request->all();
+        if (array_key_exists('dir_alias', $rawInput)) {
+            $input['dir_alias'] = $rawInput['dir_alias'];
+        }
+
+        return $input;
     }
 }

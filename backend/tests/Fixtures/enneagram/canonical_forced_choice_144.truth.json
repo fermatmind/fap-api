@@ -1,0 +1,440 @@
+{
+    "access_contract": {
+        "access_state": "ready",
+        "form_code": "enneagram_forced_choice_144",
+        "ok": true,
+        "payload_variant": "full",
+        "pdf_state": "ready",
+        "report_state": "ready"
+    },
+    "form_code": "enneagram_forced_choice_144",
+    "pdf_contract": {
+        "content_type": "application/pdf",
+        "status": 200,
+        "x_report_locked": "false",
+        "x_report_scale": "ENNEAGRAM",
+        "x_report_variant": "full"
+    },
+    "report_contract": {
+        "access_level": "full",
+        "form_code": "enneagram_forced_choice_144",
+        "locked": false,
+        "ok": true,
+        "ordered_section_keys": [
+            "summary",
+            "scores"
+        ],
+        "primary_type": "T8",
+        "report_schema": "enneagram.report.v1",
+        "variant": "full"
+    },
+    "result_contract": {
+        "form_code": "enneagram_forced_choice_144",
+        "ok": true,
+        "primary_type": "T8",
+        "projection_schema": "enneagram.public_projection.v1",
+        "question_count": 144,
+        "top_types": [
+            {
+                "band": "high",
+                "label": "八号",
+                "rank": 1,
+                "score_pct": 71.88,
+                "type_code": "T8"
+            },
+            {
+                "band": "mid",
+                "label": "三号",
+                "rank": 2,
+                "score_pct": 56.25,
+                "type_code": "T3"
+            },
+            {
+                "band": "mid",
+                "label": "四号",
+                "rank": 3,
+                "score_pct": 53.13,
+                "type_code": "T4"
+            }
+        ],
+        "type_vector": [
+            {
+                "band": "mid",
+                "label": "一号",
+                "rank": 8,
+                "score_pct": 37.5,
+                "type_code": "T1"
+            },
+            {
+                "band": "mid",
+                "label": "二号",
+                "rank": 5,
+                "score_pct": 50,
+                "type_code": "T2"
+            },
+            {
+                "band": "mid",
+                "label": "三号",
+                "rank": 2,
+                "score_pct": 56.25,
+                "type_code": "T3"
+            },
+            {
+                "band": "mid",
+                "label": "四号",
+                "rank": 3,
+                "score_pct": 53.13,
+                "type_code": "T4"
+            },
+            {
+                "band": "mid",
+                "label": "五号",
+                "rank": 7,
+                "score_pct": 43.75,
+                "type_code": "T5"
+            },
+            {
+                "band": "mid",
+                "label": "六号",
+                "rank": 6,
+                "score_pct": 46.88,
+                "type_code": "T6"
+            },
+            {
+                "band": "mid",
+                "label": "七号",
+                "rank": 4,
+                "score_pct": 53.13,
+                "type_code": "T7"
+            },
+            {
+                "band": "high",
+                "label": "八号",
+                "rank": 1,
+                "score_pct": 71.88,
+                "type_code": "T8"
+            },
+            {
+                "band": "mid",
+                "label": "九号",
+                "rank": 9,
+                "score_pct": 37.5,
+                "type_code": "T9"
+            }
+        ]
+    },
+    "scenario_id": "canonical_forced_choice_144",
+    "start": {
+        "content_package_version": "v1-forced-choice-144",
+        "dir_version": "v1-forced-choice-144",
+        "form_code": "enneagram_forced_choice_144",
+        "question_count": 144,
+        "scoring_spec_version": "enneagram_forced_choice_144_spec_v1"
+    },
+    "stored_truth": {
+        "form_code": "enneagram_forced_choice_144",
+        "primary_type": "T8",
+        "raw_scores": {
+            "pair_answer_counts": {
+                "T1-T2": 4,
+                "T1-T3": 4,
+                "T1-T4": 4,
+                "T1-T5": 4,
+                "T1-T6": 4,
+                "T1-T7": 4,
+                "T1-T8": 4,
+                "T1-T9": 4,
+                "T2-T3": 4,
+                "T2-T4": 4,
+                "T2-T5": 4,
+                "T2-T6": 4,
+                "T2-T7": 4,
+                "T2-T8": 4,
+                "T2-T9": 4,
+                "T3-T4": 4,
+                "T3-T5": 4,
+                "T3-T6": 4,
+                "T3-T7": 4,
+                "T3-T8": 4,
+                "T3-T9": 4,
+                "T4-T5": 4,
+                "T4-T6": 4,
+                "T4-T7": 4,
+                "T4-T8": 4,
+                "T4-T9": 4,
+                "T5-T6": 4,
+                "T5-T7": 4,
+                "T5-T8": 4,
+                "T5-T9": 4,
+                "T6-T7": 4,
+                "T6-T8": 4,
+                "T6-T9": 4,
+                "T7-T8": 4,
+                "T7-T9": 4,
+                "T8-T9": 4
+            },
+            "round_type_counts": {
+                "1": {
+                    "T1": 4,
+                    "T2": 3,
+                    "T3": 2,
+                    "T4": 5,
+                    "T5": 5,
+                    "T6": 3,
+                    "T7": 6,
+                    "T8": 6,
+                    "T9": 2
+                },
+                "2": {
+                    "T1": 2,
+                    "T2": 4,
+                    "T3": 4,
+                    "T4": 3,
+                    "T5": 4,
+                    "T6": 5,
+                    "T7": 4,
+                    "T8": 7,
+                    "T9": 3
+                },
+                "3": {
+                    "T1": 2,
+                    "T2": 4,
+                    "T3": 6,
+                    "T4": 7,
+                    "T5": 5,
+                    "T6": 2,
+                    "T7": 3,
+                    "T8": 4,
+                    "T9": 3
+                },
+                "4": {
+                    "T1": 4,
+                    "T2": 5,
+                    "T3": 6,
+                    "T4": 2,
+                    "T6": 5,
+                    "T7": 4,
+                    "T8": 6,
+                    "T9": 4
+                }
+            },
+            "type_counts": {
+                "T1": 12,
+                "T2": 16,
+                "T3": 18,
+                "T4": 17,
+                "T5": 14,
+                "T6": 15,
+                "T7": 17,
+                "T8": 23,
+                "T9": 12
+            }
+        },
+        "scale_code": "ENNEAGRAM",
+        "score_method": "enneagram_forced_choice_144_pair_v1",
+        "scores_0_100": {
+            "T1": 37.5,
+            "T2": 50,
+            "T3": 56.25,
+            "T4": 53.13,
+            "T5": 43.75,
+            "T6": 46.88,
+            "T7": 53.13,
+            "T8": 71.88,
+            "T9": 37.5
+        },
+        "top3": [
+            "T8",
+            "T3",
+            "T4"
+        ],
+        "type_code": "T8",
+        "version_snapshot": {
+            "content_manifest_hash": "",
+            "content_package_version": "v1-forced-choice-144",
+            "dir_version": "v1-forced-choice-144",
+            "engine_version": "enneagram_forced_choice_144_v1.0.0",
+            "pack_id": "ENNEAGRAM",
+            "report_engine_version": "v1.2",
+            "scoring_spec_version": "enneagram_forced_choice_144_spec_v1"
+        }
+    },
+    "submit_truth": {
+        "confidence": {
+            "level": "high",
+            "top1_top2_gap": 5
+        },
+        "form_code": "enneagram_forced_choice_144",
+        "ok": true,
+        "primary_type": "T8",
+        "ranking": [
+            {
+                "rank": 1,
+                "raw_count": 23,
+                "score_pct": 71.88,
+                "type_code": "T8"
+            },
+            {
+                "rank": 2,
+                "raw_count": 18,
+                "score_pct": 56.25,
+                "type_code": "T3"
+            },
+            {
+                "rank": 3,
+                "raw_count": 17,
+                "score_pct": 53.13,
+                "type_code": "T4"
+            },
+            {
+                "rank": 4,
+                "raw_count": 17,
+                "score_pct": 53.13,
+                "type_code": "T7"
+            },
+            {
+                "rank": 5,
+                "raw_count": 16,
+                "score_pct": 50,
+                "type_code": "T2"
+            },
+            {
+                "rank": 6,
+                "raw_count": 15,
+                "score_pct": 46.88,
+                "type_code": "T6"
+            },
+            {
+                "rank": 7,
+                "raw_count": 14,
+                "score_pct": 43.75,
+                "type_code": "T5"
+            },
+            {
+                "rank": 8,
+                "raw_count": 12,
+                "score_pct": 37.5,
+                "type_code": "T1"
+            },
+            {
+                "rank": 9,
+                "raw_count": 12,
+                "score_pct": 37.5,
+                "type_code": "T9"
+            }
+        ],
+        "raw_scores": {
+            "pair_answer_counts": {
+                "T1-T2": 4,
+                "T1-T3": 4,
+                "T1-T4": 4,
+                "T1-T5": 4,
+                "T1-T6": 4,
+                "T1-T7": 4,
+                "T1-T8": 4,
+                "T1-T9": 4,
+                "T2-T3": 4,
+                "T2-T4": 4,
+                "T2-T5": 4,
+                "T2-T6": 4,
+                "T2-T7": 4,
+                "T2-T8": 4,
+                "T2-T9": 4,
+                "T3-T4": 4,
+                "T3-T5": 4,
+                "T3-T6": 4,
+                "T3-T7": 4,
+                "T3-T8": 4,
+                "T3-T9": 4,
+                "T4-T5": 4,
+                "T4-T6": 4,
+                "T4-T7": 4,
+                "T4-T8": 4,
+                "T4-T9": 4,
+                "T5-T6": 4,
+                "T5-T7": 4,
+                "T5-T8": 4,
+                "T5-T9": 4,
+                "T6-T7": 4,
+                "T6-T8": 4,
+                "T6-T9": 4,
+                "T7-T8": 4,
+                "T7-T9": 4,
+                "T8-T9": 4
+            },
+            "round_type_counts": {
+                "1": {
+                    "T1": 4,
+                    "T2": 3,
+                    "T3": 2,
+                    "T4": 5,
+                    "T5": 5,
+                    "T6": 3,
+                    "T7": 6,
+                    "T8": 6,
+                    "T9": 2
+                },
+                "2": {
+                    "T1": 2,
+                    "T2": 4,
+                    "T3": 4,
+                    "T4": 3,
+                    "T5": 4,
+                    "T6": 5,
+                    "T7": 4,
+                    "T8": 7,
+                    "T9": 3
+                },
+                "3": {
+                    "T1": 2,
+                    "T2": 4,
+                    "T3": 6,
+                    "T4": 7,
+                    "T5": 5,
+                    "T6": 2,
+                    "T7": 3,
+                    "T8": 4,
+                    "T9": 3
+                },
+                "4": {
+                    "T1": 4,
+                    "T2": 5,
+                    "T3": 6,
+                    "T4": 2,
+                    "T6": 5,
+                    "T7": 4,
+                    "T8": 6,
+                    "T9": 4
+                }
+            },
+            "type_counts": {
+                "T1": 12,
+                "T2": 16,
+                "T3": 18,
+                "T4": 17,
+                "T5": 14,
+                "T6": 15,
+                "T7": 17,
+                "T8": 23,
+                "T9": 12
+            }
+        },
+        "score_method": "enneagram_forced_choice_144_pair_v1",
+        "scores_0_100": {
+            "T1": 37.5,
+            "T2": 50,
+            "T3": 56.25,
+            "T4": 53.13,
+            "T5": 43.75,
+            "T6": 46.88,
+            "T7": 53.13,
+            "T8": 71.88,
+            "T9": 37.5
+        },
+        "top3": [
+            "T8",
+            "T3",
+            "T4"
+        ]
+    }
+}
