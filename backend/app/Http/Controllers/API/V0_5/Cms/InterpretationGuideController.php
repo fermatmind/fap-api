@@ -162,6 +162,17 @@ final class InterpretationGuideController extends Controller
         }
 
         $validated = $validator->validated();
+        if (
+            in_array($validated['status'], [InterpretationGuide::STATUS_SCHEDULED, InterpretationGuide::STATUS_PUBLISHED], true)
+            && $validated['review_state'] !== InterpretationGuide::REVIEW_APPROVED
+        ) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'VALIDATION_FAILED',
+                'errors' => ['review_state' => ['scheduled or published interpretation guides must be approved.']],
+            ], 422);
+        }
+
         $bodyMd = trim((string) ($validated['body_md'] ?? ''));
         $bodyHtml = trim((string) ($validated['body_html'] ?? ''));
 

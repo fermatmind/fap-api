@@ -163,6 +163,17 @@ final class SupportArticleController extends Controller
         }
 
         $validated = $validator->validated();
+        if (
+            in_array($validated['status'], [SupportArticle::STATUS_SCHEDULED, SupportArticle::STATUS_PUBLISHED], true)
+            && $validated['review_state'] !== SupportArticle::REVIEW_APPROVED
+        ) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'VALIDATION_FAILED',
+                'errors' => ['review_state' => ['scheduled or published support articles must be approved.']],
+            ], 422);
+        }
+
         $bodyMd = trim((string) ($validated['body_md'] ?? ''));
         $bodyHtml = trim((string) ($validated['body_html'] ?? ''));
 

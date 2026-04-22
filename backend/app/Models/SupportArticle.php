@@ -94,6 +94,8 @@ final class SupportArticle extends Model
 
     public function scopePublished($query)
     {
-        return $query->where('status', self::STATUS_PUBLISHED);
+        return $query
+            ->where('status', self::STATUS_PUBLISHED)
+            ->where('review_state', self::REVIEW_APPROVED);
     }
 }

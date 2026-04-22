@@ -3500,6 +3500,40 @@
                 ]
             }
         },
+        "/api/v0.5/support/guides": {
+            "get": {
+                "operationId": "get_api_v0_5_support_guides",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\InterpretationGuideController@index",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/support/guides/{slug}": {
+            "get": {
+                "operationId": "get_api_v0_5_support_guides_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\InterpretationGuideController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/support/interpretation-guides": {
             "get": {
                 "operationId": "get_api_v0_5_support_interpretation_guides",

@@ -459,6 +459,8 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/articles/{slug}/seo', [ArticleController::class, 'seo']);
     Route::get('/support/articles', [SupportArticleController::class, 'index']);
     Route::get('/support/articles/{slug}', [SupportArticleController::class, 'show']);
+    Route::get('/support/guides', [InterpretationGuideController::class, 'index']);
+    Route::get('/support/guides/{slug}', [InterpretationGuideController::class, 'show']);
     Route::get('/support/interpretation-guides', [InterpretationGuideController::class, 'index']);
     Route::get('/support/interpretation-guides/{slug}', [InterpretationGuideController::class, 'show']);
     Route::get('/content-pages/{slug}', [ContentPageController::class, 'show']);

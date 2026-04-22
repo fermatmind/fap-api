@@ -91,6 +91,48 @@ final class SupportTrustCmsApiTest extends TestCase
             ->assertJsonPath('guide.searchable_model', 'interpretation_guides')
             ->assertJsonPath('guide.test_family', 'big_five')
             ->assertJsonPath('guide.result_context', 'score_meaning');
+
+        $aliasResponse = $this->getJson('/api/v0.5/support/guides/read-score?locale=en');
+
+        $aliasResponse->assertOk()
+            ->assertJsonPath('guide.slug', 'read-score')
+            ->assertJsonPath('guide.canonical_path', '/support/guides/read-score');
+    }
+
+    public function test_public_support_and_interpretation_reads_require_approved_review_state(): void
+    {
+        SupportArticle::query()->create([
+            'org_id' => 0,
+            'slug' => 'draft-review-support',
+            'title' => 'Draft review support',
+            'summary' => 'Not approved.',
+            'body_md' => 'Not approved body.',
+            'support_category' => 'orders',
+            'support_intent' => 'lookup_order',
+            'locale' => 'en',
+            'status' => 'published',
+            'review_state' => 'support_review',
+        ]);
+
+        InterpretationGuide::query()->create([
+            'org_id' => 0,
+            'slug' => 'draft-review-guide',
+            'title' => 'Draft review guide',
+            'summary' => 'Not approved.',
+            'body_md' => 'Not approved body.',
+            'test_family' => 'general',
+            'result_context' => 'how_to_read',
+            'audience' => 'general',
+            'locale' => 'en',
+            'status' => 'published',
+            'review_state' => 'content_review',
+        ]);
+
+        $this->getJson('/api/v0.5/support/articles/draft-review-support?locale=en')
+            ->assertNotFound();
+
+        $this->getJson('/api/v0.5/support/guides/draft-review-guide?locale=en')
+            ->assertNotFound();
     }
 
     public function test_content_pages_support_methodology_boundary_review_fields(): void
@@ -160,5 +202,30 @@ final class SupportTrustCmsApiTest extends TestCase
             'status' => 'published',
             'review_state' => 'approved',
         ]);
+
+        $this->putJson('/api/v0.5/internal/support-articles/unapproved-publish?locale=en', [
+            'title' => 'Unapproved publish',
+            'summary' => 'Should fail.',
+            'body_md' => 'Should fail.',
+            'support_category' => 'orders',
+            'support_intent' => 'lookup_order',
+            'locale' => 'en',
+            'status' => 'published',
+            'review_state' => 'support_review',
+        ])->assertStatus(422)
+            ->assertJsonPath('errors.review_state.0', 'scheduled or published support articles must be approved.');
+
+        $this->putJson('/api/v0.5/internal/interpretation-guides/unapproved-publish?locale=en', [
+            'title' => 'Unapproved publish',
+            'summary' => 'Should fail.',
+            'body_md' => 'Should fail.',
+            'test_family' => 'general',
+            'result_context' => 'how_to_read',
+            'audience' => 'general',
+            'locale' => 'en',
+            'status' => 'published',
+            'review_state' => 'content_review',
+        ])->assertStatus(422)
+            ->assertJsonPath('errors.review_state.0', 'scheduled or published interpretation guides must be approved.');
     }
 }

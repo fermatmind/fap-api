@@ -114,8 +114,12 @@ class InterpretationGuideResource extends Resource
                 ]),
             Forms\Components\Section::make('Relations and SEO')
                 ->schema([
-                    Forms\Components\KeyValue::make('related_guide_ids'),
-                    Forms\Components\KeyValue::make('related_methodology_page_ids'),
+                    Forms\Components\TagsInput::make('related_guide_ids')
+                        ->helperText('Related interpretation guide ids.')
+                        ->dehydrateStateUsing(fn (mixed $state): array => self::normalizeIdList($state)),
+                    Forms\Components\TagsInput::make('related_methodology_page_ids')
+                        ->helperText('Related methodology content_page ids.')
+                        ->dehydrateStateUsing(fn (mixed $state): array => self::normalizeIdList($state)),
                     Forms\Components\TextInput::make('seo_title')->maxLength(255),
                     Forms\Components\Textarea::make('seo_description')->rows(3)->maxLength(2000),
                     Forms\Components\TextInput::make('canonical_path')->maxLength(255),
@@ -159,5 +163,22 @@ class InterpretationGuideResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()->withoutGlobalScopes()->where('org_id', 0);
+    }
+
+    /**
+     * @return list<int>
+     */
+    private static function normalizeIdList(mixed $state): array
+    {
+        if (! is_array($state)) {
+            return [];
+        }
+
+        $ids = array_filter(array_map(
+            static fn (mixed $value): int => (int) $value,
+            $state
+        ), static fn (int $value): bool => $value > 0);
+
+        return array_values(array_unique($ids));
     }
 }
