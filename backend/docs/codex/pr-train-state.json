@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-22T00:00:00+08:00",
+  "updated_at": "2026-04-22T09:32:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -11,7 +11,7 @@
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "github_checks_failed",
       "branch": "codex/enneagram-v1-1-topology-tiebreak-display",
-      "commit_sha": "5ce2b4d858c41ba73ddd0c4ebc92ac2d7689c5df",
+      "commit_sha": "f1655f77930a160e613f6ae424f263194c44843f",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/967",
       "checks": {
         "local": [
@@ -30,32 +30,36 @@
           {
             "command": "git diff --check",
             "status": "passed"
+          },
+          {
+            "command": "Review pass on 2026-04-22: preserve 144 legacy scores_0_100 as wins/32 and keep wins/exposures only in display.preference100",
+            "status": "passed"
           }
         ],
         "github": [
           {
             "name": "hygiene",
             "status": "failed",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24755376963/job/72427347049"
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24755468430/job/72427624380"
           },
           {
             "name": "hygiene",
             "status": "failed",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24755375799/job/72427343781"
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24755467563/job/72427622224"
           },
           {
             "name": "verify-mbti-${{ matrix.mode }}",
             "status": "skipped",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24755376963/job/72427351039"
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24755468430/job/72427629091"
           },
           {
             "name": "verify-mbti-${{ matrix.mode }}",
             "status": "skipped",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24755375799/job/72427347752"
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24755467563/job/72427626614"
           }
         ]
       },
-      "failure_reason": "GitHub Actions hygiene failed immediately on draft PR #967 and verify-mbti matrix was skipped. Local manifest checks passed and the merge policy does not require GitHub checks for this Enneagram v1.1 interpretation/projection PR.",
+      "failure_reason": "GitHub Actions hygiene failed immediately on draft PR #967 after the 2026-04-22 review fix and verify-mbti matrix was skipped. Local manifest checks passed and the merge policy does not require GitHub checks for this Enneagram v1.1 interpretation/projection PR.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
