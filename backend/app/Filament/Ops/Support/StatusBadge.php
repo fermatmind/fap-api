@@ -39,6 +39,23 @@ final class StatusBadge
         return self::isTruthy($state) ? $trueLabel : $falseLabel;
     }
 
+    public static function label(bool|int|string|null $state): string
+    {
+        if (is_bool($state)) {
+            return $state ? __('ops.status.active') : __('ops.status.inactive');
+        }
+
+        $normalized = self::normalize($state);
+        if ($normalized === '') {
+            return '—';
+        }
+
+        $key = str_replace(' ', '_', $normalized);
+        $translation = __('ops.status.'.$key);
+
+        return $translation === 'ops.status.'.$key ? (string) $state : (string) $translation;
+    }
+
     private static function containsAny(string $state, array $needles): bool
     {
         foreach ($needles as $needle) {

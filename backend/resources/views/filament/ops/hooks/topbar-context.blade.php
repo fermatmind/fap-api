@@ -2,7 +2,7 @@
     $routeName = (string) request()->route()?->getName();
 
     $sectionLabel = match (true) {
-        str_contains($routeName, 'mbti-insights') => 'Assessment Insights',
+        str_contains($routeName, 'mbti-insights') => __('ops.topbar.assessment_insights'),
         str_contains($routeName, 'content-pack-release'),
         str_contains($routeName, 'content-pack-version') => __('ops.group.content_control_plane'),
         str_contains($routeName, 'editorial-review'),
@@ -51,6 +51,6 @@
 <x-filament-ops::ops-context-bar
     class="hidden lg:flex"
     :eyebrow="$sectionLabel"
-    meta="Operations shell"
+    :meta="__('ops.topbar.operations_shell')"
     title="Fermat Ops"
 />

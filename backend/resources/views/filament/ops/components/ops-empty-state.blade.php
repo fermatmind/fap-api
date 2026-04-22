@@ -1,6 +1,6 @@
 @props([
     'description' => null,
-    'eyebrow' => 'Workspace state',
+    'eyebrow' => __('ops.empty_state.eyebrow'),
     'icon' => 'heroicon-o-sparkles',
     'title',
 ])

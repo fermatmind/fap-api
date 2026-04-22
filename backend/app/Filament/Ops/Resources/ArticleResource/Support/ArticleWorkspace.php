@@ -36,15 +36,15 @@ final class ArticleWorkspace
         return new HtmlString((string) view('filament.ops.articles.partials.editorial-cues', [
             'facts' => array_values(array_filter([
                 [
-                    'label' => 'Published',
+                    'label' => __('ops.resources.articles.fields.published'),
                     'value' => self::formatTimestamp($get('published_at') ?? $record?->published_at),
                 ],
                 [
-                    'label' => 'Scheduled',
+                    'label' => __('ops.status.scheduled'),
                     'value' => self::formatTimestamp($get('scheduled_at') ?? $record?->scheduled_at),
                 ],
                 [
-                    'label' => 'Public URL',
+                    'label' => __('ops.resources.articles.fields.public_url'),
                     'value' => $publicUrl,
                     'href' => $publicUrl,
                 ],
@@ -55,11 +55,11 @@ final class ArticleWorkspace
                     'state' => $status,
                 ],
                 [
-                    'label' => $isPublic ? 'Public' : 'Private',
+                    'label' => $isPublic ? __('ops.status.public') : __('ops.status.private'),
                     'state' => $isPublic ? 'public' : 'inactive',
                 ],
                 [
-                    'label' => $isIndexable ? 'Indexable' : 'Noindex',
+                    'label' => $isIndexable ? __('ops.status.indexable') : __('ops.status.noindex'),
                     'state' => $isIndexable ? 'indexable' : 'noindex',
                 ],
             ],
@@ -79,34 +79,34 @@ final class ArticleWorkspace
             'canonicalUrl' => $canonicalUrl !== '' ? $canonicalUrl : null,
             'checks' => [
                 [
-                    'label' => 'SEO title',
-                    'description' => 'Search result headline.',
+                    'label' => __('ops.resources.articles.fields.seo_title'),
+                    'description' => __('ops.resources.articles.seo_checks.seo_title'),
                     'ready' => $seoTitle !== '',
                 ],
                 [
-                    'label' => 'SEO description',
-                    'description' => 'Search snippet summary.',
+                    'label' => __('ops.resources.articles.fields.seo_description'),
+                    'description' => __('ops.resources.articles.seo_checks.seo_description'),
                     'ready' => $seoDescription !== '',
                 ],
                 [
-                    'label' => 'Canonical URL',
-                    'description' => 'Matches the intended public article URL.',
+                    'label' => __('ops.resources.articles.fields.canonical_url'),
+                    'description' => __('ops.resources.articles.seo_checks.canonical_url'),
                     'ready' => $canonicalUrl !== '',
                 ],
                 [
-                    'label' => 'Open Graph',
-                    'description' => 'Title, description, and social image coverage.',
+                    'label' => __('ops.resources.articles.fields.open_graph'),
+                    'description' => __('ops.resources.articles.seo_checks.open_graph'),
                     'ready' => $ogTitle !== '' && $ogDescription !== '' && $ogImageUrl !== '',
                 ],
             ],
         ])->render());
     }
 
-    public static function formatTimestamp(mixed $value, string $fallback = 'Not set yet'): string
+    public static function formatTimestamp(mixed $value, ?string $fallback = null): string
     {
         $formatted = self::normalizeTimestamp($value);
 
-        return $formatted ?? $fallback;
+        return $formatted ?? ($fallback ?? __('ops.resources.articles.placeholders.not_set_yet'));
     }
 
     public static function titleMeta(Article $record): string
@@ -120,8 +120,8 @@ final class ArticleWorkspace
     public static function visibilityMeta(Article $record): string
     {
         return implode(' · ', [
-            StatusBadge::booleanLabel($record->is_public, 'Public', 'Private'),
-            StatusBadge::booleanLabel($record->is_indexable, 'Indexable', 'Noindex'),
+            StatusBadge::booleanLabel($record->is_public, __('ops.status.public'), __('ops.status.private')),
+            StatusBadge::booleanLabel($record->is_indexable, __('ops.status.indexable'), __('ops.status.noindex')),
         ]);
     }
 
@@ -147,12 +147,9 @@ final class ArticleWorkspace
         $normalized = trim($status);
 
         if ($normalized === '') {
-            return 'Draft';
+            return __('ops.status.draft');
         }
 
-        return Str::of($normalized)
-            ->replace(['_', '-'], ' ')
-            ->headline()
-            ->value();
+        return StatusBadge::label($normalized);
     }
 }

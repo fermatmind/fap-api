@@ -17,9 +17,9 @@ class FunnelConversionPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-chart-bar-square';
 
-    protected static ?string $navigationGroup = 'Commerce';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Funnel & Conversion';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 5;
 
@@ -125,6 +125,11 @@ class FunnelConversionPage extends Page
         return __('ops.group.commerce');
     }
 
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.funnel_conversion');
+    }
+
     public static function canAccess(): bool
     {
         $guard = (string) config('admin.guard', 'admin');
@@ -141,28 +146,28 @@ class FunnelConversionPage extends Page
 
     public function getTitle(): string
     {
-        return 'Funnel & Conversion';
+        return __('ops.nav.funnel_conversion');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Attempt-led commerce funnel for the selected org. Business facts stay authoritative for order, payment, unlock, and report readiness; events fill only the behavioral gaps.';
+        return __('ops.pages.funnel_conversion.subheading');
     }
 
     protected function getHeaderActions(): array
     {
         return [
             Action::make('attempts')
-                ->label('Attempts Explorer')
+                ->label(__('ops.nav.attempts_explorer'))
                 ->url('/ops/attempts'),
             Action::make('orders')
-                ->label('Orders')
+                ->label(__('ops.nav.orders'))
                 ->url('/ops/orders'),
             Action::make('paymentEvents')
-                ->label('Payment Events')
+                ->label(__('ops.nav.payment_events'))
                 ->url('/ops/payment-events'),
             Action::make('orderLookup')
-                ->label('Order Lookup')
+                ->label(__('ops.nav.order_lookup'))
                 ->url('/ops/order-lookup'),
         ];
     }

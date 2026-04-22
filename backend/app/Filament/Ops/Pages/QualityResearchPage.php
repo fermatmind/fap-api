@@ -14,9 +14,9 @@ class QualityResearchPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-beaker';
 
-    protected static ?string $navigationGroup = 'Assessment Insights';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Quality / Psychometrics / Norms & Drift';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 4;
 
@@ -145,12 +145,22 @@ class QualityResearchPage extends Page
 
     public function getTitle(): string
     {
-        return 'Quality / Psychometrics / Norms & Drift';
+        return __('ops.nav.quality_research');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Internal-only diagnostics for quality, psychometric snapshots, norm coverage, and rollout/drift reference views.';
+        return __('ops.pages.quality_research.subheading');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.topbar.assessment_insights');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.quality_research');
     }
 
     public function applyFilters(): void
@@ -185,10 +195,10 @@ class QualityResearchPage extends Page
     {
         return [
             Action::make('attempts')
-                ->label('Attempts Explorer')
+                ->label(__('ops.nav.attempts_explorer'))
                 ->url('/ops/attempts'),
             Action::make('results')
-                ->label('Results Explorer')
+                ->label(__('ops.nav.results_explorer'))
                 ->url('/ops/results'),
         ];
     }

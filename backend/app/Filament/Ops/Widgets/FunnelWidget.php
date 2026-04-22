@@ -12,7 +12,7 @@ class FunnelWidget extends BaseWidget
 
     protected function getHeading(): ?string
     {
-        return '7-Day Funnel Snapshot';
+        return __('ops.widgets.funnel_snapshot_7d');
     }
 
     protected function getStats(): array
@@ -48,7 +48,7 @@ class FunnelWidget extends BaseWidget
         if ($rows->isEmpty()) {
             return [
                 Stat::make(__('ops.widgets.funnel'), __('ops.widgets.no_data'))
-                    ->description('No funnel events were recorded in the last seven days.')
+                    ->description(__('ops.widgets.no_funnel_events_7d'))
                     ->color('gray'),
             ];
         }

@@ -35,6 +35,16 @@ class PersonalityVariantCloneContentResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Personality Desktop Clone Content';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.group.content');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.personality_desktop_clone');
+    }
+
     public static function canViewAny(): bool
     {
         return self::canRead();

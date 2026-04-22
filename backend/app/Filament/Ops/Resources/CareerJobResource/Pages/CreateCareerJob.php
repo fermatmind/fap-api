@@ -26,12 +26,12 @@ class CreateCareerJob extends CreateRecord
 
     public function getTitle(): string|Htmlable
     {
-        return 'Create Career Job';
+        return __('ops.resources.career_jobs.create_title');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Build a structured career job in the main workspace, then finish publish and SEO cues in the side rail.';
+        return __('ops.resources.career_jobs.create_subheading');
     }
 
     protected function fillForm(): void
@@ -47,7 +47,7 @@ class CreateCareerJob extends CreateRecord
     {
         return [
             Action::make('backToCareerJobs')
-                ->label('All Career Jobs')
+                ->label(__('ops.resources.career_jobs.actions.all'))
                 ->url(CareerJobResource::getUrl())
                 ->icon('heroicon-o-arrow-left')
                 ->color('gray'),
@@ -57,21 +57,21 @@ class CreateCareerJob extends CreateRecord
     protected function getCreateFormAction(): Action
     {
         return parent::getCreateFormAction()
-            ->label('Create Career Job')
+            ->label(__('ops.resources.career_jobs.actions.create'))
             ->icon('heroicon-o-check-circle');
     }
 
     protected function getCreateAnotherFormAction(): Action
     {
         return parent::getCreateAnotherFormAction()
-            ->label('Create & Add Another')
+            ->label(__('ops.resources.common.actions.create_another'))
             ->icon('heroicon-o-document-duplicate');
     }
 
     protected function getCancelFormAction(): Action
     {
         return parent::getCancelFormAction()
-            ->label('Back to Career Jobs')
+            ->label(__('ops.resources.career_jobs.actions.back_to_list'))
             ->icon('heroicon-o-arrow-left');
     }
 
@@ -107,12 +107,12 @@ class CreateCareerJob extends CreateRecord
         CareerJobWorkspace::syncWorkspaceSeo($this->getRecord(), $this->workspaceSeoState);
         $this->getRecord()->unsetRelation('sections');
         $this->getRecord()->unsetRelation('seoMeta');
-        CareerJobWorkspace::createRevision($this->getRecord(), 'Initial workspace snapshot', auth((string) config('admin.guard', 'admin'))->user());
+        CareerJobWorkspace::createRevision($this->getRecord(), __('ops.resources.common.revisions.initial_workspace_snapshot'), auth((string) config('admin.guard', 'admin'))->user());
     }
 
     protected function getCreatedNotificationTitle(): ?string
     {
-        return 'Career job created';
+        return __('ops.resources.career_jobs.notifications.created');
     }
 
     protected function getRedirectUrl(): string

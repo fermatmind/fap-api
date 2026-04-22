@@ -12,7 +12,7 @@ class HealthzStatusWidget extends BaseWidget
 
     protected function getHeading(): ?string
     {
-        return 'Service Health Snapshot';
+        return __('ops.widgets.service_health_snapshot');
     }
 
     protected function getStats(): array
@@ -20,7 +20,7 @@ class HealthzStatusWidget extends BaseWidget
         if (! \App\Support\SchemaBaseline::hasTable('ops_healthz_snapshots')) {
             return [
                 Stat::make(__('ops.widgets.healthz'), __('ops.widgets.no_data'))
-                    ->description('No health snapshot has been recorded yet.')
+                    ->description(__('ops.widgets.no_health_snapshot'))
                     ->color('gray'),
             ];
         }
@@ -29,7 +29,7 @@ class HealthzStatusWidget extends BaseWidget
         if (! $row) {
             return [
                 Stat::make(__('ops.widgets.healthz'), __('ops.widgets.no_data'))
-                    ->description('No health snapshot has been recorded yet.')
+                    ->description(__('ops.widgets.no_health_snapshot'))
                     ->color('gray'),
             ];
         }

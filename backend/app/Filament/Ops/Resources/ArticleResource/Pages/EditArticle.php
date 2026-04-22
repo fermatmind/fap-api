@@ -16,24 +16,24 @@ class EditArticle extends EditRecord
 
     public function getTitle(): string|Htmlable
     {
-        return filled($this->getRecord()->title) ? (string) $this->getRecord()->title : 'Edit Article';
+        return filled($this->getRecord()->title) ? (string) $this->getRecord()->title : __('ops.resources.articles.edit_title');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Refine the article body, release cues, and SEO metadata without leaving the editorial workspace.';
+        return __('ops.resources.articles.edit_subheading');
     }
 
     protected function getHeaderActions(): array
     {
         return [
             Action::make('backToArticles')
-                ->label('All Articles')
+                ->label(__('ops.resources.articles.actions.all'))
                 ->url(ArticleResource::getUrl())
                 ->icon('heroicon-o-arrow-left')
                 ->color('gray'),
             Action::make('openPublicUrl')
-                ->label('Open Public URL')
+                ->label(__('ops.resources.articles.actions.open_public_url'))
                 ->url(fn (): ?string => ArticleWorkspace::publicUrl((string) $this->getRecord()->slug), shouldOpenInNewTab: true)
                 ->icon('heroicon-o-arrow-top-right-on-square')
                 ->color('gray')
@@ -44,20 +44,20 @@ class EditArticle extends EditRecord
     protected function getSaveFormAction(): Action
     {
         return parent::getSaveFormAction()
-            ->label('Save Changes')
+            ->label(__('ops.resources.articles.actions.save'))
             ->icon('heroicon-o-check-circle');
     }
 
     protected function getCancelFormAction(): Action
     {
         return parent::getCancelFormAction()
-            ->label('Back to Articles')
+            ->label(__('ops.resources.articles.actions.back_to_list'))
             ->icon('heroicon-o-arrow-left');
     }
 
     protected function getSavedNotificationTitle(): ?string
     {
-        return 'Article updated';
+        return __('ops.resources.articles.notifications.updated');
     }
 
     protected function getRedirectUrl(): string

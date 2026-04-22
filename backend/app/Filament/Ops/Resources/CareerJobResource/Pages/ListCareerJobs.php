@@ -18,19 +18,19 @@ class ListCareerJobs extends ListRecords
 
     public function getTitle(): string|Htmlable
     {
-        return 'Career Jobs';
+        return __('ops.resources.career_jobs.plural');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Global career content workspace for structured career job profiles. Not tenant-specific.';
+        return __('ops.resources.career_jobs.list_subheading');
     }
 
     protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make()
-                ->label('Create Career Job')
+                ->label(__('ops.resources.career_jobs.actions.create'))
                 ->icon('heroicon-o-plus'),
         ];
     }

@@ -31,12 +31,12 @@ class CreateCareerGuide extends CreateRecord
 
     public function getTitle(): string|Htmlable
     {
-        return 'Create Career Guide';
+        return __('ops.resources.career_guides.create_title');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Build a locale-aware career guide in the main workspace, then finish publish, SEO, and revision cues in the side rail.';
+        return __('ops.resources.career_guides.create_subheading');
     }
 
     protected function fillForm(): void
@@ -52,7 +52,7 @@ class CreateCareerGuide extends CreateRecord
     {
         return [
             Action::make('backToCareerGuides')
-                ->label('All Career Guides')
+                ->label(__('ops.resources.career_guides.actions.all'))
                 ->url(CareerGuideResource::getUrl())
                 ->icon('heroicon-o-arrow-left')
                 ->color('gray'),
@@ -62,21 +62,21 @@ class CreateCareerGuide extends CreateRecord
     protected function getCreateFormAction(): Action
     {
         return parent::getCreateFormAction()
-            ->label('Create Career Guide')
+            ->label(__('ops.resources.career_guides.actions.create'))
             ->icon('heroicon-o-check-circle');
     }
 
     protected function getCreateAnotherFormAction(): Action
     {
         return parent::getCreateAnotherFormAction()
-            ->label('Create & Add Another')
+            ->label(__('ops.resources.common.actions.create_another'))
             ->icon('heroicon-o-document-duplicate');
     }
 
     protected function getCancelFormAction(): Action
     {
         return parent::getCancelFormAction()
-            ->label('Back to Career Guides')
+            ->label(__('ops.resources.career_guides.actions.back_to_list'))
             ->icon('heroicon-o-arrow-left');
     }
 
@@ -124,12 +124,12 @@ class CreateCareerGuide extends CreateRecord
         CareerGuideWorkspace::syncRelatedJobs($this->getRecord(), $this->workspaceRelatedJobsState);
         CareerGuideWorkspace::syncRelatedPersonalityProfiles($this->getRecord(), $this->workspaceRelatedPersonalityProfilesState);
         CareerGuideWorkspace::syncWorkspaceSeo($this->getRecord(), $this->workspaceSeoState);
-        CareerGuideWorkspace::createRevision($this->getRecord(), 'Initial workspace snapshot');
+        CareerGuideWorkspace::createRevision($this->getRecord(), __('ops.resources.common.revisions.initial_workspace_snapshot'));
     }
 
     protected function getCreatedNotificationTitle(): ?string
     {
-        return 'Career guide created';
+        return __('ops.resources.career_guides.notifications.created');
     }
 
     protected function getRedirectUrl(): string

@@ -5,7 +5,7 @@
 
 @php
     $tone = \App\Filament\Ops\Support\StatusBadge::color($state);
-    $display = $label ?? (is_bool($state) ? ($state ? 'active' : 'inactive') : (string) $state);
+    $display = $label ?? \App\Filament\Ops\Support\StatusBadge::label($state);
 @endphp
 
 <span {{ $attributes->class(['ops-status-pill', "ops-status-pill--{$tone}"]) }}>

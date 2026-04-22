@@ -15,19 +15,19 @@ class CreateArticle extends CreateRecord
 
     public function getTitle(): string|Htmlable
     {
-        return 'Create Article';
+        return __('ops.resources.articles.create_title');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Draft the article body in the main canvas, then finish publishing and SEO details in the side rail.';
+        return __('ops.resources.articles.create_subheading');
     }
 
     protected function getHeaderActions(): array
     {
         return [
             Action::make('backToArticles')
-                ->label('All Articles')
+                ->label(__('ops.resources.articles.actions.all'))
                 ->url(ArticleResource::getUrl())
                 ->icon('heroicon-o-arrow-left')
                 ->color('gray'),
@@ -37,27 +37,27 @@ class CreateArticle extends CreateRecord
     protected function getCreateFormAction(): Action
     {
         return parent::getCreateFormAction()
-            ->label('Create Article')
+            ->label(__('ops.resources.articles.actions.create'))
             ->icon('heroicon-o-check-circle');
     }
 
     protected function getCreateAnotherFormAction(): Action
     {
         return parent::getCreateAnotherFormAction()
-            ->label('Create & Add Another')
+            ->label(__('ops.resources.articles.actions.create_another'))
             ->icon('heroicon-o-document-duplicate');
     }
 
     protected function getCancelFormAction(): Action
     {
         return parent::getCancelFormAction()
-            ->label('Back to Articles')
+            ->label(__('ops.resources.articles.actions.back_to_list'))
             ->icon('heroicon-o-arrow-left');
     }
 
     protected function getCreatedNotificationTitle(): ?string
     {
-        return 'Article created';
+        return __('ops.resources.articles.notifications.created');
     }
 
     protected function getRedirectUrl(): string

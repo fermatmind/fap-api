@@ -104,17 +104,17 @@ class ViewReportSnapshot extends Page
 
     public function getTitle(): string
     {
-        return 'Report / PDF Center';
+        return __('ops.resources.support.report_pdf_center');
     }
 
     public function getHeading(): string
     {
-        return 'Report / PDF Center';
+        return __('ops.resources.support.report_pdf_center');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Read-only support diagnostics rooted on report snapshots.';
+        return __('ops.resources.support.report_pdf_detail_subheading');
     }
 
     public function getBreadcrumb(): string

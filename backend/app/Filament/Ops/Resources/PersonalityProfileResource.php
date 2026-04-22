@@ -63,7 +63,7 @@ class PersonalityProfileResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return 'Personality';
+        return __('ops.nav.personality');
     }
 
     public static function form(Form $form): Form
@@ -250,7 +250,7 @@ class PersonalityProfileResource extends Resource
                             ->extraAttributes(['class' => 'ops-personality-workspace-section ops-personality-workspace-section--rail'])
                             ->schema([
                                 Forms\Components\Placeholder::make('workspace_state')
-                                    ->label('Editorial cues')
+                                    ->label(__('ops.resources.common.fields.editorial_cues'))
                                     ->content(fn (Forms\Get $get, ?PersonalityProfile $record) => PersonalityWorkspace::renderEditorialCues($get, $record))
                                     ->columnSpanFull(),
                                 Forms\Components\Select::make('status')
@@ -260,11 +260,11 @@ class PersonalityProfileResource extends Resource
                                     ->default('draft')
                                     ->helperText('Published profiles are eligible for the public read API once visibility and locale are aligned.'),
                                 Forms\Components\Toggle::make('is_public')
-                                    ->label('Public visibility')
+                                    ->label(__('ops.resources.common.fields.public_visibility'))
                                     ->default(true)
                                     ->helperText('Controls whether the public personality API can serve this profile.'),
                                 Forms\Components\Toggle::make('is_indexable')
-                                    ->label('Search indexable')
+                                    ->label(__('ops.resources.common.fields.search_indexable'))
                                     ->default(true)
                                     ->helperText('Used for SEO payload fallbacks and robots defaults.'),
                                 Forms\Components\DateTimePicker::make('published_at')
@@ -277,7 +277,7 @@ class PersonalityProfileResource extends Resource
                             ->extraAttributes(['class' => 'ops-personality-workspace-section ops-personality-workspace-section--rail'])
                             ->schema([
                                 Forms\Components\Placeholder::make('seo_snapshot')
-                                    ->label('SEO snapshot')
+                                    ->label(__('ops.resources.common.fields.seo_snapshot'))
                                     ->content(fn (Forms\Get $get, ?PersonalityProfile $record) => PersonalityWorkspace::renderSeoSnapshot($get, $record))
                                     ->columnSpanFull(),
                                 Forms\Components\TextInput::make('workspace_seo.seo_title')

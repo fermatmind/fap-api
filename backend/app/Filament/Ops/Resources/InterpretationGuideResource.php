@@ -54,6 +54,11 @@ class InterpretationGuideResource extends Resource
         return __('ops.group.editorial');
     }
 
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.interpretation_guides');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([

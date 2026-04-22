@@ -15,7 +15,7 @@ class WebhookFailureWidget extends BaseWidget
 
     protected function getHeading(): ?string
     {
-        return 'Webhook Monitoring';
+        return __('ops.widgets.webhook_monitoring');
     }
 
     protected function getStats(): array

@@ -16,7 +16,7 @@ class SelectOrgPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
 
-    protected static ?string $navigationLabel = 'Select Org';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = -1;
 
@@ -30,7 +30,7 @@ class SelectOrgPage extends Page
 
     public int $currentOrgId = 0;
 
-    public string $currentOrgName = 'No Org Selected';
+    public string $currentOrgName = '';
 
     /**
      * @var list<array{id:int,name:string,status:string,domain:?string,updated_at:string}>
@@ -58,12 +58,12 @@ class SelectOrgPage extends Page
 
     public function getTitle(): string
     {
-        return 'Select organization';
+        return __('ops.select_org.title');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Use the Fermat Ops workspace shell to choose the active organization before opening commerce, content, or runtime workflows.';
+        return __('ops.select_org.subheading');
     }
 
     public function updatedSearch(): void
@@ -75,7 +75,7 @@ class SelectOrgPage extends Page
     {
         if (! \App\Support\SchemaBaseline::hasTable('organizations')) {
             Notification::make()
-                ->title('Organizations table missing')
+                ->title(__('ops.select_org.notifications.organizations_table_missing'))
                 ->danger()
                 ->send();
 
@@ -88,7 +88,7 @@ class SelectOrgPage extends Page
 
         if (! $exists) {
             Notification::make()
-                ->title('Organization not found')
+                ->title(__('ops.select_org.notifications.organization_not_found'))
                 ->danger()
                 ->send();
 
@@ -110,7 +110,7 @@ class SelectOrgPage extends Page
         ));
 
         Notification::make()
-            ->title('Organization selected')
+            ->title(__('ops.select_org.notifications.organization_selected'))
             ->success()
             ->send();
 
@@ -126,7 +126,7 @@ class SelectOrgPage extends Page
     {
         if (! \App\Support\SchemaBaseline::hasTable('organizations')) {
             Notification::make()
-                ->title('Organizations table missing')
+                ->title(__('ops.select_org.notifications.organizations_table_missing'))
                 ->danger()
                 ->send();
 
@@ -135,7 +135,7 @@ class SelectOrgPage extends Page
 
         if (! $this->canCreateOrganization()) {
             Notification::make()
-                ->title('Permission denied')
+                ->title(__('ops.select_org.notifications.permission_denied'))
                 ->danger()
                 ->send();
 
@@ -169,7 +169,7 @@ class SelectOrgPage extends Page
         $this->refreshOrganizations();
 
         Notification::make()
-            ->title('Organization created')
+            ->title(__('ops.select_org.notifications.organization_created'))
             ->body('org_id='.$orgId)
             ->success()
             ->send();
@@ -182,7 +182,7 @@ class SelectOrgPage extends Page
 
     public function whyVisibleHint(): string
     {
-        return 'No organization is selected yet. Create a new organization or import/sync existing organizations.';
+        return __('ops.select_org.empty_description');
     }
 
     public function visibleOrganizationsCount(): int
@@ -248,7 +248,7 @@ class SelectOrgPage extends Page
         $orgId = $this->resolveSelectedOrgId();
         if ($orgId <= 0) {
             $this->currentOrgId = 0;
-            $this->currentOrgName = 'No Org Selected';
+            $this->currentOrgName = __('ops.topbar.no_org_selected');
 
             return;
         }
@@ -256,7 +256,7 @@ class SelectOrgPage extends Page
         $this->currentOrgId = $orgId;
 
         if (! \App\Support\SchemaBaseline::hasTable('organizations')) {
-            $this->currentOrgName = 'No Org Selected';
+            $this->currentOrgName = __('ops.topbar.no_org_selected');
             $this->currentOrgId = 0;
 
             return;
@@ -266,7 +266,7 @@ class SelectOrgPage extends Page
         $user = auth($guard)->user();
         if (! app(OrgVisibilityResolver::class)->isVisibleOrganization($user, $this->currentOrgId)) {
             $this->currentOrgId = 0;
-            $this->currentOrgName = 'No Org Selected';
+            $this->currentOrgName = __('ops.topbar.no_org_selected');
 
             return;
         }
@@ -278,7 +278,7 @@ class SelectOrgPage extends Page
 
         if ($row === null) {
             $this->currentOrgId = 0;
-            $this->currentOrgName = 'No Org Selected';
+            $this->currentOrgName = __('ops.topbar.no_org_selected');
 
             return;
         }

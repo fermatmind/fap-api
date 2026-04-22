@@ -1,6 +1,6 @@
 @props([
     'eyebrow' => null,
-    'meta' => 'Operations shell',
+    'meta' => __('ops.topbar.operations_shell'),
     'title' => 'Fermat Ops',
 ])
 

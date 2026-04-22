@@ -17,7 +17,7 @@ final class PaymentAttemptsRelationManager extends RelationManager
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
-        return 'Payment Attempts';
+        return __('ops.nav.payment_attempts');
     }
 
     public function table(Table $table): Table

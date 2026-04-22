@@ -11,20 +11,24 @@ trait HasSharedListEmptyState
 {
     protected function getTableEmptyStateHeading(): ?string
     {
-        return 'No '.Str::lower((string) static::getResource()::getTitleCasePluralModelLabel()).' yet';
+        return __('ops.empty_state.heading', [
+            'resource' => Str::lower((string) static::getResource()::getPluralModelLabel()),
+        ]);
     }
 
     protected function getTableEmptyStateDescription(): ?string
     {
         if ($this->hasActiveTableQuery()) {
-            return 'Try adjusting the current search or filters to widen the result set.';
+            return __('ops.empty_state.filtered_description');
         }
 
         if (static::getResource()::canCreate() && static::getResource()::hasPage('create')) {
-            return 'Create the first '.Str::lower((string) static::getResource()::getTitleCaseModelLabel()).' to start this workspace.';
+            return __('ops.empty_state.create_description', [
+                'resource' => Str::lower((string) static::getResource()::getModelLabel()),
+            ]);
         }
 
-        return 'Records will appear here as soon as data is available for the current organization context.';
+        return __('ops.empty_state.default_description');
     }
 
     protected function getTableEmptyStateIcon(): ?string
@@ -40,7 +44,9 @@ trait HasSharedListEmptyState
 
         return [
             Action::make('create')
-                ->label('Create '.static::getResource()::getTitleCaseModelLabel())
+                ->label(__('ops.empty_state.create_action', [
+                    'resource' => static::getResource()::getModelLabel(),
+                ]))
                 ->icon('heroicon-m-plus')
                 ->color('primary')
                 ->url(static::getResource()::getUrl('create')),

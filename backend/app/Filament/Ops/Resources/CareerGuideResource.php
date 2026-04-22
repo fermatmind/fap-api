@@ -67,7 +67,17 @@ class CareerGuideResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return 'Career Guides';
+        return __('ops.nav.career_guides');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('ops.resources.career_guides.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('ops.resources.career_guides.plural');
     }
 
     public static function form(Form $form): Form
@@ -249,7 +259,7 @@ class CareerGuideResource extends Resource
                             ->extraAttributes(['class' => 'ops-career-job-workspace-section ops-career-job-workspace-section--rail'])
                             ->schema([
                                 Forms\Components\Placeholder::make('workspace_state')
-                                    ->label('Editorial cues')
+                                    ->label(__('ops.resources.common.fields.editorial_cues'))
                                     ->content(fn (Forms\Get $get, ?CareerGuide $record) => CareerGuideWorkspace::renderEditorialCues($get, $record))
                                     ->columnSpanFull(),
                                 Forms\Components\Select::make('status')
@@ -258,10 +268,10 @@ class CareerGuideResource extends Resource
                                     ->options(CareerGuideWorkspace::statusOptions())
                                     ->default(CareerGuide::STATUS_DRAFT),
                                 Forms\Components\Toggle::make('is_public')
-                                    ->label('Public visibility')
+                                    ->label(__('ops.resources.common.fields.public_visibility'))
                                     ->default(true),
                                 Forms\Components\Toggle::make('is_indexable')
-                                    ->label('Search indexable')
+                                    ->label(__('ops.resources.common.fields.search_indexable'))
                                     ->default(true),
                                 Forms\Components\DateTimePicker::make('published_at'),
                                 Forms\Components\DateTimePicker::make('scheduled_at'),
@@ -275,7 +285,7 @@ class CareerGuideResource extends Resource
                             ->extraAttributes(['class' => 'ops-career-job-workspace-section ops-career-job-workspace-section--rail'])
                             ->schema([
                                 Forms\Components\Placeholder::make('seo_snapshot')
-                                    ->label('SEO snapshot')
+                                    ->label(__('ops.resources.common.fields.seo_snapshot'))
                                     ->content(fn (Forms\Get $get, ?CareerGuide $record) => CareerGuideWorkspace::renderSeoSnapshot($get, $record))
                                     ->columnSpanFull(),
                                 Forms\Components\TextInput::make('workspace_seo.seo_title')

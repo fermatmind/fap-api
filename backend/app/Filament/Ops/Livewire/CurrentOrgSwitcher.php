@@ -12,7 +12,7 @@ class CurrentOrgSwitcher extends Component
 {
     public int $currentOrgId = 0;
 
-    public string $currentOrgName = 'No Org Selected';
+    public string $currentOrgName = '';
 
     /** @var list<array{id:int,name:string}> */
     public array $organizations = [];
@@ -54,7 +54,7 @@ class CurrentOrgSwitcher extends Component
     {
         if (! \App\Support\SchemaBaseline::hasTable('organizations')) {
             $this->currentOrgId = 0;
-            $this->currentOrgName = 'No Org Selected';
+            $this->currentOrgName = (string) __('ops.topbar.no_org_selected');
             $this->organizations = [];
 
             return;
@@ -93,6 +93,6 @@ class CurrentOrgSwitcher extends Component
         }
 
         $this->currentOrgId = 0;
-        $this->currentOrgName = 'No Org Selected';
+        $this->currentOrgName = (string) __('ops.topbar.no_org_selected');
     }
 }

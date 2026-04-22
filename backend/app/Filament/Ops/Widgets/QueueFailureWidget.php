@@ -15,7 +15,7 @@ class QueueFailureWidget extends BaseWidget
 
     protected function getHeading(): ?string
     {
-        return 'Operational Stability';
+        return __('ops.widgets.operational_stability');
     }
 
     protected function getStats(): array

@@ -56,7 +56,7 @@ class LandingSurfaceResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return 'Landing Surfaces';
+        return __('ops.nav.landing_surfaces');
     }
 
     public static function form(Form $form): Form

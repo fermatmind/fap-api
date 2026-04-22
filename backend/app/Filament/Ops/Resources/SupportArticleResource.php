@@ -54,6 +54,11 @@ class SupportArticleResource extends Resource
         return __('ops.group.editorial');
     }
 
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.support_articles');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([

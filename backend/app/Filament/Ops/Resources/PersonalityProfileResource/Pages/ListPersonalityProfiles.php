@@ -18,19 +18,19 @@ class ListPersonalityProfiles extends ListRecords
 
     public function getTitle(): string|Htmlable
     {
-        return 'Personality';
+        return __('ops.resources.personality_profiles.plural');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Global MBTI content workspace for structured personality profiles. Not tenant-specific.';
+        return __('ops.resources.personality_profiles.list_subheading');
     }
 
     protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make()
-                ->label('Create Personality Profile')
+                ->label(__('ops.resources.personality_profiles.actions.create'))
                 ->icon('heroicon-o-plus'),
         ];
     }

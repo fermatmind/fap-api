@@ -28,9 +28,9 @@ class ArticleCategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-folder';
 
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Categories';
+    protected static ?string $navigationLabel = null;
 
     public static function canViewAny(): bool
     {
@@ -59,7 +59,7 @@ class ArticleCategoryResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return 'Categories';
+        return __('ops.nav.article_categories');
     }
 
     public static function form(Form $form): Form
@@ -95,8 +95,8 @@ class ArticleCategoryResource extends Resource
                     ->searchable()
                     ->copyable(),
                 TextColumn::make('is_active')
-                    ->label('Status')
-                    ->formatStateUsing(fn (bool|int|string|null $state): string => StatusBadge::booleanLabel($state, 'active', 'inactive'))
+                    ->label(__('ops.status.label'))
+                    ->formatStateUsing(fn (bool|int|string|null $state): string => StatusBadge::booleanLabel($state, __('ops.status.active'), __('ops.status.inactive')))
                     ->badge()
                     ->color(fn (bool|int|string|null $state): string => StatusBadge::booleanColor($state))
                     ->sortable(),
@@ -108,7 +108,7 @@ class ArticleCategoryResource extends Resource
             ])
             ->filters([
                 TernaryFilter::make('is_active')
-                    ->label('Status'),
+                    ->label(__('ops.status.label')),
             ])
             ->defaultSort('sort_order', 'asc')
             ->actions([

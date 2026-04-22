@@ -54,6 +54,11 @@ class ContentPageResource extends Resource
         return __('ops.group.editorial');
     }
 
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.content_pages');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([

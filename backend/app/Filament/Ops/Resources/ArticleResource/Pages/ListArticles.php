@@ -18,19 +18,19 @@ class ListArticles extends ListRecords
 
     public function getTitle(): string|Htmlable
     {
-        return 'Articles';
+        return __('ops.resources.articles.plural');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Content workspace for drafting, publishing, and SEO-ready editorial updates.';
+        return __('ops.resources.articles.list_subheading');
     }
 
     protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make()
-                ->label('Create Article')
+                ->label(__('ops.resources.articles.actions.create'))
                 ->icon('heroicon-o-plus'),
         ];
     }

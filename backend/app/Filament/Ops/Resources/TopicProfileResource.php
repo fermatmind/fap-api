@@ -63,7 +63,7 @@ class TopicProfileResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return 'Topics';
+        return __('ops.nav.topics');
     }
 
     public static function form(Form $form): Form
@@ -203,7 +203,7 @@ class TopicProfileResource extends Resource
                             ->extraAttributes(['class' => 'ops-topic-workspace-section ops-topic-workspace-section--rail'])
                             ->schema([
                                 Forms\Components\Placeholder::make('workspace_state')
-                                    ->label('Editorial cues')
+                                    ->label(__('ops.resources.common.fields.editorial_cues'))
                                     ->content(fn (Forms\Get $get, ?TopicProfile $record) => TopicWorkspace::renderEditorialCues($get, $record))
                                     ->columnSpanFull(),
                                 Forms\Components\Select::make('status')
@@ -213,11 +213,11 @@ class TopicProfileResource extends Resource
                                     ->default(TopicProfile::STATUS_DRAFT)
                                     ->helperText('Published topics become eligible for public topic APIs once locale and visibility align.'),
                                 Forms\Components\Toggle::make('is_public')
-                                    ->label('Public visibility')
+                                    ->label(__('ops.resources.common.fields.public_visibility'))
                                     ->default(true)
                                     ->helperText('Controls whether public topic endpoints can serve this topic hub.'),
                                 Forms\Components\Toggle::make('is_indexable')
-                                    ->label('Search indexable')
+                                    ->label(__('ops.resources.common.fields.search_indexable'))
                                     ->default(true)
                                     ->helperText('Used for SEO payload fallbacks and future sitemap eligibility.'),
                                 Forms\Components\DateTimePicker::make('published_at')
@@ -234,7 +234,7 @@ class TopicProfileResource extends Resource
                             ->extraAttributes(['class' => 'ops-topic-workspace-section ops-topic-workspace-section--rail'])
                             ->schema([
                                 Forms\Components\Placeholder::make('seo_snapshot')
-                                    ->label('SEO snapshot')
+                                    ->label(__('ops.resources.common.fields.seo_snapshot'))
                                     ->content(fn (Forms\Get $get, ?TopicProfile $record) => TopicWorkspace::renderSeoSnapshot($get, $record))
                                     ->columnSpanFull(),
                                 Forms\Components\TextInput::make('workspace_seo.seo_title')

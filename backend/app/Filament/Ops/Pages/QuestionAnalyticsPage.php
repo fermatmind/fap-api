@@ -17,9 +17,9 @@ class QuestionAnalyticsPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-queue-list';
 
-    protected static ?string $navigationGroup = 'Assessment Insights';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Question Analytics';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 3;
 
@@ -149,12 +149,22 @@ class QuestionAnalyticsPage extends Page
 
     public function getTitle(): string
     {
-        return 'Question Analytics';
+        return __('ops.nav.question_analytics');
     }
 
     public function getSubheading(): ?string
     {
-        return 'First-phase authoritative question-level option distribution and dropoff/completion for safe row-capable scales.';
+        return __('ops.pages.question_analytics.subheading');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.topbar.assessment_insights');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.question_analytics');
     }
 
     public function applyFilters(): void
@@ -244,7 +254,7 @@ class QuestionAnalyticsPage extends Page
         $this->drillLinks = $this->buildDrillLinks();
 
         if (! SchemaBaseline::hasTable('analytics_question_option_daily') || ! SchemaBaseline::hasTable('analytics_question_progress_daily')) {
-            $this->warnings[] = 'Question Analytics daily read models are missing. Run php artisan migrate first.';
+            $this->warnings[] = __('ops.pages.question_analytics.missing_read_models');
             $this->scopeNotes = $this->buildScopeNotes();
 
             return;
@@ -260,7 +270,7 @@ class QuestionAnalyticsPage extends Page
 
         $orgId = $this->selectedOrgId();
         if ($orgId <= 0) {
-            $this->warnings[] = 'Select an org before loading Question Analytics.';
+            $this->warnings[] = __('ops.pages.question_analytics.select_org_first');
             $this->scopeNotes = $this->buildScopeNotes();
 
             return;
