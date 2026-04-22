@@ -1,0 +1,23 @@
+{
+  "schema": "fap.big5.report_registry_manifest.v1",
+  "registry_id": "BIG5_OCEAN_v2_report_engine_pr1",
+  "scale_code": "BIG5_OCEAN",
+  "version": "v2",
+  "locale": "zh-CN",
+  "scope": "PR1 N vertical slice only",
+  "runtime_contract": "fap.big5.report.v1",
+  "section_skeleton": [
+    "hero_summary",
+    "domains_overview",
+    "domain_deep_dive",
+    "facet_details",
+    "core_portrait",
+    "norms_comparison",
+    "action_plan",
+    "methodology_and_access"
+  ],
+  "traits_in_scope": ["N"],
+  "fixtures": [
+    "fixtures/canonical_n_slice_sensitive_independent.context.json"
+  ]
+}

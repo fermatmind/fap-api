@@ -1,0 +1,6 @@
+{
+  "schema": "fap.big5.shared_methodology.v1",
+  "title": "PR1 方法说明",
+  "body": "本 payload 由 Big Five Report Engine PR1 的 N 维度垂直切片生成；未覆盖 section 使用 status=not_populated_in_pr1，现网评分链和现网报告链不读取本 registry。",
+  "access_note": "此结构服务未来 8 section 承载位，不代表生产 AttemptReadController 已接入。"
+}

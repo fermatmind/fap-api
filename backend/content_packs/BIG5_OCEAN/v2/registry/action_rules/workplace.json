@@ -1,0 +1,54 @@
+{
+  "schema": "fap.big5.action_rule_pack.v1",
+  "scenario": "workplace",
+  "rules": [
+    {
+      "rule_id": "n_work_continue_risk_sensing_60_79",
+      "trait_code": "N",
+      "bucket": "continue",
+      "percentile_min": 60,
+      "percentile_max": 79,
+      "scenario_tags": ["workplace"],
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "继续保留你的风险感知",
+      "body": "不要把更快感到不对劲误解成负担。对你来说，它首先是一种预警力。"
+    },
+    {
+      "rule_id": "n_work_start_pre_meeting_boundary_note_60_79",
+      "trait_code": "N",
+      "bucket": "start",
+      "percentile_min": 60,
+      "percentile_max": 79,
+      "scenario_tags": ["workplace"],
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "会前写一句边界提醒",
+      "body": "在高摩擦或模糊边界的会议前，先写下一句：这次我最不能接受的模糊点是什么。"
+    },
+    {
+      "rule_id": "n_work_stop_hidden_load_60_79",
+      "trait_code": "N",
+      "bucket": "stop",
+      "percentile_min": 60,
+      "percentile_max": 79,
+      "scenario_tags": ["workplace"],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "停止默默吞下多余负荷",
+      "body": "当你已经明显感觉到任务、关系或节奏正在耗你时，不要继续把这部分代价全放在内部处理。"
+    },
+    {
+      "rule_id": "n_work_observe_trigger_meetings_60_100",
+      "trait_code": "N",
+      "bucket": "observe",
+      "percentile_min": 60,
+      "percentile_max": 100,
+      "scenario_tags": ["workplace"],
+      "difficulty_level": "low",
+      "time_horizon": "two_weeks",
+      "title": "记录最耗你的会议类型",
+      "body": "连续两周记录：哪些会议最容易让你提前进入高负荷——目标模糊、责任不清，还是反复拉扯。"
+    }
+  ]
+}

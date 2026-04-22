@@ -1,0 +1,54 @@
+{
+  "schema": "fap.big5.action_rule_pack.v1",
+  "scenario": "personal_growth",
+  "rules": [
+    {
+      "rule_id": "n_growth_start_name_signal_40_79",
+      "trait_code": "N",
+      "bucket": "start",
+      "percentile_min": 40,
+      "percentile_max": 79,
+      "scenario_tags": ["personal_growth"],
+      "difficulty_level": "low",
+      "time_horizon": "today",
+      "title": "先命名，不先评判",
+      "body": "当你开始觉得烦、累、乱、退时，先命名：我现在更像是焦虑、受伤、失控感，还是单纯疲惫？"
+    },
+    {
+      "rule_id": "n_growth_start_boundary_sentence_60_79",
+      "trait_code": "N",
+      "bucket": "start",
+      "percentile_min": 60,
+      "percentile_max": 79,
+      "scenario_tags": ["personal_growth", "relationships"],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "练一句低成本边界表达",
+      "body": "预先准备一句标准边界句：‘我现在需要一点时间整理，再继续讨论。’"
+    },
+    {
+      "rule_id": "n_growth_stop_catastrophe_loop_60_100",
+      "trait_code": "N",
+      "bucket": "stop",
+      "percentile_min": 60,
+      "percentile_max": 100,
+      "scenario_tags": ["personal_growth"],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "停止无限推演最坏后果",
+      "body": "当你已经开始连续推演最坏版本时，暂停继续推演，转而只写“当前最可行动的一步”。"
+    },
+    {
+      "rule_id": "n_growth_observe_real_vs_predicted_cost_40_100",
+      "trait_code": "N",
+      "bucket": "observe",
+      "percentile_min": 40,
+      "percentile_max": 100,
+      "scenario_tags": ["personal_growth"],
+      "difficulty_level": "low",
+      "time_horizon": "two_weeks",
+      "title": "比较“我担心的代价”和“真实发生的代价”",
+      "body": "连续两周做一个简单对照：我预想的坏结果是什么，真实发生的坏结果又是什么。"
+    }
+  ]
+}
