@@ -185,6 +185,55 @@ return [
             ],
         ],
     ],
+    'riasec_forms' => [
+        'default_form_code' => 'riasec_60',
+        'forms' => [
+            'riasec_60' => [
+                'dir_version' => 'v1-standard-60',
+                'question_count' => 60,
+                'form_kind' => 'standard',
+                'aliases' => [
+                    '60',
+                    'standard_60',
+                    'public_60',
+                    'holland_60',
+                ],
+                'public' => [
+                    'label' => [
+                        'zh' => '60题标准版',
+                        'en' => '60-question standard version',
+                    ],
+                    'short_label' => [
+                        'zh' => '60题',
+                        'en' => '60 questions',
+                    ],
+                    'estimated_minutes' => 8,
+                ],
+            ],
+            'riasec_140' => [
+                'dir_version' => 'v1-enhanced-140',
+                'question_count' => 140,
+                'form_kind' => 'enhanced',
+                'aliases' => [
+                    '140',
+                    'enhanced_140',
+                    'expert_140',
+                    'holland_140',
+                ],
+                'public' => [
+                    'label' => [
+                        'zh' => '140题增强版',
+                        'en' => '140-question enhanced version',
+                    ],
+                    'short_label' => [
+                        'zh' => '140题',
+                        'en' => '140 questions',
+                    ],
+                    'estimated_minutes' => 18,
+                ],
+            ],
+        ],
+    ],
 
     // ✅ 默认 region/locale 也钉死到 CN_MAINLAND/zh-CN（仍保留 fallback 机制）
     'default_region' => env('FAP_DEFAULT_REGION', 'CN_MAINLAND'),

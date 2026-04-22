@@ -295,6 +295,92 @@ final class ScaleRegistrySeeder extends Seeder
         $writer->syncSlugsForScale($enneagram);
         $this->command?->info('ScaleRegistrySeeder: ENNEAGRAM scale upserted.');
 
+        $riasec = $writer->upsertScale([
+            'code' => 'RIASEC',
+            'org_id' => 0,
+            'primary_slug' => 'holland-career-interest-test-riasec',
+            'slugs_json' => [
+                'holland-career-interest-test-riasec',
+                'holland-code-career-test',
+                'career-interest-test',
+                'riasec',
+                'riasec-test',
+                'career-tests-riasec',
+            ],
+            'driver_type' => 'riasec',
+            'assessment_driver' => 'riasec',
+            'default_pack_id' => 'RIASEC',
+            'default_region' => $defaultRegion,
+            'default_locale' => $defaultLocale,
+            'default_dir_version' => 'v1-standard-60',
+            'capabilities_json' => [
+                'assets' => false,
+                'questions' => true,
+                'enabled_in_prod' => true,
+                'enabled_regions' => ['CN_MAINLAND', 'GLOBAL'],
+                'rollout_ratio' => 1.0,
+                'paywall_mode' => 'free_only',
+                'forms' => ['riasec_60', 'riasec_140'],
+                'default_form_code' => 'riasec_60',
+            ],
+            'view_policy_json' => [
+                'free_sections' => ['summary', 'scores', 'dimension_explanations'],
+                'blur_others' => false,
+                'teaser_percent' => 0.0,
+                'upgrade_sku' => null,
+            ],
+            'commercial_json' => [
+                'price_tier' => 'FREE',
+                'report_benefit_code' => 'RIASEC_REPORT',
+                'credit_benefit_code' => 'RIASEC_REPORT',
+                'report_unlock_sku' => null,
+                'offers' => [],
+            ],
+            'seo_schema_json' => [
+                '@context' => 'https://schema.org',
+                '@type' => 'Quiz',
+                'name' => 'Holland Career Interest Test (RIASEC)',
+                'description' => 'RIASEC career interest assessment with standard 60-question and enhanced 140-question forms.',
+            ],
+            'seo_i18n_json' => [
+                'en' => [
+                    'title' => 'Holland Career Interest Test (RIASEC)',
+                    'description' => 'Discover your Holland Code across Realistic, Investigative, Artistic, Social, Enterprising, and Conventional interests.',
+                    'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
+                ],
+                'zh' => [
+                    'title' => '霍兰德职业兴趣测试（RIASEC）',
+                    'description' => '通过结构化测评了解你的现实型、研究型、艺术型、社会型、企业型与常规型兴趣排序。',
+                    'og_image_url' => 'https://api.fermatmind.com/static/share/mbti_square_600x600.png',
+                ],
+            ],
+            'content_i18n_json' => $this->catalogContent(
+                enTitle: 'Holland Career Interest Test (RIASEC)',
+                zhTitle: '霍兰德职业兴趣测试（RIASEC）',
+                enDescription: 'Discover your Holland Code across six career-interest dimensions.',
+                zhDescription: '了解你的霍兰德三字母职业兴趣主码与六维兴趣分布。',
+                questions: 60,
+                minutes: 8,
+                cardVisual: 'career_compass',
+                cardTone: 'editorial',
+                cardSeed: 'riasec',
+                cardDensity: 'regular',
+                enTagline: 'Career interest profile',
+                zhTagline: '职业兴趣画像',
+                priority: 88,
+                rating: 5,
+                enExcerpt: 'Map your strongest career interests into a Holland Code and compare your six RIASEC dimensions.',
+                zhExcerpt: '将你的职业兴趣整理为霍兰德三字母主码，并查看六个 RIASEC 维度的分数分布。',
+                enSeoCopy: 'The RIASEC assessment uses Holland career-interest dimensions and backend scoring. The default public form is 60 questions, with an enhanced 140-question form supported by the same scale.',
+                zhSeoCopy: 'RIASEC 测评基于霍兰德职业兴趣六维模型，评分由后端统一提交链路完成。默认公开版为 60 题，同一 scale 下支持 140 题增强版。'
+            ),
+            'is_public' => true,
+            'is_active' => true,
+        ]);
+
+        $writer->syncSlugsForScale($riasec);
+        $this->command?->info('ScaleRegistrySeeder: RIASEC scale upserted.');
+
         $clinical = $writer->upsertScale([
             'code' => 'CLINICAL_COMBO_68',
             'org_id' => 0,

@@ -10,9 +10,11 @@ use App\Services\Content\ClinicalComboPackLoader;
 use App\Services\Content\EnneagramPackLoader;
 use App\Services\Content\Eq60PackLoader;
 use App\Services\Content\QuestionsService;
+use App\Services\Content\RiasecPackLoader;
 use App\Services\Content\Sds20PackLoader;
 use App\Services\Enneagram\EnneagramFormCatalog;
 use App\Services\Mbti\MbtiFormCatalog;
+use App\Services\Riasec\RiasecFormCatalog;
 use App\Services\Scale\ScaleCodeInputGuard;
 use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Services\Scale\ScaleIdentityResolver;
@@ -37,6 +39,7 @@ class ScalesController extends Controller
         private MbtiFormCatalog $mbtiFormCatalog,
         private BigFiveFormCatalog $bigFiveFormCatalog,
         private EnneagramFormCatalog $enneagramFormCatalog,
+        private RiasecFormCatalog $riasecFormCatalog,
     ) {}
 
     /**
@@ -98,7 +101,8 @@ class ScalesController extends Controller
         ClinicalComboPackLoader $clinicalPackLoader,
         Sds20PackLoader $sds20PackLoader,
         Eq60PackLoader $eq60PackLoader,
-        EnneagramPackLoader $enneagramPackLoader
+        EnneagramPackLoader $enneagramPackLoader,
+        RiasecPackLoader $riasecPackLoader
     ): JsonResponse {
         try {
             $orgId = $this->orgContext->orgId();
@@ -152,6 +156,15 @@ class ScalesController extends Controller
                 $packId = (string) ($resolvedForm['pack_id'] ?? $packId);
                 $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
                 $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'enneagram_likert_105');
+                $resolvedQuestionCount = (int) ($resolvedForm['question_count'] ?? 0);
+            } elseif ($resolvedScaleCode === 'RIASEC') {
+                $resolvedForm = $this->riasecFormCatalog->resolve(
+                    $this->requestedFormCode($request),
+                    $packId
+                );
+                $packId = (string) ($resolvedForm['pack_id'] ?? $packId);
+                $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
+                $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'riasec_60');
                 $resolvedQuestionCount = (int) ($resolvedForm['question_count'] ?? 0);
             }
             if ($packId === '' || $dirVersion === '') {
@@ -284,6 +297,35 @@ class ScalesController extends Controller
                         'locale_requested' => (string) ($doc['locale_requested'] ?? $locale),
                         'locale_resolved' => $localeResolved,
                         'question_count' => $resolvedQuestionCount,
+                    ],
+                ] + $scaleCodeMeta);
+            }
+
+            if ($resolvedScaleCode === 'RIASEC') {
+                $version = $dirVersion !== '' ? $dirVersion : RiasecPackLoader::PACK_VERSION;
+                $doc = $riasecPackLoader->loadQuestionsDoc($locale, $version);
+                $localeResolved = (string) ($doc['locale_resolved'] ?? $riasecPackLoader->normalizeLocale($locale));
+
+                return response()->json([
+                    'ok' => true,
+                    'scale_code' => $scaleCodeMeta['scale_code'],
+                    'region' => $region,
+                    'locale' => $localeResolved,
+                    'pack_id' => $packId,
+                    'dir_version' => $dirVersion,
+                    'content_package_version' => $version,
+                    'form_code' => $resolvedFormCode,
+                    'questions' => [
+                        'schema' => 'fap.questions.v1',
+                        'items' => is_array($doc['items'] ?? null) ? $doc['items'] : [],
+                    ],
+                    'meta' => [
+                        'locale_requested' => (string) ($doc['locale_requested'] ?? $locale),
+                        'locale_resolved' => $localeResolved,
+                        'question_count' => $resolvedQuestionCount,
+                        'form_kind' => (string) ($doc['form_kind'] ?? ''),
+                        'option_anchors' => is_array($doc['option_anchors'] ?? null) ? $doc['option_anchors'] : [],
+                        'dimension_codes' => is_array($doc['dimension_codes'] ?? null) ? $doc['dimension_codes'] : ['R', 'I', 'A', 'S', 'E', 'C'],
                     ],
                 ] + $scaleCodeMeta);
             }

@@ -12,6 +12,7 @@ use App\Services\Content\ClinicalComboPackLoader;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\EnneagramPackLoader;
 use App\Services\Content\Eq60PackLoader;
+use App\Services\Content\RiasecPackLoader;
 use App\Services\Content\Sds20PackLoader;
 use App\Services\Enneagram\EnneagramFormCatalog;
 use App\Services\Mbti\MbtiFormCatalog;
@@ -24,6 +25,7 @@ use App\Services\Scale\ScaleIdentityRuntimePolicy;
 use App\Services\Scale\ScaleIdentityWriteProjector;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
+use App\Services\Riasec\RiasecFormCatalog;
 use App\Support\OrgContext;
 use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Support\Facades\Cache;
@@ -142,6 +144,16 @@ class AttemptStartService
             $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
             $contentPackageVersion = (string) ($resolvedForm['content_package_version'] ?? '');
             $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'enneagram_likert_105');
+            $resolvedNormVersion = trim((string) ($resolvedForm['norm_version'] ?? ''));
+            $resolvedScoringSpecVersion = trim((string) ($resolvedForm['scoring_spec_version'] ?? ''));
+            $resolvedQualityVersion = trim((string) ($resolvedForm['quality_version'] ?? ''));
+            $resolvedQuestionCount = (int) ($resolvedForm['question_count'] ?? 0);
+        } elseif (strtoupper($scaleCode) === 'RIASEC') {
+            $resolvedForm = $this->riasecFormCatalog()->resolve($dto->formCode, $packId);
+            $packId = (string) ($resolvedForm['pack_id'] ?? $packId);
+            $dirVersion = (string) ($resolvedForm['dir_version'] ?? $dirVersion);
+            $contentPackageVersion = (string) ($resolvedForm['content_package_version'] ?? '');
+            $resolvedFormCode = (string) ($resolvedForm['form_code'] ?? 'riasec_60');
             $resolvedNormVersion = trim((string) ($resolvedForm['norm_version'] ?? ''));
             $resolvedScoringSpecVersion = trim((string) ($resolvedForm['scoring_spec_version'] ?? ''));
             $resolvedQualityVersion = trim((string) ($resolvedForm['quality_version'] ?? ''));
@@ -702,6 +714,11 @@ class AttemptStartService
         return app(EnneagramFormCatalog::class);
     }
 
+    private function riasecFormCatalog(): RiasecFormCatalog
+    {
+        return app(RiasecFormCatalog::class);
+    }
+
     private function identityWriteProjector(): ScaleIdentityWriteProjector
     {
         return app(ScaleIdentityWriteProjector::class);
@@ -782,6 +799,18 @@ class AttemptStartService
             return $count;
         }
 
+        if (strtoupper($scaleCode) === 'RIASEC') {
+            $count = $this->riasecPackLoader()->getQuestionCount($dirVersion);
+            if ($count <= 0) {
+                $this->logAndThrowContentPackError('RIASEC_QUESTIONS_MISSING', $packId, $dirVersion, 'questions.compiled.json');
+            }
+            if (is_int($expectedCount) && $expectedCount > 0 && $count !== $expectedCount) {
+                $this->logAndThrowContentPackError('RIASEC_QUESTION_COUNT_MISMATCH', $packId, $dirVersion, 'questions.compiled.json');
+            }
+
+            return $count;
+        }
+
         $questionsPath = '';
 
         $found = $this->packsIndex->find($packId, $dirVersion);
@@ -848,6 +877,7 @@ class AttemptStartService
             'SDS_20' => $this->sds20PackLoader->resolveManifestHash($dirVersion),
             'EQ_60' => $this->eq60PackLoader->resolveManifestHash($dirVersion),
             'ENNEAGRAM' => $this->enneagramPackLoader()->resolveManifestHash($dirVersion),
+            'RIASEC' => $this->riasecPackLoader()->resolveManifestHash($dirVersion),
             default => '',
         };
     }
@@ -860,6 +890,7 @@ class AttemptStartService
             'SDS_20' => 'v2.0_Factor_Logic',
             'EQ_60' => 'v1.0_normed_validity',
             'ENNEAGRAM' => 'enneagram_v1.0.0',
+            'RIASEC' => 'riasec_v1.0.0',
             default => '',
         };
     }
@@ -867,6 +898,11 @@ class AttemptStartService
     private function enneagramPackLoader(): EnneagramPackLoader
     {
         return app(EnneagramPackLoader::class);
+    }
+
+    private function riasecPackLoader(): RiasecPackLoader
+    {
+        return app(RiasecPackLoader::class);
     }
 
     private function logAndThrowContentPackError(
