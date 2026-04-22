@@ -96,7 +96,7 @@ class OfferResolver
         }
         $offers = $this->filterOffersForScale($scaleCode, $offers);
 
-        if ($forceFreeOnly && in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM], true)) {
+        if ($forceFreeOnly && in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)) {
             $viewPolicy['upgrade_sku'] = null;
 
             return [

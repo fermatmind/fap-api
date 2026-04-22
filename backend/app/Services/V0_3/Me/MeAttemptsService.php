@@ -12,6 +12,7 @@ use App\Services\Mbti\MbtiPublicFormSummaryBuilder;
 use App\Services\Report\InviteUnlockSummaryBuilder;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\Resolvers\OfferResolver;
+use App\Services\Riasec\RiasecPublicFormSummaryBuilder;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
 use App\Support\ApiPagination;
@@ -66,6 +67,7 @@ class MeAttemptsService
         private readonly MbtiPublicFormSummaryBuilder $mbtiPublicFormSummaryBuilder,
         private readonly BigFivePublicFormSummaryBuilder $bigFivePublicFormSummaryBuilder,
         private readonly EnneagramPublicFormSummaryBuilder $enneagramPublicFormSummaryBuilder,
+        private readonly RiasecPublicFormSummaryBuilder $riasecPublicFormSummaryBuilder,
         private readonly InviteUnlockSummaryBuilder $inviteUnlockSummaryBuilder,
     ) {}
 
@@ -185,6 +187,8 @@ class MeAttemptsService
                 $presented['big5_form_v1'] = $this->bigFivePublicFormSummaryBuilder->summarizeForAttempt($attempt, $result, $locale);
             } elseif (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'ENNEAGRAM') {
                 $presented['enneagram_form_v1'] = $this->enneagramPublicFormSummaryBuilder->summarizeForAttempt($attempt, $result, $locale);
+            } elseif (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'RIASEC') {
+                $presented['riasec_form_v1'] = $this->riasecPublicFormSummaryBuilder->build($attempt, $result);
             }
             $items[] = $presented;
         }
