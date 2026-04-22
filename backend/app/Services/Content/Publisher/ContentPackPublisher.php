@@ -5,7 +5,6 @@ namespace App\Services\Content\Publisher;
 use App\Services\Storage\BlobCatalogService;
 use App\Services\Storage\ContentReleaseManifestCatalogService;
 use App\Support\CacheKeys;
-use App\Support\Http\ResilientClient;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
@@ -200,6 +199,9 @@ final class ContentPackPublisher
         $packVersion = '';
         $releaseManifestJson = '';
         $gitSha = $this->resolveGitSha();
+        $probeScaleCode = '';
+        $probeFormCode = '';
+        $probeSlug = '';
 
         try {
             $version = DB::table('content_pack_versions')->where('id', $versionId)->first();
@@ -230,6 +232,9 @@ final class ContentPackPublisher
             $toPackId = (string) ($sourceManifest['pack_id'] ?? '');
             $expectedPackId = $toPackId;
             $packVersion = trim((string) ($sourceManifest['content_package_version'] ?? ''));
+            $probeScaleCode = trim((string) ($sourceManifest['scale_code'] ?? ''));
+            $probeFormCode = trim((string) ($sourceManifest['form_code'] ?? ''));
+            $probeSlug = trim((string) ($sourceManifest['primary_slug'] ?? ''));
             if ($toPackId === '') {
                 $toPackId = (string) ($version->pack_id ?? '');
                 $expectedPackId = $toPackId;
@@ -291,7 +296,7 @@ final class ContentPackPublisher
         if ($status === 'success') {
             $this->clearCaches();
             if ($probe) {
-                $probeResult = $this->probe($baseUrl, $region, $locale, $expectedPackId);
+                $probeResult = $this->probe($baseUrl, $region, $locale, $expectedPackId, $probeScaleCode, $probeFormCode, $probeSlug);
                 $probes = $probeResult['probes'];
                 if (! ($probeResult['ok'] ?? false)) {
                     $status = 'failed';
@@ -412,6 +417,9 @@ final class ContentPackPublisher
         $gitSha = $this->resolveGitSha();
         $manifestVersion = '';
         $rollbackSourcePath = '';
+        $probeScaleCode = '';
+        $probeFormCode = '';
+        $probeSlug = '';
 
         $tmpDir = '';
 
@@ -456,6 +464,9 @@ final class ContentPackPublisher
             $restored = $this->manifestFieldsFromDir($targetDir);
             $rolledBack['pack_id'] = (string) ($restored['pack_id'] ?? '');
             $rolledBack['content_package_version'] = (string) ($restored['content_package_version'] ?? '');
+            $probeScaleCode = trim((string) ($restored['scale_code'] ?? ''));
+            $probeFormCode = trim((string) ($restored['form_code'] ?? ''));
+            $probeSlug = trim((string) ($restored['primary_slug'] ?? ''));
             $rolledBack['version_id'] = $this->findVersionId(
                 $rolledBack['pack_id'],
                 $rolledBack['content_package_version'],
@@ -511,7 +522,7 @@ final class ContentPackPublisher
         if ($status === 'success') {
             $this->clearCaches();
             if ($probe) {
-                $probeResult = $this->probe($baseUrl, $region, $locale, $toPackId);
+                $probeResult = $this->probe($baseUrl, $region, $locale, $toPackId, $probeScaleCode, $probeFormCode, $probeSlug);
                 $probes = $probeResult['probes'];
                 if (! ($probeResult['ok'] ?? false)) {
                     $status = 'failed';
@@ -1212,6 +1223,9 @@ final class ContentPackPublisher
         return [
             'pack_id' => (string) ($manifest['pack_id'] ?? ''),
             'content_package_version' => (string) ($manifest['content_package_version'] ?? ''),
+            'scale_code' => (string) ($manifest['scale_code'] ?? ''),
+            'form_code' => (string) ($manifest['form_code'] ?? ''),
+            'primary_slug' => (string) ($manifest['primary_slug'] ?? ''),
         ];
     }
 
@@ -1276,143 +1290,24 @@ final class ContentPackPublisher
         }
     }
 
-    private function probe(?string $baseUrl, string $region, string $locale, string $expectedPackId = ''): array
-    {
-        $probes = [
-            'health' => false,
-            'questions' => false,
-            'content_packs' => false,
-        ];
-
-        $baseUrl = $this->normalizeBaseUrl($baseUrl);
-        if ($baseUrl === '') {
-            return [
-                'ok' => false,
-                'probes' => $probes,
-                'message' => 'missing_base_url',
-            ];
-        }
-
-        $errors = [];
-
-        $health = $this->fetchJson($baseUrl.'/api/healthz', $baseUrl);
-        if ($health['ok'] ?? false) {
-            $probes['health'] = (bool) (($health['json']['ok'] ?? false) === true);
-        }
-        if (! $probes['health']) {
-            $errors[] = 'health_failed';
-        }
-
-        $questionsUrl = $baseUrl.'/api/v0.3/scales/MBTI/questions?region='.urlencode($region).'&locale='.urlencode($locale);
-        $questions = $this->fetchJson($questionsUrl, $baseUrl);
-        if ($questions['ok'] ?? false) {
-            $probes['questions'] = (bool) (($questions['json']['ok'] ?? false) === true);
-        }
-        if (! $probes['questions']) {
-            $errors[] = 'questions_failed';
-        }
-
-        $packs = $this->fetchJson(
-            $baseUrl.'/api/v0.3/scales/lookup?slug=mbti-personality-test-16-personality-types',
-            $baseUrl
+    private function probe(
+        ?string $baseUrl,
+        string $region,
+        string $locale,
+        string $expectedPackId = '',
+        ?string $scaleCode = null,
+        ?string $formCode = null,
+        ?string $slug = null,
+    ): array {
+        return (new ContentProbeService)->probe(
+            $this->normalizeBaseUrl($baseUrl),
+            $region,
+            $locale,
+            $expectedPackId,
+            $scaleCode,
+            $formCode,
+            $slug
         );
-        if ($packs['ok'] ?? false) {
-            $ok = (bool) (($packs['json']['ok'] ?? false) === true);
-            $defaultPackId = (string) (($packs['json']['pack_id'] ?? ''));
-            $hasPackId = $defaultPackId !== '';
-            if ($expectedPackId !== '') {
-                $hasPackId = $hasPackId && $defaultPackId === $expectedPackId;
-            }
-            $probes['content_packs'] = $ok && $hasPackId;
-        }
-        if (! $probes['content_packs']) {
-            $errors[] = 'content_packs_failed';
-        }
-
-        return [
-            'ok' => empty($errors),
-            'probes' => $probes,
-            'message' => empty($errors) ? '' : implode(';', $errors),
-        ];
-    }
-
-    private function fetchJson(string $url, string $baseUrl): array
-    {
-        $local = $this->tryLocalRequest($url, $baseUrl);
-        if ($local !== null) {
-            return $local;
-        }
-
-        try {
-            $resp = ResilientClient::get($url);
-        } catch (\Throwable $e) {
-            return [
-                'ok' => false,
-                'error' => 'HTTP_REQUEST_FAILED',
-                'message' => $e->getMessage(),
-            ];
-        }
-
-        if (! $resp->ok()) {
-            return [
-                'ok' => false,
-                'error' => 'HTTP_'.$resp->status(),
-                'message' => 'http_status_'.$resp->status(),
-            ];
-        }
-
-        $json = $resp->json();
-        if (! is_array($json)) {
-            return [
-                'ok' => false,
-                'error' => 'INVALID_JSON',
-                'message' => 'invalid_json',
-            ];
-        }
-
-        return [
-            'ok' => true,
-            'json' => $json,
-        ];
-    }
-
-    private function tryLocalRequest(string $url, string $baseUrl): ?array
-    {
-        if (PHP_SAPI !== 'cli-server') {
-            return null;
-        }
-
-        $normalizedBaseUrl = rtrim(trim($baseUrl), '/');
-        if ($normalizedBaseUrl === '') {
-            return null;
-        }
-
-        if (! str_starts_with($url, $normalizedBaseUrl)) {
-            return null;
-        }
-
-        $path = substr($url, strlen($normalizedBaseUrl));
-        if ($path === '') {
-            $path = '/';
-        }
-
-        $request = \Illuminate\Http\Request::create($path, 'GET');
-        $response = app()->handle($request);
-        $content = $response->getContent();
-
-        $decoded = json_decode((string) $content, true);
-        if (! is_array($decoded)) {
-            return [
-                'ok' => false,
-                'error' => 'INVALID_JSON',
-                'message' => 'invalid_json',
-            ];
-        }
-
-        return [
-            'ok' => true,
-            'json' => $decoded,
-        ];
     }
 
     private function normalizeBaseUrl(?string $baseUrl): string
