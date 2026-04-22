@@ -9,9 +9,9 @@
     "PR-BIG5-REPORT-ENGINE-N-SLICE": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "github_checks_failed",
       "branch": "codex/big5-report-engine-n-slice",
-      "commit_sha": "acb31c79a9db0b05d94b859c647a5a0760150ed1",
+      "commit_sha": "0e0d094925ca81695a2ff80942cb81c021c1b2aa",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/975",
       "checks": {
         "local": [
@@ -52,9 +52,30 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24791641998/job/72550392748"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24791640146/job/72550387065"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24791641998/job/72550408179"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24791640146/job/72550399169"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub Actions hygiene failed immediately on PR #975 after the 2026-04-23 review hardening push, and verify-mbti matrix jobs were skipped. Local scoped checks and APP_URL-pinned ci_verify_mbti.sh passed; the failure matches the repository's current workflow-start issue rather than a locally reproducible Big Five Report Engine regression.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
