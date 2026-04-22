@@ -41,6 +41,10 @@ class ScalesLookupTest extends TestCase
         $response->assertJsonPath('landing_surface_v1.landing_contract_version', 'landing.surface.v1');
         $response->assertJsonPath('landing_surface_v1.entry_surface', 'test_detail');
         $response->assertJsonPath('landing_surface_v1.entry_type', 'test_landing');
+        $response->assertJsonPath('forms.0.form_code', 'mbti_144');
+        $response->assertJsonPath('forms.0.is_default', true);
+        $response->assertJsonPath('forms.0.question_count', 144);
+        $response->assertJsonPath('forms.1.form_code', 'mbti_93');
     }
 
     public function test_lookup_aliases_resolve_to_canonical_for_all_public_models(): void
@@ -64,6 +68,8 @@ class ScalesLookupTest extends TestCase
             ['slug' => 'eq-test', 'scale_code' => 'EQ_60', 'scale_code_v2' => 'EQ_EMOTIONAL_INTELLIGENCE', 'primary_slug' => 'eq-test-emotional-intelligence-assessment', 'resolved_from_alias' => true],
             ['slug' => 'enneagram-personality-test-nine-types', 'scale_code' => 'ENNEAGRAM', 'scale_code_v2' => 'ENNEAGRAM_PERSONALITY_TEST', 'primary_slug' => 'enneagram-personality-test-nine-types', 'resolved_from_alias' => false],
             ['slug' => 'enneagram-test', 'scale_code' => 'ENNEAGRAM', 'scale_code_v2' => 'ENNEAGRAM_PERSONALITY_TEST', 'primary_slug' => 'enneagram-personality-test-nine-types', 'resolved_from_alias' => true],
+            ['slug' => 'holland-career-interest-test-riasec', 'scale_code' => 'RIASEC', 'scale_code_v2' => 'HOLLAND_RIASEC_CAREER_INTEREST', 'primary_slug' => 'holland-career-interest-test-riasec', 'resolved_from_alias' => false],
+            ['slug' => 'riasec-test', 'scale_code' => 'RIASEC', 'scale_code_v2' => 'HOLLAND_RIASEC_CAREER_INTEREST', 'primary_slug' => 'holland-career-interest-test-riasec', 'resolved_from_alias' => true],
         ];
 
         foreach ($cases as $case) {
@@ -108,6 +114,7 @@ class ScalesLookupTest extends TestCase
                     'cover_image',
                     'questions_count',
                     'time_minutes',
+                    'forms',
                     'card_visual',
                     'card_tone',
                     'card_seed',
@@ -125,7 +132,7 @@ class ScalesLookupTest extends TestCase
         ]);
 
         $items = collect($response->json('items'));
-        $this->assertCount(7, $items);
+        $this->assertCount(8, $items);
         $mbti = $items->firstWhere('slug', 'mbti-personality-test-16-personality-types');
         $this->assertIsArray($mbti);
         $this->assertSame('MBTI', $mbti['scale_code']);
@@ -135,6 +142,29 @@ class ScalesLookupTest extends TestCase
         $this->assertSame('spark_minimal', $mbti['card_visual']);
         $this->assertSame('类型轴线综合', $mbti['card_tagline_i18n']['zh']);
         $this->assertSame(100, $mbti['highlight_priority']);
+        $this->assertSame('mbti_144', data_get($mbti, 'forms.0.form_code'));
+        $this->assertTrue((bool) data_get($mbti, 'forms.0.is_default'));
+        $this->assertSame(144, data_get($mbti, 'forms.0.question_count'));
+
+        $bigFive = $items->firstWhere('slug', 'big-five-personality-test-ocean-model');
+        $this->assertIsArray($bigFive);
+        $this->assertSame('big5_120', data_get($bigFive, 'forms.0.form_code'));
+        $this->assertSame('big5_90', data_get($bigFive, 'forms.1.form_code'));
+
+        $enneagram = $items->firstWhere('slug', 'enneagram-personality-test-nine-types');
+        $this->assertIsArray($enneagram);
+        $this->assertSame('enneagram_likert_105', data_get($enneagram, 'forms.0.form_code'));
+        $this->assertSame('enneagram_forced_choice_144', data_get($enneagram, 'forms.1.form_code'));
+
+        $riasec = $items->firstWhere('slug', 'holland-career-interest-test-riasec');
+        $this->assertIsArray($riasec);
+        $this->assertSame('RIASEC', $riasec['scale_code']);
+        $this->assertSame(60, $riasec['questions_count']);
+        $this->assertSame('riasec_60', data_get($riasec, 'forms.0.form_code'));
+        $this->assertTrue((bool) data_get($riasec, 'forms.0.is_default'));
+        $this->assertSame(60, data_get($riasec, 'forms.0.question_count'));
+        $this->assertSame('riasec_140', data_get($riasec, 'forms.1.form_code'));
+        $this->assertSame(140, data_get($riasec, 'forms.1.question_count'));
     }
 
     public function test_lookup_alias_mode_canonical_only_rejects_alias_but_allows_canonical(): void

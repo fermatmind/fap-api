@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
 use App\Services\PublicSurface\LandingSurfaceContractService;
+use App\Services\Scale\PublicScaleFormsProjector;
 use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Services\Scale\ScaleIdentityResolver;
 use App\Services\Scale\ScaleRegistry;
@@ -24,6 +25,7 @@ class ScalesLookupController extends Controller
         private ScaleRegistry $registry,
         private ScaleIdentityResolver $identityResolver,
         private ScaleCodeResponseProjector $responseProjector,
+        private PublicScaleFormsProjector $publicScaleFormsProjector,
         private OrgContext $orgContext,
         private LandingSurfaceContractService $landingSurfaceContractService,
     ) {}
@@ -116,6 +118,7 @@ class ScalesLookupController extends Controller
             'view_policy' => $row['view_policy_json'] ?? null,
             'capabilities' => $row['capabilities_json'] ?? null,
             'commercial' => $row['commercial_json'] ?? null,
+            'forms' => $this->publicScaleFormsProjector->projectForRegistryRow($row, $locale),
             'seo_title' => $seo['title'],
             'seo_description' => $seo['description'],
             'og_image_url' => $seo['og_image_url'],
@@ -278,6 +281,8 @@ class ScalesLookupController extends Controller
         $fallbackCard = $this->toArray($englishContent['card'] ?? null);
         $highlight = $this->toArray($localizedContent['highlight'] ?? null);
         $fallbackHighlight = $this->toArray($englishContent['highlight'] ?? null);
+        $forms = $this->publicScaleFormsProjector->projectForRegistryRow($row, $locale);
+        $defaultFormQuestionCount = $this->publicScaleFormsProjector->defaultQuestionCount($row, $locale);
 
         $title = $this->trimOrNull($localizedContent['title'] ?? null)
             ?? $seo['title']
@@ -307,8 +312,10 @@ class ScalesLookupController extends Controller
                 ?? $this->trimOrNull($fallbackCatalog['cover_image'] ?? null)
                 ?? $seo['og_image_url']
                 ?? self::CATALOG_FALLBACK_IMAGE,
-            'questions_count' => $this->positiveInt($catalog['questions_count'] ?? $fallbackCatalog['questions_count'] ?? null),
+            'questions_count' => $this->positiveInt($catalog['questions_count'] ?? $fallbackCatalog['questions_count'] ?? null)
+                ?: $defaultFormQuestionCount,
             'time_minutes' => $this->positiveInt($catalog['time_minutes'] ?? $fallbackCatalog['time_minutes'] ?? null),
+            'forms' => $forms,
             'card_visual' => $this->trimOrNull($card['visual'] ?? null) ?? $this->trimOrNull($fallbackCard['visual'] ?? null),
             'card_tone' => $this->trimOrNull($card['tone'] ?? null) ?? $this->trimOrNull($fallbackCard['tone'] ?? null),
             'card_seed' => $this->trimOrNull($card['seed'] ?? null) ?? $this->trimOrNull($fallbackCard['seed'] ?? null),

@@ -299,6 +299,7 @@ class AttemptReadController extends Controller
             ...$this->mbtiFormEventMeta($mbtiFormSummary),
             ...$this->big5FormEventMeta($big5FormSummary),
             ...$this->enneagramFormEventMeta($enneagramFormSummary),
+            ...$this->riasecFormEventMeta($riasecFormSummary),
             ...$big5EventMeta,
         ]);
 
@@ -607,6 +608,7 @@ class AttemptReadController extends Controller
             ...$this->mbtiFormEventMeta($mbtiFormSummary),
             ...$this->big5FormEventMeta($big5FormSummary),
             ...$this->enneagramFormEventMeta($enneagramFormSummary),
+            ...$this->riasecFormEventMeta($riasecFormSummary),
             ...$big5EventMeta,
         ]);
 
@@ -675,7 +677,8 @@ class AttemptReadController extends Controller
 
         $isBigFive = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_BIG5_OCEAN;
         $isEnneagram = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_ENNEAGRAM;
-        if (($isBigFive || $isEnneagram) && $resultExists) {
+        $isRiasec = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_RIASEC;
+        if (($isBigFive || $isEnneagram || $isRiasec) && $resultExists) {
             $accessState = 'ready';
             $reportState = 'ready';
             $pdfState = 'ready';
@@ -730,6 +733,9 @@ class AttemptReadController extends Controller
         $enneagramFormSummary = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'ENNEAGRAM'
             ? $this->resolveEnneagramFormSummary($request, $attempt)
             : null;
+        $riasecFormSummary = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'RIASEC'
+            ? $this->riasecPublicFormSummaryBuilder->build($attempt)
+            : null;
         $responsePayload = [
             'ok' => true,
             'attempt_id' => (string) $attempt->id,
@@ -753,6 +759,9 @@ class AttemptReadController extends Controller
         }
         if (is_array($enneagramFormSummary)) {
             $responsePayload['enneagram_form_v1'] = $enneagramFormSummary;
+        }
+        if (is_array($riasecFormSummary)) {
+            $responsePayload['riasec_form_v1'] = $riasecFormSummary;
         }
 
         $unlockStage = ReportAccess::normalizeUnlockStage((string) data_get(
@@ -2315,6 +2324,17 @@ class AttemptReadController extends Controller
      * @return array<string,string>
      */
     private function enneagramFormEventMeta(?array $summary): array
+    {
+        $formCode = trim((string) ($summary['form_code'] ?? ''));
+
+        return $formCode !== '' ? ['form_code' => $formCode] : [];
+    }
+
+    /**
+     * @param  array<string,mixed>|null  $summary
+     * @return array<string,string>
+     */
+    private function riasecFormEventMeta(?array $summary): array
     {
         $formCode = trim((string) ($summary['form_code'] ?? ''));
 

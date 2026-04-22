@@ -102,8 +102,51 @@ final class RiasecAssessmentFlowTest extends TestCase
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
         $report->assertStatus(200);
         $report->assertJsonPath('ok', true);
+        $report->assertJsonPath('locked', false);
+        $report->assertJsonPath('report.schema_version', 'riasec.report.v1');
+        $report->assertJsonPath('report.top_code', 'RIA');
         $report->assertJsonPath('riasec_public_projection_v1.top_code', 'RIA');
         $report->assertJsonPath('riasec_form_v1.form_code', 'riasec_60');
+
+        $reportAccess = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+        $reportAccess->assertStatus(200);
+        $reportAccess->assertJsonPath('ok', true);
+        $reportAccess->assertJsonPath('access_state', 'ready');
+        $reportAccess->assertJsonPath('report_state', 'ready');
+        $reportAccess->assertJsonPath('payload.access_level', 'full');
+        $reportAccess->assertJsonPath('payload.variant', 'full');
+        $reportAccess->assertJsonPath('riasec_form_v1.form_code', 'riasec_60');
+
+        $share = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/share");
+        $share->assertStatus(200);
+        $share->assertJsonPath('scale_code', 'RIASEC');
+        $share->assertJsonPath('type_code', 'RIA');
+        $share->assertJsonPath('riasec_public_projection_v1.top_code', 'RIA');
+        $share->assertJsonPath('landing_surface_v1.entry_surface', 'riasec_share_entry');
+        $share->assertJsonPath('seo_surface_v1.surface_type', 'riasec_share_public_safe');
+        $share->assertJsonPath('answer_surface_v1.surface_type', 'riasec_share_public_safe');
+        $share->assertJsonPath('public_surface_v1.entry_surface', 'riasec_share_landing');
+        $this->assertStringContainsString('/zh/tests/holland-career-interest-test-riasec', (string) $share->json('primary_cta_path'));
+        $this->assertIsArray($share->json('dimensions'));
+        $this->assertNotEmpty($share->json('dimensions'));
+        $this->assertNull($share->json('mbti_public_projection_v1'));
+
+        $history = $this->withHeaders([
+            'X-Anon-Id' => $anonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/me/attempts?scale=RIASEC');
+        $history->assertStatus(200);
+        $history->assertJsonPath('ok', true);
+        $history->assertJsonPath('scale_code', 'RIASEC');
+        $history->assertJsonPath('items.0.attempt_id', $attemptId);
+        $history->assertJsonPath('items.0.riasec_form_v1.form_code', 'riasec_60');
+        $history->assertJsonPath('items.0.riasec_form_v1.question_count', 60);
     }
 
     public function test_riasec_enhanced_140_persists_quality_and_layer_scores(): void

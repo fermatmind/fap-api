@@ -20,6 +20,7 @@ use App\Services\PublicSurface\PublicSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportComposer;
+use App\Services\Riasec\RiasecPublicProjectionService;
 use App\Services\Scale\ScaleIdentityWriteProjector;
 use App\Services\Scale\ScaleRegistry;
 use App\Support\OrgContext;
@@ -38,6 +39,7 @@ class ShareService
         private readonly MbtiPublicProjectionService $mbtiPublicProjectionService,
         private readonly MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
         private readonly BigFivePublicProjectionService $bigFivePublicProjectionService,
+        private readonly RiasecPublicProjectionService $riasecPublicProjectionService,
         private readonly AnswerSurfaceContractService $answerSurfaceContractService,
         private readonly LandingSurfaceContractService $landingSurfaceContractService,
         private readonly PublicSurfaceContractService $publicSurfaceContractService,
@@ -245,7 +247,8 @@ class ShareService
         Attempt $attempt,
         Result $result,
         ?array $report = null,
-        ?array $big5Projection = null
+        ?array $big5Projection = null,
+        ?array $riasecProjection = null
     ): array {
         $resultJson = $this->normalizeArray($result->result_json ?? null);
         $report = is_array($report) ? $report : $this->buildPublicSafeReportSnapshot($attempt, $result);
@@ -261,6 +264,9 @@ class ShareService
         $locale = $this->normalizeLocale((string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')));
         if ($scaleCode === 'BIG5_OCEAN') {
             return $this->buildBigFiveShareSummary($attempt, $locale, $big5Projection ?? []);
+        }
+        if ($scaleCode === 'RIASEC') {
+            return $this->buildRiasecShareSummary($attempt, $locale, $riasecProjection ?? []);
         }
 
         $typeCode = trim((string) ($result->type_code ?? $resultJson['type_code'] ?? ''));
@@ -384,6 +390,69 @@ class ShareService
             'primary_cta_label' => $this->resolvePrimaryCtaLabel($locale),
             'primary_cta_path' => $this->resolvePrimaryCtaPath('BIG5_OCEAN', $locale, (int) ($attempt->org_id ?? 0)),
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $projection
+     * @return array<string,mixed>
+     */
+    private function buildRiasecShareSummary(Attempt $attempt, string $locale, array $projection): array
+    {
+        $isZh = $locale === 'zh-CN';
+        $topCode = trim((string) ($projection['top_code'] ?? ''));
+        $scores = is_array($projection['scores_0_100'] ?? null) ? $projection['scores_0_100'] : [];
+        $labels = is_array($projection['dimension_labels'] ?? null) ? $projection['dimension_labels'] : [];
+
+        $ranked = [];
+        foreach ($scores as $code => $score) {
+            $ranked[] = [
+                'code' => trim((string) $code),
+                'label' => trim((string) ($labels[$code] ?? $code)),
+                'pct' => (int) round((float) $score),
+                'state' => $this->scoreBand((float) $score, $locale),
+            ];
+        }
+        usort($ranked, static fn (array $a, array $b): int => ((int) ($b['pct'] ?? 0)) <=> ((int) ($a['pct'] ?? 0)));
+
+        $topLabels = array_values(array_filter(array_map(
+            static fn (array $item): string => trim((string) ($item['label'] ?? '')),
+            array_slice($ranked, 0, 3)
+        )));
+
+        return [
+            'scale_code' => 'RIASEC',
+            'locale' => $locale,
+            'title' => $topCode !== ''
+                ? ($isZh ? '霍兰德代码 '.$topCode : 'Holland Code '.$topCode)
+                : ($isZh ? '霍兰德职业兴趣公开摘要' : 'Holland career interest public summary'),
+            'subtitle' => $isZh ? 'RIASEC 职业兴趣画像' : 'RIASEC career interest profile',
+            'summary' => $isZh
+                ? '这是一份公开安全的霍兰德职业兴趣摘要，只展示核心兴趣代码和六维分数。'
+                : 'This is a public-safe Holland interest summary with the core code and six dimension scores.',
+            'type_code' => $topCode !== '' ? $topCode : 'RIASEC',
+            'type_name' => $topCode !== ''
+                ? ($isZh ? '霍兰德代码 '.$topCode : 'Holland Code '.$topCode)
+                : ($isZh ? '霍兰德职业兴趣' : 'Holland career interests'),
+            'tagline' => implode(' · ', $topLabels),
+            'rarity' => null,
+            'tags' => array_slice($topLabels, 0, 5),
+            'dimensions' => $ranked,
+            'primary_cta_label' => $this->resolvePrimaryCtaLabel($locale),
+            'primary_cta_path' => $this->resolvePrimaryCtaPath('RIASEC', $locale, (int) ($attempt->org_id ?? 0)),
+        ];
+    }
+
+    private function scoreBand(float $score, string $locale): string
+    {
+        $isZh = $locale === 'zh-CN';
+        if ($score >= 67) {
+            return $isZh ? '高' : 'high';
+        }
+        if ($score >= 34) {
+            return $isZh ? '中' : 'medium';
+        }
+
+        return $isZh ? '低' : 'low';
     }
 
     /**
@@ -723,7 +792,10 @@ class ShareService
         $big5Projection = $normalizedScaleCode === 'BIG5_OCEAN'
             ? $this->bigFivePublicProjectionService->buildFromResult($result, $normalizedLocale)
             : [];
-        $summary = $this->buildShareSummary($share, $attempt, $result, $publicSafeReport, $big5Projection);
+        $riasecProjection = $normalizedScaleCode === 'RIASEC'
+            ? $this->riasecPublicProjectionService->buildFromResult($result, $normalizedLocale)
+            : [];
+        $summary = $this->buildShareSummary($share, $attempt, $result, $publicSafeReport, $big5Projection, $riasecProjection);
         $resolvedShareId = trim((string) $shareId);
         $locale = (string) ($summary['locale'] ?? 'zh-CN');
         $scaleCode = strtoupper((string) ($summary['scale_code'] ?? 'MBTI'));
@@ -806,6 +878,8 @@ class ShareService
                     $payload[$contractKey] = $big5Projection[$contractKey];
                 }
             }
+        } elseif ($scaleCode === 'RIASEC' && $riasecProjection !== []) {
+            $payload['riasec_public_projection_v1'] = $riasecProjection;
         }
 
         $payload['public_surface_v1'] = $this->buildPublicSurfaceContract(
@@ -898,10 +972,17 @@ class ShareService
             if (is_array($payload['controlled_narrative_v1'] ?? null)) {
                 $discoverabilityKeys[] = 'controlled_narrative';
             }
+        } elseif ($scaleCode === 'RIASEC') {
+            $continueReadingKeys = ['riasec.summary', 'riasec.scores'];
+            $discoverabilityKeys[] = 'riasec_interest_summary';
         }
 
         return $this->publicSurfaceContractService->build([
-            'entry_surface' => $scaleCode === 'BIG5_OCEAN' ? 'big5_share_landing' : 'mbti_share_landing',
+            'entry_surface' => match ($scaleCode) {
+                'BIG5_OCEAN' => 'big5_share_landing',
+                'RIASEC' => 'riasec_share_landing',
+                default => 'mbti_share_landing',
+            },
             'discoverability_keys' => $discoverabilityKeys,
             'continue_reading_keys' => $continueReadingKeys,
             'canonical_url' => $shareId !== '' ? $this->buildLocalizedShareUrl($shareId, $locale) : null,
@@ -945,8 +1026,16 @@ class ShareService
 
         return $this->landingSurfaceContractService->build([
             'landing_scope' => 'public_share_safe',
-            'entry_surface' => $scaleCode === 'BIG5_OCEAN' ? 'big5_share_entry' : 'mbti_share_entry',
-            'entry_type' => $scaleCode === 'BIG5_OCEAN' ? 'big5_share_summary' : 'mbti_share_summary',
+            'entry_surface' => match ($scaleCode) {
+                'BIG5_OCEAN' => 'big5_share_entry',
+                'RIASEC' => 'riasec_share_entry',
+                default => 'mbti_share_entry',
+            },
+            'entry_type' => match ($scaleCode) {
+                'BIG5_OCEAN' => 'big5_share_summary',
+                'RIASEC' => 'riasec_share_summary',
+                default => 'mbti_share_summary',
+            },
             'summary_blocks' => [
                 [
                     'key' => 'share_summary',
@@ -1054,7 +1143,11 @@ class ShareService
 
         return $this->answerSurfaceContractService->build([
             'answer_scope' => 'public_share_safe',
-            'surface_type' => $scaleCode === 'BIG5_OCEAN' ? 'big5_share_public_safe' : 'mbti_share_public_safe',
+            'surface_type' => match ($scaleCode) {
+                'BIG5_OCEAN' => 'big5_share_public_safe',
+                'RIASEC' => 'riasec_share_public_safe',
+                default => 'mbti_share_public_safe',
+            },
             'summary_blocks' => [
                 [
                     'key' => 'share_summary',
@@ -1095,7 +1188,11 @@ class ShareService
         $title = trim((string) ($payload['title'] ?? ''));
         $summary = trim((string) ($payload['summary'] ?? ''));
         $typeCode = trim((string) ($payload['type_code'] ?? ''));
-        $surfaceType = $scaleCode === 'BIG5_OCEAN' ? 'big5_share_public_safe' : 'mbti_share_public_safe';
+        $surfaceType = match ($scaleCode) {
+            'BIG5_OCEAN' => 'big5_share_public_safe',
+            'RIASEC' => 'riasec_share_public_safe',
+            default => 'mbti_share_public_safe',
+        };
 
         return $this->seoSurfaceContractService->build([
             'metadata_scope' => 'public_share_safe',

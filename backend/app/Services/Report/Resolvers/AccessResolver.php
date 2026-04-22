@@ -27,10 +27,10 @@ class AccessResolver
             ? $this->entitlements->hasFullAccess($orgId, $userId, $anonId, $attemptId, $benefitCode)
             : false;
 
-        if ($forceFreeOnly && ! in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM], true)) {
+        if ($forceFreeOnly && ! in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)) {
             $hasFullAccess = false;
         }
-        if ($forceFreeOnly && in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM], true)) {
+        if ($forceFreeOnly && in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)) {
             $hasFullAccess = true;
         }
 
@@ -53,7 +53,7 @@ class AccessResolver
         array $modulesOffered
     ): array {
         $scaleCode = strtoupper(trim($scaleCode));
-        if ($forceFreeOnly && in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM], true)) {
+        if ($forceFreeOnly && in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)) {
             $modulesAllowed = ReportAccess::normalizeModules(array_merge(
                 ReportAccess::defaultModulesAllowedForLocked($scaleCode),
                 ReportAccess::allDefaultModulesOffered($scaleCode)
@@ -140,6 +140,10 @@ class AccessResolver
             ReportAccess::SCALE_ENNEAGRAM => array_values(array_filter(
                 $modules,
                 static fn (string $module): bool => str_starts_with(strtolower($module), 'enneagram_')
+            )),
+            ReportAccess::SCALE_RIASEC => array_values(array_filter(
+                $modules,
+                static fn (string $module): bool => str_starts_with(strtolower($module), 'riasec_')
             )),
             default => $modules,
         };

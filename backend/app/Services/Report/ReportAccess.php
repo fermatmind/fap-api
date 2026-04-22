@@ -38,6 +38,8 @@ final class ReportAccess
 
     public const SCALE_ENNEAGRAM = 'ENNEAGRAM';
 
+    public const SCALE_RIASEC = 'RIASEC';
+
     public const VARIANT_FREE = 'free';
 
     public const VARIANT_PARTIAL = 'partial';
@@ -114,6 +116,10 @@ final class ReportAccess
 
     public const MODULE_ENNEAGRAM_FULL = 'enneagram_full';
 
+    public const MODULE_RIASEC_CORE = 'riasec_core';
+
+    public const MODULE_RIASEC_FULL = 'riasec_full';
+
     /**
      * Growth/traits/stress_recovery are part of core_full by default.
      */
@@ -145,6 +151,9 @@ final class ReportAccess
         }
         if ($scaleCode === self::SCALE_ENNEAGRAM) {
             return [self::MODULE_ENNEAGRAM_CORE];
+        }
+        if ($scaleCode === self::SCALE_RIASEC) {
+            return [self::MODULE_RIASEC_CORE];
         }
 
         return [self::MODULE_CORE_FREE];
@@ -206,6 +215,11 @@ final class ReportAccess
                 self::MODULE_ENNEAGRAM_FULL,
             ];
         }
+        if ($scaleCode === self::SCALE_RIASEC) {
+            return [
+                self::MODULE_RIASEC_FULL,
+            ];
+        }
 
         return [
             self::MODULE_CORE_FULL,
@@ -224,6 +238,7 @@ final class ReportAccess
             self::SCALE_SDS_20 => self::MODULE_SDS_CORE,
             self::SCALE_EQ_60 => self::MODULE_EQ_CORE,
             self::SCALE_ENNEAGRAM => self::MODULE_ENNEAGRAM_CORE,
+            self::SCALE_RIASEC => self::MODULE_RIASEC_CORE,
             default => self::MODULE_CORE_FREE,
         };
     }
@@ -238,6 +253,7 @@ final class ReportAccess
             self::SCALE_SDS_20 => self::MODULE_SDS_FULL,
             self::SCALE_EQ_60 => self::MODULE_EQ_FULL,
             self::SCALE_ENNEAGRAM => self::MODULE_ENNEAGRAM_FULL,
+            self::SCALE_RIASEC => self::MODULE_RIASEC_FULL,
             default => self::MODULE_CORE_FULL,
         };
     }

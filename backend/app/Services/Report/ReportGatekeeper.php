@@ -24,7 +24,7 @@ class ReportGatekeeper
 {
     use ReportGatekeeperTeaserTrait;
 
-    private const PUBLIC_REPORT_READ_SCALES = ['MBTI', 'BIG5_OCEAN', 'IQ_RAVEN', 'EQ_60', 'ENNEAGRAM'];
+    private const PUBLIC_REPORT_READ_SCALES = ['MBTI', 'BIG5_OCEAN', 'IQ_RAVEN', 'EQ_60', 'ENNEAGRAM', 'RIASEC'];
 
     private const SNAPSHOT_RETRY_AFTER_SECONDS = 3;
 
@@ -74,7 +74,7 @@ class ReportGatekeeper
 
         $commercial = $this->offerResolver->normalizeCommercial($registry['commercial_json'] ?? null);
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
-        $forceFreeOnly = in_array(strtoupper($scaleCode), [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM], true)
+        $forceFreeOnly = in_array(strtoupper($scaleCode), [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)
             || in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
         $accessState = $this->accessResolver->resolveAccess(
             $scaleCode,
@@ -134,7 +134,7 @@ class ReportGatekeeper
         $commercial = $this->offerResolver->normalizeCommercial($registry['commercial_json'] ?? null);
         $commercialSpec = $isMbtiContract ? $this->loadCommercialSpecForAttempt($attempt, $result) : [];
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
-        $forceFreeOnly = in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM], true)
+        $forceFreeOnly = in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)
             || in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
         $paywall = $this->offerResolver->buildPaywall(
             $viewPolicy,
@@ -211,10 +211,10 @@ class ReportGatekeeper
         };
         $locked = $unlockStage === ReportAccess::UNLOCK_STAGE_LOCKED;
 
-        $shouldUseSnapshot = $scaleCode === ReportAccess::SCALE_ENNEAGRAM
+        $shouldUseSnapshot = in_array($scaleCode, [ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)
             ? false
             : $hasFullAccess && $this->offerResolver->modulesCoverOffered($modulesAllowed, $modulesOffered);
-        $snapshotStrictMode = $scaleCode === ReportAccess::SCALE_ENNEAGRAM ? false : $this->strictSnapshotModeEnabled();
+        $snapshotStrictMode = in_array($scaleCode, [ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true) ? false : $this->strictSnapshotModeEnabled();
         $shouldReadFromSnapshot = $snapshotStrictMode || $shouldUseSnapshot;
         if ($shouldReadFromSnapshot && ($snapshotStrictMode || ! $forceRefresh)) {
             $snapshotRow = DB::table('report_snapshots')
@@ -411,7 +411,7 @@ class ReportGatekeeper
 
         // Non-MBTI reports are still built by GenericReportBuilder. Re-apply teaser
         // masking when locked to avoid exposing full payload to unpaid users.
-        if ($locked && ! in_array(strtoupper($scaleCode), ['MBTI', 'BIG5_OCEAN', 'CLINICAL_COMBO_68', 'SDS_20', 'EQ_60', 'ENNEAGRAM'], true)) {
+        if ($locked && ! in_array(strtoupper($scaleCode), ['MBTI', 'BIG5_OCEAN', 'CLINICAL_COMBO_68', 'SDS_20', 'EQ_60', 'ENNEAGRAM', 'RIASEC'], true)) {
             $report = $this->applyTeaser($report, $viewPolicy);
         }
 
