@@ -249,6 +249,17 @@ return [
         'create_action' => '创建:resource',
     ],
 
+    'locale_scope' => [
+        'filter_label' => '内容语言',
+        'show_all' => '查看全部语言',
+        'content_locale' => '当前内容语言',
+        'source_locale' => '源语言',
+        'editor_marker_label' => '语言范围',
+        'editor_marker' => '当前内容语言：:locale · 源语言：:source_locale · 类型：:role',
+        'source_role' => '源文',
+        'empty_description' => '暂无该语言内容',
+    ],
+
     'resources' => [
         'common' => [
             'actions' => [
