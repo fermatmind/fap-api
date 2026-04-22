@@ -68,18 +68,23 @@ class ArticleCategoryResource extends Resource
             Hidden::make('org_id')
                 ->default(fn (): int => max(0, (int) app(OrgContext::class)->orgId())),
             TextInput::make('name')
+                ->label(__('ops.resources.taxonomy.fields.name'))
                 ->required()
                 ->maxLength(128),
             TextInput::make('slug')
+                ->label(__('ops.resources.taxonomy.fields.slug'))
                 ->required()
                 ->maxLength(127)
                 ->afterStateUpdated(fn ($state, $set): mixed => $set('slug', Str::slug((string) $state))),
             Textarea::make('description')
+                ->label(__('ops.resources.taxonomy.fields.description'))
                 ->rows(4),
             TextInput::make('sort_order')
+                ->label(__('ops.resources.taxonomy.fields.sort_order'))
                 ->numeric()
                 ->default(0),
             Toggle::make('is_active')
+                ->label(__('ops.resources.taxonomy.fields.is_active'))
                 ->default(true),
         ]);
     }
@@ -89,9 +94,11 @@ class ArticleCategoryResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label(__('ops.resources.taxonomy.fields.name'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('slug')
+                    ->label(__('ops.resources.taxonomy.fields.slug'))
                     ->searchable()
                     ->copyable(),
                 TextColumn::make('is_active')
@@ -101,8 +108,10 @@ class ArticleCategoryResource extends Resource
                     ->color(fn (bool|int|string|null $state): string => StatusBadge::booleanColor($state))
                     ->sortable(),
                 TextColumn::make('sort_order')
+                    ->label(__('ops.resources.taxonomy.fields.sort_order'))
                     ->sortable(),
                 TextColumn::make('updated_at')
+                    ->label(__('ops.resources.taxonomy.fields.updated'))
                     ->dateTime()
                     ->sortable(),
             ])
