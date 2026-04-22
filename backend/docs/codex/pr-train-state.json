@@ -9,7 +9,7 @@
     "PR-ENNEAGRAM-V11": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "open",
+      "status": "github_checks_failed",
       "branch": "codex/enneagram-v1-1-topology-tiebreak-display",
       "commit_sha": "5ce2b4d858c41ba73ddd0c4ebc92ac2d7689c5df",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/967",
@@ -32,9 +32,30 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24755376963/job/72427347049"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24755375799/job/72427343781"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24755376963/job/72427351039"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24755375799/job/72427347752"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub Actions hygiene failed immediately on draft PR #967 and verify-mbti matrix was skipped. Local manifest checks passed and the merge policy does not require GitHub checks for this Enneagram v1.1 interpretation/projection PR.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
