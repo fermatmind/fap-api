@@ -1,6 +1,6 @@
 {
   "schema": "fap.big5.shared_methodology.v1",
-  "title": "PR1 方法说明",
-  "body": "本 payload 由 Big Five Report Engine PR1 的 N 维度垂直切片生成；未覆盖 section 使用 status=not_populated_in_pr1，现网评分链和现网报告链不读取本 registry。",
+  "title": "v2 报告引擎方法说明",
+  "body": "本 payload 由 Big Five Report Engine v2 registry 生成；PR2 已覆盖 O/C/E/A/N 五维 atomic 与 sentence-level modifier，synergy、facet precision 与 scenario action rule 仍保持 PR1 的 N-only 范围。",
   "access_note": "此结构服务未来 8 section 承载位，不代表生产 AttemptReadController 已接入。"
 }

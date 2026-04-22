@@ -1,0 +1,18 @@
+{
+  "schema": "fap.big5.shared_band_labels.v1",
+  "bands": {
+    "low": {
+      "label": "偏低",
+      "meaning": "较少自然依赖该维度，优势通常来自节制、筛选或保留空间。"
+    },
+    "mid": {
+      "label": "中段",
+      "meaning": "该维度会受场景调节，需要结合任务、对象和当下负荷理解。"
+    },
+    "high": {
+      "label": "偏高",
+      "meaning": "更自然地通过该维度运行，优势更明显，代价也需要被管理。"
+    }
+  },
+  "voice_anchor": "band 只描述相对倾向，不暗示优劣、诊断或固定命运。"
+}

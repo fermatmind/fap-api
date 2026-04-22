@@ -1,0 +1,62 @@
+{
+  "schema": "fap.big5.modifier_trait_pack.v1",
+  "trait_code": "A",
+  "trait_label_zh": "宜人性",
+  "gradients": {
+    "a_g1": {
+      "percentile_range": [0, 19],
+      "user_label": "强边界判断",
+      "injections": {
+        "hero_summary.headline_extension": "——你更容易先看问题是否合理，再考虑关系是否舒服。",
+        "domain_deep_dive.intensity_sentence": "当你感到不公平或低效时，容忍度会明显下降。",
+        "core_portrait.load_sentence": "你的关系负荷来自不得不维持表面和气。",
+        "norms_comparison.compare_sentence": "这说明你的边界和判断明显强于关系顺应。",
+        "action_plan.urgency_sentence": "关键是把清晰立场翻译成可被听见的表达，而不是削弱判断。"
+      }
+    },
+    "a_g2": {
+      "percentile_range": [20, 39],
+      "user_label": "低顺应合作",
+      "injections": {
+        "hero_summary.headline_extension": "——你愿意合作，但不太愿意为关系牺牲核心判断。",
+        "domain_deep_dive.intensity_sentence": "你会观察对方是否公平、可靠，再决定投入多少。",
+        "core_portrait.load_sentence": "你的系统不喜欢模糊让步，也不喜欢把问题包装得过度委婉。",
+        "norms_comparison.compare_sentence": "这更接近低顺应合作：能配合，但需要理由和边界。",
+        "action_plan.urgency_sentence": "下一步是把拒绝说具体，减少让对方只能感到态度而看不见标准。"
+      }
+    },
+    "a_g3": {
+      "percentile_range": [40, 59],
+      "user_label": "平衡协作",
+      "injections": {
+        "hero_summary.headline_extension": "——你能照顾关系，也会保留自己的判断。",
+        "domain_deep_dive.intensity_sentence": "你的合作程度会随对象质量和互动公平度变化。",
+        "core_portrait.load_sentence": "你的关系负荷主要来自边界表达延后，而不是缺少同理。",
+        "norms_comparison.compare_sentence": "你处在参考样本中段，更像平衡协作，而不是无条件让步。",
+        "action_plan.urgency_sentence": "对你来说，关键是更早说明什么可以谈、什么不能继续承担。"
+      }
+    },
+    "a_g4": {
+      "percentile_range": [60, 79],
+      "user_label": "高合作承接",
+      "injections": {
+        "hero_summary.headline_extension": "——你更容易先理解别人，并尝试降低关系摩擦。",
+        "domain_deep_dive.intensity_sentence": "你会自然地注意气氛、感受和协作成本。",
+        "core_portrait.load_sentence": "你的负荷可能来自把别人的困难过早接到自己身上。",
+        "norms_comparison.compare_sentence": "你在参考样本中已偏合作，体谅和承接是明显优势。",
+        "action_plan.urgency_sentence": "关键是让自己的需求也进入讨论，而不是只优化别人的感受。"
+      }
+    },
+    "a_g5": {
+      "percentile_range": [80, 100],
+      "user_label": "强关系维护",
+      "injections": {
+        "hero_summary.headline_extension": "——你很容易优先考虑关系、感受和整体气氛。",
+        "domain_deep_dive.intensity_sentence": "冲突和让别人失望会比多数人更明显地占用你。",
+        "core_portrait.load_sentence": "你的系统很会承接，也更需要明确哪些责任不属于你。",
+        "norms_comparison.compare_sentence": "这属于高宜人位置，关系维护很容易成为你的默认反应。",
+        "action_plan.urgency_sentence": "此时最重要的是练习温和但清楚的拒绝，保护合作的长期质量。"
+      }
+    }
+  }
+}

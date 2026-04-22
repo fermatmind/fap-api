@@ -16,20 +16,23 @@ final class ModifierInjector
      */
     public function inject(ReportContext $context, array $blocksBySection, array $registry): array
     {
-        $traitCode = 'N';
-        $gradientId = $context->domainGradientId($traitCode);
-        $gradient = $registry['modifiers'][$traitCode]['gradients'][$gradientId] ?? null;
-        if (! is_array($gradient)) {
-            return $blocksBySection;
-        }
-
-        if (array_key_exists('replace_map', $gradient)) {
-            throw new \RuntimeException('Big Five report engine modifiers must not use replace_map.');
-        }
-
-        $injections = is_array($gradient['injections'] ?? null) ? $gradient['injections'] : [];
         foreach ($blocksBySection as $sectionKey => $blocks) {
             foreach ($blocks as $index => $block) {
+                $traitCode = (string) ($block->analytics['trait_code'] ?? '');
+                if ($traitCode === '') {
+                    continue;
+                }
+                $gradientId = $context->domainGradientId($traitCode);
+                $gradient = $registry['modifiers'][$traitCode]['gradients'][$gradientId] ?? null;
+                if (! is_array($gradient)) {
+                    continue;
+                }
+
+                if (array_key_exists('replace_map', $gradient)) {
+                    throw new \RuntimeException('Big Five report engine modifiers must not use replace_map.');
+                }
+
+                $injections = is_array($gradient['injections'] ?? null) ? $gradient['injections'] : [];
                 $copy = $block->resolvedCopy;
                 foreach ($injections as $slot => $sentence) {
                     if (! is_string($slot) || ! str_starts_with($slot, $sectionKey.'.')) {

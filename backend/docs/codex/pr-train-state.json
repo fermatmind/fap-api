@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T01:02:00+08:00",
+  "updated_at": "2026-04-23T01:26:34+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -9,9 +9,9 @@
     "PR-BIG5-REPORT-ENGINE-N-SLICE": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_checks_failed",
+      "status": "merged",
       "branch": "codex/big5-report-engine-n-slice",
-      "commit_sha": "0e0d094925ca81695a2ff80942cb81c021c1b2aa",
+      "commit_sha": "8e284e41c726f588ac200fe7621d870243d89bfd",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/975",
       "checks": {
         "local": [
@@ -75,7 +75,78 @@
           }
         ]
       },
-      "failure_reason": "GitHub Actions hygiene failed immediately on PR #975 after the 2026-04-23 review hardening push, and verify-mbti matrix jobs were skipped. Local scoped checks and APP_URL-pinned ci_verify_mbti.sh passed; the failure matches the repository's current workflow-start issue rather than a locally reproducible Big Five Report Engine regression.",
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "2026-04-22T17:05:13Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-BIG5-REPORT-ENGINE-ALL-TRAITS": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "github_checks_failed",
+      "branch": "codex/big5-report-engine-all-traits",
+      "commit_sha": "bcfbc3ed71d77e434010cc7df377f39b0f0b974a",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/977",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool content_packs/BIG5_OCEAN/v2/registry/manifest.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool tests/Fixtures/big5_engine/expected_canonical_n_slice_payload.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "for f in content_packs/BIG5_OCEAN/v2/registry/atomic/*.json content_packs/BIG5_OCEAN/v2/registry/modifiers/*.json content_packs/BIG5_OCEAN/v2/registry/shared/*.json; do python3 -m json.tool \"$f\" >/dev/null || exit 1; done",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/BigFive/ReportEngine tests/Unit/Services/BigFive/ReportEngine tests/Feature/Content/BigFiveReportEngineNSliceTest.php tests/Feature/Content/BigFiveReportEngineAllTraitsRolloutTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/BigFive/ReportEngine tests/Feature/Content/BigFiveReportEngineNSliceTest.php tests/Feature/Content/BigFiveReportEngineAllTraitsRolloutTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          },
+          {
+            "command": "tmpdir=$(mktemp -d /tmp/fap-api-pr2-ci.XXXXXX) && git worktree add --detach \"$tmpdir\" HEAD >/dev/null && bash \"$tmpdir/backend/scripts/ci/guard_no_committed_secrets.sh\" && bash \"$tmpdir/backend/scripts/cae_gate.sh\"; rc=$?; git worktree remove --force \"$tmpdir\" >/dev/null 2>&1 || true; exit $rc",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24792626414/job/72553935531"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24792623828/job/72553926389"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24792626414/job/72553946245"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24792623828/job/72553937875"
+          }
+        ]
+      },
+      "failure_reason": "GitHub Actions hygiene failed immediately on draft PR #977 and verify-mbti matrix jobs were skipped; GitHub did not expose logs for the failed hygiene jobs. The same hygiene scripts pass locally in a clean temporary git worktree at head bcfbc3ed. Local manifest checks passed. PR remains draft and is not merge-ready.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,

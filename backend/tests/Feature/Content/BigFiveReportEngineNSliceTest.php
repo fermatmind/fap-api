@@ -22,7 +22,7 @@ final class BigFiveReportEngineNSliceTest extends TestCase
             array_map(static fn (array $match): string => (string) $match['rule_id'], $payload['engine_decisions']['facet_anomalies'])
         );
         $this->assertCount(8, $payload['sections']);
-        $this->assertSame('not_populated_in_pr1', data_get($payload, 'sections.1.status'));
+        $this->assertSame('populated', data_get($payload, 'sections.1.status'));
         $this->assertCount(4, $payload['action_matrix']['workplace']);
 
         $expected = json_decode((string) file_get_contents(base_path('tests/Fixtures/big5_engine/expected_canonical_n_slice_payload.json')), true);
@@ -76,12 +76,14 @@ final class BigFiveReportEngineNSliceTest extends TestCase
         );
     }
 
-    public function test_registry_stays_limited_to_n_vertical_slice_assets(): void
+    public function test_registry_keeps_pr1_n_only_synergy_facet_and_action_scope(): void
     {
         $registry = app(RegistryLoader::class)->load();
 
-        $this->assertSame(['N'], array_keys((array) $registry['atomic']));
-        $this->assertSame(['N'], array_keys((array) $registry['modifiers']));
+        $this->assertSame(['O', 'C', 'E', 'A', 'N'], array_keys((array) $registry['atomic']));
+        $this->assertSame(['O', 'C', 'E', 'A', 'N'], array_keys((array) $registry['modifiers']));
         $this->assertSame(['N'], array_keys((array) $registry['facet_precision']));
+        $this->assertSame(['n_high_x_e_low'], array_keys((array) $registry['synergies']));
+        $this->assertSame(['workplace', 'stress_recovery', 'personal_growth'], array_keys((array) $registry['action_rules']));
     }
 }

@@ -84,7 +84,7 @@ final class SectionInstructionAssembler
                 blockUid: 'methodology_and_access.shared.methodology',
                 kind: 'methodology',
                 component: 'BigFiveMethodologyBlock',
-                blockId: 'shared_methodology_pr1',
+                blockId: 'shared_methodology_v2',
                 resolvedCopy: $methodology,
                 provenance: $this->provenanceRecorder->record(['shared/methodology.json']),
                 analytics: ['source' => 'shared'],
