@@ -3197,9 +3197,9 @@
     "PR-CMSOPS-6": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "status": "open",
+      "status": "merged",
       "branch": "codex/cmsops-pr6-staging-baseline-content",
-      "commit_sha": "ca440137d9c4444e0a626b94a6552960b6363989",
+      "commit_sha": "a0b4b5764854255e7130401f8612d5191d6259de",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/961",
       "checks": {
         "local": [
@@ -3240,13 +3240,96 @@
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
+      "merged_at": "2026-04-21T04:52:54Z",
+      "remote_branch_deleted": true,
       "local_cleanup_executed": false,
       "deferred": [
         "Deploy/import this baseline into staging after merge, then run the frontend staging baseline validator against the live API.",
         "Frontend sitemap article enumeration QA remains scoped to PR-7."
       ]
+    },
+    "PR-4": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "status": "open",
+      "branch": "codex/pr-4-support-cms-infra-backend",
+      "commit_sha": "ad4c378dfc8fb840a02e5a30dc3468fb352ed938",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/972",
+      "checks": {
+        "local": [
+          {
+            "command": "cd backend && python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan route:list --path=api/v0.5/support --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan migrate --env=testing --force --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan migrate:rollback --env=testing --step=1 --force --no-ansi",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan test tests/Feature/V0_5/SupportTrustCmsApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && php artisan test tests/Feature/V0_5/ArticlePublicApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && vendor/bin/pint --test <PR-4 touched PHP files>",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && bash scripts/export_openapi.sh --check",
+            "status": "passed"
+          },
+          {
+            "command": "cd backend && APP_URL=http://127.0.0.1:18010 bash scripts/ci_verify_mbti.sh",
+            "status": "passed"
+          },
+          {
+            "command": "bash backend/scripts/ci/guard_no_committed_secrets.sh && bash backend/scripts/cae_gate.sh",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed_external_billing_block",
+            "checked_at": "2026-04-22T20:36:00+08:00",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24778563471/job/72503198473",
+            "failure_reason": "GitHub job was not started because recent account payments failed or spending limit needs to be increased."
+          },
+          {
+            "name": "hygiene",
+            "status": "failed_external_billing_block",
+            "checked_at": "2026-04-22T20:36:00+08:00",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24778561849/job/72503194018",
+            "failure_reason": "GitHub job was not started because recent account payments failed or spending limit needs to be increased."
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped_due_hygiene_billing_block",
+            "checked_at": "2026-04-22T20:36:00+08:00",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24778563471/job/72503206659"
+          }
+        ]
+      },
+      "failure_reason": "Required GitHub checks are blocked by external GitHub billing/spending-limit runner startup failure; local validation passed.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   }
 }
