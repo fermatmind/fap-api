@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T01:18:23+08:00",
+  "updated_at": "2026-04-23T01:19:29+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -84,10 +84,10 @@
     "PR-BIG5-REPORT-ENGINE-ALL-TRAITS": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "github_checks_failed",
       "branch": "codex/big5-report-engine-all-traits",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "101fa305f660c823fb2c54c58b5d2d98f24a329c",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/977",
       "checks": {
         "local": [
           {
@@ -119,9 +119,25 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24792350271/job/72552937132"
+          },
+          {
+            "name": "hygiene",
+            "status": "queued",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24792361167/job/72552976422"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24792350271/job/72552947827"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "GitHub Actions hygiene failed immediately on draft PR #977 and verify-mbti matrix was skipped on the first run; a duplicate hygiene run was still queued when recorded. Local manifest checks passed. PR remains draft and is not merge-ready.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
