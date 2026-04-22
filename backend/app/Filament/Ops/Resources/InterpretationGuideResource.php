@@ -6,6 +6,7 @@ namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\InterpretationGuideResource\Pages;
 use App\Filament\Ops\Support\ContentAccess;
+use App\Filament\Ops\Support\OpsContentLocaleScope;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\InterpretationGuide;
 use Filament\Forms;
@@ -68,10 +69,15 @@ class InterpretationGuideResource extends Resource
                     Forms\Components\TextInput::make('title')->required()->maxLength(255)->columnSpanFull(),
                     Forms\Components\TextInput::make('slug')->required()->maxLength(128),
                     Forms\Components\Select::make('locale')
+                        ->label(__('ops.locale_scope.content_locale'))
                         ->required()
                         ->native(false)
                         ->options(['en' => 'en', 'zh-CN' => 'zh-CN'])
                         ->default('en'),
+                    Forms\Components\Placeholder::make('locale_scope_marker')
+                        ->label(__('ops.locale_scope.editor_marker_label'))
+                        ->content(fn (Forms\Get $get, ?InterpretationGuide $record): string => OpsContentLocaleScope::editorMarker((string) ($get('locale') ?? $record?->locale ?? OpsContentLocaleScope::currentContentLocale())))
+                        ->columnSpanFull(),
                     Forms\Components\Textarea::make('summary')->rows(3)->maxLength(2000)->columnSpanFull(),
                     Forms\Components\Select::make('test_family')
                         ->required()
@@ -139,6 +145,14 @@ class InterpretationGuideResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')->searchable()->limit(48),
                 Tables\Columns\TextColumn::make('slug')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('locale')
+                    ->label(__('ops.locale_scope.content_locale'))
+                    ->badge()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('source_locale')
+                    ->label(__('ops.locale_scope.source_locale'))
+                    ->state(fn (InterpretationGuide $record): string => OpsContentLocaleScope::sourceLocale($record->locale))
+                    ->badge(),
                 Tables\Columns\TextColumn::make('test_family')->badge()->sortable(),
                 Tables\Columns\TextColumn::make('result_context')->sortable(),
                 Tables\Columns\TextColumn::make('status')
@@ -151,6 +165,19 @@ class InterpretationGuideResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')->dateTime()->sortable(),
             ])
+            ->filters([
+                Tables\Filters\SelectFilter::make('locale_scope')
+                    ->label(__('ops.locale_scope.filter_label'))
+                    ->options(fn (): array => OpsContentLocaleScope::filterOptions())
+                    ->default(fn (): string => OpsContentLocaleScope::currentContentLocale())
+                    ->query(fn (Builder $query, array $data): Builder => OpsContentLocaleScope::applyToQuery($query, $data)),
+            ])
+            ->emptyStateHeading(fn (object $livewire): string => OpsContentLocaleScope::emptyStateHeading($livewire, (string) static::getPluralModelLabel()))
+            ->emptyStateDescription(fn (object $livewire): ?string => OpsContentLocaleScope::emptyStateDescription(
+                $livewire,
+                (string) static::getModelLabel(),
+                static::canCreate() && static::hasPage('create')
+            ))
             ->defaultSort('updated_at', 'desc')
             ->actions([Tables\Actions\EditAction::make()])
             ->bulkActions([]);

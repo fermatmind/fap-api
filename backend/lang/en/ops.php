@@ -249,6 +249,17 @@ return [
         'create_action' => 'Create :resource',
     ],
 
+    'locale_scope' => [
+        'filter_label' => 'Content locale',
+        'show_all' => 'Show all locales',
+        'content_locale' => 'Content language',
+        'source_locale' => 'Source locale',
+        'editor_marker_label' => 'Locale scope',
+        'editor_marker' => 'Content language: :locale · Source locale: :source_locale · Role: :role',
+        'source_role' => 'Source content',
+        'empty_description' => 'No content available in this language yet',
+    ],
+
     'resources' => [
         'common' => [
             'actions' => [

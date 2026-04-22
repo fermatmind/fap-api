@@ -9,6 +9,7 @@ use App\Filament\Ops\Resources\ArticleResource\Support\ArticleWorkspace;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Filament\Ops\Support\EditorialReviewAudit;
+use App\Filament\Ops\Support\OpsContentLocaleScope;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\Article;
 use App\Support\OrgContext;
@@ -197,6 +198,10 @@ class ArticleResource extends Resource
                             ->description(__('ops.resources.articles.section_descriptions.locale_taxonomy'))
                             ->extraAttributes(['class' => 'ops-article-workspace-section ops-article-workspace-section--rail'])
                             ->schema([
+                                Forms\Components\Placeholder::make('locale_scope_marker')
+                                    ->label(__('ops.locale_scope.editor_marker_label'))
+                                    ->content(fn (Forms\Get $get, ?Article $record): string => OpsContentLocaleScope::editorMarker((string) ($get('locale') ?? $record?->locale ?? OpsContentLocaleScope::currentContentLocale())))
+                                    ->columnSpanFull(),
                                 Forms\Components\TextInput::make('locale')
                                     ->label(__('ops.resources.articles.fields.locale'))
                                     ->required()
@@ -328,9 +333,14 @@ class ArticleResource extends Resource
                     ->description(fn (Article $record): string => ArticleWorkspace::visibilityMeta($record))
                     ->color(fn (string $state): string => StatusBadge::color($state)),
                 Tables\Columns\TextColumn::make('locale')
-                    ->label(__('ops.resources.articles.fields.locale'))
+                    ->label(__('ops.locale_scope.content_locale'))
+                    ->badge()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('source_locale')
+                    ->label(__('ops.locale_scope.source_locale'))
+                    ->state(fn (Article $record): string => OpsContentLocaleScope::sourceLocale($record->locale))
+                    ->badge(),
                 Tables\Columns\TextColumn::make('category.name')
                     ->label(__('ops.resources.articles.fields.category'))
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -348,16 +358,18 @@ class ArticleResource extends Resource
                 Tables\Filters\SelectFilter::make('status')
                     ->label(__('ops.resources.articles.fields.status'))
                     ->options(self::statusOptions()),
-                Tables\Filters\SelectFilter::make('locale')
-                    ->label(__('ops.resources.articles.fields.locale'))
-                    ->options(fn (): array => static::getEloquentQuery()
-                        ->select('locale')
-                        ->whereNotNull('locale')
-                        ->distinct()
-                        ->orderBy('locale')
-                        ->pluck('locale', 'locale')
-                        ->toArray()),
+                Tables\Filters\SelectFilter::make('locale_scope')
+                    ->label(__('ops.locale_scope.filter_label'))
+                    ->options(fn (): array => OpsContentLocaleScope::filterOptions())
+                    ->default(fn (): string => OpsContentLocaleScope::currentContentLocale())
+                    ->query(fn (Builder $query, array $data): Builder => OpsContentLocaleScope::applyToQuery($query, $data)),
             ])
+            ->emptyStateHeading(fn (object $livewire): string => OpsContentLocaleScope::emptyStateHeading($livewire, (string) static::getPluralModelLabel()))
+            ->emptyStateDescription(fn (object $livewire): ?string => OpsContentLocaleScope::emptyStateDescription(
+                $livewire,
+                (string) static::getModelLabel(),
+                static::canCreate() && static::hasPage('create')
+            ))
             ->searchPlaceholder(__('ops.resources.articles.placeholders.search'))
             ->actionsColumnLabel(__('ops.resources.articles.fields.actions'))
             ->defaultSort('updated_at', 'desc')
