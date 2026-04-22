@@ -3305,12 +3305,27 @@
         "github": [
           {
             "name": "hygiene",
-            "status": "pending_after_followup_push",
-            "checked_at": "2026-04-22T20:35:00+08:00"
+            "status": "failed_external_billing_block",
+            "checked_at": "2026-04-22T20:36:00+08:00",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24778563471/job/72503198473",
+            "failure_reason": "GitHub job was not started because recent account payments failed or spending limit needs to be increased."
+          },
+          {
+            "name": "hygiene",
+            "status": "failed_external_billing_block",
+            "checked_at": "2026-04-22T20:36:00+08:00",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24778561849/job/72503194018",
+            "failure_reason": "GitHub job was not started because recent account payments failed or spending limit needs to be increased."
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped_due_hygiene_billing_block",
+            "checked_at": "2026-04-22T20:36:00+08:00",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24778563471/job/72503206659"
           }
         ]
       },
-      "failure_reason": "",
+      "failure_reason": "Required GitHub checks are blocked by external GitHub billing/spending-limit runner startup failure; local validation passed.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
