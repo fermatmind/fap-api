@@ -37,6 +37,8 @@ use App\Services\Report\MbtiPreviewContractBuilder;
 use App\Services\Report\Pdf\ReportPdfDocumentService;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportGatekeeper;
+use App\Services\Riasec\RiasecPublicFormSummaryBuilder;
+use App\Services\Riasec\RiasecPublicProjectionService;
 use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Support\OrgContext;
 use App\Support\SchemaBaseline;
@@ -50,7 +52,7 @@ class AttemptReadController extends Controller
 {
     use ResolvesAttemptOwnership;
 
-    private const PUBLIC_RESULT_READ_SCALES = ['MBTI', 'BIG5_OCEAN', 'IQ_RAVEN', 'EQ_60', 'ENNEAGRAM'];
+    private const PUBLIC_RESULT_READ_SCALES = ['MBTI', 'BIG5_OCEAN', 'IQ_RAVEN', 'EQ_60', 'ENNEAGRAM', 'RIASEC'];
 
     private const SENSITIVE_RESULT_READ_SCALES = ['SDS_20', 'CLINICAL_COMBO_68'];
 
@@ -62,6 +64,8 @@ class AttemptReadController extends Controller
         private BigFivePublicFormSummaryBuilder $bigFivePublicFormSummaryBuilder,
         private EnneagramPublicProjectionService $enneagramPublicProjectionService,
         private EnneagramPublicFormSummaryBuilder $enneagramPublicFormSummaryBuilder,
+        private RiasecPublicProjectionService $riasecPublicProjectionService,
+        private RiasecPublicFormSummaryBuilder $riasecPublicFormSummaryBuilder,
         private MbtiPrivacyConsentContractService $mbtiPrivacyConsentContractService,
         private MbtiPublicProjectionService $mbtiPublicProjectionService,
         private MbtiPublicFormSummaryBuilder $mbtiPublicFormSummaryBuilder,
@@ -150,6 +154,9 @@ class AttemptReadController extends Controller
             : null;
         $enneagramFormSummary = $scaleCode === 'ENNEAGRAM'
             ? $this->resolveEnneagramFormSummary($request, $attempt, $result)
+            : null;
+        $riasecFormSummary = $scaleCode === 'RIASEC'
+            ? $this->riasecPublicFormSummaryBuilder->build($attempt, $result)
             : null;
 
         if ($scaleCode === 'CLINICAL_COMBO_68') {
@@ -267,6 +274,12 @@ class AttemptReadController extends Controller
                 (string) ($attempt?->locale ?? config('content_packs.default_locale', 'zh-CN'))
             )
             : [];
+        $riasecProjection = $scaleCode === 'RIASEC'
+            ? $this->riasecPublicProjectionService->buildFromResult(
+                $result,
+                (string) ($attempt?->locale ?? config('content_packs.default_locale', 'zh-CN'))
+            )
+            : [];
 
         $mbtiEventMeta = $scaleCode === 'MBTI'
             ? $this->resolveMbtiResultViewEventMeta($request, $result, $attempt, $attemptId)
@@ -341,6 +354,12 @@ class AttemptReadController extends Controller
         if (is_array($enneagramFormSummary)) {
             $responsePayload['enneagram_form_v1'] = $enneagramFormSummary;
         }
+        if ($riasecProjection !== []) {
+            $responsePayload['riasec_public_projection_v1'] = $riasecProjection;
+        }
+        if (is_array($riasecFormSummary)) {
+            $responsePayload['riasec_form_v1'] = $riasecFormSummary;
+        }
 
         return response()->json($responsePayload);
     }
@@ -390,6 +409,9 @@ class AttemptReadController extends Controller
             : null;
         $enneagramFormSummary = $scaleCode === 'ENNEAGRAM'
             ? $this->resolveEnneagramFormSummary($request, $attempt, $result)
+            : null;
+        $riasecFormSummary = $scaleCode === 'RIASEC'
+            ? $this->riasecPublicFormSummaryBuilder->build($attempt, $result)
             : null;
 
         $gate = $this->resolveReportGate(
@@ -511,6 +533,18 @@ class AttemptReadController extends Controller
                 );
             }
             $responsePayload['enneagram_public_projection_v1'] = $projection;
+        } elseif ($scaleCode === 'RIASEC') {
+            if (is_array($riasecFormSummary)) {
+                $responsePayload['riasec_form_v1'] = $riasecFormSummary;
+            }
+            $projection = data_get($responsePayload, 'report._meta.riasec_public_projection_v1');
+            if (! is_array($projection)) {
+                $projection = $this->riasecPublicProjectionService->buildFromResult(
+                    $result,
+                    (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN'))
+                );
+            }
+            $responsePayload['riasec_public_projection_v1'] = $projection;
         }
 
         $effectiveMbtiPersonalization = $scaleCode === 'MBTI'

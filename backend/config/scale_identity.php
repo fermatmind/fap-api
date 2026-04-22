@@ -46,6 +46,7 @@ return [
         'IQ_RAVEN' => 'IQ_INTELLIGENCE_QUOTIENT',
         'EQ_60' => 'EQ_EMOTIONAL_INTELLIGENCE',
         'ENNEAGRAM' => 'ENNEAGRAM_PERSONALITY_TEST',
+        'RIASEC' => 'HOLLAND_RIASEC_CAREER_INTEREST',
     ],
 
     'code_map_v2_to_v1' => [
@@ -56,6 +57,7 @@ return [
         'IQ_INTELLIGENCE_QUOTIENT' => 'IQ_RAVEN',
         'EQ_EMOTIONAL_INTELLIGENCE' => 'EQ_60',
         'ENNEAGRAM_PERSONALITY_TEST' => 'ENNEAGRAM',
+        'HOLLAND_RIASEC_CAREER_INTEREST' => 'RIASEC',
     ],
 
     'scale_uid_map' => [
@@ -66,6 +68,7 @@ return [
         'IQ_RAVEN' => '55555555-5555-4555-8555-555555555555',
         'EQ_60' => '66666666-6666-4666-8666-666666666666',
         'ENNEAGRAM' => '77777777-7777-4777-8777-777777777777',
+        'RIASEC' => '88888888-8888-4888-8888-888888888888',
     ],
 
     'pack_id_map_v1' => [
@@ -76,6 +79,7 @@ return [
         'IQ_RAVEN' => 'default',
         'EQ_60' => 'EQ_60',
         'ENNEAGRAM' => 'ENNEAGRAM',
+        'RIASEC' => 'RIASEC',
     ],
 
     // v2 pack/dir maps are compat aliases for dual-code/read-path migration.
@@ -88,6 +92,7 @@ return [
         'IQ_RAVEN' => 'default',
         'EQ_60' => 'EQ_EMOTIONAL_INTELLIGENCE',
         'ENNEAGRAM' => 'ENNEAGRAM_PERSONALITY_TEST',
+        'RIASEC' => 'HOLLAND_RIASEC_CAREER_INTEREST',
     ],
 
     'dir_version_map_v1' => [
@@ -98,6 +103,7 @@ return [
         'IQ_RAVEN' => 'IQ-RAVEN-CN-v0.3.0-DEMO',
         'EQ_60' => 'v1',
         'ENNEAGRAM' => 'v1-likert-105',
+        'RIASEC' => 'v1-standard-60',
     ],
 
     'dir_version_map_v2' => [
@@ -108,6 +114,7 @@ return [
         'IQ_RAVEN' => 'IQ_INTELLIGENCE_QUOTIENT-CN-v0.3.0-DEMO',
         'EQ_60' => 'v1',
         'ENNEAGRAM' => 'v1-likert-105',
+        'RIASEC' => 'v1-standard-60',
     ],
 
     'demo_replacement_map' => [

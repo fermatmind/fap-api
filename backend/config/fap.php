@@ -272,6 +272,7 @@ return [
         'eq_60' => App\Services\Assessment\Drivers\Eq60Driver::class,
         'eq_test' => App\Services\Assessment\Drivers\Eq60Driver::class,
         'enneagram' => App\Services\Assessment\Drivers\EnneagramDriver::class,
+        'riasec' => App\Services\Assessment\Drivers\RiasecDriver::class,
     ],
 
     // Persist raw answers (audit)

@@ -1,0 +1,32 @@
+{
+    "policy": {
+        "form_code": "riasec_140",
+        "form_kind": "enhanced",
+        "engine_version": "riasec_v1.0.0",
+        "scoring_spec_version": "riasec_enhanced_140_v1",
+        "quality_version": "riasec_quality_v1",
+        "dimensions": [
+            "R",
+            "I",
+            "A",
+            "S",
+            "E",
+            "C"
+        ],
+        "scale": {
+            "min": 1,
+            "max": 5
+        },
+        "standard_scoring": {
+            "raw_min": 10,
+            "raw_max": 50,
+            "standardize": "((raw-10)/40)*100"
+        },
+        "enhanced_scoring": {
+            "activity_weight": 0.7,
+            "environment_weight": 0.15,
+            "role_weight": 0.15,
+            "standardize": "((mean-1)/4)*100"
+        }
+    }
+}

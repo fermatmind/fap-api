@@ -221,6 +221,11 @@ class AssessmentEngine
             return 'enneagram_likert_105_spec_v1';
         }
 
+        $isRiasec = $scaleCode === 'RIASEC' || $driverType === 'riasec';
+        if ($isRiasec) {
+            return 'riasec_standard_60_v1';
+        }
+
         return 'big5_spec_2026Q1_v1';
     }
 
@@ -228,7 +233,7 @@ class AssessmentEngine
     {
         return in_array(
             strtolower(trim($driverType)),
-            ['big5_ocean', 'clinical_combo_68', 'sds_20', 'eq_60', 'eq_test', 'enneagram'],
+            ['big5_ocean', 'clinical_combo_68', 'sds_20', 'eq_60', 'eq_test', 'enneagram', 'riasec'],
             true
         );
     }
