@@ -22,6 +22,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 
 class ArticleResource extends Resource
 {
@@ -243,6 +244,35 @@ class ArticleResource extends Resource
                                     ->maxValue(65535)
                                     ->helperText(__('ops.resources.articles.helpers.voice_order')),
                             ]),
+                        Forms\Components\Section::make(__('ops.resources.articles.sections.translation'))
+                            ->description(__('ops.resources.articles.section_descriptions.translation'))
+                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-article-workspace-section--rail'])
+                            ->schema([
+                                Forms\Components\Placeholder::make('translation_current_locale')
+                                    ->label(__('ops.resources.articles.fields.current_locale'))
+                                    ->content(fn (Forms\Get $get, ?Article $record): string => (string) ($get('locale') ?? $record?->locale ?? __('ops.resources.articles.placeholders.not_set_yet'))),
+                                Forms\Components\Placeholder::make('translation_source_locale')
+                                    ->label(__('ops.resources.articles.fields.source_locale'))
+                                    ->content(fn (?Article $record): string => (string) ($record?->source_locale ?? __('ops.resources.articles.placeholders.not_set_yet'))),
+                                Forms\Components\Placeholder::make('translation_status_marker')
+                                    ->label(__('ops.resources.articles.fields.translation_status'))
+                                    ->content(fn (?Article $record): string => self::translationStatusLabel($record?->translation_status)),
+                                Forms\Components\Placeholder::make('translation_source_article')
+                                    ->label(__('ops.resources.articles.fields.translated_from_article'))
+                                    ->content(fn (?Article $record): string => self::sourceArticleSummary($record)),
+                                Forms\Components\Placeholder::make('translation_group_marker')
+                                    ->label(__('ops.resources.articles.fields.translation_group_id'))
+                                    ->content(fn (?Article $record): string => (string) ($record?->translation_group_id ?? __('ops.resources.articles.placeholders.not_set_yet'))),
+                                Forms\Components\Placeholder::make('translation_source_hash')
+                                    ->label(__('ops.resources.articles.fields.source_version_hash'))
+                                    ->content(fn (?Article $record): string => self::shortHash($record?->currentSourceVersionHash())),
+                                Forms\Components\Placeholder::make('translation_from_hash')
+                                    ->label(__('ops.resources.articles.fields.translated_from_version_hash'))
+                                    ->content(fn (?Article $record): string => self::shortHash($record?->translated_from_version_hash)),
+                                Forms\Components\Placeholder::make('translation_stale_state')
+                                    ->label(__('ops.resources.articles.fields.stale_state'))
+                                    ->content(fn (?Article $record): string => self::staleStateLabel($record)),
+                            ]),
                         Forms\Components\Section::make(__('ops.resources.articles.sections.seo'))
                             ->relationship('seoMeta')
                             ->description(__('ops.resources.articles.section_descriptions.seo'))
@@ -338,9 +368,27 @@ class ArticleResource extends Resource
                     ->sortable()
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('source_locale')
-                    ->label(__('ops.locale_scope.source_locale'))
-                    ->state(fn (Article $record): string => OpsContentLocaleScope::sourceLocale($record->locale))
-                    ->badge(),
+                    ->label(__('ops.resources.articles.fields.source_locale'))
+                    ->badge()
+                    ->sortable()
+                    ->placeholder(__('ops.resources.articles.placeholders.not_set_yet')),
+                Tables\Columns\TextColumn::make('translation_status')
+                    ->label(__('ops.resources.articles.fields.translation_status'))
+                    ->badge()
+                    ->sortable()
+                    ->formatStateUsing(fn (?string $state): string => self::translationStatusLabel($state))
+                    ->color(fn (?string $state): string => self::translationStatusColor($state)),
+                Tables\Columns\TextColumn::make('translation_group_id')
+                    ->label(__('ops.resources.articles.fields.translation_group_id'))
+                    ->formatStateUsing(fn (?string $state): string => self::shortHash($state))
+                    ->copyable()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->placeholder(__('ops.resources.articles.placeholders.not_set_yet')),
+                Tables\Columns\TextColumn::make('translation_stale')
+                    ->label(__('ops.resources.articles.fields.stale_state'))
+                    ->state(fn (Article $record): string => self::staleStateLabel($record))
+                    ->badge()
+                    ->color(fn (Article $record): string => $record->isTranslationStale() ? 'warning' : 'success'),
                 Tables\Columns\TextColumn::make('category.name')
                     ->label(__('ops.resources.articles.fields.category'))
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -354,6 +402,7 @@ class ArticleResource extends Resource
                     ->since()
                     ->sortable(),
             ])
+            ->modifyQueryUsing(fn (Builder $query): Builder => $query->with('translatedFrom'))
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
                     ->label(__('ops.resources.articles.fields.status'))
@@ -420,6 +469,69 @@ class ArticleResource extends Resource
             'draft' => __('ops.status.draft'),
             'published' => __('ops.status.published'),
         ];
+    }
+
+    private static function translationStatusLabel(?string $state): string
+    {
+        $state = $state ?: Article::TRANSLATION_STATUS_SOURCE;
+
+        return (string) __("ops.resources.articles.translation_statuses.{$state}");
+    }
+
+    private static function translationStatusColor(?string $state): string
+    {
+        return match ($state) {
+            Article::TRANSLATION_STATUS_SOURCE => 'gray',
+            Article::TRANSLATION_STATUS_MACHINE_DRAFT => 'info',
+            Article::TRANSLATION_STATUS_HUMAN_REVIEW => 'warning',
+            Article::TRANSLATION_STATUS_APPROVED, Article::TRANSLATION_STATUS_PUBLISHED => 'success',
+            Article::TRANSLATION_STATUS_STALE => 'danger',
+            Article::TRANSLATION_STATUS_ARCHIVED => 'gray',
+            default => 'gray',
+        };
+    }
+
+    private static function sourceArticleSummary(?Article $record): string
+    {
+        if (! $record instanceof Article) {
+            return (string) __('ops.resources.articles.placeholders.not_set_yet');
+        }
+
+        if ($record->isSourceArticle()) {
+            return (string) __('ops.resources.articles.placeholders.source_article');
+        }
+
+        $source = $record->translatedFrom;
+        if (! $source instanceof Article) {
+            return (string) __('ops.resources.articles.placeholders.source_missing');
+        }
+
+        return '#'.$source->id.' · '.$source->title;
+    }
+
+    private static function staleStateLabel(?Article $record): string
+    {
+        if (! $record instanceof Article) {
+            return (string) __('ops.resources.articles.placeholders.not_set_yet');
+        }
+
+        if ($record->isSourceArticle()) {
+            return (string) __('ops.resources.articles.placeholders.source_current');
+        }
+
+        return $record->isTranslationStale()
+            ? (string) __('ops.resources.articles.placeholders.stale')
+            : (string) __('ops.resources.articles.placeholders.current');
+    }
+
+    private static function shortHash(?string $hash): string
+    {
+        $hash = trim((string) $hash);
+        if ($hash === '') {
+            return (string) __('ops.resources.articles.placeholders.not_set_yet');
+        }
+
+        return Str::limit($hash, 16, '');
     }
 
     private static function canRead(): bool
