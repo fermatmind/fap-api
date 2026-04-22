@@ -3164,6 +3164,55 @@
                 ]
             }
         },
+        "/api/v0.5/internal/interpretation-guides": {
+            "get": {
+                "operationId": "get_api_v0_5_internal_interpretation_guides",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\InterpretationGuideController@internalIndex",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/internal/interpretation-guides/{slug}": {
+            "get": {
+                "operationId": "get_api_v0_5_internal_interpretation_guides_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\InterpretationGuideController@internalShow",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            },
+            "put": {
+                "operationId": "put_api_v0_5_internal_interpretation_guides_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\InterpretationGuideController@internalUpdate",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/internal/landing-surfaces": {
             "get": {
                 "operationId": "get_api_v0_5_internal_landing_surfaces",
@@ -3244,6 +3293,55 @@
                     }
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\MediaLibraryController@internalUpload",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/internal/support-articles": {
+            "get": {
+                "operationId": "get_api_v0_5_internal_support_articles",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\SupportArticleController@internalIndex",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/internal/support-articles/{slug}": {
+            "get": {
+                "operationId": "get_api_v0_5_internal_support_articles_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\SupportArticleController@internalShow",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            },
+            "put": {
+                "operationId": "put_api_v0_5_internal_support_articles_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\SupportArticleController@internalUpdate",
                 "x-laravel-middleware": [
                     "api"
                 ]
@@ -3363,6 +3461,74 @@
                     }
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\PersonalityController@seo",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/support/articles": {
+            "get": {
+                "operationId": "get_api_v0_5_support_articles",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\SupportArticleController@index",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/support/articles/{slug}": {
+            "get": {
+                "operationId": "get_api_v0_5_support_articles_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\SupportArticleController@show",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/support/interpretation-guides": {
+            "get": {
+                "operationId": "get_api_v0_5_support_interpretation_guides",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\InterpretationGuideController@index",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
+        "/api/v0.5/support/interpretation-guides/{slug}": {
+            "get": {
+                "operationId": "get_api_v0_5_support_interpretation_guides_slug_",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Cms\\InterpretationGuideController@show",
                 "x-laravel-middleware": [
                     "api"
                 ]

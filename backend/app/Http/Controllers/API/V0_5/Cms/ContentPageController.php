@@ -87,9 +87,21 @@ final class ContentPageController extends Controller
             'kicker' => ['nullable', 'string', 'max:96'],
             'summary' => ['nullable', 'string', 'max:2000'],
             'kind' => ['required', Rule::in([ContentPage::KIND_COMPANY, ContentPage::KIND_POLICY, ContentPage::KIND_HELP])],
+            'page_type' => ['nullable', Rule::in(ContentPage::PAGE_TYPES)],
             'template' => ['required', Rule::in(['company', 'charter', 'foundation', 'careers', 'brand', 'policy', 'help'])],
             'animation_profile' => ['required', Rule::in(['mission', 'principles', 'editorial', 'brand', 'policy', 'none'])],
             'locale' => ['required', 'string', Rule::in(['en', 'zh-CN'])],
+            'status' => ['nullable', Rule::in([
+                ContentPage::STATUS_DRAFT,
+                ContentPage::STATUS_SCHEDULED,
+                ContentPage::STATUS_PUBLISHED,
+                ContentPage::STATUS_ARCHIVED,
+            ])],
+            'review_state' => ['nullable', Rule::in(ContentPage::REVIEW_STATES)],
+            'owner' => ['nullable', 'string', 'max:128'],
+            'legal_review_required' => ['nullable', 'boolean'],
+            'science_review_required' => ['nullable', 'boolean'],
+            'last_reviewed_at' => ['nullable', 'date'],
             'published_at' => ['nullable', 'date'],
             'updated_at' => ['nullable', 'date'],
             'effective_at' => ['nullable', 'date'],
@@ -100,6 +112,8 @@ final class ContentPageController extends Controller
             'content_html' => ['nullable', 'string'],
             'seo_title' => ['nullable', 'string', 'max:255'],
             'meta_description' => ['nullable', 'string', 'max:2000'],
+            'seo_description' => ['nullable', 'string', 'max:2000'],
+            'canonical_path' => ['nullable', 'string', 'max:255'],
             'org_id' => ['nullable', 'integer', 'min:0'],
         ]);
 
@@ -136,6 +150,7 @@ final class ContentPageController extends Controller
         $page->fill([
             'path' => '/'.$normalizedSlug,
             'kind' => (string) $validated['kind'],
+            'page_type' => (string) ($validated['page_type'] ?? $this->defaultPageType((string) $validated['kind'], $normalizedSlug)),
             'title' => trim((string) $validated['title']),
             'kicker' => $this->nullableString($validated['kicker'] ?? null),
             'summary' => $this->nullableString($validated['summary'] ?? null),
@@ -147,12 +162,19 @@ final class ContentPageController extends Controller
             'source_doc' => $this->nullableString($validated['source_doc'] ?? null),
             'is_public' => (bool) $validated['is_public'],
             'is_indexable' => (bool) $validated['is_indexable'],
+            'review_state' => (string) ($validated['review_state'] ?? 'draft'),
+            'owner' => $this->nullableString($validated['owner'] ?? null),
+            'legal_review_required' => (bool) ($validated['legal_review_required'] ?? false),
+            'science_review_required' => (bool) ($validated['science_review_required'] ?? false),
+            'last_reviewed_at' => $validated['last_reviewed_at'] ?? null,
             'headings_json' => $this->extractHeadings($contentMd),
             'content_md' => $contentMd,
             'content_html' => $contentHtml,
             'seo_title' => $this->nullableString($validated['seo_title'] ?? null),
             'meta_description' => $this->nullableString($validated['meta_description'] ?? null),
-            'status' => (bool) $validated['is_public'] ? ContentPage::STATUS_PUBLISHED : ContentPage::STATUS_DRAFT,
+            'seo_description' => $this->nullableString($validated['seo_description'] ?? null) ?? $this->nullableString($validated['meta_description'] ?? null),
+            'canonical_path' => $this->nullableString($validated['canonical_path'] ?? null) ?? '/'.$normalizedSlug,
+            'status' => (string) ($validated['status'] ?? ((bool) $validated['is_public'] ? ContentPage::STATUS_PUBLISHED : ContentPage::STATUS_DRAFT)),
         ]);
         $page->save();
 
@@ -194,12 +216,19 @@ final class ContentPageController extends Controller
             'slug' => (string) $page->slug,
             'path' => (string) $page->path,
             'kind' => (string) $page->kind,
+            'page_type' => (string) ($page->page_type ?: $this->defaultPageType((string) $page->kind, (string) $page->slug)),
             'title' => (string) $page->title,
             'kicker' => $page->kicker,
             'summary' => $page->summary,
             'template' => (string) $page->template,
             'animation_profile' => (string) $page->animation_profile,
             'locale' => (string) $page->locale,
+            'status' => (string) $page->status,
+            'review_state' => (string) ($page->review_state ?: 'draft'),
+            'owner' => $page->owner,
+            'legal_review_required' => (bool) $page->legal_review_required,
+            'science_review_required' => (bool) $page->science_review_required,
+            'last_reviewed_at' => $this->dateString($page->last_reviewed_at),
             'published_at' => $this->dateString($page->published_at),
             'updated_at' => $this->dateString($page->source_updated_at),
             'effective_at' => $this->dateString($page->effective_at),
@@ -211,6 +240,8 @@ final class ContentPageController extends Controller
             'content_html' => (string) ($page->content_html ?? ''),
             'seo_title' => $page->seo_title,
             'meta_description' => $page->meta_description,
+            'seo_description' => $page->seo_description ?: $page->meta_description,
+            'canonical_path' => $page->canonical_path ?: (string) $page->path,
         ];
     }
 
@@ -223,12 +254,19 @@ final class ContentPageController extends Controller
             'slug',
             'path',
             'kind',
+            'page_type',
             'title',
             'kicker',
             'summary',
             'template',
             'animation_profile',
             'locale',
+            'status',
+            'review_state',
+            'owner',
+            'legal_review_required',
+            'science_review_required',
+            'last_reviewed_at',
             'published_at',
             'updated_at',
             'effective_at',
@@ -254,6 +292,19 @@ final class ContentPageController extends Controller
         $trimmed = trim((string) $value);
 
         return $trimmed !== '' ? $trimmed : null;
+    }
+
+    private function defaultPageType(string $kind, string $slug): string
+    {
+        return match ($slug) {
+            'privacy' => 'privacy',
+            'terms' => 'terms',
+            'refund' => 'refund',
+            'about' => 'about',
+            default => $kind === ContentPage::KIND_HELP
+                ? 'support_static'
+                : ($kind === ContentPage::KIND_POLICY ? 'policy' : 'company'),
+        };
     }
 
     /**

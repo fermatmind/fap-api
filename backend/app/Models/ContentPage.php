@@ -20,7 +20,35 @@ final class ContentPage extends Model
 
     public const STATUS_DRAFT = 'draft';
 
+    public const STATUS_SCHEDULED = 'scheduled';
+
     public const STATUS_PUBLISHED = 'published';
+
+    public const STATUS_ARCHIVED = 'archived';
+
+    public const PAGE_TYPES = [
+        'methodology',
+        'science',
+        'boundary',
+        'policy',
+        'privacy',
+        'terms',
+        'refund',
+        'company',
+        'trust',
+        'about',
+        'support_static',
+    ];
+
+    public const REVIEW_STATES = [
+        'draft',
+        'owner_review',
+        'legal_review',
+        'science_review',
+        'company_review',
+        'approved',
+        'changes_requested',
+    ];
 
     protected $table = 'content_pages';
 
@@ -29,6 +57,7 @@ final class ContentPage extends Model
         'slug',
         'path',
         'kind',
+        'page_type',
         'title',
         'kicker',
         'summary',
@@ -41,11 +70,18 @@ final class ContentPage extends Model
         'source_doc',
         'is_public',
         'is_indexable',
+        'review_state',
+        'owner',
+        'legal_review_required',
+        'science_review_required',
+        'last_reviewed_at',
         'headings_json',
         'content_md',
         'content_html',
         'seo_title',
         'meta_description',
+        'seo_description',
+        'canonical_path',
         'status',
     ];
 
@@ -56,6 +92,9 @@ final class ContentPage extends Model
         'effective_at' => 'date',
         'is_public' => 'boolean',
         'is_indexable' => 'boolean',
+        'legal_review_required' => 'boolean',
+        'science_review_required' => 'boolean',
+        'last_reviewed_at' => 'datetime',
         'headings_json' => 'array',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
