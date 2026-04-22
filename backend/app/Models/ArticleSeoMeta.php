@@ -39,6 +39,24 @@ class ArticleSeoMeta extends Model
         'updated_at' => 'datetime',
     ];
 
+    protected static function booted(): void
+    {
+        static::saving(static function (self $seoMeta): void {
+            if ((int) $seoMeta->article_id <= 0) {
+                return;
+            }
+
+            $article = Article::withoutGlobalScopes()->find((int) $seoMeta->article_id);
+
+            if (! $article instanceof Article) {
+                return;
+            }
+
+            $seoMeta->org_id = (int) $article->org_id;
+            $seoMeta->locale = (string) $article->locale;
+        });
+    }
+
     public function article(): BelongsTo
     {
         return $this->belongsTo(Article::class, 'article_id', 'id');
