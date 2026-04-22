@@ -14,6 +14,10 @@ final class MutexResolver
      */
     public function resolve(array $matches, int $maxShow): array
     {
+        if ($maxShow <= 0) {
+            return [];
+        }
+
         usort(
             $matches,
             static fn (SynergyMatch $left, SynergyMatch $right): int => $right->priorityWeight <=> $left->priorityWeight
@@ -26,6 +30,11 @@ final class MutexResolver
         foreach ($matches as $match) {
             if (in_array($match->synergyId, $excluded, true)) {
                 continue;
+            }
+            foreach ($match->mutualExcludes as $mutualExclude) {
+                if (in_array($mutualExclude, array_map(static fn (SynergyMatch $selected): string => $selected->synergyId, $selected), true)) {
+                    continue 2;
+                }
             }
             if ($match->mutexGroup !== '' && in_array($match->mutexGroup, $usedMutexGroups, true)) {
                 continue;

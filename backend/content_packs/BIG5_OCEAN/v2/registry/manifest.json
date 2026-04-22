@@ -1,10 +1,10 @@
 {
   "schema": "fap.big5.report_registry_manifest.v1",
-  "registry_id": "BIG5_OCEAN_v2_report_engine_pr2",
+  "registry_id": "BIG5_OCEAN_v2_report_engine_pr3a",
   "scale_code": "BIG5_OCEAN",
   "version": "v2",
   "locale": "zh-CN",
-  "scope": "PR2 all 5 traits atomic and modifier rollout; N-only synergy/facet/action remains from PR1",
+  "scope": "PR3A five synergy rollout; all 5 traits atomic and modifier remain from PR2, N-only facet/action remains from PR1",
   "runtime_contract": "fap.big5.report.v1",
   "section_skeleton": [
     "hero_summary",
@@ -22,7 +22,7 @@
     "atomic_bands_per_trait": ["low", "mid", "high"],
     "modifier_traits": ["O", "C", "E", "A", "N"],
     "modifier_gradients_per_trait": 5,
-    "synergy_traits": ["N"],
+    "synergies": ["n_high_x_e_low", "o_high_x_c_low", "o_high_x_n_high", "c_high_x_n_high", "e_high_x_a_low"],
     "facet_precision_traits": ["N"],
     "action_rule_scope": "N scenario rules only"
   },

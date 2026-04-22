@@ -36,29 +36,23 @@ final class SectionInstructionAssembler
      */
     public function assemble(array $blocksBySection, array $synergies, array $facetAnomalies, array $registry): array
     {
-        foreach ($synergies as $synergy) {
-            foreach ($synergy->sectionTargets as $target) {
-                if (! is_array($target)) {
-                    continue;
-                }
-                $sectionKey = (string) ($target['section_key'] ?? '');
-                if ($sectionKey === '') {
-                    continue;
-                }
-                $slot = (string) ($target['slot'] ?? 'synergy');
-                $blocksBySection[$sectionKey][] = new ResolvedBlock(
-                    blockUid: "{$sectionKey}.synergy.{$synergy->synergyId}.{$slot}",
-                    kind: (string) ($target['kind'] ?? 'callout'),
-                    component: 'BigFiveSynergyCallout',
-                    blockId: "synergy_{$synergy->synergyId}_{$slot}",
-                    resolvedCopy: $synergy->copy,
-                    provenance: $this->provenanceRecorder->record(synergyRefs: ["synergies/{$synergy->synergyId}.json"]),
-                    analytics: [
-                        'synergy_id' => $synergy->synergyId,
-                        'priority_weight' => $synergy->priorityWeight,
-                    ],
-                );
-            }
+        foreach (array_slice($synergies, 0, 2) as $index => $synergy) {
+            $sectionKey = $index === 0 ? 'core_portrait' : 'action_plan';
+            $slot = $index === 0 ? 'synergy_primary' : 'synergy_action';
+            $blocksBySection[$sectionKey][] = new ResolvedBlock(
+                blockUid: "{$sectionKey}.synergy.{$synergy->synergyId}.{$slot}",
+                kind: $index === 0 ? 'callout' : 'paragraph',
+                component: 'BigFiveSynergyCallout',
+                blockId: "synergy_{$synergy->synergyId}_{$slot}",
+                resolvedCopy: $synergy->copy,
+                provenance: $this->provenanceRecorder->record(synergyRefs: ["synergies/{$synergy->synergyId}.json"]),
+                analytics: [
+                    'synergy_id' => $synergy->synergyId,
+                    'synergy_rank' => $index === 0 ? 'primary' : 'secondary',
+                    'slot' => $slot,
+                    'priority_weight' => $synergy->priorityWeight,
+                ],
+            );
         }
 
         foreach ($facetAnomalies as $anomaly) {

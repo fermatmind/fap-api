@@ -10,6 +10,14 @@ final class RegistryLoader
 {
     private const TRAIT_CODES = ['O', 'C', 'E', 'A', 'N'];
 
+    private const SYNERGY_IDS = [
+        'n_high_x_e_low',
+        'o_high_x_c_low',
+        'o_high_x_n_high',
+        'c_high_x_n_high',
+        'e_high_x_a_low',
+    ];
+
     public function __construct(
         private readonly ?string $registryPath = null,
     ) {}
@@ -27,6 +35,11 @@ final class RegistryLoader
             $modifiers[$traitCode] = $this->readJson($root."/modifiers/{$traitCode}.json");
         }
 
+        $synergies = [];
+        foreach (self::SYNERGY_IDS as $synergyId) {
+            $synergies[$synergyId] = $this->readJson($root."/synergies/{$synergyId}.json");
+        }
+
         return [
             'root' => $root,
             'manifest' => $this->readJson($root.'/manifest.json'),
@@ -35,9 +48,7 @@ final class RegistryLoader
             ],
             'atomic' => $atomic,
             'modifiers' => $modifiers,
-            'synergies' => [
-                'n_high_x_e_low' => $this->readJson($root.'/synergies/n_high_x_e_low.json'),
-            ],
+            'synergies' => $synergies,
             'facet_precision' => [
                 'N' => $this->readJson($root.'/facet_precision/N.json'),
             ],

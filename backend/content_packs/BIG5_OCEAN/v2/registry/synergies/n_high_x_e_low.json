@@ -12,8 +12,8 @@
   "priority_weight_formula": "abs(N-50)+abs(E-50)+abs(N-E)*0.5",
   "priority_hint": 100,
   "mutex_group": "stress_activation",
-  "mutual_excludes": ["o_high_x_n_high"],
-  "max_show": 1,
+  "mutual_excludes": ["o_high_x_n_high", "c_high_x_n_high"],
+  "max_show": 2,
   "section_targets": [
     { "section_key": "core_portrait", "slot": "synergy_primary", "kind": "callout" },
     { "section_key": "action_plan", "slot": "synergy_action", "kind": "paragraph" }

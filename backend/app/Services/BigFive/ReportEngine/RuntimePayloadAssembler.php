@@ -52,9 +52,15 @@ final class RuntimePayloadAssembler
                     'action_plan',
                     'methodology_and_access',
                 ],
-                'registry_scope' => 'all_traits_atomic_modifier_pr2',
+                'registry_scope' => 'more_synergy_rollout_pr3a',
                 'limited_rollouts' => [
-                    'synergy_traits' => ['N'],
+                    'synergies' => [
+                        'n_high_x_e_low',
+                        'o_high_x_c_low',
+                        'o_high_x_n_high',
+                        'c_high_x_n_high',
+                        'e_high_x_a_low',
+                    ],
                     'facet_precision_traits' => ['N'],
                     'action_rule_scope' => 'N scenario rules only',
                 ],

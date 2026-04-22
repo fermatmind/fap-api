@@ -76,14 +76,14 @@ final class BigFiveReportEngineNSliceTest extends TestCase
         );
     }
 
-    public function test_registry_keeps_pr1_n_only_synergy_facet_and_action_scope(): void
+    public function test_registry_keeps_pr3a_synergy_rollout_and_n_only_facet_action_scope(): void
     {
         $registry = app(RegistryLoader::class)->load();
 
         $this->assertSame(['O', 'C', 'E', 'A', 'N'], array_keys((array) $registry['atomic']));
         $this->assertSame(['O', 'C', 'E', 'A', 'N'], array_keys((array) $registry['modifiers']));
         $this->assertSame(['N'], array_keys((array) $registry['facet_precision']));
-        $this->assertSame(['n_high_x_e_low'], array_keys((array) $registry['synergies']));
+        $this->assertSame(['n_high_x_e_low', 'o_high_x_c_low', 'o_high_x_n_high', 'c_high_x_n_high', 'e_high_x_a_low'], array_keys((array) $registry['synergies']));
         $this->assertSame(['workplace', 'stress_recovery', 'personal_growth'], array_keys((array) $registry['action_rules']));
     }
 }

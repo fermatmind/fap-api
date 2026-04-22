@@ -1,0 +1,27 @@
+{
+  "schema": "fap.big5.synergy_rule.v1",
+  "synergy_id": "c_high_x_n_high",
+  "title": "戒备型完美主义",
+  "trigger": {
+    "all": [
+      { "trait": "C", "op": ">=", "value": 70 },
+      { "trait": "N", "op": ">=", "value": 70 }
+    ]
+  },
+  "priority_weight_formula": "abs(C-50)+abs(N-50)+abs(C-N)*0.5",
+  "priority_hint": 76,
+  "mutex_group": "stress_activation",
+  "mutual_excludes": ["n_high_x_e_low", "o_high_x_n_high"],
+  "max_show": 2,
+  "section_targets": [
+    { "section_key": "core_portrait", "slot": "synergy_primary", "kind": "callout" },
+    { "section_key": "action_plan", "slot": "synergy_action", "kind": "paragraph" }
+  ],
+  "copy": {
+    "headline": "你倾向于把事情做稳、做细，同时也更容易提前感到哪里可能出错。",
+    "body": "高尽责性会推动你设标准、控细节、追求完成质量，高情绪性会让风险和失误的体感更早进入系统。两者叠加时，执行力不只是动力，也可能带着戒备：你越在意做对，就越容易被“还不够稳”的信号牵住。",
+    "strength_sentence": "这组组合让你对质量、风险和责任边界更敏感，适合承担需要可靠性和前置预警的任务。",
+    "risk_sentence": "它的代价是：你可能把许多任务都处理成高标准任务，导致持续紧绷、反复检查或难以真正收工。",
+    "action_hook": "你的优先动作是区分必须高标准的事项和可以足够好的事项。"
+  }
+}

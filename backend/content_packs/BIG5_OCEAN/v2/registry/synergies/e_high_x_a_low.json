@@ -1,0 +1,28 @@
+{
+  "schema": "fap.big5.synergy_rule.v1",
+  "synergy_id": "e_high_x_a_low",
+  "title": "推进压强放大器",
+  "trigger": {
+    "all": [
+      { "trait": "E", "op": ">=", "value": 75 },
+      { "trait": "A", "op": "<=", "value": 35 },
+      { "expr": "abs(E-A) >= 30" }
+    ]
+  },
+  "priority_weight_formula": "abs(E-50)+abs(A-50)+abs(E-A)*0.5",
+  "priority_hint": 78,
+  "mutex_group": "interpersonal_pressure",
+  "mutual_excludes": [],
+  "max_show": 2,
+  "section_targets": [
+    { "section_key": "core_portrait", "slot": "synergy_primary", "kind": "callout" },
+    { "section_key": "action_plan", "slot": "synergy_action", "kind": "paragraph" }
+  ],
+  "copy": {
+    "headline": "你更容易把想法推到台前，也更少因为维持表面和气而自动降速。",
+    "body": "高外向性会提高你的表达、进入现场和推动互动的能量，低宜人性会让你在分歧、低效或不公平面前更少选择含糊退让。两者叠加时，你的推进感会很强，但别人接收到的可能不只是清晰，也包括压强。",
+    "strength_sentence": "这组组合让你在需要破局、表态和推动决策时更有存在感，也不容易被模糊共识拖住。",
+    "risk_sentence": "它的代价是：如果缺少节奏控制，你可能在还没建立足够理解前，就把对方推入防御或对抗。",
+    "action_hook": "你的优先动作是在推进前先确认对方是否理解目标，而不是只确认自己是否表达清楚。"
+  }
+}

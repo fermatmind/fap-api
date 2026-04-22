@@ -1,0 +1,28 @@
+{
+  "schema": "fap.big5.synergy_rule.v1",
+  "synergy_id": "o_high_x_c_low",
+  "title": "复杂理解 × 低续航推进摩擦",
+  "trigger": {
+    "all": [
+      { "trait": "O", "op": ">=", "value": 70 },
+      { "trait": "C", "op": "<=", "value": 35 },
+      { "expr": "abs(O-C) >= 25" }
+    ]
+  },
+  "priority_weight_formula": "abs(O-50)+abs(C-50)+abs(O-C)*0.5",
+  "priority_hint": 80,
+  "mutex_group": "execution_friction",
+  "mutual_excludes": [],
+  "max_show": 2,
+  "section_targets": [
+    { "section_key": "core_portrait", "slot": "synergy_primary", "kind": "callout" },
+    { "section_key": "action_plan", "slot": "synergy_action", "kind": "paragraph" }
+  ],
+  "copy": {
+    "headline": "你能看见很多可能性，但不一定会自然把它们压缩成一条可持续推进的路径。",
+    "body": "高开放性会让你快速看到问题背后的层次、变量和替代解释，低尽责性则让长期拆解、排程、收尾和重复执行更容易掉速。结果是：理解力跑在执行系统前面，脑内已经展开许多分支，现实推进却需要额外结构才能跟上。",
+    "strength_sentence": "这组组合让你不容易被单一答案困住，也更适合发现旧框架解释不了的新问题。",
+    "risk_sentence": "它的代价是：想法越复杂，越可能因为缺少收束机制而停留在构思、修订和重新开始之间。",
+    "action_hook": "你的优先动作不是减少想法，而是为最有价值的一条想法设置下一步、截止点和完成标准。"
+  }
+}
