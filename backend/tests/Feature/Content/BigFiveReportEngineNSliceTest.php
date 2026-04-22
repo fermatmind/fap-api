@@ -29,6 +29,38 @@ final class BigFiveReportEngineNSliceTest extends TestCase
         $this->assertSame($expected, $payload);
     }
 
+    public function test_it_preserves_v1_block_contract_and_provenance_shape(): void
+    {
+        $payload = app(BigFiveReportEngine::class)->generateCanonicalNSlice();
+
+        $this->assertSame([
+            'hero_summary',
+            'domains_overview',
+            'domain_deep_dive',
+            'facet_details',
+            'core_portrait',
+            'norms_comparison',
+            'action_plan',
+            'methodology_and_access',
+        ], array_map(static fn (array $section): string => (string) $section['section_key'], $payload['sections']));
+
+        foreach ($payload['sections'] as $section) {
+            foreach ((array) ($section['blocks'] ?? []) as $block) {
+                foreach (['block_uid', 'kind', 'component', 'block_id', 'resolved_copy', 'provenance', 'analytics'] as $requiredKey) {
+                    $this->assertArrayHasKey($requiredKey, $block);
+                }
+
+                $this->assertIsArray($block['resolved_copy']);
+                $this->assertIsArray($block['analytics']);
+
+                foreach (['atomic_refs', 'modifier_refs', 'synergy_refs', 'facet_refs'] as $provenanceKey) {
+                    $this->assertArrayHasKey($provenanceKey, $block['provenance']);
+                    $this->assertIsArray($block['provenance'][$provenanceKey]);
+                }
+            }
+        }
+    }
+
     public function test_registry_fixture_declares_expected_hits_that_match_engine_output(): void
     {
         $registry = app(RegistryLoader::class)->load();
@@ -42,5 +74,14 @@ final class BigFiveReportEngineNSliceTest extends TestCase
             data_get($fixture, 'expected_hits.facet_anomalies'),
             array_map(static fn (array $match): string => (string) $match['rule_id'], $payload['engine_decisions']['facet_anomalies'])
         );
+    }
+
+    public function test_registry_stays_limited_to_n_vertical_slice_assets(): void
+    {
+        $registry = app(RegistryLoader::class)->load();
+
+        $this->assertSame(['N'], array_keys((array) $registry['atomic']));
+        $this->assertSame(['N'], array_keys((array) $registry['modifiers']));
+        $this->assertSame(['N'], array_keys((array) $registry['facet_precision']));
     }
 }
