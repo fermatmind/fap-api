@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T00:00:00+08:00",
+  "updated_at": "2026-04-23T01:02:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -11,7 +11,7 @@
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "pr_open",
       "branch": "codex/big5-report-engine-n-slice",
-      "commit_sha": "17dcba10b0eb7f21fe84d00d202c85599dd10114",
+      "commit_sha": "acb31c79a9db0b05d94b859c647a5a0760150ed1",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/975",
       "checks": {
         "local": [
@@ -33,6 +33,18 @@
           },
           {
             "command": "php artisan test tests/Unit/Services/BigFive/ReportEngine tests/Feature/Content/BigFiveReportEngineNSliceTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan migrate",
+            "status": "passed"
+          },
+          {
+            "command": "APP_URL=http://127.0.0.1:18010 bash scripts/ci_verify_mbti.sh",
             "status": "passed"
           },
           {
