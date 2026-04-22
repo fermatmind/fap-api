@@ -157,7 +157,7 @@
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api-pr3a/backend",
       "status": "local_checks_passed",
       "branch": "codex/big5-report-engine-more-synergy",
-      "commit_sha": "",
+      "commit_sha": "39fe20fe5e3d704dbb129ce6c75e0d004fffb99f",
       "pr_url": "",
       "checks": {
         "local": [
@@ -183,6 +183,22 @@
           },
           {
             "command": "git diff --check",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan migrate --pretend --no-interaction",
+            "status": "passed"
+          },
+          {
+            "command": "bash scripts/ci_verify_mbti.sh",
+            "status": "failed_env_app_url_mismatch"
+          },
+          {
+            "command": "APP_URL=http://127.0.0.1:18010 bash scripts/ci_verify_mbti.sh",
             "status": "passed"
           }
         ],
