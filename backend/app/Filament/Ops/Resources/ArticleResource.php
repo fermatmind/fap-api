@@ -89,6 +89,7 @@ class ArticleResource extends Resource
                             ->extraAttributes(['class' => 'ops-article-workspace-section ops-article-workspace-section--main'])
                             ->schema([
                                 Forms\Components\TextInput::make('title')
+                                    ->label(__('ops.resources.articles.fields.title'))
                                     ->required()
                                     ->maxLength(255)
                                     ->columnSpanFull()
@@ -96,11 +97,13 @@ class ArticleResource extends Resource
                                     ->extraFieldWrapperAttributes(['class' => 'ops-article-workspace-field ops-article-workspace-field--title'])
                                     ->extraInputAttributes(['class' => 'ops-article-workspace-input ops-article-workspace-input--title']),
                                 Forms\Components\TextInput::make('slug')
+                                    ->label(__('ops.resources.articles.fields.slug'))
                                     ->required()
                                     ->maxLength(127)
                                     ->helperText(__('ops.resources.articles.helpers.slug'))
                                     ->extraFieldWrapperAttributes(['class' => 'ops-article-workspace-field']),
                                 Forms\Components\Textarea::make('excerpt')
+                                    ->label(__('ops.resources.articles.fields.excerpt'))
                                     ->rows(4)
                                     ->columnSpanFull()
                                     ->helperText(__('ops.resources.articles.helpers.excerpt'))
@@ -112,36 +115,45 @@ class ArticleResource extends Resource
                             ->extraAttributes(['class' => 'ops-article-workspace-section ops-article-workspace-section--main'])
                             ->schema([
                                 Forms\Components\MarkdownEditor::make('content_md')
+                                    ->label(__('ops.resources.articles.fields.content_md'))
                                     ->required()
                                     ->columnSpanFull()
                                     ->helperText(__('ops.resources.articles.helpers.content_md'))
                                     ->extraFieldWrapperAttributes(['class' => 'ops-article-workspace-field ops-article-workspace-field--editor']),
                                 Forms\Components\TextInput::make('author_name')
+                                    ->label(__('ops.resources.articles.fields.author_name'))
                                     ->maxLength(128)
                                     ->helperText(__('ops.resources.articles.helpers.author_name')),
                                 Forms\Components\TextInput::make('reviewer_name')
+                                    ->label(__('ops.resources.articles.fields.reviewer_name'))
                                     ->maxLength(128)
                                     ->helperText(__('ops.resources.articles.helpers.reviewer_name')),
                                 Forms\Components\TextInput::make('reading_minutes')
+                                    ->label(__('ops.resources.articles.fields.reading_minutes'))
                                     ->numeric()
                                     ->minValue(1)
                                     ->maxValue(1440)
                                     ->helperText(__('ops.resources.articles.helpers.reading_minutes')),
                                 Forms\Components\TextInput::make('cover_image_url')
+                                    ->label(__('ops.resources.articles.fields.cover_image_url'))
                                     ->maxLength(255)
                                     ->helperText(__('ops.resources.articles.helpers.cover_image_url')),
                                 Forms\Components\TextInput::make('cover_image_alt')
+                                    ->label(__('ops.resources.articles.fields.cover_image_alt'))
                                     ->maxLength(255)
                                     ->helperText(__('ops.resources.articles.helpers.cover_image_alt')),
                                 Forms\Components\TextInput::make('cover_image_width')
+                                    ->label(__('ops.resources.articles.fields.cover_image_width'))
                                     ->numeric()
                                     ->minValue(1)
                                     ->helperText(__('ops.resources.articles.helpers.cover_image_width')),
                                 Forms\Components\TextInput::make('cover_image_height')
+                                    ->label(__('ops.resources.articles.fields.cover_image_height'))
                                     ->numeric()
                                     ->minValue(1)
                                     ->helperText(__('ops.resources.articles.helpers.cover_image_height')),
                                 Forms\Components\KeyValue::make('cover_image_variants')
+                                    ->label(__('ops.resources.articles.fields.cover_image_variants'))
                                     ->columnSpanFull()
                                     ->helperText(__('ops.resources.articles.helpers.cover_image_variants')),
                             ])
@@ -161,6 +173,7 @@ class ArticleResource extends Resource
                                     ->content(fn (Forms\Get $get, ?Article $record) => ArticleWorkspace::renderEditorialCues($get, $record))
                                     ->columnSpanFull(),
                                 Forms\Components\Select::make('status')
+                                    ->label(__('ops.resources.articles.fields.status'))
                                     ->required()
                                     ->options(self::statusOptions())
                                     ->default('draft')
@@ -174,8 +187,10 @@ class ArticleResource extends Resource
                                     ->default(true)
                                     ->helperText(__('ops.resources.articles.helpers.is_indexable')),
                                 Forms\Components\DateTimePicker::make('published_at')
+                                    ->label(__('ops.resources.articles.fields.published'))
                                     ->helperText(__('ops.resources.articles.helpers.published_at')),
                                 Forms\Components\DateTimePicker::make('scheduled_at')
+                                    ->label(__('ops.resources.articles.fields.scheduled_at'))
                                     ->helperText(__('ops.resources.articles.helpers.scheduled_at')),
                             ]),
                         Forms\Components\Section::make(__('ops.resources.articles.sections.locale_taxonomy'))
@@ -183,6 +198,7 @@ class ArticleResource extends Resource
                             ->extraAttributes(['class' => 'ops-article-workspace-section ops-article-workspace-section--rail'])
                             ->schema([
                                 Forms\Components\TextInput::make('locale')
+                                    ->label(__('ops.resources.articles.fields.locale'))
                                     ->required()
                                     ->maxLength(16)
                                     ->default('en')
@@ -198,6 +214,7 @@ class ArticleResource extends Resource
                                     ->preload()
                                     ->helperText(__('ops.resources.articles.helpers.category_id')),
                                 BelongsToManyMultiSelect::make('tags')
+                                    ->label(__('ops.resources.articles.fields.tags'))
                                     ->relationship(
                                         'tags',
                                         'name',
@@ -207,12 +224,15 @@ class ArticleResource extends Resource
                                     ->preload()
                                     ->helperText(__('ops.resources.articles.helpers.tags')),
                                 Forms\Components\TextInput::make('related_test_slug')
+                                    ->label(__('ops.resources.articles.fields.related_test_slug'))
                                     ->maxLength(127)
                                     ->helperText(__('ops.resources.articles.helpers.related_test_slug')),
                                 Forms\Components\TextInput::make('voice')
+                                    ->label(__('ops.resources.articles.fields.voice'))
                                     ->maxLength(32)
                                     ->helperText(__('ops.resources.articles.helpers.voice')),
                                 Forms\Components\TextInput::make('voice_order')
+                                    ->label(__('ops.resources.articles.fields.voice_order'))
                                     ->numeric()
                                     ->minValue(0)
                                     ->maxValue(65535)
@@ -228,23 +248,29 @@ class ArticleResource extends Resource
                                     ->content(fn (Forms\Get $get) => ArticleWorkspace::renderSeoSnapshot($get))
                                     ->columnSpanFull(),
                                 Forms\Components\TextInput::make('seo_title')
+                                    ->label(__('ops.resources.articles.fields.seo_title'))
                                     ->maxLength(60)
                                     ->helperText(__('ops.resources.articles.helpers.seo_title')),
                                 Forms\Components\Textarea::make('seo_description')
+                                    ->label(__('ops.resources.articles.fields.seo_description'))
                                     ->rows(3)
                                     ->maxLength(160)
                                     ->helperText(__('ops.resources.articles.helpers.seo_description')),
                                 Forms\Components\TextInput::make('canonical_url')
+                                    ->label(__('ops.resources.articles.fields.canonical_url'))
                                     ->maxLength(255)
                                     ->helperText(__('ops.resources.articles.helpers.canonical_url')),
                                 Forms\Components\TextInput::make('og_title')
+                                    ->label(__('ops.resources.articles.fields.og_title'))
                                     ->maxLength(90)
                                     ->helperText(__('ops.resources.articles.helpers.og_title')),
                                 Forms\Components\Textarea::make('og_description')
+                                    ->label(__('ops.resources.articles.fields.og_description'))
                                     ->rows(3)
                                     ->maxLength(200)
                                     ->helperText(__('ops.resources.articles.helpers.og_description')),
                                 Forms\Components\TextInput::make('og_image_url')
+                                    ->label(__('ops.resources.articles.fields.og_image_url'))
                                     ->maxLength(255)
                                     ->helperText(__('ops.resources.articles.helpers.og_image_url')),
                             ]),
@@ -289,6 +315,7 @@ class ArticleResource extends Resource
                         'title' => $record->title,
                     ])->render()),
                 Tables\Columns\TextColumn::make('slug')
+                    ->label(__('ops.resources.articles.fields.slug'))
                     ->searchable()
                     ->copyable()
                     ->formatStateUsing(fn (string $state): string => '/'.trim($state, '/'))
@@ -301,6 +328,7 @@ class ArticleResource extends Resource
                     ->description(fn (Article $record): string => ArticleWorkspace::visibilityMeta($record))
                     ->color(fn (string $state): string => StatusBadge::color($state)),
                 Tables\Columns\TextColumn::make('locale')
+                    ->label(__('ops.resources.articles.fields.locale'))
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('category.name')
@@ -318,8 +346,10 @@ class ArticleResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
+                    ->label(__('ops.resources.articles.fields.status'))
                     ->options(self::statusOptions()),
                 Tables\Filters\SelectFilter::make('locale')
+                    ->label(__('ops.resources.articles.fields.locale'))
                     ->options(fn (): array => static::getEloquentQuery()
                         ->select('locale')
                         ->whereNotNull('locale')
