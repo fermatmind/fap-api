@@ -130,6 +130,10 @@ final class EnneagramScoringV11Test extends TestCase
         $forcedProjection = (new EnneagramPublicProjectionService)->build($forced, 'en');
 
         $this->assertSame(
+            round(100 * data_get($forcedProjection, 'scoring.wins.T2') / 32, 2),
+            data_get($forced, 'scores_0_100.T2')
+        );
+        $this->assertSame(
             (int) round(100 * data_get($forcedProjection, 'scoring.wins.T2') / data_get($forcedProjection, 'scoring.exposures.T2')),
             data_get($forcedProjection, 'display.preference100.T2')
         );

@@ -45,7 +45,7 @@ final class EnneagramForcedChoice144Scorer
             $aType = $this->normalizeTypeCode($meta['a_type'] ?? '');
             $bType = $this->normalizeTypeCode($meta['b_type'] ?? '');
             $typeCode = $this->normalizeTypeCode($meta[strtolower($choice).'_type'] ?? '');
-            if ($typeCode === '' || $aType === '' || $bType === '') {
+            if ($typeCode === '' || $aType === '' || $bType === '' || ! in_array($typeCode, [$aType, $bType], true)) {
                 throw new \InvalidArgumentException("ENNEAGRAM 144 key missing for question_id={$questionId}");
             }
 
@@ -70,8 +70,7 @@ final class EnneagramForcedChoice144Scorer
 
         $scoresPct = [];
         foreach ($rawCounts as $typeCode => $count) {
-            $exposure = (int) ($exposures[$typeCode] ?? 0);
-            $scoresPct[$typeCode] = $exposure > 0 ? round(($count / $exposure) * 100.0, 2) : 0.0;
+            $scoresPct[$typeCode] = round(($count / 32.0) * 100.0, 2);
         }
 
         $ranked = $this->rankTypes($rawCounts, $scoresPct);
