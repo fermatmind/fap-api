@@ -1,0 +1,106 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Services\BigFive\ReportEngine;
+
+use App\Services\BigFive\ReportEngine\Contracts\FacetAnomalyMatch;
+use App\Services\BigFive\ReportEngine\Contracts\ResolvedBlock;
+use App\Services\BigFive\ReportEngine\Contracts\ResolvedSection;
+use App\Services\BigFive\ReportEngine\Contracts\SynergyMatch;
+use App\Services\BigFive\ReportEngine\Resolver\ProvenanceRecorder;
+
+final class SectionInstructionAssembler
+{
+    private const SECTION_KEYS = [
+        'hero_summary',
+        'domains_overview',
+        'domain_deep_dive',
+        'facet_details',
+        'core_portrait',
+        'norms_comparison',
+        'action_plan',
+        'methodology_and_access',
+    ];
+
+    public function __construct(
+        private readonly ProvenanceRecorder $provenanceRecorder = new ProvenanceRecorder,
+    ) {}
+
+    /**
+     * @param  array<string,list<ResolvedBlock>>  $blocksBySection
+     * @param  list<SynergyMatch>  $synergies
+     * @param  list<FacetAnomalyMatch>  $facetAnomalies
+     * @param  array<string,mixed>  $registry
+     * @return list<ResolvedSection>
+     */
+    public function assemble(array $blocksBySection, array $synergies, array $facetAnomalies, array $registry): array
+    {
+        foreach ($synergies as $synergy) {
+            foreach ($synergy->sectionTargets as $target) {
+                if (! is_array($target)) {
+                    continue;
+                }
+                $sectionKey = (string) ($target['section_key'] ?? '');
+                if ($sectionKey === '') {
+                    continue;
+                }
+                $slot = (string) ($target['slot'] ?? 'synergy');
+                $blocksBySection[$sectionKey][] = new ResolvedBlock(
+                    blockUid: "{$sectionKey}.synergy.{$synergy->synergyId}.{$slot}",
+                    kind: (string) ($target['kind'] ?? 'callout'),
+                    component: 'BigFiveSynergyCallout',
+                    blockId: "synergy_{$synergy->synergyId}_{$slot}",
+                    resolvedCopy: $synergy->copy,
+                    provenance: $this->provenanceRecorder->record(synergyRefs: ["synergies/{$synergy->synergyId}.json"]),
+                    analytics: [
+                        'synergy_id' => $synergy->synergyId,
+                        'priority_weight' => $synergy->priorityWeight,
+                    ],
+                );
+            }
+        }
+
+        foreach ($facetAnomalies as $anomaly) {
+            foreach ($anomaly->sectionTargets as $sectionKey) {
+                $blocksBySection[$sectionKey][] = new ResolvedBlock(
+                    blockUid: "{$sectionKey}.facet.{$anomaly->ruleId}",
+                    kind: 'facet_anomaly',
+                    component: 'BigFiveFacetPrecisionBlock',
+                    blockId: "facet_{$anomaly->ruleId}",
+                    resolvedCopy: $anomaly->copy,
+                    provenance: $this->provenanceRecorder->record(facetRefs: ["facet_precision/N.json#rules.{$anomaly->ruleId}"]),
+                    analytics: [
+                        'facet_code' => $anomaly->facetCode,
+                        'delta_abs' => $anomaly->deltaAbs,
+                    ],
+                );
+            }
+        }
+
+        $methodology = is_array($registry['shared']['methodology'] ?? null) ? $registry['shared']['methodology'] : [];
+        if ($methodology !== []) {
+            $blocksBySection['methodology_and_access'][] = new ResolvedBlock(
+                blockUid: 'methodology_and_access.shared.methodology',
+                kind: 'methodology',
+                component: 'BigFiveMethodologyBlock',
+                blockId: 'shared_methodology_pr1',
+                resolvedCopy: $methodology,
+                provenance: $this->provenanceRecorder->record(['shared/methodology.json']),
+                analytics: ['source' => 'shared'],
+            );
+        }
+
+        $sections = [];
+        foreach (self::SECTION_KEYS as $sectionKey) {
+            $blocks = $blocksBySection[$sectionKey] ?? [];
+            $sections[] = new ResolvedSection(
+                sectionKey: $sectionKey,
+                status: $blocks === [] ? 'not_populated_in_pr1' : 'populated',
+                blocks: $blocks,
+            );
+        }
+
+        return $sections;
+    }
+}

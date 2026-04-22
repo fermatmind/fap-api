@@ -1,0 +1,28 @@
+{
+  "schema": "fap.big5.synergy_rule.v1",
+  "synergy_id": "n_high_x_e_low",
+  "title": "内部高压锅效应",
+  "trigger": {
+    "all": [
+      { "trait": "N", "op": ">=", "value": 65 },
+      { "trait": "E", "op": "<=", "value": 35 },
+      { "expr": "abs(N-E) >= 20" }
+    ]
+  },
+  "priority_weight_formula": "abs(N-50)+abs(E-50)+abs(N-E)*0.5",
+  "priority_hint": 100,
+  "mutex_group": "stress_activation",
+  "mutual_excludes": ["o_high_x_n_high"],
+  "max_show": 1,
+  "section_targets": [
+    { "section_key": "core_portrait", "slot": "synergy_primary", "kind": "callout" },
+    { "section_key": "action_plan", "slot": "synergy_action", "kind": "paragraph" }
+  ],
+  "copy": {
+    "headline": "你会比多数人更早感到张力，但又不太会通过持续表达把它带出去。",
+    "body": "高情绪性让压力、误解和不确定性更早进入系统，低外向性又让这份负荷不太会通过现场表达、社交释放或高频互动被带出去。结果不是当场失控，而是外面看起来还算稳，里面却已经开始长时间高负荷运转。",
+    "strength_sentence": "这组组合会让你比很多人更早发现环境和关系中的裂缝，也更不容易盲目进入高刺激场域。",
+    "risk_sentence": "它的代价是：你更容易进入“想很多但迟迟不进入、内部很忙但外面看不太出来”的状态。",
+    "action_hook": "你的关键课题不是逼自己更外放，而是更早外化感受、更低成本表达边界、更主动安排恢复。"
+  }
+}

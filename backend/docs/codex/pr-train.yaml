@@ -6,6 +6,36 @@ require_clean_worktree: true
 execution_mode: local_clone_preferred
 
 prs:
+  - id: PR-BIG5-REPORT-ENGINE-N-SLICE
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/big5-report-engine-n-slice
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      Big Five Report Engine PR1 backend-only scaffold plus N dimension
+      vertical slice. Add the v1 runtime payload contract, mini declarative
+      evaluator, N registry assets, canonical O59/C32/E20/A55/N68 fixture,
+      and focused tests without connecting the engine to the live Big Five
+      result, report, access, PDF, history, scoring, frontend, or MBTI paths.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "python3 -m json.tool content_packs/BIG5_OCEAN/v2/registry/manifest.json >/dev/null"
+      - "python3 -m json.tool tests/Fixtures/big5_engine/expected_canonical_n_slice_payload.json >/dev/null"
+      - "vendor/bin/pint --test app/Services/BigFive/ReportEngine tests/Unit/Services/BigFive/ReportEngine tests/Feature/Content/BigFiveReportEngineNSliceTest.php"
+      - "php artisan test tests/Unit/Services/BigFive/ReportEngine tests/Feature/Content/BigFiveReportEngineNSliceTest.php"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-ENNEAGRAM-V11
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

@@ -1,0 +1,857 @@
+{
+    "schema_version": "fap.big5.report.v1",
+    "report_id": "big5-report-engine-canonical_n_slice_sensitive_independent_v1",
+    "locale": "zh-CN",
+    "scale_code": "BIG5_OCEAN",
+    "form_code": "big5_90",
+    "meta": {
+        "fixture_id": "canonical_n_slice_sensitive_independent_v1",
+        "sample_label": "高敏感 × 中高开放 × 克制进入 × 低续航推进"
+    },
+    "score_vector": {
+        "domains": {
+            "O": {
+                "percentile": 59,
+                "band": "mid",
+                "gradient_id": "o_g3"
+            },
+            "C": {
+                "percentile": 32,
+                "band": "low_mid",
+                "gradient_id": "c_g2"
+            },
+            "E": {
+                "percentile": 20,
+                "band": "low",
+                "gradient_id": "e_g1"
+            },
+            "A": {
+                "percentile": 55,
+                "band": "mid",
+                "gradient_id": "a_g3"
+            },
+            "N": {
+                "percentile": 68,
+                "band": "high_mid",
+                "gradient_id": "n_g4"
+            }
+        },
+        "facets": {
+            "N1": {
+                "percentile": 98,
+                "domain": "N"
+            },
+            "N2": {
+                "percentile": 65,
+                "domain": "N"
+            },
+            "N3": {
+                "percentile": 98,
+                "domain": "N"
+            },
+            "N4": {
+                "percentile": 8,
+                "domain": "N"
+            },
+            "N5": {
+                "percentile": 95,
+                "domain": "N"
+            },
+            "N6": {
+                "percentile": 13,
+                "domain": "N"
+            },
+            "C1": {
+                "percentile": 97,
+                "domain": "C"
+            },
+            "C2": {
+                "percentile": 89,
+                "domain": "C"
+            },
+            "C3": {
+                "percentile": 15,
+                "domain": "C"
+            },
+            "C4": {
+                "percentile": 15,
+                "domain": "C"
+            },
+            "C5": {
+                "percentile": 2,
+                "domain": "C"
+            },
+            "C6": {
+                "percentile": 10,
+                "domain": "C"
+            },
+            "E1": {
+                "percentile": 57,
+                "domain": "E"
+            },
+            "E2": {
+                "percentile": 53,
+                "domain": "E"
+            },
+            "E3": {
+                "percentile": 12,
+                "domain": "E"
+            },
+            "E4": {
+                "percentile": 4,
+                "domain": "E"
+            },
+            "E5": {
+                "percentile": 4,
+                "domain": "E"
+            },
+            "E6": {
+                "percentile": 2,
+                "domain": "E"
+            }
+        }
+    },
+    "engine_decisions": {
+        "dominant_traits": [
+            "N",
+            "O"
+        ],
+        "selected_synergies": [
+            {
+                "synergy_id": "n_high_x_e_low",
+                "title": "内部高压锅效应",
+                "priority_weight": 72.0,
+                "mutex_group": "stress_activation",
+                "section_targets": [
+                    {
+                        "section_key": "core_portrait",
+                        "slot": "synergy_primary",
+                        "kind": "callout"
+                    },
+                    {
+                        "section_key": "action_plan",
+                        "slot": "synergy_action",
+                        "kind": "paragraph"
+                    }
+                ]
+            }
+        ],
+        "facet_anomalies": [
+            {
+                "rule_id": "n1_high_spike",
+                "facet_code": "N1",
+                "anomaly_type": "positive_spike",
+                "domain_percentile": 68,
+                "facet_percentile": 98,
+                "delta_abs": 30,
+                "section_targets": [
+                    "facet_details"
+                ]
+            },
+            {
+                "rule_id": "n3_high_spike",
+                "facet_code": "N3",
+                "anomaly_type": "positive_spike",
+                "domain_percentile": 68,
+                "facet_percentile": 98,
+                "delta_abs": 30,
+                "section_targets": [
+                    "facet_details",
+                    "core_portrait"
+                ]
+            },
+            {
+                "rule_id": "n5_high_spike",
+                "facet_code": "N5",
+                "anomaly_type": "positive_spike",
+                "domain_percentile": 68,
+                "facet_percentile": 95,
+                "delta_abs": 27,
+                "section_targets": [
+                    "facet_details",
+                    "action_plan"
+                ]
+            },
+            {
+                "rule_id": "n4_low_with_n_high",
+                "facet_code": "N4",
+                "anomaly_type": "negative_spike",
+                "domain_percentile": 68,
+                "facet_percentile": 8,
+                "delta_abs": 60,
+                "section_targets": [
+                    "facet_details",
+                    "core_portrait"
+                ]
+            },
+            {
+                "rule_id": "n6_low_with_n_high",
+                "facet_code": "N6",
+                "anomaly_type": "negative_spike",
+                "domain_percentile": 68,
+                "facet_percentile": 13,
+                "delta_abs": 55,
+                "section_targets": [
+                    "facet_details",
+                    "action_plan"
+                ]
+            }
+        ]
+    },
+    "sections": [
+        {
+            "section_key": "hero_summary",
+            "status": "populated",
+            "blocks": [
+                {
+                    "block_uid": "hero_summary.atomic.N.high",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_N_high",
+                    "resolved_copy": {
+                        "headline": "你的情绪系统偏高敏感——这既是预警力，也是成本。",
+                        "body_core": "你比很多人更早感到不对劲，也更容易在模糊边界、反复误解和不确定性中产生明显内耗。",
+                        "injections": {
+                            "headline_extension": "——这意味着你更快感到不对劲，内部负荷上升更早。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/N.json#bands.high.slots.hero_summary"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/N.json#gradients.n_g4"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "N",
+                        "band": "high",
+                        "percentile": 68,
+                        "modifier_gradient_id": "n_g4",
+                        "modifier_label": "高体感预警"
+                    }
+                }
+            ]
+        },
+        {
+            "section_key": "domains_overview",
+            "status": "not_populated_in_pr1",
+            "blocks": []
+        },
+        {
+            "section_key": "domain_deep_dive",
+            "status": "populated",
+            "blocks": [
+                {
+                    "block_uid": "domain_deep_dive.atomic.N.high",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_N_high",
+                    "resolved_copy": {
+                        "definition": "情绪性决定你对压力、风险、评价、不确定性和失控感的反应强度。",
+                        "strengths": [
+                            "风险觉察更快",
+                            "更容易察觉关系和环境变化",
+                            "不容易迟钝地忽略小裂缝"
+                        ],
+                        "costs": [
+                            "更容易累",
+                            "更容易把外部张力带回内部",
+                            "更容易在事情尚未爆发前就先承担心理成本"
+                        ],
+                        "daily_life": "你不是没有能力，而是更需要恢复机制、边界和稳定节奏来承托自己的反应强度。",
+                        "injections": {
+                            "risk_sentence": "在模糊边界和反复拉扯的协作中，你会比多数人更早体验到心理耗损。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/N.json#bands.high.slots.domain_deep_dive"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/N.json#gradients.n_g4"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "N",
+                        "band": "high",
+                        "percentile": 68,
+                        "modifier_gradient_id": "n_g4",
+                        "modifier_label": "高体感预警"
+                    }
+                }
+            ]
+        },
+        {
+            "section_key": "facet_details",
+            "status": "populated",
+            "blocks": [
+                {
+                    "block_uid": "facet_details.facet.n1_high_spike",
+                    "kind": "facet_anomaly",
+                    "component": "BigFiveFacetPrecisionBlock",
+                    "block_id": "facet_n1_high_spike",
+                    "resolved_copy": {
+                        "title": "你的高敏感首先表现为“预警提前”，而不是当场崩溃。",
+                        "body": "焦虑相关 facet 明显高于 domain 均值，说明你最先被拉高的通常不是情绪外露，而是对风险、失误和不确定的提前预警。你会更早感到“这里可能要出问题了”。"
+                    },
+                    "provenance": {
+                        "atomic_refs": [],
+                        "modifier_refs": [],
+                        "synergy_refs": [],
+                        "facet_refs": [
+                            "facet_precision/N.json#rules.n1_high_spike"
+                        ]
+                    },
+                    "analytics": {
+                        "facet_code": "N1",
+                        "delta_abs": 30
+                    }
+                },
+                {
+                    "block_uid": "facet_details.facet.n3_high_spike",
+                    "kind": "facet_anomaly",
+                    "component": "BigFiveFacetPrecisionBlock",
+                    "block_id": "facet_n3_high_spike",
+                    "resolved_copy": {
+                        "title": "你的负荷更像“慢性下沉”，不是一次性炸裂。",
+                        "body": "低落与耗竭相关 facet 明显高于 domain 均值，说明你更容易在长时间拉扯和持续不确定里，慢慢被抽走心力，而不是立刻外显爆发。"
+                    },
+                    "provenance": {
+                        "atomic_refs": [],
+                        "modifier_refs": [],
+                        "synergy_refs": [],
+                        "facet_refs": [
+                            "facet_precision/N.json#rules.n3_high_spike"
+                        ]
+                    },
+                    "analytics": {
+                        "facet_code": "N3",
+                        "delta_abs": 30
+                    }
+                },
+                {
+                    "block_uid": "facet_details.facet.n5_high_spike",
+                    "kind": "facet_anomaly",
+                    "component": "BigFiveFacetPrecisionBlock",
+                    "block_id": "facet_n5_high_spike",
+                    "resolved_copy": {
+                        "title": "当负荷过高时，你更容易想“马上退出”，而不是慢慢再忍一会儿。",
+                        "body": "冲动/脱离相关 facet 明显高于 domain 均值，说明当系统过载时，你的风险不是持续大吵，而是突然想切断、离开、暂停一切。"
+                    },
+                    "provenance": {
+                        "atomic_refs": [],
+                        "modifier_refs": [],
+                        "synergy_refs": [],
+                        "facet_refs": [
+                            "facet_precision/N.json#rules.n5_high_spike"
+                        ]
+                    },
+                    "analytics": {
+                        "facet_code": "N5",
+                        "delta_abs": 27
+                    }
+                },
+                {
+                    "block_uid": "facet_details.facet.n4_low_with_n_high",
+                    "kind": "facet_anomaly",
+                    "component": "BigFiveFacetPrecisionBlock",
+                    "block_id": "facet_n4_low_with_n_high",
+                    "resolved_copy": {
+                        "title": "你不是典型的“公开羞怯型敏感”。",
+                        "body": "虽然 domain N 偏高，但自我意识/羞怯相关 facet 明显偏低，说明你的高敏感不主要表现为“在人前特别退缩”，而更像内部高负荷、外部仍尽量维持正常。"
+                    },
+                    "provenance": {
+                        "atomic_refs": [],
+                        "modifier_refs": [],
+                        "synergy_refs": [],
+                        "facet_refs": [
+                            "facet_precision/N.json#rules.n4_low_with_n_high"
+                        ]
+                    },
+                    "analytics": {
+                        "facet_code": "N4",
+                        "delta_abs": 60
+                    }
+                },
+                {
+                    "block_uid": "facet_details.facet.n6_low_with_n_high",
+                    "kind": "facet_anomaly",
+                    "component": "BigFiveFacetPrecisionBlock",
+                    "block_id": "facet_n6_low_with_n_high",
+                    "resolved_copy": {
+                        "title": "你不是“脆”，你更像“能扛，但扛久了会突然掉线”。",
+                        "body": "脆弱性相关 facet 显著低于 domain 均值，说明你不一定会很快公开显得撑不住；更常见的模式是：前面看起来还在扛，后面突然明显没电。"
+                    },
+                    "provenance": {
+                        "atomic_refs": [],
+                        "modifier_refs": [],
+                        "synergy_refs": [],
+                        "facet_refs": [
+                            "facet_precision/N.json#rules.n6_low_with_n_high"
+                        ]
+                    },
+                    "analytics": {
+                        "facet_code": "N6",
+                        "delta_abs": 55
+                    }
+                }
+            ]
+        },
+        {
+            "section_key": "core_portrait",
+            "status": "populated",
+            "blocks": [
+                {
+                    "block_uid": "core_portrait.atomic.N.high",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_N_high",
+                    "resolved_copy": {
+                        "identity": "你的感受系统强、预警系统强、内在负荷也强。",
+                        "default_style": "你更早知道哪里不对，也更早因此付出心理成本。",
+                        "injections": {
+                            "load_sentence": "别人还在说“先看看”，你可能已经在内部开始承担真实成本。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/N.json#bands.high.slots.core_portrait"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/N.json#gradients.n_g4"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "N",
+                        "band": "high",
+                        "percentile": 68,
+                        "modifier_gradient_id": "n_g4",
+                        "modifier_label": "高体感预警"
+                    }
+                },
+                {
+                    "block_uid": "core_portrait.synergy.n_high_x_e_low.synergy_primary",
+                    "kind": "callout",
+                    "component": "BigFiveSynergyCallout",
+                    "block_id": "synergy_n_high_x_e_low_synergy_primary",
+                    "resolved_copy": {
+                        "headline": "你会比多数人更早感到张力，但又不太会通过持续表达把它带出去。",
+                        "body": "高情绪性让压力、误解和不确定性更早进入系统，低外向性又让这份负荷不太会通过现场表达、社交释放或高频互动被带出去。结果不是当场失控，而是外面看起来还算稳，里面却已经开始长时间高负荷运转。",
+                        "strength_sentence": "这组组合会让你比很多人更早发现环境和关系中的裂缝，也更不容易盲目进入高刺激场域。",
+                        "risk_sentence": "它的代价是：你更容易进入“想很多但迟迟不进入、内部很忙但外面看不太出来”的状态。",
+                        "action_hook": "你的关键课题不是逼自己更外放，而是更早外化感受、更低成本表达边界、更主动安排恢复。"
+                    },
+                    "provenance": {
+                        "atomic_refs": [],
+                        "modifier_refs": [],
+                        "synergy_refs": [
+                            "synergies/n_high_x_e_low.json"
+                        ],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "synergy_id": "n_high_x_e_low",
+                        "priority_weight": 72.0
+                    }
+                },
+                {
+                    "block_uid": "core_portrait.facet.n3_high_spike",
+                    "kind": "facet_anomaly",
+                    "component": "BigFiveFacetPrecisionBlock",
+                    "block_id": "facet_n3_high_spike",
+                    "resolved_copy": {
+                        "title": "你的负荷更像“慢性下沉”，不是一次性炸裂。",
+                        "body": "低落与耗竭相关 facet 明显高于 domain 均值，说明你更容易在长时间拉扯和持续不确定里，慢慢被抽走心力，而不是立刻外显爆发。"
+                    },
+                    "provenance": {
+                        "atomic_refs": [],
+                        "modifier_refs": [],
+                        "synergy_refs": [],
+                        "facet_refs": [
+                            "facet_precision/N.json#rules.n3_high_spike"
+                        ]
+                    },
+                    "analytics": {
+                        "facet_code": "N3",
+                        "delta_abs": 30
+                    }
+                },
+                {
+                    "block_uid": "core_portrait.facet.n4_low_with_n_high",
+                    "kind": "facet_anomaly",
+                    "component": "BigFiveFacetPrecisionBlock",
+                    "block_id": "facet_n4_low_with_n_high",
+                    "resolved_copy": {
+                        "title": "你不是典型的“公开羞怯型敏感”。",
+                        "body": "虽然 domain N 偏高，但自我意识/羞怯相关 facet 明显偏低，说明你的高敏感不主要表现为“在人前特别退缩”，而更像内部高负荷、外部仍尽量维持正常。"
+                    },
+                    "provenance": {
+                        "atomic_refs": [],
+                        "modifier_refs": [],
+                        "synergy_refs": [],
+                        "facet_refs": [
+                            "facet_precision/N.json#rules.n4_low_with_n_high"
+                        ]
+                    },
+                    "analytics": {
+                        "facet_code": "N4",
+                        "delta_abs": 60
+                    }
+                }
+            ]
+        },
+        {
+            "section_key": "norms_comparison",
+            "status": "populated",
+            "blocks": [
+                {
+                    "block_uid": "norms_comparison.atomic.N.high",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_N_high",
+                    "resolved_copy": {
+                        "relative_meaning": "在参考样本中，你的压力反应强度更突出，这说明你更自然地活在高体感预警模式里。",
+                        "injections": {
+                            "compare_sentence": "这说明你在参考样本里处于明显偏敏感的位置，不是偶发起波，而是更自然地更早有体感。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/N.json#bands.high.slots.norms_comparison"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/N.json#gradients.n_g4"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "N",
+                        "band": "high",
+                        "percentile": 68,
+                        "modifier_gradient_id": "n_g4",
+                        "modifier_label": "高体感预警"
+                    }
+                }
+            ]
+        },
+        {
+            "section_key": "action_plan",
+            "status": "populated",
+            "blocks": [
+                {
+                    "block_uid": "action_plan.atomic.N.high",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_N_high",
+                    "resolved_copy": {
+                        "priority": "你的关键课题不是“别敏感”，而是别让敏感长期只停留在内部。",
+                        "injections": {
+                            "urgency_sentence": "对你来说，恢复不是附属动作，而是维持稳定输出的前提。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/N.json#bands.high.slots.action_plan"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/N.json#gradients.n_g4"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "N",
+                        "band": "high",
+                        "percentile": 68,
+                        "modifier_gradient_id": "n_g4",
+                        "modifier_label": "高体感预警"
+                    }
+                },
+                {
+                    "block_uid": "action_plan.synergy.n_high_x_e_low.synergy_action",
+                    "kind": "paragraph",
+                    "component": "BigFiveSynergyCallout",
+                    "block_id": "synergy_n_high_x_e_low_synergy_action",
+                    "resolved_copy": {
+                        "headline": "你会比多数人更早感到张力，但又不太会通过持续表达把它带出去。",
+                        "body": "高情绪性让压力、误解和不确定性更早进入系统，低外向性又让这份负荷不太会通过现场表达、社交释放或高频互动被带出去。结果不是当场失控，而是外面看起来还算稳，里面却已经开始长时间高负荷运转。",
+                        "strength_sentence": "这组组合会让你比很多人更早发现环境和关系中的裂缝，也更不容易盲目进入高刺激场域。",
+                        "risk_sentence": "它的代价是：你更容易进入“想很多但迟迟不进入、内部很忙但外面看不太出来”的状态。",
+                        "action_hook": "你的关键课题不是逼自己更外放，而是更早外化感受、更低成本表达边界、更主动安排恢复。"
+                    },
+                    "provenance": {
+                        "atomic_refs": [],
+                        "modifier_refs": [],
+                        "synergy_refs": [
+                            "synergies/n_high_x_e_low.json"
+                        ],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "synergy_id": "n_high_x_e_low",
+                        "priority_weight": 72.0
+                    }
+                },
+                {
+                    "block_uid": "action_plan.facet.n5_high_spike",
+                    "kind": "facet_anomaly",
+                    "component": "BigFiveFacetPrecisionBlock",
+                    "block_id": "facet_n5_high_spike",
+                    "resolved_copy": {
+                        "title": "当负荷过高时，你更容易想“马上退出”，而不是慢慢再忍一会儿。",
+                        "body": "冲动/脱离相关 facet 明显高于 domain 均值，说明当系统过载时，你的风险不是持续大吵，而是突然想切断、离开、暂停一切。"
+                    },
+                    "provenance": {
+                        "atomic_refs": [],
+                        "modifier_refs": [],
+                        "synergy_refs": [],
+                        "facet_refs": [
+                            "facet_precision/N.json#rules.n5_high_spike"
+                        ]
+                    },
+                    "analytics": {
+                        "facet_code": "N5",
+                        "delta_abs": 27
+                    }
+                },
+                {
+                    "block_uid": "action_plan.facet.n6_low_with_n_high",
+                    "kind": "facet_anomaly",
+                    "component": "BigFiveFacetPrecisionBlock",
+                    "block_id": "facet_n6_low_with_n_high",
+                    "resolved_copy": {
+                        "title": "你不是“脆”，你更像“能扛，但扛久了会突然掉线”。",
+                        "body": "脆弱性相关 facet 显著低于 domain 均值，说明你不一定会很快公开显得撑不住；更常见的模式是：前面看起来还在扛，后面突然明显没电。"
+                    },
+                    "provenance": {
+                        "atomic_refs": [],
+                        "modifier_refs": [],
+                        "synergy_refs": [],
+                        "facet_refs": [
+                            "facet_precision/N.json#rules.n6_low_with_n_high"
+                        ]
+                    },
+                    "analytics": {
+                        "facet_code": "N6",
+                        "delta_abs": 55
+                    }
+                }
+            ]
+        },
+        {
+            "section_key": "methodology_and_access",
+            "status": "populated",
+            "blocks": [
+                {
+                    "block_uid": "methodology_and_access.shared.methodology",
+                    "kind": "methodology",
+                    "component": "BigFiveMethodologyBlock",
+                    "block_id": "shared_methodology_pr1",
+                    "resolved_copy": {
+                        "schema": "fap.big5.shared_methodology.v1",
+                        "title": "PR1 方法说明",
+                        "body": "本 payload 由 Big Five Report Engine PR1 的 N 维度垂直切片生成；未覆盖 section 使用 status=not_populated_in_pr1，现网评分链和现网报告链不读取本 registry。",
+                        "access_note": "此结构服务未来 8 section 承载位，不代表生产 AttemptReadController 已接入。"
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "shared/methodology.json"
+                        ],
+                        "modifier_refs": [],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "source": "shared"
+                    }
+                }
+            ]
+        }
+    ],
+    "action_matrix": {
+        "workplace": [
+            {
+                "rule_id": "n_work_continue_risk_sensing_60_79",
+                "scenario": "workplace",
+                "trait_code": "N",
+                "bucket": "continue",
+                "scenario_tags": [
+                    "workplace"
+                ],
+                "difficulty_level": "low",
+                "time_horizon": "this_week",
+                "title": "继续保留你的风险感知",
+                "body": "不要把更快感到不对劲误解成负担。对你来说，它首先是一种预警力。"
+            },
+            {
+                "rule_id": "n_work_start_pre_meeting_boundary_note_60_79",
+                "scenario": "workplace",
+                "trait_code": "N",
+                "bucket": "start",
+                "scenario_tags": [
+                    "workplace"
+                ],
+                "difficulty_level": "low",
+                "time_horizon": "this_week",
+                "title": "会前写一句边界提醒",
+                "body": "在高摩擦或模糊边界的会议前，先写下一句：这次我最不能接受的模糊点是什么。"
+            },
+            {
+                "rule_id": "n_work_stop_hidden_load_60_79",
+                "scenario": "workplace",
+                "trait_code": "N",
+                "bucket": "stop",
+                "scenario_tags": [
+                    "workplace"
+                ],
+                "difficulty_level": "mid",
+                "time_horizon": "this_week",
+                "title": "停止默默吞下多余负荷",
+                "body": "当你已经明显感觉到任务、关系或节奏正在耗你时，不要继续把这部分代价全放在内部处理。"
+            },
+            {
+                "rule_id": "n_work_observe_trigger_meetings_60_100",
+                "scenario": "workplace",
+                "trait_code": "N",
+                "bucket": "observe",
+                "scenario_tags": [
+                    "workplace"
+                ],
+                "difficulty_level": "low",
+                "time_horizon": "two_weeks",
+                "title": "记录最耗你的会议类型",
+                "body": "连续两周记录：哪些会议最容易让你提前进入高负荷——目标模糊、责任不清，还是反复拉扯。"
+            }
+        ],
+        "stress_recovery": [
+            {
+                "rule_id": "n_recovery_start_10min_reset_60_79",
+                "scenario": "stress_recovery",
+                "trait_code": "N",
+                "bucket": "start",
+                "scenario_tags": [
+                    "stress_recovery"
+                ],
+                "difficulty_level": "low",
+                "time_horizon": "today",
+                "title": "启动 10 分钟脱离恢复",
+                "body": "每次你明显感觉到负荷被拉高时，先物理脱离 10 分钟，不要继续一边耗一边扛。"
+            },
+            {
+                "rule_id": "n_recovery_continue_body_signal_log_40_79",
+                "scenario": "stress_recovery",
+                "trait_code": "N",
+                "bucket": "continue",
+                "scenario_tags": [
+                    "stress_recovery"
+                ],
+                "difficulty_level": "low",
+                "time_horizon": "this_week",
+                "title": "继续记录身体信号",
+                "body": "把你的体感当成系统日志，而不是当成麻烦。心跳、烦躁、注意力涣散，都是有效信号。"
+            },
+            {
+                "rule_id": "n_recovery_stop_micro_stimulation_60_100",
+                "scenario": "stress_recovery",
+                "trait_code": "N",
+                "bucket": "stop",
+                "scenario_tags": [
+                    "stress_recovery"
+                ],
+                "difficulty_level": "mid",
+                "time_horizon": "this_week",
+                "title": "停止边刷边恢复",
+                "body": "高负荷时不要一边刷消息、一边恢复。对你来说，那不是放松，而是换一种刺激继续拖住系统。"
+            },
+            {
+                "rule_id": "n_recovery_observe_real_recovery_60_79",
+                "scenario": "stress_recovery",
+                "trait_code": "N",
+                "bucket": "observe",
+                "scenario_tags": [
+                    "stress_recovery"
+                ],
+                "difficulty_level": "low",
+                "time_horizon": "two_weeks",
+                "title": "找出真正能让你掉负荷的恢复动作",
+                "body": "连续两周观察：散步、洗澡、关机、写下来、独处，哪一个最能让你从“高负荷”真正回落。"
+            }
+        ],
+        "personal_growth": [
+            {
+                "rule_id": "n_growth_start_name_signal_40_79",
+                "scenario": "personal_growth",
+                "trait_code": "N",
+                "bucket": "start",
+                "scenario_tags": [
+                    "personal_growth"
+                ],
+                "difficulty_level": "low",
+                "time_horizon": "today",
+                "title": "先命名，不先评判",
+                "body": "当你开始觉得烦、累、乱、退时，先命名：我现在更像是焦虑、受伤、失控感，还是单纯疲惫？"
+            },
+            {
+                "rule_id": "n_growth_start_boundary_sentence_60_79",
+                "scenario": "personal_growth",
+                "trait_code": "N",
+                "bucket": "start",
+                "scenario_tags": [
+                    "personal_growth",
+                    "relationships"
+                ],
+                "difficulty_level": "mid",
+                "time_horizon": "this_week",
+                "title": "练一句低成本边界表达",
+                "body": "预先准备一句标准边界句：‘我现在需要一点时间整理，再继续讨论。’"
+            },
+            {
+                "rule_id": "n_growth_stop_catastrophe_loop_60_100",
+                "scenario": "personal_growth",
+                "trait_code": "N",
+                "bucket": "stop",
+                "scenario_tags": [
+                    "personal_growth"
+                ],
+                "difficulty_level": "mid",
+                "time_horizon": "this_week",
+                "title": "停止无限推演最坏后果",
+                "body": "当你已经开始连续推演最坏版本时，暂停继续推演，转而只写“当前最可行动的一步”。"
+            },
+            {
+                "rule_id": "n_growth_observe_real_vs_predicted_cost_40_100",
+                "scenario": "personal_growth",
+                "trait_code": "N",
+                "bucket": "observe",
+                "scenario_tags": [
+                    "personal_growth"
+                ],
+                "difficulty_level": "low",
+                "time_horizon": "two_weeks",
+                "title": "比较“我担心的代价”和“真实发生的代价”",
+                "body": "连续两周做一个简单对照：我预想的坏结果是什么，真实发生的坏结果又是什么。"
+            }
+        ]
+    },
+    "render_hints": {
+        "section_skeleton": [
+            "hero_summary",
+            "domains_overview",
+            "domain_deep_dive",
+            "facet_details",
+            "core_portrait",
+            "norms_comparison",
+            "action_plan",
+            "methodology_and_access"
+        ],
+        "pr1_vertical_slice": "N"
+    }
+}

@@ -1,0 +1,60 @@
+{
+  "schema": "fap.big5.report_context_fixture.v1",
+  "fixture_id": "canonical_n_slice_sensitive_independent_v1",
+  "locale": "zh-CN",
+  "scale_code": "BIG5_OCEAN",
+  "form_code": "big5_90",
+  "sample_label": "高敏感 × 中高开放 × 克制进入 × 低续航推进",
+  "score_vector": {
+    "domains": {
+      "O": { "percentile": 59, "band": "mid", "gradient_id": "o_g3" },
+      "C": { "percentile": 32, "band": "low_mid", "gradient_id": "c_g2" },
+      "E": { "percentile": 20, "band": "low", "gradient_id": "e_g1" },
+      "A": { "percentile": 55, "band": "mid", "gradient_id": "a_g3" },
+      "N": { "percentile": 68, "band": "high_mid", "gradient_id": "n_g4" }
+    },
+    "facets": {
+      "N1": { "percentile": 98, "domain": "N" },
+      "N2": { "percentile": 65, "domain": "N" },
+      "N3": { "percentile": 98, "domain": "N" },
+      "N4": { "percentile": 8, "domain": "N" },
+      "N5": { "percentile": 95, "domain": "N" },
+      "N6": { "percentile": 13, "domain": "N" },
+      "C1": { "percentile": 97, "domain": "C" },
+      "C2": { "percentile": 89, "domain": "C" },
+      "C3": { "percentile": 15, "domain": "C" },
+      "C4": { "percentile": 15, "domain": "C" },
+      "C5": { "percentile": 2, "domain": "C" },
+      "C6": { "percentile": 10, "domain": "C" },
+      "E1": { "percentile": 57, "domain": "E" },
+      "E2": { "percentile": 53, "domain": "E" },
+      "E3": { "percentile": 12, "domain": "E" },
+      "E4": { "percentile": 4, "domain": "E" },
+      "E5": { "percentile": 4, "domain": "E" },
+      "E6": { "percentile": 2, "domain": "E" }
+    }
+  },
+  "quality": {
+    "level": "D",
+    "norms_status": "CALIBRATED"
+  },
+  "expected_hits": {
+    "dominant_traits": ["N", "O"],
+    "selected_synergies": ["n_high_x_e_low"],
+    "facet_anomalies": [
+      "n1_high_spike",
+      "n3_high_spike",
+      "n5_high_spike",
+      "n4_low_with_n_high",
+      "n6_low_with_n_high"
+    ],
+    "primary_sections": [
+      "hero_summary",
+      "domain_deep_dive",
+      "facet_details",
+      "core_portrait",
+      "norms_comparison",
+      "action_plan"
+    ]
+  }
+}

@@ -1,11 +1,86 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-22T09:32:00+08:00",
+  "updated_at": "2026-04-23T01:02:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "PR-BIG5-REPORT-ENGINE-N-SLICE": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "github_checks_failed",
+      "branch": "codex/big5-report-engine-n-slice",
+      "commit_sha": "0e0d094925ca81695a2ff80942cb81c021c1b2aa",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/975",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool content_packs/BIG5_OCEAN/v2/registry/manifest.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool tests/Fixtures/big5_engine/expected_canonical_n_slice_payload.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/BigFive/ReportEngine tests/Unit/Services/BigFive/ReportEngine tests/Feature/Content/BigFiveReportEngineNSliceTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/BigFive/ReportEngine tests/Feature/Content/BigFiveReportEngineNSliceTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan migrate",
+            "status": "passed"
+          },
+          {
+            "command": "APP_URL=http://127.0.0.1:18010 bash scripts/ci_verify_mbti.sh",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24791641998/job/72550392748"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24791640146/job/72550387065"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24791641998/job/72550408179"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24791640146/job/72550399169"
+          }
+        ]
+      },
+      "failure_reason": "GitHub Actions hygiene failed immediately on PR #975 after the 2026-04-23 review hardening push, and verify-mbti matrix jobs were skipped. Local scoped checks and APP_URL-pinned ci_verify_mbti.sh passed; the failure matches the repository's current workflow-start issue rather than a locally reproducible Big Five Report Engine regression.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
     "PR-ENNEAGRAM-V11": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
