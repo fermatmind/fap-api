@@ -224,18 +224,30 @@
           ],
           "tests": [
             {
-              "key": "career-riasec",
+              "key": "holland-career-interest-test-riasec",
               "title": "霍兰德职业兴趣测试（RIASEC）",
               "description": "当你需要先判断职业兴趣方向、行业偏好与起步线索时。",
-              "questionsLabel": "36 题",
-              "durationLabel": "约 6-8 分钟",
+              "questionsLabel": "60 / 140 题",
+              "durationLabel": "约 8 / 18 分钟",
               "outputLabel": "RIASEC 兴趣结构与主次代码",
-              "href": "/zh/career/tests/riasec",
-              "detailsHref": "/zh/career/tests",
+              "href": "/zh/tests/holland-career-interest-test-riasec",
+              "detailsHref": "/zh/tests/holland-career-interest-test-riasec",
               "primaryLabel": "开始测试",
               "secondaryLabel": "查看职业测试",
               "scientificBasis": "Based on Holland Code",
-              "previewVariant": "matrix"
+              "previewVariant": "matrix",
+              "primaryActions": [
+                {
+                  "label": "60 题标准版",
+                  "href": "/zh/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+                  "form_code": "riasec_60"
+                },
+                {
+                  "label": "140 题增强版",
+                  "href": "/zh/tests/holland-career-interest-test-riasec/take?form=riasec_140",
+                  "form_code": "riasec_140"
+                }
+              ]
             },
             {
               "key": "big-five-personality-test-ocean-model",
@@ -721,18 +733,30 @@
             ],
             "tests": [
               {
-                "key": "career-riasec",
+                "key": "holland-career-interest-test-riasec",
                 "title": "霍兰德职业兴趣测试（RIASEC）",
                 "description": "当你需要先判断职业兴趣方向、行业偏好与起步线索时。",
-                "questionsLabel": "36 题",
-                "durationLabel": "约 6-8 分钟",
+                "questionsLabel": "60 / 140 题",
+                "durationLabel": "约 8 / 18 分钟",
                 "outputLabel": "RIASEC 兴趣结构与主次代码",
-                "href": "/zh/career/tests/riasec",
-                "detailsHref": "/zh/career/tests",
+                "href": "/zh/tests/holland-career-interest-test-riasec",
+                "detailsHref": "/zh/tests/holland-career-interest-test-riasec",
                 "primaryLabel": "开始测试",
                 "secondaryLabel": "查看职业测试",
                 "scientificBasis": "Based on Holland Code",
-                "previewVariant": "matrix"
+                "previewVariant": "matrix",
+                "primaryActions": [
+                  {
+                    "label": "60 题标准版",
+                    "href": "/zh/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+                    "form_code": "riasec_60"
+                  },
+                  {
+                    "label": "140 题增强版",
+                    "href": "/zh/tests/holland-career-interest-test-riasec/take?form=riasec_140",
+                    "form_code": "riasec_140"
+                  }
+                ]
               },
               {
                 "key": "big-five-personality-test-ocean-model",

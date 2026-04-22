@@ -49,7 +49,7 @@ final class LandingSurfacePublicApiTest extends TestCase
             array_column(data_get($home->payload_json, 'quickStart.items'), 'href')
         );
         $this->assertContains(
-            '/career/tests/riasec',
+            '/tests/holland-career-interest-test-riasec',
             array_column(data_get($home->payload_json, 'quickStart.items'), 'href')
         );
         $this->assertContains(
@@ -82,7 +82,7 @@ final class LandingSurfacePublicApiTest extends TestCase
             array_column(data_get($quickStartBlock->payload_json, 'items'), 'href')
         );
         $this->assertContains(
-            '/career/tests/riasec',
+            '/tests/holland-career-interest-test-riasec',
             array_column(data_get($quickStartBlock->payload_json, 'items'), 'href')
         );
         $this->assertContains(
@@ -94,7 +94,7 @@ final class LandingSurfacePublicApiTest extends TestCase
                 '/tests/mbti-personality-test-16-personality-types',
                 '/tests/big-five-personality-test-ocean-model',
                 '/tests/enneagram-personality-test-nine-types',
-                '/career/tests/riasec',
+                '/tests/holland-career-interest-test-riasec',
                 '/tests/iq-test-intelligence-quotient-assessment',
                 '/tests/clinical-depression-anxiety-assessment-professional-edition',
             ],
@@ -169,6 +169,25 @@ final class LandingSurfacePublicApiTest extends TestCase
             '/zh/tests/enneagram-personality-test-nine-types/take?form=enneagram_forced_choice_144',
             (string) data_get($enneagramCard, 'primaryActions.1.href')
         );
+
+        $careerFamily = collect(data_get($tests->payload_json, 'families.items'))
+            ->firstWhere('id', 'family-career-direction');
+        $riasecCard = collect(data_get($careerFamily, 'tests'))
+            ->firstWhere('key', 'holland-career-interest-test-riasec');
+
+        $this->assertIsArray($riasecCard);
+        $this->assertSame('/zh/tests/holland-career-interest-test-riasec', (string) data_get($riasecCard, 'href'));
+        $this->assertSame('/zh/tests/holland-career-interest-test-riasec', (string) data_get($riasecCard, 'detailsHref'));
+        $this->assertSame('60 / 140 题', (string) data_get($riasecCard, 'questionsLabel'));
+        $this->assertSame('约 8 / 18 分钟', (string) data_get($riasecCard, 'durationLabel'));
+        $this->assertSame(
+            '/zh/tests/holland-career-interest-test-riasec/take?form=riasec_60',
+            (string) data_get($riasecCard, 'primaryActions.0.href')
+        );
+        $this->assertSame(
+            '/zh/tests/holland-career-interest-test-riasec/take?form=riasec_140',
+            (string) data_get($riasecCard, 'primaryActions.1.href')
+        );
     }
 
     public function test_baseline_import_accepts_absolute_source_directory(): void
@@ -214,7 +233,7 @@ final class LandingSurfacePublicApiTest extends TestCase
             ->assertJsonPath('surface.payload_json.quickStart.items.2.title', '九型人格测试')
             ->assertJsonPath('surface.payload_json.quickStart.items.2.href', '/tests/enneagram-personality-test-nine-types')
             ->assertJsonPath('surface.payload_json.quickStart.items.3.title', '霍兰德职业兴趣测试')
-            ->assertJsonPath('surface.payload_json.quickStart.items.3.href', '/career/tests/riasec')
+            ->assertJsonPath('surface.payload_json.quickStart.items.3.href', '/tests/holland-career-interest-test-riasec')
             ->assertJsonPath('surface.payload_json.quickStart.items.4.href', '/tests/iq-test-intelligence-quotient-assessment')
             ->assertJsonPath('surface.payload_json.quickStart.items.5.title', '抑郁焦虑综合症测试')
             ->assertJsonPath('surface.payload_json.quickStart.items.5.href', '/tests/clinical-depression-anxiety-assessment-professional-edition')

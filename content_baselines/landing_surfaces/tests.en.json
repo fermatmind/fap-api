@@ -224,18 +224,30 @@
           ],
           "tests": [
             {
-              "key": "career-riasec",
+              "key": "holland-career-interest-test-riasec",
               "title": "Holland Career Interest Test (RIASEC)",
               "description": "When you need a first-pass read on interest patterns, role direction, and industry fit.",
-              "questionsLabel": "36 questions",
-              "durationLabel": "6-8 min",
+              "questionsLabel": "60 / 140 questions",
+              "durationLabel": "8 / 18 min",
               "outputLabel": "RIASEC profile and top interest codes",
-              "href": "/en/career/tests/riasec",
-              "detailsHref": "/en/career/tests",
+              "href": "/en/tests/holland-career-interest-test-riasec",
+              "detailsHref": "/en/tests/holland-career-interest-test-riasec",
               "primaryLabel": "Start test",
               "secondaryLabel": "View career tests",
               "scientificBasis": "Based on Holland Code",
-              "previewVariant": "matrix"
+              "previewVariant": "matrix",
+              "primaryActions": [
+                {
+                  "label": "60-question standard",
+                  "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+                  "form_code": "riasec_60"
+                },
+                {
+                  "label": "140-question enhanced",
+                  "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_140",
+                  "form_code": "riasec_140"
+                }
+              ]
             },
             {
               "key": "big-five-personality-test-ocean-model",
@@ -721,18 +733,30 @@
             ],
             "tests": [
               {
-                "key": "career-riasec",
+                "key": "holland-career-interest-test-riasec",
                 "title": "Holland Career Interest Test (RIASEC)",
                 "description": "When you need a first-pass read on interest patterns, role direction, and industry fit.",
-                "questionsLabel": "36 questions",
-                "durationLabel": "6-8 min",
+                "questionsLabel": "60 / 140 questions",
+                "durationLabel": "8 / 18 min",
                 "outputLabel": "RIASEC profile and top interest codes",
-                "href": "/en/career/tests/riasec",
-                "detailsHref": "/en/career/tests",
+                "href": "/en/tests/holland-career-interest-test-riasec",
+                "detailsHref": "/en/tests/holland-career-interest-test-riasec",
                 "primaryLabel": "Start test",
                 "secondaryLabel": "View career tests",
                 "scientificBasis": "Based on Holland Code",
-                "previewVariant": "matrix"
+                "previewVariant": "matrix",
+                "primaryActions": [
+                  {
+                    "label": "60-question standard",
+                    "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_60",
+                    "form_code": "riasec_60"
+                  },
+                  {
+                    "label": "140-question enhanced",
+                    "href": "/en/tests/holland-career-interest-test-riasec/take?form=riasec_140",
+                    "form_code": "riasec_140"
+                  }
+                ]
               },
               {
                 "key": "big-five-personality-test-ocean-model",

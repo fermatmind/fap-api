@@ -7,8 +7,15 @@ use Illuminate\Support\Facades\Log;
 
 class ContentProbeService
 {
-    public function probe(?string $baseUrl, string $region, string $locale, string $expectedPackId = ''): array
-    {
+    public function probe(
+        ?string $baseUrl,
+        string $region,
+        string $locale,
+        string $expectedPackId = '',
+        ?string $scaleCode = null,
+        ?string $formCode = null,
+        ?string $slug = null,
+    ): array {
         $probes = [
             'health' => false,
             'questions' => false,
@@ -25,6 +32,7 @@ class ContentProbeService
         }
 
         $errors = [];
+        $target = $this->resolveProbeTarget($expectedPackId, $scaleCode, $formCode, $slug);
 
         $health = $this->fetchJson($baseUrl.'/api/healthz');
         if ($health['ok'] ?? false) {
@@ -34,7 +42,11 @@ class ContentProbeService
             $errors[] = 'health_failed';
         }
 
-        $questionsUrl = $baseUrl.'/api/v0.3/scales/MBTI/questions?region='.urlencode($region).'&locale='.urlencode($locale);
+        $questionsUrl = $baseUrl.'/api/v0.3/scales/'.rawurlencode($target['scale_code'])
+            .'/questions?region='.urlencode($region).'&locale='.urlencode($locale);
+        if ($target['form_code'] !== '') {
+            $questionsUrl .= '&form_code='.urlencode($target['form_code']);
+        }
         $questions = $this->fetchJson($questionsUrl);
         if ($questions['ok'] ?? false) {
             $probes['questions'] = (bool) (($questions['json']['ok'] ?? false) === true);
@@ -44,7 +56,7 @@ class ContentProbeService
         }
 
         $packs = $this->fetchJson(
-            $baseUrl.'/api/v0.3/scales/lookup?slug=mbti-personality-test-16-personality-types'
+            $baseUrl.'/api/v0.3/scales/lookup?slug='.urlencode($target['slug'])
         );
         if ($packs['ok'] ?? false) {
             $ok = (bool) (($packs['json']['ok'] ?? false) === true);
@@ -63,6 +75,30 @@ class ContentProbeService
             'ok' => empty($errors),
             'probes' => $probes,
             'message' => empty($errors) ? '' : implode(';', $errors),
+        ];
+    }
+
+    public function resolveProbeTarget(
+        string $expectedPackId = '',
+        ?string $scaleCode = null,
+        ?string $formCode = null,
+        ?string $slug = null,
+    ): array {
+        $scale = strtoupper(trim((string) ($scaleCode ?? '')));
+        $pack = strtoupper(trim($expectedPackId));
+        if ($scale === '') {
+            $scale = $pack !== '' ? $pack : 'MBTI';
+        }
+
+        $resolvedSlug = trim((string) ($slug ?? ''));
+        if ($resolvedSlug === '') {
+            $resolvedSlug = $this->defaultSlugForScale($scale);
+        }
+
+        return [
+            'scale_code' => $scale,
+            'form_code' => trim((string) ($formCode ?? '')),
+            'slug' => $resolvedSlug,
         ];
     }
 
@@ -170,5 +206,18 @@ class ContentProbeService
         }
 
         return rtrim($baseUrl, '/');
+    }
+
+    private function defaultSlugForScale(string $scaleCode): string
+    {
+        return match (strtoupper(trim($scaleCode))) {
+            'BIG5_OCEAN' => 'big-five-personality-test-ocean-model',
+            'ENNEAGRAM' => 'enneagram-personality-test-nine-types',
+            'RIASEC' => 'holland-career-interest-test-riasec',
+            'SDS_20' => 'depression-screening-test-standard-edition',
+            'EQ_60' => 'eq-test-emotional-intelligence-assessment',
+            'IQ_RAVEN' => 'iq-test-intelligence-quotient-assessment',
+            default => 'mbti-personality-test-16-personality-types',
+        };
     }
 }

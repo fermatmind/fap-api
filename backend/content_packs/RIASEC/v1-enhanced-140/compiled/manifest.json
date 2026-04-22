@@ -1,10 +1,30 @@
 {
-    "pack_id": "RIASEC",
-    "pack_version": "v1-enhanced-140",
-    "form_code": "riasec_140",
-    "form_kind": "enhanced",
-    "question_count": 140,
-    "scoring_spec_version": "riasec_enhanced_140_v1",
-    "engine_version": "riasec_v1.0.0",
-    "compiled_hash": "df5aa9fa478f58e9131e9135e134b38815462143b279ac5571094696b3af9104"
+  "schema": "fap.content_pack.manifest.v1",
+  "pack_id": "RIASEC",
+  "scale_code": "RIASEC",
+  "pack_version": "v1-enhanced-140",
+  "content_package_version": "v1-enhanced-140",
+  "dir_version": "v1-enhanced-140",
+  "form_code": "riasec_140",
+  "form_kind": "enhanced",
+  "default_form_code": "riasec_60",
+  "public_forms": [
+    "riasec_60",
+    "riasec_140"
+  ],
+  "primary_slug": "holland-career-interest-test-riasec",
+  "question_count": 140,
+  "scoring_spec_version": "riasec_enhanced_140_v1",
+  "quality_version": "riasec_enhanced_140_quality_v1",
+  "engine_version": "riasec_v1.0.0",
+  "source_asset": "holland_riasec_60_140_design_doc",
+  "hashes": {
+    "policy.compiled.json": "b07f854e261cf8913fb2dafe94255d4026e52156a78534bda056f08a1d7d5007",
+    "questions.compiled.json": "89a197bdb81453a132f8f3d2df2099d6dcffd7904fea9186ac852669107bc76c"
+  },
+  "compiled_files": [
+    "questions.compiled.json",
+    "policy.compiled.json"
+  ],
+  "compiled_hash": "fdfa7ebea6bd8f5572ae0d81f87dc3c5284e2bf5be3397211be7085c35809742"
 }
