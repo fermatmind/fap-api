@@ -36,6 +36,39 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-BIG5-REPORT-ENGINE-ALL-TRAITS
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/big5-report-engine-all-traits
+    base: main
+    depends_on: ["PR-BIG5-REPORT-ENGINE-N-SLICE"]
+    mode: execute
+    scope: >
+      Big Five Report Engine PR2 backend-only all 5 traits atomic and
+      modifier rollout. Expand the v2 registry atomic trait-band dossiers
+      and sentence-level gradient modifiers from N to O/C/E/A/N, update the
+      in-memory resolver/validator path to assemble trait-aware copy for the
+      existing 8 section skeleton, and preserve PR1's N-only synergy, facet
+      precision, and action rule scope without connecting the engine to live
+      report, scoring, frontend, MBTI, access, PDF, history, or payment paths.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "python3 -m json.tool content_packs/BIG5_OCEAN/v2/registry/manifest.json >/dev/null"
+      - "python3 -m json.tool tests/Fixtures/big5_engine/expected_canonical_n_slice_payload.json >/dev/null"
+      - "for f in content_packs/BIG5_OCEAN/v2/registry/atomic/*.json content_packs/BIG5_OCEAN/v2/registry/modifiers/*.json content_packs/BIG5_OCEAN/v2/registry/shared/*.json; do python3 -m json.tool \"$f\" >/dev/null || exit 1; done"
+      - "vendor/bin/pint --test app/Services/BigFive/ReportEngine tests/Unit/Services/BigFive/ReportEngine tests/Feature/Content/BigFiveReportEngineNSliceTest.php tests/Feature/Content/BigFiveReportEngineAllTraitsRolloutTest.php"
+      - "php artisan test tests/Unit/Services/BigFive/ReportEngine tests/Feature/Content/BigFiveReportEngineNSliceTest.php tests/Feature/Content/BigFiveReportEngineAllTraitsRolloutTest.php"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-ENNEAGRAM-V11
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

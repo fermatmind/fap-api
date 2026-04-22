@@ -204,6 +204,126 @@
             "status": "populated",
             "blocks": [
                 {
+                    "block_uid": "hero_summary.atomic.O.mid",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_O_mid",
+                    "resolved_copy": {
+                        "headline": "你的经验开放度处在中段，既能接受新视角，也会检查它是否可用。",
+                        "body_core": "你不是只追求新鲜感的人，也不是完全依赖惯例的人；你更像在探索和落地之间来回校准。",
+                        "injections": {
+                            "headline_extension": "——当新视角足够有解释力时，你会愿意靠近并吸收。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/O.json#bands.mid.slots.hero_summary"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/O.json#gradients.o_g3"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "O",
+                        "band": "mid",
+                        "percentile": 59,
+                        "modifier_gradient_id": "o_g3",
+                        "modifier_label": "选择性探索"
+                    }
+                },
+                {
+                    "block_uid": "hero_summary.atomic.C.low",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_C_low",
+                    "resolved_copy": {
+                        "headline": "你的秩序与推进力偏低，更依赖兴趣、状态和外部结构来启动。",
+                        "body_core": "你不一定缺少判断力，但持续推进、细节收尾和自我约束会更容易消耗你。",
+                        "injections": {
+                            "headline_extension": "——你能做事，但持续推进更依赖状态、意义和外部节拍。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/C.json#bands.low.slots.hero_summary"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/C.json#gradients.c_g2"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "C",
+                        "band": "low",
+                        "percentile": 32,
+                        "modifier_gradient_id": "c_g2",
+                        "modifier_label": "低续航推进"
+                    }
+                },
+                {
+                    "block_uid": "hero_summary.atomic.E.low",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_E_low",
+                    "resolved_copy": {
+                        "headline": "你的社交能量偏内收，更适合在低噪音、高自主的节奏里展开。",
+                        "body_core": "你不一定不会社交，而是更少依赖高频互动来获得能量，也更需要保留独处和观察空间。",
+                        "injections": {
+                            "headline_extension": "——你更适合先观察、先内化，再选择性表达。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/E.json#bands.low.slots.hero_summary"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/E.json#gradients.e_g1"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "E",
+                        "band": "low",
+                        "percentile": 20,
+                        "modifier_gradient_id": "e_g1",
+                        "modifier_label": "深度内收"
+                    }
+                },
+                {
+                    "block_uid": "hero_summary.atomic.A.mid",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_A_mid",
+                    "resolved_copy": {
+                        "headline": "你的合作取向处在中段，既能顾及他人，也不会完全放弃自己的边界。",
+                        "body_core": "你愿意理解关系中的需要，但通常也会观察对方是否合理、是否值得继续投入。",
+                        "injections": {
+                            "headline_extension": "——你能照顾关系，也会保留自己的判断。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/A.json#bands.mid.slots.hero_summary"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/A.json#gradients.a_g3"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "A",
+                        "band": "mid",
+                        "percentile": 55,
+                        "modifier_gradient_id": "a_g3",
+                        "modifier_label": "平衡协作"
+                    }
+                },
+                {
                     "block_uid": "hero_summary.atomic.N.high",
                     "kind": "trait_atomic",
                     "component": "BigFiveTraitBlock",
@@ -237,13 +357,304 @@
         },
         {
             "section_key": "domains_overview",
-            "status": "not_populated_in_pr1",
-            "blocks": []
+            "status": "populated",
+            "blocks": [
+                {
+                    "block_uid": "domains_overview.atomic.O.mid",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_O_mid",
+                    "resolved_copy": {
+                        "snapshot_line": "开放性位于中段时，你通常能理解新想法，但会根据场景决定投入深度。"
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/O.json#bands.mid.slots.domains_overview"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/O.json#gradients.o_g3"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "O",
+                        "band": "mid",
+                        "percentile": 59,
+                        "modifier_gradient_id": "o_g3",
+                        "modifier_label": "选择性探索"
+                    }
+                },
+                {
+                    "block_uid": "domains_overview.atomic.C.low",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_C_low",
+                    "resolved_copy": {
+                        "snapshot_line": "尽责性偏低时，你更需要把目标拆小、把启动外置，而不是只靠意志维持。"
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/C.json#bands.low.slots.domains_overview"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/C.json#gradients.c_g2"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "C",
+                        "band": "low",
+                        "percentile": 32,
+                        "modifier_gradient_id": "c_g2",
+                        "modifier_label": "低续航推进"
+                    }
+                },
+                {
+                    "block_uid": "domains_overview.atomic.E.low",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_E_low",
+                    "resolved_copy": {
+                        "snapshot_line": "外向性偏低时，你的优势是克制进入和深度观察，代价是外部表达可能滞后。"
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/E.json#bands.low.slots.domains_overview"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/E.json#gradients.e_g1"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "E",
+                        "band": "low",
+                        "percentile": 20,
+                        "modifier_gradient_id": "e_g1",
+                        "modifier_label": "深度内收"
+                    }
+                },
+                {
+                    "block_uid": "domains_overview.atomic.A.mid",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_A_mid",
+                    "resolved_copy": {
+                        "snapshot_line": "宜人性位于中段时，你能合作，也能保留判断；关键在于边界表达是否足够及时。"
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/A.json#bands.mid.slots.domains_overview"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/A.json#gradients.a_g3"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "A",
+                        "band": "mid",
+                        "percentile": 55,
+                        "modifier_gradient_id": "a_g3",
+                        "modifier_label": "平衡协作"
+                    }
+                },
+                {
+                    "block_uid": "domains_overview.atomic.N.high",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_N_high",
+                    "resolved_copy": {
+                        "snapshot_line": "压力反应敏感度偏高时，你更早捕捉风险和关系张力，也更需要把恢复机制前置。"
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/N.json#bands.high.slots.domains_overview"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/N.json#gradients.n_g4"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "N",
+                        "band": "high",
+                        "percentile": 68,
+                        "modifier_gradient_id": "n_g4",
+                        "modifier_label": "高体感预警"
+                    }
+                }
+            ]
         },
         {
             "section_key": "domain_deep_dive",
             "status": "populated",
             "blocks": [
+                {
+                    "block_uid": "domain_deep_dive.atomic.O.mid",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_O_mid",
+                    "resolved_copy": {
+                        "definition": "开放性决定你如何面对新经验、复杂概念、审美变化和非标准答案。",
+                        "strengths": [
+                            "能吸收新视角",
+                            "不会轻易抛弃现实边界",
+                            "适合在概念和执行之间做翻译"
+                        ],
+                        "costs": [
+                            "在高不确定任务里可能需要更明确的入口",
+                            "兴趣会受任务意义和环境质量影响",
+                            "可能在探索深度上时高时低"
+                        ],
+                        "daily_life": "你会被有解释力的新东西吸引，但通常仍希望知道它和真实问题有什么关系。",
+                        "injections": {
+                            "intensity_sentence": "你对新经验的兴趣取决于它是否能解释真实问题，而不是只看新不新。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/O.json#bands.mid.slots.domain_deep_dive"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/O.json#gradients.o_g3"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "O",
+                        "band": "mid",
+                        "percentile": 59,
+                        "modifier_gradient_id": "o_g3",
+                        "modifier_label": "选择性探索"
+                    }
+                },
+                {
+                    "block_uid": "domain_deep_dive.atomic.C.low",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_C_low",
+                    "resolved_copy": {
+                        "definition": "尽责性反映计划、秩序、自我约束、责任执行和持续完成的倾向。",
+                        "strengths": [
+                            "不容易被僵硬流程完全锁住",
+                            "对变化有一定弹性",
+                            "更愿意根据真实状态调整节奏"
+                        ],
+                        "costs": [
+                            "长期任务容易断续",
+                            "收尾和复盘容易被延后",
+                            "在低反馈任务里更难稳定推进"
+                        ],
+                        "daily_life": "你常常不是不知道该做什么，而是需要更轻的启动门槛和更明确的外部节奏。",
+                        "injections": {
+                            "intensity_sentence": "你不是不能负责，而是低反馈、长周期任务会更快消耗续航。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/C.json#bands.low.slots.domain_deep_dive"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/C.json#gradients.c_g2"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "C",
+                        "band": "low",
+                        "percentile": 32,
+                        "modifier_gradient_id": "c_g2",
+                        "modifier_label": "低续航推进"
+                    }
+                },
+                {
+                    "block_uid": "domain_deep_dive.atomic.E.low",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_E_low",
+                    "resolved_copy": {
+                        "definition": "外向性反映你从互动、表达、刺激和外部活动中获得能量的程度。",
+                        "strengths": [
+                            "更能保留观察空间",
+                            "不容易被场面气氛推着走",
+                            "适合深度处理和低干扰工作"
+                        ],
+                        "costs": [
+                            "需求和边界可能表达得较晚",
+                            "高频社交更容易消耗",
+                            "机会有时需要更主动地外化"
+                        ],
+                        "daily_life": "你往往先在内部完成判断，再决定要不要进入现场或表达观点。",
+                        "injections": {
+                            "intensity_sentence": "高频互动和高刺激现场会更快消耗你的系统。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/E.json#bands.low.slots.domain_deep_dive"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/E.json#gradients.e_g1"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "E",
+                        "band": "low",
+                        "percentile": 20,
+                        "modifier_gradient_id": "e_g1",
+                        "modifier_label": "深度内收"
+                    }
+                },
+                {
+                    "block_uid": "domain_deep_dive.atomic.A.mid",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_A_mid",
+                    "resolved_copy": {
+                        "definition": "宜人性决定你在合作、信任、体谅、冲突和让步中如何平衡关系与立场。",
+                        "strengths": [
+                            "能理解他人处境",
+                            "不容易无原则让步",
+                            "适合在关系和问题之间做平衡"
+                        ],
+                        "costs": [
+                            "复杂关系里可能需要更明确的标准",
+                            "边界表达有时会延后",
+                            "容易根据对象质量调整投入"
+                        ],
+                        "daily_life": "你通常愿意合作，但如果对方持续越界或不公平，你会逐渐收回投入。",
+                        "injections": {
+                            "intensity_sentence": "你的合作程度会随对象质量和互动公平度变化。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/A.json#bands.mid.slots.domain_deep_dive"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/A.json#gradients.a_g3"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "A",
+                        "band": "mid",
+                        "percentile": 55,
+                        "modifier_gradient_id": "a_g3",
+                        "modifier_label": "平衡协作"
+                    }
+                },
                 {
                     "block_uid": "domain_deep_dive.atomic.N.high",
                     "kind": "trait_atomic",
@@ -263,7 +674,7 @@
                         ],
                         "daily_life": "你不是没有能力，而是更需要恢复机制、边界和稳定节奏来承托自己的反应强度。",
                         "injections": {
-                            "risk_sentence": "在模糊边界和反复拉扯的协作中，你会比多数人更早体验到心理耗损。"
+                            "intensity_sentence": "在模糊边界和反复拉扯的协作中，你会比多数人更早体验到心理耗损。"
                         }
                     },
                     "provenance": {
@@ -407,6 +818,126 @@
             "status": "populated",
             "blocks": [
                 {
+                    "block_uid": "core_portrait.atomic.O.mid",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_O_mid",
+                    "resolved_copy": {
+                        "identity": "你的认知入口兼具探索和校准。",
+                        "default_style": "你愿意理解不同答案，但不会因为它们新就自动接受。",
+                        "injections": {
+                            "load_sentence": "你的系统能在探索和落地之间切换，但需要明确问题意识来维持深度。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/O.json#bands.mid.slots.core_portrait"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/O.json#gradients.o_g3"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "O",
+                        "band": "mid",
+                        "percentile": 59,
+                        "modifier_gradient_id": "o_g3",
+                        "modifier_label": "选择性探索"
+                    }
+                },
+                {
+                    "block_uid": "core_portrait.atomic.C.low",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_C_low",
+                    "resolved_copy": {
+                        "identity": "你的行动系统更依赖情境牵引。",
+                        "default_style": "当任务有意义、反馈清楚、入口足够小，你的推进会明显更顺。",
+                        "injections": {
+                            "load_sentence": "你的行动负荷主要来自长期维持秩序，而不是短时爆发。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/C.json#bands.low.slots.core_portrait"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/C.json#gradients.c_g2"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "C",
+                        "band": "low",
+                        "percentile": 32,
+                        "modifier_gradient_id": "c_g2",
+                        "modifier_label": "低续航推进"
+                    }
+                },
+                {
+                    "block_uid": "core_portrait.atomic.E.low",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_E_low",
+                    "resolved_copy": {
+                        "identity": "你的能量系统更偏内收和自我调节。",
+                        "default_style": "你需要足够安静和自主，才能把观察转成稳定输出。",
+                        "injections": {
+                            "load_sentence": "你的负荷常来自过早进入场景，而不是来自缺少能力。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/E.json#bands.low.slots.core_portrait"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/E.json#gradients.e_g1"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "E",
+                        "band": "low",
+                        "percentile": 20,
+                        "modifier_gradient_id": "e_g1",
+                        "modifier_label": "深度内收"
+                    }
+                },
+                {
+                    "block_uid": "core_portrait.atomic.A.mid",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_A_mid",
+                    "resolved_copy": {
+                        "identity": "你的关系系统兼具体谅和边界。",
+                        "default_style": "你会先尝试理解，再根据互动质量决定投入深度。",
+                        "injections": {
+                            "load_sentence": "你的关系负荷主要来自边界表达延后，而不是缺少同理。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/A.json#bands.mid.slots.core_portrait"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/A.json#gradients.a_g3"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "A",
+                        "band": "mid",
+                        "percentile": 55,
+                        "modifier_gradient_id": "a_g3",
+                        "modifier_label": "平衡协作"
+                    }
+                },
+                {
                     "block_uid": "core_portrait.atomic.N.high",
                     "kind": "trait_atomic",
                     "component": "BigFiveTraitBlock",
@@ -512,6 +1043,122 @@
             "status": "populated",
             "blocks": [
                 {
+                    "block_uid": "norms_comparison.atomic.O.mid",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_O_mid",
+                    "resolved_copy": {
+                        "relative_meaning": "在参考样本中，你的经验开放度接近中段，说明探索倾向存在，但不是持续主导项。",
+                        "injections": {
+                            "compare_sentence": "这更像一种选择性开放：能探索，也会校准。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/O.json#bands.mid.slots.norms_comparison"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/O.json#gradients.o_g3"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "O",
+                        "band": "mid",
+                        "percentile": 59,
+                        "modifier_gradient_id": "o_g3",
+                        "modifier_label": "选择性探索"
+                    }
+                },
+                {
+                    "block_uid": "norms_comparison.atomic.C.low",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_C_low",
+                    "resolved_copy": {
+                        "relative_meaning": "在参考样本中，你的秩序与推进力相对较低，说明持续执行不是最自然的省力路径。",
+                        "injections": {
+                            "compare_sentence": "这更接近低续航推进：可以启动，但需要系统帮你不断续上。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/C.json#bands.low.slots.norms_comparison"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/C.json#gradients.c_g2"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "C",
+                        "band": "low",
+                        "percentile": 32,
+                        "modifier_gradient_id": "c_g2",
+                        "modifier_label": "低续航推进"
+                    }
+                },
+                {
+                    "block_uid": "norms_comparison.atomic.E.low",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_E_low",
+                    "resolved_copy": {
+                        "relative_meaning": "在参考样本中，你的外向性相对较低，说明高刺激互动不是你的默认充电方式。",
+                        "injections": {
+                            "compare_sentence": "这说明你明显不依赖社交刺激充电，更需要低噪音空间。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/E.json#bands.low.slots.norms_comparison"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/E.json#gradients.e_g1"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "E",
+                        "band": "low",
+                        "percentile": 20,
+                        "modifier_gradient_id": "e_g1",
+                        "modifier_label": "深度内收"
+                    }
+                },
+                {
+                    "block_uid": "norms_comparison.atomic.A.mid",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_A_mid",
+                    "resolved_copy": {
+                        "relative_meaning": "在参考样本中，你的宜人性接近中段，说明合作倾向存在，但不是无条件优先。",
+                        "injections": {
+                            "compare_sentence": "你处在参考样本中段，更像平衡协作，而不是无条件让步。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/A.json#bands.mid.slots.norms_comparison"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/A.json#gradients.a_g3"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "A",
+                        "band": "mid",
+                        "percentile": 55,
+                        "modifier_gradient_id": "a_g3",
+                        "modifier_label": "平衡协作"
+                    }
+                },
+                {
                     "block_uid": "norms_comparison.atomic.N.high",
                     "kind": "trait_atomic",
                     "component": "BigFiveTraitBlock",
@@ -547,12 +1194,128 @@
             "status": "populated",
             "blocks": [
                 {
+                    "block_uid": "action_plan.atomic.O.mid",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_O_mid",
+                    "resolved_copy": {
+                        "priority_hint": "你的重点是把感兴趣的新视角转成可验证的小实验，而不是停留在想法层面。",
+                        "injections": {
+                            "urgency_sentence": "你的重点是把有价值的兴趣转成一个可完成的输出。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/O.json#bands.mid.slots.action_plan"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/O.json#gradients.o_g3"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "O",
+                        "band": "mid",
+                        "percentile": 59,
+                        "modifier_gradient_id": "o_g3",
+                        "modifier_label": "选择性探索"
+                    }
+                },
+                {
+                    "block_uid": "action_plan.atomic.C.low",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_C_low",
+                    "resolved_copy": {
+                        "priority_hint": "你的重点是建立外部化推进系统：更小的下一步、更短的周期、更明确的完成标准。",
+                        "injections": {
+                            "urgency_sentence": "对你来说，恢复推进力的关键是外置清单、固定节奏和更短完成周期。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/C.json#bands.low.slots.action_plan"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/C.json#gradients.c_g2"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "C",
+                        "band": "low",
+                        "percentile": 32,
+                        "modifier_gradient_id": "c_g2",
+                        "modifier_label": "低续航推进"
+                    }
+                },
+                {
+                    "block_uid": "action_plan.atomic.E.low",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_E_low",
+                    "resolved_copy": {
+                        "priority_hint": "你的行动重点是降低表达成本，把关键感受和边界更早、更清楚地带到外部。",
+                        "injections": {
+                            "urgency_sentence": "关键是把重要表达提前准备好，避免所有边界都留在内部。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/E.json#bands.low.slots.action_plan"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/E.json#gradients.e_g1"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "E",
+                        "band": "low",
+                        "percentile": 20,
+                        "modifier_gradient_id": "e_g1",
+                        "modifier_label": "深度内收"
+                    }
+                },
+                {
+                    "block_uid": "action_plan.atomic.A.mid",
+                    "kind": "trait_atomic",
+                    "component": "BigFiveTraitBlock",
+                    "block_id": "atomic_A_mid",
+                    "resolved_copy": {
+                        "priority_hint": "你的行动重点是把“可以配合”和“不能继续承担”的界线说得更早。",
+                        "injections": {
+                            "urgency_sentence": "对你来说，关键是更早说明什么可以谈、什么不能继续承担。"
+                        }
+                    },
+                    "provenance": {
+                        "atomic_refs": [
+                            "atomic/A.json#bands.mid.slots.action_plan"
+                        ],
+                        "modifier_refs": [
+                            "modifiers/A.json#gradients.a_g3"
+                        ],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "trait_code": "A",
+                        "band": "mid",
+                        "percentile": 55,
+                        "modifier_gradient_id": "a_g3",
+                        "modifier_label": "平衡协作"
+                    }
+                },
+                {
                     "block_uid": "action_plan.atomic.N.high",
                     "kind": "trait_atomic",
                     "component": "BigFiveTraitBlock",
                     "block_id": "atomic_N_high",
                     "resolved_copy": {
-                        "priority": "你的关键课题不是“别敏感”，而是别让敏感长期只停留在内部。",
+                        "priority_hint": "你的关键课题不是“别敏感”，而是别让敏感长期只停留在内部。",
                         "injections": {
                             "urgency_sentence": "对你来说，恢复不是附属动作，而是维持稳定输出的前提。"
                         }
@@ -658,7 +1421,7 @@
                     "resolved_copy": {
                         "schema": "fap.big5.shared_methodology.v1",
                         "title": "PR1 方法说明",
-                        "body": "本 payload 由 Big Five Report Engine PR1 的 N 维度垂直切片生成；未覆盖 section 使用 status=not_populated_in_pr1，现网评分链和现网报告链不读取本 registry。",
+                        "body": "本 payload 由 Big Five Report Engine v2 registry 生成；PR2 已覆盖 O/C/E/A/N 五维 atomic 与 sentence-level modifier，synergy、facet precision 与 scenario action rule 仍保持 PR1 的 N-only 范围。",
                         "access_note": "此结构服务未来 8 section 承载位，不代表生产 AttemptReadController 已接入。"
                     },
                     "provenance": {

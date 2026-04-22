@@ -21,7 +21,10 @@ final class ModifierInjectorTest extends TestCase
         $blocks = app(AtomicBlockResolver::class)->resolve($context, $registry);
         $blocks = app(ModifierInjector::class)->inject($context, $blocks, $registry);
 
-        $hero = $blocks['hero_summary'][0]->toArray();
+        $hero = collect($blocks['hero_summary'])
+            ->first(static fn ($block): bool => $block->analytics['trait_code'] === 'N')
+            ?->toArray();
+        $this->assertIsArray($hero);
         $this->assertSame(
             '——这意味着你更快感到不对劲，内部负荷上升更早。',
             data_get($hero, 'resolved_copy.injections.headline_extension')

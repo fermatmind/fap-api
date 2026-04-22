@@ -1,0 +1,62 @@
+{
+  "schema": "fap.big5.modifier_trait_pack.v1",
+  "trait_code": "C",
+  "trait_label_zh": "尽责性",
+  "gradients": {
+    "c_g1": {
+      "percentile_range": [0, 19],
+      "user_label": "低结构启动",
+      "injections": {
+        "hero_summary.headline_extension": "——启动、排序和收尾需要外部结构明显介入。",
+        "domain_deep_dive.intensity_sentence": "当任务缺少即时反馈时，你的推进系统很容易掉速。",
+        "core_portrait.load_sentence": "你的负荷不是来自不知道目标，而是来自持续把目标保持在前台。",
+        "norms_comparison.compare_sentence": "这说明你的执行稳定性明显低于参考样本中段，需要环境帮你承接节奏。",
+        "action_plan.urgency_sentence": "优先做一件事：把今天的下一步缩小到十分钟内能开始。"
+      }
+    },
+    "c_g2": {
+      "percentile_range": [20, 39],
+      "user_label": "低续航推进",
+      "injections": {
+        "hero_summary.headline_extension": "——你能做事，但持续推进更依赖状态、意义和外部节拍。",
+        "domain_deep_dive.intensity_sentence": "你不是不能负责，而是低反馈、长周期任务会更快消耗续航。",
+        "core_portrait.load_sentence": "你的行动负荷主要来自长期维持秩序，而不是短时爆发。",
+        "norms_comparison.compare_sentence": "这更接近低续航推进：可以启动，但需要系统帮你不断续上。",
+        "action_plan.urgency_sentence": "对你来说，恢复推进力的关键是外置清单、固定节奏和更短完成周期。"
+      }
+    },
+    "c_g3": {
+      "percentile_range": [40, 59],
+      "user_label": "情境执行",
+      "injections": {
+        "hero_summary.headline_extension": "——你具备基本执行力，但会明显受任务质量影响。",
+        "domain_deep_dive.intensity_sentence": "目标清楚、反馈及时的时候，你的推进会更稳定。",
+        "core_portrait.load_sentence": "你的系统不适合把所有任务都放在同一优先级里硬推。",
+        "norms_comparison.compare_sentence": "你处在参考样本中段，更像情境执行型，而不是低执行或高控制。",
+        "action_plan.urgency_sentence": "下一步是给关键任务建立固定入口，减少临场决定。"
+      }
+    },
+    "c_g4": {
+      "percentile_range": [60, 79],
+      "user_label": "稳定负责",
+      "injections": {
+        "hero_summary.headline_extension": "——你更容易把承诺转成计划，并持续追踪完成。",
+        "domain_deep_dive.intensity_sentence": "只要目标合理，你通常能用结构和责任感把事情推进到底。",
+        "core_portrait.load_sentence": "你的负荷可能来自过度承担，而不是缺少执行。",
+        "norms_comparison.compare_sentence": "你在参考样本中已明显偏高，执行稳定性是可依赖的优势。",
+        "action_plan.urgency_sentence": "对你来说，下一步不是更努力，而是区分哪些任务值得高标准。"
+      }
+    },
+    "c_g5": {
+      "percentile_range": [80, 100],
+      "user_label": "高控制完成",
+      "injections": {
+        "hero_summary.headline_extension": "——你会强烈追求秩序、标准和完成感。",
+        "domain_deep_dive.intensity_sentence": "未完成、低标准和失控进度会比多数人更明显地占用你的注意力。",
+        "core_portrait.load_sentence": "你的系统很会推进，也容易把可调整事项体验成必须完成。",
+        "norms_comparison.compare_sentence": "这属于高尽责位置，责任和控制感很容易成为你的默认驱动。",
+        "action_plan.urgency_sentence": "此时最重要的是给任务分级，允许一部分事情只做到足够好。"
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schema": "fap.big5.modifier_trait_pack.v1",
+  "trait_code": "O",
+  "trait_label_zh": "开放性",
+  "gradients": {
+    "o_g1": {
+      "percentile_range": [0, 19],
+      "user_label": "低探索稳态",
+      "injections": {
+        "hero_summary.headline_extension": "——你更愿意从熟悉、明确、可验证的路径进入问题。",
+        "domain_deep_dive.intensity_sentence": "新鲜感本身很少足以驱动你，除非它已经显示出实际价值。",
+        "core_portrait.load_sentence": "你的系统会主动过滤过度发散的输入，以保留稳定和确定性。",
+        "norms_comparison.compare_sentence": "这说明你的认知入口明显偏务实，不太依赖抽象探索来获得动力。",
+        "action_plan.urgency_sentence": "对你来说，最有用的是设置低风险试验，而不是强迫自己持续探索未知。"
+      }
+    },
+    "o_g2": {
+      "percentile_range": [20, 39],
+      "user_label": "谨慎接纳",
+      "injections": {
+        "hero_summary.headline_extension": "——你能理解新视角，但通常需要先确认它不会打乱核心秩序。",
+        "domain_deep_dive.intensity_sentence": "你对变化并非关闭，而是更重视进入前的解释和证据。",
+        "core_portrait.load_sentence": "你的探索负荷主要来自不确定性，而不是来自学习本身。",
+        "norms_comparison.compare_sentence": "你的位置更接近“谨慎接纳”，会先筛选再投入。",
+        "action_plan.urgency_sentence": "下一步适合把新想法压缩成小范围验证，而不是一次性改变原有系统。"
+      }
+    },
+    "o_g3": {
+      "percentile_range": [40, 59],
+      "user_label": "选择性探索",
+      "injections": {
+        "hero_summary.headline_extension": "——当新视角足够有解释力时，你会愿意靠近并吸收。",
+        "domain_deep_dive.intensity_sentence": "你对新经验的兴趣取决于它是否能解释真实问题，而不是只看新不新。",
+        "core_portrait.load_sentence": "你的系统能在探索和落地之间切换，但需要明确问题意识来维持深度。",
+        "norms_comparison.compare_sentence": "这更像一种选择性开放：能探索，也会校准。",
+        "action_plan.urgency_sentence": "你的重点是把有价值的兴趣转成一个可完成的输出。"
+      }
+    },
+    "o_g4": {
+      "percentile_range": [60, 79],
+      "user_label": "高概念连接",
+      "injections": {
+        "hero_summary.headline_extension": "——你更容易看见结构、隐喻和不同系统之间的连接。",
+        "domain_deep_dive.intensity_sentence": "复杂和多义不会立刻劝退你，反而可能激活你的理解欲。",
+        "core_portrait.load_sentence": "你的认知负荷常来自可能性太多，需要主动做优先级裁剪。",
+        "norms_comparison.compare_sentence": "你在参考样本中已明显偏开放，更容易通过概念连接理解世界。",
+        "action_plan.urgency_sentence": "对你来说，关键不是再增加想法，而是决定哪个想法值得进入执行。"
+      }
+    },
+    "o_g5": {
+      "percentile_range": [80, 100],
+      "user_label": "强探索驱动",
+      "injections": {
+        "hero_summary.headline_extension": "——你很难长期停留在单一解释里，会持续寻找更大的图景。",
+        "domain_deep_dive.intensity_sentence": "高度重复和过窄框架会明显消耗你，因为你的系统需要新信息和新连接。",
+        "core_portrait.load_sentence": "你的开放性本身不是问题，真正的负荷来自无限展开之后缺少收束。",
+        "norms_comparison.compare_sentence": "这已经是明显高开放位置，探索和想象更像你的基础运行方式。",
+        "action_plan.urgency_sentence": "此时最重要的是建立收束协议，让创造力变成可交付成果。"
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schema": "fap.big5.modifier_trait_pack.v1",
+  "trait_code": "E",
+  "trait_label_zh": "外向性",
+  "gradients": {
+    "e_g1": {
+      "percentile_range": [0, 19],
+      "user_label": "深度内收",
+      "injections": {
+        "hero_summary.headline_extension": "——你更适合先观察、先内化，再选择性表达。",
+        "domain_deep_dive.intensity_sentence": "高频互动和高刺激现场会更快消耗你的系统。",
+        "core_portrait.load_sentence": "你的负荷常来自过早进入场景，而不是来自缺少能力。",
+        "norms_comparison.compare_sentence": "这说明你明显不依赖社交刺激充电，更需要低噪音空间。",
+        "action_plan.urgency_sentence": "关键是把重要表达提前准备好，避免所有边界都留在内部。"
+      }
+    },
+    "e_g2": {
+      "percentile_range": [20, 39],
+      "user_label": "克制进入",
+      "injections": {
+        "hero_summary.headline_extension": "——你可以进入互动，但通常不会把自己持续放在前台。",
+        "domain_deep_dive.intensity_sentence": "你更愿意在确认场景安全、目标清楚后再提高表达强度。",
+        "core_portrait.load_sentence": "你的能量负荷主要来自被迫高频外放。",
+        "norms_comparison.compare_sentence": "这更接近克制进入：不是隔绝，而是选择性外化。",
+        "action_plan.urgency_sentence": "对你来说，最有用的是更早释放关键信息，而不是逼自己变得热闹。"
+      }
+    },
+    "e_g3": {
+      "percentile_range": [40, 59],
+      "user_label": "场景切换",
+      "injections": {
+        "hero_summary.headline_extension": "——你能互动，也需要把节奏带回自己手里。",
+        "domain_deep_dive.intensity_sentence": "你的表达强度会随对象、目标和安全感变化。",
+        "core_portrait.load_sentence": "你的系统需要连接，也需要稳定的回收时间。",
+        "norms_comparison.compare_sentence": "你处在外向性中段，说明互动不是缺口，也不是唯一动力。",
+        "action_plan.urgency_sentence": "下一步是识别哪些互动真正补能，把精力投向关键连接。"
+      }
+    },
+    "e_g4": {
+      "percentile_range": [60, 79],
+      "user_label": "外化驱动",
+      "injections": {
+        "hero_summary.headline_extension": "——你更容易在表达、连接和现场反馈中被激活。",
+        "domain_deep_dive.intensity_sentence": "进入现场之后，你往往更快找到方向和行动感。",
+        "core_portrait.load_sentence": "你的负荷可能来自日程过满，而不是缺少动力。",
+        "norms_comparison.compare_sentence": "你在参考样本中已偏外向，外部反馈对你有明显推动作用。",
+        "action_plan.urgency_sentence": "关键是保留高质量互动，同时给深度任务留出不被打断的窗口。"
+      }
+    },
+    "e_g5": {
+      "percentile_range": [80, 100],
+      "user_label": "高互动激活",
+      "injections": {
+        "hero_summary.headline_extension": "——你很容易通过人、现场和即时反馈快速启动。",
+        "domain_deep_dive.intensity_sentence": "低反馈和长时间孤立处理会明显压低你的行动能量。",
+        "core_portrait.load_sentence": "你的系统很会向外连接，也需要防止刺激密度长期过高。",
+        "norms_comparison.compare_sentence": "这属于高外向位置，互动本身就是你的重要能量来源。",
+        "action_plan.urgency_sentence": "此时最重要的是管理节奏，不让每个机会都变成必须参与。"
+      }
+    }
+  }
+}

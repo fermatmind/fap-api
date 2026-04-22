@@ -4,7 +4,7 @@
   "scale_code": "BIG5_OCEAN",
   "version": "v2",
   "locale": "zh-CN",
-  "scope": "PR1 N vertical slice only",
+  "scope": "PR2 all 5 traits atomic and modifier rollout; N-only synergy/facet/action remains from PR1",
   "runtime_contract": "fap.big5.report.v1",
   "section_skeleton": [
     "hero_summary",
@@ -16,7 +16,16 @@
     "action_plan",
     "methodology_and_access"
   ],
-  "traits_in_scope": ["N"],
+  "traits_in_scope": ["O", "C", "E", "A", "N"],
+  "coverage": {
+    "atomic_traits": ["O", "C", "E", "A", "N"],
+    "atomic_bands_per_trait": ["low", "mid", "high"],
+    "modifier_traits": ["O", "C", "E", "A", "N"],
+    "modifier_gradients_per_trait": 5,
+    "synergy_traits": ["N"],
+    "facet_precision_traits": ["N"],
+    "action_rule_scope": "N scenario rules only"
+  },
   "fixtures": [
     "fixtures/canonical_n_slice_sensitive_independent.context.json"
   ]

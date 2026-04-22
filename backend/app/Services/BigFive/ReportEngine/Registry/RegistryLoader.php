@@ -8,6 +8,8 @@ use RuntimeException;
 
 final class RegistryLoader
 {
+    private const TRAIT_CODES = ['O', 'C', 'E', 'A', 'N'];
+
     public function __construct(
         private readonly ?string $registryPath = null,
     ) {}
@@ -18,6 +20,12 @@ final class RegistryLoader
     public function load(): array
     {
         $root = $this->registryPath ?? base_path('content_packs/BIG5_OCEAN/v2/registry');
+        $atomic = [];
+        $modifiers = [];
+        foreach (self::TRAIT_CODES as $traitCode) {
+            $atomic[$traitCode] = $this->readJson($root."/atomic/{$traitCode}.json");
+            $modifiers[$traitCode] = $this->readJson($root."/modifiers/{$traitCode}.json");
+        }
 
         return [
             'root' => $root,
@@ -25,12 +33,8 @@ final class RegistryLoader
             'fixtures' => [
                 'canonical_n_slice_sensitive_independent' => $this->readJson($root.'/fixtures/canonical_n_slice_sensitive_independent.context.json'),
             ],
-            'atomic' => [
-                'N' => $this->readJson($root.'/atomic/N.json'),
-            ],
-            'modifiers' => [
-                'N' => $this->readJson($root.'/modifiers/N.json'),
-            ],
+            'atomic' => $atomic,
+            'modifiers' => $modifiers,
             'synergies' => [
                 'n_high_x_e_low' => $this->readJson($root.'/synergies/n_high_x_e_low.json'),
             ],
@@ -46,6 +50,9 @@ final class RegistryLoader
                 'section_headlines' => $this->readJson($root.'/shared/section_headlines.json'),
                 'compare_phrases' => $this->readJson($root.'/shared/compare_phrases.json'),
                 'methodology' => $this->readJson($root.'/shared/methodology.json'),
+                'trait_labels' => $this->readJson($root.'/shared/trait_labels.json'),
+                'band_labels' => $this->readJson($root.'/shared/band_labels.json'),
+                'gradient_labels' => $this->readJson($root.'/shared/gradient_labels.json'),
             ],
         ];
     }
