@@ -32,6 +32,25 @@ final class RegistryValidator
         'action_plan.urgency_sentence',
     ];
 
+    private const REQUIRED_SHARED_ASSETS = [
+        'section_headlines.voice_anchor.tone',
+        'compare_phrases.voice_anchor',
+        'methodology.title',
+        'trait_labels.labels.O.report_anchor',
+        'trait_labels.labels.C.report_anchor',
+        'trait_labels.labels.E.report_anchor',
+        'trait_labels.labels.A.report_anchor',
+        'trait_labels.labels.N.report_anchor',
+        'band_labels.bands.low.meaning',
+        'band_labels.bands.mid.meaning',
+        'band_labels.bands.high.meaning',
+        'gradient_labels.gradients.g1.copy_rule',
+        'gradient_labels.gradients.g2.copy_rule',
+        'gradient_labels.gradients.g3.copy_rule',
+        'gradient_labels.gradients.g4.copy_rule',
+        'gradient_labels.gradients.g5.copy_rule',
+    ];
+
     /**
      * @param  array<string,mixed>  $registry
      * @return list<string>
@@ -48,6 +67,7 @@ final class RegistryValidator
 
         $errors = array_merge($errors, $this->validateAtomicCoverage($registry));
         $errors = array_merge($errors, $this->validateModifierCoverage($registry));
+        $errors = array_merge($errors, $this->validateSharedAssets($registry));
 
         $synergy = is_array($registry['synergies']['n_high_x_e_low'] ?? null) ? $registry['synergies']['n_high_x_e_low'] : [];
         foreach (['trigger', 'priority_weight_formula', 'mutex_group', 'mutual_excludes', 'max_show', 'copy'] as $key) {
@@ -83,6 +103,23 @@ final class RegistryValidator
         }
         if ($actionCount < 8 || $actionCount > 12) {
             $errors[] = "Action rule count must be 8-12, got {$actionCount}";
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  array<string,mixed>  $registry
+     * @return list<string>
+     */
+    private function validateSharedAssets(array $registry): array
+    {
+        $errors = [];
+        $shared = is_array($registry['shared'] ?? null) ? $registry['shared'] : [];
+        foreach (self::REQUIRED_SHARED_ASSETS as $assetPath) {
+            if (! $this->hasPath($shared, $assetPath)) {
+                $errors[] = "Missing shared asset {$assetPath}";
+            }
         }
 
         return $errors;

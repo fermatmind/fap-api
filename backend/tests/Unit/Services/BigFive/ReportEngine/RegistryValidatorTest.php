@@ -29,4 +29,14 @@ final class RegistryValidatorTest extends TestCase
 
         $this->assertContains('Modifier gradient n_g4 uses forbidden replace_map', $errors);
     }
+
+    public function test_it_requires_shared_voice_anchor_assets(): void
+    {
+        $registry = app(RegistryLoader::class)->load();
+        unset($registry['shared']['trait_labels']['labels']['O']['report_anchor']);
+
+        $errors = app(RegistryValidator::class)->validate($registry);
+
+        $this->assertContains('Missing shared asset trait_labels.labels.O.report_anchor', $errors);
+    }
 }

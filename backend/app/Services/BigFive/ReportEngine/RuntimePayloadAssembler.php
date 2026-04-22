@@ -52,7 +52,12 @@ final class RuntimePayloadAssembler
                     'action_plan',
                     'methodology_and_access',
                 ],
-                'pr1_vertical_slice' => 'N',
+                'registry_scope' => 'all_traits_atomic_modifier_pr2',
+                'limited_rollouts' => [
+                    'synergy_traits' => ['N'],
+                    'facet_precision_traits' => ['N'],
+                    'action_rule_scope' => 'N scenario rules only',
+                ],
             ],
         ];
     }
