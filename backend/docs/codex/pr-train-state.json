@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T01:26:34+08:00",
+  "updated_at": "2026-04-23T02:02:29+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -84,9 +84,9 @@
     "PR-BIG5-REPORT-ENGINE-ALL-TRAITS": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_checks_failed",
+      "status": "merged",
       "branch": "codex/big5-report-engine-all-traits",
-      "commit_sha": "bcfbc3ed71d77e434010cc7df377f39b0f0b974a",
+      "commit_sha": "012d627cf602cdca70adef24951fd81989ead185",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/977",
       "checks": {
         "local": [
@@ -146,7 +146,78 @@
           }
         ]
       },
-      "failure_reason": "GitHub Actions hygiene failed immediately on draft PR #977 and verify-mbti matrix jobs were skipped; GitHub did not expose logs for the failed hygiene jobs. The same hygiene scripts pass locally in a clean temporary git worktree at head bcfbc3ed. Local manifest checks passed. PR remains draft and is not merge-ready.",
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "2026-04-22T17:30:26Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-BIG5-REPORT-ENGINE-MORE-SYNERGY": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api-pr3a/backend",
+      "status": "github_checks_failed_billing_block",
+      "branch": "codex/big5-report-engine-more-synergy",
+      "commit_sha": "ebcba1a38cbfbf37e9d5e59844ac0a4d03d0b03e",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/979",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool content_packs/BIG5_OCEAN/v2/registry/manifest.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "for f in content_packs/BIG5_OCEAN/v2/registry/synergies/*.json tests/Fixtures/big5_engine/contexts/*.json tests/Fixtures/big5_engine/expected_canonical_n_slice_payload.json; do python3 -m json.tool \"$f\" >/dev/null || exit 1; done",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/BigFive/ReportEngine tests/Unit/Services/BigFive/ReportEngine tests/Feature/Content/BigFiveReportEngineNSliceTest.php tests/Feature/Content/BigFiveReportEngineAllTraitsRolloutTest.php tests/Feature/Content/BigFiveReportEngineSynergyRolloutTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/BigFive/ReportEngine tests/Feature/Content/BigFiveReportEngineNSliceTest.php tests/Feature/Content/BigFiveReportEngineAllTraitsRolloutTest.php tests/Feature/Content/BigFiveReportEngineSynergyRolloutTest.php",
+            "status": "passed_with_env_warnings"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan migrate --pretend --no-interaction",
+            "status": "passed"
+          },
+          {
+            "command": "bash scripts/ci_verify_mbti.sh",
+            "status": "failed_env_app_url_mismatch"
+          },
+          {
+            "command": "APP_URL=http://127.0.0.1:18010 bash scripts/ci_verify_mbti.sh",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24794672986/job/72561507816",
+            "reason": "GitHub Actions job was not started because recent account payments failed or the spending limit needs to be increased."
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24794672986/job/72561516638",
+            "reason": "Skipped because hygiene did not start due to GitHub billing/spending-limit block."
+          }
+        ]
+      },
+      "failure_reason": "Remote GitHub checks are blocked by account billing/spending-limit, not by PR3A code. Local hygiene and required PR3A checks passed.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,

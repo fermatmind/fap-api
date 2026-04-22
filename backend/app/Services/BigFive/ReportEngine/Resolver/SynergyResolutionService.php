@@ -19,11 +19,6 @@ final class SynergyResolutionService
      */
     public function resolve(array $candidates, int $maxShow = 2): array
     {
-        $candidateMax = $maxShow;
-        foreach ($candidates as $candidate) {
-            $candidateMax = min($candidateMax, $candidate->maxShow);
-        }
-
-        return $this->mutexResolver->resolve($candidates, max(1, $candidateMax));
+        return $this->mutexResolver->resolve($candidates, max(0, min(2, $maxShow)));
     }
 }

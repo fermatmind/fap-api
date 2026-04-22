@@ -51,6 +51,22 @@ final class RegistryValidator
         'gradient_labels.gradients.g5.copy_rule',
     ];
 
+    private const SYNERGY_IDS = [
+        'n_high_x_e_low',
+        'o_high_x_c_low',
+        'o_high_x_n_high',
+        'c_high_x_n_high',
+        'e_high_x_a_low',
+    ];
+
+    private const REQUIRED_SYNERGY_COPY_FIELDS = [
+        'headline',
+        'body',
+        'strength_sentence',
+        'risk_sentence',
+        'action_hook',
+    ];
+
     /**
      * @param  array<string,mixed>  $registry
      * @return list<string>
@@ -68,13 +84,7 @@ final class RegistryValidator
         $errors = array_merge($errors, $this->validateAtomicCoverage($registry));
         $errors = array_merge($errors, $this->validateModifierCoverage($registry));
         $errors = array_merge($errors, $this->validateSharedAssets($registry));
-
-        $synergy = is_array($registry['synergies']['n_high_x_e_low'] ?? null) ? $registry['synergies']['n_high_x_e_low'] : [];
-        foreach (['trigger', 'priority_weight_formula', 'mutex_group', 'mutual_excludes', 'max_show', 'copy'] as $key) {
-            if (! array_key_exists($key, $synergy)) {
-                $errors[] = "Synergy n_high_x_e_low missing {$key}";
-            }
-        }
+        $errors = array_merge($errors, $this->validateSynergyCoverage($registry));
 
         $facetRules = $registry['facet_precision']['N']['rules'] ?? null;
         if (! is_array($facetRules) || count($facetRules) < 5) {
@@ -103,6 +113,72 @@ final class RegistryValidator
         }
         if ($actionCount < 8 || $actionCount > 12) {
             $errors[] = "Action rule count must be 8-12, got {$actionCount}";
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  array<string,mixed>  $registry
+     * @return list<string>
+     */
+    private function validateSynergyCoverage(array $registry): array
+    {
+        $errors = [];
+        $synergies = is_array($registry['synergies'] ?? null) ? $registry['synergies'] : [];
+        if (array_values(array_keys($synergies)) !== self::SYNERGY_IDS) {
+            $errors[] = 'Synergy coverage must be exactly n_high_x_e_low/o_high_x_c_low/o_high_x_n_high/c_high_x_n_high/e_high_x_a_low in order';
+        }
+
+        $ids = [];
+        foreach (self::SYNERGY_IDS as $synergyId) {
+            $synergy = is_array($synergies[$synergyId] ?? null) ? $synergies[$synergyId] : [];
+            $declaredId = (string) ($synergy['synergy_id'] ?? '');
+            if ($declaredId !== $synergyId) {
+                $errors[] = "Synergy id mismatch for {$synergyId}.json";
+            }
+            if (in_array($declaredId, $ids, true)) {
+                $errors[] = "Duplicate synergy_id {$declaredId}";
+            }
+            $ids[] = $declaredId;
+
+            foreach (['trigger', 'mutex_group', 'mutual_excludes', 'max_show', 'section_targets', 'copy'] as $key) {
+                if (! array_key_exists($key, $synergy)) {
+                    $errors[] = "Synergy {$synergyId} missing {$key}";
+                }
+            }
+            if (! array_key_exists('priority_weight_formula', $synergy) && ! array_key_exists('priority_weight', $synergy)) {
+                $errors[] = "Synergy {$synergyId} missing priority weight";
+            }
+            if (trim((string) ($synergy['mutex_group'] ?? '')) === '') {
+                $errors[] = "Synergy {$synergyId} mutex_group must be non-empty";
+            }
+            $maxShow = (int) ($synergy['max_show'] ?? 0);
+            if ($maxShow < 1 || $maxShow > 2) {
+                $errors[] = "Synergy {$synergyId} max_show must be 1-2";
+            }
+
+            $targets = is_array($synergy['section_targets'] ?? null) ? $synergy['section_targets'] : [];
+            foreach ($targets as $target) {
+                $sectionKey = is_array($target) ? (string) ($target['section_key'] ?? '') : '';
+                if (! in_array($sectionKey, ['core_portrait', 'action_plan'], true)) {
+                    $errors[] = "Synergy {$synergyId} has invalid section target {$sectionKey}";
+                }
+            }
+
+            $copy = is_array($synergy['copy'] ?? null) ? $synergy['copy'] : [];
+            foreach (self::REQUIRED_SYNERGY_COPY_FIELDS as $field) {
+                if (! array_key_exists($field, $copy) || trim((string) $copy[$field]) === '') {
+                    $errors[] = "Synergy {$synergyId} copy missing {$field}";
+                }
+            }
+
+            $mutualExcludes = is_array($synergy['mutual_excludes'] ?? null) ? $synergy['mutual_excludes'] : [];
+            foreach ($mutualExcludes as $mutualExclude) {
+                if (! in_array((string) $mutualExclude, self::SYNERGY_IDS, true)) {
+                    $errors[] = "Synergy {$synergyId} mutual_excludes unknown rule {$mutualExclude}";
+                }
+            }
         }
 
         return $errors;

@@ -1,0 +1,27 @@
+{
+  "schema": "fap.big5.synergy_rule.v1",
+  "synergy_id": "o_high_x_n_high",
+  "title": "复杂性过载效应",
+  "trigger": {
+    "all": [
+      { "trait": "O", "op": ">=", "value": 70 },
+      { "trait": "N", "op": ">=", "value": 70 }
+    ]
+  },
+  "priority_weight_formula": "abs(O-50)+abs(N-50)+abs(O-N)*0.5",
+  "priority_hint": 75,
+  "mutex_group": "stress_activation",
+  "mutual_excludes": ["n_high_x_e_low", "c_high_x_n_high"],
+  "max_show": 2,
+  "section_targets": [
+    { "section_key": "core_portrait", "slot": "synergy_primary", "kind": "callout" },
+    { "section_key": "action_plan", "slot": "synergy_action", "kind": "paragraph" }
+  ],
+  "copy": {
+    "headline": "你会同时看见更多可能性，也更容易被这些可能性的风险和后果牵动。",
+    "body": "高开放性会扩大你对复杂情境的理解范围，高情绪性会提高你对不确定性、失控感和潜在代价的体感。两者叠加时，问题不只是“想得多”，而是每一种可能性都可能带着风险重量进入系统，让理解力变成负荷来源。",
+    "strength_sentence": "这组组合让你对细微变化、长远后果和隐藏变量更敏锐，适合处理需要深度判断的复杂议题。",
+    "risk_sentence": "它的代价是：当信息过多、边界不清或选择太开放时，你可能先被复杂性本身压住。",
+    "action_hook": "你的优先动作是把复杂问题先分层：哪些是真风险，哪些只是尚未验证的可能性。"
+  }
+}

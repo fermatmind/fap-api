@@ -127,13 +127,11 @@
                         "section_key": "core_portrait",
                         "slot": "synergy_primary",
                         "kind": "callout"
-                    },
-                    {
-                        "section_key": "action_plan",
-                        "slot": "synergy_action",
-                        "kind": "paragraph"
                     }
-                ]
+                ],
+                "render_rank": "primary",
+                "render_section": "core_portrait",
+                "render_slot": "synergy_primary"
             }
         ],
         "facet_anomalies": [
@@ -989,6 +987,8 @@
                     },
                     "analytics": {
                         "synergy_id": "n_high_x_e_low",
+                        "synergy_rank": "primary",
+                        "slot": "synergy_primary",
                         "priority_weight": 72.0
                     }
                 },
@@ -1339,31 +1339,6 @@
                     }
                 },
                 {
-                    "block_uid": "action_plan.synergy.n_high_x_e_low.synergy_action",
-                    "kind": "paragraph",
-                    "component": "BigFiveSynergyCallout",
-                    "block_id": "synergy_n_high_x_e_low_synergy_action",
-                    "resolved_copy": {
-                        "headline": "你会比多数人更早感到张力，但又不太会通过持续表达把它带出去。",
-                        "body": "高情绪性让压力、误解和不确定性更早进入系统，低外向性又让这份负荷不太会通过现场表达、社交释放或高频互动被带出去。结果不是当场失控，而是外面看起来还算稳，里面却已经开始长时间高负荷运转。",
-                        "strength_sentence": "这组组合会让你比很多人更早发现环境和关系中的裂缝，也更不容易盲目进入高刺激场域。",
-                        "risk_sentence": "它的代价是：你更容易进入“想很多但迟迟不进入、内部很忙但外面看不太出来”的状态。",
-                        "action_hook": "你的关键课题不是逼自己更外放，而是更早外化感受、更低成本表达边界、更主动安排恢复。"
-                    },
-                    "provenance": {
-                        "atomic_refs": [],
-                        "modifier_refs": [],
-                        "synergy_refs": [
-                            "synergies/n_high_x_e_low.json"
-                        ],
-                        "facet_refs": []
-                    },
-                    "analytics": {
-                        "synergy_id": "n_high_x_e_low",
-                        "priority_weight": 72.0
-                    }
-                },
-                {
                     "block_uid": "action_plan.facet.n5_high_spike",
                     "kind": "facet_anomaly",
                     "component": "BigFiveFacetPrecisionBlock",
@@ -1421,7 +1396,7 @@
                     "resolved_copy": {
                         "schema": "fap.big5.shared_methodology.v1",
                         "title": "v2 报告引擎方法说明",
-                        "body": "本 payload 由 Big Five Report Engine v2 registry 生成；PR2 已覆盖 O/C/E/A/N 五维 atomic 与 sentence-level modifier，synergy、facet precision 与 scenario action rule 仍保持 PR1 的 N-only 范围。",
+                        "body": "本 payload 由 Big Five Report Engine v2 registry 生成；PR3A 已覆盖 5 条核心 synergy 的候选收集、权重裁决和互斥熔断，O/C/E/A/N 五维 atomic 与 sentence-level modifier 继续沿用 PR2，facet precision 与 scenario action rule 仍保持 PR1 的 N-only 范围。",
                         "access_note": "此结构服务未来 8 section 承载位，不代表生产 AttemptReadController 已接入。"
                     },
                     "provenance": {
@@ -1615,10 +1590,14 @@
             "action_plan",
             "methodology_and_access"
         ],
-        "registry_scope": "all_traits_atomic_modifier_pr2",
+        "registry_scope": "more_synergy_rollout_pr3a",
         "limited_rollouts": {
-            "synergy_traits": [
-                "N"
+            "synergies": [
+                "n_high_x_e_low",
+                "o_high_x_c_low",
+                "o_high_x_n_high",
+                "c_high_x_n_high",
+                "e_high_x_a_low"
             ],
             "facet_precision_traits": [
                 "N"

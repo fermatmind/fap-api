@@ -1,0 +1,19 @@
+{
+  "schema": "fap.big5.report_context_fixture.v1",
+  "fixture_id": "context_balanced_no_synergy",
+  "locale": "zh-CN",
+  "scale_code": "BIG5_OCEAN",
+  "form_code": "big5_90",
+  "score_vector": {
+    "domains": {
+      "O": { "percentile": 52, "band": "mid", "gradient_id": "o_g3" },
+      "C": { "percentile": 49, "band": "mid", "gradient_id": "c_g3" },
+      "E": { "percentile": 51, "band": "mid", "gradient_id": "e_g3" },
+      "A": { "percentile": 54, "band": "mid", "gradient_id": "a_g3" },
+      "N": { "percentile": 47, "band": "mid", "gradient_id": "n_g3" }
+    },
+    "facets": {}
+  },
+  "expected_synergy_candidates": [],
+  "expected_selected_synergies": []
+}

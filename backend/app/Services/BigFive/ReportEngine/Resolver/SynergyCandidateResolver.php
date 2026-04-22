@@ -35,7 +35,7 @@ final class SynergyCandidateResolver
                 synergyId: (string) ($synergy['synergy_id'] ?? $synergyId),
                 title: (string) ($synergy['title'] ?? ''),
                 priorityWeight: $this->weightCalculator->calculate(
-                    (string) ($synergy['priority_weight_formula'] ?? ''),
+                    (string) ($synergy['priority_weight_formula'] ?? $synergy['priority_weight'] ?? ''),
                     $context,
                     (float) ($synergy['priority_hint'] ?? 0),
                 ),
