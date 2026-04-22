@@ -35,7 +35,7 @@ class ResultResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return 'Results Explorer';
+        return __('ops.nav.results_explorer');
     }
 
     public static function form(Form $form): Form

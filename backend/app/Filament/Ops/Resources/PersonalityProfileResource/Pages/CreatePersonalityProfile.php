@@ -27,12 +27,12 @@ class CreatePersonalityProfile extends CreateRecord
 
     public function getTitle(): string|Htmlable
     {
-        return 'Create Personality Profile';
+        return __('ops.resources.personality_profiles.create_title');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Build a structured MBTI profile in the main workspace, then finish publish and SEO cues in the side rail.';
+        return __('ops.resources.personality_profiles.create_subheading');
     }
 
     protected function fillForm(): void
@@ -48,7 +48,7 @@ class CreatePersonalityProfile extends CreateRecord
     {
         return [
             Action::make('backToPersonality')
-                ->label('All Personality Profiles')
+                ->label(__('ops.resources.personality_profiles.actions.all'))
                 ->url(PersonalityProfileResource::getUrl())
                 ->icon('heroicon-o-arrow-left')
                 ->color('gray'),
@@ -58,21 +58,21 @@ class CreatePersonalityProfile extends CreateRecord
     protected function getCreateFormAction(): Action
     {
         return parent::getCreateFormAction()
-            ->label('Create Personality Profile')
+            ->label(__('ops.resources.personality_profiles.actions.create'))
             ->icon('heroicon-o-check-circle');
     }
 
     protected function getCreateAnotherFormAction(): Action
     {
         return parent::getCreateAnotherFormAction()
-            ->label('Create & Add Another')
+            ->label(__('ops.resources.common.actions.create_another'))
             ->icon('heroicon-o-document-duplicate');
     }
 
     protected function getCancelFormAction(): Action
     {
         return parent::getCancelFormAction()
-            ->label('Back to Personality')
+            ->label(__('ops.resources.personality_profiles.actions.back_to_list'))
             ->icon('heroicon-o-arrow-left');
     }
 
@@ -113,12 +113,12 @@ class CreatePersonalityProfile extends CreateRecord
         PersonalityWorkspace::syncWorkspaceSeo($this->getRecord(), $this->workspaceSeoState);
         $this->getRecord()->unsetRelation('sections');
         $this->getRecord()->unsetRelation('seoMeta');
-        PersonalityWorkspace::createRevision($this->getRecord(), 'Initial workspace snapshot');
+        PersonalityWorkspace::createRevision($this->getRecord(), __('ops.resources.common.revisions.initial_workspace_snapshot'));
     }
 
     protected function getCreatedNotificationTitle(): ?string
     {
-        return 'Personality profile created';
+        return __('ops.resources.personality_profiles.notifications.created');
     }
 
     protected function getRedirectUrl(): string

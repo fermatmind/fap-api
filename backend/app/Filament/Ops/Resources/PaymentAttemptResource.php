@@ -34,7 +34,7 @@ final class PaymentAttemptResource extends BaseTenantResource
 
     public static function getNavigationLabel(): string
     {
-        return 'Payment Attempts';
+        return __('ops.nav.payment_attempts');
     }
 
     public static function form(Form $form): Form

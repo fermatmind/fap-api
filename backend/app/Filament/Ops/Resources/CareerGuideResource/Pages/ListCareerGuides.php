@@ -18,19 +18,19 @@ class ListCareerGuides extends ListRecords
 
     public function getTitle(): string|Htmlable
     {
-        return 'Career Guides';
+        return __('ops.resources.career_guides.plural');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Global career content workspace for structured career guides. Not tenant-specific.';
+        return __('ops.resources.career_guides.list_subheading');
     }
 
     protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make()
-                ->label('Create Career Guide')
+                ->label(__('ops.resources.career_guides.actions.create'))
                 ->icon('heroicon-o-plus'),
         ];
     }

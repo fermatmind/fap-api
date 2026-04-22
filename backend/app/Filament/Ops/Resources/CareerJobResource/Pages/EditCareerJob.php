@@ -26,19 +26,19 @@ class EditCareerJob extends EditRecord
 
     public function getTitle(): string|Htmlable
     {
-        return filled($this->getRecord()->title) ? (string) $this->getRecord()->title : 'Edit Career Job';
+        return filled($this->getRecord()->title) ? (string) $this->getRecord()->title : __('ops.resources.career_jobs.edit_title');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Maintain the career job without leaving the structured editorial workspace.';
+        return __('ops.resources.career_jobs.edit_subheading');
     }
 
     protected function getHeaderActions(): array
     {
         return [
             Action::make('backToCareerJobs')
-                ->label('All Career Jobs')
+                ->label(__('ops.resources.career_jobs.actions.all'))
                 ->url(CareerJobResource::getUrl())
                 ->icon('heroicon-o-arrow-left')
                 ->color('gray'),
@@ -48,14 +48,14 @@ class EditCareerJob extends EditRecord
     protected function getSaveFormAction(): Action
     {
         return parent::getSaveFormAction()
-            ->label('Save Changes')
+            ->label(__('ops.actions.save_changes'))
             ->icon('heroicon-o-check-circle');
     }
 
     protected function getCancelFormAction(): Action
     {
         return parent::getCancelFormAction()
-            ->label('Back to Career Jobs')
+            ->label(__('ops.resources.career_jobs.actions.back_to_list'))
             ->icon('heroicon-o-arrow-left');
     }
 
@@ -103,12 +103,12 @@ class EditCareerJob extends EditRecord
         CareerJobWorkspace::syncWorkspaceSeo($this->getRecord(), $this->workspaceSeoState);
         $this->getRecord()->unsetRelation('sections');
         $this->getRecord()->unsetRelation('seoMeta');
-        CareerJobWorkspace::createRevision($this->getRecord(), 'Workspace update', auth((string) config('admin.guard', 'admin'))->user());
+        CareerJobWorkspace::createRevision($this->getRecord(), __('ops.resources.common.revisions.workspace_update'), auth((string) config('admin.guard', 'admin'))->user());
     }
 
     protected function getSavedNotificationTitle(): ?string
     {
-        return 'Career job updated';
+        return __('ops.resources.career_jobs.notifications.updated');
     }
 
     protected function getRedirectUrl(): string

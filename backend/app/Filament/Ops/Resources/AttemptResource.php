@@ -35,7 +35,7 @@ class AttemptResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return 'Attempts Explorer';
+        return __('ops.nav.attempts_explorer');
     }
 
     public static function form(Form $form): Form

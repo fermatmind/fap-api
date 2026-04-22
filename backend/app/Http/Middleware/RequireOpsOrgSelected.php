@@ -116,7 +116,7 @@ class RequireOpsOrgSelected
             return $next($request);
         }
 
-        $request->session()->flash('ops_org_required_message', '需要先选择组织后再访问该模块。');
+        $request->session()->flash('ops_org_required_message', __('ops.select_org.required_message'));
 
         return redirect()->route('filament.ops.pages.select-org', [
             'return_to' => '/'.ltrim($request->path(), '/'),

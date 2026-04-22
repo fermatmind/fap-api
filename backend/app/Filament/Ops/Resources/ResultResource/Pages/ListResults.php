@@ -16,7 +16,7 @@ class ListResults extends ListRecords
 
     public function getTitle(): string
     {
-        return 'Results Explorer';
+        return __('ops.resources.support.results_explorer');
     }
 
     protected function getHeaderActions(): array

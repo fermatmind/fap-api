@@ -31,19 +31,19 @@ class EditCareerGuide extends EditRecord
 
     public function getTitle(): string|Htmlable
     {
-        return filled($this->getRecord()->title) ? (string) $this->getRecord()->title : 'Edit Career Guide';
+        return filled($this->getRecord()->title) ? (string) $this->getRecord()->title : __('ops.resources.career_guides.edit_title');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Maintain the career guide without implying public runtime authority or leaving the structured editorial workspace.';
+        return __('ops.resources.career_guides.edit_subheading');
     }
 
     protected function getHeaderActions(): array
     {
         return [
             Action::make('backToCareerGuides')
-                ->label('All Career Guides')
+                ->label(__('ops.resources.career_guides.actions.all'))
                 ->url(CareerGuideResource::getUrl())
                 ->icon('heroicon-o-arrow-left')
                 ->color('gray'),
@@ -53,14 +53,14 @@ class EditCareerGuide extends EditRecord
     protected function getSaveFormAction(): Action
     {
         return parent::getSaveFormAction()
-            ->label('Save Changes')
+            ->label(__('ops.actions.save_changes'))
             ->icon('heroicon-o-check-circle');
     }
 
     protected function getCancelFormAction(): Action
     {
         return parent::getCancelFormAction()
-            ->label('Back to Career Guides')
+            ->label(__('ops.resources.career_guides.actions.back_to_list'))
             ->icon('heroicon-o-arrow-left');
     }
 
@@ -122,12 +122,12 @@ class EditCareerGuide extends EditRecord
         CareerGuideWorkspace::syncRelatedJobs($this->getRecord(), $this->workspaceRelatedJobsState);
         CareerGuideWorkspace::syncRelatedPersonalityProfiles($this->getRecord(), $this->workspaceRelatedPersonalityProfilesState);
         CareerGuideWorkspace::syncWorkspaceSeo($this->getRecord(), $this->workspaceSeoState);
-        CareerGuideWorkspace::createRevision($this->getRecord(), 'Workspace update');
+        CareerGuideWorkspace::createRevision($this->getRecord(), __('ops.resources.common.revisions.workspace_update'));
     }
 
     protected function getSavedNotificationTitle(): ?string
     {
-        return 'Career guide updated';
+        return __('ops.resources.career_guides.notifications.updated');
     }
 
     protected function getRedirectUrl(): string

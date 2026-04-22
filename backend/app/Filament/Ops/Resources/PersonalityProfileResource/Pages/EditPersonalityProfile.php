@@ -27,19 +27,19 @@ class EditPersonalityProfile extends EditRecord
 
     public function getTitle(): string|Htmlable
     {
-        return filled($this->getRecord()->title) ? (string) $this->getRecord()->title : 'Edit Personality Profile';
+        return filled($this->getRecord()->title) ? (string) $this->getRecord()->title : __('ops.resources.personality_profiles.edit_title');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Maintain the structured MBTI profile without leaving the editorial workspace.';
+        return __('ops.resources.personality_profiles.edit_subheading');
     }
 
     protected function getHeaderActions(): array
     {
         return [
             Action::make('backToPersonality')
-                ->label('All Personality Profiles')
+                ->label(__('ops.resources.personality_profiles.actions.all'))
                 ->url(PersonalityProfileResource::getUrl())
                 ->icon('heroicon-o-arrow-left')
                 ->color('gray'),
@@ -49,14 +49,14 @@ class EditPersonalityProfile extends EditRecord
     protected function getSaveFormAction(): Action
     {
         return parent::getSaveFormAction()
-            ->label('Save Changes')
+            ->label(__('ops.actions.save_changes'))
             ->icon('heroicon-o-check-circle');
     }
 
     protected function getCancelFormAction(): Action
     {
         return parent::getCancelFormAction()
-            ->label('Back to Personality')
+            ->label(__('ops.resources.personality_profiles.actions.back_to_list'))
             ->icon('heroicon-o-arrow-left');
     }
 
@@ -109,12 +109,12 @@ class EditPersonalityProfile extends EditRecord
         PersonalityWorkspace::syncWorkspaceSeo($this->getRecord(), $this->workspaceSeoState);
         $this->getRecord()->unsetRelation('sections');
         $this->getRecord()->unsetRelation('seoMeta');
-        PersonalityWorkspace::createRevision($this->getRecord(), 'Workspace update');
+        PersonalityWorkspace::createRevision($this->getRecord(), __('ops.resources.common.revisions.workspace_update'));
     }
 
     protected function getSavedNotificationTitle(): ?string
     {
-        return 'Personality profile updated';
+        return __('ops.resources.personality_profiles.notifications.updated');
     }
 
     protected function getRedirectUrl(): string

@@ -56,7 +56,7 @@ class MediaAssetResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return 'Media Library';
+        return __('ops.nav.media_library');
     }
 
     public static function form(Form $form): Form

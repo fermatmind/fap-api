@@ -31,12 +31,12 @@ class CreateTopicProfile extends CreateRecord
 
     public function getTitle(): string|Htmlable
     {
-        return 'Create Topic';
+        return __('ops.resources.topics.create_title');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Build a structured topic hub with fixed narrative sections, grouped entries, and metadata rails.';
+        return __('ops.resources.topics.create_subheading');
     }
 
     protected function fillForm(): void
@@ -52,7 +52,7 @@ class CreateTopicProfile extends CreateRecord
     {
         return [
             Action::make('backToTopics')
-                ->label('All Topic Profiles')
+                ->label(__('ops.resources.topics.actions.all'))
                 ->url(TopicProfileResource::getUrl())
                 ->icon('heroicon-o-arrow-left')
                 ->color('gray'),
@@ -62,21 +62,21 @@ class CreateTopicProfile extends CreateRecord
     protected function getCreateFormAction(): Action
     {
         return parent::getCreateFormAction()
-            ->label('Create Topic')
+            ->label(__('ops.resources.topics.actions.create'))
             ->icon('heroicon-o-check-circle');
     }
 
     protected function getCreateAnotherFormAction(): Action
     {
         return parent::getCreateAnotherFormAction()
-            ->label('Create & Add Another')
+            ->label(__('ops.resources.common.actions.create_another'))
             ->icon('heroicon-o-document-duplicate');
     }
 
     protected function getCancelFormAction(): Action
     {
         return parent::getCancelFormAction()
-            ->label('Back to Topics')
+            ->label(__('ops.resources.topics.actions.back_to_list'))
             ->icon('heroicon-o-arrow-left');
     }
 
@@ -112,12 +112,12 @@ class CreateTopicProfile extends CreateRecord
         $this->getRecord()->unsetRelation('sections');
         $this->getRecord()->unsetRelation('entries');
         $this->getRecord()->unsetRelation('seoMeta');
-        TopicWorkspace::createRevision($this->getRecord(), 'Initial workspace snapshot');
+        TopicWorkspace::createRevision($this->getRecord(), __('ops.resources.common.revisions.initial_workspace_snapshot'));
     }
 
     protected function getCreatedNotificationTitle(): ?string
     {
-        return 'Topic profile created';
+        return __('ops.resources.topics.notifications.created');
     }
 
     protected function getRedirectUrl(): string

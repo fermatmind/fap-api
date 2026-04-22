@@ -18,9 +18,9 @@ class MbtiInsightsPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-chart-pie';
 
-    protected static ?string $navigationGroup = 'Assessment Insights';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'MBTI Insights';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 1;
 
@@ -126,12 +126,22 @@ class MbtiInsightsPage extends Page
 
     public function getTitle(): string
     {
-        return 'MBTI Insights';
+        return __('ops.nav.mbti_insights');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Results-rooted MBTI Overview, Type Distribution, and Axis Distribution with attempt-side locale, region, and version context.';
+        return __('ops.pages.mbti_insights.subheading');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ops.topbar.assessment_insights');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ops.nav.mbti_insights');
     }
 
     public function applyFilters(): void
@@ -171,7 +181,7 @@ class MbtiInsightsPage extends Page
     {
         return [
             Action::make('results')
-                ->label('Results Explorer')
+                ->label(__('ops.nav.results_explorer'))
                 ->url('/ops/results'),
         ];
     }

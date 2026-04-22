@@ -16,7 +16,7 @@ class ListAttempts extends ListRecords
 
     public function getTitle(): string
     {
-        return 'Attempts Explorer';
+        return __('ops.resources.support.attempts_explorer');
     }
 
     protected function getHeaderActions(): array

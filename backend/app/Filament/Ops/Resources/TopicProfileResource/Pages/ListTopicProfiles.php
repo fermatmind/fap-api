@@ -18,19 +18,19 @@ class ListTopicProfiles extends ListRecords
 
     public function getTitle(): string|Htmlable
     {
-        return 'Topics';
+        return __('ops.resources.topics.plural');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Global topic content workspace for structured topic hubs and curated entry groups. Not tenant-specific.';
+        return __('ops.resources.topics.list_subheading');
     }
 
     protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make()
-                ->label('Create Topic')
+                ->label(__('ops.resources.topics.actions.create'))
                 ->icon('heroicon-o-plus'),
         ];
     }

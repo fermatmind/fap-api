@@ -16,17 +16,17 @@ class ListReportSnapshots extends ListRecords
 
     public function getTitle(): string
     {
-        return 'Report / PDF Center';
+        return __('ops.resources.support.report_pdf_center');
     }
 
     public function getHeading(): string
     {
-        return 'Report / PDF Center';
+        return __('ops.resources.support.report_pdf_center');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Snapshot-rooted support diagnostics for report delivery, PDF availability, claim/resend clues, and unlock linkage.';
+        return __('ops.resources.support.report_pdf_subheading');
     }
 
     protected function getHeaderActions(): array

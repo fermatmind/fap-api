@@ -102,17 +102,17 @@ class ViewResult extends Page
 
     public function getTitle(): string
     {
-        return 'Results Explorer';
+        return __('ops.resources.support.results_explorer');
     }
 
     public function getHeading(): string
     {
-        return 'Results Explorer';
+        return __('ops.resources.support.results_explorer');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Read-only support diagnostics rooted on results.';
+        return __('ops.resources.support.results_detail_subheading');
     }
 
     public function getBreadcrumb(): string

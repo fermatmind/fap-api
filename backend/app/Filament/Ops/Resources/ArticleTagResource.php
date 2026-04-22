@@ -27,9 +27,9 @@ class ArticleTagResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
-    protected static ?string $navigationGroup = 'Content';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Tags';
+    protected static ?string $navigationLabel = null;
 
     public static function canViewAny(): bool
     {
@@ -58,7 +58,7 @@ class ArticleTagResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return 'Tags';
+        return __('ops.nav.article_tags');
     }
 
     public static function form(Form $form): Form
@@ -89,8 +89,8 @@ class ArticleTagResource extends Resource
                     ->searchable()
                     ->copyable(),
                 TextColumn::make('is_active')
-                    ->label('Status')
-                    ->formatStateUsing(fn (bool|int|string|null $state): string => StatusBadge::booleanLabel($state, 'active', 'inactive'))
+                    ->label(__('ops.status.label'))
+                    ->formatStateUsing(fn (bool|int|string|null $state): string => StatusBadge::booleanLabel($state, __('ops.status.active'), __('ops.status.inactive')))
                     ->badge()
                     ->color(fn (bool|int|string|null $state): string => StatusBadge::booleanColor($state))
                     ->sortable(),
@@ -100,7 +100,7 @@ class ArticleTagResource extends Resource
             ])
             ->filters([
                 TernaryFilter::make('is_active')
-                    ->label('Status'),
+                    ->label(__('ops.status.label')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

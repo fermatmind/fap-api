@@ -31,19 +31,19 @@ class EditTopicProfile extends EditRecord
 
     public function getTitle(): string|Htmlable
     {
-        return filled($this->getRecord()->title) ? (string) $this->getRecord()->title : 'Edit Topic Profile';
+        return filled($this->getRecord()->title) ? (string) $this->getRecord()->title : __('ops.resources.topics.edit_title');
     }
 
     public function getSubheading(): ?string
     {
-        return 'Maintain the topic hub without leaving the structured editorial workspace.';
+        return __('ops.resources.topics.edit_subheading');
     }
 
     protected function getHeaderActions(): array
     {
         return [
             Action::make('backToTopics')
-                ->label('All Topic Profiles')
+                ->label(__('ops.resources.topics.actions.all'))
                 ->url(TopicProfileResource::getUrl())
                 ->icon('heroicon-o-arrow-left')
                 ->color('gray'),
@@ -53,14 +53,14 @@ class EditTopicProfile extends EditRecord
     protected function getSaveFormAction(): Action
     {
         return parent::getSaveFormAction()
-            ->label('Save Changes')
+            ->label(__('ops.actions.save_changes'))
             ->icon('heroicon-o-check-circle');
     }
 
     protected function getCancelFormAction(): Action
     {
         return parent::getCancelFormAction()
-            ->label('Back to Topics')
+            ->label(__('ops.resources.topics.actions.back_to_list'))
             ->icon('heroicon-o-arrow-left');
     }
 
@@ -109,12 +109,12 @@ class EditTopicProfile extends EditRecord
         $this->getRecord()->unsetRelation('sections');
         $this->getRecord()->unsetRelation('entries');
         $this->getRecord()->unsetRelation('seoMeta');
-        TopicWorkspace::createRevision($this->getRecord(), 'Workspace update');
+        TopicWorkspace::createRevision($this->getRecord(), __('ops.resources.common.revisions.workspace_update'));
     }
 
     protected function getSavedNotificationTitle(): ?string
     {
-        return 'Topic profile updated';
+        return __('ops.resources.topics.notifications.updated');
     }
 
     protected function getRedirectUrl(): string

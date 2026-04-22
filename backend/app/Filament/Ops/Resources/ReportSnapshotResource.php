@@ -41,7 +41,7 @@ class ReportSnapshotResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return 'Report / PDF Center';
+        return __('ops.nav.report_pdf_center');
     }
 
     public static function form(Form $form): Form
