@@ -3251,10 +3251,10 @@
     "PR-4": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "status": "local_checks_passed",
+      "status": "open",
       "branch": "codex/pr-4-support-cms-infra-backend",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "1d61c78db442b10f2ce6e5da99c868767647dceb",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/972",
       "checks": {
         "local": [
           {
@@ -3298,7 +3298,12 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "status": "pending",
+            "checked_at": "2026-04-22T20:20:00+08:00"
+          }
+        ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
