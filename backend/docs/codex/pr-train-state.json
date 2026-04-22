@@ -3253,7 +3253,7 @@
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
       "status": "open",
       "branch": "codex/pr-4-support-cms-infra-backend",
-      "commit_sha": "1d61c78db442b10f2ce6e5da99c868767647dceb",
+      "commit_sha": "ad4c378dfc8fb840a02e5a30dc3468fb352ed938",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/972",
       "checks": {
         "local": [
@@ -3290,7 +3290,11 @@
             "status": "passed"
           },
           {
-            "command": "cd backend && bash scripts/ci_verify_mbti.sh",
+            "command": "cd backend && APP_URL=http://127.0.0.1:18010 bash scripts/ci_verify_mbti.sh",
+            "status": "passed"
+          },
+          {
+            "command": "bash backend/scripts/ci/guard_no_committed_secrets.sh && bash backend/scripts/cae_gate.sh",
             "status": "passed"
           },
           {
@@ -3301,21 +3305,8 @@
         "github": [
           {
             "name": "hygiene",
-            "status": "pending",
-            "checked_at": "2026-04-22T20:20:00+08:00",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24778093343/job/72501535440"
-          },
-          {
-            "name": "hygiene",
-            "status": "pending",
-            "checked_at": "2026-04-22T20:20:00+08:00",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24778094869/job/72501540933"
-          },
-          {
-            "name": "verify-mbti-${{ matrix.mode }}",
-            "status": "skipping",
-            "checked_at": "2026-04-22T20:20:00+08:00",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24778093343/job/72501544631"
+            "status": "pending_after_followup_push",
+            "checked_at": "2026-04-22T20:35:00+08:00"
           }
         ]
       },
