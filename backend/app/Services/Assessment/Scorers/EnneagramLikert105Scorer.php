@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 namespace App\Services\Assessment\Scorers;
 
+use App\Services\Enneagram\EnneagramTopologyAnalyzer;
+
 final class EnneagramLikert105Scorer
 {
+    public function __construct(
+        private readonly EnneagramTopologyAnalyzer $topologyAnalyzer,
+    ) {}
+
     /**
      * @param  array<int,int>  $answersByQid
      * @param  array<int,array<string,mixed>>  $questionIndex
@@ -73,6 +79,17 @@ final class EnneagramLikert105Scorer
         $top = $ranked[0] ?? ['type_code' => '', 'dominance' => 0.0];
         $second = $ranked[1] ?? ['type_code' => '', 'dominance' => 0.0];
         $gap = round((float) ($top['dominance'] ?? 0.0) - (float) ($second['dominance'] ?? 0.0), 6);
+        $quality = [
+            'level' => 'P0',
+            'flags' => [],
+        ];
+        $analysis = $this->topologyAnalyzer->analyzeLikert105($rawIntensity, $dominance, $ranked, $quality);
+        $display = [
+            'profile100' => $this->profile100($rawIntensity),
+            'chart_vector' => $this->chartVector($ranked, $this->profile100($rawIntensity), 'profile100'),
+            'score_kind' => 'raw_based_profile100',
+            'score_note' => 'Profile display scores are mapped from raw intensity; they are not T-scores, percentiles, or standardized scores.',
+        ];
 
         return [
             'scale_code' => 'ENNEAGRAM',
@@ -88,17 +105,24 @@ final class EnneagramLikert105Scorer
                 'dominance' => $dominance,
             ],
             'scores_0_100' => $scoresPct,
+            'scoring' => [
+                'raw' => $rawIntensity,
+                'dominance' => $dominance,
+                'weighted_sum' => $this->roundMap($weightedSums),
+                'weight_sum' => $this->roundMap($weightSums),
+            ],
+            'analysis' => $analysis,
+            'display' => $display,
             'ranking' => $ranked,
             'primary_type' => (string) ($top['type_code'] ?? ''),
             'top_types' => array_slice($ranked, 0, 3),
             'confidence' => [
-                'level' => $this->confidenceLevel($gap, $policy),
+                'level' => (string) ($analysis['confidence_band'] ?? $this->confidenceLevel($gap, $policy)),
                 'top1_top2_gap' => $gap,
+                'score_separation' => $analysis['score_separation'] ?? $gap,
+                'interpretation_state' => $analysis['interpretation_state'] ?? 'standard_primary',
             ],
-            'quality' => [
-                'level' => 'P0',
-                'flags' => [],
-            ],
+            'quality' => $quality,
         ];
     }
 
@@ -170,6 +194,43 @@ final class EnneagramLikert105Scorer
     private function roundMap(array $map): array
     {
         return array_map(static fn (float $value): float => round($value, 6), $map);
+    }
+
+    /**
+     * @param  array<string,float>  $rawIntensity
+     * @return array<string,int>
+     */
+    private function profile100(array $rawIntensity): array
+    {
+        $out = [];
+        foreach ($rawIntensity as $typeCode => $raw) {
+            $out[$typeCode] = max(0, min(100, (int) round(25.0 * (((float) $raw) + 2.0))));
+        }
+
+        return $out;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $ranked
+     * @param  array<string,int|float|null>  $scores
+     * @return list<array<string,mixed>>
+     */
+    private function chartVector(array $ranked, array $scores, string $scoreKey): array
+    {
+        $out = [];
+        foreach ($ranked as $row) {
+            $typeCode = (string) ($row['type_code'] ?? '');
+            if ($typeCode === '') {
+                continue;
+            }
+            $out[] = [
+                'type_code' => $typeCode,
+                $scoreKey => $scores[$typeCode] ?? null,
+                'rank' => (int) ($row['rank'] ?? 0),
+            ];
+        }
+
+        return $out;
     }
 
     /**

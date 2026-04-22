@@ -1,11 +1,70 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-21T12:55:00+08:00",
+  "updated_at": "2026-04-22T09:32:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "PR-ENNEAGRAM-V11": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "github_checks_failed",
+      "branch": "codex/enneagram-v1-1-topology-tiebreak-display",
+      "commit_sha": "f1655f77930a160e613f6ae424f263194c44843f",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/967",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Assessment/Scorers/EnneagramLikert105Scorer.php app/Services/Assessment/Scorers/EnneagramForcedChoice144Scorer.php app/Services/Enneagram/EnneagramTopologyAnalyzer.php app/Services/Enneagram/EnneagramPublicProjectionService.php app/Services/Report/EnneagramReportComposer.php tests/Feature/Content/EnneagramScoringV11Test.php tests/Feature/Content/EnneagramGoldenCasesTest.php tests/Feature/V0_3/EnneagramAssessmentFlowTest.php tests/Feature/V0_3/EnneagramReadReportContractTest.php tests/Feature/Attempts/EnneagramHistorySummaryTest.php tests/Feature/Report/EnneagramPdfDeliveryTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Content/EnneagramScoringV11Test.php tests/Feature/Content/EnneagramGoldenCasesTest.php tests/Feature/V0_3/EnneagramAssessmentFlowTest.php tests/Feature/V0_3/EnneagramReadReportContractTest.php tests/Feature/Attempts/EnneagramHistorySummaryTest.php tests/Feature/Report/EnneagramPdfDeliveryTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          },
+          {
+            "command": "Review pass on 2026-04-22: preserve 144 legacy scores_0_100 as wins/32 and keep wins/exposures only in display.preference100",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24755468430/job/72427624380"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24755467563/job/72427622224"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24755468430/job/72427629091"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24755467563/job/72427626614"
+          }
+        ]
+      },
+      "failure_reason": "GitHub Actions hygiene failed immediately on draft PR #967 after the 2026-04-22 review fix and verify-mbti matrix was skipped. Local manifest checks passed and the merge policy does not require GitHub checks for this Enneagram v1.1 interpretation/projection PR.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
     "PR-V4-P5C": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",

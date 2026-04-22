@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 namespace App\Services\Assessment\Scorers;
 
+use App\Services\Enneagram\EnneagramTopologyAnalyzer;
+
 final class EnneagramForcedChoice144Scorer
 {
+    public function __construct(
+        private readonly EnneagramTopologyAnalyzer $topologyAnalyzer,
+    ) {}
+
     /**
      * @param  array<int,string>  $answersByQid
      * @param  array<int,array<string,mixed>>  $questionIndex
@@ -19,6 +25,8 @@ final class EnneagramForcedChoice144Scorer
         }
 
         $rawCounts = $this->zeroTypeMap();
+        $exposures = $this->zeroTypeMap();
+        $headToHead = $this->emptyHeadToHeadMatrix();
         $pairCounts = [];
         $roundCounts = [];
         $rawAnswers = [];
@@ -34,12 +42,21 @@ final class EnneagramForcedChoice144Scorer
                 throw new \InvalidArgumentException("ENNEAGRAM 144 invalid answer for question_id={$questionId}");
             }
 
+            $aType = $this->normalizeTypeCode($meta['a_type'] ?? '');
+            $bType = $this->normalizeTypeCode($meta['b_type'] ?? '');
             $typeCode = $this->normalizeTypeCode($meta[strtolower($choice).'_type'] ?? '');
-            if ($typeCode === '') {
+            if ($typeCode === '' || $aType === '' || $bType === '' || ! in_array($typeCode, [$aType, $bType], true)) {
                 throw new \InvalidArgumentException("ENNEAGRAM 144 key missing for question_id={$questionId}");
             }
 
             $rawCounts[$typeCode]++;
+            $exposures[$aType]++;
+            $exposures[$bType]++;
+            $loserType = $typeCode === $aType ? $bType : $aType;
+            $headToHead[$typeCode][$loserType]['wins']++;
+            $headToHead[$typeCode][$loserType]['encounters']++;
+            $headToHead[$loserType][$typeCode]['losses']++;
+            $headToHead[$loserType][$typeCode]['encounters']++;
             $pair = trim((string) ($meta['pair'] ?? ''));
             if ($pair !== '') {
                 $pairCounts[$pair] = ($pairCounts[$pair] ?? 0) + 1;
@@ -57,9 +74,22 @@ final class EnneagramForcedChoice144Scorer
         }
 
         $ranked = $this->rankTypes($rawCounts, $scoresPct);
+        $quality = [
+            'level' => 'P0',
+            'flags' => [],
+        ];
+        $analysisResult = $this->topologyAnalyzer->analyzeForcedChoice144($rawCounts, $exposures, $ranked, $headToHead, $quality);
+        $ranked = $analysisResult['ranking'];
+        $analysis = $analysisResult['analysis'];
         $top = $ranked[0] ?? ['type_code' => '', 'raw_count' => 0];
         $second = $ranked[1] ?? ['type_code' => '', 'raw_count' => 0];
-        $gap = (int) ($top['raw_count'] ?? 0) - (int) ($second['raw_count'] ?? 0);
+        $gap = (int) ($analysis['score_separation'] ?? ((int) ($top['raw_count'] ?? 0) - (int) ($second['raw_count'] ?? 0)));
+        $display = [
+            'preference100' => $this->preference100($rawCounts, $exposures),
+            'chart_vector' => $this->chartVector($ranked, $this->preference100($rawCounts, $exposures), 'preference100'),
+            'score_kind' => 'win_rate_preference100',
+            'score_note' => 'Preference display scores are wins divided by exposures; they are not T-scores, percentiles, or standardized scores.',
+        ];
 
         return [
             'scale_code' => 'ENNEAGRAM',
@@ -70,21 +100,28 @@ final class EnneagramForcedChoice144Scorer
             'answer_count' => count($rawAnswers),
             'raw_scores' => [
                 'type_counts' => $rawCounts,
+                'exposures' => $exposures,
                 'pair_answer_counts' => $pairCounts,
                 'round_type_counts' => $roundCounts,
             ],
             'scores_0_100' => $scoresPct,
+            'scoring' => [
+                'wins' => $rawCounts,
+                'exposures' => $exposures,
+                'head_to_head' => $headToHead,
+            ],
+            'analysis' => $analysis,
+            'display' => $display,
             'ranking' => $ranked,
-            'primary_type' => (string) ($top['type_code'] ?? ''),
+            'primary_type' => (string) ($analysisResult['primary_type'] ?? ($top['type_code'] ?? '')),
             'top_types' => array_slice($ranked, 0, 3),
             'confidence' => [
-                'level' => $this->confidenceLevel($gap, $policy),
+                'level' => (string) ($analysis['confidence_band'] ?? $this->confidenceLevel($gap, $policy)),
                 'top1_top2_gap' => $gap,
+                'score_separation' => $analysis['score_separation'] ?? $gap,
+                'interpretation_state' => $analysis['interpretation_state'] ?? 'standard_primary',
             ],
-            'quality' => [
-                'level' => 'P0',
-                'flags' => [],
-            ],
+            'quality' => $quality,
         ];
     }
 
@@ -114,6 +151,28 @@ final class EnneagramForcedChoice144Scorer
         }
 
         return 'T'.$matches[1];
+    }
+
+    /**
+     * @return array<string,array<string,array{wins:int,losses:int,encounters:int}>>
+     */
+    private function emptyHeadToHeadMatrix(): array
+    {
+        $matrix = [];
+        foreach (array_keys($this->zeroTypeMap()) as $typeCode) {
+            foreach (array_keys($this->zeroTypeMap()) as $opponent) {
+                if ($typeCode === $opponent) {
+                    continue;
+                }
+                $matrix[$typeCode][$opponent] = [
+                    'wins' => 0,
+                    'losses' => 0,
+                    'encounters' => 0,
+                ];
+            }
+        }
+
+        return $matrix;
     }
 
     /**
@@ -166,5 +225,44 @@ final class EnneagramForcedChoice144Scorer
         }
 
         return 'low';
+    }
+
+    /**
+     * @param  array<string,int>  $wins
+     * @param  array<string,int>  $exposures
+     * @return array<string,int|null>
+     */
+    private function preference100(array $wins, array $exposures): array
+    {
+        $out = [];
+        foreach ($wins as $typeCode => $count) {
+            $exposure = (int) ($exposures[$typeCode] ?? 0);
+            $out[$typeCode] = $exposure > 0 ? (int) round(100.0 * ((int) $count) / $exposure) : null;
+        }
+
+        return $out;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $ranked
+     * @param  array<string,int|float|null>  $scores
+     * @return list<array<string,mixed>>
+     */
+    private function chartVector(array $ranked, array $scores, string $scoreKey): array
+    {
+        $out = [];
+        foreach ($ranked as $row) {
+            $typeCode = (string) ($row['type_code'] ?? '');
+            if ($typeCode === '') {
+                continue;
+            }
+            $out[] = [
+                'type_code' => $typeCode,
+                $scoreKey => $scores[$typeCode] ?? null,
+                'rank' => (int) ($row['rank'] ?? 0),
+            ];
+        }
+
+        return $out;
     }
 }
