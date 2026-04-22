@@ -1,11 +1,45 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-21T12:55:00+08:00",
+  "updated_at": "2026-04-22T00:00:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "PR-ENNEAGRAM-V11": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/enneagram-v1-1-topology-tiebreak-display",
+      "commit_sha": "49e564ba1d5ec28cbc78bb8e0d5281d7f8bf6668",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Assessment/Scorers/EnneagramLikert105Scorer.php app/Services/Assessment/Scorers/EnneagramForcedChoice144Scorer.php app/Services/Enneagram/EnneagramTopologyAnalyzer.php app/Services/Enneagram/EnneagramPublicProjectionService.php app/Services/Report/EnneagramReportComposer.php tests/Feature/Content/EnneagramScoringV11Test.php tests/Feature/Content/EnneagramGoldenCasesTest.php tests/Feature/V0_3/EnneagramAssessmentFlowTest.php tests/Feature/V0_3/EnneagramReadReportContractTest.php tests/Feature/Attempts/EnneagramHistorySummaryTest.php tests/Feature/Report/EnneagramPdfDeliveryTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Content/EnneagramScoringV11Test.php tests/Feature/Content/EnneagramGoldenCasesTest.php tests/Feature/V0_3/EnneagramAssessmentFlowTest.php tests/Feature/V0_3/EnneagramReadReportContractTest.php tests/Feature/Attempts/EnneagramHistorySummaryTest.php tests/Feature/Report/EnneagramPdfDeliveryTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
     "PR-V4-P5C": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
