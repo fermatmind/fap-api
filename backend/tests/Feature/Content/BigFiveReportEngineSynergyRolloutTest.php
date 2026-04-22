@@ -16,6 +16,16 @@ final class BigFiveReportEngineSynergyRolloutTest extends TestCase
         $payload = app(BigFiveReportEngine::class)->generate($this->fixture($fixtureName));
 
         $this->assertSame([$expectedSynergyId], $this->selectedSynergyIds($payload));
+        $this->assertSame('primary', data_get($payload, 'engine_decisions.selected_synergies.0.render_rank'));
+        $this->assertSame('core_portrait', data_get($payload, 'engine_decisions.selected_synergies.0.render_section'));
+        $this->assertSame('synergy_primary', data_get($payload, 'engine_decisions.selected_synergies.0.render_slot'));
+        $this->assertSame([
+            [
+                'section_key' => 'core_portrait',
+                'slot' => 'synergy_primary',
+                'kind' => 'callout',
+            ],
+        ], data_get($payload, 'engine_decisions.selected_synergies.0.section_targets'));
         $this->assertSame([$expectedSynergyId], $this->sectionSynergyIds($payload, 'core_portrait'));
         $this->assertSame([], $this->sectionSynergyIds($payload, 'action_plan'));
         $this->assertNoSynergyOutsideAllowedSections($payload);
@@ -32,6 +42,14 @@ final class BigFiveReportEngineSynergyRolloutTest extends TestCase
         $payload = app(BigFiveReportEngine::class)->generate($this->fixture('context_multi_hit_conflict'));
 
         $this->assertSame(['n_high_x_e_low', 'o_high_x_c_low'], $this->selectedSynergyIds($payload));
+        $this->assertSame(['primary', 'secondary'], array_map(
+            static fn (array $match): string => (string) $match['render_rank'],
+            $payload['engine_decisions']['selected_synergies']
+        ));
+        $this->assertSame(['core_portrait', 'action_plan'], array_map(
+            static fn (array $match): string => (string) $match['render_section'],
+            $payload['engine_decisions']['selected_synergies']
+        ));
         $this->assertSame(['n_high_x_e_low'], $this->sectionSynergyIds($payload, 'core_portrait'));
         $this->assertSame(['o_high_x_c_low'], $this->sectionSynergyIds($payload, 'action_plan'));
         $this->assertCount(1, array_filter(

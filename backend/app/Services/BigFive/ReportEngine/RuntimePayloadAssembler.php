@@ -36,7 +36,7 @@ final class RuntimePayloadAssembler
             'score_vector' => $context->scoreVector(),
             'engine_decisions' => [
                 'dominant_traits' => $this->dominantTraits($context),
-                'selected_synergies' => array_map(static fn (SynergyMatch $match): array => $match->toArray(), $synergies),
+                'selected_synergies' => $this->selectedSynergiesToArray($synergies),
                 'facet_anomalies' => array_map(static fn (FacetAnomalyMatch $match): array => $match->toArray(), $facetAnomalies),
             ],
             'sections' => array_map(static fn (ResolvedSection $section): array => $section->toArray(), $sections),
@@ -66,6 +66,34 @@ final class RuntimePayloadAssembler
                 ],
             ],
         ];
+    }
+
+    /**
+     * @param  list<SynergyMatch>  $synergies
+     * @return list<array<string,mixed>>
+     */
+    private function selectedSynergiesToArray(array $synergies): array
+    {
+        $out = [];
+        foreach (array_slice($synergies, 0, 2) as $index => $match) {
+            $isPrimary = $index === 0;
+            $sectionKey = $isPrimary ? 'core_portrait' : 'action_plan';
+            $slot = $isPrimary ? 'synergy_primary' : 'synergy_action';
+            $kind = $isPrimary ? 'callout' : 'paragraph';
+
+            $payload = $match->toArray();
+            $payload['render_rank'] = $isPrimary ? 'primary' : 'secondary';
+            $payload['render_section'] = $sectionKey;
+            $payload['render_slot'] = $slot;
+            $payload['section_targets'] = [[
+                'section_key' => $sectionKey,
+                'slot' => $slot,
+                'kind' => $kind,
+            ]];
+            $out[] = $payload;
+        }
+
+        return $out;
     }
 
     private function reportId(ReportContext $context): string
