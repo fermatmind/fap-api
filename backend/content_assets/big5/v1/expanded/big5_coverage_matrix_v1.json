@@ -1,0 +1,313 @@
+{
+  "version": "v1",
+  "asset_type": "big5_coverage_matrix",
+  "source_files": [
+    "big5_source_of_truth_v1.md",
+    "big5_canonical_profiles_v1.json",
+    "big5_atomic_trait_blocks_v1.json",
+    "big5_section_block_copy_map_v1.json",
+    "big5_style_and_copy_rules_v1.md"
+  ],
+  "coverage_notes": {
+    "common_assets": [
+      "30 facet glossary",
+      "25 gradient modifiers",
+      "40 action rules"
+    ],
+    "profile_specific_assets": [
+      "synergy library",
+      "facet precision rules",
+      "dominant modifier mapping"
+    ],
+    "weak_coverage_definition": "缺少直接 canonical seed 长稿、direct synergy 或三维复合结构时标记为 moderate。"
+  },
+  "profiles": [
+    {
+      "profile_id": "BF_CANONICAL_01",
+      "working_name": "敏锐的独立思考者",
+      "likely_atomic_trait_bands": [
+        "N_H",
+        "O_M",
+        "E_L",
+        "C_L",
+        "A_M"
+      ],
+      "likely_dominant_modifiers": [
+        "big5_n_g5_modifier_v1",
+        "big5_e_g1_modifier_v1",
+        "big5_c_g1_modifier_v1"
+      ],
+      "likely_synergies": [
+        "n_high_x_e_low",
+        "o_high_x_c_low"
+      ],
+      "likely_standout_facets": [
+        "N1",
+        "N3",
+        "N5",
+        "C1",
+        "C2",
+        "C5"
+      ],
+      "likely_top_scenarios": [
+        "stress_recovery",
+        "personal_growth",
+        "workplace"
+      ],
+      "current_coverage": "strong",
+      "source_refs": [
+        "big5_canonical_profiles_v1.json",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "profile_id": "BF_CANONICAL_02",
+      "working_name": "高压现场推动者",
+      "likely_atomic_trait_bands": [
+        "E_H",
+        "N_H",
+        "A_L",
+        "O_M",
+        "C_M"
+      ],
+      "likely_dominant_modifiers": [
+        "big5_e_g5_modifier_v1",
+        "big5_n_g5_modifier_v1",
+        "big5_a_g1_modifier_v1"
+      ],
+      "likely_synergies": [
+        "e_high_x_a_low",
+        "e_high_x_n_high",
+        "a_low_x_n_high"
+      ],
+      "likely_standout_facets": [
+        "E1",
+        "E2",
+        "A1",
+        "A4",
+        "N1",
+        "N5"
+      ],
+      "likely_top_scenarios": [
+        "workplace",
+        "relationships",
+        "stress_recovery"
+      ],
+      "current_coverage": "strong",
+      "source_refs": [
+        "big5_canonical_profiles_v1.json",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "profile_id": "BF_CANONICAL_03",
+      "working_name": "戒备型完美主义",
+      "likely_atomic_trait_bands": [
+        "C_H",
+        "N_H",
+        "O_M",
+        "E_M",
+        "A_M"
+      ],
+      "likely_dominant_modifiers": [
+        "big5_c_g5_modifier_v1",
+        "big5_n_g5_modifier_v1"
+      ],
+      "likely_synergies": [
+        "c_high_x_n_high"
+      ],
+      "likely_standout_facets": [
+        "C3",
+        "C5",
+        "N1",
+        "N3",
+        "N6"
+      ],
+      "likely_top_scenarios": [
+        "stress_recovery",
+        "personal_growth",
+        "workplace"
+      ],
+      "current_coverage": "strong",
+      "source_refs": [
+        "big5_canonical_profiles_v1.json",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "profile_id": "BF_CANONICAL_04",
+      "working_name": "复杂理解型低续航者",
+      "likely_atomic_trait_bands": [
+        "O_H",
+        "C_L",
+        "E_M",
+        "A_M",
+        "N_M"
+      ],
+      "likely_dominant_modifiers": [
+        "big5_o_g5_modifier_v1",
+        "big5_c_g1_modifier_v1"
+      ],
+      "likely_synergies": [
+        "o_high_x_c_low"
+      ],
+      "likely_standout_facets": [
+        "O1",
+        "O4",
+        "O5",
+        "C4",
+        "C5"
+      ],
+      "likely_top_scenarios": [
+        "personal_growth",
+        "workplace"
+      ],
+      "current_coverage": "strong",
+      "source_refs": [
+        "big5_canonical_profiles_v1.json",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "profile_id": "BF_CANONICAL_05",
+      "working_name": "连接驱动协调者",
+      "likely_atomic_trait_bands": [
+        "E_H",
+        "A_H",
+        "N_M",
+        "O_M",
+        "C_M"
+      ],
+      "likely_dominant_modifiers": [
+        "big5_e_g5_modifier_v1",
+        "big5_a_g5_modifier_v1"
+      ],
+      "likely_synergies": [
+        "e_high_x_a_high"
+      ],
+      "likely_standout_facets": [
+        "E1",
+        "E2",
+        "A3",
+        "A4",
+        "A6"
+      ],
+      "likely_top_scenarios": [
+        "relationships",
+        "workplace"
+      ],
+      "current_coverage": "strong",
+      "source_refs": [
+        "big5_canonical_profiles_v1.json",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "profile_id": "BF_CANONICAL_06",
+      "working_name": "稳态深工者",
+      "likely_atomic_trait_bands": [
+        "E_L",
+        "C_H",
+        "N_L",
+        "A_M",
+        "O_M"
+      ],
+      "likely_dominant_modifiers": [
+        "big5_e_g1_modifier_v1",
+        "big5_c_g5_modifier_v1",
+        "big5_n_g1_modifier_v1"
+      ],
+      "likely_synergies": [
+        "e_low_x_c_high"
+      ],
+      "likely_standout_facets": [
+        "C1",
+        "C2",
+        "E4",
+        "E5",
+        "N1"
+      ],
+      "likely_top_scenarios": [
+        "workplace",
+        "personal_growth"
+      ],
+      "current_coverage": "strong",
+      "source_refs": [
+        "big5_canonical_profiles_v1.json",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "profile_id": "BF_CANONICAL_07",
+      "working_name": "锋利探索推进者",
+      "likely_atomic_trait_bands": [
+        "O_H",
+        "E_H",
+        "A_L",
+        "C_M",
+        "N_M"
+      ],
+      "likely_dominant_modifiers": [
+        "big5_o_g5_modifier_v1",
+        "big5_e_g5_modifier_v1",
+        "big5_a_g1_modifier_v1"
+      ],
+      "likely_synergies": [
+        "e_high_x_a_low",
+        "o_high_x_n_high"
+      ],
+      "likely_standout_facets": [
+        "O4",
+        "O5",
+        "E3",
+        "A1",
+        "A2"
+      ],
+      "likely_top_scenarios": [
+        "workplace",
+        "relationships"
+      ],
+      "current_coverage": "strong",
+      "source_refs": [
+        "big5_canonical_profiles_v1.json",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "profile_id": "BF_CANONICAL_08",
+      "working_name": "秩序维护型支持者",
+      "likely_atomic_trait_bands": [
+        "O_L",
+        "C_H",
+        "A_H",
+        "E_M",
+        "N_M"
+      ],
+      "likely_dominant_modifiers": [
+        "big5_o_g1_modifier_v1",
+        "big5_c_g5_modifier_v1",
+        "big5_a_g5_modifier_v1"
+      ],
+      "likely_synergies": [
+        "o_low_x_c_high"
+      ],
+      "likely_standout_facets": [
+        "C2",
+        "C3",
+        "A3",
+        "A4",
+        "O6"
+      ],
+      "likely_top_scenarios": [
+        "workplace",
+        "relationships",
+        "personal_growth"
+      ],
+      "current_coverage": "moderate",
+      "source_refs": [
+        "big5_canonical_profiles_v1.json",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    }
+  ]
+}

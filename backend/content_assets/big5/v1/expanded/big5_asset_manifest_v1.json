@@ -1,0 +1,176 @@
+{
+  "version": "v1",
+  "asset_type": "big5_asset_manifest",
+  "package_root": "backend/content_assets/big5/v1",
+  "source_files": [
+    {
+      "file": "source/big5_source_of_truth_v1.md",
+      "role": "narrative and governance source"
+    },
+    {
+      "file": "source/big5_canonical_profiles_v1.json",
+      "role": "canonical profile seed source"
+    },
+    {
+      "file": "source/big5_atomic_trait_blocks_v1.json",
+      "role": "trait band atomic source"
+    },
+    {
+      "file": "source/big5_section_block_copy_map_v1.json",
+      "role": "8 section/block implementation source"
+    },
+    {
+      "file": "source/big5_style_and_copy_rules_v1.md",
+      "role": "style and copy rules source"
+    }
+  ],
+  "expanded_assets": [
+    {
+      "file": "expanded/big5_gradient_modifiers_v1.json",
+      "count": 25,
+      "unit": "modifier"
+    },
+    {
+      "file": "expanded/big5_synergy_library_v1.json",
+      "count": 12,
+      "unit": "synergy"
+    },
+    {
+      "file": "expanded/big5_facet_glossary_v1.json",
+      "count": 30,
+      "unit": "facet"
+    },
+    {
+      "file": "expanded/big5_facet_precision_v1.json",
+      "count": 23,
+      "unit": "precision_rule"
+    },
+    {
+      "file": "expanded/big5_action_matrix_v1.json",
+      "count": 40,
+      "unit": "action_rule"
+    },
+    {
+      "file": "expanded/big5_coverage_matrix_v1.json",
+      "count": 8,
+      "unit": "canonical_profile_mapping"
+    },
+    {
+      "file": "expanded/big5_review_notes_v1.md",
+      "count": 1,
+      "unit": "review_note"
+    }
+  ],
+  "asset_counts": {
+    "modifiers": 25,
+    "synergies": 12,
+    "facet_glossary": 30,
+    "facet_precision_rules": 23,
+    "action_rules": 40,
+    "canonical_profiles_in_coverage": 8
+  },
+  "coverage_summary": {
+    "traits": [
+      "O",
+      "C",
+      "E",
+      "A",
+      "N"
+    ],
+    "gradients_per_trait": 5,
+    "facets_per_trait": 6,
+    "scenarios": [
+      "workplace",
+      "relationships",
+      "stress_recovery",
+      "personal_growth"
+    ],
+    "canonical_profiles_referenced": [
+      "BF_CANONICAL_01",
+      "BF_CANONICAL_02",
+      "BF_CANONICAL_03",
+      "BF_CANONICAL_04",
+      "BF_CANONICAL_05",
+      "BF_CANONICAL_06",
+      "BF_CANONICAL_07",
+      "BF_CANONICAL_08"
+    ]
+  },
+  "canonical_profiles_referenced": [
+    {
+      "profile_id": "BF_CANONICAL_01",
+      "working_name": "敏锐的独立思考者",
+      "coverage": "strong"
+    },
+    {
+      "profile_id": "BF_CANONICAL_02",
+      "working_name": "高压现场推动者",
+      "coverage": "strong"
+    },
+    {
+      "profile_id": "BF_CANONICAL_03",
+      "working_name": "戒备型完美主义",
+      "coverage": "strong"
+    },
+    {
+      "profile_id": "BF_CANONICAL_04",
+      "working_name": "复杂理解型低续航者",
+      "coverage": "strong"
+    },
+    {
+      "profile_id": "BF_CANONICAL_05",
+      "working_name": "连接驱动协调者",
+      "coverage": "strong"
+    },
+    {
+      "profile_id": "BF_CANONICAL_06",
+      "working_name": "稳态深工者",
+      "coverage": "strong"
+    },
+    {
+      "profile_id": "BF_CANONICAL_07",
+      "working_name": "锋利探索推进者",
+      "coverage": "strong"
+    },
+    {
+      "profile_id": "BF_CANONICAL_08",
+      "working_name": "秩序维护型支持者",
+      "coverage": "moderate"
+    }
+  ],
+  "deferred_items": [
+    "big5_lifecycle_copy_library_v1",
+    "history / compare / PDF / continuation / career-next-step / growth-next-step lifecycle copy",
+    "runtime bridge and registry integration"
+  ],
+  "reviewer_notes_pointers": [
+    "expanded/big5_review_notes_v1.md"
+  ],
+  "boundary": {
+    "runtime_changed": false,
+    "database_changed": false,
+    "live_registry_changed": false,
+    "mbti_changed": false,
+    "lifecycle_assets_written": false
+  },
+  "source_refs": {
+    "narrative_master": [
+      "big5_source_of_truth_v1.md#2.1",
+      "big5_source_of_truth_v1.md#5"
+    ],
+    "section_block_master": [
+      "big5_section_block_copy_map_v1.json",
+      "big5_source_of_truth_v1.md#3"
+    ],
+    "style_rules": [
+      "big5_style_and_copy_rules_v1.md#3",
+      "big5_style_and_copy_rules_v1.md#7"
+    ],
+    "atomic_blocks": [
+      "big5_atomic_trait_blocks_v1.json"
+    ],
+    "canonical_profiles": [
+      "big5_canonical_profiles_v1.json"
+    ]
+  }
+}

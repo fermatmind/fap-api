@@ -1,0 +1,392 @@
+{
+  "schema": "fap.big5.canonical_profiles.v1",
+  "version": "v1",
+  "note": "代表性样本库，不是最终用户标签库；用于反推共通资产与样本特异资产。",
+  "profiles": [
+    {
+      "profile_id": "BF_CANONICAL_01",
+      "working_name": "敏锐的独立思考者",
+      "score_signature": {
+        "O": "M+",
+        "C": "L",
+        "E": "L",
+        "A": "M",
+        "N": "H"
+      },
+      "core_tension": "高敏感 × 中高开放 × 克制进入 × 低续航推进",
+      "best_environment": [
+        "允许深度处理与独立判断",
+        "边界清楚、噪音较低",
+        "反馈真实、节奏合理",
+        "能把理解力转成高质量结果的环境"
+      ],
+      "main_cost": "在模糊、低反馈、关系张力高的环境里，容易先在内部高负荷运转，再出现进入迟滞与慢性耗损。",
+      "section_priority": [
+        "hero_summary",
+        "domain_deep_dive",
+        "facet_details",
+        "action_plan"
+      ],
+      "notes_for_atomic_reuse": {
+        "atomic_focus": [
+          "N_H",
+          "O_M",
+          "E_L",
+          "C_L",
+          "A_M"
+        ],
+        "likely_synergies": [
+          "n_high_x_e_low",
+          "o_high_x_c_low"
+        ],
+        "facet_watch": [
+          "N1",
+          "N3",
+          "N5",
+          "C1",
+          "C2",
+          "C5"
+        ],
+        "action_focus": [
+          "stress_recovery",
+          "personal_growth",
+          "workplace"
+        ]
+      }
+    },
+    {
+      "profile_id": "BF_CANONICAL_02",
+      "working_name": "高压现场推动者",
+      "score_signature": {
+        "O": "M",
+        "C": "M",
+        "E": "H",
+        "A": "L",
+        "N": "H"
+      },
+      "core_tension": "高外向 × 高情绪反应敏感度 × 低宜人性 × 中等开放性 × 中等尽责性",
+      "best_environment": [
+        "现场反馈快、目标清楚",
+        "需要快速判断与推进",
+        "边界明确、责任清晰",
+        "允许直接表达与行动试错"
+      ],
+      "main_cost": "容易在高刺激和高摩擦里先被点燃成推动力，再被拉高成烦躁、防御或抽离。",
+      "section_priority": [
+        "hero_summary",
+        "core_portrait",
+        "facet_details",
+        "action_plan"
+      ],
+      "notes_for_atomic_reuse": {
+        "atomic_focus": [
+          "E_H",
+          "N_H",
+          "A_L",
+          "O_M",
+          "C_M"
+        ],
+        "likely_synergies": [
+          "e_high_x_a_low",
+          "o_high_x_n_high"
+        ],
+        "facet_watch": [
+          "E1",
+          "E2",
+          "A1",
+          "A4",
+          "N1",
+          "N5"
+        ],
+        "action_focus": [
+          "workplace",
+          "relationships",
+          "stress_recovery"
+        ]
+      }
+    },
+    {
+      "profile_id": "BF_CANONICAL_03",
+      "working_name": "戒备型完美主义",
+      "score_signature": {
+        "O": "M",
+        "C": "H",
+        "E": "M-",
+        "A": "M-",
+        "N": "H"
+      },
+      "core_tension": "高尽责 × 高情绪性：标准高、责任重、风险体感也高",
+      "best_environment": [
+        "标准明确、质量要求高",
+        "可控性较强",
+        "允许深度复盘与流程优化",
+        "不鼓励长期情绪消耗"
+      ],
+      "main_cost": "容易把高标准、高责任感和高警觉绑在一起，形成持续紧绷、难以放过自己与他人的模式。",
+      "section_priority": [
+        "core_portrait",
+        "domain_deep_dive",
+        "facet_details",
+        "action_plan"
+      ],
+      "notes_for_atomic_reuse": {
+        "atomic_focus": [
+          "C_H",
+          "N_H",
+          "O_M",
+          "E_M",
+          "A_M"
+        ],
+        "likely_synergies": [
+          "c_high_x_n_high"
+        ],
+        "facet_watch": [
+          "C3",
+          "C5",
+          "N1",
+          "N3",
+          "N6"
+        ],
+        "action_focus": [
+          "stress_recovery",
+          "personal_growth",
+          "workplace"
+        ]
+      }
+    },
+    {
+      "profile_id": "BF_CANONICAL_04",
+      "working_name": "复杂理解型低续航者",
+      "score_signature": {
+        "O": "H",
+        "C": "L",
+        "E": "M",
+        "A": "M",
+        "N": "M"
+      },
+      "core_tension": "高开放 × 低尽责：理解很深、持续推进更吃环境与意义",
+      "best_environment": [
+        "允许探索与构思",
+        "节奏阶段化、反馈明确",
+        "不把一切都压成长期刚性纪律",
+        "容纳理解与试验"
+      ],
+      "main_cost": "容易在理解层面走得很远，却在执行续航上失去势能，出现高认知、低完工的挫败感。",
+      "section_priority": [
+        "domain_deep_dive",
+        "core_portrait",
+        "action_plan",
+        "norms_comparison"
+      ],
+      "notes_for_atomic_reuse": {
+        "atomic_focus": [
+          "O_H",
+          "C_L",
+          "E_M",
+          "A_M",
+          "N_M"
+        ],
+        "likely_synergies": [
+          "o_high_x_c_low"
+        ],
+        "facet_watch": [
+          "O1",
+          "O4",
+          "O5",
+          "C4",
+          "C5"
+        ],
+        "action_focus": [
+          "personal_growth",
+          "workplace"
+        ]
+      }
+    },
+    {
+      "profile_id": "BF_CANONICAL_05",
+      "working_name": "连接驱动协调者",
+      "score_signature": {
+        "O": "M",
+        "C": "M",
+        "E": "H",
+        "A": "H",
+        "N": "M"
+      },
+      "core_tension": "高外向 × 高宜人 × 中情绪性：强连接、重协作、在关系里形成势能",
+      "best_environment": [
+        "合作密度高",
+        "反馈及时、关系清晰",
+        "需要鼓舞、协调与承接",
+        "允许通过互动放大影响力"
+      ],
+      "main_cost": "容易把关系流动与现场反馈当成主要燃料，长期忽视边界与独立恢复需求。",
+      "section_priority": [
+        "hero_summary",
+        "domain_deep_dive",
+        "action_plan",
+        "methodology_and_access"
+      ],
+      "notes_for_atomic_reuse": {
+        "atomic_focus": [
+          "E_H",
+          "A_H",
+          "N_M",
+          "O_M",
+          "C_M"
+        ],
+        "likely_synergies": [],
+        "facet_watch": [
+          "E1",
+          "E2",
+          "A3",
+          "A4",
+          "A6"
+        ],
+        "action_focus": [
+          "relationships",
+          "workplace"
+        ]
+      }
+    },
+    {
+      "profile_id": "BF_CANONICAL_06",
+      "working_name": "稳态深工者",
+      "score_signature": {
+        "O": "M-",
+        "C": "H",
+        "E": "L",
+        "A": "M",
+        "N": "L"
+      },
+      "core_tension": "低外向 × 高尽责 × 低情绪性：低噪音、长续航、深处理",
+      "best_environment": [
+        "低噪音、边界清楚",
+        "允许深度工作",
+        "节奏可预期",
+        "重稳定质量而非持续抢场"
+      ],
+      "main_cost": "容易在高曝光、高打断、高社交竞争环境里被误判为不够主动或不够有存在感。",
+      "section_priority": [
+        "domain_deep_dive",
+        "norms_comparison",
+        "action_plan"
+      ],
+      "notes_for_atomic_reuse": {
+        "atomic_focus": [
+          "E_L",
+          "C_H",
+          "N_L",
+          "A_M",
+          "O_M"
+        ],
+        "likely_synergies": [],
+        "facet_watch": [
+          "C1",
+          "C2",
+          "E4",
+          "E5",
+          "N1"
+        ],
+        "action_focus": [
+          "workplace",
+          "personal_growth"
+        ]
+      }
+    },
+    {
+      "profile_id": "BF_CANONICAL_07",
+      "working_name": "锋利探索推进者",
+      "score_signature": {
+        "O": "H",
+        "C": "M",
+        "E": "H",
+        "A": "L",
+        "N": "M"
+      },
+      "core_tension": "高开放 × 低宜人 × 高外向：探索快、判断强、边界硬",
+      "best_environment": [
+        "需要探索、决策与推动",
+        "允许直言和快速试验",
+        "目标高、变化快",
+        "容纳观点碰撞但责任清楚"
+      ],
+      "main_cost": "容易在推进与表达中压强过高，让正确判断以高摩擦方式被感知。",
+      "section_priority": [
+        "hero_summary",
+        "core_portrait",
+        "facet_details",
+        "action_plan"
+      ],
+      "notes_for_atomic_reuse": {
+        "atomic_focus": [
+          "O_H",
+          "E_H",
+          "A_L",
+          "C_M",
+          "N_M"
+        ],
+        "likely_synergies": [
+          "e_high_x_a_low"
+        ],
+        "facet_watch": [
+          "O4",
+          "O5",
+          "E3",
+          "A1",
+          "A2"
+        ],
+        "action_focus": [
+          "workplace",
+          "relationships"
+        ]
+      }
+    },
+    {
+      "profile_id": "BF_CANONICAL_08",
+      "working_name": "秩序维护型支持者",
+      "score_signature": {
+        "O": "L",
+        "C": "H",
+        "E": "M-",
+        "A": "H",
+        "N": "M-"
+      },
+      "core_tension": "低开放 × 高尽责 × 高宜人：重秩序、重责任、重稳态关系",
+      "best_environment": [
+        "规则明确、边界清楚",
+        "重可靠与长期稳定",
+        "关系可预期",
+        "允许通过持续投入建立价值"
+      ],
+      "main_cost": "容易对变化、模糊和反复试错容忍度低，在需要重构旧路径时进入慢、成本高。",
+      "section_priority": [
+        "domains_overview",
+        "domain_deep_dive",
+        "action_plan",
+        "methodology_and_access"
+      ],
+      "notes_for_atomic_reuse": {
+        "atomic_focus": [
+          "O_L",
+          "C_H",
+          "A_H",
+          "E_M",
+          "N_M"
+        ],
+        "likely_synergies": [],
+        "facet_watch": [
+          "C2",
+          "C3",
+          "A3",
+          "A4",
+          "O6"
+        ],
+        "action_focus": [
+          "workplace",
+          "relationships",
+          "personal_growth"
+        ]
+      }
+    }
+  ]
+}

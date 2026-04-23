@@ -1,0 +1,844 @@
+{
+  "version": "v1",
+  "asset_type": "big5_facet_precision_rules",
+  "source_files": [
+    "big5_source_of_truth_v1.md",
+    "big5_canonical_profiles_v1.json",
+    "big5_atomic_trait_blocks_v1.json",
+    "big5_section_block_copy_map_v1.json",
+    "big5_style_and_copy_rules_v1.md"
+  ],
+  "global_trigger_defaults": {
+    "delta_abs_min": 20,
+    "cross_band_required": true
+  },
+  "rules": [
+    {
+      "rule_id": "o_idea_high_experience_low_split",
+      "facet_codes_all": [
+        "O5",
+        "O4"
+      ],
+      "anomaly_type": "within_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "O5"
+          ],
+          "lower": [
+            "O4"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "想得很开，进入很慢",
+        "body": "你可能能理解复杂观念，也愿意讨论新框架，但真正把自己放进新体验时会更谨慎。这不是伪开放，而是开放性更多发生在认知层，行动层需要现实安全感。",
+        "why_it_matters": "审稿时应避免把高观念复杂度直接写成高冒险或高生活变化。"
+      },
+      "trait_code": "O",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "o_aesthetic_high_value_low_split",
+      "facet_codes_all": [
+        "O2",
+        "O6"
+      ],
+      "anomaly_type": "within_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "O2"
+          ],
+          "lower": [
+            "O6"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "感受很细，价值不轻易改",
+        "body": "你可能对氛围、形式和表达质地很敏感，却不一定愿意频繁重估核心规则。这种组合说明你会被细节打动，但不会只因美感或新鲜感就改变判断。",
+        "why_it_matters": "它能防止把审美敏感误读成全面高开放。"
+      },
+      "trait_code": "O",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "o_experience_high_order_need_split",
+      "facet_codes_all": [
+        "O4",
+        "O6"
+      ],
+      "anomaly_type": "within_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "O4"
+          ],
+          "lower": [
+            "O6"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "愿意试新，但不一定推翻旧答案",
+        "body": "你可能愿意进入新场景、尝试新体验，但在价值和规则层面仍保留稳定锚点。它更像可控探索，而不是彻底重构。",
+        "why_it_matters": "这能解释为什么用户看起来喜欢变化，却仍需要明确边界。"
+      },
+      "trait_code": "O",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "o_emotion_high_idea_low_split",
+      "facet_codes_all": [
+        "O3",
+        "O5"
+      ],
+      "anomaly_type": "within_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "O3"
+          ],
+          "lower": [
+            "O5"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "体验打开，理论未必打开",
+        "body": "你可能很能感受体验和关系中的层次，却不一定喜欢抽象理论或复杂概念。这不是不开放，而是开放性更多落在体验和感受层。",
+        "why_it_matters": "有助于避免把开放性只写成知识、理论和创新。"
+      },
+      "trait_code": "O",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "c_order_maintainer_split",
+      "facet_codes_all": [
+        "C2",
+        "C5"
+      ],
+      "anomaly_type": "compound_required",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "C2"
+          ],
+          "lower": [
+            "C5"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "你不是没尽责，你更像秩序维护型",
+        "body": "你可能很需要空间、流程和信息被理顺，但长期低反馈任务的自律续航并不同样强。于是你看起来重秩序，却未必总能把长期项目稳定推完。",
+        "why_it_matters": "这条是关键反直觉：尽责性不能只按整洁或计划感判断。"
+      },
+      "trait_code": "C",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "c_standard_high_confidence_low_split",
+      "facet_codes_all": [
+        "C3",
+        "C1"
+      ],
+      "anomaly_type": "within_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "C3"
+          ],
+          "lower": [
+            "C1"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "责任感很高，能力感未必跟上",
+        "body": "你可能很在意承诺和规则，却不总相信自己能轻松处理好任务。这会让责任变成压力，而不是稳定动力。",
+        "why_it_matters": "能解释高责任用户为什么仍然会拖延、紧绷或自责。"
+      },
+      "trait_code": "C",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "c_achievement_high_caution_high_split",
+      "facet_codes_all": [
+        "C4",
+        "C6"
+      ],
+      "anomaly_type": "within_trait_alignment",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "C4",
+            "C6"
+          ],
+          "lower": []
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "想前进，也反复检查风险",
+        "body": "目标驱动和审慎决策同时高时，你会既想推进，又不断确认后果。这能带来高质量推进，也可能让启动被预演拖慢。",
+        "why_it_matters": "有助于把“慢”解释成质量控制，而不是缺乏动力。"
+      },
+      "trait_code": "C",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "c_selfdiscipline_low_achievement_high_split",
+      "facet_codes_all": [
+        "C4",
+        "C5"
+      ],
+      "anomaly_type": "within_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "C4"
+          ],
+          "lower": [
+            "C5"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "想要结果，但续航容易掉线",
+        "body": "你可能很在意目标和进步，却难在低反馈阶段持续稳定投入。痛点不是没有野心，而是目标感没有自动转化成长期执行。",
+        "why_it_matters": "这条能支持 action_plan 做短周期反馈设计。"
+      },
+      "trait_code": "C",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "c_order_low_responsibility_high_split",
+      "facet_codes_all": [
+        "C2",
+        "C3"
+      ],
+      "anomaly_type": "within_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "C3"
+          ],
+          "lower": [
+            "C2"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "责任在前，整理不一定在前",
+        "body": "你可能认真守承诺，却不一定依赖整洁流程或严格秩序来工作。别人看到你的混乱表面时，可能低估你的责任感。",
+        "why_it_matters": "避免把秩序感直接等同于可靠性。"
+      },
+      "trait_code": "C",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "e_warm_but_reserved_split",
+      "facet_codes_all": [
+        "E1",
+        "E2",
+        "E3"
+      ],
+      "anomaly_type": "compound_required",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "E1"
+          ],
+          "lower": [
+            "E2",
+            "E3"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "你不是冷，你更像温暖但保留",
+        "body": "你可能在熟悉关系里有温度，也愿意回应他人，但不喜欢高密度群体进入，表达推进也不总外显。低外放不等于低连接。",
+        "why_it_matters": "这条能修正低外向被误读成社交差或冷淡。"
+      },
+      "trait_code": "E",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "e_assertive_low_positive_high_split",
+      "facet_codes_all": [
+        "E3",
+        "E6"
+      ],
+      "anomaly_type": "within_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "E6"
+          ],
+          "lower": [
+            "E3"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "心里容易被点亮，未必主动占场",
+        "body": "你可能对正反馈和期待有明显反应，但不一定自然把观点推到台面上。别人可能看见你的好状态，却看不见你的主张。",
+        "why_it_matters": "帮助区分积极情绪和表达推进力。"
+      },
+      "trait_code": "E",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "e_activity_high_sociability_low_split",
+      "facet_codes_all": [
+        "E4",
+        "E2"
+      ],
+      "anomaly_type": "within_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "E4"
+          ],
+          "lower": [
+            "E2"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "节奏快，不等于爱热闹",
+        "body": "你可能行动速度和切换频率都不低，但并不喜欢多人社交或高噪音场景。外向性在你这里更像能量速度，而不是群体依赖。",
+        "why_it_matters": "避免把活动水平误读为社交外向。"
+      },
+      "trait_code": "E",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "e_sensation_high_warmth_low_split",
+      "facet_codes_all": [
+        "E5",
+        "E1"
+      ],
+      "anomaly_type": "within_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "E5"
+          ],
+          "lower": [
+            "E1"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "需要刺激，不一定容易亲近",
+        "body": "你可能喜欢强体验、新鲜感或挑战，但关系中的亲近信号并不自动外放。别人可能感到你有活力，却未必感到你柔和。",
+        "why_it_matters": "用于解释高外向内部的关系温度差异。"
+      },
+      "trait_code": "E",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "a_trust_low_altruism_high_split",
+      "facet_codes_all": [
+        "A1",
+        "A3"
+      ],
+      "anomaly_type": "within_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "A3"
+          ],
+          "lower": [
+            "A1"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "愿意帮人，但不会轻易相信",
+        "body": "你可能愿意投入资源支持别人，但在信任起点上仍需要验证。它不是矛盾，而是承接意愿和信任判断分属不同系统。",
+        "why_it_matters": "能避免把高利他直接写成高信任。"
+      },
+      "trait_code": "A",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "a_direct_high_comply_low_split",
+      "facet_codes_all": [
+        "A2",
+        "A4"
+      ],
+      "anomaly_type": "within_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "A2"
+          ],
+          "lower": [
+            "A4"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "真实表达强，冲突让步低",
+        "body": "你可能很快说出真实判断，也不太愿意为了维持表面和气而持续让步。优势是问题不易被压住，代价是关系缓冲不足。",
+        "why_it_matters": "用于低宜人画像时保持非病理化和可行动。"
+      },
+      "trait_code": "A",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "a_modesty_high_assert_low_split",
+      "facet_codes_all": [
+        "A5",
+        "A2"
+      ],
+      "anomaly_type": "within_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "A5"
+          ],
+          "lower": [
+            "A2"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "低调不是没有判断",
+        "body": "你可能不愿突出自己，也较少强力表达真实想法，但这不等于没有立场。很多判断可能被保留在内部或通过行动体现。",
+        "why_it_matters": "帮助解释贡献被低估和边界表达延迟。"
+      },
+      "trait_code": "A",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "a_empathy_high_boundary_low_split",
+      "facet_codes_all": [
+        "A6",
+        "A4"
+      ],
+      "anomaly_type": "within_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "A6"
+          ],
+          "lower": [
+            "A4"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "感受得到别人，但不一定持续顺应",
+        "body": "你可能很能感到他人处境，却未必愿意为了对方一直改变自己。共情和让步不是同一件事。",
+        "why_it_matters": "避免把共情高直接推导成好说话。"
+      },
+      "trait_code": "A",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "n_anxiety_high_vulnerability_low_split",
+      "facet_codes_all": [
+        "N1",
+        "N6"
+      ],
+      "anomaly_type": "within_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "N1"
+          ],
+          "lower": [
+            "N6"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "预警很快，但未必容易崩盘",
+        "body": "你可能很早开始担心风险，却不一定在压力下失去承载。你的系统像提前报警器，而不是低承重结构。",
+        "why_it_matters": "防止把高焦虑预警写成脆弱。"
+      },
+      "trait_code": "N",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "n_anger_high_anxiety_low_split",
+      "facet_codes_all": [
+        "N2",
+        "N1"
+      ],
+      "anomaly_type": "within_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "N2"
+          ],
+          "lower": [
+            "N1"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "不是总担心，而是被越界点燃",
+        "body": "你的压力反应可能不来自持续担忧，而来自受阻、不公平或边界被踩。它更像边界警报，而不是泛化焦虑。",
+        "why_it_matters": "有助于冲突场景中的精准解释。"
+      },
+      "trait_code": "N",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "n_selfconscious_high_assert_low_split",
+      "facet_codes_all": [
+        "N4",
+        "E3"
+      ],
+      "anomaly_type": "cross_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "N4"
+          ],
+          "lower": [
+            "E3"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "有想法，但曝光成本高",
+        "body": "你可能有判断，却在被看见、被评价时提高自我监控，导致表达变慢。问题不一定是没观点，而是曝光成本太高。",
+        "why_it_matters": "连接 facet_details 与 action_plan 的低摩擦表达设计。"
+      },
+      "trait_code": "N",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "n_impulse_high_conscientious_high_split",
+      "facet_codes_all": [
+        "N5",
+        "C3"
+      ],
+      "anomaly_type": "cross_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "N5",
+            "C3"
+          ],
+          "lower": []
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "越想负责，越怕失控",
+        "body": "责任感和冲动失控感同时高时，你可能很在意后果，也害怕自己在高压下反应过快。这会让自我要求和自我监控同时上升。",
+        "why_it_matters": "避免把短时失控感写成人格问题。"
+      },
+      "trait_code": "N",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "n_mood_high_recovery_low_split",
+      "facet_codes_all": [
+        "N3",
+        "N6"
+      ],
+      "anomaly_type": "within_trait_alignment",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "N3",
+            "N6"
+          ],
+          "lower": []
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "波动和承载上限一起需要被设计",
+        "body": "情绪波动和脆弱负荷同时高时，重点不是要求自己更稳，而是减少连续暴露、缩短恢复距离。",
+        "why_it_matters": "把恢复作为结构设计，而不是情绪安抚。"
+      },
+      "trait_code": "N",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    },
+    {
+      "rule_id": "n_low_signal_high_cost_hidden_split",
+      "facet_codes_all": [
+        "N1",
+        "N4"
+      ],
+      "anomaly_type": "within_trait_split",
+      "trigger_template": {
+        "delta_abs_min": 20,
+        "cross_band_required": true,
+        "score_pattern": {
+          "higher": [
+            "N4"
+          ],
+          "lower": [
+            "N1"
+          ]
+        }
+      },
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "title": "不常提前担心，但被评价会很耗",
+        "body": "你可能不是持续风险预警型，却在被看见、被评价或可能出错时明显消耗。压力触发点更集中在自我呈现，而不是所有不确定性。",
+        "why_it_matters": "提高 N 维度解释颗粒度，避免泛化成敏感或不敏感。"
+      },
+      "trait_code": "N",
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3.3",
+        "big5_atomic_trait_blocks_v1.json"
+      ]
+    }
+  ]
+}

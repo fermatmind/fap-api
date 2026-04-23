@@ -1,0 +1,225 @@
+{
+  "schema": "fap.big5.section_block_copy_map.v1",
+  "version": "v1",
+  "note": "结构化映射表，不是用户可见正文。用于指导后续 section/block 入库、registry 编排与 Codex 扩写。",
+  "sections": {
+    "hero_summary": {
+      "display_title_zh": "结果摘要",
+      "section_role": "20 秒内交代画像主轴、主要张力、阅读价值，是入口层，不负责展开全部人生应用。",
+      "allowed_block_kinds": [
+        "paragraph",
+        "callout",
+        "bullets"
+      ],
+      "atomic_content_inputs": [
+        "dominant_trait_core_logic",
+        "secondary_trait_core_logic",
+        "one-line fingerprint",
+        "current_priority_hint"
+      ],
+      "priority_profiles": [
+        "BF_CANONICAL_01",
+        "BF_CANONICAL_02",
+        "BF_CANONICAL_03",
+        "BF_CANONICAL_07"
+      ],
+      "must_not_include": [
+        "raw percentile dump",
+        "30 facet full directory",
+        "full methodology caveats",
+        "multiple competing synergy cards"
+      ]
+    },
+    "domains_overview": {
+      "display_title_zh": "维度总览",
+      "section_role": "建立五维整体认知，先说明如何阅读，再给出五维快照与总览结论。",
+      "allowed_block_kinds": [
+        "paragraph",
+        "chart",
+        "table_row",
+        "callout"
+      ],
+      "atomic_content_inputs": [
+        "five_trait_snapshot_lines",
+        "reading_guide",
+        "overall_axis_summary"
+      ],
+      "priority_profiles": [
+        "BF_CANONICAL_01",
+        "BF_CANONICAL_02",
+        "BF_CANONICAL_05",
+        "BF_CANONICAL_08"
+      ],
+      "must_not_include": [
+        "long-form career narrative",
+        "facet anomaly cards",
+        "scenario action bullets",
+        "commercial continuation copy"
+      ]
+    },
+    "domain_deep_dive": {
+      "display_title_zh": "五维深解",
+      "section_role": "逐个 trait 展开定义、位置、优势、代价与现实表现，是正文主体层。",
+      "allowed_block_kinds": [
+        "metric_card",
+        "paragraph",
+        "callout",
+        "bullets"
+      ],
+      "atomic_content_inputs": [
+        "trait_atomic_blocks",
+        "gradient_modifiers",
+        "fit_environment",
+        "common_misread"
+      ],
+      "priority_profiles": [
+        "BF_CANONICAL_01",
+        "BF_CANONICAL_02",
+        "BF_CANONICAL_04",
+        "BF_CANONICAL_06",
+        "BF_CANONICAL_07"
+      ],
+      "must_not_include": [
+        "raw 30-facet table",
+        "unlock funnel copy",
+        "history/compare tools copy"
+      ]
+    },
+    "facet_details": {
+      "display_title_zh": "细分维度焦点",
+      "section_role": "第二主干。负责解释 broad trait 之下的反直觉发现、结构偏离和完整 facet 层，不再只是百分位表。",
+      "allowed_block_kinds": [
+        "paragraph",
+        "metric_card",
+        "table_row",
+        "callout"
+      ],
+      "atomic_content_inputs": [
+        "facet_glossary",
+        "facet_precision_rules",
+        "top_anomalies",
+        "full_facet_directory"
+      ],
+      "priority_profiles": [
+        "BF_CANONICAL_01",
+        "BF_CANONICAL_02",
+        "BF_CANONICAL_03",
+        "BF_CANONICAL_04",
+        "BF_CANONICAL_06",
+        "BF_CANONICAL_07"
+      ],
+      "must_not_include": [
+        "broad trait generic copy only",
+        "pure percentile rows with no interpretation",
+        "career-specific long narratives"
+      ]
+    },
+    "core_portrait": {
+      "display_title_zh": "人格总览",
+      "section_role": "把五维与 facets 重新收束成一个完整人格结构，负责解释主冲突、默认风格、系统优势与主要代价。",
+      "allowed_block_kinds": [
+        "paragraph",
+        "bullets",
+        "callout"
+      ],
+      "atomic_content_inputs": [
+        "synergy_primary",
+        "cross_trait_synthesis",
+        "identity_line",
+        "default_style_line"
+      ],
+      "priority_profiles": [
+        "BF_CANONICAL_01",
+        "BF_CANONICAL_02",
+        "BF_CANONICAL_03",
+        "BF_CANONICAL_04",
+        "BF_CANONICAL_07"
+      ],
+      "must_not_include": [
+        "30-facet directory",
+        "full norms explanation",
+        "full action matrix"
+      ]
+    },
+    "norms_comparison": {
+      "display_title_zh": "相对参照",
+      "section_role": "专门解释参考样本、百分位、相对位置与边界，不承担建议层。",
+      "allowed_block_kinds": [
+        "paragraph",
+        "metric_card",
+        "callout"
+      ],
+      "atomic_content_inputs": [
+        "compare_phrases",
+        "trait_relative_meaning",
+        "relative_elevation_summary"
+      ],
+      "priority_profiles": [
+        "BF_CANONICAL_01",
+        "BF_CANONICAL_02",
+        "BF_CANONICAL_04",
+        "BF_CANONICAL_06",
+        "BF_CANONICAL_08"
+      ],
+      "must_not_include": [
+        "generic motivation advice",
+        "career or relationship prescriptions",
+        "facet glossary rows"
+      ]
+    },
+    "action_plan": {
+      "display_title_zh": "成长与下一步动作",
+      "section_role": "把理解转成现实动作，闭合整份报告；既可以承载 Action Matrix，也可承载 scenario-bound next steps。",
+      "allowed_block_kinds": [
+        "paragraph",
+        "bullets",
+        "callout"
+      ],
+      "atomic_content_inputs": [
+        "action_matrix_rules",
+        "top_priority_scenario",
+        "synergy_action_hook",
+        "growth_signal_summary"
+      ],
+      "priority_profiles": [
+        "BF_CANONICAL_01",
+        "BF_CANONICAL_02",
+        "BF_CANONICAL_03",
+        "BF_CANONICAL_05",
+        "BF_CANONICAL_06",
+        "BF_CANONICAL_07"
+      ],
+      "must_not_include": [
+        "broad trait definitions",
+        "raw percentile explanations",
+        "commercial unlock CTA as main content"
+      ]
+    },
+    "methodology_and_access": {
+      "display_title_zh": "方法与边界说明",
+      "section_role": "建立专业感、边界感与信任感，不承载主体价值；说明报告是什么、不是什么、应该如何使用。",
+      "allowed_block_kinds": [
+        "paragraph",
+        "bullets",
+        "callout"
+      ],
+      "atomic_content_inputs": [
+        "methodology_copy",
+        "boundary_notes",
+        "usage_suggestions"
+      ],
+      "priority_profiles": [
+        "BF_CANONICAL_01",
+        "BF_CANONICAL_02",
+        "BF_CANONICAL_05",
+        "BF_CANONICAL_08"
+      ],
+      "must_not_include": [
+        "main narrative reveal",
+        "large action matrix",
+        "raw facet list",
+        "commercial funnel copy"
+      ]
+    }
+  }
+}

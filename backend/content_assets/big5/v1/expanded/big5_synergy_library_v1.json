@@ -1,0 +1,364 @@
+{
+  "version": "v1",
+  "asset_type": "big5_synergy_library",
+  "source_files": [
+    "big5_source_of_truth_v1.md",
+    "big5_canonical_profiles_v1.json",
+    "big5_atomic_trait_blocks_v1.json",
+    "big5_section_block_copy_map_v1.json",
+    "big5_style_and_copy_rules_v1.md"
+  ],
+  "notes": [
+    "内容资产库，不是 runtime 规则文件",
+    "section_targets 使用内部 section key 或 scenario tag"
+  ],
+  "synergies": [
+    {
+      "synergy_id": "n_high_x_e_low",
+      "working_name": "高敏感低外放",
+      "core_tension": "高预警系统遇到高筛选进入，内部会很早承担压力，但外部世界未必及时看见。",
+      "strength": "你能在低噪音中保留细致判断，尤其擅长发现关系和任务里的隐性风险。",
+      "shadow": "如果判断长期不外化，压力会在内部叠高，最后表现为迟滞、回避或突然抽离。",
+      "best_use": "适合需要深度判断、风险识别、低噪音处理的场景，但需要明确表达窗口。",
+      "section_targets": [
+        "hero_summary",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "headline": "你的预警很快，但进入很慢",
+        "body": "你不是社交差，也不是脆弱；更准确地说，你的系统先在内部完成大量风险处理，然后才决定是否把自己放进场景里。优势是判断细、误伤少，代价是别人可能只看见你的退后，看不见你已经消耗了一轮。",
+        "strength_sentence": "把这种结构用好，关键是把内部判断转成可见的小信号，而不是等到完全确定才表达。",
+        "risk_sentence": "风险在于压力被长时间内化，外部反馈来得越晚，你越容易把进入门槛继续抬高。",
+        "action_hook": "先选一个低噪音对象，说出一句“我现在最担心的是……”，让系统获得现实回声。"
+      },
+      "source_refs": [
+        "big5_canonical_profiles_v1.json",
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_source_of_truth_v1.md#3"
+      ],
+      "scenario_tags": [
+        "stress_recovery",
+        "personal_growth"
+      ]
+    },
+    {
+      "synergy_id": "o_high_x_c_low",
+      "working_name": "高开放低续航",
+      "core_tension": "复杂理解力遇到低刚性推进，想法能走很远，落地却需要额外结构承托。",
+      "strength": "你擅长重构问题、看见替代路径，并能在不确定中保持思考活性。",
+      "shadow": "如果没有阶段反馈，探索会稀释执行，最后变成高认知、低完工的挫败。",
+      "best_use": "适合探索、策略、内容、研究和早期方案，但必须配短周期交付容器。",
+      "section_targets": [
+        "domain_deep_dive",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "headline": "理解很深，收束要另设轨道",
+        "body": "你的系统不是没有行动力，而是理解入口比执行轨道更强。越复杂的问题越能激活你，但如果没有明确关闭动作，开放性会持续打开新分支，尽责性却不足以自动把它们收束成结果。",
+        "strength_sentence": "这种组合能产出有层次的判断，尤其适合把混乱问题重新组织成可理解版本。",
+        "risk_sentence": "风险是不断扩展解释，却缺少截止、交付和优先级，导致真实成果被延后。",
+        "action_hook": "每次探索只保留一个本周验证项，并明确一个暂时舍弃项。"
+      },
+      "source_refs": [
+        "big5_canonical_profiles_v1.json",
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_source_of_truth_v1.md#3"
+      ],
+      "scenario_tags": [
+        "personal_growth",
+        "workplace"
+      ]
+    },
+    {
+      "synergy_id": "o_high_x_n_high",
+      "working_name": "高开放高情绪性",
+      "core_tension": "复杂感知与高预警叠加，会让你既看见更多可能，也更早感到每种可能的代价。",
+      "strength": "你能敏锐捕捉系统裂缝、人的变化和方案的隐含风险。",
+      "shadow": "如果缺少边界，复杂性会变成心理负荷，思考越细，恢复越难。",
+      "best_use": "适合高质量分析、研究、策略和关系判断，但需要降低信息噪音。",
+      "section_targets": [
+        "hero_summary",
+        "facet_details",
+        "core_portrait"
+      ],
+      "copy": {
+        "headline": "看得多，也承担得早",
+        "body": "你的系统会同时打开复杂解释和风险预警：这让你比很多人更早看见问题，也更早被问题消耗。它不是想太多，而是复杂理解与高体感在同一时间工作。",
+        "strength_sentence": "优势是对模糊信号极其敏锐，能提前发现方案、关系或环境的脆弱点。",
+        "risk_sentence": "风险是每一种可能都带着成本进入内部，导致长时间高负荷处理。",
+        "action_hook": "为重要问题设信息边界：先确认必须知道什么，再停止继续搜集噪音。"
+      },
+      "source_refs": [
+        "big5_canonical_profiles_v1.json",
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_source_of_truth_v1.md#3"
+      ],
+      "scenario_tags": [
+        "stress_recovery",
+        "personal_growth"
+      ]
+    },
+    {
+      "synergy_id": "c_high_x_n_high",
+      "working_name": "高尽责高情绪性",
+      "core_tension": "高标准和高预警互相放大，责任感会推动你处理问题，情绪性又让问题代价更难放下。",
+      "strength": "你可靠、认真、能提前修补风险，适合高要求任务。",
+      "shadow": "长期会形成紧绷、苛责和难以恢复，尤其在标准不清或反馈不足时。",
+      "best_use": "适合质量、流程、风控和复杂项目，但要区分关键标准与普通标准。",
+      "section_targets": [
+        "domain_deep_dive",
+        "facet_details",
+        "action_plan"
+      ],
+      "copy": {
+        "headline": "标准越高，警觉越难下线",
+        "body": "你的系统会把“应该做好”和“如果出错会怎样”绑在一起。它能带来高质量和强责任，但也会让你在事情结束后仍然难以真正放下。",
+        "strength_sentence": "优势是可靠、预见风险、愿意负责到底。",
+        "risk_sentence": "风险是把每个问题都当成必须高标准处理，导致长期紧绷。",
+        "action_hook": "把任务分成必须高标准、足够好即可、可以延后观察三类。"
+      },
+      "source_refs": [
+        "big5_canonical_profiles_v1.json",
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_source_of_truth_v1.md#3"
+      ],
+      "scenario_tags": [
+        "workplace",
+        "stress_recovery"
+      ]
+    },
+    {
+      "synergy_id": "e_high_x_a_low",
+      "working_name": "高外向低宜人",
+      "core_tension": "高进入速度遇到强边界判断，会形成直接、快速、有压强的现场推动力。",
+      "strength": "你能把问题推到台面，适合需要决策、表达和打破低效的场景。",
+      "shadow": "如果缺少缓冲，别人会先感到压迫，再处理你的内容。",
+      "best_use": "适合快节奏推进、谈判、现场协调和改革场景，但要设计关系缓冲。",
+      "section_targets": [
+        "hero_summary",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "headline": "推进很快，摩擦也会变快",
+        "body": "你的系统会先进入、先表达、先把边界和责任说清楚。这种组合不是简单强势，而是外部推进力与低情绪迎合度叠加，容易让判断以很高速度进入场域。",
+        "strength_sentence": "优势是能切开模糊、减少拖延，让关键问题更快被处理。",
+        "risk_sentence": "风险是表达压强过高，正确判断也可能被体验成攻击。",
+        "action_hook": "在指出问题前先补一句共同目标，再进入事实和边界。"
+      },
+      "source_refs": [
+        "big5_canonical_profiles_v1.json",
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_source_of_truth_v1.md#3"
+      ],
+      "scenario_tags": [
+        "workplace",
+        "relationships"
+      ]
+    },
+    {
+      "synergy_id": "e_high_x_n_high",
+      "working_name": "高外向高情绪性",
+      "core_tension": "外部反馈会快速点燃你，高情绪性又会让现场刺激更快进入内部负荷。",
+      "strength": "你能在现场快速反应、带动和捕捉变化。",
+      "shadow": "长期高刺激会让你被自己的反应速度带走，事后恢复不足。",
+      "best_use": "适合需要现场判断和快速协调的任务，但要有降速机制。",
+      "section_targets": [
+        "hero_summary",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "headline": "被现场点亮，也被现场拉高",
+        "body": "你的系统在互动中很快启动，也会在互动中更快起波。它能带来强现场感和快速推进，但同一套速度也会把压力、误解和评价迅速带进身体。",
+        "strength_sentence": "优势是反应快、带动强、能在真实场景中组织行动。",
+        "risk_sentence": "风险是过度暴露在刺激里，表达结束后系统仍停不下来。",
+        "action_hook": "重要互动后固定留 10 分钟复盘和降噪，不马上进入下一场刺激。"
+      },
+      "source_refs": [
+        "big5_canonical_profiles_v1.json",
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_source_of_truth_v1.md#3"
+      ],
+      "scenario_tags": [
+        "workplace",
+        "stress_recovery"
+      ]
+    },
+    {
+      "synergy_id": "c_low_x_n_high",
+      "working_name": "低尽责高情绪性",
+      "core_tension": "执行续航较弱遇到高压力体感，容易形成知道重要、感到焦急、却更难启动的循环。",
+      "strength": "你能很早感到任务代价和风险，适合发现真正卡点。",
+      "shadow": "如果把它解释成懒，会加重羞耻与拖延，启动入口更窄。",
+      "best_use": "适合短周期、强反馈、低羞耻的推进设计。",
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "headline": "不是不在乎，是越在乎越难进",
+        "body": "你的系统可能先感到任务重要和后果压力，但尽责性不足以自动把压力转成稳定推进。于是越知道该做，越容易在焦急和回避之间摆动。",
+        "strength_sentence": "优势是你不会对重要风险迟钝，能识别哪些事真的有代价。",
+        "risk_sentence": "风险是压力变成启动阻力，并被误读成不负责。",
+        "action_hook": "把任务缩到 20 分钟内可完成的一步，完成后只记录事实，不做人格评价。"
+      },
+      "source_refs": [
+        "big5_canonical_profiles_v1.json",
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_source_of_truth_v1.md#3"
+      ],
+      "scenario_tags": [
+        "stress_recovery",
+        "personal_growth"
+      ]
+    },
+    {
+      "synergy_id": "o_low_x_c_high",
+      "working_name": "低开放高尽责",
+      "core_tension": "稳定路径和高责任感互相强化，能形成可靠交付，也会提高对变化与模糊的进入成本。",
+      "strength": "你擅长维护标准、流程和长期秩序。",
+      "shadow": "当环境需要重构或试错时，你可能过度依赖旧路径。",
+      "best_use": "适合稳定运营、质量控制和长期承诺，但需要小剂量更新机制。",
+      "section_targets": [
+        "domain_deep_dive",
+        "norms_comparison",
+        "action_plan"
+      ],
+      "copy": {
+        "headline": "秩序很强，变化要有证据",
+        "body": "你的系统更愿意把确定路径做深、做稳、做可靠。高尽责让你能持续维护质量，低开放让你对未经验证的新东西更谨慎，这不是落后，而是变化需要通过证据进入。",
+        "strength_sentence": "优势是稳定、可靠、抗噪音，能把标准长期守住。",
+        "risk_sentence": "风险是新环境已经变化时，旧方法仍因熟悉而被过度保留。",
+        "action_hook": "每月只选一个流程做小幅试验，用结果决定是否扩大。"
+      },
+      "source_refs": [
+        "big5_canonical_profiles_v1.json",
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_source_of_truth_v1.md#3"
+      ],
+      "scenario_tags": [
+        "workplace",
+        "personal_growth"
+      ]
+    },
+    {
+      "synergy_id": "a_high_x_e_low",
+      "working_name": "高宜人低外向",
+      "core_tension": "关系承接意愿强，但表达与进入较克制，容易把照顾放在内部完成。",
+      "strength": "你能营造安全感，也能在低噪音关系里提供稳定支持。",
+      "shadow": "如果不表达边界，别人会只感到你好相处，却看不见你的消耗。",
+      "best_use": "适合深度支持、长期协作和可信关系，但需要更早说出承接上限。",
+      "section_targets": [
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "headline": "承接很多，表达较少",
+        "body": "你的系统会关心关系是否还能继续，也会先在内部处理进入方式。高宜人让你容易多替别人想一步，低外向又让边界表达来得较晚。",
+        "strength_sentence": "优势是温和、可靠、能给关系稳定感。",
+        "risk_sentence": "风险是隐性劳动累积，直到你已经很累，对方仍不知道哪里超出范围。",
+        "action_hook": "承接前先说清“我可以做到哪一步”，把支持变成有边界的支持。"
+      },
+      "source_refs": [
+        "big5_canonical_profiles_v1.json",
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_source_of_truth_v1.md#3"
+      ],
+      "scenario_tags": [
+        "relationships"
+      ]
+    },
+    {
+      "synergy_id": "a_low_x_n_high",
+      "working_name": "低宜人高情绪性",
+      "core_tension": "强边界判断遇到高压力体感，会让你既容易看见不合理，也更容易被不合理点燃。",
+      "strength": "你能快速识别责任漂移、低效和关系操控。",
+      "shadow": "如果表达缺少缓冲，压力会变成锋利反击，让对方先防御。",
+      "best_use": "适合边界治理、冲突识别和责任厘清，但要把反应和表达分开。",
+      "section_targets": [
+        "facet_details",
+        "core_portrait",
+        "action_plan"
+      ],
+      "copy": {
+        "headline": "看见不合理，也更容易被点燃",
+        "body": "你的系统对边界和压力都敏感：不合理的地方会很快被你识别，也很快带来身体和情绪成本。它不是单纯难相处，而是低容忍与高体感同时启动。",
+        "strength_sentence": "优势是能防止模糊责任长期侵蚀你，也能让问题更早浮出水面。",
+        "risk_sentence": "风险是被点燃后直接表达，导致重点从问题本身转移到你的语气。",
+        "action_hook": "先暂停 10 分钟写下事实、影响和请求，再决定是否当面表达。"
+      },
+      "source_refs": [
+        "big5_canonical_profiles_v1.json",
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_source_of_truth_v1.md#3"
+      ],
+      "scenario_tags": [
+        "relationships",
+        "stress_recovery"
+      ]
+    },
+    {
+      "synergy_id": "e_high_x_a_high",
+      "working_name": "连接势能放大器",
+      "core_tension": "高外向和高宜人叠加时，互动会快速形成能量，关系质量也会被放进推进方式里。",
+      "strength": "你能带动现场、承接他人，也更容易把协作氛围转成真实行动。",
+      "shadow": "如果边界没有被提前说明，你可能在热情和承接中承担过多关系劳动。",
+      "best_use": "适合协作、协调、社群、客户沟通和需要把人聚到一起的任务。",
+      "section_targets": [
+        "hero_summary",
+        "core_portrait",
+        "action_plan"
+      ],
+      "scenario_tags": [
+        "relationships",
+        "workplace"
+      ],
+      "copy": {
+        "headline": "连接能点亮你，也会占用你",
+        "body": "你的系统很容易在互动中形成势能，也愿意照顾关系能否继续。这种组合不是单纯外向或好相处，而是表达、回应、协调和承接同时启动。优势是能把人带进同一个节奏，代价是你可能太晚才发现自己已经替关系多走了几步。",
+        "strength_sentence": "这种结构能把现场反馈转成协作动力，让团队更容易被点亮和聚合。",
+        "risk_sentence": "风险在于边界被热情覆盖，最后你承担了过多沟通、安抚和补位成本。",
+        "action_hook": "每次承接协作前，先说清你能支持的范围和需要对方承担的部分。"
+      },
+      "source_refs": [
+        "big5_canonical_profiles_v1.json#BF_CANONICAL_05",
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_source_of_truth_v1.md#3"
+      ]
+    },
+    {
+      "synergy_id": "e_low_x_c_high",
+      "working_name": "低噪音长续航者",
+      "core_tension": "低外向和高尽责叠加时，能量更少来自抢场，更多来自低噪音、清楚边界和持续推进。",
+      "strength": "你能在稳定环境里长时间维持质量，不容易被场面热度带偏。",
+      "shadow": "如果环境长期要求曝光、即时表达和高频互动，你的贡献可能被低估。",
+      "best_use": "适合深度工作、长期项目、质量维护、流程优化和需要稳定交付的任务。",
+      "section_targets": [
+        "domain_deep_dive",
+        "core_portrait",
+        "norms_comparison",
+        "action_plan"
+      ],
+      "scenario_tags": [
+        "workplace",
+        "personal_growth"
+      ],
+      "copy": {
+        "headline": "不抢场，也能长期推进",
+        "body": "你的系统不一定靠高曝光来证明存在感，却能在清楚边界和稳定节奏里持续交付。低外向让你保留处理深度，高尽责让你愿意维护质量和节点。优势是长续航，代价是别人可能先看见你的安静，而不是你的稳定贡献。",
+        "strength_sentence": "这种结构适合把复杂任务做深、做稳，并在长期里维护可靠质量。",
+        "risk_sentence": "风险是高噪音团队把可见表达误当成贡献本身，从而低估你的实际推进。",
+        "action_hook": "在关键节点主动同步一次进展和判断，让深工成果被看见。"
+      },
+      "source_refs": [
+        "big5_canonical_profiles_v1.json#BF_CANONICAL_06",
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_source_of_truth_v1.md#3"
+      ]
+    }
+  ]
+}

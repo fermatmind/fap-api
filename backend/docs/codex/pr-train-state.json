@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T04:06:10.554978Z",
+  "updated_at": "2026-04-23T12:20:19.467Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -3431,6 +3431,73 @@
         {
           "at": "2026-04-23T04:06:10.554780Z",
           "summary": "Remote CI for pushed recheck head failed to start because GitHub billing/spending-limit blocked the hygiene job; local verification remained green."
+        }
+      ]
+    },
+    "PR-BIG5-CONTENT-ASSETS-V1": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
+      "status": "local_checks_passed",
+      "branch": "codex/big5-content-assets-v1-staging",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "ruby -e \"require 'yaml'; YAML.load_file('backend/docs/codex/pr-train.yaml')\"",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool backend/docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "for f in backend/content_assets/big5/v1/source/*.json backend/content_assets/big5/v1/expanded/*.json; do python3 -m json.tool \"$f\" >/dev/null || exit 1; done",
+            "status": "passed"
+          },
+          {
+            "command": "node -e \"<Big Five v1 asset count/target validation>\"",
+            "status": "passed",
+            "result": "25 modifiers, 12 synergies, 30 facets, 23 precision rules, 40 action rules, 8 coverage profiles"
+          },
+          {
+            "command": "rg -n \"Profile Summary|Domain Deep Dive|Norms Comparison|Methodology and Access|A compact overview|Focused read|Near-term actions|assertiveness|你天生注定|你永远都会|你只能这样活|你太玻璃心|你有问题|你不正常\" backend/content_assets/big5/v1/expanded || true",
+            "status": "passed",
+            "result": "no matches in expanded assets"
+          },
+          {
+            "command": "php artisan route:list --no-ansi",
+            "status": "passed",
+            "result": "189 routes"
+          },
+          {
+            "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan migrate --pretend --no-interaction --force",
+            "status": "passed"
+          },
+          {
+            "command": "APP_URL=http://127.0.0.1:18010 bash scripts/ci_verify_mbti.sh",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "notes": [
+        {
+          "at": "2026-04-23T12:17:01.211Z",
+          "summary": "Initialized PR train ledger entry for isolated Big Five v1 content asset staging package."
+        },
+        {
+          "at": "2026-04-23T12:20:19.466Z",
+          "summary": "Re-review fixed synergy section/scenario separation and added direct coverage synergies for canonical profiles 05 and 06."
         }
       ]
     }

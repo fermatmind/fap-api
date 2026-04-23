@@ -1,0 +1,705 @@
+{
+  "version": "v1",
+  "asset_type": "big5_action_matrix",
+  "source_files": [
+    "big5_source_of_truth_v1.md",
+    "big5_canonical_profiles_v1.json",
+    "big5_atomic_trait_blocks_v1.json",
+    "big5_section_block_copy_map_v1.json",
+    "big5_style_and_copy_rules_v1.md"
+  ],
+  "allowed_buckets": [
+    "continue",
+    "start",
+    "stop",
+    "observe"
+  ],
+  "scenarios": [
+    "workplace",
+    "relationships",
+    "stress_recovery",
+    "personal_growth"
+  ],
+  "rules": [
+    {
+      "rule_id": "big5_action_01_c_workplace_start",
+      "trait_code": "C",
+      "scenario_tags": [
+        "workplace"
+      ],
+      "bucket": "start",
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "先做 20 分钟可交付片段",
+      "body": "当任务长期、模糊、反馈慢时，不要先要求自己进入完整状态。先定义一个 20 分钟内能交出的片段，让推进从可见结果开始。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_02_c_workplace_continue",
+      "trait_code": "C",
+      "scenario_tags": [
+        "workplace"
+      ],
+      "bucket": "continue",
+      "difficulty_level": "medium",
+      "time_horizon": "two_weeks",
+      "title": "保留阶段节点",
+      "body": "如果你在清楚节点下表现更稳，就继续把项目拆成每周可验收的小段。节点不是束缚，而是给尽责系统提供外部轨道。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_03_c_workplace_stop",
+      "trait_code": "C",
+      "scenario_tags": [
+        "workplace"
+      ],
+      "bucket": "stop",
+      "difficulty_level": "medium",
+      "time_horizon": "this_week",
+      "title": "停止用最高标准处理所有任务",
+      "body": "高尽责或责任感强时，先把任务分成关键、普通、可延后三类。只有关键任务使用最高标准。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_04_c_workplace_observe",
+      "trait_code": "C",
+      "scenario_tags": [
+        "workplace"
+      ],
+      "bucket": "observe",
+      "difficulty_level": "low",
+      "time_horizon": "two_weeks",
+      "title": "记录执行掉线发生在哪里",
+      "body": "连续两周只记录掉线发生在启动、持续、收束还是反馈缺失，不急着评价自己。先找到断点，才有下一步。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_05_c_personal_growth_start",
+      "trait_code": "C",
+      "scenario_tags": [
+        "personal_growth"
+      ],
+      "bucket": "start",
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "建立一个关闭动作",
+      "body": "每次学习、探索或计划结束时，写下一句结论和一个下一步。这个动作能防止开放性持续打开、尽责性没有收束。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_06_c_personal_growth_continue",
+      "trait_code": "C",
+      "scenario_tags": [
+        "personal_growth"
+      ],
+      "bucket": "continue",
+      "difficulty_level": "medium",
+      "time_horizon": "one_month",
+      "title": "继续使用短周期复盘",
+      "body": "如果你在短周期里更容易稳定，就保留每周一次复盘，而不是把成长变成长期模糊愿望。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_07_c_personal_growth_stop",
+      "trait_code": "C",
+      "scenario_tags": [
+        "personal_growth"
+      ],
+      "bucket": "stop",
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "停止把拖延翻译成人格失败",
+      "body": "低续航时，先检查任务是否低反馈、低意义或过长。把问题还原成结构问题，才能降低羞耻带来的二次阻力。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_08_c_stress_recovery_observe",
+      "trait_code": "C",
+      "scenario_tags": [
+        "stress_recovery"
+      ],
+      "bucket": "observe",
+      "difficulty_level": "low",
+      "time_horizon": "two_weeks",
+      "title": "观察高标准后的恢复成本",
+      "body": "记录完成高标准任务后需要多久回稳。如果恢复明显变慢，说明标准使用过密，需要降级部分任务。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_09_n_stress_recovery_start",
+      "trait_code": "N",
+      "scenario_tags": [
+        "stress_recovery"
+      ],
+      "bucket": "start",
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "提前安排退出点",
+      "body": "高情绪性或高预警时，在进入高压场景前先定一个退出点，例如会议后 10 分钟不接新刺激。恢复要前置，而不是过载后补救。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_10_n_stress_recovery_continue",
+      "trait_code": "N",
+      "scenario_tags": [
+        "stress_recovery"
+      ],
+      "bucket": "continue",
+      "difficulty_level": "medium",
+      "time_horizon": "two_weeks",
+      "title": "继续保留降噪窗口",
+      "body": "如果你发现安静、独处或低信息输入能让系统回稳，就把它当成必要维护，不要等到明显失速才使用。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_11_n_stress_recovery_stop",
+      "trait_code": "N",
+      "scenario_tags": [
+        "stress_recovery"
+      ],
+      "bucket": "stop",
+      "difficulty_level": "medium",
+      "time_horizon": "this_week",
+      "title": "停止把预警当成脆弱",
+      "body": "当你比别人更早感到不对，先记录触发点和现实证据。预警需要校准，不需要被羞辱。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_12_n_stress_recovery_observe",
+      "trait_code": "N",
+      "scenario_tags": [
+        "stress_recovery"
+      ],
+      "bucket": "observe",
+      "difficulty_level": "low",
+      "time_horizon": "two_weeks",
+      "title": "记录三类触发",
+      "body": "连续两周把起波场景分成边界模糊、评价压力、信息过载三类。不同触发需要不同动作。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_13_n_relationships_start",
+      "trait_code": "N",
+      "scenario_tags": [
+        "relationships"
+      ],
+      "bucket": "start",
+      "difficulty_level": "medium",
+      "time_horizon": "this_week",
+      "title": "把感受改写成请求",
+      "body": "关系张力升高时，先用一句事实加一句请求表达，例如“这件事反复变化，我需要我们先确认责任边界”。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_14_n_workplace_observe",
+      "trait_code": "N",
+      "scenario_tags": [
+        "workplace"
+      ],
+      "bucket": "observe",
+      "difficulty_level": "low",
+      "time_horizon": "two_weeks",
+      "title": "区分风险和噪音",
+      "body": "每次担心后标记：这是有证据的风险，还是信息不足带来的噪音。高预警系统需要筛选，不需要关闭。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_15_n_personal_growth_start",
+      "trait_code": "N",
+      "scenario_tags": [
+        "personal_growth"
+      ],
+      "bucket": "start",
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "设计一个恢复指标",
+      "body": "选择一个可观察指标，例如睡眠、注意力或回避冲动。用指标判断是否恢复，而不是只靠“我应该没事”。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_16_n_workplace_stop",
+      "trait_code": "N",
+      "scenario_tags": [
+        "workplace"
+      ],
+      "bucket": "stop",
+      "difficulty_level": "medium",
+      "time_horizon": "this_week",
+      "title": "停止连续暴露高摩擦场景",
+      "body": "如果同类会议或对话持续拉高你，先减少连续安排。恢复不足时继续加压，只会降低判断质量。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_17_e_workplace_start",
+      "trait_code": "E",
+      "scenario_tags": [
+        "workplace"
+      ],
+      "bucket": "start",
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "提前写出一句核心观点",
+      "body": "低外向或表达门槛高时，不要等现场自然进入。会前写下一句必须被看见的判断，让表达变成低摩擦动作。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_18_e_workplace_continue",
+      "trait_code": "E",
+      "scenario_tags": [
+        "workplace"
+      ],
+      "bucket": "continue",
+      "difficulty_level": "medium",
+      "time_horizon": "two_weeks",
+      "title": "继续利用现场反馈",
+      "body": "高外向者可以继续用讨论、协作和快速试验形成势能，但每次互动前先确认目标，避免只被热度带着走。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_19_e_workplace_stop",
+      "trait_code": "E",
+      "scenario_tags": [
+        "workplace"
+      ],
+      "bucket": "stop",
+      "difficulty_level": "medium",
+      "time_horizon": "this_week",
+      "title": "停止把沉默等同于没贡献",
+      "body": "如果你偏低外向，贡献可能先发生在观察和判断里。需要补的是可见信号，而不是否定自己的处理方式。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_20_e_workplace_observe",
+      "trait_code": "E",
+      "scenario_tags": [
+        "workplace"
+      ],
+      "bucket": "observe",
+      "difficulty_level": "low",
+      "time_horizon": "two_weeks",
+      "title": "观察能量来自哪里",
+      "body": "记录哪些互动让你被点亮，哪些互动只是在消耗。外向性不是人群数量，而是反馈质量。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_21_e_relationships_start",
+      "trait_code": "E",
+      "scenario_tags": [
+        "relationships"
+      ],
+      "bucket": "start",
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "用小范围连接替代大场合硬撑",
+      "body": "低或中位外向时，先选择一个可信对象建立连接，不要把关系成长设计成高噪音社交任务。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_22_e_relationships_continue",
+      "trait_code": "E",
+      "scenario_tags": [
+        "relationships"
+      ],
+      "bucket": "continue",
+      "difficulty_level": "medium",
+      "time_horizon": "two_weeks",
+      "title": "继续表达积极回声",
+      "body": "如果你容易被互动点亮，就继续把认可、兴趣和回应说出来，但保留真实边界，避免只靠外放维持关系。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_23_e_stress_recovery_start",
+      "trait_code": "E",
+      "scenario_tags": [
+        "stress_recovery"
+      ],
+      "bucket": "start",
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "给高互动后留白",
+      "body": "高外向不等于不需要恢复。高密度互动后留 10 分钟降速，帮助系统从外部反馈回到内部整理。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_24_e_personal_growth_observe",
+      "trait_code": "E",
+      "scenario_tags": [
+        "personal_growth"
+      ],
+      "bucket": "observe",
+      "difficulty_level": "low",
+      "time_horizon": "two_weeks",
+      "title": "观察进入门槛",
+      "body": "记录你在哪些场景愿意表达、哪些场景持续退后。重点不是逼自己外向，而是找到值得进入的条件。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_25_a_relationships_start",
+      "trait_code": "A",
+      "scenario_tags": [
+        "relationships"
+      ],
+      "bucket": "start",
+      "difficulty_level": "medium",
+      "time_horizon": "this_week",
+      "title": "先说支持范围",
+      "body": "高宜人或容易承接时，在答应前先说“我可以做到这一步”。支持有范围，关系才不靠单方消耗维持。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_26_a_relationships_continue",
+      "trait_code": "A",
+      "scenario_tags": [
+        "relationships"
+      ],
+      "bucket": "continue",
+      "difficulty_level": "medium",
+      "time_horizon": "two_weeks",
+      "title": "继续保留体谅，但加上边界",
+      "body": "如果体谅是你的优势，就继续使用它；同时把边界说出来，避免别人只看见你的好说话。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_27_a_relationships_stop",
+      "trait_code": "A",
+      "scenario_tags": [
+        "relationships"
+      ],
+      "bucket": "stop",
+      "difficulty_level": "medium",
+      "time_horizon": "this_week",
+      "title": "停止替所有摩擦买单",
+      "body": "当关系不舒服时，先分清这是你的责任、对方的责任，还是系统规则不清。不要因为你更能承接，就默认都由你吸收。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_28_a_relationships_observe",
+      "trait_code": "A",
+      "scenario_tags": [
+        "relationships"
+      ],
+      "bucket": "observe",
+      "difficulty_level": "low",
+      "time_horizon": "two_weeks",
+      "title": "观察后退发生在哪一刻",
+      "body": "中位宜人者常在心里先后退。记录你开始不想投入的时点，帮助你更早表达边界。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_29_a_workplace_start",
+      "trait_code": "A",
+      "scenario_tags": [
+        "workplace"
+      ],
+      "bucket": "start",
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "用共同目标缓冲直接反馈",
+      "body": "低宜人或表达锋利时，先说明共同目标，再进入问题。这样能让对方更容易处理内容，而不是先防御语气。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_30_a_workplace_continue",
+      "trait_code": "A",
+      "scenario_tags": [
+        "workplace"
+      ],
+      "bucket": "continue",
+      "difficulty_level": "medium",
+      "time_horizon": "two_weeks",
+      "title": "继续把责任说清楚",
+      "body": "如果你擅长指出模糊责任，就继续使用这项能力，但把事实、影响和请求分开说。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_31_a_workplace_stop",
+      "trait_code": "A",
+      "scenario_tags": [
+        "workplace"
+      ],
+      "bucket": "stop",
+      "difficulty_level": "medium",
+      "time_horizon": "this_week",
+      "title": "停止用和气覆盖责任漂移",
+      "body": "高宜人者在团队里容易补位过多。发现责任漂移时，先要求重新确认分工，而不是继续默默接住。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_32_a_stress_recovery_observe",
+      "trait_code": "A",
+      "scenario_tags": [
+        "stress_recovery"
+      ],
+      "bucket": "observe",
+      "difficulty_level": "low",
+      "time_horizon": "two_weeks",
+      "title": "观察冲突后的身体成本",
+      "body": "无论高低宜人，冲突后的恢复成本都值得记录。它能提示你是需要更早表达，还是需要降低表达压强。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_33_o_personal_growth_start",
+      "trait_code": "O",
+      "scenario_tags": [
+        "personal_growth"
+      ],
+      "bucket": "start",
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "只验证一个新假设",
+      "body": "高开放时，把新想法压缩成一个本周假设；低开放时，把变化压缩成一次可撤回试验。探索需要容器。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_34_o_personal_growth_continue",
+      "trait_code": "O",
+      "scenario_tags": [
+        "personal_growth"
+      ],
+      "bucket": "continue",
+      "difficulty_level": "medium",
+      "time_horizon": "one_month",
+      "title": "继续保留现实过滤器",
+      "body": "中位开放者可以继续用价值、证据和可行性筛选新东西。筛选不是保守，而是保护投入质量。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_35_o_personal_growth_stop",
+      "trait_code": "O",
+      "scenario_tags": [
+        "personal_growth"
+      ],
+      "bucket": "stop",
+      "difficulty_level": "medium",
+      "time_horizon": "this_week",
+      "title": "停止无限扩展解释",
+      "body": "如果你不断看到更多可能，就先写下当前最有用的一种解释。不是所有解释都需要进入行动。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_36_o_personal_growth_observe",
+      "trait_code": "O",
+      "scenario_tags": [
+        "personal_growth"
+      ],
+      "bucket": "observe",
+      "difficulty_level": "low",
+      "time_horizon": "two_weeks",
+      "title": "观察你抗拒的到底是什么",
+      "body": "面对新路径时，记录你抗拒的是风险、抽象、失控，还是缺少意义。不同抗拒需要不同入口。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_37_o_workplace_start",
+      "trait_code": "O",
+      "scenario_tags": [
+        "workplace"
+      ],
+      "bucket": "start",
+      "difficulty_level": "medium",
+      "time_horizon": "this_week",
+      "title": "把复杂问题画成三层",
+      "body": "处理复杂工作时，先分成事实、假设、下一步三层。这样能保留开放性，又不会让讨论失去收束。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_38_o_workplace_continue",
+      "trait_code": "O",
+      "scenario_tags": [
+        "workplace"
+      ],
+      "bucket": "continue",
+      "difficulty_level": "medium",
+      "time_horizon": "two_weeks",
+      "title": "继续把新想法翻译成可执行版本",
+      "body": "如果你擅长理解新框架，就继续做翻译者：每个想法都附一个成本、一个收益和一个验证方式。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_39_o_workplace_stop",
+      "trait_code": "O",
+      "scenario_tags": [
+        "workplace"
+      ],
+      "bucket": "stop",
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "停止用新方案逃开旧问题",
+      "body": "高开放时要检查：你提出新路径，是因为它更有效，还是因为旧问题难收束。先处理关键阻塞。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    },
+    {
+      "rule_id": "big5_action_40_o_relationships_observe",
+      "trait_code": "O",
+      "scenario_tags": [
+        "relationships"
+      ],
+      "bucket": "observe",
+      "difficulty_level": "low",
+      "time_horizon": "two_weeks",
+      "title": "观察价值重估对关系的影响",
+      "body": "当你开始重新评价一段关系或规则，先记录触发证据。重估需要证据，不需要被当成一时情绪。",
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json#action_plan",
+        "big5_style_and_copy_rules_v1.md#7"
+      ]
+    }
+  ]
+}
