@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T03:57:12Z",
+  "updated_at": "2026-04-23T03:57:53Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -3362,7 +3362,7 @@
     "PR-BIG5-REPORT-ENGINE-LIVE-BRIDGE": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "github_checks_failed_billing_block",
       "branch": "codex/big5-report-engine-live-bridge",
       "commit_sha": "fa63c89686e53c7a01e7995795f0ecd6b449a38f",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/983",
@@ -3401,9 +3401,22 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24815864271/job/72629993755",
+            "reason": "GitHub Actions job was not started because recent account payments failed or the spending limit needs to be increased."
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24815864271/job/72629998107",
+            "reason": "Skipped because hygiene did not start due to GitHub billing/spending-limit block."
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "Remote GitHub checks are blocked by account billing/spending-limit, not by PR4A code. Local bridge feature tests, route list, SQLite migrate pretend, MBTI verification, Pint, JSON validation, and diff check passed.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
