@@ -7,6 +7,7 @@ namespace App\Services\BigFive\ReportEngine\Bridge;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\BigFive\ReportEngine\BigFiveReportEngine;
+use Illuminate\Support\Facades\Log;
 
 final class BigFiveLiveRuntimeBridge
 {
@@ -35,6 +36,17 @@ final class BigFiveLiveRuntimeBridge
             return null;
         }
 
-        return $this->engine->generate($context);
+        try {
+            return $this->engine->generate($context);
+        } catch (\Throwable $exception) {
+            Log::warning('BIG5_REPORT_ENGINE_V2_BRIDGE_FAILED', [
+                'attempt_id' => (string) ($attempt->id ?? ''),
+                'result_id' => (string) ($result->id ?? ''),
+                'exception_class' => $exception::class,
+                'message' => $exception->getMessage(),
+            ]);
+
+            return null;
+        }
     }
 }
