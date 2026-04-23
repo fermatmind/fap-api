@@ -25,6 +25,24 @@
       "original_location": "local desktop seed",
       "normalized_to": "backend/content_assets/big5/v1/lifecycle/growth_next_step.json",
       "runtime_contract": false
+    },
+    {
+      "file_name": "history.json",
+      "original_location": "local desktop seed",
+      "normalized_to": "backend/content_assets/big5/v1/lifecycle/history.json",
+      "runtime_contract": false
+    },
+    {
+      "file_name": "compare.json",
+      "original_location": "local desktop seed",
+      "normalized_to": "backend/content_assets/big5/v1/lifecycle/compare.json",
+      "runtime_contract": false
+    },
+    {
+      "file_name": "pdf.json",
+      "original_location": "local desktop seed",
+      "normalized_to": "backend/content_assets/big5/v1/lifecycle/pdf.json",
+      "runtime_contract": false
     }
   ],
   "normalized_entry_schema": [
@@ -65,13 +83,31 @@
       "file": "growth_next_step.json",
       "surface": "growth_next_step",
       "role": "canonical-profile growth direction handoff"
+    },
+    {
+      "file": "history.json",
+      "surface": "history",
+      "role": "return-visit baseline, pattern tracking, and revisit-cycle handoff"
+    },
+    {
+      "file": "compare.json",
+      "surface": "compare",
+      "role": "change interpretation, stable/shifted pattern, and scenario delta handoff"
+    },
+    {
+      "file": "pdf.json",
+      "surface": "pdf",
+      "role": "archive, reflection, discussion, and review-material handoff"
     }
   ],
   "entry_counts": {
     "continuation": 8,
     "career_next_step": 8,
     "growth_next_step": 8,
-    "total": 24
+    "history": 6,
+    "compare": 6,
+    "pdf": 5,
+    "total": 41
   },
   "canonical_profile_mapping": [
     {
@@ -160,9 +196,6 @@
     }
   ],
   "deferred": [
-    "history.json",
-    "compare.json",
-    "pdf.json",
     "shell_tools.json",
     "retention_closeout.json"
   ],

@@ -2152,3 +2152,40 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: PR-BIG5-LIFECYCLE-HISTORY-COMPARE-PDF-V1
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api
+    branch: codex/big5-lifecycle-history-compare-pdf-v1
+    base: main
+    depends_on: ["PR-BIG5-LIFECYCLE-COPY-LIBRARY-V1"]
+    mode: execute
+    scope: >
+      Big Five lifecycle copy library v1 second-batch staging assets. Normalize
+      the history, compare, and pdf seed drafts into the existing
+      backend/content_assets/big5/v1/lifecycle package and update only the
+      lifecycle manifest and review notes. Keep this as reviewable content
+      governance only: do not change runtime code, database migrations, live
+      registry, content_packs, frontend, MBTI, payment/order/webhook, CMS, or
+      deferred shell_tools/retention_closeout lifecycle packs.
+    checks:
+      - "python3 -m json.tool backend/docs/codex/pr-train-state.json >/dev/null"
+      - "python3 -m json.tool backend/content_assets/big5/v1/lifecycle/history.json >/dev/null"
+      - "python3 -m json.tool backend/content_assets/big5/v1/lifecycle/compare.json >/dev/null"
+      - "python3 -m json.tool backend/content_assets/big5/v1/lifecycle/pdf.json >/dev/null"
+      - "python3 -m json.tool backend/content_assets/big5/v1/lifecycle/big5_lifecycle_manifest_v1.json >/dev/null"
+      - 'node -e "const fs=require(\"fs\");const base=\"backend/content_assets/big5/v1/lifecycle/\";const files=[\"history.json\",\"compare.json\",\"pdf.json\"];const fields=[\"entry_id\",\"surface\",\"placement\",\"audience_state\",\"when\",\"title\",\"body\",\"primary_cta_label\",\"secondary_cta_label\",\"notes\"].sort().join(\",\");const allowed=new Set([\"surface:history\",\"surface:compare\",\"surface:pdf\",\"surface:retake\",\"anchor:action_plan\",\"anchor:action_plan.workplace\",\"anchor:action_plan.relationships\",\"anchor:action_plan.stress_recovery\",\"anchor:action_plan.personal_growth\"]);const counts={};for(const file of files){const data=JSON.parse(fs.readFileSync(base+file,\"utf8\"));if(data.schema!==\"fap.big5.lifecycle_copy_library.v1.surface_pack\")throw new Error(file+\" schema mismatch\");counts[data.surface]=data.entries.length;for(const e of data.entries){if(Object.keys(e).sort().join(\",\")!==fields)throw new Error(file+\" entry schema mismatch \"+e.entry_id);for(const target of [e.notes.cta_targets.primary,e.notes.cta_targets.secondary])if(!allowed.has(target))throw new Error(file+\" invalid target \"+target)}}const manifest=JSON.parse(fs.readFileSync(base+\"big5_lifecycle_manifest_v1.json\",\"utf8\"));if(counts.history!==6||counts.compare!==6||counts.pdf!==5)throw new Error(\"unexpected lifecycle counts\");if(manifest.entry_counts.history!==6||manifest.entry_counts.compare!==6||manifest.entry_counts.pdf!==5||manifest.entry_counts.total!==41)throw new Error(\"manifest counts mismatch\");for(const d of [\"history.json\",\"compare.json\",\"pdf.json\"])if(manifest.deferred.includes(d))throw new Error(d+\" still deferred\");console.log(\"Big Five lifecycle second batch checks passed\")"'
+      - "rg -n \"Profile Summary|Domain Deep Dive|Norms Comparison|Methodology and Access|A compact overview|Focused read|Near-term actions|final offer|unlock|你天生注定|你永远都会|你只能这样活|你太玻璃心|你有问题|你不正常|你就是懒|cta_href|route_name|runtime_target|primary_cta_target|secondary_cta_target\" backend/content_assets/big5/v1/lifecycle/history.json backend/content_assets/big5/v1/lifecycle/compare.json backend/content_assets/big5/v1/lifecycle/pdf.json backend/content_assets/big5/v1/lifecycle/big5_lifecycle_manifest_v1.json backend/content_assets/big5/v1/lifecycle/big5_lifecycle_review_notes_v1.md && exit 1 || true"
+      - "cd backend && php artisan route:list --no-ansi"
+      - "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan migrate --pretend --no-interaction --force"
+      - "cd backend && APP_URL=http://127.0.0.1:18010 bash scripts/ci_verify_mbti.sh"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true

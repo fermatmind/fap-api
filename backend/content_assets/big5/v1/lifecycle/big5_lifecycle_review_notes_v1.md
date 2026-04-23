@@ -1,8 +1,8 @@
 # big5_lifecycle_review_notes_v1
 
 版本：v1
-状态：第一批 lifecycle staging 资产审阅稿
-范围：continuation、career_next_step、growth_next_step。未接 runtime、未写数据库、未改 live registry。
+状态：第二批 lifecycle staging 资产审阅稿
+范围：continuation、career_next_step、growth_next_step、history、compare、pdf。未接 runtime、未写数据库、未改 live registry。
 
 ## 本轮处理方式
 
@@ -10,17 +10,34 @@
 - 顶层不保留 CTA 目标字段，避免被误认为 runtime contract；CTA 映射只放在 notes.cta_targets，供后续审稿和接入设计参考。
 - continuation 只负责读后承接：回到 action_plan、history、compare、pdf、retake，不重复五维、facet、synergy 和 action matrix 的主体解释。
 - career_next_step 与 growth_next_step 均绑定 8 个 canonical profile family，作为下一步导航语，不生成独立职业报告或成长正文。
+- 第二批新增 history、compare、pdf，继续使用同一 schema，并把三类 surface 都限定为“读完之后如何继续使用结果”的承接层。
+- history 负责基线保存、稳定/变化模式和复访周期，不写成“查看历史”的按钮提示。
+- compare 负责变化解释入口和边界提示，不写成成绩单，也不重复 norms_comparison 或 action_plan 正文。
+- pdf 负责留存、复盘、讨论材料定位，不写成下载说明、权限说明或商业收口。
 
 ## 最成熟的 surface
 
 - continuation：覆盖工作、关系、压力恢复、个人成长、compare、history、pdf、action_plan 回跳，边界最清晰。
 - growth_next_step：与 canonical profile 的成长杠杆绑定较稳定，和 action_plan 的分层相对清楚。
+- history：first baseline、compare ready、stable pattern、shifted pattern、revisit cycle 覆盖完整，适合做长期使用入口。
+- compare：not ready、ready、stable、shifted、scenario delta、boundary 覆盖完整，最能避免“分数高低”的误读。
+- pdf：archive、discussion、coaching/reflection、unavailable、boundary 覆盖完整，已从“下载功能”转为复盘材料定位。
 
 ## 最容易写成功能说明的 entry
 
 - continuation_compare_ready：容易退化成“点击查看对比”的工具提示，二审时应保留“为什么对比有价值”的一句解释。
 - continuation_pdf_archive：容易退化成“下载 PDF”，二审时应保留“可复盘材料”的定位。
 - continuation_history_revisit：容易退化成“查看历史”，二审时应保留“长期基线”的使用理由。
+- history_first_result_baseline：容易退化成“保存到历史”，二审时要保留“未来可对照”的理由。
+- history_second_result_compare_prompt：容易变成 compare 入口提示，二审时要保留“历史从存档转为变化线索”的分层。
+- pdf_unavailable_explain：容易写成权限或错误提示，二审时要保持“结果仍可使用”的低压表达。
+
+## 最容易和正文重复的 entry
+
+- compare_scenario_delta_prompt：容易重复 action_plan 的场景行动建议；当前只保留“把变化放回场景”的导航语。
+- compare_ready_stable_pattern：容易重复人格稳定性解释；当前只说明稳定结果的使用方式。
+- history_shift_signal_read：容易扩写成变化原因分析；当前只提醒先回看环境与节奏。
+- pdf_ready_coaching_and_reflection：容易扩写成职业或成长正文；当前只保留材料留存与讨论入口。
 
 ## 最容易写成伪职业正文的 entry
 
@@ -40,11 +57,15 @@
 - BF_CANONICAL_05：高外向 × 高宜人的连接优势容易和关系正文重复，下一轮需要更精细地区分协作承接与边界维护。
 - BF_CANONICAL_08：秩序、可靠、支持容易写成静态优点，下一轮需要补更具体的长期使用场景。
 
+## 第二批复核修正
+
+- 将 history、compare、pdf 草稿的 notes.cta_targets 从数组规范为 primary/secondary 对象，和第一批 lifecycle schema 保持一致。
+- 统一将 CTA 目标映射为 surface:* 或 anchor:*，只作为 review metadata，不作为 runtime 字段。
+- 去掉用户可见标题中的英文概念暴露；正文里只保留必要产品词 PDF，其他场景均使用中文表达。
+- 将 history、compare、pdf 从 manifest deferred 中移除，并更新总 entry count 到 41。
+
 ## 明确 deferred
 
-- history.json
-- compare.json
-- pdf.json
 - shell_tools.json
 - retention_closeout.json
 

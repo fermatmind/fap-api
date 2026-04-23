@@ -1,0 +1,187 @@
+{
+  "schema": "fap.big5.lifecycle_copy_library.v1.surface_pack",
+  "version": "v1",
+  "surface": "history",
+  "description": "Big Five 历史记录承接层。只负责把查看历史从工具入口提升为复访、基线保存、稳定模式和变化模式的使用语境，不重复五维、facet、synergy 或 action_plan 的主体解释。",
+  "entries": [
+    {
+      "entry_id": "history_first_result_baseline",
+      "surface": "history",
+      "placement": "result_tools_panel",
+      "audience_state": "first_time_reader",
+      "when": {
+        "history_count": 0,
+        "report_mode": "full_report_user"
+      },
+      "title": "把这次结果留作第一份长期基线",
+      "body": "这份结果的价值，不只在于当下读懂自己，也在于之后可以和新的阶段做对照。先把它留在历史里，未来再回来时，你会更容易分辨：哪些变化来自环境，哪些来自节奏调整，哪些其实一直是比较稳定的底色。",
+      "primary_cta_label": "查看历史",
+      "secondary_cta_label": "保存 PDF",
+      "notes": {
+        "source_entry_id": "history_first_result_baseline",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "surface:history",
+          "secondary": "surface:pdf"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_style_and_copy_rules_v1.md#3",
+          "continuation.json#continuation_history_revisit"
+        ],
+        "normalization_notes": "从原草稿收敛为基线保存承接，不重复人格正文解释。"
+      }
+    },
+    {
+      "entry_id": "history_second_result_compare_prompt",
+      "surface": "history",
+      "placement": "result_continuation_strip",
+      "audience_state": "compare_ready_user",
+      "when": {
+        "history_count": 1,
+        "compare_available": true
+      },
+      "title": "两份结果之后，重点转向变化",
+      "body": "当你已经有前后两次记录，历史就不只是存档。把最近两次放在一起看，更适合判断这段时间是恢复、适应，还是被某个环境持续拉扯。这里不需要重新定义自己，只需要看变化发生在哪里。",
+      "primary_cta_label": "查看对比",
+      "secondary_cta_label": "查看历史",
+      "notes": {
+        "source_entry_id": "history_second_result_compare_prompt",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "surface:compare",
+          "secondary": "surface:history"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "continuation.json#continuation_compare_ready"
+        ],
+        "normalization_notes": "把 history 自然过渡到对比入口，避免写成按钮说明。"
+      }
+    },
+    {
+      "entry_id": "history_multi_result_pattern_read",
+      "surface": "history",
+      "placement": "history_header",
+      "audience_state": "returning_reader",
+      "when": {
+        "history_count_min": 2
+      },
+      "title": "把历史记录当作模式追踪",
+      "body": "当记录不止两次，最有价值的问题不再是“哪一次更准”，而是哪些倾向一直稳定，哪些会随着环境、压力和恢复质量一起波动。这样看历史，能帮你从一次状态里退后一步，看见更长期的使用线索。",
+      "primary_cta_label": "继续查看历史",
+      "secondary_cta_label": "查看对比",
+      "notes": {
+        "source_entry_id": "history_multi_result_pattern_read",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "surface:history",
+          "secondary": "surface:compare"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "用于历史页头部语境，不写成历史功能介绍。"
+      }
+    },
+    {
+      "entry_id": "history_stable_profile_signal",
+      "surface": "history",
+      "placement": "history_pattern_callout",
+      "audience_state": "returning_reader",
+      "when": {
+        "history_count_min": 2,
+        "latest_result_age_band": "within_90_days",
+        "pattern_state": "stable"
+      },
+      "title": "稳定不等于停在原地",
+      "body": "如果多次结果的主轴相近，它通常不是在说明你没有成长，而是在提示某些稳定偏好已经更清楚。下一步可以少一点怀疑“我是不是完全变了”，多看一看如何在同一套结构里使用得更稳。",
+      "primary_cta_label": "回到行动建议",
+      "secondary_cta_label": "保存 PDF",
+      "notes": {
+        "source_entry_id": "history_stable_profile_signal",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "anchor:action_plan",
+          "secondary": "surface:pdf"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "为稳定结果提供非停滞、非命运论的承接。"
+      }
+    },
+    {
+      "entry_id": "history_shift_signal_read",
+      "surface": "history",
+      "placement": "history_pattern_callout",
+      "audience_state": "returning_reader",
+      "when": {
+        "history_count_min": 2,
+        "latest_result_age_band": "within_180_days",
+        "pattern_state": "shifted"
+      },
+      "title": "变化先放回现实环境里看",
+      "body": "当结果出现明显变化，不急着把它理解成“我变成了另一种人”。更稳妥的读法，是先回看最近几个月的工作节奏、关系压力、恢复质量和生活阶段。变化通常需要和现实条件一起解释。",
+      "primary_cta_label": "查看对比",
+      "secondary_cta_label": "查看历史",
+      "notes": {
+        "source_entry_id": "history_shift_signal_read",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "surface:compare",
+          "secondary": "surface:history"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "避免把变化解释成命运式转变或诊断。"
+      }
+    },
+    {
+      "entry_id": "history_revisit_after_cycle",
+      "surface": "history",
+      "placement": "result_footer",
+      "audience_state": "full_report_user",
+      "when": {
+        "latest_result_age_band": "new_result"
+      },
+      "title": "给自己留一个回看时间点",
+      "body": "如果你准备认真使用这份结果，不需要现在一次想明白所有事。更可执行的方式，是先选一个场景和一个行为改变，跑 2–4 周后再回来回看：哪些建议真的开始起作用，哪些模式仍在原地打转。",
+      "primary_cta_label": "查看历史",
+      "secondary_cta_label": "重新测试",
+      "notes": {
+        "source_entry_id": "history_revisit_after_cycle",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "surface:history",
+          "secondary": "surface:retake"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "continuation.json#continuation_personal_growth_anchor"
+        ],
+        "normalization_notes": "形成复访周期，避免写成空泛留存文案。"
+      }
+    }
+  ]
+}
