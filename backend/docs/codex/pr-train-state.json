@@ -226,7 +226,7 @@
     "PR-BIG5-REPORT-ENGINE-FACET-PRECISION": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api-pr3a/backend",
-      "status": "open",
+      "status": "github_checks_failed_billing_block",
       "branch": "codex/big5-report-engine-facet-precision",
       "commit_sha": "51d57e573c9c074ba2fe3c737c87b4ff7e69a157",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/981",
@@ -275,13 +275,32 @@
         ],
         "github": [
           {
-            "name": "pending",
-            "status": "pending",
-            "details_url": "https://github.com/fermatmind/fap-api/pull/981"
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24811488837/job/72617117313",
+            "reason": "GitHub Actions job was not started because recent account payments failed or the spending limit needs to be increased."
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24811489620/job/72617119799",
+            "reason": "GitHub Actions job was not started because recent account payments failed or the spending limit needs to be increased."
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24811488837/job/72617121511",
+            "reason": "Skipped because hygiene did not start due to GitHub billing/spending-limit block."
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24811489620/job/72617124253",
+            "reason": "Skipped because hygiene did not start due to GitHub billing/spending-limit block."
           }
         ]
       },
-      "failure_reason": "",
+      "failure_reason": "Remote GitHub checks are blocked by account billing/spending-limit, not by PR3B code. Local manifest checks, route list, SQLite migrate pretend, and MBTI verification passed.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
