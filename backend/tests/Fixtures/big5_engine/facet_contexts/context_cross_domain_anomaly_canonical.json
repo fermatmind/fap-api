@@ -1,10 +1,9 @@
 {
     "schema": "fap.big5.report_context_fixture.v1",
-    "fixture_id": "canonical_n_slice_sensitive_independent_v1",
+    "fixture_id": "facet_cross_domain_anomaly_canonical_v1",
     "locale": "zh-CN",
     "scale_code": "BIG5_OCEAN",
     "form_code": "big5_90",
-    "sample_label": "高敏感 × 中高开放 × 克制进入 × 低续航推进",
     "score_vector": {
         "domains": {
             "O": {
@@ -20,7 +19,7 @@
             "E": {
                 "percentile": 20,
                 "band": "low",
-                "gradient_id": "e_g1"
+                "gradient_id": "e_g2"
             },
             "A": {
                 "percentile": 55,
@@ -34,29 +33,29 @@
             }
         },
         "facets": {
-            "N1": {
-                "percentile": 98,
-                "domain": "N"
+            "O1": {
+                "percentile": 84,
+                "domain": "O"
             },
-            "N2": {
-                "percentile": 65,
-                "domain": "N"
+            "O2": {
+                "percentile": 59,
+                "domain": "O"
             },
-            "N3": {
-                "percentile": 98,
-                "domain": "N"
+            "O3": {
+                "percentile": 59,
+                "domain": "O"
             },
-            "N4": {
-                "percentile": 8,
-                "domain": "N"
+            "O4": {
+                "percentile": 82,
+                "domain": "O"
             },
-            "N5": {
-                "percentile": 95,
-                "domain": "N"
+            "O5": {
+                "percentile": 59,
+                "domain": "O"
             },
-            "N6": {
-                "percentile": 13,
-                "domain": "N"
+            "O6": {
+                "percentile": 18,
+                "domain": "O"
             },
             "C1": {
                 "percentile": 97,
@@ -105,34 +104,59 @@
             "E6": {
                 "percentile": 2,
                 "domain": "E"
+            },
+            "A1": {
+                "percentile": 20,
+                "domain": "A"
+            },
+            "A2": {
+                "percentile": 55,
+                "domain": "A"
+            },
+            "A3": {
+                "percentile": 55,
+                "domain": "A"
+            },
+            "A4": {
+                "percentile": 84,
+                "domain": "A"
+            },
+            "A5": {
+                "percentile": 55,
+                "domain": "A"
+            },
+            "A6": {
+                "percentile": 55,
+                "domain": "A"
+            },
+            "N1": {
+                "percentile": 98,
+                "domain": "N"
+            },
+            "N2": {
+                "percentile": 65,
+                "domain": "N"
+            },
+            "N3": {
+                "percentile": 98,
+                "domain": "N"
+            },
+            "N4": {
+                "percentile": 8,
+                "domain": "N"
+            },
+            "N5": {
+                "percentile": 95,
+                "domain": "N"
+            },
+            "N6": {
+                "percentile": 13,
+                "domain": "N"
             }
         }
     },
     "quality": {
         "level": "D",
         "norms_status": "CALIBRATED"
-    },
-    "expected_hits": {
-        "dominant_traits": [
-            "N",
-            "O"
-        ],
-        "selected_synergies": [
-            "n_high_x_e_low"
-        ],
-        "facet_anomalies": [
-            "c1_high_with_c_low",
-            "c5_low_with_c_low",
-            "n1_high_spike",
-            "n3_high_spike"
-        ],
-        "primary_sections": [
-            "hero_summary",
-            "domain_deep_dive",
-            "facet_details",
-            "core_portrait",
-            "norms_comparison",
-            "action_plan"
-        ]
     }
 }

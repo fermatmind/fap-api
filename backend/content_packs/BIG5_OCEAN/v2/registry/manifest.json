@@ -1,32 +1,80 @@
 {
-  "schema": "fap.big5.report_registry_manifest.v1",
-  "registry_id": "BIG5_OCEAN_v2_report_engine_pr3a",
-  "scale_code": "BIG5_OCEAN",
-  "version": "v2",
-  "locale": "zh-CN",
-  "scope": "PR3A five synergy rollout; all 5 traits atomic and modifier remain from PR2, N-only facet/action remains from PR1",
-  "runtime_contract": "fap.big5.report.v1",
-  "section_skeleton": [
-    "hero_summary",
-    "domains_overview",
-    "domain_deep_dive",
-    "facet_details",
-    "core_portrait",
-    "norms_comparison",
-    "action_plan",
-    "methodology_and_access"
-  ],
-  "traits_in_scope": ["O", "C", "E", "A", "N"],
-  "coverage": {
-    "atomic_traits": ["O", "C", "E", "A", "N"],
-    "atomic_bands_per_trait": ["low", "mid", "high"],
-    "modifier_traits": ["O", "C", "E", "A", "N"],
-    "modifier_gradients_per_trait": 5,
-    "synergies": ["n_high_x_e_low", "o_high_x_c_low", "o_high_x_n_high", "c_high_x_n_high", "e_high_x_a_low"],
-    "facet_precision_traits": ["N"],
-    "action_rule_scope": "N scenario rules only"
-  },
-  "fixtures": [
-    "fixtures/canonical_n_slice_sensitive_independent.context.json"
-  ]
+    "schema": "fap.big5.report_registry_manifest.v1",
+    "registry_id": "BIG5_OCEAN_v2_report_engine_pr3b",
+    "scale_code": "BIG5_OCEAN",
+    "version": "v2",
+    "locale": "zh-CN",
+    "scope": "PR3B facet precision rollout; all 5 traits now include facet glossary and anomaly precision rules, PR3A five synergy rollout remains unchanged, scenario action rules remain N-only from PR1",
+    "runtime_contract": "fap.big5.report.v1",
+    "section_skeleton": [
+        "hero_summary",
+        "domains_overview",
+        "domain_deep_dive",
+        "facet_details",
+        "core_portrait",
+        "norms_comparison",
+        "action_plan",
+        "methodology_and_access"
+    ],
+    "traits_in_scope": [
+        "O",
+        "C",
+        "E",
+        "A",
+        "N"
+    ],
+    "coverage": {
+        "atomic_traits": [
+            "O",
+            "C",
+            "E",
+            "A",
+            "N"
+        ],
+        "atomic_bands_per_trait": [
+            "low",
+            "mid",
+            "high"
+        ],
+        "modifier_traits": [
+            "O",
+            "C",
+            "E",
+            "A",
+            "N"
+        ],
+        "modifier_gradients_per_trait": 5,
+        "synergies": [
+            "n_high_x_e_low",
+            "o_high_x_c_low",
+            "o_high_x_n_high",
+            "c_high_x_n_high",
+            "e_high_x_a_low"
+        ],
+        "facet_precision_traits": [
+            "O",
+            "C",
+            "E",
+            "A",
+            "N"
+        ],
+        "action_rule_scope": "N scenario rules only",
+        "facet_glossary_traits": [
+            "O",
+            "C",
+            "E",
+            "A",
+            "N"
+        ],
+        "facet_glossary_entries": 30,
+        "facet_precision_rules": 22,
+        "facet_precision_caps": {
+            "per_domain": 2,
+            "per_report": 6,
+            "standout_render_cards": 3
+        }
+    },
+    "fixtures": [
+        "fixtures/canonical_n_slice_sensitive_independent.context.json"
+    ]
 }

@@ -1,0 +1,98 @@
+{
+    "schema": "fap.big5.facet_precision_trait_pack.v1",
+    "trait_code": "O",
+    "rules": [
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "o1_high_with_o_mid",
+            "facet_code": "O1",
+            "anomaly_type": "positive_spike",
+            "when": {
+                "domain_percentile_min": 40,
+                "domain_percentile_max": 65,
+                "facet_percentile_min": 80,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 110,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "你的开放性首先体现在想象推演，而不是外部尝新。",
+                "body": "整体开放性处在中段时，想象活性明显更高，说明你会在脑内提前展开很多可能路径，但未必马上把它们变成行动实验。",
+                "why_it_matters": "这能解释你为什么看起来不一定很冒险，却经常已经在内部完成复杂预演。"
+            }
+        },
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "o4_high_with_o_mid",
+            "facet_code": "O4",
+            "anomaly_type": "positive_spike",
+            "when": {
+                "domain_percentile_min": 40,
+                "domain_percentile_max": 65,
+                "facet_percentile_min": 80,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 105,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "你不是只会想，你对亲自试错也有更高兴趣。",
+                "body": "行动尝新显著高于整体开放性，说明你的开放并不只停留在理解层；当场景足够具体，你会愿意用体验来校正判断。",
+                "why_it_matters": "这类偏离会让你在低风险试验中成长很快，但也需要避免一次打开过多变量。"
+            }
+        },
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "o6_low_with_o_mid",
+            "facet_code": "O6",
+            "anomaly_type": "negative_spike",
+            "when": {
+                "domain_percentile_min": 40,
+                "domain_percentile_max": 65,
+                "facet_percentile_max": 25,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 112,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "你不是不开放，而是核心价值边界更锚定。",
+                "body": "整体开放性不低，但价值弹性明显偏低，说明你可以理解新观念、体验新事物，却不一定愿意轻易松动底层原则。",
+                "why_it_matters": "这个发现能避免把你误读成保守：你更像是“理解可以开放，立场需要证据”。"
+            }
+        },
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "o3_low_with_o_mid",
+            "facet_code": "O3",
+            "anomaly_type": "negative_spike",
+            "when": {
+                "domain_percentile_min": 40,
+                "domain_percentile_max": 65,
+                "facet_percentile_max": 25,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 100,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "你的开放更多走认知通道，不一定走情绪通道。",
+                "body": "情感通道显著低于整体开放性，说明你可能愿意思考复杂问题，却不总是愿意把自己的感受摊开处理。",
+                "why_it_matters": "它解释了为什么你可以很会理解，却不一定很快进入情绪表达。"
+            }
+        }
+    ]
+}

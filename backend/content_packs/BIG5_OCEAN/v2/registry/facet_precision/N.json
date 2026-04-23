@@ -1,86 +1,116 @@
 {
-  "schema": "fap.big5.facet_precision_trait_pack.v1",
-  "trait_code": "N",
-  "rules": [
-    {
-      "rule_id": "n1_high_spike",
-      "facet_code": "N1",
-      "anomaly_type": "positive_spike",
-      "when": {
-        "domain_percentile_min": 60,
-        "facet_percentile_min": 80,
-        "delta_abs_min": 20,
-        "cross_band_required": true
-      },
-      "section_targets": ["facet_details"],
-      "copy": {
-        "title": "你的高敏感首先表现为“预警提前”，而不是当场崩溃。",
-        "body": "焦虑相关 facet 明显高于 domain 均值，说明你最先被拉高的通常不是情绪外露，而是对风险、失误和不确定的提前预警。你会更早感到“这里可能要出问题了”。"
-      }
-    },
-    {
-      "rule_id": "n3_high_spike",
-      "facet_code": "N3",
-      "anomaly_type": "positive_spike",
-      "when": {
-        "domain_percentile_min": 60,
-        "facet_percentile_min": 80,
-        "delta_abs_min": 20,
-        "cross_band_required": true
-      },
-      "section_targets": ["facet_details", "core_portrait"],
-      "copy": {
-        "title": "你的负荷更像“慢性下沉”，不是一次性炸裂。",
-        "body": "低落与耗竭相关 facet 明显高于 domain 均值，说明你更容易在长时间拉扯和持续不确定里，慢慢被抽走心力，而不是立刻外显爆发。"
-      }
-    },
-    {
-      "rule_id": "n5_high_spike",
-      "facet_code": "N5",
-      "anomaly_type": "positive_spike",
-      "when": {
-        "domain_percentile_min": 60,
-        "facet_percentile_min": 80,
-        "delta_abs_min": 20,
-        "cross_band_required": true
-      },
-      "section_targets": ["facet_details", "action_plan"],
-      "copy": {
-        "title": "当负荷过高时，你更容易想“马上退出”，而不是慢慢再忍一会儿。",
-        "body": "冲动/脱离相关 facet 明显高于 domain 均值，说明当系统过载时，你的风险不是持续大吵，而是突然想切断、离开、暂停一切。"
-      }
-    },
-    {
-      "rule_id": "n4_low_with_n_high",
-      "facet_code": "N4",
-      "anomaly_type": "negative_spike",
-      "when": {
-        "domain_percentile_min": 60,
-        "facet_percentile_max": 25,
-        "delta_abs_min": 20,
-        "cross_band_required": true
-      },
-      "section_targets": ["facet_details", "core_portrait"],
-      "copy": {
-        "title": "你不是典型的“公开羞怯型敏感”。",
-        "body": "虽然 domain N 偏高，但自我意识/羞怯相关 facet 明显偏低，说明你的高敏感不主要表现为“在人前特别退缩”，而更像内部高负荷、外部仍尽量维持正常。"
-      }
-    },
-    {
-      "rule_id": "n6_low_with_n_high",
-      "facet_code": "N6",
-      "anomaly_type": "negative_spike",
-      "when": {
-        "domain_percentile_min": 60,
-        "facet_percentile_max": 25,
-        "delta_abs_min": 20,
-        "cross_band_required": true
-      },
-      "section_targets": ["facet_details", "action_plan"],
-      "copy": {
-        "title": "你不是“脆”，你更像“能扛，但扛久了会突然掉线”。",
-        "body": "脆弱性相关 facet 显著低于 domain 均值，说明你不一定会很快公开显得撑不住；更常见的模式是：前面看起来还在扛，后面突然明显没电。"
-      }
-    }
-  ]
+    "schema": "fap.big5.facet_precision_trait_pack.v1",
+    "trait_code": "N",
+    "rules": [
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "n1_high_spike",
+            "facet_code": "N1",
+            "anomaly_type": "positive_spike",
+            "when": {
+                "domain_percentile_min": 60,
+                "facet_percentile_min": 80,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 112,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "你的高敏感首先表现为“预警提前”，而不是当场崩溃。",
+                "body": "焦虑相关 facet 明显高于 domain 均值，说明你最先被拉高的通常不是情绪外露，而是对风险、失误和不确定的提前预警。",
+                "why_it_matters": "它提醒你把预警当成信号处理，而不是把自己归因成“想太多”。"
+            }
+        },
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "n3_high_spike",
+            "facet_code": "N3",
+            "anomaly_type": "positive_spike",
+            "when": {
+                "domain_percentile_min": 60,
+                "facet_percentile_min": 80,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 112,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "你的负荷更像“慢性下沉”，不是一次性炸裂。",
+                "body": "低落与耗竭相关 facet 明显高于 domain 均值，说明你更容易在长时间拉扯和持续不确定里，慢慢被抽走心力。",
+                "why_it_matters": "这能解释为什么你外面还在维持，内部却已经开始低电量。"
+            }
+        },
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "n5_high_spike",
+            "facet_code": "N5",
+            "anomaly_type": "positive_spike",
+            "when": {
+                "domain_percentile_min": 60,
+                "facet_percentile_min": 80,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 108,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "当负荷过高时，你更容易想“马上退出”。",
+                "body": "冲动脱离相关 facet 明显高于 domain 均值，说明过载后的风险不是持续大吵，而是突然想切断、离开或暂停一切。",
+                "why_it_matters": "它提示恢复要前置，因为等到想立刻退出时，系统已经进入高负荷。"
+            }
+        },
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "n4_low_with_n_high",
+            "facet_code": "N4",
+            "anomaly_type": "negative_spike",
+            "when": {
+                "domain_percentile_min": 60,
+                "facet_percentile_max": 25,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 106,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "你不是典型的“公开羞怯型敏感”。",
+                "body": "虽然 domain N 偏高，但自我意识相关 facet 明显偏低，说明你的高敏感不主要表现为在人前特别退缩。",
+                "why_it_matters": "这个反差能解释：你可能外部仍显得正常，内部却已经承担很多成本。"
+            }
+        },
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "n6_low_with_n_high",
+            "facet_code": "N6",
+            "anomaly_type": "negative_spike",
+            "when": {
+                "domain_percentile_min": 60,
+                "facet_percentile_max": 25,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 108,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "你不是“脆”，你更像“能扛，但扛久了会突然掉线”。",
+                "body": "脆弱承压显著低于 domain 均值，说明你不一定很快公开显得撑不住；更常见的是前面还在扛，后面突然明显没电。",
+                "why_it_matters": "它提醒评估风险时不能只看外显稳定，还要看恢复库存。"
+            }
+        }
+    ]
 }

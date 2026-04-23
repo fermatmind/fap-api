@@ -18,7 +18,7 @@ final class BigFiveReportEngineNSliceTest extends TestCase
         $this->assertSame(['N', 'O'], $payload['engine_decisions']['dominant_traits']);
         $this->assertSame('n_high_x_e_low', data_get($payload, 'engine_decisions.selected_synergies.0.synergy_id'));
         $this->assertSame(
-            ['n1_high_spike', 'n3_high_spike', 'n5_high_spike', 'n4_low_with_n_high', 'n6_low_with_n_high'],
+            ['c1_high_with_c_low', 'c5_low_with_c_low', 'n1_high_spike', 'n3_high_spike'],
             array_map(static fn (array $match): string => (string) $match['rule_id'], $payload['engine_decisions']['facet_anomalies'])
         );
         $this->assertCount(8, $payload['sections']);
@@ -76,13 +76,14 @@ final class BigFiveReportEngineNSliceTest extends TestCase
         );
     }
 
-    public function test_registry_keeps_pr3a_synergy_rollout_and_n_only_facet_action_scope(): void
+    public function test_registry_keeps_pr3a_synergy_rollout_and_pr3b_facet_scope(): void
     {
         $registry = app(RegistryLoader::class)->load();
 
         $this->assertSame(['O', 'C', 'E', 'A', 'N'], array_keys((array) $registry['atomic']));
         $this->assertSame(['O', 'C', 'E', 'A', 'N'], array_keys((array) $registry['modifiers']));
-        $this->assertSame(['N'], array_keys((array) $registry['facet_precision']));
+        $this->assertSame(['O', 'C', 'E', 'A', 'N'], array_keys((array) $registry['facet_glossary']));
+        $this->assertSame(['O', 'C', 'E', 'A', 'N'], array_keys((array) $registry['facet_precision']));
         $this->assertSame(['n_high_x_e_low', 'o_high_x_c_low', 'o_high_x_n_high', 'c_high_x_n_high', 'e_high_x_a_low'], array_keys((array) $registry['synergies']));
         $this->assertSame(['workplace', 'stress_recovery', 'personal_growth'], array_keys((array) $registry['action_rules']));
     }

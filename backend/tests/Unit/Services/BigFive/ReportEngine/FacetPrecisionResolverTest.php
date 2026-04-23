@@ -20,14 +20,14 @@ final class FacetPrecisionResolverTest extends TestCase
         $ids = array_map(static fn ($match): string => $match->ruleId, $matches);
 
         $this->assertSame([
+            'c1_high_with_c_low',
+            'c5_low_with_c_low',
             'n1_high_spike',
             'n3_high_spike',
-            'n5_high_spike',
-            'n4_low_with_n_high',
-            'n6_low_with_n_high',
         ], $ids);
         foreach ($matches as $match) {
             $this->assertGreaterThanOrEqual(20, $match->deltaAbs);
+            $this->assertSame(['facet_details'], $match->sectionTargets);
         }
     }
 }

@@ -1,0 +1,134 @@
+{
+    "schema": "fap.big5.facet_precision_trait_pack.v1",
+    "trait_code": "C",
+    "rules": [
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "c1_high_with_c_low",
+            "facet_code": "C1",
+            "anomaly_type": "positive_spike",
+            "when": {
+                "domain_percentile_max": 45,
+                "facet_percentile_min": 75,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 112,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "你不是没能力，而是续航结构没有跟上胜任感。",
+                "body": "整体尽责性偏低时，胜任感却明显更高，说明你知道自己能理解和处理问题，但持续推进系统未必同样稳定。",
+                "why_it_matters": "这能把“我明明会，为什么做不完”从能力问题中拆出来。"
+            }
+        },
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "c2_high_with_c_low",
+            "facet_code": "C2",
+            "anomaly_type": "positive_spike",
+            "when": {
+                "domain_percentile_max": 45,
+                "facet_percentile_min": 75,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 108,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "你不是混乱型低尽责，而是需要秩序来维持控制感。",
+                "body": "秩序感高于整体尽责性，说明你可能很在意结构、清单和边界，但不一定能把这些结构持续转化为完成。",
+                "why_it_matters": "这提示行动改进不该从“更努力”开始，而该从降低结构维护成本开始。"
+            }
+        },
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "c5_low_with_c_low",
+            "facet_code": "C5",
+            "anomaly_type": "negative_spike",
+            "when": {
+                "domain_percentile_max": 45,
+                "facet_percentile_max": 25,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 112,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "真正拖住你的，往往是自律续航而不是理解任务。",
+                "body": "自律续航明显低于整体水平时，任务容易在无反馈、疲惫或不确定阶段断掉，并不代表你不知道目标。",
+                "why_it_matters": "这个偏离能帮助把问题定位到节奏和反馈，而不是人格评价。"
+            }
+        },
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "c4_low_with_c_low",
+            "facet_code": "C4",
+            "anomaly_type": "negative_spike",
+            "when": {
+                "domain_percentile_max": 45,
+                "facet_percentile_max": 25,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 104,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "你不一定缺责任感，更可能缺少被目标持续拉动的燃料。",
+                "body": "成就推进显著偏低，说明外部标准、排名或更高完成度不一定自然驱动你长期投入。",
+                "why_it_matters": "这能解释为什么单靠目标口号很难让你稳定启动。"
+            }
+        },
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "c_order_maintainer_split",
+            "facet_codes_all": [
+                "C1",
+                "C2",
+                "C4",
+                "C5"
+            ],
+            "anomaly_type": "compound_split",
+            "when": {
+                "domain_percentile_max": 45,
+                "facets": {
+                    "C1": {
+                        "facet_percentile_min": 75
+                    },
+                    "C2": {
+                        "facet_percentile_min": 75
+                    },
+                    "C4": {
+                        "facet_percentile_max": 30
+                    },
+                    "C5": {
+                        "facet_percentile_max": 30
+                    }
+                },
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 145,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "你不是低尽责，而是“会建秩序、难续航推进”。",
+                "body": "胜任感和秩序感明显高，但成就推进与自律续航明显低，说明你能理解任务，也会想把结构搭好；真正损耗发生在长期执行和持续拉动阶段。",
+                "why_it_matters": "这是一个高价值 split：它把“能力/秩序”与“推进/续航”拆开，避免把低总分误读成全面松散。"
+            }
+        }
+    ]
+}
