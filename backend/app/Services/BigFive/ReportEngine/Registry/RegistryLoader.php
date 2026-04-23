@@ -57,6 +57,7 @@ final class RegistryLoader
             'facet_precision' => $facetPrecision,
             'action_rules' => [
                 'workplace' => $this->readJson($root.'/action_rules/workplace.json'),
+                'relationships' => $this->readJson($root.'/action_rules/relationships.json'),
                 'stress_recovery' => $this->readJson($root.'/action_rules/stress_recovery.json'),
                 'personal_growth' => $this->readJson($root.'/action_rules/personal_growth.json'),
             ],

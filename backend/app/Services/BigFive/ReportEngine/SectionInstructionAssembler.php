@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\BigFive\ReportEngine;
 
+use App\Services\BigFive\ReportEngine\Contracts\ActionRuleMatch;
 use App\Services\BigFive\ReportEngine\Contracts\FacetAnomalyMatch;
 use App\Services\BigFive\ReportEngine\Contracts\ReportContext;
 use App\Services\BigFive\ReportEngine\Contracts\ResolvedBlock;
@@ -32,11 +33,14 @@ final class SectionInstructionAssembler
      * @param  array<string,list<ResolvedBlock>>  $blocksBySection
      * @param  list<SynergyMatch>  $synergies
      * @param  list<FacetAnomalyMatch>  $facetAnomalies
+     * @param  array<string,mixed>  $actionMatrix
      * @param  array<string,mixed>  $registry
      * @return list<ResolvedSection>
      */
-    public function assemble(ReportContext $context, array $blocksBySection, array $synergies, array $facetAnomalies, array $registry): array
+    public function assemble(ReportContext $context, array $blocksBySection, array $synergies, array $facetAnomalies, array $actionMatrix, array $registry): array
     {
+        $blocksBySection['action_plan'] = $this->actionPlanBlocks($actionMatrix);
+
         foreach (array_slice($synergies, 0, 2) as $index => $synergy) {
             $sectionKey = $index === 0 ? 'core_portrait' : 'action_plan';
             $slot = $index === 0 ? 'synergy_primary' : 'synergy_action';
@@ -82,6 +86,117 @@ final class SectionInstructionAssembler
         }
 
         return $sections;
+    }
+
+    /**
+     * @param  array<string,mixed>  $actionMatrix
+     * @return list<ResolvedBlock>
+     */
+    private function actionPlanBlocks(array $actionMatrix): array
+    {
+        $scenarios = is_array($actionMatrix['scenarios'] ?? null) ? $actionMatrix['scenarios'] : [];
+        $topScenario = (string) ($actionMatrix['top_priority_scenario'] ?? '');
+        $topScenarioPayload = null;
+        foreach ($scenarios as $scenario) {
+            if (! is_array($scenario) || (string) ($scenario['scenario_key'] ?? '') !== $topScenario) {
+                continue;
+            }
+            $topScenarioPayload = $scenario;
+            break;
+        }
+
+        $blocks = [
+            new ResolvedBlock(
+                blockUid: 'action_plan.matrix_intro',
+                kind: 'paragraph',
+                component: 'BigFiveActionMatrixIntro',
+                blockId: 'action_matrix_intro_v1',
+                resolvedCopy: [
+                    'title' => '行动建议会按场景落地，而不是把人格分数翻译成泛泛提醒。',
+                    'body' => '这里会把当前分值命中的动作按工作、关系、压力恢复和个人成长拆开，并固定放入继续、开始、停止、观察四类动作，帮助你先做最有现实价值的一步。',
+                ],
+                provenance: $this->provenanceRecorder->record(actionRefs: ['action_rules/*']),
+                analytics: ['slot' => 'action_matrix_intro'],
+            ),
+        ];
+
+        if (is_array($topScenarioPayload)) {
+            $blocks[] = new ResolvedBlock(
+                blockUid: "action_plan.matrix_top_priority.{$topScenario}",
+                kind: 'callout',
+                component: 'BigFiveActionMatrixTopPriority',
+                blockId: "action_matrix_top_priority_{$topScenario}",
+                resolvedCopy: [
+                    'title' => '优先场景：'.(string) ($topScenarioPayload['title'] ?? $topScenario),
+                    'body' => '这组动作在当前分值结构中命中数量和优先级更高，适合作为这份报告的行动入口。',
+                    'scenario_key' => $topScenario,
+                ],
+                provenance: $this->provenanceRecorder->record(actionRefs: ["action_rules/{$topScenario}.json"]),
+                analytics: ['top_priority_scenario' => $topScenario],
+            );
+        }
+
+        foreach ($scenarios as $scenario) {
+            if (! is_array($scenario)) {
+                continue;
+            }
+            $scenarioKey = (string) ($scenario['scenario_key'] ?? '');
+            $selectedRules = is_array($scenario['selected_rules'] ?? null) ? $scenario['selected_rules'] : [];
+            $items = [];
+            foreach (['continue', 'start', 'stop', 'observe'] as $bucket) {
+                $rule = $selectedRules[$bucket] ?? null;
+                if ($rule instanceof ActionRuleMatch) {
+                    $rule = $rule->toArray();
+                }
+                if (! is_array($rule)) {
+                    continue;
+                }
+                $items[] = [
+                    'bucket' => $bucket,
+                    'label' => $this->bucketLabel($bucket),
+                    'rule_id' => (string) ($rule['rule_id'] ?? ''),
+                    'title' => (string) ($rule['title'] ?? ''),
+                    'body' => (string) ($rule['body'] ?? ''),
+                    'difficulty_level' => (string) ($rule['difficulty_level'] ?? ''),
+                    'time_horizon' => (string) ($rule['time_horizon'] ?? ''),
+                ];
+            }
+            if ($items === []) {
+                continue;
+            }
+
+            $title = (string) ($scenario['title'] ?? $scenarioKey);
+            $blocks[] = new ResolvedBlock(
+                blockUid: "action_plan.matrix_scenario.{$scenarioKey}",
+                kind: 'bullets',
+                component: 'BigFiveActionMatrixScenarioBullets',
+                blockId: "action_matrix_scenario_{$scenarioKey}",
+                resolvedCopy: [
+                    'title' => "{$title}｜下一步动作",
+                    'scenario_key' => $scenarioKey,
+                    'items' => $items,
+                ],
+                provenance: $this->provenanceRecorder->record(actionRefs: ["action_rules/{$scenarioKey}.json"]),
+                analytics: [
+                    'scenario_key' => $scenarioKey,
+                    'selected_rule_count' => count($items),
+                    'buckets' => array_map(static fn (array $item): string => (string) $item['bucket'], $items),
+                ],
+            );
+        }
+
+        return $blocks;
+    }
+
+    private function bucketLabel(string $bucket): string
+    {
+        return match ($bucket) {
+            'continue' => '继续',
+            'start' => '开始',
+            'stop' => '停止',
+            'observe' => '观察',
+            default => $bucket,
+        };
     }
 
     /**

@@ -1,54 +1,85 @@
 {
   "schema": "fap.big5.action_rule_pack.v1",
   "scenario": "stress_recovery",
+  "scenario_title": "压力恢复",
   "rules": [
     {
-      "rule_id": "n_recovery_start_10min_reset_60_79",
+      "rule_id": "n_rec_start_10min_reset_60_79",
       "trait_code": "N",
       "bucket": "start",
       "percentile_min": 60,
       "percentile_max": 79,
+      "priority_weight": 94,
       "scenario_tags": ["stress_recovery"],
       "difficulty_level": "low",
       "time_horizon": "today",
       "title": "启动 10 分钟脱离恢复",
-      "body": "每次你明显感觉到负荷被拉高时，先物理脱离 10 分钟，不要继续一边耗一边扛。"
+      "body": "每次明显感觉到负荷被拉高时，先物理脱离 10 分钟，不要继续一边耗一边扛。"
     },
     {
-      "rule_id": "n_recovery_continue_body_signal_log_40_79",
+      "rule_id": "n_rec_start_protected_reset_block_80_100",
       "trait_code": "N",
-      "bucket": "continue",
-      "percentile_min": 40,
-      "percentile_max": 79,
+      "bucket": "start",
+      "percentile_min": 80,
+      "percentile_max": 100,
+      "priority_weight": 98,
       "scenario_tags": ["stress_recovery"],
-      "difficulty_level": "low",
+      "difficulty_level": "mid",
       "time_horizon": "this_week",
-      "title": "继续记录身体信号",
-      "body": "把你的体感当成系统日志，而不是当成麻烦。心跳、烦躁、注意力涣散，都是有效信号。"
+      "title": "安排受保护的恢复时段",
+      "body": "如果你的系统长期处在高警觉状态，请把恢复时段当成不可随意挪用的日程，而不是等事情都结束后再补。"
     },
     {
-      "rule_id": "n_recovery_stop_micro_stimulation_60_100",
+      "rule_id": "n_rec_stop_micro_stimulation_60_100",
       "trait_code": "N",
       "bucket": "stop",
       "percentile_min": 60,
       "percentile_max": 100,
+      "priority_weight": 90,
       "scenario_tags": ["stress_recovery"],
       "difficulty_level": "mid",
       "time_horizon": "this_week",
       "title": "停止边刷边恢复",
-      "body": "高负荷时不要一边刷消息、一边恢复。对你来说，那不是放松，而是换一种刺激继续拖住系统。"
+      "body": "高负荷时不要一边刷消息、一边恢复；对你来说，那不是放松，而是换一种刺激继续拖住系统。"
     },
     {
-      "rule_id": "n_recovery_observe_real_recovery_60_79",
+      "rule_id": "n_rec_observe_real_vs_predicted_cost_40_100",
       "trait_code": "N",
       "bucket": "observe",
-      "percentile_min": 60,
-      "percentile_max": 79,
+      "percentile_min": 40,
+      "percentile_max": 100,
+      "priority_weight": 70,
       "scenario_tags": ["stress_recovery"],
       "difficulty_level": "low",
       "time_horizon": "two_weeks",
-      "title": "找出真正能让你掉负荷的恢复动作",
-      "body": "连续两周观察：散步、洗澡、关机、写下来、独处，哪一个最能让你从“高负荷”真正回落。"
+      "title": "比较预想代价和真实代价",
+      "body": "连续两周记录：你担心的坏结果是什么，真实发生的代价又是什么，帮助系统从预演里回到事实。"
+    },
+    {
+      "rule_id": "e_rec_stop_stimulation_after_conflict_70_100",
+      "trait_code": "E",
+      "bucket": "stop",
+      "percentile_min": 70,
+      "percentile_max": 100,
+      "priority_weight": 84,
+      "scenario_tags": ["stress_recovery"],
+      "difficulty_level": "mid",
+      "time_horizon": "today",
+      "title": "冲突后先离开高刺激场域",
+      "body": "冲突刚结束时，不要立刻转入新的强互动或强刺激场景；先让系统降速，再决定要不要继续沟通。"
+    },
+    {
+      "rule_id": "c_rec_start_smallest_restart_step_00_35",
+      "trait_code": "C",
+      "bucket": "start",
+      "percentile_min": 0,
+      "percentile_max": 35,
+      "priority_weight": 76,
+      "scenario_tags": ["stress_recovery"],
+      "difficulty_level": "low",
+      "time_horizon": "today",
+      "title": "恢复后只做最小重启动作",
+      "body": "恢复后不要马上要求自己回到完整效率，只做一个最小重启动作，例如打开文件、列出三项或完成第一步。"
     }
   ]
 }

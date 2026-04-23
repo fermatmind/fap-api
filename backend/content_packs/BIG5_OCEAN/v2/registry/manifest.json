@@ -1,10 +1,10 @@
 {
     "schema": "fap.big5.report_registry_manifest.v1",
-    "registry_id": "BIG5_OCEAN_v2_report_engine_pr3b",
+    "registry_id": "BIG5_OCEAN_v2_report_engine_pr3c",
     "scale_code": "BIG5_OCEAN",
     "version": "v2",
     "locale": "zh-CN",
-    "scope": "PR3B facet precision rollout; all 5 traits now include facet glossary and anomaly precision rules, PR3A five synergy rollout remains unchanged, scenario action rules remain N-only from PR1",
+    "scope": "PR3C scenario-bound action matrix rollout; all 5 traits keep PR2 atomic/modifier coverage, PR3A five synergy rollout and PR3B facet precision remain unchanged, action rules now cover four scenario-bound packs",
     "runtime_contract": "fap.big5.report.v1",
     "section_skeleton": [
         "hero_summary",
@@ -58,7 +58,25 @@
             "A",
             "N"
         ],
-        "action_rule_scope": "N scenario rules only",
+        "action_rule_scope": "scenario-bound action matrix",
+        "action_rule_scenarios": [
+            "workplace",
+            "relationships",
+            "stress_recovery",
+            "personal_growth"
+        ],
+        "action_rule_count": 28,
+        "action_rule_counts_by_scenario": {
+            "workplace": 8,
+            "relationships": 8,
+            "stress_recovery": 6,
+            "personal_growth": 6
+        },
+        "action_matrix_caps": {
+            "per_scenario_per_bucket": 1,
+            "per_scenario": 4,
+            "per_report": 12
+        },
         "facet_glossary_traits": [
             "O",
             "C",

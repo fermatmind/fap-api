@@ -26,7 +26,7 @@ final class BigFiveReportEngineAllTraitsRolloutTest extends TestCase
                 'methodology_and_access',
             ], array_map(static fn (array $section): string => (string) $section['section_key'], $payload['sections']));
 
-            foreach (['hero_summary', 'domains_overview', 'domain_deep_dive', 'core_portrait', 'norms_comparison', 'action_plan'] as $sectionKey) {
+            foreach (['hero_summary', 'domains_overview', 'domain_deep_dive', 'core_portrait', 'norms_comparison'] as $sectionKey) {
                 $section = collect($payload['sections'])->firstWhere('section_key', $sectionKey);
                 $this->assertSame('populated', $section['status'], "{$profileId}: {$sectionKey}");
                 $this->assertCount(5, array_filter(
@@ -34,16 +34,20 @@ final class BigFiveReportEngineAllTraitsRolloutTest extends TestCase
                     static fn (array $block): bool => ($block['kind'] ?? '') === 'trait_atomic'
                 ), "{$profileId}: {$sectionKey}");
             }
+
+            $actionPlan = collect($payload['sections'])->firstWhere('section_key', 'action_plan');
+            $this->assertSame('populated', $actionPlan['status'], "{$profileId}: action_plan");
+            $this->assertSame('action_matrix_intro_v1', $actionPlan['blocks'][0]['block_id'], "{$profileId}: action_plan");
         }
     }
 
-    public function test_pr2_trait_rollout_still_keeps_balanced_profiles_without_synergy_or_action_scope(): void
+    public function test_pr2_trait_rollout_still_keeps_balanced_profiles_without_synergy_or_facet_anomalies(): void
     {
         $payload = app(BigFiveReportEngine::class)->generate($this->profiles()['balanced']);
 
         $this->assertSame([], $payload['engine_decisions']['selected_synergies']);
         $this->assertSame([], $payload['engine_decisions']['facet_anomalies']);
-        $this->assertSame([], $payload['action_matrix']);
+        $this->assertSame('scenario_bound_action_matrix_pr3c', data_get($payload, 'render_hints.limited_rollouts.action_rule_scope'));
     }
 
     /**

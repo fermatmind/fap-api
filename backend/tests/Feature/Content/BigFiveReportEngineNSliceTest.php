@@ -23,7 +23,8 @@ final class BigFiveReportEngineNSliceTest extends TestCase
         );
         $this->assertCount(8, $payload['sections']);
         $this->assertSame('populated', data_get($payload, 'sections.1.status'));
-        $this->assertCount(4, $payload['action_matrix']['workplace']);
+        $this->assertSame('stress_recovery', $payload['action_matrix']['top_priority_scenario']);
+        $this->assertCount(4, data_get($payload, 'action_matrix.scenarios.0.selected_rules'));
 
         $expected = json_decode((string) file_get_contents(base_path('tests/Fixtures/big5_engine/expected_canonical_n_slice_payload.json')), true);
         $this->assertSame($expected, $payload);
@@ -53,7 +54,7 @@ final class BigFiveReportEngineNSliceTest extends TestCase
                 $this->assertIsArray($block['resolved_copy']);
                 $this->assertIsArray($block['analytics']);
 
-                foreach (['atomic_refs', 'modifier_refs', 'synergy_refs', 'facet_refs'] as $provenanceKey) {
+                foreach (['atomic_refs', 'modifier_refs', 'synergy_refs', 'facet_refs', 'action_refs'] as $provenanceKey) {
                     $this->assertArrayHasKey($provenanceKey, $block['provenance']);
                     $this->assertIsArray($block['provenance'][$provenanceKey]);
                 }
@@ -85,6 +86,6 @@ final class BigFiveReportEngineNSliceTest extends TestCase
         $this->assertSame(['O', 'C', 'E', 'A', 'N'], array_keys((array) $registry['facet_glossary']));
         $this->assertSame(['O', 'C', 'E', 'A', 'N'], array_keys((array) $registry['facet_precision']));
         $this->assertSame(['n_high_x_e_low', 'o_high_x_c_low', 'o_high_x_n_high', 'c_high_x_n_high', 'e_high_x_a_low'], array_keys((array) $registry['synergies']));
-        $this->assertSame(['workplace', 'stress_recovery', 'personal_growth'], array_keys((array) $registry['action_rules']));
+        $this->assertSame(['workplace', 'relationships', 'stress_recovery', 'personal_growth'], array_keys((array) $registry['action_rules']));
     }
 }

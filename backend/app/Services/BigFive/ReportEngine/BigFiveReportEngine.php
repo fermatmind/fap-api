@@ -47,7 +47,7 @@ final class BigFiveReportEngine
         );
         $facetAnomalies = $this->facetPrecisionResolver->resolve($context, $registry);
         $actionMatrix = $this->actionMatrixResolver->resolve($context, $registry);
-        $sections = $this->sectionInstructionAssembler->assemble($context, $blocks, $synergies, $facetAnomalies, $registry);
+        $sections = $this->sectionInstructionAssembler->assemble($context, $blocks, $synergies, $facetAnomalies, $actionMatrix, $registry);
 
         return $this->runtimePayloadAssembler->assemble($context, $sections, $synergies, $facetAnomalies, $actionMatrix);
     }

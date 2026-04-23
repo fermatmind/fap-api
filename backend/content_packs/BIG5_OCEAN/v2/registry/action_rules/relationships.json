@@ -1,0 +1,111 @@
+{
+  "schema": "fap.big5.action_rule_pack.v1",
+  "scenario": "relationships",
+  "scenario_title": "关系场景",
+  "rules": [
+    {
+      "rule_id": "a_rel_start_boundary_sentence_00_35",
+      "trait_code": "A",
+      "bucket": "start",
+      "percentile_min": 0,
+      "percentile_max": 35,
+      "priority_weight": 88,
+      "scenario_tags": ["relationships"],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "练一句低成本边界表达",
+      "body": "预先准备一句边界句：我不是不同意你这个人，我只是现在不同意这件事的做法。"
+    },
+    {
+      "rule_id": "a_rel_stop_win_point_00_35",
+      "trait_code": "A",
+      "bucket": "stop",
+      "percentile_min": 0,
+      "percentile_max": 35,
+      "priority_weight": 84,
+      "scenario_tags": ["relationships"],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "停止只赢观点，不顾关系承托",
+      "body": "当你已经说清观点时，不要继续把对方逼到只能防御的位置；先确认对方是否还接得住。"
+    },
+    {
+      "rule_id": "e_rel_start_one_true_sentence_00_35",
+      "trait_code": "E",
+      "bucket": "start",
+      "percentile_min": 0,
+      "percentile_max": 35,
+      "priority_weight": 90,
+      "scenario_tags": ["relationships"],
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "先说一句真实想法",
+      "body": "在你准备继续保持沉默前，先说出一句真实但不必完整展开的话，让关系里有一个可以继续接住你的入口。"
+    },
+    {
+      "rule_id": "e_rel_stop_speed_as_pressure_70_100",
+      "trait_code": "E",
+      "bucket": "stop",
+      "percentile_min": 70,
+      "percentile_max": 100,
+      "priority_weight": 90,
+      "scenario_tags": ["relationships"],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "停止用速度给关系施压",
+      "body": "当你很快想把问题聊完、定性或推进结果时，先给对方一点整理时间，避免速度本身变成压力。"
+    },
+    {
+      "rule_id": "n_rel_observe_discomfort_before_withdrawal_60_100",
+      "trait_code": "N",
+      "bucket": "observe",
+      "percentile_min": 60,
+      "percentile_max": 100,
+      "priority_weight": 80,
+      "scenario_tags": ["relationships"],
+      "difficulty_level": "low",
+      "time_horizon": "two_weeks",
+      "title": "先识别不适来源，再后退",
+      "body": "当你想直接抽离时，先标记这份不适来自被误解、边界被碰到，还是失控感上升。"
+    },
+    {
+      "rule_id": "n_rel_continue_name_need_before_escalation_60_100",
+      "trait_code": "N",
+      "bucket": "continue",
+      "percentile_min": 60,
+      "percentile_max": 100,
+      "priority_weight": 76,
+      "scenario_tags": ["relationships"],
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "先命名需要，再谈对错",
+      "body": "继续把高体感翻译成可被理解的需要，例如我需要更清楚的时间、边界或回应，而不是直接进入谁对谁错。"
+    },
+    {
+      "rule_id": "o_rel_continue_hold_two_interpretations_50_100",
+      "trait_code": "O",
+      "bucket": "continue",
+      "percentile_min": 50,
+      "percentile_max": 100,
+      "priority_weight": 66,
+      "scenario_tags": ["relationships"],
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "在下结论前保留两种解释",
+      "body": "继续使用你理解复杂动机的能力，但在定性对方之前，先保留两个可能解释，避免把复杂性只用来放大担心。"
+    },
+    {
+      "rule_id": "c_rel_stop_wait_for_perfect_timing_00_35",
+      "trait_code": "C",
+      "bucket": "stop",
+      "percentile_min": 0,
+      "percentile_max": 35,
+      "priority_weight": 74,
+      "scenario_tags": ["relationships"],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "停止等待完美时机再沟通",
+      "body": "如果一件事已经反复消耗你，不要继续等一个完全合适的时机；先用小句子开启，而不是等到情绪累积后一次性说完。"
+    }
+  ]
+}

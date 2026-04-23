@@ -16,7 +16,7 @@ final class RuntimePayloadAssembler
      * @param  list<ResolvedSection>  $sections
      * @param  list<SynergyMatch>  $synergies
      * @param  list<FacetAnomalyMatch>  $facetAnomalies
-     * @param  array<string,list<ActionRuleMatch>>  $actionMatrix
+     * @param  array<string,mixed>  $actionMatrix
      * @return array<string,mixed>
      */
     public function assemble(
@@ -70,7 +70,14 @@ final class RuntimePayloadAssembler
                         'per_report' => 6,
                         'standout_render_cards' => 3,
                     ],
-                    'action_rule_scope' => 'N scenario rules only',
+                    'action_rule_scope' => 'scenario_bound_action_matrix_pr3c',
+                    'action_rule_scenarios' => ['workplace', 'relationships', 'stress_recovery', 'personal_growth'],
+                    'action_rule_count' => 28,
+                    'action_matrix_caps' => [
+                        'per_scenario_per_bucket' => 1,
+                        'per_scenario' => 4,
+                        'per_report' => 12,
+                    ],
                 ],
             ],
         ];
@@ -129,15 +136,27 @@ final class RuntimePayloadAssembler
     }
 
     /**
-     * @param  array<string,list<ActionRuleMatch>>  $actionMatrix
-     * @return array<string,list<array<string,mixed>>>
+     * @param  array<string,mixed>  $actionMatrix
+     * @return array<string,mixed>
      */
     private function actionMatrixToArray(array $actionMatrix): array
     {
-        $out = [];
-        foreach ($actionMatrix as $scenario => $matches) {
-            $out[$scenario] = array_map(static fn (ActionRuleMatch $match): array => $match->toArray(), $matches);
+        $out = $actionMatrix;
+        $scenarios = [];
+        foreach (is_array($actionMatrix['scenarios'] ?? null) ? $actionMatrix['scenarios'] : [] as $scenario) {
+            if (! is_array($scenario)) {
+                continue;
+            }
+            $selectedRules = [];
+            foreach (is_array($scenario['selected_rules'] ?? null) ? $scenario['selected_rules'] : [] as $bucket => $rule) {
+                $selectedRules[(string) $bucket] = $rule instanceof ActionRuleMatch
+                    ? $rule->toArray()
+                    : null;
+            }
+            $scenario['selected_rules'] = $selectedRules;
+            $scenarios[] = $scenario;
         }
+        $out['scenarios'] = $scenarios;
 
         return $out;
     }

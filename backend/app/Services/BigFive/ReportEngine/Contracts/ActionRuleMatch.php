@@ -19,6 +19,7 @@ final class ActionRuleMatch
         public readonly string $timeHorizon,
         public readonly string $title,
         public readonly string $body,
+        public readonly int $priorityWeight = 0,
     ) {}
 
     /**
@@ -36,6 +37,7 @@ final class ActionRuleMatch
             'time_horizon' => $this->timeHorizon,
             'title' => $this->title,
             'body' => $this->body,
+            'priority_weight' => $this->priorityWeight,
         ];
     }
 }

@@ -56,6 +56,7 @@ final class ModifierInjector
                         ))),
                         'synergy_refs' => $block->provenance['synergy_refs'] ?? [],
                         'facet_refs' => $block->provenance['facet_refs'] ?? [],
+                        'action_refs' => $block->provenance['action_refs'] ?? [],
                     ],
                     analytics: array_merge($block->analytics, [
                         'modifier_gradient_id' => $gradientId,
