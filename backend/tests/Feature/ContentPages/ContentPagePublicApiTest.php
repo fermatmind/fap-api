@@ -19,12 +19,12 @@ final class ContentPagePublicApiTest extends TestCase
             '--status' => 'published',
             '--source-dir' => '../content_baselines/content_pages',
         ])
-            ->expectsOutputToContain('files_found=3')
-            ->expectsOutputToContain('pages_found=20')
-            ->expectsOutputToContain('will_create=20')
+            ->expectsOutputToContain('files_found=4')
+            ->expectsOutputToContain('pages_found=23')
+            ->expectsOutputToContain('will_create=23')
             ->assertExitCode(0);
 
-        $this->assertSame(20, ContentPage::query()->withoutGlobalScopes()->count());
+        $this->assertSame(23, ContentPage::query()->withoutGlobalScopes()->count());
 
         $about = ContentPage::query()
             ->withoutGlobalScopes()
@@ -77,6 +77,12 @@ final class ContentPagePublicApiTest extends TestCase
         $this->getJson('/api/v0.5/content-pages/missing-page?locale=zh-CN&org_id=0')
             ->assertNotFound()
             ->assertJsonPath('ok', false);
+
+        $this->getJson('/api/v0.5/content-pages/help-faq?locale=zh-CN&org_id=0')
+            ->assertOk()
+            ->assertJsonPath('page.slug', 'help-faq')
+            ->assertJsonPath('page.path', '/help/faq')
+            ->assertJsonPath('page.canonical_path', '/help/faq');
     }
 
     public function test_ops_list_and_update_are_backed_by_content_pages_table(): void
@@ -121,5 +127,29 @@ final class ContentPagePublicApiTest extends TestCase
             'locale' => 'zh-CN',
             'title' => '关于费马测试更新',
         ]);
+
+        $this->putJson('/api/v0.5/internal/content-pages/help-contact', [
+            'title' => '联系支持更新',
+            'kicker' => 'Help',
+            'summary' => '后台更新后的帮助页摘要。',
+            'kind' => 'help',
+            'template' => 'help',
+            'animation_profile' => 'editorial',
+            'locale' => 'zh-CN',
+            'published_at' => '2026-04-19',
+            'updated_at' => '2026-04-19',
+            'effective_at' => null,
+            'source_doc' => '帮助_联系支持.docx',
+            'is_public' => true,
+            'is_indexable' => true,
+            'content_md' => "## 支持入口\n\n先完成正式流程。",
+            'content_html' => '',
+            'seo_title' => '联系支持更新',
+            'meta_description' => '后台更新后的帮助页摘要。',
+        ])
+            ->assertOk()
+            ->assertJsonPath('page.slug', 'help-contact')
+            ->assertJsonPath('page.path', '/help/contact')
+            ->assertJsonPath('page.canonical_path', '/help/contact');
     }
 }
