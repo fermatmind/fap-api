@@ -204,6 +204,149 @@ final class ArticleTranslationRevisionContractTest extends TestCase
             ->count());
     }
 
+    public function test_canonical_consolidation_remaps_en_drafts_to_public_zh_owners(): void
+    {
+        $fixtures = [
+            [
+                'slug' => 'how-personality-shapes-attitude-toward-ai',
+                'public_id' => 15,
+                'duplicate_source_id' => 17,
+                'en_id' => 24,
+            ],
+            [
+                'slug' => 'which-love-script-fits-you-best',
+                'public_id' => 16,
+                'duplicate_source_id' => 18,
+                'en_id' => 25,
+            ],
+            [
+                'slug' => 'are-infj-men-rare-or-socially-silenced',
+                'public_id' => 11,
+                'duplicate_source_id' => 19,
+                'en_id' => 26,
+            ],
+            [
+                'slug' => 'best-valentines-date-by-personality-and-relationship-science',
+                'public_id' => 12,
+                'duplicate_source_id' => 20,
+                'en_id' => 27,
+            ],
+            [
+                'slug' => 'how-16-personality-types-talk-to-an-ai-coach',
+                'public_id' => 14,
+                'duplicate_source_id' => 21,
+                'en_id' => 28,
+            ],
+            [
+                'slug' => 'childhood-dream-job-still-shapes-career-choice',
+                'public_id' => 13,
+                'duplicate_source_id' => 22,
+                'en_id' => 29,
+            ],
+        ];
+
+        Article::unguarded(function () use ($fixtures): void {
+            foreach ($fixtures as $fixture) {
+                $public = $this->createArticle(0, 'zh-CN', 'Public '.$fixture['slug'], [
+                    'id' => $fixture['public_id'],
+                    'slug' => $fixture['slug'],
+                    'status' => 'published',
+                    'is_public' => true,
+                    'published_at' => now()->subDay(),
+                    'translation_group_id' => 'article-'.$fixture['public_id'],
+                ]);
+                $publicRevision = $this->createTranslationRevision($public, [
+                    'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+                    'published_at' => $public->published_at,
+                ]);
+                $public->forceFill([
+                    'working_revision_id' => $publicRevision->id,
+                    'published_revision_id' => $publicRevision->id,
+                ])->save();
+
+                $duplicateSource = $this->createArticle(2, 'zh-CN', 'Public '.$fixture['slug'], [
+                    'id' => $fixture['duplicate_source_id'],
+                    'slug' => $fixture['slug'],
+                    'translation_group_id' => 'article-'.$fixture['duplicate_source_id'],
+                ]);
+                $duplicateRevision = $this->createTranslationRevision($duplicateSource, [
+                    'revision_status' => ArticleTranslationRevision::STATUS_SOURCE,
+                ]);
+                $duplicateSource->forceFill(['working_revision_id' => $duplicateRevision->id])->save();
+
+                $translation = $this->createArticle(2, 'en', 'English '.$fixture['slug'], [
+                    'id' => $fixture['en_id'],
+                    'slug' => $fixture['slug'],
+                    'translation_group_id' => $duplicateSource->translation_group_id,
+                    'source_locale' => 'zh-CN',
+                    'translation_status' => Article::TRANSLATION_STATUS_HUMAN_REVIEW,
+                    'translated_from_article_id' => $duplicateSource->id,
+                    'source_article_id' => $duplicateSource->id,
+                    'translated_from_version_hash' => $duplicateSource->source_version_hash,
+                ]);
+                $translationRevision = $this->createTranslationRevision($translation, [
+                    'source_article_id' => $duplicateSource->id,
+                    'translation_group_id' => $duplicateSource->translation_group_id,
+                    'revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+                    'source_version_hash' => $duplicateSource->source_version_hash,
+                    'translated_from_version_hash' => $duplicateSource->source_version_hash,
+                ]);
+                $translation->forceFill(['working_revision_id' => $translationRevision->id])->save();
+            }
+        });
+
+        foreach ($fixtures as $fixture) {
+            $this->assertSame($fixture['duplicate_source_id'], Article::query()
+                ->withoutGlobalScopes()
+                ->whereKey($fixture['en_id'])
+                ->value('source_article_id'));
+        }
+
+        $this->runCanonicalConsolidationRemap();
+
+        foreach ($fixtures as $fixture) {
+            $public = Article::query()->withoutGlobalScopes()->findOrFail($fixture['public_id']);
+            $duplicateSource = Article::query()->withoutGlobalScopes()->findOrFail($fixture['duplicate_source_id']);
+            $translation = Article::query()->withoutGlobalScopes()->findOrFail($fixture['en_id']);
+
+            $this->getJson('/api/v0.5/articles/'.$fixture['slug'].'?locale=zh-CN')
+                ->assertOk()
+                ->assertJsonPath('article.id', $fixture['public_id'])
+                ->assertJsonPath('article.translation_group_id', 'article-'.$fixture['public_id']);
+
+            $this->getJson('/api/v0.5/articles/'.$fixture['slug'].'?locale=en')
+                ->assertNotFound();
+
+            $this->assertSame(Article::TRANSLATION_STATUS_SOURCE, $public->translation_status);
+            $this->assertNull($public->source_article_id);
+            $this->assertSame($fixture['public_id'], $translation->source_article_id);
+            $this->assertSame($fixture['public_id'], $translation->translated_from_article_id);
+            $this->assertSame($public->translation_group_id, $translation->translation_group_id);
+            $this->assertSame(Article::TRANSLATION_STATUS_HUMAN_REVIEW, $translation->translation_status);
+            $this->assertNull($translation->published_revision_id);
+            $this->assertFalse((bool) $translation->is_public);
+
+            $this->assertSame(Article::TRANSLATION_STATUS_ARCHIVED, $duplicateSource->translation_status);
+            $this->assertSame($fixture['public_id'], $duplicateSource->source_article_id);
+            $this->assertSame($public->translation_group_id, $duplicateSource->translation_group_id);
+
+            $workingRevision = ArticleTranslationRevision::query()
+                ->withoutGlobalScopes()
+                ->findOrFail($translation->working_revision_id);
+            $this->assertSame($fixture['public_id'], $workingRevision->source_article_id);
+            $this->assertSame($public->translation_group_id, $workingRevision->translation_group_id);
+
+            $sourceOwnerCount = Article::query()
+                ->withoutGlobalScopes()
+                ->where('slug', $fixture['slug'])
+                ->where('locale', 'zh-CN')
+                ->where('translation_status', Article::TRANSLATION_STATUS_SOURCE)
+                ->whereNull('source_article_id')
+                ->count();
+            $this->assertSame(1, $sourceOwnerCount);
+        }
+    }
+
     public function test_revision_stale_and_supersedes_relationship_are_available(): void
     {
         $source = $this->createArticle(1, 'zh-CN', '中文源文');
@@ -413,6 +556,36 @@ final class ArticleTranslationRevisionContractTest extends TestCase
     {
         $migration = require database_path('migrations/2026_04_23_020000_reconcile_article_working_revisions_for_editor_cutover.php');
         $migration->up();
+    }
+
+    private function runCanonicalConsolidationRemap(): void
+    {
+        $migration = require database_path('migrations/2026_04_23_040000_consolidate_article_translation_canonical_owners.php');
+        $migration->up();
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createTranslationRevision(Article $article, array $overrides = []): ArticleTranslationRevision
+    {
+        /** @var ArticleTranslationRevision */
+        return ArticleTranslationRevision::query()->create(array_merge([
+            'org_id' => (int) $article->org_id,
+            'article_id' => (int) $article->id,
+            'source_article_id' => (int) ($article->source_article_id ?: $article->translated_from_article_id ?: $article->id),
+            'translation_group_id' => (string) $article->translation_group_id,
+            'locale' => (string) $article->locale,
+            'source_locale' => (string) ($article->source_locale ?: $article->locale),
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_SOURCE,
+            'source_version_hash' => $article->source_version_hash,
+            'translated_from_version_hash' => $article->translated_from_version_hash ?: $article->source_version_hash,
+            'title' => (string) $article->title,
+            'excerpt' => $article->excerpt,
+            'content_md' => (string) $article->content_md,
+            'published_at' => null,
+        ], $overrides));
     }
 
     /**
