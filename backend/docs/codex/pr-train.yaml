@@ -101,6 +101,39 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-BIG5-REPORT-ENGINE-FACET-PRECISION
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api-pr3a/backend
+    branch: codex/big5-report-engine-facet-precision
+    base: main
+    depends_on: ["PR-BIG5-REPORT-ENGINE-MORE-SYNERGY"]
+    mode: execute
+    scope: >
+      Big Five Report Engine PR3B backend-only facet precision rollout.
+      Add all 30 facet glossary entries, expand facet precision anomaly
+      rules to O/C/E/A/N, implement threshold, compound, per-domain and
+      per-report anomaly selection, and enrich only the existing
+      facet_details section with intro, top anomaly cards, overflow, and
+      30 glossary rows without changing live report, scoring, frontend,
+      MBTI, synergy registry, scenario action rules, access, PDF, history,
+      or payment paths.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "python3 -m json.tool content_packs/BIG5_OCEAN/v2/registry/manifest.json >/dev/null"
+      - "for f in content_packs/BIG5_OCEAN/v2/registry/facet_glossary/*.json content_packs/BIG5_OCEAN/v2/registry/facet_precision/*.json tests/Fixtures/big5_engine/facet_contexts/*.json tests/Fixtures/big5_engine/expected_canonical_n_slice_payload.json; do python3 -m json.tool \"$f\" >/dev/null || exit 1; done"
+      - "vendor/bin/pint --test app/Services/BigFive/ReportEngine tests/Unit/Services/BigFive/ReportEngine tests/Feature/Content/BigFiveReportEngineNSliceTest.php tests/Feature/Content/BigFiveReportEngineAllTraitsRolloutTest.php tests/Feature/Content/BigFiveReportEngineSynergyRolloutTest.php tests/Feature/Content/BigFiveReportEngineFacetPrecisionRolloutTest.php"
+      - "php artisan test tests/Unit/Services/BigFive/ReportEngine tests/Feature/Content/BigFiveReportEngineNSliceTest.php tests/Feature/Content/BigFiveReportEngineAllTraitsRolloutTest.php tests/Feature/Content/BigFiveReportEngineSynergyRolloutTest.php tests/Feature/Content/BigFiveReportEngineFacetPrecisionRolloutTest.php"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-ENNEAGRAM-V11
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

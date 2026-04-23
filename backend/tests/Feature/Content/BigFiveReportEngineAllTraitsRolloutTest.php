@@ -37,7 +37,7 @@ final class BigFiveReportEngineAllTraitsRolloutTest extends TestCase
         }
     }
 
-    public function test_pr2_does_not_expand_synergy_facet_or_action_scope_beyond_n(): void
+    public function test_pr2_trait_rollout_still_keeps_balanced_profiles_without_synergy_or_action_scope(): void
     {
         $payload = app(BigFiveReportEngine::class)->generate($this->profiles()['balanced']);
 

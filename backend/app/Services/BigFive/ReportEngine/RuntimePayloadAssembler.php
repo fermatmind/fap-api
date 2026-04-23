@@ -38,6 +38,7 @@ final class RuntimePayloadAssembler
                 'dominant_traits' => $this->dominantTraits($context),
                 'selected_synergies' => $this->selectedSynergiesToArray($synergies),
                 'facet_anomalies' => array_map(static fn (FacetAnomalyMatch $match): array => $match->toArray(), $facetAnomalies),
+                'standout_anomalies' => array_map(static fn (FacetAnomalyMatch $match): array => $match->toArray(), array_slice($facetAnomalies, 0, 3)),
             ],
             'sections' => array_map(static fn (ResolvedSection $section): array => $section->toArray(), $sections),
             'action_matrix' => $this->actionMatrixToArray($actionMatrix),
@@ -52,7 +53,7 @@ final class RuntimePayloadAssembler
                     'action_plan',
                     'methodology_and_access',
                 ],
-                'registry_scope' => 'more_synergy_rollout_pr3a',
+                'registry_scope' => 'facet_precision_rollout_pr3b',
                 'limited_rollouts' => [
                     'synergies' => [
                         'n_high_x_e_low',
@@ -61,7 +62,14 @@ final class RuntimePayloadAssembler
                         'c_high_x_n_high',
                         'e_high_x_a_low',
                     ],
-                    'facet_precision_traits' => ['N'],
+                    'facet_glossary_entries' => 30,
+                    'facet_precision_traits' => ['O', 'C', 'E', 'A', 'N'],
+                    'facet_precision_rules' => 22,
+                    'facet_precision_caps' => [
+                        'per_domain' => 2,
+                        'per_report' => 6,
+                        'standout_render_cards' => 3,
+                    ],
                     'action_rule_scope' => 'N scenario rules only',
                 ],
             ],

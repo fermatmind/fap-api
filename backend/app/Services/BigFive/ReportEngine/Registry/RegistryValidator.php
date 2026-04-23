@@ -67,6 +67,20 @@ final class RegistryValidator
         'action_hook',
     ];
 
+    private const REQUIRED_FACET_GLOSSARY_FIELDS = [
+        'facet_code',
+        'label_zh',
+        'gloss',
+        'daily_meaning',
+        'why_it_matters',
+    ];
+
+    private const REQUIRED_FACET_COPY_FIELDS = [
+        'title',
+        'body',
+        'why_it_matters',
+    ];
+
     /**
      * @param  array<string,mixed>  $registry
      * @return list<string>
@@ -75,7 +89,7 @@ final class RegistryValidator
     {
         $errors = [];
 
-        foreach (['manifest', 'atomic', 'modifiers', 'synergies', 'facet_precision', 'action_rules', 'shared'] as $key) {
+        foreach (['manifest', 'atomic', 'modifiers', 'synergies', 'facet_glossary', 'facet_precision', 'action_rules', 'shared'] as $key) {
             if (! is_array($registry[$key] ?? null)) {
                 $errors[] = "Missing registry group: {$key}";
             }
@@ -85,11 +99,9 @@ final class RegistryValidator
         $errors = array_merge($errors, $this->validateModifierCoverage($registry));
         $errors = array_merge($errors, $this->validateSharedAssets($registry));
         $errors = array_merge($errors, $this->validateSynergyCoverage($registry));
-
-        $facetRules = $registry['facet_precision']['N']['rules'] ?? null;
-        if (! is_array($facetRules) || count($facetRules) < 5) {
-            $errors[] = 'N facet precision must define at least five rules';
-        }
+        $facetCodes = [];
+        $errors = array_merge($errors, $this->validateFacetGlossaryCoverage($registry, $facetCodes));
+        $errors = array_merge($errors, $this->validateFacetPrecisionCoverage($registry, $facetCodes));
 
         $actionCount = 0;
         foreach (['workplace', 'stress_recovery', 'personal_growth'] as $scenario) {
@@ -113,6 +125,151 @@ final class RegistryValidator
         }
         if ($actionCount < 8 || $actionCount > 12) {
             $errors[] = "Action rule count must be 8-12, got {$actionCount}";
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  array<string,mixed>  $registry
+     * @param  array<int,string>  $facetCodes
+     * @return list<string>
+     */
+    private function validateFacetGlossaryCoverage(array $registry, array &$facetCodes): array
+    {
+        $errors = [];
+        $glossary = is_array($registry['facet_glossary'] ?? null) ? $registry['facet_glossary'] : [];
+        if (array_values(array_keys($glossary)) !== self::TRAIT_CODES) {
+            $errors[] = 'Facet glossary coverage must be O/C/E/A/N in order';
+        }
+
+        foreach (self::TRAIT_CODES as $traitCode) {
+            $pack = is_array($glossary[$traitCode] ?? null) ? $glossary[$traitCode] : [];
+            if ((string) ($pack['trait_code'] ?? '') !== $traitCode) {
+                $errors[] = "Facet glossary trait_code mismatch for {$traitCode}.json";
+            }
+            $facets = is_array($pack['facets'] ?? null) ? $pack['facets'] : [];
+            if (count($facets) !== 6) {
+                $errors[] = "Facet glossary {$traitCode} must contain six facets";
+            }
+            foreach ($facets as $facet) {
+                if (! is_array($facet)) {
+                    $errors[] = "Facet glossary {$traitCode} contains invalid facet";
+
+                    continue;
+                }
+                $facetCode = (string) ($facet['facet_code'] ?? '');
+                if (! str_starts_with($facetCode, $traitCode)) {
+                    $errors[] = "Facet glossary {$traitCode} has mismatched facet code {$facetCode}";
+                }
+                if (in_array($facetCode, $facetCodes, true)) {
+                    $errors[] = "Duplicate facet glossary code {$facetCode}";
+                }
+                $facetCodes[] = $facetCode;
+
+                foreach (self::REQUIRED_FACET_GLOSSARY_FIELDS as $field) {
+                    if (! array_key_exists($field, $facet) || trim((string) $facet[$field]) === '') {
+                        $errors[] = "Facet glossary {$facetCode} missing {$field}";
+                    }
+                }
+            }
+        }
+
+        if (count($facetCodes) !== 30) {
+            $errors[] = 'Facet glossary total must be 30';
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  array<string,mixed>  $registry
+     * @param  list<string>  $knownFacetCodes
+     * @return list<string>
+     */
+    private function validateFacetPrecisionCoverage(array $registry, array $knownFacetCodes): array
+    {
+        $errors = [];
+        $precision = is_array($registry['facet_precision'] ?? null) ? $registry['facet_precision'] : [];
+        if (array_values(array_keys($precision)) !== self::TRAIT_CODES) {
+            $errors[] = 'Facet precision coverage must be O/C/E/A/N in order';
+        }
+
+        $totalRules = 0;
+        $ruleIds = [];
+        foreach (self::TRAIT_CODES as $traitCode) {
+            $pack = is_array($precision[$traitCode] ?? null) ? $precision[$traitCode] : [];
+            if ((string) ($pack['trait_code'] ?? '') !== $traitCode) {
+                $errors[] = "Facet precision trait_code mismatch for {$traitCode}.json";
+            }
+            $rules = is_array($pack['rules'] ?? null) ? $pack['rules'] : [];
+            if (count($rules) < 4) {
+                $errors[] = "Facet precision {$traitCode} must contain at least four rules";
+            }
+            $totalRules += count($rules);
+
+            foreach ($rules as $rule) {
+                if (! is_array($rule)) {
+                    $errors[] = "Facet precision {$traitCode} contains invalid rule";
+
+                    continue;
+                }
+
+                $ruleId = (string) ($rule['rule_id'] ?? '');
+                if ($ruleId === '' || in_array($ruleId, $ruleIds, true)) {
+                    $errors[] = "Duplicate or missing facet precision rule_id {$ruleId}";
+                }
+                $ruleIds[] = $ruleId;
+
+                foreach (['anomaly_type', 'when', 'priority_weight', 'max_show_per_domain', 'section_targets', 'copy'] as $field) {
+                    if (! array_key_exists($field, $rule)) {
+                        $errors[] = "Facet precision {$ruleId} missing {$field}";
+                    }
+                }
+
+                $facetCodes = $this->facetCodesForRule($rule);
+                if ($facetCodes === []) {
+                    $errors[] = "Facet precision {$ruleId} must define facet_code or facet_codes_all";
+                }
+                if (array_key_exists('facet_codes_all', $rule) && $facetCodes === []) {
+                    $errors[] = "Compound facet precision {$ruleId} facet_codes_all cannot be empty";
+                }
+                foreach ($facetCodes as $facetCode) {
+                    if (! in_array($facetCode, $knownFacetCodes, true)) {
+                        $errors[] = "Facet precision {$ruleId} references unknown facet {$facetCode}";
+                    }
+                }
+                $when = is_array($rule['when'] ?? null) ? $rule['when'] : [];
+                $facetConstraints = is_array($when['facets'] ?? null) ? $when['facets'] : [];
+                foreach (array_keys($facetConstraints) as $facetCode) {
+                    if (! in_array((string) $facetCode, $knownFacetCodes, true)) {
+                        $errors[] = "Facet precision {$ruleId} references unknown facet constraint {$facetCode}";
+                    }
+                }
+
+                if ((int) ($when['delta_abs_min'] ?? 0) < 20) {
+                    $errors[] = "Facet precision {$ruleId} delta_abs_min must be >= 20";
+                }
+                if (($when['cross_band_required'] ?? false) !== true) {
+                    $errors[] = "Facet precision {$ruleId} cross_band_required must be true";
+                }
+
+                $targets = is_array($rule['section_targets'] ?? null) ? $rule['section_targets'] : [];
+                if ($targets !== ['facet_details']) {
+                    $errors[] = "Facet precision {$ruleId} section_targets must be facet_details only";
+                }
+
+                $copy = is_array($rule['copy'] ?? null) ? $rule['copy'] : [];
+                foreach (self::REQUIRED_FACET_COPY_FIELDS as $field) {
+                    if (! array_key_exists($field, $copy) || trim((string) $copy[$field]) === '') {
+                        $errors[] = "Facet precision {$ruleId} copy missing {$field}";
+                    }
+                }
+            }
+        }
+
+        if ($totalRules < 20 || $totalRules > 24) {
+            $errors[] = "Facet precision rule count must be 20-24, got {$totalRules}";
         }
 
         return $errors;
@@ -199,6 +356,23 @@ final class RegistryValidator
         }
 
         return $errors;
+    }
+
+    /**
+     * @param  array<string,mixed>  $rule
+     * @return list<string>
+     */
+    private function facetCodesForRule(array $rule): array
+    {
+        if (isset($rule['facet_code'])) {
+            return [(string) $rule['facet_code']];
+        }
+
+        if (! is_array($rule['facet_codes_all'] ?? null)) {
+            return [];
+        }
+
+        return array_values(array_filter(array_map('strval', $rule['facet_codes_all'])));
     }
 
     /**

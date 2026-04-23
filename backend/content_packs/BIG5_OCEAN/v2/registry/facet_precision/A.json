@@ -1,0 +1,102 @@
+{
+    "schema": "fap.big5.facet_precision_trait_pack.v1",
+    "trait_code": "A",
+    "rules": [
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "a1_low_with_a_mid",
+            "facet_code": "A1",
+            "anomaly_type": "negative_spike",
+            "when": {
+                "domain_percentile_min": 40,
+                "domain_percentile_max": 65,
+                "facet_percentile_max": 25,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 112,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "你不是不合作，而是信任启动更慢。",
+                "body": "整体宜人性处在中段时，信任起点明显偏低，说明你可以合作、也愿意讲理，但不会轻易默认他人动机可靠。",
+                "why_it_matters": "这能把“防备”从“不友好”里拆出来，看到你对风险证据的需求。"
+            }
+        },
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "a4_high_with_a_mid",
+            "facet_code": "A4",
+            "anomaly_type": "positive_spike",
+            "when": {
+                "domain_percentile_min": 40,
+                "domain_percentile_max": 65,
+                "facet_percentile_min": 80,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 106,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "你在冲突里更倾向保留关系温度。",
+                "body": "冲突调停明显高于整体宜人性，说明你可能并非处处让步，但面对分歧时会优先避免关系快速升温。",
+                "why_it_matters": "这解释了你为什么能坚持判断，同时仍不愿把冲突推到最硬。"
+            }
+        },
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "a_selective_cooperator_split",
+            "facet_code": "A1",
+            "anomaly_type": "negative_spike",
+            "when": {
+                "domain_percentile_min": 40,
+                "domain_percentile_max": 65,
+                "facet_percentile_max": 25,
+                "facets": {
+                    "A4": {
+                        "facet_percentile_min": 75
+                    }
+                },
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 120,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "你是选择性合作者：合作在，信任慢。",
+                "body": "信任起点低、冲突调停高，说明你愿意维持合作秩序，却不会在证据不足时快速交出信任。",
+                "why_it_matters": "这是典型的反直觉发现：你的合作不是天真开放，而是带有边界和观察期。"
+            }
+        },
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "a6_high_with_a_low",
+            "facet_code": "A6",
+            "anomaly_type": "positive_spike",
+            "when": {
+                "domain_percentile_max": 40,
+                "facet_percentile_min": 75,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 110,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "即使整体不算迎合，你仍可能对脆弱处境很有感。",
+                "body": "共情柔软高于低位宜人性时，说明你不一定愿意迁就所有关系，却会对真实困难和脆弱信号产生反应。",
+                "why_it_matters": "这能避免把低宜人误读成冷漠：你可能只是更重边界，而不是没有感受。"
+            }
+        }
+    ]
+}

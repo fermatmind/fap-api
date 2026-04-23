@@ -1,0 +1,112 @@
+{
+    "schema": "fap.big5.facet_precision_trait_pack.v1",
+    "trait_code": "E",
+    "rules": [
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "e1_high_with_e_low",
+            "facet_code": "E1",
+            "anomaly_type": "positive_spike",
+            "when": {
+                "domain_percentile_max": 40,
+                "facet_percentile_min": 60,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 112,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "你不是社交冷，而是亲近通道比群体能量更强。",
+                "body": "整体外向性偏低时，亲近温度却不低，说明你并不缺少连接能力，只是不一定喜欢高密度社交场。",
+                "why_it_matters": "它能纠正“低外向=不亲近”的误读。"
+            }
+        },
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "e2_high_with_e_low",
+            "facet_code": "E2",
+            "anomaly_type": "positive_spike",
+            "when": {
+                "domain_percentile_max": 40,
+                "facet_percentile_min": 60,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 104,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "你对人群并非完全排斥，只是需要选择合适密度。",
+                "body": "群体参与高于整体外向性时，说明你能进入人群，但未必能承受持续高刺激、高主张或快节奏互动。",
+                "why_it_matters": "这提示社交策略应关注场景密度，而不是简单贴上内向标签。"
+            }
+        },
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "e_warm_but_reserved_split",
+            "facet_codes_all": [
+                "E1",
+                "E2",
+                "E3",
+                "E5"
+            ],
+            "anomaly_type": "compound_split",
+            "when": {
+                "domain_percentile_max": 40,
+                "facets": {
+                    "E1": {
+                        "facet_percentile_min": 55
+                    },
+                    "E2": {
+                        "facet_percentile_min": 50
+                    },
+                    "E3": {
+                        "facet_percentile_max": 30
+                    },
+                    "E5": {
+                        "facet_percentile_max": 30
+                    }
+                },
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 145,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "你不是社交差，而是“能连接，但不抢场”。",
+                "body": "亲近温度和群体参与并不低，但主张表达与刺激寻求偏低，说明你可以建立连接，也能待在人群中；真正保留的是抢占位置、制造强刺激和高频推进。",
+                "why_it_matters": "这个 split 能解释外部看见的克制：它不是关系能力弱，而是表达压强和刺激需求低。"
+            }
+        },
+        {
+            "schema": "fap.big5.facet_precision_rule.v1",
+            "rule_id": "e_stimulation_low_with_e_mid_or_high",
+            "facet_code": "E5",
+            "anomaly_type": "negative_spike",
+            "when": {
+                "domain_percentile_min": 45,
+                "facet_percentile_max": 25,
+                "delta_abs_min": 20,
+                "cross_band_required": true
+            },
+            "priority_weight": 106,
+            "max_show_per_domain": 2,
+            "section_targets": [
+                "facet_details"
+            ],
+            "copy": {
+                "title": "即使你能外放，也不一定需要强刺激。",
+                "body": "刺激寻求显著低于整体外向性，说明你可以表达、互动或推进，但不一定喜欢高噪音、高风险和强唤醒场景。",
+                "why_it_matters": "这能避免把活跃能力误读成刺激偏好。"
+            }
+        }
+    ]
+}

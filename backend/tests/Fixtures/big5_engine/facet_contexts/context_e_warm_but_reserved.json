@@ -1,0 +1,162 @@
+{
+    "schema": "fap.big5.report_context_fixture.v1",
+    "fixture_id": "facet_e_warm_but_reserved_v1",
+    "locale": "zh-CN",
+    "scale_code": "BIG5_OCEAN",
+    "form_code": "big5_90",
+    "score_vector": {
+        "domains": {
+            "O": {
+                "percentile": 50,
+                "band": "mid",
+                "gradient_id": "o_g3"
+            },
+            "C": {
+                "percentile": 54,
+                "band": "mid",
+                "gradient_id": "c_g3"
+            },
+            "E": {
+                "percentile": 35,
+                "band": "low_mid",
+                "gradient_id": "e_g2"
+            },
+            "A": {
+                "percentile": 58,
+                "band": "mid",
+                "gradient_id": "a_g3"
+            },
+            "N": {
+                "percentile": 42,
+                "band": "mid",
+                "gradient_id": "n_g3"
+            }
+        },
+        "facets": {
+            "O1": {
+                "percentile": 50,
+                "domain": "O"
+            },
+            "O2": {
+                "percentile": 50,
+                "domain": "O"
+            },
+            "O3": {
+                "percentile": 50,
+                "domain": "O"
+            },
+            "O4": {
+                "percentile": 50,
+                "domain": "O"
+            },
+            "O5": {
+                "percentile": 50,
+                "domain": "O"
+            },
+            "O6": {
+                "percentile": 50,
+                "domain": "O"
+            },
+            "C1": {
+                "percentile": 54,
+                "domain": "C"
+            },
+            "C2": {
+                "percentile": 54,
+                "domain": "C"
+            },
+            "C3": {
+                "percentile": 54,
+                "domain": "C"
+            },
+            "C4": {
+                "percentile": 54,
+                "domain": "C"
+            },
+            "C5": {
+                "percentile": 54,
+                "domain": "C"
+            },
+            "C6": {
+                "percentile": 54,
+                "domain": "C"
+            },
+            "E1": {
+                "percentile": 64,
+                "domain": "E"
+            },
+            "E2": {
+                "percentile": 62,
+                "domain": "E"
+            },
+            "E3": {
+                "percentile": 10,
+                "domain": "E"
+            },
+            "E4": {
+                "percentile": 24,
+                "domain": "E"
+            },
+            "E5": {
+                "percentile": 8,
+                "domain": "E"
+            },
+            "E6": {
+                "percentile": 24,
+                "domain": "E"
+            },
+            "A1": {
+                "percentile": 58,
+                "domain": "A"
+            },
+            "A2": {
+                "percentile": 58,
+                "domain": "A"
+            },
+            "A3": {
+                "percentile": 58,
+                "domain": "A"
+            },
+            "A4": {
+                "percentile": 58,
+                "domain": "A"
+            },
+            "A5": {
+                "percentile": 58,
+                "domain": "A"
+            },
+            "A6": {
+                "percentile": 58,
+                "domain": "A"
+            },
+            "N1": {
+                "percentile": 42,
+                "domain": "N"
+            },
+            "N2": {
+                "percentile": 42,
+                "domain": "N"
+            },
+            "N3": {
+                "percentile": 42,
+                "domain": "N"
+            },
+            "N4": {
+                "percentile": 42,
+                "domain": "N"
+            },
+            "N5": {
+                "percentile": 42,
+                "domain": "N"
+            },
+            "N6": {
+                "percentile": 42,
+                "domain": "N"
+            }
+        }
+    },
+    "quality": {
+        "level": "D",
+        "norms_status": "CALIBRATED"
+    }
+}

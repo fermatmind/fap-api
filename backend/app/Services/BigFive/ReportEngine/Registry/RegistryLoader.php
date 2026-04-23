@@ -30,9 +30,13 @@ final class RegistryLoader
         $root = $this->registryPath ?? base_path('content_packs/BIG5_OCEAN/v2/registry');
         $atomic = [];
         $modifiers = [];
+        $facetGlossary = [];
+        $facetPrecision = [];
         foreach (self::TRAIT_CODES as $traitCode) {
             $atomic[$traitCode] = $this->readJson($root."/atomic/{$traitCode}.json");
             $modifiers[$traitCode] = $this->readJson($root."/modifiers/{$traitCode}.json");
+            $facetGlossary[$traitCode] = $this->readJson($root."/facet_glossary/{$traitCode}.json");
+            $facetPrecision[$traitCode] = $this->readJson($root."/facet_precision/{$traitCode}.json");
         }
 
         $synergies = [];
@@ -49,9 +53,8 @@ final class RegistryLoader
             'atomic' => $atomic,
             'modifiers' => $modifiers,
             'synergies' => $synergies,
-            'facet_precision' => [
-                'N' => $this->readJson($root.'/facet_precision/N.json'),
-            ],
+            'facet_glossary' => $facetGlossary,
+            'facet_precision' => $facetPrecision,
             'action_rules' => [
                 'workplace' => $this->readJson($root.'/action_rules/workplace.json'),
                 'stress_recovery' => $this->readJson($root.'/action_rules/stress_recovery.json'),
