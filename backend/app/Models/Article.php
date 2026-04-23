@@ -223,6 +223,15 @@ class Article extends Model
             return false;
         }
 
+        $workingRevision = $this->workingRevision;
+        if ($workingRevision instanceof ArticleTranslationRevision) {
+            $sourceHash = $this->currentSourceVersionHash();
+
+            return filled($sourceHash)
+                && filled($workingRevision->translated_from_version_hash)
+                && ! hash_equals((string) $sourceHash, (string) $workingRevision->translated_from_version_hash);
+        }
+
         $source ??= $this->sourceArticle();
         if (! $source instanceof self) {
             return false;
@@ -244,7 +253,19 @@ class Article extends Model
 
     public function currentSourceVersionHash(): ?string
     {
-        return $this->sourceArticle()?->source_version_hash;
+        $source = $this->sourceArticle();
+
+        if (! $source instanceof self) {
+            return null;
+        }
+
+        $source->loadMissing('workingRevision');
+        if ($source->workingRevision instanceof ArticleTranslationRevision
+            && filled($source->workingRevision->source_version_hash)) {
+            return (string) $source->workingRevision->source_version_hash;
+        }
+
+        return $source->source_version_hash;
     }
 
     public function computeSourceVersionHash(): string
