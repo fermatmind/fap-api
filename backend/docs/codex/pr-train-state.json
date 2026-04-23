@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T16:08:00.000Z",
+  "updated_at": "2026-04-23T16:12:00.000Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -3780,7 +3780,7 @@
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "pr_open",
       "branch": "codex/unified-multilingual-cms-backbone",
-      "commit_sha": "16c880170c74d9873602ea3b938509861d4053ae",
+      "commit_sha": "a390964caa5bfc0d0879365a78316b8e70f44df6",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/995",
       "checks": {
         "local": [
@@ -3809,7 +3809,28 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24844841643/job/72728861183"
+          },
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24844820246/job/72728781274"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24844841643/job/72728872175"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24844820246/job/72728794297"
+          }
+        ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
