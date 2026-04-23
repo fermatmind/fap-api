@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T13:17:04.667Z",
+  "updated_at": "2026-04-23T13:19:05.960Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -3535,10 +3535,10 @@
     "PR-BIG5-LIFECYCLE-COPY-LIBRARY-V1": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "status": "local_checks_passed",
+      "status": "github_checks_failed_billing_block",
       "branch": "codex/big5-lifecycle-copy-library-v1",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "0dbf10e43ee7f2ab593a493207eeeb3703dae54a",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/990",
       "checks": {
         "local": [
           {
@@ -3578,9 +3578,32 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed_external_billing_or_runner_startup_block",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24837463433/job/72701636085",
+            "reason": "GitHub job completed with no steps and no downloadable logs; verify-mbti was skipped. This matches the existing repo billing/spending-limit runner startup failure pattern."
+          },
+          {
+            "name": "hygiene",
+            "status": "failed_external_billing_or_runner_startup_block",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24837476157/job/72701684493",
+            "reason": "GitHub job completed with no steps and no downloadable logs; verify-mbti was skipped. This matches the existing repo billing/spending-limit runner startup failure pattern."
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped_due_hygiene_startup_failure",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24837463433/job/72701647461"
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped_due_hygiene_startup_failure",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24837476157/job/72701696492"
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "Remote GitHub checks failed before running any job steps/logs; local validation passed. PR is not mergeable until required GitHub checks are green or the external runner/billing block is resolved.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
@@ -3593,6 +3616,10 @@
         {
           "at": "2026-04-23T13:17:04.667Z",
           "summary": "Re-reviewed lifecycle staging package; fixed seed/source metadata and clarified non-runtime CTA review semantics. All local validation passed."
+        },
+        {
+          "at": "2026-04-23T13:19:05.960Z",
+          "summary": "Opened PR #990 and recorded remote hygiene startup failures with no steps/logs; local validation remains green."
         }
       ]
     }
