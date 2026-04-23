@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T04:04:40.880279Z",
+  "updated_at": "2026-04-23T04:06:10.554978Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -3362,9 +3362,9 @@
     "PR-BIG5-REPORT-ENGINE-LIVE-BRIDGE": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_verification_passed_pending_github_checks",
+      "status": "github_checks_failed_billing_block",
       "branch": "codex/big5-report-engine-live-bridge",
-      "commit_sha": "5bb740cdad256263fc49329071c857f0792d2f90",
+      "commit_sha": "02d19e281da4ceff6b4f143ee24436743a339f50",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/983",
       "checks": {
         "local": [
@@ -3407,18 +3407,18 @@
           {
             "name": "hygiene",
             "status": "failed",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24815864271/job/72629993755",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24816085044/job/72630672431",
             "reason": "GitHub Actions job was not started because recent account payments failed or the spending limit needs to be increased."
           },
           {
             "name": "verify-mbti-${{ matrix.mode }}",
             "status": "skipped",
-            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24815864271/job/72629998107",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24816085044/job/72630677760",
             "reason": "Skipped because hygiene did not start due to GitHub billing/spending-limit block."
           }
         ]
       },
-      "failure_reason": "Local verification passed after scoped bridge safety fix. Awaiting GitHub checks; previous remote failures were account billing/spending-limit blocks, not PR4A code failures.",
+      "failure_reason": "Remote GitHub checks are blocked by account billing/spending-limit, not by PR4A code. Local verification passed after bridge safety recheck.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
@@ -3427,6 +3427,10 @@
         {
           "at": "2026-04-23T04:04:40.880063Z",
           "summary": "Re-review fix added exception isolation around v2 bridge generation and an incomplete live score context regression test."
+        },
+        {
+          "at": "2026-04-23T04:06:10.554780Z",
+          "summary": "Remote CI for pushed recheck head failed to start because GitHub billing/spending-limit blocked the hygiene job; local verification remained green."
         }
       ]
     }
