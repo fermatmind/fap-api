@@ -1,0 +1,154 @@
+{
+  "schema": "fap.big5.lifecycle_copy_library.v1.surface_pack",
+  "version": "v1",
+  "surface": "pdf",
+  "description": "Big Five PDF 承接层。只负责把 PDF 定位为留存、复盘、讨论和分享材料，不写成下载功能说明或商业解锁文案。",
+  "entries": [
+    {
+      "entry_id": "pdf_ready_archive_and_review",
+      "surface": "pdf",
+      "placement": "result_tools_panel",
+      "audience_state": "pdf_ready_user",
+      "when": {
+        "pdf_available": true
+      },
+      "title": "保存一份可回看的观察档案",
+      "body": "PDF 适合在两种时候使用：几周后重新对照这次结果，或者把关键判断带进职业、关系、成长讨论。它不是纪念品，而是一份能保留上下文的复盘材料。",
+      "primary_cta_label": "保存 PDF",
+      "secondary_cta_label": "查看历史",
+      "notes": {
+        "source_entry_id": "pdf_ready_archive_and_review",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "surface:pdf",
+          "secondary": "surface:history"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_style_and_copy_rules_v1.md#3",
+          "continuation.json#continuation_pdf_archive"
+        ],
+        "normalization_notes": "强调 PDF 的留存和复盘价值，避免纯下载提示。"
+      }
+    },
+    {
+      "entry_id": "pdf_ready_discussion_copy",
+      "surface": "pdf",
+      "placement": "result_continuation_strip",
+      "audience_state": "pdf_ready_user",
+      "when": {
+        "pdf_available": true,
+        "compare_available": true
+      },
+      "title": "适合带进一次认真讨论",
+      "body": "截图适合分享一瞬间的感受，PDF 更适合带着完整上下文去讨论。无论对象是教练、咨询师、伴侣，还是未来某个阶段的自己，一份可保存的版本都更能保留这次结果的结构和细节。",
+      "primary_cta_label": "保存 PDF",
+      "secondary_cta_label": "查看对比",
+      "notes": {
+        "source_entry_id": "pdf_ready_discussion_copy",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "surface:pdf",
+          "secondary": "surface:compare"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_style_and_copy_rules_v1.md#1",
+          "continuation.json#continuation_pdf_archive"
+        ],
+        "normalization_notes": "保留讨论材料属性，不扩展成关系或职业正文。"
+      }
+    },
+    {
+      "entry_id": "pdf_ready_coaching_and_reflection",
+      "surface": "pdf",
+      "placement": "result_footer",
+      "audience_state": "full_report_user",
+      "when": {
+        "pdf_available": true,
+        "top_priority_scenario": "workplace"
+      },
+      "title": "把这一版留给后续复盘",
+      "body": "真正有帮助的往往不是记得报告大概写了什么，而是在需要时能把当时的结构重新拿出来看。尤其当重点落在工作节奏、边界表达和恢复方式时，完整保存的一版会比临时回忆更可靠。",
+      "primary_cta_label": "保存 PDF",
+      "secondary_cta_label": "查看行动建议",
+      "notes": {
+        "source_entry_id": "pdf_ready_coaching_and_reflection",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "surface:pdf",
+          "secondary": "anchor:action_plan"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "career_next_step.json",
+          "growth_next_step.json"
+        ],
+        "normalization_notes": "适合与 career/growth 方向衔接，但不生成职业或成长正文。"
+      }
+    },
+    {
+      "entry_id": "pdf_unavailable_explain",
+      "surface": "pdf",
+      "placement": "result_tools_panel",
+      "audience_state": "preview_user",
+      "when": {
+        "pdf_available": false
+      },
+      "title": "当前不可保存，也不影响结果使用",
+      "body": "PDF 只是结果的一种留存方式，不是结果本身。即使当前不可用，你仍然可以先阅读、查看历史、把最有用的判断落到行动上；等它可用时，再整理成长期可回看的版本。",
+      "primary_cta_label": "查看历史",
+      "secondary_cta_label": "重新测试",
+      "notes": {
+        "source_entry_id": "pdf_unavailable_explain",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "surface:history",
+          "secondary": "surface:retake"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "避免把 PDF 不可用写成挫败或解锁压力。"
+      }
+    },
+    {
+      "entry_id": "pdf_boundary_note",
+      "surface": "pdf",
+      "placement": "result_footer",
+      "audience_state": "pdf_ready_user",
+      "when": {
+        "pdf_available": true,
+        "report_mode": "full_report_user"
+      },
+      "title": "保存不是结束，而是留下对照点",
+      "body": "下载一次不等于完成使用。PDF 的价值在于未来某个阶段重新打开，看看自己是否还在同样的节奏里，哪些建议已经起效，哪些仍需要调整。它的重点不在拥有，而在复看。",
+      "primary_cta_label": "保存 PDF",
+      "secondary_cta_label": "查看历史",
+      "notes": {
+        "source_entry_id": "pdf_boundary_note",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "surface:pdf",
+          "secondary": "surface:history"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_style_and_copy_rules_v1.md#1",
+          "history.json#history_revisit_after_cycle"
+        ],
+        "normalization_notes": "作为 PDF 行为边界说明，避免商业化收口。"
+      }
+    }
+  ]
+}
