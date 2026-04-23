@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T14:08:28.196Z",
+  "updated_at": "2026-04-23T14:55:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -3727,6 +3727,53 @@
           "summary": "Opened PR #992 and recorded remote hygiene startup failures with no steps/logs; local validation remains green."
         }
       ]
+    },
+    "PR-ARTICLE-TRANSLATION-OPS-COMPLETION": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/multilingual-editorial-article-ops",
+      "commit_sha": "600ce495d06cff86ac4f2a6292e9fe3d37db7129",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/994",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Contracts/Cms/ArticleMachineTranslationProvider.php app/Services/Cms/DisabledArticleMachineTranslationProvider.php app/Services/Cms/ArticleTranslationWorkflowException.php app/Services/Cms/ArticleTranslationWorkflowService.php app/Filament/Ops/Pages/ArticleTranslationOpsPage.php app/Providers/AppServiceProvider.php app/Services/Ops/ArticleTranslationOpsService.php config/services.php tests/Feature/Ops/ArticleTranslationOpsPageTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Ops/ArticleTranslationOpsPageTest.php tests/Feature/V0_5/ArticlePublicApiTest.php tests/Feature/Ops/ArticleTranslationRevisionContractTest.php tests/Feature/Ops/ContentCmsProductLayerTest.php tests/Feature/Architecture/ServiceLayerBoundaryTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan fap:schema:verify",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test --testsuite=Feature",
+            "status": "failed_outside_scope",
+            "failure_reason": "Existing full-suite failures outside article translation ops scope: baseline import counts, MBTI prewarm/fixture/telemetry, and unrelated Ops page text assertions. Scoped tests passed."
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   },
   "prs": {

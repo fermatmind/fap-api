@@ -202,11 +202,32 @@
                             <x-filament::button size="xs" color="gray" tag="a" href="{{ $action['url'] }}">
                                 {{ $action['label'] }}
                             </x-filament::button>
+                        @elseif (($action['wire_action'] ?? null) && ($action['enabled'] ?? false))
+                            <x-filament::button
+                                size="xs"
+                                color="primary"
+                                type="button"
+                                wire:click="{{ $action['wire_action'] }}({{ (int) $action['article_id'] }}, @js($action['target_locale'] ?? ''))"
+                            >
+                                {{ $action['label'] }}
+                            </x-filament::button>
                         @else
                             <span class="ops-control-hint">{{ $action['label'] }} disabled: {{ $action['reason'] }}</span>
                         @endif
                     @endforeach
                 </div>
+
+                <x-filament-ops::ops-field-grid
+                    :fields="[
+                        ['label' => 'Target locales', 'value' => implode(', ', $selectedGroup['coverage']['target_locales'] ?? []) ?: 'None', 'state' => 'info'],
+                        ['label' => 'Existing locales', 'value' => implode(', ', $selectedGroup['coverage']['existing_locales'] ?? []) ?: 'None', 'state' => 'info'],
+                        ['label' => 'Published locales', 'value' => implode(', ', $selectedGroup['coverage']['published_locales'] ?? []) ?: 'None', 'state' => 'success'],
+                        ['label' => 'Machine draft locales', 'value' => implode(', ', $selectedGroup['coverage']['machine_draft_locales'] ?? []) ?: 'None', 'state' => 'info'],
+                        ['label' => 'Human review locales', 'value' => implode(', ', $selectedGroup['coverage']['human_review_locales'] ?? []) ?: 'None', 'state' => 'warning'],
+                        ['label' => 'Stale locales', 'value' => implode(', ', $selectedGroup['coverage']['stale_locales'] ?? []) ?: 'None', 'state' => empty($selectedGroup['coverage']['stale_locales'] ?? []) ? 'success' : 'warning'],
+                        ['label' => 'Missing target locales', 'value' => implode(', ', $selectedGroup['coverage']['missing_target_locales'] ?? []) ?: 'None', 'state' => empty($selectedGroup['coverage']['missing_target_locales'] ?? []) ? 'success' : 'warning'],
+                    ]"
+                />
 
                 <div class="ops-table-shell">
                     <table class="ops-table">
@@ -243,11 +264,21 @@
                                     <td>
                                         <p class="ops-control-hint">source {{ \Illuminate\Support\Str::limit((string) ($locale['source_version_hash'] ?? 'missing'), 12, '') }}</p>
                                         <p class="ops-control-hint">from {{ \Illuminate\Support\Str::limit((string) ($locale['translated_from_version_hash'] ?? 'missing'), 12, '') }}</p>
+                                        @foreach (($locale['compare_summary'] ?? []) as $line)
+                                            <p class="ops-control-hint">{{ $line }}</p>
+                                        @endforeach
                                     </td>
                                     <td>
                                         <x-filament.ops.shared.status-pill :state="$locale['ownership_ok'] ? 'success' : 'failed'" :label="$locale['ownership_ok'] ? 'ok' : 'mismatch'" />
                                         @foreach (($locale['ownership_issues'] ?? []) as $issue)
                                             <p class="ops-control-hint">{{ $issue }}</p>
+                                        @endforeach
+                                        <x-filament.ops.shared.status-pill
+                                            :state="($locale['preflight']['ok'] ?? true) ? 'success' : 'failed'"
+                                            :label="($locale['preflight']['ok'] ?? true) ? 'preflight ok' : 'preflight blocked'"
+                                        />
+                                        @foreach (($locale['preflight']['blockers'] ?? []) as $blocker)
+                                            <p class="ops-control-hint">{{ $blocker }}</p>
                                         @endforeach
                                     </td>
                                     <td>

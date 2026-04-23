@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Ops;
 
+use App\Contracts\Cms\ArticleMachineTranslationProvider;
 use App\Filament\Ops\Pages\ArticleTranslationOpsPage;
 use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Models\AuditLog;
 use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Services\Cms\ArticleTranslationWorkflowException;
+use App\Services\Cms\ArticleTranslationWorkflowService;
 use App\Services\Ops\ArticleTranslationOpsService;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
@@ -218,6 +222,233 @@ final class ArticleTranslationOpsPageTest extends TestCase
         $this->assertSame('source-only-published-fixture', $dashboard['groups'][0]['slug']);
     }
 
+    public function test_translation_workflow_creates_machine_draft_with_public_ownership_and_audit(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $this->app->instance(ArticleMachineTranslationProvider::class, new FakeArticleMachineTranslationProvider);
+
+        $source = $this->createSourceOnlyGroup('create-machine-draft-fixture');
+
+        $result = app(ArticleTranslationWorkflowService::class)->createMachineDraft($source, 'en', (int) $admin->id);
+
+        $translation = $result['article']->fresh(['workingRevision', 'seoMeta']);
+        $revision = $translation->workingRevision;
+        $seoMeta = $translation->seoMeta;
+
+        $this->assertSame(0, (int) $translation->org_id);
+        $this->assertSame('en', (string) $translation->locale);
+        $this->assertSame((int) $source->id, (int) $translation->source_article_id);
+        $this->assertSame((string) $source->translation_group_id, (string) $translation->translation_group_id);
+        $this->assertSame(Article::TRANSLATION_STATUS_MACHINE_DRAFT, (string) $translation->translation_status);
+        $this->assertSame('draft', (string) $translation->status);
+        $this->assertFalse((bool) $translation->is_public);
+        $this->assertInstanceOf(ArticleTranslationRevision::class, $revision);
+        $this->assertSame(0, (int) $revision->org_id);
+        $this->assertSame(ArticleTranslationRevision::STATUS_MACHINE_DRAFT, (string) $revision->revision_status);
+        $this->assertSame((string) $source->source_version_hash, (string) $revision->translated_from_version_hash);
+        $this->assertInstanceOf(ArticleSeoMeta::class, $seoMeta);
+        $this->assertSame(0, (int) $seoMeta->org_id);
+        $this->assertSame('en', (string) $seoMeta->locale);
+        $this->assertTrue(AuditLog::query()->where('action', 'article_translation_draft_created')->exists());
+    }
+
+    public function test_translation_ops_page_create_draft_action_uses_workflow_service(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $this->app->instance(ArticleMachineTranslationProvider::class, new FakeArticleMachineTranslationProvider);
+
+        $source = $this->createSourceOnlyGroup('livewire-create-machine-draft-fixture');
+
+        Livewire::test(ArticleTranslationOpsPage::class)
+            ->call('createTranslationDraft', (int) $source->id, 'en')
+            ->assertOk();
+
+        $translation = Article::query()
+            ->withoutGlobalScopes()
+            ->where('translation_group_id', (string) $source->translation_group_id)
+            ->where('locale', 'en')
+            ->with(['workingRevision', 'seoMeta'])
+            ->first();
+
+        $this->assertInstanceOf(Article::class, $translation);
+        $this->assertSame(0, (int) $translation->org_id);
+        $this->assertSame(Article::TRANSLATION_STATUS_MACHINE_DRAFT, (string) $translation->translation_status);
+        $this->assertSame(0, (int) $translation->workingRevision->org_id);
+        $this->assertSame(0, (int) $translation->seoMeta->org_id);
+    }
+
+    public function test_translation_workflow_resyncs_stale_translation_under_same_canonical_article(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $this->app->instance(ArticleMachineTranslationProvider::class, new FakeArticleMachineTranslationProvider('resynced'));
+
+        $group = $this->createPublishedTranslationGroup('resync-stale-fixture');
+        $translationId = (int) $group['translation']->id;
+        $publishedRevisionId = (int) $group['translation']->published_revision_id;
+
+        $group['source']->forceFill([
+            'content_md' => "更新中文正文\n\n参考文献：https://example.test/new",
+        ])->save();
+        $newSourceHash = (string) $group['source']->fresh()->source_version_hash;
+        $group['sourceRevision']->forceFill([
+            'source_version_hash' => $newSourceHash,
+            'translated_from_version_hash' => $newSourceHash,
+        ])->save();
+
+        $result = app(ArticleTranslationWorkflowService::class)->resyncFromSource($group['translation'], (int) $admin->id);
+
+        $translation = $result['article']->fresh(['workingRevision', 'publishedRevision']);
+        $revision = $translation->workingRevision;
+
+        $this->assertSame($translationId, (int) $translation->id);
+        $this->assertSame($publishedRevisionId, (int) $translation->published_revision_id);
+        $this->assertInstanceOf(ArticleTranslationRevision::class, $revision);
+        $this->assertNotSame($publishedRevisionId, (int) $revision->id);
+        $this->assertSame($publishedRevisionId, (int) $revision->supersedes_revision_id);
+        $this->assertSame(2, (int) $revision->revision_number);
+        $this->assertSame(ArticleTranslationRevision::STATUS_MACHINE_DRAFT, (string) $revision->revision_status);
+        $this->assertSame($newSourceHash, (string) $revision->translated_from_version_hash);
+        $this->assertSame(1, Article::query()
+            ->withoutGlobalScopes()
+            ->where('translation_group_id', (string) $group['source']->translation_group_id)
+            ->where('locale', 'en')
+            ->count());
+        $this->assertTrue(AuditLog::query()->where('action', 'article_translation_resynced')->exists());
+    }
+
+    public function test_translation_publish_guardrails_block_missing_reference_markers(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        $source = $this->createSourceOnlyGroup('preflight-reference-fixture');
+        $source->forceFill([
+            'content_md' => "中文正文\n\n参考文献：https://example.test/source",
+        ])->save();
+        $sourceHash = (string) $source->fresh()->source_version_hash;
+        $source->workingRevision->forceFill([
+            'source_version_hash' => $sourceHash,
+            'translated_from_version_hash' => $sourceHash,
+            'content_md' => $source->content_md,
+        ])->save();
+
+        $translation = Article::query()->create([
+            'org_id' => 0,
+            'slug' => (string) $source->slug,
+            'locale' => 'en',
+            'translation_group_id' => (string) $source->translation_group_id,
+            'source_locale' => 'zh-CN',
+            'translation_status' => Article::TRANSLATION_STATUS_HUMAN_REVIEW,
+            'translated_from_article_id' => (int) $source->id,
+            'source_article_id' => (int) $source->id,
+            'translated_from_version_hash' => $sourceHash,
+            'title' => 'English preflight fixture',
+            'excerpt' => 'English excerpt',
+            'content_md' => 'English body without markers',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => false,
+        ]);
+        $revision = $this->createRevision($translation, [
+            'source_article_id' => (int) $source->id,
+            'revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+            'source_version_hash' => $sourceHash,
+            'translated_from_version_hash' => $sourceHash,
+            'content_md' => 'English body without markers',
+        ]);
+        $translation->forceFill([
+            'working_revision_id' => (int) $revision->id,
+        ])->saveQuietly();
+
+        $preflight = app(ArticleTranslationWorkflowService::class)->preflight($translation->fresh(['workingRevision', 'sourceCanonical.workingRevision']));
+
+        $this->assertFalse($preflight['ok']);
+        $this->assertContains('references/citations presence check failed', $preflight['blockers']);
+        $this->expectException(ArticleTranslationWorkflowException::class);
+
+        app(ArticleTranslationWorkflowService::class)->approveTranslation($translation);
+    }
+
+    public function test_translation_workflow_promotes_approves_and_publishes_with_guardrails(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_WRITE,
+            PermissionNames::ADMIN_APPROVAL_REVIEW,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $this->app->instance(ArticleMachineTranslationProvider::class, new FakeArticleMachineTranslationProvider);
+
+        $source = $this->createSourceOnlyGroup('publish-translation-fixture');
+        $workflow = app(ArticleTranslationWorkflowService::class);
+        $draft = $workflow->createMachineDraft($source, 'en', (int) $admin->id)['article'];
+        $workflow->promoteToHumanReview($draft);
+        $workflow->approveTranslation($draft);
+        $publishedRevision = $workflow->publishTranslation($draft);
+        $translation = $draft->fresh(['workingRevision', 'publishedRevision']);
+
+        $this->assertSame('published', (string) $translation->status);
+        $this->assertTrue((bool) $translation->is_public);
+        $this->assertNotNull($translation->published_at);
+        $this->assertSame((int) $publishedRevision->id, (int) $translation->published_revision_id);
+        $this->assertSame(Article::TRANSLATION_STATUS_PUBLISHED, (string) $translation->translation_status);
+        $this->assertSame(ArticleTranslationRevision::STATUS_PUBLISHED, (string) $publishedRevision->revision_status);
+        $this->assertTrue(AuditLog::query()->where('action', 'article_translation_published')->exists());
+    }
+
+    public function test_translation_ops_console_exposes_coverage_compare_and_preflight_summary(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        $this->createPublishedTranslationGroup('console-summary-fixture');
+
+        $dashboard = app(ArticleTranslationOpsService::class)->dashboard([
+            'slug' => 'console-summary-fixture',
+        ]);
+
+        $group = $dashboard['groups'][0];
+        $targetLocale = collect($group['locales'])->first(fn (array $locale): bool => $locale['locale'] === 'en');
+
+        $this->assertSame(['zh-CN', 'en'], $group['coverage']['existing_locales']);
+        $this->assertSame(['zh-CN', 'en'], $group['coverage']['published_locales']);
+        $this->assertSame([], $group['coverage']['missing_target_locales']);
+        $this->assertContains('source/target hash current', $targetLocale['compare_summary']);
+        $this->assertTrue($targetLocale['preflight']['ok']);
+    }
+
+    public function test_translation_ops_console_uses_configured_target_locale_coverage(): void
+    {
+        config()->set('services.article_translation.target_locales', ['en', 'ja']);
+
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        $this->createPublishedTranslationGroup('configured-target-locale-fixture');
+
+        $dashboard = app(ArticleTranslationOpsService::class)->dashboard([
+            'slug' => 'configured-target-locale-fixture',
+        ]);
+        $group = $dashboard['groups'][0];
+
+        $this->assertSame(['en', 'ja'], $group['coverage']['target_locales']);
+        $this->assertSame(['ja'], $group['coverage']['missing_target_locales']);
+        $this->assertContains('missing ja locale', collect($group['alerts'])->pluck('label')->all());
+    }
+
     /**
      * @return array{source:Article,translation:Article,sourceRevision:ArticleTranslationRevision,translationRevision:ArticleTranslationRevision}
      */
@@ -386,6 +617,35 @@ final class ArticleTranslationOpsPageTest extends TestCase
             'ops_org_id' => (int) $org->id,
             'ops_locale' => 'en',
             'ops_admin_totp_verified_user_id' => (int) $admin->id,
+        ];
+    }
+}
+
+final class FakeArticleMachineTranslationProvider implements ArticleMachineTranslationProvider
+{
+    public function __construct(private readonly string $suffix = 'translated') {}
+
+    public function isConfigured(): bool
+    {
+        return true;
+    }
+
+    public function unavailableReason(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @return array{title:string,excerpt:string|null,content_md:string,seo_title:string|null,seo_description:string|null}
+     */
+    public function translate(Article $source, string $targetLocale): array
+    {
+        return [
+            'title' => 'English '.$this->suffix.' '.$source->slug,
+            'excerpt' => 'English excerpt for '.$source->slug,
+            'content_md' => "English body for {$source->slug}.\n\nReferences: https://example.test/reference",
+            'seo_title' => 'SEO '.$source->slug,
+            'seo_description' => 'SEO description '.$source->slug,
         ];
     }
 }

@@ -116,6 +116,13 @@ return [
         ),
     ],
 
+    'article_translation' => [
+        'target_locales' => array_values(array_filter(array_map(
+            static fn ($locale) => trim((string) $locale),
+            explode(',', (string) env('ARTICLE_TRANSLATION_TARGET_LOCALES', 'en'))
+        ))),
+    ],
+
     'integrations' => [
         'webhook_tolerance_seconds' => (int) env('INTEGRATIONS_WEBHOOK_TOLERANCE_SECONDS', 300),
         'allow_unsigned_without_secret' => (bool) env('INTEGRATIONS_WEBHOOK_ALLOW_UNSIGNED', false),

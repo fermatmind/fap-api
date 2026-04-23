@@ -9,6 +9,7 @@ use App\Filament\Ops\Support\ContentAccess;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Services\Cms\ArticleTranslationWorkflowService;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -96,6 +97,7 @@ final class ArticleTranslationOpsService
             ->sortBy(fn (Article $article): string => ($this->isSource($article) ? '0-' : '1-').(string) $article->locale)
             ->map(fn (Article $article): array => $this->summarizeLocale($article, $source, $sourceHash, $revisions))
             ->values();
+        $coverage = $this->coverage($locales, $this->targetLocales());
 
         $staleLocales = $locales->filter(fn (array $locale): bool => (bool) $locale['is_stale']);
         $publishedLocales = $locales->filter(fn (array $locale): bool => (bool) $locale['is_published']);
@@ -118,6 +120,7 @@ final class ArticleTranslationOpsService
             'locales' => $locales->all(),
             'locale_codes' => $locales->pluck('locale')->all(),
             'published_locales' => $publishedLocales->pluck('locale')->all(),
+            'coverage' => $coverage,
             'stale_locales_count' => $staleLocales->count(),
             'has_working_revision' => $locales->contains(fn (array $locale): bool => (bool) $locale['working_revision_id']),
             'has_published_revision' => $locales->contains(fn (array $locale): bool => (bool) $locale['published_revision_id']),
@@ -128,7 +131,7 @@ final class ArticleTranslationOpsService
             'orphan_revision_count' => $orphanRevisions->count(),
             'alerts' => $alerts,
             'revision_history' => $this->revisionHistory($revisions),
-            'actions' => $this->groupActions($source),
+            'actions' => $this->groupActions($source, $coverage['missing_target_locales']),
         ];
     }
 
@@ -177,6 +180,8 @@ final class ArticleTranslationOpsService
             'ownership_issues' => $ownershipIssues,
             'edit_url' => ArticleResource::getUrl('edit', ['record' => $article]),
             'revision_history' => $this->revisionHistory($articleRevisions),
+            'compare_summary' => $this->compareSummary($article, $source, $workingRevision, $publishedRevision, $sourceHash, $isStale),
+            'preflight' => $isSource ? ['ok' => true, 'blockers' => []] : app(ArticleTranslationWorkflowService::class)->preflight($article),
             'actions' => $this->localeActions($article, $status, $isStale, $isSource),
         ];
     }
@@ -303,8 +308,9 @@ final class ArticleTranslationOpsService
         )) {
             $alerts[] = ['label' => 'missing published revision', 'state' => 'failed'];
         }
-        if (! in_array(self::DEFAULT_TARGET_LOCALE, $locales->pluck('locale')->all(), true)) {
-            $alerts[] = ['label' => 'missing en locale', 'state' => 'warning'];
+        $missingTargetLocales = array_values(array_diff($this->targetLocales(), $locales->pluck('locale')->all()));
+        foreach ($missingTargetLocales as $missingLocale) {
+            $alerts[] = ['label' => 'missing '.$missingLocale.' locale', 'state' => 'warning'];
         }
         if (! empty($ownershipIssues)) {
             $alerts[] = ['label' => 'ownership mismatch', 'state' => 'failed'];
@@ -339,10 +345,20 @@ final class ArticleTranslationOpsService
     }
 
     /**
+     * @param  list<string>  $missingTargetLocales
      * @return list<array<string, mixed>>
      */
-    private function groupActions(?Article $source): array
+    private function groupActions(?Article $source, array $missingTargetLocales): array
     {
+        $workflow = app(ArticleTranslationWorkflowService::class);
+        $defaultTargetLocale = in_array(self::DEFAULT_TARGET_LOCALE, $missingTargetLocales, true)
+            ? self::DEFAULT_TARGET_LOCALE
+            : ($missingTargetLocales[0] ?? self::DEFAULT_TARGET_LOCALE);
+        $canCreate = $source instanceof Article
+            && ContentAccess::canWrite()
+            && in_array($defaultTargetLocale, $missingTargetLocales, true)
+            && $workflow->canGenerateMachineDraft();
+
         return [
             [
                 'label' => 'Open source article',
@@ -352,15 +368,22 @@ final class ArticleTranslationOpsService
             ],
             [
                 'label' => 'Create translation draft',
-                'enabled' => false,
+                'enabled' => $canCreate,
+                'wire_action' => 'createTranslationDraft',
+                'article_id' => $source instanceof Article ? (int) $source->id : null,
+                'target_locale' => $defaultTargetLocale,
                 'url' => null,
-                'reason' => 'Draft creation remains in the existing article translation workflow.',
+                'reason' => $canCreate
+                    ? null
+                    : ($workflow->canGenerateMachineDraft()
+                        ? 'Target locale already exists or write permission is missing.'
+                        : (string) $workflow->machineDraftUnavailableReason()),
             ],
             [
                 'label' => 'Re-sync from source',
                 'enabled' => false,
                 'url' => null,
-                'reason' => 'Source re-sync automation is not enabled in v1.',
+                'reason' => 'Use the per-locale target action so lineage stays tied to the canonical target article.',
             ],
         ];
     }
@@ -370,6 +393,9 @@ final class ArticleTranslationOpsService
      */
     private function localeActions(Article $article, string $status, bool $isStale, bool $isSource): array
     {
+        $workflow = app(ArticleTranslationWorkflowService::class);
+        $preflight = $isSource ? ['ok' => true, 'blockers' => []] : $workflow->preflight($article);
+
         return [
             [
                 'label' => 'Open target article',
@@ -395,19 +421,108 @@ final class ArticleTranslationOpsService
                     && ! $isSource
                     && ! $isStale
                     && $article->status !== 'published'
-                    && $article->workingRevision instanceof ArticleTranslationRevision,
+                    && $article->workingRevision instanceof ArticleTranslationRevision
+                    && $article->workingRevision->revision_status === ArticleTranslationRevision::STATUS_APPROVED
+                    && (bool) $preflight['ok'],
                 'wire_action' => 'publishCurrentRevision',
                 'article_id' => (int) $article->id,
-                'reason' => 'Uses the existing article release gate and approval checks.',
+                'reason' => (bool) $preflight['ok']
+                    ? 'Uses translation preflight and the existing release audit path.'
+                    : 'Preflight blocked: '.implode('; ', $preflight['blockers']),
+            ],
+            [
+                'label' => 'Approve translation',
+                'enabled' => ContentAccess::canReview()
+                    && ! $isSource
+                    && ! $isStale
+                    && $article->workingRevision instanceof ArticleTranslationRevision
+                    && $article->workingRevision->revision_status === ArticleTranslationRevision::STATUS_HUMAN_REVIEW
+                    && (bool) $preflight['ok'],
+                'wire_action' => 'approveTranslation',
+                'article_id' => (int) $article->id,
+                'reason' => (bool) $preflight['ok']
+                    ? 'Only human_review translations can be approved.'
+                    : 'Preflight blocked: '.implode('; ', $preflight['blockers']),
+            ],
+            [
+                'label' => 'Re-sync from source',
+                'enabled' => ContentAccess::canWrite()
+                    && ! $isSource
+                    && $isStale
+                    && $workflow->canGenerateMachineDraft(),
+                'wire_action' => 'resyncFromSource',
+                'article_id' => (int) $article->id,
+                'reason' => $workflow->canGenerateMachineDraft()
+                    ? 'Only stale target translations need re-sync.'
+                    : (string) $workflow->machineDraftUnavailableReason(),
             ],
             [
                 'label' => 'Archive stale revision',
-                'enabled' => false,
-                'wire_action' => null,
+                'enabled' => ContentAccess::canWrite()
+                    && ! $isSource
+                    && $isStale
+                    && $article->workingRevision instanceof ArticleTranslationRevision
+                    && (int) $article->working_revision_id !== (int) $article->published_revision_id,
+                'wire_action' => 'archiveStaleRevision',
                 'article_id' => (int) $article->id,
-                'reason' => 'Archive automation is intentionally disabled in v1.',
+                'reason' => 'Only non-published stale working revisions can be archived.',
             ],
         ];
+    }
+
+    /**
+     * @param  Collection<int, array<string, mixed>>  $locales
+     * @return array<string, mixed>
+     */
+    private function coverage(Collection $locales, array $targetLocales): array
+    {
+        $localeCodes = $locales->pluck('locale')->all();
+        $missingTargetLocales = array_values(array_diff($targetLocales, $localeCodes));
+        $sourceLocale = $locales->first(fn (array $locale): bool => (bool) $locale['is_source']);
+
+        return [
+            'source_locale' => (string) ($sourceLocale['locale'] ?? ''),
+            'target_locales' => $targetLocales,
+            'existing_locales' => $localeCodes,
+            'published_locales' => $locales->filter(fn (array $locale): bool => (bool) $locale['is_published'])->pluck('locale')->all(),
+            'machine_draft_locales' => $locales->filter(fn (array $locale): bool => $locale['translation_status'] === Article::TRANSLATION_STATUS_MACHINE_DRAFT)->pluck('locale')->all(),
+            'human_review_locales' => $locales->filter(fn (array $locale): bool => $locale['translation_status'] === Article::TRANSLATION_STATUS_HUMAN_REVIEW)->pluck('locale')->all(),
+            'stale_locales' => $locales->filter(fn (array $locale): bool => (bool) $locale['is_stale'])->pluck('locale')->all(),
+            'missing_target_locales' => $missingTargetLocales,
+        ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function compareSummary(
+        Article $article,
+        ?Article $source,
+        ?ArticleTranslationRevision $workingRevision,
+        ?ArticleTranslationRevision $publishedRevision,
+        ?string $sourceHash,
+        bool $isStale
+    ): array {
+        $summary = [];
+        $summary[] = 'source_hash='.($this->shortHash($sourceHash) ?? 'missing');
+        $summary[] = 'translated_from='.($this->shortHash($workingRevision?->translated_from_version_hash) ?? 'missing');
+        $summary[] = $isStale ? 'source changed after target revision' : 'source/target hash current';
+
+        if ($workingRevision instanceof ArticleTranslationRevision && $publishedRevision instanceof ArticleTranslationRevision) {
+            $summary[] = (int) $workingRevision->id === (int) $publishedRevision->id
+                ? 'working revision is published revision'
+                : 'working revision differs from latest published revision';
+        } elseif ($workingRevision instanceof ArticleTranslationRevision) {
+            $summary[] = 'working revision exists; no published revision';
+        } else {
+            $summary[] = 'working revision missing';
+        }
+
+        if ($source instanceof Article) {
+            $summary[] = 'source #'.$source->id.' -> '.$article->locale.' #'.$article->id;
+        }
+
+        return $summary;
     }
 
     /**
@@ -516,7 +631,8 @@ final class ArticleTranslationOpsService
     {
         $locales = $articles
             ->pluck('locale')
-            ->merge(['zh-CN', self::DEFAULT_TARGET_LOCALE])
+            ->merge(['zh-CN'])
+            ->merge($this->targetLocales())
             ->filter()
             ->map(fn (mixed $locale): string => (string) $locale)
             ->unique()
@@ -608,5 +724,20 @@ final class ArticleTranslationOpsService
         }
 
         return Str::limit((string) $hash, 12, '');
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function targetLocales(): array
+    {
+        $configured = config('services.article_translation.target_locales', [self::DEFAULT_TARGET_LOCALE]);
+        $locales = is_array($configured) ? $configured : [self::DEFAULT_TARGET_LOCALE];
+        $normalized = array_values(array_unique(array_filter(array_map(
+            static fn (mixed $locale): string => trim((string) $locale),
+            $locales
+        ))));
+
+        return $normalized === [] ? [self::DEFAULT_TARGET_LOCALE] : $normalized;
     }
 }
