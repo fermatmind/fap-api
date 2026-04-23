@@ -156,8 +156,11 @@ class ContentPageResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('source_locale')
                     ->label(__('ops.locale_scope.source_locale'))
-                    ->state(fn (ContentPage $record): string => OpsContentLocaleScope::sourceLocale($record->locale))
+                    ->state(fn (ContentPage $record): string => (string) ($record->source_locale ?: OpsContentLocaleScope::sourceLocale($record->locale)))
                     ->badge(),
+                Tables\Columns\TextColumn::make('translation_status')
+                    ->badge()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('kind')->badge()->sortable(),
                 Tables\Columns\TextColumn::make('page_type')->badge()->sortable(),
                 Tables\Columns\TextColumn::make('status')

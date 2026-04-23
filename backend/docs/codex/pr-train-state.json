@@ -3775,6 +3775,48 @@
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
     },
+    "PR-UNIFIED-MULTILINGUAL-CMS-BACKBONE": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/unified-multilingual-cms-backbone",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Contracts/Cms/CmsMachineTranslationProvider.php app/Contracts/Cms/SiblingTranslationAdapter.php app/Filament/Ops/Pages/ArticleTranslationOpsPage.php app/Filament/Ops/Resources/ContentPageResource.php app/Filament/Ops/Resources/ContentPageResource/Pages/CreateContentPage.php app/Filament/Ops/Resources/ContentPageResource/Pages/EditContentPage.php app/Filament/Ops/Resources/InterpretationGuideResource.php app/Filament/Ops/Resources/InterpretationGuideResource/Pages/CreateInterpretationGuide.php app/Filament/Ops/Resources/InterpretationGuideResource/Pages/EditInterpretationGuide.php app/Filament/Ops/Resources/SupportArticleResource.php app/Filament/Ops/Resources/SupportArticleResource/Pages/CreateSupportArticle.php app/Filament/Ops/Resources/SupportArticleResource/Pages/EditSupportArticle.php app/Filament/Ops/Support/ContentReleaseAudit.php app/Filament/Ops/Support/ContentReleaseFollowUp.php app/Filament/Ops/Support/ContentReleaseTrace.php app/Http/Controllers/API/V0_5/Cms/ContentPageController.php app/Http/Controllers/API/V0_5/Cms/InterpretationGuideController.php app/Http/Controllers/API/V0_5/Cms/SupportArticleController.php app/Models/ContentPage.php app/Models/InterpretationGuide.php app/Models/SupportArticle.php app/Providers/AppServiceProvider.php app/Services/Audit/AuditLogger.php app/Services/Cms/AbstractSiblingTranslationAdapter.php app/Services/Cms/ArticleCmsMachineTranslationProvider.php app/Services/Cms/CmsMachineTranslationProviderRegistry.php app/Services/Cms/CmsTranslationWorkflowException.php app/Services/Cms/ContentPageTranslationAdapter.php app/Services/Cms/DisabledCmsMachineTranslationProvider.php app/Services/Cms/InterpretationGuideTranslationAdapter.php app/Services/Cms/SiblingTranslationWorkflowService.php app/Services/Cms/SupportArticleTranslationAdapter.php app/Services/Ops/CmsTranslationOpsService.php config/services.php database/migrations/2026_04_23_050000_add_multilingual_contract_to_cms_content_tables.php tests/Feature/Ops/CmsTranslationBackboneTest.php tests/Feature/V0_5/SupportTrustCmsApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Architecture/ServiceLayerBoundaryTest.php tests/Feature/Ops/ArticleTranslationOpsPageTest.php tests/Feature/Ops/CmsTranslationBackboneTest.php tests/Feature/Ops/PostReleaseObservabilityPageTest.php tests/Feature/Ops/ContentCmsProductLayerTest.php tests/Feature/V0_5/ArticlePublicApiTest.php tests/Feature/Ops/ArticleTranslationRevisionContractTest.php tests/Feature/V0_5/SupportTrustCmsApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan fap:schema:verify",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
     "PR-BIG5-LIFECYCLE-SHELL-RETENTION-V1": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api-big5-lifecycle-shell-retention",

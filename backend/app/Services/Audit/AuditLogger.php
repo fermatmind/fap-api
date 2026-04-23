@@ -79,7 +79,7 @@ class AuditLogger
             }
         }
 
-        AuditLog::create([
+        AuditLog::query()->withoutGlobalScopes()->create([
             'org_id' => $orgId,
             'actor_admin_id' => $actorAdminId,
             'action' => $action,

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Contracts\Cms\ArticleMachineTranslationProvider;
+use App\Contracts\Cms\CmsMachineTranslationProvider;
 use App\Contracts\Security\PiiEnvelopeAdapter;
 use App\Livewire\Filament\Ops\Livewire\CurrentOrgSwitcher;
 use App\Livewire\Filament\Ops\Livewire\LocaleSwitcher;
@@ -24,7 +25,10 @@ use App\Policies\ReportSnapshotPolicy;
 use App\Policies\ScaleRegistryPolicy;
 use App\Policies\ScaleSlugPolicy;
 use App\Policies\SharePolicy;
+use App\Services\Cms\ArticleCmsMachineTranslationProvider;
+use App\Services\Cms\CmsMachineTranslationProviderRegistry;
 use App\Services\Cms\DisabledArticleMachineTranslationProvider;
+use App\Services\Cms\DisabledCmsMachineTranslationProvider;
 use App\Services\Content\ContentPack;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\ContentStore;
@@ -67,6 +71,11 @@ class AppServiceProvider extends ServiceProvider
             ArticleMachineTranslationProvider::class,
             static fn ($app): ArticleMachineTranslationProvider => $app->make(DisabledArticleMachineTranslationProvider::class),
         );
+
+        $this->app->singleton(DisabledCmsMachineTranslationProvider::class);
+        $this->app->singleton(ArticleCmsMachineTranslationProvider::class);
+        $this->app->singleton(CmsMachineTranslationProviderRegistry::class);
+        $this->app->bind(CmsMachineTranslationProvider::class, static fn ($app): CmsMachineTranslationProvider => $app->make(DisabledCmsMachineTranslationProvider::class));
 
         $this->app->singleton(PiiEnvelopeAdapter::class, function ($app) {
             $adapterRaw = strtolower(trim((string) config('services.pii.adapter', 'local')));

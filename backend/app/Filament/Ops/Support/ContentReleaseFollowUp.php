@@ -6,6 +6,9 @@ namespace App\Filament\Ops\Support;
 
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
+use App\Models\ContentPage;
+use App\Models\InterpretationGuide;
+use App\Models\SupportArticle;
 use App\Services\Audit\AuditLogger;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\CareerGuideSeoService;
@@ -109,6 +112,15 @@ final class ContentReleaseFollowUp
                 ),
                 app(ArticleSeoService::class)->buildListUrl((string) data_get($record, 'locale', 'en')),
             ],
+            'support_article' => $record instanceof SupportArticle
+                ? [trim((string) ($record->canonical_path ?: '/support/articles/'.$record->slug))]
+                : [],
+            'interpretation_guide' => $record instanceof InterpretationGuide
+                ? [trim((string) ($record->canonical_path ?: '/support/guides/'.$record->slug))]
+                : [],
+            'content_page' => $record instanceof ContentPage
+                ? [trim((string) ($record->canonical_path ?: $record->path ?: '/'.$record->slug))]
+                : [],
             'guide' => $record instanceof CareerGuide
                 ? [app(CareerGuideSeoService::class)->buildCanonicalUrl($record)]
                 : [],

@@ -97,6 +97,7 @@ final class ContentReleaseTrace
     private static function previousPublish(string $type, object $record): ?AuditLog
     {
         return AuditLog::query()
+            ->withoutGlobalScopes()
             ->where('action', 'content_release_publish')
             ->where('target_type', self::targetType($type))
             ->where('target_id', (string) data_get($record, 'id', ''))
@@ -179,6 +180,43 @@ final class ContentReleaseTrace
                 'seo_meta.seo_description' => 'SEO Description',
                 'seo_meta.canonical_url' => 'Canonical URL',
                 'seo_meta.robots' => 'Robots',
+            ],
+            'support_article' => [
+                'title' => 'Title',
+                'summary' => 'Summary',
+                'body_md' => 'Body',
+                'slug' => 'Slug',
+                'locale' => 'Locale',
+                'status' => 'Status',
+                'review_state' => 'Review State',
+                'seo_title' => 'SEO Title',
+                'seo_description' => 'SEO Description',
+                'canonical_path' => 'Canonical Path',
+            ],
+            'interpretation_guide' => [
+                'title' => 'Title',
+                'summary' => 'Summary',
+                'body_md' => 'Body',
+                'slug' => 'Slug',
+                'locale' => 'Locale',
+                'status' => 'Status',
+                'review_state' => 'Review State',
+                'seo_title' => 'SEO Title',
+                'seo_description' => 'SEO Description',
+                'canonical_path' => 'Canonical Path',
+            ],
+            'content_page' => [
+                'title' => 'Title',
+                'summary' => 'Summary',
+                'content_md' => 'Body',
+                'slug' => 'Slug',
+                'path' => 'Path',
+                'locale' => 'Locale',
+                'status' => 'Status',
+                'review_state' => 'Review State',
+                'seo_title' => 'SEO Title',
+                'seo_description' => 'SEO Description',
+                'canonical_path' => 'Canonical Path',
             ],
             'guide' => [
                 'guide.title' => 'Title',

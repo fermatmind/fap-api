@@ -123,6 +123,19 @@ return [
         ))),
     ],
 
+    'cms_translation' => [
+        'target_locales' => array_values(array_filter(array_map(
+            static fn ($locale) => trim((string) $locale),
+            explode(',', (string) env('CMS_TRANSLATION_TARGET_LOCALES', env('ARTICLE_TRANSLATION_TARGET_LOCALES', 'en')))
+        ))),
+        'providers' => [
+            'article' => \App\Services\Cms\ArticleCmsMachineTranslationProvider::class,
+            'support_article' => env('CMS_TRANSLATION_PROVIDER_SUPPORT_ARTICLE', ''),
+            'interpretation_guide' => env('CMS_TRANSLATION_PROVIDER_INTERPRETATION_GUIDE', ''),
+            'content_page' => env('CMS_TRANSLATION_PROVIDER_CONTENT_PAGE', ''),
+        ],
+    ],
+
     'integrations' => [
         'webhook_tolerance_seconds' => (int) env('INTEGRATIONS_WEBHOOK_TOLERANCE_SECONDS', 300),
         'allow_unsigned_without_secret' => (bool) env('INTEGRATIONS_WEBHOOK_ALLOW_UNSIGNED', false),
