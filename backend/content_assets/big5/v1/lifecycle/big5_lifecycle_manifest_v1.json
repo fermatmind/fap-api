@@ -1,0 +1,193 @@
+{
+  "schema": "fap.big5.lifecycle_copy_library.v1.manifest",
+  "version": "v1",
+  "source_of_truth": [
+    "backend/content_assets/big5/v1/source/big5_source_of_truth_v1.md",
+    "backend/content_assets/big5/v1/source/big5_canonical_profiles_v1.json",
+    "backend/content_assets/big5/v1/source/big5_section_block_copy_map_v1.json",
+    "backend/content_assets/big5/v1/source/big5_style_and_copy_rules_v1.md"
+  ],
+  "draft_seed_files": [
+    {
+      "file_name": "continuation.json",
+      "original_location": "local desktop seed",
+      "normalized_to": "backend/content_assets/big5/v1/lifecycle/continuation.json",
+      "runtime_contract": false
+    },
+    {
+      "file_name": "career_next_step.json",
+      "original_location": "local desktop seed",
+      "normalized_to": "backend/content_assets/big5/v1/lifecycle/career_next_step.json",
+      "runtime_contract": false
+    },
+    {
+      "file_name": "growth_next_step.json",
+      "original_location": "local desktop seed",
+      "normalized_to": "backend/content_assets/big5/v1/lifecycle/growth_next_step.json",
+      "runtime_contract": false
+    }
+  ],
+  "normalized_entry_schema": [
+    "entry_id",
+    "surface",
+    "placement",
+    "audience_state",
+    "when",
+    "title",
+    "body",
+    "primary_cta_label",
+    "secondary_cta_label",
+    "notes"
+  ],
+  "allowed_cta_targets": [
+    "surface:history",
+    "surface:compare",
+    "surface:pdf",
+    "surface:retake",
+    "anchor:action_plan",
+    "anchor:action_plan.workplace",
+    "anchor:action_plan.relationships",
+    "anchor:action_plan.stress_recovery",
+    "anchor:action_plan.personal_growth"
+  ],
+  "surface_packs": [
+    {
+      "file": "continuation.json",
+      "surface": "continuation",
+      "role": "post-result continuation and tool/anchor handoff"
+    },
+    {
+      "file": "career_next_step.json",
+      "surface": "career_next_step",
+      "role": "canonical-profile career direction handoff"
+    },
+    {
+      "file": "growth_next_step.json",
+      "surface": "growth_next_step",
+      "role": "canonical-profile growth direction handoff"
+    }
+  ],
+  "entry_counts": {
+    "continuation": 8,
+    "career_next_step": 8,
+    "growth_next_step": 8,
+    "total": 24
+  },
+  "canonical_profile_mapping": [
+    {
+      "profile_id": "BF_CANONICAL_01",
+      "working_name": "敏锐的独立思考者",
+      "career_entry_id": "career_next_step_canonical_01",
+      "growth_entry_id": "growth_next_step_canonical_01",
+      "action_focus": [
+        "stress_recovery",
+        "personal_growth",
+        "workplace"
+      ]
+    },
+    {
+      "profile_id": "BF_CANONICAL_02",
+      "working_name": "高压现场推动者",
+      "career_entry_id": "career_next_step_canonical_02",
+      "growth_entry_id": "growth_next_step_canonical_02",
+      "action_focus": [
+        "workplace",
+        "relationships",
+        "stress_recovery"
+      ]
+    },
+    {
+      "profile_id": "BF_CANONICAL_03",
+      "working_name": "戒备型完美主义",
+      "career_entry_id": "career_next_step_canonical_03",
+      "growth_entry_id": "growth_next_step_canonical_03",
+      "action_focus": [
+        "stress_recovery",
+        "personal_growth",
+        "workplace"
+      ]
+    },
+    {
+      "profile_id": "BF_CANONICAL_04",
+      "working_name": "复杂理解型低续航者",
+      "career_entry_id": "career_next_step_canonical_04",
+      "growth_entry_id": "growth_next_step_canonical_04",
+      "action_focus": [
+        "personal_growth",
+        "workplace"
+      ]
+    },
+    {
+      "profile_id": "BF_CANONICAL_05",
+      "working_name": "连接驱动协调者",
+      "career_entry_id": "career_next_step_canonical_05",
+      "growth_entry_id": "growth_next_step_canonical_05",
+      "action_focus": [
+        "relationships",
+        "workplace"
+      ]
+    },
+    {
+      "profile_id": "BF_CANONICAL_06",
+      "working_name": "稳态深工者",
+      "career_entry_id": "career_next_step_canonical_06",
+      "growth_entry_id": "growth_next_step_canonical_06",
+      "action_focus": [
+        "workplace",
+        "personal_growth"
+      ]
+    },
+    {
+      "profile_id": "BF_CANONICAL_07",
+      "working_name": "锋利探索推进者",
+      "career_entry_id": "career_next_step_canonical_07",
+      "growth_entry_id": "growth_next_step_canonical_07",
+      "action_focus": [
+        "workplace",
+        "relationships"
+      ]
+    },
+    {
+      "profile_id": "BF_CANONICAL_08",
+      "working_name": "秩序维护型支持者",
+      "career_entry_id": "career_next_step_canonical_08",
+      "growth_entry_id": "growth_next_step_canonical_08",
+      "action_focus": [
+        "workplace",
+        "relationships",
+        "personal_growth"
+      ]
+    }
+  ],
+  "deferred": [
+    "history.json",
+    "compare.json",
+    "pdf.json",
+    "shell_tools.json",
+    "retention_closeout.json"
+  ],
+  "review_notes_file": "big5_lifecycle_review_notes_v1.md",
+  "boundary": {
+    "runtime_changed": false,
+    "db_changed": false,
+    "live_registry_changed": false,
+    "mbti_changed": false,
+    "other_lifecycle_packs_written": false
+  },
+  "review_constraints": {
+    "lifecycle_layer_role": "post-result continuation only",
+    "not_runtime_contract": true,
+    "no_new_routes_or_api_fields": true,
+    "cta_targets_are_review_metadata": true,
+    "main_report_sections_unchanged": [
+      "hero_summary",
+      "domains_overview",
+      "domain_deep_dive",
+      "facet_details",
+      "core_portrait",
+      "norms_comparison",
+      "action_plan",
+      "methodology_and_access"
+    ]
+  }
+}
