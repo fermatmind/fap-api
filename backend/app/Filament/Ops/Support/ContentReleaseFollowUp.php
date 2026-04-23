@@ -94,6 +94,7 @@ final class ContentReleaseFollowUp
             ],
             'cache_signal' => [
                 'kind' => 'invalidate',
+                'paths' => $paths,
                 'urls' => $paths,
             ],
         ];
@@ -113,13 +114,22 @@ final class ContentReleaseFollowUp
                 app(ArticleSeoService::class)->buildListUrl((string) data_get($record, 'locale', 'en')),
             ],
             'support_article' => $record instanceof SupportArticle
-                ? [trim((string) ($record->canonical_path ?: '/support/articles/'.$record->slug))]
+                ? [
+                    trim((string) ($record->canonical_path ?: '/support/articles/'.$record->slug)),
+                    '/support',
+                ]
                 : [],
             'interpretation_guide' => $record instanceof InterpretationGuide
-                ? [trim((string) ($record->canonical_path ?: '/support/guides/'.$record->slug))]
+                ? [
+                    trim((string) ($record->canonical_path ?: '/support/guides/'.$record->slug)),
+                    '/support',
+                ]
                 : [],
             'content_page' => $record instanceof ContentPage
-                ? [trim((string) ($record->canonical_path ?: $record->path ?: '/'.$record->slug))]
+                ? array_values(array_filter([
+                    trim((string) ($record->canonical_path ?: $record->path ?: '/'.$record->slug)),
+                    (string) data_get($record, 'kind') === ContentPage::KIND_HELP ? '/support' : null,
+                ]))
                 : [],
             'guide' => $record instanceof CareerGuide
                 ? [app(CareerGuideSeoService::class)->buildCanonicalUrl($record)]
@@ -153,9 +163,20 @@ final class ContentReleaseFollowUp
         ];
 
         try {
-            $response = Http::acceptJson()
+            $requestBuilder = Http::acceptJson()
                 ->timeout((int) config('ops.content_release_observability.http_timeout_seconds', 5))
-                ->post($endpoint, $payload);
+                ->withHeaders([
+                    'X-FM-Content-Release-Source' => (string) ($payload['source'] ?? 'unknown'),
+                ]);
+
+            $secret = self::cacheInvalidationSecret();
+            if ($secret !== '' && $action === 'content_release_cache_signal') {
+                $requestBuilder = $requestBuilder->withHeaders([
+                    'X-FM-Content-Release-Token' => $secret,
+                ]);
+            }
+
+            $response = $requestBuilder->post($endpoint, $payload);
 
             if (! $response->successful()) {
                 throw new RequestException($response);
@@ -183,6 +204,11 @@ final class ContentReleaseFollowUp
 
             self::alertFailure($request, $payload, $endpoint, $alertLabel, $exception);
         }
+    }
+
+    private static function cacheInvalidationSecret(): string
+    {
+        return trim((string) config('ops.content_release_observability.cache_invalidation_secret', ''));
     }
 
     /**

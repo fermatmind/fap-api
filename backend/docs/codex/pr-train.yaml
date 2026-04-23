@@ -2355,3 +2355,35 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: PR-NON-ARTICLE-MULTILINGUAL-PUBLIC-ROLLOUT-BACKEND
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/non-article-multilingual-public-rollout-backend
+    base: main
+    depends_on: ["PR-ROW-BACKED-CMS-SHADOW-REVISIONS"]
+    mode: execute
+    scope: >
+      Backend half of non-article multilingual public rollout. Align support
+      article public canonical paths with dedicated detail routes, upgrade
+      non-article content release invalidation payloads and auth headers for a
+      frontend revalidation consumer, and keep the work strictly limited to
+      support_articles / interpretation_guides / content_pages public-release
+      contracts. Do not change frontend rendering, glossary/SLA/QA workflows,
+      article runtime behavior, or any unrelated CMS/product modules.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Filament/Ops/Support/ContentReleaseFollowUp.php app/Http/Controllers/API/V0_5/Cms/SupportArticleController.php app/Services/PublicSurface/PublicGatewaySurfaceService.php config/ops.php tests/Feature/Ops/PostReleaseObservabilityPageTest.php tests/Feature/V0_5/SupportTrustCmsApiTest.php database/migrations/2026_04_24_160000_normalize_support_article_public_paths.php"
+      - "php artisan test tests/Feature/Ops/PostReleaseObservabilityPageTest.php tests/Feature/V0_5/SupportTrustCmsApiTest.php"
+      - "php artisan fap:schema:verify"
+      - "php artisan route:list | rg 'support/articles|support/guides|content-pages|public-gateways/help'"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true

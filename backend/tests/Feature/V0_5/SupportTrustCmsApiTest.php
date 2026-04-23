@@ -47,7 +47,7 @@ final class SupportTrustCmsApiTest extends TestCase
             'related_content_page_ids' => [],
             'seo_title' => 'Recover report',
             'seo_description' => 'Recover a report.',
-            'canonical_path' => '/support/recover-report',
+            'canonical_path' => '/support/articles/recover-report',
         ]);
 
         $response = $this->getJson('/api/v0.5/support/articles?locale=en');
@@ -191,12 +191,13 @@ final class SupportTrustCmsApiTest extends TestCase
             'published_at' => '2026-04-22T00:00:00Z',
             'seo_title' => 'Contact support',
             'seo_description' => 'Contact support.',
-            'canonical_path' => '/support/contact-support',
+            'canonical_path' => '/support/articles/contact-support',
         ])
             ->assertOk()
             ->assertJsonPath('article.slug', 'contact-support')
             ->assertJsonPath('article.status', 'published')
-            ->assertJsonPath('article.review_state', 'approved');
+            ->assertJsonPath('article.review_state', 'approved')
+            ->assertJsonPath('article.canonical_path', '/support/articles/contact-support');
 
         $this->assertDatabaseHas('support_articles', [
             'slug' => 'contact-support',

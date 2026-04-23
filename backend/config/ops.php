@@ -38,6 +38,7 @@ return [
             static fn (string $value): string => trim($value),
             explode(',', (string) env('OPS_CONTENT_RELEASE_CACHE_INVALIDATION_URLS', ''))
         ))),
+        'cache_invalidation_secret' => env('OPS_CONTENT_RELEASE_CACHE_INVALIDATION_SECRET', ''),
         'broadcast_webhook' => env('OPS_CONTENT_RELEASE_BROADCAST_WEBHOOK', ''),
         'http_timeout_seconds' => (int) env('OPS_CONTENT_RELEASE_HTTP_TIMEOUT_SECONDS', 5),
     ],
