@@ -14,7 +14,6 @@ use App\Filament\Ops\Support\StatusBadge;
 use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticleTranslationRevisionWorkspace;
-use App\Support\OrgContext;
 use Filament\Forms;
 use Filament\Forms\Components\BelongsToManyMultiSelect;
 use Filament\Forms\Form;
@@ -80,7 +79,7 @@ class ArticleResource extends Resource
     {
         return $form->schema([
             Forms\Components\Hidden::make('org_id')
-                ->default(fn (): int => max(0, (int) app(OrgContext::class)->orgId())),
+                ->default(fn (): int => self::publicArticleOrgId()),
             Forms\Components\Grid::make([
                 'default' => 1,
                 'xl' => 12,
@@ -216,7 +215,7 @@ class ArticleResource extends Resource
                                     ->relationship(
                                         'category',
                                         'name',
-                                        fn (Builder $query): Builder => $query->where('article_categories.org_id', self::currentOrgId())
+                                        fn (Builder $query): Builder => $query->where('article_categories.org_id', self::publicArticleOrgId())
                                     )
                                     ->searchable()
                                     ->preload()
@@ -226,7 +225,7 @@ class ArticleResource extends Resource
                                     ->relationship(
                                         'tags',
                                         'name',
-                                        fn (Builder $query): Builder => $query->where('article_tags.org_id', self::currentOrgId())
+                                        fn (Builder $query): Builder => $query->where('article_tags.org_id', self::publicArticleOrgId())
                                     )
                                     ->searchable()
                                     ->preload()
@@ -477,12 +476,13 @@ class ArticleResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->where('org_id', self::currentOrgId());
+            ->withoutGlobalScopes()
+            ->where('org_id', self::publicArticleOrgId());
     }
 
-    private static function currentOrgId(): int
+    private static function publicArticleOrgId(): int
     {
-        return max(0, (int) app(OrgContext::class)->orgId());
+        return 0;
     }
 
     /**
@@ -626,6 +626,9 @@ class ArticleResource extends Resource
             'is_public' => true,
             'published_at' => $record->published_at ?? now(),
             'published_revision_id' => $publishedRevision->id,
+            'translation_status' => $record->isSourceArticle()
+                ? Article::TRANSLATION_STATUS_SOURCE
+                : Article::TRANSLATION_STATUS_PUBLISHED,
         ])->save();
 
         if ($record->isSourceArticle()

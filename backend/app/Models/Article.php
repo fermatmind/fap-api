@@ -178,27 +178,27 @@ class Article extends Model
 
     public function translationRevisions(): HasMany
     {
-        return $this->hasMany(ArticleTranslationRevision::class, 'article_id', 'id');
+        return $this->hasMany(ArticleTranslationRevision::class, 'article_id', 'id')->withoutGlobalScopes();
     }
 
     public function sourceCanonical(): BelongsTo
     {
-        return $this->belongsTo(self::class, 'source_article_id', 'id');
+        return $this->belongsTo(self::class, 'source_article_id', 'id')->withoutGlobalScopes();
     }
 
     public function workingRevision(): BelongsTo
     {
-        return $this->belongsTo(ArticleTranslationRevision::class, 'working_revision_id', 'id');
+        return $this->belongsTo(ArticleTranslationRevision::class, 'working_revision_id', 'id')->withoutGlobalScopes();
     }
 
     public function publishedRevision(): BelongsTo
     {
-        return $this->belongsTo(ArticleTranslationRevision::class, 'published_revision_id', 'id');
+        return $this->belongsTo(ArticleTranslationRevision::class, 'published_revision_id', 'id')->withoutGlobalScopes();
     }
 
     public function translatedFrom(): BelongsTo
     {
-        return $this->belongsTo(self::class, 'translated_from_article_id', 'id');
+        return $this->belongsTo(self::class, 'translated_from_article_id', 'id')->withoutGlobalScopes();
     }
 
     public function translations(): HasMany
@@ -213,7 +213,7 @@ class Article extends Model
 
     public function seoMeta(): HasOne
     {
-        return $this->hasOne(ArticleSeoMeta::class, 'article_id', 'id');
+        return $this->hasOne(ArticleSeoMeta::class, 'article_id', 'id')->withoutGlobalScopes();
     }
 
     public static function findBySlug(string $slug, string $locale = 'en'): ?self

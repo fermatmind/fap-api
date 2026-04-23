@@ -22,6 +22,7 @@ use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTag;
+use App\Models\ArticleTranslationRevision;
 use App\Models\AuditLog;
 use App\Models\CareerGuide;
 use App\Models\CareerGuideSeoMeta;
@@ -308,6 +309,91 @@ final class ContentCmsProductLayerTest extends TestCase
             ->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath('article.slug', $article->slug);
+    }
+
+    public function test_article_release_marks_translation_published_without_changing_source_linkage(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+        $selectedOrg = Organization::query()->create([
+            'name' => 'Selected Ops Org',
+            'owner_user_id' => 9444,
+            'status' => 'active',
+            'domain' => 'selected-ops.example.test',
+            'timezone' => 'Asia/Shanghai',
+            'locale' => 'en',
+        ]);
+        $selectedOrgId = (int) $selectedOrg->id;
+
+        $source = $this->seedArticle([
+            'org_id' => 0,
+            'slug' => 'source-article-'.Str::lower(Str::random(6)),
+            'locale' => 'zh-CN',
+            'title' => '中文源文',
+            'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
+            'source_locale' => 'zh-CN',
+            'translation_group_id' => 'article-source-fixture',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subDay(),
+        ]);
+
+        $translation = $this->seedArticle([
+            'org_id' => 0,
+            'slug' => 'translation-article-'.Str::lower(Str::random(6)),
+            'locale' => 'en',
+            'title' => 'English review draft',
+            'translation_status' => Article::TRANSLATION_STATUS_HUMAN_REVIEW,
+            'source_locale' => 'zh-CN',
+            'source_article_id' => (int) $source->id,
+            'translated_from_article_id' => (int) $source->id,
+            'translation_group_id' => (string) $source->translation_group_id,
+            'status' => 'draft',
+            'is_public' => false,
+            'published_at' => null,
+        ]);
+
+        $revision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $translation->id,
+            'source_article_id' => (int) $source->id,
+            'translation_group_id' => (string) $source->translation_group_id,
+            'locale' => 'en',
+            'source_locale' => 'zh-CN',
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+            'source_version_hash' => (string) $source->source_version_hash,
+            'translated_from_version_hash' => (string) $source->source_version_hash,
+            'title' => 'English review draft',
+            'excerpt' => 'Reviewed English excerpt.',
+            'content_md' => 'Reviewed English body.',
+            'seo_title' => 'English SEO title',
+            'seo_description' => 'English SEO description',
+        ]);
+
+        $translation->forceFill(['working_revision_id' => (int) $revision->id])->save();
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $this->approveRecord($admin, $selectedOrgId, 'article', $translation);
+        $this->setOpsContext($selectedOrgId, $admin, '/ops/content-release');
+
+        ArticleResource::releaseRecord($translation);
+
+        $translation->refresh();
+        $revision->refresh();
+        $source->refresh();
+
+        $this->assertSame('published', $translation->status);
+        $this->assertTrue($translation->is_public);
+        $this->assertSame(Article::TRANSLATION_STATUS_PUBLISHED, $translation->translation_status);
+        $this->assertSame((int) $revision->id, (int) $translation->published_revision_id);
+        $this->assertSame((int) $source->id, (int) $translation->source_article_id);
+        $this->assertSame((string) $source->translation_group_id, (string) $translation->translation_group_id);
+        $this->assertSame(ArticleTranslationRevision::STATUS_PUBLISHED, $revision->revision_status);
+        $this->assertSame(0, (int) $revision->org_id);
+        $this->assertSame(Article::TRANSLATION_STATUS_SOURCE, $source->translation_status);
+        $this->assertSame('published', $source->status);
     }
 
     public function test_content_write_admin_cannot_release_draft_content_records(): void
@@ -854,7 +940,7 @@ final class ContentCmsProductLayerTest extends TestCase
             ->assertSee($reviewer->name);
     }
 
-    public function test_article_and_taxonomy_resources_are_scoped_to_selected_org_only(): void
+    public function test_article_resource_uses_public_org_while_taxonomy_resources_remain_selected_org_scoped(): void
     {
         $selectedOrg = Organization::query()->create([
             'name' => 'Scoped Org',
@@ -874,22 +960,32 @@ final class ContentCmsProductLayerTest extends TestCase
             'locale' => 'en',
         ]);
 
-        $selectedArticle = Article::query()->create([
-            'org_id' => $selectedOrg->id,
-            'slug' => 'selected-article',
+        $publicArticle = Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'public-article',
             'locale' => 'en',
-            'title' => 'Selected Article',
-            'content_md' => 'Selected article body',
+            'title' => 'Public Article',
+            'content_md' => 'Public article body',
             'status' => 'draft',
             'is_public' => false,
             'is_indexable' => true,
         ]);
-        $otherArticle = Article::query()->create([
-            'org_id' => $otherOrg->id,
-            'slug' => 'other-article',
+        $selectedOrgArticle = Article::query()->create([
+            'org_id' => $selectedOrg->id,
+            'slug' => 'selected-org-article',
             'locale' => 'en',
-            'title' => 'Other Article',
-            'content_md' => 'Other article body',
+            'title' => 'Selected Org Article',
+            'content_md' => 'Selected org article body',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+        ]);
+        $otherOrgArticle = Article::query()->create([
+            'org_id' => $otherOrg->id,
+            'slug' => 'other-org-article',
+            'locale' => 'en',
+            'title' => 'Other Org Article',
+            'content_md' => 'Other org article body',
             'status' => 'draft',
             'is_public' => false,
             'is_indexable' => true,
@@ -930,12 +1026,65 @@ final class ContentCmsProductLayerTest extends TestCase
         $categoryIds = ArticleCategoryResource::getEloquentQuery()->pluck('id')->all();
         $tagIds = ArticleTagResource::getEloquentQuery()->pluck('id')->all();
 
-        $this->assertSame([(int) $selectedArticle->id], $articleIds);
-        $this->assertNotContains((int) $otherArticle->id, $articleIds);
+        $this->assertSame([(int) $publicArticle->id], $articleIds);
+        $this->assertNotContains((int) $selectedOrgArticle->id, $articleIds);
+        $this->assertNotContains((int) $otherOrgArticle->id, $articleIds);
         $this->assertSame([(int) $selectedCategory->id], $categoryIds);
         $this->assertNotContains((int) $otherCategory->id, $categoryIds);
         $this->assertSame([(int) $selectedTag->id], $tagIds);
         $this->assertNotContains((int) $otherTag->id, $tagIds);
+    }
+
+    public function test_article_edit_page_resolves_public_org_articles_from_tenant_ops_session(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+
+        $selectedOrg = Organization::query()->create([
+            'name' => 'Selected Tenant Org',
+            'owner_user_id' => 9333,
+            'status' => 'active',
+            'domain' => 'selected-tenant.example.test',
+            'timezone' => 'Asia/Shanghai',
+            'locale' => 'en',
+        ]);
+
+        $publicArticle = Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'public-editorial-article',
+            'locale' => 'en',
+            'title' => 'Public Editorial Article',
+            'excerpt' => 'Visible to the public editorial workspace.',
+            'content_md' => 'Public editorial body',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+        ]);
+        $tenantArticle = Article::query()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'slug' => 'tenant-editorial-article',
+            'locale' => 'en',
+            'title' => 'Tenant Editorial Article',
+            'excerpt' => 'Tenant scoped body.',
+            'content_md' => 'Tenant editorial body',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+        ]);
+
+        $session = $this->opsSessionForOrg((int) $admin->id, (int) $selectedOrg->id);
+
+        $this->withSession($session)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/articles/'.((int) $publicArticle->id).'/edit')
+            ->assertOk()
+            ->assertSee('Public Editorial Article');
+
+        $this->withSession($session)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/articles/'.((int) $tenantArticle->id).'/edit')
+            ->assertNotFound();
     }
 
     /**

@@ -157,11 +157,11 @@ class EditArticle extends EditRecord
 
         ArticleSeoMeta::query()->updateOrCreate(
             [
+                'org_id' => (int) $record->org_id,
                 'article_id' => (int) $record->id,
                 'locale' => (string) $record->locale,
             ],
             array_merge($this->seoCompatibilityPayload, [
-                'org_id' => (int) $record->org_id,
                 'is_indexable' => (bool) $record->is_indexable,
             ])
         );
