@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T14:45:49.086Z",
+  "updated_at": "2026-04-23T14:46:10.508Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -3843,8 +3843,14 @@
         {
           "at": "2026-04-23T14:45:49.086Z",
           "summary": "Opened draft PR #993 under documented draft exception; PR is not mergeable while ci_verify_mbti.sh remains red."
+        },
+        {
+          "at": "2026-04-23T14:46:10.508Z",
+          "summary": "Fixed ledger commit/pr URL fields after draft PR creation; commit_sha records the scoped content commit."
         }
-      ]
+      ],
+      "commit_sha": "7b8db33ec76e6eba4d144abd6ceb790e496ad803",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/993"
     }
   },
   "prs": {
