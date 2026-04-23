@@ -4337,6 +4337,48 @@
       "merged_at": "",
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "PR-NON-ARTICLE-MULTILINGUAL-PUBLIC-ROLLOUT-BACKEND": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/non-article-multilingual-public-rollout-backend",
+      "commit_sha": "312e86b5",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/998",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Filament/Ops/Support/ContentReleaseFollowUp.php app/Http/Controllers/API/V0_5/Cms/SupportArticleController.php app/Services/PublicSurface/PublicGatewaySurfaceService.php config/ops.php tests/Feature/Ops/PostReleaseObservabilityPageTest.php tests/Feature/V0_5/SupportTrustCmsApiTest.php database/migrations/2026_04_24_160000_normalize_support_article_public_paths.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Ops/PostReleaseObservabilityPageTest.php tests/Feature/V0_5/SupportTrustCmsApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan fap:schema:verify",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list | rg 'support/articles|support/guides|content-pages|public-gateways/help'",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   }
 }

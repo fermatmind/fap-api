@@ -63,6 +63,7 @@ final class PostReleaseObservabilityPageTest extends TestCase
         config()->set('ops.content_release_observability.cache_invalidation_urls', [
             'https://cache.example.test/invalidate',
         ]);
+        config()->set('ops.content_release_observability.cache_invalidation_secret', 'release-secret');
         config()->set('ops.content_release_observability.broadcast_webhook', 'https://broadcast.example.test/content-release');
 
         Http::fake([
@@ -301,10 +302,15 @@ final class PostReleaseObservabilityPageTest extends TestCase
 
         Http::assertSentCount(2);
         Http::assertSent(function ($request): bool {
+            $paths = (array) data_get($request->data(), 'cache_signal.paths', []);
+
             return $request->url() === 'https://cache.example.test/invalidate'
                 && data_get($request->data(), 'event') === 'content_release_publish'
                 && data_get($request->data(), 'content.type') === 'article'
-                && data_get($request->data(), 'cache_signal.kind') === 'invalidate';
+                && data_get($request->data(), 'cache_signal.kind') === 'invalidate'
+                && in_array('https://example.test/en/articles/observability-article', $paths, true)
+                && in_array('https://example.test/en/articles', $paths, true)
+                && $request->hasHeader('X-FM-Content-Release-Token');
         });
         Http::assertSent(function ($request): bool {
             return $request->url() === 'https://broadcast.example.test/content-release'

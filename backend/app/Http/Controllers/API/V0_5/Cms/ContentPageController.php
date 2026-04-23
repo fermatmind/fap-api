@@ -154,6 +154,11 @@ final class ContentPageController extends Controller
                 'locale' => (string) $validated['locale'],
             ])->first();
 
+        $kind = (string) $validated['kind'];
+        $pageType = (string) ($validated['page_type'] ?? $this->defaultPageType($kind, $normalizedSlug));
+        $publicPath = $this->publicPathFor($normalizedSlug, $kind);
+        $canonicalPath = $this->nullableString($validated['canonical_path'] ?? null) ?? $publicPath;
+
         $page = $existing ?? new ContentPage([
             'org_id' => $orgId,
             'slug' => $normalizedSlug,
@@ -161,9 +166,9 @@ final class ContentPageController extends Controller
         ]);
 
         $page->fill([
-            'path' => '/'.$normalizedSlug,
-            'kind' => (string) $validated['kind'],
-            'page_type' => (string) ($validated['page_type'] ?? $this->defaultPageType((string) $validated['kind'], $normalizedSlug)),
+            'path' => $publicPath,
+            'kind' => $kind,
+            'page_type' => $pageType,
             'title' => trim((string) $validated['title']),
             'kicker' => $this->nullableString($validated['kicker'] ?? null),
             'summary' => $this->nullableString($validated['summary'] ?? null),
@@ -186,7 +191,7 @@ final class ContentPageController extends Controller
             'seo_title' => $this->nullableString($validated['seo_title'] ?? null),
             'meta_description' => $this->nullableString($validated['meta_description'] ?? null),
             'seo_description' => $this->nullableString($validated['seo_description'] ?? null) ?? $this->nullableString($validated['meta_description'] ?? null),
-            'canonical_path' => $this->nullableString($validated['canonical_path'] ?? null) ?? '/'.$normalizedSlug,
+            'canonical_path' => $canonicalPath,
             'status' => (string) ($validated['status'] ?? ((bool) $validated['is_public'] ? ContentPage::STATUS_PUBLISHED : ContentPage::STATUS_DRAFT)),
         ]);
         $page->save();
@@ -198,9 +203,9 @@ final class ContentPageController extends Controller
             'body_html' => $contentHtml,
             'seo_title' => $this->nullableString($validated['seo_title'] ?? null),
             'seo_description' => $this->nullableString($validated['seo_description'] ?? null) ?? $this->nullableString($validated['meta_description'] ?? null),
-            'path' => '/'.$normalizedSlug,
-            'kind' => (string) $validated['kind'],
-            'page_type' => (string) ($validated['page_type'] ?? $this->defaultPageType((string) $validated['kind'], $normalizedSlug)),
+            'path' => $publicPath,
+            'kind' => $kind,
+            'page_type' => $pageType,
             'kicker' => $this->nullableString($validated['kicker'] ?? null),
             'template' => (string) $validated['template'],
             'animation_profile' => (string) $validated['animation_profile'],
@@ -210,7 +215,7 @@ final class ContentPageController extends Controller
             'source_doc' => $this->nullableString($validated['source_doc'] ?? null),
             'headings_json' => $this->extractHeadings($contentMd),
             'meta_description' => $this->nullableString($validated['meta_description'] ?? null),
-            'canonical_path' => $this->nullableString($validated['canonical_path'] ?? null) ?? '/'.$normalizedSlug,
+            'canonical_path' => $canonicalPath,
             'is_public' => (bool) $validated['is_public'],
             'is_indexable' => (bool) $validated['is_indexable'],
         ];
@@ -356,6 +361,16 @@ final class ContentPageController extends Controller
         $normalized = strtolower(str_replace('_', '-', trim($locale)));
 
         return str_starts_with($normalized, 'zh') ? 'zh-CN' : 'en';
+    }
+
+    private function publicPathFor(string $slug, string $kind): string
+    {
+        $normalizedSlug = strtolower(trim($slug));
+        if ($kind === ContentPage::KIND_HELP && str_starts_with($normalizedSlug, 'help-')) {
+            return '/help/'.substr($normalizedSlug, 5);
+        }
+
+        return '/'.$normalizedSlug;
     }
 
     private function normalizeSlug(string $slug): string

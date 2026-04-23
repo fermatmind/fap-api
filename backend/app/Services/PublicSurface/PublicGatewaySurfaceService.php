@@ -162,10 +162,10 @@ final class PublicGatewaySurfaceService
             'summary_blocks' => [
                 [
                     'key' => 'help_home',
-                    'title' => $locale === 'zh-CN' ? '帮助中心' : 'Help center',
+                    'title' => $locale === 'zh-CN' ? '支持与信任中心' : 'Support & Trust Center',
                     'body' => $locale === 'zh-CN'
-                        ? '用正式入口处理订单找回、邮件偏好、退订和常见支持问题。'
-                        : 'Use formal public entry points for order lookup, email preferences, unsubscribe, and common support questions.',
+                        ? '从找回报告，到读懂结果，再到方法边界与数据控制，把最常见的问题放在正式入口里。'
+                        : 'From report recovery, to understanding results, to method boundaries and data controls, the most common questions live behind formal entry points.',
                     'kind' => 'answer_first',
                 ],
             ],
@@ -197,6 +197,12 @@ final class PublicGatewaySurfaceService
                     'key' => 'unsubscribe',
                     'label' => $locale === 'zh-CN' ? '退订邮件' : 'Unsubscribe',
                     'href' => '/'.$segment.'/email/unsubscribe',
+                    'kind' => 'formal_entry',
+                ],
+                [
+                    'key' => 'privacy_data',
+                    'label' => $locale === 'zh-CN' ? '隐私与数据说明' : 'Privacy and data information',
+                    'href' => '/'.$segment.'/privacy',
                     'kind' => 'formal_entry',
                 ],
             ],

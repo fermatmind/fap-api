@@ -226,7 +226,7 @@ final class SupportArticleController extends Controller
             'published_at' => $validated['published_at'] ?? null,
             'seo_title' => $this->nullableString($validated['seo_title'] ?? null),
             'seo_description' => $this->nullableString($validated['seo_description'] ?? null),
-            'canonical_path' => $this->nullableString($validated['canonical_path'] ?? null) ?? '/support/'.$normalizedSlug,
+            'canonical_path' => $this->nullableString($validated['canonical_path'] ?? null) ?? '/support/articles/'.$normalizedSlug,
         ]);
         $article->save();
 
@@ -243,7 +243,7 @@ final class SupportArticleController extends Controller
             'primary_cta_url' => $this->nullableString($validated['primary_cta_url'] ?? null),
             'related_support_article_ids' => array_values((array) ($validated['related_support_article_ids'] ?? [])),
             'related_content_page_ids' => array_values((array) ($validated['related_content_page_ids'] ?? [])),
-            'canonical_path' => $this->nullableString($validated['canonical_path'] ?? null) ?? '/support/'.$normalizedSlug,
+            'canonical_path' => $this->nullableString($validated['canonical_path'] ?? null) ?? '/support/articles/'.$normalizedSlug,
         ];
         $revisionStatus = $this->revisionStatus((string) $validated['status'], (string) $validated['review_state'], $article->isSourceContent());
         $article = $this->workspace->saveWorkingDraft(
@@ -353,7 +353,7 @@ final class SupportArticleController extends Controller
             'updated_at' => $this->dateString($article->updated_at),
             'seo_title' => $article->seo_title,
             'seo_description' => $article->seo_description,
-            'canonical_path' => $article->canonical_path ?: '/support/'.(string) $article->slug,
+            'canonical_path' => $article->canonical_path ?: '/support/articles/'.(string) $article->slug,
             'searchable_model' => 'support_articles',
         ];
     }
