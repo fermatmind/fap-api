@@ -2091,3 +2091,33 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: PR-BIG5-CONTENT-ASSETS-V1
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api
+    branch: codex/big5-content-assets-v1-staging
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      Big Five v1 content asset staging package. Copy the five frozen source
+      files into an isolated backend/content_assets/big5/v1/source package and
+      add reviewable expanded P1 assets for gradient modifiers, synergy library,
+      facet glossary, facet precision, action matrix, manifest, coverage matrix,
+      and review notes without changing runtime code, database migrations, live
+      content packs, live registry, frontend, MBTI, lifecycle copy, payment,
+      order, webhook, article, help, or public CMS files.
+    checks:
+      - "python3 -m json.tool backend/docs/codex/pr-train-state.json >/dev/null"
+      - "for f in backend/content_assets/big5/v1/source/*.json backend/content_assets/big5/v1/expanded/*.json; do python3 -m json.tool \"$f\" >/dev/null || exit 1; done"
+      - 'node -e "const fs=require(\"fs\");const base=\"backend/content_assets/big5/v1/expanded/\";const j=n=>JSON.parse(fs.readFileSync(base+n,\"utf8\"));const g=j(\"big5_gradient_modifiers_v1.json\");const s=j(\"big5_synergy_library_v1.json\");const fg=j(\"big5_facet_glossary_v1.json\");const fp=j(\"big5_facet_precision_v1.json\");const a=j(\"big5_action_matrix_v1.json\");const c=j(\"big5_coverage_matrix_v1.json\");const sections=new Set([\"hero_summary\",\"domains_overview\",\"domain_deep_dive\",\"facet_details\",\"core_portrait\",\"norms_comparison\",\"action_plan\",\"methodology_and_access\"]);const buckets=new Set([\"continue\",\"start\",\"stop\",\"observe\"]);const scenarios=new Set([\"workplace\",\"relationships\",\"stress_recovery\",\"personal_growth\"]);function ok(x,m){if(!x)throw new Error(m)}ok(g.modifiers.length===25,\"expected 25 modifiers\");ok(s.synergies.length>=10&&s.synergies.length<=12,\"expected 10-12 synergies\");ok(fg.facets.length===30,\"expected 30 facets\");ok(fp.rules.length>=20&&fp.rules.length<=24,\"expected 20-24 precision rules\");ok(a.rules.length>=36&&a.rules.length<=48,\"expected 36-48 action rules\");ok(c.profiles.length===8,\"expected 8 coverage profiles\");for(const x of s.synergies)for(const t of x.section_targets)ok(sections.has(t),\"invalid section target \"+x.synergy_id+\": \"+t);for(const x of a.rules){ok(buckets.has(x.bucket),\"invalid bucket \"+x.rule_id);for(const t of x.scenario_tags)ok(scenarios.has(t),\"invalid scenario \"+x.rule_id+\": \"+t)}for(const id of [\"c_order_maintainer_split\",\"e_warm_but_reserved_split\"])ok(fp.rules.some(x=>x.rule_id===id),\"missing \"+id);for(const tr of [\"O\",\"C\",\"E\",\"A\",\"N\"])ok(fp.rules.filter(x=>x.trait_code===tr).length>=4,\"precision undercovered \"+tr);console.log(\"Big Five v1 asset checks passed\");"'
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true

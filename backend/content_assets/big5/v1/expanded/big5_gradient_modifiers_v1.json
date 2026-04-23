@@ -1,0 +1,768 @@
+{
+  "version": "v1",
+  "asset_type": "big5_gradient_modifiers",
+  "source_files": [
+    "big5_source_of_truth_v1.md",
+    "big5_canonical_profiles_v1.json",
+    "big5_atomic_trait_blocks_v1.json",
+    "big5_section_block_copy_map_v1.json",
+    "big5_style_and_copy_rules_v1.md"
+  ],
+  "invariants": [
+    "sentence_level_injection_only",
+    "no_word_level_replace",
+    "no_runtime_binding"
+  ],
+  "modifiers": [
+    {
+      "modifier_id": "big5_o_g1_modifier_v1",
+      "trait_code": "O",
+      "trait_label_zh": "开放性",
+      "gradient_level": "g1",
+      "percentile_range": "0-20",
+      "user_label": "开放性｜偏低",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "你更像把注意力放在可验证路径上的人，报告入口需要先说明你的稳定感来自清楚规则，而不是来自不断换新。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "在五维深解中，应强调你对复杂概念会先看成本、证据和可控性，优势是稳，代价是进入新路径较慢。"
+        },
+        "core_portrait": {
+          "load_sentence": "当开放性处在这个区间时，系统负荷通常不来自想法太多，而来自外部变化过快、旧规则被频繁打断。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照里适合说明：你的开放性在参考样本中不算突出，这表示你更依赖可靠经验，不表示缺乏理解力。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层要把重点放在低风险试验上：先用一个小样本验证新方法，而不是要求自己一次接受整套变化。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_o_g2_modifier_v1",
+      "trait_code": "O",
+      "trait_label_zh": "开放性",
+      "gradient_level": "g2",
+      "percentile_range": "21-40",
+      "user_label": "开放性｜中位偏低",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "你会接触新想法，但通常需要先确认它能落地；这让你的画像更接近审慎筛选，而不是简单保守。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解应写出你对变化有选择性：可解释、可验证、可带来收益的变化更容易进入系统。"
+        },
+        "core_portrait": {
+          "load_sentence": "这种位置的负荷常出现在别人催你马上创新时，你需要更多证据来降低进入成本。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照可以提示：你不是拒绝新东西，而是在参考样本中更重视稳定锚点和现实效用。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层适合设置“先试一版”的入口，把探索压缩成可撤回、可比较的小动作。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_o_g3_modifier_v1",
+      "trait_code": "O",
+      "trait_label_zh": "开放性",
+      "gradient_level": "g3",
+      "percentile_range": "41-60",
+      "user_label": "开放性｜中位",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "你在新旧之间保留过滤器，既不会被新鲜感直接带走，也不需要把熟悉路径永远固定。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解中应强调现实过滤能力：你会把想法、意义和可行性放在一起判断。"
+        },
+        "core_portrait": {
+          "load_sentence": "核心负荷来自选择质量：当信息太散、价值不明时，你会在进入与保留之间反复评估。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照应说明：这个位置不是没有特点，而是开放性更受议题价值和环境质量调节。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层可以让你每次只回答一个问题：这件事值得理解、值得试验，还是暂时只需观察。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_o_g4_modifier_v1",
+      "trait_code": "O",
+      "trait_label_zh": "开放性",
+      "gradient_level": "g4",
+      "percentile_range": "61-80",
+      "user_label": "开放性｜中位偏高",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "你更容易看见替代解释和潜在结构，报告入口可以把这种理解力写成主轴之一，但不能把它夸成脱离现实的想象力。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解应说明：你愿意处理复杂性，也需要更明确的收束机制来保护执行集中度。"
+        },
+        "core_portrait": {
+          "load_sentence": "负荷常来自可能性过多：你不是没有方向，而是容易在更多解释之间延长判断时间。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照里适合写：你的开放性在参考样本中偏突出，说明复杂问题更容易激活你。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层应提醒你把探索固定到一个现实容器里，例如先定义本周只验证一个关键假设。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_o_g5_modifier_v1",
+      "trait_code": "O",
+      "trait_label_zh": "开放性",
+      "gradient_level": "g5",
+      "percentile_range": "81-100",
+      "user_label": "开放性｜较高",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "你的画像需要突出复杂理解、抽象连接和重构路径的能力，同时说明高开放的价值依赖现实收束。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解要写出双面性：你能在多种可能中保持活性，也更需要防止想法稀释推进。"
+        },
+        "core_portrait": {
+          "load_sentence": "这种强度下的负荷常是认知过载和收束延迟，不是单纯兴趣广或不务实。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照应说明：你在参考样本中明显更愿意处理复杂性，但高低不等于优劣。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层要给你明确的关闭动作：每次探索结束都要留下一个结论、一个舍弃项和一个下一步。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_c_g1_modifier_v1",
+      "trait_code": "C",
+      "trait_label_zh": "尽责性",
+      "gradient_level": "g1",
+      "percentile_range": "0-20",
+      "user_label": "尽责性｜偏低",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "结果摘要需要说明：你的系统不适合长期只靠意志力硬推，真正的杠杆是意义、反馈和短周期结构。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解应避免把低尽责写成懒，而要说明你在低反馈、长期、模糊任务里续航更容易松动。"
+        },
+        "core_portrait": {
+          "load_sentence": "核心负荷来自启动与持续的断裂：你可能理解重要性，却难以稳定维持推进。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照应写清：尽责性较低表示长期结构依赖更弱，不等于没有责任感或能力。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层必须从 20 分钟、一个节点、一次反馈开始，不要给长期自律宣言。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_c_g2_modifier_v1",
+      "trait_code": "C",
+      "trait_label_zh": "尽责性",
+      "gradient_level": "g2",
+      "percentile_range": "21-40",
+      "user_label": "尽责性｜中位偏低",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "你的画像更适合写成弹性推进型：能做重要的事，但需要把路径拆得更短、更有回声。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解要强调你并非完全无序，而是对低意义、低反馈任务的承托要求更高。"
+        },
+        "core_portrait": {
+          "load_sentence": "负荷会集中在“知道该做但进不去”的阶段，过度自责只会继续消耗执行入口。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照可说明：你在参考样本中更不依赖刚性纪律，环境设计会明显影响表现。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层应把任务改成可见进度，例如先完成一个可交付片段，再决定是否加码。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_c_g3_modifier_v1",
+      "trait_code": "C",
+      "trait_label_zh": "尽责性",
+      "gradient_level": "g3",
+      "percentile_range": "41-60",
+      "user_label": "尽责性｜中位",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "结果摘要可以把你写成条件性稳定：事情值得、边界清楚、反馈存在时，你能认真推进。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解应呈现责任感与弹性并存，不把你写成高压管理者，也不写成随意散漫。"
+        },
+        "core_portrait": {
+          "load_sentence": "负荷来自任务条件：意义、截止、责任边界不清时，执行波动会被放大。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照应说明：中位尽责性更需要结合场景解读，不能只看百分位高低。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层适合建立轻量节奏，用每周回看和阶段交付替代全天候高压管理。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_c_g4_modifier_v1",
+      "trait_code": "C",
+      "trait_label_zh": "尽责性",
+      "gradient_level": "g4",
+      "percentile_range": "61-80",
+      "user_label": "尽责性｜中位偏高",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "你的画像应突出可靠、计划和质量意识，同时保留对弹性与恢复的说明。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解可写出你会自然维护秩序，但不必把所有事情都升级成严格控制。"
+        },
+        "core_portrait": {
+          "load_sentence": "负荷常来自标准与现实的落差：你容易比别人更早看见混乱会带来的后果。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照可说明：你的尽责性在参考样本中偏突出，意味着长期推进更容易成为优势。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层应加入减压阀：保留一个“足够好即可”的判断点，避免每件事都按最高标准处理。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_c_g5_modifier_v1",
+      "trait_code": "C",
+      "trait_label_zh": "尽责性",
+      "gradient_level": "g5",
+      "percentile_range": "81-100",
+      "user_label": "尽责性｜较高",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "结果摘要需要把高标准、长期推进和责任承担写成核心力量，同时说明它也会提高紧绷成本。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解必须呈现双面性：你能把事情做成系统，也可能把系统质量压力长期背在身上。"
+        },
+        "core_portrait": {
+          "load_sentence": "这种强度下的负荷来自持续负责和难以放下，尤其在低质量、低反馈环境里更明显。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照应写清：尽责性明显突出不等于更优秀，而是你更依赖结构、标准和可控推进。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层应提醒你区分关键任务和普通任务，只把高标准投向真正值得的地方。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_e_g1_modifier_v1",
+      "trait_code": "E",
+      "trait_label_zh": "外向性",
+      "gradient_level": "g1",
+      "percentile_range": "0-20",
+      "user_label": "外向性｜偏低",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "结果摘要应说明你更倾向先内部处理再进入外部场域，低外向不是社交差，而是进入门槛更高。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解要突出观察、深处理和低噪音优势，同时说明判断不表达就可能不可见。"
+        },
+        "core_portrait": {
+          "load_sentence": "核心负荷来自高曝光、高打断和表演式互动，它们会比任务本身更快消耗你。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照可写：你的外向性在参考样本中不突出，表示你更少依赖持续互动获得能量。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层应设置低摩擦表达：先发一段判断、先约一个小范围沟通，而不是要求自己持续抢场。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_e_g2_modifier_v1",
+      "trait_code": "E",
+      "trait_label_zh": "外向性",
+      "gradient_level": "g2",
+      "percentile_range": "21-40",
+      "user_label": "外向性｜中位偏低",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "你的画像更像高筛选进入：不是没有连接能力，而是更看重关系质量、场景价值和安全感。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解应说明你能连接，但需要可信场域；陌生、高噪音场景会提高进入成本。"
+        },
+        "core_portrait": {
+          "load_sentence": "负荷常出现在别人把沉默误读为没想法时，你需要更主动地给出可见信号。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照里适合写：你在参考样本中更克制外放，优势是保留判断，代价是存在感容易被低估。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层要鼓励提前准备一句核心观点，让进入动作不依赖临场社交能量。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_e_g3_modifier_v1",
+      "trait_code": "E",
+      "trait_label_zh": "外向性",
+      "gradient_level": "g3",
+      "percentile_range": "41-60",
+      "user_label": "外向性｜中位",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "结果摘要可以把你写成情境调节型：能独立，也能互动，进入深度由场景质量决定。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解要呈现你的灵活性，而不是把中位外向写成没有特征。"
+        },
+        "core_portrait": {
+          "load_sentence": "负荷来自进入选择：在要不要表达、要不要靠近、要不要退后之间，你会看任务与关系是否值得。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照应说明：中位外向性需要结合场景，不宜被解读成固定内向或固定外向。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层适合让你先判断本场景需要的是表达、倾听、协调，还是保留能量。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_e_g4_modifier_v1",
+      "trait_code": "E",
+      "trait_label_zh": "外向性",
+      "gradient_level": "g4",
+      "percentile_range": "61-80",
+      "user_label": "外向性｜中位偏高",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "你的画像需要呈现外部反馈会快速点亮你，但也要说明调速比持续加码更重要。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解应写出互动、表达和推进的优势，同时提示高刺激环境会放大反应强度。"
+        },
+        "core_portrait": {
+          "load_sentence": "负荷常来自外部节奏太快：你容易先进入、先表达，再需要补上回收和复盘。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照可说明：你的外向性偏突出，意味着现场反馈更容易成为动力来源。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层应加入节奏开关：重要互动后安排短复盘，避免一直被外部反馈牵引。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_e_g5_modifier_v1",
+      "trait_code": "E",
+      "trait_label_zh": "外向性",
+      "gradient_level": "g5",
+      "percentile_range": "81-100",
+      "user_label": "外向性｜较高",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "结果摘要应把表达、互动和现场推进写成显著势能，同时说明高外向不等于永远有能量。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解要突出你在高反馈情境里的带动力，也要写出压强、占场和刺激负荷的代价。"
+        },
+        "core_portrait": {
+          "load_sentence": "这种强度下的负荷来自持续外放后的回收不足，尤其当情绪性或低宜人性同时偏高时更明显。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照应写：你在参考样本中更容易通过外部世界组织行动，但高低不代表价值高低。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层应要求你在关键表达前先定目标，在表达后留出降速动作。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_a_g1_modifier_v1",
+      "trait_code": "A",
+      "trait_label_zh": "宜人性",
+      "gradient_level": "g1",
+      "percentile_range": "0-20",
+      "user_label": "宜人性｜偏低",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "结果摘要应说明你更重事实、边界和责任清楚，不宜把它写成不关心人。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解要呈现锋利判断的价值，也要说明表达压强可能让正确内容变得难被接收。"
+        },
+        "core_portrait": {
+          "load_sentence": "核心负荷来自低效、模糊责任和情绪绑架，你会比别人更难长期替系统吸收摩擦。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照可写：你的宜人性在参考样本中不突出，表示你更少默认以和气作为第一目标。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层应给缓冲句：先说明共同目标，再指出问题，避免判断一开始就被当成攻击。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_a_g2_modifier_v1",
+      "trait_code": "A",
+      "trait_label_zh": "宜人性",
+      "gradient_level": "g2",
+      "percentile_range": "21-40",
+      "user_label": "宜人性｜中位偏低",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "你的画像更接近边界优先型：愿意合作，但不会长期用委婉覆盖不合理。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解应写出你能承接事实与责任，也需要练习让表达更可被关系系统接住。"
+        },
+        "core_portrait": {
+          "load_sentence": "负荷常来自必须反复照顾情绪氛围的场景，你会更想把话说清楚。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照可说明：你在参考样本中更强调边界，这不等于缺乏合作意愿。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层适合使用“两句式边界”：先确认事项，再说明自己能承担和不能承担的部分。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_a_g3_modifier_v1",
+      "trait_code": "A",
+      "trait_label_zh": "宜人性",
+      "gradient_level": "g3",
+      "percentile_range": "41-60",
+      "user_label": "宜人性｜中位",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "结果摘要可以写成合作与判断并存：你愿意体谅，也会看事情是否合理。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解应强调你不是天然迎合或天然对抗，而是在关系质量、规则和边界之间权衡。"
+        },
+        "core_portrait": {
+          "load_sentence": "负荷来自模糊关系：你可能先消耗一段时间，再决定是否表达或后退。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照应说明：中位宜人性需要结合冲突场景看，不能只读成好相处或不好相处。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层应让你更早标记边界变化，避免别人还以为一切都可以继续。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_a_g4_modifier_v1",
+      "trait_code": "A",
+      "trait_label_zh": "宜人性",
+      "gradient_level": "g4",
+      "percentile_range": "61-80",
+      "user_label": "宜人性｜中位偏高",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "你的画像应突出协调、体谅和关系承接，同时说明边界后撤会带来长期成本。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解要写出你在合作氛围中的稳定作用，也要提示不要把所有摩擦都吞进自己系统。"
+        },
+        "core_portrait": {
+          "load_sentence": "负荷常来自替别人多承担一步，你可能为了关系可持续而延迟说不。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照可说明：你的宜人性偏突出，关系质量更容易进入你的决策模型。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层要加入边界练习：先表达可支持的范围，再说明超出范围的部分需要重新协商。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_a_g5_modifier_v1",
+      "trait_code": "A",
+      "trait_label_zh": "宜人性",
+      "gradient_level": "g5",
+      "percentile_range": "81-100",
+      "user_label": "宜人性｜较高",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "结果摘要需要把信任、承接和合作稳定器写出来，同时提醒高宜人不等于必须持续让步。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解应呈现你维护关系质量的能力，也要写出隐性劳动、冲突延迟和自我消耗。"
+        },
+        "core_portrait": {
+          "load_sentence": "这种强度下的负荷来自关系成本内化：你可能先照顾别人，再很晚才看见自己已超载。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照应说明：你在参考样本中更重视合作与承受力，但高低不等于人品好坏。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层应要求每次承接前先问一句：这是否属于我的责任，还是我只是更容易接住它。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_n_g1_modifier_v1",
+      "trait_code": "N",
+      "trait_label_zh": "情绪性",
+      "gradient_level": "g1",
+      "percentile_range": "0-20",
+      "user_label": "情绪性｜偏低",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "结果摘要应说明你的系统较容易回稳，但不能把低情绪性写成没有感受。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解要突出稳定、恢复快和抗短时张力，同时提示可能较晚发现慢性消耗。"
+        },
+        "core_portrait": {
+          "load_sentence": "核心负荷不常来自短时起波，而可能来自长期低估问题已经积累。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照可写：你的情绪性在参考样本中不突出，表示压力反应较不容易快速拉高。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层应加入定期检查：即使当下不明显，也每周确认一次关系、任务和身体的累计成本。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_n_g2_modifier_v1",
+      "trait_code": "N",
+      "trait_label_zh": "情绪性",
+      "gradient_level": "g2",
+      "percentile_range": "21-40",
+      "user_label": "情绪性｜中位偏低",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "你的画像更接近平稳型：多数压力不会迅速把你拉高，但重要问题仍需要被识别。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解应说明你的稳态优势，同时避免让你忽略别人已经感到高负荷。"
+        },
+        "core_portrait": {
+          "load_sentence": "负荷常在长周期里显现，不一定以强烈情绪出现，而可能表现为兴趣下降或迟钝疲惫。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照里适合写：你相对不容易被短时张力带走，但这不是对风险免疫。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层要设置外部反馈点，避免只凭自己当下感觉判断环境是否健康。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_n_g3_modifier_v1",
+      "trait_code": "N",
+      "trait_label_zh": "情绪性",
+      "gradient_level": "g3",
+      "percentile_range": "41-60",
+      "user_label": "情绪性｜中位",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "结果摘要可以写成条件性敏感：日常能保持稳态，但在高压、误解和不确定中会明显起波。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解应呈现你对环境质量有反应，而不是长期高警觉或完全无波动。"
+        },
+        "core_portrait": {
+          "load_sentence": "负荷来自特定触发条件：边界模糊、低反馈、关系拉扯会逐步提高系统成本。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照应说明：中位情绪性需要结合场景，不应被读成稳定或敏感的单一标签。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层适合做触发记录：连续两周记录让你起波的场景，而不是只追求当场压下去。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_n_g4_modifier_v1",
+      "trait_code": "N",
+      "trait_label_zh": "情绪性",
+      "gradient_level": "g4",
+      "percentile_range": "61-80",
+      "user_label": "情绪性｜中位偏高",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "你的画像需要写出预警快、体感强和恢复需要设计，而不是把敏感写成脆弱。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解应强调你能更早发现风险与裂缝，也会更早为它们付出心理成本。"
+        },
+        "core_portrait": {
+          "load_sentence": "负荷常来自外部张力内化：别人还在观察时，你的系统可能已经开始推演后果。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照可写：你的情绪性偏突出，说明压力和不确定性更容易被你身体化地感知。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层应把恢复前置：在高压事件前就安排退出、降噪和复盘，而不是等过载后再补救。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    },
+    {
+      "modifier_id": "big5_n_g5_modifier_v1",
+      "trait_code": "N",
+      "trait_label_zh": "情绪性",
+      "gradient_level": "g5",
+      "percentile_range": "81-100",
+      "user_label": "情绪性｜较高",
+      "injections": {
+        "hero_summary": {
+          "headline_extension": "结果摘要应明确：高情绪性不是脆弱，而是风险觉察快、反应强、恢复成本更需要被认真管理。"
+        },
+        "domain_deep_dive": {
+          "intensity_sentence": "五维深解要写出高预警系统的优势与代价，尤其是高警觉、高消耗和低恢复循环。"
+        },
+        "core_portrait": {
+          "load_sentence": "这种强度下的负荷来自长期处在内部高负荷状态，外部未必看得见，但成本是真实的。"
+        },
+        "norms_comparison": {
+          "compare_sentence": "相对参照应说明：你在参考样本中对压力更敏感，这是一种倾向，不是问题判定。"
+        },
+        "action_plan": {
+          "urgency_sentence": "行动层必须优先处理恢复机制：减少触发、缩短暴露、明确边界，再谈长期成长。"
+        }
+      },
+      "source_refs": [
+        "big5_atomic_trait_blocks_v1.json",
+        "big5_section_block_copy_map_v1.json",
+        "big5_style_and_copy_rules_v1.md"
+      ]
+    }
+  ]
+}

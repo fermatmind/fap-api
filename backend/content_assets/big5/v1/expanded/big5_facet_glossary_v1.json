@@ -1,0 +1,553 @@
+{
+  "version": "v1",
+  "asset_type": "big5_facet_glossary",
+  "source_files": [
+    "big5_source_of_truth_v1.md",
+    "big5_canonical_profiles_v1.json",
+    "big5_atomic_trait_blocks_v1.json",
+    "big5_section_block_copy_map_v1.json",
+    "big5_style_and_copy_rules_v1.md"
+  ],
+  "facets": [
+    {
+      "facet_code": "O1",
+      "trait_code": "O",
+      "trait_label_zh": "开放性",
+      "label_zh": "想象与联想",
+      "gloss": "你处理问题时，是否容易在现有事实之外继续形成画面、假设和替代解释。",
+      "daily_meaning": "日常里，它会表现为你能不能自然想到“还有另一种可能”，以及这些可能会不会占用很多注意力。",
+      "why_it_matters": "它决定开放性是停留在兴趣层，还是能真正扩展你理解复杂问题的方式。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "O2",
+      "trait_code": "O",
+      "trait_label_zh": "开放性",
+      "label_zh": "审美与感受",
+      "gloss": "你对氛围、形式、节奏和美感线索的敏感程度。",
+      "daily_meaning": "它会影响你对空间、文字、音乐、设计和表达质地的反应，而不只是喜欢不喜欢艺术。",
+      "why_it_matters": "它能解释为什么某些环境会让你更愿意投入，而另一些环境即使功能足够也让你难以进入。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "O3",
+      "trait_code": "O",
+      "trait_label_zh": "开放性",
+      "label_zh": "情感开放",
+      "gloss": "你是否愿意承认并细分自己的感受，而不是只用理性结论覆盖它们。",
+      "daily_meaning": "日常里，它影响你能不能说清一种体验的层次，而不是只说“还行”或“不舒服”。",
+      "why_it_matters": "它关系到你如何从体验中获取信息，也关系到情绪性被理解还是被压平。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "O4",
+      "trait_code": "O",
+      "trait_label_zh": "开放性",
+      "label_zh": "变化与体验",
+      "gloss": "你对新体验、新场景和不同生活方式的进入意愿。",
+      "daily_meaning": "它不等于爱冒险，而是你是否愿意让经验边界被适度扩展。",
+      "why_it_matters": "它能帮助区分“开放在想法里”还是“开放也能进入现实试验”。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "O5",
+      "trait_code": "O",
+      "trait_label_zh": "开放性",
+      "label_zh": "观念复杂度",
+      "gloss": "你对抽象问题、理论框架和多重解释的耐受度。",
+      "daily_meaning": "日常里，它表现为你是否愿意把一个问题拆成结构，而不是只要一个快速答案。",
+      "why_it_matters": "它决定你在复杂任务中是被激活，还是被过度抽象拖慢。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "O6",
+      "trait_code": "O",
+      "trait_label_zh": "开放性",
+      "label_zh": "价值重估",
+      "gloss": "你是否愿意重新审视既有规则、传统判断和默认答案。",
+      "daily_meaning": "它会影响你在面对旧路径时是优先维护稳定，还是更愿意问“这套规则还成立吗”。",
+      "why_it_matters": "它关系到创新、变革和自我更新，也提醒高分者不要把重估变成无休止推翻。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "C1",
+      "trait_code": "C",
+      "trait_label_zh": "尽责性",
+      "label_zh": "胜任感",
+      "gloss": "你对自己能否把事情处理好的基本把握。",
+      "daily_meaning": "它会影响你面对任务时是先相信自己能拆解，还是先担心自己撑不住。",
+      "why_it_matters": "它决定执行问题有多少来自能力感，而不只是时间管理。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "C2",
+      "trait_code": "C",
+      "trait_label_zh": "尽责性",
+      "label_zh": "秩序感",
+      "gloss": "你对物理空间、流程、信息和任务边界的整理需求。",
+      "daily_meaning": "日常里，它表现为你是否需要先把东西理顺，才能真正开始推进。",
+      "why_it_matters": "它能解释为什么有些人靠秩序获得能量，有些人却被过度整理消耗。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "C3",
+      "trait_code": "C",
+      "trait_label_zh": "尽责性",
+      "label_zh": "责任与规则",
+      "gloss": "你对承诺、规则和应尽责任的重视程度。",
+      "daily_meaning": "它影响你是否会把“答应过”看成强约束，以及别人不守边界时你会多快起反应。",
+      "why_it_matters": "它是长期可靠性的核心来源，也可能带来对自己和他人的高压要求。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "C4",
+      "trait_code": "C",
+      "trait_label_zh": "尽责性",
+      "label_zh": "成就驱动",
+      "gloss": "你对目标、进步和结果达成的内在推力。",
+      "daily_meaning": "日常里，它会表现为你是否需要看见自己在往前走，才觉得投入有意义。",
+      "why_it_matters": "它能区分高尽责中的质量维护者和目标冲刺者。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "C5",
+      "trait_code": "C",
+      "trait_label_zh": "尽责性",
+      "label_zh": "自律续航",
+      "gloss": "你在低反馈、长期任务中维持行动的能力。",
+      "daily_meaning": "它不是道德评价，而是系统能否在没有即时回报时继续运转。",
+      "why_it_matters": "它常是拖延、断续推进和长期项目成败的关键解释点。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "C6",
+      "trait_code": "C",
+      "trait_label_zh": "尽责性",
+      "label_zh": "审慎决策",
+      "gloss": "你在行动前评估风险、后果和步骤的倾向。",
+      "daily_meaning": "日常里，它影响你是先试再修，还是先想清楚再动。",
+      "why_it_matters": "它能保护你少犯粗糙错误，也可能让启动被过多预演拖慢。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "E1",
+      "trait_code": "E",
+      "trait_label_zh": "外向性",
+      "label_zh": "温暖连接",
+      "gloss": "你在关系中自然释放亲近、回应和友好信号的程度。",
+      "daily_meaning": "它影响别人是否容易感到你可接近，也影响你建立关系的前期摩擦。",
+      "why_it_matters": "它能解释低外向者是否只是克制，还是连熟悉关系中的温度也较少外显。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "E2",
+      "trait_code": "E",
+      "trait_label_zh": "外向性",
+      "label_zh": "群体进入",
+      "gloss": "你对群体、聚会和多人互动的进入意愿。",
+      "daily_meaning": "日常里，它表现为你是被人群点亮，还是需要在进入前先评估能量成本。",
+      "why_it_matters": "它决定外向性在社交场景中的可见度，但不等于关系质量。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "E3",
+      "trait_code": "E",
+      "trait_label_zh": "外向性",
+      "label_zh": "表达推进",
+      "gloss": "你把观点、需求和方向推到台面上的自然程度。",
+      "daily_meaning": "它会影响你是否容易成为推动讨论的人，还是需要被邀请才表达关键判断。",
+      "why_it_matters": "它能区分“有想法”与“想法被看见”之间的距离。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "E4",
+      "trait_code": "E",
+      "trait_label_zh": "外向性",
+      "label_zh": "活动水平",
+      "gloss": "你偏好的生活与工作节奏快慢。",
+      "daily_meaning": "日常里，它影响你是否喜欢同时推进多件事，还是更需要低噪音、低切换。",
+      "why_it_matters": "它解释外向性中的能量速度，而不只是社交偏好。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "E5",
+      "trait_code": "E",
+      "trait_label_zh": "外向性",
+      "label_zh": "刺激寻求",
+      "gloss": "你对高强度、新鲜、热闹或冒险体验的需求。",
+      "daily_meaning": "它会影响你是否需要更强外部刺激来保持兴奋和投入。",
+      "why_it_matters": "它提醒高分者设计回收，低分者不要被误判为没活力。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "E6",
+      "trait_code": "E",
+      "trait_label_zh": "外向性",
+      "label_zh": "积极情绪",
+      "gloss": "你是否容易被期待、希望和现场正反馈带动。",
+      "daily_meaning": "日常里，它影响你进入任务时是否容易被好消息和互动回声点亮。",
+      "why_it_matters": "它能解释有些人外向但并不总轻松，也能解释低外向中仍然存在的愉悦感。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "A1",
+      "trait_code": "A",
+      "trait_label_zh": "宜人性",
+      "label_zh": "信任起点",
+      "gloss": "你默认相信他人善意和可靠性的程度。",
+      "daily_meaning": "它影响你在关系开始时是先打开，还是先观察和验证。",
+      "why_it_matters": "它决定合作成本的前期高低，也提醒高信任者保留现实校验。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "A2",
+      "trait_code": "A",
+      "trait_label_zh": "宜人性",
+      "label_zh": "坦率与直言",
+      "gloss": "你在表达真实想法时，是更直接还是更倾向策略性保留。",
+      "daily_meaning": "日常里，它影响你说真话的速度、方式和关系缓冲。",
+      "why_it_matters": "它能解释为什么同样低宜人，有些人是边界清楚，有些人是表达压强过高。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "A3",
+      "trait_code": "A",
+      "trait_label_zh": "宜人性",
+      "label_zh": "利他承接",
+      "gloss": "你愿意为他人需要投入资源、时间和注意力的程度。",
+      "daily_meaning": "它会表现为你是否自然补位、照顾和多想一步。",
+      "why_it_matters": "它是关系稳定的重要来源，也可能让责任边界变模糊。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "A4",
+      "trait_code": "A",
+      "trait_label_zh": "宜人性",
+      "label_zh": "合作顺应",
+      "gloss": "你在冲突中维持协调、让步和继续合作的倾向。",
+      "daily_meaning": "日常里，它影响你是先保关系，还是先把分歧说清。",
+      "why_it_matters": "它决定冲突成本如何分配，也提醒高分者不要长期牺牲真实边界。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "A5",
+      "trait_code": "A",
+      "trait_label_zh": "宜人性",
+      "label_zh": "谦逊姿态",
+      "gloss": "你是否倾向低调处理自我重要性和功劳归属。",
+      "daily_meaning": "它会影响你如何展示成绩、接受认可，以及是否愿意站到前台。",
+      "why_it_matters": "它有助于团队信任，也可能让贡献被低估。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "A6",
+      "trait_code": "A",
+      "trait_label_zh": "宜人性",
+      "label_zh": "共情柔软度",
+      "gloss": "你对他人痛苦、处境和情绪压力的感受与回应程度。",
+      "daily_meaning": "日常里，它决定你是否容易被别人的处境触动，并愿意调整自己的做法。",
+      "why_it_matters": "它能支持照顾与理解，也需要边界来防止被过度牵引。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "N1",
+      "trait_code": "N",
+      "trait_label_zh": "情绪性",
+      "label_zh": "焦虑预警",
+      "gloss": "你对风险、不确定和潜在后果的提前感知强度。",
+      "daily_meaning": "它会表现为你比别人更早开始推演、担心或准备。",
+      "why_it_matters": "它能保护你不迟钝，也可能让尚未发生的风险提前占用大量心力。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "N2",
+      "trait_code": "N",
+      "trait_label_zh": "情绪性",
+      "label_zh": "愤怒反应",
+      "gloss": "你在受阻、被冒犯或遇到不公平时的起火速度。",
+      "daily_meaning": "日常里，它影响你多快感到被点燃，以及是否能把反应转成清楚表达。",
+      "why_it_matters": "它解释冲突中的压强来源，也提醒不要把合理边界表达成伤害性反击。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "N3",
+      "trait_code": "N",
+      "trait_label_zh": "情绪性",
+      "label_zh": "情绪波动",
+      "gloss": "你的情绪状态被环境、关系和事件拉动的幅度。",
+      "daily_meaning": "它会影响一天中状态切换的明显程度，以及恢复是否需要额外设计。",
+      "why_it_matters": "它能区分真实敏感和短时反应，也帮助找到更合适的节奏。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "N4",
+      "trait_code": "N",
+      "trait_label_zh": "情绪性",
+      "label_zh": "自我意识压力",
+      "gloss": "你在被评价、被看见或可能出错时的自我监控强度。",
+      "daily_meaning": "日常里，它表现为你是否容易在表达后反复回放自己的表现。",
+      "why_it_matters": "它能解释为什么有些人能力足够，却在曝光场景中消耗很高。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "N5",
+      "trait_code": "N",
+      "trait_label_zh": "情绪性",
+      "label_zh": "冲动与失控感",
+      "gloss": "你在高压或高诱惑下维持调节的难度。",
+      "daily_meaning": "它不是品格判断，而是压力升高时系统是否容易先被反应带走。",
+      "why_it_matters": "它有助于识别过载前兆，并把行动设计得更低摩擦。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    },
+    {
+      "facet_code": "N6",
+      "trait_code": "N",
+      "trait_label_zh": "情绪性",
+      "label_zh": "脆弱负荷",
+      "gloss": "你在持续压力下感到撑不住、需要退出或恢复的程度。",
+      "daily_meaning": "日常里，它影响你面对连续任务、冲突和不确定时的承载上限。",
+      "why_it_matters": "它提醒报告把恢复当成结构设计，而不是要求用户一直硬扛。",
+      "usable_as": [
+        "table_row",
+        "metric_card",
+        "tooltip_hover_copy"
+      ],
+      "source_refs": [
+        "big5_source_of_truth_v1.md#3",
+        "big5_style_and_copy_rules_v1.md#3"
+      ]
+    }
+  ]
+}
