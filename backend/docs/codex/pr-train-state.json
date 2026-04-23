@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T14:55:00Z",
+  "updated_at": "2026-04-23T14:45:49.086Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -3778,10 +3778,8 @@
     "PR-BIG5-LIFECYCLE-SHELL-RETENTION-V1": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api-big5-lifecycle-shell-retention",
-      "status": "local_checks_failed_draft_exception",
+      "status": "draft_pr_open_local_checks_failed",
       "branch": "codex/big5-lifecycle-shell-retention-v1",
-      "commit_sha": "",
-      "pr_url": "",
       "checks": {
         "local": [
           {
@@ -3841,6 +3839,10 @@
         {
           "at": "2026-04-23T14:44:21.784Z",
           "summary": "Scoped lifecycle checks passed; recorded ci_verify_mbti.sh out-of-scope Big Five pack publish/rollback failures and proceeding with draft PR exception."
+        },
+        {
+          "at": "2026-04-23T14:45:49.086Z",
+          "summary": "Opened draft PR #993 under documented draft exception; PR is not mergeable while ci_verify_mbti.sh remains red."
         }
       ]
     }
