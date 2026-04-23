@@ -7,6 +7,8 @@ namespace App\Http\Controllers\API\V0_5\Cms;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Http\Controllers\Controller;
 use App\Models\InterpretationGuide;
+use App\Services\Cms\RowBackedRevisionWorkspace;
+use App\Services\Cms\SiblingTranslationWorkflowService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -14,6 +16,10 @@ use Illuminate\Validation\Rule;
 
 final class InterpretationGuideController extends Controller
 {
+    public function __construct(
+        private readonly RowBackedRevisionWorkspace $workspace,
+    ) {}
+
     public function index(Request $request): JsonResponse
     {
         $validated = $this->validateReadQuery($request);
@@ -114,7 +120,7 @@ final class InterpretationGuideController extends Controller
 
         return response()->json([
             'ok' => true,
-            'guide' => $this->payload($guide),
+            'guide' => $this->payload($this->workspace->editorRecord('interpretation_guide', $guide)),
         ]);
     }
 
@@ -188,13 +194,19 @@ final class InterpretationGuideController extends Controller
         $orgId = (int) ($validated['org_id'] ?? 0);
         $normalizedSlug = $this->normalizeSlug($slug);
 
-        $guide = InterpretationGuide::query()
+        $existing = InterpretationGuide::query()
             ->withoutGlobalScopes()
-            ->firstOrNew([
+            ->where([
                 'org_id' => $orgId,
                 'slug' => $normalizedSlug,
                 'locale' => (string) $validated['locale'],
-            ]);
+            ])->first();
+
+        $guide = $existing ?? new InterpretationGuide([
+            'org_id' => $orgId,
+            'slug' => $normalizedSlug,
+            'locale' => (string) $validated['locale'],
+        ]);
 
         $guide->fill([
             'title' => trim((string) $validated['title']),
@@ -215,6 +227,39 @@ final class InterpretationGuideController extends Controller
             'canonical_path' => $this->nullableString($validated['canonical_path'] ?? null) ?? '/support/guides/'.$normalizedSlug,
         ]);
         $guide->save();
+
+        $payload = [
+            'title' => trim((string) $validated['title']),
+            'summary' => $this->nullableString($validated['summary'] ?? null),
+            'body_md' => $bodyMd,
+            'body_html' => $bodyHtml,
+            'seo_title' => $this->nullableString($validated['seo_title'] ?? null),
+            'seo_description' => $this->nullableString($validated['seo_description'] ?? null),
+            'test_family' => (string) $validated['test_family'],
+            'result_context' => (string) $validated['result_context'],
+            'audience' => $this->nullableString($validated['audience'] ?? null) ?? 'general',
+            'related_guide_ids' => array_values((array) ($validated['related_guide_ids'] ?? [])),
+            'related_methodology_page_ids' => array_values((array) ($validated['related_methodology_page_ids'] ?? [])),
+            'canonical_path' => $this->nullableString($validated['canonical_path'] ?? null) ?? '/support/guides/'.$normalizedSlug,
+        ];
+        $revisionStatus = $this->revisionStatus((string) $validated['status'], (string) $validated['review_state'], $guide->isSourceContent());
+        $guide = $this->workspace->saveWorkingDraft(
+            'interpretation_guide',
+            $guide,
+            $payload,
+            $revisionStatus,
+            [
+                'org_id' => SiblingTranslationWorkflowService::PUBLIC_EDITORIAL_ORG_ID,
+                'status' => (string) $validated['status'],
+                'review_state' => (string) $validated['review_state'],
+                'last_reviewed_at' => $validated['last_reviewed_at'] ?? null,
+                'published_at' => $validated['published_at'] ?? null,
+            ],
+        );
+        if ((string) $validated['status'] === InterpretationGuide::STATUS_PUBLISHED) {
+            $guide = $this->workspace->publishWorkingRevision('interpretation_guide', $guide);
+        }
+
         $shouldDispatchRelease = ContentReleaseAudit::shouldDispatchPublishedFollowUp('interpretation_guide', $guide, [
             'title',
             'summary',
@@ -232,8 +277,26 @@ final class InterpretationGuideController extends Controller
 
         return response()->json([
             'ok' => true,
-            'guide' => $this->payload($guide),
+            'guide' => $this->payload($this->workspace->editorRecord('interpretation_guide', $guide)),
         ]);
+    }
+
+    private function revisionStatus(string $status, string $reviewState, bool $isSource): string
+    {
+        if ($isSource) {
+            return InterpretationGuide::TRANSLATION_STATUS_SOURCE;
+        }
+        if ($status === InterpretationGuide::STATUS_PUBLISHED) {
+            return InterpretationGuide::TRANSLATION_STATUS_PUBLISHED;
+        }
+        if ($reviewState === InterpretationGuide::REVIEW_APPROVED) {
+            return InterpretationGuide::TRANSLATION_STATUS_APPROVED;
+        }
+        if (in_array($reviewState, [InterpretationGuide::REVIEW_CONTENT, InterpretationGuide::REVIEW_SCIENCE_OR_PRODUCT], true)) {
+            return InterpretationGuide::TRANSLATION_STATUS_HUMAN_REVIEW;
+        }
+
+        return InterpretationGuide::TRANSLATION_STATUS_DRAFT;
     }
 
     private function validateReadQuery(Request $request): array|JsonResponse

@@ -134,6 +134,38 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-ROW-BACKED-CMS-SHADOW-REVISIONS
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/row-backed-cms-shadow-revisions
+    base: main
+    depends_on: ["PR-ARTICLE-REAL-MACHINE-TRANSLATION-PROVIDER"]
+    mode: execute
+    scope: >
+      Revision/shadow layer for row-backed multilingual CMS content.
+      Add a shared shadow revision layer for support_articles,
+      interpretation_guides, and content_pages so published canonical rows
+      can keep a stable public surface while machine_draft, human_review,
+      approved, stale, and publish workflows run against working revisions.
+      Preserve current frontend/public contracts and do not start non-article
+      public rollout work in this PR.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Models/CmsTranslationRevision.php app/Services/Cms/RowBackedRevisionWorkspace.php app/Services/Cms/AbstractSiblingTranslationAdapter.php app/Services/Cms/SiblingTranslationWorkflowService.php app/Http/Controllers/API/V0_5/Cms/SupportArticleController.php app/Http/Controllers/API/V0_5/Cms/InterpretationGuideController.php app/Http/Controllers/API/V0_5/Cms/ContentPageController.php app/Filament/Ops/Resources/SupportArticleResource.php app/Filament/Ops/Resources/InterpretationGuideResource.php app/Filament/Ops/Resources/ContentPageResource.php app/Filament/Ops/Resources/SupportArticleResource/Pages/CreateSupportArticle.php app/Filament/Ops/Resources/SupportArticleResource/Pages/EditSupportArticle.php app/Filament/Ops/Resources/InterpretationGuideResource/Pages/CreateInterpretationGuide.php app/Filament/Ops/Resources/InterpretationGuideResource/Pages/EditInterpretationGuide.php app/Filament/Ops/Resources/ContentPageResource/Pages/CreateContentPage.php app/Filament/Ops/Resources/ContentPageResource/Pages/EditContentPage.php tests/Feature/Ops/CmsTranslationShadowRevisionTest.php tests/Feature/V0_5/SupportTrustCmsApiTest.php"
+      - "php artisan test tests/Feature/Ops/CmsTranslationBackboneTest.php tests/Feature/Ops/CmsTranslationShadowRevisionTest.php tests/Feature/V0_5/SupportTrustCmsApiTest.php tests/Feature/Ops/PostReleaseObservabilityPageTest.php"
+      - "php artisan fap:schema:verify"
+      - "php artisan route:list"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-BIG5-REPORT-ENGINE-ALL-TRAITS
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

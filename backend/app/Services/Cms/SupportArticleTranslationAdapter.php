@@ -147,4 +147,30 @@ final class SupportArticleTranslationAdapter extends AbstractSiblingTranslationA
             'canonical_path' => $source->canonical_path,
         ];
     }
+
+    protected function additionalPayloadFields(Model $record): array
+    {
+        return [
+            'support_category' => (string) $record->support_category,
+            'support_intent' => (string) $record->support_intent,
+            'primary_cta_label' => $record->primary_cta_label,
+            'primary_cta_url' => $record->primary_cta_url,
+            'related_support_article_ids' => is_array($record->related_support_article_ids) ? $record->related_support_article_ids : [],
+            'related_content_page_ids' => is_array($record->related_content_page_ids) ? $record->related_content_page_ids : [],
+            'canonical_path' => $record->canonical_path,
+        ];
+    }
+
+    protected function applyAdditionalPayloadFields(Model $record, array $payload): void
+    {
+        $record->forceFill([
+            'support_category' => (string) ($payload['support_category'] ?? $record->support_category),
+            'support_intent' => (string) ($payload['support_intent'] ?? $record->support_intent),
+            'primary_cta_label' => $payload['primary_cta_label'] ?? null,
+            'primary_cta_url' => $payload['primary_cta_url'] ?? null,
+            'related_support_article_ids' => array_values((array) ($payload['related_support_article_ids'] ?? [])),
+            'related_content_page_ids' => array_values((array) ($payload['related_content_page_ids'] ?? [])),
+            'canonical_path' => $payload['canonical_path'] ?? null,
+        ]);
+    }
 }

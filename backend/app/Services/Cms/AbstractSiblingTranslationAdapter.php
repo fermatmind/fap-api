@@ -47,6 +47,16 @@ abstract class AbstractSiblingTranslationAdapter implements SiblingTranslationAd
 
     abstract protected function baseCreateAttributes(Model $source, string $targetLocale): array;
 
+    /**
+     * @return array<string, mixed>
+     */
+    abstract protected function additionalPayloadFields(Model $record): array;
+
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    abstract protected function applyAdditionalPayloadFields(Model $record, array $payload): void;
+
     public function sourceLocale(Model $record): string
     {
         return (string) ($record->source_locale ?: $record->locale);
@@ -91,6 +101,40 @@ abstract class AbstractSiblingTranslationAdapter implements SiblingTranslationAd
         ];
     }
 
+    public function snapshotPayload(Model $record): array
+    {
+        $payload = $this->normalizedSourcePayload($record);
+        $payload['body_html'] = $this->bodyHtmlValue($record);
+
+        return $payload + $this->additionalPayloadFields($record);
+    }
+
+    public function applyRevisionPayload(Model $record, array $payload): void
+    {
+        $titleField = $this->titleField();
+        $summaryField = $this->summaryField();
+        $bodyField = $this->bodyField();
+        $seoTitleField = $this->seoTitleField();
+        $seoDescriptionField = $this->seoDescriptionField();
+
+        $record->forceFill([
+            $titleField => (string) ($payload['title'] ?? ''),
+            $summaryField => $payload['summary'] ?? null,
+            $bodyField => (string) ($payload['body_md'] ?? ''),
+            $seoTitleField => $payload['seo_title'] ?? null,
+            $seoDescriptionField => $payload['seo_description'] ?? null,
+        ]);
+
+        $bodyHtmlField = $this->bodyHtmlField();
+        if ($bodyHtmlField !== null) {
+            $record->forceFill([
+                $bodyHtmlField => (string) ($payload['body_html'] ?? ''),
+            ]);
+        }
+
+        $this->applyAdditionalPayloadFields($record, $payload);
+    }
+
     public function createTarget(Model $source, string $targetLocale, array $payload): Model
     {
         $modelClass = $this->modelClass();
@@ -114,20 +158,10 @@ abstract class AbstractSiblingTranslationAdapter implements SiblingTranslationAd
 
     public function applyMachinePayload(Model $target, array $payload): void
     {
-        $titleField = $this->titleField();
-        $summaryField = $this->summaryField();
-        $bodyField = $this->bodyField();
-        $seoTitleField = $this->seoTitleField();
-        $seoDescriptionField = $this->seoDescriptionField();
-
-        $target->forceFill([
-            $titleField => (string) $payload['title'],
-            $summaryField => $payload['summary'] ?? null,
-            $bodyField => (string) $payload['body_md'],
-            $seoTitleField => $payload['seo_title'] ?? null,
-            $seoDescriptionField => $payload['seo_description'] ?? null,
-            'translation_status' => $this->translationStatusMachineDraft(),
+        $this->applyRevisionPayload($target, $payload + [
+            'body_html' => $payload['body_html'] ?? '',
         ]);
+        $target->forceFill(['translation_status' => $this->translationStatusMachineDraft()]);
     }
 
     public function markHumanReview(Model $target): void
@@ -162,10 +196,14 @@ abstract class AbstractSiblingTranslationAdapter implements SiblingTranslationAd
 
     public function requiredFieldBlockers(Model $target): array
     {
-        $payload = $this->normalizedSourcePayload($target);
+        return $this->requiredPayloadBlockers($this->snapshotPayload($target));
+    }
+
+    public function requiredPayloadBlockers(array $payload): array
+    {
         $blockers = [];
 
-        if (trim((string) $payload['title']) === '') {
+        if (trim((string) ($payload['title'] ?? '')) === '') {
             $blockers[] = 'title missing';
         }
         if (trim((string) ($payload['body_md'] ?? '')) === '') {
@@ -179,5 +217,17 @@ abstract class AbstractSiblingTranslationAdapter implements SiblingTranslationAd
         }
 
         return $blockers;
+    }
+
+    protected function bodyHtmlField(): ?string
+    {
+        return 'body_html';
+    }
+
+    protected function bodyHtmlValue(Model $record): string
+    {
+        $field = $this->bodyHtmlField();
+
+        return $field !== null ? (string) ($record->{$field} ?? '') : '';
     }
 }

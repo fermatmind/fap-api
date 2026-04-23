@@ -7,6 +7,7 @@ namespace App\Filament\Ops\Resources\ContentPageResource\Pages;
 use App\Filament\Ops\Resources\ContentPageResource;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Models\ContentPage;
+use App\Services\Cms\RowBackedRevisionWorkspace;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateContentPage extends CreateRecord
@@ -17,6 +18,8 @@ class CreateContentPage extends CreateRecord
     {
         /** @var ContentPage $record */
         $record = $this->getRecord()->fresh();
+        app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('content_page', $record);
+        $record = $record->fresh();
 
         if (ContentReleaseAudit::shouldDispatchPublishedFollowUp('content_page', $record, [
             'title',

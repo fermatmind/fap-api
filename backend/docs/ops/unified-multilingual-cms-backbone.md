@@ -28,12 +28,14 @@ All supported content types now carry the same core translation metadata:
 - `published_revision_id`
 - `article_translation_revisions`
 
-`support_articles`, `interpretation_guides`, and `content_pages` are now sibling-row-backed:
+`support_articles`, `interpretation_guides`, and `content_pages` now use sibling rows with a shared shadow revision layer:
 
 - one canonical source row
 - one sibling row per target locale
+- one `cms_translation_revisions` history per row-backed locale record
+- `working_revision_id` and `published_revision_id` pointers on the base row
 - stale detection from source hash drift
-- publish/approve/review state managed on the sibling row itself
+- publish/approve/review state managed on the working revision and surfaced on the row
 
 ## Ownership rule
 
@@ -95,10 +97,12 @@ Each group shows:
 
 `support_articles`, `interpretation_guides`, `content_pages`
 
+- create or hydrate initial shadow revision
+- re-sync from source into a new working revision
 - promote to human review
 - approve translation
 - publish translation
-- archive stale unpublished translation
+- archive stale working revision
 - open source
 - open target
 
@@ -112,15 +116,14 @@ When no provider is configured:
 - the reason is rendered in the UI
 - no fake translation is performed
 
-### Intentionally disabled
+### Current shadow behavior
 
-Published re-sync for row-backed content types is disabled.
+For published row-backed translations:
 
-Reason:
-
-- current public reads for these content types still come from the base row
-- overwriting a published row with a new machine draft would leak draft content
-- these content types need a later revision-backed or draft-shadow cutover before safe draft-over-published re-sync
+- the base row remains the public owner
+- machine re-sync creates a new working revision instead of overwriting the base row
+- the base row keeps serving the previously published payload until publish is executed
+- publishing copies the working revision payload back onto the base row and advances `published_revision_id`
 
 ## Provider integration
 
@@ -177,8 +180,9 @@ For row-backed content:
 
 - stale is visible in the console
 - publish preflight blocks stale targets
-- archive stale unpublished target is supported
-- published re-sync remains disabled until revision-backed editing exists
+- re-sync forks a new working revision under the same locale row
+- internal/editor reads can hydrate from the working revision
+- public reads stay on the base published row until publish advances the pointer
 
 ## Validation baseline
 
@@ -187,6 +191,7 @@ Recommended validation commands:
 ```bash
 vendor/bin/pint --test
 php artisan test tests/Feature/Ops/ArticleTranslationOpsPageTest.php tests/Feature/Ops/CmsTranslationBackboneTest.php tests/Feature/Ops/PostReleaseObservabilityPageTest.php tests/Feature/Ops/ContentCmsProductLayerTest.php tests/Feature/V0_5/ArticlePublicApiTest.php tests/Feature/Ops/ArticleTranslationRevisionContractTest.php tests/Feature/V0_5/SupportTrustCmsApiTest.php tests/Feature/Architecture/ServiceLayerBoundaryTest.php
+php artisan test tests/Feature/Ops/CmsTranslationShadowRevisionTest.php
 php artisan fap:schema:verify
 php artisan route:list
 ```
@@ -196,6 +201,5 @@ php artisan route:list
 Still deferred for a later PR:
 
 - real provider implementations for non-article content types
-- row-backed published re-sync via revision-backed editing
 - frontend consumption of multilingual support articles / interpretation guides / content pages beyond current public contract
 - a dedicated invalidation queue with retry state surfaced directly in the translation console

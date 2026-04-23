@@ -7,6 +7,8 @@ namespace App\Http\Controllers\API\V0_5\Cms;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Http\Controllers\Controller;
 use App\Models\SupportArticle;
+use App\Services\Cms\RowBackedRevisionWorkspace;
+use App\Services\Cms\SiblingTranslationWorkflowService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -14,6 +16,10 @@ use Illuminate\Validation\Rule;
 
 final class SupportArticleController extends Controller
 {
+    public function __construct(
+        private readonly RowBackedRevisionWorkspace $workspace,
+    ) {}
+
     public function index(Request $request): JsonResponse
     {
         $validated = $this->validateReadQuery($request);
@@ -114,7 +120,7 @@ final class SupportArticleController extends Controller
 
         return response()->json([
             'ok' => true,
-            'article' => $this->payload($article),
+            'article' => $this->payload($this->workspace->editorRecord('support_article', $article)),
         ]);
     }
 
@@ -189,13 +195,19 @@ final class SupportArticleController extends Controller
         $orgId = (int) ($validated['org_id'] ?? 0);
         $normalizedSlug = $this->normalizeSlug($slug);
 
-        $article = SupportArticle::query()
+        $existing = SupportArticle::query()
             ->withoutGlobalScopes()
-            ->firstOrNew([
+            ->where([
                 'org_id' => $orgId,
                 'slug' => $normalizedSlug,
                 'locale' => (string) $validated['locale'],
-            ]);
+            ])->first();
+
+        $article = $existing ?? new SupportArticle([
+            'org_id' => $orgId,
+            'slug' => $normalizedSlug,
+            'locale' => (string) $validated['locale'],
+        ]);
 
         $article->fill([
             'title' => trim((string) $validated['title']),
@@ -217,6 +229,40 @@ final class SupportArticleController extends Controller
             'canonical_path' => $this->nullableString($validated['canonical_path'] ?? null) ?? '/support/'.$normalizedSlug,
         ]);
         $article->save();
+
+        $payload = [
+            'title' => trim((string) $validated['title']),
+            'summary' => $this->nullableString($validated['summary'] ?? null),
+            'body_md' => $bodyMd,
+            'body_html' => $bodyHtml,
+            'seo_title' => $this->nullableString($validated['seo_title'] ?? null),
+            'seo_description' => $this->nullableString($validated['seo_description'] ?? null),
+            'support_category' => (string) $validated['support_category'],
+            'support_intent' => (string) $validated['support_intent'],
+            'primary_cta_label' => $this->nullableString($validated['primary_cta_label'] ?? null),
+            'primary_cta_url' => $this->nullableString($validated['primary_cta_url'] ?? null),
+            'related_support_article_ids' => array_values((array) ($validated['related_support_article_ids'] ?? [])),
+            'related_content_page_ids' => array_values((array) ($validated['related_content_page_ids'] ?? [])),
+            'canonical_path' => $this->nullableString($validated['canonical_path'] ?? null) ?? '/support/'.$normalizedSlug,
+        ];
+        $revisionStatus = $this->revisionStatus((string) $validated['status'], (string) $validated['review_state'], $article->isSourceContent());
+        $article = $this->workspace->saveWorkingDraft(
+            'support_article',
+            $article,
+            $payload,
+            $revisionStatus,
+            [
+                'org_id' => SiblingTranslationWorkflowService::PUBLIC_EDITORIAL_ORG_ID,
+                'status' => (string) $validated['status'],
+                'review_state' => (string) $validated['review_state'],
+                'last_reviewed_at' => $validated['last_reviewed_at'] ?? null,
+                'published_at' => $validated['published_at'] ?? null,
+            ],
+        );
+        if ((string) $validated['status'] === SupportArticle::STATUS_PUBLISHED) {
+            $article = $this->workspace->publishWorkingRevision('support_article', $article);
+        }
+
         $shouldDispatchRelease = ContentReleaseAudit::shouldDispatchPublishedFollowUp('support_article', $article, [
             'title',
             'summary',
@@ -235,8 +281,27 @@ final class SupportArticleController extends Controller
 
         return response()->json([
             'ok' => true,
-            'article' => $this->payload($article),
+            'article' => $this->payload($this->workspace->editorRecord('support_article', $article)),
         ]);
+    }
+
+    private function revisionStatus(string $status, string $reviewState, bool $isSource): string
+    {
+        if ($isSource) {
+            return SupportArticle::TRANSLATION_STATUS_SOURCE;
+        }
+
+        if ($status === SupportArticle::STATUS_PUBLISHED) {
+            return SupportArticle::TRANSLATION_STATUS_PUBLISHED;
+        }
+        if ($reviewState === SupportArticle::REVIEW_APPROVED) {
+            return SupportArticle::TRANSLATION_STATUS_APPROVED;
+        }
+        if (in_array($reviewState, [SupportArticle::REVIEW_SUPPORT, SupportArticle::REVIEW_PRODUCT_OR_POLICY], true)) {
+            return SupportArticle::TRANSLATION_STATUS_HUMAN_REVIEW;
+        }
+
+        return SupportArticle::TRANSLATION_STATUS_DRAFT;
     }
 
     private function validateReadQuery(Request $request): array|JsonResponse

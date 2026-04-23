@@ -7,6 +7,8 @@ namespace App\Http\Controllers\API\V0_5\Cms;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Http\Controllers\Controller;
 use App\Models\ContentPage;
+use App\Services\Cms\RowBackedRevisionWorkspace;
+use App\Services\Cms\SiblingTranslationWorkflowService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -14,6 +16,10 @@ use Illuminate\Validation\Rule;
 
 final class ContentPageController extends Controller
 {
+    public function __construct(
+        private readonly RowBackedRevisionWorkspace $workspace,
+    ) {}
+
     /**
      * GET /api/v0.5/content-pages/{slug}
      */
@@ -140,13 +146,19 @@ final class ContentPageController extends Controller
             ], 422);
         }
 
-        $page = ContentPage::query()
+        $existing = ContentPage::query()
             ->withoutGlobalScopes()
-            ->firstOrNew([
+            ->where([
                 'org_id' => $orgId,
                 'slug' => $normalizedSlug,
                 'locale' => (string) $validated['locale'],
-            ]);
+            ])->first();
+
+        $page = $existing ?? new ContentPage([
+            'org_id' => $orgId,
+            'slug' => $normalizedSlug,
+            'locale' => (string) $validated['locale'],
+        ]);
 
         $page->fill([
             'path' => '/'.$normalizedSlug,
@@ -178,6 +190,52 @@ final class ContentPageController extends Controller
             'status' => (string) ($validated['status'] ?? ((bool) $validated['is_public'] ? ContentPage::STATUS_PUBLISHED : ContentPage::STATUS_DRAFT)),
         ]);
         $page->save();
+
+        $payload = [
+            'title' => trim((string) $validated['title']),
+            'summary' => $this->nullableString($validated['summary'] ?? null),
+            'body_md' => $contentMd,
+            'body_html' => $contentHtml,
+            'seo_title' => $this->nullableString($validated['seo_title'] ?? null),
+            'seo_description' => $this->nullableString($validated['seo_description'] ?? null) ?? $this->nullableString($validated['meta_description'] ?? null),
+            'path' => '/'.$normalizedSlug,
+            'kind' => (string) $validated['kind'],
+            'page_type' => (string) ($validated['page_type'] ?? $this->defaultPageType((string) $validated['kind'], $normalizedSlug)),
+            'kicker' => $this->nullableString($validated['kicker'] ?? null),
+            'template' => (string) $validated['template'],
+            'animation_profile' => (string) $validated['animation_profile'],
+            'owner' => $this->nullableString($validated['owner'] ?? null),
+            'legal_review_required' => (bool) ($validated['legal_review_required'] ?? false),
+            'science_review_required' => (bool) ($validated['science_review_required'] ?? false),
+            'source_doc' => $this->nullableString($validated['source_doc'] ?? null),
+            'headings_json' => $this->extractHeadings($contentMd),
+            'meta_description' => $this->nullableString($validated['meta_description'] ?? null),
+            'canonical_path' => $this->nullableString($validated['canonical_path'] ?? null) ?? '/'.$normalizedSlug,
+            'is_public' => (bool) $validated['is_public'],
+            'is_indexable' => (bool) $validated['is_indexable'],
+        ];
+        $status = (string) ($validated['status'] ?? ((bool) $validated['is_public'] ? ContentPage::STATUS_PUBLISHED : ContentPage::STATUS_DRAFT));
+        $reviewState = (string) ($validated['review_state'] ?? 'draft');
+        $revisionStatus = $this->revisionStatus($status, $reviewState, $page->isSourceContent());
+        $page = $this->workspace->saveWorkingDraft(
+            'content_page',
+            $page,
+            $payload,
+            $revisionStatus,
+            [
+                'org_id' => SiblingTranslationWorkflowService::PUBLIC_EDITORIAL_ORG_ID,
+                'status' => $status,
+                'review_state' => $reviewState,
+                'published_at' => $validated['published_at'] ?? null,
+                'source_updated_at' => $validated['updated_at'] ?? null,
+                'effective_at' => $validated['effective_at'] ?? null,
+                'last_reviewed_at' => $validated['last_reviewed_at'] ?? null,
+            ],
+        );
+        if ($status === ContentPage::STATUS_PUBLISHED && (bool) $validated['is_public']) {
+            $page = $this->workspace->publishWorkingRevision('content_page', $page);
+        }
+
         $shouldDispatchRelease = ContentReleaseAudit::shouldDispatchPublishedFollowUp('content_page', $page, [
             'title',
             'kicker',
@@ -198,7 +256,7 @@ final class ContentPageController extends Controller
 
         return response()->json([
             'ok' => true,
-            'page' => $this->pagePayload($page),
+            'page' => $this->pagePayload($this->workspace->editorRecord('content_page', $page)),
         ]);
     }
 
@@ -351,5 +409,23 @@ final class ContentPageController extends Controller
         $trimmed = trim((string) $value);
 
         return $trimmed !== '' ? substr($trimmed, 0, 10) : null;
+    }
+
+    private function revisionStatus(string $status, string $reviewState, bool $isSource): string
+    {
+        if ($isSource) {
+            return ContentPage::TRANSLATION_STATUS_SOURCE;
+        }
+        if ($status === ContentPage::STATUS_PUBLISHED) {
+            return ContentPage::TRANSLATION_STATUS_PUBLISHED;
+        }
+        if ($reviewState === 'approved') {
+            return ContentPage::TRANSLATION_STATUS_APPROVED;
+        }
+        if ($reviewState !== 'draft') {
+            return ContentPage::TRANSLATION_STATUS_HUMAN_REVIEW;
+        }
+
+        return ContentPage::TRANSLATION_STATUS_DRAFT;
     }
 }

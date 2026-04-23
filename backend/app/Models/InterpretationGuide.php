@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Models\Concerns\HasOrgScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -84,6 +85,8 @@ final class InterpretationGuide extends Model
         'source_content_id',
         'source_version_hash',
         'translated_from_version_hash',
+        'working_revision_id',
+        'published_revision_id',
         'status',
         'review_state',
         'related_guide_ids',
@@ -98,6 +101,8 @@ final class InterpretationGuide extends Model
     protected $casts = [
         'org_id' => 'integer',
         'source_content_id' => 'integer',
+        'working_revision_id' => 'integer',
+        'published_revision_id' => 'integer',
         'related_guide_ids' => 'array',
         'related_methodology_page_ids' => 'array',
         'last_reviewed_at' => 'datetime',
@@ -162,6 +167,16 @@ final class InterpretationGuide extends Model
         return filled($source->source_version_hash)
             && filled($this->translated_from_version_hash)
             && ! hash_equals((string) $source->source_version_hash, (string) $this->translated_from_version_hash);
+    }
+
+    public function workingRevision(): BelongsTo
+    {
+        return $this->belongsTo(CmsTranslationRevision::class, 'working_revision_id');
+    }
+
+    public function publishedRevision(): BelongsTo
+    {
+        return $this->belongsTo(CmsTranslationRevision::class, 'published_revision_id');
     }
 
     private function computeSourceVersionHash(): string
