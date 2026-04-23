@@ -46,8 +46,11 @@ class Article extends Model
         'source_locale',
         'translation_status',
         'translated_from_article_id',
+        'source_article_id',
         'source_version_hash',
         'translated_from_version_hash',
+        'working_revision_id',
+        'published_revision_id',
         'title',
         'excerpt',
         'content_md',
@@ -81,6 +84,9 @@ class Article extends Model
         'cover_image_variants' => 'array',
         'voice_order' => 'integer',
         'translated_from_article_id' => 'integer',
+        'source_article_id' => 'integer',
+        'working_revision_id' => 'integer',
+        'published_revision_id' => 'integer',
         'lifecycle_changed_by_admin_user_id' => 'integer',
         'is_public' => 'boolean',
         'is_indexable' => 'boolean',
@@ -99,13 +105,24 @@ class Article extends Model
             if ($article->translation_status === self::TRANSLATION_STATUS_SOURCE) {
                 $article->source_locale = $article->locale;
                 $article->translated_from_article_id = null;
+                $article->source_article_id = null;
                 $article->translated_from_version_hash = null;
             } elseif (! filled($article->source_locale)) {
-                $article->source_locale = $article->translatedFrom?->source_locale ?: $article->locale;
+                $article->source_locale = $article->sourceCanonical?->source_locale
+                    ?: $article->translatedFrom?->source_locale
+                    ?: $article->locale;
+            }
+
+            if ($article->translation_status !== self::TRANSLATION_STATUS_SOURCE
+                && ! filled($article->source_article_id)
+                && filled($article->translated_from_article_id)) {
+                $article->source_article_id = $article->translated_from_article_id;
             }
 
             if (! filled($article->translation_group_id)) {
-                $article->translation_group_id = $article->translatedFrom?->translation_group_id ?: (string) Str::uuid();
+                $article->translation_group_id = $article->sourceCanonical?->translation_group_id
+                    ?: $article->translatedFrom?->translation_group_id
+                    ?: (string) Str::uuid();
             }
 
             $article->source_version_hash = $article->computeSourceVersionHash();
@@ -139,6 +156,26 @@ class Article extends Model
         return $this->hasMany(ArticleRevision::class, 'article_id', 'id');
     }
 
+    public function translationRevisions(): HasMany
+    {
+        return $this->hasMany(ArticleTranslationRevision::class, 'article_id', 'id');
+    }
+
+    public function sourceCanonical(): BelongsTo
+    {
+        return $this->belongsTo(self::class, 'source_article_id', 'id');
+    }
+
+    public function workingRevision(): BelongsTo
+    {
+        return $this->belongsTo(ArticleTranslationRevision::class, 'working_revision_id', 'id');
+    }
+
+    public function publishedRevision(): BelongsTo
+    {
+        return $this->belongsTo(ArticleTranslationRevision::class, 'published_revision_id', 'id');
+    }
+
     public function translatedFrom(): BelongsTo
     {
         return $this->belongsTo(self::class, 'translated_from_article_id', 'id');
@@ -147,6 +184,11 @@ class Article extends Model
     public function translations(): HasMany
     {
         return $this->hasMany(self::class, 'translated_from_article_id', 'id');
+    }
+
+    public function canonicalTranslations(): HasMany
+    {
+        return $this->hasMany(self::class, 'source_article_id', 'id');
     }
 
     public function seoMeta(): HasOne
@@ -166,6 +208,7 @@ class Article extends Model
     {
         return $this->translation_status === self::TRANSLATION_STATUS_SOURCE
             && $this->translated_from_article_id === null
+            && $this->source_article_id === null
             && (string) $this->locale === (string) $this->source_locale;
     }
 
@@ -196,7 +239,7 @@ class Article extends Model
             return $this;
         }
 
-        return $this->translatedFrom;
+        return $this->sourceCanonical ?: $this->translatedFrom;
     }
 
     public function currentSourceVersionHash(): ?string
