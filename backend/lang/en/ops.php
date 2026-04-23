@@ -50,6 +50,7 @@ return [
         'content_growth_attribution' => 'Growth Attribution',
         'seo_operations' => 'SEO Operations',
         'content_search' => 'Content Search',
+        'article_translation_ops' => 'Translation Ops',
         'content_workspace' => 'Content Workspace',
         'editorial_review' => 'Editorial Review',
         'content_release' => 'Content Release',

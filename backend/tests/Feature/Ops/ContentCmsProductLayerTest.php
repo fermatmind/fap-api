@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Ops;
 
+use App\Filament\Ops\Pages\ArticleTranslationOpsPage;
 use App\Filament\Ops\Pages\ContentOverviewPage;
 use App\Filament\Ops\Pages\ContentReleasePage;
 use App\Filament\Ops\Pages\ContentWorkspacePage;
@@ -529,6 +530,7 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->assertSame(__('ops.group.content_overview'), ContentOverviewPage::getNavigationGroup());
         $this->assertSame(__('ops.group.content_overview'), ContentWorkspacePage::getNavigationGroup());
         $this->assertSame(__('ops.group.editorial'), EditorialOperationsPage::getNavigationGroup());
+        $this->assertSame(__('ops.group.editorial'), ArticleTranslationOpsPage::getNavigationGroup());
         $this->assertSame(__('ops.group.content_release'), EditorialReviewPage::getNavigationGroup());
         $this->assertSame(__('ops.group.editorial'), ArticleResource::getNavigationGroup());
         $this->assertSame(__('ops.group.editorial'), CareerGuideResource::getNavigationGroup());
