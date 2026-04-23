@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T12:20:19.467Z",
+  "updated_at": "2026-04-23T12:21:43.758Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -3437,10 +3437,10 @@
     "PR-BIG5-CONTENT-ASSETS-V1": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api",
-      "status": "local_checks_passed",
+      "status": "pr_open",
       "branch": "codex/big5-content-assets-v1-staging",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "4c49604c6d9da5901493cba4f5a531521442f379",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/988",
       "checks": {
         "local": [
           {
@@ -3498,6 +3498,10 @@
         {
           "at": "2026-04-23T12:20:19.466Z",
           "summary": "Re-review fixed synergy section/scenario separation and added direct coverage synergies for canonical profiles 05 and 06."
+        },
+        {
+          "at": "2026-04-23T12:21:43.758Z",
+          "summary": "Opened PR #988 after local validation passed; commit_sha records the content asset commit opened for review."
         }
       ]
     }
