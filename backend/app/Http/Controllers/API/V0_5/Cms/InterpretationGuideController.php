@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V0_5\Cms;
 
+use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Http\Controllers\Controller;
 use App\Models\InterpretationGuide;
 use Illuminate\Http\JsonResponse;
@@ -214,6 +215,20 @@ final class InterpretationGuideController extends Controller
             'canonical_path' => $this->nullableString($validated['canonical_path'] ?? null) ?? '/support/guides/'.$normalizedSlug,
         ]);
         $guide->save();
+        $shouldDispatchRelease = ContentReleaseAudit::shouldDispatchPublishedFollowUp('interpretation_guide', $guide, [
+            'title',
+            'summary',
+            'body_md',
+            'body_html',
+            'seo_title',
+            'seo_description',
+            'test_family',
+            'result_context',
+            'audience',
+        ]);
+        if ($shouldDispatchRelease) {
+            ContentReleaseAudit::log('interpretation_guide', $guide->fresh(), 'interpretation_guide_internal_update');
+        }
 
         return response()->json([
             'ok' => true,

@@ -151,8 +151,11 @@ class InterpretationGuideResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('source_locale')
                     ->label(__('ops.locale_scope.source_locale'))
-                    ->state(fn (InterpretationGuide $record): string => OpsContentLocaleScope::sourceLocale($record->locale))
+                    ->state(fn (InterpretationGuide $record): string => (string) ($record->source_locale ?: OpsContentLocaleScope::sourceLocale($record->locale)))
                     ->badge(),
+                Tables\Columns\TextColumn::make('translation_status')
+                    ->badge()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('test_family')->badge()->sortable(),
                 Tables\Columns\TextColumn::make('result_context')->sortable(),
                 Tables\Columns\TextColumn::make('status')

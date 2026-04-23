@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\V0_5;
 
 use App\Models\Article;
+use App\Models\AuditLog;
 use App\Models\ContentPage;
 use App\Models\InterpretationGuide;
 use App\Models\SupportArticle;
@@ -202,6 +203,12 @@ final class SupportTrustCmsApiTest extends TestCase
             'status' => 'published',
             'review_state' => 'approved',
         ]);
+        $this->assertDatabaseHas('audit_logs', [
+            'action' => 'content_release_publish',
+            'target_type' => 'support_article',
+            'reason' => 'cms_release_workspace',
+            'result' => 'success',
+        ]);
 
         $this->putJson('/api/v0.5/internal/support-articles/unapproved-publish?locale=en', [
             'title' => 'Unapproved publish',
@@ -227,5 +234,58 @@ final class SupportTrustCmsApiTest extends TestCase
             'review_state' => 'content_review',
         ])->assertStatus(422)
             ->assertJsonPath('errors.review_state.0', 'scheduled or published interpretation guides must be approved.');
+
+        $this->putJson('/api/v0.5/internal/interpretation-guides/how-to-read?locale=en', [
+            'title' => 'How to read',
+            'summary' => 'Understand the guide.',
+            'body_md' => 'Guide body.',
+            'test_family' => 'general',
+            'result_context' => 'how_to_read',
+            'audience' => 'general',
+            'locale' => 'en',
+            'status' => 'published',
+            'review_state' => 'approved',
+            'related_guide_ids' => [],
+            'related_methodology_page_ids' => [],
+            'published_at' => '2026-04-22T00:00:00Z',
+            'seo_title' => 'How to read',
+            'seo_description' => 'Guide description.',
+            'canonical_path' => '/support/guides/how-to-read',
+        ])->assertOk();
+
+        $this->assertDatabaseHas('audit_logs', [
+            'action' => 'content_release_publish',
+            'target_type' => 'interpretation_guide',
+            'reason' => 'cms_release_workspace',
+            'result' => 'success',
+        ]);
+
+        $this->putJson('/api/v0.5/internal/content-pages/trust?locale=en', [
+            'title' => 'Trust',
+            'summary' => 'Trust page.',
+            'kind' => 'policy',
+            'page_type' => 'trust',
+            'template' => 'policy',
+            'animation_profile' => 'policy',
+            'locale' => 'en',
+            'status' => 'published',
+            'review_state' => 'approved',
+            'is_public' => true,
+            'is_indexable' => true,
+            'content_md' => 'Trust page body.',
+            'content_html' => '',
+            'seo_title' => 'Trust',
+            'meta_description' => 'Trust description.',
+            'seo_description' => 'Trust description.',
+            'canonical_path' => '/trust',
+        ])->assertOk();
+
+        $this->assertDatabaseHas('audit_logs', [
+            'action' => 'content_release_publish',
+            'target_type' => 'content_page',
+            'reason' => 'cms_release_workspace',
+            'result' => 'success',
+        ]);
+        $this->assertSame(3, AuditLog::query()->withoutGlobalScopes()->where('action', 'content_release_publish')->count());
     }
 }

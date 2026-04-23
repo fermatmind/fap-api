@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V0_5\Cms;
 
+use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Http\Controllers\Controller;
 use App\Models\ContentPage;
 use Illuminate\Http\JsonResponse;
@@ -177,6 +178,23 @@ final class ContentPageController extends Controller
             'status' => (string) ($validated['status'] ?? ((bool) $validated['is_public'] ? ContentPage::STATUS_PUBLISHED : ContentPage::STATUS_DRAFT)),
         ]);
         $page->save();
+        $shouldDispatchRelease = ContentReleaseAudit::shouldDispatchPublishedFollowUp('content_page', $page, [
+            'title',
+            'kicker',
+            'summary',
+            'content_md',
+            'content_html',
+            'seo_title',
+            'seo_description',
+            'meta_description',
+            'kind',
+            'page_type',
+            'template',
+            'animation_profile',
+        ]);
+        if ($shouldDispatchRelease) {
+            ContentReleaseAudit::log('content_page', $page->fresh(), 'content_page_internal_update');
+        }
 
         return response()->json([
             'ok' => true,

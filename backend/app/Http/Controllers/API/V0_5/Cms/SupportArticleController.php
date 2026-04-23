@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V0_5\Cms;
 
+use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Http\Controllers\Controller;
 use App\Models\SupportArticle;
 use Illuminate\Http\JsonResponse;
@@ -216,6 +217,21 @@ final class SupportArticleController extends Controller
             'canonical_path' => $this->nullableString($validated['canonical_path'] ?? null) ?? '/support/'.$normalizedSlug,
         ]);
         $article->save();
+        $shouldDispatchRelease = ContentReleaseAudit::shouldDispatchPublishedFollowUp('support_article', $article, [
+            'title',
+            'summary',
+            'body_md',
+            'body_html',
+            'seo_title',
+            'seo_description',
+            'support_category',
+            'support_intent',
+            'primary_cta_label',
+            'primary_cta_url',
+        ]);
+        if ($shouldDispatchRelease) {
+            ContentReleaseAudit::log('support_article', $article->fresh(), 'support_article_internal_update');
+        }
 
         return response()->json([
             'ok' => true,
