@@ -146,4 +146,28 @@ final class InterpretationGuideTranslationAdapter extends AbstractSiblingTransla
             'canonical_path' => $source->canonical_path,
         ];
     }
+
+    protected function additionalPayloadFields(Model $record): array
+    {
+        return [
+            'test_family' => (string) $record->test_family,
+            'result_context' => (string) $record->result_context,
+            'audience' => $record->audience,
+            'related_guide_ids' => is_array($record->related_guide_ids) ? $record->related_guide_ids : [],
+            'related_methodology_page_ids' => is_array($record->related_methodology_page_ids) ? $record->related_methodology_page_ids : [],
+            'canonical_path' => $record->canonical_path,
+        ];
+    }
+
+    protected function applyAdditionalPayloadFields(Model $record, array $payload): void
+    {
+        $record->forceFill([
+            'test_family' => (string) ($payload['test_family'] ?? ''),
+            'result_context' => (string) ($payload['result_context'] ?? ''),
+            'audience' => $payload['audience'] ?? null,
+            'related_guide_ids' => array_values((array) ($payload['related_guide_ids'] ?? [])),
+            'related_methodology_page_ids' => array_values((array) ($payload['related_methodology_page_ids'] ?? [])),
+            'canonical_path' => $payload['canonical_path'] ?? null,
+        ]);
+    }
 }

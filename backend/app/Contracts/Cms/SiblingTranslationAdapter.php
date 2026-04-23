@@ -45,6 +45,16 @@ interface SiblingTranslationAdapter
     public function createTarget(Model $source, string $targetLocale, array $payload): Model;
 
     /**
+     * @return array<string, mixed>
+     */
+    public function snapshotPayload(Model $record): array;
+
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    public function applyRevisionPayload(Model $record, array $payload): void;
+
+    /**
      * @param  array{title:string,summary:string|null,body_md:string,seo_title:string|null,seo_description:string|null}  $payload
      */
     public function applyMachinePayload(Model $target, array $payload): void;
@@ -61,4 +71,10 @@ interface SiblingTranslationAdapter
      * @return list<string>
      */
     public function requiredFieldBlockers(Model $target): array;
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return list<string>
+     */
+    public function requiredPayloadBlockers(array $payload): array;
 }

@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-24T09:18:00.000Z",
+  "updated_at": "2026-04-24T12:05:00.000Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -4277,6 +4277,44 @@
           },
           {
             "command": "php artisan test tests/Feature/Ops/ArticleMachineTranslationProviderTest.php tests/Feature/Ops/ArticleTranslationOpsPageTest.php tests/Feature/Ops/ArticleTranslationRevisionContractTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan fap:schema:verify",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-ROW-BACKED-CMS-SHADOW-REVISIONS": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "in_progress",
+      "branch": "codex/row-backed-cms-shadow-revisions",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "vendor/bin/pint --test app/Models/CmsTranslationRevision.php app/Services/Cms/RowBackedRevisionWorkspace.php app/Services/Cms/AbstractSiblingTranslationAdapter.php app/Services/Cms/SiblingTranslationWorkflowService.php app/Http/Controllers/API/V0_5/Cms/SupportArticleController.php app/Http/Controllers/API/V0_5/Cms/InterpretationGuideController.php app/Http/Controllers/API/V0_5/Cms/ContentPageController.php app/Filament/Ops/Resources/SupportArticleResource/Pages/CreateSupportArticle.php app/Filament/Ops/Resources/SupportArticleResource/Pages/EditSupportArticle.php app/Filament/Ops/Resources/InterpretationGuideResource/Pages/CreateInterpretationGuide.php app/Filament/Ops/Resources/InterpretationGuideResource/Pages/EditInterpretationGuide.php app/Filament/Ops/Resources/ContentPageResource/Pages/CreateContentPage.php app/Filament/Ops/Resources/ContentPageResource/Pages/EditContentPage.php app/Services/Ops/CmsTranslationOpsService.php tests/Feature/Ops/CmsTranslationBackboneTest.php tests/Feature/Ops/CmsTranslationShadowRevisionTest.php tests/Feature/V0_5/SupportTrustCmsApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Ops/CmsTranslationBackboneTest.php tests/Feature/Ops/CmsTranslationShadowRevisionTest.php tests/Feature/V0_5/SupportTrustCmsApiTest.php tests/Feature/Ops/PostReleaseObservabilityPageTest.php",
             "status": "passed"
           },
           {

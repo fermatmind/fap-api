@@ -7,6 +7,7 @@ namespace App\Filament\Ops\Resources\InterpretationGuideResource\Pages;
 use App\Filament\Ops\Resources\InterpretationGuideResource;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Models\InterpretationGuide;
+use App\Services\Cms\RowBackedRevisionWorkspace;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateInterpretationGuide extends CreateRecord
@@ -17,6 +18,8 @@ class CreateInterpretationGuide extends CreateRecord
     {
         /** @var InterpretationGuide $record */
         $record = $this->getRecord()->fresh();
+        app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('interpretation_guide', $record);
+        $record = $record->fresh();
 
         if (ContentReleaseAudit::shouldDispatchPublishedFollowUp('interpretation_guide', $record, [
             'title',

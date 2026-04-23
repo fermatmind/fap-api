@@ -7,6 +7,7 @@ namespace App\Filament\Ops\Resources\SupportArticleResource\Pages;
 use App\Filament\Ops\Resources\SupportArticleResource;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Models\SupportArticle;
+use App\Services\Cms\RowBackedRevisionWorkspace;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateSupportArticle extends CreateRecord
@@ -17,6 +18,8 @@ class CreateSupportArticle extends CreateRecord
     {
         /** @var SupportArticle $record */
         $record = $this->getRecord()->fresh();
+        app(RowBackedRevisionWorkspace::class)->ensureInitialRevision('support_article', $record);
+        $record = $record->fresh();
 
         if (ContentReleaseAudit::shouldDispatchPublishedFollowUp('support_article', $record, [
             'title',

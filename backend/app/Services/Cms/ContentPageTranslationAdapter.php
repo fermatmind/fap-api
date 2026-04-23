@@ -53,6 +53,11 @@ final class ContentPageTranslationAdapter extends AbstractSiblingTranslationAdap
         return 'content_md';
     }
 
+    protected function bodyHtmlField(): ?string
+    {
+        return 'content_html';
+    }
+
     protected function seoTitleField(): string
     {
         return 'seo_title';
@@ -151,5 +156,47 @@ final class ContentPageTranslationAdapter extends AbstractSiblingTranslationAdap
             'canonical_path' => $source->canonical_path,
             'meta_description' => $source->meta_description,
         ];
+    }
+
+    protected function additionalPayloadFields(Model $record): array
+    {
+        return [
+            'path' => (string) $record->path,
+            'kind' => (string) $record->kind,
+            'page_type' => (string) $record->page_type,
+            'kicker' => $record->kicker,
+            'template' => (string) $record->template,
+            'animation_profile' => (string) $record->animation_profile,
+            'owner' => $record->owner,
+            'legal_review_required' => (bool) $record->legal_review_required,
+            'science_review_required' => (bool) $record->science_review_required,
+            'source_doc' => $record->source_doc,
+            'headings_json' => is_array($record->headings_json) ? $record->headings_json : [],
+            'meta_description' => $record->meta_description,
+            'canonical_path' => $record->canonical_path,
+            'is_public' => (bool) $record->is_public,
+            'is_indexable' => (bool) $record->is_indexable,
+        ];
+    }
+
+    protected function applyAdditionalPayloadFields(Model $record, array $payload): void
+    {
+        $record->forceFill([
+            'path' => (string) ($payload['path'] ?? ''),
+            'kind' => (string) ($payload['kind'] ?? ''),
+            'page_type' => (string) ($payload['page_type'] ?? ''),
+            'kicker' => $payload['kicker'] ?? null,
+            'template' => (string) ($payload['template'] ?? ''),
+            'animation_profile' => (string) ($payload['animation_profile'] ?? ''),
+            'owner' => $payload['owner'] ?? null,
+            'legal_review_required' => (bool) ($payload['legal_review_required'] ?? false),
+            'science_review_required' => (bool) ($payload['science_review_required'] ?? false),
+            'source_doc' => $payload['source_doc'] ?? null,
+            'headings_json' => array_values((array) ($payload['headings_json'] ?? [])),
+            'meta_description' => $payload['meta_description'] ?? null,
+            'canonical_path' => $payload['canonical_path'] ?? null,
+            'is_public' => (bool) ($payload['is_public'] ?? false),
+            'is_indexable' => (bool) ($payload['is_indexable'] ?? false),
+        ]);
     }
 }

@@ -227,8 +227,8 @@ final class CmsTranslationOpsService
             'is_stale' => $isStale || (string) $record->translation_status === 'stale',
             'published_at' => optional($record->published_at)?->toISOString(),
             'source_record_id' => $record->source_content_id ? (int) $record->source_content_id : null,
-            'working_revision_id' => null,
-            'published_revision_id' => null,
+            'working_revision_id' => $record->working_revision_id ? (int) $record->working_revision_id : null,
+            'published_revision_id' => $record->published_revision_id ? (int) $record->published_revision_id : null,
             'source_version_hash' => $record->source_version_hash,
             'translated_from_version_hash' => $record->translated_from_version_hash,
             'ownership_ok' => $ownershipIssues === [],
@@ -236,10 +236,11 @@ final class CmsTranslationOpsService
             'edit_url' => $adapter->editUrl($record),
             'preflight' => $preflight,
             'compare_summary' => [
-                'row-backed workflow',
+                'shadow revision workflow',
+                $record->working_revision_id ? 'working revision present' : 'working revision missing',
                 $isStale ? 'source hash drift detected' : 'source hash aligned',
             ],
-            'workflow_kind' => 'row',
+            'workflow_kind' => 'shadow_revision',
             'actions' => $this->siblingLocaleActions($contentType, $adapter, $record, $isSource, $isStale),
         ];
     }

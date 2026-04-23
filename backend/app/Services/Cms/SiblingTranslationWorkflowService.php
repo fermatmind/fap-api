@@ -6,6 +6,7 @@ namespace App\Services\Cms;
 
 use App\Contracts\Cms\SiblingTranslationAdapter;
 use App\Filament\Ops\Support\ContentReleaseAudit;
+use App\Models\CmsTranslationRevision;
 use App\Services\Audit\AuditLogger;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ final class SiblingTranslationWorkflowService
     public function __construct(
         private readonly CmsMachineTranslationProviderRegistry $providers,
         private readonly AuditLogger $auditLogger,
+        private readonly RowBackedRevisionWorkspace $workspace,
         SupportArticleTranslationAdapter $supportArticles,
         InterpretationGuideTranslationAdapter $interpretationGuides,
         ContentPageTranslationAdapter $contentPages,
@@ -81,6 +83,19 @@ final class SiblingTranslationWorkflowService
 
             $payload = $provider->translate($contentType, $source, $adapter->normalizedSourcePayload($source), $targetLocale);
             $target = $adapter->createTarget($source, $targetLocale, $payload);
+            $target = $this->workspace->saveWorkingDraft(
+                $contentType,
+                $target,
+                $adapter->snapshotPayload($target),
+                CmsTranslationRevision::STATUS_MACHINE_DRAFT,
+                [
+                    'org_id' => self::PUBLIC_EDITORIAL_ORG_ID,
+                    'source_content_id' => (int) $source->id,
+                    'source_locale' => (string) $source->locale,
+                    'translation_group_id' => (string) $source->translation_group_id,
+                    'translated_from_version_hash' => (string) $source->source_version_hash,
+                ],
+            );
 
             $this->log('cms_translation_draft_created', $contentType, $target, [
                 'source_content_id' => (int) $source->id,
@@ -102,11 +117,6 @@ final class SiblingTranslationWorkflowService
                 'target row is source',
             ]);
         }
-        if ($adapter->isPublished($target) && ! $adapter->supportsPublishedResync()) {
-            throw new CmsTranslationWorkflowException('Published row-backed translations cannot be re-synced safely until they move to revision-backed editing.', [
-                'published target re-sync disabled',
-            ]);
-        }
 
         return DB::transaction(function () use ($adapter, $provider, $contentType, $target): Model {
             $source = $this->source($adapter, $target);
@@ -117,14 +127,21 @@ final class SiblingTranslationWorkflowService
             }
 
             $payload = $provider->translate($contentType, $source, $adapter->normalizedSourcePayload($source), (string) $target->locale);
-            $adapter->applyMachinePayload($target, $payload);
-            $target->forceFill([
-                'org_id' => self::PUBLIC_EDITORIAL_ORG_ID,
-                'source_content_id' => (int) $source->id,
-                'source_locale' => (string) $source->locale,
-                'translation_group_id' => (string) $source->translation_group_id,
-                'translated_from_version_hash' => (string) $source->source_version_hash,
-            ])->save();
+            $currentWorking = $this->workspace->workingRevision($contentType, $target);
+            $recordPayload = array_replace($currentWorking->payload_json ?? $adapter->snapshotPayload($target), $payload);
+            $target = $this->workspace->saveWorkingDraft(
+                $contentType,
+                $target,
+                $recordPayload,
+                CmsTranslationRevision::STATUS_MACHINE_DRAFT,
+                [
+                    'org_id' => self::PUBLIC_EDITORIAL_ORG_ID,
+                    'source_content_id' => (int) $source->id,
+                    'source_locale' => (string) $source->locale,
+                    'translation_group_id' => (string) $source->translation_group_id,
+                    'translated_from_version_hash' => (string) $source->source_version_hash,
+                ],
+            );
 
             $this->log('cms_translation_resynced', $contentType, $target, [
                 'source_content_id' => (int) $source->id,
@@ -144,8 +161,13 @@ final class SiblingTranslationWorkflowService
             ]);
         }
 
+        $target = $this->workspace->updateWorkingRevisionStatus($contentType, $target, CmsTranslationRevision::STATUS_HUMAN_REVIEW);
         $adapter->markHumanReview($target);
-        $target->save();
+        if (! filled($target->published_revision_id)) {
+            $target->save();
+        } else {
+            $target->saveQuietly();
+        }
 
         $this->log('cms_translation_promoted_human_review', $contentType, $target, []);
 
@@ -159,9 +181,14 @@ final class SiblingTranslationWorkflowService
             throw new CmsTranslationWorkflowException('Translation approval is blocked by preflight issues.', $blockers);
         }
 
+        $target = $this->workspace->updateWorkingRevisionStatus($contentType, $target, CmsTranslationRevision::STATUS_APPROVED);
         $adapter = $this->adapter($contentType);
         $adapter->markApproved($target);
-        $target->save();
+        if (! filled($target->published_revision_id)) {
+            $target->save();
+        } else {
+            $target->saveQuietly();
+        }
 
         $this->log('cms_translation_approved', $contentType, $target, []);
 
@@ -175,9 +202,7 @@ final class SiblingTranslationWorkflowService
             throw new CmsTranslationWorkflowException('Translation publish preflight failed.', $preflight['blockers']);
         }
 
-        $adapter = $this->adapter($contentType);
-        $adapter->markPublished($target);
-        $target->save();
+        $target = $this->workspace->publishWorkingRevision($contentType, $target);
 
         ContentReleaseAudit::log($contentType, $target->fresh(), 'translation_ops_console');
         $this->log('cms_translation_published', $contentType, $target, []);
@@ -189,19 +214,17 @@ final class SiblingTranslationWorkflowService
     {
         $adapter = $this->adapter($contentType);
 
-        if ($adapter->isPublished($target)) {
-            throw new CmsTranslationWorkflowException('Published row-backed translations cannot be archived from the translation console.', [
-                'target row is published',
-            ]);
-        }
         if ((string) $target->translation_status !== 'stale' && ! $this->isStale($adapter, $target)) {
             throw new CmsTranslationWorkflowException('Only stale translation rows can be archived.', [
                 'target row is not stale',
             ]);
         }
 
-        $adapter->markArchived($target);
-        $target->save();
+        $target = $this->workspace->updateWorkingRevisionStatus($contentType, $target, CmsTranslationRevision::STATUS_ARCHIVED);
+        if (! filled($target->published_revision_id)) {
+            $adapter->markArchived($target);
+            $target->save();
+        }
 
         $this->log('cms_translation_archived', $contentType, $target, []);
 
@@ -226,6 +249,12 @@ final class SiblingTranslationWorkflowService
             $blockers[] = 'target locale missing';
         }
 
+        $working = $this->workspace->workingRevision($contentType, $target);
+        $payload = $working->payload_json ?? [];
+        if ($payload === []) {
+            $blockers[] = 'working revision missing payload';
+        }
+
         $source = $this->source($adapter, $target);
         if (! $source instanceof Model || ! $adapter->isSource($source)) {
             $blockers[] = 'source linkage invalid';
@@ -246,7 +275,7 @@ final class SiblingTranslationWorkflowService
 
         return [
             'ok' => $blockers === [],
-            'blockers' => array_values(array_unique(array_merge($blockers, $adapter->requiredFieldBlockers($target)))),
+            'blockers' => array_values(array_unique(array_merge($blockers, $adapter->requiredPayloadBlockers($payload)))),
         ];
     }
 
@@ -257,9 +286,14 @@ final class SiblingTranslationWorkflowService
             return false;
         }
 
+        $working = $target->workingRevision instanceof CmsTranslationRevision
+            ? $target->workingRevision
+            : null;
+        $translatedFrom = $working?->translated_from_version_hash ?: $target->translated_from_version_hash;
+
         return filled($source->source_version_hash)
-            && filled($target->translated_from_version_hash)
-            && ! hash_equals((string) $source->source_version_hash, (string) $target->translated_from_version_hash);
+            && filled($translatedFrom)
+            && ! hash_equals((string) $source->source_version_hash, (string) $translatedFrom);
     }
 
     public function adapter(string $contentType): SiblingTranslationAdapter
