@@ -1,0 +1,248 @@
+{
+  "schema": "fap.big5.lifecycle_copy_library.v1.surface_pack",
+  "version": "v1",
+  "surface": "career_next_step",
+  "description": "Big Five 职业下一步承接层。按 canonical profile family 组织，只提供职业方向入口提示，不生成独立职业报告正文。",
+  "entries": [
+    {
+      "entry_id": "career_next_step_canonical_01",
+      "surface": "career_next_step",
+      "placement": "result_continuation_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "dominant_profile_family": "BF_CANONICAL_01"
+      },
+      "title": "进入需要深度判断的环境",
+      "body": "你的职业下一步，不是把自己推成高压外放型，而是把感知、判断和结构梳理放到真正需要它们的工作里。先回到工作建议，找出一个最耗你的变量：噪音、边界、反馈，或推进周期。",
+      "primary_cta_label": "回到工作建议",
+      "secondary_cta_label": "保存 PDF",
+      "notes": {
+        "source_entry_id": "career_next_step_canonical_01",
+        "canonical_profile_id": "BF_CANONICAL_01",
+        "canonical_profile_name": "敏锐的独立思考者",
+        "cta_targets": {
+          "primary": "anchor:action_plan.workplace",
+          "secondary": "surface:pdf"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_canonical_profiles_v1.json#BF_CANONICAL_01",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "绑定 敏锐的独立思考者；只作为职业方向入口，不扩写岗位、行业或职业产品正文。"
+      }
+    },
+    {
+      "entry_id": "career_next_step_canonical_02",
+      "surface": "career_next_step",
+      "placement": "result_continuation_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "dominant_profile_family": "BF_CANONICAL_02"
+      },
+      "title": "把推动力用在高杠杆处",
+      "body": "你的职业价值来自现场推进、快速判断和边界清晰。下一步不是更快，而是先学会调速：把速度放在关键目标上，把反应留给真正需要处理的问题。",
+      "primary_cta_label": "回到工作建议",
+      "secondary_cta_label": "查看历史",
+      "notes": {
+        "source_entry_id": "career_next_step_canonical_02",
+        "canonical_profile_id": "BF_CANONICAL_02",
+        "canonical_profile_name": "高压现场推动者",
+        "cta_targets": {
+          "primary": "anchor:action_plan.workplace",
+          "secondary": "surface:history"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_canonical_profiles_v1.json#BF_CANONICAL_02",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "绑定 高压现场推动者；只作为职业方向入口，不扩写岗位、行业或职业产品正文。"
+      }
+    },
+    {
+      "entry_id": "career_next_step_canonical_03",
+      "surface": "career_next_step",
+      "placement": "result_continuation_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "dominant_profile_family": "BF_CANONICAL_03"
+      },
+      "title": "让高标准服务结果",
+      "body": "你的高标准适合质量、流程和风险敏感的工作。下一步不是再多盯一点，而是区分哪些标准值得长期投入，哪些只是让系统持续紧绷。",
+      "primary_cta_label": "回到工作建议",
+      "secondary_cta_label": "保存 PDF",
+      "notes": {
+        "source_entry_id": "career_next_step_canonical_03",
+        "canonical_profile_id": "BF_CANONICAL_03",
+        "canonical_profile_name": "戒备型完美主义",
+        "cta_targets": {
+          "primary": "anchor:action_plan.workplace",
+          "secondary": "surface:pdf"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_canonical_profiles_v1.json#BF_CANONICAL_03",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "绑定 戒备型完美主义；只作为职业方向入口，不扩写岗位、行业或职业产品正文。"
+      }
+    },
+    {
+      "entry_id": "career_next_step_canonical_04",
+      "surface": "career_next_step",
+      "placement": "result_continuation_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "dominant_profile_family": "BF_CANONICAL_04"
+      },
+      "title": "把复杂理解切成短回合",
+      "body": "你适合处理复杂问题，但职业推进不能只停在理解层。下一步是把一个大问题切成短周期交付，让反馈更密，让理解开始产生可见结果。",
+      "primary_cta_label": "回到工作建议",
+      "secondary_cta_label": "保存 PDF",
+      "notes": {
+        "source_entry_id": "career_next_step_canonical_04",
+        "canonical_profile_id": "BF_CANONICAL_04",
+        "canonical_profile_name": "复杂理解型低续航者",
+        "cta_targets": {
+          "primary": "anchor:action_plan.workplace",
+          "secondary": "surface:pdf"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_canonical_profiles_v1.json#BF_CANONICAL_04",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "绑定 复杂理解型低续航者；只作为职业方向入口，不扩写岗位、行业或职业产品正文。"
+      }
+    },
+    {
+      "entry_id": "career_next_step_canonical_05",
+      "surface": "career_next_step",
+      "placement": "result_continuation_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "dominant_profile_family": "BF_CANONICAL_05"
+      },
+      "title": "把连接力放进协作场域",
+      "body": "你的职业入口更适合需要协调、承接和建立信任的场景。下一步不是承担更多关系劳动，而是选择一个能放大连接价值、同时允许边界清楚的位置。",
+      "primary_cta_label": "回到工作建议",
+      "secondary_cta_label": "查看历史",
+      "notes": {
+        "source_entry_id": "career_next_step_canonical_05",
+        "canonical_profile_id": "BF_CANONICAL_05",
+        "canonical_profile_name": "连接驱动协调者",
+        "cta_targets": {
+          "primary": "anchor:action_plan.workplace",
+          "secondary": "surface:history"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_canonical_profiles_v1.json#BF_CANONICAL_05",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "绑定 连接驱动协调者；只作为职业方向入口，不扩写岗位、行业或职业产品正文。"
+      }
+    },
+    {
+      "entry_id": "career_next_step_canonical_06",
+      "surface": "career_next_step",
+      "placement": "result_continuation_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "dominant_profile_family": "BF_CANONICAL_06"
+      },
+      "title": "让稳定贡献被看见",
+      "body": "你的优势在稳态、深工和可靠交付。下一步不是追逐高曝光，而是在关键节点主动同步判断和进展，让低噪音贡献进入他人的视野。",
+      "primary_cta_label": "回到工作建议",
+      "secondary_cta_label": "保存 PDF",
+      "notes": {
+        "source_entry_id": "career_next_step_canonical_06",
+        "canonical_profile_id": "BF_CANONICAL_06",
+        "canonical_profile_name": "稳态深工者",
+        "cta_targets": {
+          "primary": "anchor:action_plan.workplace",
+          "secondary": "surface:pdf"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_canonical_profiles_v1.json#BF_CANONICAL_06",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "绑定 稳态深工者；只作为职业方向入口，不扩写岗位、行业或职业产品正文。"
+      }
+    },
+    {
+      "entry_id": "career_next_step_canonical_07",
+      "surface": "career_next_step",
+      "placement": "result_continuation_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "dominant_profile_family": "BF_CANONICAL_07"
+      },
+      "title": "把探索放到破局任务里",
+      "body": "你的职业能量更适合需要试探新方向、挑战旧路径和快速推动的任务。下一步不是磨平判断，而是把锋利放进责任清楚、目标明确的场景。",
+      "primary_cta_label": "回到工作建议",
+      "secondary_cta_label": "保存 PDF",
+      "notes": {
+        "source_entry_id": "career_next_step_canonical_07",
+        "canonical_profile_id": "BF_CANONICAL_07",
+        "canonical_profile_name": "锋利探索推进者",
+        "cta_targets": {
+          "primary": "anchor:action_plan.workplace",
+          "secondary": "surface:pdf"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_canonical_profiles_v1.json#BF_CANONICAL_07",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "绑定 锋利探索推进者；只作为职业方向入口，不扩写岗位、行业或职业产品正文。"
+      }
+    },
+    {
+      "entry_id": "career_next_step_canonical_08",
+      "surface": "career_next_step",
+      "placement": "result_continuation_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "dominant_profile_family": "BF_CANONICAL_08"
+      },
+      "title": "用可靠性维护系统",
+      "body": "你的价值更容易出现在需要秩序、耐心、支持和稳定承接的环境里。下一步不是抢更喧闹的位置，而是找到那些会因你的可靠而明显变顺的工作场景。",
+      "primary_cta_label": "回到工作建议",
+      "secondary_cta_label": "查看历史",
+      "notes": {
+        "source_entry_id": "career_next_step_canonical_08",
+        "canonical_profile_id": "BF_CANONICAL_08",
+        "canonical_profile_name": "秩序维护型支持者",
+        "cta_targets": {
+          "primary": "anchor:action_plan.workplace",
+          "secondary": "surface:history"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_canonical_profiles_v1.json#BF_CANONICAL_08",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "绑定 秩序维护型支持者；只作为职业方向入口，不扩写岗位、行业或职业产品正文。"
+      }
+    }
+  ]
+}

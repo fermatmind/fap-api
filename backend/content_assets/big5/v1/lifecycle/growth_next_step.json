@@ -1,0 +1,248 @@
+{
+  "schema": "fap.big5.lifecycle_copy_library.v1.surface_pack",
+  "version": "v1",
+  "surface": "growth_next_step",
+  "description": "Big Five 成长下一步承接层。按 canonical profile family 组织，只负责高层导航，不重复 action_plan 的具体动作列表。",
+  "entries": [
+    {
+      "entry_id": "growth_next_step_canonical_01",
+      "surface": "growth_next_step",
+      "placement": "result_continuation_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "dominant_profile_family": "BF_CANONICAL_01"
+      },
+      "title": "把内部判断更早外化",
+      "body": "你的成长入口不是压低敏感，而是更早把感受翻译成边界、表达和恢复。先选一个低风险场景，让判断离开内部循环，获得现实反馈。",
+      "primary_cta_label": "回到成长建议",
+      "secondary_cta_label": "查看恢复建议",
+      "notes": {
+        "source_entry_id": "growth_next_step_canonical_01",
+        "canonical_profile_id": "BF_CANONICAL_01",
+        "canonical_profile_name": "敏锐的独立思考者",
+        "cta_targets": {
+          "primary": "anchor:action_plan.personal_growth",
+          "secondary": "anchor:action_plan.stress_recovery"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_canonical_profiles_v1.json#BF_CANONICAL_01",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "绑定 敏锐的独立思考者；作为成长导航语，不重复 stop/start/continue/observe 具体动作。"
+      }
+    },
+    {
+      "entry_id": "growth_next_step_canonical_02",
+      "surface": "growth_next_step",
+      "placement": "result_continuation_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "dominant_profile_family": "BF_CANONICAL_02"
+      },
+      "title": "给推进力加一个调速器",
+      "body": "你的力量和反应常常一起出现。下一步成长不是降低能量，而是在表达、判断和边界之间多留半拍，让别人跟得上，也让你自己收得住。",
+      "primary_cta_label": "回到成长建议",
+      "secondary_cta_label": "查看关系建议",
+      "notes": {
+        "source_entry_id": "growth_next_step_canonical_02",
+        "canonical_profile_id": "BF_CANONICAL_02",
+        "canonical_profile_name": "高压现场推动者",
+        "cta_targets": {
+          "primary": "anchor:action_plan.personal_growth",
+          "secondary": "anchor:action_plan.relationships"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_canonical_profiles_v1.json#BF_CANONICAL_02",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "绑定 高压现场推动者；作为成长导航语，不重复 stop/start/continue/observe 具体动作。"
+      }
+    },
+    {
+      "entry_id": "growth_next_step_canonical_03",
+      "surface": "growth_next_step",
+      "placement": "result_continuation_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "dominant_profile_family": "BF_CANONICAL_03"
+      },
+      "title": "减少不必要的戒备",
+      "body": "你已经很会担责任、控质量、看风险。下一步不是更谨慎，而是练习分辨哪些风险真的值得持续盯住，哪些只是系统在过度预警。",
+      "primary_cta_label": "回到成长建议",
+      "secondary_cta_label": "查看恢复建议",
+      "notes": {
+        "source_entry_id": "growth_next_step_canonical_03",
+        "canonical_profile_id": "BF_CANONICAL_03",
+        "canonical_profile_name": "戒备型完美主义",
+        "cta_targets": {
+          "primary": "anchor:action_plan.personal_growth",
+          "secondary": "anchor:action_plan.stress_recovery"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_canonical_profiles_v1.json#BF_CANONICAL_03",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "绑定 戒备型完美主义；作为成长导航语，不重复 stop/start/continue/observe 具体动作。"
+      }
+    },
+    {
+      "entry_id": "growth_next_step_canonical_04",
+      "surface": "growth_next_step",
+      "placement": "result_continuation_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "dominant_profile_family": "BF_CANONICAL_04"
+      },
+      "title": "把理解推进到开始",
+      "body": "你的关键跃迁，是把“我想清楚了”变成“我已经开始了”。下一步先修启动入口：切短任务、增加反馈、降低第一步的阻力。",
+      "primary_cta_label": "回到成长建议",
+      "secondary_cta_label": "查看工作建议",
+      "notes": {
+        "source_entry_id": "growth_next_step_canonical_04",
+        "canonical_profile_id": "BF_CANONICAL_04",
+        "canonical_profile_name": "复杂理解型低续航者",
+        "cta_targets": {
+          "primary": "anchor:action_plan.personal_growth",
+          "secondary": "anchor:action_plan.workplace"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_canonical_profiles_v1.json#BF_CANONICAL_04",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "绑定 复杂理解型低续航者；作为成长导航语，不重复 stop/start/continue/observe 具体动作。"
+      }
+    },
+    {
+      "entry_id": "growth_next_step_canonical_05",
+      "surface": "growth_next_step",
+      "placement": "result_continuation_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "dominant_profile_family": "BF_CANONICAL_05"
+      },
+      "title": "让连接和边界同时成立",
+      "body": "你容易在协作中承接很多。下一步成长不是继续多做一点，而是更早判断：哪里值得继续承接，哪里需要保护自己的节奏。",
+      "primary_cta_label": "回到成长建议",
+      "secondary_cta_label": "查看关系建议",
+      "notes": {
+        "source_entry_id": "growth_next_step_canonical_05",
+        "canonical_profile_id": "BF_CANONICAL_05",
+        "canonical_profile_name": "连接驱动协调者",
+        "cta_targets": {
+          "primary": "anchor:action_plan.personal_growth",
+          "secondary": "anchor:action_plan.relationships"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_canonical_profiles_v1.json#BF_CANONICAL_05",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "绑定 连接驱动协调者；作为成长导航语，不重复 stop/start/continue/observe 具体动作。"
+      }
+    },
+    {
+      "entry_id": "growth_next_step_canonical_06",
+      "surface": "growth_next_step",
+      "placement": "result_continuation_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "dominant_profile_family": "BF_CANONICAL_06"
+      },
+      "title": "更早表达稳定判断",
+      "body": "你已经足够稳，下一步不是更安静，而是让关键判断更早被看见。选择一个低噪音表达入口，让你的深处理进入协作。",
+      "primary_cta_label": "回到成长建议",
+      "secondary_cta_label": "查看工作建议",
+      "notes": {
+        "source_entry_id": "growth_next_step_canonical_06",
+        "canonical_profile_id": "BF_CANONICAL_06",
+        "canonical_profile_name": "稳态深工者",
+        "cta_targets": {
+          "primary": "anchor:action_plan.personal_growth",
+          "secondary": "anchor:action_plan.workplace"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_canonical_profiles_v1.json#BF_CANONICAL_06",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "绑定 稳态深工者；作为成长导航语，不重复 stop/start/continue/observe 具体动作。"
+      }
+    },
+    {
+      "entry_id": "growth_next_step_canonical_07",
+      "surface": "growth_next_step",
+      "placement": "result_continuation_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "dominant_profile_family": "BF_CANONICAL_07"
+      },
+      "title": "让锋利多一层承托",
+      "body": "你的成长方向不是磨平锋利，而是在锋利之外补上缓冲、同理和节奏。这样判断仍然清楚，但更容易被关系和团队接住。",
+      "primary_cta_label": "回到成长建议",
+      "secondary_cta_label": "查看关系建议",
+      "notes": {
+        "source_entry_id": "growth_next_step_canonical_07",
+        "canonical_profile_id": "BF_CANONICAL_07",
+        "canonical_profile_name": "锋利探索推进者",
+        "cta_targets": {
+          "primary": "anchor:action_plan.personal_growth",
+          "secondary": "anchor:action_plan.relationships"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_canonical_profiles_v1.json#BF_CANONICAL_07",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "绑定 锋利探索推进者；作为成长导航语，不重复 stop/start/continue/observe 具体动作。"
+      }
+    },
+    {
+      "entry_id": "growth_next_step_canonical_08",
+      "surface": "growth_next_step",
+      "placement": "result_continuation_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "dominant_profile_family": "BF_CANONICAL_08"
+      },
+      "title": "在可靠之外增加一点开放",
+      "body": "你已经能维护秩序和承接责任。下一步成长不是更可靠，而是小步增加开放度和表达度，让自己也被看见，而不只是持续支持他人。",
+      "primary_cta_label": "回到成长建议",
+      "secondary_cta_label": "查看历史",
+      "notes": {
+        "source_entry_id": "growth_next_step_canonical_08",
+        "canonical_profile_id": "BF_CANONICAL_08",
+        "canonical_profile_name": "秩序维护型支持者",
+        "cta_targets": {
+          "primary": "anchor:action_plan.personal_growth",
+          "secondary": "surface:history"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_canonical_profiles_v1.json#BF_CANONICAL_08",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "绑定 秩序维护型支持者；作为成长导航语，不重复 stop/start/continue/observe 具体动作。"
+      }
+    }
+  ]
+}

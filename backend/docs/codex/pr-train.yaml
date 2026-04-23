@@ -2121,3 +2121,34 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: PR-BIG5-LIFECYCLE-COPY-LIBRARY-V1
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api
+    branch: codex/big5-lifecycle-copy-library-v1
+    base: main
+    depends_on: ["PR-BIG5-CONTENT-ASSETS-V1"]
+    mode: execute
+    scope: >
+      Big Five lifecycle copy library v1 staging assets. Normalize the three
+      seed drafts for continuation, career next step, and growth next step into
+      an isolated backend/content_assets/big5/v1/lifecycle package with a
+      manifest and review notes. Keep this as reviewable content governance
+      only: do not change runtime code, database migrations, live registry,
+      content_packs, frontend, MBTI, payment/order/webhook, CMS/article/help
+      files, or deferred lifecycle packs.
+    checks:
+      - "python3 -m json.tool backend/docs/codex/pr-train-state.json >/dev/null"
+      - "for f in backend/content_assets/big5/v1/lifecycle/*.json; do python3 -m json.tool \"$f\" >/dev/null || exit 1; done"
+      - 'node -e "const fs=require(\"fs\");const base=\"backend/content_assets/big5/v1/lifecycle/\";const files=[\"continuation.json\",\"career_next_step.json\",\"growth_next_step.json\"];const fields=[\"entry_id\",\"surface\",\"placement\",\"audience_state\",\"when\",\"title\",\"body\",\"primary_cta_label\",\"secondary_cta_label\",\"notes\"].sort().join(\",\");const allowed=new Set([\"surface:history\",\"surface:compare\",\"surface:pdf\",\"surface:retake\",\"anchor:action_plan\",\"anchor:action_plan.workplace\",\"anchor:action_plan.relationships\",\"anchor:action_plan.stress_recovery\",\"anchor:action_plan.personal_growth\"]);const counts={};for(const file of files){const data=JSON.parse(fs.readFileSync(base+file,\"utf8\"));counts[data.surface]=data.entries.length;for(const e of data.entries){if(Object.keys(e).sort().join(\",\")!==fields)throw new Error(file+\" schema mismatch \"+e.entry_id);for(const target of [e.notes.cta_targets.primary,e.notes.cta_targets.secondary])if(!allowed.has(target))throw new Error(file+\" invalid target \"+target)}}if(counts.continuation!==8||counts.career_next_step!==8||counts.growth_next_step!==8)throw new Error(\"unexpected lifecycle counts\");console.log(\"Big Five lifecycle checks passed\")"'
+      - "rg -n \"Profile Summary|Domain Deep Dive|Norms Comparison|Methodology and Access|A compact overview|Focused read|Near-term actions|final offer|unlock|你天生注定|你永远都会|你只能这样活|你太玻璃心|你有问题|你不正常|你就是懒|primary_cta_target|secondary_cta_target\" backend/content_assets/big5/v1/lifecycle && exit 1 || true"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true

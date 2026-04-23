@@ -1,0 +1,238 @@
+{
+  "schema": "fap.big5.lifecycle_copy_library.v1.surface_pack",
+  "version": "v1",
+  "surface": "continuation",
+  "description": "Big Five 结果页之后的承接层。只负责读完之后去哪里、下一步如何使用结果，不重复五维、facet、synergy 或 action_plan 的主体解释。",
+  "entries": [
+    {
+      "entry_id": "continuation_workplace_anchor",
+      "surface": "continuation",
+      "placement": "post_result_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "top_priority_scenario": "workplace"
+      },
+      "title": "先回到工作场景",
+      "body": "如果这次结果最先指向工作场景，下一步不需要重新解释人格结构。更有用的是回到行动建议里，选一个能在本周验证的工作入口：节奏、边界、表达或恢复，只先推进一处。",
+      "primary_cta_label": "回到工作建议",
+      "secondary_cta_label": "保存 PDF",
+      "notes": {
+        "source_entry_id": "continuation_workplace_anchor",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "anchor:action_plan.workplace",
+          "secondary": "surface:pdf"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "从原草稿收敛为工作场景回跳，不扩写职业正文。"
+      }
+    },
+    {
+      "entry_id": "continuation_relationships_anchor",
+      "surface": "continuation",
+      "placement": "post_result_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "top_priority_scenario": "relationships"
+      },
+      "title": "把理解带回关系里",
+      "body": "如果你最想处理的是关系，下一步不是继续分析自己，而是把结果页里的一个判断带回到表达与边界。先选一处最容易反复消耗你的关系场景，练习更早说清。",
+      "primary_cta_label": "回到关系建议",
+      "secondary_cta_label": "查看历史",
+      "notes": {
+        "source_entry_id": "continuation_relationships_anchor",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "anchor:action_plan.relationships",
+          "secondary": "surface:history"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "保留关系承接，但避免重复关系人格解释。"
+      }
+    },
+    {
+      "entry_id": "continuation_stress_recovery_anchor",
+      "surface": "continuation",
+      "placement": "post_result_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "top_priority_scenario": "stress_recovery"
+      },
+      "title": "先固定恢复入口",
+      "body": "当结果最先指向压力与恢复，下一步不是给自己加更多任务，而是把恢复前置。回到行动建议，选一个可重复的降噪、退出或复盘入口，先跑两周。",
+      "primary_cta_label": "回到恢复建议",
+      "secondary_cta_label": "保存 PDF",
+      "notes": {
+        "source_entry_id": "continuation_stress_recovery_anchor",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "anchor:action_plan.stress_recovery",
+          "secondary": "surface:pdf"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "承接恢复场景，避免把压力解释重写一遍。"
+      }
+    },
+    {
+      "entry_id": "continuation_personal_growth_anchor",
+      "surface": "continuation",
+      "placement": "post_result_strip",
+      "audience_state": "full_report_user",
+      "when": {
+        "top_priority_scenario": "personal_growth"
+      },
+      "title": "只选一个成长入口",
+      "body": "Big Five 的读后价值，通常来自一个小而稳定的行为改变。不要试图一次改完整套模式，先回到成长建议里选一个最小入口，持续 2–4 周再复盘。",
+      "primary_cta_label": "回到成长建议",
+      "secondary_cta_label": "保存 PDF",
+      "notes": {
+        "source_entry_id": "continuation_personal_growth_anchor",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "anchor:action_plan.personal_growth",
+          "secondary": "surface:pdf"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "对齐 growth guide 的 2–4 周复盘原则。"
+      }
+    },
+    {
+      "entry_id": "continuation_compare_ready",
+      "surface": "continuation",
+      "placement": "result_tools_panel",
+      "audience_state": "compare_ready_user",
+      "when": {
+        "compare_available": true
+      },
+      "title": "用对比看变化",
+      "body": "单次结果适合理解当下结构，对比更适合看变化来自哪里。若你已有多次结果，可以把最近两次放在一起看：变化更像环境影响、节奏调整，还是关系压力带来的状态波动。",
+      "primary_cta_label": "查看对比",
+      "secondary_cta_label": "查看历史",
+      "notes": {
+        "source_entry_id": "continuation_compare_ready",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "surface:compare",
+          "secondary": "surface:history"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "把 compare 定位为长期使用入口，不写成按钮说明。"
+      }
+    },
+    {
+      "entry_id": "continuation_history_revisit",
+      "surface": "continuation",
+      "placement": "result_tools_panel",
+      "audience_state": "returning_reader",
+      "when": {
+        "history_count": 1
+      },
+      "title": "把这次结果留作基线",
+      "body": "这份结果可以先作为你的第一份长期基线。以后再回来时，重点不是判断自己有没有变成另一种人，而是看哪些反应稳定，哪些变化更受环境、压力和节奏影响。",
+      "primary_cta_label": "查看历史",
+      "secondary_cta_label": "保存 PDF",
+      "notes": {
+        "source_entry_id": "continuation_history_revisit",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "surface:history",
+          "secondary": "surface:pdf"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "保留历史价值，避免写成存档功能说明。"
+      }
+    },
+    {
+      "entry_id": "continuation_pdf_archive",
+      "surface": "continuation",
+      "placement": "result_tools_panel",
+      "audience_state": "pdf_ready_user",
+      "when": {
+        "pdf_available": true
+      },
+      "title": "保存一份可复盘材料",
+      "body": "PDF 适合在几周后重新对照，也适合带进职业、关系或成长讨论。它的价值不是收藏结果，而是让你在下一次复盘时仍能看见当时的判断、场景和行动入口。",
+      "primary_cta_label": "保存 PDF",
+      "secondary_cta_label": "查看历史",
+      "notes": {
+        "source_entry_id": "continuation_pdf_archive",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "surface:pdf",
+          "secondary": "surface:history"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "强调 PDF 的复盘材料属性。"
+      }
+    },
+    {
+      "entry_id": "continuation_back_to_action_anchor",
+      "surface": "continuation",
+      "placement": "after_methodology_and_access",
+      "audience_state": "full_report_user",
+      "when": {},
+      "title": "最后回到一个动作",
+      "body": "如果现在只做一件事，就回到行动建议里选最小的下一步。理解已经足够时，真正会改变使用体验的，是把一个判断翻译成一个可执行动作。",
+      "primary_cta_label": "回到行动建议",
+      "secondary_cta_label": "重新测试",
+      "notes": {
+        "source_entry_id": "continuation_back_to_action_anchor",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "anchor:action_plan",
+          "secondary": "surface:retake"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "big5_style_and_copy_rules_v1.md#3"
+        ],
+        "normalization_notes": "结果页尾部总收口，不写商业化收口语气。"
+      }
+    }
+  ]
+}
