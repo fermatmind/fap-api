@@ -102,6 +102,38 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-ARTICLE-REAL-MACHINE-TRANSLATION-PROVIDER
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/real-article-machine-translation-provider
+    base: main
+    depends_on: ["PR-UNIFIED-MULTILINGUAL-CMS-BACKBONE"]
+    mode: execute
+    scope: >
+      Real machine translation provider for revision-backed editorial articles
+      only. Add a production-capable OpenAI-backed ArticleMachineTranslationProvider,
+      wire config-driven binding, preserve the existing article translation
+      workflow and ownership model, add focused provider/workflow tests and
+      runbook updates, and do not change non-article provider rollout,
+      row-backed multilingual contracts, frontend public read behavior, or
+      invalidation/public rollout work.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Services/Cms/OpenAiArticleMachineTranslationProvider.php app/Providers/AppServiceProvider.php config/services.php tests/Feature/Ops/ArticleMachineTranslationProviderTest.php"
+      - "php artisan test tests/Feature/Ops/ArticleMachineTranslationProviderTest.php tests/Feature/Ops/ArticleTranslationOpsPageTest.php tests/Feature/Ops/ArticleTranslationRevisionContractTest.php"
+      - "php artisan fap:schema:verify"
+      - "php artisan route:list"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-BIG5-REPORT-ENGINE-ALL-TRAITS
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

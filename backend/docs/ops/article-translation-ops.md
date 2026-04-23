@@ -33,6 +33,32 @@ The console exposes these actions from a single translation group surface:
 
 When no provider is configured, machine draft and re-sync actions remain disabled with an explicit reason. The service contract is still present so a provider can be bound without changing the console action surface.
 
+## Real Provider Configuration
+
+`articles` now support a real OpenAI-backed machine translation provider. Configure it with:
+
+- `ARTICLE_TRANSLATION_PROVIDER=openai`
+- `ARTICLE_TRANSLATION_OPENAI_API_KEY`
+- `ARTICLE_TRANSLATION_OPENAI_MODEL`
+
+Optional overrides:
+
+- `ARTICLE_TRANSLATION_OPENAI_BASE_URL`
+- `ARTICLE_TRANSLATION_OPENAI_CONNECT_TIMEOUT`
+- `ARTICLE_TRANSLATION_OPENAI_REQUEST_TIMEOUT`
+- `ARTICLE_TRANSLATION_OPENAI_MAX_RETRIES`
+- `ARTICLE_TRANSLATION_OPENAI_RETRY_SLEEP_MS`
+- `ARTICLE_TRANSLATION_OPENAI_MAX_OUTPUT_TOKENS`
+
+Behavior:
+
+- Calls the OpenAI Responses API with structured JSON output.
+- Translates only editorial output fields: title, excerpt, markdown body, SEO title, SEO description.
+- Preserves markdown links, URLs, DOI strings, PMIDs, and reference blocks.
+- Keeps the existing ownership rule and revision-backed article workflow unchanged.
+
+This provider rollout is intentionally scoped to `articles` only. Non-article content types still use the shared disabled/provider-registry path until their own provider rollout PR.
+
 ## Preflight
 
 Publish and approval use the translation workflow preflight guard. Blocking conditions include:
