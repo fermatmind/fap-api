@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\API\V0_5\Cms;
 
-use App\Exceptions\OrgContextMissingException;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticlePublishService;
 use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\ArticleService;
@@ -44,7 +44,7 @@ class ArticleController extends Controller
         $query = Article::query()
             ->withoutGlobalScopes()
             ->where('org_id', $validated['org_id'])
-            ->published()
+            ->publiclyReadable()
             ->with($this->articleRelations());
 
         if ($validated['locale'] !== null) {
@@ -70,7 +70,7 @@ class ArticleController extends Controller
                 continue;
             }
 
-            $items[] = $this->articlePayload($article);
+            $items[] = $this->publicArticlePayload($article);
         }
 
         return response()->json([
@@ -109,24 +109,9 @@ class ArticleController extends Controller
             ], 400);
         }
 
-        $article = null;
+        $article = $this->findPublicArticle($normalizedSlug, $locale, $orgId);
 
-        try {
-            $article = Article::findBySlug($normalizedSlug, $locale);
-        } catch (OrgContextMissingException) {
-            $article = null;
-        }
-
-        if (! $article instanceof Article || (int) $article->org_id !== $orgId) {
-            $article = Article::query()
-                ->withoutGlobalScopes()
-                ->where('org_id', $orgId)
-                ->where('slug', $normalizedSlug)
-                ->where('locale', $locale)
-                ->first();
-        }
-
-        if (! $article instanceof Article || (string) $article->status !== 'published' || ! (bool) $article->is_public) {
+        if (! $article instanceof Article) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'NOT_FOUND',
@@ -134,19 +119,27 @@ class ArticleController extends Controller
             ], 404);
         }
 
-        $article->loadMissing($this->articleRelations());
+        $revision = $this->publicRevision($article);
+        if (! $revision instanceof ArticleTranslationRevision) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'NOT_FOUND',
+                'message' => 'article not found.',
+            ], 404);
+        }
 
         $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
-            $this->articleSeoService->buildSeoPayload($article)
+            $this->articleSeoService->buildSeoPayload($article, $revision)
         );
-        $jsonLd = $this->articleSeoService->generateJsonLd($article);
+        $jsonLd = $this->articleSeoService->generateJsonLd($article, $revision);
+        $payload = $this->publicArticlePayload($article, $revision);
 
         return response()->json([
             'ok' => true,
-            'article' => $this->articlePayload($article),
+            'article' => $payload,
             'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'article_public_detail'),
-            'landing_surface_v1' => $this->buildDetailLandingSurface($article, $locale),
-            'answer_surface_v1' => $this->buildDetailAnswerSurface($article, $locale),
+            'landing_surface_v1' => $this->buildDetailLandingSurface($article, $payload, $locale),
+            'answer_surface_v1' => $this->buildDetailAnswerSurface($article, $payload, $locale),
         ]);
     }
 
@@ -166,33 +159,21 @@ class ArticleController extends Controller
             return response()->json(['error' => 'not found'], 404);
         }
 
-        $article = null;
+        $article = $this->findPublicArticle($normalizedSlug, $locale, $orgId);
 
-        try {
-            $article = Article::findBySlug($normalizedSlug, $locale);
-        } catch (OrgContextMissingException) {
-            $article = null;
-        }
-
-        if (! $article instanceof Article || (int) $article->org_id !== $orgId) {
-            $article = Article::query()
-                ->withoutGlobalScopes()
-                ->where('org_id', $orgId)
-                ->where('slug', $normalizedSlug)
-                ->where('locale', $locale)
-                ->first();
-        }
-
-        if (! $article instanceof Article || (string) $article->status !== 'published' || ! (bool) $article->is_public) {
+        if (! $article instanceof Article) {
             return response()->json(['error' => 'not found'], 404);
         }
 
-        $article->loadMissing($this->articleRelations());
+        $revision = $this->publicRevision($article);
+        if (! $revision instanceof ArticleTranslationRevision) {
+            return response()->json(['error' => 'not found'], 404);
+        }
 
         $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
-            $this->articleSeoService->buildSeoPayload($article)
+            $this->articleSeoService->buildSeoPayload($article, $revision)
         );
-        $jsonLd = $this->articleSeoService->generateJsonLd($article);
+        $jsonLd = $this->articleSeoService->generateJsonLd($article, $revision);
 
         return response()->json([
             'meta' => $meta,
@@ -308,7 +289,7 @@ class ArticleController extends Controller
     /**
      * @return array<string,mixed>
      */
-    private function buildDetailLandingSurface(Article $article, string $locale): array
+    private function buildDetailLandingSurface(Article $article, array $payload, string $locale): array
     {
         $segment = $this->frontendLocaleSegment($locale);
         $slug = trim((string) $article->slug);
@@ -320,8 +301,8 @@ class ArticleController extends Controller
             'summary_blocks' => [
                 [
                     'key' => 'article_hero',
-                    'title' => (string) $article->title,
-                    'body' => trim((string) ($article->excerpt ?? '')),
+                    'title' => (string) ($payload['title'] ?? ''),
+                    'body' => trim((string) ($payload['excerpt'] ?? '')),
                     'kind' => 'answer_first',
                 ],
             ],
@@ -364,7 +345,7 @@ class ArticleController extends Controller
     /**
      * @return array<string,mixed>
      */
-    private function buildDetailAnswerSurface(Article $article, string $locale): array
+    private function buildDetailAnswerSurface(Article $article, array $payload, string $locale): array
     {
         $segment = $this->frontendLocaleSegment($locale);
         $category = $article->relationLoaded('category') && $article->category
@@ -442,8 +423,8 @@ class ArticleController extends Controller
             'summary_blocks' => [
                 [
                     'key' => 'article_summary',
-                    'title' => (string) $article->title,
-                    'body' => trim((string) ($article->excerpt ?? '')),
+                    'title' => (string) ($payload['title'] ?? ''),
+                    'body' => trim((string) ($payload['excerpt'] ?? '')),
                     'kind' => 'answer_first',
                 ],
             ],
@@ -788,7 +769,110 @@ class ArticleController extends Controller
             'category' => static fn ($query) => $query->withoutGlobalScopes(),
             'tags' => static fn ($query) => $query->withoutGlobalScopes(),
             'seoMeta' => static fn ($query) => $query->withoutGlobalScopes(),
+            'publishedRevision' => static fn ($query) => $query->withoutGlobalScopes(),
         ];
+    }
+
+    private function findPublicArticle(string $slug, string $locale, int $orgId): ?Article
+    {
+        /** @var Article|null */
+        return Article::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', $orgId)
+            ->where('slug', $slug)
+            ->where('locale', $locale)
+            ->publiclyReadable()
+            ->with($this->articleRelations())
+            ->first();
+    }
+
+    private function publicRevision(Article $article): ?ArticleTranslationRevision
+    {
+        if (
+            $article->relationLoaded('publishedRevision')
+            && $article->publishedRevision instanceof ArticleTranslationRevision
+        ) {
+            return $article->publishedRevision;
+        }
+
+        $article->loadMissing('publishedRevision');
+
+        return $article->publishedRevision instanceof ArticleTranslationRevision
+            ? $article->publishedRevision
+            : null;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function publicArticlePayload(Article $article, ?ArticleTranslationRevision $revision = null): array
+    {
+        $revision ??= $this->publicRevision($article);
+        if (! $revision instanceof ArticleTranslationRevision) {
+            throw new RuntimeException('published revision not found.');
+        }
+
+        return [
+            'id' => (int) $article->id,
+            'org_id' => (int) $article->org_id,
+            'category_id' => $article->category_id !== null ? (int) $article->category_id : null,
+            'author_admin_user_id' => $article->author_admin_user_id !== null ? (int) $article->author_admin_user_id : null,
+            'author_name' => $article->author_name,
+            'reviewer_name' => $article->reviewer_name,
+            'reading_minutes' => $article->reading_minutes !== null ? (int) $article->reading_minutes : null,
+            'slug' => (string) $article->slug,
+            'locale' => (string) $article->locale,
+            'translation_group_id' => (string) ($article->translation_group_id ?? ''),
+            'source_article_id' => $article->source_article_id !== null ? (int) $article->source_article_id : null,
+            'source_locale' => $article->source_locale,
+            'published_revision_id' => (int) $revision->id,
+            'title' => (string) $revision->title,
+            'excerpt' => $revision->excerpt,
+            'content_md' => (string) $revision->content_md,
+            'content_html' => null,
+            'cover_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($article->cover_image_url),
+            'cover_image_alt' => $article->cover_image_alt,
+            'cover_image_width' => $article->cover_image_width !== null ? (int) $article->cover_image_width : null,
+            'cover_image_height' => $article->cover_image_height !== null ? (int) $article->cover_image_height : null,
+            'cover_image_variants' => PublicMediaUrlGuard::sanitizeArrayFields($article->cover_image_variants, ['url']),
+            'related_test_slug' => $article->related_test_slug,
+            'voice' => $article->voice,
+            'voice_order' => $article->voice_order !== null ? (int) $article->voice_order : null,
+            'status' => (string) $article->status,
+            'is_public' => (bool) $article->is_public,
+            'is_indexable' => (bool) $article->is_indexable,
+            'published_at' => $article->published_at?->toISOString(),
+            'scheduled_at' => $article->scheduled_at?->toISOString(),
+            'created_at' => $article->created_at?->toISOString(),
+            'updated_at' => $revision->updated_at?->toISOString() ?? $article->updated_at?->toISOString(),
+            'category' => $article->relationLoaded('category') ? $article->category : null,
+            'tags' => $article->relationLoaded('tags') ? $article->tags : [],
+            'seo_meta' => $this->publicSeoMetaSnapshot($article, $revision),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function publicSeoMetaSnapshot(Article $article, ArticleTranslationRevision $revision): ?array
+    {
+        if (! $article->relationLoaded('seoMeta')) {
+            return null;
+        }
+
+        $seoMeta = PublicMediaUrlGuard::sanitizeArrayFields(
+            $article->seoMeta?->toArray(),
+            ['og_image_url', 'twitter_image_url']
+        );
+
+        if (! is_array($seoMeta)) {
+            return null;
+        }
+
+        $seoMeta['seo_title'] = $revision->seo_title;
+        $seoMeta['seo_description'] = $revision->seo_description;
+
+        return $seoMeta;
     }
 
     /**

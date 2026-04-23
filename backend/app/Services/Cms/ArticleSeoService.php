@@ -6,6 +6,7 @@ namespace App\Services\Cms;
 
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
+use App\Models\ArticleTranslationRevision;
 use App\Services\Career\StructuredData\CareerArticleStructuredDataBuilder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -75,14 +76,15 @@ final class ArticleSeoService
     /**
      * @return array<string,mixed>
      */
-    public function buildSeoPayload(Article $article): array
+    public function buildSeoPayload(Article $article, ?ArticleTranslationRevision $revision = null): array
     {
         $locale = $this->normalizeLocale((string) $article->locale);
         $seo = $this->resolveSeoMeta($article, $locale);
+        $revision = $this->resolvePublishedRevision($article, $revision);
 
-        $title = $seo?->seo_title ?? $article->title;
-        $descriptionSource = (string) ($article->excerpt ?? $article->content_md);
-        $description = $seo?->seo_description
+        $title = $revision?->seo_title ?? $revision?->title ?? $seo?->seo_title ?? $article->title;
+        $descriptionSource = (string) ($revision?->excerpt ?? $revision?->content_md ?? $article->excerpt ?? $article->content_md);
+        $description = $revision?->seo_description ?? $seo?->seo_description
             ?? Str::limit($this->normalizeWhitespace(strip_tags($descriptionSource)), 160);
         $canonical = $this->buildCanonicalUrl((string) $article->slug, $locale);
         $image = $seo?->og_image_url ?? $this->resolveArticleImageUrl($article);
@@ -114,21 +116,22 @@ final class ArticleSeoService
     /**
      * @return array<string,mixed>
      */
-    public function generateJsonLd(Article $article): array
+    public function generateJsonLd(Article $article, ?ArticleTranslationRevision $revision = null): array
     {
         $locale = $this->normalizeLocale((string) $article->locale);
         $seo = $this->resolveSeoMeta($article, $locale);
+        $revision = $this->resolvePublishedRevision($article, $revision);
         $canonical = $this->buildCanonicalUrl((string) $article->slug, $locale);
-        $descriptionSource = (string) ($article->excerpt ?? $article->content_md);
+        $descriptionSource = (string) ($revision?->excerpt ?? $revision?->content_md ?? $article->excerpt ?? $article->content_md);
         $structured = $this->careerArticleStructuredDataBuilder->build('article_public_detail', [
             'id' => $canonical !== null ? $canonical.'#article' : null,
-            'headline' => $seo?->seo_title ?? $article->title,
-            'description' => $seo?->seo_description
+            'headline' => $revision?->seo_title ?? $revision?->title ?? $seo?->seo_title ?? $article->title,
+            'description' => $revision?->seo_description ?? $seo?->seo_description
                 ?? Str::limit($this->normalizeWhitespace(strip_tags($descriptionSource)), 160),
             'url' => $canonical,
             'main_entity_of_page' => $canonical,
-            'date_published' => $article->published_at?->toAtomString(),
-            'date_modified' => $article->updated_at?->toAtomString(),
+            'date_published' => $revision?->published_at?->toAtomString() ?? $article->published_at?->toAtomString(),
+            'date_modified' => $revision?->updated_at?->toAtomString() ?? $article->updated_at?->toAtomString(),
             'article_section' => $this->normalizeString($article->category?->name),
             'author_name' => $this->normalizeString($article->author_name),
             'keywords' => $article->relationLoaded('tags')
@@ -250,8 +253,7 @@ final class ArticleSeoService
             ->withoutGlobalScopes()
             ->where('org_id', (int) $article->org_id)
             ->where('slug', (string) $article->slug)
-            ->where('status', 'published')
-            ->where('is_public', true)
+            ->publiclyReadable()
             ->whereIn('locale', self::SUPPORTED_LOCALES)
             ->pluck('locale')
             ->all();
@@ -333,6 +335,24 @@ final class ArticleSeoService
     private function frontendBaseUrl(): string
     {
         return rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+    }
+
+    private function resolvePublishedRevision(
+        Article $article,
+        ?ArticleTranslationRevision $revision
+    ): ?ArticleTranslationRevision {
+        if ($revision instanceof ArticleTranslationRevision) {
+            return $revision;
+        }
+
+        if (
+            $article->relationLoaded('publishedRevision')
+            && $article->publishedRevision instanceof ArticleTranslationRevision
+        ) {
+            return $article->publishedRevision;
+        }
+
+        return null;
     }
 
     private function normalizeLocale(string $locale): string

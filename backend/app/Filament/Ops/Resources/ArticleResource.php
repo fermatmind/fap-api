@@ -605,26 +605,30 @@ class ArticleResource extends Resource
             throw new AuthorizationException('This article must be approved in editorial review before it can be published.');
         }
 
-        $publishedRevision = $record->workingRevision;
-        if ($publishedRevision instanceof ArticleTranslationRevision
-            && $publishedRevision->revision_status === ArticleTranslationRevision::STATUS_APPROVED) {
-            $publishedRevision->forceFill([
-                'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
-                'published_at' => $publishedRevision->published_at ?? now(),
-            ])->save();
-        } else {
-            $publishedRevision = $record->publishedRevision;
+        $publishedRevision = $record->workingRevision instanceof ArticleTranslationRevision
+            ? $record->workingRevision
+            : self::revisionWorkspace()->resolveWorkingRevision($record);
+
+        if (
+            $publishedRevision->revision_status === ArticleTranslationRevision::STATUS_STALE
+            || $publishedRevision->revision_status === ArticleTranslationRevision::STATUS_ARCHIVED
+        ) {
+            throw new AuthorizationException('This article revision is not publishable.');
         }
+
+        $publishedRevision->forceFill([
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'published_at' => $publishedRevision->published_at ?? now(),
+        ])->save();
 
         $record->forceFill([
             'status' => 'published',
             'is_public' => true,
             'published_at' => $record->published_at ?? now(),
-            'published_revision_id' => $publishedRevision?->id,
+            'published_revision_id' => $publishedRevision->id,
         ])->save();
 
         if ($record->isSourceArticle()
-            && $publishedRevision instanceof ArticleTranslationRevision
             && filled($publishedRevision->source_version_hash)) {
             $record->forceFill([
                 'source_version_hash' => $publishedRevision->source_version_hash,

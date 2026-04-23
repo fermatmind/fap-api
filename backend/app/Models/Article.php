@@ -151,6 +151,26 @@ class Article extends Model
             ->where('is_public', true);
     }
 
+    public function scopePubliclyReadable($query)
+    {
+        return $query
+            ->published()
+            ->whereNotNull('published_revision_id')
+            ->whereHas('publishedRevision', static function ($revisionQuery): void {
+                $revisionQuery
+                    ->withoutGlobalScopes()
+                    ->whereColumn('article_translation_revisions.article_id', 'articles.id')
+                    ->whereColumn('article_translation_revisions.org_id', 'articles.org_id')
+                    ->whereColumn('article_translation_revisions.locale', 'articles.locale')
+                    ->where('article_translation_revisions.revision_status', ArticleTranslationRevision::STATUS_PUBLISHED)
+                    ->where(static function ($publishedAtQuery): void {
+                        $publishedAtQuery
+                            ->whereNull('article_translation_revisions.published_at')
+                            ->orWhere('article_translation_revisions.published_at', '<=', now());
+                    });
+            });
+    }
+
     public function revisions(): HasMany
     {
         return $this->hasMany(ArticleRevision::class, 'article_id', 'id');
