@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T11:06:00+08:00",
+  "updated_at": "2026-04-23T11:08:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -309,7 +309,7 @@
     "PR-BIG5-REPORT-ENGINE-ACTION-MATRIX": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_checks_passed",
+      "status": "github_checks_failed_billing_block",
       "branch": "codex/big5-report-engine-action-matrix",
       "commit_sha": "86482e52a52598abea99874eb9fd27f1a9b44df8",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/982",
@@ -352,9 +352,22 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24814484807/job/72625871393",
+            "reason": "GitHub Actions job was not started because recent account payments failed or the spending limit needs to be increased."
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24814484807/job/72625876441",
+            "reason": "Skipped because hygiene did not start due to GitHub billing/spending-limit block."
+          }
+        ]
       },
-      "failure_reason": "",
+      "failure_reason": "Remote GitHub checks are blocked by account billing/spending-limit, not by PR3C code. Local manifest checks, action matrix tests, route list, SQLite migrate pretend, and MBTI verification passed.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
