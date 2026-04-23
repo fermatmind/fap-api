@@ -10,6 +10,7 @@ use App\Models\ArticleSeoMeta;
 use App\Services\Cms\ArticleTranslationWorkflowService;
 use App\Services\Cms\OpenAiArticleMachineTranslationProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
@@ -135,6 +136,24 @@ final class ArticleMachineTranslationProviderTest extends TestCase
 
         $boundProvider = app(ArticleMachineTranslationProvider::class);
         $this->assertInstanceOf(OpenAiArticleMachineTranslationProvider::class, $boundProvider);
+    }
+
+    public function test_openai_article_machine_translation_provider_normalizes_connection_failures(): void
+    {
+        config()->set('services.article_translation.provider', 'openai');
+        config()->set('services.article_translation.openai.base_url', 'https://api.openai.test/v1');
+        config()->set('services.article_translation.openai.api_key', 'test-key');
+        config()->set('services.article_translation.openai.model', 'gpt-4.1');
+
+        Http::fake(static fn () => throw new ConnectionException('connection refused'));
+
+        $source = $this->createSourceArticle('provider-connection-failure-fixture');
+        $provider = app(OpenAiArticleMachineTranslationProvider::class);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('OpenAI article translation request failed: connection error.');
+
+        $provider->translate($source, 'en');
     }
 
     private function createSourceArticle(string $slug): Article

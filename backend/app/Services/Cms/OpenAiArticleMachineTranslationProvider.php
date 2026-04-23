@@ -6,6 +6,7 @@ namespace App\Services\Cms;
 
 use App\Contracts\Cms\ArticleMachineTranslationProvider;
 use App\Models\Article;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;
@@ -112,6 +113,8 @@ final class OpenAiArticleMachineTranslationProvider implements ArticleMachineTra
                 ->retry($this->maxRetries(), $this->retrySleepMilliseconds())
                 ->post($this->endpointUrl(), $payload)
                 ->throw();
+        } catch (ConnectionException $e) {
+            throw new RuntimeException('OpenAI article translation request failed: connection error.', previous: $e);
         } catch (RequestException $e) {
             $status = $e->response?->status();
             $body = $e->response?->json();
