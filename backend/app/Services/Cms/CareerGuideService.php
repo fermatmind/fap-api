@@ -217,12 +217,12 @@ final class CareerGuideService
             ->where('career_guide_article_map.career_guide_id', (int) $guide->id)
             ->where('articles.org_id', (int) $guide->org_id)
             ->where('articles.locale', $this->normalizeLocale((string) $guide->locale))
-            ->where('articles.status', 'published')
-            ->where('articles.is_public', true)
+            ->publiclyReadable()
             ->where(static function (Builder $query): void {
                 $query->whereNull('articles.published_at')
                     ->orWhere('articles.published_at', '<=', now());
             })
+            ->with(['publishedRevision' => static fn ($query) => $query->withoutGlobalScopes()])
             ->orderBy('career_guide_article_map.sort_order')
             ->orderBy('articles.id')
             ->get()
@@ -230,8 +230,8 @@ final class CareerGuideService
                 'id' => (int) $article->id,
                 'slug' => (string) $article->slug,
                 'locale' => (string) $article->locale,
-                'title' => (string) $article->title,
-                'excerpt' => $article->excerpt,
+                'title' => (string) ($article->publishedRevision?->title ?? ''),
+                'excerpt' => $article->publishedRevision?->excerpt,
                 'published_at' => $article->published_at?->toISOString(),
             ])
             ->all();

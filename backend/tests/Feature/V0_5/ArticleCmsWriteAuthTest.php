@@ -6,6 +6,7 @@ namespace Tests\Feature\V0_5;
 
 use App\Models\AdminUser;
 use App\Models\Article;
+use App\Models\ArticleTranslationRevision;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Support\Rbac\PermissionNames;
@@ -112,6 +113,15 @@ final class ArticleCmsWriteAuthTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('article.status', 'published')
             ->assertJsonPath('article.is_public', true);
+
+        $article->refresh();
+        $this->assertNotNull($article->published_revision_id);
+        $this->assertSame($article->working_revision_id, $article->published_revision_id);
+        $this->assertSame(
+            ArticleTranslationRevision::STATUS_PUBLISHED,
+            $article->publishedRevision?->revision_status
+        );
+        $this->assertNotNull($article->publishedRevision?->published_at);
     }
 
     public function test_admin_with_content_release_permission_cannot_create_article(): void

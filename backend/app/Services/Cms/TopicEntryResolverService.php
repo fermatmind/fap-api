@@ -78,8 +78,8 @@ final class TopicEntryResolverService
             ->where('org_id', (int) $profile->org_id)
             ->where('slug', trim((string) $entry->target_key))
             ->where('locale', $targetLocale)
-            ->where('status', 'published')
-            ->where('is_public', true)
+            ->publiclyReadable()
+            ->with(['publishedRevision' => static fn ($query) => $query->withoutGlobalScopes()])
             ->first();
 
         if (! $article instanceof Article) {
@@ -90,8 +90,8 @@ final class TopicEntryResolverService
 
         return $this->buildResolvedEntry(
             $entry,
-            $article->title,
-            $article->excerpt,
+            (string) ($article->publishedRevision?->title ?? ''),
+            $article->publishedRevision?->excerpt,
             '/'.$segment.'/articles/'.rawurlencode((string) $article->slug),
             $article->cover_image_url,
             $targetLocale
