@@ -3461,7 +3461,7 @@
             "result": "25 modifiers, 12 synergies, 30 facets, 23 precision rules, 40 action rules, 8 coverage profiles"
           },
           {
-            "command": "rg -n \"Profile Summary|Domain Deep Dive|Norms Comparison|Methodology and Access|A compact overview|Focused read|Near-term actions|assertiveness|你天生注定|你永远都会|你只能这样活|你太玻璃心|你有问题|你不正常\" backend/content_assets/big5/v1/expanded || true",
+            "command": "rg -n \"Profile Summary|Domain Deep Dive|Norms Comparison|Methodology and Access|A compact overview|Focused read|Near-term actions|assertiveness|\u4f60\u5929\u751f\u6ce8\u5b9a|\u4f60\u6c38\u8fdc\u90fd\u4f1a|\u4f60\u53ea\u80fd\u8fd9\u6837\u6d3b|\u4f60\u592a\u73bb\u7483\u5fc3|\u4f60\u6709\u95ee\u9898|\u4f60\u4e0d\u6b63\u5e38\" backend/content_assets/big5/v1/expanded || true",
             "status": "passed",
             "result": "no matches in expanded assets"
           },
@@ -4303,9 +4303,9 @@
     "PR-ROW-BACKED-CMS-SHADOW-REVISIONS": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "open",
+      "status": "merged",
       "branch": "codex/row-backed-cms-shadow-revisions",
-      "commit_sha": "7044c1e6",
+      "commit_sha": "ccf6889d",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/997",
       "checks": {
         "local": [
@@ -4334,16 +4334,16 @@
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-04-23T17:30:02Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "PR-NON-ARTICLE-MULTILINGUAL-PUBLIC-ROLLOUT-BACKEND": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "pr_open",
+      "status": "merged",
       "branch": "codex/non-article-multilingual-public-rollout-backend",
-      "commit_sha": "312e86b5",
+      "commit_sha": "83d9d71d",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/998",
       "checks": {
         "local": [
@@ -4357,6 +4357,48 @@
           },
           {
             "command": "php artisan test tests/Feature/Ops/PostReleaseObservabilityPageTest.php tests/Feature/V0_5/SupportTrustCmsApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan fap:schema:verify",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list | rg 'support/articles|support/guides|content-pages|public-gateways/help'",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "2026-04-23T17:55:02Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-NON-ARTICLE-REAL-PROVIDER-ROLLOUT-BACKEND": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/non-article-real-provider-rollout-backend",
+      "commit_sha": "44abcae1",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/999",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Providers/AppServiceProvider.php app/Services/Cms/OpenAiCmsMachineTranslationProvider.php config/services.php docs/ops/unified-multilingual-cms-backbone.md docs/codex/final-v4-backend-rules.md tests/Feature/Ops/CmsMachineTranslationProviderTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Ops/CmsMachineTranslationProviderTest.php tests/Feature/Ops/CmsTranslationBackboneTest.php tests/Feature/Ops/CmsTranslationShadowRevisionTest.php",
             "status": "passed"
           },
           {

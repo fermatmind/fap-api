@@ -2387,3 +2387,36 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: PR-NON-ARTICLE-REAL-PROVIDER-ROLLOUT-BACKEND
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/non-article-real-provider-rollout-backend
+    base: main
+    depends_on: ["PR-NON-ARTICLE-MULTILINGUAL-PUBLIC-ROLLOUT-BACKEND"]
+    mode: execute
+    scope: >
+      Backend closeout for remaining multilingual CMS strategic gaps. Add a
+      real OpenAI-backed machine translation provider for support_articles,
+      interpretation_guides, and content_pages; keep non-article machine draft
+      generation backend-authoritative; and reconcile multilingual runbook,
+      backend repository-rule documentation, and PR-train ledger state with the
+      already-merged non-article public rollout. Do not change frontend
+      rendering, public route behavior, glossary/SLA/QA governance, or
+      unrelated backend product modules.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Providers/AppServiceProvider.php app/Services/Cms/OpenAiCmsMachineTranslationProvider.php config/services.php docs/ops/unified-multilingual-cms-backbone.md docs/codex/final-v4-backend-rules.md tests/Feature/Ops/CmsMachineTranslationProviderTest.php"
+      - "php artisan test tests/Feature/Ops/CmsMachineTranslationProviderTest.php tests/Feature/Ops/CmsTranslationBackboneTest.php tests/Feature/Ops/CmsTranslationShadowRevisionTest.php"
+      - "php artisan fap:schema:verify"
+      - "php artisan route:list | rg 'support/articles|support/guides|content-pages|public-gateways/help'"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true

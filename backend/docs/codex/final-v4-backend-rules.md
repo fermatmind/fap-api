@@ -18,6 +18,16 @@ Backend-owned surfaces include:
 
 Public article rows and their article-owned sidecars, including translation revisions and article SEO metadata, must be owned by the public editorial org (`org_id=0`). Ops Article CMS must not derive article ownership from the currently selected tenant org; tenant org context may gate operator access, but it must not remap public article ownership or hide public article sidecars during edit, review, or release.
 
+Multilingual backend workflow authority now spans `articles`, `support_articles`, `interpretation_guides`, and `content_pages`. For row-backed multilingual content, the backend owns:
+
+- translation-group linkage
+- shadow revision creation and promotion
+- working/published revision pointers
+- machine draft generation provider binding
+- release invalidation payloads and webhook auth headers
+
+Frontend consumers may render or revalidate these surfaces, but they must not infer publication state or machine-translation availability outside backend contracts.
+
 ## Baseline Protocol
 
 `content_baselines` may be retained only for:

@@ -9,7 +9,7 @@ The Ops CMS multilingual backbone now spans four editorial content types:
 - `interpretation_guides`
 - `content_pages`
 
-The public frontend contracts are unchanged. This PR adds backend workflow, metadata, auditability, and publish follow-up behavior.
+`articles` are fully revision-backed. `support_articles`, `interpretation_guides`, and `content_pages` now have backend/CMS multilingual workflow plus published public-surface rollout on the frontend.
 
 ## Contract shape
 
@@ -132,12 +132,20 @@ Two layers now exist:
 - `ArticleMachineTranslationProvider`: existing article-specific provider contract
 - `CmsMachineTranslationProviderRegistry`: shared registry for multilingual CMS content types
 
-Default behavior:
+Current behavior:
 
-- `article` resolves to the article bridge provider
-- other content types resolve to the disabled provider unless explicitly configured
+- `article` resolves through the article-specific provider contract
+- `support_article`, `interpretation_guide`, and `content_page` resolve to the shared OpenAI-backed CMS provider by default
+- when `CMS_TRANSLATION_OPENAI_API_KEY` or `CMS_TRANSLATION_OPENAI_MODEL` is missing, non-article machine-draft actions stay disabled and the console surfaces the configuration reason
 
-This keeps the provider boundary clean and makes future provider plug-in work type-aware.
+Relevant backend env/config:
+
+- `CMS_TRANSLATION_OPENAI_API_KEY`
+- `CMS_TRANSLATION_OPENAI_MODEL`
+- `CMS_TRANSLATION_OPENAI_BASE_URL`
+- `CMS_TRANSLATION_PROVIDER_SUPPORT_ARTICLE`
+- `CMS_TRANSLATION_PROVIDER_INTERPRETATION_GUIDE`
+- `CMS_TRANSLATION_PROVIDER_CONTENT_PAGE`
 
 ## Publish invalidation
 
@@ -164,6 +172,7 @@ Failure behavior:
 Additional source-side hook:
 
 - saving a published `support_article`, `interpretation_guide`, or `content_page` through the Ops CMS create/edit page now emits the same release follow-up signal
+- production/staging invalidation wiring should point `OPS_CONTENT_RELEASE_CACHE_INVALIDATION_URLS` at the frontend revalidation consumer and share the same secret via `OPS_CONTENT_RELEASE_CACHE_INVALIDATION_SECRET`
 
 ## Stale semantics
 
@@ -196,10 +205,9 @@ php artisan fap:schema:verify
 php artisan route:list
 ```
 
-## Deferred follow-up
+## Remaining deferred follow-up
 
 Still deferred for a later PR:
 
-- real provider implementations for non-article content types
-- frontend consumption of multilingual support articles / interpretation guides / content pages beyond current public contract
 - a dedicated invalidation queue with retry state surfaced directly in the translation console
+- glossary / QA / SLA governance above the translation workflow contract
