@@ -1,0 +1,181 @@
+{
+  "schema": "fap.big5.lifecycle_copy_library.v1.surface_pack",
+  "version": "v1",
+  "surface": "shell_tools",
+  "description": "Big Five 工具区承接层。只负责把结果页工具组织成继续使用结果的入口，不解释人格结构，不写按钮说明，不新增 runtime contract。",
+  "entries": [
+    {
+      "entry_id": "shell_tools_group_intro",
+      "surface": "shell_tools",
+      "placement": "result_tools_header",
+      "audience_state": "full_report_user",
+      "when": {},
+      "title": "继续使用这份结果",
+      "body": "把这份结果当成一个长期可回看的工作台，而不是一次性阅读。你可以保存、回看、对比和复盘，让这次结果进入后续决策，而不是停在当下的理解里。",
+      "primary_cta_label": "查看行动建议",
+      "secondary_cta_label": "保存 PDF",
+      "notes": {
+        "source_entry_id": "shell_tools_group_intro",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "anchor:action_plan",
+          "secondary": "surface:pdf"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "continuation.json#continuation_back_to_action_anchor"
+        ],
+        "normalization_notes": "用于工具区总承接，补齐 CTA review metadata，不保留空 target。"
+      }
+    },
+    {
+      "entry_id": "shell_tools_pdf_ready",
+      "surface": "shell_tools",
+      "placement": "result_tools_pdf",
+      "audience_state": "pdf_ready_user",
+      "when": {
+        "pdf_available": true
+      },
+      "title": "保存一份可回看的结果档案",
+      "body": "如果你打算在几周后重新对照这次结果，或想把关键判断带进职业、关系和成长讨论，PDF 会比停留在当前页面更方便复盘。",
+      "primary_cta_label": "保存 PDF",
+      "secondary_cta_label": "查看历史",
+      "notes": {
+        "source_entry_id": "shell_tools_pdf_ready",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "surface:pdf",
+          "secondary": "surface:history"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_style_and_copy_rules_v1.md#1",
+          "pdf.json#pdf_ready_archive_and_review"
+        ],
+        "normalization_notes": "强调复盘与留存，不写权限说明或下载功能说明。"
+      }
+    },
+    {
+      "entry_id": "shell_tools_history_ready",
+      "surface": "shell_tools",
+      "placement": "result_tools_history",
+      "audience_state": "returning_reader",
+      "when": {
+        "history_count_min": 1
+      },
+      "title": "放进长期基线里看",
+      "body": "历史记录的价值，不是把每次结果重新读一遍，而是帮你看见稳定模式和阶段变化。它能让你分辨：什么是一贯倾向，什么是环境带来的短期波动。",
+      "primary_cta_label": "查看历史",
+      "secondary_cta_label": "查看对比",
+      "notes": {
+        "source_entry_id": "shell_tools_history_ready",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "surface:history",
+          "secondary": "surface:compare"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_style_and_copy_rules_v1.md#1",
+          "history.json#history_multi_result_pattern_read"
+        ],
+        "normalization_notes": "强调长期使用价值，不写成历史按钮介绍。"
+      }
+    },
+    {
+      "entry_id": "shell_tools_compare_ready",
+      "surface": "shell_tools",
+      "placement": "result_tools_compare",
+      "audience_state": "compare_ready_user",
+      "when": {
+        "compare_available": true
+      },
+      "title": "看变化发生在哪里",
+      "body": "对比不是给自己打分，而是帮助你看清最近的变化更像恢复、适应，还是某种长期消耗开始显形。把两次结果放在一起，通常比只看一次更容易找到真实线索。",
+      "primary_cta_label": "查看对比",
+      "secondary_cta_label": "查看历史",
+      "notes": {
+        "source_entry_id": "shell_tools_compare_ready",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "surface:compare",
+          "secondary": "surface:history"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_style_and_copy_rules_v1.md#1",
+          "compare.json#compare_meaning_not_grade"
+        ],
+        "normalization_notes": "强调对比的解释价值，不写成成绩单或功能提示。"
+      }
+    },
+    {
+      "entry_id": "shell_tools_retake_ready",
+      "surface": "shell_tools",
+      "placement": "result_tools_retake",
+      "audience_state": "full_report_user",
+      "when": {
+        "latest_result_age_band": "stale_or_reflection_window"
+      },
+      "title": "环境明显变化后，再测更有意义",
+      "body": "重新测试更适合用在两个时点：环境、角色或关系发生明显变化时；或者你已经连续实践一段时间，想看自己的节奏是否真的在调整。",
+      "primary_cta_label": "重新测试",
+      "secondary_cta_label": "查看历史",
+      "notes": {
+        "source_entry_id": "shell_tools_retake_ready",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "surface:retake",
+          "secondary": "surface:history"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_style_and_copy_rules_v1.md#1",
+          "history.json#history_revisit_after_cycle"
+        ],
+        "normalization_notes": "将 retake 定位为阶段性复测，不写成频繁召回。"
+      }
+    },
+    {
+      "entry_id": "shell_tools_action_anchor",
+      "surface": "shell_tools",
+      "placement": "result_tools_next_step",
+      "audience_state": "full_report_user",
+      "when": {
+        "top_priority_scenario_in": [
+          "workplace",
+          "relationships",
+          "stress_recovery",
+          "personal_growth"
+        ]
+      },
+      "title": "先回到一个优先场景",
+      "body": "真正能改变体验的，通常不是把整份报告都记住，而是先挑一个最相关的场景，把那里的下一步动作做起来。先动起来，再回来读其他部分。",
+      "primary_cta_label": "查看行动建议",
+      "secondary_cta_label": "保存 PDF",
+      "notes": {
+        "source_entry_id": "shell_tools_action_anchor",
+        "canonical_profile_id": null,
+        "canonical_profile_name": null,
+        "cta_targets": {
+          "primary": "anchor:action_plan",
+          "secondary": "surface:pdf"
+        },
+        "source_refs": [
+          "big5_source_of_truth_v1.md#3",
+          "big5_section_block_copy_map_v1.json#action_plan",
+          "big5_style_and_copy_rules_v1.md#1",
+          "continuation.json#continuation_personal_growth_anchor"
+        ],
+        "normalization_notes": "作为工具区下一步引导，不重复 action_plan 正文。"
+      }
+    }
+  ]
+}

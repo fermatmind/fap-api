@@ -1,8 +1,8 @@
 # big5_lifecycle_review_notes_v1
 
 版本：v1
-状态：第二批 lifecycle staging 资产审阅稿
-范围：continuation、career_next_step、growth_next_step、history、compare、pdf。未接 runtime、未写数据库、未改 live registry。
+状态：v1 core lifecycle staging 资产审阅稿
+范围：continuation、career_next_step、growth_next_step、history、compare、pdf、shell_tools、retention_closeout。未接 runtime、未写数据库、未改 live registry。
 
 ## 本轮处理方式
 
@@ -14,6 +14,9 @@
 - history 负责基线保存、稳定/变化模式和复访周期，不写成“查看历史”的按钮提示。
 - compare 负责变化解释入口和边界提示，不写成成绩单，也不重复 norms_comparison 或 action_plan 正文。
 - pdf 负责留存、复盘、讨论材料定位，不写成下载说明、权限说明或商业收口。
+- 最后一批新增 shell_tools 与 retention_closeout，继续使用同一 schema，并把工具区与页面收口限定为“如何继续使用这份结果”的承接层。
+- shell_tools 只组织现有 history、compare、pdf、retake、action_plan 入口，不解释人格结构，也不新增 route 或 runtime 字段。
+- retention_closeout 只负责结果页收尾、复访理由和长期使用说明，不写商业化最终转化 CTA。
 
 ## 最成熟的 surface
 
@@ -22,6 +25,8 @@
 - history：first baseline、compare ready、stable pattern、shifted pattern、revisit cycle 覆盖完整，适合做长期使用入口。
 - compare：not ready、ready、stable、shifted、scenario delta、boundary 覆盖完整，最能避免“分数高低”的误读。
 - pdf：archive、discussion、coaching/reflection、unavailable、boundary 覆盖完整，已从“下载功能”转为复盘材料定位。
+- shell_tools：覆盖工具区总承接、PDF、history、compare、retake、action_plan 六个入口，适合接在结果页工具区。
+- retention_closeout：覆盖首读留存、对比可用、行动优先、复看周期、PDF 讨论材料、长期使用说明六个收口语境，适合作为结果页尾部承接。
 
 ## 最容易写成功能说明的 entry
 
@@ -31,6 +36,9 @@
 - history_first_result_baseline：容易退化成“保存到历史”，二审时要保留“未来可对照”的理由。
 - history_second_result_compare_prompt：容易变成 compare 入口提示，二审时要保留“历史从存档转为变化线索”的分层。
 - pdf_unavailable_explain：容易写成权限或错误提示，二审时要保持“结果仍可使用”的低压表达。
+- shell_tools_pdf_ready：容易退化成“下载 PDF”按钮说明，二审时要保留复盘材料定位。
+- shell_tools_retake_ready：容易退化成“重新测试”召回提示，二审时要保留阶段性复测条件。
+- shell_tools_group_intro：容易写成工具区功能总览，二审时要保留长期工作台定位。
 
 ## 最容易和正文重复的 entry
 
@@ -38,6 +46,9 @@
 - compare_ready_stable_pattern：容易重复人格稳定性解释；当前只说明稳定结果的使用方式。
 - history_shift_signal_read：容易扩写成变化原因分析；当前只提醒先回看环境与节奏。
 - pdf_ready_coaching_and_reflection：容易扩写成职业或成长正文；当前只保留材料留存与讨论入口。
+- retention_closeout_action_first：容易重复 action_plan 的具体动作；当前只保留“先做一个最小动作”的收口。
+- retention_closeout_compare_when_ready：容易重复 compare 正文；当前只说明为什么对比比回忆可靠。
+- retention_closeout_long_term_use：容易重复 history/compare 的具体解释；当前只保留长期使用说明。
 
 ## 最容易写成伪职业正文的 entry
 
@@ -64,10 +75,17 @@
 - 去掉用户可见标题中的英文概念暴露；正文里只保留必要产品词 PDF，其他场景均使用中文表达。
 - 将 history、compare、pdf 从 manifest deferred 中移除，并更新总 entry count 到 41。
 
+## 第三批复核修正
+
+- 将 shell_tools 与 retention_closeout 草稿的 schema 统一为 fap.big5.lifecycle_copy_library.v1.surface_pack。
+- 为 shell_tools_group_intro 补齐 primary/secondary CTA label 与 notes.cta_targets，避免出现空 target 或不完整 schema。
+- 将草稿中的数组/对象式条件收敛为 reviewer 可读的 when 字段，不新增 runtime 字段。
+- 移除 review notes 中残留的英文商业收口词，统一为中文治理表述。
+- 将 shell_tools 与 retention_closeout 从 manifest deferred 中移除，并更新总 entry count 到 53。
+
 ## 明确 deferred
 
-- shell_tools.json
-- retention_closeout.json
+- none for v1 core lifecycle pack
 
 ## 本次复核修正
 

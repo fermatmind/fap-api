@@ -2222,3 +2222,39 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: PR-BIG5-LIFECYCLE-SHELL-RETENTION-V1
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api-big5-lifecycle-shell-retention
+    branch: codex/big5-lifecycle-shell-retention-v1
+    base: main
+    depends_on: ["PR-BIG5-LIFECYCLE-HISTORY-COMPARE-PDF-V1"]
+    mode: execute
+    scope: >
+      Big Five lifecycle copy library v1 final core staging assets. Normalize
+      shell_tools and retention_closeout seed drafts into the existing
+      backend/content_assets/big5/v1/lifecycle package and update only the
+      lifecycle manifest and review notes. Keep this as reviewable content
+      governance only: do not change runtime code, database migrations, live
+      registry, content_packs, frontend, MBTI, payment/order/webhook, CMS, or
+      any additional lifecycle packs.
+    checks:
+      - "python3 -m json.tool backend/docs/codex/pr-train-state.json >/dev/null"
+      - "python3 -m json.tool backend/content_assets/big5/v1/lifecycle/shell_tools.json >/dev/null"
+      - "python3 -m json.tool backend/content_assets/big5/v1/lifecycle/retention_closeout.json >/dev/null"
+      - "python3 -m json.tool backend/content_assets/big5/v1/lifecycle/big5_lifecycle_manifest_v1.json >/dev/null"
+      - 'node -e "const fs=require(\"fs\");const base=\"backend/content_assets/big5/v1/lifecycle/\";const files=[\"shell_tools.json\",\"retention_closeout.json\"];const fields=[\"entry_id\",\"surface\",\"placement\",\"audience_state\",\"when\",\"title\",\"body\",\"primary_cta_label\",\"secondary_cta_label\",\"notes\"].sort().join(\",\");const allowed=new Set([\"surface:history\",\"surface:compare\",\"surface:pdf\",\"surface:retake\",\"anchor:action_plan\",\"anchor:action_plan.workplace\",\"anchor:action_plan.relationships\",\"anchor:action_plan.stress_recovery\",\"anchor:action_plan.personal_growth\"]);const counts={};for(const file of files){const data=JSON.parse(fs.readFileSync(base+file,\"utf8\"));if(data.schema!==\"fap.big5.lifecycle_copy_library.v1.surface_pack\")throw new Error(file+\" schema mismatch\");counts[data.surface]=data.entries.length;for(const e of data.entries){if(Object.keys(e).sort().join(\",\")!==fields)throw new Error(file+\" entry schema mismatch \"+e.entry_id);if(!e.primary_cta_label||!e.secondary_cta_label)throw new Error(file+\" empty CTA label \"+e.entry_id);for(const target of [e.notes.cta_targets.primary,e.notes.cta_targets.secondary])if(!allowed.has(target))throw new Error(file+\" invalid target \"+target)}}const manifest=JSON.parse(fs.readFileSync(base+\"big5_lifecycle_manifest_v1.json\",\"utf8\"));if(counts.shell_tools!==6||counts.retention_closeout!==6)throw new Error(\"unexpected lifecycle counts\");if(manifest.entry_counts.shell_tools!==6||manifest.entry_counts.retention_closeout!==6||manifest.entry_counts.total!==53)throw new Error(\"manifest counts mismatch\");if(manifest.deferred.length!==0)throw new Error(\"manifest deferred should be empty\");console.log(\"Big Five lifecycle final batch checks passed\")"'
+      - "rg -n \"Profile Summary|Domain Deep Dive|Norms Comparison|Methodology and Access|A compact overview|Focused read|Near-term actions|final offer|unlock|解锁|付费|价格|你天生注定|你永远都会|你只能这样活|你太玻璃心|你有问题|你不正常|你就是懒|cta_href|route_name|runtime_target|primary_cta_target|secondary_cta_target\" backend/content_assets/big5/v1/lifecycle/shell_tools.json backend/content_assets/big5/v1/lifecycle/retention_closeout.json backend/content_assets/big5/v1/lifecycle/big5_lifecycle_manifest_v1.json backend/content_assets/big5/v1/lifecycle/big5_lifecycle_review_notes_v1.md && exit 1 || true"
+      - "cd backend && php artisan route:list --no-ansi"
+      - "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan migrate --pretend --no-interaction --force"
+      - "cd backend && APP_URL=http://127.0.0.1:18010 bash scripts/ci_verify_mbti.sh"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true

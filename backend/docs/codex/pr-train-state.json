@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T14:55:00Z",
+  "updated_at": "2026-04-23T14:57:47.437Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -3774,6 +3774,87 @@
       "merged_at": "",
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "PR-BIG5-LIFECYCLE-SHELL-RETENTION-V1": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api-big5-lifecycle-shell-retention",
+      "status": "draft_pr_open_local_checks_failed",
+      "branch": "codex/big5-lifecycle-shell-retention-v1",
+      "checks": {
+        "local": [
+          {
+            "name": "python3 -m json.tool backend/docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "name": "python3 -m json.tool backend/content_assets/big5/v1/lifecycle/shell_tools.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "name": "python3 -m json.tool backend/content_assets/big5/v1/lifecycle/retention_closeout.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "name": "python3 -m json.tool backend/content_assets/big5/v1/lifecycle/big5_lifecycle_manifest_v1.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "name": "node lifecycle final-batch schema/count/CTA validation",
+            "status": "passed"
+          },
+          {
+            "name": "rg prohibited visible heading/commercial/runtime-target scan",
+            "status": "passed"
+          },
+          {
+            "name": "cd backend && php artisan route:list --no-ansi",
+            "status": "passed"
+          },
+          {
+            "name": "cd backend && APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan migrate --pretend --no-interaction --force",
+            "status": "passed"
+          },
+          {
+            "name": "cd backend && APP_URL=http://127.0.0.1:18010 bash scripts/ci_verify_mbti.sh",
+            "status": "failed",
+            "details": "Fails in existing Big Five pack publish/rollback tests outside lifecycle staging asset scope."
+          },
+          {
+            "name": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "backend/scripts/ci_verify_mbti.sh fails outside this PR scope in existing Big Five pack publish/rollback tests: Tests\\Feature\\Content\\PacksPublishBig5Test::test_packs_publish_creates_release_and_target_pack_dir and Tests\\Feature\\Content\\PacksRollbackBig5Test::test_packs_rollback_restores_previous_release_with_to_release_id assert target compiled directory false. Scoped lifecycle content checks, route list, migration dry-run, and git diff check passed. Draft PR only; not mergeable until required checks are green.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "notes": [
+        {
+          "at": "2026-04-23T14:38:22.386Z",
+          "summary": "Initialized ledger entry for final Big Five lifecycle shell tools and retention closeout staging assets."
+        },
+        {
+          "at": "2026-04-23T14:44:21.784Z",
+          "summary": "Scoped lifecycle checks passed; recorded ci_verify_mbti.sh out-of-scope Big Five pack publish/rollback failures and proceeding with draft PR exception."
+        },
+        {
+          "at": "2026-04-23T14:45:49.086Z",
+          "summary": "Opened draft PR #993 under documented draft exception; PR is not mergeable while ci_verify_mbti.sh remains red."
+        },
+        {
+          "at": "2026-04-23T14:46:10.508Z",
+          "summary": "Fixed ledger commit/pr URL fields after draft PR creation; commit_sha records the scoped content commit."
+        },
+        {
+          "at": "2026-04-23T14:57:47.437Z",
+          "summary": "Rebased PR branch onto origin/main after #994 and refreshed commit_sha for the rewritten content commit."
+        }
+      ],
+      "commit_sha": "0f7bcb45a028709c9b542248885f0a72e4c4c850",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/993"
     }
   },
   "prs": {
