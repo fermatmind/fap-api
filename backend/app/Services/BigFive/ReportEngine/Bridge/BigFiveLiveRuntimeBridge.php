@@ -1,0 +1,40 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Services\BigFive\ReportEngine\Bridge;
+
+use App\Models\Attempt;
+use App\Models\Result;
+use App\Services\BigFive\ReportEngine\BigFiveReportEngine;
+
+final class BigFiveLiveRuntimeBridge
+{
+    public const RESPONSE_KEY = 'big5_report_engine_v2';
+
+    public function __construct(
+        private readonly BigFiveReportEngine $engine,
+        private readonly LiveReportContextAdapter $contextAdapter,
+    ) {}
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    public function build(Attempt $attempt, Result $result, string $scaleCode): ?array
+    {
+        if (! (bool) config('big5_report_engine.v2_bridge_enabled', false)) {
+            return null;
+        }
+
+        if (strtoupper(trim($scaleCode)) !== 'BIG5_OCEAN') {
+            return null;
+        }
+
+        $context = $this->contextAdapter->adapt($attempt, $result);
+        if ($context === null) {
+            return null;
+        }
+
+        return $this->engine->generate($context);
+    }
+}

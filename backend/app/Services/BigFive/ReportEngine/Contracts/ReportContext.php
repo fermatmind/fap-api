@@ -28,6 +28,7 @@ final class ReportContext
     public static function fromArray(array $payload): self
     {
         $scoreVector = is_array($payload['score_vector'] ?? null) ? $payload['score_vector'] : [];
+        $meta = is_array($payload['meta'] ?? null) ? $payload['meta'] : [];
 
         return new self(
             locale: (string) ($payload['locale'] ?? 'zh-CN'),
@@ -36,10 +37,10 @@ final class ReportContext
             domains: is_array($scoreVector['domains'] ?? null) ? $scoreVector['domains'] : [],
             facets: is_array($scoreVector['facets'] ?? null) ? $scoreVector['facets'] : [],
             quality: is_array($payload['quality'] ?? null) ? $payload['quality'] : [],
-            meta: [
+            meta: array_merge($meta, [
                 'fixture_id' => (string) ($payload['fixture_id'] ?? ''),
                 'sample_label' => (string) ($payload['sample_label'] ?? ''),
-            ],
+            ]),
         );
     }
 
