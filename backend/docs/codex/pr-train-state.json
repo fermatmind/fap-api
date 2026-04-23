@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T03:57:53Z",
+  "updated_at": "2026-04-23T04:04:40.880279Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -3362,9 +3362,9 @@
     "PR-BIG5-REPORT-ENGINE-LIVE-BRIDGE": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_checks_failed_billing_block",
+      "status": "local_verification_passed_pending_github_checks",
       "branch": "codex/big5-report-engine-live-bridge",
-      "commit_sha": "fa63c89686e53c7a01e7995795f0ecd6b449a38f",
+      "commit_sha": "5bb740cdad256263fc49329071c857f0792d2f90",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/983",
       "checks": {
         "local": [
@@ -3382,11 +3382,13 @@
           },
           {
             "command": "php artisan test --testsuite=Feature --filter=BigFiveReportEngineBridge",
-            "status": "passed"
+            "status": "passed",
+            "result": "4 tests, 708 assertions"
           },
           {
             "command": "php artisan route:list",
-            "status": "passed"
+            "status": "passed",
+            "result": "189 routes"
           },
           {
             "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan migrate --pretend --no-interaction --force",
@@ -3416,11 +3418,17 @@
           }
         ]
       },
-      "failure_reason": "Remote GitHub checks are blocked by account billing/spending-limit, not by PR4A code. Local bridge feature tests, route list, SQLite migrate pretend, MBTI verification, Pint, JSON validation, and diff check passed.",
+      "failure_reason": "Local verification passed after scoped bridge safety fix. Awaiting GitHub checks; previous remote failures were account billing/spending-limit blocks, not PR4A code failures.",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "local_cleanup_executed": false,
+      "notes": [
+        {
+          "at": "2026-04-23T04:04:40.880063Z",
+          "summary": "Re-review fix added exception isolation around v2 bridge generation and an incomplete live score context regression test."
+        }
+      ]
     }
   },
   "prs": {
