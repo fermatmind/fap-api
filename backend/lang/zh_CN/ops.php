@@ -50,6 +50,7 @@ return [
         'content_growth_attribution' => '增长归因',
         'seo_operations' => 'SEO运营',
         'content_search' => '内容搜索',
+        'article_translation_ops' => '翻译运营',
         'content_workspace' => '内容工作台',
         'editorial_review' => '内容审核',
         'content_release' => '内容发布',
