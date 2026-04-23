@@ -56,6 +56,16 @@ final class CmsTranslationShadowRevisionTest extends TestCase
         $editorRecord = $workspace->editorRecord('support_article', $resynced->fresh());
         $this->assertSame('Resynced machine draft body', (string) $editorRecord->body_md);
         $this->assertSame('Resynced machine draft title', (string) $editorRecord->title);
+
+        $this->getJson('/api/v0.5/support/articles/recover-report?locale=en')
+            ->assertOk()
+            ->assertJsonPath('article.body_md', $publishedBody)
+            ->assertJsonPath('article.title', 'Published EN title');
+
+        $this->getJson('/api/v0.5/internal/support-articles/recover-report?locale=en')
+            ->assertOk()
+            ->assertJsonPath('article.body_md', 'Resynced machine draft body')
+            ->assertJsonPath('article.title', 'Resynced machine draft title');
     }
 
     public function test_publish_promotes_working_revision_to_public_row(): void

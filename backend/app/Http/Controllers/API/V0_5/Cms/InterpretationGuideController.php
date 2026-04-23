@@ -71,7 +71,7 @@ final class InterpretationGuideController extends Controller
 
         return response()->json([
             'ok' => true,
-            'guide' => $this->payload($this->workspace->editorRecord('interpretation_guide', $guide)),
+            'guide' => $this->payload($guide),
         ]);
     }
 
@@ -120,7 +120,7 @@ final class InterpretationGuideController extends Controller
 
         return response()->json([
             'ok' => true,
-            'guide' => $this->payload($guide),
+            'guide' => $this->payload($this->workspace->editorRecord('interpretation_guide', $guide)),
         ]);
     }
 

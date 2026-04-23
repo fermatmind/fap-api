@@ -71,7 +71,7 @@ final class SupportArticleController extends Controller
 
         return response()->json([
             'ok' => true,
-            'article' => $this->payload($this->workspace->editorRecord('support_article', $article)),
+            'article' => $this->payload($article),
         ]);
     }
 
@@ -120,7 +120,7 @@ final class SupportArticleController extends Controller
 
         return response()->json([
             'ok' => true,
-            'article' => $this->payload($article),
+            'article' => $this->payload($this->workspace->editorRecord('support_article', $article)),
         ]);
     }
 
