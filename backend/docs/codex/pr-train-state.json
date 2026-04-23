@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T16:12:00.000Z",
+  "updated_at": "2026-04-24T09:18:00.000Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -4253,6 +4253,48 @@
         ]
       },
       "failure_reason": "Required GitHub checks are blocked by external GitHub billing/spending-limit runner startup failure; local validation passed.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-ARTICLE-REAL-MACHINE-TRANSLATION-PROVIDER": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/real-article-machine-translation-provider",
+      "commit_sha": "e9c429be6ed6f98177844cc0aad4c693ea2e7719",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/996",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Cms/OpenAiArticleMachineTranslationProvider.php app/Providers/AppServiceProvider.php config/services.php tests/Feature/Ops/ArticleMachineTranslationProviderTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Ops/ArticleMachineTranslationProviderTest.php tests/Feature/Ops/ArticleTranslationOpsPageTest.php tests/Feature/Ops/ArticleTranslationRevisionContractTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan fap:schema:verify",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,

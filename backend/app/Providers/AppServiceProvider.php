@@ -29,6 +29,7 @@ use App\Services\Cms\ArticleCmsMachineTranslationProvider;
 use App\Services\Cms\CmsMachineTranslationProviderRegistry;
 use App\Services\Cms\DisabledArticleMachineTranslationProvider;
 use App\Services\Cms\DisabledCmsMachineTranslationProvider;
+use App\Services\Cms\OpenAiArticleMachineTranslationProvider;
 use App\Services\Content\ContentPack;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\ContentStore;
@@ -69,11 +70,19 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(
             ArticleMachineTranslationProvider::class,
-            static fn ($app): ArticleMachineTranslationProvider => $app->make(DisabledArticleMachineTranslationProvider::class),
+            static function ($app): ArticleMachineTranslationProvider {
+                $provider = strtolower(trim((string) config('services.article_translation.provider', 'disabled')));
+
+                return match ($provider) {
+                    'openai' => $app->make(OpenAiArticleMachineTranslationProvider::class),
+                    default => $app->make(DisabledArticleMachineTranslationProvider::class),
+                };
+            },
         );
 
         $this->app->singleton(DisabledCmsMachineTranslationProvider::class);
         $this->app->singleton(ArticleCmsMachineTranslationProvider::class);
+        $this->app->singleton(OpenAiArticleMachineTranslationProvider::class);
         $this->app->singleton(CmsMachineTranslationProviderRegistry::class);
         $this->app->bind(CmsMachineTranslationProvider::class, static fn ($app): CmsMachineTranslationProvider => $app->make(DisabledCmsMachineTranslationProvider::class));
 

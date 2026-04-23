@@ -121,6 +121,17 @@ return [
             static fn ($locale) => trim((string) $locale),
             explode(',', (string) env('ARTICLE_TRANSLATION_TARGET_LOCALES', 'en'))
         ))),
+        'provider' => strtolower(trim((string) env('ARTICLE_TRANSLATION_PROVIDER', 'disabled'))),
+        'openai' => [
+            'base_url' => rtrim((string) env('ARTICLE_TRANSLATION_OPENAI_BASE_URL', env('OPENAI_BASE_URL', 'https://api.openai.com/v1')), '/'),
+            'api_key' => env('ARTICLE_TRANSLATION_OPENAI_API_KEY', env('OPENAI_API_KEY', '')),
+            'model' => trim((string) env('ARTICLE_TRANSLATION_OPENAI_MODEL', 'gpt-4.1')),
+            'connect_timeout_seconds' => (int) env('ARTICLE_TRANSLATION_OPENAI_CONNECT_TIMEOUT', 5),
+            'request_timeout_seconds' => (int) env('ARTICLE_TRANSLATION_OPENAI_REQUEST_TIMEOUT', 60),
+            'max_retries' => (int) env('ARTICLE_TRANSLATION_OPENAI_MAX_RETRIES', 1),
+            'retry_sleep_milliseconds' => (int) env('ARTICLE_TRANSLATION_OPENAI_RETRY_SLEEP_MS', 250),
+            'max_output_tokens' => (int) env('ARTICLE_TRANSLATION_OPENAI_MAX_OUTPUT_TOKENS', 6000),
+        ],
     ],
 
     'cms_translation' => [
