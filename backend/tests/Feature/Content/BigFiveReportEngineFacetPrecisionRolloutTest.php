@@ -55,6 +55,35 @@ final class BigFiveReportEngineFacetPrecisionRolloutTest extends TestCase
         $this->assertCount(30, $blocks->where('kind', 'table_row'));
     }
 
+    public function test_missing_facet_scores_render_as_not_available_not_zero(): void
+    {
+        $payload = app(BigFiveReportEngine::class)->generate([
+            'locale' => 'zh-CN',
+            'scale_code' => 'BIG5_OCEAN',
+            'form_code' => 'big5_90',
+            'score_vector' => [
+                'domains' => [
+                    'O' => ['percentile' => 50, 'band' => 'mid', 'gradient_id' => 'o_g3'],
+                    'C' => ['percentile' => 50, 'band' => 'mid', 'gradient_id' => 'c_g3'],
+                    'E' => ['percentile' => 50, 'band' => 'mid', 'gradient_id' => 'e_g3'],
+                    'A' => ['percentile' => 50, 'band' => 'mid', 'gradient_id' => 'a_g3'],
+                    'N' => ['percentile' => 50, 'band' => 'mid', 'gradient_id' => 'n_g3'],
+                ],
+                'facets' => [],
+            ],
+        ]);
+
+        $facetSection = collect($payload['sections'])->firstWhere('section_key', 'facet_details');
+        $rows = collect($facetSection['blocks'])->where('kind', 'table_row');
+
+        $this->assertCount(30, $rows);
+        foreach ($rows as $row) {
+            $this->assertNull($row['resolved_copy']['percentile']);
+            $this->assertSame('not_available', $row['resolved_copy']['band']);
+            $this->assertFalse($row['analytics']['has_percentile']);
+        }
+    }
+
     public function test_domain_and_report_caps_are_enforced(): void
     {
         $payload = app(BigFiveReportEngine::class)->generate($this->fixture('context_cross_domain_anomaly_canonical.json'));

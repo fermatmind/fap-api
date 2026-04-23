@@ -71,6 +71,13 @@ final class ReportContext
         return (int) ($facet['percentile'] ?? 0);
     }
 
+    public function hasFacetPercentile(string $facetCode): bool
+    {
+        $facet = is_array($this->facets[$facetCode] ?? null) ? $this->facets[$facetCode] : [];
+
+        return array_key_exists('percentile', $facet);
+    }
+
     /**
      * @return array<string,mixed>
      */

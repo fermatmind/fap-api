@@ -221,10 +221,16 @@ final class RegistryValidator
                 }
                 $ruleIds[] = $ruleId;
 
-                foreach (['anomaly_type', 'when', 'priority_weight', 'max_show_per_domain', 'section_targets', 'copy'] as $field) {
+                foreach (['schema', 'anomaly_type', 'when', 'priority_weight', 'max_show_per_domain', 'section_targets', 'copy'] as $field) {
                     if (! array_key_exists($field, $rule)) {
                         $errors[] = "Facet precision {$ruleId} missing {$field}";
                     }
+                }
+                if ((string) ($rule['schema'] ?? '') !== 'fap.big5.facet_precision_rule.v1') {
+                    $errors[] = "Facet precision {$ruleId} has invalid schema";
+                }
+                if ((int) ($rule['max_show_per_domain'] ?? 0) !== 2) {
+                    $errors[] = "Facet precision {$ruleId} max_show_per_domain must be 2";
                 }
 
                 $facetCodes = $this->facetCodesForRule($rule);
@@ -238,12 +244,18 @@ final class RegistryValidator
                     if (! in_array($facetCode, $knownFacetCodes, true)) {
                         $errors[] = "Facet precision {$ruleId} references unknown facet {$facetCode}";
                     }
+                    if (! str_starts_with($facetCode, $traitCode)) {
+                        $errors[] = "Facet precision {$ruleId} facet {$facetCode} does not belong to {$traitCode}";
+                    }
                 }
                 $when = is_array($rule['when'] ?? null) ? $rule['when'] : [];
                 $facetConstraints = is_array($when['facets'] ?? null) ? $when['facets'] : [];
                 foreach (array_keys($facetConstraints) as $facetCode) {
                     if (! in_array((string) $facetCode, $knownFacetCodes, true)) {
                         $errors[] = "Facet precision {$ruleId} references unknown facet constraint {$facetCode}";
+                    }
+                    if (! str_starts_with((string) $facetCode, $traitCode)) {
+                        $errors[] = "Facet precision {$ruleId} facet constraint {$facetCode} does not belong to {$traitCode}";
                     }
                 }
 

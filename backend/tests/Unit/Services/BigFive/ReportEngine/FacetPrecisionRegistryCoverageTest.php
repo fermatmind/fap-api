@@ -26,6 +26,8 @@ final class FacetPrecisionRegistryCoverageTest extends TestCase
             $total += count($pack['rules']);
 
             foreach ($pack['rules'] as $rule) {
+                $this->assertSame('fap.big5.facet_precision_rule.v1', $rule['schema'], $rule['rule_id']);
+                $this->assertSame(2, $rule['max_show_per_domain'], $rule['rule_id']);
                 $this->assertSame(['facet_details'], $rule['section_targets'], $rule['rule_id']);
                 $this->assertGreaterThanOrEqual(20, $rule['when']['delta_abs_min'], $rule['rule_id']);
                 $this->assertTrue($rule['when']['cross_band_required'], $rule['rule_id']);

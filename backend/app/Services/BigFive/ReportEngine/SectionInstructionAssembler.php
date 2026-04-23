@@ -182,7 +182,9 @@ final class SectionInstructionAssembler
                     continue;
                 }
                 $facetCode = (string) ($facet['facet_code'] ?? '');
-                $percentile = $context->facetPercentile($facetCode);
+                $hasPercentile = $context->hasFacetPercentile($facetCode);
+                $percentile = $hasPercentile ? $context->facetPercentile($facetCode) : null;
+                $band = $percentile === null ? 'not_available' : $this->bandFor($percentile);
                 $rows[] = new ResolvedBlock(
                     blockUid: "facet_details.glossary.{$facetCode}",
                     kind: 'table_row',
@@ -193,7 +195,7 @@ final class SectionInstructionAssembler
                         'facet_code' => $facetCode,
                         'label_zh' => (string) ($facet['label_zh'] ?? ''),
                         'percentile' => $percentile,
-                        'band' => $this->bandFor($percentile),
+                        'band' => $band,
                         'gloss' => (string) ($facet['gloss'] ?? ''),
                         'daily_meaning' => (string) ($facet['daily_meaning'] ?? ''),
                         'why_it_matters' => (string) ($facet['why_it_matters'] ?? ''),
@@ -203,7 +205,8 @@ final class SectionInstructionAssembler
                         'trait_code' => $traitCode,
                         'facet_code' => $facetCode,
                         'percentile' => $percentile,
-                        'band' => $this->bandFor($percentile),
+                        'band' => $band,
+                        'has_percentile' => $hasPercentile,
                     ],
                 );
             }
