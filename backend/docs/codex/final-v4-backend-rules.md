@@ -16,6 +16,8 @@ Backend-owned surfaces include:
 - Career guides, career jobs, career recommendations, personality profiles, topics, FAQ, sections, and SEO.
 - Media Library metadata and variants for mutable editorial, marketing, social, article, landing page, and SEO images.
 
+Public article rows and their article-owned sidecars, including translation revisions and article SEO metadata, must be owned by the public editorial org (`org_id=0`). Ops Article CMS must not derive article ownership from the currently selected tenant org; tenant org context may gate operator access, but it must not remap public article ownership or hide public article sidecars during edit, review, or release.
+
 ## Baseline Protocol
 
 `content_baselines` may be retained only for:

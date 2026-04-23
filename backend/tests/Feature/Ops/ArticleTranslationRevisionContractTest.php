@@ -486,7 +486,7 @@ final class ArticleTranslationRevisionContractTest extends TestCase
         $org = $this->createOrganization();
         app(OrgContext::class)->set((int) $org->id, (int) $admin->id, 'admin');
 
-        $article = $this->createArticle((int) $org->id, 'en', 'Canonical editor title');
+        $article = $this->createArticle(0, 'en', 'Canonical editor title');
         $this->runRevisionBackfill();
         $article->refresh();
 
@@ -523,8 +523,10 @@ final class ArticleTranslationRevisionContractTest extends TestCase
         $this->assertSame('Editor revision body', $revision?->content_md);
         $this->assertSame('Editor revision SEO title', $revision?->seo_title);
         $this->assertSame(ArticleTranslationRevision::STATUS_HUMAN_REVIEW, $revision?->revision_status);
+        $this->assertSame(0, (int) $revision?->org_id);
         $this->assertSame('https://example.test/articles/canonical-editor-title', $article->seoMeta?->canonical_url);
         $this->assertSame('Compatibility OG title', $article->seoMeta?->og_title);
+        $this->assertSame(0, (int) $article->seoMeta?->org_id);
         $this->assertNull($article->seoMeta?->seo_title);
     }
 

@@ -47,7 +47,7 @@ final class ArticleTranslationRevisionWorkspace
     {
         return DB::transaction(function () use ($article, $payload, $adminUserId): ArticleTranslationRevision {
             /** @var Article $locked */
-            $locked = Article::query()
+            $locked = Article::withoutGlobalScopes()
                 ->with(['workingRevision', 'seoMeta', 'sourceCanonical.workingRevision'])
                 ->lockForUpdate()
                 ->findOrFail($article->getKey());
