@@ -43,6 +43,18 @@
       "original_location": "local desktop seed",
       "normalized_to": "backend/content_assets/big5/v1/lifecycle/pdf.json",
       "runtime_contract": false
+    },
+    {
+      "file_name": "shell_tools.json",
+      "original_location": "local desktop seed",
+      "normalized_to": "backend/content_assets/big5/v1/lifecycle/shell_tools.json",
+      "runtime_contract": false
+    },
+    {
+      "file_name": "retention_closeout.json",
+      "original_location": "local desktop seed",
+      "normalized_to": "backend/content_assets/big5/v1/lifecycle/retention_closeout.json",
+      "runtime_contract": false
     }
   ],
   "normalized_entry_schema": [
@@ -98,6 +110,16 @@
       "file": "pdf.json",
       "surface": "pdf",
       "role": "archive, reflection, discussion, and review-material handoff"
+    },
+    {
+      "file": "shell_tools.json",
+      "surface": "shell_tools",
+      "role": "result tool area language for continued use of the report"
+    },
+    {
+      "file": "retention_closeout.json",
+      "surface": "retention_closeout",
+      "role": "non-commercial result-page closeout and revisit rationale"
     }
   ],
   "entry_counts": {
@@ -107,7 +129,9 @@
     "history": 6,
     "compare": 6,
     "pdf": 5,
-    "total": 41
+    "shell_tools": 6,
+    "retention_closeout": 6,
+    "total": 53
   },
   "canonical_profile_mapping": [
     {
@@ -195,10 +219,7 @@
       ]
     }
   ],
-  "deferred": [
-    "shell_tools.json",
-    "retention_closeout.json"
-  ],
+  "deferred": [],
   "review_notes_file": "big5_lifecycle_review_notes_v1.md",
   "boundary": {
     "runtime_changed": false,
