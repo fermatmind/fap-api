@@ -54,7 +54,7 @@ final class BigFiveReportEngineNSliceTest extends TestCase
                 $this->assertIsArray($block['resolved_copy']);
                 $this->assertIsArray($block['analytics']);
 
-                foreach (['atomic_refs', 'modifier_refs', 'synergy_refs', 'facet_refs'] as $provenanceKey) {
+                foreach (['atomic_refs', 'modifier_refs', 'synergy_refs', 'facet_refs', 'action_refs'] as $provenanceKey) {
                     $this->assertArrayHasKey($provenanceKey, $block['provenance']);
                     $this->assertIsArray($block['provenance'][$provenanceKey]);
                 }

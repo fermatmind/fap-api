@@ -115,7 +115,7 @@ final class SectionInstructionAssembler
                     'title' => '行动建议会按场景落地，而不是把人格分数翻译成泛泛提醒。',
                     'body' => '这里会把当前分值命中的动作按工作、关系、压力恢复和个人成长拆开，并固定放入继续、开始、停止、观察四类动作，帮助你先做最有现实价值的一步。',
                 ],
-                provenance: $this->provenanceRecorder->record(),
+                provenance: $this->provenanceRecorder->record(actionRefs: ['action_rules/*']),
                 analytics: ['slot' => 'action_matrix_intro'],
             ),
         ];
@@ -131,7 +131,7 @@ final class SectionInstructionAssembler
                     'body' => '这组动作在当前分值结构中命中数量和优先级更高，适合作为这份报告的行动入口。',
                     'scenario_key' => $topScenario,
                 ],
-                provenance: $this->provenanceRecorder->record(),
+                provenance: $this->provenanceRecorder->record(actionRefs: ["action_rules/{$topScenario}.json"]),
                 analytics: ['top_priority_scenario' => $topScenario],
             );
         }
@@ -176,7 +176,7 @@ final class SectionInstructionAssembler
                     'scenario_key' => $scenarioKey,
                     'items' => $items,
                 ],
-                provenance: $this->provenanceRecorder->record(),
+                provenance: $this->provenanceRecorder->record(actionRefs: ["action_rules/{$scenarioKey}.json"]),
                 analytics: [
                     'scenario_key' => $scenarioKey,
                     'selected_rule_count' => count($items),

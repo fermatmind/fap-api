@@ -49,11 +49,14 @@ final class BigFiveReportEngineActionMatrixRolloutTest extends TestCase
         $this->assertSame('callout', $blocks[1]['kind']);
         $this->assertGreaterThanOrEqual(3, $blocks->where('kind', 'bullets')->count());
         $this->assertSame('action_matrix_intro_v1', $blocks[0]['block_id']);
+        $this->assertSame(['action_rules/*'], $blocks[0]['provenance']['action_refs']);
         $this->assertSame('action_matrix_top_priority_stress_recovery', $blocks[1]['block_id']);
+        $this->assertSame(['action_rules/stress_recovery.json'], $blocks[1]['provenance']['action_refs']);
 
         foreach ($blocks->where('kind', 'bullets') as $block) {
             $this->assertStringStartsWith('action_matrix_scenario_', $block['block_id']);
             $this->assertNotEmpty($block['resolved_copy']['items']);
+            $this->assertSame(['action_rules/'.$block['resolved_copy']['scenario_key'].'.json'], $block['provenance']['action_refs']);
             foreach ($block['resolved_copy']['items'] as $item) {
                 $this->assertContains($item['bucket'], ['continue', 'start', 'stop', 'observe']);
                 $this->assertNotSame('', $item['title']);
