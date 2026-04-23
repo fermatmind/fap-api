@@ -81,6 +81,23 @@ final class RegistryValidator
         'why_it_matters',
     ];
 
+    private const ACTION_SCENARIOS = ['workplace', 'relationships', 'stress_recovery', 'personal_growth'];
+
+    private const ACTION_BUCKETS = ['continue', 'start', 'stop', 'observe'];
+
+    private const REQUIRED_ACTION_FIELDS = [
+        'rule_id',
+        'trait_code',
+        'bucket',
+        'percentile_min',
+        'percentile_max',
+        'scenario_tags',
+        'difficulty_level',
+        'time_horizon',
+        'title',
+        'body',
+    ];
+
     /**
      * @param  array<string,mixed>  $registry
      * @return list<string>
@@ -103,28 +120,85 @@ final class RegistryValidator
         $errors = array_merge($errors, $this->validateFacetGlossaryCoverage($registry, $facetCodes));
         $errors = array_merge($errors, $this->validateFacetPrecisionCoverage($registry, $facetCodes));
 
-        $actionCount = 0;
-        foreach (['workplace', 'stress_recovery', 'personal_growth'] as $scenario) {
-            $rules = $registry['action_rules'][$scenario]['rules'] ?? null;
-            if (! is_array($rules)) {
-                $errors[] = "Action scenario missing rules: {$scenario}";
+        $errors = array_merge($errors, $this->validateActionRuleCoverage($registry));
 
-                continue;
+        return $errors;
+    }
+
+    /**
+     * @param  array<string,mixed>  $registry
+     * @return list<string>
+     */
+    private function validateActionRuleCoverage(array $registry): array
+    {
+        $errors = [];
+        $actionRules = is_array($registry['action_rules'] ?? null) ? $registry['action_rules'] : [];
+        if (array_values(array_keys($actionRules)) !== self::ACTION_SCENARIOS) {
+            $errors[] = 'Action rule scenarios must be exactly workplace/relationships/stress_recovery/personal_growth in order';
+        }
+
+        $ruleIds = [];
+        $actionCount = 0;
+        foreach (self::ACTION_SCENARIOS as $scenario) {
+            $pack = is_array($actionRules[$scenario] ?? null) ? $actionRules[$scenario] : [];
+            if ((string) ($pack['scenario'] ?? '') !== $scenario) {
+                $errors[] = "Action scenario mismatch for {$scenario}.json";
             }
+            $rules = is_array($pack['rules'] ?? null) ? $pack['rules'] : [];
             $actionCount += count($rules);
             foreach ($rules as $rule) {
                 if (! is_array($rule)) {
+                    $errors[] = "Action scenario {$scenario} contains invalid rule";
+
                     continue;
                 }
-                foreach (['scenario_tags', 'difficulty_level', 'time_horizon', 'bucket', 'title', 'body'] as $requiredKey) {
-                    if (! array_key_exists($requiredKey, $rule)) {
-                        $errors[] = "Action rule missing {$requiredKey}: ".(string) ($rule['rule_id'] ?? $scenario);
+
+                $ruleId = (string) ($rule['rule_id'] ?? '');
+                if ($ruleId === '' || in_array($ruleId, $ruleIds, true)) {
+                    $errors[] = "Duplicate or missing action rule_id {$ruleId}";
+                }
+                $ruleIds[] = $ruleId;
+
+                foreach (self::REQUIRED_ACTION_FIELDS as $field) {
+                    if (! array_key_exists($field, $rule)) {
+                        $errors[] = "Action rule {$ruleId} missing {$field}";
                     }
+                }
+
+                $traitCode = (string) ($rule['trait_code'] ?? '');
+                if (! in_array($traitCode, self::TRAIT_CODES, true)) {
+                    $errors[] = "Action rule {$ruleId} has invalid trait_code {$traitCode}";
+                }
+
+                $bucket = (string) ($rule['bucket'] ?? '');
+                if (! in_array($bucket, self::ACTION_BUCKETS, true)) {
+                    $errors[] = "Action rule {$ruleId} has invalid bucket {$bucket}";
+                }
+
+                $scenarioTags = is_array($rule['scenario_tags'] ?? null) ? $rule['scenario_tags'] : [];
+                if ($scenarioTags === []) {
+                    $errors[] = "Action rule {$ruleId} scenario_tags cannot be empty";
+                }
+                if (! in_array($scenario, array_map('strval', $scenarioTags), true)) {
+                    $errors[] = "Action rule {$ruleId} scenario_tags must include {$scenario}";
+                }
+
+                foreach (['difficulty_level', 'time_horizon', 'title', 'body'] as $field) {
+                    if (trim((string) ($rule[$field] ?? '')) === '') {
+                        $errors[] = "Action rule {$ruleId} {$field} cannot be empty";
+                    }
+                }
+
+                $min = (int) ($rule['percentile_min'] ?? -1);
+                $max = (int) ($rule['percentile_max'] ?? -1);
+                if ($min < 0 || $max > 100 || $min > $max) {
+                    $errors[] = "Action rule {$ruleId} percentile range is invalid";
                 }
             }
         }
-        if ($actionCount < 8 || $actionCount > 12) {
-            $errors[] = "Action rule count must be 8-12, got {$actionCount}";
+
+        if ($actionCount !== 28) {
+            $errors[] = "Action rule count must be 28, got {$actionCount}";
         }
 
         return $errors;

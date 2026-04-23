@@ -2209,148 +2209,258 @@
             "status": "populated",
             "blocks": [
                 {
-                    "block_uid": "action_plan.atomic.O.mid",
-                    "kind": "trait_atomic",
-                    "component": "BigFiveTraitBlock",
-                    "block_id": "atomic_O_mid",
+                    "block_uid": "action_plan.matrix_intro",
+                    "kind": "paragraph",
+                    "component": "BigFiveActionMatrixIntro",
+                    "block_id": "action_matrix_intro_v1",
                     "resolved_copy": {
-                        "priority_hint": "你的重点是把感兴趣的新视角转成可验证的小实验，而不是停留在想法层面。",
-                        "injections": {
-                            "urgency_sentence": "你的重点是把有价值的兴趣转成一个可完成的输出。"
-                        }
+                        "title": "行动建议会按场景落地，而不是把人格分数翻译成泛泛提醒。",
+                        "body": "这里会把当前分值命中的动作按工作、关系、压力恢复和个人成长拆开，并固定放入继续、开始、停止、观察四类动作，帮助你先做最有现实价值的一步。"
                     },
                     "provenance": {
-                        "atomic_refs": [
-                            "atomic/O.json#bands.mid.slots.action_plan"
-                        ],
-                        "modifier_refs": [
-                            "modifiers/O.json#gradients.o_g3"
-                        ],
+                        "atomic_refs": [],
+                        "modifier_refs": [],
                         "synergy_refs": [],
                         "facet_refs": []
                     },
                     "analytics": {
-                        "trait_code": "O",
-                        "band": "mid",
-                        "percentile": 59,
-                        "modifier_gradient_id": "o_g3",
-                        "modifier_label": "选择性探索"
+                        "slot": "action_matrix_intro"
                     }
                 },
                 {
-                    "block_uid": "action_plan.atomic.C.low",
-                    "kind": "trait_atomic",
-                    "component": "BigFiveTraitBlock",
-                    "block_id": "atomic_C_low",
+                    "block_uid": "action_plan.matrix_top_priority.stress_recovery",
+                    "kind": "callout",
+                    "component": "BigFiveActionMatrixTopPriority",
+                    "block_id": "action_matrix_top_priority_stress_recovery",
                     "resolved_copy": {
-                        "priority_hint": "你的重点是建立外部化推进系统：更小的下一步、更短的周期、更明确的完成标准。",
-                        "injections": {
-                            "urgency_sentence": "对你来说，恢复推进力的关键是外置清单、固定节奏和更短完成周期。"
-                        }
+                        "title": "优先场景：压力恢复",
+                        "body": "这组动作在当前分值结构中命中数量和优先级更高，适合作为这份报告的行动入口。",
+                        "scenario_key": "stress_recovery"
                     },
                     "provenance": {
-                        "atomic_refs": [
-                            "atomic/C.json#bands.low.slots.action_plan"
-                        ],
-                        "modifier_refs": [
-                            "modifiers/C.json#gradients.c_g2"
-                        ],
+                        "atomic_refs": [],
+                        "modifier_refs": [],
                         "synergy_refs": [],
                         "facet_refs": []
                     },
                     "analytics": {
-                        "trait_code": "C",
-                        "band": "low",
-                        "percentile": 32,
-                        "modifier_gradient_id": "c_g2",
-                        "modifier_label": "低续航推进"
+                        "top_priority_scenario": "stress_recovery"
                     }
                 },
                 {
-                    "block_uid": "action_plan.atomic.E.low",
-                    "kind": "trait_atomic",
-                    "component": "BigFiveTraitBlock",
-                    "block_id": "atomic_E_low",
+                    "block_uid": "action_plan.matrix_scenario.workplace",
+                    "kind": "bullets",
+                    "component": "BigFiveActionMatrixScenarioBullets",
+                    "block_id": "action_matrix_scenario_workplace",
                     "resolved_copy": {
-                        "priority_hint": "你的行动重点是降低表达成本，把关键感受和边界更早、更清楚地带到外部。",
-                        "injections": {
-                            "urgency_sentence": "关键是把重要表达提前准备好，避免所有边界都留在内部。"
-                        }
+                        "title": "工作场景｜下一步动作",
+                        "scenario_key": "workplace",
+                        "items": [
+                            {
+                                "bucket": "continue",
+                                "label": "继续",
+                                "rule_id": "o_work_continue_frame_complexity_50_100",
+                                "title": "把复杂性先收束成一个决策问题",
+                                "body": "继续使用你对复杂性的理解力，但每次讨论结束前，都把它收束成一个当前最需要回答的决策问题。",
+                                "difficulty_level": "low",
+                                "time_horizon": "this_week"
+                            },
+                            {
+                                "bucket": "start",
+                                "label": "开始",
+                                "rule_id": "c_work_start_20min_16_35",
+                                "title": "开启 20 分钟任务",
+                                "body": "把重要但不紧急的任务拆成 20 分钟启动单元，而不是要求自己一次性完整推进。",
+                                "difficulty_level": "low",
+                                "time_horizon": "this_week"
+                            },
+                            {
+                                "bucket": "stop",
+                                "label": "停止",
+                                "rule_id": "n_work_stop_hidden_load_60_79",
+                                "title": "停止默默吞下多余负荷",
+                                "body": "当你已经明显感觉到任务、关系或节奏正在耗你时，不要继续把这部分代价全放在内部处理。",
+                                "difficulty_level": "mid",
+                                "time_horizon": "this_week"
+                            },
+                            {
+                                "bucket": "observe",
+                                "label": "观察",
+                                "rule_id": "n_work_observe_trigger_meetings_60_100",
+                                "title": "记录最耗你的会议类型",
+                                "body": "连续两周记录：哪些会议最容易让你提前进入高负荷，是目标模糊、责任不清，还是反复拉扯。",
+                                "difficulty_level": "low",
+                                "time_horizon": "two_weeks"
+                            }
+                        ]
                     },
                     "provenance": {
-                        "atomic_refs": [
-                            "atomic/E.json#bands.low.slots.action_plan"
-                        ],
-                        "modifier_refs": [
-                            "modifiers/E.json#gradients.e_g1"
-                        ],
+                        "atomic_refs": [],
+                        "modifier_refs": [],
                         "synergy_refs": [],
                         "facet_refs": []
                     },
                     "analytics": {
-                        "trait_code": "E",
-                        "band": "low",
-                        "percentile": 20,
-                        "modifier_gradient_id": "e_g1",
-                        "modifier_label": "深度内收"
+                        "scenario_key": "workplace",
+                        "selected_rule_count": 4,
+                        "buckets": [
+                            "continue",
+                            "start",
+                            "stop",
+                            "observe"
+                        ]
                     }
                 },
                 {
-                    "block_uid": "action_plan.atomic.A.mid",
-                    "kind": "trait_atomic",
-                    "component": "BigFiveTraitBlock",
-                    "block_id": "atomic_A_mid",
+                    "block_uid": "action_plan.matrix_scenario.relationships",
+                    "kind": "bullets",
+                    "component": "BigFiveActionMatrixScenarioBullets",
+                    "block_id": "action_matrix_scenario_relationships",
                     "resolved_copy": {
-                        "priority_hint": "你的行动重点是把“可以配合”和“不能继续承担”的界线说得更早。",
-                        "injections": {
-                            "urgency_sentence": "对你来说，关键是更早说明什么可以谈、什么不能继续承担。"
-                        }
+                        "title": "关系场景｜下一步动作",
+                        "scenario_key": "relationships",
+                        "items": [
+                            {
+                                "bucket": "continue",
+                                "label": "继续",
+                                "rule_id": "n_rel_continue_name_need_before_escalation_60_100",
+                                "title": "先命名需要，再谈对错",
+                                "body": "继续把高体感翻译成可被理解的需要，例如我需要更清楚的时间、边界或回应，而不是直接进入谁对谁错。",
+                                "difficulty_level": "low",
+                                "time_horizon": "this_week"
+                            },
+                            {
+                                "bucket": "start",
+                                "label": "开始",
+                                "rule_id": "e_rel_start_one_true_sentence_00_35",
+                                "title": "先说一句真实想法",
+                                "body": "在你准备继续保持沉默前，先说出一句真实但不必完整展开的话，让关系里有一个可以继续接住你的入口。",
+                                "difficulty_level": "low",
+                                "time_horizon": "this_week"
+                            },
+                            {
+                                "bucket": "stop",
+                                "label": "停止",
+                                "rule_id": "c_rel_stop_wait_for_perfect_timing_00_35",
+                                "title": "停止等待完美时机再沟通",
+                                "body": "如果一件事已经反复消耗你，不要继续等一个完全合适的时机；先用小句子开启，而不是等到情绪累积后一次性说完。",
+                                "difficulty_level": "mid",
+                                "time_horizon": "this_week"
+                            },
+                            {
+                                "bucket": "observe",
+                                "label": "观察",
+                                "rule_id": "n_rel_observe_discomfort_before_withdrawal_60_100",
+                                "title": "先识别不适来源，再后退",
+                                "body": "当你想直接抽离时，先标记这份不适来自被误解、边界被碰到，还是失控感上升。",
+                                "difficulty_level": "low",
+                                "time_horizon": "two_weeks"
+                            }
+                        ]
                     },
                     "provenance": {
-                        "atomic_refs": [
-                            "atomic/A.json#bands.mid.slots.action_plan"
-                        ],
-                        "modifier_refs": [
-                            "modifiers/A.json#gradients.a_g3"
-                        ],
+                        "atomic_refs": [],
+                        "modifier_refs": [],
                         "synergy_refs": [],
                         "facet_refs": []
                     },
                     "analytics": {
-                        "trait_code": "A",
-                        "band": "mid",
-                        "percentile": 55,
-                        "modifier_gradient_id": "a_g3",
-                        "modifier_label": "平衡协作"
+                        "scenario_key": "relationships",
+                        "selected_rule_count": 4,
+                        "buckets": [
+                            "continue",
+                            "start",
+                            "stop",
+                            "observe"
+                        ]
                     }
                 },
                 {
-                    "block_uid": "action_plan.atomic.N.high",
-                    "kind": "trait_atomic",
-                    "component": "BigFiveTraitBlock",
-                    "block_id": "atomic_N_high",
+                    "block_uid": "action_plan.matrix_scenario.stress_recovery",
+                    "kind": "bullets",
+                    "component": "BigFiveActionMatrixScenarioBullets",
+                    "block_id": "action_matrix_scenario_stress_recovery",
                     "resolved_copy": {
-                        "priority_hint": "你的关键课题不是“别敏感”，而是别让敏感长期只停留在内部。",
-                        "injections": {
-                            "urgency_sentence": "对你来说，恢复不是附属动作，而是维持稳定输出的前提。"
-                        }
+                        "title": "压力恢复｜下一步动作",
+                        "scenario_key": "stress_recovery",
+                        "items": [
+                            {
+                                "bucket": "start",
+                                "label": "开始",
+                                "rule_id": "n_rec_start_10min_reset_60_79",
+                                "title": "启动 10 分钟脱离恢复",
+                                "body": "每次明显感觉到负荷被拉高时，先物理脱离 10 分钟，不要继续一边耗一边扛。",
+                                "difficulty_level": "low",
+                                "time_horizon": "today"
+                            },
+                            {
+                                "bucket": "stop",
+                                "label": "停止",
+                                "rule_id": "n_rec_stop_micro_stimulation_60_100",
+                                "title": "停止边刷边恢复",
+                                "body": "高负荷时不要一边刷消息、一边恢复；对你来说，那不是放松，而是换一种刺激继续拖住系统。",
+                                "difficulty_level": "mid",
+                                "time_horizon": "this_week"
+                            },
+                            {
+                                "bucket": "observe",
+                                "label": "观察",
+                                "rule_id": "n_rec_observe_real_vs_predicted_cost_40_100",
+                                "title": "比较预想代价和真实代价",
+                                "body": "连续两周记录：你担心的坏结果是什么，真实发生的代价又是什么，帮助系统从预演里回到事实。",
+                                "difficulty_level": "low",
+                                "time_horizon": "two_weeks"
+                            }
+                        ]
                     },
                     "provenance": {
-                        "atomic_refs": [
-                            "atomic/N.json#bands.high.slots.action_plan"
-                        ],
-                        "modifier_refs": [
-                            "modifiers/N.json#gradients.n_g4"
-                        ],
+                        "atomic_refs": [],
+                        "modifier_refs": [],
                         "synergy_refs": [],
                         "facet_refs": []
                     },
                     "analytics": {
-                        "trait_code": "N",
-                        "band": "high",
-                        "percentile": 68,
-                        "modifier_gradient_id": "n_g4",
-                        "modifier_label": "高体感预警"
+                        "scenario_key": "stress_recovery",
+                        "selected_rule_count": 3,
+                        "buckets": [
+                            "start",
+                            "stop",
+                            "observe"
+                        ]
+                    }
+                },
+                {
+                    "block_uid": "action_plan.matrix_scenario.personal_growth",
+                    "kind": "bullets",
+                    "component": "BigFiveActionMatrixScenarioBullets",
+                    "block_id": "action_matrix_scenario_personal_growth",
+                    "resolved_copy": {
+                        "title": "个人成长｜下一步动作",
+                        "scenario_key": "personal_growth",
+                        "items": [
+                            {
+                                "bucket": "continue",
+                                "label": "继续",
+                                "rule_id": "o_gro_continue_meaningful_exploration_50_100",
+                                "title": "保留有意义的探索时间",
+                                "body": "继续保留能让你理解世界、更新经验或形成新连接的探索时间，但给它一个明确边界。",
+                                "difficulty_level": "low",
+                                "time_horizon": "this_month"
+                            }
+                        ]
+                    },
+                    "provenance": {
+                        "atomic_refs": [],
+                        "modifier_refs": [],
+                        "synergy_refs": [],
+                        "facet_refs": []
+                    },
+                    "analytics": {
+                        "scenario_key": "personal_growth",
+                        "selected_rule_count": 1,
+                        "buckets": [
+                            "continue"
+                        ]
                     }
                 }
             ]
@@ -2386,169 +2496,210 @@
         }
     ],
     "action_matrix": {
-        "workplace": [
+        "scenarios": [
             {
-                "rule_id": "n_work_continue_risk_sensing_60_79",
-                "scenario": "workplace",
-                "trait_code": "N",
-                "bucket": "continue",
-                "scenario_tags": [
-                    "workplace"
-                ],
-                "difficulty_level": "low",
-                "time_horizon": "this_week",
-                "title": "继续保留你的风险感知",
-                "body": "不要把更快感到不对劲误解成负担。对你来说，它首先是一种预警力。"
+                "scenario_key": "workplace",
+                "title": "工作场景",
+                "selected_rules": {
+                    "continue": {
+                        "rule_id": "o_work_continue_frame_complexity_50_100",
+                        "scenario": "workplace",
+                        "trait_code": "O",
+                        "bucket": "continue",
+                        "scenario_tags": [
+                            "workplace"
+                        ],
+                        "difficulty_level": "low",
+                        "time_horizon": "this_week",
+                        "title": "把复杂性先收束成一个决策问题",
+                        "body": "继续使用你对复杂性的理解力，但每次讨论结束前，都把它收束成一个当前最需要回答的决策问题。",
+                        "priority_weight": 64
+                    },
+                    "start": {
+                        "rule_id": "c_work_start_20min_16_35",
+                        "scenario": "workplace",
+                        "trait_code": "C",
+                        "bucket": "start",
+                        "scenario_tags": [
+                            "workplace"
+                        ],
+                        "difficulty_level": "low",
+                        "time_horizon": "this_week",
+                        "title": "开启 20 分钟任务",
+                        "body": "把重要但不紧急的任务拆成 20 分钟启动单元，而不是要求自己一次性完整推进。",
+                        "priority_weight": 88
+                    },
+                    "stop": {
+                        "rule_id": "n_work_stop_hidden_load_60_79",
+                        "scenario": "workplace",
+                        "trait_code": "N",
+                        "bucket": "stop",
+                        "scenario_tags": [
+                            "workplace"
+                        ],
+                        "difficulty_level": "mid",
+                        "time_horizon": "this_week",
+                        "title": "停止默默吞下多余负荷",
+                        "body": "当你已经明显感觉到任务、关系或节奏正在耗你时，不要继续把这部分代价全放在内部处理。",
+                        "priority_weight": 86
+                    },
+                    "observe": {
+                        "rule_id": "n_work_observe_trigger_meetings_60_100",
+                        "scenario": "workplace",
+                        "trait_code": "N",
+                        "bucket": "observe",
+                        "scenario_tags": [
+                            "workplace"
+                        ],
+                        "difficulty_level": "low",
+                        "time_horizon": "two_weeks",
+                        "title": "记录最耗你的会议类型",
+                        "body": "连续两周记录：哪些会议最容易让你提前进入高负荷，是目标模糊、责任不清，还是反复拉扯。",
+                        "priority_weight": 78
+                    }
+                }
             },
             {
-                "rule_id": "n_work_start_pre_meeting_boundary_note_60_79",
-                "scenario": "workplace",
-                "trait_code": "N",
-                "bucket": "start",
-                "scenario_tags": [
-                    "workplace"
-                ],
-                "difficulty_level": "low",
-                "time_horizon": "this_week",
-                "title": "会前写一句边界提醒",
-                "body": "在高摩擦或模糊边界的会议前，先写下一句：这次我最不能接受的模糊点是什么。"
+                "scenario_key": "relationships",
+                "title": "关系场景",
+                "selected_rules": {
+                    "continue": {
+                        "rule_id": "n_rel_continue_name_need_before_escalation_60_100",
+                        "scenario": "relationships",
+                        "trait_code": "N",
+                        "bucket": "continue",
+                        "scenario_tags": [
+                            "relationships"
+                        ],
+                        "difficulty_level": "low",
+                        "time_horizon": "this_week",
+                        "title": "先命名需要，再谈对错",
+                        "body": "继续把高体感翻译成可被理解的需要，例如我需要更清楚的时间、边界或回应，而不是直接进入谁对谁错。",
+                        "priority_weight": 76
+                    },
+                    "start": {
+                        "rule_id": "e_rel_start_one_true_sentence_00_35",
+                        "scenario": "relationships",
+                        "trait_code": "E",
+                        "bucket": "start",
+                        "scenario_tags": [
+                            "relationships"
+                        ],
+                        "difficulty_level": "low",
+                        "time_horizon": "this_week",
+                        "title": "先说一句真实想法",
+                        "body": "在你准备继续保持沉默前，先说出一句真实但不必完整展开的话，让关系里有一个可以继续接住你的入口。",
+                        "priority_weight": 90
+                    },
+                    "stop": {
+                        "rule_id": "c_rel_stop_wait_for_perfect_timing_00_35",
+                        "scenario": "relationships",
+                        "trait_code": "C",
+                        "bucket": "stop",
+                        "scenario_tags": [
+                            "relationships"
+                        ],
+                        "difficulty_level": "mid",
+                        "time_horizon": "this_week",
+                        "title": "停止等待完美时机再沟通",
+                        "body": "如果一件事已经反复消耗你，不要继续等一个完全合适的时机；先用小句子开启，而不是等到情绪累积后一次性说完。",
+                        "priority_weight": 74
+                    },
+                    "observe": {
+                        "rule_id": "n_rel_observe_discomfort_before_withdrawal_60_100",
+                        "scenario": "relationships",
+                        "trait_code": "N",
+                        "bucket": "observe",
+                        "scenario_tags": [
+                            "relationships"
+                        ],
+                        "difficulty_level": "low",
+                        "time_horizon": "two_weeks",
+                        "title": "先识别不适来源，再后退",
+                        "body": "当你想直接抽离时，先标记这份不适来自被误解、边界被碰到，还是失控感上升。",
+                        "priority_weight": 80
+                    }
+                }
             },
             {
-                "rule_id": "n_work_stop_hidden_load_60_79",
-                "scenario": "workplace",
-                "trait_code": "N",
-                "bucket": "stop",
-                "scenario_tags": [
-                    "workplace"
-                ],
-                "difficulty_level": "mid",
-                "time_horizon": "this_week",
-                "title": "停止默默吞下多余负荷",
-                "body": "当你已经明显感觉到任务、关系或节奏正在耗你时，不要继续把这部分代价全放在内部处理。"
+                "scenario_key": "stress_recovery",
+                "title": "压力恢复",
+                "selected_rules": {
+                    "continue": null,
+                    "start": {
+                        "rule_id": "n_rec_start_10min_reset_60_79",
+                        "scenario": "stress_recovery",
+                        "trait_code": "N",
+                        "bucket": "start",
+                        "scenario_tags": [
+                            "stress_recovery"
+                        ],
+                        "difficulty_level": "low",
+                        "time_horizon": "today",
+                        "title": "启动 10 分钟脱离恢复",
+                        "body": "每次明显感觉到负荷被拉高时，先物理脱离 10 分钟，不要继续一边耗一边扛。",
+                        "priority_weight": 94
+                    },
+                    "stop": {
+                        "rule_id": "n_rec_stop_micro_stimulation_60_100",
+                        "scenario": "stress_recovery",
+                        "trait_code": "N",
+                        "bucket": "stop",
+                        "scenario_tags": [
+                            "stress_recovery"
+                        ],
+                        "difficulty_level": "mid",
+                        "time_horizon": "this_week",
+                        "title": "停止边刷边恢复",
+                        "body": "高负荷时不要一边刷消息、一边恢复；对你来说，那不是放松，而是换一种刺激继续拖住系统。",
+                        "priority_weight": 90
+                    },
+                    "observe": {
+                        "rule_id": "n_rec_observe_real_vs_predicted_cost_40_100",
+                        "scenario": "stress_recovery",
+                        "trait_code": "N",
+                        "bucket": "observe",
+                        "scenario_tags": [
+                            "stress_recovery"
+                        ],
+                        "difficulty_level": "low",
+                        "time_horizon": "two_weeks",
+                        "title": "比较预想代价和真实代价",
+                        "body": "连续两周记录：你担心的坏结果是什么，真实发生的代价又是什么，帮助系统从预演里回到事实。",
+                        "priority_weight": 70
+                    }
+                }
             },
             {
-                "rule_id": "n_work_observe_trigger_meetings_60_100",
-                "scenario": "workplace",
-                "trait_code": "N",
-                "bucket": "observe",
-                "scenario_tags": [
-                    "workplace"
-                ],
-                "difficulty_level": "low",
-                "time_horizon": "two_weeks",
-                "title": "记录最耗你的会议类型",
-                "body": "连续两周记录：哪些会议最容易让你提前进入高负荷——目标模糊、责任不清，还是反复拉扯。"
+                "scenario_key": "personal_growth",
+                "title": "个人成长",
+                "selected_rules": {
+                    "continue": {
+                        "rule_id": "o_gro_continue_meaningful_exploration_50_100",
+                        "scenario": "personal_growth",
+                        "trait_code": "O",
+                        "bucket": "continue",
+                        "scenario_tags": [
+                            "personal_growth"
+                        ],
+                        "difficulty_level": "low",
+                        "time_horizon": "this_month",
+                        "title": "保留有意义的探索时间",
+                        "body": "继续保留能让你理解世界、更新经验或形成新连接的探索时间，但给它一个明确边界。",
+                        "priority_weight": 68
+                    },
+                    "start": null,
+                    "stop": null,
+                    "observe": null
+                }
             }
         ],
-        "stress_recovery": [
-            {
-                "rule_id": "n_recovery_start_10min_reset_60_79",
-                "scenario": "stress_recovery",
-                "trait_code": "N",
-                "bucket": "start",
-                "scenario_tags": [
-                    "stress_recovery"
-                ],
-                "difficulty_level": "low",
-                "time_horizon": "today",
-                "title": "启动 10 分钟脱离恢复",
-                "body": "每次你明显感觉到负荷被拉高时，先物理脱离 10 分钟，不要继续一边耗一边扛。"
-            },
-            {
-                "rule_id": "n_recovery_continue_body_signal_log_40_79",
-                "scenario": "stress_recovery",
-                "trait_code": "N",
-                "bucket": "continue",
-                "scenario_tags": [
-                    "stress_recovery"
-                ],
-                "difficulty_level": "low",
-                "time_horizon": "this_week",
-                "title": "继续记录身体信号",
-                "body": "把你的体感当成系统日志，而不是当成麻烦。心跳、烦躁、注意力涣散，都是有效信号。"
-            },
-            {
-                "rule_id": "n_recovery_stop_micro_stimulation_60_100",
-                "scenario": "stress_recovery",
-                "trait_code": "N",
-                "bucket": "stop",
-                "scenario_tags": [
-                    "stress_recovery"
-                ],
-                "difficulty_level": "mid",
-                "time_horizon": "this_week",
-                "title": "停止边刷边恢复",
-                "body": "高负荷时不要一边刷消息、一边恢复。对你来说，那不是放松，而是换一种刺激继续拖住系统。"
-            },
-            {
-                "rule_id": "n_recovery_observe_real_recovery_60_79",
-                "scenario": "stress_recovery",
-                "trait_code": "N",
-                "bucket": "observe",
-                "scenario_tags": [
-                    "stress_recovery"
-                ],
-                "difficulty_level": "low",
-                "time_horizon": "two_weeks",
-                "title": "找出真正能让你掉负荷的恢复动作",
-                "body": "连续两周观察：散步、洗澡、关机、写下来、独处，哪一个最能让你从“高负荷”真正回落。"
-            }
-        ],
-        "personal_growth": [
-            {
-                "rule_id": "n_growth_start_name_signal_40_79",
-                "scenario": "personal_growth",
-                "trait_code": "N",
-                "bucket": "start",
-                "scenario_tags": [
-                    "personal_growth"
-                ],
-                "difficulty_level": "low",
-                "time_horizon": "today",
-                "title": "先命名，不先评判",
-                "body": "当你开始觉得烦、累、乱、退时，先命名：我现在更像是焦虑、受伤、失控感，还是单纯疲惫？"
-            },
-            {
-                "rule_id": "n_growth_start_boundary_sentence_60_79",
-                "scenario": "personal_growth",
-                "trait_code": "N",
-                "bucket": "start",
-                "scenario_tags": [
-                    "personal_growth",
-                    "relationships"
-                ],
-                "difficulty_level": "mid",
-                "time_horizon": "this_week",
-                "title": "练一句低成本边界表达",
-                "body": "预先准备一句标准边界句：‘我现在需要一点时间整理，再继续讨论。’"
-            },
-            {
-                "rule_id": "n_growth_stop_catastrophe_loop_60_100",
-                "scenario": "personal_growth",
-                "trait_code": "N",
-                "bucket": "stop",
-                "scenario_tags": [
-                    "personal_growth"
-                ],
-                "difficulty_level": "mid",
-                "time_horizon": "this_week",
-                "title": "停止无限推演最坏后果",
-                "body": "当你已经开始连续推演最坏版本时，暂停继续推演，转而只写“当前最可行动的一步”。"
-            },
-            {
-                "rule_id": "n_growth_observe_real_vs_predicted_cost_40_100",
-                "scenario": "personal_growth",
-                "trait_code": "N",
-                "bucket": "observe",
-                "scenario_tags": [
-                    "personal_growth"
-                ],
-                "difficulty_level": "low",
-                "time_horizon": "two_weeks",
-                "title": "比较“我担心的代价”和“真实发生的代价”",
-                "body": "连续两周做一个简单对照：我预想的坏结果是什么，真实发生的坏结果又是什么。"
-            }
-        ]
+        "top_priority_scenario": "stress_recovery",
+        "caps": {
+            "per_scenario_per_bucket": 1,
+            "per_scenario": 4,
+            "per_report": 12
+        }
     },
     "render_hints": {
         "section_skeleton": [
@@ -2584,7 +2735,19 @@
                 "per_report": 6,
                 "standout_render_cards": 3
             },
-            "action_rule_scope": "N scenario rules only"
+            "action_rule_scope": "scenario_bound_action_matrix_pr3c",
+            "action_rule_scenarios": [
+                "workplace",
+                "relationships",
+                "stress_recovery",
+                "personal_growth"
+            ],
+            "action_rule_count": 28,
+            "action_matrix_caps": {
+                "per_scenario_per_bucket": 1,
+                "per_scenario": 4,
+                "per_report": 12
+            }
         }
     }
 }

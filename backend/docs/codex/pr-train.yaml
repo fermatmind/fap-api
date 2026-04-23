@@ -134,6 +134,38 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-BIG5-REPORT-ENGINE-ACTION-MATRIX
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/big5-report-engine-action-matrix
+    base: main
+    depends_on: ["PR-BIG5-REPORT-ENGINE-FACET-PRECISION"]
+    mode: execute
+    scope: >
+      Big Five Report Engine PR3C backend-only scenario-bound action matrix
+      rollout. Replace the N-only action rule scope with four scenario packs
+      for workplace, relationships, stress recovery, and personal growth;
+      implement scenario and bucket selection caps; emit a structured
+      action_matrix payload; and enrich only the existing action_plan section
+      from that matrix without changing live report, scoring, frontend, MBTI,
+      synergies, facet precision, access, PDF, history, or payment paths.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "python3 -m json.tool content_packs/BIG5_OCEAN/v2/registry/manifest.json >/dev/null"
+      - "for f in content_packs/BIG5_OCEAN/v2/registry/action_rules/*.json tests/Fixtures/big5_engine/action_contexts/*.json tests/Fixtures/big5_engine/expected_canonical_n_slice_payload.json; do python3 -m json.tool \"$f\" >/dev/null || exit 1; done"
+      - "vendor/bin/pint --test app/Services/BigFive/ReportEngine tests/Unit/Services/BigFive/ReportEngine tests/Feature/Content/BigFiveReportEngineNSliceTest.php tests/Feature/Content/BigFiveReportEngineAllTraitsRolloutTest.php tests/Feature/Content/BigFiveReportEngineSynergyRolloutTest.php tests/Feature/Content/BigFiveReportEngineFacetPrecisionRolloutTest.php tests/Feature/Content/BigFiveReportEngineActionMatrixRolloutTest.php"
+      - "php artisan test tests/Unit/Services/BigFive/ReportEngine tests/Feature/Content/BigFiveReportEngineNSliceTest.php tests/Feature/Content/BigFiveReportEngineAllTraitsRolloutTest.php tests/Feature/Content/BigFiveReportEngineSynergyRolloutTest.php tests/Feature/Content/BigFiveReportEngineFacetPrecisionRolloutTest.php tests/Feature/Content/BigFiveReportEngineActionMatrixRolloutTest.php"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-ENNEAGRAM-V11
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

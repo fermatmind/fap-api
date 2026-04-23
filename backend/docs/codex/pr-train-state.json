@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T09:20:00+08:00",
+  "updated_at": "2026-04-23T10:58:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -226,9 +226,9 @@
     "PR-BIG5-REPORT-ENGINE-FACET-PRECISION": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api-pr3a/backend",
-      "status": "github_checks_failed_billing_block",
+      "status": "merged",
       "branch": "codex/big5-report-engine-facet-precision",
-      "commit_sha": "51d57e573c9c074ba2fe3c737c87b4ff7e69a157",
+      "commit_sha": "08b72a41cbda7736aa9d2ece8515ee9340420088",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/981",
       "checks": {
         "local": [
@@ -300,7 +300,61 @@
           }
         ]
       },
-      "failure_reason": "Remote GitHub checks are blocked by account billing/spending-limit, not by PR3B code. Local manifest checks, route list, SQLite migrate pretend, and MBTI verification passed.",
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "2026-04-23T01:46:16Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
+    },
+    "PR-BIG5-REPORT-ENGINE-ACTION-MATRIX": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_checks_passed",
+      "branch": "codex/big5-report-engine-action-matrix",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool content_packs/BIG5_OCEAN/v2/registry/manifest.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "for f in content_packs/BIG5_OCEAN/v2/registry/action_rules/*.json tests/Fixtures/big5_engine/action_contexts/*.json tests/Fixtures/big5_engine/expected_canonical_n_slice_payload.json; do python3 -m json.tool \"$f\" >/dev/null || exit 1; done",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/BigFive/ReportEngine tests/Unit/Services/BigFive/ReportEngine tests/Feature/Content/BigFiveReportEngineNSliceTest.php tests/Feature/Content/BigFiveReportEngineAllTraitsRolloutTest.php tests/Feature/Content/BigFiveReportEngineSynergyRolloutTest.php tests/Feature/Content/BigFiveReportEngineFacetPrecisionRolloutTest.php tests/Feature/Content/BigFiveReportEngineActionMatrixRolloutTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/BigFive/ReportEngine tests/Feature/Content/BigFiveReportEngineNSliceTest.php tests/Feature/Content/BigFiveReportEngineAllTraitsRolloutTest.php tests/Feature/Content/BigFiveReportEngineSynergyRolloutTest.php tests/Feature/Content/BigFiveReportEngineFacetPrecisionRolloutTest.php tests/Feature/Content/BigFiveReportEngineActionMatrixRolloutTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list",
+            "status": "passed"
+          },
+          {
+            "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan migrate --pretend --no-interaction --force",
+            "status": "passed"
+          },
+          {
+            "command": "APP_URL=http://127.0.0.1:18010 bash scripts/ci_verify_mbti.sh",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
       "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,

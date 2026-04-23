@@ -1,30 +1,46 @@
 {
   "schema": "fap.big5.action_rule_pack.v1",
   "scenario": "workplace",
+  "scenario_title": "工作场景",
   "rules": [
     {
-      "rule_id": "n_work_continue_risk_sensing_60_79",
-      "trait_code": "N",
-      "bucket": "continue",
-      "percentile_min": 60,
-      "percentile_max": 79,
+      "rule_id": "c_work_start_5min_00_15",
+      "trait_code": "C",
+      "bucket": "start",
+      "percentile_min": 0,
+      "percentile_max": 15,
+      "priority_weight": 92,
       "scenario_tags": ["workplace"],
       "difficulty_level": "low",
-      "time_horizon": "this_week",
-      "title": "继续保留你的风险感知",
-      "body": "不要把更快感到不对劲误解成负担。对你来说，它首先是一种预警力。"
+      "time_horizon": "today",
+      "title": "开启 5 分钟任务",
+      "body": "把最容易拖住你的任务切成 5 分钟启动单元，只要求自己打开材料、写下第一步或完成一个最小动作。"
     },
     {
-      "rule_id": "n_work_start_pre_meeting_boundary_note_60_79",
-      "trait_code": "N",
+      "rule_id": "c_work_start_20min_16_35",
+      "trait_code": "C",
       "bucket": "start",
-      "percentile_min": 60,
-      "percentile_max": 79,
+      "percentile_min": 16,
+      "percentile_max": 35,
+      "priority_weight": 88,
       "scenario_tags": ["workplace"],
       "difficulty_level": "low",
       "time_horizon": "this_week",
-      "title": "会前写一句边界提醒",
-      "body": "在高摩擦或模糊边界的会议前，先写下一句：这次我最不能接受的模糊点是什么。"
+      "title": "开启 20 分钟任务",
+      "body": "把重要但不紧急的任务拆成 20 分钟启动单元，而不是要求自己一次性完整推进。"
+    },
+    {
+      "rule_id": "c_work_observe_stage_cadence_36_60",
+      "trait_code": "C",
+      "bucket": "observe",
+      "percentile_min": 36,
+      "percentile_max": 60,
+      "priority_weight": 54,
+      "scenario_tags": ["workplace"],
+      "difficulty_level": "low",
+      "time_horizon": "two_weeks",
+      "title": "记录阶段回报是否存在",
+      "body": "连续两周观察：哪些任务因为看不到阶段回报而变慢，哪些任务因为反馈清楚而自然推进。"
     },
     {
       "rule_id": "n_work_stop_hidden_load_60_79",
@@ -32,6 +48,7 @@
       "bucket": "stop",
       "percentile_min": 60,
       "percentile_max": 79,
+      "priority_weight": 86,
       "scenario_tags": ["workplace"],
       "difficulty_level": "mid",
       "time_horizon": "this_week",
@@ -44,11 +61,51 @@
       "bucket": "observe",
       "percentile_min": 60,
       "percentile_max": 100,
+      "priority_weight": 78,
       "scenario_tags": ["workplace"],
       "difficulty_level": "low",
       "time_horizon": "two_weeks",
       "title": "记录最耗你的会议类型",
-      "body": "连续两周记录：哪些会议最容易让你提前进入高负荷——目标模糊、责任不清，还是反复拉扯。"
+      "body": "连续两周记录：哪些会议最容易让你提前进入高负荷，是目标模糊、责任不清，还是反复拉扯。"
+    },
+    {
+      "rule_id": "e_work_stop_lower_pressure_70_100",
+      "trait_code": "E",
+      "bucket": "stop",
+      "percentile_min": 70,
+      "percentile_max": 100,
+      "priority_weight": 82,
+      "scenario_tags": ["workplace"],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "先降表达压强，再推进结论",
+      "body": "当你很快想把结论推到台前时，先停一下，把语速、轮次和确认问题的空间降下来，再推进决定。"
+    },
+    {
+      "rule_id": "a_work_start_align_goal_before_disagree_00_35",
+      "trait_code": "A",
+      "bucket": "start",
+      "percentile_min": 0,
+      "percentile_max": 35,
+      "priority_weight": 84,
+      "scenario_tags": ["workplace"],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "先对齐目标，再表达异议",
+      "body": "在提出反对意见前，先说清你和对方共同要解决的问题，再进入分歧本身。"
+    },
+    {
+      "rule_id": "o_work_continue_frame_complexity_50_100",
+      "trait_code": "O",
+      "bucket": "continue",
+      "percentile_min": 50,
+      "percentile_max": 100,
+      "priority_weight": 64,
+      "scenario_tags": ["workplace"],
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "把复杂性先收束成一个决策问题",
+      "body": "继续使用你对复杂性的理解力，但每次讨论结束前，都把它收束成一个当前最需要回答的决策问题。"
     }
   ]
 }

@@ -1,54 +1,85 @@
 {
   "schema": "fap.big5.action_rule_pack.v1",
   "scenario": "personal_growth",
+  "scenario_title": "个人成长",
   "rules": [
     {
-      "rule_id": "n_growth_start_name_signal_40_79",
-      "trait_code": "N",
+      "rule_id": "c_gro_start_20min_task_16_35",
+      "trait_code": "C",
       "bucket": "start",
-      "percentile_min": 40,
-      "percentile_max": 79,
+      "percentile_min": 16,
+      "percentile_max": 35,
+      "priority_weight": 86,
+      "scenario_tags": ["personal_growth"],
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "把成长任务拆成 20 分钟单位",
+      "body": "把想学、想练、想改善的事情拆成 20 分钟单位，让成长任务先进入日程，而不是停在计划里。"
+    },
+    {
+      "rule_id": "c_gro_start_5min_task_00_15",
+      "trait_code": "C",
+      "bucket": "start",
+      "percentile_min": 0,
+      "percentile_max": 15,
+      "priority_weight": 90,
       "scenario_tags": ["personal_growth"],
       "difficulty_level": "low",
       "time_horizon": "today",
-      "title": "先命名，不先评判",
-      "body": "当你开始觉得烦、累、乱、退时，先命名：我现在更像是焦虑、受伤、失控感，还是单纯疲惫？"
+      "title": "成长任务先做 5 分钟",
+      "body": "当你知道这件事重要但很难开始时，只做 5 分钟，不用证明自己能坚持完整一轮。"
     },
     {
-      "rule_id": "n_growth_start_boundary_sentence_60_79",
-      "trait_code": "N",
-      "bucket": "start",
-      "percentile_min": 60,
-      "percentile_max": 79,
-      "scenario_tags": ["personal_growth", "relationships"],
-      "difficulty_level": "mid",
-      "time_horizon": "this_week",
-      "title": "练一句低成本边界表达",
-      "body": "预先准备一句标准边界句：‘我现在需要一点时间整理，再继续讨论。’"
-    },
-    {
-      "rule_id": "n_growth_stop_catastrophe_loop_60_100",
-      "trait_code": "N",
-      "bucket": "stop",
-      "percentile_min": 60,
+      "rule_id": "o_gro_continue_meaningful_exploration_50_100",
+      "trait_code": "O",
+      "bucket": "continue",
+      "percentile_min": 50,
       "percentile_max": 100,
-      "scenario_tags": ["personal_growth"],
-      "difficulty_level": "mid",
-      "time_horizon": "this_week",
-      "title": "停止无限推演最坏后果",
-      "body": "当你已经开始连续推演最坏版本时，暂停继续推演，转而只写“当前最可行动的一步”。"
-    },
-    {
-      "rule_id": "n_growth_observe_real_vs_predicted_cost_40_100",
-      "trait_code": "N",
-      "bucket": "observe",
-      "percentile_min": 40,
-      "percentile_max": 100,
+      "priority_weight": 68,
       "scenario_tags": ["personal_growth"],
       "difficulty_level": "low",
-      "time_horizon": "two_weeks",
-      "title": "比较“我担心的代价”和“真实发生的代价”",
-      "body": "连续两周做一个简单对照：我预想的坏结果是什么，真实发生的坏结果又是什么。"
+      "time_horizon": "this_month",
+      "title": "保留有意义的探索时间",
+      "body": "继续保留能让你理解世界、更新经验或形成新连接的探索时间，但给它一个明确边界。"
+    },
+    {
+      "rule_id": "o_gro_stop_endless_option_expansion_50_100",
+      "trait_code": "O",
+      "bucket": "stop",
+      "percentile_min": 50,
+      "percentile_max": 100,
+      "priority_weight": 72,
+      "scenario_tags": ["personal_growth"],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "停止无限扩展选项",
+      "body": "当一个成长决定已经足够明确时，不要再通过继续看更多可能性来推迟真正进入。"
+    },
+    {
+      "rule_id": "e_gro_start_low_cost_expression_00_35",
+      "trait_code": "E",
+      "bucket": "start",
+      "percentile_min": 0,
+      "percentile_max": 35,
+      "priority_weight": 78,
+      "scenario_tags": ["personal_growth"],
+      "difficulty_level": "low",
+      "time_horizon": "this_week",
+      "title": "建立低成本表达练习",
+      "body": "每周选择一个低风险场景，说出一个真实偏好、一个不同意见或一个需要，不用等到表达已经完全准备好。"
+    },
+    {
+      "rule_id": "a_gro_start_disagree_without_rupture_00_35",
+      "trait_code": "A",
+      "bucket": "start",
+      "percentile_min": 0,
+      "percentile_max": 35,
+      "priority_weight": 80,
+      "scenario_tags": ["personal_growth"],
+      "difficulty_level": "mid",
+      "time_horizon": "this_week",
+      "title": "练习“不顺从，但不撕裂”",
+      "body": "把不同意练成清楚表达，而不是冷硬切断：先说共同目标，再说你无法同意的部分。"
     }
   ]
 }
