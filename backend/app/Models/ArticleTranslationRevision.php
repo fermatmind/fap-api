@@ -106,9 +106,14 @@ class ArticleTranslationRevision extends Model
             return false;
         }
 
-        return filled($sourceArticle->source_version_hash)
+        $sourceArticle->loadMissing('workingRevision');
+        $sourceHash = $sourceArticle->workingRevision instanceof self && filled($sourceArticle->workingRevision->source_version_hash)
+            ? (string) $sourceArticle->workingRevision->source_version_hash
+            : $sourceArticle->source_version_hash;
+
+        return filled($sourceHash)
             && filled($this->translated_from_version_hash)
-            && ! hash_equals((string) $sourceArticle->source_version_hash, (string) $this->translated_from_version_hash);
+            && ! hash_equals((string) $sourceHash, (string) $this->translated_from_version_hash);
     }
 
     /**

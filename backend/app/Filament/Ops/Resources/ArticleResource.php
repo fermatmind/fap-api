@@ -12,6 +12,8 @@ use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Filament\Ops\Support\OpsContentLocaleScope;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\Article;
+use App\Models\ArticleTranslationRevision;
+use App\Services\Cms\ArticleTranslationRevisionWorkspace;
 use App\Support\OrgContext;
 use Filament\Forms;
 use Filament\Forms\Components\BelongsToManyMultiSelect;
@@ -256,25 +258,34 @@ class ArticleResource extends Resource
                                     ->content(fn (?Article $record): string => (string) ($record?->source_locale ?? __('ops.resources.articles.placeholders.not_set_yet'))),
                                 Forms\Components\Placeholder::make('translation_status_marker')
                                     ->label(__('ops.resources.articles.fields.translation_status'))
-                                    ->content(fn (?Article $record): string => self::translationStatusLabel($record?->translation_status)),
+                                    ->content(fn (?Article $record): string => self::translationStatusLabel($record?->workingRevision?->revision_status ?? $record?->translation_status)),
+                                Forms\Components\Select::make('working_revision_status')
+                                    ->label(__('ops.resources.articles.fields.working_revision_status'))
+                                    ->options(self::translationStatusOptions())
+                                    ->helperText(__('ops.resources.articles.helpers.working_revision_status')),
                                 Forms\Components\Placeholder::make('translation_source_article')
                                     ->label(__('ops.resources.articles.fields.translated_from_article'))
                                     ->content(fn (?Article $record): string => self::sourceArticleSummary($record)),
                                 Forms\Components\Placeholder::make('translation_group_marker')
                                     ->label(__('ops.resources.articles.fields.translation_group_id'))
                                     ->content(fn (?Article $record): string => (string) ($record?->translation_group_id ?? __('ops.resources.articles.placeholders.not_set_yet'))),
+                                Forms\Components\Placeholder::make('working_revision_marker')
+                                    ->label(__('ops.resources.articles.fields.working_revision_id'))
+                                    ->content(fn (?Article $record): string => self::revisionSummary($record?->workingRevision)),
+                                Forms\Components\Placeholder::make('published_revision_marker')
+                                    ->label(__('ops.resources.articles.fields.published_revision_id'))
+                                    ->content(fn (?Article $record): string => self::revisionSummary($record?->publishedRevision)),
                                 Forms\Components\Placeholder::make('translation_source_hash')
                                     ->label(__('ops.resources.articles.fields.source_version_hash'))
                                     ->content(fn (?Article $record): string => self::shortHash($record?->currentSourceVersionHash())),
                                 Forms\Components\Placeholder::make('translation_from_hash')
                                     ->label(__('ops.resources.articles.fields.translated_from_version_hash'))
-                                    ->content(fn (?Article $record): string => self::shortHash($record?->translated_from_version_hash)),
+                                    ->content(fn (?Article $record): string => self::shortHash($record?->workingRevision?->translated_from_version_hash ?? $record?->translated_from_version_hash)),
                                 Forms\Components\Placeholder::make('translation_stale_state')
                                     ->label(__('ops.resources.articles.fields.stale_state'))
                                     ->content(fn (?Article $record): string => self::staleStateLabel($record)),
                             ]),
                         Forms\Components\Section::make(__('ops.resources.articles.sections.seo'))
-                            ->relationship('seoMeta')
                             ->description(__('ops.resources.articles.section_descriptions.seo'))
                             ->extraAttributes(['class' => 'ops-article-workspace-section ops-article-workspace-section--rail'])
                             ->schema([
@@ -347,7 +358,7 @@ class ArticleResource extends Resource
                     ->sortable()
                     ->formatStateUsing(fn (Article $record): string => (string) view('filament.ops.articles.partials.table-title', [
                         'meta' => ArticleWorkspace::titleMeta($record),
-                        'title' => $record->title,
+                        'title' => $record->workingRevision?->title ?? $record->title,
                     ])->render()),
                 Tables\Columns\TextColumn::make('slug')
                     ->label(__('ops.resources.articles.fields.slug'))
@@ -374,10 +385,19 @@ class ArticleResource extends Resource
                     ->placeholder(__('ops.resources.articles.placeholders.not_set_yet')),
                 Tables\Columns\TextColumn::make('translation_status')
                     ->label(__('ops.resources.articles.fields.translation_status'))
+                    ->state(fn (Article $record): string => (string) ($record->workingRevision?->revision_status ?? $record->translation_status ?? Article::TRANSLATION_STATUS_SOURCE))
                     ->badge()
                     ->sortable()
                     ->formatStateUsing(fn (?string $state): string => self::translationStatusLabel($state))
                     ->color(fn (?string $state): string => self::translationStatusColor($state)),
+                Tables\Columns\TextColumn::make('working_revision_id')
+                    ->label(__('ops.resources.articles.fields.working_revision_id'))
+                    ->state(fn (Article $record): string => self::revisionSummary($record->workingRevision))
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('published_revision_id')
+                    ->label(__('ops.resources.articles.fields.published_revision_id'))
+                    ->state(fn (Article $record): string => self::revisionSummary($record->publishedRevision))
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('translation_group_id')
                     ->label(__('ops.resources.articles.fields.translation_group_id'))
                     ->formatStateUsing(fn (?string $state): string => self::shortHash($state))
@@ -388,7 +408,7 @@ class ArticleResource extends Resource
                     ->label(__('ops.resources.articles.fields.stale_state'))
                     ->state(fn (Article $record): string => self::staleStateLabel($record))
                     ->badge()
-                    ->color(fn (Article $record): string => $record->isTranslationStale() ? 'warning' : 'success'),
+                    ->color(fn (Article $record): string => self::revisionWorkspace()->isWorkingRevisionStale($record) ? 'warning' : 'success'),
                 Tables\Columns\TextColumn::make('category.name')
                     ->label(__('ops.resources.articles.fields.category'))
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -402,7 +422,12 @@ class ArticleResource extends Resource
                     ->since()
                     ->sortable(),
             ])
-            ->modifyQueryUsing(fn (Builder $query): Builder => $query->with('translatedFrom'))
+            ->modifyQueryUsing(fn (Builder $query): Builder => $query->with([
+                'translatedFrom',
+                'sourceCanonical.workingRevision',
+                'workingRevision',
+                'publishedRevision',
+            ]))
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
                     ->label(__('ops.resources.articles.fields.status'))
@@ -491,6 +516,16 @@ class ArticleResource extends Resource
         };
     }
 
+    /**
+     * @return array<string,string>
+     */
+    private static function translationStatusOptions(): array
+    {
+        return collect(Article::translationStatuses())
+            ->mapWithKeys(fn (string $state): array => [$state => self::translationStatusLabel($state)])
+            ->all();
+    }
+
     private static function sourceArticleSummary(?Article $record): string
     {
         if (! $record instanceof Article) {
@@ -501,12 +536,12 @@ class ArticleResource extends Resource
             return (string) __('ops.resources.articles.placeholders.source_article');
         }
 
-        $source = $record->translatedFrom;
+        $source = $record->sourceCanonical ?: $record->translatedFrom;
         if (! $source instanceof Article) {
             return (string) __('ops.resources.articles.placeholders.source_missing');
         }
 
-        return '#'.$source->id.' · '.$source->title;
+        return '#'.$source->id.' · '.($source->workingRevision?->title ?? $source->title);
     }
 
     private static function staleStateLabel(?Article $record): string
@@ -519,9 +554,16 @@ class ArticleResource extends Resource
             return (string) __('ops.resources.articles.placeholders.source_current');
         }
 
-        return $record->isTranslationStale()
+        return self::revisionWorkspace()->isWorkingRevisionStale($record)
             ? (string) __('ops.resources.articles.placeholders.stale')
             : (string) __('ops.resources.articles.placeholders.current');
+    }
+
+    private static function revisionSummary(?ArticleTranslationRevision $revision): string
+    {
+        $summary = self::revisionWorkspace()->shortRevision($revision);
+
+        return $summary !== '' ? $summary : (string) __('ops.resources.articles.placeholders.not_set_yet');
     }
 
     private static function shortHash(?string $hash): string
@@ -544,6 +586,11 @@ class ArticleResource extends Resource
         return ContentAccess::canWrite();
     }
 
+    private static function revisionWorkspace(): ArticleTranslationRevisionWorkspace
+    {
+        return app(ArticleTranslationRevisionWorkspace::class);
+    }
+
     public static function releaseRecord(Article $record, string $source = 'resource_table'): void
     {
         if (! ContentAccess::canRelease()) {
@@ -558,11 +605,31 @@ class ArticleResource extends Resource
             throw new AuthorizationException('This article must be approved in editorial review before it can be published.');
         }
 
+        $publishedRevision = $record->workingRevision;
+        if ($publishedRevision instanceof ArticleTranslationRevision
+            && $publishedRevision->revision_status === ArticleTranslationRevision::STATUS_APPROVED) {
+            $publishedRevision->forceFill([
+                'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+                'published_at' => $publishedRevision->published_at ?? now(),
+            ])->save();
+        } else {
+            $publishedRevision = $record->publishedRevision;
+        }
+
         $record->forceFill([
             'status' => 'published',
             'is_public' => true,
             'published_at' => $record->published_at ?? now(),
+            'published_revision_id' => $publishedRevision?->id,
         ])->save();
+
+        if ($record->isSourceArticle()
+            && $publishedRevision instanceof ArticleTranslationRevision
+            && filled($publishedRevision->source_version_hash)) {
+            $record->forceFill([
+                'source_version_hash' => $publishedRevision->source_version_hash,
+            ])->saveQuietly();
+        }
 
         ContentReleaseAudit::log('article', $record->fresh(), $source);
 
