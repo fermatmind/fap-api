@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Pages;
 
-use App\Filament\Ops\Resources\ArticleResource;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Models\Article;
-use App\Models\ArticleTranslationRevision;
+use App\Services\Cms\ArticleTranslationWorkflowException;
+use App\Services\Cms\ArticleTranslationWorkflowService;
 use App\Services\Ops\ArticleTranslationOpsService;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
@@ -140,52 +140,135 @@ class ArticleTranslationOpsPage extends Page
         $this->refreshDashboard();
     }
 
-    public function promoteToHumanReview(int $articleId): void
+    public function createTranslationDraft(
+        int $sourceArticleId,
+        string $targetLocale,
+        ArticleTranslationWorkflowService $workflow
+    ): void {
+        if (! ContentAccess::canWrite()) {
+            throw new AuthorizationException('You do not have permission to create translation drafts.');
+        }
+
+        try {
+            $result = $workflow->createMachineDraft(
+                $this->article($sourceArticleId),
+                $targetLocale,
+                $this->adminUserId(),
+            );
+
+            Notification::make()
+                ->title('Translation draft created')
+                ->body('Created '.$result['article']->locale.' machine_draft revision #'.$result['revision']->id.'.')
+                ->success()
+                ->send();
+        } catch (ArticleTranslationWorkflowException $exception) {
+            $this->notifyWorkflowFailure($exception);
+        }
+
+        $this->refreshDashboard();
+    }
+
+    public function resyncFromSource(int $articleId, ArticleTranslationWorkflowService $workflow): void
+    {
+        if (! ContentAccess::canWrite()) {
+            throw new AuthorizationException('You do not have permission to re-sync translation drafts.');
+        }
+
+        try {
+            $result = $workflow->resyncFromSource($this->article($articleId), $this->adminUserId());
+
+            Notification::make()
+                ->title('Translation re-synced')
+                ->body('Created new machine_draft revision #'.$result['revision']->id.' under the existing target article.')
+                ->success()
+                ->send();
+        } catch (ArticleTranslationWorkflowException $exception) {
+            $this->notifyWorkflowFailure($exception);
+        }
+
+        $this->refreshDashboard();
+    }
+
+    public function promoteToHumanReview(int $articleId, ArticleTranslationWorkflowService $workflow): void
     {
         if (! ContentAccess::canWrite()) {
             throw new AuthorizationException('You do not have permission to update translation review state.');
         }
 
-        $article = Article::query()
-            ->withoutGlobalScopes()
-            ->with('workingRevision')
-            ->findOrFail($articleId);
-        $revision = $article->workingRevision;
+        try {
+            $revision = $workflow->promoteToHumanReview($this->article($articleId));
 
-        if (! $revision instanceof ArticleTranslationRevision) {
-            throw new AuthorizationException('This translation does not have a working revision.');
+            Notification::make()
+                ->title('Translation promoted')
+                ->body('Working revision #'.$revision->id.' is now in human_review.')
+                ->success()
+                ->send();
+        } catch (ArticleTranslationWorkflowException $exception) {
+            $this->notifyWorkflowFailure($exception);
         }
-
-        if ((string) $revision->revision_status !== ArticleTranslationRevision::STATUS_MACHINE_DRAFT) {
-            throw new AuthorizationException('Only machine_draft translations can be promoted to human review here.');
-        }
-
-        $revision->forceFill([
-            'revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
-            'reviewed_at' => $revision->reviewed_at ?? now(),
-        ])->save();
-
-        $article->forceFill([
-            'translation_status' => Article::TRANSLATION_STATUS_HUMAN_REVIEW,
-        ])->save();
-
-        Notification::make()
-            ->title('Translation promoted')
-            ->body('The working revision is now in human_review.')
-            ->success()
-            ->send();
 
         $this->refreshDashboard();
     }
 
-    public function publishCurrentRevision(int $articleId): void
+    public function approveTranslation(int $articleId, ArticleTranslationWorkflowService $workflow): void
     {
-        $article = Article::query()
-            ->withoutGlobalScopes()
-            ->with('workingRevision')
-            ->findOrFail($articleId);
+        if (! ContentAccess::canReview()) {
+            throw new AuthorizationException('You do not have permission to approve translation revisions.');
+        }
 
-        ArticleResource::releaseRecord($article, 'translation_ops_console');
+        try {
+            $revision = $workflow->approveTranslation($this->article($articleId));
+
+            Notification::make()
+                ->title('Translation approved')
+                ->body('Working revision #'.$revision->id.' passed preflight and is approved.')
+                ->success()
+                ->send();
+        } catch (ArticleTranslationWorkflowException $exception) {
+            $this->notifyWorkflowFailure($exception);
+        }
+
+        $this->refreshDashboard();
+    }
+
+    public function publishCurrentRevision(int $articleId, ArticleTranslationWorkflowService $workflow): void
+    {
+        if (! ContentAccess::canRelease()) {
+            throw new AuthorizationException('You do not have permission to publish translation revisions.');
+        }
+
+        try {
+            $revision = $workflow->publishTranslation($this->article($articleId));
+
+            Notification::make()
+                ->title('Translation published')
+                ->body('Published revision #'.$revision->id.' through translation preflight.')
+                ->success()
+                ->send();
+        } catch (ArticleTranslationWorkflowException $exception) {
+            $this->notifyWorkflowFailure($exception);
+        }
+
+        $this->refreshDashboard();
+    }
+
+    public function archiveStaleRevision(int $articleId, ArticleTranslationWorkflowService $workflow): void
+    {
+        if (! ContentAccess::canWrite()) {
+            throw new AuthorizationException('You do not have permission to archive translation revisions.');
+        }
+
+        try {
+            $revision = $workflow->archiveStaleRevision($this->article($articleId));
+
+            Notification::make()
+                ->title('Stale revision archived')
+                ->body('Archived stale working revision #'.$revision->id.'.')
+                ->success()
+                ->send();
+        } catch (ArticleTranslationWorkflowException $exception) {
+            $this->notifyWorkflowFailure($exception);
+        }
 
         $this->refreshDashboard();
     }
@@ -215,5 +298,32 @@ class ArticleTranslationOpsPage extends Page
             'missing_locale' => $this->missingLocaleFilter,
             'ownership' => $this->ownershipFilter,
         ];
+    }
+
+    private function article(int $articleId): Article
+    {
+        return Article::query()
+            ->withoutGlobalScopes()
+            ->with(['workingRevision', 'publishedRevision', 'sourceCanonical.workingRevision', 'seoMeta'])
+            ->findOrFail($articleId);
+    }
+
+    private function adminUserId(): ?int
+    {
+        $guard = (string) config('admin.guard', 'admin');
+        $actor = auth($guard)->user();
+
+        return is_object($actor) && is_numeric(data_get($actor, 'id'))
+            ? (int) data_get($actor, 'id')
+            : null;
+    }
+
+    private function notifyWorkflowFailure(ArticleTranslationWorkflowException $exception): void
+    {
+        Notification::make()
+            ->title('Translation action blocked')
+            ->body(implode('; ', $exception->blockers) ?: $exception->getMessage())
+            ->danger()
+            ->send();
     }
 }

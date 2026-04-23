@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Contracts\Cms\ArticleMachineTranslationProvider;
 use App\Contracts\Security\PiiEnvelopeAdapter;
 use App\Livewire\Filament\Ops\Livewire\CurrentOrgSwitcher;
 use App\Livewire\Filament\Ops\Livewire\LocaleSwitcher;
@@ -23,6 +24,7 @@ use App\Policies\ReportSnapshotPolicy;
 use App\Policies\ScaleRegistryPolicy;
 use App\Policies\ScaleSlugPolicy;
 use App\Policies\SharePolicy;
+use App\Services\Cms\DisabledArticleMachineTranslationProvider;
 use App\Services\Content\ContentPack;
 use App\Services\Content\ContentPacksIndex;
 use App\Services\Content\ContentStore;
@@ -60,6 +62,11 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(OrgContext::class, static fn (): OrgContext => new OrgContext);
+
+        $this->app->singleton(
+            ArticleMachineTranslationProvider::class,
+            static fn ($app): ArticleMachineTranslationProvider => $app->make(DisabledArticleMachineTranslationProvider::class),
+        );
 
         $this->app->singleton(PiiEnvelopeAdapter::class, function ($app) {
             $adapterRaw = strtolower(trim((string) config('services.pii.adapter', 'local')));

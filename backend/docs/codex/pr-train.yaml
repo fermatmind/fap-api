@@ -36,6 +36,39 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-ARTICLE-TRANSLATION-OPS-COMPLETION
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/multilingual-editorial-article-ops
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      Multilingual editorial article ops completion backend-only. Add the
+      article translation workflow service, provider contract, Ops CMS
+      operational actions, preflight guardrails, stale re-sync lineage,
+      configurable locale coverage, audit logging, tests, and runbook without
+      changing fap-web, public article read routes/contracts, article body
+      copy, slugs, references/citations/DOI, support articles,
+      interpretation guides, content pages, Big Five/MBTI runtime, or frontend
+      behavior.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Contracts/Cms/ArticleMachineTranslationProvider.php app/Services/Cms/DisabledArticleMachineTranslationProvider.php app/Services/Cms/ArticleTranslationWorkflowException.php app/Services/Cms/ArticleTranslationWorkflowService.php app/Filament/Ops/Pages/ArticleTranslationOpsPage.php app/Providers/AppServiceProvider.php app/Services/Ops/ArticleTranslationOpsService.php config/services.php tests/Feature/Ops/ArticleTranslationOpsPageTest.php"
+      - "php artisan test tests/Feature/Ops/ArticleTranslationOpsPageTest.php tests/Feature/V0_5/ArticlePublicApiTest.php tests/Feature/Ops/ArticleTranslationRevisionContractTest.php tests/Feature/Ops/ContentCmsProductLayerTest.php tests/Feature/Architecture/ServiceLayerBoundaryTest.php"
+      - "php artisan fap:schema:verify"
+      - "php artisan route:list"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-BIG5-REPORT-ENGINE-ALL-TRAITS
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
