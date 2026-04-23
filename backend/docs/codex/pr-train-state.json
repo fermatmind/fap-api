@@ -226,10 +226,10 @@
     "PR-BIG5-REPORT-ENGINE-FACET-PRECISION": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api-pr3a/backend",
-      "status": "local_checks_passed",
+      "status": "open",
       "branch": "codex/big5-report-engine-facet-precision",
       "commit_sha": "51d57e573c9c074ba2fe3c737c87b4ff7e69a157",
-      "pr_url": "",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/981",
       "checks": {
         "local": [
           {
@@ -273,7 +273,13 @@
             "status": "passed"
           }
         ],
-        "github": []
+        "github": [
+          {
+            "name": "pending",
+            "status": "pending",
+            "details_url": "https://github.com/fermatmind/fap-api/pull/981"
+          }
+        ]
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
