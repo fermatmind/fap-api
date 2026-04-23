@@ -166,6 +166,40 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-BIG5-REPORT-ENGINE-LIVE-BRIDGE
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/big5-report-engine-live-bridge
+    base: main
+    depends_on: ["PR-BIG5-REPORT-ENGINE-ACTION-MATRIX"]
+    mode: execute
+    scope: >
+      Big Five Report Engine PR4A backend-only live runtime bridge. Add a
+      config-gated, additive top-level big5_report_engine_v2 field to the
+      existing Big Five /report response by adapting live Result/Attempt score
+      truth into the existing Report Engine v2 contract. Do not replace
+      report.sections, do not change /result, /report-access, /report.pdf,
+      scoring, registry content, frontend, MBTI, payment, access, PDF, or
+      history behavior.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "python3 -m json.tool tests/Fixtures/big5_engine/expected_live_bridge_report_payload.json >/dev/null"
+      - "vendor/bin/pint --test config/big5_report_engine.php app/Services/BigFive/ReportEngine/Bridge app/Services/BigFive/ReportEngine/Contracts/ReportContext.php app/Http/Controllers/API/V0_3/AttemptReadController.php tests/Feature/V0_3/BigFiveReportEngineBridgeContractTest.php tests/Feature/V0_3/BigFiveReportEngineBridgeFlagTest.php tests/Feature/V0_3/BigFiveReportEngineBridgeNonBigFiveIsolationTest.php tests/Feature/V0_3/Concerns/BuildsBigFiveReportEngineBridgeFixture.php"
+      - "php artisan test --testsuite=Feature --filter=BigFiveReportEngineBridge"
+      - "php artisan route:list"
+      - "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan migrate --pretend --no-interaction --force"
+      - "APP_URL=http://127.0.0.1:18010 bash scripts/ci_verify_mbti.sh"
+      - "git diff --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-ENNEAGRAM-V11
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

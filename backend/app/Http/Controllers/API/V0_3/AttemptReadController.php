@@ -17,6 +17,7 @@ use App\Services\Attempts\AttemptSubmissionService;
 use App\Services\Attempts\InviteUnlock\InviteUnlockDiagnostics;
 use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
 use App\Services\BigFive\BigFivePublicProjectionService;
+use App\Services\BigFive\ReportEngine\Bridge\BigFiveLiveRuntimeBridge;
 use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Enneagram\EnneagramPublicFormSummaryBuilder;
 use App\Services\Enneagram\EnneagramPublicProjectionService;
@@ -83,6 +84,7 @@ class AttemptReadController extends Controller
         private ScaleCodeResponseProjector $responseProjector,
         private ReportSubjectRepository $reportSubjects,
         private AttemptUnlockProjectionRepairService $projectionRepair,
+        private BigFiveLiveRuntimeBridge $bigFiveLiveRuntimeBridge,
     ) {}
 
     /**
@@ -519,6 +521,10 @@ class AttemptReadController extends Controller
                 : [];
             if ($comparative !== []) {
                 $responsePayload['comparative_v1'] = $comparative;
+            }
+            $engineV2Payload = $this->bigFiveLiveRuntimeBridge->build($attempt, $result, $scaleCode);
+            if (is_array($engineV2Payload)) {
+                $responsePayload[BigFiveLiveRuntimeBridge::RESPONSE_KEY] = $engineV2Payload;
             }
         } elseif ($scaleCode === 'ENNEAGRAM') {
             if (is_array($enneagramFormSummary)) {

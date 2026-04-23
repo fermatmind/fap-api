@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-23T03:16:00Z",
+  "updated_at": "2026-04-23T04:06:10.554978Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -309,9 +309,9 @@
     "PR-BIG5-REPORT-ENGINE-ACTION-MATRIX": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "github_checks_failed_billing_block",
+      "status": "merged",
       "branch": "codex/big5-report-engine-action-matrix",
-      "commit_sha": "63b19c2712d8c995b058a39312558a09fd629dfd",
+      "commit_sha": "b90eef8ea6b6235c0912bd189ec8aa818f8ac86c",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/982",
       "checks": {
         "local": [
@@ -367,11 +367,11 @@
           }
         ]
       },
-      "failure_reason": "Remote GitHub checks are blocked by account billing/spending-limit, not by PR3C code. Local manifest checks, action matrix tests, route list, SQLite migrate pretend, MBTI verification, and re-review action provenance hardening checks passed.",
+      "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-04-23T03:19:09Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true
     },
     "PR-ENNEAGRAM-V11": {
       "repo": "fap-api",
@@ -3358,6 +3358,81 @@
       "merged_at": "",
       "remote_branch_deleted": false,
       "local_cleanup_executed": false
+    },
+    "PR-BIG5-REPORT-ENGINE-LIVE-BRIDGE": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "github_checks_failed_billing_block",
+      "branch": "codex/big5-report-engine-live-bridge",
+      "commit_sha": "02d19e281da4ceff6b4f143ee24436743a339f50",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/983",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "python3 -m json.tool tests/Fixtures/big5_engine/expected_live_bridge_report_payload.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test config/big5_report_engine.php app/Services/BigFive/ReportEngine/Bridge app/Services/BigFive/ReportEngine/Contracts/ReportContext.php app/Http/Controllers/API/V0_3/AttemptReadController.php tests/Feature/V0_3/BigFiveReportEngineBridgeContractTest.php tests/Feature/V0_3/BigFiveReportEngineBridgeFlagTest.php tests/Feature/V0_3/BigFiveReportEngineBridgeNonBigFiveIsolationTest.php tests/Feature/V0_3/Concerns/BuildsBigFiveReportEngineBridgeFixture.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test --testsuite=Feature --filter=BigFiveReportEngineBridge",
+            "status": "passed",
+            "result": "4 tests, 708 assertions"
+          },
+          {
+            "command": "php artisan route:list",
+            "status": "passed",
+            "result": "189 routes"
+          },
+          {
+            "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: php artisan migrate --pretend --no-interaction --force",
+            "status": "passed"
+          },
+          {
+            "command": "APP_URL=http://127.0.0.1:18010 bash scripts/ci_verify_mbti.sh",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "failed",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24816085044/job/72630672431",
+            "reason": "GitHub Actions job was not started because recent account payments failed or the spending limit needs to be increased."
+          },
+          {
+            "name": "verify-mbti-${{ matrix.mode }}",
+            "status": "skipped",
+            "details_url": "https://github.com/fermatmind/fap-api/actions/runs/24816085044/job/72630677760",
+            "reason": "Skipped because hygiene did not start due to GitHub billing/spending-limit block."
+          }
+        ]
+      },
+      "failure_reason": "Remote GitHub checks are blocked by account billing/spending-limit, not by PR4A code. Local verification passed after bridge safety recheck.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "notes": [
+        {
+          "at": "2026-04-23T04:04:40.880063Z",
+          "summary": "Re-review fix added exception isolation around v2 bridge generation and an incomplete live score context regression test."
+        },
+        {
+          "at": "2026-04-23T04:06:10.554780Z",
+          "summary": "Remote CI for pushed recheck head failed to start because GitHub billing/spending-limit blocked the hygiene job; local verification remained green."
+        }
+      ]
     }
   },
   "prs": {

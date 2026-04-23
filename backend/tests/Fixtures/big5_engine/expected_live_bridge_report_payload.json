@@ -1,0 +1,2872 @@
+{
+    "report": {
+        "sections": [
+            {
+                "key": "traits.overview",
+                "title": "五维总览",
+                "blocks": [
+                    {
+                        "kind": "paragraph",
+                        "body": "legacy overview"
+                    }
+                ]
+            },
+            {
+                "key": "traits.why_this_profile",
+                "title": "为什么是这个画像",
+                "blocks": [
+                    {
+                        "kind": "paragraph",
+                        "body": "legacy portrait"
+                    }
+                ]
+            },
+            {
+                "key": "growth.next_actions",
+                "title": "下一步行动",
+                "blocks": [
+                    {
+                        "kind": "paragraph",
+                        "body": "legacy action"
+                    }
+                ]
+            }
+        ]
+    },
+    "big5_report_engine_v2": {
+        "schema_version": "fap.big5.report.v1",
+        "report_id": "big5-report-engine-045c8fad2df87ddc6b920e81bc75231f2b401d07",
+        "locale": "zh-CN",
+        "scale_code": "BIG5_OCEAN",
+        "form_code": "big5_90",
+        "meta": {
+            "attempt_id": "attempt_live_bridge_fixture",
+            "result_id": "result_live_bridge_fixture",
+            "bridge_source": "live_report",
+            "fixture_id": "",
+            "sample_label": ""
+        },
+        "score_vector": {
+            "domains": {
+                "O": {
+                    "percentile": 59,
+                    "band": "mid",
+                    "gradient_id": "o_g3"
+                },
+                "C": {
+                    "percentile": 32,
+                    "band": "low_mid",
+                    "gradient_id": "c_g2"
+                },
+                "E": {
+                    "percentile": 20,
+                    "band": "low",
+                    "gradient_id": "e_g2"
+                },
+                "A": {
+                    "percentile": 55,
+                    "band": "mid",
+                    "gradient_id": "a_g3"
+                },
+                "N": {
+                    "percentile": 68,
+                    "band": "high_mid",
+                    "gradient_id": "n_g4"
+                }
+            },
+            "facets": {
+                "C1": {
+                    "percentile": 97,
+                    "domain": "C"
+                },
+                "C2": {
+                    "percentile": 89,
+                    "domain": "C"
+                },
+                "C3": {
+                    "percentile": 15,
+                    "domain": "C"
+                },
+                "C4": {
+                    "percentile": 15,
+                    "domain": "C"
+                },
+                "C5": {
+                    "percentile": 2,
+                    "domain": "C"
+                },
+                "C6": {
+                    "percentile": 10,
+                    "domain": "C"
+                },
+                "E1": {
+                    "percentile": 57,
+                    "domain": "E"
+                },
+                "E2": {
+                    "percentile": 53,
+                    "domain": "E"
+                },
+                "E3": {
+                    "percentile": 12,
+                    "domain": "E"
+                },
+                "E4": {
+                    "percentile": 4,
+                    "domain": "E"
+                },
+                "E5": {
+                    "percentile": 4,
+                    "domain": "E"
+                },
+                "E6": {
+                    "percentile": 2,
+                    "domain": "E"
+                },
+                "N1": {
+                    "percentile": 98,
+                    "domain": "N"
+                },
+                "N2": {
+                    "percentile": 65,
+                    "domain": "N"
+                },
+                "N3": {
+                    "percentile": 98,
+                    "domain": "N"
+                },
+                "N4": {
+                    "percentile": 8,
+                    "domain": "N"
+                },
+                "N5": {
+                    "percentile": 95,
+                    "domain": "N"
+                },
+                "N6": {
+                    "percentile": 13,
+                    "domain": "N"
+                }
+            }
+        },
+        "engine_decisions": {
+            "dominant_traits": [
+                "N",
+                "O"
+            ],
+            "selected_synergies": [
+                {
+                    "synergy_id": "n_high_x_e_low",
+                    "title": "内部高压锅效应",
+                    "priority_weight": 72,
+                    "mutex_group": "stress_activation",
+                    "section_targets": [
+                        {
+                            "section_key": "core_portrait",
+                            "slot": "synergy_primary",
+                            "kind": "callout"
+                        }
+                    ],
+                    "render_rank": "primary",
+                    "render_section": "core_portrait",
+                    "render_slot": "synergy_primary"
+                }
+            ],
+            "facet_anomalies": [
+                {
+                    "rule_id": "c1_high_with_c_low",
+                    "domain_code": "C",
+                    "facet_code": "C1",
+                    "facet_codes": [
+                        "C1"
+                    ],
+                    "anomaly_type": "positive_spike",
+                    "domain_percentile": 32,
+                    "facet_percentile": 97,
+                    "delta_abs": 65,
+                    "domain_band": "low_mid",
+                    "facet_band": "high",
+                    "priority_weight": 112,
+                    "is_compound": false,
+                    "section_targets": [
+                        "facet_details"
+                    ]
+                },
+                {
+                    "rule_id": "c5_low_with_c_low",
+                    "domain_code": "C",
+                    "facet_code": "C5",
+                    "facet_codes": [
+                        "C5"
+                    ],
+                    "anomaly_type": "negative_spike",
+                    "domain_percentile": 32,
+                    "facet_percentile": 2,
+                    "delta_abs": 30,
+                    "domain_band": "low_mid",
+                    "facet_band": "low",
+                    "priority_weight": 112,
+                    "is_compound": false,
+                    "section_targets": [
+                        "facet_details"
+                    ]
+                },
+                {
+                    "rule_id": "n1_high_spike",
+                    "domain_code": "N",
+                    "facet_code": "N1",
+                    "facet_codes": [
+                        "N1"
+                    ],
+                    "anomaly_type": "positive_spike",
+                    "domain_percentile": 68,
+                    "facet_percentile": 98,
+                    "delta_abs": 30,
+                    "domain_band": "high_mid",
+                    "facet_band": "high",
+                    "priority_weight": 112,
+                    "is_compound": false,
+                    "section_targets": [
+                        "facet_details"
+                    ]
+                },
+                {
+                    "rule_id": "n3_high_spike",
+                    "domain_code": "N",
+                    "facet_code": "N3",
+                    "facet_codes": [
+                        "N3"
+                    ],
+                    "anomaly_type": "positive_spike",
+                    "domain_percentile": 68,
+                    "facet_percentile": 98,
+                    "delta_abs": 30,
+                    "domain_band": "high_mid",
+                    "facet_band": "high",
+                    "priority_weight": 112,
+                    "is_compound": false,
+                    "section_targets": [
+                        "facet_details"
+                    ]
+                }
+            ],
+            "standout_anomalies": [
+                {
+                    "rule_id": "c1_high_with_c_low",
+                    "domain_code": "C",
+                    "facet_code": "C1",
+                    "facet_codes": [
+                        "C1"
+                    ],
+                    "anomaly_type": "positive_spike",
+                    "domain_percentile": 32,
+                    "facet_percentile": 97,
+                    "delta_abs": 65,
+                    "domain_band": "low_mid",
+                    "facet_band": "high",
+                    "priority_weight": 112,
+                    "is_compound": false,
+                    "section_targets": [
+                        "facet_details"
+                    ]
+                },
+                {
+                    "rule_id": "c5_low_with_c_low",
+                    "domain_code": "C",
+                    "facet_code": "C5",
+                    "facet_codes": [
+                        "C5"
+                    ],
+                    "anomaly_type": "negative_spike",
+                    "domain_percentile": 32,
+                    "facet_percentile": 2,
+                    "delta_abs": 30,
+                    "domain_band": "low_mid",
+                    "facet_band": "low",
+                    "priority_weight": 112,
+                    "is_compound": false,
+                    "section_targets": [
+                        "facet_details"
+                    ]
+                },
+                {
+                    "rule_id": "n1_high_spike",
+                    "domain_code": "N",
+                    "facet_code": "N1",
+                    "facet_codes": [
+                        "N1"
+                    ],
+                    "anomaly_type": "positive_spike",
+                    "domain_percentile": 68,
+                    "facet_percentile": 98,
+                    "delta_abs": 30,
+                    "domain_band": "high_mid",
+                    "facet_band": "high",
+                    "priority_weight": 112,
+                    "is_compound": false,
+                    "section_targets": [
+                        "facet_details"
+                    ]
+                }
+            ]
+        },
+        "sections": [
+            {
+                "section_key": "hero_summary",
+                "status": "populated",
+                "blocks": [
+                    {
+                        "block_uid": "hero_summary.atomic.O.mid",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_O_mid",
+                        "resolved_copy": {
+                            "headline": "你的经验开放度处在中段，既能接受新视角，也会检查它是否可用。",
+                            "body_core": "你不是只追求新鲜感的人，也不是完全依赖惯例的人；你更像在探索和落地之间来回校准。",
+                            "injections": {
+                                "headline_extension": "——当新视角足够有解释力时，你会愿意靠近并吸收。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/O.json#bands.mid.slots.hero_summary"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/O.json#gradients.o_g3"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "O",
+                            "band": "mid",
+                            "percentile": 59,
+                            "modifier_gradient_id": "o_g3",
+                            "modifier_label": "选择性探索"
+                        }
+                    },
+                    {
+                        "block_uid": "hero_summary.atomic.C.low",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_C_low",
+                        "resolved_copy": {
+                            "headline": "你的秩序与推进力偏低，更依赖兴趣、状态和外部结构来启动。",
+                            "body_core": "你不一定缺少判断力，但持续推进、细节收尾和自我约束会更容易消耗你。",
+                            "injections": {
+                                "headline_extension": "——你能做事，但持续推进更依赖状态、意义和外部节拍。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/C.json#bands.low.slots.hero_summary"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/C.json#gradients.c_g2"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "C",
+                            "band": "low",
+                            "percentile": 32,
+                            "modifier_gradient_id": "c_g2",
+                            "modifier_label": "低续航推进"
+                        }
+                    },
+                    {
+                        "block_uid": "hero_summary.atomic.E.low",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_E_low",
+                        "resolved_copy": {
+                            "headline": "你的社交能量偏内收，更适合在低噪音、高自主的节奏里展开。",
+                            "body_core": "你不一定不会社交，而是更少依赖高频互动来获得能量，也更需要保留独处和观察空间。",
+                            "injections": {
+                                "headline_extension": "——你可以进入互动，但通常不会把自己持续放在前台。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/E.json#bands.low.slots.hero_summary"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/E.json#gradients.e_g2"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "E",
+                            "band": "low",
+                            "percentile": 20,
+                            "modifier_gradient_id": "e_g2",
+                            "modifier_label": "克制进入"
+                        }
+                    },
+                    {
+                        "block_uid": "hero_summary.atomic.A.mid",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_A_mid",
+                        "resolved_copy": {
+                            "headline": "你的合作取向处在中段，既能顾及他人，也不会完全放弃自己的边界。",
+                            "body_core": "你愿意理解关系中的需要，但通常也会观察对方是否合理、是否值得继续投入。",
+                            "injections": {
+                                "headline_extension": "——你能照顾关系，也会保留自己的判断。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/A.json#bands.mid.slots.hero_summary"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/A.json#gradients.a_g3"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "A",
+                            "band": "mid",
+                            "percentile": 55,
+                            "modifier_gradient_id": "a_g3",
+                            "modifier_label": "平衡协作"
+                        }
+                    },
+                    {
+                        "block_uid": "hero_summary.atomic.N.high",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_N_high",
+                        "resolved_copy": {
+                            "headline": "你的情绪系统偏高敏感——这既是预警力，也是成本。",
+                            "body_core": "你比很多人更早感到不对劲，也更容易在模糊边界、反复误解和不确定性中产生明显内耗。",
+                            "injections": {
+                                "headline_extension": "——这意味着你更快感到不对劲，内部负荷上升更早。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/N.json#bands.high.slots.hero_summary"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/N.json#gradients.n_g4"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "N",
+                            "band": "high",
+                            "percentile": 68,
+                            "modifier_gradient_id": "n_g4",
+                            "modifier_label": "高体感预警"
+                        }
+                    }
+                ]
+            },
+            {
+                "section_key": "domains_overview",
+                "status": "populated",
+                "blocks": [
+                    {
+                        "block_uid": "domains_overview.atomic.O.mid",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_O_mid",
+                        "resolved_copy": {
+                            "snapshot_line": "开放性位于中段时，你通常能理解新想法，但会根据场景决定投入深度。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/O.json#bands.mid.slots.domains_overview"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/O.json#gradients.o_g3"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "O",
+                            "band": "mid",
+                            "percentile": 59,
+                            "modifier_gradient_id": "o_g3",
+                            "modifier_label": "选择性探索"
+                        }
+                    },
+                    {
+                        "block_uid": "domains_overview.atomic.C.low",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_C_low",
+                        "resolved_copy": {
+                            "snapshot_line": "尽责性偏低时，你更需要把目标拆小、把启动外置，而不是只靠意志维持。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/C.json#bands.low.slots.domains_overview"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/C.json#gradients.c_g2"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "C",
+                            "band": "low",
+                            "percentile": 32,
+                            "modifier_gradient_id": "c_g2",
+                            "modifier_label": "低续航推进"
+                        }
+                    },
+                    {
+                        "block_uid": "domains_overview.atomic.E.low",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_E_low",
+                        "resolved_copy": {
+                            "snapshot_line": "外向性偏低时，你的优势是克制进入和深度观察，代价是外部表达可能滞后。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/E.json#bands.low.slots.domains_overview"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/E.json#gradients.e_g2"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "E",
+                            "band": "low",
+                            "percentile": 20,
+                            "modifier_gradient_id": "e_g2",
+                            "modifier_label": "克制进入"
+                        }
+                    },
+                    {
+                        "block_uid": "domains_overview.atomic.A.mid",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_A_mid",
+                        "resolved_copy": {
+                            "snapshot_line": "宜人性位于中段时，你能合作，也能保留判断；关键在于边界表达是否足够及时。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/A.json#bands.mid.slots.domains_overview"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/A.json#gradients.a_g3"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "A",
+                            "band": "mid",
+                            "percentile": 55,
+                            "modifier_gradient_id": "a_g3",
+                            "modifier_label": "平衡协作"
+                        }
+                    },
+                    {
+                        "block_uid": "domains_overview.atomic.N.high",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_N_high",
+                        "resolved_copy": {
+                            "snapshot_line": "压力反应敏感度偏高时，你更早捕捉风险和关系张力，也更需要把恢复机制前置。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/N.json#bands.high.slots.domains_overview"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/N.json#gradients.n_g4"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "N",
+                            "band": "high",
+                            "percentile": 68,
+                            "modifier_gradient_id": "n_g4",
+                            "modifier_label": "高体感预警"
+                        }
+                    }
+                ]
+            },
+            {
+                "section_key": "domain_deep_dive",
+                "status": "populated",
+                "blocks": [
+                    {
+                        "block_uid": "domain_deep_dive.atomic.O.mid",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_O_mid",
+                        "resolved_copy": {
+                            "definition": "开放性决定你如何面对新经验、复杂概念、审美变化和非标准答案。",
+                            "strengths": [
+                                "能吸收新视角",
+                                "不会轻易抛弃现实边界",
+                                "适合在概念和执行之间做翻译"
+                            ],
+                            "costs": [
+                                "在高不确定任务里可能需要更明确的入口",
+                                "兴趣会受任务意义和环境质量影响",
+                                "可能在探索深度上时高时低"
+                            ],
+                            "daily_life": "你会被有解释力的新东西吸引，但通常仍希望知道它和真实问题有什么关系。",
+                            "injections": {
+                                "intensity_sentence": "你对新经验的兴趣取决于它是否能解释真实问题，而不是只看新不新。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/O.json#bands.mid.slots.domain_deep_dive"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/O.json#gradients.o_g3"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "O",
+                            "band": "mid",
+                            "percentile": 59,
+                            "modifier_gradient_id": "o_g3",
+                            "modifier_label": "选择性探索"
+                        }
+                    },
+                    {
+                        "block_uid": "domain_deep_dive.atomic.C.low",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_C_low",
+                        "resolved_copy": {
+                            "definition": "尽责性反映计划、秩序、自我约束、责任执行和持续完成的倾向。",
+                            "strengths": [
+                                "不容易被僵硬流程完全锁住",
+                                "对变化有一定弹性",
+                                "更愿意根据真实状态调整节奏"
+                            ],
+                            "costs": [
+                                "长期任务容易断续",
+                                "收尾和复盘容易被延后",
+                                "在低反馈任务里更难稳定推进"
+                            ],
+                            "daily_life": "你常常不是不知道该做什么，而是需要更轻的启动门槛和更明确的外部节奏。",
+                            "injections": {
+                                "intensity_sentence": "你不是不能负责，而是低反馈、长周期任务会更快消耗续航。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/C.json#bands.low.slots.domain_deep_dive"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/C.json#gradients.c_g2"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "C",
+                            "band": "low",
+                            "percentile": 32,
+                            "modifier_gradient_id": "c_g2",
+                            "modifier_label": "低续航推进"
+                        }
+                    },
+                    {
+                        "block_uid": "domain_deep_dive.atomic.E.low",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_E_low",
+                        "resolved_copy": {
+                            "definition": "外向性反映你从互动、表达、刺激和外部活动中获得能量的程度。",
+                            "strengths": [
+                                "更能保留观察空间",
+                                "不容易被场面气氛推着走",
+                                "适合深度处理和低干扰工作"
+                            ],
+                            "costs": [
+                                "需求和边界可能表达得较晚",
+                                "高频社交更容易消耗",
+                                "机会有时需要更主动地外化"
+                            ],
+                            "daily_life": "你往往先在内部完成判断，再决定要不要进入现场或表达观点。",
+                            "injections": {
+                                "intensity_sentence": "你更愿意在确认场景安全、目标清楚后再提高表达强度。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/E.json#bands.low.slots.domain_deep_dive"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/E.json#gradients.e_g2"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "E",
+                            "band": "low",
+                            "percentile": 20,
+                            "modifier_gradient_id": "e_g2",
+                            "modifier_label": "克制进入"
+                        }
+                    },
+                    {
+                        "block_uid": "domain_deep_dive.atomic.A.mid",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_A_mid",
+                        "resolved_copy": {
+                            "definition": "宜人性决定你在合作、信任、体谅、冲突和让步中如何平衡关系与立场。",
+                            "strengths": [
+                                "能理解他人处境",
+                                "不容易无原则让步",
+                                "适合在关系和问题之间做平衡"
+                            ],
+                            "costs": [
+                                "复杂关系里可能需要更明确的标准",
+                                "边界表达有时会延后",
+                                "容易根据对象质量调整投入"
+                            ],
+                            "daily_life": "你通常愿意合作，但如果对方持续越界或不公平，你会逐渐收回投入。",
+                            "injections": {
+                                "intensity_sentence": "你的合作程度会随对象质量和互动公平度变化。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/A.json#bands.mid.slots.domain_deep_dive"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/A.json#gradients.a_g3"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "A",
+                            "band": "mid",
+                            "percentile": 55,
+                            "modifier_gradient_id": "a_g3",
+                            "modifier_label": "平衡协作"
+                        }
+                    },
+                    {
+                        "block_uid": "domain_deep_dive.atomic.N.high",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_N_high",
+                        "resolved_copy": {
+                            "definition": "情绪性决定你对压力、风险、评价、不确定性和失控感的反应强度。",
+                            "strengths": [
+                                "风险觉察更快",
+                                "更容易察觉关系和环境变化",
+                                "不容易迟钝地忽略小裂缝"
+                            ],
+                            "costs": [
+                                "更容易累",
+                                "更容易把外部张力带回内部",
+                                "更容易在事情尚未爆发前就先承担心理成本"
+                            ],
+                            "daily_life": "你不是没有能力，而是更需要恢复机制、边界和稳定节奏来承托自己的反应强度。",
+                            "injections": {
+                                "intensity_sentence": "在模糊边界和反复拉扯的协作中，你会比多数人更早体验到心理耗损。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/N.json#bands.high.slots.domain_deep_dive"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/N.json#gradients.n_g4"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "N",
+                            "band": "high",
+                            "percentile": 68,
+                            "modifier_gradient_id": "n_g4",
+                            "modifier_label": "高体感预警"
+                        }
+                    }
+                ]
+            },
+            {
+                "section_key": "facet_details",
+                "status": "populated",
+                "blocks": [
+                    {
+                        "block_uid": "facet_details.precision_intro",
+                        "kind": "paragraph",
+                        "component": "BigFiveFacetPrecisionIntro",
+                        "block_id": "facet_precision_intro_v1",
+                        "resolved_copy": {
+                            "title": "细分维度不是 30 个分数的列表，而是结构性偏离的线索。",
+                            "body": "这里会优先展开那些明显高于或低于所属维度的 facet：它们往往解释“你为什么不是表面总分看起来的那一种人”，也能帮助区分能力、动机、表达和恢复成本。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/*"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "slot": "facet_precision_intro"
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.anomaly.c1_high_with_c_low",
+                        "kind": "metric_card",
+                        "component": "BigFiveFacetAnomalyCard",
+                        "block_id": "facet_anomaly_c1_high_with_c_low",
+                        "resolved_copy": {
+                            "title": "你不是没能力，而是续航结构没有跟上胜任感。",
+                            "body": "整体尽责性偏低时，胜任感却明显更高，说明你知道自己能理解和处理问题，但持续推进系统未必同样稳定。",
+                            "why_it_matters": "这能把“我明明会，为什么做不完”从能力问题中拆出来。",
+                            "domain_code": "C",
+                            "facet_code": "C1",
+                            "facet_codes": [
+                                "C1"
+                            ],
+                            "domain_percentile": 32,
+                            "facet_percentile": 97,
+                            "delta_abs": 65
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_precision/C.json#rules.c1_high_with_c_low"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "facet_code": "C1",
+                            "facet_codes": [
+                                "C1"
+                            ],
+                            "domain_code": "C",
+                            "delta_abs": 65,
+                            "rank": 1,
+                            "is_compound": false
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.anomaly.c5_low_with_c_low",
+                        "kind": "metric_card",
+                        "component": "BigFiveFacetAnomalyCard",
+                        "block_id": "facet_anomaly_c5_low_with_c_low",
+                        "resolved_copy": {
+                            "title": "真正拖住你的，往往是自律续航而不是理解任务。",
+                            "body": "自律续航明显低于整体水平时，任务容易在无反馈、疲惫或不确定阶段断掉，并不代表你不知道目标。",
+                            "why_it_matters": "这个偏离能帮助把问题定位到节奏和反馈，而不是人格评价。",
+                            "domain_code": "C",
+                            "facet_code": "C5",
+                            "facet_codes": [
+                                "C5"
+                            ],
+                            "domain_percentile": 32,
+                            "facet_percentile": 2,
+                            "delta_abs": 30
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_precision/C.json#rules.c5_low_with_c_low"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "facet_code": "C5",
+                            "facet_codes": [
+                                "C5"
+                            ],
+                            "domain_code": "C",
+                            "delta_abs": 30,
+                            "rank": 2,
+                            "is_compound": false
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.anomaly.n1_high_spike",
+                        "kind": "metric_card",
+                        "component": "BigFiveFacetAnomalyCard",
+                        "block_id": "facet_anomaly_n1_high_spike",
+                        "resolved_copy": {
+                            "title": "你的高敏感首先表现为“预警提前”，而不是当场崩溃。",
+                            "body": "焦虑相关 facet 明显高于 domain 均值，说明你最先被拉高的通常不是情绪外露，而是对风险、失误和不确定的提前预警。",
+                            "why_it_matters": "它提醒你把预警当成信号处理，而不是把自己归因成“想太多”。",
+                            "domain_code": "N",
+                            "facet_code": "N1",
+                            "facet_codes": [
+                                "N1"
+                            ],
+                            "domain_percentile": 68,
+                            "facet_percentile": 98,
+                            "delta_abs": 30
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_precision/N.json#rules.n1_high_spike"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "facet_code": "N1",
+                            "facet_codes": [
+                                "N1"
+                            ],
+                            "domain_code": "N",
+                            "delta_abs": 30,
+                            "rank": 3,
+                            "is_compound": false
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.anomaly_overflow",
+                        "kind": "callout",
+                        "component": "BigFiveFacetAnomalyOverflowCallout",
+                        "block_id": "facet_anomaly_overflow_v1",
+                        "resolved_copy": {
+                            "title": "还有一些结构性偏离被记录，但不在主卡中展开。",
+                            "body": "为避免把 facet_details 变成过长列表，报告只展开前三条最值得优先阅读的异常，其余命中会保留在 engine_decisions 中供后续渲染或分析使用。",
+                            "items": [
+                                {
+                                    "rule_id": "n3_high_spike",
+                                    "domain_code": "N",
+                                    "facet_codes": [
+                                        "N3"
+                                    ],
+                                    "title": "你的负荷更像“慢性下沉”，不是一次性炸裂。"
+                                }
+                            ]
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_precision/N.json#rules.n3_high_spike"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "overflow_count": 1
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.O1",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_O1",
+                        "resolved_copy": {
+                            "trait_code": "O",
+                            "facet_code": "O1",
+                            "label_zh": "想象活性",
+                            "percentile": null,
+                            "band": "not_available",
+                            "gloss": "你如何在现实信息之外进行内在联想与可能性推演。",
+                            "daily_meaning": "分数高时，更容易在尚未成形的线索里看见画面和假设；分数低时，更依赖已经被验证的事实与流程。",
+                            "why_it_matters": "它影响你理解复杂问题时，是先展开可能性，还是先压缩到可执行的现实边界。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/O.json#facets.O1"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "O",
+                            "facet_code": "O1",
+                            "percentile": null,
+                            "band": "not_available",
+                            "has_percentile": false
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.O2",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_O2",
+                        "resolved_copy": {
+                            "trait_code": "O",
+                            "facet_code": "O2",
+                            "label_zh": "审美感受",
+                            "percentile": null,
+                            "band": "not_available",
+                            "gloss": "你对形式、气氛、节奏与细节质感的敏感度。",
+                            "daily_meaning": "高分通常会更快被空间、语言、图像或声音的质量影响；低分则更少让审美线索改变判断重点。",
+                            "why_it_matters": "它解释为什么有些人会被“说不清但不对劲”的质感牵动，有些人则更关注功能是否成立。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/O.json#facets.O2"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "O",
+                            "facet_code": "O2",
+                            "percentile": null,
+                            "band": "not_available",
+                            "has_percentile": false
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.O3",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_O3",
+                        "resolved_copy": {
+                            "trait_code": "O",
+                            "facet_code": "O3",
+                            "label_zh": "情感通道",
+                            "percentile": null,
+                            "band": "not_available",
+                            "gloss": "你是否愿意辨认、接近并表达内部感受。",
+                            "daily_meaning": "高分更容易把情绪当作信息来源；低分更倾向先把感受放到一边，回到任务和事实。",
+                            "why_it_matters": "它决定感受是被纳入判断，还是只作为背景噪音被降权处理。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/O.json#facets.O3"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "O",
+                            "facet_code": "O3",
+                            "percentile": null,
+                            "band": "not_available",
+                            "has_percentile": false
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.O4",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_O4",
+                        "resolved_copy": {
+                            "trait_code": "O",
+                            "facet_code": "O4",
+                            "label_zh": "行动尝新",
+                            "percentile": null,
+                            "band": "not_available",
+                            "gloss": "你是否愿意用新的做法、路线和经验校正自己。",
+                            "daily_meaning": "高分更容易亲自试一试；低分更偏好沿用熟悉方案，直到新方案有足够证据。",
+                            "why_it_matters": "它影响开放性是停留在理解层，还是会真正进入行为实验。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/O.json#facets.O4"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "O",
+                            "facet_code": "O4",
+                            "percentile": null,
+                            "band": "not_available",
+                            "has_percentile": false
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.O5",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_O5",
+                        "resolved_copy": {
+                            "trait_code": "O",
+                            "facet_code": "O5",
+                            "label_zh": "观念探索",
+                            "percentile": null,
+                            "band": "not_available",
+                            "gloss": "你对抽象概念、系统关系和解释框架的兴趣。",
+                            "daily_meaning": "高分会自然追问底层机制；低分更重视结论是否直接可用。",
+                            "why_it_matters": "它解释一个人为什么会花力气理解“为什么”，而不只是知道“怎么做”。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/O.json#facets.O5"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "O",
+                            "facet_code": "O5",
+                            "percentile": null,
+                            "band": "not_available",
+                            "has_percentile": false
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.O6",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_O6",
+                        "resolved_copy": {
+                            "trait_code": "O",
+                            "facet_code": "O6",
+                            "label_zh": "价值弹性",
+                            "percentile": null,
+                            "band": "not_available",
+                            "gloss": "你对既有规则、传统立场和价值边界的可调整程度。",
+                            "daily_meaning": "高分更愿意重新审视旧规则；低分更需要稳定的原则和可继承的边界。",
+                            "why_it_matters": "它影响你面对新观念时，是先松动立场，还是先确认它是否破坏核心秩序。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/O.json#facets.O6"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "O",
+                            "facet_code": "O6",
+                            "percentile": null,
+                            "band": "not_available",
+                            "has_percentile": false
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.C1",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_C1",
+                        "resolved_copy": {
+                            "trait_code": "C",
+                            "facet_code": "C1",
+                            "label_zh": "胜任感",
+                            "percentile": 97,
+                            "band": "high",
+                            "gloss": "你对自己能处理任务、理解要求并解决问题的基本把握。",
+                            "daily_meaning": "高分会让人更敢接住复杂责任；低分则更容易在开始前需要更多确认和支持。",
+                            "why_it_matters": "它决定你面对要求时，先感到“我可以拆解”，还是先感到“不确定能不能撑住”。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/C.json#facets.C1"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "C",
+                            "facet_code": "C1",
+                            "percentile": 97,
+                            "band": "high",
+                            "has_percentile": true
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.C2",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_C2",
+                        "resolved_copy": {
+                            "trait_code": "C",
+                            "facet_code": "C2",
+                            "label_zh": "秩序感",
+                            "percentile": 89,
+                            "band": "high",
+                            "gloss": "你对结构、整洁、计划和可预期安排的需求。",
+                            "daily_meaning": "高分会主动建立清单、规则和顺序；低分更能忍受临场调整和松散结构。",
+                            "why_it_matters": "它解释为什么有些人靠秩序恢复掌控，有些人则在过度秩序里失去灵活性。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/C.json#facets.C2"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "C",
+                            "facet_code": "C2",
+                            "percentile": 89,
+                            "band": "high",
+                            "has_percentile": true
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.C3",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_C3",
+                        "resolved_copy": {
+                            "trait_code": "C",
+                            "facet_code": "C3",
+                            "label_zh": "责任遵循",
+                            "percentile": 15,
+                            "band": "low",
+                            "gloss": "你是否把承诺、规则和应尽义务稳定放在决策前列。",
+                            "daily_meaning": "高分更容易把“应该完成”看得很重；低分更容易按情境价值重新排序。",
+                            "why_it_matters": "它影响一个人是被责任牵引，还是更容易从需求变化中重新谈判承诺。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/C.json#facets.C3"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "C",
+                            "facet_code": "C3",
+                            "percentile": 15,
+                            "band": "low",
+                            "has_percentile": true
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.C4",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_C4",
+                        "resolved_copy": {
+                            "trait_code": "C",
+                            "facet_code": "C4",
+                            "label_zh": "成就推进",
+                            "percentile": 15,
+                            "band": "low",
+                            "gloss": "你对目标、标准和向上完成度的驱动力。",
+                            "daily_meaning": "高分会持续追求更好结果；低分更可能把足够可用作为停止点。",
+                            "why_it_matters": "它决定尽责性是以结果拉动，还是只维持基本运转。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/C.json#facets.C4"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "C",
+                            "facet_code": "C4",
+                            "percentile": 15,
+                            "band": "low",
+                            "has_percentile": true
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.C5",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_C5",
+                        "resolved_copy": {
+                            "trait_code": "C",
+                            "facet_code": "C5",
+                            "label_zh": "自律续航",
+                            "percentile": 2,
+                            "band": "low",
+                            "gloss": "你在没有即时反馈时继续推进的能力。",
+                            "daily_meaning": "高分能把任务拆成长期节奏；低分更容易在疲惫、无聊或不确定中断电。",
+                            "why_it_matters": "它解释为什么一个人明明理解目标，却仍可能卡在持续执行。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/C.json#facets.C5"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "C",
+                            "facet_code": "C5",
+                            "percentile": 2,
+                            "band": "low",
+                            "has_percentile": true
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.C6",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_C6",
+                        "resolved_copy": {
+                            "trait_code": "C",
+                            "facet_code": "C6",
+                            "label_zh": "审慎决策",
+                            "percentile": 10,
+                            "band": "low",
+                            "gloss": "你在行动前评估风险、后果和步骤的倾向。",
+                            "daily_meaning": "高分更愿意慢一点、想清楚再动；低分更容易边做边校正。",
+                            "why_it_matters": "它影响你把错误预防放在行动之前，还是允许行动本身产生答案。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/C.json#facets.C6"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "C",
+                            "facet_code": "C6",
+                            "percentile": 10,
+                            "band": "low",
+                            "has_percentile": true
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.E1",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_E1",
+                        "resolved_copy": {
+                            "trait_code": "E",
+                            "facet_code": "E1",
+                            "label_zh": "亲近温度",
+                            "percentile": 57,
+                            "band": "mid",
+                            "gloss": "你在一对一互动中释放善意、亲近和可接近感的程度。",
+                            "daily_meaning": "高分让别人更容易感到被接住；低分则更容易显得保留、慢热或需要距离。",
+                            "why_it_matters": "它能区分“是否需要人群刺激”和“是否能建立温暖连接”这两件事。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/E.json#facets.E1"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "E",
+                            "facet_code": "E1",
+                            "percentile": 57,
+                            "band": "mid",
+                            "has_percentile": true
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.E2",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_E2",
+                        "resolved_copy": {
+                            "trait_code": "E",
+                            "facet_code": "E2",
+                            "label_zh": "群体参与",
+                            "percentile": 53,
+                            "band": "mid",
+                            "gloss": "你对多人场合、热闹互动和社交密度的自然偏好。",
+                            "daily_meaning": "高分更容易从群体中获得能量；低分则更需要低密度互动和独处恢复。",
+                            "why_it_matters": "它解释一个人不是会不会社交，而是能承受多高的社交频率。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/E.json#facets.E2"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "E",
+                            "facet_code": "E2",
+                            "percentile": 53,
+                            "band": "mid",
+                            "has_percentile": true
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.E3",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_E3",
+                        "resolved_copy": {
+                            "trait_code": "E",
+                            "facet_code": "E3",
+                            "label_zh": "主张表达",
+                            "percentile": 12,
+                            "band": "low",
+                            "gloss": "你是否自然占据表达位置、提出要求并影响场面走向。",
+                            "daily_meaning": "高分更容易主动推动议题；低分更倾向观察后再选择是否出声。",
+                            "why_it_matters": "它影响一个人的想法是否会及时进入外部系统。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/E.json#facets.E3"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "E",
+                            "facet_code": "E3",
+                            "percentile": 12,
+                            "band": "low",
+                            "has_percentile": true
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.E4",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_E4",
+                        "resolved_copy": {
+                            "trait_code": "E",
+                            "facet_code": "E4",
+                            "label_zh": "活动节奏",
+                            "percentile": 4,
+                            "band": "low",
+                            "gloss": "你偏好的生活速度、任务密度和身体动能水平。",
+                            "daily_meaning": "高分更能承受快节奏；低分更需要慢启动和低干扰节律。",
+                            "why_it_matters": "它解释疲惫有时不是动机不足，而是节奏不匹配。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/E.json#facets.E4"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "E",
+                            "facet_code": "E4",
+                            "percentile": 4,
+                            "band": "low",
+                            "has_percentile": true
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.E5",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_E5",
+                        "resolved_copy": {
+                            "trait_code": "E",
+                            "facet_code": "E5",
+                            "label_zh": "刺激寻求",
+                            "percentile": 4,
+                            "band": "low",
+                            "gloss": "你对新鲜、强烈和高唤醒体验的需要。",
+                            "daily_meaning": "高分容易被挑战、变化和强刺激吸引；低分更偏好低噪音、低波动的场景。",
+                            "why_it_matters": "它影响你把刺激视为燃料，还是视为需要管理的负荷。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/E.json#facets.E5"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "E",
+                            "facet_code": "E5",
+                            "percentile": 4,
+                            "band": "low",
+                            "has_percentile": true
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.E6",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_E6",
+                        "resolved_copy": {
+                            "trait_code": "E",
+                            "facet_code": "E6",
+                            "label_zh": "积极情绪",
+                            "percentile": 2,
+                            "band": "low",
+                            "gloss": "你自然体验和表达轻快、兴奋、愉悦感的频率。",
+                            "daily_meaning": "高分更容易外显快乐和期待；低分则不一定消极，只是情绪表达更低调。",
+                            "why_it_matters": "它能帮助区分“内在没有感受”和“外在不常高频表达”。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/E.json#facets.E6"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "E",
+                            "facet_code": "E6",
+                            "percentile": 2,
+                            "band": "low",
+                            "has_percentile": true
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.A1",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_A1",
+                        "resolved_copy": {
+                            "trait_code": "A",
+                            "facet_code": "A1",
+                            "label_zh": "信任起点",
+                            "percentile": null,
+                            "band": "not_available",
+                            "gloss": "你默认他人意图可信、关系可以先给善意的程度。",
+                            "daily_meaning": "高分更容易先开放信任；低分更常先观察证据，再决定是否靠近。",
+                            "why_it_matters": "它影响合作开始时的速度，也影响你如何处理不确定的人际风险。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/A.json#facets.A1"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "A",
+                            "facet_code": "A1",
+                            "percentile": null,
+                            "band": "not_available",
+                            "has_percentile": false
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.A2",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_A2",
+                        "resolved_copy": {
+                            "trait_code": "A",
+                            "facet_code": "A2",
+                            "label_zh": "坦直表达",
+                            "percentile": null,
+                            "band": "not_available",
+                            "gloss": "你在表达想法时保持直接、透明和低策略性的倾向。",
+                            "daily_meaning": "高分更倾向把话讲清楚；低分更会考虑时机、利益和信息保留。",
+                            "why_it_matters": "它解释一个人是真诚地直说，还是更习惯把表达当成关系管理。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/A.json#facets.A2"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "A",
+                            "facet_code": "A2",
+                            "percentile": null,
+                            "band": "not_available",
+                            "has_percentile": false
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.A3",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_A3",
+                        "resolved_copy": {
+                            "trait_code": "A",
+                            "facet_code": "A3",
+                            "label_zh": "利他关照",
+                            "percentile": null,
+                            "band": "not_available",
+                            "gloss": "你是否自然把他人的处境、需求和负担纳入考虑。",
+                            "daily_meaning": "高分更容易主动照看别人；低分更倾向先确认责任边界。",
+                            "why_it_matters": "它影响合作中你会不会自动承担额外的照顾成本。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/A.json#facets.A3"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "A",
+                            "facet_code": "A3",
+                            "percentile": null,
+                            "band": "not_available",
+                            "has_percentile": false
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.A4",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_A4",
+                        "resolved_copy": {
+                            "trait_code": "A",
+                            "facet_code": "A4",
+                            "label_zh": "冲突调停",
+                            "percentile": null,
+                            "band": "not_available",
+                            "gloss": "你在分歧中维持关系、让步和避免升级的倾向。",
+                            "daily_meaning": "高分更愿意降温与调和；低分更愿意把分歧摊开并坚持边界。",
+                            "why_it_matters": "它决定你面对冲突时，是先保护关系温度，还是先保护判断清晰。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/A.json#facets.A4"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "A",
+                            "facet_code": "A4",
+                            "percentile": null,
+                            "band": "not_available",
+                            "has_percentile": false
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.A5",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_A5",
+                        "resolved_copy": {
+                            "trait_code": "A",
+                            "facet_code": "A5",
+                            "label_zh": "谦逊位置",
+                            "percentile": null,
+                            "band": "not_available",
+                            "gloss": "你是否愿意降低自我突出、避免把自己放在中心。",
+                            "daily_meaning": "高分更少主动强调功劳；低分更愿意明确展示自己的贡献和资格。",
+                            "why_it_matters": "它影响一个人如何在关系中摆放自我，而不是简单等同于自信高低。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/A.json#facets.A5"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "A",
+                            "facet_code": "A5",
+                            "percentile": null,
+                            "band": "not_available",
+                            "has_percentile": false
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.A6",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_A6",
+                        "resolved_copy": {
+                            "trait_code": "A",
+                            "facet_code": "A6",
+                            "label_zh": "共情柔软",
+                            "percentile": null,
+                            "band": "not_available",
+                            "gloss": "你对他人脆弱、困难和情绪痛点的感受性。",
+                            "daily_meaning": "高分更容易被他人的处境触动；低分更倾向以原则、事实和可执行方案回应。",
+                            "why_it_matters": "它解释为什么有些合作冲突来自同情心强弱，而不是道德好坏。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/A.json#facets.A6"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "A",
+                            "facet_code": "A6",
+                            "percentile": null,
+                            "band": "not_available",
+                            "has_percentile": false
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.N1",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_N1",
+                        "resolved_copy": {
+                            "trait_code": "N",
+                            "facet_code": "N1",
+                            "label_zh": "焦虑预警",
+                            "percentile": 98,
+                            "band": "high",
+                            "gloss": "你对风险、错误和不确定后果的提前警觉程度。",
+                            "daily_meaning": "高分更早感到事情可能出问题；低分更不容易被尚未发生的风险拉高。",
+                            "why_it_matters": "它解释高敏感常常首先表现为预警提前，而不一定是外显失控。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/N.json#facets.N1"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "N",
+                            "facet_code": "N1",
+                            "percentile": 98,
+                            "band": "high",
+                            "has_percentile": true
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.N2",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_N2",
+                        "resolved_copy": {
+                            "trait_code": "N",
+                            "facet_code": "N2",
+                            "label_zh": "愤怒反应",
+                            "percentile": 65,
+                            "band": "high_mid",
+                            "gloss": "你在受阻、被误解或边界被侵犯时的内在激活强度。",
+                            "daily_meaning": "高分更快感到不满与反抗；低分更容易先降温或延后处理。",
+                            "why_it_matters": "它决定压力是否会转化为直接对抗、闷在内部，或被理性压住。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/N.json#facets.N2"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "N",
+                            "facet_code": "N2",
+                            "percentile": 65,
+                            "band": "high_mid",
+                            "has_percentile": true
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.N3",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_N3",
+                        "resolved_copy": {
+                            "trait_code": "N",
+                            "facet_code": "N3",
+                            "label_zh": "低落耗竭",
+                            "percentile": 98,
+                            "band": "high",
+                            "gloss": "你在持续压力下出现心力下沉、疲惫和无力感的倾向。",
+                            "daily_meaning": "高分更容易在长期拉扯中被抽走能量；低分更不容易进入慢性低电量状态。",
+                            "why_it_matters": "它解释有些负荷不是当场爆发，而是持续消耗后的系统下沉。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/N.json#facets.N3"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "N",
+                            "facet_code": "N3",
+                            "percentile": 98,
+                            "band": "high",
+                            "has_percentile": true
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.N4",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_N4",
+                        "resolved_copy": {
+                            "trait_code": "N",
+                            "facet_code": "N4",
+                            "label_zh": "自我意识",
+                            "percentile": 8,
+                            "band": "low",
+                            "gloss": "你在他人目光、评价和社交暴露中的不自在程度。",
+                            "daily_meaning": "高分更容易在人前自我监控；低分则不太会因被看见而明显退缩。",
+                            "why_it_matters": "它能区分“敏感”是否主要发生在公开场合和他人评价中。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/N.json#facets.N4"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "N",
+                            "facet_code": "N4",
+                            "percentile": 8,
+                            "band": "low",
+                            "has_percentile": true
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.N5",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_N5",
+                        "resolved_copy": {
+                            "trait_code": "N",
+                            "facet_code": "N5",
+                            "label_zh": "冲动脱离",
+                            "percentile": 95,
+                            "band": "high",
+                            "gloss": "你在过载时想立刻切断、退出或用即时动作降压的倾向。",
+                            "daily_meaning": "高分更容易出现突然暂停、撤离或马上改变状态的冲动；低分更能延迟反应。",
+                            "why_it_matters": "它解释过载风险有时不是吵起来，而是突然掉线或切断。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/N.json#facets.N5"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "N",
+                            "facet_code": "N5",
+                            "percentile": 95,
+                            "band": "high",
+                            "has_percentile": true
+                        }
+                    },
+                    {
+                        "block_uid": "facet_details.glossary.N6",
+                        "kind": "table_row",
+                        "component": "BigFiveFacetGlossaryRow",
+                        "block_id": "facet_glossary_N6",
+                        "resolved_copy": {
+                            "trait_code": "N",
+                            "facet_code": "N6",
+                            "label_zh": "脆弱承压",
+                            "percentile": 13,
+                            "band": "low",
+                            "gloss": "你在高压、失控和复杂要求下是否容易明显撑不住。",
+                            "daily_meaning": "高分更快显示承压困难；低分则可能外部看起来仍能扛一段时间。",
+                            "why_it_matters": "它帮助区分“负荷高”和“很快表现为失能”这两件事。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [
+                                "facet_glossary/N.json#facets.N6"
+                            ],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "N",
+                            "facet_code": "N6",
+                            "percentile": 13,
+                            "band": "low",
+                            "has_percentile": true
+                        }
+                    }
+                ]
+            },
+            {
+                "section_key": "core_portrait",
+                "status": "populated",
+                "blocks": [
+                    {
+                        "block_uid": "core_portrait.atomic.O.mid",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_O_mid",
+                        "resolved_copy": {
+                            "identity": "你的认知入口兼具探索和校准。",
+                            "default_style": "你愿意理解不同答案，但不会因为它们新就自动接受。",
+                            "injections": {
+                                "load_sentence": "你的系统能在探索和落地之间切换，但需要明确问题意识来维持深度。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/O.json#bands.mid.slots.core_portrait"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/O.json#gradients.o_g3"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "O",
+                            "band": "mid",
+                            "percentile": 59,
+                            "modifier_gradient_id": "o_g3",
+                            "modifier_label": "选择性探索"
+                        }
+                    },
+                    {
+                        "block_uid": "core_portrait.atomic.C.low",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_C_low",
+                        "resolved_copy": {
+                            "identity": "你的行动系统更依赖情境牵引。",
+                            "default_style": "当任务有意义、反馈清楚、入口足够小，你的推进会明显更顺。",
+                            "injections": {
+                                "load_sentence": "你的行动负荷主要来自长期维持秩序，而不是短时爆发。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/C.json#bands.low.slots.core_portrait"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/C.json#gradients.c_g2"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "C",
+                            "band": "low",
+                            "percentile": 32,
+                            "modifier_gradient_id": "c_g2",
+                            "modifier_label": "低续航推进"
+                        }
+                    },
+                    {
+                        "block_uid": "core_portrait.atomic.E.low",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_E_low",
+                        "resolved_copy": {
+                            "identity": "你的能量系统更偏内收和自我调节。",
+                            "default_style": "你需要足够安静和自主，才能把观察转成稳定输出。",
+                            "injections": {
+                                "load_sentence": "你的能量负荷主要来自被迫高频外放。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/E.json#bands.low.slots.core_portrait"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/E.json#gradients.e_g2"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "E",
+                            "band": "low",
+                            "percentile": 20,
+                            "modifier_gradient_id": "e_g2",
+                            "modifier_label": "克制进入"
+                        }
+                    },
+                    {
+                        "block_uid": "core_portrait.atomic.A.mid",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_A_mid",
+                        "resolved_copy": {
+                            "identity": "你的关系系统兼具体谅和边界。",
+                            "default_style": "你会先尝试理解，再根据互动质量决定投入深度。",
+                            "injections": {
+                                "load_sentence": "你的关系负荷主要来自边界表达延后，而不是缺少同理。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/A.json#bands.mid.slots.core_portrait"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/A.json#gradients.a_g3"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "A",
+                            "band": "mid",
+                            "percentile": 55,
+                            "modifier_gradient_id": "a_g3",
+                            "modifier_label": "平衡协作"
+                        }
+                    },
+                    {
+                        "block_uid": "core_portrait.atomic.N.high",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_N_high",
+                        "resolved_copy": {
+                            "identity": "你的感受系统强、预警系统强、内在负荷也强。",
+                            "default_style": "你更早知道哪里不对，也更早因此付出心理成本。",
+                            "injections": {
+                                "load_sentence": "别人还在说“先看看”，你可能已经在内部开始承担真实成本。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/N.json#bands.high.slots.core_portrait"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/N.json#gradients.n_g4"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "N",
+                            "band": "high",
+                            "percentile": 68,
+                            "modifier_gradient_id": "n_g4",
+                            "modifier_label": "高体感预警"
+                        }
+                    },
+                    {
+                        "block_uid": "core_portrait.synergy.n_high_x_e_low.synergy_primary",
+                        "kind": "callout",
+                        "component": "BigFiveSynergyCallout",
+                        "block_id": "synergy_n_high_x_e_low_synergy_primary",
+                        "resolved_copy": {
+                            "headline": "你会比多数人更早感到张力，但又不太会通过持续表达把它带出去。",
+                            "body": "高情绪性让压力、误解和不确定性更早进入系统，低外向性又让这份负荷不太会通过现场表达、社交释放或高频互动被带出去。结果不是当场失控，而是外面看起来还算稳，里面却已经开始长时间高负荷运转。",
+                            "strength_sentence": "这组组合会让你比很多人更早发现环境和关系中的裂缝，也更不容易盲目进入高刺激场域。",
+                            "risk_sentence": "它的代价是：你更容易进入“想很多但迟迟不进入、内部很忙但外面看不太出来”的状态。",
+                            "action_hook": "你的关键课题不是逼自己更外放，而是更早外化感受、更低成本表达边界、更主动安排恢复。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [
+                                "synergies/n_high_x_e_low.json"
+                            ],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "synergy_id": "n_high_x_e_low",
+                            "synergy_rank": "primary",
+                            "slot": "synergy_primary",
+                            "priority_weight": 72
+                        }
+                    }
+                ]
+            },
+            {
+                "section_key": "norms_comparison",
+                "status": "populated",
+                "blocks": [
+                    {
+                        "block_uid": "norms_comparison.atomic.O.mid",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_O_mid",
+                        "resolved_copy": {
+                            "relative_meaning": "在参考样本中，你的经验开放度接近中段，说明探索倾向存在，但不是持续主导项。",
+                            "injections": {
+                                "compare_sentence": "这更像一种选择性开放：能探索，也会校准。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/O.json#bands.mid.slots.norms_comparison"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/O.json#gradients.o_g3"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "O",
+                            "band": "mid",
+                            "percentile": 59,
+                            "modifier_gradient_id": "o_g3",
+                            "modifier_label": "选择性探索"
+                        }
+                    },
+                    {
+                        "block_uid": "norms_comparison.atomic.C.low",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_C_low",
+                        "resolved_copy": {
+                            "relative_meaning": "在参考样本中，你的秩序与推进力相对较低，说明持续执行不是最自然的省力路径。",
+                            "injections": {
+                                "compare_sentence": "这更接近低续航推进：可以启动，但需要系统帮你不断续上。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/C.json#bands.low.slots.norms_comparison"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/C.json#gradients.c_g2"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "C",
+                            "band": "low",
+                            "percentile": 32,
+                            "modifier_gradient_id": "c_g2",
+                            "modifier_label": "低续航推进"
+                        }
+                    },
+                    {
+                        "block_uid": "norms_comparison.atomic.E.low",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_E_low",
+                        "resolved_copy": {
+                            "relative_meaning": "在参考样本中，你的外向性相对较低，说明高刺激互动不是你的默认充电方式。",
+                            "injections": {
+                                "compare_sentence": "这更接近克制进入：不是隔绝，而是选择性外化。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/E.json#bands.low.slots.norms_comparison"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/E.json#gradients.e_g2"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "E",
+                            "band": "low",
+                            "percentile": 20,
+                            "modifier_gradient_id": "e_g2",
+                            "modifier_label": "克制进入"
+                        }
+                    },
+                    {
+                        "block_uid": "norms_comparison.atomic.A.mid",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_A_mid",
+                        "resolved_copy": {
+                            "relative_meaning": "在参考样本中，你的宜人性接近中段，说明合作倾向存在，但不是无条件优先。",
+                            "injections": {
+                                "compare_sentence": "你处在参考样本中段，更像平衡协作，而不是无条件让步。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/A.json#bands.mid.slots.norms_comparison"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/A.json#gradients.a_g3"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "A",
+                            "band": "mid",
+                            "percentile": 55,
+                            "modifier_gradient_id": "a_g3",
+                            "modifier_label": "平衡协作"
+                        }
+                    },
+                    {
+                        "block_uid": "norms_comparison.atomic.N.high",
+                        "kind": "trait_atomic",
+                        "component": "BigFiveTraitBlock",
+                        "block_id": "atomic_N_high",
+                        "resolved_copy": {
+                            "relative_meaning": "在参考样本中，你的压力反应强度更突出，这说明你更自然地活在高体感预警模式里。",
+                            "injections": {
+                                "compare_sentence": "这说明你在参考样本里处于明显偏敏感的位置，不是偶发起波，而是更自然地更早有体感。"
+                            }
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "atomic/N.json#bands.high.slots.norms_comparison"
+                            ],
+                            "modifier_refs": [
+                                "modifiers/N.json#gradients.n_g4"
+                            ],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "trait_code": "N",
+                            "band": "high",
+                            "percentile": 68,
+                            "modifier_gradient_id": "n_g4",
+                            "modifier_label": "高体感预警"
+                        }
+                    }
+                ]
+            },
+            {
+                "section_key": "action_plan",
+                "status": "populated",
+                "blocks": [
+                    {
+                        "block_uid": "action_plan.matrix_intro",
+                        "kind": "paragraph",
+                        "component": "BigFiveActionMatrixIntro",
+                        "block_id": "action_matrix_intro_v1",
+                        "resolved_copy": {
+                            "title": "行动建议会按场景落地，而不是把人格分数翻译成泛泛提醒。",
+                            "body": "这里会把当前分值命中的动作按工作、关系、压力恢复和个人成长拆开，并固定放入继续、开始、停止、观察四类动作，帮助你先做最有现实价值的一步。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": [
+                                "action_rules/*"
+                            ]
+                        },
+                        "analytics": {
+                            "slot": "action_matrix_intro"
+                        }
+                    },
+                    {
+                        "block_uid": "action_plan.matrix_top_priority.stress_recovery",
+                        "kind": "callout",
+                        "component": "BigFiveActionMatrixTopPriority",
+                        "block_id": "action_matrix_top_priority_stress_recovery",
+                        "resolved_copy": {
+                            "title": "优先场景：压力恢复",
+                            "body": "这组动作在当前分值结构中命中数量和优先级更高，适合作为这份报告的行动入口。",
+                            "scenario_key": "stress_recovery"
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": [
+                                "action_rules/stress_recovery.json"
+                            ]
+                        },
+                        "analytics": {
+                            "top_priority_scenario": "stress_recovery"
+                        }
+                    },
+                    {
+                        "block_uid": "action_plan.matrix_scenario.workplace",
+                        "kind": "bullets",
+                        "component": "BigFiveActionMatrixScenarioBullets",
+                        "block_id": "action_matrix_scenario_workplace",
+                        "resolved_copy": {
+                            "title": "工作场景｜下一步动作",
+                            "scenario_key": "workplace",
+                            "items": [
+                                {
+                                    "bucket": "continue",
+                                    "label": "继续",
+                                    "rule_id": "o_work_continue_frame_complexity_50_100",
+                                    "title": "把复杂性先收束成一个决策问题",
+                                    "body": "继续使用你对复杂性的理解力，但每次讨论结束前，都把它收束成一个当前最需要回答的决策问题。",
+                                    "difficulty_level": "low",
+                                    "time_horizon": "this_week"
+                                },
+                                {
+                                    "bucket": "start",
+                                    "label": "开始",
+                                    "rule_id": "c_work_start_20min_16_35",
+                                    "title": "开启 20 分钟任务",
+                                    "body": "把重要但不紧急的任务拆成 20 分钟启动单元，而不是要求自己一次性完整推进。",
+                                    "difficulty_level": "low",
+                                    "time_horizon": "this_week"
+                                },
+                                {
+                                    "bucket": "stop",
+                                    "label": "停止",
+                                    "rule_id": "n_work_stop_hidden_load_60_79",
+                                    "title": "停止默默吞下多余负荷",
+                                    "body": "当你已经明显感觉到任务、关系或节奏正在耗你时，不要继续把这部分代价全放在内部处理。",
+                                    "difficulty_level": "mid",
+                                    "time_horizon": "this_week"
+                                },
+                                {
+                                    "bucket": "observe",
+                                    "label": "观察",
+                                    "rule_id": "n_work_observe_trigger_meetings_60_100",
+                                    "title": "记录最耗你的会议类型",
+                                    "body": "连续两周记录：哪些会议最容易让你提前进入高负荷，是目标模糊、责任不清，还是反复拉扯。",
+                                    "difficulty_level": "low",
+                                    "time_horizon": "two_weeks"
+                                }
+                            ]
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": [
+                                "action_rules/workplace.json"
+                            ]
+                        },
+                        "analytics": {
+                            "scenario_key": "workplace",
+                            "selected_rule_count": 4,
+                            "buckets": [
+                                "continue",
+                                "start",
+                                "stop",
+                                "observe"
+                            ]
+                        }
+                    },
+                    {
+                        "block_uid": "action_plan.matrix_scenario.relationships",
+                        "kind": "bullets",
+                        "component": "BigFiveActionMatrixScenarioBullets",
+                        "block_id": "action_matrix_scenario_relationships",
+                        "resolved_copy": {
+                            "title": "关系场景｜下一步动作",
+                            "scenario_key": "relationships",
+                            "items": [
+                                {
+                                    "bucket": "continue",
+                                    "label": "继续",
+                                    "rule_id": "n_rel_continue_name_need_before_escalation_60_100",
+                                    "title": "先命名需要，再谈对错",
+                                    "body": "继续把高体感翻译成可被理解的需要，例如我需要更清楚的时间、边界或回应，而不是直接进入谁对谁错。",
+                                    "difficulty_level": "low",
+                                    "time_horizon": "this_week"
+                                },
+                                {
+                                    "bucket": "start",
+                                    "label": "开始",
+                                    "rule_id": "e_rel_start_one_true_sentence_00_35",
+                                    "title": "先说一句真实想法",
+                                    "body": "在你准备继续保持沉默前，先说出一句真实但不必完整展开的话，让关系里有一个可以继续接住你的入口。",
+                                    "difficulty_level": "low",
+                                    "time_horizon": "this_week"
+                                },
+                                {
+                                    "bucket": "stop",
+                                    "label": "停止",
+                                    "rule_id": "c_rel_stop_wait_for_perfect_timing_00_35",
+                                    "title": "停止等待完美时机再沟通",
+                                    "body": "如果一件事已经反复消耗你，不要继续等一个完全合适的时机；先用小句子开启，而不是等到情绪累积后一次性说完。",
+                                    "difficulty_level": "mid",
+                                    "time_horizon": "this_week"
+                                },
+                                {
+                                    "bucket": "observe",
+                                    "label": "观察",
+                                    "rule_id": "n_rel_observe_discomfort_before_withdrawal_60_100",
+                                    "title": "先识别不适来源，再后退",
+                                    "body": "当你想直接抽离时，先标记这份不适来自被误解、边界被碰到，还是失控感上升。",
+                                    "difficulty_level": "low",
+                                    "time_horizon": "two_weeks"
+                                }
+                            ]
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": [
+                                "action_rules/relationships.json"
+                            ]
+                        },
+                        "analytics": {
+                            "scenario_key": "relationships",
+                            "selected_rule_count": 4,
+                            "buckets": [
+                                "continue",
+                                "start",
+                                "stop",
+                                "observe"
+                            ]
+                        }
+                    },
+                    {
+                        "block_uid": "action_plan.matrix_scenario.stress_recovery",
+                        "kind": "bullets",
+                        "component": "BigFiveActionMatrixScenarioBullets",
+                        "block_id": "action_matrix_scenario_stress_recovery",
+                        "resolved_copy": {
+                            "title": "压力恢复｜下一步动作",
+                            "scenario_key": "stress_recovery",
+                            "items": [
+                                {
+                                    "bucket": "start",
+                                    "label": "开始",
+                                    "rule_id": "n_rec_start_10min_reset_60_79",
+                                    "title": "启动 10 分钟脱离恢复",
+                                    "body": "每次明显感觉到负荷被拉高时，先物理脱离 10 分钟，不要继续一边耗一边扛。",
+                                    "difficulty_level": "low",
+                                    "time_horizon": "today"
+                                },
+                                {
+                                    "bucket": "stop",
+                                    "label": "停止",
+                                    "rule_id": "n_rec_stop_micro_stimulation_60_100",
+                                    "title": "停止边刷边恢复",
+                                    "body": "高负荷时不要一边刷消息、一边恢复；对你来说，那不是放松，而是换一种刺激继续拖住系统。",
+                                    "difficulty_level": "mid",
+                                    "time_horizon": "this_week"
+                                },
+                                {
+                                    "bucket": "observe",
+                                    "label": "观察",
+                                    "rule_id": "n_rec_observe_real_vs_predicted_cost_40_100",
+                                    "title": "比较预想代价和真实代价",
+                                    "body": "连续两周记录：你担心的坏结果是什么，真实发生的代价又是什么，帮助系统从预演里回到事实。",
+                                    "difficulty_level": "low",
+                                    "time_horizon": "two_weeks"
+                                }
+                            ]
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": [
+                                "action_rules/stress_recovery.json"
+                            ]
+                        },
+                        "analytics": {
+                            "scenario_key": "stress_recovery",
+                            "selected_rule_count": 3,
+                            "buckets": [
+                                "start",
+                                "stop",
+                                "observe"
+                            ]
+                        }
+                    },
+                    {
+                        "block_uid": "action_plan.matrix_scenario.personal_growth",
+                        "kind": "bullets",
+                        "component": "BigFiveActionMatrixScenarioBullets",
+                        "block_id": "action_matrix_scenario_personal_growth",
+                        "resolved_copy": {
+                            "title": "个人成长｜下一步动作",
+                            "scenario_key": "personal_growth",
+                            "items": [
+                                {
+                                    "bucket": "continue",
+                                    "label": "继续",
+                                    "rule_id": "o_gro_continue_meaningful_exploration_50_100",
+                                    "title": "保留有意义的探索时间",
+                                    "body": "继续保留能让你理解世界、更新经验或形成新连接的探索时间，但给它一个明确边界。",
+                                    "difficulty_level": "low",
+                                    "time_horizon": "this_month"
+                                }
+                            ]
+                        },
+                        "provenance": {
+                            "atomic_refs": [],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": [
+                                "action_rules/personal_growth.json"
+                            ]
+                        },
+                        "analytics": {
+                            "scenario_key": "personal_growth",
+                            "selected_rule_count": 1,
+                            "buckets": [
+                                "continue"
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "section_key": "methodology_and_access",
+                "status": "populated",
+                "blocks": [
+                    {
+                        "block_uid": "methodology_and_access.shared.methodology",
+                        "kind": "methodology",
+                        "component": "BigFiveMethodologyBlock",
+                        "block_id": "shared_methodology_v2",
+                        "resolved_copy": {
+                            "schema": "fap.big5.shared_methodology.v1",
+                            "title": "v2 报告引擎方法说明",
+                            "body": "本 payload 由 Big Five Report Engine v2 registry 生成；PR3B 已覆盖 30 条 facet glossary 与 22 条 facet precision anomaly rules，PR3A 的 5 条 synergy、PR2 的 O/C/E/A/N atomic 与 sentence-level modifier 继续沿用，scenario action rule 仍保持 PR1 的 N-only 范围。",
+                            "access_note": "此结构服务未来 8 section 承载位，不代表生产 AttemptReadController 已接入。"
+                        },
+                        "provenance": {
+                            "atomic_refs": [
+                                "shared/methodology.json"
+                            ],
+                            "modifier_refs": [],
+                            "synergy_refs": [],
+                            "facet_refs": [],
+                            "action_refs": []
+                        },
+                        "analytics": {
+                            "source": "shared"
+                        }
+                    }
+                ]
+            }
+        ],
+        "action_matrix": {
+            "scenarios": [
+                {
+                    "scenario_key": "workplace",
+                    "title": "工作场景",
+                    "selected_rules": {
+                        "continue": {
+                            "rule_id": "o_work_continue_frame_complexity_50_100",
+                            "scenario": "workplace",
+                            "trait_code": "O",
+                            "bucket": "continue",
+                            "scenario_tags": [
+                                "workplace"
+                            ],
+                            "difficulty_level": "low",
+                            "time_horizon": "this_week",
+                            "title": "把复杂性先收束成一个决策问题",
+                            "body": "继续使用你对复杂性的理解力，但每次讨论结束前，都把它收束成一个当前最需要回答的决策问题。",
+                            "priority_weight": 64
+                        },
+                        "start": {
+                            "rule_id": "c_work_start_20min_16_35",
+                            "scenario": "workplace",
+                            "trait_code": "C",
+                            "bucket": "start",
+                            "scenario_tags": [
+                                "workplace"
+                            ],
+                            "difficulty_level": "low",
+                            "time_horizon": "this_week",
+                            "title": "开启 20 分钟任务",
+                            "body": "把重要但不紧急的任务拆成 20 分钟启动单元，而不是要求自己一次性完整推进。",
+                            "priority_weight": 88
+                        },
+                        "stop": {
+                            "rule_id": "n_work_stop_hidden_load_60_79",
+                            "scenario": "workplace",
+                            "trait_code": "N",
+                            "bucket": "stop",
+                            "scenario_tags": [
+                                "workplace"
+                            ],
+                            "difficulty_level": "mid",
+                            "time_horizon": "this_week",
+                            "title": "停止默默吞下多余负荷",
+                            "body": "当你已经明显感觉到任务、关系或节奏正在耗你时，不要继续把这部分代价全放在内部处理。",
+                            "priority_weight": 86
+                        },
+                        "observe": {
+                            "rule_id": "n_work_observe_trigger_meetings_60_100",
+                            "scenario": "workplace",
+                            "trait_code": "N",
+                            "bucket": "observe",
+                            "scenario_tags": [
+                                "workplace"
+                            ],
+                            "difficulty_level": "low",
+                            "time_horizon": "two_weeks",
+                            "title": "记录最耗你的会议类型",
+                            "body": "连续两周记录：哪些会议最容易让你提前进入高负荷，是目标模糊、责任不清，还是反复拉扯。",
+                            "priority_weight": 78
+                        }
+                    }
+                },
+                {
+                    "scenario_key": "relationships",
+                    "title": "关系场景",
+                    "selected_rules": {
+                        "continue": {
+                            "rule_id": "n_rel_continue_name_need_before_escalation_60_100",
+                            "scenario": "relationships",
+                            "trait_code": "N",
+                            "bucket": "continue",
+                            "scenario_tags": [
+                                "relationships"
+                            ],
+                            "difficulty_level": "low",
+                            "time_horizon": "this_week",
+                            "title": "先命名需要，再谈对错",
+                            "body": "继续把高体感翻译成可被理解的需要，例如我需要更清楚的时间、边界或回应，而不是直接进入谁对谁错。",
+                            "priority_weight": 76
+                        },
+                        "start": {
+                            "rule_id": "e_rel_start_one_true_sentence_00_35",
+                            "scenario": "relationships",
+                            "trait_code": "E",
+                            "bucket": "start",
+                            "scenario_tags": [
+                                "relationships"
+                            ],
+                            "difficulty_level": "low",
+                            "time_horizon": "this_week",
+                            "title": "先说一句真实想法",
+                            "body": "在你准备继续保持沉默前，先说出一句真实但不必完整展开的话，让关系里有一个可以继续接住你的入口。",
+                            "priority_weight": 90
+                        },
+                        "stop": {
+                            "rule_id": "c_rel_stop_wait_for_perfect_timing_00_35",
+                            "scenario": "relationships",
+                            "trait_code": "C",
+                            "bucket": "stop",
+                            "scenario_tags": [
+                                "relationships"
+                            ],
+                            "difficulty_level": "mid",
+                            "time_horizon": "this_week",
+                            "title": "停止等待完美时机再沟通",
+                            "body": "如果一件事已经反复消耗你，不要继续等一个完全合适的时机；先用小句子开启，而不是等到情绪累积后一次性说完。",
+                            "priority_weight": 74
+                        },
+                        "observe": {
+                            "rule_id": "n_rel_observe_discomfort_before_withdrawal_60_100",
+                            "scenario": "relationships",
+                            "trait_code": "N",
+                            "bucket": "observe",
+                            "scenario_tags": [
+                                "relationships"
+                            ],
+                            "difficulty_level": "low",
+                            "time_horizon": "two_weeks",
+                            "title": "先识别不适来源，再后退",
+                            "body": "当你想直接抽离时，先标记这份不适来自被误解、边界被碰到，还是失控感上升。",
+                            "priority_weight": 80
+                        }
+                    }
+                },
+                {
+                    "scenario_key": "stress_recovery",
+                    "title": "压力恢复",
+                    "selected_rules": {
+                        "continue": null,
+                        "start": {
+                            "rule_id": "n_rec_start_10min_reset_60_79",
+                            "scenario": "stress_recovery",
+                            "trait_code": "N",
+                            "bucket": "start",
+                            "scenario_tags": [
+                                "stress_recovery"
+                            ],
+                            "difficulty_level": "low",
+                            "time_horizon": "today",
+                            "title": "启动 10 分钟脱离恢复",
+                            "body": "每次明显感觉到负荷被拉高时，先物理脱离 10 分钟，不要继续一边耗一边扛。",
+                            "priority_weight": 94
+                        },
+                        "stop": {
+                            "rule_id": "n_rec_stop_micro_stimulation_60_100",
+                            "scenario": "stress_recovery",
+                            "trait_code": "N",
+                            "bucket": "stop",
+                            "scenario_tags": [
+                                "stress_recovery"
+                            ],
+                            "difficulty_level": "mid",
+                            "time_horizon": "this_week",
+                            "title": "停止边刷边恢复",
+                            "body": "高负荷时不要一边刷消息、一边恢复；对你来说，那不是放松，而是换一种刺激继续拖住系统。",
+                            "priority_weight": 90
+                        },
+                        "observe": {
+                            "rule_id": "n_rec_observe_real_vs_predicted_cost_40_100",
+                            "scenario": "stress_recovery",
+                            "trait_code": "N",
+                            "bucket": "observe",
+                            "scenario_tags": [
+                                "stress_recovery"
+                            ],
+                            "difficulty_level": "low",
+                            "time_horizon": "two_weeks",
+                            "title": "比较预想代价和真实代价",
+                            "body": "连续两周记录：你担心的坏结果是什么，真实发生的代价又是什么，帮助系统从预演里回到事实。",
+                            "priority_weight": 70
+                        }
+                    }
+                },
+                {
+                    "scenario_key": "personal_growth",
+                    "title": "个人成长",
+                    "selected_rules": {
+                        "continue": {
+                            "rule_id": "o_gro_continue_meaningful_exploration_50_100",
+                            "scenario": "personal_growth",
+                            "trait_code": "O",
+                            "bucket": "continue",
+                            "scenario_tags": [
+                                "personal_growth"
+                            ],
+                            "difficulty_level": "low",
+                            "time_horizon": "this_month",
+                            "title": "保留有意义的探索时间",
+                            "body": "继续保留能让你理解世界、更新经验或形成新连接的探索时间，但给它一个明确边界。",
+                            "priority_weight": 68
+                        },
+                        "start": null,
+                        "stop": null,
+                        "observe": null
+                    }
+                }
+            ],
+            "top_priority_scenario": "stress_recovery",
+            "caps": {
+                "per_scenario_per_bucket": 1,
+                "per_scenario": 4,
+                "per_report": 12
+            }
+        },
+        "render_hints": {
+            "section_skeleton": [
+                "hero_summary",
+                "domains_overview",
+                "domain_deep_dive",
+                "facet_details",
+                "core_portrait",
+                "norms_comparison",
+                "action_plan",
+                "methodology_and_access"
+            ],
+            "registry_scope": "facet_precision_rollout_pr3b",
+            "limited_rollouts": {
+                "synergies": [
+                    "n_high_x_e_low",
+                    "o_high_x_c_low",
+                    "o_high_x_n_high",
+                    "c_high_x_n_high",
+                    "e_high_x_a_low"
+                ],
+                "facet_glossary_entries": 30,
+                "facet_precision_traits": [
+                    "O",
+                    "C",
+                    "E",
+                    "A",
+                    "N"
+                ],
+                "facet_precision_rules": 22,
+                "facet_precision_caps": {
+                    "per_domain": 2,
+                    "per_report": 6,
+                    "standout_render_cards": 3
+                },
+                "action_rule_scope": "scenario_bound_action_matrix_pr3c",
+                "action_rule_scenarios": [
+                    "workplace",
+                    "relationships",
+                    "stress_recovery",
+                    "personal_growth"
+                ],
+                "action_rule_count": 28,
+                "action_matrix_caps": {
+                    "per_scenario_per_bucket": 1,
+                    "per_scenario": 4,
+                    "per_report": 12
+                }
+            }
+        }
+    }
+}
