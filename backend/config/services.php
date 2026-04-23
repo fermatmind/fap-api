@@ -139,11 +139,21 @@ return [
             static fn ($locale) => trim((string) $locale),
             explode(',', (string) env('CMS_TRANSLATION_TARGET_LOCALES', env('ARTICLE_TRANSLATION_TARGET_LOCALES', 'en')))
         ))),
+        'openai' => [
+            'base_url' => rtrim((string) env('CMS_TRANSLATION_OPENAI_BASE_URL', env('OPENAI_BASE_URL', 'https://api.openai.com/v1')), '/'),
+            'api_key' => env('CMS_TRANSLATION_OPENAI_API_KEY', env('OPENAI_API_KEY', '')),
+            'model' => trim((string) env('CMS_TRANSLATION_OPENAI_MODEL', env('ARTICLE_TRANSLATION_OPENAI_MODEL', 'gpt-4.1'))),
+            'connect_timeout_seconds' => (int) env('CMS_TRANSLATION_OPENAI_CONNECT_TIMEOUT', 5),
+            'request_timeout_seconds' => (int) env('CMS_TRANSLATION_OPENAI_REQUEST_TIMEOUT', 60),
+            'max_retries' => (int) env('CMS_TRANSLATION_OPENAI_MAX_RETRIES', 1),
+            'retry_sleep_milliseconds' => (int) env('CMS_TRANSLATION_OPENAI_RETRY_SLEEP_MS', 250),
+            'max_output_tokens' => (int) env('CMS_TRANSLATION_OPENAI_MAX_OUTPUT_TOKENS', 5000),
+        ],
         'providers' => [
             'article' => \App\Services\Cms\ArticleCmsMachineTranslationProvider::class,
-            'support_article' => env('CMS_TRANSLATION_PROVIDER_SUPPORT_ARTICLE', ''),
-            'interpretation_guide' => env('CMS_TRANSLATION_PROVIDER_INTERPRETATION_GUIDE', ''),
-            'content_page' => env('CMS_TRANSLATION_PROVIDER_CONTENT_PAGE', ''),
+            'support_article' => env('CMS_TRANSLATION_PROVIDER_SUPPORT_ARTICLE', \App\Services\Cms\OpenAiCmsMachineTranslationProvider::class),
+            'interpretation_guide' => env('CMS_TRANSLATION_PROVIDER_INTERPRETATION_GUIDE', \App\Services\Cms\OpenAiCmsMachineTranslationProvider::class),
+            'content_page' => env('CMS_TRANSLATION_PROVIDER_CONTENT_PAGE', \App\Services\Cms\OpenAiCmsMachineTranslationProvider::class),
         ],
     ],
 
