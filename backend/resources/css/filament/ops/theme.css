@@ -813,18 +813,47 @@
         gap: 0.65rem;
     }
 
+    .ops-topbar-start {
+        display: inline-flex;
+        align-items: center;
+        min-width: 0;
+        gap: 1rem;
+    }
+
     .ops-topbar-controls {
         display: inline-flex;
         align-items: center;
-        gap: 0.75rem;
-        padding-inline-start: 0.9rem;
-        margin-inline-start: 0.15rem;
+        gap: 0.55rem;
+        padding-inline-start: 0.75rem;
+        margin-inline-start: 0.05rem;
         border-inline-start: 1px solid rgba(209, 213, 219, 0.85);
     }
 
     .ops-topbar-controls__item {
         display: inline-flex;
         align-items: center;
+    }
+
+    .ops-environment-badge {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.25rem;
+        gap: 0.45rem;
+        border-radius: 999px;
+        background: rgba(240, 253, 244, 0.82);
+        color: #166534;
+        padding: 0 0.75rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        box-shadow: inset 0 0 0 1px rgba(187, 247, 208, 0.9);
+    }
+
+    .ops-environment-badge__dot {
+        height: 0.45rem;
+        width: 0.45rem;
+        border-radius: 999px;
+        background: #16a34a;
+        box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.12);
     }
 
     .ops-topbar-chip {
@@ -879,13 +908,172 @@
         padding-inline: 0.8rem;
     }
 
+    .ops-org-switcher {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.5rem;
+        max-width: 18rem;
+        gap: 0.55rem;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--ops-text-primary);
+        padding: 0.3rem 0.55rem 0.3rem 0.45rem;
+        box-shadow: inset 0 0 0 1px rgba(209, 213, 219, 0.92);
+        transition: background-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .ops-org-switcher:hover {
+        background: #fff;
+        box-shadow: inset 0 0 0 1px rgba(var(--primary-200), 1);
+    }
+
+    .ops-org-switcher__icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        height: 1.85rem;
+        width: 1.85rem;
+        border-radius: 10px;
+        background: rgba(var(--primary-50), 0.92);
+        color: rgb(var(--primary-700));
+    }
+
+    .ops-org-switcher__body {
+        display: grid;
+        min-width: 0;
+        gap: 0.02rem;
+    }
+
+    .ops-org-switcher__label {
+        color: var(--ops-text-tertiary);
+        font-size: 0.625rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        line-height: 1;
+        text-transform: uppercase;
+    }
+
+    .ops-org-switcher__value {
+        max-width: 10.5rem;
+        overflow: hidden;
+        color: var(--ops-text-primary);
+        font-size: 0.8125rem;
+        font-weight: 700;
+        line-height: 1.2;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .ops-org-switcher__chevron {
+        flex-shrink: 0;
+        color: var(--ops-text-tertiary);
+    }
+
+    .ops-org-switcher-menu {
+        display: grid;
+        min-width: 14rem;
+        gap: 0.65rem;
+        padding: 0.1rem 0;
+    }
+
+    .ops-org-switcher-menu__name {
+        color: var(--ops-text-primary);
+        font-size: 0.875rem;
+        font-weight: 700;
+    }
+
+    .ops-org-switcher-menu__facts {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.65rem;
+    }
+
+    .ops-org-switcher-menu__facts dt {
+        color: var(--ops-text-tertiary);
+        font-size: 0.65rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .ops-org-switcher-menu__facts dd {
+        margin-top: 0.15rem;
+        color: var(--ops-text-primary);
+        font-size: 0.8125rem;
+        font-weight: 700;
+    }
+
+    .ops-language-switcher {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.25rem;
+        border-radius: 999px;
+        background: rgba(243, 244, 246, 0.9);
+        padding: 0.18rem;
+        box-shadow: inset 0 0 0 1px rgba(209, 213, 219, 0.9);
+    }
+
+    .ops-language-switcher__option {
+        min-height: 1.85rem;
+        border-radius: 999px;
+        color: var(--ops-text-secondary);
+        padding: 0 0.65rem;
+        font-size: 0.75rem;
+        font-weight: 800;
+        transition: background-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
+    }
+
+    .ops-language-switcher__option:not(.ops-language-switcher__option--active):hover {
+        color: var(--ops-text-primary);
+    }
+
+    .ops-language-switcher__option--active {
+        background: #fff;
+        color: rgb(var(--primary-700));
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08), inset 0 0 0 1px rgba(209, 213, 219, 0.86);
+    }
+
     .fi-body.fi-panel-ops .fi-global-search {
-        min-width: min(100%, 19rem);
+        min-width: min(30vw, 24rem);
+    }
+
+    .fi-body.fi-panel-ops .fi-global-search > .sm\:relative {
+        width: 100%;
     }
 
     .fi-body.fi-panel-ops .fi-global-search .fi-input-wrp {
-        min-height: 2.75rem;
-        background: rgba(255, 255, 255, 0.92);
+        min-height: 2.5rem;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: inset 0 0 0 1px rgba(209, 213, 219, 0.92);
+        transition: background-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .fi-body.fi-panel-ops .fi-global-search .fi-input-wrp:hover,
+    .fi-body.fi-panel-ops .fi-global-search .fi-input-wrp:focus-within {
+        background: #fff;
+        box-shadow: inset 0 0 0 1px rgba(var(--primary-200), 1), 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .fi-body.fi-panel-ops .fi-global-search .fi-input-wrp-prefix {
+        color: rgb(var(--primary-600));
+    }
+
+    .fi-body.fi-panel-ops .fi-global-search .fi-input {
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+
+    .fi-body.fi-panel-ops .fi-global-search .fi-input-wrp-suffix {
+        border-radius: 8px;
+        background: #f3f4f6;
+        color: var(--ops-text-tertiary);
+        padding: 0.18rem 0.45rem;
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        box-shadow: inset 0 0 0 1px rgba(209, 213, 219, 0.92);
     }
 
     .fi-body.fi-panel-ops .fi-global-search-results-ctn {
@@ -912,13 +1100,13 @@
 
     .ops-sidebar-footer {
         display: grid;
-        gap: 0.45rem;
+        gap: 0.35rem;
         margin: 0 1.25rem 1.25rem;
-        padding: 1rem;
-        background: rgba(255, 255, 255, 0.92);
-        border: 1px solid rgba(229, 231, 235, 0.92);
-        border-radius: calc(var(--ops-radius-card) + 2px);
-        box-shadow: var(--ops-shadow-surface);
+        padding: 0.85rem 0.95rem;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(229, 231, 235, 0.88);
+        border-radius: 14px;
+        box-shadow: none;
     }
 
     .ops-sidebar-footer__eyebrow {
@@ -2228,10 +2416,67 @@
         padding: 2rem 1.5rem;
     }
 
+    .ops-topbar-start {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .ops-environment-badge,
+    .ops-org-switcher__label,
+    .ops-org-switcher__chevron {
+        display: none;
+    }
+
+    .fi-body.fi-panel-ops .fi-global-search {
+        min-width: 2.5rem;
+        width: 2.5rem;
+    }
+
+    .fi-body.fi-panel-ops .fi-global-search .fi-input,
+    .fi-body.fi-panel-ops .fi-global-search .fi-input-wrp-suffix {
+        display: none;
+    }
+
+    .fi-body.fi-panel-ops .fi-global-search .fi-input-wrp {
+        justify-content: center;
+        padding-inline: 0;
+    }
+
     .ops-topbar-controls {
+        gap: 0.35rem;
         padding-inline-start: 0;
         margin-inline-start: 0;
         border-inline-start: none;
+    }
+
+    .ops-topbar-controls__item--environment {
+        display: none;
+    }
+
+    .ops-org-switcher {
+        max-width: 8.75rem;
+        min-height: 2.25rem;
+        padding: 0.2rem 0.45rem 0.2rem 0.25rem;
+    }
+
+    .ops-org-switcher__icon {
+        height: 1.75rem;
+        width: 1.75rem;
+    }
+
+    .ops-org-switcher__value {
+        max-width: 5.75rem;
+        font-size: 0.75rem;
+    }
+
+    .ops-language-switcher {
+        min-height: 2.15rem;
+    }
+
+    .ops-language-switcher__option {
+        min-height: 1.75rem;
+        padding: 0 0.5rem;
+        font-size: 0.7rem;
     }
 
     .ops-topbar-chip {

@@ -113,7 +113,7 @@ class ContentWorkspacePage extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.content_overview');
+        return __('ops.group.content');
     }
 
     public static function getNavigationLabel(): string

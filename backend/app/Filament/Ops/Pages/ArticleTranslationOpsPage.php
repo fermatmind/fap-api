@@ -73,7 +73,7 @@ class ArticleTranslationOpsPage extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.group.editorial');
+        return __('ops.group.translation');
     }
 
     public static function getNavigationLabel(): string
