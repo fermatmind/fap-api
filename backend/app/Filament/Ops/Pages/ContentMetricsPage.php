@@ -22,9 +22,9 @@ class ContentMetricsPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-chart-bar-square';
 
-    protected static ?string $navigationGroup = 'Content Overview';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Content Metrics';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 4;
 
@@ -51,7 +51,7 @@ class ContentMetricsPage extends Page
     public function archiveStale(string $type, ContentLifecycleService $service, AuditLogger $audit): void
     {
         if (! ContentAccess::canRelease()) {
-            throw new AuthorizationException('You do not have permission to archive stale content.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.archive_stale_forbidden'));
         }
 
         $result = $service->applyToStaleDrafts(
@@ -73,8 +73,8 @@ class ContentMetricsPage extends Page
         );
 
         Notification::make()
-            ->title('Stale drafts archived')
-            ->body((string) ($result['processed_count'] ?? 0).' record(s) archived from the stale queue.')
+            ->title(__('ops.custom_pages.content_metrics.notifications.stale_drafts_archived'))
+            ->body(__('ops.custom_pages.content_metrics.notifications.stale_drafts_archived_body', ['count' => (int) ($result['processed_count'] ?? 0)]))
             ->success()
             ->send();
 

@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 
 final class ReportSnapshotExplorerSupport
@@ -689,14 +690,12 @@ final class ReportSnapshotExplorerSupport
                 $this->field('updated_at', $this->formatTimestamp($snapshotRow->updated_at ?? $snapshot->updated_at ?? null)),
                 $this->field('last_activity_at', $lastActivityAt),
             ],
-            'notes' => [
-                'Raw report payloads stay hidden by default.',
-            ],
+            'notes' => [__('ops.custom_pages.reports.detail.notes.raw_report_payloads_hidden')],
         ];
 
-        $pdfDeliveryNotes = ['Claim/resend clues are read-only here. This page does not trigger delivery writes.'];
+        $pdfDeliveryNotes = [__('ops.custom_pages.reports.detail.notes.delivery_read_only')];
         if ($order === null) {
-            $pdfDeliveryNotes[] = 'No linked order row was found, so claim/resend eligibility may remain unavailable.';
+            $pdfDeliveryNotes[] = __('ops.custom_pages.reports.detail.notes.no_linked_order');
         }
 
         $pdfDeliverySummary = [
@@ -726,9 +725,9 @@ final class ReportSnapshotExplorerSupport
             'notes' => $pdfDeliveryNotes,
         ];
 
-        $reportJobNotes = ['Report jobs stay auxiliary. report_snapshots remain the persisted delivery object read by access flows.'];
+        $reportJobNotes = [__('ops.custom_pages.reports.detail.notes.report_jobs_auxiliary')];
         if (filled($reportJob->last_error ?? null)) {
-            $reportJobNotes[] = 'Only a compact report job error summary is shown here.';
+            $reportJobNotes[] = __('ops.custom_pages.reports.detail.notes.compact_report_job_error');
         }
 
         $reportJobSummary = [
@@ -745,9 +744,9 @@ final class ReportSnapshotExplorerSupport
             'notes' => $reportJobNotes,
         ];
 
-        $attemptNotes = ['Attempt linkage stays cross-org and read-only in ops/admin context.'];
+        $attemptNotes = [__('ops.custom_pages.reports.detail.notes.attempt_read_only')];
         if ($attempt === null) {
-            $attemptNotes[] = 'Attempt row is missing for this snapshot. attempt_id search remains available.';
+            $attemptNotes[] = __('ops.custom_pages.reports.detail.notes.attempt_missing');
         }
 
         $attemptSummary = [
@@ -768,9 +767,9 @@ final class ReportSnapshotExplorerSupport
             'notes' => $attemptNotes,
         ];
 
-        $resultNotes = ['Raw result payloads stay hidden. This section only shows linkage and compact timing/type breadcrumbs.'];
+        $resultNotes = [__('ops.custom_pages.reports.detail.notes.raw_result_payloads_hidden')];
         if ($result === null) {
-            $resultNotes[] = 'No result row is linked to this snapshot yet.';
+            $resultNotes[] = __('ops.custom_pages.reports.detail.notes.result_missing');
         }
 
         $resultSummary = [
@@ -785,11 +784,11 @@ final class ReportSnapshotExplorerSupport
         ];
 
         $commerceNotes = [
-            'Unlock truth is derived from benefit_grants first, not from report_jobs or order status alone.',
-            'Raw payment payloads and forensics stay hidden.',
+            __('ops.custom_pages.reports.detail.notes.unlock_truth_source'),
+            __('ops.custom_pages.reports.detail.notes.payment_payloads_hidden'),
         ];
         if ($order === null) {
-            $commerceNotes[] = 'No linked order row was found for this snapshot chain.';
+            $commerceNotes[] = __('ops.custom_pages.reports.detail.notes.no_order_for_chain');
         }
 
         $commerceSummary = [
@@ -810,9 +809,9 @@ final class ReportSnapshotExplorerSupport
             'notes' => $commerceNotes,
         ];
 
-        $shareNotes = ['Share/access traces stay summarized only. Raw events and raw delivery meta stay hidden.'];
+        $shareNotes = [__('ops.custom_pages.reports.detail.notes.share_access_summarized')];
         if ($shareId === '') {
-            $shareNotes[] = 'No share row or attribution share_id was found for this snapshot yet.';
+            $shareNotes[] = __('ops.custom_pages.reports.detail.notes.share_missing');
         }
 
         $shareAccessSummary = [
@@ -861,7 +860,7 @@ final class ReportSnapshotExplorerSupport
                     $headline['unlock']['label'] === 'paid_pending' ? 'warning' : 'success'
                 ),
             ],
-            'notes' => ['These diagnostics are explicit v1 support rules, not a remediation console or analytics read model.'],
+            'notes' => [__('ops.custom_pages.reports.detail.notes.exception_rules')],
         ];
 
         return [
@@ -1305,7 +1304,7 @@ final class ReportSnapshotExplorerSupport
         if ($base !== '') {
             if ($orderNo !== null && $orderNo !== '') {
                 $links[] = [
-                    'label' => 'Order page',
+                    'label' => __('ops.custom_pages.reports.detail.links.order_page'),
                     'url' => $base.'/'.$localeSegment.'/orders/'.urlencode($orderNo),
                     'kind' => 'frontend',
                 ];
@@ -1313,12 +1312,12 @@ final class ReportSnapshotExplorerSupport
 
             if ($attemptId !== '') {
                 $links[] = [
-                    'label' => 'Result page',
+                    'label' => __('ops.custom_pages.reports.detail.links.result_page'),
                     'url' => $base.'/'.$localeSegment.'/result/'.urlencode($attemptId),
                     'kind' => 'frontend',
                 ];
                 $links[] = [
-                    'label' => 'Report page',
+                    'label' => __('ops.custom_pages.reports.detail.links.report_page'),
                     'url' => $base.'/'.$localeSegment.'/attempts/'.urlencode($attemptId).'/report',
                     'kind' => 'frontend',
                 ];
@@ -1326,7 +1325,7 @@ final class ReportSnapshotExplorerSupport
 
             if ($shareId !== null && $shareId !== '') {
                 $links[] = [
-                    'label' => 'Share page',
+                    'label' => __('ops.custom_pages.reports.detail.links.share_page'),
                     'url' => $base.'/'.$localeSegment.'/share/'.urlencode($shareId),
                     'kind' => 'frontend',
                 ];
@@ -1335,7 +1334,7 @@ final class ReportSnapshotExplorerSupport
 
         if ($pdfEndpoint !== null && $pdfEndpoint !== '') {
             $links[] = [
-                'label' => 'PDF endpoint',
+                'label' => __('ops.custom_pages.reports.detail.links.pdf_endpoint'),
                 'url' => $pdfEndpoint,
                 'kind' => 'frontend',
             ];
@@ -1343,7 +1342,7 @@ final class ReportSnapshotExplorerSupport
 
         if ($attemptId !== '') {
             $links[] = [
-                'label' => 'Attempt Explorer',
+                'label' => __('ops.custom_pages.reports.detail.links.attempt_explorer'),
                 'url' => AttemptResource::getUrl('view', ['record' => $attemptId]),
                 'kind' => 'ops',
             ];
@@ -1351,7 +1350,7 @@ final class ReportSnapshotExplorerSupport
 
         if ($resultId !== null && $resultId !== '') {
             $links[] = [
-                'label' => 'Result diagnostics',
+                'label' => __('ops.custom_pages.reports.detail.links.result_diagnostics'),
                 'url' => ResultResource::getUrl('view', ['record' => $resultId]),
                 'kind' => 'ops',
             ];
@@ -1359,14 +1358,14 @@ final class ReportSnapshotExplorerSupport
 
         if ($orderId !== null && $orderId !== '') {
             $links[] = [
-                'label' => 'Order diagnostics',
+                'label' => __('ops.custom_pages.reports.detail.links.order_diagnostics'),
                 'url' => OrderResource::getUrl('view', ['record' => $orderId]),
                 'kind' => 'ops',
             ];
         }
 
         $links[] = [
-            'label' => 'Order Lookup',
+            'label' => __('ops.custom_pages.reports.detail.links.order_lookup'),
             'url' => '/ops/order-lookup',
             'kind' => 'ops',
         ];
@@ -1490,7 +1489,7 @@ final class ReportSnapshotExplorerSupport
     private function field(string $label, string $value, ?string $hint = null): array
     {
         return [
-            'label' => $label,
+            'label' => $this->displayFieldLabel($label),
             'value' => $value !== '' ? $value : '-',
             'hint' => $hint,
             'kind' => 'text',
@@ -1504,12 +1503,32 @@ final class ReportSnapshotExplorerSupport
     private function pillField(string $label, string $value, string $state, ?string $hint = null): array
     {
         return [
-            'label' => $label,
-            'value' => $value !== '' ? $value : '-',
+            'label' => $this->displayFieldLabel($label),
+            'value' => $this->displayStatusLabel($value),
             'hint' => $hint,
             'kind' => 'pill',
             'state' => $state,
         ];
+    }
+
+    public function displayStatusLabel(string $value): string
+    {
+        $value = trim($value);
+        if ($value === '' || $value === '-') {
+            return '-';
+        }
+
+        return $this->translated('ops.custom_pages.reports.statuses.'.$value, $value);
+    }
+
+    private function displayFieldLabel(string $label): string
+    {
+        return $this->translated('ops.custom_pages.reports.fields.'.$label, $label);
+    }
+
+    private function translated(string $key, string $fallback): string
+    {
+        return Lang::has($key) ? (string) __($key) : $fallback;
     }
 
     private function stringOrDash(mixed $value): string

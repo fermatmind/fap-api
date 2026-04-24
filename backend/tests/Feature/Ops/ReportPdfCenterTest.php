@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Ops;
 
 use App\Filament\Ops\Resources\ReportSnapshotResource\Pages\ListReportSnapshots;
+use App\Http\Middleware\SetOpsLocale;
 use App\Models\AdminUser;
 use App\Models\Organization;
 use App\Models\Permission;
@@ -78,9 +79,9 @@ final class ReportPdfCenterTest extends TestCase
         $selectedOrg = $this->createOrganization('Cross Org Session');
         $chain = $this->seedDiagnosticChain(orgId: 72, orderNo: 'ord_report_diag_001');
 
-        $response = $this->withSession($this->opsSession($admin, $selectedOrg))
+        $response = $this->withSession($this->opsSession($admin, $selectedOrg, 'en'))
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
-            ->get('/ops/reports/'.$chain['attempt_id']);
+            ->get('/ops/reports/'.$chain['attempt_id'].'?locale=en');
 
         $response
             ->assertOk()
@@ -91,8 +92,8 @@ final class ReportPdfCenterTest extends TestCase
             ->assertSee('Result Linkage')
             ->assertSee('Commerce / Unlock Linkage')
             ->assertSee('Share / Access Linkage + Exception Diagnostics')
-            ->assertSee('unlock: unlocked')
-            ->assertSee('snapshot: ready')
+            ->assertSee('unlock: Unlocked')
+            ->assertSee('snapshot: Ready')
             ->assertSee((string) $chain['order_no'])
             ->assertSee((string) $chain['attempt_id'])
             ->assertSee((string) $chain['share_id'])
@@ -146,17 +147,17 @@ final class ReportPdfCenterTest extends TestCase
         $selectedOrg = $this->createOrganization('Unlock Truth Org');
         $chain = $this->seedDiagnosticChain(orgId: 91, orderNo: 'ord_unlock_truth_001');
 
-        $response = $this->withSession($this->opsSession($admin, $selectedOrg))
+        $response = $this->withSession($this->opsSession($admin, $selectedOrg, 'en'))
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
-            ->get('/ops/reports/'.$chain['attempt_id']);
+            ->get('/ops/reports/'.$chain['attempt_id'].'?locale=en');
 
         $response
             ->assertOk()
             ->assertSee('Unlock truth is derived from benefit_grants first, not from report_jobs or order status alone.')
             ->assertSee('Report jobs stay auxiliary. report_snapshots remain the persisted delivery object read by access flows.')
-            ->assertSee('active_benefit_grant')
-            ->assertSee('unlocked')
-            ->assertSee('succeeded');
+            ->assertSee('Active benefit grant')
+            ->assertSee('Unlocked')
+            ->assertSee('Succeeded');
     }
 
     private function createOrganization(string $name): Organization
@@ -203,14 +204,21 @@ final class ReportPdfCenterTest extends TestCase
     }
 
     /**
-     * @return array{ops_org_id:int,ops_admin_totp_verified_user_id:int}
+     * @return array{ops_org_id:int,ops_admin_totp_verified_user_id:int,ops_locale?:string,ops_locale_explicit?:bool}
      */
-    private function opsSession(AdminUser $admin, Organization $selectedOrg): array
+    private function opsSession(AdminUser $admin, Organization $selectedOrg, ?string $locale = null): array
     {
-        return [
+        $session = [
             'ops_org_id' => (int) $selectedOrg->id,
             'ops_admin_totp_verified_user_id' => (int) $admin->id,
         ];
+
+        if ($locale !== null) {
+            $session[SetOpsLocale::SESSION_KEY] = $locale;
+            $session[SetOpsLocale::EXPLICIT_SESSION_KEY] = true;
+        }
+
+        return $session;
     }
 
     /**

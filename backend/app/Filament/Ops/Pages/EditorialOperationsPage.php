@@ -18,9 +18,9 @@ class EditorialOperationsPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
 
-    protected static ?string $navigationGroup = 'Editorial';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Editorial Operations';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 1;
 

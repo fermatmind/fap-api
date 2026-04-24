@@ -22,9 +22,9 @@ class ContentReleasePage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-rocket-launch';
 
-    protected static ?string $navigationGroup = 'Content Release';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Content Release';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 1;
 
@@ -78,18 +78,18 @@ class ContentReleasePage extends Page
     public function releaseItem(string $type, int $id): void
     {
         if (! ContentAccess::canRelease()) {
-            throw new AuthorizationException('You do not have permission to release content.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.release_content_forbidden'));
         }
 
         $record = match ($type) {
             'article' => Article::query()->whereIn('org_id', $this->currentOrgIds())->findOrFail($id),
             'guide' => CareerGuide::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
             'job' => CareerJob::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
-            default => throw new AuthorizationException('Unsupported content type.'),
+            default => throw new AuthorizationException(__('ops.custom_pages.common.errors.unsupported_content_type')),
         };
 
         if ($this->reviewState($type, $record) !== EditorialReviewAudit::STATE_APPROVED) {
-            throw new AuthorizationException('This record must be approved in editorial review before it can be published.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.must_be_approved_before_publish'));
         }
 
         match ($type) {

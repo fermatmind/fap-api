@@ -23,9 +23,9 @@ class EditorialReviewPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
 
-    protected static ?string $navigationGroup = 'Content Release';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Editorial Review';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 1;
 
@@ -74,7 +74,7 @@ class EditorialReviewPage extends Page
     public function assignOwnerItem(string $type, int $id): void
     {
         if (! ContentAccess::canAssignOwner()) {
-            throw new AuthorizationException('You do not have permission to assign an owner.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.assign_owner_forbidden'));
         }
 
         $record = $this->resolveRecord($type, $id);
@@ -82,13 +82,13 @@ class EditorialReviewPage extends Page
         $ownerAdminId = (int) $selection;
 
         if ($ownerAdminId <= 0) {
-            throw new AuthorizationException('Select an owner before saving the assignment.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.select_owner'));
         }
 
         EditorialReviewAudit::assignOwner($ownerAdminId, $type, $record);
 
         Notification::make()
-            ->title('Owner assigned')
+            ->title(__('ops.custom_pages.editorial_review.notifications.owner_assigned'))
             ->success()
             ->send();
 
@@ -98,7 +98,7 @@ class EditorialReviewPage extends Page
     public function assignReviewerItem(string $type, int $id): void
     {
         if (! ContentAccess::canAssignReviewer()) {
-            throw new AuthorizationException('You do not have permission to assign a reviewer.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.assign_reviewer_forbidden'));
         }
 
         $record = $this->resolveRecord($type, $id);
@@ -106,13 +106,13 @@ class EditorialReviewPage extends Page
         $reviewerAdminId = (int) $selection;
 
         if ($reviewerAdminId <= 0) {
-            throw new AuthorizationException('Select a reviewer before saving the assignment.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.select_reviewer'));
         }
 
         EditorialReviewAudit::assignReviewer($reviewerAdminId, $type, $record);
 
         Notification::make()
-            ->title('Reviewer assigned')
+            ->title(__('ops.custom_pages.editorial_review.notifications.reviewer_assigned'))
             ->success()
             ->send();
 
@@ -126,21 +126,21 @@ class EditorialReviewPage extends Page
         $snapshot = EditorialReviewAudit::latestState($type, $record);
 
         if ($missing !== []) {
-            throw new AuthorizationException('Fix the checklist gaps before submitting for review.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.fix_checklist_before_submit'));
         }
 
         if ((int) ($snapshot['owner_admin_user_id'] ?? 0) <= 0 || (int) ($snapshot['reviewer_admin_user_id'] ?? 0) <= 0) {
-            throw new AuthorizationException('Assign both an owner and a reviewer before submitting for review.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.assign_owner_reviewer_before_submit'));
         }
 
         if (! $this->canSubmitForReview($snapshot)) {
-            throw new AuthorizationException('You do not have permission to submit this record for review.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.submit_review_forbidden'));
         }
 
         EditorialReviewAudit::submit($type, $record);
 
         Notification::make()
-            ->title('Sent to review')
+            ->title(__('ops.custom_pages.editorial_review.notifications.sent_to_review'))
             ->success()
             ->send();
 
@@ -154,17 +154,17 @@ class EditorialReviewPage extends Page
         $snapshot = EditorialReviewAudit::latestState($type, $record);
 
         if ($missing !== []) {
-            throw new AuthorizationException('You cannot approve a record with review checklist gaps.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.approve_with_checklist_gaps'));
         }
 
         if (! $this->canDecideReview($snapshot)) {
-            throw new AuthorizationException('You are not the assigned reviewer for this record.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.not_assigned_reviewer'));
         }
 
         EditorialReviewAudit::mark(EditorialReviewAudit::STATE_APPROVED, $type, $record);
 
         Notification::make()
-            ->title('Editorial review approved')
+            ->title(__('ops.custom_pages.editorial_review.notifications.approved'))
             ->success()
             ->send();
 
@@ -177,13 +177,13 @@ class EditorialReviewPage extends Page
         $snapshot = EditorialReviewAudit::latestState($type, $record);
 
         if (! $this->canDecideReview($snapshot)) {
-            throw new AuthorizationException('You are not the assigned reviewer for this record.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.not_assigned_reviewer'));
         }
 
         EditorialReviewAudit::mark(EditorialReviewAudit::STATE_CHANGES_REQUESTED, $type, $record);
 
         Notification::make()
-            ->title('Changes requested')
+            ->title(__('ops.custom_pages.editorial_review.notifications.changes_requested'))
             ->warning()
             ->send();
 
@@ -196,13 +196,13 @@ class EditorialReviewPage extends Page
         $snapshot = EditorialReviewAudit::latestState($type, $record);
 
         if (! $this->canDecideReview($snapshot)) {
-            throw new AuthorizationException('You are not the assigned reviewer for this record.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.not_assigned_reviewer'));
         }
 
         EditorialReviewAudit::mark(EditorialReviewAudit::STATE_REJECTED, $type, $record);
 
         Notification::make()
-            ->title('Editorial review rejected')
+            ->title(__('ops.custom_pages.editorial_review.notifications.rejected'))
             ->danger()
             ->send();
 
@@ -491,14 +491,14 @@ class EditorialReviewPage extends Page
     private function resolveRecord(string $type, int $id): object
     {
         if (! ContentAccess::canOpenWorkflow()) {
-            throw new AuthorizationException('You do not have permission to review content.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.review_content_forbidden'));
         }
 
         return match ($type) {
             'article' => Article::query()->whereIn('org_id', $this->currentOrgIds())->findOrFail($id),
             'guide' => CareerGuide::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
             'job' => CareerJob::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
-            default => throw new AuthorizationException('Unsupported review type.'),
+            default => throw new AuthorizationException(__('ops.custom_pages.common.errors.unsupported_review_type')),
         };
     }
 

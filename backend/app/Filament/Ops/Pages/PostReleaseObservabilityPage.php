@@ -18,9 +18,9 @@ class PostReleaseObservabilityPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-signal';
 
-    protected static ?string $navigationGroup = 'Content Release';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Post-Release Observability';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 2;
 

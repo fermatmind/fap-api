@@ -20,9 +20,9 @@ class SeoOperationsPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
 
-    protected static ?string $navigationGroup = 'Content Overview';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'SEO Operations';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 5;
 
@@ -76,12 +76,12 @@ class SeoOperationsPage extends Page
     public function applyBulkAction(SeoOperationsService $service, AuditLogger $audit): void
     {
         if (! ContentAccess::canWrite()) {
-            throw new AuthorizationException('You do not have permission to operate SEO actions.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.seo_action_forbidden'));
         }
 
         if ($this->selectedTargets === []) {
             Notification::make()
-                ->title('Select at least one SEO issue row')
+                ->title(__('ops.custom_pages.seo_operations.notifications.select_issue'))
                 ->warning()
                 ->send();
 
@@ -110,8 +110,8 @@ class SeoOperationsPage extends Page
         $this->refreshDashboard($service);
 
         Notification::make()
-            ->title('SEO operations applied')
-            ->body('Updated '.$updatedCount.' records.')
+            ->title(__('ops.custom_pages.seo_operations.notifications.applied'))
+            ->body(__('ops.custom_pages.seo_operations.notifications.applied_body', ['count' => $updatedCount]))
             ->success()
             ->send();
     }

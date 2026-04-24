@@ -8,6 +8,7 @@ use App\Http\Middleware\SetOpsLocale;
 use App\Models\AdminUser;
 use App\Models\Organization;
 use App\Models\Permission;
+use App\Models\ReportSnapshot;
 use App\Models\Role;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
@@ -81,6 +82,53 @@ final class OpsCustomPagesI18nContractTest extends TestCase
                 $enHtml,
                 "English Ops page [{$path}] leaked Chinese UI phrase [{$phrase}].",
             );
+        }
+    }
+
+    public function test_report_detail_subpage_uses_explicit_locale_copy(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_OWNER,
+            PermissionNames::ADMIN_OPS_READ,
+            PermissionNames::ADMIN_MENU_SUPPORT,
+        ]);
+        $org = $this->createOrganization('Ops Report Detail I18n Org');
+        $snapshot = ReportSnapshot::query()->create([
+            'org_id' => (int) $org->id,
+            'attempt_id' => 'attempt_ops_i18n_detail',
+            'order_no' => 'ord_ops_i18n_detail',
+            'scale_code' => 'MBTI',
+            'pack_id' => 'pack_i18n',
+            'dir_version' => 'dir_i18n',
+            'scoring_spec_version' => 'scoring_i18n',
+            'report_engine_version' => 'engine_i18n',
+            'snapshot_version' => 'snapshot_i18n',
+            'report_json' => ['variant' => 'compact'],
+            'report_free_json' => [],
+            'report_full_json' => [],
+            'status' => 'ready',
+            'last_error' => null,
+        ]);
+        $path = '/ops/reports/'.$snapshot->getKey();
+
+        $zhHtml = $this->withSession($this->opsSession($admin, $org, 'zh_CN'))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get($path.'?locale=zh-CN')
+            ->assertOk()
+            ->content();
+
+        foreach (['Support diagnostic', 'Snapshot Summary', 'Report Job / Generation Status', 'Raw report payloads stay hidden'] as $phrase) {
+            $this->assertStringNotContainsString($phrase, $zhHtml);
+        }
+
+        $enHtml = $this->withSession($this->opsSession($admin, $org, 'en'))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get($path.'?locale=en')
+            ->assertOk()
+            ->content();
+
+        foreach (['支持诊断', '快照摘要', '报告任务 / 生成状态', '默认隐藏原始报告载荷'] as $phrase) {
+            $this->assertStringNotContainsString($phrase, $enHtml);
         }
     }
 
