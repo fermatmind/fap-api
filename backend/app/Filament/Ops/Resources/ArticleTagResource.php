@@ -6,6 +6,7 @@ namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\ArticleTagResource\Pages;
 use App\Filament\Ops\Support\ContentAccess;
+use App\Filament\Ops\Support\OpsTable;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\ArticleTag;
 use App\Support\OrgContext;
@@ -85,24 +86,19 @@ class ArticleTagResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->label(__('ops.resources.taxonomy.fields.name'))
-                    ->searchable()
-                    ->sortable(),
+                OpsTable::titleWithSlug('name', 'slug', __('ops.nav.article_tags')),
                 TextColumn::make('slug')
                     ->label(__('ops.resources.taxonomy.fields.slug'))
                     ->searchable()
-                    ->copyable(),
+                    ->copyable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('is_active')
                     ->label(__('ops.status.label'))
                     ->formatStateUsing(fn (bool|int|string|null $state): string => StatusBadge::booleanLabel($state, __('ops.status.active'), __('ops.status.inactive')))
                     ->badge()
                     ->color(fn (bool|int|string|null $state): string => StatusBadge::booleanColor($state))
                     ->sortable(),
-                TextColumn::make('updated_at')
-                    ->label(__('ops.resources.taxonomy.fields.updated'))
-                    ->dateTime()
-                    ->sortable(),
+                OpsTable::updatedAt(label: __('ops.resources.taxonomy.fields.updated')),
             ])
             ->filters([
                 TernaryFilter::make('is_active')

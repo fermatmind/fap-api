@@ -338,6 +338,43 @@
     .fi-body.fi-panel-ops .fi-ta-header-cell-label {
         color: var(--ops-text-primary);
         font-size: 0.8125rem;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+    }
+
+    .fi-body.fi-panel-ops .fi-ta-table {
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .fi-body.fi-panel-ops .fi-ta-row {
+        transition:
+            background-color 120ms ease,
+            box-shadow 120ms ease;
+    }
+
+    .fi-body.fi-panel-ops .fi-ta-cell {
+        vertical-align: middle;
+    }
+
+    .fi-body.fi-panel-ops .fi-ta-text-item-label {
+        color: var(--ops-text-primary);
+        font-weight: 600;
+        line-height: 1.35;
+    }
+
+    .fi-body.fi-panel-ops .fi-ta-text-item-description {
+        margin-top: 0.22rem;
+        color: var(--ops-text-tertiary);
+        font-size: 0.75rem;
+        line-height: 1.35;
+    }
+
+    .fi-body.fi-panel-ops .fi-badge {
+        min-height: 1.45rem;
+        border-radius: var(--ops-radius-badge);
+        font-size: 0.72rem;
+        font-weight: 700;
         letter-spacing: 0.01em;
     }
 
@@ -350,6 +387,11 @@
         gap: 0.85rem;
         padding: 1rem 1.5rem 1.1rem;
         border-top: 1px solid rgba(229, 231, 235, 0.88);
+    }
+
+    .fi-body.fi-panel-ops .fi-ta-header-toolbar .fi-btn,
+    .fi-body.fi-panel-ops .fi-ta-header-toolbar .fi-icon-btn {
+        min-height: 2.45rem;
     }
 
     .fi-body.fi-panel-ops .fi-ta-header-toolbar > .flex,
@@ -381,6 +423,11 @@
     .fi-body.fi-panel-ops .fi-ta-selection-indicator,
     .fi-body.fi-panel-ops .fi-ta-filter-indicators {
         padding: 1rem 1.5rem;
+    }
+
+    .fi-body.fi-panel-ops .fi-ta-filters-above-content-ctn .fi-fo-component-ctn,
+    .fi-body.fi-panel-ops .fi-ta-filters-below-content .fi-fo-component-ctn {
+        gap: 0.9rem;
     }
 
     .fi-body.fi-panel-ops .fi-ta-row:hover,

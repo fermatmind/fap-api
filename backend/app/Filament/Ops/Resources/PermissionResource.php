@@ -72,12 +72,26 @@ class PermissionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('description')->limit(50),
-                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->label(__('ops.nav.permissions'))
+                    ->searchable()
+                    ->sortable()
+                    ->description(fn (Permission $record): ?string => $record->description),
+                Tables\Columns\TextColumn::make('description')
+                    ->label(__('ops.resources.taxonomy.fields.description'))
+                    ->limit(50)
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('ops.resources.articles.fields.created'))
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->label(__('ops.resources.articles.actions.edit'))
+                    ->icon('heroicon-o-pencil-square')
+                    ->color('gray'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

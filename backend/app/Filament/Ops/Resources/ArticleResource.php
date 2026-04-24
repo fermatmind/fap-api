@@ -10,6 +10,7 @@ use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Filament\Ops\Support\OpsContentLocaleScope;
+use App\Filament\Ops\Support\OpsTable;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
@@ -366,21 +367,18 @@ class ArticleResource extends Resource
                     ->formatStateUsing(fn (string $state): string => '/'.trim($state, '/'))
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('status')
-                    ->label(__('ops.resources.articles.fields.status'))
+                    ->label(__('ops.table.visibility'))
                     ->badge()
                     ->sortable()
                     ->formatStateUsing(fn (string $state): string => StatusBadge::label($state))
                     ->description(fn (Article $record): string => ArticleWorkspace::visibilityMeta($record))
                     ->color(fn (string $state): string => StatusBadge::color($state)),
-                Tables\Columns\TextColumn::make('locale')
-                    ->label(__('ops.locale_scope.content_locale'))
-                    ->badge()
-                    ->sortable()
-                    ->toggleable(),
+                OpsTable::locale(label: __('ops.locale_scope.content_locale')),
                 Tables\Columns\TextColumn::make('source_locale')
                     ->label(__('ops.resources.articles.fields.source_locale'))
                     ->badge()
                     ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->placeholder(__('ops.resources.articles.placeholders.not_set_yet')),
                 Tables\Columns\TextColumn::make('translation_status')
                     ->label(__('ops.resources.articles.fields.translation_status'))
@@ -392,7 +390,7 @@ class ArticleResource extends Resource
                 Tables\Columns\TextColumn::make('working_revision_id')
                     ->label(__('ops.resources.articles.fields.working_revision_id'))
                     ->state(fn (Article $record): string => self::revisionSummary($record->workingRevision))
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('published_revision_id')
                     ->label(__('ops.resources.articles.fields.published_revision_id'))
                     ->state(fn (Article $record): string => self::revisionSummary($record->publishedRevision))
@@ -415,11 +413,9 @@ class ArticleResource extends Resource
                     ->label(__('ops.resources.articles.fields.published'))
                     ->dateTime()
                     ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->placeholder(__('ops.resources.articles.placeholders.not_published')),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->label(__('ops.resources.articles.fields.updated'))
-                    ->since()
-                    ->sortable(),
+                OpsTable::updatedAt(label: __('ops.resources.articles.fields.updated')),
             ])
             ->modifyQueryUsing(fn (Builder $query): Builder => $query->with([
                 'translatedFrom',
@@ -429,8 +425,36 @@ class ArticleResource extends Resource
             ]))
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
-                    ->label(__('ops.resources.articles.fields.status'))
+                    ->label(__('ops.table.visibility'))
                     ->options(self::statusOptions()),
+                Tables\Filters\SelectFilter::make('translation_status')
+                    ->label(__('ops.table.translation_status'))
+                    ->options([
+                        Article::TRANSLATION_STATUS_SOURCE => __('ops.resources.articles.translation_statuses.source'),
+                        Article::TRANSLATION_STATUS_MACHINE_DRAFT => __('ops.resources.articles.translation_statuses.machine_draft'),
+                        Article::TRANSLATION_STATUS_HUMAN_REVIEW => __('ops.resources.articles.translation_statuses.human_review'),
+                        Article::TRANSLATION_STATUS_APPROVED => __('ops.resources.articles.translation_statuses.approved'),
+                        Article::TRANSLATION_STATUS_PUBLISHED => __('ops.resources.articles.translation_statuses.published'),
+                        Article::TRANSLATION_STATUS_STALE => __('ops.resources.articles.translation_statuses.stale'),
+                        Article::TRANSLATION_STATUS_ARCHIVED => __('ops.resources.articles.translation_statuses.archived'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        $status = (string) ($data['value'] ?? '');
+
+                        if ($status === '') {
+                            return $query;
+                        }
+
+                        return $query->where(function (Builder $query) use ($status): void {
+                            $query
+                                ->whereHas('workingRevision', fn (Builder $revisionQuery): Builder => $revisionQuery->where('revision_status', $status))
+                                ->orWhere(function (Builder $query) use ($status): void {
+                                    $query
+                                        ->whereDoesntHave('workingRevision')
+                                        ->where('translation_status', $status);
+                                });
+                        });
+                    }),
                 Tables\Filters\SelectFilter::make('locale_scope')
                     ->label(__('ops.locale_scope.filter_label'))
                     ->options(fn (): array => OpsContentLocaleScope::filterOptions())

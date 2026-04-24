@@ -41,8 +41,8 @@ final class OpsContentLocaleScopeTest extends TestCase
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
         $org = $this->createOrganization();
         app(OrgContext::class)->set((int) $org->id, (int) $admin->id, 'admin');
-        $zhArticle = $this->createArticle((int) $org->id, 'zh-CN', '中文源文');
-        $enArticle = $this->createArticle((int) $org->id, 'en', 'English source');
+        $zhArticle = $this->createArticle(0, 'zh-CN', '中文源文');
+        $enArticle = $this->createArticle(0, 'en', 'English source');
 
         session($this->opsSession($admin, $org, 'en'));
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
@@ -64,8 +64,8 @@ final class OpsContentLocaleScopeTest extends TestCase
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
         $org = $this->createOrganization();
         app(OrgContext::class)->set((int) $org->id, (int) $admin->id, 'admin');
-        $zhArticle = $this->createArticle((int) $org->id, 'zh-CN', '中文源文');
-        $enArticle = $this->createArticle((int) $org->id, 'en', 'English source');
+        $zhArticle = $this->createArticle(0, 'zh-CN', '中文源文');
+        $enArticle = $this->createArticle(0, 'en', 'English source');
 
         session($this->opsSession($admin, $org, 'en'));
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
@@ -84,7 +84,7 @@ final class OpsContentLocaleScopeTest extends TestCase
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
         $org = $this->createOrganization();
         app(OrgContext::class)->set((int) $org->id, (int) $admin->id, 'admin');
-        $this->createArticle((int) $org->id, 'zh-CN', '中文源文');
+        $this->createArticle(0, 'zh-CN', '中文源文');
 
         session($this->opsSession($admin, $org, 'en'));
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));

@@ -3,6 +3,7 @@
 namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\AdminUserResource\Pages;
+use App\Filament\Ops\Support\StatusBadge;
 use App\Models\AdminUser;
 use App\Support\Rbac\PermissionNames;
 use Filament\Forms;
@@ -72,19 +73,50 @@ class AdminUserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('email')->searchable(),
-                Tables\Columns\IconColumn::make('is_active')
-                    ->boolean()
-                    ->label('Active'),
-                Tables\Columns\TextColumn::make('last_login_at')->dateTime()->sortable(),
-                Tables\Columns\TextColumn::make('totp_enabled_at')->dateTime()->label('2FA')->toggleable(),
-                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->label(__('ops.nav.admin_users'))
+                    ->searchable()
+                    ->sortable()
+                    ->description(fn (AdminUser $record): ?string => $record->email),
+                Tables\Columns\TextColumn::make('email')
+                    ->label(__('ops.table.email'))
+                    ->searchable()
+                    ->copyable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('is_active')
+                    ->label(__('ops.status.label'))
+                    ->badge()
+                    ->formatStateUsing(fn (bool|int|string|null $state): string => StatusBadge::booleanLabel($state, __('ops.status.active'), __('ops.status.inactive')))
+                    ->color(fn (bool|int|string|null $state): string => StatusBadge::booleanColor($state))
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('last_login_at')
+                    ->label(__('ops.table.last_login'))
+                    ->since()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('totp_enabled_at')
+                    ->label(__('ops.table.security'))
+                    ->state(fn (AdminUser $record): string => $record->totp_enabled_at ? '2FA' : __('ops.status.missing'))
+                    ->badge()
+                    ->color(fn (AdminUser $record): string => $record->totp_enabled_at ? 'success' : 'gray')
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('ops.resources.articles.fields.created'))
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+            ])
+            ->filters([
+                Tables\Filters\TernaryFilter::make('is_active')
+                    ->label(__('ops.status.label')),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->label(__('ops.resources.articles.actions.edit'))
+                    ->icon('heroicon-o-pencil-square')
+                    ->color('gray'),
                 Tables\Actions\Action::make('disable')
-                    ->label('Disable')
+                    ->label(__('ops.table.disable'))
+                    ->color('danger')
                     ->requiresConfirmation()
                     ->visible(fn (AdminUser $record) => (int) $record->is_active === 1)
                     ->action(function (AdminUser $record) {
@@ -99,7 +131,8 @@ class AdminUserResource extends Resource
                         );
                     }),
                 Tables\Actions\Action::make('enable')
-                    ->label('Enable')
+                    ->label(__('ops.table.enable'))
+                    ->color('success')
                     ->requiresConfirmation()
                     ->visible(fn (AdminUser $record) => (int) $record->is_active !== 1)
                     ->action(function (AdminUser $record) {

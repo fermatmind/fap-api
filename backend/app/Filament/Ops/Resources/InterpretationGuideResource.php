@@ -7,6 +7,7 @@ namespace App\Filament\Ops\Resources;
 use App\Filament\Ops\Resources\InterpretationGuideResource\Pages;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\OpsContentLocaleScope;
+use App\Filament\Ops\Support\OpsTable;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\InterpretationGuide;
 use Filament\Forms;
@@ -143,32 +144,54 @@ class InterpretationGuideResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')->searchable()->limit(48),
-                Tables\Columns\TextColumn::make('slug')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('locale')
-                    ->label(__('ops.locale_scope.content_locale'))
-                    ->badge()
-                    ->sortable(),
+                OpsTable::titleWithSlug('title', 'slug', __('ops.nav.interpretation_guides')),
+                Tables\Columns\TextColumn::make('slug')
+                    ->label(__('ops.resources.articles.fields.slug'))
+                    ->searchable()
+                    ->copyable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                OpsTable::locale(label: __('ops.locale_scope.content_locale')),
                 Tables\Columns\TextColumn::make('source_locale')
-                    ->label(__('ops.locale_scope.source_locale'))
+                    ->label(__('ops.table.source_locale'))
                     ->state(fn (InterpretationGuide $record): string => (string) ($record->source_locale ?: OpsContentLocaleScope::sourceLocale($record->locale)))
-                    ->badge(),
-                Tables\Columns\TextColumn::make('translation_status')
                     ->badge()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('test_family')->badge()->sortable(),
-                Tables\Columns\TextColumn::make('result_context')->sortable(),
-                Tables\Columns\TextColumn::make('status')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                OpsTable::translationStatus(),
+                Tables\Columns\TextColumn::make('test_family')
+                    ->label(__('ops.table.category_type'))
                     ->badge()
-                    ->color(fn (?string $state): string => StatusBadge::color($state))
-                    ->sortable(),
+                    ->sortable()
+                    ->description(fn (InterpretationGuide $record): ?string => $record->result_context),
+                OpsTable::status(),
                 Tables\Columns\TextColumn::make('review_state')
+                    ->label(__('ops.resources.articles.fields.working_revision_status'))
                     ->badge()
                     ->color(fn (?string $state): string => StatusBadge::color($state))
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('updated_at')->dateTime()->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                OpsTable::updatedAt(),
             ])
             ->filters([
+                Tables\Filters\SelectFilter::make('status')
+                    ->label(__('ops.table.status'))
+                    ->options([
+                        'draft' => __('ops.status.draft'),
+                        'scheduled' => __('ops.status.scheduled'),
+                        'published' => __('ops.status.published'),
+                        'archived' => __('ops.status.archived'),
+                    ]),
+                Tables\Filters\SelectFilter::make('translation_status')
+                    ->label(__('ops.table.translation_status'))
+                    ->options([
+                        'source' => __('ops.status.source'),
+                        'draft' => __('ops.status.draft'),
+                        'machine_draft' => __('ops.status.machine_draft'),
+                        'human_review' => __('ops.status.human_review'),
+                        'approved' => __('ops.status.approved'),
+                        'published' => __('ops.status.published'),
+                        'stale' => __('ops.status.stale'),
+                        'archived' => __('ops.status.archived'),
+                    ]),
                 Tables\Filters\SelectFilter::make('locale_scope')
                     ->label(__('ops.locale_scope.filter_label'))
                     ->options(fn (): array => OpsContentLocaleScope::filterOptions())

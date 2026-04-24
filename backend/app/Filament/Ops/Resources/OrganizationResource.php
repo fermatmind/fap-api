@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\OrganizationResource\Pages;
-use App\Filament\Ops\Support\StatusBadge;
+use App\Filament\Ops\Support\OpsTable;
 use App\Models\Organization;
 use App\Services\Ops\OrgVisibilityResolver;
 use App\Support\Rbac\PermissionNames;
@@ -89,17 +89,37 @@ class OrganizationResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('id')->label('Org ID')->sortable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->badge()
-                    ->color(fn (string $state): string => StatusBadge::color($state))
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('domain')->toggleable(),
-                Tables\Columns\TextColumn::make('timezone')->toggleable(),
-                Tables\Columns\TextColumn::make('locale')->toggleable(),
-                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
-                Tables\Columns\TextColumn::make('updated_at')->dateTime()->sortable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->label(__('ops.nav.organizations'))
+                    ->searchable()
+                    ->sortable()
+                    ->description(fn (Organization $record): ?string => $record->domain),
+                Tables\Columns\TextColumn::make('id')
+                    ->label(__('ops.topbar.org_id'))
+                    ->sortable()
+                    ->copyable(),
+                OpsTable::status(),
+                Tables\Columns\TextColumn::make('domain')
+                    ->label(__('ops.table.domain'))
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('timezone')
+                    ->label(__('ops.table.timezone'))
+                    ->toggleable(isToggledHiddenByDefault: true),
+                OpsTable::locale(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('ops.resources.articles.fields.created'))
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                OpsTable::updatedAt(),
+            ])
+            ->filters([
+                Tables\Filters\SelectFilter::make('status')
+                    ->label(__('ops.table.status'))
+                    ->options([
+                        'active' => __('ops.status.active'),
+                        'suspended' => __('ops.status.suspended'),
+                    ]),
             ])
             ->defaultSort('updated_at', 'desc')
             ->actions([
