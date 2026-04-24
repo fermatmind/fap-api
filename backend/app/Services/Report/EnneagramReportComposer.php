@@ -38,6 +38,7 @@ final class EnneagramReportComposer
         }
 
         $projection = $this->projectionService->build($scoreResult, $locale, $variant, $locked);
+        $projectionV2 = $this->projectionService->buildV2($scoreResult, $locale, $variant, $locked);
         $sections = is_array($projection['sections'] ?? null) ? $projection['sections'] : [];
 
         return [
@@ -58,6 +59,7 @@ final class EnneagramReportComposer
                 'sections' => $sections,
                 '_meta' => [
                     'enneagram_public_projection_v1' => $projection,
+                    'enneagram_public_projection_v2' => $projectionV2,
                 ],
                 'generated_at' => now()->toISOString(),
             ],

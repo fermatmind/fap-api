@@ -276,6 +276,12 @@ class AttemptReadController extends Controller
                 (string) ($attempt?->locale ?? config('content_packs.default_locale', 'zh-CN'))
             )
             : [];
+        $enneagramProjectionV2 = $scaleCode === 'ENNEAGRAM'
+            ? $this->enneagramPublicProjectionService->buildV2FromResult(
+                $result,
+                (string) ($attempt?->locale ?? config('content_packs.default_locale', 'zh-CN'))
+            )
+            : [];
         $riasecProjection = $scaleCode === 'RIASEC'
             ? $this->riasecPublicProjectionService->buildFromResult(
                 $result,
@@ -353,6 +359,9 @@ class AttemptReadController extends Controller
         }
         if ($enneagramProjection !== []) {
             $responsePayload['enneagram_public_projection_v1'] = $enneagramProjection;
+        }
+        if ($enneagramProjectionV2 !== []) {
+            $responsePayload['enneagram_public_projection_v2'] = $enneagramProjectionV2;
         }
         if (is_array($enneagramFormSummary)) {
             $responsePayload['enneagram_form_v1'] = $enneagramFormSummary;
@@ -539,7 +548,17 @@ class AttemptReadController extends Controller
                     (bool) ($gate['locked'] ?? false)
                 );
             }
+            $projectionV2 = data_get($responsePayload, 'report._meta.enneagram_public_projection_v2');
+            if (! is_array($projectionV2)) {
+                $projectionV2 = $this->enneagramPublicProjectionService->buildV2FromResult(
+                    $result,
+                    (string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')),
+                    strtolower(trim((string) ($gate['variant'] ?? 'free'))),
+                    (bool) ($gate['locked'] ?? false)
+                );
+            }
             $responsePayload['enneagram_public_projection_v1'] = $projection;
+            $responsePayload['enneagram_public_projection_v2'] = $projectionV2;
         } elseif ($scaleCode === 'RIASEC') {
             if (is_array($riasecFormSummary)) {
                 $responsePayload['riasec_form_v1'] = $riasecFormSummary;
