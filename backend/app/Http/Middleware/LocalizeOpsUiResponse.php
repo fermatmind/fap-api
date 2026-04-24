@@ -82,7 +82,9 @@ final class LocalizeOpsUiResponse
     private function localizeJson(mixed $value): mixed
     {
         if (is_string($value)) {
-            return OpsUiText::localizeHtml($value);
+            return str_contains($value, '<')
+                ? OpsUiText::localizeHtml($value)
+                : OpsUiText::translate($value);
         }
 
         if (! is_array($value)) {

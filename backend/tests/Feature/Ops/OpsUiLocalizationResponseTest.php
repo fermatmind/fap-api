@@ -20,7 +20,7 @@ final class OpsUiLocalizationResponseTest extends TestCase
 
         Route::middleware(['web', SetOpsLocale::class, LocalizeOpsUiResponse::class])
             ->get('/ops/test-ui-localization', static fn () => response(
-                '<main><h1>Delivery tools</h1><label>Order number</label><button>Request</button><p>Permission boundary</p></main>'
+                '<main><h1>Delivery tools</h1><label>Order number</label><button>Request</button><p>Permission boundary</p><table><tbody><tr><td>Order</td><td>Article</td></tr></tbody></table></main>'
             ));
 
         Route::middleware(['web', SetOpsLocale::class, LocalizeOpsUiResponse::class])
@@ -42,6 +42,8 @@ final class OpsUiLocalizationResponseTest extends TestCase
             ->assertSee('订单号', false)
             ->assertSee('请求', false)
             ->assertSee('权限边界', false)
+            ->assertSee('<td>Order</td>', false)
+            ->assertSee('<td>Article</td>', false)
             ->assertDontSee('Delivery tools', false)
             ->assertDontSee('Order number', false);
     }

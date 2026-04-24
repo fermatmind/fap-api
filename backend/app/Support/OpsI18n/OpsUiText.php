@@ -59,9 +59,21 @@ final class OpsUiText
             return $html;
         }
 
-        uksort($translations, static fn (string $left, string $right): int => strlen($right) <=> strlen($left));
+        $html = (string) preg_replace_callback(
+            '/\b(?P<name>title|description|eyebrow|label|placeholder|empty-title|empty-description|empty-eyebrow|aria-label)="(?P<value>[^"]*[A-Za-z][^"]*)"/u',
+            static function (array $matches): string {
+                return $matches['name'].'="'.e(self::translateText($matches['value'])).'"';
+            },
+            $html,
+        );
 
-        return strtr($html, $translations);
+        return (string) preg_replace_callback(
+            '/(?P<open><(?P<tag>h[1-6]|label|button|option|th|a|p|span|li)\b[^>]*>)(?P<text>[^<>]*[A-Za-z][^<>]*)(?P<close><\/\g{tag}>)/u',
+            static function (array $matches): string {
+                return $matches['open'].self::translateTextPreservingWhitespace($matches['text']).$matches['close'];
+            },
+            $html,
+        );
     }
 
     /**
@@ -99,5 +111,22 @@ final class OpsUiText
     private static function normalize(string $text): string
     {
         return trim((string) preg_replace('/\s+/u', ' ', $text));
+    }
+
+    private static function translateText(string $text): string
+    {
+        $decoded = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+        return self::translate(self::normalize($decoded));
+    }
+
+    private static function translateTextPreservingWhitespace(string $text): string
+    {
+        preg_match('/^\s*/u', $text, $leading);
+        preg_match('/\s*$/u', $text, $trailing);
+
+        $translated = self::translateText($text);
+
+        return ($leading[0] ?? '').e($translated).($trailing[0] ?? '');
     }
 }
