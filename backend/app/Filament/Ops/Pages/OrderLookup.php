@@ -33,6 +33,11 @@ class OrderLookup extends Page
         return __('ops.nav.order_lookup');
     }
 
+    public function getTitle(): string
+    {
+        return __('ops.custom_pages.order_lookup.title');
+    }
+
     public static function canAccess(): bool
     {
         $guard = (string) config('admin.guard', 'admin');

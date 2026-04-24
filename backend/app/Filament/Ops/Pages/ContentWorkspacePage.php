@@ -22,9 +22,9 @@ class ContentWorkspacePage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Content Overview';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Content Workspace';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 2;
 
@@ -47,22 +47,22 @@ class ContentWorkspacePage extends Page
 
         $this->editorialCards = [
             $this->workspaceCard(
-                'Articles',
-                'Org-aware editorial workspace for long-form CMS publishing, SEO metadata, and visibility state.',
+                __('ops.custom_pages.content_workspace.cards.articles'),
+                __('ops.custom_pages.content_workspace.cards.articles_desc'),
                 Article::query()->whereIn('org_id', $currentOrgIds)->count(),
                 ArticleResource::getUrl(),
                 ArticleResource::getUrl('create')
             ),
             $this->workspaceCard(
-                'Career Guides',
-                'Global guide authoring workspace for structured career education content and related object links.',
+                __('ops.custom_pages.content_workspace.cards.career_guides'),
+                __('ops.custom_pages.content_workspace.cards.career_guides_desc'),
                 CareerGuide::query()->where('org_id', 0)->count(),
                 CareerGuideResource::getUrl(),
                 CareerGuideResource::getUrl('create')
             ),
             $this->workspaceCard(
-                'Career Jobs',
-                'Global job profile workspace for structured role narratives, signals, sections, and SEO metadata.',
+                __('ops.custom_pages.content_workspace.cards.career_jobs'),
+                __('ops.custom_pages.content_workspace.cards.career_jobs_desc'),
                 CareerJob::query()->where('org_id', 0)->count(),
                 CareerJobResource::getUrl(),
                 CareerJobResource::getUrl('create')
@@ -71,15 +71,15 @@ class ContentWorkspacePage extends Page
 
         $this->dataCards = [
             $this->workspaceCard(
-                'Categories',
-                'Taxonomy records that shape article organization and filtering inside the editorial workspace.',
+                __('ops.custom_pages.content_workspace.cards.categories'),
+                __('ops.custom_pages.content_workspace.cards.categories_desc'),
                 ArticleCategory::query()->whereIn('org_id', $currentOrgIds)->count(),
                 ArticleCategoryResource::getUrl(),
                 ArticleCategoryResource::getUrl('create')
             ),
             $this->workspaceCard(
-                'Tags',
-                'Lightweight metadata used to cluster related editorial records and speed up operator discovery.',
+                __('ops.custom_pages.content_workspace.cards.tags'),
+                __('ops.custom_pages.content_workspace.cards.tags_desc'),
                 ArticleTag::query()->whereIn('org_id', $currentOrgIds)->count(),
                 ArticleTagResource::getUrl(),
                 ArticleTagResource::getUrl('create')
@@ -88,25 +88,25 @@ class ContentWorkspacePage extends Page
 
         $this->permissionFields = [
             [
-                'label' => 'Content read',
-                'value' => ContentAccess::canRead() ? 'Enabled' : 'Missing',
+                'label' => __('ops.custom_pages.content_workspace.permissions.content_read'),
+                'value' => ContentAccess::canRead() ? __('ops.custom_pages.common.values.enabled') : __('ops.custom_pages.common.values.missing'),
                 'kind' => 'pill',
                 'state' => ContentAccess::canRead() ? 'success' : 'failed',
-                'hint' => 'Allows browsing workspace pages, list pages, and release summaries.',
+                'hint' => __('ops.custom_pages.content_workspace.permissions.content_read_hint'),
             ],
             [
-                'label' => 'Content write',
-                'value' => ContentAccess::canWrite() ? 'Enabled' : 'Missing',
+                'label' => __('ops.custom_pages.content_workspace.permissions.content_write'),
+                'value' => ContentAccess::canWrite() ? __('ops.custom_pages.common.values.enabled') : __('ops.custom_pages.common.values.missing'),
                 'kind' => 'pill',
                 'state' => ContentAccess::canWrite() ? 'success' : 'warning',
-                'hint' => 'Controls create and edit actions across articles, career guides, jobs, categories, and tags.',
+                'hint' => __('ops.custom_pages.content_workspace.permissions.content_write_hint'),
             ],
             [
-                'label' => 'Content release',
-                'value' => ContentAccess::canRelease() ? 'Enabled' : 'Missing',
+                'label' => __('ops.custom_pages.content_workspace.permissions.content_release'),
+                'value' => ContentAccess::canRelease() ? __('ops.custom_pages.common.values.enabled') : __('ops.custom_pages.common.values.missing'),
                 'kind' => 'pill',
                 'state' => ContentAccess::canRelease() ? 'success' : 'gray',
-                'hint' => 'Required for content release queue access and release execution actions.',
+                'hint' => __('ops.custom_pages.content_workspace.permissions.content_release_hint'),
             ],
         ];
     }
@@ -119,6 +119,11 @@ class ContentWorkspacePage extends Page
     public static function getNavigationLabel(): string
     {
         return __('ops.nav.content_workspace');
+    }
+
+    public function getTitle(): string
+    {
+        return __('ops.custom_pages.content_workspace.title');
     }
 
     public static function canAccess(): bool
@@ -144,7 +149,7 @@ class ContentWorkspacePage extends Page
         return [
             'title' => $title,
             'description' => $description,
-            'meta' => $count.' records',
+            'meta' => __('ops.custom_pages.content_workspace.cards.record_count', ['count' => $count]),
             'index_url' => $indexUrl,
             'create_url' => $createUrl,
             'can_write' => ContentAccess::canWrite(),

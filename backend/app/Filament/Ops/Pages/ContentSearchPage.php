@@ -138,6 +138,11 @@ class ContentSearchPage extends Page
         return __('ops.nav.content_search');
     }
 
+    public function getTitle(): string
+    {
+        return __('ops.custom_pages.content_search.title');
+    }
+
     public static function canAccess(): bool
     {
         return ContentAccess::canRead();
