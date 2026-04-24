@@ -81,7 +81,16 @@ final class EnneagramReadReportContractTest extends TestCase
         $report->assertJsonPath('enneagram_form_v1.form_code', $formCode);
         $report->assertJsonPath('enneagram_public_projection_v1.schema_version', 'enneagram.public_projection.v1');
         $report->assertJsonPath('enneagram_public_projection_v2.schema_version', 'enneagram.public_projection.v2');
+        $report->assertJsonPath('enneagram_report_v2.schema_version', 'enneagram.report.v2');
+        $report->assertJsonCount(5, 'enneagram_report_v2.pages');
         $report->assertJsonPath('report._meta.enneagram_public_projection_v2.schema_version', 'enneagram.public_projection.v2');
+        $report->assertJsonPath('report._meta.enneagram_report_v2.schema_version', 'enneagram.report.v2');
+        $report->assertJsonPath('report._meta.enneagram_report_v2.pages.0.page_key', 'page_1_result_overview');
+        $report->assertJsonPath('report._meta.enneagram_report_v2.provenance.report_engine_version', 'enneagram_report_engine.v2');
+        $report->assertJsonPath(
+            'report._meta.enneagram_report_v2.provenance.interpretation_context_id',
+            $result->json('enneagram_public_projection_v2.content_binding.interpretation_context_id')
+        );
         $this->assertSame(
             $result->json('enneagram_public_projection_v1.primary_type'),
             $report->json('enneagram_public_projection_v1.primary_type')
@@ -94,6 +103,7 @@ final class EnneagramReadReportContractTest extends TestCase
             $result->json('enneagram_public_projection_v2.methodology.compare_compatibility_group'),
             $report->json('enneagram_public_projection_v2.methodology.compare_compatibility_group')
         );
+        $this->assertNotSame('', (string) $report->json('enneagram_report_v2.registry.registry_release_hash'));
 
         $access = $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
         $access->assertStatus(200);

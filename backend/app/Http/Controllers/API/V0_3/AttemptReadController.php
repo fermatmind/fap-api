@@ -559,6 +559,10 @@ class AttemptReadController extends Controller
             }
             $responsePayload['enneagram_public_projection_v1'] = $projection;
             $responsePayload['enneagram_public_projection_v2'] = $projectionV2;
+            $reportV2 = data_get($responsePayload, 'report._meta.enneagram_report_v2');
+            if (is_array($reportV2)) {
+                $responsePayload['enneagram_report_v2'] = $reportV2;
+            }
         } elseif ($scaleCode === 'RIASEC') {
             if (is_array($riasecFormSummary)) {
                 $responsePayload['riasec_form_v1'] = $riasecFormSummary;
