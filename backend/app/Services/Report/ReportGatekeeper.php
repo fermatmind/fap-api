@@ -211,11 +211,12 @@ class ReportGatekeeper
         };
         $locked = $unlockStage === ReportAccess::UNLOCK_STAGE_LOCKED;
 
-        $shouldUseSnapshot = in_array($scaleCode, [ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)
+        $shouldUseSnapshot = in_array($scaleCode, [ReportAccess::SCALE_RIASEC], true)
             ? false
             : $hasFullAccess && $this->offerResolver->modulesCoverOffered($modulesAllowed, $modulesOffered);
         $snapshotStrictMode = in_array($scaleCode, [ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true) ? false : $this->strictSnapshotModeEnabled();
         $shouldReadFromSnapshot = $snapshotStrictMode || $shouldUseSnapshot;
+        $allowLiveBuildFallbackForSnapshot = $scaleCode === ReportAccess::SCALE_ENNEAGRAM && ! $snapshotStrictMode;
         if ($shouldReadFromSnapshot && ($snapshotStrictMode || ! $forceRefresh)) {
             $snapshotRow = DB::table('report_snapshots')
                 ->where('org_id', $effectiveOrgId)
@@ -249,123 +250,137 @@ class ReportGatekeeper
             if ($snapshotRow) {
                 $snapshotStatus = strtolower(trim((string) ($snapshotRow->status ?? '')));
                 if ($snapshotStatus === 'pending') {
-                    return $this->responsePayload(
-                        $locked,
-                        $reportAccessLevel,
-                        $variant,
-                        $viewPolicy,
-                        [],
-                        $paywall,
-                        [
-                            'generating' => true,
-                            'snapshot_error' => false,
-                            'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
-                        ],
-                        $modulesAllowed,
-                        $modulesOffered,
-                        $modulesPreview,
-                        $normsPayload,
-                        $qualityPayload,
-                        $isMbtiContract
-                    );
+                    if ($allowLiveBuildFallbackForSnapshot) {
+                        $snapshotRow = null;
+                    } else {
+                        return $this->responsePayload(
+                            $locked,
+                            $reportAccessLevel,
+                            $variant,
+                            $viewPolicy,
+                            [],
+                            $paywall,
+                            [
+                                'generating' => true,
+                                'snapshot_error' => false,
+                                'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
+                            ],
+                            $modulesAllowed,
+                            $modulesOffered,
+                            $modulesPreview,
+                            $normsPayload,
+                            $qualityPayload,
+                            $isMbtiContract
+                        );
+                    }
                 }
 
-                if ($snapshotStatus === 'failed') {
-                    return $this->responsePayload(
-                        $locked,
-                        $reportAccessLevel,
-                        $variant,
-                        $viewPolicy,
-                        [],
-                        $paywall,
-                        [
-                            'generating' => false,
-                            'snapshot_error' => true,
-                            'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
-                        ],
-                        $modulesAllowed,
-                        $modulesOffered,
-                        $modulesPreview,
-                        $normsPayload,
-                        $qualityPayload,
-                        $isMbtiContract
-                    );
+                if ($snapshotRow && $snapshotStatus === 'failed') {
+                    if ($allowLiveBuildFallbackForSnapshot) {
+                        $snapshotRow = null;
+                    } else {
+                        return $this->responsePayload(
+                            $locked,
+                            $reportAccessLevel,
+                            $variant,
+                            $viewPolicy,
+                            [],
+                            $paywall,
+                            [
+                                'generating' => false,
+                                'snapshot_error' => true,
+                                'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
+                            ],
+                            $modulesAllowed,
+                            $modulesOffered,
+                            $modulesPreview,
+                            $normsPayload,
+                            $qualityPayload,
+                            $isMbtiContract
+                        );
+                    }
                 }
 
-                if ($snapshotStatus !== 'ready') {
-                    Log::warning('[REPORT] snapshot_status_unknown', [
-                        'org_id' => $effectiveOrgId,
-                        'attempt_id' => $attemptId,
-                        'status' => $snapshotStatus !== '' ? $snapshotStatus : null,
-                        'strict_mode' => $snapshotStrictMode,
-                        'variant' => $variant,
-                        'source' => 'report_gatekeeper',
-                    ]);
+                if ($snapshotRow && $snapshotStatus !== 'ready') {
+                    if ($allowLiveBuildFallbackForSnapshot) {
+                        $snapshotRow = null;
+                    } else {
+                        Log::warning('[REPORT] snapshot_status_unknown', [
+                            'org_id' => $effectiveOrgId,
+                            'attempt_id' => $attemptId,
+                            'status' => $snapshotStatus !== '' ? $snapshotStatus : null,
+                            'strict_mode' => $snapshotStrictMode,
+                            'variant' => $variant,
+                            'source' => 'report_gatekeeper',
+                        ]);
 
-                    return $this->responsePayload(
-                        $locked,
-                        $reportAccessLevel,
-                        $variant,
-                        $viewPolicy,
-                        [],
-                        $paywall,
-                        [
-                            'generating' => false,
-                            'snapshot_error' => true,
-                            'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
-                            'snapshot_status' => $snapshotStatus !== '' ? $snapshotStatus : null,
-                            'snapshot_status_unknown' => true,
-                        ],
-                        $modulesAllowed,
-                        $modulesOffered,
-                        $modulesPreview,
-                        $normsPayload,
-                        $qualityPayload,
-                        $isMbtiContract
-                    );
+                        return $this->responsePayload(
+                            $locked,
+                            $reportAccessLevel,
+                            $variant,
+                            $viewPolicy,
+                            [],
+                            $paywall,
+                            [
+                                'generating' => false,
+                                'snapshot_error' => true,
+                                'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
+                                'snapshot_status' => $snapshotStatus !== '' ? $snapshotStatus : null,
+                                'snapshot_status_unknown' => true,
+                            ],
+                            $modulesAllowed,
+                            $modulesOffered,
+                            $modulesPreview,
+                            $normsPayload,
+                            $qualityPayload,
+                            $isMbtiContract
+                        );
+                    }
                 }
 
-                $report = $this->snapshotReportForVariant($snapshotRow, $renderVariant);
-                if ($report !== []) {
-                    return $this->responsePayload(
-                        $locked,
-                        $reportAccessLevel,
-                        $variant,
-                        $viewPolicy,
-                        $report,
-                        $paywall,
-                        [],
-                        $modulesAllowed,
-                        $modulesOffered,
-                        $modulesPreview,
-                        $normsPayload,
-                        $qualityPayload,
-                        $isMbtiContract
-                    );
-                }
+                if ($snapshotRow) {
+                    $report = $this->snapshotReportForVariant($snapshotRow, $renderVariant);
+                    if ($report !== []) {
+                        return $this->responsePayload(
+                            $locked,
+                            $reportAccessLevel,
+                            $variant,
+                            $viewPolicy,
+                            $report,
+                            $paywall,
+                            [],
+                            $modulesAllowed,
+                            $modulesOffered,
+                            $modulesPreview,
+                            $normsPayload,
+                            $qualityPayload,
+                            $isMbtiContract
+                        );
+                    }
 
-                if ($snapshotStrictMode) {
-                    $this->enqueueSnapshotBuild($effectiveOrgId, $attempt, $result);
+                    if ($snapshotStrictMode) {
+                        $this->enqueueSnapshotBuild($effectiveOrgId, $attempt, $result);
 
-                    return $this->responsePayload(
-                        $locked,
-                        $reportAccessLevel,
-                        $variant,
-                        $viewPolicy,
-                        [],
-                        $paywall,
-                        [
-                            'generating' => true,
-                            'snapshot_error' => false,
-                            'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
-                        ],
-                        $modulesAllowed,
-                        $modulesOffered,
-                        $modulesPreview,
-                        $normsPayload,
-                        $qualityPayload,
-                        $isMbtiContract
-                    );
+                        return $this->responsePayload(
+                            $locked,
+                            $reportAccessLevel,
+                            $variant,
+                            $viewPolicy,
+                            [],
+                            $paywall,
+                            [
+                                'generating' => true,
+                                'snapshot_error' => false,
+                                'retry_after_seconds' => self::SNAPSHOT_RETRY_AFTER_SECONDS,
+                            ],
+                            $modulesAllowed,
+                            $modulesOffered,
+                            $modulesPreview,
+                            $normsPayload,
+                            $qualityPayload,
+                            $isMbtiContract
+                        );
+                    }
                 }
             }
         }

@@ -377,7 +377,9 @@ final class EnneagramPublicProjectionService
             'content_binding' => [
                 'content_snapshot_id' => null,
                 'content_snapshot_hash' => null,
+                'content_snapshot_status' => 'unavailable_until_registry_pack',
                 'content_release_hash' => $contentReleaseHash !== '' ? $contentReleaseHash : null,
+                'content_release_hash_status' => $contentReleaseHash !== '' ? 'resolved_from_result_manifest' : 'unavailable_no_manifest_hash',
                 'interpretation_context_id' => $interpretationContextId,
             ],
             'render_hints' => [

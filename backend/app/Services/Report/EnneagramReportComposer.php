@@ -60,6 +60,7 @@ final class EnneagramReportComposer
                 '_meta' => [
                     'enneagram_public_projection_v1' => $projection,
                     'enneagram_public_projection_v2' => $projectionV2,
+                    'snapshot_binding_v1' => $this->buildSnapshotBinding($projectionV2),
                 ],
                 'generated_at' => now()->toISOString(),
             ],
@@ -86,5 +87,36 @@ final class EnneagramReportComposer
         }
 
         return [];
+    }
+
+    /**
+     * @param  array<string,mixed>  $projectionV2
+     * @return array<string,mixed>
+     */
+    private function buildSnapshotBinding(array $projectionV2): array
+    {
+        return [
+            'scale_code' => 'ENNEAGRAM',
+            'form_code' => data_get($projectionV2, 'form.form_code'),
+            'form_kind' => data_get($projectionV2, 'form.form_kind'),
+            'score_method' => data_get($projectionV2, 'form.score_method'),
+            'scoring_spec_version' => data_get($projectionV2, 'form.scoring_spec_version'),
+            'score_space_version' => data_get($projectionV2, 'form.score_space_version'),
+            'projection_version' => data_get($projectionV2, 'algorithmic_meta.projection_version'),
+            'report_schema_version' => data_get($projectionV2, 'algorithmic_meta.report_schema_version'),
+            'report_engine_version' => data_get($projectionV2, 'algorithmic_meta.report_engine_version'),
+            'close_call_rule_version' => data_get($projectionV2, 'algorithmic_meta.close_call_rule_version'),
+            'confidence_policy_version' => data_get($projectionV2, 'algorithmic_meta.confidence_policy_version'),
+            'quality_policy_version' => data_get($projectionV2, 'algorithmic_meta.quality_policy_version'),
+            'technical_note_version' => data_get($projectionV2, 'algorithmic_meta.technical_note_version'),
+            'interpretation_context_id' => data_get($projectionV2, 'content_binding.interpretation_context_id'),
+            'content_release_hash' => data_get($projectionV2, 'content_binding.content_release_hash'),
+            'content_release_hash_status' => data_get($projectionV2, 'content_binding.content_release_hash_status'),
+            'content_snapshot_id' => data_get($projectionV2, 'content_binding.content_snapshot_id'),
+            'content_snapshot_hash' => data_get($projectionV2, 'content_binding.content_snapshot_hash'),
+            'content_snapshot_status' => data_get($projectionV2, 'content_binding.content_snapshot_status'),
+            'compare_compatibility_group' => data_get($projectionV2, 'methodology.compare_compatibility_group'),
+            'cross_form_comparable' => data_get($projectionV2, 'methodology.cross_form_comparable'),
+        ];
     }
 }

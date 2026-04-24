@@ -56,6 +56,10 @@ final class EnneagramReadReportContractTest extends TestCase
             'not_triggered_no_operational_signal'
         );
         $result->assertJsonPath('enneagram_public_projection_v2.classification.quality_level', 'unavailable');
+        $result->assertJsonPath(
+            'enneagram_public_projection_v2.content_binding.content_snapshot_status',
+            'unavailable_until_registry_pack'
+        );
         $result->assertJsonPath('enneagram_public_projection_v2.dynamics.center_scores.body', null);
         $result->assertJsonPath(
             'enneagram_public_projection_v2._meta.unavailable.dynamics.center_scores.status',
