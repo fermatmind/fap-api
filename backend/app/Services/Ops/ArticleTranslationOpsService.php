@@ -194,19 +194,19 @@ final class ArticleTranslationOpsService
         $issues = [];
 
         if ((int) $article->org_id !== self::PUBLIC_ARTICLE_ORG_ID) {
-            $issues[] = 'article org mismatch';
+            $issues[] = __('ops.translation_ops.ownership_issues.article_org_mismatch');
         }
 
         $workingRevision = $article->workingRevision;
         if (! $workingRevision instanceof ArticleTranslationRevision) {
-            $issues[] = 'missing working revision';
+            $issues[] = __('ops.translation_ops.ownership_issues.missing_working_revision');
         } else {
             $issues = array_merge($issues, $this->revisionOwnershipIssues($article, $workingRevision, 'working revision'));
         }
 
         $publishedRevision = $article->publishedRevision;
         if ($article->published_revision_id !== null && ! $publishedRevision instanceof ArticleTranslationRevision) {
-            $issues[] = 'missing published revision';
+            $issues[] = __('ops.translation_ops.ownership_issues.missing_published_revision');
         }
         if ($publishedRevision instanceof ArticleTranslationRevision) {
             $issues = array_merge($issues, $this->revisionOwnershipIssues($article, $publishedRevision, 'published revision'));
@@ -216,13 +216,13 @@ final class ArticleTranslationOpsService
         if ($seoMeta instanceof ArticleSeoMeta) {
             if ((int) $seoMeta->org_id !== self::PUBLIC_ARTICLE_ORG_ID
                 || (int) $seoMeta->org_id !== (int) $article->org_id) {
-                $issues[] = 'seo_meta org mismatch';
+                $issues[] = __('ops.translation_ops.ownership_issues.seo_meta_org_mismatch');
             }
             if ((int) $seoMeta->article_id !== (int) $article->id) {
-                $issues[] = 'seo_meta article mismatch';
+                $issues[] = __('ops.translation_ops.ownership_issues.seo_meta_article_mismatch');
             }
             if ((string) $seoMeta->locale !== (string) $article->locale) {
-                $issues[] = 'seo_meta locale mismatch';
+                $issues[] = __('ops.translation_ops.ownership_issues.seo_meta_locale_mismatch');
             }
         }
 
@@ -235,20 +235,21 @@ final class ArticleTranslationOpsService
     private function revisionOwnershipIssues(Article $article, ArticleTranslationRevision $revision, string $label): array
     {
         $issues = [];
+        $labelKey = str_replace(' ', '_', $label);
 
         if ((int) $revision->org_id !== self::PUBLIC_ARTICLE_ORG_ID) {
-            $issues[] = "{$label} org mismatch";
+            $issues[] = __("ops.translation_ops.ownership_issues.{$labelKey}_org_mismatch");
         } elseif ((int) $revision->org_id !== (int) $article->org_id) {
-            $issues[] = "{$label} org mismatch";
+            $issues[] = __("ops.translation_ops.ownership_issues.{$labelKey}_org_mismatch");
         }
         if ((int) $revision->article_id !== (int) $article->id) {
-            $issues[] = "{$label} article mismatch";
+            $issues[] = __("ops.translation_ops.ownership_issues.{$labelKey}_article_mismatch");
         }
         if ((string) $revision->locale !== (string) $article->locale) {
-            $issues[] = "{$label} locale mismatch";
+            $issues[] = __("ops.translation_ops.ownership_issues.{$labelKey}_locale_mismatch");
         }
         if ((string) $revision->translation_group_id !== (string) $article->translation_group_id) {
-            $issues[] = "{$label} group mismatch";
+            $issues[] = __("ops.translation_ops.ownership_issues.{$labelKey}_group_mismatch");
         }
 
         return $issues;
@@ -264,7 +265,7 @@ final class ArticleTranslationOpsService
         $issues = [];
 
         if ($sourceArticles->count() !== 1) {
-            $issues[] = 'source article count is '.$sourceArticles->count();
+            $issues[] = __('ops.translation_ops.ownership_issues.source_article_count', ['count' => $sourceArticles->count()]);
         }
 
         if (! $source instanceof Article) {
@@ -277,10 +278,10 @@ final class ArticleTranslationOpsService
             }
 
             if ((int) ($article->source_article_id ?? 0) !== (int) $source->id) {
-                $issues[] = 'translation source_article_id mismatch';
+                $issues[] = __('ops.translation_ops.ownership_issues.translation_source_article_id_mismatch');
             }
             if ((string) $article->source_locale !== (string) $source->locale) {
-                $issues[] = 'translation source_locale mismatch';
+                $issues[] = __('ops.translation_ops.ownership_issues.translation_source_locale_mismatch');
             }
         }
 
@@ -298,25 +299,25 @@ final class ArticleTranslationOpsService
         $alerts = [];
 
         if ($locales->contains(fn (array $locale): bool => (bool) $locale['is_stale'] && (bool) $locale['is_published'])) {
-            $alerts[] = ['label' => 'stale published translation', 'state' => 'failed'];
+            $alerts[] = ['label' => __('ops.translation_ops.alerts.stale_published_translation'), 'state' => 'failed'];
         }
         if ($locales->contains(fn (array $locale): bool => (bool) $locale['is_stale'])) {
-            $alerts[] = ['label' => 'source updated after target review', 'state' => 'warning'];
+            $alerts[] = ['label' => __('ops.translation_ops.alerts.source_updated_after_target_review'), 'state' => 'warning'];
         }
         if ($locales->contains(
             fn (array $locale): bool => (bool) $locale['is_article_published_public'] && empty($locale['published_revision_id'])
         )) {
-            $alerts[] = ['label' => 'missing published revision', 'state' => 'failed'];
+            $alerts[] = ['label' => __('ops.translation_ops.alerts.missing_published_revision'), 'state' => 'failed'];
         }
         $missingTargetLocales = array_values(array_diff($this->targetLocales(), $locales->pluck('locale')->all()));
         foreach ($missingTargetLocales as $missingLocale) {
-            $alerts[] = ['label' => 'missing '.$missingLocale.' locale', 'state' => 'warning'];
+            $alerts[] = ['label' => __('ops.translation_ops.alerts.missing_locale', ['locale' => $missingLocale]), 'state' => 'warning'];
         }
         if (! empty($ownershipIssues)) {
-            $alerts[] = ['label' => 'ownership mismatch', 'state' => 'failed'];
+            $alerts[] = ['label' => __('ops.translation_ops.alerts.ownership_mismatch'), 'state' => 'failed'];
         }
         if (! empty($canonicalIssues)) {
-            $alerts[] = ['label' => 'canonical/source split risk', 'state' => 'failed'];
+            $alerts[] = ['label' => __('ops.translation_ops.alerts.canonical_source_split_risk'), 'state' => 'failed'];
         }
 
         return $alerts;
@@ -361,13 +362,13 @@ final class ArticleTranslationOpsService
 
         return [
             [
-                'label' => 'Open source article',
+                'label' => __('ops.translation_ops.actions.open_source_article'),
                 'enabled' => $source instanceof Article,
                 'url' => $source instanceof Article ? ArticleResource::getUrl('edit', ['record' => $source]) : null,
                 'reason' => null,
             ],
             [
-                'label' => 'Create translation draft',
+                'label' => __('ops.translation_ops.actions.create_translation_draft'),
                 'enabled' => $canCreate,
                 'wire_action' => 'createTranslationDraft',
                 'article_id' => $source instanceof Article ? (int) $source->id : null,
@@ -376,14 +377,14 @@ final class ArticleTranslationOpsService
                 'reason' => $canCreate
                     ? null
                     : ($workflow->canGenerateMachineDraft()
-                        ? 'Target locale already exists or write permission is missing.'
+                        ? __('ops.translation_ops.reasons.target_locale_exists_or_missing_permission')
                         : (string) $workflow->machineDraftUnavailableReason()),
             ],
             [
-                'label' => 'Re-sync from source',
+                'label' => __('ops.translation_ops.actions.resync_from_source'),
                 'enabled' => false,
                 'url' => null,
-                'reason' => 'Use the per-locale target action so lineage stays tied to the canonical target article.',
+                'reason' => __('ops.translation_ops.reasons.use_per_locale_action'),
             ],
         ];
     }
@@ -398,13 +399,13 @@ final class ArticleTranslationOpsService
 
         return [
             [
-                'label' => 'Open target article',
+                'label' => __('ops.translation_ops.actions.open_target_article'),
                 'enabled' => true,
                 'url' => ArticleResource::getUrl('edit', ['record' => $article]),
                 'reason' => null,
             ],
             [
-                'label' => 'Promote to human review',
+                'label' => __('ops.translation_ops.actions.promote_to_human_review'),
                 'enabled' => ContentAccess::canWrite()
                     && ! $isSource
                     && $status === Article::TRANSLATION_STATUS_MACHINE_DRAFT
@@ -412,11 +413,11 @@ final class ArticleTranslationOpsService
                 'wire_action' => 'promoteToHumanReview',
                 'article_id' => (int) $article->id,
                 'reason' => $status === Article::TRANSLATION_STATUS_MACHINE_DRAFT
-                    ? 'Requires content write permission and a current revision.'
-                    : 'Only machine_draft revisions can be promoted here.',
+                    ? __('ops.translation_ops.reasons.requires_write_current_revision')
+                    : __('ops.translation_ops.reasons.only_machine_draft_promote'),
             ],
             [
-                'label' => 'Publish current working revision',
+                'label' => __('ops.translation_ops.actions.publish_current_working_revision'),
                 'enabled' => ContentAccess::canRelease()
                     && ! $isSource
                     && ! $isStale
@@ -427,11 +428,11 @@ final class ArticleTranslationOpsService
                 'wire_action' => 'publishCurrentRevision',
                 'article_id' => (int) $article->id,
                 'reason' => (bool) $preflight['ok']
-                    ? 'Uses translation preflight and the existing release audit path.'
-                    : 'Preflight blocked: '.implode('; ', $preflight['blockers']),
+                    ? __('ops.translation_ops.reasons.uses_translation_preflight')
+                    : __('ops.translation_ops.reasons.preflight_blocked', ['blockers' => implode('; ', $preflight['blockers'])]),
             ],
             [
-                'label' => 'Approve translation',
+                'label' => __('ops.translation_ops.actions.approve_translation'),
                 'enabled' => ContentAccess::canReview()
                     && ! $isSource
                     && ! $isStale
@@ -441,11 +442,11 @@ final class ArticleTranslationOpsService
                 'wire_action' => 'approveTranslation',
                 'article_id' => (int) $article->id,
                 'reason' => (bool) $preflight['ok']
-                    ? 'Only human_review translations can be approved.'
-                    : 'Preflight blocked: '.implode('; ', $preflight['blockers']),
+                    ? __('ops.translation_ops.reasons.only_human_review_approve')
+                    : __('ops.translation_ops.reasons.preflight_blocked', ['blockers' => implode('; ', $preflight['blockers'])]),
             ],
             [
-                'label' => 'Re-sync from source',
+                'label' => __('ops.translation_ops.actions.resync_from_source'),
                 'enabled' => ContentAccess::canWrite()
                     && ! $isSource
                     && $isStale
@@ -453,11 +454,11 @@ final class ArticleTranslationOpsService
                 'wire_action' => 'resyncFromSource',
                 'article_id' => (int) $article->id,
                 'reason' => $workflow->canGenerateMachineDraft()
-                    ? 'Only stale target translations need re-sync.'
+                    ? __('ops.translation_ops.reasons.only_stale_resync')
                     : (string) $workflow->machineDraftUnavailableReason(),
             ],
             [
-                'label' => 'Archive stale revision',
+                'label' => __('ops.translation_ops.actions.archive_stale_revision'),
                 'enabled' => ContentAccess::canWrite()
                     && ! $isSource
                     && $isStale
@@ -465,7 +466,7 @@ final class ArticleTranslationOpsService
                     && (int) $article->working_revision_id !== (int) $article->published_revision_id,
                 'wire_action' => 'archiveStaleRevision',
                 'article_id' => (int) $article->id,
-                'reason' => 'Only non-published stale working revisions can be archived.',
+                'reason' => __('ops.translation_ops.reasons.only_non_published_stale_archive'),
             ],
         ];
     }
@@ -504,22 +505,28 @@ final class ArticleTranslationOpsService
         bool $isStale
     ): array {
         $summary = [];
-        $summary[] = 'source_hash='.($this->shortHash($sourceHash) ?? 'missing');
-        $summary[] = 'translated_from='.($this->shortHash($workingRevision?->translated_from_version_hash) ?? 'missing');
-        $summary[] = $isStale ? 'source changed after target revision' : 'source/target hash current';
+        $summary[] = __('ops.translation_ops.compare.source_hash', ['hash' => $this->shortHash($sourceHash) ?? __('ops.status.missing')]);
+        $summary[] = __('ops.translation_ops.compare.translated_from', ['hash' => $this->shortHash($workingRevision?->translated_from_version_hash) ?? __('ops.status.missing')]);
+        $summary[] = $isStale
+            ? __('ops.translation_ops.compare.source_changed_after_target_revision')
+            : __('ops.translation_ops.compare.source_target_hash_current');
 
         if ($workingRevision instanceof ArticleTranslationRevision && $publishedRevision instanceof ArticleTranslationRevision) {
             $summary[] = (int) $workingRevision->id === (int) $publishedRevision->id
-                ? 'working revision is published revision'
-                : 'working revision differs from latest published revision';
+                ? __('ops.translation_ops.compare.working_revision_is_published_revision')
+                : __('ops.translation_ops.compare.working_revision_differs_from_published_revision');
         } elseif ($workingRevision instanceof ArticleTranslationRevision) {
-            $summary[] = 'working revision exists; no published revision';
+            $summary[] = __('ops.translation_ops.compare.working_revision_exists_no_published_revision');
         } else {
-            $summary[] = 'working revision missing';
+            $summary[] = __('ops.translation_ops.compare.working_revision_missing');
         }
 
         if ($source instanceof Article) {
-            $summary[] = 'source #'.$source->id.' -> '.$article->locale.' #'.$article->id;
+            $summary[] = __('ops.translation_ops.compare.source_to_target', [
+                'source' => $source->id,
+                'locale' => $article->locale,
+                'target' => $article->id,
+            ]);
         }
 
         return $summary;

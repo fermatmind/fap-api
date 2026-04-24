@@ -137,7 +137,9 @@ final class ArticleTranslationRevisionWorkspace
             return '';
         }
 
-        return '#'.$revision->id.' · r'.$revision->revision_number.' · '.$revision->revision_status;
+        $status = str_replace('-', '_', (string) $revision->revision_status);
+
+        return '#'.$revision->id.' · r'.$revision->revision_number.' · '.__('ops.status.'.$status);
     }
 
     /**

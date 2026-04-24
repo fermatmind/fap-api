@@ -79,6 +79,30 @@ final class ArticleTranslationOpsPageTest extends TestCase
             ->assertSee('Re-sync from source disabled');
     }
 
+    public function test_translation_ops_page_localizes_visible_chinese_console_copy(): void
+    {
+        app()->setLocale('zh_CN');
+
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $this->createOrganization();
+        $this->createPublishedTranslationGroup('localized-console-fixture');
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        Livewire::test(ArticleTranslationOpsPage::class)
+            ->assertOk()
+            ->assertSee('统一翻译运营控制台')
+            ->assertSee('翻译健康度')
+            ->assertSee('内容类型')
+            ->assertSee('源文')
+            ->assertSee('已发布')
+            ->assertSee('归属正常')
+            ->assertSee('未配置机器翻译 provider')
+            ->assertDontSee('Unified Translation Ops Console')
+            ->assertDontSee('Translation health')
+            ->assertDontSee('Content type');
+    }
+
     public function test_translation_ops_service_flags_stale_translation_and_source_update_alert(): void
     {
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);

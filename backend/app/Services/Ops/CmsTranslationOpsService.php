@@ -78,7 +78,7 @@ final class CmsTranslationOpsService
             ->map(fn (array $group): array => [
                 'group_key' => 'article:'.$group['translation_group_id'],
                 'content_type' => 'article',
-                'content_type_label' => 'Articles',
+                'content_type_label' => $this->contentTypeLabel('article'),
                 'translation_group_id' => (string) $group['translation_group_id'],
                 'slug' => (string) $group['slug'],
                 'source_locale' => (string) $group['source_locale'],
@@ -162,14 +162,14 @@ final class CmsTranslationOpsService
         $alerts = [];
         if (($coverage['missing_target_locales'] ?? []) !== []) {
             foreach ($coverage['missing_target_locales'] as $locale) {
-                $alerts[] = ['label' => 'missing '.$locale.' locale'];
+                $alerts[] = ['label' => __('ops.translation_ops.alerts.missing_locale', ['locale' => $locale])];
             }
         }
         if ($locales->contains(fn (array $locale): bool => (bool) $locale['is_stale'])) {
-            $alerts[] = ['label' => 'source updated after target review'];
+            $alerts[] = ['label' => __('ops.translation_ops.alerts.source_updated_after_target_review')];
         }
         if ($locales->contains(fn (array $locale): bool => ! (bool) $locale['ownership_ok'])) {
-            $alerts[] = ['label' => 'ownership mismatch'];
+            $alerts[] = ['label' => __('ops.translation_ops.alerts.ownership_mismatch')];
         }
 
         return [
@@ -208,10 +208,10 @@ final class CmsTranslationOpsService
         $ownershipIssues = [];
 
         if ((int) $record->org_id !== 0) {
-            $ownershipIssues[] = 'row org mismatch';
+            $ownershipIssues[] = __('ops.translation_ops.ownership_issues.row_org_mismatch');
         }
         if (! $isSource && ! filled($record->source_content_id)) {
-            $ownershipIssues[] = 'source linkage missing';
+            $ownershipIssues[] = __('ops.translation_ops.ownership_issues.source_linkage_missing');
         }
 
         return [
@@ -236,11 +236,16 @@ final class CmsTranslationOpsService
             'edit_url' => $adapter->editUrl($record),
             'preflight' => $preflight,
             'compare_summary' => [
-                'shadow revision workflow',
-                $record->working_revision_id ? 'working revision present' : 'working revision missing',
-                $isStale ? 'source hash drift detected' : 'source hash aligned',
+                __('ops.translation_ops.compare.shadow_revision_workflow'),
+                $record->working_revision_id
+                    ? __('ops.translation_ops.compare.working_revision_present')
+                    : __('ops.translation_ops.compare.working_revision_missing'),
+                $isStale
+                    ? __('ops.translation_ops.compare.source_hash_drift_detected')
+                    : __('ops.translation_ops.compare.source_hash_aligned'),
             ],
             'workflow_kind' => 'shadow_revision',
+            'workflow_kind_label' => __('ops.translation_ops.compare.shadow_revision_workflow'),
             'actions' => $this->siblingLocaleActions($contentType, $adapter, $record, $isSource, $isStale),
         ];
     }
@@ -396,10 +401,10 @@ final class CmsTranslationOpsService
     private function contentTypeLabel(string $contentType): string
     {
         return match ($contentType) {
-            'article' => 'Articles',
-            'support_article' => 'Support Articles',
-            'interpretation_guide' => 'Interpretation Guides',
-            'content_page' => 'Content Pages',
+            'article' => __('ops.translation_ops.content_types.article'),
+            'support_article' => __('ops.translation_ops.content_types.support_article'),
+            'interpretation_guide' => __('ops.translation_ops.content_types.interpretation_guide'),
+            'content_page' => __('ops.translation_ops.content_types.content_page'),
             default => ucfirst(str_replace('_', ' ', $contentType)),
         };
     }
@@ -458,7 +463,7 @@ final class CmsTranslationOpsService
         foreach (($coverage['missing_target_locales'] ?? []) as $targetLocale) {
             $enabled = $this->siblingWorkflow->canGenerateMachineDraft($contentType);
             $actions[] = [
-                'label' => 'Create '.$targetLocale.' translation draft',
+                'label' => __('ops.translation_ops.actions.create_locale_translation_draft', ['locale' => $targetLocale]),
                 'enabled' => $enabled,
                 'reason' => $enabled ? null : $this->siblingWorkflow->machineDraftUnavailableReason($contentType),
                 'url' => null,
@@ -470,7 +475,7 @@ final class CmsTranslationOpsService
         }
 
         $actions[] = [
-            'label' => 'Open source '.$this->contentTypeLabel($contentType),
+            'label' => __('ops.translation_ops.actions.open_source_type', ['content_type' => $this->contentTypeLabel($contentType)]),
             'enabled' => true,
             'reason' => null,
             'url' => $adapter->editUrl($source),
@@ -490,7 +495,7 @@ final class CmsTranslationOpsService
     {
         if ($isSource) {
             return [[
-                'label' => 'Open source',
+                'label' => __('ops.translation_ops.actions.open_source'),
                 'enabled' => true,
                 'reason' => null,
                 'url' => $adapter->editUrl($record),
@@ -501,7 +506,7 @@ final class CmsTranslationOpsService
         }
 
         $actions = [[
-            'label' => 'Open target',
+            'label' => __('ops.translation_ops.actions.open_target'),
             'enabled' => true,
             'reason' => null,
             'url' => $adapter->editUrl($record),
@@ -512,11 +517,11 @@ final class CmsTranslationOpsService
 
         $canResync = $this->siblingWorkflow->canGenerateMachineDraft($contentType) && (! $adapter->isPublished($record) || $adapter->supportsPublishedResync());
         $actions[] = [
-            'label' => 'Re-sync from source',
+            'label' => __('ops.translation_ops.actions.resync_from_source'),
             'enabled' => $isStale && $canResync,
             'reason' => $isStale
-                ? ($canResync ? null : ($adapter->isPublished($record) ? 'Published row-backed translations cannot be re-synced safely yet.' : $this->siblingWorkflow->machineDraftUnavailableReason($contentType)))
-                : 'Target is not stale',
+                ? ($canResync ? null : ($adapter->isPublished($record) ? __('ops.translation_ops.reasons.published_row_backed_resync_disabled') : $this->siblingWorkflow->machineDraftUnavailableReason($contentType)))
+                : __('ops.translation_ops.reasons.target_not_stale'),
             'url' => null,
             'wire_action' => 'resyncFromSource',
             'content_type' => $contentType,
@@ -525,38 +530,38 @@ final class CmsTranslationOpsService
 
         $status = (string) $record->translation_status;
         $actions[] = [
-            'label' => 'Promote to human review',
+            'label' => __('ops.translation_ops.actions.promote_to_human_review'),
             'enabled' => in_array($status, ['draft', 'machine_draft'], true),
-            'reason' => in_array($status, ['draft', 'machine_draft'], true) ? null : 'Only draft or machine_draft rows can be promoted.',
+            'reason' => in_array($status, ['draft', 'machine_draft'], true) ? null : __('ops.translation_ops.reasons.only_machine_draft_promote'),
             'url' => null,
             'wire_action' => 'promoteToHumanReview',
             'content_type' => $contentType,
             'record_id' => (int) $record->id,
         ];
         $actions[] = [
-            'label' => 'Approve translation',
+            'label' => __('ops.translation_ops.actions.approve_translation'),
             'enabled' => $status === 'human_review',
-            'reason' => $status === 'human_review' ? null : 'Only human_review rows can be approved.',
+            'reason' => $status === 'human_review' ? null : __('ops.translation_ops.reasons.only_human_review_approve'),
             'url' => null,
             'wire_action' => 'approveTranslation',
             'content_type' => $contentType,
             'record_id' => (int) $record->id,
         ];
         $actions[] = [
-            'label' => 'Publish translation',
+            'label' => __('ops.translation_ops.actions.publish_translation'),
             'enabled' => $status === 'approved',
-            'reason' => $status === 'approved' ? null : 'Only approved rows can be published.',
+            'reason' => $status === 'approved' ? null : __('ops.translation_ops.reasons.only_approved_publish'),
             'url' => null,
             'wire_action' => 'publishCurrentRevision',
             'content_type' => $contentType,
             'record_id' => (int) $record->id,
         ];
         $actions[] = [
-            'label' => 'Archive stale',
+            'label' => __('ops.translation_ops.actions.archive_stale'),
             'enabled' => $isStale && ! $adapter->isPublished($record),
             'reason' => $isStale
-                ? ($adapter->isPublished($record) ? 'Published rows cannot be archived here.' : null)
-                : 'Only stale translation rows can be archived.',
+                ? ($adapter->isPublished($record) ? __('ops.translation_ops.reasons.published_rows_cannot_archive') : null)
+                : __('ops.translation_ops.reasons.only_stale_archive'),
             'url' => null,
             'wire_action' => 'archiveStaleRevision',
             'content_type' => $contentType,

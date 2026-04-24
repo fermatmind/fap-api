@@ -8,7 +8,7 @@
                 </div>
 
                 <x-filament.ops.shared.status-pill
-                    :label="$check['ready'] ? 'Ready' : 'Missing'"
+                    :label="$check['ready'] ? __('ops.status.ready') : __('ops.status.missing')"
                     :state="$check['ready'] ? 'ready' : 'draft'"
                 />
             </div>
@@ -17,7 +17,7 @@
 
     @if (filled($plannedCanonical))
         <div class="ops-personality-workspace-seo__planned">
-            <span class="ops-personality-workspace-seo__planned-label">Planned canonical</span>
+            <span class="ops-personality-workspace-seo__planned-label">{{ __('ops.resources.common.fields.planned_canonical') }}</span>
             <span class="ops-personality-workspace-seo__planned-value">{{ $plannedCanonical }}</span>
         </div>
     @endif

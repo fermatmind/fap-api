@@ -8,7 +8,7 @@
                 </div>
 
                 <x-filament.ops.shared.status-pill
-                    :label="$check['ready'] ? 'Ready' : 'Missing'"
+                    :label="$check['ready'] ? __('ops.status.ready') : __('ops.status.missing')"
                     :state="$check['ready'] ? 'ready' : 'draft'"
                 />
             </div>
@@ -22,7 +22,7 @@
             target="_blank"
             rel="noreferrer"
         >
-            Open canonical URL
+            {{ __('ops.resources.common.fields.open_canonical_url') }}
         </a>
     @endif
 </div>
