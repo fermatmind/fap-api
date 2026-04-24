@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Ops;
 
 use App\Contracts\Cms\SiblingTranslationAdapter;
+use App\Filament\Ops\Support\StatusBadge;
 use App\Services\Cms\ArticleTranslationWorkflowService;
 use App\Services\Cms\SiblingTranslationWorkflowService;
 use Illuminate\Database\Eloquent\Model;
@@ -33,6 +34,9 @@ final class CmsTranslationOpsService
      * @param  array<string, mixed>  $filters
      * @return array{
      *     metrics: array<string, int>,
+     *     summary_cards: list<array<string, mixed>>,
+     *     locale_columns: list<string>,
+     *     coverage_matrix: list<array<string, mixed>>,
      *     groups: list<array<string, mixed>>,
      *     selected_group: array<string, mixed>|null,
      *     filter_options: array<string, list<string>>
@@ -50,6 +54,9 @@ final class CmsTranslationOpsService
 
         return [
             'metrics' => $this->metrics($groups),
+            'summary_cards' => $this->summaryCards($groups),
+            'locale_columns' => $this->localeColumns($filtered),
+            'coverage_matrix' => $this->coverageMatrix($filtered),
             'groups' => $filtered->all(),
             'selected_group' => $filtered->firstWhere('group_key', $selectedGroupKey)
                 ?? $groups->firstWhere('group_key', $selectedGroupKey),
@@ -334,14 +341,320 @@ final class CmsTranslationOpsService
      */
     private function metrics(Collection $groups): array
     {
+        $publishedLocaleCount = $groups->sum(fn (array $group): int => count($group['published_locales'] ?? []));
+        $targetSlotCount = $groups->sum(fn (array $group): int => count($group['coverage']['target_locales'] ?? []));
+        $blockedActionCount = $groups->sum(fn (array $group): int => $this->blockedActionCount($group));
+        $stalePublishedCount = $groups->sum(fn (array $group): int => collect($group['locales'] ?? [])
+            ->filter(fn (array $locale): bool => (bool) ($locale['is_stale'] ?? false) && (bool) ($locale['is_published'] ?? false))
+            ->count());
+        $staleDraftCount = $groups->sum(fn (array $group): int => collect($group['locales'] ?? [])
+            ->filter(fn (array $locale): bool => (bool) ($locale['is_stale'] ?? false) && ! (bool) ($locale['is_published'] ?? false))
+            ->count());
+
         return [
             'translation_groups' => $groups->count(),
             'stale_groups' => $groups->where('stale_locales_count', '>', 0)->count(),
             'published_groups' => $groups->filter(fn (array $group): bool => ($group['published_locales'] ?? []) !== [])->count(),
+            'published_locale_count' => $publishedLocaleCount,
+            'target_slot_count' => $targetSlotCount,
+            'published_coverage_rate' => $targetSlotCount > 0 ? (int) round(($publishedLocaleCount / $targetSlotCount) * 100) : 0,
             'missing_target_locale' => $groups->filter(fn (array $group): bool => ($group['coverage']['missing_target_locales'] ?? []) !== [])->count(),
+            'missing_translation_count' => $groups->sum(fn (array $group): int => count($group['coverage']['missing_target_locales'] ?? [])),
+            'stale_translation_count' => $groups->sum(fn (array $group): int => (int) ($group['stale_locales_count'] ?? 0)),
+            'stale_published_count' => $stalePublishedCount,
+            'stale_draft_count' => $staleDraftCount,
+            'blocked_action_count' => $blockedActionCount,
             'ownership_mismatch_groups' => $groups->where('ownership_ok', false)->count(),
             'canonical_risk_groups' => $groups->where('canonical_ok', false)->count(),
         ];
+    }
+
+    /**
+     * @param  Collection<int, array<string, mixed>>  $groups
+     * @return list<array<string, mixed>>
+     */
+    private function summaryCards(Collection $groups): array
+    {
+        $metrics = $this->metrics($groups);
+
+        return [
+            [
+                'label' => __('ops.translation_ops.summary.published_coverage'),
+                'value' => __('ops.translation_ops.summary.coverage_rate', ['rate' => $metrics['published_coverage_rate']]),
+                'hint' => __('ops.translation_ops.summary.published_coverage_hint', [
+                    'locales' => $metrics['published_locale_count'],
+                    'groups' => $metrics['published_groups'],
+                ]),
+                'state' => $metrics['published_coverage_rate'] >= 90 ? 'success' : 'warning',
+            ],
+            [
+                'label' => __('ops.translation_ops.summary.missing_translations'),
+                'value' => (string) $metrics['missing_translation_count'],
+                'hint' => __('ops.translation_ops.summary.missing_translations_hint', [
+                    'groups' => $metrics['missing_target_locale'],
+                ]),
+                'state' => $metrics['missing_translation_count'] > 0 ? 'warning' : 'success',
+            ],
+            [
+                'label' => __('ops.translation_ops.summary.stale_translations'),
+                'value' => (string) $metrics['stale_translation_count'],
+                'hint' => __('ops.translation_ops.summary.stale_translations_hint', [
+                    'published' => $metrics['stale_published_count'],
+                    'drafts' => $metrics['stale_draft_count'],
+                ]),
+                'state' => $metrics['stale_translation_count'] > 0 ? 'failed' : 'success',
+            ],
+            [
+                'label' => __('ops.translation_ops.summary.blocked_actions'),
+                'value' => (string) $metrics['blocked_action_count'],
+                'hint' => __('ops.translation_ops.summary.blocked_actions_hint'),
+                'state' => $metrics['blocked_action_count'] > 0 ? 'warning' : 'success',
+            ],
+        ];
+    }
+
+    /**
+     * @param  Collection<int, array<string, mixed>>  $groups
+     * @return list<string>
+     */
+    private function localeColumns(Collection $groups): array
+    {
+        $sourceLocales = $groups->pluck('source_locale')->filter()->values()->all();
+        $existingLocales = $groups
+            ->flatMap(fn (array $group): array => collect($group['locales'] ?? [])->pluck('locale')->all())
+            ->filter()
+            ->values()
+            ->all();
+
+        return collect($sourceLocales)
+            ->merge($this->targetLocales())
+            ->merge($existingLocales)
+            ->filter()
+            ->unique()
+            ->sortBy(fn (string $locale): string => $locale === 'zh-CN' ? '0-'.$locale : '1-'.$locale)
+            ->values()
+            ->all();
+    }
+
+    /**
+     * @param  Collection<int, array<string, mixed>>  $groups
+     * @return list<array<string, mixed>>
+     */
+    private function coverageMatrix(Collection $groups): array
+    {
+        $columns = $this->localeColumns($groups);
+
+        return $groups
+            ->map(fn (array $group): array => [
+                'group_key' => (string) $group['group_key'],
+                'content_type' => (string) $group['content_type'],
+                'content_type_label' => (string) $group['content_type_label'],
+                'slug' => (string) $group['slug'],
+                'translation_group_id' => (string) $group['translation_group_id'],
+                'source_locale' => (string) $group['source_locale'],
+                'source_record_id' => $group['source_record_id'],
+                'source_edit_url' => $group['source_edit_url'],
+                'alerts' => $group['alerts'] ?? [],
+                'health_state' => $this->groupHealthState($group),
+                'health_label' => $this->groupHealthLabel($group),
+                'cells' => collect($columns)
+                    ->mapWithKeys(fn (string $locale): array => [$locale => $this->coverageCell($group, $locale)])
+                    ->all(),
+            ])
+            ->values()
+            ->all();
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function coverageCell(array $group, string $locale): array
+    {
+        $localeRow = collect($group['locales'] ?? [])->first(
+            fn (array $row): bool => (string) ($row['locale'] ?? '') === $locale
+        );
+
+        if (is_array($localeRow)) {
+            $state = $this->localeCellState($localeRow);
+
+            return [
+                'locale' => $locale,
+                'state' => $state,
+                'status_state' => $this->localeCellStatusState($state),
+                'status_label' => $this->localeCellStatusLabel($localeRow),
+                'freshness_label' => (bool) ($localeRow['is_stale'] ?? false)
+                    ? __('ops.translation_ops.matrix.stale')
+                    : __('ops.translation_ops.matrix.current'),
+                'freshness_state' => (bool) ($localeRow['is_stale'] ?? false) ? 'failed' : 'success',
+                'publish_label' => (bool) ($localeRow['is_published'] ?? false)
+                    ? __('ops.translation_ops.matrix.published')
+                    : __('ops.translation_ops.matrix.not_published'),
+                'publish_state' => (bool) ($localeRow['is_published'] ?? false) ? 'success' : 'gray',
+                'record_label' => '#'.(string) ($localeRow['record_id'] ?? ''),
+                'workflow_label' => (string) ($localeRow['workflow_kind_label'] ?? $localeRow['workflow_kind'] ?? ''),
+                'blockers' => array_values(array_filter(array_merge(
+                    (array) ($localeRow['ownership_issues'] ?? []),
+                    (array) data_get($localeRow, 'preflight.blockers', []),
+                ))),
+                'actions' => $this->groupActionsByPriority((array) ($localeRow['actions'] ?? [])),
+            ];
+        }
+
+        return [
+            'locale' => $locale,
+            'state' => 'missing',
+            'status_state' => 'gray',
+            'status_label' => __('ops.translation_ops.matrix.missing'),
+            'freshness_label' => __('ops.translation_ops.matrix.not_available'),
+            'freshness_state' => 'gray',
+            'publish_label' => __('ops.translation_ops.matrix.not_published'),
+            'publish_state' => 'gray',
+            'record_label' => __('ops.translation_ops.fields.not_available'),
+            'workflow_label' => __('ops.translation_ops.matrix.no_target_record'),
+            'blockers' => [__('ops.translation_ops.alerts.missing_locale', ['locale' => $locale])],
+            'actions' => $this->groupActionsByPriority($this->missingLocaleActions($group, $locale)),
+        ];
+    }
+
+    private function localeCellState(array $locale): string
+    {
+        if ((bool) ($locale['is_source'] ?? false)) {
+            return 'source';
+        }
+
+        if (! (bool) ($locale['ownership_ok'] ?? true) || ! (bool) data_get($locale, 'preflight.ok', true)) {
+            return 'blocked';
+        }
+
+        if ((bool) ($locale['is_stale'] ?? false)) {
+            return 'stale';
+        }
+
+        if ((bool) ($locale['is_published'] ?? false)) {
+            return 'published';
+        }
+
+        return (string) ($locale['translation_status'] ?? 'draft');
+    }
+
+    private function localeCellStatusState(string $state): string
+    {
+        return match ($state) {
+            'source', 'published' => 'success',
+            'stale', 'blocked' => 'failed',
+            'approved', 'human_review' => 'warning',
+            default => $state,
+        };
+    }
+
+    private function localeCellStatusLabel(array $locale): string
+    {
+        if ((bool) ($locale['is_source'] ?? false)) {
+            return __('ops.translation_ops.matrix.source');
+        }
+
+        if ((bool) ($locale['is_stale'] ?? false)) {
+            return __('ops.translation_ops.matrix.stale');
+        }
+
+        if ((bool) ($locale['is_published'] ?? false)) {
+            return __('ops.translation_ops.matrix.published');
+        }
+
+        return StatusBadge::label((string) data_get($locale, 'translation_status', 'draft'));
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    private function missingLocaleActions(array $group, string $locale): array
+    {
+        $actions = collect($group['group_actions'] ?? [])
+            ->filter(fn (array $action): bool => (string) ($action['target_locale'] ?? '') === $locale)
+            ->values()
+            ->all();
+
+        if ($actions !== []) {
+            return $actions;
+        }
+
+        return [[
+            'label' => __('ops.translation_ops.actions.create_locale_translation_draft', ['locale' => $locale]),
+            'enabled' => false,
+            'reason' => __('ops.translation_ops.reasons.no_available_create_action'),
+            'url' => null,
+            'wire_action' => null,
+            'content_type' => (string) ($group['content_type'] ?? ''),
+            'record_id' => (int) ($group['source_record_id'] ?? 0),
+            'target_locale' => $locale,
+        ]];
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $actions
+     * @return array{primary:list<array<string,mixed>>,secondary:list<array<string,mixed>>,disabled:list<array<string,mixed>>}
+     */
+    private function groupActionsByPriority(array $actions): array
+    {
+        $grouped = [
+            'primary' => [],
+            'secondary' => [],
+            'disabled' => [],
+        ];
+
+        foreach ($actions as $action) {
+            if (! (bool) ($action['enabled'] ?? false)) {
+                $grouped['disabled'][] = $action;
+
+                continue;
+            }
+
+            $wireAction = (string) ($action['wire_action'] ?? '');
+            if (in_array($wireAction, ['createTranslationDraft', 'resyncFromSource', 'publishCurrentRevision'], true)) {
+                $grouped['primary'][] = $action;
+
+                continue;
+            }
+
+            $grouped['secondary'][] = $action;
+        }
+
+        return $grouped;
+    }
+
+    private function blockedActionCount(array $group): int
+    {
+        $groupActionCount = collect($group['group_actions'] ?? [])
+            ->filter(fn (array $action): bool => ! (bool) ($action['enabled'] ?? false))
+            ->count();
+        $localeActionCount = collect($group['locales'] ?? [])
+            ->sum(fn (array $locale): int => collect($locale['actions'] ?? [])
+                ->filter(fn (array $action): bool => ! (bool) ($action['enabled'] ?? false))
+                ->count());
+
+        return $groupActionCount + $localeActionCount;
+    }
+
+    private function groupHealthState(array $group): string
+    {
+        if (! (bool) ($group['ownership_ok'] ?? true) || ! (bool) ($group['canonical_ok'] ?? true)) {
+            return 'failed';
+        }
+
+        if ((int) ($group['stale_locales_count'] ?? 0) > 0 || ($group['coverage']['missing_target_locales'] ?? []) !== []) {
+            return 'warning';
+        }
+
+        return 'success';
+    }
+
+    private function groupHealthLabel(array $group): string
+    {
+        return match ($this->groupHealthState($group)) {
+            'failed' => __('ops.translation_ops.matrix.blocked'),
+            'warning' => __('ops.translation_ops.matrix.needs_action'),
+            default => __('ops.translation_ops.matrix.healthy'),
+        };
     }
 
     /**

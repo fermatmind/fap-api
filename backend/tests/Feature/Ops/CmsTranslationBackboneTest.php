@@ -57,6 +57,9 @@ final class CmsTranslationBackboneTest extends TestCase
             ->assertSee('Content Pages')
             ->assertSee('Create translation draft disabled')
             ->assertSet('metrics.translation_groups', 4)
+            ->assertSet('metrics.missing_translation_count', 3)
+            ->assertSet('coverageMatrix.0.cells.zh-CN.state', 'source')
+            ->assertSet('summaryCards.1.value', '3')
             ->set('contentTypeFilter', 'support_article')
             ->assertSee('support-faq')
             ->assertDontSee('ops-article');
