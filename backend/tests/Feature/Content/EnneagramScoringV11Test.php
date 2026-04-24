@@ -170,6 +170,171 @@ final class EnneagramScoringV11Test extends TestCase
         $this->assertSame('e105_likert_space.v1', data_get($projection, 'form.score_space_version'));
     }
 
+    public function test_projection_v2_policy_marks_e105_clear_when_gap_is_strong(): void
+    {
+        $projection = (new EnneagramPublicProjectionService)->buildV2(
+            $this->syntheticProjectionInput('enneagram_likert_105', [
+                'T4' => 92.0,
+                'T2' => 68.0,
+                'T9' => 51.0,
+                'T1' => 34.0,
+                'T3' => 29.0,
+                'T5' => 24.0,
+                'T6' => 20.0,
+                'T7' => 18.0,
+                'T8' => 15.0,
+            ]),
+            'zh-CN'
+        );
+
+        $this->assertSame('high_confidence', data_get($projection, 'classification.confidence_level'));
+        $this->assertSame('clear', data_get($projection, 'classification.interpretation_scope'));
+        $this->assertSame('gap_above_high_confidence_threshold', data_get($projection, 'classification.interpretation_reason'));
+        $this->assertGreaterThan(15.0, (float) data_get($projection, 'classification.dominance_gap_pct'));
+        $this->assertNotNull(data_get($projection, 'classification.dominance.normalized_gap'));
+        $this->assertNotNull(data_get($projection, 'classification.dominance.profile_entropy'));
+    }
+
+    public function test_projection_v2_policy_marks_e105_close_call_from_analyzer_signal(): void
+    {
+        $scorer = new EnneagramLikert105Scorer(new EnneagramTopologyAnalyzer);
+        [$answers, $questionIndex] = $this->likertFixture([
+            'T3' => array_fill(0, 12, 2),
+            'T8' => array_merge(array_fill(0, 10, 2), [1]),
+            'T4' => array_fill(0, 12, 0),
+        ]);
+        $result = $scorer->score($answers, $questionIndex, []);
+
+        $projection = (new EnneagramPublicProjectionService)->buildV2($result, 'zh-CN');
+
+        $this->assertSame('close_call', data_get($projection, 'classification.confidence_level'));
+        $this->assertSame('close_call', data_get($projection, 'classification.interpretation_scope'));
+        $this->assertSame('analyzer_close_call', data_get($projection, 'classification.interpretation_reason'));
+        $this->assertSame('analyzer_close_call', data_get($projection, 'dynamics.close_call_pair.trigger_reason'));
+    }
+
+    public function test_projection_v2_policy_marks_fc144_clear_when_gap_is_strong(): void
+    {
+        $projection = (new EnneagramPublicProjectionService)->buildV2(
+            $this->syntheticProjectionInput('enneagram_forced_choice_144', [
+                'T8' => 88.0,
+                'T3' => 63.0,
+                'T7' => 50.0,
+                'T2' => 38.0,
+                'T1' => 30.0,
+                'T4' => 26.0,
+                'T5' => 20.0,
+                'T6' => 18.0,
+                'T9' => 16.0,
+            ]),
+            'en'
+        );
+
+        $this->assertSame('high_confidence', data_get($projection, 'classification.confidence_level'));
+        $this->assertSame('clear', data_get($projection, 'classification.interpretation_scope'));
+        $this->assertSame('fc144_forced_choice_space.v1', data_get($projection, 'form.score_space_version'));
+        $this->assertGreaterThan(15.0, (float) data_get($projection, 'classification.dominance_gap_pct'));
+    }
+
+    public function test_projection_v2_policy_marks_fc144_unresolved_tie_as_close_call(): void
+    {
+        $scorer = new EnneagramForcedChoice144Scorer(new EnneagramTopologyAnalyzer);
+        [$answers, $questionIndex] = $this->forcedChoiceFixture(
+            winnerSequence: array_merge(
+                array_fill(0, 19, 'T1'),
+                array_fill(0, 19, 'T2'),
+                $this->nonLeaderWins(104)
+            ),
+            headToHeadWinners: ['T1', 'T2']
+        );
+
+        $result = $scorer->score($answers, $questionIndex, []);
+        $projection = (new EnneagramPublicProjectionService)->buildV2($result, 'en');
+
+        $this->assertSame('close_call', data_get($projection, 'classification.confidence_level'));
+        $this->assertSame('close_call', data_get($projection, 'classification.interpretation_scope'));
+        $this->assertSame('unresolved_tie', data_get($projection, 'classification.interpretation_reason'));
+        $this->assertSame('unresolved_tie', data_get($projection, 'dynamics.close_call_pair.trigger_reason'));
+    }
+
+    public function test_projection_v2_policy_marks_diffuse_when_profile_shape_is_flat(): void
+    {
+        $projection = (new EnneagramPublicProjectionService)->buildV2(
+            $this->syntheticProjectionInput('enneagram_likert_105', [
+                'T1' => 52.0,
+                'T2' => 51.0,
+                'T3' => 50.0,
+                'T4' => 49.0,
+                'T5' => 48.0,
+                'T6' => 47.0,
+                'T7' => 46.0,
+                'T8' => 45.0,
+                'T9' => 44.0,
+            ]),
+            'zh-CN'
+        );
+
+        $this->assertSame('diffuse', data_get($projection, 'classification.confidence_level'));
+        $this->assertSame('diffuse', data_get($projection, 'classification.interpretation_scope'));
+        $this->assertContains(
+            (string) data_get($projection, 'classification.interpretation_reason'),
+            ['high_profile_entropy', 'top3_spread_low']
+        );
+        $this->assertTrue((bool) data_get($projection, 'render_hints.show_diffuse_warning'));
+    }
+
+    public function test_projection_v2_policy_triggers_low_quality_only_with_operational_flags(): void
+    {
+        $projection = (new EnneagramPublicProjectionService)->buildV2(
+            $this->syntheticProjectionInput(
+                'enneagram_likert_105',
+                [
+                    'T5' => 84.0,
+                    'T6' => 68.0,
+                    'T4' => 52.0,
+                    'T1' => 35.0,
+                    'T2' => 28.0,
+                    'T3' => 21.0,
+                    'T7' => 18.0,
+                    'T8' => 16.0,
+                    'T9' => 12.0,
+                ],
+                [],
+                ['level' => 'P2', 'flags' => ['speed_too_fast']]
+            ),
+            'zh-CN'
+        );
+
+        $this->assertSame('low_quality', data_get($projection, 'classification.confidence_level'));
+        $this->assertSame('low_quality', data_get($projection, 'classification.interpretation_scope'));
+        $this->assertSame('retest', data_get($projection, 'classification.quality_level'));
+        $this->assertSame('triggered_operational_signal', data_get($projection, 'classification.low_quality_status'));
+        $this->assertTrue((bool) data_get($projection, 'render_hints.show_low_quality_boundary'));
+    }
+
+    public function test_projection_v2_policy_keeps_low_quality_unavailable_without_operational_flags(): void
+    {
+        $projection = (new EnneagramPublicProjectionService)->buildV2(
+            $this->syntheticProjectionInput('enneagram_forced_choice_144', [
+                'T1' => 71.0,
+                'T2' => 62.0,
+                'T3' => 44.0,
+                'T4' => 31.0,
+                'T5' => 27.0,
+                'T6' => 22.0,
+                'T7' => 18.0,
+                'T8' => 16.0,
+                'T9' => 12.0,
+            ]),
+            'en'
+        );
+
+        $this->assertNotSame('low_quality', data_get($projection, 'classification.confidence_level'));
+        $this->assertSame('unavailable', data_get($projection, 'classification.quality_level'));
+        $this->assertSame('not_triggered_no_operational_signal', data_get($projection, 'classification.low_quality_status'));
+        $this->assertSame('no_signal', data_get($projection, '_meta.policy.signal_limitations.low_quality'));
+    }
+
     /**
      * @param  array<string,list<int>>  $overrides
      * @return array{0:array<int,int>,1:array<int,array<string,mixed>>}
@@ -246,6 +411,107 @@ final class EnneagramScoringV11Test extends TestCase
         sort($types, SORT_STRING);
 
         return implode('-', $types);
+    }
+
+    /**
+     * @param  array<string,float>  $scoresPct
+     * @param  array<string,mixed>  $analysisOverrides
+     * @param  array<string,mixed>  $qualityOverrides
+     * @return array<string,mixed>
+     */
+    private function syntheticProjectionInput(
+        string $formCode,
+        array $scoresPct,
+        array $analysisOverrides = [],
+        array $qualityOverrides = []
+    ): array {
+        $normalizedScores = [];
+        foreach (['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9'] as $typeCode) {
+            $normalizedScores[$typeCode] = round((float) ($scoresPct[$typeCode] ?? 0.0), 2);
+        }
+
+        $ranking = collect($normalizedScores)
+            ->map(fn (float $scorePct, string $typeCode): array => [
+                'type_code' => $typeCode,
+                'score_pct' => $scorePct,
+            ])
+            ->sort(fn (array $a, array $b): int => ($b['score_pct'] <=> $a['score_pct']) ?: strcmp($a['type_code'], $b['type_code']))
+            ->values()
+            ->map(function (array $row, int $index) use ($formCode, $normalizedScores): array {
+                if ($formCode === 'enneagram_forced_choice_144') {
+                    $row['raw_count'] = (int) round(($row['score_pct'] / 100.0) * 32.0);
+                } else {
+                    $mean = array_sum($normalizedScores) / count($normalizedScores);
+                    $rawIntensity = round(($row['score_pct'] / 25.0) - 2.0, 6);
+                    $row['raw_intensity'] = $rawIntensity;
+                    $row['dominance'] = round($row['score_pct'] - $mean, 6);
+                }
+                $row['rank'] = $index + 1;
+
+                return $row;
+            })
+            ->all();
+
+        $analysis = array_merge([
+            'core_type' => $ranking[0]['type_code'],
+            'top3' => array_values(array_map(static fn (array $row): string => (string) ($row['type_code'] ?? ''), array_slice($ranking, 0, 3))),
+            'score_separation' => round((float) $ranking[0]['score_pct'] - (float) $ranking[1]['score_pct'], 4),
+            'interpretation_state' => 'standard_primary',
+            'confidence_band' => 'medium',
+            'response_quality_summary' => ['level' => 'clean', 'soft_flags' => [], 'hard_flags' => [], 'flags' => []],
+        ], $analysisOverrides);
+
+        $quality = array_merge([
+            'level' => 'P0',
+            'flags' => [],
+        ], $qualityOverrides);
+
+        if ($formCode === 'enneagram_forced_choice_144') {
+            $wins = [];
+            $exposures = [];
+            foreach ($normalizedScores as $typeCode => $scorePct) {
+                $wins[$typeCode] = (int) round(($scorePct / 100.0) * 32.0);
+                $exposures[$typeCode] = 32;
+            }
+
+            return [
+                'scale_code' => 'ENNEAGRAM',
+                'form_code' => $formCode,
+                'score_method' => 'enneagram_forced_choice_144_pair_v1',
+                'scoring_spec_version' => 'enneagram_forced_choice_144_spec_v1',
+                'scores_0_100' => $normalizedScores,
+                'ranking' => $ranking,
+                'analysis' => $analysis,
+                'quality' => $quality,
+                'raw_scores' => [
+                    'type_counts' => $wins,
+                    'exposures' => $exposures,
+                ],
+            ];
+        }
+
+        $rawIntensity = [];
+        $dominance = [];
+        $mean = array_sum($normalizedScores) / count($normalizedScores);
+        foreach ($normalizedScores as $typeCode => $scorePct) {
+            $rawIntensity[$typeCode] = round(($scorePct / 25.0) - 2.0, 6);
+            $dominance[$typeCode] = round($scorePct - $mean, 6);
+        }
+
+        return [
+            'scale_code' => 'ENNEAGRAM',
+            'form_code' => $formCode,
+            'score_method' => 'enneagram_likert_105_weighted_v1',
+            'scoring_spec_version' => 'enneagram_likert_105_spec_v1',
+            'scores_0_100' => $normalizedScores,
+            'ranking' => $ranking,
+            'analysis' => $analysis,
+            'quality' => $quality,
+            'raw_scores' => [
+                'raw_intensity' => $rawIntensity,
+                'dominance' => $dominance,
+            ],
+        ];
     }
 
     /**

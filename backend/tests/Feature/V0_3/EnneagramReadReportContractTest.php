@@ -47,6 +47,14 @@ final class EnneagramReadReportContractTest extends TestCase
         $result->assertJsonPath('enneagram_public_projection_v2.form.form_code', $formCode);
         $result->assertJsonPath('enneagram_public_projection_v2.form.question_count', $questionCount);
         $result->assertJsonPath('enneagram_public_projection_v2.methodology.cross_form_comparable', false);
+        $result->assertJsonPath('enneagram_public_projection_v2.algorithmic_meta.quality_policy_version', 'enneagram_quality_policy.v1');
+        $result->assertJsonPath('enneagram_public_projection_v2.algorithmic_meta.confidence_policy_version', 'enneagram_confidence_policy.v1');
+        $result->assertJsonPath('enneagram_public_projection_v2._meta.policy.versions.close_call_rule_version', 'close_call_rule.v1');
+        $result->assertJsonPath('enneagram_public_projection_v2._meta.policy.precedence.0', 'low_quality');
+        $result->assertJsonPath(
+            'enneagram_public_projection_v2.classification.low_quality_status',
+            'not_triggered_no_operational_signal'
+        );
         $result->assertJsonPath('enneagram_public_projection_v2.classification.quality_level', 'unavailable');
         $result->assertJsonPath('enneagram_public_projection_v2.dynamics.center_scores.body', null);
         $result->assertJsonPath(
@@ -244,5 +252,18 @@ final class EnneagramReadReportContractTest extends TestCase
             'close_call_rule.v1',
             (string) data_get($projection, 'algorithmic_meta.close_call_rule_version')
         );
+        $this->assertSame(
+            'enneagram_quality_policy.v1',
+            (string) data_get($projection, 'algorithmic_meta.quality_policy_version')
+        );
+        $this->assertSame(
+            'enneagram_confidence_policy.v1',
+            (string) data_get($projection, 'algorithmic_meta.confidence_policy_version')
+        );
+        $this->assertContains(
+            (string) data_get($projection, 'classification.interpretation_scope'),
+            ['clear', 'close_call', 'diffuse', 'low_quality']
+        );
+        $this->assertNotSame('', (string) data_get($projection, 'classification.interpretation_reason'));
     }
 }

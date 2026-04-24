@@ -22,7 +22,39 @@ final class EnneagramPublicProjectionService
 
     private const TECHNICAL_NOTE_VERSION = 'unavailable';
 
-    private const QUALITY_POLICY_VERSION = 'unavailable';
+    private const QUALITY_POLICY_VERSION = 'enneagram_quality_policy.v1';
+
+    private const CONFIDENCE_POLICY_VERSION = 'enneagram_confidence_policy.v1';
+
+    /**
+     * @var array{
+     *   close_call_gap_pct_max:float,
+     *   close_call_normalized_gap_max:float,
+     *   medium_confidence_gap_pct_min:float,
+     *   high_confidence_gap_pct_min:float,
+     *   high_confidence_normalized_gap_min:float,
+     *   diffuse_entropy_min:float,
+     *   diffuse_entropy_priority_min:float,
+     *   diffuse_top3_spread_max:float,
+     *   diffuse_gap_pct_max:float
+     * }
+     */
+    private const POLICY_THRESHOLDS = [
+        'close_call_gap_pct_max' => 8.0,
+        'close_call_normalized_gap_max' => 0.35,
+        'medium_confidence_gap_pct_min' => 8.0,
+        'high_confidence_gap_pct_min' => 15.0,
+        'high_confidence_normalized_gap_min' => 0.8,
+        'diffuse_entropy_min' => 0.72,
+        'diffuse_entropy_priority_min' => 0.82,
+        'diffuse_top3_spread_max' => 12.0,
+        'diffuse_gap_pct_max' => 15.0,
+    ];
+
+    /**
+     * @var list<string>
+     */
+    private const INTERPRETATION_PRECEDENCE = ['low_quality', 'diffuse', 'close_call', 'clear'];
 
     /**
      * @var array<string,array{en:string,zh:string}>
@@ -250,8 +282,9 @@ final class EnneagramPublicProjectionService
         $topTypes = $this->buildTopTypesV2($scoreResult, $language, $form);
         $all9Profile = $this->buildAll9ProfileV2($scoreResult, $language, $form);
         $quality = is_array($scoreResult['quality'] ?? null) ? $scoreResult['quality'] : [];
-        $classification = $this->buildClassificationV2($scoreResult, $topTypes, $quality, $language);
-        $closeCallPair = $this->buildCloseCallPair($scoreResult, $topTypes);
+        $policyEvaluation = $this->evaluateClassificationPolicy($scoreResult, $topTypes, $all9Profile, $quality, $language);
+        $classification = $this->buildClassificationV2($policyEvaluation);
+        $closeCallPair = $this->buildCloseCallPair($scoreResult, $topTypes, $policyEvaluation);
         $wingHints = $this->buildWingHints($topTypes, $all9Profile);
         $contentReleaseHash = $this->resolveContentReleaseHash($scoreResult);
         $interpretationContextId = $this->buildInterpretationContextId(
@@ -261,7 +294,7 @@ final class EnneagramPublicProjectionService
             $closeCallPair,
             $contentReleaseHash
         );
-        $unavailable = $this->buildUnavailableFields();
+        $unavailable = $this->buildUnavailableFields($policyEvaluation);
         $formBoundary = is_array($form['form_interpretation_boundary'] ?? null)
             ? ($form['form_interpretation_boundary'][$language] ?? $form['form_interpretation_boundary']['zh'] ?? '')
             : '';
@@ -269,6 +302,7 @@ final class EnneagramPublicProjectionService
         $compareGroup = 'ENNEAGRAM:'.(string) ($form['form_code'] ?? 'unknown').':'.(string) ($form['score_space_version'] ?? 'unknown');
         $recommendedFirstAction = $this->recommendedFirstAction(
             (string) ($classification['confidence_level'] ?? 'medium_confidence'),
+            (string) ($classification['interpretation_scope'] ?? 'clear'),
             (string) ($form['form_code'] ?? '')
         );
 
@@ -338,6 +372,7 @@ final class EnneagramPublicProjectionService
                 'report_engine_version' => self::REPORT_ENGINE_VERSION,
                 'technical_note_version' => self::TECHNICAL_NOTE_VERSION,
                 'quality_policy_version' => self::QUALITY_POLICY_VERSION,
+                'confidence_policy_version' => self::CONFIDENCE_POLICY_VERSION,
             ],
             'content_binding' => [
                 'content_snapshot_id' => null,
@@ -348,8 +383,8 @@ final class EnneagramPublicProjectionService
             'render_hints' => [
                 'show_primary_type' => true,
                 'show_close_call_card' => $closeCallPair !== null,
-                'show_diffuse_warning' => false,
-                'show_low_quality_boundary' => false,
+                'show_diffuse_warning' => (string) ($classification['interpretation_scope'] ?? '') === 'diffuse',
+                'show_low_quality_boundary' => (string) ($classification['interpretation_scope'] ?? '') === 'low_quality',
                 'show_wing_hint' => ($wingHints['left'] !== null || $wingHints['right'] !== null),
                 'recommended_first_action' => $recommendedFirstAction,
             ],
@@ -372,11 +407,13 @@ final class EnneagramPublicProjectionService
                     'classification' => [
                         'dominance_gap_abs' => 'derived from score_norm top1-top2',
                         'dominance_gap_pct' => 'derived from score_norm top1-top2 and top1',
-                        'confidence_level' => 'mapped from current scorer/analyzer confidence signals without PR2 diffuse/low_quality policy',
-                        'interpretation_scope' => 'basic scope derived from current close-call and confidence signals',
+                        'normalized_gap' => 'derived from dominance_gap_abs divided by within-form all9 profile standard deviation',
+                        'profile_entropy' => 'derived from within-form all9 score_norm Shannon entropy',
+                        'confidence_level' => 'policy driven precedence low_quality > diffuse > close_call > clear',
+                        'interpretation_scope' => 'policy driven precedence low_quality > diffuse > close_call > clear',
                     ],
                     'close_call_pair' => [
-                        'source' => 'score_result.analysis',
+                        'source' => 'score_result.analysis with threshold fallback',
                         'rule_version' => self::CLOSE_CALL_RULE_VERSION,
                     ],
                     'wing_hint' => [
@@ -387,6 +424,28 @@ final class EnneagramPublicProjectionService
                         'same_model_not_same_score_space' => true,
                         'cross_form_comparable' => false,
                     ],
+                ],
+                'policy' => [
+                    'versions' => [
+                        'close_call_rule_version' => self::CLOSE_CALL_RULE_VERSION,
+                        'quality_policy_version' => self::QUALITY_POLICY_VERSION,
+                        'confidence_policy_version' => self::CONFIDENCE_POLICY_VERSION,
+                    ],
+                    'precedence' => self::INTERPRETATION_PRECEDENCE,
+                    'thresholds' => self::POLICY_THRESHOLDS,
+                    'applied' => [
+                        'confidence_level' => $classification['confidence_level'] ?? null,
+                        'interpretation_scope' => $classification['interpretation_scope'] ?? null,
+                        'interpretation_reason' => $classification['interpretation_reason'] ?? null,
+                        'low_quality_status' => $classification['low_quality_status'] ?? null,
+                        'close_call_trigger_reason' => $policyEvaluation['close_call_trigger_reason'] ?? null,
+                        'diffuse_trigger_reason' => $policyEvaluation['diffuse_trigger_reason'] ?? null,
+                    ],
+                    'signal_limitations' => [
+                        'low_quality' => $policyEvaluation['quality_signal_limitation'] ?? 'no_signal',
+                        'note' => 'low_quality is only triggered when operational QC flags are present in scorer/analyzer output.',
+                    ],
+                    'source' => '01_measurement_and_judgement_strategy.md',
                 ],
                 'unavailable' => $unavailable,
             ],
@@ -763,11 +822,17 @@ final class EnneagramPublicProjectionService
 
     /**
      * @param  list<array<string,mixed>>  $topTypes
+     * @param  list<array<string,mixed>>  $all9Profile
      * @param  array<string,mixed>  $quality
      * @return array<string,mixed>
      */
-    private function buildClassificationV2(array $scoreResult, array $topTypes, array $quality, string $language): array
-    {
+    private function evaluateClassificationPolicy(
+        array $scoreResult,
+        array $topTypes,
+        array $all9Profile,
+        array $quality,
+        string $language
+    ): array {
         $top1Norm = $this->normalizeFloat($topTypes[0]['score_norm'] ?? null);
         $top2Norm = $this->normalizeFloat($topTypes[1]['score_norm'] ?? null);
         $top3Norm = $this->normalizeFloat($topTypes[2]['score_norm'] ?? null);
@@ -777,59 +842,126 @@ final class EnneagramPublicProjectionService
         $gapPct = ($gapAbs !== null && $top1Norm !== null && $top1Norm > 0.0)
             ? round(($gapAbs / max($top1Norm, 1.0)) * 100.0, 4)
             : null;
+        $top3Spread = ($top1Norm !== null && $top3Norm !== null)
+            ? round($top1Norm - $top3Norm, 4)
+            : null;
+        $profileSd = $this->profileStandardDeviation($all9Profile);
+        $normalizedGap = ($gapAbs !== null && $profileSd !== null && $profileSd > 0.0)
+            ? round($gapAbs / $profileSd, 6)
+            : null;
+        $profileEntropy = $this->profileEntropy($all9Profile);
         $analysis = is_array($scoreResult['analysis'] ?? null) ? $scoreResult['analysis'] : [];
-        $confidence = is_array($scoreResult['confidence'] ?? null) ? $scoreResult['confidence'] : [];
-        $confidenceLevel = $this->confidenceLevelV2($analysis, $confidence, $quality);
+        $qualitySummary = $this->qualitySignalSummary($quality);
         $precisionLevel = (string) ($this->resolveFormPolicy($scoreResult, $language)['precision_level'] ?? 'unavailable');
-        $interpretationScope = $this->interpretationScopeV2($confidenceLevel, $analysis, $quality);
-        $qualityFlags = $this->qualityFlags($quality);
+        $closeCallTriggerReason = $this->closeCallTriggerReason($analysis, $gapPct, $normalizedGap);
+        $diffuseTriggerReason = in_array($closeCallTriggerReason, ['analyzer_close_call', 'unresolved_tie'], true)
+            ? null
+            : $this->diffuseTriggerReason($profileEntropy, $top3Spread, $gapPct);
+
+        $interpretationScope = 'clear';
+        $confidenceLevel = 'medium_confidence';
+        $interpretationReason = 'clear_within_policy';
+
+        if ((bool) ($qualitySummary['trigger_low_quality'] ?? false)) {
+            $interpretationScope = 'low_quality';
+            $confidenceLevel = 'low_quality';
+            $interpretationReason = 'operational_qc_flags_present';
+        } elseif ($diffuseTriggerReason !== null) {
+            $interpretationScope = 'diffuse';
+            $confidenceLevel = 'diffuse';
+            $interpretationReason = $diffuseTriggerReason;
+        } elseif ($closeCallTriggerReason !== null) {
+            $interpretationScope = 'close_call';
+            $confidenceLevel = 'close_call';
+            $interpretationReason = $closeCallTriggerReason;
+        } elseif ($this->isHighConfidence($gapPct, $normalizedGap)) {
+            $interpretationScope = 'clear';
+            $confidenceLevel = 'high_confidence';
+            $interpretationReason = 'gap_above_high_confidence_threshold';
+        } else {
+            $interpretationScope = 'clear';
+            $confidenceLevel = 'medium_confidence';
+            $interpretationReason = 'gap_within_medium_confidence_band';
+        }
 
         return [
-            'dominance' => [
-                'top1' => $topTypes[0]['type'] ?? null,
-                'top2' => $topTypes[1]['type'] ?? null,
-                'top3' => $topTypes[2]['type'] ?? null,
-                'gap_abs' => $gapAbs,
-                'gap_pct' => $gapPct,
-                'normalized_gap' => null,
-                'top3_spread' => ($top1Norm !== null && $top3Norm !== null) ? round($top1Norm - $top3Norm, 4) : null,
-                'profile_entropy' => null,
-            ],
+            'top1' => $topTypes[0]['type'] ?? null,
+            'top2' => $topTypes[1]['type'] ?? null,
+            'top3' => $topTypes[2]['type'] ?? null,
             'dominance_gap_abs' => $gapAbs,
             'dominance_gap_pct' => $gapPct,
+            'normalized_gap' => $normalizedGap,
+            'top3_spread' => $top3Spread,
+            'profile_entropy' => $profileEntropy,
             'confidence_level' => $confidenceLevel,
             'confidence_label' => $this->confidenceLabel($confidenceLevel, $language),
             'precision_level' => $precisionLevel,
             'precision_label' => $this->precisionLabel($precisionLevel, $language),
             'interpretation_scope' => $interpretationScope,
-            'quality_level' => 'unavailable',
-            'qc_flags' => $qualityFlags,
+            'interpretation_reason' => $interpretationReason,
+            'quality_level' => $qualitySummary['quality_level'] ?? 'unavailable',
+            'low_quality_status' => $qualitySummary['low_quality_status'] ?? 'not_triggered_no_operational_signal',
+            'quality_signal_limitation' => $qualitySummary['signal_limitation'] ?? 'no_signal',
+            'qc_flags' => $qualitySummary['flags'] ?? [],
+            'close_call_trigger_reason' => $closeCallTriggerReason,
+            'diffuse_trigger_reason' => $diffuseTriggerReason,
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $policyEvaluation
+     * @return array<string,mixed>
+     */
+    private function buildClassificationV2(array $policyEvaluation): array
+    {
+        return [
+            'dominance' => [
+                'top1' => $policyEvaluation['top1'] ?? null,
+                'top2' => $policyEvaluation['top2'] ?? null,
+                'top3' => $policyEvaluation['top3'] ?? null,
+                'gap_abs' => $policyEvaluation['dominance_gap_abs'] ?? null,
+                'gap_pct' => $policyEvaluation['dominance_gap_pct'] ?? null,
+                'normalized_gap' => $policyEvaluation['normalized_gap'] ?? null,
+                'top3_spread' => $policyEvaluation['top3_spread'] ?? null,
+                'profile_entropy' => $policyEvaluation['profile_entropy'] ?? null,
+            ],
+            'dominance_gap_abs' => $policyEvaluation['dominance_gap_abs'] ?? null,
+            'dominance_gap_pct' => $policyEvaluation['dominance_gap_pct'] ?? null,
+            'confidence_level' => $policyEvaluation['confidence_level'] ?? null,
+            'confidence_band' => $policyEvaluation['confidence_level'] ?? null,
+            'confidence_label' => $policyEvaluation['confidence_label'] ?? null,
+            'precision_level' => $policyEvaluation['precision_level'] ?? null,
+            'precision_label' => $policyEvaluation['precision_label'] ?? null,
+            'interpretation_scope' => $policyEvaluation['interpretation_scope'] ?? null,
+            'interpretation_reason' => $policyEvaluation['interpretation_reason'] ?? null,
+            'quality_level' => $policyEvaluation['quality_level'] ?? null,
+            'low_quality_status' => $policyEvaluation['low_quality_status'] ?? null,
+            'qc_flags' => $policyEvaluation['qc_flags'] ?? [],
         ];
     }
 
     /**
      * @param  list<array<string,mixed>>  $topTypes
+     * @param  array<string,mixed>  $policyEvaluation
      * @return array<string,mixed>|null
      */
-    private function buildCloseCallPair(array $scoreResult, array $topTypes): ?array
+    private function buildCloseCallPair(array $scoreResult, array $topTypes, array $policyEvaluation): ?array
     {
         $analysis = is_array($scoreResult['analysis'] ?? null) ? $scoreResult['analysis'] : [];
-        $interpretationState = trim((string) ($analysis['interpretation_state'] ?? ''));
         $pairTypes = [];
-        $triggerReason = '';
+        $triggerReason = (string) ($policyEvaluation['close_call_trigger_reason'] ?? '');
+        $isCloseCall = (string) ($policyEvaluation['interpretation_scope'] ?? '') === 'close_call';
 
         $closeCallCandidates = is_array($analysis['close_call_candidates'] ?? null)
             ? $analysis['close_call_candidates']
             : [];
         if (count($closeCallCandidates) >= 2) {
             $pairTypes = array_slice(array_values(array_map(fn (mixed $value): string => $this->publicTypeCode($this->normalizeTypeCode($value)), $closeCallCandidates)), 0, 2);
-            $triggerReason = trim((string) ($analysis['tie_break_status'] ?? 'forced_choice_close_call'));
-        } elseif (in_array($interpretationState, ['mixed_close_call', 'wing_heavy', 'line_tension'], true)) {
+        } elseif ($isCloseCall) {
             $pairTypes = [
                 (string) ($topTypes[0]['type'] ?? ''),
                 (string) ($topTypes[1]['type'] ?? ''),
             ];
-            $triggerReason = $interpretationState;
         }
 
         $pairTypes = array_values(array_filter($pairTypes, static fn (string $value): bool => $value !== ''));
@@ -844,7 +976,7 @@ final class EnneagramPublicProjectionService
             'type_b' => $pairTypes[1],
             'pair_key' => implode('_', $pairTypes),
             'rule_version' => self::CLOSE_CALL_RULE_VERSION,
-            'trigger_reason' => $triggerReason !== '' ? $triggerReason : 'close_call_signal',
+            'trigger_reason' => $triggerReason !== '' ? $triggerReason : 'analyzer_close_call',
         ];
     }
 
@@ -922,66 +1054,104 @@ final class EnneagramPublicProjectionService
 
     /**
      * @param  array<string,mixed>  $analysis
-     * @param  array<string,mixed>  $confidence
-     * @param  array<string,mixed>  $quality
      */
-    private function confidenceLevelV2(array $analysis, array $confidence, array $quality): string
+    private function closeCallTriggerReason(array $analysis, ?float $gapPct, ?float $normalizedGap): ?string
     {
-        if ($this->hasOperationalLowQuality($quality)) {
-            return 'low_quality';
+        if ((bool) ($analysis['unresolved_tie'] ?? false)) {
+            return 'unresolved_tie';
         }
 
         $interpretationState = trim((string) ($analysis['interpretation_state'] ?? ''));
         if (in_array($interpretationState, ['mixed_close_call', 'forced_choice_close_call', 'wing_heavy', 'line_tension'], true)) {
-            return 'close_call';
+            return 'analyzer_close_call';
         }
 
-        $level = strtolower(trim((string) ($confidence['level'] ?? '')));
+        if ($gapPct !== null && $gapPct < self::POLICY_THRESHOLDS['close_call_gap_pct_max']) {
+            return 'gap_below_threshold';
+        }
 
-        return match ($level) {
-            'high' => 'high_confidence',
-            'medium' => 'medium_confidence',
-            'low' => 'close_call',
-            default => 'medium_confidence',
-        };
+        if ($normalizedGap !== null && $normalizedGap < self::POLICY_THRESHOLDS['close_call_normalized_gap_max']) {
+            return 'normalized_gap_below_threshold';
+        }
+
+        return null;
+    }
+
+    private function diffuseTriggerReason(?float $profileEntropy, ?float $top3Spread, ?float $gapPct): ?string
+    {
+        if ($profileEntropy !== null
+            && $profileEntropy >= self::POLICY_THRESHOLDS['diffuse_entropy_priority_min']
+            && ($gapPct === null || $gapPct < self::POLICY_THRESHOLDS['diffuse_gap_pct_max'])) {
+            return 'high_profile_entropy';
+        }
+
+        if ($profileEntropy !== null
+            && $profileEntropy >= self::POLICY_THRESHOLDS['diffuse_entropy_min']
+            && $top3Spread !== null
+            && $top3Spread <= self::POLICY_THRESHOLDS['diffuse_top3_spread_max']
+            && ($gapPct === null || $gapPct < self::POLICY_THRESHOLDS['diffuse_gap_pct_max'])) {
+            return 'top3_spread_low';
+        }
+
+        return null;
+    }
+
+    private function isHighConfidence(?float $gapPct, ?float $normalizedGap): bool
+    {
+        if ($gapPct !== null && $gapPct >= self::POLICY_THRESHOLDS['high_confidence_gap_pct_min']) {
+            return true;
+        }
+
+        return $normalizedGap !== null && $normalizedGap >= self::POLICY_THRESHOLDS['high_confidence_normalized_gap_min'];
     }
 
     /**
-     * @param  array<string,mixed>  $analysis
      * @param  array<string,mixed>  $quality
+     * @return array{
+     *   flags:list<string>,
+     *   quality_level:string,
+     *   low_quality_status:string,
+     *   trigger_low_quality:bool,
+     *   signal_limitation:string
+     * }
      */
-    private function interpretationScopeV2(string $confidenceLevel, array $analysis, array $quality): string
+    private function qualitySignalSummary(array $quality): array
     {
-        if ($this->hasOperationalLowQuality($quality)) {
-            return 'low_quality';
-        }
-
-        if ($confidenceLevel === 'close_call') {
-            return 'close_call';
-        }
-
-        return 'clear';
-    }
-
-    /**
-     * @param  array<string,mixed>  $quality
-     * @return list<string>
-     */
-    private function qualityFlags(array $quality): array
-    {
-        $flags = is_array($quality['flags'] ?? null) ? $quality['flags'] : [];
-
-        return array_values(array_filter(array_map(static fn (mixed $value): string => trim((string) $value), $flags)));
-    }
-
-    /**
-     * @param  array<string,mixed>  $quality
-     */
-    private function hasOperationalLowQuality(array $quality): bool
-    {
+        $flags = array_values(array_filter(array_map(
+            static fn (mixed $value): string => trim((string) $value),
+            is_array($quality['flags'] ?? null) ? $quality['flags'] : []
+        )));
         $level = strtoupper(trim((string) ($quality['level'] ?? 'P0')));
+        $hasOperationalSignal = $flags !== [];
+        $hasHardSignal = $hasOperationalSignal && $level !== '' && $level !== 'P0' && $level !== 'CLEAN';
 
-        return $level !== 'P0' && $level !== 'CLEAN';
+        if ($hasHardSignal) {
+            return [
+                'flags' => $flags,
+                'quality_level' => 'retest',
+                'low_quality_status' => 'triggered_operational_signal',
+                'trigger_low_quality' => true,
+                'signal_limitation' => 'operational_signal_present',
+            ];
+        }
+
+        if ($hasOperationalSignal) {
+            return [
+                'flags' => $flags,
+                'quality_level' => 'caution',
+                'low_quality_status' => 'not_triggered_soft_signal_only',
+                'trigger_low_quality' => false,
+                'signal_limitation' => 'soft_signal_only',
+            ];
+        }
+
+        return [
+            'flags' => [],
+            'quality_level' => 'unavailable',
+            'low_quality_status' => 'not_triggered_no_operational_signal',
+            'trigger_low_quality' => false,
+            'signal_limitation' => 'no_signal',
+        ];
     }
 
     private function confidenceLabel(string $confidenceLevel, string $language): string
@@ -1133,6 +1303,7 @@ final class EnneagramPublicProjectionService
             'report_schema_version' => self::REPORT_SCHEMA_VERSION,
             'close_call_rule_version' => self::CLOSE_CALL_RULE_VERSION,
             'quality_policy_version' => self::QUALITY_POLICY_VERSION,
+            'confidence_policy_version' => self::CONFIDENCE_POLICY_VERSION,
             'confidence_level' => $classification['confidence_level'] ?? null,
             'interpretation_scope' => $classification['interpretation_scope'] ?? null,
             'close_call_pair' => $closeCallPair !== null ? ($closeCallPair['pair_key'] ?? null) : null,
@@ -1143,48 +1314,112 @@ final class EnneagramPublicProjectionService
     }
 
     /**
+     * @param  array<string,mixed>  $policyEvaluation
      * @return array<string,mixed>
      */
-    private function buildUnavailableFields(): array
+    private function buildUnavailableFields(array $policyEvaluation): array
     {
-        return [
+        $out = [
             'dynamics' => [
                 'center_scores' => [
                     'status' => 'unavailable',
-                    'reason' => 'deferred_to_pr2_safe_group_policy_not_shipped',
+                    'reason' => 'deferred_to_future_group_policy_not_shipped',
                 ],
                 'stance_scores' => [
                     'status' => 'unavailable',
-                    'reason' => 'deferred_to_pr2_safe_group_policy_not_shipped',
+                    'reason' => 'deferred_to_future_group_policy_not_shipped',
                 ],
                 'harmonic_scores' => [
                     'status' => 'unavailable',
-                    'reason' => 'deferred_to_pr2_safe_group_policy_not_shipped',
+                    'reason' => 'deferred_to_future_group_policy_not_shipped',
                 ],
                 'blind_spot_type' => [
                     'status' => 'unavailable',
-                    'reason' => 'deferred_to_pr2_safe_blind_spot_policy_not_shipped',
-                ],
-            ],
-            'classification' => [
-                'dominance' => [
-                    'profile_entropy' => [
-                        'status' => 'unavailable',
-                        'reason' => 'deferred_to_pr2_entropy_policy_not_shipped',
-                    ],
-                    'normalized_gap' => [
-                        'status' => 'unavailable',
-                        'reason' => 'deferred_to_pr2_normalized_gap_policy_not_shipped',
-                    ],
-                ],
-                'quality_level' => [
-                    'low_quality_status' => [
-                        'status' => 'unavailable',
-                        'reason' => 'current_scorers_do_not_emit_operational_low_quality_signal',
-                    ],
+                    'reason' => 'deferred_to_future_blind_spot_policy_not_shipped',
                 ],
             ],
         ];
+
+        if (($policyEvaluation['normalized_gap'] ?? null) === null) {
+            $out['classification']['dominance']['normalized_gap'] = [
+                'status' => 'unavailable',
+                'reason' => 'profile_sd_zero_or_missing',
+            ];
+        }
+
+        if (($policyEvaluation['profile_entropy'] ?? null) === null) {
+            $out['classification']['dominance']['profile_entropy'] = [
+                'status' => 'unavailable',
+                'reason' => 'score_norm_sum_zero_or_missing',
+            ];
+        }
+
+        if (($policyEvaluation['low_quality_status'] ?? '') === 'not_triggered_no_operational_signal') {
+            $out['classification']['quality']['low_quality_status'] = [
+                'status' => 'no_signal',
+                'reason' => 'current_scorers_do_not_emit_operational_qc_flags',
+            ];
+        }
+
+        return $out;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $all9Profile
+     */
+    private function profileStandardDeviation(array $all9Profile): ?float
+    {
+        $scores = [];
+        foreach ($all9Profile as $row) {
+            $score = $this->normalizeFloat($row['score_norm'] ?? null);
+            if ($score !== null) {
+                $scores[] = $score;
+            }
+        }
+
+        $count = count($scores);
+        if ($count === 0) {
+            return null;
+        }
+
+        $mean = array_sum($scores) / $count;
+        $variance = 0.0;
+        foreach ($scores as $score) {
+            $variance += ($score - $mean) ** 2;
+        }
+        $variance /= $count;
+
+        $sd = sqrt($variance);
+
+        return $sd > 0.0 ? round($sd, 6) : null;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $all9Profile
+     */
+    private function profileEntropy(array $all9Profile): ?float
+    {
+        $scores = [];
+        foreach ($all9Profile as $row) {
+            $score = $this->normalizeFloat($row['score_norm'] ?? null);
+            if ($score !== null && $score > 0.0) {
+                $scores[] = $score;
+            }
+        }
+
+        $count = count($scores);
+        $sum = array_sum($scores);
+        if ($count <= 1 || $sum <= 0.0) {
+            return null;
+        }
+
+        $entropy = 0.0;
+        foreach ($scores as $score) {
+            $p = $score / $sum;
+            $entropy += -1.0 * $p * log($p);
+        }
+
+        return round($entropy / log(9.0), 6);
     }
 
     private function normalizeFloat(mixed $value): ?float
@@ -1200,8 +1435,14 @@ final class EnneagramPublicProjectionService
         return null;
     }
 
-    private function recommendedFirstAction(string $confidenceLevel, string $formCode): string
+    private function recommendedFirstAction(string $confidenceLevel, string $interpretationScope, string $formCode): string
     {
+        if ($interpretationScope === 'low_quality') {
+            return 'retake_same_form';
+        }
+        if ($interpretationScope === 'diffuse') {
+            return 'observe_7_days';
+        }
         if ($confidenceLevel === 'close_call' && $formCode === 'enneagram_likert_105') {
             return 'fc144';
         }
