@@ -42,8 +42,20 @@ final class EnneagramReadReportContractTest extends TestCase
         $result->assertJsonPath('enneagram_form_v1.question_count', $questionCount);
         $result->assertJsonPath('enneagram_public_projection_v1.schema_version', 'enneagram.public_projection.v1');
         $result->assertJsonPath('enneagram_public_projection_v1.scale_code', 'ENNEAGRAM');
+        $result->assertJsonPath('enneagram_public_projection_v2.schema_version', 'enneagram.public_projection.v2');
+        $result->assertJsonPath('enneagram_public_projection_v2.scale_code', 'ENNEAGRAM');
+        $result->assertJsonPath('enneagram_public_projection_v2.form.form_code', $formCode);
+        $result->assertJsonPath('enneagram_public_projection_v2.form.question_count', $questionCount);
+        $result->assertJsonPath('enneagram_public_projection_v2.methodology.cross_form_comparable', false);
+        $result->assertJsonPath('enneagram_public_projection_v2.classification.quality_level', 'unavailable');
+        $result->assertJsonPath('enneagram_public_projection_v2.dynamics.center_scores.body', null);
+        $result->assertJsonPath(
+            'enneagram_public_projection_v2._meta.unavailable.dynamics.center_scores.status',
+            'unavailable'
+        );
         $this->assertNotSame('', (string) $result->json('enneagram_public_projection_v1.primary_type'));
         $this->assertCount(9, (array) $result->json('enneagram_public_projection_v1.type_vector'));
+        $this->assertEnneagramProjectionV2Contract((array) $result->json('enneagram_public_projection_v2'), $formCode);
 
         $report = $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/report");
         $report->assertStatus(200);
@@ -56,9 +68,19 @@ final class EnneagramReadReportContractTest extends TestCase
         $report->assertJsonPath('report.scale_code', 'ENNEAGRAM');
         $report->assertJsonPath('enneagram_form_v1.form_code', $formCode);
         $report->assertJsonPath('enneagram_public_projection_v1.schema_version', 'enneagram.public_projection.v1');
+        $report->assertJsonPath('enneagram_public_projection_v2.schema_version', 'enneagram.public_projection.v2');
+        $report->assertJsonPath('report._meta.enneagram_public_projection_v2.schema_version', 'enneagram.public_projection.v2');
         $this->assertSame(
             $result->json('enneagram_public_projection_v1.primary_type'),
             $report->json('enneagram_public_projection_v1.primary_type')
+        );
+        $this->assertSame(
+            $result->json('enneagram_public_projection_v2.scores.primary_candidate'),
+            $report->json('enneagram_public_projection_v2.scores.primary_candidate')
+        );
+        $this->assertSame(
+            $result->json('enneagram_public_projection_v2.methodology.compare_compatibility_group'),
+            $report->json('enneagram_public_projection_v2.methodology.compare_compatibility_group')
         );
 
         $access = $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
@@ -72,6 +94,36 @@ final class EnneagramReadReportContractTest extends TestCase
         $access->assertJsonPath('enneagram_form_v1.form_code', $formCode);
         $access->assertJsonPath('actions.page_href', "/result/{$attemptId}");
         $access->assertJsonPath('actions.pdf_href', "/api/v0.3/attempts/{$attemptId}/report.pdf");
+    }
+
+    public function test_enneagram_projection_v2_compare_groups_are_form_scoped_and_cross_form_comparison_is_disabled(): void
+    {
+        (new ScaleRegistrySeeder)->run();
+
+        [$likertAttemptId, $likertAnon, $likertToken] = $this->createSubmittedEnneagramAttempt('enneagram_v2_compare_105', 'enneagram_likert_105');
+        [$forcedAttemptId, $forcedAnon, $forcedToken] = $this->createSubmittedEnneagramAttempt('enneagram_v2_compare_144', 'enneagram_forced_choice_144');
+
+        $likert = $this->withHeaders([
+            'X-Anon-Id' => $likertAnon,
+            'Authorization' => 'Bearer '.$likertToken,
+        ])->getJson("/api/v0.3/attempts/{$likertAttemptId}/result");
+        $forced = $this->withHeaders([
+            'X-Anon-Id' => $forcedAnon,
+            'Authorization' => 'Bearer '.$forcedToken,
+        ])->getJson("/api/v0.3/attempts/{$forcedAttemptId}/result");
+
+        $likert->assertStatus(200);
+        $forced->assertStatus(200);
+        $likert->assertJsonPath('enneagram_public_projection_v2.methodology.cross_form_comparable', false);
+        $forced->assertJsonPath('enneagram_public_projection_v2.methodology.cross_form_comparable', false);
+        $this->assertNotSame(
+            (string) $likert->json('enneagram_public_projection_v2.methodology.compare_compatibility_group'),
+            (string) $forced->json('enneagram_public_projection_v2.methodology.compare_compatibility_group')
+        );
+        $this->assertNotSame(
+            (string) $likert->json('enneagram_public_projection_v2.form.score_space_version'),
+            (string) $forced->json('enneagram_public_projection_v2.form.score_space_version')
+        );
     }
 
     /**
@@ -156,5 +208,41 @@ final class EnneagramReadReportContractTest extends TestCase
         ]);
 
         return $token;
+    }
+
+    /**
+     * @param  array<string,mixed>  $projection
+     */
+    private function assertEnneagramProjectionV2Contract(array $projection, string $formCode): void
+    {
+        $all9 = is_array($projection['scores']['all9_profile'] ?? null) ? $projection['scores']['all9_profile'] : [];
+        $topTypes = is_array($projection['scores']['top_types'] ?? null) ? $projection['scores']['top_types'] : [];
+        $types = array_map(static fn (array $row): string => (string) ($row['type'] ?? ''), $all9);
+        sort($types, SORT_STRING);
+
+        $this->assertCount(9, $all9);
+        $this->assertSame(['1', '2', '3', '4', '5', '6', '7', '8', '9'], $types);
+        $this->assertCount(3, $topTypes);
+        $this->assertSame('primary', (string) data_get($topTypes, '0.candidate_role'));
+        $this->assertSame('secondary', (string) data_get($topTypes, '1.candidate_role'));
+        $this->assertSame('tertiary', (string) data_get($topTypes, '2.candidate_role'));
+        $this->assertNotSame('', (string) data_get($projection, 'scores.primary_candidate'));
+        $this->assertNotSame('', (string) data_get($projection, 'content_binding.interpretation_context_id'));
+        $this->assertSame(
+            $formCode === 'enneagram_likert_105' ? 'e105_standard' : 'fc144_forced_choice',
+            (string) data_get($projection, 'form.methodology_variant')
+        );
+        $this->assertSame(
+            $formCode === 'enneagram_likert_105' ? 'standard' : 'deep',
+            (string) data_get($projection, 'classification.precision_level')
+        );
+        $this->assertSame(
+            $formCode === 'enneagram_likert_105' ? 'e105_likert_space.v1' : 'fc144_forced_choice_space.v1',
+            (string) data_get($projection, 'form.score_space_version')
+        );
+        $this->assertSame(
+            'close_call_rule.v1',
+            (string) data_get($projection, 'algorithmic_meta.close_call_rule_version')
+        );
     }
 }

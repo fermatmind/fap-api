@@ -145,6 +145,31 @@ final class EnneagramScoringV11Test extends TestCase
         $this->assertSame('preference100', data_get($forcedProjection, '_meta.display_score_semantics.display_score'));
     }
 
+    public function test_projection_v2_falls_back_to_scores_when_legacy_ranking_is_missing(): void
+    {
+        $scorer = new EnneagramLikert105Scorer(new EnneagramTopologyAnalyzer);
+        [$answers, $questionIndex] = $this->likertFixture([
+            'T6' => array_fill(0, 12, 2),
+            'T9' => array_merge(array_fill(0, 11, 2), [1]),
+            'T2' => array_fill(0, 12, 1),
+        ]);
+        $result = $scorer->score($answers, $questionIndex, []);
+
+        unset($result['ranking']);
+
+        $projection = (new EnneagramPublicProjectionService)->buildV2($result, 'zh-CN');
+
+        $this->assertSame('6', data_get($projection, 'scores.primary_candidate'));
+        $this->assertCount(3, (array) data_get($projection, 'scores.top_types'));
+        $this->assertCount(9, (array) data_get($projection, 'scores.all9_profile'));
+        $this->assertSame(
+            ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+            collect((array) data_get($projection, 'scores.all9_profile'))->pluck('type')->sort()->values()->all()
+        );
+        $this->assertSame('enneagram_likert_105', data_get($projection, 'form.form_code'));
+        $this->assertSame('e105_likert_space.v1', data_get($projection, 'form.score_space_version'));
+    }
+
     /**
      * @param  array<string,list<int>>  $overrides
      * @return array{0:array<int,int>,1:array<int,array<string,mixed>>}
