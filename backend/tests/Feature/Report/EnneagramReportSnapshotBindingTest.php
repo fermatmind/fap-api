@@ -53,6 +53,18 @@ final class EnneagramReportSnapshotBindingTest extends TestCase
             (string) data_get($reportFull, '_meta.enneagram_public_projection_v2.schema_version')
         );
         $this->assertSame(
+            'enneagram.report.v2',
+            (string) data_get($reportFull, '_meta.enneagram_report_v2.schema_version')
+        );
+        $this->assertSame(
+            'page_1_result_overview',
+            (string) data_get($reportFull, '_meta.enneagram_report_v2.pages.0.page_key')
+        );
+        $this->assertNotSame(
+            '',
+            (string) data_get($reportFull, '_meta.enneagram_report_v2.registry.registry_release_hash')
+        );
+        $this->assertSame(
             $firstContextId,
             (string) data_get($reportFull, '_meta.snapshot_binding_v1.interpretation_context_id')
         );
@@ -105,6 +117,10 @@ final class EnneagramReportSnapshotBindingTest extends TestCase
         $this->assertSame(
             $first->json('report._meta.snapshot_binding_v1'),
             $second->json('report._meta.snapshot_binding_v1')
+        );
+        $this->assertSame(
+            $first->json('report._meta.enneagram_report_v2'),
+            $second->json('report._meta.enneagram_report_v2')
         );
     }
 
