@@ -44,7 +44,7 @@ final class ReportPdfCenterTest extends TestCase
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/reports')
             ->assertOk()
-            ->assertSee('Report / PDF Center')
+            ->assertSee('报告 / PDF 中心')
             ->assertDontSee('Create Report Snapshot')
             ->assertDontSee('Edit Report Snapshot');
 

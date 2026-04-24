@@ -25,6 +25,7 @@ final class LocaleSwitcherComponentTest extends TestCase
             ->assertRedirect('/ops');
 
         $this->assertSame('zh_CN', session('ops_locale'));
+        $this->assertTrue((bool) session('ops_locale_explicit'));
     }
 
     public function test_set_locale_ignores_unsupported_locale(): void

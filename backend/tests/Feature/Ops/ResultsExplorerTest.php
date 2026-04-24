@@ -46,7 +46,7 @@ final class ResultsExplorerTest extends TestCase
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/results')
             ->assertOk()
-            ->assertSee('Results Explorer')
+            ->assertSee('结果排查')
             ->assertDontSee('Create Result')
             ->assertDontSee('Edit Result');
 

@@ -35,7 +35,7 @@ final class OpsContentLocaleScope
 
     public static function currentContentLocale(?string $appLocale = null): string
     {
-        $locale = str_replace('_', '-', $appLocale ?? app()->getLocale());
+        $locale = str_replace('_', '-', $appLocale ?? (string) session('ops_locale', app()->getLocale()));
 
         if (str_starts_with($locale, 'zh')) {
             return 'zh-CN';

@@ -46,8 +46,8 @@ final class TopicWorkspaceTest extends TestCase
         ])->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/topics')
             ->assertOk()
-            ->assertSee('Global topic content workspace', false)
-            ->assertSee('Create Topic');
+            ->assertSee('结构化主题页与精选入口组的全局内容工作区', false)
+            ->assertSee('创建主题页');
 
         $this->withSession([
             'ops_org_id' => $selectedOrg->id,
@@ -56,7 +56,7 @@ final class TopicWorkspaceTest extends TestCase
             ->get('/ops/topics/create')
             ->assertOk()
             ->assertSee('ops-topic-workspace-layout', false)
-            ->assertSee('Create Topic');
+            ->assertSee('创建主题页');
 
         $this->withSession([
             'ops_org_id' => $selectedOrg->id,

@@ -63,8 +63,8 @@ final class CareerGuideWorkspaceTest extends TestCase
         ])->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/career-guides')
             ->assertOk()
-            ->assertSee('Global career content workspace', false)
-            ->assertSee('Create Career Guide');
+            ->assertSee('结构化职业指南的全局内容工作区', false)
+            ->assertSee('创建职业指南');
 
         $this->withSession([
             'ops_org_id' => $selectedOrg->id,
@@ -73,7 +73,7 @@ final class CareerGuideWorkspaceTest extends TestCase
             ->get('/ops/career-guides/create')
             ->assertOk()
             ->assertSee('ops-career-job-workspace-layout', false)
-            ->assertSee('Create Career Guide')
+            ->assertSee('创建职业指南')
             ->assertSee('Article linking remains a legacy global-only runtime surface and is intentionally read-only in the production CMS bootstrap.')
             ->assertDontSee('Add related article')
             ->assertDontSee('Open Public URL');

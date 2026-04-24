@@ -52,7 +52,7 @@ final class FunnelConversionPageTest extends TestCase
                 ->actingAs($admin, (string) config('admin.guard', 'admin'))
                 ->get('/ops/funnel-conversion')
                 ->assertOk()
-                ->assertSee('Funnel & Conversion')
+                ->assertSee('漏斗与转化')
                 ->assertSee('KPI Cards')
                 ->assertSee('Started attempts')
                 ->assertSee('Daily Funnel Trend')
