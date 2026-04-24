@@ -1,0 +1,28 @@
+{
+    "id": "enneagram_group_registry_v1",
+    "schema_version": "fap.enneagram.group_registry.v1",
+    "registry_key": "enneagram_group_registry",
+    "locale": "zh-CN",
+    "form_variant": "all",
+    "context_mode": "individual",
+    "status": "published",
+    "version": "v1",
+    "release_id": "enneagram_registry_pack_v1_scaffold_2026_04",
+    "content_release_hash": "sha256:pending_loader_resolution",
+    "content_snapshot_hash": null,
+    "content_maturity": "scaffold",
+    "evidence_level": "theory_based",
+    "preview_enabled": true,
+    "fallback_policy": "optional",
+    "entries": [
+        {"group_type": "center", "group_key": "body", "type_ids": ["8", "9", "1"], "description": "从边界、节奏和本能判断进入。", "strength_expression": "行动直接，知道哪里不对。", "cost_expression": "愤怒和控制感可能被包装。", "observation_question": "你最先感到的是身体里的不对劲吗？"},
+        {"group_type": "center", "group_key": "heart", "type_ids": ["2", "3", "4"], "description": "从价值感、关系位置和被看见进入。", "strength_expression": "更能看见关系与情绪信号。", "cost_expression": "价值感容易绑在关系或形象上。", "observation_question": "今天你最在意自己被怎样看见？"},
+        {"group_type": "center", "group_key": "head", "type_ids": ["5", "6", "7"], "description": "从理解、预判和选择空间进入。", "strength_expression": "判断快，也会先看风险和可能性。", "cost_expression": "容易把思考变成延迟进入。", "observation_question": "今天你是在清晰判断，还是在用思考拖延进入？"},
+        {"group_type": "stance", "group_key": "assertive", "type_ids": ["3", "7", "8"], "description": "主动推进、主动出击、主动争取。", "strength_expression": "能拉动节奏，也能把局面往前推。", "cost_expression": "较难停下承认疲惫和限制。", "observation_question": "今天你是在推进事情，还是在逃离停顿？"},
+        {"group_type": "stance", "group_key": "compliant", "type_ids": ["1", "2", "6"], "description": "对责任、规则和外部期待更有参照。", "strength_expression": "会守住责任，也会对齐要求。", "cost_expression": "容易把应该做和真想做混在一起。", "observation_question": "今天你做这件事，是因为认同还是因为应该？"},
+        {"group_type": "stance", "group_key": "withdrawn", "type_ids": ["4", "5", "9"], "description": "先向内处理，再决定是否进入。", "strength_expression": "保留空间，也能看见更深层的感受。", "cost_expression": "容易后退过久，错过重新进入。", "observation_question": "今天你退后之后，有没有重新进入？"},
+        {"group_type": "harmonic", "group_key": "positive_outlook", "type_ids": ["2", "7", "9"], "description": "倾向把局面缓和、重构或重新看轻。", "strength_expression": "能提供希望，也能维持气氛。", "cost_expression": "可能过早把问题抹平。", "observation_question": "今天你有没有太快说“没事”？"},
+        {"group_type": "harmonic", "group_key": "competency", "type_ids": ["1", "3", "5"], "description": "倾向用标准、效率和能力来处理问题。", "strength_expression": "能把混乱重新拉回可执行。", "cost_expression": "可能把人的问题只当成技术问题。", "observation_question": "今天你有没有跳过关系成本，只想把问题做掉？"},
+        {"group_type": "harmonic", "group_key": "reactive", "type_ids": ["4", "6", "8"], "description": "遇到不真、不稳、不公时更会直接反应。", "strength_expression": "能让真实问题快速浮出水面。", "cost_expression": "防御强度可能过高。", "observation_question": "今天你的反应是在表达需要，还是在保护伤口？"}
+    ]
+}

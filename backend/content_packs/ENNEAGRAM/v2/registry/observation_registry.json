@@ -1,0 +1,26 @@
+{
+    "id": "enneagram_observation_registry_v1",
+    "schema_version": "fap.enneagram.observation_registry.v1",
+    "registry_key": "enneagram_observation_registry",
+    "locale": "zh-CN",
+    "form_variant": "all",
+    "context_mode": "individual",
+    "status": "published",
+    "version": "v1",
+    "release_id": "enneagram_registry_pack_v1_scaffold_2026_04",
+    "content_release_hash": "sha256:pending_loader_resolution",
+    "content_snapshot_hash": null,
+    "content_maturity": "scaffold",
+    "evidence_level": "descriptive",
+    "preview_enabled": true,
+    "fallback_policy": "fallback_to_generic",
+    "entries": [
+        {"day": 1, "phase": "observe_trigger", "prompt": "记录今天最先让你起反应的触发点。", "user_input_schema": {"type": "text", "max_length": 280}, "analytics_event_key": "enneagram_observation_day1_started", "suggested_next_action": "先记录，不急着解释类型。"},
+        {"day": 2, "phase": "observe_pattern", "prompt": "回看你最自然的自动化反应。", "user_input_schema": {"type": "text", "max_length": 280}, "analytics_event_key": "enneagram_observation_day2_pattern_logged", "suggested_next_action": "标记重复出现的关键词。"},
+        {"day": 3, "phase": "day3_feedback", "prompt": "填写 Day3 观察反馈：更像在守标准、守关系、守安全，还是守边界/自由？", "user_input_schema": {"type": "single_select", "options": ["标准", "关系", "安全", "边界", "自由", "其他"]}, "analytics_event_key": "enneagram_day3_feedback_submitted", "suggested_next_action": "对照 close-call 或 Top3 模块再看一遍。"},
+        {"day": 4, "phase": "observe_cost", "prompt": "今天你的自动反应带来了什么代价？", "user_input_schema": {"type": "text", "max_length": 280}, "analytics_event_key": "enneagram_observation_day4_cost_logged", "suggested_next_action": "把代价和收益同时记下来。"},
+        {"day": 5, "phase": "observe_relationship", "prompt": "在关系互动里，你更在意被怎样看见或不被怎样对待？", "user_input_schema": {"type": "text", "max_length": 280}, "analytics_event_key": "enneagram_observation_day5_relationship_logged", "suggested_next_action": "记录一段具体对话，而不是抽象结论。"},
+        {"day": 6, "phase": "observe_work", "prompt": "在工作或任务推进中，你最自然守住的东西是什么？", "user_input_schema": {"type": "text", "max_length": 280}, "analytics_event_key": "enneagram_observation_day6_work_logged", "suggested_next_action": "和 work_summary 或 pair_delta 对照。"},
+        {"day": 7, "phase": "day7_resonance", "prompt": "回看七天记录：哪条解释最像你，哪条最不像你？", "user_input_schema": {"type": "text", "max_length": 500}, "analytics_event_key": "enneagram_day7_feedback_submitted", "suggested_next_action": "只提交 resonance feedback，不覆盖 primary_candidate。"}
+    ]
+}

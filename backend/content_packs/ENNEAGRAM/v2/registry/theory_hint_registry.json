@@ -1,0 +1,47 @@
+{
+    "id": "enneagram_theory_hint_registry_v1",
+    "schema_version": "fap.enneagram.theory_hint_registry.v1",
+    "registry_key": "enneagram_theory_hint_registry",
+    "locale": "zh-CN",
+    "form_variant": "all",
+    "context_mode": "individual",
+    "status": "published",
+    "version": "v1",
+    "release_id": "enneagram_registry_pack_v1_scaffold_2026_04",
+    "content_release_hash": "sha256:pending_loader_resolution",
+    "content_snapshot_hash": null,
+    "content_maturity": "scaffold",
+    "evidence_level": "theory_based",
+    "preview_enabled": true,
+    "fallback_policy": "optional",
+    "entries": [
+        {
+            "theory_key": "wing_hint",
+            "visibility_scope": "p0_visible",
+            "evidence_level": "theory_based",
+            "hard_judgement_allowed": false,
+            "boundary_copy": "邻位牵引只作为表达色彩提示，不等于正式 wing 判定。"
+        },
+        {
+            "theory_key": "arrow_growth_reference_placeholder",
+            "visibility_scope": "p1_visible",
+            "evidence_level": "descriptive",
+            "hard_judgement_allowed": false,
+            "boundary_copy": "箭头方向位先保留为方法参考，不在 P0 做硬判断。"
+        },
+        {
+            "theory_key": "level_spectrum_placeholder",
+            "visibility_scope": "p1_visible",
+            "evidence_level": "descriptive",
+            "hard_judgement_allowed": false,
+            "boundary_copy": "状态光谱位仅作观察辅助，不等于健康层级判定。"
+        },
+        {
+            "theory_key": "subtype_future_module_placeholder",
+            "visibility_scope": "hidden",
+            "evidence_level": "descriptive",
+            "hard_judgement_allowed": false,
+            "boundary_copy": "subtype 暂不启用，避免在缺少证据时提前硬判。"
+        }
+    ]
+}
