@@ -519,6 +519,8 @@ final class SeoOperationsPageTest extends TestCase
         return [
             'ops_org_id' => (int) $selectedOrg->id,
             'ops_admin_totp_verified_user_id' => (int) $admin->id,
+            \App\Http\Middleware\SetOpsLocale::SESSION_KEY => 'en',
+            \App\Http\Middleware\SetOpsLocale::EXPLICIT_SESSION_KEY => true,
         ];
     }
 }

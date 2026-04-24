@@ -33,14 +33,14 @@
 
     <div class="ops-shell-page">
         <x-filament-ops::ops-section
-            eyebrow="Support search"
-            title="Order lookup"
-            description="Search by order number, email, or target attempt id, then inspect the order root, payment event timeline, grants, and linked attempt in one shell."
+            :eyebrow="__('ops.custom_pages.order_lookup.eyebrow')"
+            :title="__('ops.custom_pages.order_lookup.title')"
+            :description="__('ops.custom_pages.order_lookup.description')"
         >
             <x-filament-ops::ops-toolbar>
                 <div class="ops-page-grid ops-page-grid--3">
                     <div class="ops-control-stack">
-                        <label class="ops-control-label" for="ops-order-lookup-order-no">Order number</label>
+                        <label class="ops-control-label" for="ops-order-lookup-order-no">{{ __('ops.custom_pages.order_lookup.order_number') }}</label>
                         <input
                             id="ops-order-lookup-order-no"
                             type="text"
@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="ops-control-stack">
-                        <label class="ops-control-label" for="ops-order-lookup-email">Email</label>
+                        <label class="ops-control-label" for="ops-order-lookup-email">{{ __('ops.custom_pages.order_lookup.email') }}</label>
                         <input
                             id="ops-order-lookup-email"
                             type="text"
@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="ops-control-stack">
-                        <label class="ops-control-label" for="ops-order-lookup-attempt-id">Target attempt</label>
+                        <label class="ops-control-label" for="ops-order-lookup-attempt-id">{{ __('ops.custom_pages.order_lookup.target_attempt') }}</label>
                         <input
                             id="ops-order-lookup-attempt-id"
                             type="text"
@@ -74,7 +74,7 @@
                 </div>
 
                 <x-slot name="actions">
-                    <x-filament::button wire:click="search">Search</x-filament::button>
+                    <x-filament::button wire:click="search">{{ __('ops.custom_pages.common.actions.search') }}</x-filament::button>
                 </x-slot>
             </x-filament-ops::ops-toolbar>
         </x-filament-ops::ops-section>
@@ -82,127 +82,127 @@
         @if (! $hasQuery)
             <x-filament-ops::ops-section>
                 <x-filament-ops::ops-empty-state
-                    eyebrow="Order lookup"
+                    :eyebrow="__('ops.custom_pages.order_lookup.title')"
                     icon="heroicon-o-magnifying-glass"
-                    title="Search for an order"
-                    description="Use at least one identifier to inspect the current order, payment events, grants, and linked attempt."
+                    :title="__('ops.custom_pages.order_lookup.search_title')"
+                    :description="__('ops.custom_pages.order_lookup.search_desc')"
                 />
             </x-filament-ops::ops-section>
         @elseif (! $order)
             <x-filament-ops::ops-section>
                 <x-filament-ops::ops-empty-state
-                    eyebrow="Order lookup"
+                    :eyebrow="__('ops.custom_pages.order_lookup.title')"
                     icon="heroicon-o-face-frown"
-                    title="No matching order found"
-                    description="No order matched the current search input inside the active organization context."
+                    :title="__('ops.custom_pages.order_lookup.not_found_title')"
+                    :description="__('ops.custom_pages.order_lookup.not_found_desc')"
                 />
             </x-filament-ops::ops-section>
         @else
             <x-filament-ops::ops-section
-                title="Order"
-                description="The order root record and current payment, unlock, and lifecycle posture."
+                :title="__('ops.custom_pages.order_lookup.order_title')"
+                :description="__('ops.custom_pages.order_lookup.order_desc')"
             >
                 <x-filament-ops::ops-field-grid
                     :fields="$toFields($order)"
-                    empty-description="This order has no visible fields."
-                    empty-eyebrow="Order"
-                    empty-title="No order details"
+                    :empty-description="__('ops.custom_pages.order_lookup.no_order_fields')"
+                    :empty-eyebrow="__('ops.custom_pages.order_lookup.order_title')"
+                    :empty-title="__('ops.custom_pages.order_lookup.no_order_details')"
                 />
             </x-filament-ops::ops-section>
 
             <x-filament-ops::ops-section
-                title="Payment events"
-                description="Latest-first payment event records currently linked to the resolved order number."
+                :title="__('ops.custom_pages.order_lookup.payment_events_title')"
+                :description="__('ops.custom_pages.order_lookup.payment_events_desc')"
             >
                 <div class="ops-card-list">
                     @forelse ($paymentEvents as $index => $event)
                         <x-filament-ops::ops-result-card
-                            :title="(string) ($event['provider_event_id'] ?? ('payment event #'.($index + 1)))"
-                            :meta="'status='.(string) ($event['status'] ?? '-').' | handle='.(string) ($event['handle_status'] ?? '-')"
+                            :title="(string) ($event['provider_event_id'] ?? __('ops.custom_pages.order_lookup.payment_event_fallback', ['number' => $index + 1]))"
+                            :meta="__('ops.custom_pages.order_lookup.payment_meta', ['status' => (string) ($event['status'] ?? '-'), 'handle' => (string) ($event['handle_status'] ?? '-')])"
                         >
                             <x-slot name="badges">
                                 <x-filament.ops.shared.status-pill
                                     :state="(string) ($event['status'] ?? 'gray')"
-                                    :label="'status: '.(string) ($event['status'] ?? '-')"
+                                    :label="__('ops.custom_pages.order_lookup.status_label', ['status' => (string) ($event['status'] ?? '-')])"
                                 />
                                 <x-filament.ops.shared.status-pill
                                     :state="(string) ($event['handle_status'] ?? 'gray')"
-                                    :label="'handle: '.(string) ($event['handle_status'] ?? '-')"
+                                    :label="__('ops.custom_pages.order_lookup.handle_label', ['status' => (string) ($event['handle_status'] ?? '-')])"
                                 />
                             </x-slot>
 
                             <x-filament-ops::ops-field-grid
                                 cardless
                                 :fields="$toFields((array) $event)"
-                                empty-description="This event has no visible fields."
-                                empty-eyebrow="Payment events"
-                                empty-title="No payment event details"
+                                :empty-description="__('ops.custom_pages.order_lookup.no_event_fields')"
+                                :empty-eyebrow="__('ops.custom_pages.order_lookup.payment_events_title')"
+                                :empty-title="__('ops.custom_pages.order_lookup.no_event_details')"
                             />
                         </x-filament-ops::ops-result-card>
                     @empty
                         <x-filament-ops::ops-empty-state
-                            eyebrow="Payment events"
+                            :eyebrow="__('ops.custom_pages.order_lookup.payment_events_title')"
                             icon="heroicon-o-credit-card"
-                            title="No payment events found"
-                            description="The resolved order does not currently expose any linked payment events."
+                            :title="__('ops.custom_pages.order_lookup.no_events_title')"
+                            :description="__('ops.custom_pages.order_lookup.no_events_desc')"
                         />
                     @endforelse
                 </div>
             </x-filament-ops::ops-section>
 
             <x-filament-ops::ops-section
-                title="Benefit grants"
-                description="Benefit and unlock records currently linked to the order number or target attempt."
+                :title="__('ops.custom_pages.order_lookup.benefit_grants_title')"
+                :description="__('ops.custom_pages.order_lookup.benefit_grants_desc')"
             >
                 <div class="ops-card-list">
                     @forelse ($benefitGrants as $index => $grant)
                         <x-filament-ops::ops-result-card
-                            :title="(string) ($grant['id'] ?? ('grant #'.($index + 1)))"
-                            :meta="'benefit='.(string) ($grant['benefit_code'] ?? '-').' | status='.(string) ($grant['status'] ?? '-')"
+                            :title="(string) ($grant['id'] ?? __('ops.custom_pages.order_lookup.grant_fallback', ['number' => $index + 1]))"
+                            :meta="__('ops.custom_pages.order_lookup.grant_meta', ['benefit' => (string) ($grant['benefit_code'] ?? '-'), 'status' => (string) ($grant['status'] ?? '-')])"
                         >
                             <x-slot name="badges">
                                 <x-filament.ops.shared.status-pill
                                     :state="(string) ($grant['status'] ?? 'gray')"
-                                    :label="'status: '.(string) ($grant['status'] ?? '-')"
+                                    :label="__('ops.custom_pages.order_lookup.status_label', ['status' => (string) ($grant['status'] ?? '-')])"
                                 />
                             </x-slot>
 
                             <x-filament-ops::ops-field-grid
                                 cardless
                                 :fields="$toFields((array) $grant)"
-                                empty-description="This grant has no visible fields."
-                                empty-eyebrow="Benefit grants"
-                                empty-title="No grant details"
+                                :empty-description="__('ops.custom_pages.order_lookup.no_grant_fields')"
+                                :empty-eyebrow="__('ops.custom_pages.order_lookup.benefit_grants_title')"
+                                :empty-title="__('ops.custom_pages.order_lookup.no_grant_details')"
                             />
                         </x-filament-ops::ops-result-card>
                     @empty
                         <x-filament-ops::ops-empty-state
-                            eyebrow="Benefit grants"
+                            :eyebrow="__('ops.custom_pages.order_lookup.benefit_grants_title')"
                             icon="heroicon-o-key"
-                            title="No benefit grants found"
-                            description="The resolved order does not currently expose linked benefit grant records."
+                            :title="__('ops.custom_pages.order_lookup.no_grants_title')"
+                            :description="__('ops.custom_pages.order_lookup.no_grants_desc')"
                         />
                     @endforelse
                 </div>
             </x-filament-ops::ops-section>
 
             <x-filament-ops::ops-section
-                title="Attempt"
-                description="The linked target attempt record when the order is attached to one."
+                :title="__('ops.custom_pages.order_lookup.attempt_title')"
+                :description="__('ops.custom_pages.order_lookup.attempt_desc')"
             >
                 @if ($attempt)
                     <x-filament-ops::ops-field-grid
                         :fields="$toFields($attempt)"
-                        empty-description="This attempt has no visible fields."
-                        empty-eyebrow="Attempt"
-                        empty-title="No attempt details"
+                        :empty-description="__('ops.custom_pages.order_lookup.no_attempt_fields')"
+                        :empty-eyebrow="__('ops.custom_pages.order_lookup.attempt_title')"
+                        :empty-title="__('ops.custom_pages.order_lookup.no_attempt_details')"
                     />
                 @else
                     <x-filament-ops::ops-empty-state
-                        eyebrow="Attempt"
+                        :eyebrow="__('ops.custom_pages.order_lookup.attempt_title')"
                         icon="heroicon-o-clipboard-document-list"
-                        title="No linked attempt found"
-                        description="This order does not currently resolve to a linked target attempt inside the active organization context."
+                        :title="__('ops.custom_pages.order_lookup.no_attempt_title')"
+                        :description="__('ops.custom_pages.order_lookup.no_attempt_desc')"
                     />
                 @endif
             </x-filament-ops::ops-section>

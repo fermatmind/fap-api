@@ -283,39 +283,39 @@ class EditorialReviewPage extends Page
 
         $this->reviewFields = [
             [
-                'label' => 'Draft review queue',
+                'label' => __('ops.custom_pages.editorial_review.fields.draft_queue'),
                 'value' => (string) $allItems->count(),
-                'hint' => 'Draft editorial records currently visible to the lightweight review surface.',
+                'hint' => __('ops.custom_pages.editorial_review.fields.draft_queue_hint'),
             ],
             [
-                'label' => 'Ready for release review',
+                'label' => __('ops.custom_pages.editorial_review.fields.ready'),
                 'value' => (string) $readyCount,
-                'hint' => 'Checklist-clean drafts that have not yet been formally submitted into the reviewer queue.',
+                'hint' => __('ops.custom_pages.editorial_review.fields.ready_hint'),
             ],
             [
-                'label' => 'Currently in review',
+                'label' => __('ops.custom_pages.editorial_review.fields.in_review'),
                 'value' => (string) $inReviewCount,
-                'hint' => 'Draft records actively assigned and submitted to a reviewer.',
+                'hint' => __('ops.custom_pages.editorial_review.fields.in_review_hint'),
             ],
             [
-                'label' => 'Approved for release',
+                'label' => __('ops.custom_pages.editorial_review.fields.approved'),
                 'value' => (string) $approvedCount,
-                'hint' => 'Draft records with a current approval decision and no newer edits after that approval.',
+                'hint' => __('ops.custom_pages.editorial_review.fields.approved_hint'),
             ],
             [
-                'label' => 'Needs attention',
+                'label' => __('ops.custom_pages.editorial_review.fields.attention'),
                 'value' => (string) $attentionCount,
-                'hint' => 'Draft records still missing content or SEO inputs before release review is likely to pass cleanly.',
+                'hint' => __('ops.custom_pages.editorial_review.fields.attention_hint'),
             ],
             [
-                'label' => 'Current type filter',
+                'label' => __('ops.custom_pages.editorial_review.fields.type_filter'),
                 'value' => $this->typeLabel($this->typeFilter),
-                'hint' => 'Filter the review queue by editorial surface.',
+                'hint' => __('ops.custom_pages.editorial_review.fields.type_filter_hint'),
             ],
             [
-                'label' => 'Current review filter',
+                'label' => __('ops.custom_pages.editorial_review.fields.review_filter'),
                 'value' => $this->typeLabel($this->reviewStateFilter),
-                'hint' => 'Keep focus on records that are ready now or isolate drafts that still need editorial cleanup.',
+                'hint' => __('ops.custom_pages.editorial_review.fields.review_filter_hint'),
             ],
         ];
     }
@@ -342,7 +342,7 @@ class EditorialReviewPage extends Page
         return $this->reviewRow(
             type: 'article',
             id: (int) $record->id,
-            typeLabel: 'Article',
+            typeLabel: __('ops.custom_pages.common.filters.article'),
             title: (string) $record->title,
             locale: (string) $record->locale,
             reviewState: $reviewState,
@@ -350,8 +350,8 @@ class EditorialReviewPage extends Page
             ownerLabel: (string) ($snapshot['owner_label'] ?? ''),
             reviewerAdminId: (int) ($snapshot['reviewer_admin_user_id'] ?? 0),
             reviewerLabel: (string) ($snapshot['reviewer_label'] ?? ''),
-            checklistLabel: $missing === [] ? 'Content + SEO ready' : 'Missing: '.implode(', ', $missing),
-            updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
+            checklistLabel: $missing === [] ? __('ops.custom_pages.editorial_review.checklist_ready') : __('ops.custom_pages.editorial_review.checklist_missing', ['items' => implode(', ', $missing)]),
+            updatedAt: optional($record->updated_at)?->toDateTimeString() ?? __('ops.custom_pages.common.values.unknown'),
             editUrl: ArticleResource::getUrl('edit', ['record' => $record]),
         );
     }
@@ -368,7 +368,7 @@ class EditorialReviewPage extends Page
         return $this->reviewRow(
             type: 'guide',
             id: (int) $record->id,
-            typeLabel: 'Career Guide',
+            typeLabel: __('ops.custom_pages.common.filters.career_guide'),
             title: (string) $record->title,
             locale: (string) $record->locale,
             reviewState: $reviewState,
@@ -376,8 +376,8 @@ class EditorialReviewPage extends Page
             ownerLabel: (string) ($snapshot['owner_label'] ?? ''),
             reviewerAdminId: (int) ($snapshot['reviewer_admin_user_id'] ?? 0),
             reviewerLabel: (string) ($snapshot['reviewer_label'] ?? ''),
-            checklistLabel: $missing === [] ? 'Content + SEO ready' : 'Missing: '.implode(', ', $missing),
-            updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
+            checklistLabel: $missing === [] ? __('ops.custom_pages.editorial_review.checklist_ready') : __('ops.custom_pages.editorial_review.checklist_missing', ['items' => implode(', ', $missing)]),
+            updatedAt: optional($record->updated_at)?->toDateTimeString() ?? __('ops.custom_pages.common.values.unknown'),
             editUrl: CareerGuideResource::getUrl('edit', ['record' => $record]),
         );
     }
@@ -394,7 +394,7 @@ class EditorialReviewPage extends Page
         return $this->reviewRow(
             type: 'job',
             id: (int) $record->id,
-            typeLabel: 'Career Job',
+            typeLabel: __('ops.custom_pages.common.filters.career_job'),
             title: (string) $record->title,
             locale: (string) $record->locale,
             reviewState: $reviewState,
@@ -402,8 +402,8 @@ class EditorialReviewPage extends Page
             ownerLabel: (string) ($snapshot['owner_label'] ?? ''),
             reviewerAdminId: (int) ($snapshot['reviewer_admin_user_id'] ?? 0),
             reviewerLabel: (string) ($snapshot['reviewer_label'] ?? ''),
-            checklistLabel: $missing === [] ? 'Content + SEO ready' : 'Missing: '.implode(', ', $missing),
-            updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
+            checklistLabel: $missing === [] ? __('ops.custom_pages.editorial_review.checklist_ready') : __('ops.custom_pages.editorial_review.checklist_missing', ['items' => implode(', ', $missing)]),
+            updatedAt: optional($record->updated_at)?->toDateTimeString() ?? __('ops.custom_pages.common.values.unknown'),
             editUrl: CareerJobResource::getUrl('edit', ['record' => $record]),
         );
     }
@@ -433,13 +433,13 @@ class EditorialReviewPage extends Page
             'id' => $id,
             'workflow_key' => $workflowKey,
             'type_label' => $typeLabel,
-            'title' => $title !== '' ? $title : 'Untitled',
-            'locale' => $locale !== '' ? $locale : 'Unknown',
+            'title' => $title !== '' ? $title : __('ops.custom_pages.common.values.untitled'),
+            'locale' => $locale !== '' ? $locale : __('ops.custom_pages.common.values.unknown'),
             'review_state' => $reviewState,
             'owner_admin_user_id' => $ownerAdminId > 0 ? $ownerAdminId : null,
-            'owner_label' => $ownerLabel !== '' ? $ownerLabel : 'Unassigned',
+            'owner_label' => $ownerLabel !== '' ? $ownerLabel : __('ops.custom_pages.common.values.unassigned'),
             'reviewer_admin_user_id' => $reviewerAdminId > 0 ? $reviewerAdminId : null,
-            'reviewer_label' => $reviewerLabel !== '' ? $reviewerLabel : 'Unassigned',
+            'reviewer_label' => $reviewerLabel !== '' ? $reviewerLabel : __('ops.custom_pages.common.values.unassigned'),
             'checklist_label' => $checklistLabel,
             'updated_at' => $updatedAt,
             'updated_at_sort' => strtotime($updatedAt) ?: 0,
@@ -463,16 +463,16 @@ class EditorialReviewPage extends Page
     private function typeLabel(string $value): string
     {
         return match ($value) {
-            'article' => 'Article',
-            'guide' => 'Career Guide',
-            'job' => 'Career Job',
+            'article' => __('ops.custom_pages.common.filters.article'),
+            'guide' => __('ops.custom_pages.common.filters.career_guide'),
+            'job' => __('ops.custom_pages.common.filters.career_job'),
             EditorialReviewAudit::STATE_READY => EditorialReviewAudit::label(EditorialReviewAudit::STATE_READY),
             EditorialReviewAudit::STATE_IN_REVIEW => EditorialReviewAudit::label(EditorialReviewAudit::STATE_IN_REVIEW),
             EditorialReviewAudit::STATE_APPROVED => EditorialReviewAudit::label(EditorialReviewAudit::STATE_APPROVED),
             EditorialReviewAudit::STATE_CHANGES_REQUESTED => EditorialReviewAudit::label(EditorialReviewAudit::STATE_CHANGES_REQUESTED),
             EditorialReviewAudit::STATE_REJECTED => EditorialReviewAudit::label(EditorialReviewAudit::STATE_REJECTED),
             EditorialReviewAudit::STATE_NEEDS_ATTENTION => EditorialReviewAudit::label(EditorialReviewAudit::STATE_NEEDS_ATTENTION),
-            default => 'All',
+            default => __('ops.custom_pages.common.filters.all'),
         };
     }
 

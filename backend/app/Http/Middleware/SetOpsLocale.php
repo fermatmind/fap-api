@@ -7,6 +7,7 @@ namespace App\Http\Middleware;
 use Carbon\Carbon;
 use Closure;
 use Filament\Facades\Filament;
+use Filament\Navigation\NavigationManager;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -49,8 +50,17 @@ class SetOpsLocale
 
         $locale = $this->normalizeAndWhitelist($picked);
 
+        $previousNavigationLocale = app()->bound('ops.navigation_locale')
+            ? (string) app('ops.navigation_locale')
+            : null;
+
         app()->setLocale($locale);
         Carbon::setLocale($locale);
+
+        if ($previousNavigationLocale !== $locale) {
+            app()->forgetInstance(NavigationManager::class);
+            app()->instance('ops.navigation_locale', $locale);
+        }
         $request->attributes->set('ops_locale_explicit', $explicit);
         session()->put(self::SESSION_KEY, $locale);
 

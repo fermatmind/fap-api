@@ -131,7 +131,7 @@ final class SeoOperationsService
         if ($this->hasMetadataGap($type, $record, $seoMeta)) {
             $issues[] = [
                 'code' => self::ISSUE_METADATA,
-                'label' => 'Metadata gaps',
+                'label' => __('ops.custom_pages.seo_operations.issue_labels.metadata_gaps'),
                 'autofix' => [self::ACTION_FILL_METADATA],
             ];
         }
@@ -139,7 +139,7 @@ final class SeoOperationsService
         if ($expectedCanonical !== null && trim((string) data_get($seoMeta, 'canonical_url', '')) !== $expectedCanonical) {
             $issues[] = [
                 'code' => self::ISSUE_CANONICAL,
-                'label' => 'Canonical mismatch',
+                'label' => __('ops.custom_pages.seo_operations.issue_labels.canonical_mismatch'),
                 'autofix' => [self::ACTION_SYNC_CANONICAL],
             ];
         }
@@ -147,7 +147,7 @@ final class SeoOperationsService
         if (trim((string) data_get($seoMeta, 'robots', '')) !== $expectedRobots) {
             $issues[] = [
                 'code' => self::ISSUE_ROBOTS,
-                'label' => 'Robots drift',
+                'label' => __('ops.custom_pages.seo_operations.issue_labels.robots_drift'),
                 'autofix' => [self::ACTION_SYNC_ROBOTS],
             ];
         }
@@ -155,7 +155,7 @@ final class SeoOperationsService
         if ($type === 'article' && $seoMeta instanceof ArticleSeoMeta && $seoMeta->is_indexable !== $isIndexable) {
             $issues[] = [
                 'code' => self::ISSUE_INDEXABILITY,
-                'label' => 'Indexability mismatch',
+                'label' => __('ops.custom_pages.seo_operations.issue_labels.indexability_mismatch'),
                 'autofix' => [self::ACTION_SYNC_ROBOTS],
             ];
         }
@@ -163,7 +163,7 @@ final class SeoOperationsService
         if ($this->hasSocialGap($type, $record, $seoMeta)) {
             $issues[] = [
                 'code' => self::ISSUE_SOCIAL,
-                'label' => 'Social preview gaps',
+                'label' => __('ops.custom_pages.seo_operations.issue_labels.social_preview_gaps'),
                 'autofix' => $this->socialAutofixActions($type, $record, $seoMeta),
             ];
         }
@@ -171,7 +171,9 @@ final class SeoOperationsService
         if ($isPublishedPublic && (! $isIndexable || $this->hasGrowthBlocker($type, $record, $seoMeta))) {
             $issues[] = [
                 'code' => self::ISSUE_GROWTH,
-                'label' => ! $isIndexable ? 'Discovery blocked by noindex' : 'Published discovery blockers',
+                'label' => ! $isIndexable
+                    ? __('ops.custom_pages.seo_operations.issue_labels.discovery_blocked_by_noindex')
+                    : __('ops.custom_pages.seo_operations.issue_labels.published_discovery_blockers'),
                 'autofix' => $isIndexable
                     ? [self::ACTION_FILL_METADATA, self::ACTION_SYNC_CANONICAL, self::ACTION_SYNC_ROBOTS]
                     : [self::ACTION_MARK_INDEXABLE],
@@ -194,6 +196,15 @@ final class SeoOperationsService
         return $this->isPublishedPublic($type, $record)
             && (bool) data_get($record, 'is_indexable')
             && ! $this->hasGrowthBlocker($type, $record, $this->seoMetaFor($record));
+    }
+
+    public function hasPublishedDiscoveryBlocker(string $type, object $record): bool
+    {
+        return $this->isPublishedPublic($type, $record)
+            && (
+                ! (bool) data_get($record, 'is_indexable')
+                || $this->hasGrowthBlocker($type, $record, $this->seoMetaFor($record))
+            );
     }
 
     public function expectedCanonical(string $type, object $record): ?string
@@ -455,8 +466,10 @@ final class SeoOperationsService
         return [
             'selection_key' => $type.':'.(int) data_get($record, 'id'),
             'type' => $type,
-            'title' => trim((string) data_get($record, 'title', 'Untitled')),
-            'scope' => $type === 'article' ? 'Current org' : 'Global content',
+            'title' => trim((string) data_get($record, 'title', __('ops.custom_pages.common.values.untitled'))),
+            'scope' => $type === 'article'
+                ? __('ops.custom_pages.editorial_operations.surfaces.current_org')
+                : __('ops.custom_pages.common.values.global_content'),
             'status' => trim((string) data_get($record, 'status', 'draft')),
             'is_public' => (bool) data_get($record, 'is_public'),
             'is_indexable' => (bool) data_get($record, 'is_indexable'),
@@ -524,18 +537,18 @@ final class SeoOperationsService
         $seoMeta = $this->seoMetaFor($record);
 
         if (! $this->isPublishedPublic($type, $record)) {
-            return 'Not discoverable yet';
+            return __('ops.custom_pages.seo_operations.growth_signals.not_discoverable');
         }
 
         if (! (bool) data_get($record, 'is_indexable')) {
-            return 'Blocked by noindex';
+            return __('ops.custom_pages.seo_operations.growth_signals.blocked_by_noindex');
         }
 
         if ($this->hasGrowthBlocker($type, $record, $seoMeta)) {
-            return 'Published with discovery blockers';
+            return __('ops.custom_pages.seo_operations.growth_signals.published_blockers');
         }
 
-        return 'Discoverable now';
+        return __('ops.custom_pages.seo_operations.growth_signals.discoverable');
     }
 
     /**

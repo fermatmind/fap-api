@@ -28,10 +28,6 @@ class ReportSnapshotResource extends Resource
 
     protected static ?string $navigationLabel = 'Report / PDF Center';
 
-    protected static ?string $modelLabel = 'Report Snapshot';
-
-    protected static ?string $pluralModelLabel = 'Report Snapshots';
-
     protected static ?int $navigationSort = 10;
 
     public static function getNavigationGroup(): ?string
@@ -42,6 +38,16 @@ class ReportSnapshotResource extends Resource
     public static function getNavigationLabel(): string
     {
         return __('ops.nav.report_pdf_center');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('ops.custom_pages.reports.model_label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('ops.custom_pages.reports.plural_model_label');
     }
 
     public static function form(Form $form): Form
@@ -79,7 +85,7 @@ class ReportSnapshotResource extends Resource
         $support = app(ReportSnapshotExplorerSupport::class);
 
         return $table
-            ->searchPlaceholder('attempt_id / order_no / share_id / scale_code')
+            ->searchPlaceholder(__('ops.custom_pages.reports.search_placeholder'))
             ->searchDebounce('600ms')
             ->recordUrl(fn (ReportSnapshot $record): string => static::getUrl('view', ['record' => $record]))
             ->columns([
@@ -150,10 +156,10 @@ class ReportSnapshotResource extends Resource
             ->defaultSort('updated_at', 'desc')
             ->filters([
                 Tables\Filters\Filter::make('activity_window')
-                    ->label('Date')
+                    ->label(__('ops.custom_pages.reports.date'))
                     ->form([
-                        Forms\Components\DatePicker::make('from')->label('from'),
-                        Forms\Components\DatePicker::make('until')->label('until'),
+                        Forms\Components\DatePicker::make('from')->label(__('ops.custom_pages.reports.from')),
+                        Forms\Components\DatePicker::make('until')->label(__('ops.custom_pages.reports.until')),
                     ])
                     ->query(function (Builder $query, array $data): void {
                         $from = trim((string) ($data['from'] ?? ''));
@@ -185,14 +191,14 @@ class ReportSnapshotResource extends Resource
                         $support->applySnapshotStatusFilter($query, $data['value'] ?? null);
                     }),
                 Tables\Filters\TernaryFilter::make('pdf_ready_filter')
-                    ->label('PDF ready')
+                    ->label(__('ops.custom_pages.reports.pdf_ready'))
                     ->queries(
                         true: fn (Builder $query): Builder => tap($query, fn (Builder $builder) => $support->applyPdfReadyFilter($builder, true)),
                         false: fn (Builder $query): Builder => tap($query, fn (Builder $builder) => $support->applyPdfReadyFilter($builder, false)),
                         blank: fn (Builder $query): Builder => $query,
                     ),
                 Tables\Filters\SelectFilter::make('unlock_status_filter')
-                    ->label('Unlock status')
+                    ->label(__('ops.custom_pages.reports.unlock_status'))
                     ->options([
                         'unlocked' => 'unlocked',
                         'paid_pending' => 'paid_pending',
@@ -204,21 +210,21 @@ class ReportSnapshotResource extends Resource
                         $support->applyUnlockStatusFilter($query, $data['value'] ?? null);
                     }),
                 Tables\Filters\TernaryFilter::make('has_order')
-                    ->label('Has order')
+                    ->label(__('ops.custom_pages.reports.has_order'))
                     ->queries(
                         true: fn (Builder $query): Builder => tap($query, fn (Builder $builder) => $support->applyHasOrderFilter($builder, true)),
                         false: fn (Builder $query): Builder => tap($query, fn (Builder $builder) => $support->applyHasOrderFilter($builder, false)),
                         blank: fn (Builder $query): Builder => $query,
                     ),
                 Tables\Filters\TernaryFilter::make('paid_success')
-                    ->label('Paid success')
+                    ->label(__('ops.custom_pages.reports.paid_success'))
                     ->queries(
                         true: fn (Builder $query): Builder => tap($query, fn (Builder $builder) => $support->applyPaidSuccessFilter($builder, true)),
                         false: fn (Builder $query): Builder => tap($query, fn (Builder $builder) => $support->applyPaidSuccessFilter($builder, false)),
                         blank: fn (Builder $query): Builder => $query,
                     ),
                 Tables\Filters\SelectFilter::make('delivery_status_filter')
-                    ->label('Delivery status')
+                    ->label(__('ops.custom_pages.reports.delivery_status'))
                     ->options([
                         'delivered' => 'delivered',
                         'ready' => 'ready',

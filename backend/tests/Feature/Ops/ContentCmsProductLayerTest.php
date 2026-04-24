@@ -238,7 +238,7 @@ final class ContentCmsProductLayerTest extends TestCase
             ->assertSee('Release Queue Guide')
             ->assertSee('Release Queue Job');
 
-        $this->withSession($session)
+        $releaseResponse = $this->withSession($session)
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/content-release')
             ->assertOk()
@@ -247,9 +247,11 @@ final class ContentCmsProductLayerTest extends TestCase
             ->assertSee('Article')
             ->assertSee('Career Guide')
             ->assertSee('Career Job')
-            ->assertSee('Review state')
-            ->assertDontSee('Content Pack Release')
-            ->assertDontSee('Content Pack Version');
+            ->assertSee('Review state');
+
+        $releaseMainHtml = Str::between($releaseResponse->content(), '<main', '</main>') ?: $releaseResponse->content();
+        $this->assertStringNotContainsString('Content Pack Release', $releaseMainHtml);
+        $this->assertStringNotContainsString('Content Pack Version', $releaseMainHtml);
 
         $this->withSession($session)
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -1137,6 +1139,8 @@ final class ContentCmsProductLayerTest extends TestCase
         return [
             'ops_org_id' => $org->id,
             'ops_admin_totp_verified_user_id' => $adminUserId,
+            \App\Http\Middleware\SetOpsLocale::SESSION_KEY => 'en',
+            \App\Http\Middleware\SetOpsLocale::EXPLICIT_SESSION_KEY => true,
         ];
     }
 
@@ -1273,6 +1277,8 @@ final class ContentCmsProductLayerTest extends TestCase
         return [
             'ops_org_id' => $orgId,
             'ops_admin_totp_verified_user_id' => $adminUserId,
+            \App\Http\Middleware\SetOpsLocale::SESSION_KEY => 'en',
+            \App\Http\Middleware\SetOpsLocale::EXPLICIT_SESSION_KEY => true,
         ];
     }
 

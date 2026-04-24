@@ -3,17 +3,17 @@
         <form wire:submit.prevent="applyFilters" class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
             <div class="grid gap-4 xl:grid-cols-[repeat(4,minmax(0,1fr))]">
                 <label class="space-y-2">
-                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">From</span>
+                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{{ __('ops.custom_pages.question_analytics.filters.from') }}</span>
                     <input type="date" wire:model.defer="fromDate" class="block w-full rounded-xl border-slate-300 text-sm shadow-sm" />
                 </label>
 
                 <label class="space-y-2">
-                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">To</span>
+                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{{ __('ops.custom_pages.question_analytics.filters.to') }}</span>
                     <input type="date" wire:model.defer="toDate" class="block w-full rounded-xl border-slate-300 text-sm shadow-sm" />
                 </label>
 
                 <label class="space-y-2">
-                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Scale</span>
+                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{{ __('ops.custom_pages.question_analytics.filters.scale') }}</span>
                     <select wire:model.defer="scaleCode" class="block w-full rounded-xl border-slate-300 text-sm shadow-sm" disabled>
                         @foreach ($scaleOptions as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
@@ -22,9 +22,9 @@
                 </label>
 
                 <label class="space-y-2">
-                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Locale</span>
+                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{{ __('ops.custom_pages.question_analytics.filters.locale') }}</span>
                     <select wire:model.defer="locale" class="block w-full rounded-xl border-slate-300 text-sm shadow-sm">
-                        <option value="all">All locales</option>
+                        <option value="all">{{ __('ops.custom_pages.question_analytics.filters.all_locales') }}</option>
                         @foreach ($localeOptions as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                         @endforeach
@@ -32,9 +32,9 @@
                 </label>
 
                 <label class="space-y-2">
-                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Region</span>
+                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{{ __('ops.custom_pages.question_analytics.filters.region') }}</span>
                     <select wire:model.defer="region" class="block w-full rounded-xl border-slate-300 text-sm shadow-sm">
-                        <option value="all">All regions</option>
+                        <option value="all">{{ __('ops.custom_pages.question_analytics.filters.all_regions') }}</option>
                         @foreach ($regionOptions as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                         @endforeach
@@ -42,9 +42,9 @@
                 </label>
 
                 <label class="space-y-2">
-                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Content</span>
+                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{{ __('ops.custom_pages.question_analytics.filters.content') }}</span>
                     <select wire:model.defer="contentPackageVersion" class="block w-full rounded-xl border-slate-300 text-sm shadow-sm">
-                        <option value="all">All content versions</option>
+                        <option value="all">{{ __('ops.custom_pages.question_analytics.filters.all_content_versions') }}</option>
                         @foreach ($contentPackageVersionOptions as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                         @endforeach
@@ -52,9 +52,9 @@
                 </label>
 
                 <label class="space-y-2">
-                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Scoring</span>
+                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{{ __('ops.custom_pages.question_analytics.filters.scoring') }}</span>
                     <select wire:model.defer="scoringSpecVersion" class="block w-full rounded-xl border-slate-300 text-sm shadow-sm">
-                        <option value="all">All scoring versions</option>
+                        <option value="all">{{ __('ops.custom_pages.question_analytics.filters.all_scoring_versions') }}</option>
                         @foreach ($scoringSpecVersionOptions as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                         @endforeach
@@ -62,9 +62,9 @@
                 </label>
 
                 <label class="space-y-2">
-                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Norm</span>
+                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{{ __('ops.custom_pages.question_analytics.filters.norm') }}</span>
                     <select wire:model.defer="normVersion" class="block w-full rounded-xl border-slate-300 text-sm shadow-sm">
-                        <option value="all">All norm versions</option>
+                        <option value="all">{{ __('ops.custom_pages.question_analytics.filters.all_norm_versions') }}</option>
                         @foreach ($normVersionOptions as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                         @endforeach
@@ -72,9 +72,9 @@
                 </label>
 
                 <label class="space-y-2 xl:col-span-2">
-                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Question</span>
+                    <span class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{{ __('ops.custom_pages.question_analytics.filters.question') }}</span>
                     <select wire:model.defer="questionId" class="block w-full rounded-xl border-slate-300 text-sm shadow-sm">
-                        <option value="all">All questions</option>
+                        <option value="all">{{ __('ops.custom_pages.question_analytics.filters.all_questions') }}</option>
                         @foreach ($questionIdOptions as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
                         @endforeach
@@ -83,16 +83,16 @@
 
                 <label class="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50/70 px-4 py-3 text-sm text-slate-700">
                     <input type="checkbox" wire:model.defer="onlyCompletedAttempts" class="rounded border-slate-300 text-sky-600 shadow-sm" />
-                    <span>Only completed attempts</span>
+                    <span>{{ __('ops.custom_pages.question_analytics.filters.only_completed_attempts') }}</span>
                 </label>
 
                 <label class="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50/70 px-4 py-3 text-sm text-slate-500">
                     <input type="checkbox" wire:model.defer="excludeNonAuthoritativeScales" class="rounded border-slate-300 text-sky-600 shadow-sm" checked disabled />
-                    <span>Exclude non-authoritative scales</span>
+                    <span>{{ __('ops.custom_pages.question_analytics.filters.exclude_non_authoritative_scales') }}</span>
                 </label>
 
                 <div class="flex items-end gap-3">
-                    <x-filament::button type="submit">Apply</x-filament::button>
+                    <x-filament::button type="submit">{{ __('ops.custom_pages.common.actions.apply') }}</x-filament::button>
                 </div>
             </div>
         </form>
@@ -100,14 +100,14 @@
         <section class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
             <div class="flex flex-wrap items-center justify-between gap-4">
                 <div>
-                    <h2 class="text-lg font-semibold text-slate-950">Authority Scope</h2>
+                    <h2 class="text-lg font-semibold text-slate-950">{{ __('ops.custom_pages.question_analytics.authority.title') }}</h2>
                     <p class="text-sm text-slate-500">
-                        Fixed to {{ $canonicalScale['scale_code'] }} only, with legacy / v2 recognition for {{ $canonicalScale['scale_code_v2'] }}.
+                        {{ __('ops.custom_pages.question_analytics.authority.description', ['scale' => $canonicalScale['scale_code'], 'scale_v2' => $canonicalScale['scale_code_v2']]) }}
                     </p>
                 </div>
 
                 <div class="flex flex-wrap gap-2">
-                    @foreach (['option-distribution' => 'Option Distribution', 'dropoff-completion' => 'Dropoff / Completion'] as $tabKey => $label)
+                    @foreach (['option-distribution' => __('ops.custom_pages.question_analytics.tabs.option_distribution'), 'dropoff-completion' => __('ops.custom_pages.question_analytics.tabs.dropoff_completion')] as $tabKey => $label)
                         <button
                             type="button"
                             wire:click="setActiveTab('{{ $tabKey }}')"
@@ -131,12 +131,12 @@
                 @foreach ($drillLinks as $link)
                     <a href="{{ $link['url'] }}" class="inline-flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:text-slate-950">
                         <span>{{ $link['label'] }}</span>
-                        <span class="text-slate-400">Open</span>
+                        <span class="text-slate-400">{{ __('ops.custom_pages.common.actions.open') }}</span>
                     </a>
                 @endforeach
 
                 <div class="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-600">
-                    Duration is deferred in v1. No authority duration panel or heatmap is shown on this page.
+                    {{ __('ops.custom_pages.question_analytics.authority.duration_deferred') }}
                 </div>
             </div>
         </section>
@@ -155,8 +155,8 @@
             @if ($hasOptionData)
                 <section class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
                     <div class="mb-4">
-                        <h2 class="text-lg font-semibold text-slate-950">Option Distribution KPI Cards</h2>
-                        <p class="text-sm text-slate-500">Authoritative rows only. No events-based fallback and no redacted / rowless scales.</p>
+                        <h2 class="text-lg font-semibold text-slate-950">{{ __('ops.custom_pages.question_analytics.sections.option_kpis') }}</h2>
+                        <p class="text-sm text-slate-500">{{ __('ops.custom_pages.question_analytics.sections.option_kpis_desc') }}</p>
                     </div>
 
                     <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -174,21 +174,21 @@
 
                 <section class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
                     <div class="mb-4">
-                        <h2 class="text-lg font-semibold text-slate-950">Question Option Distribution Table</h2>
-                        <p class="text-sm text-slate-500">Question ranking, answer count, and option share stacked bars come from daily authority rows.</p>
+                        <h2 class="text-lg font-semibold text-slate-950">{{ __('ops.custom_pages.question_analytics.sections.option_table') }}</h2>
+                        <p class="text-sm text-slate-500">{{ __('ops.custom_pages.question_analytics.sections.option_table_desc') }}</p>
                     </div>
 
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-slate-200 text-sm">
                             <thead class="bg-slate-50 text-left text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
                                 <tr>
-                                    <th class="px-3 py-3">Order</th>
-                                    <th class="px-3 py-3">Question</th>
-                                    <th class="px-3 py-3">Answer count</th>
-                                    <th class="px-3 py-3">Distinct attempts</th>
-                                    <th class="px-3 py-3">Option share</th>
-                                    <th class="px-3 py-3">Top option</th>
-                                    <th class="px-3 py-3">Attempts Explorer</th>
+                                    <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.order') }}</th>
+                                    <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.question') }}</th>
+                                    <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.answer_count') }}</th>
+                                    <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.distinct_attempts') }}</th>
+                                    <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.option_share') }}</th>
+                                    <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.top_option') }}</th>
+                                    <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.attempts_explorer') }}</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-100 bg-white">
@@ -225,7 +225,7 @@
                                         <td class="px-3 py-3">{{ $row['top_option_key'] }} · {{ $this->formatRate($row['top_option_share']) }}</td>
                                         <td class="px-3 py-3">
                                             <a href="/ops/attempts?tableSearch=BIG5_OCEAN%20{{ urlencode($row['question_id']) }}" class="text-sky-700 transition hover:text-sky-900">
-                                                Open
+                                                {{ __('ops.custom_pages.common.actions.open') }}
                                             </a>
                                         </td>
                                     </tr>
@@ -238,17 +238,17 @@
                 <section class="grid gap-6 xl:grid-cols-3">
                     <div class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
                         <div class="mb-4">
-                            <h2 class="text-lg font-semibold text-slate-950">Top Answered Questions</h2>
-                            <p class="text-sm text-slate-500">Fast ranking for question-level answer volume.</p>
+                            <h2 class="text-lg font-semibold text-slate-950">{{ __('ops.custom_pages.question_analytics.sections.top_answered') }}</h2>
+                            <p class="text-sm text-slate-500">{{ __('ops.custom_pages.question_analytics.sections.top_answered_desc') }}</p>
                         </div>
 
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-slate-200 text-sm">
                                 <thead class="bg-slate-50 text-left text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
                                     <tr>
-                                        <th class="px-3 py-3">Question</th>
-                                        <th class="px-3 py-3">Answer count</th>
-                                        <th class="px-3 py-3">Top share</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.question') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.answer_count') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.top_share') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-100 bg-white">
@@ -266,17 +266,17 @@
 
                     <div class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
                         <div class="mb-4">
-                            <h2 class="text-lg font-semibold text-slate-950">Locale Compare</h2>
-                            <p class="text-sm text-slate-500">Table cut only. No tiny-locale charting in v1.</p>
+                            <h2 class="text-lg font-semibold text-slate-950">{{ __('ops.custom_pages.question_analytics.sections.locale_compare') }}</h2>
+                            <p class="text-sm text-slate-500">{{ __('ops.custom_pages.question_analytics.sections.locale_compare_option_desc') }}</p>
                         </div>
 
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-slate-200 text-sm">
                                 <thead class="bg-slate-50 text-left text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
                                     <tr>
-                                        <th class="px-3 py-3">Locale</th>
-                                        <th class="px-3 py-3">Answered rows</th>
-                                        <th class="px-3 py-3">Attempts</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.filters.locale') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.answered_rows') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.attempts') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-100 bg-white">
@@ -294,18 +294,18 @@
 
                     <div class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
                         <div class="mb-4">
-                            <h2 class="text-lg font-semibold text-slate-950">Version Compare</h2>
-                            <p class="text-sm text-slate-500">Content, scoring, and norm stay explicit so cross-version pools remain visible.</p>
+                            <h2 class="text-lg font-semibold text-slate-950">{{ __('ops.custom_pages.question_analytics.sections.version_compare') }}</h2>
+                            <p class="text-sm text-slate-500">{{ __('ops.custom_pages.question_analytics.sections.version_compare_option_desc') }}</p>
                         </div>
 
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-slate-200 text-sm">
                                 <thead class="bg-slate-50 text-left text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
                                     <tr>
-                                        <th class="px-3 py-3">Content</th>
-                                        <th class="px-3 py-3">Scoring</th>
-                                        <th class="px-3 py-3">Norm</th>
-                                        <th class="px-3 py-3">Answered rows</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.content') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.scoring') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.norm') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.answered_rows') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-100 bg-white">
@@ -324,15 +324,15 @@
                 </section>
             @else
                 <div class="rounded-2xl border border-slate-200 bg-white/95 px-4 py-5 text-sm text-slate-500 shadow-sm">
-                    No option-distribution data matches the current scope.
+                    {{ __('ops.custom_pages.question_analytics.sections.no_option_data') }}
                 </div>
             @endif
         @elseif ($activeTab === 'dropoff-completion')
             @if ($hasProgressData)
                 <section class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
                     <div class="mb-4">
-                        <h2 class="text-lg font-semibold text-slate-950">Dropoff / Completion KPI Cards</h2>
-                        <p class="text-sm text-slate-500">Progression comes from attempts + drafts + rows, not from events. Completed-only mode is explicit.</p>
+                        <h2 class="text-lg font-semibold text-slate-950">{{ __('ops.custom_pages.question_analytics.sections.progress_kpis') }}</h2>
+                        <p class="text-sm text-slate-500">{{ __('ops.custom_pages.question_analytics.sections.progress_kpis_desc') }}</p>
                     </div>
 
                     <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -350,22 +350,22 @@
 
                 <section class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
                     <div class="mb-4">
-                        <h2 class="text-lg font-semibold text-slate-950">Question Dropoff / Completion Table</h2>
-                        <p class="text-sm text-slate-500">Rates are computed from reached attempts inside the current filtered scope.</p>
+                        <h2 class="text-lg font-semibold text-slate-950">{{ __('ops.custom_pages.question_analytics.sections.progress_table') }}</h2>
+                        <p class="text-sm text-slate-500">{{ __('ops.custom_pages.question_analytics.sections.progress_table_desc') }}</p>
                     </div>
 
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-slate-200 text-sm">
                             <thead class="bg-slate-50 text-left text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
                                 <tr>
-                                    <th class="px-3 py-3">Order</th>
-                                    <th class="px-3 py-3">Question</th>
-                                    <th class="px-3 py-3">Reached</th>
-                                    <th class="px-3 py-3">Answered</th>
-                                    <th class="px-3 py-3">Completed</th>
-                                    <th class="px-3 py-3">Dropoff</th>
-                                    <th class="px-3 py-3">Dropoff rate</th>
-                                    <th class="px-3 py-3">Completion rate</th>
+                                    <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.order') }}</th>
+                                    <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.question') }}</th>
+                                    <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.reached') }}</th>
+                                    <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.answered') }}</th>
+                                    <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.completed') }}</th>
+                                    <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.dropoff') }}</th>
+                                    <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.dropoff_rate') }}</th>
+                                    <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.completion_rate') }}</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-100 bg-white">
@@ -392,17 +392,17 @@
                 <section class="grid gap-6 xl:grid-cols-2">
                     <div class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
                         <div class="mb-4">
-                            <h2 class="text-lg font-semibold text-slate-950">Highest Dropoff Questions</h2>
-                            <p class="text-sm text-slate-500">Ranking by dropoff rate, then dropoff attempt count.</p>
+                            <h2 class="text-lg font-semibold text-slate-950">{{ __('ops.custom_pages.question_analytics.sections.highest_dropoff') }}</h2>
+                            <p class="text-sm text-slate-500">{{ __('ops.custom_pages.question_analytics.sections.highest_dropoff_desc') }}</p>
                         </div>
 
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-slate-200 text-sm">
                                 <thead class="bg-slate-50 text-left text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
                                     <tr>
-                                        <th class="px-3 py-3">Question</th>
-                                        <th class="px-3 py-3">Dropoff</th>
-                                        <th class="px-3 py-3">Rate</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.question') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.dropoff') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.rate') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-100 bg-white">
@@ -420,17 +420,17 @@
 
                     <div class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
                         <div class="mb-4">
-                            <h2 class="text-lg font-semibold text-slate-950">Lowest Completion Questions</h2>
-                            <p class="text-sm text-slate-500">Ranking by completion rate inside the current scope.</p>
+                            <h2 class="text-lg font-semibold text-slate-950">{{ __('ops.custom_pages.question_analytics.sections.lowest_completion') }}</h2>
+                            <p class="text-sm text-slate-500">{{ __('ops.custom_pages.question_analytics.sections.lowest_completion_desc') }}</p>
                         </div>
 
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-slate-200 text-sm">
                                 <thead class="bg-slate-50 text-left text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
                                     <tr>
-                                        <th class="px-3 py-3">Question</th>
-                                        <th class="px-3 py-3">Completed</th>
-                                        <th class="px-3 py-3">Rate</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.question') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.completed') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.rate') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-100 bg-white">
@@ -450,19 +450,19 @@
                 <section class="grid gap-6 xl:grid-cols-2">
                     <div class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
                         <div class="mb-4">
-                            <h2 class="text-lg font-semibold text-slate-950">Locale Compare</h2>
-                            <p class="text-sm text-slate-500">Simple locale table cut for reached / answered / completed / dropoff.</p>
+                            <h2 class="text-lg font-semibold text-slate-950">{{ __('ops.custom_pages.question_analytics.sections.locale_compare') }}</h2>
+                            <p class="text-sm text-slate-500">{{ __('ops.custom_pages.question_analytics.sections.locale_compare_progress_desc') }}</p>
                         </div>
 
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-slate-200 text-sm">
                                 <thead class="bg-slate-50 text-left text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
                                     <tr>
-                                        <th class="px-3 py-3">Locale</th>
-                                        <th class="px-3 py-3">Reached</th>
-                                        <th class="px-3 py-3">Completed</th>
-                                        <th class="px-3 py-3">Dropoff</th>
-                                        <th class="px-3 py-3">Dropoff rate</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.filters.locale') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.reached') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.completed') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.dropoff') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.dropoff_rate') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-100 bg-white">
@@ -482,19 +482,19 @@
 
                     <div class="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm">
                         <div class="mb-4">
-                            <h2 class="text-lg font-semibold text-slate-950">Version Compare</h2>
-                            <p class="text-sm text-slate-500">Version pool stays explicit to avoid silent cross-version authority claims.</p>
+                            <h2 class="text-lg font-semibold text-slate-950">{{ __('ops.custom_pages.question_analytics.sections.version_compare') }}</h2>
+                            <p class="text-sm text-slate-500">{{ __('ops.custom_pages.question_analytics.sections.version_compare_progress_desc') }}</p>
                         </div>
 
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-slate-200 text-sm">
                                 <thead class="bg-slate-50 text-left text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
                                     <tr>
-                                        <th class="px-3 py-3">Content</th>
-                                        <th class="px-3 py-3">Scoring</th>
-                                        <th class="px-3 py-3">Norm</th>
-                                        <th class="px-3 py-3">Reached</th>
-                                        <th class="px-3 py-3">Dropoff</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.content') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.scoring') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.norm') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.reached') }}</th>
+                                        <th class="px-3 py-3">{{ __('ops.custom_pages.question_analytics.table.dropoff') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-100 bg-white">
@@ -514,7 +514,7 @@
                 </section>
             @else
                 <div class="rounded-2xl border border-slate-200 bg-white/95 px-4 py-5 text-sm text-slate-500 shadow-sm">
-                    No dropoff / completion data matches the current scope.
+                    {{ __('ops.custom_pages.question_analytics.sections.no_progress_data') }}
                 </div>
             @endif
         @endif

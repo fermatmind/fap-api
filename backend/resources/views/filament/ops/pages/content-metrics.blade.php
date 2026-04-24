@@ -1,35 +1,35 @@
 <x-filament-panels::page>
     <div class="ops-shell-page">
         <x-filament-ops::ops-section
-            eyebrow="Content metrics"
-            title="Content metrics"
-            description="Track the visible CMS footprint across current-org articles, global career content, lifecycle backlog, stale drafts, and release pressure."
+            :eyebrow="__('ops.custom_pages.content_metrics.eyebrow')"
+            :title="__('ops.custom_pages.content_metrics.title')"
+            :description="__('ops.custom_pages.content_metrics.description')"
         >
             <x-filament-ops::ops-toolbar>
                 <div class="ops-control-stack">
-                    <span class="ops-control-label">Metrics contract</span>
-                    <p class="ops-control-hint">This page now doubles as a lifecycle console: use the stale cards to archive old drafts before they pile up in review and release queues.</p>
+                    <span class="ops-control-label">{{ __('ops.custom_pages.content_metrics.contract_label') }}</span>
+                    <p class="ops-control-hint">{{ __('ops.custom_pages.content_metrics.contract_hint') }}</p>
                 </div>
 
                 <x-slot name="actions">
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentOverviewPage::getUrl() }}">
-                        Overview
+                        {{ __('ops.custom_pages.common.nav.overview') }}
                     </x-filament::button>
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\EditorialOperationsPage::getUrl() }}">
-                        Editorial Ops
+                        {{ __('ops.custom_pages.common.nav.editorial_ops') }}
                     </x-filament::button>
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\SeoOperationsPage::getUrl() }}">
-                        SEO Operations
+                        {{ __('ops.custom_pages.common.nav.seo_operations') }}
                     </x-filament::button>
                     <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\ContentSearchPage::getUrl() }}">
-                        Content Search
+                        {{ __('ops.custom_pages.common.nav.content_search') }}
                     </x-filament::button>
                     @if (\App\Filament\Ops\Support\ContentAccess::canRelease())
                         <x-filament::button color="gray" tag="a" href="{{ \App\Filament\Ops\Pages\EditorialReviewPage::getUrl() }}">
-                            Editorial Review
+                            {{ __('ops.custom_pages.common.nav.editorial_review') }}
                         </x-filament::button>
                         <x-filament::button color="primary" tag="a" href="{{ \App\Filament\Ops\Pages\ContentReleasePage::getUrl() }}">
-                            Release Queue
+                            {{ __('ops.custom_pages.common.nav.release_queue') }}
                         </x-filament::button>
                     @endif
                 </x-slot>
@@ -37,22 +37,22 @@
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Metric snapshot"
-            description="A compact KPI layer for the production CMS footprint."
+            :title="__('ops.custom_pages.content_metrics.snapshot_title')"
+            :description="__('ops.custom_pages.content_metrics.snapshot_desc')"
         >
             <x-filament-ops::ops-field-grid :fields="$headlineFields" />
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Boundary health"
-            description="Keep org-scoped and global content boundaries explicit while watching publish coverage and visibility mismatches."
+            :title="__('ops.custom_pages.content_metrics.boundary_title')"
+            :description="__('ops.custom_pages.content_metrics.boundary_desc')"
         >
             <x-filament-ops::ops-field-grid :fields="$scopeFields" />
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Freshness and pressure"
-            description="These cards help operators spot stale drafts and public visibility mismatches before opening the full resource surfaces."
+            :title="__('ops.custom_pages.content_metrics.freshness_title')"
+            :description="__('ops.custom_pages.content_metrics.freshness_desc')"
         >
             <div class="ops-card-list">
                 @foreach ($freshnessCards as $card)
@@ -61,7 +61,7 @@
                         :meta="$card['meta']"
                     >
                         <p class="ops-control-hint">{{ $card['description'] }}</p>
-                        <p class="ops-control-hint">Latest record: {{ $card['latest_title'] ?? 'No recent record' }}</p>
+                        <p class="ops-control-hint">{{ __('ops.custom_pages.content_metrics.latest_record', ['title' => $card['latest_title'] ?? __('ops.custom_pages.common.values.no_recent_record')]) }}</p>
                         <x-slot name="actions">
                             <div class="ops-toolbar-inline">
                                 <x-filament.ops.shared.status-pill
@@ -75,7 +75,7 @@
                                         type="button"
                                         wire:click="archiveStale('{{ $card['action_type'] }}')"
                                     >
-                                        Archive stale
+                                        {{ __('ops.custom_pages.common.actions.archive_stale') }}
                                     </x-filament::button>
                                 @endif
                             </div>
