@@ -2,24 +2,29 @@
 
 return [
     'locale' => [
-        'switcher_label' => 'Lang',
+        'switcher_label' => 'Interface language',
+        'english_short' => 'EN',
+        'chinese_short' => '中文',
     ],
 
     'group' => [
-        'support' => 'Support',
-        'sre' => 'SRE',
+        'support' => 'Operations',
+        'sre' => 'Operations',
         'governance' => 'Governance',
-        'admin' => 'Admin',
+        'admin' => 'Governance',
         'content' => 'Content',
-        'content_overview' => 'Content Overview',
-        'content_workspace' => 'Content Workspace',
-        'content_release' => 'Content Release',
-        'content_data' => 'Content Data',
-        'editorial' => 'Editorial',
-        'taxonomy' => 'Taxonomy',
-        'content_control_plane' => 'Content Control Plane',
-        'commerce' => 'Commerce',
-        'observability' => 'Observability',
+        'translation' => 'Translation',
+        'operations' => 'Operations',
+        'insights' => 'Insights',
+        'content_overview' => 'Insights',
+        'content_workspace' => 'Content',
+        'content_release' => 'Operations',
+        'content_data' => 'Insights',
+        'editorial' => 'Content',
+        'taxonomy' => 'Content',
+        'content_control_plane' => 'Operations',
+        'commerce' => 'Operations',
+        'observability' => 'Operations',
     ],
 
     'nav' => [
@@ -212,6 +217,10 @@ return [
 
     'topbar' => [
         'current_org' => 'Current Org',
+        'org_prefix' => 'Org',
+        'org_id' => 'Org ID',
+        'role' => 'Role',
+        'manage_org' => 'Manage organization',
         'switch_org' => 'Switch Org',
         'select_org' => 'Select Org',
         'no_org_selected' => 'No Org Selected',
@@ -219,6 +228,15 @@ return [
         'control_plane' => 'Control plane',
         'control_plane_meta' => 'Content, commerce, governance, and runtime operations share the same shell.',
         'assessment_insights' => 'Assessment Insights',
+        'environment' => 'Environment',
+        'production' => 'Production',
+        'local' => 'Local',
+        'system_status' => 'System status',
+        'shell_ready' => 'Ready',
+        'version_label' => 'Ops console',
+        'command_search_label' => 'Global command search',
+        'command_search_placeholder' => 'Search content, orders, users...',
+        'command_search_hint' => 'Open search',
     ],
 
     'status' => [

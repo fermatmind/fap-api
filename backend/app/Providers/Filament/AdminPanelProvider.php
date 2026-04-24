@@ -16,6 +16,7 @@ use App\Http\Middleware\VerifyCsrfToken;
 use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
+use Filament\Navigation\NavigationGroup;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -60,10 +61,24 @@ class AdminPanelProvider extends PanelProvider
             ->darkMode(false)
             ->defaultThemeMode(ThemeMode::Light)
             ->theme('ops-theme')
+            ->globalSearchKeyBindings(['command+k', 'ctrl+k'])
+            ->globalSearchFieldSuffix('⌘K')
             ->discoverResources(in: app_path('Filament/Ops/Resources'), for: 'App\\Filament\\Ops\\Resources')
             ->discoverPages(in: app_path('Filament/Ops/Pages'), for: 'App\\Filament\\Ops\\Pages')
             ->pages([
                 OpsDashboard::class,
+            ])
+            ->navigationGroups([
+                NavigationGroup::make()
+                    ->label(fn (): string => (string) __('ops.group.content')),
+                NavigationGroup::make()
+                    ->label(fn (): string => (string) __('ops.group.translation')),
+                NavigationGroup::make()
+                    ->label(fn (): string => (string) __('ops.group.operations')),
+                NavigationGroup::make()
+                    ->label(fn (): string => (string) __('ops.group.insights')),
+                NavigationGroup::make()
+                    ->label(fn (): string => (string) __('ops.group.governance')),
             ])
             ->discoverWidgets(in: app_path('Filament/Ops/Widgets'), for: 'App\\Filament\\Ops\\Widgets')
             ->middleware([

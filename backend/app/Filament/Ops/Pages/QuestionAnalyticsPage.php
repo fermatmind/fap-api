@@ -159,7 +159,7 @@ class QuestionAnalyticsPage extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return __('ops.topbar.assessment_insights');
+        return __('ops.group.insights');
     }
 
     public static function getNavigationLabel(): string

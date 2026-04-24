@@ -42,7 +42,7 @@ final class OpsLocalePurityTest extends TestCase
         $this->assertSame('已发布', StatusBadge::label('published'));
 
         $topbar = view('filament.ops.hooks.sidebar-footer')->render();
-        $this->assertStringContainsString('控制平面', $topbar);
+        $this->assertStringContainsString('系统状态', $topbar);
         $this->assertStringNotContainsString('Control plane', $topbar);
     }
 
@@ -62,7 +62,7 @@ final class OpsLocalePurityTest extends TestCase
         $this->assertSame('Published', StatusBadge::label('published'));
 
         $topbar = view('filament.ops.hooks.sidebar-footer')->render();
-        $this->assertStringContainsString('Control plane', $topbar);
+        $this->assertStringContainsString('System status', $topbar);
         $this->assertDoesNotMatchRegularExpression('/[\x{4E00}-\x{9FFF}]/u', $topbar);
     }
 

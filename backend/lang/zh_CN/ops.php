@@ -2,24 +2,29 @@
 
 return [
     'locale' => [
-        'switcher_label' => '语言',
+        'switcher_label' => '界面语言',
+        'english_short' => 'EN',
+        'chinese_short' => '中文',
     ],
 
     'group' => [
-        'support' => '支持',
-        'sre' => '运维',
+        'support' => '运营',
+        'sre' => '运营',
         'governance' => '治理',
-        'admin' => '管理',
+        'admin' => '治理',
         'content' => '内容',
-        'content_overview' => '内容总览',
-        'content_workspace' => '内容工作台',
-        'content_release' => '内容发布',
-        'content_data' => '内容数据',
-        'editorial' => '内容编辑',
-        'taxonomy' => '内容分类',
-        'content_control_plane' => '内容控制平面',
-        'commerce' => '交易',
-        'observability' => '可观测性',
+        'translation' => '翻译',
+        'operations' => '运营',
+        'insights' => '洞察',
+        'content_overview' => '洞察',
+        'content_workspace' => '内容',
+        'content_release' => '运营',
+        'content_data' => '洞察',
+        'editorial' => '内容',
+        'taxonomy' => '内容',
+        'content_control_plane' => '运营',
+        'commerce' => '运营',
+        'observability' => '运营',
     ],
 
     'nav' => [
@@ -212,6 +217,10 @@ return [
 
     'topbar' => [
         'current_org' => '当前组织',
+        'org_prefix' => '组织',
+        'org_id' => '组织 ID',
+        'role' => '角色',
+        'manage_org' => '管理组织',
         'switch_org' => '切换组织',
         'select_org' => '选择组织',
         'no_org_selected' => '未选择组织',
@@ -219,6 +228,15 @@ return [
         'control_plane' => '控制平面',
         'control_plane_meta' => '内容、交易、治理与运行操作共用同一个后台。',
         'assessment_insights' => '测评洞察',
+        'environment' => '环境',
+        'production' => '生产',
+        'local' => '本地',
+        'system_status' => '系统状态',
+        'shell_ready' => '就绪',
+        'version_label' => '运营控制台',
+        'command_search_label' => '全局命令搜索',
+        'command_search_placeholder' => '搜索内容、订单、用户...',
+        'command_search_hint' => '打开搜索',
     ],
 
     'status' => [
