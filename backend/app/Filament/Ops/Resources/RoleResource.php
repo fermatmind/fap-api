@@ -63,15 +63,31 @@ class RoleResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('description')->limit(50),
+                Tables\Columns\TextColumn::make('name')
+                    ->label(__('ops.nav.roles'))
+                    ->searchable()
+                    ->sortable()
+                    ->description(fn (Role $record): ?string => $record->description),
+                Tables\Columns\TextColumn::make('description')
+                    ->label(__('ops.resources.taxonomy.fields.description'))
+                    ->limit(50)
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('permissions_count')
                     ->counts('permissions')
-                    ->label('Permissions'),
-                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
+                    ->label(__('ops.table.permissions'))
+                    ->badge()
+                    ->color('gray'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('ops.resources.articles.fields.created'))
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->label(__('ops.resources.articles.actions.edit'))
+                    ->icon('heroicon-o-pencil-square')
+                    ->color('gray'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -6,7 +6,7 @@ namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\LandingSurfaceResource\Pages;
 use App\Filament\Ops\Support\ContentAccess;
-use App\Filament\Ops\Support\StatusBadge;
+use App\Filament\Ops\Support\OpsTable;
 use App\Models\LandingSurface;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -152,24 +152,44 @@ class LandingSurfaceResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('surface_key')
+                    ->label(__('ops.nav.landing_surfaces'))
                     ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('locale')
-                    ->sortable(),
+                    ->sortable()
+                    ->description(fn (LandingSurface $record): ?string => $record->title),
+                OpsTable::locale(),
                 Tables\Columns\TextColumn::make('title')
+                    ->label(__('ops.resources.articles.fields.title'))
                     ->searchable()
-                    ->limit(48),
-                Tables\Columns\TextColumn::make('status')
-                    ->formatStateUsing(fn (?string $state): string => ucfirst((string) $state))
-                    ->badge()
-                    ->color(fn (?string $state): string => StatusBadge::color($state))
-                    ->sortable(),
+                    ->limit(48)
+                    ->toggleable(isToggledHiddenByDefault: true),
+                OpsTable::status(),
                 Tables\Columns\IconColumn::make('is_public')
+                    ->label(__('ops.table.public'))
                     ->boolean()
                     ->sortable(),
+                Tables\Columns\IconColumn::make('is_indexable')
+                    ->label(__('ops.table.indexable'))
+                    ->boolean()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label(__('ops.table.updated'))
+                    ->since()
                     ->sortable(),
+            ])
+            ->filters([
+                Tables\Filters\SelectFilter::make('status')
+                    ->label(__('ops.table.status'))
+                    ->options([
+                        LandingSurface::STATUS_DRAFT => __('ops.status.draft'),
+                        LandingSurface::STATUS_PUBLISHED => __('ops.status.published'),
+                    ]),
+                Tables\Filters\SelectFilter::make('locale')
+                    ->label(__('ops.table.locale'))
+                    ->options([
+                        'zh-CN' => 'zh-CN',
+                        'en' => 'en',
+                    ]),
             ])
             ->defaultSort('surface_key')
             ->actions([

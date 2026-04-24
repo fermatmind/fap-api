@@ -6,7 +6,7 @@ namespace App\Filament\Ops\Resources;
 
 use App\Filament\Ops\Resources\MediaAssetResource\Pages;
 use App\Filament\Ops\Support\ContentAccess;
-use App\Filament\Ops\Support\StatusBadge;
+use App\Filament\Ops\Support\OpsTable;
 use App\Models\MediaAsset;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -174,25 +174,45 @@ class MediaAssetResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('url')
+                    ->label('')
+                    ->size(44)
+                    ->square()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('asset_key')
+                    ->label(__('ops.nav.media_library'))
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->description(fn (MediaAsset $record): ?string => $record->alt),
                 Tables\Columns\TextColumn::make('mime_type')
+                    ->label(__('ops.table.asset_type'))
+                    ->badge()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('alt')
                     ->limit(56)
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->formatStateUsing(fn (?string $state): string => ucfirst((string) $state))
-                    ->badge()
-                    ->color(fn (?string $state): string => StatusBadge::color($state))
-                    ->sortable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                OpsTable::status(),
                 Tables\Columns\IconColumn::make('is_public')
+                    ->label(__('ops.table.public'))
                     ->boolean()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('width')
+                    ->label(__('ops.table.dimensions'))
+                    ->state(fn (MediaAsset $record): string => $record->width && $record->height ? "{$record->width} x {$record->height}" : '-')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label(__('ops.table.updated'))
+                    ->since()
                     ->sortable(),
+            ])
+            ->filters([
+                Tables\Filters\SelectFilter::make('status')
+                    ->label(__('ops.table.status'))
+                    ->options([
+                        MediaAsset::STATUS_DRAFT => __('ops.status.draft'),
+                        MediaAsset::STATUS_PUBLISHED => __('ops.status.published'),
+                    ]),
             ])
             ->defaultSort('asset_key')
             ->actions([

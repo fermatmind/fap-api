@@ -530,9 +530,9 @@ final class ContentCmsProductLayerTest extends TestCase
     public function test_navigation_groups_match_cms_bootstrap_blueprint(): void
     {
         $this->assertSame(__('ops.group.content_overview'), ContentOverviewPage::getNavigationGroup());
-        $this->assertSame(__('ops.group.content_overview'), ContentWorkspacePage::getNavigationGroup());
+        $this->assertSame(__('ops.group.content'), ContentWorkspacePage::getNavigationGroup());
         $this->assertSame(__('ops.group.editorial'), EditorialOperationsPage::getNavigationGroup());
-        $this->assertSame(__('ops.group.editorial'), ArticleTranslationOpsPage::getNavigationGroup());
+        $this->assertSame(__('ops.group.translation'), ArticleTranslationOpsPage::getNavigationGroup());
         $this->assertSame(__('ops.group.content_release'), EditorialReviewPage::getNavigationGroup());
         $this->assertSame(__('ops.group.editorial'), ArticleResource::getNavigationGroup());
         $this->assertSame(__('ops.group.editorial'), CareerGuideResource::getNavigationGroup());
