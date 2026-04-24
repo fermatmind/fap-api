@@ -44,8 +44,8 @@ final class CareerJobWorkspaceTest extends TestCase
         ])->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/career-jobs')
             ->assertOk()
-            ->assertSee('Global career content workspace', false)
-            ->assertSee('Create Career Job');
+            ->assertSee('结构化职业岗位档案的全局内容工作区', false)
+            ->assertSee('创建职业岗位');
 
         $this->withSession([
             'ops_org_id' => $selectedOrg->id,
@@ -54,7 +54,7 @@ final class CareerJobWorkspaceTest extends TestCase
             ->get('/ops/career-jobs/create')
             ->assertOk()
             ->assertSee('ops-career-job-workspace-layout', false)
-            ->assertSee('Create Career Job');
+            ->assertSee('创建职业岗位');
 
         $this->withSession([
             'ops_org_id' => $selectedOrg->id,

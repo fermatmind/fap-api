@@ -279,8 +279,8 @@ final class SelectOrgFlowTest extends TestCase
             ->get(route('filament.ops.pages.organizations-import'))
             ->assertOk()
             ->assertSee((new OrganizationsImportPage)->getNavigationLabel())
-            ->assertSee('Runbook-driven import only')
-            ->assertSee('Back to Select Org');
+            ->assertSee('仅支持运行手册导入')
+            ->assertSee('返回选择组织');
     }
 
     public function test_organization_resource_create_uses_same_bootstrap_semantics_without_membership_side_effects(): void

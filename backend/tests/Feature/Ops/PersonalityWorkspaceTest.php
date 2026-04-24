@@ -45,8 +45,8 @@ final class PersonalityWorkspaceTest extends TestCase
         ])->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/personality')
             ->assertOk()
-            ->assertSee('Global MBTI content workspace', false)
-            ->assertSee('Create Personality Profile');
+            ->assertSee('结构化人格档案的全局 MBTI 内容工作区', false)
+            ->assertSee('创建人格档案');
 
         $this->withSession([
             'ops_org_id' => $selectedOrg->id,
@@ -55,7 +55,7 @@ final class PersonalityWorkspaceTest extends TestCase
             ->get('/ops/personality/create')
             ->assertOk()
             ->assertSee('ops-personality-workspace-layout', false)
-            ->assertSee('Create Personality Profile');
+            ->assertSee('创建人格档案');
 
         $this->withSession([
             'ops_org_id' => $selectedOrg->id,

@@ -6,6 +6,7 @@ use App\Filament\Ops\Pages\OpsDashboard;
 use App\Filament\Ops\Pages\OpsLogin;
 use App\Http\Middleware\BindOpsLoginResponse;
 use App\Http\Middleware\EnsureAdminTotpVerified;
+use App\Http\Middleware\LocalizeOpsUiResponse;
 use App\Http\Middleware\OpsAccessControl;
 use App\Http\Middleware\RequireOpsOrgSelected;
 use App\Http\Middleware\ResolveOrgContext;
@@ -73,6 +74,7 @@ class AdminPanelProvider extends PanelProvider
                 SetOpsRequestContext::class,
                 ResolveOrgContext::class,
                 SetOpsLocale::class,
+                LocalizeOpsUiResponse::class,
                 ShareErrorsFromSession::class,
                 VerifyCsrfToken::class,
                 SubstituteBindings::class,
@@ -85,6 +87,7 @@ class AdminPanelProvider extends PanelProvider
                 SetOpsRequestContext::class,
                 ResolveOrgContext::class,
                 SetOpsLocale::class,
+                LocalizeOpsUiResponse::class,
                 EnsureAdminTotpVerified::class,
                 RequireOpsOrgSelected::class,
                 OpsAccessControl::class,

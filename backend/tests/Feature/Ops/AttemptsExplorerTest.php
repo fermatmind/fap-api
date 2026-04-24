@@ -44,7 +44,7 @@ final class AttemptsExplorerTest extends TestCase
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/attempts')
             ->assertOk()
-            ->assertSee('Attempts Explorer')
+            ->assertSee('作答排查')
             ->assertDontSee('Create Attempt')
             ->assertDontSee('Edit Attempt');
 

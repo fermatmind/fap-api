@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire\Filament\Ops\Livewire;
 
+use App\Http\Middleware\SetOpsLocale;
 use Filament\Facades\Filament;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Cookie;
@@ -32,12 +33,26 @@ final class LocaleSwitcher extends Component
             return;
         }
 
-        session()->put('ops_locale', $locale);
+        session()->put(SetOpsLocale::SESSION_KEY, $locale);
+        session()->put(SetOpsLocale::EXPLICIT_SESSION_KEY, true);
 
         Cookie::queue(
             Cookie::make(
-                name: 'ops_locale',
+                name: SetOpsLocale::COOKIE_KEY,
                 value: $locale,
+                minutes: 60 * 24 * 365,
+                path: '/ops',
+                domain: null,
+                secure: (bool) config('session.secure'),
+                httpOnly: true,
+                raw: false,
+                sameSite: 'lax',
+            )
+        );
+        Cookie::queue(
+            Cookie::make(
+                name: SetOpsLocale::EXPLICIT_COOKIE_KEY,
+                value: '1',
                 minutes: 60 * 24 * 365,
                 path: '/ops',
                 domain: null,

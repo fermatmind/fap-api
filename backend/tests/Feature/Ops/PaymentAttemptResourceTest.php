@@ -43,7 +43,7 @@ final class PaymentAttemptResourceTest extends TestCase
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/payment-attempts')
             ->assertOk()
-            ->assertSee('Payment Attempts');
+            ->assertSee('支付尝试');
 
         session($this->opsSession($admin, $selectedOrg));
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));

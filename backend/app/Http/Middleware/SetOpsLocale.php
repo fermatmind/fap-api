@@ -16,11 +16,16 @@ class SetOpsLocale
 
     public const COOKIE_KEY = 'ops_locale';
 
+    public const EXPLICIT_SESSION_KEY = 'ops_locale_explicit';
+
+    public const EXPLICIT_COOKIE_KEY = 'ops_locale_explicit';
+
     public const DEFAULT_LOCALE = 'zh_CN';
 
     public function handle(Request $request, Closure $next): Response
     {
         $picked = (string) ($request->query('locale') ?: $request->query('lang') ?: '');
+        $explicit = $picked !== '';
 
         if (
             $picked === ''
@@ -29,20 +34,24 @@ class SetOpsLocale
         ) {
             $user = Filament::auth()->user();
             $picked = (string) ($user?->preferred_locale ?? '');
+            $explicit = $picked !== '';
         }
 
         if ($picked === '') {
             $picked = (string) session(self::SESSION_KEY, '');
+            $explicit = $picked !== '' && (bool) session(self::EXPLICIT_SESSION_KEY, false);
         }
 
         if ($picked === '') {
             $picked = (string) $request->cookie(self::COOKIE_KEY, '');
+            $explicit = false;
         }
 
         $locale = $this->normalizeAndWhitelist($picked);
 
         app()->setLocale($locale);
         Carbon::setLocale($locale);
+        $request->attributes->set('ops_locale_explicit', $explicit);
         session()->put(self::SESSION_KEY, $locale);
 
         $response = $next($request);
@@ -59,7 +68,19 @@ class SetOpsLocale
             sameSite: 'lax',
         );
 
-        return $response->withCookie($cookie);
+        $explicitCookie = cookie(
+            name: self::EXPLICIT_COOKIE_KEY,
+            value: $explicit ? '1' : '0',
+            minutes: 60 * 24 * 365,
+            path: '/ops',
+            domain: null,
+            secure: (bool) config('session.secure'),
+            httpOnly: true,
+            raw: false,
+            sameSite: 'lax',
+        );
+
+        return $response->withCookie($cookie)->withCookie($explicitCookie);
     }
 
     private function normalizeAndWhitelist(string $locale): string
