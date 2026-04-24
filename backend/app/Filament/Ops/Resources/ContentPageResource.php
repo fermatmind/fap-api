@@ -7,6 +7,7 @@ namespace App\Filament\Ops\Resources;
 use App\Filament\Ops\Resources\ContentPageResource\Pages;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\OpsContentLocaleScope;
+use App\Filament\Ops\Support\OpsEdit;
 use App\Filament\Ops\Support\OpsTable;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\ContentPage;
@@ -65,83 +66,136 @@ class ContentPageResource extends Resource
     {
         return $form->schema([
             Forms\Components\Hidden::make('org_id')->default(0),
-            Forms\Components\Section::make('Page authority')
+            Forms\Components\Grid::make(['default' => 1, 'xl' => 12])
+                ->extraAttributes(['class' => 'ops-edit-workspace-layout'])
                 ->schema([
-                    Forms\Components\TextInput::make('title')->required()->maxLength(255)->columnSpanFull(),
-                    Forms\Components\TextInput::make('slug')->required()->maxLength(128),
-                    Forms\Components\TextInput::make('path')->required()->maxLength(160),
-                    Forms\Components\Select::make('kind')
-                        ->required()
-                        ->native(false)
-                        ->options([
-                            ContentPage::KIND_COMPANY => 'Company',
-                            ContentPage::KIND_POLICY => 'Policy',
-                            ContentPage::KIND_HELP => 'Help',
-                        ])
-                        ->default(ContentPage::KIND_COMPANY),
-                    Forms\Components\Select::make('page_type')
-                        ->required()
-                        ->native(false)
-                        ->options(array_combine(ContentPage::PAGE_TYPES, ContentPage::PAGE_TYPES))
-                        ->default('company'),
-                    Forms\Components\Select::make('locale')
-                        ->label(__('ops.locale_scope.content_locale'))
-                        ->required()
-                        ->native(false)
-                        ->options(['en' => 'en', 'zh-CN' => 'zh-CN'])
-                        ->default('en'),
-                    Forms\Components\Placeholder::make('locale_scope_marker')
-                        ->label(__('ops.locale_scope.editor_marker_label'))
-                        ->content(fn (Forms\Get $get, ?ContentPage $record): string => OpsContentLocaleScope::editorMarker((string) ($get('locale') ?? $record?->locale ?? OpsContentLocaleScope::currentContentLocale())))
-                        ->columnSpanFull(),
-                    Forms\Components\TextInput::make('kicker')->maxLength(96),
-                    Forms\Components\Textarea::make('summary')->rows(3)->maxLength(2000)->columnSpanFull(),
-                    Forms\Components\TextInput::make('template')->required()->maxLength(64)->default('company'),
-                    Forms\Components\TextInput::make('animation_profile')->required()->maxLength(64)->default('none'),
-                ])
-                ->columns(2),
-            Forms\Components\Section::make('Publishing and review')
-                ->schema([
-                    Forms\Components\Select::make('status')
-                        ->required()
-                        ->native(false)
-                        ->options([
-                            ContentPage::STATUS_DRAFT => 'Draft',
-                            ContentPage::STATUS_SCHEDULED => 'Scheduled',
-                            ContentPage::STATUS_PUBLISHED => 'Published',
-                            ContentPage::STATUS_ARCHIVED => 'Archived',
-                        ])
-                        ->default(ContentPage::STATUS_DRAFT),
-                    Forms\Components\Select::make('review_state')
-                        ->required()
-                        ->native(false)
-                        ->options(array_combine(ContentPage::REVIEW_STATES, ContentPage::REVIEW_STATES))
-                        ->default('draft'),
-                    Forms\Components\TextInput::make('owner')->maxLength(128),
-                    Forms\Components\Toggle::make('legal_review_required')->default(false),
-                    Forms\Components\Toggle::make('science_review_required')->default(false),
-                    Forms\Components\Toggle::make('is_public')->default(false),
-                    Forms\Components\Toggle::make('is_indexable')->default(true),
-                    Forms\Components\DateTimePicker::make('last_reviewed_at'),
-                    Forms\Components\DateTimePicker::make('published_at'),
-                    Forms\Components\DateTimePicker::make('source_updated_at'),
-                    Forms\Components\DateTimePicker::make('effective_at'),
-                    Forms\Components\TextInput::make('source_doc')->maxLength(255),
-                ])
-                ->columns(2),
-            Forms\Components\Section::make('Body')
-                ->schema([
-                    Forms\Components\MarkdownEditor::make('content_md')->columnSpanFull(),
-                    Forms\Components\Textarea::make('content_html')->rows(8)->columnSpanFull(),
+                    Forms\Components\Group::make([
+                        Forms\Components\Tabs::make(__('ops.edit.sections.content'))
+                            ->contained(false)
+                            ->extraAttributes(['class' => 'ops-edit-workspace-tabs'])
+                            ->tabs([
+                                Forms\Components\Tabs\Tab::make(__('ops.edit.tabs.content'))
+                                    ->schema([
+                                        Forms\Components\Section::make(__('ops.edit.sections.content'))
+                                            ->schema([
+                                                Forms\Components\TextInput::make('title')->required()->maxLength(255)->columnSpanFull(),
+                                                Forms\Components\TextInput::make('slug')->required()->maxLength(128),
+                                                Forms\Components\TextInput::make('path')->required()->maxLength(160),
+                                                Forms\Components\Select::make('locale')
+                                                    ->label(__('ops.locale_scope.content_locale'))
+                                                    ->required()
+                                                    ->native(false)
+                                                    ->options(OpsEdit::localeOptions())
+                                                    ->default('en'),
+                                                Forms\Components\Placeholder::make('locale_scope_marker')
+                                                    ->label(__('ops.locale_scope.editor_marker_label'))
+                                                    ->content(fn (Forms\Get $get, ?ContentPage $record): string => OpsContentLocaleScope::editorMarker((string) ($get('locale') ?? $record?->locale ?? OpsContentLocaleScope::currentContentLocale())))
+                                                    ->columnSpanFull(),
+                                                Forms\Components\TextInput::make('kicker')->maxLength(96),
+                                                Forms\Components\Textarea::make('summary')->rows(3)->maxLength(2000)->columnSpanFull(),
+                                                Forms\Components\MarkdownEditor::make('content_md')->columnSpanFull()->extraFieldWrapperAttributes(['class' => 'ops-edit-workspace-field--editor']),
+                                                Forms\Components\Textarea::make('content_html')->rows(8)->columnSpanFull(),
+                                            ])
+                                            ->columns(2),
+                                    ]),
+                                Forms\Components\Tabs\Tab::make(__('ops.edit.tabs.seo'))
+                                    ->schema([
+                                        Forms\Components\Section::make(__('ops.edit.sections.seo_fields'))
+                                            ->schema([
+                                                Forms\Components\TextInput::make('seo_title')->maxLength(255),
+                                                Forms\Components\Textarea::make('meta_description')->rows(3)->maxLength(2000),
+                                                Forms\Components\Textarea::make('seo_description')->rows(3)->maxLength(2000),
+                                                Forms\Components\TextInput::make('canonical_path')->maxLength(255),
+                                            ])
+                                            ->columns(2),
+                                    ]),
+                                Forms\Components\Tabs\Tab::make(__('ops.edit.tabs.translation'))
+                                    ->schema([
+                                        Forms\Components\Section::make(__('ops.edit.sections.operations'))
+                                            ->schema([
+                                                Forms\Components\Select::make('kind')
+                                                    ->required()
+                                                    ->native(false)
+                                                    ->options(OpsEdit::statusOptions([ContentPage::KIND_COMPANY, ContentPage::KIND_POLICY, ContentPage::KIND_HELP]))
+                                                    ->default(ContentPage::KIND_COMPANY),
+                                                Forms\Components\Select::make('page_type')
+                                                    ->required()
+                                                    ->native(false)
+                                                    ->options(array_combine(ContentPage::PAGE_TYPES, ContentPage::PAGE_TYPES))
+                                                    ->default('company'),
+                                                Forms\Components\TextInput::make('template')->required()->maxLength(64)->default('company'),
+                                                Forms\Components\TextInput::make('animation_profile')->required()->maxLength(64)->default('none'),
+                                                Forms\Components\TextInput::make('owner')->maxLength(128),
+                                                Forms\Components\TextInput::make('source_doc')->maxLength(255),
+                                            ])
+                                            ->columns(2),
+                                    ]),
+                                Forms\Components\Tabs\Tab::make(__('ops.edit.tabs.audit'))
+                                    ->schema([
+                                        Forms\Components\Section::make(__('ops.edit.sections.audit'))
+                                            ->schema([
+                                                Forms\Components\Toggle::make('legal_review_required')->default(false),
+                                                Forms\Components\Toggle::make('science_review_required')->default(false),
+                                                Forms\Components\DateTimePicker::make('source_updated_at'),
+                                                Forms\Components\DateTimePicker::make('effective_at'),
+                                            ])
+                                            ->columns(2),
+                                    ]),
+                            ]),
+                    ])->columnSpan(['xl' => 8])->extraAttributes(['class' => 'ops-edit-workspace-main-column']),
+                    Forms\Components\Group::make([
+                        Forms\Components\Section::make(__('ops.edit.sections.status_visibility'))
+                            ->description(__('ops.edit.descriptions.status_visibility'))
+                            ->extraAttributes(['class' => 'ops-edit-workspace-section ops-edit-workspace-section--rail'])
+                            ->schema([
+                                Forms\Components\Placeholder::make('ops_status_visibility')->label(__('ops.edit.sections.status_visibility'))->content(fn (?ContentPage $record) => OpsEdit::statusVisibility($record)),
+                                Forms\Components\Select::make('status')
+                                    ->required()
+                                    ->native(false)
+                                    ->options(OpsEdit::statusOptions([ContentPage::STATUS_DRAFT, ContentPage::STATUS_SCHEDULED, ContentPage::STATUS_PUBLISHED, ContentPage::STATUS_ARCHIVED]))
+                                    ->default(ContentPage::STATUS_DRAFT),
+                                Forms\Components\Select::make('review_state')
+                                    ->required()
+                                    ->native(false)
+                                    ->options(OpsEdit::statusOptions(ContentPage::REVIEW_STATES))
+                                    ->default('draft'),
+                                Forms\Components\Toggle::make('is_public')->default(false),
+                                Forms\Components\Toggle::make('is_indexable')->default(true),
+                                Forms\Components\DateTimePicker::make('last_reviewed_at'),
+                                Forms\Components\DateTimePicker::make('published_at'),
+                            ]),
+                        Forms\Components\Section::make(__('ops.edit.sections.publish_readiness'))
+                            ->description(__('ops.edit.descriptions.publish_readiness'))
+                            ->extraAttributes(['class' => 'ops-edit-workspace-section ops-edit-workspace-section--rail'])
+                            ->schema([
+                                Forms\Components\Placeholder::make('ops_publish_readiness')->label(__('ops.edit.sections.publish_readiness'))->content(fn (?ContentPage $record) => OpsEdit::publishReadiness($record, [
+                                    'title' => __('ops.resources.articles.fields.title'),
+                                    'slug' => __('ops.resources.articles.fields.slug'),
+                                    'path' => 'path',
+                                    'content_md' => __('ops.resources.articles.fields.content_md'),
+                                    'seo_title' => __('ops.edit.fields.seo_title'),
+                                    'seo_description' => __('ops.edit.fields.seo_description'),
+                                    'canonical_path' => __('ops.edit.fields.canonical_path'),
+                                ])),
+                            ]),
+                        Forms\Components\Section::make(__('ops.edit.sections.translation'))
+                            ->description(__('ops.edit.descriptions.translation'))
+                            ->extraAttributes(['class' => 'ops-edit-workspace-section ops-edit-workspace-section--rail'])
+                            ->schema([Forms\Components\Placeholder::make('ops_translation')->label(__('ops.edit.sections.translation'))->content(fn (?ContentPage $record) => OpsEdit::translation($record))]),
+                        Forms\Components\Section::make(__('ops.edit.sections.revision'))
+                            ->description(__('ops.edit.descriptions.revision'))
+                            ->extraAttributes(['class' => 'ops-edit-workspace-section ops-edit-workspace-section--rail'])
+                            ->schema([Forms\Components\Placeholder::make('ops_revision')->label(__('ops.edit.sections.revision'))->content(fn (?ContentPage $record) => OpsEdit::revision($record))]),
+                        Forms\Components\Section::make(__('ops.edit.sections.seo'))
+                            ->description(__('ops.edit.descriptions.seo'))
+                            ->extraAttributes(['class' => 'ops-edit-workspace-section ops-edit-workspace-section--rail'])
+                            ->schema([Forms\Components\Placeholder::make('ops_seo')->label(__('ops.edit.sections.seo'))->content(fn (?ContentPage $record) => OpsEdit::seo($record))]),
+                        Forms\Components\Section::make(__('ops.edit.sections.audit'))
+                            ->description(__('ops.edit.descriptions.audit'))
+                            ->extraAttributes(['class' => 'ops-edit-workspace-section ops-edit-workspace-section--rail'])
+                            ->schema([Forms\Components\Placeholder::make('ops_audit')->label(__('ops.edit.sections.audit'))->content(fn (?ContentPage $record) => OpsEdit::audit($record))]),
+                    ])->columnSpan(['xl' => 4])->extraAttributes(['class' => 'ops-edit-workspace-rail-column']),
                 ]),
-            Forms\Components\Section::make('SEO')
-                ->schema([
-                    Forms\Components\TextInput::make('seo_title')->maxLength(255),
-                    Forms\Components\Textarea::make('meta_description')->rows(3)->maxLength(2000),
-                    Forms\Components\Textarea::make('seo_description')->rows(3)->maxLength(2000),
-                    Forms\Components\TextInput::make('canonical_path')->maxLength(255),
-                ])
-                ->columns(2),
         ]);
     }
 

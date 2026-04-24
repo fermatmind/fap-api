@@ -10,17 +10,43 @@ use App\Models\InterpretationGuide;
 use App\Services\Cms\RowBackedRevisionWorkspace;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 
 class EditInterpretationGuide extends EditRecord
 {
     protected static string $resource = InterpretationGuideResource::class;
 
+    public function getTitle(): string|Htmlable
+    {
+        /** @var InterpretationGuide $record */
+        $record = $this->getRecord();
+
+        return filled($record->title) ? (string) $record->title : __('ops.nav.interpretation_guides');
+    }
+
+    public function getSubheading(): ?string
+    {
+        return __('ops.edit.descriptions.main_tabs');
+    }
+
     protected function getHeaderActions(): array
     {
         return [
+            Actions\Action::make('backToInterpretationGuides')
+                ->label(__('ops.resources.articles.actions.back_to_list'))
+                ->url(InterpretationGuideResource::getUrl())
+                ->icon('heroicon-o-arrow-left')
+                ->color('gray'),
             Actions\DeleteAction::make()->visible(false),
         ];
+    }
+
+    protected function getSaveFormAction(): Actions\Action
+    {
+        return parent::getSaveFormAction()
+            ->label(__('ops.resources.articles.actions.save'))
+            ->icon('heroicon-o-check-circle');
     }
 
     /**
