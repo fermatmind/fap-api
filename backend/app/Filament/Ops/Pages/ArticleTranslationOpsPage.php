@@ -81,6 +81,11 @@ class ArticleTranslationOpsPage extends Page
         return __('ops.nav.article_translation_ops');
     }
 
+    public function getTitle(): string
+    {
+        return __('ops.translation_ops.title');
+    }
+
     public static function canAccess(): bool
     {
         return ContentAccess::canRead();
@@ -155,7 +160,7 @@ class ArticleTranslationOpsPage extends Page
     public function createTranslationDraft(mixed $contentTypeOrRecordId, mixed $recordIdOrTargetLocale = null, mixed $targetLocale = ''): void
     {
         if (! ContentAccess::canWrite()) {
-            throw new AuthorizationException('You do not have permission to create translation drafts.');
+            throw new AuthorizationException(__('ops.translation_ops.auth.create'));
         }
 
         [$contentType, $recordId, $targetLocale] = $this->normalizeCreateArgs(
@@ -169,13 +174,19 @@ class ArticleTranslationOpsPage extends Page
         try {
             if ($contentType === 'article') {
                 $result = $articleWorkflow->createMachineDraft($this->article($recordId), $targetLocale, $this->adminUserId());
-                $message = 'Created '.$result['article']->locale.' machine_draft revision #'.$result['revision']->id.'.';
+                $message = __('ops.translation_ops.notifications.draft_created_revision', [
+                    'locale' => $result['article']->locale,
+                    'revision' => $result['revision']->id,
+                ]);
             } else {
                 $record = $siblingWorkflow->createMachineDraft($contentType, $this->record($contentType, $recordId, $siblingWorkflow), $targetLocale);
-                $message = 'Created '.$record->locale.' machine_draft row #'.$record->id.'.';
+                $message = __('ops.translation_ops.notifications.draft_created_row', [
+                    'locale' => $record->locale,
+                    'record' => $record->id,
+                ]);
             }
 
-            Notification::make()->title('Translation draft created')->body($message)->success()->send();
+            Notification::make()->title(__('ops.translation_ops.notifications.draft_created_title'))->body($message)->success()->send();
         } catch (ArticleTranslationWorkflowException|CmsTranslationWorkflowException $exception) {
             $this->notifyWorkflowFailure($exception);
         }
@@ -186,7 +197,7 @@ class ArticleTranslationOpsPage extends Page
     public function resyncFromSource(mixed $contentTypeOrRecordId, mixed $recordId = null, mixed $targetLocale = ''): void
     {
         if (! ContentAccess::canWrite()) {
-            throw new AuthorizationException('You do not have permission to re-sync translation drafts.');
+            throw new AuthorizationException(__('ops.translation_ops.auth.resync'));
         }
 
         [$contentType, $recordId] = $this->normalizeRecordArgs($contentTypeOrRecordId, $recordId);
@@ -196,13 +207,17 @@ class ArticleTranslationOpsPage extends Page
         try {
             if ($contentType === 'article') {
                 $result = $articleWorkflow->resyncFromSource($this->article($recordId), $this->adminUserId());
-                $message = 'Created new machine_draft revision #'.$result['revision']->id.' under the existing target article.';
+                $message = __('ops.translation_ops.notifications.resynced_revision', [
+                    'revision' => $result['revision']->id,
+                ]);
             } else {
                 $record = $siblingWorkflow->resyncFromSource($contentType, $this->record($contentType, $recordId, $siblingWorkflow));
-                $message = 'Re-synced target row #'.$record->id.' from the current source.';
+                $message = __('ops.translation_ops.notifications.resynced_row', [
+                    'record' => $record->id,
+                ]);
             }
 
-            Notification::make()->title('Translation re-synced')->body($message)->success()->send();
+            Notification::make()->title(__('ops.translation_ops.notifications.resynced_title'))->body($message)->success()->send();
         } catch (ArticleTranslationWorkflowException|CmsTranslationWorkflowException $exception) {
             $this->notifyWorkflowFailure($exception);
         }
@@ -213,7 +228,7 @@ class ArticleTranslationOpsPage extends Page
     public function promoteToHumanReview(mixed $contentTypeOrRecordId, mixed $recordId = null, mixed $targetLocale = ''): void
     {
         if (! ContentAccess::canWrite()) {
-            throw new AuthorizationException('You do not have permission to update translation review state.');
+            throw new AuthorizationException(__('ops.translation_ops.auth.review'));
         }
 
         [$contentType, $recordId] = $this->normalizeRecordArgs($contentTypeOrRecordId, $recordId);
@@ -223,13 +238,17 @@ class ArticleTranslationOpsPage extends Page
         try {
             if ($contentType === 'article') {
                 $revision = $articleWorkflow->promoteToHumanReview($this->article($recordId));
-                $message = 'Working revision #'.$revision->id.' is now in human_review.';
+                $message = __('ops.translation_ops.notifications.promoted_revision', [
+                    'revision' => $revision->id,
+                ]);
             } else {
                 $record = $siblingWorkflow->promoteToHumanReview($contentType, $this->record($contentType, $recordId, $siblingWorkflow));
-                $message = 'Row #'.$record->id.' is now in human_review.';
+                $message = __('ops.translation_ops.notifications.promoted_row', [
+                    'record' => $record->id,
+                ]);
             }
 
-            Notification::make()->title('Translation promoted')->body($message)->success()->send();
+            Notification::make()->title(__('ops.translation_ops.notifications.promoted_title'))->body($message)->success()->send();
         } catch (ArticleTranslationWorkflowException|CmsTranslationWorkflowException $exception) {
             $this->notifyWorkflowFailure($exception);
         }
@@ -240,7 +259,7 @@ class ArticleTranslationOpsPage extends Page
     public function approveTranslation(mixed $contentTypeOrRecordId, mixed $recordId = null, mixed $targetLocale = ''): void
     {
         if (! ContentAccess::canReview()) {
-            throw new AuthorizationException('You do not have permission to approve translation revisions.');
+            throw new AuthorizationException(__('ops.translation_ops.auth.approve'));
         }
 
         [$contentType, $recordId] = $this->normalizeRecordArgs($contentTypeOrRecordId, $recordId);
@@ -250,13 +269,17 @@ class ArticleTranslationOpsPage extends Page
         try {
             if ($contentType === 'article') {
                 $revision = $articleWorkflow->approveTranslation($this->article($recordId));
-                $message = 'Working revision #'.$revision->id.' passed preflight and is approved.';
+                $message = __('ops.translation_ops.notifications.approved_revision', [
+                    'revision' => $revision->id,
+                ]);
             } else {
                 $record = $siblingWorkflow->approveTranslation($contentType, $this->record($contentType, $recordId, $siblingWorkflow));
-                $message = 'Row #'.$record->id.' passed preflight and is approved.';
+                $message = __('ops.translation_ops.notifications.approved_row', [
+                    'record' => $record->id,
+                ]);
             }
 
-            Notification::make()->title('Translation approved')->body($message)->success()->send();
+            Notification::make()->title(__('ops.translation_ops.notifications.approved_title'))->body($message)->success()->send();
         } catch (ArticleTranslationWorkflowException|CmsTranslationWorkflowException $exception) {
             $this->notifyWorkflowFailure($exception);
         }
@@ -267,7 +290,7 @@ class ArticleTranslationOpsPage extends Page
     public function publishCurrentRevision(mixed $contentTypeOrRecordId, mixed $recordId = null, mixed $targetLocale = ''): void
     {
         if (! ContentAccess::canRelease()) {
-            throw new AuthorizationException('You do not have permission to publish translation revisions.');
+            throw new AuthorizationException(__('ops.translation_ops.auth.publish'));
         }
 
         [$contentType, $recordId] = $this->normalizeRecordArgs($contentTypeOrRecordId, $recordId);
@@ -277,13 +300,17 @@ class ArticleTranslationOpsPage extends Page
         try {
             if ($contentType === 'article') {
                 $revision = $articleWorkflow->publishTranslation($this->article($recordId));
-                $message = 'Published revision #'.$revision->id.' through translation preflight.';
+                $message = __('ops.translation_ops.notifications.published_revision', [
+                    'revision' => $revision->id,
+                ]);
             } else {
                 $record = $siblingWorkflow->publishTranslation($contentType, $this->record($contentType, $recordId, $siblingWorkflow));
-                $message = 'Published row #'.$record->id.' through translation preflight.';
+                $message = __('ops.translation_ops.notifications.published_row', [
+                    'record' => $record->id,
+                ]);
             }
 
-            Notification::make()->title('Translation published')->body($message)->success()->send();
+            Notification::make()->title(__('ops.translation_ops.notifications.published_title'))->body($message)->success()->send();
         } catch (ArticleTranslationWorkflowException|CmsTranslationWorkflowException $exception) {
             $this->notifyWorkflowFailure($exception);
         }
@@ -294,7 +321,7 @@ class ArticleTranslationOpsPage extends Page
     public function archiveStaleRevision(mixed $contentTypeOrRecordId, mixed $recordId = null, mixed $targetLocale = ''): void
     {
         if (! ContentAccess::canWrite()) {
-            throw new AuthorizationException('You do not have permission to archive translation revisions.');
+            throw new AuthorizationException(__('ops.translation_ops.auth.archive'));
         }
 
         [$contentType, $recordId] = $this->normalizeRecordArgs($contentTypeOrRecordId, $recordId);
@@ -304,13 +331,17 @@ class ArticleTranslationOpsPage extends Page
         try {
             if ($contentType === 'article') {
                 $revision = $articleWorkflow->archiveStaleRevision($this->article($recordId));
-                $message = 'Archived stale working revision #'.$revision->id.'.';
+                $message = __('ops.translation_ops.notifications.archived_revision', [
+                    'revision' => $revision->id,
+                ]);
             } else {
                 $record = $siblingWorkflow->archiveStale($contentType, $this->record($contentType, $recordId, $siblingWorkflow));
-                $message = 'Archived stale translation row #'.$record->id.'.';
+                $message = __('ops.translation_ops.notifications.archived_row', [
+                    'record' => $record->id,
+                ]);
             }
 
-            Notification::make()->title('Stale translation archived')->body($message)->success()->send();
+            Notification::make()->title(__('ops.translation_ops.notifications.archived_title'))->body($message)->success()->send();
         } catch (ArticleTranslationWorkflowException|CmsTranslationWorkflowException $exception) {
             $this->notifyWorkflowFailure($exception);
         }
@@ -406,7 +437,7 @@ class ArticleTranslationOpsPage extends Page
             : $exception->getMessage();
 
         Notification::make()
-            ->title('Translation action blocked')
+            ->title(__('ops.translation_ops.notifications.blocked_title'))
             ->body($body)
             ->danger()
             ->send();

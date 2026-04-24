@@ -1,59 +1,67 @@
 <x-filament-panels::page>
+    @php
+        $statusLabel = static fn (?string $state): string => \App\Filament\Ops\Support\StatusBadge::label($state);
+        $compactStatusLabel = static fn (?string $state): string => app()->getLocale() === 'zh_CN'
+            ? \App\Filament\Ops\Support\StatusBadge::label($state)
+            : (string) $state;
+        $emptyValue = static fn (array $values): string => implode(', ', $values) ?: (string) __('ops.translation_ops.fields.none');
+    @endphp
+
     <div class="ops-shell-page">
         <x-filament-ops::ops-section
-            eyebrow="CMS"
-            title="Unified Translation Ops Console"
-            description="Inspect multilingual source and translation ownership, stale state, locale coverage, publish readiness, and safe workflow actions across articles, support articles, interpretation guides, and content pages."
+            :eyebrow="__('ops.translation_ops.eyebrow')"
+            :title="__('ops.translation_ops.heading')"
+            :description="__('ops.translation_ops.description')"
         >
             <x-filament-ops::ops-toolbar>
                 <div class="ops-control-stack">
-                    <span class="ops-control-label">Backend multilingual authority</span>
-                    <p class="ops-control-hint">Articles remain revision-backed. Support articles, interpretation guides, and content pages are currently sibling-row backed, so published re-sync is disabled until those editors move to revision-backed authority.</p>
-                    <p class="ops-control-hint">Create translation draft disabled when no machine translation provider is configured. Re-sync from source disabled when the target is not stale, provider access is unavailable, or a row-backed published translation would be overwritten.</p>
+                    <span class="ops-control-label">{{ __('ops.translation_ops.authority_label') }}</span>
+                    <p class="ops-control-hint">{{ __('ops.translation_ops.authority_revision') }}</p>
+                    <p class="ops-control-hint">{{ __('ops.translation_ops.authority_provider') }}</p>
                 </div>
 
                 <x-slot name="actions">
                     <x-filament::button color="gray" type="button" wire:click="resetFilters">
-                        Reset filters
+                        {{ __('ops.translation_ops.reset_filters') }}
                     </x-filament::button>
                 </x-slot>
             </x-filament-ops::ops-toolbar>
         </x-filament-ops::ops-section>
 
-        <x-filament-ops::ops-section title="Translation health" description="Cross-type pressure points before multilingual release.">
+        <x-filament-ops::ops-section :title="__('ops.translation_ops.health_title')" :description="__('ops.translation_ops.health_description')">
             <x-filament-ops::ops-field-grid
                 :fields="[
-                    ['label' => 'Translation groups', 'value' => (string) ($metrics['translation_groups'] ?? 0), 'state' => 'info'],
-                    ['label' => 'Stale groups', 'value' => (string) ($metrics['stale_groups'] ?? 0), 'state' => (($metrics['stale_groups'] ?? 0) > 0 ? 'warning' : 'success')],
-                    ['label' => 'Published groups', 'value' => (string) ($metrics['published_groups'] ?? 0), 'state' => 'success'],
-                    ['label' => 'Missing target locale', 'value' => (string) ($metrics['missing_target_locale'] ?? 0), 'state' => (($metrics['missing_target_locale'] ?? 0) > 0 ? 'warning' : 'success')],
-                    ['label' => 'Ownership mismatches', 'value' => (string) ($metrics['ownership_mismatch_groups'] ?? 0), 'state' => (($metrics['ownership_mismatch_groups'] ?? 0) > 0 ? 'failed' : 'success')],
-                    ['label' => 'Canonical risks', 'value' => (string) ($metrics['canonical_risk_groups'] ?? 0), 'state' => (($metrics['canonical_risk_groups'] ?? 0) > 0 ? 'failed' : 'success')],
+                    ['label' => __('ops.translation_ops.metrics.translation_groups'), 'value' => (string) ($metrics['translation_groups'] ?? 0), 'state' => 'info'],
+                    ['label' => __('ops.translation_ops.metrics.stale_groups'), 'value' => (string) ($metrics['stale_groups'] ?? 0), 'state' => (($metrics['stale_groups'] ?? 0) > 0 ? 'warning' : 'success')],
+                    ['label' => __('ops.translation_ops.metrics.published_groups'), 'value' => (string) ($metrics['published_groups'] ?? 0), 'state' => 'success'],
+                    ['label' => __('ops.translation_ops.metrics.missing_target_locale'), 'value' => (string) ($metrics['missing_target_locale'] ?? 0), 'state' => (($metrics['missing_target_locale'] ?? 0) > 0 ? 'warning' : 'success')],
+                    ['label' => __('ops.translation_ops.metrics.ownership_mismatch_groups'), 'value' => (string) ($metrics['ownership_mismatch_groups'] ?? 0), 'state' => (($metrics['ownership_mismatch_groups'] ?? 0) > 0 ? 'failed' : 'success')],
+                    ['label' => __('ops.translation_ops.metrics.canonical_risk_groups'), 'value' => (string) ($metrics['canonical_risk_groups'] ?? 0), 'state' => (($metrics['canonical_risk_groups'] ?? 0) > 0 ? 'failed' : 'success')],
                 ]"
             />
         </x-filament-ops::ops-section>
 
-        <x-filament-ops::ops-section title="Filters" description="Narrow by content type, slug, locale, translation status, freshness, publication, missing locale, or ownership mismatch.">
+        <x-filament-ops::ops-section :title="__('ops.translation_ops.filters_title')" :description="__('ops.translation_ops.filters_description')">
             <div class="ops-toolbar-grid">
                 <label class="ops-control-stack">
-                    <span class="ops-control-label">Content type</span>
+                    <span class="ops-control-label">{{ __('ops.translation_ops.filters.content_type') }}</span>
                     <select class="fi-select-input" wire:model.live="contentTypeFilter">
-                        <option value="all">All content types</option>
+                        <option value="all">{{ __('ops.translation_ops.filters.all_content_types') }}</option>
                         @foreach (($filterOptions['content_types'] ?? []) as $type)
-                            <option value="{{ $type }}">{{ $type }}</option>
+                            <option value="{{ $type }}">{{ __('ops.translation_ops.content_types.'.$type) }}</option>
                         @endforeach
                     </select>
                 </label>
 
                 <label class="ops-control-stack">
-                    <span class="ops-control-label">Slug</span>
-                    <input class="fi-input" type="search" wire:model.live.debounce.350ms="slugSearch" placeholder="Search slug" />
+                    <span class="ops-control-label">{{ __('ops.translation_ops.filters.slug') }}</span>
+                    <input class="fi-input" type="search" wire:model.live.debounce.350ms="slugSearch" placeholder="{{ __('ops.translation_ops.filters.search_slug') }}" />
                 </label>
 
                 <label class="ops-control-stack">
-                    <span class="ops-control-label">Source locale</span>
+                    <span class="ops-control-label">{{ __('ops.translation_ops.filters.source_locale') }}</span>
                     <select class="fi-select-input" wire:model.live="sourceLocaleFilter">
-                        <option value="all">All source locales</option>
+                        <option value="all">{{ __('ops.translation_ops.filters.all_source_locales') }}</option>
                         @foreach (($filterOptions['locales'] ?? []) as $locale)
                             <option value="{{ $locale }}">{{ $locale }}</option>
                         @endforeach
@@ -61,9 +69,9 @@
                 </label>
 
                 <label class="ops-control-stack">
-                    <span class="ops-control-label">Target locale</span>
+                    <span class="ops-control-label">{{ __('ops.translation_ops.filters.target_locale') }}</span>
                     <select class="fi-select-input" wire:model.live="targetLocaleFilter">
-                        <option value="all">All target locales</option>
+                        <option value="all">{{ __('ops.translation_ops.filters.all_target_locales') }}</option>
                         @foreach (($filterOptions['locales'] ?? []) as $locale)
                             <option value="{{ $locale }}">{{ $locale }}</option>
                         @endforeach
@@ -71,67 +79,67 @@
                 </label>
 
                 <label class="ops-control-stack">
-                    <span class="ops-control-label">Translation status</span>
+                    <span class="ops-control-label">{{ __('ops.translation_ops.filters.translation_status') }}</span>
                     <select class="fi-select-input" wire:model.live="translationStatusFilter">
-                        <option value="all">All statuses</option>
+                        <option value="all">{{ __('ops.translation_ops.filters.all_statuses') }}</option>
                         @foreach (($filterOptions['statuses'] ?? []) as $status)
-                            <option value="{{ $status }}">{{ $status }}</option>
+                            <option value="{{ $status }}">{{ $statusLabel($status) }}</option>
                         @endforeach
                     </select>
                 </label>
 
                 <label class="ops-control-stack">
-                    <span class="ops-control-label">Freshness</span>
+                    <span class="ops-control-label">{{ __('ops.translation_ops.filters.freshness') }}</span>
                     <select class="fi-select-input" wire:model.live="staleFilter">
-                        <option value="all">All freshness</option>
-                        <option value="stale">Stale only</option>
-                        <option value="current">Current only</option>
+                        <option value="all">{{ __('ops.translation_ops.filters.all_freshness') }}</option>
+                        <option value="stale">{{ __('ops.translation_ops.filters.stale_only') }}</option>
+                        <option value="current">{{ __('ops.translation_ops.filters.current_only') }}</option>
                     </select>
                 </label>
 
                 <label class="ops-control-stack">
-                    <span class="ops-control-label">Publication</span>
+                    <span class="ops-control-label">{{ __('ops.translation_ops.filters.publication') }}</span>
                     <select class="fi-select-input" wire:model.live="publishedFilter">
-                        <option value="all">All publication states</option>
-                        <option value="published">Has published locale</option>
-                        <option value="unpublished">No published locale</option>
+                        <option value="all">{{ __('ops.translation_ops.filters.all_publication_states') }}</option>
+                        <option value="published">{{ __('ops.translation_ops.filters.has_published_locale') }}</option>
+                        <option value="unpublished">{{ __('ops.translation_ops.filters.no_published_locale') }}</option>
                     </select>
                 </label>
 
                 <label class="ops-control-stack">
-                    <span class="ops-control-label">Ownership</span>
+                    <span class="ops-control-label">{{ __('ops.translation_ops.filters.ownership') }}</span>
                     <select class="fi-select-input" wire:model.live="ownershipFilter">
-                        <option value="all">All ownership</option>
-                        <option value="mismatch">Mismatch only</option>
-                        <option value="ok">OK only</option>
+                        <option value="all">{{ __('ops.translation_ops.filters.all_ownership') }}</option>
+                        <option value="mismatch">{{ __('ops.translation_ops.filters.mismatch_only') }}</option>
+                        <option value="ok">{{ __('ops.translation_ops.filters.ok_only') }}</option>
                     </select>
                 </label>
 
                 <label class="ops-control-stack">
-                    <span class="ops-control-label">Missing locale</span>
+                    <span class="ops-control-label">{{ __('ops.translation_ops.filters.missing_locale') }}</span>
                     <span class="ops-toolbar-inline">
                         <input type="checkbox" wire:model.live="missingLocaleFilter" />
-                        <span class="ops-control-hint">Uses the selected target locale.</span>
+                        <span class="ops-control-hint">{{ __('ops.translation_ops.filters.missing_locale_hint') }}</span>
                     </span>
                 </label>
             </div>
         </x-filament-ops::ops-section>
 
-        <x-filament-ops::ops-section title="Translation groups" description="Each row is one translation group under one CMS content type.">
+        <x-filament-ops::ops-section :title="__('ops.translation_ops.groups_title')" :description="__('ops.translation_ops.groups_description')">
             <x-filament-ops::ops-table
                 :has-rows="count($groups) > 0"
-                empty-title="No translation groups found"
-                empty-description="Adjust filters or create translation groups through the existing CMS workflow."
+                :empty-title="__('ops.translation_ops.empty_title')"
+                :empty-description="__('ops.translation_ops.empty_description')"
             >
                 <x-slot name="head">
                     <tr>
-                        <th>Content type</th>
-                        <th>Group</th>
-                        <th>Source</th>
-                        <th>Locales</th>
-                        <th>Published</th>
-                        <th>Health</th>
-                        <th>Actions</th>
+                        <th>{{ __('ops.translation_ops.table.content_type') }}</th>
+                        <th>{{ __('ops.translation_ops.table.group') }}</th>
+                        <th>{{ __('ops.translation_ops.table.source') }}</th>
+                        <th>{{ __('ops.translation_ops.table.locales') }}</th>
+                        <th>{{ __('ops.translation_ops.table.published') }}</th>
+                        <th>{{ __('ops.translation_ops.table.health') }}</th>
+                        <th>{{ __('ops.translation_ops.table.actions') }}</th>
                     </tr>
                 </x-slot>
 
@@ -141,27 +149,27 @@
                         <td>
                             <strong>{{ $group['slug'] }}</strong>
                             <p class="ops-control-hint">{{ $group['translation_group_id'] }}</p>
-                            <p class="ops-control-hint">hash {{ \Illuminate\Support\Str::limit((string) ($group['latest_source_hash'] ?? 'missing'), 12, '') }}</p>
+                            <p class="ops-control-hint">{{ __('ops.translation_ops.fields.hash') }} {{ \Illuminate\Support\Str::limit((string) ($group['latest_source_hash'] ?? __('ops.status.missing')), 12, '') }}</p>
                         </td>
                         <td>
                             <x-filament.ops.shared.status-pill :state="$group['source_status']" :label="$group['source_locale'].' #'.$group['source_record_id']" />
-                            <p class="ops-control-hint">{{ $group['source_status'] }}</p>
+                            <p class="ops-control-hint">{{ $compactStatusLabel($group['source_status']) }}</p>
                         </td>
                         <td>
                             <div class="ops-toolbar-inline">
                                 @foreach (($group['locales'] ?? []) as $locale)
                                     <x-filament.ops.shared.status-pill
                                         :state="$locale['is_stale'] ? 'warning' : $locale['translation_status']"
-                                        :label="$locale['locale'].' '.$locale['translation_status'].($locale['is_stale'] ? ' stale' : '')"
+                                        :label="$locale['locale'].' '.$compactStatusLabel($locale['translation_status']).($locale['is_stale'] ? ' '.$compactStatusLabel('stale') : '')"
                                     />
                                 @endforeach
                             </div>
                         </td>
-                        <td>{{ implode(', ', $group['published_locales'] ?? []) ?: 'None' }}</td>
+                        <td>{{ $emptyValue($group['published_locales'] ?? []) }}</td>
                         <td>
                             <div class="ops-toolbar-inline">
-                                <x-filament.ops.shared.status-pill :state="$group['ownership_ok'] ? 'success' : 'failed'" :label="$group['ownership_ok'] ? 'ownership ok' : 'ownership mismatch'" />
-                                <x-filament.ops.shared.status-pill :state="$group['canonical_ok'] ? 'success' : 'failed'" :label="$group['canonical_ok'] ? 'canonical ok' : 'canonical risk'" />
+                                <x-filament.ops.shared.status-pill :state="$group['ownership_ok'] ? 'success' : 'failed'" :label="$group['ownership_ok'] ? __('ops.translation_ops.health.ownership_ok') : __('ops.translation_ops.health.ownership_mismatch')" />
+                                <x-filament.ops.shared.status-pill :state="$group['canonical_ok'] ? 'success' : 'failed'" :label="$group['canonical_ok'] ? __('ops.translation_ops.health.canonical_ok') : __('ops.translation_ops.health.canonical_risk')" />
                             </div>
                             @foreach (($group['alerts'] ?? []) as $alert)
                                 <p class="ops-control-hint">{{ $alert['label'] }}</p>
@@ -170,11 +178,11 @@
                         <td>
                             <div class="ops-toolbar-inline">
                                 <x-filament::button size="xs" color="gray" type="button" wire:click="inspectGroup('{{ $group['group_key'] }}')">
-                                    Inspect
+                                    {{ __('ops.translation_ops.actions.inspect') }}
                                 </x-filament::button>
                                 @if ($group['source_edit_url'])
                                     <x-filament::button size="xs" color="gray" tag="a" href="{{ $group['source_edit_url'] }}">
-                                        Source
+                                        {{ __('ops.translation_ops.actions.source') }}
                                     </x-filament::button>
                                 @endif
                             </div>
@@ -186,17 +194,17 @@
 
         @if ($selectedGroup)
             <x-filament-ops::ops-section
-                title="Group inspect: {{ $selectedGroup['slug'] }}"
-                description="Canonical source, sibling locales, version hashes, publish readiness, and safe action entry points."
+                :title="__('ops.translation_ops.inspect_title', ['slug' => $selectedGroup['slug']])"
+                :description="__('ops.translation_ops.inspect_description')"
             >
                 <x-filament-ops::ops-field-grid
                     :fields="[
-                        ['label' => 'Content type', 'value' => (string) $selectedGroup['content_type_label'], 'state' => 'info'],
-                        ['label' => 'Translation group', 'value' => (string) $selectedGroup['translation_group_id'], 'state' => 'info'],
-                        ['label' => 'Source row', 'value' => $selectedGroup['source_locale'].' #'.$selectedGroup['source_record_id'], 'state' => $selectedGroup['canonical_ok'] ? 'success' : 'failed'],
-                        ['label' => 'Published locales', 'value' => implode(', ', $selectedGroup['published_locales'] ?? []) ?: 'None', 'state' => 'success'],
-                        ['label' => 'Stale locales', 'value' => (string) $selectedGroup['stale_locales_count'], 'state' => $selectedGroup['stale_locales_count'] > 0 ? 'warning' : 'success'],
-                        ['label' => 'Ownership', 'value' => $selectedGroup['ownership_ok'] ? 'OK' : implode(', ', $selectedGroup['ownership_issues']), 'state' => $selectedGroup['ownership_ok'] ? 'success' : 'failed'],
+                        ['label' => __('ops.translation_ops.fields.content_type'), 'value' => (string) $selectedGroup['content_type_label'], 'state' => 'info'],
+                        ['label' => __('ops.translation_ops.fields.translation_group'), 'value' => (string) $selectedGroup['translation_group_id'], 'state' => 'info'],
+                        ['label' => __('ops.translation_ops.fields.source_row'), 'value' => $selectedGroup['source_locale'].' #'.$selectedGroup['source_record_id'], 'state' => $selectedGroup['canonical_ok'] ? 'success' : 'failed'],
+                        ['label' => __('ops.translation_ops.fields.published_locales'), 'value' => $emptyValue($selectedGroup['published_locales'] ?? []), 'state' => 'success'],
+                        ['label' => __('ops.translation_ops.fields.stale_locales'), 'value' => (string) $selectedGroup['stale_locales_count'], 'state' => $selectedGroup['stale_locales_count'] > 0 ? 'warning' : 'success'],
+                        ['label' => __('ops.translation_ops.fields.ownership'), 'value' => $selectedGroup['ownership_ok'] ? __('ops.translation_ops.health.ok') : implode(', ', $selectedGroup['ownership_issues']), 'state' => $selectedGroup['ownership_ok'] ? 'success' : 'failed'],
                     ]"
                 />
 
@@ -216,20 +224,20 @@
                                 {{ $action['label'] }}
                             </x-filament::button>
                         @else
-                            <span class="ops-control-hint">{{ $action['label'] }} disabled: {{ $action['reason'] }}</span>
+                            <span class="ops-control-hint">{{ __('ops.translation_ops.actions.disabled', ['action' => $action['label'], 'reason' => $action['reason']]) }}</span>
                         @endif
                     @endforeach
                 </div>
 
                 <x-filament-ops::ops-field-grid
                     :fields="[
-                        ['label' => 'Target locales', 'value' => implode(', ', $selectedGroup['coverage']['target_locales'] ?? []) ?: 'None', 'state' => 'info'],
-                        ['label' => 'Existing locales', 'value' => implode(', ', $selectedGroup['coverage']['existing_locales'] ?? []) ?: 'None', 'state' => 'info'],
-                        ['label' => 'Published locales', 'value' => implode(', ', $selectedGroup['coverage']['published_locales'] ?? []) ?: 'None', 'state' => 'success'],
-                        ['label' => 'Machine draft locales', 'value' => implode(', ', $selectedGroup['coverage']['machine_draft_locales'] ?? []) ?: 'None', 'state' => 'info'],
-                        ['label' => 'Human review locales', 'value' => implode(', ', $selectedGroup['coverage']['human_review_locales'] ?? []) ?: 'None', 'state' => 'warning'],
-                        ['label' => 'Stale locales', 'value' => implode(', ', $selectedGroup['coverage']['stale_locales'] ?? []) ?: 'None', 'state' => empty($selectedGroup['coverage']['stale_locales'] ?? []) ? 'success' : 'warning'],
-                        ['label' => 'Missing target locales', 'value' => implode(', ', $selectedGroup['coverage']['missing_target_locales'] ?? []) ?: 'None', 'state' => empty($selectedGroup['coverage']['missing_target_locales'] ?? []) ? 'success' : 'warning'],
+                        ['label' => __('ops.translation_ops.fields.target_locales'), 'value' => $emptyValue($selectedGroup['coverage']['target_locales'] ?? []), 'state' => 'info'],
+                        ['label' => __('ops.translation_ops.fields.existing_locales'), 'value' => $emptyValue($selectedGroup['coverage']['existing_locales'] ?? []), 'state' => 'info'],
+                        ['label' => __('ops.translation_ops.fields.published_locales'), 'value' => $emptyValue($selectedGroup['coverage']['published_locales'] ?? []), 'state' => 'success'],
+                        ['label' => __('ops.translation_ops.fields.machine_draft_locales'), 'value' => $emptyValue($selectedGroup['coverage']['machine_draft_locales'] ?? []), 'state' => 'info'],
+                        ['label' => __('ops.translation_ops.fields.human_review_locales'), 'value' => $emptyValue($selectedGroup['coverage']['human_review_locales'] ?? []), 'state' => 'warning'],
+                        ['label' => __('ops.translation_ops.fields.stale_locales'), 'value' => $emptyValue($selectedGroup['coverage']['stale_locales'] ?? []), 'state' => empty($selectedGroup['coverage']['stale_locales'] ?? []) ? 'success' : 'warning'],
+                        ['label' => __('ops.translation_ops.fields.missing_target_locales'), 'value' => $emptyValue($selectedGroup['coverage']['missing_target_locales'] ?? []), 'state' => empty($selectedGroup['coverage']['missing_target_locales'] ?? []) ? 'success' : 'warning'],
                     ]"
                 />
 
@@ -237,12 +245,12 @@
                     <table class="ops-table">
                         <thead>
                             <tr>
-                                <th>Locale row</th>
-                                <th>Status</th>
-                                <th>Workflow</th>
-                                <th>Version match</th>
-                                <th>Ownership / preflight</th>
-                                <th>Entry points</th>
+                                <th>{{ __('ops.translation_ops.table.locale_row') }}</th>
+                                <th>{{ __('ops.translation_ops.table.status') }}</th>
+                                <th>{{ __('ops.translation_ops.table.workflow') }}</th>
+                                <th>{{ __('ops.translation_ops.table.version_match') }}</th>
+                                <th>{{ __('ops.translation_ops.table.ownership_preflight') }}</th>
+                                <th>{{ __('ops.translation_ops.table.entry_points') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -250,37 +258,37 @@
                                 <tr wire:key="translation-locale-{{ $selectedGroup['group_key'] }}-{{ $locale['record_id'] }}">
                                     <td>
                                         <strong>{{ $locale['locale'] }} #{{ $locale['record_id'] }}</strong>
-                                        <p class="ops-control-hint">source_locale {{ $locale['source_locale'] }}</p>
-                                        <p class="ops-control-hint">source_record_id {{ $locale['source_record_id'] ?? 'source' }}</p>
+                                        <p class="ops-control-hint">{{ __('ops.translation_ops.fields.source_locale') }} {{ $locale['source_locale'] }}</p>
+                                        <p class="ops-control-hint">{{ __('ops.translation_ops.fields.source_record_id') }} {{ $locale['source_record_id'] ?? __('ops.status.source') }}</p>
                                     </td>
                                     <td>
                                         <x-filament.ops.shared.status-pill
                                             :state="$locale['is_stale'] ? 'warning' : $locale['translation_status']"
-                                            :label="$locale['translation_status'].($locale['is_stale'] ? ' stale' : '')"
+                                            :label="$compactStatusLabel($locale['translation_status']).($locale['is_stale'] ? ' '.$compactStatusLabel('stale') : '')"
                                         />
-                                        <p class="ops-control-hint">{{ $locale['record_status'] }} / public {{ $locale['is_public'] ? 'yes' : 'no' }}</p>
-                                        <p class="ops-control-hint">published_at {{ $locale['published_at'] ?? 'null' }}</p>
+                                        <p class="ops-control-hint">{{ $compactStatusLabel($locale['record_status']) }} / {{ __('ops.translation_ops.fields.public') }} {{ $locale['is_public'] ? __('ops.translation_ops.fields.yes') : __('ops.translation_ops.fields.no') }}</p>
+                                        <p class="ops-control-hint">{{ __('ops.translation_ops.fields.published_at') }} {{ $locale['published_at'] ?? __('ops.translation_ops.fields.null') }}</p>
                                     </td>
                                     <td>
-                                        <p class="ops-control-hint">{{ $locale['workflow_kind'] }} workflow</p>
-                                        <p class="ops-control-hint">working revision {{ $locale['working_revision_id'] ?? 'n/a' }}</p>
-                                        <p class="ops-control-hint">published revision {{ $locale['published_revision_id'] ?? 'n/a' }}</p>
+                                        <p class="ops-control-hint">{{ $locale['workflow_kind_label'] ?? $locale['workflow_kind'] }} {{ __('ops.translation_ops.fields.workflow') }}</p>
+                                        <p class="ops-control-hint">{{ __('ops.translation_ops.fields.working_revision') }} {{ $locale['working_revision_id'] ?? __('ops.translation_ops.fields.not_available') }}</p>
+                                        <p class="ops-control-hint">{{ __('ops.translation_ops.fields.published_revision') }} {{ $locale['published_revision_id'] ?? __('ops.translation_ops.fields.not_available') }}</p>
                                     </td>
                                     <td>
-                                        <p class="ops-control-hint">source {{ \Illuminate\Support\Str::limit((string) ($locale['source_version_hash'] ?? 'missing'), 12, '') }}</p>
-                                        <p class="ops-control-hint">from {{ \Illuminate\Support\Str::limit((string) ($locale['translated_from_version_hash'] ?? 'missing'), 12, '') }}</p>
+                                        <p class="ops-control-hint">{{ __('ops.translation_ops.fields.source_hash') }} {{ \Illuminate\Support\Str::limit((string) ($locale['source_version_hash'] ?? __('ops.status.missing')), 12, '') }}</p>
+                                        <p class="ops-control-hint">{{ __('ops.translation_ops.fields.translated_from') }} {{ \Illuminate\Support\Str::limit((string) ($locale['translated_from_version_hash'] ?? __('ops.status.missing')), 12, '') }}</p>
                                         @foreach (($locale['compare_summary'] ?? []) as $line)
                                             <p class="ops-control-hint">{{ $line }}</p>
                                         @endforeach
                                     </td>
                                     <td>
-                                        <x-filament.ops.shared.status-pill :state="$locale['ownership_ok'] ? 'success' : 'failed'" :label="$locale['ownership_ok'] ? 'ok' : 'mismatch'" />
+                                        <x-filament.ops.shared.status-pill :state="$locale['ownership_ok'] ? 'success' : 'failed'" :label="$locale['ownership_ok'] ? __('ops.translation_ops.health.ok') : __('ops.translation_ops.health.mismatch')" />
                                         @foreach (($locale['ownership_issues'] ?? []) as $issue)
                                             <p class="ops-control-hint">{{ $issue }}</p>
                                         @endforeach
                                         <x-filament.ops.shared.status-pill
                                             :state="($locale['preflight']['ok'] ?? true) ? 'success' : 'failed'"
-                                            :label="($locale['preflight']['ok'] ?? true) ? 'preflight ok' : 'preflight blocked'"
+                                            :label="($locale['preflight']['ok'] ?? true) ? __('ops.translation_ops.health.preflight_ok') : __('ops.translation_ops.health.preflight_blocked')"
                                         />
                                         @foreach (($locale['preflight']['blockers'] ?? []) as $blocker)
                                             <p class="ops-control-hint">{{ $blocker }}</p>
@@ -303,7 +311,7 @@
                                                         {{ $action['label'] }}
                                                     </x-filament::button>
                                                 @else
-                                                    <span class="ops-control-hint">{{ $action['label'] }} disabled: {{ $action['reason'] }}</span>
+                                                    <span class="ops-control-hint">{{ __('ops.translation_ops.actions.disabled', ['action' => $action['label'], 'reason' => $action['reason']]) }}</span>
                                                 @endif
                                             @endforeach
                                         </div>
