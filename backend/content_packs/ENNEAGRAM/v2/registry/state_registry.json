@@ -1,0 +1,27 @@
+{
+    "id": "enneagram_state_registry_v1",
+    "schema_version": "fap.enneagram.state_registry.v1",
+    "registry_key": "enneagram_state_registry",
+    "locale": "zh-CN",
+    "form_variant": "all",
+    "context_mode": "individual",
+    "status": "published",
+    "version": "v1",
+    "release_id": "enneagram_registry_pack_v1_scaffold_2026_04",
+    "content_release_hash": "sha256:pending_loader_resolution",
+    "content_snapshot_hash": null,
+    "content_maturity": "scaffold",
+    "evidence_level": "theory_based",
+    "preview_enabled": true,
+    "fallback_policy": "fallback_to_type_base",
+    "entries": [
+        {
+            "state_key": "base_state_scaffold",
+            "stable_expression": "P0 scaffold：用于描述相对稳定时的表达，不作为硬 health-level 判断。",
+            "average_expression": "P0 scaffold：用于描述日常状态下的习惯性表达。",
+            "strained_expression": "P0 scaffold：用于描述压力升高时更常见的偏移。",
+            "recovery_action": "P0 scaffold：用于给出恢复动作，不替代诊断或治疗建议。",
+            "disclaimer": "This registry is not a hard health-level judgement."
+        }
+    ]
+}

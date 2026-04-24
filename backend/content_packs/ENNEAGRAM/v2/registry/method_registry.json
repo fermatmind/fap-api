@@ -1,0 +1,49 @@
+{
+    "id": "enneagram_method_registry_v1",
+    "schema_version": "fap.enneagram.method_registry.v1",
+    "registry_key": "enneagram_method_registry",
+    "locale": "zh-CN",
+    "form_variant": "all",
+    "context_mode": "individual",
+    "status": "published",
+    "version": "v1",
+    "release_id": "enneagram_registry_pack_v1_scaffold_2026_04",
+    "content_release_hash": "sha256:pending_loader_resolution",
+    "content_snapshot_hash": null,
+    "content_maturity": "scaffold",
+    "evidence_level": "descriptive",
+    "preview_enabled": true,
+    "fallback_policy": "required",
+    "entries": [
+        {
+            "method_key": "e105_standard_methodology",
+            "form_variant": "e105",
+            "display_context": "result_page",
+            "copy": "E105 使用 Likert intensity / dominance score space，适合标准版结果解释。"
+        },
+        {
+            "method_key": "fc144_forced_choice_methodology",
+            "form_variant": "fc144",
+            "display_context": "result_page",
+            "copy": "FC144 使用 forced-choice wins / exposures score space，适合深度版辨析。"
+        },
+        {
+            "method_key": "same_model_not_same_score_space",
+            "form_variant": "all",
+            "display_context": "technical_note",
+            "copy": "E105 与 FC144 属于同一 ENNEAGRAM 模型，但不处在同一 score space，不能直接数值横比。"
+        },
+        {
+            "method_key": "cross_form_compare_blocked",
+            "form_variant": "all",
+            "display_context": "history",
+            "copy": "跨 form 对比默认关闭；如果没有等值映射，就不把 E105 和 FC144 放进同一 compare 语义。"
+        },
+        {
+            "method_key": "non_diagnostic_boundary",
+            "form_variant": "all",
+            "display_context": "technical_note",
+            "copy": "本结果用于人格模式理解与观察，不用于临床诊断、招聘筛选或对个体做绝对定性。"
+        }
+    ]
+}

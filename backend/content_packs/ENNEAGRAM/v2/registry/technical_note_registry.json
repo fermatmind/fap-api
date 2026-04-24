@@ -1,0 +1,32 @@
+{
+    "id": "enneagram_technical_note_registry_v1",
+    "schema_version": "fap.enneagram.technical_note_registry.v1",
+    "registry_key": "enneagram_technical_note_registry",
+    "locale": "zh-CN",
+    "form_variant": "all",
+    "context_mode": "individual",
+    "status": "published",
+    "version": "v1",
+    "release_id": "enneagram_registry_pack_v1_scaffold_2026_04",
+    "content_release_hash": "sha256:pending_loader_resolution",
+    "content_snapshot_hash": null,
+    "content_maturity": "scaffold",
+    "evidence_level": "descriptive",
+    "preview_enabled": true,
+    "fallback_policy": "required",
+    "entries": [
+        {"section_key": "test_goal", "title": "测试目标", "body": "说明九型结果用于模式理解与观察，而不是把用户钉死为单一号码。"},
+        {"section_key": "e105_fc144_forms", "title": "E105 与 FC144 两个 form", "body": "说明 single-scale / multi-form 的结果壳与解释边界。"},
+        {"section_key": "score_space_boundary", "title": "Score space 边界", "body": "明确 same model 不等于 same score space。"},
+        {"section_key": "dominance_gap", "title": "Dominance Gap", "body": "解释 Top1 / Top2 within-form gap 的用途与限制。"},
+        {"section_key": "confidence_band", "title": "Confidence Band", "body": "解释 high / medium / close_call / diffuse / low_quality。"},
+        {"section_key": "close_call", "title": "Close-call", "body": "说明 close-call 是辨析位，不是改判机制。"},
+        {"section_key": "diffuse", "title": "Diffuse", "body": "说明 profile shape 分散时的保守解释原则。"},
+        {"section_key": "low_quality", "title": "Low-quality", "body": "说明只有在存在真实 QC signal 时才触发 low-quality。"},
+        {"section_key": "retake_stability", "title": "Retake Stability", "body": "说明重测稳定性会在后续指标中追踪，而不是在 P0 里硬承诺。"},
+        {"section_key": "e105_fc144_agreement", "title": "E105 / FC144 Agreement", "body": "说明未来 agreement 指标的目标和当前边界。"},
+        {"section_key": "resonance_feedback", "title": "Resonance Feedback", "body": "说明用户反馈用于研究和优化，不覆盖 primary_candidate。"},
+        {"section_key": "method_boundaries", "title": "方法边界", "body": "说明非诊断、非招聘筛选、非绝对人格标签。"},
+        {"section_key": "privacy", "title": "隐私与数据", "body": "说明反馈、样例和快照都应遵守最小必要与可回溯原则。"}
+    ]
+}

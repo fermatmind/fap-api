@@ -1,0 +1,82 @@
+{
+    "schema_version": "fap.enneagram.registry_manifest.v1",
+    "scale_code": "ENNEAGRAM",
+    "registry_version": "enneagram_registry.v1",
+    "release_id": "enneagram_registry_pack_v1_scaffold_2026_04",
+    "content_release_hash": "sha256:pending_loader_resolution",
+    "registries": [
+        {
+            "registry_key": "enneagram_type_registry",
+            "file": "type_registry.json"
+        },
+        {
+            "registry_key": "enneagram_pair_registry",
+            "file": "pair_registry.json"
+        },
+        {
+            "registry_key": "enneagram_group_registry",
+            "file": "group_registry.json"
+        },
+        {
+            "registry_key": "enneagram_scenario_registry",
+            "file": "scenario_registry.json"
+        },
+        {
+            "registry_key": "enneagram_state_registry",
+            "file": "state_registry.json"
+        },
+        {
+            "registry_key": "enneagram_theory_hint_registry",
+            "file": "theory_hint_registry.json"
+        },
+        {
+            "registry_key": "enneagram_observation_registry",
+            "file": "observation_registry.json"
+        },
+        {
+            "registry_key": "enneagram_method_registry",
+            "file": "method_registry.json"
+        },
+        {
+            "registry_key": "enneagram_ui_copy_registry",
+            "file": "ui_copy_registry.json"
+        },
+        {
+            "registry_key": "enneagram_sample_report_registry",
+            "file": "sample_report_registry.json"
+        },
+        {
+            "registry_key": "enneagram_technical_note_registry",
+            "file": "technical_note_registry.json"
+        }
+    ],
+    "locales": [
+        "zh-CN",
+        "en"
+    ],
+    "supported_form_variants": [
+        "all",
+        "e105",
+        "fc144"
+    ],
+    "supported_context_modes": [
+        "individual",
+        "workplace",
+        "team"
+    ],
+    "content_maturity_values": [
+        "scaffold",
+        "p0_placeholder",
+        "p0_ready",
+        "p1_expanded",
+        "experimental",
+        "deprecated"
+    ],
+    "evidence_level_values": [
+        "descriptive",
+        "theory_based",
+        "data_supported",
+        "validated_internal",
+        "validated_external"
+    ]
+}

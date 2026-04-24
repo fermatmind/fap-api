@@ -1,0 +1,27 @@
+{
+    "id": "enneagram_scenario_registry_v1",
+    "schema_version": "fap.enneagram.scenario_registry.v1",
+    "registry_key": "enneagram_scenario_registry",
+    "locale": "zh-CN",
+    "form_variant": "all",
+    "context_mode": "individual",
+    "status": "published",
+    "version": "v1",
+    "release_id": "enneagram_registry_pack_v1_scaffold_2026_04",
+    "content_release_hash": "sha256:pending_loader_resolution",
+    "content_snapshot_hash": null,
+    "content_maturity": "scaffold",
+    "evidence_level": "descriptive",
+    "preview_enabled": true,
+    "fallback_policy": "fallback_to_type_base",
+    "entries": [
+        {"scenario_key": "work_style_summary", "module_key": "work_style_summary", "title": "工作风格摘要", "body": "P0 scaffold：后续在 composer v2 中按主类型、Top3 和 group overlay 拼接。"},
+        {"scenario_key": "collaboration_strengths", "module_key": "collaboration_strengths", "title": "协作优势", "body": "P0 scaffold：优先 fallback 到 type_base 和 group registry。"},
+        {"scenario_key": "collaboration_friction", "module_key": "collaboration_friction", "title": "协作摩擦点", "body": "P0 scaffold：先保留结构位，不在本 PR 写成长文。"},
+        {"scenario_key": "leadership_pattern", "module_key": "leadership_pattern", "title": "领导模式", "body": "P0 scaffold：工作与领导模块的共享结构入口。"},
+        {"scenario_key": "managed_by_others", "module_key": "managed_by_others", "title": "被管理时更顺畅的方式", "body": "P0 scaffold：后续按 context_mode=workplace 扩展。"},
+        {"scenario_key": "relationship_need", "module_key": "relationship_need", "title": "关系需要", "body": "P0 scaffold：默认回退到 type_base relationship_summary。"},
+        {"scenario_key": "conflict_script", "module_key": "conflict_script", "title": "冲突脚本", "body": "P0 scaffold：close-call 或 group overlay 可覆盖。"},
+        {"scenario_key": "communication_manual", "module_key": "communication_manual", "title": "沟通说明书", "body": "P0 scaffold：供结果页关系模块与样例报告共享。"}
+    ]
+}

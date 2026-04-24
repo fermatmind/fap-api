@@ -1,0 +1,29 @@
+{
+    "id": "enneagram_ui_copy_registry_v1",
+    "schema_version": "fap.enneagram.ui_copy_registry.v1",
+    "registry_key": "enneagram_ui_copy_registry",
+    "locale": "zh-CN",
+    "form_variant": "all",
+    "context_mode": "individual",
+    "status": "published",
+    "version": "v1",
+    "release_id": "enneagram_registry_pack_v1_scaffold_2026_04",
+    "content_release_hash": "sha256:pending_loader_resolution",
+    "content_snapshot_hash": null,
+    "content_maturity": "scaffold",
+    "evidence_level": "descriptive",
+    "preview_enabled": true,
+    "fallback_policy": "required",
+    "entries": {
+        "instant_summary.clear": {"title_template": "当前主候选较清晰", "body_template": "P0 scaffold：用 clear scope 的主候选摘要。"},
+        "instant_summary.close_call": {"title_template": "当前更像 close-call", "body_template": "P0 scaffold：强调 Top1/Top2 接近而非系统改判。"},
+        "instant_summary.diffuse": {"title_template": "当前轮廓较分散", "body_template": "P0 scaffold：提示继续观察而非强行下结论。"},
+        "instant_summary.low_quality": {"title_template": "当前质量信号不足", "body_template": "P0 scaffold：解释 low-quality boundary 与重测建议。"},
+        "form_badge.e105": {"label": "E105 标准版", "body_template": "Likert 标准版"},
+        "form_badge.fc144": {"label": "FC144 深度版", "body_template": "Forced-choice 深度版"},
+        "close_call_card.title": {"label": "Close-call 辨析"},
+        "diffuse_boundary.title": {"label": "结果分散说明"},
+        "low_quality_boundary.title": {"label": "质量边界说明"},
+        "technical_note.link_label": {"label": "查看 Technical Note"}
+    }
+}
