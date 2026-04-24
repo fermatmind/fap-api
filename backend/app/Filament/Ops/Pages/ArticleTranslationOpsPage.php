@@ -56,6 +56,15 @@ class ArticleTranslationOpsPage extends Page
     /** @var list<array<string, mixed>> */
     public array $groups = [];
 
+    /** @var list<array<string, mixed>> */
+    public array $summaryCards = [];
+
+    /** @var list<string> */
+    public array $localeColumns = [];
+
+    /** @var list<array<string, mixed>> */
+    public array $coverageMatrix = [];
+
     /** @var array<string, mixed>|null */
     public ?array $selectedGroup = null;
 
@@ -355,6 +364,9 @@ class ArticleTranslationOpsPage extends Page
 
         $this->metrics = $dashboard['metrics'];
         $this->groups = $dashboard['groups'];
+        $this->summaryCards = $dashboard['summary_cards'] ?? [];
+        $this->localeColumns = $dashboard['locale_columns'] ?? [];
+        $this->coverageMatrix = $dashboard['coverage_matrix'] ?? [];
         $this->selectedGroup = $dashboard['selected_group'];
         $this->filterOptions = $dashboard['filter_options'];
     }

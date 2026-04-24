@@ -72,9 +72,10 @@ final class ArticleTranslationOpsPageTest extends TestCase
             ->assertSet('metrics.translation_groups', 6)
             ->assertSet('metrics.stale_groups', 0)
             ->assertSet('metrics.ownership_mismatch_groups', 0)
+            ->assertSet('localeColumns.0', 'zh-CN')
+            ->assertSet('coverageMatrix.0.cells.zh-CN.state', 'source')
+            ->assertSet('coverageMatrix.0.cells.en.state', 'published')
             ->assertSee('how-16-personality-types-talk-to-an-ai-coach')
-            ->assertSee('en published')
-            ->assertSee('zh-CN source')
             ->assertSee('Create translation draft disabled')
             ->assertSee('Re-sync from source disabled');
     }
@@ -92,11 +93,11 @@ final class ArticleTranslationOpsPageTest extends TestCase
         Livewire::test(ArticleTranslationOpsPage::class)
             ->assertOk()
             ->assertSee('统一翻译运营控制台')
-            ->assertSee('翻译健康度')
+            ->assertSee('覆盖摘要')
             ->assertSee('内容类型')
             ->assertSee('源文')
             ->assertSee('已发布')
-            ->assertSee('归属正常')
+            ->assertSet('coverageMatrix.0.health_state', 'success')
             ->assertSee('未配置机器翻译 provider')
             ->assertDontSee('Unified Translation Ops Console')
             ->assertDontSee('Translation health')
@@ -440,16 +441,23 @@ final class ArticleTranslationOpsPageTest extends TestCase
 
         $this->createPublishedTranslationGroup('console-summary-fixture');
 
-        $dashboard = app(ArticleTranslationOpsService::class)->dashboard([
+        $dashboard = app(\App\Services\Ops\CmsTranslationOpsService::class)->dashboard([
+            'content_type' => 'article',
             'slug' => 'console-summary-fixture',
         ]);
 
         $group = $dashboard['groups'][0];
+        $matrixRow = $dashboard['coverage_matrix'][0];
         $targetLocale = collect($group['locales'])->first(fn (array $locale): bool => $locale['locale'] === 'en');
 
         $this->assertSame(['zh-CN', 'en'], $group['coverage']['existing_locales']);
         $this->assertSame(['zh-CN', 'en'], $group['coverage']['published_locales']);
         $this->assertSame([], $group['coverage']['missing_target_locales']);
+        $this->assertSame('source', $matrixRow['cells']['zh-CN']['state']);
+        $this->assertSame('success', $matrixRow['cells']['zh-CN']['status_state']);
+        $this->assertSame('published', $matrixRow['cells']['en']['state']);
+        $this->assertSame('success', $matrixRow['cells']['en']['status_state']);
+        $this->assertSame([], $matrixRow['cells']['en']['blockers']);
         $this->assertContains('source/target hash current', $targetLocale['compare_summary']);
         $this->assertTrue($targetLocale['preflight']['ok']);
     }
