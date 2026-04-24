@@ -10,17 +10,43 @@ use App\Models\SupportArticle;
 use App\Services\Cms\RowBackedRevisionWorkspace;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 
 class EditSupportArticle extends EditRecord
 {
     protected static string $resource = SupportArticleResource::class;
 
+    public function getTitle(): string|Htmlable
+    {
+        /** @var SupportArticle $record */
+        $record = $this->getRecord();
+
+        return filled($record->title) ? (string) $record->title : __('ops.nav.support_articles');
+    }
+
+    public function getSubheading(): ?string
+    {
+        return __('ops.edit.descriptions.main_tabs');
+    }
+
     protected function getHeaderActions(): array
     {
         return [
+            Actions\Action::make('backToSupportArticles')
+                ->label(__('ops.resources.articles.actions.back_to_list'))
+                ->url(SupportArticleResource::getUrl())
+                ->icon('heroicon-o-arrow-left')
+                ->color('gray'),
             Actions\DeleteAction::make()->visible(false),
         ];
+    }
+
+    protected function getSaveFormAction(): Actions\Action
+    {
+        return parent::getSaveFormAction()
+            ->label(__('ops.resources.articles.actions.save'))
+            ->icon('heroicon-o-check-circle');
     }
 
     /**

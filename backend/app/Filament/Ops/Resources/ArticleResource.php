@@ -10,6 +10,7 @@ use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\ContentReleaseAudit;
 use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Filament\Ops\Support\OpsContentLocaleScope;
+use App\Filament\Ops\Support\OpsEdit;
 use App\Filament\Ops\Support\OpsTable;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\Article;
@@ -168,9 +169,9 @@ class ArticleResource extends Resource
                         ])
                         ->extraAttributes(['class' => 'ops-article-workspace-main-column']),
                     Forms\Components\Group::make([
-                        Forms\Components\Section::make(__('ops.resources.articles.sections.publish'))
-                            ->description(__('ops.resources.articles.section_descriptions.publish'))
-                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-article-workspace-section--rail'])
+                        Forms\Components\Section::make(__('ops.edit.sections.status_visibility'))
+                            ->description(__('ops.edit.descriptions.status_visibility'))
+                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-edit-workspace-section ops-edit-workspace-section--rail ops-article-workspace-section--rail'])
                             ->schema([
                                 Forms\Components\Placeholder::make('workspace_state')
                                     ->label(__('ops.resources.articles.fields.editorial_cues'))
@@ -197,9 +198,24 @@ class ArticleResource extends Resource
                                     ->label(__('ops.resources.articles.fields.scheduled_at'))
                                     ->helperText(__('ops.resources.articles.helpers.scheduled_at')),
                             ]),
+                        Forms\Components\Section::make(__('ops.edit.sections.publish_readiness'))
+                            ->description(__('ops.edit.descriptions.publish_readiness'))
+                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-edit-workspace-section ops-edit-workspace-section--rail ops-article-workspace-section--rail'])
+                            ->schema([
+                                Forms\Components\Placeholder::make('ops_publish_readiness')
+                                    ->label(__('ops.edit.sections.publish_readiness'))
+                                    ->content(fn (?Article $record) => OpsEdit::publishReadiness($record, [
+                                        'title' => __('ops.resources.articles.fields.title'),
+                                        'slug' => __('ops.resources.articles.fields.slug'),
+                                        'content_md' => __('ops.resources.articles.fields.content_md'),
+                                        'seo_title' => __('ops.edit.fields.seo_title'),
+                                        'seo_description' => __('ops.edit.fields.seo_description'),
+                                    ]))
+                                    ->columnSpanFull(),
+                            ]),
                         Forms\Components\Section::make(__('ops.resources.articles.sections.locale_taxonomy'))
                             ->description(__('ops.resources.articles.section_descriptions.locale_taxonomy'))
-                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-article-workspace-section--rail'])
+                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-edit-workspace-section ops-edit-workspace-section--rail ops-article-workspace-section--rail'])
                             ->schema([
                                 Forms\Components\Placeholder::make('locale_scope_marker')
                                     ->label(__('ops.locale_scope.editor_marker_label'))
@@ -248,7 +264,7 @@ class ArticleResource extends Resource
                             ]),
                         Forms\Components\Section::make(__('ops.resources.articles.sections.translation'))
                             ->description(__('ops.resources.articles.section_descriptions.translation'))
-                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-article-workspace-section--rail'])
+                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-edit-workspace-section ops-edit-workspace-section--rail ops-article-workspace-section--rail'])
                             ->schema([
                                 Forms\Components\Placeholder::make('translation_current_locale')
                                     ->label(__('ops.resources.articles.fields.current_locale'))
@@ -285,9 +301,18 @@ class ArticleResource extends Resource
                                     ->label(__('ops.resources.articles.fields.stale_state'))
                                     ->content(fn (?Article $record): string => self::staleStateLabel($record)),
                             ]),
+                        Forms\Components\Section::make(__('ops.edit.sections.revision'))
+                            ->description(__('ops.edit.descriptions.revision'))
+                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-edit-workspace-section ops-edit-workspace-section--rail ops-article-workspace-section--rail'])
+                            ->schema([
+                                Forms\Components\Placeholder::make('ops_revision')
+                                    ->label(__('ops.edit.sections.revision'))
+                                    ->content(fn (?Article $record) => OpsEdit::revision($record))
+                                    ->columnSpanFull(),
+                            ]),
                         Forms\Components\Section::make(__('ops.resources.articles.sections.seo'))
                             ->description(__('ops.resources.articles.section_descriptions.seo'))
-                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-article-workspace-section--rail'])
+                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-edit-workspace-section ops-edit-workspace-section--rail ops-article-workspace-section--rail'])
                             ->schema([
                                 Forms\Components\Placeholder::make('seo_snapshot')
                                     ->label(__('ops.resources.articles.fields.seo_snapshot'))
@@ -320,9 +345,9 @@ class ArticleResource extends Resource
                                     ->maxLength(255)
                                     ->helperText(__('ops.resources.articles.helpers.og_image_url')),
                             ]),
-                        Forms\Components\Section::make(__('ops.resources.articles.sections.record_cues'))
-                            ->description(__('ops.resources.articles.section_descriptions.record_cues'))
-                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-article-workspace-section--rail'])
+                        Forms\Components\Section::make(__('ops.edit.sections.audit'))
+                            ->description(__('ops.edit.descriptions.audit'))
+                            ->extraAttributes(['class' => 'ops-article-workspace-section ops-edit-workspace-section ops-edit-workspace-section--rail ops-article-workspace-section--rail'])
                             ->visible(fn (?Article $record): bool => filled($record))
                             ->schema([
                                 Forms\Components\Placeholder::make('public_url_preview')

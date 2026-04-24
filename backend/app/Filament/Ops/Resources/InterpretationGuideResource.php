@@ -7,6 +7,7 @@ namespace App\Filament\Ops\Resources;
 use App\Filament\Ops\Resources\InterpretationGuideResource\Pages;
 use App\Filament\Ops\Support\ContentAccess;
 use App\Filament\Ops\Support\OpsContentLocaleScope;
+use App\Filament\Ops\Support\OpsEdit;
 use App\Filament\Ops\Support\OpsTable;
 use App\Filament\Ops\Support\StatusBadge;
 use App\Models\InterpretationGuide;
@@ -65,78 +66,125 @@ class InterpretationGuideResource extends Resource
     {
         return $form->schema([
             Forms\Components\Hidden::make('org_id')->default(0),
-            Forms\Components\Section::make('Interpretation scope')
+            Forms\Components\Grid::make(['default' => 1, 'xl' => 12])
+                ->extraAttributes(['class' => 'ops-edit-workspace-layout'])
                 ->schema([
-                    Forms\Components\TextInput::make('title')->required()->maxLength(255)->columnSpanFull(),
-                    Forms\Components\TextInput::make('slug')->required()->maxLength(128),
-                    Forms\Components\Select::make('locale')
-                        ->label(__('ops.locale_scope.content_locale'))
-                        ->required()
-                        ->native(false)
-                        ->options(['en' => 'en', 'zh-CN' => 'zh-CN'])
-                        ->default('en'),
-                    Forms\Components\Placeholder::make('locale_scope_marker')
-                        ->label(__('ops.locale_scope.editor_marker_label'))
-                        ->content(fn (Forms\Get $get, ?InterpretationGuide $record): string => OpsContentLocaleScope::editorMarker((string) ($get('locale') ?? $record?->locale ?? OpsContentLocaleScope::currentContentLocale())))
-                        ->columnSpanFull(),
-                    Forms\Components\Textarea::make('summary')->rows(3)->maxLength(2000)->columnSpanFull(),
-                    Forms\Components\Select::make('test_family')
-                        ->required()
-                        ->native(false)
-                        ->options(array_combine(InterpretationGuide::TEST_FAMILIES, InterpretationGuide::TEST_FAMILIES))
-                        ->default('general'),
-                    Forms\Components\Select::make('result_context')
-                        ->required()
-                        ->native(false)
-                        ->options(array_combine(InterpretationGuide::RESULT_CONTEXTS, InterpretationGuide::RESULT_CONTEXTS)),
-                    Forms\Components\TextInput::make('audience')->maxLength(96)->default('general'),
-                ])
-                ->columns(2),
-            Forms\Components\Section::make('Publishing and review')
-                ->schema([
-                    Forms\Components\Select::make('status')
-                        ->required()
-                        ->native(false)
-                        ->options([
-                            InterpretationGuide::STATUS_DRAFT => 'Draft',
-                            InterpretationGuide::STATUS_SCHEDULED => 'Scheduled',
-                            InterpretationGuide::STATUS_PUBLISHED => 'Published',
-                            InterpretationGuide::STATUS_ARCHIVED => 'Archived',
-                        ])
-                        ->default(InterpretationGuide::STATUS_DRAFT),
-                    Forms\Components\Select::make('review_state')
-                        ->required()
-                        ->native(false)
-                        ->options([
-                            InterpretationGuide::REVIEW_DRAFT => 'Draft',
-                            InterpretationGuide::REVIEW_CONTENT => 'Content review',
-                            InterpretationGuide::REVIEW_SCIENCE_OR_PRODUCT => 'Science or product review',
-                            InterpretationGuide::REVIEW_APPROVED => 'Approved',
-                            InterpretationGuide::REVIEW_CHANGES_REQUESTED => 'Changes requested',
-                        ])
-                        ->default(InterpretationGuide::REVIEW_DRAFT),
-                    Forms\Components\DateTimePicker::make('last_reviewed_at'),
-                    Forms\Components\DateTimePicker::make('published_at'),
-                ])
-                ->columns(2),
-            Forms\Components\Section::make('Body')
-                ->schema([
-                    Forms\Components\MarkdownEditor::make('body_md')->columnSpanFull(),
-                    Forms\Components\Textarea::make('body_html')->rows(8)->columnSpanFull(),
+                    Forms\Components\Group::make([
+                        Forms\Components\Tabs::make(__('ops.edit.sections.content'))
+                            ->contained(false)
+                            ->extraAttributes(['class' => 'ops-edit-workspace-tabs'])
+                            ->tabs([
+                                Forms\Components\Tabs\Tab::make(__('ops.edit.tabs.content'))
+                                    ->schema([
+                                        Forms\Components\Section::make(__('ops.edit.sections.content'))
+                                            ->schema([
+                                                Forms\Components\TextInput::make('title')->required()->maxLength(255)->columnSpanFull(),
+                                                Forms\Components\TextInput::make('slug')->required()->maxLength(128),
+                                                Forms\Components\Select::make('locale')
+                                                    ->label(__('ops.locale_scope.content_locale'))
+                                                    ->required()
+                                                    ->native(false)
+                                                    ->options(OpsEdit::localeOptions())
+                                                    ->default('en'),
+                                                Forms\Components\Placeholder::make('locale_scope_marker')
+                                                    ->label(__('ops.locale_scope.editor_marker_label'))
+                                                    ->content(fn (Forms\Get $get, ?InterpretationGuide $record): string => OpsContentLocaleScope::editorMarker((string) ($get('locale') ?? $record?->locale ?? OpsContentLocaleScope::currentContentLocale())))
+                                                    ->columnSpanFull(),
+                                                Forms\Components\Textarea::make('summary')->rows(3)->maxLength(2000)->columnSpanFull(),
+                                                Forms\Components\MarkdownEditor::make('body_md')->columnSpanFull()->extraFieldWrapperAttributes(['class' => 'ops-edit-workspace-field--editor']),
+                                                Forms\Components\Textarea::make('body_html')->rows(8)->columnSpanFull(),
+                                            ])
+                                            ->columns(2),
+                                    ]),
+                                Forms\Components\Tabs\Tab::make(__('ops.edit.tabs.seo'))
+                                    ->schema([
+                                        Forms\Components\Section::make(__('ops.edit.sections.seo_fields'))
+                                            ->schema([
+                                                Forms\Components\TextInput::make('seo_title')->maxLength(255),
+                                                Forms\Components\Textarea::make('seo_description')->rows(3)->maxLength(2000),
+                                                Forms\Components\TextInput::make('canonical_path')->maxLength(255),
+                                            ])
+                                            ->columns(2),
+                                    ]),
+                                Forms\Components\Tabs\Tab::make(__('ops.edit.tabs.translation'))
+                                    ->schema([
+                                        Forms\Components\Section::make(__('ops.edit.sections.operations'))
+                                            ->schema([
+                                                Forms\Components\Select::make('test_family')
+                                                    ->required()
+                                                    ->native(false)
+                                                    ->options(array_combine(InterpretationGuide::TEST_FAMILIES, InterpretationGuide::TEST_FAMILIES))
+                                                    ->default('general'),
+                                                Forms\Components\Select::make('result_context')
+                                                    ->required()
+                                                    ->native(false)
+                                                    ->options(array_combine(InterpretationGuide::RESULT_CONTEXTS, InterpretationGuide::RESULT_CONTEXTS)),
+                                                Forms\Components\TextInput::make('audience')->maxLength(96)->default('general'),
+                                            ])
+                                            ->columns(2),
+                                    ]),
+                                Forms\Components\Tabs\Tab::make(__('ops.edit.tabs.revision'))
+                                    ->schema([
+                                        Forms\Components\Section::make(__('ops.edit.sections.relation_fields'))
+                                            ->schema([
+                                                Forms\Components\TagsInput::make('related_guide_ids')
+                                                    ->dehydrateStateUsing(fn (mixed $state): array => self::normalizeIdList($state)),
+                                                Forms\Components\TagsInput::make('related_methodology_page_ids')
+                                                    ->dehydrateStateUsing(fn (mixed $state): array => self::normalizeIdList($state)),
+                                            ])
+                                            ->columns(2),
+                                    ]),
+                            ]),
+                    ])->columnSpan(['xl' => 8])->extraAttributes(['class' => 'ops-edit-workspace-main-column']),
+                    Forms\Components\Group::make([
+                        Forms\Components\Section::make(__('ops.edit.sections.status_visibility'))
+                            ->description(__('ops.edit.descriptions.status_visibility'))
+                            ->extraAttributes(['class' => 'ops-edit-workspace-section ops-edit-workspace-section--rail'])
+                            ->schema([
+                                Forms\Components\Placeholder::make('ops_status_visibility')->label(__('ops.edit.sections.status_visibility'))->content(fn (?InterpretationGuide $record) => OpsEdit::statusVisibility($record)),
+                                Forms\Components\Select::make('status')
+                                    ->required()
+                                    ->native(false)
+                                    ->options(OpsEdit::statusOptions([InterpretationGuide::STATUS_DRAFT, InterpretationGuide::STATUS_SCHEDULED, InterpretationGuide::STATUS_PUBLISHED, InterpretationGuide::STATUS_ARCHIVED]))
+                                    ->default(InterpretationGuide::STATUS_DRAFT),
+                                Forms\Components\Select::make('review_state')
+                                    ->required()
+                                    ->native(false)
+                                    ->options(OpsEdit::statusOptions([InterpretationGuide::REVIEW_DRAFT, InterpretationGuide::REVIEW_CONTENT, InterpretationGuide::REVIEW_SCIENCE_OR_PRODUCT, InterpretationGuide::REVIEW_APPROVED, InterpretationGuide::REVIEW_CHANGES_REQUESTED]))
+                                    ->default(InterpretationGuide::REVIEW_DRAFT),
+                                Forms\Components\DateTimePicker::make('last_reviewed_at'),
+                                Forms\Components\DateTimePicker::make('published_at'),
+                            ]),
+                        Forms\Components\Section::make(__('ops.edit.sections.publish_readiness'))
+                            ->description(__('ops.edit.descriptions.publish_readiness'))
+                            ->extraAttributes(['class' => 'ops-edit-workspace-section ops-edit-workspace-section--rail'])
+                            ->schema([
+                                Forms\Components\Placeholder::make('ops_publish_readiness')->label(__('ops.edit.sections.publish_readiness'))->content(fn (?InterpretationGuide $record) => OpsEdit::publishReadiness($record, [
+                                    'title' => __('ops.resources.articles.fields.title'),
+                                    'slug' => __('ops.resources.articles.fields.slug'),
+                                    'body_md' => __('ops.resources.articles.fields.content_md'),
+                                    'seo_title' => __('ops.edit.fields.seo_title'),
+                                    'seo_description' => __('ops.edit.fields.seo_description'),
+                                ])),
+                            ]),
+                        Forms\Components\Section::make(__('ops.edit.sections.translation'))
+                            ->description(__('ops.edit.descriptions.translation'))
+                            ->extraAttributes(['class' => 'ops-edit-workspace-section ops-edit-workspace-section--rail'])
+                            ->schema([Forms\Components\Placeholder::make('ops_translation')->label(__('ops.edit.sections.translation'))->content(fn (?InterpretationGuide $record) => OpsEdit::translation($record))]),
+                        Forms\Components\Section::make(__('ops.edit.sections.revision'))
+                            ->description(__('ops.edit.descriptions.revision'))
+                            ->extraAttributes(['class' => 'ops-edit-workspace-section ops-edit-workspace-section--rail'])
+                            ->schema([Forms\Components\Placeholder::make('ops_revision')->label(__('ops.edit.sections.revision'))->content(fn (?InterpretationGuide $record) => OpsEdit::revision($record))]),
+                        Forms\Components\Section::make(__('ops.edit.sections.seo'))
+                            ->description(__('ops.edit.descriptions.seo'))
+                            ->extraAttributes(['class' => 'ops-edit-workspace-section ops-edit-workspace-section--rail'])
+                            ->schema([Forms\Components\Placeholder::make('ops_seo')->label(__('ops.edit.sections.seo'))->content(fn (?InterpretationGuide $record) => OpsEdit::seo($record))]),
+                        Forms\Components\Section::make(__('ops.edit.sections.audit'))
+                            ->description(__('ops.edit.descriptions.audit'))
+                            ->extraAttributes(['class' => 'ops-edit-workspace-section ops-edit-workspace-section--rail'])
+                            ->schema([Forms\Components\Placeholder::make('ops_audit')->label(__('ops.edit.sections.audit'))->content(fn (?InterpretationGuide $record) => OpsEdit::audit($record))]),
+                    ])->columnSpan(['xl' => 4])->extraAttributes(['class' => 'ops-edit-workspace-rail-column']),
                 ]),
-            Forms\Components\Section::make('Relations and SEO')
-                ->schema([
-                    Forms\Components\TagsInput::make('related_guide_ids')
-                        ->helperText('Related interpretation guide ids.')
-                        ->dehydrateStateUsing(fn (mixed $state): array => self::normalizeIdList($state)),
-                    Forms\Components\TagsInput::make('related_methodology_page_ids')
-                        ->helperText('Related methodology content_page ids.')
-                        ->dehydrateStateUsing(fn (mixed $state): array => self::normalizeIdList($state)),
-                    Forms\Components\TextInput::make('seo_title')->maxLength(255),
-                    Forms\Components\Textarea::make('seo_description')->rows(3)->maxLength(2000),
-                    Forms\Components\TextInput::make('canonical_path')->maxLength(255),
-                ])
-                ->columns(2),
         ]);
     }
 

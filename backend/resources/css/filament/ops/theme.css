@@ -1673,11 +1673,41 @@
         align-items: start;
     }
 
+    .ops-edit-workspace-layout {
+        align-items: start;
+    }
+
+    .ops-edit-workspace-main-column,
+    .ops-edit-workspace-rail-column,
     .ops-article-workspace-main-column,
     .ops-article-workspace-rail-column {
         display: grid;
         gap: 1.25rem;
         align-self: start;
+    }
+
+    .ops-edit-workspace-rail-column {
+        position: sticky;
+        top: 6rem;
+    }
+
+    .ops-edit-workspace-tabs {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .ops-edit-workspace-section--rail .fi-section-header-heading {
+        font-size: 0.98rem;
+        letter-spacing: -0.02em;
+    }
+
+    .ops-edit-workspace-section--rail .fi-section-header-description {
+        font-size: 0.78rem;
+        line-height: 1.5;
+    }
+
+    .ops-edit-workspace-field--editor .fi-fo-markdown-editor {
+        min-height: 25rem;
     }
 
     .ops-article-workspace-section .fi-section-header {
@@ -1739,6 +1769,59 @@
     .ops-article-workspace-seo {
         display: grid;
         gap: 0.85rem;
+    }
+
+    .ops-metadata-rail-card {
+        display: grid;
+        gap: 0.8rem;
+    }
+
+    .ops-metadata-rail-card__pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .ops-metadata-rail-card__alerts {
+        display: grid;
+        gap: 0.45rem;
+    }
+
+    .ops-metadata-rail-card__alert {
+        border-radius: 12px;
+        background: rgba(217, 119, 6, 0.1);
+        color: #92400e;
+        padding: 0.65rem 0.75rem;
+        font-size: 0.78rem;
+        font-weight: 650;
+        line-height: 1.45;
+        box-shadow: inset 0 0 0 1px rgba(217, 119, 6, 0.16);
+    }
+
+    .ops-metadata-rail-card__rows {
+        display: grid;
+        gap: 0.65rem;
+    }
+
+    .ops-metadata-rail-card__row {
+        display: grid;
+        gap: 0.18rem;
+    }
+
+    .ops-metadata-rail-card__row dt {
+        color: var(--ops-text-tertiary);
+        font-size: 0.6875rem;
+        font-weight: 750;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+    }
+
+    .ops-metadata-rail-card__row dd {
+        color: var(--ops-text-primary);
+        font-size: 0.86rem;
+        font-weight: 650;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
     }
 
     .ops-article-workspace-cues__pills {
@@ -2452,6 +2535,10 @@
 }
 
 @media (max-width: 1023px) {
+    .ops-edit-workspace-rail-column {
+        position: static;
+    }
+
     .fi-body.fi-panel-ops .fi-main {
         padding-top: 1rem;
         padding-bottom: 1.5rem;
