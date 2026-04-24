@@ -16,9 +16,9 @@ class DeliveryTools extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-truck';
 
-    protected static ?string $navigationGroup = 'Support';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Delivery Tools';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 20;
 
@@ -34,6 +34,11 @@ class DeliveryTools extends Page
     public static function getNavigationLabel(): string
     {
         return __('ops.nav.delivery_tools');
+    }
+
+    public function getTitle(): string
+    {
+        return __('ops.custom_pages.delivery_tools.title');
     }
 
     public static function canAccess(): bool
@@ -74,7 +79,7 @@ class DeliveryTools extends Page
     public function requestAction(): void
     {
         if (! $this->canRequestAction()) {
-            $this->statusMessage = 'permission denied.';
+            $this->statusMessage = __('ops.custom_pages.delivery_tools.status.permission_denied');
 
             return;
         }
@@ -84,7 +89,7 @@ class DeliveryTools extends Page
         $reason = trim($this->reason);
 
         if ($orderNo === '' || $reason === '') {
-            $this->statusMessage = 'order_no and reason are required.';
+            $this->statusMessage = __('ops.custom_pages.delivery_tools.status.required_fields');
 
             return;
         }
@@ -95,7 +100,7 @@ class DeliveryTools extends Page
             ->first();
 
         if (! $order) {
-            $this->statusMessage = 'order not found.';
+            $this->statusMessage = __('ops.custom_pages.delivery_tools.status.order_not_found');
 
             return;
         }
@@ -138,6 +143,6 @@ class DeliveryTools extends Page
             'requested',
         );
 
-        $this->statusMessage = 'Request submitted: '.$approval->id;
+        $this->statusMessage = __('ops.custom_pages.delivery_tools.status.request_submitted', ['id' => $approval->id]);
     }
 }

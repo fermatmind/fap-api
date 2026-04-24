@@ -243,6 +243,11 @@ class PostReleaseObservabilityPage extends Page
         return __('ops.nav.post_release_observability');
     }
 
+    public function getTitle(): string
+    {
+        return __('ops.custom_pages.post_release_observability.title');
+    }
+
     public static function canAccess(): bool
     {
         return ContentAccess::canRelease();

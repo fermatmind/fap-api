@@ -157,6 +157,11 @@ class EditorialOperationsPage extends Page
         return __('ops.nav.editorial_operations');
     }
 
+    public function getTitle(): string
+    {
+        return __('ops.custom_pages.editorial_operations.title');
+    }
+
     public static function canAccess(): bool
     {
         return ContentAccess::canRead();

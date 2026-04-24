@@ -91,6 +91,11 @@ class ContentMetricsPage extends Page
         return __('ops.nav.content_metrics');
     }
 
+    public function getTitle(): string
+    {
+        return __('ops.custom_pages.content_metrics.title');
+    }
+
     public static function canAccess(): bool
     {
         return ContentAccess::canRead();

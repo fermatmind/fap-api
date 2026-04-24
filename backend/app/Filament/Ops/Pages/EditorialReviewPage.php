@@ -219,6 +219,11 @@ class EditorialReviewPage extends Page
         return __('ops.nav.editorial_review');
     }
 
+    public function getTitle(): string
+    {
+        return __('ops.custom_pages.editorial_review.title');
+    }
+
     public static function canAccess(): bool
     {
         return ContentAccess::canOpenWorkflow();

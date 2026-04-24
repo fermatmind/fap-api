@@ -70,6 +70,11 @@ class ContentReleasePage extends Page
         return __('ops.nav.content_release');
     }
 
+    public function getTitle(): string
+    {
+        return __('ops.custom_pages.content_release.title');
+    }
+
     public static function canAccess(): bool
     {
         return ContentAccess::canRelease();

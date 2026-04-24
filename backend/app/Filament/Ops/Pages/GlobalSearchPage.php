@@ -74,6 +74,11 @@ class GlobalSearchPage extends Page
         return __('ops.nav.global_search');
     }
 
+    public function getTitle(): string
+    {
+        return __('ops.custom_pages.global_search.title');
+    }
+
     public static function canAccess(): bool
     {
         $guard = (string) config('admin.guard', 'admin');

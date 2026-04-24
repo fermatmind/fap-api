@@ -126,6 +126,11 @@ class SeoOperationsPage extends Page
         return __('ops.nav.seo_operations');
     }
 
+    public function getTitle(): string
+    {
+        return __('ops.custom_pages.seo_operations.title');
+    }
+
     public static function canAccess(): bool
     {
         return ContentAccess::canRead();

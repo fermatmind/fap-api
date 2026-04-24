@@ -43,8 +43,13 @@ final class OpsCustomPagesI18nContractTest extends TestCase
      * @param  list<string>  $enForbidden
      */
     #[DataProvider('customPageProvider')]
-    public function test_custom_ops_pages_render_from_explicit_locale_copy(string $path, array $zhForbidden, array $enForbidden): void
-    {
+    public function test_custom_ops_pages_render_from_explicit_locale_copy(
+        string $path,
+        string $zhExpectedTitle,
+        string $enExpectedTitle,
+        array $zhForbidden,
+        array $enForbidden,
+    ): void {
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_OWNER,
             PermissionNames::ADMIN_OPS_READ,
@@ -62,6 +67,8 @@ final class OpsCustomPagesI18nContractTest extends TestCase
             ->assertOk()
             ->content();
 
+        $this->assertStringContainsString($zhExpectedTitle, $zhHtml);
+
         foreach ($zhForbidden as $phrase) {
             $this->assertStringNotContainsString(
                 $phrase,
@@ -75,6 +82,8 @@ final class OpsCustomPagesI18nContractTest extends TestCase
             ->get($path.'?locale=en')
             ->assertOk()
             ->content();
+
+        $this->assertStringContainsString($enExpectedTitle, $enHtml);
 
         foreach ($enForbidden as $phrase) {
             $this->assertStringNotContainsString(
@@ -133,72 +142,110 @@ final class OpsCustomPagesI18nContractTest extends TestCase
     }
 
     /**
-     * @return iterable<string,array{0:string,1:list<string>,2:list<string>}>
+     * @return iterable<string,array{0:string,1:string,2:string,3:list<string>,4:list<string>}>
      */
     public static function customPageProvider(): iterable
     {
         yield 'question analytics' => [
             '/ops/question-analytics',
+            '题目分析',
+            'Question Analytics',
             ['Authority Scope', 'Option Distribution', 'Dropoff / Completion', 'Only completed attempts'],
             ['权威范围', '选项分布', '流失 / 完成', '仅完成作答'],
         ];
 
         yield 'editorial operations' => [
             '/ops/editorial-operations',
-            ['Editorial operations', 'Operations snapshot', 'Editorial surfaces', 'Release Queue'],
+            '内容编辑运营',
+            'Editorial operations',
+            ['Editorial Operations Page', 'Editorial operations', 'Operations snapshot', 'Editorial surfaces', 'Release Queue'],
             ['内容编辑运营', '运营快照', '编辑界面', '发布队列'],
         ];
 
         yield 'editorial review' => [
             '/ops/editorial-review',
-            ['Editorial review', 'Review queue', 'Approval boundary', 'Assign owner'],
+            '内容审核',
+            'Editorial review',
+            ['Editorial Review Page', 'Editorial review', 'Review queue', 'Approval boundary', 'Assign owner'],
             ['内容审核', '审核队列', '审批边界', '分配负责人'],
         ];
 
         yield 'content release' => [
             '/ops/content-release',
-            ['Content release', 'Release workspace', 'Release review', 'Needs Workflow'],
+            '内容发布',
+            'Content release',
+            ['Content Release Page', 'Content release', 'Release workspace', 'Release review', 'Needs Workflow'],
             ['内容发布', '发布工作台', '发布审核', '需要工作流'],
         ];
 
         yield 'content search' => [
             '/ops/content-search',
-            ['Content search', 'Search by title / slug / excerpt / category / tag', 'Start with a content search'],
+            '内容搜索',
+            'Content search',
+            ['Content Search Page', 'Content search', 'Search by title / slug / excerpt / category / tag', 'Start with a content search'],
             ['内容搜索', '按标题 / slug / 摘要 / 分类 / 标签搜索', '先开始内容搜索'],
         ];
 
         yield 'content metrics' => [
             '/ops/content-metrics',
-            ['Content metrics', 'Metrics contract', 'Freshness and pressure', 'Latest record'],
+            '内容指标',
+            'Content metrics',
+            ['Content Metrics Page', 'Content metrics', 'Metrics contract', 'Freshness and pressure', 'Latest record'],
             ['内容指标', '指标契约', '新鲜度与压力', '最新记录'],
         ];
 
         yield 'seo operations' => [
             '/ops/seo-operations',
-            ['SEO operations', 'Issue focus', 'Attention queue', 'No SEO issues match the current filters.'],
+            'SEO运营',
+            'SEO operations',
+            ['SEO Operations Page', 'Seo Operations Page', 'Issue focus', 'Attention queue', 'No SEO issues match the current filters.'],
             ['SEO运营', '问题焦点', '关注队列', '当前筛选下没有匹配的 SEO 问题。'],
         ];
 
         yield 'post release observability' => [
             '/ops/post-release-observability',
-            ['Post-release observability', 'Release telemetry', 'Recently published records', 'No publish audits yet'],
+            '发布后可观测性',
+            'Post-release observability',
+            ['Post Release Observability Page', 'Post-release observability', 'Release telemetry', 'Recently published records', 'No publish audits yet'],
             ['发布后可观测性', '发布遥测', '最近发布记录', '暂无发布审计'],
         ];
 
         yield 'global search' => [
             '/ops/global-search',
-            ['Global search', 'Support workspace', 'Start with a search', 'Search by order_no / attempt_id / share_id / user_email'],
+            '全局搜索',
+            'Global search',
+            ['Global Search Page', 'Support workspace', 'Start with a search', 'Search by order_no / attempt_id / share_id / user_email'],
             ['全局搜索', '支持工作台', '先开始搜索', '按 order_no / attempt_id / share_id / user_email 搜索'],
         ];
 
         yield 'order lookup' => [
             '/ops/order-lookup',
-            ['Order lookup', 'Search for an order', 'Payment events', 'Benefit grants'],
+            '订单查询',
+            'Order lookup',
+            ['Order Lookup Page', 'Order lookup', 'Search for an order', 'Payment events', 'Benefit grants'],
             ['订单查询', '搜索订单', '支付事件', '权益发放'],
+        ];
+
+        yield 'delivery tools' => [
+            '/ops/delivery-tools',
+            '交付工具',
+            'Delivery tools',
+            ['Delivery Tools', 'Delivery Tools Page', 'Support tools', 'Order number', 'Request status', 'No request submitted yet'],
+            ['交付工具', '支持工具', '订单号', '请求状态', '尚未提交请求'],
+        ];
+
+        yield 'content workspace' => [
+            '/ops/content-workspace',
+            '内容工作台',
+            'Content workspace',
+            ['Content Workspace Page', 'Content workspace', 'Permission boundary', 'Access model', 'Content read', 'records'],
+            ['内容工作台', '权限边界', '访问模型', '内容读取', '条记录'],
         ];
 
         yield 'reports' => [
             '/ops/reports',
+            '报告快照',
+            'Report Snapshots',
             ['Report Snapshot', 'Report Snapshots', 'PDF ready', 'Unlock status'],
             ['报告快照', 'PDF 就绪', '解锁状态'],
         ];
