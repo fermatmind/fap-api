@@ -390,7 +390,7 @@ final class ShareFlowCoreService
     {
         return in_array(
             strtoupper(trim((string) ($attempt->scale_code ?? ''))),
-            ['MBTI', 'BIG5_OCEAN', 'RIASEC'],
+            ['MBTI', 'BIG5_OCEAN', 'RIASEC', 'ENNEAGRAM'],
             true
         );
     }
