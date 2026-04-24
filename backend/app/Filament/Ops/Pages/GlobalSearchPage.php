@@ -14,9 +14,9 @@ class GlobalSearchPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-magnifying-glass';
 
-    protected static ?string $navigationGroup = 'Support';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Global Search';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 5;
 
@@ -58,7 +58,7 @@ class GlobalSearchPage extends Page
 
         if (count($this->items) === 0) {
             Notification::make()
-                ->title('No result found')
+                ->title(__('ops.custom_pages.global_search.no_result_notification'))
                 ->warning()
                 ->send();
         }

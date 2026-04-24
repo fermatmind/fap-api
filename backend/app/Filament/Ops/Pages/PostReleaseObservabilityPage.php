@@ -18,9 +18,9 @@ class PostReleaseObservabilityPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-signal';
 
-    protected static ?string $navigationGroup = 'Content Release';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Post-Release Observability';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 2;
 
@@ -135,43 +135,43 @@ class PostReleaseObservabilityPage extends Page
 
         $this->headlineFields = [
             [
-                'label' => 'Publishes in last 24h',
+                'label' => __('ops.custom_pages.post_release_observability.fields.publishes_24h'),
                 'value' => (string) $recentPublishes,
-                'hint' => 'Recently published records across selected-org articles and global career content.',
+                'hint' => __('ops.custom_pages.post_release_observability.fields.publishes_24h_hint'),
             ],
             [
-                'label' => 'Release audits in last 24h',
+                'label' => __('ops.custom_pages.post_release_observability.fields.audits_24h'),
                 'value' => (string) $publishAuditCount24h,
-                'hint' => 'Audit rows written by the CMS release workspace during the last 24 hours.',
+                'hint' => __('ops.custom_pages.post_release_observability.fields.audits_24h_hint'),
             ],
             [
-                'label' => 'Cache invalidation signals',
+                'label' => __('ops.custom_pages.post_release_observability.fields.cache_signals'),
                 'value' => (string) $cacheSignalCount24h,
-                'hint' => 'Downstream cache invalidation webhooks attempted by the CMS release flow in the last 24 hours.',
+                'hint' => __('ops.custom_pages.post_release_observability.fields.cache_signals_hint'),
             ],
             [
-                'label' => 'Broadcast events',
+                'label' => __('ops.custom_pages.post_release_observability.fields.broadcasts'),
                 'value' => (string) $broadcastCount24h,
-                'hint' => 'Release event broadcasts attempted by the CMS release flow in the last 24 hours.',
+                'hint' => __('ops.custom_pages.post_release_observability.fields.broadcasts_hint'),
             ],
             [
-                'label' => 'Follow-up failures',
+                'label' => __('ops.custom_pages.post_release_observability.fields.failures'),
                 'value' => (string) $followUpFailureCount24h,
                 'kind' => 'pill',
                 'state' => $followUpFailureCount24h > 0 ? 'warning' : 'success',
-                'hint' => 'Failed cache invalidation or broadcast follow-up events after release.',
+                'hint' => __('ops.custom_pages.post_release_observability.fields.failures_hint'),
             ],
             [
-                'label' => 'Public delivery footprint',
+                'label' => __('ops.custom_pages.post_release_observability.fields.public_footprint'),
                 'value' => (string) $publicFootprint,
-                'hint' => 'Published and public records currently reachable through the visible public content contract.',
+                'hint' => __('ops.custom_pages.post_release_observability.fields.public_footprint_hint'),
             ],
             [
-                'label' => 'Visibility gaps',
+                'label' => __('ops.custom_pages.post_release_observability.fields.visibility_gaps'),
                 'value' => (string) $visibilityGaps,
                 'kind' => 'pill',
                 'state' => $visibilityGaps > 0 ? 'warning' : 'success',
-                'hint' => 'Published-but-not-public records that can cause release confusion after approval.',
+                'hint' => __('ops.custom_pages.post_release_observability.fields.visibility_gaps_hint'),
             ],
         ];
 
@@ -182,8 +182,8 @@ class PostReleaseObservabilityPage extends Page
                     ->latest('published_at')
                     ->limit(3)
                     ->get(),
-                'Article',
-                'Current org'
+                __('ops.custom_pages.common.filters.article'),
+                __('ops.custom_pages.editorial_operations.surfaces.current_org')
             ))
             ->concat($this->publishedCards(
                 (clone $guideBaseQuery)
@@ -191,8 +191,8 @@ class PostReleaseObservabilityPage extends Page
                     ->latest('published_at')
                     ->limit(3)
                     ->get(),
-                'Career Guide',
-                'Global content'
+                __('ops.custom_pages.common.filters.career_guide'),
+                __('ops.custom_pages.common.values.global_content')
             ))
             ->concat($this->publishedCards(
                 (clone $jobBaseQuery)
@@ -200,8 +200,8 @@ class PostReleaseObservabilityPage extends Page
                     ->latest('published_at')
                     ->limit(3)
                     ->get(),
-                'Career Job',
-                'Global content'
+                __('ops.custom_pages.common.filters.career_job'),
+                __('ops.custom_pages.common.values.global_content')
             ))
             ->sortByDesc('sort_at')
             ->take(6)
@@ -216,15 +216,17 @@ class PostReleaseObservabilityPage extends Page
                 $result = trim((string) ($row->result ?? 'success'));
 
                 return [
-                    'title' => trim((string) data_get($meta, 'title', 'Untitled release event')),
+                    'title' => trim((string) data_get($meta, 'title', __('ops.custom_pages.common.values.untitled'))),
                     'meta' => trim((string) ($row->action.' | '.(string) ($row->target_type ?? 'unknown'))),
-                    'description' => 'Source: '.trim((string) data_get($meta, 'source', 'unknown'))
-                        .' | Endpoint: '.trim((string) data_get($meta, 'endpoint', 'n/a'))
-                        .' | Visibility: '.trim((string) data_get($meta, 'visibility', 'unknown')),
+                    'description' => __('ops.custom_pages.post_release_observability.audit_description', [
+                        'source' => trim((string) data_get($meta, 'source', 'unknown')),
+                        'endpoint' => trim((string) data_get($meta, 'endpoint', 'n/a')),
+                        'visibility' => trim((string) data_get($meta, 'visibility', 'unknown')),
+                    ]),
                     'trace' => $this->traceSummary($meta),
                     'status' => $result,
                     'status_state' => $result === 'failed' ? 'danger' : 'success',
-                    'latest_title' => optional($row->created_at)?->toDateTimeString() ?? 'Unknown',
+                    'latest_title' => optional($row->created_at)?->toDateTimeString() ?? __('ops.custom_pages.common.values.unknown'),
                 ];
             })
             ->values()
@@ -267,9 +269,9 @@ class PostReleaseObservabilityPage extends Page
                 $publishedAt = data_get($row, 'published_at');
 
                 return [
-                    'title' => trim((string) data_get($row, 'title', 'Untitled')),
-                    'meta' => $typeLabel.' | '.$scope.' | '.(data_get($row, 'is_public') ? 'Public' : 'Private'),
-                    'description' => 'Published at '.(optional($publishedAt)?->toDateTimeString() ?? 'Unknown'),
+                    'title' => trim((string) data_get($row, 'title', __('ops.custom_pages.common.values.untitled'))),
+                    'meta' => $typeLabel.' | '.$scope.' | '.(data_get($row, 'is_public') ? __('ops.custom_pages.common.values.public') : __('ops.custom_pages.common.values.private')),
+                    'description' => __('ops.custom_pages.post_release_observability.published_at', ['time' => optional($publishedAt)?->toDateTimeString() ?? __('ops.custom_pages.common.values.unknown')]),
                     'status' => trim((string) data_get($row, 'status', 'published')),
                     'status_state' => data_get($row, 'is_public') ? 'success' : 'warning',
                     'latest_title' => trim((string) data_get($row, 'slug', '')),
@@ -289,25 +291,31 @@ class PostReleaseObservabilityPage extends Page
 
         $revisionNo = data_get($meta, 'revision_no');
         if ($revisionNo !== null) {
-            $traceParts[] = 'Revision #'.$revisionNo;
+            $traceParts[] = __('ops.custom_pages.post_release_observability.trace.revision', ['revision' => $revisionNo]);
         }
 
         $changedCount = (int) data_get($meta, 'diff_summary.changed_count', 0);
         $changedFields = array_values(array_filter((array) data_get($meta, 'diff_summary.changed_fields', [])));
         if ($changedCount > 0) {
-            $traceParts[] = 'Diff: '.$changedCount.' field'.($changedCount === 1 ? '' : 's')
-                .' changed'
+            $traceParts[] = __('ops.custom_pages.post_release_observability.trace.diff', [
+                'count' => $changedCount,
+                'fields' => $changedCount === 1
+                    ? __('ops.custom_pages.post_release_observability.trace.field')
+                    : __('ops.custom_pages.post_release_observability.trace.fields'),
+            ])
                 .($changedFields !== [] ? ' ('.implode(', ', $changedFields).')' : '');
         }
 
         $rollbackRevision = data_get($meta, 'rollback_target.revision_no');
         $rollbackSource = trim((string) data_get($meta, 'rollback_target.source', ''));
         if ($rollbackRevision !== null || $rollbackSource !== '') {
-            $traceParts[] = 'Rollback: '
-                .($rollbackRevision !== null ? 'rev '.$rollbackRevision : 'history')
-                .($rollbackSource !== '' ? ' via '.$rollbackSource : '');
+            $target = ($rollbackRevision !== null
+                ? __('ops.custom_pages.post_release_observability.trace.rev', ['revision' => $rollbackRevision])
+                : __('ops.custom_pages.post_release_observability.trace.history'))
+                .($rollbackSource !== '' ? __('ops.custom_pages.post_release_observability.trace.via', ['source' => $rollbackSource]) : '');
+            $traceParts[] = __('ops.custom_pages.post_release_observability.trace.rollback', ['target' => $target]);
         }
 
-        return $traceParts !== [] ? implode(' | ', $traceParts) : 'No diff or rollback trace recorded.';
+        return $traceParts !== [] ? implode(' | ', $traceParts) : __('ops.custom_pages.post_release_observability.trace.none');
     }
 }

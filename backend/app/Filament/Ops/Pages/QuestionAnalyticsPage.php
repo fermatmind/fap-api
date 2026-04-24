@@ -262,7 +262,7 @@ class QuestionAnalyticsPage extends Page
 
         [$from, $to] = $this->resolvedRange();
         if ($from->greaterThan($to)) {
-            $this->warnings[] = 'The selected date range is invalid. Keep the start date on or before the end date.';
+            $this->warnings[] = __('ops.custom_pages.question_analytics.warnings.invalid_range');
             $this->scopeNotes = $this->buildScopeNotes();
 
             return;
@@ -314,7 +314,10 @@ class QuestionAnalyticsPage extends Page
         $this->hasProgressData = $progressRows->isNotEmpty();
 
         if (! $this->hasOptionData && ! $this->hasProgressData) {
-            $this->warnings[] = 'No authoritative BIG5 question rows match the current scope. Refresh with php artisan analytics:refresh-question-daily --from='.$from->toDateString().' --to='.$to->toDateString().'.';
+            $this->warnings[] = __('ops.custom_pages.question_analytics.warnings.no_rows', [
+                'from' => $from->toDateString(),
+                'to' => $to->toDateString(),
+            ]);
             $this->scopeNotes = $this->buildScopeNotes();
 
             return;
@@ -334,7 +337,7 @@ class QuestionAnalyticsPage extends Page
     private function loadFilterOptions(): void
     {
         $this->scaleOptions = [
-            $this->canonicalScale['scale_code'] => $this->canonicalScale['scale_code'].' (authoritative)',
+            $this->canonicalScale['scale_code'] => $this->canonicalScale['scale_code'],
         ];
         $this->localeOptions = [];
         $this->regionOptions = [];
@@ -461,27 +464,27 @@ class QuestionAnalyticsPage extends Page
 
         $this->optionKpis = [
             [
-                'label' => 'Total answered rows',
+                'label' => __('ops.custom_pages.question_analytics.kpis.total_answered_rows'),
                 'value' => $totalAnsweredRows,
-                'description' => 'Submitted BIG5 answer rows only. Clinical, SDS, redacted, and rowless scales stay out.',
+                'description' => __('ops.custom_pages.question_analytics.kpis.total_answered_rows_desc'),
             ],
             [
-                'label' => 'Distinct attempts with answers',
+                'label' => __('ops.custom_pages.question_analytics.kpis.distinct_attempts_with_answers'),
                 'value' => $attemptsWithAnswers,
-                'description' => 'Question-level answer authority count in the current BIG5 scope.',
+                'description' => __('ops.custom_pages.question_analytics.kpis.distinct_attempts_with_answers_desc'),
             ],
             [
-                'label' => 'Total questions in scope',
+                'label' => __('ops.custom_pages.question_analytics.kpis.total_questions_in_scope'),
                 'value' => $totalQuestionsInScope,
-                'description' => 'Question order comes from the BIG5 content pack, not from frontend question_index alone.',
+                'description' => __('ops.custom_pages.question_analytics.kpis.total_questions_in_scope_desc'),
             ],
             [
-                'label' => 'Top answered question',
+                'label' => __('ops.custom_pages.question_analytics.kpis.top_answered_question'),
                 'value' => 0,
                 'display_value' => is_array($topAnsweredQuestion)
                     ? '#'.$topAnsweredQuestion['question_order'].' / '.$topAnsweredQuestion['question_id']
                     : 'n/a',
-                'description' => 'Highest answer volume inside the current scope.',
+                'description' => __('ops.custom_pages.question_analytics.kpis.top_answered_question_desc'),
             ],
         ];
 
@@ -511,32 +514,32 @@ class QuestionAnalyticsPage extends Page
 
         $this->progressKpis = [
             [
-                'label' => 'Reached attempts',
+                'label' => __('ops.custom_pages.question_analytics.kpis.reached_attempts'),
                 'value' => $this->questionId === 'all'
                     ? $this->firstQuestionMetric($questionRows, 'reached_attempts_count')
                     : (int) (($selectedQuestion['reached_attempts_count'] ?? 0)),
-                'description' => 'Attempts that reached the current question scope using attempts + drafts + rows.',
+                'description' => __('ops.custom_pages.question_analytics.kpis.reached_attempts_desc'),
             ],
             [
-                'label' => 'Answered attempts',
+                'label' => __('ops.custom_pages.question_analytics.kpis.answered_attempts'),
                 'value' => $this->questionId === 'all'
                     ? $this->firstQuestionMetric($questionRows, 'answered_attempts_count')
                     : (int) (($selectedQuestion['answered_attempts_count'] ?? 0)),
-                'description' => 'Attempts with a recorded answer at the question level.',
+                'description' => __('ops.custom_pages.question_analytics.kpis.answered_attempts_desc'),
             ],
             [
-                'label' => 'Completed attempts',
+                'label' => __('ops.custom_pages.question_analytics.kpis.completed_attempts'),
                 'value' => $this->questionId === 'all'
                     ? $this->firstQuestionMetric($questionRows, 'completed_attempts_count')
                     : (int) (($selectedQuestion['completed_attempts_count'] ?? 0)),
-                'description' => 'Attempts that completed the full BIG5 after entering the current question scope.',
+                'description' => __('ops.custom_pages.question_analytics.kpis.completed_attempts_desc'),
             ],
             [
-                'label' => 'Dropoff attempts',
+                'label' => __('ops.custom_pages.question_analytics.kpis.dropoff_attempts'),
                 'value' => $this->questionId === 'all'
                     ? (int) $questionRows->sum('dropoff_attempts_count')
                     : (int) (($selectedQuestion['dropoff_attempts_count'] ?? 0)),
-                'description' => 'Attempt terminal question under the current scope. Completed-only mode zeros this by design.',
+                'description' => __('ops.custom_pages.question_analytics.kpis.dropoff_attempts_desc'),
             ],
         ];
 
@@ -780,15 +783,15 @@ class QuestionAnalyticsPage extends Page
     private function buildScopeNotes(): array
     {
         $notes = [
-            'Current authoritative scope is fixed to BIG5_OCEAN only. MBTI, EQ_60, IQ_RAVEN, SDS_20, and CLINICAL_COMBO_68 stay out of this first-phase authority page.',
-            'Question order is reconstructed from the BIG5 content pack. Frontend question_index is not treated as the sole source of truth.',
-            'Option Distribution uses attempt_answer_rows + attempt context only. events and attempt_answer_sets do not act as the main fact axis here.',
-            'Dropoff / Completion uses attempts + attempt_drafts + attempt_answer_rows. Duration is intentionally deferred and is not a first-phase authority metric.',
-            'Mixed version pools and tiny locale slices should be read cautiously. The page keeps content, scoring, and norm versions visible instead of silently pooling them.',
+            __('ops.custom_pages.question_analytics.notes.fixed_scope'),
+            __('ops.custom_pages.question_analytics.notes.question_order'),
+            __('ops.custom_pages.question_analytics.notes.option_distribution'),
+            __('ops.custom_pages.question_analytics.notes.dropoff_completion'),
+            __('ops.custom_pages.question_analytics.notes.version_pools'),
         ];
 
         if ($this->onlyCompletedAttempts) {
-            $notes[] = 'Completed-only mode is enabled. In Dropoff / Completion this collapses dropoff behavior by definition and should be read as a completion-only cut.';
+            $notes[] = __('ops.custom_pages.question_analytics.notes.completed_only');
         }
 
         return $notes;
@@ -827,19 +830,19 @@ class QuestionAnalyticsPage extends Page
         $links = [];
         if ($frontendUrls['detail'] !== null) {
             $links[] = [
-                'label' => 'Frontend test detail',
+                'label' => __('ops.custom_pages.question_analytics.links.frontend_detail'),
                 'url' => (string) $frontendUrls['detail'],
             ];
         }
         if ($frontendUrls['take'] !== null) {
             $links[] = [
-                'label' => 'Frontend take page',
+                'label' => __('ops.custom_pages.question_analytics.links.frontend_take'),
                 'url' => (string) $frontendUrls['take'],
             ];
         }
 
         $links[] = [
-            'label' => 'Attempts Explorer',
+            'label' => __('ops.custom_pages.question_analytics.links.attempts_explorer'),
             'url' => app(QuestionAnalyticsSupport::class)->attemptExplorerUrl($this->questionId !== 'all' ? $this->questionId : null),
         ];
 

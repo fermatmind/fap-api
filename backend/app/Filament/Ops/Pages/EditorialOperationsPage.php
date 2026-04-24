@@ -18,9 +18,9 @@ class EditorialOperationsPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
 
-    protected static ?string $navigationGroup = 'Editorial';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Editorial Operations';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 1;
 
@@ -68,55 +68,55 @@ class EditorialOperationsPage extends Page
 
         $this->snapshotFields = [
             [
-                'label' => 'Current org article drafts',
+                'label' => __('ops.custom_pages.editorial_operations.fields.article_drafts'),
                 'value' => (string) $articleDraftCount,
-                'hint' => 'Org-scoped article records still waiting for editorial completion or publish approval.',
+                'hint' => __('ops.custom_pages.editorial_operations.fields.article_drafts_hint'),
             ],
             [
-                'label' => 'Current org published articles',
+                'label' => __('ops.custom_pages.editorial_operations.fields.published_articles'),
                 'value' => (string) $articlePublishedCount,
-                'hint' => 'Article records already published for the selected Ops organization.',
+                'hint' => __('ops.custom_pages.editorial_operations.fields.published_articles_hint'),
             ],
             [
-                'label' => 'Global career drafts',
+                'label' => __('ops.custom_pages.editorial_operations.fields.career_drafts'),
                 'value' => (string) ($guideDraftCount + $jobDraftCount),
-                'hint' => 'Career guides and jobs remain global authoring surfaces with org_id=0.',
+                'hint' => __('ops.custom_pages.editorial_operations.fields.career_drafts_hint'),
             ],
             [
-                'label' => 'Global career published',
+                'label' => __('ops.custom_pages.editorial_operations.fields.career_published'),
                 'value' => (string) ($guidePublishedCount + $jobPublishedCount),
-                'hint' => 'Published global career records visible to the current public content contract.',
+                'hint' => __('ops.custom_pages.editorial_operations.fields.career_published_hint'),
             ],
             [
-                'label' => 'Release-ready inventory',
+                'label' => __('ops.custom_pages.editorial_operations.fields.release_ready'),
                 'value' => (string) ($articleDraftCount + $guideDraftCount + $jobDraftCount),
-                'hint' => 'Draft editorial records that can be handed off into the content release queue.',
+                'hint' => __('ops.custom_pages.editorial_operations.fields.release_ready_hint'),
             ],
         ];
 
         $this->surfaceCards = [
             $this->surfaceCard(
-                'Articles',
-                'Current org editorial surface for long-form article authoring, locale handling, SEO fields, and publish state.',
-                'Current org',
+                __('ops.custom_pages.editorial_operations.surfaces.articles'),
+                __('ops.custom_pages.editorial_operations.surfaces.articles_desc'),
+                __('ops.custom_pages.editorial_operations.surfaces.current_org'),
                 $articleDraftCount,
                 $articlePublishedCount,
                 ArticleResource::getUrl(),
                 ArticleResource::getUrl('create')
             ),
             $this->surfaceCard(
-                'Career Guides',
-                'Global guide authoring surface for structured career education content, public delivery, and SEO metadata.',
-                'Global content',
+                __('ops.custom_pages.editorial_operations.surfaces.career_guides'),
+                __('ops.custom_pages.editorial_operations.surfaces.career_guides_desc'),
+                __('ops.custom_pages.editorial_operations.surfaces.global_content'),
                 $guideDraftCount,
                 $guidePublishedCount,
                 CareerGuideResource::getUrl(),
                 CareerGuideResource::getUrl('create')
             ),
             $this->surfaceCard(
-                'Career Jobs',
-                'Global job profile surface for narrative content, role signals, and release-ready public delivery state.',
-                'Global content',
+                __('ops.custom_pages.editorial_operations.surfaces.career_jobs'),
+                __('ops.custom_pages.editorial_operations.surfaces.career_jobs_desc'),
+                __('ops.custom_pages.editorial_operations.surfaces.global_content'),
                 $jobDraftCount,
                 $jobPublishedCount,
                 CareerJobResource::getUrl(),
@@ -126,23 +126,23 @@ class EditorialOperationsPage extends Page
 
         $this->boundaryFields = [
             [
-                'label' => 'Write boundary',
-                'value' => ContentAccess::canWrite() ? 'Enabled' : 'Missing',
+                'label' => __('ops.custom_pages.editorial_operations.fields.write_boundary'),
+                'value' => ContentAccess::canWrite() ? __('ops.custom_pages.common.values.enabled') : __('ops.custom_pages.common.values.missing'),
                 'kind' => 'pill',
                 'state' => ContentAccess::canWrite() ? 'success' : 'warning',
-                'hint' => 'Write permission opens create and edit actions across the editorial surfaces.',
+                'hint' => __('ops.custom_pages.editorial_operations.fields.write_boundary_hint'),
             ],
             [
-                'label' => 'Release handoff',
-                'value' => ContentAccess::canRelease() ? 'Available' : 'Read only',
+                'label' => __('ops.custom_pages.editorial_operations.fields.release_handoff'),
+                'value' => ContentAccess::canRelease() ? __('ops.status.ready') : __('ops.custom_pages.common.values.read_only'),
                 'kind' => 'pill',
                 'state' => ContentAccess::canRelease() ? 'success' : 'gray',
-                'hint' => 'Publishing still happens in the dedicated content release workspace, not inside this operations page.',
+                'hint' => __('ops.custom_pages.editorial_operations.fields.release_handoff_hint'),
             ],
             [
-                'label' => 'Org model',
-                'value' => 'Articles are org-scoped; career content is global',
-                'hint' => 'This page keeps the current production bootstrap boundary explicit instead of hiding the split inside individual resources.',
+                'label' => __('ops.custom_pages.editorial_operations.fields.org_model'),
+                'value' => __('ops.custom_pages.editorial_operations.fields.org_model_value'),
+                'hint' => __('ops.custom_pages.editorial_operations.fields.org_model_hint'),
             ],
         ];
     }
@@ -190,7 +190,7 @@ class EditorialOperationsPage extends Page
             'scope' => $scope,
             'draft_count' => $draftCount,
             'published_count' => $publishedCount,
-            'meta' => $draftCount.' draft | '.$publishedCount.' published',
+            'meta' => __('ops.custom_pages.editorial_operations.surfaces.meta', ['draft' => $draftCount, 'published' => $publishedCount]),
             'index_url' => $indexUrl,
             'create_url' => $createUrl,
             'can_write' => ContentAccess::canWrite(),

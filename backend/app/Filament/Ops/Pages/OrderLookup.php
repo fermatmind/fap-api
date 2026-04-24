@@ -13,9 +13,9 @@ class OrderLookup extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-magnifying-glass';
 
-    protected static ?string $navigationGroup = 'Support';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Order Lookup';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 10;
 

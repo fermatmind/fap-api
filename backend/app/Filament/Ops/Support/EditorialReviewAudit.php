@@ -165,7 +165,7 @@ final class EditorialReviewAudit
             return [
                 'state' => self::STATE_READY,
                 'label' => self::label(self::STATE_READY),
-                'reviewed_at' => optional($workflow->reviewed_at)?->toDateTimeString() ?? 'Unknown',
+                'reviewed_at' => optional($workflow->reviewed_at)?->toDateTimeString() ?? __('ops.custom_pages.common.values.unknown'),
                 'owner_admin_user_id' => $workflow->owner_admin_user_id,
                 'owner_label' => trim((string) optional($workflow->owner)->name),
                 'reviewer_admin_user_id' => $workflow->reviewer_admin_user_id,
@@ -176,7 +176,7 @@ final class EditorialReviewAudit
         return [
             'state' => (string) $workflow->workflow_state,
             'label' => self::label((string) $workflow->workflow_state),
-            'reviewed_at' => optional($workflow->reviewed_at ?? $workflow->submitted_at)?->toDateTimeString() ?? 'Unknown',
+            'reviewed_at' => optional($workflow->reviewed_at ?? $workflow->submitted_at)?->toDateTimeString() ?? __('ops.custom_pages.common.values.unknown'),
             'owner_admin_user_id' => $workflow->owner_admin_user_id,
             'owner_label' => trim((string) optional($workflow->owner)->name),
             'reviewer_admin_user_id' => $workflow->reviewer_admin_user_id,
@@ -187,12 +187,12 @@ final class EditorialReviewAudit
     public static function label(string $state): string
     {
         return match ($state) {
-            self::STATE_IN_REVIEW => 'In review',
-            self::STATE_APPROVED => 'Approved',
-            self::STATE_CHANGES_REQUESTED => 'Changes requested',
-            self::STATE_REJECTED => 'Rejected',
-            self::STATE_NEEDS_ATTENTION => 'Needs attention',
-            default => 'Ready',
+            self::STATE_IN_REVIEW => __('ops.custom_pages.common.filters.in_review'),
+            self::STATE_APPROVED => __('ops.custom_pages.common.filters.approved'),
+            self::STATE_CHANGES_REQUESTED => __('ops.custom_pages.common.filters.changes_requested'),
+            self::STATE_REJECTED => __('ops.custom_pages.common.filters.rejected'),
+            self::STATE_NEEDS_ATTENTION => __('ops.custom_pages.common.filters.needs_attention'),
+            default => __('ops.custom_pages.common.filters.ready'),
         };
     }
 

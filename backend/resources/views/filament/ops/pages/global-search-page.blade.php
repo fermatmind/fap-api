@@ -1,42 +1,44 @@
 <x-filament-panels::page>
     @php
         $hasQuery = trim($query) !== '';
-        $emptyTitle = $hasQuery ? 'No matching records' : 'Start with a search';
+        $emptyTitle = $hasQuery
+            ? __('ops.custom_pages.global_search.empty_query_title')
+            : __('ops.custom_pages.global_search.empty_initial_title');
         $emptyDescription = $hasQuery
-            ? 'Try another order number, attempt id, share id, or user email to widen the search.'
-            : 'Search by order number, attempt id, share id, or user email to open the right workflow quickly.';
+            ? __('ops.custom_pages.global_search.empty_query_desc')
+            : __('ops.custom_pages.global_search.empty_initial_desc');
     @endphp
 
     <div class="ops-shell-page">
         <x-filament-ops::ops-section
-            eyebrow="Support workspace"
-            title="Global search"
-            description="Jump directly to orders, attempts, shares, or user records without leaving the current Ops shell."
+            :eyebrow="__('ops.custom_pages.global_search.eyebrow')"
+            :title="__('ops.custom_pages.global_search.title')"
+            :description="__('ops.custom_pages.global_search.description')"
         >
             <x-filament-ops::ops-toolbar>
                 <div class="ops-control-stack">
-                    <label class="ops-control-label" for="ops-global-search-input">Search by order_no / attempt_id / share_id / user_email</label>
+                    <label class="ops-control-label" for="ops-global-search-input">{{ __('ops.custom_pages.global_search.search_label') }}</label>
                     <input
                         id="ops-global-search-input"
                         type="text"
                         wire:model.defer="query"
-                        placeholder="ord_..., attempt..., share..., email"
+                        placeholder="{{ __('ops.custom_pages.global_search.placeholder') }}"
                         class="ops-input"
                     />
-                    <p class="ops-control-hint">The search stays read-only here. Open a result to continue in its native workspace.</p>
+                    <p class="ops-control-hint">{{ __('ops.custom_pages.global_search.hint') }}</p>
                 </div>
 
                 <x-slot name="actions">
                     <x-filament::button color="primary" wire:click="runSearch">
-                        Search
+                        {{ __('ops.custom_pages.common.actions.search') }}
                     </x-filament::button>
                 </x-slot>
             </x-filament-ops::ops-toolbar>
         </x-filament-ops::ops-section>
 
         <x-filament-ops::ops-section
-            title="Results"
-            description="Shared result cards keep support actions readable even when records come from different domains."
+            :title="__('ops.custom_pages.global_search.results_title')"
+            :description="__('ops.custom_pages.global_search.results_desc')"
         >
             <x-slot name="actions">
                 <span class="ops-results-header__meta">{{ $elapsedMs }} ms</span>
@@ -50,13 +52,13 @@
                     >
                         <x-slot name="actions">
                             <x-filament::button size="xs" color="gray" tag="a" href="{{ (string) ($item['url'] ?? '/ops') }}">
-                                Open
+                                {{ __('ops.custom_pages.common.actions.open') }}
                             </x-filament::button>
                         </x-slot>
                     </x-filament-ops::ops-result-card>
                 @empty
                     <x-filament-ops::ops-empty-state
-                        eyebrow="Support search"
+                        :eyebrow="__('ops.custom_pages.global_search.empty_eyebrow')"
                         icon="heroicon-o-magnifying-glass"
                         :title="$emptyTitle"
                         :description="$emptyDescription"

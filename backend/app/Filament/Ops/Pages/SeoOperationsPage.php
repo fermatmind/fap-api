@@ -20,9 +20,9 @@ class SeoOperationsPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
 
-    protected static ?string $navigationGroup = 'Content Overview';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'SEO Operations';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 5;
 
@@ -76,12 +76,12 @@ class SeoOperationsPage extends Page
     public function applyBulkAction(SeoOperationsService $service, AuditLogger $audit): void
     {
         if (! ContentAccess::canWrite()) {
-            throw new AuthorizationException('You do not have permission to operate SEO actions.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.seo_action_forbidden'));
         }
 
         if ($this->selectedTargets === []) {
             Notification::make()
-                ->title('Select at least one SEO issue row')
+                ->title(__('ops.custom_pages.seo_operations.notifications.select_issue'))
                 ->warning()
                 ->send();
 
@@ -110,8 +110,8 @@ class SeoOperationsPage extends Page
         $this->refreshDashboard($service);
 
         Notification::make()
-            ->title('SEO operations applied')
-            ->body('Updated '.$updatedCount.' records.')
+            ->title(__('ops.custom_pages.seo_operations.notifications.applied'))
+            ->body(__('ops.custom_pages.seo_operations.notifications.applied_body', ['count' => $updatedCount]))
             ->success()
             ->send();
     }
@@ -213,113 +213,113 @@ class SeoOperationsPage extends Page
 
         $this->headlineFields = [
             [
-                'label' => 'Current org article SEO-ready',
+                'label' => __('ops.custom_pages.seo_operations.fields.article_ready'),
                 'value' => $this->ratioLabel($articleSeoReady, $articleTotal),
-                'hint' => 'Selected-org article coverage for metadata, canonical, robots, indexability, and growth blockers.',
+                'hint' => __('ops.custom_pages.seo_operations.fields.article_ready_hint'),
             ],
             [
-                'label' => 'Global career SEO-ready',
+                'label' => __('ops.custom_pages.seo_operations.fields.career_ready'),
                 'value' => $this->ratioLabel($careerSeoReady, $careerTotal),
-                'hint' => 'Global guide and job coverage for the visible SEO authoring surface.',
+                'hint' => __('ops.custom_pages.seo_operations.fields.career_ready_hint'),
             ],
             [
-                'label' => 'Indexable footprint',
+                'label' => __('ops.custom_pages.seo_operations.fields.indexable_footprint'),
                 'value' => (string) $indexableFootprint,
-                'hint' => 'Visible records currently marked indexable across article and global career surfaces.',
+                'hint' => __('ops.custom_pages.seo_operations.fields.indexable_footprint_hint'),
             ],
             [
-                'label' => 'Growth-ready records',
+                'label' => __('ops.custom_pages.seo_operations.fields.growth_ready'),
                 'value' => (string) $publicSeoReady,
-                'hint' => 'Published, public, indexable, and discovery-ready records.',
+                'hint' => __('ops.custom_pages.seo_operations.fields.growth_ready_hint'),
             ],
             [
-                'label' => 'SEO attention queue',
+                'label' => __('ops.custom_pages.seo_operations.fields.attention_queue'),
                 'value' => (string) $seoAttentionQueue,
-                'hint' => 'Visible content objects still missing at least one operational SEO requirement.',
+                'hint' => __('ops.custom_pages.seo_operations.fields.attention_queue_hint'),
             ],
         ];
 
         $this->coverageFields = [
             [
-                'label' => 'Article canonical coverage',
+                'label' => __('ops.custom_pages.seo_operations.fields.article_canonical'),
                 'value' => $this->ratioLabel($articleCanonicalCoverage, $articleTotal),
-                'hint' => 'Current-org article canonical URL alignment.',
+                'hint' => __('ops.custom_pages.seo_operations.fields.article_canonical_hint'),
             ],
             [
-                'label' => 'Article social coverage',
+                'label' => __('ops.custom_pages.seo_operations.fields.article_social'),
                 'value' => $this->ratioLabel($articleSocialCoverage, $articleTotal),
-                'hint' => 'Current-org Open Graph coverage for articles.',
+                'hint' => __('ops.custom_pages.seo_operations.fields.article_social_hint'),
             ],
             [
-                'label' => 'Guide canonical coverage',
+                'label' => __('ops.custom_pages.seo_operations.fields.guide_canonical'),
                 'value' => $this->ratioLabel($guideCanonicalCoverage, $guideTotal),
-                'hint' => 'Global career guide canonical URL alignment.',
+                'hint' => __('ops.custom_pages.seo_operations.fields.guide_canonical_hint'),
             ],
             [
-                'label' => 'Job canonical coverage',
+                'label' => __('ops.custom_pages.seo_operations.fields.job_canonical'),
                 'value' => $this->ratioLabel($jobCanonicalCoverage, $jobTotal),
-                'hint' => 'Global career job canonical URL alignment.',
+                'hint' => __('ops.custom_pages.seo_operations.fields.job_canonical_hint'),
             ],
             [
-                'label' => 'Robots gaps',
+                'label' => __('ops.custom_pages.seo_operations.fields.robots_gaps'),
                 'value' => (string) $robotsGaps,
                 'kind' => 'pill',
                 'state' => $robotsGaps > 0 ? 'warning' : 'success',
-                'hint' => 'Records where robots still drift from the current indexability contract.',
+                'hint' => __('ops.custom_pages.seo_operations.fields.robots_gaps_hint'),
             ],
         ];
 
         $this->growthFields = [
             [
-                'label' => 'Published discovery blockers',
+                'label' => __('ops.custom_pages.seo_operations.fields.published_blockers'),
                 'value' => (string) $publishedDiscoveryBlocked,
-                'hint' => 'Published and public records still blocked from SEO discovery.',
+                'hint' => __('ops.custom_pages.seo_operations.fields.published_blockers_hint'),
             ],
             [
-                'label' => 'Social preview blockers',
+                'label' => __('ops.custom_pages.seo_operations.fields.social_blockers'),
                 'value' => (string) $socialPreviewBlocked,
-                'hint' => 'Records missing Open Graph or Twitter preview support.',
+                'hint' => __('ops.custom_pages.seo_operations.fields.social_blockers_hint'),
             ],
             [
-                'label' => 'Noindex inventory',
+                'label' => __('ops.custom_pages.seo_operations.fields.noindex_inventory'),
                 'value' => (string) $noindexInventory,
-                'hint' => 'Visible records intentionally excluded from discovery today.',
+                'hint' => __('ops.custom_pages.seo_operations.fields.noindex_inventory_hint'),
             ],
             [
-                'label' => 'Growth-ready ratio',
+                'label' => __('ops.custom_pages.seo_operations.fields.growth_ratio'),
                 'value' => $this->ratioLabel($publicSeoReady, $articleTotal + $careerTotal),
-                'hint' => 'Visible content already ready for search and social discovery.',
+                'hint' => __('ops.custom_pages.seo_operations.fields.growth_ratio_hint'),
             ],
         ];
 
         $this->attentionCards = [
             $this->attentionCard(
-                'Article SEO gaps',
-                'Current-org articles that still need metadata, canonical, robots, or discoverability fixes.',
+                __('ops.custom_pages.seo_operations.fields.article_gaps'),
+                __('ops.custom_pages.seo_operations.fields.article_gaps_desc'),
                 $articleTotal - $articleSeoReady,
-                'Current org',
+                __('ops.custom_pages.editorial_operations.surfaces.current_org'),
                 $this->latestIssueTitle($service, 'article', $articles)
             ),
             $this->attentionCard(
-                'Career guide SEO gaps',
-                'Global guides that still need operational SEO fixes before they should be treated as growth inventory.',
+                __('ops.custom_pages.seo_operations.fields.guide_gaps'),
+                __('ops.custom_pages.seo_operations.fields.guide_gaps_desc'),
                 $guideTotal - $guideSeoReady,
-                'Global content',
+                __('ops.custom_pages.common.values.global_content'),
                 $this->latestIssueTitle($service, 'guide', $guides)
             ),
             $this->attentionCard(
-                'Career job SEO gaps',
-                'Global jobs that still need operational SEO fixes before they should be treated as growth inventory.',
+                __('ops.custom_pages.seo_operations.fields.job_gaps'),
+                __('ops.custom_pages.seo_operations.fields.job_gaps_desc'),
                 $jobTotal - $jobSeoReady,
-                'Global content',
+                __('ops.custom_pages.common.values.global_content'),
                 $this->latestIssueTitle($service, 'job', $jobs)
             ),
             [
-                'title' => 'Growth blockers',
-                'description' => 'Published records that are still blocked by noindex, canonical drift, robots drift, or missing metadata.',
-                'meta' => 'Visible content | '.$publishedDiscoveryBlocked.' records need discovery fixes',
+                'title' => __('ops.custom_pages.seo_operations.fields.growth_blockers'),
+                'description' => __('ops.custom_pages.seo_operations.fields.growth_blockers_desc'),
+                'meta' => __('ops.custom_pages.seo_operations.fields.growth_blockers_meta', ['count' => $publishedDiscoveryBlocked]),
                 'value' => (string) $publishedDiscoveryBlocked,
-                'status' => $publishedDiscoveryBlocked > 0 ? 'Needs attention' : 'Healthy',
+                'status' => $publishedDiscoveryBlocked > 0 ? __('ops.custom_pages.common.values.needs_attention') : __('ops.custom_pages.common.values.healthy'),
                 'status_state' => $publishedDiscoveryBlocked > 0 ? 'warning' : 'success',
                 'latest_title' => $this->latestGrowthBlockedTitle($service, $articles, $guides, $jobs),
             ],
@@ -395,8 +395,7 @@ class SeoOperationsPage extends Page
      */
     private function countPublishedDiscoveryBlocked(SeoOperationsService $service, string $type, Collection $records): int
     {
-        return $records->filter(fn (object $record): bool => $service->growthSignal($type, $record) === 'Blocked by noindex'
-            || $service->growthSignal($type, $record) === 'Published with discovery blockers')->count();
+        return $records->filter(fn (object $record): bool => $service->hasPublishedDiscoveryBlocker($type, $record))->count();
     }
 
     /**
@@ -421,18 +420,15 @@ class SeoOperationsPage extends Page
         Collection $jobs,
     ): string {
         $candidates = collect([
-            $articles->first(fn (Article $record): bool => str_contains($service->growthSignal('article', $record), 'Blocked')
-                || str_contains($service->growthSignal('article', $record), 'Published')),
-            $guides->first(fn (CareerGuide $record): bool => str_contains($service->growthSignal('guide', $record), 'Blocked')
-                || str_contains($service->growthSignal('guide', $record), 'Published')),
-            $jobs->first(fn (CareerJob $record): bool => str_contains($service->growthSignal('job', $record), 'Blocked')
-                || str_contains($service->growthSignal('job', $record), 'Published')),
+            $articles->first(fn (Article $record): bool => $service->hasPublishedDiscoveryBlocker('article', $record)),
+            $guides->first(fn (CareerGuide $record): bool => $service->hasPublishedDiscoveryBlocker('guide', $record)),
+            $jobs->first(fn (CareerJob $record): bool => $service->hasPublishedDiscoveryBlocker('job', $record)),
         ])->filter(fn ($record): bool => is_object($record));
 
         /** @var object|null $latest */
         $latest = $candidates->sortByDesc(static fn (object $record): string => (string) optional(data_get($record, 'updated_at'))->toISOString())->first();
 
-        return trim((string) data_get($latest, 'title', '')) !== '' ? trim((string) data_get($latest, 'title', '')) : 'No recent record';
+        return trim((string) data_get($latest, 'title', '')) !== '' ? trim((string) data_get($latest, 'title', '')) : __('ops.custom_pages.common.values.no_recent_record');
     }
 
     private function ratioLabel(int $value, int $total): string
@@ -459,11 +455,11 @@ class SeoOperationsPage extends Page
         return [
             'title' => $title,
             'description' => $description,
-            'meta' => $scope.' | '.$count.' records need SEO work',
+            'meta' => __('ops.custom_pages.seo_operations.fields.records_need_work', ['scope' => $scope, 'count' => $count]),
             'value' => (string) $count,
-            'status' => $count > 0 ? 'Needs attention' : 'Healthy',
+            'status' => $count > 0 ? __('ops.custom_pages.common.values.needs_attention') : __('ops.custom_pages.common.values.healthy'),
             'status_state' => $count > 0 ? 'warning' : 'success',
-            'latest_title' => trim((string) $latestTitle) !== '' ? trim((string) $latestTitle) : 'No recent record',
+            'latest_title' => trim((string) $latestTitle) !== '' ? trim((string) $latestTitle) : __('ops.custom_pages.common.values.no_recent_record'),
         ];
     }
 }

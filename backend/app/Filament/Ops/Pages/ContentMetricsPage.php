@@ -22,9 +22,9 @@ class ContentMetricsPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-chart-bar-square';
 
-    protected static ?string $navigationGroup = 'Content Overview';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Content Metrics';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 4;
 
@@ -51,7 +51,7 @@ class ContentMetricsPage extends Page
     public function archiveStale(string $type, ContentLifecycleService $service, AuditLogger $audit): void
     {
         if (! ContentAccess::canRelease()) {
-            throw new AuthorizationException('You do not have permission to archive stale content.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.archive_stale_forbidden'));
         }
 
         $result = $service->applyToStaleDrafts(
@@ -73,8 +73,8 @@ class ContentMetricsPage extends Page
         );
 
         Notification::make()
-            ->title('Stale drafts archived')
-            ->body((string) ($result['processed_count'] ?? 0).' record(s) archived from the stale queue.')
+            ->title(__('ops.custom_pages.content_metrics.notifications.stale_drafts_archived'))
+            ->body(__('ops.custom_pages.content_metrics.notifications.stale_drafts_archived_body', ['count' => (int) ($result['processed_count'] ?? 0)]))
             ->success()
             ->send();
 
@@ -227,100 +227,100 @@ class ContentMetricsPage extends Page
 
         $this->headlineFields = [
             [
-                'label' => 'Current org article inventory',
+                'label' => __('ops.custom_pages.content_metrics.fields.article_inventory'),
                 'value' => (string) $articleTotal,
-                'hint' => 'Article records attached to the selected Ops organization.',
+                'hint' => __('ops.custom_pages.content_metrics.fields.article_inventory_hint'),
             ],
             [
-                'label' => 'Current org public articles',
+                'label' => __('ops.custom_pages.content_metrics.fields.public_articles'),
                 'value' => (string) $articlePublishedPublic,
-                'hint' => 'Selected-org articles already published and public under the current API contract.',
+                'hint' => __('ops.custom_pages.content_metrics.fields.public_articles_hint'),
             ],
             [
-                'label' => 'Global career inventory',
+                'label' => __('ops.custom_pages.content_metrics.fields.career_inventory'),
                 'value' => (string) $globalCareerInventory,
-                'hint' => 'Career guides and jobs remain global authoring surfaces with org_id=0.',
+                'hint' => __('ops.custom_pages.content_metrics.fields.career_inventory_hint'),
             ],
             [
-                'label' => 'Draft queue pressure',
+                'label' => __('ops.custom_pages.content_metrics.fields.draft_pressure'),
                 'value' => (string) $draftQueuePressure,
-                'hint' => 'Draft editorial objects currently waiting for review or publish handoff.',
+                'hint' => __('ops.custom_pages.content_metrics.fields.draft_pressure_hint'),
             ],
             [
-                'label' => 'Published surface footprint',
+                'label' => __('ops.custom_pages.content_metrics.fields.published_footprint'),
                 'value' => (string) $publishedSurfaceFootprint,
-                'hint' => 'Public article, guide, and job records visible through the current delivery contract.',
+                'hint' => __('ops.custom_pages.content_metrics.fields.published_footprint_hint'),
             ],
         ];
 
         $this->scopeFields = [
             [
-                'label' => 'Current org taxonomy',
+                'label' => __('ops.custom_pages.content_metrics.fields.taxonomy'),
                 'value' => (string) ($categoryCount + $tagCount),
-                'hint' => 'Categories and tags available to the selected organization.',
+                'hint' => __('ops.custom_pages.content_metrics.fields.taxonomy_hint'),
             ],
             [
-                'label' => 'Lifecycle backlog',
+                'label' => __('ops.custom_pages.content_metrics.fields.lifecycle_backlog'),
                 'value' => (string) $lifecycleBacklog,
-                'hint' => 'Records already moved into down-ranked, archived, or soft-deleted states.',
+                'hint' => __('ops.custom_pages.content_metrics.fields.lifecycle_backlog_hint'),
             ],
             [
-                'label' => 'Article publish coverage',
+                'label' => __('ops.custom_pages.content_metrics.fields.article_coverage'),
                 'value' => $this->ratioLabel($articlePublishedPublic, $articleTotal),
-                'hint' => 'Public article coverage inside the selected org boundary.',
+                'hint' => __('ops.custom_pages.content_metrics.fields.article_coverage_hint'),
             ],
             [
-                'label' => 'Article SEO-ready',
+                'label' => __('ops.custom_pages.content_metrics.fields.article_seo_ready'),
                 'value' => $this->ratioLabel($articleIndexable, $articleTotal),
-                'hint' => 'Selected-org articles currently marked indexable.',
+                'hint' => __('ops.custom_pages.content_metrics.fields.article_seo_ready_hint'),
             ],
             [
-                'label' => 'Global career publish coverage',
+                'label' => __('ops.custom_pages.content_metrics.fields.career_coverage'),
                 'value' => $this->ratioLabel($guidePublishedPublic + $jobPublishedPublic, $globalCareerInventory),
-                'hint' => 'Public global career coverage across guides and jobs.',
+                'hint' => __('ops.custom_pages.content_metrics.fields.career_coverage_hint'),
             ],
             [
-                'label' => 'Visibility gaps',
+                'label' => __('ops.custom_pages.content_metrics.fields.visibility_gaps'),
                 'value' => (string) $visibilityGaps,
                 'kind' => 'pill',
                 'state' => $visibilityGaps > 0 ? 'warning' : 'success',
-                'hint' => 'Published records that are still not public and therefore not reachable on the public contract.',
+                'hint' => __('ops.custom_pages.content_metrics.fields.visibility_gaps_hint'),
             ],
         ];
 
         $this->freshnessCards = [
             $this->freshnessCard(
-                'Current org stale drafts',
-                'Org-scoped article drafts older than 14 days.',
+                __('ops.custom_pages.content_metrics.fields.article_stale'),
+                __('ops.custom_pages.content_metrics.fields.article_stale_desc'),
                 $articleStaleDrafts,
-                'Current org',
+                __('ops.custom_pages.editorial_operations.surfaces.current_org'),
                 (clone $articleStaleBaseQuery)->latest('updated_at')->value('title'),
                 'article'
             ),
             $this->freshnessCard(
-                'Global guide stale drafts',
-                'Global career guide drafts older than 14 days.',
+                __('ops.custom_pages.content_metrics.fields.guide_stale'),
+                __('ops.custom_pages.content_metrics.fields.guide_stale_desc'),
                 $guideStaleDrafts,
-                'Global content',
+                __('ops.custom_pages.common.values.global_content'),
                 (clone $guideStaleBaseQuery)->latest('updated_at')->value('title'),
                 'guide'
             ),
             $this->freshnessCard(
-                'Global job stale drafts',
-                'Global career job drafts older than 14 days.',
+                __('ops.custom_pages.content_metrics.fields.job_stale'),
+                __('ops.custom_pages.content_metrics.fields.job_stale_desc'),
                 $jobStaleDrafts,
-                'Global content',
+                __('ops.custom_pages.common.values.global_content'),
                 (clone $jobStaleBaseQuery)->latest('updated_at')->value('title'),
                 'job'
             ),
             [
-                'title' => 'Publish gap watch',
-                'description' => 'Keep an eye on published-but-not-public mismatches before they turn into confusing release support work.',
-                'meta' => 'Visibility gaps | '.$visibilityGaps.' records',
+                'title' => __('ops.custom_pages.content_metrics.fields.publish_gap_watch'),
+                'description' => __('ops.custom_pages.content_metrics.fields.publish_gap_watch_desc'),
+                'meta' => __('ops.custom_pages.content_metrics.fields.visibility_meta', ['count' => $visibilityGaps]),
                 'value' => (string) $visibilityGaps,
-                'status' => $visibilityGaps > 0 ? 'Needs cleanup' : 'Healthy',
+                'status' => $visibilityGaps > 0 ? __('ops.custom_pages.common.values.needs_attention') : __('ops.custom_pages.common.values.healthy'),
                 'status_state' => $visibilityGaps > 0 ? 'warning' : 'success',
-                'latest_title' => 'No stale queue action',
+                'latest_title' => __('ops.custom_pages.content_metrics.fields.no_stale_action'),
                 'action_type' => null,
                 'can_archive' => false,
             ],
@@ -362,11 +362,11 @@ class ContentMetricsPage extends Page
         return [
             'title' => $title,
             'description' => $description,
-            'meta' => $scope.' | '.$count.' stale drafts',
+            'meta' => __('ops.custom_pages.content_metrics.fields.stale_meta', ['scope' => $scope, 'count' => $count]),
             'value' => (string) $count,
-            'status' => $count > 0 ? 'Needs attention' : 'Healthy',
+            'status' => $count > 0 ? __('ops.custom_pages.common.values.needs_attention') : __('ops.custom_pages.common.values.healthy'),
             'status_state' => $count > 0 ? 'warning' : 'success',
-            'latest_title' => trim((string) $latestTitle) !== '' ? trim((string) $latestTitle) : 'No recent record',
+            'latest_title' => trim((string) $latestTitle) !== '' ? trim((string) $latestTitle) : __('ops.custom_pages.common.values.no_recent_record'),
             'action_type' => $actionType,
             'can_archive' => $count > 0 && ContentAccess::canRelease(),
         ];

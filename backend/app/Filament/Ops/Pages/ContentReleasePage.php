@@ -22,9 +22,9 @@ class ContentReleasePage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-rocket-launch';
 
-    protected static ?string $navigationGroup = 'Content Release';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Content Release';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 1;
 
@@ -78,18 +78,18 @@ class ContentReleasePage extends Page
     public function releaseItem(string $type, int $id): void
     {
         if (! ContentAccess::canRelease()) {
-            throw new AuthorizationException('You do not have permission to release content.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.release_content_forbidden'));
         }
 
         $record = match ($type) {
             'article' => Article::query()->whereIn('org_id', $this->currentOrgIds())->findOrFail($id),
             'guide' => CareerGuide::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
             'job' => CareerJob::query()->withoutGlobalScopes()->where('org_id', 0)->findOrFail($id),
-            default => throw new AuthorizationException('Unsupported content type.'),
+            default => throw new AuthorizationException(__('ops.custom_pages.common.errors.unsupported_content_type')),
         };
 
         if ($this->reviewState($type, $record) !== EditorialReviewAudit::STATE_APPROVED) {
-            throw new AuthorizationException('This record must be approved in editorial review before it can be published.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.must_be_approved_before_publish'));
         }
 
         match ($type) {
@@ -112,14 +112,14 @@ class ContentReleasePage extends Page
             ->get()
             ->map(fn (Article $record): array => $this->releaseRow(
                 type: 'article',
-                typeLabel: 'Article',
+                typeLabel: __('ops.custom_pages.common.filters.article'),
                 id: (int) $record->id,
                 title: $record->title,
                 status: (string) $record->status,
                 reviewState: $this->reviewState('article', $record),
                 locale: (string) $record->locale,
-                visibility: $record->is_public ? 'Public' : 'Private',
-                updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
+                visibility: $record->is_public ? __('ops.custom_pages.common.values.public') : __('ops.custom_pages.common.values.private'),
+                updatedAt: optional($record->updated_at)?->toDateTimeString() ?? __('ops.custom_pages.common.values.unknown'),
                 editUrl: ArticleResource::getUrl('edit', ['record' => $record]),
                 indexUrl: ArticleResource::getUrl(),
             ));
@@ -132,14 +132,14 @@ class ContentReleasePage extends Page
             ->get()
             ->map(fn (CareerGuide $record): array => $this->releaseRow(
                 type: 'guide',
-                typeLabel: 'Career Guide',
+                typeLabel: __('ops.custom_pages.common.filters.career_guide'),
                 id: (int) $record->id,
                 title: $record->title,
                 status: (string) $record->status,
                 reviewState: $this->reviewState('guide', $record),
                 locale: (string) $record->locale,
-                visibility: $record->is_public ? 'Public' : 'Private',
-                updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
+                visibility: $record->is_public ? __('ops.custom_pages.common.values.public') : __('ops.custom_pages.common.values.private'),
+                updatedAt: optional($record->updated_at)?->toDateTimeString() ?? __('ops.custom_pages.common.values.unknown'),
                 editUrl: CareerGuideResource::getUrl('edit', ['record' => $record]),
                 indexUrl: CareerGuideResource::getUrl(),
             ));
@@ -152,14 +152,14 @@ class ContentReleasePage extends Page
             ->get()
             ->map(fn (CareerJob $record): array => $this->releaseRow(
                 type: 'job',
-                typeLabel: 'Career Job',
+                typeLabel: __('ops.custom_pages.common.filters.career_job'),
                 id: (int) $record->id,
                 title: $record->title,
                 status: (string) $record->status,
                 reviewState: $this->reviewState('job', $record),
                 locale: (string) $record->locale,
-                visibility: $record->is_public ? 'Public' : 'Private',
-                updatedAt: optional($record->updated_at)?->toDateTimeString() ?? 'Unknown',
+                visibility: $record->is_public ? __('ops.custom_pages.common.values.public') : __('ops.custom_pages.common.values.private'),
+                updatedAt: optional($record->updated_at)?->toDateTimeString() ?? __('ops.custom_pages.common.values.unknown'),
                 editUrl: CareerJobResource::getUrl('edit', ['record' => $record]),
                 indexUrl: CareerJobResource::getUrl(),
             ));
@@ -184,43 +184,43 @@ class ContentReleasePage extends Page
 
         $this->releaseFields = [
             [
-                'label' => 'Draft queue',
+                'label' => __('ops.custom_pages.content_release.fields.draft_queue'),
                 'value' => (string) $draftCount,
-                'hint' => 'Draft content waiting inside the lightweight review-and-release surface.',
+                'hint' => __('ops.custom_pages.content_release.fields.draft_queue_hint'),
             ],
             [
-                'label' => 'Approved for publish',
+                'label' => __('ops.custom_pages.content_release.fields.approved'),
                 'value' => (string) $approvedCount,
-                'hint' => 'Draft records with a current approval decision and no newer edits after review.',
+                'hint' => __('ops.custom_pages.content_release.fields.approved_hint'),
             ],
             [
-                'label' => 'Published content',
+                'label' => __('ops.custom_pages.content_release.fields.published'),
                 'value' => (string) $publishedCount,
-                'hint' => 'Published records already cleared by a release-capable operator.',
+                'hint' => __('ops.custom_pages.content_release.fields.published_hint'),
             ],
             [
-                'label' => 'Current type filter',
+                'label' => __('ops.custom_pages.content_release.fields.type_filter'),
                 'value' => $this->typeLabel($this->typeFilter),
-                'hint' => 'Filter the release queue by content type without leaving the workspace.',
+                'hint' => __('ops.custom_pages.content_release.fields.type_filter_hint'),
             ],
             [
-                'label' => 'Current status filter',
+                'label' => __('ops.custom_pages.content_release.fields.status_filter'),
                 'value' => $this->typeLabel($this->statusFilter),
-                'hint' => 'Draft stays the default review state. Switch to all or published for audit checks.',
+                'hint' => __('ops.custom_pages.content_release.fields.status_filter_hint'),
             ],
             [
-                'label' => 'Release permission',
-                'value' => ContentAccess::canRelease() ? 'Enabled' : 'Missing',
+                'label' => __('ops.custom_pages.content_release.fields.permission'),
+                'value' => ContentAccess::canRelease() ? __('ops.custom_pages.common.values.enabled') : __('ops.custom_pages.common.values.missing'),
                 'kind' => 'pill',
                 'state' => ContentAccess::canRelease() ? 'success' : 'failed',
-                'hint' => 'Release permission is the approval boundary in this lightweight phase.',
+                'hint' => __('ops.custom_pages.content_release.fields.permission_hint'),
             ],
         ];
 
         $this->surfaceCards = [
-            $this->surfaceCard('Articles', $articles, ArticleResource::getUrl()),
-            $this->surfaceCard('Career Guides', $guides, CareerGuideResource::getUrl()),
-            $this->surfaceCard('Career Jobs', $jobs, CareerJobResource::getUrl()),
+            $this->surfaceCard(__('ops.custom_pages.common.filters.articles'), $articles, ArticleResource::getUrl()),
+            $this->surfaceCard(__('ops.custom_pages.common.filters.career_guides'), $guides, CareerGuideResource::getUrl()),
+            $this->surfaceCard(__('ops.custom_pages.common.filters.career_jobs'), $jobs, CareerJobResource::getUrl()),
         ];
     }
 
@@ -256,6 +256,7 @@ class ContentReleasePage extends Page
             'type_label' => $typeLabel,
             'title' => $title,
             'status' => $status,
+            'status_label' => $this->typeLabel($status),
             'review_state' => $reviewState,
             'locale' => $locale,
             'visibility' => $visibility,
@@ -275,8 +276,8 @@ class ContentReleasePage extends Page
     {
         return [
             'title' => $title,
-            'meta' => $records->count().' matching',
-            'description' => 'Open the corresponding resource list for full editing, audit, and release follow-up.',
+            'meta' => __('ops.custom_pages.content_release.matching', ['count' => $records->count()]),
+            'description' => __('ops.custom_pages.content_release.surface_desc'),
             'index_url' => $indexUrl,
         ];
     }
@@ -284,12 +285,12 @@ class ContentReleasePage extends Page
     private function typeLabel(string $value): string
     {
         return match ($value) {
-            'all' => 'All',
-            'article' => 'Article',
-            'guide' => 'Career Guide',
-            'job' => 'Career Job',
-            'draft' => 'Draft',
-            'published' => 'Published',
+            'all' => __('ops.custom_pages.common.filters.all'),
+            'article' => __('ops.custom_pages.common.filters.article'),
+            'guide' => __('ops.custom_pages.common.filters.career_guide'),
+            'job' => __('ops.custom_pages.common.filters.career_job'),
+            'draft' => __('ops.custom_pages.common.filters.draft'),
+            'published' => __('ops.custom_pages.common.filters.published'),
             default => ucfirst($value),
         };
     }

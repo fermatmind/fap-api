@@ -17,9 +17,9 @@ class ContentSearchPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-magnifying-glass';
 
-    protected static ?string $navigationGroup = 'Content Overview';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Content Search';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 3;
 
@@ -83,7 +83,7 @@ class ContentSearchPage extends Page
 
         if ($this->items === []) {
             Notification::make()
-                ->title('No content result found')
+                ->title(__('ops.custom_pages.content_search.notifications.no_result'))
                 ->warning()
                 ->send();
         }
@@ -92,13 +92,13 @@ class ContentSearchPage extends Page
     public function applyBulkAction(ContentLifecycleService $service, AuditLogger $audit): void
     {
         if (! ContentAccess::canRelease()) {
-            throw new AuthorizationException('You do not have permission to manage content lifecycle actions.');
+            throw new AuthorizationException(__('ops.custom_pages.common.errors.lifecycle_action_forbidden'));
         }
 
         $targets = array_values(array_filter($this->selectedTargets, static fn (mixed $value): bool => is_string($value) && trim($value) !== ''));
         if ($targets === []) {
             Notification::make()
-                ->title('Select at least one editorial record')
+                ->title(__('ops.custom_pages.content_search.notifications.select_record'))
                 ->warning()
                 ->send();
 
@@ -120,8 +120,8 @@ class ContentSearchPage extends Page
         );
 
         Notification::make()
-            ->title('Lifecycle action applied')
-            ->body((string) ($result['processed_count'] ?? 0).' record(s) updated.')
+            ->title(__('ops.custom_pages.content_search.notifications.lifecycle_applied'))
+            ->body(__('ops.custom_pages.content_search.notifications.lifecycle_applied_body', ['count' => (int) ($result['processed_count'] ?? 0)]))
             ->success()
             ->send();
 
