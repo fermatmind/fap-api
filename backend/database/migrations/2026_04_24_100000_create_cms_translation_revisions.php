@@ -2,9 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Models\ContentPage;
-use App\Models\InterpretationGuide;
-use App\Models\SupportArticle;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -116,18 +113,8 @@ return new class extends Migration
 
     public function down(): void
     {
-        foreach (['support_articles', 'interpretation_guides', 'content_pages'] as $tableName) {
-            Schema::table($tableName, function (Blueprint $table) use ($tableName): void {
-                if (Schema::hasColumn($tableName, 'working_revision_id')) {
-                    $table->dropColumn('working_revision_id');
-                }
-                if (Schema::hasColumn($tableName, 'published_revision_id')) {
-                    $table->dropColumn('published_revision_id');
-                }
-            });
-        }
-
-        Schema::dropIfExists('cms_translation_revisions');
+        // Production safety: keep this migration irreversible instead of dropping
+        // CMS translation revision history or revision pointers on rollback.
     }
 
     private function addRevisionPointers(string $tableName): void

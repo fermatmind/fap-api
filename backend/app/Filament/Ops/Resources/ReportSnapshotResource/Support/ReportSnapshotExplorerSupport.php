@@ -140,6 +140,19 @@ final class ReportSnapshotExplorerSupport
     }
 
     /**
+     * Production index pages must stay cheap: detail-only linkage data is fetched
+     * lazily from buildDetail() after an operator opens a single snapshot.
+     *
+     * @return Builder<ReportSnapshot>
+     */
+    public function indexQuery(): Builder
+    {
+        return ReportSnapshot::query()
+            ->withoutGlobalScopes()
+            ->select('report_snapshots.*');
+    }
+
+    /**
      * @param  Builder<ReportSnapshot>  $query
      */
     public function applySearch(Builder $query, string $search): void
@@ -218,6 +231,7 @@ final class ReportSnapshotExplorerSupport
             ->where($column, '!=', '')
             ->distinct()
             ->orderBy($column)
+            ->limit(100)
             ->pluck($column, $column)
             ->mapWithKeys(fn ($value): array => [(string) $value => (string) $value])
             ->all();
@@ -237,6 +251,7 @@ final class ReportSnapshotExplorerSupport
             ->where($column, '!=', '')
             ->distinct()
             ->orderBy($column)
+            ->limit(100)
             ->pluck($column, $column)
             ->mapWithKeys(fn ($value): array => [(string) $value => (string) $value])
             ->all();

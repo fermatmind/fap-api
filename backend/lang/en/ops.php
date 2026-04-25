@@ -551,6 +551,34 @@ return [
             'translation_source_article_id_mismatch' => 'translation source_article_id mismatch',
             'translation_source_locale_mismatch' => 'translation source_locale mismatch',
         ],
+        'blockers' => [
+            'target_article_is_source' => 'target article is source',
+            'target_article_org_mismatch' => 'target article org mismatch',
+            'target_locale_missing' => 'target locale missing',
+            'working_revision_missing' => 'working revision missing',
+            'working_revision_is_stale' => 'working revision is stale',
+            'working_revision_is_archived' => 'working revision is archived',
+            'source_canonical_invalid' => 'source canonical invalid',
+            'source_article_id_mismatch' => 'source_article_id mismatch',
+            'source_locale_mismatch' => 'source_locale mismatch',
+            'translation_group_mismatch' => 'translation_group mismatch',
+            'references_citations_presence_check_failed' => 'references/citations presence check failed',
+            'seo_meta_org_mismatch' => 'seo_meta org mismatch',
+            'working_revision_org_mismatch' => 'working revision org mismatch',
+            'working_revision_article_mismatch' => 'working revision article mismatch',
+            'working_revision_locale_mismatch' => 'working revision locale mismatch',
+            'working_revision_group_mismatch' => 'working revision group mismatch',
+            'target_row_is_source' => 'target row is source',
+            'target_row_org_mismatch' => 'target row org mismatch',
+            'working_revision_missing_payload' => 'working revision missing payload',
+            'source_linkage_invalid' => 'source linkage invalid',
+            'source_content_id_mismatch' => 'source_content_id mismatch',
+            'target_translation_is_stale' => 'target translation is stale',
+            'title_missing' => 'title missing',
+            'body_missing' => 'body missing',
+            'seo_title_missing' => 'seo title missing',
+            'seo_description_missing' => 'seo description missing',
+        ],
         'compare' => [
             'shadow_revision_workflow' => 'shadow revision workflow',
             'working_revision_present' => 'working revision present',
@@ -601,6 +629,7 @@ return [
             'preflight_blocked' => 'Preflight blocked: :blockers',
             'only_stale_resync' => 'Only stale target translations need re-sync.',
             'no_available_create_action' => 'No create draft action is available for this locale under the current provider and permission state.',
+            'machine_translation_provider_unconfigured' => 'Machine translation provider is not configured.',
             'action_unavailable' => 'Action unavailable.',
         ],
         'notifications' => [
@@ -1354,6 +1383,95 @@ return [
                 'content_write_hint' => 'Controls create and edit actions across articles, career guides, jobs, categories, and tags.',
                 'content_release' => 'Content release',
                 'content_release_hint' => 'Required for content release queue access and release execution actions.',
+            ],
+        ],
+        'go_live_gate' => [
+            'title' => 'Go-Live Gate',
+            'heading' => 'Go-Live Gate',
+            'breadcrumb' => 'Go-Live Gate',
+            'eyebrow' => 'Governance checkpoint',
+            'description' => 'Review the current go-live signals before releasing content or escalating operational changes.',
+            'status_label' => 'Gate status',
+            'generated_at' => 'Generated: :time',
+            'group_hint' => 'Each check shares the same status language as the rest of Ops.',
+            'actions' => [
+                'refresh' => 'Refresh',
+                'run_checks' => 'Run Checks',
+            ],
+            'groups' => [
+                'commerce_payments' => 'Commerce / Payments',
+                'sre_devops' => 'SRE / DevOps',
+                'compliance_comm' => 'Compliance / Comm',
+                'growth_observability' => 'Growth / Observability',
+            ],
+            'checks' => [
+                'region_cn_provider_available' => [
+                    'label' => 'CN payment route available',
+                    'message' => 'At least one enabled payment provider must be routable for CN_MAINLAND.',
+                ],
+                'region_us_provider_available' => [
+                    'label' => 'US payment route available',
+                    'message' => 'At least one enabled payment provider must be routable for US.',
+                ],
+                'region_eu_provider_available' => [
+                    'label' => 'EU payment route available',
+                    'message' => 'At least one enabled payment provider must be routable for EU.',
+                ],
+                'provider_configured' => [
+                    'message' => ':provider provider configuration needs attention before go-live.',
+                ],
+                'payment_refund_drill' => [
+                    'label' => 'Refund drill',
+                    'message' => 'Set OPS_GATE_PAYMENT_REFUND_DRILL_OK=true after drill.',
+                ],
+                'app_debug_false' => [
+                    'label' => 'APP_DEBUG disabled',
+                    'message' => 'APP_DEBUG must be false in production.',
+                ],
+                'queue_worker' => [
+                    'label' => 'Queue worker configured',
+                    'message' => 'Queue driver cannot be sync for go-live.',
+                ],
+                'backup_restore_drill' => [
+                    'label' => 'Backup restore drill',
+                    'message' => 'Set OPS_GATE_DB_RESTORE_DRILL_OK=true after drill.',
+                ],
+                'log_rotation' => [
+                    'label' => 'Log rotation',
+                    'message' => 'Set OPS_GATE_LOG_ROTATION_OK=true after verification.',
+                ],
+                'smtp_ready' => [
+                    'label' => 'SMTP ready',
+                    'message' => 'MAIL_HOST must be configured.',
+                ],
+                'spf_dkim_dmarc' => [
+                    'label' => 'SPF / DKIM / DMARC',
+                    'message' => 'Set OPS_GATE_SPF_DKIM_DMARC_OK=true after DNS verification.',
+                ],
+                'legal_pages' => [
+                    'label' => 'Legal pages reviewed',
+                    'message' => 'Set OPS_GATE_LEGAL_PAGES_OK=true after legal review.',
+                ],
+                'compliance_skeleton' => [
+                    'label' => 'Compliance tables',
+                    'message' => 'audit_logs and data_lifecycle_requests are required.',
+                ],
+                'sentry_backend' => [
+                    'label' => 'Backend Sentry',
+                    'message' => 'Backend Sentry DSN required.',
+                ],
+                'sentry_frontend' => [
+                    'label' => 'Frontend Sentry',
+                    'message' => 'Frontend Sentry DSN required.',
+                ],
+                'conversion_tracking' => [
+                    'label' => 'Conversion tracking',
+                    'message' => 'Set OPS_GATE_CONVERSION_TRACKING_OK=true after validation.',
+                ],
+                'gsc_sitemap_robots' => [
+                    'label' => 'GSC / sitemap / robots',
+                    'message' => 'Set OPS_GATE_GSC_SITEMAP_OK=true after GSC submission.',
+                ],
             ],
         ],
         'reports' => [

@@ -16,7 +16,9 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\SupportArticle;
 use App\Services\Cms\CmsTranslationWorkflowException;
+use App\Services\Cms\DisabledCmsMachineTranslationProvider;
 use App\Services\Cms\SiblingTranslationWorkflowService;
+use App\Services\Ops\CmsTranslationOpsService;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
@@ -125,6 +127,43 @@ final class CmsTranslationBackboneTest extends TestCase
         $this->expectExceptionMessage('Translation publish preflight failed.');
 
         $workflow->publishTranslation('support_article', $target->fresh());
+    }
+
+    public function test_unified_translation_ops_localizes_blockers_and_provider_reasons(): void
+    {
+        app()->setLocale('zh_CN');
+        config()->set('services.cms_translation.providers.support_article', DisabledCmsMachineTranslationProvider::class);
+
+        $source = $this->createSourceSupportArticle('localized-blockers');
+        $target = $this->createTargetTranslation('support_article', $source, 'en');
+        $target->forceFill([
+            'body_md' => '',
+            'body_html' => '',
+            'seo_description' => '',
+            'translation_status' => SupportArticle::TRANSLATION_STATUS_APPROVED,
+        ])->save();
+
+        $missingSource = $this->createSourceSupportArticle('localized-provider-reason');
+
+        $dashboard = app(CmsTranslationOpsService::class)->dashboard(['content_type' => 'support_article']);
+        $blockedGroup = collect($dashboard['groups'])->firstWhere('translation_group_id', $source->translation_group_id);
+        $this->assertIsArray($blockedGroup);
+        $targetLocale = collect($blockedGroup['locales'])->firstWhere('locale', 'en');
+        $this->assertIsArray($targetLocale);
+
+        $this->assertContains('缺少正文', $targetLocale['preflight']['blockers']);
+        $this->assertContains('缺少 SEO 描述', $targetLocale['preflight']['blockers']);
+
+        $missingGroup = collect($dashboard['groups'])->firstWhere('translation_group_id', $missingSource->translation_group_id);
+        $this->assertIsArray($missingGroup);
+        $disabledReasons = collect($missingGroup['group_actions'])->pluck('reason')->filter()->values()->all();
+
+        $this->assertTrue(
+            collect($disabledReasons)->contains(fn (string $reason): bool => str_contains($reason, '尚未配置机器翻译 provider')),
+            'Expected at least one disabled reason to be localized for the missing provider.',
+        );
+        $this->assertNotContains('body missing', $targetLocale['preflight']['blockers']);
+        $this->assertNotContains('seo description missing', $targetLocale['preflight']['blockers']);
     }
 
     private function createPublishedArticleGroup(string $slug): void

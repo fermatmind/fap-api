@@ -14,16 +14,17 @@ use Illuminate\Support\Str;
 
 final class ArticleWorkspace
 {
-    public static function publicUrl(?string $slug): ?string
+    public static function publicUrl(?string $slug, ?string $locale = null): ?string
     {
-        $baseUrl = rtrim((string) config('services.seo.articles_url_prefix', ''), '/');
+        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
         $resolvedSlug = trim((string) $slug);
+        $segment = self::frontendLocaleSegment((string) ($locale ?: 'en'));
 
         if ($baseUrl === '' || $resolvedSlug === '') {
             return null;
         }
 
-        return $baseUrl.'/'.rawurlencode($resolvedSlug);
+        return $baseUrl.'/'.$segment.'/articles/'.rawurlencode($resolvedSlug);
     }
 
     public static function renderEditorialCues(Get $get, ?Article $record = null): Htmlable
@@ -31,7 +32,10 @@ final class ArticleWorkspace
         $status = trim((string) ($get('status') ?? $record?->status ?? 'draft'));
         $isPublic = StatusBadge::isTruthy($get('is_public') ?? $record?->is_public ?? false);
         $isIndexable = StatusBadge::isTruthy($get('is_indexable') ?? $record?->is_indexable ?? true);
-        $publicUrl = self::publicUrl((string) ($get('slug') ?? $record?->slug ?? ''));
+        $publicUrl = self::publicUrl(
+            (string) ($get('slug') ?? $record?->slug ?? ''),
+            (string) ($get('locale') ?? $record?->locale ?? '')
+        );
 
         return new HtmlString((string) view('filament.ops.articles.partials.editorial-cues', [
             'facts' => array_values(array_filter([
@@ -151,5 +155,10 @@ final class ArticleWorkspace
         }
 
         return StatusBadge::label($normalized);
+    }
+
+    private static function frontendLocaleSegment(string $locale): string
+    {
+        return str_starts_with(strtolower(trim($locale)), 'zh') ? 'zh' : 'en';
     }
 }

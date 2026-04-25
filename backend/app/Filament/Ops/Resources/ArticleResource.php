@@ -352,7 +352,10 @@ class ArticleResource extends Resource
                             ->schema([
                                 Forms\Components\Placeholder::make('public_url_preview')
                                     ->label(__('ops.resources.articles.fields.public_url'))
-                                    ->content(fn (Forms\Get $get, ?Article $record): string => ArticleWorkspace::publicUrl((string) ($get('slug') ?? $record?->slug ?? '')) ?? __('ops.resources.articles.placeholders.public_url_after_slug')),
+                                    ->content(fn (Forms\Get $get, ?Article $record): string => ArticleWorkspace::publicUrl(
+                                        (string) ($get('slug') ?? $record?->slug ?? ''),
+                                        (string) ($get('locale') ?? $record?->locale ?? '')
+                                    ) ?? __('ops.resources.articles.placeholders.public_url_after_slug')),
                                 Forms\Components\Placeholder::make('created_at_summary')
                                     ->label(__('ops.resources.articles.fields.created'))
                                     ->content(fn (?Article $record): string => ArticleWorkspace::formatTimestamp($record?->created_at, __('ops.resources.articles.placeholders.draft_not_saved'))),

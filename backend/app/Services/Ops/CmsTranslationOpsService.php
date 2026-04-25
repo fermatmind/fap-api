@@ -10,6 +10,7 @@ use App\Services\Cms\ArticleTranslationWorkflowService;
 use App\Services\Cms\SiblingTranslationWorkflowService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Lang;
 
 final class CmsTranslationOpsService
 {
@@ -113,7 +114,7 @@ final class CmsTranslationOpsService
                     'ownership_ok' => (bool) $locale['ownership_ok'],
                     'ownership_issues' => $locale['ownership_issues'],
                     'edit_url' => $locale['edit_url'],
-                    'preflight' => $locale['preflight'],
+                    'preflight' => $this->localizedPreflight((array) $locale['preflight']),
                     'compare_summary' => $locale['compare_summary'],
                     'workflow_kind' => 'revision',
                     'actions' => $this->articleLocaleActions($locale),
@@ -212,6 +213,7 @@ final class CmsTranslationOpsService
         $isSource = $adapter->isSource($record);
         $isStale = ! $isSource && $this->siblingWorkflow->isStale($adapter, $record);
         $preflight = $isSource ? ['ok' => true, 'blockers' => []] : $this->siblingWorkflow->preflight($contentType, $record);
+        $preflight = $this->localizedPreflight($preflight);
         $ownershipIssues = [];
 
         if ((int) $record->org_id !== 0) {
@@ -494,7 +496,7 @@ final class CmsTranslationOpsService
                 'workflow_label' => (string) ($localeRow['workflow_kind_label'] ?? $localeRow['workflow_kind'] ?? ''),
                 'blockers' => array_values(array_filter(array_merge(
                     (array) ($localeRow['ownership_issues'] ?? []),
-                    (array) data_get($localeRow, 'preflight.blockers', []),
+                    $this->localizedBlockers((array) data_get($localeRow, 'preflight.blockers', [])),
                 ))),
                 'actions' => $this->groupActionsByPriority((array) ($localeRow['actions'] ?? [])),
             ];
@@ -604,19 +606,19 @@ final class CmsTranslationOpsService
 
         foreach ($actions as $action) {
             if (! (bool) ($action['enabled'] ?? false)) {
-                $grouped['disabled'][] = $action;
+                $grouped['disabled'][] = $this->localizedAction($action);
 
                 continue;
             }
 
             $wireAction = (string) ($action['wire_action'] ?? '');
             if (in_array($wireAction, ['createTranslationDraft', 'resyncFromSource', 'publishCurrentRevision'], true)) {
-                $grouped['primary'][] = $action;
+                $grouped['primary'][] = $this->localizedAction($action);
 
                 continue;
             }
 
-            $grouped['secondary'][] = $action;
+            $grouped['secondary'][] = $this->localizedAction($action);
         }
 
         return $grouped;
@@ -734,7 +736,7 @@ final class CmsTranslationOpsService
             $actions[] = [
                 'label' => $action['label'],
                 'enabled' => (bool) ($action['enabled'] ?? false),
-                'reason' => $action['reason'] ?? null,
+                'reason' => $this->localizedReason($action['reason'] ?? null),
                 'url' => $action['url'] ?? null,
                 'wire_action' => $action['wire_action'] ?? null,
                 'content_type' => 'article',
@@ -755,7 +757,7 @@ final class CmsTranslationOpsService
         return array_map(fn (array $action): array => [
             'label' => $action['label'],
             'enabled' => (bool) ($action['enabled'] ?? false),
-            'reason' => $action['reason'] ?? null,
+            'reason' => $this->localizedReason($action['reason'] ?? null),
             'url' => $action['url'] ?? null,
             'wire_action' => $action['wire_action'] ?? null,
             'content_type' => 'article',
@@ -778,7 +780,7 @@ final class CmsTranslationOpsService
             $actions[] = [
                 'label' => __('ops.translation_ops.actions.create_locale_translation_draft', ['locale' => $targetLocale]),
                 'enabled' => $enabled,
-                'reason' => $enabled ? null : $this->siblingWorkflow->machineDraftUnavailableReason($contentType),
+                'reason' => $enabled ? null : $this->localizedReason($this->siblingWorkflow->machineDraftUnavailableReason($contentType)),
                 'url' => null,
                 'wire_action' => 'createTranslationDraft',
                 'content_type' => $contentType,
@@ -882,5 +884,99 @@ final class CmsTranslationOpsService
         ];
 
         return $actions;
+    }
+
+    /**
+     * @param  array<string, mixed>  $preflight
+     * @return array<string, mixed>
+     */
+    private function localizedPreflight(array $preflight): array
+    {
+        $preflight['blockers'] = $this->localizedBlockers((array) ($preflight['blockers'] ?? []));
+
+        return $preflight;
+    }
+
+    /**
+     * @param  list<string>  $blockers
+     * @return list<string>
+     */
+    private function localizedBlockers(array $blockers): array
+    {
+        return array_values(array_map(fn (string $blocker): string => $this->localizedBlocker($blocker), $blockers));
+    }
+
+    private function localizedBlocker(string $blocker): string
+    {
+        $key = str_replace(['/', ' '], ['_', '_'], strtolower(trim($blocker)));
+        $translationKey = "ops.translation_ops.blockers.{$key}";
+
+        return Lang::has($translationKey) ? (string) __($translationKey) : $blocker;
+    }
+
+    /**
+     * @param  array<string, mixed>  $action
+     * @return array<string, mixed>
+     */
+    private function localizedAction(array $action): array
+    {
+        $action['reason'] = $this->localizedReason($action['reason'] ?? null);
+
+        return $action;
+    }
+
+    private function localizedReason(mixed $reason): ?string
+    {
+        $raw = trim((string) $reason);
+        if ($raw === '') {
+            return null;
+        }
+
+        if (str_contains($raw, 'Machine translation provider is not configured')) {
+            return __('ops.translation_ops.reasons.machine_translation_provider_unconfigured');
+        }
+
+        foreach ($this->rawBlockerPhrases() as $phrase) {
+            if (str_contains($raw, $phrase)) {
+                $raw = str_replace($phrase, $this->localizedBlocker($phrase), $raw);
+            }
+        }
+
+        return $raw;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function rawBlockerPhrases(): array
+    {
+        return [
+            'target article is source',
+            'target article org mismatch',
+            'target locale missing',
+            'working revision missing',
+            'working revision is stale',
+            'working revision is archived',
+            'source canonical invalid',
+            'source_article_id mismatch',
+            'source_locale mismatch',
+            'translation_group mismatch',
+            'references/citations presence check failed',
+            'seo_meta org mismatch',
+            'working revision org mismatch',
+            'working revision article mismatch',
+            'working revision locale mismatch',
+            'working revision group mismatch',
+            'target row is source',
+            'target row org mismatch',
+            'working revision missing payload',
+            'source linkage invalid',
+            'source_content_id mismatch',
+            'target translation is stale',
+            'title missing',
+            'body missing',
+            'seo title missing',
+            'seo description missing',
+        ];
     }
 }
