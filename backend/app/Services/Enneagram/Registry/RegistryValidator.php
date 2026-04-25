@@ -6,6 +6,36 @@ namespace App\Services\Enneagram\Registry;
 
 final class RegistryValidator
 {
+    private const REQUIRED_TYPE_DEEP_DIVE_FIELDS = [
+        'core_desire',
+        'core_fear',
+        'defense_pattern',
+        'misread_by_others',
+        'self_misread',
+        'work_mechanism',
+        'relationship_script',
+        'conflict_pattern',
+        'stress_signal',
+        'recovery_action',
+        'growth_principle',
+        'thirty_day_experiment',
+    ];
+
+    private const UNSUPPORTED_TYPE_CLAIM_SNIPPETS = [
+        '临床诊断',
+        '临床判断',
+        '招聘筛选',
+        '筛选候选人',
+        '准确率',
+        '效度验证',
+        '外部效度',
+        'health level',
+        '健康层级判定',
+        '子类型判定',
+        '翼型判定',
+        '箭头判定',
+    ];
+
     /**
      * @var array<string,string>
      */
@@ -288,6 +318,28 @@ final class RegistryValidator
             ] as $field) {
                 if (trim((string) ($entry[$field] ?? '')) === '') {
                     $errors[] = "Type registry {$typeId} missing {$field}";
+                }
+            }
+            $deepDive = is_array($entry['deep_dive'] ?? null) ? $entry['deep_dive'] : null;
+            if ($deepDive === null) {
+                $errors[] = "Type registry {$typeId} missing deep_dive";
+
+                continue;
+            }
+            foreach (self::REQUIRED_TYPE_DEEP_DIVE_FIELDS as $field) {
+                if (trim((string) ($deepDive[$field] ?? '')) === '') {
+                    $errors[] = "Type registry {$typeId} missing deep_dive.{$field}";
+                }
+            }
+            if (($entry['content_maturity'] ?? null) !== 'p0_ready') {
+                $errors[] = "Type registry {$typeId} content_maturity must remain p0_ready";
+            }
+            foreach (self::REQUIRED_TYPE_DEEP_DIVE_FIELDS as $field) {
+                $value = (string) ($deepDive[$field] ?? '');
+                foreach (self::UNSUPPORTED_TYPE_CLAIM_SNIPPETS as $snippet) {
+                    if (str_contains($value, $snippet)) {
+                        $errors[] = "Type registry {$typeId} deep_dive.{$field} contains unsupported claim snippet: {$snippet}";
+                    }
                 }
             }
         }

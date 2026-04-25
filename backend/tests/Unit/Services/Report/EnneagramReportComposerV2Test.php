@@ -81,6 +81,7 @@ final class EnneagramReportComposerV2Test extends TestCase
             [
                 'instant_summary',
                 'top3_cards',
+                'type_deep_dive_summary',
                 'all9_profile',
                 'confidence_band_card',
                 'dominance_gap_card',
@@ -196,6 +197,46 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertSame('p0_ready', data_get($module, 'provenance.content_maturity'));
         $this->assertSame('descriptive', data_get($module, 'provenance.evidence_level'));
         $this->assertSame('required', data_get($module, 'fallback_policy'));
+    }
+
+    public function test_type_deep_dive_fields_are_available_across_pages(): void
+    {
+        $payload = $this->composeReportV2(
+            $this->syntheticProjectionInput('enneagram_likert_105', [
+                'T8' => 91.0,
+                'T3' => 69.0,
+                'T1' => 61.0,
+                'T6' => 42.0,
+                'T2' => 28.0,
+                'T5' => 23.0,
+                'T4' => 19.0,
+                'T7' => 17.0,
+                'T9' => 13.0,
+            ])
+        );
+
+        $summary = $this->module($payload, 'type_deep_dive_summary');
+        $this->assertSame('8', data_get($summary, 'content.primary_candidate'));
+        $this->assertNotSame('', (string) data_get($summary, 'content.core_desire'));
+        $this->assertNotSame('', (string) data_get($summary, 'content.core_fear'));
+        $this->assertNotSame('', (string) data_get($summary, 'content.defense_pattern'));
+
+        $work = $this->module($payload, 'work_style_summary');
+        $this->assertNotSame('', (string) data_get($work, 'content.type_summary'));
+
+        $stress = $this->module($payload, 'stress_trigger');
+        $this->assertNotSame('', (string) data_get($stress, 'content.value'));
+
+        $recovery = $this->module($payload, 'recovery_action');
+        $this->assertNotSame('', (string) data_get($recovery, 'content.type_recovery_action'));
+        $this->assertNotSame('', (string) data_get($recovery, 'content.growth_principle'));
+        $this->assertNotSame('', (string) data_get($recovery, 'content.thirty_day_experiment'));
+
+        $relationship = $this->module($payload, 'relationship_need');
+        $this->assertNotSame('', (string) data_get($relationship, 'content.type_summary'));
+
+        $conflict = $this->module($payload, 'conflict_script');
+        $this->assertNotSame('', (string) data_get($conflict, 'content.type_summary'));
     }
 
     public function test_sample_report_module_exposes_preview_fields_from_registry(): void

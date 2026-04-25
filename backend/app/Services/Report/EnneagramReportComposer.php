@@ -27,6 +27,7 @@ final class EnneagramReportComposer
             'modules' => [
                 'instant_summary',
                 'top3_cards',
+                'type_deep_dive_summary',
                 'all9_profile',
                 'confidence_band_card',
                 'dominance_gap_card',
@@ -426,24 +427,28 @@ final class EnneagramReportComposer
             'methodology_boundary_card' => $this->buildMethodologyBoundaryModule($projectionV2, $indexes, 'methodology_boundary_card'),
             'diffuse_boundary' => $this->buildDiffuseBoundaryModule($projectionV2, $indexes),
             'low_quality_boundary' => $this->buildLowQualityBoundaryModule($projectionV2, $indexes),
-            'work_style_summary' => $this->buildScenarioModule($projectionV2, $indexes, 'work_style_summary', 'scenario_card', ['content.summary_ref' => 'work_summary']),
+            'work_style_summary' => $this->buildScenarioModule($projectionV2, $indexes, 'work_style_summary', 'scenario_card', ['content.summary_ref' => 'deep_dive.work_mechanism']),
+            'type_deep_dive_summary' => $this->buildTypeDeepDiveSummaryModule($projectionV2, $indexes),
             'collaboration_strengths' => $this->buildScenarioModule($projectionV2, $indexes, 'collaboration_strengths', 'scenario_card', ['content.summary_ref' => 'work_summary']),
             'collaboration_friction' => $this->buildScenarioModule($projectionV2, $indexes, 'collaboration_friction', 'scenario_card', ['content.summary_ref' => 'internal_tension']),
-            'leadership_pattern' => $this->buildScenarioModule($projectionV2, $indexes, 'leadership_pattern', 'scenario_card', ['content.summary_ref' => 'work_summary']),
+            'leadership_pattern' => $this->buildScenarioModule($projectionV2, $indexes, 'leadership_pattern', 'scenario_card', ['content.summary_ref' => 'deep_dive.work_mechanism']),
             'managed_by_others' => $this->buildScenarioModule($projectionV2, $indexes, 'managed_by_others', 'scenario_card', ['content.summary_ref' => 'relationship_summary']),
             'workplace_trigger_points' => $this->buildPlaceholderModule($projectionV2, $indexes, 'workplace_trigger_points', 'placeholder_card', 'registry_entry_not_shipped_for_workplace'),
             'context_mode_placeholder' => $this->buildPlaceholderModule($projectionV2, $indexes, 'context_mode_placeholder', 'placeholder_card', 'workplace_context_mode_not_enabled'),
-            'growth_axis' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'growth_axis', 'summary_card', 'growth_summary'),
+            'growth_axis' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'growth_axis', 'summary_card', 'growth_summary', [
+                'detail_label' => 'growth_principle',
+                'deep_dive_detail' => 'deep_dive.growth_principle',
+            ]),
             'strength_expression' => $this->buildGroupOverlayModule($projectionV2, $indexes, 'strength_expression', 'strength_expression'),
             'cost_expression' => $this->buildGroupOverlayModule($projectionV2, $indexes, 'cost_expression', 'cost_expression'),
-            'stress_trigger' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'stress_trigger', 'summary_card', 'internal_tension'),
+            'stress_trigger' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'stress_trigger', 'summary_card', 'deep_dive.stress_signal'),
             'recovery_action' => $this->buildStateModule($projectionV2, $indexes, 'recovery_action'),
             'state_spectrum' => $this->buildStateModule($projectionV2, $indexes, 'state_spectrum'),
             'arrow_growth_reference_placeholder' => $this->buildTheoryModule($projectionV2, $indexes, 'arrow_growth_reference_placeholder', 'placeholder_card'),
-            'relationship_need' => $this->buildScenarioModule($projectionV2, $indexes, 'relationship_need', 'scenario_card', ['content.summary_ref' => 'relationship_summary']),
+            'relationship_need' => $this->buildScenarioModule($projectionV2, $indexes, 'relationship_need', 'scenario_card', ['content.summary_ref' => 'deep_dive.relationship_script']),
             'relationship_strengths' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'relationship_strengths', 'summary_card', 'relationship_summary'),
-            'misread_by_others' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'misread_by_others', 'summary_card', 'surface_impression'),
-            'conflict_script' => $this->buildScenarioModule($projectionV2, $indexes, 'conflict_script', 'scenario_card', ['content.summary_ref' => 'internal_tension']),
+            'misread_by_others' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'misread_by_others', 'summary_card', 'deep_dive.misread_by_others'),
+            'conflict_script' => $this->buildScenarioModule($projectionV2, $indexes, 'conflict_script', 'scenario_card', ['content.summary_ref' => 'deep_dive.conflict_pattern']),
             'communication_manual' => $this->buildScenarioModule($projectionV2, $indexes, 'communication_manual', 'scenario_card', ['content.summary_ref' => 'surface_impression']),
             'blind_spot_in_relationship' => $this->buildBlindSpotModule($projectionV2, $indexes, 'blind_spot_in_relationship'),
             'method_boundary' => $this->buildMethodologyBoundaryModule($projectionV2, $indexes, 'method_boundary'),
@@ -547,6 +552,39 @@ final class EnneagramReportComposer
             $registryRefs,
             [],
             $this->registryMeta($indexes, 'enneagram_type_registry')
+        );
+    }
+
+    /**
+     * @param  array<string,mixed>  $projectionV2
+     * @param  array<string,mixed>  $indexes
+     * @return array<string,mixed>
+     */
+    private function buildTypeDeepDiveSummaryModule(array $projectionV2, array $indexes): array
+    {
+        $primaryType = (string) data_get($projectionV2, 'scores.primary_candidate', '');
+        $typeEntry = $this->typeEntry($indexes, $primaryType);
+
+        return $this->module(
+            'type_deep_dive_summary',
+            'type_deep_dive_summary',
+            'visible',
+            'all',
+            [
+                'primary_candidate' => $primaryType !== '' ? $primaryType : null,
+                'type_name_cn' => $typeEntry['type_name_cn'] ?? null,
+                'type_name_en' => $typeEntry['type_name_en'] ?? null,
+                'short_title' => $typeEntry['short_title'] ?? null,
+                'core_desire' => data_get($typeEntry, 'deep_dive.core_desire'),
+                'core_fear' => data_get($typeEntry, 'deep_dive.core_fear'),
+                'defense_pattern' => data_get($typeEntry, 'deep_dive.defense_pattern'),
+                'self_misread' => data_get($typeEntry, 'deep_dive.self_misread'),
+                'validation_hook' => $typeEntry['validation_hook'] ?? null,
+            ],
+            ['scores.primary_candidate'],
+            $primaryType !== '' ? ['enneagram_type_registry:'.$primaryType] : [],
+            [],
+            $this->entryMeta($typeEntry, $this->registryMeta($indexes, 'enneagram_type_registry'))
         );
     }
 
@@ -891,8 +929,13 @@ final class EnneagramReportComposer
         $primaryType = (string) data_get($projectionV2, 'scores.primary_candidate', '');
         $typeEntry = $this->typeEntry($indexes, $primaryType);
         $summaryRef = (string) ($extraContent['content.summary_ref'] ?? '');
+        $detailLabel = (string) ($extraContent['content.detail_label'] ?? '');
+        $detailRef = (string) ($extraContent['content.detail_ref'] ?? '');
         unset($extraContent['content.summary_ref']);
-        $typeSummary = $summaryRef !== '' ? ($typeEntry[$summaryRef] ?? null) : null;
+        unset($extraContent['content.detail_label']);
+        unset($extraContent['content.detail_ref']);
+        $typeSummary = $summaryRef !== '' ? data_get($typeEntry, $summaryRef) : null;
+        $deepDiveDetail = $detailRef !== '' ? data_get($typeEntry, $detailRef) : null;
 
         return $this->module(
             $scenarioKey,
@@ -904,6 +947,8 @@ final class EnneagramReportComposer
                 'body' => $entry['body'] ?? null,
                 'primary_candidate' => $primaryType !== '' ? $primaryType : null,
                 'type_summary' => $typeSummary,
+                'detail_label' => $detailLabel !== '' ? $detailLabel : null,
+                'deep_dive_detail' => $deepDiveDetail,
             ], $extraContent),
             ['scores.primary_candidate'],
             array_merge(
@@ -920,10 +965,12 @@ final class EnneagramReportComposer
      * @param  array<string,mixed>  $indexes
      * @return array<string,mixed>
      */
-    private function buildTypeDrivenModule(array $projectionV2, array $indexes, string $moduleKey, string $kind, string $typeField): array
+    private function buildTypeDrivenModule(array $projectionV2, array $indexes, string $moduleKey, string $kind, string $typeField, array $extraContent = []): array
     {
         $primaryType = (string) data_get($projectionV2, 'scores.primary_candidate', '');
         $typeEntry = $this->typeEntry($indexes, $primaryType);
+        $detailLabel = (string) ($extraContent['detail_label'] ?? '');
+        $detailRef = (string) ($extraContent['deep_dive_detail'] ?? '');
 
         return $this->module(
             $moduleKey,
@@ -932,9 +979,11 @@ final class EnneagramReportComposer
             'all',
             [
                 'primary_candidate' => $primaryType !== '' ? $primaryType : null,
-                'value' => $typeEntry[$typeField] ?? null,
+                'value' => data_get($typeEntry, $typeField),
                 'type_name_cn' => $typeEntry['type_name_cn'] ?? null,
                 'type_name_en' => $typeEntry['type_name_en'] ?? null,
+                'detail_label' => $detailLabel !== '' ? $detailLabel : null,
+                'deep_dive_detail' => $detailRef !== '' ? data_get($typeEntry, $detailRef) : null,
             ],
             ['scores.primary_candidate'],
             $primaryType !== '' ? ['enneagram_type_registry:'.$primaryType] : [],
@@ -990,9 +1039,14 @@ final class EnneagramReportComposer
     private function buildStateModule(array $projectionV2, array $indexes, string $moduleKey): array
     {
         $stateEntry = is_array($indexes['state_entry'] ?? null) ? $indexes['state_entry'] : [];
+        $primaryType = (string) data_get($projectionV2, 'scores.primary_candidate', '');
+        $typeEntry = $this->typeEntry($indexes, $primaryType);
         $content = match ($moduleKey) {
             'recovery_action' => [
                 'recovery_action' => $stateEntry['recovery_action'] ?? null,
+                'type_recovery_action' => data_get($typeEntry, 'deep_dive.recovery_action'),
+                'growth_principle' => data_get($typeEntry, 'deep_dive.growth_principle'),
+                'thirty_day_experiment' => data_get($typeEntry, 'deep_dive.thirty_day_experiment'),
                 'disclaimer' => $stateEntry['disclaimer'] ?? null,
             ],
             default => [
@@ -1000,6 +1054,9 @@ final class EnneagramReportComposer
                 'average_expression' => $stateEntry['average_expression'] ?? null,
                 'strained_expression' => $stateEntry['strained_expression'] ?? null,
                 'recovery_action' => $stateEntry['recovery_action'] ?? null,
+                'stress_signal' => data_get($typeEntry, 'deep_dive.stress_signal'),
+                'growth_principle' => data_get($typeEntry, 'deep_dive.growth_principle'),
+                'thirty_day_experiment' => data_get($typeEntry, 'deep_dive.thirty_day_experiment'),
                 'disclaimer' => $stateEntry['disclaimer'] ?? null,
             ],
         };
@@ -1010,10 +1067,13 @@ final class EnneagramReportComposer
             'visible',
             'all',
             $content,
+            ['scores.primary_candidate'],
+            array_values(array_filter([
+                'enneagram_state_registry:base_state_scaffold',
+                $primaryType !== '' ? 'enneagram_type_registry:'.$primaryType : null,
+            ])),
             [],
-            ['enneagram_state_registry:base_state_scaffold'],
-            [],
-            $this->entryMeta($stateEntry, $this->registryMeta($indexes, 'enneagram_state_registry'))
+            $this->mergeEntryMeta([$stateEntry, $typeEntry], $this->registryMeta($indexes, 'enneagram_state_registry'))
         );
     }
 
