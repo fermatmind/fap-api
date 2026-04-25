@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Controllers\API\V0_5\Cms;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
 use App\Models\LandingSurface;
 use App\Models\PageBlock;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -195,9 +197,131 @@ final class LandingSurfaceController extends Controller
             'published_at' => $surface->published_at?->toIso8601String(),
             'scheduled_at' => $surface->scheduled_at?->toIso8601String(),
             'page_blocks' => $surface->blocks
-                ->map(fn (PageBlock $block): array => $this->blockPayload($block))
+                ->map(fn (PageBlock $block): array => $this->blockPayload(
+                    $block,
+                    $surface->locale,
+                    (int) $surface->org_id
+                ))
                 ->values()
                 ->all(),
+        ];
+    }
+
+    /**
+     * @return array<string, array{published_revision_id: int, published_revision: array{id: int}}>
+     */
+    private function recommendedArticlePayloadMap(PageBlock $block, string $locale, int $orgId): array
+    {
+        if ((string) $block->block_key !== 'recommended_articles') {
+            return [];
+        }
+
+        $payload = is_array($block->payload_json) ? $block->payload_json : [];
+        $items = $payload['items'] ?? null;
+        if (! is_array($items) || $items === []) {
+            return [];
+        }
+
+        $slugs = collect($items)
+            ->map(fn (mixed $item): ?string => is_array($item) ? $this->recommendedArticleSlug($item) : null)
+            ->filter(fn (?string $slug): bool => is_string($slug) && $slug !== '')
+            ->unique()
+            ->values()
+            ->all();
+
+        if ($slugs === []) {
+            return [];
+        }
+
+        /** @var Collection<int, Article> $articles */
+        $articles = Article::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', $orgId)
+            ->where('locale', $locale)
+            ->whereIn('slug', $slugs)
+            ->publiclyReadable()
+            ->get(['slug', 'published_revision_id']);
+
+        return $articles
+            ->filter(fn (Article $article): bool => $article->published_revision_id !== null)
+            ->mapWithKeys(fn (Article $article): array => [
+                (string) $article->slug => [
+                    'published_revision_id' => (int) $article->published_revision_id,
+                    'published_revision' => [
+                        'id' => (int) $article->published_revision_id,
+                    ],
+                ],
+            ])
+            ->all();
+    }
+
+    private function recommendedArticleSlug(array $item): ?string
+    {
+        $article = $item['article'] ?? null;
+        if (is_array($article)) {
+            $slug = trim((string) ($article['slug'] ?? ''));
+
+            return $slug !== '' ? $slug : null;
+        }
+
+        $slug = trim((string) ($item['slug'] ?? ''));
+
+        return $slug !== '' ? $slug : null;
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @param  array<string, array{published_revision_id: int, published_revision: array{id: int}}>  $articleMap
+     * @return array<string, mixed>
+     */
+    private function enrichRecommendedArticlesPayload(array $payload, array $articleMap): array
+    {
+        $items = $payload['items'] ?? null;
+        if (! is_array($items) || $items === [] || $articleMap === []) {
+            return $payload;
+        }
+
+        $payload['items'] = array_map(function (mixed $item) use ($articleMap): mixed {
+            if (! is_array($item)) {
+                return $item;
+            }
+
+            $slug = $this->recommendedArticleSlug($item);
+            if ($slug === null || ! array_key_exists($slug, $articleMap)) {
+                return $item;
+            }
+
+            $articlePatch = $articleMap[$slug];
+            $article = is_array($item['article'] ?? null) ? $item['article'] : [];
+            $item['article'] = array_merge($article, $articlePatch);
+
+            return $item;
+        }, $items);
+
+        return $payload;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function blockPayload(PageBlock $block, ?string $surfaceLocale = null, ?int $surfaceOrgId = null): array
+    {
+        $payload = is_array($block->payload_json) ? $block->payload_json : [];
+
+        if ($surfaceLocale !== null && $surfaceOrgId !== null) {
+            $payload = $this->enrichRecommendedArticlesPayload(
+                $payload,
+                $this->recommendedArticlePayloadMap($block, $surfaceLocale, $surfaceOrgId)
+            );
+        }
+
+        return [
+            'block_key' => (string) $block->block_key,
+            'block_type' => (string) $block->block_type,
+            'title' => $block->title,
+            'payload_json' => $payload,
+            'sort_order' => (int) $block->sort_order,
+            'is_enabled' => (bool) $block->is_enabled,
         ];
     }
 
@@ -223,18 +347,6 @@ final class LandingSurfaceController extends Controller
     /**
      * @return array<string,mixed>
      */
-    private function blockPayload(PageBlock $block): array
-    {
-        return [
-            'block_key' => (string) $block->block_key,
-            'block_type' => (string) $block->block_type,
-            'title' => $block->title,
-            'payload_json' => is_array($block->payload_json) ? $block->payload_json : [],
-            'sort_order' => (int) $block->sort_order,
-            'is_enabled' => (bool) $block->is_enabled,
-        ];
-    }
-
     private function normalizeLocale(string $locale): string
     {
         $normalized = strtolower(str_replace('_', '-', trim($locale)));
