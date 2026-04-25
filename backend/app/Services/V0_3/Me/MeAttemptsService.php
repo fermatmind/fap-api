@@ -9,6 +9,7 @@ use App\Models\Result;
 use App\Models\UnifiedAccessProjection;
 use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
 use App\Services\Enneagram\EnneagramCompareGuardService;
+use App\Services\Enneagram\EnneagramObservationStateService;
 use App\Services\Enneagram\EnneagramPublicFormSummaryBuilder;
 use App\Services\Mbti\MbtiPublicFormSummaryBuilder;
 use App\Services\Report\InviteUnlockSummaryBuilder;
@@ -19,6 +20,7 @@ use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
 use App\Support\ApiPagination;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class MeAttemptsService
 {
@@ -70,6 +72,7 @@ class MeAttemptsService
         private readonly BigFivePublicFormSummaryBuilder $bigFivePublicFormSummaryBuilder,
         private readonly EnneagramPublicFormSummaryBuilder $enneagramPublicFormSummaryBuilder,
         private readonly EnneagramCompareGuardService $enneagramCompareGuardService,
+        private readonly EnneagramObservationStateService $enneagramObservationStateService,
         private readonly RiasecPublicFormSummaryBuilder $riasecPublicFormSummaryBuilder,
         private readonly InviteUnlockSummaryBuilder $inviteUnlockSummaryBuilder,
     ) {}
@@ -131,6 +134,7 @@ class MeAttemptsService
 
         $projectionByAttemptId = [];
         $inviteByAttemptId = [];
+        $observationSummaryByAttemptId = [];
         $needsAccessSummary = false;
         foreach ($attemptModels as $attempt) {
             if ($attempt instanceof Attempt && $this->shouldIncludeAccessSummary($attempt)) {
@@ -174,6 +178,29 @@ class MeAttemptsService
             }
         }
 
+        if ($attemptIds !== [] && Schema::hasTable('enneagram_observation_states')) {
+            $observationRows = DB::table('enneagram_observation_states')
+                ->where('org_id', $orgId)
+                ->whereIn('attempt_id', $attemptIds)
+                ->get();
+
+            foreach ($observationRows as $row) {
+                $attemptId = (string) ($row->attempt_id ?? '');
+                if ($attemptId === '') {
+                    continue;
+                }
+
+                $observationSummaryByAttemptId[$attemptId] = [
+                    'version' => EnneagramObservationStateService::VERSION,
+                    'status' => trim((string) ($row->status ?? 'initial_result')),
+                    'observation_completion_rate' => (int) ($row->observation_completion_rate ?? 0),
+                    'user_confirmed_type' => $this->nullableText($row->user_confirmed_type ?? null),
+                    'suggested_next_action' => $this->nullableText($row->suggested_next_action ?? null),
+                    'day7_submitted' => ! empty($row->day7_submitted_at),
+                ];
+            }
+        }
+
         $items = [];
         foreach ($attemptModels as $attempt) {
             $attemptId = (string) ($attempt->id ?? '');
@@ -182,7 +209,8 @@ class MeAttemptsService
                 $attempt,
                 $result,
                 $projectionByAttemptId[$attemptId] ?? null,
-                $inviteByAttemptId[$attemptId] ?? null
+                $inviteByAttemptId[$attemptId] ?? null,
+                $observationSummaryByAttemptId[$attemptId] ?? null
             );
             if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI') {
                 $presented['mbti_form_v1'] = $this->mbtiPublicFormSummaryBuilder->summarizeForAttempt($attempt, $result, $locale);
@@ -221,7 +249,8 @@ class MeAttemptsService
         Attempt $attempt,
         ?Result $result = null,
         ?UnifiedAccessProjection $projection = null,
-        ?array $inviteSnapshot = null
+        ?array $inviteSnapshot = null,
+        ?array $observationSummary = null
     ): array {
         $attemptId = (string) ($attempt->id ?? '');
         $domainsMean = $this->extractDomainsMean($result?->result_json);
@@ -266,7 +295,7 @@ class MeAttemptsService
             );
             $output['access_summary'] = $accessSummary;
             $output = array_merge($output, $this->buildBigFiveRowSummary($attempt, $result, $accessSummary));
-            $output = array_merge($output, $this->buildEnneagramRowSummary($attempt, $result, $accessSummary));
+            $output = array_merge($output, $this->buildEnneagramRowSummaryWithObservation($attempt, $result, $accessSummary, $observationSummary));
         }
 
         return $output;
@@ -468,6 +497,10 @@ class MeAttemptsService
         ];
 
         $payload['current_compare_policy_v1'] = $this->buildEnneagramComparePolicySummary($latest, $resultByAttemptId[$latestId] ?? null);
+        $payload['current_observation_state_v1'] = $this->enneagramObservationStateService->summarizeForHistory(
+            $latest,
+            $resultByAttemptId[$latestId] ?? null
+        );
 
         $previous = $attemptModels[1] ?? null;
         if ($previous instanceof Attempt) {
@@ -478,6 +511,10 @@ class MeAttemptsService
                 $payload['previous_primary_type'] = (string) ($previousScore['primary_type'] ?? '');
                 $payload['primary_type_changed'] = $payload['previous_primary_type'] !== $payload['current_primary_type'];
                 $payload['previous_compare_policy_v1'] = $this->buildEnneagramComparePolicySummary($previous, $resultByAttemptId[$previousId] ?? null);
+                $payload['previous_observation_state_v1'] = $this->enneagramObservationStateService->summarizeForHistory(
+                    $previous,
+                    $resultByAttemptId[$previousId] ?? null
+                );
                 $payload['compare_guard_v1'] = $this->enneagramCompareGuardService->evaluate(
                     $latest,
                     $resultByAttemptId[$latestId] ?? null,
@@ -548,6 +585,20 @@ class MeAttemptsService
      */
     private function buildEnneagramRowSummary(Attempt $attempt, ?Result $result, ?array $accessSummary): array
     {
+        return $this->buildEnneagramRowSummaryWithObservation($attempt, $result, $accessSummary, null);
+    }
+
+    /**
+     * @param  array<string,mixed>|null  $accessSummary
+     * @param  array<string,mixed>|null  $observationSummary
+     * @return array<string,mixed>
+     */
+    private function buildEnneagramRowSummaryWithObservation(
+        Attempt $attempt,
+        ?Result $result,
+        ?array $accessSummary,
+        ?array $observationSummary
+    ): array {
         if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) !== ReportAccess::SCALE_ENNEAGRAM) {
             return [];
         }
@@ -558,6 +609,7 @@ class MeAttemptsService
         $closeCallPair = is_array(data_get($projectionV2, 'dynamics.close_call_pair'))
             ? data_get($projectionV2, 'dynamics.close_call_pair')
             : null;
+        $resolvedObservationSummary = $observationSummary ?? $this->enneagramObservationStateService->summarizeForHistory($attempt, $result);
 
         return [
             'enneagram_summary_v1' => [
@@ -580,6 +632,12 @@ class MeAttemptsService
                     ?? $this->nullableText(data_get($snapshotBinding, 'content_release_hash')),
             ],
             'quality_summary' => $this->buildQualitySummary($scoreResult),
+            'observation_state_v1' => $resolvedObservationSummary,
+            'observation_status' => $this->nullableText($resolvedObservationSummary['status'] ?? null) ?? 'initial_result',
+            'observation_completion_rate' => (int) ($resolvedObservationSummary['observation_completion_rate'] ?? 0),
+            'user_confirmed_type' => $this->nullableText($resolvedObservationSummary['user_confirmed_type'] ?? null),
+            'suggested_next_action' => $this->nullableText($resolvedObservationSummary['suggested_next_action'] ?? null),
+            'day7_submitted' => (bool) ($resolvedObservationSummary['day7_submitted'] ?? false),
             'share_summary' => [
                 'enabled' => $result instanceof Result && strtolower(trim((string) ($accessSummary['report_state'] ?? ''))) === 'ready',
                 'share_kind' => 'enneagram_result',

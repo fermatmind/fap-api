@@ -19,6 +19,7 @@ use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
 use App\Services\BigFive\BigFivePublicProjectionService;
 use App\Services\BigFive\ReportEngine\Bridge\BigFiveLiveRuntimeBridge;
 use App\Services\Commerce\MbtiAccessHubBuilder;
+use App\Services\Enneagram\EnneagramObservationStateService;
 use App\Services\Enneagram\EnneagramPublicFormSummaryBuilder;
 use App\Services\Enneagram\EnneagramPublicProjectionService;
 use App\Services\Mbti\MbtiActionJourneyContractService;
@@ -65,6 +66,7 @@ class AttemptReadController extends Controller
         private BigFivePublicFormSummaryBuilder $bigFivePublicFormSummaryBuilder,
         private EnneagramPublicProjectionService $enneagramPublicProjectionService,
         private EnneagramPublicFormSummaryBuilder $enneagramPublicFormSummaryBuilder,
+        private EnneagramObservationStateService $enneagramObservationStateService,
         private RiasecPublicProjectionService $riasecPublicProjectionService,
         private RiasecPublicFormSummaryBuilder $riasecPublicFormSummaryBuilder,
         private MbtiPrivacyConsentContractService $mbtiPrivacyConsentContractService,
@@ -1969,6 +1971,32 @@ class AttemptReadController extends Controller
         return $this->isPublicResultScale($scaleCode);
     }
 
+    /**
+     * @return array{0:Attempt,1:Result}
+     */
+    private function resolveEnneagramObservationSubject(Request $request, string $attemptId): array
+    {
+        $orgId = $this->currentOrgContext()->orgId();
+        $result = Result::query()
+            ->where('org_id', $orgId)
+            ->where('attempt_id', $attemptId)
+            ->first();
+
+        if (! $result instanceof Result) {
+            throw new ApiProblemException(404, 'RESULT_NOT_FOUND', 'result not found.');
+        }
+
+        $responseCodes = $this->resolveResponseScaleCodes($result);
+        $scaleCode = $this->resolveNormalizedScaleCode($responseCodes);
+        if ($scaleCode !== 'ENNEAGRAM') {
+            throw new ApiProblemException(422, 'SCALE_NOT_SUPPORTED', 'observation is only available for ENNEAGRAM attempts.');
+        }
+
+        $attempt = $this->resolveAttemptForReportRead($request, $attemptId, $scaleCode);
+
+        return [$attempt, $result];
+    }
+
     private function resolveNormalizedScaleCode(array $responseCodes): string
     {
         $legacy = strtoupper(trim((string) ($responseCodes['scale_code_legacy'] ?? '')));
@@ -2302,6 +2330,71 @@ class AttemptReadController extends Controller
             'X-Cross-Form-Comparable' => is_bool($pdfMetadata['cross_form_comparable'] ?? null)
                 ? (($pdfMetadata['cross_form_comparable'] ?? false) ? 'true' : 'false')
                 : '',
+        ]);
+    }
+
+    /**
+     * GET /api/v0.3/attempts/{id}/enneagram/observation
+     */
+    public function enneagramObservation(Request $request, string $id): JsonResponse
+    {
+        [$attempt, $result] = $this->resolveEnneagramObservationSubject($request, $id);
+
+        return response()->json([
+            'ok' => true,
+            ...$this->enneagramObservationStateService->view($attempt, $result),
+        ]);
+    }
+
+    /**
+     * POST /api/v0.3/attempts/{id}/enneagram/observation/assign
+     */
+    public function assignEnneagramObservation(Request $request, string $id): JsonResponse
+    {
+        [$attempt, $result] = $this->resolveEnneagramObservationSubject($request, $id);
+
+        return response()->json([
+            'ok' => true,
+            ...$this->enneagramObservationStateService->assign($attempt, $result),
+        ]);
+    }
+
+    /**
+     * POST /api/v0.3/attempts/{id}/enneagram/observation/day3
+     */
+    public function submitEnneagramObservationDay3(Request $request, string $id): JsonResponse
+    {
+        [$attempt, $result] = $this->resolveEnneagramObservationSubject($request, $id);
+        $payload = $request->validate([
+            'more_like' => ['required', 'string', 'in:top1,top2,unclear,other'],
+            'evidence_sentence' => ['required', 'string', 'max:280'],
+            'confidence_self_rating' => ['required', 'integer', 'between:1,5'],
+            'scene_type' => ['required', 'string', 'in:work,relationship,pressure,alone,other'],
+        ]);
+
+        return response()->json([
+            'ok' => true,
+            ...$this->enneagramObservationStateService->submitDay3($attempt, $result, $payload),
+        ]);
+    }
+
+    /**
+     * POST /api/v0.3/attempts/{id}/enneagram/observation/day7
+     */
+    public function submitEnneagramObservationDay7(Request $request, string $id): JsonResponse
+    {
+        [$attempt, $result] = $this->resolveEnneagramObservationSubject($request, $id);
+        $payload = $request->validate([
+            'final_resonance' => ['required', 'string', 'in:top1,top2,top3,other,still_uncertain'],
+            'user_confirmed_type' => ['nullable', 'string', 'regex:/^(?:[1-9]|T[1-9])$/i'],
+            'wants_fc144' => ['sometimes', 'boolean'],
+            'wants_retake_same_form' => ['sometimes', 'boolean'],
+            'user_disagreed_reason' => ['nullable', 'string', 'max:255'],
+        ]);
+
+        return response()->json([
+            'ok' => true,
+            ...$this->enneagramObservationStateService->submitDay7($attempt, $result, $payload),
         ]);
     }
 
