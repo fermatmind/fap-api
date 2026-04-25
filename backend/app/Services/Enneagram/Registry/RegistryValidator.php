@@ -57,6 +57,10 @@ final class RegistryValidator
         'same_model_not_same_score_space',
         'cross_form_compare_blocked',
         'non_diagnostic_boundary',
+        'user_confirmed_type_boundary',
+        'low_quality_boundary',
+        'diffuse_boundary',
+        'close_call_boundary',
     ];
 
     private const REQUIRED_UI_COPY_KEYS = [
@@ -70,7 +74,13 @@ final class RegistryValidator
         'diffuse_boundary.title',
         'low_quality_boundary.title',
         'technical_note.link_label',
+        'observation.assign_cta',
+        'observation.day3_title',
+        'observation.day7_title',
+        'observation.self_confirmation_boundary',
     ];
+
+    private const VALID_TECHNICAL_NOTE_DATA_STATUS = ['planned', 'collecting', 'provisional', 'available', 'deprecated'];
 
     private const REQUIRED_TECHNICAL_NOTE_KEYS = [
         'test_goal',
@@ -254,7 +264,28 @@ final class RegistryValidator
             }
             $typeId = (string) ($entry['type_id'] ?? '');
             $typeIds[] = $typeId;
-            foreach (['type_name_cn', 'type_name_en', 'core_logic', 'surface_impression', 'internal_tension', 'validation_hook', 'work_summary', 'growth_summary', 'relationship_summary', 'blind_spot_link', 'seven_day_question', 'content_maturity', 'fallback_policy'] as $field) {
+            foreach ([
+                'type_name_cn',
+                'type_name_en',
+                'short_title',
+                'core_logic',
+                'surface_impression',
+                'internal_tension',
+                'validation_hook',
+                'hero_summary',
+                'work_summary',
+                'growth_summary',
+                'relationship_summary',
+                'healthy_expression',
+                'average_expression',
+                'strained_expression',
+                'blind_spot_copy',
+                'blind_spot_link',
+                'seven_day_question',
+                'content_maturity',
+                'evidence_level',
+                'fallback_policy',
+            ] as $field) {
                 if (trim((string) ($entry[$field] ?? '')) === '') {
                     $errors[] = "Type registry {$typeId} missing {$field}";
                 }
@@ -277,6 +308,7 @@ final class RegistryValidator
         $entries = is_array($payload['entries'] ?? null) ? $payload['entries'] : [];
         $keys = [];
         $errors = [];
+        $fallbackTemplate = is_array($payload['fallback_template'] ?? null) ? $payload['fallback_template'] : [];
         foreach ($entries as $entry) {
             if (! is_array($entry)) {
                 $errors[] = 'Pair registry contains invalid entry';
@@ -285,7 +317,22 @@ final class RegistryValidator
             }
             $pairKey = (string) ($entry['pair_key'] ?? '');
             $keys[] = $pairKey;
-            foreach (['type_a', 'type_b', 'shared_surface_similarity', 'core_motivation_difference', 'fear_difference', 'stress_reaction_difference', 'relationship_difference', 'work_difference', 'seven_day_observation_question', 'resonance_feedback_prompt', 'fallback_policy', 'content_maturity'] as $field) {
+            foreach ([
+                'type_a',
+                'type_b',
+                'shared_surface_similarity',
+                'core_motivation_difference',
+                'fear_difference',
+                'stress_reaction_difference',
+                'relationship_difference',
+                'work_difference',
+                'seven_day_observation_question',
+                'resonance_feedback_prompt',
+                'short_compare_copy',
+                'fallback_policy',
+                'content_maturity',
+                'evidence_level',
+            ] as $field) {
                 if (! array_key_exists($field, $entry)) {
                     $errors[] = "Pair registry {$pairKey} missing {$field}";
                 }
@@ -299,6 +346,11 @@ final class RegistryValidator
         sort($expected);
         if ($keys !== $expected) {
             $errors[] = 'Pair registry must include all required P0 pair keys';
+        }
+        foreach (['same_surface', 'motivation_difference', 'pressure_difference', 'relationship_difference', 'work_difference', 'observation_question'] as $field) {
+            if (trim((string) ($fallbackTemplate[$field] ?? '')) === '') {
+                $errors[] = "Pair registry fallback_template missing {$field}";
+            }
         }
 
         return $errors;
@@ -322,7 +374,7 @@ final class RegistryValidator
             $groupType = (string) ($entry['group_type'] ?? '');
             $groupKey = (string) ($entry['group_key'] ?? '');
             $keys[] = $groupType.':'.$groupKey;
-            foreach (['description', 'strength_expression', 'cost_expression', 'observation_question'] as $field) {
+            foreach (['description', 'strength_expression', 'cost_expression', 'stress_signal', 'observation_question', 'content_maturity'] as $field) {
                 if (trim((string) ($entry[$field] ?? '')) === '') {
                     $errors[] = "Group registry {$groupType}:{$groupKey} missing {$field}";
                 }
@@ -392,11 +444,12 @@ final class RegistryValidator
         foreach ($entries as $entry) {
             if (! is_array($entry)) {
                 $errors[] = 'Scenario registry contains invalid entry';
+
                 continue;
             }
             $scenarioKey = (string) ($entry['scenario_key'] ?? '');
             $keys[] = $scenarioKey;
-            foreach (['module_key', 'title', 'body'] as $field) {
+            foreach (['module_key', 'title', 'body', 'module_purpose', 'content_maturity', 'fallback_policy'] as $field) {
                 if (trim((string) ($entry[$field] ?? '')) === '') {
                     $errors[] = "Scenario registry {$scenarioKey} missing {$field}";
                 }
@@ -421,15 +474,16 @@ final class RegistryValidator
         $errors = [];
 
         if (count($entries) !== 1) {
-            $errors[] = 'State registry must include one scaffold entry for P0';
+            $errors[] = 'State registry must include one state spectrum entry for P0';
         }
 
         foreach ($entries as $entry) {
             if (! is_array($entry)) {
                 $errors[] = 'State registry contains invalid entry';
+
                 continue;
             }
-            foreach (['stable_expression', 'average_expression', 'strained_expression', 'recovery_action', 'disclaimer'] as $field) {
+            foreach (['state_key', 'stable_expression', 'average_expression', 'strained_expression', 'recovery_action', 'disclaimer', 'content_maturity'] as $field) {
                 if (trim((string) ($entry[$field] ?? '')) === '') {
                     $errors[] = "State registry missing {$field}";
                 }
@@ -451,11 +505,12 @@ final class RegistryValidator
         foreach ($entries as $entry) {
             if (! is_array($entry)) {
                 $errors[] = 'Observation registry contains invalid entry';
+
                 continue;
             }
             $day = (int) ($entry['day'] ?? 0);
             $days[] = $day;
-            foreach (['phase', 'prompt', 'analytics_event_key', 'suggested_next_action'] as $field) {
+            foreach (['phase', 'title', 'prompt', 'example', 'analytics_event_key', 'suggested_next_action', 'boundary_copy', 'content_maturity'] as $field) {
                 if (trim((string) ($entry[$field] ?? '')) === '') {
                     $errors[] = "Observation registry day {$day} missing {$field}";
                 }
@@ -489,6 +544,11 @@ final class RegistryValidator
             $theoryKey = (string) ($entry['theory_key'] ?? '');
             if (($entry['hard_judgement_allowed'] ?? null) !== false) {
                 $errors[] = "Theory hint {$theoryKey} must mark hard_judgement_allowed=false";
+            }
+            foreach (['visibility_scope', 'boundary_copy', 'user_facing_boundary', 'content_maturity', 'evidence_level'] as $field) {
+                if (trim((string) ($entry[$field] ?? '')) === '') {
+                    $errors[] = "Theory hint {$theoryKey} missing {$field}";
+                }
             }
         }
 
@@ -530,12 +590,34 @@ final class RegistryValidator
         foreach ($entries as $entryKey => $entry) {
             if (! is_array($entry)) {
                 $errors[] = "Sample report registry {$entryKey} must be object";
+
                 continue;
             }
-            foreach (['sample_key', 'sample_type', 'projection_fixture_id', 'public_url_slug'] as $field) {
+            foreach ([
+                'sample_key',
+                'sample_type',
+                'form_code',
+                'interpretation_scope',
+                'projection_fixture_id',
+                'public_url_slug',
+                'short_summary',
+                'page_1_preview',
+                'method_boundary',
+                'content_maturity',
+                'evidence_level',
+            ] as $field) {
                 if (trim((string) ($entry[$field] ?? '')) === '') {
                     $errors[] = "Sample report registry {$entryKey} missing {$field}";
                 }
+            }
+            if (! is_array($entry['top_types'] ?? null) || count((array) $entry['top_types']) < 3) {
+                $errors[] = "Sample report registry {$entryKey} top_types must include at least 3 items";
+            }
+            if ((string) ($entry['content_maturity'] ?? '') !== 'p0_ready') {
+                $errors[] = "Sample report registry {$entryKey} content_maturity must be p0_ready";
+            }
+            if (! in_array((string) ($entry['evidence_level'] ?? ''), self::VALID_EVIDENCE_LEVEL, true)) {
+                $errors[] = "Sample report registry {$entryKey} has invalid evidence_level";
             }
         }
 
@@ -550,15 +632,34 @@ final class RegistryValidator
     {
         $entries = is_array($payload['entries'] ?? null) ? $payload['entries'] : [];
         $keys = [];
+        $errors = [];
         foreach ($entries as $entry) {
-            if (is_array($entry)) {
-                $keys[] = (string) ($entry['section_key'] ?? '');
+            if (! is_array($entry)) {
+                $errors[] = 'Technical note registry contains invalid entry';
+
+                continue;
+            }
+            $sectionKey = (string) ($entry['section_key'] ?? '');
+            $keys[] = $sectionKey;
+            foreach (['title', 'body', 'data_status', 'content_maturity'] as $field) {
+                if (trim((string) ($entry[$field] ?? '')) === '') {
+                    $errors[] = "Technical note registry {$sectionKey} missing {$field}";
+                }
+            }
+            if (! is_array($entry['metric_refs'] ?? null)) {
+                $errors[] = "Technical note registry {$sectionKey} metric_refs must be array";
+            }
+            if (! in_array((string) ($entry['data_status'] ?? ''), self::VALID_TECHNICAL_NOTE_DATA_STATUS, true)) {
+                $errors[] = "Technical note registry {$sectionKey} has invalid data_status";
             }
         }
         sort($keys);
         $expected = self::REQUIRED_TECHNICAL_NOTE_KEYS;
         sort($expected);
+        if ($keys !== $expected) {
+            $errors[] = 'Technical note registry must include required scaffold sections';
+        }
 
-        return $keys === $expected ? [] : ['Technical note registry must include required scaffold sections'];
+        return $errors;
     }
 }

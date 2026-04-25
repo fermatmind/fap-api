@@ -20,11 +20,14 @@ final class EnneagramRegistryPackLoadTest extends TestCase
 
         $this->assertSame('ENNEAGRAM', data_get($pack, 'manifest.scale_code'));
         $this->assertSame('enneagram_registry.v1', data_get($pack, 'manifest.registry_version'));
+        $this->assertSame('enneagram_registry_pack_v1_p0_ready_2026_04', data_get($pack, 'manifest.release_id'));
         $this->assertSame('enneagram_type_registry', data_get($pack, 'type_registry.registry_key'));
         $this->assertSame('enneagram_method_registry', data_get($pack, 'method_registry.registry_key'));
-        $this->assertSame('查看 Technical Note', data_get($uiEntries['technical_note.link_label'] ?? [], 'label'));
+        $this->assertSame('查看 Technical Note v0.1', data_get($uiEntries['technical_note.link_label'] ?? [], 'label'));
         $this->assertSame('clear_sample', data_get($sampleEntries['clear_sample'] ?? [], 'sample_key'));
         $this->assertSame('privacy', data_get($technicalEntries->firstWhere('section_key', 'privacy') ?? [], 'section_key'));
+        $this->assertSame('p0_ready', data_get($pack, 'type_registry.content_maturity'));
+        $this->assertSame('experimental', data_get($pack, 'theory_hint_registry.content_maturity'));
         $this->assertStringStartsWith('sha256:', (string) ($pack['release_hash'] ?? ''));
 
         $errors = app(RegistryValidator::class)->validate($pack);

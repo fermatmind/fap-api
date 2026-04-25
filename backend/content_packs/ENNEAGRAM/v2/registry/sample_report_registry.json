@@ -7,16 +7,58 @@
     "context_mode": "individual",
     "status": "published",
     "version": "v1",
-    "release_id": "enneagram_registry_pack_v1_scaffold_2026_04",
+    "release_id": "enneagram_registry_pack_v1_p0_ready_2026_04",
     "content_release_hash": "sha256:pending_loader_resolution",
     "content_snapshot_hash": null,
-    "content_maturity": "scaffold",
+    "content_maturity": "p0_ready",
     "evidence_level": "descriptive",
     "preview_enabled": true,
     "fallback_policy": "optional",
     "entries": {
-        "clear_sample": {"sample_key": "clear_sample", "sample_type": "clear", "projection_fixture_id": "enneagram_clear_sample_fixture", "report_snapshot_ref": null, "public_url_slug": "enneagram-clear-sample"},
-        "close_call_sample": {"sample_key": "close_call_sample", "sample_type": "close_call", "projection_fixture_id": "enneagram_close_call_sample_fixture", "report_snapshot_ref": null, "public_url_slug": "enneagram-close-call-sample"},
-        "diffuse_sample": {"sample_key": "diffuse_sample", "sample_type": "diffuse", "projection_fixture_id": "enneagram_diffuse_sample_fixture", "report_snapshot_ref": null, "public_url_slug": "enneagram-diffuse-sample"}
+        "clear_sample": {
+            "sample_key": "clear_sample",
+            "sample_type": "clear",
+            "form_code": "enneagram_likert_105",
+            "interpretation_scope": "clear",
+            "projection_fixture_id": "enneagram_clear_sample_fixture",
+            "report_snapshot_ref": null,
+            "public_url_slug": "enneagram-clear-sample",
+            "top_types": ["8", "3", "1"],
+            "short_summary": "示例结果展示主候选相对清晰时，如何同时呈现 Top3、方法边界与可观察语气。",
+            "page_1_preview": "你最可能以 8 号为主，同时带有 3 号和 1 号的结果风格：既守住主导权，也在意结果质量。",
+            "method_boundary": "结果用于理解你的动力结构，不用于绝对定型或跨 form 数值比较。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        "close_call_sample": {
+            "sample_key": "close_call_sample",
+            "sample_type": "close_call",
+            "form_code": "enneagram_likert_105",
+            "interpretation_scope": "close_call",
+            "projection_fixture_id": "enneagram_close_call_sample_fixture",
+            "report_snapshot_ref": null,
+            "public_url_slug": "enneagram-close-call-sample",
+            "top_types": ["4", "5", "9"],
+            "short_summary": "示例结果展示 close-call 时如何把 Top1 与 Top2 的相似性和关键分歧并排交付。",
+            "page_1_preview": "这次结果更像在 4 号与 5 号之间摇摆：表面都可能内收，但要守住的东西并不相同。",
+            "method_boundary": "close-call 不是改判机制，而是把不确定性转换成 pair 辨析与观察任务。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        "diffuse_sample": {
+            "sample_key": "diffuse_sample",
+            "sample_type": "diffuse",
+            "form_code": "enneagram_likert_105",
+            "interpretation_scope": "diffuse",
+            "projection_fixture_id": "enneagram_diffuse_sample_fixture",
+            "report_snapshot_ref": null,
+            "public_url_slug": "enneagram-diffuse-sample",
+            "top_types": ["9", "6", "2"],
+            "short_summary": "示例结果展示分布较分散时，如何弱化单一号码语气并把阅读重点转回 Top3、三中心与观察任务。",
+            "page_1_preview": "这次结果更适合把 9、6、2 放在一起读：它们共同说明你如何在关系、安全和安宁之间调节自己。",
+            "method_boundary": "diffuse 结果优先看结构，不把单一号码写成确定答案。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        }
     }
 }

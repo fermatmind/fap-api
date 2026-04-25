@@ -7,21 +7,24 @@
     "context_mode": "individual",
     "status": "published",
     "version": "v1",
-    "release_id": "enneagram_registry_pack_v1_scaffold_2026_04",
+    "release_id": "enneagram_registry_pack_v1_p0_ready_2026_04",
     "content_release_hash": "sha256:pending_loader_resolution",
     "content_snapshot_hash": null,
-    "content_maturity": "scaffold",
+    "content_maturity": "p0_ready",
     "evidence_level": "theory_based",
     "preview_enabled": true,
     "fallback_policy": "fallback_to_type_base",
     "entries": [
         {
             "state_key": "base_state_scaffold",
-            "stable_expression": "P0 scaffold：用于描述相对稳定时的表达，不作为硬 health-level 判断。",
-            "average_expression": "P0 scaffold：用于描述日常状态下的习惯性表达。",
-            "strained_expression": "P0 scaffold：用于描述压力升高时更常见的偏移。",
-            "recovery_action": "P0 scaffold：用于给出恢复动作，不替代诊断或治疗建议。",
-            "disclaimer": "This registry is not a hard health-level judgement."
+            "stable_expression": "当你的惯性没有被压力接管时，你更可能把类型优势用成稳定、清晰、对自己和别人都更有余地的表达。",
+            "average_expression": "大多数日常状态下，你会回到熟悉的自动化策略，用它维持秩序、关系、安全、结果或安宁。",
+            "strained_expression": "当压力、疲惫或恢复不足叠加时，你更容易把同一套老办法用得更硬、更窄，也更难看见它带来的代价。",
+            "recovery_action": "先命名此刻最明显的紧绷点，再选一个最小动作把自己带回更稳的节奏，而不是立刻做大幅度人格判断。",
+            "disclaimer": "这是一层自我校准与解释光谱，不是系统对 health level、临床状态或固定发展阶段的硬判定。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "theory_based",
+            "fallback_policy": "fallback_to_type_base"
         }
     ]
 }

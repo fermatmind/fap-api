@@ -175,7 +175,7 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertSame(['speed_too_fast'], data_get($module, 'content.qc_flags'));
     }
 
-    public function test_v2_modules_expose_scaffold_provenance(): void
+    public function test_v2_modules_expose_p0_ready_registry_provenance(): void
     {
         $payload = $this->composeReportV2(
             $this->syntheticProjectionInput('enneagram_likert_105', [
@@ -193,7 +193,7 @@ final class EnneagramReportComposerV2Test extends TestCase
 
         $module = $this->module($payload, 'technical_note_link');
 
-        $this->assertSame('scaffold', data_get($module, 'provenance.content_maturity'));
+        $this->assertSame('p0_ready', data_get($module, 'provenance.content_maturity'));
         $this->assertSame('descriptive', data_get($module, 'provenance.evidence_level'));
         $this->assertSame('required', data_get($module, 'fallback_policy'));
     }

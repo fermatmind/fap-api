@@ -7,26 +7,130 @@
     "context_mode": "individual",
     "status": "published",
     "version": "v1",
-    "release_id": "enneagram_registry_pack_v1_scaffold_2026_04",
+    "release_id": "enneagram_registry_pack_v1_p0_ready_2026_04",
     "content_release_hash": "sha256:pending_loader_resolution",
     "content_snapshot_hash": null,
-    "content_maturity": "scaffold",
+    "content_maturity": "p0_ready",
     "evidence_level": "descriptive",
     "preview_enabled": true,
     "fallback_policy": "required",
     "entries": [
-        {"section_key": "test_goal", "title": "测试目标", "body": "说明九型结果用于模式理解与观察，而不是把用户钉死为单一号码。"},
-        {"section_key": "e105_fc144_forms", "title": "E105 与 FC144 两个 form", "body": "说明 single-scale / multi-form 的结果壳与解释边界。"},
-        {"section_key": "score_space_boundary", "title": "Score space 边界", "body": "明确 same model 不等于 same score space。"},
-        {"section_key": "dominance_gap", "title": "Dominance Gap", "body": "解释 Top1 / Top2 within-form gap 的用途与限制。"},
-        {"section_key": "confidence_band", "title": "Confidence Band", "body": "解释 high / medium / close_call / diffuse / low_quality。"},
-        {"section_key": "close_call", "title": "Close-call", "body": "说明 close-call 是辨析位，不是改判机制。"},
-        {"section_key": "diffuse", "title": "Diffuse", "body": "说明 profile shape 分散时的保守解释原则。"},
-        {"section_key": "low_quality", "title": "Low-quality", "body": "说明只有在存在真实 QC signal 时才触发 low-quality。"},
-        {"section_key": "retake_stability", "title": "Retake Stability", "body": "说明重测稳定性会在后续指标中追踪，而不是在 P0 里硬承诺。"},
-        {"section_key": "e105_fc144_agreement", "title": "E105 / FC144 Agreement", "body": "说明未来 agreement 指标的目标和当前边界。"},
-        {"section_key": "resonance_feedback", "title": "Resonance Feedback", "body": "说明用户反馈用于研究和优化，不覆盖 primary_candidate。"},
-        {"section_key": "method_boundaries", "title": "方法边界", "body": "说明非诊断、非招聘筛选、非绝对人格标签。"},
-        {"section_key": "privacy", "title": "隐私与数据", "body": "说明反馈、样例和快照都应遵守最小必要与可回溯原则。"}
+        {
+            "section_key": "test_goal",
+            "title": "测试目标",
+            "body": "FermatMind 九型人格测试的目标不是把用户压缩成一个不可改变的号码，而是提供一套可阅读、可观察、可反馈的动力结构说明。系统优先交付主候选、Top3、全谱、close-call 与方法边界，再把用户带回现实观察。",
+            "metric_refs": [],
+            "data_status": "available",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "e105_fc144_forms",
+            "title": "E105 与 FC144 两个 form",
+            "body": "E105 是标准版入口，用 Likert 强度建立全谱与 Top3；FC144 是 close-call 后的深度辨析 form，用 forced-choice 帮助用户在相近候选之间做更谨慎的观察。两者属于同一模型，但题型和分数来源不同。",
+            "metric_refs": [],
+            "data_status": "available",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "score_space_boundary",
+            "title": "Score space 边界",
+            "body": "E105 的分数来自 Likert 强度，FC144 的分数来自 pairwise choice 的相对偏好。它们都被投影到同一结果壳中，但不默认进入同一数值比较语义。这就是 same model 不等于 same score space 的原因。",
+            "metric_refs": ["E105_FC144_score_space_boundary"],
+            "data_status": "available",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "dominance_gap",
+            "title": "Dominance Gap",
+            "body": "Dominance Gap 描述的是同一 form 内 Top1 与 Top2 的差距，用来帮助系统决定是更适合用 clear 语气，还是更适合进入 close-call 或 diffuse 的保守解释。它是 operational 指标，不是临床置信区间。",
+            "metric_refs": ["top_gap_distribution"],
+            "data_status": "available",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "confidence_band",
+            "title": "Confidence Band",
+            "body": "当前系统会输出 clear、close_call、diffuse、low_quality 等解释范围。它们控制的是结果页语气、模块显隐与推荐动作，而不是宣称某个号码已经被绝对证明。",
+            "metric_refs": ["confidence_band_distribution"],
+            "data_status": "available",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "close_call",
+            "title": "Close-call",
+            "body": "当 Top1 与 Top2 接近时，系统不会假装自己比数据更确定，而会进入 pair 辨析与 7 天观察任务。close-call 是模糊性治理位，不是改判机制。",
+            "metric_refs": ["close_call_rate", "misidentification_matrix"],
+            "data_status": "collecting",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "diffuse",
+            "title": "Diffuse",
+            "body": "当结果呈现较分散的 profile shape 时，系统会降低单一号码语气，转而强调 Top3、三中心和观察任务。此时更重要的是结构阅读，而不是强行定型。",
+            "metric_refs": ["profile_entropy_distribution"],
+            "data_status": "available",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "low_quality",
+            "title": "Low-quality",
+            "body": "只有在真实质量信号触发时，系统才进入 low_quality 边界。P0 里 low_quality 的作用是收窄语气和推荐同 form 重测，而不是给用户贴上不可靠标签。",
+            "metric_refs": ["low_quality_rate", "low_quality_close_call_relation"],
+            "data_status": "collecting",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "retake_stability",
+            "title": "Retake Stability",
+            "body": "重测稳定性是后续 Technical Note 会持续跟踪的指标。P0 先公开定义和采集计划，不提前承诺具体稳定率数字。",
+            "metric_refs": ["retake_consistency_index", "top1_stability", "top3_stability"],
+            "data_status": "planned",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "e105_fc144_agreement",
+            "title": "E105 / FC144 Agreement",
+            "body": "E105 与 FC144 的 agreement 用于评估双题型在 Top1 或 Top3 上的重叠度，而不是用来证明二者可以直接比较分数。P0 先定义指标与采集方向，后续再基于样本决定公开结论。",
+            "metric_refs": ["E105_FC144_agreement", "close_call_conversion"],
+            "data_status": "planned",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "resonance_feedback",
+            "title": "Resonance Feedback",
+            "body": "用户的 Day7 resonance feedback 和 user_confirmed_type 会作为自我观察证据进入历史，用于研究和内容校准，但不会静默覆盖 primary_candidate。用户反馈是观察层，不是系统重判。",
+            "metric_refs": ["resonance_feedback", "observation_completion_rate"],
+            "data_status": "collecting",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "method_boundaries",
+            "title": "方法边界",
+            "body": "本测试用于人格模式理解与自我观察，不用于临床诊断、招聘筛选、治疗建议或绝对人格定性。wing、arrow、subtype、health level 在当前版本只作为解释层或未来模块保留位，不做硬判。",
+            "metric_refs": [],
+            "data_status": "available",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "section_key": "privacy",
+            "title": "隐私与数据",
+            "body": "公开说明只使用聚合后的方法指标。share 页面不默认展示 observation 私密内容，user_confirmed_type 也不会被当作系统最终类型。用户反馈和样例内容都应遵守最小必要与可回溯原则。",
+            "metric_refs": [],
+            "data_status": "available",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        }
     ]
 }

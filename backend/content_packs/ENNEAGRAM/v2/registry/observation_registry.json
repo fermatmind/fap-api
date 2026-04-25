@@ -7,20 +7,219 @@
     "context_mode": "individual",
     "status": "published",
     "version": "v1",
-    "release_id": "enneagram_registry_pack_v1_scaffold_2026_04",
+    "release_id": "enneagram_registry_pack_v1_p0_ready_2026_04",
     "content_release_hash": "sha256:pending_loader_resolution",
     "content_snapshot_hash": null,
-    "content_maturity": "scaffold",
+    "content_maturity": "p0_ready",
     "evidence_level": "descriptive",
     "preview_enabled": true,
     "fallback_policy": "fallback_to_generic",
     "entries": [
-        {"day": 1, "phase": "observe_trigger", "prompt": "记录今天最先让你起反应的触发点。", "user_input_schema": {"type": "text", "max_length": 280}, "analytics_event_key": "enneagram_observation_day1_started", "suggested_next_action": "先记录，不急着解释类型。"},
-        {"day": 2, "phase": "observe_pattern", "prompt": "回看你最自然的自动化反应。", "user_input_schema": {"type": "text", "max_length": 280}, "analytics_event_key": "enneagram_observation_day2_pattern_logged", "suggested_next_action": "标记重复出现的关键词。"},
-        {"day": 3, "phase": "day3_feedback", "prompt": "填写 Day3 观察反馈：更像在守标准、守关系、守安全，还是守边界/自由？", "user_input_schema": {"type": "single_select", "options": ["标准", "关系", "安全", "边界", "自由", "其他"]}, "analytics_event_key": "enneagram_day3_feedback_submitted", "suggested_next_action": "对照 close-call 或 Top3 模块再看一遍。"},
-        {"day": 4, "phase": "observe_cost", "prompt": "今天你的自动反应带来了什么代价？", "user_input_schema": {"type": "text", "max_length": 280}, "analytics_event_key": "enneagram_observation_day4_cost_logged", "suggested_next_action": "把代价和收益同时记下来。"},
-        {"day": 5, "phase": "observe_relationship", "prompt": "在关系互动里，你更在意被怎样看见或不被怎样对待？", "user_input_schema": {"type": "text", "max_length": 280}, "analytics_event_key": "enneagram_observation_day5_relationship_logged", "suggested_next_action": "记录一段具体对话，而不是抽象结论。"},
-        {"day": 6, "phase": "observe_work", "prompt": "在工作或任务推进中，你最自然守住的东西是什么？", "user_input_schema": {"type": "text", "max_length": 280}, "analytics_event_key": "enneagram_observation_day6_work_logged", "suggested_next_action": "和 work_summary 或 pair_delta 对照。"},
-        {"day": 7, "phase": "day7_resonance", "prompt": "回看七天记录：哪条解释最像你，哪条最不像你？", "user_input_schema": {"type": "text", "max_length": 500}, "analytics_event_key": "enneagram_day7_feedback_submitted", "suggested_next_action": "只提交 resonance feedback，不覆盖 primary_candidate。"}
+        {
+            "day": 1,
+            "phase": "core_motivation_observation",
+            "title": "Day 1｜先抓触发点",
+            "prompt": "今天只记录一个让你明显收缩、推进、解释、讨好、控制或退开的场景。不要急着分析类型，先看自动反应是怎样启动的。",
+            "example": "例如：会议里有人否定方案，你是先想纠正、先想证明、先想确认风险，还是先想把场面压平？",
+            "user_input_schema": {
+                "type": "object",
+                "fields": {
+                    "trigger_scene": {
+                        "type": "enum",
+                        "options": ["work", "relationship", "pressure", "alone", "other"]
+                    },
+                    "trigger_description": {
+                        "type": "text",
+                        "max_length": 280
+                    },
+                    "automatic_reaction": {
+                        "type": "enum",
+                        "options": ["push", "withdraw", "please", "control", "explain", "freeze", "reframe", "other"]
+                    }
+                }
+            },
+            "analytics_event_key": "enneagram_observation_day1_started",
+            "suggested_next_action": "observe_7_days",
+            "boundary_copy": "这一步只记录现实证据，不急着把自己定成某个号码。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "day": 2,
+            "phase": "core_motivation_observation",
+            "title": "Day 2｜看你真正怕失去什么",
+            "prompt": "回看今天一个明显不舒服的瞬间：你最怕失去的是正确感、认可、关系位置、安全、边界、自由、真实，还是平静？",
+            "example": "例如：如果一件事做得不漂亮，你不舒服是因为它不对、它不成、它不稳，还是它让你失去空间？",
+            "user_input_schema": {
+                "type": "object",
+                "fields": {
+                    "core_fear_selection": {
+                        "type": "enum",
+                        "options": ["correctness", "recognition", "being_needed", "safety", "boundary", "freedom", "authenticity", "harmony", "other"]
+                    },
+                    "evidence_sentence": {
+                        "type": "text",
+                        "max_length": 280
+                    }
+                }
+            },
+            "analytics_event_key": "enneagram_observation_day2_pattern_logged",
+            "suggested_next_action": "observe_7_days",
+            "boundary_copy": "只记录最像你的动力，不必追求一次就找到最终答案。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "day": 3,
+            "phase": "day3_feedback",
+            "title": "Day 3｜动机投票",
+            "prompt": "三天过去，你不需要给出最终答案。只要问自己：过去几天里，哪一种动力更像你真正不能退让的东西？",
+            "example": "如果你是 close-call，更重要的不是看谁更像表面行为，而是看 Top1 和 Top2 谁更像你真正要守的东西。",
+            "user_input_schema": {
+                "type": "object",
+                "fields": {
+                    "more_like": {
+                        "type": "enum",
+                        "options": ["top1", "top2", "unclear", "other"]
+                    },
+                    "evidence_sentence": {
+                        "type": "text",
+                        "max_length": 280
+                    },
+                    "confidence_self_rating": {
+                        "type": "integer",
+                        "min": 1,
+                        "max": 5
+                    },
+                    "scene_type": {
+                        "type": "enum",
+                        "options": ["work", "relationship", "pressure", "alone", "other"]
+                    }
+                }
+            },
+            "analytics_event_key": "enneagram_day3_feedback_submitted",
+            "suggested_next_action": "read_top3",
+            "boundary_copy": "Day3 反馈会进入自我观察记录，但不会静默改写本次测量结果。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "day": 4,
+            "phase": "pressure_reaction_observation",
+            "title": "Day 4｜看压力下的第一反应",
+            "prompt": "今天观察压力上来时，你更想迎战、解释、撤退、讨好、转移、控制、麻木，还是先找人确认？",
+            "example": "例如：当事情开始失控时，你是更想把边界拉直，还是更想把局面先稳住？",
+            "user_input_schema": {
+                "type": "object",
+                "fields": {
+                    "stress_reaction": {
+                        "type": "enum",
+                        "options": ["fight", "explain", "withdraw", "please", "distract", "control", "numb", "confirm", "other"]
+                    },
+                    "scene": {
+                        "type": "text",
+                        "max_length": 280
+                    },
+                    "recovered_how": {
+                        "type": "text",
+                        "max_length": 280
+                    }
+                }
+            },
+            "analytics_event_key": "enneagram_observation_day4_cost_logged",
+            "suggested_next_action": "observe_7_days",
+            "boundary_copy": "这一层只帮助你看见压力脚本，不把任何反应自动解释成健康层级或临床状态。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "day": 5,
+            "phase": "pressure_reaction_observation",
+            "title": "Day 5｜关系里的防御点",
+            "prompt": "今天观察一段关系里的小摩擦：你更想被理解、被认可、被尊重边界、被承诺、被需要，还是只想让局面平下来？",
+            "example": "例如：对方一句话让你不舒服时，你最先在保护的是关系位置、尊严、安全感，还是平静感？",
+            "user_input_schema": {
+                "type": "object",
+                "fields": {
+                    "relationship_need": {
+                        "type": "enum",
+                        "options": ["understood", "recognized", "boundary_respected", "reassured", "needed", "harmony", "other"]
+                    },
+                    "what_you_did": {
+                        "type": "text",
+                        "max_length": 280
+                    },
+                    "what_you_wanted_to_say": {
+                        "type": "text",
+                        "max_length": 280
+                    }
+                }
+            },
+            "analytics_event_key": "enneagram_observation_day5_relationship_logged",
+            "suggested_next_action": "observe_7_days",
+            "boundary_copy": "观察的是你真正想守住的关系需求，不是给关系里谁对谁错做裁决。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "day": 6,
+            "phase": "pressure_reaction_observation",
+            "title": "Day 6｜看你的低动用资源",
+            "prompt": "今天观察一个你不太自然使用的能力：求助、直接拒绝、表达愤怒、放松享受、承认需要、建立规则、主动展示、停下来感受，还是承担冲突。",
+            "example": "不是问你‘会不会’，而是看这类资源在真实生活里是不是总要晚一步才出现。",
+            "user_input_schema": {
+                "type": "object",
+                "fields": {
+                    "blind_spot_observed": {
+                        "type": "enum",
+                        "options": ["help_seeking", "refusal", "anger_expression", "enjoyment", "need_admission", "rule_setting", "visibility", "feeling_pause", "conflict_ownership", "other"]
+                    },
+                    "evidence_sentence": {
+                        "type": "text",
+                        "max_length": 280
+                    }
+                }
+            },
+            "analytics_event_key": "enneagram_observation_day6_work_logged",
+            "suggested_next_action": "read_top3",
+            "boundary_copy": "blind spot 只是低动用资源，不代表你没有这一部分，也不代表系统在做硬判。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "day": 7,
+            "phase": "day7_resonance",
+            "title": "Day 7｜深度共鸣投票",
+            "prompt": "现在不要问哪个号码更好，只问：过去一周，哪一种动力在关键时刻最像你真正不能退让的东西？",
+            "example": "如果你仍然摇摆，这不表示失败。它只说明当前更适合继续观察、阅读 Top3，或在需要时补做 FC144 深度版。",
+            "user_input_schema": {
+                "type": "object",
+                "fields": {
+                    "final_resonance": {
+                        "type": "enum",
+                        "options": ["top1", "top2", "top3", "other", "still_uncertain"]
+                    },
+                    "user_confirmed_type": {
+                        "type": "enum",
+                        "options": ["1", "2", "3", "4", "5", "6", "7", "8", "9", null]
+                    },
+                    "wants_fc144": {
+                        "type": "boolean"
+                    },
+                    "wants_retake_same_form": {
+                        "type": "boolean"
+                    },
+                    "user_disagreed_reason": {
+                        "type": "text",
+                        "max_length": 280
+                    }
+                }
+            },
+            "analytics_event_key": "enneagram_day7_feedback_submitted",
+            "suggested_next_action": "observe_7_days",
+            "boundary_copy": "你的自我观察确认会被记录进历史，但不会把本次测量结果静默改写成‘系统改判’。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        }
     ]
 }

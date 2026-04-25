@@ -32,5 +32,7 @@ final class EnneagramGroupRegistryCoverageTest extends TestCase
             'stance:compliant',
             'stance:withdrawn',
         ], $keys);
+        $this->assertFalse($entries->contains(fn ($entry): bool => trim((string) ($entry['stress_signal'] ?? '')) === ''));
+        $this->assertFalse($entries->contains(fn ($entry): bool => ($entry['content_maturity'] ?? null) !== 'p0_ready'));
     }
 }

@@ -7,10 +7,10 @@
     "context_mode": "individual",
     "status": "published",
     "version": "v1",
-    "release_id": "enneagram_registry_pack_v1_scaffold_2026_04",
+    "release_id": "enneagram_registry_pack_v1_p0_ready_2026_04",
     "content_release_hash": "sha256:pending_loader_resolution",
     "content_snapshot_hash": null,
-    "content_maturity": "scaffold",
+    "content_maturity": "p0_ready",
     "evidence_level": "descriptive",
     "preview_enabled": true,
     "fallback_policy": "required",
@@ -19,31 +19,73 @@
             "method_key": "e105_standard_methodology",
             "form_variant": "e105",
             "display_context": "result_page",
-            "copy": "E105 使用 Likert intensity / dominance score space，适合标准版结果解释。"
+            "copy": "E105 标准版使用 Likert 强度作答，适合第一次建立全谱结果、Top3、Dominance Gap 与 close-call 阅读框架。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
         },
         {
             "method_key": "fc144_forced_choice_methodology",
             "form_variant": "fc144",
             "display_context": "result_page",
-            "copy": "FC144 使用 forced-choice wins / exposures score space，适合深度版辨析。"
+            "copy": "FC144 深度版使用 forced-choice 配对选择，更适合 close-call 后的深度辨析，但它与 E105 不共享同一分数来源。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
         },
         {
             "method_key": "same_model_not_same_score_space",
             "form_variant": "all",
             "display_context": "technical_note",
-            "copy": "E105 与 FC144 属于同一 ENNEAGRAM 模型，但不处在同一 score space，不能直接数值横比。"
+            "copy": "E105 与 FC144 属于同一 ENNEAGRAM 模型，但不处在同一 score space。它们可以共用结果页结构与解释边界，不默认直接比较数值高低。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
         },
         {
             "method_key": "cross_form_compare_blocked",
             "form_variant": "all",
             "display_context": "history",
-            "copy": "跨 form 对比默认关闭；如果没有等值映射，就不把 E105 和 FC144 放进同一 compare 语义。"
+            "copy": "跨 form 对比默认关闭。只要没有等值映射，系统就不会把 E105 与 FC144 放进同一数值比较语义里。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
         },
         {
             "method_key": "non_diagnostic_boundary",
             "form_variant": "all",
             "display_context": "technical_note",
-            "copy": "本结果用于人格模式理解与观察，不用于临床诊断、招聘筛选或对个体做绝对定性。"
+            "copy": "本结果用于人格模式理解与自我观察，不用于临床诊断、心理治疗建议、招聘筛选或对个体做绝对定性。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "method_key": "user_confirmed_type_boundary",
+            "form_variant": "all",
+            "display_context": "observation",
+            "copy": "user_confirmed_type 是自我观察证据，不是系统改判。它会进入历史记录，但不会覆盖 primary_candidate、Top3 或 scorer 输出。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "method_key": "low_quality_boundary",
+            "form_variant": "all",
+            "display_context": "result_page",
+            "copy": "当低质量信号触发时，结果仍可阅读，但解释边界会收窄。优先建议在状态更稳定时重测同一题型，而不是立刻切到另一 form。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "method_key": "diffuse_boundary",
+            "form_variant": "all",
+            "display_context": "result_page",
+            "copy": "当结果呈现 diffuse 结构时，更有价值的是阅读 Top3、三中心与观察任务，而不是急着把自己固定成单一号码。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
+        },
+        {
+            "method_key": "close_call_boundary",
+            "form_variant": "all",
+            "display_context": "result_page",
+            "copy": "close-call 表示 Top1 与 Top2 接近。系统不会假装自己比数据更确定，而会把分歧转换成 pair 辨析与 7 天观察问题。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive"
         }
     ]
 }
