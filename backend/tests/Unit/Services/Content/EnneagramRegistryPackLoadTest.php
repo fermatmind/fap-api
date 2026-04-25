@@ -17,6 +17,7 @@ final class EnneagramRegistryPackLoadTest extends TestCase
         $uiEntries = (array) data_get($pack, 'ui_copy_registry.entries', []);
         $sampleEntries = (array) data_get($pack, 'sample_report_registry.entries', []);
         $technicalEntries = collect((array) data_get($pack, 'technical_note_registry.entries', []));
+        $typeEntries = collect((array) data_get($pack, 'type_registry.entries', []));
 
         $this->assertSame('ENNEAGRAM', data_get($pack, 'manifest.scale_code'));
         $this->assertSame('enneagram_registry.v1', data_get($pack, 'manifest.registry_version'));
@@ -26,6 +27,7 @@ final class EnneagramRegistryPackLoadTest extends TestCase
         $this->assertSame('查看 Technical Note v0.1', data_get($uiEntries['technical_note.link_label'] ?? [], 'label'));
         $this->assertSame('clear_sample', data_get($sampleEntries['clear_sample'] ?? [], 'sample_key'));
         $this->assertSame('privacy', data_get($technicalEntries->firstWhere('section_key', 'privacy') ?? [], 'section_key'));
+        $this->assertNotSame('', (string) data_get($typeEntries->firstWhere('type_id', '8') ?? [], 'deep_dive.core_desire'));
         $this->assertSame('p0_ready', data_get($pack, 'type_registry.content_maturity'));
         $this->assertSame('experimental', data_get($pack, 'theory_hint_registry.content_maturity'));
         $this->assertStringStartsWith('sha256:', (string) ($pack['release_hash'] ?? ''));
