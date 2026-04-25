@@ -44,7 +44,7 @@ final class EnneagramReportComposer
         ],
         'page_2_work_reality' => [
             'title' => ['zh' => '工作现实', 'en' => 'Work Reality'],
-            'purpose' => ['zh' => '输出工作风格、协作优势、摩擦点和 workplace 占位位。', 'en' => 'Expose work style, collaboration strengths, friction points, and workplace placeholders.'],
+            'purpose' => ['zh' => '输出工作风格、协作优势、摩擦点和工作触发点。', 'en' => 'Expose work style, collaboration strengths, friction points, and workplace triggers.'],
             'modules' => [
                 'work_style_summary',
                 'collaboration_strengths',
@@ -427,29 +427,94 @@ final class EnneagramReportComposer
             'methodology_boundary_card' => $this->buildMethodologyBoundaryModule($projectionV2, $indexes, 'methodology_boundary_card'),
             'diffuse_boundary' => $this->buildDiffuseBoundaryModule($projectionV2, $indexes),
             'low_quality_boundary' => $this->buildLowQualityBoundaryModule($projectionV2, $indexes),
-            'work_style_summary' => $this->buildScenarioModule($projectionV2, $indexes, 'work_style_summary', 'scenario_card', ['content.summary_ref' => 'deep_dive.work_mechanism']),
+            'work_style_summary' => $this->buildScenarioModule($projectionV2, $indexes, 'work_style_summary', 'scenario_card', [
+                'content.summary_ref' => 'deep_dive.work_mechanism',
+                'content.list_group_refs' => [
+                    ['label_key' => 'ideal_environment', 'ref' => 'work_pack.ideal_environment'],
+                ],
+            ]),
             'type_deep_dive_summary' => $this->buildTypeDeepDiveSummaryModule($projectionV2, $indexes),
-            'collaboration_strengths' => $this->buildScenarioModule($projectionV2, $indexes, 'collaboration_strengths', 'scenario_card', ['content.summary_ref' => 'work_summary']),
-            'collaboration_friction' => $this->buildScenarioModule($projectionV2, $indexes, 'collaboration_friction', 'scenario_card', ['content.summary_ref' => 'internal_tension']),
-            'leadership_pattern' => $this->buildScenarioModule($projectionV2, $indexes, 'leadership_pattern', 'scenario_card', ['content.summary_ref' => 'deep_dive.work_mechanism']),
-            'managed_by_others' => $this->buildScenarioModule($projectionV2, $indexes, 'managed_by_others', 'scenario_card', ['content.summary_ref' => 'relationship_summary']),
-            'workplace_trigger_points' => $this->buildPlaceholderModule($projectionV2, $indexes, 'workplace_trigger_points', 'placeholder_card', 'registry_entry_not_shipped_for_workplace'),
+            'collaboration_strengths' => $this->buildScenarioModule($projectionV2, $indexes, 'collaboration_strengths', 'scenario_card', [
+                'content.summary_ref' => 'work_summary',
+                'content.list_group_refs' => [
+                    ['label_key' => 'work_strengths', 'ref' => 'work_pack.work_strengths'],
+                ],
+            ]),
+            'collaboration_friction' => $this->buildScenarioModule($projectionV2, $indexes, 'collaboration_friction', 'scenario_card', [
+                'content.summary_ref' => 'internal_tension',
+                'content.list_group_refs' => [
+                    ['label_key' => 'work_friction_points', 'ref' => 'work_pack.work_friction_points'],
+                ],
+            ]),
+            'leadership_pattern' => $this->buildScenarioModule($projectionV2, $indexes, 'leadership_pattern', 'scenario_card', [
+                'content.summary_ref' => 'deep_dive.work_mechanism',
+                'content.list_group_refs' => [
+                    ['label_key' => 'leadership_pattern', 'ref' => 'work_pack.leadership_pattern'],
+                ],
+            ]),
+            'managed_by_others' => $this->buildScenarioModule($projectionV2, $indexes, 'managed_by_others', 'scenario_card', [
+                'content.summary_ref' => 'relationship_summary',
+                'content.list_group_refs' => [
+                    ['label_key' => 'collaboration_manual', 'ref' => 'work_pack.collaboration_manual'],
+                    ['label_key' => 'managed_by_others', 'ref' => 'work_pack.managed_by_others'],
+                ],
+            ]),
+            'workplace_trigger_points' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'workplace_trigger_points', 'summary_card', '', [
+                'list_group_refs' => [
+                    ['label_key' => 'workplace_trigger_points', 'ref' => 'work_pack.workplace_trigger_points'],
+                ],
+            ]),
             'context_mode_placeholder' => $this->buildPlaceholderModule($projectionV2, $indexes, 'context_mode_placeholder', 'placeholder_card', 'workplace_context_mode_not_enabled'),
             'growth_axis' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'growth_axis', 'summary_card', 'growth_summary', [
                 'detail_label' => 'growth_principle',
                 'deep_dive_detail' => 'deep_dive.growth_principle',
+                'list_group_refs' => [
+                    ['label_key' => 'growth_strengths', 'ref' => 'growth_pack.growth_strengths'],
+                ],
             ]),
-            'strength_expression' => $this->buildGroupOverlayModule($projectionV2, $indexes, 'strength_expression', 'strength_expression'),
-            'cost_expression' => $this->buildGroupOverlayModule($projectionV2, $indexes, 'cost_expression', 'cost_expression'),
-            'stress_trigger' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'stress_trigger', 'summary_card', 'deep_dive.stress_signal'),
+            'strength_expression' => $this->buildGroupOverlayModule($projectionV2, $indexes, 'strength_expression', 'strength_expression', [
+                ['label_key' => 'growth_strengths', 'ref' => 'growth_pack.growth_strengths'],
+            ]),
+            'cost_expression' => $this->buildGroupOverlayModule($projectionV2, $indexes, 'cost_expression', 'cost_expression', [
+                ['label_key' => 'growth_costs', 'ref' => 'growth_pack.growth_costs'],
+            ]),
+            'stress_trigger' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'stress_trigger', 'summary_card', 'deep_dive.stress_signal', [
+                'list_group_refs' => [
+                    ['label_key' => 'early_warning_signs', 'ref' => 'growth_pack.early_warning_signs'],
+                ],
+            ]),
             'recovery_action' => $this->buildStateModule($projectionV2, $indexes, 'recovery_action'),
             'state_spectrum' => $this->buildStateModule($projectionV2, $indexes, 'state_spectrum'),
             'arrow_growth_reference_placeholder' => $this->buildTheoryModule($projectionV2, $indexes, 'arrow_growth_reference_placeholder', 'placeholder_card'),
-            'relationship_need' => $this->buildScenarioModule($projectionV2, $indexes, 'relationship_need', 'scenario_card', ['content.summary_ref' => 'deep_dive.relationship_script']),
-            'relationship_strengths' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'relationship_strengths', 'summary_card', 'relationship_summary'),
-            'misread_by_others' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'misread_by_others', 'summary_card', 'deep_dive.misread_by_others'),
-            'conflict_script' => $this->buildScenarioModule($projectionV2, $indexes, 'conflict_script', 'scenario_card', ['content.summary_ref' => 'deep_dive.conflict_pattern']),
-            'communication_manual' => $this->buildScenarioModule($projectionV2, $indexes, 'communication_manual', 'scenario_card', ['content.summary_ref' => 'surface_impression']),
+            'relationship_need' => $this->buildScenarioModule($projectionV2, $indexes, 'relationship_need', 'scenario_card', [
+                'content.summary_ref' => 'deep_dive.relationship_script',
+                'content.list_group_refs' => [
+                    ['label_key' => 'partner_facing_notes', 'ref' => 'relationship_pack.partner_facing_notes'],
+                ],
+            ]),
+            'relationship_strengths' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'relationship_strengths', 'summary_card', 'relationship_summary', [
+                'list_group_refs' => [
+                    ['label_key' => 'relationship_strengths', 'ref' => 'relationship_pack.relationship_strengths'],
+                ],
+            ]),
+            'misread_by_others' => $this->buildTypeDrivenModule($projectionV2, $indexes, 'misread_by_others', 'summary_card', 'deep_dive.misread_by_others', [
+                'list_group_refs' => [
+                    ['label_key' => 'relationship_traps', 'ref' => 'relationship_pack.relationship_traps'],
+                ],
+            ]),
+            'conflict_script' => $this->buildScenarioModule($projectionV2, $indexes, 'conflict_script', 'scenario_card', [
+                'content.summary_ref' => 'deep_dive.conflict_pattern',
+                'content.list_group_refs' => [
+                    ['label_key' => 'conflict_trigger_points', 'ref' => 'relationship_pack.conflict_trigger_points'],
+                    ['label_key' => 'repair_language', 'ref' => 'relationship_pack.repair_language'],
+                ],
+            ]),
+            'communication_manual' => $this->buildScenarioModule($projectionV2, $indexes, 'communication_manual', 'scenario_card', [
+                'content.summary_ref' => 'surface_impression',
+                'content.list_group_refs' => [
+                    ['label_key' => 'communication_manual', 'ref' => 'relationship_pack.communication_manual'],
+                ],
+            ]),
             'blind_spot_in_relationship' => $this->buildBlindSpotModule($projectionV2, $indexes, 'blind_spot_in_relationship'),
             'method_boundary' => $this->buildMethodologyBoundaryModule($projectionV2, $indexes, 'method_boundary'),
             'seven_day_observation' => $this->buildObservationModule($projectionV2, $indexes),
@@ -931,11 +996,14 @@ final class EnneagramReportComposer
         $summaryRef = (string) ($extraContent['content.summary_ref'] ?? '');
         $detailLabel = (string) ($extraContent['content.detail_label'] ?? '');
         $detailRef = (string) ($extraContent['content.detail_ref'] ?? '');
+        $listGroupRefs = is_array($extraContent['content.list_group_refs'] ?? null) ? $extraContent['content.list_group_refs'] : [];
         unset($extraContent['content.summary_ref']);
         unset($extraContent['content.detail_label']);
         unset($extraContent['content.detail_ref']);
+        unset($extraContent['content.list_group_refs']);
         $typeSummary = $summaryRef !== '' ? data_get($typeEntry, $summaryRef) : null;
         $deepDiveDetail = $detailRef !== '' ? data_get($typeEntry, $detailRef) : null;
+        $listGroups = $this->typePackListGroups($typeEntry, $listGroupRefs);
 
         return $this->module(
             $scenarioKey,
@@ -949,6 +1017,7 @@ final class EnneagramReportComposer
                 'type_summary' => $typeSummary,
                 'detail_label' => $detailLabel !== '' ? $detailLabel : null,
                 'deep_dive_detail' => $deepDiveDetail,
+                'list_groups' => $listGroups,
             ], $extraContent),
             ['scores.primary_candidate'],
             array_merge(
@@ -971,6 +1040,7 @@ final class EnneagramReportComposer
         $typeEntry = $this->typeEntry($indexes, $primaryType);
         $detailLabel = (string) ($extraContent['detail_label'] ?? '');
         $detailRef = (string) ($extraContent['deep_dive_detail'] ?? '');
+        $listGroupRefs = is_array($extraContent['list_group_refs'] ?? null) ? $extraContent['list_group_refs'] : [];
 
         return $this->module(
             $moduleKey,
@@ -979,11 +1049,12 @@ final class EnneagramReportComposer
             'all',
             [
                 'primary_candidate' => $primaryType !== '' ? $primaryType : null,
-                'value' => data_get($typeEntry, $typeField),
+                'value' => $typeField !== '' ? data_get($typeEntry, $typeField) : null,
                 'type_name_cn' => $typeEntry['type_name_cn'] ?? null,
                 'type_name_en' => $typeEntry['type_name_en'] ?? null,
                 'detail_label' => $detailLabel !== '' ? $detailLabel : null,
                 'deep_dive_detail' => $detailRef !== '' ? data_get($typeEntry, $detailRef) : null,
+                'list_groups' => $this->typePackListGroups($typeEntry, $listGroupRefs),
             ],
             ['scores.primary_candidate'],
             $primaryType !== '' ? ['enneagram_type_registry:'.$primaryType] : [],
@@ -997,10 +1068,11 @@ final class EnneagramReportComposer
      * @param  array<string,mixed>  $indexes
      * @return array<string,mixed>
      */
-    private function buildGroupOverlayModule(array $projectionV2, array $indexes, string $moduleKey, string $field): array
+    private function buildGroupOverlayModule(array $projectionV2, array $indexes, string $moduleKey, string $field, array $listGroupRefs = []): array
     {
         $primaryType = (string) data_get($projectionV2, 'scores.primary_candidate', '');
         $groupEntries = $this->groupEntriesForType($indexes, $primaryType);
+        $typeEntry = $this->typeEntry($indexes, $primaryType);
         $items = [];
         $registryRefs = [];
         foreach ($groupEntries as $groupRef => $entry) {
@@ -1023,6 +1095,7 @@ final class EnneagramReportComposer
                 'primary_candidate' => $primaryType !== '' ? $primaryType : null,
                 'items' => $items,
                 'status' => $items !== [] ? 'available' : 'unavailable',
+                'list_groups' => $this->typePackListGroups($typeEntry, $listGroupRefs),
             ],
             ['scores.primary_candidate'],
             $registryRefs,
@@ -1047,16 +1120,23 @@ final class EnneagramReportComposer
                 'type_recovery_action' => data_get($typeEntry, 'deep_dive.recovery_action'),
                 'growth_principle' => data_get($typeEntry, 'deep_dive.growth_principle'),
                 'thirty_day_experiment' => data_get($typeEntry, 'deep_dive.thirty_day_experiment'),
+                'list_groups' => $this->typePackListGroups($typeEntry, [
+                    ['label_key' => 'recovery_protocol', 'ref' => 'growth_pack.recovery_protocol'],
+                    ['label_key' => 'small_experiments', 'ref' => 'growth_pack.small_experiments'],
+                ]),
                 'disclaimer' => $stateEntry['disclaimer'] ?? null,
             ],
             default => [
-                'stable_expression' => $stateEntry['stable_expression'] ?? null,
-                'average_expression' => $stateEntry['average_expression'] ?? null,
-                'strained_expression' => $stateEntry['strained_expression'] ?? null,
+                'stable_expression' => data_get($typeEntry, 'growth_pack.state_spectrum_copy.stable_expression') ?? $stateEntry['stable_expression'] ?? null,
+                'average_expression' => data_get($typeEntry, 'growth_pack.state_spectrum_copy.default_expression') ?? $stateEntry['average_expression'] ?? null,
+                'strained_expression' => data_get($typeEntry, 'growth_pack.state_spectrum_copy.strained_expression') ?? $stateEntry['strained_expression'] ?? null,
                 'recovery_action' => $stateEntry['recovery_action'] ?? null,
                 'stress_signal' => data_get($typeEntry, 'deep_dive.stress_signal'),
                 'growth_principle' => data_get($typeEntry, 'deep_dive.growth_principle'),
                 'thirty_day_experiment' => data_get($typeEntry, 'deep_dive.thirty_day_experiment'),
+                'list_groups' => $this->typePackListGroups($typeEntry, [
+                    ['label_key' => 'early_warning_signs', 'ref' => 'growth_pack.early_warning_signs'],
+                ]),
                 'disclaimer' => $stateEntry['disclaimer'] ?? null,
             ],
         };
@@ -1075,6 +1155,50 @@ final class EnneagramReportComposer
             [],
             $this->mergeEntryMeta([$stateEntry, $typeEntry], $this->registryMeta($indexes, 'enneagram_state_registry'))
         );
+    }
+
+    /**
+     * @param  array<string,mixed>  $typeEntry
+     * @param  list<array{label_key:string,ref:string}>  $specs
+     * @return list<array{label_key:string,items:list<array{title:string,body:string}>}>
+     */
+    private function typePackListGroups(array $typeEntry, array $specs): array
+    {
+        $groups = [];
+
+        foreach ($specs as $spec) {
+            $labelKey = trim((string) ($spec['label_key'] ?? ''));
+            $ref = trim((string) ($spec['ref'] ?? ''));
+            if ($labelKey === '' || $ref === '') {
+                continue;
+            }
+
+            $items = [];
+            foreach ((array) data_get($typeEntry, $ref, []) as $item) {
+                if (! is_array($item)) {
+                    continue;
+                }
+
+                $title = trim((string) ($item['title'] ?? ''));
+                $body = trim((string) ($item['body'] ?? ''));
+                if ($title === '' || $body === '') {
+                    continue;
+                }
+
+                $items[] = ['title' => $title, 'body' => $body];
+            }
+
+            if ($items === []) {
+                continue;
+            }
+
+            $groups[] = [
+                'label_key' => $labelKey,
+                'items' => $items,
+            ];
+        }
+
+        return $groups;
     }
 
     /**

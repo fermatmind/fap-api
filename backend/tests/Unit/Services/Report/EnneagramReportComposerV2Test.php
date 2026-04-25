@@ -223,20 +223,66 @@ final class EnneagramReportComposerV2Test extends TestCase
 
         $work = $this->module($payload, 'work_style_summary');
         $this->assertNotSame('', (string) data_get($work, 'content.type_summary'));
+        $this->assertGreaterThanOrEqual(1, count((array) data_get($work, 'content.list_groups', [])));
 
         $stress = $this->module($payload, 'stress_trigger');
         $this->assertNotSame('', (string) data_get($stress, 'content.value'));
+        $this->assertGreaterThanOrEqual(1, count((array) data_get($stress, 'content.list_groups', [])));
 
         $recovery = $this->module($payload, 'recovery_action');
         $this->assertNotSame('', (string) data_get($recovery, 'content.type_recovery_action'));
         $this->assertNotSame('', (string) data_get($recovery, 'content.growth_principle'));
         $this->assertNotSame('', (string) data_get($recovery, 'content.thirty_day_experiment'));
+        $this->assertGreaterThanOrEqual(2, count((array) data_get($recovery, 'content.list_groups', [])));
 
         $relationship = $this->module($payload, 'relationship_need');
         $this->assertNotSame('', (string) data_get($relationship, 'content.type_summary'));
+        $this->assertGreaterThanOrEqual(1, count((array) data_get($relationship, 'content.list_groups', [])));
 
         $conflict = $this->module($payload, 'conflict_script');
         $this->assertNotSame('', (string) data_get($conflict, 'content.type_summary'));
+        $this->assertGreaterThanOrEqual(2, count((array) data_get($conflict, 'content.list_groups', [])));
+    }
+
+    public function test_work_growth_and_relationship_modules_expose_pack_lists(): void
+    {
+        $payload = $this->composeReportV2(
+            $this->syntheticProjectionInput('enneagram_likert_105', [
+                'T1' => 88.0,
+                'T6' => 63.0,
+                'T3' => 51.0,
+                'T9' => 42.0,
+                'T2' => 33.0,
+                'T5' => 29.0,
+                'T4' => 24.0,
+                'T7' => 20.0,
+                'T8' => 18.0,
+            ])
+        );
+
+        $workStrengths = $this->module($payload, 'collaboration_strengths');
+        $this->assertSame('work_strengths', data_get($workStrengths, 'content.list_groups.0.label_key'));
+        $this->assertGreaterThanOrEqual(4, count((array) data_get($workStrengths, 'content.list_groups.0.items', [])));
+
+        $workTriggers = $this->module($payload, 'workplace_trigger_points');
+        $this->assertSame('workplace_trigger_points', data_get($workTriggers, 'content.list_groups.0.label_key'));
+        $this->assertGreaterThanOrEqual(2, count((array) data_get($workTriggers, 'content.list_groups.0.items', [])));
+
+        $growthCosts = $this->module($payload, 'cost_expression');
+        $this->assertSame('growth_costs', data_get($growthCosts, 'content.list_groups.0.label_key'));
+        $this->assertGreaterThanOrEqual(4, count((array) data_get($growthCosts, 'content.list_groups.0.items', [])));
+
+        $state = $this->module($payload, 'state_spectrum');
+        $this->assertNotSame('', (string) data_get($state, 'content.stable_expression'));
+        $this->assertSame('early_warning_signs', data_get($state, 'content.list_groups.0.label_key'));
+
+        $relationshipStrengths = $this->module($payload, 'relationship_strengths');
+        $this->assertSame('relationship_strengths', data_get($relationshipStrengths, 'content.list_groups.0.label_key'));
+        $this->assertGreaterThanOrEqual(4, count((array) data_get($relationshipStrengths, 'content.list_groups.0.items', [])));
+
+        $communication = $this->module($payload, 'communication_manual');
+        $this->assertSame('communication_manual', data_get($communication, 'content.list_groups.0.label_key'));
+        $this->assertGreaterThanOrEqual(3, count((array) data_get($communication, 'content.list_groups.0.items', [])));
     }
 
     public function test_sample_report_module_exposes_preview_fields_from_registry(): void

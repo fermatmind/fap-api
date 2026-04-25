@@ -28,6 +28,9 @@ final class EnneagramRegistryPackLoadTest extends TestCase
         $this->assertSame('clear_sample', data_get($sampleEntries['clear_sample'] ?? [], 'sample_key'));
         $this->assertSame('privacy', data_get($technicalEntries->firstWhere('section_key', 'privacy') ?? [], 'section_key'));
         $this->assertNotSame('', (string) data_get($typeEntries->firstWhere('type_id', '8') ?? [], 'deep_dive.core_desire'));
+        $this->assertGreaterThanOrEqual(4, count((array) data_get($typeEntries->firstWhere('type_id', '8') ?? [], 'work_pack.work_strengths', [])));
+        $this->assertGreaterThanOrEqual(3, count((array) data_get($typeEntries->firstWhere('type_id', '8') ?? [], 'growth_pack.recovery_protocol', [])));
+        $this->assertGreaterThanOrEqual(3, count((array) data_get($typeEntries->firstWhere('type_id', '8') ?? [], 'relationship_pack.repair_language', [])));
         $this->assertSame('p0_ready', data_get($pack, 'type_registry.content_maturity'));
         $this->assertSame('experimental', data_get($pack, 'theory_hint_registry.content_maturity'));
         $this->assertStringStartsWith('sha256:', (string) ($pack['release_hash'] ?? ''));
