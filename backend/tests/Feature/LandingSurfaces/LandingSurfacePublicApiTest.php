@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature\LandingSurfaces;
 
+use App\Models\Article;
+use App\Models\ArticleTranslationRevision;
 use App\Models\LandingSurface;
 use App\Models\PageBlock;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 final class LandingSurfacePublicApiTest extends TestCase
@@ -335,5 +338,132 @@ final class LandingSurfacePublicApiTest extends TestCase
             ->assertJsonPath('ok', true)
             ->assertJsonPath('surface.title', '首页更新')
             ->assertJsonPath('surface.page_blocks.0.block_key', 'hero');
+    }
+
+    public function test_public_api_enriches_recommended_articles_with_published_revision_pointer(): void
+    {
+        $surface = LandingSurface::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'surface_key' => 'home',
+            'locale' => 'zh-CN',
+            'title' => '首页',
+            'description' => '首页',
+            'schema_version' => 'v1',
+            'payload_json' => [],
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 4, 25, 0, 0, 0, 'UTC'),
+            'scheduled_at' => null,
+        ]);
+
+        $surface->blocks()->create([
+            'block_key' => 'recommended_articles',
+            'block_type' => 'json',
+            'title' => '推荐阅读',
+            'payload_json' => [
+                'items' => [
+                    [
+                        'display_order' => 1,
+                        'article' => [
+                            'slug' => 'recommended-article',
+                            'locale' => 'zh-CN',
+                            'title' => '推荐文章',
+                            'status' => 'published',
+                            'is_public' => true,
+                        ],
+                    ],
+                ],
+            ],
+            'sort_order' => 0,
+            'is_enabled' => true,
+        ]);
+
+        $article = $this->createArticle([
+            'slug' => 'recommended-article',
+            'locale' => 'zh-CN',
+            'title' => '推荐文章 legacy',
+        ], [
+            'title' => '推荐文章 published',
+        ]);
+
+        $response = $this->getJson('/api/v0.5/landing-surfaces/home?locale=zh-CN&org_id=0');
+
+        $response->assertOk()
+            ->assertJsonPath(
+                'surface.page_blocks.0.payload_json.items.0.article.published_revision_id',
+                (int) $article->published_revision_id
+            )
+            ->assertJsonPath(
+                'surface.page_blocks.0.payload_json.items.0.article.published_revision.id',
+                (int) $article->published_revision_id
+            );
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     * @param  array<string, mixed>  $revisionOverrides
+     */
+    private function createArticle(
+        array $overrides = [],
+        array $revisionOverrides = [],
+        bool $withPublishedRevision = true
+    ): Article {
+        /** @var Article $article */
+        $article = Article::query()->create(array_merge([
+            'org_id' => 0,
+            'category_id' => null,
+            'author_admin_user_id' => null,
+            'slug' => 'article-slug',
+            'locale' => 'en',
+            'title' => 'Article Title',
+            'excerpt' => 'Article excerpt.',
+            'content_md' => '# Article body',
+            'content_html' => null,
+            'cover_image_url' => null,
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 3, 9, 8, 0, 0, 'UTC'),
+            'scheduled_at' => null,
+            'created_at' => Carbon::create(2026, 3, 9, 8, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 3, 9, 9, 0, 0, 'UTC'),
+        ], $overrides));
+
+        if ($withPublishedRevision) {
+            $revision = $this->createRevision($article, $revisionOverrides);
+            $article->forceFill(['published_revision_id' => $revision->id])->save();
+        }
+
+        return $article->fresh(['publishedRevision']) ?? $article;
+    }
+
+    /**
+     * @param  array<string, mixed>  $overrides
+     */
+    private function createRevision(Article $article, array $overrides = []): ArticleTranslationRevision
+    {
+        /** @var ArticleTranslationRevision $revision */
+        $revision = ArticleTranslationRevision::query()->create(array_merge([
+            'org_id' => (int) $article->org_id,
+            'article_id' => (int) $article->id,
+            'source_article_id' => (int) ($article->source_article_id ?: $article->translated_from_article_id ?: $article->id),
+            'translation_group_id' => (string) $article->translation_group_id,
+            'locale' => (string) $article->locale,
+            'source_locale' => (string) ($article->source_locale ?: $article->locale),
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'source_version_hash' => $article->source_version_hash,
+            'translated_from_version_hash' => $article->translated_from_version_hash ?: $article->source_version_hash,
+            'supersedes_revision_id' => null,
+            'title' => (string) $article->title,
+            'excerpt' => $article->excerpt,
+            'content_md' => (string) $article->content_md,
+            'seo_title' => null,
+            'seo_description' => null,
+            'published_at' => $article->published_at,
+        ], $overrides));
+
+        return $revision;
     }
 }
