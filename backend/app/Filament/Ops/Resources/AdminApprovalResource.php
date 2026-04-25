@@ -68,6 +68,16 @@ class AdminApprovalResource extends BaseTenantResource
         return __('ops.nav.approvals');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('ops.nav.approvals');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('ops.nav.approvals');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([]);
@@ -77,18 +87,36 @@ class AdminApprovalResource extends BaseTenantResource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('type')->badge(),
+                Tables\Columns\TextColumn::make('type')
+                    ->label(__('ops.table.record'))
+                    ->badge(),
                 Tables\Columns\TextColumn::make('status')
+                    ->label(__('ops.table.status'))
                     ->badge()
                     ->color(fn (string $state): string => StatusBadge::color($state))
                     ->sortable(),
-                Tables\Columns\TextColumn::make('requested_by_admin_user_id')->label('Requested By'),
-                Tables\Columns\TextColumn::make('approved_by_admin_user_id')->label('Approved By'),
-                Tables\Columns\TextColumn::make('reason')->limit(60)->tooltip(fn (AdminApproval $record): string => (string) $record->reason),
-                Tables\Columns\TextColumn::make('correlation_id')->label('Correlation ID')->copyable()->toggleable(),
-                Tables\Columns\TextColumn::make('approved_at')->dateTime()->toggleable(),
-                Tables\Columns\TextColumn::make('executed_at')->dateTime()->toggleable(),
-                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
+                Tables\Columns\TextColumn::make('requested_by_admin_user_id')->label(__('ops.resources.approvals.fields.requested_by')),
+                Tables\Columns\TextColumn::make('approved_by_admin_user_id')->label(__('ops.resources.approvals.fields.approved_by')),
+                Tables\Columns\TextColumn::make('reason')
+                    ->label(__('ops.resources.approvals.fields.reason'))
+                    ->limit(60)
+                    ->tooltip(fn (AdminApproval $record): string => (string) $record->reason),
+                Tables\Columns\TextColumn::make('correlation_id')
+                    ->label(__('ops.resources.approvals.fields.correlation_id'))
+                    ->copyable()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('approved_at')
+                    ->label(__('ops.edit.fields.approved_at'))
+                    ->dateTime()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('executed_at')
+                    ->label(__('ops.resources.approvals.fields.executed_at'))
+                    ->dateTime()
+                    ->toggleable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('ops.edit.fields.created_at'))
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
@@ -113,7 +141,7 @@ class AdminApprovalResource extends BaseTenantResource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\Action::make('approve')
-                    ->label('Approve')
+                    ->label(__('ops.resources.approvals.actions.approve'))
                     ->icon('heroicon-o-check')
                     ->color('success')
                     ->visible(fn (AdminApproval $record): bool => static::canReview() && strtoupper((string) $record->status) === AdminApproval::STATUS_PENDING)
@@ -155,19 +183,19 @@ class AdminApprovalResource extends BaseTenantResource
                         ExecuteApprovalJob::dispatch((string) $record->id)->afterCommit();
 
                         Notification::make()
-                            ->title('Approval approved and execution queued')
+                            ->title(__('ops.resources.approvals.notifications.approved'))
                             ->success()
                             ->send();
                     }),
                 Tables\Actions\Action::make('reject')
-                    ->label('Reject')
+                    ->label(__('ops.resources.approvals.actions.reject'))
                     ->icon('heroicon-o-x-mark')
                     ->color('danger')
                     ->visible(fn (AdminApproval $record): bool => static::canReview() && strtoupper((string) $record->status) === AdminApproval::STATUS_PENDING)
                     ->requiresConfirmation()
                     ->form([
                         Forms\Components\Textarea::make('reason_append')
-                            ->label('Reject Note')
+                            ->label(__('ops.resources.approvals.fields.reject_note'))
                             ->maxLength(255),
                     ])
                     ->action(function (AdminApproval $record, array $data): void {
@@ -210,12 +238,12 @@ class AdminApprovalResource extends BaseTenantResource
                         });
 
                         Notification::make()
-                            ->title('Approval rejected')
+                            ->title(__('ops.resources.approvals.notifications.rejected'))
                             ->success()
                             ->send();
                     }),
                 Tables\Actions\Action::make('retryExecute')
-                    ->label('Retry Execute')
+                    ->label(__('ops.resources.approvals.actions.retry_execute'))
                     ->icon('heroicon-o-arrow-path')
                     ->visible(fn (AdminApproval $record): bool => static::canReview() && in_array(strtoupper((string) $record->status), [AdminApproval::STATUS_FAILED, AdminApproval::STATUS_APPROVED], true))
                     ->requiresConfirmation()
@@ -230,7 +258,7 @@ class AdminApprovalResource extends BaseTenantResource
                         ExecuteApprovalJob::dispatch((string) $record->id)->afterCommit();
 
                         Notification::make()
-                            ->title('Approval execution retried')
+                            ->title(__('ops.resources.approvals.notifications.retried'))
                             ->success()
                             ->send();
                     }),

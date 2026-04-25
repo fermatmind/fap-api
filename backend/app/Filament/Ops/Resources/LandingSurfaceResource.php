@@ -60,6 +60,16 @@ class LandingSurfaceResource extends Resource
         return __('ops.nav.landing_surfaces');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('ops.nav.landing_surfaces');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('ops.nav.landing_surfaces');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -78,19 +88,24 @@ class LandingSurfaceResource extends Resource
                                         Forms\Components\Section::make(__('ops.edit.sections.content'))
                                             ->schema([
                                                 Forms\Components\TextInput::make('surface_key')
+                                                    ->label(__('ops.edit.fields.surface_key'))
                                                     ->required()
                                                     ->maxLength(128),
                                                 Forms\Components\Select::make('locale')
+                                                    ->label(__('ops.edit.fields.locale'))
                                                     ->required()
                                                     ->native(false)
                                                     ->options(OpsEdit::localeOptions())
                                                     ->default('zh-CN'),
                                                 Forms\Components\TextInput::make('title')
+                                                    ->label(__('ops.resources.articles.fields.title'))
                                                     ->maxLength(255),
                                                 Forms\Components\Textarea::make('description')
+                                                    ->label(__('ops.edit.fields.description'))
                                                     ->rows(3)
                                                     ->columnSpanFull(),
                                                 Forms\Components\TextInput::make('schema_version')
+                                                    ->label(__('ops.edit.fields.schema_version'))
                                                     ->default('v1')
                                                     ->maxLength(32),
                                             ])
@@ -154,11 +169,13 @@ class LandingSurfaceResource extends Resource
                             ->schema([
                                 Forms\Components\Placeholder::make('ops_status_visibility')->label(__('ops.edit.sections.status_visibility'))->content(fn (?LandingSurface $record) => OpsEdit::statusVisibility($record)),
                                 Forms\Components\Select::make('status')
+                                    ->label(__('ops.table.status'))
                                     ->required()
                                     ->native(false)
                                     ->options(OpsEdit::statusOptions([LandingSurface::STATUS_DRAFT, LandingSurface::STATUS_PUBLISHED]))
                                     ->default(LandingSurface::STATUS_PUBLISHED),
                                 Forms\Components\Toggle::make('is_public')
+                                    ->label(__('ops.table.public'))
                                     ->default(true),
                                 Forms\Components\Toggle::make('is_indexable')
                                     ->default(true),
@@ -170,8 +187,8 @@ class LandingSurfaceResource extends Resource
                             ->extraAttributes(['class' => 'ops-edit-workspace-section ops-edit-workspace-section--rail'])
                             ->schema([
                                 Forms\Components\Placeholder::make('ops_publish_readiness')->label(__('ops.edit.sections.publish_readiness'))->content(fn (?LandingSurface $record) => OpsEdit::publishReadiness($record, [
-                                    'surface_key' => __('ops.nav.landing_surfaces'),
-                                    'locale' => __('ops.table.locale'),
+                                    'surface_key' => __('ops.edit.fields.surface_key'),
+                                    'locale' => __('ops.edit.fields.locale'),
                                     'payload_json' => __('ops.edit.sections.surface_payload'),
                                 ])),
                             ]),

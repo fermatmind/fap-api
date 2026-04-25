@@ -60,6 +60,7 @@ final class CmsTranslationBackboneTest extends TestCase
             ->assertSee('Create translation draft disabled')
             ->assertSet('metrics.translation_groups', 4)
             ->assertSet('metrics.missing_translation_count', 3)
+            ->assertSet('metrics.published_target_coverage_rate', 25)
             ->assertSet('coverageMatrix.0.cells.zh-CN.state', 'source')
             ->assertSet('summaryCards.1.value', '3')
             ->set('contentTypeFilter', 'support_article')
@@ -164,6 +165,44 @@ final class CmsTranslationBackboneTest extends TestCase
         );
         $this->assertNotContains('body missing', $targetLocale['preflight']['blockers']);
         $this->assertNotContains('seo description missing', $targetLocale['preflight']['blockers']);
+    }
+
+    public function test_unified_translation_ops_coverage_rate_counts_only_target_locales(): void
+    {
+        $this->createPublishedArticleGroup('coverage-rate-fixture');
+
+        $dashboard = app(CmsTranslationOpsService::class)->dashboard(['content_type' => 'article']);
+
+        $this->assertSame(1, $dashboard['metrics']['translation_groups']);
+        $this->assertSame(1, $dashboard['metrics']['published_target_locale_count']);
+        $this->assertSame(1, $dashboard['metrics']['target_slot_count']);
+        $this->assertSame(100, $dashboard['metrics']['published_target_coverage_rate']);
+        $this->assertSame('100%', $dashboard['summary_cards'][0]['value']);
+    }
+
+    public function test_unified_translation_ops_keeps_missing_published_revision_out_of_ownership_mismatch(): void
+    {
+        $this->createPublishedArticleGroup('missing-published-pointer-fixture');
+        $translation = Article::query()
+            ->where('translation_group_id', 'article-missing-published-pointer-fixture')
+            ->where('locale', 'en')
+            ->firstOrFail();
+
+        $translation->forceFill([
+            'published_revision_id' => null,
+        ])->saveQuietly();
+
+        $dashboard = app(CmsTranslationOpsService::class)->dashboard([
+            'content_type' => 'article',
+            'slug' => 'missing-published-pointer-fixture',
+        ]);
+
+        $this->assertSame(0, $dashboard['metrics']['ownership_mismatch_groups']);
+
+        $cell = data_get($dashboard, 'coverage_matrix.0.cells.en');
+        $this->assertIsArray($cell);
+        $this->assertSame([], $cell['ownership_blockers']);
+        $this->assertNotEmpty($cell['readiness_blockers']);
     }
 
     private function createPublishedArticleGroup(string $slug): void

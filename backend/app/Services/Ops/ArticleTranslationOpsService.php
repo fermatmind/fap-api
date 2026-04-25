@@ -157,6 +157,14 @@ final class ArticleTranslationOpsService
         $articleRevisions = $revisions
             ->filter(fn (ArticleTranslationRevision $revision): bool => (int) $revision->article_id === (int) $article->id)
             ->take(3);
+        $preflight = $isSource
+            ? ['ok' => true, 'blockers' => []]
+            : app(ArticleTranslationWorkflowService::class)->preflight($article);
+
+        if ($isArticlePublishedPublic && ! $publishedRevision instanceof ArticleTranslationRevision) {
+            $preflight['blockers'][] = 'missing published revision';
+            $preflight['ok'] = false;
+        }
 
         return [
             'article_id' => (int) $article->id,
@@ -182,9 +190,7 @@ final class ArticleTranslationOpsService
             'edit_url' => ArticleResource::getUrl('edit', ['record' => $article]),
             'revision_history' => $this->revisionHistory($articleRevisions),
             'compare_summary' => $this->compareSummary($article, $source, $workingRevision, $publishedRevision, $sourceHash, $isStale),
-            'preflight' => $isSource
-                ? ['ok' => true, 'blockers' => []]
-                : $this->localizedPreflight(app(ArticleTranslationWorkflowService::class)->preflight($article)),
+            'preflight' => $this->localizedPreflight($preflight),
             'actions' => $this->localeActions($article, $status, $isStale, $isSource),
         ];
     }

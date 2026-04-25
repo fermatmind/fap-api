@@ -281,6 +281,8 @@ return [
 
     'actions' => [
         'save_changes' => '保存修改',
+        'create_resource' => '创建 :resource',
+        'back_to_resource_list' => '返回 :resource',
     ],
 
     'edit' => [
@@ -321,6 +323,7 @@ return [
         'fields' => [
             'readiness' => '准备度',
             'blocker' => '阻塞项',
+            'surface_key' => '页面键',
             'locale' => '语言',
             'source_locale' => '源文语言',
             'translation_group' => '翻译组',
@@ -335,6 +338,8 @@ return [
             'seo_title' => 'SEO 标题',
             'seo_description' => 'SEO 描述',
             'canonical_path' => 'Canonical 路径',
+            'description' => '描述',
+            'schema_version' => 'Schema 版本',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
             'last_reviewed_at' => '最近审核时间',
@@ -392,9 +397,9 @@ return [
         'summary' => [
             'title' => '覆盖摘要',
             'description' => '汇总多语言发布覆盖、缺失语言压力、过期风险和阻塞操作量。',
-            'published_coverage' => '已发布覆盖',
+            'published_target_coverage' => '目标语言已发布覆盖',
             'coverage_rate' => ':rate%',
-            'published_coverage_hint' => ':groups 个翻译组中共有 :locales 个已发布语言单元。',
+            'published_target_coverage_hint' => ':groups 个翻译组的 :slots 个目标语言位中，已有 :published 个已发布。',
             'missing_translations' => '缺失译文',
             'missing_translations_hint' => ':groups 个翻译组至少缺少一个已配置目标语言。',
             'stale_translations' => '过期译文',
@@ -1768,6 +1773,26 @@ return [
             'report_pdf_subheading' => '以报告快照为根的支持排查视图，覆盖报告交付、PDF 可用性、认领/重发线索与解锁关联。',
             'report_pdf_detail_subheading' => '以报告快照为根的只读支持排查视图。',
             'results_detail_subheading' => '以结果记录为根的只读支持排查视图。',
+        ],
+        'approvals' => [
+            'fields' => [
+                'requested_by' => '申请人',
+                'approved_by' => '批准人',
+                'reason' => '原因',
+                'correlation_id' => '关联 ID',
+                'executed_at' => '执行时间',
+                'reject_note' => '拒绝备注',
+            ],
+            'actions' => [
+                'approve' => '批准',
+                'reject' => '拒绝',
+                'retry_execute' => '重试执行',
+            ],
+            'notifications' => [
+                'approved' => '审批已通过并已加入执行队列',
+                'rejected' => '审批已拒绝',
+                'retried' => '审批执行已重试',
+            ],
         ],
         'articles' => [
             'label' => '文章',

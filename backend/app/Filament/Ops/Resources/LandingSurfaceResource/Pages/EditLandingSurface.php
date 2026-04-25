@@ -31,7 +31,7 @@ class EditLandingSurface extends EditRecord
     {
         return [
             Actions\Action::make('backToLandingSurfaces')
-                ->label(__('ops.resources.articles.actions.back_to_list'))
+                ->label(__('ops.actions.back_to_resource_list', ['resource' => LandingSurfaceResource::getPluralModelLabel()]))
                 ->url(LandingSurfaceResource::getUrl())
                 ->icon('heroicon-o-arrow-left')
                 ->color('gray'),

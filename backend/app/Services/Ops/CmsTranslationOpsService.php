@@ -115,11 +115,24 @@ final class CmsTranslationOpsService
                     'ownership_issues' => $locale['ownership_issues'],
                     'edit_url' => $locale['edit_url'],
                     'preflight' => $this->localizedPreflight((array) $locale['preflight']),
+                    'readiness_blockers' => (array) data_get($locale, 'preflight.blockers', []),
                     'compare_summary' => $locale['compare_summary'],
                     'workflow_kind' => 'revision',
                     'actions' => $this->articleLocaleActions($locale),
                 ], $group['locales'] ?? []),
                 'published_locales' => $group['published_locales'] ?? [],
+                'published_target_locales' => $this->publishedTargetLocales(array_merge(
+                    (array) ($group['coverage'] ?? []),
+                    [
+                        'published_target_locales' => array_values(array_intersect(
+                            $this->targetLocales(),
+                            array_map(
+                                static fn (mixed $locale): string => (string) $locale,
+                                (array) ($group['published_locales'] ?? [])
+                            )
+                        )),
+                    ],
+                )),
                 'coverage' => $group['coverage'] ?? [],
                 'stale_locales_count' => (int) ($group['stale_locales_count'] ?? 0),
                 'ownership_ok' => (bool) ($group['ownership_ok'] ?? false),
@@ -193,6 +206,7 @@ final class CmsTranslationOpsService
             'latest_source_hash' => $source?->source_version_hash,
             'locales' => $locales->all(),
             'published_locales' => $locales->where('is_published', true)->pluck('locale')->all(),
+            'published_target_locales' => $this->publishedTargetLocales($coverage),
             'coverage' => $coverage,
             'stale_locales_count' => $locales->where('is_stale', true)->count(),
             'ownership_ok' => ! $locales->contains(fn (array $locale): bool => ! (bool) $locale['ownership_ok']),
@@ -256,6 +270,7 @@ final class CmsTranslationOpsService
             'workflow_kind' => 'shadow_revision',
             'workflow_kind_label' => __('ops.translation_ops.compare.shadow_revision_workflow'),
             'actions' => $this->siblingLocaleActions($contentType, $adapter, $record, $isSource, $isStale),
+            'readiness_blockers' => (array) ($preflight['blockers'] ?? []),
         ];
     }
 
@@ -343,7 +358,7 @@ final class CmsTranslationOpsService
      */
     private function metrics(Collection $groups): array
     {
-        $publishedLocaleCount = $groups->sum(fn (array $group): int => count($group['published_locales'] ?? []));
+        $publishedTargetLocaleCount = $groups->sum(fn (array $group): int => count($group['published_target_locales'] ?? []));
         $targetSlotCount = $groups->sum(fn (array $group): int => count($group['coverage']['target_locales'] ?? []));
         $blockedActionCount = $groups->sum(fn (array $group): int => $this->blockedActionCount($group));
         $stalePublishedCount = $groups->sum(fn (array $group): int => collect($group['locales'] ?? [])
@@ -356,10 +371,10 @@ final class CmsTranslationOpsService
         return [
             'translation_groups' => $groups->count(),
             'stale_groups' => $groups->where('stale_locales_count', '>', 0)->count(),
-            'published_groups' => $groups->filter(fn (array $group): bool => ($group['published_locales'] ?? []) !== [])->count(),
-            'published_locale_count' => $publishedLocaleCount,
+            'published_groups' => $groups->filter(fn (array $group): bool => ($group['published_target_locales'] ?? []) !== [])->count(),
+            'published_target_locale_count' => $publishedTargetLocaleCount,
             'target_slot_count' => $targetSlotCount,
-            'published_coverage_rate' => $targetSlotCount > 0 ? (int) round(($publishedLocaleCount / $targetSlotCount) * 100) : 0,
+            'published_target_coverage_rate' => $targetSlotCount > 0 ? (int) round(($publishedTargetLocaleCount / $targetSlotCount) * 100) : 0,
             'missing_target_locale' => $groups->filter(fn (array $group): bool => ($group['coverage']['missing_target_locales'] ?? []) !== [])->count(),
             'missing_translation_count' => $groups->sum(fn (array $group): int => count($group['coverage']['missing_target_locales'] ?? [])),
             'stale_translation_count' => $groups->sum(fn (array $group): int => (int) ($group['stale_locales_count'] ?? 0)),
@@ -381,13 +396,14 @@ final class CmsTranslationOpsService
 
         return [
             [
-                'label' => __('ops.translation_ops.summary.published_coverage'),
-                'value' => __('ops.translation_ops.summary.coverage_rate', ['rate' => $metrics['published_coverage_rate']]),
-                'hint' => __('ops.translation_ops.summary.published_coverage_hint', [
-                    'locales' => $metrics['published_locale_count'],
+                'label' => __('ops.translation_ops.summary.published_target_coverage'),
+                'value' => __('ops.translation_ops.summary.coverage_rate', ['rate' => $metrics['published_target_coverage_rate']]),
+                'hint' => __('ops.translation_ops.summary.published_target_coverage_hint', [
+                    'published' => $metrics['published_target_locale_count'],
+                    'slots' => $metrics['target_slot_count'],
                     'groups' => $metrics['published_groups'],
                 ]),
-                'state' => $metrics['published_coverage_rate'] >= 90 ? 'success' : 'warning',
+                'state' => $metrics['published_target_coverage_rate'] >= 90 ? 'success' : 'warning',
             ],
             [
                 'label' => __('ops.translation_ops.summary.missing_translations'),
@@ -494,9 +510,11 @@ final class CmsTranslationOpsService
                 'publish_state' => (bool) ($localeRow['is_published'] ?? false) ? 'success' : 'gray',
                 'record_label' => '#'.(string) ($localeRow['record_id'] ?? ''),
                 'workflow_label' => (string) ($localeRow['workflow_kind_label'] ?? $localeRow['workflow_kind'] ?? ''),
+                'ownership_blockers' => array_values(array_filter((array) ($localeRow['ownership_issues'] ?? []))),
+                'readiness_blockers' => array_values(array_filter($this->localizedBlockers((array) data_get($localeRow, 'preflight.blockers', [])))),
                 'blockers' => array_values(array_filter(array_merge(
                     (array) ($localeRow['ownership_issues'] ?? []),
-                    $this->localizedBlockers((array) data_get($localeRow, 'preflight.blockers', [])),
+                    (array) ($localeRow['readiness_blockers'] ?? []),
                 ))),
                 'actions' => $this->groupActionsByPriority((array) ($localeRow['actions'] ?? [])),
             ];
@@ -686,6 +704,7 @@ final class CmsTranslationOpsService
         $locales = collect($locales);
         $existing = $locales->pluck('locale')->all();
         $published = $locales->where('is_published', true)->pluck('locale')->all();
+        $publishedTarget = array_values(array_intersect($targetLocales, $published));
         $machineDraft = $locales->where('translation_status', 'machine_draft')->pluck('locale')->all();
         $humanReview = $locales->where('translation_status', 'human_review')->pluck('locale')->all();
         $stale = $locales->where('is_stale', true)->pluck('locale')->all();
@@ -695,11 +714,24 @@ final class CmsTranslationOpsService
             'target_locales' => $targetLocales,
             'existing_locales' => array_values(array_unique($existing)),
             'published_locales' => array_values(array_unique($published)),
+            'published_target_locales' => $publishedTarget,
             'machine_draft_locales' => array_values(array_unique($machineDraft)),
             'human_review_locales' => array_values(array_unique($humanReview)),
             'stale_locales' => array_values(array_unique($stale)),
             'missing_target_locales' => $missing,
         ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $coverage
+     * @return list<string>
+     */
+    private function publishedTargetLocales(array $coverage): array
+    {
+        return array_values(array_map(
+            static fn (mixed $locale): string => (string) $locale,
+            (array) ($coverage['published_target_locales'] ?? [])
+        ));
     }
 
     /**

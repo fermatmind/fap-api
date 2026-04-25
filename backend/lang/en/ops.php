@@ -281,6 +281,8 @@ return [
 
     'actions' => [
         'save_changes' => 'Save Changes',
+        'create_resource' => 'Create :resource',
+        'back_to_resource_list' => 'Back to :resource',
     ],
 
     'edit' => [
@@ -321,6 +323,7 @@ return [
         'fields' => [
             'readiness' => 'Readiness',
             'blocker' => 'Blocker',
+            'surface_key' => 'Surface key',
             'locale' => 'Locale',
             'source_locale' => 'Source locale',
             'translation_group' => 'Translation group',
@@ -335,6 +338,8 @@ return [
             'seo_title' => 'SEO title',
             'seo_description' => 'SEO description',
             'canonical_path' => 'Canonical path',
+            'description' => 'Description',
+            'schema_version' => 'Schema version',
             'created_at' => 'Created at',
             'updated_at' => 'Updated at',
             'last_reviewed_at' => 'Last reviewed at',
@@ -392,9 +397,9 @@ return [
         'summary' => [
             'title' => 'Coverage summary',
             'description' => 'Headline multilingual coverage, missing locale pressure, stale risk, and blocked action load.',
-            'published_coverage' => 'Published coverage',
+            'published_target_coverage' => 'Published target-locale coverage',
             'coverage_rate' => ':rate%',
-            'published_coverage_hint' => ':locales published locale cells across :groups groups.',
+            'published_target_coverage_hint' => ':published published target-locale cells across :slots expected slots in :groups groups.',
             'missing_translations' => 'Missing translations',
             'missing_translations_hint' => ':groups groups are missing at least one configured target locale.',
             'stale_translations' => 'Stale translations',
@@ -1768,6 +1773,26 @@ return [
             'report_pdf_subheading' => 'Snapshot-rooted support diagnostics for report delivery, PDF availability, claim/resend clues, and unlock linkage.',
             'report_pdf_detail_subheading' => 'Read-only support diagnostics rooted on report snapshots.',
             'results_detail_subheading' => 'Read-only support diagnostics rooted on results.',
+        ],
+        'approvals' => [
+            'fields' => [
+                'requested_by' => 'Requested by',
+                'approved_by' => 'Approved by',
+                'reason' => 'Reason',
+                'correlation_id' => 'Correlation ID',
+                'executed_at' => 'Executed at',
+                'reject_note' => 'Reject note',
+            ],
+            'actions' => [
+                'approve' => 'Approve',
+                'reject' => 'Reject',
+                'retry_execute' => 'Retry execute',
+            ],
+            'notifications' => [
+                'approved' => 'Approval approved and execution queued',
+                'rejected' => 'Approval rejected',
+                'retried' => 'Approval execution retried',
+            ],
         ],
         'articles' => [
             'label' => 'Article',

@@ -62,6 +62,16 @@ class SupportArticleResource extends Resource
         return __('ops.nav.support_articles');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('ops.nav.support_articles');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('ops.nav.support_articles');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([

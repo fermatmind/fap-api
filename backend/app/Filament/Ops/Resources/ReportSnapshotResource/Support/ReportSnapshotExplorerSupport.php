@@ -20,6 +20,8 @@ use Illuminate\Support\Str;
 
 final class ReportSnapshotExplorerSupport
 {
+    private const INDEX_LOOKBACK_DAYS = 45;
+
     /**
      * @return Builder<ReportSnapshot>
      */
@@ -147,9 +149,66 @@ final class ReportSnapshotExplorerSupport
      */
     public function indexQuery(): Builder
     {
-        return ReportSnapshot::query()
+        $query = ReportSnapshot::query()
             ->withoutGlobalScopes()
             ->select('report_snapshots.*');
+
+        $query->where(function (Builder $builder): void {
+            $this->applyRecentSnapshotWindow($builder->getQuery());
+        });
+
+        if (SchemaBaseline::hasTable('attempts')) {
+            foreach ([
+                'locale' => 'locale',
+                'region' => 'region',
+            ] as $column => $alias) {
+                if (SchemaBaseline::hasColumn('attempts', $column)) {
+                    $query->selectSub($this->attemptField($column), $alias);
+                }
+            }
+        }
+
+        if (SchemaBaseline::hasTable('orders')) {
+            if (SchemaBaseline::hasColumn('orders', 'status')) {
+                $query->selectSub($this->orderField('status'), 'order_status');
+            }
+
+            $query->selectSub($this->orderExistsField(), 'has_order');
+
+            if (SchemaBaseline::hasColumn('orders', 'contact_email_hash')) {
+                $query->selectSub($this->contactEmailPresentField(), 'contact_email_present');
+            } else {
+                $query->selectRaw('0 as contact_email_present');
+            }
+        } else {
+            $query
+                ->selectRaw('0 as has_order')
+                ->selectRaw('0 as contact_email_present');
+        }
+
+        if (SchemaBaseline::hasTable('payment_events') && SchemaBaseline::hasColumn('payment_events', 'status')) {
+            $query->selectSub($this->paymentField('status'), 'payment_status');
+        }
+
+        if (SchemaBaseline::hasTable('benefit_grants')) {
+            $query->selectSub($this->activeBenefitExistsField(), 'has_active_benefit_grant');
+        } else {
+            $query->selectRaw('0 as has_active_benefit_grant');
+        }
+
+        if (SchemaBaseline::hasTable('report_jobs') && SchemaBaseline::hasColumn('report_jobs', 'status')) {
+            $query->selectSub($this->reportJobField('status'), 'report_job_status');
+        }
+
+        if (
+            SchemaBaseline::hasTable('email_outbox')
+            && SchemaBaseline::hasColumn('email_outbox', 'attempt_id')
+            && SchemaBaseline::hasColumn('email_outbox', 'sent_at')
+        ) {
+            $query->selectSub($this->deliveryEmailSentAtField(), 'last_delivery_email_sent_at');
+        }
+
+        return $query;
     }
 
     /**
@@ -227,6 +286,9 @@ final class ReportSnapshotExplorerSupport
         }
 
         return DB::table('report_snapshots')
+            ->where(function (QueryBuilder $builder): void {
+                $this->applyRecentSnapshotWindow($builder);
+            })
             ->whereNotNull($column)
             ->where($column, '!=', '')
             ->distinct()
@@ -247,6 +309,15 @@ final class ReportSnapshotExplorerSupport
         }
 
         return DB::table('attempts')
+            ->whereExists(function (QueryBuilder $snapshotQuery): void {
+                $snapshotQuery
+                    ->selectRaw('1')
+                    ->from('report_snapshots')
+                    ->whereColumn('report_snapshots.attempt_id', 'attempts.id')
+                    ->where(function (QueryBuilder $builder): void {
+                        $this->applyRecentSnapshotWindow($builder);
+                    });
+            })
             ->whereNotNull($column)
             ->where($column, '!=', '')
             ->distinct()
@@ -611,6 +682,11 @@ final class ReportSnapshotExplorerSupport
     public function contactEmailPresent(object $snapshot): bool
     {
         return StatusBadge::isTruthy($snapshot->contact_email_present ?? null);
+    }
+
+    public function indexLookbackDays(): int
+    {
+        return self::INDEX_LOOKBACK_DAYS;
     }
 
     /**
@@ -1017,6 +1093,24 @@ final class ReportSnapshotExplorerSupport
         return $query
             ->orderByDesc('sent_at')
             ->limit(1);
+    }
+
+    private function applyRecentSnapshotWindow(QueryBuilder $query): void
+    {
+        $start = $this->indexLookbackStart();
+
+        $query
+            ->where('report_snapshots.updated_at', '>=', $start)
+            ->orWhere(function (QueryBuilder $builder) use ($start): void {
+                $builder
+                    ->whereNull('report_snapshots.updated_at')
+                    ->where('report_snapshots.created_at', '>=', $start);
+            });
+    }
+
+    private function indexLookbackStart(): Carbon
+    {
+        return now()->subDays($this->indexLookbackDays());
     }
 
     private function deliveryEmailExistsField(): QueryBuilder

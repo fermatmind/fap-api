@@ -65,9 +65,19 @@
 
                                         <p class="ops-control-hint">{{ $cell['workflow_label'] }}</p>
 
-                                        @foreach (($cell['blockers'] ?? []) as $blocker)
-                                            <p class="ops-coverage-matrix__blocker">{{ $blocker }}</p>
-                                        @endforeach
+                                        @if (($cell['ownership_blockers'] ?? []) !== [])
+                                            <p class="ops-control-hint">{{ __('ops.translation_ops.table.ownership_preflight') }}:</p>
+                                            @foreach (($cell['ownership_blockers'] ?? []) as $blocker)
+                                                <p class="ops-coverage-matrix__blocker">{{ $blocker }}</p>
+                                            @endforeach
+                                        @endif
+
+                                        @if (($cell['readiness_blockers'] ?? []) !== [])
+                                            <p class="ops-control-hint">{{ __('ops.translation_ops.health.preflight_blocked') }}:</p>
+                                            @foreach (($cell['readiness_blockers'] ?? []) as $blocker)
+                                                <p class="ops-coverage-matrix__blocker">{{ $blocker }}</p>
+                                            @endforeach
+                                        @endif
 
                                         <x-filament-ops::ops-translation-action-list :actions="$cell['actions']" />
                                     </div>

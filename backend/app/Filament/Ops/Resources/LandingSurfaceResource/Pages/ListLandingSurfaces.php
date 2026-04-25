@@ -18,7 +18,8 @@ class ListLandingSurfaces extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->label(__('ops.actions.create_resource', ['resource' => LandingSurfaceResource::getModelLabel()])),
         ];
     }
 }

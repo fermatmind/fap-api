@@ -62,6 +62,16 @@ class InterpretationGuideResource extends Resource
         return __('ops.nav.interpretation_guides');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('ops.nav.interpretation_guides');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('ops.nav.interpretation_guides');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([
