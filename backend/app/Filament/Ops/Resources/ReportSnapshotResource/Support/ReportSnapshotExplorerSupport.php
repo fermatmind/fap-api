@@ -331,19 +331,32 @@ final class ReportSnapshotExplorerSupport
     /**
      * @param  Builder<ReportSnapshot>  $query
      */
-    public function applyAttemptFieldFilter(Builder $query, string $column, ?string $value): void
+    public function applySnapshotFieldContainsFilter(Builder $query, string $column, ?string $value): void
+    {
+        $needle = trim((string) $value);
+        if ($needle === '' || ! SchemaBaseline::hasColumn('report_snapshots', $column)) {
+            return;
+        }
+
+        $query->where('report_snapshots.'.$column, 'like', '%'.$needle.'%');
+    }
+
+    /**
+     * @param  Builder<ReportSnapshot>  $query
+     */
+    public function applyAttemptFieldFilter(Builder $query, string $column, ?string $value, bool $partial = false): void
     {
         $needle = trim((string) $value);
         if ($needle === '' || ! SchemaBaseline::hasTable('attempts') || ! SchemaBaseline::hasColumn('attempts', $column)) {
             return;
         }
 
-        $query->whereExists(function (QueryBuilder $attemptQuery) use ($column, $needle): void {
+        $query->whereExists(function (QueryBuilder $attemptQuery) use ($column, $needle, $partial): void {
             $attemptQuery
                 ->selectRaw('1')
                 ->from('attempts')
                 ->whereColumn('attempts.id', 'report_snapshots.attempt_id')
-                ->where('attempts.'.$column, $needle);
+                ->where('attempts.'.$column, $partial ? 'like' : '=', $partial ? '%'.$needle.'%' : $needle);
         });
     }
 

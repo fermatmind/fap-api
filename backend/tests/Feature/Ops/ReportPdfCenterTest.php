@@ -48,6 +48,7 @@ final class ReportPdfCenterTest extends TestCase
             ->get('/ops/reports')
             ->assertOk()
             ->assertSee('报告 / PDF 中心')
+            ->assertSee('最近 45 天记录')
             ->assertDontSee('Create Report Snapshot')
             ->assertDontSee('Edit Report Snapshot');
 
@@ -102,6 +103,29 @@ final class ReportPdfCenterTest extends TestCase
         $this->assertNotEmpty((string) $snapshot->last_delivery_email_sent_at);
         $this->assertSame(1, (int) $snapshot->has_order);
         $this->assertSame(1, (int) $snapshot->has_active_benefit_grant);
+    }
+
+    public function test_report_pdf_center_initial_render_avoids_expensive_distinct_filter_option_queries(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_MENU_SUPPORT,
+            PermissionNames::ADMIN_OPS_READ,
+        ]);
+        $selectedOrg = $this->createOrganization('Recent Window Org');
+        $this->seedDiagnosticChain(orgId: 61);
+
+        $this->withSession($this->opsSession($admin, $selectedOrg))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/reports')
+            ->assertOk()
+            ->assertSee('最近 45 天记录');
+
+        $resourceSource = file_get_contents(__DIR__.'/../../..'.'/app/Filament/Ops/Resources/ReportSnapshotResource.php');
+
+        $this->assertIsString($resourceSource);
+        $this->assertStringNotContainsString("->options(fn (): array => \$support->distinctSnapshotOptions('scale_code'))", $resourceSource);
+        $this->assertStringNotContainsString("->options(fn (): array => \$support->distinctAttemptOptions('locale'))", $resourceSource);
+        $this->assertStringNotContainsString("->options(fn (): array => \$support->distinctAttemptOptions('region'))", $resourceSource);
     }
 
     public function test_report_pdf_center_detail_renders_seven_sections_hides_sensitive_payloads_and_shows_drill_through_links(): void

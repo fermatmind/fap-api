@@ -766,6 +766,28 @@ final class ArticleTranslationOpsService
             return null;
         }
 
+        if ($raw === 'machine translation provider unavailable') {
+            return __('ops.translation_ops.reasons.machine_translation_provider_unavailable');
+        }
+
+        if ($raw === 'Machine translation provider is not configured. Configure an ArticleMachineTranslationProvider binding before creating machine drafts.') {
+            return __('ops.translation_ops.reasons.article_machine_translation_provider_unconfigured');
+        }
+
+        if (str_contains($raw, 'Article machine translation provider is not configured. Set ARTICLE_TRANSLATION_OPENAI_API_KEY')) {
+            return __('ops.translation_ops.reasons.article_machine_translation_provider_missing_api_key');
+        }
+
+        if (str_contains($raw, 'Article machine translation provider is not configured. Set ARTICLE_TRANSLATION_OPENAI_MODEL')) {
+            return __('ops.translation_ops.reasons.article_machine_translation_provider_missing_model');
+        }
+
+        if (preg_match('/^Article machine translation provider \\[(.+)\\] is not supported\\./', $raw, $matches) === 1) {
+            return __('ops.translation_ops.reasons.article_machine_translation_provider_not_supported', [
+                'provider' => $matches[1],
+            ]);
+        }
+
         if (str_contains($raw, 'Machine translation provider is not configured')) {
             return __('ops.translation_ops.reasons.machine_translation_provider_unconfigured');
         }
