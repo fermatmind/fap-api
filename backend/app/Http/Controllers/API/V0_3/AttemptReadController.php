@@ -19,6 +19,7 @@ use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
 use App\Services\BigFive\BigFivePublicProjectionService;
 use App\Services\BigFive\ReportEngine\Bridge\BigFiveLiveRuntimeBridge;
 use App\Services\Commerce\MbtiAccessHubBuilder;
+use App\Services\Content\EnneagramPackLoader;
 use App\Services\Enneagram\EnneagramObservationStateService;
 use App\Services\Enneagram\EnneagramPublicFormSummaryBuilder;
 use App\Services\Enneagram\EnneagramPublicProjectionService;
@@ -312,6 +313,13 @@ class AttemptReadController extends Controller
             ...$this->riasecFormEventMeta($riasecFormSummary),
             ...$big5EventMeta,
         ]);
+        if ($scaleCode === 'ENNEAGRAM') {
+            $this->eventRecorder->recordFromRequest($request, 'enneagram_result_viewed', $this->resolveUserId($request), $this->resolveEnneagramAnalyticsEventMeta(
+                $attempt,
+                $result,
+                $enneagramProjectionV2,
+            ));
+        }
 
         $responsePayload = [
             'ok' => true,
@@ -642,6 +650,13 @@ class AttemptReadController extends Controller
             ...$this->riasecFormEventMeta($riasecFormSummary),
             ...$big5EventMeta,
         ]);
+        if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'ENNEAGRAM') {
+            $this->eventRecorder->recordFromRequest($request, 'enneagram_report_viewed', $this->resolveUserId($request), $this->resolveEnneagramAnalyticsEventMeta(
+                $attempt,
+                $result,
+                is_array($responsePayload['enneagram_public_projection_v2'] ?? null) ? $responsePayload['enneagram_public_projection_v2'] : null,
+            ));
+        }
 
         return response()->json($responsePayload);
     }
@@ -2303,6 +2318,9 @@ class AttemptReadController extends Controller
             ...$this->big5FormEventMeta($big5FormSummary),
             ...$this->enneagramFormEventMeta($enneagramFormSummary),
         ]);
+        if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'ENNEAGRAM') {
+            $this->eventRecorder->recordFromRequest($request, 'enneagram_pdf_downloaded', $this->resolveUserId($request), $this->resolveEnneagramAnalyticsEventMeta($attempt, $result));
+        }
 
         $generated = $this->reportPdfDocumentService->getOrGenerate($attempt, $gate, $result);
         $pdfBinary = (string) ($generated['binary'] ?? '');
@@ -2352,10 +2370,21 @@ class AttemptReadController extends Controller
     public function assignEnneagramObservation(Request $request, string $id): JsonResponse
     {
         [$attempt, $result] = $this->resolveEnneagramObservationSubject($request, $id);
+        $contract = $this->enneagramObservationStateService->assign($attempt, $result);
+        $request->merge(['attempt_id' => (string) $attempt->id]);
+        $this->eventRecorder->recordFromRequest($request, 'enneagram_observation_assigned', $this->resolveUserId($request), $this->resolveEnneagramAnalyticsEventMeta(
+            $attempt,
+            $result,
+            null,
+            [
+                'observation_status' => data_get($contract, 'observation_state_v1.status'),
+                'suggested_next_action' => data_get($contract, 'observation_state_v1.suggested_next_action'),
+            ],
+        ));
 
         return response()->json([
             'ok' => true,
-            ...$this->enneagramObservationStateService->assign($attempt, $result),
+            ...$contract,
         ]);
     }
 
@@ -2371,10 +2400,21 @@ class AttemptReadController extends Controller
             'confidence_self_rating' => ['required', 'integer', 'between:1,5'],
             'scene_type' => ['required', 'string', 'in:work,relationship,pressure,alone,other'],
         ]);
+        $contract = $this->enneagramObservationStateService->submitDay3($attempt, $result, $payload);
+        $request->merge(['attempt_id' => (string) $attempt->id]);
+        $this->eventRecorder->recordFromRequest($request, 'enneagram_day3_feedback_submitted', $this->resolveUserId($request), $this->resolveEnneagramAnalyticsEventMeta(
+            $attempt,
+            $result,
+            null,
+            [
+                'observation_status' => data_get($contract, 'observation_state_v1.status'),
+                'suggested_next_action' => data_get($contract, 'observation_state_v1.suggested_next_action'),
+            ],
+        ));
 
         return response()->json([
             'ok' => true,
-            ...$this->enneagramObservationStateService->submitDay3($attempt, $result, $payload),
+            ...$contract,
         ]);
     }
 
@@ -2391,10 +2431,26 @@ class AttemptReadController extends Controller
             'wants_retake_same_form' => ['sometimes', 'boolean'],
             'user_disagreed_reason' => ['nullable', 'string', 'max:255'],
         ]);
+        $contract = $this->enneagramObservationStateService->submitDay7($attempt, $result, $payload);
+        $request->merge(['attempt_id' => (string) $attempt->id]);
+        $eventMeta = $this->resolveEnneagramAnalyticsEventMeta(
+            $attempt,
+            $result,
+            null,
+            [
+                'observation_status' => data_get($contract, 'observation_state_v1.status'),
+                'suggested_next_action' => data_get($contract, 'observation_state_v1.suggested_next_action'),
+            ],
+        );
+        $this->eventRecorder->recordFromRequest($request, 'enneagram_day7_feedback_submitted', $this->resolveUserId($request), $eventMeta);
+        $this->eventRecorder->recordFromRequest($request, 'enneagram_resonance_feedback_submitted', $this->resolveUserId($request), $eventMeta);
+        if (trim((string) data_get($contract, 'observation_state_v1.user_confirmed_type', '')) !== '') {
+            $this->eventRecorder->recordFromRequest($request, 'enneagram_user_confirmed_type', $this->resolveUserId($request), $eventMeta);
+        }
 
         return response()->json([
             'ok' => true,
-            ...$this->enneagramObservationStateService->submitDay7($attempt, $result, $payload),
+            ...$contract,
         ]);
     }
 
@@ -2465,6 +2521,73 @@ class AttemptReadController extends Controller
         $formCode = trim((string) ($summary['form_code'] ?? ''));
 
         return $formCode !== '' ? ['form_code' => $formCode] : [];
+    }
+
+    /**
+     * @param  array<string,mixed>|null  $projection
+     * @param  array<string,mixed>  $overrides
+     * @return array<string,mixed>
+     */
+    private function resolveEnneagramAnalyticsEventMeta(?Attempt $attempt, ?Result $result, ?array $projection = null, array $overrides = []): array
+    {
+        $resolvedProjection = is_array($projection) && $projection !== []
+            ? $projection
+            : $this->enneagramPublicProjectionService->buildV2FromResult(
+                $result,
+                (string) ($attempt?->locale ?? config('content_packs.default_locale', 'zh-CN'))
+            );
+
+        $meta = [
+            'scale_code' => 'ENNEAGRAM',
+            'form_code' => $this->nullableScalar(data_get($resolvedProjection, 'form.form_code') ?? $attempt?->form_code),
+            'form_kind' => $this->nullableScalar(data_get($resolvedProjection, 'form.form_kind')),
+            'score_space_version' => $this->nullableScalar(data_get($resolvedProjection, 'form.score_space_version')),
+            'interpretation_scope' => $this->nullableScalar(data_get($resolvedProjection, 'classification.interpretation_scope')),
+            'confidence_level' => $this->nullableScalar(data_get($resolvedProjection, 'classification.confidence_level')),
+            'close_call_pair' => is_array(data_get($resolvedProjection, 'dynamics.close_call_pair'))
+                ? data_get($resolvedProjection, 'dynamics.close_call_pair')
+                : null,
+            'primary_candidate' => $this->nullableScalar(data_get($resolvedProjection, 'scores.primary_candidate')),
+            'second_candidate' => $this->nullableScalar(data_get($resolvedProjection, 'scores.second_candidate')),
+            'third_candidate' => $this->nullableScalar(data_get($resolvedProjection, 'scores.third_candidate')),
+            'compare_compatibility_group' => $this->nullableScalar(data_get($resolvedProjection, 'methodology.compare_compatibility_group')),
+            'cross_form_comparable' => data_get($resolvedProjection, 'methodology.cross_form_comparable'),
+            'interpretation_context_id' => $this->nullableScalar(data_get($resolvedProjection, 'content_binding.interpretation_context_id')),
+            'content_release_hash' => $this->nullableScalar(data_get($resolvedProjection, 'content_binding.content_release_hash')),
+            'registry_release_hash' => $this->nullableScalar(
+                data_get($resolvedProjection, 'registry.registry_release_hash')
+                ?? data_get($resolvedProjection, 'content_binding.registry_release_hash')
+                ?? data_get(app(EnneagramPackLoader::class)->loadRegistryPack(), 'release_hash')
+            ),
+            'projection_version' => $this->nullableScalar(data_get($resolvedProjection, 'algorithmic_meta.projection_version')),
+            'report_schema_version' => $this->nullableScalar(data_get($resolvedProjection, 'algorithmic_meta.report_schema_version')),
+            'close_call_rule_version' => $this->nullableScalar(data_get($resolvedProjection, 'algorithmic_meta.close_call_rule_version')),
+            'confidence_policy_version' => $this->nullableScalar(data_get($resolvedProjection, 'algorithmic_meta.confidence_policy_version')),
+            'quality_policy_version' => $this->nullableScalar(data_get($resolvedProjection, 'algorithmic_meta.quality_policy_version')),
+            'observation_status' => null,
+            'suggested_next_action' => null,
+        ];
+
+        foreach ($overrides as $key => $value) {
+            $meta[$key] = $value;
+        }
+
+        return $meta;
+    }
+
+    private function nullableScalar(mixed $value): string|int|float|bool|null
+    {
+        if (is_bool($value) || is_int($value) || is_float($value)) {
+            return $value;
+        }
+
+        if (! is_scalar($value)) {
+            return null;
+        }
+
+        $normalized = trim((string) $value);
+
+        return $normalized !== '' ? $normalized : null;
     }
 
     /**

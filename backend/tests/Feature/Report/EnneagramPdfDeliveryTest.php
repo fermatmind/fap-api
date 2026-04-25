@@ -38,6 +38,10 @@ final class EnneagramPdfDeliveryTest extends TestCase
             'event_code' => 'report_pdf_view',
             'attempt_id' => $attemptId,
         ]);
+        $this->assertDatabaseHas('events', [
+            'event_code' => 'enneagram_pdf_downloaded',
+            'attempt_id' => $attemptId,
+        ]);
     }
 
     /**

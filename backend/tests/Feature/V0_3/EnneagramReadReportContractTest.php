@@ -68,6 +68,10 @@ final class EnneagramReadReportContractTest extends TestCase
         $this->assertNotSame('', (string) $result->json('enneagram_public_projection_v1.primary_type'));
         $this->assertCount(9, (array) $result->json('enneagram_public_projection_v1.type_vector'));
         $this->assertEnneagramProjectionV2Contract((array) $result->json('enneagram_public_projection_v2'), $formCode);
+        $this->assertDatabaseHas('events', [
+            'event_code' => 'enneagram_result_viewed',
+            'attempt_id' => $attemptId,
+        ]);
 
         $report = $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/report");
         $report->assertStatus(200);
@@ -104,6 +108,10 @@ final class EnneagramReadReportContractTest extends TestCase
             $report->json('enneagram_public_projection_v2.methodology.compare_compatibility_group')
         );
         $this->assertNotSame('', (string) $report->json('enneagram_report_v2.registry.registry_release_hash'));
+        $this->assertDatabaseHas('events', [
+            'event_code' => 'enneagram_report_viewed',
+            'attempt_id' => $attemptId,
+        ]);
 
         $access = $this->withHeaders($headers)->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
         $access->assertStatus(200);

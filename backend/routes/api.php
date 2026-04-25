@@ -201,6 +201,7 @@ Route::prefix('v0.3')->middleware([
         Route::get('/public-gateways/help', [PublicGatewaySurfaceController::class, 'help']);
         Route::get('/public-gateways/help/{slug}', [PublicGatewaySurfaceController::class, 'helpDetail']);
         Route::get('/scales/{scale_code}/questions', [ScalesController::class, 'questions']);
+        Route::get('/scales/{scale_code}/technical-note', [ScalesController::class, 'technicalNote']);
         Route::get('/scales/{scale_code}', [ScalesController::class, 'show']);
 
         // 2) Attempts lifecycle

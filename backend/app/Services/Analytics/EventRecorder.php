@@ -20,6 +20,7 @@ final class EventRecorder
         private ExperimentAssigner $experimentAssigner,
         private ?SensitiveDataRedactor $redactor = null,
         private ?Big5EventSchema $big5EventSchema = null,
+        private ?EnneagramEventSchema $enneagramEventSchema = null,
         private ?ScaleIdentityRuntimePolicy $runtimePolicy = null,
     ) {}
 
@@ -30,6 +31,10 @@ final class EventRecorder
         }
 
         $meta = $this->validateBigFiveEventMeta($eventCode, $meta);
+        if ($meta === null) {
+            return;
+        }
+        $meta = $this->validateEnneagramEventMeta($eventCode, $meta);
         if ($meta === null) {
             return;
         }
@@ -681,6 +686,10 @@ final class EventRecorder
             return 'clinical_event_meta';
         }
 
+        if (str_starts_with($normalizedCode, 'enneagram_')) {
+            return 'enneagram_event_meta';
+        }
+
         return 'event_meta';
     }
 
@@ -737,6 +746,34 @@ final class EventRecorder
             return $schema->validate($eventCode, $meta);
         } catch (\InvalidArgumentException $e) {
             Log::warning('BIG5_EVENT_SCHEMA_INVALID', [
+                'event_code' => $eventCode,
+                'message' => $e->getMessage(),
+                'meta_keys' => array_values(array_map('strval', array_keys($meta))),
+            ]);
+
+            return null;
+        }
+    }
+
+    /**
+     * @param  array<string,mixed>  $meta
+     * @return array<string,mixed>|null
+     */
+    private function validateEnneagramEventMeta(string $eventCode, array $meta): ?array
+    {
+        $normalizedCode = strtolower(trim($eventCode));
+        if (! str_starts_with($normalizedCode, 'enneagram_')) {
+            return $meta;
+        }
+
+        $schema = $this->enneagramEventSchema instanceof EnneagramEventSchema
+            ? $this->enneagramEventSchema
+            : new EnneagramEventSchema;
+
+        try {
+            return $schema->validate($eventCode, $meta);
+        } catch (\InvalidArgumentException $e) {
+            Log::warning('ENNEAGRAM_EVENT_SCHEMA_INVALID', [
                 'event_code' => $eventCode,
                 'message' => $e->getMessage(),
                 'meta_keys' => array_values(array_map('strval', array_keys($meta))),

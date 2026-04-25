@@ -13,6 +13,7 @@ use App\Services\Content\QuestionsService;
 use App\Services\Content\RiasecPackLoader;
 use App\Services\Content\Sds20PackLoader;
 use App\Services\Enneagram\EnneagramFormCatalog;
+use App\Services\Enneagram\EnneagramTechnicalNoteService;
 use App\Services\Mbti\MbtiFormCatalog;
 use App\Services\Riasec\RiasecFormCatalog;
 use App\Services\Scale\ScaleCodeInputGuard;
@@ -88,6 +89,48 @@ class ScalesController extends Controller
             'scale_code' => $scaleCodeMeta['scale_code'],
             'item' => $row,
         ], $scaleCodeMeta));
+    }
+
+    /**
+     * GET /api/v0.3/scales/{scale_code}/technical-note
+     */
+    public function technicalNote(Request $request, string $scale_code, EnneagramTechnicalNoteService $technicalNoteService): JsonResponse
+    {
+        $orgId = $this->orgContext->orgId();
+        $code = strtoupper(trim($scale_code));
+        if ($code === '') {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'SCALE_REQUIRED',
+                'message' => 'scale_code is required.',
+            ], 400);
+        }
+        $this->inputGuard->assertAccepted($code);
+
+        $row = $this->registry->getByCode($code, $orgId);
+        if (! $row) {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'NOT_FOUND',
+                'message' => 'scale not found.',
+            ], 404);
+        }
+
+        $resolvedScaleCode = strtoupper(trim((string) ($row['code'] ?? $code)));
+        if ($resolvedScaleCode !== 'ENNEAGRAM') {
+            return response()->json([
+                'ok' => false,
+                'error_code' => 'SCALE_NOT_SUPPORTED',
+                'message' => 'technical note contract is only available for ENNEAGRAM.',
+            ], 422);
+        }
+
+        $scaleCodeMeta = $this->buildScaleCodeMeta($code, $row);
+
+        return response()->json(array_merge([
+            'ok' => true,
+            'scale_code' => $scaleCodeMeta['scale_code'],
+        ], $scaleCodeMeta, $technicalNoteService->contract()));
     }
 
     /**

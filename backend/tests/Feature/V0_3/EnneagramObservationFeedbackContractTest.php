@@ -44,6 +44,10 @@ final class EnneagramObservationFeedbackContractTest extends TestCase
         $day3->assertJsonPath('observation_state_v1.status', 'day3_feedback_submitted');
         $day3->assertJsonPath('observation_state_v1.observation_completion_rate', 50);
         $day3->assertJsonPath('observation_state_v1.day3_observation_feedback.more_like', 'top1');
+        $this->assertDatabaseHas('events', [
+            'event_code' => 'enneagram_day3_feedback_submitted',
+            'attempt_id' => $attemptId,
+        ]);
 
         $day7 = $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
@@ -61,6 +65,18 @@ final class EnneagramObservationFeedbackContractTest extends TestCase
         $day7->assertJsonPath('observation_state_v1.user_confirmed_type', '8');
         $day7->assertJsonPath('observation_state_v1.suggested_next_action', 'no_action');
         $day7->assertJsonPath('observation_state_v1.observation_completion_rate', 100);
+        $this->assertDatabaseHas('events', [
+            'event_code' => 'enneagram_day7_feedback_submitted',
+            'attempt_id' => $attemptId,
+        ]);
+        $this->assertDatabaseHas('events', [
+            'event_code' => 'enneagram_resonance_feedback_submitted',
+            'attempt_id' => $attemptId,
+        ]);
+        $this->assertDatabaseHas('events', [
+            'event_code' => 'enneagram_user_confirmed_type',
+            'attempt_id' => $attemptId,
+        ]);
 
         $resultPayload = json_decode((string) DB::table('results')->where('attempt_id', $attemptId)->value('result_json'), true);
         $this->assertSame('T1', data_get($resultPayload, 'enneagram_public_projection_v2.top_types.0.type_code'));
