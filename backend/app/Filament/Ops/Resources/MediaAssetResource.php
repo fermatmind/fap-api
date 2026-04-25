@@ -59,6 +59,16 @@ class MediaAssetResource extends Resource
         return __('ops.nav.media_library');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('ops.nav.media_library');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('ops.nav.media_library');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([

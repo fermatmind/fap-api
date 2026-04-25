@@ -63,6 +63,16 @@ class ArticleCategoryResource extends Resource
         return __('ops.nav.article_categories');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('ops.nav.article_categories');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('ops.nav.article_categories');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([

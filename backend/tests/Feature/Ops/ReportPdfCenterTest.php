@@ -74,15 +74,34 @@ final class ReportPdfCenterTest extends TestCase
 
     public function test_report_pdf_center_index_query_stays_lightweight_for_production_listing(): void
     {
-        $sql = strtolower(app(ReportSnapshotExplorerSupport::class)->indexQuery()->toBase()->toSql());
+        $support = app(ReportSnapshotExplorerSupport::class);
+        $sql = strtolower($support->indexQuery()->toBase()->toSql());
         $resourceSql = strtolower(ReportSnapshotResource::getEloquentQuery()->toBase()->toSql());
 
         $this->assertStringContainsString('from "report_snapshots"', $sql);
-        $this->assertStringNotContainsString('benefit_grants', $sql);
-        $this->assertStringNotContainsString('payment_events', $sql);
-        $this->assertStringNotContainsString('email_outbox', $sql);
-        $this->assertStringNotContainsString('report_jobs', $sql);
+        $this->assertStringContainsString('"report_snapshots"."updated_at" >= ?', $sql);
+        $this->assertStringContainsString('"report_snapshots"."created_at" >= ?', $sql);
+        $this->assertStringContainsString('last_delivery_email_sent_at', $sql);
+        $this->assertStringContainsString('report_job_status', $sql);
+        $this->assertStringContainsString('benefit_grants', $sql);
         $this->assertSame($sql, $resourceSql);
+        $this->assertSame(45, $support->indexLookbackDays());
+    }
+
+    public function test_report_pdf_center_index_query_hydrates_lightweight_status_fields_without_detail_fetches(): void
+    {
+        $chain = $this->seedDiagnosticChain(orgId: 91, orderNo: 'ord_report_index_status_001');
+
+        $snapshot = app(ReportSnapshotExplorerSupport::class)->indexQuery()->firstWhere('attempt_id', $chain['attempt_id']);
+
+        $this->assertInstanceOf(ReportSnapshot::class, $snapshot);
+        $this->assertSame('en', (string) $snapshot->locale);
+        $this->assertSame('paid', (string) $snapshot->order_status);
+        $this->assertSame('paid', (string) $snapshot->payment_status);
+        $this->assertSame('succeeded', (string) $snapshot->report_job_status);
+        $this->assertNotEmpty((string) $snapshot->last_delivery_email_sent_at);
+        $this->assertSame(1, (int) $snapshot->has_order);
+        $this->assertSame(1, (int) $snapshot->has_active_benefit_grant);
     }
 
     public function test_report_pdf_center_detail_renders_seven_sections_hides_sensitive_payloads_and_shows_drill_through_links(): void

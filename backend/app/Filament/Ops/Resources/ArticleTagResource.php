@@ -62,6 +62,16 @@ class ArticleTagResource extends Resource
         return __('ops.nav.article_tags');
     }
 
+    public static function getModelLabel(): string
+    {
+        return __('ops.nav.article_tags');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('ops.nav.article_tags');
+    }
+
     public static function form(Form $form): Form
     {
         return $form->schema([
