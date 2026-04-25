@@ -241,6 +241,22 @@ Route::prefix('v0.3')->middleware([
                 ->middleware('uuid:id')
                 ->defaults('public_realm', true)
                 ->name('api.v0_3.attempts.report_pdf');
+            Route::get('/attempts/{id}/enneagram/observation', [AttemptReadController::class, 'enneagramObservation'])
+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.enneagram.observation.show');
+            Route::post('/attempts/{id}/enneagram/observation/assign', [AttemptReadController::class, 'assignEnneagramObservation'])
+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.enneagram.observation.assign');
+            Route::post('/attempts/{id}/enneagram/observation/day3', [AttemptReadController::class, 'submitEnneagramObservationDay3'])
+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.enneagram.observation.day3');
+            Route::post('/attempts/{id}/enneagram/observation/day7', [AttemptReadController::class, 'submitEnneagramObservationDay7'])
+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.enneagram.observation.day7');
             Route::post('/attempts/{id}/invite-unlocks', [AttemptInviteUnlockController::class, 'store'])
                 ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
                 ->defaults('public_realm', true)
