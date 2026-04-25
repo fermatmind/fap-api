@@ -198,6 +198,35 @@ final class EnneagramReportComposerV2Test extends TestCase
         $this->assertSame('required', data_get($module, 'fallback_policy'));
     }
 
+    public function test_sample_report_module_exposes_preview_fields_from_registry(): void
+    {
+        $payload = $this->composeReportV2(
+            $this->syntheticProjectionInput('enneagram_likert_105', [
+                'T8' => 86.0,
+                'T3' => 71.0,
+                'T1' => 64.0,
+                'T6' => 39.0,
+                'T2' => 28.0,
+                'T5' => 25.0,
+                'T4' => 21.0,
+                'T7' => 19.0,
+                'T9' => 17.0,
+            ])
+        );
+
+        $module = $this->module($payload, 'sample_report_link');
+
+        $this->assertSame('clear_sample', data_get($module, 'content.sample_key'));
+        $this->assertSame('clear', data_get($module, 'content.sample_type'));
+        $this->assertSame('enneagram_likert_105', data_get($module, 'content.form_code'));
+        $this->assertSame('clear', data_get($module, 'content.interpretation_scope'));
+        $this->assertSame(['8', '3', '1'], data_get($module, 'content.top_types'));
+        $this->assertNotSame('', (string) data_get($module, 'content.short_summary'));
+        $this->assertNotSame('', (string) data_get($module, 'content.page_1_preview'));
+        $this->assertNotSame('', (string) data_get($module, 'content.method_boundary'));
+        $this->assertNotSame('', (string) data_get($module, 'content.public_url_slug'));
+    }
+
     /**
      * @return iterable<string,array{string,string,string}>
      */
