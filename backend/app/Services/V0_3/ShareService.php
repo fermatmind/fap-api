@@ -4,10 +4,12 @@ namespace App\Services\V0_3;
 
 use App\Models\Attempt;
 use App\Models\PersonalityProfile;
+use App\Models\ReportSnapshot;
 use App\Models\Result;
 use App\Models\Share;
 use App\Services\BigFive\BigFivePublicProjectionService;
 use App\Services\Cms\PersonalityProfileService;
+use App\Services\Enneagram\EnneagramPublicFormSummaryBuilder;
 use App\Services\InsightGraph\InsightGraphContractService;
 use App\Services\InsightGraph\PartnerReadContractService;
 use App\Services\InsightGraph\WidgetSurfaceContractService;
@@ -39,6 +41,7 @@ class ShareService
         private readonly MbtiPublicProjectionService $mbtiPublicProjectionService,
         private readonly MbtiPublicSummaryV1Builder $mbtiPublicSummaryV1Builder,
         private readonly BigFivePublicProjectionService $bigFivePublicProjectionService,
+        private readonly EnneagramPublicFormSummaryBuilder $enneagramPublicFormSummaryBuilder,
         private readonly RiasecPublicProjectionService $riasecPublicProjectionService,
         private readonly AnswerSurfaceContractService $answerSurfaceContractService,
         private readonly LandingSurfaceContractService $landingSurfaceContractService,
@@ -265,6 +268,9 @@ class ShareService
         if ($scaleCode === 'BIG5_OCEAN') {
             return $this->buildBigFiveShareSummary($attempt, $locale, $big5Projection ?? []);
         }
+        if ($scaleCode === 'ENNEAGRAM') {
+            return $this->buildEnneagramShareSummary($attempt, $result, $locale, $report);
+        }
         if ($scaleCode === 'RIASEC') {
             return $this->buildRiasecShareSummary($attempt, $locale, $riasecProjection ?? []);
         }
@@ -442,6 +448,124 @@ class ShareService
         ];
     }
 
+    /**
+     * @param  array<string,mixed>  $report
+     * @return array<string,mixed>
+     */
+    private function buildEnneagramShareSummary(Attempt $attempt, Result $result, string $locale, array $report): array
+    {
+        $surface = $this->resolveEnneagramSurfacePayload($attempt, $result, $report);
+        $projection = $surface['projection_v2'];
+        $reportV2 = $surface['report_v2'];
+        $snapshotBinding = $surface['snapshot_binding_v1'];
+        $formSummary = $this->enneagramPublicFormSummaryBuilder->summarizeForAttempt($attempt, $result, $locale);
+        $classification = is_array($reportV2['classification'] ?? null) ? $reportV2['classification'] : [];
+        $top3Module = $this->firstModule($reportV2, 'top3_cards');
+        $topTypeCards = is_array(data_get($top3Module, 'content.cards')) ? data_get($top3Module, 'content.cards') : [];
+        $all9Profile = is_array(data_get($projection, 'scores.all9_profile')) ? data_get($projection, 'scores.all9_profile') : [];
+        $closeCallPair = is_array(data_get($projection, 'dynamics.close_call_pair')) ? data_get($projection, 'dynamics.close_call_pair') : [];
+        $scope = (string) ($classification['interpretation_scope'] ?? data_get($projection, 'classification.interpretation_scope', 'clear'));
+        $primary = trim((string) (data_get($projection, 'scores.primary_candidate') ?? data_get($topTypeCards, '0.type', '')));
+        $second = trim((string) (data_get($projection, 'scores.second_candidate') ?? data_get($topTypeCards, '1.type', '')));
+        $third = trim((string) (data_get($projection, 'scores.third_candidate') ?? data_get($topTypeCards, '2.type', '')));
+        $shareText = $this->resolveEnneagramShareText($locale, $scope, $primary, $second);
+        $confidenceLevel = trim((string) ($classification['confidence_level'] ?? data_get($projection, 'classification.confidence_level', '')));
+        $confidenceLabel = trim((string) (data_get($projection, 'classification.confidence_label') ?? $confidenceLevel));
+        $generatedAt = $surface['generated_at'];
+        $formCode = (string) ($formSummary['form_code'] ?? '');
+        $formKind = (string) ($formSummary['form_kind'] ?? '');
+        $methodologyVariant = $this->stringOrNull(
+            data_get($reportV2, 'form.methodology_variant')
+            ?? data_get($projection, 'form.methodology_variant')
+        );
+        if ($methodologyVariant === null) {
+            $methodologyVariant = match ($formCode) {
+                'enneagram_likert_105' => 'e105',
+                'enneagram_forced_choice_144' => 'fc144',
+                default => null,
+            };
+        }
+
+        $publicSummary = [
+            'version' => 'enneagram.public_summary.v1',
+            'public_surface_version' => 'enneagram.public_surface.v1',
+            'scale_code' => 'ENNEAGRAM',
+            'form_code' => $formCode !== '' ? $formCode : null,
+            'form_label' => $formSummary['label'] ?? null,
+            'form_kind' => $formKind !== '' ? $formKind : null,
+            'methodology_variant' => $methodologyVariant,
+            'primary_candidate' => $primary !== '' ? $primary : null,
+            'second_candidate' => $second !== '' ? $second : null,
+            'third_candidate' => $third !== '' ? $third : null,
+            'top_types' => array_values(array_map(
+                static fn (array $row): array => [
+                    'type' => trim((string) ($row['type'] ?? '')),
+                    'candidate_role' => trim((string) ($row['candidate_role'] ?? '')),
+                    'display_score' => $row['display_score'] ?? null,
+                ],
+                array_filter($topTypeCards, static fn (mixed $row): bool => is_array($row))
+            )),
+            'all9_profile_mini' => array_values(array_map(
+                static fn (array $row): array => [
+                    'type' => trim((string) ($row['type'] ?? '')),
+                    'rank' => isset($row['rank']) ? (int) $row['rank'] : null,
+                    'display_score' => $row['display_score'] ?? null,
+                ],
+                array_filter($all9Profile, static fn (mixed $row): bool => is_array($row))
+            )),
+            'confidence_level' => $confidenceLevel !== '' ? $confidenceLevel : null,
+            'confidence_label' => $confidenceLabel !== '' ? $confidenceLabel : null,
+            'interpretation_scope' => $scope !== '' ? $scope : null,
+            'interpretation_reason' => $classification['interpretation_reason'] ?? data_get($projection, 'classification.interpretation_reason'),
+            'close_call_pair' => [
+                'pair_key' => $this->stringOrNull($closeCallPair['pair_key'] ?? null),
+                'type_a' => $this->stringOrNull($closeCallPair['type_a'] ?? null),
+                'type_b' => $this->stringOrNull($closeCallPair['type_b'] ?? null),
+            ],
+            'dominance_gap_abs' => data_get($projection, 'classification.dominance_gap_abs'),
+            'dominance_gap_pct' => data_get($projection, 'classification.dominance_gap_pct'),
+            'compare_compatibility_group' => data_get($projection, 'methodology.compare_compatibility_group')
+                ?? data_get($snapshotBinding, 'compare_compatibility_group'),
+            'cross_form_comparable' => false,
+            'interpretation_context_id' => data_get($reportV2, 'provenance.interpretation_context_id')
+                ?? data_get($projection, 'content_binding.interpretation_context_id')
+                ?? data_get($snapshotBinding, 'interpretation_context_id'),
+            'registry_release_hash' => data_get($reportV2, 'registry.registry_release_hash')
+                ?? data_get($reportV2, 'provenance.registry_release_hash'),
+            'content_release_hash' => data_get($reportV2, 'provenance.content_release_hash')
+                ?? data_get($projection, 'content_binding.content_release_hash')
+                ?? data_get($snapshotBinding, 'content_release_hash'),
+            'content_snapshot_status' => data_get($reportV2, 'provenance.content_snapshot_status')
+                ?? data_get($projection, 'content_binding.content_snapshot_status')
+                ?? data_get($snapshotBinding, 'content_snapshot_status'),
+            'report_schema_version' => data_get($reportV2, 'schema_version')
+                ?? data_get($snapshotBinding, 'report_schema_version'),
+            'projection_version' => data_get($projection, 'algorithmic_meta.projection_version')
+                ?? data_get($snapshotBinding, 'projection_version'),
+            'generated_at' => $generatedAt,
+            'summary_text' => $shareText,
+        ];
+
+        return [
+            'scale_code' => 'ENNEAGRAM',
+            'locale' => $locale,
+            'title' => $this->resolveEnneagramShareTitle($locale, $scope, $primary, $second),
+            'subtitle' => (string) ($formSummary['label'] ?? ($locale === 'zh-CN' ? '九型人格结果摘要' : 'Enneagram result summary')),
+            'summary' => $shareText,
+            'type_code' => $primary !== '' ? $primary : 'ENNEAGRAM',
+            'type_name' => $primary !== ''
+                ? ($locale === 'zh-CN' ? $primary.'号候选' : 'Type '.$primary.' candidate')
+                : ($locale === 'zh-CN' ? '九型人格' : 'Enneagram'),
+            'tagline' => $confidenceLabel !== '' ? $confidenceLabel : (string) ($formSummary['label'] ?? ''),
+            'rarity' => null,
+            'tags' => array_values(array_filter([$primary, $second, $third])),
+            'dimensions' => $publicSummary['all9_profile_mini'],
+            'primary_cta_label' => $this->resolvePrimaryCtaLabel($locale),
+            'primary_cta_path' => $this->resolvePrimaryCtaPath('ENNEAGRAM', $locale, (int) ($attempt->org_id ?? 0)),
+            'contract' => $publicSummary,
+        ];
+    }
+
     private function scoreBand(float $score, string $locale): string
     {
         $isZh = $locale === 'zh-CN';
@@ -460,6 +584,25 @@ class ShareService
      */
     private function buildPublicSafeReportSnapshot(Attempt $attempt, Result $result): array
     {
+        if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'ENNEAGRAM') {
+            $snapshot = ReportSnapshot::query()
+                ->where('org_id', (int) ($attempt->org_id ?? 0))
+                ->where('attempt_id', (string) $attempt->id)
+                ->where('status', 'ready')
+                ->first();
+
+            if ($snapshot instanceof ReportSnapshot) {
+                $report = is_array($snapshot->report_full_json) ? $snapshot->report_full_json : [];
+                if ($report === []) {
+                    $report = is_array($snapshot->report_json) ? $snapshot->report_json : [];
+                }
+
+                return $report;
+            }
+
+            return [];
+        }
+
         if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) !== 'MBTI') {
             return [];
         }
@@ -518,6 +661,149 @@ class ShareService
     private function baseTypeCode(string $typeCode): string
     {
         return strtoupper(trim((string) preg_replace('/-[A-Z]$/', '', $typeCode)));
+    }
+
+    /**
+     * @param  array<string,mixed>  $report
+     * @return array{report_v2:array<string,mixed>,projection_v2:array<string,mixed>,snapshot_binding_v1:array<string,mixed>,generated_at:?string}
+     */
+    private function resolveEnneagramSurfacePayload(Attempt $attempt, Result $result, array $report): array
+    {
+        $snapshot = ReportSnapshot::query()
+            ->where('org_id', (int) ($attempt->org_id ?? 0))
+            ->where('attempt_id', (string) $attempt->id)
+            ->where('status', 'ready')
+            ->first();
+
+        $snapshotReport = [];
+        if ($snapshot instanceof ReportSnapshot) {
+            $snapshotReport = is_array($snapshot->report_full_json) ? $snapshot->report_full_json : [];
+            if ($snapshotReport === []) {
+                $snapshotReport = is_array($snapshot->report_json) ? $snapshot->report_json : [];
+            }
+        }
+
+        $resolvedReport = $snapshotReport !== [] ? $snapshotReport : $report;
+        $resultJson = $this->normalizeArray($result->result_json ?? null);
+
+        return [
+            'report_v2' => $this->extractEnneagramReportV2($resolvedReport),
+            'projection_v2' => $this->extractEnneagramProjectionV2($resolvedReport, $resultJson),
+            'snapshot_binding_v1' => $this->extractEnneagramSnapshotBinding($resolvedReport),
+            'generated_at' => $snapshot instanceof ReportSnapshot
+                ? ($snapshot->updated_at?->toIso8601String() ?? $snapshot->created_at?->toIso8601String())
+                : $this->stringOrNull(data_get($resultJson, 'computed_at')),
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $report
+     * @return array<string,mixed>
+     */
+    private function extractEnneagramReportV2(array $report): array
+    {
+        $candidates = [
+            data_get($report, 'report._meta.enneagram_report_v2'),
+            data_get($report, '_meta.enneagram_report_v2'),
+            data_get($report, 'enneagram_report_v2'),
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (is_array($candidate) && (string) ($candidate['schema_version'] ?? '') === 'enneagram.report.v2') {
+                return $candidate;
+            }
+        }
+
+        return [];
+    }
+
+    /**
+     * @param  array<string,mixed>  $report
+     * @param  array<string,mixed>  $resultJson
+     * @return array<string,mixed>
+     */
+    private function extractEnneagramProjectionV2(array $report, array $resultJson): array
+    {
+        $candidates = [
+            data_get($report, 'report._meta.enneagram_public_projection_v2'),
+            data_get($report, '_meta.enneagram_public_projection_v2'),
+            data_get($report, 'enneagram_public_projection_v2'),
+            data_get($resultJson, 'enneagram_public_projection_v2'),
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (is_array($candidate) && (string) ($candidate['schema_version'] ?? '') === 'enneagram.public_projection.v2') {
+                return $candidate;
+            }
+        }
+
+        return [];
+    }
+
+    /**
+     * @param  array<string,mixed>  $report
+     * @return array<string,mixed>
+     */
+    private function extractEnneagramSnapshotBinding(array $report): array
+    {
+        $binding = data_get($report, '_meta.snapshot_binding_v1');
+
+        return is_array($binding) ? $binding : [];
+    }
+
+    /**
+     * @param  array<string,mixed>  $reportV2
+     * @return array<string,mixed>
+     */
+    private function firstModule(array $reportV2, string $moduleKey): array
+    {
+        foreach ((array) ($reportV2['modules'] ?? []) as $module) {
+            if (is_array($module) && (string) ($module['module_key'] ?? '') === $moduleKey) {
+                return $module;
+            }
+        }
+
+        foreach ((array) ($reportV2['pages'] ?? []) as $page) {
+            foreach ((array) ($page['modules'] ?? []) as $module) {
+                if (is_array($module) && (string) ($module['module_key'] ?? '') === $moduleKey) {
+                    return $module;
+                }
+            }
+        }
+
+        return [];
+    }
+
+    private function resolveEnneagramShareTitle(string $locale, string $scope, string $primary, string $second): string
+    {
+        return match ($scope) {
+            'close_call' => $locale === 'zh-CN'
+                ? sprintf('九型结果摘要｜%s 与 %s 接近', $primary !== '' ? $primary.'号' : '候选', $second !== '' ? $second.'号' : '次候选')
+                : sprintf('Enneagram summary | %s vs %s', $primary !== '' ? 'Type '.$primary : 'Top candidate', $second !== '' ? 'Type '.$second : 'Second candidate'),
+            'diffuse' => $locale === 'zh-CN' ? '九型结果摘要｜分散结构' : 'Enneagram summary | diffuse profile',
+            'low_quality' => $locale === 'zh-CN' ? '九型结果摘要｜解释边界较宽' : 'Enneagram summary | wider interpretation boundary',
+            default => $locale === 'zh-CN'
+                ? sprintf('九型结果摘要｜%s号候选', $primary !== '' ? $primary : '主')
+                : sprintf('Enneagram summary | %s', $primary !== '' ? 'Type '.$primary.' candidate' : 'Top candidate'),
+        };
+    }
+
+    private function resolveEnneagramShareText(string $locale, string $scope, string $primary, string $second): string
+    {
+        return match ($scope) {
+            'close_call' => $locale === 'zh-CN'
+                ? sprintf('我在 FermatMind 的九型结果显示：我可能在 %s 号与 %s 号之间摇摆。报告不会强行给出单一标签，而是保留两型辨析与后续观察线索。', $primary !== '' ? $primary : '主候选', $second !== '' ? $second : '次候选')
+                : sprintf('My FermatMind Enneagram result suggests I may be oscillating between Type %s and Type %s. The report keeps the distinction cautious instead of forcing a single label.', $primary !== '' ? $primary : 'A', $second !== '' ? $second : 'B'),
+            'diffuse' => $locale === 'zh-CN'
+                ? '我在 FermatMind 的九型结果呈现分散结构。系统建议先观察 Top3 和整体分布，而不是急着固定成单一类型。'
+                : 'My FermatMind Enneagram result shows a diffuse pattern. The system suggests watching the Top 3 and the overall profile before fixing on one type.',
+            'low_quality' => $locale === 'zh-CN'
+                ? '我在 FermatMind 的九型结果可以阅读，但系统提示解释边界较宽。它更适合作为初步观察线索，而不是最终定型。'
+                : 'My FermatMind Enneagram result is readable, but the interpretation boundary is wider. It is better used as an observation cue than a final label.',
+            default => $locale === 'zh-CN'
+                ? sprintf('我在 FermatMind 的九型结果显示：我最可能是 %s 号。结果清晰度较高，但仍建议把它当成持续观察自己的框架。', $primary !== '' ? $primary : '主候选')
+                : sprintf('My FermatMind Enneagram result suggests I am most likely Type %s. The signal is relatively clear, but it should still be used as a framework for continued self-observation.', $primary !== '' ? $primary : 'A'),
+        };
     }
 
     /**
@@ -877,6 +1163,11 @@ class ShareService
                 if (is_array($big5Projection[$contractKey] ?? null)) {
                     $payload[$contractKey] = $big5Projection[$contractKey];
                 }
+            }
+        } elseif ($scaleCode === 'ENNEAGRAM') {
+            $enneagramPublicSummary = is_array($summary['contract'] ?? null) ? $summary['contract'] : [];
+            if ($enneagramPublicSummary !== []) {
+                $payload['enneagram_public_summary_v1'] = $enneagramPublicSummary;
             }
         } elseif ($scaleCode === 'RIASEC' && $riasecProjection !== []) {
             $payload['riasec_public_projection_v1'] = $riasecProjection;

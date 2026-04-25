@@ -4,9 +4,11 @@ namespace App\Services\V0_3\Me;
 
 use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
+use App\Models\ReportSnapshot;
 use App\Models\Result;
 use App\Models\UnifiedAccessProjection;
 use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
+use App\Services\Enneagram\EnneagramCompareGuardService;
 use App\Services\Enneagram\EnneagramPublicFormSummaryBuilder;
 use App\Services\Mbti\MbtiPublicFormSummaryBuilder;
 use App\Services\Report\InviteUnlockSummaryBuilder;
@@ -67,6 +69,7 @@ class MeAttemptsService
         private readonly MbtiPublicFormSummaryBuilder $mbtiPublicFormSummaryBuilder,
         private readonly BigFivePublicFormSummaryBuilder $bigFivePublicFormSummaryBuilder,
         private readonly EnneagramPublicFormSummaryBuilder $enneagramPublicFormSummaryBuilder,
+        private readonly EnneagramCompareGuardService $enneagramCompareGuardService,
         private readonly RiasecPublicFormSummaryBuilder $riasecPublicFormSummaryBuilder,
         private readonly InviteUnlockSummaryBuilder $inviteUnlockSummaryBuilder,
     ) {}
@@ -464,6 +467,8 @@ class MeAttemptsService
             'current_top_types' => is_array($latestScore['top_types'] ?? null) ? array_values($latestScore['top_types']) : [],
         ];
 
+        $payload['current_compare_policy_v1'] = $this->buildEnneagramComparePolicySummary($latest, $resultByAttemptId[$latestId] ?? null);
+
         $previous = $attemptModels[1] ?? null;
         if ($previous instanceof Attempt) {
             $previousId = (string) ($previous->id ?? '');
@@ -472,6 +477,13 @@ class MeAttemptsService
                 $payload['previous_attempt_id'] = $previousId;
                 $payload['previous_primary_type'] = (string) ($previousScore['primary_type'] ?? '');
                 $payload['primary_type_changed'] = $payload['previous_primary_type'] !== $payload['current_primary_type'];
+                $payload['previous_compare_policy_v1'] = $this->buildEnneagramComparePolicySummary($previous, $resultByAttemptId[$previousId] ?? null);
+                $payload['compare_guard_v1'] = $this->enneagramCompareGuardService->evaluate(
+                    $latest,
+                    $resultByAttemptId[$latestId] ?? null,
+                    $previous,
+                    $resultByAttemptId[$previousId] ?? null
+                );
             }
         }
 
@@ -541,12 +553,31 @@ class MeAttemptsService
         }
 
         $scoreResult = $this->extractEnneagramScoreResult($result);
+        $projectionV2 = $this->extractEnneagramProjectionV2($result);
+        $snapshotBinding = $this->extractEnneagramSnapshotBinding($attempt);
+        $closeCallPair = is_array(data_get($projectionV2, 'dynamics.close_call_pair'))
+            ? data_get($projectionV2, 'dynamics.close_call_pair')
+            : null;
 
         return [
             'enneagram_summary_v1' => [
                 'primary_type' => (string) ($scoreResult['primary_type'] ?? ''),
                 'top_types' => is_array($scoreResult['top_types'] ?? null) ? array_values($scoreResult['top_types']) : [],
                 'confidence' => is_array($scoreResult['confidence'] ?? null) ? $scoreResult['confidence'] : [],
+            ],
+            'compare_policy_v1' => $this->buildEnneagramComparePolicySummary($attempt, $result, $projectionV2, $snapshotBinding),
+            'classification_summary_v1' => [
+                'interpretation_scope' => $this->nullableText(data_get($projectionV2, 'classification.interpretation_scope')),
+                'confidence_level' => $this->nullableText(data_get($projectionV2, 'classification.confidence_level')),
+                'close_call_pair' => [
+                    'pair_key' => $this->nullableText(data_get($closeCallPair, 'pair_key')),
+                    'type_a' => $this->nullableText(data_get($closeCallPair, 'type_a')),
+                    'type_b' => $this->nullableText(data_get($closeCallPair, 'type_b')),
+                ],
+                'interpretation_context_id' => $this->nullableText(data_get($projectionV2, 'content_binding.interpretation_context_id'))
+                    ?? $this->nullableText(data_get($snapshotBinding, 'interpretation_context_id')),
+                'content_release_hash' => $this->nullableText(data_get($projectionV2, 'content_binding.content_release_hash'))
+                    ?? $this->nullableText(data_get($snapshotBinding, 'content_release_hash')),
             ],
             'quality_summary' => $this->buildQualitySummary($scoreResult),
             'share_summary' => [
@@ -904,6 +935,93 @@ class MeAttemptsService
         $decoded = json_decode($value, true);
 
         return is_array($decoded) ? $decoded : [];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function extractEnneagramProjectionV2(?Result $result): array
+    {
+        if (! $result instanceof Result) {
+            return [];
+        }
+
+        $payload = $this->decodeResultJson($result->result_json);
+        $projection = data_get($payload, 'enneagram_public_projection_v2');
+
+        return is_array($projection) ? $projection : [];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function extractEnneagramSnapshotBinding(Attempt $attempt): array
+    {
+        $snapshot = ReportSnapshot::query()
+            ->where('org_id', (int) ($attempt->org_id ?? 0))
+            ->where('attempt_id', (string) $attempt->id)
+            ->where('status', 'ready')
+            ->first();
+
+        if (! $snapshot instanceof ReportSnapshot) {
+            return [];
+        }
+
+        $report = is_array($snapshot->report_full_json) ? $snapshot->report_full_json : [];
+        if ($report === []) {
+            $report = is_array($snapshot->report_json) ? $snapshot->report_json : [];
+        }
+        $binding = data_get($report, '_meta.snapshot_binding_v1');
+
+        return is_array($binding) ? $binding : [];
+    }
+
+    /**
+     * @param  array<string,mixed>  $projectionV2
+     * @param  array<string,mixed>  $snapshotBinding
+     * @return array<string,mixed>
+     */
+    private function buildEnneagramComparePolicySummary(
+        Attempt $attempt,
+        ?Result $result,
+        array $projectionV2 = [],
+        array $snapshotBinding = []
+    ): array {
+        if ($projectionV2 === []) {
+            $projectionV2 = $this->extractEnneagramProjectionV2($result);
+        }
+        if ($snapshotBinding === []) {
+            $snapshotBinding = $this->extractEnneagramSnapshotBinding($attempt);
+        }
+
+        $formSummary = $this->enneagramPublicFormSummaryBuilder->summarizeForAttempt($attempt, $result);
+        $closeCallPair = is_array(data_get($projectionV2, 'dynamics.close_call_pair'))
+            ? data_get($projectionV2, 'dynamics.close_call_pair')
+            : [];
+
+        return [
+            'version' => EnneagramCompareGuardService::VERSION,
+            'form_code' => $this->nullableText(data_get($projectionV2, 'form.form_code') ?? ($formSummary['form_code'] ?? null)),
+            'form_label' => $this->nullableText($formSummary['label'] ?? null),
+            'compare_compatibility_group' => $this->nullableText(data_get($projectionV2, 'methodology.compare_compatibility_group'))
+                ?? $this->nullableText(data_get($snapshotBinding, 'compare_compatibility_group')),
+            'cross_form_comparable' => false,
+            'score_space_version' => $this->nullableText(data_get($projectionV2, 'form.score_space_version'))
+                ?? $this->nullableText(data_get($snapshotBinding, 'score_space_version')),
+            'interpretation_scope' => $this->nullableText(data_get($projectionV2, 'classification.interpretation_scope')),
+            'confidence_level' => $this->nullableText(data_get($projectionV2, 'classification.confidence_level')),
+            'close_call_pair' => [
+                'pair_key' => $this->nullableText(data_get($closeCallPair, 'pair_key')),
+                'type_a' => $this->nullableText(data_get($closeCallPair, 'type_a')),
+                'type_b' => $this->nullableText(data_get($closeCallPair, 'type_b')),
+            ],
+            'interpretation_context_id' => $this->nullableText(data_get($projectionV2, 'content_binding.interpretation_context_id'))
+                ?? $this->nullableText(data_get($snapshotBinding, 'interpretation_context_id')),
+            'content_release_hash' => $this->nullableText(data_get($projectionV2, 'content_binding.content_release_hash'))
+                ?? $this->nullableText(data_get($snapshotBinding, 'content_release_hash')),
+            'content_snapshot_status' => $this->nullableText(data_get($projectionV2, 'content_binding.content_snapshot_status'))
+                ?? $this->nullableText(data_get($snapshotBinding, 'content_snapshot_status')),
+        ];
     }
 
     /**

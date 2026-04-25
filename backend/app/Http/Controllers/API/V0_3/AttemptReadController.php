@@ -2257,7 +2257,8 @@ class AttemptReadController extends Controller
 
         $variant = $this->reportPdfDocumentService->normalizeVariant((string) ($gate['variant'] ?? 'free'));
         $locked = (bool) ($gate['locked'] ?? false);
-        $fileName = $this->reportPdfDocumentService->fileName((string) ($attempt->scale_code ?? 'report'), (string) $attempt->id);
+        $pdfMetadata = $this->reportPdfDocumentService->metadata($attempt, $gate, $result);
+        $fileName = $this->reportPdfDocumentService->fileNameForAttempt($attempt, $gate, $result);
         $inline = in_array(strtolower(trim((string) $request->query('inline', '0'))), ['1', 'true', 'yes', 'on'], true);
         $disposition = $inline ? 'inline' : 'attachment';
 
@@ -2287,6 +2288,20 @@ class AttemptReadController extends Controller
             'X-Report-Scale' => strtoupper((string) ($attempt->scale_code ?? '')),
             'X-Report-Variant' => $variant,
             'X-Report-Locked' => $locked ? 'true' : 'false',
+            'X-Pdf-Surface-Version' => (string) ($pdfMetadata['pdf_surface_version'] ?? ''),
+            'X-Report-Form-Code' => (string) ($pdfMetadata['form_code'] ?? ''),
+            'X-Report-Form-Label' => (string) ($pdfMetadata['form_label'] ?? ''),
+            'X-Report-Filename-Hint' => (string) ($pdfMetadata['filename_hint'] ?? ''),
+            'X-Report-Schema-Version' => (string) ($pdfMetadata['report_schema_version'] ?? ''),
+            'X-Projection-Version' => (string) ($pdfMetadata['projection_version'] ?? ''),
+            'X-Report-Engine-Version' => (string) ($pdfMetadata['report_engine_version'] ?? ''),
+            'X-Interpretation-Context-Id' => (string) ($pdfMetadata['interpretation_context_id'] ?? ''),
+            'X-Content-Release-Hash' => (string) ($pdfMetadata['content_release_hash'] ?? ''),
+            'X-Content-Snapshot-Status' => (string) ($pdfMetadata['content_snapshot_status'] ?? ''),
+            'X-Compare-Compatibility-Group' => (string) ($pdfMetadata['compare_compatibility_group'] ?? ''),
+            'X-Cross-Form-Comparable' => is_bool($pdfMetadata['cross_form_comparable'] ?? null)
+                ? (($pdfMetadata['cross_form_comparable'] ?? false) ? 'true' : 'false')
+                : '',
         ]);
     }
 
