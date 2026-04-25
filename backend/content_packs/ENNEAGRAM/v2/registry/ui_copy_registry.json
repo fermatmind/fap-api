@@ -7,23 +7,61 @@
     "context_mode": "individual",
     "status": "published",
     "version": "v1",
-    "release_id": "enneagram_registry_pack_v1_scaffold_2026_04",
+    "release_id": "enneagram_registry_pack_v1_p0_ready_2026_04",
     "content_release_hash": "sha256:pending_loader_resolution",
     "content_snapshot_hash": null,
-    "content_maturity": "scaffold",
+    "content_maturity": "p0_ready",
     "evidence_level": "descriptive",
     "preview_enabled": true,
     "fallback_policy": "required",
     "entries": {
-        "instant_summary.clear": {"title_template": "当前主候选较清晰", "body_template": "P0 scaffold：用 clear scope 的主候选摘要。"},
-        "instant_summary.close_call": {"title_template": "当前更像 close-call", "body_template": "P0 scaffold：强调 Top1/Top2 接近而非系统改判。"},
-        "instant_summary.diffuse": {"title_template": "当前轮廓较分散", "body_template": "P0 scaffold：提示继续观察而非强行下结论。"},
-        "instant_summary.low_quality": {"title_template": "当前质量信号不足", "body_template": "P0 scaffold：解释 low-quality boundary 与重测建议。"},
-        "form_badge.e105": {"label": "E105 标准版", "body_template": "Likert 标准版"},
-        "form_badge.fc144": {"label": "FC144 深度版", "body_template": "Forced-choice 深度版"},
-        "close_call_card.title": {"label": "Close-call 辨析"},
-        "diffuse_boundary.title": {"label": "结果分散说明"},
-        "low_quality_boundary.title": {"label": "质量边界说明"},
-        "technical_note.link_label": {"label": "查看 Technical Note"}
+        "instant_summary.clear": {
+            "title_template": "当前主候选相对清晰",
+            "body_template": "这次结果更像以主候选为核心来理解，但仍建议把它当作可观察、可回看的工作假设，而不是绝对标签。"
+        },
+        "instant_summary.close_call": {
+            "title_template": "当前更像 close-call 结果",
+            "body_template": "这次结果更适合把 Top1 与 Top2 放在一起读：系统在提示两种动力都在解释你，而不是在偷偷改判。"
+        },
+        "instant_summary.diffuse": {
+            "title_template": "当前轮廓较分散",
+            "body_template": "这次结果更适合先阅读 Top3、三中心与观察任务，而不是强行认定单一号码。"
+        },
+        "instant_summary.low_quality": {
+            "title_template": "当前结果有质量边界",
+            "body_template": "结果仍可阅读，但解释边界较宽。更稳妥的下一步是状态稳定后重测同一题型。"
+        },
+        "form_badge.e105": {
+            "label": "E105 标准版",
+            "body_template": "第一次了解自己的九型结构时，更适合用它建立全谱与 Top3 阅读。"
+        },
+        "form_badge.fc144": {
+            "label": "FC144 深度版",
+            "body_template": "它和 E105 同属一套模型，但采用 forced-choice 题型，分数空间不同。"
+        },
+        "close_call_card.title": {
+            "label": "Top1 vs Top2 辨析"
+        },
+        "diffuse_boundary.title": {
+            "label": "结果分散说明"
+        },
+        "low_quality_boundary.title": {
+            "label": "质量边界说明"
+        },
+        "technical_note.link_label": {
+            "label": "查看 Technical Note v0.1"
+        },
+        "observation.assign_cta": {
+            "label": "开始 7 天观察"
+        },
+        "observation.day3_title": {
+            "label": "Day3 观察反馈"
+        },
+        "observation.day7_title": {
+            "label": "Day7 共鸣反馈"
+        },
+        "observation.self_confirmation_boundary": {
+            "label": "这不会静默改写本次测量结果。它会作为你的自我观察证据记录在历史中。"
+        }
     }
 }

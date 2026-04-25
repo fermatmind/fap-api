@@ -7,21 +7,93 @@
     "context_mode": "individual",
     "status": "published",
     "version": "v1",
-    "release_id": "enneagram_registry_pack_v1_scaffold_2026_04",
+    "release_id": "enneagram_registry_pack_v1_p0_ready_2026_04",
     "content_release_hash": "sha256:pending_loader_resolution",
     "content_snapshot_hash": null,
-    "content_maturity": "scaffold",
+    "content_maturity": "p0_ready",
     "evidence_level": "descriptive",
     "preview_enabled": true,
     "fallback_policy": "fallback_to_type_base",
     "entries": [
-        {"scenario_key": "work_style_summary", "module_key": "work_style_summary", "title": "工作风格摘要", "body": "P0 scaffold：后续在 composer v2 中按主类型、Top3 和 group overlay 拼接。"},
-        {"scenario_key": "collaboration_strengths", "module_key": "collaboration_strengths", "title": "协作优势", "body": "P0 scaffold：优先 fallback 到 type_base 和 group registry。"},
-        {"scenario_key": "collaboration_friction", "module_key": "collaboration_friction", "title": "协作摩擦点", "body": "P0 scaffold：先保留结构位，不在本 PR 写成长文。"},
-        {"scenario_key": "leadership_pattern", "module_key": "leadership_pattern", "title": "领导模式", "body": "P0 scaffold：工作与领导模块的共享结构入口。"},
-        {"scenario_key": "managed_by_others", "module_key": "managed_by_others", "title": "被管理时更顺畅的方式", "body": "P0 scaffold：后续按 context_mode=workplace 扩展。"},
-        {"scenario_key": "relationship_need", "module_key": "relationship_need", "title": "关系需要", "body": "P0 scaffold：默认回退到 type_base relationship_summary。"},
-        {"scenario_key": "conflict_script", "module_key": "conflict_script", "title": "冲突脚本", "body": "P0 scaffold：close-call 或 group overlay 可覆盖。"},
-        {"scenario_key": "communication_manual", "module_key": "communication_manual", "title": "沟通说明书", "body": "P0 scaffold：供结果页关系模块与样例报告共享。"}
+        {
+            "scenario_key": "work_style_summary",
+            "module_key": "work_style_summary",
+            "title": "工作风格摘要",
+            "body": "先解释你最自然的推进方式，再解释什么环境会放大你的优势，什么噪音会快速消耗你。",
+            "module_purpose": "把主类型与 Top3 的动力差异落到现实任务推进方式，而不是只给抽象人格标签。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive",
+            "fallback_policy": "fallback_to_type_base"
+        },
+        {
+            "scenario_key": "collaboration_strengths",
+            "module_key": "collaboration_strengths",
+            "title": "协作优势",
+            "body": "聚焦你在团队里最容易稳定贡献的部分，例如收口、推进、缓冲、预案、连接或结构化判断。",
+            "module_purpose": "让用户看到自己在协作里带来的真实价值，而不是泛泛的优点清单。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive",
+            "fallback_policy": "fallback_to_type_base"
+        },
+        {
+            "scenario_key": "collaboration_friction",
+            "module_key": "collaboration_friction",
+            "title": "协作摩擦点",
+            "body": "指出你在高压或高噪音协作中最容易带来的摩擦，不把代价写成道德批评，而写成可观察的惯性。",
+            "module_purpose": "帮助用户把“别人为什么会被我卡住”看清楚，为关系和工作场景做预防性解释。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive",
+            "fallback_policy": "fallback_to_type_base"
+        },
+        {
+            "scenario_key": "leadership_pattern",
+            "module_key": "leadership_pattern",
+            "title": "领导模式",
+            "body": "只写 P0 可上线的领导倾向：你更可能通过标准、结果、边界、缓冲还是支持来带队，而不写完整管理学指南。",
+            "module_purpose": "给结果页提供一个可分享的‘你如何带人’入口，为后续 workplace 扩展留结构位。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive",
+            "fallback_policy": "fallback_to_type_base"
+        },
+        {
+            "scenario_key": "managed_by_others",
+            "module_key": "managed_by_others",
+            "title": "被管理时更顺畅的方式",
+            "body": "说明什么样的指令、节奏和反馈方式更容易让你进入最佳状态，而不是写完整的上下级配对手册。",
+            "module_purpose": "把人格阅读转成对协作与被管理体验更直接的说明书。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive",
+            "fallback_policy": "fallback_to_type_base"
+        },
+        {
+            "scenario_key": "relationship_need",
+            "module_key": "relationship_need",
+            "title": "关系需要",
+            "body": "只说你在关系里最在意被怎样对待、最容易在哪个地方卡住，以及别人通常如何误读你。",
+            "module_purpose": "把人格结果翻译成关系里更可执行的语言，而不是扩写成长篇伴侣报告。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive",
+            "fallback_policy": "fallback_to_type_base"
+        },
+        {
+            "scenario_key": "conflict_script",
+            "module_key": "conflict_script",
+            "title": "冲突脚本",
+            "body": "聚焦你在冲突中的第一反应、升级点和修复入口，只给 P0 的结构化提示，不写完整冲突矩阵。",
+            "module_purpose": "为结果页和后续付费层提供共享的冲突表达骨架。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive",
+            "fallback_policy": "fallback_to_type_base"
+        },
+        {
+            "scenario_key": "communication_manual",
+            "module_key": "communication_manual",
+            "title": "沟通说明书",
+            "body": "用一句话解释怎样更容易和你说得通、怎样最容易踩雷，让报告具备可分享给同事或伴侣的实用入口。",
+            "module_purpose": "把复杂的人格解释压缩成简洁、可复述、可分享的沟通说明。",
+            "content_maturity": "p0_ready",
+            "evidence_level": "descriptive",
+            "fallback_policy": "fallback_to_type_base"
+        }
     ]
 }

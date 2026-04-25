@@ -7,41 +7,49 @@
     "context_mode": "individual",
     "status": "published",
     "version": "v1",
-    "release_id": "enneagram_registry_pack_v1_scaffold_2026_04",
+    "release_id": "enneagram_registry_pack_v1_p0_ready_2026_04",
     "content_release_hash": "sha256:pending_loader_resolution",
     "content_snapshot_hash": null,
-    "content_maturity": "scaffold",
-    "evidence_level": "theory_based",
+    "content_maturity": "experimental",
+    "evidence_level": "descriptive",
     "preview_enabled": true,
     "fallback_policy": "optional",
     "entries": [
         {
             "theory_key": "wing_hint",
             "visibility_scope": "p0_visible",
-            "evidence_level": "theory_based",
             "hard_judgement_allowed": false,
-            "boundary_copy": "邻位牵引只作为表达色彩提示，不等于正式 wing 判定。"
+            "boundary_copy": "邻位牵引只作为表达色彩提示，不等于正式 wing 判定。",
+            "user_facing_boundary": "如果你看到主候选左右两侧都有牵引力，这说明表达上可能带有邻位色彩，而不是系统已经把你判成某个 wing。",
+            "content_maturity": "experimental",
+            "evidence_level": "theory_based"
         },
         {
             "theory_key": "arrow_growth_reference_placeholder",
             "visibility_scope": "p1_visible",
-            "evidence_level": "descriptive",
             "hard_judgement_allowed": false,
-            "boundary_copy": "箭头方向位先保留为方法参考，不在 P0 做硬判断。"
+            "boundary_copy": "箭头方向位只作为方法参考，不在 P0 做硬判断。",
+            "user_facing_boundary": "当前版本不会把 arrow 写成系统定论；即使引用，也只用于帮助你阅读压力与成长时的常见倾向。",
+            "content_maturity": "experimental",
+            "evidence_level": "descriptive"
         },
         {
             "theory_key": "level_spectrum_placeholder",
             "visibility_scope": "p1_visible",
-            "evidence_level": "descriptive",
             "hard_judgement_allowed": false,
-            "boundary_copy": "状态光谱位仅作观察辅助，不等于健康层级判定。"
+            "boundary_copy": "状态光谱位只用于自我校准，不等于健康层级判定。",
+            "user_facing_boundary": "系统不会把你直接标记成某个 health level；当前只提供稳定、平均、受压三段观察框架。",
+            "content_maturity": "experimental",
+            "evidence_level": "descriptive"
         },
         {
             "theory_key": "subtype_future_module_placeholder",
             "visibility_scope": "hidden",
-            "evidence_level": "descriptive",
             "hard_judgement_allowed": false,
-            "boundary_copy": "subtype 暂不启用，避免在缺少证据时提前硬判。"
+            "boundary_copy": "subtype 暂不启用，避免在证据不足时提前硬判。",
+            "user_facing_boundary": "当前版本不会给出 instinctual subtype 结论，也不会把生活方式差异误写成 subtype 诊断。",
+            "content_maturity": "experimental",
+            "evidence_level": "descriptive"
         }
     ]
 }
