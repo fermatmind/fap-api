@@ -179,20 +179,35 @@ class ReportSnapshotResource extends Resource
                             $query->whereRaw('date(coalesce(report_snapshots.updated_at, report_snapshots.created_at)) <= ?', [$until]);
                         }
                     }),
-                Tables\Filters\SelectFilter::make('scale_code')
+                Tables\Filters\Filter::make('scale_code')
                     ->label(__('ops.custom_pages.reports.columns.scale_code'))
-                    ->options(fn (): array => $support->distinctSnapshotOptions('scale_code')),
-                Tables\Filters\SelectFilter::make('locale')
-                    ->label(__('ops.custom_pages.reports.columns.locale'))
-                    ->options(fn (): array => $support->distinctAttemptOptions('locale'))
+                    ->form([
+                        Forms\Components\TextInput::make('value')
+                            ->label(__('ops.custom_pages.reports.columns.scale_code'))
+                            ->placeholder(__('ops.custom_pages.reports.filter_placeholders.scale_code')),
+                    ])
                     ->query(function (Builder $query, array $data) use ($support): void {
-                        $support->applyAttemptFieldFilter($query, 'locale', $data['value'] ?? null);
+                        $support->applySnapshotFieldContainsFilter($query, 'scale_code', $data['value'] ?? null);
                     }),
-                Tables\Filters\SelectFilter::make('region')
-                    ->label(__('ops.custom_pages.reports.columns.region'))
-                    ->options(fn (): array => $support->distinctAttemptOptions('region'))
+                Tables\Filters\Filter::make('locale')
+                    ->label(__('ops.custom_pages.reports.columns.locale'))
+                    ->form([
+                        Forms\Components\TextInput::make('value')
+                            ->label(__('ops.custom_pages.reports.columns.locale'))
+                            ->placeholder(__('ops.custom_pages.reports.filter_placeholders.locale')),
+                    ])
                     ->query(function (Builder $query, array $data) use ($support): void {
-                        $support->applyAttemptFieldFilter($query, 'region', $data['value'] ?? null);
+                        $support->applyAttemptFieldFilter($query, 'locale', $data['value'] ?? null, partial: false);
+                    }),
+                Tables\Filters\Filter::make('region')
+                    ->label(__('ops.custom_pages.reports.columns.region'))
+                    ->form([
+                        Forms\Components\TextInput::make('value')
+                            ->label(__('ops.custom_pages.reports.columns.region'))
+                            ->placeholder(__('ops.custom_pages.reports.filter_placeholders.region')),
+                    ])
+                    ->query(function (Builder $query, array $data) use ($support): void {
+                        $support->applyAttemptFieldFilter($query, 'region', $data['value'] ?? null, partial: false);
                     }),
                 Tables\Filters\SelectFilter::make('snapshot_status')
                     ->label(__('ops.custom_pages.reports.columns.snapshot_status'))

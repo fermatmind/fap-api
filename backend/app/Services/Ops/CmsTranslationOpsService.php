@@ -964,6 +964,34 @@ final class CmsTranslationOpsService
             return null;
         }
 
+        if ($raw === 'machine translation provider unavailable') {
+            return __('ops.translation_ops.reasons.machine_translation_provider_unavailable');
+        }
+
+        if ($raw === 'This content type does not support machine draft creation in the current backend contract.') {
+            return __('ops.translation_ops.reasons.machine_draft_creation_not_supported');
+        }
+
+        if (preg_match('/^Machine translation provider is not configured for ([a-z_]+)\\./', $raw, $matches) === 1) {
+            return __('ops.translation_ops.reasons.cms_machine_translation_provider_unconfigured_for_type', [
+                'content_type' => $this->contentTypeLabel($matches[1]),
+            ]);
+        }
+
+        if (preg_match('/^Provider does not support ([a-z_]+)\\.$/', $raw, $matches) === 1) {
+            return __('ops.translation_ops.reasons.cms_machine_translation_provider_not_supported_for_type', [
+                'content_type' => $this->contentTypeLabel($matches[1]),
+            ]);
+        }
+
+        if (str_contains($raw, 'CMS machine translation provider is not configured. Set CMS_TRANSLATION_OPENAI_API_KEY')) {
+            return __('ops.translation_ops.reasons.cms_machine_translation_provider_missing_api_key');
+        }
+
+        if (str_contains($raw, 'CMS machine translation provider is not configured. Set CMS_TRANSLATION_OPENAI_MODEL')) {
+            return __('ops.translation_ops.reasons.cms_machine_translation_provider_missing_model');
+        }
+
         if (str_contains($raw, 'Machine translation provider is not configured')) {
             return __('ops.translation_ops.reasons.machine_translation_provider_unconfigured');
         }

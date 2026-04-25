@@ -163,8 +163,30 @@ final class CmsTranslationBackboneTest extends TestCase
             collect($disabledReasons)->contains(fn (string $reason): bool => str_contains($reason, '尚未配置机器翻译 provider')),
             'Expected at least one disabled reason to be localized for the missing provider.',
         );
+        $this->assertFalse(
+            collect($disabledReasons)->contains(fn (string $reason): bool => str_contains($reason, 'Machine translation provider is not configured')),
+            'Provider-disabled reason should not leak the raw English provider message in zh-CN.',
+        );
         $this->assertNotContains('body missing', $targetLocale['preflight']['blockers']);
         $this->assertNotContains('seo description missing', $targetLocale['preflight']['blockers']);
+    }
+
+    public function test_unified_translation_ops_keeps_provider_reasons_natural_in_english(): void
+    {
+        app()->setLocale('en');
+        config()->set('services.cms_translation.providers.support_article', DisabledCmsMachineTranslationProvider::class);
+
+        $missingSource = $this->createSourceSupportArticle('english-provider-reason');
+
+        $dashboard = app(CmsTranslationOpsService::class)->dashboard(['content_type' => 'support_article']);
+        $missingGroup = collect($dashboard['groups'])->firstWhere('translation_group_id', $missingSource->translation_group_id);
+        $this->assertIsArray($missingGroup);
+        $disabledReasons = collect($missingGroup['group_actions'])->pluck('reason')->filter()->values()->all();
+
+        $this->assertTrue(
+            collect($disabledReasons)->contains(fn (string $reason): bool => str_contains($reason, 'Machine translation provider is not configured for Support Articles')),
+            'Expected the provider-disabled reason to remain natural English in en mode.',
+        );
     }
 
     public function test_unified_translation_ops_coverage_rate_counts_only_target_locales(): void

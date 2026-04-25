@@ -99,6 +99,7 @@ final class ArticleTranslationOpsPageTest extends TestCase
             ->assertSee('已发布')
             ->assertSet('coverageMatrix.0.health_state', 'success')
             ->assertSee('未配置机器翻译 provider')
+            ->assertDontSee('Machine translation provider is not configured')
             ->assertDontSee('Unified Translation Ops Console')
             ->assertDontSee('Translation health')
             ->assertDontSee('Content type');
