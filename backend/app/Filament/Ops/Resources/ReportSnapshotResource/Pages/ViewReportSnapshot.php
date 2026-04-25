@@ -72,7 +72,7 @@ class ViewReportSnapshot extends Page
         abort_unless(ReportSnapshotResource::canViewAny(), 403);
 
         /** @var ReportSnapshot $resolved */
-        $resolved = ReportSnapshotResource::getEloquentQuery()->whereKey($record)->firstOrFail();
+        $resolved = app(ReportSnapshotExplorerSupport::class)->query()->whereKey($record)->firstOrFail();
 
         abort_unless(ReportSnapshotResource::canView($resolved), 403);
 

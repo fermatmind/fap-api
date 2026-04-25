@@ -11,6 +11,7 @@ use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticleTranslationWorkflowService;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 
 final class ArticleTranslationOpsService
@@ -181,7 +182,9 @@ final class ArticleTranslationOpsService
             'edit_url' => ArticleResource::getUrl('edit', ['record' => $article]),
             'revision_history' => $this->revisionHistory($articleRevisions),
             'compare_summary' => $this->compareSummary($article, $source, $workingRevision, $publishedRevision, $sourceHash, $isStale),
-            'preflight' => $isSource ? ['ok' => true, 'blockers' => []] : app(ArticleTranslationWorkflowService::class)->preflight($article),
+            'preflight' => $isSource
+                ? ['ok' => true, 'blockers' => []]
+                : $this->localizedPreflight(app(ArticleTranslationWorkflowService::class)->preflight($article)),
             'actions' => $this->localeActions($article, $status, $isStale, $isSource),
         ];
     }
@@ -373,7 +376,7 @@ final class ArticleTranslationOpsService
                     ? null
                     : ($workflow->canGenerateMachineDraft()
                         ? __('ops.translation_ops.reasons.target_locale_exists_or_missing_permission')
-                        : (string) $workflow->machineDraftUnavailableReason()),
+                        : $this->localizedReason($workflow->machineDraftUnavailableReason())),
             ],
             [
                 'label' => __('ops.translation_ops.actions.resync_from_source'),
@@ -390,7 +393,7 @@ final class ArticleTranslationOpsService
     private function localeActions(Article $article, string $status, bool $isStale, bool $isSource): array
     {
         $workflow = app(ArticleTranslationWorkflowService::class);
-        $preflight = $isSource ? ['ok' => true, 'blockers' => []] : $workflow->preflight($article);
+        $preflight = $isSource ? ['ok' => true, 'blockers' => []] : $this->localizedPreflight($workflow->preflight($article));
 
         return [
             [
@@ -450,7 +453,7 @@ final class ArticleTranslationOpsService
                 'article_id' => (int) $article->id,
                 'reason' => $workflow->canGenerateMachineDraft()
                     ? __('ops.translation_ops.reasons.only_stale_resync')
-                    : (string) $workflow->machineDraftUnavailableReason(),
+                    : $this->localizedReason($workflow->machineDraftUnavailableReason()),
             ],
             [
                 'label' => __('ops.translation_ops.actions.archive_stale_revision'),
@@ -726,6 +729,73 @@ final class ArticleTranslationOpsService
         }
 
         return Str::limit((string) $hash, 12, '');
+    }
+
+    /**
+     * @param  array<string, mixed>  $preflight
+     * @return array<string, mixed>
+     */
+    private function localizedPreflight(array $preflight): array
+    {
+        $preflight['blockers'] = array_values(array_map(
+            fn (string $blocker): string => $this->localizedBlocker($blocker),
+            (array) ($preflight['blockers'] ?? [])
+        ));
+
+        return $preflight;
+    }
+
+    private function localizedBlocker(string $blocker): string
+    {
+        $key = str_replace(['/', ' '], ['_', '_'], strtolower(trim($blocker)));
+        $translationKey = "ops.translation_ops.blockers.{$key}";
+
+        return Lang::has($translationKey) ? (string) __($translationKey) : $blocker;
+    }
+
+    private function localizedReason(mixed $reason): ?string
+    {
+        $raw = trim((string) $reason);
+        if ($raw === '') {
+            return null;
+        }
+
+        if (str_contains($raw, 'Machine translation provider is not configured')) {
+            return __('ops.translation_ops.reasons.machine_translation_provider_unconfigured');
+        }
+
+        foreach ($this->rawBlockerPhrases() as $phrase) {
+            if (str_contains($raw, $phrase)) {
+                $raw = str_replace($phrase, $this->localizedBlocker($phrase), $raw);
+            }
+        }
+
+        return $raw;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function rawBlockerPhrases(): array
+    {
+        return [
+            'target article is source',
+            'target article org mismatch',
+            'target locale missing',
+            'working revision missing',
+            'working revision is stale',
+            'working revision is archived',
+            'source canonical invalid',
+            'source_article_id mismatch',
+            'source_locale mismatch',
+            'translation_group mismatch',
+            'references/citations presence check failed',
+            'seo_meta org mismatch',
+            'working revision org mismatch',
+            'working revision article mismatch',
+            'working revision locale mismatch',
+            'working revision group mismatch',
+        ];
     }
 
     /**

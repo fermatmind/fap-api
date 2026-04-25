@@ -104,6 +104,48 @@ final class ArticleTranslationOpsPageTest extends TestCase
             ->assertDontSee('Content type');
     }
 
+    public function test_article_translation_ops_service_localizes_article_preflight_blockers_and_action_reasons(): void
+    {
+        app()->setLocale('zh_CN');
+
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        $group = $this->createPublishedTranslationGroup('localized-article-preflight-fixture');
+        $group['source']->forceFill([
+            'content_md' => "中文正文\n\n参考文献：https://example.test/source",
+        ])->saveQuietly();
+        $group['sourceRevision']->forceFill([
+            'content_md' => "中文正文\n\n参考文献：https://example.test/source",
+        ])->save();
+        $group['translation']->forceFill([
+            'status' => 'draft',
+            'is_public' => false,
+            'published_revision_id' => null,
+        ])->saveQuietly();
+        $group['translationRevision']->forceFill([
+            'revision_status' => ArticleTranslationRevision::STATUS_APPROVED,
+            'content_md' => 'English body without the required source notes marker.',
+        ])->save();
+
+        $dashboard = app(ArticleTranslationOpsService::class)->dashboard([
+            'slug' => 'localized-article-preflight-fixture',
+        ]);
+        $targetLocale = collect($dashboard['groups'][0]['locales'])->firstWhere('locale', 'en');
+        $this->assertIsArray($targetLocale);
+
+        $this->assertContains('参考文献 / citation 存在性检查失败', $targetLocale['preflight']['blockers']);
+        $this->assertNotContains('references/citations presence check failed', $targetLocale['preflight']['blockers']);
+
+        $publishAction = collect($targetLocale['actions'])->firstWhere('wire_action', 'publishCurrentRevision');
+        $this->assertIsArray($publishAction);
+        $this->assertStringContainsString('参考文献 / citation 存在性检查失败', (string) $publishAction['reason']);
+        $this->assertStringNotContainsString('references/citations presence check failed', (string) $publishAction['reason']);
+    }
+
     public function test_translation_ops_service_flags_stale_translation_and_source_update_alert(): void
     {
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);

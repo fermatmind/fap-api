@@ -12,9 +12,9 @@ class GoLiveGatePage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
 
-    protected static ?string $navigationGroup = 'Governance';
+    protected static ?string $navigationGroup = null;
 
-    protected static ?string $navigationLabel = 'Go-Live Gate';
+    protected static ?string $navigationLabel = null;
 
     protected static ?int $navigationSort = 2;
 
@@ -51,6 +51,11 @@ class GoLiveGatePage extends Page
     }
 
     public function getTitle(): string
+    {
+        return __('ops.custom_pages.go_live_gate.title');
+    }
+
+    public static function getLabel(): string
     {
         return __('ops.custom_pages.go_live_gate.title');
     }
