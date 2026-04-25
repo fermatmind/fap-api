@@ -91,7 +91,7 @@ final class BigFiveCanonicalTruthFixturesTest extends TestCase
         $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
         $this->artisan('norms:import --scale=BIG5_OCEAN --csv=resources/norms/big5/big5_norm_stats_seed.csv --activate=1')
             ->assertExitCode(0);
-        (new ScaleRegistrySeeder())->run();
+        (new ScaleRegistrySeeder)->run();
     }
 
     /**
@@ -395,9 +395,6 @@ final class BigFiveCanonicalTruthFixturesTest extends TestCase
         return $token;
     }
 
-    /**
-     * @return mixed
-     */
     private function sanitizeForFixture(mixed $value): mixed
     {
         if (is_float($value)) {
@@ -446,6 +443,40 @@ final class BigFiveCanonicalTruthFixturesTest extends TestCase
         $normalized = preg_replace('/\b20\d{2}-\d{2}-\d{2}\b/u', '<date>', $normalized) ?? $normalized;
         $normalized = preg_replace('/\b<date> \d{2}:\d{2}:\d{2}\b/u', '<timestamp>', $normalized) ?? $normalized;
 
+        return $this->normalizeLocalOrigin($normalized);
+    }
+
+    private function normalizeLocalOrigin(string $value): string
+    {
+        $parts = parse_url($value);
+        if (! is_array($parts)) {
+            return $value;
+        }
+
+        $scheme = strtolower((string) ($parts['scheme'] ?? ''));
+        $host = strtolower((string) ($parts['host'] ?? ''));
+        $path = (string) ($parts['path'] ?? '');
+
+        if (! in_array($scheme, ['http', 'https'], true)) {
+            return $value;
+        }
+
+        if (! in_array($host, ['localhost', '127.0.0.1'], true)) {
+            return $value;
+        }
+
+        if ($path === '') {
+            return $value;
+        }
+
+        $normalized = '<local-origin>'.$path;
+        if (isset($parts['query']) && $parts['query'] !== '') {
+            $normalized .= '?'.$parts['query'];
+        }
+        if (isset($parts['fragment']) && $parts['fragment'] !== '') {
+            $normalized .= '#'.$parts['fragment'];
+        }
+
         return $normalized;
     }
 
@@ -471,6 +502,6 @@ final class BigFiveCanonicalTruthFixturesTest extends TestCase
         $this->assertIsString($raw, 'canonical fixture missing: '.$fixturePath);
         $expected = json_decode($raw, true);
         $this->assertIsArray($expected, 'canonical fixture invalid json: '.$fixturePath);
-        $this->assertSame($expected, $actual);
+        $this->assertSame($this->sanitizeForFixture($expected), $actual);
     }
 }
