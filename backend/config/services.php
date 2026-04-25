@@ -112,7 +112,7 @@ return [
         ),
         'articles_url_prefix' => env(
             'SEO_ARTICLES_PREFIX',
-            rtrim((string) env('APP_URL', 'http://localhost'), '/').'/articles'
+            rtrim((string) env('FRONTEND_URL', env('APP_URL', 'http://localhost')), '/').'/articles'
         ),
     ],
 

@@ -198,16 +198,11 @@ final class ArticleTranslationOpsService
         }
 
         $workingRevision = $article->workingRevision;
-        if (! $workingRevision instanceof ArticleTranslationRevision) {
-            $issues[] = __('ops.translation_ops.ownership_issues.missing_working_revision');
-        } else {
+        if ($workingRevision instanceof ArticleTranslationRevision) {
             $issues = array_merge($issues, $this->revisionOwnershipIssues($article, $workingRevision, 'working revision'));
         }
 
         $publishedRevision = $article->publishedRevision;
-        if ($article->published_revision_id !== null && ! $publishedRevision instanceof ArticleTranslationRevision) {
-            $issues[] = __('ops.translation_ops.ownership_issues.missing_published_revision');
-        }
         if ($publishedRevision instanceof ArticleTranslationRevision) {
             $issues = array_merge($issues, $this->revisionOwnershipIssues($article, $publishedRevision, 'published revision'));
         }

@@ -228,6 +228,7 @@ final class ArticleTranslationOpsPageTest extends TestCase
 
         $this->assertCount(1, $dashboard['groups']);
         $this->assertContains('missing published revision', collect($dashboard['groups'][0]['alerts'])->pluck('label')->all());
+        $this->assertNotContains('missing published revision', $dashboard['groups'][0]['ownership_issues']);
     }
 
     public function test_translation_ops_published_filter_respects_selected_target_locale(): void

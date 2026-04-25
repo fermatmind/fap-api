@@ -50,10 +50,16 @@ class EditArticle extends EditRecord
                 ->color('gray'),
             Action::make('openPublicUrl')
                 ->label(__('ops.resources.articles.actions.open_public_url'))
-                ->url(fn (): ?string => ArticleWorkspace::publicUrl((string) $this->getRecord()->slug), shouldOpenInNewTab: true)
+                ->url(fn (): ?string => ArticleWorkspace::publicUrl(
+                    (string) $this->getRecord()->slug,
+                    (string) $this->getRecord()->locale
+                ), shouldOpenInNewTab: true)
                 ->icon('heroicon-o-arrow-top-right-on-square')
                 ->color('gray')
-                ->visible(fn (): bool => (bool) $this->getRecord()->is_public && filled(ArticleWorkspace::publicUrl((string) $this->getRecord()->slug))),
+                ->visible(fn (): bool => (bool) $this->getRecord()->is_public && filled(ArticleWorkspace::publicUrl(
+                    (string) $this->getRecord()->slug,
+                    (string) $this->getRecord()->locale
+                ))),
         ];
     }
 

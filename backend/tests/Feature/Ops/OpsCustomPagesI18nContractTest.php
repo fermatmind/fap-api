@@ -242,6 +242,14 @@ final class OpsCustomPagesI18nContractTest extends TestCase
             ['内容工作台', '权限边界', '访问模型', '内容读取', '条记录'],
         ];
 
+        yield 'go live gate' => [
+            '/ops/go-live-gate',
+            '上线门禁',
+            'Go-Live Gate',
+            ['Go Live Gate Page', 'Governance checkpoint', 'Gate status', 'Generated:', 'At least one enabled payment provider must be routable'],
+            ['上线门禁', '治理检查点', '门禁状态', '生成时间', '刷新', '运行检查', '至少需要一个已启用的支付 provider'],
+        ];
+
         yield 'reports' => [
             '/ops/reports',
             '报告快照',

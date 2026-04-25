@@ -551,6 +551,34 @@ return [
             'translation_source_article_id_mismatch' => '译文 source_article_id 不一致',
             'translation_source_locale_mismatch' => '译文 source_locale 不一致',
         ],
+        'blockers' => [
+            'target_article_is_source' => '目标文章是源文',
+            'target_article_org_mismatch' => '目标文章组织归属不一致',
+            'target_locale_missing' => '缺少目标语言',
+            'working_revision_missing' => '缺少工作版本',
+            'working_revision_is_stale' => '工作版本已过期',
+            'working_revision_is_archived' => '工作版本已归档',
+            'source_canonical_invalid' => '源 canonical 无效',
+            'source_article_id_mismatch' => 'source_article_id 不一致',
+            'source_locale_mismatch' => 'source_locale 不一致',
+            'translation_group_mismatch' => 'translation_group 不一致',
+            'references_citations_presence_check_failed' => '参考文献 / citation 存在性检查失败',
+            'seo_meta_org_mismatch' => 'SEO 元数据组织归属不一致',
+            'working_revision_org_mismatch' => '工作版本组织归属不一致',
+            'working_revision_article_mismatch' => '工作版本文章关联不一致',
+            'working_revision_locale_mismatch' => '工作版本语言不一致',
+            'working_revision_group_mismatch' => '工作版本翻译组不一致',
+            'target_row_is_source' => '目标记录是源文',
+            'target_row_org_mismatch' => '目标记录组织归属不一致',
+            'working_revision_missing_payload' => '工作版本缺少内容载荷',
+            'source_linkage_invalid' => '源文关联无效',
+            'source_content_id_mismatch' => 'source_content_id 不一致',
+            'target_translation_is_stale' => '目标译文已过期',
+            'title_missing' => '缺少标题',
+            'body_missing' => '缺少正文',
+            'seo_title_missing' => '缺少 SEO 标题',
+            'seo_description_missing' => '缺少 SEO 描述',
+        ],
         'compare' => [
             'shadow_revision_workflow' => 'shadow revision 工作流',
             'working_revision_present' => '工作版本存在',
@@ -601,6 +629,7 @@ return [
             'preflight_blocked' => '发布前检查阻塞：:blockers',
             'only_stale_resync' => '只有过期目标译文需要重同步。',
             'no_available_create_action' => '当前 provider 和权限状态下，没有可用于该语言的创建草稿操作。',
+            'machine_translation_provider_unconfigured' => '尚未配置机器翻译 provider。',
             'action_unavailable' => '操作不可用。',
         ],
         'notifications' => [
@@ -1354,6 +1383,95 @@ return [
                 'content_write_hint' => '控制文章、职业指南、岗位、分类和标签的创建及编辑动作。',
                 'content_release' => '内容发布',
                 'content_release_hint' => '访问内容发布队列和执行发布动作所需的权限。',
+            ],
+        ],
+        'go_live_gate' => [
+            'title' => '上线门禁',
+            'heading' => '上线门禁',
+            'breadcrumb' => '上线门禁',
+            'eyebrow' => '治理检查点',
+            'description' => '在发布内容或升级运营变更前，检查当前上线信号。',
+            'status_label' => '门禁状态',
+            'generated_at' => '生成时间：:time',
+            'group_hint' => '每个检查项使用与 Ops 其他页面一致的状态语言。',
+            'actions' => [
+                'refresh' => '刷新',
+                'run_checks' => '运行检查',
+            ],
+            'groups' => [
+                'commerce_payments' => '交易 / 支付',
+                'sre_devops' => 'SRE / DevOps',
+                'compliance_comm' => '合规 / 通信',
+                'growth_observability' => '增长 / 可观测性',
+            ],
+            'checks' => [
+                'region_cn_provider_available' => [
+                    'label' => '中国大陆支付路由可用',
+                    'message' => '至少需要一个已启用的支付 provider 可路由到 CN_MAINLAND。',
+                ],
+                'region_us_provider_available' => [
+                    'label' => '美国支付路由可用',
+                    'message' => '至少需要一个已启用的支付 provider 可路由到 US。',
+                ],
+                'region_eu_provider_available' => [
+                    'label' => '欧洲支付路由可用',
+                    'message' => '至少需要一个已启用的支付 provider 可路由到 EU。',
+                ],
+                'provider_configured' => [
+                    'message' => ':provider provider 配置需要在上线前处理。',
+                ],
+                'payment_refund_drill' => [
+                    'label' => '退款演练',
+                    'message' => '演练完成后设置 OPS_GATE_PAYMENT_REFUND_DRILL_OK=true。',
+                ],
+                'app_debug_false' => [
+                    'label' => 'APP_DEBUG 已关闭',
+                    'message' => '生产环境 APP_DEBUG 必须为 false。',
+                ],
+                'queue_worker' => [
+                    'label' => '队列 worker 已配置',
+                    'message' => '上线前队列 driver 不能是 sync。',
+                ],
+                'backup_restore_drill' => [
+                    'label' => '备份恢复演练',
+                    'message' => '演练完成后设置 OPS_GATE_DB_RESTORE_DRILL_OK=true。',
+                ],
+                'log_rotation' => [
+                    'label' => '日志轮转',
+                    'message' => '验证完成后设置 OPS_GATE_LOG_ROTATION_OK=true。',
+                ],
+                'smtp_ready' => [
+                    'label' => 'SMTP 就绪',
+                    'message' => '必须配置 MAIL_HOST。',
+                ],
+                'spf_dkim_dmarc' => [
+                    'label' => 'SPF / DKIM / DMARC',
+                    'message' => 'DNS 验证完成后设置 OPS_GATE_SPF_DKIM_DMARC_OK=true。',
+                ],
+                'legal_pages' => [
+                    'label' => '法律页面已审核',
+                    'message' => '法律审核完成后设置 OPS_GATE_LEGAL_PAGES_OK=true。',
+                ],
+                'compliance_skeleton' => [
+                    'label' => '合规数据表',
+                    'message' => '需要 audit_logs 和 data_lifecycle_requests。',
+                ],
+                'sentry_backend' => [
+                    'label' => '后端 Sentry',
+                    'message' => '需要配置后端 Sentry DSN。',
+                ],
+                'sentry_frontend' => [
+                    'label' => '前端 Sentry',
+                    'message' => '需要配置前端 Sentry DSN。',
+                ],
+                'conversion_tracking' => [
+                    'label' => '转化追踪',
+                    'message' => '验证完成后设置 OPS_GATE_CONVERSION_TRACKING_OK=true。',
+                ],
+                'gsc_sitemap_robots' => [
+                    'label' => 'GSC / sitemap / robots',
+                    'message' => 'GSC 提交完成后设置 OPS_GATE_GSC_SITEMAP_OK=true。',
+                ],
             ],
         ],
         'reports' => [
