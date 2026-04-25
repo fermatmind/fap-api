@@ -312,6 +312,106 @@
                 "x-laravel-name": "api.v0_3.attempts.show"
             }
         },
+        "/api/v0.3/attempts/{id}/enneagram/observation": {
+            "get": {
+                "operationId": "api.v0_3.attempts.enneagram.observation.show",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AttemptReadController@enneagramObservation",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
+                ],
+                "x-laravel-name": "api.v0_3.attempts.enneagram.observation.show"
+            }
+        },
+        "/api/v0.3/attempts/{id}/enneagram/observation/assign": {
+            "post": {
+                "operationId": "api.v0_3.attempts.enneagram.observation.assign",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AttemptReadController@assignEnneagramObservation",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
+                ],
+                "x-laravel-name": "api.v0_3.attempts.enneagram.observation.assign"
+            }
+        },
+        "/api/v0.3/attempts/{id}/enneagram/observation/day3": {
+            "post": {
+                "operationId": "api.v0_3.attempts.enneagram.observation.day3",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AttemptReadController@submitEnneagramObservationDay3",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
+                ],
+                "x-laravel-name": "api.v0_3.attempts.enneagram.observation.day3"
+            }
+        },
+        "/api/v0.3/attempts/{id}/enneagram/observation/day7": {
+            "post": {
+                "operationId": "api.v0_3.attempts.enneagram.observation.day7",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AttemptReadController@submitEnneagramObservationDay7",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
+                ],
+                "x-laravel-name": "api.v0_3.attempts.enneagram.observation.day7"
+            }
+        },
         "/api/v0.3/attempts/{id}/invite-unlocks": {
             "get": {
                 "operationId": "api.v0_3.attempts.invite_unlocks.show",

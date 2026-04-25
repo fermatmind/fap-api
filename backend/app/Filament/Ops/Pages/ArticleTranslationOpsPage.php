@@ -15,6 +15,7 @@ use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Lang;
 
 class ArticleTranslationOpsPage extends Page
 {
@@ -445,7 +446,7 @@ class ArticleTranslationOpsPage extends Page
     private function notifyWorkflowFailure(\Throwable $exception): void
     {
         $body = method_exists($exception, 'blockers')
-            ? implode('; ', $exception->blockers()) ?: $exception->getMessage()
+            ? implode('; ', $this->localizedBlockers((array) $exception->blockers())) ?: $exception->getMessage()
             : $exception->getMessage();
 
         Notification::make()
@@ -453,5 +454,19 @@ class ArticleTranslationOpsPage extends Page
             ->body($body)
             ->danger()
             ->send();
+    }
+
+    /**
+     * @param  list<string>  $blockers
+     * @return list<string>
+     */
+    private function localizedBlockers(array $blockers): array
+    {
+        return array_values(array_map(function (string $blocker): string {
+            $key = str_replace(['/', ' '], ['_', '_'], strtolower(trim($blocker)));
+            $translationKey = "ops.translation_ops.blockers.{$key}";
+
+            return Lang::has($translationKey) ? (string) __($translationKey) : $blocker;
+        }, $blockers));
     }
 }

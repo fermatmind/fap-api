@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SitemapController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -36,6 +37,18 @@ if (config('admin.panel_enabled')) {
     Route::permanentRedirect('/admin', '/ops');
     Route::get('/admin/{path}', fn (string $path) => redirect('/ops/'.$path, 301))
         ->where('path', '.*');
+
+    foreach ([
+        'categories' => 'article-categories',
+        'tags' => 'article-tags',
+        'approvals' => 'admin-approvals',
+    ] as $legacyPath => $canonicalPath) {
+        Route::get('/ops/'.$legacyPath, static function (Request $request) use ($canonicalPath) {
+            $query = $request->getQueryString();
+
+            return redirect('/ops/'.$canonicalPath.($query !== null && $query !== '' ? '?'.$query : ''), 302);
+        });
+    }
 } else {
     Route::get('/admin', fn () => abort(404));
     Route::get('/ops', fn () => abort(404));

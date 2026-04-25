@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Ops;
 
+use App\Filament\Ops\Resources\ReportSnapshotResource;
 use App\Filament\Ops\Resources\ReportSnapshotResource\Pages\ListReportSnapshots;
 use App\Filament\Ops\Resources\ReportSnapshotResource\Support\ReportSnapshotExplorerSupport;
 use App\Http\Middleware\SetOpsLocale;
@@ -74,12 +75,14 @@ final class ReportPdfCenterTest extends TestCase
     public function test_report_pdf_center_index_query_stays_lightweight_for_production_listing(): void
     {
         $sql = strtolower(app(ReportSnapshotExplorerSupport::class)->indexQuery()->toBase()->toSql());
+        $resourceSql = strtolower(ReportSnapshotResource::getEloquentQuery()->toBase()->toSql());
 
         $this->assertStringContainsString('from "report_snapshots"', $sql);
         $this->assertStringNotContainsString('benefit_grants', $sql);
         $this->assertStringNotContainsString('payment_events', $sql);
         $this->assertStringNotContainsString('email_outbox', $sql);
         $this->assertStringNotContainsString('report_jobs', $sql);
+        $this->assertSame($sql, $resourceSql);
     }
 
     public function test_report_pdf_center_detail_renders_seven_sections_hides_sensitive_payloads_and_shows_drill_through_links(): void

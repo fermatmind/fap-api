@@ -266,7 +266,7 @@ class ReportSnapshotResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return app(ReportSnapshotExplorerSupport::class)->query();
+        return app(ReportSnapshotExplorerSupport::class)->indexQuery();
     }
 
     private static function canSupportAccess(): bool
