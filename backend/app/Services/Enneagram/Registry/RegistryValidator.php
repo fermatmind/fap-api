@@ -6,6 +6,42 @@ namespace App\Services\Enneagram\Registry;
 
 final class RegistryValidator
 {
+    /**
+     * @var array<string,int>
+     */
+    private const REQUIRED_TYPE_WORK_PACK_COUNTS = [
+        'work_strengths' => 4,
+        'work_friction_points' => 4,
+        'ideal_environment' => 3,
+        'collaboration_manual' => 3,
+        'managed_by_others' => 2,
+        'leadership_pattern' => 2,
+        'workplace_trigger_points' => 2,
+    ];
+
+    /**
+     * @var array<string,int>
+     */
+    private const REQUIRED_TYPE_GROWTH_PACK_COUNTS = [
+        'growth_strengths' => 4,
+        'growth_costs' => 4,
+        'early_warning_signs' => 4,
+        'recovery_protocol' => 3,
+        'small_experiments' => 3,
+    ];
+
+    /**
+     * @var array<string,int>
+     */
+    private const REQUIRED_TYPE_RELATIONSHIP_PACK_COUNTS = [
+        'relationship_strengths' => 4,
+        'relationship_traps' => 4,
+        'communication_manual' => 3,
+        'conflict_trigger_points' => 3,
+        'repair_language' => 3,
+        'partner_facing_notes' => 2,
+    ];
+
     private const REQUIRED_TYPE_DEEP_DIVE_FIELDS = [
         'core_desire',
         'core_fear',
@@ -31,9 +67,14 @@ final class RegistryValidator
         '外部效度',
         'health level',
         '健康层级判定',
+        '高健康层级',
+        '低健康层级',
         '子类型判定',
         '翼型判定',
         '箭头判定',
+        '适合招聘',
+        '筛掉',
+        '录用',
     ];
 
     /**
@@ -336,12 +377,15 @@ final class RegistryValidator
             }
             foreach (self::REQUIRED_TYPE_DEEP_DIVE_FIELDS as $field) {
                 $value = (string) ($deepDive[$field] ?? '');
-                foreach (self::UNSUPPORTED_TYPE_CLAIM_SNIPPETS as $snippet) {
-                    if (str_contains($value, $snippet)) {
-                        $errors[] = "Type registry {$typeId} deep_dive.{$field} contains unsupported claim snippet: {$snippet}";
-                    }
+                $snippet = $this->unsupportedSnippetForText($value);
+                if ($snippet !== null) {
+                    $errors[] = "Type registry {$typeId} deep_dive.{$field} contains unsupported claim snippet: {$snippet}";
                 }
             }
+            $this->validateTypePackItems($errors, $typeId, 'work_pack', (array) ($entry['work_pack'] ?? []), self::REQUIRED_TYPE_WORK_PACK_COUNTS);
+            $this->validateTypePackItems($errors, $typeId, 'growth_pack', (array) ($entry['growth_pack'] ?? []), self::REQUIRED_TYPE_GROWTH_PACK_COUNTS);
+            $this->validateStateSpectrumCopy($errors, $typeId, (array) data_get($entry, 'growth_pack.state_spectrum_copy', []));
+            $this->validateTypePackItems($errors, $typeId, 'relationship_pack', (array) ($entry['relationship_pack'] ?? []), self::REQUIRED_TYPE_RELATIONSHIP_PACK_COUNTS);
         }
         sort($typeIds);
         if ($typeIds !== self::REQUIRED_TYPE_IDS) {
@@ -713,5 +757,82 @@ final class RegistryValidator
         }
 
         return $errors;
+    }
+
+    /**
+     * @param  list<string>  $errors
+     * @param  array<string,mixed>  $pack
+     * @param  array<string,int>  $requiredFields
+     */
+    private function validateTypePackItems(array &$errors, string $typeId, string $packKey, array $pack, array $requiredFields): void
+    {
+        if ($pack === []) {
+            $errors[] = "Type registry {$typeId} missing {$packKey}";
+
+            return;
+        }
+
+        foreach ($requiredFields as $field => $minCount) {
+            $items = $pack[$field] ?? null;
+            if (! is_array($items) || count($items) < $minCount) {
+                $errors[] = "Type registry {$typeId} {$packKey}.{$field} must include at least {$minCount} items";
+
+                continue;
+            }
+
+            foreach ($items as $index => $item) {
+                if (! is_array($item)) {
+                    $errors[] = "Type registry {$typeId} {$packKey}.{$field}[{$index}] must be object";
+
+                    continue;
+                }
+
+                foreach (['title', 'body'] as $itemField) {
+                    $value = trim((string) ($item[$itemField] ?? ''));
+                    if ($value === '') {
+                        $errors[] = "Type registry {$typeId} {$packKey}.{$field}[{$index}] missing {$itemField}";
+
+                        continue;
+                    }
+
+                    $snippet = $this->unsupportedSnippetForText($value);
+                    if ($snippet !== null) {
+                        $errors[] = "Type registry {$typeId} {$packKey}.{$field}[{$index}].{$itemField} contains unsupported claim snippet: {$snippet}";
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * @param  list<string>  $errors
+     * @param  array<string,mixed>  $copy
+     */
+    private function validateStateSpectrumCopy(array &$errors, string $typeId, array $copy): void
+    {
+        foreach (['stable_expression', 'default_expression', 'strained_expression'] as $field) {
+            $value = trim((string) ($copy[$field] ?? ''));
+            if ($value === '') {
+                $errors[] = "Type registry {$typeId} growth_pack.state_spectrum_copy.{$field} missing";
+
+                continue;
+            }
+
+            $snippet = $this->unsupportedSnippetForText($value);
+            if ($snippet !== null) {
+                $errors[] = "Type registry {$typeId} growth_pack.state_spectrum_copy.{$field} contains unsupported claim snippet: {$snippet}";
+            }
+        }
+    }
+
+    private function unsupportedSnippetForText(string $value): ?string
+    {
+        foreach (self::UNSUPPORTED_TYPE_CLAIM_SNIPPETS as $snippet) {
+            if (str_contains($value, $snippet)) {
+                return $snippet;
+            }
+        }
+
+        return null;
     }
 }
