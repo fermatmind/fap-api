@@ -1860,6 +1860,27 @@
                 ]
             }
         },
+        "/api/v0.3/scales/{scale_code}/technical-note": {
+            "get": {
+                "operationId": "get_api_v0_3_scales_scale_code_technical_note",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ScalesController@technicalNote",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext"
+                ]
+            }
+        },
         "/api/v0.3/shares/{id}": {
             "get": {
                 "operationId": "get_api_v0_3_shares_id_",
