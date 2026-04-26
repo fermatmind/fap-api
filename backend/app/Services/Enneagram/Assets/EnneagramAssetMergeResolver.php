@@ -19,32 +19,44 @@ final class EnneagramAssetMergeResolver
      */
     public function resolve(array $batchA, array $batchB): array
     {
-        $errors = $this->mergePolicyValidator->validatePair($batchA, $batchB);
+        return $this->resolveStreams($batchA, $batchB);
+    }
+
+    /**
+     * @param  array<int,array{metadata?:array<string,mixed>,items?:list<array<string,mixed>>}>  $streams
+     * @return array<string,mixed>
+     */
+    public function resolveStreams(array ...$streams): array
+    {
+        $errors = $this->mergePolicyValidator->validateStreams(...$streams);
         if ($errors !== []) {
             throw new RuntimeException('ENNEAGRAM asset merge policy invalid: '.implode(' | ', $errors));
         }
 
         $items = [];
-        foreach ((array) ($batchA['items'] ?? []) as $item) {
-            if (is_array($item)) {
-                $items[] = array_merge($item, ['_preview_batch' => '1R-A']);
+        $sourceVersions = [];
+        foreach ($streams as $stream) {
+            $batch = $this->detectBatchKey($stream);
+            if ($batch === '') {
+                continue;
+            }
+            $sourceVersions[$this->sourceVersionKey($batch)] = (string) data_get($stream, 'metadata.version', '');
+
+            foreach ((array) ($stream['items'] ?? []) as $item) {
+                if (is_array($item)) {
+                    $items[] = array_merge($item, ['_preview_batch' => $batch]);
+                }
             }
         }
-        foreach ((array) ($batchB['items'] ?? []) as $item) {
-            if (is_array($item)) {
-                $items[] = array_merge($item, ['_preview_batch' => '1R-B']);
-            }
-        }
+
+        ksort($sourceVersions);
 
         return [
             'schema_version' => 'enneagram.asset_preview.merge.v1',
             'mode' => 'staging_preview_only',
             'production_import_allowed' => false,
             'full_replacement_allowed' => false,
-            'source_versions' => [
-                'batch_1r_a' => (string) data_get($batchA, 'metadata.version', ''),
-                'batch_1r_b' => (string) data_get($batchB, 'metadata.version', ''),
-            ],
+            'source_versions' => $sourceVersions,
             'replacement_coverage' => [
                 'batch_1r_a_replaces' => EnneagramAssetMergePolicyValidator::BATCH_A_REPLACE_CATEGORIES,
                 'batch_1r_a_adds' => array_values(array_diff(
@@ -52,8 +64,53 @@ final class EnneagramAssetMergeResolver
                     EnneagramAssetMergePolicyValidator::BATCH_A_REPLACE_CATEGORIES
                 )),
                 'batch_1r_b_replaces' => EnneagramAssetMergePolicyValidator::BATCH_B_DEEP_CORE_CATEGORIES,
+                'batch_1r_c_adds' => EnneagramAssetMergePolicyValidator::BATCH_C_CATEGORIES,
             ],
             'items' => $items,
         ];
+    }
+
+    /**
+     * @param  array{metadata?:array<string,mixed>,items?:list<array<string,mixed>>}  $stream
+     */
+    private function detectBatchKey(array $stream): string
+    {
+        $version = (string) data_get($stream, 'metadata.version', '');
+        $categories = array_values(array_unique(array_filter(array_map(
+            static fn (array $item): string => trim((string) ($item['category'] ?? '')),
+            (array) ($stream['items'] ?? [])
+        ))));
+
+        if (str_contains($version, '1R-A') || in_array('page1_summary', $categories, true)) {
+            return '1R-A';
+        }
+        if (str_contains($version, '1R-B') || in_array('core_motivation', $categories, true)) {
+            return '1R-B';
+        }
+        if (str_contains($version, '1R-C')) {
+            return '1R-C';
+        }
+
+        foreach ((array) ($stream['items'] ?? []) as $item) {
+            if (is_array($item) && trim((string) ($item['objection_axis'] ?? '')) !== '') {
+                return '1R-C';
+            }
+        }
+
+        if ($categories === EnneagramAssetMergePolicyValidator::BATCH_C_CATEGORIES) {
+            return '1R-C';
+        }
+
+        return '';
+    }
+
+    private function sourceVersionKey(string $batch): string
+    {
+        return match ($batch) {
+            '1R-A' => 'batch_1r_a',
+            '1R-B' => 'batch_1r_b',
+            '1R-C' => 'batch_1r_c',
+            default => strtolower(str_replace('-', '_', $batch)),
+        };
     }
 }

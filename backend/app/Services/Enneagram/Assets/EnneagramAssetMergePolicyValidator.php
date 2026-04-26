@@ -38,6 +38,10 @@ final class EnneagramAssetMergePolicyValidator
         'boundary',
     ];
 
+    public const BATCH_C_CATEGORIES = [
+        'low_resonance_response',
+    ];
+
     /**
      * @param  array<string,mixed>  $stream
      * @return list<string>
@@ -82,6 +86,18 @@ final class EnneagramAssetMergePolicyValidator
             }
         }
 
+        if ($this->isBatchC($version, $items)) {
+            if ($mode !== 'additive_branch_expansion') {
+                $errors[] = 'batch_1r_c_requires_additive_branch_expansion_mode';
+            }
+            $categories = $this->categories($items);
+            foreach ($categories as $category) {
+                if (! in_array($category, self::BATCH_C_CATEGORIES, true)) {
+                    $errors[] = 'batch_1r_c_unknown_category:'.$category;
+                }
+            }
+        }
+
         return $errors;
     }
 
@@ -92,14 +108,52 @@ final class EnneagramAssetMergePolicyValidator
      */
     public function validatePair(array $batchA, array $batchB): array
     {
-        $errors = [];
-        $errors = array_merge($errors, $this->validateSingle($batchA), $this->validateSingle($batchB));
+        return $this->validateStreams($batchA, $batchB);
+    }
 
-        $aCategories = $this->categories((array) ($batchA['items'] ?? []));
-        $bCategories = $this->categories((array) ($batchB['items'] ?? []));
-        $overlap = array_values(array_intersect($aCategories, $bCategories));
-        if ($overlap !== []) {
-            $errors[] = 'batch_1r_a_1r_b_category_overlap_blocked:'.implode(',', $overlap);
+    /**
+     * @param  array<int,array{metadata?:array<string,mixed>,items?:list<array<string,mixed>>}>  $streams
+     * @return list<string>
+     */
+    public function validateStreams(array ...$streams): array
+    {
+        $errors = [];
+        foreach ($streams as $stream) {
+            $errors = array_merge($errors, $this->validateSingle($stream));
+        }
+
+        $categoriesByBatch = [];
+        foreach ($streams as $stream) {
+            $items = (array) ($stream['items'] ?? []);
+            $batchKey = $this->batchKey((string) data_get($stream, 'metadata.version', ''), $items);
+            if ($batchKey === '') {
+                continue;
+            }
+            $categoriesByBatch[$batchKey] = $this->categories($items);
+        }
+
+        $overlapAB = array_values(array_intersect(
+            $categoriesByBatch['1R-A'] ?? [],
+            $categoriesByBatch['1R-B'] ?? []
+        ));
+        if ($overlapAB !== []) {
+            $errors[] = 'batch_1r_a_1r_b_category_overlap_blocked:'.implode(',', $overlapAB);
+        }
+
+        $unexpectedAC = array_values(array_diff(
+            array_intersect($categoriesByBatch['1R-A'] ?? [], $categoriesByBatch['1R-C'] ?? []),
+            self::BATCH_C_CATEGORIES
+        ));
+        if ($unexpectedAC !== []) {
+            $errors[] = 'batch_1r_a_1r_c_category_overlap_blocked:'.implode(',', $unexpectedAC);
+        }
+
+        $unexpectedBC = array_values(array_diff(
+            array_intersect($categoriesByBatch['1R-B'] ?? [], $categoriesByBatch['1R-C'] ?? []),
+            self::BATCH_C_CATEGORIES
+        ));
+        if ($unexpectedBC !== []) {
+            $errors[] = 'batch_1r_b_1r_c_category_overlap_blocked:'.implode(',', $unexpectedBC);
         }
 
         return array_values(array_unique($errors));
@@ -131,5 +185,41 @@ final class EnneagramAssetMergePolicyValidator
     private function isBatchB(string $version, array $items): bool
     {
         return str_contains($version, '1R-B') || in_array('core_motivation', $this->categories($items), true);
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $items
+     */
+    private function isBatchC(string $version, array $items): bool
+    {
+        if (str_contains($version, '1R-C')) {
+            return true;
+        }
+
+        foreach ($items as $item) {
+            if (trim((string) ($item['objection_axis'] ?? '')) !== '') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $items
+     */
+    private function batchKey(string $version, array $items): string
+    {
+        if ($this->isBatchA($version, $items)) {
+            return '1R-A';
+        }
+        if ($this->isBatchB($version, $items)) {
+            return '1R-B';
+        }
+        if ($this->isBatchC($version, $items)) {
+            return '1R-C';
+        }
+
+        return '';
     }
 }
