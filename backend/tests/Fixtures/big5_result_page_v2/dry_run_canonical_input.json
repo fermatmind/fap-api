@@ -1,0 +1,40 @@
+{
+  "attempt_id": "attempt_big5_v2_dry_run_canonical",
+  "form_code": "big5_90",
+  "norm_status": "CALIBRATED",
+  "norm_group_id": "zh-CN_prod_all_18-60",
+  "norm_version": "big5_norms_fixture_v1",
+  "quality_status": "B",
+  "scores_json": {
+    "domains_mean": { "O": 3.59, "C": 2.32, "E": 2.2, "A": 3.55, "N": 3.68 }
+  },
+  "scores_pct": { "O": 59, "C": 32, "E": 20, "A": 55, "N": 68 },
+  "result_json": {
+    "normed_json": {
+      "engine_version": "big5_ipipneo90_v3.0.0",
+      "raw_scores": {
+        "domains_mean": { "O": 3.59, "C": 2.32, "E": 2.2, "A": 3.55, "N": 3.68 },
+        "facets_mean": { "N1": 4.4, "O5": 3.8 }
+      },
+      "scores_0_100": {
+        "domains_percentile": { "O": 59, "C": 32, "E": 20, "A": 55, "N": 68 },
+        "facets_percentile": { "N1": 98, "O5": 72 }
+      },
+      "facts": {
+        "domain_buckets": { "O": "mid_high", "C": "mid_low", "E": "low", "A": "mid", "N": "high" },
+        "facet_buckets": { "N1": "high", "O5": "mid_high" },
+        "top_strength_facets": ["O5"],
+        "top_growth_facets": ["C5", "E6"]
+      },
+      "tags": ["big5:o_mid_high", "big5:n_high"]
+    }
+  },
+  "big5_public_projection_v1": {
+    "schema_version": "big5.public_projection.v1",
+    "trait_bands": { "O": "mid_high", "C": "mid_low", "E": "low", "A": "mid", "N": "high" },
+    "facet_vector": [
+      { "key": "N1", "bucket": "high", "percentile": 98, "item_count": 4, "confidence": "medium" },
+      { "key": "O5", "bucket": "mid_high", "percentile": 72, "item_count": 4, "confidence": "medium" }
+    ]
+  }
+}
