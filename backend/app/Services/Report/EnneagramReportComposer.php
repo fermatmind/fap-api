@@ -7,6 +7,7 @@ namespace App\Services\Report;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\Content\EnneagramPackLoader;
+use App\Services\Enneagram\Assets\EnneagramAssetPreviewPayloadBuilder;
 use App\Services\Enneagram\EnneagramPublicProjectionService;
 use App\Services\Enneagram\Registry\RegistryValidator;
 use RuntimeException;
@@ -99,6 +100,7 @@ final class EnneagramReportComposer
         private readonly EnneagramPublicProjectionService $projectionService,
         private readonly EnneagramPackLoader $packLoader,
         private readonly RegistryValidator $registryValidator,
+        private readonly EnneagramAssetPreviewPayloadBuilder $assetPreviewPayloadBuilder,
     ) {}
 
     /**
@@ -150,6 +152,39 @@ final class EnneagramReportComposer
                     'enneagram_public_projection_v2' => $projectionV2,
                     'enneagram_report_v2' => $reportV2,
                     'snapshot_binding_v1' => $this->buildSnapshotBinding($projectionV2),
+                ],
+                'generated_at' => now()->toISOString(),
+            ],
+        ];
+    }
+
+    /**
+     * Preview-only asset selection entrypoint. This is intentionally detached from
+     * composeVariant() so normal /report, snapshots, share, PDF, and history stay unchanged.
+     *
+     * @param  array<string,mixed>  $mergedAssets
+     * @param  array<string,mixed>  $context
+     * @return array<string,mixed>
+     */
+    public function composeAssetPreview(array $mergedAssets, array $context): array
+    {
+        if (($context['preview_mode'] ?? null) !== true) {
+            return [
+                'ok' => false,
+                'error' => 'ENNEAGRAM_ASSET_PREVIEW_MODE_REQUIRED',
+                'message' => 'ENNEAGRAM asset selection is only available behind explicit preview mode.',
+                'status' => 422,
+            ];
+        }
+
+        return [
+            'ok' => true,
+            'report' => [
+                'schema_version' => 'enneagram.report.v1',
+                'scale_code' => 'ENNEAGRAM',
+                'variant' => 'asset_preview',
+                '_meta' => [
+                    'enneagram_report_v2' => $this->assetPreviewPayloadBuilder->build($mergedAssets, $context),
                 ],
                 'generated_at' => now()->toISOString(),
             ],
