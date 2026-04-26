@@ -117,4 +117,48 @@ final class EnneagramAssetSelectorTest extends TestCase
         $this->assertSame('top3_flat', $selected['diffuse_convergence_response']['diffuse_axis']);
         $this->assertStringContainsString('1R_E', $selected['diffuse_convergence_response']['asset_key']);
     }
+
+    public function test_it_selects_1r_f_close_call_pair_for_matching_pair_key_and_canonicalizes_reverse_probe(): void
+    {
+        $this->skipWhenAssetsMissing();
+        $this->skipWhenBatchCMissing();
+        $this->skipWhenBatchDMissing();
+        $this->skipWhenBatchEMissing();
+        $this->skipWhenBatchFMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $merged = app(EnneagramAssetMergeResolver::class)->resolveStreams(
+            $loader->load($this->batchAPath()),
+            $loader->load($this->batchBPath()),
+            $loader->load($this->batchCPath()),
+            $loader->load($this->batchDPath()),
+            $loader->load($this->batchEPath()),
+            $loader->load($this->batchFPath()),
+        );
+        $batchFItem = collect((array) ($merged['items'] ?? []))
+            ->first(static fn (array $item): bool => ($item['_preview_batch'] ?? null) === '1R-F'
+                && ($item['canonical_pair_key'] ?? null) === '1_6');
+
+        $this->assertIsArray($batchFItem);
+
+        $context = app(EnneagramAssetPreviewPayloadBuilder::class)->contextForPairItem($batchFItem);
+        $selected = app(EnneagramAssetSelector::class)->selectByCategory($merged, $context);
+
+        $this->assertArrayHasKey('close_call_pair', $selected);
+        $this->assertSame('1R-F', $selected['close_call_pair']['_preview_batch']);
+        $this->assertSame('1_6', $selected['close_call_pair']['canonical_pair_key']);
+        $this->assertStringContainsString('1R_F', $selected['close_call_pair']['asset_key']);
+
+        $reverseContext = array_merge($context, [
+            'pair_key' => '6_1',
+            'top1_type' => '6',
+            'top2_type' => '1',
+        ]);
+        $reverseSelected = app(EnneagramAssetSelector::class)->selectByCategory($merged, $reverseContext);
+
+        $this->assertSame(
+            $selected['close_call_pair']['asset_key'],
+            $reverseSelected['close_call_pair']['asset_key']
+        );
+    }
 }

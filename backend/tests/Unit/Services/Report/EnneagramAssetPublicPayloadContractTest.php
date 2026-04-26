@@ -35,4 +35,43 @@ final class EnneagramAssetPublicPayloadContractTest extends TestCase
             $this->assertArrayNotHasKey('safety_note', $content);
         }
     }
+
+    public function test_public_preview_payload_exposes_pair_safe_fields_without_internal_metadata(): void
+    {
+        $this->skipWhenAssetsMissing();
+        $this->skipWhenBatchCMissing();
+        $this->skipWhenBatchDMissing();
+        $this->skipWhenBatchEMissing();
+        $this->skipWhenBatchFMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $merged = app(EnneagramAssetMergeResolver::class)->resolveStreams(
+            $loader->load($this->batchAPath()),
+            $loader->load($this->batchBPath()),
+            $loader->load($this->batchCPath()),
+            $loader->load($this->batchDPath()),
+            $loader->load($this->batchEPath()),
+            $loader->load($this->batchFPath()),
+        );
+        $batchFItem = $loader->load($this->batchFPath())['items'][0];
+        $payload = app(EnneagramAssetPreviewPayloadBuilder::class)->build(
+            $merged,
+            app(EnneagramAssetPreviewPayloadBuilder::class)->contextForPairItem($batchFItem)
+        );
+        $sanitizer = app(EnneagramAssetPublicPayloadSanitizer::class);
+
+        $this->assertSame([], $sanitizer->internalMetadataLeaks($payload));
+        $pairModule = collect((array) $payload['modules'])
+            ->first(fn (array $module): bool => data_get($module, 'content.category') === 'close_call_pair');
+
+        $this->assertIsArray($pairModule);
+        $content = (array) ($pairModule['content'] ?? []);
+        $this->assertSame('1_2', $content['pair_key']);
+        $this->assertArrayHasKey('commercial_summary', $content);
+        $this->assertArrayHasKey('micro_discrimination_prompt', $content);
+        $this->assertArrayNotHasKey('selection_guidance', $content);
+        $this->assertArrayNotHasKey('editor_note', $content);
+        $this->assertArrayNotHasKey('qa_note', $content);
+        $this->assertArrayNotHasKey('safety_note', $content);
+    }
 }

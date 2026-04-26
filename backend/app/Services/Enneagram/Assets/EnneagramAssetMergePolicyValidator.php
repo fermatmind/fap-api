@@ -50,6 +50,10 @@ final class EnneagramAssetMergePolicyValidator
         'diffuse_convergence_response',
     ];
 
+    public const BATCH_F_CATEGORIES = [
+        'close_call_pair',
+    ];
+
     /**
      * @param  array<string,mixed>  $stream
      * @return list<string>
@@ -130,6 +134,20 @@ final class EnneagramAssetMergePolicyValidator
             }
         }
 
+        if ($this->isBatchF($version, $items)) {
+            if ($mode !== 'pair_library_completion') {
+                $errors[] = 'batch_1r_f_requires_pair_library_completion_mode';
+            }
+            $categories = $this->categories($items);
+            foreach ($categories as $category) {
+                if (! in_array($category, self::BATCH_F_CATEGORIES, true)) {
+                    $errors[] = 'batch_1r_f_unknown_category:'.$category;
+                }
+            }
+
+            $errors = array_merge($errors, $this->validatePairLibrary($items));
+        }
+
         return $errors;
     }
 
@@ -157,7 +175,7 @@ final class EnneagramAssetMergePolicyValidator
         $categoriesByBatch = [];
         foreach ($streams as $stream) {
             $items = (array) ($stream['items'] ?? []);
-            $batchKey = $this->batchKey((string) data_get($stream, 'metadata.version', ''), $items);
+            $batchKey = $this->detectBatchKey((array) data_get($stream, 'metadata', []), $items);
             if ($batchKey === '') {
                 continue;
             }
@@ -244,7 +262,58 @@ final class EnneagramAssetMergePolicyValidator
             $errors[] = 'batch_1r_d_1r_e_category_overlap_blocked:'.implode(',', $unexpectedDE);
         }
 
+        $unexpectedAF = array_values(array_intersect(
+            $categoriesByBatch['1R-A'] ?? [],
+            $categoriesByBatch['1R-F'] ?? []
+        ));
+        if ($unexpectedAF !== []) {
+            $errors[] = 'batch_1r_a_1r_f_category_overlap_blocked:'.implode(',', $unexpectedAF);
+        }
+
+        $unexpectedBF = array_values(array_intersect(
+            $categoriesByBatch['1R-B'] ?? [],
+            $categoriesByBatch['1R-F'] ?? []
+        ));
+        if ($unexpectedBF !== []) {
+            $errors[] = 'batch_1r_b_1r_f_category_overlap_blocked:'.implode(',', $unexpectedBF);
+        }
+
+        $unexpectedCF = array_values(array_intersect(
+            $categoriesByBatch['1R-C'] ?? [],
+            $categoriesByBatch['1R-F'] ?? []
+        ));
+        if ($unexpectedCF !== []) {
+            $errors[] = 'batch_1r_c_1r_f_category_overlap_blocked:'.implode(',', $unexpectedCF);
+        }
+
+        $unexpectedDF = array_values(array_intersect(
+            $categoriesByBatch['1R-D'] ?? [],
+            $categoriesByBatch['1R-F'] ?? []
+        ));
+        if ($unexpectedDF !== []) {
+            $errors[] = 'batch_1r_d_1r_f_category_overlap_blocked:'.implode(',', $unexpectedDF);
+        }
+
+        $unexpectedEF = array_values(array_intersect(
+            $categoriesByBatch['1R-E'] ?? [],
+            $categoriesByBatch['1R-F'] ?? []
+        ));
+        if ($unexpectedEF !== []) {
+            $errors[] = 'batch_1r_e_1r_f_category_overlap_blocked:'.implode(',', $unexpectedEF);
+        }
+
         return array_values(array_unique($errors));
+    }
+
+    /**
+     * @param  array<string,mixed>  $metadata
+     * @param  list<array<string,mixed>>  $items
+     */
+    public function detectBatchKey(array $metadata, array $items): string
+    {
+        $version = (string) ($metadata['version'] ?? $metadata['batch'] ?? $metadata['batch_name'] ?? '');
+
+        return $this->batchKey($version, $items);
     }
 
     /**
@@ -332,6 +401,28 @@ final class EnneagramAssetMergePolicyValidator
     /**
      * @param  list<array<string,mixed>>  $items
      */
+    private function isBatchF(string $version, array $items): bool
+    {
+        if (str_contains($version, '1R-F')) {
+            return true;
+        }
+
+        foreach ($items as $item) {
+            $pairKey = trim((string) ($item['pair_key'] ?? ''));
+            $canonicalPairKey = trim((string) ($item['canonical_pair_key'] ?? ''));
+            $typeA = trim((string) ($item['type_a'] ?? ''));
+            $typeB = trim((string) ($item['type_b'] ?? ''));
+            if (($pairKey !== '' || $canonicalPairKey !== '') && $typeA !== '' && $typeB !== '') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $items
+     */
     private function batchKey(string $version, array $items): string
     {
         if ($this->isBatchA($version, $items)) {
@@ -349,7 +440,106 @@ final class EnneagramAssetMergePolicyValidator
         if ($this->isBatchE($version, $items)) {
             return '1R-E';
         }
+        if ($this->isBatchF($version, $items)) {
+            return '1R-F';
+        }
 
         return '';
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $items
+     * @return list<string>
+     */
+    private function validatePairLibrary(array $items): array
+    {
+        $errors = [];
+        $canonicalKeys = [];
+        $expected = [];
+        for ($left = 1; $left <= 9; $left++) {
+            for ($right = $left + 1; $right <= 9; $right++) {
+                $expected[] = $left.'_'.$right;
+            }
+        }
+
+        foreach ($items as $index => $item) {
+            $typeA = trim((string) ($item['type_a'] ?? ''));
+            $typeB = trim((string) ($item['type_b'] ?? ''));
+            $pairKey = trim((string) ($item['pair_key'] ?? ''));
+            $canonicalPairKey = trim((string) ($item['canonical_pair_key'] ?? ''));
+            $directional = (bool) ($item['directional'] ?? false);
+
+            if (! ctype_digit($typeA) || ! ctype_digit($typeB)) {
+                $errors[] = 'batch_1r_f_invalid_type_pair:item_'.$index;
+
+                continue;
+            }
+
+            $left = (int) $typeA;
+            $right = (int) $typeB;
+            if ($left < 1 || $left > 9 || $right < 1 || $right > 9 || $left === $right) {
+                $errors[] = 'batch_1r_f_invalid_type_pair:item_'.$index;
+
+                continue;
+            }
+
+            $normalized = $this->canonicalPairKey($left, $right, $directional);
+            if (! $this->isValidPairKey($pairKey)) {
+                $errors[] = 'batch_1r_f_invalid_pair_key:item_'.$index;
+            }
+            if ($canonicalPairKey === '') {
+                $errors[] = 'batch_1r_f_missing_canonical_pair_key:item_'.$index;
+            } elseif ($canonicalPairKey !== $normalized) {
+                $errors[] = 'batch_1r_f_canonical_pair_key_mismatch:'.$canonicalPairKey.'!= '.$normalized;
+            }
+
+            if (! $directional && $pairKey !== '' && $pairKey !== $normalized) {
+                $errors[] = 'batch_1r_f_non_directional_pair_key_must_be_canonical:'.$pairKey;
+            }
+
+            if ($canonicalPairKey !== '') {
+                if (isset($canonicalKeys[$canonicalPairKey])) {
+                    $errors[] = 'batch_1r_f_duplicate_canonical_pair_key:'.$canonicalPairKey;
+                }
+                $canonicalKeys[$canonicalPairKey] = true;
+            }
+        }
+
+        $actual = array_keys($canonicalKeys);
+        sort($actual);
+        sort($expected);
+
+        foreach (array_values(array_diff($expected, $actual)) as $missing) {
+            $errors[] = 'batch_1r_f_missing_canonical_pair_key:'.$missing;
+        }
+
+        foreach (array_values(array_diff($actual, $expected)) as $unexpected) {
+            $errors[] = 'batch_1r_f_unexpected_canonical_pair_key:'.$unexpected;
+        }
+
+        return $errors;
+    }
+
+    private function isValidPairKey(string $pairKey): bool
+    {
+        if (! preg_match('/^[1-9]_[1-9]$/', $pairKey)) {
+            return false;
+        }
+
+        [$left, $right] = array_map('intval', explode('_', $pairKey, 2));
+
+        return $left !== $right;
+    }
+
+    private function canonicalPairKey(int $left, int $right, bool $directional): string
+    {
+        if ($directional) {
+            return $left.'_'.$right;
+        }
+
+        $values = [$left, $right];
+        sort($values, SORT_NUMERIC);
+
+        return $values[0].'_'.$values[1];
     }
 }

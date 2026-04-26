@@ -105,4 +105,34 @@ final class EnneagramAssetMergeResolverTest extends TestCase
             data_get($merged, 'source_versions.batch_1r_e')
         );
     }
+
+    public function test_it_merges_1r_a_1r_b_1r_c_1r_d_1r_e_and_1r_f_as_staging_preview_only(): void
+    {
+        $this->skipWhenAssetsMissing();
+        $this->skipWhenBatchCMissing();
+        $this->skipWhenBatchDMissing();
+        $this->skipWhenBatchEMissing();
+        $this->skipWhenBatchFMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $resolver = app(EnneagramAssetMergeResolver::class);
+
+        $merged = $resolver->resolveStreams(
+            $loader->load($this->batchAPath()),
+            $loader->load($this->batchBPath()),
+            $loader->load($this->batchCPath()),
+            $loader->load($this->batchDPath()),
+            $loader->load($this->batchEPath()),
+            $loader->load($this->batchFPath()),
+        );
+
+        $this->assertFalse($merged['production_import_allowed']);
+        $this->assertFalse($merged['full_replacement_allowed']);
+        $this->assertCount(1080, $merged['items']);
+        $this->assertContains('close_call_pair', data_get($merged, 'replacement_coverage.batch_1r_f_adds'));
+        $this->assertSame(
+            'enneagram_content_expansion_batch_1R_F_close_call_36_pair_completion.v1',
+            data_get($merged, 'source_versions.batch_1r_f')
+        );
+    }
 }

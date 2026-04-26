@@ -67,6 +67,7 @@ final class EnneagramAssetMergeResolver
                 'batch_1r_c_adds' => EnneagramAssetMergePolicyValidator::BATCH_C_CATEGORIES,
                 'batch_1r_d_adds' => EnneagramAssetMergePolicyValidator::BATCH_D_CATEGORIES,
                 'batch_1r_e_adds' => EnneagramAssetMergePolicyValidator::BATCH_E_CATEGORIES,
+                'batch_1r_f_adds' => EnneagramAssetMergePolicyValidator::BATCH_F_CATEGORIES,
             ],
             'items' => $items,
         ];
@@ -77,26 +78,16 @@ final class EnneagramAssetMergeResolver
      */
     private function detectBatchKey(array $stream): string
     {
-        $version = (string) data_get($stream, 'metadata.version', '');
+        $metadata = (array) data_get($stream, 'metadata', []);
+        $version = (string) ($metadata['version'] ?? '');
         $categories = array_values(array_unique(array_filter(array_map(
             static fn (array $item): string => trim((string) ($item['category'] ?? '')),
             (array) ($stream['items'] ?? [])
         ))));
 
-        if (str_contains($version, '1R-A') || in_array('page1_summary', $categories, true)) {
-            return '1R-A';
-        }
-        if (str_contains($version, '1R-B') || in_array('core_motivation', $categories, true)) {
-            return '1R-B';
-        }
-        if (str_contains($version, '1R-C')) {
-            return '1R-C';
-        }
-        if (str_contains($version, '1R-D')) {
-            return '1R-D';
-        }
-        if (str_contains($version, '1R-E')) {
-            return '1R-E';
+        $batch = $this->mergePolicyValidator->detectBatchKey($metadata, (array) ($stream['items'] ?? []));
+        if ($batch !== '') {
+            return $batch;
         }
 
         foreach ((array) ($stream['items'] ?? []) as $item) {
@@ -109,6 +100,9 @@ final class EnneagramAssetMergeResolver
             if (is_array($item) && trim((string) ($item['diffuse_axis'] ?? '')) !== '') {
                 return '1R-E';
             }
+            if (is_array($item) && trim((string) ($item['pair_key'] ?? '')) !== '' && trim((string) ($item['canonical_pair_key'] ?? '')) !== '') {
+                return '1R-F';
+            }
         }
 
         if ($categories === EnneagramAssetMergePolicyValidator::BATCH_C_CATEGORIES) {
@@ -119,6 +113,9 @@ final class EnneagramAssetMergeResolver
         }
         if ($categories === EnneagramAssetMergePolicyValidator::BATCH_E_CATEGORIES) {
             return '1R-E';
+        }
+        if ($categories === EnneagramAssetMergePolicyValidator::BATCH_F_CATEGORIES) {
+            return '1R-F';
         }
 
         return '';
@@ -132,6 +129,7 @@ final class EnneagramAssetMergeResolver
             '1R-C' => 'batch_1r_c',
             '1R-D' => 'batch_1r_d',
             '1R-E' => 'batch_1r_e',
+            '1R-F' => 'batch_1r_f',
             default => strtolower(str_replace('-', '_', $batch)),
         };
     }
