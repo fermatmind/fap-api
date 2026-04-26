@@ -24,7 +24,6 @@ final class EnneagramAssetItemStreamValidator
         'asset_type',
         'category',
         'module_key',
-        'type_id',
         'applies_to',
         'body_zh',
         'short_body_zh',
@@ -61,6 +60,7 @@ final class EnneagramAssetItemStreamValidator
         $sourceFile = (string) ($stream['source_file'] ?? '');
         $errors = [];
         $warnings = [];
+        $batchKey = $this->mergePolicyValidator->detectBatchKey($metadata, $items);
 
         foreach (self::REQUIRED_TOP_LEVEL_FIELDS as $field) {
             if (! array_key_exists($field, $metadata)) {
@@ -82,7 +82,31 @@ final class EnneagramAssetItemStreamValidator
         $bodyLengthErrors = [];
 
         foreach ($items as $index => $item) {
-            foreach (self::REQUIRED_ITEM_FIELDS as $field) {
+            $requiredFields = self::REQUIRED_ITEM_FIELDS;
+            if ($batchKey === '1R-F') {
+                $requiredFields = array_merge($requiredFields, [
+                    'pair_key',
+                    'canonical_pair_key',
+                    'type_a',
+                    'type_b',
+                    'title_zh',
+                    'commercial_summary',
+                    'page1_close_call_summary',
+                    'shared_surface_similarity',
+                    'core_motivation_difference',
+                    'fear_difference',
+                    'stress_reaction_difference',
+                    'work_difference',
+                    'relationship_difference',
+                    'seven_day_observation_question',
+                    'resonance_feedback_prompt',
+                    'micro_discrimination_prompt',
+                ]);
+            } else {
+                $requiredFields[] = 'type_id';
+            }
+
+            foreach ($requiredFields as $field) {
                 if (! array_key_exists($field, $item)) {
                     $errors[] = 'item_'.$index.'_missing_field:'.$field;
                 }

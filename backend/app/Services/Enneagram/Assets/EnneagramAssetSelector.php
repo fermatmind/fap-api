@@ -21,7 +21,8 @@ final class EnneagramAssetSelector
             if (! is_array($item)) {
                 continue;
             }
-            if ($typeId !== '' && trim((string) ($item['type_id'] ?? '')) !== $typeId) {
+            $itemTypeId = trim((string) ($item['type_id'] ?? ''));
+            if ($typeId !== '' && $itemTypeId !== '' && $itemTypeId !== $typeId) {
                 continue;
             }
             $category = trim((string) ($item['category'] ?? ''));
@@ -66,6 +67,7 @@ final class EnneagramAssetSelector
                     'objection_axis',
                     'partial_axis',
                     'diffuse_axis',
+                    'pair_key',
                 ] as $key) {
                     if ($avoid === (string) ($context[$key] ?? '')) {
                         return null;
@@ -108,6 +110,7 @@ final class EnneagramAssetSelector
             'objection_axis',
             'partial_axis',
             'diffuse_axis',
+            'pair_key',
         ] as $key) {
             $allowed = is_array($appliesTo[$key] ?? null) ? $appliesTo[$key] : [];
             $value = (string) ($context[$key] ?? '');
@@ -171,11 +174,51 @@ final class EnneagramAssetSelector
             }
         }
 
+        $contextPairKey = $this->canonicalPairKey(
+            trim((string) ($context['pair_key'] ?? '')),
+            false
+        );
+        $itemPairKey = $this->canonicalPairKey(
+            trim((string) ($item['canonical_pair_key'] ?? $item['pair_key'] ?? '')),
+            (bool) ($item['directional'] ?? false)
+        );
+        if ($contextPairKey !== '') {
+            if ($itemPairKey === $contextPairKey) {
+                $score += 20;
+            } elseif ($itemPairKey === '') {
+                $score -= 12;
+            } else {
+                $score -= 20;
+            }
+        }
+
         if ((bool) ($item['suppress_if_seen'] ?? false)) {
             $score -= 1;
         }
 
         return $score;
+    }
+
+    private function canonicalPairKey(string $pairKey, bool $directional): string
+    {
+        if (! preg_match('/^([1-9])_([1-9])$/', $pairKey, $matches)) {
+            return $pairKey;
+        }
+
+        $left = (int) $matches[1];
+        $right = (int) $matches[2];
+        if ($left === $right) {
+            return $pairKey;
+        }
+
+        if ($directional) {
+            return $left.'_'.$right;
+        }
+
+        $values = [$left, $right];
+        sort($values, SORT_NUMERIC);
+
+        return $values[0].'_'.$values[1];
     }
 
     /**

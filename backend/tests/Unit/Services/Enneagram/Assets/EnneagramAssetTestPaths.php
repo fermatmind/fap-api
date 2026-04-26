@@ -31,6 +31,11 @@ trait EnneagramAssetTestPaths
         return '/Users/rainie/Desktop/FermatMind_Enneagram_Content_Expansion_Batch_1R_E_Diffuse_Top3_Convergence/FermatMind_Enneagram_Content_Expansion_Batch_1R_E_Diffuse_Top3_Convergence_Assets.json';
     }
 
+    private function batchFPath(): string
+    {
+        return '/Users/rainie/Desktop/FermatMind_Enneagram_Content_Expansion_Batch_1R_F_Close_Call_36_Pair_Completion/FermatMind_Enneagram_Content_Expansion_Batch_1R_F_Close_Call_36_Pair_Completion_Assets.json';
+    }
+
     private function skipWhenAssetsMissing(): void
     {
         if (! is_file($this->batchAPath()) || ! is_file($this->batchBPath())) {
@@ -56,6 +61,13 @@ trait EnneagramAssetTestPaths
     {
         if (! is_file($this->batchEPath())) {
             $this->markTestSkipped('External ENNEAGRAM 1R-E asset file is not present on this workstation.');
+        }
+    }
+
+    private function skipWhenBatchFMissing(): void
+    {
+        if (! is_file($this->batchFPath())) {
+            $this->markTestSkipped('External ENNEAGRAM 1R-F asset file is not present on this workstation.');
         }
     }
 }

@@ -191,6 +191,35 @@ final class EnneagramAssetPreviewPayloadBuilder
 
     /**
      * @param  array<string,mixed>  $merged
+     * @return list<array<string,mixed>>
+     */
+    public function buildCloseCallPairMatrix(array $merged): array
+    {
+        $payloads = [];
+        foreach ((array) ($merged['items'] ?? []) as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+            if ((string) ($item['_preview_batch'] ?? '') !== '1R-F') {
+                continue;
+            }
+            if (trim((string) ($item['category'] ?? '')) !== 'close_call_pair') {
+                continue;
+            }
+
+            $payloads[] = $this->build($merged, $this->contextForPairItem($item));
+        }
+
+        usort($payloads, static function (array $left, array $right): int {
+            return ((string) data_get($left, 'preview_context.pair_key', ''))
+                <=> ((string) data_get($right, 'preview_context.pair_key', ''));
+        });
+
+        return $payloads;
+    }
+
+    /**
+     * @param  array<string,mixed>  $merged
      * @param  array<string,mixed>  $context
      * @return array<string,mixed>
      */
@@ -272,7 +301,7 @@ final class EnneagramAssetPreviewPayloadBuilder
                 'projection_version' => null,
                 'report_schema_version' => 'enneagram.report.v2',
                 'report_engine_version' => 'enneagram_asset_preview.phase_0',
-                'interpretation_context_id' => 'asset_preview_'.$context['type_id'].'_'.$context['interpretation_scope'],
+                'interpretation_context_id' => 'asset_preview_'.($context['type_id'] ?? $context['pair_key'] ?? 'preview').'_'.$context['interpretation_scope'],
                 'content_release_hash' => null,
                 'content_snapshot_status' => 'not_written',
                 'registry_release_hash' => null,
@@ -489,6 +518,67 @@ final class EnneagramAssetPreviewPayloadBuilder
             'methodology_variant' => 'asset_preview_only',
             'diffuse_axis' => in_array($diffuseAxis, self::DIFFUSE_AXES, true) ? $diffuseAxis : '',
             'body_context' => 'matching_diffuse_top3_convergence_signal',
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     * @return array<string,mixed>
+     */
+    public function contextForPairItem(array $item): array
+    {
+        $appliesTo = is_array($item['applies_to'] ?? null) ? $item['applies_to'] : [];
+        $typeA = trim((string) ($item['type_a'] ?? ''));
+        $typeB = trim((string) ($item['type_b'] ?? ''));
+        $pairKey = trim((string) ($item['canonical_pair_key'] ?? $item['pair_key'] ?? ''));
+        $scope = $this->preferredAllowedValue(
+            $appliesTo,
+            'interpretation_scope',
+            ['close_call', 'diffuse', 'clear', 'low_quality']
+        );
+        $confidence = $this->preferredAllowedValue(
+            $appliesTo,
+            'confidence_level',
+            ['medium_confidence', 'low_confidence', 'any']
+        );
+        $scoreProfile = $this->preferredAllowedValue(
+            $appliesTo,
+            'score_profile',
+            ['primary_with_strong_secondary', 'top2_close_call', 'any']
+        );
+        $scenario = $this->preferredAllowedValue(
+            $appliesTo,
+            'scenario',
+            ['deep_reading', 'first_screen', 'self_observation', 'any']
+        );
+        $userSignal = $this->preferredAllowedValue(
+            $appliesTo,
+            'user_signal',
+            ['partial_resonance', 'only_top2_resonates', 'top2_resonance', 'uncertain_result', 'any']
+        );
+        $audienceSegment = $this->preferredAllowedValue(
+            $appliesTo,
+            'audience_segment',
+            ['general', 'deep_reader', 'returning_user', 'any']
+        );
+
+        return [
+            'type_id' => $typeA,
+            'type_a' => $typeA,
+            'type_b' => $typeB,
+            'top1_type' => $typeA,
+            'top2_type' => $typeB,
+            'pair_key' => $pairKey,
+            'interpretation_scope' => $scope !== '' && $scope !== 'any' ? $scope : 'close_call',
+            'confidence_level' => $confidence !== '' && $confidence !== 'any' ? $confidence : 'medium_confidence',
+            'score_profile' => $scoreProfile !== '' && $scoreProfile !== 'any' ? $scoreProfile : 'primary_with_strong_secondary',
+            'scenario' => $scenario !== '' && $scenario !== 'any' ? $scenario : 'deep_reading',
+            'user_signal' => $userSignal !== '' && $userSignal !== 'any' ? $userSignal : 'uncertain_result',
+            'audience_segment' => $audienceSegment !== '' && $audienceSegment !== 'any' ? $audienceSegment : 'general',
+            'selected_form' => 'enneagram_likert_105',
+            'selected_form_kind' => 'likert',
+            'methodology_variant' => 'asset_preview_only',
+            'body_context' => 'matching_close_call_pair',
         ];
     }
 

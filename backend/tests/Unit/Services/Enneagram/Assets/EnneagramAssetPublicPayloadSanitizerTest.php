@@ -28,4 +28,20 @@ final class EnneagramAssetPublicPayloadSanitizerTest extends TestCase
             $this->assertArrayNotHasKey($field, $payload);
         }
     }
+
+    public function test_it_preserves_pair_safe_fields_for_1r_f_preview_payloads(): void
+    {
+        $this->skipWhenBatchFMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $sanitizer = app(EnneagramAssetPublicPayloadSanitizer::class);
+        $item = $loader->load($this->batchFPath())['items'][0];
+
+        $payload = $sanitizer->sanitizeItem($item);
+
+        $this->assertSame('1_2', $payload['pair_key']);
+        $this->assertSame($item['commercial_summary'], $payload['commercial_summary']);
+        $this->assertSame($item['micro_discrimination_prompt'], $payload['micro_discrimination_prompt']);
+        $this->assertSame([], $sanitizer->internalMetadataLeaks($payload));
+    }
 }
