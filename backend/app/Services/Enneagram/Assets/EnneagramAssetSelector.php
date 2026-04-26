@@ -51,19 +51,50 @@ final class EnneagramAssetSelector
      */
     private function score(array $item, array $context): ?int
     {
+        $score = (int) ($item['selection_priority'] ?? 0);
+
         $avoidWhen = is_array($item['avoid_when'] ?? null) ? $item['avoid_when'] : [];
         foreach ($avoidWhen as $avoid) {
-            if (! is_string($avoid) || $avoid === '') {
+            if (is_string($avoid) && $avoid !== '') {
+                foreach ([
+                    'interpretation_scope',
+                    'confidence_level',
+                    'score_profile',
+                    'scenario',
+                    'user_signal',
+                    'selected_form',
+                    'objection_axis',
+                ] as $key) {
+                    if ($avoid === (string) ($context[$key] ?? '')) {
+                        return null;
+                    }
+                }
+
                 continue;
             }
-            foreach (['interpretation_scope', 'confidence_level', 'score_profile', 'scenario', 'user_signal', 'selected_form'] as $key) {
-                if ($avoid === (string) ($context[$key] ?? '')) {
-                    return null;
-                }
+
+            if (! is_array($avoid)) {
+                continue;
+            }
+
+            if (! $this->matchesCondition($avoid, $context)) {
+                continue;
+            }
+
+            $action = (string) ($avoid['action'] ?? 'suppress');
+            if ($action === 'suppress') {
+                return null;
+            }
+            if ($action === 'downgrade') {
+                $score -= 4;
+
+                continue;
+            }
+            if ($action === 'use_boundary_first') {
+                $score -= 2;
             }
         }
 
-        $score = (int) ($item['selection_priority'] ?? 0);
         $appliesTo = is_array($item['applies_to'] ?? null) ? $item['applies_to'] : [];
         foreach ([
             'interpretation_scope',
@@ -72,13 +103,44 @@ final class EnneagramAssetSelector
             'scenario',
             'user_signal',
             'audience_segment',
+            'objection_axis',
         ] as $key) {
             $allowed = is_array($appliesTo[$key] ?? null) ? $appliesTo[$key] : [];
             $value = (string) ($context[$key] ?? '');
-            if ($value === '' || $allowed === []) {
+            if ($allowed === []) {
                 continue;
             }
-            $score += in_array($value, $allowed, true) ? 10 : -2;
+
+            $normalizedAllowed = array_values(array_filter(array_map(
+                static fn ($entry): string => is_scalar($entry) ? trim((string) $entry) : '',
+                $allowed
+            )));
+
+            if ($normalizedAllowed === [] || in_array('any', $normalizedAllowed, true)) {
+                $score += 2;
+
+                continue;
+            }
+
+            if ($value === '') {
+                $score -= 2;
+
+                continue;
+            }
+
+            $score += in_array($value, $normalizedAllowed, true) ? 10 : -2;
+        }
+
+        $contextObjectionAxis = trim((string) ($context['objection_axis'] ?? ''));
+        $itemObjectionAxis = trim((string) ($item['objection_axis'] ?? ''));
+        if ($contextObjectionAxis !== '') {
+            if ($itemObjectionAxis === $contextObjectionAxis) {
+                $score += 20;
+            } elseif ($itemObjectionAxis === '') {
+                $score -= 12;
+            } else {
+                $score -= 20;
+            }
         }
 
         if ((bool) ($item['suppress_if_seen'] ?? false)) {
@@ -86,5 +148,28 @@ final class EnneagramAssetSelector
         }
 
         return $score;
+    }
+
+    /**
+     * @param  array<string,mixed>  $rule
+     * @param  array<string,mixed>  $context
+     */
+    private function matchesCondition(array $rule, array $context): bool
+    {
+        $field = trim((string) ($rule['field'] ?? ''));
+        if ($field === '') {
+            return false;
+        }
+
+        $operator = trim((string) ($rule['operator'] ?? 'equals'));
+        $expected = trim((string) ($rule['value'] ?? ''));
+        $actual = trim((string) ($context[$field] ?? ''));
+
+        return match ($operator) {
+            'equals' => $actual !== '' && $actual === $expected,
+            'mismatch' => $actual !== '' && $actual !== $expected,
+            'missing' => $actual === '',
+            default => false,
+        };
     }
 }

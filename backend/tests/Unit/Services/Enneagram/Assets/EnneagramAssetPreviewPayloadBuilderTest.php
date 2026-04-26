@@ -34,4 +34,36 @@ final class EnneagramAssetPreviewPayloadBuilderTest extends TestCase
             $this->assertNotEmpty($payload['modules']);
         }
     }
+
+    public function test_it_builds_1r_c_low_resonance_objection_matrix_without_internal_metadata(): void
+    {
+        $this->skipWhenAssetsMissing();
+        $this->skipWhenBatchCMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $merged = app(EnneagramAssetMergeResolver::class)->resolveStreams(
+            $loader->load($this->batchAPath()),
+            $loader->load($this->batchBPath()),
+            $loader->load($this->batchCPath()),
+        );
+        $payloads = app(EnneagramAssetPreviewPayloadBuilder::class)->buildLowResonanceObjectionMatrix($merged);
+        $sanitizer = app(EnneagramAssetPublicPayloadSanitizer::class);
+
+        $this->assertCount(108, $payloads);
+
+        foreach ($payloads as $payload) {
+            $this->assertTrue($payload['preview_mode']);
+            $this->assertFalse($payload['production_import_allowed']);
+            $this->assertFalse($payload['full_replacement_allowed']);
+            $this->assertSame([], $payload['blocked_reasons']);
+            $this->assertSame([], $sanitizer->internalMetadataLeaks($payload));
+            $lowResonanceModules = array_values(array_filter(
+                (array) ($payload['modules'] ?? []),
+                static fn (array $module): bool => data_get($module, 'content.category') === 'low_resonance_response'
+            ));
+
+            $this->assertCount(1, $lowResonanceModules);
+            $this->assertStringContainsString('1R_C', (string) data_get($lowResonanceModules[0], 'content.asset_key'));
+        }
+    }
 }

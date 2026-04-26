@@ -30,4 +30,31 @@ final class EnneagramAssetSelectorTest extends TestCase
         $this->assertStringContainsString('1R_A', $selected['page1_summary']['asset_key']);
         $this->assertStringContainsString('1R_B', $selected['core_motivation']['asset_key']);
     }
+
+    public function test_it_selects_1r_c_low_resonance_branch_for_matching_objection_axis(): void
+    {
+        $this->skipWhenAssetsMissing();
+        $this->skipWhenBatchCMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $merged = app(EnneagramAssetMergeResolver::class)->resolveStreams(
+            $loader->load($this->batchAPath()),
+            $loader->load($this->batchBPath()),
+            $loader->load($this->batchCPath()),
+        );
+        $batchCItem = collect((array) ($merged['items'] ?? []))
+            ->first(static fn (array $item): bool => ($item['_preview_batch'] ?? null) === '1R-C'
+                && ($item['type_id'] ?? null) === '1'
+                && ($item['objection_axis'] ?? null) === 'top2_feels_closer');
+
+        $this->assertIsArray($batchCItem);
+
+        $context = app(EnneagramAssetPreviewPayloadBuilder::class)->contextForObjectionItem($batchCItem);
+        $selected = app(EnneagramAssetSelector::class)->selectByCategory($merged, $context);
+
+        $this->assertArrayHasKey('low_resonance_response', $selected);
+        $this->assertSame('1R-C', $selected['low_resonance_response']['_preview_batch']);
+        $this->assertSame('top2_feels_closer', $selected['low_resonance_response']['objection_axis']);
+        $this->assertStringContainsString('1R_C', $selected['low_resonance_response']['asset_key']);
+    }
 }
