@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\BigFive\ResultPageV2;
 
-final class BigFiveResultPageV2CompatibilityTransformer
+final class BigFiveResultPageV2CompatibilityTransformer implements BigFiveResultPageV2TransformerContract
 {
     private const DOMAIN_ORDER = ['O', 'C', 'E', 'A', 'N'];
 
