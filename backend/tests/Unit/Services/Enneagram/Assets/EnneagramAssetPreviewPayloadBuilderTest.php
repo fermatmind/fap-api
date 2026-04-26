@@ -66,4 +66,38 @@ final class EnneagramAssetPreviewPayloadBuilderTest extends TestCase
             $this->assertStringContainsString('1R_C', (string) data_get($lowResonanceModules[0], 'content.asset_key'));
         }
     }
+
+    public function test_it_builds_1r_d_partial_resonance_matrix_without_internal_metadata(): void
+    {
+        $this->skipWhenAssetsMissing();
+        $this->skipWhenBatchCMissing();
+        $this->skipWhenBatchDMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $merged = app(EnneagramAssetMergeResolver::class)->resolveStreams(
+            $loader->load($this->batchAPath()),
+            $loader->load($this->batchBPath()),
+            $loader->load($this->batchCPath()),
+            $loader->load($this->batchDPath()),
+        );
+        $payloads = app(EnneagramAssetPreviewPayloadBuilder::class)->buildPartialResonanceMatrix($merged);
+        $sanitizer = app(EnneagramAssetPublicPayloadSanitizer::class);
+
+        $this->assertCount(90, $payloads);
+
+        foreach ($payloads as $payload) {
+            $this->assertTrue($payload['preview_mode']);
+            $this->assertFalse($payload['production_import_allowed']);
+            $this->assertFalse($payload['full_replacement_allowed']);
+            $this->assertSame([], $payload['blocked_reasons']);
+            $this->assertSame([], $sanitizer->internalMetadataLeaks($payload));
+            $partialResonanceModules = array_values(array_filter(
+                (array) ($payload['modules'] ?? []),
+                static fn (array $module): bool => data_get($module, 'content.category') === 'partial_resonance_response'
+            ));
+
+            $this->assertCount(1, $partialResonanceModules);
+            $this->assertStringContainsString('1R_D', (string) data_get($partialResonanceModules[0], 'content.asset_key'));
+        }
+    }
 }

@@ -57,4 +57,33 @@ final class EnneagramAssetSelectorTest extends TestCase
         $this->assertSame('top2_feels_closer', $selected['low_resonance_response']['objection_axis']);
         $this->assertStringContainsString('1R_C', $selected['low_resonance_response']['asset_key']);
     }
+
+    public function test_it_selects_1r_d_partial_resonance_branch_for_matching_partial_axis(): void
+    {
+        $this->skipWhenAssetsMissing();
+        $this->skipWhenBatchCMissing();
+        $this->skipWhenBatchDMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $merged = app(EnneagramAssetMergeResolver::class)->resolveStreams(
+            $loader->load($this->batchAPath()),
+            $loader->load($this->batchBPath()),
+            $loader->load($this->batchCPath()),
+            $loader->load($this->batchDPath()),
+        );
+        $batchDItem = collect((array) ($merged['items'] ?? []))
+            ->first(static fn (array $item): bool => ($item['_preview_batch'] ?? null) === '1R-D'
+                && ($item['type_id'] ?? null) === '1'
+                && ($item['partial_axis'] ?? null) === 'top2_only');
+
+        $this->assertIsArray($batchDItem);
+
+        $context = app(EnneagramAssetPreviewPayloadBuilder::class)->contextForPartialItem($batchDItem);
+        $selected = app(EnneagramAssetSelector::class)->selectByCategory($merged, $context);
+
+        $this->assertArrayHasKey('partial_resonance_response', $selected);
+        $this->assertSame('1R-D', $selected['partial_resonance_response']['_preview_batch']);
+        $this->assertSame('top2_only', $selected['partial_resonance_response']['partial_axis']);
+        $this->assertStringContainsString('1R_D', $selected['partial_resonance_response']['asset_key']);
+    }
 }

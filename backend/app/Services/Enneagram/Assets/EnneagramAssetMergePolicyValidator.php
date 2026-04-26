@@ -42,6 +42,10 @@ final class EnneagramAssetMergePolicyValidator
         'low_resonance_response',
     ];
 
+    public const BATCH_D_CATEGORIES = [
+        'partial_resonance_response',
+    ];
+
     /**
      * @param  array<string,mixed>  $stream
      * @return list<string>
@@ -94,6 +98,18 @@ final class EnneagramAssetMergePolicyValidator
             foreach ($categories as $category) {
                 if (! in_array($category, self::BATCH_C_CATEGORIES, true)) {
                     $errors[] = 'batch_1r_c_unknown_category:'.$category;
+                }
+            }
+        }
+
+        if ($this->isBatchD($version, $items)) {
+            if ($mode !== 'additive_branch_expansion') {
+                $errors[] = 'batch_1r_d_requires_additive_branch_expansion_mode';
+            }
+            $categories = $this->categories($items);
+            foreach ($categories as $category) {
+                if (! in_array($category, self::BATCH_D_CATEGORIES, true)) {
+                    $errors[] = 'batch_1r_d_unknown_category:'.$category;
                 }
             }
         }
@@ -156,6 +172,30 @@ final class EnneagramAssetMergePolicyValidator
             $errors[] = 'batch_1r_b_1r_c_category_overlap_blocked:'.implode(',', $unexpectedBC);
         }
 
+        $unexpectedAD = array_values(array_diff(
+            array_intersect($categoriesByBatch['1R-A'] ?? [], $categoriesByBatch['1R-D'] ?? []),
+            self::BATCH_D_CATEGORIES
+        ));
+        if ($unexpectedAD !== []) {
+            $errors[] = 'batch_1r_a_1r_d_category_overlap_blocked:'.implode(',', $unexpectedAD);
+        }
+
+        $unexpectedBD = array_values(array_diff(
+            array_intersect($categoriesByBatch['1R-B'] ?? [], $categoriesByBatch['1R-D'] ?? []),
+            self::BATCH_D_CATEGORIES
+        ));
+        if ($unexpectedBD !== []) {
+            $errors[] = 'batch_1r_b_1r_d_category_overlap_blocked:'.implode(',', $unexpectedBD);
+        }
+
+        $unexpectedCD = array_values(array_intersect(
+            $categoriesByBatch['1R-C'] ?? [],
+            $categoriesByBatch['1R-D'] ?? []
+        ));
+        if ($unexpectedCD !== []) {
+            $errors[] = 'batch_1r_c_1r_d_category_overlap_blocked:'.implode(',', $unexpectedCD);
+        }
+
         return array_values(array_unique($errors));
     }
 
@@ -208,6 +248,24 @@ final class EnneagramAssetMergePolicyValidator
     /**
      * @param  list<array<string,mixed>>  $items
      */
+    private function isBatchD(string $version, array $items): bool
+    {
+        if (str_contains($version, '1R-D')) {
+            return true;
+        }
+
+        foreach ($items as $item) {
+            if (trim((string) ($item['partial_axis'] ?? '')) !== '') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $items
+     */
     private function batchKey(string $version, array $items): string
     {
         if ($this->isBatchA($version, $items)) {
@@ -218,6 +276,9 @@ final class EnneagramAssetMergePolicyValidator
         }
         if ($this->isBatchC($version, $items)) {
             return '1R-C';
+        }
+        if ($this->isBatchD($version, $items)) {
+            return '1R-D';
         }
 
         return '';
