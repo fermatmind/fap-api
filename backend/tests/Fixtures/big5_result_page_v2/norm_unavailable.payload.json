@@ -1,0 +1,235 @@
+{
+  "big5_result_page_v2": {
+    "schema_version": "fap.big5.result_page.v2",
+    "payload_key": "big5_result_page_v2",
+    "scale_code": "BIG5_OCEAN",
+    "projection_v2": {
+      "schema_version": "fap.big5.projection.v2",
+      "attempt_id": "attempt_big5_v2_fixture_b",
+      "result_version": "big5_result_page_v2.fixture",
+      "scale_code": "BIG5_OCEAN",
+      "form_code": "big5_90",
+      "domains": {
+        "O": { "score": 59, "band": "mid_high" },
+        "C": { "score": 32, "band": "mid_low" },
+        "E": { "score": 20, "band": "low" },
+        "A": { "score": 55, "band": "mid" },
+        "N": { "score": 68, "band": "high" }
+      },
+      "domain_bands": { "O": "mid_high", "C": "mid_low", "E": "low", "A": "mid", "N": "high" },
+      "facets": {},
+      "facet_highlights": [],
+      "norm_status": "MISSING",
+      "norm_group_id": "",
+      "norm_version": "",
+      "quality_status": "B",
+      "quality_flags": [],
+      "profile_signature": {
+        "signature_key": "norm_unavailable_fixture",
+        "label_key": "signature.fixture.norm_unavailable",
+        "is_fixed_type": false,
+        "system": "trait_signature"
+      },
+      "dominant_couplings": [],
+      "interpretation_scope": "norm_unavailable",
+      "confidence_flags": ["norm_unavailable"],
+      "safety_flags": ["hide_percentile", "hide_normal_curve"],
+      "public_fields": ["domain_bands", "interpretation_scope", "safety_flags"],
+      "internal_only_fields": ["editor_note", "qa_note", "selection_guidance", "import_policy", "internal_metadata"]
+    },
+    "modules": [
+      {
+        "module_key": "module_00_trust_bar",
+        "blocks": [
+          {
+            "block_key": "module_00_trust_bar.norm_unavailable.fixture.v1",
+            "block_kind": "trust_bar",
+            "module_key": "module_00_trust_bar",
+            "content": { "summary_zh": "fixture norm boundary" },
+            "projection_refs": ["norm_status", "safety_flags"],
+            "registry_refs": ["boundary_registry:norm_unavailable"],
+            "safety_level": "boundary",
+            "evidence_level": "descriptive",
+            "shareable": false,
+            "content_source": "fixture"
+          }
+        ]
+      },
+      {
+        "module_key": "module_01_hero",
+        "blocks": [
+          {
+            "block_key": "module_01_hero.norm_unavailable.fixture.v1",
+            "block_kind": "hero_summary",
+            "module_key": "module_01_hero",
+            "content": { "summary_zh": "fixture hero without percentile" },
+            "projection_refs": ["domain_bands"],
+            "registry_refs": ["profile_signature_registry:norm_unavailable_fixture"],
+            "safety_level": "boundary",
+            "evidence_level": "computed",
+            "shareable": false,
+            "content_source": "fixture"
+          }
+        ]
+      },
+      {
+        "module_key": "module_02_quick_understanding",
+        "blocks": [
+          {
+            "block_key": "module_02_quick_understanding.norm_unavailable.fixture.v1",
+            "block_kind": "quick_cards",
+            "module_key": "module_02_quick_understanding",
+            "content": { "summary_zh": "fixture quick boundary" },
+            "projection_refs": ["interpretation_scope"],
+            "registry_refs": ["state_scope_registry:norm_unavailable"],
+            "safety_level": "boundary",
+            "evidence_level": "descriptive",
+            "shareable": false,
+            "content_source": "fixture"
+          }
+        ]
+      },
+      {
+        "module_key": "module_03_trait_deep_dive",
+        "blocks": [
+          {
+            "block_key": "module_03_trait_deep_dive.norm_unavailable.fixture.v1",
+            "block_kind": "trait_deep_dive",
+            "module_key": "module_03_trait_deep_dive",
+            "content": { "summary_zh": "fixture band-only trait view" },
+            "projection_refs": ["domain_bands"],
+            "registry_refs": ["domain_registry:band_only"],
+            "safety_level": "boundary",
+            "evidence_level": "computed",
+            "shareable": false,
+            "content_source": "fixture"
+          }
+        ]
+      },
+      {
+        "module_key": "module_04_coupling",
+        "blocks": [
+          {
+            "block_key": "module_04_coupling.norm_unavailable.fixture.v1",
+            "block_kind": "coupling_cards",
+            "module_key": "module_04_coupling",
+            "content": { "summary_zh": "fixture coupling boundary" },
+            "projection_refs": ["dominant_couplings"],
+            "registry_refs": ["coupling_registry:boundary"],
+            "safety_level": "boundary",
+            "evidence_level": "computed",
+            "shareable": false,
+            "content_source": "fixture"
+          }
+        ]
+      },
+      {
+        "module_key": "module_05_facet_reframe",
+        "blocks": [
+          {
+            "block_key": "module_05_facet_reframe.norm_unavailable.fixture.v1",
+            "block_kind": "facet_reframe",
+            "module_key": "module_05_facet_reframe",
+            "content": {
+              "summary_zh": "fixture facet caution",
+              "facets": [
+                { "facet": "N1", "item_count": 4, "confidence": "low", "claim_strength": "interpretive_signal" }
+              ]
+            },
+            "projection_refs": ["facet_highlights"],
+            "registry_refs": ["facet_registry:caution"],
+            "safety_level": "boundary",
+            "evidence_level": "computed",
+            "shareable": false,
+            "content_source": "fixture"
+          }
+        ]
+      },
+      {
+        "module_key": "module_06_application_matrix",
+        "blocks": [
+          {
+            "block_key": "module_06_application_matrix.norm_unavailable.fixture.v1",
+            "block_kind": "application_matrix",
+            "module_key": "module_06_application_matrix",
+            "content": { "summary_zh": "fixture application boundary" },
+            "projection_refs": ["domain_bands"],
+            "registry_refs": ["scenario_registry:boundary"],
+            "safety_level": "boundary",
+            "evidence_level": "descriptive",
+            "shareable": false,
+            "content_source": "fixture"
+          }
+        ]
+      },
+      {
+        "module_key": "module_07_collaboration_manual",
+        "blocks": [
+          {
+            "block_key": "module_07_collaboration_manual.norm_unavailable.fixture.v1",
+            "block_kind": "collaboration_manual",
+            "module_key": "module_07_collaboration_manual",
+            "content": { "summary_zh": "fixture collaboration boundary" },
+            "projection_refs": ["domain_bands"],
+            "registry_refs": ["scenario_registry:collaboration_boundary"],
+            "safety_level": "share_safe",
+            "evidence_level": "descriptive",
+            "shareable": true,
+            "content_source": "fixture"
+          }
+        ]
+      },
+      {
+        "module_key": "module_08_share_save",
+        "blocks": [
+          {
+            "block_key": "module_08_share_save.norm_unavailable.fixture.v1",
+            "block_kind": "share_save",
+            "module_key": "module_08_share_save",
+            "content": { "summary_zh": "fixture share boundary" },
+            "projection_refs": ["profile_signature.label_key"],
+            "registry_refs": ["share_safety_registry:norm_unavailable"],
+            "safety_level": "share_safe",
+            "evidence_level": "descriptive",
+            "shareable": true,
+            "content_source": "fixture"
+          }
+        ]
+      },
+      {
+        "module_key": "module_09_feedback_data_flywheel",
+        "blocks": [
+          {
+            "block_key": "module_09_feedback_data_flywheel.norm_unavailable.fixture.v1",
+            "block_kind": "feedback_block",
+            "module_key": "module_09_feedback_data_flywheel",
+            "content": { "summary_zh": "fixture feedback" },
+            "projection_refs": ["interpretation_scope"],
+            "registry_refs": ["observation_registry:module_feedback"],
+            "safety_level": "boundary",
+            "evidence_level": "descriptive",
+            "shareable": false,
+            "content_source": "fixture"
+          }
+        ]
+      },
+      {
+        "module_key": "module_10_method_privacy",
+        "blocks": [
+          {
+            "block_key": "module_10_method_privacy.norm_unavailable.fixture.v1",
+            "block_kind": "method_boundary",
+            "module_key": "module_10_method_privacy",
+            "content": { "summary_zh": "fixture method boundary" },
+            "projection_refs": ["norm_status", "quality_status", "safety_flags"],
+            "registry_refs": ["boundary_registry:method_privacy"],
+            "safety_level": "boundary",
+            "evidence_level": "descriptive",
+            "shareable": false,
+            "content_source": "fixture"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "big5_result_page_v2": {
+    "schema_version": "fap.big5.result_page.v2",
+    "payload_key": "big5_result_page_v2",
+    "scale_code": "BIG5_OCEAN",
+    "projection_v2": {
+      "schema_version": "fap.big5.projection.v2",
+      "attempt_id": "attempt_big5_v2_fixture_c",
+      "result_version": "big5_result_page_v2.fixture",
+      "scale_code": "BIG5_OCEAN",
+      "form_code": "big5_90",
+      "domains": {},
+      "domain_bands": {},
+      "facets": {},
+      "facet_highlights": [],
+      "norm_status": "CALIBRATED",
+      "norm_group_id": "zh-CN_prod_all_18-60",
+      "norm_version": "big5_norms_fixture_v1",
+      "quality_status": "D",
+      "quality_flags": ["LOW_QUALITY"],
+      "profile_signature": {
+        "signature_key": "low_quality_boundary_fixture",
+        "label_key": "signature.fixture.low_quality_boundary",
+        "is_fixed_type": false,
+        "system": "trait_signature"
+      },
+      "dominant_couplings": [],
+      "interpretation_scope": "low_quality",
+      "confidence_flags": ["low_quality"],
+      "safety_flags": ["degrade_explanation", "retest_recommended"],
+      "public_fields": ["interpretation_scope", "quality_status", "quality_flags", "safety_flags"],
+      "internal_only_fields": ["editor_note", "qa_note", "selection_guidance", "import_policy", "internal_metadata"]
+    },
+    "modules": [
+      {
+        "module_key": "module_00_trust_bar",
+        "blocks": [
+          {
+            "block_key": "module_00_trust_bar.low_quality.fixture.v1",
+            "block_kind": "trust_bar",
+            "module_key": "module_00_trust_bar",
+            "content": { "summary_zh": "fixture low quality boundary" },
+            "projection_refs": ["quality_status", "safety_flags"],
+            "registry_refs": ["boundary_registry:low_quality"],
+            "safety_level": "degraded",
+            "evidence_level": "descriptive",
+            "shareable": false,
+            "content_source": "fixture"
+          }
+        ]
+      },
+      {
+        "module_key": "module_09_feedback_data_flywheel",
+        "blocks": [
+          {
+            "block_key": "module_09_feedback_data_flywheel.low_quality.fixture.v1",
+            "block_kind": "feedback_block",
+            "module_key": "module_09_feedback_data_flywheel",
+            "content": { "summary_zh": "fixture low quality feedback" },
+            "projection_refs": ["interpretation_scope"],
+            "registry_refs": ["observation_registry:low_quality_feedback"],
+            "safety_level": "degraded",
+            "evidence_level": "descriptive",
+            "shareable": false,
+            "content_source": "fixture"
+          }
+        ]
+      },
+      {
+        "module_key": "module_10_method_privacy",
+        "blocks": [
+          {
+            "block_key": "module_10_method_privacy.low_quality.fixture.v1",
+            "block_kind": "method_boundary",
+            "module_key": "module_10_method_privacy",
+            "content": { "summary_zh": "fixture low quality method boundary" },
+            "projection_refs": ["quality_status", "quality_flags"],
+            "registry_refs": ["boundary_registry:method_privacy"],
+            "safety_level": "boundary",
+            "evidence_level": "descriptive",
+            "shareable": false,
+            "content_source": "fixture"
+          }
+        ]
+      }
+    ]
+  }
+}
