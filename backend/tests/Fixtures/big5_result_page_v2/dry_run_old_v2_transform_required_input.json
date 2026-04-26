@@ -1,0 +1,37 @@
+{
+  "attempt_id": "attempt_big5_v2_dry_run_old_v2",
+  "form_code": "big5_90",
+  "norm_status": "CALIBRATED",
+  "norm_group_id": "zh-CN_prod_all_18-60",
+  "norm_version": "big5_norms_fixture_v1",
+  "quality_status": "B",
+  "scores_pct": { "O": 59, "C": 32, "E": 20, "A": 55, "N": 68 },
+  "big5_public_projection_v1": {
+    "schema_version": "big5.public_projection.v1",
+    "trait_bands": { "O": "mid_high", "C": "mid_low", "E": "low", "A": "mid", "N": "high" }
+  },
+  "big5_report_engine_v2": {
+    "schema_version": "fap.big5.report.v1",
+    "form_code": "big5_90",
+    "score_vector": {
+      "domains": {
+        "O": { "percentile": 59, "band": "mid_high" },
+        "C": { "percentile": 32, "band": "mid_low" },
+        "E": { "percentile": 20, "band": "low" },
+        "A": { "percentile": 55, "band": "mid" },
+        "N": { "percentile": 68, "band": "high" }
+      },
+      "facets": {
+        "N1": { "percentile": 98, "domain": "N" }
+      }
+    },
+    "engine_decisions": {
+      "selected_synergies": [
+        { "synergy_id": "n_high_x_e_low", "title": "old v2 fixture", "priority_weight": 72 }
+      ],
+      "standout_anomalies": [
+        { "rule_id": "n1_high_spike", "domain_code": "N", "facet_code": "N1" }
+      ]
+    }
+  }
+}

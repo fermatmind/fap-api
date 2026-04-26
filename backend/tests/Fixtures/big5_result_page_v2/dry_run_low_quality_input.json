@@ -1,0 +1,20 @@
+{
+  "attempt_id": "attempt_big5_v2_dry_run_low_quality",
+  "form_code": "big5_90",
+  "norm_status": "CALIBRATED",
+  "norm_group_id": "zh-CN_prod_all_18-60",
+  "norm_version": "big5_norms_fixture_v1",
+  "quality_status": "D",
+  "quality_flags": ["LOW_QUALITY"],
+  "scores_json": {
+    "domains_mean": { "O": 3.59, "C": 2.32, "E": 2.2, "A": 3.55, "N": 3.68 }
+  },
+  "scores_pct": { "O": 59, "C": 32, "E": 20, "A": 55, "N": 68 },
+  "result_json": {
+    "normed_json": {
+      "facts": {
+        "domain_buckets": { "O": "mid_high", "C": "mid_low", "E": "low", "A": "mid", "N": "high" }
+      }
+    }
+  }
+}
