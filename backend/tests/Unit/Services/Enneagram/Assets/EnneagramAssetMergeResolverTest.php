@@ -77,4 +77,32 @@ final class EnneagramAssetMergeResolverTest extends TestCase
             data_get($merged, 'source_versions.batch_1r_d')
         );
     }
+
+    public function test_it_merges_1r_a_1r_b_1r_c_1r_d_and_1r_e_as_staging_preview_only(): void
+    {
+        $this->skipWhenAssetsMissing();
+        $this->skipWhenBatchCMissing();
+        $this->skipWhenBatchDMissing();
+        $this->skipWhenBatchEMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $resolver = app(EnneagramAssetMergeResolver::class);
+
+        $merged = $resolver->resolveStreams(
+            $loader->load($this->batchAPath()),
+            $loader->load($this->batchBPath()),
+            $loader->load($this->batchCPath()),
+            $loader->load($this->batchDPath()),
+            $loader->load($this->batchEPath()),
+        );
+
+        $this->assertFalse($merged['production_import_allowed']);
+        $this->assertFalse($merged['full_replacement_allowed']);
+        $this->assertCount(1044, $merged['items']);
+        $this->assertContains('diffuse_convergence_response', data_get($merged, 'replacement_coverage.batch_1r_e_adds'));
+        $this->assertSame(
+            'enneagram_content_expansion_batch_1R_E_diffuse_top3_convergence.v1',
+            data_get($merged, 'source_versions.batch_1r_e')
+        );
+    }
 }

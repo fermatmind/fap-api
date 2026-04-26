@@ -100,4 +100,40 @@ final class EnneagramAssetPreviewPayloadBuilderTest extends TestCase
             $this->assertStringContainsString('1R_D', (string) data_get($partialResonanceModules[0], 'content.asset_key'));
         }
     }
+
+    public function test_it_builds_1r_e_diffuse_convergence_matrix_without_internal_metadata(): void
+    {
+        $this->skipWhenAssetsMissing();
+        $this->skipWhenBatchCMissing();
+        $this->skipWhenBatchDMissing();
+        $this->skipWhenBatchEMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $merged = app(EnneagramAssetMergeResolver::class)->resolveStreams(
+            $loader->load($this->batchAPath()),
+            $loader->load($this->batchBPath()),
+            $loader->load($this->batchCPath()),
+            $loader->load($this->batchDPath()),
+            $loader->load($this->batchEPath()),
+        );
+        $payloads = app(EnneagramAssetPreviewPayloadBuilder::class)->buildDiffuseConvergenceMatrix($merged);
+        $sanitizer = app(EnneagramAssetPublicPayloadSanitizer::class);
+
+        $this->assertCount(108, $payloads);
+
+        foreach ($payloads as $payload) {
+            $this->assertTrue($payload['preview_mode']);
+            $this->assertFalse($payload['production_import_allowed']);
+            $this->assertFalse($payload['full_replacement_allowed']);
+            $this->assertSame([], $payload['blocked_reasons']);
+            $this->assertSame([], $sanitizer->internalMetadataLeaks($payload));
+            $diffuseModules = array_values(array_filter(
+                (array) ($payload['modules'] ?? []),
+                static fn (array $module): bool => data_get($module, 'content.category') === 'diffuse_convergence_response'
+            ));
+
+            $this->assertCount(1, $diffuseModules);
+            $this->assertStringContainsString('1R_E', (string) data_get($diffuseModules[0], 'content.asset_key'));
+        }
+    }
 }
