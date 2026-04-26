@@ -86,4 +86,35 @@ final class EnneagramAssetSelectorTest extends TestCase
         $this->assertSame('top2_only', $selected['partial_resonance_response']['partial_axis']);
         $this->assertStringContainsString('1R_D', $selected['partial_resonance_response']['asset_key']);
     }
+
+    public function test_it_selects_1r_e_diffuse_convergence_branch_for_matching_diffuse_axis(): void
+    {
+        $this->skipWhenAssetsMissing();
+        $this->skipWhenBatchCMissing();
+        $this->skipWhenBatchDMissing();
+        $this->skipWhenBatchEMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $merged = app(EnneagramAssetMergeResolver::class)->resolveStreams(
+            $loader->load($this->batchAPath()),
+            $loader->load($this->batchBPath()),
+            $loader->load($this->batchCPath()),
+            $loader->load($this->batchDPath()),
+            $loader->load($this->batchEPath()),
+        );
+        $batchEItem = collect((array) ($merged['items'] ?? []))
+            ->first(static fn (array $item): bool => ($item['_preview_batch'] ?? null) === '1R-E'
+                && ($item['type_id'] ?? null) === '1'
+                && ($item['diffuse_axis'] ?? null) === 'top3_flat');
+
+        $this->assertIsArray($batchEItem);
+
+        $context = app(EnneagramAssetPreviewPayloadBuilder::class)->contextForDiffuseItem($batchEItem);
+        $selected = app(EnneagramAssetSelector::class)->selectByCategory($merged, $context);
+
+        $this->assertArrayHasKey('diffuse_convergence_response', $selected);
+        $this->assertSame('1R-E', $selected['diffuse_convergence_response']['_preview_batch']);
+        $this->assertSame('top3_flat', $selected['diffuse_convergence_response']['diffuse_axis']);
+        $this->assertStringContainsString('1R_E', $selected['diffuse_convergence_response']['asset_key']);
+    }
 }

@@ -65,6 +65,7 @@ final class EnneagramAssetSelector
                     'selected_form',
                     'objection_axis',
                     'partial_axis',
+                    'diffuse_axis',
                 ] as $key) {
                     if ($avoid === (string) ($context[$key] ?? '')) {
                         return null;
@@ -106,6 +107,7 @@ final class EnneagramAssetSelector
             'audience_segment',
             'objection_axis',
             'partial_axis',
+            'diffuse_axis',
         ] as $key) {
             $allowed = is_array($appliesTo[$key] ?? null) ? $appliesTo[$key] : [];
             $value = (string) ($context[$key] ?? '');
@@ -151,6 +153,18 @@ final class EnneagramAssetSelector
             if ($itemPartialAxis === $contextPartialAxis) {
                 $score += 20;
             } elseif ($itemPartialAxis === '') {
+                $score -= 12;
+            } else {
+                $score -= 20;
+            }
+        }
+
+        $contextDiffuseAxis = trim((string) ($context['diffuse_axis'] ?? ''));
+        $itemDiffuseAxis = trim((string) ($item['diffuse_axis'] ?? ''));
+        if ($contextDiffuseAxis !== '') {
+            if ($itemDiffuseAxis === $contextDiffuseAxis) {
+                $score += 20;
+            } elseif ($itemDiffuseAxis === '') {
                 $score -= 12;
             } else {
                 $score -= 20;

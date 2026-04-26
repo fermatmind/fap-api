@@ -36,6 +36,21 @@ final class EnneagramAssetPreviewPayloadBuilder
         'context_specific',
     ];
 
+    private const DIFFUSE_AXES = [
+        'top3_flat',
+        'broad_distribution',
+        'low_signal_top3',
+        'contradictory_pattern',
+        'center_clustered_body',
+        'center_clustered_heart',
+        'center_clustered_head',
+        'cross_center_distribution',
+        'three_center_spread',
+        'behavior_vs_motivation',
+        'scene_specific_top3',
+        'next_step_convergence',
+    ];
+
     public function __construct(
         private readonly EnneagramAssetSelector $selector,
         private readonly EnneagramAssetPublicPayloadSanitizer $sanitizer,
@@ -127,6 +142,45 @@ final class EnneagramAssetPreviewPayloadBuilder
                 '%s:%s',
                 (string) data_get($right, 'preview_context.type_id', ''),
                 (string) data_get($right, 'preview_context.partial_axis', '')
+            );
+
+            return $leftKey <=> $rightKey;
+        });
+
+        return $payloads;
+    }
+
+    /**
+     * @param  array<string,mixed>  $merged
+     * @return list<array<string,mixed>>
+     */
+    public function buildDiffuseConvergenceMatrix(array $merged): array
+    {
+        $payloads = [];
+        foreach ((array) ($merged['items'] ?? []) as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+            if ((string) ($item['_preview_batch'] ?? '') !== '1R-E') {
+                continue;
+            }
+            if (trim((string) ($item['category'] ?? '')) !== 'diffuse_convergence_response') {
+                continue;
+            }
+
+            $payloads[] = $this->build($merged, $this->contextForDiffuseItem($item));
+        }
+
+        usort($payloads, static function (array $left, array $right): int {
+            $leftKey = sprintf(
+                '%s:%s',
+                (string) data_get($left, 'preview_context.type_id', ''),
+                (string) data_get($left, 'preview_context.diffuse_axis', '')
+            );
+            $rightKey = sprintf(
+                '%s:%s',
+                (string) data_get($right, 'preview_context.type_id', ''),
+                (string) data_get($right, 'preview_context.diffuse_axis', '')
             );
 
             return $leftKey <=> $rightKey;
@@ -379,6 +433,62 @@ final class EnneagramAssetPreviewPayloadBuilder
             'methodology_variant' => 'asset_preview_only',
             'partial_axis' => in_array($partialAxis, self::PARTIAL_AXES, true) ? $partialAxis : '',
             'body_context' => 'matching_partial_resonance_signal',
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     * @return array<string,mixed>
+     */
+    public function contextForDiffuseItem(array $item): array
+    {
+        $appliesTo = is_array($item['applies_to'] ?? null) ? $item['applies_to'] : [];
+        $typeId = trim((string) ($item['type_id'] ?? ''));
+        $diffuseAxis = trim((string) ($item['diffuse_axis'] ?? ''));
+        $scope = $this->preferredAllowedValue(
+            $appliesTo,
+            'interpretation_scope',
+            ['diffuse', 'close_call', 'clear', 'low_quality']
+        );
+        $confidence = $this->preferredAllowedValue(
+            $appliesTo,
+            'confidence_level',
+            ['low_confidence', 'medium_confidence', 'any']
+        );
+        $scoreProfile = $this->preferredAllowedValue(
+            $appliesTo,
+            'score_profile',
+            ['top3_flat', 'broad_distribution', 'low_signal', 'contradictory_pattern', 'center_clustered_body', 'center_clustered_heart', 'center_clustered_head', 'cross_center_distribution', 'three_center_spread', 'behavior_vs_motivation', 'scene_specific_top3', 'any']
+        );
+        $scenario = $this->preferredAllowedValue(
+            $appliesTo,
+            'scenario',
+            ['self_observation', 'deep_reading', 'work_context', 'relationship_context', 'stress_context', 'growth_context', 'any']
+        );
+        $userSignal = $this->preferredAllowedValue(
+            $appliesTo,
+            'user_signal',
+            ['diffuse_distribution', 'uncertain_result', 'low_resonance', 'partial_resonance', 'only_top2_resonates', 'any']
+        );
+        $audienceSegment = $this->preferredAllowedValue(
+            $appliesTo,
+            'audience_segment',
+            ['general', 'deep_reader', 'returning_user', 'quick_reader', 'any']
+        );
+
+        return [
+            'type_id' => $typeId,
+            'interpretation_scope' => $scope !== '' && $scope !== 'any' ? $scope : 'diffuse',
+            'confidence_level' => $confidence !== '' && $confidence !== 'any' ? $confidence : 'low_confidence',
+            'score_profile' => $scoreProfile !== '' && $scoreProfile !== 'any' ? $scoreProfile : 'top3_flat',
+            'scenario' => $scenario !== '' && $scenario !== 'any' ? $scenario : 'self_observation',
+            'user_signal' => $userSignal !== '' && $userSignal !== 'any' ? $userSignal : 'diffuse_distribution',
+            'audience_segment' => $audienceSegment !== '' && $audienceSegment !== 'any' ? $audienceSegment : 'general',
+            'selected_form' => 'enneagram_likert_105',
+            'selected_form_kind' => 'likert',
+            'methodology_variant' => 'asset_preview_only',
+            'diffuse_axis' => in_array($diffuseAxis, self::DIFFUSE_AXES, true) ? $diffuseAxis : '',
+            'body_context' => 'matching_diffuse_top3_convergence_signal',
         ];
     }
 
