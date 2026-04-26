@@ -200,6 +200,8 @@ final class BigFiveResultPageV2Validator
             $errors[] = "{$moduleKey}.blocks.{$blockIndex} evidence_level is invalid: {$evidenceLevel}";
         }
 
+        $errors = array_merge($errors, $this->validateSourceAuthority($block, $moduleKey, $blockIndex, $blockKind));
+
         if ($scope === 'low_quality' && ! in_array($safetyLevel, ['boundary', 'degraded'], true)) {
             $errors[] = "low_quality block {$block['block_key']} must use boundary/degraded safety level";
         }
@@ -214,6 +216,107 @@ final class BigFiveResultPageV2Validator
 
         if ($blockKind === 'facet_reframe') {
             $errors = array_merge($errors, $this->validateFacetReframeBlock($block));
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  array<string,mixed>  $block
+     * @return list<string>
+     */
+    private function validateSourceAuthority(array $block, string $moduleKey, int $blockIndex, string $blockKind): array
+    {
+        $errors = [];
+        $contentSource = (string) ($block['content_source'] ?? '');
+        if (! in_array($contentSource, BigFiveResultPageV2SourceAuthorityMap::CONTENT_SOURCES, true)) {
+            $errors[] = "{$moduleKey}.blocks.{$blockIndex} content_source is invalid: {$contentSource}";
+        }
+
+        $registryRefs = is_array($block['registry_refs'] ?? null) ? $block['registry_refs'] : [];
+        foreach ($registryRefs as $refIndex => $registryRef) {
+            if (! is_string($registryRef) || ! str_contains($registryRef, ':')) {
+                $errors[] = "{$moduleKey}.blocks.{$blockIndex} registry_refs.{$refIndex} must use registry_key:item_key";
+
+                continue;
+            }
+
+            [$registryKey] = explode(':', $registryRef, 2);
+            if (in_array($registryKey, BigFiveResultPageV2SourceAuthorityMap::OLD_V2_DIRECT_PREFIXES, true)) {
+                $errors[] = "{$moduleKey}.blocks.{$blockIndex} must not reference {$registryKey} directly; use transformed_old_v2_registry with a mapped V2.0 registry";
+
+                continue;
+            }
+
+            if (! BigFiveResultPageV2SourceAuthorityMap::isKnownRegistryKey($registryKey)) {
+                $errors[] = "{$moduleKey}.blocks.{$blockIndex} registry_ref uses unknown registry: {$registryKey}";
+
+                continue;
+            }
+
+            if (! BigFiveResultPageV2SourceAuthorityMap::registryAllowsModule($registryKey, $moduleKey)) {
+                $errors[] = "{$moduleKey}.blocks.{$blockIndex} registry {$registryKey} is not allowed for module {$moduleKey}";
+            }
+        }
+
+        $registryKeys = array_map(
+            static fn (string $registryRef): string => explode(':', $registryRef, 2)[0],
+            array_values(array_filter($registryRefs, static fn ($registryRef): bool => is_string($registryRef) && str_contains($registryRef, ':')))
+        );
+        if (($block['shareable'] ?? false) === true && ! in_array('share_safety_registry', $registryKeys, true)) {
+            $errors[] = "{$moduleKey}.blocks.{$blockIndex} shareable block must reference share_safety_registry";
+        }
+
+        if ($contentSource === 'transformed_old_v2_registry') {
+            $errors = array_merge($errors, $this->validateTransformedOldV2Source($block, $moduleKey, $blockIndex, $registryKeys));
+        }
+
+        $fallbackPolicy = (string) ($block['fallback_policy'] ?? '');
+        if ($fallbackPolicy !== '' && ! in_array($fallbackPolicy, BigFiveResultPageV2SourceAuthorityMap::FALLBACK_POLICIES, true)) {
+            $errors[] = "{$moduleKey}.blocks.{$blockIndex} fallback_policy is invalid: {$fallbackPolicy}";
+        }
+        if (in_array($blockKind, ['trust_bar', 'method_boundary'], true)) {
+            if ($fallbackPolicy === '') {
+                $errors[] = "{$moduleKey}.blocks.{$blockIndex} {$blockKind} requires fallback_policy";
+            }
+            if (in_array($fallbackPolicy, ['frontend_fallback', 'consumer_generated'], true)) {
+                $errors[] = "{$moduleKey}.blocks.{$blockIndex} {$blockKind} must not use frontend fallback";
+            }
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  array<string,mixed>  $block
+     * @param  list<string>  $registryKeys
+     * @return list<string>
+     */
+    private function validateTransformedOldV2Source(array $block, string $moduleKey, int $blockIndex, array $registryKeys): array
+    {
+        $errors = [];
+        $sourceAuthority = is_array($block['source_authority'] ?? null) ? $block['source_authority'] : null;
+        if (! is_array($sourceAuthority)) {
+            return ["{$moduleKey}.blocks.{$blockIndex} transformed_old_v2_registry requires source_authority"];
+        }
+
+        $oldV2Group = (string) ($sourceAuthority['old_v2_group'] ?? '');
+        $mappedRegistry = (string) ($sourceAuthority['mapped_registry'] ?? '');
+        $reuseStatus = (string) ($sourceAuthority['reuse_status'] ?? '');
+        if (! BigFiveResultPageV2SourceAuthorityMap::isKnownOldV2Group($oldV2Group)) {
+            $errors[] = "{$moduleKey}.blocks.{$blockIndex} source_authority.old_v2_group is invalid: {$oldV2Group}";
+        }
+        if (! BigFiveResultPageV2SourceAuthorityMap::isKnownRegistryKey($mappedRegistry)) {
+            $errors[] = "{$moduleKey}.blocks.{$blockIndex} source_authority.mapped_registry is invalid: {$mappedRegistry}";
+        }
+        if ($oldV2Group !== '' && $mappedRegistry !== '' && ! BigFiveResultPageV2SourceAuthorityMap::oldV2GroupTargetsRegistry($oldV2Group, $mappedRegistry)) {
+            $errors[] = "{$moduleKey}.blocks.{$blockIndex} source_authority {$oldV2Group} does not map to {$mappedRegistry}";
+        }
+        if ($mappedRegistry !== '' && ! in_array($mappedRegistry, $registryKeys, true)) {
+            $errors[] = "{$moduleKey}.blocks.{$blockIndex} source_authority.mapped_registry must also appear in registry_refs";
+        }
+        if (! in_array($reuseStatus, BigFiveResultPageV2SourceAuthorityMap::OLD_V2_ALLOWED_REUSE_STATUSES, true)) {
+            $errors[] = "{$moduleKey}.blocks.{$blockIndex} source_authority.reuse_status is invalid: {$reuseStatus}";
         }
 
         return $errors;

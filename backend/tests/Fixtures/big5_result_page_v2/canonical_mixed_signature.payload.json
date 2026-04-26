@@ -58,7 +58,8 @@
             "safety_level": "boundary",
             "evidence_level": "descriptive",
             "shareable": false,
-            "content_source": "fixture"
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
           }
         ]
       },
@@ -75,7 +76,8 @@
             "safety_level": "standard",
             "evidence_level": "computed",
             "shareable": false,
-            "content_source": "fixture"
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
           },
           {
             "block_key": "module_01_hero.trait_bars.fixture.v1",
@@ -87,7 +89,8 @@
             "safety_level": "standard",
             "evidence_level": "normed",
             "shareable": false,
-            "content_source": "fixture"
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
           }
         ]
       },
@@ -104,7 +107,8 @@
             "safety_level": "standard",
             "evidence_level": "computed",
             "shareable": false,
-            "content_source": "fixture"
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
           }
         ]
       },
@@ -121,7 +125,8 @@
             "safety_level": "standard",
             "evidence_level": "registry_backed",
             "shareable": false,
-            "content_source": "fixture"
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
           }
         ]
       },
@@ -138,7 +143,8 @@
             "safety_level": "standard",
             "evidence_level": "computed",
             "shareable": false,
-            "content_source": "fixture"
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
           }
         ]
       },
@@ -160,7 +166,8 @@
             "safety_level": "standard",
             "evidence_level": "computed",
             "shareable": false,
-            "content_source": "fixture"
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
           }
         ]
       },
@@ -177,7 +184,8 @@
             "safety_level": "standard",
             "evidence_level": "registry_backed",
             "shareable": false,
-            "content_source": "fixture"
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
           }
         ]
       },
@@ -190,11 +198,12 @@
             "module_key": "module_07_collaboration_manual",
             "content": { "summary_zh": "fixture collaboration" },
             "projection_refs": ["domain_bands"],
-            "registry_refs": ["scenario_registry:collaboration"],
+            "registry_refs": ["scenario_registry:collaboration", "share_safety_registry:collaboration_manual"],
             "safety_level": "share_safe",
             "evidence_level": "registry_backed",
             "shareable": true,
-            "content_source": "fixture"
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
           }
         ]
       },
@@ -211,7 +220,8 @@
             "safety_level": "share_safe",
             "evidence_level": "descriptive",
             "shareable": true,
-            "content_source": "fixture"
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
           }
         ]
       },
@@ -224,11 +234,12 @@
             "module_key": "module_09_feedback_data_flywheel",
             "content": { "summary_zh": "fixture feedback" },
             "projection_refs": ["interpretation_scope"],
-            "registry_refs": ["observation_registry:module_feedback"],
+            "registry_refs": ["observation_feedback_registry:module_feedback"],
             "safety_level": "boundary",
             "evidence_level": "descriptive",
             "shareable": false,
-            "content_source": "fixture"
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
           }
         ]
       },
@@ -245,7 +256,8 @@
             "safety_level": "boundary",
             "evidence_level": "descriptive",
             "shareable": false,
-            "content_source": "fixture"
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
           }
         ]
       }
