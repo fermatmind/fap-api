@@ -44,6 +44,25 @@ final class BigFiveResultPageV2ContentPlanningTest extends TestCase
         $this->assertSame('staging_only', data_get($manifest, 'reset_classification.runtime_use'));
         $this->assertSame('not_allowed', data_get($manifest, 'reset_classification.composer_use'));
         $this->assertSame('not_allowed', data_get($manifest, 'reset_classification.frontend_use'));
+        $this->assertSame('not_allowed_until_selector_metadata_exists', data_get($manifest, 'reset_classification.cms_import_use'));
+        $this->assertSame([
+            'slot_key',
+            'trigger_fields',
+            'priority',
+            'mutual_exclusion_group',
+            'can_stack_with',
+            'reading_modes',
+            'scenario',
+            'scope',
+            'required_evidence_level',
+            'safety_level',
+            'shareable_policy',
+            'fallback_policy',
+        ], data_get($manifest, 'selector_metadata_required_before_runtime'));
+        $this->assertTrue((bool) data_get($manifest, 'runtime_guardrails.runtime_wrapper_must_not_read_this_pack'));
+        $this->assertTrue((bool) data_get($manifest, 'runtime_guardrails.composer_must_not_select_this_pack'));
+        $this->assertTrue((bool) data_get($manifest, 'runtime_guardrails.frontend_must_not_render_this_pack_directly'));
+        $this->assertTrue((bool) data_get($manifest, 'runtime_guardrails.cms_import_requires_selector_ready_replacement'));
         $this->assertSame([
             'profile_signature_registry',
             'state_scope_registry',
@@ -99,6 +118,13 @@ final class BigFiveResultPageV2ContentPlanningTest extends TestCase
             $this->assertContains($entry['registry_key'], $registryAllowlist);
             $this->assertContains($entry['target_module'], BigFiveResultPageV2Contract::MODULE_KEYS);
             $this->assertContains($entry['priority_tier'], $priorityAllowlist);
+            $this->assertContains($entry['required_evidence_level'], data_get($matrix, 'allowlists.evidence_levels'));
+            $this->assertContains($entry['safety_level'], data_get($matrix, 'allowlists.safety_levels'));
+            $this->assertContains($entry['fallback_policy'], data_get($matrix, 'allowlists.fallback_policies'));
+
+            foreach ((array) $entry['reading_modes'] as $readingMode) {
+                $this->assertContains($readingMode, data_get($matrix, 'allowlists.reading_modes'));
+            }
         }
 
         $coveredRegistries = array_values(array_unique(array_map(
@@ -113,6 +139,15 @@ final class BigFiveResultPageV2ContentPlanningTest extends TestCase
         $this->assertContains('P0', array_column($entries, 'priority_tier'));
         $this->assertContains('P1', array_column($entries, 'priority_tier'));
         $this->assertContains('P2', array_column($entries, 'priority_tier'));
+
+        $coveredModules = array_values(array_unique(array_map(
+            static fn (array $entry): string => (string) $entry['target_module'],
+            $entries
+        )));
+        sort($coveredModules);
+        $expectedModules = BigFiveResultPageV2Contract::MODULE_KEYS;
+        sort($expectedModules);
+        $this->assertSame($expectedModules, $coveredModules);
     }
 
     public function test_coverage_matrix_has_required_p0_p1_p2_groups(): void
@@ -149,6 +184,13 @@ final class BigFiveResultPageV2ContentPlanningTest extends TestCase
 
             $this->assertFalse($this->containsKeyRecursive($decoded, 'body_zh'), "{$filename} must not include body_zh");
             $this->assertFalse($this->containsKeyRecursive($decoded, 'user_confirmed_type'), "{$filename} must not include user_confirmed_type");
+            $this->assertFalse($this->containsAnyKeyRecursive($decoded, [
+                'editor_notes',
+                'qa_notes',
+                'selection_guidance',
+                'import_policy',
+                'internal_metadata',
+            ]), "{$filename} must not include public-payload forbidden metadata keys");
             $this->assertStringNotContainsString('frontend_fallback', $contents, "{$filename} must not allow frontend fallback");
             $this->assertStringNotContainsString('fixed_type', $contents, "{$filename} must not include fixed type language");
         }
@@ -182,6 +224,21 @@ final class BigFiveResultPageV2ContentPlanningTest extends TestCase
                 return true;
             }
             if (is_array($value) && $this->containsKeyRecursive($value, $key)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  array<mixed>  $payload
+     * @param  array<int,string>  $keys
+     */
+    private function containsAnyKeyRecursive(array $payload, array $keys): bool
+    {
+        foreach ($keys as $key) {
+            if ($this->containsKeyRecursive($payload, $key)) {
                 return true;
             }
         }

@@ -13,6 +13,15 @@ The current 72-block Big Five Result Page V2 asset bundle is classified as `foun
 
 The bundle can inform foundation page filling, safety boundary review, method framing, and registry naming. It must not be connected to the runtime composer, frontend fallback, or CMS/runtime import as selector-ready personalized content.
 
+Before any replacement asset pack can be considered selector-ready, it must add selector metadata such as `slot_key`, `trigger_fields`, `priority`, `mutual_exclusion_group`, `can_stack_with`, `reading_modes`, `scenario`, `scope`, `required_evidence_level`, `safety_level`, `shareable_policy`, and `fallback_policy`.
+
+Runtime guardrails:
+
+- `BigFiveResultPageV2RuntimeWrapper` must not read this foundation seed pack.
+- Future composers must not select this foundation seed pack.
+- Frontend consumers must not render this foundation seed pack directly.
+- CMS import must wait for a selector-ready replacement pack.
+
 ## Why It Is Not Personalization Ready
 
 The current bundle covers six registries only:

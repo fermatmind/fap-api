@@ -32,6 +32,27 @@
     "frontend_use": "not_allowed",
     "cms_import_use": "not_allowed_until_selector_metadata_exists"
   },
+  "selector_metadata_required_before_runtime": [
+    "slot_key",
+    "trigger_fields",
+    "priority",
+    "mutual_exclusion_group",
+    "can_stack_with",
+    "reading_modes",
+    "scenario",
+    "scope",
+    "required_evidence_level",
+    "safety_level",
+    "shareable_policy",
+    "fallback_policy"
+  ],
+  "runtime_guardrails": {
+    "runtime_wrapper_must_not_read_this_pack": true,
+    "composer_must_not_select_this_pack": true,
+    "frontend_must_not_render_this_pack_directly": true,
+    "cms_import_requires_selector_ready_replacement": true,
+    "allowed_use_until_replacement": "planning_and_editorial_reference_only"
+  },
   "missing_registries": [
     "profile_signature_registry",
     "state_scope_registry",
