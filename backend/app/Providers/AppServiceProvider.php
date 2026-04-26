@@ -25,6 +25,8 @@ use App\Policies\ReportSnapshotPolicy;
 use App\Policies\ScaleRegistryPolicy;
 use App\Policies\ScaleSlugPolicy;
 use App\Policies\SharePolicy;
+use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2CompatibilityTransformer;
+use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2TransformerContract;
 use App\Services\Cms\ArticleCmsMachineTranslationProvider;
 use App\Services\Cms\CmsMachineTranslationProviderRegistry;
 use App\Services\Cms\DisabledArticleMachineTranslationProvider;
@@ -87,6 +89,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(OpenAiArticleMachineTranslationProvider::class);
         $this->app->singleton(CmsMachineTranslationProviderRegistry::class);
         $this->app->bind(CmsMachineTranslationProvider::class, static fn ($app): CmsMachineTranslationProvider => $app->make(DisabledCmsMachineTranslationProvider::class));
+        $this->app->bind(BigFiveResultPageV2TransformerContract::class, BigFiveResultPageV2CompatibilityTransformer::class);
 
         $this->app->singleton(PiiEnvelopeAdapter::class, function ($app) {
             $adapterRaw = strtolower(trim((string) config('services.pii.adapter', 'local')));
