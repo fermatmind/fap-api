@@ -152,6 +152,18 @@ final class BigFiveResultPageV2SelectorAssetValidator
                 $errors[] = "reading_mode is invalid: {$readingMode}";
             }
         }
+        if (! in_array((string) ($asset['scenario'] ?? ''), BigFiveResultPageV2SelectorAssetContract::SCENARIOS, true)) {
+            $errors[] = 'scenario is invalid: '.(string) ($asset['scenario'] ?? '');
+        }
+        if (! in_array((string) ($asset['scope'] ?? ''), BigFiveResultPageV2SelectorAssetContract::SCOPES, true)) {
+            $errors[] = 'scope is invalid: '.(string) ($asset['scope'] ?? '');
+        }
+        if (! is_bool($asset['shareable'] ?? null)) {
+            $errors[] = 'shareable must be a boolean';
+        }
+        if (! in_array((string) ($asset['shareable_policy'] ?? ''), BigFiveResultPageV2SelectorAssetContract::SHAREABLE_POLICIES, true)) {
+            $errors[] = 'shareable_policy is invalid: '.(string) ($asset['shareable_policy'] ?? '');
+        }
         if (! in_array((string) ($asset['fallback_policy'] ?? ''), BigFiveResultPageV2SelectorAssetContract::FALLBACK_POLICIES, true)) {
             $errors[] = 'fallback_policy is invalid: '.(string) ($asset['fallback_policy'] ?? '');
         }
@@ -190,6 +202,17 @@ final class BigFiveResultPageV2SelectorAssetValidator
         }
 
         $this->collectForbiddenKeys($trigger, ['fixed_type', 'user_confirmed_type', 'diagnosis'], 'trigger', $errors);
+
+        foreach ((array) ($trigger['reading_mode'] ?? []) as $readingMode) {
+            if (! in_array($readingMode, (array) ($asset['reading_modes'] ?? []), true)) {
+                $errors[] = "trigger reading_mode {$readingMode} must be included in reading_modes";
+            }
+        }
+
+        $triggerScenarios = (array) ($trigger['scenario'] ?? []);
+        if ($triggerScenarios !== [] && ! in_array((string) ($asset['scenario'] ?? ''), $triggerScenarios, true)) {
+            $errors[] = 'trigger scenario must include scenario';
+        }
 
         $scope = (string) ($asset['scope'] ?? '');
         if ($scope === 'norm_unavailable' || in_array('norm_unavailable', (array) ($trigger['interpretation_scopes'] ?? []), true)) {

@@ -74,6 +74,48 @@ final class BigFiveResultPageV2SelectorAssetContract
         'deep',
     ];
 
+    public const SCENARIOS = [
+        'global',
+        'work',
+        'relationship',
+        'stress',
+        'growth',
+        'action',
+        'collaboration',
+        'share',
+        'feedback',
+        'follow_up',
+        'multi_scenario',
+        'advanced',
+    ];
+
+    public const SCOPES = [
+        'all',
+        'all_scopes',
+        'quality_acceptable',
+        'facet_supported',
+        'clear_signature',
+        'mixed_signature',
+        'balanced_profile',
+        'high_tension_profile',
+        'facet_inconsistent',
+        'norm_unavailable',
+        'low_quality',
+        'retest_recommended',
+        'share_safe_summary_only',
+    ];
+
+    public const SHAREABLE_POLICIES = [
+        'not_shareable',
+        'not_shareable_by_default',
+        'not_shareable_unless_rewritten_by_share_safety_registry',
+        'share_safe_summary_only_when_scope_requires',
+        'label_only_after_share_safety_rewrite',
+        'required_for_every_shareable_true_block',
+        'module_07_requires_share_safety_registry',
+        'requires_share_safety_registry',
+    ];
+
     public const FALLBACK_POLICIES = [
         'backend_required',
         'omit_block',

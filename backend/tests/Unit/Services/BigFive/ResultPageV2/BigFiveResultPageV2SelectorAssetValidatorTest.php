@@ -54,6 +54,16 @@ final class BigFiveResultPageV2SelectorAssetValidatorTest extends TestCase
         }
     }
 
+    public function test_contract_registry_allowlist_matches_coverage_matrix(): void
+    {
+        $matrixRegistryKeys = array_values(array_unique(array_column($this->coverageMatrixEntries(), 'registry_key')));
+        sort($matrixRegistryKeys);
+        $contractRegistryKeys = BigFiveResultPageV2SelectorAssetContract::REGISTRY_KEYS;
+        sort($contractRegistryKeys);
+
+        $this->assertSame($matrixRegistryKeys, $contractRegistryKeys);
+    }
+
     public function test_missing_trigger_is_rejected(): void
     {
         $asset = $this->fixture('fixture.domain.o_mid_high');
@@ -85,6 +95,36 @@ final class BigFiveResultPageV2SelectorAssetValidatorTest extends TestCase
         $asset['reading_modes'][] = 'share_safe';
 
         $this->assertHasError('reading_mode is invalid: share_safe', $asset);
+    }
+
+    public function test_trigger_reading_mode_must_be_declared_by_asset(): void
+    {
+        $asset = $this->fixture('fixture.domain.o_mid_high');
+        $asset['trigger']['reading_mode'][] = 'quick';
+
+        $this->assertHasError('trigger reading_mode quick must be included in reading_modes', $asset);
+    }
+
+    public function test_invalid_scenario_scope_shareable_and_shareable_policy_are_rejected(): void
+    {
+        $asset = $this->fixture('fixture.domain.o_mid_high');
+        $asset['scenario'] = 'career_prediction';
+        $asset['scope'] = 'fixed_type_scope';
+        $asset['shareable'] = 'false';
+        $asset['shareable_policy'] = 'public_raw_score_card';
+
+        $this->assertHasError('scenario is invalid: career_prediction', $asset);
+        $this->assertHasError('scope is invalid: fixed_type_scope', $asset);
+        $this->assertHasError('shareable must be a boolean', $asset);
+        $this->assertHasError('shareable_policy is invalid: public_raw_score_card', $asset);
+    }
+
+    public function test_trigger_scenario_must_include_asset_scenario(): void
+    {
+        $asset = $this->fixture('fixture.scenario.work');
+        $asset['trigger']['scenario'] = ['relationship'];
+
+        $this->assertHasError('trigger scenario must include scenario', $asset);
     }
 
     public function test_fixed_type_language_is_rejected(): void
@@ -167,6 +207,20 @@ final class BigFiveResultPageV2SelectorAssetValidatorTest extends TestCase
         $this->assertIsArray($decoded);
 
         return $decoded;
+    }
+
+    /**
+     * @return list<array<string,mixed>>
+     */
+    private function coverageMatrixEntries(): array
+    {
+        $json = file_get_contents(base_path('content_assets/big5/result_page_v2/personalization_coverage_matrix_v0_2.json'));
+        $this->assertIsString($json);
+        $decoded = json_decode($json, true);
+        $this->assertIsArray($decoded);
+        $this->assertIsArray($decoded['entries'] ?? null);
+
+        return $decoded['entries'];
     }
 
     /**
