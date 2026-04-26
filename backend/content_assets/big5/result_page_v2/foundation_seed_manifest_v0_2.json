@@ -1,0 +1,107 @@
+{
+  "schema": "fap.big5.result_page_v2.foundation_seed_manifest.v0.2",
+  "version": "v0.2",
+  "asset_pack": {
+    "version": "big5_result_page_v2.content_assets.v0.1",
+    "asset_count": 72,
+    "source_location": "external_staging_bundle",
+    "repo_import_status": "metadata_only",
+    "content_assets_imported": false,
+    "sha256_json": "a936548fdd4cbd484230f41924bdb038fd0c0d2ca58cc32dacbee57aff9bc3ff",
+    "registry_counts": {
+      "domain_registry": 25,
+      "boundary_registry": 3,
+      "method_registry": 3,
+      "coupling_registry": 10,
+      "scenario_registry": 25,
+      "share_safety_registry": 6
+    },
+    "source_documents": [
+      "FermatMind_BigFive_新版结果页_正式上线V2.0.docx",
+      "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx",
+      "FermatMind_BigFive_第二版结果页方案_V1.0.docx"
+    ]
+  },
+  "reset_classification": {
+    "coverage_tier": "foundation_seed",
+    "personalization_ready": false,
+    "selector_ready": false,
+    "runtime_ready": false,
+    "runtime_use": "staging_only",
+    "composer_use": "not_allowed",
+    "frontend_use": "not_allowed",
+    "cms_import_use": "not_allowed_until_selector_metadata_exists"
+  },
+  "selector_metadata_required_before_runtime": [
+    "slot_key",
+    "trigger_fields",
+    "priority",
+    "mutual_exclusion_group",
+    "can_stack_with",
+    "reading_modes",
+    "scenario",
+    "scope",
+    "required_evidence_level",
+    "safety_level",
+    "shareable_policy",
+    "fallback_policy"
+  ],
+  "runtime_guardrails": {
+    "runtime_wrapper_must_not_read_this_pack": true,
+    "composer_must_not_select_this_pack": true,
+    "frontend_must_not_render_this_pack_directly": true,
+    "cms_import_requires_selector_ready_replacement": true,
+    "allowed_use_until_replacement": "planning_and_editorial_reference_only"
+  },
+  "missing_registries": [
+    "profile_signature_registry",
+    "state_scope_registry",
+    "facet_pattern_registry",
+    "observation_feedback_registry",
+    "triple_pattern_registry",
+    "action_plan_registry"
+  ],
+  "positioning": {
+    "can_support": [
+      "foundation page filling review",
+      "safe boundary and method framing review",
+      "registry naming baseline",
+      "editorial source decomposition planning"
+    ],
+    "must_not_support": [
+      "runtime composer selection",
+      "personalization claim",
+      "selector-ready block import",
+      "frontend fallback interpretation",
+      "profile or signature personalization",
+      "module feedback selection",
+      "facet pattern selection"
+    ],
+    "reason_not_personalization_ready": [
+      "missing selector metadata such as slot_key, trigger_fields, priority, and mutual_exclusion_group",
+      "missing profile_signature, state_scope, facet_pattern, observation_feedback, triple_pattern, and action_plan registries",
+      "no coverage matrix for score bands, scopes, scenarios, reading modes, or feedback variants",
+      "no rendered QA, safety QA, or selector dry-run coverage for personalized assembly"
+    ]
+  },
+  "safety_constraints": {
+    "non_type_system": true,
+    "forbid_type_confirmation_override": true,
+    "forbid_consumer_side_fallback": true,
+    "forbid_raw_sensitive_scores_in_shareable_blocks": true,
+    "forbid_percentile_or_normal_curve_when_norm_unavailable": true,
+    "facet_claim_requires_item_count_and_confidence": true,
+    "public_payload_forbidden_fields": [
+      "editor_notes",
+      "qa_notes",
+      "selection_guidance",
+      "import_policy",
+      "internal_metadata"
+    ]
+  },
+  "next_required_artifact": {
+    "name": "Big Five Personalization Coverage Matrix",
+    "version": "v0.2",
+    "path": "backend/content_assets/big5/result_page_v2/personalization_coverage_matrix_v0_2.json"
+  }
+}
