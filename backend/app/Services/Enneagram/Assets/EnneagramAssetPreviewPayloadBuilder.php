@@ -23,6 +23,19 @@ final class EnneagramAssetPreviewPayloadBuilder
         'work_only_resonance',
     ];
 
+    private const PARTIAL_AXES = [
+        'work_only',
+        'relationship_only',
+        'stress_only',
+        'growth_only',
+        'strength_only',
+        'blindspot_only',
+        'motivation_only',
+        'fear_only',
+        'top2_only',
+        'context_specific',
+    ];
+
     public function __construct(
         private readonly EnneagramAssetSelector $selector,
         private readonly EnneagramAssetPublicPayloadSanitizer $sanitizer,
@@ -75,6 +88,45 @@ final class EnneagramAssetPreviewPayloadBuilder
                 '%s:%s',
                 (string) data_get($right, 'preview_context.type_id', ''),
                 (string) data_get($right, 'preview_context.objection_axis', '')
+            );
+
+            return $leftKey <=> $rightKey;
+        });
+
+        return $payloads;
+    }
+
+    /**
+     * @param  array<string,mixed>  $merged
+     * @return list<array<string,mixed>>
+     */
+    public function buildPartialResonanceMatrix(array $merged): array
+    {
+        $payloads = [];
+        foreach ((array) ($merged['items'] ?? []) as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+            if ((string) ($item['_preview_batch'] ?? '') !== '1R-D') {
+                continue;
+            }
+            if (trim((string) ($item['category'] ?? '')) !== 'partial_resonance_response') {
+                continue;
+            }
+
+            $payloads[] = $this->build($merged, $this->contextForPartialItem($item));
+        }
+
+        usort($payloads, static function (array $left, array $right): int {
+            $leftKey = sprintf(
+                '%s:%s',
+                (string) data_get($left, 'preview_context.type_id', ''),
+                (string) data_get($left, 'preview_context.partial_axis', '')
+            );
+            $rightKey = sprintf(
+                '%s:%s',
+                (string) data_get($right, 'preview_context.type_id', ''),
+                (string) data_get($right, 'preview_context.partial_axis', '')
             );
 
             return $leftKey <=> $rightKey;
@@ -271,6 +323,62 @@ final class EnneagramAssetPreviewPayloadBuilder
             'methodology_variant' => 'asset_preview_only',
             'objection_axis' => in_array($objectionAxis, self::OBJECTION_AXES, true) ? $objectionAxis : '',
             'body_context' => 'matching_primary_or_top3',
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     * @return array<string,mixed>
+     */
+    public function contextForPartialItem(array $item): array
+    {
+        $appliesTo = is_array($item['applies_to'] ?? null) ? $item['applies_to'] : [];
+        $typeId = trim((string) ($item['type_id'] ?? ''));
+        $partialAxis = trim((string) ($item['partial_axis'] ?? ''));
+        $scope = $this->preferredAllowedValue(
+            $appliesTo,
+            'interpretation_scope',
+            ['close_call', 'diffuse', 'clear', 'low_quality']
+        );
+        $confidence = $this->preferredAllowedValue(
+            $appliesTo,
+            'confidence_level',
+            ['medium_confidence', 'low_confidence', 'any']
+        );
+        $scoreProfile = $this->preferredAllowedValue(
+            $appliesTo,
+            'score_profile',
+            ['primary_with_strong_secondary', 'top2_close_call', 'broad_distribution', 'high_variance', 'top3_flat', 'low_signal', 'any']
+        );
+        $scenario = $this->preferredAllowedValue(
+            $appliesTo,
+            'scenario',
+            ['work_context', 'relationship_context', 'stress_context', 'growth_context', 'deep_reading', 'self_observation', 'any']
+        );
+        $userSignal = $this->preferredAllowedValue(
+            $appliesTo,
+            'user_signal',
+            ['partial_resonance', 'only_work_resonates', 'only_relationship_resonates', 'stress_focus', 'growth_focus', 'uncertain_result', 'only_top2_resonates', 'any']
+        );
+        $audienceSegment = $this->preferredAllowedValue(
+            $appliesTo,
+            'audience_segment',
+            ['general', 'work_focus', 'relationship_focus', 'stress_focus', 'student', 'early_career', 'deep_reader', 'any']
+        );
+
+        return [
+            'type_id' => $typeId,
+            'interpretation_scope' => $scope !== '' && $scope !== 'any' ? $scope : 'close_call',
+            'confidence_level' => $confidence !== '' && $confidence !== 'any' ? $confidence : 'medium_confidence',
+            'score_profile' => $scoreProfile !== '' && $scoreProfile !== 'any' ? $scoreProfile : 'primary_with_strong_secondary',
+            'scenario' => $scenario !== '' && $scenario !== 'any' ? $scenario : 'deep_reading',
+            'user_signal' => $userSignal !== '' && $userSignal !== 'any' ? $userSignal : 'partial_resonance',
+            'audience_segment' => $audienceSegment !== '' && $audienceSegment !== 'any' ? $audienceSegment : 'general',
+            'selected_form' => 'enneagram_likert_105',
+            'selected_form_kind' => 'likert',
+            'methodology_variant' => 'asset_preview_only',
+            'partial_axis' => in_array($partialAxis, self::PARTIAL_AXES, true) ? $partialAxis : '',
+            'body_context' => 'matching_partial_resonance_signal',
         ];
     }
 

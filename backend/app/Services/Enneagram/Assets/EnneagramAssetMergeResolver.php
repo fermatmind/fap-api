@@ -65,6 +65,7 @@ final class EnneagramAssetMergeResolver
                 )),
                 'batch_1r_b_replaces' => EnneagramAssetMergePolicyValidator::BATCH_B_DEEP_CORE_CATEGORIES,
                 'batch_1r_c_adds' => EnneagramAssetMergePolicyValidator::BATCH_C_CATEGORIES,
+                'batch_1r_d_adds' => EnneagramAssetMergePolicyValidator::BATCH_D_CATEGORIES,
             ],
             'items' => $items,
         ];
@@ -90,15 +91,24 @@ final class EnneagramAssetMergeResolver
         if (str_contains($version, '1R-C')) {
             return '1R-C';
         }
+        if (str_contains($version, '1R-D')) {
+            return '1R-D';
+        }
 
         foreach ((array) ($stream['items'] ?? []) as $item) {
             if (is_array($item) && trim((string) ($item['objection_axis'] ?? '')) !== '') {
                 return '1R-C';
             }
+            if (is_array($item) && trim((string) ($item['partial_axis'] ?? '')) !== '') {
+                return '1R-D';
+            }
         }
 
         if ($categories === EnneagramAssetMergePolicyValidator::BATCH_C_CATEGORIES) {
             return '1R-C';
+        }
+        if ($categories === EnneagramAssetMergePolicyValidator::BATCH_D_CATEGORIES) {
+            return '1R-D';
         }
 
         return '';
@@ -110,6 +120,7 @@ final class EnneagramAssetMergeResolver
             '1R-A' => 'batch_1r_a',
             '1R-B' => 'batch_1r_b',
             '1R-C' => 'batch_1r_c',
+            '1R-D' => 'batch_1r_d',
             default => strtolower(str_replace('-', '_', $batch)),
         };
     }

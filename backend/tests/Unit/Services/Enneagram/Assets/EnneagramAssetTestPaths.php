@@ -21,6 +21,11 @@ trait EnneagramAssetTestPaths
         return '/Users/rainie/Desktop/FermatMind_Enneagram_Content_Expansion_Batch_1R_C_Low_Resonance_Objection_Handling/FermatMind_Enneagram_Content_Expansion_Batch_1R_C_Low_Resonance_Objection_Handling_Assets.json';
     }
 
+    private function batchDPath(): string
+    {
+        return '/Users/rainie/Desktop/FermatMind_Enneagram_Content_Expansion_Batch_1R_D_Partial_Resonance_Deep_Branch/FermatMind_Enneagram_Content_Expansion_Batch_1R_D_Partial_Resonance_Deep_Branch_Assets.json';
+    }
+
     private function skipWhenAssetsMissing(): void
     {
         if (! is_file($this->batchAPath()) || ! is_file($this->batchBPath())) {
@@ -32,6 +37,13 @@ trait EnneagramAssetTestPaths
     {
         if (! is_file($this->batchCPath())) {
             $this->markTestSkipped('External ENNEAGRAM 1R-C asset file is not present on this workstation.');
+        }
+    }
+
+    private function skipWhenBatchDMissing(): void
+    {
+        if (! is_file($this->batchDPath())) {
+            $this->markTestSkipped('External ENNEAGRAM 1R-D asset file is not present on this workstation.');
         }
     }
 }
