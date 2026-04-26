@@ -45,7 +45,8 @@
             "safety_level": "degraded",
             "evidence_level": "descriptive",
             "shareable": false,
-            "content_source": "fixture"
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
           }
         ]
       },
@@ -58,11 +59,12 @@
             "module_key": "module_09_feedback_data_flywheel",
             "content": { "summary_zh": "fixture low quality feedback" },
             "projection_refs": ["interpretation_scope"],
-            "registry_refs": ["observation_registry:low_quality_feedback"],
+            "registry_refs": ["observation_feedback_registry:low_quality_feedback"],
             "safety_level": "degraded",
             "evidence_level": "descriptive",
             "shareable": false,
-            "content_source": "fixture"
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
           }
         ]
       },
@@ -79,7 +81,8 @@
             "safety_level": "boundary",
             "evidence_level": "descriptive",
             "shareable": false,
-            "content_source": "fixture"
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
           }
         ]
       }
