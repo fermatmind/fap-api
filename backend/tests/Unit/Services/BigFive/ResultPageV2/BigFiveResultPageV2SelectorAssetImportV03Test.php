@@ -99,6 +99,35 @@ final class BigFiveResultPageV2SelectorAssetImportV03Test extends TestCase
         $this->assertSame('staging_only', $manifest['runtime_use'] ?? null);
     }
 
+    public function test_v0_3_assets_align_with_coverage_matrix_and_contract(): void
+    {
+        $matrix = $this->coverageMatrix();
+        $matrixRegistryKeys = $matrix['allowlists']['registry_keys'] ?? [];
+        $matrixModules = $matrix['allowlists']['target_modules'] ?? [];
+
+        foreach ($this->assets() as $asset) {
+            $assetKey = (string) $asset['asset_key'];
+            $this->assertContains($asset['registry_key'], $matrixRegistryKeys, $assetKey);
+            $this->assertContains($asset['module_key'], $matrixModules, $assetKey);
+            $this->assertContains($asset['module_key'], BigFiveResultPageV2Contract::MODULE_KEYS, $assetKey);
+            $this->assertContains($asset['block_kind'], BigFiveResultPageV2Contract::BLOCK_KINDS, $assetKey);
+
+            foreach ($asset['reading_modes'] as $readingMode) {
+                $this->assertContains($readingMode, BigFiveResultPageV2SelectorAssetContract::READING_MODES, $assetKey);
+            }
+
+            foreach (($asset['trigger']['reading_mode'] ?? []) as $triggerReadingMode) {
+                $this->assertContains($triggerReadingMode, $asset['reading_modes'], $assetKey);
+            }
+
+            $triggerScenarios = $asset['trigger']['scenario'] ?? [];
+            $scenario = $asset['scenario'] ?: 'unspecified';
+            if ($triggerScenarios !== []) {
+                $this->assertContains($scenario, $triggerScenarios, $assetKey);
+            }
+        }
+    }
+
     public function test_v0_3_public_payload_has_no_internal_metadata(): void
     {
         foreach ($this->assets() as $asset) {
@@ -214,6 +243,21 @@ final class BigFiveResultPageV2SelectorAssetImportV03Test extends TestCase
     private function coverageSummary(): array
     {
         return $this->decodeJsonFile('coverage_summary.json');
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function coverageMatrix(): array
+    {
+        $decoded = json_decode(
+            file_get_contents(base_path('content_assets/big5/result_page_v2/personalization_coverage_matrix_v0_2.json')) ?: '',
+            true,
+            flags: JSON_THROW_ON_ERROR,
+        );
+        $this->assertIsArray($decoded);
+
+        return $decoded;
     }
 
     /**

@@ -23,10 +23,11 @@
 
 ## Files
 
-- `big5_result_page_v2_selector_ready_assets_v0_3_p0_full.json`: JSON array.
-- `big5_result_page_v2_selector_ready_assets_v0_3_p0_full.jsonl`: JSON Lines.
-- `big5_result_page_v2_selector_ready_assets_v0_3_p0_full_manifest.json`: manifest and hash.
-- `big5_result_page_v2_selector_ready_assets_v0_3_p0_full_coverage_summary.json`: coverage summary by registry/module/scope.
+- `assets.json`: JSON array copied from `big5_result_page_v2_selector_ready_assets_v0_3_p0_full.json`.
+- `assets.jsonl`: JSON Lines copied from `big5_result_page_v2_selector_ready_assets_v0_3_p0_full.jsonl`.
+- `manifest.json`: manifest and hash copied from `big5_result_page_v2_selector_ready_assets_v0_3_p0_full_manifest.json`.
+- `coverage_summary.json`: coverage summary copied from `big5_result_page_v2_selector_ready_assets_v0_3_p0_full_coverage_summary.json`.
+- `import_coverage_report.json`: backend staging import validation report generated for this repository.
 
 ## Scope
 
