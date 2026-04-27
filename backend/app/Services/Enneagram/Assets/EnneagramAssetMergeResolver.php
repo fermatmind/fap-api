@@ -69,6 +69,7 @@ final class EnneagramAssetMergeResolver
                 'batch_1r_e_adds' => EnneagramAssetMergePolicyValidator::BATCH_E_CATEGORIES,
                 'batch_1r_f_adds' => EnneagramAssetMergePolicyValidator::BATCH_F_CATEGORIES,
                 'batch_1r_g_adds' => EnneagramAssetMergePolicyValidator::BATCH_G_CATEGORIES,
+                'batch_1r_h_adds' => EnneagramAssetMergePolicyValidator::BATCH_H_CATEGORIES,
             ],
             'items' => $items,
         ];
@@ -107,6 +108,13 @@ final class EnneagramAssetMergeResolver
             if (is_array($item) && trim((string) ($item['scene_axis'] ?? '')) !== '') {
                 return '1R-G';
             }
+            if (
+                is_array($item)
+                && trim((string) ($item['fc144_recommendation_context'] ?? '')) !== ''
+                && trim((string) ($item['category'] ?? '')) === 'fc144_recommendation_response'
+            ) {
+                return '1R-H';
+            }
         }
 
         if ($categories === EnneagramAssetMergePolicyValidator::BATCH_C_CATEGORIES) {
@@ -124,6 +132,9 @@ final class EnneagramAssetMergeResolver
         if ($categories === EnneagramAssetMergePolicyValidator::BATCH_G_CATEGORIES) {
             return '1R-G';
         }
+        if ($categories === EnneagramAssetMergePolicyValidator::BATCH_H_CATEGORIES) {
+            return '1R-H';
+        }
 
         return '';
     }
@@ -138,6 +149,7 @@ final class EnneagramAssetMergeResolver
             '1R-E' => 'batch_1r_e',
             '1R-F' => 'batch_1r_f',
             '1R-G' => 'batch_1r_g',
+            '1R-H' => 'batch_1r_h',
             default => strtolower(str_replace('-', '_', $batch)),
         };
     }

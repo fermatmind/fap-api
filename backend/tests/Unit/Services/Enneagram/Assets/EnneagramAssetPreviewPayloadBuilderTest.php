@@ -220,4 +220,48 @@ final class EnneagramAssetPreviewPayloadBuilderTest extends TestCase
             $this->assertArrayHasKey('scene_label_zh', (array) data_get($sceneModules[0], 'content'));
         }
     }
+
+    public function test_it_builds_1r_h_fc144_recommendation_matrix_without_internal_metadata(): void
+    {
+        $this->skipWhenAssetsMissing();
+        $this->skipWhenBatchCMissing();
+        $this->skipWhenBatchDMissing();
+        $this->skipWhenBatchEMissing();
+        $this->skipWhenBatchFMissing();
+        $this->skipWhenBatchGMissing();
+        $this->skipWhenBatchHMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $merged = app(EnneagramAssetMergeResolver::class)->resolveStreams(
+            $loader->load($this->batchAPath()),
+            $loader->load($this->batchBPath()),
+            $loader->load($this->batchCPath()),
+            $loader->load($this->batchDPath()),
+            $loader->load($this->batchEPath()),
+            $loader->load($this->batchFPath()),
+            $loader->load($this->batchGPath()),
+            $loader->load($this->batchHPath()),
+        );
+        $payloads = app(EnneagramAssetPreviewPayloadBuilder::class)->buildFc144RecommendationMatrix($merged);
+        $sanitizer = app(EnneagramAssetPublicPayloadSanitizer::class);
+
+        $this->assertCount(90, $payloads);
+
+        foreach ($payloads as $payload) {
+            $this->assertTrue($payload['preview_mode']);
+            $this->assertFalse($payload['production_import_allowed']);
+            $this->assertFalse($payload['full_replacement_allowed']);
+            $this->assertSame([], $payload['blocked_reasons']);
+            $this->assertSame([], $sanitizer->internalMetadataLeaks($payload));
+            $fc144Modules = array_values(array_filter(
+                (array) ($payload['modules'] ?? []),
+                static fn (array $module): bool => data_get($module, 'content.category') === 'fc144_recommendation_response'
+            ));
+
+            $this->assertCount(1, $fc144Modules);
+            $this->assertStringContainsString('1R_H', (string) data_get($fc144Modules[0], 'content.asset_key'));
+            $this->assertArrayHasKey('fc144_recommendation_context', (array) data_get($fc144Modules[0], 'content'));
+            $this->assertArrayHasKey('recommendation_strategy', (array) data_get($fc144Modules[0], 'content'));
+        }
+    }
 }

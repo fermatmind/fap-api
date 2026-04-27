@@ -68,6 +68,7 @@ final class EnneagramAssetSelector
                     'partial_axis',
                     'diffuse_axis',
                     'scene_axis',
+                    'fc144_recommendation_context',
                     'pair_key',
                 ] as $key) {
                     if ($avoid === (string) ($context[$key] ?? '')) {
@@ -112,6 +113,7 @@ final class EnneagramAssetSelector
             'partial_axis',
             'diffuse_axis',
             'scene_axis',
+            'fc144_recommendation_context',
             'pair_key',
         ] as $key) {
             $allowed = is_array($appliesTo[$key] ?? null) ? $appliesTo[$key] : [];
@@ -200,6 +202,18 @@ final class EnneagramAssetSelector
             if ($itemSceneAxis === $contextSceneAxis) {
                 $score += 20;
             } elseif ($itemSceneAxis === '') {
+                $score -= 12;
+            } else {
+                $score -= 20;
+            }
+        }
+
+        $contextFc144RecommendationContext = trim((string) ($context['fc144_recommendation_context'] ?? ''));
+        $itemFc144RecommendationContext = trim((string) ($item['fc144_recommendation_context'] ?? ''));
+        if ($contextFc144RecommendationContext !== '') {
+            if ($itemFc144RecommendationContext === $contextFc144RecommendationContext) {
+                $score += 20;
+            } elseif ($itemFc144RecommendationContext === '') {
                 $score -= 12;
             } else {
                 $score -= 20;

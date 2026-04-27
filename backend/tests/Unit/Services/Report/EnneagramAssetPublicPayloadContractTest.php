@@ -115,4 +115,46 @@ final class EnneagramAssetPublicPayloadContractTest extends TestCase
         $this->assertArrayNotHasKey('qa_note', $content);
         $this->assertArrayNotHasKey('safety_note', $content);
     }
+
+    public function test_public_preview_payload_exposes_fc144_safe_fields_without_internal_metadata(): void
+    {
+        $this->skipWhenAssetsMissing();
+        $this->skipWhenBatchCMissing();
+        $this->skipWhenBatchDMissing();
+        $this->skipWhenBatchEMissing();
+        $this->skipWhenBatchFMissing();
+        $this->skipWhenBatchGMissing();
+        $this->skipWhenBatchHMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $merged = app(EnneagramAssetMergeResolver::class)->resolveStreams(
+            $loader->load($this->batchAPath()),
+            $loader->load($this->batchBPath()),
+            $loader->load($this->batchCPath()),
+            $loader->load($this->batchDPath()),
+            $loader->load($this->batchEPath()),
+            $loader->load($this->batchFPath()),
+            $loader->load($this->batchGPath()),
+            $loader->load($this->batchHPath()),
+        );
+        $batchHItem = $loader->load($this->batchHPath())['items'][0];
+        $payload = app(EnneagramAssetPreviewPayloadBuilder::class)->build(
+            $merged,
+            app(EnneagramAssetPreviewPayloadBuilder::class)->contextForFc144RecommendationItem($batchHItem)
+        );
+        $sanitizer = app(EnneagramAssetPublicPayloadSanitizer::class);
+
+        $this->assertSame([], $sanitizer->internalMetadataLeaks($payload));
+        $fc144Module = collect((array) $payload['modules'])
+            ->first(fn (array $module): bool => data_get($module, 'content.category') === 'fc144_recommendation_response');
+
+        $this->assertIsArray($fc144Module);
+        $content = (array) ($fc144Module['content'] ?? []);
+        $this->assertSame('clear_high_resonance', $content['fc144_recommendation_context']);
+        $this->assertSame('recommend_after_high_resonance', $content['recommendation_strategy']);
+        $this->assertArrayNotHasKey('selection_guidance', $content);
+        $this->assertArrayNotHasKey('editor_note', $content);
+        $this->assertArrayNotHasKey('qa_note', $content);
+        $this->assertArrayNotHasKey('safety_note', $content);
+    }
 }

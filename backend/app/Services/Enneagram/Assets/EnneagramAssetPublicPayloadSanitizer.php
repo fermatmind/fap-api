@@ -62,6 +62,8 @@ final class EnneagramAssetPublicPayloadSanitizer
         'scene_axis',
         'scene_domain',
         'scene_label_zh',
+        'fc144_recommendation_context',
+        'recommendation_strategy',
     ];
 
     /**

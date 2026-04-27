@@ -34,9 +34,9 @@ final class EnneagramAssetItemStreamLoader
             throw new RuntimeException('ENNEAGRAM asset item stream must decode to an object.');
         }
 
-        $items = $decoded['items'] ?? null;
+        $items = $decoded['items'] ?? $decoded['assets'] ?? null;
         if (! is_array($items)) {
-            throw new RuntimeException('ENNEAGRAM asset item stream must contain items[].');
+            throw new RuntimeException('ENNEAGRAM asset item stream must contain items[] or assets[].');
         }
 
         $normalizedItems = [];
@@ -48,6 +48,7 @@ final class EnneagramAssetItemStreamLoader
 
         $metadata = $decoded;
         unset($metadata['items']);
+        unset($metadata['assets']);
 
         return [
             'source_file' => $sourceFile,
