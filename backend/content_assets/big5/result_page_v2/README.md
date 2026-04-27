@@ -49,3 +49,19 @@ Missing registries:
 `personalization_coverage_matrix_v0_2.json` defines the selector-ready coverage groups that future GPT-generated content assets must satisfy. It contains structure, triggers, slots, priorities, safety policy, and missing block counts only. It intentionally contains no user-facing body copy.
 
 Future content batches should fill the matrix, not bypass it.
+
+## Selector-Ready Asset Contract
+
+Selector-ready assets must use `fap.big5.result_page_v2.selector_asset.v0.1` and pass `BigFiveResultPageV2SelectorAssetValidator` before any future importer or composer can consider them. The schema requires selector metadata including `slot_key`, `trigger`, `priority`, `mutual_exclusion_group`, `reading_modes`, `scenario`, `scope`, `evidence_level`, `safety_level`, `shareable_policy`, `fallback_policy`, `provenance`, `replacement_policy`, `public_payload`, and `internal_metadata`.
+
+GPT-generated content batches must target this schema. GPT may populate content fields such as `title_zh`, `summary_zh`, `body_zh`, `action_zh`, `benefit_zh`, and `cost_zh`, but Codex should validate and import those assets; Codex should not write Big Five psychological interpretation prose in the runtime, frontend, or consumer layer.
+
+Selector-ready assets must not:
+
+- turn Big Five into a fixed category system;
+- include `user_confirmed_type`;
+- rely on frontend-authored interpretation fallback;
+- claim percentiles or normal curves when norms are unavailable;
+- make unsupported facet independent-measurement claims;
+- expose raw scores or sensitive vectors in shareable blocks;
+- leak `editor_notes`, `qa_notes`, `selection_guidance`, `import_policy`, or `internal_metadata` into `public_payload`.

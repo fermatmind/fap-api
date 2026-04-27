@@ -1,0 +1,630 @@
+[
+  {
+    "version": "fap.big5.result_page_v2.selector_asset.v0.1",
+    "asset_key": "fixture.state_scope.low_quality",
+    "registry_key": "state_scope_registry",
+    "module_key": "module_02_quick_understanding",
+    "block_key": "module_02_quick_understanding.fixture_state_scope_low_quality",
+    "block_kind": "quick_cards",
+    "slot_key": "quick_cards.scope_strategy",
+    "trigger": {
+      "trait_bands": [],
+      "facet_patterns": [],
+      "coupling_keys": [],
+      "triple_patterns": [],
+      "interpretation_scopes": ["low_quality"],
+      "norm_status": ["calibrated"],
+      "quality_status": ["low_quality"],
+      "scenario": ["global"],
+      "feedback_state": ["none"],
+      "reading_mode": ["standard"]
+    },
+    "priority": 90,
+    "mutual_exclusion_group": "scope_strategy",
+    "can_stack_with": ["boundary_registry", "method_registry"],
+    "reading_modes": ["standard"],
+    "scenario": "global",
+    "scope": "low_quality",
+    "required_evidence_level": "computed",
+    "evidence_level": "computed",
+    "safety_level": "boundary",
+    "shareable": false,
+    "shareable_policy": "not_shareable",
+    "fallback_policy": "degrade_to_boundary",
+    "content_source": "fixture",
+    "provenance": {
+      "source": "selector_contract_fixture",
+      "coverage_group": "nine_interpretation_scopes"
+    },
+    "replacement_policy": {
+      "replaceable": true,
+      "requires_same_slot_key": true
+    },
+    "forbidden_public_fields": ["raw_scores", "percentiles", "normal_curve", "user_confirmed_type", "fixed_type"],
+    "review_status": "fixture_only",
+    "public_payload": {
+      "title_zh": "fixture only",
+      "summary_zh": "fixture only",
+      "body_zh": "fixture only"
+    },
+    "internal_metadata": {
+      "fixture_id": "state_scope_low_quality"
+    }
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_asset.v0.1",
+    "asset_key": "fixture.profile_signature.auxiliary_label",
+    "registry_key": "profile_signature_registry",
+    "module_key": "module_01_hero",
+    "block_key": "module_01_hero.fixture_profile_signature",
+    "block_kind": "hero_summary",
+    "slot_key": "hero_summary.profile_signature",
+    "trigger": {
+      "trait_bands": ["O.mid_high", "C.mid_low"],
+      "facet_patterns": [],
+      "coupling_keys": ["O_x_C"],
+      "triple_patterns": [],
+      "interpretation_scopes": ["mixed_signature"],
+      "norm_status": ["calibrated"],
+      "quality_status": ["acceptable"],
+      "scenario": ["global"],
+      "feedback_state": ["none"],
+      "reading_mode": ["quick", "standard"],
+      "signature_policy": "auxiliary_label_only"
+    },
+    "priority": 80,
+    "mutual_exclusion_group": "hero_signature",
+    "can_stack_with": ["domain_registry", "boundary_registry"],
+    "reading_modes": ["quick", "standard"],
+    "scenario": "global",
+    "scope": "mixed_signature",
+    "required_evidence_level": "computed",
+    "evidence_level": "computed",
+    "safety_level": "standard",
+    "shareable": false,
+    "shareable_policy": "label_only_after_share_safety_rewrite",
+    "fallback_policy": "omit_block",
+    "content_source": "fixture",
+    "provenance": {
+      "source": "selector_contract_fixture",
+      "coverage_group": "first_batch_non_type_trait_signatures"
+    },
+    "replacement_policy": {
+      "replaceable": true,
+      "requires_same_slot_key": true
+    },
+    "forbidden_public_fields": ["raw_scores", "percentiles", "normal_curve", "user_confirmed_type", "fixed_type"],
+    "review_status": "fixture_only",
+    "public_payload": {
+      "title_zh": "fixture only",
+      "summary_zh": "fixture only",
+      "body_zh": "fixture only"
+    },
+    "internal_metadata": {
+      "fixture_id": "profile_signature_auxiliary_label"
+    }
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_asset.v0.1",
+    "asset_key": "fixture.domain.o_mid_high",
+    "registry_key": "domain_registry",
+    "module_key": "module_03_trait_deep_dive",
+    "block_key": "module_03_trait_deep_dive.fixture_domain_o",
+    "block_kind": "trait_deep_dive",
+    "slot_key": "trait_deep_dive.domain_card",
+    "trigger": {
+      "trait_bands": ["O.mid_high"],
+      "facet_patterns": [],
+      "coupling_keys": [],
+      "triple_patterns": [],
+      "interpretation_scopes": ["clear_signature", "mixed_signature"],
+      "norm_status": ["calibrated"],
+      "quality_status": ["acceptable"],
+      "scenario": ["global"],
+      "feedback_state": ["none"],
+      "reading_mode": ["standard", "deep"]
+    },
+    "priority": 75,
+    "mutual_exclusion_group": "domain_o_primary",
+    "can_stack_with": ["coupling_registry", "scenario_registry"],
+    "reading_modes": ["standard", "deep"],
+    "scenario": "global",
+    "scope": "quality_acceptable",
+    "required_evidence_level": "registry_backed",
+    "evidence_level": "registry_backed",
+    "safety_level": "standard",
+    "shareable": false,
+    "shareable_policy": "not_shareable_unless_rewritten_by_share_safety_registry",
+    "fallback_policy": "omit_block",
+    "content_source": "fixture",
+    "provenance": {
+      "source": "selector_contract_fixture",
+      "coverage_group": "five_domains_x_five_bands_x_three_slots"
+    },
+    "replacement_policy": {
+      "replaceable": true,
+      "requires_same_slot_key": true
+    },
+    "forbidden_public_fields": ["raw_scores", "percentiles", "normal_curve", "user_confirmed_type", "fixed_type"],
+    "review_status": "fixture_only",
+    "public_payload": {
+      "title_zh": "fixture only",
+      "summary_zh": "fixture only",
+      "body_zh": "fixture only",
+      "action_zh": "fixture only"
+    },
+    "internal_metadata": {
+      "fixture_id": "domain_o_mid_high"
+    }
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_asset.v0.1",
+    "asset_key": "fixture.facet_pattern.o6_reframe",
+    "registry_key": "facet_pattern_registry",
+    "module_key": "module_05_facet_reframe",
+    "block_key": "module_05_facet_reframe.fixture_facet_pattern",
+    "block_kind": "facet_reframe",
+    "slot_key": "facet_reframe.reframe_card",
+    "trigger": {
+      "trait_bands": ["O.mid_high"],
+      "facet_patterns": ["O6.high"],
+      "coupling_keys": [],
+      "triple_patterns": [],
+      "interpretation_scopes": ["mixed_signature"],
+      "norm_status": ["calibrated"],
+      "quality_status": ["acceptable"],
+      "scenario": ["global"],
+      "feedback_state": ["none"],
+      "reading_mode": ["standard", "deep"],
+      "facet_support": {
+        "item_count": 4,
+        "confidence": "medium",
+        "claim_strength": "inference",
+        "inference_only": false
+      }
+    },
+    "priority": 70,
+    "mutual_exclusion_group": "facet_pattern_primary",
+    "can_stack_with": ["domain_registry", "boundary_registry"],
+    "reading_modes": ["standard", "deep"],
+    "scenario": "global",
+    "scope": "facet_supported",
+    "required_evidence_level": "computed",
+    "evidence_level": "computed",
+    "safety_level": "standard",
+    "shareable": false,
+    "shareable_policy": "not_shareable_by_default",
+    "fallback_policy": "degrade_to_boundary",
+    "content_source": "fixture",
+    "provenance": {
+      "source": "selector_contract_fixture",
+      "coverage_group": "thirty_facets_high_low_mismatch_reframe"
+    },
+    "replacement_policy": {
+      "replaceable": true,
+      "requires_same_slot_key": true
+    },
+    "forbidden_public_fields": ["raw_scores", "percentiles", "normal_curve", "user_confirmed_type", "fixed_type"],
+    "review_status": "fixture_only",
+    "public_payload": {
+      "title_zh": "fixture only",
+      "summary_zh": "fixture only",
+      "body_zh": "fixture only"
+    },
+    "internal_metadata": {
+      "fixture_id": "facet_pattern_o6_reframe"
+    }
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_asset.v0.1",
+    "asset_key": "fixture.coupling.n_o",
+    "registry_key": "coupling_registry",
+    "module_key": "module_04_coupling",
+    "block_key": "module_04_coupling.fixture_coupling_no",
+    "block_kind": "coupling_cards",
+    "slot_key": "coupling_cards.primary_coupling",
+    "trigger": {
+      "trait_bands": ["N.high", "O.mid_high"],
+      "facet_patterns": [],
+      "coupling_keys": ["N_x_O"],
+      "triple_patterns": [],
+      "interpretation_scopes": ["high_tension_profile"],
+      "norm_status": ["calibrated"],
+      "quality_status": ["acceptable"],
+      "scenario": ["global"],
+      "feedback_state": ["none"],
+      "reading_mode": ["quick", "standard", "deep"]
+    },
+    "priority": 70,
+    "mutual_exclusion_group": "coupling_primary",
+    "can_stack_with": ["domain_registry", "scenario_registry"],
+    "reading_modes": ["quick", "standard", "deep"],
+    "scenario": "global",
+    "scope": "high_tension_profile",
+    "required_evidence_level": "computed",
+    "evidence_level": "computed",
+    "safety_level": "standard",
+    "shareable": false,
+    "shareable_policy": "not_shareable_unless_rewritten_by_share_safety_registry",
+    "fallback_policy": "omit_block",
+    "content_source": "fixture",
+    "provenance": {
+      "source": "selector_contract_fixture",
+      "coverage_group": "ten_pair_core_polarity_variants"
+    },
+    "replacement_policy": {
+      "replaceable": true,
+      "requires_same_slot_key": true
+    },
+    "forbidden_public_fields": ["raw_scores", "percentiles", "normal_curve", "user_confirmed_type", "fixed_type"],
+    "review_status": "fixture_only",
+    "public_payload": {
+      "title_zh": "fixture only",
+      "summary_zh": "fixture only",
+      "body_zh": "fixture only"
+    },
+    "internal_metadata": {
+      "fixture_id": "coupling_n_o"
+    }
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_asset.v0.1",
+    "asset_key": "fixture.share_safety.safe_quote",
+    "registry_key": "share_safety_registry",
+    "module_key": "module_08_share_save",
+    "block_key": "module_08_share_save.fixture_safe_quote",
+    "block_kind": "share_save",
+    "slot_key": "share_save.safe_quote",
+    "trigger": {
+      "trait_bands": [],
+      "facet_patterns": [],
+      "coupling_keys": [],
+      "triple_patterns": [],
+      "interpretation_scopes": ["share_safe_summary_only"],
+      "norm_status": ["calibrated"],
+      "quality_status": ["acceptable"],
+      "scenario": ["share"],
+      "feedback_state": ["none"],
+      "reading_mode": ["quick"]
+    },
+    "priority": 65,
+    "mutual_exclusion_group": "share_safe_quote",
+    "can_stack_with": ["boundary_registry"],
+    "reading_modes": ["quick"],
+    "scenario": "share",
+    "scope": "share_safe_summary_only",
+    "required_evidence_level": "descriptive",
+    "evidence_level": "descriptive",
+    "safety_level": "share_safe",
+    "shareable": true,
+    "shareable_policy": "required_for_every_shareable_true_block",
+    "fallback_policy": "share_safe_summary_only",
+    "content_source": "fixture",
+    "provenance": {
+      "source": "selector_contract_fixture",
+      "coverage_group": "share_transforms_forbidden_fields_safe_quote_pool"
+    },
+    "replacement_policy": {
+      "replaceable": true,
+      "requires_same_slot_key": true
+    },
+    "forbidden_public_fields": ["raw_scores", "percentiles", "normal_curve", "user_confirmed_type", "fixed_type"],
+    "review_status": "fixture_only",
+    "public_payload": {
+      "title_zh": "fixture only",
+      "summary_zh": "fixture only"
+    },
+    "internal_metadata": {
+      "fixture_id": "share_safety_safe_quote"
+    }
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_asset.v0.1",
+    "asset_key": "fixture.boundary.non_diagnostic",
+    "registry_key": "boundary_registry",
+    "module_key": "module_00_trust_bar",
+    "block_key": "module_00_trust_bar.fixture_boundary",
+    "block_kind": "trust_bar",
+    "slot_key": "trust_bar.boundary_core",
+    "trigger": {
+      "trait_bands": [],
+      "facet_patterns": [],
+      "coupling_keys": [],
+      "triple_patterns": [],
+      "interpretation_scopes": ["clear_signature", "mixed_signature", "low_quality"],
+      "norm_status": ["calibrated", "unavailable"],
+      "quality_status": ["acceptable", "low_quality"],
+      "scenario": ["global"],
+      "feedback_state": ["none"],
+      "reading_mode": ["quick", "standard"]
+    },
+    "priority": 100,
+    "mutual_exclusion_group": "trust_bar_boundary",
+    "can_stack_with": ["method_registry", "state_scope_registry"],
+    "reading_modes": ["quick", "standard"],
+    "scenario": "global",
+    "scope": "all",
+    "required_evidence_level": "descriptive",
+    "evidence_level": "descriptive",
+    "safety_level": "boundary",
+    "shareable": false,
+    "shareable_policy": "not_shareable",
+    "fallback_policy": "backend_required",
+    "content_source": "fixture",
+    "provenance": {
+      "source": "selector_contract_fixture",
+      "coverage_group": "core_boundary_and_trust_controls"
+    },
+    "replacement_policy": {
+      "replaceable": true,
+      "requires_same_slot_key": true
+    },
+    "forbidden_public_fields": ["raw_scores", "percentiles", "normal_curve", "user_confirmed_type", "fixed_type"],
+    "review_status": "fixture_only",
+    "public_payload": {
+      "title_zh": "fixture only",
+      "summary_zh": "fixture only"
+    },
+    "internal_metadata": {
+      "fixture_id": "boundary_non_diagnostic"
+    }
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_asset.v0.1",
+    "asset_key": "fixture.method.norm_unavailable",
+    "registry_key": "method_registry",
+    "module_key": "module_10_method_privacy",
+    "block_key": "module_10_method_privacy.fixture_method",
+    "block_kind": "method_boundary",
+    "slot_key": "method_boundary.boundary_card",
+    "trigger": {
+      "trait_bands": [],
+      "facet_patterns": [],
+      "coupling_keys": [],
+      "triple_patterns": [],
+      "interpretation_scopes": ["norm_unavailable"],
+      "norm_status": ["unavailable"],
+      "quality_status": ["acceptable"],
+      "scenario": ["global"],
+      "feedback_state": ["none"],
+      "reading_mode": ["standard"]
+    },
+    "priority": 95,
+    "mutual_exclusion_group": "method_boundary",
+    "can_stack_with": ["boundary_registry"],
+    "reading_modes": ["standard"],
+    "scenario": "global",
+    "scope": "norm_unavailable",
+    "required_evidence_level": "descriptive",
+    "evidence_level": "descriptive",
+    "safety_level": "boundary",
+    "shareable": false,
+    "shareable_policy": "not_shareable",
+    "fallback_policy": "backend_required",
+    "content_source": "fixture",
+    "provenance": {
+      "source": "selector_contract_fixture",
+      "coverage_group": "method_norm_privacy_explanation"
+    },
+    "replacement_policy": {
+      "replaceable": true,
+      "requires_same_slot_key": true
+    },
+    "forbidden_public_fields": ["raw_scores", "percentiles", "normal_curve", "user_confirmed_type", "fixed_type"],
+    "review_status": "fixture_only",
+    "public_payload": {
+      "title_zh": "fixture only",
+      "summary_zh": "fixture only"
+    },
+    "internal_metadata": {
+      "fixture_id": "method_norm_unavailable"
+    }
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_asset.v0.1",
+    "asset_key": "fixture.scenario.work",
+    "registry_key": "scenario_registry",
+    "module_key": "module_06_application_matrix",
+    "block_key": "module_06_application_matrix.fixture_work",
+    "block_kind": "application_matrix",
+    "slot_key": "application_matrix.work_card",
+    "trigger": {
+      "trait_bands": ["C.mid_low"],
+      "facet_patterns": [],
+      "coupling_keys": ["C_x_O"],
+      "triple_patterns": [],
+      "interpretation_scopes": ["mixed_signature"],
+      "norm_status": ["calibrated"],
+      "quality_status": ["acceptable"],
+      "scenario": ["work"],
+      "feedback_state": ["none"],
+      "reading_mode": ["standard", "deep"]
+    },
+    "priority": 55,
+    "mutual_exclusion_group": "scenario_work",
+    "can_stack_with": ["domain_registry", "action_plan_registry"],
+    "reading_modes": ["standard", "deep"],
+    "scenario": "work",
+    "scope": "quality_acceptable",
+    "required_evidence_level": "registry_backed",
+    "evidence_level": "registry_backed",
+    "safety_level": "standard",
+    "shareable": false,
+    "shareable_policy": "module_07_requires_share_safety_registry",
+    "fallback_policy": "omit_block",
+    "content_source": "fixture",
+    "provenance": {
+      "source": "selector_contract_fixture",
+      "coverage_group": "five_scenarios_trait_coupling_facet_triggers"
+    },
+    "replacement_policy": {
+      "replaceable": true,
+      "requires_same_slot_key": true
+    },
+    "forbidden_public_fields": ["raw_scores", "percentiles", "normal_curve", "user_confirmed_type", "fixed_type"],
+    "review_status": "fixture_only",
+    "public_payload": {
+      "title_zh": "fixture only",
+      "summary_zh": "fixture only",
+      "action_zh": "fixture only"
+    },
+    "internal_metadata": {
+      "fixture_id": "scenario_work"
+    }
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_asset.v0.1",
+    "asset_key": "fixture.action_plan.7d",
+    "registry_key": "action_plan_registry",
+    "module_key": "module_06_application_matrix",
+    "block_key": "module_06_application_matrix.fixture_action_plan",
+    "block_kind": "application_matrix",
+    "slot_key": "application_matrix.action_path",
+    "trigger": {
+      "trait_bands": ["C.mid_low"],
+      "facet_patterns": [],
+      "coupling_keys": ["C_x_O"],
+      "triple_patterns": [],
+      "interpretation_scopes": ["mixed_signature"],
+      "norm_status": ["calibrated"],
+      "quality_status": ["acceptable"],
+      "scenario": ["action"],
+      "feedback_state": ["none"],
+      "reading_mode": ["standard"]
+    },
+    "priority": 50,
+    "mutual_exclusion_group": "action_plan_path",
+    "can_stack_with": ["scenario_registry", "observation_feedback_registry"],
+    "reading_modes": ["standard"],
+    "scenario": "action",
+    "scope": "quality_acceptable",
+    "required_evidence_level": "registry_backed",
+    "evidence_level": "registry_backed",
+    "safety_level": "standard",
+    "shareable": false,
+    "shareable_policy": "not_shareable_by_default",
+    "fallback_policy": "omit_block",
+    "content_source": "fixture",
+    "provenance": {
+      "source": "selector_contract_fixture",
+      "coverage_group": "forty_eight_hour_seven_day_thirty_day_paths"
+    },
+    "replacement_policy": {
+      "replaceable": true,
+      "requires_same_slot_key": true
+    },
+    "forbidden_public_fields": ["raw_scores", "percentiles", "normal_curve", "user_confirmed_type", "fixed_type"],
+    "review_status": "fixture_only",
+    "public_payload": {
+      "title_zh": "fixture only",
+      "summary_zh": "fixture only",
+      "action_zh": "fixture only"
+    },
+    "internal_metadata": {
+      "fixture_id": "action_plan_7d"
+    }
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_asset.v0.1",
+    "asset_key": "fixture.observation_feedback.module_response",
+    "registry_key": "observation_feedback_registry",
+    "module_key": "module_09_feedback_data_flywheel",
+    "block_key": "module_09_feedback_data_flywheel.fixture_feedback",
+    "block_kind": "feedback_block",
+    "slot_key": "feedback_block.feedback_prompt",
+    "trigger": {
+      "trait_bands": [],
+      "facet_patterns": [],
+      "coupling_keys": [],
+      "triple_patterns": [],
+      "interpretation_scopes": ["mixed_signature"],
+      "norm_status": ["calibrated"],
+      "quality_status": ["acceptable"],
+      "scenario": ["feedback"],
+      "feedback_state": ["module_impression"],
+      "reading_mode": ["quick", "standard"]
+    },
+    "priority": 45,
+    "mutual_exclusion_group": "feedback_prompt",
+    "can_stack_with": ["state_scope_registry", "action_plan_registry"],
+    "reading_modes": ["quick", "standard"],
+    "scenario": "feedback",
+    "scope": "all",
+    "required_evidence_level": "descriptive",
+    "evidence_level": "descriptive",
+    "safety_level": "boundary",
+    "shareable": false,
+    "shareable_policy": "not_shareable",
+    "fallback_policy": "backend_required",
+    "content_source": "fixture",
+    "provenance": {
+      "source": "selector_contract_fixture",
+      "coverage_group": "module_coupling_facet_action_feedback"
+    },
+    "replacement_policy": {
+      "replaceable": true,
+      "requires_same_slot_key": true
+    },
+    "forbidden_public_fields": ["raw_scores", "percentiles", "normal_curve", "user_confirmed_type", "fixed_type"],
+    "review_status": "fixture_only",
+    "public_payload": {
+      "title_zh": "fixture only",
+      "summary_zh": "fixture only"
+    },
+    "internal_metadata": {
+      "fixture_id": "observation_feedback_module_response"
+    }
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_asset.v0.1",
+    "asset_key": "fixture.triple_pattern.high_value",
+    "registry_key": "triple_pattern_registry",
+    "module_key": "module_04_coupling",
+    "block_key": "module_04_coupling.fixture_triple_pattern",
+    "block_kind": "coupling_cards",
+    "slot_key": "coupling_cards.triple_pattern",
+    "trigger": {
+      "trait_bands": ["N.high", "O.mid_high", "E.low"],
+      "facet_patterns": [],
+      "coupling_keys": ["N_x_O", "O_x_E"],
+      "triple_patterns": ["N_high_O_high_E_low"],
+      "interpretation_scopes": ["high_tension_profile"],
+      "norm_status": ["calibrated"],
+      "quality_status": ["acceptable"],
+      "scenario": ["global"],
+      "feedback_state": ["none"],
+      "reading_mode": ["deep"]
+    },
+    "priority": 35,
+    "mutual_exclusion_group": "triple_pattern",
+    "can_stack_with": ["coupling_registry", "scenario_registry"],
+    "reading_modes": ["deep"],
+    "scenario": "global",
+    "scope": "high_tension_profile",
+    "required_evidence_level": "computed",
+    "evidence_level": "computed",
+    "safety_level": "standard",
+    "shareable": false,
+    "shareable_policy": "not_shareable_unless_rewritten_by_share_safety_registry",
+    "fallback_policy": "omit_block",
+    "content_source": "fixture",
+    "provenance": {
+      "source": "selector_contract_fixture",
+      "coverage_group": "high_value_three_domain_combinations"
+    },
+    "replacement_policy": {
+      "replaceable": true,
+      "requires_same_slot_key": true
+    },
+    "forbidden_public_fields": ["raw_scores", "percentiles", "normal_curve", "user_confirmed_type", "fixed_type"],
+    "review_status": "fixture_only",
+    "public_payload": {
+      "title_zh": "fixture only",
+      "summary_zh": "fixture only",
+      "body_zh": "fixture only"
+    },
+    "internal_metadata": {
+      "fixture_id": "triple_pattern_high_value"
+    }
+  }
+]
