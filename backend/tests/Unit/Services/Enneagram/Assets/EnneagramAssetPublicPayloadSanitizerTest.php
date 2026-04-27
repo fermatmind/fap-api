@@ -44,4 +44,20 @@ final class EnneagramAssetPublicPayloadSanitizerTest extends TestCase
         $this->assertSame($item['micro_discrimination_prompt'], $payload['micro_discrimination_prompt']);
         $this->assertSame([], $sanitizer->internalMetadataLeaks($payload));
     }
+
+    public function test_it_preserves_scene_safe_fields_for_1r_g_preview_payloads(): void
+    {
+        $this->skipWhenBatchGMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $sanitizer = app(EnneagramAssetPublicPayloadSanitizer::class);
+        $item = $loader->load($this->batchGPath())['items'][0];
+
+        $payload = $sanitizer->sanitizeItem($item);
+
+        $this->assertSame('student_group_project', $payload['scene_axis']);
+        $this->assertSame($item['scene_domain'], $payload['scene_domain']);
+        $this->assertSame($item['scene_label_zh'], $payload['scene_label_zh']);
+        $this->assertSame([], $sanitizer->internalMetadataLeaks($payload));
+    }
 }

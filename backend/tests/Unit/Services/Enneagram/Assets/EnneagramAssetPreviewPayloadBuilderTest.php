@@ -177,4 +177,47 @@ final class EnneagramAssetPreviewPayloadBuilderTest extends TestCase
             $this->assertArrayHasKey('micro_discrimination_prompt', (array) data_get($pairModules[0], 'content'));
         }
     }
+
+    public function test_it_builds_1r_g_scene_localization_matrix_without_internal_metadata(): void
+    {
+        $this->skipWhenAssetsMissing();
+        $this->skipWhenBatchCMissing();
+        $this->skipWhenBatchDMissing();
+        $this->skipWhenBatchEMissing();
+        $this->skipWhenBatchFMissing();
+        $this->skipWhenBatchGMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $merged = app(EnneagramAssetMergeResolver::class)->resolveStreams(
+            $loader->load($this->batchAPath()),
+            $loader->load($this->batchBPath()),
+            $loader->load($this->batchCPath()),
+            $loader->load($this->batchDPath()),
+            $loader->load($this->batchEPath()),
+            $loader->load($this->batchFPath()),
+            $loader->load($this->batchGPath()),
+        );
+        $payloads = app(EnneagramAssetPreviewPayloadBuilder::class)->buildSceneLocalizationMatrix($merged);
+        $sanitizer = app(EnneagramAssetPublicPayloadSanitizer::class);
+
+        $this->assertCount(162, $payloads);
+
+        foreach ($payloads as $payload) {
+            $this->assertTrue($payload['preview_mode']);
+            $this->assertFalse($payload['production_import_allowed']);
+            $this->assertFalse($payload['full_replacement_allowed']);
+            $this->assertSame([], $payload['blocked_reasons']);
+            $this->assertSame([], $sanitizer->internalMetadataLeaks($payload));
+            $sceneModules = array_values(array_filter(
+                (array) ($payload['modules'] ?? []),
+                static fn (array $module): bool => data_get($module, 'content.category') === 'scene_localization_response'
+            ));
+
+            $this->assertCount(1, $sceneModules);
+            $this->assertStringContainsString('1R_G', (string) data_get($sceneModules[0], 'content.asset_key'));
+            $this->assertArrayHasKey('scene_axis', (array) data_get($sceneModules[0], 'content'));
+            $this->assertArrayHasKey('scene_domain', (array) data_get($sceneModules[0], 'content'));
+            $this->assertArrayHasKey('scene_label_zh', (array) data_get($sceneModules[0], 'content'));
+        }
+    }
 }
