@@ -30,6 +30,8 @@ if [[ "${RUN_BIG5_OCEAN_GATE}" != "1" ]]; then
 fi
 
 echo "[CI][scales] validating BIG5 compiled evidence"
+echo "[CI][scales] regenerating BIG5_OCEAN v1 compiled artifacts from raw sources"
+(cd "${BACKEND_DIR}" && php artisan content:compile --pack=BIG5_OCEAN --pack-version=v1)
 MANIFEST_PATH="${BACKEND_DIR}/content_packs/BIG5_OCEAN/v1/compiled/manifest.json"
 if [[ ! -f "${MANIFEST_PATH}" ]]; then
   echo "[CI][scales][FAIL] missing BIG5 compiled manifest: ${MANIFEST_PATH}" >&2

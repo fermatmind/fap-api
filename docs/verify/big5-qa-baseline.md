@@ -45,6 +45,12 @@ Current CI source:
 - `.github/workflows/deploy.yml` sets `RUN_BIG5_OCEAN_GATE=1` before deploy verification.
 - `backend/scripts/ci_verify_mbti.sh` runs the Big Five gate by executing `content:lint`, `content:compile`, `verify_big5_norms.sh`, and `php artisan test --filter '(BigFive|Big5|NonMbtiReportContractRegressionTest)'`.
 
+Repository convention:
+
+- `backend/content_packs/BIG5_OCEAN/v1/compiled/*` is generated evidence, not source-of-truth. The source-of-truth for that pack version is `backend/content_packs/BIG5_OCEAN/v1/raw/*`.
+- CI must regenerate `BIG5_OCEAN/v1/compiled/*` with `php artisan content:compile --pack=BIG5_OCEAN --pack-version=v1` before validating compiled evidence or running the Big Five gate.
+- `backend/content_packs/BIG5_OCEAN/v1-form-90/compiled/*` is outside this change. It remains versioned until a separate raw-source and compile contract exists for that form.
+
 Release-freeze relationship:
 
 - `backend/scripts/release_freeze_verify.sh` remains the mixed MBTI + Big Five release-freeze evidence entry.
