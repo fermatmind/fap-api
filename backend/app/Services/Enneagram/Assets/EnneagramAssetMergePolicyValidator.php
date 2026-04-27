@@ -54,6 +54,31 @@ final class EnneagramAssetMergePolicyValidator
         'close_call_pair',
     ];
 
+    public const BATCH_G_CATEGORIES = [
+        'scene_localization_response',
+    ];
+
+    public const BATCH_G_SCENE_AXES = [
+        'student_group_project',
+        'student_exam_pressure',
+        'student_dorm_relationship',
+        'student_club_collaboration',
+        'student_thesis_paper',
+        'student_job_search',
+        'early_career_internship',
+        'early_career_probation',
+        'early_career_reporting',
+        'early_career_cross_team',
+        'early_career_kpi_feedback',
+        'work_leader_changes_requirements',
+        'work_colleague_blame_shift',
+        'relationship_intimacy',
+        'relationship_family_expectation',
+        'relationship_no_reply',
+        'relationship_cold_war',
+        'relationship_conflict_repair',
+    ];
+
     /**
      * @param  array<string,mixed>  $stream
      * @return list<string>
@@ -146,6 +171,20 @@ final class EnneagramAssetMergePolicyValidator
             }
 
             $errors = array_merge($errors, $this->validatePairLibrary($items));
+        }
+
+        if ($this->isBatchG($version, $items)) {
+            if ($mode !== 'additive_branch_expansion') {
+                $errors[] = 'batch_1r_g_requires_additive_branch_expansion_mode';
+            }
+            $categories = $this->categories($items);
+            foreach ($categories as $category) {
+                if (! in_array($category, self::BATCH_G_CATEGORIES, true)) {
+                    $errors[] = 'batch_1r_g_unknown_category:'.$category;
+                }
+            }
+
+            $errors = array_merge($errors, $this->validateSceneLocalization($items));
         }
 
         return $errors;
@@ -302,6 +341,54 @@ final class EnneagramAssetMergePolicyValidator
             $errors[] = 'batch_1r_e_1r_f_category_overlap_blocked:'.implode(',', $unexpectedEF);
         }
 
+        $unexpectedAG = array_values(array_intersect(
+            $categoriesByBatch['1R-A'] ?? [],
+            $categoriesByBatch['1R-G'] ?? []
+        ));
+        if ($unexpectedAG !== []) {
+            $errors[] = 'batch_1r_a_1r_g_category_overlap_blocked:'.implode(',', $unexpectedAG);
+        }
+
+        $unexpectedBG = array_values(array_intersect(
+            $categoriesByBatch['1R-B'] ?? [],
+            $categoriesByBatch['1R-G'] ?? []
+        ));
+        if ($unexpectedBG !== []) {
+            $errors[] = 'batch_1r_b_1r_g_category_overlap_blocked:'.implode(',', $unexpectedBG);
+        }
+
+        $unexpectedCG = array_values(array_intersect(
+            $categoriesByBatch['1R-C'] ?? [],
+            $categoriesByBatch['1R-G'] ?? []
+        ));
+        if ($unexpectedCG !== []) {
+            $errors[] = 'batch_1r_c_1r_g_category_overlap_blocked:'.implode(',', $unexpectedCG);
+        }
+
+        $unexpectedDG = array_values(array_intersect(
+            $categoriesByBatch['1R-D'] ?? [],
+            $categoriesByBatch['1R-G'] ?? []
+        ));
+        if ($unexpectedDG !== []) {
+            $errors[] = 'batch_1r_d_1r_g_category_overlap_blocked:'.implode(',', $unexpectedDG);
+        }
+
+        $unexpectedEG = array_values(array_intersect(
+            $categoriesByBatch['1R-E'] ?? [],
+            $categoriesByBatch['1R-G'] ?? []
+        ));
+        if ($unexpectedEG !== []) {
+            $errors[] = 'batch_1r_e_1r_g_category_overlap_blocked:'.implode(',', $unexpectedEG);
+        }
+
+        $unexpectedFG = array_values(array_intersect(
+            $categoriesByBatch['1R-F'] ?? [],
+            $categoriesByBatch['1R-G'] ?? []
+        ));
+        if ($unexpectedFG !== []) {
+            $errors[] = 'batch_1r_f_1r_g_category_overlap_blocked:'.implode(',', $unexpectedFG);
+        }
+
         return array_values(array_unique($errors));
     }
 
@@ -423,6 +510,24 @@ final class EnneagramAssetMergePolicyValidator
     /**
      * @param  list<array<string,mixed>>  $items
      */
+    private function isBatchG(string $version, array $items): bool
+    {
+        if (str_contains($version, '1R-G')) {
+            return true;
+        }
+
+        foreach ($items as $item) {
+            if (trim((string) ($item['scene_axis'] ?? '')) !== '') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $items
+     */
     private function batchKey(string $version, array $items): string
     {
         if ($this->isBatchA($version, $items)) {
@@ -442,6 +547,9 @@ final class EnneagramAssetMergePolicyValidator
         }
         if ($this->isBatchF($version, $items)) {
             return '1R-F';
+        }
+        if ($this->isBatchG($version, $items)) {
+            return '1R-G';
         }
 
         return '';
@@ -515,6 +623,59 @@ final class EnneagramAssetMergePolicyValidator
 
         foreach (array_values(array_diff($actual, $expected)) as $unexpected) {
             $errors[] = 'batch_1r_f_unexpected_canonical_pair_key:'.$unexpected;
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $items
+     * @return list<string>
+     */
+    private function validateSceneLocalization(array $items): array
+    {
+        $errors = [];
+        $expectedKeys = [];
+        for ($type = 1; $type <= 9; $type++) {
+            foreach (self::BATCH_G_SCENE_AXES as $axis) {
+                $expectedKeys[] = $type.':'.$axis;
+            }
+        }
+
+        $seen = [];
+        foreach ($items as $index => $item) {
+            $typeId = trim((string) ($item['type_id'] ?? ''));
+            $sceneAxis = trim((string) ($item['scene_axis'] ?? ''));
+
+            if (! ctype_digit($typeId) || (int) $typeId < 1 || (int) $typeId > 9) {
+                $errors[] = 'batch_1r_g_invalid_type_id:item_'.$index;
+
+                continue;
+            }
+
+            if (! in_array($sceneAxis, self::BATCH_G_SCENE_AXES, true)) {
+                $errors[] = 'batch_1r_g_invalid_scene_axis:item_'.$index;
+
+                continue;
+            }
+
+            $key = $typeId.':'.$sceneAxis;
+            if (isset($seen[$key])) {
+                $errors[] = 'batch_1r_g_duplicate_type_scene_axis:'.$key;
+            }
+            $seen[$key] = true;
+        }
+
+        $actualKeys = array_keys($seen);
+        sort($actualKeys);
+        sort($expectedKeys);
+
+        foreach (array_values(array_diff($expectedKeys, $actualKeys)) as $missing) {
+            $errors[] = 'batch_1r_g_missing_type_scene_axis:'.$missing;
+        }
+
+        foreach (array_values(array_diff($actualKeys, $expectedKeys)) as $unexpected) {
+            $errors[] = 'batch_1r_g_unexpected_type_scene_axis:'.$unexpected;
         }
 
         return $errors;

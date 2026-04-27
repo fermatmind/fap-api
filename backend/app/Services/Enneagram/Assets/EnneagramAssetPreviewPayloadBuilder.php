@@ -51,6 +51,27 @@ final class EnneagramAssetPreviewPayloadBuilder
         'next_step_convergence',
     ];
 
+    private const SCENE_AXES = [
+        'student_group_project',
+        'student_exam_pressure',
+        'student_dorm_relationship',
+        'student_club_collaboration',
+        'student_thesis_paper',
+        'student_job_search',
+        'early_career_internship',
+        'early_career_probation',
+        'early_career_reporting',
+        'early_career_cross_team',
+        'early_career_kpi_feedback',
+        'work_leader_changes_requirements',
+        'work_colleague_blame_shift',
+        'relationship_intimacy',
+        'relationship_family_expectation',
+        'relationship_no_reply',
+        'relationship_cold_war',
+        'relationship_conflict_repair',
+    ];
+
     public function __construct(
         private readonly EnneagramAssetSelector $selector,
         private readonly EnneagramAssetPublicPayloadSanitizer $sanitizer,
@@ -213,6 +234,45 @@ final class EnneagramAssetPreviewPayloadBuilder
         usort($payloads, static function (array $left, array $right): int {
             return ((string) data_get($left, 'preview_context.pair_key', ''))
                 <=> ((string) data_get($right, 'preview_context.pair_key', ''));
+        });
+
+        return $payloads;
+    }
+
+    /**
+     * @param  array<string,mixed>  $merged
+     * @return list<array<string,mixed>>
+     */
+    public function buildSceneLocalizationMatrix(array $merged): array
+    {
+        $payloads = [];
+        foreach ((array) ($merged['items'] ?? []) as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+            if ((string) ($item['_preview_batch'] ?? '') !== '1R-G') {
+                continue;
+            }
+            if (trim((string) ($item['category'] ?? '')) !== 'scene_localization_response') {
+                continue;
+            }
+
+            $payloads[] = $this->build($merged, $this->contextForSceneItem($item));
+        }
+
+        usort($payloads, static function (array $left, array $right): int {
+            $leftKey = sprintf(
+                '%s:%s',
+                (string) data_get($left, 'preview_context.type_id', ''),
+                (string) data_get($left, 'preview_context.scene_axis', '')
+            );
+            $rightKey = sprintf(
+                '%s:%s',
+                (string) data_get($right, 'preview_context.type_id', ''),
+                (string) data_get($right, 'preview_context.scene_axis', '')
+            );
+
+            return $leftKey <=> $rightKey;
         });
 
         return $payloads;
@@ -579,6 +639,64 @@ final class EnneagramAssetPreviewPayloadBuilder
             'selected_form_kind' => 'likert',
             'methodology_variant' => 'asset_preview_only',
             'body_context' => 'matching_close_call_pair',
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     * @return array<string,mixed>
+     */
+    public function contextForSceneItem(array $item): array
+    {
+        $appliesTo = is_array($item['applies_to'] ?? null) ? $item['applies_to'] : [];
+        $typeId = trim((string) ($item['type_id'] ?? ''));
+        $sceneAxis = trim((string) ($item['scene_axis'] ?? ''));
+        $sceneDomain = trim((string) ($item['scene_domain'] ?? ''));
+        $scope = $this->preferredAllowedValue(
+            $appliesTo,
+            'interpretation_scope',
+            ['clear', 'close_call', 'diffuse', 'low_quality']
+        );
+        $confidence = $this->preferredAllowedValue(
+            $appliesTo,
+            'confidence_level',
+            ['high_confidence', 'medium_confidence', 'low_confidence', 'any']
+        );
+        $scoreProfile = $this->preferredAllowedValue(
+            $appliesTo,
+            'score_profile',
+            ['high_primary_clear', 'top2_close_call', 'top3_flat', 'broad_distribution', 'any']
+        );
+        $scenario = $this->preferredAllowedValue(
+            $appliesTo,
+            'scenario',
+            ['scene_localization_context', 'student_context', 'work_context', 'relationship_context', 'self_observation', 'any']
+        );
+        $userSignal = $this->preferredAllowedValue(
+            $appliesTo,
+            'user_signal',
+            ['scene_resonance', 'context_specific', 'self_observation', 'any']
+        );
+        $audienceSegment = $this->preferredAllowedValue(
+            $appliesTo,
+            'audience_segment',
+            ['student', 'early_career', 'relationship_focus', 'work_focus', 'general', 'any']
+        );
+
+        return [
+            'type_id' => $typeId,
+            'scene_axis' => in_array($sceneAxis, self::SCENE_AXES, true) ? $sceneAxis : '',
+            'scene_domain' => $sceneDomain,
+            'interpretation_scope' => $scope !== '' && $scope !== 'any' ? $scope : 'clear',
+            'confidence_level' => $confidence !== '' && $confidence !== 'any' ? $confidence : 'medium_confidence',
+            'score_profile' => $scoreProfile !== '' && $scoreProfile !== 'any' ? $scoreProfile : 'high_primary_clear',
+            'scenario' => $scenario !== '' && $scenario !== 'any' ? $scenario : 'scene_localization_context',
+            'user_signal' => $userSignal !== '' && $userSignal !== 'any' ? $userSignal : 'scene_resonance',
+            'audience_segment' => $audienceSegment !== '' && $audienceSegment !== 'any' ? $audienceSegment : 'general',
+            'selected_form' => 'enneagram_likert_105',
+            'selected_form_kind' => 'likert',
+            'methodology_variant' => 'asset_preview_only',
+            'body_context' => 'matching_scene_localization_signal',
         ];
     }
 

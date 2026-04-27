@@ -59,6 +59,9 @@ final class EnneagramAssetPublicPayloadSanitizer
         'day7_convergence_prompt',
         'fallback',
         'directional',
+        'scene_axis',
+        'scene_domain',
+        'scene_label_zh',
     ];
 
     /**

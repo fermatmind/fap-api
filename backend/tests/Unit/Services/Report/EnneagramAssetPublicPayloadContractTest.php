@@ -74,4 +74,45 @@ final class EnneagramAssetPublicPayloadContractTest extends TestCase
         $this->assertArrayNotHasKey('qa_note', $content);
         $this->assertArrayNotHasKey('safety_note', $content);
     }
+
+    public function test_public_preview_payload_exposes_scene_safe_fields_without_internal_metadata(): void
+    {
+        $this->skipWhenAssetsMissing();
+        $this->skipWhenBatchCMissing();
+        $this->skipWhenBatchDMissing();
+        $this->skipWhenBatchEMissing();
+        $this->skipWhenBatchFMissing();
+        $this->skipWhenBatchGMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $merged = app(EnneagramAssetMergeResolver::class)->resolveStreams(
+            $loader->load($this->batchAPath()),
+            $loader->load($this->batchBPath()),
+            $loader->load($this->batchCPath()),
+            $loader->load($this->batchDPath()),
+            $loader->load($this->batchEPath()),
+            $loader->load($this->batchFPath()),
+            $loader->load($this->batchGPath()),
+        );
+        $batchGItem = $loader->load($this->batchGPath())['items'][0];
+        $payload = app(EnneagramAssetPreviewPayloadBuilder::class)->build(
+            $merged,
+            app(EnneagramAssetPreviewPayloadBuilder::class)->contextForSceneItem($batchGItem)
+        );
+        $sanitizer = app(EnneagramAssetPublicPayloadSanitizer::class);
+
+        $this->assertSame([], $sanitizer->internalMetadataLeaks($payload));
+        $sceneModule = collect((array) $payload['modules'])
+            ->first(fn (array $module): bool => data_get($module, 'content.category') === 'scene_localization_response');
+
+        $this->assertIsArray($sceneModule);
+        $content = (array) ($sceneModule['content'] ?? []);
+        $this->assertSame('student_group_project', $content['scene_axis']);
+        $this->assertSame('student', $content['scene_domain']);
+        $this->assertSame('小组作业', $content['scene_label_zh']);
+        $this->assertArrayNotHasKey('selection_guidance', $content);
+        $this->assertArrayNotHasKey('editor_note', $content);
+        $this->assertArrayNotHasKey('qa_note', $content);
+        $this->assertArrayNotHasKey('safety_note', $content);
+    }
 }

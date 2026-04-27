@@ -19,6 +19,7 @@ final class EnneagramAssetItemStreamValidatorTest extends TestCase
         $this->skipWhenBatchDMissing();
         $this->skipWhenBatchEMissing();
         $this->skipWhenBatchFMissing();
+        $this->skipWhenBatchGMissing();
 
         $loader = app(EnneagramAssetItemStreamLoader::class);
         $validator = app(EnneagramAssetItemStreamValidator::class);
@@ -29,6 +30,7 @@ final class EnneagramAssetItemStreamValidatorTest extends TestCase
         $batchDReport = $validator->validate($loader->load($this->batchDPath()));
         $batchEReport = $validator->validate($loader->load($this->batchEPath()));
         $batchFReport = $validator->validate($loader->load($this->batchFPath()));
+        $batchGReport = $validator->validate($loader->load($this->batchGPath()));
 
         $this->assertSame('PASS', $batchAReport['status']);
         $this->assertSame('PASS', $batchBReport['status']);
@@ -36,30 +38,35 @@ final class EnneagramAssetItemStreamValidatorTest extends TestCase
         $this->assertSame('PASS', $batchDReport['status']);
         $this->assertSame('PASS', $batchEReport['status']);
         $this->assertSame('PASS', $batchFReport['status']);
+        $this->assertSame('PASS', $batchGReport['status']);
         $this->assertSame(315, $batchAReport['asset_count']);
         $this->assertSame(423, $batchBReport['asset_count']);
         $this->assertSame(108, $batchCReport['asset_count']);
         $this->assertSame(90, $batchDReport['asset_count']);
         $this->assertSame(108, $batchEReport['asset_count']);
         $this->assertSame(36, $batchFReport['asset_count']);
+        $this->assertSame(162, $batchGReport['asset_count']);
         $this->assertFalse($batchAReport['production_import_allowed']);
         $this->assertFalse($batchBReport['production_import_allowed']);
         $this->assertFalse($batchCReport['production_import_allowed']);
         $this->assertFalse($batchDReport['production_import_allowed']);
         $this->assertFalse($batchEReport['production_import_allowed']);
         $this->assertFalse($batchFReport['production_import_allowed']);
+        $this->assertFalse($batchGReport['production_import_allowed']);
         $this->assertTrue($batchAReport['staging_preview_allowed']);
         $this->assertTrue($batchBReport['staging_preview_allowed']);
         $this->assertTrue($batchCReport['staging_preview_allowed']);
         $this->assertTrue($batchDReport['staging_preview_allowed']);
         $this->assertTrue($batchEReport['staging_preview_allowed']);
         $this->assertTrue($batchFReport['staging_preview_allowed']);
+        $this->assertTrue($batchGReport['staging_preview_allowed']);
         $this->assertFalse($batchAReport['full_replacement_allowed']);
         $this->assertFalse($batchBReport['full_replacement_allowed']);
         $this->assertFalse($batchCReport['full_replacement_allowed']);
         $this->assertFalse($batchDReport['full_replacement_allowed']);
         $this->assertFalse($batchEReport['full_replacement_allowed']);
         $this->assertFalse($batchFReport['full_replacement_allowed']);
+        $this->assertFalse($batchGReport['full_replacement_allowed']);
 
         foreach ([
             'core_motivation',
@@ -95,7 +102,12 @@ final class EnneagramAssetItemStreamValidatorTest extends TestCase
             ['close_call_pair' => 36],
             data_get($batchFReport, 'counts.category_counts')
         );
+        $this->assertSame(
+            ['scene_localization_response' => 162],
+            data_get($batchGReport, 'counts.category_counts')
+        );
         $this->assertSame([], $batchFReport['blocked_reasons']);
+        $this->assertSame([], $batchGReport['blocked_reasons']);
     }
 
     public function test_it_blocks_duplicate_key_banned_phrase_and_full_replacement(): void
@@ -207,6 +219,28 @@ final class EnneagramAssetItemStreamValidatorTest extends TestCase
         $this->assertSame('FAIL', $report['status']);
         $this->assertStringContainsString('full_replacement_blocked', $blocked);
         $this->assertStringContainsString('batch_1r_f_requires_pair_library_completion_mode', $blocked);
+        $this->assertStringContainsString('production_import_allowed_must_be_false_for_phase_0', $blocked);
+        $this->assertStringContainsString('staging_preview_allowed_must_be_true_for_phase_0', $blocked);
+    }
+
+    public function test_it_blocks_1r_g_if_treated_as_full_replacement(): void
+    {
+        $this->skipWhenBatchGMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $validator = app(EnneagramAssetItemStreamValidator::class);
+        $stream = $loader->load($this->batchGPath());
+        $stream['metadata']['replacement_policy']['mode'] = 'full_replacement';
+        $stream['metadata']['import_policy'] = 'production_full_replacement';
+        $stream['metadata']['preflight_self_check']['production_import_allowed'] = true;
+        $stream['metadata']['preflight_self_check']['staging_merge_preview_allowed'] = false;
+
+        $report = $validator->validate($stream);
+        $blocked = implode('|', $report['blocked_reasons']);
+
+        $this->assertSame('FAIL', $report['status']);
+        $this->assertStringContainsString('full_replacement_blocked', $blocked);
+        $this->assertStringContainsString('batch_1r_g_requires_additive_branch_expansion_mode', $blocked);
         $this->assertStringContainsString('production_import_allowed_must_be_false_for_phase_0', $blocked);
         $this->assertStringContainsString('staging_preview_allowed_must_be_true_for_phase_0', $blocked);
     }

@@ -161,4 +161,39 @@ final class EnneagramAssetSelectorTest extends TestCase
             $reverseSelected['close_call_pair']['asset_key']
         );
     }
+
+    public function test_it_selects_1r_g_scene_localization_branch_for_matching_scene_axis(): void
+    {
+        $this->skipWhenAssetsMissing();
+        $this->skipWhenBatchCMissing();
+        $this->skipWhenBatchDMissing();
+        $this->skipWhenBatchEMissing();
+        $this->skipWhenBatchFMissing();
+        $this->skipWhenBatchGMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $merged = app(EnneagramAssetMergeResolver::class)->resolveStreams(
+            $loader->load($this->batchAPath()),
+            $loader->load($this->batchBPath()),
+            $loader->load($this->batchCPath()),
+            $loader->load($this->batchDPath()),
+            $loader->load($this->batchEPath()),
+            $loader->load($this->batchFPath()),
+            $loader->load($this->batchGPath()),
+        );
+        $batchGItem = collect((array) ($merged['items'] ?? []))
+            ->first(static fn (array $item): bool => ($item['_preview_batch'] ?? null) === '1R-G'
+                && ($item['type_id'] ?? null) === '1'
+                && ($item['scene_axis'] ?? null) === 'student_group_project');
+
+        $this->assertIsArray($batchGItem);
+
+        $context = app(EnneagramAssetPreviewPayloadBuilder::class)->contextForSceneItem($batchGItem);
+        $selected = app(EnneagramAssetSelector::class)->selectByCategory($merged, $context);
+
+        $this->assertArrayHasKey('scene_localization_response', $selected);
+        $this->assertSame('1R-G', $selected['scene_localization_response']['_preview_batch']);
+        $this->assertSame('student_group_project', $selected['scene_localization_response']['scene_axis']);
+        $this->assertStringContainsString('1R_G', $selected['scene_localization_response']['asset_key']);
+    }
 }
