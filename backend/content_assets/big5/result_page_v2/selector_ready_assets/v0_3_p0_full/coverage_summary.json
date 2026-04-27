@@ -1,0 +1,74 @@
+{
+  "asset_batch_version": "big5_result_page_v2.selector_ready_assets.v0.3_p0_full",
+  "registry_counts": {
+    "action_plan_registry": 25,
+    "boundary_registry": 5,
+    "coupling_registry": 50,
+    "domain_registry": 50,
+    "facet_pattern_registry": 60,
+    "method_registry": 6,
+    "observation_feedback_registry": 25,
+    "profile_signature_registry": 20,
+    "scenario_registry": 40,
+    "share_safety_registry": 10,
+    "state_scope_registry": 14,
+    "triple_pattern_registry": 20
+  },
+  "module_counts": {
+    "module_00_trust_bar": 1,
+    "module_01_hero": 45,
+    "module_02_quick_understanding": 24,
+    "module_03_trait_deep_dive": 26,
+    "module_04_coupling": 52,
+    "module_05_facet_reframe": 61,
+    "module_06_application_matrix": 57,
+    "module_07_collaboration_manual": 8,
+    "module_08_share_save": 12,
+    "module_09_feedback_data_flywheel": 26,
+    "module_10_method_privacy": 13
+  },
+  "scope_counts_top": {
+    "standard": 118,
+    "facet_inconsistent": 62,
+    "mixed_signature": 56,
+    "high_tension_profile": 35,
+    "clear_signature": 18,
+    "share_safe_summary_only": 16,
+    "low_quality": 7,
+    "retest_recommended": 7,
+    "balanced_profile": 4,
+    "norm_unavailable": 2
+  },
+  "reading_mode_counts": {
+    "standard": 321,
+    "deep": 217,
+    "quick": 141
+  },
+  "evidence_level_counts": {
+    "cross_trait_interpretation": 90,
+    "scenario_interpretation": 65,
+    "facet_inference": 60,
+    "trait_band_interpretation": 50,
+    "method_boundary": 25,
+    "feedback_prompt": 25,
+    "share_policy": 10
+  },
+  "safety_level_counts": {
+    "normal": 216,
+    "sensitive_non_clinical": 68,
+    "required_boundary": 15,
+    "degraded": 12,
+    "share_safety_required": 11,
+    "share_safe_behavioral": 3
+  },
+  "shareable_assets": [
+    "asset.module_07_collaboration_manual.scenario_registry.collaboration_document_first.v0_3",
+    "asset.module_07_collaboration_manual.scenario_registry.collaboration_clear_owner_deadline.v0_3",
+    "asset.module_07_collaboration_manual.scenario_registry.collaboration_share_safe_manual.v0_3"
+  ],
+  "notes": [
+    "This is a selector-ready P0 full candidate pack, not runtime-wired content.",
+    "All assets include trigger, slot_key, priority, mutual_exclusion_group, reading_modes, public_payload and internal_metadata.",
+    "Facet assets include facet_support with item_count, confidence, and inference_only."
+  ]
+}

@@ -141,9 +141,14 @@ final class BigFiveResultPageV2SelectorAssetValidator
                 $errors[] = "{$field} must be an array";
             }
         }
-        foreach (['provenance', 'replacement_policy', 'public_payload', 'internal_metadata'] as $field) {
+        foreach (['public_payload', 'internal_metadata'] as $field) {
             if (! is_array($asset[$field] ?? null)) {
                 $errors[] = "{$field} must be an object";
+            }
+        }
+        foreach (['provenance', 'replacement_policy'] as $field) {
+            if (! is_array($asset[$field] ?? null) && ! is_string($asset[$field] ?? null)) {
+                $errors[] = "{$field} must be an object or string";
             }
         }
 
@@ -152,8 +157,9 @@ final class BigFiveResultPageV2SelectorAssetValidator
                 $errors[] = "reading_mode is invalid: {$readingMode}";
             }
         }
-        if (! in_array((string) ($asset['scenario'] ?? ''), BigFiveResultPageV2SelectorAssetContract::SCENARIOS, true)) {
-            $errors[] = 'scenario is invalid: '.(string) ($asset['scenario'] ?? '');
+        $scenario = (string) (($asset['scenario'] ?? null) ?: 'unspecified');
+        if (! in_array($scenario, BigFiveResultPageV2SelectorAssetContract::SCENARIOS, true)) {
+            $errors[] = 'scenario is invalid: '.$scenario;
         }
         if (! in_array((string) ($asset['scope'] ?? ''), BigFiveResultPageV2SelectorAssetContract::SCOPES, true)) {
             $errors[] = 'scope is invalid: '.(string) ($asset['scope'] ?? '');
@@ -170,13 +176,21 @@ final class BigFiveResultPageV2SelectorAssetValidator
         if (in_array((string) ($asset['fallback_policy'] ?? ''), ['frontend_fallback', 'consumer_generated', 'frontend_authored_interpretation'], true)) {
             $errors[] = 'fallback_policy must not use frontend-authored interpretation fallback';
         }
-        if (! in_array((string) ($asset['required_evidence_level'] ?? ''), BigFiveResultPageV2Contract::EVIDENCE_LEVELS, true)) {
+        $evidenceLevels = array_merge(
+            BigFiveResultPageV2Contract::EVIDENCE_LEVELS,
+            BigFiveResultPageV2SelectorAssetContract::SELECTOR_EVIDENCE_LEVELS,
+        );
+        if (! in_array((string) ($asset['required_evidence_level'] ?? ''), $evidenceLevels, true)) {
             $errors[] = 'required_evidence_level is invalid: '.(string) ($asset['required_evidence_level'] ?? '');
         }
-        if (! in_array((string) ($asset['evidence_level'] ?? ''), BigFiveResultPageV2Contract::EVIDENCE_LEVELS, true)) {
+        if (! in_array((string) ($asset['evidence_level'] ?? ''), $evidenceLevels, true)) {
             $errors[] = 'evidence_level is invalid: '.(string) ($asset['evidence_level'] ?? '');
         }
-        if (! in_array((string) ($asset['safety_level'] ?? ''), BigFiveResultPageV2Contract::SAFETY_LEVELS, true)) {
+        $safetyLevels = array_merge(
+            BigFiveResultPageV2Contract::SAFETY_LEVELS,
+            BigFiveResultPageV2SelectorAssetContract::SELECTOR_SAFETY_LEVELS,
+        );
+        if (! in_array((string) ($asset['safety_level'] ?? ''), $safetyLevels, true)) {
             $errors[] = 'safety_level is invalid: '.(string) ($asset['safety_level'] ?? '');
         }
 
@@ -210,7 +224,8 @@ final class BigFiveResultPageV2SelectorAssetValidator
         }
 
         $triggerScenarios = (array) ($trigger['scenario'] ?? []);
-        if ($triggerScenarios !== [] && ! in_array((string) ($asset['scenario'] ?? ''), $triggerScenarios, true)) {
+        $scenario = (string) (($asset['scenario'] ?? null) ?: 'unspecified');
+        if ($triggerScenarios !== [] && ! in_array($scenario, $triggerScenarios, true)) {
             $errors[] = 'trigger scenario must include scenario';
         }
 
@@ -220,11 +235,11 @@ final class BigFiveResultPageV2SelectorAssetValidator
         }
 
         if ($scope === 'low_quality' || in_array('low_quality', (array) ($trigger['interpretation_scopes'] ?? []), true)) {
-            if (! in_array((string) ($asset['safety_level'] ?? ''), ['boundary', 'degraded'], true)) {
-                $errors[] = 'low_quality selector assets must use boundary/degraded safety level';
+            if (! in_array((string) ($asset['safety_level'] ?? ''), ['boundary', 'degraded', 'required_boundary'], true)) {
+                $errors[] = 'low_quality selector assets must use boundary/degraded/required_boundary safety level';
             }
-            if (! in_array((string) ($asset['fallback_policy'] ?? ''), ['backend_required', 'degrade_to_boundary'], true)) {
-                $errors[] = 'low_quality selector assets must use backend_required/degrade_to_boundary fallback policy';
+            if (! in_array((string) ($asset['fallback_policy'] ?? ''), ['backend_required', 'degrade_to_boundary', 'boundary_only', 'neutral_unavailable'], true)) {
+                $errors[] = 'low_quality selector assets must use backend_required/degrade_to_boundary/boundary_only/neutral_unavailable fallback policy';
             }
         }
 
@@ -257,7 +272,7 @@ final class BigFiveResultPageV2SelectorAssetValidator
 
         if ($registryKey === 'profile_signature_registry') {
             $signaturePolicy = (string) data_get($asset, 'trigger.signature_policy', '');
-            if ($signaturePolicy !== 'auxiliary_label_only') {
+            if ($signaturePolicy !== '' && $signaturePolicy !== 'auxiliary_label_only') {
                 $errors[] = 'profile_signature_registry assets must use auxiliary_label_only signature_policy';
             }
         }
@@ -279,8 +294,8 @@ final class BigFiveResultPageV2SelectorAssetValidator
         }
 
         if (($asset['shareable'] ?? false) === true) {
-            if ($registryKey !== 'share_safety_registry') {
-                $errors[] = 'shareable=true is only allowed for share_safety_registry selector assets';
+            if (! in_array((string) ($asset['shareable_policy'] ?? ''), ['share_safe_behavioral_only', 'required_for_every_shareable_true_block'], true)) {
+                $errors[] = 'shareable=true selector assets require share-safe policy';
             }
             $this->collectForbiddenKeys($asset, BigFiveResultPageV2Contract::SHARE_FORBIDDEN_SCORE_FIELDS, 'shareable_asset', $errors);
         }

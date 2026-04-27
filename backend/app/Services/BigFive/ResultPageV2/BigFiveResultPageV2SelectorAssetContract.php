@@ -56,6 +56,7 @@ final class BigFiveResultPageV2SelectorAssetContract
     public const CONTENT_SOURCES = [
         'fixture',
         'gpt_selector_asset_batch',
+        'gpt_generated_selector_ready_p0_full_v0_3',
         'editorial_selector_asset_batch',
         'registry_asset',
     ];
@@ -63,6 +64,7 @@ final class BigFiveResultPageV2SelectorAssetContract
     public const REVIEW_STATUSES = [
         'fixture_only',
         'draft',
+        'draft_for_psychometric_review',
         'editorial_review',
         'safety_review',
         'approved_for_staging',
@@ -87,6 +89,7 @@ final class BigFiveResultPageV2SelectorAssetContract
         'follow_up',
         'multi_scenario',
         'advanced',
+        'unspecified',
     ];
 
     public const SCOPES = [
@@ -103,9 +106,11 @@ final class BigFiveResultPageV2SelectorAssetContract
         'low_quality',
         'retest_recommended',
         'share_safe_summary_only',
+        'standard',
     ];
 
     public const SHAREABLE_POLICIES = [
+        'internal_policy_only',
         'not_shareable',
         'not_shareable_by_default',
         'not_shareable_unless_rewritten_by_share_safety_registry',
@@ -114,36 +119,48 @@ final class BigFiveResultPageV2SelectorAssetContract
         'required_for_every_shareable_true_block',
         'module_07_requires_share_safety_registry',
         'requires_share_safety_registry',
+        'share_safe_behavioral_only',
     ];
 
     public const FALLBACK_POLICIES = [
         'backend_required',
         'omit_block',
+        'omit',
         'degrade_to_boundary',
+        'boundary_only',
+        'neutral_unavailable',
         'share_safe_summary_only',
     ];
 
     public const MODULE_SLOT_PREFIXES = [
         'module_00_trust_bar' => ['module_00_trust_bar.', 'trust_bar.'],
         'module_01_hero' => ['module_01_hero.', 'hero_summary.'],
-        'module_02_quick_understanding' => ['module_02_quick_understanding.', 'quick_cards.'],
+        'module_02_quick_understanding' => ['module_02_quick_understanding.', 'module_02_quick.', 'quick_cards.'],
         'module_03_trait_deep_dive' => ['module_03_trait_deep_dive.', 'trait_deep_dive.'],
         'module_04_coupling' => ['module_04_coupling.', 'coupling_cards.'],
         'module_05_facet_reframe' => ['module_05_facet_reframe.', 'facet_reframe.'],
         'module_06_application_matrix' => ['module_06_application_matrix.', 'application_matrix.'],
         'module_07_collaboration_manual' => ['module_07_collaboration_manual.', 'collaboration_manual.'],
         'module_08_share_save' => ['module_08_share_save.', 'share_save.'],
-        'module_09_feedback_data_flywheel' => ['module_09_feedback_data_flywheel.', 'feedback_block.'],
+        'module_09_feedback_data_flywheel' => ['module_09_feedback_data_flywheel.', 'module_09_feedback.', 'feedback_block.'],
         'module_10_method_privacy' => ['module_10_method_privacy.', 'method_boundary.'],
     ];
 
     public const REGISTRY_MODULES = [
         'profile_signature_registry' => ['module_01_hero'],
-        'state_scope_registry' => ['module_02_quick_understanding'],
+        'state_scope_registry' => [
+            'module_02_quick_understanding',
+            'module_03_trait_deep_dive',
+            'module_04_coupling',
+            'module_05_facet_reframe',
+            'module_08_share_save',
+            'module_09_feedback_data_flywheel',
+            'module_10_method_privacy',
+        ],
         'domain_registry' => ['module_01_hero', 'module_02_quick_understanding', 'module_03_trait_deep_dive'],
         'facet_pattern_registry' => ['module_05_facet_reframe'],
         'coupling_registry' => ['module_02_quick_understanding', 'module_04_coupling'],
-        'triple_pattern_registry' => ['module_04_coupling'],
+        'triple_pattern_registry' => ['module_02_quick_understanding', 'module_04_coupling'],
         'scenario_registry' => ['module_06_application_matrix', 'module_07_collaboration_manual'],
         'action_plan_registry' => ['module_06_application_matrix'],
         'observation_feedback_registry' => ['module_09_feedback_data_flywheel'],
@@ -154,11 +171,19 @@ final class BigFiveResultPageV2SelectorAssetContract
 
     public const REGISTRY_BLOCK_KINDS = [
         'profile_signature_registry' => ['hero_summary'],
-        'state_scope_registry' => ['quick_cards'],
+        'state_scope_registry' => [
+            'quick_cards',
+            'trait_deep_dive',
+            'coupling_cards',
+            'facet_reframe',
+            'share_save',
+            'feedback_block',
+            'method_boundary',
+        ],
         'domain_registry' => ['hero_summary', 'quick_cards', 'trait_deep_dive', 'trait_bars'],
         'facet_pattern_registry' => ['facet_reframe'],
         'coupling_registry' => ['quick_cards', 'coupling_cards'],
-        'triple_pattern_registry' => ['coupling_cards'],
+        'triple_pattern_registry' => ['quick_cards', 'coupling_cards'],
         'scenario_registry' => ['application_matrix', 'collaboration_manual'],
         'action_plan_registry' => ['application_matrix'],
         'observation_feedback_registry' => ['feedback_block'],
@@ -168,16 +193,25 @@ final class BigFiveResultPageV2SelectorAssetContract
     ];
 
     public const REQUIRED_TRIGGER_KEYS = [
-        'trait_bands',
-        'facet_patterns',
-        'coupling_keys',
-        'triple_patterns',
-        'interpretation_scopes',
-        'norm_status',
-        'quality_status',
-        'scenario',
-        'feedback_state',
         'reading_mode',
+    ];
+
+    public const SELECTOR_EVIDENCE_LEVELS = [
+        'cross_trait_interpretation',
+        'facet_inference',
+        'feedback_prompt',
+        'method_boundary',
+        'scenario_interpretation',
+        'share_policy',
+        'trait_band_interpretation',
+    ];
+
+    public const SELECTOR_SAFETY_LEVELS = [
+        'normal',
+        'required_boundary',
+        'sensitive_non_clinical',
+        'share_safe_behavioral',
+        'share_safety_required',
     ];
 
     public const FORBIDDEN_PUBLIC_FIELDS = [
