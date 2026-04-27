@@ -34,6 +34,7 @@ final class EnneagramPackLoader
     public function __construct(
         private ?ContentPackV2Resolver $v2Resolver,
         private ContentPathAliasResolver $pathAliasResolver,
+        private EnneagramRegistryReleaseResolver $registryReleaseResolver,
     ) {}
 
     public function packRoot(?string $version = null): string
@@ -61,9 +62,7 @@ final class EnneagramPackLoader
 
     public function registryRoot(?string $version = null): string
     {
-        $packBase = $this->pathAliasResolver->resolveBackendPackRoot(self::PACK_ID);
-
-        return rtrim($packBase, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$this->normalizeRegistryVersion($version).DIRECTORY_SEPARATOR.'registry';
+        return $this->registryReleaseResolver->runtimeRegistryRoot($version);
     }
 
     public function registryPath(string $file, ?string $version = null): string
