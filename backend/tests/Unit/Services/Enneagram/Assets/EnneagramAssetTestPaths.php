@@ -62,6 +62,15 @@ trait EnneagramAssetTestPaths
         );
     }
 
+    private function batchHPath(): string
+    {
+        return $this->resolveExternalAssetPath(
+            '/Users/rainie/Desktop/FermatMind_Enneagram_Content_Expansion_Batch_1R_H_FC144_Recommendation_Pack/FermatMind_Enneagram_Content_Expansion_Batch_1R_H_FC144_Recommendation_Pack_Assets.json',
+            '/Users/rainie/Desktop/九型/FermatMind_Enneagram_Content_Expansion_Batch_1R_H_FC144_Recommendation_Pack/FermatMind_Enneagram_Content_Expansion_Batch_1R_H_FC144_Recommendation_Pack_Assets.json',
+            '/mnt/data/FermatMind_Enneagram_Content_Expansion_Batch_1R_H_FC144_Recommendation_Pack/FermatMind_Enneagram_Content_Expansion_Batch_1R_H_FC144_Recommendation_Pack_Assets.json',
+        );
+    }
+
     private function skipWhenAssetsMissing(): void
     {
         if (! is_file($this->batchAPath()) || ! is_file($this->batchBPath())) {
@@ -101,6 +110,13 @@ trait EnneagramAssetTestPaths
     {
         if (! is_file($this->batchGPath())) {
             $this->markTestSkipped('External ENNEAGRAM 1R-G asset file is not present on this workstation.');
+        }
+    }
+
+    private function skipWhenBatchHMissing(): void
+    {
+        if (! is_file($this->batchHPath())) {
+            $this->markTestSkipped('External ENNEAGRAM 1R-H asset file is not present on this workstation.');
         }
     }
 

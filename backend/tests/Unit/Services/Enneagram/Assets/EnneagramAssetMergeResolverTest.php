@@ -113,7 +113,38 @@ final class EnneagramAssetMergeResolverTest extends TestCase
         $this->skipWhenBatchDMissing();
         $this->skipWhenBatchEMissing();
         $this->skipWhenBatchFMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $resolver = app(EnneagramAssetMergeResolver::class);
+
+        $merged = $resolver->resolveStreams(
+            $loader->load($this->batchAPath()),
+            $loader->load($this->batchBPath()),
+            $loader->load($this->batchCPath()),
+            $loader->load($this->batchDPath()),
+            $loader->load($this->batchEPath()),
+            $loader->load($this->batchFPath()),
+        );
+
+        $this->assertFalse($merged['production_import_allowed']);
+        $this->assertFalse($merged['full_replacement_allowed']);
+        $this->assertCount(1080, $merged['items']);
+        $this->assertContains('close_call_pair', data_get($merged, 'replacement_coverage.batch_1r_f_adds'));
+        $this->assertSame(
+            'enneagram_content_expansion_batch_1R_F_close_call_36_pair_completion.v1',
+            data_get($merged, 'source_versions.batch_1r_f')
+        );
+    }
+
+    public function test_it_merges_1r_a_1r_b_1r_c_1r_d_1r_e_1r_f_1r_g_and_1r_h_as_staging_preview_only(): void
+    {
+        $this->skipWhenAssetsMissing();
+        $this->skipWhenBatchCMissing();
+        $this->skipWhenBatchDMissing();
+        $this->skipWhenBatchEMissing();
+        $this->skipWhenBatchFMissing();
         $this->skipWhenBatchGMissing();
+        $this->skipWhenBatchHMissing();
 
         $loader = app(EnneagramAssetItemStreamLoader::class);
         $resolver = app(EnneagramAssetMergeResolver::class);
@@ -126,13 +157,15 @@ final class EnneagramAssetMergeResolverTest extends TestCase
             $loader->load($this->batchEPath()),
             $loader->load($this->batchFPath()),
             $loader->load($this->batchGPath()),
+            $loader->load($this->batchHPath()),
         );
 
         $this->assertFalse($merged['production_import_allowed']);
         $this->assertFalse($merged['full_replacement_allowed']);
-        $this->assertCount(1242, $merged['items']);
+        $this->assertCount(1332, $merged['items']);
         $this->assertContains('close_call_pair', data_get($merged, 'replacement_coverage.batch_1r_f_adds'));
         $this->assertContains('scene_localization_response', data_get($merged, 'replacement_coverage.batch_1r_g_adds'));
+        $this->assertContains('fc144_recommendation_response', data_get($merged, 'replacement_coverage.batch_1r_h_adds'));
         $this->assertSame(
             'enneagram_content_expansion_batch_1R_F_close_call_36_pair_completion.v1',
             data_get($merged, 'source_versions.batch_1r_f')
@@ -140,6 +173,10 @@ final class EnneagramAssetMergeResolverTest extends TestCase
         $this->assertSame(
             'enneagram_content_expansion_batch_1R_G_scene_localization.v1',
             data_get($merged, 'source_versions.batch_1r_g')
+        );
+        $this->assertSame(
+            'enneagram_content_expansion_batch_1R_H_fc144_recommendation.v1',
+            data_get($merged, 'source_versions.batch_1r_h')
         );
     }
 }

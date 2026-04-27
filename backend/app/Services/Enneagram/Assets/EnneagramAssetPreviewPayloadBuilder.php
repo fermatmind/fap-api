@@ -72,6 +72,19 @@ final class EnneagramAssetPreviewPayloadBuilder
         'relationship_conflict_repair',
     ];
 
+    private const FC144_RECOMMENDATION_CONTEXTS = [
+        'clear_high_resonance',
+        'close_call_top2',
+        'diffuse_top3',
+        'low_quality',
+        'low_resonance',
+        'partial_resonance',
+        'after_pair_comparison',
+        'after_scene_localization',
+        'high_engagement_deep_reader',
+        'paid_preview_teaser',
+    ];
+
     public function __construct(
         private readonly EnneagramAssetSelector $selector,
         private readonly EnneagramAssetPublicPayloadSanitizer $sanitizer,
@@ -270,6 +283,45 @@ final class EnneagramAssetPreviewPayloadBuilder
                 '%s:%s',
                 (string) data_get($right, 'preview_context.type_id', ''),
                 (string) data_get($right, 'preview_context.scene_axis', '')
+            );
+
+            return $leftKey <=> $rightKey;
+        });
+
+        return $payloads;
+    }
+
+    /**
+     * @param  array<string,mixed>  $merged
+     * @return list<array<string,mixed>>
+     */
+    public function buildFc144RecommendationMatrix(array $merged): array
+    {
+        $payloads = [];
+        foreach ((array) ($merged['items'] ?? []) as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+            if ((string) ($item['_preview_batch'] ?? '') !== '1R-H') {
+                continue;
+            }
+            if (trim((string) ($item['category'] ?? '')) !== 'fc144_recommendation_response') {
+                continue;
+            }
+
+            $payloads[] = $this->build($merged, $this->contextForFc144RecommendationItem($item));
+        }
+
+        usort($payloads, static function (array $left, array $right): int {
+            $leftKey = sprintf(
+                '%s:%s',
+                (string) data_get($left, 'preview_context.type_id', ''),
+                (string) data_get($left, 'preview_context.fc144_recommendation_context', '')
+            );
+            $rightKey = sprintf(
+                '%s:%s',
+                (string) data_get($right, 'preview_context.type_id', ''),
+                (string) data_get($right, 'preview_context.fc144_recommendation_context', '')
             );
 
             return $leftKey <=> $rightKey;
@@ -697,6 +749,63 @@ final class EnneagramAssetPreviewPayloadBuilder
             'selected_form_kind' => 'likert',
             'methodology_variant' => 'asset_preview_only',
             'body_context' => 'matching_scene_localization_signal',
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $item
+     * @return array<string,mixed>
+     */
+    public function contextForFc144RecommendationItem(array $item): array
+    {
+        $appliesTo = is_array($item['applies_to'] ?? null) ? $item['applies_to'] : [];
+        $typeId = trim((string) ($item['type_id'] ?? ''));
+        $recommendationContext = trim((string) ($item['fc144_recommendation_context'] ?? ''));
+        $scope = $this->preferredAllowedValue(
+            $appliesTo,
+            'interpretation_scope',
+            ['clear', 'close_call', 'diffuse', 'low_quality']
+        );
+        $confidence = $this->preferredAllowedValue(
+            $appliesTo,
+            'confidence_level',
+            ['high_confidence', 'medium_confidence', 'low_confidence', 'any']
+        );
+        $scoreProfile = $this->preferredAllowedValue(
+            $appliesTo,
+            'score_profile',
+            ['high_primary_clear', 'top2_close_call', 'top3_flat', 'low_quality_signal', 'broad_distribution', 'any']
+        );
+        $scenario = $this->preferredAllowedValue(
+            $appliesTo,
+            'scenario',
+            ['deep_reading', 'comparison', 'scene_localization_context', 'quality_boundary', 'self_observation', 'paid_conversion', 'any']
+        );
+        $userSignal = $this->preferredAllowedValue(
+            $appliesTo,
+            'user_signal',
+            ['high_resonance', 'partial_resonance', 'low_resonance', 'low_quality', 'scene_resonance', 'high_engagement_deep_reader', 'paid_preview_interest', 'any']
+        );
+        $audienceSegment = $this->preferredAllowedValue(
+            $appliesTo,
+            'audience_segment',
+            ['deep_reader', 'paid_intent', 'returning_user', 'general', 'any']
+        );
+
+        return [
+            'type_id' => $typeId,
+            'fc144_recommendation_context' => in_array($recommendationContext, self::FC144_RECOMMENDATION_CONTEXTS, true) ? $recommendationContext : '',
+            'interpretation_scope' => $scope !== '' && $scope !== 'any' ? $scope : 'clear',
+            'confidence_level' => $confidence !== '' && $confidence !== 'any' ? $confidence : 'medium_confidence',
+            'score_profile' => $scoreProfile !== '' && $scoreProfile !== 'any' ? $scoreProfile : 'high_primary_clear',
+            'scenario' => $scenario !== '' && $scenario !== 'any' ? $scenario : 'deep_reading',
+            'user_signal' => $userSignal !== '' && $userSignal !== 'any' ? $userSignal : 'high_resonance',
+            'audience_segment' => $audienceSegment !== '' && $audienceSegment !== 'any' ? $audienceSegment : 'general',
+            'selected_form' => 'enneagram_likert_105',
+            'selected_form_kind' => 'likert',
+            'methodology_variant' => 'asset_preview_only',
+            'phase' => '7-A',
+            'body_context' => 'matching_fc144_recommendation_signal',
         ];
     }
 

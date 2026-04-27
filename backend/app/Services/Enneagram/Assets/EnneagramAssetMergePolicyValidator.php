@@ -58,6 +58,10 @@ final class EnneagramAssetMergePolicyValidator
         'scene_localization_response',
     ];
 
+    public const BATCH_H_CATEGORIES = [
+        'fc144_recommendation_response',
+    ];
+
     public const BATCH_G_SCENE_AXES = [
         'student_group_project',
         'student_exam_pressure',
@@ -77,6 +81,36 @@ final class EnneagramAssetMergePolicyValidator
         'relationship_no_reply',
         'relationship_cold_war',
         'relationship_conflict_repair',
+    ];
+
+    public const BATCH_H_RECOMMENDATION_CONTEXTS = [
+        'clear_high_resonance',
+        'close_call_top2',
+        'diffuse_top3',
+        'low_quality',
+        'low_resonance',
+        'partial_resonance',
+        'after_pair_comparison',
+        'after_scene_localization',
+        'high_engagement_deep_reader',
+        'paid_preview_teaser',
+    ];
+
+    private const BATCH_H_BANNED_COPY_PHRASES = [
+        'FC144 更准确',
+        '更准确',
+        '最终判型',
+        '终极判型',
+        '第二套结果页',
+        '第二套产品',
+        'E105 和 FC144 分数可比较',
+        '分数可比较',
+        '直接比较分数',
+        '重新判型',
+        '确认最终类型',
+        '诊断',
+        '招聘',
+        '准确率',
     ];
 
     /**
@@ -185,6 +219,20 @@ final class EnneagramAssetMergePolicyValidator
             }
 
             $errors = array_merge($errors, $this->validateSceneLocalization($items));
+        }
+
+        if ($this->isBatchH($version, $items)) {
+            if ($mode !== 'additive_branch_expansion') {
+                $errors[] = 'batch_1r_h_requires_additive_branch_expansion_mode';
+            }
+            $categories = $this->categories($items);
+            foreach ($categories as $category) {
+                if (! in_array($category, self::BATCH_H_CATEGORIES, true)) {
+                    $errors[] = 'batch_1r_h_unknown_category:'.$category;
+                }
+            }
+
+            $errors = array_merge($errors, $this->validateFc144Recommendation($items));
         }
 
         return $errors;
@@ -389,6 +437,62 @@ final class EnneagramAssetMergePolicyValidator
             $errors[] = 'batch_1r_f_1r_g_category_overlap_blocked:'.implode(',', $unexpectedFG);
         }
 
+        $unexpectedAH = array_values(array_intersect(
+            $categoriesByBatch['1R-A'] ?? [],
+            $categoriesByBatch['1R-H'] ?? []
+        ));
+        if ($unexpectedAH !== []) {
+            $errors[] = 'batch_1r_a_1r_h_category_overlap_blocked:'.implode(',', $unexpectedAH);
+        }
+
+        $unexpectedBH = array_values(array_intersect(
+            $categoriesByBatch['1R-B'] ?? [],
+            $categoriesByBatch['1R-H'] ?? []
+        ));
+        if ($unexpectedBH !== []) {
+            $errors[] = 'batch_1r_b_1r_h_category_overlap_blocked:'.implode(',', $unexpectedBH);
+        }
+
+        $unexpectedCH = array_values(array_intersect(
+            $categoriesByBatch['1R-C'] ?? [],
+            $categoriesByBatch['1R-H'] ?? []
+        ));
+        if ($unexpectedCH !== []) {
+            $errors[] = 'batch_1r_c_1r_h_category_overlap_blocked:'.implode(',', $unexpectedCH);
+        }
+
+        $unexpectedDH = array_values(array_intersect(
+            $categoriesByBatch['1R-D'] ?? [],
+            $categoriesByBatch['1R-H'] ?? []
+        ));
+        if ($unexpectedDH !== []) {
+            $errors[] = 'batch_1r_d_1r_h_category_overlap_blocked:'.implode(',', $unexpectedDH);
+        }
+
+        $unexpectedEH = array_values(array_intersect(
+            $categoriesByBatch['1R-E'] ?? [],
+            $categoriesByBatch['1R-H'] ?? []
+        ));
+        if ($unexpectedEH !== []) {
+            $errors[] = 'batch_1r_e_1r_h_category_overlap_blocked:'.implode(',', $unexpectedEH);
+        }
+
+        $unexpectedFH = array_values(array_intersect(
+            $categoriesByBatch['1R-F'] ?? [],
+            $categoriesByBatch['1R-H'] ?? []
+        ));
+        if ($unexpectedFH !== []) {
+            $errors[] = 'batch_1r_f_1r_h_category_overlap_blocked:'.implode(',', $unexpectedFH);
+        }
+
+        $unexpectedGH = array_values(array_intersect(
+            $categoriesByBatch['1R-G'] ?? [],
+            $categoriesByBatch['1R-H'] ?? []
+        ));
+        if ($unexpectedGH !== []) {
+            $errors[] = 'batch_1r_g_1r_h_category_overlap_blocked:'.implode(',', $unexpectedGH);
+        }
+
         return array_values(array_unique($errors));
     }
 
@@ -528,6 +632,25 @@ final class EnneagramAssetMergePolicyValidator
     /**
      * @param  list<array<string,mixed>>  $items
      */
+    private function isBatchH(string $version, array $items): bool
+    {
+        if (str_contains($version, '1R-H')) {
+            return true;
+        }
+
+        foreach ($items as $item) {
+            $context = trim((string) ($item['fc144_recommendation_context'] ?? ''));
+            if ($context !== '' && trim((string) ($item['category'] ?? '')) === 'fc144_recommendation_response') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $items
+     */
     private function batchKey(string $version, array $items): string
     {
         if ($this->isBatchA($version, $items)) {
@@ -550,6 +673,9 @@ final class EnneagramAssetMergePolicyValidator
         }
         if ($this->isBatchG($version, $items)) {
             return '1R-G';
+        }
+        if ($this->isBatchH($version, $items)) {
+            return '1R-H';
         }
 
         return '';
@@ -676,6 +802,77 @@ final class EnneagramAssetMergePolicyValidator
 
         foreach (array_values(array_diff($actualKeys, $expectedKeys)) as $unexpected) {
             $errors[] = 'batch_1r_g_unexpected_type_scene_axis:'.$unexpected;
+        }
+
+        return $errors;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $items
+     * @return list<string>
+     */
+    private function validateFc144Recommendation(array $items): array
+    {
+        $errors = [];
+        $expectedKeys = [];
+        for ($type = 1; $type <= 9; $type++) {
+            foreach (self::BATCH_H_RECOMMENDATION_CONTEXTS as $context) {
+                $expectedKeys[] = $type.':'.$context;
+            }
+        }
+
+        $seen = [];
+        $assetKeys = [];
+        foreach ($items as $index => $item) {
+            $typeId = trim((string) ($item['type_id'] ?? ''));
+            $context = trim((string) ($item['fc144_recommendation_context'] ?? ''));
+            $assetKey = trim((string) ($item['asset_key'] ?? ''));
+
+            if (! ctype_digit($typeId) || (int) $typeId < 1 || (int) $typeId > 9) {
+                $errors[] = 'batch_1r_h_invalid_type_id:item_'.$index;
+
+                continue;
+            }
+
+            if (! in_array($context, self::BATCH_H_RECOMMENDATION_CONTEXTS, true)) {
+                $errors[] = 'batch_1r_h_invalid_fc144_recommendation_context:item_'.$index;
+
+                continue;
+            }
+
+            if ($assetKey !== '') {
+                if (isset($assetKeys[$assetKey])) {
+                    $errors[] = 'batch_1r_h_duplicate_asset_key:'.$assetKey;
+                }
+                $assetKeys[$assetKey] = true;
+            }
+
+            $key = $typeId.':'.$context;
+            if (isset($seen[$key])) {
+                $errors[] = 'batch_1r_h_duplicate_type_context:'.$key;
+            }
+            $seen[$key] = true;
+
+            foreach (['body_zh', 'short_body_zh', 'cta_zh'] as $field) {
+                $text = trim((string) ($item[$field] ?? ''));
+                foreach (self::BATCH_H_BANNED_COPY_PHRASES as $phrase) {
+                    if ($phrase !== '' && $text !== '' && str_contains($text, $phrase)) {
+                        $errors[] = 'batch_1r_h_banned_phrase:'.$field.':'.($assetKey !== '' ? $assetKey : 'item_'.$index).':'.$phrase;
+                    }
+                }
+            }
+        }
+
+        $actualKeys = array_keys($seen);
+        sort($actualKeys);
+        sort($expectedKeys);
+
+        foreach (array_values(array_diff($expectedKeys, $actualKeys)) as $missing) {
+            $errors[] = 'batch_1r_h_missing_type_context:'.$missing;
+        }
+
+        foreach (array_values(array_diff($actualKeys, $expectedKeys)) as $unexpected) {
+            $errors[] = 'batch_1r_h_unexpected_type_context:'.$unexpected;
         }
 
         return $errors;

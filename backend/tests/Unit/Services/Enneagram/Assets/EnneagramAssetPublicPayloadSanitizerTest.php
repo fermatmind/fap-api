@@ -60,4 +60,19 @@ final class EnneagramAssetPublicPayloadSanitizerTest extends TestCase
         $this->assertSame($item['scene_label_zh'], $payload['scene_label_zh']);
         $this->assertSame([], $sanitizer->internalMetadataLeaks($payload));
     }
+
+    public function test_it_preserves_fc144_safe_fields_for_1r_h_preview_payloads(): void
+    {
+        $this->skipWhenBatchHMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $sanitizer = app(EnneagramAssetPublicPayloadSanitizer::class);
+        $item = $loader->load($this->batchHPath())['items'][0];
+
+        $payload = $sanitizer->sanitizeItem($item);
+
+        $this->assertSame('clear_high_resonance', $payload['fc144_recommendation_context']);
+        $this->assertSame($item['recommendation_strategy'], $payload['recommendation_strategy']);
+        $this->assertSame([], $sanitizer->internalMetadataLeaks($payload));
+    }
 }

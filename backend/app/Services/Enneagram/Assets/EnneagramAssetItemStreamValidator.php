@@ -28,7 +28,6 @@ final class EnneagramAssetItemStreamValidator
         'body_zh',
         'short_body_zh',
         'cta_zh',
-        'replacement_target',
         'content_maturity',
         'review_status',
         'version',
@@ -83,6 +82,9 @@ final class EnneagramAssetItemStreamValidator
 
         foreach ($items as $index => $item) {
             $requiredFields = self::REQUIRED_ITEM_FIELDS;
+            if ($batchKey !== '1R-H') {
+                $requiredFields[] = 'replacement_target';
+            }
             if ($batchKey === '1R-F') {
                 $requiredFields = array_merge($requiredFields, [
                     'pair_key',
@@ -101,6 +103,11 @@ final class EnneagramAssetItemStreamValidator
                     'seven_day_observation_question',
                     'resonance_feedback_prompt',
                     'micro_discrimination_prompt',
+                ]);
+            } elseif ($batchKey === '1R-H') {
+                $requiredFields = array_merge($requiredFields, [
+                    'fc144_recommendation_context',
+                    'recommendation_strategy',
                 ]);
             } else {
                 $requiredFields[] = 'type_id';

@@ -196,4 +196,41 @@ final class EnneagramAssetSelectorTest extends TestCase
         $this->assertSame('student_group_project', $selected['scene_localization_response']['scene_axis']);
         $this->assertStringContainsString('1R_G', $selected['scene_localization_response']['asset_key']);
     }
+
+    public function test_it_selects_1r_h_fc144_recommendation_branch_for_matching_context(): void
+    {
+        $this->skipWhenAssetsMissing();
+        $this->skipWhenBatchCMissing();
+        $this->skipWhenBatchDMissing();
+        $this->skipWhenBatchEMissing();
+        $this->skipWhenBatchFMissing();
+        $this->skipWhenBatchGMissing();
+        $this->skipWhenBatchHMissing();
+
+        $loader = app(EnneagramAssetItemStreamLoader::class);
+        $merged = app(EnneagramAssetMergeResolver::class)->resolveStreams(
+            $loader->load($this->batchAPath()),
+            $loader->load($this->batchBPath()),
+            $loader->load($this->batchCPath()),
+            $loader->load($this->batchDPath()),
+            $loader->load($this->batchEPath()),
+            $loader->load($this->batchFPath()),
+            $loader->load($this->batchGPath()),
+            $loader->load($this->batchHPath()),
+        );
+        $batchHItem = collect((array) ($merged['items'] ?? []))
+            ->first(static fn (array $item): bool => ($item['_preview_batch'] ?? null) === '1R-H'
+                && ($item['type_id'] ?? null) === '1'
+                && ($item['fc144_recommendation_context'] ?? null) === 'after_scene_localization');
+
+        $this->assertIsArray($batchHItem);
+
+        $context = app(EnneagramAssetPreviewPayloadBuilder::class)->contextForFc144RecommendationItem($batchHItem);
+        $selected = app(EnneagramAssetSelector::class)->selectByCategory($merged, $context);
+
+        $this->assertArrayHasKey('fc144_recommendation_response', $selected);
+        $this->assertSame('1R-H', $selected['fc144_recommendation_response']['_preview_batch']);
+        $this->assertSame('after_scene_localization', $selected['fc144_recommendation_response']['fc144_recommendation_context']);
+        $this->assertStringContainsString('1R_H', $selected['fc144_recommendation_response']['asset_key']);
+    }
 }
