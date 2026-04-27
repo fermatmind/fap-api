@@ -35,6 +35,7 @@ use App\Console\Commands\CommerceRepairPostCommitFailed;
 use App\Console\Commands\ContentCompile;
 use App\Console\Commands\ContentLint;
 use App\Console\Commands\EnneagramExportProductionEquivalentCandidatePayloads;
+use App\Console\Commands\EnneagramImportInactiveCandidateRelease;
 use App\Console\Commands\Eq60PsychometricsReport;
 use App\Console\Commands\FapEmailLifecycleRollout;
 use App\Console\Commands\FapEmailOutboxSend;
@@ -127,6 +128,7 @@ class Kernel extends ConsoleKernel
         ContentLint::class,
         ContentCompile::class,
         EnneagramExportProductionEquivalentCandidatePayloads::class,
+        EnneagramImportInactiveCandidateRelease::class,
         NormsImport::class,
         NormsBig5Roll::class,
         NormsBig5Rebuild::class,
