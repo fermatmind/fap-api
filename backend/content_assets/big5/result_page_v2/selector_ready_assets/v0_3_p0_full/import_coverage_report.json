@@ -1,0 +1,118 @@
+{
+    "schema": "fap.big5.result_page_v2.selector_asset_import_coverage_report.v0.1",
+    "asset_batch_version": "big5_result_page_v2.selector_ready_assets.v0.3_p0_full",
+    "source_manifest": "manifest.json",
+    "source_assets": "assets.json",
+    "runtime_ready": false,
+    "runtime_use": "staging_only",
+    "total_assets": 325,
+    "registry_counts_actual": {
+        "action_plan_registry": 25,
+        "boundary_registry": 5,
+        "coupling_registry": 50,
+        "domain_registry": 50,
+        "facet_pattern_registry": 60,
+        "method_registry": 6,
+        "observation_feedback_registry": 25,
+        "profile_signature_registry": 20,
+        "scenario_registry": 40,
+        "share_safety_registry": 10,
+        "state_scope_registry": 14,
+        "triple_pattern_registry": 20
+    },
+    "registry_counts_expected": {
+        "action_plan_registry": 25,
+        "boundary_registry": 5,
+        "coupling_registry": 50,
+        "domain_registry": 50,
+        "facet_pattern_registry": 60,
+        "method_registry": 6,
+        "observation_feedback_registry": 25,
+        "profile_signature_registry": 20,
+        "scenario_registry": 40,
+        "share_safety_registry": 10,
+        "state_scope_registry": 14,
+        "triple_pattern_registry": 20
+    },
+    "module_counts_actual": {
+        "module_00_trust_bar": 1,
+        "module_01_hero": 45,
+        "module_02_quick_understanding": 24,
+        "module_03_trait_deep_dive": 26,
+        "module_04_coupling": 52,
+        "module_05_facet_reframe": 61,
+        "module_06_application_matrix": 57,
+        "module_07_collaboration_manual": 8,
+        "module_08_share_save": 12,
+        "module_09_feedback_data_flywheel": 26,
+        "module_10_method_privacy": 13
+    },
+    "module_counts_expected": {
+        "module_00_trust_bar": 1,
+        "module_01_hero": 45,
+        "module_02_quick_understanding": 24,
+        "module_03_trait_deep_dive": 26,
+        "module_04_coupling": 52,
+        "module_05_facet_reframe": 61,
+        "module_06_application_matrix": 57,
+        "module_07_collaboration_manual": 8,
+        "module_08_share_save": 12,
+        "module_09_feedback_data_flywheel": 26,
+        "module_10_method_privacy": 13
+    },
+    "scope_counts": {
+        "balanced_profile": 4,
+        "clear_signature": 18,
+        "facet_inconsistent": 62,
+        "high_tension_profile": 35,
+        "low_quality": 7,
+        "mixed_signature": 56,
+        "norm_unavailable": 2,
+        "retest_recommended": 7,
+        "share_safe_summary_only": 16,
+        "standard": 118
+    },
+    "reading_mode_counts": {
+        "deep": 217,
+        "quick": 141,
+        "standard": 321
+    },
+    "evidence_level_counts": {
+        "cross_trait_interpretation": 90,
+        "facet_inference": 60,
+        "feedback_prompt": 25,
+        "method_boundary": 25,
+        "scenario_interpretation": 65,
+        "share_policy": 10,
+        "trait_band_interpretation": 50
+    },
+    "safety_level_counts": {
+        "degraded": 12,
+        "normal": 216,
+        "required_boundary": 15,
+        "sensitive_non_clinical": 68,
+        "share_safe_behavioral": 3,
+        "share_safety_required": 11
+    },
+    "shareable_assets": [
+        "asset.module_07_collaboration_manual.scenario_registry.collaboration_document_first.v0_3",
+        "asset.module_07_collaboration_manual.scenario_registry.collaboration_clear_owner_deadline.v0_3",
+        "asset.module_07_collaboration_manual.scenario_registry.collaboration_share_safe_manual.v0_3"
+    ],
+    "validation_status": "pass",
+    "validation_error_count": 0,
+    "validation_errors": [],
+    "warnings": [
+        "module_00_trust_bar only 1 asset",
+        "module_07_collaboration_manual only 8 assets",
+        "shareable assets only 3",
+        "balanced_profile only 4",
+        "norm_unavailable only 2"
+    ],
+    "next_recommended_steps": [
+        "Run psychometric review for profile_signature, facet_pattern, coupling, and triple_pattern assets.",
+        "Run share-safety/privacy review for share_safety and shareable scenario assets.",
+        "Create golden cases and selection policy before any runtime composer integration.",
+        "Keep this v0.3 P0 full bundle staging-only until reviewed and selected through a backend-owned composer."
+    ]
+}

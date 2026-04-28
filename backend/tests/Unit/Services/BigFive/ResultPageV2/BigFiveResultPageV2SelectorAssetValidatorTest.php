@@ -192,8 +192,8 @@ final class BigFiveResultPageV2SelectorAssetValidatorTest extends TestCase
         $asset['safety_level'] = 'standard';
         $asset['fallback_policy'] = 'omit_block';
 
-        $this->assertHasError('low_quality selector assets must use boundary/degraded safety level', $asset);
-        $this->assertHasError('low_quality selector assets must use backend_required/degrade_to_boundary fallback policy', $asset);
+        $this->assertHasError('low_quality selector assets must use boundary/degraded/required_boundary safety level', $asset);
+        $this->assertHasError('low_quality selector assets must use backend_required/degrade_to_boundary/boundary_only/neutral_unavailable fallback policy', $asset);
     }
 
     /**
