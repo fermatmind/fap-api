@@ -60,4 +60,33 @@ final class ArticleSeoServiceTest extends TestCase
             'canonical_url' => 'https://staging.fermatmind.com/zh/articles/mbti-basics',
         ]);
     }
+
+    public function test_build_seo_payload_converges_fermat_www_to_apex(): void
+    {
+        config(['app.frontend_url' => 'https://www.fermatmind.com']);
+
+        $article = Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'mbti-basics',
+            'locale' => 'en',
+            'title' => 'MBTI Basics',
+            'excerpt' => 'Learn the core concepts behind MBTI.',
+            'content_md' => '# MBTI Basics',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 3, 12, 8, 0, 0, 'UTC'),
+            'scheduled_at' => null,
+            'created_at' => Carbon::create(2026, 3, 12, 8, 0, 0, 'UTC'),
+            'updated_at' => Carbon::create(2026, 3, 12, 9, 0, 0, 'UTC'),
+        ]);
+
+        $payload = app(ArticleSeoService::class)->buildSeoPayload($article);
+        $jsonLd = app(ArticleSeoService::class)->generateJsonLd($article);
+
+        $this->assertSame('https://fermatmind.com/en/articles/mbti-basics', $payload['canonical']);
+        $this->assertSame('https://fermatmind.com/en/articles/mbti-basics', data_get($jsonLd, 'url'));
+        $this->assertStringNotContainsString('www.fermatmind.com', json_encode($payload, JSON_THROW_ON_ERROR));
+        $this->assertStringNotContainsString('www.fermatmind.com', json_encode($jsonLd, JSON_THROW_ON_ERROR));
+    }
 }

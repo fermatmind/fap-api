@@ -9,6 +9,7 @@ use App\Models\PersonalityProfileVariant;
 use App\Models\Result;
 use App\Services\Mbti\Adapters\MbtiPersonalityProfileAuthoritySourceAdapter;
 use App\Services\Mbti\Adapters\MbtiReportAuthoritySourceAdapter;
+use App\Support\CanonicalFrontendUrl;
 use App\Support\Mbti\MbtiAxisStrengthBand;
 use App\Support\Mbti\MbtiPublicTypeIdentity;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -177,7 +178,7 @@ final class MbtiPublicProjectionService
 
     public function buildCanonicalUrl(?string $slug, string $locale): ?string
     {
-        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+        $baseUrl = CanonicalFrontendUrl::fromConfig();
         $normalizedSlug = trim((string) $slug);
 
         if ($baseUrl === '' || $normalizedSlug === '') {

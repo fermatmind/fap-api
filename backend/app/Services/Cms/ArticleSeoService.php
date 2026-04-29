@@ -8,6 +8,7 @@ use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Career\StructuredData\CareerArticleStructuredDataBuilder;
+use App\Support\CanonicalFrontendUrl;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
@@ -146,7 +147,9 @@ final class ArticleSeoService
             $jsonLd = array_replace_recursive($jsonLd, $seo->schema_json);
         }
 
-        return $this->normalizeJsonLdUrls($jsonLd, $canonical, (string) $article->slug);
+        return CanonicalFrontendUrl::normalizeNestedUrls(
+            $this->normalizeJsonLdUrls($jsonLd, $canonical, (string) $article->slug)
+        );
     }
 
     public function buildCanonicalUrl(string $slug, string $locale): ?string
@@ -334,7 +337,7 @@ final class ArticleSeoService
 
     private function frontendBaseUrl(): string
     {
-        return rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+        return CanonicalFrontendUrl::fromConfig();
     }
 
     private function resolvePublishedRevision(

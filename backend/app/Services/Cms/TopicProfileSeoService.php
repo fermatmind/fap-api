@@ -6,6 +6,7 @@ namespace App\Services\Cms;
 
 use App\Models\TopicProfile;
 use App\Models\TopicProfileSeoMeta;
+use App\Support\CanonicalFrontendUrl;
 
 final class TopicProfileSeoService
 {
@@ -76,15 +77,17 @@ final class TopicProfileSeoService
 
         $seoMeta = $this->resolveSeoMeta($profile);
         if ($seoMeta instanceof TopicProfileSeoMeta && is_array($seoMeta->jsonld_overrides_json)) {
-            return array_replace_recursive($jsonLd, $seoMeta->jsonld_overrides_json);
+            return CanonicalFrontendUrl::normalizeNestedUrls(
+                array_replace_recursive($jsonLd, $seoMeta->jsonld_overrides_json)
+            );
         }
 
-        return $jsonLd;
+        return CanonicalFrontendUrl::normalizeNestedUrls($jsonLd);
     }
 
     public function buildCanonicalUrl(TopicProfile $profile, string $locale): ?string
     {
-        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+        $baseUrl = CanonicalFrontendUrl::fromConfig();
         $slug = trim((string) $profile->slug);
 
         if ($baseUrl === '' || $slug === '') {

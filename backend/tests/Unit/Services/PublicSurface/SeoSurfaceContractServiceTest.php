@@ -16,7 +16,7 @@ final class SeoSurfaceContractServiceTest extends TestCase
         $contract = $service->build([
             'metadata_scope' => 'public_indexable_detail',
             'surface_type' => 'article_public_detail',
-            'canonical_url' => 'https://staging.fermatmind.com/en/articles/how-to-read-mbti-results',
+            'canonical_url' => 'https://www.fermatmind.com/en/articles/how-to-read-mbti-results',
             'robots_policy' => 'index,follow',
             'title' => 'How to Read MBTI Results',
             'description' => 'A practical guide to reading MBTI results.',
@@ -24,7 +24,7 @@ final class SeoSurfaceContractServiceTest extends TestCase
                 'title' => 'How to Read MBTI Results',
                 'description' => 'A practical guide to reading MBTI results.',
                 'type' => 'article',
-                'url' => 'https://staging.fermatmind.com/en/articles/how-to-read-mbti-results',
+                'url' => 'https://www.fermatmind.com/en/articles/how-to-read-mbti-results',
             ],
             'twitter_payload' => [
                 'card' => 'summary_large_image',
@@ -32,8 +32,8 @@ final class SeoSurfaceContractServiceTest extends TestCase
                 'description' => 'A practical guide to reading MBTI results.',
             ],
             'alternates' => [
-                'en' => 'https://staging.fermatmind.com/en/articles/how-to-read-mbti-results',
-                'zh-CN' => 'https://staging.fermatmind.com/zh/articles/how-to-read-mbti-results',
+                'en' => 'https://www.fermatmind.com/en/articles/how-to-read-mbti-results',
+                'zh-CN' => 'https://www.fermatmind.com/zh/articles/how-to-read-mbti-results',
             ],
             'structured_data' => [
                 '@context' => 'https://schema.org',
@@ -47,7 +47,7 @@ final class SeoSurfaceContractServiceTest extends TestCase
         $this->assertSame('seo.surface.v1', $contract['metadata_contract_version']);
         $this->assertSame('public_indexable_detail', $contract['metadata_scope']);
         $this->assertSame('article_public_detail', $contract['surface_type']);
-        $this->assertSame('https://staging.fermatmind.com/en/articles/how-to-read-mbti-results', $contract['canonical_url']);
+        $this->assertSame('https://fermatmind.com/en/articles/how-to-read-mbti-results', $contract['canonical_url']);
         $this->assertSame('index,follow', $contract['robots_policy']);
         $this->assertSame('How to Read MBTI Results', $contract['title']);
         $this->assertSame('A practical guide to reading MBTI results.', $contract['description']);
@@ -55,6 +55,9 @@ final class SeoSurfaceContractServiceTest extends TestCase
         $this->assertSame('included', $contract['sitemap_state']);
         $this->assertSame('allow', $contract['llms_exposure_state']);
         $this->assertSame(['Article', 'BreadcrumbList'], $contract['structured_data_keys']);
+        $this->assertSame('https://fermatmind.com/en/articles/how-to-read-mbti-results', data_get($contract, 'og_payload.url'));
+        $this->assertSame('https://fermatmind.com/en/articles/how-to-read-mbti-results', data_get($contract, 'alternates.en'));
+        $this->assertSame('https://fermatmind.com/zh/articles/how-to-read-mbti-results', data_get($contract, 'alternates.zh-CN'));
         $this->assertIsString($contract['metadata_fingerprint']);
         $this->assertNotSame('', $contract['metadata_fingerprint']);
     }

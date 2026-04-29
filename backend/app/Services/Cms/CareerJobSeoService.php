@@ -6,6 +6,7 @@ namespace App\Services\Cms;
 
 use App\Models\CareerJob;
 use App\Models\CareerJobSeoMeta;
+use App\Support\CanonicalFrontendUrl;
 
 final class CareerJobSeoService
 {
@@ -27,7 +28,8 @@ final class CareerJobSeoService
             (string) ($job->subtitle ?? null),
             (string) $job->title
         ) ?? (string) $job->title;
-        $canonical = $seoMeta?->canonical_url ?? $this->buildCanonicalUrl($job, $resolvedLocale);
+        $canonical = CanonicalFrontendUrl::normalizeAbsoluteUrl($seoMeta?->canonical_url)
+            ?? $this->buildCanonicalUrl($job, $resolvedLocale);
         $robots = $this->fallbackText($seoMeta?->robots)
             ?? ((bool) $job->is_indexable ? 'index,follow' : 'noindex,follow');
         $image = $this->fallbackText($seoMeta?->og_image_url, (string) ($job->cover_image_url ?? null));
@@ -85,15 +87,17 @@ final class CareerJobSeoService
 
         $seoMeta = $this->resolveSeoMeta($job);
         if ($seoMeta instanceof CareerJobSeoMeta && is_array($seoMeta->jsonld_overrides_json)) {
-            return array_replace_recursive($jsonLd, $seoMeta->jsonld_overrides_json);
+            return CanonicalFrontendUrl::normalizeNestedUrls(
+                array_replace_recursive($jsonLd, $seoMeta->jsonld_overrides_json)
+            );
         }
 
-        return $jsonLd;
+        return CanonicalFrontendUrl::normalizeNestedUrls($jsonLd);
     }
 
     public function buildCanonicalUrl(CareerJob $job, string $locale): ?string
     {
-        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+        $baseUrl = CanonicalFrontendUrl::fromConfig();
         $slug = trim((string) $job->slug);
 
         if ($baseUrl === '' || $slug === '') {

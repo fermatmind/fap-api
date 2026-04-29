@@ -17,6 +17,7 @@ use App\Services\Cms\PersonalityProfileService;
 use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
+use App\Support\CanonicalFrontendUrl;
 use App\Support\PublicMediaUrlGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -542,7 +543,7 @@ class PersonalityController extends Controller
             'twitter_description' => $seoMeta?->twitter_description,
             'twitter_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($seoMeta?->twitter_image_url),
             'robots' => $seoMeta?->robots,
-            'jsonld_overrides_json' => $seoMeta?->jsonld_overrides_json,
+            'jsonld_overrides_json' => CanonicalFrontendUrl::normalizeNestedUrls($seoMeta?->jsonld_overrides_json),
         ];
 
         $variantSeoMeta = $variant?->seoMeta;
@@ -566,7 +567,9 @@ class PersonalityController extends Controller
             }
 
             if (is_array($variantSeoMeta->jsonld_overrides_json) && $variantSeoMeta->jsonld_overrides_json !== []) {
-                $meta['jsonld_overrides_json'] = $variantSeoMeta->jsonld_overrides_json;
+                $meta['jsonld_overrides_json'] = CanonicalFrontendUrl::normalizeNestedUrls(
+                    $variantSeoMeta->jsonld_overrides_json
+                );
             }
         }
 

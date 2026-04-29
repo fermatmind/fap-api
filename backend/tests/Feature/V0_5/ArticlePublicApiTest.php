@@ -129,6 +129,8 @@ final class ArticlePublicApiTest extends TestCase
 
     public function test_article_detail_includes_landing_and_answer_surfaces(): void
     {
+        config(['app.frontend_url' => 'https://www.fermatmind.com']);
+
         $article = $this->createArticle([
             'slug' => 'career-fit-guide',
             'locale' => 'en',
@@ -143,6 +145,11 @@ final class ArticlePublicApiTest extends TestCase
         $this->createSeoMeta($article, [
             'seo_title' => 'Career Fit Guide | FermatMind',
             'seo_description' => 'Use article-level insight to continue into tests and public hubs.',
+            'canonical_url' => 'https://www.fermatmind.com/en/articles/career-fit-guide',
+            'schema_json' => [
+                'url' => 'https://www.fermatmind.com/en/articles/career-fit-guide',
+                'mainEntityOfPage' => 'https://www.fermatmind.com/en/articles/career-fit-guide',
+            ],
         ]);
 
         $response = $this->getJson('/api/v0.5/articles/career-fit-guide?locale=en');
@@ -151,6 +158,9 @@ final class ArticlePublicApiTest extends TestCase
             ->assertJsonPath('landing_surface_v1.landing_contract_version', 'landing.surface.v1')
             ->assertJsonPath('landing_surface_v1.entry_surface', 'article_detail')
             ->assertJsonPath('landing_surface_v1.entry_type', 'editorial_article')
+            ->assertJsonPath('seo_surface_v1.canonical_url', 'https://fermatmind.com/en/articles/career-fit-guide')
+            ->assertJsonPath('seo_surface_v1.alternates.en', 'https://fermatmind.com/en/articles/career-fit-guide')
+            ->assertJsonPath('seo_surface_v1.og_payload.url', 'https://fermatmind.com/en/articles/career-fit-guide')
             ->assertJsonPath('answer_surface_v1.answer_contract_version', 'answer.surface.v1')
             ->assertJsonPath('answer_surface_v1.surface_type', 'article_public_detail')
             ->assertJsonPath('answer_surface_v1.summary_blocks.0.key', 'article_summary')
@@ -158,7 +168,11 @@ final class ArticlePublicApiTest extends TestCase
             ->assertJsonPath('article.title', 'Career Fit Guide')
             ->assertJsonPath('article.excerpt', 'Use article-level insight to continue into tests and public hubs.')
             ->assertJsonPath('article.content_md', 'Revision-backed public article body.')
+            ->assertJsonPath('article.seo_meta.canonical_url', 'https://fermatmind.com/en/articles/career-fit-guide')
+            ->assertJsonPath('article.seo_meta.schema_json.url', 'https://fermatmind.com/en/articles/career-fit-guide')
             ->assertJsonPath('answer_surface_v1.next_step_blocks.0.href', '/en/articles');
+
+        $this->assertStringNotContainsString('www.fermatmind.com', (string) $response->getContent());
     }
 
     public function test_public_reads_require_published_revision_and_hide_human_review(): void

@@ -6,6 +6,7 @@ namespace App\Services\Cms;
 
 use App\Models\PersonalityProfile;
 use App\Models\PersonalityProfileVariant;
+use App\Support\CanonicalFrontendUrl;
 
 final class PersonalityProfileSeoService
 {
@@ -101,7 +102,7 @@ final class PersonalityProfileSeoService
 
         $jsonLd['mainEntityOfPage'] = $meta['canonical'];
 
-        return $jsonLd;
+        return CanonicalFrontendUrl::normalizeNestedUrls($jsonLd);
     }
 
     public function buildCanonicalUrl(
@@ -109,7 +110,7 @@ final class PersonalityProfileSeoService
         string $locale,
         ?PersonalityProfileVariant $variant = null
     ): ?string {
-        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+        $baseUrl = CanonicalFrontendUrl::fromConfig();
         $slug = $this->publicRouteSlug($profile, $variant);
 
         if ($baseUrl === '' || $slug === '') {

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\PublicSurface;
 
+use App\Support\CanonicalFrontendUrl;
+
 final class SeoSurfaceContractService
 {
     /**
@@ -32,11 +34,13 @@ final class SeoSurfaceContractService
     {
         $metadataScope = $this->normalizeString($context['metadata_scope'] ?? null) ?? 'public_detail';
         $surfaceType = $this->normalizeString($context['surface_type'] ?? null) ?? 'public_surface';
-        $canonicalUrl = $this->normalizeString($context['canonical_url'] ?? null);
+        $canonicalUrl = CanonicalFrontendUrl::normalizeAbsoluteUrl($this->normalizeString($context['canonical_url'] ?? null));
         $robotsPolicy = $this->normalizeString($context['robots_policy'] ?? null) ?? 'index,follow';
         $title = $this->normalizeString($context['title'] ?? null);
         $description = $this->normalizeString($context['description'] ?? null);
-        $alternates = $this->normalizeStringMap($context['alternates'] ?? []);
+        $alternates = CanonicalFrontendUrl::normalizeUrlMap(
+            is_array($context['alternates'] ?? null) ? $context['alternates'] : []
+        );
         $structuredDataKeys = $this->extractStructuredDataKeys($context['structured_data'] ?? null);
 
         $ogPayload = $this->normalizePayload($context['og_payload'] ?? [], $title, $description, $canonicalUrl);
@@ -117,30 +121,8 @@ final class SeoSurfaceContractService
             'image' => $this->normalizeString($payload['image'] ?? null),
             'type' => $this->normalizeString($payload['type'] ?? null),
             'card' => $this->normalizeString($payload['card'] ?? null),
-            'url' => $this->normalizeString($payload['url'] ?? null) ?? $url,
+            'url' => CanonicalFrontendUrl::normalizeAbsoluteUrl($this->normalizeString($payload['url'] ?? null)) ?? $url,
         ], static fn (mixed $value): bool => $value !== null);
-    }
-
-    /**
-     * @param  array<string,mixed>  $map
-     * @return array<string,string>
-     */
-    private function normalizeStringMap(array $map): array
-    {
-        $normalized = [];
-
-        foreach ($map as $key => $value) {
-            $normalizedValue = $this->normalizeString($value);
-            if ($normalizedValue === null) {
-                continue;
-            }
-
-            $normalized[(string) $key] = $normalizedValue;
-        }
-
-        ksort($normalized);
-
-        return $normalized;
     }
 
     /**
