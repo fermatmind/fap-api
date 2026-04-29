@@ -15,6 +15,7 @@ use App\Services\Cms\TopicProfileService;
 use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
+use App\Support\CanonicalFrontendUrl;
 use App\Support\PublicMediaUrlGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -528,7 +529,7 @@ final class TopicController extends Controller
         return [
             'seo_title' => $seoMeta->seo_title,
             'seo_description' => $seoMeta->seo_description,
-            'canonical_url' => $seoMeta->canonical_url,
+            'canonical_url' => CanonicalFrontendUrl::normalizeAbsoluteUrl($seoMeta->canonical_url),
             'og_title' => $seoMeta->og_title,
             'og_description' => $seoMeta->og_description,
             'og_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($seoMeta->og_image_url),
@@ -536,7 +537,7 @@ final class TopicController extends Controller
             'twitter_description' => $seoMeta->twitter_description,
             'twitter_image_url' => PublicMediaUrlGuard::sanitizeNullableUrl($seoMeta->twitter_image_url),
             'robots' => $seoMeta->robots,
-            'jsonld_overrides_json' => $seoMeta->jsonld_overrides_json,
+            'jsonld_overrides_json' => CanonicalFrontendUrl::normalizeNestedUrls($seoMeta->jsonld_overrides_json),
         ];
     }
 

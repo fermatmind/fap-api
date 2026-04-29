@@ -148,6 +148,8 @@ final class CareerJobPublicApiTest extends TestCase
 
     public function test_detail_returns_job_sections_seo_meta_and_normalized_structured_fields(): void
     {
+        config(['app.frontend_url' => 'https://www.fermatmind.com']);
+
         $job = $this->createJob([
             'job_code' => 'product-manager',
             'slug' => 'product-manager',
@@ -236,9 +238,13 @@ final class CareerJobPublicApiTest extends TestCase
         $this->createSeoMeta($job, [
             'seo_title' => 'Product Manager Career Guide | FermatMind',
             'seo_description' => 'Responsibilities, salary, growth path, and personality fit for Product Managers.',
-            'canonical_url' => 'https://staging.fermatmind.com/en/career/jobs/product-manager',
+            'canonical_url' => 'https://www.fermatmind.com/en/career/jobs/product-manager',
             'og_title' => 'Product Manager Career Guide',
             'robots' => 'index,follow',
+            'jsonld_overrides_json' => [
+                'url' => 'https://www.fermatmind.com/en/career/jobs/product-manager',
+                'mainEntityOfPage' => 'https://www.fermatmind.com/en/career/jobs/product-manager',
+            ],
         ]);
 
         $response = $this->getJson('/api/v0.5/career-jobs/product-manager?locale=en');
@@ -264,8 +270,14 @@ final class CareerJobPublicApiTest extends TestCase
             ->assertJsonCount(1, 'sections')
             ->assertJsonPath('sections.0.section_key', 'day_to_day')
             ->assertJsonPath('seo_meta.seo_title', 'Product Manager Career Guide | FermatMind')
+            ->assertJsonPath('seo_surface_v1.canonical_url', 'https://fermatmind.com/en/career/jobs/product-manager')
+            ->assertJsonPath('seo_surface_v1.alternates.en', 'https://fermatmind.com/en/career/jobs/product-manager')
+            ->assertJsonPath('seo_surface_v1.alternates.zh-CN', 'https://fermatmind.com/zh/career/jobs/product-manager')
+            ->assertJsonPath('seo_surface_v1.og_payload.url', 'https://fermatmind.com/en/career/jobs/product-manager')
             ->assertJsonMissingPath('job.salary_json')
             ->assertJsonMissingPath('revisions');
+
+        $this->assertStringNotContainsString('www.fermatmind.com', (string) $response->getContent());
     }
 
     public function test_detail_returns_not_found_for_missing_hidden_or_locale_mismatch_jobs(): void

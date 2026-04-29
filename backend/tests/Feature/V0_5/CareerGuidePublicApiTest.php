@@ -122,7 +122,7 @@ final class CareerGuidePublicApiTest extends TestCase
 
     public function test_detail_returns_guide_related_summaries_industry_slugs_and_resolved_seo_meta(): void
     {
-        config(['app.frontend_url' => 'https://staging.fermatmind.com']);
+        config(['app.frontend_url' => 'https://www.fermatmind.com']);
 
         $guide = $this->createGuide([
             'guide_code' => 'from-mbti-to-job-fit',
@@ -140,11 +140,13 @@ final class CareerGuidePublicApiTest extends TestCase
         $this->createSeoMeta($guide, [
             'seo_title' => 'From MBTI to Job Fit | FermatMind',
             'seo_description' => 'Translate personality insights into practical career decisions.',
-            'canonical_url' => 'https://api.staging.fermatmind.com/career-guides/from-mbti-to-job-fit',
+            'canonical_url' => 'https://www.fermatmind.com/en/career/guides/from-mbti-to-job-fit',
             'og_title' => 'MBTI to Job Fit',
             'og_description' => 'Practical MBTI career guide.',
             'robots' => 'index,follow',
-            'jsonld_overrides_json' => ['@id' => 'https://api.staging.fermatmind.com/career-guides/from-mbti-to-job-fit#webpage'],
+            'jsonld_overrides_json' => [
+                '@id' => 'https://www.fermatmind.com/en/career/guides/from-mbti-to-job-fit#webpage',
+            ],
         ]);
 
         $job = $this->createJob([
@@ -233,12 +235,17 @@ final class CareerGuidePublicApiTest extends TestCase
             ->assertJsonPath('seo_meta.seo_title', 'From MBTI to Job Fit | FermatMind')
             ->assertJsonPath(
                 'seo_meta.canonical_url',
-                'https://staging.fermatmind.com/en/career/guides/from-mbti-to-job-fit'
+                'https://fermatmind.com/en/career/guides/from-mbti-to-job-fit'
             )
+            ->assertJsonPath('seo_surface_v1.canonical_url', 'https://fermatmind.com/en/career/guides/from-mbti-to-job-fit')
+            ->assertJsonPath('seo_surface_v1.alternates.en', 'https://fermatmind.com/en/career/guides/from-mbti-to-job-fit')
+            ->assertJsonPath('seo_surface_v1.og_payload.url', 'https://fermatmind.com/en/career/guides/from-mbti-to-job-fit')
             ->assertJsonPath('seo_meta.robots', 'index,follow')
             ->assertJsonMissingPath('guide.related_jobs')
             ->assertJsonMissingPath('revisions')
             ->assertJsonMissingPath('related_jobs.0.pivot');
+
+        $this->assertStringNotContainsString('www.fermatmind.com', (string) $response->getContent());
     }
 
     public function test_detail_returns_not_found_for_missing_hidden_and_locale_mismatch_guides(): void

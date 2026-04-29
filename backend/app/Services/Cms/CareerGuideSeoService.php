@@ -7,6 +7,7 @@ namespace App\Services\Cms;
 use App\Models\CareerGuide;
 use App\Models\CareerGuideSeoMeta;
 use App\Services\Career\StructuredData\CareerArticleStructuredDataBuilder;
+use App\Support\CanonicalFrontendUrl;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
@@ -125,7 +126,9 @@ final class CareerGuideSeoService
             $jsonLd = array_replace_recursive($jsonLd, $seoMeta->jsonld_overrides_json);
         }
 
-        return $this->normalizeJsonLdUrls($jsonLd, $canonical, $seoMeta?->canonical_url);
+        return CanonicalFrontendUrl::normalizeNestedUrls(
+            $this->normalizeJsonLdUrls($jsonLd, $canonical, $seoMeta?->canonical_url)
+        );
     }
 
     /**
@@ -147,13 +150,13 @@ final class CareerGuideSeoService
             'twitter_description' => data_get($payload, 'twitter.description'),
             'twitter_image_url' => data_get($payload, 'twitter.image'),
             'robots' => $payload['robots'],
-            'jsonld_overrides_json' => $seoMeta?->jsonld_overrides_json,
+            'jsonld_overrides_json' => CanonicalFrontendUrl::normalizeNestedUrls($seoMeta?->jsonld_overrides_json),
         ];
     }
 
     public function buildCanonicalUrl(CareerGuide $guide, ?string $locale = null, ?string $slug = null): ?string
     {
-        $baseUrl = rtrim((string) config('app.frontend_url', config('app.url', '')), '/');
+        $baseUrl = CanonicalFrontendUrl::fromConfig();
         $resolvedSlug = strtolower(trim((string) ($slug ?? $guide->slug)));
         $resolvedLocale = $this->normalizeLocale((string) ($locale ?? $guide->locale));
 

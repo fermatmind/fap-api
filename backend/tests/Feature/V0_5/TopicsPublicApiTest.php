@@ -123,6 +123,8 @@ final class TopicsPublicApiTest extends TestCase
 
     public function test_detail_returns_sections_entry_groups_and_seo_meta(): void
     {
+        config(['app.frontend_url' => 'https://www.fermatmind.com']);
+
         $topic = $this->createTopicProfile([
             'topic_code' => 'mbti',
             'slug' => 'mbti',
@@ -236,6 +238,10 @@ final class TopicsPublicApiTest extends TestCase
             ->assertJsonPath('seo_meta.seo_title', 'MBTI Guide and Type Hub | FermatMind')
             ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
             ->assertJsonPath('seo_surface_v1.surface_type', 'topic_public_detail')
+            ->assertJsonPath('seo_surface_v1.canonical_url', 'https://fermatmind.com/en/topics/mbti')
+            ->assertJsonPath('seo_surface_v1.alternates.en', 'https://fermatmind.com/en/topics/mbti')
+            ->assertJsonPath('seo_surface_v1.alternates.zh-CN', 'https://fermatmind.com/zh/topics/mbti')
+            ->assertJsonPath('seo_surface_v1.og_payload.url', 'https://fermatmind.com/en/topics/mbti')
             ->assertJsonPath('landing_surface_v1.landing_contract_version', 'landing.surface.v1')
             ->assertJsonPath('landing_surface_v1.entry_surface', 'topic_detail')
             ->assertJsonPath('landing_surface_v1.entry_type', 'topic_profile')
@@ -254,6 +260,8 @@ final class TopicsPublicApiTest extends TestCase
             ->assertJsonPath('entry_groups.tests.0.url', '/en/tests/mbti-personality-test-16-personality-types')
             ->assertJsonPath('entry_groups.related.0.url', '/en/about/methodology')
             ->assertJsonMissingPath('revisions');
+
+        $this->assertStringNotContainsString('www.fermatmind.com', (string) $response->getContent());
     }
 
     public function test_detail_returns_not_found_for_missing_hidden_or_locale_mismatch_topics(): void

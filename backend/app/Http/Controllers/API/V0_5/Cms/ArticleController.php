@@ -13,6 +13,7 @@ use App\Services\Cms\ArticleService;
 use App\Services\PublicSurface\AnswerSurfaceContractService;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\PublicSurface\SeoSurfaceContractService;
+use App\Support\CanonicalFrontendUrl;
 use App\Support\PublicMediaUrlGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -871,6 +872,10 @@ class ArticleController extends Controller
 
         $seoMeta['seo_title'] = $revision->seo_title;
         $seoMeta['seo_description'] = $revision->seo_description;
+        $seoMeta['canonical_url'] = CanonicalFrontendUrl::normalizeAbsoluteUrl($seoMeta['canonical_url'] ?? null);
+        if (array_key_exists('schema_json', $seoMeta)) {
+            $seoMeta['schema_json'] = CanonicalFrontendUrl::normalizeNestedUrls($seoMeta['schema_json']);
+        }
 
         return $seoMeta;
     }
@@ -911,10 +916,34 @@ class ArticleController extends Controller
             'updated_at' => $article->updated_at?->toISOString(),
             'category' => $article->relationLoaded('category') ? $article->category : null,
             'tags' => $article->relationLoaded('tags') ? $article->tags : [],
-            'seo_meta' => $article->relationLoaded('seoMeta')
-                ? PublicMediaUrlGuard::sanitizeArrayFields($article->seoMeta?->toArray(), ['og_image_url', 'twitter_image_url'])
-                : null,
+            'seo_meta' => $this->articleSeoMetaPayload($article),
         ];
+    }
+
+    /**
+     * @return array<string,mixed>|null
+     */
+    private function articleSeoMetaPayload(Article $article): ?array
+    {
+        if (! $article->relationLoaded('seoMeta')) {
+            return null;
+        }
+
+        $seoMeta = PublicMediaUrlGuard::sanitizeArrayFields(
+            $article->seoMeta?->toArray(),
+            ['og_image_url', 'twitter_image_url']
+        );
+
+        if (! is_array($seoMeta)) {
+            return null;
+        }
+
+        $seoMeta['canonical_url'] = CanonicalFrontendUrl::normalizeAbsoluteUrl($seoMeta['canonical_url'] ?? null);
+        if (array_key_exists('schema_json', $seoMeta)) {
+            $seoMeta['schema_json'] = CanonicalFrontendUrl::normalizeNestedUrls($seoMeta['schema_json']);
+        }
+
+        return $seoMeta;
     }
 
     private function invalidArgument(InvalidArgumentException $e): JsonResponse

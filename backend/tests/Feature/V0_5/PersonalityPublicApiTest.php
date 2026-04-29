@@ -134,6 +134,8 @@ final class PersonalityPublicApiTest extends TestCase
 
     public function test_detail_returns_profile_sections_and_seo_meta(): void
     {
+        config(['app.frontend_url' => 'https://www.fermatmind.com']);
+
         $profile = $this->createProfile([
             'type_code' => 'INTJ',
             'slug' => 'intj',
@@ -199,6 +201,10 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('seo_meta.seo_title', 'INTJ Personality Type')
             ->assertJsonPath('seo_surface_v1.metadata_contract_version', 'seo.surface.v1')
             ->assertJsonPath('seo_surface_v1.surface_type', 'mbti_personality_public_detail')
+            ->assertJsonPath('seo_surface_v1.canonical_url', 'https://fermatmind.com/en/personality/intj')
+            ->assertJsonPath('seo_surface_v1.alternates.en', 'https://fermatmind.com/en/personality/intj')
+            ->assertJsonPath('seo_surface_v1.alternates.zh-CN', 'https://fermatmind.com/zh/personality/intj')
+            ->assertJsonPath('seo_surface_v1.og_payload.url', 'https://fermatmind.com/en/personality/intj')
             ->assertJsonPath('landing_surface_v1.landing_contract_version', 'landing.surface.v1')
             ->assertJsonPath('landing_surface_v1.entry_surface', 'personality_detail')
             ->assertJsonPath('landing_surface_v1.entry_type', 'personality_profile')
@@ -215,6 +221,8 @@ final class PersonalityPublicApiTest extends TestCase
             ->assertJsonPath('mbti_public_projection_v1.summary_card.title', 'INTJ - Architect')
             ->assertJsonPath('mbti_public_projection_v1.sections.0.key', 'overview')
             ->assertJsonMissingPath('revisions');
+
+        $this->assertStringNotContainsString('www.fermatmind.com', (string) $response->getContent());
     }
 
     public function test_detail_returns_not_found_for_missing_hidden_or_locale_mismatch_profiles(): void
