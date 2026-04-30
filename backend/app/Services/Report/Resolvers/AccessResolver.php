@@ -50,7 +50,8 @@ class AccessResolver
         string $attemptId,
         bool $hasFullAccess,
         bool $forceFreeOnly,
-        array $modulesOffered
+        array $modulesOffered,
+        bool $allowAttemptScopedPaidModules = true
     ): array {
         $scaleCode = strtoupper(trim($scaleCode));
         if ($forceFreeOnly && in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)) {
@@ -67,7 +68,9 @@ class AccessResolver
             ];
         }
 
-        $modulesAllowed = $this->entitlements->getAllowedModulesForAttempt($orgId, $attemptId);
+        $modulesAllowed = $allowAttemptScopedPaidModules
+            ? $this->entitlements->getAllowedModulesForAttempt($orgId, $attemptId)
+            : ReportAccess::defaultModulesAllowedForLocked($scaleCode);
         $modulesAllowed = $this->filterModulesForScale($scaleCode, $modulesAllowed);
 
         if ($modulesAllowed === [] || $forceFreeOnly) {
