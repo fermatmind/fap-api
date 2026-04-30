@@ -54,6 +54,13 @@ final class EnsureCmsAdminAuthorized
     private function isAuthorized(object $user, string $ability): bool
     {
         $permissions = match ($ability) {
+            'read' => [
+                PermissionNames::ADMIN_CONTENT_READ,
+                PermissionNames::ADMIN_CONTENT_WRITE,
+                PermissionNames::ADMIN_CONTENT_RELEASE,
+                PermissionNames::ADMIN_CONTENT_PUBLISH,
+                PermissionNames::ADMIN_OWNER,
+            ],
             'release' => [
                 PermissionNames::ADMIN_CONTENT_RELEASE,
                 PermissionNames::ADMIN_CONTENT_PUBLISH,
@@ -84,6 +91,7 @@ final class EnsureCmsAdminAuthorized
     private function forbiddenReason(string $ability): string
     {
         return match ($ability) {
+            'read' => 'admin_content_read_required',
             'release' => 'admin_content_release_required',
             'write' => 'admin_content_write_required',
             default => 'admin_content_access_required',
