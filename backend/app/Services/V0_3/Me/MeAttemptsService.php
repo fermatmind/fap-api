@@ -8,6 +8,7 @@ use App\Models\ReportSnapshot;
 use App\Models\Result;
 use App\Models\UnifiedAccessProjection;
 use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
+use App\Services\Commerce\EntitlementManager;
 use App\Services\Enneagram\EnneagramCompareGuardService;
 use App\Services\Enneagram\EnneagramObservationStateService;
 use App\Services\Enneagram\EnneagramPublicFormSummaryBuilder;
@@ -68,6 +69,7 @@ class MeAttemptsService
     public function __construct(
         private readonly ScaleRegistry $scaleRegistry,
         private readonly OfferResolver $offerResolver,
+        private readonly EntitlementManager $entitlements,
         private readonly MbtiPublicFormSummaryBuilder $mbtiPublicFormSummaryBuilder,
         private readonly BigFivePublicFormSummaryBuilder $bigFivePublicFormSummaryBuilder,
         private readonly EnneagramPublicFormSummaryBuilder $enneagramPublicFormSummaryBuilder,
@@ -355,7 +357,10 @@ class MeAttemptsService
         $completedInvitees = max(0, min($requiredInvitees, (int) ($inviteSnapshot['completed_invitees'] ?? 0)));
         $isBigFive = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_BIG5_OCEAN;
         $isEnneagram = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_ENNEAGRAM;
-        if (($isBigFive || $isEnneagram) && $resultExists) {
+        $isFreeReadableBigFive = $isBigFive && $this->isBigFiveFreeReadable($attempt);
+        $hasPaidBigFiveAccess = $isBigFive && ! $isFreeReadableBigFive && $resultExists
+            && $this->hasBigFiveFullAccess($attempt);
+        if (($isFreeReadableBigFive || $isEnneagram) && $resultExists) {
             $accessState = 'ready';
             $reportState = 'ready';
             $pdfState = 'ready';
@@ -363,6 +368,19 @@ class MeAttemptsService
             $unlockSource = ReportAccess::UNLOCK_SOURCE_NONE;
             $payload['access_level'] = ReportAccess::REPORT_ACCESS_FULL;
             $payload['variant'] = ReportAccess::VARIANT_FULL;
+        } elseif ($hasPaidBigFiveAccess) {
+            $accessState = 'ready';
+            $reportState = 'ready';
+            $pdfState = 'ready';
+            $unlockStage = ReportAccess::UNLOCK_STAGE_FULL;
+            $unlockSource = ReportAccess::UNLOCK_SOURCE_PAYMENT;
+            $payload['access_level'] = ReportAccess::REPORT_ACCESS_FULL;
+            $payload['variant'] = ReportAccess::VARIANT_FULL;
+            $payload['modules_allowed'] = ReportAccess::normalizeModules(array_merge(
+                ReportAccess::defaultModulesAllowedForLocked(ReportAccess::SCALE_BIG5_OCEAN),
+                ReportAccess::allDefaultModulesOffered(ReportAccess::SCALE_BIG5_OCEAN)
+            ));
+            $payload['modules_preview'] = $payload['modules_allowed'];
         }
 
         return [
@@ -385,6 +403,42 @@ class MeAttemptsService
             ),
             'actions' => $this->buildAccessSummaryActions($attempt, $accessState, $reportState, $pdfState),
         ];
+    }
+
+    private function isBigFiveFreeReadable(Attempt $attempt): bool
+    {
+        $registry = $this->scaleRegistry->getByCode(ReportAccess::SCALE_BIG5_OCEAN, (int) ($attempt->org_id ?? 0));
+        if (! is_array($registry)) {
+            return false;
+        }
+
+        return in_array(
+            ScaleRolloutGate::paywallMode($registry),
+            [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF],
+            true
+        );
+    }
+
+    private function hasBigFiveFullAccess(Attempt $attempt): bool
+    {
+        $registry = $this->scaleRegistry->getByCode(ReportAccess::SCALE_BIG5_OCEAN, (int) ($attempt->org_id ?? 0));
+        if (! is_array($registry)) {
+            return false;
+        }
+
+        $commercial = $this->offerResolver->normalizeCommercial($registry['commercial_json'] ?? null);
+        $benefitCode = strtoupper(trim((string) ($commercial['report_benefit_code'] ?? '')));
+        if ($benefitCode === '') {
+            $benefitCode = strtoupper(trim((string) ($commercial['credit_benefit_code'] ?? '')));
+        }
+
+        return $this->entitlements->hasFullAccess(
+            (int) ($attempt->org_id ?? 0),
+            $this->nullableText($attempt->user_id ?? null),
+            $this->nullableText($attempt->anon_id ?? null),
+            (string) ($attempt->id ?? ''),
+            $benefitCode
+        );
     }
 
     /**

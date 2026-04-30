@@ -727,7 +727,8 @@ class AttemptReadController extends Controller
         $isBigFive = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_BIG5_OCEAN;
         $isEnneagram = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_ENNEAGRAM;
         $isRiasec = strtoupper(trim((string) ($attempt->scale_code ?? ''))) === ReportAccess::SCALE_RIASEC;
-        if (($isBigFive || $isEnneagram || $isRiasec) && $resultExists) {
+        $hasBigFiveFullAccess = $isBigFive && $resultExists && $this->hasBigFiveFullAccess($request, $orgId, (string) $attempt->id);
+        if (($hasBigFiveFullAccess || $isEnneagram || $isRiasec) && $resultExists) {
             $accessState = 'ready';
             $reportState = 'ready';
             $pdfState = 'ready';
@@ -1231,6 +1232,23 @@ class AttemptReadController extends Controller
                 'result_exists' => $resultExists,
             ],
         ];
+    }
+
+    private function hasBigFiveFullAccess(Request $request, int $orgId, string $attemptId): bool
+    {
+        $gate = $this->reportGatekeeper->ensureAccess(
+            $orgId,
+            $attemptId,
+            $this->resolveUserId($request),
+            $this->resolveAnonId($request),
+            $this->currentOrgContext()->role()
+        );
+
+        if (! ($gate['ok'] ?? false)) {
+            return false;
+        }
+
+        return ! (bool) ($gate['locked'] ?? true);
     }
 
     /**
