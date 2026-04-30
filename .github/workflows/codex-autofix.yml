@@ -1,151 +1,72 @@
 name: Codex Auto-Fix on PR CI Failure
 
+run-name: Codex autofix safety boundary
+
 on:
   workflow_run:
     workflows: ["CI"]
     types: [completed]
+  workflow_dispatch:
+    inputs:
+      failed_workflow_id:
+        description: "Optional failed CI run id for maintainer follow-up."
+        required: false
+        type: string
 
-permissions:
-  contents: write
-  actions: read
+# Keep this workflow with no repository token scopes. Do not check out PR heads,
+# run dependency scripts, pass secrets, or push commits from this workflow_run
+# context.
+permissions: {}
 
 concurrency:
-  group: codex-autofix-${{ github.event.workflow_run.head_branch }}
+  group: codex-autofix-${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_branch || github.run_id }}
   cancel-in-progress: false
 
 jobs:
-  autofix:
+  safe-autofix-boundary:
+    permissions: {}
     if: >
       ${{
-        github.event.workflow_run.conclusion == 'failure' &&
-        github.event.workflow_run.event == 'pull_request' &&
-        github.event.workflow_run.head_branch != 'main' &&
-        github.event.workflow_run.head_repository.full_name == github.repository &&
-        !startsWith(github.event.workflow_run.head_branch, 'codex/autofix-') &&
-        !startsWith(github.event.workflow_run.head_branch, 'autofix/') &&
-        github.event.workflow_run.actor.login != 'github-actions[bot]'
+        github.event_name == 'workflow_dispatch' ||
+        (
+          github.event_name == 'workflow_run' &&
+          github.event.workflow_run.conclusion == 'failure' &&
+          github.event.workflow_run.event == 'pull_request'
+        )
       }}
     runs-on: ubuntu-latest
-    timeout-minutes: 45
-
-    env:
-      FAILED_WORKFLOW_ID: ${{ github.event.workflow_run.id }}
-      FAILED_WORKFLOW_NAME: ${{ github.event.workflow_run.name }}
-      FAILED_HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
-      FAILED_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+    timeout-minutes: 5
 
     steps:
-      - name: Check out failing PR head branch
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ env.FAILED_HEAD_BRANCH }}
-          fetch-depth: 0
-
-      - name: Check whether branch moved after failed run
-        id: staleness
-        run: |
-          current_sha="$(git rev-parse HEAD)"
-          if [ "$current_sha" = "$FAILED_HEAD_SHA" ]; then
-            echo "stale=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "stale=true" >> "$GITHUB_OUTPUT"
-            echo "Branch moved after the failed run. Skipping stale autofix."
-          fi
-
-      - name: Loop guard for prior autofix commit
-        id: loop_guard
-        if: steps.staleness.outputs.stale != 'true'
-        run: |
-          subject="$(git log -1 --pretty=%s)"
-          if printf '%s' "$subject" | grep -q '^\[codex-autofix\]'; then
-            echo "already_autofixed=true" >> "$GITHUB_OUTPUT"
-            echo "Latest commit is already an autofix commit. Skipping."
-          else
-            echo "already_autofixed=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Ensure backend manifest files are present
-        if: steps.staleness.outputs.stale != 'true' && steps.loop_guard.outputs.already_autofixed != 'true'
-        run: |
-          test -f backend/composer.json
-          test -f .github/codex/prompts/fix-ci.md
-
-      - name: Capture failed run context
-        if: steps.staleness.outputs.stale != 'true' && steps.loop_guard.outputs.already_autofixed != 'true'
+      - name: Record safe autofix boundary
         env:
-          GH_TOKEN: ${{ github.token }}
+          EVENT_NAME: ${{ github.event_name }}
+          FAILED_WORKFLOW_ID: ${{ github.event.workflow_run.id || inputs.failed_workflow_id || '' }}
+          FAILED_WORKFLOW_NAME: ${{ github.event.workflow_run.name || 'manual dispatch' }}
+          FAILED_HEAD_BRANCH: ${{ github.event.workflow_run.head_branch || '' }}
+          FAILED_HEAD_SHA: ${{ github.event.workflow_run.head_sha || '' }}
         run: |
-          mkdir -p .github/codex-context
+          echo "Codex autofix is intentionally read-only in GitHub Actions."
+          echo "event=${EVENT_NAME}"
+          echo "failed_workflow=${FAILED_WORKFLOW_NAME}"
+          echo "failed_workflow_id=${FAILED_WORKFLOW_ID}"
 
-          cat > .github/codex-context/metadata.txt <<EOF
-          workflow: ${FAILED_WORKFLOW_NAME}
-          workflow_run_id: ${FAILED_WORKFLOW_ID}
-          branch: ${FAILED_HEAD_BRANCH}
-          sha: ${FAILED_HEAD_SHA}
+          if [ -n "${FAILED_HEAD_BRANCH}" ]; then
+            echo "failed_head_branch=${FAILED_HEAD_BRANCH}"
+          fi
+
+          if [ -n "${FAILED_HEAD_SHA}" ]; then
+            echo "failed_head_sha=${FAILED_HEAD_SHA}"
+          fi
+
+          cat <<'EOF'
+          Automatic PR autofix is disabled here because workflow_run executes
+          with repository credentials. A workflow that checks out PR-controlled
+          code, runs project scripts, passes secrets, and pushes changes would
+          give untrusted code access to privileged credentials.
+
+          Safe follow-up path:
+          - inspect the failed run logs with read-only credentials;
+          - make fixes from a trusted local Codex session or trusted branch;
+          - open a normal PR and let required CI checks enforce merge safety.
           EOF
-
-          gh run view "${FAILED_WORKFLOW_ID}" --log-failed > .github/codex-context/failed-run.log || true
-
-      - name: Set up PHP 8.4 and Composer v2
-        if: steps.staleness.outputs.stale != 'true' && steps.loop_guard.outputs.already_autofixed != 'true'
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-          tools: composer:v2
-          coverage: none
-
-      - name: Set up Node 20
-        if: steps.staleness.outputs.stale != 'true' && steps.loop_guard.outputs.already_autofixed != 'true'
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install backend dependencies
-        if: steps.staleness.outputs.stale != 'true' && steps.loop_guard.outputs.already_autofixed != 'true'
-        working-directory: backend
-        run: |
-          composer install --no-interaction --prefer-dist --no-progress
-
-      - name: Run Codex autofix
-        if: steps.staleness.outputs.stale != 'true' && steps.loop_guard.outputs.already_autofixed != 'true'
-        uses: openai/codex-action@v1
-        with:
-          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
-          prompt-file: .github/codex/prompts/fix-ci.md
-          sandbox: workspace-write
-          safety-strategy: drop-sudo
-
-      - name: Detect repository changes
-        id: changes
-        if: steps.staleness.outputs.stale != 'true' && steps.loop_guard.outputs.already_autofixed != 'true'
-        run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            echo "has_changes=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "has_changes=false" >> "$GITHUB_OUTPUT"
-            echo "No changes produced by Codex."
-          fi
-
-      - name: Check remote branch is still unchanged
-        id: remote_guard
-        if: steps.changes.outputs.has_changes == 'true'
-        run: |
-          git fetch origin "${FAILED_HEAD_BRANCH}"
-          remote_sha="$(git rev-parse "origin/${FAILED_HEAD_BRANCH}")"
-
-          if [ "$remote_sha" = "$FAILED_HEAD_SHA" ]; then
-            echo "can_push=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "can_push=false" >> "$GITHUB_OUTPUT"
-            echo "Remote branch moved during autofix. Skipping push."
-          fi
-
-      - name: Commit and push autofix back to PR branch
-        if: steps.changes.outputs.has_changes == 'true' && steps.remote_guard.outputs.can_push == 'true'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add -A
-          git commit -m "[codex-autofix] fix failing CI in ${FAILED_WORKFLOW_NAME}"
-          git push origin "HEAD:${FAILED_HEAD_BRANCH}"
