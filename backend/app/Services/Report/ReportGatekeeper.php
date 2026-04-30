@@ -74,8 +74,7 @@ class ReportGatekeeper
 
         $commercial = $this->offerResolver->normalizeCommercial($registry['commercial_json'] ?? null);
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
-        $forceFreeOnly = in_array(strtoupper($scaleCode), [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)
-            || in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
+        $forceFreeOnly = $this->shouldForceFreeOnly($scaleCode, $paywallMode);
         $accessState = $this->accessResolver->resolveAccess(
             $scaleCode,
             $effectiveOrgId,
@@ -134,8 +133,7 @@ class ReportGatekeeper
         $commercial = $this->offerResolver->normalizeCommercial($registry['commercial_json'] ?? null);
         $commercialSpec = $isMbtiContract ? $this->loadCommercialSpecForAttempt($attempt, $result) : [];
         $paywallMode = ScaleRolloutGate::paywallMode($registry);
-        $forceFreeOnly = in_array($scaleCode, [ReportAccess::SCALE_BIG5_OCEAN, ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)
-            || in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
+        $forceFreeOnly = $this->shouldForceFreeOnly($scaleCode, $paywallMode);
         $paywall = $this->offerResolver->buildPaywall(
             $viewPolicy,
             $commercial,
@@ -519,6 +517,19 @@ class ReportGatekeeper
         $normalizedRole = strtolower(trim((string) $role));
 
         return $normalizedRole === 'system';
+    }
+
+    private function shouldForceFreeOnly(string $scaleCode, string $paywallMode): bool
+    {
+        $scaleCode = strtoupper(trim($scaleCode));
+        $freeByPaywallMode = in_array($paywallMode, [ScaleRolloutGate::PAYWALL_FREE_ONLY, ScaleRolloutGate::PAYWALL_OFF], true);
+
+        if ($scaleCode === ReportAccess::SCALE_BIG5_OCEAN) {
+            return $freeByPaywallMode;
+        }
+
+        return in_array($scaleCode, [ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)
+            || $freeByPaywallMode;
     }
 
     private function canUseAttemptScopedPaidModules(?string $userId, ?string $anonId, ?string $role): bool
