@@ -21,6 +21,10 @@ export DB_DATABASE=/tmp/fap-ci.sqlite
 export QUEUE_CONNECTION=sync
 export FAP_ATTEMPT_WRITE_CONNECTION="${FAP_ATTEMPT_WRITE_CONNECTION:-sqlite}"
 
+# Cache (GitHub Actions CI does not start Redis for the MBTI response cache)
+export CONTENT_LOADER_CACHE_STORE=array
+export MBTI_RESPONSE_CACHE_STORE=array
+
 # Content packs (force local driver + repo path)
 export FAP_PACKS_DRIVER=local
 export FAP_PACKS_ROOT="${REPO_DIR}/content_packages"
@@ -686,7 +690,7 @@ if lsof -ti "tcp:${PORT}" >/dev/null 2>&1; then
 fi
 
 echo "[CI] starting server: php artisan serve --host=$HOST --port=$PORT"
-php artisan serve --host="$HOST" --port="$PORT" >"$SERVE_LOG" 2>&1 &
+CACHE_STORE=file php artisan serve --host="$HOST" --port="$PORT" >"$SERVE_LOG" 2>&1 &
 SERVE_PID=$!
 
 echo "[CI] waiting for health: $API/api/healthz"
@@ -1013,7 +1017,7 @@ SQLITE_DB_FOR_ACCEPT="$DB_DATABASE"
 # ----------------------------
 if [[ "$ACCEPT_PHONE" == "1" ]]; then
   echo "[CI] phone otp acceptance (Phase B)"
-  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" bash "$ACCEPT_PHONE_SH"
+  API="$API" SQLITE_DB="$SQLITE_DB_FOR_ACCEPT" CACHE_STORE=file bash "$ACCEPT_PHONE_SH"
   echo "[CI] phone otp acceptance OK"
 fi
 

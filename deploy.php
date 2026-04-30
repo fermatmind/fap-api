@@ -158,6 +158,7 @@ $stagingHost = host('staging')
     ->set('deploy_path', getenv('DEPLOY_PATH_STG') ?: '/var/www/fap-api-staging')
     ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_STG') ?: 'staging.fermatmind.com')
     ->set('static_media_healthcheck_host', getenv('STATIC_MEDIA_HEALTHCHECK_HOST_STG') ?: 'staging-api.fermatmind.com')
+    ->set('static_media_healthcheck_use_resolve', true)
     ->set('scale_lookup_healthcheck_host', getenv('SCALE_LOOKUP_HEALTHCHECK_HOST_STG') ?: 'staging-api.fermatmind.com')
     ->set('ops_entry_host', getenv('OPS_ENTRY_HOST_STG') ?: '')
     ->set('nginx_site', '/etc/nginx/sites-enabled/fap-api-staging')
@@ -571,6 +572,12 @@ task('guard:required-public-static-media-assets', function () {
     }
 });
 
+task('ensure:release-public-static-compat', function () {
+    run('mkdir -p {{release_path}}/public');
+    run('ln -sfn ../backend/public/static {{release_path}}/public/static');
+    run('test -s {{release_path}}/public/static/social/wechat-qr-official-258.jpg');
+});
+
 /**
  * ======================================================
  * Healthcheck
@@ -801,6 +808,7 @@ after('deploy:vendors', 'artisan:filament:assets');
 after('artisan:filament:assets', 'guard:ops-theme-asset');
 after('artisan:filament:assets', 'guard:filament-assets');
 after('artisan:filament:assets', 'guard:required-public-static-media-assets');
+after('guard:required-public-static-media-assets', 'ensure:release-public-static-compat');
 after('artisan:config:cache', 'guard:sitemap-authority');
 after('artisan:migrate', 'guard:no-pending-migrations');
 after('guard:no-pending-migrations', 'artisan:scales:seed-default');
