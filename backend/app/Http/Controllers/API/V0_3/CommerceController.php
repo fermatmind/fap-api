@@ -4,10 +4,10 @@ namespace App\Http\Controllers\API\V0_3;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
 use App\Services\Commerce\Checkout\AlipayCheckoutService;
 use App\Services\Commerce\Checkout\LemonSqueezyCheckoutService;
 use App\Services\Commerce\Checkout\WechatPayCheckoutService;
-use App\Services\BigFive\BigFivePublicFormSummaryBuilder;
 use App\Services\Commerce\MbtiAccessHubBuilder;
 use App\Services\Commerce\OrderManager;
 use App\Services\Commerce\SkuCatalog;
@@ -293,6 +293,20 @@ class CommerceController extends Controller
                 'error_code' => 'ORDER_NOT_FOUND',
                 'message' => 'order not found.',
             ], 404);
+        }
+
+        $bindingError = $this->validateAlipayReturnRecoveryBinding($payload, $order);
+        if ($bindingError !== null) {
+            Log::warning('ALIPAY_RETURN_RECOVERY_BINDING_REJECTED', [
+                'order_no' => $normalizedRouteOrderNo,
+                'reason' => $bindingError['error_code'],
+            ]);
+
+            return response()->json([
+                'ok' => false,
+                'error_code' => $bindingError['error_code'],
+                'message' => $bindingError['message'],
+            ], $bindingError['status']);
         }
 
         $paymentRecoveryToken = $this->orders->issuePaymentRecoveryToken($order);
@@ -1633,6 +1647,135 @@ class CommerceController extends Controller
         }
 
         return [];
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @return array{status:int,error_code:string,message:string}|null
+     */
+    private function validateAlipayReturnRecoveryBinding(array $payload, object $order): ?array
+    {
+        if (strtolower(trim((string) ($order->provider ?? ''))) !== 'alipay') {
+            return $this->alipayReturnBindingMismatch();
+        }
+
+        $expectedAppId = $this->trimNullableString(config('pay.alipay.default.app_id', ''));
+        if ($expectedAppId === null) {
+            return [
+                'status' => 503,
+                'error_code' => 'PAYMENT_RETURN_BINDING_UNAVAILABLE',
+                'message' => 'payment return binding is not configured.',
+            ];
+        }
+
+        $returnedAppId = $this->firstPayloadString($payload, ['app_id', 'auth_app_id', 'appId']);
+        if ($returnedAppId === null || ! hash_equals($expectedAppId, $returnedAppId)) {
+            return $this->alipayReturnBindingMismatch();
+        }
+
+        $expectedSellerId = $this->trimNullableString(config('pay.alipay.default.seller_id', ''));
+        if ($expectedSellerId === null) {
+            return [
+                'status' => 503,
+                'error_code' => 'PAYMENT_RETURN_BINDING_UNAVAILABLE',
+                'message' => 'payment return binding is not configured.',
+            ];
+        }
+
+        $returnedSellerId = $this->firstPayloadString($payload, ['seller_id', 'sellerId']);
+        if ($returnedSellerId === null || ! hash_equals($expectedSellerId, $returnedSellerId)) {
+            return $this->alipayReturnBindingMismatch();
+        }
+
+        $orderProviderApp = $this->trimNullableString($order->provider_app ?? null);
+        if ($orderProviderApp !== null && ! hash_equals($expectedAppId, $orderProviderApp)) {
+            return $this->alipayReturnBindingMismatch();
+        }
+
+        $paymentState = Order::normalizePaymentState(
+            $this->trimNullableString($order->payment_state ?? null),
+            $this->trimNullableString($order->status ?? null)
+        );
+        if (! in_array($paymentState, [
+            Order::PAYMENT_STATE_CREATED,
+            Order::PAYMENT_STATE_PENDING,
+            Order::PAYMENT_STATE_PAID,
+        ], true)) {
+            return $this->alipayReturnBindingMismatch();
+        }
+
+        $tradeStatus = strtoupper((string) ($this->trimNullableString($payload['trade_status'] ?? null) ?? ''));
+        if (! in_array($tradeStatus, ['TRADE_SUCCESS', 'TRADE_FINISHED'], true)) {
+            return $this->alipayReturnBindingMismatch();
+        }
+
+        $returnedAmountCents = $this->parseAlipayYuanAmountCents($payload['total_amount'] ?? null);
+        $orderAmountCents = (int) ($order->amount_cents ?? $order->amount_total ?? 0);
+        if ($returnedAmountCents === null || $orderAmountCents <= 0 || $returnedAmountCents !== $orderAmountCents) {
+            return $this->alipayReturnBindingMismatch();
+        }
+
+        $orderCurrency = strtoupper((string) ($this->trimNullableString($order->currency ?? null) ?? ''));
+        if ($orderCurrency !== '' && $orderCurrency !== 'CNY') {
+            return $this->alipayReturnBindingMismatch();
+        }
+
+        $returnedCurrency = strtoupper((string) ($this->firstPayloadString($payload, ['currency', 'trans_currency']) ?? 'CNY'));
+        if ($returnedCurrency !== 'CNY') {
+            return $this->alipayReturnBindingMismatch();
+        }
+
+        $returnedTradeNo = $this->firstPayloadString($payload, ['trade_no', 'external_trade_no', 'provider_trade_no']);
+        if ($returnedTradeNo !== null) {
+            foreach (['external_trade_no', 'provider_trade_no'] as $field) {
+                $storedTradeNo = $this->trimNullableString($order->{$field} ?? null);
+                if ($storedTradeNo !== null && ! hash_equals($storedTradeNo, $returnedTradeNo)) {
+                    return $this->alipayReturnBindingMismatch();
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @return array{status:int,error_code:string,message:string}
+     */
+    private function alipayReturnBindingMismatch(): array
+    {
+        return [
+            'status' => 422,
+            'error_code' => 'PAYMENT_RETURN_BINDING_MISMATCH',
+            'message' => 'payment return does not match order binding.',
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @param  list<string>  $keys
+     */
+    private function firstPayloadString(array $payload, array $keys): ?string
+    {
+        foreach ($keys as $key) {
+            $value = $this->trimNullableString($payload[$key] ?? null);
+            if ($value !== null) {
+                return $value;
+            }
+        }
+
+        return null;
+    }
+
+    private function parseAlipayYuanAmountCents(mixed $value): ?int
+    {
+        $amount = $this->trimNullableString($value);
+        if ($amount === null || ! preg_match('/^\d+(?:\.\d{1,2})?$/', $amount)) {
+            return null;
+        }
+
+        [$yuan, $fraction] = array_pad(explode('.', $amount, 2), 2, '0');
+
+        return ((int) $yuan * 100) + (int) str_pad($fraction, 2, '0');
     }
 
     /**
