@@ -611,11 +611,33 @@ NGINX;
 set -euo pipefail
 tmp_site="$(mktemp)"
 tmp_script="$(mktemp)"
+tmp_snippet="$(mktemp)"
 site_path=__QUOTED_SITE__
-trap 'rm -f "$tmp_site" "$tmp_script"' EXIT
+snippet_path=__QUOTED_SNIPPET__
+backup_suffix="$(date +%Y%m%d%H%M%S)"
+site_backup="$site_path.bak.fap-static.$backup_suffix"
+snippet_backup="$snippet_path.bak.fap-static.$backup_suffix"
+snippet_existed=0
+trap 'rm -f "$tmp_site" "$tmp_script" "$tmp_snippet"' EXIT
 
-printf %s __ENCODED_SNIPPET__ | base64 -d | sudo -n tee __QUOTED_SNIPPET__ >/dev/null
+printf %s __ENCODED_SNIPPET__ | base64 -d > "$tmp_snippet"
 sudo -n test -f "$site_path"
+
+restore_nginx_static_config() {
+    echo "nginx static media route: restoring previous site file: $site_path" >&2
+    sudo -n cp -p "$site_backup" "$site_path"
+
+    if [ "$snippet_existed" = "1" ]; then
+        echo "nginx static media route: restoring previous snippet: $snippet_path" >&2
+        sudo -n cp -p "$snippet_backup" "$snippet_path"
+    else
+        echo "nginx static media route: removing newly-created snippet: $snippet_path" >&2
+        sudo -n rm -f "$snippet_path"
+    fi
+
+    echo "nginx static media route: validating restored nginx config" >&2
+    sudo -n nginx -t
+}
 
 cat > "$tmp_script" <<'PHP'
 <?php
@@ -655,11 +677,35 @@ if ($count < 1 || ! is_string($next)) {
 echo $next;
 PHP
 
-php "$tmp_script" "$site_path" __QUOTED_SNIPPET__ __QUOTED_HOST__ __QUOTED_PRIMARY_HOST__ > "$tmp_site"
-sudo -n cp "$site_path" "$site_path.bak.fap-static.$(date +%Y%m%d%H%M%S)"
+php "$tmp_script" "$site_path" "$snippet_path" __QUOTED_HOST__ __QUOTED_PRIMARY_HOST__ > "$tmp_site"
+
+if sudo -n test -e "$snippet_path"; then
+    snippet_existed=1
+    sudo -n cp -p "$snippet_path" "$snippet_backup"
+    echo "nginx static media route: snippet backup created: $snippet_backup"
+else
+    echo "nginx static media route: snippet did not exist before update: $snippet_path"
+fi
+
+sudo -n cp -p "$site_path" "$site_backup"
+echo "nginx static media route: site backup created: $site_backup"
+
+echo "nginx static media route: installing candidate snippet and site config"
+sudo -n cp "$tmp_snippet" "$snippet_path"
 sudo -n cp "$tmp_site" "$site_path"
-sudo -n nginx -t
+
+echo "nginx static media route: validating candidate nginx config"
+if sudo -n nginx -t; then
+    echo "nginx static media route: candidate nginx config valid; keeping update"
+else
+    status=$?
+    echo "nginx static media route: candidate nginx config invalid; restoring previous files" >&2
+    restore_nginx_static_config
+    exit "$status"
+fi
+
 test -s __QUOTED_STATIC_ASSET__
+echo "nginx static media route: final static asset path verified"
 BASH, [
         '__ENCODED_SNIPPET__' => $encodedSnippet,
         '__QUOTED_HOST__' => $quotedHost,
