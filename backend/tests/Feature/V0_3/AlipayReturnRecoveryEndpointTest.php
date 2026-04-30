@@ -37,6 +37,7 @@ final class AlipayReturnRecoveryEndpointTest extends TestCase
             'app.frontend_url' => 'https://web.example.test',
             'payments.providers.alipay.enabled' => true,
             'pay.alipay.default.app_id' => 'app_alipay_return_recovery',
+            'pay.alipay.default.seller_id' => 'seller_alipay_return_recovery',
             'pay.alipay.default.alipay_public_cert_path' => $publicKey,
         ]);
 
@@ -45,6 +46,7 @@ final class AlipayReturnRecoveryEndpointTest extends TestCase
         ]);
         $payload = [
             'app_id' => 'app_alipay_return_recovery',
+            'seller_id' => 'seller_alipay_return_recovery',
             'out_trade_no' => $orderNo,
             'trade_no' => 'ali_trade_return_recovery_1',
             'trade_status' => 'TRADE_SUCCESS',
@@ -113,6 +115,7 @@ final class AlipayReturnRecoveryEndpointTest extends TestCase
         config([
             'payments.providers.alipay.enabled' => true,
             'pay.alipay.default.app_id' => 'app_alipay_return_recovery',
+            'pay.alipay.default.seller_id' => 'seller_alipay_return_recovery',
             'pay.alipay.default.alipay_public_cert_path' => $publicKey,
         ]);
 
@@ -142,6 +145,7 @@ final class AlipayReturnRecoveryEndpointTest extends TestCase
         config([
             'payments.providers.alipay.enabled' => true,
             'pay.alipay.default.app_id' => 'app_alipay_return_recovery',
+            'pay.alipay.default.seller_id' => 'seller_alipay_return_recovery',
             'pay.alipay.default.alipay_public_cert_path' => $publicKey,
         ]);
 
@@ -172,6 +176,7 @@ final class AlipayReturnRecoveryEndpointTest extends TestCase
         config([
             'payments.providers.alipay.enabled' => true,
             'pay.alipay.default.app_id' => 'app_alipay_return_recovery',
+            'pay.alipay.default.seller_id' => 'seller_alipay_return_recovery',
             'pay.alipay.default.alipay_public_cert_path' => $publicKey,
         ]);
 
@@ -181,8 +186,136 @@ final class AlipayReturnRecoveryEndpointTest extends TestCase
         ]);
         $payload = [
             'app_id' => 'app_alipay_return_recovery',
+            'seller_id' => 'seller_alipay_return_recovery',
             'out_trade_no' => $orderNo,
             'trade_no' => 'ali_trade_return_recovery_6',
+            'trade_status' => 'TRADE_SUCCESS',
+            'total_amount' => '19.90',
+            'sign_type' => 'RSA2',
+            'notify_time' => '2026-04-02 12:00:00',
+        ];
+        $payload['sign'] = $this->buildAlipaySignature($payload, $privateKey);
+
+        $response = $this->get('/api/v0.3/orders/'.$orderNo.'/recover/alipay-return?'.http_build_query($payload));
+
+        $response->assertStatus(422);
+        $response->assertJsonPath('error_code', 'PAYMENT_RETURN_BINDING_MISMATCH');
+        $response->assertJsonMissingPath('payment_recovery_token');
+    }
+
+    public function test_recover_alipay_return_rejects_missing_configured_seller_binding(): void
+    {
+        ['private' => $privateKey, 'public' => $publicKey] = $this->generateRsaKeyPair();
+        config([
+            'payments.providers.alipay.enabled' => true,
+            'pay.alipay.default.app_id' => 'app_alipay_return_recovery',
+            'pay.alipay.default.seller_id' => '',
+            'pay.alipay.default.alipay_public_cert_path' => $publicKey,
+        ]);
+
+        $orderNo = $this->insertOrder('anon_alipay_return_recovery_7', [
+            'provider_app' => 'app_alipay_return_recovery',
+        ]);
+        $payload = [
+            'app_id' => 'app_alipay_return_recovery',
+            'seller_id' => 'seller_alipay_return_recovery',
+            'out_trade_no' => $orderNo,
+            'trade_no' => 'ali_trade_return_recovery_7',
+            'trade_status' => 'TRADE_SUCCESS',
+            'total_amount' => '19.90',
+            'sign_type' => 'RSA2',
+            'notify_time' => '2026-04-02 12:00:00',
+        ];
+        $payload['sign'] = $this->buildAlipaySignature($payload, $privateKey);
+
+        $response = $this->get('/api/v0.3/orders/'.$orderNo.'/recover/alipay-return?'.http_build_query($payload));
+
+        $response->assertStatus(503);
+        $response->assertJsonPath('error_code', 'PAYMENT_RETURN_BINDING_UNAVAILABLE');
+        $response->assertJsonMissingPath('payment_recovery_token');
+    }
+
+    public function test_recover_alipay_return_rejects_missing_seller_binding(): void
+    {
+        ['private' => $privateKey, 'public' => $publicKey] = $this->generateRsaKeyPair();
+        config([
+            'payments.providers.alipay.enabled' => true,
+            'pay.alipay.default.app_id' => 'app_alipay_return_recovery',
+            'pay.alipay.default.seller_id' => 'seller_alipay_return_recovery',
+            'pay.alipay.default.alipay_public_cert_path' => $publicKey,
+        ]);
+
+        $orderNo = $this->insertOrder('anon_alipay_return_recovery_8', [
+            'provider_app' => 'app_alipay_return_recovery',
+        ]);
+        $payload = [
+            'app_id' => 'app_alipay_return_recovery',
+            'out_trade_no' => $orderNo,
+            'trade_no' => 'ali_trade_return_recovery_8',
+            'trade_status' => 'TRADE_SUCCESS',
+            'total_amount' => '19.90',
+            'sign_type' => 'RSA2',
+            'notify_time' => '2026-04-02 12:00:00',
+        ];
+        $payload['sign'] = $this->buildAlipaySignature($payload, $privateKey);
+
+        $response = $this->get('/api/v0.3/orders/'.$orderNo.'/recover/alipay-return?'.http_build_query($payload));
+
+        $response->assertStatus(422);
+        $response->assertJsonPath('error_code', 'PAYMENT_RETURN_BINDING_MISMATCH');
+        $response->assertJsonMissingPath('payment_recovery_token');
+    }
+
+    public function test_recover_alipay_return_rejects_seller_binding_mismatch(): void
+    {
+        ['private' => $privateKey, 'public' => $publicKey] = $this->generateRsaKeyPair();
+        config([
+            'payments.providers.alipay.enabled' => true,
+            'pay.alipay.default.app_id' => 'app_alipay_return_recovery',
+            'pay.alipay.default.seller_id' => 'seller_alipay_return_recovery',
+            'pay.alipay.default.alipay_public_cert_path' => $publicKey,
+        ]);
+
+        $orderNo = $this->insertOrder('anon_alipay_return_recovery_9', [
+            'provider_app' => 'app_alipay_return_recovery',
+        ]);
+        $payload = [
+            'app_id' => 'app_alipay_return_recovery',
+            'seller_id' => 'seller_alipay_other',
+            'out_trade_no' => $orderNo,
+            'trade_no' => 'ali_trade_return_recovery_9',
+            'trade_status' => 'TRADE_SUCCESS',
+            'total_amount' => '19.90',
+            'sign_type' => 'RSA2',
+            'notify_time' => '2026-04-02 12:00:00',
+        ];
+        $payload['sign'] = $this->buildAlipaySignature($payload, $privateKey);
+
+        $response = $this->get('/api/v0.3/orders/'.$orderNo.'/recover/alipay-return?'.http_build_query($payload));
+
+        $response->assertStatus(422);
+        $response->assertJsonPath('error_code', 'PAYMENT_RETURN_BINDING_MISMATCH');
+        $response->assertJsonMissingPath('payment_recovery_token');
+    }
+
+    public function test_recover_alipay_return_rejects_order_provider_app_mismatch(): void
+    {
+        ['private' => $privateKey, 'public' => $publicKey] = $this->generateRsaKeyPair();
+        config([
+            'payments.providers.alipay.enabled' => true,
+            'pay.alipay.default.app_id' => 'app_alipay_return_recovery',
+            'pay.alipay.default.seller_id' => 'seller_alipay_return_recovery',
+            'pay.alipay.default.alipay_public_cert_path' => $publicKey,
+        ]);
+
+        $orderNo = $this->insertOrder('anon_alipay_return_recovery_10', [
+            'provider_app' => 'app_alipay_other',
+        ]);
+        $payload = [
+            'app_id' => 'app_alipay_return_recovery',
+            'seller_id' => 'seller_alipay_return_recovery',
+            'out_trade_no' => $orderNo,
+            'trade_no' => 'ali_trade_return_recovery_10',
             'trade_status' => 'TRADE_SUCCESS',
             'total_amount' => '19.90',
             'sign_type' => 'RSA2',
@@ -203,16 +336,18 @@ final class AlipayReturnRecoveryEndpointTest extends TestCase
         config([
             'payments.providers.alipay.enabled' => true,
             'pay.alipay.default.app_id' => 'app_alipay_return_recovery',
+            'pay.alipay.default.seller_id' => 'seller_alipay_return_recovery',
             'pay.alipay.default.alipay_public_cert_path' => $publicKey,
         ]);
 
-        $orderNo = $this->insertOrder('anon_alipay_return_recovery_7', [
+        $orderNo = $this->insertOrder('anon_alipay_return_recovery_11', [
             'provider_app' => 'app_alipay_return_recovery',
         ]);
         $payload = [
             'app_id' => 'app_alipay_return_recovery',
+            'seller_id' => 'seller_alipay_return_recovery',
             'out_trade_no' => $orderNo,
-            'trade_no' => 'ali_trade_return_recovery_7',
+            'trade_no' => 'ali_trade_return_recovery_11',
             'trade_status' => 'TRADE_SUCCESS',
             'total_amount' => '20.00',
             'sign_type' => 'RSA2',
@@ -233,18 +368,20 @@ final class AlipayReturnRecoveryEndpointTest extends TestCase
         config([
             'payments.providers.alipay.enabled' => true,
             'pay.alipay.default.app_id' => 'app_alipay_return_recovery',
+            'pay.alipay.default.seller_id' => 'seller_alipay_return_recovery',
             'pay.alipay.default.alipay_public_cert_path' => $publicKey,
         ]);
 
-        $orderNo = $this->insertOrder('anon_alipay_return_recovery_8', [
+        $orderNo = $this->insertOrder('anon_alipay_return_recovery_12', [
             'provider_app' => 'app_alipay_return_recovery',
             'status' => 'canceled',
             'payment_state' => 'canceled',
         ]);
         $payload = [
             'app_id' => 'app_alipay_return_recovery',
+            'seller_id' => 'seller_alipay_return_recovery',
             'out_trade_no' => $orderNo,
-            'trade_no' => 'ali_trade_return_recovery_8',
+            'trade_no' => 'ali_trade_return_recovery_12',
             'trade_status' => 'TRADE_SUCCESS',
             'total_amount' => '19.90',
             'sign_type' => 'RSA2',

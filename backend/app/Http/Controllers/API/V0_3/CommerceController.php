@@ -1673,6 +1673,20 @@ class CommerceController extends Controller
             return $this->alipayReturnBindingMismatch();
         }
 
+        $expectedSellerId = $this->trimNullableString(config('pay.alipay.default.seller_id', ''));
+        if ($expectedSellerId === null) {
+            return [
+                'status' => 503,
+                'error_code' => 'PAYMENT_RETURN_BINDING_UNAVAILABLE',
+                'message' => 'payment return binding is not configured.',
+            ];
+        }
+
+        $returnedSellerId = $this->firstPayloadString($payload, ['seller_id', 'sellerId']);
+        if ($returnedSellerId === null || ! hash_equals($expectedSellerId, $returnedSellerId)) {
+            return $this->alipayReturnBindingMismatch();
+        }
+
         $orderProviderApp = $this->trimNullableString($order->provider_app ?? null);
         if ($orderProviderApp !== null && ! hash_equals($expectedAppId, $orderProviderApp)) {
             return $this->alipayReturnBindingMismatch();

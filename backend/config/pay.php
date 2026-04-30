@@ -51,6 +51,7 @@ return [
     'alipay' => [
         'default' => [
             'app_id' => env('ALIPAY_APP_ID', ''),
+            'seller_id' => env('ALIPAY_SELLER_ID', ''),
             'merchant_private_key' => $alipayMerchantPrivateKey,
             'merchant_private_key_path' => $alipayMerchantPrivateKeyPath,
             'app_secret_cert' => $resolvedAlipayPrivateKey,
