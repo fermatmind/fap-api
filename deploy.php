@@ -578,6 +578,100 @@ task('ensure:release-public-static-compat', function () {
     run('test -s {{release_path}}/public/static/social/wechat-qr-official-258.jpg');
 });
 
+task('ensure:nginx-public-static-media-route', function () {
+    $host = trim((string) (get('static_media_healthcheck_host') ?: get('healthcheck_host')));
+    $primaryHost = trim((string) get('healthcheck_host', ''));
+    $site = trim((string) get('nginx_site', ''));
+
+    if ($host === '' || $primaryHost === '' || $site === '') {
+        throw new \RuntimeException('static media nginx route requires static_media_healthcheck_host and nginx_site');
+    }
+
+    $snippet = '/etc/nginx/snippets/fap-api-public-static-media-' . preg_replace('/[^A-Za-z0-9_.-]/', '-', $host) . '.conf';
+    $staticRoot = rtrim((string) get('deploy_path'), '/') . '/current/backend/public/static/';
+    $snippetBody = <<<NGINX
+# Managed by fap-api deploy. Serve committed backend public static media.
+location ^~ /static/ {
+    alias {$staticRoot};
+    access_log off;
+    expires 30d;
+    add_header Cache-Control "public, max-age=2592000, immutable" always;
+    try_files \$uri =404;
+}
+NGINX;
+
+    $encodedSnippet = escapeshellarg(base64_encode($snippetBody));
+    $quotedSnippet = escapeshellarg($snippet);
+    $quotedSite = escapeshellarg($site);
+    $quotedHost = escapeshellarg($host);
+    $quotedPrimaryHost = escapeshellarg($primaryHost);
+    $quotedStaticAsset = escapeshellarg($staticRoot . 'social/wechat-qr-official-258.jpg');
+
+    $command = strtr(<<<'BASH'
+set -euo pipefail
+tmp_site="$(mktemp)"
+tmp_script="$(mktemp)"
+site_path=__QUOTED_SITE__
+trap 'rm -f "$tmp_site" "$tmp_script"' EXIT
+
+printf %s __ENCODED_SNIPPET__ | base64 -d | sudo -n tee __QUOTED_SNIPPET__ >/dev/null
+sudo -n test -f "$site_path"
+
+cat > "$tmp_script" <<'PHP'
+<?php
+[$script, $site, $include, $host, $primaryHost] = $argv;
+
+$content = shell_exec('sudo -n /usr/bin/cat ' . escapeshellarg($site));
+if (! is_string($content) || $content === '') {
+    fwrite(STDERR, "nginx site is empty or unreadable: {$site}\n");
+    exit(1);
+}
+
+$content = preg_replace('/^\\s*include\\s+\\/etc\\/nginx\\/snippets\\/fap-api-public-static-media-[^;]+;\\R/m', '', $content);
+$includeLine = '    include ' . $include . ';';
+$hostPattern = preg_quote($host, '/');
+$staticHostPattern = '/(^\\s*server_name\\s+[^;]*\\b' . $hostPattern . '\\b[^;]*;\\s*$)/m';
+$next = preg_replace($staticHostPattern, '$1' . PHP_EOL . $includeLine, $content, -1, $count);
+
+if ($count < 1 || ! is_string($next)) {
+    $primaryHostPattern = preg_quote($primaryHost, '/');
+    $apiHostPattern = '/(^\\s*server_name\\s+[^;]*\\b' . $primaryHostPattern . '\\b)([^;]*)(;\\s*$)/m';
+    $next = preg_replace_callback(
+        $apiHostPattern,
+        static function (array $matches) use ($host, $includeLine): string {
+            return $matches[1] . $matches[2] . ' ' . $host . $matches[3] . PHP_EOL . $includeLine;
+        },
+        $content,
+        -1,
+        $count
+    );
+
+    if ($count < 1 || ! is_string($next)) {
+        fwrite(STDERR, "server_name for {$host} or {$primaryHost} not found in {$site}\n");
+        exit(1);
+    }
+}
+
+echo $next;
+PHP
+
+php "$tmp_script" "$site_path" __QUOTED_SNIPPET__ __QUOTED_HOST__ __QUOTED_PRIMARY_HOST__ > "$tmp_site"
+sudo -n cp "$site_path" "$site_path.bak.fap-static.$(date +%Y%m%d%H%M%S)"
+sudo -n cp "$tmp_site" "$site_path"
+sudo -n nginx -t
+test -s __QUOTED_STATIC_ASSET__
+BASH, [
+        '__ENCODED_SNIPPET__' => $encodedSnippet,
+        '__QUOTED_HOST__' => $quotedHost,
+        '__QUOTED_PRIMARY_HOST__' => $quotedPrimaryHost,
+        '__QUOTED_SITE__' => $quotedSite,
+        '__QUOTED_SNIPPET__' => $quotedSnippet,
+        '__QUOTED_STATIC_ASSET__' => $quotedStaticAsset,
+    ]);
+
+    run($command);
+});
+
 /**
  * ======================================================
  * Healthcheck
@@ -818,6 +912,7 @@ after('cms:import-content-page-baselines', 'career:warm-public-authority-cache')
 after('career:warm-public-authority-cache', 'guard:public-content-release');
 after('guard:public-content-release', 'ensure:release-runtime-perms');
 
+after('deploy:symlink', 'ensure:nginx-public-static-media-route');
 after('deploy:symlink', 'reload:php-fpm');
 after('deploy:symlink', 'reload:nginx');
 after('deploy:symlink', 'queue:reload-workers');
