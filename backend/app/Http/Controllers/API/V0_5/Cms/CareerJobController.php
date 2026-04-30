@@ -82,16 +82,18 @@ final class CareerJobController extends Controller
             return $this->notFoundResponse('career job not found.');
         }
 
+        $frontendDetailAvailable = $this->careerJobSeoService->isFrontendDetailAvailable($job, $validated['locale']);
         $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
-            $this->careerJobSeoService->buildMeta($job, $validated['locale'])
+            $this->careerJobSeoService->buildMeta($job, $validated['locale'], $frontendDetailAvailable)
         );
-        $jsonLd = $this->careerJobSeoService->buildJsonLd($job, $validated['locale']);
+        $jsonLd = $this->careerJobSeoService->buildJsonLd($job, $validated['locale'], $frontendDetailAvailable);
         $sections = array_map(
             fn (CareerJobSection $section): array => $this->careerJobService->sectionPayload($section),
             $job->sections->all()
         );
-        $seoSurface = $this->buildSeoSurface($meta, $jsonLd, 'career_job_public_detail');
-        $landingSurface = $this->buildLandingSurface($job, $validated['locale']);
+        $publicIndexable = $this->careerJobSeoService->isPublicIndexable($job, $validated['locale'], $frontendDetailAvailable);
+        $seoSurface = $this->buildSeoSurface($meta, $jsonLd, 'career_job_public_detail', $publicIndexable);
+        $landingSurface = $this->buildLandingSurface($job, $validated['locale'], $publicIndexable);
 
         return response()->json([
             'ok' => true,
@@ -100,7 +102,14 @@ final class CareerJobController extends Controller
             'seo_meta' => $this->careerJobService->seoMetaPayload($job->seoMeta),
             'seo_surface_v1' => $seoSurface,
             'landing_surface_v1' => $landingSurface,
-            'answer_surface_v1' => $this->buildAnswerSurface($job, $sections, $seoSurface, $landingSurface, $validated['locale']),
+            'answer_surface_v1' => $this->buildAnswerSurface(
+                $job,
+                $sections,
+                $seoSurface,
+                $landingSurface,
+                $validated['locale'],
+                $publicIndexable
+            ),
         ]);
     }
 
@@ -121,15 +130,17 @@ final class CareerJobController extends Controller
             return response()->json(['error' => 'not found'], 404);
         }
 
+        $frontendDetailAvailable = $this->careerJobSeoService->isFrontendDetailAvailable($job, $validated['locale']);
         $meta = PublicMediaUrlGuard::sanitizeSeoMeta(
-            $this->careerJobSeoService->buildMeta($job, $validated['locale'])
+            $this->careerJobSeoService->buildMeta($job, $validated['locale'], $frontendDetailAvailable)
         );
-        $jsonLd = $this->careerJobSeoService->buildJsonLd($job, $validated['locale']);
+        $jsonLd = $this->careerJobSeoService->buildJsonLd($job, $validated['locale'], $frontendDetailAvailable);
+        $publicIndexable = $this->careerJobSeoService->isPublicIndexable($job, $validated['locale'], $frontendDetailAvailable);
 
         return response()->json([
             'meta' => $meta,
             'jsonld' => $jsonLd,
-            'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'career_job_public_detail'),
+            'seo_surface_v1' => $this->buildSeoSurface($meta, $jsonLd, 'career_job_public_detail', $publicIndexable),
         ]);
     }
 
@@ -137,10 +148,10 @@ final class CareerJobController extends Controller
      * @param  array<string,mixed>  $meta
      * @return array<string,mixed>
      */
-    private function buildSeoSurface(array $meta, array $jsonLd, string $surfaceType): array
+    private function buildSeoSurface(array $meta, array $jsonLd, string $surfaceType, bool $publicIndexable): array
     {
         return $this->seoSurfaceContractService->build([
-            'metadata_scope' => 'public_indexable_detail',
+            'metadata_scope' => $publicIndexable ? 'public_indexable_detail' : 'public_noindex_detail',
             'surface_type' => $surfaceType,
             'canonical_url' => $meta['canonical'] ?? null,
             'robots_policy' => $meta['robots'] ?? null,
@@ -150,13 +161,16 @@ final class CareerJobController extends Controller
             'twitter_payload' => is_array($meta['twitter'] ?? null) ? $meta['twitter'] : [],
             'alternates' => is_array($meta['alternates'] ?? null) ? $meta['alternates'] : [],
             'structured_data' => $jsonLd,
+            'indexability_state' => $publicIndexable ? 'indexable' : 'noindex',
+            'sitemap_state' => $publicIndexable ? 'included' : 'excluded',
+            'llms_exposure_state' => $publicIndexable ? 'allow' : 'withhold',
         ]);
     }
 
     /**
      * @return array<string,mixed>
      */
-    private function buildLandingSurface(CareerJob $job, string $locale): array
+    private function buildLandingSurface(CareerJob $job, string $locale, bool $publicIndexable): array
     {
         $segment = $this->frontendLocaleSegment($locale);
         $personalityCodes = array_values(array_filter(array_map(
@@ -208,7 +222,7 @@ final class CareerJobController extends Controller
                     'kind' => 'discover',
                 ],
             ])),
-            'indexability_state' => $job->is_indexable ? 'indexable' : 'noindex',
+            'indexability_state' => $publicIndexable ? 'indexable' : 'noindex',
             'attribution_scope' => 'public_career_job_landing',
             'surface_family' => 'career_job',
             'primary_content_ref' => (string) ($job->slug ?? ''),
@@ -231,7 +245,8 @@ final class CareerJobController extends Controller
         array $sections,
         array $seoSurface,
         array $landingSurface,
-        string $locale
+        string $locale,
+        bool $publicIndexable
     ): array {
         $fitCodes = array_values(array_filter(array_unique(array_map(
             static fn (mixed $value): string => strtoupper(trim((string) $value)),
@@ -271,7 +286,7 @@ final class CareerJobController extends Controller
         ]));
 
         return $this->answerSurfaceContractService->build([
-            'answer_scope' => $job->is_indexable ? 'public_indexable_detail' : 'public_noindex_detail',
+            'answer_scope' => $publicIndexable ? 'public_indexable_detail' : 'public_noindex_detail',
             'surface_type' => 'career_job_public_detail',
             'summary_blocks' => [
                 [
@@ -294,8 +309,8 @@ final class CareerJobController extends Controller
                 $riasecText !== '' ? 'riasec_profile' : '',
                 $sections !== [] ? 'career_job_sections' : '',
             ])),
-            'public_safety_state' => 'public_indexable',
-            'indexability_state' => $job->is_indexable ? 'indexable' : 'noindex',
+            'public_safety_state' => $publicIndexable ? 'public_indexable' : 'public_noindex',
+            'indexability_state' => $publicIndexable ? 'indexable' : 'noindex',
             'attribution_scope' => 'public_career_job_answer',
             'seo_surface_ref' => (string) ($seoSurface['metadata_fingerprint'] ?? ''),
             'landing_surface_ref' => (string) ($landingSurface['landing_fingerprint'] ?? ''),

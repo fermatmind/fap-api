@@ -6,17 +6,23 @@ namespace App\Services\Cms;
 
 use App\Models\CareerJob;
 use App\Models\CareerJobSeoMeta;
+use App\Services\Career\Bundles\CareerJobDetailBundleBuilder;
 use App\Support\CanonicalFrontendUrl;
 
 final class CareerJobSeoService
 {
+    public function __construct(
+        private readonly CareerJobDetailBundleBuilder $careerJobDetailBundleBuilder,
+    ) {}
+
     /**
      * @return array<string, mixed>
      */
-    public function buildMeta(CareerJob $job, string $locale): array
+    public function buildMeta(CareerJob $job, string $locale, ?bool $frontendDetailAvailable = null): array
     {
         $resolvedLocale = $this->normalizeLocale($locale);
         $seoMeta = $this->resolveSeoMeta($job);
+        $indexable = $this->isPublicIndexable($job, $resolvedLocale, $frontendDetailAvailable, $seoMeta);
 
         $title = $this->fallbackText(
             $seoMeta?->seo_title,
@@ -30,8 +36,10 @@ final class CareerJobSeoService
         ) ?? (string) $job->title;
         $canonical = CanonicalFrontendUrl::normalizeAbsoluteUrl($seoMeta?->canonical_url)
             ?? $this->buildCanonicalUrl($job, $resolvedLocale);
-        $robots = $this->fallbackText($seoMeta?->robots)
-            ?? ((bool) $job->is_indexable ? 'index,follow' : 'noindex,follow');
+        $robotsOverride = $this->fallbackText($seoMeta?->robots);
+        $robots = $indexable
+            ? ($robotsOverride ?? 'index,follow')
+            : ($this->containsNoindex($robotsOverride) ? $robotsOverride : 'noindex,follow');
         $image = $this->fallbackText($seoMeta?->og_image_url, (string) ($job->cover_image_url ?? null));
 
         return [
@@ -65,10 +73,10 @@ final class CareerJobSeoService
     /**
      * @return array<string, mixed>
      */
-    public function buildJsonLd(CareerJob $job, string $locale): array
+    public function buildJsonLd(CareerJob $job, string $locale, ?bool $frontendDetailAvailable = null): array
     {
         $resolvedLocale = $this->normalizeLocale($locale);
-        $meta = $this->buildMeta($job, $resolvedLocale);
+        $meta = $this->buildMeta($job, $resolvedLocale, $frontendDetailAvailable);
 
         $jsonLd = [
             '@context' => 'https://schema.org',
@@ -108,6 +116,49 @@ final class CareerJobSeoService
             .'/'.$this->mapBackendLocaleToFrontendSegment($locale)
             .'/career/jobs/'
             .rawurlencode($slug);
+    }
+
+    public function isFrontendDetailAvailable(CareerJob $job, string $locale): bool
+    {
+        return $this->careerJobDetailBundleBuilder->resolvesFrontendDetailRouteFor($job, $this->normalizeLocale($locale));
+    }
+
+    public function isPublicIndexable(
+        CareerJob $job,
+        string $locale,
+        ?bool $frontendDetailAvailable = null,
+        ?CareerJobSeoMeta $seoMeta = null
+    ): bool {
+        if (! (bool) $job->is_indexable) {
+            return false;
+        }
+
+        $isFrontendAvailable = $frontendDetailAvailable
+            ?? $this->isFrontendDetailAvailable($job, $locale);
+        if (! $isFrontendAvailable) {
+            return false;
+        }
+
+        $robots = $this->fallbackText($seoMeta?->robots ?? $this->resolveSeoMeta($job)?->robots);
+        if ($robots === null) {
+            return true;
+        }
+
+        return ! $this->containsNoindex($robots);
+    }
+
+    private function containsNoindex(?string $robots): bool
+    {
+        if ($robots === null) {
+            return false;
+        }
+
+        $tokens = array_map(
+            static fn (string $token): string => strtolower(trim($token)),
+            explode(',', $robots)
+        );
+
+        return in_array('noindex', $tokens, true);
     }
 
     public function mapBackendLocaleToFrontendSegment(string $locale): string

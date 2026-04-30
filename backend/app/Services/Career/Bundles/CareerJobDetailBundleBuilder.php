@@ -241,6 +241,16 @@ final class CareerJobDetailBundleBuilder
         );
     }
 
+    public function resolvesFrontendDetailRouteFor(CareerJob $job, string $locale): bool
+    {
+        $slug = strtolower(trim((string) $job->slug));
+        if ($slug === '' || trim($locale) !== 'zh-CN') {
+            return false;
+        }
+
+        return $this->findPublishedDocxCareerJob($slug) instanceof CareerJob;
+    }
+
     private function buildFromPublishedDocxCareerJob(string $slug): ?CareerJobDetailBundle
     {
         $job = $this->findPublishedDocxCareerJob($slug);
