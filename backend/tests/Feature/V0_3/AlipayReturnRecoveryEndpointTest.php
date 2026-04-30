@@ -36,11 +36,15 @@ final class AlipayReturnRecoveryEndpointTest extends TestCase
         config([
             'app.frontend_url' => 'https://web.example.test',
             'payments.providers.alipay.enabled' => true,
+            'pay.alipay.default.app_id' => 'app_alipay_return_recovery',
             'pay.alipay.default.alipay_public_cert_path' => $publicKey,
         ]);
 
-        $orderNo = $this->insertOrder('anon_alipay_return_recovery_1');
+        $orderNo = $this->insertOrder('anon_alipay_return_recovery_1', [
+            'provider_app' => 'app_alipay_return_recovery',
+        ]);
         $payload = [
+            'app_id' => 'app_alipay_return_recovery',
             'out_trade_no' => $orderNo,
             'trade_no' => 'ali_trade_return_recovery_1',
             'trade_status' => 'TRADE_SUCCESS',
@@ -103,11 +107,163 @@ final class AlipayReturnRecoveryEndpointTest extends TestCase
         $response->assertJsonPath('error_code', 'ORDER_MISMATCH');
     }
 
-    private function insertOrder(string $anonId): string
+    public function test_recover_alipay_return_rejects_missing_app_binding(): void
+    {
+        ['private' => $privateKey, 'public' => $publicKey] = $this->generateRsaKeyPair();
+        config([
+            'payments.providers.alipay.enabled' => true,
+            'pay.alipay.default.app_id' => 'app_alipay_return_recovery',
+            'pay.alipay.default.alipay_public_cert_path' => $publicKey,
+        ]);
+
+        $orderNo = $this->insertOrder('anon_alipay_return_recovery_4', [
+            'provider_app' => 'app_alipay_return_recovery',
+        ]);
+        $payload = [
+            'out_trade_no' => $orderNo,
+            'trade_no' => 'ali_trade_return_recovery_4',
+            'trade_status' => 'TRADE_SUCCESS',
+            'total_amount' => '19.90',
+            'sign_type' => 'RSA2',
+            'notify_time' => '2026-04-02 12:00:00',
+        ];
+        $payload['sign'] = $this->buildAlipaySignature($payload, $privateKey);
+
+        $response = $this->get('/api/v0.3/orders/'.$orderNo.'/recover/alipay-return?'.http_build_query($payload));
+
+        $response->assertStatus(422);
+        $response->assertJsonPath('error_code', 'PAYMENT_RETURN_BINDING_MISMATCH');
+        $response->assertJsonMissingPath('payment_recovery_token');
+    }
+
+    public function test_recover_alipay_return_rejects_app_binding_mismatch(): void
+    {
+        ['private' => $privateKey, 'public' => $publicKey] = $this->generateRsaKeyPair();
+        config([
+            'payments.providers.alipay.enabled' => true,
+            'pay.alipay.default.app_id' => 'app_alipay_return_recovery',
+            'pay.alipay.default.alipay_public_cert_path' => $publicKey,
+        ]);
+
+        $orderNo = $this->insertOrder('anon_alipay_return_recovery_5', [
+            'provider_app' => 'app_alipay_return_recovery',
+        ]);
+        $payload = [
+            'app_id' => 'app_alipay_other',
+            'out_trade_no' => $orderNo,
+            'trade_no' => 'ali_trade_return_recovery_5',
+            'trade_status' => 'TRADE_SUCCESS',
+            'total_amount' => '19.90',
+            'sign_type' => 'RSA2',
+            'notify_time' => '2026-04-02 12:00:00',
+        ];
+        $payload['sign'] = $this->buildAlipaySignature($payload, $privateKey);
+
+        $response = $this->get('/api/v0.3/orders/'.$orderNo.'/recover/alipay-return?'.http_build_query($payload));
+
+        $response->assertStatus(422);
+        $response->assertJsonPath('error_code', 'PAYMENT_RETURN_BINDING_MISMATCH');
+        $response->assertJsonMissingPath('payment_recovery_token');
+    }
+
+    public function test_recover_alipay_return_rejects_order_provider_mismatch(): void
+    {
+        ['private' => $privateKey, 'public' => $publicKey] = $this->generateRsaKeyPair();
+        config([
+            'payments.providers.alipay.enabled' => true,
+            'pay.alipay.default.app_id' => 'app_alipay_return_recovery',
+            'pay.alipay.default.alipay_public_cert_path' => $publicKey,
+        ]);
+
+        $orderNo = $this->insertOrder('anon_alipay_return_recovery_6', [
+            'provider' => 'wechatpay',
+            'provider_app' => 'app_alipay_return_recovery',
+        ]);
+        $payload = [
+            'app_id' => 'app_alipay_return_recovery',
+            'out_trade_no' => $orderNo,
+            'trade_no' => 'ali_trade_return_recovery_6',
+            'trade_status' => 'TRADE_SUCCESS',
+            'total_amount' => '19.90',
+            'sign_type' => 'RSA2',
+            'notify_time' => '2026-04-02 12:00:00',
+        ];
+        $payload['sign'] = $this->buildAlipaySignature($payload, $privateKey);
+
+        $response = $this->get('/api/v0.3/orders/'.$orderNo.'/recover/alipay-return?'.http_build_query($payload));
+
+        $response->assertStatus(422);
+        $response->assertJsonPath('error_code', 'PAYMENT_RETURN_BINDING_MISMATCH');
+        $response->assertJsonMissingPath('payment_recovery_token');
+    }
+
+    public function test_recover_alipay_return_rejects_amount_mismatch(): void
+    {
+        ['private' => $privateKey, 'public' => $publicKey] = $this->generateRsaKeyPair();
+        config([
+            'payments.providers.alipay.enabled' => true,
+            'pay.alipay.default.app_id' => 'app_alipay_return_recovery',
+            'pay.alipay.default.alipay_public_cert_path' => $publicKey,
+        ]);
+
+        $orderNo = $this->insertOrder('anon_alipay_return_recovery_7', [
+            'provider_app' => 'app_alipay_return_recovery',
+        ]);
+        $payload = [
+            'app_id' => 'app_alipay_return_recovery',
+            'out_trade_no' => $orderNo,
+            'trade_no' => 'ali_trade_return_recovery_7',
+            'trade_status' => 'TRADE_SUCCESS',
+            'total_amount' => '20.00',
+            'sign_type' => 'RSA2',
+            'notify_time' => '2026-04-02 12:00:00',
+        ];
+        $payload['sign'] = $this->buildAlipaySignature($payload, $privateKey);
+
+        $response = $this->get('/api/v0.3/orders/'.$orderNo.'/recover/alipay-return?'.http_build_query($payload));
+
+        $response->assertStatus(422);
+        $response->assertJsonPath('error_code', 'PAYMENT_RETURN_BINDING_MISMATCH');
+        $response->assertJsonMissingPath('payment_recovery_token');
+    }
+
+    public function test_recover_alipay_return_rejects_closed_order_state(): void
+    {
+        ['private' => $privateKey, 'public' => $publicKey] = $this->generateRsaKeyPair();
+        config([
+            'payments.providers.alipay.enabled' => true,
+            'pay.alipay.default.app_id' => 'app_alipay_return_recovery',
+            'pay.alipay.default.alipay_public_cert_path' => $publicKey,
+        ]);
+
+        $orderNo = $this->insertOrder('anon_alipay_return_recovery_8', [
+            'provider_app' => 'app_alipay_return_recovery',
+            'status' => 'canceled',
+            'payment_state' => 'canceled',
+        ]);
+        $payload = [
+            'app_id' => 'app_alipay_return_recovery',
+            'out_trade_no' => $orderNo,
+            'trade_no' => 'ali_trade_return_recovery_8',
+            'trade_status' => 'TRADE_SUCCESS',
+            'total_amount' => '19.90',
+            'sign_type' => 'RSA2',
+            'notify_time' => '2026-04-02 12:00:00',
+        ];
+        $payload['sign'] = $this->buildAlipaySignature($payload, $privateKey);
+
+        $response = $this->get('/api/v0.3/orders/'.$orderNo.'/recover/alipay-return?'.http_build_query($payload));
+
+        $response->assertStatus(422);
+        $response->assertJsonPath('error_code', 'PAYMENT_RETURN_BINDING_MISMATCH');
+        $response->assertJsonMissingPath('payment_recovery_token');
+    }
+
+    private function insertOrder(string $anonId, array $overrides = []): string
     {
         $orderNo = 'ord_alipay_recover_'.Str::random(8);
 
-        DB::table('orders')->insert([
+        DB::table('orders')->insert(array_merge([
             'id' => (string) Str::uuid(),
             'order_no' => $orderNo,
             'org_id' => 0,
@@ -133,7 +289,7 @@ final class AlipayReturnRecoveryEndpointTest extends TestCase
             'created_ip' => null,
             'fulfilled_at' => null,
             'refunded_at' => null,
-        ]);
+        ], $overrides));
 
         return $orderNo;
     }
