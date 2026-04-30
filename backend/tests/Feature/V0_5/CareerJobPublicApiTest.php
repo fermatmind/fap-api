@@ -257,7 +257,7 @@ final class CareerJobPublicApiTest extends TestCase
             ->assertJsonPath('landing_surface_v1.landing_contract_version', 'landing.surface.v1')
             ->assertJsonPath('landing_surface_v1.entry_surface', 'career_job_detail')
             ->assertJsonPath('answer_surface_v1.answer_contract_version', 'answer.surface.v1')
-            ->assertJsonPath('answer_surface_v1.answer_scope', 'public_indexable_detail')
+            ->assertJsonPath('answer_surface_v1.answer_scope', 'public_noindex_detail')
             ->assertJsonPath('answer_surface_v1.surface_type', 'career_job_public_detail')
             ->assertJsonPath('answer_surface_v1.summary_blocks.0.key', 'job_summary')
             ->assertJsonPath('job.industry_label', 'Technology')
@@ -274,6 +274,12 @@ final class CareerJobPublicApiTest extends TestCase
             ->assertJsonPath('seo_surface_v1.alternates.en', 'https://fermatmind.com/en/career/jobs/product-manager')
             ->assertJsonPath('seo_surface_v1.alternates.zh-CN', 'https://fermatmind.com/zh/career/jobs/product-manager')
             ->assertJsonPath('seo_surface_v1.og_payload.url', 'https://fermatmind.com/en/career/jobs/product-manager')
+            ->assertJsonPath('seo_surface_v1.robots_policy', 'noindex,follow')
+            ->assertJsonPath('seo_surface_v1.indexability_state', 'noindex')
+            ->assertJsonPath('seo_surface_v1.sitemap_state', 'excluded')
+            ->assertJsonPath('seo_surface_v1.llms_exposure_state', 'withhold')
+            ->assertJsonPath('landing_surface_v1.indexability_state', 'noindex')
+            ->assertJsonPath('answer_surface_v1.indexability_state', 'noindex')
             ->assertJsonMissingPath('job.salary_json')
             ->assertJsonMissingPath('revisions');
 
@@ -348,6 +354,80 @@ final class CareerJobPublicApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('meta.og.image', null)
             ->assertJsonPath('meta.twitter.image', null);
+    }
+
+    public function test_known_frontend_unavailable_jobs_are_withheld_from_seo_exposure(): void
+    {
+        foreach (['backend-engineer', 'data-scientist', 'frontend-engineer', 'product-manager'] as $index => $slug) {
+            $job = $this->createJob([
+                'job_code' => $slug,
+                'slug' => $slug,
+                'title' => str_replace('-', ' ', $slug),
+                'status' => CareerJob::STATUS_PUBLISHED,
+                'is_public' => true,
+                'is_indexable' => true,
+                'published_at' => now()->subMinute(),
+                'sort_order' => $index,
+            ]);
+            $this->createSeoMeta($job, [
+                'canonical_url' => 'https://www.fermatmind.com/en/career/jobs/'.$slug,
+                'robots' => 'index,follow',
+            ]);
+
+            $response = $this->getJson('/api/v0.5/career-jobs/'.$slug.'?locale=en');
+
+            $response->assertOk()
+                ->assertJsonPath('seo_surface_v1.canonical_url', 'https://fermatmind.com/en/career/jobs/'.$slug)
+                ->assertJsonPath('seo_surface_v1.robots_policy', 'noindex,follow')
+                ->assertJsonPath('seo_surface_v1.indexability_state', 'noindex')
+                ->assertJsonPath('seo_surface_v1.sitemap_state', 'excluded')
+                ->assertJsonPath('seo_surface_v1.llms_exposure_state', 'withhold')
+                ->assertJsonPath('landing_surface_v1.indexability_state', 'noindex')
+                ->assertJsonPath('answer_surface_v1.indexability_state', 'noindex');
+
+            $this->assertStringNotContainsString('www.fermatmind.com', (string) $response->getContent());
+        }
+    }
+
+    public function test_docx_backed_frontend_available_job_can_remain_indexable(): void
+    {
+        $job = $this->createJob([
+            'job_code' => 'accountants-and-auditors',
+            'slug' => 'accountants-and-auditors',
+            'locale' => 'zh-CN',
+            'title' => '会计师和审计师',
+            'subtitle' => 'Accountants and Auditors',
+            'excerpt' => '了解会计师和审计师的职责、薪资和职业发展。',
+            'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => now()->subMinute(),
+            'market_demand_json' => [
+                'source_refs' => [
+                    ['url' => 'https://www.bls.gov/ooh/business-and-financial/accountants-and-auditors.htm'],
+                ],
+            ],
+        ]);
+        $this->createSeoMeta($job, [
+            'canonical_url' => 'https://www.fermatmind.com/zh/career/jobs/accountants-and-auditors',
+            'robots' => 'index,follow',
+            'jsonld_overrides_json' => [
+                'source_docx' => '01_会计师和审计师_accountants-and-auditors.docx',
+            ],
+        ]);
+
+        $response = $this->getJson('/api/v0.5/career-jobs/accountants-and-auditors?locale=zh-CN');
+
+        $response->assertOk()
+            ->assertJsonPath('seo_surface_v1.canonical_url', 'https://fermatmind.com/zh/career/jobs/accountants-and-auditors')
+            ->assertJsonPath('seo_surface_v1.robots_policy', 'index,follow')
+            ->assertJsonPath('seo_surface_v1.indexability_state', 'indexable')
+            ->assertJsonPath('seo_surface_v1.sitemap_state', 'included')
+            ->assertJsonPath('seo_surface_v1.llms_exposure_state', 'allow')
+            ->assertJsonPath('landing_surface_v1.indexability_state', 'indexable')
+            ->assertJsonPath('answer_surface_v1.indexability_state', 'indexable');
+
+        $this->assertStringNotContainsString('www.fermatmind.com', (string) $response->getContent());
     }
 
     public function test_imported_local_baseline_publishes_family_jobs_for_en_and_zh_cn(): void
@@ -453,7 +533,10 @@ final class CareerJobPublicApiTest extends TestCase
             ->assertJsonPath('seo_surface_v1.surface_type', 'career_job_public_detail')
             ->assertJsonPath('meta.alternates.en', 'https://staging.fermatmind.com/en/career/jobs/product-manager')
             ->assertJsonPath('meta.alternates.zh-CN', 'https://staging.fermatmind.com/zh/career/jobs/product-manager')
-            ->assertJsonPath('meta.robots', 'index,follow')
+            ->assertJsonPath('meta.robots', 'noindex,follow')
+            ->assertJsonPath('seo_surface_v1.indexability_state', 'noindex')
+            ->assertJsonPath('seo_surface_v1.sitemap_state', 'excluded')
+            ->assertJsonPath('seo_surface_v1.llms_exposure_state', 'withhold')
             ->assertJsonPath('jsonld.@type', 'Occupation')
             ->assertJsonPath('jsonld.mainEntityOfPage', 'https://staging.fermatmind.com/en/career/jobs/product-manager')
             ->assertJsonPath('jsonld.skills.0', 'roadmapping');
