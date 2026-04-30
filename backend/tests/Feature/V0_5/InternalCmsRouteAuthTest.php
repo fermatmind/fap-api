@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace Tests\Feature\V0_5;
 
 use App\Models\AdminUser;
+use App\Models\InterpretationGuide;
+use App\Models\LandingSurface;
 use App\Models\MediaAsset;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Models\SupportArticle;
 use App\Support\Rbac\PermissionNames;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
@@ -139,6 +142,32 @@ final class InternalCmsRouteAuthTest extends TestCase
         return [
             [
                 'method' => 'PUT',
+                'uri' => '/api/v0.5/internal/support-articles/security-regression',
+                'payload' => [
+                    'title' => 'Security regression',
+                    'support_category' => 'troubleshooting',
+                    'support_intent' => 'contact_support',
+                    'locale' => 'en',
+                    'status' => SupportArticle::STATUS_DRAFT,
+                    'review_state' => SupportArticle::REVIEW_DRAFT,
+                    'body_md' => 'Security regression content.',
+                ],
+            ],
+            [
+                'method' => 'PUT',
+                'uri' => '/api/v0.5/internal/interpretation-guides/security-regression',
+                'payload' => [
+                    'title' => 'Security regression',
+                    'test_family' => 'general',
+                    'result_context' => 'how_to_read',
+                    'locale' => 'en',
+                    'status' => InterpretationGuide::STATUS_DRAFT,
+                    'review_state' => InterpretationGuide::REVIEW_DRAFT,
+                    'body_md' => 'Security regression content.',
+                ],
+            ],
+            [
+                'method' => 'PUT',
                 'uri' => '/api/v0.5/internal/content-pages/security-regression',
                 'payload' => [
                     'title' => 'Security regression',
@@ -149,6 +178,16 @@ final class InternalCmsRouteAuthTest extends TestCase
                     'is_public' => false,
                     'is_indexable' => false,
                     'content_md' => 'Security regression content.',
+                ],
+            ],
+            [
+                'method' => 'PUT',
+                'uri' => '/api/v0.5/internal/landing-surfaces/security-regression',
+                'payload' => [
+                    'locale' => 'en',
+                    'status' => LandingSurface::STATUS_DRAFT,
+                    'is_public' => false,
+                    'is_indexable' => false,
                 ],
             ],
             [
