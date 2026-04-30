@@ -168,7 +168,8 @@ class ReportGatekeeper
             $attemptId,
             $hasFullAccess,
             $forceFreeOnly,
-            $modulesOffered
+            $modulesOffered,
+            $this->canUseAttemptScopedPaidModules($userId, $anonId, $role)
         );
         $modulesAllowed = (array) ($modulesState['modules_allowed'] ?? []);
         $modulesPreview = (array) ($modulesState['modules_preview'] ?? []);
@@ -518,6 +519,15 @@ class ReportGatekeeper
         $normalizedRole = strtolower(trim((string) $role));
 
         return $normalizedRole === 'system';
+    }
+
+    private function canUseAttemptScopedPaidModules(?string $userId, ?string $anonId, ?string $role): bool
+    {
+        if (trim((string) $userId) !== '' || trim((string) $anonId) !== '') {
+            return true;
+        }
+
+        return strtolower(trim((string) $role)) === 'system';
     }
 
     private function upsertSnapshotVariants(
