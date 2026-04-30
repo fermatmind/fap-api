@@ -481,22 +481,44 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/support/interpretation-guides', [InterpretationGuideController::class, 'index']);
     Route::get('/support/interpretation-guides/{slug}', [InterpretationGuideController::class, 'show']);
     Route::get('/content-pages/{slug}', [ContentPageController::class, 'show']);
-    Route::get('/internal/support-articles', [SupportArticleController::class, 'internalIndex']);
-    Route::get('/internal/support-articles/{slug}', [SupportArticleController::class, 'internalShow']);
-    Route::put('/internal/support-articles/{slug}', [SupportArticleController::class, 'internalUpdate']);
-    Route::get('/internal/interpretation-guides', [InterpretationGuideController::class, 'internalIndex']);
-    Route::get('/internal/interpretation-guides/{slug}', [InterpretationGuideController::class, 'internalShow']);
-    Route::put('/internal/interpretation-guides/{slug}', [InterpretationGuideController::class, 'internalUpdate']);
-    Route::get('/internal/content-pages', [ContentPageController::class, 'internalIndex']);
-    Route::put('/internal/content-pages/{slug}', [ContentPageController::class, 'internalUpdate']);
+
+    $cmsAdminMiddleware = [
+        EncryptCookies::class,
+        AddQueuedCookiesToResponse::class,
+        StartSession::class,
+        SetOpsRequestContext::class,
+        AdminAuth::class,
+        ResolveOrgContext::class,
+    ];
+
+    Route::middleware([
+        ...$cmsAdminMiddleware,
+        EnsureCmsAdminAuthorized::class.':read',
+    ])->group(function () {
+        Route::get('/internal/support-articles', [SupportArticleController::class, 'internalIndex']);
+        Route::get('/internal/support-articles/{slug}', [SupportArticleController::class, 'internalShow']);
+        Route::get('/internal/interpretation-guides', [InterpretationGuideController::class, 'internalIndex']);
+        Route::get('/internal/interpretation-guides/{slug}', [InterpretationGuideController::class, 'internalShow']);
+        Route::get('/internal/content-pages', [ContentPageController::class, 'internalIndex']);
+        Route::get('/internal/landing-surfaces', [LandingSurfaceController::class, 'internalIndex']);
+        Route::get('/internal/media-assets', [MediaLibraryController::class, 'internalIndex']);
+    });
+
+    Route::middleware([
+        ...$cmsAdminMiddleware,
+        EnsureCmsAdminAuthorized::class.':write',
+    ])->group(function () {
+        Route::put('/internal/support-articles/{slug}', [SupportArticleController::class, 'internalUpdate']);
+        Route::put('/internal/interpretation-guides/{slug}', [InterpretationGuideController::class, 'internalUpdate']);
+        Route::put('/internal/content-pages/{slug}', [ContentPageController::class, 'internalUpdate']);
+        Route::put('/internal/landing-surfaces/{surfaceKey}', [LandingSurfaceController::class, 'internalUpdate']);
+        Route::put('/internal/media-assets/{assetKey}', [MediaLibraryController::class, 'internalUpdate']);
+        Route::post('/internal/media-assets/{assetKey}/upload', [MediaLibraryController::class, 'internalUpload']);
+    });
+
     Route::get('/landing-surfaces/{surfaceKey}', [LandingSurfaceController::class, 'show']);
-    Route::get('/internal/landing-surfaces', [LandingSurfaceController::class, 'internalIndex']);
-    Route::put('/internal/landing-surfaces/{surfaceKey}', [LandingSurfaceController::class, 'internalUpdate']);
     Route::get('/media-assets', [MediaLibraryController::class, 'index']);
     Route::get('/media-assets/{assetKey}', [MediaLibraryController::class, 'show']);
-    Route::get('/internal/media-assets', [MediaLibraryController::class, 'internalIndex']);
-    Route::put('/internal/media-assets/{assetKey}', [MediaLibraryController::class, 'internalUpdate']);
-    Route::post('/internal/media-assets/{assetKey}/upload', [MediaLibraryController::class, 'internalUpload']);
     Route::get('/career-guides', [CareerGuideController::class, 'index']);
     Route::get('/career-guides/{slug}/seo', [CareerGuideController::class, 'seo']);
     Route::get('/career-guides/{slug}', [CareerGuideController::class, 'show']);
@@ -512,15 +534,6 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/topics', [TopicController::class, 'index']);
     Route::get('/topics/{slug}/seo', [TopicController::class, 'seo']);
     Route::get('/topics/{slug}', [TopicController::class, 'show']);
-
-    $cmsAdminMiddleware = [
-        EncryptCookies::class,
-        AddQueuedCookiesToResponse::class,
-        StartSession::class,
-        SetOpsRequestContext::class,
-        AdminAuth::class,
-        ResolveOrgContext::class,
-    ];
 
     Route::middleware([
         ...$cmsAdminMiddleware,
