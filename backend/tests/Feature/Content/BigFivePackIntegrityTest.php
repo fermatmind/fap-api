@@ -6,11 +6,31 @@ namespace Tests\Feature\Content;
 
 use App\Services\Content\BigFivePackLoader;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
 final class BigFivePackIntegrityTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_big5_runtime_compiled_artifacts_are_present_in_checkout(): void
+    {
+        $compiledDir = base_path('content_packs/BIG5_OCEAN/v1/compiled');
+        $requiredFiles = [
+            'manifest.json',
+            'questions.min.compiled.json',
+            'questions.compiled.json',
+            'policy.compiled.json',
+            'legal.compiled.json',
+        ];
+
+        foreach ($requiredFiles as $file) {
+            $this->assertTrue(
+                File::exists($compiledDir.'/'.$file),
+                'Missing BIG5_OCEAN runtime compiled artifact: '.$file
+            );
+        }
+    }
 
     public function test_big5_pack_structure_and_direction_are_valid(): void
     {
