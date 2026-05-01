@@ -68,6 +68,41 @@ final class CareerTrustFreshnessAuthorityServiceTest extends TestCase
         $this->assertSame('trust_manifest_next_review_due_at', $row['review_freshness_basis']);
     }
 
+    public function test_it_uses_the_compiled_snapshot_trust_manifest_instead_of_newer_draft_rows(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+
+        $subject = Occupation::query()->where('canonical_slug', 'data-scientists')->firstOrFail();
+        $compiledManifest = $subject->trustManifests()
+            ->orderByDesc('reviewed_at')
+            ->orderByDesc('created_at')
+            ->firstOrFail();
+        $compiledManifest->update([
+            'reviewed_at' => now()->subDay(),
+            'next_review_due_at' => now()->subMinute(),
+        ]);
+        $subject->trustManifests()->create([
+            'content_version' => 'draft-future-content',
+            'data_version' => 'draft-future-data',
+            'logic_version' => 'draft-future-logic',
+            'locale_context' => [],
+            'methodology' => [],
+            'reviewer_status' => 'approved',
+            'reviewed_at' => now(),
+            'ai_assistance' => [],
+            'quality' => [],
+            'last_substantive_update_at' => now(),
+            'next_review_due_at' => now()->addDays(30),
+            'created_at' => now()->addMinute(),
+        ]);
+
+        $authority = app(CareerTrustFreshnessAuthorityService::class)->build()->toArray();
+        $row = collect($authority['members'])->keyBy('canonical_slug')->get('data-scientists');
+
+        $this->assertIsArray($row);
+        $this->assertSame('review_due', $row['review_staleness_state']);
+    }
+
     public function test_it_marks_past_or_current_due_dates_as_review_due(): void
     {
         $this->materializeCurrentFirstWaveFixture();

@@ -18,6 +18,16 @@ use Illuminate\Support\Collection;
 
 final class CareerRecommendationDetailBundleBuilder
 {
+    private const SAFE_CROSSWALK_MODES = ['exact', 'trust_inheritance', 'direct_match'];
+
+    /**
+     * @var array<string, true>
+     */
+    private const PUBLIC_REVIEW_STATUSES = [
+        'approved' => true,
+        'reviewed' => true,
+    ];
+
     public function __construct(
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
         private readonly CareerWhiteBoxScorePayloadBuilder $whiteBoxScorePayloadBuilder,
@@ -206,7 +216,7 @@ final class CareerRecommendationDetailBundleBuilder
                     return null;
                 }
 
-                if (! (bool) ($snapshot->indexState?->index_eligible ?? false)) {
+                if (! $this->isPublicMatchedJobSnapshot($snapshot)) {
                     return null;
                 }
 
@@ -215,9 +225,6 @@ final class CareerRecommendationDetailBundleBuilder
                     'canonical_slug' => $occupation->canonical_slug,
                     'title' => $occupation->canonical_title_en,
                     'seo_contract' => $this->buildMatchedJobSeoContract($occupation, $snapshot),
-                    'trust_summary' => [
-                        'reviewer_status' => $snapshot->trustManifest?->reviewer_status,
-                    ],
                 ];
             })
             ->filter()
@@ -231,6 +238,35 @@ final class CareerRecommendationDetailBundleBuilder
         $matchedJobs = $items->all();
 
         return $matchedJobs;
+    }
+
+    private function isPublicMatchedJobSnapshot(RecommendationSnapshot $snapshot): bool
+    {
+        $occupation = $snapshot->occupation;
+        if (! $occupation instanceof Occupation || $snapshot->indexState === null || $snapshot->trustManifest === null) {
+            return false;
+        }
+
+        $crosswalkMode = strtolower(trim((string) ($occupation->crosswalk_mode ?? '')));
+        if (! in_array($crosswalkMode, self::SAFE_CROSSWALK_MODES, true)) {
+            return false;
+        }
+
+        if (! (bool) ($snapshot->indexState->index_eligible ?? false)) {
+            return false;
+        }
+
+        $publicIndexState = IndexStateValue::publicFacing(
+            (string) ($snapshot->indexState->index_state ?? ''),
+            true,
+        );
+        if ($publicIndexState !== IndexStateValue::INDEXABLE) {
+            return false;
+        }
+
+        $reviewerStatus = strtolower(trim((string) ($snapshot->trustManifest->reviewer_status ?? '')));
+
+        return isset(self::PUBLIC_REVIEW_STATUSES[$reviewerStatus]);
     }
 
     private function compareSnapshots(RecommendationSnapshot $left, RecommendationSnapshot $right): int
@@ -310,7 +346,6 @@ final class CareerRecommendationDetailBundleBuilder
             'canonical_target' => $indexState?->canonical_target,
             'index_state' => $publicIndexState,
             'index_eligible' => $indexEligible,
-            'reason_codes' => is_array($indexState?->reason_codes) ? $indexState->reason_codes : [],
         ];
     }
 

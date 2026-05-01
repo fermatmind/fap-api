@@ -47,6 +47,9 @@ final class CareerFirstWaveLifecycleApiTest extends TestCase
                     'index_eligible',
                 ]],
             ])
+            ->assertJsonMissingPath('occupations.0.current_index_state')
+            ->assertJsonMissingPath('occupations.0.confidence_score')
+            ->assertJsonMissingPath('occupations.0.blocked_governance_status')
             ->assertJsonMissingPath('occupations.0.lifecycle_state')
             ->assertJsonMissingPath('occupations.0.reviewer_status')
             ->assertJsonMissingPath('occupations.0.reason_codes');
