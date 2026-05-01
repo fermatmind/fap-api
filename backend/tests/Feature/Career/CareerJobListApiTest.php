@@ -56,21 +56,42 @@ final class CareerJobListApiTest extends TestCase
             'display_market' => 'CN',
         ]);
 
-        $this->getJson('/api/v0.5/career/jobs')
+        $response = $this->getJson('/api/v0.5/career/jobs')
             ->assertOk()
             ->assertJsonCount(1, 'items')
             ->assertJsonPath('items.0.identity.canonical_slug', 'cn-digital-compliance-specialist')
+            ->assertJsonPath('items.0.trust_summary.public_stub_kind', 'public_directory_stub')
             ->assertJsonPath('items.0.trust_summary.status', 'unavailable')
+            ->assertJsonPath('items.0.trust_summary.availability', 'detail_unavailable')
             ->assertJsonPath('items.0.seo_contract.index_eligible', false)
+            ->assertJsonPath('items.0.seo_contract.public_stub_kind', 'public_directory_stub')
             ->assertJsonPath('items.0.seo_contract.reason_codes.0', 'detail_page_unavailable')
+            ->assertJsonPath('items.0.seo_contract.robots_policy', 'noindex,follow')
+            ->assertJsonMissingPath('items.0.identity.occupation_uuid')
+            ->assertJsonMissingPath('items.0.identity.entity_level')
+            ->assertJsonMissingPath('items.0.identity.family_uuid')
             ->assertJsonMissingPath('items.0.trust_summary.reviewer_status')
+            ->assertJsonMissingPath('items.0.trust_summary.review_status')
             ->assertJsonMissingPath('items.0.trust_summary.content_version')
             ->assertJsonMissingPath('items.0.trust_summary.data_version')
             ->assertJsonMissingPath('items.0.trust_summary.logic_version')
+            ->assertJsonMissingPath('items.0.trust_summary.editorial_patch_required')
+            ->assertJsonMissingPath('items.0.trust_summary.editorial_patch_status')
             ->assertJsonMissingPath('items.0.provenance_meta.content_version')
             ->assertJsonMissingPath('items.0.provenance_meta.data_version')
             ->assertJsonMissingPath('items.0.provenance_meta.logic_version')
-            ->assertJsonMissingPath('items.0.provenance_meta.import_run_id');
+            ->assertJsonMissingPath('items.0.provenance_meta.import_run_id')
+            ->assertJsonMissingPath('items.0.provenance_meta.source_snapshot_id')
+            ->assertJsonMissingPath('items.0.provenance_meta.compile_run_id')
+            ->assertJsonMissingPath('items.0.provenance_meta.index_state_id')
+            ->assertJsonMissingPath('items.0.governance')
+            ->assertJsonMissingPath('items.0.readiness');
+
+        $item = $response->json('items.0');
+        $this->assertSame(['canonical_slug'], array_keys($item['identity']));
+        $this->assertSame(['truth_market'], array_keys($item['truth_summary']));
+        $this->assertSame([], $item['score_summary']);
+        $this->assertSame([], $item['provenance_meta']);
 
         $this->getJson('/api/v0.5/career/jobs/cn-digital-compliance-specialist')
             ->assertStatus(404)

@@ -23,6 +23,8 @@ final class CareerSearchBundleBuilder
 
     private const DIRECTORY_DRAFT_CROSSWALK_MODE = 'directory_draft';
 
+    private const PUBLIC_DIRECTORY_STUB_KIND = 'public_directory_stub';
+
     /**
      * @var array<string, int>
      */
@@ -362,7 +364,6 @@ final class CareerSearchBundleBuilder
             matchKind: $matchKind,
             matchedText: $matchedText,
             identity: [
-                'occupation_uuid' => $occupation->id,
                 'canonical_slug' => $occupation->canonical_slug,
             ],
             titles: [
@@ -372,17 +373,12 @@ final class CareerSearchBundleBuilder
             ],
             seoContract: $this->buildDirectoryDraftSeoContract($occupation),
             trustSummary: [
+                'public_stub_kind' => self::PUBLIC_DIRECTORY_STUB_KIND,
                 'status' => 'unavailable',
-                'reviewed_at' => null,
-                'cross_market_notice' => null,
+                'availability' => 'detail_unavailable',
+                'reason_codes' => ['detail_page_unavailable'],
             ],
-            provenanceMeta: [
-                'compiler_version' => null,
-                'compiled_at' => null,
-                'trust_manifest_id' => null,
-                'index_state_id' => null,
-                'compile_run_id' => null,
-            ],
+            provenanceMeta: [],
         );
     }
 
@@ -440,14 +436,12 @@ final class CareerSearchBundleBuilder
 
         return [
             'canonical_path' => $canonicalPath,
-            'canonical_target' => null,
             'index_state' => IndexStateValue::NOINDEX,
             'index_eligible' => false,
             'reason_codes' => ['detail_page_unavailable'],
-            'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,
+            'public_stub_kind' => self::PUBLIC_DIRECTORY_STUB_KIND,
             'surface_type' => $surface['surface_type'] ?? null,
             'robots_policy' => $surface['robots_policy'] ?? 'noindex,follow',
-            'metadata_fingerprint' => $surface['metadata_fingerprint'] ?? null,
         ];
     }
 
