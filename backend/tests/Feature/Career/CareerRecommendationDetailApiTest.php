@@ -31,10 +31,7 @@ final class CareerRecommendationDetailApiTest extends TestCase
             ->assertJsonPath('claim_permissions.allow_salary_comparison', false)
             ->assertJsonPath('seo_contract.canonical_path', '/career/recommendations/mbti/intj')
             ->assertJsonPath('seo_contract.index_eligible', false)
-            ->assertJsonPath('matched_jobs.0.canonical_slug', 'backend-architect-cn-market')
-            ->assertJsonPath('matched_jobs.0.seo_contract.index_eligible', false)
-            ->assertJsonPath('matched_jobs.0.seo_contract.index_state', 'trust_limited')
-            ->assertJsonPath('matched_jobs.0.trust_summary.reviewer_status', 'pending')
+            ->assertJsonCount(0, 'matched_jobs')
             ->assertJsonStructure([
                 'identity',
                 'recommendation_subject_meta',
@@ -55,13 +52,7 @@ final class CareerRecommendationDetailApiTest extends TestCase
                 'claim_permissions',
                 'integrity_summary',
                 'trust_manifest',
-                'matched_jobs' => [[
-                    'occupation_uuid',
-                    'canonical_slug',
-                    'title',
-                    'seo_contract' => ['canonical_path', 'canonical_target', 'index_state', 'index_eligible', 'reason_codes'],
-                    'trust_summary' => ['reviewer_status'],
-                ]],
+                'matched_jobs',
                 'feedback_checkin',
                 'projection_timeline' => [
                     'timeline_kind',
@@ -80,8 +71,6 @@ final class CareerRecommendationDetailApiTest extends TestCase
             ->assertJsonMissingPath('white_box_scores.strain_score.formula_ref')
             ->assertJsonMissingPath('white_box_scores.strain_score.critical_missing_fields');
 
-        $this->assertIsString((string) $response->json('matched_jobs.0.occupation_uuid'));
-        $this->assertNotSame('', (string) $response->json('matched_jobs.0.occupation_uuid'));
         $this->assertIsNumeric($response->json('white_box_scores.strain_score.score'));
         $this->assertIsString((string) $response->json('white_box_scores.strain_score.integrity_state'));
     }
@@ -98,9 +87,9 @@ final class CareerRecommendationDetailApiTest extends TestCase
 
         $matchedJobs = (array) $response->json('matched_jobs');
 
-        $this->assertCount(2, $matchedJobs);
+        $this->assertCount(1, $matchedJobs);
         $this->assertSame(
-            ['backend-architect-cn-market', 'backend-architect-intj-api'],
+            ['backend-architect-intj-api'],
             array_map(
                 static fn (array $job): string => (string) ($job['canonical_slug'] ?? ''),
                 $matchedJobs

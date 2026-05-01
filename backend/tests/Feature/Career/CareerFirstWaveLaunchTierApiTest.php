@@ -42,26 +42,20 @@ final class CareerFirstWaveLaunchTierApiTest extends TestCase
                     'canonical_slug',
                     'canonical_title_en',
                     'launch_tier',
-                    'readiness_status',
-                    'lifecycle_state',
                     'public_index_state',
                     'index_eligible',
-                    'reviewer_status',
-                    'crosswalk_mode',
-                    'allow_strong_claim',
-                    'confidence_score',
-                    'blocked_governance_status',
-                    'reason_codes',
                 ]],
             ])
-            ->assertJsonMissingPath('recommended_action');
+            ->assertJsonMissingPath('recommended_action')
+            ->assertJsonMissingPath('occupations.0.reviewer_status')
+            ->assertJsonMissingPath('occupations.0.crosswalk_mode')
+            ->assertJsonMissingPath('occupations.0.blocked_governance_status')
+            ->assertJsonMissingPath('occupations.0.confidence_score');
 
         $occupations = collect($response->json('occupations'))->keyBy('canonical_slug');
 
         $this->assertSame('stable', $occupations['registered-nurses']['launch_tier']);
         $this->assertSame('hold', $occupations['software-developers']['launch_tier']);
-        $this->assertContains('hold_blocked_governance', $occupations['software-developers']['reason_codes']);
-        $this->assertNotContains('publish_gate_candidate', $occupations['software-developers']['reason_codes']);
     }
 
     public function test_it_exposes_candidate_rows_without_turning_them_into_rollout_queue_actions(): void
@@ -85,9 +79,9 @@ final class CareerFirstWaveLaunchTierApiTest extends TestCase
         $candidateRow = $occupations['data-scientists'];
 
         $this->assertSame('candidate', $candidateRow['launch_tier']);
-        $this->assertSame('indexed', $candidateRow['lifecycle_state']);
-        $this->assertSame('direct_match', $candidateRow['crosswalk_mode']);
-        $this->assertSame(['candidate_review_required'], $candidateRow['reason_codes']);
+        $this->assertArrayNotHasKey('lifecycle_state', $candidateRow);
+        $this->assertArrayNotHasKey('crosswalk_mode', $candidateRow);
+        $this->assertArrayNotHasKey('reason_codes', $candidateRow);
     }
 
     private function materializeCurrentFirstWaveFixture(): void
