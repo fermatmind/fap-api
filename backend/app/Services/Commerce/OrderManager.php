@@ -366,7 +366,7 @@ class OrderManager
      */
     public function presentPaymentRecoveryUrls(
         object $order,
-        ?string $paymentRecoveryToken = null,
+        ?string $_paymentRecoveryToken = null,
         ?string $fallbackLocale = null
     ): array {
         $base = $this->frontendBaseUrl();
@@ -384,13 +384,13 @@ class OrderManager
             $this->resolveOrderLocale($orgId, $attemptId, $fallbackLocale)
         );
 
+        // Recovery tokens stay in the response contract; do not place them in URLs
+        // that can be captured by browser history, referrers, or provider logs.
         $waitUrl = null;
-        $normalizedPaymentRecoveryToken = $this->trimOrNull($paymentRecoveryToken);
-        if ($orderNo !== null && $normalizedPaymentRecoveryToken !== null) {
+        if ($orderNo !== null) {
             $waitUrl = $base.'/'.$localeSegment.'/pay/wait'
                 .'?'.http_build_query([
                     'order_no' => $orderNo,
-                    'payment_recovery_token' => $normalizedPaymentRecoveryToken,
                 ]);
         }
 

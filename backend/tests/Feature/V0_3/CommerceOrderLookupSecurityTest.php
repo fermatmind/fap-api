@@ -37,7 +37,12 @@ final class CommerceOrderLookupSecurityTest extends TestCase
         ]);
 
         $response->assertStatus(404)
-            ->assertJsonPath('error_code', 'ORDER_NOT_FOUND');
+            ->assertJsonPath('error_code', 'ORDER_NOT_FOUND')
+            ->assertJsonMissingPath('payment_recovery_token')
+            ->assertJsonMissingPath('wait_url')
+            ->assertJsonMissingPath('amount_cents')
+            ->assertJsonMissingPath('provider')
+            ->assertJsonMissingPath('latest_payment_attempt');
     }
 
     public function test_lookup_with_matching_email_hash_returns_delivery_contract(): void

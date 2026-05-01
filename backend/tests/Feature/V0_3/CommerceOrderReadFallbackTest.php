@@ -292,14 +292,14 @@ final class CommerceOrderReadFallbackTest extends TestCase
             ->assertJsonPath('status', 'pending')
             ->assertJsonPath('attempt_id', $attemptId)
             ->assertJsonPath('payment_recovery_token', $token)
-            ->assertJsonPath('wait_url', "https://web.example.test/en/pay/wait?order_no={$orderNo}&payment_recovery_token={$token}")
+            ->assertJsonPath('wait_url', "https://web.example.test/en/pay/wait?order_no={$orderNo}")
             ->assertJsonPath('result_url', "https://web.example.test/en/result/{$attemptId}")
             ->assertJsonPath('provider', 'alipay')
             ->assertJsonPath('pay.type', 'html')
             ->assertJsonPath('checkout_url', null)
             ->assertJsonMissingPath('order');
 
-        $this->assertStringContainsString('paymentRecoveryToken=', (string) $response->json('pay.value'));
+        $this->assertStringNotContainsString('paymentRecoveryToken=', (string) $response->json('pay.value'));
     }
 
     public function test_valid_payment_recovery_token_reads_paid_order_without_owner_identity(): void
