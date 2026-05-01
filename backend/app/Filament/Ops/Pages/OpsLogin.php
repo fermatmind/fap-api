@@ -16,6 +16,10 @@ class OpsLogin extends BaseLogin
 {
     protected static string $view = 'filament.ops.pages.auth.login';
 
+    private const MAX_LOGIN_ATTEMPTS = 5;
+
+    private const SOURCE_RATE_LIMIT_METHOD = 'authenticateSource';
+
     public function authenticate(): ?LoginResponse
     {
         $email = (string) data_get($this->data, 'email', '');
@@ -24,7 +28,8 @@ class OpsLogin extends BaseLogin
         OpsLoginTracer::start($trace);
 
         try {
-            $this->rateLimit(5);
+            $this->rateLimit(self::MAX_LOGIN_ATTEMPTS, method: self::SOURCE_RATE_LIMIT_METHOD);
+            $this->rateLimit(self::MAX_LOGIN_ATTEMPTS);
         } catch (TooManyRequestsException $exception) {
             $this->getRateLimitedNotification($exception)?->send();
 
@@ -100,7 +105,13 @@ class OpsLogin extends BaseLogin
         $method ??= debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, limit: 2)[1]['function'];
         $component ??= static::class;
 
-        return 'ops-login-rate-limiter:'.sha1($component.'|'.$method.'|'.(request()->ip() ?? 'unknown').'|'.$this->loginIdentifier());
+        $ip = request()->ip() ?? 'unknown';
+
+        if ($method === self::SOURCE_RATE_LIMIT_METHOD) {
+            return 'ops-login-rate-limiter:'.sha1($component.'|'.$method.'|'.$ip);
+        }
+
+        return 'ops-login-rate-limiter:'.sha1($component.'|'.$method.'|'.$ip.'|'.$this->loginIdentifier());
     }
 
     /**
