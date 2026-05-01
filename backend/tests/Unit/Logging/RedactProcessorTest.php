@@ -34,6 +34,8 @@ final class RedactProcessorTest extends TestCase
                     'invite_unlock_code' => 'unlock-plain-1',
                     'invite_token' => 'invite-token-1',
                     'webhook_secret' => 'whsec_live_secret',
+                    'x_api_key' => 'api-key-raw-1',
+                    'request_cookie' => 'cookie-raw-1',
                     'anon_id' => 'anon-raw-1',
                     'target_attempt_id' => 'attempt-raw-1',
                     'trace_id' => 'trace-1',
@@ -55,6 +57,8 @@ final class RedactProcessorTest extends TestCase
         $this->assertSame('[REDACTED]', $actual['extra']['payload']['invite_unlock_code']);
         $this->assertSame('[REDACTED]', $actual['extra']['payload']['invite_token']);
         $this->assertSame('[REDACTED]', $actual['extra']['payload']['webhook_secret']);
+        $this->assertSame('[REDACTED]', $actual['extra']['payload']['x_api_key']);
+        $this->assertSame('[REDACTED]', $actual['extra']['payload']['request_cookie']);
         $this->assertSame('[REDACTED]', $actual['extra']['payload']['anon_id']);
         $this->assertSame('[REDACTED]', $actual['extra']['payload']['target_attempt_id']);
         $this->assertSame('ok', $actual['context']['nested']['keep']);

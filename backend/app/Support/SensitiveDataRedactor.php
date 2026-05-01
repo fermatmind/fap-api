@@ -35,6 +35,10 @@ final class SensitiveDataRedactor
     private const SENSITIVE_EXACT_KEYS = [
         'error',
         'err',
+        'invite_code',
+        'invite_token',
+        'invite_unlock_code',
+        'invitee_identity_key',
         'message',
     ];
 

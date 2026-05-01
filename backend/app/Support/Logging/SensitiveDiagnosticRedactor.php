@@ -46,7 +46,9 @@ final class SensitiveDiagnosticRedactor
     /** @var list<string> */
     private const SENSITIVE_KEY_PARTS = [
         'authorization',
+        'api_key',
         'client_secret',
+        'cookie',
         'credit_card',
         'email',
         'id_card',
