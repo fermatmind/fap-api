@@ -61,7 +61,7 @@ class EnneagramRegistryReleasePage extends Page
 
     public function publishRegistryRelease(EnneagramRegistryOpsService $service): void
     {
-        if (! ContentAccess::canRelease()) {
+        if (! ContentAccess::canReleaseContentPacks()) {
             Notification::make()->title('Publish permission required')->danger()->send();
 
             return;
@@ -83,7 +83,7 @@ class EnneagramRegistryReleasePage extends Page
 
     public function activateRelease(string $releaseId, EnneagramRegistryOpsService $service): void
     {
-        if (! ContentAccess::canRelease()) {
+        if (! ContentAccess::canReleaseContentPacks()) {
             Notification::make()->title('Activation permission required')->danger()->send();
 
             return;
@@ -100,7 +100,7 @@ class EnneagramRegistryReleasePage extends Page
 
     public function rollbackRelease(string $releaseId, EnneagramRegistryOpsService $service): void
     {
-        if (! ContentAccess::canRelease()) {
+        if (! ContentAccess::canReleaseContentPacks()) {
             Notification::make()->title('Rollback permission required')->danger()->send();
 
             return;

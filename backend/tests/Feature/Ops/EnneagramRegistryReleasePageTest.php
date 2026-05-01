@@ -83,6 +83,25 @@ final class EnneagramRegistryReleasePageTest extends TestCase
             ->count());
     }
 
+    public function test_content_publish_permission_cannot_publish_registry_release(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_PUBLISH,
+        ]);
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        Livewire::test(EnneagramRegistryReleasePage::class)
+            ->call('publishRegistryRelease');
+
+        $this->assertSame(0, DB::table('content_pack_releases')
+            ->where('to_pack_id', 'ENNEAGRAM')
+            ->where('pack_version', 'v2')
+            ->where('action', 'enneagram_registry_publish')
+            ->count());
+    }
+
     public function test_refresh_action_reloads_preview_from_registry_files(): void
     {
         $admin = $this->createAdminWithPermissions([
