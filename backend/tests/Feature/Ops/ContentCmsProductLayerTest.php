@@ -11,8 +11,14 @@ use App\Filament\Ops\Pages\ContentWorkspacePage;
 use App\Filament\Ops\Pages\EditorialOperationsPage;
 use App\Filament\Ops\Pages\EditorialReviewPage;
 use App\Filament\Ops\Resources\ArticleCategoryResource;
+use App\Filament\Ops\Resources\ArticleCategoryResource\Pages\CreateArticleCategory;
+use App\Filament\Ops\Resources\ArticleCategoryResource\Pages\EditArticleCategory;
 use App\Filament\Ops\Resources\ArticleResource;
+use App\Filament\Ops\Resources\ArticleResource\Pages\CreateArticle;
+use App\Filament\Ops\Resources\ArticleResource\Pages\EditArticle;
 use App\Filament\Ops\Resources\ArticleTagResource;
+use App\Filament\Ops\Resources\ArticleTagResource\Pages\CreateArticleTag;
+use App\Filament\Ops\Resources\ArticleTagResource\Pages\EditArticleTag;
 use App\Filament\Ops\Resources\CareerGuideResource;
 use App\Filament\Ops\Resources\CareerJobResource;
 use App\Filament\Ops\Resources\ContentPackReleaseResource;
@@ -1151,6 +1157,219 @@ final class ContentCmsProductLayerTest extends TestCase
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/articles/'.((int) $tenantArticle->id).'/edit')
             ->assertNotFound();
+    }
+
+    public function test_filament_taxonomy_pages_ignore_client_supplied_org_id(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
+        $selectedOrg = Organization::query()->create([
+            'name' => 'Taxonomy Tenant',
+            'owner_user_id' => 9444,
+            'status' => 'active',
+            'domain' => 'taxonomy-tenant.example.test',
+            'timezone' => 'Asia/Shanghai',
+            'locale' => 'en',
+        ]);
+        $otherOrg = Organization::query()->create([
+            'name' => 'Foreign Taxonomy Tenant',
+            'owner_user_id' => 9555,
+            'status' => 'active',
+            'domain' => 'foreign-taxonomy.example.test',
+            'timezone' => 'Asia/Shanghai',
+            'locale' => 'en',
+        ]);
+
+        $this->setOpsContext((int) $selectedOrg->id, $admin, '/ops/article-categories/create');
+        session($this->opsSessionForOrg((int) $admin->id, (int) $selectedOrg->id));
+
+        Livewire::test(CreateArticleCategory::class)
+            ->fillForm([
+                'org_id' => (int) $otherOrg->id,
+                'name' => 'Scoped Category',
+                'slug' => 'scoped-category',
+                'description' => 'Category must stay in selected org.',
+                'sort_order' => 1,
+                'is_active' => true,
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $category = ArticleCategory::query()->where('slug', 'scoped-category')->firstOrFail();
+        $this->assertSame((int) $selectedOrg->id, (int) $category->org_id);
+
+        Livewire::test(EditArticleCategory::class, ['record' => $category->getKey()])
+            ->fillForm([
+                'org_id' => (int) $otherOrg->id,
+                'name' => 'Scoped Category Edited',
+                'slug' => 'scoped-category',
+                'description' => 'Edited category must stay in selected org.',
+                'sort_order' => 2,
+                'is_active' => true,
+            ])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $category->refresh();
+        $this->assertSame((int) $selectedOrg->id, (int) $category->org_id);
+
+        Livewire::test(CreateArticleTag::class)
+            ->fillForm([
+                'org_id' => (int) $otherOrg->id,
+                'name' => 'Scoped Tag',
+                'slug' => 'scoped-tag',
+                'is_active' => true,
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $tag = ArticleTag::query()->where('slug', 'scoped-tag')->firstOrFail();
+        $this->assertSame((int) $selectedOrg->id, (int) $tag->org_id);
+
+        Livewire::test(EditArticleTag::class, ['record' => $tag->getKey()])
+            ->fillForm([
+                'org_id' => (int) $otherOrg->id,
+                'name' => 'Scoped Tag Edited',
+                'slug' => 'scoped-tag',
+                'is_active' => true,
+            ])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $tag->refresh();
+        $this->assertSame((int) $selectedOrg->id, (int) $tag->org_id);
+    }
+
+    public function test_filament_article_pages_preserve_public_article_org_scope(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
+        $selectedOrg = Organization::query()->create([
+            'name' => 'Article Tenant',
+            'owner_user_id' => 9666,
+            'status' => 'active',
+            'domain' => 'article-tenant.example.test',
+            'timezone' => 'Asia/Shanghai',
+            'locale' => 'en',
+        ]);
+
+        $this->setOpsContext((int) $selectedOrg->id, $admin, '/ops/articles/create');
+        session($this->opsSessionForOrg((int) $admin->id, (int) $selectedOrg->id));
+
+        $createPage = new class extends CreateArticle
+        {
+            /**
+             * @param  array<string, mixed>  $data
+             * @return array<string, mixed>
+             */
+            public function exposeMutateFormDataBeforeCreate(array $data): array
+            {
+                return $this->mutateFormDataBeforeCreate($data);
+            }
+        };
+        $createData = $createPage->exposeMutateFormDataBeforeCreate([
+            'org_id' => (int) $selectedOrg->id,
+            'title' => 'Tenant Tamper Article',
+            'slug' => 'tenant-tamper-article',
+            'excerpt' => 'Article create must remain public editorial scoped.',
+            'content_md' => 'Article body',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+            'locale' => 'en',
+            'working_revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+        ]);
+        $this->assertSame(0, (int) $createData['org_id']);
+
+        $article = Article::query()->create([
+            'org_id' => 0,
+            'slug' => 'tenant-tamper-article',
+            'locale' => 'en',
+            'title' => 'Tenant Tamper Article',
+            'excerpt' => 'Article create must remain public editorial scoped.',
+            'content_md' => 'Article body',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+        ]);
+
+        Livewire::test(EditArticle::class, ['record' => $article->getKey()])
+            ->fillForm([
+                'org_id' => (int) $selectedOrg->id,
+                'title' => 'Tenant Tamper Article Edited',
+                'slug' => 'tenant-tamper-article',
+                'excerpt' => 'Article edit must remain public editorial scoped.',
+                'content_md' => 'Article body edited',
+                'status' => 'draft',
+                'is_public' => false,
+                'is_indexable' => true,
+                'locale' => 'en',
+                'working_revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+            ])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $article->refresh();
+        $this->assertSame(0, (int) $article->org_id);
+    }
+
+    public function test_public_article_payload_filters_foreign_taxonomy_relationships(): void
+    {
+        $foreignCategory = ArticleCategory::query()->create([
+            'org_id' => 81,
+            'slug' => 'foreign-public-category',
+            'name' => 'Foreign Public Category',
+            'is_active' => true,
+        ]);
+        $foreignTag = ArticleTag::query()->create([
+            'org_id' => 81,
+            'slug' => 'foreign-public-tag',
+            'name' => 'Foreign Public Tag',
+            'is_active' => true,
+        ]);
+        $article = Article::query()->create([
+            'org_id' => 0,
+            'category_id' => (int) $foreignCategory->id,
+            'slug' => 'foreign-taxonomy-public-article',
+            'locale' => 'en',
+            'title' => 'Foreign Taxonomy Public Article',
+            'excerpt' => 'Public article should not disclose foreign taxonomy.',
+            'content_md' => 'Public article body',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+        ]);
+        $article->tags()->sync([
+            (int) $foreignTag->id => [
+                'org_id' => 81,
+                'created_at' => now(),
+            ],
+        ]);
+        $revision = ArticleTranslationRevision::query()->create([
+            'org_id' => 0,
+            'article_id' => (int) $article->id,
+            'revision_number' => 1,
+            'source_article_id' => (int) $article->id,
+            'translation_group_id' => (string) $article->translation_group_id,
+            'locale' => 'en',
+            'revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+            'source_version_hash' => 'source-hash',
+            'translated_from_version_hash' => 'source-hash',
+            'title' => (string) $article->title,
+            'excerpt' => (string) $article->excerpt,
+            'content_md' => (string) $article->content_md,
+            'seo_title' => 'Foreign Taxonomy SEO',
+            'seo_description' => 'Foreign Taxonomy SEO Description',
+            'published_at' => now()->subMinute(),
+        ]);
+        $article->forceFill([
+            'working_revision_id' => (int) $revision->id,
+            'published_revision_id' => (int) $revision->id,
+        ])->save();
+
+        $this->getJson('/api/v0.5/articles/'.$article->slug.'?locale=en')
+            ->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('article.category', null)
+            ->assertJsonPath('article.tags', []);
     }
 
     /**

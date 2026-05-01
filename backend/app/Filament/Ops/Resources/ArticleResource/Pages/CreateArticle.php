@@ -79,6 +79,7 @@ class CreateArticle extends CreateRecord
      */
     protected function mutateFormDataBeforeCreate(array $data): array
     {
+        $data['org_id'] = 0;
         $this->workingRevisionPayload = [
             'title' => $data['title'] ?? null,
             'excerpt' => $data['excerpt'] ?? null,

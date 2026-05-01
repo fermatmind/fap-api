@@ -34,6 +34,7 @@ final class CareerCrosswalkOpsApiTest extends TestCase
         ]);
         $slug = (string) $fixture['occupation']->canonical_slug;
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
+        $releaseAdmin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_RELEASE]);
 
         $queueResponse = $this->withSession(['ops_org_id' => 31])
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -62,7 +63,7 @@ final class CareerCrosswalkOpsApiTest extends TestCase
         $this->assertNotSame('', $patchKey);
 
         $approveResponse = $this->withSession(['ops_org_id' => 31])
-            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->actingAs($releaseAdmin, (string) config('admin.guard', 'admin'))
             ->postJson('/api/v0.5/internal/career/crosswalk/patches/'.$patchKey.'/approve', [
                 'review_notes' => 'approve from ops console',
             ]);
@@ -87,7 +88,7 @@ final class CareerCrosswalkOpsApiTest extends TestCase
             ->assertJsonPath('resolved_crosswalk_mode', 'exact');
 
         $rejectResponse = $this->withSession(['ops_org_id' => 31])
-            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->actingAs($releaseAdmin, (string) config('admin.guard', 'admin'))
             ->postJson('/api/v0.5/internal/career/crosswalk/patches/'.$patchKey.'/reject', [
                 'review_notes' => 'reject after approval should still set rejected',
             ]);
@@ -95,6 +96,50 @@ final class CareerCrosswalkOpsApiTest extends TestCase
         $rejectResponse->assertOk()
             ->assertJsonPath('mutation_kind', 'career_crosswalk_patch_reject')
             ->assertJsonPath('patch.patch_status', 'rejected');
+    }
+
+    public function test_content_write_admin_cannot_approve_or_reject_crosswalk_patches(): void
+    {
+        $fixture = CareerFoundationFixture::seedHighTrustCompleteChain([
+            'slug' => 'ops-approval-split',
+            'crosswalk_mode' => 'local_heavy_interpretation',
+        ]);
+        $slug = (string) $fixture['occupation']->canonical_slug;
+        $writer = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
+
+        $createResponse = $this->withSession(['ops_org_id' => 32])
+            ->actingAs($writer, (string) config('admin.guard', 'admin'))
+            ->postJson('/api/v0.5/internal/career/crosswalk/patches', [
+                'subject_kind' => 'career_job_detail',
+                'subject_slug' => $slug,
+                'target_kind' => 'occupation',
+                'target_slug' => $slug,
+                'crosswalk_mode_override' => 'exact',
+                'review_notes' => 'writer can draft only',
+            ]);
+
+        $createResponse->assertOk()
+            ->assertJsonPath('patch.patch_status', 'draft');
+
+        $patchKey = (string) $createResponse->json('patch.patch_key');
+
+        $this->withSession(['ops_org_id' => 32])
+            ->actingAs($writer, (string) config('admin.guard', 'admin'))
+            ->postJson('/api/v0.5/internal/career/crosswalk/patches/'.$patchKey.'/approve', [
+                'review_notes' => 'writer should not approve',
+            ])
+            ->assertStatus(403)
+            ->assertJsonPath('error_code', 'FORBIDDEN')
+            ->assertJsonPath('message', 'admin_content_release_required');
+
+        $this->withSession(['ops_org_id' => 32])
+            ->actingAs($writer, (string) config('admin.guard', 'admin'))
+            ->postJson('/api/v0.5/internal/career/crosswalk/patches/'.$patchKey.'/reject', [
+                'review_notes' => 'writer should not reject',
+            ])
+            ->assertStatus(403)
+            ->assertJsonPath('error_code', 'FORBIDDEN')
+            ->assertJsonPath('message', 'admin_content_release_required');
     }
 
     /**

@@ -6,6 +6,8 @@ namespace App\Http\Controllers\API\V0_5\Cms;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\ArticleCategory;
+use App\Models\ArticleTag;
 use App\Models\ArticleTranslationRevision;
 use App\Services\Cms\ArticlePublishService;
 use App\Services\Cms\ArticleSeoService;
@@ -846,8 +848,8 @@ class ArticleController extends Controller
             'scheduled_at' => $article->scheduled_at?->toISOString(),
             'created_at' => $article->created_at?->toISOString(),
             'updated_at' => $revision->updated_at?->toISOString() ?? $article->updated_at?->toISOString(),
-            'category' => $article->relationLoaded('category') ? $article->category : null,
-            'tags' => $article->relationLoaded('tags') ? $article->tags : [],
+            'category' => $this->scopedCategory($article),
+            'tags' => $this->scopedTags($article),
             'seo_meta' => $this->publicSeoMetaSnapshot($article, $revision),
         ];
     }
@@ -914,10 +916,39 @@ class ArticleController extends Controller
             'scheduled_at' => $article->scheduled_at?->toISOString(),
             'created_at' => $article->created_at?->toISOString(),
             'updated_at' => $article->updated_at?->toISOString(),
-            'category' => $article->relationLoaded('category') ? $article->category : null,
-            'tags' => $article->relationLoaded('tags') ? $article->tags : [],
+            'category' => $this->scopedCategory($article),
+            'tags' => $this->scopedTags($article),
             'seo_meta' => $this->articleSeoMetaPayload($article),
         ];
+    }
+
+    private function scopedCategory(Article $article): ?ArticleCategory
+    {
+        if (! $article->relationLoaded('category')) {
+            return null;
+        }
+
+        $category = $article->category;
+
+        return $category instanceof ArticleCategory
+            && (int) $category->org_id === (int) $article->org_id
+                ? $category
+                : null;
+    }
+
+    /**
+     * @return array<int, ArticleTag>
+     */
+    private function scopedTags(Article $article): array
+    {
+        if (! $article->relationLoaded('tags')) {
+            return [];
+        }
+
+        return $article->tags
+            ->filter(static fn (ArticleTag $tag): bool => (int) $tag->org_id === (int) $article->org_id)
+            ->values()
+            ->all();
     }
 
     /**

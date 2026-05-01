@@ -3103,7 +3103,7 @@
                     "App\\Http\\Middleware\\SetOpsRequestContext",
                     "App\\Http\\Middleware\\AdminAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
-                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:write"
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:read"
                 ]
             }
         },
@@ -3151,7 +3151,7 @@
                     "App\\Http\\Middleware\\SetOpsRequestContext",
                     "App\\Http\\Middleware\\AdminAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
-                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:write"
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:release"
                 ]
             }
         },
@@ -3175,7 +3175,7 @@
                     "App\\Http\\Middleware\\SetOpsRequestContext",
                     "App\\Http\\Middleware\\AdminAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
-                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:write"
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:release"
                 ]
             }
         },
@@ -3199,7 +3199,7 @@
                     "App\\Http\\Middleware\\SetOpsRequestContext",
                     "App\\Http\\Middleware\\AdminAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
-                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:write"
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:read"
                 ]
             }
         },
@@ -3223,7 +3223,7 @@
                     "App\\Http\\Middleware\\SetOpsRequestContext",
                     "App\\Http\\Middleware\\AdminAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
-                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:write"
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:read"
                 ]
             }
         },
@@ -3247,7 +3247,7 @@
                     "App\\Http\\Middleware\\SetOpsRequestContext",
                     "App\\Http\\Middleware\\AdminAuth",
                     "App\\Http\\Middleware\\ResolveOrgContext",
-                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:write"
+                    "App\\Http\\Middleware\\EnsureCmsAdminAuthorized:read"
                 ]
             }
         },

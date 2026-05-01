@@ -6,6 +6,8 @@ namespace Tests\Feature\V0_5;
 
 use App\Models\AdminUser;
 use App\Models\Article;
+use App\Models\ArticleCategory;
+use App\Models\ArticleTag;
 use App\Models\ArticleTranslationRevision;
 use App\Models\Permission;
 use App\Models\Role;
@@ -165,6 +167,85 @@ final class ArticleCmsWriteAuthTest extends TestCase
             'id' => $article->id,
             'title' => 'Cross org target',
             'org_id' => 21,
+        ]);
+    }
+
+    public function test_cms_article_create_rejects_foreign_category_and_tags(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
+        $foreignCategory = ArticleCategory::query()->create([
+            'org_id' => 41,
+            'slug' => 'foreign-category',
+            'name' => 'Foreign Category',
+            'is_active' => true,
+        ]);
+        $foreignTag = ArticleTag::query()->create([
+            'org_id' => 41,
+            'slug' => 'foreign-tag',
+            'name' => 'Foreign Tag',
+            'is_active' => true,
+        ]);
+
+        $categoryResponse = $this->withSession(['ops_org_id' => 42])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->postJson('/api/v0.5/cms/articles', array_merge($this->articlePayload('foreign-category'), [
+                'category_id' => $foreignCategory->id,
+            ]));
+
+        $categoryResponse->assertStatus(422)
+            ->assertJsonPath('ok', false);
+
+        $tagResponse = $this->withSession(['ops_org_id' => 42])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->postJson('/api/v0.5/cms/articles', array_merge($this->articlePayload('foreign-tag'), [
+                'tags' => [$foreignTag->id],
+            ]));
+
+        $tagResponse->assertStatus(422)
+            ->assertJsonPath('ok', false);
+    }
+
+    public function test_cms_article_update_rejects_foreign_category_and_preserves_existing_scope(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
+        $localCategory = ArticleCategory::query()->create([
+            'org_id' => 51,
+            'slug' => 'local-category',
+            'name' => 'Local Category',
+            'is_active' => true,
+        ]);
+        $foreignCategory = ArticleCategory::query()->create([
+            'org_id' => 52,
+            'slug' => 'foreign-category',
+            'name' => 'Foreign Category',
+            'is_active' => true,
+        ]);
+        $article = Article::query()->create([
+            'org_id' => 51,
+            'category_id' => $localCategory->id,
+            'slug' => 'category-scope-target',
+            'locale' => 'en',
+            'title' => 'Category scope target',
+            'content_md' => 'Initial content',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+        ]);
+
+        $response = $this->withSession(['ops_org_id' => 51])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->putJson('/api/v0.5/cms/articles/'.$article->id, [
+                'title' => 'Should not change category',
+                'category_id' => $foreignCategory->id,
+            ]);
+
+        $response->assertStatus(422)
+            ->assertJsonPath('ok', false);
+
+        $this->assertDatabaseHas('articles', [
+            'id' => $article->id,
+            'category_id' => $localCategory->id,
+            'title' => 'Category scope target',
         ]);
     }
 
