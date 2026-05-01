@@ -37,6 +37,14 @@ final class ContentAccess
         ]);
     }
 
+    public static function canReleaseContentPacks(): bool
+    {
+        return self::hasAnyPermission([
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+            PermissionNames::ADMIN_OWNER,
+        ]);
+    }
+
     public static function canReview(): bool
     {
         return self::hasAnyPermission([

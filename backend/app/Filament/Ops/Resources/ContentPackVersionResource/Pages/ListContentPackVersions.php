@@ -20,7 +20,7 @@ class ListContentPackVersions extends ListRecords
             Actions\Action::make('releaseQueue')
                 ->label('Open Release Queue')
                 ->icon('heroicon-o-archive-box-arrow-down')
-                ->visible(fn (): bool => ContentAccess::canRelease())
+                ->visible(fn (): bool => ContentAccess::canReleaseContentPacks())
                 ->url(ContentPackReleaseResource::getUrl('index')),
             Actions\CreateAction::make(),
         ];

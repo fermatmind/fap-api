@@ -33,7 +33,7 @@ class ContentPackReleaseResource extends Resource
 
     public static function canViewAny(): bool
     {
-        return ContentAccess::canRelease();
+        return ContentAccess::canReleaseContentPacks();
     }
 
     public static function getNavigationGroup(): ?string
@@ -76,7 +76,7 @@ class ContentPackReleaseResource extends Resource
                     ->label('Run Probe')
                     ->icon('heroicon-o-sparkles')
                     ->requiresConfirmation()
-                    ->visible(fn (): bool => ContentAccess::canRelease())
+                    ->visible(fn (): bool => ContentAccess::canReleaseContentPacks())
                     ->action(function (ContentPackRelease $record): void {
                         $correlationId = (string) Str::uuid();
                         $orgId = max(0, (int) app(OrgContext::class)->orgId());
@@ -112,7 +112,7 @@ class ContentPackReleaseResource extends Resource
                     ->label('Release')
                     ->icon('heroicon-o-paper-airplane')
                     ->requiresConfirmation()
-                    ->visible(fn (ContentPackRelease $record): bool => ContentAccess::canRelease() && (bool) $record->probe_ok)
+                    ->visible(fn (ContentPackRelease $record): bool => ContentAccess::canReleaseContentPacks() && (bool) $record->probe_ok)
                     ->form([
                         Forms\Components\Textarea::make('reason')
                             ->required()
@@ -160,7 +160,7 @@ class ContentPackReleaseResource extends Resource
                     ->label('Request Rollback')
                     ->icon('heroicon-o-arrow-uturn-left')
                     ->requiresConfirmation()
-                    ->visible(fn (): bool => ContentAccess::canRelease())
+                    ->visible(fn (): bool => ContentAccess::canReleaseContentPacks())
                     ->form([
                         Forms\Components\Textarea::make('reason')
                             ->required()
