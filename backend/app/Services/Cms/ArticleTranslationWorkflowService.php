@@ -57,6 +57,13 @@ final class ArticleTranslationWorkflowService
                 ->lockForUpdate()
                 ->findOrFail($source->id);
 
+            if (! $lockedSource->isSourceArticle()) {
+                throw new ArticleTranslationWorkflowException('Create translation draft must start from a source article.', [
+                    'source article is not canonical source',
+                ]);
+            }
+            $this->assertSourceInTranslationScope($lockedSource);
+
             $existingTarget = $this->targetFor($lockedSource, $targetLocale);
             if ($existingTarget instanceof Article) {
                 throw new ArticleTranslationWorkflowException('Target locale already exists. Use re-sync from source instead.', [
@@ -128,6 +135,7 @@ final class ArticleTranslationWorkflowService
                 ]);
             }
 
+            $this->assertTargetInTranslationScope($lockedTarget, $source);
             $source->loadMissing(['workingRevision', 'seoMeta']);
             $payload = $this->provider->translate($source, (string) $lockedTarget->locale);
             $sourceHash = $this->sourceHashFor($source);
@@ -136,7 +144,7 @@ final class ArticleTranslationWorkflowService
             $revision = $this->createMachineRevision($lockedTarget, $source, $payload, $sourceHash, $supersedesRevisionId, $adminUserId);
 
             $lockedTarget->forceFill([
-                'org_id' => self::PUBLIC_EDITORIAL_ORG_ID,
+                'org_id' => (int) $source->org_id,
                 'source_article_id' => (int) $source->id,
                 'translated_from_article_id' => (int) $source->id,
                 'translation_group_id' => (string) $source->translation_group_id,
@@ -149,7 +157,7 @@ final class ArticleTranslationWorkflowService
             ArticleSeoMeta::query()->updateOrCreate(
                 ['article_id' => (int) $lockedTarget->id],
                 [
-                    'org_id' => self::PUBLIC_EDITORIAL_ORG_ID,
+                    'org_id' => (int) $lockedTarget->org_id,
                     'locale' => (string) $lockedTarget->locale,
                     'seo_title' => $payload['seo_title'] ?? null,
                     'seo_description' => $payload['seo_description'] ?? null,
@@ -314,6 +322,7 @@ final class ArticleTranslationWorkflowService
         if (! $source instanceof Article || ! $source->isSourceArticle()) {
             $blockers[] = 'source canonical invalid';
         } else {
+            $blockers = array_merge($blockers, $this->translationScopeBlockers($target, $source));
             if ((int) $target->source_article_id !== (int) $source->id) {
                 $blockers[] = 'source_article_id mismatch';
             }
@@ -330,7 +339,7 @@ final class ArticleTranslationWorkflowService
         }
 
         $seoMeta = $target->seoMeta;
-        if ($seoMeta instanceof ArticleSeoMeta && (int) $seoMeta->org_id !== self::PUBLIC_EDITORIAL_ORG_ID) {
+        if ($seoMeta instanceof ArticleSeoMeta && (int) $seoMeta->org_id !== (int) $target->org_id) {
             $blockers[] = 'seo_meta org mismatch';
         }
 
@@ -389,13 +398,29 @@ final class ArticleTranslationWorkflowService
         }
     }
 
+    private function assertSourceInTranslationScope(Article $source): void
+    {
+        $blockers = $this->sourceScopeBlockers($source);
+        if ($blockers !== []) {
+            throw new ArticleTranslationWorkflowException('Source article is outside translation content scope.', $blockers);
+        }
+    }
+
+    private function assertTargetInTranslationScope(Article $target, Article $source): void
+    {
+        $blockers = $this->translationScopeBlockers($target, $source);
+        if ($blockers !== []) {
+            throw new ArticleTranslationWorkflowException('Translation target is outside translation content scope.', $blockers);
+        }
+    }
+
     /**
      * @param  array{title:string,excerpt:string|null,content_md:string,seo_title:string|null,seo_description:string|null}  $payload
      */
     private function createTargetArticle(Article $source, string $targetLocale, array $payload, string $sourceHash): Article
     {
         $target = Article::query()->create([
-            'org_id' => self::PUBLIC_EDITORIAL_ORG_ID,
+            'org_id' => (int) $source->org_id,
             'slug' => (string) $source->slug,
             'locale' => $targetLocale,
             'translation_group_id' => (string) $source->translation_group_id,
@@ -437,7 +462,7 @@ final class ArticleTranslationWorkflowService
         $revisionNumber = ((int) $target->translationRevisions()->max('revision_number')) + 1;
 
         return ArticleTranslationRevision::query()->create([
-            'org_id' => self::PUBLIC_EDITORIAL_ORG_ID,
+            'org_id' => (int) $target->org_id,
             'article_id' => (int) $target->id,
             'source_article_id' => (int) $source->id,
             'translation_group_id' => (string) $source->translation_group_id,
@@ -461,7 +486,7 @@ final class ArticleTranslationWorkflowService
     {
         return Article::query()
             ->withoutGlobalScopes()
-            ->where('org_id', self::PUBLIC_EDITORIAL_ORG_ID)
+            ->where('org_id', (int) $source->org_id)
             ->where('translation_group_id', (string) $source->translation_group_id)
             ->where('source_article_id', (int) $source->id)
             ->where('locale', $targetLocale)
@@ -521,7 +546,7 @@ final class ArticleTranslationWorkflowService
     private function revisionOwnershipBlockers(Article $target, ArticleTranslationRevision $revision, string $label): array
     {
         $blockers = [];
-        if ((int) $revision->org_id !== self::PUBLIC_EDITORIAL_ORG_ID) {
+        if ((int) $revision->org_id !== (int) $target->org_id) {
             $blockers[] = "{$label} org mismatch";
         }
         if ((int) $revision->article_id !== (int) $target->id) {
@@ -532,6 +557,42 @@ final class ArticleTranslationWorkflowService
         }
         if ((string) $revision->translation_group_id !== (string) $target->translation_group_id) {
             $blockers[] = "{$label} group mismatch";
+        }
+
+        return $blockers;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function translationScopeBlockers(Article $target, Article $source): array
+    {
+        $blockers = $this->sourceScopeBlockers($source);
+
+        if ((int) $target->org_id !== self::PUBLIC_EDITORIAL_ORG_ID) {
+            $blockers[] = 'target article org mismatch';
+        }
+        if ((int) $target->org_id !== (int) $source->org_id) {
+            $blockers[] = 'source/target org mismatch';
+        }
+
+        return array_values(array_unique($blockers));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function sourceScopeBlockers(Article $source): array
+    {
+        $blockers = [];
+
+        if ((int) $source->org_id !== self::PUBLIC_EDITORIAL_ORG_ID) {
+            $blockers[] = 'source article org mismatch';
+        }
+
+        $source->loadMissing('seoMeta');
+        if ($source->seoMeta instanceof ArticleSeoMeta && (int) $source->seoMeta->org_id !== (int) $source->org_id) {
+            $blockers[] = 'source seo_meta org mismatch';
         }
 
         return $blockers;
@@ -574,7 +635,7 @@ final class ArticleTranslationWorkflowService
                 'content_id' => (int) $target->id,
             ],
             [
-                'org_id' => self::PUBLIC_EDITORIAL_ORG_ID,
+                'org_id' => (int) $target->org_id,
                 'workflow_state' => EditorialReviewAudit::STATE_APPROVED,
                 'reviewed_by_admin_user_id' => $actorId,
                 'reviewed_at' => now(),
