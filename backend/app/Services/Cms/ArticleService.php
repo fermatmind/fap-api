@@ -152,11 +152,7 @@ final class ArticleService
                 'related_test_slug',
                 'voice',
                 'voice_order',
-                'status',
-                'is_public',
                 'is_indexable',
-                'published_at',
-                'scheduled_at',
             ];
 
             $updates = [];

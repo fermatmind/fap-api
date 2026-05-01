@@ -224,7 +224,7 @@ final class LandingSurfaceController extends Controller
 
         $slugs = collect($items)
             ->map(fn (mixed $item): ?string => is_array($item) ? $this->recommendedArticleSlug($item) : null)
-            ->filter(fn (?string $slug): bool => is_string($slug) && $slug !== '')
+            ->filter(fn (?string $slug): bool => $slug !== null)
             ->unique()
             ->values()
             ->all();
@@ -259,14 +259,26 @@ final class LandingSurfaceController extends Controller
     {
         $article = $item['article'] ?? null;
         if (is_array($article)) {
-            $slug = trim((string) ($article['slug'] ?? ''));
-
-            return $slug !== '' ? $slug : null;
+            return $this->normalizeRecommendedArticleSlug($article['slug'] ?? null);
         }
 
-        $slug = trim((string) ($item['slug'] ?? ''));
+        return $this->normalizeRecommendedArticleSlug($item['slug'] ?? null);
+    }
 
-        return $slug !== '' ? $slug : null;
+    private function normalizeRecommendedArticleSlug(mixed $slug): ?string
+    {
+        if (! is_scalar($slug)) {
+            return null;
+        }
+
+        $normalized = trim((string) $slug);
+        if ($normalized === '' || strlen($normalized) > 127) {
+            return null;
+        }
+
+        return preg_match('/\A[a-z0-9](?:[a-z0-9-]{0,125}[a-z0-9])?\z/', $normalized) === 1
+            ? $normalized
+            : null;
     }
 
     /**

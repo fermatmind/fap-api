@@ -170,6 +170,47 @@ final class ArticleCmsWriteAuthTest extends TestCase
         ]);
     }
 
+    public function test_content_writer_cannot_publish_article_through_generic_update(): void
+    {
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
+        $article = Article::query()->create([
+            'org_id' => 31,
+            'slug' => 'generic-update-publish-target',
+            'locale' => 'en',
+            'title' => 'Generic update publish target',
+            'content_md' => 'Initial content',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => true,
+            'published_at' => null,
+            'scheduled_at' => null,
+        ]);
+
+        $response = $this->withSession(['ops_org_id' => 31])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->putJson('/api/v0.5/cms/articles/'.$article->id, [
+                'title' => 'Generic edit only',
+                'status' => 'published',
+                'is_public' => true,
+                'published_at' => now()->toIso8601String(),
+                'scheduled_at' => now()->addDay()->toIso8601String(),
+            ]);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('article.title', 'Generic edit only')
+            ->assertJsonPath('article.status', 'draft')
+            ->assertJsonPath('article.is_public', false)
+            ->assertJsonPath('article.published_at', null)
+            ->assertJsonPath('article.scheduled_at', null);
+
+        $article->refresh();
+        $this->assertSame('draft', (string) $article->status);
+        $this->assertFalse((bool) $article->is_public);
+        $this->assertNull($article->published_at);
+        $this->assertNull($article->scheduled_at);
+    }
+
     public function test_cms_article_create_rejects_foreign_category_and_tags(): void
     {
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);

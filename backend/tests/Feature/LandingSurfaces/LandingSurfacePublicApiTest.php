@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace Tests\Feature\LandingSurfaces;
 
+use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\ArticleTranslationRevision;
 use App\Models\LandingSurface;
 use App\Models\PageBlock;
+use App\Models\Permission;
+use App\Models\Role;
+use App\Support\Rbac\PermissionNames;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 final class LandingSurfacePublicApiTest extends TestCase
@@ -311,29 +316,33 @@ final class LandingSurfacePublicApiTest extends TestCase
             ->assertJsonPath('surface.payload_json.allTests.items.2.key', 'enneagram-personality-test-nine-types')
             ->assertJsonPath('surface.payload_json.allTests.items.2.href', '/zh/tests/enneagram-personality-test-nine-types');
 
-        $this->putJson('/api/v0.5/internal/landing-surfaces/home', [
-            'locale' => 'zh-CN',
-            'title' => '首页更新',
-            'description' => '后台更新首页。',
-            'schema_version' => 'home.v1',
-            'payload_json' => [
-                'seo' => ['title' => '首页更新'],
-                'hero' => ['title' => '后台首页'],
-            ],
-            'status' => 'published',
-            'is_public' => true,
-            'is_indexable' => true,
-            'page_blocks' => [
-                [
-                    'block_key' => 'hero',
-                    'block_type' => 'homepage_section',
-                    'title' => '后台首页',
-                    'payload_json' => ['title' => '后台首页'],
-                    'sort_order' => 0,
-                    'is_enabled' => true,
+        $admin = $this->createCmsAdminWithPermissions([PermissionNames::ADMIN_CONTENT_WRITE]);
+
+        $this->withSession(['ops_org_id' => 0])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->putJson('/api/v0.5/internal/landing-surfaces/home', [
+                'locale' => 'zh-CN',
+                'title' => '首页更新',
+                'description' => '后台更新首页。',
+                'schema_version' => 'home.v1',
+                'payload_json' => [
+                    'seo' => ['title' => '首页更新'],
+                    'hero' => ['title' => '后台首页'],
                 ],
-            ],
-        ])
+                'status' => 'published',
+                'is_public' => true,
+                'is_indexable' => true,
+                'page_blocks' => [
+                    [
+                        'block_key' => 'hero',
+                        'block_type' => 'homepage_section',
+                        'title' => '后台首页',
+                        'payload_json' => ['title' => '后台首页'],
+                        'sort_order' => 0,
+                        'is_enabled' => true,
+                    ],
+                ],
+            ])
             ->assertOk()
             ->assertJsonPath('ok', true)
             ->assertJsonPath('surface.title', '首页更新')
@@ -398,6 +407,59 @@ final class LandingSurfacePublicApiTest extends TestCase
                 'surface.page_blocks.0.payload_json.items.0.article.published_revision.id',
                 (int) $article->published_revision_id
             );
+    }
+
+    public function test_public_api_skips_malformed_recommended_article_slugs_without_crashing(): void
+    {
+        $surface = LandingSurface::query()->withoutGlobalScopes()->create([
+            'org_id' => 0,
+            'surface_key' => 'home',
+            'locale' => 'zh-CN',
+            'title' => '首页',
+            'description' => '首页',
+            'schema_version' => 'v1',
+            'payload_json' => [],
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 4, 25, 0, 0, 0, 'UTC'),
+            'scheduled_at' => null,
+        ]);
+
+        $surface->blocks()->create([
+            'block_key' => 'recommended_articles',
+            'block_type' => 'json',
+            'title' => '推荐阅读',
+            'payload_json' => [
+                'items' => [
+                    ['article' => ['slug' => ['not' => 'scalar']]],
+                    ['slug' => '../bad-slug'],
+                    ['article' => ['slug' => 'recommended-article']],
+                ],
+            ],
+            'sort_order' => 0,
+            'is_enabled' => true,
+        ]);
+
+        $article = $this->createArticle([
+            'slug' => 'recommended-article',
+            'locale' => 'zh-CN',
+            'title' => '推荐文章 legacy',
+        ], [
+            'title' => '推荐文章 published',
+        ]);
+
+        $response = $this->getJson('/api/v0.5/landing-surfaces/home?locale=zh-CN&org_id=0');
+
+        $response->assertOk()
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath(
+                'surface.page_blocks.0.payload_json.items.2.article.published_revision_id',
+                (int) $article->published_revision_id
+            );
+
+        $this->assertNull($response->json('surface.page_blocks.0.payload_json.items.0.article.published_revision_id'));
+        $this->assertNull($response->json('surface.page_blocks.0.payload_json.items.1.article.published_revision_id'));
     }
 
     /**
@@ -465,5 +527,36 @@ final class LandingSurfacePublicApiTest extends TestCase
         ], $overrides));
 
         return $revision;
+    }
+
+    /**
+     * @param  list<string>  $permissions
+     */
+    private function createCmsAdminWithPermissions(array $permissions): AdminUser
+    {
+        $admin = AdminUser::query()->create([
+            'name' => 'admin_'.Str::lower(Str::random(6)),
+            'email' => 'admin_'.Str::lower(Str::random(6)).'@example.test',
+            'password' => bcrypt('secret'),
+            'is_active' => 1,
+        ]);
+
+        $role = Role::query()->create([
+            'name' => 'role_'.Str::lower(Str::random(10)),
+            'description' => null,
+        ]);
+
+        foreach ($permissions as $permissionName) {
+            $permission = Permission::query()->firstOrCreate(
+                ['name' => $permissionName],
+                ['description' => null]
+            );
+
+            $role->permissions()->syncWithoutDetaching([$permission->id]);
+        }
+
+        $admin->roles()->syncWithoutDetaching([$role->id]);
+
+        return $admin;
     }
 }

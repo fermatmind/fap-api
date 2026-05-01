@@ -525,11 +525,7 @@ class ArticleController extends Controller
             'related_test_slug' => ['nullable', 'string', 'max:127'],
             'voice' => ['nullable', 'string', 'max:32'],
             'voice_order' => ['nullable', 'integer', 'min:0', 'max:65535'],
-            'status' => ['sometimes', 'string', 'max:32'],
-            'is_public' => ['sometimes', 'boolean'],
             'is_indexable' => ['sometimes', 'boolean'],
-            'published_at' => ['nullable', 'date'],
-            'scheduled_at' => ['nullable', 'date'],
             'tags' => ['sometimes', 'array'],
             'tags.*' => ['integer', 'min:1'],
         ]);

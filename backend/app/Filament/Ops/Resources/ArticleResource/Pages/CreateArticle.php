@@ -96,6 +96,11 @@ class CreateArticle extends CreateRecord
         ];
 
         unset(
+            $data['status'],
+            $data['is_public'],
+            $data['published_at'],
+            $data['scheduled_at'],
+            $data['published_revision_id'],
             $data['seo_title'],
             $data['seo_description'],
             $data['working_revision_status'],

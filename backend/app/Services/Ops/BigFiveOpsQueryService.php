@@ -68,9 +68,10 @@ final class BigFiveOpsQueryService
     /**
      * @return list<object>
      */
-    public function listLatestReleaseAudits(string $releaseId, string $result, int $limit): array
+    public function listLatestReleaseAudits(int $orgId, string $releaseId, string $result, int $limit): array
     {
         $query = DB::table('audit_logs')
+            ->where('org_id', max(0, $orgId))
             ->whereIn('action', self::BIG5_ACTIONS)
             ->where('target_id', $releaseId);
 
@@ -89,9 +90,10 @@ final class BigFiveOpsQueryService
     /**
      * @return list<object>
      */
-    public function listAudits(string $action, string $result, string $releaseId, int $limit): array
+    public function listAudits(int $orgId, string $action, string $result, string $releaseId, int $limit): array
     {
         $query = DB::table('audit_logs')
+            ->where('org_id', max(0, $orgId))
             ->whereIn('action', self::BIG5_ACTIONS);
 
         if ($action !== '') {
@@ -112,9 +114,10 @@ final class BigFiveOpsQueryService
         return $rows->all();
     }
 
-    public function findAuditById(string $auditId): ?object
+    public function findAuditById(int $orgId, string $auditId): ?object
     {
         $row = DB::table('audit_logs')
+            ->where('org_id', max(0, $orgId))
             ->where('id', $auditId)
             ->whereIn('action', self::BIG5_ACTIONS)
             ->first();
@@ -171,9 +174,10 @@ final class BigFiveOpsQueryService
     /**
      * @return list<object>
      */
-    public function listReleaseAudits(string $releaseId, int $limit = 20): array
+    public function listReleaseAudits(int $orgId, string $releaseId, int $limit = 20): array
     {
         $rows = DB::table('audit_logs')
+            ->where('org_id', max(0, $orgId))
             ->whereIn('action', self::BIG5_ACTIONS)
             ->where('target_id', $releaseId)
             ->orderByDesc('id')
@@ -251,6 +255,7 @@ final class BigFiveOpsQueryService
      * @param  array<string,mixed>  $meta
      */
     public function insertAudit(
+        int $orgId,
         string $action,
         string $targetType,
         string $targetId,
@@ -262,6 +267,7 @@ final class BigFiveOpsQueryService
         string $requestId
     ): void {
         DB::table('audit_logs')->insert([
+            'org_id' => max(0, $orgId),
             'actor_admin_id' => null,
             'action' => $action,
             'target_type' => $targetType,

@@ -182,10 +182,12 @@ class ArticleResource extends Resource
                                     ->required()
                                     ->options(self::statusOptions())
                                     ->default('draft')
+                                    ->disabled()
                                     ->helperText(__('ops.resources.articles.helpers.status')),
                                 Forms\Components\Toggle::make('is_public')
                                     ->label(__('ops.resources.articles.fields.public_visibility'))
                                     ->default(false)
+                                    ->disabled()
                                     ->helperText(__('ops.resources.articles.helpers.is_public')),
                                 Forms\Components\Toggle::make('is_indexable')
                                     ->label(__('ops.resources.articles.fields.search_indexable'))
@@ -193,9 +195,11 @@ class ArticleResource extends Resource
                                     ->helperText(__('ops.resources.articles.helpers.is_indexable')),
                                 Forms\Components\DateTimePicker::make('published_at')
                                     ->label(__('ops.resources.articles.fields.published'))
+                                    ->disabled()
                                     ->helperText(__('ops.resources.articles.helpers.published_at')),
                                 Forms\Components\DateTimePicker::make('scheduled_at')
                                     ->label(__('ops.resources.articles.fields.scheduled_at'))
+                                    ->disabled()
                                     ->helperText(__('ops.resources.articles.helpers.scheduled_at')),
                             ]),
                         Forms\Components\Section::make(__('ops.edit.sections.publish_readiness'))

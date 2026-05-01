@@ -81,7 +81,7 @@ final class BigFiveOpsActionService
         }
 
         $releaseId = (string) ($row->id ?? '');
-        $audits = $this->queryService->listLatestReleaseAudits($releaseId, $result, $limit);
+        $audits = $this->queryService->listLatestReleaseAudits($orgId, $releaseId, $result, $limit);
         $items = [];
         foreach ($audits as $audit) {
             $items[] = $this->mapAuditRow($audit);
@@ -141,7 +141,7 @@ final class BigFiveOpsActionService
         $result = $this->normalizeAuditResult((string) ($input['result'] ?? ''));
         $releaseId = trim((string) ($input['release_id'] ?? ''));
 
-        $rows = $this->queryService->listAudits($action, $result, $releaseId, $limit);
+        $rows = $this->queryService->listAudits($orgId, $action, $result, $releaseId, $limit);
         $items = [];
         foreach ($rows as $row) {
             $items[] = $this->mapAuditRow($row);
@@ -175,7 +175,7 @@ final class BigFiveOpsActionService
             ];
         }
 
-        $row = $this->queryService->findAuditById($auditId);
+        $row = $this->queryService->findAuditById($orgId, $auditId);
         if (! is_object($row)) {
             return [
                 'status' => 404,
@@ -237,7 +237,7 @@ final class BigFiveOpsActionService
             ];
         }
 
-        $audits = $this->queryService->listReleaseAudits($releaseId, 20);
+        $audits = $this->queryService->listReleaseAudits($orgId, $releaseId, 20);
         $auditItems = [];
         foreach ($audits as $audit) {
             $auditItems[] = $this->mapAuditRow($audit);
@@ -865,6 +865,7 @@ final class BigFiveOpsActionService
         array $context
     ): void {
         $this->queryService->insertAudit(
+            (int) ($meta['org_id'] ?? 0),
             $action,
             $targetType,
             $targetId,
