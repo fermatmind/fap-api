@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Cms;
 
 use App\Models\Article;
+use App\Models\ArticleCategory;
 use App\Models\ArticleRevision;
 use App\Models\ArticleTag;
 use Illuminate\Support\Facades\DB;
@@ -45,11 +46,12 @@ final class ArticleService
             $normalizedLocale,
             null
         );
+        $resolvedCategoryId = $this->resolveCategoryId($categoryId, $normalizedOrgId);
         $tagIds = $this->resolveTagIds($tags, $normalizedOrgId);
 
         return DB::transaction(function () use (
             $normalizedOrgId,
-            $categoryId,
+            $resolvedCategoryId,
             $resolvedSlug,
             $normalizedLocale,
             $normalizedTitle,
@@ -58,7 +60,7 @@ final class ArticleService
         ): Article {
             $article = Article::query()->create([
                 'org_id' => $normalizedOrgId,
-                'category_id' => $categoryId,
+                'category_id' => $resolvedCategoryId,
                 'slug' => $resolvedSlug,
                 'locale' => $normalizedLocale,
                 'title' => $normalizedTitle,
@@ -126,6 +128,13 @@ final class ArticleService
                 $nextLocale,
                 (int) $article->id
             );
+
+            if (array_key_exists('category_id', $fields)) {
+                $rawCategoryId = $fields['category_id'];
+                $fields['category_id'] = $rawCategoryId === null || $rawCategoryId === ''
+                    ? null
+                    : $this->resolveCategoryId((int) $rawCategoryId, $orgId);
+            }
 
             $allowedFields = [
                 'category_id',
@@ -233,6 +242,29 @@ final class ArticleService
         }
 
         return $query->exists();
+    }
+
+    private function resolveCategoryId(?int $categoryId, int $orgId): ?int
+    {
+        if ($categoryId === null) {
+            return null;
+        }
+
+        if ($categoryId <= 0) {
+            throw new InvalidArgumentException('category_id must be a positive integer.');
+        }
+
+        $exists = ArticleCategory::query()
+            ->withoutGlobalScopes()
+            ->where('org_id', $orgId)
+            ->where('id', $categoryId)
+            ->exists();
+
+        if (! $exists) {
+            throw new InvalidArgumentException('category does not exist for the specified org.');
+        }
+
+        return $categoryId;
     }
 
     /**

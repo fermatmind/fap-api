@@ -552,16 +552,30 @@ Route::prefix('v0.5')->group(function () {
         Route::post('/cms/articles/{id}/unpublish', [ArticleController::class, 'unpublish']);
     });
 
-    Route::middleware([
-        ...$cmsAdminMiddleware,
-        EnsureCmsAdminAuthorized::class.':write',
-    ])->prefix('internal/career/crosswalk')->group(function () {
-        Route::get('/review-queue', [CareerCrosswalkReviewQueueController::class, 'index']);
-        Route::get('/review-queue/{slug}', [CareerCrosswalkReviewQueueController::class, 'show']);
-        Route::get('/patches/{slug}', [CareerCrosswalkPatchController::class, 'history']);
-        Route::get('/override/{slug}', [CareerCrosswalkOverrideController::class, 'show']);
-        Route::post('/patches', [CareerCrosswalkPatchController::class, 'store']);
-        Route::post('/patches/{patchKey}/approve', [CareerCrosswalkPatchController::class, 'approve']);
-        Route::post('/patches/{patchKey}/reject', [CareerCrosswalkPatchController::class, 'reject']);
+    Route::prefix('internal/career/crosswalk')->group(function () use ($cmsAdminMiddleware) {
+        Route::middleware([
+            ...$cmsAdminMiddleware,
+            EnsureCmsAdminAuthorized::class.':read',
+        ])->group(function () {
+            Route::get('/review-queue', [CareerCrosswalkReviewQueueController::class, 'index']);
+            Route::get('/review-queue/{slug}', [CareerCrosswalkReviewQueueController::class, 'show']);
+            Route::get('/patches/{slug}', [CareerCrosswalkPatchController::class, 'history']);
+            Route::get('/override/{slug}', [CareerCrosswalkOverrideController::class, 'show']);
+        });
+
+        Route::middleware([
+            ...$cmsAdminMiddleware,
+            EnsureCmsAdminAuthorized::class.':write',
+        ])->group(function () {
+            Route::post('/patches', [CareerCrosswalkPatchController::class, 'store']);
+        });
+
+        Route::middleware([
+            ...$cmsAdminMiddleware,
+            EnsureCmsAdminAuthorized::class.':release',
+        ])->group(function () {
+            Route::post('/patches/{patchKey}/approve', [CareerCrosswalkPatchController::class, 'approve']);
+            Route::post('/patches/{patchKey}/reject', [CareerCrosswalkPatchController::class, 'reject']);
+        });
     });
 });

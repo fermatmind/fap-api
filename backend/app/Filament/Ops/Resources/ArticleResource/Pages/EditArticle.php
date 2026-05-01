@@ -108,6 +108,9 @@ class EditArticle extends EditRecord
      */
     protected function mutateFormDataBeforeSave(array $data): array
     {
+        /** @var Article $record */
+        $record = $this->getRecord();
+        $data['org_id'] = (int) $record->org_id;
         $this->workingRevisionPayload = [
             'title' => $data['title'] ?? null,
             'excerpt' => $data['excerpt'] ?? null,
