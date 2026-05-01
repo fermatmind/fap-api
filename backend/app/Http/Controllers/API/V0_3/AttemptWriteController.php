@@ -52,6 +52,11 @@ class AttemptWriteController extends Controller
             $payload['referrer'] = $referrer;
         }
 
+        $resumeToken = trim((string) ($request->header('X-Resume-Token') ?: ($payload['resume_token'] ?? '')));
+        if ($resumeToken !== '') {
+            $payload['resume_token'] = $resumeToken;
+        }
+
         $result = $this->startService->start($context, StartAttemptDTO::fromArray($payload));
 
         return response()->json($result);

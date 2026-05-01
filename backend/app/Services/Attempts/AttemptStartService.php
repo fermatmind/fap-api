@@ -19,13 +19,13 @@ use App\Services\Mbti\MbtiFormCatalog;
 use App\Services\Observability\BigFiveTelemetry;
 use App\Services\Observability\ClinicalComboTelemetry;
 use App\Services\Observability\Sds20Telemetry;
+use App\Services\Riasec\RiasecFormCatalog;
 use App\Services\Scale\ScaleCodeInputGuard;
 use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Services\Scale\ScaleIdentityRuntimePolicy;
 use App\Services\Scale\ScaleIdentityWriteProjector;
 use App\Services\Scale\ScaleRegistry;
 use App\Services\Scale\ScaleRolloutGate;
-use App\Services\Riasec\RiasecFormCatalog;
 use App\Support\OrgContext;
 use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Support\Facades\Cache;
@@ -90,6 +90,11 @@ class AttemptStartService
         if ($anonId === '') {
             $anonId = 'anon_'.Str::uuid();
         }
+        $resumeToken = trim((string) ($dto->resumeToken ?? ''));
+        $tokenBoundAnonId = trim((string) ($ctx->anonId() ?? ''));
+        $hasAnonSessionProof = $ctx->userId() === null
+            && $tokenBoundAnonId !== ''
+            && hash_equals($tokenBoundAnonId, $anonId);
 
         ScaleRolloutGate::assertEnabled($scaleCode, $row, $region, $anonId);
 
@@ -337,6 +342,8 @@ class AttemptStartService
             scaleCode: $scaleCode,
             actorUserId: $ctx->userId(),
             anonId: $anonId,
+            resumeToken: $resumeToken,
+            hasAnonSessionProof: $hasAnonSessionProof,
             packId: $packId,
             dirVersion: $dirVersion,
             contentPackageVersion: $contentPackageVersion,
@@ -432,6 +439,8 @@ class AttemptStartService
         string $scaleCode,
         ?int $actorUserId,
         string $anonId,
+        string $resumeToken,
+        bool $hasAnonSessionProof,
         string $packId,
         string $dirVersion,
         string $contentPackageVersion,
@@ -444,6 +453,8 @@ class AttemptStartService
             $scaleCode,
             $actorUserId,
             $anonId,
+            $resumeToken,
+            $hasAnonSessionProof,
             $packId,
             $dirVersion,
             $contentPackageVersion,
@@ -457,6 +468,8 @@ class AttemptStartService
                     scaleCode: $scaleCode,
                     actorUserId: $actorUserId,
                     anonId: $anonId,
+                    resumeToken: $resumeToken,
+                    hasAnonSessionProof: $hasAnonSessionProof,
                     packId: $packId,
                     dirVersion: $dirVersion,
                     contentPackageVersion: $contentPackageVersion,
@@ -521,12 +534,19 @@ class AttemptStartService
         string $scaleCode,
         ?int $actorUserId,
         string $anonId,
+        string $resumeToken,
+        bool $hasAnonSessionProof,
         string $packId,
         string $dirVersion,
         string $contentPackageVersion,
         ?string $resolvedFormCode,
         ?string $writeConnectionName,
     ): ?array {
+        $hasActorSessionProof = $actorUserId !== null || $hasAnonSessionProof;
+        if (! $hasActorSessionProof && $resumeToken === '') {
+            return null;
+        }
+
         $now = now();
         $query = Attempt::on($writeConnectionName)
             ->where('org_id', $orgId)
@@ -564,7 +584,12 @@ class AttemptStartService
                 === $this->normalizeFormCode($resolvedFormCode);
         })->values();
         foreach ($candidates as $attempt) {
-            $draft = $this->progressService->reissueDraftForAttempt($attempt);
+            $draft = $this->progressService->reissueDraftForAttemptWithProof(
+                $attempt,
+                $resumeToken !== '' ? $resumeToken : null,
+                $actorUserId,
+                $hasActorSessionProof
+            );
             if ($draft === null) {
                 continue;
             }

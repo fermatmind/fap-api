@@ -198,8 +198,12 @@ class AttemptProgressService
         DB::table('attempt_drafts')->where('attempt_id', $attemptId)->delete();
     }
 
-    public function reissueDraftForAttempt(Attempt $attempt): ?array
-    {
+    public function reissueDraftForAttemptWithProof(
+        Attempt $attempt,
+        ?string $token,
+        ?int $userId,
+        bool $hasSessionProof = false,
+    ): ?array {
         $draft = $this->loadDraft((string) $attempt->id);
         if (! $draft) {
             return null;
@@ -207,6 +211,10 @@ class AttemptProgressService
 
         $expiresAt = $this->parseExpiresAt($draft['expires_at'] ?? null);
         if (! $expiresAt || $expiresAt->isPast()) {
+            return null;
+        }
+
+        if (! $hasSessionProof && ! $this->canAccessDraft($draft, $token, $userId)) {
             return null;
         }
 
