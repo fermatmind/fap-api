@@ -311,6 +311,30 @@ class AttemptOwnershipAnd404Test extends TestCase
         $this->assertUniform404($this->getJson("/api/v0.3/attempts/{$attemptId}/report.pdf", $adminHeaders));
     }
 
+    public function test_tenant_admin_cannot_submit_public_org_zero_attempt(): void
+    {
+        $this->seedScales();
+
+        $owner = $this->createUserWithToken('owner_org_zero_case@example.com');
+        $admin = $this->createUserWithToken('admin_org_zero_case@example.com');
+
+        $orgId = $this->createOrg($owner['user_id']);
+        $this->addMember($orgId, $owner['user_id'], 'owner');
+        $this->addMember($orgId, $admin['user_id'], 'admin');
+
+        $attemptId = $this->seedOrgZeroAttempt();
+        $adminHeaders = [
+            'Authorization' => 'Bearer '.$admin['token'],
+            'X-Org-Id' => (string) $orgId,
+        ];
+
+        $this->assertUniform404($this->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => $attemptId,
+            'answers' => $this->defaultAnswers(),
+            'duration_ms' => 120000,
+        ], $adminHeaders));
+    }
+
     public function test_missing_token_or_cross_org_access_returns_404(): void
     {
         $this->seedScales();
@@ -343,5 +367,36 @@ class AttemptOwnershipAnd404Test extends TestCase
             'Authorization' => 'Bearer '.$memberB['token'],
             'X-Org-Id' => (string) $org2,
         ]));
+    }
+
+    private function seedOrgZeroAttempt(): string
+    {
+        $attemptId = (string) Str::uuid();
+
+        DB::table('attempts')->insert([
+            'id' => $attemptId,
+            'org_id' => 0,
+            'anon_id' => 'org-zero-tenant-admin-regression',
+            'user_id' => null,
+            'scale_code' => 'SIMPLE_SCORE_DEMO',
+            'scale_version' => 'v0.3',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'question_count' => 5,
+            'answers_summary_json' => json_encode(['seed' => true]),
+            'client_platform' => 'test',
+            'client_version' => '1.0.0',
+            'channel' => 'test',
+            'started_at' => now(),
+            'submitted_at' => null,
+            'pack_id' => (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.3'),
+            'dir_version' => (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.3'),
+            'content_package_version' => 'v0.3',
+            'scoring_spec_version' => '2026.01',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return $attemptId;
     }
 }

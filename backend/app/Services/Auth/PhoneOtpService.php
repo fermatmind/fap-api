@@ -21,7 +21,7 @@ class PhoneOtpService
     /**
      * 发送验证码：生成 code -> 写 cache -> 返回 (MVP: local/dev 可返回 dev_code)
      */
-    public function send(string $phone, string $scene, string $ip = '', ?string $deviceKey = null): array
+    public function send(string $phone, string $scene, string $ip = '', ?string $deviceKey = null, ?string $anonId = null): array
     {
         $scene = $this->normalizeScene($scene);
         $p = $this->normalizePhone($phone);
@@ -33,6 +33,12 @@ class PhoneOtpService
 
         Cache::put($this->otpKey($p, $scene), $code, $this->ttlSeconds);
         Cache::put($this->failKey($p, $scene), 0, $this->ttlSeconds);
+        $boundAnonId = trim((string) ($anonId ?? ''));
+        if ($boundAnonId !== '') {
+            Cache::put($this->anonKey($p, $scene), $boundAnonId, $this->ttlSeconds);
+        } else {
+            Cache::forget($this->anonKey($p, $scene));
+        }
 
         $res = [
             'ok' => true,
@@ -67,10 +73,18 @@ class PhoneOtpService
         if ($this->allowDevCode()) {
             $dev = $this->devCode();
             if (is_string($dev) && $dev !== '' && hash_equals($dev, $code)) {
+                $boundAnonId = Cache::get($this->anonKey($p, $scene));
                 Cache::forget($this->otpKey($p, $scene));
                 Cache::forget($this->failKey($p, $scene));
+                Cache::forget($this->anonKey($p, $scene));
 
-                return ['ok' => true, 'phone' => $p, 'scene' => $scene, 'via' => 'dev_code'];
+                return [
+                    'ok' => true,
+                    'phone' => $p,
+                    'scene' => $scene,
+                    'via' => 'dev_code',
+                    'bound_anon_id' => is_string($boundAnonId) && trim($boundAnonId) !== '' ? trim($boundAnonId) : null,
+                ];
             }
         }
 
@@ -86,16 +100,25 @@ class PhoneOtpService
 
             if ($fails >= $this->maxFail) {
                 Cache::forget($this->otpKey($p, $scene));
+                Cache::forget($this->anonKey($p, $scene));
                 throw new ApiProblemException(429, 'RATE_LIMITED', 'Too many failed attempts.');
             }
 
             throw new ApiProblemException(400, 'OTP_INVALID', 'Invalid code.');
         }
 
+        $boundAnonId = Cache::get($this->anonKey($p, $scene));
         Cache::forget($this->otpKey($p, $scene));
         Cache::forget($this->failKey($p, $scene));
+        Cache::forget($this->anonKey($p, $scene));
 
-        return ['ok' => true, 'phone' => $p, 'scene' => $scene, 'via' => 'cache'];
+        return [
+            'ok' => true,
+            'phone' => $p,
+            'scene' => $scene,
+            'via' => 'cache',
+            'bound_anon_id' => is_string($boundAnonId) && trim($boundAnonId) !== '' ? trim($boundAnonId) : null,
+        ];
     }
 
     // ----------------------------
@@ -142,6 +165,11 @@ class PhoneOtpService
     private function failKey(string $phone, string $scene): string
     {
         return "otp:{$scene}:{$phone}:fail";
+    }
+
+    private function anonKey(string $phone, string $scene): string
+    {
+        return "otp:{$scene}:{$phone}:anon";
     }
 
     private function rateKeyIp(string $ip): string

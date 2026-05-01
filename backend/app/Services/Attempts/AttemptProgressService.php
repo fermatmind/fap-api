@@ -230,6 +230,27 @@ class AttemptProgressService
         ];
     }
 
+    public function hasValidResumeToken(string $attemptId, string $token): bool
+    {
+        $attemptId = trim($attemptId);
+        $token = trim($token);
+        if ($attemptId === '' || $token === '') {
+            return false;
+        }
+
+        $draft = $this->loadDraft($attemptId);
+        if (! $draft) {
+            return false;
+        }
+
+        $expiresAt = $this->parseExpiresAt($draft['expires_at'] ?? null);
+        if (! $expiresAt || $expiresAt->isPast()) {
+            return false;
+        }
+
+        return $this->canAccessDraft($draft, $token, null);
+    }
+
     public function loadDraftAnswers(Attempt $attempt): array
     {
         $row = DB::table('attempt_drafts')->where('attempt_id', (string) $attempt->id)->first();

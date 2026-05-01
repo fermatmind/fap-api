@@ -2,6 +2,8 @@
 
 namespace App\Services\Account;
 
+use App\Models\Attempt;
+use App\Services\Attempts\AttemptProgressService;
 use App\Support\OrgContext;
 use Illuminate\Support\Facades\DB;
 
@@ -9,6 +11,7 @@ class AssetCollector
 {
     public function __construct(
         private readonly OrgContext $orgContext,
+        private readonly AttemptProgressService $progressService,
     ) {}
 
     /**
@@ -37,6 +40,57 @@ class AssetCollector
             'user_id' => $userId,
             'updated_at' => now(),
         ]);
+
+        return ['updated' => (int) $n];
+    }
+
+    /**
+     * Claim only attempts for which the caller proves possession of that
+     * attempt's current resume token. A raw anon_id is not enough.
+     *
+     * @return array {updated:int}
+     */
+    public function appendByAnonIdWithResumeToken(string $userId, string $anonId, string $resumeToken): array
+    {
+        $userId = trim($userId);
+        $anonId = trim($anonId);
+        $resumeToken = trim($resumeToken);
+
+        if ($userId === '' || $anonId === '' || $resumeToken === '') {
+            return ['updated' => 0];
+        }
+
+        $attempts = Attempt::withoutGlobalScopes()
+            ->where('org_id', $this->orgContext->orgId())
+            ->whereNull('user_id')
+            ->where('anon_id', $anonId)
+            ->orderByDesc('started_at')
+            ->limit(16)
+            ->get(['id']);
+
+        $claimableIds = [];
+        foreach ($attempts as $attempt) {
+            $attemptId = trim((string) ($attempt->id ?? ''));
+            if ($attemptId === '') {
+                continue;
+            }
+            if ($this->progressService->hasValidResumeToken($attemptId, $resumeToken)) {
+                $claimableIds[] = $attemptId;
+            }
+        }
+
+        if ($claimableIds === []) {
+            return ['updated' => 0];
+        }
+
+        $n = DB::table('attempts')
+            ->where('org_id', $this->orgContext->orgId())
+            ->whereNull('user_id')
+            ->whereIn('id', $claimableIds)
+            ->update([
+                'user_id' => $userId,
+                'updated_at' => now(),
+            ]);
 
         return ['updated' => (int) $n];
     }

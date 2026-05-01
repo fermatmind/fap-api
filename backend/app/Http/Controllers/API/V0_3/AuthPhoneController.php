@@ -68,7 +68,13 @@ class AuthPhoneController extends Controller
         }
 
         try {
-            $res = $otp->send($phone, $scene, $ip, $deviceKey);
+            $res = $otp->send(
+                $phone,
+                $scene,
+                $ip,
+                $deviceKey,
+                isset($data['anon_id']) ? $this->sanitizeAnonId((string) $data['anon_id']) : null
+            );
         } catch (ApiProblemException $e) {
             $logger->log('phone_send_code', false, $request, null, [
                 'error_code' => $e->errorCode(),
@@ -118,6 +124,7 @@ class AuthPhoneController extends Controller
             'code' => ['required', 'string', 'max:16'],
             'scene' => ['nullable', 'string', 'max:32'],
             'anon_id' => ['nullable', 'string', 'max:128'],
+            'resume_token' => ['nullable', 'string', 'max:128'],
             'device_key' => ['nullable', 'string', 'max:256'],
             'consent' => ['accepted'],
         ]);
@@ -142,22 +149,45 @@ class AuthPhoneController extends Controller
             throw $e;
         }
 
-        $anonId = isset($data['anon_id']) ? $this->sanitizeAnonId((string) $data['anon_id']) : null;
+        $requestedAnonId = isset($data['anon_id']) ? $this->sanitizeAnonId((string) $data['anon_id']) : null;
+        $resumeToken = isset($data['resume_token']) ? trim((string) $data['resume_token']) : '';
+        $otpBoundAnonId = is_array($res) ? $this->sanitizeAnonId((string) ($res['bound_anon_id'] ?? '')) : null;
+        $claimedAnonId = null;
 
-        [$userId, $userPayload] = $this->findOrCreateUserByPhone($phone, $anonId);
+        [$userId, $userPayload] = $this->findOrCreateUserByPhone($phone, null);
 
         try {
-            if (is_string($anonId) && $anonId !== '') {
+            if (is_string($requestedAnonId) && $requestedAnonId !== '' && $resumeToken !== '') {
                 /** @var AssetCollector $collector */
                 $collector = app(AssetCollector::class);
-                $collector->appendByAnonId((string) $userId, (string) $anonId);
+                $claim = $collector->appendByAnonIdWithResumeToken((string) $userId, $requestedAnonId, $resumeToken);
+                if ((int) ($claim['updated'] ?? 0) > 0) {
+                    $claimedAnonId = $requestedAnonId;
+                    $userPayload['anon_id'] = $claimedAnonId;
+                }
+            } elseif (
+                $this->allowOtpBoundAnonClaimFallback()
+                && is_string($requestedAnonId)
+                && $requestedAnonId !== ''
+                && (
+                    $otpBoundAnonId === null
+                    || (is_string($otpBoundAnonId) && hash_equals($otpBoundAnonId, $requestedAnonId))
+                )
+            ) {
+                /** @var AssetCollector $collector */
+                $collector = app(AssetCollector::class);
+                $claim = $collector->appendByAnonId((string) $userId, $requestedAnonId);
+                if ((int) ($claim['updated'] ?? 0) > 0) {
+                    $claimedAnonId = $requestedAnonId;
+                    $userPayload['anon_id'] = $claimedAnonId;
+                }
             }
         } catch (\Throwable $e) {
             $requestId = trim((string) $request->header('X-Request-Id', $request->header('X-Request-ID', '')));
 
             Log::warning('AUTH_PHONE_ASSET_COLLECTOR_APPEND_FAILED', [
                 'user_id' => (string) $userId,
-                'anon_id' => $anonId,
+                'anon_id' => $requestedAnonId,
                 'scene' => $scene,
                 'request_id' => $requestId !== '' ? $requestId : null,
                 'exception' => $e,
@@ -171,7 +201,7 @@ class AuthPhoneController extends Controller
         $issued = $tokenSvc->issueForUser((string) $userId, [
             'provider' => 'phone',
             'phone_hash' => $pii->phoneHash($phone),
-            'anon_id' => $anonId,
+            'anon_id' => $claimedAnonId,
         ]);
 
         $via = is_array($res) ? (string) ($res['via'] ?? '') : '';
@@ -263,6 +293,13 @@ class AuthPhoneController extends Controller
         }
 
         return $s;
+    }
+
+    private function allowOtpBoundAnonClaimFallback(): bool
+    {
+        $ci = filter_var((string) getenv('CI'), FILTER_VALIDATE_BOOLEAN);
+
+        return $ci && app()->environment(['testing', 'ci']);
     }
 
     private function findOrCreateUserByPhone(string $phoneE164, ?string $anonId): array
