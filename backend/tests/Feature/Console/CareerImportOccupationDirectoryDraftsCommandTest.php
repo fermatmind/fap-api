@@ -114,10 +114,21 @@ final class CareerImportOccupationDirectoryDraftsCommandTest extends TestCase
 
         $this->getJson('/api/v0.5/career/jobs')
             ->assertOk()
-            ->assertJsonCount(0, 'items');
+            ->assertJsonCount(2, 'items')
+            ->assertJsonPath('items.0.trust_summary.status', 'unavailable')
+            ->assertJsonPath('items.0.seo_contract.index_eligible', false)
+            ->assertJsonMissingPath('items.0.trust_summary.reviewer_status')
+            ->assertJsonMissingPath('items.0.trust_summary.content_version')
+            ->assertJsonMissingPath('items.0.trust_summary.data_version')
+            ->assertJsonMissingPath('items.0.provenance_meta.import_run_id');
         $this->getJson('/api/v0.5/career/search?q='.urlencode('示例职业').'&locale=zh-CN')
             ->assertOk()
-            ->assertJsonCount(0, 'items');
+            ->assertJsonCount(1, 'items')
+            ->assertJsonPath('items.0.trust_summary.status', 'unavailable')
+            ->assertJsonPath('items.0.seo_contract.index_eligible', false)
+            ->assertJsonMissingPath('items.0.trust_summary.reviewer_status')
+            ->assertJsonMissingPath('items.0.trust_summary.content_version')
+            ->assertJsonMissingPath('items.0.provenance_meta.import_run_id');
         $this->getJson('/api/v0.5/career/jobs/cn-1-01-00-01')
             ->assertNotFound();
     }

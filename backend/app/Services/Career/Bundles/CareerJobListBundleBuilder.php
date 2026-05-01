@@ -17,6 +17,8 @@ final class CareerJobListBundleBuilder
 {
     private const SAFE_CROSSWALK_MODES = ['exact', 'trust_inheritance', 'direct_match'];
 
+    private const DIRECTORY_DRAFT_CROSSWALK_MODE = 'directory_draft';
+
     public function __construct(
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
     ) {}
@@ -93,6 +95,15 @@ final class CareerJobListBundleBuilder
             $items = $items->concat($docxItems)->values();
         }
 
+        $visibleSlugs = $items
+            ->map(static fn (CareerJobListItemBundle $item): string => (string) ($item->identity['canonical_slug'] ?? ''))
+            ->filter()
+            ->all();
+        $directoryDraftItems = $this->buildDirectoryDraftCareerJobItems($visibleSlugs);
+        if ($directoryDraftItems !== []) {
+            $items = $items->concat($directoryDraftItems)->values();
+        }
+
         /** @var Collection<int, CareerJobListItemBundle> $items */
         $items = $items->sortBy(static fn (CareerJobListItemBundle $item): array => [
             strtolower((string) ($item->titles['canonical_en'] ?? '')),
@@ -127,6 +138,25 @@ final class CareerJobListBundleBuilder
             ->filter(fn (CareerJob $job): bool => ! isset($excluded[(string) $job->slug]) && $this->isDocxCareerJob($job))
             ->values()
             ->map(fn (CareerJob $job): CareerJobListItemBundle => $this->buildDocxCareerJobItem($job))
+            ->all();
+    }
+
+    /**
+     * @param  list<string>  $excludedSlugs
+     * @return list<CareerJobListItemBundle>
+     */
+    private function buildDirectoryDraftCareerJobItems(array $excludedSlugs): array
+    {
+        $excluded = array_flip(array_filter($excludedSlugs));
+
+        return Occupation::query()
+            ->where('crosswalk_mode', self::DIRECTORY_DRAFT_CROSSWALK_MODE)
+            ->orderBy('canonical_title_en')
+            ->orderBy('canonical_slug')
+            ->get()
+            ->filter(static fn (Occupation $occupation): bool => ! isset($excluded[(string) $occupation->canonical_slug]))
+            ->values()
+            ->map(fn (Occupation $occupation): CareerJobListItemBundle => $this->buildDirectoryDraftCareerJobItem($occupation))
             ->all();
     }
 
@@ -283,6 +313,61 @@ final class CareerJobListBundleBuilder
         );
     }
 
+    private function buildDirectoryDraftCareerJobItem(Occupation $occupation): CareerJobListItemBundle
+    {
+        return new CareerJobListItemBundle(
+            identity: [
+                'occupation_uuid' => $occupation->id,
+                'canonical_slug' => $occupation->canonical_slug,
+                'entity_level' => $occupation->entity_level,
+                'family_uuid' => $occupation->family_id,
+            ],
+            titles: [
+                'canonical_en' => $occupation->canonical_title_en,
+                'canonical_zh' => $occupation->canonical_title_zh,
+                'search_h1_zh' => $occupation->search_h1_zh,
+            ],
+            truthSummary: [
+                'truth_market' => $occupation->truth_market,
+                'median_pay_usd_annual' => null,
+                'outlook_pct_2024_2034' => null,
+                'outlook_description' => null,
+                'ai_exposure' => null,
+            ],
+            trustSummary: [
+                'status' => 'unavailable',
+                'reviewed_at' => null,
+                'editorial_patch_required' => true,
+                'editorial_patch_status' => 'pending_detail_authoring',
+                'allow_strong_claim' => false,
+                'allow_salary_comparison' => false,
+                'allow_ai_strategy' => false,
+                'reason_codes' => ['detail_page_unavailable'],
+            ],
+            scoreSummary: [
+                'fit_score' => [
+                    'value' => null,
+                    'integrity_state' => null,
+                    'band' => null,
+                ],
+                'confidence_score' => [
+                    'value' => null,
+                    'integrity_state' => null,
+                    'band' => null,
+                ],
+            ],
+            seoContract: $this->buildDirectoryDraftSeoContract($occupation, 'career_job_list_item_bundle'),
+            provenanceMeta: [
+                'compiler_version' => null,
+                'compiled_at' => null,
+                'truth_metric_id' => null,
+                'trust_manifest_id' => null,
+                'index_state_id' => null,
+                'compile_run_id' => null,
+            ],
+        );
+    }
+
     /**
      * @return array<string, mixed>
      */
@@ -347,6 +432,36 @@ final class CareerJobListBundleBuilder
             'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,
             'surface_type' => $surface['surface_type'] ?? null,
             'robots_policy' => $surface['robots_policy'] ?? $robotsPolicy,
+            'metadata_fingerprint' => $surface['metadata_fingerprint'] ?? null,
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function buildDirectoryDraftSeoContract(Occupation $occupation, string $surfaceType): array
+    {
+        $canonicalPath = '/career/jobs/'.(string) $occupation->canonical_slug;
+        $surface = $this->seoSurfaceContractService->build([
+            'metadata_scope' => 'career_protocol_bundle',
+            'surface_type' => $surfaceType,
+            'canonical_url' => $canonicalPath,
+            'robots_policy' => 'noindex,follow',
+            'title' => $occupation->canonical_title_en,
+            'description' => $occupation->canonical_title_en,
+            'indexability_state' => IndexStateValue::NOINDEX,
+            'sitemap_state' => 'excluded',
+        ]);
+
+        return [
+            'canonical_path' => $canonicalPath,
+            'canonical_target' => null,
+            'index_state' => IndexStateValue::NOINDEX,
+            'index_eligible' => false,
+            'reason_codes' => ['detail_page_unavailable'],
+            'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,
+            'surface_type' => $surface['surface_type'] ?? null,
+            'robots_policy' => $surface['robots_policy'] ?? 'noindex,follow',
             'metadata_fingerprint' => $surface['metadata_fingerprint'] ?? null,
         ];
     }
