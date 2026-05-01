@@ -6,18 +6,20 @@ namespace App\Http\Controllers\API\V0_5\Career;
 
 use App\Domain\Career\Publish\CareerFirstWaveLifecycleSummaryService;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Career\CareerFirstWaveLifecycleSummaryResource;
+use App\Services\Career\PublicCareerVisibilityPayloadFilter;
+use Illuminate\Http\JsonResponse;
 
 final class CareerFirstWaveLifecycleController extends Controller
 {
     public function __construct(
         private readonly CareerFirstWaveLifecycleSummaryService $summaryService,
+        private readonly PublicCareerVisibilityPayloadFilter $visibilityFilter,
     ) {}
 
-    public function show(): CareerFirstWaveLifecycleSummaryResource
+    public function show(): JsonResponse
     {
-        return new CareerFirstWaveLifecycleSummaryResource(
-            $this->summaryService->build()
+        return response()->json(
+            $this->visibilityFilter->lifecycle($this->summaryService->build()->toArray())
         );
     }
 }

@@ -45,9 +45,9 @@ final class CareerJobListApiTest extends TestCase
             ]);
     }
 
-    public function test_it_exposes_directory_draft_jobs_on_index_but_keeps_detail_unavailable(): void
+    public function test_it_keeps_directory_draft_jobs_out_of_public_index(): void
     {
-        $occupation = $this->createDirectoryDraftOccupation([
+        $this->createDirectoryDraftOccupation([
             'canonical_slug' => 'cn-digital-compliance-specialist',
             'canonical_title_en' => 'Digital Compliance Specialist',
             'canonical_title_zh' => '数字合规专员',
@@ -58,14 +58,7 @@ final class CareerJobListApiTest extends TestCase
 
         $this->getJson('/api/v0.5/career/jobs')
             ->assertOk()
-            ->assertJsonCount(1, 'items')
-            ->assertJsonPath('items.0.identity.canonical_slug', 'cn-digital-compliance-specialist')
-            ->assertJsonPath('items.0.identity.occupation_uuid', $occupation->id)
-            ->assertJsonPath('items.0.titles.canonical_zh', '数字合规专员')
-            ->assertJsonPath('items.0.trust_summary.reviewer_status', 'directory_draft_pending_detail')
-            ->assertJsonPath('items.0.seo_contract.canonical_path', '/career/jobs')
-            ->assertJsonPath('items.0.seo_contract.index_eligible', false)
-            ->assertJsonPath('items.0.seo_contract.index_state', 'noindex');
+            ->assertJsonCount(0, 'items');
 
         $this->getJson('/api/v0.5/career/jobs/cn-digital-compliance-specialist')
             ->assertStatus(404)

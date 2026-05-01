@@ -43,23 +43,18 @@ final class CareerFirstWaveLifecycleApiTest extends TestCase
                     'occupation_uuid',
                     'canonical_slug',
                     'canonical_title_en',
-                    'lifecycle_state',
                     'public_index_state',
                     'index_eligible',
-                    'reviewer_status',
-                    'reason_codes',
                 ]],
-            ]);
+            ])
+            ->assertJsonMissingPath('occupations.0.lifecycle_state')
+            ->assertJsonMissingPath('occupations.0.reviewer_status')
+            ->assertJsonMissingPath('occupations.0.reason_codes');
 
         $occupations = collect($response->json('occupations'))->keyBy('canonical_slug');
 
-        $this->assertSame('indexed', $occupations['registered-nurses']['lifecycle_state']);
         $this->assertSame('indexable', $occupations['registered-nurses']['public_index_state']);
-        $this->assertSame(['indexed_ready'], $occupations['registered-nurses']['reason_codes']);
-
-        $this->assertSame('noindex', $occupations['software-developers']['lifecycle_state']);
-        $this->assertContains('publish_gate_hold', $occupations['software-developers']['reason_codes']);
-        $this->assertContains('not_index_eligible', $occupations['software-developers']['reason_codes']);
+        $this->assertSame('noindex', $occupations['software-developers']['public_index_state']);
     }
 
     public function test_it_exposes_curated_candidate_and_demoted_states_without_raw_internal_tags(): void
@@ -94,14 +89,11 @@ final class CareerFirstWaveLifecycleApiTest extends TestCase
         $candidateRow = $occupations['data-scientists'];
         $demotedRow = $occupations['management-analysts'];
 
-        $this->assertSame('promotion_candidate', $candidateRow['lifecycle_state']);
-        $this->assertSame(['publish_gate_candidate', 'not_index_eligible', 'trust_limited'], $candidateRow['reason_codes']);
+        $this->assertArrayNotHasKey('lifecycle_state', $candidateRow);
+        $this->assertArrayNotHasKey('reason_codes', $candidateRow);
 
-        $this->assertSame('demoted', $demotedRow['lifecycle_state']);
-        $this->assertContains('demoted_review_regression', $demotedRow['reason_codes']);
-        $this->assertContains('demoted_trust_regression', $demotedRow['reason_codes']);
-        $this->assertNotContains('career_index_lifecycle_demoted', $demotedRow['reason_codes']);
-        $this->assertNotContains('career_index_lifecycle_regressed', $demotedRow['reason_codes']);
+        $this->assertArrayNotHasKey('lifecycle_state', $demotedRow);
+        $this->assertArrayNotHasKey('reason_codes', $demotedRow);
     }
 
     private function materializeCurrentFirstWaveFixture(): void

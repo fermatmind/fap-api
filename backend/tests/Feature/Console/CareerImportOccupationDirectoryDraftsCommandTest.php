@@ -114,11 +114,10 @@ final class CareerImportOccupationDirectoryDraftsCommandTest extends TestCase
 
         $this->getJson('/api/v0.5/career/jobs')
             ->assertOk()
-            ->assertJsonCount(2, 'items')
-            ->assertJsonPath('items.0.trust_summary.reviewer_status', 'directory_draft_pending_detail');
+            ->assertJsonCount(0, 'items');
         $this->getJson('/api/v0.5/career/search?q='.urlencode('示例职业').'&locale=zh-CN')
             ->assertOk()
-            ->assertJsonCount(1, 'items');
+            ->assertJsonCount(0, 'items');
         $this->getJson('/api/v0.5/career/jobs/cn-1-01-00-01')
             ->assertNotFound();
     }

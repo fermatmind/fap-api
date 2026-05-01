@@ -114,9 +114,9 @@ final class CareerSearchApiTest extends TestCase
         DB::disableQueryLog();
     }
 
-    public function test_it_exposes_directory_draft_jobs_in_search_without_opening_detail_pages(): void
+    public function test_it_keeps_directory_draft_jobs_out_of_public_search(): void
     {
-        $occupation = $this->createDirectoryDraftOccupation([
+        $this->createDirectoryDraftOccupation([
             'canonical_slug' => 'us-ai-compliance-analyst',
             'canonical_title_en' => 'AI Compliance Analyst',
             'canonical_title_zh' => 'AI 合规分析师',
@@ -126,15 +126,7 @@ final class CareerSearchApiTest extends TestCase
         $this->getJson('/api/v0.5/career/search?q=AI%20Compliance&limit=5&mode=prefix&locale=en-US')
             ->assertOk()
             ->assertJsonPath('bundle_kind', 'career_search_results')
-            ->assertJsonCount(1, 'items')
-            ->assertJsonPath('items.0.identity.occupation_uuid', $occupation->id)
-            ->assertJsonPath('items.0.identity.canonical_slug', 'us-ai-compliance-analyst')
-            ->assertJsonPath('items.0.match_kind', 'canonical_title_prefix')
-            ->assertJsonPath('items.0.trust_summary.status', 'unavailable')
-            ->assertJsonPath('items.0.trust_summary.reviewer_status', 'directory_draft_pending_detail')
-            ->assertJsonPath('items.0.seo_contract.canonical_path', '/career/jobs')
-            ->assertJsonPath('items.0.seo_contract.index_eligible', false)
-            ->assertJsonPath('items.0.seo_contract.index_state', 'noindex');
+            ->assertJsonCount(0, 'items');
 
         $this->getJson('/api/v0.5/career/jobs/us-ai-compliance-analyst')
             ->assertStatus(404)

@@ -206,6 +206,10 @@ final class CareerRecommendationDetailBundleBuilder
                     return null;
                 }
 
+                if (! (bool) ($snapshot->indexState?->index_eligible ?? false)) {
+                    return null;
+                }
+
                 return [
                     'occupation_uuid' => $occupation->id,
                     'canonical_slug' => $occupation->canonical_slug,

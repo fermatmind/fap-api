@@ -23,10 +23,8 @@ final class FirstWaveReadinessApiTest extends TestCase
             ->assertJsonPath('summary_version', 'career.release.first_wave_readiness.v1')
             ->assertJsonPath('counts.total', 10)
             ->assertJsonPath('counts.publish_ready', 6)
-            ->assertJsonPath('counts.blocked_override_eligible', 2)
-            ->assertJsonPath('counts.blocked_not_safely_remediable', 2)
-            ->assertJsonPath('counts.blocked_total', 4)
-            ->assertJsonPath('counts.partial_raw', 0)
+            ->assertJsonPath('counts.not_public', 4)
+            ->assertJsonCount(6, 'occupations')
             ->assertJsonStructure([
                 'summary_kind',
                 'summary_version',
@@ -34,37 +32,30 @@ final class FirstWaveReadinessApiTest extends TestCase
                 'counts' => [
                     'total',
                     'publish_ready',
-                    'blocked_override_eligible',
-                    'blocked_not_safely_remediable',
-                    'blocked_total',
-                    'partial_raw',
+                    'not_public',
                 ],
                 'occupations' => [[
                     'occupation_uuid',
                     'canonical_slug',
                     'canonical_title_en',
                     'status',
-                    'blocker_type',
-                    'remediation_class',
-                    'authority_override_supplied',
-                    'review_required',
-                    'crosswalk_mode',
-                    'reviewer_status',
                     'index_state',
                     'index_eligible',
-                    'reason_codes',
                 ]],
-            ]);
+            ])
+            ->assertJsonMissingPath('counts.blocked_override_eligible')
+            ->assertJsonMissingPath('counts.blocked_not_safely_remediable')
+            ->assertJsonMissingPath('occupations.0.blocker_type')
+            ->assertJsonMissingPath('occupations.0.remediation_class')
+            ->assertJsonMissingPath('occupations.0.reviewer_status')
+            ->assertJsonMissingPath('occupations.0.reason_codes');
 
         $occupations = collect($response->json('occupations'))->keyBy('canonical_slug');
 
-        $this->assertSame('blocked_override_eligible', $occupations['software-developers']['status']);
-        $this->assertSame('blocked_override_eligible', $occupations['financial-analysts']['status']);
-        $this->assertSame('blocked_not_safely_remediable', $occupations['marketing-managers']['status']);
-        $this->assertSame(
-            'blocked_not_safely_remediable',
-            $occupations['elementary-school-teachers-except-special-education']['status']
-        );
+        $this->assertFalse($occupations->has('software-developers'));
+        $this->assertFalse($occupations->has('financial-analysts'));
+        $this->assertFalse($occupations->has('marketing-managers'));
+        $this->assertFalse($occupations->has('elementary-school-teachers-except-special-education'));
         $this->assertSame('publish_ready', $occupations['registered-nurses']['status']);
     }
 
