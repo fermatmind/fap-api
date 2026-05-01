@@ -5,10 +5,16 @@ declare(strict_types=1);
 namespace Tests\Feature\Ops;
 
 use App\Contracts\Cms\CmsMachineTranslationProvider;
+use App\Models\AdminUser;
+use App\Models\Permission;
+use App\Models\Role;
 use App\Models\SupportArticle;
+use App\Services\Cms\CmsTranslationWorkflowException;
 use App\Services\Cms\RowBackedRevisionWorkspace;
 use App\Services\Cms\SiblingTranslationWorkflowService;
+use App\Support\Rbac\PermissionNames;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 final class CmsTranslationShadowRevisionTest extends TestCase
@@ -19,8 +25,55 @@ final class CmsTranslationShadowRevisionTest extends TestCase
     {
         parent::setUp();
 
+        FakeSupportArticleTranslationProvider::$calls = 0;
         config()->set('services.cms_translation.providers.support_article', FakeSupportArticleTranslationProvider::class);
         app()->bind(FakeSupportArticleTranslationProvider::class, fn (): FakeSupportArticleTranslationProvider => new FakeSupportArticleTranslationProvider);
+    }
+
+    public function test_machine_translation_blocks_unapproved_source_before_provider_call(): void
+    {
+        $workflow = app(SiblingTranslationWorkflowService::class);
+        $source = $this->createSourceSupportArticle();
+        $source->forceFill([
+            'status' => SupportArticle::STATUS_DRAFT,
+            'review_state' => SupportArticle::REVIEW_DRAFT,
+            'published_at' => null,
+        ])->save();
+
+        try {
+            $workflow->createMachineDraft('support_article', $source->fresh(), 'en');
+            $this->fail('Expected source disclosure guard to block the machine translation draft.');
+        } catch (CmsTranslationWorkflowException $exception) {
+            $this->assertContains('source row not published', $exception->blockers());
+            $this->assertContains('source row not approved', $exception->blockers());
+            $this->assertContains('source row adapter publication check failed', $exception->blockers());
+        }
+
+        $this->assertSame(0, FakeSupportArticleTranslationProvider::$calls);
+        $this->assertDatabaseMissing('support_articles', [
+            'translation_group_id' => (string) $source->translation_group_id,
+            'locale' => 'en',
+        ]);
+    }
+
+    public function test_publish_requires_approved_working_revision(): void
+    {
+        $workflow = app(SiblingTranslationWorkflowService::class);
+        $source = $this->createSourceSupportArticle();
+        $target = $workflow->createMachineDraft('support_article', $source, 'en');
+
+        try {
+            $workflow->publishTranslation('support_article', $target->fresh());
+            $this->fail('Expected publish guard to require an approved working revision.');
+        } catch (CmsTranslationWorkflowException $exception) {
+            $this->assertSame('Only approved translation revisions can be published.', $exception->getMessage());
+            $this->assertContains('working revision is not approved', $exception->blockers());
+        }
+
+        $target = $target->fresh();
+        $this->assertSame(SupportArticle::STATUS_DRAFT, (string) $target->status);
+        $this->assertSame(SupportArticle::TRANSLATION_STATUS_MACHINE_DRAFT, (string) $target->translation_status);
+        $this->assertNull($target->published_revision_id);
     }
 
     public function test_resync_creates_new_working_revision_without_overwriting_public_row(): void
@@ -62,7 +115,10 @@ final class CmsTranslationShadowRevisionTest extends TestCase
             ->assertJsonPath('article.body_md', $publishedBody)
             ->assertJsonPath('article.title', 'Published EN title');
 
-        $this->getJson('/api/v0.5/internal/support-articles/recover-report?locale=en')
+        $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
+        $this->withSession(['ops_org_id' => 0])
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->getJson('/api/v0.5/internal/support-articles/recover-report?locale=en')
             ->assertOk()
             ->assertJsonPath('article.body_md', 'Resynced machine draft body')
             ->assertJsonPath('article.title', 'Resynced machine draft title');
@@ -149,10 +205,46 @@ final class CmsTranslationShadowRevisionTest extends TestCase
             'canonical_path' => '/support/recover-report',
         ]);
     }
+
+    /**
+     * @param  list<string>  $permissions
+     */
+    private function createAdminWithPermissions(array $permissions): AdminUser
+    {
+        $admin = AdminUser::query()->create([
+            'name' => 'admin_'.Str::lower(Str::random(6)),
+            'email' => 'admin_'.Str::lower(Str::random(6)).'@example.test',
+            'password' => bcrypt('secret'),
+            'is_active' => 1,
+        ]);
+
+        if ($permissions === []) {
+            return $admin;
+        }
+
+        $role = Role::query()->create([
+            'name' => 'role_'.Str::lower(Str::random(8)),
+            'guard_name' => (string) config('admin.guard', 'admin'),
+        ]);
+
+        foreach ($permissions as $permissionName) {
+            $permission = Permission::query()->create([
+                'name' => $permissionName,
+                'guard_name' => (string) config('admin.guard', 'admin'),
+            ]);
+            $role->permissions()->attach($permission);
+        }
+
+        $admin->roles()->attach($role);
+
+        return $admin;
+    }
 }
 
 final class FakeSupportArticleTranslationProvider implements CmsMachineTranslationProvider
 {
+    public static int $calls = 0;
+
     public function supports(string $contentType): bool
     {
         return $contentType === 'support_article';
@@ -170,6 +262,8 @@ final class FakeSupportArticleTranslationProvider implements CmsMachineTranslati
 
     public function translate(string $contentType, object $sourceRecord, array $normalizedSource, string $targetLocale): array
     {
+        self::$calls++;
+
         return [
             'title' => 'Resynced machine draft title',
             'summary' => 'Resynced machine draft summary',

@@ -53,7 +53,7 @@ final class ArticleTranslationWorkflowService
             /** @var Article $lockedSource */
             $lockedSource = Article::query()
                 ->withoutGlobalScopes()
-                ->with(['workingRevision', 'seoMeta'])
+                ->with(['workingRevision', 'publishedRevision', 'seoMeta'])
                 ->lockForUpdate()
                 ->findOrFail($source->id);
 
@@ -136,7 +136,7 @@ final class ArticleTranslationWorkflowService
             }
 
             $this->assertTargetInTranslationScope($lockedTarget, $source);
-            $source->loadMissing(['workingRevision', 'seoMeta']);
+            $source->loadMissing(['workingRevision', 'publishedRevision', 'seoMeta']);
             $payload = $this->provider->translate($source, (string) $lockedTarget->locale);
             $sourceHash = $this->sourceHashFor($source);
             $supersedesRevisionId = $lockedTarget->working_revision_id ? (int) $lockedTarget->working_revision_id : null;
@@ -590,9 +590,41 @@ final class ArticleTranslationWorkflowService
             $blockers[] = 'source article org mismatch';
         }
 
-        $source->loadMissing('seoMeta');
+        $source->loadMissing(['publishedRevision', 'seoMeta']);
         if ($source->seoMeta instanceof ArticleSeoMeta && (int) $source->seoMeta->org_id !== (int) $source->org_id) {
             $blockers[] = 'source seo_meta org mismatch';
+        }
+
+        return array_values(array_unique(array_merge($blockers, $this->sourceDisclosureBlockers($source))));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function sourceDisclosureBlockers(Article $source): array
+    {
+        $blockers = [];
+
+        if ((string) $source->status !== 'published') {
+            $blockers[] = 'source article not published';
+        }
+        if (! (bool) $source->is_public) {
+            $blockers[] = 'source article not public';
+        }
+        if ($source->published_at instanceof \DateTimeInterface && $source->published_at > now()) {
+            $blockers[] = 'source article publish date is future';
+        }
+
+        $publishedRevision = $source->publishedRevision;
+        if (! $publishedRevision instanceof ArticleTranslationRevision) {
+            $blockers[] = 'source article published revision missing';
+
+            return $blockers;
+        }
+
+        $blockers = array_merge($blockers, $this->revisionOwnershipBlockers($source, $publishedRevision, 'source published revision'));
+        if ($publishedRevision->revision_status !== ArticleTranslationRevision::STATUS_SOURCE) {
+            $blockers[] = 'source published revision is not source';
         }
 
         return $blockers;

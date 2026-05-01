@@ -352,6 +352,41 @@ final class ArticleTranslationOpsPageTest extends TestCase
             ->count());
     }
 
+    public function test_translation_workflow_blocks_unpublished_source_before_machine_translation(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $provider = new FakeArticleMachineTranslationProvider;
+        $this->app->instance(ArticleMachineTranslationProvider::class, $provider);
+
+        $source = $this->createSourceOnlyGroup('unpublished-source-translation-fixture');
+        $source->forceFill([
+            'status' => 'draft',
+            'is_public' => false,
+            'published_at' => null,
+            'published_revision_id' => null,
+        ])->saveQuietly();
+
+        try {
+            app(ArticleTranslationWorkflowService::class)->createMachineDraft($source->fresh(['workingRevision']), 'en', (int) $admin->id);
+            $this->fail('Expected source disclosure guard to block the machine translation draft.');
+        } catch (ArticleTranslationWorkflowException $exception) {
+            $this->assertContains('source article not published', $exception->blockers);
+            $this->assertContains('source article not public', $exception->blockers);
+            $this->assertContains('source article published revision missing', $exception->blockers);
+        }
+
+        $this->assertSame(0, $provider->calls);
+        $this->assertSame(0, Article::query()
+            ->withoutGlobalScopes()
+            ->where('translation_group_id', (string) $source->translation_group_id)
+            ->where('locale', 'en')
+            ->count());
+    }
+
     public function test_translation_ops_page_create_draft_action_uses_workflow_service(): void
     {
         $admin = $this->createAdminWithPermissions([
