@@ -25,8 +25,6 @@ class OpsLogin extends BaseLogin
         $email = (string) data_get($this->data, 'email', '');
         $trace = OpsLoginTracer::context(request(), $email);
 
-        OpsLoginTracer::start($trace);
-
         try {
             $this->rateLimit(self::MAX_LOGIN_ATTEMPTS, method: self::SOURCE_RATE_LIMIT_METHOD);
             $this->rateLimit(self::MAX_LOGIN_ATTEMPTS);
@@ -40,6 +38,8 @@ class OpsLogin extends BaseLogin
 
             return null;
         }
+
+        $this->startTrace($trace);
 
         $data = $this->form->getState();
 
@@ -98,6 +98,14 @@ class OpsLogin extends BaseLogin
             ->extraInputAttributes([
                 'tabindex' => 2,
             ]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $trace
+     */
+    protected function startTrace(array $trace): void
+    {
+        OpsLoginTracer::start($trace);
     }
 
     protected function getRateLimitKey($method, $component = null)

@@ -355,10 +355,10 @@ final class PostReleaseObservabilityPageTest extends TestCase
     public function test_resource_release_action_triggers_failure_alerts_and_observability_ignores_other_org_rows(): void
     {
         config()->set('ops.content_release_observability.cache_invalidation_urls', [
-            'https://cache.example.test/invalidate',
+            'https://cache.example.test/invalidate?webhook_secret=cache-secret',
         ]);
         config()->set('ops.content_release_observability.broadcast_webhook', '');
-        config()->set('ops.alert.webhook', 'https://alerts.example.test/ops');
+        config()->set('ops.alert.webhook', 'https://alerts.example.test/ops?token=alert-secret');
 
         Http::fake([
             'https://cache.example.test/*' => Http::response(['ok' => false], 500),
@@ -437,9 +437,13 @@ final class PostReleaseObservabilityPageTest extends TestCase
         $this->assertSame('failed', $failedSignalAudit->result);
         $this->assertNotNull($failureAlertAudit);
         $this->assertSame('success', $failureAlertAudit->result);
+        $this->assertStringNotContainsString('cache-secret', (string) data_get($failedSignalAudit->meta_json, 'endpoint'));
+        $this->assertStringNotContainsString('cache-secret', (string) data_get($failureAlertAudit->meta_json, 'failed_endpoint'));
+        $this->assertStringStartsWith('sha256:', (string) data_get($failureAlertAudit->meta_json, 'alert_webhook_fingerprint'));
+        $this->assertArrayNotHasKey('alert_webhook', (array) $failureAlertAudit->meta_json);
 
         Http::assertSent(function ($request): bool {
-            return $request->url() === 'https://alerts.example.test/ops'
+            return str_starts_with($request->url(), 'https://alerts.example.test/ops')
                 && str_contains((string) data_get($request->data(), 'text', ''), 'CMS release follow-up failed');
         });
 

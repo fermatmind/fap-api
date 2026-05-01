@@ -9,6 +9,7 @@ use App\Models\Article;
 use App\Models\AuditLog;
 use App\Models\CareerGuide;
 use App\Models\CareerJob;
+use App\Support\Logging\SensitiveDiagnosticRedactor;
 use App\Support\OrgContext;
 use Filament\Pages\Page;
 use Illuminate\Support\Carbon;
@@ -220,7 +221,7 @@ class PostReleaseObservabilityPage extends Page
                     'meta' => trim((string) ($row->action.' | '.(string) ($row->target_type ?? 'unknown'))),
                     'description' => __('ops.custom_pages.post_release_observability.audit_description', [
                         'source' => trim((string) data_get($meta, 'source', 'unknown')),
-                        'endpoint' => trim((string) data_get($meta, 'endpoint', 'n/a')),
+                        'endpoint' => SensitiveDiagnosticRedactor::redactString(trim((string) data_get($meta, 'endpoint', 'n/a'))),
                         'visibility' => trim((string) data_get($meta, 'visibility', 'unknown')),
                     ]),
                     'trace' => $this->traceSummary($meta),

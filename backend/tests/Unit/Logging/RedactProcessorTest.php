@@ -31,7 +31,14 @@ final class RedactProcessorTest extends TestCase
                     'secret' => 'sec_123',
                     'to_email' => 'user@example.com',
                     'phone_e164' => '+8613900001111',
+                    'invite_unlock_code' => 'unlock-plain-1',
+                    'invite_token' => 'invite-token-1',
+                    'webhook_secret' => 'whsec_live_secret',
+                    'anon_id' => 'anon-raw-1',
+                    'target_attempt_id' => 'attempt-raw-1',
                     'trace_id' => 'trace-1',
+                    'diagnostic_status' => 'ready',
+                    'duration_ms' => 12,
                 ],
             ],
         ];
@@ -45,8 +52,15 @@ final class RedactProcessorTest extends TestCase
         $this->assertSame('[REDACTED]', $actual['extra']['payload']['secret']);
         $this->assertSame('[REDACTED]', $actual['extra']['payload']['to_email']);
         $this->assertSame('[REDACTED]', $actual['extra']['payload']['phone_e164']);
+        $this->assertSame('[REDACTED]', $actual['extra']['payload']['invite_unlock_code']);
+        $this->assertSame('[REDACTED]', $actual['extra']['payload']['invite_token']);
+        $this->assertSame('[REDACTED]', $actual['extra']['payload']['webhook_secret']);
+        $this->assertSame('[REDACTED]', $actual['extra']['payload']['anon_id']);
+        $this->assertSame('[REDACTED]', $actual['extra']['payload']['target_attempt_id']);
         $this->assertSame('ok', $actual['context']['nested']['keep']);
         $this->assertSame('trace-1', $actual['extra']['payload']['trace_id']);
+        $this->assertSame('ready', $actual['extra']['payload']['diagnostic_status']);
+        $this->assertSame(12, $actual['extra']['payload']['duration_ms']);
     }
 
     public function test_key_matching_is_case_insensitive(): void
@@ -68,6 +82,21 @@ final class RedactProcessorTest extends TestCase
         $this->assertSame('[REDACTED]', $actual['context']['Password']);
         $this->assertSame('[REDACTED]', $actual['context']['Authorization']);
         $this->assertSame('[REDACTED]', $actual['extra']['TOKEN']);
+    }
+
+    public function test_custom_redaction_keys_are_preserved(): void
+    {
+        $processor = new RedactProcessor(['session']);
+
+        $actual = $processor([
+            'context' => [
+                'session_hint' => 'raw-session',
+                'trace_id' => 'trace-1',
+            ],
+        ]);
+
+        $this->assertSame('[REDACTED]', $actual['context']['session_hint']);
+        $this->assertSame('trace-1', $actual['context']['trace_id']);
     }
 
     public function test_non_sensitive_fields_remain_unchanged(): void
@@ -120,5 +149,27 @@ final class RedactProcessorTest extends TestCase
         $this->assertSame('[REDACTED]', $actual->context['nested']['secret']);
         $this->assertSame('[REDACTED]', $actual->extra['authorization']);
         $this->assertSame('req-1', $actual->extra['request_id']);
+    }
+
+    public function test_redacts_sensitive_values_inside_diagnostic_strings(): void
+    {
+        $processor = new RedactProcessor;
+
+        $record = [
+            'context' => [
+                'endpoint' => 'https://ops.example.test/hook?webhook_secret=whsec_live_123&attempt_id=attempt-raw-2',
+                'message' => '{"invite_token":"invite-token-2","anon_id":"anon-raw-2","safe":"kept"}',
+                'auth_header' => 'Bearer token-raw-3',
+            ],
+        ];
+
+        $actual = $processor($record);
+
+        $this->assertStringNotContainsString('whsec_live_123', $actual['context']['endpoint']);
+        $this->assertStringNotContainsString('attempt-raw-2', $actual['context']['endpoint']);
+        $this->assertStringNotContainsString('invite-token-2', $actual['context']['message']);
+        $this->assertStringNotContainsString('anon-raw-2', $actual['context']['message']);
+        $this->assertStringNotContainsString('token-raw-3', $actual['context']['auth_header']);
+        $this->assertStringContainsString('safe', $actual['context']['message']);
     }
 }

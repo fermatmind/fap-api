@@ -14,6 +14,7 @@ use App\Services\Cms\ArticleSeoService;
 use App\Services\Cms\CareerGuideSeoService;
 use App\Services\Cms\CareerJobSeoService;
 use App\Services\Ops\OpsAlertService;
+use App\Support\Logging\SensitiveDiagnosticRedactor;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -153,13 +154,13 @@ final class ContentReleaseFollowUp
     ): void {
         $audit = app(AuditLogger::class);
         $meta = [
-            'endpoint' => $endpoint,
+            'endpoint' => SensitiveDiagnosticRedactor::redactString($endpoint),
             'source' => (string) ($payload['source'] ?? 'unknown'),
             'title' => data_get($payload, 'content.title', ''),
             'locale' => data_get($payload, 'content.locale', ''),
             'visibility' => data_get($payload, 'content.visibility', ''),
             'published_at' => data_get($payload, 'content.published_at'),
-            'cache_urls' => data_get($payload, 'cache_signal.urls', []),
+            'cache_urls' => self::redactStringList(data_get($payload, 'cache_signal.urls', [])),
         ];
 
         try {
@@ -197,7 +198,7 @@ final class ContentReleaseFollowUp
                 $action,
                 (string) data_get($payload, 'content.type', 'content'),
                 (string) data_get($payload, 'content.id', ''),
-                $meta + ['error' => trim($exception->getMessage())],
+                $meta + ['error' => SensitiveDiagnosticRedactor::redactString(trim($exception->getMessage()))],
                 reason: 'cms_release_observability',
                 result: 'failed',
             );
@@ -232,8 +233,8 @@ final class ContentReleaseFollowUp
             (string) data_get($payload, 'content.type', 'content'),
             (string) data_get($payload, 'content.id', ''),
             (string) data_get($payload, 'source', 'unknown'),
-            $endpoint,
-            trim($exception->getMessage())
+            SensitiveDiagnosticRedactor::redactString($endpoint),
+            SensitiveDiagnosticRedactor::redactString(trim($exception->getMessage()))
         );
 
         OpsAlertService::send($message);
@@ -247,11 +248,26 @@ final class ContentReleaseFollowUp
                 'title' => data_get($payload, 'content.title', ''),
                 'source' => data_get($payload, 'source', ''),
                 'alert_label' => $alertLabel,
-                'failed_endpoint' => $endpoint,
-                'alert_webhook' => $alertWebhook,
+                'failed_endpoint' => SensitiveDiagnosticRedactor::redactString($endpoint),
+                'alert_webhook_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($alertWebhook),
             ],
             reason: 'cms_release_observability',
             result: 'success',
         );
+    }
+
+    /**
+     * @return list<string>
+     */
+    private static function redactStringList(mixed $values): array
+    {
+        if (! is_array($values)) {
+            return [];
+        }
+
+        return array_values(array_map(
+            static fn (mixed $value): string => SensitiveDiagnosticRedactor::redactString((string) $value),
+            $values
+        ));
     }
 }

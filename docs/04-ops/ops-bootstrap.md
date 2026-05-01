@@ -246,9 +246,9 @@ php -l app/Http/Middleware/RequireOpsOrgSelected.php
 Host-level smoke:
 
 ```bash
-curl -I https://ops.fermatmind.com/ops/login
-curl -I https://ops.fermatmind.com/ops
-curl -I https://staging.fermatmind.com/ops/login
+curl -I https://<ops-host>/ops/login
+curl -I https://<ops-host>/ops
+curl -I https://<staging-ops-host>/ops/login
 ```
 
 Repo-context checks:
