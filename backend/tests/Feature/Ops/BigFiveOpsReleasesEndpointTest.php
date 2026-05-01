@@ -14,6 +14,8 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
 {
     use RefreshDatabase;
 
+    private int $lastOrgId = 0;
+
     public function test_owner_can_list_big5_releases_with_evidence_fields(): void
     {
         $owner = $this->createUserWithToken('ops-owner@big5.test');
@@ -403,6 +405,7 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         ]);
 
         $auditId = (int) DB::table('audit_logs')->insertGetId([
+            'org_id' => $orgId,
             'actor_admin_id' => null,
             'action' => 'big5_pack_publish',
             'target_type' => 'content_pack_release',
@@ -426,6 +429,101 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         $response->assertJsonPath('item.id', $auditId);
         $response->assertJsonPath('item.action', 'big5_pack_publish');
         $response->assertJsonPath('release.release_id', $releaseId);
+    }
+
+    public function test_big5_audit_list_and_latest_audits_are_org_scoped(): void
+    {
+        $ownerA = $this->createUserWithToken('ops-owner-audit-scope-a@big5.test');
+        $orgA = $this->createOrgForToken($ownerA['token']);
+        $ownerB = $this->createUserWithToken('ops-owner-audit-scope-b@big5.test');
+        $orgB = $this->createOrgForToken($ownerB['token']);
+
+        $releaseId = (string) Str::uuid();
+        $this->insertRelease([
+            'id' => $releaseId,
+            'action' => 'publish',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'from_pack_id' => 'BIG5_OCEAN',
+            'to_pack_id' => 'BIG5_OCEAN',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $this->insertAudit([
+            'org_id' => $orgA,
+            'action' => 'big5_pack_publish',
+            'target_type' => 'content_pack_release',
+            'target_id' => $releaseId,
+            'result' => 'success',
+            'request_id' => 'req_org_a_big5_audit',
+        ]);
+        $this->insertAudit([
+            'org_id' => $orgB,
+            'action' => 'big5_pack_publish',
+            'target_type' => 'content_pack_release',
+            'target_id' => $releaseId,
+            'result' => 'success',
+            'request_id' => 'req_org_b_big5_audit',
+        ]);
+
+        $headers = [
+            'Authorization' => 'Bearer '.$ownerA['token'],
+            'X-Org-Id' => (string) $orgA,
+        ];
+
+        $list = $this->withHeaders($headers)
+            ->getJson('/api/v0.3/orgs/'.$orgA.'/big5/audits?release_id='.$releaseId.'&limit=10');
+        $list->assertStatus(200)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('count', 1)
+            ->assertJsonPath('items.0.request_id', 'req_org_a_big5_audit');
+
+        $latest = $this->withHeaders($headers)
+            ->getJson('/api/v0.3/orgs/'.$orgA.'/big5/releases/latest/audits?region=CN_MAINLAND&locale=zh-CN&limit=10');
+        $latest->assertStatus(200)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('count', 1)
+            ->assertJsonPath('audits.0.request_id', 'req_org_a_big5_audit');
+    }
+
+    public function test_big5_audit_detail_denies_cross_org_audit_access(): void
+    {
+        $ownerA = $this->createUserWithToken('ops-owner-audit-detail-scope-a@big5.test');
+        $orgA = $this->createOrgForToken($ownerA['token']);
+        $ownerB = $this->createUserWithToken('ops-owner-audit-detail-scope-b@big5.test');
+        $orgB = $this->createOrgForToken($ownerB['token']);
+
+        $releaseId = (string) Str::uuid();
+        $this->insertRelease([
+            'id' => $releaseId,
+            'action' => 'publish',
+            'from_pack_id' => 'BIG5_OCEAN',
+            'to_pack_id' => 'BIG5_OCEAN',
+        ]);
+
+        $auditId = (int) DB::table('audit_logs')->insertGetId([
+            'org_id' => $orgB,
+            'actor_admin_id' => null,
+            'action' => 'big5_pack_publish',
+            'target_type' => 'content_pack_release',
+            'target_id' => $releaseId,
+            'meta_json' => json_encode([], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'ip' => '127.0.0.1',
+            'user_agent' => 'phpunit',
+            'request_id' => 'req_cross_org_audit_detail',
+            'reason' => '',
+            'result' => 'success',
+            'created_at' => now(),
+        ]);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$ownerA['token'],
+            'X-Org-Id' => (string) $orgA,
+        ])->getJson('/api/v0.3/orgs/'.$orgA.'/big5/audits/'.$auditId);
+
+        $response->assertStatus(404);
+        $response->assertJsonPath('error_code', 'AUDIT_NOT_FOUND');
     }
 
     public function test_audit_detail_returns_not_found_for_non_big5_action(): void
@@ -618,7 +716,9 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
 
         $response->assertStatus(200);
 
-        return (int) ($response->json('org.org_id') ?? 0);
+        $this->lastOrgId = (int) ($response->json('org.org_id') ?? 0);
+
+        return $this->lastOrgId;
     }
 
     /**
@@ -655,6 +755,7 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
     private function insertAudit(array $row): void
     {
         DB::table('audit_logs')->insert(array_merge([
+            'org_id' => $this->lastOrgId,
             'actor_admin_id' => null,
             'action' => 'big5_pack_publish',
             'target_type' => 'content_pack_release',

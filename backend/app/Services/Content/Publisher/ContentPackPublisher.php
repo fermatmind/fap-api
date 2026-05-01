@@ -311,6 +311,10 @@ final class ContentPackPublisher
             ? $this->absoluteContentPath($sourcePath)
             : null;
 
+        $releaseActor = is_object($version)
+            ? $this->trimOrDefault($version->created_by ?? 'admin', 'admin')
+            : 'admin';
+
         $releaseRow = [
             'id' => $releaseId,
             'action' => 'publish',
@@ -323,7 +327,7 @@ final class ContentPackPublisher
             'to_pack_id' => $toPackId,
             'status' => $status,
             'message' => $message === '' ? null : $message,
-            'created_by' => 'admin',
+            'created_by' => $releaseActor,
             'manifest_hash' => $releaseEvidence['manifest_hash'] !== '' ? $releaseEvidence['manifest_hash'] : null,
             'compiled_hash' => $releaseEvidence['compiled_hash'] !== '' ? $releaseEvidence['compiled_hash'] : null,
             'content_hash' => $releaseEvidence['content_hash'] !== '' ? $releaseEvidence['content_hash'] : null,
@@ -368,6 +372,8 @@ final class ContentPackPublisher
                 'content_hash' => $releaseEvidence['content_hash'],
                 'norms_version' => $releaseEvidence['norms_version'],
                 'git_sha' => $gitSha,
+                'created_by' => $releaseActor,
+                'org_id' => $this->orgIdFromActor($releaseActor),
             ]
         );
 
@@ -1024,7 +1030,7 @@ final class ContentPackPublisher
 
         try {
             DB::table('audit_logs')->insert([
-                'org_id' => 0,
+                'org_id' => $this->orgIdFromAuditMeta($meta),
                 'actor_admin_id' => null,
                 'action' => $action,
                 'target_type' => 'content_pack_release',
@@ -1044,6 +1050,32 @@ final class ContentPackPublisher
                 'error' => $e->getMessage(),
             ]);
         }
+    }
+
+    /**
+     * @param  array<string,mixed>  $meta
+     */
+    private function orgIdFromAuditMeta(array $meta): int
+    {
+        $orgId = $meta['org_id'] ?? null;
+        if (is_int($orgId) || is_string($orgId) || is_numeric($orgId)) {
+            $raw = trim((string) $orgId);
+            if ($raw !== '' && preg_match('/\A\d+\z/', $raw) === 1) {
+                return max(0, (int) $raw);
+            }
+        }
+
+        return $this->orgIdFromActor($meta['created_by'] ?? '');
+    }
+
+    private function orgIdFromActor(mixed $actor): int
+    {
+        $raw = trim((string) $actor);
+        if ($raw !== '' && preg_match('/@org:(\d+)\z/', $raw, $matches) === 1) {
+            return max(0, (int) $matches[1]);
+        }
+
+        return 0;
     }
 
     private function packsRoot(): string

@@ -127,6 +127,11 @@ class EditArticle extends EditRecord
         ];
 
         unset(
+            $data['status'],
+            $data['is_public'],
+            $data['published_at'],
+            $data['scheduled_at'],
+            $data['published_revision_id'],
             $data['title'],
             $data['excerpt'],
             $data['content_md'],
