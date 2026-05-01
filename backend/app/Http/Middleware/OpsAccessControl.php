@@ -73,22 +73,18 @@ class OpsAccessControl
                     }
 
                     $loginIpKey = 'ops:login:ip:'.($request->ip() ?? 'unknown');
-                    $loginRouteKey = 'ops:login:route:'.$routeKey;
-                    $identifier = trim((string) ($request->input('email') ?? $request->input('username') ?? 'anonymous'));
+                    $identifier = $this->loginIdentifier($request);
                     $loginUserKey = 'ops:login:user:'.$identifier;
                     $maxAttempts = max(1, (int) ($config['rate_limit']['login'] ?? $config['admin_login_max_attempts']));
 
                     $decaySeconds = max(60, (int) config('ops.security.admin_login_decay_seconds', 300));
                     $ipCount = OpsDistributedLimiter::hit($loginIpKey, $decaySeconds);
-                    $routeCount = OpsDistributedLimiter::hit($loginRouteKey, $decaySeconds);
                     $userCount = OpsDistributedLimiter::hit($loginUserKey, $decaySeconds);
 
                     if (
                         $ipCount > $maxAttempts
-                        || $routeCount > $maxAttempts
                         || $userCount > $maxAttempts
                         || OpsDistributedLimiter::tooMany($loginIpKey, $maxAttempts)
-                        || OpsDistributedLimiter::tooMany($loginRouteKey, $maxAttempts)
                         || OpsDistributedLimiter::tooMany($loginUserKey, $maxAttempts)
                     ) {
                         OpsSecurityEvent::emit('LOGIN_RATE_LIMIT', [
@@ -96,7 +92,6 @@ class OpsAccessControl
                             'route' => $routeName,
                             'identifier' => $identifier,
                             'count_ip' => $ipCount,
-                            'count_route' => $routeCount,
                             'count_user' => $userCount,
                         ]);
 
@@ -343,6 +338,15 @@ class OpsAccessControl
         )));
 
         return $allowlist !== [] && in_array($ip, $allowlist, true);
+    }
+
+    private function loginIdentifier(Request $request): string
+    {
+        $identifier = mb_strtolower(trim((string) ($request->input('email') ?? $request->input('username') ?? '')));
+
+        return $identifier !== ''
+            ? $identifier
+            : 'anonymous:'.($request->ip() ?? 'unknown');
     }
 
     private function isSensitiveRoute(string $routeName, string $path): bool
