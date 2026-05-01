@@ -20,9 +20,6 @@ final class BigFiveReportCoverageMatrixTest extends TestCase
     private const EXPECTED_FREE_SECTION_KEYS = [
         'traits.overview',
         'traits.why_this_profile',
-        'relationships.interpersonal_style',
-        'career.work_style',
-        'growth.next_actions',
         'disclaimer_top',
         'summary',
         'domains_overview',
@@ -200,7 +197,7 @@ final class BigFiveReportCoverageMatrixTest extends TestCase
                     }
                 }
                 $this->assertSame(
-                    ['relationships.interpersonal_style', 'career.work_style', 'growth.next_actions'],
+                    [],
                     $paidKeys,
                     (string) $case['name']
                 );

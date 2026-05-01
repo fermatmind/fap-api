@@ -96,11 +96,24 @@ final class BigFiveResultPageV2CompatibilityTransformer implements BigFiveResult
                 $lowQuality ? 'degrade_explanation' : null,
                 $lowQuality ? 'retest_recommended' : null,
             ])),
-            'public_fields' => $lowQuality
-                ? ['interpretation_scope', 'quality_status', 'quality_flags', 'safety_flags']
-                : ['domains', 'domain_bands', 'facet_highlights', 'profile_signature', 'dominant_couplings', 'interpretation_scope'],
+            'public_fields' => $this->publicFields($lowQuality, $normUnavailable),
             'internal_only_fields' => ['editor_note', 'qa_note', 'selection_guidance', 'import_policy', 'internal_metadata'],
         ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function publicFields(bool $lowQuality, bool $normUnavailable): array
+    {
+        if ($lowQuality) {
+            return ['interpretation_scope', 'quality_status', 'quality_flags', 'safety_flags'];
+        }
+        if ($normUnavailable) {
+            return ['domain_bands', 'interpretation_scope', 'safety_flags'];
+        }
+
+        return ['domains', 'domain_bands', 'facet_highlights', 'profile_signature', 'dominant_couplings', 'interpretation_scope'];
     }
 
     /**
@@ -298,10 +311,10 @@ final class BigFiveResultPageV2CompatibilityTransformer implements BigFiveResult
         foreach (self::DOMAIN_ORDER as $domain) {
             $band = (string) data_get($projectionV1, "trait_bands.{$domain}", data_get($scoreResult, "facts.domain_buckets.{$domain}", data_get($oldReport, "score_vector.domains.{$domain}.band", 'mid')));
             $entry = [
-                'score' => (int) data_get($scoresPct, $domain, data_get($scoreResult, "scores_0_100.domains_percentile.{$domain}", data_get($oldReport, "score_vector.domains.{$domain}.percentile", data_get($scoresJson, "domains_mean.{$domain}", 0)))),
                 'band' => $this->normalizeBand($band),
             ];
             if (! $normUnavailable) {
+                $entry['score'] = (int) data_get($scoresPct, $domain, data_get($scoreResult, "scores_0_100.domains_percentile.{$domain}", data_get($oldReport, "score_vector.domains.{$domain}.percentile", data_get($scoresJson, "domains_mean.{$domain}", 0))));
                 $entry['percentile'] = (int) data_get($scoresPct, $domain, data_get($scoreResult, "scores_0_100.domains_percentile.{$domain}", data_get($oldReport, "score_vector.domains.{$domain}.percentile", 0)));
             }
             $domains[$domain] = $entry;

@@ -143,7 +143,9 @@ final class BigFiveResultPageV2RuntimeGateTest extends TestCase
             BigFiveResultPageV2Contract::PAYLOAD_KEY => $payload,
         ]));
         $this->assertSame('norm_unavailable', data_get($payload, 'projection_v2.interpretation_scope'));
+        $this->assertNull(data_get($payload, 'projection_v2.domains.O.score'));
         $this->assertNull(data_get($payload, 'projection_v2.domains.O.percentile'));
+        $this->assertSame(['domain_bands', 'interpretation_scope', 'safety_flags'], data_get($payload, 'projection_v2.public_fields'));
         $this->assertFalse($this->containsKeyRecursive((array) $payload, 'normal_curve'));
         $this->assertFalse($this->containsKeyRecursive((array) $payload, 'show_normal_curve'));
     }

@@ -89,7 +89,7 @@ final class BigFivePublicProjectionServiceTest extends TestCase
             ],
         ]);
 
-        $projection = app(BigFivePublicProjectionService::class)->buildFromResult($result, 'en', 'free', true);
+        $projection = app(BigFivePublicProjectionService::class)->buildFromResult($result, 'en', 'full', false);
 
         $this->assertSame(
             ['O', 'C', 'E', 'A', 'N'],
@@ -104,5 +104,79 @@ final class BigFivePublicProjectionServiceTest extends TestCase
         )));
         $this->assertCount(30, (array) ($projection['facet_vector'] ?? []));
         $this->assertSame('E', data_get($projection, 'action_plan_summary.focus_trait'));
+    }
+
+    public function test_locked_projection_redacts_paid_vectors_sections_and_layers(): void
+    {
+        $result = new Result([
+            'result_json' => [
+                'normed_json' => [
+                    'engine_version' => 'big5_ipipneo120_v3.0.0',
+                    'raw_scores' => [
+                        'domains_mean' => ['O' => 4.2, 'C' => 3.8, 'E' => 3.2, 'A' => 3.9, 'N' => 2.3],
+                        'facets_mean' => ['N1' => 2.1, 'E1' => 3.4, 'O1' => 4.6],
+                    ],
+                    'scores_0_100' => [
+                        'domains_percentile' => ['O' => 81, 'C' => 73, 'E' => 48, 'A' => 76, 'N' => 22],
+                        'facets_percentile' => ['N1' => 18, 'E1' => 57, 'O1' => 93],
+                    ],
+                    'facts' => [
+                        'domain_buckets' => ['O' => 'high', 'C' => 'high', 'E' => 'mid', 'A' => 'high', 'N' => 'low'],
+                        'facet_buckets' => ['N1' => 'low', 'E1' => 'mid', 'O1' => 'high'],
+                        'top_strength_facets' => ['O5', 'A3', 'C4'],
+                        'top_growth_facets' => ['E3', 'E2', 'C5'],
+                    ],
+                    'tags' => ['big5:o_high', 'profile:explorer'],
+                ],
+            ],
+        ]);
+
+        $projection = app(BigFivePublicProjectionService::class)->buildFromResult($result, 'en', 'free', true);
+
+        $this->assertSame('big5.public_projection.v1', $projection['schema_version']);
+        $this->assertSame(true, data_get($projection, '_meta.locked'));
+        $this->assertSame(true, data_get($projection, '_meta.redacted'));
+        $this->assertSame(['traits.overview', 'traits.why_this_profile'], $projection['ordered_section_keys']);
+        $this->assertCount(5, (array) ($projection['trait_vector'] ?? []));
+        $this->assertCount(0, (array) ($projection['facet_vector'] ?? []));
+        $this->assertSame([], (array) ($projection['action_plan_summary'] ?? []));
+        $this->assertSame('O', data_get($projection, 'dominant_traits.0.key'));
+        $this->assertArrayNotHasKey('controlled_narrative_v1', $projection);
+        $this->assertArrayNotHasKey('cultural_calibration_v1', $projection);
+        $this->assertArrayNotHasKey('comparative_v1', $projection);
+        $this->assertFalse($this->containsKeyRecursive($projection, 'mean'));
+        $this->assertFalse($this->containsKeyRecursive($projection, 'percentile'));
+        $this->assertFalse($this->containsPaidSection($projection));
+    }
+
+    /**
+     * @param  array<string,mixed>|list<mixed>  $payload
+     */
+    private function containsKeyRecursive(array $payload, string $key): bool
+    {
+        foreach ($payload as $currentKey => $value) {
+            if ((string) $currentKey === $key) {
+                return true;
+            }
+            if (is_array($value) && $this->containsKeyRecursive($value, $key)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  array<string,mixed>  $projection
+     */
+    private function containsPaidSection(array $projection): bool
+    {
+        foreach ((array) ($projection['sections'] ?? []) as $section) {
+            if (is_array($section) && (string) ($section['access_level'] ?? '') === 'paid') {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

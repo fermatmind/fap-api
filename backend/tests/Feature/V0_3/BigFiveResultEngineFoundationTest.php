@@ -6,7 +6,9 @@ namespace Tests\Feature\V0_3;
 
 use App\Models\Attempt;
 use App\Services\Assessment\Scorers\BigFiveScorerV3;
+use App\Services\Commerce\EntitlementManager;
 use App\Services\Content\BigFivePackLoader;
+use App\Services\Report\ReportAccess;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -60,6 +62,9 @@ final class BigFiveResultEngineFoundationTest extends TestCase
         ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
 
         $reportResponse->assertOk();
+        $reportResponse->assertJsonPath('locked', false);
+        $reportResponse->assertJsonPath('variant', 'full');
+        $reportResponse->assertJsonPath('access_level', 'full');
         $reportResponse->assertJsonPath('big5_public_projection_v1.schema_version', 'big5.public_projection.v1');
         $reportResponse->assertJsonPath('big5_public_projection_v1.ordered_section_keys.1', 'traits.why_this_profile');
         $reportResponse->assertJsonCount(30, 'big5_public_projection_v1.facet_vector');
@@ -97,6 +102,79 @@ final class BigFiveResultEngineFoundationTest extends TestCase
         $this->assertNotSame('', trim((string) ($meta['norming_scope'] ?? '')));
         $this->assertNotSame('', trim((string) ($meta['norming_source'] ?? '')));
         $this->assertSame($comparativePercentile, (int) data_get($meta, 'comparative_v1.percentile.value'));
+    }
+
+    public function test_big5_paid_mode_locked_report_redacts_projection_until_entitled(): void
+    {
+        config()->set('ai.enabled', true);
+        config()->set('ai.narrative.enabled', true);
+        config()->set('ai.narrative.provider', 'mock');
+        config()->set('ai.breaker_enabled', false);
+
+        $this->artisan('content:compile --pack=BIG5_OCEAN --pack-version=v1')->assertExitCode(0);
+        $this->artisan('norms:import --scale=BIG5_OCEAN --csv=resources/norms/big5/big5_norm_stats_seed.csv --activate=1')
+            ->assertExitCode(0);
+        (new ScaleRegistrySeeder)->run();
+        $this->configureBigFivePaidReports();
+
+        $anonId = 'anon_big5_paid_redaction';
+        $attemptId = $this->seedAttempt($anonId);
+        $this->seedResult($attemptId);
+        $token = $this->issueAnonToken($anonId);
+
+        $locked = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+            'X-Anon-Id' => $anonId,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
+
+        $locked->assertOk();
+        $locked->assertJsonPath('locked', true);
+        $locked->assertJsonPath('variant', 'free');
+        $locked->assertJsonPath('access_level', 'free');
+        $locked->assertJsonCount(0, 'big5_public_projection_v1.facet_vector');
+        $locked->assertJsonMissingPath('big5_public_projection_v1.trait_vector.0.percentile');
+        $locked->assertJsonMissingPath('big5_public_projection_v1.trait_vector.0.mean');
+        $locked->assertJsonMissingPath('big5_public_projection_v1.controlled_narrative_v1');
+        $locked->assertJsonMissingPath('big5_public_projection_v1.cultural_calibration_v1');
+        $locked->assertJsonMissingPath('big5_public_projection_v1.comparative_v1');
+        $this->assertSame(['traits.overview', 'traits.why_this_profile'], $locked->json('big5_public_projection_v1.ordered_section_keys'));
+        $this->assertNotContains('paid', array_map(
+            static fn (array $section): string => (string) ($section['access_level'] ?? ''),
+            (array) $locked->json('report.sections')
+        ));
+
+        app(EntitlementManager::class)->grantAttemptUnlock(
+            0,
+            null,
+            $anonId,
+            'BIG5_FULL_REPORT',
+            $attemptId,
+            null,
+            null,
+            null,
+            [
+                ReportAccess::MODULE_BIG5_CORE,
+                ReportAccess::MODULE_BIG5_FULL,
+                ReportAccess::MODULE_BIG5_ACTION_PLAN,
+            ]
+        );
+
+        $full = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+            'X-Anon-Id' => $anonId,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report");
+
+        $full->assertOk();
+        $full->assertJsonPath('locked', false);
+        $full->assertJsonPath('variant', 'full');
+        $full->assertJsonPath('access_level', 'full');
+        $full->assertJsonCount(30, 'big5_public_projection_v1.facet_vector');
+        $full->assertJsonPath('big5_public_projection_v1.facet_vector.0.key', 'N1');
+        $full->assertJsonPath('big5_public_projection_v1.controlled_narrative_v1.version', 'controlled_narrative.v1');
+        $this->assertContains('paid', array_map(
+            static fn (array $section): string => (string) ($section['access_level'] ?? ''),
+            (array) $full->json('report.sections')
+        ));
     }
 
     private function seedAttempt(string $anonId): string
@@ -195,6 +273,40 @@ final class BigFiveResultEngineFoundationTest extends TestCase
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+    }
+
+    private function configureBigFivePaidReports(): void
+    {
+        $scale = DB::table('scales_registry')
+            ->where('org_id', 0)
+            ->where('code', 'BIG5_OCEAN')
+            ->first();
+
+        $capabilities = json_decode((string) ($scale->capabilities_json ?? '{}'), true);
+        if (! is_array($capabilities)) {
+            $capabilities = [];
+        }
+        $capabilities['paywall_mode'] = 'full';
+
+        DB::table('scales_registry')
+            ->where('org_id', 0)
+            ->where('code', 'BIG5_OCEAN')
+            ->update([
+                'capabilities_json' => json_encode($capabilities, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'view_policy_json' => json_encode([
+                    'free_sections' => ['disclaimer_top', 'summary', 'domains_overview', 'disclaimer'],
+                    'blur_others' => true,
+                    'teaser_percent' => 0.0,
+                    'upgrade_sku' => 'SKU_BIG5_FULL_REPORT_299',
+                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'commercial_json' => json_encode([
+                    'price_tier' => 'PAID',
+                    'report_benefit_code' => 'BIG5_FULL_REPORT',
+                    'credit_benefit_code' => 'BIG5_FULL_REPORT',
+                    'report_unlock_sku' => 'SKU_BIG5_FULL_REPORT_299',
+                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'updated_at' => now(),
+            ]);
     }
 
     /**

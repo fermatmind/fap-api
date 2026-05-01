@@ -119,7 +119,7 @@ final class BigFiveResultPageV2Validator
 
         if ($this->isNormUnavailable($projection)) {
             foreach (['domains', 'facets'] as $field) {
-                $this->collectForbiddenKeys((array) ($projection[$field] ?? []), ['percentile', 'percentiles', 'normal_curve'], "projection_v2.{$field}", $errors);
+                $this->collectForbiddenKeys((array) ($projection[$field] ?? []), ['score', 'percentile', 'percentiles', 'normal_curve'], "projection_v2.{$field}", $errors);
             }
         }
 

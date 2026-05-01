@@ -268,11 +268,13 @@ final class BigFiveResultPageV2ValidatorTest extends TestCase
     public function test_it_rejects_percentile_and_normal_curve_when_norm_unavailable(): void
     {
         $payload = $this->loadFixture('norm_unavailable.payload.json');
+        $payload[BigFiveResultPageV2Contract::PAYLOAD_KEY]['projection_v2']['domains']['O']['score'] = 59;
         $payload[BigFiveResultPageV2Contract::PAYLOAD_KEY]['projection_v2']['domains']['O']['percentile'] = 59;
         $payload[BigFiveResultPageV2Contract::PAYLOAD_KEY]['modules'][1]['blocks'][0]['content']['show_normal_curve'] = true;
 
         $errors = app(BigFiveResultPageV2Validator::class)->validateEnvelope($payload);
 
+        $this->assertContains('Forbidden public field projection_v2.domains.O.score', $errors);
         $this->assertContains('Forbidden public field projection_v2.domains.O.percentile', $errors);
         $this->assertContains('Forbidden public field module_01_hero.norm_unavailable.fixture.v1.content.show_normal_curve', $errors);
     }

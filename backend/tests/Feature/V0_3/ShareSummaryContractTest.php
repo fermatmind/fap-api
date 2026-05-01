@@ -263,8 +263,6 @@ final class ShareSummaryContractTest extends TestCase
             ->assertJsonPath('public_surface_v1.entry_surface', 'big5_share_landing')
             ->assertJsonPath('public_surface_v1.robots_policy', 'noindex,follow')
             ->assertJsonPath('public_surface_v1.attribution_scope', 'share_public_surface')
-            ->assertJsonPath('comparative_v1.norming_source', 'scale_norms')
-            ->assertJsonPath('comparative_v1.percentile.metric_key', 'O')
             ->assertJsonPath('insight_graph_v1.graph_contract_version', 'insight.graph.v1')
             ->assertJsonPath('insight_graph_v1.graph_scope', 'public_share_safe')
             ->assertJsonPath('embed_surface_v1.version', 'embed.surface.v1')
@@ -283,12 +281,18 @@ final class ShareSummaryContractTest extends TestCase
             ->assertJsonMissingPath('offers')
             ->assertJsonMissingPath('recommended_reads')
             ->assertJsonMissingPath('request_id')
-            ->assertJsonMissingPath('order_no');
+            ->assertJsonMissingPath('order_no')
+            ->assertJsonMissingPath('dimensions.0.pct')
+            ->assertJsonMissingPath('comparative_v1')
+            ->assertJsonMissingPath('controlled_narrative_v1')
+            ->assertJsonMissingPath('cultural_calibration_v1')
+            ->assertJsonMissingPath('big5_public_projection_v1.trait_vector.0.percentile')
+            ->assertJsonMissingPath('big5_public_projection_v1.trait_vector.0.mean');
 
-        $this->assertSame(['traits.overview', 'traits.why_this_profile', 'relationships.interpersonal_style'], $response->json('public_surface_v1.continue_reading_keys'));
+        $this->assertSame(['traits.overview', 'traits.why_this_profile'], $response->json('public_surface_v1.continue_reading_keys'));
         $this->assertContains('big5_foundation_summary', $response->json('public_surface_v1.discoverability_keys'));
-        $this->assertContains('comparative', $response->json('public_surface_v1.discoverability_keys'));
-        $this->assertStringContainsString('cohort', (string) $response->json('comparative_v1.cohort_relative_position.label'));
+        $this->assertNotContains('comparative', $response->json('public_surface_v1.discoverability_keys'));
+        $response->assertJsonCount(0, 'big5_public_projection_v1.facet_vector');
         $this->assertSame('Openness', $response->json('big5_public_projection_v1.trait_vector.0.label'));
         $this->assertStringContainsString('/share/'.$response->json('share_id'), (string) $response->json('share_url'));
     }

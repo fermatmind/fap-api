@@ -56,8 +56,10 @@ final class BigFiveResultPageV2CompatibilityTransformerTest extends TestCase
 
         $this->assertSame('norm_unavailable', data_get($payload, 'big5_result_page_v2.projection_v2.interpretation_scope'));
         $this->assertSame('MISSING', data_get($payload, 'big5_result_page_v2.projection_v2.norm_status'));
+        $this->assertNull(data_get($payload, 'big5_result_page_v2.projection_v2.domains.O.score'));
         $this->assertNull(data_get($payload, 'big5_result_page_v2.projection_v2.domains.O.percentile'));
         $this->assertNull(data_get($payload, 'big5_result_page_v2.projection_v2.facets.N1.percentile'));
+        $this->assertSame(['domain_bands', 'interpretation_scope', 'safety_flags'], data_get($payload, 'big5_result_page_v2.projection_v2.public_fields'));
         $this->assertFalse($this->containsKeyRecursive($payload, 'normal_curve'));
         $this->assertFalse($this->containsKeyRecursive($payload, 'show_normal_curve'));
     }

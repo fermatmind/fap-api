@@ -164,6 +164,71 @@ final class BigFiveHistoryCompareTest extends TestCase
         $response->assertJsonPath('items.1.share_summary.enabled', true);
     }
 
+    public function test_me_attempts_big5_locked_rows_do_not_expose_paid_facet_summary(): void
+    {
+        (new ScaleRegistrySeeder)->run();
+        (new Pr19CommerceSeeder)->run();
+        $this->configureBigFivePaidReports();
+
+        $userId = 8102;
+        $anonId = 'anon_big5_history_locked';
+        $this->seedUser($userId);
+        $token = $this->seedFmToken($anonId, $userId);
+
+        $attemptId = $this->seedBigFiveAttempt(
+            $anonId,
+            (string) $userId,
+            now()->subDay(),
+            120,
+            'big5_120',
+            'v1',
+            'v1',
+            'big5_spec_2026Q1_v1'
+        );
+        $this->seedBigFiveResult(
+            $attemptId,
+            ['O' => 3.5, 'C' => 3.1, 'E' => 3.0, 'A' => 3.6, 'N' => 3.2],
+            [
+                'scores_0_100' => [
+                    'domains_percentile' => ['O' => 84, 'C' => 63, 'E' => 51, 'A' => 78, 'N' => 40],
+                    'facets_percentile' => ['O5' => 88, 'A3' => 73, 'C4' => 69, 'E2' => 34],
+                ],
+                'facts' => [
+                    'facet_buckets' => ['O5' => 'high', 'A3' => 'high', 'C4' => 'mid', 'E2' => 'low'],
+                    'top_strength_facets' => ['O5', 'A3', 'C4'],
+                    'top_growth_facets' => ['E2'],
+                ],
+                'quality' => ['level' => 'A'],
+                'norms' => ['status' => 'CALIBRATED', 'norms_version' => '2026Q1'],
+            ]
+        );
+        $this->seedAccessProjection($attemptId, [
+            'access_state' => 'locked',
+            'report_state' => 'ready',
+            'pdf_state' => 'missing',
+            'reason_code' => 'missing_entitlement',
+            'payload_json' => [
+                'access_level' => 'free',
+                'variant' => 'free',
+                'modules_allowed' => ['big5_core'],
+                'modules_preview' => ['big5_full', 'big5_action_plan'],
+            ],
+        ]);
+
+        $response = $this->withHeaders([
+            'Authorization' => "Bearer {$token}",
+        ])->getJson('/api/v0.3/me/attempts?scale=BIG5_OCEAN');
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('items.0.access_summary.access_state', 'locked');
+        $response->assertJsonPath('items.0.access_summary.access_level', 'free');
+        $response->assertJsonPath('items.0.access_summary.variant', 'free');
+        $response->assertJsonMissingPath('items.0.top_facets_summary_v1');
+        $response->assertJsonPath('items.0.quality_summary.level', 'A');
+        $response->assertJsonPath('items.0.norms_summary.status', 'CALIBRATED');
+        $response->assertJsonPath('items.0.share_summary.enabled', true);
+    }
+
     private function seedBigFiveAttempt(
         string $anonId,
         string $userId,
@@ -296,6 +361,28 @@ final class BigFiveHistoryCompareTest extends TestCase
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+    }
+
+    private function configureBigFivePaidReports(): void
+    {
+        $scale = DB::table('scales_registry')
+            ->where('org_id', 0)
+            ->where('code', 'BIG5_OCEAN')
+            ->first();
+
+        $capabilities = json_decode((string) ($scale->capabilities_json ?? '{}'), true);
+        if (! is_array($capabilities)) {
+            $capabilities = [];
+        }
+        $capabilities['paywall_mode'] = 'full';
+
+        DB::table('scales_registry')
+            ->where('org_id', 0)
+            ->where('code', 'BIG5_OCEAN')
+            ->update([
+                'capabilities_json' => json_encode($capabilities, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                'updated_at' => now(),
+            ]);
     }
 
     private function seedFmToken(string $anonId, int $userId): string
