@@ -213,6 +213,103 @@ final class PaymentRepairEngineTest extends TestCase
         $this->assertSame(1, DB::table('benefit_grants')->where('order_no', $orderNo)->where('status', 'active')->count());
     }
 
+    public function test_paid_order_repair_command_denies_attempt_owner_mismatch_without_event(): void
+    {
+        (new Pr19CommerceSeeder)->run();
+
+        $attemptId = $this->insertAttempt('anon_paid_owner');
+        $orderNo = 'ord_repair_paid_owner_mismatch_1';
+        $this->insertReportUnlockOrder($orderNo, $attemptId, 'anon_paid_other');
+
+        DB::table('orders')
+            ->where('order_no', $orderNo)
+            ->update([
+                'status' => 'paid',
+                'payment_state' => 'paid',
+                'updated_at' => now()->subMinutes(10),
+                'paid_at' => now()->subMinutes(10),
+            ]);
+
+        $exitCode = Artisan::call('commerce:repair-paid-orders', [
+            '--org_id' => 0,
+            '--order' => $orderNo,
+            '--older_than_minutes' => 0,
+            '--limit' => 20,
+            '--json' => 1,
+        ]);
+        $this->assertSame(0, $exitCode);
+
+        $summary = json_decode(Artisan::output(), true);
+        $this->assertIsArray($summary);
+        $this->assertSame(1, (int) ($summary['candidate_count'] ?? -1));
+        $this->assertSame(0, (int) ($summary['repaired_count'] ?? -1));
+        $this->assertSame(1, (int) ($summary['failed_count'] ?? -1));
+        $this->assertSame('ATTEMPT_OWNER_MISMATCH', (string) ($summary['results'][0]['error'] ?? ''));
+
+        $this->assertDatabaseHas('orders', [
+            'order_no' => $orderNo,
+            'payment_state' => 'paid',
+            'grant_state' => 'not_started',
+            'status' => 'paid',
+        ]);
+        $this->assertSame(0, DB::table('benefit_grants')->where('order_no', $orderNo)->count());
+        $this->assertDatabaseHas('audit_logs', [
+            'org_id' => 0,
+            'action' => 'commerce_order_repair_failed',
+            'target_type' => 'Order',
+            'result' => 'failed',
+        ]);
+    }
+
+    public function test_paid_order_repair_command_denies_attempt_scale_mismatch_without_event(): void
+    {
+        (new Pr19CommerceSeeder)->run();
+
+        $attemptId = $this->insertAttempt('anon_paid_scale');
+        DB::table('attempts')
+            ->where('id', $attemptId)
+            ->update([
+                'scale_code' => 'SDS_20',
+                'updated_at' => now()->subMinutes(9),
+            ]);
+
+        $orderNo = 'ord_repair_paid_scale_mismatch_1';
+        $this->insertReportUnlockOrder($orderNo, $attemptId, 'anon_paid_scale');
+
+        DB::table('orders')
+            ->where('order_no', $orderNo)
+            ->update([
+                'status' => 'paid',
+                'payment_state' => 'paid',
+                'updated_at' => now()->subMinutes(10),
+                'paid_at' => now()->subMinutes(10),
+            ]);
+
+        $exitCode = Artisan::call('commerce:repair-paid-orders', [
+            '--org_id' => 0,
+            '--order' => $orderNo,
+            '--older_than_minutes' => 0,
+            '--limit' => 20,
+            '--json' => 1,
+        ]);
+        $this->assertSame(0, $exitCode);
+
+        $summary = json_decode(Artisan::output(), true);
+        $this->assertIsArray($summary);
+        $this->assertSame(1, (int) ($summary['candidate_count'] ?? -1));
+        $this->assertSame(0, (int) ($summary['repaired_count'] ?? -1));
+        $this->assertSame(1, (int) ($summary['failed_count'] ?? -1));
+        $this->assertSame('ATTEMPT_SCALE_MISMATCH', (string) ($summary['results'][0]['error'] ?? ''));
+
+        $this->assertDatabaseHas('orders', [
+            'order_no' => $orderNo,
+            'payment_state' => 'paid',
+            'grant_state' => 'not_started',
+            'status' => 'paid',
+        ]);
+        $this->assertSame(0, DB::table('benefit_grants')->where('order_no', $orderNo)->count());
+    }
+
     public function test_paid_order_repair_ignores_unrelated_active_grant_and_grants_correct_benefit(): void
     {
         (new Pr19CommerceSeeder)->run();

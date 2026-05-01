@@ -65,6 +65,35 @@ final class OrderRepairService
             ]);
         }
 
+        $attemptMeta = $this->resolveAttemptMeta((int) $freshOrder->org_id, $attemptId);
+        $ownerGuard = $this->validateAttemptOwnershipForOrder($freshOrder, $attemptMeta);
+        if (! ($ownerGuard['ok'] ?? false)) {
+            return $this->failure(
+                (string) ($ownerGuard['error'] ?? 'ATTEMPT_OWNER_MISMATCH'),
+                (string) ($ownerGuard['message'] ?? 'order owner mismatch.'),
+                $freshOrder,
+                $context,
+                [
+                    'benefit_code' => $benefitCode,
+                    'attempt_id' => $attemptId,
+                ]
+            );
+        }
+
+        $scaleGuard = $this->validateAttemptScaleForSku($skuRow, $attemptMeta);
+        if (! ($scaleGuard['ok'] ?? false)) {
+            return $this->failure(
+                (string) ($scaleGuard['error'] ?? 'ATTEMPT_SCALE_MISMATCH'),
+                (string) ($scaleGuard['message'] ?? 'attempt scale does not match sku scale.'),
+                $freshOrder,
+                $context,
+                [
+                    'benefit_code' => $benefitCode,
+                    'attempt_id' => $attemptId,
+                ]
+            );
+        }
+
         $blockingEvent = $this->resolveBlockingSemanticRejectEvent($freshOrder);
         if ($blockingEvent !== null) {
             return $this->skip(
@@ -267,6 +296,120 @@ final class OrderRepairService
         }
 
         return strtolower(trim((string) ($skuRow->kind ?? ''))) === 'report_unlock';
+    }
+
+    /**
+     * @param  array<string,mixed>  $attemptMeta
+     * @return array{ok:bool,error?:string,message?:string}
+     */
+    private function validateAttemptOwnershipForOrder(object $order, array $attemptMeta): array
+    {
+        $attemptId = trim((string) ($attemptMeta['attempt_id'] ?? ''));
+        if ($attemptId === '') {
+            return [
+                'ok' => false,
+                'error' => 'ATTEMPT_NOT_FOUND',
+                'message' => 'target attempt not found.',
+            ];
+        }
+
+        $orderUserId = trim((string) ($order->user_id ?? ''));
+        $orderAnonId = trim((string) ($order->anon_id ?? ''));
+        $attemptUserId = trim((string) ($attemptMeta['user_id'] ?? ''));
+        $attemptAnonId = trim((string) ($attemptMeta['anon_id'] ?? ''));
+
+        if ($orderUserId !== '') {
+            if ($attemptUserId !== '' && $attemptUserId === $orderUserId) {
+                return ['ok' => true];
+            }
+
+            return [
+                'ok' => false,
+                'error' => 'ATTEMPT_OWNER_MISMATCH',
+                'message' => 'attempt owner user_id does not match order user_id.',
+            ];
+        }
+
+        if ($orderAnonId !== '') {
+            if ($attemptAnonId !== '' && $attemptAnonId === $orderAnonId) {
+                return ['ok' => true];
+            }
+
+            return [
+                'ok' => false,
+                'error' => 'ATTEMPT_OWNER_MISMATCH',
+                'message' => 'attempt owner anon_id does not match order anon_id.',
+            ];
+        }
+
+        return ['ok' => true];
+    }
+
+    /**
+     * @param  array<string,mixed>  $attemptMeta
+     * @return array{ok:bool,error?:string,message?:string}
+     */
+    private function validateAttemptScaleForSku(object $skuRow, array $attemptMeta): array
+    {
+        $skuScaleCode = strtoupper(trim((string) ($skuRow->scale_code ?? '')));
+        $attemptScaleCode = strtoupper(trim((string) ($attemptMeta['scale_code'] ?? '')));
+
+        if ($attemptScaleCode === '') {
+            return [
+                'ok' => false,
+                'error' => 'ATTEMPT_NOT_FOUND',
+                'message' => 'target attempt not found.',
+            ];
+        }
+
+        if ($skuScaleCode === '' || $skuScaleCode === $attemptScaleCode) {
+            return ['ok' => true];
+        }
+
+        return [
+            'ok' => false,
+            'error' => 'ATTEMPT_SCALE_MISMATCH',
+            'message' => 'attempt scale_code does not match sku scale_code.',
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function resolveAttemptMeta(int $orgId, string $attemptId): array
+    {
+        $attemptId = trim($attemptId);
+        if ($attemptId === '') {
+            return $this->emptyAttemptMeta();
+        }
+
+        $row = DB::table('attempts')
+            ->where('id', $attemptId)
+            ->where('org_id', $orgId)
+            ->first();
+        if (! $row) {
+            return $this->emptyAttemptMeta();
+        }
+
+        return [
+            'attempt_id' => (string) ($row->id ?? $attemptId),
+            'scale_code' => (string) ($row->scale_code ?? ''),
+            'user_id' => isset($row->user_id) ? (string) ($row->user_id ?? '') : null,
+            'anon_id' => isset($row->anon_id) ? (string) ($row->anon_id ?? '') : null,
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function emptyAttemptMeta(): array
+    {
+        return [
+            'attempt_id' => null,
+            'scale_code' => null,
+            'user_id' => null,
+            'anon_id' => null,
+        ];
     }
 
     /**
