@@ -719,10 +719,33 @@ final class EnneagramRegistryOpsService
             ->where('id', trim($releaseId))
             ->where('to_pack_id', self::PACK_ID)
             ->where('pack_version', self::PACK_VERSION)
+            ->where('action', 'enneagram_registry_publish')
+            ->where('status', 'success')
             ->first();
 
         if (! $release instanceof ContentPackRelease) {
             throw new RuntimeException('ENNEAGRAM_REGISTRY_RELEASE_NOT_FOUND');
+        }
+
+        $releaseHash = trim((string) ($release->manifest_hash ?? ''));
+        $compiledHash = trim((string) ($release->compiled_hash ?? ''));
+        $contentHash = trim((string) ($release->content_hash ?? ''));
+        $storagePath = trim((string) ($release->storage_path ?? ''));
+        $manifest = is_array($release->manifest_json) ? $release->manifest_json : [];
+        $manifestScaleCode = trim((string) ($manifest['scale_code'] ?? ''));
+        $manifestReleaseHash = trim((string) ($manifest['registry_release_hash'] ?? ''));
+
+        if (
+            $releaseHash === ''
+            || $compiledHash === ''
+            || ! hash_equals($releaseHash, $compiledHash)
+            || ($contentHash !== '' && ! hash_equals($releaseHash, $contentHash))
+            || $storagePath !== self::STORAGE_PATH
+            || $manifestScaleCode !== self::PACK_ID
+            || $manifestReleaseHash === ''
+            || ! hash_equals($releaseHash, $manifestReleaseHash)
+        ) {
+            throw new RuntimeException('ENNEAGRAM_REGISTRY_RELEASE_INVALID');
         }
 
         return $release;

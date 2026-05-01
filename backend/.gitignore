@@ -38,8 +38,9 @@ Thumbs.db
 /storage/app/private/prune_plans/*
 /storage/app/content_packs_v2/*
 /storage/app/archives/*
-# BIG5_OCEAN v1 compiled artifacts are regenerated from content_packs/BIG5_OCEAN/v1/raw
-/content_packs/BIG5_OCEAN/v1/compiled/*
+# BIG5_OCEAN v1 compiled artifacts are runtime release inputs.
+!/content_packs/BIG5_OCEAN/v1/compiled/
+!/content_packs/BIG5_OCEAN/v1/compiled/*.json
 !/storage/logs/.gitkeep
 !/storage/framework/sessions/.gitkeep
 !/storage/framework/cache/.gitkeep
