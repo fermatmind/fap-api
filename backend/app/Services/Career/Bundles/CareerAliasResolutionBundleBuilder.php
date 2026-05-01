@@ -5,23 +5,29 @@ declare(strict_types=1);
 namespace App\Services\Career\Bundles;
 
 use App\Domain\Career\IndexStateValue;
-use App\Domain\Career\Publish\FirstWaveReadinessSummaryService;
+use App\Domain\Career\Publish\FirstWavePublishGate;
 use App\DTO\Career\CareerAliasResolutionBundle;
 use App\Models\Occupation;
 use App\Models\OccupationAlias;
 use App\Models\OccupationFamily;
 use App\Models\RecommendationSnapshot;
 use App\Services\PublicSurface\SeoSurfaceContractService;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 
 final class CareerAliasResolutionBundleBuilder
 {
     private const SAFE_CROSSWALK_MODES = ['exact', 'trust_inheritance', 'direct_match'];
 
+    private const MAX_ALIAS_LOOKUP_ROWS = 50;
+
+    private const MAX_RESOLUTION_SNAPSHOT_ROWS = 100;
+
+    private const MAX_FAMILY_LOOKUP_ROWS = 50;
+
     public function __construct(
-        private readonly FirstWaveReadinessSummaryService $readinessSummaryService,
+        private readonly FirstWavePublishGate $publishGate,
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
-        private readonly CareerFamilyHubBundleBuilder $familyHubBundleBuilder,
     ) {}
 
     public function build(string $query, ?string $locale = null): CareerAliasResolutionBundle
@@ -29,17 +35,16 @@ final class CareerAliasResolutionBundleBuilder
         $rawQuery = trim($query);
         $normalizedQuery = $this->normalizeText($rawQuery) ?? '';
         $normalizedLocale = $this->normalizeLocale($locale);
-        $readinessBySlug = $this->readinessRowsBySlug();
 
         $exactCandidates = [
-            ...$this->matchOccupationCandidates($normalizedQuery, $rawQuery, $normalizedLocale, $readinessBySlug, exactOnly: true),
+            ...$this->matchOccupationCandidates($normalizedQuery, $rawQuery, $normalizedLocale, exactOnly: true),
             ...$this->matchFamilyCandidates($normalizedQuery, $rawQuery, $normalizedLocale, exactOnly: true),
         ];
 
         $candidates = $exactCandidates !== []
             ? $this->dedupeCandidates($exactCandidates)
             : $this->dedupeCandidates([
-                ...$this->matchOccupationCandidates($normalizedQuery, $rawQuery, $normalizedLocale, $readinessBySlug, exactOnly: false),
+                ...$this->matchOccupationCandidates($normalizedQuery, $rawQuery, $normalizedLocale, exactOnly: false),
                 ...$this->matchFamilyCandidates($normalizedQuery, $rawQuery, $normalizedLocale, exactOnly: false),
             ]);
 
@@ -125,23 +130,28 @@ final class CareerAliasResolutionBundleBuilder
     }
 
     /**
-     * @param  Collection<string, array<string, mixed>>  $readinessBySlug
      * @return list<array<string, mixed>>
      */
     private function matchOccupationCandidates(
         string $normalizedQuery,
         string $rawQuery,
         ?string $normalizedLocale,
-        Collection $readinessBySlug,
         bool $exactOnly,
     ): array {
         if ($normalizedQuery === '') {
             return [];
         }
 
+        $aliasMatchTiersByOccupationId = $this->matchingOccupationAliasTiers(
+            $normalizedQuery,
+            $normalizedLocale,
+            $exactOnly,
+        );
+        $aliasOccupationIds = array_keys($aliasMatchTiersByOccupationId);
+
         $snapshots = RecommendationSnapshot::query()
             ->with([
-                'occupation.aliases',
+                'occupation',
                 'trustManifest',
                 'indexState',
                 'profileProjection',
@@ -162,8 +172,28 @@ final class CareerAliasResolutionBundleBuilder
             ->whereHas('indexState', static function ($query): void {
                 $query->where('index_eligible', true);
             })
+            ->where(function (Builder $query) use ($aliasOccupationIds, $exactOnly, $normalizedQuery, $rawQuery): void {
+                $query->whereHas('occupation', function (Builder $occupationQuery) use ($exactOnly, $normalizedQuery, $rawQuery): void {
+                    $occupationQuery->where(function (Builder $matchQuery) use ($exactOnly, $normalizedQuery, $rawQuery): void {
+                        $matchQuery->where('canonical_slug', $normalizedQuery)
+                            ->orWhereRaw('LOWER(canonical_title_en) = ?', [$normalizedQuery])
+                            ->orWhere('canonical_title_zh', $rawQuery);
+
+                        if (! $exactOnly) {
+                            $matchQuery->orWhereRaw("canonical_slug LIKE ? ESCAPE '!'", [$this->likePrefixPattern($normalizedQuery)])
+                                ->orWhereRaw("LOWER(canonical_title_en) LIKE ? ESCAPE '!'", [$this->likePrefixPattern($normalizedQuery)])
+                                ->orWhereRaw("canonical_title_zh LIKE ? ESCAPE '!'", [$this->likePrefixPattern($rawQuery)]);
+                        }
+                    });
+                });
+
+                if ($aliasOccupationIds !== []) {
+                    $query->orWhereIn('occupation_id', $aliasOccupationIds);
+                }
+            })
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
+            ->limit(self::MAX_RESOLUTION_SNAPSHOT_ROWS)
             ->get()
             ->groupBy('occupation_id')
             ->map(function (Collection $group): ?RecommendationSnapshot {
@@ -196,15 +226,17 @@ final class CareerAliasResolutionBundleBuilder
                 continue;
             }
 
-            $readiness = $readinessBySlug->get((string) $occupation->canonical_slug);
-            if (! is_array($readiness)
-                || (string) ($readiness['status'] ?? '') !== 'publish_ready'
-                || ! (bool) ($readiness['index_eligible'] ?? false)
-            ) {
+            if (! $this->isOccupationPublishReady($occupation, $snapshot)) {
                 continue;
             }
 
-            $matchTier = $this->resolveOccupationMatchTier($occupation, $normalizedQuery, $rawQuery, $normalizedLocale, $exactOnly);
+            $matchTier = $this->resolveOccupationMatchTier(
+                $occupation,
+                $normalizedQuery,
+                $rawQuery,
+                $aliasMatchTiersByOccupationId,
+                $exactOnly,
+            );
             if ($matchTier === null) {
                 continue;
             }
@@ -219,7 +251,7 @@ final class CareerAliasResolutionBundleBuilder
                 'canonical_title_zh' => $occupation->canonical_title_zh,
                 'seo_contract' => $this->buildOccupationSeoContract($occupation, $snapshot),
                 'trust_summary' => [
-                    'reviewer_status' => $readiness['reviewer_status'] ?? $snapshot->trustManifest?->reviewer_status,
+                    'reviewer_status' => $snapshot->trustManifest?->reviewer_status,
                 ],
             ];
         }
@@ -231,17 +263,18 @@ final class CareerAliasResolutionBundleBuilder
         Occupation $occupation,
         string $normalizedQuery,
         string $rawQuery,
-        ?string $normalizedLocale,
+        array $aliasMatchTiersByOccupationId,
         bool $exactOnly,
     ): ?string {
         $canonicalSlug = $this->normalizeText($occupation->canonical_slug);
         $canonicalTitleEn = $this->normalizeText($occupation->canonical_title_en);
         $canonicalTitleZh = $this->normalizeRawText($occupation->canonical_title_zh);
+        $aliasMatchTier = $aliasMatchTiersByOccupationId[(string) $occupation->id] ?? null;
 
         if ($canonicalSlug === $normalizedQuery
             || $canonicalTitleEn === $normalizedQuery
             || ($canonicalTitleZh !== null && $canonicalTitleZh === $rawQuery)
-            || $this->matchesOccupationAlias($occupation, $normalizedQuery, $normalizedLocale, exact: true)
+            || $aliasMatchTier === 'exact'
         ) {
             return 'exact';
         }
@@ -253,7 +286,7 @@ final class CareerAliasResolutionBundleBuilder
         if (($canonicalSlug !== null && str_starts_with($canonicalSlug, $normalizedQuery))
             || ($canonicalTitleEn !== null && str_starts_with($canonicalTitleEn, $normalizedQuery))
             || ($canonicalTitleZh !== null && str_starts_with($canonicalTitleZh, $rawQuery))
-            || $this->matchesOccupationAlias($occupation, $normalizedQuery, $normalizedLocale, exact: false)
+            || $aliasMatchTier === 'prefix'
         ) {
             return 'prefix';
         }
@@ -261,38 +294,49 @@ final class CareerAliasResolutionBundleBuilder
         return null;
     }
 
-    private function matchesOccupationAlias(
-        Occupation $occupation,
+    /**
+     * @return array<string, 'exact'|'prefix'>
+     */
+    private function matchingOccupationAliasTiers(
         string $normalizedQuery,
         ?string $normalizedLocale,
-        bool $exact,
-    ): bool {
-        $aliases = $occupation->aliases instanceof Collection ? $occupation->aliases : collect();
+        bool $exactOnly,
+    ): array {
+        $aliases = OccupationAlias::query()
+            ->select(['occupation_id', 'normalized'])
+            ->whereNotNull('occupation_id')
+            ->when($normalizedLocale !== null, function (Builder $query) use ($normalizedLocale): void {
+                $query->where('lang', 'like', $normalizedLocale.'%');
+            })
+            ->where(function (Builder $query) use ($exactOnly, $normalizedQuery): void {
+                if ($exactOnly) {
+                    $query->where('normalized', $normalizedQuery);
 
+                    return;
+                }
+
+                $query->whereRaw("normalized LIKE ? ESCAPE '!'", [$this->likePrefixPattern($normalizedQuery)]);
+            })
+            ->orderBy('normalized')
+            ->orderBy('id')
+            ->limit(self::MAX_ALIAS_LOOKUP_ROWS)
+            ->get();
+
+        $tiers = [];
         foreach ($aliases as $alias) {
-            if (! $alias instanceof OccupationAlias) {
+            if (! $alias instanceof OccupationAlias || ! is_string($alias->occupation_id)) {
                 continue;
             }
 
-            if ($normalizedLocale !== null && ! str_starts_with(strtolower((string) $alias->lang), $normalizedLocale)) {
-                continue;
-            }
+            $tier = $this->normalizeText($alias->normalized) === $normalizedQuery ? 'exact' : 'prefix';
+            $occupationId = (string) $alias->occupation_id;
 
-            $aliasNormalized = $this->normalizeText($alias->normalized);
-            if ($aliasNormalized === null) {
-                continue;
-            }
-
-            if ($exact && $aliasNormalized === $normalizedQuery) {
-                return true;
-            }
-
-            if (! $exact && str_starts_with($aliasNormalized, $normalizedQuery)) {
-                return true;
+            if (($tiers[$occupationId] ?? null) !== 'exact') {
+                $tiers[$occupationId] = $tier;
             }
         }
 
-        return false;
+        return $tiers;
     }
 
     /**
@@ -308,10 +352,34 @@ final class CareerAliasResolutionBundleBuilder
             return [];
         }
 
+        $aliasMatchTiersByFamilyId = $this->matchingFamilyAliasTiers(
+            $normalizedQuery,
+            $normalizedLocale,
+            $exactOnly,
+        );
+        $aliasFamilyIds = array_keys($aliasMatchTiersByFamilyId);
+
         $families = OccupationFamily::query()
-            ->with('aliases')
+            ->where(function (Builder $query) use ($aliasFamilyIds, $exactOnly, $normalizedQuery, $rawQuery): void {
+                $query->where(function (Builder $matchQuery) use ($exactOnly, $normalizedQuery, $rawQuery): void {
+                    $matchQuery->where('canonical_slug', $normalizedQuery)
+                        ->orWhereRaw('LOWER(title_en) = ?', [$normalizedQuery])
+                        ->orWhere('title_zh', $rawQuery);
+
+                    if (! $exactOnly) {
+                        $matchQuery->orWhereRaw("canonical_slug LIKE ? ESCAPE '!'", [$this->likePrefixPattern($normalizedQuery)])
+                            ->orWhereRaw("LOWER(title_en) LIKE ? ESCAPE '!'", [$this->likePrefixPattern($normalizedQuery)])
+                            ->orWhereRaw("title_zh LIKE ? ESCAPE '!'", [$this->likePrefixPattern($rawQuery)]);
+                    }
+                });
+
+                if ($aliasFamilyIds !== []) {
+                    $query->orWhereIn('id', $aliasFamilyIds);
+                }
+            })
             ->orderBy('title_en')
             ->orderBy('canonical_slug')
+            ->limit(self::MAX_FAMILY_LOOKUP_ROWS)
             ->get();
 
         $candidates = [];
@@ -325,7 +393,13 @@ final class CareerAliasResolutionBundleBuilder
                 continue;
             }
 
-            $matchTier = $this->resolveFamilyMatchTier($family, $normalizedQuery, $rawQuery, $normalizedLocale, $exactOnly);
+            $matchTier = $this->resolveFamilyMatchTier(
+                $family,
+                $normalizedQuery,
+                $rawQuery,
+                $aliasMatchTiersByFamilyId,
+                $exactOnly,
+            );
             if ($matchTier === null) {
                 continue;
             }
@@ -348,17 +422,18 @@ final class CareerAliasResolutionBundleBuilder
         OccupationFamily $family,
         string $normalizedQuery,
         string $rawQuery,
-        ?string $normalizedLocale,
+        array $aliasMatchTiersByFamilyId,
         bool $exactOnly,
     ): ?string {
         $canonicalSlug = $this->normalizeText($family->canonical_slug);
         $titleEn = $this->normalizeText($family->title_en);
         $titleZh = $this->normalizeRawText($family->title_zh);
+        $aliasMatchTier = $aliasMatchTiersByFamilyId[(string) $family->id] ?? null;
 
         if ($canonicalSlug === $normalizedQuery
             || $titleEn === $normalizedQuery
             || ($titleZh !== null && $titleZh === $rawQuery)
-            || $this->matchesExplicitFamilyAlias($family, $normalizedQuery, $normalizedLocale, exact: true)
+            || $aliasMatchTier === 'exact'
         ) {
             return 'exact';
         }
@@ -370,7 +445,7 @@ final class CareerAliasResolutionBundleBuilder
         if (($canonicalSlug !== null && str_starts_with($canonicalSlug, $normalizedQuery))
             || ($titleEn !== null && str_starts_with($titleEn, $normalizedQuery))
             || ($titleZh !== null && str_starts_with($titleZh, $rawQuery))
-            || $this->matchesExplicitFamilyAlias($family, $normalizedQuery, $normalizedLocale, exact: false)
+            || $aliasMatchTier === 'prefix'
         ) {
             return 'prefix';
         }
@@ -378,53 +453,116 @@ final class CareerAliasResolutionBundleBuilder
         return null;
     }
 
-    private function matchesExplicitFamilyAlias(
-        OccupationFamily $family,
+    /**
+     * @return array<string, 'exact'|'prefix'>
+     */
+    private function matchingFamilyAliasTiers(
         string $normalizedQuery,
         ?string $normalizedLocale,
-        bool $exact,
-    ): bool {
-        $aliases = $family->aliases instanceof Collection ? $family->aliases : collect();
+        bool $exactOnly,
+    ): array {
+        $aliases = OccupationAlias::query()
+            ->select(['family_id', 'normalized'])
+            ->whereNotNull('family_id')
+            ->where(function (Builder $query): void {
+                $query->whereNull('occupation_id')
+                    ->orWhereRaw('LOWER(target_kind) = ?', ['family']);
+            })
+            ->when($normalizedLocale !== null, function (Builder $query) use ($normalizedLocale): void {
+                $query->where('lang', 'like', $normalizedLocale.'%');
+            })
+            ->where(function (Builder $query) use ($exactOnly, $normalizedQuery): void {
+                if ($exactOnly) {
+                    $query->where('normalized', $normalizedQuery);
 
+                    return;
+                }
+
+                $query->whereRaw("normalized LIKE ? ESCAPE '!'", [$this->likePrefixPattern($normalizedQuery)]);
+            })
+            ->orderBy('normalized')
+            ->orderBy('id')
+            ->limit(self::MAX_ALIAS_LOOKUP_ROWS)
+            ->get();
+
+        $tiers = [];
         foreach ($aliases as $alias) {
-            if (! $alias instanceof OccupationAlias) {
+            if (! $alias instanceof OccupationAlias || ! is_string($alias->family_id)) {
                 continue;
             }
 
-            $targetKind = strtolower(trim((string) $alias->target_kind));
-            if ($alias->occupation_id !== null && $targetKind !== 'family') {
+            $tier = $this->normalizeText($alias->normalized) === $normalizedQuery ? 'exact' : 'prefix';
+            $familyId = (string) $alias->family_id;
+
+            if (($tiers[$familyId] ?? null) !== 'exact') {
+                $tiers[$familyId] = $tier;
+            }
+        }
+
+        return $tiers;
+    }
+
+    private function familyHasVisibleChildren(OccupationFamily $family): bool
+    {
+        $snapshots = RecommendationSnapshot::query()
+            ->with([
+                'occupation',
+                'trustManifest',
+                'indexState',
+                'contextSnapshot',
+                'profileProjection',
+                'compileRun',
+            ])
+            ->whereNotNull('compiled_at')
+            ->whereNotNull('compile_run_id')
+            ->whereHas('occupation', function (Builder $query) use ($family): void {
+                $query->where('family_id', $family->id)
+                    ->whereIn('crosswalk_mode', self::SAFE_CROSSWALK_MODES);
+            })
+            ->whereHas('contextSnapshot', static function ($query): void {
+                $query->where('context_payload->materialization', 'career_first_wave');
+            })
+            ->whereHas('profileProjection', static function ($query): void {
+                $query->where('projection_payload->materialization', 'career_first_wave');
+            })
+            ->whereHas('indexState', static function ($query): void {
+                $query->where('index_eligible', true);
+            })
+            ->orderByDesc('compiled_at')
+            ->orderByDesc('created_at')
+            ->limit(self::MAX_RESOLUTION_SNAPSHOT_ROWS)
+            ->get()
+            ->groupBy('occupation_id')
+            ->map(function (Collection $group): ?RecommendationSnapshot {
+                /** @var RecommendationSnapshot|null $selected */
+                $selected = $group
+                    ->sort(function (RecommendationSnapshot $left, RecommendationSnapshot $right): int {
+                        $leftCompiled = optional($left->compiled_at)?->getTimestamp() ?? 0;
+                        $rightCompiled = optional($right->compiled_at)?->getTimestamp() ?? 0;
+                        if ($leftCompiled !== $rightCompiled) {
+                            return $rightCompiled <=> $leftCompiled;
+                        }
+
+                        return strcmp((string) $left->id, (string) $right->id);
+                    })
+                    ->first();
+
+                return $selected;
+            })
+            ->filter(static fn (mixed $snapshot): bool => $snapshot instanceof RecommendationSnapshot);
+
+        foreach ($snapshots as $snapshot) {
+            if (! $snapshot instanceof RecommendationSnapshot) {
                 continue;
             }
 
-            if ($normalizedLocale !== null && ! str_starts_with(strtolower((string) $alias->lang), $normalizedLocale)) {
-                continue;
-            }
-
-            $aliasNormalized = $this->normalizeText($alias->normalized);
-            if ($aliasNormalized === null) {
-                continue;
-            }
-
-            if ($exact && $aliasNormalized === $normalizedQuery) {
-                return true;
-            }
-
-            if (! $exact && str_starts_with($aliasNormalized, $normalizedQuery)) {
+            $occupation = $snapshot->occupation;
+            if ($occupation instanceof Occupation && $this->isOccupationPublishReady($occupation, $snapshot)) {
                 return true;
             }
         }
 
         return false;
-    }
-
-    private function familyHasVisibleChildren(OccupationFamily $family): bool
-    {
-        $bundle = $this->familyHubBundleBuilder->buildBySlug((string) $family->canonical_slug);
-        if ($bundle === null) {
-            return false;
-        }
-
-        return count($bundle->visibleChildren) > 0;
     }
 
     /**
@@ -524,16 +662,22 @@ final class CareerAliasResolutionBundleBuilder
         ];
     }
 
-    /**
-     * @return Collection<string, array<string, mixed>>
-     */
-    private function readinessRowsBySlug(): Collection
+    private function isOccupationPublishReady(Occupation $occupation, RecommendationSnapshot $snapshot): bool
     {
-        $summary = $this->readinessSummaryService->build();
+        $gate = $this->publishGate->evaluate([
+            'crosswalk_mode' => $occupation->crosswalk_mode,
+            'confidence_score' => data_get(
+                $snapshot->trustManifest?->quality,
+                'confidence_score',
+                data_get($snapshot->trustManifest?->quality, 'confidence', 0)
+            ),
+            'reviewer_status' => $snapshot->trustManifest?->reviewer_status,
+            'index_state' => $snapshot->indexState?->index_state,
+            'index_eligible' => $snapshot->indexState?->index_eligible,
+            'allow_strong_claim' => data_get($snapshot->snapshot_payload, 'claim_permissions.allow_strong_claim', false),
+        ]);
 
-        return collect($summary->occupations)
-            ->filter(static fn (mixed $row): bool => is_array($row) && is_string($row['canonical_slug'] ?? null))
-            ->keyBy(static fn (array $row): string => (string) $row['canonical_slug']);
+        return (bool) ($gate['publishable'] ?? false);
     }
 
     private function normalizeText(mixed $value): ?string
@@ -556,6 +700,11 @@ final class CareerAliasResolutionBundleBuilder
         $normalized = trim($value);
 
         return $normalized === '' ? null : $normalized;
+    }
+
+    private function likePrefixPattern(string $value): string
+    {
+        return str_replace(['!', '%', '_'], ['!!', '!%', '!_'], $value).'%';
     }
 
     private function normalizeLocale(?string $locale): ?string
