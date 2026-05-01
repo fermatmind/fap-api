@@ -325,6 +325,33 @@ final class ArticleTranslationOpsPageTest extends TestCase
         $this->assertTrue(AuditLog::query()->where('action', 'article_translation_draft_created')->exists());
     }
 
+    public function test_translation_workflow_blocks_out_of_scope_source_before_machine_translation(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $provider = new FakeArticleMachineTranslationProvider;
+        $this->app->instance(ArticleMachineTranslationProvider::class, $provider);
+
+        $source = $this->createSourceOnlyGroup('tenant-source-translation-fixture', 2);
+
+        try {
+            app(ArticleTranslationWorkflowService::class)->createMachineDraft($source, 'en', (int) $admin->id);
+            $this->fail('Expected source scope guard to block the machine translation draft.');
+        } catch (ArticleTranslationWorkflowException $exception) {
+            $this->assertContains('source article org mismatch', $exception->blockers);
+        }
+
+        $this->assertSame(0, $provider->calls);
+        $this->assertSame(0, Article::query()
+            ->withoutGlobalScopes()
+            ->where('translation_group_id', (string) $source->translation_group_id)
+            ->where('locale', 'en')
+            ->count());
+    }
+
     public function test_translation_ops_page_create_draft_action_uses_workflow_service(): void
     {
         $admin = $this->createAdminWithPermissions([
@@ -397,6 +424,55 @@ final class ArticleTranslationOpsPageTest extends TestCase
         $this->assertTrue(AuditLog::query()->where('action', 'article_translation_resynced')->exists());
     }
 
+    public function test_translation_workflow_blocks_cross_org_resync_before_machine_translation(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_WRITE,
+        ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $provider = new FakeArticleMachineTranslationProvider('cross-org-resync');
+        $this->app->instance(ArticleMachineTranslationProvider::class, $provider);
+
+        $tenantSource = $this->createSourceOnlyGroup('cross-org-resync-fixture', 2);
+        $target = Article::query()->create([
+            'org_id' => 0,
+            'slug' => (string) $tenantSource->slug,
+            'locale' => 'en',
+            'translation_group_id' => (string) $tenantSource->translation_group_id,
+            'source_locale' => 'zh-CN',
+            'translation_status' => Article::TRANSLATION_STATUS_STALE,
+            'translated_from_article_id' => (int) $tenantSource->id,
+            'source_article_id' => (int) $tenantSource->id,
+            'translated_from_version_hash' => 'old-source-hash',
+            'title' => 'English cross-org resync fixture',
+            'excerpt' => 'English excerpt',
+            'content_md' => 'English body',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => false,
+        ]);
+        $revision = $this->createRevision($target, [
+            'source_article_id' => (int) $tenantSource->id,
+            'revision_status' => ArticleTranslationRevision::STATUS_STALE,
+            'translated_from_version_hash' => 'old-source-hash',
+        ]);
+        $target->forceFill([
+            'working_revision_id' => (int) $revision->id,
+        ])->saveQuietly();
+
+        try {
+            app(ArticleTranslationWorkflowService::class)->resyncFromSource($target->fresh(['workingRevision']), (int) $admin->id);
+            $this->fail('Expected target scope guard to block cross-org resync.');
+        } catch (ArticleTranslationWorkflowException $exception) {
+            $this->assertContains('source article org mismatch', $exception->blockers);
+            $this->assertContains('source/target org mismatch', $exception->blockers);
+        }
+
+        $this->assertSame(0, $provider->calls);
+        $this->assertSame((int) $revision->id, (int) $target->fresh()->working_revision_id);
+    }
+
     public function test_translation_publish_guardrails_block_missing_reference_markers(): void
     {
         $admin = $this->createAdminWithPermissions([PermissionNames::ADMIN_CONTENT_READ]);
@@ -448,6 +524,64 @@ final class ArticleTranslationOpsPageTest extends TestCase
         $this->expectException(ArticleTranslationWorkflowException::class);
 
         app(ArticleTranslationWorkflowService::class)->approveTranslation($translation);
+    }
+
+    public function test_translation_publish_preflight_blocks_cross_org_source_target_scope(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+
+        $tenantSource = $this->createSourceOnlyGroup('cross-org-publish-fixture', 2);
+        $sourceHash = (string) $tenantSource->source_version_hash;
+        $translation = Article::query()->create([
+            'org_id' => 0,
+            'slug' => (string) $tenantSource->slug,
+            'locale' => 'en',
+            'translation_group_id' => (string) $tenantSource->translation_group_id,
+            'source_locale' => 'zh-CN',
+            'translation_status' => Article::TRANSLATION_STATUS_APPROVED,
+            'translated_from_article_id' => (int) $tenantSource->id,
+            'source_article_id' => (int) $tenantSource->id,
+            'translated_from_version_hash' => $sourceHash,
+            'title' => 'English cross-org publish fixture',
+            'excerpt' => 'English excerpt',
+            'content_md' => 'English body',
+            'status' => 'draft',
+            'is_public' => false,
+            'is_indexable' => false,
+        ]);
+        $revision = $this->createRevision($translation, [
+            'source_article_id' => (int) $tenantSource->id,
+            'revision_status' => ArticleTranslationRevision::STATUS_APPROVED,
+            'source_version_hash' => $sourceHash,
+            'translated_from_version_hash' => $sourceHash,
+        ]);
+        $translation->forceFill([
+            'working_revision_id' => (int) $revision->id,
+        ])->saveQuietly();
+
+        $preflight = app(ArticleTranslationWorkflowService::class)->preflight(
+            $translation->fresh(['workingRevision', 'sourceCanonical.workingRevision'])
+        );
+
+        $this->assertFalse($preflight['ok']);
+        $this->assertContains('source article org mismatch', $preflight['blockers']);
+        $this->assertContains('source/target org mismatch', $preflight['blockers']);
+
+        try {
+            app(ArticleTranslationWorkflowService::class)->publishTranslation($translation);
+            $this->fail('Expected publish preflight to block cross-org source scope.');
+        } catch (ArticleTranslationWorkflowException $exception) {
+            $this->assertSame('Translation publish preflight failed.', $exception->getMessage());
+        }
+
+        $translation = $translation->fresh();
+        $this->assertSame('draft', (string) $translation->status);
+        $this->assertFalse((bool) $translation->is_public);
+        $this->assertNull($translation->published_revision_id);
     }
 
     public function test_translation_workflow_promotes_approves_and_publishes_with_guardrails(): void
@@ -580,10 +714,10 @@ final class ArticleTranslationOpsPageTest extends TestCase
         ];
     }
 
-    private function createSourceOnlyGroup(string $slug): Article
+    private function createSourceOnlyGroup(string $slug, int $orgId = 0): Article
     {
         $source = Article::query()->create([
-            'org_id' => 0,
+            'org_id' => $orgId,
             'slug' => $slug,
             'locale' => 'zh-CN',
             'translation_group_id' => 'article-'.$slug,
@@ -611,7 +745,7 @@ final class ArticleTranslationOpsPageTest extends TestCase
         ])->saveQuietly();
 
         ArticleSeoMeta::query()->create([
-            'org_id' => 0,
+            'org_id' => $orgId,
             'article_id' => (int) $source->id,
             'locale' => 'zh-CN',
             'seo_title' => '中文 SEO '.$slug,
@@ -699,6 +833,8 @@ final class ArticleTranslationOpsPageTest extends TestCase
 
 final class FakeArticleMachineTranslationProvider implements ArticleMachineTranslationProvider
 {
+    public int $calls = 0;
+
     public function __construct(private readonly string $suffix = 'translated') {}
 
     public function isConfigured(): bool
@@ -716,6 +852,8 @@ final class FakeArticleMachineTranslationProvider implements ArticleMachineTrans
      */
     public function translate(Article $source, string $targetLocale): array
     {
+        $this->calls++;
+
         return [
             'title' => 'English '.$this->suffix.' '.$source->slug,
             'excerpt' => 'English excerpt for '.$source->slug,
