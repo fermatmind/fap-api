@@ -124,12 +124,24 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('content.chapters.growth.what_energizes.schema_version', 'insight_list_v1')
             ->assertJsonPath('content.chapters.growth.what_energizes.title', 'what energizes infj-a')
             ->assertJsonPath('content.chapters.growth.what_energizes.intro', 'what energizes intro infj-a')
+            ->assertJsonPath('content.chapters.growth.what_energizes.is_locked', true)
+            ->assertJsonPath('content.chapters.growth.what_energizes.items.0.is_locked', true)
+            ->assertJsonPath('content.chapters.growth.what_energizes.items.0.description', 'what energizes description 1 infj-a')
+            ->assertJsonMissingPath('content.chapters.growth.what_energizes.items.0.body')
+            ->assertJsonMissingPath('content.chapters.growth.what_energizes.items.0.why_it_matters')
+            ->assertJsonMissingPath('content.chapters.growth.what_energizes.items.0.signals')
+            ->assertJsonMissingPath('content.chapters.growth.what_energizes.items.0.actions')
             ->assertJsonPath('content.chapters.growth.what_drains.items.0.description', 'what drains description 1 infj-a')
-            ->assertJsonPath('content.chapters.growth.what_drains.items.0.body', 'what drains body 1 infj-a')
+            ->assertJsonMissingPath('content.chapters.growth.what_drains.items.0.body')
             ->assertJsonPath('content.chapters.relationships.superpowers.title', 'superpowers infj-a')
-            ->assertJsonPath('content.chapters.relationships.superpowers.items.0.why_it_matters', 'superpowers why it matters 1 infj-a')
+            ->assertJsonPath('content.chapters.relationships.superpowers.items.0.is_locked', true)
+            ->assertJsonMissingPath('content.chapters.relationships.superpowers.items.0.why_it_matters')
             ->assertJsonPath('content.chapters.relationships.pitfalls.items.0.description', 'pitfalls description 1 infj-a')
-            ->assertJsonPath('content.chapters.relationships.pitfalls.items.0.actions.do', 'pitfalls do 1 infj-a')
+            ->assertJsonMissingPath('content.chapters.relationships.pitfalls.items.0.actions')
+            ->assertJsonPath('content.chapters.career.lockedBlocks.0.is_locked', true)
+            ->assertJsonPath('content.chapters.career.lockedBlocks.0.blurredItems.0.is_locked', true)
+            ->assertJsonMissingPath('content.chapters.career.lockedBlocks.0.blurredItems.0.title')
+            ->assertJsonMissingPath('content.chapters.career.lockedBlocks.0.blurredItems.0.body')
             ->assertJsonPath('content.chapters.career.traits_unlock.title', 'career traits unlock title infj-a')
             ->assertJsonPath('content.chapters.career.traits_unlock.items.0.label', 'career trait 1 infj-a')
             ->assertJsonPath('content.chapters.growth.traits_unlock.items.0.label', 'growth trait 1 infj-a')
@@ -179,7 +191,7 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             ->assertJsonPath('content.letters_intro.headline', 'letters headline entj-t')
             ->assertJsonPath('content.chapters.career.matched_jobs.job_examples.0', 'job example 1 entj-t')
             ->assertJsonPath('content.chapters.growth.what_energizes.items.0.description', 'what energizes description 1 entj-t')
-            ->assertJsonPath('content.chapters.growth.what_energizes.items.0.signals.0', 'what energizes signal 1 1 entj-t')
+            ->assertJsonMissingPath('content.chapters.growth.what_energizes.items.0.signals')
             ->assertJsonPath('content.chapters.career.traits_unlock.title', 'career traits unlock title entj-t')
             ->assertJsonPath('content.chapters.career.traits_unlock.items.0.label', 'career trait 1 entj-t')
             ->assertJsonPath('content.chapters.growth.traits_unlock.items.0.label', 'growth trait 1 entj-t')
@@ -226,22 +238,22 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
                 'chapters.career.work_styles',
                 $fullCode,
             );
-            $this->assertInsightListModuleShape(
+            $this->assertRedactedInsightListModuleShape(
                 $content,
                 'chapters.growth.what_energizes',
                 $fullCode,
             );
-            $this->assertInsightListModuleShape(
+            $this->assertRedactedInsightListModuleShape(
                 $content,
                 'chapters.growth.what_drains',
                 $fullCode,
             );
-            $this->assertInsightListModuleShape(
+            $this->assertRedactedInsightListModuleShape(
                 $content,
                 'chapters.relationships.superpowers',
                 $fullCode,
             );
-            $this->assertInsightListModuleShape(
+            $this->assertRedactedInsightListModuleShape(
                 $content,
                 'chapters.relationships.pitfalls',
                 $fullCode,
@@ -917,12 +929,13 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
     /**
      * @param  array<string, mixed>  $content
      */
-    private function assertInsightListModuleShape(array $content, string $modulePath, string $fullCode): void
+    private function assertRedactedInsightListModuleShape(array $content, string $modulePath, string $fullCode): void
     {
         $module = data_get($content, $modulePath);
         $this->assertIsArray($module, sprintf('%s missing module %s', $fullCode, $modulePath));
         $this->assertSame('insight_list_v1', data_get($module, 'schema_version'), sprintf('%s has invalid %s.schema_version', $fullCode, $modulePath));
         $this->assertNotSame('', trim((string) data_get($module, 'intro')), sprintf('%s has empty %s.intro', $fullCode, $modulePath));
+        $this->assertTrue((bool) data_get($module, 'is_locked'), sprintf('%s has unlocked %s', $fullCode, $modulePath));
 
         $items = (array) data_get($module, 'items');
         $this->assertGreaterThanOrEqual(4, count($items), sprintf('%s has insufficient %s.items', $fullCode, $modulePath));
@@ -932,11 +945,11 @@ final class PersonalityDesktopClonePublicApiTest extends TestCase
             $this->assertNotSame('', trim((string) data_get($item, 'id')), sprintf('%s has empty %s.items[%d].id', $fullCode, $modulePath, $index));
             $this->assertNotSame('', trim((string) data_get($item, 'title')), sprintf('%s has empty %s.items[%d].title', $fullCode, $modulePath, $index));
             $this->assertNotSame('', trim((string) data_get($item, 'description')), sprintf('%s has empty %s.items[%d].description', $fullCode, $modulePath, $index));
-            $this->assertNotSame('', trim((string) data_get($item, 'body')), sprintf('%s has empty %s.items[%d].body', $fullCode, $modulePath, $index));
-            $this->assertNotSame('', trim((string) data_get($item, 'why_it_matters')), sprintf('%s has empty %s.items[%d].why_it_matters', $fullCode, $modulePath, $index));
-            $this->assertGreaterThanOrEqual(2, count((array) data_get($item, 'signals')), sprintf('%s has insufficient %s.items[%d].signals', $fullCode, $modulePath, $index));
-            $this->assertNotSame('', trim((string) data_get($item, 'actions.do')), sprintf('%s has empty %s.items[%d].actions.do', $fullCode, $modulePath, $index));
-            $this->assertNotSame('', trim((string) data_get($item, 'actions.avoid')), sprintf('%s has empty %s.items[%d].actions.avoid', $fullCode, $modulePath, $index));
+            $this->assertTrue((bool) data_get($item, 'is_locked'), sprintf('%s has unlocked %s.items[%d]', $fullCode, $modulePath, $index));
+            $this->assertArrayNotHasKey('body', $item, sprintf('%s exposes %s.items[%d].body', $fullCode, $modulePath, $index));
+            $this->assertArrayNotHasKey('why_it_matters', $item, sprintf('%s exposes %s.items[%d].why_it_matters', $fullCode, $modulePath, $index));
+            $this->assertArrayNotHasKey('signals', $item, sprintf('%s exposes %s.items[%d].signals', $fullCode, $modulePath, $index));
+            $this->assertArrayNotHasKey('actions', $item, sprintf('%s exposes %s.items[%d].actions', $fullCode, $modulePath, $index));
             $this->assertNotEmpty((array) data_get($item, 'tags'), sprintf('%s has empty %s.items[%d].tags', $fullCode, $modulePath, $index));
         }
     }
