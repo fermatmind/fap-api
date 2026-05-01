@@ -1458,7 +1458,12 @@ class AttemptReadController extends Controller
     private function resolveAttemptForResultRead(Request $request, int $orgId, string $attemptId, string $scaleCode): ?Attempt
     {
         if ($this->isPublicResultScale($scaleCode)) {
-            return $this->reportSubjects->findAttemptForCurrentContext($attemptId, $this->reportActor($request));
+            $attempt = $this->reportSubjects->findAttemptForCurrentContext($attemptId, $this->reportActor($request));
+            if ($attempt instanceof Attempt) {
+                return $attempt;
+            }
+
+            throw new ApiProblemException(404, 'RESOURCE_NOT_FOUND', 'attempt not found.');
         }
 
         $attempt = $this->ownedAttemptQuery($request, $attemptId)->first();
