@@ -98,6 +98,7 @@ final class ArticlePublishService
         if (
             $revision->revision_status === ArticleTranslationRevision::STATUS_STALE
             || $revision->revision_status === ArticleTranslationRevision::STATUS_ARCHIVED
+            || ! $revision->isPublishableForArticle($article)
         ) {
             throw new InvalidArgumentException('working revision is not publishable.');
         }

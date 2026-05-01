@@ -116,6 +116,26 @@ class ArticleTranslationRevision extends Model
             && ! hash_equals((string) $sourceHash, (string) $this->translated_from_version_hash);
     }
 
+    public function isPublishableForArticle(?Article $article = null): bool
+    {
+        $status = (string) $this->revision_status;
+
+        if (in_array($status, [self::STATUS_APPROVED, self::STATUS_PUBLISHED], true)) {
+            return true;
+        }
+
+        if ($status !== self::STATUS_SOURCE) {
+            return false;
+        }
+
+        $article ??= $this->article;
+
+        return $article instanceof Article
+            && $article->isSourceArticle()
+            && (int) $this->article_id === (int) $article->id
+            && (int) $this->source_article_id === (int) $article->id;
+    }
+
     /**
      * @return array<int, string>
      */

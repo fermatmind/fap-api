@@ -664,6 +664,7 @@ class ArticleResource extends Resource
         if (
             $publishedRevision->revision_status === ArticleTranslationRevision::STATUS_STALE
             || $publishedRevision->revision_status === ArticleTranslationRevision::STATUS_ARCHIVED
+            || ! $publishedRevision->isPublishableForArticle($record)
         ) {
             throw new AuthorizationException('This article revision is not publishable.');
         }

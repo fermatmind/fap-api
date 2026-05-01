@@ -80,6 +80,7 @@ return new class extends Migration
                 ->where('article_id', (int) $article->id)
                 ->where('org_id', (int) ($article->org_id ?? 0))
                 ->where('locale', (string) ($article->locale ?? ''))
+                ->where($this->publishableRevisionConstraint())
                 ->orderByRaw('case when id = ? then 0 else 1 end', [(int) ($article->published_revision_id ?? 0)])
                 ->first();
 
@@ -92,7 +93,24 @@ return new class extends Migration
             ->where('article_id', (int) $article->id)
             ->where('org_id', (int) ($article->org_id ?? 0))
             ->where('locale', (string) ($article->locale ?? ''))
+            ->where($this->publishableRevisionConstraint())
             ->orderBy('revision_number')
             ->first();
+    }
+
+    private function publishableRevisionConstraint(): \Closure
+    {
+        return static function ($query): void {
+            $query
+                ->whereIn('revision_status', [
+                    ArticleTranslationRevision::STATUS_APPROVED,
+                    ArticleTranslationRevision::STATUS_PUBLISHED,
+                ])
+                ->orWhere(static function ($sourceQuery): void {
+                    $sourceQuery
+                        ->where('revision_status', ArticleTranslationRevision::STATUS_SOURCE)
+                        ->whereColumn('article_id', 'source_article_id');
+                });
+        };
     }
 };
