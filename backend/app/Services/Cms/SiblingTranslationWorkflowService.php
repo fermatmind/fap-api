@@ -65,6 +65,7 @@ final class SiblingTranslationWorkflowService
                 'source row is not canonical source',
             ]);
         }
+        $this->assertSourceApprovedForMachineTranslation($adapter, $source);
 
         return DB::transaction(function () use ($adapter, $provider, $contentType, $source, $targetLocale): Model {
             $modelClass = $adapter->modelClass();
@@ -125,6 +126,7 @@ final class SiblingTranslationWorkflowService
                     'source linkage invalid',
                 ]);
             }
+            $this->assertSourceApprovedForMachineTranslation($adapter, $source);
 
             $payload = $provider->translate($contentType, $source, $adapter->normalizedSourcePayload($source), (string) $target->locale);
             $currentWorking = $this->workspace->workingRevision($contentType, $target);
@@ -202,6 +204,13 @@ final class SiblingTranslationWorkflowService
             throw new CmsTranslationWorkflowException('Translation publish preflight failed.', $preflight['blockers']);
         }
 
+        $working = $this->workspace->workingRevision($contentType, $target);
+        if ($working->revision_status !== CmsTranslationRevision::STATUS_APPROVED) {
+            throw new CmsTranslationWorkflowException('Only approved translation revisions can be published.', [
+                'working revision is not approved',
+            ]);
+        }
+
         $target = $this->workspace->publishWorkingRevision($contentType, $target);
 
         ContentReleaseAudit::log($contentType, $target->fresh(), 'translation_ops_console');
@@ -259,6 +268,7 @@ final class SiblingTranslationWorkflowService
         if (! $source instanceof Model || ! $adapter->isSource($source)) {
             $blockers[] = 'source linkage invalid';
         } else {
+            $blockers = array_merge($blockers, $this->sourceDisclosureBlockers($adapter, $source));
             if ((int) $target->source_content_id !== (int) $source->id) {
                 $blockers[] = 'source_content_id mismatch';
             }
@@ -330,6 +340,40 @@ final class SiblingTranslationWorkflowService
                 'machine translation provider unavailable',
             ]);
         }
+    }
+
+    private function assertSourceApprovedForMachineTranslation(SiblingTranslationAdapter $adapter, Model $source): void
+    {
+        $blockers = $this->sourceDisclosureBlockers($adapter, $source);
+        if ($blockers !== []) {
+            throw new CmsTranslationWorkflowException('Source row is outside machine translation disclosure scope.', $blockers);
+        }
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function sourceDisclosureBlockers(SiblingTranslationAdapter $adapter, Model $source): array
+    {
+        $blockers = [];
+
+        if ((int) data_get($source, 'org_id') !== self::PUBLIC_EDITORIAL_ORG_ID) {
+            $blockers[] = 'source row org mismatch';
+        }
+        if ((string) data_get($source, 'status') !== 'published') {
+            $blockers[] = 'source row not published';
+        }
+        if ((string) data_get($source, 'review_state') !== 'approved') {
+            $blockers[] = 'source row not approved';
+        }
+        if ($source->getAttribute('is_public') !== null && ! (bool) data_get($source, 'is_public')) {
+            $blockers[] = 'source row not public';
+        }
+        if (! $adapter->isPublished($source)) {
+            $blockers[] = 'source row adapter publication check failed';
+        }
+
+        return array_values(array_unique($blockers));
     }
 
     /**
