@@ -9,6 +9,7 @@ use App\Services\Auth\FmTokenService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -42,6 +43,56 @@ final class AuthTokensSingleSourceTest extends TestCase
         $response = (new FmTokenAuth)->handle($request, static fn () => response()->json(['ok' => true]));
 
         $this->assertSame(401, $response->getStatusCode());
+    }
+
+    public function test_fm_token_service_rejects_legacy_plaintext_fallback_when_auth_tokens_lookup_is_unavailable_outside_testing(): void
+    {
+        $this->app->detectEnvironment(static fn (): string => 'production');
+
+        $token = 'fm_'.(string) Str::uuid();
+        $tokenHash = hash('sha256', $token);
+
+        DB::table('fm_tokens')->insert([
+            'token' => $token,
+            'token_hash' => $tokenHash,
+            'anon_id' => 'anon-prod-legacy-read',
+            'user_id' => null,
+            'org_id' => 0,
+            'role' => 'public',
+            'expires_at' => now()->addHour(),
+            'revoked_at' => null,
+            'meta_json' => null,
+            'last_used_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        Schema::dropIfExists('auth_tokens');
+
+        $validated = app(FmTokenService::class)->validateToken($token);
+
+        $this->assertFalse((bool) ($validated['ok'] ?? false));
+    }
+
+    public function test_fm_token_service_does_not_write_legacy_plaintext_token_when_auth_tokens_storage_is_unavailable_outside_testing(): void
+    {
+        $this->app->detectEnvironment(static fn (): string => 'production');
+
+        Schema::dropIfExists('auth_tokens');
+
+        try {
+            app(FmTokenService::class)->issueForUser('9103', [
+                'anon_id' => 'anon-9103',
+                'org_id' => 2,
+                'role' => 'member',
+            ]);
+
+            $this->fail('Expected production token issuing to fail closed when auth_tokens storage is unavailable.');
+        } catch (\RuntimeException $exception) {
+            $this->assertSame('token storage unavailable', $exception->getMessage());
+        }
+
+        $this->assertSame(0, DB::table('fm_tokens')->count());
     }
 
     public function test_fm_token_service_writes_auth_tokens_only(): void

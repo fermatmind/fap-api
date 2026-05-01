@@ -152,8 +152,6 @@ class FmTokenService
 
     private function findTokenRow(string $token, string $tokenHash): ?object
     {
-        $authLookupUnavailable = false;
-
         try {
             $authRow = DB::table('auth_tokens')
                 ->where('token_hash', $tokenHash)
@@ -162,14 +160,13 @@ class FmTokenService
                 return $authRow;
             }
         } catch (\Throwable $e) {
-            $authLookupUnavailable = true;
             Log::warning('[SEC] auth_tokens_lookup_failed', [
                 'source' => 'fm_token_service.validate_token',
                 'exception' => $e::class,
             ]);
         }
 
-        if (! app()->environment(['testing', 'ci']) && ! $authLookupUnavailable) {
+        if (! $this->shouldAllowLegacyTestingTokenFallback()) {
             return null;
         }
 
@@ -234,6 +231,10 @@ class FmTokenService
             ]);
         }
 
+        if (! $this->shouldAllowLegacyTestingTokenFallback()) {
+            throw new \RuntimeException('token storage unavailable');
+        }
+
         $legacyWriteException = null;
         foreach ($this->legacyTokenWritePayloadVariants(
             token: $token,
@@ -263,6 +264,11 @@ class FmTokenService
         }
 
         throw new \RuntimeException('token storage unavailable');
+    }
+
+    private function shouldAllowLegacyTestingTokenFallback(): bool
+    {
+        return app()->environment(['testing', 'ci']);
     }
 
     /**
