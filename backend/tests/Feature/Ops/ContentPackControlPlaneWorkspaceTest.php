@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Ops;
 
+use App\Filament\Ops\Support\ContentAccess;
 use App\Models\AdminUser;
 use App\Models\ContentPackVersion;
 use App\Models\Organization;
@@ -39,7 +40,8 @@ final class ContentPackControlPlaneWorkspaceTest extends TestCase
     {
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_READ,
-            PermissionNames::ADMIN_CONTENT_PUBLISH,
+            PermissionNames::ADMIN_CONTENT_WRITE,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
         ]);
         $selectedOrg = $this->createSelectedOrg();
 
@@ -77,6 +79,67 @@ final class ContentPackControlPlaneWorkspaceTest extends TestCase
             ->assertSee('runtime_binding=runtime_bindable');
     }
 
+    public function test_content_publish_permission_does_not_open_content_pack_release_controls(): void
+    {
+        $publisher = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_PUBLISH,
+        ]);
+        $selectedOrg = $this->createSelectedOrg();
+
+        $publisherSession = [
+            'ops_org_id' => $selectedOrg->id,
+            'ops_admin_totp_verified_user_id' => (int) $publisher->id,
+        ];
+
+        $this->withSession($publisherSession)
+            ->actingAs($publisher, (string) config('admin.guard', 'admin'));
+
+        $this->assertTrue(ContentAccess::canRelease());
+        $this->assertFalse(ContentAccess::canReleaseContentPacks());
+
+        $this->withSession($publisherSession)
+            ->actingAs($publisher, (string) config('admin.guard', 'admin'))
+            ->get('/ops/content-pack-versions')
+            ->assertOk()
+            ->assertDontSee('Open Release Queue');
+
+        $this->withSession($publisherSession)
+            ->actingAs($publisher, (string) config('admin.guard', 'admin'))
+            ->get('/ops/content-pack-releases')
+            ->assertForbidden();
+    }
+
+    public function test_content_pack_release_permission_opens_content_pack_release_controls(): void
+    {
+        $releaseAdmin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_CONTENT_WRITE,
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+        $selectedOrg = $this->createSelectedOrg();
+        $releaseSession = [
+            'ops_org_id' => $selectedOrg->id,
+            'ops_admin_totp_verified_user_id' => (int) $releaseAdmin->id,
+        ];
+
+        $this->withSession($releaseSession)
+            ->actingAs($releaseAdmin, (string) config('admin.guard', 'admin'));
+
+        $this->assertTrue(ContentAccess::canReleaseContentPacks());
+
+        $this->withSession($releaseSession)
+            ->actingAs($releaseAdmin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/content-pack-versions')
+            ->assertOk()
+            ->assertSee('Open Release Queue');
+
+        $this->withSession($releaseSession)
+            ->actingAs($releaseAdmin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/content-pack-releases')
+            ->assertOk();
+    }
+
     private function createSelectedOrg(): Organization
     {
         return Organization::query()->create([
@@ -107,10 +170,7 @@ final class ContentPackControlPlaneWorkspaceTest extends TestCase
         ]);
 
         foreach ($permissions as $permissionName) {
-            $permission = Permission::query()->firstOrCreate([
-                'name' => $permissionName,
-                'guard_name' => (string) config('admin.guard', 'admin'),
-            ]);
+            $permission = Permission::query()->firstOrCreate(['name' => $permissionName]);
 
             $role->permissions()->syncWithoutDetaching([$permission->id]);
         }
