@@ -485,8 +485,18 @@ class AttemptStartService
                 }
             }
 
-            // Big Five retake cooldown/limit is intentionally disabled:
-            // users can restart BIG5 attempts without 24h or 30-day gating.
+            if (strtoupper($scaleCode) === 'BIG5_OCEAN') {
+                $retakePolicy = $this->resolveBigFiveRetakePolicy($dirVersion);
+                $this->attemptRateLimitService->assertRetakeAllowed(
+                    $orgId,
+                    $scaleCode,
+                    $actorUserId !== null ? (string) $actorUserId : null,
+                    $anonId,
+                    (int) ($retakePolicy['cooldown_hours'] ?? 24),
+                    (int) ($retakePolicy['max_attempts_per_30_days'] ?? 3),
+                    $resolvedFormCode
+                );
+            }
 
             return DB::connection($writeConnectionName)->transaction(function () use ($attemptPayload, $writeConnectionName): array {
                 $attempt = new Attempt;
