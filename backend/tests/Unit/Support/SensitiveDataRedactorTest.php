@@ -128,6 +128,29 @@ final class SensitiveDataRedactorTest extends TestCase
         $this->assertSame('[REDACTED]', $result['phone']);
     }
 
+    public function test_invite_capability_and_identity_keys_are_redacted(): void
+    {
+        $redactor = new SensitiveDataRedactor;
+
+        $data = [
+            'invite_code' => 'invite-code-raw',
+            'invite_token' => 'invite-token-raw',
+            'invite_unlock_code' => 'unlock-code-raw',
+            'invitee_identity_key' => 'anon:invitee-raw',
+            'target_attempt_id' => 'attempt-public-contract',
+            'anon_id' => 'anon-public-contract',
+        ];
+
+        $result = $redactor->redact($data);
+
+        $this->assertSame('[REDACTED]', $result['invite_code']);
+        $this->assertSame('[REDACTED]', $result['invite_token']);
+        $this->assertSame('[REDACTED]', $result['invite_unlock_code']);
+        $this->assertSame('[REDACTED]', $result['invitee_identity_key']);
+        $this->assertSame('attempt-public-contract', $result['target_attempt_id']);
+        $this->assertSame('anon-public-contract', $result['anon_id']);
+    }
+
     public function test_error_message_and_err_keys_are_redacted(): void
     {
         $redactor = new SensitiveDataRedactor;
