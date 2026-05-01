@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace Tests\Feature\V0_3;
 
 use App\Support\PiiCipher;
+use App\Support\SchemaBaseline;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB as DBFacade;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use ReflectionClass;
 use Tests\TestCase;
 
 final class ClaimReportEmailRequestTest extends TestCase
@@ -126,6 +129,70 @@ final class ClaimReportEmailRequestTest extends TestCase
         $this->assertArrayNotHasKey('claim_url', $payloadEnc);
     }
 
+    public function test_claim_report_post_denies_legacy_historical_outbox_row_for_wrong_recipient(): void
+    {
+        $attemptId = $this->createAttempt('claim_owner');
+        $orderNo = 'ord_claim_'.Str::lower(Str::random(8));
+        $this->insertOrder($orderNo, $attemptId, 'purchase@example.com');
+        $this->insertHistoricalOutboxRecipient($orderNo, $attemptId, 'owner@example.com');
+
+        $this->withLegacyOutboxRecipientHashColumnsUnavailable(function () use ($orderNo, $attemptId): void {
+            $response = $this->postJson('/api/v0.3/claim/report', [
+                'order_no' => $orderNo,
+                'email' => 'attacker@example.com',
+                'surface' => 'lookup',
+                'entrypoint' => 'order_lookup',
+            ]);
+
+            $response->assertOk()
+                ->assertJson([
+                    'ok' => true,
+                    'queued' => true,
+                ]);
+
+            $this->assertSame(
+                0,
+                DB::table('email_outbox')
+                    ->where('attempt_id', $attemptId)
+                    ->where('template', 'report_claim')
+                    ->where('status', 'pending')
+                    ->count()
+            );
+        });
+    }
+
+    public function test_claim_report_post_allows_matching_legacy_historical_outbox_recipient(): void
+    {
+        $attemptId = $this->createAttempt('claim_owner');
+        $orderNo = 'ord_claim_'.Str::lower(Str::random(8));
+        $this->insertOrder($orderNo, $attemptId, 'purchase@example.com');
+        $this->insertHistoricalOutboxRecipient($orderNo, $attemptId, 'owner@example.com');
+
+        $this->withLegacyOutboxRecipientHashColumnsUnavailable(function () use ($orderNo, $attemptId): void {
+            $response = $this->postJson('/api/v0.3/claim/report', [
+                'order_no' => $orderNo,
+                'email' => 'owner@example.com',
+                'surface' => 'lookup',
+                'entrypoint' => 'order_lookup',
+            ]);
+
+            $response->assertOk()
+                ->assertJson([
+                    'ok' => true,
+                    'queued' => true,
+                ]);
+
+            $this->assertSame(
+                1,
+                DB::table('email_outbox')
+                    ->where('attempt_id', $attemptId)
+                    ->where('template', 'report_claim')
+                    ->where('status', 'pending')
+                    ->count()
+            );
+        });
+    }
+
     private function createAttempt(string $anonId): string
     {
         $attemptId = (string) Str::uuid();
@@ -225,5 +292,99 @@ final class ClaimReportEmailRequestTest extends TestCase
         }
 
         DB::table('orders')->insert($row);
+    }
+
+    private function insertHistoricalOutboxRecipient(string $orderNo, string $attemptId, string $email): void
+    {
+        /** @var PiiCipher $pii */
+        $pii = app(PiiCipher::class);
+        $payload = [
+            'attempt_id' => $attemptId,
+            'order_no' => $orderNo,
+            'to_email' => $email,
+        ];
+
+        $row = [
+            'id' => (string) Str::uuid(),
+            'user_id' => 'legacy_user',
+            'email' => $pii->legacyEmailPlaceholder($pii->emailHash($email)),
+            'attempt_id' => $attemptId,
+            'template' => 'payment_success',
+            'payload_json' => json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'claim_token_hash' => hash('sha256', 'legacy-'.$attemptId),
+            'claim_expires_at' => null,
+            'status' => 'sent',
+            'sent_at' => now(),
+            'consumed_at' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
+
+        if (Schema::hasColumn('email_outbox', 'email_hash')) {
+            $row['email_hash'] = $pii->emailHash($email);
+        }
+        if (Schema::hasColumn('email_outbox', 'to_email_hash')) {
+            $row['to_email_hash'] = $pii->emailHash($email);
+        }
+        if (Schema::hasColumn('email_outbox', 'email_enc')) {
+            $row['email_enc'] = $pii->encrypt($email);
+        }
+        if (Schema::hasColumn('email_outbox', 'to_email_enc')) {
+            $row['to_email_enc'] = $pii->encrypt($email);
+        }
+        if (Schema::hasColumn('email_outbox', 'payload_enc')) {
+            $row['payload_enc'] = $pii->encrypt((string) $row['payload_json']);
+        }
+        if (Schema::hasColumn('email_outbox', 'payload_schema_version')) {
+            $row['payload_schema_version'] = 'v1';
+        }
+        if (Schema::hasColumn('email_outbox', 'key_version')) {
+            $row['key_version'] = $pii->currentKeyVersion();
+        }
+        if (Schema::hasColumn('email_outbox', 'template_key')) {
+            $row['template_key'] = 'payment_success';
+        }
+        if (Schema::hasColumn('email_outbox', 'to_email')) {
+            $row['to_email'] = $row['email'];
+        }
+        if (Schema::hasColumn('email_outbox', 'subject')) {
+            $row['subject'] = 'Payment successful and report delivered';
+        }
+
+        DB::table('email_outbox')->insert($row);
+    }
+
+    /**
+     * @param  callable():void  $callback
+     */
+    private function withLegacyOutboxRecipientHashColumnsUnavailable(callable $callback): void
+    {
+        SchemaBaseline::clearCache();
+
+        $class = new ReflectionClass(SchemaBaseline::class);
+        $property = $class->getProperty('columnMetaCache');
+        $property->setAccessible(true);
+        $connection = strtolower(trim((string) DBFacade::connection()->getName()));
+        $prefix = ($connection !== '' ? $connection : 'default').':email_outbox.';
+
+        $property->setValue(null, array_replace(
+            (array) $property->getValue(),
+            [
+                $prefix.'email_hash' => [
+                    'reason' => 'column_missing',
+                    'exception_class' => null,
+                ],
+                $prefix.'to_email_hash' => [
+                    'reason' => 'column_missing',
+                    'exception_class' => null,
+                ],
+            ]
+        ));
+
+        try {
+            $callback();
+        } finally {
+            SchemaBaseline::clearCache();
+        }
     }
 }
