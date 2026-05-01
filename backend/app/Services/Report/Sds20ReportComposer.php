@@ -45,6 +45,9 @@ final class Sds20ReportComposer
         $scores = is_array($score['scores'] ?? null) ? $score['scores'] : [];
         $reportTags = is_array($score['report_tags'] ?? null) ? $score['report_tags'] : [];
         $crisisAlert = (bool) ($quality['crisis_alert'] ?? false);
+        $modulesAllowed = ReportAccess::normalizeModules(
+            is_array($ctx['modules_allowed'] ?? null) ? $ctx['modules_allowed'] : []
+        );
 
         $sectionsConfig = is_array($layout['sections'] ?? null) ? $layout['sections'] : $this->defaultSections();
         $sections = [];
@@ -59,21 +62,29 @@ final class Sds20ReportComposer
                 continue;
             }
 
+            $accessLevel = strtolower(trim((string) ($sectionConfig['access_level'] ?? 'free')));
+            $moduleCode = strtolower(trim((string) ($sectionConfig['module_code'] ?? ReportAccess::MODULE_SDS_CORE)));
+            if ($moduleCode === '') {
+                $moduleCode = ReportAccess::MODULE_SDS_CORE;
+            }
+            $paidModuleAllowed = $accessLevel === 'paid'
+                && in_array($variant, [ReportAccess::VARIANT_PARTIAL, ReportAccess::VARIANT_FULL], true)
+                && ! $crisisAlert
+                && in_array($moduleCode, $modulesAllowed, true);
+
             $requiredInVariant = array_values(array_filter(
                 array_map(static fn ($v): string => strtolower(trim((string) $v)), (array) ($sectionConfig['required_in_variant'] ?? ['free', 'full'])),
                 static fn (string $v): bool => $v !== ''
             ));
-            if ($requiredInVariant !== [] && ! in_array($variant, $requiredInVariant, true)) {
+            if ($requiredInVariant !== [] && ! in_array($variant, $requiredInVariant, true) && ! $paidModuleAllowed) {
                 continue;
             }
 
-            $accessLevel = strtolower(trim((string) ($sectionConfig['access_level'] ?? 'free')));
-            if ($accessLevel === 'paid' && ($variant !== ReportAccess::VARIANT_FULL || $crisisAlert)) {
+            if ($accessLevel === 'paid' && ! $paidModuleAllowed) {
                 continue;
             }
 
             $source = strtolower(trim((string) ($sectionConfig['source'] ?? 'blocks')));
-            $moduleCode = trim((string) ($sectionConfig['module_code'] ?? ReportAccess::MODULE_SDS_CORE));
 
             if ($source === 'copy') {
                 $copySection = $this->composeCopySection($key, $locale, $landing, $accessLevel, $moduleCode, $crisisAlert);

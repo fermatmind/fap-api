@@ -110,6 +110,16 @@ final class EnneagramReportComposer
     public function composeVariant(Attempt $attempt, Result $result, string $variant, array $ctx = []): array
     {
         $variant = ReportAccess::normalizeVariant($variant);
+        if (array_key_exists('modules_allowed', $ctx)) {
+            $modulesAllowed = ReportAccess::normalizeModules(
+                is_array($ctx['modules_allowed'] ?? null) ? $ctx['modules_allowed'] : []
+            );
+            if ($variant !== ReportAccess::VARIANT_FREE
+                && ! in_array(ReportAccess::MODULE_ENNEAGRAM_FULL, $modulesAllowed, true)
+            ) {
+                $variant = ReportAccess::VARIANT_FREE;
+            }
+        }
         $locked = $variant === ReportAccess::VARIANT_FREE;
         $locale = trim((string) ($attempt->locale ?? $ctx['locale'] ?? config('content_packs.default_locale', 'zh-CN')));
         if ($locale === '') {

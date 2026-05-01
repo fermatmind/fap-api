@@ -78,6 +78,59 @@ final class ReportGatekeeperDecompositionContractTest extends TestCase
         $this->assertNotSame([], (array) ($gate['offers'] ?? []));
     }
 
+    public function test_partial_sds_modules_only_render_allowed_paid_sections(): void
+    {
+        (new ScaleRegistrySeeder)->run();
+        $this->configureSdsCommercialOffers();
+
+        /** @var EntitlementManager $entitlements */
+        $entitlements = app(EntitlementManager::class);
+        /** @var ReportGatekeeper $gatekeeper */
+        $gatekeeper = app(ReportGatekeeper::class);
+
+        $deniedAnonId = 'anon_decomp_partial_denied';
+        $deniedAttemptId = $this->createSdsAttemptWithResult($deniedAnonId, false);
+        $entitlements->grantAttemptUnlock(
+            0,
+            null,
+            $deniedAnonId,
+            'SDS_20_ACTION_PLAN_ONLY',
+            $deniedAttemptId,
+            null,
+            'attempt',
+            null,
+            [ReportAccess::MODULE_SDS_ACTION_PLAN]
+        );
+
+        $deniedGate = $gatekeeper->resolve(0, $deniedAttemptId, null, $deniedAnonId, 'public');
+
+        $this->assertTrue((bool) ($deniedGate['ok'] ?? false));
+        $this->assertFalse((bool) ($deniedGate['locked'] ?? true));
+        $this->assertSame('partial', (string) ($deniedGate['variant'] ?? ''));
+        $this->assertNotContains('paid_deep_dive', $this->sectionKeys((array) data_get($deniedGate, 'report.sections', [])));
+
+        $allowedAnonId = 'anon_decomp_partial_allowed';
+        $allowedAttemptId = $this->createSdsAttemptWithResult($allowedAnonId, false);
+        $entitlements->grantAttemptUnlock(
+            0,
+            null,
+            $allowedAnonId,
+            'SDS_20_DEEP_DIVE_ONLY',
+            $allowedAttemptId,
+            null,
+            'attempt',
+            null,
+            [ReportAccess::MODULE_SDS_FULL]
+        );
+
+        $allowedGate = $gatekeeper->resolve(0, $allowedAttemptId, null, $allowedAnonId, 'public');
+
+        $this->assertTrue((bool) ($allowedGate['ok'] ?? false));
+        $this->assertFalse((bool) ($allowedGate['locked'] ?? true));
+        $this->assertSame('partial', (string) ($allowedGate['variant'] ?? ''));
+        $this->assertContains('paid_deep_dive', $this->sectionKeys((array) data_get($allowedGate, 'report.sections', [])));
+    }
+
     public function test_crisis_state_contract_is_preserved(): void
     {
         (new ScaleRegistrySeeder)->run();
@@ -183,5 +236,17 @@ final class ReportGatekeeperDecompositionContractTest extends TestCase
         ]);
 
         return $attemptId;
+    }
+
+    /**
+     * @param  list<mixed>  $sections
+     * @return list<string>
+     */
+    private function sectionKeys(array $sections): array
+    {
+        return array_values(array_filter(array_map(
+            static fn (mixed $section): string => is_array($section) ? (string) ($section['key'] ?? '') : '',
+            $sections
+        )));
     }
 }
