@@ -116,14 +116,18 @@ final class AttemptSubmitSideEffects
             }
         }
 
+        $creditConsumed = false;
+
         if ($consumeB2BCredit) {
             $consume = $this->benefitWallets->consume($orgId, self::B2B_CREDIT_BENEFIT_CODE, $attemptId);
             $this->ensureCreditConsumed($consume, $orgId, $attemptId, self::B2B_CREDIT_BENEFIT_CODE, 'SUBMIT_POST_COMMIT_B2B_CREDIT_CONSUME_FAILED');
+            $creditConsumed = true;
         }
 
         if ($orgId > 0 && $creditBenefitCode !== '' && ! $consumeB2BCredit) {
             $consume = $this->benefitWallets->consume($orgId, $creditBenefitCode, $attemptId);
             $this->ensureCreditConsumed($consume, $orgId, $attemptId, $creditBenefitCode, 'SUBMIT_POST_COMMIT_CREDIT_CONSUME_FAILED');
+            $creditConsumed = true;
 
             $this->eventRecorder->record('wallet_consumed', $this->resolveUserIdInt($ctx, $actorUserId), [
                 'scale_code' => $scaleCode,
@@ -146,7 +150,7 @@ final class AttemptSubmitSideEffects
             ]);
         }
 
-        if ($orgId > 0 && $entitlementBenefitCode !== '') {
+        if ($orgId > 0 && $entitlementBenefitCode !== '' && $creditConsumed) {
             $userIdRaw = $this->resolveUserId($ctx, $actorUserId);
             $anonIdRaw = $this->resolveAnonId($ctx, $actorAnonId);
 
