@@ -358,12 +358,18 @@ class ShareService
         )));
 
         $dimensions = array_values(array_map(
-            static fn (array $trait): array => [
-                'code' => trim((string) ($trait['key'] ?? '')),
-                'label' => trim((string) ($trait['label'] ?? '')),
-                'pct' => (int) ($trait['percentile'] ?? 0),
-                'state' => trim((string) ($trait['band_label'] ?? $trait['band'] ?? '')),
-            ],
+            static function (array $trait): array {
+                $dimension = [
+                    'code' => trim((string) ($trait['key'] ?? '')),
+                    'label' => trim((string) ($trait['label'] ?? '')),
+                    'state' => trim((string) ($trait['band_label'] ?? $trait['band'] ?? '')),
+                ];
+                if (array_key_exists('percentile', $trait)) {
+                    $dimension['pct'] = (int) $trait['percentile'];
+                }
+
+                return $dimension;
+            },
             array_filter($traitVector, static fn (mixed $item): bool => is_array($item))
         ));
 
@@ -1076,7 +1082,12 @@ class ShareService
         $normalizedScaleCode = strtoupper(trim((string) ($attempt->scale_code ?? $result->scale_code ?? 'MBTI')));
         $normalizedLocale = $this->normalizeLocale((string) ($attempt->locale ?? config('content_packs.default_locale', 'zh-CN')));
         $big5Projection = $normalizedScaleCode === 'BIG5_OCEAN'
-            ? $this->bigFivePublicProjectionService->buildFromResult($result, $normalizedLocale)
+            ? $this->bigFivePublicProjectionService->buildFromResult(
+                $result,
+                $normalizedLocale,
+                ReportAccess::VARIANT_FREE,
+                true
+            )
             : [];
         $riasecProjection = $normalizedScaleCode === 'RIASEC'
             ? $this->riasecPublicProjectionService->buildFromResult($result, $normalizedLocale)

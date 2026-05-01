@@ -624,13 +624,41 @@ class MeAttemptsService
 
         $scoreResult = $this->extractBigFiveScoreResult($result);
 
-        return [
-            'top_facets_summary_v1' => $this->buildTopFacetsSummary($scoreResult),
+        $summary = [
             'quality_summary' => $this->buildQualitySummary($scoreResult),
             'norms_summary' => $this->buildNormsSummary($scoreResult),
             'offer_summary' => $this->buildOfferSummary($attempt, $accessSummary),
             'share_summary' => $this->buildShareSummary($result, $accessSummary),
         ];
+
+        if ($this->hasBigFivePaidFacetAccess($accessSummary)) {
+            $summary['top_facets_summary_v1'] = $this->buildTopFacetsSummary($scoreResult);
+        }
+
+        return $summary;
+    }
+
+    /**
+     * @param  array<string,mixed>|null  $accessSummary
+     */
+    private function hasBigFivePaidFacetAccess(?array $accessSummary): bool
+    {
+        if (! is_array($accessSummary)) {
+            return false;
+        }
+
+        $accessState = strtolower(trim((string) ($accessSummary['access_state'] ?? '')));
+        $variant = ReportAccess::normalizeVariant((string) ($accessSummary['variant'] ?? ''));
+        $accessLevel = ReportAccess::normalizeReportAccessLevel((string) ($accessSummary['access_level'] ?? ''));
+        $modulesAllowed = $this->normalizeStringArray($accessSummary['modules_allowed'] ?? null);
+
+        if (in_array(ReportAccess::MODULE_BIG5_FULL, $modulesAllowed, true)) {
+            return true;
+        }
+
+        return $accessState === 'ready'
+            && $variant === ReportAccess::VARIANT_FULL
+            && $accessLevel === ReportAccess::REPORT_ACCESS_FULL;
     }
 
     /**

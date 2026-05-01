@@ -269,11 +269,21 @@ class AttemptReadController extends Controller
             $compatScoresPct = [];
         }
 
+        $hasBigFiveProjectionFullAccess = $scaleCode === 'BIG5_OCEAN'
+            && $attempt instanceof Attempt
+            && $this->hasBigFiveFullAccess($request, $orgId, (string) $attempt->id);
         $big5Projection = $scaleCode === 'BIG5_OCEAN'
-            ? $this->bigFivePublicProjectionService->buildFromResult(
-                $result,
-                (string) ($attempt?->locale ?? config('content_packs.default_locale', 'zh-CN'))
-            )
+            ? ($hasBigFiveProjectionFullAccess
+                ? $this->bigFivePublicProjectionService->buildFromResult(
+                    $result,
+                    (string) ($attempt?->locale ?? config('content_packs.default_locale', 'zh-CN'))
+                )
+                : $this->bigFivePublicProjectionService->buildFromResult(
+                    $result,
+                    (string) ($attempt?->locale ?? config('content_packs.default_locale', 'zh-CN')),
+                    ReportAccess::VARIANT_FREE,
+                    true
+                ))
             : [];
         $enneagramProjection = $scaleCode === 'ENNEAGRAM'
             ? $this->enneagramPublicProjectionService->buildFromResult(

@@ -9,6 +9,7 @@ use App\Services\AI\ControlledGenerationRuntime;
 use App\Services\AI\ControlledNarrativeLayerService;
 use App\Services\Comparative\VersionedComparativeNormingLayerService;
 use App\Services\Content\CulturalCalibrationLayerService;
+use App\Services\Report\ReportAccess;
 
 final class BigFivePublicProjectionService
 {
@@ -130,6 +131,13 @@ final class BigFivePublicProjectionService
     public function build(array $scoreResult, string $locale, ?string $variant = null, ?bool $locked = null): array
     {
         $locale = $this->normalizeLocale($locale);
+        $metaVariant = $variant !== null && trim($variant) !== ''
+            ? $this->normalizeProjectionVariant($variant)
+            : null;
+        $redactLockedProjection = $this->shouldRedactProjection(
+            $metaVariant ?? ReportAccess::VARIANT_FULL,
+            $locked
+        );
         $domainsMean = is_array(data_get($scoreResult, 'raw_scores.domains_mean')) ? data_get($scoreResult, 'raw_scores.domains_mean') : [];
         $facetsMean = is_array(data_get($scoreResult, 'raw_scores.facets_mean')) ? data_get($scoreResult, 'raw_scores.facets_mean') : [];
         $domainsPercentile = is_array(data_get($scoreResult, 'scores_0_100.domains_percentile')) ? data_get($scoreResult, 'scores_0_100.domains_percentile') : [];
@@ -227,10 +235,14 @@ final class BigFivePublicProjectionService
             '_meta' => array_filter([
                 'scale_code' => 'BIG5_OCEAN',
                 'engine_version' => (string) ($scoreResult['engine_version'] ?? ''),
-                'variant' => $variant,
+                'variant' => $metaVariant,
                 'locked' => $locked,
             ], static fn ($value): bool => $value !== null && $value !== ''),
         ];
+
+        if ($redactLockedProjection) {
+            return $this->redactLockedProjection($projection);
+        }
 
         $runtimeContract = $this->controlledGenerationRuntime->buildContract(
             'big5.report',
@@ -255,6 +267,158 @@ final class BigFivePublicProjectionService
         );
 
         return $projection;
+    }
+
+    private function normalizeProjectionVariant(?string $variant): string
+    {
+        if ($variant === null || trim($variant) === '') {
+            return ReportAccess::VARIANT_FULL;
+        }
+
+        $normalized = strtolower(trim((string) $variant));
+
+        return in_array($normalized, [
+            ReportAccess::VARIANT_FREE,
+            ReportAccess::VARIANT_PARTIAL,
+            ReportAccess::VARIANT_FULL,
+        ], true)
+            ? $normalized
+            : ReportAccess::VARIANT_FREE;
+    }
+
+    private function shouldRedactProjection(string $variant, ?bool $locked): bool
+    {
+        return $locked === true || $variant !== ReportAccess::VARIANT_FULL;
+    }
+
+    /**
+     * @param  array<string,mixed>  $projection
+     * @return array<string,mixed>
+     */
+    private function redactLockedProjection(array $projection): array
+    {
+        $projection['trait_vector'] = $this->redactTraitVector(
+            is_array($projection['trait_vector'] ?? null) ? $projection['trait_vector'] : []
+        );
+        $projection['facet_vector'] = [];
+        $projection['dominant_traits'] = $this->redactDominantTraits(
+            is_array($projection['dominant_traits'] ?? null) ? $projection['dominant_traits'] : []
+        );
+        $projection['explainability_summary'] = $this->redactExplainabilitySummary(
+            is_array($projection['explainability_summary'] ?? null) ? $projection['explainability_summary'] : []
+        );
+        $projection['action_plan_summary'] = [];
+        $projection['sections'] = $this->redactSections(
+            is_array($projection['sections'] ?? null) ? $projection['sections'] : [],
+            is_array($projection['trait_vector'] ?? null) ? $projection['trait_vector'] : []
+        );
+        $projection['ordered_section_keys'] = array_values(array_map(
+            static fn (array $section): string => (string) ($section['key'] ?? ''),
+            $projection['sections']
+        ));
+        $projection['_meta']['redacted'] = true;
+        $projection['_meta']['variant'] = ReportAccess::VARIANT_FREE;
+        $projection['_meta']['locked'] = true;
+        $projection['_meta']['redaction_policy'] = 'big5.locked_public_projection.v1';
+        unset(
+            $projection['_meta']['narrative_runtime_contract_v1'],
+            $projection['controlled_narrative_v1'],
+            $projection['cultural_calibration_v1'],
+            $projection['comparative_v1']
+        );
+
+        return $projection;
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $traitVector
+     * @return list<array<string,mixed>>
+     */
+    private function redactTraitVector(array $traitVector): array
+    {
+        return array_values(array_map(
+            static fn (array $trait): array => array_filter([
+                'key' => (string) ($trait['key'] ?? ''),
+                'label' => (string) ($trait['label'] ?? ''),
+                'band' => (string) ($trait['band'] ?? ''),
+                'band_label' => (string) ($trait['band_label'] ?? ''),
+            ], static fn (mixed $value): bool => $value !== ''),
+            array_filter($traitVector, static fn (mixed $trait): bool => is_array($trait))
+        ));
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $dominantTraits
+     * @return list<array<string,mixed>>
+     */
+    private function redactDominantTraits(array $dominantTraits): array
+    {
+        return array_values(array_map(
+            static fn (array $trait): array => array_filter([
+                'key' => (string) ($trait['key'] ?? ''),
+                'label' => (string) ($trait['label'] ?? ''),
+                'band' => (string) ($trait['band'] ?? ''),
+                'rank' => isset($trait['rank']) ? (int) $trait['rank'] : null,
+            ], static fn (mixed $value): bool => $value !== null && $value !== ''),
+            array_filter($dominantTraits, static fn (mixed $trait): bool => is_array($trait))
+        ));
+    }
+
+    /**
+     * @param  array<string,mixed>  $summary
+     * @return array<string,mixed>
+     */
+    private function redactExplainabilitySummary(array $summary): array
+    {
+        return array_filter([
+            'headline' => (string) ($summary['headline'] ?? ''),
+        ], static fn (mixed $value): bool => $value !== '');
+    }
+
+    /**
+     * @param  list<array<string,mixed>>  $sections
+     * @param  list<array<string,mixed>>  $traitVector
+     * @return list<array<string,mixed>>
+     */
+    private function redactSections(array $sections, array $traitVector): array
+    {
+        $safeTraitBullets = implode("\n", array_map(
+            static fn (array $trait): string => trim(sprintf(
+                '%s: %s',
+                (string) ($trait['label'] ?? $trait['key'] ?? ''),
+                (string) ($trait['band_label'] ?? $trait['band'] ?? '')
+            )),
+            $traitVector
+        ));
+
+        $redacted = [];
+        foreach ($sections as $section) {
+            if (! is_array($section)) {
+                continue;
+            }
+            if (strtolower(trim((string) ($section['access_level'] ?? 'free'))) === 'paid') {
+                continue;
+            }
+
+            $key = (string) ($section['key'] ?? '');
+            $blocks = is_array($section['blocks'] ?? null) ? $section['blocks'] : [];
+            if ($key === 'traits.overview') {
+                foreach ($blocks as $index => $block) {
+                    if (is_array($block) && (string) ($block['kind'] ?? '') === 'bullets') {
+                        $blocks[$index]['body'] = $safeTraitBullets;
+                    }
+                }
+            } elseif ($key === 'traits.why_this_profile') {
+                $blocks = array_values(array_filter(
+                    $blocks,
+                    static fn (mixed $block): bool => is_array($block) && (string) ($block['kind'] ?? '') !== 'bullets'
+                ));
+            }
+            $section['blocks'] = $blocks;
+            $redacted[] = $section;
+        }
+
+        return array_values($redacted);
     }
 
     /**
