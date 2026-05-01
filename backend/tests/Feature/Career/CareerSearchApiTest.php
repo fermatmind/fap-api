@@ -114,7 +114,7 @@ final class CareerSearchApiTest extends TestCase
         DB::disableQueryLog();
     }
 
-    public function test_it_keeps_directory_draft_jobs_out_of_public_search(): void
+    public function test_it_exposes_directory_draft_search_without_internal_metadata(): void
     {
         $this->createDirectoryDraftOccupation([
             'canonical_slug' => 'us-ai-compliance-analyst',
@@ -126,7 +126,17 @@ final class CareerSearchApiTest extends TestCase
         $this->getJson('/api/v0.5/career/search?q=AI%20Compliance&limit=5&mode=prefix&locale=en-US')
             ->assertOk()
             ->assertJsonPath('bundle_kind', 'career_search_results')
-            ->assertJsonCount(0, 'items');
+            ->assertJsonCount(1, 'items')
+            ->assertJsonPath('items.0.identity.canonical_slug', 'us-ai-compliance-analyst')
+            ->assertJsonPath('items.0.match_kind', 'canonical_title_prefix')
+            ->assertJsonPath('items.0.trust_summary.status', 'unavailable')
+            ->assertJsonPath('items.0.seo_contract.index_eligible', false)
+            ->assertJsonPath('items.0.seo_contract.reason_codes.0', 'detail_page_unavailable')
+            ->assertJsonMissingPath('items.0.trust_summary.reviewer_status')
+            ->assertJsonMissingPath('items.0.trust_summary.content_version')
+            ->assertJsonMissingPath('items.0.trust_summary.data_version')
+            ->assertJsonMissingPath('items.0.trust_summary.logic_version')
+            ->assertJsonMissingPath('items.0.provenance_meta.import_run_id');
 
         $this->getJson('/api/v0.5/career/jobs/us-ai-compliance-analyst')
             ->assertStatus(404)

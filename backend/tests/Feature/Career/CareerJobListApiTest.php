@@ -45,7 +45,7 @@ final class CareerJobListApiTest extends TestCase
             ]);
     }
 
-    public function test_it_keeps_directory_draft_jobs_out_of_public_index(): void
+    public function test_it_exposes_directory_draft_jobs_without_internal_metadata(): void
     {
         $this->createDirectoryDraftOccupation([
             'canonical_slug' => 'cn-digital-compliance-specialist',
@@ -58,7 +58,19 @@ final class CareerJobListApiTest extends TestCase
 
         $this->getJson('/api/v0.5/career/jobs')
             ->assertOk()
-            ->assertJsonCount(0, 'items');
+            ->assertJsonCount(1, 'items')
+            ->assertJsonPath('items.0.identity.canonical_slug', 'cn-digital-compliance-specialist')
+            ->assertJsonPath('items.0.trust_summary.status', 'unavailable')
+            ->assertJsonPath('items.0.seo_contract.index_eligible', false)
+            ->assertJsonPath('items.0.seo_contract.reason_codes.0', 'detail_page_unavailable')
+            ->assertJsonMissingPath('items.0.trust_summary.reviewer_status')
+            ->assertJsonMissingPath('items.0.trust_summary.content_version')
+            ->assertJsonMissingPath('items.0.trust_summary.data_version')
+            ->assertJsonMissingPath('items.0.trust_summary.logic_version')
+            ->assertJsonMissingPath('items.0.provenance_meta.content_version')
+            ->assertJsonMissingPath('items.0.provenance_meta.data_version')
+            ->assertJsonMissingPath('items.0.provenance_meta.logic_version')
+            ->assertJsonMissingPath('items.0.provenance_meta.import_run_id');
 
         $this->getJson('/api/v0.5/career/jobs/cn-digital-compliance-specialist')
             ->assertStatus(404)
