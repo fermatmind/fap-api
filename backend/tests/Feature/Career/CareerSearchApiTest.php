@@ -12,6 +12,7 @@ use App\Models\OccupationCrosswalk;
 use App\Models\OccupationFamily;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Tests\Fixtures\Career\CareerFoundationFixture;
 use Tests\TestCase;
 
@@ -78,6 +79,39 @@ final class CareerSearchApiTest extends TestCase
             ->assertStatus(422)
             ->assertJsonPath('ok', false)
             ->assertJsonPath('error_code', 'VALIDATION_FAILED');
+    }
+
+    public function test_it_does_not_expand_wildcard_or_path_like_search_input(): void
+    {
+        $this->compileJobChain(CareerFoundationFixture::seedHighTrustCompleteChain([
+            'slug' => 'wildcard-safe-search-api',
+            'crosswalk_mode' => 'exact',
+        ]));
+        $this->createDirectoryDraftOccupation([
+            'canonical_slug' => 'wildcard-safe-directory-draft',
+            'canonical_title_en' => 'Wildcard Safe Directory Draft',
+        ]);
+
+        DB::flushQueryLog();
+        DB::enableQueryLog();
+
+        $this->getJson('/api/v0.5/career/search?q='.urlencode('../%').'&limit=5&mode=prefix')
+            ->assertOk()
+            ->assertJsonPath('bundle_kind', 'career_search_results')
+            ->assertJsonPath('query.q', '../%')
+            ->assertJsonCount(0, 'items');
+
+        $queries = collect(DB::getQueryLog())
+            ->map(static fn (array $entry): string => strtolower((string) ($entry['query'] ?? '')))
+            ->filter(static fn (string $query): bool => str_contains($query, 'recommendation_snapshots')
+                || str_contains($query, 'occupations')
+                || str_contains($query, 'occupation_aliases'))
+            ->values();
+
+        $this->assertTrue($queries->contains(static fn (string $query): bool => str_contains($query, "escape '!'")));
+        $this->assertTrue($queries->contains(static fn (string $query): bool => str_contains($query, 'limit')));
+
+        DB::disableQueryLog();
     }
 
     public function test_it_exposes_directory_draft_jobs_in_search_without_opening_detail_pages(): void

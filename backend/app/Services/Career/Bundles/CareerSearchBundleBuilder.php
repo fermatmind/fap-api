@@ -17,6 +17,10 @@ final class CareerSearchBundleBuilder
 {
     private const SAFE_CROSSWALK_MODES = ['exact', 'trust_inheritance'];
 
+    private const MAX_SEARCH_CANDIDATE_ROWS = 100;
+
+    private const MAX_DIRECTORY_DRAFT_SEARCH_ROWS = 100;
+
     private const DIRECTORY_DRAFT_CROSSWALK_MODE = 'directory_draft';
 
     private const DIRECTORY_DRAFT_CONTENT_VERSION = 'occupation_directory_draft';
@@ -51,9 +55,9 @@ final class CareerSearchBundleBuilder
 
         $mode = in_array($mode, ['auto', 'exact', 'prefix'], true) ? $mode : 'auto';
         $limit = max(1, min($limit, 20));
-        $prefixQuery = $normalizedQuery.'%';
+        $prefixQuery = $this->likePrefixPattern($normalizedQuery);
         $rawQuery = trim($query);
-        $rawPrefixQuery = $rawQuery.'%';
+        $rawPrefixQuery = $this->likePrefixPattern($rawQuery);
         $normalizedLocale = $this->normalizeLocale($locale);
 
         $snapshots = RecommendationSnapshot::query()
@@ -87,9 +91,9 @@ final class CareerSearchBundleBuilder
                             ->orWhere('canonical_title_zh', $rawQuery);
 
                         if ($mode !== 'exact') {
-                            $matchQuery->orWhere('canonical_slug', 'like', $prefixQuery)
-                                ->orWhereRaw('LOWER(canonical_title_en) LIKE ?', [$prefixQuery])
-                                ->orWhere('canonical_title_zh', 'like', $rawPrefixQuery);
+                            $matchQuery->orWhereRaw("canonical_slug LIKE ? ESCAPE '!'", [$prefixQuery])
+                                ->orWhereRaw("LOWER(canonical_title_en) LIKE ? ESCAPE '!'", [$prefixQuery])
+                                ->orWhereRaw("canonical_title_zh LIKE ? ESCAPE '!'", [$rawPrefixQuery]);
                         }
                     });
                 })->orWhereHas('occupation.aliases', function (Builder $aliasQuery) use ($mode, $normalizedQuery, $prefixQuery, $normalizedLocale): void {
@@ -101,13 +105,14 @@ final class CareerSearchBundleBuilder
                         $matchQuery->where('normalized', $normalizedQuery);
 
                         if ($mode !== 'exact') {
-                            $matchQuery->orWhere('normalized', 'like', $prefixQuery);
+                            $matchQuery->orWhereRaw("normalized LIKE ? ESCAPE '!'", [$prefixQuery]);
                         }
                     });
                 });
             })
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
+            ->limit(self::MAX_SEARCH_CANDIDATE_ROWS)
             ->get();
 
         $rankedRows = $snapshots
@@ -192,8 +197,8 @@ final class CareerSearchBundleBuilder
         array $excludedSlugs,
     ): Collection {
         $excluded = array_flip(array_filter($excludedSlugs));
-        $prefixQuery = $normalizedQuery.'%';
-        $rawPrefixQuery = $rawQuery.'%';
+        $prefixQuery = $this->likePrefixPattern($normalizedQuery);
+        $rawPrefixQuery = $this->likePrefixPattern($rawQuery);
 
         return Occupation::query()
             ->with([
@@ -208,9 +213,9 @@ final class CareerSearchBundleBuilder
                         ->orWhere('canonical_title_zh', $rawQuery);
 
                     if ($mode !== 'exact') {
-                        $matchQuery->orWhere('canonical_slug', 'like', $prefixQuery)
-                            ->orWhereRaw('LOWER(canonical_title_en) LIKE ?', [$prefixQuery])
-                            ->orWhere('canonical_title_zh', 'like', $rawPrefixQuery);
+                        $matchQuery->orWhereRaw("canonical_slug LIKE ? ESCAPE '!'", [$prefixQuery])
+                            ->orWhereRaw("LOWER(canonical_title_en) LIKE ? ESCAPE '!'", [$prefixQuery])
+                            ->orWhereRaw("canonical_title_zh LIKE ? ESCAPE '!'", [$rawPrefixQuery]);
                     }
                 })->orWhereHas('aliases', function (Builder $aliasQuery) use ($mode, $normalizedQuery, $prefixQuery, $normalizedLocale): void {
                     if ($normalizedLocale !== null) {
@@ -221,13 +226,14 @@ final class CareerSearchBundleBuilder
                         $matchQuery->where('normalized', $normalizedQuery);
 
                         if ($mode !== 'exact') {
-                            $matchQuery->orWhere('normalized', 'like', $prefixQuery);
+                            $matchQuery->orWhereRaw("normalized LIKE ? ESCAPE '!'", [$prefixQuery]);
                         }
                     });
                 });
             })
             ->orderBy('canonical_title_en')
             ->orderBy('canonical_slug')
+            ->limit(self::MAX_DIRECTORY_DRAFT_SEARCH_ROWS)
             ->get()
             ->filter(fn (Occupation $occupation): bool => ! isset($excluded[(string) $occupation->canonical_slug]))
             ->map(function (Occupation $occupation) use ($normalizedQuery, $rawQuery, $normalizedLocale, $mode): ?array {
@@ -501,5 +507,10 @@ final class CareerSearchBundleBuilder
         $normalized = trim((string) $value);
 
         return $normalized === '' ? null : $normalized;
+    }
+
+    private function likePrefixPattern(string $value): string
+    {
+        return str_replace(['!', '%', '_'], ['!!', '!%', '!_'], $value).'%';
     }
 }
