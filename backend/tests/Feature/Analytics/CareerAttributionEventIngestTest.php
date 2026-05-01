@@ -977,4 +977,91 @@ final class CareerAttributionEventIngestTest extends TestCase
 
         $response->assertStatus(422);
     }
+
+    public function test_ingest_endpoint_rejects_malformed_conversion_payloads_without_crashing_or_writing(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        $cases = [
+            [
+                'eventName' => 'career_shortlist_add',
+                'anonymousId' => 'anon_b2_malformed_action',
+                'payload' => [
+                    'entry_surface' => 'career_recommendation_detail',
+                    'source_page_type' => 'career_recommendation_detail',
+                    'target_action' => ['add_shortlist'],
+                    'landing_path' => '/en/career/recommendations/mbti/intj-a',
+                    'route_family' => 'recommendation_detail',
+                    'subject_kind' => 'job_slug',
+                    'subject_key' => 'software-developers',
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                ],
+            ],
+            [
+                'eventName' => 'career_feedback_submit',
+                'anonymousId' => 'anon_b2_oversized_subject',
+                'payload' => [
+                    'entry_surface' => 'career_recommendation_detail',
+                    'source_page_type' => 'career_recommendation_detail',
+                    'target_action' => 'submit_feedback',
+                    'landing_path' => '/en/career/recommendations/mbti/intj-a',
+                    'route_family' => 'recommendation_detail',
+                    'subject_kind' => 'recommendation_type',
+                    'subject_key' => str_repeat('a', 129),
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                ],
+            ],
+            [
+                'eventName' => 'career_feedback_submit',
+                'anonymousId' => 'anon_b2_governance_field',
+                'payload' => [
+                    'entry_surface' => 'career_recommendation_detail',
+                    'source_page_type' => 'career_recommendation_detail',
+                    'target_action' => 'submit_feedback',
+                    'landing_path' => '/en/career/recommendations/mbti/intj-a',
+                    'route_family' => 'recommendation_detail',
+                    'subject_kind' => 'recommendation_type',
+                    'subject_key' => 'intj',
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                    'trust_manifest_id' => '11111111-1111-4111-8111-111111111111',
+                ],
+            ],
+            [
+                'eventName' => 'career_shortlist_add',
+                'anonymousId' => 'anon_b2_external_path',
+                'path' => 'https://example.invalid/career',
+                'payload' => [
+                    'entry_surface' => 'career_recommendation_detail',
+                    'source_page_type' => 'career_recommendation_detail',
+                    'target_action' => 'add_shortlist',
+                    'landing_path' => '/en/career/recommendations/mbti/intj-a',
+                    'route_family' => 'recommendation_detail',
+                    'subject_kind' => 'job_slug',
+                    'subject_key' => 'software-developers',
+                    'query_mode' => 'non_query',
+                    'locale' => 'en',
+                ],
+            ],
+        ];
+
+        foreach ($cases as $case) {
+            $response = $this->withHeaders([
+                'Authorization' => 'Bearer ingest_test_token',
+            ])->postJson('/api/v0.5/career/attribution/events', [
+                'eventName' => $case['eventName'],
+                'anonymousId' => $case['anonymousId'],
+                'path' => $case['path'] ?? '/en/career/recommendations/mbti/intj-a',
+                'timestamp' => '2026-04-16T11:00:00+08:00',
+                'payload' => $case['payload'],
+            ]);
+
+            $response->assertStatus(422);
+            $this->assertDatabaseMissing('events', [
+                'anon_id' => $case['anonymousId'],
+            ]);
+        }
+    }
 }

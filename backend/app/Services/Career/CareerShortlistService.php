@@ -7,6 +7,7 @@ namespace App\Services\Career;
 use App\Models\CareerShortlistItem;
 use App\Models\Occupation;
 use App\Models\RecommendationSnapshot;
+use Illuminate\Validation\ValidationException;
 
 final class CareerShortlistService
 {
@@ -32,28 +33,32 @@ final class CareerShortlistService
             return ['item' => $existing, 'is_new' => false];
         }
 
-        $occupation = Occupation::query()
-            ->where('canonical_slug', $subjectSlug)
-            ->first();
+        $occupation = $this->resolvePublicOccupation($subjectSlug);
 
         $latestSnapshot = null;
-        if ($occupation instanceof Occupation) {
-            $latestSnapshot = RecommendationSnapshot::query()
-                ->where('occupation_id', $occupation->id)
-                ->orderByDesc('compiled_at')
-                ->orderByDesc('created_at')
-                ->first();
-        }
+        $latestSnapshot = RecommendationSnapshot::query()
+            ->where('occupation_id', $occupation->id)
+            ->whereNotNull('compiled_at')
+            ->whereNotNull('compile_run_id')
+            ->whereHas('contextSnapshot', static function ($query): void {
+                $query->where('context_payload->materialization', 'career_first_wave');
+            })
+            ->whereHas('profileProjection', static function ($query): void {
+                $query->where('projection_payload->materialization', 'career_first_wave');
+            })
+            ->orderByDesc('compiled_at')
+            ->orderByDesc('created_at')
+            ->first();
 
         $item = CareerShortlistItem::query()->create([
             'visitor_key' => $visitorKey,
             'subject_kind' => $subjectKind,
             'subject_slug' => $subjectSlug,
             'source_page_type' => $sourcePageType,
-            'occupation_id' => $occupation?->id,
-            'context_snapshot_id' => $this->normalizeUuid($input['context_snapshot_uuid'] ?? null) ?? $latestSnapshot?->context_snapshot_id,
-            'profile_projection_id' => $this->normalizeUuid($input['projection_uuid'] ?? null) ?? $latestSnapshot?->profile_projection_id,
-            'recommendation_snapshot_id' => $this->normalizeUuid($input['recommendation_snapshot_uuid'] ?? null) ?? $latestSnapshot?->id,
+            'occupation_id' => $occupation->id,
+            'context_snapshot_id' => $latestSnapshot?->context_snapshot_id,
+            'profile_projection_id' => $latestSnapshot?->profile_projection_id,
+            'recommendation_snapshot_id' => $latestSnapshot?->id,
         ]);
 
         return ['item' => $item, 'is_new' => true];
@@ -89,14 +94,19 @@ final class CareerShortlistService
         return $normalized === '' ? null : $normalized;
     }
 
-    private function normalizeUuid(mixed $value): ?string
+    private function resolvePublicOccupation(string $subjectSlug): Occupation
     {
-        if (! is_scalar($value)) {
-            return null;
+        /** @var Occupation|null $occupation */
+        $occupation = Occupation::query()
+            ->where('canonical_slug', $subjectSlug)
+            ->first();
+
+        if ($occupation instanceof Occupation) {
+            return $occupation;
         }
 
-        $uuid = trim((string) $value);
-
-        return $uuid === '' ? null : $uuid;
+        throw ValidationException::withMessages([
+            'subject_slug' => 'subject_slug must reference an existing public career job.',
+        ]);
     }
 }

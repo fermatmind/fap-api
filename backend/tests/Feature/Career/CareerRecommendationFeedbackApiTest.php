@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature\Career;
 
 use App\Models\CareerCompileRun;
+use App\Models\CareerFeedbackRecord;
 use App\Models\CareerImportRun;
 use App\Models\ContextSnapshot;
 use App\Models\ProfileProjection;
@@ -19,7 +20,7 @@ final class CareerRecommendationFeedbackApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_it_appends_feedback_as_new_lifecycle_state_and_keeps_previous_snapshots_immutable(): void
+    public function test_it_records_public_feedback_without_materializing_new_snapshots(): void
     {
         $snapshot = $this->compileRecommendationChainBySlug('feedback-api-case');
         TransitionPath::query()->create([
@@ -45,28 +46,54 @@ final class CareerRecommendationFeedbackApiTest extends TestCase
             ->assertJsonPath('data.feedback_checkin.burnout_checkin', 5)
             ->assertJsonPath('data.feedback_checkin.career_satisfaction', 2)
             ->assertJsonPath('data.feedback_checkin.switch_urgency', 4)
-            ->assertJsonPath('data.projection_delta_summary.delta_available', true)
+            ->assertJsonPath('data.projection_delta_summary.delta_available', false)
             ->assertJsonPath('data.projection_delta_summary.transition_changed', false);
 
-        $this->assertSame($beforeSnapshotCount + 1, RecommendationSnapshot::query()->count());
-        $this->assertSame($beforeProjectionCount + 1, ProfileProjection::query()->count());
-        $this->assertSame($beforeContextCount + 1, ContextSnapshot::query()->count());
-        $this->assertSame($beforePathCount + 1, TransitionPath::query()->count());
+        $this->assertSame($beforeSnapshotCount, RecommendationSnapshot::query()->count());
+        $this->assertSame($beforeProjectionCount, ProfileProjection::query()->count());
+        $this->assertSame($beforeContextCount, ContextSnapshot::query()->count());
+        $this->assertSame($beforePathCount, TransitionPath::query()->count());
+        $this->assertSame(1, CareerFeedbackRecord::query()->count());
         $this->assertNotNull(RecommendationSnapshot::query()->find($snapshot->id));
 
         $entries = (array) data_get($response->json(), 'data.projection_timeline.entries', []);
-        $this->assertGreaterThanOrEqual(2, count($entries));
+        $this->assertGreaterThanOrEqual(1, count($entries));
     }
 
     public function test_it_returns_not_found_when_feedback_target_type_is_unavailable(): void
     {
-        $this->postJson('/api/v0.5/career/recommendations/mbti/non-existent-type/feedback', [
+        $this->postJson('/api/v0.5/career/recommendations/mbti/intp/feedback', [
             'burnout_checkin' => 3,
             'career_satisfaction' => 3,
             'switch_urgency' => 3,
         ])->assertStatus(404)
             ->assertJsonPath('ok', false)
             ->assertJsonPath('error_code', 'NOT_FOUND');
+    }
+
+    public function test_it_rejects_empty_malformed_or_internal_feedback_payloads_without_writes(): void
+    {
+        $this->compileRecommendationChainBySlug('feedback-validation-case');
+        $beforeSnapshotCount = RecommendationSnapshot::query()->count();
+
+        $this->postJson('/api/v0.5/career/recommendations/mbti/intj/feedback', [])
+            ->assertStatus(422);
+
+        $this->postJson('/api/v0.5/career/recommendations/mbti/intj/feedback', [
+            'burnout_checkin' => 4,
+            'snapshot_payload' => ['governance' => 'poison'],
+        ])->assertStatus(422);
+
+        $this->postJson('/api/v0.5/career/recommendations/mbti/intj/feedback', [
+            'burnout_checkin' => str_repeat('5', 200),
+        ])->assertStatus(422);
+
+        $this->postJson('/api/v0.5/career/recommendations/mbti/not-a-type/feedback', [
+            'burnout_checkin' => 4,
+        ])->assertStatus(422);
+
+        $this->assertSame($beforeSnapshotCount, RecommendationSnapshot::query()->count());
+        $this->assertSame(0, CareerFeedbackRecord::query()->count());
     }
 
     private function compileRecommendationChainBySlug(string $slug): RecommendationSnapshot

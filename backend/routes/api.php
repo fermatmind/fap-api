@@ -444,7 +444,8 @@ Route::prefix('v0.4')->middleware(NormalizeApiErrorContract::class)->group(funct
 });
 
 Route::prefix('v0.5')->group(function () {
-    Route::post('/career/attribution/events', [CareerAttributionEventController::class, 'store']);
+    Route::post('/career/attribution/events', [CareerAttributionEventController::class, 'store'])
+        ->middleware('throttle:api_track');
     Route::get('/career/family/{slug}', [CareerFamilyHubController::class, 'show']);
     Route::get('/career/first-wave/discoverability-manifest', [CareerFirstWaveDiscoverabilityManifestController::class, 'show']);
     Route::get('/career/first-wave/jobs/{slug}/next-step-links', [CareerFirstWaveNextStepLinksController::class, 'show']);
@@ -463,8 +464,10 @@ Route::prefix('v0.5')->group(function () {
     Route::get('/career/recommendations/mbti', [CareerRecommendationIndexController::class, 'index']);
     Route::get('/career/recommendations/mbti/{type}', [CareerRecommendationDetailController::class, 'show']);
     Route::get('/career/recommendations/mbti/{type}/explainability', [CareerRecommendationExplainabilityController::class, 'show']);
-    Route::post('/career/recommendations/mbti/{type}/feedback', [CareerRecommendationFeedbackController::class, 'store']);
-    Route::post('/career/shortlist', [CareerShortlistController::class, 'store']);
+    Route::post('/career/recommendations/mbti/{type}/feedback', [CareerRecommendationFeedbackController::class, 'store'])
+        ->middleware('throttle:api_track');
+    Route::post('/career/shortlist', [CareerShortlistController::class, 'store'])
+        ->middleware('throttle:api_track');
     Route::get('/career/shortlist/state', [CareerShortlistController::class, 'show']);
     Route::get('/career/runtime-config', [CareerRuntimeConfigController::class, 'show']);
     Route::get('/career/transition-preview', [CareerTransitionPreviewController::class, 'show']);
