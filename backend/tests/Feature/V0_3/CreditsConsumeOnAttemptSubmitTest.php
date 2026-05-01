@@ -346,11 +346,8 @@ class CreditsConsumeOnAttemptSubmitTest extends TestCase
             'invite_token' => $inviteTokens[3],
         ]);
 
-        $submit->assertStatus(200);
-        $submit->assertJson([
-            'ok' => true,
-            'attempt_id' => $attemptId,
-        ]);
+        $submit->assertStatus(402);
+        $submit->assertJsonPath('error_code', 'INSUFFICIENT_CREDITS');
 
         $wallet = DB::table('benefit_wallets')
             ->where('org_id', $orgId)
@@ -361,5 +358,64 @@ class CreditsConsumeOnAttemptSubmitTest extends TestCase
             ->where('org_id', $orgId)
             ->where('benefit_code', 'B2B_ASSESSMENT_ATTEMPT_SUBMIT')
             ->count());
+    }
+
+    public function test_reused_invite_token_does_not_consume_credit_for_another_attempt(): void
+    {
+        $this->seedScales();
+        [$orgId, $userId, $token] = $this->seedOrgWithToken();
+        $this->grantScaleForOrg($orgId, 'SIMPLE_SCORE_DEMO');
+        $this->seedWallet($orgId, 2);
+
+        $inviteTokens = $this->createAssessmentWithAssignments($orgId, $userId, 1);
+        $answers = $this->fetchAnswers($orgId, $token);
+        $headers = [
+            'Authorization' => 'Bearer '.$token,
+            'X-Org-Id' => (string) $orgId,
+        ];
+
+        $firstStart = $this->withHeaders($headers)->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'SIMPLE_SCORE_DEMO',
+        ]);
+        $firstStart->assertStatus(200);
+
+        $firstSubmit = $this->withHeaders($headers)->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => (string) $firstStart->json('attempt_id'),
+            'answers' => $answers,
+            'duration_ms' => 120000,
+            'invite_token' => $inviteTokens[0],
+        ]);
+        $firstSubmit->assertStatus(200);
+
+        $secondStart = $this->withHeaders($headers)->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'SIMPLE_SCORE_DEMO',
+        ]);
+        $secondStart->assertStatus(200);
+
+        $secondSubmit = $this->withHeaders($headers)->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => (string) $secondStart->json('attempt_id'),
+            'answers' => $answers,
+            'duration_ms' => 120000,
+            'invite_token' => $inviteTokens[0],
+        ]);
+        $secondSubmit->assertStatus(402);
+        $secondSubmit->assertJsonPath('error_code', 'INSUFFICIENT_CREDITS');
+
+        $wallet = DB::table('benefit_wallets')
+            ->where('org_id', $orgId)
+            ->where('benefit_code', 'B2B_ASSESSMENT_ATTEMPT_SUBMIT')
+            ->first();
+        $this->assertSame(1, (int) ($wallet->balance ?? -1));
+        $this->assertSame(1, DB::table('benefit_consumptions')
+            ->where('org_id', $orgId)
+            ->where('benefit_code', 'B2B_ASSESSMENT_ATTEMPT_SUBMIT')
+            ->count());
+        $this->assertSame(
+            (string) $firstStart->json('attempt_id'),
+            (string) DB::table('assessment_assignments')
+                ->where('org_id', $orgId)
+                ->where('invite_token', $inviteTokens[0])
+                ->value('attempt_id')
+        );
     }
 }

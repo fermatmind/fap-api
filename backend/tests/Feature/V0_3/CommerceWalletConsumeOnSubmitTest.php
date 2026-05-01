@@ -215,4 +215,59 @@ class CommerceWalletConsumeOnSubmitTest extends TestCase
         $this->assertSame(1, DB::table('benefit_wallet_ledgers')->where('reason', 'consume')->count());
         $this->assertSame(1, DB::table('benefit_consumptions')->count());
     }
+
+    public function test_submit_with_configured_credit_requires_successful_consumption_before_granting_entitlement(): void
+    {
+        $this->seedScales();
+        [$orgId, $userId, $token] = $this->seedOrgWithToken();
+        $this->grantScaleForOrg($orgId, 'SIMPLE_SCORE_DEMO');
+
+        DB::table('benefit_wallets')->insert([
+            'org_id' => $orgId,
+            'benefit_code' => 'MBTI_CREDIT',
+            'balance' => 0,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $start = $this->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'SIMPLE_SCORE_DEMO',
+        ], [
+            'X-Org-Id' => (string) $orgId,
+            'Authorization' => 'Bearer '.$token,
+        ]);
+        $start->assertStatus(200);
+        $attemptId = (string) $start->json('attempt_id');
+
+        $submit = $this->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => $attemptId,
+            'answers' => [
+                ['question_id' => 'SS-001', 'code' => '5'],
+                ['question_id' => 'SS-002', 'code' => '4'],
+                ['question_id' => 'SS-003', 'code' => '3'],
+                ['question_id' => 'SS-004', 'code' => '2'],
+                ['question_id' => 'SS-005', 'code' => '1'],
+            ],
+            'duration_ms' => 120000,
+        ], [
+            'X-Org-Id' => (string) $orgId,
+            'Authorization' => 'Bearer '.$token,
+        ]);
+
+        $submit->assertStatus(402);
+        $submit->assertJsonPath('error_code', 'INSUFFICIENT_CREDITS');
+
+        $walletAfter = DB::table('benefit_wallets')
+            ->where('org_id', $orgId)
+            ->where('benefit_code', 'MBTI_CREDIT')
+            ->first();
+        $this->assertSame(0, (int) ($walletAfter->balance ?? -1));
+        $this->assertSame(0, DB::table('benefit_consumptions')->count());
+        $this->assertSame(0, DB::table('benefit_wallet_ledgers')->where('reason', 'consume')->count());
+        $this->assertSame(0, DB::table('benefit_grants')
+            ->where('org_id', $orgId)
+            ->where('attempt_id', $attemptId)
+            ->where('benefit_code', 'MBTI_CREDIT')
+            ->count());
+    }
 }

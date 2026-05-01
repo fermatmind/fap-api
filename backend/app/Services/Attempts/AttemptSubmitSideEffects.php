@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Attempts;
 
+use App\Exceptions\Api\ApiProblemException;
 use App\Models\Attempt;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Assessments\AssessmentService;
@@ -115,74 +116,37 @@ final class AttemptSubmitSideEffects
             }
         }
 
-        $creditOk = true;
         if ($consumeB2BCredit) {
-            try {
-                $consume = $this->benefitWallets->consume($orgId, self::B2B_CREDIT_BENEFIT_CODE, $attemptId);
-                $creditOk = (bool) ($consume['ok'] ?? false);
-                if (! $creditOk) {
-                    Log::warning('SUBMIT_POST_COMMIT_B2B_CREDIT_CONSUME_FAILED', [
-                        'org_id' => $orgId,
-                        'attempt_id' => $attemptId,
-                        'error_code' => (string) data_get($consume, 'error_code', data_get($consume, 'error', 'CREDITS_CONSUME_FAILED')),
-                        'message' => $consume['message'] ?? 'credits consume failed.',
-                    ]);
-                }
-            } catch (\Throwable $e) {
-                $creditOk = false;
-                Log::error('SUBMIT_POST_COMMIT_B2B_CREDIT_CONSUME_EXCEPTION', [
-                    'org_id' => $orgId,
-                    'attempt_id' => $attemptId,
-                    'exception' => $e,
-                ]);
-            }
+            $consume = $this->benefitWallets->consume($orgId, self::B2B_CREDIT_BENEFIT_CODE, $attemptId);
+            $this->ensureCreditConsumed($consume, $orgId, $attemptId, self::B2B_CREDIT_BENEFIT_CODE, 'SUBMIT_POST_COMMIT_B2B_CREDIT_CONSUME_FAILED');
         }
 
         if ($orgId > 0 && $creditBenefitCode !== '' && ! $consumeB2BCredit) {
-            try {
-                $consume = $this->benefitWallets->consume($orgId, $creditBenefitCode, $attemptId);
-                $creditOk = (bool) ($consume['ok'] ?? false);
-                if ($creditOk) {
-                    $this->eventRecorder->record('wallet_consumed', $this->resolveUserIdInt($ctx, $actorUserId), [
-                        'scale_code' => $scaleCode,
-                        'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
-                        'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
-                        'pack_id' => $packId,
-                        'dir_version' => $dirVersion,
-                        'attempt_id' => $attemptId,
-                        'benefit_code' => $creditBenefitCode,
-                        'sku' => null,
-                    ], [
-                        'org_id' => $orgId,
-                        'anon_id' => $actorAnonId,
-                        'attempt_id' => $attemptId,
-                        'scale_code' => $scaleCode,
-                        'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
-                        'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
-                        'pack_id' => $packId,
-                        'dir_version' => $dirVersion,
-                    ]);
-                } else {
-                    Log::warning('SUBMIT_POST_COMMIT_CREDIT_CONSUME_FAILED', [
-                        'org_id' => $orgId,
-                        'attempt_id' => $attemptId,
-                        'benefit_code' => $creditBenefitCode,
-                        'error_code' => (string) data_get($consume, 'error_code', data_get($consume, 'error', 'INSUFFICIENT_CREDITS')),
-                        'message' => $consume['message'] ?? 'insufficient credits.',
-                    ]);
-                }
-            } catch (\Throwable $e) {
-                $creditOk = false;
-                Log::error('SUBMIT_POST_COMMIT_CREDIT_CONSUME_EXCEPTION', [
-                    'org_id' => $orgId,
-                    'attempt_id' => $attemptId,
-                    'benefit_code' => $creditBenefitCode,
-                    'exception' => $e,
-                ]);
-            }
+            $consume = $this->benefitWallets->consume($orgId, $creditBenefitCode, $attemptId);
+            $this->ensureCreditConsumed($consume, $orgId, $attemptId, $creditBenefitCode, 'SUBMIT_POST_COMMIT_CREDIT_CONSUME_FAILED');
+
+            $this->eventRecorder->record('wallet_consumed', $this->resolveUserIdInt($ctx, $actorUserId), [
+                'scale_code' => $scaleCode,
+                'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
+                'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+                'attempt_id' => $attemptId,
+                'benefit_code' => $creditBenefitCode,
+                'sku' => null,
+            ], [
+                'org_id' => $orgId,
+                'anon_id' => $actorAnonId,
+                'attempt_id' => $attemptId,
+                'scale_code' => $scaleCode,
+                'scale_code_v2' => $scaleCodeV2 !== '' ? $scaleCodeV2 : null,
+                'scale_uid' => $scaleUid !== '' ? $scaleUid : null,
+                'pack_id' => $packId,
+                'dir_version' => $dirVersion,
+            ]);
         }
 
-        if ($creditOk && $orgId > 0 && $entitlementBenefitCode !== '') {
+        if ($orgId > 0 && $entitlementBenefitCode !== '') {
             $userIdRaw = $this->resolveUserId($ctx, $actorUserId);
             $anonIdRaw = $this->resolveAnonId($ctx, $actorAnonId);
 
@@ -424,6 +388,43 @@ final class AttemptSubmitSideEffects
         }
 
         return null;
+    }
+
+    private function ensureCreditConsumed(
+        array $consume,
+        int $orgId,
+        string $attemptId,
+        string $benefitCode,
+        string $logCode
+    ): void {
+        if (($consume['ok'] ?? false) === true) {
+            return;
+        }
+
+        $errorCode = strtoupper(trim((string) data_get($consume, 'error_code', data_get($consume, 'error', 'INSUFFICIENT_CREDITS'))));
+        if ($errorCode === '') {
+            $errorCode = 'INSUFFICIENT_CREDITS';
+        }
+
+        $message = trim((string) ($consume['message'] ?? 'insufficient credits.'));
+        if ($message === '') {
+            $message = 'insufficient credits.';
+        }
+
+        $status = (int) ($consume['status'] ?? 402);
+        if ($status < 400 || $status > 599) {
+            $status = 402;
+        }
+
+        Log::warning($logCode, [
+            'org_id' => $orgId,
+            'attempt_id' => $attemptId,
+            'benefit_code' => $benefitCode,
+            'error_code' => $errorCode,
+            'message' => $message,
+        ]);
+
+        throw new ApiProblemException($status, $errorCode, $message);
     }
 
     private function resolveAnonId(OrgContext $ctx, ?string $actorAnonId): ?string
