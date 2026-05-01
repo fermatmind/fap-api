@@ -66,6 +66,7 @@ final class AlipayReturnRecoveryEndpointTest extends TestCase
         $response->assertJsonPath('order_no', $orderNo);
         $response->assertJsonPath('payment_recovery_token', fn ($value) => is_string($value) && $value !== '');
         $this->assertStringContainsString('/en/pay/wait?order_no='.$orderNo, (string) $response->json('wait_url'));
+        $this->assertStringNotContainsString('payment_recovery_token=', (string) $response->json('wait_url'));
     }
 
     public function test_recover_alipay_return_rejects_invalid_signature(): void

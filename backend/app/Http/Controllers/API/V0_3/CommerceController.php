@@ -186,8 +186,7 @@ class CommerceController extends Controller
         $payment = $this->buildOrderPaymentPayload(
             $request,
             $order,
-            $status === 'pending' && ($request->boolean('include_payment_action') || $paymentRecoveryVerified),
-            $paymentRecoveryToken
+            $status === 'pending' && ($request->boolean('include_payment_action') || $paymentRecoveryVerified)
         );
         $exactResultEntry = $this->mbtiAccessHubBuilder->buildExactResultEntryForOrder($order);
         $big5FormSummary = $this->big5FormSummaryForOrder($order, $request);
@@ -405,8 +404,7 @@ class CommerceController extends Controller
                 $payment = $this->buildOrderPaymentPayload(
                     $request,
                     $order,
-                    $this->resolvePublicOrderStatus($order) === 'pending',
-                    $paymentRecoveryToken
+                    $this->resolvePublicOrderStatus($order) === 'pending'
                 );
                 $order = $this->orders->findOrderByOrderNo((string) ($order->order_no ?? $existingOrderNo), $orgId) ?? $order;
                 $paymentAttemptSummary = $this->orders->paymentAttemptSummary(
@@ -581,14 +579,11 @@ class CommerceController extends Controller
                 $this->resolveRequestedLocale($request)
             )
             : ['wait_url' => null, 'result_url' => null];
-        $presentedPayment = $this->decoratePaymentPayloadForRecovery(
-            [
-                'provider' => $provider,
-                'pay' => $payPayload,
-                'checkout_url' => $checkoutUrl,
-            ],
-            $paymentRecoveryToken
-        );
+        $presentedPayment = [
+            'provider' => $provider,
+            'pay' => $payPayload,
+            'checkout_url' => $checkoutUrl,
+        ];
 
         return response()->json([
             'ok' => true,
@@ -675,8 +670,7 @@ class CommerceController extends Controller
         $payment = $this->buildOrderPaymentPayload(
             $request,
             $order,
-            $status === 'pending',
-            $paymentRecoveryToken
+            $status === 'pending'
         );
         $exactResultEntry = $this->mbtiAccessHubBuilder->buildExactResultEntryForOrder($order);
         $big5FormSummary = $this->big5FormSummaryForOrder($order, $request);
@@ -798,7 +792,6 @@ class CommerceController extends Controller
         $launchOrder = (array) $order;
         $enrichedReturnUrl = $this->buildAlipayReturnUrl(
             $order,
-            $paymentRecoveryToken,
             $recoveryUrls
         );
         if ($enrichedReturnUrl !== null) {
@@ -871,8 +864,7 @@ class CommerceController extends Controller
     private function buildOrderPaymentPayload(
         Request $request,
         object $order,
-        bool $includePaymentAction,
-        ?string $paymentRecoveryToken = null
+        bool $includePaymentAction
     ): array {
         $provider = strtolower(trim((string) ($order->provider ?? '')));
         if ($provider === '') {
@@ -898,7 +890,7 @@ class CommerceController extends Controller
                 $this->trimNullableString($order->provider_app ?? null)
             );
 
-            return $this->decoratePaymentPayloadForRecovery($cached, $paymentRecoveryToken);
+            return $cached;
         }
 
         if ($normalizedProvider === null || ! $this->isProviderEnabled($normalizedProvider)) {
@@ -959,7 +951,7 @@ class CommerceController extends Controller
 
         $presented = $this->presentCheckoutPayAction($normalizedProvider, $payAction);
         if (! is_array($presented['pay'] ?? null) && $this->trimNullableString($presented['checkout_url'] ?? null) === null) {
-            return $this->decoratePaymentPayloadForRecovery($presented, $paymentRecoveryToken);
+            return $presented;
         }
 
         $paymentAttempt = $this->createPaymentAttemptForOrder($order, $normalizedProvider, $scene);
@@ -985,7 +977,7 @@ class CommerceController extends Controller
             $this->trimNullableString($paymentAttempt->id ?? null)
         );
 
-        return $this->decoratePaymentPayloadForRecovery($presented, $paymentRecoveryToken);
+        return $presented;
     }
 
     /**
@@ -1050,10 +1042,11 @@ class CommerceController extends Controller
         }
 
         $payType = strtolower(trim((string) ($pay['type'] ?? '')));
-        $payValue = trim((string) ($pay['value'] ?? ''));
+        $payValue = $this->stripPaymentRecoveryTokenFromUrl($pay['value'] ?? null) ?? '';
         if ($payType === '' || $payValue === '') {
             return null;
         }
+        $checkoutUrl = $this->stripPaymentRecoveryTokenFromUrl($payload['checkout_url'] ?? null);
 
         return [
             'provider' => $provider,
@@ -1063,8 +1056,8 @@ class CommerceController extends Controller
                 'provider' => $provider,
             ],
             'checkout_url' => $payType === 'redirect'
-                ? ($payload['checkout_url'] ?? $payValue)
-                : ($payload['checkout_url'] ?? null),
+                ? ($checkoutUrl ?? $payValue)
+                : $checkoutUrl,
         ];
     }
 
@@ -1087,10 +1080,11 @@ class CommerceController extends Controller
         }
 
         $payType = strtolower(trim((string) ($pay['type'] ?? '')));
-        $payValue = trim((string) ($pay['value'] ?? ''));
+        $payValue = $this->stripPaymentRecoveryTokenFromUrl($pay['value'] ?? null) ?? '';
         if ($payType === '' || $payValue === '') {
             return;
         }
+        $checkoutUrl = $this->stripPaymentRecoveryTokenFromUrl($payload['checkout_url'] ?? null);
 
         $meta = $this->decodeMeta($order->meta_json ?? null);
         $cache = is_array($meta['payment_action_cache'] ?? null) ? $meta['payment_action_cache'] : [];
@@ -1102,7 +1096,7 @@ class CommerceController extends Controller
                 'value' => $payValue,
                 'provider' => $provider,
             ],
-            'checkout_url' => $payload['checkout_url'] ?? null,
+            'checkout_url' => $checkoutUrl,
             'payment_attempt_id' => $paymentAttemptId,
             'cached_at' => now()->toIso8601String(),
         ];
@@ -1161,23 +1155,31 @@ class CommerceController extends Controller
         }
 
         $provider = strtolower(trim((string) ($order->provider ?? '')));
+        $safePayPayload = $payPayload;
+        if (is_array($safePayPayload)) {
+            $safePayValue = $this->stripPaymentRecoveryTokenFromUrl($safePayPayload['value'] ?? null);
+            if ($safePayValue !== null) {
+                $safePayPayload['value'] = $safePayValue;
+            }
+        }
+        $safeCheckoutUrl = $this->stripPaymentRecoveryTokenFromUrl($checkoutUrl);
         $payloadMeta = [
             'scene' => $scene,
-            'pay_type' => strtolower(trim((string) ($payPayload['type'] ?? ''))),
-            'pay_value_sha256' => $this->digestNullableString($payPayload['value'] ?? null),
-            'checkout_url_sha256' => $this->digestNullableString($checkoutUrl),
-            'has_checkout_url' => $checkoutUrl !== null && trim($checkoutUrl) !== '',
+            'pay_type' => strtolower(trim((string) ($safePayPayload['type'] ?? ''))),
+            'pay_value_sha256' => $this->digestNullableString($safePayPayload['value'] ?? null),
+            'checkout_url_sha256' => $this->digestNullableString($safeCheckoutUrl),
+            'has_checkout_url' => $safeCheckoutUrl !== null && trim($safeCheckoutUrl) !== '',
         ];
         $externalTradeNo = $this->trimNullableString($payAction['external_trade_no'] ?? null)
             ?? $this->trimNullableString($order->external_trade_no ?? null);
         $providerSessionRef = $this->resolveProviderSessionRef(
             $provider,
-            $payPayload,
-            $checkoutUrl,
+            $safePayPayload,
+            $safeCheckoutUrl,
             $payAction
         );
 
-        if ($payPayload !== null) {
+        if ($safePayPayload !== null) {
             $paymentAttempt = $this->orders->advancePaymentAttempt((string) ($paymentAttempt->id ?? ''), [
                 'state' => \App\Models\PaymentAttempt::STATE_PROVIDER_CREATED,
                 'external_trade_no' => $externalTradeNo,
@@ -1232,6 +1234,64 @@ class CommerceController extends Controller
         }
 
         return hash('sha256', $normalized);
+    }
+
+    private function stripPaymentRecoveryTokenFromUrl(mixed $value): ?string
+    {
+        $url = $this->trimNullableString($value);
+        if ($url === null) {
+            return null;
+        }
+
+        if (! str_contains($url, 'payment_recovery_token') && ! str_contains($url, 'paymentRecoveryToken')) {
+            return $url;
+        }
+
+        $parts = parse_url($url);
+        if (! is_array($parts)) {
+            return $url;
+        }
+
+        $query = (string) ($parts['query'] ?? '');
+        if ($query === '') {
+            return $url;
+        }
+
+        parse_str($query, $params);
+        unset($params['payment_recovery_token'], $params['paymentRecoveryToken']);
+
+        $rebuilt = '';
+        if (isset($parts['scheme'])) {
+            $rebuilt .= $parts['scheme'].'://';
+        } elseif (isset($parts['host']) && str_starts_with($url, '//')) {
+            $rebuilt .= '//';
+        }
+
+        if (isset($parts['user'])) {
+            $rebuilt .= $parts['user'];
+            if (isset($parts['pass'])) {
+                $rebuilt .= ':'.$parts['pass'];
+            }
+            $rebuilt .= '@';
+        }
+
+        if (isset($parts['host'])) {
+            $rebuilt .= $parts['host'];
+        }
+        if (isset($parts['port'])) {
+            $rebuilt .= ':'.$parts['port'];
+        }
+
+        $rebuilt .= $parts['path'] ?? '';
+        $cleanQuery = http_build_query($params);
+        if ($cleanQuery !== '') {
+            $rebuilt .= '?'.$cleanQuery;
+        }
+        if (isset($parts['fragment'])) {
+            $rebuilt .= '#'.$parts['fragment'];
+        }
+
+        return $rebuilt !== '' ? $rebuilt : $url;
     }
 
     private function resolvePaymentActionScene(string $userAgent): string
@@ -1781,7 +1841,7 @@ class CommerceController extends Controller
     /**
      * @param  array{wait_url:?string,result_url:?string}  $recoveryUrls
      */
-    private function buildAlipayReturnUrl(object $order, ?string $paymentRecoveryToken, array $recoveryUrls): ?string
+    private function buildAlipayReturnUrl(object $order, array $recoveryUrls): ?string
     {
         $baseReturnUrl = $this->trimNullableString(data_get(config('pay.alipay.default', []), 'return_url', ''))
             ?? $this->deriveDefaultAlipayReturnUrl($recoveryUrls);
@@ -1801,9 +1861,6 @@ class CommerceController extends Controller
         }
 
         $query['order_no'] = $orderNo;
-        if ($paymentRecoveryToken !== null) {
-            $query['payment_recovery_token'] = $paymentRecoveryToken;
-        }
         if ($waitUrl !== null) {
             $query['wait_url'] = $waitUrl;
         }
@@ -1899,53 +1956,6 @@ class CommerceController extends Controller
             'refunded' => 'Order refunded.',
             default => 'Confirming your payment...',
         };
-    }
-
-    /**
-     * @param  array{
-     *     provider:?string,
-     *     pay:?array{type:string,value:string,provider:string},
-     *     checkout_url:?string
-     * }  $payload
-     * @return array{
-     *     provider:?string,
-     *     pay:?array{type:string,value:string,provider:string},
-     *     checkout_url:?string
-     * }
-     */
-    private function decoratePaymentPayloadForRecovery(array $payload, ?string $paymentRecoveryToken): array
-    {
-        $normalizedToken = $this->trimNullableString($paymentRecoveryToken);
-        $provider = strtolower(trim((string) ($payload['provider'] ?? '')));
-        if ($normalizedToken === null || $provider !== 'alipay') {
-            return $payload;
-        }
-
-        $pay = $payload['pay'] ?? null;
-        if (is_array($pay)) {
-            $payValue = $this->trimNullableString($pay['value'] ?? null);
-            if ($payValue !== null) {
-                $payload['pay']['value'] = $this->appendPaymentRecoveryTokenToUrl($payValue, $normalizedToken);
-            }
-        }
-
-        $checkoutUrl = $this->trimNullableString($payload['checkout_url'] ?? null);
-        if ($checkoutUrl !== null) {
-            $payload['checkout_url'] = $this->appendPaymentRecoveryTokenToUrl($checkoutUrl, $normalizedToken);
-        }
-
-        return $payload;
-    }
-
-    private function appendPaymentRecoveryTokenToUrl(string $url, string $paymentRecoveryToken): string
-    {
-        if (str_contains($url, 'paymentRecoveryToken=')) {
-            return $url;
-        }
-
-        $separator = str_contains($url, '?') ? '&' : '?';
-
-        return $url.$separator.'paymentRecoveryToken='.rawurlencode($paymentRecoveryToken);
     }
 
     /**

@@ -149,7 +149,7 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $this->assertNotSame('', $paymentRecoveryToken);
         $this->assertStringContainsString('/en/pay/wait', $waitUrl);
         $this->assertStringContainsString('order_no='.$orderNo, $waitUrl);
-        $this->assertStringContainsString('payment_recovery_token=', $waitUrl);
+        $this->assertStringNotContainsString('payment_recovery_token=', $waitUrl);
         $this->assertSame('pending', (string) DB::table('orders')->where('order_no', $orderNo)->value('payment_state'));
         $this->assertSame('not_started', (string) DB::table('orders')->where('order_no', $orderNo)->value('grant_state'));
         $this->assertSame('web', (string) DB::table('orders')->where('order_no', $orderNo)->value('channel'));
@@ -301,8 +301,14 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $response->assertJsonPath('checkout_url', null);
         $this->assertStringContainsString('/api/v0.3/orders/', (string) $response->json('pay.value'));
         $this->assertStringContainsString('/pay/alipay?scene=desktop', (string) $response->json('pay.value'));
-        $this->assertNotSame('', (string) $response->json('payment_recovery_token'));
-        $this->assertStringContainsString('paymentRecoveryToken=', (string) $response->json('pay.value'));
+        $orderNo = (string) $response->json('order_no');
+        $paymentRecoveryToken = (string) $response->json('payment_recovery_token');
+        $this->assertNotSame('', $paymentRecoveryToken);
+        $this->assertStringNotContainsString('paymentRecoveryToken=', (string) $response->json('pay.value'));
+        $this->assertStringNotContainsString($paymentRecoveryToken, (string) $response->json('pay.value'));
+        $this->assertStringNotContainsString($paymentRecoveryToken, (string) $response->json('wait_url'));
+        $this->assertStringNotContainsString($paymentRecoveryToken, (string) DB::table('orders')->where('order_no', $orderNo)->value('meta_json'));
+        $this->assertStringNotContainsString($paymentRecoveryToken, (string) DB::table('payment_attempts')->where('order_no', $orderNo)->value('payload_meta_json'));
     }
 
     public function test_checkout_alipay_mobile_returns_redirect_and_checkout_url(): void
@@ -328,7 +334,7 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $response->assertJsonPath('checkout_url', $response->json('pay.value'));
         $this->assertStringContainsString('/pay/alipay?scene=mobile', (string) $response->json('pay.value'));
         $this->assertNotSame('', (string) $response->json('payment_recovery_token'));
-        $this->assertStringContainsString('paymentRecoveryToken=', (string) $response->json('pay.value'));
+        $this->assertStringNotContainsString('paymentRecoveryToken=', (string) $response->json('pay.value'));
     }
 
     public function test_checkout_cn_mainland_prefers_alipay_when_primary_provider_override_is_enabled(): void
@@ -492,7 +498,7 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $response->assertJsonPath('checkout_url', null);
     }
 
-    public function test_lookup_pending_alipay_returns_recovery_contract_and_tokenized_launch_url_after_email_match(): void
+    public function test_lookup_pending_alipay_returns_recovery_contract_without_tokenized_launch_url_after_email_match(): void
     {
         $this->seedCommerce();
 
@@ -521,7 +527,61 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $response->assertJsonPath('result_url', 'https://web.example.test/zh/result/attempt_'.$orderNo);
         $this->assertNotSame('', (string) $response->json('payment_recovery_token'));
         $this->assertStringContainsString('/zh/pay/wait', (string) $response->json('wait_url'));
-        $this->assertStringContainsString('paymentRecoveryToken=', (string) $response->json('pay.value'));
+        $this->assertStringNotContainsString('paymentRecoveryToken=', (string) $response->json('pay.value'));
+    }
+
+    public function test_lookup_sanitizes_legacy_cached_payment_action_recovery_token_url(): void
+    {
+        $this->seedCommerce();
+
+        config([
+            'payments.providers.alipay.enabled' => true,
+            'app.url' => 'https://api.example.test',
+            'app.frontend_url' => 'https://web.example.test',
+        ]);
+
+        $orderNo = 'ord_lookup_alipay_legacy_cache_1';
+        $anonId = 'anon_lookup_alipay_legacy_cache_1';
+        $this->insertAttempt('attempt_'.$orderNo, $anonId, 'zh-CN');
+        $this->insertPendingOrder($orderNo, 'alipay', $anonId, 'buyer-legacy-cache@example.com');
+
+        $legacyToken = 'token_legacy_payment_recovery_1';
+        $legacyLaunchUrl = 'https://api.example.test/api/v0.3/orders/'.$orderNo
+            .'/pay/alipay?scene=desktop&paymentRecoveryToken='.$legacyToken;
+        DB::table('orders')
+            ->where('order_no', $orderNo)
+            ->update([
+                'meta_json' => json_encode([
+                    'payment_action_cache' => [
+                        'alipay' => [
+                            'desktop' => [
+                                'provider' => 'alipay',
+                                'pay' => [
+                                    'type' => 'html',
+                                    'value' => $legacyLaunchUrl,
+                                    'provider' => 'alipay',
+                                ],
+                                'checkout_url' => $legacyLaunchUrl,
+                            ],
+                        ],
+                    ],
+                ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            ]);
+
+        $response = $this->withHeaders([
+            'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        ])->postJson('/api/v0.3/orders/lookup', [
+            'order_no' => $orderNo,
+            'email' => 'buyer-legacy-cache@example.com',
+        ]);
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('provider', 'alipay');
+        $response->assertJsonPath('pay.type', 'html');
+        $response->assertJsonPath('pay.value', 'https://api.example.test/api/v0.3/orders/'.$orderNo.'/pay/alipay?scene=desktop');
+        $response->assertJsonPath('checkout_url', 'https://api.example.test/api/v0.3/orders/'.$orderNo.'/pay/alipay?scene=desktop');
+        $this->assertStringNotContainsString($legacyToken, (string) $response->json('pay.value'));
+        $this->assertStringNotContainsString('paymentRecoveryToken=', (string) $response->json('checkout_url'));
     }
 
     public function test_get_order_reuses_cached_payment_action_from_checkout_when_gateway_is_not_reinvoked(): void
@@ -584,7 +644,7 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $response->assertJsonPath('checkout_url', null);
     }
 
-    public function test_alipay_launch_accepts_payment_recovery_token_without_owner_identity(): void
+    public function test_alipay_launch_accepts_payment_recovery_token_without_leaking_it_to_return_url(): void
     {
         $this->seedCommerce();
 
@@ -599,7 +659,7 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $service = Mockery::mock(\App\Services\Commerce\Checkout\AlipayCheckoutService::class);
         $service->shouldReceive('launch')
             ->once()
-            ->withArgs(function (array $order, string $scene) use ($orderNo, $token): bool {
+            ->withArgs(function (array $order, string $scene) use ($orderNo): bool {
                 $this->assertSame('desktop', $scene);
                 $this->assertArrayHasKey('return_url', $order);
 
@@ -608,9 +668,13 @@ final class CommerceCheckoutPayActionTest extends TestCase
                 parse_str((string) parse_url($returnUrl, PHP_URL_QUERY), $parsedQuery);
 
                 $this->assertSame($orderNo, (string) ($parsedQuery['order_no'] ?? ''));
-                $this->assertSame($token, (string) ($parsedQuery['payment_recovery_token'] ?? ''));
+                $this->assertArrayNotHasKey('payment_recovery_token', $parsedQuery);
                 $this->assertStringContainsString(
-                    '/pay/wait?order_no='.$orderNo.'&payment_recovery_token='.$token,
+                    '/pay/wait?order_no='.$orderNo,
+                    (string) ($parsedQuery['wait_url'] ?? '')
+                );
+                $this->assertStringNotContainsString(
+                    'payment_recovery_token=',
                     (string) ($parsedQuery['wait_url'] ?? '')
                 );
 

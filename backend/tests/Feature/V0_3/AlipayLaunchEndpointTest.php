@@ -76,9 +76,13 @@ final class AlipayLaunchEndpointTest extends TestCase
                 parse_str((string) parse_url($returnUrl, PHP_URL_QUERY), $parsedQuery);
 
                 $this->assertSame($orderNo, (string) ($parsedQuery['order_no'] ?? ''));
-                $this->assertNotSame('', (string) ($parsedQuery['payment_recovery_token'] ?? ''));
+                $this->assertArrayNotHasKey('payment_recovery_token', $parsedQuery);
                 $this->assertStringContainsString(
                     '/en/pay/wait?order_no='.$orderNo,
+                    (string) ($parsedQuery['wait_url'] ?? '')
+                );
+                $this->assertStringNotContainsString(
+                    'payment_recovery_token=',
                     (string) ($parsedQuery['wait_url'] ?? '')
                 );
 
@@ -120,9 +124,13 @@ final class AlipayLaunchEndpointTest extends TestCase
                 parse_str((string) parse_url($returnUrl, PHP_URL_QUERY), $parsedQuery);
 
                 $this->assertSame($orderNo, (string) ($parsedQuery['order_no'] ?? ''));
-                $this->assertNotSame('', (string) ($parsedQuery['payment_recovery_token'] ?? ''));
+                $this->assertArrayNotHasKey('payment_recovery_token', $parsedQuery);
                 $this->assertStringContainsString(
                     '/en/pay/wait?order_no='.$orderNo,
+                    (string) ($parsedQuery['wait_url'] ?? '')
+                );
+                $this->assertStringNotContainsString(
+                    'payment_recovery_token=',
                     (string) ($parsedQuery['wait_url'] ?? '')
                 );
 
