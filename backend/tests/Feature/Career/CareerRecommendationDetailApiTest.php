@@ -100,6 +100,36 @@ final class CareerRecommendationDetailApiTest extends TestCase
         $this->assertArrayNotHasKey('score_bundle', $matchedJobs[0]);
     }
 
+    public function test_it_omits_non_public_matched_jobs_from_recommendation_detail(): void
+    {
+        $this->compileRecommendationChain(
+            CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-intj-api'])
+        );
+        $this->compileRecommendationChain(
+            CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'manual-review-intj-api'])
+        );
+
+        $manualReview = Occupation::query()->where('canonical_slug', 'manual-review-intj-api')->firstOrFail();
+        $manualReview->trustManifests()->orderByDesc('reviewed_at')->orderByDesc('created_at')->firstOrFail()->update([
+            'reviewer_status' => 'pending',
+        ]);
+
+        $response = $this->getJson('/api/v0.5/career/recommendations/mbti/intj')
+            ->assertOk();
+
+        $matchedJobs = (array) $response->json('matched_jobs');
+
+        $this->assertSame(
+            ['backend-architect-intj-api'],
+            array_map(
+                static fn (array $job): string => (string) ($job['canonical_slug'] ?? ''),
+                $matchedJobs
+            )
+        );
+        $this->assertArrayNotHasKey('trust_summary', $matchedJobs[0]);
+        $this->assertArrayNotHasKey('reason_codes', $matchedJobs[0]['seo_contract'] ?? []);
+    }
+
     public function test_it_additively_exposes_transition_path_contract_with_structured_bridge_and_tradeoff_fields(): void
     {
         $snapshot = $this->compileRecommendationChainBySlug('recommendation-transition-contract');

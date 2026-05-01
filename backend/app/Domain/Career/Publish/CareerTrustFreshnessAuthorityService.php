@@ -7,8 +7,7 @@ namespace App\Domain\Career\Publish;
 use App\DTO\Career\CareerTrustFreshnessAuthority;
 use App\DTO\Career\CareerTrustFreshnessMember;
 use App\Models\Occupation;
-use App\Models\OccupationTruthMetric;
-use App\Models\TrustManifest;
+use App\Models\RecommendationSnapshot;
 use Carbon\CarbonInterface;
 
 final class CareerTrustFreshnessAuthorityService
@@ -115,23 +114,32 @@ final class CareerTrustFreshnessAuthorityService
 
         $occupationIds = array_keys($slugByOccupationId);
 
-        $seenTrust = [];
-        TrustManifest::query()
+        $seenSnapshot = [];
+        RecommendationSnapshot::query()
+            ->with(['trustManifest', 'truthMetric'])
             ->whereIn('occupation_id', $occupationIds)
+            ->whereNotNull('compiled_at')
+            ->whereNotNull('compile_run_id')
+            ->whereHas('contextSnapshot', static function ($query): void {
+                $query->where('context_payload->materialization', 'career_first_wave');
+            })
+            ->whereHas('profileProjection', static function ($query): void {
+                $query->where('projection_payload->materialization', 'career_first_wave');
+            })
             ->orderBy('occupation_id')
-            ->orderByDesc('reviewed_at')
+            ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
             ->get([
+                'id',
                 'occupation_id',
-                'reviewer_status',
-                'reviewed_at',
-                'last_substantive_update_at',
-                'next_review_due_at',
+                'trust_manifest_id',
+                'truth_metric_id',
+                'compiled_at',
                 'created_at',
             ])
-            ->each(function (TrustManifest $manifest) use (&$profiles, &$seenTrust, $slugByOccupationId): void {
-                $occupationId = (string) $manifest->occupation_id;
-                if (isset($seenTrust[$occupationId])) {
+            ->each(function (RecommendationSnapshot $snapshot) use (&$profiles, &$seenSnapshot, $slugByOccupationId): void {
+                $occupationId = (string) $snapshot->occupation_id;
+                if (isset($seenSnapshot[$occupationId])) {
                     return;
                 }
 
@@ -140,34 +148,15 @@ final class CareerTrustFreshnessAuthorityService
                     return;
                 }
 
-                $seenTrust[$occupationId] = true;
-                $profiles[$slug]['reviewer_status'] = $manifest->reviewer_status;
-                $profiles[$slug]['reviewed_at'] = $manifest->reviewed_at;
-                $profiles[$slug]['last_substantive_update_at'] = $manifest->last_substantive_update_at;
-                $profiles[$slug]['next_review_due_at'] = $manifest->next_review_due_at;
-            });
+                $seenSnapshot[$occupationId] = true;
+                $manifest = $snapshot->trustManifest;
+                $truthMetric = $snapshot->truthMetric;
 
-        $seenTruth = [];
-        OccupationTruthMetric::query()
-            ->whereIn('occupation_id', $occupationIds)
-            ->orderBy('occupation_id')
-            ->orderByDesc('reviewed_at')
-            ->orderByDesc('effective_at')
-            ->orderByDesc('updated_at')
-            ->get(['occupation_id', 'reviewed_at', 'effective_at', 'updated_at'])
-            ->each(function (OccupationTruthMetric $metric) use (&$profiles, &$seenTruth, $slugByOccupationId): void {
-                $occupationId = (string) $metric->occupation_id;
-                if (isset($seenTruth[$occupationId])) {
-                    return;
-                }
-
-                $slug = $slugByOccupationId[$occupationId] ?? null;
-                if ($slug === null || ! isset($profiles[$slug])) {
-                    return;
-                }
-
-                $seenTruth[$occupationId] = true;
-                $profiles[$slug]['truth_last_reviewed_at'] = $metric->reviewed_at;
+                $profiles[$slug]['reviewer_status'] = $manifest?->reviewer_status;
+                $profiles[$slug]['reviewed_at'] = $manifest?->reviewed_at;
+                $profiles[$slug]['last_substantive_update_at'] = $manifest?->last_substantive_update_at;
+                $profiles[$slug]['next_review_due_at'] = $manifest?->next_review_due_at;
+                $profiles[$slug]['truth_last_reviewed_at'] = $truthMetric?->reviewed_at;
             });
 
         return $profiles;

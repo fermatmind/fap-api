@@ -45,8 +45,13 @@ final class FirstWaveReadinessApiTest extends TestCase
             ])
             ->assertJsonMissingPath('counts.blocked_override_eligible')
             ->assertJsonMissingPath('counts.blocked_not_safely_remediable')
+            ->assertJsonMissingPath('counts.blocked_total')
+            ->assertJsonMissingPath('counts.partial_raw')
             ->assertJsonMissingPath('occupations.0.blocker_type')
             ->assertJsonMissingPath('occupations.0.remediation_class')
+            ->assertJsonMissingPath('occupations.0.authority_override_supplied')
+            ->assertJsonMissingPath('occupations.0.review_required')
+            ->assertJsonMissingPath('occupations.0.crosswalk_mode')
             ->assertJsonMissingPath('occupations.0.reviewer_status')
             ->assertJsonMissingPath('occupations.0.reason_codes');
 

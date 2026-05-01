@@ -48,9 +48,13 @@ final class CareerFirstWaveLaunchTierApiTest extends TestCase
             ])
             ->assertJsonMissingPath('recommended_action')
             ->assertJsonMissingPath('occupations.0.reviewer_status')
+            ->assertJsonMissingPath('occupations.0.readiness_status')
+            ->assertJsonMissingPath('occupations.0.lifecycle_state')
             ->assertJsonMissingPath('occupations.0.crosswalk_mode')
+            ->assertJsonMissingPath('occupations.0.allow_strong_claim')
             ->assertJsonMissingPath('occupations.0.blocked_governance_status')
-            ->assertJsonMissingPath('occupations.0.confidence_score');
+            ->assertJsonMissingPath('occupations.0.confidence_score')
+            ->assertJsonMissingPath('occupations.0.reason_codes');
 
         $occupations = collect($response->json('occupations'))->keyBy('canonical_slug');
 
