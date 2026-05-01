@@ -5,6 +5,7 @@ namespace App\Services\Commerce;
 use App\Models\UnifiedAccessProjection;
 use App\Services\Report\ReportAccess;
 use App\Services\Storage\UnifiedAccessProjectionWriter;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -253,25 +254,7 @@ class EntitlementManager
             return ReportAccess::defaultModulesAllowedForLocked();
         }
 
-        $rows = $this->activeGrantRowsForAttempt($orgId, $attemptId);
-
-        $modules = ReportAccess::defaultModulesAllowedForLocked();
-        foreach ($rows as $row) {
-            $meta = $this->decodeMeta($row->meta_json ?? null);
-            $modules = array_merge(
-                $modules,
-                ReportAccess::normalizeModules(is_array($meta['modules'] ?? null) ? $meta['modules'] : [])
-            );
-            $modules = array_merge(
-                $modules,
-                $this->benefitModuleRuleCatalog()->modulesForBenefitCode(
-                    $orgId,
-                    (string) ($row->benefit_code ?? '')
-                )
-            );
-        }
-
-        return ReportAccess::normalizeModules($modules);
+        return $this->modulesAllowedFromGrantRows($orgId, $this->activeGrantRowsForAttempt($orgId, $attemptId));
     }
 
     public function hasActiveGrantForAttemptBenefitCode(int $orgId, string $attemptId, string $benefitCode): bool
@@ -304,20 +287,42 @@ class EntitlementManager
     {
         $attemptId = trim($attemptId);
         if ($attemptId === '') {
-            return [
-                'unlock_stage' => ReportAccess::UNLOCK_STAGE_LOCKED,
-                'unlock_source' => ReportAccess::UNLOCK_SOURCE_NONE,
-                'modules_allowed' => ReportAccess::defaultModulesAllowedForLocked(),
-                'access_level' => ReportAccess::REPORT_ACCESS_FREE,
-                'variant' => ReportAccess::VARIANT_FREE,
-                'has_active_grant' => false,
-                'has_full_grant' => false,
-                'has_partial_grant' => false,
-            ];
+            return $this->lockedUnlockState();
         }
 
         $scaleCode = $this->resolveScaleCodeForAttempt($orgId, $attemptId);
         $rows = $this->activeGrantRowsForAttempt($orgId, $attemptId);
+
+        return $this->unlockStateFromRows($orgId, $scaleCode, $rows);
+    }
+
+    /**
+     * @return array{unlock_stage:string,unlock_source:string,modules_allowed:list<string>,access_level:string,variant:string,has_active_grant:bool,has_full_grant:bool,has_partial_grant:bool}
+     */
+    public function resolveAttemptUnlockStateForActor(
+        int $orgId,
+        string $attemptId,
+        ?string $userId,
+        ?string $anonId,
+        ?string $orderNo = null
+    ): array {
+        $attemptId = trim($attemptId);
+        if ($attemptId === '') {
+            return $this->lockedUnlockState();
+        }
+
+        $scaleCode = $this->resolveScaleCodeForAttempt($orgId, $attemptId);
+        $rows = $this->ownedActiveGrantRowsForAttempt($orgId, $attemptId, $userId, $anonId, $orderNo);
+
+        return $this->unlockStateFromRows($orgId, $scaleCode, $rows);
+    }
+
+    /**
+     * @param  Collection<int,object>  $rows
+     * @return array{unlock_stage:string,unlock_source:string,modules_allowed:list<string>,access_level:string,variant:string,has_active_grant:bool,has_full_grant:bool,has_partial_grant:bool}
+     */
+    private function unlockStateFromRows(int $orgId, string $scaleCode, Collection $rows): array
+    {
         $benefitCodes = [];
         foreach ($rows as $row) {
             $code = strtoupper(trim((string) ($row->benefit_code ?? '')));
@@ -326,7 +331,7 @@ class EntitlementManager
             }
         }
 
-        $modulesAllowed = $this->getAllowedModulesForAttempt($orgId, $attemptId);
+        $modulesAllowed = $this->modulesAllowedFromGrantRows($orgId, $rows);
         $freeModule = ReportAccess::freeModuleForScale($scaleCode);
         $fullModule = ReportAccess::fullModuleForScale($scaleCode);
         $hasPaidModuleAccess = count(array_diff($modulesAllowed, [$freeModule])) > 0;
@@ -368,6 +373,23 @@ class EntitlementManager
             'has_active_grant' => $rows->count() > 0,
             'has_full_grant' => $hasFullGrant,
             'has_partial_grant' => $hasPartialGrant || ($unlockStage === ReportAccess::UNLOCK_STAGE_PARTIAL),
+        ];
+    }
+
+    /**
+     * @return array{unlock_stage:string,unlock_source:string,modules_allowed:list<string>,access_level:string,variant:string,has_active_grant:bool,has_full_grant:bool,has_partial_grant:bool}
+     */
+    private function lockedUnlockState(): array
+    {
+        return [
+            'unlock_stage' => ReportAccess::UNLOCK_STAGE_LOCKED,
+            'unlock_source' => ReportAccess::UNLOCK_SOURCE_NONE,
+            'modules_allowed' => ReportAccess::defaultModulesAllowedForLocked(),
+            'access_level' => ReportAccess::REPORT_ACCESS_FREE,
+            'variant' => ReportAccess::VARIANT_FREE,
+            'has_active_grant' => false,
+            'has_full_grant' => false,
+            'has_partial_grant' => false,
         ];
     }
 
@@ -532,10 +554,38 @@ class EntitlementManager
         ];
     }
 
-    private function activeGrantRowsForAttempt(int $orgId, string $attemptId): \Illuminate\Support\Collection
+    /**
+     * @param  Collection<int,object>  $rows
+     * @return list<string>
+     */
+    private function modulesAllowedFromGrantRows(int $orgId, Collection $rows): array
+    {
+        $modules = ReportAccess::defaultModulesAllowedForLocked();
+        foreach ($rows as $row) {
+            $meta = $this->decodeMeta($row->meta_json ?? null);
+            $modules = array_merge(
+                $modules,
+                ReportAccess::normalizeModules(is_array($meta['modules'] ?? null) ? $meta['modules'] : [])
+            );
+            $modules = array_merge(
+                $modules,
+                $this->benefitModuleRuleCatalog()->modulesForBenefitCode(
+                    $orgId,
+                    (string) ($row->benefit_code ?? '')
+                )
+            );
+        }
+
+        return ReportAccess::normalizeModules($modules);
+    }
+
+    /**
+     * @return Collection<int,object>
+     */
+    private function activeGrantRowsForAttempt(int $orgId, string $attemptId): Collection
     {
         return DB::table('benefit_grants')
-            ->select(['benefit_code', 'meta_json', 'scope', 'attempt_id', 'order_no'])
+            ->select(['benefit_code', 'meta_json', 'scope', 'attempt_id', 'order_no', 'user_id', 'benefit_ref'])
             ->where('org_id', $orgId)
             ->where('status', 'active')
             ->where(function ($q) use ($attemptId) {
@@ -547,6 +597,44 @@ class EntitlementManager
                     ->orWhere('expires_at', '>', now());
             })
             ->get();
+    }
+
+    /**
+     * @return Collection<int,object>
+     */
+    private function ownedActiveGrantRowsForAttempt(
+        int $orgId,
+        string $attemptId,
+        ?string $userId,
+        ?string $anonId,
+        ?string $orderNo
+    ): Collection {
+        $uid = $this->normalizeNullableString($userId);
+        $aid = $this->normalizeNullableString($anonId);
+        $ono = $this->normalizeNullableString($orderNo);
+        if ($uid === null && $aid === null && $ono === null) {
+            return collect();
+        }
+
+        return $this->activeGrantRowsForAttempt($orgId, $attemptId)
+            ->filter(function (object $row) use ($uid, $aid, $ono): bool {
+                $grantUserId = $this->normalizeNullableString($row->user_id ?? null);
+                $grantBenefitRef = $this->normalizeNullableString($row->benefit_ref ?? null);
+                $grantOrderNo = $this->normalizeNullableString($row->order_no ?? null);
+
+                if ($ono !== null) {
+                    $matchesOwner = $uid === null && $aid === null
+                        || ($uid !== null && ($grantUserId === $uid || $grantBenefitRef === $uid))
+                        || ($aid !== null && ($grantBenefitRef === $aid || $grantUserId === $aid));
+
+                    return $grantOrderNo === $ono && $matchesOwner;
+                }
+
+                return ($uid !== null && $grantUserId === $uid)
+                    || ($aid !== null && ($grantBenefitRef === $aid || $grantUserId === $aid))
+                    || ($uid !== null && $grantBenefitRef === $uid);
+            })
+            ->values();
     }
 
     private function resolveScaleCodeForAttempt(int $orgId, string $attemptId): string
@@ -629,6 +717,17 @@ class EntitlementManager
         }
 
         return [];
+    }
+
+    private function normalizeNullableString(mixed $value): ?string
+    {
+        if (! is_string($value) && ! is_numeric($value)) {
+            return null;
+        }
+
+        $normalized = trim((string) $value);
+
+        return $normalized === '' ? null : $normalized;
     }
 
     /**

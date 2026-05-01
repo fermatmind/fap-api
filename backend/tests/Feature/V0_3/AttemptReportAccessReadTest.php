@@ -100,8 +100,7 @@ final class AttemptReportAccessReadTest extends TestCase
         string $benefitCode = 'MBTI_REPORT_FULL',
         ?string $orderNo = null,
         ?array $meta = null,
-    ): void
-    {
+    ): void {
         DB::table('benefit_grants')->insert([
             'id' => (string) Str::uuid(),
             'org_id' => 0,
@@ -204,6 +203,36 @@ final class AttemptReportAccessReadTest extends TestCase
             'attempt_id' => $attemptId,
             'access_state' => 'ready',
             'report_state' => 'ready',
+            'reason_code' => 'projection_repaired_from_entitlement',
+        ]);
+    }
+
+    public function test_it_does_not_repair_missing_projection_from_grant_owned_by_another_anon(): void
+    {
+        $this->seedScales();
+
+        $attemptId = (string) Str::uuid();
+        $ownerAnonId = 'anon_access_owner';
+        $otherAnonId = 'anon_access_other_grant';
+        $token = $this->issueAnonToken($ownerAnonId);
+        $this->createAttempt($attemptId, $ownerAnonId);
+        $this->createResult($attemptId);
+        $this->createActiveGrant($attemptId, $otherAnonId);
+
+        $response = $this->withHeaders([
+            'X-Anon-Id' => $ownerAnonId,
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
+
+        $response->assertStatus(200);
+        $response->assertJsonPath('attempt_id', $attemptId);
+        $response->assertJsonPath('access_state', 'locked');
+        $response->assertJsonPath('report_state', 'ready');
+        $response->assertJsonPath('reason_code', 'projection_missing_result_ready');
+        $response->assertJsonPath('unlock_stage', 'locked');
+        $response->assertJsonPath('unlock_source', 'none');
+        $this->assertDatabaseMissing('unified_access_projections', [
+            'attempt_id' => $attemptId,
             'reason_code' => 'projection_repaired_from_entitlement',
         ]);
     }
@@ -439,7 +468,7 @@ final class AttemptReportAccessReadTest extends TestCase
 
         Log::spy();
         $this->mock(EntitlementManager::class, function (MockInterface $mock): void {
-            $mock->shouldReceive('resolveAttemptUnlockState')
+            $mock->shouldReceive('resolveAttemptUnlockStateForActor')
                 ->once()
                 ->andThrow(new \RuntimeException('simulated unlock-state failure'));
         });

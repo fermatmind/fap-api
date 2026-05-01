@@ -208,6 +208,67 @@ final class CommerceOrderReadFallbackTest extends TestCase
         ]);
     }
 
+    public function test_paid_mbti_order_does_not_repair_from_different_order_grant(): void
+    {
+        $orderNo = 'ord_fallback_mbti_order_'.Str::lower(Str::random(10));
+        $otherOrderNo = 'ord_fallback_mbti_other_'.Str::lower(Str::random(10));
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, self::ANON_OWNER, 'MBTI');
+        $this->insertOrderForOwner($orderNo, $attemptId, 'paid');
+        $this->insertResult($attemptId);
+        $this->insertActiveGrant($attemptId, $otherOrderNo);
+
+        $token = $this->issueAnonToken(self::ANON_OWNER);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/orders/'.$orderNo);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('status', 'paid')
+            ->assertJsonPath('exact_result_entry.attempt_id', $attemptId)
+            ->assertJsonPath('exact_result_entry.access_state', 'locked')
+            ->assertJsonPath('exact_result_entry.report_state', 'ready')
+            ->assertJsonPath('exact_result_entry.reason_code', 'projection_missing_result_ready')
+            ->assertJsonPath('exact_result_entry.ready_to_enter', false)
+            ->assertJsonPath('mbti_access_hub_v1.access_state', 'locked')
+            ->assertJsonPath('mbti_access_hub_v1.report_access.can_view_report', false);
+
+        $this->assertDatabaseMissing('unified_access_projections', [
+            'attempt_id' => $attemptId,
+            'reason_code' => 'projection_repaired_from_entitlement',
+        ]);
+    }
+
+    public function test_paid_mbti_order_does_not_repair_from_same_order_grant_owned_by_another_actor(): void
+    {
+        $orderNo = 'ord_fallback_mbti_actor_'.Str::lower(Str::random(10));
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, self::ANON_OWNER, 'MBTI');
+        $this->insertOrderForOwner($orderNo, $attemptId, 'paid');
+        $this->insertResult($attemptId);
+        $this->insertActiveGrant($attemptId, $orderNo, self::ANON_ATTACKER, self::ANON_ATTACKER);
+
+        $token = $this->issueAnonToken(self::ANON_OWNER);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/orders/'.$orderNo);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('status', 'paid')
+            ->assertJsonPath('exact_result_entry.attempt_id', $attemptId)
+            ->assertJsonPath('exact_result_entry.access_state', 'locked')
+            ->assertJsonPath('exact_result_entry.report_state', 'ready')
+            ->assertJsonPath('exact_result_entry.reason_code', 'projection_missing_result_ready')
+            ->assertJsonPath('exact_result_entry.ready_to_enter', false)
+            ->assertJsonPath('mbti_access_hub_v1.access_state', 'locked')
+            ->assertJsonPath('mbti_access_hub_v1.report_access.can_view_report', false);
+
+        $this->assertDatabaseMissing('unified_access_projections', [
+            'attempt_id' => $attemptId,
+            'reason_code' => 'projection_repaired_from_entitlement',
+        ]);
+    }
+
     public function test_valid_payment_recovery_token_reads_pending_order_without_owner_identity(): void
     {
         config([
@@ -418,19 +479,23 @@ final class CommerceOrderReadFallbackTest extends TestCase
         ]);
     }
 
-    private function insertActiveGrant(string $attemptId, string $orderNo): void
-    {
+    private function insertActiveGrant(
+        string $attemptId,
+        string $orderNo,
+        string $userId = self::ANON_OWNER,
+        string $benefitRef = self::ANON_OWNER
+    ): void {
         DB::table('benefit_grants')->insert([
             'id' => (string) Str::uuid(),
             'org_id' => 0,
-            'user_id' => self::ANON_OWNER,
+            'user_id' => $userId,
             'benefit_code' => 'MBTI_REPORT_FULL',
             'scope' => 'attempt',
             'attempt_id' => $attemptId,
             'order_no' => $orderNo,
             'status' => 'active',
             'expires_at' => null,
-            'benefit_ref' => self::ANON_OWNER,
+            'benefit_ref' => $benefitRef,
             'benefit_type' => 'report_unlock',
             'source_order_id' => (string) Str::uuid(),
             'source_event_id' => null,
