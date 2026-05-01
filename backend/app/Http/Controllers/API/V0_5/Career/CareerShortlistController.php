@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Career\CareerShortlistService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 final class CareerShortlistController extends Controller
 {
@@ -17,14 +18,19 @@ final class CareerShortlistController extends Controller
 
     public function store(Request $request): JsonResponse
     {
+        $this->rejectUnexpectedKeys($request->all(), [
+            'visitor_key',
+            'subject_kind',
+            'subject_slug',
+            'source_page_type',
+            'locale',
+        ]);
+
         $validated = $request->validate([
-            'visitor_key' => ['required', 'string', 'max:128'],
+            'visitor_key' => ['required', 'string', 'min:8', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'subject_kind' => ['required', 'string', 'in:job_slug'],
-            'subject_slug' => ['required', 'string', 'max:128'],
+            'subject_slug' => ['required', 'string', 'max:96', 'regex:/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/'],
             'source_page_type' => ['required', 'string', 'in:career_job_detail,career_recommendation_detail'],
-            'context_snapshot_uuid' => ['nullable', 'uuid'],
-            'projection_uuid' => ['nullable', 'uuid'],
-            'recommendation_snapshot_uuid' => ['nullable', 'uuid'],
         ]);
 
         $result = $this->shortlistService->add($validated);
@@ -48,10 +54,18 @@ final class CareerShortlistController extends Controller
 
     public function show(Request $request): JsonResponse
     {
+        $this->rejectUnexpectedKeys($request->all(), [
+            'visitor_key',
+            'subject_kind',
+            'subject_slug',
+            'source_page_type',
+            'locale',
+        ]);
+
         $validated = $request->validate([
-            'visitor_key' => ['required', 'string', 'max:128'],
+            'visitor_key' => ['required', 'string', 'min:8', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
             'subject_kind' => ['required', 'string', 'in:job_slug'],
-            'subject_slug' => ['required', 'string', 'max:128'],
+            'subject_slug' => ['required', 'string', 'max:96', 'regex:/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/'],
             'source_page_type' => ['required', 'string', 'in:career_job_detail,career_recommendation_detail'],
         ]);
 
@@ -76,6 +90,22 @@ final class CareerShortlistController extends Controller
                     'created_at' => optional($item->created_at)->toISOString(),
                 ] : null,
             ],
+        ]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $input
+     * @param  list<string>  $allowedKeys
+     */
+    private function rejectUnexpectedKeys(array $input, array $allowedKeys): void
+    {
+        $unexpected = array_values(array_diff(array_keys($input), $allowedKeys));
+        if ($unexpected === []) {
+            return;
+        }
+
+        throw ValidationException::withMessages([
+            $unexpected[0] => 'Unexpected public shortlist field.',
         ]);
     }
 }

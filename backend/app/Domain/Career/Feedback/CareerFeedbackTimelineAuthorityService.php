@@ -15,6 +15,7 @@ use App\Models\ProjectionLineage;
 use App\Models\RecommendationSnapshot;
 use App\Models\TransitionPath;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 final class CareerFeedbackTimelineAuthorityService
 {
@@ -203,6 +204,43 @@ final class CareerFeedbackTimelineAuthorityService
         });
 
         return $createdSnapshot->fresh(['profileProjection', 'contextSnapshot']) ?? $createdSnapshot;
+    }
+
+    /**
+     * Public feedback is an interaction record, not authority materialization.
+     *
+     * @param  array<string, mixed>  $input
+     */
+    public function recordPublicFeedback(RecommendationSnapshot $snapshot, array $input): RecommendationSnapshot
+    {
+        $context = $snapshot->contextSnapshot;
+        $projection = $snapshot->profileProjection;
+        if (! $context instanceof ContextSnapshot || ! $projection instanceof ProfileProjection) {
+            return $snapshot;
+        }
+
+        $burnoutCheckin = $this->normalizeScaleValue($input['burnout_checkin'] ?? null);
+        $careerSatisfaction = $this->normalizeScaleValue($input['career_satisfaction'] ?? null);
+        $switchUrgency = $this->normalizeScaleValue($input['switch_urgency'] ?? null);
+
+        if ($burnoutCheckin === null && $careerSatisfaction === null && $switchUrgency === null) {
+            throw ValidationException::withMessages([
+                'feedback' => 'At least one feedback value is required.',
+            ]);
+        }
+
+        CareerFeedbackRecord::query()->create([
+            'subject_kind' => 'recommendation_type',
+            'subject_slug' => strtolower(trim((string) ($input['subject_slug'] ?? ''))),
+            'burnout_checkin' => $burnoutCheckin,
+            'career_satisfaction' => $careerSatisfaction,
+            'switch_urgency' => $switchUrgency,
+            'context_snapshot_id' => $context->id,
+            'profile_projection_id' => $projection->id,
+            'recommendation_snapshot_id' => $snapshot->id,
+        ]);
+
+        return $snapshot->fresh(['profileProjection', 'contextSnapshot']) ?? $snapshot;
     }
 
     private function cloneTransitionPaths(

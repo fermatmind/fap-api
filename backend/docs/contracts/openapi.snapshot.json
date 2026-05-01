@@ -2500,7 +2500,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerAttributionEventController@store",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_track"
                 ]
             }
         },
@@ -2840,7 +2841,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerRecommendationFeedbackController@store",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_track"
                 ]
             }
         },
@@ -2908,7 +2910,8 @@
                 },
                 "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\Career\\CareerShortlistController@store",
                 "x-laravel-middleware": [
-                    "api"
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_track"
                 ]
             }
         },
