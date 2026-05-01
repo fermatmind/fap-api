@@ -126,6 +126,7 @@ final class OpsLoginPageTest extends TestCase
         $login->data = ['email' => 'fresh@example.test'];
 
         $this->assertNull($login->authenticate());
+        $this->assertFalse($login->traceStarted);
 
         RateLimiter::clear($sourceKey);
     }
@@ -190,6 +191,8 @@ final class OpsLoginPageTest extends TestCase
     {
         return new class extends OpsLogin
         {
+            public bool $traceStarted = false;
+
             public function exposeRateLimitKey(?string $method = 'authenticate'): string
             {
                 return $this->getRateLimitKey($method);
@@ -203,6 +206,11 @@ final class OpsLoginPageTest extends TestCase
             protected function getRateLimitedNotification(TooManyRequestsException $exception): ?Notification
             {
                 return null;
+            }
+
+            protected function startTrace(array $trace): void
+            {
+                $this->traceStarted = true;
             }
         };
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use App\Jobs\Ops\TouchFmTokenLastUsedAtJob;
+use App\Support\Logging\SensitiveDiagnosticRedactor;
 use App\Support\OrgContext;
 use Closure;
 use Illuminate\Http\Request;
@@ -446,7 +447,7 @@ class FmTokenAuth
             'ok' => $ok,
             'path' => $request->path(),
             'method' => $request->method(),
-            'attempt_id' => $this->extractAttemptId($request),
+            'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($this->extractAttemptId($request)),
         ];
 
         if ($reason !== '') {

@@ -146,10 +146,10 @@ curl -s 'http://127.0.0.1:8011/api/v0.5/personality/intp-t/desktop-clone?locale=
 
 ### 4.1 生产 SSH 入口
 
-当前实际验证过的生产执行节点：
+使用受控运维入口进入生产执行节点：
 
 ```bash
-ssh 122.152.221.126
+ssh <production-ops-entrypoint>
 ```
 
 该节点连接生产库：
@@ -162,14 +162,14 @@ grep -E '^(APP_ENV|APP_URL|DB_CONNECTION|DB_HOST|DB_DATABASE)=' /var/www/fap-api
 
 ```text
 APP_ENV=production
-APP_URL=https://ops.fermatmind.com
+APP_URL=https://<ops-host>
 DB_CONNECTION=mysql
-DB_HOST=10.20.1.13
-DB_DATABASE=fap_prod
+DB_HOST=<production-db-host>
+DB_DATABASE=<production-db-name>
 ```
 
 注意：
-- `api.fermatmind.com` 当前 DNS 可能不等于 deploy workflow 记录的机器 IP
+- `<api-host>` 当前 DNS 可能不等于 deploy workflow 记录的机器 IP
 - 不要先假设接流量节点和执行节点是同一台
 - 以 live curl 是否恢复为最终判断
 
@@ -191,11 +191,11 @@ php artisan optimize:clear
 ### 4.3 live API 验证
 
 ```bash
-curl -s 'https://api.fermatmind.com/api/v0.5/personality/enfj-t/desktop-clone?locale=zh-CN&org_id=0&scale_code=MBTI' | jq '{full_code:.full_code, hero:.content.hero, meta:._meta}'
+curl -s 'https://<api-host>/api/v0.5/personality/enfj-t/desktop-clone?locale=zh-CN&org_id=0&scale_code=MBTI' | jq '{full_code:.full_code, hero:.content.hero, meta:._meta}'
 ```
 
 ```bash
-curl -s 'https://api.fermatmind.com/api/v0.5/personality/intp-t/desktop-clone?locale=zh-CN&org_id=0&scale_code=MBTI' | jq '{full_code:.full_code, hero:.content.hero, meta:._meta}'
+curl -s 'https://<api-host>/api/v0.5/personality/intp-t/desktop-clone?locale=zh-CN&org_id=0&scale_code=MBTI' | jq '{full_code:.full_code, hero:.content.hero, meta:._meta}'
 ```
 
 恢复标准：

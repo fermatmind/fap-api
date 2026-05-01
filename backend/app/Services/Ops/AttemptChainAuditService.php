@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Ops;
 
+use App\Support\Logging\SensitiveDiagnosticRedactor;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +15,7 @@ final class AttemptChainAuditService
      * @return array{
      *     ok:bool,
      *     timestamp:string,
-     *     selection:array{attempt_id:?string,window_hours:int,limit:int,pending_timeout_minutes:int},
+     *     selection:array{attempt_fingerprint:?string,window_hours:int,limit:int,pending_timeout_minutes:int},
      *     inspected_count:int,
      *     summary:array{finding_total:int,critical_total:int,warning_total:int,by_issue_code:array<string,int>},
      *     inspections:list<array<string,mixed>>
@@ -35,7 +36,7 @@ final class AttemptChainAuditService
             'ok' => true,
             'timestamp' => now()->toISOString(),
             'selection' => [
-                'attempt_id' => $attemptId,
+                'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($attemptId),
                 'window_hours' => $windowHours,
                 'limit' => $limit,
                 'pending_timeout_minutes' => $pendingTimeoutMinutes,
@@ -193,7 +194,7 @@ final class AttemptChainAuditService
         }
 
         return [
-            'attempt_id' => $attemptId,
+            'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($attemptId),
             'source' => 'attempt',
             'attempt' => $this->attemptPayload($attempt),
             'submission' => $this->submissionPayload($submission),
@@ -227,13 +228,14 @@ final class AttemptChainAuditService
 
         $inspections = [];
         foreach ($rows as $row) {
+            $attemptId = trim((string) ($row->attempt_id ?? ''));
             $inspections[] = [
-                'attempt_id' => trim((string) ($row->attempt_id ?? '')),
+                'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($attemptId),
                 'source' => 'orphan_submission',
                 'attempt' => $this->attemptPayload(null),
                 'submission' => $this->submissionPayload($row),
-                'result' => $this->resultPayload($this->findResult((string) ($row->attempt_id ?? ''))),
-                'projection' => $this->projectionPayload($this->findProjection((string) ($row->attempt_id ?? ''))),
+                'result' => $this->resultPayload($this->findResult($attemptId)),
+                'projection' => $this->projectionPayload($this->findProjection($attemptId)),
                 'invite_unlock_diagnostic_v1' => null,
                 'findings' => [
                     $this->finding(
@@ -272,13 +274,14 @@ final class AttemptChainAuditService
 
         $inspections = [];
         foreach ($rows as $row) {
+            $attemptId = trim((string) ($row->attempt_id ?? ''));
             $inspections[] = [
-                'attempt_id' => trim((string) ($row->attempt_id ?? '')),
+                'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($attemptId),
                 'source' => 'orphan_result',
                 'attempt' => $this->attemptPayload(null),
-                'submission' => $this->submissionPayload($this->findLatestSubmission((string) ($row->attempt_id ?? ''))),
+                'submission' => $this->submissionPayload($this->findLatestSubmission($attemptId)),
                 'result' => $this->resultPayload($row),
-                'projection' => $this->projectionPayload($this->findProjection((string) ($row->attempt_id ?? ''))),
+                'projection' => $this->projectionPayload($this->findProjection($attemptId)),
                 'invite_unlock_diagnostic_v1' => null,
                 'findings' => [
                     $this->finding(
@@ -317,12 +320,13 @@ final class AttemptChainAuditService
 
         $inspections = [];
         foreach ($rows as $row) {
+            $attemptId = trim((string) ($row->attempt_id ?? ''));
             $inspections[] = [
-                'attempt_id' => trim((string) ($row->attempt_id ?? '')),
+                'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($attemptId),
                 'source' => 'orphan_projection',
                 'attempt' => $this->attemptPayload(null),
-                'submission' => $this->submissionPayload($this->findLatestSubmission((string) ($row->attempt_id ?? ''))),
-                'result' => $this->resultPayload($this->findResult((string) ($row->attempt_id ?? ''))),
+                'submission' => $this->submissionPayload($this->findLatestSubmission($attemptId)),
+                'result' => $this->resultPayload($this->findResult($attemptId)),
                 'projection' => $this->projectionPayload($row),
                 'invite_unlock_diagnostic_v1' => null,
                 'findings' => [
@@ -447,7 +451,7 @@ final class AttemptChainAuditService
         return [
             'present' => $row !== null,
             'org_id' => $this->nullableInt($row?->org_id ?? null),
-            'anon_id' => $this->normalizeString($row?->anon_id ?? null),
+            'anon_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($this->normalizeString($row?->anon_id ?? null)),
             'user_id' => $this->normalizeString($row?->user_id ?? null),
             'scale_code' => $this->normalizeString($row?->scale_code ?? null),
             'submitted_at' => $this->formatTimestamp($row?->submitted_at ?? null),
@@ -463,12 +467,12 @@ final class AttemptChainAuditService
     {
         return [
             'present' => $row !== null,
-            'id' => $this->normalizeString($row?->id ?? null),
+            'submission_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($this->normalizeString($row?->id ?? null)),
             'org_id' => $this->nullableInt($row?->org_id ?? null),
             'state' => $this->normalizeString($row?->state ?? null),
             'mode' => $this->normalizeString($row?->mode ?? null),
             'actor_user_id' => $this->normalizeString($row?->actor_user_id ?? null),
-            'actor_anon_id' => $this->normalizeString($row?->actor_anon_id ?? null),
+            'actor_anon_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($this->normalizeString($row?->actor_anon_id ?? null)),
             'error_code' => $this->normalizeString($row?->error_code ?? null),
             'updated_at' => $this->formatTimestamp($row?->updated_at ?? null),
             'created_at' => $this->formatTimestamp($row?->created_at ?? null),
@@ -550,8 +554,8 @@ final class AttemptChainAuditService
         if (! $invite) {
             return [
                 'has_invite' => false,
-                'invite_id' => null,
-                'invite_code' => null,
+                'invite_fingerprint' => null,
+                'invite_code_fingerprint' => null,
                 'invite_status' => null,
                 'completed_invitees' => 0,
                 'required_invitees' => 2,
@@ -641,8 +645,8 @@ final class AttemptChainAuditService
 
         return [
             'has_invite' => true,
-            'invite_id' => $inviteId,
-            'invite_code' => $this->normalizeString($invite->invite_code ?? null),
+            'invite_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($inviteId),
+            'invite_code_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($this->normalizeString($invite->invite_code ?? null)),
             'invite_status' => $this->normalizeString($invite->status ?? null),
             'completed_invitees' => max(0, (int) ($invite->completed_invitees ?? 0)),
             'required_invitees' => max(1, (int) ($invite->required_invitees ?? 2)),
@@ -651,9 +655,9 @@ final class AttemptChainAuditService
             'grants' => $grants,
             'counted_completions' => $countedRows->map(function (object $row): array {
                 return [
-                    'completion_id' => $this->normalizeString($row->id ?? null),
-                    'invitee_attempt_id' => $this->normalizeString($row->invitee_attempt_id ?? null),
-                    'invitee_identity_key' => $this->normalizeString($row->invitee_identity_key ?? null),
+                    'completion_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($this->normalizeString($row->id ?? null)),
+                    'invitee_attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($this->normalizeString($row->invitee_attempt_id ?? null)),
+                    'invitee_identity_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($this->normalizeString($row->invitee_identity_key ?? null)),
                     'qualified_reason' => $this->normalizeString($row->qualified_reason ?? null),
                     'qualification_status' => $this->normalizeString($row->qualification_status ?? null),
                     'created_at' => $this->formatTimestamp($row->created_at ?? null),
@@ -661,9 +665,9 @@ final class AttemptChainAuditService
             })->values()->all(),
             'rejected_completions' => $rejectedRows->map(function (object $row): array {
                 return [
-                    'completion_id' => $this->normalizeString($row->id ?? null),
-                    'invitee_attempt_id' => $this->normalizeString($row->invitee_attempt_id ?? null),
-                    'invitee_identity_key' => $this->normalizeString($row->invitee_identity_key ?? null),
+                    'completion_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($this->normalizeString($row->id ?? null)),
+                    'invitee_attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($this->normalizeString($row->invitee_attempt_id ?? null)),
+                    'invitee_identity_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($this->normalizeString($row->invitee_identity_key ?? null)),
                     'qualified_reason' => $this->normalizeString($row->qualified_reason ?? null),
                     'qualification_status' => $this->normalizeString($row->qualification_status ?? null),
                     'created_at' => $this->formatTimestamp($row->created_at ?? null),

@@ -8,42 +8,22 @@ use Monolog\LogRecord;
 
 final class RedactProcessor
 {
-    private const REDACTED = '[REDACTED]';
-
     /** @var array<string, true> */
-    private array $sensitiveExactKeys = [];
+    private array $customKeys = [];
 
-    /** @var array<int, string> */
-    private array $sensitiveKeyParts = [];
+    /** @var list<string> */
+    private array $customKeyParts = [];
 
     /**
      * @param  list<string>|null  $keys
      */
     public function __construct(?array $keys = null)
     {
-        $keys = $keys ?? [
-            'password',
-            'password_confirmation',
-            'token',
-            'authorization',
-            'secret',
-            'credit_card',
-            'email',
-            'phone',
-            'cookie',
-            'api_key',
-            'client_secret',
-            'private_key',
-            'signature',
-            'id_card',
-            'id_number',
-        ];
-
-        foreach ($keys as $key) {
+        foreach ($keys ?? [] as $key) {
             $normalized = strtolower(trim((string) $key));
             if ($normalized !== '') {
-                $this->sensitiveExactKeys[$normalized] = true;
-                $this->sensitiveKeyParts[] = $normalized;
+                $this->customKeys[$normalized] = true;
+                $this->customKeyParts[] = $normalized;
             }
         }
     }
@@ -78,36 +58,39 @@ final class RedactProcessor
      */
     private function redactArray(array $data): array
     {
-        $result = [];
+        if ($this->customKeys === []) {
+            return SensitiveDiagnosticRedactor::redactArray($data);
+        }
+
+        $redacted = [];
 
         foreach ($data as $key => $value) {
-            if ($this->isSensitiveKey($key)) {
-                $result[$key] = self::REDACTED;
+            $normalized = strtolower((string) $key);
+            if ($this->isCustomKey($normalized) || SensitiveDiagnosticRedactor::isSensitiveKey($key)) {
+                $redacted[$key] = SensitiveDiagnosticRedactor::REDACTED;
 
                 continue;
             }
 
             if (is_array($value)) {
-                $result[$key] = $this->redactArray($value);
+                $redacted[$key] = $this->redactArray($value);
 
                 continue;
             }
 
-            $result[$key] = $value;
+            $redacted[$key] = is_string($value) ? SensitiveDiagnosticRedactor::redactString($value) : $value;
         }
 
-        return $result;
+        return $redacted;
     }
 
-    private function isSensitiveKey(int|string $key): bool
+    private function isCustomKey(string $normalized): bool
     {
-        $normalized = strtolower((string) $key);
-
-        if (isset($this->sensitiveExactKeys[$normalized])) {
+        if (isset($this->customKeys[$normalized])) {
             return true;
         }
 
-        foreach ($this->sensitiveKeyParts as $part) {
+        foreach ($this->customKeyParts as $part) {
             if ($part !== '' && str_contains($normalized, $part)) {
                 return true;
             }

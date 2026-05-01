@@ -9,10 +9,11 @@ use App\Models\AttemptInviteUnlock;
 use App\Models\AttemptInviteUnlockCompletion;
 use App\Models\Result;
 use App\Services\Analytics\EventRecorder;
-use App\Services\Commerce\EntitlementManager;
-use App\Services\Attempts\InviteUnlock\InviteUnlockDiagnostics;
 use App\Services\Attempts\InviteUnlock\InviteUnlockCompletionStatus;
+use App\Services\Attempts\InviteUnlock\InviteUnlockDiagnostics;
 use App\Services\Attempts\InviteUnlock\InviteUnlockStatus;
+use App\Services\Commerce\EntitlementManager;
+use App\Support\Logging\SensitiveDiagnosticRedactor;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -638,11 +639,11 @@ final class AttemptInviteUnlockCompletionService
         $durationMs = (int) floor((hrtime(true) - $startedAt) / 1_000_000);
         $logPayload = [
             'source' => __METHOD__,
-            'invite_code' => $inviteCode,
-            'invitee_attempt_id' => $inviteeAttemptId,
+            'invite_code_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($inviteCode),
+            'invitee_attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($inviteeAttemptId),
             'ok' => (bool) ($payload['ok'] ?? false),
             'idempotent' => (bool) ($payload['idempotent'] ?? false),
-            'invite_id' => (string) ($payload['invite_id'] ?? ''),
+            'invite_fingerprint' => SensitiveDiagnosticRedactor::fingerprint((string) ($payload['invite_id'] ?? '')),
             'completion_id' => (string) ($payload['completion_id'] ?? ''),
             'qualification_status' => (string) ($payload['qualification_status'] ?? ''),
             'qualified_reason' => (string) ($payload['qualified_reason'] ?? ''),

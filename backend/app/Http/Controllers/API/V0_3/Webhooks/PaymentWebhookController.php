@@ -9,6 +9,7 @@ use App\Services\Commerce\PaymentGateway\PaymentGatewayInterface;
 use App\Services\Commerce\PaymentGateway\StripeGateway;
 use App\Services\Commerce\PaymentWebhookProcessor;
 use App\Services\Payments\PaymentProviderRegistry;
+use App\Support\Logging\SensitiveDiagnosticRedactor;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -79,7 +80,7 @@ final class PaymentWebhookController extends Controller
             Log::warning('PAYMENT_WEBHOOK_INVALID_SIGNATURE', [
                 'request_id' => $requestId,
                 'provider' => $provider,
-                'exception' => $e->getMessage(),
+                'exception' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
             ]);
 
             return $this->errorResponse(400, 'INVALID_SIGNATURE', 'invalid signature.');
@@ -103,7 +104,7 @@ final class PaymentWebhookController extends Controller
             Log::warning('PAYMENT_WEBHOOK_ACK_FAILED', [
                 'request_id' => $requestId,
                 'provider' => $provider,
-                'exception' => $e->getMessage(),
+                'exception' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
             ]);
 
             return $this->jsonResult($result);
@@ -123,7 +124,7 @@ final class PaymentWebhookController extends Controller
             Log::warning('PAYMENT_WEBHOOK_INVALID_SIGNATURE', [
                 'request_id' => $requestId,
                 'provider' => $provider,
-                'exception' => $e->getMessage(),
+                'exception' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
             ]);
 
             return $this->errorResponse(400, 'INVALID_SIGNATURE', 'invalid signature.');
@@ -147,7 +148,7 @@ final class PaymentWebhookController extends Controller
             Log::warning('PAYMENT_WEBHOOK_ACK_FAILED', [
                 'request_id' => $requestId,
                 'provider' => $provider,
-                'exception' => $e->getMessage(),
+                'exception' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
             ]);
 
             return $this->jsonResult($result);
@@ -267,7 +268,7 @@ final class PaymentWebhookController extends Controller
                 Log::error('PAYMENT_WEBHOOK_INTERNAL_ERROR', [
                     'request_id' => $requestId,
                     'provider' => $provider,
-                    'exception' => $e->getMessage(),
+                    'exception' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
                 ]);
 
                 return $this->errorResponse(500, 'WEBHOOK_INTERNAL_ERROR', 'webhook internal error');

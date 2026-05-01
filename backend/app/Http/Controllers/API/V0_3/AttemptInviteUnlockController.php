@@ -11,6 +11,7 @@ use App\Models\Attempt;
 use App\Services\Analytics\EventRecorder;
 use App\Services\Attempts\AttemptInviteUnlockService;
 use App\Services\Attempts\InviteUnlock\InviteUnlockDiagnostics;
+use App\Support\Logging\SensitiveDiagnosticRedactor;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -75,9 +76,9 @@ final class AttemptInviteUnlockController extends Controller
             'route' => 'attempts.invite_unlocks.store',
             'source' => __METHOD__,
             'org_id' => (int) ($attempt->org_id ?? 0),
-            'attempt_id' => (string) ($attempt->id ?? ''),
-            'invite_id' => (string) ($result['invite_id'] ?? ''),
-            'invite_code' => (string) ($result['invite_code'] ?? ''),
+            'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint((string) ($attempt->id ?? '')),
+            'invite_fingerprint' => SensitiveDiagnosticRedactor::fingerprint((string) ($result['invite_id'] ?? '')),
+            'invite_code_fingerprint' => SensitiveDiagnosticRedactor::fingerprint((string) ($result['invite_code'] ?? '')),
             'created' => (bool) ($result['created'] ?? false),
             'diagnostic_status' => (string) ($diagnostics['status'] ?? 'locked'),
             'unlock_stage' => (string) ($diagnostics['unlock_stage'] ?? 'locked'),
@@ -114,9 +115,9 @@ final class AttemptInviteUnlockController extends Controller
             'route' => 'attempts.invite_unlocks.show',
             'source' => __METHOD__,
             'org_id' => (int) ($attempt->org_id ?? 0),
-            'attempt_id' => (string) ($attempt->id ?? ''),
-            'invite_id' => (string) ($result['invite_id'] ?? ''),
-            'invite_code' => (string) ($result['invite_code'] ?? ''),
+            'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint((string) ($attempt->id ?? '')),
+            'invite_fingerprint' => SensitiveDiagnosticRedactor::fingerprint((string) ($result['invite_id'] ?? '')),
+            'invite_code_fingerprint' => SensitiveDiagnosticRedactor::fingerprint((string) ($result['invite_code'] ?? '')),
             'has_invite' => (bool) ($result['has_invite'] ?? false),
             'diagnostic_status' => (string) ($diagnostics['status'] ?? 'locked'),
             'unlock_stage' => (string) ($diagnostics['unlock_stage'] ?? 'locked'),

@@ -44,6 +44,7 @@ use App\Services\Report\ReportGatekeeper;
 use App\Services\Riasec\RiasecPublicFormSummaryBuilder;
 use App\Services\Riasec\RiasecPublicProjectionService;
 use App\Services\Scale\ScaleCodeResponseProjector;
+use App\Support\Logging\SensitiveDiagnosticRedactor;
 use App\Support\OrgContext;
 use App\Support\SchemaBaseline;
 use Illuminate\Database\QueryException;
@@ -702,7 +703,7 @@ class AttemptReadController extends Controller
                 $repairFailureCode = 'projection_repair_runtime_exception';
                 Log::error('REPORT_ACCESS_PROJECTION_REPAIR_FAILED', [
                     'org_id' => $orgId,
-                    'attempt_id' => (string) $attempt->id,
+                    'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint((string) $attempt->id),
                     'exception' => $e,
                 ]);
             }
@@ -766,7 +767,7 @@ class AttemptReadController extends Controller
 
             Log::warning('REPORT_ACCESS_PROJECTION_REPAIR_FALLBACK_APPLIED', [
                 'org_id' => $orgId,
-                'attempt_id' => (string) $attempt->id,
+                'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint((string) $attempt->id),
                 'reason_code' => $reasonCode,
                 'access_state' => $accessState,
                 'report_state' => $reportState,
@@ -897,7 +898,7 @@ class AttemptReadController extends Controller
         $durationMs = (int) floor((hrtime(true) - $startedAt) / 1_000_000);
         Log::info('REPORT_ACCESS_INVITE_UNLOCK_DIAGNOSTIC', [
             'org_id' => $orgId,
-            'attempt_id' => (string) ($attempt->id ?? ''),
+            'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint((string) ($attempt->id ?? '')),
             'source' => __METHOD__,
             'access_state' => $accessState,
             'report_state' => $reportState,
@@ -938,7 +939,7 @@ class AttemptReadController extends Controller
                 : 'invite_snapshot_table_missing';
             Log::warning('REPORT_ACCESS_INVITE_SNAPSHOT_FAILED', [
                 'org_id' => $orgId,
-                'attempt_id' => $attemptId,
+                'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($attemptId),
                 'branch' => 'schema_guard',
                 'source' => __METHOD__,
                 'failure_code' => $failureCode,
@@ -971,7 +972,7 @@ class AttemptReadController extends Controller
             $failureCode = 'invite_snapshot_schema_guard_exception';
             Log::warning('REPORT_ACCESS_INVITE_SNAPSHOT_FAILED', [
                 'org_id' => $orgId,
-                'attempt_id' => $attemptId,
+                'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($attemptId),
                 'branch' => 'schema_guard',
                 'source' => __METHOD__,
                 'failure_code' => $failureCode,
@@ -986,7 +987,7 @@ class AttemptReadController extends Controller
             $failureCode = 'invite_snapshot_columns_missing';
             Log::warning('REPORT_ACCESS_INVITE_SNAPSHOT_FAILED', [
                 'org_id' => $orgId,
-                'attempt_id' => $attemptId,
+                'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($attemptId),
                 'branch' => 'schema_guard',
                 'source' => __METHOD__,
                 'failure_code' => $failureCode,
@@ -1005,12 +1006,12 @@ class AttemptReadController extends Controller
             $failureCode = 'invite_snapshot_query_exception';
             Log::error('REPORT_ACCESS_INVITE_SNAPSHOT_FAILED', [
                 'org_id' => $orgId,
-                'attempt_id' => $attemptId,
+                'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($attemptId),
                 'branch' => 'query_exception',
                 'source' => __METHOD__,
                 'failure_code' => $failureCode,
                 'exception_class' => $e::class,
-                'message' => $e->getMessage(),
+                'message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
                 'sql_state' => $e->errorInfo[0] ?? null,
             ]);
 
@@ -1019,12 +1020,12 @@ class AttemptReadController extends Controller
             $failureCode = 'invite_snapshot_runtime_exception';
             Log::error('REPORT_ACCESS_INVITE_SNAPSHOT_FAILED', [
                 'org_id' => $orgId,
-                'attempt_id' => $attemptId,
+                'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($attemptId),
                 'branch' => 'runtime_exception',
                 'source' => __METHOD__,
                 'failure_code' => $failureCode,
                 'exception_class' => $e::class,
-                'message' => $e->getMessage(),
+                'message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
             ]);
 
             return null;
@@ -1059,7 +1060,7 @@ class AttemptReadController extends Controller
             $failureCode = 'projection_table_missing';
             Log::warning('REPORT_ACCESS_PROJECTION_READ_FAILED', [
                 'org_id' => $orgId,
-                'attempt_id' => $attemptId,
+                'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($attemptId),
                 'branch' => 'schema_guard',
                 'source' => __METHOD__,
                 'failure_code' => $failureCode,
@@ -1073,7 +1074,7 @@ class AttemptReadController extends Controller
             $failureCode = 'projection_attempt_id_column_missing';
             Log::warning('REPORT_ACCESS_PROJECTION_READ_FAILED', [
                 'org_id' => $orgId,
-                'attempt_id' => $attemptId,
+                'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($attemptId),
                 'branch' => 'schema_guard',
                 'source' => __METHOD__,
                 'failure_code' => $failureCode,
@@ -1092,12 +1093,12 @@ class AttemptReadController extends Controller
             $failureCode = 'projection_query_exception';
             Log::error('REPORT_ACCESS_PROJECTION_READ_FAILED', [
                 'org_id' => $orgId,
-                'attempt_id' => $attemptId,
+                'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($attemptId),
                 'branch' => 'query_exception',
                 'source' => __METHOD__,
                 'failure_code' => $failureCode,
                 'exception_class' => $e::class,
-                'message' => $e->getMessage(),
+                'message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
                 'sql_state' => $e->errorInfo[0] ?? null,
             ]);
 
@@ -1107,12 +1108,12 @@ class AttemptReadController extends Controller
             $failureCode = 'projection_runtime_exception';
             Log::error('REPORT_ACCESS_PROJECTION_READ_FAILED', [
                 'org_id' => $orgId,
-                'attempt_id' => $attemptId,
+                'attempt_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($attemptId),
                 'branch' => 'runtime_exception',
                 'source' => __METHOD__,
                 'failure_code' => $failureCode,
                 'exception_class' => $e::class,
-                'message' => $e->getMessage(),
+                'message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
             ]);
 
             return null;
