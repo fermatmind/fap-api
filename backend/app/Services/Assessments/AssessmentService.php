@@ -195,7 +195,7 @@ class AssessmentService
 
             $existingAttempt = trim((string) ($row->attempt_id ?? ''));
             if ($existingAttempt !== '' && $existingAttempt !== $attemptId) {
-                return $row;
+                return null;
             }
 
             $now = now();
