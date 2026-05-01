@@ -1,4 +1,5 @@
 <?php
+
 namespace Deployer;
 
 require 'recipe/laravel.php';
@@ -116,6 +117,106 @@ function resolveDeployIdentityFile(string $envKey, array $candidates = []): ?str
     return null;
 }
 
+function deployShellArg(string $value): string
+{
+    return escapeshellarg($value);
+}
+
+function deploySafeAbsolutePath(string $path, string $label): string
+{
+    $path = trim($path);
+
+    if ($path === '' || $path[0] !== '/' || preg_match('/[\x00-\x1F\x7F]/', $path)) {
+        throw new \RuntimeException("{$label} must be a non-empty absolute path");
+    }
+
+    if (preg_match('#(^|/)\.\.?(/|$)#', $path) || ! preg_match('#\A/[A-Za-z0-9._~+/\-]+\z#', $path)) {
+        throw new \RuntimeException("{$label} contains unsafe path characters");
+    }
+
+    return $path;
+}
+
+function deploySafeRelativePath(string $path, string $label): string
+{
+    $path = ltrim(trim($path), '/');
+
+    if ($path === '' || preg_match('/[\x00-\x1F\x7F]/', $path)) {
+        throw new \RuntimeException("{$label} must be a non-empty relative path");
+    }
+
+    if (preg_match('#(^|/)\.\.?(/|$)#', $path) || ! preg_match('#\A[A-Za-z0-9._~+/\-]+\z#', $path)) {
+        throw new \RuntimeException("{$label} contains unsafe path characters");
+    }
+
+    return $path;
+}
+
+function deployPlaceholderPathArg(string $placeholder, string $relative = ''): string
+{
+    $path = rtrim($placeholder, '/');
+
+    if ($relative !== '') {
+        $path .= '/'.deploySafeRelativePath($relative, 'deploy placeholder relative path');
+    }
+
+    return deployShellArg($path);
+}
+
+function deploySafeHost(string $host, string $label): string
+{
+    $host = strtolower(trim($host));
+
+    if ($host === '' || ! preg_match('/\A[A-Za-z0-9.-]+\z/', $host) || str_contains($host, '..')) {
+        throw new \RuntimeException("{$label} contains unsafe host characters");
+    }
+
+    return $host;
+}
+
+function deployCurlResolveArg(string $host, bool $enabled): string
+{
+    if (! $enabled) {
+        return '';
+    }
+
+    return '--resolve '.deployShellArg(deploySafeHost($host, 'curl resolve host').':443:127.0.0.1').' ';
+}
+
+function deployHttpsUrlArg(string $host, string $path): string
+{
+    $host = deploySafeHost($host, 'https URL host');
+    $path = '/'.ltrim($path, '/');
+
+    if (preg_match('/[\x00-\x1F\x7F]/', $path) || str_contains($path, '..')) {
+        throw new \RuntimeException('https URL path contains unsafe characters');
+    }
+
+    return deployShellArg("https://{$host}{$path}");
+}
+
+function deploySystemdServiceArg(string $service, string $label): string
+{
+    $service = trim($service);
+
+    if ($service === '' || ! preg_match('/\A[A-Za-z0-9_.@:+-]+\z/', $service)) {
+        throw new \RuntimeException("{$label} contains unsafe systemd service characters");
+    }
+
+    return deployShellArg($service);
+}
+
+function deployOwnerGroupArg(string $owner, string $group): string
+{
+    foreach (['owner' => $owner, 'group' => $group] as $label => $value) {
+        if (! preg_match('/\A[A-Za-z0-9_.-]+\z/', $value)) {
+            throw new \RuntimeException("deploy {$label} contains unsafe account characters");
+        }
+    }
+
+    return deployShellArg("{$owner}:{$group}");
+}
+
 $productionIdentityFile = resolveDeployIdentityFile('DEPLOY_IDENTITY_FILE_PROD', [
     '~/.ssh/fap_prod',
     '~/.ssh/fap_api_gha',
@@ -134,7 +235,7 @@ $stagingIdentityFile = resolveDeployIdentityFile('DEPLOY_IDENTITY_FILE_STG', [
 $productionHost = host('production')
     ->setHostname(getenv('DEPLOY_HOST_PROD') ?: '122.152.221.126')
     ->setRemoteUser(getenv('DEPLOY_USER_PROD') ?: 'ubuntu')
-    ->setPort((int)(getenv('DEPLOY_PORT_PROD') ?: 22))
+    ->setPort((int) (getenv('DEPLOY_PORT_PROD') ?: 22))
     ->set('deploy_path', getenv('DEPLOY_PATH_PROD') ?: '/var/www/fap-api')
     ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_PROD') ?: 'fermatmind.com')
     ->set('static_media_healthcheck_host', getenv('STATIC_MEDIA_HEALTHCHECK_HOST_PROD') ?: 'api.fermatmind.com')
@@ -154,7 +255,7 @@ if ($productionIdentityFile !== null) {
 $stagingHost = host('staging')
     ->setHostname(getenv('DEPLOY_HOST_STG') ?: 'staging.fermatmind.com')
     ->setRemoteUser(getenv('DEPLOY_USER_STG') ?: 'ubuntu')
-    ->setPort((int)(getenv('DEPLOY_PORT_STG') ?: 22))
+    ->setPort((int) (getenv('DEPLOY_PORT_STG') ?: 22))
     ->set('deploy_path', getenv('DEPLOY_PATH_STG') ?: '/var/www/fap-api-staging')
     ->set('healthcheck_host', getenv('HEALTHCHECK_HOST_STG') ?: 'staging.fermatmind.com')
     ->set('static_media_healthcheck_host', getenv('STATIC_MEDIA_HEALTHCHECK_HOST_STG') ?: 'staging-api.fermatmind.com')
@@ -172,7 +273,7 @@ if ($stagingIdentityFile !== null) {
 }
 
 task('guard:ops-theme-asset', function () {
-    $asset = '{{release_path}}/backend/public/css/app/ops-theme.css';
+    $asset = deployPlaceholderPathArg('{{release_path}}', 'backend/public/css/app/ops-theme.css');
 
     if (! test("[ -s {$asset} ]")) {
         throw new \RuntimeException("ops theme asset missing or empty: {$asset}");
@@ -186,17 +287,19 @@ task('guard:ops-theme-asset', function () {
 
 task('guard:filament-assets', function () {
     $assets = [
-        '{{release_path}}/backend/public/css/filament/forms/forms.css',
-        '{{release_path}}/backend/public/css/filament/support/support.css',
-        '{{release_path}}/backend/public/css/filament/filament/app.css',
-        '{{release_path}}/backend/public/js/filament/filament/app.js',
-        '{{release_path}}/backend/public/js/filament/support/support.js',
-        '{{release_path}}/backend/public/js/filament/notifications/notifications.js',
+        'backend/public/css/filament/forms/forms.css',
+        'backend/public/css/filament/support/support.css',
+        'backend/public/css/filament/filament/app.css',
+        'backend/public/js/filament/filament/app.js',
+        'backend/public/js/filament/support/support.js',
+        'backend/public/js/filament/notifications/notifications.js',
     ];
 
     foreach ($assets as $asset) {
-        if (! test("[ -s {$asset} ]")) {
-            throw new \RuntimeException("filament asset missing or empty: {$asset}");
+        $assetPath = deployPlaceholderPathArg('{{release_path}}', $asset);
+
+        if (! test("[ -s {$assetPath} ]")) {
+            throw new \RuntimeException("filament asset missing or empty: {$assetPath}");
         }
     }
 });
@@ -270,7 +373,7 @@ task('rollback:healthcheck', [
  * ======================================================
  */
 task('deploy:vendors', function () {
-    run('cd {{release_path}}/backend && {{bin/composer}} install --no-interaction --prefer-dist --optimize-autoloader --no-dev');
+    run('cd '.deployPlaceholderPathArg('{{release_path}}', 'backend').' && {{bin/composer}} install --no-interaction --prefer-dist --optimize-autoloader --no-dev');
 });
 
 /**
@@ -279,15 +382,15 @@ task('deploy:vendors', function () {
  * ======================================================
  */
 task('artisan:filament:assets', function () {
-    run('{{bin/php}} {{release_path}}/backend/artisan filament:assets --ansi');
+    run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' filament:assets --ansi');
 });
 
 task('artisan:storage:link', function () {
-    run('{{bin/php}} {{release_path}}/backend/artisan storage:link --ansi');
+    run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' storage:link --ansi');
 });
 
 task('artisan:config:cache', function () {
-    run('{{bin/php}} {{release_path}}/backend/artisan config:cache --ansi');
+    run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' config:cache --ansi');
 });
 
 task('guard:sitemap-authority', function () {
@@ -310,15 +413,15 @@ BASH);
 });
 
 task('artisan:route:cache', function () {
-    run('{{bin/php}} {{release_path}}/backend/artisan route:cache --ansi');
+    run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' route:cache --ansi');
 });
 
 task('artisan:event:cache', function () {
-    run('{{bin/php}} {{release_path}}/backend/artisan event:cache --ansi');
+    run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' event:cache --ansi');
 });
 
 task('artisan:migrate', function () {
-    run('{{bin/php}} {{release_path}}/backend/artisan migrate --force --no-interaction --ansi');
+    run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' migrate --force --no-interaction --ansi');
 });
 
 task('guard:no-pending-migrations', function () {
@@ -336,7 +439,7 @@ BASH);
 });
 
 task('artisan:scales:seed-default', function () {
-    run('{{bin/php}} {{release_path}}/backend/artisan fap:scales:seed-default --no-interaction --ansi');
+    run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' fap:scales:seed-default --no-interaction --ansi');
 });
 
 task('career:warm-public-authority-cache', function () {
@@ -344,21 +447,22 @@ task('career:warm-public-authority-cache', function () {
     $timeoutSeconds = max(180, $timeoutSeconds);
 
     run(sprintf(
-        'timeout %d {{bin/php}} {{release_path}}/backend/artisan career:warm-public-authority-cache --no-interaction --ansi',
+        'timeout %d {{bin/php}} %s career:warm-public-authority-cache --no-interaction --ansi',
         $timeoutSeconds,
+        deployPlaceholderPathArg('{{release_path}}', 'backend/artisan'),
     ));
 });
 
 task('guard:public-content-release', function () {
-    run('timeout 180 {{bin/php}} {{release_path}}/backend/artisan release:verify-public-content --content-source-dir={{release_path}}/content_baselines/content_pages --no-interaction --ansi');
+    run('timeout 180 {{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' release:verify-public-content --content-source-dir='.deployPlaceholderPathArg('{{release_path}}', 'content_baselines/content_pages').' --no-interaction --ansi');
 });
 
 task('cms:import-landing-surface-baselines', function () {
-    run('{{bin/php}} {{release_path}}/backend/artisan landing-surfaces:import-local-baseline --upsert --status=published --source-dir={{release_path}}/content_baselines/landing_surfaces --no-interaction --ansi');
+    run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' landing-surfaces:import-local-baseline --upsert --status=published --source-dir='.deployPlaceholderPathArg('{{release_path}}', 'content_baselines/landing_surfaces').' --no-interaction --ansi');
 });
 
 task('cms:import-content-page-baselines', function () {
-    run('{{bin/php}} {{release_path}}/backend/artisan content-pages:import-local-baseline --upsert --status=published --source-dir={{release_path}}/content_baselines/content_pages --no-interaction --ansi');
+    run('{{bin/php}} '.deployPlaceholderPathArg('{{release_path}}', 'backend/artisan').' content-pages:import-local-baseline --upsert --status=published --source-dir='.deployPlaceholderPathArg('{{release_path}}', 'content_baselines/content_pages').' --no-interaction --ansi');
 });
 
 task('artisan:view:cache', function () {
@@ -378,13 +482,49 @@ task('guard:forbid-destructive', function () {
     }
 });
 
+task('guard:deploy-shell-config', function () {
+    deploySafeAbsolutePath((string) get('deploy_path'), 'deploy_path');
+    deploySafeAbsolutePath((string) get('nginx_site'), 'nginx_site');
+    deploySystemdServiceArg((string) get('php_fpm_service'), 'php_fpm_service');
+    deployOwnerGroupArg(currentHost()->getRemoteUser() ?: 'ubuntu', 'www-data');
+    deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host');
+    deploySafeHost((string) (get('static_media_healthcheck_host') ?: get('healthcheck_host')), 'static_media_healthcheck_host');
+    deploySafeHost((string) (get('scale_lookup_healthcheck_host') ?: get('healthcheck_host')), 'scale_lookup_healthcheck_host');
+
+    $opsEntryHost = trim((string) get('ops_entry_host', ''));
+    if ($opsEntryHost !== '') {
+        deploySafeHost($opsEntryHost, 'ops_entry_host');
+    }
+
+    $legacyQueueService = trim((string) get('legacy_queue_systemd_service', ''));
+    if ($legacyQueueService !== '') {
+        deploySystemdServiceArg($legacyQueueService, 'legacy_queue_systemd_service');
+    }
+
+    foreach ((array) get('required_public_static_media_assets', []) as $asset) {
+        $asset = trim((string) $asset);
+        if ($asset !== '') {
+            deploySafeRelativePath($asset, 'required_public_static_media_assets entry');
+        }
+    }
+
+    foreach ((array) get('required_public_scale_lookup_slugs', []) as $slug) {
+        $slug = trim((string) $slug);
+        if ($slug !== '') {
+            deploySafeRelativePath($slug, 'required_public_scale_lookup_slugs entry');
+        }
+    }
+});
+
 /**
  * ======================================================
  * 服务重载
  * ======================================================
  */
 task('reload:php-fpm', function () {
-    run('sudo -n /usr/bin/systemctl reload ' . get('php_fpm_service'));
+    $service = deploySystemdServiceArg((string) get('php_fpm_service'), 'php_fpm_service');
+
+    run("sudo -n /usr/bin/systemctl reload {$service}");
 });
 
 task('reload:nginx', function () {
@@ -405,21 +545,24 @@ task('queue:reload-workers', function () {
             run('{{bin/php}} artisan queue:restart --ansi');
         });
 
-        $supervisorctlAvailable = test('[ -x ' . escapeshellarg($supervisorctl) . ' ] || command -v supervisorctl >/dev/null 2>&1');
+        $supervisorctlAvailable = test('[ -x '.escapeshellarg($supervisorctl).' ] || command -v supervisorctl >/dev/null 2>&1');
         if (! $supervisorctlAvailable) {
             if ($legacySystemdService !== '') {
-                $quotedService = escapeshellarg($legacySystemdService);
+                $quotedService = deploySystemdServiceArg($legacySystemdService, 'legacy_queue_systemd_service');
+                $notFoundMessage = deployShellArg("legacy queue systemd service not found: {$legacySystemdService}");
                 writeln('<comment>supervisorctl not found; fallback to legacy systemd queue service</comment>');
-                run("if sudo -n /usr/bin/systemctl list-unit-files {$quotedService} >/dev/null 2>&1; then sudo -n /usr/bin/systemctl restart {$quotedService}; else echo 'legacy queue systemd service not found: {$legacySystemdService}' >&2; fi");
+                run("if sudo -n /usr/bin/systemctl list-unit-files {$quotedService} >/dev/null 2>&1; then sudo -n /usr/bin/systemctl restart {$quotedService}; else printf '%s\\n' {$notFoundMessage} >&2; fi");
+
                 return;
             }
 
             writeln('<comment>supervisorctl not found and no legacy systemd service configured; skip manager-specific queue reload</comment>');
+
             return;
         }
 
         $resolvedSupervisorctl = trim((string) run(
-            'if [ -x ' . escapeshellarg($supervisorctl) . ' ]; then echo ' . escapeshellarg($supervisorctl) . '; else command -v supervisorctl; fi'
+            'if [ -x '.escapeshellarg($supervisorctl).' ]; then echo '.escapeshellarg($supervisorctl).'; else command -v supervisorctl; fi'
         ));
         $quotedSupervisorctl = escapeshellarg($resolvedSupervisorctl);
 
@@ -427,26 +570,27 @@ task('queue:reload-workers', function () {
         run("sudo -n {$quotedSupervisorctl} update");
 
         foreach ($requiredPrograms as $program) {
-            $quotedProgramAll = escapeshellarg($program . ':*');
+            $quotedProgramAll = escapeshellarg($program.':*');
             $quotedProgram = escapeshellarg($program);
             run("sudo -n {$quotedSupervisorctl} restart {$quotedProgramAll} >/dev/null 2>&1 || sudo -n {$quotedSupervisorctl} restart {$quotedProgram}");
         }
 
         foreach ($optionalPrograms as $program) {
-            $quotedProgramAll = escapeshellarg($program . ':*');
+            $quotedProgramAll = escapeshellarg($program.':*');
             $quotedProgram = escapeshellarg($program);
             run("sudo -n {$quotedSupervisorctl} restart {$quotedProgramAll} >/dev/null 2>&1 || sudo -n {$quotedSupervisorctl} restart {$quotedProgram} >/dev/null 2>&1 || true");
         }
 
         if ($legacySystemdService !== '') {
-            $quotedService = escapeshellarg($legacySystemdService);
+            $quotedService = deploySystemdServiceArg($legacySystemdService, 'legacy_queue_systemd_service');
             run("if sudo -n /usr/bin/systemctl list-unit-files {$quotedService} >/dev/null 2>&1; then sudo -n /usr/bin/systemctl stop {$quotedService} >/dev/null 2>&1 || true; fi");
 
             if ($disableLegacySystemd) {
                 run("if sudo -n /usr/bin/systemctl list-unit-files {$quotedService} >/dev/null 2>&1; then sudo -n /usr/bin/systemctl disable {$quotedService} >/dev/null 2>&1 || true; fi");
             }
 
-            run("if sudo -n /usr/bin/systemctl list-unit-files {$quotedService} >/dev/null 2>&1 && sudo -n /usr/bin/systemctl is-active --quiet {$quotedService}; then echo 'legacy queue systemd service still active: {$legacySystemdService}' >&2; exit 1; fi");
+            $stillActiveMessage = deployShellArg("legacy queue systemd service still active: {$legacySystemdService}");
+            run("if sudo -n /usr/bin/systemctl list-unit-files {$quotedService} >/dev/null 2>&1 && sudo -n /usr/bin/systemctl is-active --quiet {$quotedService}; then printf '%s\\n' {$stillActiveMessage} >&2; exit 1; fi");
         }
 
         return;
@@ -461,12 +605,13 @@ task('queue:reload-workers', function () {
         within('{{current_path}}/backend', function () {
             run('{{bin/php}} artisan queue:restart --ansi');
         });
-        run('sudo -n /usr/bin/systemctl restart ' . $systemdService);
+        $quotedService = deploySystemdServiceArg($systemdService, 'legacy_queue_systemd_service');
+        run("sudo -n /usr/bin/systemctl restart {$quotedService}");
 
         return;
     }
 
-    throw new \RuntimeException('unsupported queue_manager [' . $manager . ']');
+    throw new \RuntimeException('unsupported queue_manager ['.$manager.']');
 });
 
 function deploySharedPath(string $base, string $relative): string
@@ -477,9 +622,10 @@ function deploySharedPath(string $base, string $relative): string
 function ensureOwnedWritableTree(string $path, string $owner = 'ubuntu', string $group = 'www-data'): void
 {
     $quotedPath = escapeshellarg($path);
+    $quotedOwnerGroup = deployOwnerGroupArg($owner, $group);
 
     run("sudo -n /usr/bin/mkdir -p {$quotedPath}");
-    run("sudo -n /usr/bin/chown -R {$owner}:{$group} {$quotedPath}");
+    run("sudo -n /usr/bin/chown -R {$quotedOwnerGroup} {$quotedPath}");
     run("sudo -n /usr/bin/find {$quotedPath} -type d -exec chmod 2775 {} \\;");
     run("sudo -n /usr/bin/find {$quotedPath} -type f -exec chmod 664 {} \\;");
 }
@@ -487,9 +633,10 @@ function ensureOwnedWritableTree(string $path, string $owner = 'ubuntu', string 
 function ensureOwnedWritableDir(string $path, string $owner = 'ubuntu', string $group = 'www-data'): void
 {
     $quotedPath = escapeshellarg($path);
+    $quotedOwnerGroup = deployOwnerGroupArg($owner, $group);
 
     run("sudo -n /usr/bin/mkdir -p {$quotedPath}");
-    run("sudo -n /usr/bin/chown {$owner}:{$group} {$quotedPath}");
+    run("sudo -n /usr/bin/chown {$quotedOwnerGroup} {$quotedPath}");
     run("sudo -n /usr/bin/chmod 2775 {$quotedPath}");
 }
 
@@ -535,7 +682,7 @@ task('ensure:release-runtime-perms', function () {
  * ======================================================
  */
 task('ensure:healthz-deps', function () {
-    $base = get('deploy_path') . '/shared/backend/storage';
+    $base = get('deploy_path').'/shared/backend/storage';
     $owner = currentHost()->getRemoteUser() ?: 'ubuntu';
 
     ensureOwnedWritableDir("{$base}/app/content-packs", $owner, 'www-data');
@@ -568,27 +715,27 @@ task('guard:required-public-static-media-assets', function () {
             continue;
         }
 
-        run("test -s {{release_path}}/{$path}");
+        run('test -s '.deployPlaceholderPathArg('{{release_path}}', $path));
     }
 });
 
 task('ensure:release-public-static-compat', function () {
-    run('mkdir -p {{release_path}}/public');
-    run('ln -sfn ../backend/public/static {{release_path}}/public/static');
-    run('test -s {{release_path}}/public/static/social/wechat-qr-official-258.jpg');
+    run('mkdir -p '.deployPlaceholderPathArg('{{release_path}}', 'public'));
+    run('ln -sfn '.deployShellArg('../backend/public/static').' '.deployPlaceholderPathArg('{{release_path}}', 'public/static'));
+    run('test -s '.deployPlaceholderPathArg('{{release_path}}', 'public/static/social/wechat-qr-official-258.jpg'));
 });
 
 task('ensure:nginx-public-static-media-route', function () {
-    $host = trim((string) (get('static_media_healthcheck_host') ?: get('healthcheck_host')));
-    $primaryHost = trim((string) get('healthcheck_host', ''));
-    $site = trim((string) get('nginx_site', ''));
+    $host = deploySafeHost((string) (get('static_media_healthcheck_host') ?: get('healthcheck_host')), 'static_media_healthcheck_host');
+    $primaryHost = deploySafeHost((string) get('healthcheck_host', ''), 'healthcheck_host');
+    $site = deploySafeAbsolutePath((string) get('nginx_site', ''), 'nginx_site');
 
     if ($host === '' || $primaryHost === '' || $site === '') {
         throw new \RuntimeException('static media nginx route requires static_media_healthcheck_host and nginx_site');
     }
 
-    $snippet = '/etc/nginx/snippets/fap-api-public-static-media-' . preg_replace('/[^A-Za-z0-9_.-]/', '-', $host) . '.conf';
-    $staticRoot = rtrim((string) get('deploy_path'), '/') . '/current/backend/public/static/';
+    $snippet = '/etc/nginx/snippets/fap-api-public-static-media-'.preg_replace('/[^A-Za-z0-9_.-]/', '-', $host).'.conf';
+    $staticRoot = rtrim(deploySafeAbsolutePath((string) get('deploy_path'), 'deploy_path'), '/').'/current/backend/public/static/';
     $snippetBody = <<<NGINX
 # Managed by fap-api deploy. Serve committed backend public static media.
 location ^~ /static/ {
@@ -605,7 +752,7 @@ NGINX;
     $quotedSite = escapeshellarg($site);
     $quotedHost = escapeshellarg($host);
     $quotedPrimaryHost = escapeshellarg($primaryHost);
-    $quotedStaticAsset = escapeshellarg($staticRoot . 'social/wechat-qr-official-258.jpg');
+    $quotedStaticAsset = escapeshellarg($staticRoot.'social/wechat-qr-official-258.jpg');
 
     $command = strtr(<<<'BASH'
 set -euo pipefail
@@ -724,45 +871,58 @@ BASH, [
  * ======================================================
  */
 task('healthcheck:public', function () {
-    $host = get('healthcheck_host');
-    $cmd  = "curl -fsS --resolve {$host}:443:127.0.0.1 https://{$host}/api/healthz | jq -e '.ok==true'";
+    $host = deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host');
+    $resolveArg = deployCurlResolveArg($host, (bool) get('healthcheck_use_resolve', true));
+    $url = deployHttpsUrlArg($host, '/api/healthz');
+    $jq = deployShellArg('.ok==true');
+    $cmd = "curl -fsS {$resolveArg}{$url} | jq -e {$jq}";
     run($cmd);
 });
 
 task('healthcheck:auth-guest-contract', function () {
-    $host = get('healthcheck_host');
+    $host = deploySafeHost((string) get('healthcheck_host'), 'healthcheck_host');
+    $resolveArg = deployCurlResolveArg($host, (bool) get('healthcheck_use_resolve', true));
+    $url = deployHttpsUrlArg($host, '/api/v0.3/auth/guest');
     $payload = escapeshellarg((string) json_encode([
         'anon_id' => 'deploy_contract_probe',
     ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    $contentType = deployShellArg('Content-Type: application/json');
+    $jq = deployShellArg('.ok==true and .anon_id=="deploy_contract_probe"');
 
-    $cmd = "curl -fsS --resolve {$host}:443:127.0.0.1 -H 'Content-Type: application/json' -X POST https://{$host}/api/v0.3/auth/guest --data {$payload} | jq -e '.ok==true and .anon_id==\"deploy_contract_probe\"'";
+    $cmd = "curl -fsS {$resolveArg}-H {$contentType} -X POST {$url} --data {$payload} | jq -e {$jq}";
     run($cmd);
 });
 
 task('healthcheck:public-static-media-assets', function () {
-    $host = trim((string) (get('static_media_healthcheck_host') ?: get('healthcheck_host')));
-    $resolveArg = (bool) get('static_media_healthcheck_use_resolve', false)
-        ? "--resolve {$host}:443:127.0.0.1 "
-        : '';
+    $host = deploySafeHost((string) (get('static_media_healthcheck_host') ?: get('healthcheck_host')), 'static_media_healthcheck_host');
+    $resolveArg = deployCurlResolveArg($host, (bool) get('static_media_healthcheck_use_resolve', false));
     $assets = (array) get('required_public_static_media_assets', []);
+    $contentTypePattern = deployShellArg('^content-type: image/');
 
     foreach ($assets as $asset) {
-        $path = '/' . ltrim(preg_replace('#^backend/public/#', '', trim((string) $asset)) ?? '', '/');
+        $assetPath = trim((string) $asset);
+
+        if ($assetPath === '') {
+            continue;
+        }
+
+        $assetPath = deploySafeRelativePath($assetPath, 'static media healthcheck asset');
+        $path = '/'.ltrim(preg_replace('#^backend/public/#', '', $assetPath) ?? '', '/');
 
         if ($path === '/') {
             continue;
         }
 
-        run("curl -fsSI {$resolveArg}https://{$host}{$path} | grep -Ei '^content-type: image/' >/dev/null");
+        $url = deployHttpsUrlArg($host, $path);
+        run("curl -fsSI {$resolveArg}{$url} | grep -Ei {$contentTypePattern} >/dev/null");
     }
 });
 
 task('healthcheck:scale-lookup', function () {
-    $host = trim((string) (get('scale_lookup_healthcheck_host') ?: get('healthcheck_host')));
-    $resolveArg = (bool) get('scale_lookup_healthcheck_use_resolve', false)
-        ? "--resolve {$host}:443:127.0.0.1 "
-        : '';
+    $host = deploySafeHost((string) (get('scale_lookup_healthcheck_host') ?: get('healthcheck_host')), 'scale_lookup_healthcheck_host');
+    $resolveArg = deployCurlResolveArg($host, (bool) get('scale_lookup_healthcheck_use_resolve', false));
     $slugs = (array) get('required_public_scale_lookup_slugs', []);
+    $jq = deployShellArg('.ok==true and .primary_slug==$slug');
 
     foreach ($slugs as $slug) {
         $slug = trim((string) $slug);
@@ -771,24 +931,30 @@ task('healthcheck:scale-lookup', function () {
             continue;
         }
 
-        $url = escapeshellarg("https://{$host}/api/v0.3/scales/lookup?slug={$slug}&locale=zh-CN");
+        $slug = deploySafeRelativePath($slug, 'scale lookup slug');
+        $query = http_build_query(['slug' => $slug, 'locale' => 'zh-CN'], '', '&', PHP_QUERY_RFC3986);
+        $url = deployHttpsUrlArg($host, "/api/v0.3/scales/lookup?{$query}");
         $slugArg = escapeshellarg($slug);
-        $jq = escapeshellarg('.ok==true and .primary_slug==$slug');
 
         run("curl -fsS {$resolveArg}{$url} | jq -e --arg slug {$slugArg} {$jq} >/dev/null");
     }
 });
 
 task('healthcheck:ops-entry-contract', function () {
-    $host = trim((string) get('ops_entry_host', ''));
+    $configuredHost = trim((string) get('ops_entry_host', ''));
 
-    if ($host === '') {
+    if ($configuredHost === '') {
         writeln('<comment>Skip ops entry contract smoke (ops_entry_host not configured)</comment>');
+
         return;
     }
 
+    $host = deploySafeHost($configuredHost, 'ops_entry_host');
+
     $fetchHeaders = static function (string $url) use ($host): string {
-        return run("curl -sSI --max-redirs 0 --resolve {$host}:443:127.0.0.1 {$url}");
+        $resolveArg = deployCurlResolveArg($host, true);
+
+        return run("curl -sSI --max-redirs 0 {$resolveArg}".deployShellArg($url));
     };
 
     $assertRedirect = static function (string $url, string $expectedRelative, string $expectedAbsolute, string $label) use ($fetchHeaders): void {
@@ -811,7 +977,7 @@ task('healthcheck:ops-entry-contract', function () {
     $assertStatus = static function (string $url, int $status, string $label) use ($fetchHeaders): void {
         $headers = $fetchHeaders($url);
 
-        if (! preg_match('/^HTTP\\/[0-9.]+ ' . $status . '\\b/m', $headers)) {
+        if (! preg_match('/^HTTP\\/[0-9.]+ '.$status.'\\b/m', $headers)) {
             throw new \RuntimeException("{$label} did not return HTTP {$status}");
         }
     };
@@ -921,8 +1087,8 @@ BASH);
  * ======================================================
  */
 task('fap:seed_shared_content_packages', function () {
-    run('mkdir -p {{deploy_path}}/shared/content_packages');
-    run('cp -an {{release_path}}/content_packages/. {{deploy_path}}/shared/content_packages/ || true');
+    run('mkdir -p '.deployPlaceholderPathArg('{{deploy_path}}', 'shared/content_packages'));
+    run('cp -an '.deployPlaceholderPathArg('{{release_path}}', 'content_packages').'/. '.deployPlaceholderPathArg('{{deploy_path}}', 'shared/content_packages').' || true');
 });
 
 /**
@@ -930,7 +1096,9 @@ task('fap:seed_shared_content_packages', function () {
  * Hooks
  * ======================================================
  */
+before('deploy', 'guard:deploy-shell-config');
 before('deploy', 'guard:forbid-destructive');
+before('rollback', 'guard:deploy-shell-config');
 before('deploy:prepare', 'ensure:phpredis');
 before('deploy:shared', 'fap:seed_shared_content_packages');
 
