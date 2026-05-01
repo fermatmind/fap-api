@@ -51,13 +51,15 @@ final class PersonalityDesktopCloneContentService
 
         $baseCode = strtoupper(trim((string) ($profile->type_code ?? '')));
 
+        $content = is_array($record->content_json) ? $record->content_json : [];
+
         return [
             'template_key' => (string) $record->template_key,
             'schema_version' => (string) $record->schema_version,
             'full_code' => (string) $variant->runtime_type_code,
             'base_code' => $baseCode,
             'locale' => (string) $profile->locale,
-            'content' => is_array($record->content_json) ? $record->content_json : [],
+            'content' => $this->redactPublicContent($content),
             'asset_slots' => PersonalityDesktopCloneAssetSlotSupport::normalizeAssetSlots(
                 is_array($record->asset_slots_json) ? $record->asset_slots_json : [],
             ),
@@ -83,5 +85,98 @@ final class PersonalityDesktopCloneContentService
         }
 
         return (string) $matches['base'].'-'.(string) $matches['variant'];
+    }
+
+    /**
+     * @param  array<string, mixed>  $content
+     * @return array<string, mixed>
+     */
+    private function redactPublicContent(array $content): array
+    {
+        foreach (['career', 'growth', 'relationships'] as $chapterKey) {
+            $chapter = $content['chapters'][$chapterKey] ?? null;
+            if (! is_array($chapter)) {
+                continue;
+            }
+
+            $chapter['lockedBlocks'] = $this->redactLockedBlocks(
+                is_array($chapter['lockedBlocks'] ?? null) ? $chapter['lockedBlocks'] : [],
+            );
+
+            foreach ($this->premiumInsightModuleKeys($chapterKey) as $moduleKey) {
+                if (is_array($chapter[$moduleKey] ?? null)) {
+                    $chapter[$moduleKey] = $this->redactPremiumInsightModule($chapter[$moduleKey]);
+                }
+            }
+
+            $content['chapters'][$chapterKey] = $chapter;
+        }
+
+        return $content;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function premiumInsightModuleKeys(string $chapterKey): array
+    {
+        return match ($chapterKey) {
+            'growth' => ['what_energizes', 'what_drains'],
+            'relationships' => ['superpowers', 'pitfalls'],
+            default => [],
+        };
+    }
+
+    /**
+     * @param  array<int, mixed>  $blocks
+     * @return array<int, mixed>
+     */
+    private function redactLockedBlocks(array $blocks): array
+    {
+        foreach ($blocks as $index => $block) {
+            if (! is_array($block)) {
+                continue;
+            }
+
+            $blurredItems = is_array($block['blurredItems'] ?? null) ? $block['blurredItems'] : [];
+            $block['blurredItems'] = array_map(
+                static fn (): array => ['is_locked' => true],
+                $blurredItems,
+            );
+            $block['is_locked'] = true;
+            $blocks[$index] = $block;
+        }
+
+        return $blocks;
+    }
+
+    /**
+     * @param  array<string, mixed>  $module
+     * @return array<string, mixed>
+     */
+    private function redactPremiumInsightModule(array $module): array
+    {
+        $items = is_array($module['items'] ?? null) ? $module['items'] : [];
+
+        $module['items'] = array_map(
+            static function (mixed $item): mixed {
+                if (! is_array($item)) {
+                    return $item;
+                }
+
+                return array_filter([
+                    'id' => $item['id'] ?? null,
+                    'title' => $item['title'] ?? null,
+                    'description' => $item['description'] ?? null,
+                    'tags' => $item['tags'] ?? null,
+                    'is_locked' => true,
+                ], static fn (mixed $value): bool => $value !== null);
+            },
+            $items,
+        );
+
+        $module['is_locked'] = true;
+
+        return $module;
     }
 }
