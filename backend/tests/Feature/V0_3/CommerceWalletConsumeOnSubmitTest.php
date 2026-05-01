@@ -8,6 +8,7 @@ use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Tests\Concerns\SignedBillingWebhook;
 use Tests\TestCase;
@@ -23,12 +24,28 @@ class CommerceWalletConsumeOnSubmitTest extends TestCase
         (new Pr17SimpleScoreDemoSeeder)->run();
         (new Pr19CommerceSeeder)->run();
 
-        $row = DB::table('scales_registry')
-            ->where('org_id', 0)
-            ->where('code', 'SIMPLE_SCORE_DEMO')
-            ->first();
+        $this->updateSimpleScoreCommercial([
+            'credit_benefit_code' => 'MBTI_CREDIT',
+            'report_benefit_code' => 'MBTI_REPORT_FULL',
+        ]);
+    }
 
-        if ($row) {
+    private function updateSimpleScoreCommercial(array $overrides, int $orgId = 0): void
+    {
+        foreach (['scales_registry', 'scales_registry_v2'] as $table) {
+            if (! Schema::hasTable($table)) {
+                continue;
+            }
+
+            $row = DB::table($table)
+                ->where('org_id', $orgId)
+                ->where('code', 'SIMPLE_SCORE_DEMO')
+                ->first();
+
+            if (! $row) {
+                continue;
+            }
+
             $commercial = $row->commercial_json ?? null;
             if (is_string($commercial)) {
                 $decoded = json_decode($commercial, true);
@@ -38,15 +55,17 @@ class CommerceWalletConsumeOnSubmitTest extends TestCase
                 $commercial = [];
             }
 
-            $commercial['credit_benefit_code'] = 'MBTI_CREDIT';
+            foreach ($overrides as $key => $value) {
+                $commercial[$key] = $value;
+            }
 
             $payload = $commercial;
             if (is_array($payload)) {
                 $payload = json_encode($payload, JSON_UNESCAPED_UNICODE);
             }
 
-            DB::table('scales_registry')
-                ->where('org_id', 0)
+            DB::table($table)
+                ->where('org_id', $orgId)
                 ->where('code', 'SIMPLE_SCORE_DEMO')
                 ->update([
                     'commercial_json' => $payload,
@@ -192,6 +211,12 @@ class CommerceWalletConsumeOnSubmitTest extends TestCase
         $this->assertSame(99, (int) ($walletAfter->balance ?? 0));
         $this->assertSame(1, DB::table('benefit_wallet_ledgers')->where('reason', 'consume')->count());
         $this->assertSame(1, DB::table('benefit_consumptions')->count());
+        $this->assertSame(1, DB::table('benefit_grants')
+            ->where('org_id', $orgId)
+            ->where('attempt_id', $attemptId)
+            ->where('benefit_code', 'MBTI_REPORT_FULL')
+            ->where('status', 'active')
+            ->count());
 
         $dup = $this->postJson('/api/v0.3/attempts/submit', [
             'attempt_id' => $attemptId,
@@ -214,6 +239,63 @@ class CommerceWalletConsumeOnSubmitTest extends TestCase
         $this->assertSame(99, (int) ($walletFinal->balance ?? 0));
         $this->assertSame(1, DB::table('benefit_wallet_ledgers')->where('reason', 'consume')->count());
         $this->assertSame(1, DB::table('benefit_consumptions')->count());
+        $this->assertSame(1, DB::table('benefit_grants')
+            ->where('org_id', $orgId)
+            ->where('attempt_id', $attemptId)
+            ->where('benefit_code', 'MBTI_REPORT_FULL')
+            ->where('status', 'active')
+            ->count());
+    }
+
+    public function test_submit_without_credit_benefit_does_not_grant_report_entitlement(): void
+    {
+        $this->seedScales();
+        $this->updateSimpleScoreCommercial([
+            'credit_benefit_code' => '',
+            'report_benefit_code' => 'MBTI_REPORT_FULL',
+        ]);
+        [$orgId, $userId, $token] = $this->seedOrgWithToken();
+        $this->grantScaleForOrg($orgId, 'SIMPLE_SCORE_DEMO');
+        $this->updateSimpleScoreCommercial([
+            'credit_benefit_code' => '',
+            'report_benefit_code' => 'MBTI_REPORT_FULL',
+        ], $orgId);
+
+        $start = $this->postJson('/api/v0.3/attempts/start', [
+            'scale_code' => 'SIMPLE_SCORE_DEMO',
+        ], [
+            'X-Org-Id' => (string) $orgId,
+            'Authorization' => 'Bearer '.$token,
+        ]);
+        $start->assertStatus(200);
+        $attemptId = (string) $start->json('attempt_id');
+
+        $submit = $this->postJson('/api/v0.3/attempts/submit', [
+            'attempt_id' => $attemptId,
+            'answers' => [
+                ['question_id' => 'SS-001', 'code' => '5'],
+                ['question_id' => 'SS-002', 'code' => '4'],
+                ['question_id' => 'SS-003', 'code' => '3'],
+                ['question_id' => 'SS-004', 'code' => '2'],
+                ['question_id' => 'SS-005', 'code' => '1'],
+            ],
+            'duration_ms' => 120000,
+        ], [
+            'X-Org-Id' => (string) $orgId,
+            'Authorization' => 'Bearer '.$token,
+        ]);
+
+        $submit->assertStatus(200);
+        $submit->assertJson(['ok' => true]);
+
+        $this->assertSame(0, DB::table('benefit_consumptions')
+            ->where('attempt_id', $attemptId)
+            ->count());
+        $this->assertSame(0, DB::table('benefit_grants')
+            ->where('org_id', $orgId)
+            ->where('attempt_id', $attemptId)
+            ->where('benefit_code', 'MBTI_REPORT_FULL')
+            ->count());
     }
 
     public function test_submit_with_configured_credit_requires_successful_consumption_before_granting_entitlement(): void
@@ -267,7 +349,7 @@ class CommerceWalletConsumeOnSubmitTest extends TestCase
         $this->assertSame(0, DB::table('benefit_grants')
             ->where('org_id', $orgId)
             ->where('attempt_id', $attemptId)
-            ->where('benefit_code', 'MBTI_CREDIT')
+            ->where('benefit_code', 'MBTI_REPORT_FULL')
             ->count());
     }
 }
