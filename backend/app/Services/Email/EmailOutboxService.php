@@ -1264,10 +1264,18 @@ class EmailOutboxService
         $rows = $query->get();
 
         foreach ($rows as $row) {
+            $payload = null;
             if ($normalizedOrderNo !== null) {
                 $payload = $this->decodePayloadFromRow($row);
                 $payloadOrderNo = $this->trimOrNull((string) ($payload['order_no'] ?? ''));
                 if ($payloadOrderNo !== null && $payloadOrderNo !== $normalizedOrderNo) {
+                    continue;
+                }
+            }
+
+            if (! $hasEmailHash && ! $hasToEmailHash) {
+                $recipientEmail = $this->extractRecipientEmailFromOutboxRow($row, $payload);
+                if ($recipientEmail === '' || ! hash_equals($email, $recipientEmail)) {
                     continue;
                 }
             }
