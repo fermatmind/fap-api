@@ -195,9 +195,11 @@ class ReportGatekeeper
         $unlockStage = $hasFullAccess
             ? ReportAccess::UNLOCK_STAGE_FULL
             : ($hasPaidModuleAccess ? ReportAccess::UNLOCK_STAGE_PARTIAL : ReportAccess::UNLOCK_STAGE_LOCKED);
-        $renderVariant = $unlockStage === ReportAccess::UNLOCK_STAGE_LOCKED
-            ? ReportAccess::VARIANT_FREE
-            : ReportAccess::VARIANT_FULL;
+        $renderVariant = match ($unlockStage) {
+            ReportAccess::UNLOCK_STAGE_PARTIAL => ReportAccess::VARIANT_PARTIAL,
+            ReportAccess::UNLOCK_STAGE_FULL => ReportAccess::VARIANT_FULL,
+            default => ReportAccess::VARIANT_FREE,
+        };
         $variant = match ($unlockStage) {
             ReportAccess::UNLOCK_STAGE_PARTIAL => ReportAccess::VARIANT_PARTIAL,
             ReportAccess::UNLOCK_STAGE_FULL => ReportAccess::VARIANT_FULL,
@@ -214,7 +216,8 @@ class ReportGatekeeper
             ? false
             : $hasFullAccess && $this->offerResolver->modulesCoverOffered($modulesAllowed, $modulesOffered);
         $snapshotStrictMode = in_array($scaleCode, [ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true) ? false : $this->strictSnapshotModeEnabled();
-        $shouldReadFromSnapshot = $snapshotStrictMode || $shouldUseSnapshot;
+        $shouldReadFromSnapshot = $unlockStage !== ReportAccess::UNLOCK_STAGE_PARTIAL
+            && ($snapshotStrictMode || $shouldUseSnapshot);
         $allowLiveBuildFallbackForSnapshot = $scaleCode === ReportAccess::SCALE_ENNEAGRAM && ! $snapshotStrictMode;
         if ($shouldReadFromSnapshot && ($snapshotStrictMode || ! $forceRefresh)) {
             $snapshotRow = DB::table('report_snapshots')
@@ -384,7 +387,7 @@ class ReportGatekeeper
             }
         }
 
-        if ($snapshotStrictMode) {
+        if ($snapshotStrictMode && $unlockStage !== ReportAccess::UNLOCK_STAGE_PARTIAL) {
             return $this->responsePayload(
                 $locked,
                 $reportAccessLevel,
@@ -528,8 +531,7 @@ class ReportGatekeeper
             return $freeByPaywallMode;
         }
 
-        return in_array($scaleCode, [ReportAccess::SCALE_ENNEAGRAM, ReportAccess::SCALE_RIASEC], true)
-            || $freeByPaywallMode;
+        return $scaleCode === ReportAccess::SCALE_RIASEC || $freeByPaywallMode;
     }
 
     private function canUseAttemptScopedPaidModules(?string $userId, ?string $anonId, ?string $role): bool
@@ -614,9 +616,11 @@ class ReportGatekeeper
                 [
                     'org_id' => (int) ($attempt->org_id ?? 0),
                     'variant' => $variant,
-                    'report_access_level' => $variant === ReportAccess::VARIANT_FREE
-                        ? ReportAccess::REPORT_ACCESS_FREE
-                        : ReportAccess::REPORT_ACCESS_FULL,
+                    'report_access_level' => match (ReportAccess::normalizeVariant($variant)) {
+                        ReportAccess::VARIANT_PARTIAL => ReportAccess::REPORT_ACCESS_PARTIAL,
+                        ReportAccess::VARIANT_FULL => ReportAccess::REPORT_ACCESS_FULL,
+                        default => ReportAccess::REPORT_ACCESS_FREE,
+                    },
                     'modules_allowed' => $modulesAllowed,
                     'modules_preview' => $modulesPreview,
                 ]

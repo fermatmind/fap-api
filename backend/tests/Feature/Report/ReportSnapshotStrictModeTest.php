@@ -7,6 +7,8 @@ namespace Tests\Feature\Report;
 use App\Jobs\GenerateReportSnapshotJob;
 use App\Models\Attempt;
 use App\Models\Result;
+use App\Services\Commerce\EntitlementManager;
+use App\Services\Report\ReportAccess;
 use Database\Seeders\Pr19CommerceSeeder;
 use Database\Seeders\ScaleRegistrySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -134,6 +136,69 @@ final class ReportSnapshotStrictModeTest extends TestCase
                 && $job->attemptId === $attemptId
                 && $job->triggerSource === 'report_api';
         });
+    }
+
+    public function test_partial_unlock_does_not_read_full_snapshot_in_strict_mode(): void
+    {
+        config()->set('fap.features.report_snapshot_strict_v2', true);
+        $this->seedScales();
+
+        $anonId = 'anon_report_strict_partial';
+        $attemptId = $this->createAttemptWithResult($anonId);
+        $token = $this->issueAnonToken($anonId);
+
+        /** @var EntitlementManager $entitlements */
+        $entitlements = app(EntitlementManager::class);
+        $grant = $entitlements->grantAttemptUnlock(
+            0,
+            null,
+            $anonId,
+            'MBTI_CAREER',
+            $attemptId,
+            null,
+            'attempt',
+            null,
+            [ReportAccess::MODULE_CAREER]
+        );
+        $this->assertTrue((bool) ($grant['ok'] ?? false));
+
+        DB::table('report_snapshots')->insert([
+            'org_id' => 0,
+            'attempt_id' => $attemptId,
+            'order_no' => null,
+            'scale_code' => 'MBTI',
+            'pack_id' => (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.3'),
+            'dir_version' => (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.3'),
+            'scoring_spec_version' => '2026.01',
+            'report_engine_version' => 'v1.2',
+            'snapshot_version' => 'v1',
+            'report_json' => json_encode(['leaked_full_snapshot_marker' => true], JSON_UNESCAPED_SLASHES),
+            'report_free_json' => json_encode(['free_snapshot_marker' => true], JSON_UNESCAPED_SLASHES),
+            'report_full_json' => json_encode(['leaked_full_snapshot_marker' => true], JSON_UNESCAPED_SLASHES),
+            'status' => 'ready',
+            'last_error' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/report');
+
+        $response->assertStatus(200);
+        $response->assertJson([
+            'ok' => true,
+            'generating' => false,
+            'snapshot_error' => false,
+            'variant' => 'partial',
+            'access_level' => 'partial',
+            'unlock_stage' => 'partial',
+        ]);
+
+        $report = (array) $response->json('report');
+        $this->assertNotSame([], $report);
+        $this->assertStringNotContainsString('leaked_full_snapshot_marker', json_encode($report, JSON_UNESCAPED_SLASHES) ?: '');
+        $this->assertSame(1, DB::table('report_snapshots')->where('attempt_id', $attemptId)->count());
     }
 
     public function test_unknown_snapshot_status_returns_snapshot_error_and_observability_signal(): void
