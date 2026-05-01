@@ -53,10 +53,17 @@ final class ArticleTranslationRevisionWorkspace
                 ->findOrFail($article->getKey());
 
             $revision = $this->resolveWorkingRevision($locked);
-            $revisionStatus = $this->normalizeStatus($payload['working_revision_status'] ?? $revision->revision_status);
+            $revisionChanged = $this->revisionPayloadChanged($revision, $payload);
+            $revisionStatus = $this->normalizeWritableStatus(
+                $payload['working_revision_status'] ?? $revision->revision_status,
+                (string) $revision->revision_status,
+                $revisionChanged,
+                $locked,
+            );
             $sourceHash = $this->sourceVersionHashFor($locked);
+            $now = now();
 
-            $revision->forceFill([
+            $revisionPayload = [
                 'org_id' => (int) $locked->org_id,
                 'article_id' => (int) $locked->id,
                 'source_article_id' => $this->sourceArticleIdFor($locked),
@@ -82,14 +89,37 @@ final class ArticleTranslationRevisionWorkspace
                 'seo_title' => $payload['seo_title'] ?? $revision->seo_title,
                 'seo_description' => $payload['seo_description'] ?? $revision->seo_description,
                 'created_by' => $revision->created_by ?: $adminUserId,
-            ])->save();
+            ];
+
+            if ($revisionChanged && ! in_array($revisionStatus, [
+                ArticleTranslationRevision::STATUS_APPROVED,
+                ArticleTranslationRevision::STATUS_PUBLISHED,
+                ArticleTranslationRevision::STATUS_SOURCE,
+            ], true)) {
+                $revisionPayload = array_merge($revisionPayload, [
+                    'reviewed_by' => null,
+                    'reviewed_at' => null,
+                    'approved_at' => null,
+                    'published_at' => null,
+                ]);
+            }
+
+            $statusChanged = $revisionStatus !== (string) $revision->revision_status;
+
+            $revision->forceFill($revisionPayload)->save();
+
+            if ($revisionChanged || $statusChanged) {
+                DB::table('articles')
+                    ->where('id', $locked->id)
+                    ->update(['updated_at' => $now]);
+            }
 
             if ($locked->isSourceArticle()) {
                 DB::table('articles')
                     ->where('id', $locked->id)
                     ->update([
                         'source_version_hash' => $revision->source_version_hash,
-                        'updated_at' => $locked->updated_at,
+                        'updated_at' => $revisionChanged || $statusChanged ? $now : $locked->updated_at,
                     ]);
             }
 
@@ -227,5 +257,60 @@ final class ArticleTranslationRevisionWorkspace
         return in_array($status, ArticleTranslationRevision::statuses(), true)
             ? $status
             : ArticleTranslationRevision::STATUS_MACHINE_DRAFT;
+    }
+
+    private function normalizeWritableStatus(
+        mixed $requestedStatus,
+        string $currentStatus,
+        bool $revisionChanged,
+        Article $article,
+    ): string {
+        $requestedStatus = $this->normalizeStatus(is_string($requestedStatus) ? $requestedStatus : null);
+        $currentStatus = $this->normalizeStatus($currentStatus);
+
+        if (
+            $article->isSourceArticle()
+            && $currentStatus === ArticleTranslationRevision::STATUS_SOURCE
+            && $requestedStatus === ArticleTranslationRevision::STATUS_SOURCE
+        ) {
+            return ArticleTranslationRevision::STATUS_SOURCE;
+        }
+
+        if ($revisionChanged && in_array($currentStatus, [
+            ArticleTranslationRevision::STATUS_APPROVED,
+            ArticleTranslationRevision::STATUS_PUBLISHED,
+        ], true)) {
+            return ArticleTranslationRevision::STATUS_HUMAN_REVIEW;
+        }
+
+        if (in_array($requestedStatus, [
+            ArticleTranslationRevision::STATUS_APPROVED,
+            ArticleTranslationRevision::STATUS_PUBLISHED,
+            ArticleTranslationRevision::STATUS_SOURCE,
+        ], true) && $requestedStatus !== $currentStatus) {
+            return $currentStatus === ArticleTranslationRevision::STATUS_APPROVED
+                ? ArticleTranslationRevision::STATUS_APPROVED
+                : ArticleTranslationRevision::STATUS_HUMAN_REVIEW;
+        }
+
+        return $requestedStatus;
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     */
+    private function revisionPayloadChanged(ArticleTranslationRevision $revision, array $payload): bool
+    {
+        foreach (['title', 'excerpt', 'content_md', 'seo_title', 'seo_description'] as $field) {
+            if (! array_key_exists($field, $payload)) {
+                continue;
+            }
+
+            if ((string) ($payload[$field] ?? '') !== (string) ($revision->{$field} ?? '')) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

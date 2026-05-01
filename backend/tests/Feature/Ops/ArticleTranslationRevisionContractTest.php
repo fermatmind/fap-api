@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Tests\Feature\Ops;
 
 use App\Filament\Ops\Resources\ArticleResource\Pages\EditArticle;
+use App\Filament\Ops\Support\EditorialReviewAudit;
 use App\Models\AdminUser;
 use App\Models\Article;
 use App\Models\ArticleSeoMeta;
 use App\Models\ArticleTranslationRevision;
+use App\Models\EditorialReview;
 use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
@@ -105,6 +107,59 @@ final class ArticleTranslationRevisionContractTest extends TestCase
         $this->assertNotNull($published->working_revision_id);
         $this->assertSame($published->working_revision_id, $published->published_revision_id);
         $this->assertNotNull($published->publishedRevision?->published_at);
+    }
+
+    public function test_published_revision_repair_does_not_promote_unreviewed_revision(): void
+    {
+        $article = $this->createArticle(1, 'en', 'Published article with draft revision', [
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $revision = $this->createTranslationRevision($article, [
+            'revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+            'published_at' => null,
+        ]);
+        $article->forceFill([
+            'working_revision_id' => (int) $revision->id,
+            'published_revision_id' => null,
+        ])->save();
+
+        $this->runPublishedRevisionPointerRepair();
+
+        $article->refresh();
+        $revision->refresh();
+
+        $this->assertNull($article->published_revision_id);
+        $this->assertSame(ArticleTranslationRevision::STATUS_HUMAN_REVIEW, $revision->revision_status);
+        $this->assertNull($revision->published_at);
+    }
+
+    public function test_published_revision_repair_accepts_approved_revision(): void
+    {
+        $article = $this->createArticle(1, 'en', 'Published article with approved revision', [
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subMinute(),
+        ]);
+        $revision = $this->createTranslationRevision($article, [
+            'revision_status' => ArticleTranslationRevision::STATUS_APPROVED,
+            'approved_at' => now()->subMinutes(5),
+            'published_at' => null,
+        ]);
+        $article->forceFill([
+            'working_revision_id' => (int) $revision->id,
+            'published_revision_id' => null,
+        ])->save();
+
+        $this->runPublishedRevisionPointerRepair();
+
+        $article->refresh();
+        $revision->refresh();
+
+        $this->assertSame((int) $revision->id, (int) $article->published_revision_id);
+        $this->assertSame(ArticleTranslationRevision::STATUS_PUBLISHED, $revision->revision_status);
+        $this->assertNotNull($revision->published_at);
     }
 
     public function test_same_locale_can_create_new_revision_without_new_article_row(): void
@@ -530,6 +585,50 @@ final class ArticleTranslationRevisionContractTest extends TestCase
         $this->assertNull($article->seoMeta?->seo_title);
     }
 
+    public function test_working_revision_edit_invalidates_review_and_cannot_self_publish(): void
+    {
+        $article = $this->createArticle(1, 'en', 'Approved article draft');
+        $this->runRevisionBackfill();
+        $article->refresh();
+
+        $revision = $article->workingRevision;
+        $this->assertInstanceOf(ArticleTranslationRevision::class, $revision);
+        $revision->forceFill([
+            'revision_status' => ArticleTranslationRevision::STATUS_APPROVED,
+            'reviewed_by' => 101,
+            'reviewed_at' => now()->subMinutes(5),
+            'approved_at' => now()->subMinutes(5),
+        ])->save();
+        $article->forceFill(['updated_at' => now()->subMinutes(10)])->save();
+
+        EditorialReview::withoutGlobalScopes()->create([
+            'id' => (string) Str::uuid(),
+            'org_id' => (int) $article->org_id,
+            'content_type' => 'article',
+            'content_id' => (int) $article->id,
+            'workflow_state' => EditorialReviewAudit::STATE_APPROVED,
+            'reviewed_by_admin_user_id' => 101,
+            'reviewed_at' => now()->subMinutes(5),
+            'last_transition_at' => now()->subMinutes(5),
+        ]);
+
+        app(ArticleTranslationRevisionWorkspace::class)->saveWorkingRevision($article, [
+            'title' => 'Edited article draft',
+            'excerpt' => 'Edited excerpt',
+            'content_md' => 'Edited body',
+            'working_revision_status' => ArticleTranslationRevision::STATUS_PUBLISHED,
+        ]);
+
+        $article->refresh();
+        $revision->refresh();
+
+        $this->assertSame(ArticleTranslationRevision::STATUS_HUMAN_REVIEW, $revision->revision_status);
+        $this->assertNull($revision->reviewed_by);
+        $this->assertNull($revision->reviewed_at);
+        $this->assertNull($revision->approved_at);
+        $this->assertSame(EditorialReviewAudit::STATE_READY, EditorialReviewAudit::latestState('article', $article)['state'] ?? null);
+    }
+
     /**
      * @param  array<string, mixed>  $overrides
      */
@@ -551,6 +650,12 @@ final class ArticleTranslationRevisionContractTest extends TestCase
     private function runRevisionBackfill(): void
     {
         $migration = require database_path('migrations/2026_04_23_010000_create_article_translation_revisions_table.php');
+        $migration->up();
+    }
+
+    private function runPublishedRevisionPointerRepair(): void
+    {
+        $migration = require database_path('migrations/2026_04_23_030000_repair_article_published_revision_pointers.php');
         $migration->up();
     }
 

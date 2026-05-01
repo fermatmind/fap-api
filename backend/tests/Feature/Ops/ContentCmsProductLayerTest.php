@@ -365,7 +365,7 @@ final class ContentCmsProductLayerTest extends TestCase
             'locale' => 'en',
             'source_locale' => 'zh-CN',
             'revision_number' => 1,
-            'revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+            'revision_status' => ArticleTranslationRevision::STATUS_APPROVED,
             'source_version_hash' => (string) $source->source_version_hash,
             'translated_from_version_hash' => (string) $source->source_version_hash,
             'title' => 'English review draft',
@@ -397,6 +397,68 @@ final class ContentCmsProductLayerTest extends TestCase
         $this->assertSame(0, (int) $revision->org_id);
         $this->assertSame(Article::TRANSLATION_STATUS_SOURCE, $source->translation_status);
         $this->assertSame('published', $source->status);
+    }
+
+    public function test_article_release_rejects_unapproved_translation_revision(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_RELEASE,
+        ]);
+        $session = $this->opsSession((int) $admin->id);
+        $selectedOrgId = (int) $session['ops_org_id'];
+
+        $source = $this->seedArticle([
+            'org_id' => $selectedOrgId,
+            'slug' => 'release-source-'.Str::lower(Str::random(6)),
+            'locale' => 'zh-CN',
+            'title' => '中文源文',
+            'translation_status' => Article::TRANSLATION_STATUS_SOURCE,
+            'source_locale' => 'zh-CN',
+            'translation_group_id' => 'article-release-review-gate',
+            'status' => 'published',
+            'is_public' => true,
+            'published_at' => now()->subDay(),
+        ]);
+
+        $translation = $this->seedArticle([
+            'org_id' => $selectedOrgId,
+            'slug' => 'release-translation-'.Str::lower(Str::random(6)),
+            'locale' => 'en',
+            'title' => 'English review draft',
+            'translation_status' => Article::TRANSLATION_STATUS_HUMAN_REVIEW,
+            'source_locale' => 'zh-CN',
+            'source_article_id' => (int) $source->id,
+            'translated_from_article_id' => (int) $source->id,
+            'translation_group_id' => (string) $source->translation_group_id,
+            'status' => 'draft',
+            'is_public' => false,
+            'published_at' => null,
+        ]);
+
+        $revision = ArticleTranslationRevision::query()->create([
+            'org_id' => $selectedOrgId,
+            'article_id' => (int) $translation->id,
+            'source_article_id' => (int) $source->id,
+            'translation_group_id' => (string) $source->translation_group_id,
+            'locale' => 'en',
+            'source_locale' => 'zh-CN',
+            'revision_number' => 1,
+            'revision_status' => ArticleTranslationRevision::STATUS_HUMAN_REVIEW,
+            'source_version_hash' => (string) $source->source_version_hash,
+            'translated_from_version_hash' => (string) $source->source_version_hash,
+            'title' => 'English review draft',
+            'excerpt' => 'Reviewed English excerpt.',
+            'content_md' => 'Reviewed English body.',
+        ]);
+        $translation->forceFill(['working_revision_id' => (int) $revision->id])->save();
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        $this->approveRecord($admin, $selectedOrgId, 'article', $translation);
+        $this->setOpsContext($selectedOrgId, $admin, '/ops/content-release');
+
+        $this->expectException(AuthorizationException::class);
+
+        ArticleResource::releaseRecord($translation);
     }
 
     public function test_content_write_admin_cannot_release_draft_content_records(): void
