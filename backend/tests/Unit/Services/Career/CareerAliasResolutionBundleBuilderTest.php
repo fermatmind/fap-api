@@ -11,8 +11,10 @@ use App\Models\OccupationAlias;
 use App\Models\OccupationFamily;
 use App\Services\Career\Bundles\CareerAliasResolutionBundleBuilder;
 use App\Services\Career\CareerRecommendationCompiler;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Tests\Fixtures\Career\CareerFoundationFixture;
 use Tests\TestCase;
 
@@ -50,6 +52,67 @@ final class CareerAliasResolutionBundleBuilderTest extends TestCase
         $this->assertSame('data-scientists', data_get($payload, 'resolution.occupation.canonical_slug'));
         $this->assertSame(true, data_get($payload, 'resolution.occupation.seo_contract.index_eligible'));
         $this->assertSame('approved', data_get($payload, 'resolution.occupation.trust_summary.reviewer_status'));
+    }
+
+    public function test_it_bounds_alias_lookup_queries_by_normalized_input(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+        $occupation = Occupation::query()
+            ->where('canonical_slug', 'data-scientists')
+            ->firstOrFail();
+
+        OccupationAlias::query()->create([
+            'occupation_id' => $occupation->id,
+            'family_id' => $occupation->family_id,
+            'alias' => 'Bounded Resolution Analyst',
+            'normalized' => 'bounded resolution analyst',
+            'lang' => 'en-US',
+            'register' => 'alias',
+            'intent_scope' => 'specialized',
+            'target_kind' => 'leaf_or_child',
+            'precision_score' => 0.95,
+            'confidence_score' => 0.96,
+        ]);
+
+        foreach (range(1, 70) as $index) {
+            OccupationAlias::query()->create([
+                'occupation_id' => $occupation->id,
+                'family_id' => $occupation->family_id,
+                'alias' => 'Unrelated Resolution Alias '.$index,
+                'normalized' => 'unrelated resolution alias '.$index,
+                'lang' => 'en-US',
+                'register' => 'alias',
+                'intent_scope' => 'specialized',
+                'target_kind' => 'leaf_or_child',
+                'precision_score' => 0.5,
+                'confidence_score' => 0.5,
+            ]);
+        }
+
+        $queries = [];
+        DB::listen(static function (QueryExecuted $query) use (&$queries): void {
+            $queries[] = strtolower($query->sql);
+        });
+
+        $payload = app(CareerAliasResolutionBundleBuilder::class)
+            ->build('bounded resolution analyst', 'en-US')
+            ->toArray();
+
+        $this->assertSame('occupation', data_get($payload, 'resolution.resolved_kind'));
+        $this->assertSame('data-scientists', data_get($payload, 'resolution.occupation.canonical_slug'));
+
+        $aliasQueries = array_values(array_filter(
+            $queries,
+            static fn (string $sql): bool => str_contains($sql, 'occupation_aliases')
+        ));
+
+        $this->assertNotEmpty($aliasQueries);
+        $this->assertLessThanOrEqual(2, count($aliasQueries), implode("\n", $aliasQueries));
+
+        foreach ($aliasQueries as $sql) {
+            $this->assertStringContainsString('normalized', $sql);
+            $this->assertStringContainsString('limit', $sql);
+        }
     }
 
     public function test_it_returns_family_when_family_identity_matches_and_no_safe_leaf_is_selected(): void
