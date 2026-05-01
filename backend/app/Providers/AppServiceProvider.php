@@ -573,11 +573,11 @@ class AppServiceProvider extends ServiceProvider
             $key = 'ops:admin-login:'.$ip;
             RateLimiter::clear($key);
 
-            $routeName = (string) optional(request()?->route())->getName();
-            $routeKey = $routeName !== '' ? $routeName : 'filament.ops.auth.login';
-            $identifier = trim((string) (request()?->input('email') ?? request()?->input('username') ?? 'anonymous'));
+            $identifier = mb_strtolower(trim((string) (request()?->input('email') ?? request()?->input('username') ?? '')));
+            if ($identifier === '') {
+                $identifier = 'anonymous:'.$ip;
+            }
             OpsDistributedLimiter::clear('ops:login:ip:'.$ip);
-            OpsDistributedLimiter::clear('ops:login:route:'.$routeKey);
             OpsDistributedLimiter::clear('ops:login:user:'.$identifier);
 
             $user = $event->user;

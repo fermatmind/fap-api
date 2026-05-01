@@ -76,10 +76,19 @@ final class OpsAccessControlMiddlewareTest extends TestCase
             ->with('ops:ip:blacklist', '8.8.8.8')
             ->andReturn(false);
         Redis::shouldReceive('incr')
-            ->times(3)
-            ->andReturn(2, 1, 1);
+            ->with('ops:login:route:filament.ops.auth.login')
+            ->never();
+        Redis::shouldReceive('incr')
+            ->once()
+            ->with('ops:login:ip:8.8.8.8')
+            ->andReturn(2);
+        Redis::shouldReceive('incr')
+            ->once()
+            ->with('ops:login:user:anonymous:8.8.8.8')
+            ->andReturn(1);
         Redis::shouldReceive('expire')
-            ->times(2)
+            ->once()
+            ->with('ops:login:user:anonymous:8.8.8.8', 300)
             ->andReturnTrue();
         Redis::shouldReceive('sadd')
             ->once()
@@ -101,6 +110,99 @@ final class OpsAccessControlMiddlewareTest extends TestCase
 
         $this->assertSame(429, $response->getStatusCode());
         $this->assertStringContainsString('RATE_LIMITED', (string) $response->getContent());
+    }
+
+    public function test_login_rate_limit_does_not_use_shared_route_key_to_block_unrelated_admins(): void
+    {
+        $this->app->detectEnvironment(static fn (): string => 'production');
+        config()->set('ops.access_control.rate_limit.login', 1);
+        config()->set('ops.access_control.risk.enabled', false);
+
+        Redis::shouldReceive('incr')
+            ->with('ops:login:route:filament.ops.auth.login')
+            ->never();
+
+        Redis::shouldReceive('sismember')
+            ->once()
+            ->with('ops:ip:blacklist', '8.8.8.8')
+            ->andReturn(false);
+        Redis::shouldReceive('incr')
+            ->once()
+            ->with('ops:login:ip:8.8.8.8')
+            ->andReturn(2);
+        Redis::shouldReceive('incr')
+            ->once()
+            ->with('ops:login:user:target@example.test')
+            ->andReturn(1);
+        Redis::shouldReceive('expire')
+            ->once()
+            ->with('ops:login:user:target@example.test', 300)
+            ->andReturnTrue();
+        Redis::shouldReceive('sadd')
+            ->once()
+            ->with('ops:ip:blacklist', '8.8.8.8')
+            ->andReturn(1);
+
+        Redis::shouldReceive('sismember')
+            ->once()
+            ->with('ops:ip:blacklist', '9.9.9.9')
+            ->andReturn(false);
+        Redis::shouldReceive('incr')
+            ->once()
+            ->with('ops:login:ip:9.9.9.9')
+            ->andReturn(1);
+        Redis::shouldReceive('incr')
+            ->once()
+            ->with('ops:login:user:owner@example.test')
+            ->andReturn(1);
+        Redis::shouldReceive('expire')
+            ->once()
+            ->with('ops:login:ip:9.9.9.9', 300)
+            ->andReturnTrue();
+        Redis::shouldReceive('expire')
+            ->once()
+            ->with('ops:login:user:owner@example.test', 300)
+            ->andReturnTrue();
+        Redis::shouldReceive('get')
+            ->once()
+            ->with('ops:login:ip:9.9.9.9')
+            ->andReturn(1);
+        Redis::shouldReceive('get')
+            ->once()
+            ->with('ops:login:user:owner@example.test')
+            ->andReturn(1);
+
+        $blockedRequest = Request::create('/ops/login', 'POST', [
+            'email' => 'target@example.test',
+        ], [], [], [
+            'REMOTE_ADDR' => '8.8.8.8',
+            'HTTP_HOST' => 'ops.example.test',
+        ]);
+        $route = new Route(['POST'], '/ops/login', static fn (): Response => response('ok'));
+        $route->name('filament.ops.auth.login');
+        $blockedRequest->setRouteResolver(static fn (): Route => $route);
+
+        $blockedResponse = app(OpsAccessControl::class)->handle(
+            $blockedRequest,
+            static fn (): Response => response('blocked source allowed'),
+        );
+
+        $allowedRequest = Request::create('/ops/login', 'POST', [
+            'email' => 'owner@example.test',
+        ], [], [], [
+            'REMOTE_ADDR' => '9.9.9.9',
+            'HTTP_HOST' => 'ops.example.test',
+        ]);
+        $allowedRequest->setRouteResolver(static fn (): Route => $route);
+
+        $allowedResponse = app(OpsAccessControl::class)->handle(
+            $allowedRequest,
+            static fn (): Response => response('unrelated admin allowed'),
+        );
+
+        $this->assertSame(429, $blockedResponse->getStatusCode());
+        $this->assertSame(200, $allowedResponse->getStatusCode());
+        $this->assertSame('unrelated admin allowed', $allowedResponse->getContent());
     }
 
     public function test_non_auth_ops_routes_remain_blocked_by_host_policy(): void

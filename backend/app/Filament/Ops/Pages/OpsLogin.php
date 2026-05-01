@@ -95,18 +95,37 @@ class OpsLogin extends BaseLogin
             ]);
     }
 
+    protected function getRateLimitKey($method, $component = null)
+    {
+        $method ??= debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, limit: 2)[1]['function'];
+        $component ??= static::class;
+
+        return 'ops-login-rate-limiter:'.sha1($component.'|'.$method.'|'.(request()->ip() ?? 'unknown').'|'.$this->loginIdentifier());
+    }
+
     /**
      * @param  array<string, mixed>  $data
      */
     protected function clearDistributedLoginLimiters(array $data): void
     {
         $ip = (string) (request()->ip() ?? 'unknown');
-        $email = trim((string) ($data['email'] ?? 'anonymous'));
-        $routeName = (string) optional(request()->route())->getName();
-        $routeKey = $routeName !== '' ? $routeName : 'filament.ops.auth.login';
+        $email = $this->loginIdentifier($data);
 
         OpsDistributedLimiter::clear('ops:login:ip:'.$ip);
-        OpsDistributedLimiter::clear('ops:login:route:'.$routeKey);
         OpsDistributedLimiter::clear('ops:login:user:'.$email);
+    }
+
+    /**
+     * @param  array<string, mixed>|null  $data
+     */
+    private function loginIdentifier(?array $data = null): string
+    {
+        $data ??= is_array($this->data) ? $this->data : [];
+
+        $identifier = mb_strtolower(trim((string) ($data['email'] ?? '')));
+
+        return $identifier !== ''
+            ? $identifier
+            : 'anonymous:'.(request()->ip() ?? 'unknown');
     }
 }

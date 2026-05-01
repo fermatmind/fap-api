@@ -36,10 +36,6 @@ final class OpsLoginLimiterResetTest extends TestCase
             ->andReturn(1);
         Redis::shouldReceive('del')
             ->once()
-            ->with('ops:login:route:filament.ops.auth.login')
-            ->andReturn(1);
-        Redis::shouldReceive('del')
-            ->once()
             ->with('ops:login:user:ops@example.test')
             ->andReturn(1);
 
