@@ -31,6 +31,13 @@ final class ContentPackResolver
         $locale = $this->normLocale($locale);
         $version = trim($version);
         $dirVersion = is_string($dirVersion) ? trim($dirVersion) : null;
+        $this->assertSafeResolverInput($scale, 'scale');
+        $this->assertSafeResolverInput($region, 'region');
+        $this->assertSafeResolverInput($locale, 'locale');
+        $this->assertSafeResolverInput($version, 'version');
+        if (is_string($dirVersion) && $dirVersion !== '') {
+            $this->assertSafeResolverInput($dirVersion, 'dir_version');
+        }
 
         $trace = [
             'input' => [
@@ -314,6 +321,19 @@ final class ContentPackResolver
     private function makeKey(string $scale, string $region, string $locale, string $version): string
     {
         return "{$scale}|{$region}|{$locale}|{$version}";
+    }
+
+    private function assertSafeResolverInput(string $value, string $field): void
+    {
+        $trimmed = trim($value);
+        if (
+            $trimmed === ''
+            || strlen($trimmed) > 128
+            || str_contains($trimmed, '..')
+            || preg_match('/\A[A-Za-z0-9._-]+\z/', $trimmed) !== 1
+        ) {
+            throw new \RuntimeException("ContentPackResolver: invalid {$field}");
+        }
     }
 
     private function readJson(string $path): ?array

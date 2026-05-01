@@ -53,6 +53,7 @@ final class CacheKeys
             .':org='.self::normalizeSegment((string) $orgId)
             .':slug='.self::normalizeSegment($requestedSlug)
             .':locale='.self::normalizeSegment($locale)
+            .':response='.self::responseScaleCodeMode()
             .':alias='.(int) $allowAlias;
     }
 
@@ -64,6 +65,7 @@ final class CacheKeys
         string $locale,
         string $region,
         ?string $assetsBaseUrlOverride = null,
+        string $requestedScaleCode = '',
     ): string {
         $assetsMarker = $assetsBaseUrlOverride === null || trim($assetsBaseUrlOverride) === ''
             ? 'default'
@@ -74,8 +76,10 @@ final class CacheKeys
             .':pack='.self::normalizeSegment($packId)
             .':dir='.self::normalizeSegment($dirVersion)
             .':form='.self::normalizeSegment($resolvedFormCode)
+            .':requested='.self::normalizeSegment($requestedScaleCode)
             .':locale='.self::normalizeSegment($locale)
             .':region='.self::normalizeSegment($region)
+            .':response='.self::responseScaleCodeMode()
             .':assets='.$assetsMarker;
     }
 
@@ -111,6 +115,11 @@ final class CacheKeys
         return self::PREFIX.':v='.self::versionTag();
     }
 
+    private static function responseScaleCodeMode(): string
+    {
+        return self::normalizeSegment((string) config('scale_identity.api_response_scale_code_mode', 'legacy'));
+    }
+
     private static function normalizeSegment(string $value): string
     {
         $value = trim($value);
@@ -120,6 +129,15 @@ final class CacheKeys
 
         $normalized = preg_replace('/[^a-z0-9._-]+/i', '_', $value);
 
-        return $normalized !== null && $normalized !== '' ? strtolower($normalized) : 'na';
+        if ($normalized === null || $normalized === '') {
+            return 'na';
+        }
+
+        $normalized = strtolower($normalized);
+        if (strlen($normalized) <= 96) {
+            return $normalized;
+        }
+
+        return substr($normalized, 0, 48).'_h'.substr(hash('sha256', $normalized), 0, 16);
     }
 }
