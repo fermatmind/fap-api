@@ -19,8 +19,13 @@ final class AttemptUnlockProjectionRepairService
         private readonly EntitlementManager $entitlements,
     ) {}
 
-    public function repairResultReadyProjectionIfNeeded(int $orgId, string $attemptId): ?UnifiedAccessProjection
-    {
+    public function repairResultReadyProjectionIfNeeded(
+        int $orgId,
+        string $attemptId,
+        ?string $userId = null,
+        ?string $anonId = null,
+        ?string $orderNo = null
+    ): ?UnifiedAccessProjection {
         $attemptId = trim($attemptId);
         if ($attemptId === '' || ! SchemaBaseline::hasTable('unified_access_projections')) {
             return null;
@@ -35,7 +40,13 @@ final class AttemptUnlockProjectionRepairService
         }
 
         try {
-            $unlockState = $this->entitlements->resolveAttemptUnlockState($orgId, $attemptId);
+            $unlockState = $this->entitlements->resolveAttemptUnlockStateForActor(
+                $orgId,
+                $attemptId,
+                $userId,
+                $anonId,
+                $orderNo
+            );
         } catch (\Throwable $e) {
             Log::error('ATTEMPT_UNLOCK_PROJECTION_REPAIR_UNLOCK_STATE_FAILED', [
                 'org_id' => $orgId,

@@ -126,7 +126,13 @@ final class MbtiAccessHubBuilder
         $delivery = $this->presentDelivery($order);
         $reportUrl = $this->stringOrNull($delivery['report_url'] ?? null);
         $reportPdfUrl = $this->stringOrNull($delivery['report_pdf_url'] ?? null);
-        $exactResultEntry = $this->buildExactResultEntry($attemptId, (int) ($order->org_id ?? 0));
+        $exactResultEntry = $this->buildExactResultEntry(
+            $attemptId,
+            (int) ($order->org_id ?? 0),
+            $this->stringOrNull($order->user_id ?? null),
+            $this->stringOrNull($order->anon_id ?? null),
+            $this->stringOrNull($order->order_no ?? null)
+        );
         $canViewReport = (bool) ($exactResultEntry['ready_to_enter'] ?? false);
         $canDownloadPdf = $this->normalizeProjectionState((string) ($exactResultEntry['pdf_state'] ?? 'missing'), 'pdf') === 'ready';
         $canRequestClaimEmail = (bool) ($delivery['can_request_claim_email'] ?? false);
@@ -185,7 +191,13 @@ final class MbtiAccessHubBuilder
             return null;
         }
 
-        return $this->buildExactResultEntry($attemptId, (int) ($order->org_id ?? 0));
+        return $this->buildExactResultEntry(
+            $attemptId,
+            (int) ($order->org_id ?? 0),
+            $this->stringOrNull($order->user_id ?? null),
+            $this->stringOrNull($order->anon_id ?? null),
+            $this->stringOrNull($order->order_no ?? null)
+        );
     }
 
     /**
@@ -288,8 +300,13 @@ final class MbtiAccessHubBuilder
     /**
      * @return array<string,mixed>|null
      */
-    private function buildExactResultEntry(string $attemptId, int $orgId): ?array
-    {
+    private function buildExactResultEntry(
+        string $attemptId,
+        int $orgId,
+        ?string $userId = null,
+        ?string $anonId = null,
+        ?string $orderNo = null
+    ): ?array {
         $attempt = DB::table('attempts')
             ->where('org_id', $orgId)
             ->where('id', $attemptId)
@@ -304,7 +321,13 @@ final class MbtiAccessHubBuilder
             ->where('attempt_id', $attemptId)
             ->exists();
         if ($resultExists) {
-            $this->projectionRepair->repairResultReadyProjectionIfNeeded($orgId, $attemptId);
+            $this->projectionRepair->repairResultReadyProjectionIfNeeded(
+                $orgId,
+                $attemptId,
+                $userId,
+                $anonId,
+                $orderNo
+            );
         }
 
         $projection = UnifiedAccessProjection::query()->where('attempt_id', $attemptId)->first();

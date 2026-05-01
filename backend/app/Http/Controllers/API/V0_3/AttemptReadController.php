@@ -681,7 +681,12 @@ class AttemptReadController extends Controller
         $repairFailureCode = null;
         if ($resultExists && strtoupper(trim((string) ($attempt->scale_code ?? ''))) === 'MBTI') {
             try {
-                $this->projectionRepair->repairResultReadyProjectionIfNeeded($orgId, (string) $attempt->id);
+                $this->projectionRepair->repairResultReadyProjectionIfNeeded(
+                    $orgId,
+                    (string) $attempt->id,
+                    $this->resolveUserId($request),
+                    $this->resolveAnonId($request)
+                );
             } catch (\Throwable $e) {
                 $repairFailed = true;
                 $repairFailureCode = 'projection_repair_runtime_exception';
