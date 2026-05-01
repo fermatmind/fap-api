@@ -19,6 +19,8 @@ final class CareerJobListBundleBuilder
 
     private const DIRECTORY_DRAFT_CROSSWALK_MODE = 'directory_draft';
 
+    private const PUBLIC_DIRECTORY_STUB_KIND = 'public_directory_stub';
+
     public function __construct(
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
     ) {}
@@ -317,10 +319,7 @@ final class CareerJobListBundleBuilder
     {
         return new CareerJobListItemBundle(
             identity: [
-                'occupation_uuid' => $occupation->id,
                 'canonical_slug' => $occupation->canonical_slug,
-                'entity_level' => $occupation->entity_level,
-                'family_uuid' => $occupation->family_id,
             ],
             titles: [
                 'canonical_en' => $occupation->canonical_title_en,
@@ -329,42 +328,19 @@ final class CareerJobListBundleBuilder
             ],
             truthSummary: [
                 'truth_market' => $occupation->truth_market,
-                'median_pay_usd_annual' => null,
-                'outlook_pct_2024_2034' => null,
-                'outlook_description' => null,
-                'ai_exposure' => null,
             ],
             trustSummary: [
+                'public_stub_kind' => self::PUBLIC_DIRECTORY_STUB_KIND,
                 'status' => 'unavailable',
-                'reviewed_at' => null,
-                'editorial_patch_required' => true,
-                'editorial_patch_status' => 'pending_detail_authoring',
+                'availability' => 'detail_unavailable',
                 'allow_strong_claim' => false,
                 'allow_salary_comparison' => false,
                 'allow_ai_strategy' => false,
                 'reason_codes' => ['detail_page_unavailable'],
             ],
-            scoreSummary: [
-                'fit_score' => [
-                    'value' => null,
-                    'integrity_state' => null,
-                    'band' => null,
-                ],
-                'confidence_score' => [
-                    'value' => null,
-                    'integrity_state' => null,
-                    'band' => null,
-                ],
-            ],
+            scoreSummary: [],
             seoContract: $this->buildDirectoryDraftSeoContract($occupation, 'career_job_list_item_bundle'),
-            provenanceMeta: [
-                'compiler_version' => null,
-                'compiled_at' => null,
-                'truth_metric_id' => null,
-                'trust_manifest_id' => null,
-                'index_state_id' => null,
-                'compile_run_id' => null,
-            ],
+            provenanceMeta: [],
         );
     }
 
@@ -455,14 +431,12 @@ final class CareerJobListBundleBuilder
 
         return [
             'canonical_path' => $canonicalPath,
-            'canonical_target' => null,
             'index_state' => IndexStateValue::NOINDEX,
             'index_eligible' => false,
             'reason_codes' => ['detail_page_unavailable'],
-            'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,
+            'public_stub_kind' => self::PUBLIC_DIRECTORY_STUB_KIND,
             'surface_type' => $surface['surface_type'] ?? null,
             'robots_policy' => $surface['robots_policy'] ?? 'noindex,follow',
-            'metadata_fingerprint' => $surface['metadata_fingerprint'] ?? null,
         ];
     }
 

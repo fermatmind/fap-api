@@ -123,20 +123,36 @@ final class CareerSearchApiTest extends TestCase
             'search_h1_zh' => 'AI 合规分析师',
         ]);
 
-        $this->getJson('/api/v0.5/career/search?q=AI%20Compliance&limit=5&mode=prefix&locale=en-US')
+        $response = $this->getJson('/api/v0.5/career/search?q=AI%20Compliance&limit=5&mode=prefix&locale=en-US')
             ->assertOk()
             ->assertJsonPath('bundle_kind', 'career_search_results')
             ->assertJsonCount(1, 'items')
             ->assertJsonPath('items.0.identity.canonical_slug', 'us-ai-compliance-analyst')
             ->assertJsonPath('items.0.match_kind', 'canonical_title_prefix')
+            ->assertJsonPath('items.0.trust_summary.public_stub_kind', 'public_directory_stub')
             ->assertJsonPath('items.0.trust_summary.status', 'unavailable')
+            ->assertJsonPath('items.0.trust_summary.availability', 'detail_unavailable')
             ->assertJsonPath('items.0.seo_contract.index_eligible', false)
+            ->assertJsonPath('items.0.seo_contract.public_stub_kind', 'public_directory_stub')
             ->assertJsonPath('items.0.seo_contract.reason_codes.0', 'detail_page_unavailable')
+            ->assertJsonPath('items.0.seo_contract.robots_policy', 'noindex,follow')
+            ->assertJsonMissingPath('items.0.identity.occupation_uuid')
             ->assertJsonMissingPath('items.0.trust_summary.reviewer_status')
+            ->assertJsonMissingPath('items.0.trust_summary.review_status')
             ->assertJsonMissingPath('items.0.trust_summary.content_version')
             ->assertJsonMissingPath('items.0.trust_summary.data_version')
             ->assertJsonMissingPath('items.0.trust_summary.logic_version')
-            ->assertJsonMissingPath('items.0.provenance_meta.import_run_id');
+            ->assertJsonMissingPath('items.0.trust_summary.cross_market_notice')
+            ->assertJsonMissingPath('items.0.provenance_meta.import_run_id')
+            ->assertJsonMissingPath('items.0.provenance_meta.source_snapshot_id')
+            ->assertJsonMissingPath('items.0.provenance_meta.compile_run_id')
+            ->assertJsonMissingPath('items.0.provenance_meta.index_state_id')
+            ->assertJsonMissingPath('items.0.governance')
+            ->assertJsonMissingPath('items.0.readiness');
+
+        $item = $response->json('items.0');
+        $this->assertSame(['canonical_slug'], array_keys($item['identity']));
+        $this->assertSame([], $item['provenance_meta']);
 
         $this->getJson('/api/v0.5/career/jobs/us-ai-compliance-analyst')
             ->assertStatus(404)

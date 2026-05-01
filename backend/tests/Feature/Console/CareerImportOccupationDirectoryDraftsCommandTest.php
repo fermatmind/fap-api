@@ -115,20 +115,32 @@ final class CareerImportOccupationDirectoryDraftsCommandTest extends TestCase
         $this->getJson('/api/v0.5/career/jobs')
             ->assertOk()
             ->assertJsonCount(2, 'items')
+            ->assertJsonPath('items.0.trust_summary.public_stub_kind', 'public_directory_stub')
             ->assertJsonPath('items.0.trust_summary.status', 'unavailable')
+            ->assertJsonPath('items.0.trust_summary.availability', 'detail_unavailable')
             ->assertJsonPath('items.0.seo_contract.index_eligible', false)
+            ->assertJsonPath('items.0.seo_contract.public_stub_kind', 'public_directory_stub')
+            ->assertJsonMissingPath('items.0.identity.occupation_uuid')
+            ->assertJsonMissingPath('items.0.identity.family_uuid')
             ->assertJsonMissingPath('items.0.trust_summary.reviewer_status')
+            ->assertJsonMissingPath('items.0.trust_summary.editorial_patch_status')
             ->assertJsonMissingPath('items.0.trust_summary.content_version')
             ->assertJsonMissingPath('items.0.trust_summary.data_version')
-            ->assertJsonMissingPath('items.0.provenance_meta.import_run_id');
+            ->assertJsonMissingPath('items.0.provenance_meta.import_run_id')
+            ->assertJsonMissingPath('items.0.provenance_meta.compile_run_id');
         $this->getJson('/api/v0.5/career/search?q='.urlencode('示例职业').'&locale=zh-CN')
             ->assertOk()
             ->assertJsonCount(1, 'items')
+            ->assertJsonPath('items.0.trust_summary.public_stub_kind', 'public_directory_stub')
             ->assertJsonPath('items.0.trust_summary.status', 'unavailable')
+            ->assertJsonPath('items.0.trust_summary.availability', 'detail_unavailable')
             ->assertJsonPath('items.0.seo_contract.index_eligible', false)
+            ->assertJsonPath('items.0.seo_contract.public_stub_kind', 'public_directory_stub')
+            ->assertJsonMissingPath('items.0.identity.occupation_uuid')
             ->assertJsonMissingPath('items.0.trust_summary.reviewer_status')
             ->assertJsonMissingPath('items.0.trust_summary.content_version')
-            ->assertJsonMissingPath('items.0.provenance_meta.import_run_id');
+            ->assertJsonMissingPath('items.0.provenance_meta.import_run_id')
+            ->assertJsonMissingPath('items.0.provenance_meta.compile_run_id');
         $this->getJson('/api/v0.5/career/jobs/cn-1-01-00-01')
             ->assertNotFound();
     }
