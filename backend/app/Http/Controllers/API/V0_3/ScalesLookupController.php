@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\V0_3;
 use App\Http\Controllers\Controller;
 use App\Services\PublicSurface\LandingSurfaceContractService;
 use App\Services\Scale\PublicScaleFormsProjector;
+use App\Services\Scale\PublicScaleInputGuard;
 use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Services\Scale\ScaleIdentityResolver;
 use App\Services\Scale\ScaleRegistry;
@@ -26,6 +27,7 @@ class ScalesLookupController extends Controller
         private ScaleIdentityResolver $identityResolver,
         private ScaleCodeResponseProjector $responseProjector,
         private PublicScaleFormsProjector $publicScaleFormsProjector,
+        private PublicScaleInputGuard $publicInputGuard,
         private OrgContext $orgContext,
         private LandingSurfaceContractService $landingSurfaceContractService,
     ) {}
@@ -36,21 +38,13 @@ class ScalesLookupController extends Controller
     public function lookup(Request $request): JsonResponse
     {
         $orgId = $this->orgContext->orgId();
-        $requestedSlug = (string) $request->query('slug', '');
-        $requestedSlug = trim(strtolower($requestedSlug));
-        if ($requestedSlug === '') {
+        $requestedSlug = $this->publicInputGuard->normalizeSlug($request->query('slug', ''));
+        if ($requestedSlug === null) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'SLUG_REQUIRED',
                 'message' => 'slug is required.',
             ], 400);
-        }
-        if (! preg_match('/^[a-z0-9-]{0,127}$/', $requestedSlug)) {
-            return response()->json([
-                'ok' => false,
-                'error_code' => 'NOT_FOUND',
-                'message' => 'scale not found.',
-            ], 404);
         }
 
         $allowAlias = config('scales_lookup.alias_mode', 'compat') !== 'canonical_only';
@@ -363,37 +357,7 @@ class ScalesLookupController extends Controller
 
     private function resolveRequestedLocale(Request $request, string $defaultLocale): string
     {
-        $raw = trim((string) (
-            $request->query('locale')
-            ?? $request->header('X-FAP-Locale')
-            ?? $request->attributes->get('locale')
-            ?? ''
-        ));
-
-        if ($raw === '') {
-            $raw = trim($defaultLocale);
-        }
-        if ($raw === '') {
-            $raw = 'en';
-        }
-
-        $normalized = str_replace('_', '-', $raw);
-        $parts = array_values(array_filter(explode('-', $normalized), static fn ($p) => $p !== ''));
-        if ($parts === []) {
-            return 'en';
-        }
-
-        $lang = strtolower((string) ($parts[0] ?? 'en'));
-        $region = trim((string) ($parts[1] ?? ''));
-
-        if ($lang === 'zh') {
-            return 'zh-CN';
-        }
-        if ($lang === 'en') {
-            return $region !== '' ? 'en-'.strtoupper($region) : 'en';
-        }
-
-        return $lang;
+        return $this->publicInputGuard->normalizeRequestedLocale($request, $defaultLocale);
     }
 
     private function localeToLanguage(string $locale): string

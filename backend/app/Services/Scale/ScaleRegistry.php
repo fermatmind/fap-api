@@ -98,7 +98,7 @@ class ScaleRegistry
         $cacheKey = CacheKeys::scaleRegistryByCode($orgId, $requestedCode);
         $cached = Cache::get($cacheKey);
         if (is_array($cached)) {
-            return $cached;
+            return $this->canExposeRegistryRow($cached, $orgId) ? $cached : null;
         }
 
         $row = $this->findByCode($requestedCode, $orgId);
@@ -132,7 +132,7 @@ class ScaleRegistry
         $cacheKey = CacheKeys::scaleRegistryBySlug($orgId, $cacheSuffix);
         $cached = Cache::get($cacheKey);
         if (is_array($cached)) {
-            return $cached;
+            return $this->canExposeRegistryRow($cached, $orgId) ? $cached : null;
         }
 
         if ($this->useV2ForTenantReads($orgId)) {
@@ -151,6 +151,7 @@ class ScaleRegistry
                     ->where('org_id', 0)
                     ->where('primary_slug', $slug)
                     ->where('is_public', true)
+                    ->where('is_active', true)
                     ->first();
             } else {
                 $registry = $this->registryQueryForOrg($orgId)
@@ -194,7 +195,8 @@ class ScaleRegistry
             ->where('org_id', $registryOrgId)
             ->where('code', $slugRow->scale_code)
             ->when($registryOrgId === 0, function ($q) {
-                $q->where('is_public', true);
+                $q->where('is_public', true)
+                    ->where('is_active', true);
             })
             ->first();
 
@@ -238,6 +240,18 @@ class ScaleRegistry
         }
 
         return null;
+    }
+
+    /**
+     * @param  array<string,mixed>  $row
+     */
+    private function canExposeRegistryRow(array $row, int $orgId): bool
+    {
+        if ($orgId > 0) {
+            return true;
+        }
+
+        return (bool) ($row['is_public'] ?? false) && (bool) ($row['is_active'] ?? false);
     }
 
     private function registryQueryForOrg(int $orgId, bool $includeGlobalFallback = false): Builder
@@ -347,6 +361,7 @@ class ScaleRegistry
                 ->where('org_id', 0)
                 ->where('code', $code)
                 ->where('is_public', true)
+                ->where('is_active', true)
                 ->first();
 
             return $row ? $row->toArray() : null;
@@ -374,6 +389,7 @@ class ScaleRegistry
                 ->where('org_id', 0)
                 ->where('code', $code)
                 ->where('is_public', true)
+                ->where('is_active', true)
                 ->first();
             if (! $row) {
                 return null;

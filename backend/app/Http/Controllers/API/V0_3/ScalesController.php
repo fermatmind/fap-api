@@ -16,6 +16,7 @@ use App\Services\Enneagram\EnneagramFormCatalog;
 use App\Services\Enneagram\EnneagramTechnicalNoteService;
 use App\Services\Mbti\MbtiFormCatalog;
 use App\Services\Riasec\RiasecFormCatalog;
+use App\Services\Scale\PublicScaleInputGuard;
 use App\Services\Scale\ScaleCodeInputGuard;
 use App\Services\Scale\ScaleCodeResponseProjector;
 use App\Services\Scale\ScaleIdentityResolver;
@@ -26,6 +27,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class ScalesController extends Controller
 {
@@ -36,6 +38,7 @@ class ScalesController extends Controller
         private ScaleIdentityResolver $identityResolver,
         private ScaleCodeResponseProjector $responseProjector,
         private ScaleCodeInputGuard $inputGuard,
+        private PublicScaleInputGuard $publicInputGuard,
         private OrgContext $orgContext,
         private MbtiFormCatalog $mbtiFormCatalog,
         private BigFiveFormCatalog $bigFiveFormCatalog,
@@ -63,8 +66,8 @@ class ScalesController extends Controller
     public function show(Request $request, string $scale_code): JsonResponse
     {
         $orgId = $this->orgContext->orgId();
-        $code = strtoupper(trim($scale_code));
-        if ($code === '') {
+        $code = $this->publicInputGuard->normalizeScaleCode($scale_code);
+        if ($code === null) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'SCALE_REQUIRED',
@@ -97,8 +100,8 @@ class ScalesController extends Controller
     public function technicalNote(Request $request, string $scale_code, EnneagramTechnicalNoteService $technicalNoteService): JsonResponse
     {
         $orgId = $this->orgContext->orgId();
-        $code = strtoupper(trim($scale_code));
-        if ($code === '') {
+        $code = $this->publicInputGuard->normalizeScaleCode($scale_code);
+        if ($code === null) {
             return response()->json([
                 'ok' => false,
                 'error_code' => 'SCALE_REQUIRED',
@@ -149,8 +152,8 @@ class ScalesController extends Controller
     ): JsonResponse {
         try {
             $orgId = $this->orgContext->orgId();
-            $code = strtoupper(trim($scale_code));
-            if ($code === '') {
+            $code = $this->publicInputGuard->normalizeScaleCode($scale_code);
+            if ($code === null) {
                 return response()->json([
                     'ok' => false,
                     'error_code' => 'SCALE_REQUIRED',
@@ -218,8 +221,16 @@ class ScalesController extends Controller
                 ], 503);
             }
 
-            $region = (string) ($request->query('region') ?? $row['default_region'] ?? config('content_packs.default_region', ''));
-            $locale = (string) ($request->query('locale') ?? $row['default_locale'] ?? config('content_packs.default_locale', ''));
+            $region = $this->publicInputGuard->normalizeRequestedRegion(
+                $request,
+                (string) ($row['default_region'] ?? config('content_packs.default_region', 'GLOBAL'))
+            );
+            $locale = $this->publicInputGuard->normalizeRequestedLocale(
+                $request,
+                (string) ($row['default_locale'] ?? config('content_packs.default_locale', 'en'))
+            );
+            $this->publicInputGuard->assertSafeContentIdentifier($packId, 'pack_id');
+            $this->publicInputGuard->assertSafeContentIdentifier($dirVersion, 'dir_version');
 
             if ($resolvedScaleCode === 'BIG5_OCEAN') {
                 $version = $dirVersion !== '' ? $dirVersion : (string) ($row['default_dir_version'] ?? BigFivePackLoader::PACK_VERSION);
@@ -488,7 +499,8 @@ class ScalesController extends Controller
                     $resolvedFormCode,
                     $locale,
                     $region,
-                    $assetsBaseUrlOverride
+                    $assetsBaseUrlOverride,
+                    $code
                 );
                 $cached = $cacheStore->get($cacheKey);
                 if (is_array($cached)) {
@@ -540,7 +552,7 @@ class ScalesController extends Controller
 
             return $this->cacheableJson($payload, 'miss');
         } catch (\Throwable $e) {
-            if ($e instanceof ApiProblemException) {
+            if ($e instanceof ApiProblemException || $e instanceof ValidationException) {
                 throw $e;
             }
 
@@ -764,10 +776,13 @@ class ScalesController extends Controller
             $resolvedV2,
             $scaleUid !== '' ? $scaleUid : null
         );
+        $primaryScaleCode = $requested === $resolvedV2 && $requested !== $resolvedV1
+            ? $resolvedV2
+            : $responseCodes['scale_code'];
 
         return [
             'requested_scale_code' => $requested,
-            'scale_code' => $responseCodes['scale_code'],
+            'scale_code' => $primaryScaleCode,
             'scale_code_legacy' => $responseCodes['scale_code_legacy'],
             'scale_code_v2' => $responseCodes['scale_code_v2'],
             'scale_uid' => $responseCodes['scale_uid'],

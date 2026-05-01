@@ -28,6 +28,10 @@ class ContentPackResolver
         if (! $version) {
             throw new RuntimeException("No default content_package_version configured for scale=$scaleCode");
         }
+        $this->assertSafePathSegment($scaleCode, 'scale_code');
+        $this->assertSafePathSegment($region, 'region');
+        $this->assertSafePathSegment($locale, 'locale');
+        $this->assertSafePathSegment((string) $version, 'content_package_version');
 
         $packPath = $scaleCode.'/'.$region.'/'.$locale.'/'.$version;
         $driver = config('content_packs.driver', 'local');
@@ -121,6 +125,19 @@ class ContentPackResolver
                 // 找不到 fallback pack 就跳过，不阻塞主流程
                 continue;
             }
+        }
+    }
+
+    private function assertSafePathSegment(string $value, string $field): void
+    {
+        $trimmed = trim($value);
+        if (
+            $trimmed === ''
+            || strlen($trimmed) > 128
+            || str_contains($trimmed, '..')
+            || preg_match('/\A[A-Za-z0-9._-]+\z/', $trimmed) !== 1
+        ) {
+            throw new RuntimeException("Invalid content pack {$field}.");
         }
     }
 

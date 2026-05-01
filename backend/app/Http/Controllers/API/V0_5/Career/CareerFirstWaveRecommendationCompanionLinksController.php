@@ -8,6 +8,7 @@ use App\Domain\Career\Publish\CareerFirstWaveRecommendationCompanionLinksService
 use App\Http\Controllers\Concerns\RespondsWithNotFound;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Career\CareerFirstWaveRecommendationCompanionLinksSummaryResource;
+use App\Services\Scale\PublicScaleInputGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,7 @@ final class CareerFirstWaveRecommendationCompanionLinksController extends Contro
 
     public function __construct(
         private readonly CareerFirstWaveRecommendationCompanionLinksService $summaryService,
+        private readonly PublicScaleInputGuard $publicInputGuard,
     ) {}
 
     /**
@@ -36,14 +38,8 @@ final class CareerFirstWaveRecommendationCompanionLinksController extends Contro
 
     private function resolveLocale(Request $request): string
     {
-        $raw = trim((string) (
-            $request->query('locale')
-            ?? $request->header('X-FAP-Locale')
-            ?? 'en'
-        ));
+        $locale = $this->publicInputGuard->normalizeRequestedLocale($request, 'en');
 
-        $normalized = strtolower(str_replace('_', '-', $raw));
-
-        return str_starts_with($normalized, 'zh') ? 'zh-CN' : 'en';
+        return str_starts_with(strtolower($locale), 'zh') ? 'zh-CN' : 'en';
     }
 }
