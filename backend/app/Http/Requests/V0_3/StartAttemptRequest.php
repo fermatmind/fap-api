@@ -75,6 +75,7 @@ class StartAttemptRequest extends FormRequest
             'channel' => ['nullable', 'string', 'max:32'],
             'referrer' => ['nullable', 'string', 'max:255'],
             'form_code' => ['nullable', 'string', 'max:64'],
+            'resume_token' => ['nullable', 'string', 'max:128'],
             'meta' => ['sometimes', 'array'],
             'share_id' => ['nullable', 'string', 'max:128'],
             'compare_invite_id' => ['nullable', 'string', 'max:128'],
