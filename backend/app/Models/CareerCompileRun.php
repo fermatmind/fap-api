@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CareerCompileRun extends CareerFoundationModel
 {
@@ -28,5 +29,10 @@ class CareerCompileRun extends CareerFoundationModel
     public function importRun(): BelongsTo
     {
         return $this->belongsTo(CareerImportRun::class, 'import_run_id', 'id');
+    }
+
+    public function recommendationSnapshots(): HasMany
+    {
+        return $this->hasMany(RecommendationSnapshot::class, 'compile_run_id', 'id');
     }
 }

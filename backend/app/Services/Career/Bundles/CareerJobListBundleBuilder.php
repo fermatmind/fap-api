@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\Import\RunStatus;
 use App\Domain\Career\IndexStateValue;
 use App\DTO\Career\CareerJobListItemBundle;
+use App\Models\CareerCompileRun;
 use App\Models\CareerJob;
 use App\Models\Occupation;
 use App\Models\RecommendationSnapshot;
@@ -36,6 +38,8 @@ final class CareerJobListBundleBuilder
      */
     public function build(bool $includeNonIndexable = false): array
     {
+        $compileRunId = $this->latestCompletedJobListCompileRunId();
+
         $snapshotQuery = RecommendationSnapshot::query()
             ->with([
                 'occupation.editorialPatches' => fn ($query) => $query->orderByDesc('updated_at')->orderByDesc('created_at'),
@@ -64,6 +68,12 @@ final class CareerJobListBundleBuilder
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
             ->limit(self::MAX_PUBLIC_COMPILED_ROWS);
+
+        if ($compileRunId !== null) {
+            $snapshotQuery->where('compile_run_id', $compileRunId);
+        } else {
+            $snapshotQuery->whereRaw('1 = 0');
+        }
 
         $snapshots = $snapshotQuery->get();
 
@@ -193,6 +203,32 @@ final class CareerJobListBundleBuilder
         }
 
         return strcmp((string) $left->id, (string) $right->id);
+    }
+
+    private function latestCompletedJobListCompileRunId(): ?string
+    {
+        $id = CareerCompileRun::query()
+            ->where('status', RunStatus::COMPLETED)
+            ->where('dry_run', false)
+            ->whereHas('recommendationSnapshots', static function ($query): void {
+                $query->whereNotNull('compiled_at')
+                    ->whereHas('occupation', static function ($query): void {
+                        $query->whereIn('crosswalk_mode', self::SAFE_CROSSWALK_MODES);
+                    })
+                    ->whereHas('contextSnapshot', static function ($query): void {
+                        $query->where('context_payload->materialization', 'career_first_wave');
+                    })
+                    ->whereHas('profileProjection', static function ($query): void {
+                        $query->where('projection_payload->materialization', 'career_first_wave')
+                            ->whereNull('projection_payload->recommendation_subject_meta');
+                    });
+            })
+            ->orderByDesc('finished_at')
+            ->orderByDesc('started_at')
+            ->orderByDesc('created_at')
+            ->value('id');
+
+        return is_string($id) && $id !== '' ? $id : null;
     }
 
     private function buildItem(RecommendationSnapshot $snapshot, Occupation $occupation): CareerJobListItemBundle
