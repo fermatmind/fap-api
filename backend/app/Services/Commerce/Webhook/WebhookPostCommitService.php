@@ -36,7 +36,7 @@ class WebhookPostCommitService
                     $errorMessage
                 );
 
-                $result = $this->core->serverError($errorCode, $errorMessage);
+                $result = $this->core->serverError($errorCode, 'post commit side effects failed.');
             }
         } elseif (($result['ok'] ?? false) && ! ($result['duplicate'] ?? false) && ! ($result['ignored'] ?? false)) {
             $this->core->markEventProcessed($provider, $providerEventId);

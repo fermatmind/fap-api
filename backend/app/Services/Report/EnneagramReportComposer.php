@@ -10,6 +10,8 @@ use App\Services\Content\EnneagramPackLoader;
 use App\Services\Enneagram\Assets\EnneagramAssetPreviewPayloadBuilder;
 use App\Services\Enneagram\EnneagramPublicProjectionService;
 use App\Services\Enneagram\Registry\RegistryValidator;
+use App\Support\Logging\SensitiveDiagnosticRedactor;
+use Illuminate\Support\Facades\Log;
 use RuntimeException;
 
 final class EnneagramReportComposer
@@ -318,7 +320,12 @@ final class EnneagramReportComposer
                 ],
             ];
         } catch (\Throwable $error) {
-            return $this->buildUnavailableReportV2($projectionV2, $language, $error);
+            Log::warning('ENNEAGRAM_REPORT_V2_REGISTRY_UNAVAILABLE', [
+                'exception_class' => $error::class,
+                'exception' => SensitiveDiagnosticRedactor::redactString($error->getMessage()),
+            ]);
+
+            return $this->buildUnavailableReportV2($projectionV2, $language);
         }
     }
 
@@ -326,7 +333,7 @@ final class EnneagramReportComposer
      * @param  array<string,mixed>  $projectionV2
      * @return array<string,mixed>
      */
-    private function buildUnavailableReportV2(array $projectionV2, string $language, \Throwable $error): array
+    private function buildUnavailableReportV2(array $projectionV2, string $language): array
     {
         $pages = [];
         foreach (array_keys(self::PAGE_SPECS) as $pageKey) {
@@ -373,7 +380,8 @@ final class EnneagramReportComposer
                 'confidence_policy_version' => data_get($projectionV2, 'algorithmic_meta.confidence_policy_version'),
                 'quality_policy_version' => data_get($projectionV2, 'algorithmic_meta.quality_policy_version'),
                 'build_status' => 'registry_unavailable',
-                'build_error' => $error->getMessage(),
+                'build_error' => 'registry unavailable.',
+                'build_error_code' => 'ENNEAGRAM_REGISTRY_UNAVAILABLE',
             ],
         ];
     }

@@ -191,12 +191,16 @@ class AttemptSubmissionJobTerminalFailureTest extends TestCase
                 'id' => $submissionId,
                 'state' => 'failed',
                 'error_code' => 'SUBMISSION_JOB_TERMINAL_FAILURE',
+                'error_message' => 'submission job terminal failure.',
             ],
             'result' => [
                 'ok' => false,
                 'error_code' => 'SUBMISSION_JOB_TERMINAL_FAILURE',
+                'message' => 'submission job terminal failure.',
                 'terminal_failure' => true,
             ],
         ]);
+        $this->assertStringNotContainsString('fatal worker failure', $status->getContent());
+        $this->assertNull($status->json('result.job.exception'));
     }
 }

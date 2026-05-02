@@ -74,8 +74,11 @@ final class GenericLikertDriverTest extends TestCase
             ->once()
             ->with('LIKERT_ANSWER_UNKNOWN', \Mockery::on(function ($context): bool {
                 return is_array($context)
-                    && ($context['question'] ?? null) === 'Q2'
-                    && ($context['answer'] ?? null) === 'Z';
+                    && is_string($context['question_fingerprint'] ?? null)
+                    && is_string($context['answer_fingerprint'] ?? null)
+                    && ($context['answer_length'] ?? null) === 1
+                    && ! array_key_exists('question', $context)
+                    && ! array_key_exists('answer', $context);
             }));
     }
 }
