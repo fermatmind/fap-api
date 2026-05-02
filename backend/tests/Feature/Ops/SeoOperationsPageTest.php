@@ -468,6 +468,43 @@ final class SeoOperationsPageTest extends TestCase
         $this->assertSame('https://example.test/images/social-gap-article.png', $articleSeo->og_image_url);
     }
 
+    public function test_seo_operations_issue_queue_is_capped(): void
+    {
+        $selectedOrg = $this->createOrganization('SEO Bound Org');
+
+        foreach (range(1, SeoOperationsService::MAX_ISSUE_QUEUE_ITEMS + 10) as $index) {
+            $article = Article::query()->create([
+                'org_id' => (int) $selectedOrg->id,
+                'slug' => 'seo-bound-article-'.$index,
+                'locale' => 'en',
+                'title' => 'SEO Bound Article '.$index,
+                'excerpt' => 'Bound article excerpt',
+                'content_md' => 'Bound body',
+                'status' => 'published',
+                'is_public' => true,
+                'is_indexable' => true,
+                'published_at' => Carbon::now()->subDay(),
+            ]);
+            ArticleSeoMeta::query()->create([
+                'org_id' => (int) $selectedOrg->id,
+                'article_id' => (int) $article->id,
+                'locale' => 'en',
+                'seo_title' => '',
+                'seo_description' => '',
+                'canonical_url' => '',
+                'og_title' => '',
+                'og_description' => '',
+                'og_image_url' => '',
+                'robots' => '',
+                'is_indexable' => false,
+            ]);
+        }
+
+        $queue = app(SeoOperationsService::class)->buildIssueQueue([(int) $selectedOrg->id], 'article', 'all');
+
+        $this->assertCount(SeoOperationsService::MAX_ISSUE_QUEUE_ITEMS, $queue['items']);
+    }
+
     private function createOrganization(string $name): Organization
     {
         return Organization::query()->create([

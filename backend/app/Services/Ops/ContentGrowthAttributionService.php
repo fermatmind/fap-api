@@ -15,6 +15,14 @@ use Illuminate\Support\Collection;
 
 final class ContentGrowthAttributionService
 {
+    public const MAX_SURFACES_PER_TYPE = 200;
+
+    public const MAX_EVENTS = 1000;
+
+    public const MAX_ORDERS = 500;
+
+    public const MAX_SHARE_ALIASES_PER_SURFACE = 100;
+
     public function __construct(
         private readonly OrderManager $orders,
     ) {}
@@ -27,7 +35,7 @@ final class ContentGrowthAttributionService
      *   matrix_rows:list<array<string,mixed>>
      * }
      */
-    public function build(array $currentOrgIds): array
+    public function build(array $currentOrgIds, bool $includeCommerceMetrics = true): array
     {
         $orgId = max(0, (int) ($currentOrgIds[0] ?? 0));
         $lookbackThreshold = Carbon::now()->subDays(30);
@@ -37,24 +45,30 @@ final class ContentGrowthAttributionService
             ->withoutGlobalScopes()
             ->where('org_id', $orgId)
             ->where('occurred_at', '>=', $lookbackThreshold)
+            ->latest('occurred_at')
+            ->limit(self::MAX_EVENTS)
             ->get();
 
-        $orders = Order::query()
-            ->withoutGlobalScopes()
-            ->where('org_id', $orgId)
-            ->whereIn('status', [Order::STATUS_PAID, Order::STATUS_FULFILLED])
-            ->where(function ($query) use ($lookbackThreshold): void {
-                $query->where('paid_at', '>=', $lookbackThreshold)
-                    ->orWhere(function ($fallbackQuery) use ($lookbackThreshold): void {
-                        $fallbackQuery
-                            ->whereNull('paid_at')
-                            ->where('updated_at', '>=', $lookbackThreshold);
-                    });
-            })
-            ->get();
+        $orders = $includeCommerceMetrics
+            ? Order::query()
+                ->withoutGlobalScopes()
+                ->where('org_id', $orgId)
+                ->whereIn('status', [Order::STATUS_PAID, Order::STATUS_FULFILLED])
+                ->where(function ($query) use ($lookbackThreshold): void {
+                    $query->where('paid_at', '>=', $lookbackThreshold)
+                        ->orWhere(function ($fallbackQuery) use ($lookbackThreshold): void {
+                            $fallbackQuery
+                                ->whereNull('paid_at')
+                                ->where('updated_at', '>=', $lookbackThreshold);
+                        });
+                })
+                ->latest('updated_at')
+                ->limit(self::MAX_ORDERS)
+                ->get()
+            : collect();
 
         $matrixRows = $surfaces
-            ->map(function (array $surface) use ($events, $orders): array {
+            ->map(function (array $surface) use ($events, $orders, $includeCommerceMetrics): array {
                 $matchingEvents = $events
                     ->filter(fn (Event $event): bool => $this->matchesSurface($surface, $this->eventCandidates($event)))
                     ->values();
@@ -82,13 +96,17 @@ final class ContentGrowthAttributionService
                 }
 
                 $shareTouchpoints = $this->shareTouchpoints($matchingEvents, $matchingOrders);
-                $paidOrders = $matchingOrders->count();
-                $shareAssistedOrders = $matchingOrders
-                    ->filter(fn (Order $order): bool => $this->isShareAssistedOrder($order))
-                    ->count();
-                $revenueCents = (int) $matchingOrders->sum(function (Order $order): int {
-                    return (int) ($order->amount_cents ?? $order->amount_total ?? 0);
-                });
+                $paidOrders = $includeCommerceMetrics ? $matchingOrders->count() : 0;
+                $shareAssistedOrders = $includeCommerceMetrics
+                    ? $matchingOrders
+                        ->filter(fn (Order $order): bool => $this->isShareAssistedOrder($order))
+                        ->count()
+                    : 0;
+                $revenueCents = $includeCommerceMetrics
+                    ? (int) $matchingOrders->sum(function (Order $order): int {
+                        return (int) ($order->amount_cents ?? $order->amount_total ?? 0);
+                    })
+                    : 0;
                 $signalCount = $matchingEvents->count();
                 $lastTouch = $this->latestTouchAt($matchingEvents, $matchingOrders);
                 $canonicalReady = $surface['canonical_ready'];
@@ -112,8 +130,8 @@ final class ContentGrowthAttributionService
                     'share_touchpoints' => $shareTouchpoints,
                     'share_assisted_orders' => $shareAssistedOrders,
                     'paid_orders' => $paidOrders,
-                    'revenue_cents' => $revenueCents,
-                    'revenue_label' => $this->formatCurrencyCents($revenueCents),
+                    'revenue_cents' => $includeCommerceMetrics ? $revenueCents : null,
+                    'revenue_label' => $includeCommerceMetrics ? $this->formatCurrencyCents($revenueCents) : 'Restricted',
                     'growth_state' => $growthState,
                     'growth_state_label' => $growthState.' | '.$growthStateLabel,
                     'last_touch_at' => $lastTouch,
@@ -146,17 +164,20 @@ final class ContentGrowthAttributionService
                 'value' => (string) $matrixRows->sum('share_touchpoints'),
                 'hint' => 'Distinct share_id or share_click_id touchpoints attributed back to visible content surfaces.',
             ],
-            [
+        ];
+
+        if ($includeCommerceMetrics) {
+            $headlineFields[] = [
                 'label' => 'Paid conversions (30d)',
                 'value' => (string) $matrixRows->sum('paid_orders'),
                 'hint' => 'Paid or fulfilled orders carrying attribution that resolves back to visible content paths.',
-            ],
-            [
+            ];
+            $headlineFields[] = [
                 'label' => 'Attributed revenue (30d)',
                 'value' => $this->formatCurrencyCents((int) $matrixRows->sum('revenue_cents')),
                 'hint' => 'Revenue from paid orders attributed to visible content paths in the current org boundary.',
-            ],
-        ];
+            ];
+        }
 
         $diagnosticCards = [
             $this->diagnosticCard(
@@ -203,6 +224,8 @@ final class ContentGrowthAttributionService
             ->where('status', 'published')
             ->where('is_public', true)
             ->with('seoMeta')
+            ->latest('updated_at')
+            ->limit(self::MAX_SURFACES_PER_TYPE)
             ->get()
             ->map(fn (Article $article): array => $this->surfaceRecord('article', $article, 'Current org'));
 
@@ -212,6 +235,8 @@ final class ContentGrowthAttributionService
             ->where('status', CareerGuide::STATUS_PUBLISHED)
             ->where('is_public', true)
             ->with('seoMeta')
+            ->latest('updated_at')
+            ->limit(self::MAX_SURFACES_PER_TYPE)
             ->get()
             ->map(fn (CareerGuide $guide): array => $this->surfaceRecord('guide', $guide, 'Global content'));
 
@@ -221,6 +246,8 @@ final class ContentGrowthAttributionService
             ->where('status', CareerJob::STATUS_PUBLISHED)
             ->where('is_public', true)
             ->with('seoMeta')
+            ->latest('updated_at')
+            ->limit(self::MAX_SURFACES_PER_TYPE)
             ->get()
             ->map(fn (CareerJob $job): array => $this->surfaceRecord('job', $job, 'Global content'));
 
@@ -414,12 +441,18 @@ final class ContentGrowthAttributionService
         foreach ($events as $event) {
             foreach ($this->eventShareAliases($event) as $alias) {
                 $aliases[$alias] = true;
+                if (count($aliases) >= self::MAX_SHARE_ALIASES_PER_SURFACE) {
+                    return array_keys($aliases);
+                }
             }
         }
 
         foreach ($orders as $order) {
             foreach ($this->orderShareAliases($order) as $alias) {
                 $aliases[$alias] = true;
+                if (count($aliases) >= self::MAX_SHARE_ALIASES_PER_SURFACE) {
+                    return array_keys($aliases);
+                }
             }
         }
 

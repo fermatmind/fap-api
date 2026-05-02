@@ -18,6 +18,8 @@ use Illuminate\Support\Collection;
 
 class SeoOperationsPage extends Page
 {
+    public const MAX_RECORDS_PER_CONTENT_TYPE = 500;
+
     protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
 
     protected static ?string $navigationGroup = null;
@@ -155,6 +157,7 @@ class SeoOperationsPage extends Page
             ->whereIn('org_id', $currentOrgIds)
             ->with('seoMeta')
             ->latest('updated_at')
+            ->limit(self::MAX_RECORDS_PER_CONTENT_TYPE)
             ->get();
         /** @var Collection<int, CareerGuide> $guides */
         $guides = CareerGuide::query()
@@ -162,6 +165,7 @@ class SeoOperationsPage extends Page
             ->where('org_id', 0)
             ->with('seoMeta')
             ->latest('updated_at')
+            ->limit(self::MAX_RECORDS_PER_CONTENT_TYPE)
             ->get();
         /** @var Collection<int, CareerJob> $jobs */
         $jobs = CareerJob::query()
@@ -169,6 +173,7 @@ class SeoOperationsPage extends Page
             ->where('org_id', 0)
             ->with('seoMeta')
             ->latest('updated_at')
+            ->limit(self::MAX_RECORDS_PER_CONTENT_TYPE)
             ->get();
 
         $articleTotal = $articles->count();

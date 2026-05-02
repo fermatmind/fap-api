@@ -75,8 +75,10 @@
                         <th>SEO</th>
                         <th>Signals</th>
                         <th>Share</th>
-                        <th>Paid</th>
-                        <th>Revenue</th>
+                        @if ($showCommerceMetrics)
+                            <th>Paid</th>
+                            <th>Revenue</th>
+                        @endif
                         <th>Latest touch</th>
                     </tr>
                 </x-slot>
@@ -100,11 +102,15 @@
                         <td>
                             <div class="ops-control-stack">
                                 <span>{{ $row['share_touchpoints'] }} touchpoints</span>
-                                <span class="ops-control-hint">{{ $row['share_assisted_orders'] }} assisted orders</span>
+                                @if ($showCommerceMetrics)
+                                    <span class="ops-control-hint">{{ $row['share_assisted_orders'] }} assisted orders</span>
+                                @endif
                             </div>
                         </td>
-                        <td>{{ $row['paid_orders'] }}</td>
-                        <td>{{ $row['revenue_label'] }}</td>
+                        @if ($showCommerceMetrics)
+                            <td>{{ $row['paid_orders'] }}</td>
+                            <td>{{ $row['revenue_label'] }}</td>
+                        @endif
                         <td>
                             <div class="ops-control-stack">
                                 <span>{{ $row['last_touch_label'] }}</span>

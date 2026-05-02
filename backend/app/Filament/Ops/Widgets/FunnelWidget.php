@@ -2,6 +2,7 @@
 
 namespace App\Filament\Ops\Widgets;
 
+use App\Filament\Ops\Support\OpsMetricsAccess;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Facades\DB;
@@ -9,6 +10,11 @@ use Illuminate\Support\Facades\DB;
 class FunnelWidget extends BaseWidget
 {
     protected static bool $isLazy = false;
+
+    public static function canView(): bool
+    {
+        return OpsMetricsAccess::canViewCommerceMetrics();
+    }
 
     protected function getHeading(): ?string
     {

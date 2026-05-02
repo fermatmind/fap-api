@@ -50,12 +50,44 @@ final class OpsDashboardOrgContextInheritanceTest extends TestCase
             ->get('/ops')
             ->assertOk()
             ->assertSee($selectedOrg->name)
+            ->assertSee(__('ops.widgets.paid_orders_today'))
+            ->assertSee(__('ops.widgets.funnel_snapshot_7d'))
+            ->assertSee(__('ops.widgets.webhook_monitoring'))
             ->assertDontSee(__('ops.topbar.no_org_selected'))
             ->assertDontSee(__('ops.widgets.select_org_to_view_metrics'))
             ->assertDontSee('@js(request()->fullUrl())', false)
             ->assertSee('setLocale(', false)
             ->assertSee('window.__opsLivewirePageExpiredRecoveryHookInstalled', false)
             ->assertSee("const autoRefreshStorageKeyPrefix = 'ops-livewire-page-expired-at:'", false);
+    }
+
+    public function test_content_role_does_not_render_commerce_kpis_on_ops_dashboard(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+        ]);
+        $selectedOrg = $this->createOrganization('Dashboard Content Only Org');
+
+        $this->seedCommerceOpsChain((int) $selectedOrg->id, 'ord_dashboard_content_only', [
+            'payment_state' => 'paid',
+            'grant_state' => 'granted',
+            'status' => 'paid',
+            'paid_at' => now()->subMinutes(10),
+        ]);
+
+        $this->withSession([
+            'ops_admin_totp_verified_user_id' => (int) $admin->id,
+            'ops_org_id' => (int) $selectedOrg->id,
+        ])->withCookie('ops_org_id', (string) $selectedOrg->id)
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops')
+            ->assertOk()
+            ->assertSee($selectedOrg->name)
+            ->assertDontSee(__('ops.widgets.commerce_overview'))
+            ->assertDontSee(__('ops.widgets.paid_orders_today'))
+            ->assertDontSee(__('ops.widgets.paid_without_grant'))
+            ->assertDontSee(__('ops.widgets.funnel_snapshot_7d'))
+            ->assertDontSee(__('ops.widgets.webhook_monitoring'));
     }
 
     public function test_ops_panel_registers_org_context_middleware_for_livewire_persistence(): void
