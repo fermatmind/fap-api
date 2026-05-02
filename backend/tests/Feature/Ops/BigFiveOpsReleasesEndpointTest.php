@@ -16,7 +16,7 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
 
     private int $lastOrgId = 0;
 
-    public function test_owner_can_list_big5_releases_with_evidence_fields(): void
+    public function test_owner_can_list_big5_releases_without_internal_metadata(): void
     {
         $owner = $this->createUserWithToken('ops-owner@big5.test');
         $orgId = $this->createOrgForToken($owner['token']);
@@ -92,8 +92,9 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         $this->assertSame('rollback', (string) ($items[0]['action'] ?? ''));
         $this->assertSame('publish', (string) ($items[1]['action'] ?? ''));
         $this->assertSame('BIG5_OCEAN', (string) ($items[0]['to_pack_id'] ?? ''));
-        $this->assertSame(64, strlen((string) ($items[0]['evidence']['manifest_hash'] ?? '')));
-        $this->assertSame('2026Q1_zhcn_prod_v1', (string) ($items[0]['evidence']['norms_version'] ?? ''));
+        $this->assertArrayNotHasKey('evidence', (array) $items[0]);
+        $this->assertArrayNotHasKey('from_version_id', (array) $items[0]);
+        $this->assertArrayNotHasKey('to_version_id', (array) $items[0]);
     }
 
     public function test_non_member_cannot_access_big5_releases_endpoint(): void
@@ -152,7 +153,7 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonPath('ok', true);
         $response->assertJsonPath('item.release_id', $latestId);
-        $response->assertJsonPath('item.evidence.norms_version', '2026Q2_zhcn_prod_v1');
+        $this->assertArrayNotHasKey('evidence', (array) $response->json('item'));
     }
 
     public function test_owner_can_get_latest_big5_release_audits(): void
@@ -355,7 +356,7 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         $response->assertJsonPath('count', 1);
         $response->assertJsonPath('items.0.action', 'big5_pack_publish');
         $response->assertJsonPath('items.0.target_id', $releaseId);
-        $response->assertJsonPath('items.0.meta.git_sha', str_repeat('d', 40));
+        $this->assertArrayNotHasKey('git_sha', (array) $response->json('items.0.meta'));
     }
 
     public function test_non_member_cannot_access_big5_audits_endpoint(): void
@@ -655,10 +656,10 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         $response->assertJsonPath('ok', true);
         $response->assertJsonPath('org_id', $orgId);
         $response->assertJsonPath('item.release_id', $releaseId);
-        $response->assertJsonPath('item.evidence.norms_version', '2026Q1_zhcn_prod_v1');
+        $this->assertArrayNotHasKey('evidence', (array) $response->json('item'));
         $response->assertJsonPath('audits.0.action', 'big5_pack_publish');
         $response->assertJsonPath('audits.0.target_id', $releaseId);
-        $response->assertJsonPath('audits.0.meta.manifest_hash', str_repeat('a', 64));
+        $this->assertArrayNotHasKey('manifest_hash', (array) $response->json('audits.0.meta'));
     }
 
     public function test_release_api_responses_omit_publisher_identifiers(): void

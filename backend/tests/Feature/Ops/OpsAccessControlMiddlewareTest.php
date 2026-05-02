@@ -257,6 +257,77 @@ final class OpsAccessControlMiddlewareTest extends TestCase
         $this->assertSame(403, $response->getStatusCode());
     }
 
+    public function test_ops_livewire_update_respects_host_and_ip_blocks(): void
+    {
+        $this->app->detectEnvironment(static fn (): string => 'production');
+        config()->set('ops.access_control.allowed_host', 'ops.example.test');
+        config()->set('ops.access_control.ip_allowlist', ['1.1.1.1']);
+
+        Redis::shouldReceive('sismember')
+            ->never();
+
+        $request = Request::create('/livewire/update', 'POST', [
+            'components' => [
+                [
+                    'snapshot' => json_encode([
+                        'memo' => [
+                            'name' => 'filament.ops.livewire.current-org-switcher',
+                        ],
+                    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                ],
+            ],
+        ], [], [], [
+            'REMOTE_ADDR' => '8.8.8.8',
+            'HTTP_HOST' => 'blocked.example.test',
+        ]);
+        $route = new Route(['POST'], '/livewire/update', static fn (): Response => response('ok'));
+        $route->name('livewire.update');
+        $request->setRouteResolver(static fn (): Route => $route);
+
+        $response = app(OpsAccessControl::class)->handle(
+            $request,
+            static fn (): Response => response('allowed'),
+        );
+
+        $this->assertSame(403, $response->getStatusCode());
+    }
+
+    public function test_non_ops_livewire_update_is_not_constrained_by_ops_allowlist(): void
+    {
+        $this->app->detectEnvironment(static fn (): string => 'production');
+        config()->set('ops.access_control.allowed_host', 'ops.example.test');
+        config()->set('ops.access_control.ip_allowlist', ['1.1.1.1']);
+
+        Redis::shouldReceive('sismember')
+            ->never();
+
+        $request = Request::create('/livewire/update', 'POST', [
+            'components' => [
+                [
+                    'snapshot' => json_encode([
+                        'memo' => [
+                            'name' => 'tenant.dashboard-widget',
+                        ],
+                    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                ],
+            ],
+        ], [], [], [
+            'REMOTE_ADDR' => '8.8.8.8',
+            'HTTP_HOST' => 'blocked.example.test',
+        ]);
+        $route = new Route(['POST'], '/livewire/update', static fn (): Response => response('ok'));
+        $route->name('livewire.update');
+        $request->setRouteResolver(static fn (): Route => $route);
+
+        $response = app(OpsAccessControl::class)->handle(
+            $request,
+            static fn (): Response => response('allowed'),
+        );
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame('allowed', $response->getContent());
+    }
+
     public function test_dashboard_route_is_not_treated_as_safe_route(): void
     {
         $this->app->detectEnvironment(static fn (): string => 'production');

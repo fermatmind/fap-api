@@ -914,17 +914,8 @@ final class BigFiveOpsActionService
             'locale' => (string) ($row->locale ?? ''),
             'from_pack_id' => (string) ($row->from_pack_id ?? ''),
             'to_pack_id' => (string) ($row->to_pack_id ?? ''),
-            'from_version_id' => (string) ($row->from_version_id ?? ''),
-            'to_version_id' => (string) ($row->to_version_id ?? ''),
             'created_at' => (string) ($row->created_at ?? ''),
             'updated_at' => (string) ($row->updated_at ?? ''),
-            'evidence' => [
-                'manifest_hash' => (string) ($row->manifest_hash ?? ''),
-                'compiled_hash' => (string) ($row->compiled_hash ?? ''),
-                'content_hash' => (string) ($row->content_hash ?? ''),
-                'norms_version' => (string) ($row->norms_version ?? ''),
-                'git_sha' => (string) ($row->git_sha ?? ''),
-            ],
         ];
     }
 
@@ -942,8 +933,24 @@ final class BigFiveOpsActionService
             'target_id' => (string) ($row->target_id ?? ''),
             'request_id' => (string) ($row->request_id ?? ''),
             'created_at' => (string) ($row->created_at ?? ''),
-            'meta' => $this->decodeJson((string) ($row->meta_json ?? '')),
+            'meta' => $this->publicAuditMeta($this->decodeJson((string) ($row->meta_json ?? ''))),
         ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $meta
+     * @return array<string,mixed>
+     */
+    private function publicAuditMeta(array $meta): array
+    {
+        $allowed = [];
+        foreach (['scale_code', 'locale', 'region', 'action', 'status', 'result', 'exit_code'] as $key) {
+            if (array_key_exists($key, $meta) && is_scalar($meta[$key])) {
+                $allowed[$key] = $meta[$key];
+            }
+        }
+
+        return $allowed;
     }
 
     /**
