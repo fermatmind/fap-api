@@ -99,6 +99,32 @@ final class EnneagramReportComposerV2Test extends TestCase
         );
     }
 
+    public function test_unavailable_v2_report_uses_public_error_code_without_registry_exception_details(): void
+    {
+        $composer = app(EnneagramReportComposer::class);
+        $method = (new \ReflectionClass($composer))->getMethod('buildUnavailableReportV2');
+        $method->setAccessible(true);
+
+        $payload = $method->invoke($composer, [
+            'form' => [
+                'form_code' => 'enneagram_likert_105',
+                'form_kind' => 'likert',
+                'methodology_variant' => 'e105_standard',
+            ],
+            'algorithmic_meta' => [
+                'projection_version' => 'projection.test',
+            ],
+        ], 'en');
+
+        $provenance = data_get($payload, 'provenance');
+
+        $this->assertSame('registry_unavailable', data_get($provenance, 'build_status'));
+        $this->assertSame('ENNEAGRAM_REGISTRY_UNAVAILABLE', data_get($provenance, 'build_error_code'));
+        $this->assertSame('registry unavailable.', data_get($provenance, 'build_error'));
+        $this->assertStringNotContainsString('/Users/', json_encode($payload, JSON_THROW_ON_ERROR));
+        $this->assertStringNotContainsString('RuntimeException', json_encode($payload, JSON_THROW_ON_ERROR));
+    }
+
     public function test_close_call_scope_includes_close_call_card_with_pair_refs(): void
     {
         $payload = $this->composeReportV2(

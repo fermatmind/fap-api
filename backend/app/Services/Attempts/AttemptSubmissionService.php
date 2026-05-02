@@ -375,6 +375,12 @@ final class AttemptSubmissionService
 
         $state = strtolower(trim((string) ($row->state ?? 'pending')));
         $resultPayload = $this->decodeJsonArray($row->response_payload_json ?? null);
+        $errorCode = $this->nullableString($row->error_code ?? null);
+        $errorMessage = $this->nullableString($row->error_message ?? null);
+        if ($state === 'failed') {
+            $errorMessage = $this->publicSubmissionErrorMessage($errorCode, $errorMessage);
+            $resultPayload = $this->sanitizeSubmissionResultPayload($resultPayload, $errorCode);
+        }
 
         return [
             'ok' => true,
@@ -383,8 +389,8 @@ final class AttemptSubmissionService
                 'id' => (string) ($row->id ?? ''),
                 'mode' => strtolower(trim((string) ($row->mode ?? ''))),
                 'state' => $state,
-                'error_code' => $this->nullableString($row->error_code ?? null),
-                'error_message' => $this->nullableString($row->error_message ?? null),
+                'error_code' => $errorCode,
+                'error_message' => $errorMessage,
                 'started_at' => $row->started_at !== null ? (string) $row->started_at : null,
                 'finished_at' => $row->finished_at !== null ? (string) $row->finished_at : null,
                 'updated_at' => $row->updated_at !== null ? (string) $row->updated_at : null,
@@ -418,11 +424,6 @@ final class AttemptSubmissionService
             $message = 'submission job terminal failure.';
         }
 
-        $exceptionMessage = trim($exception->getMessage());
-        if ($exceptionMessage !== '') {
-            $message .= ' '.$exceptionMessage;
-        }
-
         $payload = [
             'ok' => false,
             'error_code' => $errorCode,
@@ -433,7 +434,7 @@ final class AttemptSubmissionService
                 'max_tries' => max(0, $maxTries),
                 'connection' => $this->nullableString($connection),
                 'queue' => $this->nullableString($queue),
-                'exception' => $this->truncate($exception::class.': '.$exceptionMessage, 255),
+                'exception' => '[REDACTED]',
             ],
         ];
 
@@ -765,6 +766,43 @@ final class AttemptSubmissionService
         $decoded = json_decode($raw, true);
 
         return is_array($decoded) ? $decoded : [];
+    }
+
+    /**
+     * @param  array<string,mixed>  $payload
+     * @return array<string,mixed>
+     */
+    private function sanitizeSubmissionResultPayload(array $payload, ?string $errorCode): array
+    {
+        if (($payload['ok'] ?? null) !== false) {
+            return $payload;
+        }
+
+        $payload['message'] = $this->publicSubmissionErrorMessage(
+            is_string($payload['error_code'] ?? null) ? (string) $payload['error_code'] : $errorCode,
+            is_string($payload['message'] ?? null) ? (string) $payload['message'] : null
+        );
+
+        if (is_array($payload['job'] ?? null)) {
+            unset($payload['job']['exception'], $payload['job']['exception_class'], $payload['job']['exception_message']);
+        }
+
+        unset($payload['exception'], $payload['exception_class'], $payload['exception_message']);
+
+        return $payload;
+    }
+
+    private function publicSubmissionErrorMessage(?string $errorCode, ?string $message): string
+    {
+        $code = strtoupper(trim((string) $errorCode));
+
+        return match ($code) {
+            'SUBMISSION_JOB_TIMEOUT' => 'submission job timed out.',
+            'SUBMISSION_QUEUE_DISPATCH_FAILED' => 'submission dispatch failed.',
+            'SUBMISSION_JOB_RETRY_EXHAUSTED',
+            'SUBMISSION_JOB_TERMINAL_FAILURE' => 'submission job terminal failure.',
+            default => 'submission failed.',
+        };
     }
 
     private function truncate(string $value, int $max): string

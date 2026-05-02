@@ -99,7 +99,9 @@ final class PaymentWebhookProcessorAtomicityTest extends TestCase
         $first->assertJson([
             'ok' => false,
             'error_code' => 'WALLET_TOPUP_EXCEPTION',
+            'message' => 'post commit side effects failed.',
         ]);
+        $this->assertStringNotContainsString('simulated_atomicity_failure', $first->getContent());
 
         $this->assertSame(1, DB::table('payment_events')
             ->where('provider', 'billing')
@@ -111,6 +113,13 @@ final class PaymentWebhookProcessorAtomicityTest extends TestCase
                 ->where('provider', 'billing')
                 ->where('provider_event_id', 'evt_atomic_1')
                 ->value('status') ?? '')
+        );
+        $this->assertSame(
+            'wallet topup failed.',
+            (string) (DB::table('payment_events')
+                ->where('provider', 'billing')
+                ->where('provider_event_id', 'evt_atomic_1')
+                ->value('last_error_message') ?? '')
         );
         $this->assertSame('fulfilled', (string) (DB::table('orders')
             ->where('order_no', $orderNo)
@@ -298,7 +307,9 @@ final class PaymentWebhookProcessorAtomicityTest extends TestCase
         $first->assertJson([
             'ok' => false,
             'error_code' => 'SEED_SNAPSHOT_FAILED',
+            'message' => 'post commit side effects failed.',
         ]);
+        $this->assertStringNotContainsString('simulated_seed_snapshot_failure', $first->getContent());
 
         $this->assertSame(
             'post_commit_failed',
@@ -306,6 +317,13 @@ final class PaymentWebhookProcessorAtomicityTest extends TestCase
                 ->where('provider', 'billing')
                 ->where('provider_event_id', 'evt_atomic_report_1')
                 ->value('status') ?? '')
+        );
+        $this->assertSame(
+            'report snapshot preparation failed.',
+            (string) (DB::table('payment_events')
+                ->where('provider', 'billing')
+                ->where('provider_event_id', 'evt_atomic_report_1')
+                ->value('last_error_message') ?? '')
         );
         $this->assertSame('fulfilled', (string) (DB::table('orders')
             ->where('order_no', $orderNo)

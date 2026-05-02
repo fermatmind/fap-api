@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Assessment\Drivers;
 
 use App\Services\Assessment\ScoreResult;
+use App\Support\Logging\SensitiveDiagnosticRedactor;
 use Illuminate\Support\Facades\Log;
 
 class GenericLikertDriver implements DriverInterface
@@ -323,8 +324,9 @@ class GenericLikertDriver implements DriverInterface
     private function logInvalidAnswer(string $qId, string $answer): void
     {
         Log::warning('LIKERT_ANSWER_UNKNOWN', [
-            'question' => $qId,
-            'answer' => $answer,
+            'question_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($qId),
+            'answer_fingerprint' => SensitiveDiagnosticRedactor::fingerprint($answer),
+            'answer_length' => strlen($answer),
         ]);
     }
 

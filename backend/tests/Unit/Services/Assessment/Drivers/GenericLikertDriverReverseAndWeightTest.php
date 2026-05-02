@@ -102,8 +102,11 @@ final class GenericLikertDriverReverseAndWeightTest extends TestCase
             ->withArgs(function ($message, $context): bool {
                 $this->assertSame('LIKERT_ANSWER_UNKNOWN', $message);
                 $this->assertIsArray($context);
-                $this->assertSame('Q3', $context['question'] ?? null);
-                $this->assertSame('Z', $context['answer'] ?? null);
+                $this->assertIsString($context['question_fingerprint'] ?? null);
+                $this->assertIsString($context['answer_fingerprint'] ?? null);
+                $this->assertSame(1, $context['answer_length'] ?? null);
+                $this->assertArrayNotHasKey('question', $context);
+                $this->assertArrayNotHasKey('answer', $context);
 
                 return true;
             });

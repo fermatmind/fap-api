@@ -26,6 +26,7 @@ use App\Services\Payments\PaymentProviderRegistry;
 use App\Services\Referral\ReferralRewardService;
 use App\Services\Report\ReportAccess;
 use App\Services\Report\ReportSnapshotStore;
+use App\Support\Logging\SensitiveDiagnosticRedactor;
 use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -406,7 +407,7 @@ class PaymentWebhookHandlerCore
                     'provider' => $provider,
                     'provider_event_id' => $providerEventId,
                     'order_no' => $orderNo,
-                    'error_message' => $e->getMessage(),
+                    'error_message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
                 ]);
             }
         }
@@ -455,7 +456,7 @@ class PaymentWebhookHandlerCore
                                 'provider' => $provider,
                                 'provider_event_id' => $providerEventId,
                                 'order_no' => $orderNo,
-                                'error_message' => $e->getMessage(),
+                                'error_message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
                             ]);
                         }
                     }
@@ -466,11 +467,11 @@ class PaymentWebhookHandlerCore
                         'order_no' => $orderNo,
                         'org_id' => $orgId,
                         'benefit_code' => $benefitCode,
-                        'error_message' => $e->getMessage(),
+                        'error_message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
                     ]);
                     $outcome['ok'] = false;
                     $outcome['error_code'] = 'WALLET_TOPUP_EXCEPTION';
-                    $outcome['error_message'] = $e->getMessage();
+                    $outcome['error_message'] = 'wallet topup failed.';
                 }
             }
         } elseif ($kind === 'report_unlock') {
@@ -482,7 +483,7 @@ class PaymentWebhookHandlerCore
                     'provider' => $provider,
                     'provider_event_id' => $providerEventId,
                     'order_no' => $orderNo,
-                    'error_message' => $e->getMessage(),
+                    'error_message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
                 ]);
             }
 
@@ -531,7 +532,7 @@ class PaymentWebhookHandlerCore
                             'order_no' => $orderNo,
                             'org_id' => $orgId,
                             'attempt_id' => $attemptId,
-                            'error_message' => $e->getMessage(),
+                            'error_message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
                         ]);
                     }
 
@@ -551,11 +552,11 @@ class PaymentWebhookHandlerCore
                         'order_no' => $orderNo,
                         'org_id' => $orgId,
                         'attempt_id' => $attemptId,
-                        'error_message' => $e->getMessage(),
+                        'error_message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
                     ]);
                     $outcome['ok'] = false;
                     $outcome['error_code'] = 'SEED_SNAPSHOT_FAILED';
-                    $outcome['error_message'] = $e->getMessage();
+                    $outcome['error_message'] = 'report snapshot preparation failed.';
                 }
             }
         } else {
@@ -573,7 +574,7 @@ class PaymentWebhookHandlerCore
                     'provider' => $provider,
                     'provider_event_id' => $providerEventId,
                     'order_no' => $orderNo,
-                    'error_message' => $e->getMessage(),
+                    'error_message' => SensitiveDiagnosticRedactor::redactString($e->getMessage()),
                 ]);
             }
         }
