@@ -11,9 +11,36 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 final class MbtiAttributionEventController extends Controller
 {
+    /**
+     * @var list<string>
+     */
+    private const TOP_LEVEL_KEYS = [
+        'eventName',
+        'payload',
+        'anonymousId',
+        'path',
+        'timestamp',
+    ];
+
+    /**
+     * @var list<string>
+     */
+    private const PAYLOAD_KEYS = [
+        'entry_surface',
+        'source_page_type',
+        'target_action',
+        'test_slug',
+        'form_code',
+        'landing_path',
+        'locale',
+        'attempt_id',
+        'target_attempt_id',
+    ];
+
     /**
      * @var list<string>
      */
@@ -37,12 +64,22 @@ final class MbtiAttributionEventController extends Controller
     public function store(Request $request): JsonResponse
     {
         $this->authorizeIngest($request);
+        $this->rejectUnexpectedKeys($request->all(), self::TOP_LEVEL_KEYS, 'request');
 
         $data = $request->validate([
             'eventName' => ['required', 'string', 'max:64'],
-            'payload' => ['nullable', 'array'],
-            'anonymousId' => ['nullable', 'string', 'max:128'],
-            'path' => ['nullable', 'string', 'max:2048'],
+            'payload' => ['nullable', 'array:'.implode(',', self::PAYLOAD_KEYS)],
+            'payload.entry_surface' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.source_page_type' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.target_action' => ['nullable', 'string', 'max:128', 'regex:/\A[a-z0-9]+(?:_[a-z0-9]+)*\z/'],
+            'payload.test_slug' => ['nullable', 'string', 'max:128', 'regex:/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/'],
+            'payload.form_code' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.landing_path' => ['nullable', 'string', 'max:512', 'regex:/\A\/[^\r\n]*\z/'],
+            'payload.locale' => ['nullable', 'string', 'max:16', 'in:en,zh,zh-cn,zh-CN'],
+            'payload.attempt_id' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'payload.target_attempt_id' => ['nullable', 'string', 'max:64', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'anonymousId' => ['nullable', 'string', 'max:128', 'regex:/\A[A-Za-z0-9._:-]+\z/'],
+            'path' => ['nullable', 'string', 'max:512', 'regex:/\A\/[^\r\n]*\z/'],
             'timestamp' => ['nullable', 'date'],
         ]);
 
@@ -73,7 +110,7 @@ final class MbtiAttributionEventController extends Controller
             'target_action' => $this->normalizeOptionalString($payload['target_action'] ?? null, 128),
             'test_slug' => $this->normalizeOptionalString($payload['test_slug'] ?? null, 128),
             'form_code' => $this->normalizeOptionalString($payload['form_code'] ?? null, 64),
-            'landing_path' => $this->normalizeOptionalString($payload['landing_path'] ?? null, 2048) ?? $path,
+            'landing_path' => $this->normalizeOptionalString($payload['landing_path'] ?? null, 512) ?? $path,
             'path' => $path,
             'anonymous_id' => $anonymousId,
             'target_attempt_id' => $this->normalizeOptionalString($payload['target_attempt_id'] ?? null, 64),
@@ -119,7 +156,11 @@ final class MbtiAttributionEventController extends Controller
     {
         $configuredToken = trim((string) config('fap.events.ingest_token', ''));
         if ($configuredToken === '') {
-            return;
+            abort(response()->json([
+                'ok' => false,
+                'error_code' => 'INGEST_DISABLED',
+                'message' => 'MBTI attribution ingest is not configured.',
+            ], 503));
         }
 
         $provided = trim((string) ($request->bearerToken() ?? ''));
@@ -130,7 +171,7 @@ final class MbtiAttributionEventController extends Controller
         if ($provided === '' || ! hash_equals($configuredToken, $provided)) {
             abort(response()->json([
                 'ok' => false,
-                'error_code' => 'unauthorized',
+                'error_code' => 'UNAUTHORIZED',
                 'message' => 'Invalid ingest token.',
             ], 401));
         }
@@ -138,14 +179,15 @@ final class MbtiAttributionEventController extends Controller
 
     private function resolveOrgId(Request $request): int
     {
+        if (trim((string) ($request->header('X-Org-Id') ?? '')) !== '') {
+            throw ValidationException::withMessages([
+                'X-Org-Id' => 'Public MBTI attribution ingest does not accept caller-supplied tenant identifiers.',
+            ]);
+        }
+
         $attr = $request->attributes->get('org_id');
         if (is_numeric($attr)) {
             return max(0, (int) $attr);
-        }
-
-        $header = trim((string) ($request->header('X-Org-Id') ?? ''));
-        if ($header !== '' && preg_match('/^\d+$/', $header) === 1) {
-            return (int) $header;
         }
 
         return 0;
@@ -167,5 +209,21 @@ final class MbtiAttributionEventController extends Controller
         }
 
         return $normalized;
+    }
+
+    /**
+     * @param  array<string, mixed>  $input
+     * @param  list<string>  $allowedKeys
+     */
+    private function rejectUnexpectedKeys(array $input, array $allowedKeys, string $scope): void
+    {
+        $unexpected = array_values(array_diff(array_keys($input), $allowedKeys));
+        if ($unexpected === []) {
+            return;
+        }
+
+        throw ValidationException::withMessages([
+            $unexpected[0] => "Unexpected MBTI attribution $scope field.",
+        ]);
     }
 }
