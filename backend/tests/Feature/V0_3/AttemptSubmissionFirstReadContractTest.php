@@ -214,7 +214,7 @@ final class AttemptSubmissionFirstReadContractTest extends TestCase
         $response->assertJsonPath('submission.id', $submissionId);
     }
 
-    public function test_submission_reads_succeeded_public_submission_without_actor_when_result_exists(): void
+    public function test_submission_requires_actor_proof_when_result_exists(): void
     {
         $attemptId = (string) Str::uuid();
         $anonId = 'anon_submission_public_artifact_fallback';
@@ -228,21 +228,9 @@ final class AttemptSubmissionFirstReadContractTest extends TestCase
 
         $response = $this->getJson("/api/v0.3/attempts/{$attemptId}/submission");
 
-        $response->assertStatus(200);
-        $response->assertJson([
-            'ok' => true,
-            'attempt_id' => $attemptId,
-            'generating' => false,
-            'submission' => [
-                'id' => $submissionId,
-                'state' => 'succeeded',
-            ],
-            'result' => [
-                'ok' => true,
-                'attempt_id' => $attemptId,
-                'type_code' => 'INTJ-A',
-            ],
-        ]);
+        $response->assertStatus(404);
+        $response->assertJsonPath('error_code', 'RESOURCE_NOT_FOUND');
+        $this->assertStringNotContainsString($submissionId, (string) $response->getContent());
     }
 
     public function test_report_returns_terminal_failure_contract_when_submission_failed_and_result_is_missing(): void
@@ -371,7 +359,7 @@ final class AttemptSubmissionFirstReadContractTest extends TestCase
         $response->assertJsonPath('actions.wait_href', "/result/{$attemptId}");
     }
 
-    public function test_report_access_reads_public_projection_without_actor_when_projection_exists(): void
+    public function test_report_access_requires_actor_proof_when_projection_exists(): void
     {
         $attemptId = (string) Str::uuid();
         $anonId = 'anon_access_public_artifact_fallback';
@@ -381,19 +369,11 @@ final class AttemptSubmissionFirstReadContractTest extends TestCase
 
         $response = $this->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
 
-        $response->assertStatus(200);
-        $response->assertJson([
-            'ok' => true,
-            'attempt_id' => $attemptId,
-            'access_state' => 'ready',
-            'report_state' => 'ready',
-            'pdf_state' => 'ready',
-            'reason_code' => 'report_ready',
-        ]);
-        $response->assertJsonPath('actions.page_href', "/result/{$attemptId}");
+        $response->assertStatus(404);
+        $response->assertJsonPath('error_code', 'ATTEMPT_NOT_FOUND');
     }
 
-    public function test_report_access_reads_public_projection_without_actor_when_only_projection_exists(): void
+    public function test_report_access_requires_actor_proof_when_only_projection_exists(): void
     {
         $attemptId = (string) Str::uuid();
         $anonId = 'anon_access_public_projection_only';
@@ -402,16 +382,8 @@ final class AttemptSubmissionFirstReadContractTest extends TestCase
 
         $response = $this->getJson("/api/v0.3/attempts/{$attemptId}/report-access");
 
-        $response->assertStatus(200);
-        $response->assertJson([
-            'ok' => true,
-            'attempt_id' => $attemptId,
-            'access_state' => 'locked',
-            'report_state' => 'ready',
-            'pdf_state' => 'ready',
-            'reason_code' => 'report_ready',
-        ]);
-        $response->assertJsonPath('actions.page_href', "/result/{$attemptId}");
+        $response->assertStatus(404);
+        $response->assertJsonPath('error_code', 'RESOURCE_NOT_FOUND');
     }
 
     public function test_report_access_returns_submission_failed_fallback_when_projection_and_result_are_missing(): void

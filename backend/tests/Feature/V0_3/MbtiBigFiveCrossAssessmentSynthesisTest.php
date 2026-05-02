@@ -136,6 +136,23 @@ class MbtiBigFiveCrossAssessmentSynthesisTest extends TestCase
         );
     }
 
+    public function test_mbti_report_does_not_expose_big_five_cross_assessment_without_actor_proof(): void
+    {
+        $this->seedScales();
+        Config::set('fap_experiments.experiments', []);
+
+        $anonId = 'mbti_big5_synthesis_public_probe';
+        $attemptId = $this->createMbtiAttemptWithResult($anonId);
+        $this->createBigFiveAttemptWithResult($anonId);
+
+        $response = $this->getJson("/api/v0.3/attempts/{$attemptId}/report");
+
+        $response->assertStatus(404);
+        $response->assertJsonPath('error_code', 'ATTEMPT_NOT_FOUND');
+        $this->assertStringNotContainsString('mbti_cross_assessment_v1', (string) $response->getContent());
+        $this->assertStringNotContainsString('BIG5_OCEAN', (string) $response->getContent());
+    }
+
     private function seedScales(): void
     {
         (new ScaleRegistrySeeder)->run();

@@ -201,6 +201,53 @@ final class ReportSnapshotStrictModeTest extends TestCase
         $this->assertSame(1, DB::table('report_snapshots')->where('attempt_id', $attemptId)->count());
     }
 
+    public function test_locked_report_does_not_read_full_snapshot_in_strict_mode(): void
+    {
+        config()->set('fap.features.report_snapshot_strict_v2', true);
+        $this->seedScales();
+
+        $anonId = 'anon_report_strict_locked';
+        $attemptId = $this->createAttemptWithResult($anonId);
+        $token = $this->issueAnonToken($anonId);
+
+        DB::table('report_snapshots')->insert([
+            'org_id' => 0,
+            'attempt_id' => $attemptId,
+            'order_no' => null,
+            'scale_code' => 'MBTI',
+            'pack_id' => (string) config('content_packs.default_pack_id', 'MBTI.cn-mainland.zh-CN.v0.3'),
+            'dir_version' => (string) config('content_packs.default_dir_version', 'MBTI-CN-v0.3'),
+            'scoring_spec_version' => '2026.01',
+            'report_engine_version' => 'v1.2',
+            'snapshot_version' => 'v1',
+            'report_json' => json_encode(['leaked_full_snapshot_marker' => true], JSON_UNESCAPED_SLASHES),
+            'report_free_json' => json_encode(['free_snapshot_marker' => true], JSON_UNESCAPED_SLASHES),
+            'report_full_json' => json_encode(['leaked_full_snapshot_marker' => true], JSON_UNESCAPED_SLASHES),
+            'status' => 'ready',
+            'last_error' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson('/api/v0.3/attempts/'.$attemptId.'/report');
+
+        $response->assertStatus(200);
+        $response->assertJson([
+            'ok' => true,
+            'generating' => false,
+            'snapshot_error' => false,
+            'variant' => 'free',
+            'access_level' => 'free',
+            'unlock_stage' => 'locked',
+        ]);
+
+        $report = (array) $response->json('report');
+        $this->assertTrue((bool) ($report['free_snapshot_marker'] ?? false));
+        $this->assertStringNotContainsString('leaked_full_snapshot_marker', json_encode($report, JSON_UNESCAPED_SLASHES) ?: '');
+    }
+
     public function test_unknown_snapshot_status_returns_snapshot_error_and_observability_signal(): void
     {
         config()->set('fap.features.report_snapshot_strict_v2', true);
