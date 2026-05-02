@@ -1063,7 +1063,7 @@
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-web",
       "status": "pending",
       "branch": "codex/pr-d1-career-batch-production-sop",
-      "commit_sha": "",
+      "commit_sha": "1780b5d4",
       "pr_url": "",
       "checks": {
         "local": [],
@@ -4411,6 +4411,45 @@
           },
           {
             "command": "git diff --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
+    "PR-A2b": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "pr_open",
+      "branch": "codex/pr-a2b-actors-display-asset",
+      "commit_sha": "51786942",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1105",
+      "checks": {
+        "local": [
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/CareerImportActorsDisplayAsset.php app/Console/Kernel.php tests/Feature/Console/CareerImportActorsDisplayAssetCommandTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/CareerImportActorsDisplayAssetCommandTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:import-actors-display-asset --file=/Users/rainie/Desktop/actors_v4_2_pilot_master.json --dry-run --json",
+            "status": "passed_with_isolated_local_db",
+            "details": "Passed against an isolated local MySQL instance with minimal occupation authority tables and Actors SOC/O*NET crosswalks."
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --cached --check",
             "status": "passed"
           }
         ],
