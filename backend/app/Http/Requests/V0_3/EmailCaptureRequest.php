@@ -34,10 +34,6 @@ final class EmailCaptureRequest extends FormRequest
         if ($this->has('marketing_consent')) {
             $payload['marketing_consent'] = $this->boolean('marketing_consent');
         }
-        if ($this->has('transactional_recovery_enabled')) {
-            $payload['transactional_recovery_enabled'] = $this->boolean('transactional_recovery_enabled');
-        }
-
         $this->merge($payload);
     }
 
@@ -62,7 +58,6 @@ final class EmailCaptureRequest extends FormRequest
             'utm.term' => ['nullable', 'string', 'max:512'],
             'utm.content' => ['nullable', 'string', 'max:512'],
             'marketing_consent' => ['nullable', 'boolean'],
-            'transactional_recovery_enabled' => ['nullable', 'boolean'],
         ];
     }
 
