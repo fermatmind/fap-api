@@ -20,6 +20,7 @@ use App\Console\Commands\CareerExportFullReleaseLedger;
 use App\Console\Commands\CareerExportLaunchGovernanceClosure;
 use App\Console\Commands\CareerExportOccupationDirectoryReviewQueues;
 use App\Console\Commands\CareerExportStrongIndexEligibility;
+use App\Console\Commands\CareerImportActorsDisplayAsset;
 use App\Console\Commands\CareerImportAuthorityWave;
 use App\Console\Commands\CareerImportOccupationDirectoryDrafts;
 use App\Console\Commands\CareerImportOccupationDirectoryDryRun;
@@ -155,6 +156,7 @@ class Kernel extends ConsoleKernel
         CommerceRepairPaidOrders::class,
         CommerceRepairPostCommitFailed::class,
         CareerApplyOccupationDirectoryReviewDecisions::class,
+        CareerImportActorsDisplayAsset::class,
         CareerImportAuthorityWave::class,
         CareerImportOccupationDirectoryDrafts::class,
         CareerImportOccupationDirectoryDryRun::class,

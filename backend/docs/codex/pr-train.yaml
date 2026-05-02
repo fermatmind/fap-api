@@ -2420,3 +2420,33 @@ prs:
     cleanup:
       delete_remote_branch: true
       run_local_cleanup: true
+
+  - id: PR-A2b
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-a2b-actors-display-asset
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      Backend-only guarded Actors v4.2 display asset persistence. Add an
+      artisan command that reads actors_v4_2_pilot_master.json, validates the
+      single Actors pilot display asset, and writes only the Actors
+      career_job_display_assets row when --force is explicit. Do not add
+      migrations, routes, public API resource shape changes, frontend changes,
+      sitemap/llms changes, seeders, or placeholder career imports.
+    checks:
+      - "vendor/bin/pint --test app/Console/Commands/CareerImportActorsDisplayAsset.php app/Console/Kernel.php tests/Feature/Console/CareerImportActorsDisplayAssetCommandTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php"
+      - "php artisan test tests/Feature/Console/CareerImportActorsDisplayAssetCommandTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php"
+      - "php artisan career:import-actors-display-asset --file=/Users/rainie/Desktop/actors_v4_2_pilot_master.json --dry-run --json"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
