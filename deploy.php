@@ -686,6 +686,9 @@ task('ensure:healthz-deps', function () {
     $owner = currentHost()->getRemoteUser() ?: 'ubuntu';
 
     ensureOwnedWritableDir("{$base}/app/content-packs", $owner, 'www-data');
+    ensureOwnedWritableDir("{$base}/app", $owner, 'www-data');
+    ensureOwnedWritableDir("{$base}/app/private", $owner, 'www-data');
+    ensureOwnedWritableDir("{$base}/app/private/artifacts", $owner, 'www-data');
     ensureOwnedWritableDir("{$base}/app/private/packs_v2_materialized", $owner, 'www-data');
     ensureOwnedWritableDir("{$base}/framework/cache", $owner, 'www-data');
     ensureOwnedWritableDir("{$base}/framework/sessions", $owner, 'www-data');
