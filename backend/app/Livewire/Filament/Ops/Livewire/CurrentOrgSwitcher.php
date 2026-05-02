@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Livewire\Filament\Ops\Livewire;
 
+use App\Services\Ops\OrgVisibilityResolver;
 use App\Support\OrgContext;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 final class CurrentOrgSwitcher extends Component
@@ -26,10 +26,21 @@ final class CurrentOrgSwitcher extends Component
             return;
         }
 
-        $row = DB::table('organizations')
-            ->select(['id', 'name'])
+        $guard = (string) config('admin.guard', 'admin');
+        $admin = auth($guard)->user();
+        $visibility = app(OrgVisibilityResolver::class);
+
+        if (! $visibility->isVisibleOrganization($admin, $this->orgId)) {
+            $this->clearOrgSelection();
+            $this->orgId = null;
+            $this->orgName = __('ops.topbar.no_org_selected');
+
+            return;
+        }
+
+        $row = $visibility->visibleOrganizationsQuery($admin)
             ->where('id', $this->orgId)
-            ->first();
+            ->first(['name']);
 
         if ($row !== null) {
             $this->orgName = (string) $row->name;

@@ -22,8 +22,12 @@ class OpsAccessControl
     public function handle(Request $request, Closure $next): Response
     {
         $routeName = (string) optional($request->route())->getName();
-        if ($routeName === '' || ! str_starts_with($routeName, 'filament.ops.')) {
+        $isOpsLivewireRequest = $this->isOpsLivewireRequest($request);
+        if (($routeName === '' || ! str_starts_with($routeName, 'filament.ops.')) && ! $isOpsLivewireRequest) {
             return $next($request);
+        }
+        if ($isOpsLivewireRequest) {
+            $routeName = 'filament.ops.livewire.update';
         }
 
         $config = $this->accessControlConfig();
@@ -397,5 +401,45 @@ class OpsAccessControl
         $user = Auth::guard($guard)->user();
 
         return $user instanceof Authenticatable ? $user : null;
+    }
+
+    private function isOpsLivewireRequest(Request $request): bool
+    {
+        $routeName = (string) optional($request->route())->getName();
+        if ($routeName !== 'livewire.update' && ! $request->is('livewire/*')) {
+            return false;
+        }
+
+        $components = (array) $request->input('components', []);
+        foreach ($components as $component) {
+            if (! is_array($component)) {
+                continue;
+            }
+
+            if ($this->isOpsLivewireComponentName($component['name'] ?? null)) {
+                return true;
+            }
+
+            $snapshot = $component['snapshot'] ?? null;
+            if (is_string($snapshot)) {
+                $decoded = json_decode($snapshot, true);
+                if (is_array($decoded) && $this->isOpsLivewireComponentName(data_get($decoded, 'memo.name'))) {
+                    return true;
+                }
+            }
+        }
+
+        return $this->isOpsLivewireComponentName($request->input('fingerprint.name'));
+    }
+
+    private function isOpsLivewireComponentName(mixed $name): bool
+    {
+        $normalized = str_replace('/', '\\', mb_strtolower(trim((string) $name)));
+        if ($normalized === '') {
+            return false;
+        }
+
+        return str_contains($normalized, 'filament.ops.')
+            || str_contains($normalized, 'filament\\ops\\');
     }
 }
