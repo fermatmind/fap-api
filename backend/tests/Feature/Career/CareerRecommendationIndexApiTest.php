@@ -73,12 +73,45 @@ final class CareerRecommendationIndexApiTest extends TestCase
             ->assertJsonCount(0, 'items');
     }
 
+    public function test_it_reads_only_the_latest_completed_compile_run_for_public_recommendation_index(): void
+    {
+        $this->compileRecommendationChain(
+            CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'older-rec-index']),
+            [
+                'type_code' => 'ISTJ-A',
+                'canonical_type_code' => 'ISTJ',
+                'display_title' => 'ISTJ-A Career Match',
+                'public_route_slug' => 'istj',
+            ],
+            40
+        );
+        $this->compileRecommendationChain(
+            CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'latest-rec-index']),
+            [
+                'type_code' => 'ENTJ-A',
+                'canonical_type_code' => 'ENTJ',
+                'display_title' => 'ENTJ-A Career Match',
+                'public_route_slug' => 'entj',
+            ],
+            5
+        );
+
+        $this->getJson('/api/v0.5/career/recommendations/mbti')
+            ->assertOk()
+            ->assertJsonCount(1, 'items')
+            ->assertJsonPath('items.0.recommendation_subject_meta.public_route_slug', 'entj')
+            ->assertJsonMissing(['public_route_slug' => 'istj']);
+    }
+
     /**
      * @param  array<string, mixed>  $chain
      * @param  array<string, mixed>  $subjectMeta
      */
-    private function compileRecommendationChain(array $chain, array $subjectMeta): void
-    {
+    private function compileRecommendationChain(
+        array $chain,
+        array $subjectMeta,
+        int $compileFinishedMinutesAgo = 7
+    ): void {
         $importRun = CareerImportRun::query()->create([
             'dataset_name' => 'fixture',
             'dataset_version' => 'v1',
@@ -86,8 +119,8 @@ final class CareerRecommendationIndexApiTest extends TestCase
             'scope_mode' => 'first_wave_exact',
             'dry_run' => false,
             'status' => 'completed',
-            'started_at' => now()->subMinutes(10),
-            'finished_at' => now()->subMinutes(9),
+            'started_at' => now()->subMinutes($compileFinishedMinutesAgo + 3),
+            'finished_at' => now()->subMinutes($compileFinishedMinutesAgo + 2),
         ]);
         $compileRun = CareerCompileRun::query()->create([
             'import_run_id' => $importRun->id,
@@ -95,8 +128,8 @@ final class CareerRecommendationIndexApiTest extends TestCase
             'scope_mode' => 'first_wave_exact',
             'dry_run' => false,
             'status' => 'completed',
-            'started_at' => now()->subMinutes(8),
-            'finished_at' => now()->subMinutes(7),
+            'started_at' => now()->subMinutes($compileFinishedMinutesAgo + 1),
+            'finished_at' => now()->subMinutes($compileFinishedMinutesAgo),
         ]);
 
         $chain['contextSnapshot']->update([
