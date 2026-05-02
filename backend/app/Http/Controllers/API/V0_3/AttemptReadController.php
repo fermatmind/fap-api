@@ -1133,20 +1133,10 @@ class AttemptReadController extends Controller
                 return $attempt;
             }
 
-            $attempt = $this->resolvePublicAttemptFromArtifacts($request, $this->currentOrgContext()->orgId(), $attemptId, $scaleCode);
-            if ($attempt instanceof Attempt) {
-                return $attempt;
-            }
-
             throw new ApiProblemException(404, 'ATTEMPT_NOT_FOUND', 'attempt not found.');
         }
 
         $attempt = $this->ownedAttemptQuery($request, $attemptId)->first();
-        if ($attempt instanceof Attempt) {
-            return $attempt;
-        }
-
-        $attempt = $this->resolvePublicAttemptFromArtifacts($request, $this->currentOrgContext()->orgId(), $attemptId);
         if ($attempt instanceof Attempt) {
             return $attempt;
         }
@@ -1170,11 +1160,6 @@ class AttemptReadController extends Controller
         }
 
         $attempt = $this->ownedAttemptQuery($request, $attemptId)->first();
-        if ($attempt instanceof Attempt) {
-            return $attempt;
-        }
-
-        $attempt = $this->resolvePublicAttemptFromArtifacts($request, $orgId, $attemptId);
         if ($attempt instanceof Attempt) {
             return $attempt;
         }
@@ -2033,7 +2018,8 @@ class AttemptReadController extends Controller
      */
     private function resolveEnneagramObservationSubject(Request $request, string $attemptId): array
     {
-        $orgId = $this->currentOrgContext()->orgId();
+        $attempt = $this->resolveAttemptForReportRead($request, $attemptId, 'ENNEAGRAM');
+        $orgId = (int) ($attempt->org_id ?? $this->currentOrgContext()->orgId());
         $result = Result::query()
             ->where('org_id', $orgId)
             ->where('attempt_id', $attemptId)
@@ -2048,8 +2034,6 @@ class AttemptReadController extends Controller
         if ($scaleCode !== 'ENNEAGRAM') {
             throw new ApiProblemException(422, 'SCALE_NOT_SUPPORTED', 'observation is only available for ENNEAGRAM attempts.');
         }
-
-        $attempt = $this->resolveAttemptForReportRead($request, $attemptId, $scaleCode);
 
         return [$attempt, $result];
     }
@@ -2113,7 +2097,7 @@ class AttemptReadController extends Controller
             return $attempt;
         }
 
-        return $this->resolvePublicAttemptFromArtifacts($request, $this->currentOrgContext()->orgId(), $attemptId);
+        return null;
     }
 
     /**

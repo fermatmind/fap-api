@@ -207,7 +207,7 @@ final class AttemptPublicReportReadHotfixTest extends TestCase
         $this->assertStringNotContainsString('No query results for model', (string) $response->getContent());
     }
 
-    public function test_public_mbti_report_reads_public_result_without_actor_when_attempt_and_result_exist(): void
+    public function test_public_mbti_report_requires_actor_proof_when_attempt_and_result_exist(): void
     {
         $this->seedScales();
         config()->set('fap.features.report_snapshot_strict_v2', false);
@@ -218,20 +218,12 @@ final class AttemptPublicReportReadHotfixTest extends TestCase
 
         $response = $this->getJson("/api/v0.3/attempts/{$attemptId}/report");
 
-        $response->assertStatus(200);
-        $response->assertJsonPath('ok', true);
-        $response->assertJsonPath('locked', true);
-        $response->assertJsonPath('access_level', 'free');
-        $response->assertJsonPath('variant', 'free');
-        $response->assertJsonPath('scale_code', 'MBTI');
-        $response->assertJsonPath('meta.scale_code', 'MBTI');
-        $response->assertJsonPath('mbti_form_v1.form_code', 'mbti_144');
-        $response->assertJsonPath('mbti_form_v1.question_count', 144);
-        $response->assertJsonPath('mbti_form_v1.scale_code', 'MBTI');
-        $this->assertStringNotContainsString('ATTEMPT_NOT_FOUND', (string) $response->getContent());
+        $response->assertStatus(404);
+        $response->assertJsonPath('error_code', 'ATTEMPT_NOT_FOUND');
+        $this->assertStringNotContainsString('mbti_form_v1', (string) $response->getContent());
     }
 
-    public function test_public_mbti_report_fallback_does_not_inherit_paid_attempt_grants_without_actor(): void
+    public function test_public_mbti_report_without_actor_does_not_inherit_paid_attempt_grants(): void
     {
         $this->seedScales();
         config()->set('fap.features.report_snapshot_strict_v2', false);
@@ -258,16 +250,10 @@ final class AttemptPublicReportReadHotfixTest extends TestCase
 
         $response = $this->getJson("/api/v0.3/attempts/{$attemptId}/report");
 
-        $response->assertStatus(200);
-        $response->assertJsonPath('ok', true);
-        $response->assertJsonPath('locked', true);
-        $response->assertJsonPath('access_level', 'free');
-        $response->assertJsonPath('variant', 'free');
-        $response->assertJsonPath('unlock_stage', 'locked');
-        $this->assertSame(['core_free'], $response->json('modules_allowed'));
-        $this->assertNotContains('core_full', (array) $response->json('modules_allowed'));
-        $this->assertNotContains('career', (array) $response->json('modules_allowed'));
-        $this->assertNotContains('relationships', (array) $response->json('modules_allowed'));
+        $response->assertStatus(404);
+        $response->assertJsonPath('error_code', 'ATTEMPT_NOT_FOUND');
+        $this->assertStringNotContainsString('core_full', (string) $response->getContent());
+        $this->assertStringNotContainsString('relationships', (string) $response->getContent());
     }
 
     public function test_sds20_report_still_requires_existing_ownership_chain(): void

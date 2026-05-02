@@ -64,4 +64,27 @@ final class EnneagramObservationAuthorizationTest extends TestCase
         $response->assertStatus(422);
         $response->assertJsonPath('error_code', 'SCALE_NOT_SUPPORTED');
     }
+
+    public function test_non_owner_does_not_learn_non_enneagram_scale_from_observation_endpoint(): void
+    {
+        (new ScaleRegistrySeeder)->run();
+
+        $ownerAnonId = 'anon_observation_wrong_scale_owner';
+        $ownerToken = $this->issueAnonToken($ownerAnonId);
+        $attemptId = $this->createSubmittedEnneagramAttempt($ownerAnonId, $ownerToken);
+
+        DB::table('attempts')->where('id', $attemptId)->update(['scale_code' => 'MBTI']);
+        DB::table('results')->where('attempt_id', $attemptId)->update(['scale_code' => 'MBTI']);
+
+        $otherAnonId = 'anon_observation_wrong_scale_probe';
+        $otherToken = $this->issueAnonToken($otherAnonId);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$otherToken,
+            'X-Anon-Id' => $otherAnonId,
+        ])->getJson("/api/v0.3/attempts/{$attemptId}/enneagram/observation");
+
+        $response->assertStatus(404);
+        $this->assertStringNotContainsString('SCALE_NOT_SUPPORTED', (string) $response->getContent());
+    }
 }
