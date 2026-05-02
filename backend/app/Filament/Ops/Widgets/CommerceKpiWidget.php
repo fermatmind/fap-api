@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Widgets;
 
+use App\Filament\Ops\Support\OpsMetricsAccess;
 use App\Support\OrgContext;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -14,6 +15,11 @@ class CommerceKpiWidget extends BaseWidget
     protected static bool $isLazy = false;
 
     private const NO_ORG_PLACEHOLDER = '—';
+
+    public static function canView(): bool
+    {
+        return OpsMetricsAccess::canViewCommerceMetrics();
+    }
 
     protected function getHeading(): ?string
     {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Ops\Pages;
 
 use App\Filament\Ops\Support\ContentAccess;
+use App\Filament\Ops\Support\OpsMetricsAccess;
 use App\Services\Ops\ContentGrowthAttributionService;
 use App\Support\OrgContext;
 use Filament\Pages\Page;
@@ -32,9 +33,12 @@ final class ContentGrowthAttributionPage extends Page
     /** @var list<array<string,mixed>> */
     public array $matrixRows = [];
 
+    public bool $showCommerceMetrics = false;
+
     public function mount(ContentGrowthAttributionService $service): void
     {
-        $dashboard = $service->build($this->currentOrgIds());
+        $this->showCommerceMetrics = OpsMetricsAccess::canViewCommerceMetrics();
+        $dashboard = $service->build($this->currentOrgIds(), $this->showCommerceMetrics);
 
         $this->headlineFields = $dashboard['headline_fields'];
         $this->diagnosticCards = $dashboard['diagnostic_cards'];

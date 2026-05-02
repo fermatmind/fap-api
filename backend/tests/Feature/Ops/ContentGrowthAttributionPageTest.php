@@ -17,6 +17,7 @@ use App\Models\Order;
 use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Services\Ops\ContentGrowthAttributionService;
 use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
@@ -45,6 +46,7 @@ final class ContentGrowthAttributionPageTest extends TestCase
     {
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_MENU_COMMERCE,
         ]);
 
         $this->withSession([
@@ -59,6 +61,7 @@ final class ContentGrowthAttributionPageTest extends TestCase
     {
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_MENU_COMMERCE,
         ]);
         $selectedOrg = $this->createOrganization('Growth Org');
         $otherOrg = $this->createOrganization('Other Growth Org');
@@ -276,6 +279,7 @@ final class ContentGrowthAttributionPageTest extends TestCase
     {
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_CONTENT_READ,
+            PermissionNames::ADMIN_MENU_COMMERCE,
         ]);
         $selectedOrg = $this->createOrganization('Growth Lineage Org');
 
@@ -377,6 +381,169 @@ final class ContentGrowthAttributionPageTest extends TestCase
             ->assertSet('matrixRows.0.share_assisted_orders', 1)
             ->assertSet('matrixRows.0.share_touchpoints', 2)
             ->assertSet('matrixRows.0.seo_label', 'Canonical gap');
+    }
+
+    public function test_content_only_role_does_not_receive_commerce_metrics_on_growth_attribution(): void
+    {
+        $admin = $this->createAdminWithPermissions([
+            PermissionNames::ADMIN_CONTENT_READ,
+        ]);
+        $selectedOrg = $this->createOrganization('Growth Content Only Org');
+
+        $article = Article::query()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'slug' => 'content-only-growth-article',
+            'locale' => 'en',
+            'title' => 'Content Only Growth Article',
+            'excerpt' => 'Content only excerpt',
+            'content_md' => 'Body',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::now()->subDay(),
+        ]);
+        ArticleSeoMeta::query()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'article_id' => (int) $article->id,
+            'locale' => 'en',
+            'seo_title' => 'Content Only Growth Article SEO',
+            'seo_description' => 'Content only article description',
+            'canonical_url' => 'https://frontend.example.test/en/articles/content-only-growth-article',
+            'og_title' => 'Content Only Growth Article OG',
+            'og_description' => 'Content Only Growth Article OG Description',
+            'og_image_url' => 'https://frontend.example.test/images/content-only-growth-article.png',
+            'robots' => 'index,follow',
+            'is_indexable' => true,
+        ]);
+
+        Event::query()->create([
+            'id' => (string) Str::uuid(),
+            'event_code' => 'content_entry',
+            'event_name' => 'content_entry',
+            'org_id' => (int) $selectedOrg->id,
+            'meta_json' => [
+                'landing_path' => '/en/articles/content-only-growth-article',
+                'share_click_id' => 'content_only_click',
+            ],
+            'share_id' => 'content_only_share',
+            'occurred_at' => Carbon::now()->subHours(6),
+        ]);
+
+        Order::query()->create([
+            'id' => (string) Str::uuid(),
+            'order_no' => 'ord_content_only_growth',
+            'provider' => 'stripe',
+            'status' => 'paid',
+            'payment_state' => 'paid',
+            'grant_state' => 'not_started',
+            'amount_total' => 1299,
+            'amount_cents' => 1299,
+            'currency' => 'USD',
+            'item_sku' => 'MBTI_REPORT_FULL',
+            'sku' => 'MBTI_REPORT_FULL',
+            'quantity' => 1,
+            'anon_id' => 'anon_content_only_growth',
+            'org_id' => (int) $selectedOrg->id,
+            'meta_json' => [
+                'attribution' => [
+                    'landing_path' => '/en/articles/content-only-growth-article',
+                    'share_id' => 'content_only_share',
+                    'share_click_id' => 'content_only_click',
+                    'entrypoint' => 'article_detail',
+                ],
+            ],
+            'paid_at' => Carbon::now()->subHours(5),
+        ]);
+
+        $this->withSession($this->opsSession($admin, $selectedOrg))
+            ->actingAs($admin, (string) config('admin.guard', 'admin'))
+            ->get('/ops/content-growth-attribution')
+            ->assertOk()
+            ->assertSee('Content Only Growth Article')
+            ->assertDontSee('Attributed revenue')
+            ->assertDontSee('$12.99')
+            ->assertDontSee('assisted orders');
+
+        $this->actingAs($admin, (string) config('admin.guard', 'admin'));
+        app()->instance('request', Request::create('/ops/content-growth-attribution', 'GET'));
+
+        $context = app(OrgContext::class);
+        $context->set((int) $selectedOrg->id, (int) $admin->id, 'admin');
+        app()->instance(OrgContext::class, $context);
+
+        Livewire::test(ContentGrowthAttributionPage::class)
+            ->assertOk()
+            ->assertSet('showCommerceMetrics', false)
+            ->assertCount('headlineFields', 3)
+            ->assertSet('matrixRows.0.title', 'Content Only Growth Article')
+            ->assertSet('matrixRows.0.paid_orders', 0)
+            ->assertSet('matrixRows.0.revenue_cents', null)
+            ->assertSet('matrixRows.0.revenue_label', 'Restricted');
+    }
+
+    public function test_share_alias_expansion_is_capped_for_growth_attribution(): void
+    {
+        $selectedOrg = $this->createOrganization('Growth Alias Bound Org');
+
+        $article = Article::query()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'slug' => 'alias-bound-article',
+            'locale' => 'en',
+            'title' => 'Alias Bound Article',
+            'excerpt' => 'Alias bound excerpt',
+            'content_md' => 'Body',
+            'status' => 'published',
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::now()->subDay(),
+        ]);
+        ArticleSeoMeta::query()->create([
+            'org_id' => (int) $selectedOrg->id,
+            'article_id' => (int) $article->id,
+            'locale' => 'en',
+            'seo_title' => 'Alias Bound Article SEO',
+            'seo_description' => 'Alias bound article description',
+            'canonical_url' => 'https://frontend.example.test/en/articles/alias-bound-article',
+            'og_title' => 'Alias Bound Article OG',
+            'og_description' => 'Alias Bound Article OG Description',
+            'og_image_url' => 'https://frontend.example.test/images/alias-bound-article.png',
+            'robots' => 'index,follow',
+            'is_indexable' => true,
+        ]);
+
+        foreach (range(1, ContentGrowthAttributionService::MAX_SHARE_ALIASES_PER_SURFACE + 25) as $index) {
+            Order::query()->create([
+                'id' => (string) Str::uuid(),
+                'order_no' => 'ord_alias_bound_'.$index,
+                'provider' => 'stripe',
+                'status' => 'paid',
+                'payment_state' => 'paid',
+                'grant_state' => 'not_started',
+                'amount_total' => 100,
+                'amount_cents' => 100,
+                'currency' => 'USD',
+                'item_sku' => 'MBTI_REPORT_FULL',
+                'sku' => 'MBTI_REPORT_FULL',
+                'quantity' => 1,
+                'anon_id' => 'anon_alias_bound_'.$index,
+                'org_id' => (int) $selectedOrg->id,
+                'meta_json' => [
+                    'attribution' => [
+                        'landing_path' => '/en/articles/alias-bound-article',
+                        'share_id' => 'alias_bound_share_'.$index,
+                        'share_click_id' => 'alias_bound_click_'.$index,
+                    ],
+                ],
+                'paid_at' => Carbon::now()->subMinutes($index),
+            ]);
+        }
+
+        $dashboard = app(ContentGrowthAttributionService::class)->build([(int) $selectedOrg->id], true);
+
+        $this->assertSame(
+            ContentGrowthAttributionService::MAX_SHARE_ALIASES_PER_SURFACE,
+            (int) data_get($dashboard, 'matrix_rows.0.share_touchpoints')
+        );
     }
 
     private function createOrganization(string $name): Organization

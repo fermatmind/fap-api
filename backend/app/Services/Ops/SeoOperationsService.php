@@ -17,6 +17,10 @@ use Illuminate\Support\Str;
 
 final class SeoOperationsService
 {
+    public const MAX_RECORDS_PER_CONTENT_TYPE = 500;
+
+    public const MAX_ISSUE_QUEUE_ITEMS = 100;
+
     public const ACTION_FILL_METADATA = 'fill_metadata';
 
     public const ACTION_SYNC_CANONICAL = 'sync_canonical';
@@ -85,7 +89,7 @@ final class SeoOperationsService
         });
 
         return [
-            'items' => array_values($items),
+            'items' => array_slice(array_values($items), 0, self::MAX_ISSUE_QUEUE_ITEMS),
             'elapsed_ms' => (int) round((microtime(true) - $startedAt) * 1000),
         ];
     }
@@ -380,6 +384,7 @@ final class SeoOperationsService
                 ->whereIn('org_id', $currentOrgIds)
                 ->with('seoMeta')
                 ->latest('updated_at')
+                ->limit(self::MAX_RECORDS_PER_CONTENT_TYPE)
                 ->get();
 
             foreach ($records as $record) {
@@ -393,6 +398,7 @@ final class SeoOperationsService
                 ->where('org_id', 0)
                 ->with('seoMeta')
                 ->latest('updated_at')
+                ->limit(self::MAX_RECORDS_PER_CONTENT_TYPE)
                 ->get();
 
             foreach ($records as $record) {
@@ -406,6 +412,7 @@ final class SeoOperationsService
                 ->where('org_id', 0)
                 ->with('seoMeta')
                 ->latest('updated_at')
+                ->limit(self::MAX_RECORDS_PER_CONTENT_TYPE)
                 ->get();
 
             foreach ($records as $record) {

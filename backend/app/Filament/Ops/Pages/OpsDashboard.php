@@ -37,13 +37,24 @@ class OpsDashboard extends Dashboard
 
     public function getWidgets(): array
     {
-        return [
-            CommerceKpiWidget::class,
-            FunnelWidget::class,
-            WebhookFailureWidget::class,
+        $widgets = [
             QueueFailureWidget::class,
             HealthzStatusWidget::class,
         ];
+
+        if (WebhookFailureWidget::canView()) {
+            array_unshift($widgets, WebhookFailureWidget::class);
+        }
+
+        if (FunnelWidget::canView()) {
+            array_unshift($widgets, FunnelWidget::class);
+        }
+
+        if (CommerceKpiWidget::canView()) {
+            array_unshift($widgets, CommerceKpiWidget::class);
+        }
+
+        return $widgets;
     }
 
     protected function getHeaderActions(): array
