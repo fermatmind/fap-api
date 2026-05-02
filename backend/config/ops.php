@@ -7,7 +7,7 @@ $opsIpAllowlist = array_values(array_filter(array_map(
 
 $opsAccessControl = [
     'enabled' => (bool) env('OPS_ACCESS_CONTROL_ENABLED', true),
-    'fail_open' => (bool) env('OPS_ACCESS_FAIL_OPEN', true),
+    'fail_open' => (bool) env('OPS_ACCESS_FAIL_OPEN', false),
     'emergency_disable' => (bool) env('OPS_EMERGENCY_DISABLE', false),
     'allowed_host' => env('OPS_ALLOWED_HOST', ''),
     'ip_allowlist' => $opsIpAllowlist,

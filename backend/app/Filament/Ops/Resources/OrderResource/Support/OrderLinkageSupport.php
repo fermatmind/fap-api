@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Resources\OrderResource\Support;
 
+use App\Exceptions\OrgContextMissingException;
 use App\Filament\Ops\Resources\BenefitGrantResource;
 use App\Filament\Ops\Resources\PaymentAttemptResource;
 use App\Filament\Ops\Resources\PaymentEventResource;
 use App\Models\Order;
 use App\Models\PaymentAttempt;
 use App\Services\Commerce\OrderManager;
+use App\Support\OrgContext;
 use App\Support\SchemaBaseline;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
@@ -49,7 +51,8 @@ final class OrderLinkageSupport
     {
         $query = Order::query()
             ->withoutGlobalScopes()
-            ->select('orders.*');
+            ->select('orders.*')
+            ->where('orders.org_id', $this->currentOrgId());
 
         if (SchemaBaseline::hasTable('attempts')) {
             $query
@@ -205,6 +208,7 @@ final class OrderLinkageSupport
                     $grantQuery
                         ->selectRaw('1')
                         ->from('benefit_grants')
+                        ->whereColumn('benefit_grants.org_id', 'orders.org_id')
                         ->where(function (QueryBuilder $nested): void {
                             $nested->whereColumn('benefit_grants.order_no', 'orders.order_no')
                                 ->orWhereColumn('benefit_grants.attempt_id', 'orders.target_attempt_id');
@@ -218,6 +222,7 @@ final class OrderLinkageSupport
                     $snapshotQuery
                         ->selectRaw('1')
                         ->from('report_snapshots')
+                        ->whereColumn('report_snapshots.org_id', 'orders.org_id')
                         ->where(function (QueryBuilder $nested): void {
                             $nested->whereColumn('report_snapshots.attempt_id', 'orders.target_attempt_id')
                                 ->orWhereColumn('report_snapshots.order_no', 'orders.order_no');
@@ -238,6 +243,7 @@ final class OrderLinkageSupport
         }
 
         return DB::table('orders')
+            ->where('org_id', $this->currentOrgId())
             ->whereNotNull($column)
             ->where($column, '!=', '')
             ->distinct()
@@ -257,6 +263,7 @@ final class OrderLinkageSupport
         }
 
         return DB::table('attempts')
+            ->where('org_id', $this->currentOrgId())
             ->whereNotNull($column)
             ->where($column, '!=', '')
             ->distinct()
@@ -298,6 +305,7 @@ final class OrderLinkageSupport
         }
 
         return DB::table('payment_events')
+            ->where('org_id', $this->currentOrgId())
             ->whereNotNull('status')
             ->where('status', '!=', '')
             ->distinct()
@@ -317,6 +325,7 @@ final class OrderLinkageSupport
         }
 
         return DB::table('benefit_grants')
+            ->where('org_id', $this->currentOrgId())
             ->whereNotNull('benefit_code')
             ->where('benefit_code', '!=', '')
             ->distinct()
@@ -340,6 +349,7 @@ final class OrderLinkageSupport
 
             $values = $values->merge(
                 DB::table('orders')
+                    ->where('org_id', $this->currentOrgId())
                     ->whereNotNull($column)
                     ->where($column, '!=', '')
                     ->distinct()
@@ -356,6 +366,7 @@ final class OrderLinkageSupport
 
                 $values = $values->merge(
                     DB::table('payment_events')
+                        ->where('org_id', $this->currentOrgId())
                         ->whereNotNull($column)
                         ->where($column, '!=', '')
                         ->distinct()
@@ -459,6 +470,7 @@ final class OrderLinkageSupport
                     $paymentQuery
                         ->selectRaw('1')
                         ->from('payment_events')
+                        ->whereColumn('payment_events.org_id', 'orders.org_id')
                         ->whereColumn('payment_events.order_no', 'orders.order_no')
                         ->where(function (QueryBuilder $nested) use ($sku): void {
                             $nested->where('payment_events.requested_sku', $sku)
@@ -483,6 +495,7 @@ final class OrderLinkageSupport
             $grantQuery
                 ->selectRaw('1')
                 ->from('benefit_grants')
+                ->whereColumn('benefit_grants.org_id', 'orders.org_id')
                 ->where('benefit_grants.benefit_code', $benefitCode)
                 ->where(function (QueryBuilder $nested): void {
                     $nested->whereColumn('benefit_grants.order_no', 'orders.order_no')
@@ -505,6 +518,7 @@ final class OrderLinkageSupport
             $attemptQuery
                 ->selectRaw('1')
                 ->from('attempts')
+                ->whereColumn('attempts.org_id', 'orders.org_id')
                 ->whereColumn('attempts.id', 'orders.target_attempt_id')
                 ->where('attempts.locale', $locale);
         });
@@ -524,6 +538,7 @@ final class OrderLinkageSupport
             $attemptQuery
                 ->selectRaw('1')
                 ->from('attempts')
+                ->whereColumn('attempts.org_id', 'orders.org_id')
                 ->whereColumn('attempts.id', 'orders.target_attempt_id')
                 ->where('attempts.region', $region);
         });
@@ -556,6 +571,7 @@ final class OrderLinkageSupport
             $paymentQuery
                 ->selectRaw('1')
                 ->from('payment_events')
+                ->whereColumn('payment_events.org_id', 'orders.org_id')
                 ->whereColumn('payment_events.order_no', 'orders.order_no')
                 ->where('payment_events.status', $webhookStatus);
         });
@@ -921,7 +937,10 @@ final class OrderLinkageSupport
      */
     public function buildDetail(Order $order): array
     {
-        $orderRow = DB::table('orders')->where('id', (string) $order->getKey())->first() ?? $order;
+        $orderRow = DB::table('orders')
+            ->where('org_id', $this->currentOrgId())
+            ->where('id', (string) $order->getKey())
+            ->first() ?? $order;
         $resolvedAttemptId = $this->resolvedAttemptId($order);
         $orderNo = (string) ($orderRow->order_no ?? '');
         $paymentEvents = $this->paymentEvents((string) ($orderRow->order_no ?? ''));
@@ -1149,6 +1168,7 @@ final class OrderLinkageSupport
     {
         return DB::table('attempts')
             ->select($column)
+            ->whereColumn('attempts.org_id', 'orders.org_id')
             ->whereColumn('attempts.id', 'orders.target_attempt_id')
             ->limit(1);
     }
@@ -1157,6 +1177,7 @@ final class OrderLinkageSupport
     {
         return DB::table('results')
             ->select($column)
+            ->whereColumn('results.org_id', 'orders.org_id')
             ->whereColumn('results.attempt_id', 'orders.target_attempt_id')
             ->orderByRaw('coalesce(computed_at, updated_at, created_at) desc')
             ->limit(1);
@@ -1166,6 +1187,7 @@ final class OrderLinkageSupport
     {
         return DB::table('payment_events')
             ->select($column)
+            ->whereColumn('payment_events.org_id', 'orders.org_id')
             ->whereColumn('payment_events.order_no', 'orders.order_no')
             ->orderByRaw('coalesce(processed_at, handled_at, updated_at, created_at) desc')
             ->limit(1);
@@ -1175,6 +1197,7 @@ final class OrderLinkageSupport
     {
         return DB::table('payment_attempts')
             ->select($column)
+            ->whereColumn('payment_attempts.org_id', 'orders.org_id')
             ->whereColumn('payment_attempts.order_no', 'orders.order_no')
             ->orderByDesc('attempt_no')
             ->limit(1);
@@ -1184,6 +1207,7 @@ final class OrderLinkageSupport
     {
         return DB::table('payment_attempts')
             ->selectRaw('count(*)')
+            ->whereColumn('payment_attempts.org_id', 'orders.org_id')
             ->whereColumn('payment_attempts.order_no', 'orders.order_no');
     }
 
@@ -1200,6 +1224,7 @@ final class OrderLinkageSupport
     {
         $query = DB::table('benefit_grants')
             ->select($column)
+            ->whereColumn('benefit_grants.org_id', 'orders.org_id')
             ->where(function (QueryBuilder $builder): void {
                 $builder->whereColumn('benefit_grants.order_no', 'orders.order_no')
                     ->orWhereColumn('benefit_grants.attempt_id', 'orders.target_attempt_id');
@@ -1217,6 +1242,7 @@ final class OrderLinkageSupport
     {
         $query = DB::table('benefit_grants')
             ->selectRaw('1')
+            ->whereColumn('benefit_grants.org_id', 'orders.org_id')
             ->where('benefit_grants.status', 'active')
             ->where(function (QueryBuilder $builder): void {
                 $builder->whereColumn('benefit_grants.order_no', 'orders.order_no')
@@ -1237,6 +1263,7 @@ final class OrderLinkageSupport
 
         return DB::table('skus')
             ->selectRaw('upper(coalesce(benefit_code, \'\'))')
+            ->whereColumn('skus.org_id', 'orders.org_id')
             ->where('is_active', true)
             ->whereRaw("upper(coalesce(skus.sku, '')) = upper(coalesce(nullif(orders.item_sku, ''), orders.sku, ''))")
             ->limit(1);
@@ -1266,6 +1293,7 @@ final class OrderLinkageSupport
     {
         return DB::table('report_snapshots')
             ->select($column)
+            ->whereColumn('report_snapshots.org_id', 'orders.org_id')
             ->where(function (QueryBuilder $builder): void {
                 $builder->whereColumn('report_snapshots.attempt_id', 'orders.target_attempt_id')
                     ->orWhereColumn('report_snapshots.order_no', 'orders.order_no');
@@ -1278,6 +1306,7 @@ final class OrderLinkageSupport
     {
         return DB::table('report_snapshots')
             ->selectRaw('1')
+            ->whereColumn('report_snapshots.org_id', 'orders.org_id')
             ->where(function (QueryBuilder $builder): void {
                 $builder->whereColumn('report_snapshots.attempt_id', 'orders.target_attempt_id')
                     ->orWhereColumn('report_snapshots.order_no', 'orders.order_no');
@@ -1289,6 +1318,7 @@ final class OrderLinkageSupport
     {
         return DB::table('report_jobs')
             ->select($column)
+            ->whereColumn('report_jobs.org_id', 'orders.org_id')
             ->whereColumn('report_jobs.attempt_id', 'orders.target_attempt_id')
             ->orderByRaw('coalesce(updated_at, created_at) desc')
             ->limit(1);
@@ -1320,6 +1350,7 @@ final class OrderLinkageSupport
             $benefitQuery
                 ->selectRaw('1')
                 ->from('benefit_grants')
+                ->whereColumn('benefit_grants.org_id', 'orders.org_id')
                 ->where('benefit_grants.status', 'active')
                 ->where(function (QueryBuilder $builder): void {
                     $builder->whereColumn('benefit_grants.order_no', 'orders.order_no')
@@ -1334,6 +1365,7 @@ final class OrderLinkageSupport
             $benefitQuery
                 ->selectRaw('1')
                 ->from('benefit_grants')
+                ->whereColumn('benefit_grants.org_id', 'orders.org_id')
                 ->whereRaw("lower(coalesce(benefit_grants.status, '')) in (?, ?)", ['revoked', 'expired'])
                 ->where(function (QueryBuilder $builder): void {
                     $builder->whereColumn('benefit_grants.order_no', 'orders.order_no')
@@ -1348,6 +1380,7 @@ final class OrderLinkageSupport
             $attemptQuery
                 ->selectRaw('1')
                 ->from('payment_attempts')
+                ->whereColumn('payment_attempts.org_id', 'orders.org_id')
                 ->whereColumn('payment_attempts.order_no', 'orders.order_no');
         };
     }
@@ -1361,6 +1394,7 @@ final class OrderLinkageSupport
             $attemptQuery
                 ->selectRaw('1')
                 ->from('payment_attempts')
+                ->whereColumn('payment_attempts.org_id', 'orders.org_id')
                 ->whereColumn('payment_attempts.order_no', 'orders.order_no')
                 ->whereIn('payment_attempts.state', $states);
         };
@@ -1372,6 +1406,7 @@ final class OrderLinkageSupport
             $eventQuery
                 ->selectRaw('1')
                 ->from('payment_events')
+                ->whereColumn('payment_events.org_id', 'orders.org_id')
                 ->whereColumn('payment_events.order_no', 'orders.order_no')
                 ->where(function (QueryBuilder $builder): void {
                     $builder->where('signature_ok', 0)
@@ -1388,6 +1423,7 @@ final class OrderLinkageSupport
             $snapshotQuery
                 ->selectRaw('1')
                 ->from('report_snapshots')
+                ->whereColumn('report_snapshots.org_id', 'orders.org_id')
                 ->where(function (QueryBuilder $builder): void {
                     $builder->whereColumn('report_snapshots.attempt_id', 'orders.target_attempt_id')
                         ->orWhereColumn('report_snapshots.order_no', 'orders.order_no');
@@ -1402,6 +1438,7 @@ final class OrderLinkageSupport
             $snapshotQuery
                 ->selectRaw('1')
                 ->from('report_snapshots')
+                ->whereColumn('report_snapshots.org_id', 'orders.org_id')
                 ->where(function (QueryBuilder $builder): void {
                     $builder->whereColumn('report_snapshots.attempt_id', 'orders.target_attempt_id')
                         ->orWhereColumn('report_snapshots.order_no', 'orders.order_no');
@@ -1415,6 +1452,7 @@ final class OrderLinkageSupport
             $snapshotQuery
                 ->selectRaw('1')
                 ->from('report_snapshots')
+                ->whereColumn('report_snapshots.org_id', 'orders.org_id')
                 ->where(function (QueryBuilder $builder): void {
                     $builder->whereColumn('report_snapshots.attempt_id', 'orders.target_attempt_id')
                         ->orWhereColumn('report_snapshots.order_no', 'orders.order_no');
@@ -1433,6 +1471,7 @@ final class OrderLinkageSupport
             $jobQuery
                 ->selectRaw('1')
                 ->from('report_jobs')
+                ->whereColumn('report_jobs.org_id', 'orders.org_id')
                 ->whereColumn('report_jobs.attempt_id', 'orders.target_attempt_id')
                 ->whereRaw("lower(coalesce(report_jobs.status, '')) in (?, ?)", ['failed', 'error']);
         };
@@ -1508,6 +1547,7 @@ final class OrderLinkageSupport
                 'handled_at',
                 'last_error_message',
             ])
+            ->where('org_id', $this->currentOrgId())
             ->where('order_no', $orderNo)
             ->orderByRaw('coalesce(processed_at, handled_at, updated_at, created_at) desc')
             ->limit(10)
@@ -1539,6 +1579,7 @@ final class OrderLinkageSupport
                 'last_error_code',
                 'last_error_message',
             ])
+            ->where('org_id', $this->currentOrgId())
             ->where('order_no', $orderNo)
             ->orderByDesc('attempt_no')
             ->limit(10)
@@ -1566,6 +1607,7 @@ final class OrderLinkageSupport
                 'source_event_id',
                 'meta_json',
             ])
+            ->where('org_id', $this->currentOrgId())
             ->where(function (QueryBuilder $builder) use ($orderNo, $attemptId): void {
                 if ($orderNo !== '') {
                     $builder->where('order_no', $orderNo);
@@ -1601,6 +1643,7 @@ final class OrderLinkageSupport
         }
 
         return DB::table('report_snapshots')
+            ->where('org_id', $this->currentOrgId())
             ->where(function (QueryBuilder $builder) use ($orderNo, $attemptId): void {
                 if ($attemptId !== null) {
                     $builder->where('attempt_id', $attemptId);
@@ -1622,6 +1665,7 @@ final class OrderLinkageSupport
         }
 
         return DB::table('report_jobs')
+            ->where('org_id', $this->currentOrgId())
             ->where('attempt_id', $attemptId)
             ->orderByRaw('coalesce(updated_at, created_at) desc')
             ->first();
@@ -1633,7 +1677,10 @@ final class OrderLinkageSupport
             return null;
         }
 
-        return DB::table('attempts')->where('id', $attemptId)->first();
+        return DB::table('attempts')
+            ->where('org_id', $this->currentOrgId())
+            ->where('id', $attemptId)
+            ->first();
     }
 
     private function result(?string $attemptId): ?object
@@ -1643,6 +1690,7 @@ final class OrderLinkageSupport
         }
 
         return DB::table('results')
+            ->where('org_id', $this->currentOrgId())
             ->where('attempt_id', $attemptId)
             ->orderByRaw('coalesce(computed_at, updated_at, created_at) desc')
             ->first();
@@ -2072,5 +2120,15 @@ final class OrderLinkageSupport
         $text = trim((string) $value);
 
         return $text !== '' ? $text : '-';
+    }
+
+    private function currentOrgId(): int
+    {
+        $orgId = (int) app(OrgContext::class)->orgId();
+        if ($orgId <= 0) {
+            throw new OrgContextMissingException(Order::class);
+        }
+
+        return $orgId;
     }
 }

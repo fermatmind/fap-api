@@ -10,6 +10,7 @@ use App\Models\Attempt;
 use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
@@ -38,7 +39,7 @@ final class AttemptsExplorerTest extends TestCase
             PermissionNames::ADMIN_OPS_READ,
         ]);
         $selectedOrg = $this->createOrganization('Selected Ops Org');
-        $chain = $this->seedFullDiagnosticChain(orgId: 22);
+        $chain = $this->seedFullDiagnosticChain(orgId: (int) $selectedOrg->id);
 
         $this->withSession($this->opsSession($admin, $selectedOrg))
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -49,6 +50,7 @@ final class AttemptsExplorerTest extends TestCase
             ->assertDontSee('Edit Attempt');
 
         session($this->opsSession($admin, $selectedOrg));
+        $this->setOpsOrgContext((int) $selectedOrg->id, $admin);
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
 
         Livewire::test(ListAttempts::class)
@@ -77,7 +79,7 @@ final class AttemptsExplorerTest extends TestCase
             PermissionNames::ADMIN_OPS_READ,
         ]);
         $selectedOrg = $this->createOrganization('Support Selection Org');
-        $chain = $this->seedFullDiagnosticChain(orgId: 33);
+        $chain = $this->seedFullDiagnosticChain(orgId: (int) $selectedOrg->id);
 
         $this->withSession($this->opsSession($admin, $selectedOrg))
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -104,7 +106,7 @@ final class AttemptsExplorerTest extends TestCase
             ->assertSee('active');
     }
 
-    public function test_attempts_explorer_cross_org_order_search_bypasses_selected_org_context(): void
+    public function test_attempts_explorer_cross_org_order_search_respects_selected_org_context(): void
     {
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_MENU_SUPPORT,
@@ -120,14 +122,16 @@ final class AttemptsExplorerTest extends TestCase
         $foreignChain = $this->seedFullDiagnosticChain(orgId: 77, orderNo: 'ord_cross_org_001');
 
         session($this->opsSession($admin, $selectedOrg));
+        $this->setOpsOrgContext((int) $selectedOrg->id, $admin);
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
 
         Livewire::test(ListAttempts::class)
             ->assertOk()
             ->searchTable('ord_cross_org_001')
-            ->assertCanSeeTableRecords([$foreignChain['attempt']])
+            ->assertCanNotSeeTableRecords([$foreignChain['attempt']])
             ->assertCanNotSeeTableRecords([$localAttempt])
-            ->assertTableColumnStateSet('org_id', 77, $foreignChain['attempt']);
+            ->searchTable('FMT-LOCAL01')
+            ->assertCanSeeTableRecords([$localAttempt]);
     }
 
     public function test_attempts_explorer_keeps_raw_answers_hidden_and_surfaces_sensitive_storage_modes(): void
@@ -140,7 +144,7 @@ final class AttemptsExplorerTest extends TestCase
 
         $clinicalAttempt = $this->createAttempt([
             'id' => '11111111-1111-4111-8111-111111111111',
-            'org_id' => 44,
+            'org_id' => (int) $selectedOrg->id,
             'scale_code' => 'CLINICAL_COMBO_68',
             'locale' => 'zh-CN',
             'region' => 'CN_MAINLAND',
@@ -149,11 +153,11 @@ final class AttemptsExplorerTest extends TestCase
             'scoring_spec_version' => 'clinical_v1',
             'question_count' => 68,
         ]);
-        $this->insertAnswerSet($clinicalAttempt->id, 44, 'CLINICAL_COMBO_68', null, hash('sha256', 'clinical-secret-answer'), 68);
+        $this->insertAnswerSet($clinicalAttempt->id, (int) $selectedOrg->id, 'CLINICAL_COMBO_68', null, hash('sha256', 'clinical-secret-answer'), 68);
 
         $sdsAttempt = $this->createAttempt([
             'id' => '22222222-2222-4222-8222-222222222222',
-            'org_id' => 44,
+            'org_id' => (int) $selectedOrg->id,
             'scale_code' => 'SDS_20',
             'locale' => 'zh-CN',
             'region' => 'CN_MAINLAND',
@@ -162,8 +166,8 @@ final class AttemptsExplorerTest extends TestCase
             'scoring_spec_version' => 'sds_v2',
             'question_count' => 20,
         ]);
-        $this->insertAnswerSet($sdsAttempt->id, 44, 'SDS_20', null, hash('sha256', 'sds-secret-answer'), 20);
-        $this->insertAnswerRow($sdsAttempt->id, 44, 'SDS_20', 'Q-1', ['code' => 'SDS_SECRET', 'answer' => 'Very secret']);
+        $this->insertAnswerSet($sdsAttempt->id, (int) $selectedOrg->id, 'SDS_20', null, hash('sha256', 'sds-secret-answer'), 20);
+        $this->insertAnswerRow($sdsAttempt->id, (int) $selectedOrg->id, 'SDS_20', 'Q-1', ['code' => 'SDS_SECRET', 'answer' => 'Very secret']);
 
         $this->withSession($this->opsSession($admin, $selectedOrg))
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -239,6 +243,13 @@ final class AttemptsExplorerTest extends TestCase
             'ops_org_id' => (int) $selectedOrg->id,
             'ops_admin_totp_verified_user_id' => (int) $admin->id,
         ];
+    }
+
+    private function setOpsOrgContext(int $orgId, AdminUser $admin): void
+    {
+        $context = app(OrgContext::class);
+        $context->set($orgId, (int) $admin->id, 'admin');
+        app()->instance(OrgContext::class, $context);
     }
 
     /**

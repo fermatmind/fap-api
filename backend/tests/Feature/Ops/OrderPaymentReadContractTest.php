@@ -24,6 +24,7 @@ final class OrderPaymentReadContractTest extends TestCase
             'payment_event_status' => 'post_commit_failed',
             'payment_event_handle_status' => 'post_commit_failed',
         ]);
+        $this->setOpsOrgContext(72);
 
         $record = app(OrderLinkageSupport::class)
             ->query()
@@ -52,6 +53,7 @@ final class OrderPaymentReadContractTest extends TestCase
             'with_grant' => false,
             'payment_event_status' => 'processed',
         ]);
+        $this->setOpsOrgContext(74);
 
         $support = app(OrderLinkageSupport::class);
         $query = $support->query();
@@ -71,6 +73,7 @@ final class OrderPaymentReadContractTest extends TestCase
             'with_grant' => false,
             'payment_event_status' => 'processed',
         ]);
+        $this->setOpsOrgContext(75);
 
         $record = app(OrderLinkageSupport::class)
             ->query()

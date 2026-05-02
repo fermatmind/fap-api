@@ -28,7 +28,7 @@ final class OpsAccessBoundaryTest extends TestCase
         Filament::setCurrentPanel(app(PanelRegistry::class)->get('ops'));
     }
 
-    public function test_cross_org_explorer_pages_open_without_org_context_but_org_scoped_pages_still_redirect(): void
+    public function test_order_and_attempt_explorer_pages_require_org_context(): void
     {
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_MENU_SUPPORT,
@@ -41,13 +41,13 @@ final class OpsAccessBoundaryTest extends TestCase
             'ops_admin_totp_verified_user_id' => (int) $admin->id,
         ])->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/orders')
-            ->assertOk();
+            ->assertRedirect('/ops/select-org?return_to=%2Fops%2Forders');
 
         $this->withSession([
             'ops_admin_totp_verified_user_id' => (int) $admin->id,
         ])->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/attempts')
-            ->assertOk();
+            ->assertRedirect('/ops/select-org?return_to=%2Fops%2Fattempts');
 
         $this->withSession([
             'ops_admin_totp_verified_user_id' => (int) $admin->id,
@@ -80,7 +80,7 @@ final class OpsAccessBoundaryTest extends TestCase
             ->assertRedirect('/ops/select-org?return_to=%2Fops%2Forder-lookup');
     }
 
-    public function test_cross_org_explorers_no_longer_allow_plain_ops_read_without_support_or_commerce_menu(): void
+    public function test_explorers_no_longer_allow_plain_ops_read_without_required_scope(): void
     {
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_OPS_READ,
@@ -90,13 +90,13 @@ final class OpsAccessBoundaryTest extends TestCase
             'ops_admin_totp_verified_user_id' => (int) $admin->id,
         ])->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/orders')
-            ->assertForbidden();
+            ->assertRedirect('/ops/select-org?return_to=%2Fops%2Forders');
 
         $this->withSession([
             'ops_admin_totp_verified_user_id' => (int) $admin->id,
         ])->actingAs($admin, (string) config('admin.guard', 'admin'))
             ->get('/ops/attempts')
-            ->assertForbidden();
+            ->assertRedirect('/ops/select-org?return_to=%2Fops%2Fattempts');
 
         $this->withSession([
             'ops_admin_totp_verified_user_id' => (int) $admin->id,

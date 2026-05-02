@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Filament\Ops\Resources\AttemptResource\Support;
 
+use App\Exceptions\OrgContextMissingException;
 use App\Models\Attempt;
+use App\Support\OrgContext;
 use App\Support\SchemaBaseline;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
@@ -21,7 +23,8 @@ final class AttemptExplorerSupport
         $query = Attempt::query()
             ->withoutGlobalScopes()
             ->select('attempts.*')
-            ->selectRaw('coalesce(attempts.submitted_at, attempts.created_at) as activity_at');
+            ->selectRaw('coalesce(attempts.submitted_at, attempts.created_at) as activity_at')
+            ->where('attempts.org_id', $this->currentOrgId());
 
         if (SchemaBaseline::hasTable('attempt_submissions')) {
             $query
@@ -91,6 +94,7 @@ final class AttemptExplorerSupport
                     $orderQuery
                         ->selectRaw('1')
                         ->from('orders')
+                        ->whereColumn('orders.org_id', 'attempts.org_id')
                         ->whereColumn('orders.target_attempt_id', 'attempts.id')
                         ->where('orders.order_no', 'like', $like);
                 });
@@ -118,6 +122,7 @@ final class AttemptExplorerSupport
         }
 
         return DB::table('attempts')
+            ->where('org_id', $this->currentOrgId())
             ->whereNotNull($column)
             ->where($column, '!=', '')
             ->distinct()
@@ -137,6 +142,7 @@ final class AttemptExplorerSupport
         if (SchemaBaseline::hasColumn('results', 'report_engine_version')) {
             $values = $values->merge(
                 DB::table('results')
+                    ->where('org_id', $this->currentOrgId())
                     ->whereNotNull('report_engine_version')
                     ->where('report_engine_version', '!=', '')
                     ->distinct()
@@ -148,6 +154,7 @@ final class AttemptExplorerSupport
         if (SchemaBaseline::hasColumn('report_snapshots', 'report_engine_version')) {
             $values = $values->merge(
                 DB::table('report_snapshots')
+                    ->where('org_id', $this->currentOrgId())
                     ->whereNotNull('report_engine_version')
                     ->where('report_engine_version', '!=', '')
                     ->distinct()
@@ -203,6 +210,7 @@ final class AttemptExplorerSupport
                     $resultQuery
                         ->selectRaw('1')
                         ->from('results')
+                        ->whereColumn('results.org_id', 'attempts.org_id')
                         ->whereColumn('results.attempt_id', 'attempts.id')
                         ->where('results.report_engine_version', $version);
                 });
@@ -213,6 +221,7 @@ final class AttemptExplorerSupport
                     $snapshotQuery
                         ->selectRaw('1')
                         ->from('report_snapshots')
+                        ->whereColumn('report_snapshots.org_id', 'attempts.org_id')
                         ->whereColumn('report_snapshots.attempt_id', 'attempts.id')
                         ->where('report_snapshots.report_engine_version', $version);
                 });
@@ -456,6 +465,7 @@ final class AttemptExplorerSupport
     {
         return DB::table('attempt_submissions')
             ->select($column)
+            ->whereColumn('attempt_submissions.org_id', 'attempts.org_id')
             ->whereColumn('attempt_submissions.attempt_id', 'attempts.id')
             ->orderByRaw('coalesce(finished_at, updated_at, created_at) desc')
             ->limit(1);
@@ -465,6 +475,7 @@ final class AttemptExplorerSupport
     {
         return DB::table('results')
             ->select($column)
+            ->whereColumn('results.org_id', 'attempts.org_id')
             ->whereColumn('results.attempt_id', 'attempts.id')
             ->orderByRaw('coalesce(computed_at, updated_at, created_at) desc')
             ->limit(1);
@@ -474,6 +485,7 @@ final class AttemptExplorerSupport
     {
         return DB::table('report_snapshots')
             ->select($column)
+            ->whereColumn('report_snapshots.org_id', 'attempts.org_id')
             ->whereColumn('report_snapshots.attempt_id', 'attempts.id')
             ->orderByRaw('coalesce(updated_at, created_at) desc')
             ->limit(1);
@@ -483,6 +495,7 @@ final class AttemptExplorerSupport
     {
         return DB::table('orders')
             ->select($column)
+            ->whereColumn('orders.org_id', 'attempts.org_id')
             ->whereColumn('orders.target_attempt_id', 'attempts.id')
             ->orderByRaw('coalesce(paid_at, updated_at, created_at) desc')
             ->limit(1);
@@ -496,6 +509,7 @@ final class AttemptExplorerSupport
                 $orderQuery
                     ->selectRaw('1')
                     ->from('orders')
+                    ->whereColumn('orders.org_id', 'attempts.org_id')
                     ->whereColumn('orders.order_no', 'payment_events.order_no')
                     ->whereColumn('orders.target_attempt_id', 'attempts.id');
             })
@@ -507,12 +521,14 @@ final class AttemptExplorerSupport
     {
         return DB::table('benefit_grants')
             ->select($column)
+            ->whereColumn('benefit_grants.org_id', 'attempts.org_id')
             ->where(function (QueryBuilder $benefitQuery): void {
                 $benefitQuery->whereColumn('benefit_grants.attempt_id', 'attempts.id')
                     ->orWhereExists(function (QueryBuilder $orderQuery): void {
                         $orderQuery
                             ->selectRaw('1')
                             ->from('orders')
+                            ->whereColumn('orders.org_id', 'attempts.org_id')
                             ->whereColumn('orders.order_no', 'benefit_grants.order_no')
                             ->whereColumn('orders.target_attempt_id', 'attempts.id');
                     });
@@ -543,6 +559,7 @@ final class AttemptExplorerSupport
             $orderQuery
                 ->selectRaw('1')
                 ->from('orders')
+                ->whereColumn('orders.org_id', 'attempts.org_id')
                 ->whereColumn('orders.target_attempt_id', 'attempts.id');
         };
     }
@@ -559,6 +576,7 @@ final class AttemptExplorerSupport
             $orderQuery
                 ->selectRaw('1')
                 ->from('orders')
+                ->whereColumn('orders.org_id', 'attempts.org_id')
                 ->whereColumn('orders.target_attempt_id', 'attempts.id')
                 ->where(function (QueryBuilder $builder): void {
                     $builder->whereRaw("lower(coalesce(orders.status, '')) in (?, ?, ?, ?)", ['paid', 'fulfilled', 'complete', 'completed']);
@@ -582,6 +600,7 @@ final class AttemptExplorerSupport
             $orderQuery
                 ->selectRaw('1')
                 ->from('orders')
+                ->whereColumn('orders.org_id', 'attempts.org_id')
                 ->whereColumn('orders.target_attempt_id', 'attempts.id')
                 ->where(function (QueryBuilder $builder): void {
                     $builder->whereRaw("lower(coalesce(orders.status, '')) like ?", ['%refund%']);
@@ -605,6 +624,7 @@ final class AttemptExplorerSupport
             $benefitQuery
                 ->selectRaw('1')
                 ->from('benefit_grants')
+                ->whereColumn('benefit_grants.org_id', 'attempts.org_id')
                 ->where('benefit_grants.status', 'active')
                 ->where(function (QueryBuilder $builder): void {
                     $builder->whereColumn('benefit_grants.attempt_id', 'attempts.id')
@@ -612,6 +632,7 @@ final class AttemptExplorerSupport
                             $orderQuery
                                 ->selectRaw('1')
                                 ->from('orders')
+                                ->whereColumn('orders.org_id', 'attempts.org_id')
                                 ->whereColumn('orders.order_no', 'benefit_grants.order_no')
                                 ->whereColumn('orders.target_attempt_id', 'attempts.id');
                         });
@@ -636,6 +657,7 @@ final class AttemptExplorerSupport
 
         if (SchemaBaseline::hasTable('attempt_answer_sets')) {
             $answerSet = DB::table('attempt_answer_sets')
+                ->where('org_id', $this->currentOrgId())
                 ->where('attempt_id', (string) $attempt->id)
                 ->first();
         }
@@ -643,6 +665,7 @@ final class AttemptExplorerSupport
         $rowCount = 0;
         if (SchemaBaseline::hasTable('attempt_answer_rows')) {
             $rowCount = (int) DB::table('attempt_answer_rows')
+                ->where('org_id', $this->currentOrgId())
                 ->where('attempt_id', (string) $attempt->id)
                 ->count();
         }
@@ -708,6 +731,7 @@ final class AttemptExplorerSupport
 
         if (SchemaBaseline::hasTable('results')) {
             $row = DB::table('results')
+                ->where('org_id', $this->currentOrgId())
                 ->where('attempt_id', (string) $attempt->id)
                 ->orderByRaw('coalesce(computed_at, updated_at, created_at) desc')
                 ->first();
@@ -781,6 +805,7 @@ final class AttemptExplorerSupport
 
         if (SchemaBaseline::hasTable('report_snapshots')) {
             $row = DB::table('report_snapshots')
+                ->where('org_id', $this->currentOrgId())
                 ->where('attempt_id', (string) $attempt->id)
                 ->orderByRaw('coalesce(updated_at, created_at) desc')
                 ->first();
@@ -860,6 +885,7 @@ final class AttemptExplorerSupport
 
         if (SchemaBaseline::hasTable('orders')) {
             $order = DB::table('orders')
+                ->where('org_id', $this->currentOrgId())
                 ->where('target_attempt_id', (string) $attempt->id)
                 ->orderByRaw('coalesce(paid_at, updated_at, created_at) desc')
                 ->first();
@@ -872,6 +898,7 @@ final class AttemptExplorerSupport
         $payment = null;
         if ($orderNo !== '' && SchemaBaseline::hasTable('payment_events')) {
             $payment = DB::table('payment_events')
+                ->where('org_id', $this->currentOrgId())
                 ->where('order_no', $orderNo)
                 ->orderByRaw('coalesce(processed_at, updated_at, created_at) desc')
                 ->first();
@@ -880,6 +907,7 @@ final class AttemptExplorerSupport
         $benefit = null;
         if (SchemaBaseline::hasTable('benefit_grants')) {
             $benefit = DB::table('benefit_grants')
+                ->where('org_id', $this->currentOrgId())
                 ->where(function (QueryBuilder $builder) use ($attempt, $orderNo): void {
                     $builder->where('attempt_id', (string) $attempt->id);
 
@@ -930,6 +958,7 @@ final class AttemptExplorerSupport
 
         $rows = DB::table('events')
             ->select(['event_code', 'occurred_at', 'share_id', 'channel', 'meta_json'])
+            ->where('org_id', $this->currentOrgId())
             ->where(function (QueryBuilder $query) use ($attempt, $shareId): void {
                 $query->where('attempt_id', (string) $attempt->id);
 
@@ -967,6 +996,7 @@ final class AttemptExplorerSupport
 
         $rows = DB::table('report_jobs')
             ->select(['status', 'created_at', 'finished_at'])
+            ->where('org_id', $this->currentOrgId())
             ->where('attempt_id', (string) $attempt->id)
             ->orderByDesc('created_at')
             ->limit(10)
@@ -1179,5 +1209,15 @@ final class AttemptExplorerSupport
     private function isRefundedLike(string $value): bool
     {
         return str_contains(strtolower(trim($value)), 'refund');
+    }
+
+    private function currentOrgId(): int
+    {
+        $orgId = (int) app(OrgContext::class)->orgId();
+        if ($orgId <= 0) {
+            throw new OrgContextMissingException(Attempt::class);
+        }
+
+        return $orgId;
     }
 }

@@ -32,9 +32,10 @@ final class CommerceExceptionWorkbenchContractTest extends TestCase
             PermissionNames::ADMIN_OPS_READ,
         ]);
         $selectedOrg = $this->createOrganization('Commerce Workbench Org');
-        $chain = $this->seedCommerceOpsChain(orgId: 61);
+        $chain = $this->seedCommerceOpsChain(orgId: (int) $selectedOrg->id);
 
         session($this->opsSession($admin, $selectedOrg));
+        $this->setOpsOrgContext((int) $selectedOrg->id, $admin);
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
 
         Livewire::test(ListOrders::class)

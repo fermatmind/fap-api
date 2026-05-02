@@ -52,6 +52,11 @@ class OpsAccessControl
                 'user_id' => $admin?->getAuthIdentifier(),
             ]);
 
+            $networkBlock = $this->networkBoundaryBlock($request, $routeName, $config);
+            if ($networkBlock !== null) {
+                return $networkBlock;
+            }
+
             if (str_starts_with($routeName, 'filament.ops.auth.')) {
                 if (
                     $routeName === 'filament.ops.auth.login'
@@ -191,39 +196,6 @@ class OpsAccessControl
                 }
             }
 
-            if (! app()->environment(['local', 'testing', 'ci'])) {
-                $allowedHost = trim((string) $config['allowed_host']);
-                if ($allowedHost !== '') {
-                    $host = trim((string) $request->getHost());
-
-                    if (! str_contains($host, $allowedHost)) {
-                        OpsSecurityEvent::emit('HOST_BLOCKED', [
-                            'host' => $host,
-                            'allowed' => $allowedHost,
-                            'route' => $routeName,
-                            'ip' => $request->ip(),
-                        ]);
-
-                        return response('Ops console is not available on this host.', 403);
-                    }
-                }
-
-                $allowlist = array_values(array_filter(array_map(
-                    static fn ($value): string => trim((string) $value),
-                    (array) $config['ip_allowlist']
-                )));
-
-                if (! empty($allowlist) && ! in_array((string) $request->ip(), $allowlist, true)) {
-                    OpsSecurityEvent::emit('IP_BLOCKED', [
-                        'ip' => $request->ip(),
-                        'route' => $routeName,
-                        'host' => $request->getHost(),
-                    ]);
-
-                    return response('Ops console IP is not allowlisted.', 403);
-                }
-            }
-
             if ($this->isSensitiveRoute($routeName, $request->path())) {
                 OpsAuditLogger::log('SENSITIVE_ACTION', [
                     'user_id' => $admin?->getAuthIdentifier(),
@@ -306,7 +278,7 @@ class OpsAccessControl
 
         return [
             'enabled' => (bool) ($config['enabled'] ?? true),
-            'fail_open' => (bool) ($config['fail_open'] ?? true),
+            'fail_open' => (bool) ($config['fail_open'] ?? false),
             'emergency_disable' => (bool) ($config['emergency_disable'] ?? false),
             'allowed_host' => trim((string) ($config['allowed_host'] ?? '')),
             'ip_allowlist' => array_values(array_filter(array_map(
@@ -347,6 +319,48 @@ class OpsAccessControl
         return $identifier !== ''
             ? $identifier
             : 'anonymous:'.($request->ip() ?? 'unknown');
+    }
+
+    /**
+     * @param  array{
+     *     allowed_host: string,
+     *     ip_allowlist: array<int, string>
+     * }  $config
+     */
+    private function networkBoundaryBlock(Request $request, string $routeName, array $config): ?Response
+    {
+        $allowedHost = mb_strtolower(trim((string) $config['allowed_host']));
+        if ($allowedHost !== '') {
+            $host = mb_strtolower(trim((string) $request->getHost()));
+
+            if ($host !== $allowedHost) {
+                OpsSecurityEvent::emit('HOST_BLOCKED', [
+                    'host' => $host,
+                    'allowed' => $allowedHost,
+                    'route' => $routeName,
+                    'ip' => $request->ip(),
+                ]);
+
+                return response('Ops console is not available on this host.', 403);
+            }
+        }
+
+        $allowlist = array_values(array_filter(array_map(
+            static fn ($value): string => trim((string) $value),
+            (array) $config['ip_allowlist']
+        )));
+
+        if ($allowlist !== [] && ! in_array((string) $request->ip(), $allowlist, true)) {
+            OpsSecurityEvent::emit('IP_BLOCKED', [
+                'ip' => $request->ip(),
+                'route' => $routeName,
+                'host' => $request->getHost(),
+            ]);
+
+            return response('Ops console IP is not allowlisted.', 403);
+        }
+
+        return null;
     }
 
     private function isSensitiveRoute(string $routeName, string $path): bool
