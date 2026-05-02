@@ -88,11 +88,38 @@ final class CareerJobListBundleBuilderTest extends TestCase
         );
     }
 
+    public function test_it_ignores_newer_recommendation_subject_compile_runs(): void
+    {
+        $jobRun = $this->compileJobChain(
+            CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-public-index']),
+            now()->subMinutes(10)
+        );
+        $recommendationRun = $this->compileJobChain(
+            CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-recommendation-shadow']),
+            now()->subMinute(),
+            [
+                'type_code' => 'INTJ-A',
+                'canonical_type_code' => 'INTJ',
+                'display_title' => 'INTJ-A Career Match',
+                'public_route_slug' => 'intj',
+            ]
+        );
+
+        $items = app(CareerJobListBundleBuilder::class)->build(includeNonIndexable: true);
+        $payloads = array_map(static fn ($item): array => $item->toArray(), $items);
+
+        $this->assertCount(1, $payloads);
+        $this->assertSame('backend-architect-public-index', data_get($payloads[0], 'identity.canonical_slug'));
+        $this->assertSame($jobRun['compileRun']->id, data_get($payloads[0], 'provenance_meta.compile_run_id'));
+        $this->assertNotSame($recommendationRun['compileRun']->id, data_get($payloads[0], 'provenance_meta.compile_run_id'));
+    }
+
     /**
      * @param  array<string, mixed>  $chain
+     * @param  array<string, mixed>|null  $subjectMeta
      * @return array<string, mixed>
      */
-    private function compileJobChain(array $chain, ?\Illuminate\Support\Carbon $compiledAt = null): array
+    private function compileJobChain(array $chain, ?\Illuminate\Support\Carbon $compiledAt = null, ?array $subjectMeta = null): array
     {
         $importRun = CareerImportRun::query()->create([
             'dataset_name' => 'fixture',
@@ -122,7 +149,10 @@ final class CareerJobListBundleBuilderTest extends TestCase
             'compile_run_id' => $compileRun->id,
             'projection_payload' => array_merge(
                 is_array($chain['childProjection']->projection_payload) ? $chain['childProjection']->projection_payload : [],
-                ['materialization' => 'career_first_wave']
+                array_filter([
+                    'materialization' => 'career_first_wave',
+                    'recommendation_subject_meta' => $subjectMeta,
+                ], static fn (mixed $value): bool => $value !== null)
             ),
         ]);
 

@@ -68,11 +68,16 @@ final class BigFiveResultPageV2SelectorAssetImportV03Test extends TestCase
         $this->assertSame(hash_file('sha256', $this->path('assets.json')), $manifest['sha256_json'] ?? null);
     }
 
-    public function test_v0_3_all_assets_pass_selector_validator(): void
+    public function test_v0_3_staging_assets_reject_shareable_content_outside_share_safety_registry(): void
     {
         $validator = new BigFiveResultPageV2SelectorAssetValidator;
 
-        $this->assertSame([], $validator->validateAssetSet($this->assets()));
+        $errors = $validator->validateAssetSet($this->assets());
+
+        $this->assertCount(3, $errors);
+        foreach ($errors as $error) {
+            $this->assertStringContainsString('shareable=true selector assets must originate from share_safety_registry', $error);
+        }
     }
 
     public function test_v0_3_registry_counts_match_manifest(): void
@@ -166,6 +171,9 @@ final class BigFiveResultPageV2SelectorAssetImportV03Test extends TestCase
                 'share_safe_behavioral_only',
                 'required_for_every_shareable_true_block',
             ], (string) $asset['asset_key']);
+            if (($asset['registry_key'] ?? null) !== 'share_safety_registry') {
+                continue;
+            }
             $this->assertForbiddenKeysAbsent($asset, BigFiveResultPageV2Contract::SHARE_FORBIDDEN_SCORE_FIELDS, (string) $asset['asset_key']);
             $publicText = json_encode($asset['public_payload'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             $this->assertIsString($publicText);

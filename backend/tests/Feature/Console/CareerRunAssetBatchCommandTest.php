@@ -76,6 +76,59 @@ final class CareerRunAssetBatchCommandTest extends TestCase
         $this->assertSame(20, data_get($payload, 'stages.validate.counts.warnings'));
     }
 
+    public function test_command_rejects_unsupported_batch_kind(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+        $manifestPath = $this->createBatchManifest(
+            'career_asset_batch_unsupported',
+            0,
+            1,
+        );
+
+        $exitCode = Artisan::call('career:run-asset-batch', [
+            '--manifest' => $manifestPath,
+            '--mode' => 'validate',
+            '--json' => true,
+        ]);
+        $payload = json_decode(trim((string) Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertIsArray($payload);
+        $this->assertSame('aborted', $payload['status'] ?? null);
+        $this->assertContains('unsupported_batch_kind', data_get($payload, 'stages.validate.errors'));
+    }
+
+    public function test_command_rejects_batch_role_publish_track_mismatch(): void
+    {
+        $this->materializeCurrentFirstWaveFixture();
+        $manifestPath = $this->createBatchManifest(
+            CareerAssetBatchManifestBuilder::BATCH_KIND_2,
+            0,
+            30,
+        );
+        $payload = json_decode((string) File::get($manifestPath), true);
+        $this->assertIsArray($payload);
+        $payload['members'][0]['batch_role'] = 'hold_seed';
+        $payload['members'][0]['hold_seed'] = true;
+        $payload['members'][0]['stable_seed'] = false;
+        $payload['members'][0]['candidate_seed'] = false;
+        $payload['members'][0]['expected_publish_track'] = 'stable';
+        File::put($manifestPath, (string) json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+        $exitCode = Artisan::call('career:run-asset-batch', [
+            '--manifest' => $manifestPath,
+            '--mode' => 'validate',
+            '--json' => true,
+        ]);
+        $result = json_decode(trim((string) Artisan::output()), true);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertIsArray($result);
+        $this->assertSame('aborted', $result['status'] ?? null);
+        $this->assertSame(1, data_get($result, 'stages.validate.counts.invalid'));
+        $this->assertContains('expected_publish_track_role_mismatch', data_get($result, 'stages.validate.members.0.errors'));
+    }
+
     public function test_command_supports_manifest_set_and_outputs_combined_summary(): void
     {
         $this->materializeCurrentFirstWaveFixture();
