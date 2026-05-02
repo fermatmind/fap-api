@@ -69,4 +69,79 @@ final class MbtiAttributionEventIngestTest extends TestCase
         $response->assertJsonPath('ok', false);
         $response->assertJsonPath('error_code', 'UNAUTHORIZED');
     }
+
+    public function test_ingest_endpoint_rejects_when_ingest_token_is_not_configured(): void
+    {
+        config()->set('fap.events.ingest_token', '');
+
+        $response = $this->postJson('/api/v0.3/analytics/mbti-attribution-events', [
+            'eventName' => 'landing_view',
+            'payload' => [
+                'entry_surface' => 'mbti_topic_detail',
+            ],
+        ]);
+
+        $response->assertStatus(503);
+        $response->assertJsonPath('ok', false);
+        $response->assertJsonPath('error_code', 'INGEST_DISABLED');
+
+        $this->assertSame(0, DB::table('events')->count());
+    }
+
+    public function test_ingest_endpoint_rejects_unauthenticated_caller_supplied_org_header(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ingest_test_token',
+            'X-Org-Id' => '42',
+        ])->postJson('/api/v0.3/analytics/mbti-attribution-events', [
+            'eventName' => 'landing_view',
+            'payload' => [
+                'entry_surface' => 'mbti_topic_detail',
+            ],
+        ]);
+
+        $response->assertStatus(404);
+
+        $this->assertSame(0, DB::table('events')->count());
+    }
+
+    public function test_ingest_endpoint_rejects_unexpected_payload_shape(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ingest_test_token',
+        ])->postJson('/api/v0.3/analytics/mbti-attribution-events', [
+            'eventName' => 'landing_view',
+            'payload' => [
+                'entry_surface' => 'mbti_topic_detail',
+                'org_id' => 42,
+            ],
+        ]);
+
+        $response->assertStatus(422);
+
+        $this->assertSame(0, DB::table('events')->count());
+    }
+
+    public function test_ingest_endpoint_rejects_malformed_identifiers(): void
+    {
+        config()->set('fap.events.ingest_token', 'ingest_test_token');
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ingest_test_token',
+        ])->postJson('/api/v0.3/analytics/mbti-attribution-events', [
+            'eventName' => 'landing_view',
+            'anonymousId' => ['not-scalar'],
+            'payload' => [
+                'entry_surface' => 'mbti_topic_detail',
+            ],
+        ]);
+
+        $response->assertStatus(422);
+
+        $this->assertSame(0, DB::table('events')->count());
+    }
 }
