@@ -66,12 +66,40 @@ final class CareerRecommendationIndexBundleBuilderTest extends TestCase
         $this->assertSame([], $items);
     }
 
+    public function test_it_ignores_newer_job_list_compile_runs_without_recommendation_subjects(): void
+    {
+        $recommendationRun = $this->compileRecommendationChain(
+            CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-intj-index']),
+            [
+                'type_code' => 'INTJ-A',
+                'canonical_type_code' => 'INTJ',
+                'display_title' => 'INTJ-A Career Match',
+                'public_route_slug' => 'intj',
+            ],
+            now()->subMinutes(10)
+        );
+        $jobListRun = $this->compileRecommendationChain(
+            CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-job-shadow']),
+            null,
+            now()->subMinute()
+        );
+
+        $items = app(CareerRecommendationIndexBundleBuilder::class)->build(includeNonIndexable: true);
+
+        $this->assertCount(1, $items);
+        $payload = $items[0]->toArray();
+
+        $this->assertSame('intj', data_get($payload, 'recommendation_subject_meta.public_route_slug'));
+        $this->assertSame($recommendationRun['compileRun']->id, data_get($payload, 'provenance_meta.compile_run_id'));
+        $this->assertNotSame($jobListRun['compileRun']->id, data_get($payload, 'provenance_meta.compile_run_id'));
+    }
+
     /**
      * @param  array<string, mixed>  $chain
-     * @param  array<string, mixed>  $subjectMeta
+     * @param  array<string, mixed>|null  $subjectMeta
      * @return array<string, mixed>
      */
-    private function compileRecommendationChain(array $chain, array $subjectMeta, ?\Illuminate\Support\Carbon $compiledAt = null): array
+    private function compileRecommendationChain(array $chain, ?array $subjectMeta, ?\Illuminate\Support\Carbon $compiledAt = null): array
     {
         $importRun = CareerImportRun::query()->create([
             'dataset_name' => 'fixture',
@@ -102,10 +130,10 @@ final class CareerRecommendationIndexBundleBuilderTest extends TestCase
             'compile_run_id' => $compileRun->id,
             'projection_payload' => array_merge(
                 is_array($chain['childProjection']->projection_payload) ? $chain['childProjection']->projection_payload : [],
-                [
+                array_filter([
                     'materialization' => 'career_first_wave',
                     'recommendation_subject_meta' => $subjectMeta,
-                ]
+                ], static fn (mixed $value): bool => $value !== null)
             ),
         ]);
 

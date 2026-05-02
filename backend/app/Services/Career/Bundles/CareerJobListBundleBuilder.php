@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
-use App\Domain\Career\Import\RunStatus;
 use App\Domain\Career\IndexStateValue;
 use App\DTO\Career\CareerJobListItemBundle;
-use App\Models\CareerCompileRun;
 use App\Models\CareerJob;
 use App\Models\Occupation;
 use App\Models\RecommendationSnapshot;
@@ -38,8 +36,6 @@ final class CareerJobListBundleBuilder
      */
     public function build(bool $includeNonIndexable = false): array
     {
-        $compileRunId = $this->latestCompletedCompileRunId();
-
         $snapshotQuery = RecommendationSnapshot::query()
             ->with([
                 'occupation.editorialPatches' => fn ($query) => $query->orderByDesc('updated_at')->orderByDesc('created_at'),
@@ -58,17 +54,16 @@ final class CareerJobListBundleBuilder
                 $query->where('context_payload->materialization', 'career_first_wave');
             })
             ->whereHas('profileProjection', static function ($query): void {
-                $query->where('projection_payload->materialization', 'career_first_wave');
+                $query->where('projection_payload->materialization', 'career_first_wave')
+                    ->whereNull('projection_payload->recommendation_subject_meta');
+            })
+            ->whereHas('compileRun', static function ($query): void {
+                $query->where('status', 'completed')
+                    ->where('dry_run', false);
             })
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
             ->limit(self::MAX_PUBLIC_COMPILED_ROWS);
-
-        if ($compileRunId !== null) {
-            $snapshotQuery->where('compile_run_id', $compileRunId);
-        } else {
-            $snapshotQuery->whereRaw('1 = 0');
-        }
 
         $snapshots = $snapshotQuery->get();
 
@@ -483,18 +478,5 @@ final class CareerJobListBundleBuilder
     {
         return is_string(data_get($job->seoMeta?->jsonld_overrides_json, 'source_docx'))
             && data_get($job->market_demand_json, 'source_refs.0.url') !== null;
-    }
-
-    private function latestCompletedCompileRunId(): ?string
-    {
-        $id = CareerCompileRun::query()
-            ->where('status', RunStatus::COMPLETED)
-            ->where('dry_run', false)
-            ->orderByDesc('finished_at')
-            ->orderByDesc('started_at')
-            ->orderByDesc('created_at')
-            ->value('id');
-
-        return is_string($id) && $id !== '' ? $id : null;
     }
 }

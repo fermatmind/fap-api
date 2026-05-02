@@ -168,6 +168,16 @@ final class BigFiveResultPageV2SelectorAssetValidatorTest extends TestCase
         $this->assertHasError('Forbidden field public_payload.raw_score', $asset);
     }
 
+    public function test_shareable_assets_must_come_from_share_safety_registry(): void
+    {
+        $asset = $this->fixture('fixture.scenario.work');
+        $asset['shareable'] = true;
+        $asset['shareable_policy'] = 'share_safe_behavioral_only';
+        $asset['safety_level'] = 'share_safe_behavioral';
+
+        $this->assertHasError('shareable=true selector assets must originate from share_safety_registry', $asset);
+    }
+
     public function test_facet_independent_claim_without_confidence_is_rejected(): void
     {
         $asset = $this->fixture('fixture.facet_pattern.o6_reframe');

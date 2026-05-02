@@ -294,6 +294,9 @@ final class BigFiveResultPageV2SelectorAssetValidator
         }
 
         if (($asset['shareable'] ?? false) === true) {
+            if ($registryKey !== 'share_safety_registry') {
+                $errors[] = 'shareable=true selector assets must originate from share_safety_registry';
+            }
             if (! in_array((string) ($asset['shareable_policy'] ?? ''), ['share_safe_behavioral_only', 'required_for_every_shareable_true_block'], true)) {
                 $errors[] = 'shareable=true selector assets require share-safe policy';
             }

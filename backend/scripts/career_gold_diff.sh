@@ -9,7 +9,7 @@ FIRST_WAVE_ALIASES="${REPO_ROOT}/docs/career/first_wave_aliases.json"
 usage() {
   cat <<'EOF'
 Usage:
-  scripts/career_gold_diff.sh CANDIDATE_JSON [--assert-frozen-clean]
+  scripts/career_gold_diff.sh CANDIDATE_JSON [--assert-frozen-clean] [--frozen-base=REF]
 
 Behavior:
   - validates the candidate batch manifest structurally
@@ -35,10 +35,29 @@ fi
 
 CANDIDATE_PATH="$1"
 ASSERT_FROZEN_CLEAN=0
+FROZEN_BASE_REF="${CAREER_GOLD_DIFF_BASE_REF:-origin/main}"
 
-if [ "${2:-}" = "--assert-frozen-clean" ]; then
-  ASSERT_FROZEN_CLEAN=1
-fi
+shift
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --assert-frozen-clean)
+      ASSERT_FROZEN_CLEAN=1
+      ;;
+    --frozen-base=*)
+      FROZEN_BASE_REF="${1#--frozen-base=}"
+      ;;
+    --frozen-base)
+      shift
+      FROZEN_BASE_REF="${1:-}"
+      ;;
+    *)
+      echo "FAIL: unknown option $1."
+      usage
+      exit 1
+      ;;
+  esac
+  shift
+done
 
 if [ ! -f "${CANDIDATE_PATH}" ]; then
   echo "FAIL: candidate manifest not found at ${CANDIDATE_PATH}."
@@ -63,6 +82,19 @@ fi
 if [ "${ASSERT_FROZEN_CLEAN}" = "1" ]; then
   if ! git -C "${REPO_ROOT}" diff --quiet -- "${FIRST_WAVE_MANIFEST}" "${FIRST_WAVE_ALIASES}"; then
     echo "FAIL: frozen first-wave files have local modifications."
+    exit 1
+  fi
+  if ! git -C "${REPO_ROOT}" diff --cached --quiet -- "${FIRST_WAVE_MANIFEST}" "${FIRST_WAVE_ALIASES}"; then
+    echo "FAIL: frozen first-wave files have staged modifications."
+    exit 1
+  fi
+  if [ "${FROZEN_BASE_REF}" != "" ] && git -C "${REPO_ROOT}" rev-parse --verify --quiet "${FROZEN_BASE_REF}^{commit}" >/dev/null; then
+    if ! git -C "${REPO_ROOT}" diff --quiet "${FROZEN_BASE_REF}...HEAD" -- "${FIRST_WAVE_MANIFEST}" "${FIRST_WAVE_ALIASES}"; then
+      echo "FAIL: frozen first-wave files differ from ${FROZEN_BASE_REF}."
+      exit 1
+    fi
+  elif [ "${FROZEN_BASE_REF}" != "" ] && [ "${CAREER_GOLD_DIFF_BASE_REF+x}" = "x" ]; then
+    echo "FAIL: frozen base ref not found: ${FROZEN_BASE_REF}."
     exit 1
   fi
 fi
