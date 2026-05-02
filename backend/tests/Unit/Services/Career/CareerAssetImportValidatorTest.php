@@ -37,6 +37,12 @@ final class CareerAssetImportValidatorTest extends TestCase
         ], $report['normalized_release_status_counts']);
         $this->assertSame('pass_for_database_import_test', $report['import_decision']);
         $this->assertSame('actors_only_ready_for_pilot_validation', $report['release_decision']);
+        $this->assertFalse($report['release_status_rows_sample'][0]['ready_for_sitemap']);
+        $this->assertFalse($report['release_status_rows_sample'][0]['ready_for_llms_full']);
+        $this->assertFalse($report['release_status_rows_sample'][0]['ready_for_paid']);
+        $this->assertNull($report['release_status_rows_sample'][0]['normalized_EN_Occupation_Schema_JSON']);
+        $this->assertNull($report['release_status_rows_sample'][0]['normalized_CN_Occupation_Schema_JSON']);
+        $this->assertFalse($report['release_status_rows_sample'][1]['ready_for_paid']);
     }
 
     #[Test]

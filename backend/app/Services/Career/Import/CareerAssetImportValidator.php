@@ -170,6 +170,9 @@ final class CareerAssetImportValidator
             }
 
             $normalizedReleaseStatusCounts[$normalizedReleaseStatus] = ($normalizedReleaseStatusCounts[$normalizedReleaseStatus] ?? 0) + 1;
+            $readyForSitemap = ! $missingSoc && $this->truthyWorkbookFlag($record['Ready_For_Sitemap'] ?? null);
+            $readyForLlmsFull = ! $missingSoc && $this->truthyWorkbookFlag($record['Ready_For_LLMS'] ?? null);
+            $readyForPaid = ! $missingSoc && $this->truthyWorkbookFlag($record['Ready_For_Paid'] ?? null);
 
             if (count($releaseStatusSamples) < 25) {
                 $releaseStatusSamples[] = [
@@ -177,10 +180,16 @@ final class CareerAssetImportValidator
                     'slug' => $slug,
                     'source_release_status' => $sourceReleaseStatus,
                     'normalized_release_status' => $normalizedReleaseStatus,
-                    'ready_for_sitemap' => ! $missingSoc,
-                    'ready_for_llms_full' => ! $missingSoc,
-                    'ready_for_paid' => ! $missingSoc,
+                    'ready_for_sitemap' => $readyForSitemap,
+                    'ready_for_llms_full' => $readyForLlmsFull,
+                    'ready_for_paid' => $readyForPaid,
                     'occupation_schema_allowed' => ! $missingSoc,
+                    'normalized_EN_Occupation_Schema_JSON' => $missingSoc
+                        ? null
+                        : $this->nullableWorkbookValue($record['EN_Occupation_Schema_JSON'] ?? null),
+                    'normalized_CN_Occupation_Schema_JSON' => $missingSoc
+                        ? null
+                        : $this->nullableWorkbookValue($record['CN_Occupation_Schema_JSON'] ?? null),
                 ];
             }
 
@@ -562,6 +571,24 @@ final class CareerAssetImportValidator
         $normalized = trim((string) $value);
 
         return in_array(strtolower($normalized), ['', 'n/a', 'na', '-'], true);
+    }
+
+    private function truthyWorkbookFlag(mixed $value): bool
+    {
+        if ($this->isNullish($value)) {
+            return false;
+        }
+
+        return in_array(strtolower($this->stringValue($value)), ['1', 'true', 'yes', 'y'], true);
+    }
+
+    private function nullableWorkbookValue(mixed $value): ?string
+    {
+        if ($this->isNullish($value)) {
+            return null;
+        }
+
+        return $this->stringValue($value);
     }
 
     private function isPlaceholderInternalLinks(mixed $value): bool
