@@ -31,6 +31,7 @@ final class OrderExceptionFilterTest extends TestCase
             'payment_attempt_state' => 'verified',
         ]);
         $clear = $this->seedCommerceOpsChain(orgId: 71, orderNo: 'ord_clear_ops');
+        $this->setOpsOrgContext(71);
 
         $support = app(OrderLinkageSupport::class);
 

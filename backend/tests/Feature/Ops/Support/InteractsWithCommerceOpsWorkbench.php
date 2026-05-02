@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Support\OrgContext;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
@@ -67,6 +68,13 @@ trait InteractsWithCommerceOpsWorkbench
             'ops_org_id' => (int) $selectedOrg->id,
             'ops_admin_totp_verified_user_id' => (int) $admin->id,
         ];
+    }
+
+    private function setOpsOrgContext(int $orgId, ?AdminUser $admin = null): void
+    {
+        $context = app(OrgContext::class);
+        $context->set($orgId, $admin !== null ? (int) $admin->id : 9001, 'admin');
+        app()->instance(OrgContext::class, $context);
     }
 
     /**

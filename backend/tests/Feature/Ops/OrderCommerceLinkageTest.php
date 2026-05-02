@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\Organization;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Support\OrgContext;
 use App\Support\Rbac\PermissionNames;
 use Filament\Facades\Filament;
 use Filament\PanelRegistry;
@@ -38,7 +39,7 @@ final class OrderCommerceLinkageTest extends TestCase
             PermissionNames::ADMIN_OPS_READ,
         ]);
         $selectedOrg = $this->createOrganization('Selected Commerce Org');
-        $chain = $this->seedDiagnosticChain(orgId: 41);
+        $chain = $this->seedDiagnosticChain(orgId: (int) $selectedOrg->id);
 
         $this->withSession($this->opsSession($admin, $selectedOrg))
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -48,6 +49,7 @@ final class OrderCommerceLinkageTest extends TestCase
             ->assertDontSee('Request Refund');
 
         session($this->opsSession($admin, $selectedOrg));
+        $this->setOpsOrgContext((int) $selectedOrg->id, $admin);
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
 
         Livewire::test(ListOrders::class)
@@ -87,7 +89,7 @@ final class OrderCommerceLinkageTest extends TestCase
             PermissionNames::ADMIN_OPS_READ,
         ]);
         $selectedOrg = $this->createOrganization('Cross Org Session');
-        $chain = $this->seedDiagnosticChain(orgId: 52, orderNo: 'ord_unlock_chain_001');
+        $chain = $this->seedDiagnosticChain(orgId: (int) $selectedOrg->id, orderNo: 'ord_unlock_chain_001');
 
         $this->withSession($this->opsSession($admin, $selectedOrg))
             ->actingAs($admin, (string) config('admin.guard', 'admin'))
@@ -125,7 +127,7 @@ final class OrderCommerceLinkageTest extends TestCase
             ->assertDontSee((string) $chain['report_secret']);
     }
 
-    public function test_orders_linkage_cross_org_search_works_for_order_no_and_attempt_id(): void
+    public function test_orders_linkage_cross_org_search_respects_selected_org_context(): void
     {
         $admin = $this->createAdminWithPermissions([
             PermissionNames::ADMIN_MENU_COMMERCE,
@@ -136,15 +138,16 @@ final class OrderCommerceLinkageTest extends TestCase
         $foreign = $this->seedDiagnosticChain(orgId: 88, orderNo: 'ord_cross_scope_001');
 
         session($this->opsSession($admin, $selectedOrg));
+        $this->setOpsOrgContext((int) $selectedOrg->id, $admin);
         $this->actingAs($admin, (string) config('admin.guard', 'admin'));
 
         Livewire::test(ListOrders::class)
             ->assertOk()
             ->searchTable('ord_cross_scope_001')
-            ->assertCanSeeTableRecords([$foreign['order']])
+            ->assertCanNotSeeTableRecords([$foreign['order']])
             ->assertCanNotSeeTableRecords([$localOrder])
             ->searchTable((string) $foreign['attempt_id'])
-            ->assertCanSeeTableRecords([$foreign['order']]);
+            ->assertCanNotSeeTableRecords([$foreign['order']]);
     }
 
     private function createOrganization(string $name): Organization
@@ -199,6 +202,13 @@ final class OrderCommerceLinkageTest extends TestCase
             'ops_org_id' => (int) $selectedOrg->id,
             'ops_admin_totp_verified_user_id' => (int) $admin->id,
         ];
+    }
+
+    private function setOpsOrgContext(int $orgId, AdminUser $admin): void
+    {
+        $context = app(OrgContext::class);
+        $context->set($orgId, (int) $admin->id, 'admin');
+        app()->instance(OrgContext::class, $context);
     }
 
     /**

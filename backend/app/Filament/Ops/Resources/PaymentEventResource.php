@@ -98,6 +98,7 @@ class PaymentEventResource extends BaseTenantResource
                     ->url(function (PaymentEvent $record): ?string {
                         $orderId = Order::query()
                             ->withoutGlobalScopes()
+                            ->where('org_id', (int) $record->org_id)
                             ->where('order_no', (string) ($record->order_no ?? ''))
                             ->value('id');
 

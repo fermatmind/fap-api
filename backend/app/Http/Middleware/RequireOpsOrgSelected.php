@@ -37,8 +37,6 @@ class RequireOpsOrgSelected
         'filament.ops.resources.permissions.',
         'filament.ops.resources.organizations.',
         'filament.ops.resources.deploys.',
-        'filament.ops.resources.orders.',
-        'filament.ops.resources.attempts.',
         'filament.ops.resources.results.',
         'filament.ops.resources.reports.',
     ];
