@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Resources\Career;
 
 use App\DTO\Career\CareerJobDetailBundle;
+use App\Services\Career\Bundles\CareerJobDisplaySurfaceBuilder;
 use App\Services\Career\StructuredData\CareerStructuredDataBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -24,9 +25,20 @@ final class CareerJobDetailResource extends JsonResource
         /** @var CareerJobDetailBundle $bundle */
         $bundle = $this->resource;
 
-        return array_merge($bundle->toArray(), [
+        $payload = array_merge($bundle->toArray(), [
             'structured_data' => $this->buildStructuredData($bundle),
         ]);
+
+        $displaySurface = app(CareerJobDisplaySurfaceBuilder::class)->buildForBundle(
+            $bundle,
+            is_string($request->query('locale')) ? (string) $request->query('locale') : 'zh-CN'
+        );
+
+        if ($displaySurface !== null) {
+            $payload['display_surface_v1'] = $displaySurface;
+        }
+
+        return $payload;
     }
 
     /**

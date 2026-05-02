@@ -78,6 +78,11 @@ class Occupation extends CareerFoundationModel
         return $this->hasMany(RecommendationSnapshot::class, 'occupation_id', 'id');
     }
 
+    public function displayAssets(): HasMany
+    {
+        return $this->hasMany(CareerJobDisplayAsset::class, 'occupation_id', 'id');
+    }
+
     public function sourceTraces(): HasMany
     {
         return $this->hasManyThrough(
