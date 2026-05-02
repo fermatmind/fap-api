@@ -41,25 +41,23 @@ final class CareerJobListBundleBuilderTest extends TestCase
     public function test_it_can_include_non_indexable_jobs_when_explicitly_requested(): void
     {
         $this->compileJobChain(
-            CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-visible'])
+            CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-visible']),
+            now()->subMinutes(5)
         );
         $this->compileJobChain(
-            CareerFoundationFixture::seedTrustLimitedCrossMarketChain()
+            CareerFoundationFixture::seedTrustLimitedCrossMarketChain(),
+            now()->subMinute()
         );
 
         $items = app(CareerJobListBundleBuilder::class)->build(includeNonIndexable: true);
         $payloads = array_map(static fn ($item): array => $item->toArray(), $items);
 
-        $this->assertCount(2, $payloads);
-        $this->assertContains('backend-architect-visible', array_column(array_column($payloads, 'identity'), 'canonical_slug'));
-        $this->assertContains('backend-architect-cn-market', array_column(array_column($payloads, 'identity'), 'canonical_slug'));
-        $this->assertFalse((bool) data_get(
-            collect($payloads)->firstWhere('identity.canonical_slug', 'backend-architect-cn-market'),
-            'seo_contract.index_eligible'
-        ));
+        $this->assertCount(1, $payloads);
+        $this->assertSame('backend-architect-cn-market', data_get($payloads[0], 'identity.canonical_slug'));
+        $this->assertFalse((bool) data_get($payloads[0], 'seo_contract.index_eligible'));
     }
 
-    public function test_it_prefers_an_older_indexable_snapshot_over_a_newer_non_indexable_snapshot_for_the_same_job(): void
+    public function test_it_does_not_resurrect_older_indexable_snapshot_when_current_run_withdraws_job(): void
     {
         $chain = CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-stable']);
         $this->compileJobChain($chain, now()->subMinutes(5));
@@ -77,15 +75,34 @@ final class CareerJobListBundleBuilderTest extends TestCase
 
         $items = app(CareerJobListBundleBuilder::class)->build();
 
+        $this->assertSame([], $items);
+    }
+
+    public function test_it_can_include_current_non_indexable_job_when_explicitly_requested(): void
+    {
+        $chain = CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-stable']);
+        $older = $this->compileJobChain($chain, now()->subMinutes(5));
+
+        $chain['occupation']->indexStates()->create([
+            'index_state' => 'trust_limited',
+            'index_eligible' => false,
+            'canonical_path' => '/career/jobs/backend-architect-stable',
+            'canonical_target' => null,
+            'reason_codes' => ['trust_limited'],
+            'changed_at' => now()->subSeconds(30),
+        ]);
+
+        $current = $this->compileJobChain($chain, now()->subMinute());
+
+        $items = app(CareerJobListBundleBuilder::class)->build(includeNonIndexable: true);
+
         $this->assertCount(1, $items);
         $payload = $items[0]->toArray();
 
         $this->assertSame('backend-architect-stable', data_get($payload, 'identity.canonical_slug'));
-        $this->assertTrue((bool) data_get($payload, 'seo_contract.index_eligible'));
-        $this->assertContains(
-            data_get($payload, 'trust_summary.reviewer_status'),
-            ['approved', 'reviewed']
-        );
+        $this->assertFalse((bool) data_get($payload, 'seo_contract.index_eligible'));
+        $this->assertSame($current['compileRun']->id, data_get($payload, 'provenance_meta.compile_run_id'));
+        $this->assertNotSame($older['compileRun']->id, data_get($payload, 'provenance_meta.compile_run_id'));
     }
 
     public function test_it_ignores_newer_recommendation_subject_compile_runs(): void
@@ -137,8 +154,8 @@ final class CareerJobListBundleBuilderTest extends TestCase
             'scope_mode' => 'first_wave_exact',
             'dry_run' => false,
             'status' => 'completed',
-            'started_at' => now()->subMinutes(8),
-            'finished_at' => now()->subMinutes(7),
+            'started_at' => ($compiledAt ?? now())->copy()->subMinute(),
+            'finished_at' => $compiledAt ?? now(),
         ]);
 
         $chain['contextSnapshot']->update([

@@ -66,6 +66,54 @@ final class CareerRecommendationIndexBundleBuilderTest extends TestCase
         $this->assertSame([], $items);
     }
 
+    public function test_it_does_not_resurrect_older_indexable_subject_when_current_run_withdraws_it(): void
+    {
+        $chain = CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'backend-architect-intj-stale']);
+        $older = $this->compileRecommendationChain(
+            $chain,
+            [
+                'type_code' => 'INTJ-A',
+                'canonical_type_code' => 'INTJ',
+                'display_title' => 'INTJ-A Career Match',
+                'public_route_slug' => 'intj',
+            ],
+            now()->subMinutes(5)
+        );
+
+        $chain['occupation']->indexStates()->create([
+            'index_state' => 'trust_limited',
+            'index_eligible' => false,
+            'canonical_path' => '/career/recommendations/mbti/intj',
+            'canonical_target' => null,
+            'reason_codes' => ['trust_limited'],
+            'changed_at' => now()->subSeconds(30),
+        ]);
+
+        $current = $this->compileRecommendationChain(
+            $chain,
+            [
+                'type_code' => 'INTJ-A',
+                'canonical_type_code' => 'INTJ',
+                'display_title' => 'INTJ-A Career Match',
+                'public_route_slug' => 'intj',
+            ],
+            now()->subMinute()
+        );
+
+        $items = app(CareerRecommendationIndexBundleBuilder::class)->build();
+
+        $this->assertSame([], $items);
+
+        $itemsWithNonIndexable = app(CareerRecommendationIndexBundleBuilder::class)->build(includeNonIndexable: true);
+        $this->assertCount(1, $itemsWithNonIndexable);
+        $payload = $itemsWithNonIndexable[0]->toArray();
+
+        $this->assertSame('intj', data_get($payload, 'recommendation_subject_meta.public_route_slug'));
+        $this->assertFalse((bool) data_get($payload, 'seo_contract.index_eligible'));
+        $this->assertSame($current['compileRun']->id, data_get($payload, 'provenance_meta.compile_run_id'));
+        $this->assertNotSame($older['compileRun']->id, data_get($payload, 'provenance_meta.compile_run_id'));
+    }
+
     public function test_it_ignores_newer_job_list_compile_runs_without_recommendation_subjects(): void
     {
         $recommendationRun = $this->compileRecommendationChain(
@@ -117,8 +165,8 @@ final class CareerRecommendationIndexBundleBuilderTest extends TestCase
             'scope_mode' => 'first_wave_exact',
             'dry_run' => false,
             'status' => 'completed',
-            'started_at' => now()->subMinutes(8),
-            'finished_at' => now()->subMinutes(7),
+            'started_at' => ($compiledAt ?? now())->copy()->subMinute(),
+            'finished_at' => $compiledAt ?? now(),
         ]);
 
         $chain['contextSnapshot']->update([
