@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\Import\RunStatus;
 use App\Domain\Career\IndexStateValue;
 use App\DTO\Career\CareerRecommendationIndexItemBundle;
+use App\Models\CareerCompileRun;
 use App\Models\RecommendationSnapshot;
 use App\Services\PublicSurface\SeoSurfaceContractService;
 use Illuminate\Support\Collection;
@@ -13,6 +15,8 @@ use Illuminate\Support\Collection;
 final class CareerRecommendationIndexBundleBuilder
 {
     private const SAFE_CROSSWALK_MODES = ['exact', 'trust_inheritance', 'direct_match'];
+
+    private const MAX_PUBLIC_RECOMMENDATION_ROWS = 512;
 
     public function __construct(
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
@@ -23,6 +27,11 @@ final class CareerRecommendationIndexBundleBuilder
      */
     public function build(bool $includeNonIndexable = false): array
     {
+        $compileRunId = $this->latestCompletedCompileRunId();
+        if ($compileRunId === null) {
+            return [];
+        }
+
         $snapshots = RecommendationSnapshot::query()
             ->with([
                 'occupation',
@@ -33,7 +42,7 @@ final class CareerRecommendationIndexBundleBuilder
                 'compileRun',
             ])
             ->whereNotNull('compiled_at')
-            ->whereNotNull('compile_run_id')
+            ->where('compile_run_id', $compileRunId)
             ->whereHas('occupation', static function ($query): void {
                 $query->whereIn('crosswalk_mode', self::SAFE_CROSSWALK_MODES);
             })
@@ -46,6 +55,7 @@ final class CareerRecommendationIndexBundleBuilder
             })
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
+            ->limit(self::MAX_PUBLIC_RECOMMENDATION_ROWS)
             ->get();
 
         $grouped = $snapshots
@@ -265,5 +275,18 @@ final class CareerRecommendationIndexBundleBuilder
             'integrity_state' => $value['integrity_state'] ?? null,
             'band' => $value['band'] ?? null,
         ];
+    }
+
+    private function latestCompletedCompileRunId(): ?string
+    {
+        $id = CareerCompileRun::query()
+            ->where('status', RunStatus::COMPLETED)
+            ->where('dry_run', false)
+            ->orderByDesc('finished_at')
+            ->orderByDesc('started_at')
+            ->orderByDesc('created_at')
+            ->value('id');
+
+        return is_string($id) && $id !== '' ? $id : null;
     }
 }

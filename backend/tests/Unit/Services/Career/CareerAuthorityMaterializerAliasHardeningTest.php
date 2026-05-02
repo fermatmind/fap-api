@@ -10,6 +10,7 @@ use App\Models\OccupationAlias;
 use App\Models\OccupationFamily;
 use App\Services\Career\Import\CareerAuthorityMaterializer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use RuntimeException;
 use Tests\TestCase;
 
 final class CareerAuthorityMaterializerAliasHardeningTest extends TestCase
@@ -113,6 +114,111 @@ final class CareerAuthorityMaterializerAliasHardeningTest extends TestCase
 
         $this->assertContains('occupation', $leafAliases);
         $this->assertNotContains('family', $leafAliases);
+    }
+
+    public function test_it_rejects_manifest_occupation_uuid_for_unrelated_slug(): void
+    {
+        $run = CareerImportRun::query()->create([
+            'dataset_name' => 'fixture',
+            'dataset_version' => 'v1',
+            'dataset_checksum' => 'checksum-b7-import-occupation-conflict',
+            'scope_mode' => 'first_wave_exact',
+            'dry_run' => false,
+            'status' => 'completed',
+            'started_at' => now()->subMinute(),
+            'finished_at' => now(),
+        ]);
+        $existingFamily = OccupationFamily::query()->create([
+            'canonical_slug' => 'existing-family',
+            'title_en' => 'Existing Family',
+            'title_zh' => '现有家族',
+        ]);
+        $existingOccupation = Occupation::query()->create([
+            'family_id' => $existingFamily->id,
+            'canonical_slug' => 'existing-occupation',
+            'entity_level' => 'market_child',
+            'truth_market' => 'US',
+            'display_market' => 'US',
+            'crosswalk_mode' => 'exact',
+            'canonical_title_en' => 'Existing Occupation',
+            'canonical_title_zh' => '现有职业',
+            'search_h1_zh' => '现有职业诊断',
+        ]);
+
+        $row = $this->normalizedRow('incoming-occupation', 'Incoming Occupation');
+        $row['occupation_uuid'] = $existingOccupation->id;
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('already belongs to slug [existing-occupation]');
+
+        app(CareerAuthorityMaterializer::class)->materializeImportRow($row, $run);
+    }
+
+    public function test_it_rejects_manifest_family_uuid_for_unrelated_family_slug(): void
+    {
+        $run = CareerImportRun::query()->create([
+            'dataset_name' => 'fixture',
+            'dataset_version' => 'v1',
+            'dataset_checksum' => 'checksum-b7-import-family-conflict',
+            'scope_mode' => 'first_wave_exact',
+            'dry_run' => false,
+            'status' => 'completed',
+            'started_at' => now()->subMinute(),
+            'finished_at' => now(),
+        ]);
+        $existingFamily = OccupationFamily::query()->create([
+            'canonical_slug' => 'existing-family',
+            'title_en' => 'Existing Family',
+            'title_zh' => '现有家族',
+        ]);
+
+        $row = $this->normalizedRow('incoming-family-occupation', 'Incoming Family Occupation');
+        $row['family_uuid'] = $existingFamily->id;
+        $row['family_slug'] = 'incoming-family';
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('already belongs to slug [existing-family]');
+
+        app(CareerAuthorityMaterializer::class)->materializeImportRow($row, $run);
+    }
+
+    public function test_it_allows_manifest_uuids_when_canonical_identity_matches(): void
+    {
+        $run = CareerImportRun::query()->create([
+            'dataset_name' => 'fixture',
+            'dataset_version' => 'v1',
+            'dataset_checksum' => 'checksum-b7-import-valid-identity',
+            'scope_mode' => 'first_wave_exact',
+            'dry_run' => false,
+            'status' => 'completed',
+            'started_at' => now()->subMinute(),
+            'finished_at' => now(),
+        ]);
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'same-family',
+            'title_en' => 'Same Family',
+            'title_zh' => '同一家族',
+        ]);
+        $occupation = Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => 'same-occupation',
+            'entity_level' => 'market_child',
+            'truth_market' => 'US',
+            'display_market' => 'US',
+            'crosswalk_mode' => 'exact',
+            'canonical_title_en' => 'Same Occupation',
+            'canonical_title_zh' => '同一职业',
+            'search_h1_zh' => '同一职业诊断',
+        ]);
+
+        $row = $this->normalizedRow('same-occupation', 'Updated Same Occupation', 'same-family', 'Updated Same Family');
+        $row['occupation_uuid'] = $occupation->id;
+        $row['family_uuid'] = $family->id;
+
+        app(CareerAuthorityMaterializer::class)->materializeImportRow($row, $run);
+
+        $this->assertSame('Updated Same Occupation', $occupation->fresh()->canonical_title_en);
+        $this->assertSame('Updated Same Family', $family->fresh()->title_en);
     }
 
     /**

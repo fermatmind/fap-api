@@ -45,6 +45,25 @@ final class CareerJobListApiTest extends TestCase
             ]);
     }
 
+    public function test_it_reads_only_the_latest_completed_compile_run_for_public_index(): void
+    {
+        $this->compileJobChain(
+            CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'older-career-index']),
+            40
+        );
+        $this->compileJobChain(
+            CareerFoundationFixture::seedHighTrustCompleteChain(['slug' => 'latest-career-index']),
+            5
+        );
+
+        $this->getJson('/api/v0.5/career/jobs')
+            ->assertOk()
+            ->assertJsonCount(1, 'items')
+            ->assertJsonPath('items.0.identity.canonical_slug', 'latest-career-index')
+            ->assertJsonMissingPath('items.1')
+            ->assertJsonMissing(['canonical_slug' => 'older-career-index']);
+    }
+
     public function test_it_exposes_directory_draft_jobs_without_internal_metadata(): void
     {
         $this->createDirectoryDraftOccupation([
@@ -101,7 +120,7 @@ final class CareerJobListApiTest extends TestCase
     /**
      * @param  array<string, mixed>  $chain
      */
-    private function compileJobChain(array $chain): void
+    private function compileJobChain(array $chain, int $compileFinishedMinutesAgo = 7): void
     {
         $importRun = CareerImportRun::query()->create([
             'dataset_name' => 'fixture',
@@ -110,8 +129,8 @@ final class CareerJobListApiTest extends TestCase
             'scope_mode' => 'first_wave_exact',
             'dry_run' => false,
             'status' => 'completed',
-            'started_at' => now()->subMinutes(10),
-            'finished_at' => now()->subMinutes(9),
+            'started_at' => now()->subMinutes($compileFinishedMinutesAgo + 3),
+            'finished_at' => now()->subMinutes($compileFinishedMinutesAgo + 2),
         ]);
         $compileRun = CareerCompileRun::query()->create([
             'import_run_id' => $importRun->id,
@@ -119,8 +138,8 @@ final class CareerJobListApiTest extends TestCase
             'scope_mode' => 'first_wave_exact',
             'dry_run' => false,
             'status' => 'completed',
-            'started_at' => now()->subMinutes(8),
-            'finished_at' => now()->subMinutes(7),
+            'started_at' => now()->subMinutes($compileFinishedMinutesAgo + 1),
+            'finished_at' => now()->subMinutes($compileFinishedMinutesAgo),
         ]);
 
         $chain['contextSnapshot']->update([

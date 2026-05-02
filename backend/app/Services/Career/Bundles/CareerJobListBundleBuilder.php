@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Services\Career\Bundles;
 
+use App\Domain\Career\Import\RunStatus;
 use App\Domain\Career\IndexStateValue;
 use App\DTO\Career\CareerJobListItemBundle;
+use App\Models\CareerCompileRun;
 use App\Models\CareerJob;
 use App\Models\Occupation;
 use App\Models\RecommendationSnapshot;
@@ -21,6 +23,12 @@ final class CareerJobListBundleBuilder
 
     private const PUBLIC_DIRECTORY_STUB_KIND = 'public_directory_stub';
 
+    private const MAX_PUBLIC_COMPILED_ROWS = 3200;
+
+    private const MAX_PUBLIC_DOCX_ROWS = 3200;
+
+    private const MAX_PUBLIC_DIRECTORY_DRAFT_ROWS = 3200;
+
     public function __construct(
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
     ) {}
@@ -30,7 +38,9 @@ final class CareerJobListBundleBuilder
      */
     public function build(bool $includeNonIndexable = false): array
     {
-        $snapshots = RecommendationSnapshot::query()
+        $compileRunId = $this->latestCompletedCompileRunId();
+
+        $snapshotQuery = RecommendationSnapshot::query()
             ->with([
                 'occupation.editorialPatches' => fn ($query) => $query->orderByDesc('updated_at')->orderByDesc('created_at'),
                 'truthMetric',
@@ -41,7 +51,6 @@ final class CareerJobListBundleBuilder
                 'contextSnapshot',
             ])
             ->whereNotNull('compiled_at')
-            ->whereNotNull('compile_run_id')
             ->whereHas('occupation', static function ($query): void {
                 $query->whereIn('crosswalk_mode', self::SAFE_CROSSWALK_MODES);
             })
@@ -53,7 +62,15 @@ final class CareerJobListBundleBuilder
             })
             ->orderByDesc('compiled_at')
             ->orderByDesc('created_at')
-            ->get();
+            ->limit(self::MAX_PUBLIC_COMPILED_ROWS);
+
+        if ($compileRunId !== null) {
+            $snapshotQuery->where('compile_run_id', $compileRunId);
+        } else {
+            $snapshotQuery->whereRaw('1 = 0');
+        }
+
+        $snapshots = $snapshotQuery->get();
 
         $selectedSnapshots = $snapshots
             ->groupBy('occupation_id')
@@ -136,6 +153,7 @@ final class CareerJobListBundleBuilder
             })
             ->orderBy('subtitle')
             ->orderBy('slug')
+            ->limit(self::MAX_PUBLIC_DOCX_ROWS)
             ->get()
             ->filter(fn (CareerJob $job): bool => ! isset($excluded[(string) $job->slug]) && $this->isDocxCareerJob($job))
             ->values()
@@ -155,6 +173,7 @@ final class CareerJobListBundleBuilder
             ->where('crosswalk_mode', self::DIRECTORY_DRAFT_CROSSWALK_MODE)
             ->orderBy('canonical_title_en')
             ->orderBy('canonical_slug')
+            ->limit(self::MAX_PUBLIC_DIRECTORY_DRAFT_ROWS)
             ->get()
             ->filter(static fn (Occupation $occupation): bool => ! isset($excluded[(string) $occupation->canonical_slug]))
             ->values()
@@ -464,5 +483,18 @@ final class CareerJobListBundleBuilder
     {
         return is_string(data_get($job->seoMeta?->jsonld_overrides_json, 'source_docx'))
             && data_get($job->market_demand_json, 'source_refs.0.url') !== null;
+    }
+
+    private function latestCompletedCompileRunId(): ?string
+    {
+        $id = CareerCompileRun::query()
+            ->where('status', RunStatus::COMPLETED)
+            ->where('dry_run', false)
+            ->orderByDesc('finished_at')
+            ->orderByDesc('started_at')
+            ->orderByDesc('created_at')
+            ->value('id');
+
+        return is_string($id) && $id !== '' ? $id : null;
     }
 }

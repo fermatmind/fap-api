@@ -26,6 +26,7 @@ use App\Services\Career\CareerRecommendationCompiler;
 use App\Services\Career\Transition\CareerTransitionPathWriter;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use RuntimeException;
 
 final class CareerAuthorityMaterializer
 {
@@ -52,13 +53,23 @@ final class CareerAuthorityMaterializer
                 'title_zh' => $normalized['family_title_zh'] ?? '',
             ];
             $family = null;
-            if (($normalized['family_uuid'] ?? null) !== null) {
-                $family = OccupationFamily::query()->find((string) $normalized['family_uuid']);
+            $familyUuid = $this->nullableString($normalized['family_uuid'] ?? null);
+            if ($familyUuid !== null) {
+                $family = OccupationFamily::query()->find($familyUuid);
+                if ($family instanceof OccupationFamily) {
+                    $this->assertExistingFamilyIdentityMatches($family, (string) $normalized['family_slug']);
+                }
             }
             if (! $family instanceof OccupationFamily) {
                 $family = OccupationFamily::query()
                     ->where('canonical_slug', (string) $normalized['family_slug'])
                     ->first();
+                if ($family instanceof OccupationFamily && $familyUuid !== null && $family->id !== $familyUuid) {
+                    throw new RuntimeException(sprintf(
+                        'Career authority import family UUID conflict for slug [%s].',
+                        (string) $normalized['family_slug']
+                    ));
+                }
             }
             if ($family instanceof OccupationFamily) {
                 $family->forceFill($familyAttributes)->save();
@@ -90,13 +101,23 @@ final class CareerAuthorityMaterializer
                 'trust_inheritance_scope' => $normalized['trust_inheritance_scope'],
             ];
             $occupation = null;
-            if (($normalized['occupation_uuid'] ?? null) !== null) {
-                $occupation = Occupation::query()->find((string) $normalized['occupation_uuid']);
+            $occupationUuid = $this->nullableString($normalized['occupation_uuid'] ?? null);
+            if ($occupationUuid !== null) {
+                $occupation = Occupation::query()->find($occupationUuid);
+                if ($occupation instanceof Occupation) {
+                    $this->assertExistingOccupationIdentityMatches($occupation, (string) $normalized['canonical_slug']);
+                }
             }
             if (! $occupation instanceof Occupation) {
                 $occupation = Occupation::query()
                     ->where('canonical_slug', (string) $normalized['canonical_slug'])
                     ->first();
+                if ($occupation instanceof Occupation && $occupationUuid !== null && $occupation->id !== $occupationUuid) {
+                    throw new RuntimeException(sprintf(
+                        'Career authority import occupation UUID conflict for slug [%s].',
+                        (string) $normalized['canonical_slug']
+                    ));
+                }
             }
             if ($occupation instanceof Occupation) {
                 $occupation->forceFill($occupationAttributes)->save();
@@ -649,5 +670,38 @@ final class CareerAuthorityMaterializer
         $encoded = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
         return hash('sha256', $encoded === false ? serialize($payload) : $encoded);
+    }
+
+    private function assertExistingFamilyIdentityMatches(OccupationFamily $family, string $incomingSlug): void
+    {
+        if ((string) $family->canonical_slug === $incomingSlug) {
+            return;
+        }
+
+        throw new RuntimeException(sprintf(
+            'Career authority import family UUID [%s] already belongs to slug [%s].',
+            (string) $family->id,
+            (string) $family->canonical_slug
+        ));
+    }
+
+    private function assertExistingOccupationIdentityMatches(Occupation $occupation, string $incomingSlug): void
+    {
+        if ((string) $occupation->canonical_slug === $incomingSlug) {
+            return;
+        }
+
+        throw new RuntimeException(sprintf(
+            'Career authority import occupation UUID [%s] already belongs to slug [%s].',
+            (string) $occupation->id,
+            (string) $occupation->canonical_slug
+        ));
+    }
+
+    private function nullableString(mixed $value): ?string
+    {
+        $string = trim((string) $value);
+
+        return $string === '' ? null : $string;
     }
 }
