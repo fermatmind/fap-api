@@ -661,6 +661,74 @@ final class BigFiveOpsReleasesEndpointTest extends TestCase
         $response->assertJsonPath('audits.0.meta.manifest_hash', str_repeat('a', 64));
     }
 
+    public function test_release_api_responses_omit_publisher_identifiers(): void
+    {
+        $owner = $this->createUserWithToken('ops-owner-release-privacy@big5.test');
+        $orgId = $this->createOrgForToken($owner['token']);
+
+        $releaseId = (string) Str::uuid();
+        $this->insertRelease([
+            'id' => $releaseId,
+            'action' => 'publish',
+            'region' => 'CN_MAINLAND',
+            'locale' => 'zh-CN',
+            'from_pack_id' => 'BIG5_OCEAN',
+            'to_pack_id' => 'BIG5_OCEAN',
+            'created_by' => 'ops_user:123@org:456',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $auditId = (int) DB::table('audit_logs')->insertGetId([
+            'org_id' => $orgId,
+            'actor_admin_id' => null,
+            'action' => 'big5_pack_publish',
+            'target_type' => 'content_pack_release',
+            'target_id' => $releaseId,
+            'meta_json' => json_encode([], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'ip' => '127.0.0.1',
+            'user_agent' => 'phpunit',
+            'request_id' => 'req_release_privacy',
+            'reason' => '',
+            'result' => 'success',
+            'created_at' => now(),
+        ]);
+
+        $headers = [
+            'Authorization' => 'Bearer '.$owner['token'],
+            'X-Org-Id' => (string) $orgId,
+        ];
+
+        $list = $this->withHeaders($headers)
+            ->getJson('/api/v0.3/orgs/'.$orgId.'/big5/releases?region=CN_MAINLAND&locale=zh-CN&limit=10');
+        $list->assertStatus(200);
+        $this->assertSame($releaseId, (string) $list->json('items.0.release_id'));
+        $this->assertArrayNotHasKey('created_by', (array) $list->json('items.0'));
+
+        $latest = $this->withHeaders($headers)
+            ->getJson('/api/v0.3/orgs/'.$orgId.'/big5/releases/latest?region=CN_MAINLAND&locale=zh-CN');
+        $latest->assertStatus(200);
+        $this->assertSame($releaseId, (string) $latest->json('item.release_id'));
+        $this->assertArrayNotHasKey('created_by', (array) $latest->json('item'));
+
+        $detail = $this->withHeaders($headers)
+            ->getJson('/api/v0.3/orgs/'.$orgId.'/big5/releases/'.$releaseId);
+        $detail->assertStatus(200);
+        $this->assertSame($releaseId, (string) $detail->json('item.release_id'));
+        $this->assertArrayNotHasKey('created_by', (array) $detail->json('item'));
+
+        $audit = $this->withHeaders($headers)
+            ->getJson('/api/v0.3/orgs/'.$orgId.'/big5/audits/'.$auditId);
+        $audit->assertStatus(200);
+        $this->assertSame($releaseId, (string) $audit->json('release.release_id'));
+        $this->assertArrayNotHasKey('created_by', (array) $audit->json('release'));
+
+        $this->assertSame(
+            'ops_user:123@org:456',
+            (string) DB::table('content_pack_releases')->where('id', $releaseId)->value('created_by')
+        );
+    }
+
     public function test_release_detail_returns_not_found_for_non_big5_release(): void
     {
         $owner = $this->createUserWithToken('ops-owner-nonbig5@big5.test');

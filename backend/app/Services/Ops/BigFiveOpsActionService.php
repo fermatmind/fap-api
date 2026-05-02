@@ -916,7 +916,6 @@ final class BigFiveOpsActionService
             'to_pack_id' => (string) ($row->to_pack_id ?? ''),
             'from_version_id' => (string) ($row->from_version_id ?? ''),
             'to_version_id' => (string) ($row->to_version_id ?? ''),
-            'created_by' => (string) ($row->created_by ?? ''),
             'created_at' => (string) ($row->created_at ?? ''),
             'updated_at' => (string) ($row->updated_at ?? ''),
             'evidence' => [
