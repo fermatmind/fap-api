@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-03T12:38:46.792915Z",
+  "updated_at": "2026-05-03T17:26:47.288314Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -4099,6 +4099,57 @@
           "at": "2026-05-03T12:38:46.792915Z",
           "status": "state_commit_sha_refreshed",
           "summary": "Recorded the pushed PR-D3a implementation commit SHA after draft PR creation."
+        }
+      ]
+    },
+    "PR-D5b": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_verified",
+      "branch": "codex/pr-d5b-selected-authority-crosswalks",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/CareerAlignSelectedAuthorityCrosswalks.php app/Console/Kernel.php tests/Feature/Console/CareerAlignSelectedAuthorityCrosswalksCommandTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/CareerAlignSelectedAuthorityCrosswalksCommandTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:align-selected-authority-crosswalks --file=/Users/rainie/Desktop/第八版_d5a_8_repaired.xlsx --slugs=actuaries,financial-analysts,high-school-teachers,market-research-analysts,architectural-and-engineering-managers,civil-engineers,biomedical-engineers,dentists --dry-run --json",
+            "status": "passed_local_db_unavailable_plan",
+            "details": "Local authority DB is unavailable; dry-run completed read-only from the D5a repaired workbook, validated all 8 selected slugs, reported would_create_occupation_count=8 and would_create_crosswalk_count=16, and wrote no DB rows."
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-03T17:25:12.779784Z",
+          "status": "in_progress",
+          "summary": "Initialized PR-D5b ledger entry for selected D5 authority occupation and crosswalk alignment command."
+        },
+        {
+          "at": "2026-05-03T17:26:47.288314Z",
+          "status": "local_verified",
+          "summary": "Implemented guarded selected authority alignment command; local formatter, tests, real workbook dry-run, and diff checks passed."
         }
       ]
     }
