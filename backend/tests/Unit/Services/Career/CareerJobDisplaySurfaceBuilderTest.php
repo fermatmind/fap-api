@@ -21,6 +21,14 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         'data-scientists' => ['soc' => '15-2051', 'onet' => '15-2051.00', 'title' => 'Data Scientists'],
         'registered-nurses' => ['soc' => '29-1141', 'onet' => '29-1141.00', 'title' => 'Registered Nurses'],
         'accountants-and-auditors' => ['soc' => '13-2011', 'onet' => '13-2011.00', 'title' => 'Accountants and Auditors'],
+        'actuaries' => ['soc' => '15-2011', 'onet' => '15-2011.00', 'title' => 'Actuaries'],
+        'financial-analysts' => ['soc' => '13-2051', 'onet' => '13-2051.00', 'title' => 'Financial Analysts'],
+        'high-school-teachers' => ['soc' => '25-2031', 'onet' => '25-2031.00', 'title' => 'High School Teachers'],
+        'market-research-analysts' => ['soc' => '13-1161', 'onet' => '13-1161.00', 'title' => 'Market Research Analysts'],
+        'architectural-and-engineering-managers' => ['soc' => '11-9041', 'onet' => '11-9041.00', 'title' => 'Architectural and Engineering Managers'],
+        'civil-engineers' => ['soc' => '17-2051', 'onet' => '17-2051.00', 'title' => 'Civil Engineers'],
+        'biomedical-engineers' => ['soc' => '17-2031', 'onet' => '17-2031.00', 'title' => 'Biomedical Engineers'],
+        'dentists' => ['soc' => '29-1021', 'onet' => '29-1021.00', 'title' => 'Dentists'],
     ];
 
     public function test_it_returns_surface_for_actors_ready_asset(): void
@@ -51,6 +59,31 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
             $this->assertSame($slug, $surface['subject']['canonical_slug']);
             $this->assertSame(self::PILOT_SLUGS[$slug]['soc'], $surface['subject']['soc_code']);
             $this->assertSame(self::PILOT_SLUGS[$slug]['onet'], $surface['subject']['onet_code']);
+        }
+    }
+
+    public function test_it_returns_surface_for_selected_d5_slugs(): void
+    {
+        foreach ([
+            'actuaries',
+            'financial-analysts',
+            'high-school-teachers',
+            'market-research-analysts',
+            'architectural-and-engineering-managers',
+            'civil-engineers',
+            'biomedical-engineers',
+            'dentists',
+        ] as $slug) {
+            $occupation = $this->createOccupation($slug);
+            $this->createDisplayAsset($occupation);
+
+            $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+
+            $this->assertIsArray($surface);
+            $this->assertSame($slug, $surface['subject']['canonical_slug']);
+            $this->assertSame(self::PILOT_SLUGS[$slug]['soc'], $surface['subject']['soc_code']);
+            $this->assertSame(self::PILOT_SLUGS[$slug]['onet'], $surface['subject']['onet_code']);
+            $this->assertSame('display.surface.v1', $surface['surface_version']);
         }
     }
 

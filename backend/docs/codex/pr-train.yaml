@@ -2162,6 +2162,43 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-D5d-api
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-d5d-api
+    base: main
+    depends_on: ["PR-D3b", "PR-D5c1"]
+    mode: execute
+    scope: >
+      Expand the backend CareerJobDisplaySurfaceBuilder selected pilot
+      allowlist so D5 careers with imported ready display assets return
+      display_surface_v1 from the existing /api/v0.5/career/jobs/{slug}
+      authority endpoint. Cover actuaries, financial-analysts,
+      high-school-teachers, market-research-analysts,
+      architectural-and-engineering-managers, civil-engineers,
+      biomedical-engineers, and dentists while preserving Actors and
+      second-pilot behavior, non-selected slug blocking, ready status and
+      asset_type gates, forbidden field stripping, and release gate isolation.
+      Do not change routes, controllers, API resources, frontend, sitemap,
+      llms, release gates, display asset import commands, workbook assets,
+      production data, CN mapping, payment/order, tracking, or bulk rollout.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php"
+      - "php artisan route:list | grep -E 'career/jobs|career-jobs|career|seo'"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-B84
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
