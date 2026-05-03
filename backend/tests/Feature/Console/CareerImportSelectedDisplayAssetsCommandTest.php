@@ -83,6 +83,35 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
     }
 
     #[Test]
+    public function d5_selected_slugs_dry_run_generates_payloads_without_writing_database_rows(): void
+    {
+        foreach ($this->d5Rows() as $row) {
+            $this->createAuthorityOccupation($row['Slug'], $row['SOC_Code'], $row['O_NET_Code']);
+        }
+        $workbook = $this->writeWorkbook($this->d5Rows());
+        $before = $this->tableCounts();
+
+        [$exitCode, $report] = $this->runImport($workbook, implode(',', array_column($this->d5Rows(), 'Slug')), [
+            '--dry-run' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame($before, $this->tableCounts());
+        $this->assertSame('dry_run', $report['mode']);
+        $this->assertSame(8, $report['validated_count']);
+        $this->assertSame(8, $report['would_write_count']);
+        $this->assertFalse($report['did_write']);
+
+        foreach ($report['items'] as $item) {
+            $this->assertTrue($item['would_write']);
+            $this->assertSame(24, $item['payload_summary']['component_order_count']);
+            $this->assertTrue($item['payload_summary']['has_zh_page']);
+            $this->assertTrue($item['payload_summary']['has_en_page']);
+            $this->assertSame([], $item['payload_summary']['public_payload_forbidden_keys_found']);
+        }
+    }
+
+    #[Test]
     public function force_writes_exactly_three_display_asset_rows(): void
     {
         foreach ($this->selectedRows() as $row) {
@@ -114,6 +143,36 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
                 'status' => 'ready_for_pilot',
             ]);
         }
+    }
+
+    #[Test]
+    public function force_writes_d5_display_assets_only_and_is_idempotent(): void
+    {
+        foreach ($this->d5Rows() as $row) {
+            $this->createAuthorityOccupation($row['Slug'], $row['SOC_Code'], $row['O_NET_Code']);
+        }
+        $workbook = $this->writeWorkbook($this->d5Rows());
+        $slugs = implode(',', array_column($this->d5Rows(), 'Slug'));
+
+        [$exitCode, $report] = $this->runImport($workbook, $slugs, ['--force' => true]);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame('force', $report['mode']);
+        $this->assertTrue($report['did_write']);
+        $this->assertSame(8, $report['created_count']);
+        $this->assertSame(0, $report['updated_count']);
+        $this->assertSame(8, Occupation::query()->count());
+        $this->assertSame(16, OccupationCrosswalk::query()->count());
+        $this->assertSame(8, CareerJobDisplayAsset::query()->count());
+
+        [$exitCode, $report] = $this->runImport($workbook, $slugs, ['--force' => true]);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame(0, $report['created_count']);
+        $this->assertSame(8, $report['updated_count']);
+        $this->assertSame(8, Occupation::query()->count());
+        $this->assertSame(16, OccupationCrosswalk::query()->count());
+        $this->assertSame(8, CareerJobDisplayAsset::query()->count());
     }
 
     #[Test]
@@ -212,6 +271,35 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
         $errors = implode(' ', $report['errors']);
         $this->assertStringContainsString('EN_Occupation_Schema_JSON must not include Product schema.', $errors);
         $this->assertStringContainsString('Forbidden public payload keys found', $errors);
+    }
+
+    #[Test]
+    public function biomedical_engineers_product_substring_blocker_is_rejected_if_reintroduced(): void
+    {
+        $this->createAuthorityOccupation('biomedical-engineers', '17-2031', '17-2031.00');
+        $row = $this->row(
+            'biomedical-engineers',
+            title: 'Bioengineers and biomedical engineers',
+            cnTitle: '生物工程师与生物医学工程师',
+            soc: '17-2031',
+            onet: '17-2031.00',
+        );
+        $row['EN_Occupation_Schema_JSON'] = $this->encodeJson([
+            '@context' => 'https://schema.org',
+            '@type' => 'Occupation',
+            'name' => 'Bioengineers and biomedical engineers',
+            'occupationalCategory' => '17-2031',
+            'description' => 'Design systems and products for healthcare settings.',
+        ]);
+        $workbook = $this->writeWorkbook([$row]);
+
+        [$exitCode, $report] = $this->runImport($workbook, 'biomedical-engineers');
+
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString(
+            'EN_Occupation_Schema_JSON must not include Product schema.',
+            implode(' ', $report['errors']),
+        );
     }
 
     #[Test]
@@ -332,6 +420,23 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
             $this->row('data-scientists'),
             $this->row('registered-nurses', title: 'Registered Nurses', cnTitle: '注册护士', soc: '29-1141', onet: '29-1141.00'),
             $this->row('accountants-and-auditors', title: 'Accountants and Auditors', cnTitle: '会计与审计人员', soc: '13-2011', onet: '13-2011.00'),
+        ];
+    }
+
+    /**
+     * @return list<array<string, string>>
+     */
+    private function d5Rows(): array
+    {
+        return [
+            $this->row('actuaries', title: 'Actuaries', cnTitle: '精算师', soc: '15-2011', onet: '15-2011.00'),
+            $this->row('financial-analysts', title: 'Financial and Investment Analysts', cnTitle: '金融与投资分析师', soc: '13-2051', onet: '13-2051.00'),
+            $this->row('high-school-teachers', title: 'Secondary School Teachers, Except Special and Career/Technical Education', cnTitle: '高中教师（不含特殊与职业技术教育）', soc: '25-2031', onet: '25-2031.00'),
+            $this->row('market-research-analysts', title: 'Market Research Analysts and Marketing Specialists', cnTitle: '市场研究分析师与营销专员', soc: '13-1161', onet: '13-1161.00'),
+            $this->row('architectural-and-engineering-managers', title: 'Architectural and Engineering Managers', cnTitle: '建筑与工程经理', soc: '11-9041', onet: '11-9041.00'),
+            $this->row('civil-engineers', title: 'Civil Engineers', cnTitle: '土木工程师', soc: '17-2051', onet: '17-2051.00'),
+            $this->row('biomedical-engineers', title: 'Bioengineers and Biomedical Engineers', cnTitle: '生物工程师与生物医学工程师', soc: '17-2031', onet: '17-2031.00'),
+            $this->row('dentists', title: 'Dentists, General', cnTitle: '普通牙医', soc: '29-1021', onet: '29-1021.00'),
         ];
     }
 

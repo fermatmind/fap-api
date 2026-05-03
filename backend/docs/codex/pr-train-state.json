@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-03T17:39:18.713871Z",
+  "updated_at": "2026-05-03T18:40:10Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -4105,9 +4105,9 @@
     "PR-D5b": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "draft_open",
+      "status": "merged",
       "branch": "codex/pr-d5b-selected-authority-crosswalks",
-      "commit_sha": "fc27188d169e280bc09dc6c8e2fbbd571e161b33",
+      "commit_sha": "c625280c65c4e3a6d40ddcd651b72410c6647712",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1113",
       "checks": {
         "local": [
@@ -4137,9 +4137,9 @@
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-03T17:44:30Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-03T17:25:12.779784Z",
@@ -4155,6 +4155,90 @@
           "at": "2026-05-03T17:39:18.713871Z",
           "status": "draft_open",
           "summary": "Opened draft PR #1113 for PR-D5b after local validation passed."
+        },
+        {
+          "at": "2026-05-03T18:30:02Z",
+          "status": "reconciled_merged",
+          "summary": "Reconciled PR-D5b ledger: GitHub PR #1113 is merged, origin/main contains merge commit c625280c65c4e3a6d40ddcd651b72410c6647712, and the task branch is cleaned up locally/remotely."
+        }
+      ]
+    },
+    "PR-D5c1": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "draft_open_workbook_blocked",
+      "branch": "codex/pr-d5c1-display-import-allowlist",
+      "commit_sha": "a08849432caf0c8f60903aa1014d37cbb67b5636",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1114",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/CareerImportSelectedDisplayAssets.php app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php app/Console/Kernel.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:import-selected-display-assets --file=/Users/rainie/Desktop/第九版.xlsx --slugs=actuaries,financial-analysts,high-school-teachers,market-research-analysts,architectural-and-engineering-managers,civil-engineers,biomedical-engineers,dentists --dry-run --json",
+            "status": "failed_workbook_contract_outside_scope",
+            "details": "Draft PR exception: unsupported slug error is gone; all 8 D5 slugs were requested, validated, and generated payload summaries, but 第九版.xlsx still fails workbook contract validation for CTA/source labels, CN job-posting sample terms, and biomedical Product substring. This PR is not mergeable until the workbook source passes or the manifest acceptance is updated."
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": [
+          {
+            "name": "hygiene",
+            "status": "success"
+          },
+          {
+            "name": "verify-mbti-legacy",
+            "status": "pending"
+          },
+          {
+            "name": "verify-mbti-v2",
+            "status": "pending"
+          }
+        ]
+      },
+      "failure_reason": "Draft PR opened under repository draft exception. Scoped code checks passed and the allowlist blocker is fixed, but /Users/rainie/Desktop/第九版.xlsx dry-run fails on workbook contract blockers outside PR-D5c1 scope; PR is not mergeable until those blockers are repaired and checks settle.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-03T18:30:02Z",
+          "status": "in_progress",
+          "summary": "Initialized PR-D5c1 ledger entry for expanding selected display asset import allowlist to D5 slugs."
+        },
+        {
+          "at": "2026-05-03T18:33:57Z",
+          "status": "failed_local_check",
+          "summary": "Updated D5c1 validation source to 第九版.xlsx. Scoped code checks passed and unsupported slug errors are gone, but real workbook dry-run fails due workbook contract blockers outside allowlist scope."
+        },
+        {
+          "at": "2026-05-03T18:36:47Z",
+          "status": "draft_exception_ready",
+          "summary": "Review pass: scope limited to allowlist/tests/train metadata. Open draft PR under documented exception because 第九版 workbook dry-run fails only on data contract blockers outside this PR."
+        },
+        {
+          "at": "2026-05-03T18:38:31Z",
+          "status": "draft_open_workbook_blocked",
+          "summary": "Opened draft PR #1114. GitHub checks are pending; mergeStateStatus is UNSTABLE because the PR is draft/pending and the real 第九版 workbook dry-run remains blocked by workbook contract data."
+        },
+        {
+          "at": "2026-05-03T18:40:10Z",
+          "status": "state_commit_sha_refreshed",
+          "summary": "Refreshed PR-D5c1 ledger with amended commit SHA after draft PR metadata update; GitHub checks remain pending and PR remains draft/workbook-blocked."
         }
       ]
     }
