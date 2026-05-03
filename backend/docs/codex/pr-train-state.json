@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-03T00:00:00.000Z",
+  "updated_at": "2026-05-03T11:38:09.201475Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -3982,6 +3982,45 @@
       ],
       "commit_sha": "0f7bcb45a028709c9b542248885f0a72e4c4c850",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/993"
+    },
+    "PR-D2b": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "committed",
+      "branch": "codex/pr-d2b-selected-onet-crosswalks",
+      "commit_sha": "cd2a17201ba631d59d5eb07f8ab22b046446c76b",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/CareerAlignSelectedOnetCrosswalks.php app/Console/Kernel.php tests/Feature/Console/CareerAlignSelectedOnetCrosswalksCommandTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/CareerAlignSelectedOnetCrosswalksCommandTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:align-selected-onet-crosswalks --file=/Users/rainie/Desktop/fermat_career_assets_v4_2_second_pilot_repaired.xlsx --slugs=data-scientists,registered-nurses,accountants-and-auditors --dry-run --json",
+            "status": "passed_public_api_fallback",
+            "details": "Local MySQL authority DB is unavailable; dry-run completed read-only using public API fallback, validated us_soc and missing onet for all three selected slugs, and did not write DB rows."
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
     }
   },
   "prs": {
