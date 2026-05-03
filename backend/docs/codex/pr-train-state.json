@@ -1,11 +1,50 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-04-24T13:05:00.000Z",
+  "updated_at": "2026-05-03T00:00:00.000Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
   "items": {
+    "PR-A2d": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "draft_open_env_blocked",
+      "branch": "codex/pr-a2d-actors-authority-alignment",
+      "commit_sha": "69d62884c39531ed09b8bf1754783ecd391ad2ed",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1106",
+      "checks": {
+        "local": [
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/CareerAlignActorsAuthorityOccupation.php app/Console/Kernel.php tests/Feature/Console/CareerAlignActorsAuthorityOccupationCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/CareerAlignActorsAuthorityOccupationCommandTest.php tests/Feature/Console/CareerImportActorsDisplayAssetCommandTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:align-actors-authority-occupation --file=/Users/rainie/Desktop/actors_v4_2_pilot_master.json --dry-run --json",
+            "status": "failed_env_db_connection",
+            "reason": "Command exited with a controlled database validation failure because the current local DB connection cannot read authority tables."
+          },
+          {
+            "command": "git diff --check",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "Real Actors JSON dry-run is blocked by local DB connectivity outside this PR scope; scoped formatter and test suite passed. Draft PR only, not mergeable until target DB dry-run passes.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false
+    },
     "PR-BIG5-REPORT-ENGINE-N-SLICE": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",

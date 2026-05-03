@@ -6,6 +6,37 @@ require_clean_worktree: true
 execution_mode: local_clone_preferred
 
 prs:
+  - id: PR-A2d
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-a2d-actors-authority-alignment
+    base: main
+    depends_on: []
+    mode: execute
+    scope: >
+      Actors authority occupation/crosswalk alignment backend-only. Add a
+      guarded dry-run-by-default command that validates the Actors v4.2 pilot
+      asset and aligns exactly one authority Occupation plus SOC and O*NET
+      crosswalks for actors, without changing routes, controllers, API
+      resources, migrations, fap-web, sitemap, llms, first-wave manifests,
+      directory draft importers, display asset force import, or bulk career
+      imports.
+    checks:
+      - "vendor/bin/pint --test app/Console/Commands/CareerAlignActorsAuthorityOccupation.php app/Console/Kernel.php tests/Feature/Console/CareerAlignActorsAuthorityOccupationCommandTest.php"
+      - "php artisan test tests/Feature/Console/CareerAlignActorsAuthorityOccupationCommandTest.php tests/Feature/Console/CareerImportActorsDisplayAssetCommandTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php"
+      - "php artisan career:align-actors-authority-occupation --file=/Users/rainie/Desktop/actors_v4_2_pilot_master.json --dry-run --json"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-BIG5-REPORT-ENGINE-N-SLICE
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
