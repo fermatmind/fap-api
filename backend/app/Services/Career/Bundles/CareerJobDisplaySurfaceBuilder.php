@@ -17,6 +17,14 @@ final class CareerJobDisplaySurfaceBuilder
         'data-scientists',
         'registered-nurses',
         'accountants-and-auditors',
+        'actuaries',
+        'financial-analysts',
+        'high-school-teachers',
+        'market-research-analysts',
+        'architectural-and-engineering-managers',
+        'civil-engineers',
+        'biomedical-engineers',
+        'dentists',
     ];
 
     private const READY_STATUS = 'ready_for_pilot';

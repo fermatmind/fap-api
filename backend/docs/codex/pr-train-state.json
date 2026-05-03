@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-03T18:41:05Z",
+  "updated_at": "2026-05-04T03:38:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -4166,9 +4166,9 @@
     "PR-D5c1": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "draft_open_workbook_blocked",
+      "status": "merged",
       "branch": "codex/pr-d5c1-display-import-allowlist",
-      "commit_sha": "38867cd1605fdcf81e3f06a56c0a5e8ced0fa7ac",
+      "commit_sha": "6222c7b08e85ec2e8ce34d3ba85ddcc57c5e97a1",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1114",
       "checks": {
         "local": [
@@ -4209,11 +4209,11 @@
           }
         ]
       },
-      "failure_reason": "Draft PR opened under repository draft exception. Scoped code checks passed and the allowlist blocker is fixed, but /Users/rainie/Desktop/第九版.xlsx dry-run fails on workbook contract blockers outside PR-D5c1 scope; PR is not mergeable until those blockers are repaired and checks settle.",
+      "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-03T18:41:58Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-03T18:30:02Z",
@@ -4244,6 +4244,66 @@
           "at": "2026-05-03T18:41:05Z",
           "status": "state_commit_sha_refreshed",
           "summary": "Recorded current PR-D5c1 branch head after force-push."
+        },
+        {
+          "at": "2026-05-04T03:30:00Z",
+          "status": "reconciled_merged",
+          "summary": "Reconciled PR-D5c1 ledger: GitHub PR #1114 is merged, origin/main contains merge commit 6222c7b08e85ec2e8ce34d3ba85ddcc57c5e97a1, and the task branch is cleaned up locally/remotely."
+        }
+      ]
+    },
+    "PR-D5d-api": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "draft_open",
+      "branch": "codex/pr-d5d-api",
+      "commit_sha": "8a14a6b0b4e645a22a1656b9f458a9736c14b81d",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1115",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list | grep -E 'career/jobs|career-jobs|career|seo'",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-04T03:30:00Z",
+          "status": "in_progress",
+          "summary": "Initialized PR-D5d-api ledger entry for expanding backend display surface allowlist to D5 careers after D5c target display asset import completed."
+        },
+        {
+          "at": "2026-05-04T03:35:00Z",
+          "status": "local_verified",
+          "summary": "Expanded backend display surface allowlist to D5 slugs; scoped formatter, tests, route list, and diff checks passed."
+        },
+        {
+          "at": "2026-05-04T03:38:00Z",
+          "status": "draft_open",
+          "summary": "Opened draft PR #1115 for PR-D5d-api after scoped local checks passed."
         }
       ]
     }

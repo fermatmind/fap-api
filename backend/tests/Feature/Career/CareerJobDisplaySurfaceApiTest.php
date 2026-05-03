@@ -23,6 +23,14 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         'data-scientists' => ['soc' => '15-2051', 'onet' => '15-2051.00', 'title' => 'Data Scientists'],
         'registered-nurses' => ['soc' => '29-1141', 'onet' => '29-1141.00', 'title' => 'Registered Nurses'],
         'accountants-and-auditors' => ['soc' => '13-2011', 'onet' => '13-2011.00', 'title' => 'Accountants and Auditors'],
+        'actuaries' => ['soc' => '15-2011', 'onet' => '15-2011.00', 'title' => 'Actuaries'],
+        'financial-analysts' => ['soc' => '13-2051', 'onet' => '13-2051.00', 'title' => 'Financial Analysts'],
+        'high-school-teachers' => ['soc' => '25-2031', 'onet' => '25-2031.00', 'title' => 'High School Teachers'],
+        'market-research-analysts' => ['soc' => '13-1161', 'onet' => '13-1161.00', 'title' => 'Market Research Analysts'],
+        'architectural-and-engineering-managers' => ['soc' => '11-9041', 'onet' => '11-9041.00', 'title' => 'Architectural and Engineering Managers'],
+        'civil-engineers' => ['soc' => '17-2051', 'onet' => '17-2051.00', 'title' => 'Civil Engineers'],
+        'biomedical-engineers' => ['soc' => '17-2031', 'onet' => '17-2031.00', 'title' => 'Biomedical Engineers'],
+        'dentists' => ['soc' => '29-1021', 'onet' => '29-1021.00', 'title' => 'Dentists'],
     ];
 
     public function test_it_adds_display_surface_for_eligible_actors_asset(): void
@@ -69,6 +77,43 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
                 ->assertJsonPath('display_surface_v1.subject.soc_code', self::PILOT_SLUGS[$slug]['soc'])
                 ->assertJsonPath('display_surface_v1.subject.onet_code', self::PILOT_SLUGS[$slug]['onet'])
                 ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
+
+            $encoded = json_encode($response->json('display_surface_v1'), JSON_THROW_ON_ERROR);
+            $this->assertStringNotContainsString('release_gate', $encoded);
+            $this->assertStringNotContainsString('qa_risk', $encoded);
+            $this->assertStringNotContainsString('admin_review_state', $encoded);
+            $this->assertStringNotContainsString('tracking_json', $encoded);
+            $this->assertStringNotContainsString('raw_ai_exposure_score', $encoded);
+        }
+    }
+
+    public function test_it_adds_display_surface_for_selected_d5_assets(): void
+    {
+        foreach ([
+            'actuaries',
+            'financial-analysts',
+            'high-school-teachers',
+            'market-research-analysts',
+            'architectural-and-engineering-managers',
+            'civil-engineers',
+            'biomedical-engineers',
+            'dentists',
+        ] as $slug) {
+            $occupation = $this->seedCompiledOccupation($slug);
+            $this->addCrosswalks($occupation, $slug);
+            $this->createDisplayAsset($occupation);
+
+            $response = $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
+                ->assertOk()
+                ->assertJsonPath('identity.canonical_slug', $slug)
+                ->assertJsonPath('display_surface_v1.surface_version', 'display.surface.v1')
+                ->assertJsonPath('display_surface_v1.template_version', 'v4.2')
+                ->assertJsonPath('display_surface_v1.subject.canonical_slug', $slug)
+                ->assertJsonPath('display_surface_v1.subject.soc_code', self::PILOT_SLUGS[$slug]['soc'])
+                ->assertJsonPath('display_surface_v1.subject.onet_code', self::PILOT_SLUGS[$slug]['onet'])
+                ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
+
+            $this->assertContains('fermat_decision_card', $response->json('display_surface_v1.component_order'));
 
             $encoded = json_encode($response->json('display_surface_v1'), JSON_THROW_ON_ERROR);
             $this->assertStringNotContainsString('release_gate', $encoded);
