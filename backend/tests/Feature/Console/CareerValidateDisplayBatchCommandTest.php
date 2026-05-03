@@ -215,8 +215,10 @@ final class CareerValidateDisplayBatchCommandTest extends TestCase
         $this->assertSame('no_go', $report['decision']);
         $item = $report['items'][0];
         $this->assertSame('public_api_fallback', $item['authority_gate']['authority_source']);
-        $this->assertSame('docx_fallback', $item['authority_gate']['authority_state']);
-        $this->assertSame('blocked_docx_fallback', $item['recommended_status']);
+        $this->assertSame('authority_unavailable', $item['authority_gate']['authority_state']);
+        $this->assertSame('docx_fallback', $item['authority_gate']['api_state']);
+        $this->assertSame(0, $item['scores']['authority_score']);
+        $this->assertSame('blocked_authority_unavailable', $item['recommended_status']);
         $this->assertNotSame('ready_for_second_pilot_validation', $item['recommended_status']);
         $this->assertFalse($item['release_gate']['ready_for_sitemap']);
         $this->assertFalse($item['release_gate']['ready_for_llms']);

@@ -587,13 +587,14 @@ final class CareerValidateDisplayBatch extends Command
 
         if ($response->status() === 404) {
             return [
-                'authority_state' => 'API_404',
+                'authority_state' => 'authority_unavailable',
                 'authority_source' => 'public_api_fallback',
                 'occupation_exists' => false,
                 'SOC_crosswalk_exists' => false,
                 'O_NET_crosswalk_exists' => false,
                 'display_surface_ready' => false,
-                'public_API_state' => 'API_404',
+                'public_API_state' => 'authority_unavailable',
+                'api_state' => 'API_404',
                 'authority_warning' => 'Local DB unavailable; public API fallback returned 404.',
             ];
         }
@@ -629,13 +630,18 @@ final class CareerValidateDisplayBatch extends Command
         };
 
         return [
-            'authority_state' => $state,
+            'authority_state' => 'authority_unavailable',
             'authority_source' => 'public_api_fallback',
-            'occupation_exists' => $occupationExists,
-            'SOC_crosswalk_exists' => $socCrosswalkExists,
-            'O_NET_crosswalk_exists' => $onetCrosswalkExists,
-            'display_surface_ready' => $displaySurfaceReady,
-            'public_API_state' => $state,
+            'occupation_exists' => false,
+            'SOC_crosswalk_exists' => false,
+            'O_NET_crosswalk_exists' => false,
+            'display_surface_ready' => false,
+            'public_API_state' => 'authority_unavailable',
+            'api_state' => $state,
+            'api_occupation_exists' => $occupationExists,
+            'api_SOC_crosswalk_exists' => $socCrosswalkExists,
+            'api_O_NET_crosswalk_exists' => $onetCrosswalkExists,
+            'api_display_surface_ready' => $displaySurfaceReady,
             'authority_warning' => 'Local DB unavailable; public API fallback used for read-only reporting only.',
         ];
     }
