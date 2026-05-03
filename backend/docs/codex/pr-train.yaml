@@ -1989,19 +1989,28 @@ prs:
       run_local_cleanup: true
 
   - id: PR-D1
-    repo: fap-web
-    repo_path: /Users/rainie/Desktop/GitHub/fap-web
-    branch: codex/pr-d1-career-batch-production-sop
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-d1-career-display-batch-validator
     base: main
     depends_on: []
     mode: execute
     scope: >
-      Codex batch production SOP + review checklist + gold diff tooling.
-      Create the documentation/tooling baseline for 342 occupations batch production:
-      batch manifest template, review checklist, gold diff rules, and the hard rule
-      that Codex may draft but Laravel is the source of truth.
+      Career Display Batch Validator backend-only. Add a read-only
+      career:validate-display-batch Artisan command that reads a v4.2 career
+      asset workbook, requires an explicit --slugs allowlist, validates only
+      those rows across content, JSON, authority, schema, CTA, source, link,
+      evidence, scoring, and release gates, and does not write DB rows, import
+      display assets, create occupations/crosswalks, change release state,
+      touch fap-web, sitemap, llms, payment/order, tracking, or bulk-import
+      all 2786 workbook rows.
     checks:
-      - "pnpm verify:pr"
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Console/Commands/CareerValidateDisplayBatch.php app/Console/Kernel.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php"
+      - "php artisan career:validate-display-batch --file=/Users/rainie/Desktop/fermat_career_assets_v4_2_all_remaining_completed.xlsx --slugs=data-scientists,registered-nurses,accountants-and-auditors --json"
+      - "git diff --check"
+      - "git diff --cached --check"
     stop_if_changed_files_outside_scope: true
     resume_policy: manual_only
     merge_policy:
