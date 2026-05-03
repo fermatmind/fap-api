@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-03T17:26:47.288314Z",
+  "updated_at": "2026-05-03T17:39:18.713871Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -4105,10 +4105,10 @@
     "PR-D5b": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "local_verified",
+      "status": "draft_open",
       "branch": "codex/pr-d5b-selected-authority-crosswalks",
-      "commit_sha": "",
-      "pr_url": "",
+      "commit_sha": "fc27188d169e280bc09dc6c8e2fbbd571e161b33",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1113",
       "checks": {
         "local": [
           {
@@ -4150,6 +4150,11 @@
           "at": "2026-05-03T17:26:47.288314Z",
           "status": "local_verified",
           "summary": "Implemented guarded selected authority alignment command; local formatter, tests, real workbook dry-run, and diff checks passed."
+        },
+        {
+          "at": "2026-05-03T17:39:18.713871Z",
+          "status": "draft_open",
+          "summary": "Opened draft PR #1113 for PR-D5b after local validation passed."
         }
       ]
     }
