@@ -1098,14 +1098,39 @@
       "local_cleanup_executed": false
     },
     "PR-D1": {
-      "repo": "fap-web",
-      "repo_path": "/Users/rainie/Desktop/GitHub/fap-web",
-      "status": "pending",
-      "branch": "codex/pr-d1-career-batch-production-sop",
-      "commit_sha": "1780b5d4",
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_verified",
+      "branch": "codex/pr-d1-career-display-batch-validator",
+      "commit_sha": "",
       "pr_url": "",
       "checks": {
-        "local": [],
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/CareerValidateDisplayBatch.php app/Console/Kernel.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:validate-display-batch --file=/Users/rainie/Desktop/fermat_career_assets_v4_2_all_remaining_completed.xlsx --slugs=data-scientists,registered-nurses,accountants-and-auditors --json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list | rg 'career/jobs|career-jobs|career|seo|occupation|import'",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
         "github": []
       },
       "failure_reason": "",
@@ -3500,7 +3525,7 @@
             "result": "25 modifiers, 12 synergies, 30 facets, 23 precision rules, 40 action rules, 8 coverage profiles"
           },
           {
-            "command": "rg -n \"Profile Summary|Domain Deep Dive|Norms Comparison|Methodology and Access|A compact overview|Focused read|Near-term actions|assertiveness|\u4f60\u5929\u751f\u6ce8\u5b9a|\u4f60\u6c38\u8fdc\u90fd\u4f1a|\u4f60\u53ea\u80fd\u8fd9\u6837\u6d3b|\u4f60\u592a\u73bb\u7483\u5fc3|\u4f60\u6709\u95ee\u9898|\u4f60\u4e0d\u6b63\u5e38\" backend/content_assets/big5/v1/expanded || true",
+            "command": "rg -n \"Profile Summary|Domain Deep Dive|Norms Comparison|Methodology and Access|A compact overview|Focused read|Near-term actions|assertiveness|你天生注定|你永远都会|你只能这样活|你太玻璃心|你有问题|你不正常\" backend/content_assets/big5/v1/expanded || true",
             "status": "passed",
             "result": "no matches in expanded assets"
           },

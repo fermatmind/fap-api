@@ -28,6 +28,7 @@ use App\Console\Commands\CareerImportOccupationDirectoryDryRun;
 use App\Console\Commands\CareerRunAssetBatch;
 use App\Console\Commands\CareerSyncOccupationDirectoryDisplay;
 use App\Console\Commands\CareerValidateAssetImport;
+use App\Console\Commands\CareerValidateDisplayBatch;
 use App\Console\Commands\CareerValidateOccupationDirectoryReviewQueues;
 use App\Console\Commands\CareerWarmPublicAuthorityCache;
 use App\Console\Commands\CiScaleImpact;
@@ -163,6 +164,7 @@ class Kernel extends ConsoleKernel
         CareerImportOccupationDirectoryDrafts::class,
         CareerImportOccupationDirectoryDryRun::class,
         CareerValidateAssetImport::class,
+        CareerValidateDisplayBatch::class,
         CareerCompileAuthorityWave::class,
         CareerCompileRecommendationSubjects::class,
         CareerCrosswalkOps::class,
