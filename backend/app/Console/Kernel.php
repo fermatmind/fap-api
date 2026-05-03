@@ -8,6 +8,7 @@ use App\Console\Commands\ArchiveColdData;
 use App\Console\Commands\Big5AttemptPurge;
 use App\Console\Commands\Big5PsychometricsReport;
 use App\Console\Commands\Big5TelemetrySummary;
+use App\Console\Commands\CareerAlignActorsAuthorityOccupation;
 use App\Console\Commands\CareerApplyOccupationDirectoryReviewDecisions;
 use App\Console\Commands\CareerCompileAuthorityWave;
 use App\Console\Commands\CareerCompileRecommendationSubjects;
@@ -156,6 +157,7 @@ class Kernel extends ConsoleKernel
         CommerceRepairPaidOrders::class,
         CommerceRepairPostCommitFailed::class,
         CareerApplyOccupationDirectoryReviewDecisions::class,
+        CareerAlignActorsAuthorityOccupation::class,
         CareerImportActorsDisplayAsset::class,
         CareerImportAuthorityWave::class,
         CareerImportOccupationDirectoryDrafts::class,
