@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-04T03:35:00Z",
+  "updated_at": "2026-05-04T03:38:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -4255,10 +4255,10 @@
     "PR-D5d-api": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "in_progress",
+      "status": "draft_open",
       "branch": "codex/pr-d5d-api",
-      "commit_sha": "1dcc2ca0a30ecddfec87a3ce8a500aa24b74799d",
-      "pr_url": "",
+      "commit_sha": "8a14a6b0b4e645a22a1656b9f458a9736c14b81d",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1115",
       "checks": {
         "local": [
           {
@@ -4299,6 +4299,11 @@
           "at": "2026-05-04T03:35:00Z",
           "status": "local_verified",
           "summary": "Expanded backend display surface allowlist to D5 slugs; scoped formatter, tests, route list, and diff checks passed."
+        },
+        {
+          "at": "2026-05-04T03:38:00Z",
+          "status": "draft_open",
+          "summary": "Opened draft PR #1115 for PR-D5d-api after scoped local checks passed."
         }
       ]
     }
