@@ -12,7 +12,12 @@ use Illuminate\Support\Str;
 
 final class CareerJobDisplaySurfaceBuilder
 {
-    private const ALLOWED_SLUG = 'actors';
+    private const PILOT_SLUGS = [
+        'actors',
+        'data-scientists',
+        'registered-nurses',
+        'accountants-and-auditors',
+    ];
 
     private const READY_STATUS = 'ready_for_pilot';
 
@@ -33,12 +38,12 @@ final class CareerJobDisplaySurfaceBuilder
     {
         $identity = $bundle->identity;
         $slug = strtolower((string) ($identity['canonical_slug'] ?? ''));
-        if ($slug !== self::ALLOWED_SLUG) {
+        if (! $this->isPilotSlug($slug)) {
             return null;
         }
 
         $occupationUuid = (string) ($identity['occupation_uuid'] ?? '');
-        $query = Occupation::query()->where('canonical_slug', self::ALLOWED_SLUG);
+        $query = Occupation::query()->where('canonical_slug', $slug);
 
         if (Str::isUuid($occupationUuid)) {
             $query->whereKey($occupationUuid);
@@ -58,12 +63,12 @@ final class CareerJobDisplaySurfaceBuilder
     public function buildForOccupation(Occupation $occupation, string $locale): ?array
     {
         $canonicalSlug = strtolower((string) $occupation->canonical_slug);
-        if ($canonicalSlug !== self::ALLOWED_SLUG) {
+        if (! $this->isPilotSlug($canonicalSlug)) {
             return null;
         }
 
         $asset = $occupation->displayAssets()
-            ->where('canonical_slug', self::ALLOWED_SLUG)
+            ->where('canonical_slug', $canonicalSlug)
             ->where('status', self::READY_STATUS)
             ->where('asset_type', self::ASSET_TYPE)
             ->orderByDesc('updated_at')
@@ -98,6 +103,11 @@ final class CareerJobDisplaySurfaceBuilder
             'structured_data_from_visible_content' => $this->stripForbiddenKeys($asset->structured_data_json ?? []),
             'implementation_contract' => $this->stripForbiddenKeys($asset->implementation_contract_json ?? []),
         ];
+    }
+
+    private function isPilotSlug(string $slug): bool
+    {
+        return in_array(strtolower(trim($slug)), self::PILOT_SLUGS, true);
     }
 
     private function normalizeLocale(string $locale): string

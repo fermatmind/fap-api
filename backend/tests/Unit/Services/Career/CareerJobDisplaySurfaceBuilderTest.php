@@ -16,6 +16,13 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
 {
     use RefreshDatabase;
 
+    private const PILOT_SLUGS = [
+        'actors' => ['soc' => '27-2011', 'onet' => '27-2011.00', 'title' => 'Actors'],
+        'data-scientists' => ['soc' => '15-2051', 'onet' => '15-2051.00', 'title' => 'Data Scientists'],
+        'registered-nurses' => ['soc' => '29-1141', 'onet' => '29-1141.00', 'title' => 'Registered Nurses'],
+        'accountants-and-auditors' => ['soc' => '13-2011', 'onet' => '13-2011.00', 'title' => 'Accountants and Auditors'],
+    ];
+
     public function test_it_returns_surface_for_actors_ready_asset(): void
     {
         $occupation = $this->createOccupation('actors');
@@ -32,10 +39,25 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $this->assertContains('fermat_decision_card', $surface['component_order']);
     }
 
-    public function test_it_returns_null_for_non_actors(): void
+    public function test_it_returns_surface_for_selected_second_pilot_slugs(): void
     {
-        $occupation = $this->createOccupation('accountants-and-auditors');
-        $this->createDisplayAsset($occupation, ['canonical_slug' => 'accountants-and-auditors']);
+        foreach (['data-scientists', 'registered-nurses', 'accountants-and-auditors'] as $slug) {
+            $occupation = $this->createOccupation($slug);
+            $this->createDisplayAsset($occupation);
+
+            $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+
+            $this->assertIsArray($surface);
+            $this->assertSame($slug, $surface['subject']['canonical_slug']);
+            $this->assertSame(self::PILOT_SLUGS[$slug]['soc'], $surface['subject']['soc_code']);
+            $this->assertSame(self::PILOT_SLUGS[$slug]['onet'], $surface['subject']['onet_code']);
+        }
+    }
+
+    public function test_it_returns_null_for_non_selected_slug(): void
+    {
+        $occupation = $this->createOccupation('veterinary-technologists-and-technicians');
+        $this->createDisplayAsset($occupation);
 
         $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
 
@@ -46,6 +68,26 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
     {
         $occupation = $this->createOccupation('actors');
         $this->createDisplayAsset($occupation, ['status' => 'needs_source_code']);
+
+        $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+
+        $this->assertNull($surface);
+    }
+
+    public function test_it_returns_null_if_asset_type_is_not_public_display(): void
+    {
+        $occupation = $this->createOccupation('data-scientists');
+        $this->createDisplayAsset($occupation, ['asset_type' => 'career_job_internal_review']);
+
+        $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+
+        $this->assertNull($surface);
+    }
+
+    public function test_it_returns_null_if_asset_slug_does_not_match_occupation(): void
+    {
+        $occupation = $this->createOccupation('data-scientists');
+        $this->createDisplayAsset($occupation, ['canonical_slug' => 'actors']);
 
         $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
 
@@ -118,10 +160,16 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
 
     private function createOccupation(string $slug): Occupation
     {
+        $meta = self::PILOT_SLUGS[$slug] ?? [
+            'soc' => '29-2056',
+            'onet' => '29-2056.00',
+            'title' => 'Veterinary Technologists and Technicians',
+        ];
+
         $family = OccupationFamily::query()->create([
             'canonical_slug' => 'performing-arts-'.$slug,
-            'title_en' => 'Performing Arts',
-            'title_zh' => '表演艺术',
+            'title_en' => 'Career Family',
+            'title_zh' => '职业族群',
         ]);
 
         $occupation = Occupation::query()->create([
@@ -131,24 +179,24 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
             'truth_market' => 'US',
             'display_market' => 'CN',
             'crosswalk_mode' => 'direct_match',
-            'canonical_title_en' => 'Actors',
-            'canonical_title_zh' => '演员',
-            'search_h1_zh' => '演员职业诊断',
+            'canonical_title_en' => $meta['title'],
+            'canonical_title_zh' => $meta['title'],
+            'search_h1_zh' => $meta['title'],
         ]);
 
         OccupationCrosswalk::query()->create([
             'occupation_id' => $occupation->id,
             'source_system' => 'us_soc',
-            'source_code' => '27-2011',
-            'source_title' => 'Actors',
+            'source_code' => $meta['soc'],
+            'source_title' => $meta['title'],
             'mapping_type' => 'direct_match',
             'confidence_score' => 1.0,
         ]);
         OccupationCrosswalk::query()->create([
             'occupation_id' => $occupation->id,
             'source_system' => 'onet_soc_2019',
-            'source_code' => '27-2011.00',
-            'source_title' => 'Actors',
+            'source_code' => $meta['onet'],
+            'source_title' => $meta['title'],
             'mapping_type' => 'direct_match',
             'confidence_score' => 1.0,
         ]);

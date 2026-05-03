@@ -18,10 +18,17 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
 {
     use RefreshDatabase;
 
+    private const PILOT_SLUGS = [
+        'actors' => ['soc' => '27-2011', 'onet' => '27-2011.00', 'title' => 'Actors'],
+        'data-scientists' => ['soc' => '15-2051', 'onet' => '15-2051.00', 'title' => 'Data Scientists'],
+        'registered-nurses' => ['soc' => '29-1141', 'onet' => '29-1141.00', 'title' => 'Registered Nurses'],
+        'accountants-and-auditors' => ['soc' => '13-2011', 'onet' => '13-2011.00', 'title' => 'Accountants and Auditors'],
+    ];
+
     public function test_it_adds_display_surface_for_eligible_actors_asset(): void
     {
         $occupation = $this->seedCompiledOccupation('actors');
-        $this->addActorsCrosswalks($occupation);
+        $this->addCrosswalks($occupation, 'actors');
         $this->createDisplayAsset($occupation);
 
         $response = $this->getJson('/api/v0.5/career/jobs/actors?locale=zh-CN')
@@ -46,13 +53,40 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         $this->assertStringNotContainsString('raw_ai_exposure_score', $encoded);
     }
 
-    public function test_it_does_not_add_display_surface_for_non_actors(): void
+    public function test_it_adds_display_surface_for_selected_second_pilot_assets(): void
     {
-        $this->seedCompiledOccupation('accountants-and-auditors');
+        foreach (['data-scientists', 'registered-nurses', 'accountants-and-auditors'] as $slug) {
+            $occupation = $this->seedCompiledOccupation($slug);
+            $this->addCrosswalks($occupation, $slug);
+            $this->createDisplayAsset($occupation);
 
-        $this->getJson('/api/v0.5/career/jobs/accountants-and-auditors?locale=zh-CN')
+            $response = $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
+                ->assertOk()
+                ->assertJsonPath('identity.canonical_slug', $slug)
+                ->assertJsonPath('display_surface_v1.surface_version', 'display.surface.v1')
+                ->assertJsonPath('display_surface_v1.template_version', 'v4.2')
+                ->assertJsonPath('display_surface_v1.subject.canonical_slug', $slug)
+                ->assertJsonPath('display_surface_v1.subject.soc_code', self::PILOT_SLUGS[$slug]['soc'])
+                ->assertJsonPath('display_surface_v1.subject.onet_code', self::PILOT_SLUGS[$slug]['onet'])
+                ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
+
+            $encoded = json_encode($response->json('display_surface_v1'), JSON_THROW_ON_ERROR);
+            $this->assertStringNotContainsString('release_gate', $encoded);
+            $this->assertStringNotContainsString('qa_risk', $encoded);
+            $this->assertStringNotContainsString('admin_review_state', $encoded);
+            $this->assertStringNotContainsString('tracking_json', $encoded);
+            $this->assertStringNotContainsString('raw_ai_exposure_score', $encoded);
+        }
+    }
+
+    public function test_it_does_not_add_display_surface_for_non_selected_slug(): void
+    {
+        $occupation = $this->seedCompiledOccupation('veterinary-technologists-and-technicians');
+        $this->createDisplayAsset($occupation);
+
+        $this->getJson('/api/v0.5/career/jobs/veterinary-technologists-and-technicians?locale=zh-CN')
             ->assertOk()
-            ->assertJsonPath('identity.canonical_slug', 'accountants-and-auditors')
+            ->assertJsonPath('identity.canonical_slug', 'veterinary-technologists-and-technicians')
             ->assertJsonMissingPath('display_surface_v1');
     }
 
@@ -97,14 +131,16 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         return $chain['occupation'];
     }
 
-    private function addActorsCrosswalks(Occupation $occupation): void
+    private function addCrosswalks(Occupation $occupation, string $slug): void
     {
+        $meta = self::PILOT_SLUGS[$slug];
+
         OccupationCrosswalk::query()
             ->where('occupation_id', $occupation->id)
             ->where('source_system', 'us_soc')
             ->update([
-                'source_code' => '27-2011',
-                'source_title' => 'Actors',
+                'source_code' => $meta['soc'],
+                'source_title' => $meta['title'],
                 'mapping_type' => 'direct_match',
                 'confidence_score' => 1.0,
             ]);
@@ -112,8 +148,8 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         OccupationCrosswalk::query()->create([
             'occupation_id' => $occupation->id,
             'source_system' => 'onet_soc_2019',
-            'source_code' => '27-2011.00',
-            'source_title' => 'Actors',
+            'source_code' => $meta['onet'],
+            'source_title' => $meta['title'],
             'mapping_type' => 'direct_match',
             'confidence_score' => 1.0,
         ]);
@@ -123,7 +159,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
     {
         return CareerJobDisplayAsset::query()->create([
             'occupation_id' => $occupation->id,
-            'canonical_slug' => 'actors',
+            'canonical_slug' => (string) $occupation->canonical_slug,
             'surface_version' => 'display.surface.v1',
             'asset_version' => 'v4.2',
             'template_version' => 'v4.2',
