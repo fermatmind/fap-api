@@ -2054,6 +2054,41 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-D3a
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-d3a-selected-display-asset-import
+    base: main
+    depends_on: ["PR-D1", "PR-D2b"]
+    mode: execute
+    scope: >
+      Selected display asset import command for second-pilot careers. Add a
+      guarded career:import-selected-display-assets Artisan command and mapper
+      that read the repaired v4.2 workbook, require explicit --slugs, validate
+      only data-scientists, registered-nurses, and accountants-and-auditors,
+      generate display.surface.v1 payloads in memory by default, and write only
+      career_job_display_assets rows when --force is explicit. Do not create or
+      modify occupations/crosswalks, change release gates, generalize the
+      display surface builder allowlist, touch API resources, fap-web, sitemap,
+      llms, Actors, CN mapping, payment/order, tracking, or bulk-import the
+      full workbook.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Console/Commands/CareerImportSelectedDisplayAssets.php app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php app/Console/Kernel.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php"
+      - "php artisan career:import-selected-display-assets --file=/Users/rainie/Desktop/fermat_career_assets_v4_2_second_pilot_repaired.xlsx --slugs=data-scientists,registered-nurses,accountants-and-auditors --dry-run --json"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-B84
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

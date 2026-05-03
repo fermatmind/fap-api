@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-03T11:39:05.965744Z",
+  "updated_at": "2026-05-03T12:38:46.792915Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -1100,9 +1100,9 @@
     "PR-D1": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "draft_open",
+      "status": "merged",
       "branch": "codex/pr-d1-career-display-batch-validator",
-      "commit_sha": "729431dbb9d6043b1c634f668b1a462faf51a5bd",
+      "commit_sha": "0f20af2ea1d94be027e73b883127e77fd530798e",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1107",
       "checks": {
         "local": [
@@ -1135,9 +1135,16 @@
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "merged_at": "2026-05-03T09:25:55Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "history": [
+        {
+          "at": "2026-05-03T12:33:19.747370Z",
+          "status": "reconciled_merged",
+          "summary": "Reconciled stale PR train ledger after GitHub showed merged and origin/main contained the merge commit; local and remote branches are absent."
+        }
+      ]
     },
     "PR-B18": {
       "repo": "fap-api",
@@ -3986,9 +3993,9 @@
     "PR-D2b": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "draft_open",
+      "status": "merged",
       "branch": "codex/pr-d2b-selected-onet-crosswalks",
-      "commit_sha": "da5c2168ba82d90ef81e1e37b5044ac7550f0c88",
+      "commit_sha": "f8665bc5114b3a6cbf849f21588ace5899e95d15",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1110",
       "checks": {
         "local": [
@@ -4018,9 +4025,82 @@
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
+      "merged_at": "2026-05-03T11:43:45Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
+      "history": [
+        {
+          "at": "2026-05-03T12:33:19.747370Z",
+          "status": "reconciled_merged",
+          "summary": "Reconciled stale PR train ledger after GitHub showed merged and origin/main contained the merge commit; local and remote branches are absent."
+        }
+      ]
+    },
+    "PR-D3a": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "draft_open",
+      "branch": "codex/pr-d3a-selected-display-asset-import",
+      "commit_sha": "c8ff1611ebaeed1cc08da6582bfeab964a16a712",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1111",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/CareerImportSelectedDisplayAssets.php app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php app/Console/Kernel.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:import-selected-display-assets --file=/Users/rainie/Desktop/fermat_career_assets_v4_2_second_pilot_repaired.xlsx --slugs=data-scientists,registered-nurses,accountants-and-auditors --dry-run --json",
+            "status": "passed_no_go_authority_unavailable",
+            "details": "Command exited 0 and generated payload summaries for all three selected slugs without DB writes. Local authority DB was unavailable and public API returned no authority rows, so decision=no_go and would_write_count=0 locally; target DB dry-run is required after deploy before --force."
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
       "merged_at": "",
       "remote_branch_deleted": false,
-      "local_cleanup_executed": false
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-03T12:33:19.747370Z",
+          "status": "in_progress",
+          "summary": "Started PR-D3a selected display asset import command scope from latest main; D1 and D2b dependencies reconciled as merged."
+        },
+        {
+          "at": "2026-05-03T12:34:30.717301Z",
+          "status": "local_checks_passed",
+          "summary": "Scoped local checks passed. Real workbook dry-run exited 0 but reported no_go because local authority DB/public API authority was unavailable; no DB writes occurred."
+        },
+        {
+          "at": "2026-05-03T12:37:04.446992Z",
+          "status": "committed_local",
+          "summary": "Created local PR-D3a implementation commit after scoped local checks."
+        },
+        {
+          "at": "2026-05-03T12:38:02.872632Z",
+          "status": "draft_open",
+          "summary": "Opened draft PR #1111 for PR-D3a after scoped local checks."
+        },
+        {
+          "at": "2026-05-03T12:38:46.792915Z",
+          "status": "state_commit_sha_refreshed",
+          "summary": "Recorded the pushed PR-D3a implementation commit SHA after draft PR creation."
+        }
+      ]
     }
   },
   "prs": {
