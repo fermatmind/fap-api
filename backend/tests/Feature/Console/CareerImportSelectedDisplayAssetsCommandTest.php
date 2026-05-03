@@ -231,7 +231,7 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
     }
 
     #[Test]
-    public function command_created_non_actor_asset_does_not_change_current_builder_allowlist(): void
+    public function command_created_selected_asset_is_available_to_display_surface_builder(): void
     {
         $occupation = $this->createAuthorityOccupation('data-scientists', '15-2051', '15-2051.00');
         $workbook = $this->writeWorkbook([$this->row('data-scientists')]);
@@ -240,7 +240,9 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
 
         $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
         $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
-        $this->assertNull($surface);
+        $this->assertIsArray($surface);
+        $this->assertSame('data-scientists', $surface['subject']['canonical_slug']);
+        $this->assertSame('display.surface.v1', $surface['surface_version']);
     }
 
     /**
