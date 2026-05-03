@@ -2021,6 +2021,39 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-D2b
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-d2b-selected-onet-crosswalks
+    base: main
+    depends_on: ["PR-D1"]
+    mode: execute
+    scope: >
+      Selected O*NET crosswalk alignment for second-pilot careers. Add a
+      guarded career:align-selected-onet-crosswalks Artisan command that reads
+      the repaired v4.2 workbook, requires explicit --slugs, validates only
+      data-scientists, registered-nurses, and accountants-and-auditors, and
+      writes only missing onet_soc_2019 crosswalk rows when --force is explicit.
+      Do not create or modify occupations, import display assets, change release
+      gates, touch fap-web, sitemap, llms, Actors, CN mapping, or bulk-import
+      the full workbook.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Console/Commands/CareerAlignSelectedOnetCrosswalks.php app/Console/Kernel.php tests/Feature/Console/CareerAlignSelectedOnetCrosswalksCommandTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Feature/Console/CareerAlignSelectedOnetCrosswalksCommandTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php"
+      - "php artisan career:align-selected-onet-crosswalks --file=/Users/rainie/Desktop/fermat_career_assets_v4_2_second_pilot_repaired.xlsx --slugs=data-scientists,registered-nurses,accountants-and-auditors --dry-run --json"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-B84
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
