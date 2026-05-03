@@ -31,7 +31,15 @@ final class CareerSelectedDisplayAssetMapper
     /** @var array<string, array{soc: string, onet: string}> */
     public const ALLOWED_SLUGS = [
         'accountants-and-auditors' => ['soc' => '13-2011', 'onet' => '13-2011.00'],
+        'actuaries' => ['soc' => '15-2011', 'onet' => '15-2011.00'],
+        'architectural-and-engineering-managers' => ['soc' => '11-9041', 'onet' => '11-9041.00'],
+        'biomedical-engineers' => ['soc' => '17-2031', 'onet' => '17-2031.00'],
+        'civil-engineers' => ['soc' => '17-2051', 'onet' => '17-2051.00'],
         'data-scientists' => ['soc' => '15-2051', 'onet' => '15-2051.00'],
+        'dentists' => ['soc' => '29-1021', 'onet' => '29-1021.00'],
+        'financial-analysts' => ['soc' => '13-2051', 'onet' => '13-2051.00'],
+        'high-school-teachers' => ['soc' => '25-2031', 'onet' => '25-2031.00'],
+        'market-research-analysts' => ['soc' => '13-1161', 'onet' => '13-1161.00'],
         'registered-nurses' => ['soc' => '29-1141', 'onet' => '29-1141.00'],
     ];
 
@@ -189,7 +197,7 @@ final class CareerSelectedDisplayAssetMapper
         $errors = [];
 
         if (! isset(self::ALLOWED_SLUGS[$slug])) {
-            $errors[] = 'Slug is not in the selected second-pilot display asset allowlist.';
+            $errors[] = 'Slug is not in the selected display asset import allowlist.';
         }
 
         $expected = self::ALLOWED_SLUGS[$slug] ?? ['soc' => '', 'onet' => ''];

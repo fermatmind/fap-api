@@ -43,6 +43,47 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
         $this->assertSame('Plain language explanation from the workbook.', $result['payload']['page_payload_json']['page']['en']['ai_impact_table']['explanation']);
     }
 
+    public function test_it_maps_d5_selected_rows_to_display_asset_payloads(): void
+    {
+        foreach ($this->d5Rows() as $row) {
+            $result = app(CareerSelectedDisplayAssetMapper::class)->mapRow($row);
+
+            $this->assertSame([], $result['errors'], $row['Slug'].' should map cleanly.');
+            $this->assertSame($row['Slug'], $result['slug']);
+            $this->assertSame($row['SOC_Code'], $result['expected_soc']);
+            $this->assertSame($row['O_NET_Code'], $result['expected_onet']);
+            $this->assertSame(24, $result['summary']['component_order_count']);
+            $this->assertTrue($result['summary']['has_zh_page']);
+            $this->assertTrue($result['summary']['has_en_page']);
+            $this->assertSame([], $result['summary']['public_payload_forbidden_keys_found']);
+        }
+    }
+
+    public function test_biomedical_engineers_rejects_product_substring_if_reintroduced(): void
+    {
+        $row = $this->row(
+            'biomedical-engineers',
+            title: 'Bioengineers and biomedical engineers',
+            cnTitle: '生物工程师与生物医学工程师',
+            soc: '17-2031',
+            onet: '17-2031.00',
+        );
+        $row['EN_Occupation_Schema_JSON'] = $this->encodeJson([
+            '@context' => 'https://schema.org',
+            '@type' => 'Occupation',
+            'name' => 'Bioengineers and biomedical engineers',
+            'occupationalCategory' => '17-2031',
+            'description' => 'Design systems and products for healthcare settings.',
+        ]);
+
+        $result = app(CareerSelectedDisplayAssetMapper::class)->mapRow($row);
+
+        $this->assertStringContainsString(
+            'EN_Occupation_Schema_JSON must not include Product schema.',
+            implode(' ', $result['errors']),
+        );
+    }
+
     public function test_it_rejects_product_schema_hidden_faq_and_forbidden_public_keys(): void
     {
         $row = $this->row('data-scientists');
@@ -66,6 +107,23 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
         $this->assertStringContainsString('EN_Occupation_Schema_JSON must not include Product schema.', $errors);
         $this->assertStringContainsString('cn_faq must not contain hidden FAQ schema.', $errors);
         $this->assertStringContainsString('Forbidden public payload keys found', $errors);
+    }
+
+    /**
+     * @return list<array<string, string>>
+     */
+    private function d5Rows(): array
+    {
+        return [
+            $this->row('actuaries', title: 'Actuaries', cnTitle: '精算师', soc: '15-2011', onet: '15-2011.00'),
+            $this->row('financial-analysts', title: 'Financial and Investment Analysts', cnTitle: '金融与投资分析师', soc: '13-2051', onet: '13-2051.00'),
+            $this->row('high-school-teachers', title: 'Secondary School Teachers, Except Special and Career/Technical Education', cnTitle: '高中教师（不含特殊与职业技术教育）', soc: '25-2031', onet: '25-2031.00'),
+            $this->row('market-research-analysts', title: 'Market Research Analysts and Marketing Specialists', cnTitle: '市场研究分析师与营销专员', soc: '13-1161', onet: '13-1161.00'),
+            $this->row('architectural-and-engineering-managers', title: 'Architectural and Engineering Managers', cnTitle: '建筑与工程经理', soc: '11-9041', onet: '11-9041.00'),
+            $this->row('civil-engineers', title: 'Civil Engineers', cnTitle: '土木工程师', soc: '17-2051', onet: '17-2051.00'),
+            $this->row('biomedical-engineers', title: 'Bioengineers and Biomedical Engineers', cnTitle: '生物工程师与生物医学工程师', soc: '17-2031', onet: '17-2031.00'),
+            $this->row('dentists', title: 'Dentists, General', cnTitle: '普通牙医', soc: '29-1021', onet: '29-1021.00'),
+        ];
     }
 
     /**

@@ -2126,6 +2126,42 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-D5c1
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-d5c1-display-import-allowlist
+    base: main
+    depends_on: ["PR-D3a", "PR-D5b"]
+    mode: execute
+    scope: >
+      Expand selected display asset import allowlist to D5 careers. Update the
+      existing career:import-selected-display-assets command/mapper allowlist so
+      actuaries, financial-analysts, high-school-teachers,
+      market-research-analysts, architectural-and-engineering-managers,
+      civil-engineers, biomedical-engineers, and dentists can validate and
+      generate display.surface.v1 payloads in dry-run, preserving all mapper
+      validation, forbidden field stripping, Product/hidden FAQ rejection, and
+      dry-run-by-default write guardrails. Do not change routes, controllers,
+      API resources, frontend, sitemap, llms, release gates, Actors content,
+      existing validated career data, CN proxy rows, or import/write production
+      display assets inside the PR.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Console/Commands/CareerImportSelectedDisplayAssets.php app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php app/Console/Kernel.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php"
+      - "php artisan career:import-selected-display-assets --file=/Users/rainie/Desktop/第九版.xlsx --slugs=actuaries,financial-analysts,high-school-teachers,market-research-analysts,architectural-and-engineering-managers,civil-engineers,biomedical-engineers,dentists --dry-run --json"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-B84
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
