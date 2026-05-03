@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-03T18:40:10Z",
+  "updated_at": "2026-05-03T18:41:05Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -4168,7 +4168,7 @@
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
       "status": "draft_open_workbook_blocked",
       "branch": "codex/pr-d5c1-display-import-allowlist",
-      "commit_sha": "a08849432caf0c8f60903aa1014d37cbb67b5636",
+      "commit_sha": "38867cd1605fdcf81e3f06a56c0a5e8ced0fa7ac",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1114",
       "checks": {
         "local": [
@@ -4239,6 +4239,11 @@
           "at": "2026-05-03T18:40:10Z",
           "status": "state_commit_sha_refreshed",
           "summary": "Refreshed PR-D5c1 ledger with amended commit SHA after draft PR metadata update; GitHub checks remain pending and PR remains draft/workbook-blocked."
+        },
+        {
+          "at": "2026-05-03T18:41:05Z",
+          "status": "state_commit_sha_refreshed",
+          "summary": "Recorded current PR-D5c1 branch head after force-push."
         }
       ]
     }
