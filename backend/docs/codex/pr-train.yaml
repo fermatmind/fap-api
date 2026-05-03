@@ -2089,6 +2089,43 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-D5b
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-d5b-selected-authority-crosswalks
+    base: main
+    depends_on: ["PR-D1", "PR-D2b", "PR-D3a"]
+    mode: execute
+    scope: >
+      Selected authority occupation and crosswalk alignment for D5a repaired
+      careers. Add a guarded career:align-selected-authority-crosswalks
+      Artisan command that reads the D5a repaired workbook, requires explicit
+      --slugs, validates only actuaries, financial-analysts,
+      high-school-teachers, market-research-analysts,
+      architectural-and-engineering-managers, civil-engineers,
+      biomedical-engineers, and dentists, and creates only missing authority
+      Occupation rows plus direct us_soc and onet_soc_2019 crosswalk rows when
+      --force is explicit. Do not import display assets, change routes,
+      controllers, API resources, release gates, fap-web, sitemap, llms,
+      Actors, existing validated careers, CN mapping, payment/order, tracking,
+      or bulk-import the full workbook.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Console/Commands/CareerAlignSelectedAuthorityCrosswalks.php app/Console/Kernel.php tests/Feature/Console/CareerAlignSelectedAuthorityCrosswalksCommandTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Feature/Console/CareerAlignSelectedAuthorityCrosswalksCommandTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php"
+      - "php artisan career:align-selected-authority-crosswalks --file=/Users/rainie/Desktop/第八版_d5a_8_repaired.xlsx --slugs=actuaries,financial-analysts,high-school-teachers,market-research-analysts,architectural-and-engineering-managers,civil-engineers,biomedical-engineers,dentists --dry-run --json"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-B84
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

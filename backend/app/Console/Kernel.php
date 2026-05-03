@@ -9,6 +9,7 @@ use App\Console\Commands\Big5AttemptPurge;
 use App\Console\Commands\Big5PsychometricsReport;
 use App\Console\Commands\Big5TelemetrySummary;
 use App\Console\Commands\CareerAlignActorsAuthorityOccupation;
+use App\Console\Commands\CareerAlignSelectedAuthorityCrosswalks;
 use App\Console\Commands\CareerAlignSelectedOnetCrosswalks;
 use App\Console\Commands\CareerApplyOccupationDirectoryReviewDecisions;
 use App\Console\Commands\CareerCompileAuthorityWave;
@@ -161,6 +162,7 @@ class Kernel extends ConsoleKernel
         CommerceRepairPostCommitFailed::class,
         CareerApplyOccupationDirectoryReviewDecisions::class,
         CareerAlignActorsAuthorityOccupation::class,
+        CareerAlignSelectedAuthorityCrosswalks::class,
         CareerAlignSelectedOnetCrosswalks::class,
         CareerImportActorsDisplayAsset::class,
         CareerImportAuthorityWave::class,
