@@ -1,0 +1,1430 @@
+{
+  "big5_result_page_v2": {
+    "schema_version": "fap.big5.result_page.v2",
+    "payload_key": "big5_result_page_v2",
+    "scale_code": "BIG5_OCEAN",
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "fixture_key": "canonical_o59_core_body_preview",
+    "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+    "canonical_profile_key": "canonical_o59_c32_e20_a55_n68",
+    "profile_label_zh": "敏锐的独立思考者",
+    "profile_axis_zh": "高敏感 × 中高开放 × 克制进入",
+    "b5_a_lite_section_trace": {
+      "runtime_skeleton": "current_8_section_big5_runtime_skeleton",
+      "runtime_sections": [
+        "hero_summary",
+        "domains_overview",
+        "domain_deep_dive",
+        "facet_details",
+        "core_portrait",
+        "norms_comparison",
+        "action_plan",
+        "methodology_and_access"
+      ],
+      "module_to_section_mapping_version": "v0.1",
+      "core_body_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+      "core_body_manifest_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+      "core_body_section_count": 8,
+      "core_body_block_count": 32
+    },
+    "projection_v2": {
+      "schema_version": "fap.big5.projection.v2",
+      "attempt_id": "attempt_big5_o59_core_body_preview_fixture",
+      "result_version": "big5_result_page_v2.o59_core_body_preview.fixture.v1",
+      "scale_code": "BIG5_OCEAN",
+      "form_code": "big5_90",
+      "domains": {
+        "O": {
+          "score": 59,
+          "percentile": 59,
+          "band": "mid_high"
+        },
+        "C": {
+          "score": 32,
+          "percentile": 32,
+          "band": "mid_low"
+        },
+        "E": {
+          "score": 20,
+          "percentile": 20,
+          "band": "low"
+        },
+        "A": {
+          "score": 55,
+          "percentile": 55,
+          "band": "mid"
+        },
+        "N": {
+          "score": 68,
+          "percentile": 68,
+          "band": "high"
+        }
+      },
+      "domain_bands": {
+        "O": "mid_high",
+        "C": "mid_low",
+        "E": "low",
+        "A": "mid",
+        "N": "high"
+      },
+      "facets": {
+        "N1": {
+          "bucket": "high",
+          "item_count": 4,
+          "confidence": "medium"
+        },
+        "O5": {
+          "bucket": "mid_high",
+          "item_count": 4,
+          "confidence": "medium"
+        }
+      },
+      "facet_highlights": [
+        {
+          "facet": "N1",
+          "item_count": 4,
+          "confidence": "medium",
+          "claim_strength": "interpretive_signal"
+        }
+      ],
+      "norm_status": "CALIBRATED",
+      "norm_group_id": "zh-CN_prod_all_18-60",
+      "norm_version": "big5_norms_fixture_v1",
+      "quality_status": "B",
+      "quality_flags": [],
+      "profile_signature": {
+        "signature_key": "canonical_o59_c32_e20_a55_n68",
+        "label_key": "signature.canonical_o59_sensitive_independent",
+        "is_fixed_type": false,
+        "system": "trait_signature",
+        "label_zh": "敏锐的独立思考者",
+        "axis_zh": "高敏感 × 中高开放 × 克制进入"
+      },
+      "dominant_couplings": [
+        {
+          "coupling_key": "n_high_x_o_mid_high",
+          "traits": [
+            "N",
+            "O"
+          ],
+          "strength": "medium"
+        },
+        {
+          "coupling_key": "low_e_x_low_c",
+          "traits": [
+            "E",
+            "C"
+          ],
+          "strength": "medium"
+        },
+        {
+          "coupling_key": "a_mid_x_n_high",
+          "traits": [
+            "A",
+            "N"
+          ],
+          "strength": "medium"
+        }
+      ],
+      "interpretation_scope": "high_tension_profile",
+      "confidence_flags": [
+        "normed",
+        "quality_acceptable",
+        "core_body_preview"
+      ],
+      "safety_flags": [
+        "non_diagnostic",
+        "not_type_system",
+        "not_for_hiring_screening",
+        "staging_only"
+      ],
+      "public_fields": [
+        "domains",
+        "domain_bands",
+        "facet_highlights",
+        "profile_signature",
+        "dominant_couplings",
+        "interpretation_scope"
+      ],
+      "internal_only_fields": [
+        "editor_note",
+        "qa_note",
+        "selection_guidance",
+        "import_policy",
+        "internal_metadata"
+      ]
+    },
+    "modules": [
+      {
+        "module_key": "module_00_trust_bar",
+        "blocks": [
+          {
+            "block_key": "module_00_trust_bar.methodology_trust_bar.o59_core_body_preview.v1",
+            "block_kind": "trust_bar",
+            "module_key": "module_00_trust_bar",
+            "source_section_key": "methodology_and_access",
+            "source_section_title_zh": "方法、边界与访问说明",
+            "source_modules": [
+              "module_00_trust_bar",
+              "module_10_method_privacy"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "使用边界",
+              "body_zh": "Big Five 描述的是连续人格特质，不是固定人格类型。本报告用于自我理解、职业反思和行动规划，不用于医学诊断、心理治疗、招聘筛选或给自己贴死标签。画像名只是辅助理解标签；高低分不代表好坏；结果应带回工作、关系和压力情境里验证。"
+            },
+            "projection_refs": [
+              "safety_flags",
+              "norm_status",
+              "quality_status"
+            ],
+            "registry_refs": [
+              "boundary_registry:non_diagnostic",
+              "method_registry:core_body_preview"
+            ],
+            "safety_level": "boundary",
+            "evidence_level": "descriptive",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          }
+        ]
+      },
+      {
+        "module_key": "module_01_hero",
+        "blocks": [
+          {
+            "block_key": "module_01_hero.hero_identity.o59_core_body_preview.v1",
+            "block_kind": "hero_summary",
+            "module_key": "module_01_hero",
+            "source_section_key": "hero_summary",
+            "source_section_title_zh": "首屏快读",
+            "source_modules": [
+              "module_01_hero",
+              "module_02_quick_understanding"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "敏锐的独立思考者",
+              "body_zh": "高敏感 × 中高开放 × 克制进入。这个名称只是辅助理解标签，不是固定类型，也不是对你这个人的最终定义。Big Five 描述的是五个连续特质在当前作答中的相对位置；你不是属于某一型，而是在这组分数上呈现出一种敏锐、细致、克制进入的倾向。"
+            },
+            "projection_refs": [
+              "profile_signature",
+              "domains",
+              "domain_bands",
+              "safety_flags"
+            ],
+            "registry_refs": [
+              "profile_signature_registry:canonical_o59_c32_e20_a55_n68",
+              "domain_registry:all",
+              "boundary_registry:non_type"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "computed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_01_hero.hero_one_sentence.o59_core_body_preview.v1",
+            "block_kind": "hero_summary",
+            "module_key": "module_01_hero",
+            "source_section_key": "hero_summary",
+            "source_section_title_zh": "首屏快读",
+            "source_modules": [
+              "module_01_hero",
+              "module_02_quick_understanding"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "一句话总结",
+              "body_zh": "你不是没有力量，而是力量主要来自感受、理解和判断，不来自持续外放与高压硬推。真正的发展重点，不是把自己改造成另一种人，而是让这套敏锐、细致、克制的系统，在现实里更稳定地发力。"
+            },
+            "projection_refs": [
+              "profile_signature",
+              "domains",
+              "domain_bands",
+              "safety_flags"
+            ],
+            "registry_refs": [
+              "profile_signature_registry:canonical_o59_c32_e20_a55_n68",
+              "domain_registry:all",
+              "boundary_registry:non_type"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "computed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_01_hero.hero_score_snapshot.o59_core_body_preview.v1",
+            "block_kind": "trait_bars",
+            "module_key": "module_01_hero",
+            "source_section_key": "hero_summary",
+            "source_section_title_zh": "首屏快读",
+            "source_modules": [
+              "module_01_hero",
+              "module_02_quick_understanding"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "五维快照",
+              "table_zh": [
+                {
+                  "维度": "开放性",
+                  "分数": "59",
+                  "位置": "中高",
+                  "说明": "理解复杂性，但仍有现实过滤器。"
+                },
+                {
+                  "维度": "尽责性",
+                  "分数": "32",
+                  "位置": "偏低",
+                  "说明": "不是无序，而是持续推进依赖意义和反馈。"
+                },
+                {
+                  "维度": "外向性",
+                  "分数": "20",
+                  "位置": "明显偏低",
+                  "说明": "不是冷淡，而是进入克制、能量内收。"
+                },
+                {
+                  "维度": "宜人性",
+                  "分数": "55",
+                  "位置": "中位略高",
+                  "说明": "能合作，但不会无限迎合。"
+                },
+                {
+                  "维度": "情绪性",
+                  "分数": "68",
+                  "位置": "中高",
+                  "说明": "对风险、误差和关系张力更早有体感。"
+                }
+              ]
+            },
+            "projection_refs": [
+              "profile_signature",
+              "domains",
+              "domain_bands",
+              "safety_flags"
+            ],
+            "registry_refs": [
+              "profile_signature_registry:canonical_o59_c32_e20_a55_n68",
+              "domain_registry:all",
+              "boundary_registry:non_type"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "computed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          }
+        ]
+      },
+      {
+        "module_key": "module_02_quick_understanding",
+        "blocks": [
+          {
+            "block_key": "module_02_quick_understanding.hero_strengths_risks.o59_core_body_preview.v1",
+            "block_kind": "quick_cards",
+            "module_key": "module_02_quick_understanding",
+            "source_section_key": "hero_summary",
+            "source_section_title_zh": "首屏快读",
+            "source_modules": [
+              "module_01_hero",
+              "module_02_quick_understanding"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "优势与风险",
+              "body_zh": "这组分数最值得保留的不是单项高低，而是它们组合出的工作方式：你会先扫描风险、确认意义、判断边界，再决定是否进入。它能保护你不被粗糙环境带走，也会在反馈不足时让你卡住。",
+              "bullets_zh": [
+                "优势：能更早感知风险、误差和关系张力。",
+                "优势：能理解复杂性，不轻易下粗糙结论。",
+                "优势：有边界感，不容易被热闹和表面共识带着跑。",
+                "风险：容易把感受长期留在内部，形成慢性内耗。",
+                "风险：容易在低反馈、低意义任务中启动困难。",
+                "风险：容易因为进入慢、表达晚，让别人看不见你的价值。"
+              ]
+            },
+            "projection_refs": [
+              "interpretation_scope",
+              "dominant_couplings",
+              "domain_bands"
+            ],
+            "registry_refs": [
+              "state_scope_registry:high_tension_profile",
+              "coupling_registry:o59_c32_e20_a55_n68",
+              "domain_registry:all"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "computed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_02_quick_understanding.hero_48h_action.o59_core_body_preview.v1",
+            "block_kind": "quick_cards",
+            "module_key": "module_02_quick_understanding",
+            "source_section_key": "hero_summary",
+            "source_section_title_zh": "首屏快读",
+            "source_modules": [
+              "module_01_hero",
+              "module_02_quick_understanding"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "接下来 48 小时",
+              "body_zh": "选一件重要但不紧急的事，只做 20 分钟。不要要求完成，只要求开始。开始前写一句：我现在是在处理真实问题，还是在处理不确定性压力？结束后只记录一个结果：我更清楚了什么。",
+              "action_zh": "设置一个 20 分钟计时器；选最小可开始动作；结束后用一句话命名来源。"
+            },
+            "projection_refs": [
+              "interpretation_scope",
+              "dominant_couplings",
+              "domain_bands"
+            ],
+            "registry_refs": [
+              "state_scope_registry:high_tension_profile",
+              "coupling_registry:o59_c32_e20_a55_n68",
+              "domain_registry:all"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "computed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_02_quick_understanding.domains_how_to_read.o59_core_body_preview.v1",
+            "block_kind": "quick_cards",
+            "module_key": "module_02_quick_understanding",
+            "source_section_key": "domains_overview",
+            "source_section_title_zh": "五维阅读说明",
+            "source_modules": [
+              "module_02_quick_understanding",
+              "module_03_trait_deep_dive"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "如何阅读 Big Five",
+              "body_zh": "Big Five 是五个连续特质维度，不是人格类型。高低分不是好坏，也不是身份判断；它只是在描述某种倾向在你当前作答里更明显或更不明显。真正影响日常表现的，往往不是单项分数，而是这些维度如何一起工作、互相补偿、互相拉扯。"
+            },
+            "projection_refs": [
+              "interpretation_scope",
+              "dominant_couplings",
+              "domain_bands"
+            ],
+            "registry_refs": [
+              "state_scope_registry:high_tension_profile",
+              "coupling_registry:o59_c32_e20_a55_n68",
+              "domain_registry:all"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "registry_backed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_02_quick_understanding.domains_combination_matters.o59_core_body_preview.v1",
+            "block_kind": "quick_cards",
+            "module_key": "module_02_quick_understanding",
+            "source_section_key": "domains_overview",
+            "source_section_title_zh": "五维阅读说明",
+            "source_modules": [
+              "module_02_quick_understanding",
+              "module_03_trait_deep_dive"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "为什么组合比单项更重要",
+              "body_zh": "如果只看单项，你可能会误以为自己只是敏感、慢热或不够自律；把分数放在一起看，画面会更准确：高情绪性让你更早感到风险，中高开放性让你继续理解复杂性，低外向让你进入克制，偏低尽责性让长期低反馈任务更难维持，中位宜人性让你能合作但不愿无限迎合。组合读法能把自责改成结构化理解。"
+            },
+            "projection_refs": [
+              "interpretation_scope",
+              "dominant_couplings",
+              "domain_bands"
+            ],
+            "registry_refs": [
+              "state_scope_registry:high_tension_profile",
+              "coupling_registry:o59_c32_e20_a55_n68",
+              "domain_registry:all"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "registry_backed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_02_quick_understanding.portrait_conflict_misread_growth.o59_core_body_preview.v1",
+            "block_kind": "quick_cards",
+            "module_key": "module_02_quick_understanding",
+            "source_section_key": "core_portrait",
+            "source_section_title_zh": "核心画像",
+            "source_modules": [
+              "module_02_quick_understanding",
+              "module_04_coupling"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "主导冲突、常见误读与发展路径",
+              "body_zh": "主导冲突是：你看得深、感觉早、进入慎重，但现实世界常常奖励更快表达、更强外放和更硬的持续推进。常见误读包括把你看成冷、慢、不主动，或者把启动困难看成能力不足。更准确的发展路径是：更早表达边界，更短节奏启动，更及时恢复，把内部判断翻译成外部可见的行动。"
+            },
+            "projection_refs": [
+              "interpretation_scope",
+              "dominant_couplings",
+              "domain_bands"
+            ],
+            "registry_refs": [
+              "state_scope_registry:high_tension_profile",
+              "coupling_registry:o59_c32_e20_a55_n68",
+              "domain_registry:all"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "computed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          }
+        ]
+      },
+      {
+        "module_key": "module_03_trait_deep_dive",
+        "blocks": [
+          {
+            "block_key": "module_03_trait_deep_dive.domains_snapshot.o59_core_body_preview.v1",
+            "block_kind": "trait_bars",
+            "module_key": "module_03_trait_deep_dive",
+            "source_section_key": "domains_overview",
+            "source_section_title_zh": "五维阅读说明",
+            "source_modules": [
+              "module_02_quick_understanding",
+              "module_03_trait_deep_dive"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "这组分数的基本读法",
+              "bullets_zh": [
+                "O59：愿意理解复杂性，也保有现实过滤器。",
+                "C32：不是没有秩序，而是持续推进更依赖意义、路径和阶段反馈。",
+                "E20：不是冷淡，而是先观察、先理解、先判断，再决定如何进入。",
+                "A55：愿意合作，也会在边界模糊或责任漂移时后退。",
+                "N68：对误解、不确定性、关系张力和失控感更早有体感。"
+              ]
+            },
+            "projection_refs": [
+              "domains",
+              "domain_bands"
+            ],
+            "registry_refs": [
+              "domain_registry:O",
+              "domain_registry:C",
+              "domain_registry:E",
+              "domain_registry:A",
+              "domain_registry:N"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "registry_backed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_03_trait_deep_dive.domain_o59.o59_core_body_preview.v1",
+            "block_kind": "trait_deep_dive",
+            "module_key": "module_03_trait_deep_dive",
+            "source_section_key": "domain_deep_dive",
+            "source_section_title_zh": "五维深解",
+            "source_modules": [
+              "module_03_trait_deep_dive"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "开放性 59｜理解复杂性，但有现实锚点",
+              "body_zh": "分数位置：中高。你愿意理解复杂性，也愿意接触新想法，但不会为了显得前卫而强迫自己喜欢某些东西。它如何帮助你：你不容易被空洞口号收编，也更可能在复杂问题里保留细腻和耐心。它如何消耗你：当别人只想要快答案时，你可能会觉得环境粗糙，并在内部多想一步、多看一层。你该怎么用它：用开放性做判断，而不是让复杂性拖住行动；先写出“我现在最确定的一点是什么”。这不是高低优劣，而是一种理解和筛选方式。"
+            },
+            "projection_refs": [
+              "domains",
+              "domain_bands"
+            ],
+            "registry_refs": [
+              "domain_registry:O",
+              "domain_registry:C",
+              "domain_registry:E",
+              "domain_registry:A",
+              "domain_registry:N"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "registry_backed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_03_trait_deep_dive.domain_c32.o59_core_body_preview.v1",
+            "block_kind": "trait_deep_dive",
+            "module_key": "module_03_trait_deep_dive",
+            "source_section_key": "domain_deep_dive",
+            "source_section_title_zh": "五维深解",
+            "source_modules": [
+              "module_03_trait_deep_dive"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "尽责性 32｜不是无序，而是持续推进依赖意义",
+              "body_zh": "分数位置：偏低。你并非没有秩序感，也不是不懂责任，而是更难长期靠纯意志力高压推进。它如何帮助你：只要你认定事情重要、路径清楚、反馈存在，你往往会迅速进入认真状态。它如何消耗你：你容易在“看起来应该做”和“我真心认同值得做”之间出现落差，进而形成拖延。你该怎么用它：把任务拆短，增加阶段反馈，明确当前阶段为什么值得投入。这里的重点不是责备，而是给行动系统加支架。"
+            },
+            "projection_refs": [
+              "domains",
+              "domain_bands"
+            ],
+            "registry_refs": [
+              "domain_registry:O",
+              "domain_registry:C",
+              "domain_registry:E",
+              "domain_registry:A",
+              "domain_registry:N"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "registry_backed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_03_trait_deep_dive.domain_e20.o59_core_body_preview.v1",
+            "block_kind": "trait_deep_dive",
+            "module_key": "module_03_trait_deep_dive",
+            "source_section_key": "domain_deep_dive",
+            "source_section_title_zh": "五维深解",
+            "source_modules": [
+              "module_03_trait_deep_dive"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "外向性 20｜进入克制，不是疏离",
+              "body_zh": "分数位置：明显偏低。你不太依赖持续互动来获取能量，也不会天然把自己推到场景中心。它如何帮助你：你不容易被场面带着跑，也不需要通过过度曝光证明自己。它如何消耗你：如果洞察和判断不主动表达，别人不一定能看见你的能力。你该怎么用它：训练低成本进入，提前准备一句观点、会后补充反馈、用文字表达判断。偏低外向不是社交失败，而是能量获取和进入节奏不同。"
+            },
+            "projection_refs": [
+              "domains",
+              "domain_bands"
+            ],
+            "registry_refs": [
+              "domain_registry:O",
+              "domain_registry:C",
+              "domain_registry:E",
+              "domain_registry:A",
+              "domain_registry:N"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "registry_backed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_03_trait_deep_dive.domain_a55.o59_core_body_preview.v1",
+            "block_kind": "trait_deep_dive",
+            "module_key": "module_03_trait_deep_dive",
+            "source_section_key": "domain_deep_dive",
+            "source_section_title_zh": "五维深解",
+            "source_modules": [
+              "module_03_trait_deep_dive"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "宜人性 55｜能合作，也会后退",
+              "body_zh": "分数位置：中位略高。你愿意合作，也能顾及他人处境，但不是没有边界的人。它如何帮助你：在规则清楚、目标一致时，你可以合作得很好，甚至比别人更稳定。它如何消耗你：当边界模糊、责任漂移或情绪期待过多时，你会明显退后。你该怎么用它：不要等到完全耗尽才表达；不舒服刚出现时先说一半。这个分数不说明你应该更讨好或更强硬，而是提醒你把合作建立在清楚边界上。"
+            },
+            "projection_refs": [
+              "domains",
+              "domain_bands"
+            ],
+            "registry_refs": [
+              "domain_registry:O",
+              "domain_registry:C",
+              "domain_registry:E",
+              "domain_registry:A",
+              "domain_registry:N"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "registry_backed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_03_trait_deep_dive.domain_n68.o59_core_body_preview.v1",
+            "block_kind": "trait_deep_dive",
+            "module_key": "module_03_trait_deep_dive",
+            "source_section_key": "domain_deep_dive",
+            "source_section_title_zh": "五维深解",
+            "source_modules": [
+              "module_03_trait_deep_dive"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "情绪性 68｜高体感，是优势，也是成本",
+              "body_zh": "分数位置：中高。你对误解、评价、不确定性、关系张力和失控感比很多人更有体感。它如何帮助你：你能更快发现风险，察觉别人忽视的小裂缝。它如何消耗你：你也更容易比别人更早进入消耗，把预警升级成长期内耗。你该怎么用它：敏感之后要接上命名、表达和恢复，而不是一直留在内部循环。这个分数不是脆弱判断，而是在描述更早预警、更高成本的感受系统。"
+            },
+            "projection_refs": [
+              "domains",
+              "domain_bands"
+            ],
+            "registry_refs": [
+              "domain_registry:O",
+              "domain_registry:C",
+              "domain_registry:E",
+              "domain_registry:A",
+              "domain_registry:N"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "registry_backed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          }
+        ]
+      },
+      {
+        "module_key": "module_04_coupling",
+        "blocks": [
+          {
+            "block_key": "module_04_coupling.portrait_coupling_sensitive_open.o59_core_body_preview.v1",
+            "block_kind": "coupling_cards",
+            "module_key": "module_04_coupling",
+            "source_section_key": "core_portrait",
+            "source_section_title_zh": "核心画像",
+            "source_modules": [
+              "module_02_quick_understanding",
+              "module_04_coupling"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "高情绪性 × 中高开放性",
+              "body_zh": "这是你的核心认知引擎。你不是单纯敏感，而是会在感到风险后继续理解、分析和寻找更深层原因。正向时，它让你早发现风险、保留复杂判断、不轻易下粗糙结论；成本是想得很细、停不下来，在事情还没爆发前已经很累。",
+              "action_zh": "当你开始反复想一件事时，先写一句：我现在是在处理真实问题，还是在处理不确定性压力？"
+            },
+            "projection_refs": [
+              "dominant_couplings",
+              "domain_bands",
+              "interpretation_scope"
+            ],
+            "registry_refs": [
+              "coupling_registry:n_high_x_o_mid_high",
+              "coupling_registry:low_e_x_low_c",
+              "coupling_registry:a_mid_x_n_high"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "computed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_04_coupling.portrait_coupling_low_e_low_c.o59_core_body_preview.v1",
+            "block_kind": "coupling_cards",
+            "module_key": "module_04_coupling",
+            "source_section_key": "core_portrait",
+            "source_section_title_zh": "核心画像",
+            "source_modules": [
+              "module_02_quick_understanding",
+              "module_04_coupling"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "低外向 × 低续航尽责性",
+              "body_zh": "这组耦合解释你的行动瓶颈。你不适合长期依靠外部热闹和纯意志力推进，需要意义、反馈和小启动。拖延很多时候不是懒，而是进入系统缺少支架；当路径清楚、事情值得、反馈可见时，你并不缺投入能力。",
+              "action_zh": "把长期任务改成 20 分钟启动，不要用“必须完成”作为开始条件。"
+            },
+            "projection_refs": [
+              "dominant_couplings",
+              "domain_bands",
+              "interpretation_scope"
+            ],
+            "registry_refs": [
+              "coupling_registry:n_high_x_o_mid_high",
+              "coupling_registry:low_e_x_low_c",
+              "coupling_registry:a_mid_x_n_high"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "computed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_04_coupling.portrait_coupling_a_mid_n_high.o59_core_body_preview.v1",
+            "block_kind": "coupling_cards",
+            "module_key": "module_04_coupling",
+            "source_section_key": "core_portrait",
+            "source_section_title_zh": "核心画像",
+            "source_modules": [
+              "module_02_quick_understanding",
+              "module_04_coupling"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "中位宜人性 × 高情绪性",
+              "body_zh": "你既会体谅别人，也会很快感到边界被消耗。边界清楚、沟通直接时，你可以非常合作；边界模糊、推诿或隐性期待太多时，你会更快进入不适。常见成本是先忍、晚表达，然后从内耗直接进入安静后退。",
+              "action_zh": "不舒服刚出现时，先说一半，而不是等到完全耗尽才退后。"
+            },
+            "projection_refs": [
+              "dominant_couplings",
+              "domain_bands",
+              "interpretation_scope"
+            ],
+            "registry_refs": [
+              "coupling_registry:n_high_x_o_mid_high",
+              "coupling_registry:low_e_x_low_c",
+              "coupling_registry:a_mid_x_n_high"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "computed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          }
+        ]
+      },
+      {
+        "module_key": "module_05_facet_reframe",
+        "blocks": [
+          {
+            "block_key": "module_05_facet_reframe.facet_inference_boundary.o59_core_body_preview.v1",
+            "block_kind": "facet_reframe",
+            "module_key": "module_05_facet_reframe",
+            "source_section_key": "facet_details",
+            "source_section_title_zh": "侧面线索解释",
+            "source_modules": [
+              "module_05_facet_reframe"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "先看边界",
+              "body_zh": "以下内容是基于当前五维分数结构的解释性推断，并非独立测量结论，也不是医学或心理诊断。它不适合被阅读成逐项排名，更不适合被用来给自己贴死标签。它的作用是把常见误读重新翻译成更可行动的解释。",
+              "facets": [
+                {
+                  "facet": "N1",
+                  "item_count": 4,
+                  "confidence": "medium",
+                  "claim_strength": "interpretive_signal"
+                },
+                {
+                  "facet": "O5",
+                  "item_count": 4,
+                  "confidence": "medium",
+                  "claim_strength": "interpretive_signal"
+                }
+              ]
+            },
+            "projection_refs": [
+              "facet_highlights",
+              "confidence_flags"
+            ],
+            "registry_refs": [
+              "facet_registry:interpretive_signal"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "computed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_05_facet_reframe.facet_reframes.o59_core_body_preview.v1",
+            "block_kind": "facet_reframe",
+            "module_key": "module_05_facet_reframe",
+            "source_section_key": "facet_details",
+            "source_section_title_zh": "侧面线索解释",
+            "source_modules": [
+              "module_05_facet_reframe"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "三个反直觉发现",
+              "bullets_zh": [
+                "不是没尽责：你可能很会整理和理解，但不擅长长期无反馈硬推。更有效的做法是增加阶段反馈，而不是只骂自己不自律。",
+                "不是社交差：你不是对人没兴趣，而是高筛选进入。更有效的做法是训练低频但高质量表达，而不是逼自己持续外放。",
+                "不是玻璃心：你是高负荷内循环，感受需要被命名、外化和转成决策。每次烦、累、拖、退时，先写下真正来源。"
+              ],
+              "facets": [
+                {
+                  "facet": "N1",
+                  "item_count": 4,
+                  "confidence": "medium",
+                  "claim_strength": "interpretive_signal"
+                },
+                {
+                  "facet": "O5",
+                  "item_count": 4,
+                  "confidence": "medium",
+                  "claim_strength": "interpretive_signal"
+                }
+              ]
+            },
+            "projection_refs": [
+              "facet_highlights",
+              "confidence_flags"
+            ],
+            "registry_refs": [
+              "facet_registry:interpretive_signal"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "computed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_05_facet_reframe.facet_top_five.o59_core_body_preview.v1",
+            "block_kind": "facet_reframe",
+            "module_key": "module_05_facet_reframe",
+            "source_section_key": "facet_details",
+            "source_section_title_zh": "侧面线索解释",
+            "source_modules": [
+              "module_05_facet_reframe"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "最值得先看懂的 5 个侧面解释点",
+              "body_zh": "这 5 点不是独立诊断项，也不是用百分位来证明你是谁。它们更像解释索引：当你在现实里遇到启动困难、关系内耗、表达偏晚或过度扫描时，可以回到这些点上，看见问题更可能发生在动力结构、反馈设计和边界表达，而不是发生在个人价值上。",
+              "bullets_zh": [
+                "压力信号感知：你对不舒服、不确定和误解的感知比很多人快。这是预警力，也是成本。",
+                "条理能力：你其实很会把事情理顺，只是不能长期靠意志把自己拧在高压推进状态里。",
+                "进入门槛：你并不是没兴趣，而是对“值不值得进入”非常敏感。这会保护你，也会拖慢你。",
+                "自我效能：一旦你认定事情重要，而且知道从哪里开始，你往往并不缺能力感。",
+                "现实过滤下的开放：你不是为了新而新，而是愿意理解、愿意探索，但最终仍以现实价值来筛选。"
+              ],
+              "facets": [
+                {
+                  "facet": "N1",
+                  "item_count": 4,
+                  "confidence": "medium",
+                  "claim_strength": "interpretive_signal"
+                },
+                {
+                  "facet": "O5",
+                  "item_count": 4,
+                  "confidence": "medium",
+                  "claim_strength": "interpretive_signal"
+                }
+              ]
+            },
+            "projection_refs": [
+              "facet_highlights",
+              "confidence_flags"
+            ],
+            "registry_refs": [
+              "facet_registry:interpretive_signal"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "computed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          }
+        ]
+      },
+      {
+        "module_key": "module_06_application_matrix",
+        "blocks": [
+          {
+            "block_key": "module_06_application_matrix.action_workplace.o59_core_body_preview.v1",
+            "block_kind": "application_matrix",
+            "module_key": "module_06_application_matrix",
+            "source_section_key": "action_plan",
+            "source_section_title_zh": "现实行动计划",
+            "source_modules": [
+              "module_06_application_matrix",
+              "module_07_collaboration_manual"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "工作 workplace",
+              "body_zh": "你更适合节奏清楚、目标明确、允许深度处理、不要求持续表演式外放的环境。容易发挥的方向包括分析、策略、内容、产品判断、研究、用户体验、深度咨询和复杂问题拆解。高损耗场景通常是高频打断、长期低反馈、目标模糊、责任不清，只讲执行却不讲意义。",
+              "action_zh": "来源命名：遇到拖延时先写下它来自任务本身、反馈不足、边界不清，还是意义感不足。"
+            },
+            "projection_refs": [
+              "domain_bands",
+              "dominant_couplings",
+              "interpretation_scope"
+            ],
+            "registry_refs": [
+              "scenario_registry:work",
+              "scenario_registry:relationship",
+              "scenario_registry:stress",
+              "scenario_registry:growth",
+              "scenario_registry:action"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "registry_backed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_06_application_matrix.action_relationship.o59_core_body_preview.v1",
+            "block_kind": "application_matrix",
+            "module_key": "module_06_application_matrix",
+            "source_section_key": "action_plan",
+            "source_section_title_zh": "现实行动计划",
+            "source_modules": [
+              "module_06_application_matrix",
+              "module_07_collaboration_manual"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "关系 relationship",
+              "body_zh": "你的关系优势是认真、细腻、不表演、重视真实，并且会对重要的人稳定投入。风险是边界表达偏晚、不舒服时先忍、习惯自己消化，退开时别人可能不知道发生了什么。你要练的不是更能忍，而是更早说清楚。",
+              "action_zh": "提前表达边界：当不舒服刚出现时，先说一半，例如“我需要一点时间整理，稍后给你完整反馈”。"
+            },
+            "projection_refs": [
+              "domain_bands",
+              "dominant_couplings",
+              "interpretation_scope"
+            ],
+            "registry_refs": [
+              "scenario_registry:work",
+              "scenario_registry:relationship",
+              "scenario_registry:stress",
+              "scenario_registry:growth",
+              "scenario_registry:action"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "registry_backed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_06_application_matrix.action_stress.o59_core_body_preview.v1",
+            "block_kind": "application_matrix",
+            "module_key": "module_06_application_matrix",
+            "source_section_key": "action_plan",
+            "source_section_title_zh": "现实行动计划",
+            "source_modules": [
+              "module_06_application_matrix",
+              "module_07_collaboration_manual"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "压力 stress",
+              "body_zh": "你的压力通常不是突然出现，而是在模糊边界、长期误解、不确定性反复、低反馈拖延和硬扛不适中逐渐过载。过载时可能表现为高精度内耗、瘫痪式拖延和安静后退。",
+              "action_zh": "恢复协议：物理断连 → 命名来源 → 缩小动作 → 回到身体 → 补表达。"
+            },
+            "projection_refs": [
+              "domain_bands",
+              "dominant_couplings",
+              "interpretation_scope"
+            ],
+            "registry_refs": [
+              "scenario_registry:work",
+              "scenario_registry:relationship",
+              "scenario_registry:stress",
+              "scenario_registry:growth",
+              "scenario_registry:action"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "registry_backed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_06_application_matrix.action_growth.o59_core_body_preview.v1",
+            "block_kind": "application_matrix",
+            "module_key": "module_06_application_matrix",
+            "source_section_key": "action_plan",
+            "source_section_title_zh": "现实行动计划",
+            "source_modules": [
+              "module_06_application_matrix",
+              "module_07_collaboration_manual"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "成长行动 growth/action",
+              "body_zh": "不要再试图用更自律解决所有问题。你的第一杠杆是更清楚的节奏、更及时的边界表达、以及更低成本的恢复机制。保留你的感受力和判断力，把开放性理解力用在有方向的探索上，同时把关键任务拆成更短的启动单元。",
+              "action_zh": "20 分钟启动：选一件重要但不紧急的事，只推进 20 分钟，不要求做完，只要求开始。"
+            },
+            "projection_refs": [
+              "domain_bands",
+              "dominant_couplings",
+              "interpretation_scope"
+            ],
+            "registry_refs": [
+              "scenario_registry:work",
+              "scenario_registry:relationship",
+              "scenario_registry:stress",
+              "scenario_registry:growth",
+              "scenario_registry:action"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "registry_backed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_06_application_matrix.action_30_60_90.o59_core_body_preview.v1",
+            "block_kind": "application_matrix",
+            "module_key": "module_06_application_matrix",
+            "source_section_key": "action_plan",
+            "source_section_title_zh": "现实行动计划",
+            "source_modules": [
+              "module_06_application_matrix",
+              "module_07_collaboration_manual"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "30 / 60 / 90 天路径",
+              "table_zh": [
+                {
+                  "阶段": "未来 30 天",
+                  "目标": "先解决进入",
+                  "任务": "每周一次 20 分钟启动；每天一次来源命名；在一次合作中提前表达边界。"
+                },
+                {
+                  "阶段": "未来 60 天",
+                  "目标": "再解决续航",
+                  "任务": "给长期任务增加阶段反馈；建立短恢复和长恢复；减少高噪音环境暴露。"
+                },
+                {
+                  "阶段": "未来 90 天",
+                  "目标": "最后解决整合",
+                  "任务": "复盘最放大你和最消耗你的环境；明确工作、关系、生活里的三条非谈判边界；训练早表达。"
+                }
+              ]
+            },
+            "projection_refs": [
+              "domain_bands",
+              "dominant_couplings",
+              "interpretation_scope"
+            ],
+            "registry_refs": [
+              "scenario_registry:work",
+              "scenario_registry:relationship",
+              "scenario_registry:stress",
+              "scenario_registry:growth",
+              "scenario_registry:action"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "registry_backed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          }
+        ]
+      },
+      {
+        "module_key": "module_07_collaboration_manual",
+        "blocks": [
+          {
+            "block_key": "module_07_collaboration_manual.action_collaboration.o59_core_body_preview.v1",
+            "block_kind": "collaboration_manual",
+            "module_key": "module_07_collaboration_manual",
+            "source_section_key": "action_plan",
+            "source_section_title_zh": "现实行动计划",
+            "source_modules": [
+              "module_06_application_matrix",
+              "module_07_collaboration_manual"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "协作说明",
+              "body_zh": "和你高效协作时，最好给清楚背景，不要只丢结论；复杂问题先用文字说明；如果你当场沉默，不一定是不同意，可能是在内部处理。会消耗你的包括模糊责任、反复变动的边界、高频打断、即时响应压力、长期低反馈和低意义任务。",
+              "cta_zh": "我的行动承诺：我会练习更早表达边界，也会把重要判断更清楚地说出来。"
+            },
+            "projection_refs": [
+              "domain_bands",
+              "safety_flags"
+            ],
+            "registry_refs": [
+              "scenario_registry:collaboration",
+              "share_safety_registry:collaboration_manual"
+            ],
+            "safety_level": "standard",
+            "evidence_level": "registry_backed",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          }
+        ]
+      },
+      {
+        "module_key": "module_08_share_save",
+        "blocks": [
+          {
+            "block_key": "module_08_share_save.share_privacy_summary.o59_core_body_preview.v1",
+            "block_kind": "share_save",
+            "module_key": "module_08_share_save",
+            "source_section_key": "methodology_and_access",
+            "source_section_title_zh": "方法、边界与访问说明",
+            "source_modules": [
+              "module_00_trust_bar",
+              "module_10_method_privacy"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "隐私与数据使用",
+              "body_zh": "你的测试结果和反馈只用于生成报告、改善解释准确度和优化产品体验。邮箱不是必填项；不填写也可以完整阅读报告。分享内容只会在你主动生成时创建，敏感心理内容不会默认分享。你可以申请删除个人测试结果与反馈数据。"
+            },
+            "projection_refs": [
+              "profile_signature.label_key",
+              "safety_flags"
+            ],
+            "registry_refs": [
+              "share_safety_registry:summary_card",
+              "boundary_registry:share_boundary"
+            ],
+            "safety_level": "share_safe",
+            "evidence_level": "descriptive",
+            "shareable": true,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          }
+        ]
+      },
+      {
+        "module_key": "module_09_feedback_data_flywheel",
+        "blocks": [
+          {
+            "block_key": "module_09_feedback_data_flywheel.retest_feedback_prompt.o59_core_body_preview.v1",
+            "block_kind": "feedback_block",
+            "module_key": "module_09_feedback_data_flywheel",
+            "source_section_key": "methodology_and_access",
+            "source_section_title_zh": "方法、边界与访问说明",
+            "source_modules": [
+              "module_00_trust_bar",
+              "module_10_method_privacy"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "复测与反馈",
+              "body_zh": "本结果基于你当前作答生成。建议在未来 4-8 周后，结合现实行为再次复测或回看：最近最明显的耗损来自哪里，哪一个判断已经在报告里提前写出来，是否开始更早表达边界，以及是否把节奏问题继续误判成意志力问题。"
+            },
+            "projection_refs": [
+              "attempt_id",
+              "interpretation_scope",
+              "quality_status"
+            ],
+            "registry_refs": [
+              "observation_feedback_registry:module_feedback",
+              "state_scope_registry:retest_recommended"
+            ],
+            "safety_level": "boundary",
+            "evidence_level": "descriptive",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          }
+        ]
+      },
+      {
+        "module_key": "module_10_method_privacy",
+        "blocks": [
+          {
+            "block_key": "module_10_method_privacy.norms_boundary.o59_core_body_preview.v1",
+            "block_kind": "method_boundary",
+            "module_key": "module_10_method_privacy",
+            "source_section_key": "norms_comparison",
+            "source_section_title_zh": "常模与分数边界",
+            "source_modules": [
+              "module_10_method_privacy"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "中文方法边界",
+              "body_zh": "这份内容用中文解释当前 Big Five 分数的行为含义。若当前没有发布稳定常模，就不展示超过多少人的排名，也不展示正态曲线。此时可以展示 0-100 分数条和偏低、中位、偏高区间，但它们只能作为阅读参考，不能作为身份判断、能力判断或筛选依据。"
+            },
+            "projection_refs": [
+              "norm_status",
+              "norm_group_id",
+              "norm_version",
+              "quality_status",
+              "safety_flags"
+            ],
+            "registry_refs": [
+              "boundary_registry:method_privacy",
+              "method_registry:core_body_preview",
+              "state_scope_registry:high_tension_profile"
+            ],
+            "safety_level": "boundary",
+            "evidence_level": "descriptive",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_10_method_privacy.norms_score_reference.o59_core_body_preview.v1",
+            "block_kind": "method_boundary",
+            "module_key": "module_10_method_privacy",
+            "source_section_key": "norms_comparison",
+            "source_section_title_zh": "常模与分数边界",
+            "source_modules": [
+              "module_10_method_privacy"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "如何使用分数",
+              "body_zh": "O59、C32、E20、A55、N68 的价值在于提供一张当前倾向地图，而不是判定你是谁。阅读时应把分数带回现实情境验证：什么环境放大你，什么环境消耗你，哪些行动支架能让你更稳定。分数不应用于招聘筛选、医学判断或对个人做单一结论。"
+            },
+            "projection_refs": [
+              "norm_status",
+              "norm_group_id",
+              "norm_version",
+              "quality_status",
+              "safety_flags"
+            ],
+            "registry_refs": [
+              "boundary_registry:method_privacy",
+              "method_registry:core_body_preview",
+              "state_scope_registry:high_tension_profile"
+            ],
+            "safety_level": "boundary",
+            "evidence_level": "descriptive",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_10_method_privacy.method_boundaries.o59_core_body_preview.v1",
+            "block_kind": "method_boundary",
+            "module_key": "module_10_method_privacy",
+            "source_section_key": "methodology_and_access",
+            "source_section_title_zh": "方法、边界与访问说明",
+            "source_modules": [
+              "module_00_trust_bar",
+              "module_10_method_privacy"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "使用边界",
+              "body_zh": "Big Five 描述的是连续人格特质，不是固定人格类型。本报告用于自我理解、职业反思和行动规划，不用于医学诊断、心理治疗、招聘筛选或给自己贴死标签。画像名只是辅助理解标签；高低分不代表好坏；结果应带回工作、关系和压力情境里验证。"
+            },
+            "projection_refs": [
+              "norm_status",
+              "norm_group_id",
+              "norm_version",
+              "quality_status",
+              "safety_flags"
+            ],
+            "registry_refs": [
+              "boundary_registry:method_privacy",
+              "method_registry:core_body_preview",
+              "state_scope_registry:high_tension_profile"
+            ],
+            "safety_level": "boundary",
+            "evidence_level": "descriptive",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_10_method_privacy.method_facet_norms.o59_core_body_preview.v1",
+            "block_kind": "method_boundary",
+            "module_key": "module_10_method_privacy",
+            "source_section_key": "methodology_and_access",
+            "source_section_title_zh": "方法、边界与访问说明",
+            "source_modules": [
+              "module_00_trust_bar",
+              "module_10_method_privacy"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "侧面线索与常模说明",
+              "body_zh": "报告中既包含分数事实，也包含基于人格模型的解释性推断和帮助理解的语言表达。如果侧面线索没有独立题项和信度支持，应标注为解释性推断。若当前尚未发布稳定常模，只展示 0-100 分数条与偏低、中位、偏高区间，不展示超过多少人的排名，也不展示曲线比较。"
+            },
+            "projection_refs": [
+              "norm_status",
+              "norm_group_id",
+              "norm_version",
+              "quality_status",
+              "safety_flags"
+            ],
+            "registry_refs": [
+              "boundary_registry:method_privacy",
+              "method_registry:core_body_preview",
+              "state_scope_registry:high_tension_profile"
+            ],
+            "safety_level": "boundary",
+            "evidence_level": "descriptive",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_10_method_privacy.method_privacy_data.o59_core_body_preview.v1",
+            "block_kind": "method_boundary",
+            "module_key": "module_10_method_privacy",
+            "source_section_key": "methodology_and_access",
+            "source_section_title_zh": "方法、边界与访问说明",
+            "source_modules": [
+              "module_00_trust_bar",
+              "module_10_method_privacy"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "隐私与数据使用",
+              "body_zh": "你的测试结果和反馈只用于生成报告、改善解释准确度和优化产品体验。邮箱不是必填项；不填写也可以完整阅读报告。分享内容只会在你主动生成时创建，敏感心理内容不会默认分享。你可以申请删除个人测试结果与反馈数据。"
+            },
+            "projection_refs": [
+              "norm_status",
+              "norm_group_id",
+              "norm_version",
+              "quality_status",
+              "safety_flags"
+            ],
+            "registry_refs": [
+              "boundary_registry:method_privacy",
+              "method_registry:core_body_preview",
+              "state_scope_registry:high_tension_profile"
+            ],
+            "safety_level": "boundary",
+            "evidence_level": "descriptive",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          },
+          {
+            "block_key": "module_10_method_privacy.method_retest.o59_core_body_preview.v1",
+            "block_kind": "method_boundary",
+            "module_key": "module_10_method_privacy",
+            "source_section_key": "methodology_and_access",
+            "source_section_title_zh": "方法、边界与访问说明",
+            "source_modules": [
+              "module_00_trust_bar",
+              "module_10_method_privacy"
+            ],
+            "source_asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+            "content": {
+              "title_zh": "复测建议",
+              "body_zh": "本结果基于你当前作答生成。建议在未来 4-8 周后，结合现实行为再次复测或回看：最近最明显的耗损来自哪里，哪一个判断已经在报告里提前写出来，是否开始更早表达边界，以及是否把节奏问题继续误判成意志力问题。"
+            },
+            "projection_refs": [
+              "norm_status",
+              "norm_group_id",
+              "norm_version",
+              "quality_status",
+              "safety_flags"
+            ],
+            "registry_refs": [
+              "boundary_registry:method_privacy",
+              "method_registry:core_body_preview",
+              "state_scope_registry:high_tension_profile"
+            ],
+            "safety_level": "boundary",
+            "evidence_level": "descriptive",
+            "shareable": false,
+            "content_source": "fixture",
+            "fallback_policy": "backend_required"
+          }
+        ]
+      }
+    ]
+  }
+}
