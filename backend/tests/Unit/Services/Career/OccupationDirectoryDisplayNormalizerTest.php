@@ -13,7 +13,7 @@ final class OccupationDirectoryDisplayNormalizerTest extends TestCase
     #[Test]
     public function english_title_translation_trims_connectors_without_corrupting_utf8(): void
     {
-        $normalizer = new OccupationDirectoryDisplayNormalizer();
+        $normalizer = new OccupationDirectoryDisplayNormalizer;
 
         $title = $normalizer->titleZh([
             'market' => 'US',

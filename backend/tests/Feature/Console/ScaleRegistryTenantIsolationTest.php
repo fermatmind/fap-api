@@ -78,7 +78,7 @@ final class ScaleRegistryTenantIsolationTest extends TestCase
 
     public function test_scales_registry_v2_supports_same_code_across_tenants(): void
     {
-        if (!Schema::hasTable('scales_registry_v2')) {
+        if (! Schema::hasTable('scales_registry_v2')) {
             $this->markTestSkipped('scales_registry_v2 missing');
         }
 
