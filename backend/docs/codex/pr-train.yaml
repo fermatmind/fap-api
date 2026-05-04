@@ -2466,6 +2466,42 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-D8c
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-d8c-display-asset-import-batch
+    base: main
+    depends_on: ["PR-D8b"]
+    mode: execute
+    scope: >
+      D8 selected display asset import batch for the 19 active D8 slugs after
+      software-developers moved to manual hold. Expand the guarded
+      career:import-selected-display-assets mapper/import allowlist, keep
+      software-developers unsupported, preserve dry-run by default,
+      --force-only writes, authority validation, Product/forbidden-field
+      rejection, lineage metadata, idempotency, display-asset-only writes,
+      release gate closure, sitemap/llms closure, and protected validated slug
+      safety. Do not create occupations/crosswalks, import software-developers,
+      change public API resources, mutate sitemap/llms, alter release states,
+      or process a 2786 bulk write.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Console/Commands/CareerImportSelectedDisplayAssets.php app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php app/Console/Kernel.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Console/CareerFullDisplayWorkbookValidatorCommandTest.php"
+      - "php artisan career:import-selected-display-assets --file=/tmp/fermat_career_assets_v4_2_v9_d8b1_19_repaired.xlsx --slugs=web-developers,marketing-managers,lawyers,pharmacists,acupuncturists,business-intelligence-analysts,clinical-data-managers,budget-analysts,human-resources-managers,administrative-services-managers,advertising-and-promotions-managers,architects,air-traffic-controllers,airline-and-commercial-pilots,chemists-and-materials-scientists,clinical-laboratory-technologists-and-technicians,community-health-workers,compensation-and-benefits-managers,career-and-technical-education-teachers --dry-run --json"
+      - "php artisan career:import-selected-display-assets --file=/tmp/fermat_career_assets_v4_2_v9_d8b1_19_repaired.xlsx --slugs=software-developers --dry-run --json"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-B84
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

@@ -112,6 +112,47 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
     }
 
     #[Test]
+    public function d8_active_slugs_dry_run_generates_payloads_without_importing_manual_hold(): void
+    {
+        foreach ($this->d8Rows() as $row) {
+            $this->createAuthorityOccupation($row['Slug'], $row['SOC_Code'], $row['O_NET_Code']);
+        }
+        $workbook = $this->writeWorkbook($this->d8Rows());
+        $before = $this->tableCounts();
+
+        [$exitCode, $report] = $this->runImport($workbook, implode(',', array_column($this->d8Rows(), 'Slug')), [
+            '--dry-run' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame($before, $this->tableCounts());
+        $this->assertSame('dry_run', $report['mode']);
+        $this->assertSame(19, $report['validated_count']);
+        $this->assertSame(19, $report['would_write_count']);
+        $this->assertFalse($report['did_write']);
+
+        foreach ($report['items'] as $item) {
+            $this->assertNotSame('software-developers', $item['slug']);
+            $this->assertTrue($item['would_write']);
+            $this->assertSame(24, $item['payload_summary']['component_order_count']);
+            $this->assertTrue($item['payload_summary']['has_zh_page']);
+            $this->assertTrue($item['payload_summary']['has_en_page']);
+            $this->assertSame([], $item['payload_summary']['public_payload_forbidden_keys_found']);
+        }
+
+        [$exitCode, $report] = $this->runImport(
+            $this->writeWorkbook([
+                $this->row('software-developers', title: 'Software Developers', cnTitle: '软件开发人员', soc: '15-1252', onet: '15-1252.00'),
+            ]),
+            'software-developers',
+            ['--dry-run' => true],
+        );
+
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('Unsupported slug(s) for selected display asset import: software-developers.', implode(' ', $report['errors']));
+    }
+
+    #[Test]
     public function force_writes_exactly_three_display_asset_rows(): void
     {
         foreach ($this->selectedRows() as $row) {
@@ -173,6 +214,60 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
         $this->assertSame(8, Occupation::query()->count());
         $this->assertSame(16, OccupationCrosswalk::query()->count());
         $this->assertSame(8, CareerJobDisplayAsset::query()->count());
+    }
+
+    #[Test]
+    public function force_writes_d8_display_assets_only_with_lineage_and_is_idempotent(): void
+    {
+        foreach ($this->d8Rows() as $row) {
+            $this->createAuthorityOccupation($row['Slug'], $row['SOC_Code'], $row['O_NET_Code']);
+        }
+        $workbook = $this->writeWorkbook($this->d8Rows());
+        $slugs = implode(',', array_column($this->d8Rows(), 'Slug'));
+
+        [$exitCode, $report] = $this->runImport($workbook, $slugs, ['--force' => true]);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame('force', $report['mode']);
+        $this->assertTrue($report['did_write']);
+        $this->assertSame(19, $report['created_count']);
+        $this->assertSame(0, $report['updated_count']);
+        $this->assertSame(19, Occupation::query()->count());
+        $this->assertSame(38, OccupationCrosswalk::query()->count());
+        $this->assertSame(19, CareerJobDisplayAsset::query()->count());
+        $this->assertDatabaseMissing('career_job_display_assets', ['canonical_slug' => 'software-developers']);
+
+        foreach ($this->d8Rows() as $row) {
+            $asset = CareerJobDisplayAsset::query()
+                ->where('canonical_slug', $row['Slug'])
+                ->where('asset_version', 'v4.2')
+                ->firstOrFail();
+            $metadata = $asset->metadata_json;
+
+            $this->assertSame('display.surface.v1', $asset->surface_version);
+            $this->assertSame('v4.2', $asset->template_version);
+            $this->assertSame('career_job_public_display', $asset->asset_type);
+            $this->assertSame('ready_for_pilot', $asset->status);
+            $this->assertCount(24, $asset->component_order_json);
+            $this->assertIsArray(data_get($asset->page_payload_json, 'page.zh'));
+            $this->assertIsArray(data_get($asset->page_payload_json, 'page.en'));
+            $this->assertSame('career:import-selected-display-assets', data_get($metadata, 'command'));
+            $this->assertSame(hash_file('sha256', $workbook), data_get($metadata, 'workbook_sha256'));
+            $this->assertIsInt(data_get($metadata, 'row_number'));
+            $this->assertIsString(data_get($metadata, 'row_fingerprint'));
+            $this->assertSame(false, data_get($metadata, 'release_gates.sitemap'));
+            $this->assertStringNotContainsString('"@type":"Product"', json_encode($asset->structured_data_json, JSON_THROW_ON_ERROR));
+            $this->assertStringNotContainsString('release_gates', json_encode($asset->page_payload_json, JSON_THROW_ON_ERROR));
+        }
+
+        [$exitCode, $report] = $this->runImport($workbook, $slugs, ['--force' => true]);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame(0, $report['created_count']);
+        $this->assertSame(19, $report['updated_count']);
+        $this->assertSame(19, Occupation::query()->count());
+        $this->assertSame(38, OccupationCrosswalk::query()->count());
+        $this->assertSame(19, CareerJobDisplayAsset::query()->count());
     }
 
     #[Test]
@@ -436,6 +531,34 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
             $this->row('civil-engineers', title: 'Civil Engineers', cnTitle: '土木工程师', soc: '17-2051', onet: '17-2051.00'),
             $this->row('biomedical-engineers', title: 'Bioengineers and Biomedical Engineers', cnTitle: '生物工程师与生物医学工程师', soc: '17-2031', onet: '17-2031.00'),
             $this->row('dentists', title: 'Dentists, General', cnTitle: '普通牙医', soc: '29-1021', onet: '29-1021.00'),
+        ];
+    }
+
+    /**
+     * @return list<array<string, string>>
+     */
+    private function d8Rows(): array
+    {
+        return [
+            $this->row('web-developers', title: 'Web Developers', cnTitle: '网页开发人员', soc: '15-1254', onet: '15-1254.00'),
+            $this->row('marketing-managers', title: 'Marketing Managers', cnTitle: '营销经理', soc: '11-2021', onet: '11-2021.00'),
+            $this->row('lawyers', title: 'Lawyers', cnTitle: '律师', soc: '23-1011', onet: '23-1011.00'),
+            $this->row('pharmacists', title: 'Pharmacists', cnTitle: '药剂师', soc: '29-1051', onet: '29-1051.00'),
+            $this->row('acupuncturists', title: 'Acupuncturists', cnTitle: '针灸师', soc: '29-1291', onet: '29-1291.00'),
+            $this->row('business-intelligence-analysts', title: 'Business Intelligence Analysts', cnTitle: '商业智能分析师', soc: '15-2051', onet: '15-2051.01'),
+            $this->row('clinical-data-managers', title: 'Clinical Data Managers', cnTitle: '临床数据经理', soc: '15-2051', onet: '15-2051.02'),
+            $this->row('budget-analysts', title: 'Budget Analysts', cnTitle: '预算分析师', soc: '13-2031', onet: '13-2031.00'),
+            $this->row('human-resources-managers', title: 'Human Resources Managers', cnTitle: '人力资源经理', soc: '11-3121', onet: '11-3121.00'),
+            $this->row('administrative-services-managers', title: 'Administrative Services Managers', cnTitle: '行政服务经理', soc: '11-3012', onet: '11-3012.00'),
+            $this->row('advertising-and-promotions-managers', title: 'Advertising and Promotions Managers', cnTitle: '广告与促销经理', soc: '11-2011', onet: '11-2011.00'),
+            $this->row('architects', title: 'Architects, Except Landscape and Naval', cnTitle: '建筑师（不含景观与船舶）', soc: '17-1011', onet: '17-1011.00'),
+            $this->row('air-traffic-controllers', title: 'Air Traffic Controllers', cnTitle: '空中交通管制员', soc: '53-2021', onet: '53-2021.00'),
+            $this->row('airline-and-commercial-pilots', title: 'Airline and Commercial Pilots', cnTitle: '航空公司与商业飞行员', soc: '53-2011', onet: '53-2011.00'),
+            $this->row('chemists-and-materials-scientists', title: 'Chemists', cnTitle: '化学家', soc: '19-2031', onet: '19-2031.00'),
+            $this->row('clinical-laboratory-technologists-and-technicians', title: 'Medical and Clinical Laboratory Technologists', cnTitle: '医学与临床实验室技师', soc: '29-2011', onet: '29-2011.00'),
+            $this->row('community-health-workers', title: 'Community Health Workers', cnTitle: '社区健康工作者', soc: '21-1094', onet: '21-1094.00'),
+            $this->row('compensation-and-benefits-managers', title: 'Compensation and Benefits Managers', cnTitle: '薪酬与福利经理', soc: '11-3111', onet: '11-3111.00'),
+            $this->row('career-and-technical-education-teachers', title: 'Career/Technical Education Teachers, Secondary School', cnTitle: '中学职业/技术教育教师', soc: '25-2032', onet: '25-2032.00'),
         ];
     }
 

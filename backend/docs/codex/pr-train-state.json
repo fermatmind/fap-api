@@ -5247,5 +5247,81 @@
         ]
       }
     }
+  },
+  "trains": {
+    "career-pr-train": {
+      "prs": {
+        "PR-D8c": {
+          "repo": "fap-api",
+          "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+          "status": "pr_open",
+          "branch": "codex/pr-d8c-display-asset-import-batch",
+          "commit_sha": "e57800121b0b002c35841eaf78e3d2061683e917",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1132",
+          "checks": {
+            "local": [
+              {
+                "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+                "status": "passed"
+              },
+              {
+                "command": "vendor/bin/pint --test app/Console/Commands/CareerImportSelectedDisplayAssets.php app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php app/Console/Kernel.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+                "status": "passed"
+              },
+              {
+                "command": "php artisan test tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Console/CareerFullDisplayWorkbookValidatorCommandTest.php",
+                "status": "passed"
+              },
+              {
+                "command": "php artisan career:import-selected-display-assets --file=/tmp/fermat_career_assets_v4_2_v9_d8b1_19_repaired.xlsx --slugs=web-developers,marketing-managers,lawyers,pharmacists,acupuncturists,business-intelligence-analysts,clinical-data-managers,budget-analysts,human-resources-managers,administrative-services-managers,advertising-and-promotions-managers,architects,air-traffic-controllers,airline-and-commercial-pilots,chemists-and-materials-scientists,clinical-laboratory-technologists-and-technicians,community-health-workers,compensation-and-benefits-managers,career-and-technical-education-teachers --dry-run --json",
+                "status": "no_go_authority_unavailable_locally",
+                "details": "Workbook contract and mapper payloads validated for 19 active D8 slugs; local authority DB/public fallback is unavailable, so target dry-run is required post-merge."
+              },
+              {
+                "command": "php artisan career:import-selected-display-assets --file=/tmp/fermat_career_assets_v4_2_v9_d8b1_19_repaired.xlsx --slugs=software-developers --dry-run --json",
+                "status": "passed_expected_rejection",
+                "details": "software-developers remains unsupported/manual hold."
+              },
+              {
+                "command": "git diff --check",
+                "status": "passed"
+              },
+              {
+                "command": "git diff --cached --check",
+                "status": "passed"
+              }
+            ],
+            "github": []
+          },
+          "failure_reason": "",
+          "resume_policy": "manual_only",
+          "merged_at": "",
+          "remote_branch_deleted": false,
+          "local_cleanup_executed": false,
+          "history": [
+            {
+              "at": "2026-05-04T17:20:00+08:00",
+              "status": "in_progress",
+              "summary": "Initialized PR-D8c ledger entry for guarded display asset import of the 19 active D8 slugs, excluding software-developers manual hold."
+            },
+            {
+              "at": "2026-05-04T17:32:00+08:00",
+              "status": "local_checks_passed",
+              "summary": "D8c scoped tests and Pint passed; real D8b1 workbook maps 19 active slugs but local dry-run is no_go due unavailable authority, while software-developers is explicitly rejected."
+            },
+            {
+              "at": "2026-05-04T17:34:00+08:00",
+              "status": "committed",
+              "summary": "Committed D8c display asset import allowlist and tests on codex/pr-d8c-display-asset-import-batch."
+            },
+            {
+              "at": "2026-05-04T17:36:00+08:00",
+              "status": "pr_open",
+              "summary": "Opened draft PR #1132 for D8c selected display asset import batch."
+            }
+          ]
+        }
+      }
+    }
   }
 }
