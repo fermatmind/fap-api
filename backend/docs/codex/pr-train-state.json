@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-04T06:15:00Z",
+  "updated_at": "2026-05-04T21:55:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -5451,6 +5451,67 @@
               "at": "2026-05-05T00:04:00+08:00",
               "status": "pr_open",
               "summary": "Opened draft PR #1136 for display-asset-backed career detail bundles."
+            }
+          ]
+        },
+        "PR-D11": {
+          "repo": "fap-api",
+          "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+          "status": "local_checks_passed",
+          "branch": "codex/pr-d11-career-authority-batch",
+          "commit_sha": "",
+          "pr_url": "",
+          "checks": {
+            "local": [
+              {
+                "command": "vendor/bin/pint --test app/Console/Commands/CareerAlignCareerAuthorityBatch.php app/Console/Kernel.php tests/Feature/Console/CareerAlignCareerAuthorityBatchCommandTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+                "status": "passed"
+              },
+              {
+                "command": "php artisan test tests/Feature/Console/CareerAlignCareerAuthorityBatchCommandTest.php",
+                "status": "passed"
+              },
+              {
+                "command": "php artisan career:align-career-authority-batch --file=/tmp/fermat_career_assets_v4_2_v9_d10_30_repaired.xlsx --slugs=$D10_SLUGS --dry-run --json",
+                "status": "passed",
+                "details": "decision=pass, validated_count=30, did_write=false; local DB empty so local plan reports would_create_occupation_count=30 and would_create_crosswalk_count=60; target dry-run would be authoritative for +7/+37."
+              },
+              {
+                "command": "vendor/bin/pint --test app/Console/Commands app/Console/Kernel.php tests/Feature/Console tests/Unit/Services/Career docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+                "status": "passed"
+              },
+              {
+                "command": "php artisan test tests/Feature/Console tests/Unit/Services/Career",
+                "status": "passed",
+                "details": "D11-preflight PR #1138 restored the out-of-scope career test baseline; rerun passed with 412 tests and 12212 assertions."
+              },
+              {
+                "command": "git diff --check && git diff --cached --check",
+                "status": "passed"
+              }
+            ],
+            "github": []
+          },
+          "failure_reason": "",
+          "resume_policy": "manual_only",
+          "merged_at": "",
+          "remote_branch_deleted": false,
+          "local_cleanup_executed": false,
+          "history": [
+            {
+              "at": "2026-05-04T21:40:00+08:00",
+              "status": "in_progress",
+              "summary": "Initialized PR-D11 ledger entry for guarded career upload authority alignment of the first 30-slug D10 cohort."
+            },
+            {
+              "at": "2026-05-04T21:55:00+08:00",
+              "status": "local_checks_failed",
+              "summary": "D11 implementation-specific tests passed, but required broad local acceptance failed on existing out-of-scope career tests; PR was not opened and no DB writes were run."
+            },
+            {
+              "at": "2026-05-04T22:13:00+08:00",
+              "status": "local_checks_passed",
+              "summary": "After D11-preflight PR #1138 merged, D11 scoped Pint, command tests, broad career console/unit acceptance, D10 workbook dry-run, and diff checks passed without DB writes."
             }
           ]
         }
