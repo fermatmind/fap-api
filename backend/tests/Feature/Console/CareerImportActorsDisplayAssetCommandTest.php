@@ -174,12 +174,16 @@ final class CareerImportActorsDisplayAssetCommandTest extends TestCase
         $this->createOccupation();
         $file = $this->writeAsset(function (array &$payload): void {
             $payload['page']['zh']['release_gate'] = ['hidden' => true];
+            $payload['page']['zh']['boundary_notice']['release_gates'] = ['sitemap' => false];
         });
 
         [$exitCode, $report] = $this->runImport($file, ['--force' => true]);
 
         $this->assertSame(1, $exitCode);
-        $this->assertSame(['page_payload_json.zh.release_gate'], $report['public_payload_forbidden_keys_found']);
+        $this->assertEqualsCanonicalizing([
+            'page_payload_json.zh.release_gate',
+            'page_payload_json.zh.boundary_notice.release_gates',
+        ], $report['public_payload_forbidden_keys_found']);
         $this->assertSame(0, CareerJobDisplayAsset::query()->count());
     }
 
@@ -411,6 +415,7 @@ final class CareerImportActorsDisplayAssetCommandTest extends TestCase
                 ],
                 'not_included_in_public_display' => [
                     'release_gate',
+                    'release_gates',
                     'qa_risk',
                     'admin_review_state',
                     'tracking_json',

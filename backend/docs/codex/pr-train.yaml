@@ -2199,6 +2199,40 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-D5d-api-hotfix
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-d5d-api-hotfix-strip-release-gates
+    base: main
+    depends_on: ["PR-D5d-api"]
+    mode: execute
+    scope: >
+      Strip release_gates from public career display surface payloads. Update
+      backend display_surface_v1 recursive sanitization so release_gate,
+      release_gates, qa_risk, admin_review_state, tracking_json, and
+      raw_ai_exposure_score are not emitted from public API payloads, and keep
+      the display asset mapper/importer forbidden-key guards aligned for future
+      imports. Do not write DB rows, import display assets, alter existing
+      display asset rows, change routes/controllers/resources, frontend,
+      sitemap, llms, release gates, Actors content, existing validated career
+      data, CN mapping, payment/order, tracking, or bulk rollout.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php app/Console/Commands/CareerImportActorsDisplayAsset.php app/Console/Commands/CareerValidateDisplayBatch.php tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Feature/Console/CareerImportActorsDisplayAssetCommandTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php tests/Feature/Console/CareerImportActorsDisplayAssetCommandTest.php"
+      - "php artisan route:list | grep -E 'career/jobs|career-jobs|career|seo'"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-B84
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

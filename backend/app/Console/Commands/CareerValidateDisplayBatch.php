@@ -108,6 +108,7 @@ final class CareerValidateDisplayBatch extends Command
     /** @var list<string> */
     private const FORBIDDEN_PUBLIC_TERMS = [
         'release_gate',
+        'release_gates',
         'qa_risk',
         'admin_review_state',
         'tracking_json',

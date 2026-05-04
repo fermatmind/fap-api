@@ -95,10 +95,8 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
         $faq = json_decode($row['CN_FAQ_SCHEMA_JSON'], true, 512, JSON_THROW_ON_ERROR);
         $faq['hidden_faq'] = [['name' => 'Hidden']];
         $row['CN_FAQ_SCHEMA_JSON'] = $this->encodeJson($faq);
-        $row['EN_Internal_Links'] = $this->encodeJson([
-            'related_tests' => ['/en/tests/holland-career-interest-test-riasec'],
-            'validation_policy' => ['render_policy' => 'hide_or_plain_text_if_unvalidated'],
-            'tracking_json' => ['do_not_show' => true],
+        $row['EN_Comparison_Block'] = $this->encodeJson([
+            'release_gates' => ['sitemap' => false],
         ]);
 
         $result = app(CareerSelectedDisplayAssetMapper::class)->mapRow($row);
@@ -107,6 +105,7 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
         $this->assertStringContainsString('EN_Occupation_Schema_JSON must not include Product schema.', $errors);
         $this->assertStringContainsString('cn_faq must not contain hidden FAQ schema.', $errors);
         $this->assertStringContainsString('Forbidden public payload keys found', $errors);
+        $this->assertContains('page_payload_json.page.en.adjacent_career_comparison_table.release_gates', $result['summary']['public_payload_forbidden_keys_found']);
     }
 
     /**

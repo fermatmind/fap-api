@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-04T03:38:00Z",
+  "updated_at": "2026-05-04T03:55:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -4255,9 +4255,9 @@
     "PR-D5d-api": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "draft_open",
+      "status": "merged",
       "branch": "codex/pr-d5d-api",
-      "commit_sha": "8a14a6b0b4e645a22a1656b9f458a9736c14b81d",
+      "commit_sha": "3c571c414f2ec582233973539222924ac3f081eb",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1115",
       "checks": {
         "local": [
@@ -4286,9 +4286,9 @@
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-03T19:30:59Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-04T03:30:00Z",
@@ -4304,6 +4304,61 @@
           "at": "2026-05-04T03:38:00Z",
           "status": "draft_open",
           "summary": "Opened draft PR #1115 for PR-D5d-api after scoped local checks passed."
+        },
+        {
+          "at": "2026-05-04T03:45:00Z",
+          "status": "reconciled_merged",
+          "summary": "Reconciled PR-D5d-api ledger: GitHub PR #1115 is merged, origin/main contains merge commit 3c571c414f2ec582233973539222924ac3f081eb, and the task branch is cleaned up locally/remotely."
+        }
+      ]
+    },
+    "PR-D5d-api-hotfix": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "in_progress",
+      "branch": "codex/pr-d5d-api-hotfix-strip-release-gates",
+      "commit_sha": "f95870e2763596193da83f70b6b299f5dc3aa78b",
+      "pr_url": "",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php app/Console/Commands/CareerImportActorsDisplayAsset.php app/Console/Commands/CareerValidateDisplayBatch.php tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Feature/Console/CareerImportActorsDisplayAssetCommandTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php tests/Feature/Console/CareerImportActorsDisplayAssetCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list | rg 'career/jobs|career-jobs|career|seo'",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-04T03:45:00Z",
+          "status": "in_progress",
+          "summary": "Initialized PR-D5d-api-hotfix ledger entry to strip release_gates from public display_surface_v1 payloads."
+        },
+        {
+          "at": "2026-05-04T03:55:00Z",
+          "status": "local_verified",
+          "summary": "Implemented release_gates public payload stripping, aligned import guards, and passed scoped formatter, tests, route list, and diff checks."
         }
       ]
     }

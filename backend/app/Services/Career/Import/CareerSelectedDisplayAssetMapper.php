@@ -148,6 +148,7 @@ final class CareerSelectedDisplayAssetMapper
     /** @var list<string> */
     private const FORBIDDEN_PUBLIC_KEYS = [
         'release_gate',
+        'release_gates',
         'qa_risk',
         'admin_review_state',
         'tracking_json',
@@ -428,14 +429,7 @@ final class CareerSelectedDisplayAssetMapper
                 'last_reviewed' => $this->stringValue($row, 'Last_Reviewed'),
                 'next_review_due' => $this->stringValue($row, 'Next_Review_Due'),
             ],
-            'boundary_notice' => [
-                'release_gates' => [
-                    'sitemap' => false,
-                    'llms' => false,
-                    'paid' => false,
-                    'backlink' => false,
-                ],
-            ],
+            'boundary_notice' => [],
             'final_cta' => $primaryCta,
             'secondary_cta' => [
                 'label' => $this->stringValue($row, 'Secondary_CTA_Label'),
