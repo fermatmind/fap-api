@@ -32,6 +32,7 @@ use App\Console\Commands\CareerImportSelectedDisplayAssets;
 use App\Console\Commands\CareerRunAssetBatch;
 use App\Console\Commands\CareerSyncOccupationDirectoryDisplay;
 use App\Console\Commands\CareerValidateAssetImport;
+use App\Console\Commands\CareerValidateDisplayAssetLineage;
 use App\Console\Commands\CareerValidateDisplayBatch;
 use App\Console\Commands\CareerValidateOccupationDirectoryReviewQueues;
 use App\Console\Commands\CareerValidateReleaseGate;
@@ -173,6 +174,7 @@ class Kernel extends ConsoleKernel
         CareerImportSelectedDisplayAssets::class,
         CareerValidateAssetImport::class,
         CareerValidateDisplayBatch::class,
+        CareerValidateDisplayAssetLineage::class,
         CareerValidateReleaseGate::class,
         CareerFullDisplayWorkbookValidator::class,
         CareerCompileAuthorityWave::class,
