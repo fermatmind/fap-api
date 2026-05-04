@@ -421,6 +421,7 @@ final class CareerImportSelectedDisplayAssets extends Command
             'workbook_sha256' => hash_file('sha256', $file) ?: null,
             'slug' => $item['slug'],
             'row_number' => $item['row_number'],
+            'row_fingerprint' => $this->rowFingerprint($item),
             'imported_at' => now()->toISOString(),
             'release_gates' => [
                 'sitemap' => false,
@@ -430,6 +431,22 @@ final class CareerImportSelectedDisplayAssets extends Command
             ],
             'display_import_stage' => 'second_pilot_selected',
         ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $item
+     */
+    private function rowFingerprint(array $item): string
+    {
+        $payload = [
+            'slug' => $item['slug'] ?? null,
+            'row_number' => $item['row_number'] ?? null,
+            'payload_summary' => $item['payload_summary'] ?? [],
+            'payload' => $item['payload'] ?? [],
+        ];
+        $encoded = json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+        return hash('sha256', is_string($encoded) ? $encoded : serialize($payload));
     }
 
     /**

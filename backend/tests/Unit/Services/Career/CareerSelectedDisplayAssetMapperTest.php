@@ -59,6 +59,31 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
         }
     }
 
+    public function test_it_maps_d8_active_rows_and_keeps_software_developers_on_manual_hold(): void
+    {
+        foreach ($this->d8Rows() as $row) {
+            $result = app(CareerSelectedDisplayAssetMapper::class)->mapRow($row);
+
+            $this->assertSame([], $result['errors'], $row['Slug'].' should map cleanly.');
+            $this->assertSame($row['Slug'], $result['slug']);
+            $this->assertSame($row['SOC_Code'], $result['expected_soc']);
+            $this->assertSame($row['O_NET_Code'], $result['expected_onet']);
+            $this->assertSame(24, $result['summary']['component_order_count']);
+            $this->assertTrue($result['summary']['has_zh_page']);
+            $this->assertTrue($result['summary']['has_en_page']);
+            $this->assertSame([], $result['summary']['public_payload_forbidden_keys_found']);
+        }
+
+        $result = app(CareerSelectedDisplayAssetMapper::class)->mapRow(
+            $this->row('software-developers', title: 'Software Developers', cnTitle: '软件开发人员', soc: '15-1252', onet: '15-1252.00'),
+        );
+
+        $this->assertStringContainsString(
+            'Slug is not in the selected display asset import allowlist.',
+            implode(' ', $result['errors']),
+        );
+    }
+
     public function test_biomedical_engineers_rejects_product_substring_if_reintroduced(): void
     {
         $row = $this->row(
@@ -122,6 +147,34 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
             $this->row('civil-engineers', title: 'Civil Engineers', cnTitle: '土木工程师', soc: '17-2051', onet: '17-2051.00'),
             $this->row('biomedical-engineers', title: 'Bioengineers and Biomedical Engineers', cnTitle: '生物工程师与生物医学工程师', soc: '17-2031', onet: '17-2031.00'),
             $this->row('dentists', title: 'Dentists, General', cnTitle: '普通牙医', soc: '29-1021', onet: '29-1021.00'),
+        ];
+    }
+
+    /**
+     * @return list<array<string, string>>
+     */
+    private function d8Rows(): array
+    {
+        return [
+            $this->row('web-developers', title: 'Web Developers', cnTitle: '网页开发人员', soc: '15-1254', onet: '15-1254.00'),
+            $this->row('marketing-managers', title: 'Marketing Managers', cnTitle: '营销经理', soc: '11-2021', onet: '11-2021.00'),
+            $this->row('lawyers', title: 'Lawyers', cnTitle: '律师', soc: '23-1011', onet: '23-1011.00'),
+            $this->row('pharmacists', title: 'Pharmacists', cnTitle: '药剂师', soc: '29-1051', onet: '29-1051.00'),
+            $this->row('acupuncturists', title: 'Acupuncturists', cnTitle: '针灸师', soc: '29-1291', onet: '29-1291.00'),
+            $this->row('business-intelligence-analysts', title: 'Business Intelligence Analysts', cnTitle: '商业智能分析师', soc: '15-2051', onet: '15-2051.01'),
+            $this->row('clinical-data-managers', title: 'Clinical Data Managers', cnTitle: '临床数据经理', soc: '15-2051', onet: '15-2051.02'),
+            $this->row('budget-analysts', title: 'Budget Analysts', cnTitle: '预算分析师', soc: '13-2031', onet: '13-2031.00'),
+            $this->row('human-resources-managers', title: 'Human Resources Managers', cnTitle: '人力资源经理', soc: '11-3121', onet: '11-3121.00'),
+            $this->row('administrative-services-managers', title: 'Administrative Services Managers', cnTitle: '行政服务经理', soc: '11-3012', onet: '11-3012.00'),
+            $this->row('advertising-and-promotions-managers', title: 'Advertising and Promotions Managers', cnTitle: '广告与促销经理', soc: '11-2011', onet: '11-2011.00'),
+            $this->row('architects', title: 'Architects, Except Landscape and Naval', cnTitle: '建筑师（不含景观与船舶）', soc: '17-1011', onet: '17-1011.00'),
+            $this->row('air-traffic-controllers', title: 'Air Traffic Controllers', cnTitle: '空中交通管制员', soc: '53-2021', onet: '53-2021.00'),
+            $this->row('airline-and-commercial-pilots', title: 'Airline and Commercial Pilots', cnTitle: '航空公司与商业飞行员', soc: '53-2011', onet: '53-2011.00'),
+            $this->row('chemists-and-materials-scientists', title: 'Chemists', cnTitle: '化学家', soc: '19-2031', onet: '19-2031.00'),
+            $this->row('clinical-laboratory-technologists-and-technicians', title: 'Medical and Clinical Laboratory Technologists', cnTitle: '医学与临床实验室技师', soc: '29-2011', onet: '29-2011.00'),
+            $this->row('community-health-workers', title: 'Community Health Workers', cnTitle: '社区健康工作者', soc: '21-1094', onet: '21-1094.00'),
+            $this->row('compensation-and-benefits-managers', title: 'Compensation and Benefits Managers', cnTitle: '薪酬与福利经理', soc: '11-3111', onet: '11-3111.00'),
+            $this->row('career-and-technical-education-teachers', title: 'Career/Technical Education Teachers, Secondary School', cnTitle: '中学职业/技术教育教师', soc: '25-2032', onet: '25-2032.00'),
         ];
     }
 
