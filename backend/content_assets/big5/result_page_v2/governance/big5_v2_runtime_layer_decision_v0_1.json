@@ -1,0 +1,89 @@
+{
+  "schema": "fap.big5.result_page_v2.governance.runtime_layer_decision.v0.1",
+  "version": "v0.1",
+  "runtime_wiring_allowed_now": false,
+  "frontend_changes_allowed_now": false,
+  "selector_runtime_allowed_now": false,
+  "b5_b1_import_target": "backend/content_assets/big5/result_page_v2/core_body/v0_1/",
+  "layers": [
+    {
+      "layer_key": "v2_formal_doc",
+      "label": "V2.0 正式稿",
+      "classification": "source_only",
+      "notes": "Module master for V2 result page planning. Not a direct runtime import file."
+    },
+    {
+      "layer_key": "longform_final_doc",
+      "label": "两万字正式稿",
+      "classification": "source_only",
+      "notes": "Narrative and canonical body master built on the O59 / C32 / E20 / A55 / N68 sample. Not universal runtime copy."
+    },
+    {
+      "layer_key": "selector_ready_assets_v0_3_p0_full",
+      "label": "325 selector-ready assets",
+      "classification": "staging_only",
+      "notes": "Verified staging selector candidates with runtime flags still disabled."
+    },
+    {
+      "layer_key": "selector_qa_policy_pack",
+      "label": "Golden Cases + Policy + Conflict Resolution",
+      "classification": "staging_only",
+      "notes": "Selector QA and policy package only. Not a prose asset pack and not B5-B1."
+    },
+    {
+      "layer_key": "v1_compiled_pack",
+      "label": "v1 compiled pack",
+      "classification": "current_live_legacy_or_compatibility",
+      "notes": "Current live or compatibility layer that still feeds the existing 8 section surface."
+    },
+    {
+      "layer_key": "v2_registry",
+      "label": "v2 registry",
+      "classification": "engine_ready_or_gated",
+      "notes": "Registry and engine layer can inform future assembly but does not replace governance or source authority."
+    },
+    {
+      "layer_key": "frontend_fallback",
+      "label": "frontend fallback",
+      "classification": "must_not_be_long_term_content_owner",
+      "notes": "Transitional compatibility layer only. Must not remain the owner of Big Five interpretation content."
+    },
+    {
+      "layer_key": "compact_online_page",
+      "label": "compact online page",
+      "classification": "anti_target",
+      "notes": "Existing user-visible compact render is a regression baseline to avoid, not preserve."
+    }
+  ],
+  "current_runtime_skeleton": {
+    "classification": "current_runtime_skeleton",
+    "surface": "8_section_compatibility_surface",
+    "section_keys": [
+      "hero_summary",
+      "domains_overview",
+      "domain_deep_dive",
+      "facet_details",
+      "core_portrait",
+      "norms_comparison",
+      "action_plan",
+      "methodology_and_access"
+    ],
+    "notes": "This remains the active runtime structure until a later migration explicitly changes it."
+  },
+  "this_pr_scope": {
+    "governance_only": true,
+    "imports_new_prose": false,
+    "imports_selector_qa_pack": false,
+    "imports_selector_assets": false,
+    "touches_runtime": false,
+    "touches_frontend": false,
+    "touches_registry": false,
+    "touches_tests": false
+  },
+  "decisions": [
+    "This PR does not wire runtime.",
+    "B5-B1 is the canonical core body staging import track.",
+    "P0 selector QA fix remains a later branch.",
+    "B5-H rendered QA remains a pre-launch gate."
+  ]
+}
