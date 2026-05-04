@@ -55,6 +55,11 @@ final class CareerFullDisplayWorkbookValidatorCommandTest extends TestCase
         $this->assertTrue($report['d5_repair_presence'][0]['fermat_label_ok']);
         $this->assertTrue($report['d5_repair_presence'][0]['links_ok']);
         $this->assertTrue($report['d5_repair_presence'][0]['product_absent']);
+        $this->assertSame('career.crosswalk_mode_policy.v1', $report['crosswalk_policy_summary']['taxonomy_version']);
+        $this->assertSame(1, $report['crosswalk_policy_summary']['modes']['exact']);
+        $this->assertSame('exact', $report['items'][0]['crosswalk_policy']['mode']);
+        $this->assertSame('auto_safe', $report['items'][0]['crosswalk_policy']['release_bucket']);
+        $this->assertTrue($report['items'][0]['crosswalk_policy']['display_import_allowed']);
         $this->assertSame('partially', $report['strategic_architecture_gap_scan']['executive_decision']['current_d5_d6_pipeline_aligned_with_long_term_career_architecture']);
         $this->assertCount(5, $report['strategic_architecture_gap_scan']['gap_matrix']);
     }

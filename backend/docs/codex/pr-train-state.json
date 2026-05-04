@@ -4448,9 +4448,9 @@
     "PR-D7a-api": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "draft_open",
+      "status": "merged",
       "branch": "codex/pr-d7a-api-claim-permissions-display-surface",
-      "commit_sha": "fd42887d8df68d20b692aa41ac51cbc259aaa420",
+      "commit_sha": "4e3794efd2a369eba26e2e2ce3067ebd6322be62",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1119",
       "checks": {
         "local": [
@@ -4483,9 +4483,9 @@
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-04T04:24:46Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-04T06:30:00Z",
@@ -4506,6 +4506,40 @@
           "at": "2026-05-04T07:20:00Z",
           "status": "draft_open",
           "summary": "Opened draft PR #1119 for PR-D7a-api after scoped local acceptance passed."
+        },
+        {
+          "at": "2026-05-04T04:24:46Z",
+          "status": "merged",
+          "summary": "Reconciled PR-D7a-api before PR-D7b: GitHub PR #1119 is merged, origin/main contains merge commit 4e3794efd2a369eba26e2e2ce3067ebd6322be62, and the task branch was cleaned locally/remotely."
+        }
+      ]
+    },
+    "PR-D7b": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "local_check_failed_out_of_scope",
+      "branch": "codex/pr-d7b-crosswalk-mode-alias-policy",
+      "commit_sha": "",
+      "pr_url": "",
+      "checks": {
+        "local": [],
+        "github": []
+      },
+      "failure_reason": "PR-D7b stopped before commit/PR because the required broad php artisan test tests/Unit/Services/Career check fails in existing out-of-scope CareerRecommendationDetailBundleBuilderTest assertions unrelated to crosswalk taxonomy or alias policy.",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-04T04:50:00Z",
+          "status": "in_progress",
+          "summary": "Initialized PR-D7b ledger entry for crosswalk mode taxonomy and alias policy validation after PR-D7a-api was reconciled as merged."
+        },
+        {
+          "at": "2026-05-04T05:00:00Z",
+          "status": "local_check_failed_out_of_scope",
+          "summary": "Scoped Pint, D7b policy tests, full workbook validator test, and real D5-ready workbook dry-run passed; broad tests/Unit/Services/Career failed in out-of-scope CareerRecommendationDetailBundleBuilderTest, so no D7b commit or PR was opened."
         }
       ]
     }
