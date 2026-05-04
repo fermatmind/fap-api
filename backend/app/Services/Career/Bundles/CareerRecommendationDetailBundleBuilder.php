@@ -28,6 +28,16 @@ final class CareerRecommendationDetailBundleBuilder
         'reviewed' => true,
     ];
 
+    /**
+     * @var array<string, true>
+     */
+    private const COMPACT_REVIEW_STATUSES = [
+        'approved' => true,
+        'reviewed' => true,
+        'pending' => true,
+        'in_review' => true,
+    ];
+
     public function __construct(
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
         private readonly CareerWhiteBoxScorePayloadBuilder $whiteBoxScorePayloadBuilder,
@@ -225,6 +235,7 @@ final class CareerRecommendationDetailBundleBuilder
                     'canonical_slug' => $occupation->canonical_slug,
                     'title' => $occupation->canonical_title_en,
                     'seo_contract' => $this->buildMatchedJobSeoContract($occupation, $snapshot),
+                    'trust_summary' => $this->buildMatchedJobTrustSummary($snapshot),
                 ];
             })
             ->filter()
@@ -252,19 +263,19 @@ final class CareerRecommendationDetailBundleBuilder
             return false;
         }
 
-        if (! (bool) ($snapshot->indexState->index_eligible ?? false)) {
-            return false;
-        }
-
+        $indexEligible = (bool) ($snapshot->indexState->index_eligible ?? false);
         $publicIndexState = IndexStateValue::publicFacing(
             (string) ($snapshot->indexState->index_state ?? ''),
-            true,
+            $indexEligible,
         );
-        if ($publicIndexState !== IndexStateValue::INDEXABLE) {
+        if (! in_array($publicIndexState, [IndexStateValue::INDEXABLE, IndexStateValue::TRUST_LIMITED], true)) {
             return false;
         }
 
         $reviewerStatus = strtolower(trim((string) ($snapshot->trustManifest->reviewer_status ?? '')));
+        if ($publicIndexState === IndexStateValue::TRUST_LIMITED) {
+            return isset(self::COMPACT_REVIEW_STATUSES[$reviewerStatus]);
+        }
 
         return isset(self::PUBLIC_REVIEW_STATUSES[$reviewerStatus]);
     }
@@ -346,6 +357,29 @@ final class CareerRecommendationDetailBundleBuilder
             'canonical_target' => $indexState?->canonical_target,
             'index_state' => $publicIndexState,
             'index_eligible' => $indexEligible,
+            'reason_codes' => is_array($indexState?->reason_codes) ? $indexState->reason_codes : [],
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function buildMatchedJobTrustSummary(RecommendationSnapshot $snapshot): array
+    {
+        $trustManifest = $snapshot->trustManifest;
+        $payload = is_array($snapshot->snapshot_payload) ? $snapshot->snapshot_payload : [];
+        $claimPermissions = $this->normalizeArray($payload['claim_permissions'] ?? []);
+
+        return [
+            'reviewer_status' => $trustManifest?->reviewer_status,
+            'reviewed_at' => optional($trustManifest?->reviewed_at)->toISOString(),
+            'content_version' => $trustManifest?->content_version,
+            'data_version' => $trustManifest?->data_version,
+            'logic_version' => $trustManifest?->logic_version,
+            'allow_strong_claim' => (bool) ($claimPermissions['allow_strong_claim'] ?? false),
+            'allow_salary_comparison' => (bool) ($claimPermissions['allow_salary_comparison'] ?? false),
+            'allow_ai_strategy' => (bool) ($claimPermissions['allow_ai_strategy'] ?? false),
+            'reason_codes' => is_array($claimPermissions['reason_codes'] ?? null) ? $claimPermissions['reason_codes'] : [],
         ];
     }
 
