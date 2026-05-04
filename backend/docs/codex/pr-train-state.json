@@ -5604,10 +5604,10 @@
         "PR-D14b": {
           "repo": "fap-api",
           "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-          "status": "local_checks_passed",
+          "status": "draft_open",
           "branch": "codex/pr-d14b-legacy-display-asset-normalization",
-          "commit_sha": "",
-          "pr_url": "",
+          "commit_sha": "c09273437d0814b7ad9dacbf92d962103f093ee6",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1141",
           "checks": {
             "local": [
               {
@@ -5655,6 +5655,11 @@
               "at": "2026-05-05T00:01:08+08:00",
               "status": "local_checks_passed",
               "summary": "D14b scoped Pint, command tests, display import/validator regression tests, local DB-unavailable dry-run guard, software-developers rejection, JSON validation, and diff checks passed without DB writes."
+            },
+            {
+              "at": "2026-05-05T00:01:08+08:00",
+              "status": "draft_open",
+              "summary": "Opened draft PR #1141 for guarded D14b legacy career display asset normalization after scoped local checks passed."
             }
           ]
         }
