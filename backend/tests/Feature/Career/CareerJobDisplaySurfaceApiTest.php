@@ -9,6 +9,7 @@ use App\Models\CareerImportRun;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationCrosswalk;
+use App\Models\OccupationFamily;
 use App\Services\Career\CareerRecommendationCompiler;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Fixtures\Career\CareerFoundationFixture;
@@ -245,6 +246,49 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         }
     }
 
+    public function test_directory_draft_d8_assets_build_display_asset_backed_bundles_for_blocked_slugs(): void
+    {
+        foreach ([
+            'web-developers',
+            'marketing-managers',
+            'acupuncturists',
+            'business-intelligence-analysts',
+            'clinical-data-managers',
+            'administrative-services-managers',
+            'advertising-and-promotions-managers',
+        ] as $slug) {
+            $occupation = $this->seedDisplayAssetBackedDirectoryDraftOccupation($slug);
+            $this->createDisplayAsset($occupation);
+
+            $response = $this->getJson('/api/v0.5/career/jobs/'.$slug.'?locale=zh-CN')
+                ->assertOk()
+                ->assertJsonPath('identity.canonical_slug', $slug)
+                ->assertJsonPath('identity.entity_level', 'dataset_candidate')
+                ->assertJsonPath('locale_policy.crosswalk_mode', 'directory_draft')
+                ->assertJsonPath('seo_contract.index_eligible', false)
+                ->assertJsonPath('provenance_meta.logic_version', 'career.protocol.job_detail.display_asset_backed.v1')
+                ->assertJsonPath('display_surface_v1.surface_version', 'display.surface.v1')
+                ->assertJsonPath('display_surface_v1.asset_version', 'v4.2')
+                ->assertJsonPath('display_surface_v1.template_version', 'v4.2')
+                ->assertJsonPath('display_surface_v1.subject.canonical_slug', $slug)
+                ->assertJsonPath('display_surface_v1.subject.soc_code', self::PILOT_SLUGS[$slug]['soc'])
+                ->assertJsonPath('display_surface_v1.subject.onet_code', self::PILOT_SLUGS[$slug]['onet'])
+                ->assertJsonPath('display_surface_v1.claim_permissions.allow_strong_claim', false)
+                ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
+
+            $this->assertCount(24, $response->json('display_surface_v1.component_order'));
+
+            $encoded = json_encode($response->json(), JSON_THROW_ON_ERROR);
+            $this->assertStringNotContainsString('Product', $encoded);
+            $this->assertStringNotContainsString('release_gate', $encoded);
+            $this->assertStringNotContainsString('release_gates', $encoded);
+            $this->assertStringNotContainsString('qa_risk', $encoded);
+            $this->assertStringNotContainsString('admin_review_state', $encoded);
+            $this->assertStringNotContainsString('tracking_json', $encoded);
+            $this->assertStringNotContainsString('raw_ai_exposure_score', $encoded);
+        }
+    }
+
     public function test_manual_hold_software_developers_is_not_force_enabled_even_with_display_asset(): void
     {
         $occupation = $this->seedCompiledOccupation('software-developers');
@@ -255,6 +299,15 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('identity.canonical_slug', 'software-developers')
             ->assertJsonMissingPath('display_surface_v1');
+    }
+
+    public function test_manual_hold_software_developers_directory_draft_remains_blocked_even_with_display_asset(): void
+    {
+        $occupation = $this->seedDisplayAssetBackedDirectoryDraftOccupation('software-developers');
+        $this->createDisplayAsset($occupation);
+
+        $this->getJson('/api/v0.5/career/jobs/software-developers?locale=zh-CN')
+            ->assertNotFound();
     }
 
     public function test_it_does_not_add_display_surface_for_missing_asset(): void
@@ -282,6 +335,39 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('identity.canonical_slug', 'data-scientists')
             ->assertJsonMissingPath('display_surface_v1');
+    }
+
+    public function test_directory_draft_without_valid_display_asset_remains_blocked(): void
+    {
+        $this->seedDisplayAssetBackedDirectoryDraftOccupation('web-developers');
+
+        $this->getJson('/api/v0.5/career/jobs/web-developers?locale=zh-CN')
+            ->assertNotFound();
+    }
+
+    public function test_directory_draft_with_invalid_display_asset_remains_blocked(): void
+    {
+        $occupation = $this->seedDisplayAssetBackedDirectoryDraftOccupation('marketing-managers');
+        $this->createDisplayAsset($occupation, [
+            'component_order_json' => ['hero'],
+        ]);
+
+        $this->getJson('/api/v0.5/career/jobs/marketing-managers?locale=zh-CN')
+            ->assertNotFound();
+    }
+
+    public function test_directory_draft_with_product_schema_display_asset_remains_blocked(): void
+    {
+        $occupation = $this->seedDisplayAssetBackedDirectoryDraftOccupation('acupuncturists');
+        $this->createDisplayAsset($occupation, [
+            'structured_data_json' => [
+                '@type' => 'Product',
+                'name' => 'Unsafe product schema',
+            ],
+        ]);
+
+        $this->getJson('/api/v0.5/career/jobs/acupuncturists?locale=zh-CN')
+            ->assertNotFound();
     }
 
     private function seedCompiledOccupation(string $slug): Occupation
@@ -323,6 +409,55 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         ]);
 
         return $chain['occupation'];
+    }
+
+    private function seedDisplayAssetBackedDirectoryDraftOccupation(string $slug): Occupation
+    {
+        $meta = self::PILOT_SLUGS[$slug];
+        $family = OccupationFamily::query()->create([
+            'canonical_slug' => 'display-asset-backed-'.$slug,
+            'title_en' => $meta['title'],
+            'title_zh' => $meta['title'],
+        ]);
+
+        $occupation = Occupation::query()->create([
+            'family_id' => $family->id,
+            'canonical_slug' => $slug,
+            'entity_level' => 'dataset_candidate',
+            'truth_market' => 'US',
+            'display_market' => 'zh-CN',
+            'crosswalk_mode' => 'directory_draft',
+            'canonical_title_en' => $meta['title'],
+            'canonical_title_zh' => $meta['title'],
+            'search_h1_zh' => $meta['title'],
+            'structural_stability' => null,
+            'task_prototype_signature' => [],
+            'market_semantics_gap' => null,
+            'regulatory_divergence' => null,
+            'toolchain_divergence' => null,
+            'skill_gap_threshold' => null,
+            'trust_inheritance_scope' => [],
+        ]);
+
+        OccupationCrosswalk::query()->create([
+            'occupation_id' => $occupation->id,
+            'source_system' => 'us_soc',
+            'source_code' => $meta['soc'],
+            'source_title' => $meta['title'],
+            'mapping_type' => 'direct_match',
+            'confidence_score' => 1.0,
+        ]);
+
+        OccupationCrosswalk::query()->create([
+            'occupation_id' => $occupation->id,
+            'source_system' => 'onet_soc_2019',
+            'source_code' => $meta['onet'],
+            'source_title' => $meta['title'],
+            'mapping_type' => 'directory_candidate',
+            'confidence_score' => 0.5,
+        ]);
+
+        return $occupation->load(['family', 'aliases', 'crosswalks']);
     }
 
     private function addCrosswalks(Occupation $occupation, string $slug): void

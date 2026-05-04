@@ -5394,6 +5394,65 @@
               "summary": "Added explicit software-developers manual-hold guard and regression tests proving it is not force-enabled even if a display asset exists."
             }
           ]
+        },
+        "PR-D8e3-api": {
+          "repo": "fap-api",
+          "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+          "status": "pr_open",
+          "branch": "codex/pr-d8e3-api-display-asset-backed-bundles",
+          "commit_sha": "27341600209a74a68e584408018de912569268a3",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1136",
+          "checks": {
+            "local": [
+              {
+                "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+                "status": "passed"
+              },
+              {
+                "command": "vendor/bin/pint --test app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+                "status": "passed"
+              },
+              {
+                "command": "php artisan test tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php",
+                "status": "passed"
+              },
+              {
+                "command": "php artisan route:list | rg 'career/jobs|career-jobs|career|seo'",
+                "status": "passed"
+              },
+              {
+                "command": "git diff --check",
+                "status": "passed"
+              },
+              {
+                "command": "git diff --cached --check",
+                "status": "passed"
+              }
+            ],
+            "github": []
+          },
+          "failure_reason": "",
+          "resume_policy": "manual_only",
+          "merged_at": "",
+          "remote_branch_deleted": false,
+          "local_cleanup_executed": false,
+          "history": [
+            {
+              "at": "2026-05-04T23:45:00+08:00",
+              "status": "in_progress",
+              "summary": "Initialized PR-D8e3-api ledger entry for display-asset-backed career detail bundle eligibility after D8e3 blocker scan found seven D8 directory_draft occupations blocked before display_surface_v1 attachment."
+            },
+            {
+              "at": "2026-05-04T23:58:00+08:00",
+              "status": "local_checks_passed",
+              "summary": "D8e3-api local checks passed with display-asset-backed directory_draft bundle tests for the seven blocked D8 slugs, negative invalid asset/Product paths, and software-developers manual hold safety."
+            },
+            {
+              "at": "2026-05-05T00:04:00+08:00",
+              "status": "pr_open",
+              "summary": "Opened draft PR #1136 for display-asset-backed career detail bundles."
+            }
+          ]
         }
       }
     }
