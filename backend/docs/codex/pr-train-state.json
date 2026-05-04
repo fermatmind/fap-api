@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-04T03:55:00Z",
+  "updated_at": "2026-05-04T04:00:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -4315,10 +4315,10 @@
     "PR-D5d-api-hotfix": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "in_progress",
+      "status": "draft_open",
       "branch": "codex/pr-d5d-api-hotfix-strip-release-gates",
-      "commit_sha": "f95870e2763596193da83f70b6b299f5dc3aa78b",
-      "pr_url": "",
+      "commit_sha": "30c99e0b21645ef3e4db10194f9964272dc8f2a1",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1116",
       "checks": {
         "local": [
           {
@@ -4359,6 +4359,11 @@
           "at": "2026-05-04T03:55:00Z",
           "status": "local_verified",
           "summary": "Implemented release_gates public payload stripping, aligned import guards, and passed scoped formatter, tests, route list, and diff checks."
+        },
+        {
+          "at": "2026-05-04T04:00:00Z",
+          "status": "draft_open",
+          "summary": "Opened draft PR #1116 after scoped local hotfix validation passed."
         }
       ]
     }
