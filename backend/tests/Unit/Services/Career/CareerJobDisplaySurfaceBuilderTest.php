@@ -29,6 +29,26 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         'civil-engineers' => ['soc' => '17-2051', 'onet' => '17-2051.00', 'title' => 'Civil Engineers'],
         'biomedical-engineers' => ['soc' => '17-2031', 'onet' => '17-2031.00', 'title' => 'Biomedical Engineers'],
         'dentists' => ['soc' => '29-1021', 'onet' => '29-1021.00', 'title' => 'Dentists'],
+        'web-developers' => ['soc' => '15-1254', 'onet' => '15-1254.00', 'title' => 'Web Developers'],
+        'marketing-managers' => ['soc' => '11-2021', 'onet' => '11-2021.00', 'title' => 'Marketing Managers'],
+        'lawyers' => ['soc' => '23-1011', 'onet' => '23-1011.00', 'title' => 'Lawyers'],
+        'pharmacists' => ['soc' => '29-1051', 'onet' => '29-1051.00', 'title' => 'Pharmacists'],
+        'acupuncturists' => ['soc' => '29-1291', 'onet' => '29-1291.00', 'title' => 'Acupuncturists'],
+        'business-intelligence-analysts' => ['soc' => '15-2051', 'onet' => '15-2051.01', 'title' => 'Business Intelligence Analysts'],
+        'clinical-data-managers' => ['soc' => '15-2051', 'onet' => '15-2051.02', 'title' => 'Clinical Data Managers'],
+        'budget-analysts' => ['soc' => '13-2031', 'onet' => '13-2031.00', 'title' => 'Budget Analysts'],
+        'human-resources-managers' => ['soc' => '11-3121', 'onet' => '11-3121.00', 'title' => 'Human Resources Managers'],
+        'administrative-services-managers' => ['soc' => '11-3012', 'onet' => '11-3012.00', 'title' => 'Administrative Services Managers'],
+        'advertising-and-promotions-managers' => ['soc' => '11-2011', 'onet' => '11-2011.00', 'title' => 'Advertising and Promotions Managers'],
+        'architects' => ['soc' => '17-1011', 'onet' => '17-1011.00', 'title' => 'Architects'],
+        'air-traffic-controllers' => ['soc' => '53-2021', 'onet' => '53-2021.00', 'title' => 'Air Traffic Controllers'],
+        'airline-and-commercial-pilots' => ['soc' => '53-2011', 'onet' => '53-2011.00', 'title' => 'Airline and Commercial Pilots'],
+        'chemists-and-materials-scientists' => ['soc' => '19-2031', 'onet' => '19-2031.00', 'title' => 'Chemists and Materials Scientists'],
+        'clinical-laboratory-technologists-and-technicians' => ['soc' => '29-2011', 'onet' => '29-2011.00', 'title' => 'Clinical Laboratory Technologists and Technicians'],
+        'community-health-workers' => ['soc' => '21-1094', 'onet' => '21-1094.00', 'title' => 'Community Health Workers'],
+        'compensation-and-benefits-managers' => ['soc' => '11-3111', 'onet' => '11-3111.00', 'title' => 'Compensation and Benefits Managers'],
+        'career-and-technical-education-teachers' => ['soc' => '25-2032', 'onet' => '25-2032.00', 'title' => 'Career and Technical Education Teachers'],
+        'software-developers' => ['soc' => '15-1252', 'onet' => '15-1252.00', 'title' => 'Software Developers'],
     ];
 
     private const COMPONENT_ORDER = [
@@ -125,10 +145,57 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         }
     }
 
-    public function test_it_returns_null_for_non_selected_slug(): void
+    public function test_it_returns_surface_for_d8_validator_eligible_slugs(): void
+    {
+        foreach ([
+            'web-developers',
+            'marketing-managers',
+            'lawyers',
+            'pharmacists',
+            'acupuncturists',
+            'business-intelligence-analysts',
+            'clinical-data-managers',
+            'budget-analysts',
+            'human-resources-managers',
+            'administrative-services-managers',
+            'advertising-and-promotions-managers',
+            'architects',
+            'air-traffic-controllers',
+            'airline-and-commercial-pilots',
+            'chemists-and-materials-scientists',
+            'clinical-laboratory-technologists-and-technicians',
+            'community-health-workers',
+            'compensation-and-benefits-managers',
+            'career-and-technical-education-teachers',
+        ] as $slug) {
+            $occupation = $this->createOccupation($slug);
+            $this->createDisplayAsset($occupation);
+
+            $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+
+            $this->assertIsArray($surface);
+            $this->assertSame($slug, $surface['subject']['canonical_slug']);
+            $this->assertSame(self::PILOT_SLUGS[$slug]['soc'], $surface['subject']['soc_code']);
+            $this->assertSame(self::PILOT_SLUGS[$slug]['onet'], $surface['subject']['onet_code']);
+            $this->assertSame('display.surface.v1', $surface['surface_version']);
+            $this->assertSame('v4.2', $surface['asset_version']);
+            $this->assertCount(24, $surface['component_order']);
+        }
+    }
+
+    public function test_it_returns_null_for_manual_hold_slug_even_with_display_asset(): void
+    {
+        $occupation = $this->createOccupation('software-developers');
+        $this->createDisplayAsset($occupation);
+
+        $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+
+        $this->assertNull($surface);
+    }
+
+    public function test_it_returns_null_for_missing_display_asset(): void
     {
         $occupation = $this->createOccupation('veterinary-technologists-and-technicians');
-        $this->createDisplayAsset($occupation);
 
         $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
 
@@ -139,6 +206,46 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
     {
         $occupation = $this->createOccupation('actors');
         $this->createDisplayAsset($occupation, ['status' => 'needs_source_code']);
+
+        $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+
+        $this->assertNull($surface);
+    }
+
+    public function test_it_returns_null_if_asset_versions_are_not_v42(): void
+    {
+        $occupation = $this->createOccupation('data-scientists');
+        $this->createDisplayAsset($occupation, [
+            'asset_version' => 'v4.3',
+            'template_version' => 'v4.3',
+        ]);
+
+        $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+
+        $this->assertNull($surface);
+    }
+
+    public function test_it_returns_null_if_component_order_is_not_complete(): void
+    {
+        $occupation = $this->createOccupation('data-scientists');
+        $this->createDisplayAsset($occupation, [
+            'component_order_json' => array_slice(self::COMPONENT_ORDER, 0, 23),
+        ]);
+
+        $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+
+        $this->assertNull($surface);
+    }
+
+    public function test_it_returns_null_if_product_schema_is_present(): void
+    {
+        $occupation = $this->createOccupation('data-scientists');
+        $this->createDisplayAsset($occupation, [
+            'structured_data_json' => [
+                '@type' => 'Product',
+                'name' => 'Unsafe product schema',
+            ],
+        ]);
 
         $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
 
