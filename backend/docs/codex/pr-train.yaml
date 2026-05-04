@@ -2369,6 +2369,38 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-D7d
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-d7d-unified-career-release-gate
+    base: main
+    depends_on: ["PR-D7c"]
+    mode: execute
+    scope: >
+      D7d Unified Career Release Gate. Add a read-only career:validate-release-gate
+      command that evaluates final public career page URLs for HTTP status,
+      canonical self, robots/noindex, schema safety, FAQ schema, CTA attribution,
+      Product absence, forbidden public fields, HTML size, and timing. The command
+      must report release eligibility only and must not write DB rows, mutate
+      release states, generate sitemap/llms, import display assets, or alter
+      paid/backlink gates.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Console/Commands/CareerValidateReleaseGate.php app/Console/Kernel.php tests/Feature/Console/CareerValidateReleaseGateCommandTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Feature/Console/CareerValidateReleaseGateCommandTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php"
+      - "php artisan career:validate-release-gate --slugs=actors,data-scientists,registered-nurses,accountants-and-auditors,actuaries,financial-analysts,high-school-teachers,market-research-analysts,architectural-and-engineering-managers,civil-engineers,biomedical-engineers,dentists --locales=zh,en --json"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-B84
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
