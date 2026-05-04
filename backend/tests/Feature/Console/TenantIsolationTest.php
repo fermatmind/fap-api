@@ -123,9 +123,9 @@ final class TenantIsolationTest extends TestCase
 
         $this->setHttpContext(501, '/ops/resources/policy-check');
 
-        $attemptPolicy = new AttemptPolicy();
-        $orderPolicy = new OrderPolicy();
-        $sharePolicy = new SharePolicy();
+        $attemptPolicy = new AttemptPolicy;
+        $orderPolicy = new OrderPolicy;
+        $sharePolicy = new SharePolicy;
 
         $this->assertTrue($attemptPolicy->view($readOnlyAdmin, $attemptOrgA));
         $this->assertFalse($attemptPolicy->view($readOnlyAdmin, $attemptOrgB));
@@ -158,7 +158,7 @@ final class TenantIsolationTest extends TestCase
         return Attempt::create([
             'id' => (string) Str::uuid(),
             'org_id' => $orgId,
-            'anon_id' => 'anon_' . $orgId,
+            'anon_id' => 'anon_'.$orgId,
             'user_id' => '9001',
             'scale_code' => 'MBTI',
             'scale_version' => 'v0.3',
@@ -183,7 +183,7 @@ final class TenantIsolationTest extends TestCase
     {
         return Order::create([
             'id' => (string) Str::uuid(),
-            'order_no' => 'ord_' . Str::uuid(),
+            'order_no' => 'ord_'.Str::uuid(),
             'provider' => 'stub',
             'status' => 'created',
             'amount_total' => 100,
@@ -194,7 +194,7 @@ final class TenantIsolationTest extends TestCase
             'sku' => 'MBTI_REPORT',
             'quantity' => 1,
             'user_id' => '9001',
-            'anon_id' => 'anon_' . $orgId,
+            'anon_id' => 'anon_'.$orgId,
             'org_id' => $orgId,
         ]);
     }
@@ -212,13 +212,13 @@ final class TenantIsolationTest extends TestCase
     }
 
     /**
-     * @param list<string> $permissions
+     * @param  list<string>  $permissions
      */
     private function seedAdmin(array $permissions): AdminUser
     {
         $admin = AdminUser::create([
-            'name' => 'admin_' . Str::lower(Str::random(6)),
-            'email' => 'admin_' . Str::lower(Str::random(6)) . '@example.test',
+            'name' => 'admin_'.Str::lower(Str::random(6)),
+            'email' => 'admin_'.Str::lower(Str::random(6)).'@example.test',
             'password' => bcrypt('secret'),
             'is_active' => 1,
         ]);
@@ -228,7 +228,7 @@ final class TenantIsolationTest extends TestCase
         }
 
         $role = Role::create([
-            'name' => 'role_' . Str::lower(Str::random(10)),
+            'name' => 'role_'.Str::lower(Str::random(10)),
             'description' => null,
         ]);
 
