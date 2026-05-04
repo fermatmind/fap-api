@@ -4375,9 +4375,9 @@
     "PR-D6": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "draft_open",
+      "status": "merged",
       "branch": "codex/pr-d6-full-display-workbook-validator",
-      "commit_sha": "65072bc06f7e85241b4ad2cfe58ab79f6e5259ad",
+      "commit_sha": "440438d46060a350d0f44b80f6ee838109986d61",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1117",
       "checks": {
         "local": [
@@ -4414,9 +4414,9 @@
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-04T03:24:11Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-04T05:20:00Z",
@@ -4437,6 +4437,75 @@
           "at": "2026-05-04T06:15:00Z",
           "status": "draft_open",
           "summary": "Opened draft PR #1117 for PR-D6 after scoped local validation and real D5-ready workbook full scan passed."
+        },
+        {
+          "at": "2026-05-04T06:30:00Z",
+          "status": "reconciled_merged",
+          "summary": "Reconciled PR-D6 ledger before PR-D7a-api: GitHub PR #1117 is merged, origin/main contains merge commit 440438d46060a350d0f44b80f6ee838109986d61, and the task branch was cleaned up locally/remotely."
+        }
+      ]
+    },
+    "PR-D7a-api": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "draft_open",
+      "branch": "codex/pr-d7a-api-claim-permissions-display-surface",
+      "commit_sha": "fd42887d8df68d20b692aa41ac51cbc259aaa420",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1119",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php app/Console/Commands/CareerValidateDisplayBatch.php app/Console/Commands/CareerFullDisplayWorkbookValidator.php tests/Unit/Services/Career tests/Feature/Career tests/Feature/Console docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Console/CareerFullDisplayWorkbookValidatorCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list | rg 'career/jobs|career-jobs|career|seo'",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-04T06:30:00Z",
+          "status": "in_progress",
+          "summary": "Initialized PR-D7a-api ledger entry for public-safe career display_surface_v1 claim permissions after PR-D6 was reconciled as merged."
+        },
+        {
+          "at": "2026-05-04T06:45:00Z",
+          "status": "local_check_failed_out_of_scope",
+          "summary": "Stopped PR-D7a-api before PR creation because the required broad Pint check failed on pre-existing out-of-scope files; changed D7a implementation files passed targeted tests."
+        },
+        {
+          "at": "2026-05-04T07:10:00Z",
+          "status": "local_verified",
+          "summary": "After hygiene PR #1118 merged, reran PR-D7a-api acceptance successfully: JSON ledger check, scoped Pint, broad Pint, targeted tests, route list, and diff checks all passed."
+        },
+        {
+          "at": "2026-05-04T07:20:00Z",
+          "status": "draft_open",
+          "summary": "Opened draft PR #1119 for PR-D7a-api after scoped local acceptance passed."
         }
       ]
     }

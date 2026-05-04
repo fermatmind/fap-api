@@ -71,6 +71,15 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $this->assertSame('actors', $surface['subject']['canonical_slug']);
         $this->assertSame('27-2011', $surface['subject']['soc_code']);
         $this->assertSame('27-2011.00', $surface['subject']['onet_code']);
+        $this->assertSame('full', $surface['claim_permissions']['integrity_state']);
+        $this->assertTrue($surface['claim_permissions']['allow_strong_claim']);
+        $this->assertTrue($surface['claim_permissions']['allow_ai_strategy']);
+        $this->assertTrue($surface['claim_permissions']['allow_salary_comparison']);
+        $this->assertTrue($surface['claim_permissions']['allow_market_signal']);
+        $this->assertFalse($surface['claim_permissions']['allow_local_proxy_wage']);
+        $this->assertSame('official', $surface['claim_permissions']['evidence_basis']['salary']);
+        $this->assertSame('central_score', $surface['claim_permissions']['evidence_basis']['ai_exposure']);
+        $this->assertSame('direct', $surface['claim_permissions']['evidence_basis']['crosswalk']);
         $this->assertCount(24, $surface['component_order']);
         $this->assertContains('fermat_decision_card', $surface['component_order']);
     }
@@ -210,6 +219,91 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
         $this->assertStringNotContainsString('raw_ai_exposure_score', $encoded);
     }
 
+    public function test_it_blocks_ai_strategy_when_ai_exposure_evidence_is_missing(): void
+    {
+        $occupation = $this->createOccupation('actors');
+        $this->createDisplayAsset($occupation, [
+            'page_payload_json' => [
+                'zh' => [
+                    'hero' => ['title' => '演员职业判断'],
+                    'market_signal_card' => [
+                        'salary_data_type' => 'BLS official wage evidence',
+                        'body' => 'Official wage signal from BLS.',
+                    ],
+                ],
+                'en' => [
+                    'hero' => ['title' => 'Actor career fit'],
+                    'market_signal_card' => [
+                        'salary_data_type' => 'BLS official wage evidence',
+                        'body' => 'Official wage signal from BLS.',
+                    ],
+                ],
+            ],
+        ]);
+
+        $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+
+        $this->assertSame('provisional', $surface['claim_permissions']['integrity_state']);
+        $this->assertFalse($surface['claim_permissions']['allow_ai_strategy']);
+        $this->assertSame('missing', $surface['claim_permissions']['evidence_basis']['ai_exposure']);
+        $this->assertContains('ai_strategy_missing_ai_exposure', $surface['claim_permissions']['blocked_claims']);
+    }
+
+    public function test_it_blocks_salary_comparison_for_proxy_wage_sources(): void
+    {
+        $occupation = $this->createOccupation('actors');
+        $this->createDisplayAsset($occupation, [
+            'page_payload_json' => [
+                'zh' => [
+                    'hero' => ['title' => '演员职业判断'],
+                    'market_signal_card' => [
+                        'salary_data_type' => 'CN industry proxy wage',
+                        'body' => 'Local proxy wage signal.',
+                    ],
+                    'ai_impact_table' => [
+                        'score_normalized' => '82',
+                        'label' => 'medium',
+                        'source' => 'FermatMind central score',
+                    ],
+                ],
+                'en' => [
+                    'hero' => ['title' => 'Actor career fit'],
+                    'market_signal_card' => [
+                        'salary_data_type' => 'CN industry proxy wage',
+                        'body' => 'Local proxy wage signal.',
+                    ],
+                    'ai_impact_table' => [
+                        'score_normalized' => '82',
+                        'label' => 'medium',
+                        'source' => 'FermatMind central score',
+                    ],
+                ],
+            ],
+        ]);
+
+        $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+
+        $this->assertSame('provisional', $surface['claim_permissions']['integrity_state']);
+        $this->assertFalse($surface['claim_permissions']['allow_salary_comparison']);
+        $this->assertFalse($surface['claim_permissions']['allow_local_proxy_wage']);
+        $this->assertSame('proxy', $surface['claim_permissions']['evidence_basis']['salary']);
+        $this->assertContains('salary_comparison_proxy_wage_not_direct_fact', $surface['claim_permissions']['blocked_claims']);
+    }
+
+    public function test_it_blocks_strong_claims_for_proxy_crosswalks(): void
+    {
+        $occupation = $this->createOccupation('actors');
+        $occupation->update(['crosswalk_mode' => 'local_heavy_interpretation']);
+        $this->createDisplayAsset($occupation);
+
+        $surface = app(CareerJobDisplaySurfaceBuilder::class)->buildForOccupation($occupation, 'zh-CN');
+
+        $this->assertSame('provisional', $surface['claim_permissions']['integrity_state']);
+        $this->assertFalse($surface['claim_permissions']['allow_strong_claim']);
+        $this->assertSame('proxy', $surface['claim_permissions']['evidence_basis']['crosswalk']);
+        $this->assertContains('strong_claim_crosswalk_not_direct', $surface['claim_permissions']['blocked_claims']);
+    }
+
     public function test_it_includes_sources_and_implementation_contract(): void
     {
         $occupation = $this->createOccupation('actors');
@@ -285,6 +379,15 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
             'page_payload_json' => [
                 'zh' => [
                     'hero' => ['title' => '演员职业判断'],
+                    'market_signal_card' => [
+                        'salary_data_type' => 'BLS official wage evidence',
+                        'body' => 'Official wage signal from BLS.',
+                    ],
+                    'ai_impact_table' => [
+                        'score_normalized' => '82',
+                        'label' => 'medium',
+                        'source' => 'FermatMind central score',
+                    ],
                     'boundary_notice' => [
                         'release_gate' => ['do_not_show' => true],
                         'release_gates' => [
@@ -295,6 +398,15 @@ final class CareerJobDisplaySurfaceBuilderTest extends TestCase
                 ],
                 'en' => [
                     'hero' => ['title' => 'Actor career fit'],
+                    'market_signal_card' => [
+                        'salary_data_type' => 'BLS official wage evidence',
+                        'body' => 'Official wage signal from BLS.',
+                    ],
+                    'ai_impact_table' => [
+                        'score_normalized' => '82',
+                        'label' => 'medium',
+                        'source' => 'FermatMind central score',
+                    ],
                     'tracking_json' => ['do_not_show' => true],
                 ],
             ],

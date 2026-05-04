@@ -2272,6 +2272,42 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-D7a-api
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-d7a-api-claim-permissions-display-surface
+    base: main
+    depends_on: ["PR-D6"]
+    mode: execute
+    scope: >
+      Add public-safe claim_permissions to career display_surface_v1 API
+      payloads. Compile integrity_state, claim booleans, blocked_claims,
+      warnings, and evidence_basis from the existing ready display asset,
+      source evidence, and occupation crosswalks so frontend renderers can
+      avoid over-claiming AI, salary, strong recommendation, market signal,
+      or local proxy wage content. Preserve the existing selected-surface
+      allowlist, asset gates, component order, Product rejection, recursive
+      forbidden field stripping, sitemap/llms isolation, release gate closure,
+      and DB read-only behavior. Do not implement a full new scoring engine,
+      transition engine, release gate, frontend claim guard, migrations,
+      display asset import, production data write, or 2786 rollout.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php app/Console/Commands/CareerValidateDisplayBatch.php app/Console/Commands/CareerFullDisplayWorkbookValidator.php tests/Unit/Services/Career tests/Feature/Career tests/Feature/Console docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Unit/Services/Career tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Console/CareerFullDisplayWorkbookValidatorCommandTest.php"
+      - "php artisan route:list | rg 'career/jobs|career-jobs|career|seo'"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-B84
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

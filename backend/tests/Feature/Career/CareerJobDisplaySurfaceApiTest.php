@@ -74,6 +74,15 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ->assertJsonPath('display_surface_v1.subject.canonical_slug', 'actors')
             ->assertJsonPath('display_surface_v1.subject.soc_code', '27-2011')
             ->assertJsonPath('display_surface_v1.subject.onet_code', '27-2011.00')
+            ->assertJsonPath('display_surface_v1.claim_permissions.integrity_state', 'full')
+            ->assertJsonPath('display_surface_v1.claim_permissions.allow_strong_claim', true)
+            ->assertJsonPath('display_surface_v1.claim_permissions.allow_ai_strategy', true)
+            ->assertJsonPath('display_surface_v1.claim_permissions.allow_salary_comparison', true)
+            ->assertJsonPath('display_surface_v1.claim_permissions.allow_market_signal', true)
+            ->assertJsonPath('display_surface_v1.claim_permissions.allow_local_proxy_wage', false)
+            ->assertJsonPath('display_surface_v1.claim_permissions.evidence_basis.ai_exposure', 'central_score')
+            ->assertJsonPath('display_surface_v1.claim_permissions.evidence_basis.salary', 'official')
+            ->assertJsonPath('display_surface_v1.claim_permissions.evidence_basis.crosswalk', 'direct')
             ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN')
             ->assertJsonPath('display_surface_v1.page.content.hero.title', '演员职业判断');
 
@@ -105,6 +114,10 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
                 ->assertJsonPath('display_surface_v1.subject.canonical_slug', $slug)
                 ->assertJsonPath('display_surface_v1.subject.soc_code', self::PILOT_SLUGS[$slug]['soc'])
                 ->assertJsonPath('display_surface_v1.subject.onet_code', self::PILOT_SLUGS[$slug]['onet'])
+                ->assertJsonPath('display_surface_v1.claim_permissions.integrity_state', 'full')
+                ->assertJsonPath('display_surface_v1.claim_permissions.allow_strong_claim', true)
+                ->assertJsonPath('display_surface_v1.claim_permissions.allow_ai_strategy', true)
+                ->assertJsonPath('display_surface_v1.claim_permissions.allow_salary_comparison', true)
                 ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
 
             $encoded = json_encode($response->json('display_surface_v1'), JSON_THROW_ON_ERROR);
@@ -141,6 +154,10 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
                 ->assertJsonPath('display_surface_v1.subject.canonical_slug', $slug)
                 ->assertJsonPath('display_surface_v1.subject.soc_code', self::PILOT_SLUGS[$slug]['soc'])
                 ->assertJsonPath('display_surface_v1.subject.onet_code', self::PILOT_SLUGS[$slug]['onet'])
+                ->assertJsonPath('display_surface_v1.claim_permissions.integrity_state', 'full')
+                ->assertJsonPath('display_surface_v1.claim_permissions.allow_strong_claim', true)
+                ->assertJsonPath('display_surface_v1.claim_permissions.allow_ai_strategy', true)
+                ->assertJsonPath('display_surface_v1.claim_permissions.allow_salary_comparison', true)
                 ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
 
             $this->assertContains('fermat_decision_card', $response->json('display_surface_v1.component_order'));
@@ -247,6 +264,15 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             'page_payload_json' => [
                 'zh' => [
                     'hero' => ['title' => '演员职业判断'],
+                    'market_signal_card' => [
+                        'salary_data_type' => 'BLS official wage evidence',
+                        'body' => 'Official wage signal from BLS.',
+                    ],
+                    'ai_impact_table' => [
+                        'score_normalized' => '82',
+                        'label' => 'medium',
+                        'source' => 'FermatMind central score',
+                    ],
                     'boundary_notice' => [
                         'release_gate' => ['do_not_show' => true],
                         'release_gates' => [
@@ -257,6 +283,15 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
                 ],
                 'en' => [
                     'hero' => ['title' => 'Actor career fit'],
+                    'market_signal_card' => [
+                        'salary_data_type' => 'BLS official wage evidence',
+                        'body' => 'Official wage signal from BLS.',
+                    ],
+                    'ai_impact_table' => [
+                        'score_normalized' => '82',
+                        'label' => 'medium',
+                        'source' => 'FermatMind central score',
+                    ],
                 ],
             ],
             'sources_json' => [

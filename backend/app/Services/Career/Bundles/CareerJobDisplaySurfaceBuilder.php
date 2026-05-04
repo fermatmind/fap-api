@@ -103,6 +103,7 @@ final class CareerJobDisplaySurfaceBuilder
             'status' => (string) $asset->status,
             'subject' => $this->subject($occupation),
             'available_locales' => $this->availableLocales($localizedPages),
+            'claim_permissions' => $this->claimPermissions($occupation, $asset, $pageContent),
             'page' => [
                 'locale' => $this->publicLocale($normalizedLocale),
                 'content' => $this->stripForbiddenKeys($pageContent),
@@ -192,6 +193,219 @@ final class CareerJobDisplaySurfaceBuilder
         }
 
         return null;
+    }
+
+    /**
+     * @param  array<string, mixed>  $pageContent
+     * @return array<string, mixed>
+     */
+    private function claimPermissions(Occupation $occupation, CareerJobDisplayAsset $asset, array $pageContent): array
+    {
+        $salaryBasis = $this->salaryEvidenceBasis($pageContent, $asset);
+        $aiBasis = $this->aiExposureEvidenceBasis($pageContent);
+        $marketBasis = $this->marketSignalEvidenceBasis($pageContent, $asset);
+        $crosswalkBasis = $this->crosswalkEvidenceBasis($occupation);
+
+        $allowAiStrategy = $aiBasis === 'central_score';
+        $allowSalaryComparison = $salaryBasis === 'official';
+        $allowMarketSignal = in_array($marketBasis, ['official', 'sample'], true);
+        $allowLocalProxyWage = false;
+        $allowStrongClaim = in_array($crosswalkBasis, ['direct', 'trust_inheritance'], true);
+
+        $blockedClaims = [];
+        $warnings = [];
+        $criticalMissingCount = 0;
+
+        if (! $allowAiStrategy) {
+            $blockedClaims[] = 'ai_strategy_missing_ai_exposure';
+            $warnings[] = 'AI strategy claims are blocked until central AI exposure evidence is present.';
+            $criticalMissingCount++;
+        }
+
+        if ($salaryBasis !== 'official') {
+            $blockedClaims[] = $salaryBasis === 'proxy'
+                ? 'salary_comparison_proxy_wage_not_direct_fact'
+                : 'salary_comparison_missing_official_wage_source';
+            $warnings[] = $salaryBasis === 'proxy'
+                ? 'Proxy wage references cannot be presented as direct occupational salary facts.'
+                : 'Salary comparison claims are blocked until official wage evidence is present.';
+            $criticalMissingCount++;
+        }
+
+        if (! $allowStrongClaim) {
+            $blockedClaims[] = 'strong_claim_crosswalk_not_direct';
+            $warnings[] = 'Strong fit or recommendation language is blocked for proxy or unmapped crosswalks.';
+            $criticalMissingCount++;
+        }
+
+        if (! $allowMarketSignal) {
+            $blockedClaims[] = 'market_signal_missing_source';
+            $warnings[] = 'Market-signal interpretation is blocked until source-backed market evidence is present.';
+        }
+
+        return [
+            'integrity_state' => $this->integrityState($criticalMissingCount),
+            'allow_strong_claim' => $allowStrongClaim,
+            'allow_ai_strategy' => $allowAiStrategy,
+            'allow_salary_comparison' => $allowSalaryComparison,
+            'allow_market_signal' => $allowMarketSignal,
+            'allow_local_proxy_wage' => $allowLocalProxyWage,
+            'blocked_claims' => array_values(array_unique($blockedClaims)),
+            'warnings' => array_values(array_unique($warnings)),
+            'evidence_basis' => [
+                'salary' => $salaryBasis,
+                'ai_exposure' => $aiBasis,
+                'market_signal' => $marketBasis,
+                'crosswalk' => $crosswalkBasis,
+            ],
+        ];
+    }
+
+    private function integrityState(int $criticalMissingCount): string
+    {
+        if ($criticalMissingCount <= 0) {
+            return 'full';
+        }
+
+        if ($criticalMissingCount === 1) {
+            return 'provisional';
+        }
+
+        return 'restricted';
+    }
+
+    /**
+     * @param  array<string, mixed>  $pageContent
+     */
+    private function salaryEvidenceBasis(array $pageContent, CareerJobDisplayAsset $asset): string
+    {
+        $marketSignal = (array) ($pageContent['market_signal_card'] ?? []);
+        $salaryType = strtolower($this->flattenText($marketSignal['salary_data_type'] ?? ''));
+        $marketText = strtolower($this->flattenText($marketSignal));
+
+        if ($this->containsAny($salaryType.' '.$marketText, ['cn industry proxy', 'local proxy', 'proxy wage', 'functional proxy', 'nearest_us_soc'])) {
+            return 'proxy';
+        }
+
+        $sourcesText = strtolower($this->flattenText($asset->sources_json ?? []));
+        if ($this->containsAny($sourcesText, ['bls.gov', 'occupational outlook handbook', 'oes', 'salary', 'wage', 'median pay', 'median wage'])) {
+            return 'official';
+        }
+
+        return 'missing';
+    }
+
+    /**
+     * @param  array<string, mixed>  $pageContent
+     */
+    private function aiExposureEvidenceBasis(array $pageContent): string
+    {
+        $aiImpact = (array) ($pageContent['ai_impact_table'] ?? []);
+        $score = $aiImpact['score_normalized'] ?? $aiImpact['score'] ?? $aiImpact['normalized_score'] ?? null;
+        $source = strtolower($this->flattenText($aiImpact['source'] ?? ''));
+
+        if ($this->containsAny($source, ['blocked', 'not available', 'missing'])) {
+            return 'blocked';
+        }
+
+        if ($score !== null && trim((string) $score) !== '') {
+            return 'central_score';
+        }
+
+        return 'missing';
+    }
+
+    /**
+     * @param  array<string, mixed>  $pageContent
+     */
+    private function marketSignalEvidenceBasis(array $pageContent, CareerJobDisplayAsset $asset): string
+    {
+        if (! is_array($pageContent['market_signal_card'] ?? null)) {
+            return 'missing';
+        }
+
+        $marketSignal = (array) $pageContent['market_signal_card'];
+        $sourcesText = strtolower($this->flattenText($asset->sources_json ?? []));
+        $marketText = strtolower($this->flattenText($marketSignal));
+
+        if ($this->containsAny($sourcesText.' '.$marketText, ['bls.gov', 'onetonline.org', 'occupational outlook handbook', 'official'])) {
+            return 'official';
+        }
+
+        if ($this->containsAny($sourcesText.' '.$marketText, ['sample', 'market signal', 'fermatmind interpretation'])) {
+            return 'sample';
+        }
+
+        return 'missing';
+    }
+
+    private function crosswalkEvidenceBasis(Occupation $occupation): string
+    {
+        $occupation->loadMissing('crosswalks');
+
+        $mode = strtolower((string) $occupation->crosswalk_mode);
+        if (in_array($mode, ['exact', 'direct', 'direct_match'], true)) {
+            return 'direct';
+        }
+
+        if ($mode === 'trust_inheritance') {
+            return 'trust_inheritance';
+        }
+
+        if (in_array($mode, ['functional_equivalent', 'functional_proxy', 'local_heavy_interpretation', 'family_proxy', 'cn_boundary_only'], true)) {
+            return 'proxy';
+        }
+
+        if ($mode === 'unmapped' || $mode === 'directory_draft') {
+            return 'missing';
+        }
+
+        $hasUsSoc = false;
+        $hasOnet = false;
+        /** @var OccupationCrosswalk $crosswalk */
+        foreach ($occupation->crosswalks as $crosswalk) {
+            $system = strtolower((string) $crosswalk->source_system);
+            $mappingType = strtolower((string) $crosswalk->mapping_type);
+            $isDirect = in_array($mappingType, ['exact', 'direct', 'direct_match'], true);
+            $hasUsSoc = $hasUsSoc || ($system === 'us_soc' && $isDirect);
+            $hasOnet = $hasOnet || ($system === 'onet_soc_2019' && $isDirect);
+        }
+
+        return $hasUsSoc && $hasOnet ? 'direct' : 'missing';
+    }
+
+    /**
+     * @param  list<string>  $needles
+     */
+    private function containsAny(string $haystack, array $needles): bool
+    {
+        foreach ($needles as $needle) {
+            if (str_contains($haystack, $needle)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function flattenText(mixed $value): string
+    {
+        if (is_scalar($value) || $value === null) {
+            return (string) $value;
+        }
+
+        if (! is_array($value)) {
+            return '';
+        }
+
+        $parts = [];
+        array_walk_recursive($value, static function (mixed $item) use (&$parts): void {
+            if (is_scalar($item) || $item === null) {
+                $parts[] = (string) $item;
+            }
+        });
+
+        return implode(' ', $parts);
     }
 
     /**
