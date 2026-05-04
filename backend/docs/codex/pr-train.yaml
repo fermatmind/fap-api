@@ -2574,6 +2574,41 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-D11
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-d11-career-authority-batch
+    base: main
+    depends_on: ["PR-D8e3-api"]
+    mode: execute
+    scope: >
+      Career upload governance authority alignment for the first D10 cohort.
+      Add a guarded career:align-career-authority-batch command that requires
+      explicit --file and --slugs, defaults to dry-run, requires --force for
+      writes, rejects protected validated slugs, software-developers manual
+      hold, CN/proxy/broad/multiple O*NET rows, missing/duplicate workbook
+      rows, conflicting existing crosswalks, and duplicate existing
+      crosswalks. Writes are limited to missing Occupation rows plus direct
+      us_soc and onet_soc_2019 crosswalks. Do not import display assets,
+      change release gates, mutate sitemap/llms, or process a 2786 bulk
+      write.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Console/Commands app/Console/Kernel.php tests/Feature/Console tests/Unit/Services/Career docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Feature/Console tests/Unit/Services/Career"
+      - "php artisan career:align-career-authority-batch --file=/tmp/fermat_career_assets_v4_2_v9_d10_30_repaired.xlsx --slugs=acute-care-nurses,adapted-physical-education-specialists,administrative-law-judges-adjudicators-and-hearing-officers,adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors,adult-literacy-and-ged-teachers,advanced-practice-psychiatric-nurses,advertising-promotions-and-marketing-managers,advertising-sales-agents,aerospace-engineering-and-operations-technicians,agents-and-business-managers-of-artists-performers-and-athletes,agricultural-and-food-science-technicians,agricultural-equipment-operators,agricultural-sciences-teachers-postsecondary,aircraft-and-avionics-equipment-mechanics-and-technicians,aircraft-cargo-handling-supervisors,aircraft-launch-and-recovery-officers,aircraft-launch-and-recovery-specialists,aircraft-mechanics-and-service-technicians,aircraft-service-attendants,aircraft-structure-surfaces-rigging-and-systems-assemblers,airfield-operations-specialists,airline-pilots-copilots-and-flight-engineers,allergists-and-immunologists,ambulance-drivers-and-attendants-except-emergency-medical-technicians,amusement-and-recreation-attendants,anesthesiologist-assistants,anesthesiologists,animal-care-and-service-workers,animal-caretakers,animal-control-workers --dry-run --json"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-B84
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
