@@ -23,6 +23,7 @@ use App\Console\Commands\CareerExportFullReleaseLedger;
 use App\Console\Commands\CareerExportLaunchGovernanceClosure;
 use App\Console\Commands\CareerExportOccupationDirectoryReviewQueues;
 use App\Console\Commands\CareerExportStrongIndexEligibility;
+use App\Console\Commands\CareerFullDisplayWorkbookValidator;
 use App\Console\Commands\CareerImportActorsDisplayAsset;
 use App\Console\Commands\CareerImportAuthorityWave;
 use App\Console\Commands\CareerImportOccupationDirectoryDrafts;
@@ -171,6 +172,7 @@ class Kernel extends ConsoleKernel
         CareerImportSelectedDisplayAssets::class,
         CareerValidateAssetImport::class,
         CareerValidateDisplayBatch::class,
+        CareerFullDisplayWorkbookValidator::class,
         CareerCompileAuthorityWave::class,
         CareerCompileRecommendationSubjects::class,
         CareerCrosswalkOps::class,

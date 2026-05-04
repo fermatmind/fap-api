@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-04T04:00:00Z",
+  "updated_at": "2026-05-04T06:15:00Z",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -4315,9 +4315,9 @@
     "PR-D5d-api-hotfix": {
       "repo": "fap-api",
       "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-      "status": "draft_open",
+      "status": "reconciled_merged",
       "branch": "codex/pr-d5d-api-hotfix-strip-release-gates",
-      "commit_sha": "30c99e0b21645ef3e4db10194f9964272dc8f2a1",
+      "commit_sha": "e83f05e4a1923162110189af53d9fd2fdb44cb5c",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1116",
       "checks": {
         "local": [
@@ -4346,9 +4346,9 @@
       },
       "failure_reason": "",
       "resume_policy": "manual_only",
-      "merged_at": "",
-      "remote_branch_deleted": false,
-      "local_cleanup_executed": false,
+      "merged_at": "2026-05-04T02:27:23Z",
+      "remote_branch_deleted": true,
+      "local_cleanup_executed": true,
       "history": [
         {
           "at": "2026-05-04T03:45:00Z",
@@ -4364,6 +4364,79 @@
           "at": "2026-05-04T04:00:00Z",
           "status": "draft_open",
           "summary": "Opened draft PR #1116 after scoped local hotfix validation passed."
+        },
+        {
+          "at": "2026-05-04T04:45:00Z",
+          "status": "reconciled_merged",
+          "summary": "Reconciled PR-D5d-api-hotfix ledger: GitHub PR #1116 is merged, origin/main contains merge commit e83f05e4a1923162110189af53d9fd2fdb44cb5c, target release validation passed, and the task branch was cleaned up locally/remotely."
+        }
+      ]
+    },
+    "PR-D6": {
+      "repo": "fap-api",
+      "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+      "status": "draft_open",
+      "branch": "codex/pr-d6-full-display-workbook-validator",
+      "commit_sha": "65072bc06f7e85241b4ad2cfe58ab79f6e5259ad",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1117",
+      "checks": {
+        "local": [
+          {
+            "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+            "status": "passed"
+          },
+          {
+            "command": "vendor/bin/pint --test app/Console/Commands/CareerValidateDisplayBatch.php app/Console/Commands/CareerFullDisplayWorkbookValidator.php app/Console/Kernel.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Console/CareerFullDisplayWorkbookValidatorCommandTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan test tests/Feature/Console/CareerFullDisplayWorkbookValidatorCommandTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan career:validate-display-batch --file=/tmp/fermat_career_assets_v4_2_v9_d5_ready.xlsx --json > /tmp/d6_full_validate.json",
+            "status": "passed"
+          },
+          {
+            "command": "php artisan route:list | rg 'career/jobs|career-jobs|career|seo'",
+            "status": "passed"
+          },
+          {
+            "command": "git diff --check && git diff --cached --check",
+            "status": "passed"
+          },
+          {
+            "command": "curl sitemap.xml/llms.txt/llms-full.txt D5 slug absence checks",
+            "status": "passed"
+          }
+        ],
+        "github": []
+      },
+      "failure_reason": "",
+      "resume_policy": "manual_only",
+      "merged_at": "",
+      "remote_branch_deleted": false,
+      "local_cleanup_executed": false,
+      "history": [
+        {
+          "at": "2026-05-04T05:20:00Z",
+          "status": "in_progress",
+          "summary": "Initialized PR-D6 ledger entry for the read-only 第九版 full display workbook intake validator after D5e live validation passed."
+        },
+        {
+          "at": "2026-05-04T05:45:00Z",
+          "status": "scope_extended",
+          "summary": "Extended PR-D6 scope to include a read-only Strategic Architecture Gap Scan for protocol sections §1 through §5 without implementing architecture modules or changing release gates."
+        },
+        {
+          "at": "2026-05-04T06:05:00Z",
+          "status": "local_verified",
+          "summary": "Implemented read-only full workbook validator and Strategic Architecture Gap Scan, optimized full workbook scanning to stream rows with preloaded authority snapshots, and passed formatter, targeted tests, route list, real D5-ready workbook full scan, diff checks, and sitemap/llms absence checks."
+        },
+        {
+          "at": "2026-05-04T06:15:00Z",
+          "status": "draft_open",
+          "summary": "Opened draft PR #1117 for PR-D6 after scoped local validation and real D5-ready workbook full scan passed."
         }
       ]
     }

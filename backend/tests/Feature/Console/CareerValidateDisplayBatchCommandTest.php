@@ -94,7 +94,7 @@ final class CareerValidateDisplayBatchCommandTest extends TestCase
     ];
 
     #[Test]
-    public function it_requires_file_and_slugs(): void
+    public function it_requires_file(): void
     {
         $exitCode = Artisan::call('career:validate-display-batch', [
             '--json' => true,
@@ -102,15 +102,26 @@ final class CareerValidateDisplayBatchCommandTest extends TestCase
 
         $this->assertSame(1, $exitCode);
         $this->assertStringContainsString('--file is required.', Artisan::output());
+    }
 
-        $workbook = $this->writeWorkbook([$this->row('data-scientists')]);
-        $exitCode = Artisan::call('career:validate-display-batch', [
-            '--file' => $workbook,
-            '--json' => true,
+    #[Test]
+    public function it_allows_read_only_full_workbook_scan_when_slugs_are_omitted(): void
+    {
+        $workbook = $this->writeWorkbook([
+            $this->row('data-scientists'),
+            $this->row('actuaries', title: 'Actuaries', soc: '15-2011', onet: '15-2011.00'),
         ]);
 
-        $this->assertSame(1, $exitCode);
-        $this->assertStringContainsString('--slugs is required', Artisan::output());
+        [$exitCode, $report] = $this->runValidator($workbook, '');
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame('full_workbook', $report['scan_scope']);
+        $this->assertFalse($report['explicit_slugs']);
+        $this->assertSame(2, $report['validated_count']);
+        $this->assertTrue($report['read_only']);
+        $this->assertFalse($report['writes_database']);
+        $this->assertSame('partially', $report['strategic_architecture_gap_scan']['executive_decision']['current_d5_d6_pipeline_aligned_with_long_term_career_architecture']);
+        $this->assertCount(5, $report['strategic_architecture_gap_scan']['gap_matrix']);
     }
 
     #[Test]
