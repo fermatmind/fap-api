@@ -2308,6 +2308,36 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-D7b
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-d7b-crosswalk-mode-alias-policy
+    base: main
+    depends_on: ["PR-D7a-api"]
+    mode: execute
+    scope: >
+      D7b Crosswalk Mode Taxonomy + Alias Policy. Add read-only career
+      authority policy services for canonical crosswalk modes, proxy/broad
+      group/manual review blockers, and alias ambiguity validation. Surface the
+      crosswalk policy matrix in the full display workbook validator without
+      mutating occupations, crosswalks, display assets, release states,
+      sitemap, llms, paid/backlink gates, routes, or public resources.
+    checks:
+      - "vendor/bin/pint --test app/Services/Career app/Console/Commands tests/Unit/Services/Career tests/Feature/Console docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Unit/Services/Career tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Console/CareerFullDisplayWorkbookValidatorCommandTest.php"
+      - "php artisan career:validate-full-display-workbook --file=/tmp/fermat_career_assets_v4_2_v9_d5_ready.xlsx --json"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-B84
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend

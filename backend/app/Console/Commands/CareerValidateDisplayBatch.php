@@ -8,6 +8,7 @@ use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\Scopes\TenantScope;
+use App\Services\Career\Authority\CareerCrosswalkModePolicy;
 use DOMDocument;
 use DOMElement;
 use DOMNode;
@@ -206,6 +207,7 @@ final class CareerValidateDisplayBatch extends Command
                 'summary' => $summary,
                 'blockers_by_owner' => $this->blockersByOwner($items),
                 'recommended_next_batches' => $this->recommendedNextBatches($items),
+                'crosswalk_policy_summary' => $this->crosswalkPolicySummary($items),
                 'd5_repair_presence' => $this->d5RepairPresence($rowsBySlug),
                 'items' => $items,
             ]);
@@ -282,6 +284,7 @@ final class CareerValidateDisplayBatch extends Command
             'summary' => $summary,
             'blockers_by_owner' => $this->blockersByOwner($items),
             'recommended_next_batches' => $this->recommendedNextBatches($items),
+            'crosswalk_policy_summary' => $this->crosswalkPolicySummary($items),
             'd5_repair_presence' => $this->d5RepairPresence($d5RowsBySlug),
             'strategic_architecture_gap_scan' => $this->strategicArchitectureGapScan(),
             'items' => $items,
@@ -370,6 +373,7 @@ final class CareerValidateDisplayBatch extends Command
         $linkGate = $this->linkGate($json['en_internal_links'], $json['cn_internal_links']);
         $evidenceGate = $this->evidenceGate($row, $json, $sourceGate, $schemaGate);
         $authorityGate = $this->authorityGate($slug, $this->stringValue($row, 'SOC_Code'), $this->stringValue($row, 'O_NET_Code'));
+        $crosswalkPolicy = app(CareerCrosswalkModePolicy::class)->classifyWorkbookRow($row);
         $scores = $this->scores($contentGate, $authorityGate, $evidenceGate, $schemaGate, $ctaGate, $sourceGate, $linkGate);
 
         return [
@@ -388,6 +392,7 @@ final class CareerValidateDisplayBatch extends Command
             'source_gate' => $sourceGate,
             'link_gate' => $linkGate,
             'evidence_gate' => $evidenceGate,
+            'crosswalk_policy' => $crosswalkPolicy,
             'scores' => $scores,
             'recommended_status' => $this->recommendedStatus($row, $authorityGate, $scores),
             'release_gate' => [
@@ -1048,6 +1053,43 @@ final class CareerValidateDisplayBatch extends Command
             'blocked_authority_unavailable' => $this->countStatus($items, 'blocked_authority_unavailable'),
             'blocked_docx_fallback' => $this->countStatus($items, 'blocked_docx_fallback'),
             'blocked_api_404' => $this->countStatus($items, 'blocked_api_404'),
+        ];
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $items
+     * @return array<string, mixed>
+     */
+    private function crosswalkPolicySummary(array $items): array
+    {
+        $byMode = array_fill_keys(CareerCrosswalkModePolicy::canonicalModes(), 0);
+        $byBucket = [
+            'auto_safe' => 0,
+            'manual_review' => 0,
+            'blocked' => 0,
+        ];
+        $blockers = [];
+
+        foreach ($items as $item) {
+            $policy = (array) ($item['crosswalk_policy'] ?? []);
+            $mode = (string) ($policy['mode'] ?? CareerCrosswalkModePolicy::UNMAPPED);
+            $bucket = (string) ($policy['release_bucket'] ?? 'blocked');
+            $byMode[$mode] = ($byMode[$mode] ?? 0) + 1;
+            $byBucket[$bucket] = ($byBucket[$bucket] ?? 0) + 1;
+
+            foreach ((array) ($policy['blockers'] ?? []) as $blocker) {
+                $blocker = (string) $blocker;
+                $blockers[$blocker] = ($blockers[$blocker] ?? 0) + 1;
+            }
+        }
+
+        ksort($blockers);
+
+        return [
+            'taxonomy_version' => 'career.crosswalk_mode_policy.v1',
+            'modes' => $byMode,
+            'release_buckets' => $byBucket,
+            'blockers' => $blockers,
         ];
     }
 
