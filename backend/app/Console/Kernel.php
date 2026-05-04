@@ -31,6 +31,7 @@ use App\Console\Commands\CareerImportAuthorityWave;
 use App\Console\Commands\CareerImportOccupationDirectoryDrafts;
 use App\Console\Commands\CareerImportOccupationDirectoryDryRun;
 use App\Console\Commands\CareerImportSelectedDisplayAssets;
+use App\Console\Commands\CareerNormalizeLegacyDisplayAssets;
 use App\Console\Commands\CareerRunAssetBatch;
 use App\Console\Commands\CareerSyncOccupationDirectoryDisplay;
 use App\Console\Commands\CareerValidateAssetImport;
@@ -176,6 +177,7 @@ class Kernel extends ConsoleKernel
         CareerImportOccupationDirectoryDrafts::class,
         CareerImportOccupationDirectoryDryRun::class,
         CareerImportSelectedDisplayAssets::class,
+        CareerNormalizeLegacyDisplayAssets::class,
         CareerValidateAssetImport::class,
         CareerValidateDisplayBatch::class,
         CareerValidateDisplayAssetLineage::class,
