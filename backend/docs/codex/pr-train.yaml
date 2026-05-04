@@ -2401,6 +2401,38 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-D7e
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-d7e-display-asset-lineage-rollback
+    base: main
+    depends_on: ["PR-D7d"]
+    mode: execute
+    scope: >
+      D7e Display Asset Lineage + Rollback. Add read-only display asset
+      lineage and rollback reporting for career display surfaces using existing
+      career_job_display_assets metadata_json and payload hashes. The command
+      must report workbook/source identity, import command metadata, asset hash,
+      web validation status, rollback notes, and lineage blockers without
+      mutating display assets, release states, occupations, crosswalks, sitemap,
+      llms, paid, backlink, routes, or public resources.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Console/Commands/CareerValidateDisplayAssetLineage.php app/Console/Kernel.php app/Services/Career/Governance/CareerDisplayAssetLineageReporter.php tests/Feature/Console/CareerValidateDisplayAssetLineageCommandTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Feature/Console/CareerValidateDisplayAssetLineageCommandTest.php"
+      - "php artisan career:validate-display-asset-lineage --slugs=actors,data-scientists,registered-nurses,accountants-and-auditors,actuaries,financial-analysts,high-school-teachers,market-research-analysts,architectural-and-engineering-managers,civil-engineers,biomedical-engineers,dentists --json"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-B84
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
