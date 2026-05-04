@@ -5254,9 +5254,9 @@
         "PR-D8c": {
           "repo": "fap-api",
           "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-          "status": "pr_open",
+          "status": "merged_target_ops_complete",
           "branch": "codex/pr-d8c-display-asset-import-batch",
-          "commit_sha": "e57800121b0b002c35841eaf78e3d2061683e917",
+          "commit_sha": "4b4f82a1ca52c25c3e1b40c60cd8e762aa16eb96",
           "pr_url": "https://github.com/fermatmind/fap-api/pull/1132",
           "checks": {
             "local": [
@@ -5295,9 +5295,9 @@
           },
           "failure_reason": "",
           "resume_policy": "manual_only",
-          "merged_at": "",
-          "remote_branch_deleted": false,
-          "local_cleanup_executed": false,
+          "merged_at": "2026-05-04T09:44:58Z",
+          "remote_branch_deleted": true,
+          "local_cleanup_executed": true,
           "history": [
             {
               "at": "2026-05-04T17:20:00+08:00",
@@ -5318,6 +5318,80 @@
               "at": "2026-05-04T17:36:00+08:00",
               "status": "pr_open",
               "summary": "Opened draft PR #1132 for D8c selected display asset import batch."
+            },
+            {
+              "at": "2026-05-04T17:50:00+08:00",
+              "status": "merged_target_ops_complete",
+              "summary": "PR-D8c merged and target force imported 19 active D8 display assets; occupations/crosswalks unchanged, release gates unchanged, software-developers excluded."
+            }
+          ]
+        },
+        "PR-D8d-api": {
+          "repo": "fap-api",
+          "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+          "status": "pr_open",
+          "branch": "codex/pr-d8d-api-validator-driven-display-surface",
+          "commit_sha": "c67cdf1aa9ddca6ab341c318b0e17411f2e6e41c",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1134",
+          "checks": {
+            "local": [
+              {
+                "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+                "status": "passed"
+              },
+              {
+                "command": "vendor/bin/pint --test app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+                "status": "passed"
+              },
+              {
+                "command": "php artisan test tests/Unit/Services/Career/CareerJobDisplaySurfaceBuilderTest.php tests/Feature/Career/CareerJobDisplaySurfaceApiTest.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php",
+                "status": "passed"
+              },
+              {
+                "command": "php artisan route:list | rg 'career/jobs|career-jobs|career|seo'",
+                "status": "passed"
+              },
+              {
+                "command": "git diff --check",
+                "status": "passed"
+              },
+              {
+                "command": "git diff --cached --check",
+                "status": "passed"
+              }
+            ],
+            "github": []
+          },
+          "failure_reason": "",
+          "resume_policy": "manual_only",
+          "merged_at": "",
+          "remote_branch_deleted": false,
+          "local_cleanup_executed": false,
+          "history": [
+            {
+              "at": "2026-05-04T18:00:00+08:00",
+              "status": "in_progress",
+              "summary": "Initialized PR-D8d-api ledger entry for validator-driven display surface API eligibility after D8c target display asset import completed."
+            },
+            {
+              "at": "2026-05-04T18:12:00+08:00",
+              "status": "local_checks_passed",
+              "summary": "D8d-api builder/API tests passed with validator-driven display surface eligibility for protected 12 and active D8 19, Product rejection, missing asset safety, and software-developers manual hold safety."
+            },
+            {
+              "at": "2026-05-04T18:14:00+08:00",
+              "status": "committed",
+              "summary": "Committed D8d-api validator-driven display surface eligibility on codex/pr-d8d-api-validator-driven-display-surface."
+            },
+            {
+              "at": "2026-05-04T18:16:00+08:00",
+              "status": "pr_open",
+              "summary": "Opened draft PR #1134 for validator-driven display surface API eligibility."
+            },
+            {
+              "at": "2026-05-04T18:25:00+08:00",
+              "status": "review_fix_local_checks_passed",
+              "summary": "Added explicit software-developers manual-hold guard and regression tests proving it is not force-enabled even if a display asset exists."
             }
           ]
         }

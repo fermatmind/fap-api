@@ -12,19 +12,16 @@ use Illuminate\Support\Str;
 
 final class CareerJobDisplaySurfaceBuilder
 {
-    private const PILOT_SLUGS = [
-        'actors',
-        'data-scientists',
-        'registered-nurses',
-        'accountants-and-auditors',
-        'actuaries',
-        'financial-analysts',
-        'high-school-teachers',
-        'market-research-analysts',
-        'architectural-and-engineering-managers',
-        'civil-engineers',
-        'biomedical-engineers',
-        'dentists',
+    private const SURFACE_VERSION = 'display.surface.v1';
+
+    private const ASSET_VERSION = 'v4.2';
+
+    private const TEMPLATE_VERSION = 'v4.2';
+
+    private const COMPONENT_ORDER_COUNT = 24;
+
+    private const MANUAL_HOLD_SLUGS = [
+        'software-developers',
     ];
 
     private const READY_STATUS = 'ready_for_pilot';
@@ -40,6 +37,24 @@ final class CareerJobDisplaySurfaceBuilder
         'raw_ai_exposure_score',
     ];
 
+    private const PRODUCT_SCHEMA_KEYS = [
+        'offers',
+        'aggregateRating',
+        'sku',
+    ];
+
+    private const CLAIM_PERMISSION_KEYS = [
+        'integrity_state',
+        'allow_strong_claim',
+        'allow_ai_strategy',
+        'allow_salary_comparison',
+        'allow_market_signal',
+        'allow_local_proxy_wage',
+        'blocked_claims',
+        'warnings',
+        'evidence_basis',
+    ];
+
     /**
      * @return array<string, mixed>|null
      */
@@ -47,7 +62,7 @@ final class CareerJobDisplaySurfaceBuilder
     {
         $identity = $bundle->identity;
         $slug = strtolower((string) ($identity['canonical_slug'] ?? ''));
-        if (! $this->isPilotSlug($slug)) {
+        if ($slug === '' || $this->isManualHoldSlug($slug)) {
             return null;
         }
 
@@ -72,12 +87,15 @@ final class CareerJobDisplaySurfaceBuilder
     public function buildForOccupation(Occupation $occupation, string $locale): ?array
     {
         $canonicalSlug = strtolower((string) $occupation->canonical_slug);
-        if (! $this->isPilotSlug($canonicalSlug)) {
+        if ($canonicalSlug === '' || $this->isManualHoldSlug($canonicalSlug)) {
             return null;
         }
 
         $asset = $occupation->displayAssets()
             ->where('canonical_slug', $canonicalSlug)
+            ->where('surface_version', self::SURFACE_VERSION)
+            ->where('asset_version', self::ASSET_VERSION)
+            ->where('template_version', self::TEMPLATE_VERSION)
             ->where('status', self::READY_STATUS)
             ->where('asset_type', self::ASSET_TYPE)
             ->orderByDesc('updated_at')
@@ -94,6 +112,28 @@ final class CareerJobDisplaySurfaceBuilder
             return null;
         }
 
+        if (! $this->assetContractEligible($occupation, $asset, $pageContent)) {
+            return null;
+        }
+
+        $claimPermissions = $this->claimPermissions($occupation, $asset, $pageContent);
+        if (! $this->hasRequiredClaimPermissionKeys($claimPermissions)) {
+            return null;
+        }
+
+        $page = [
+            'locale' => $this->publicLocale($normalizedLocale),
+            'content' => $this->stripForbiddenKeys($pageContent),
+        ];
+        $componentOrder = $this->stripForbiddenKeys($asset->component_order_json ?? []);
+        $sources = $this->stripForbiddenKeys($asset->sources_json ?? []);
+        $structuredData = $this->stripForbiddenKeys($asset->structured_data_json ?? []);
+        $implementationContract = $this->stripForbiddenKeys($asset->implementation_contract_json ?? []);
+
+        if ($this->containsForbiddenPublicKey([$page, $componentOrder, $sources, $structuredData, $implementationContract, $claimPermissions])) {
+            return null;
+        }
+
         return [
             'surface_version' => (string) $asset->surface_version,
             'asset_version' => (string) $asset->asset_version,
@@ -103,21 +143,66 @@ final class CareerJobDisplaySurfaceBuilder
             'status' => (string) $asset->status,
             'subject' => $this->subject($occupation),
             'available_locales' => $this->availableLocales($localizedPages),
-            'claim_permissions' => $this->claimPermissions($occupation, $asset, $pageContent),
-            'page' => [
-                'locale' => $this->publicLocale($normalizedLocale),
-                'content' => $this->stripForbiddenKeys($pageContent),
-            ],
-            'component_order' => $this->stripForbiddenKeys($asset->component_order_json ?? []),
-            'sources' => $this->stripForbiddenKeys($asset->sources_json ?? []),
-            'structured_data_from_visible_content' => $this->stripForbiddenKeys($asset->structured_data_json ?? []),
-            'implementation_contract' => $this->stripForbiddenKeys($asset->implementation_contract_json ?? []),
+            'claim_permissions' => $claimPermissions,
+            'page' => $page,
+            'component_order' => $componentOrder,
+            'sources' => $sources,
+            'structured_data_from_visible_content' => $structuredData,
+            'implementation_contract' => $implementationContract,
         ];
     }
 
-    private function isPilotSlug(string $slug): bool
+    private function isManualHoldSlug(string $slug): bool
     {
-        return in_array(strtolower(trim($slug)), self::PILOT_SLUGS, true);
+        return in_array(strtolower(trim($slug)), self::MANUAL_HOLD_SLUGS, true);
+    }
+
+    /**
+     * @param  array<string, mixed>  $pageContent
+     */
+    private function assetContractEligible(Occupation $occupation, CareerJobDisplayAsset $asset, array $pageContent): bool
+    {
+        if ((string) $asset->occupation_id !== (string) $occupation->id) {
+            return false;
+        }
+
+        if (strtolower((string) $asset->canonical_slug) !== strtolower((string) $occupation->canonical_slug)) {
+            return false;
+        }
+
+        $componentOrder = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
+        if (count($componentOrder) !== self::COMPONENT_ORDER_COUNT) {
+            return false;
+        }
+
+        foreach ($componentOrder as $component) {
+            if (! is_string($component) || trim($component) === '') {
+                return false;
+            }
+        }
+
+        return ! $this->containsProductSchema([
+            $pageContent,
+            $asset->sources_json ?? [],
+            $asset->structured_data_json ?? [],
+            $asset->implementation_contract_json ?? [],
+        ]);
+    }
+
+    /**
+     * @param  array<string, mixed>  $claimPermissions
+     */
+    private function hasRequiredClaimPermissionKeys(array $claimPermissions): bool
+    {
+        foreach (self::CLAIM_PERMISSION_KEYS as $key) {
+            if (! array_key_exists($key, $claimPermissions)) {
+                return false;
+            }
+        }
+
+        return is_array($claimPermissions['blocked_claims'])
+            && is_array($claimPermissions['warnings'])
+            && is_array($claimPermissions['evidence_basis']);
     }
 
     private function normalizeLocale(string $locale): string
@@ -425,5 +510,47 @@ final class CareerJobDisplaySurfaceBuilder
         }
 
         return $clean;
+    }
+
+    private function containsForbiddenPublicKey(mixed $payload): bool
+    {
+        if (! is_array($payload)) {
+            return false;
+        }
+
+        foreach ($payload as $key => $value) {
+            if (is_string($key) && in_array($key, self::FORBIDDEN_PUBLIC_KEYS, true)) {
+                return true;
+            }
+
+            if ($this->containsForbiddenPublicKey($value)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function containsProductSchema(mixed $payload): bool
+    {
+        if (! is_array($payload)) {
+            return false;
+        }
+
+        foreach ($payload as $key => $value) {
+            if ($key === '@type' && is_string($value) && strtolower($value) === 'product') {
+                return true;
+            }
+
+            if (is_string($key) && in_array($key, self::PRODUCT_SCHEMA_KEYS, true)) {
+                return true;
+            }
+
+            if ($this->containsProductSchema($value)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
