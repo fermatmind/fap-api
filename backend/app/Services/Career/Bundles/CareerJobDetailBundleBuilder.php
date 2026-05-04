@@ -9,7 +9,9 @@ use App\Domain\Career\IndexStateValue;
 use App\Domain\Career\Publish\CareerLifecycleOperationalSummaryService;
 use App\DTO\Career\CareerJobDetailBundle;
 use App\Models\CareerJob;
+use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
+use App\Models\OccupationCrosswalk;
 use App\Models\RecommendationSnapshot;
 use App\Models\Scopes\TenantScope;
 use App\Services\Analytics\CareerConversionClosureBuilder;
@@ -21,12 +23,27 @@ final class CareerJobDetailBundleBuilder
 {
     private const DIRECTORY_DRAFT_CROSSWALK_MODE = 'directory_draft';
 
+    private const DISPLAY_SURFACE_VERSION = 'display.surface.v1';
+
+    private const DISPLAY_ASSET_VERSION = 'v4.2';
+
+    private const DISPLAY_ASSET_TYPE = 'career_job_public_display';
+
+    private const DISPLAY_READY_STATUS = 'ready_for_pilot';
+
+    private const DISPLAY_COMPONENT_ORDER_COUNT = 24;
+
+    private const DISPLAY_ASSET_BACKED_MANUAL_HOLD_SLUGS = [
+        'software-developers',
+    ];
+
     public function __construct(
         private readonly SeoSurfaceContractService $seoSurfaceContractService,
         private readonly CareerWhiteBoxScorePayloadBuilder $whiteBoxScorePayloadBuilder,
         private readonly CareerFeedbackTimelineAuthorityService $feedbackTimelineAuthorityService,
         private readonly CareerLifecycleOperationalSummaryService $lifecycleOperationalSummaryService,
         private readonly CareerConversionClosureBuilder $conversionClosureBuilder,
+        private readonly CareerJobDisplaySurfaceBuilder $displaySurfaceBuilder,
     ) {}
 
     public function buildBySlug(string $slug): ?CareerJobDetailBundle
@@ -51,7 +68,7 @@ final class CareerJobDetailBundleBuilder
         }
 
         if ($occupation->crosswalk_mode === self::DIRECTORY_DRAFT_CROSSWALK_MODE) {
-            return null;
+            return $this->buildDisplayAssetBackedBundle($occupation, $normalizedSlug);
         }
 
         $snapshot = RecommendationSnapshot::query()
@@ -228,6 +245,194 @@ final class CareerJobDetailBundleBuilder
                 'compile_refs' => $this->normalizeArray($payload['compile_refs'] ?? []),
             ],
             lifecycleCompanion: $this->feedbackTimelineAuthorityService->buildCompanionForJobSnapshot($snapshot),
+            lifecycleOperational: $lifecycleOperational,
+            shortlistContract: [
+                'enabled' => true,
+                'subject_kind' => 'job_slug',
+                'subject_slug' => $subjectSlug,
+                'source_page_type' => 'career_job_detail',
+                'state_endpoint' => '/api/v0.5/career/shortlist/state',
+                'write_endpoint' => '/api/v0.5/career/shortlist',
+            ],
+            conversionClosure: $conversionClosure,
+        );
+    }
+
+    private function buildDisplayAssetBackedBundle(Occupation $occupation, string $requestedSlug): ?CareerJobDetailBundle
+    {
+        $subjectSlug = strtolower((string) $occupation->canonical_slug);
+        if ($subjectSlug === '' || $subjectSlug !== strtolower($requestedSlug)) {
+            return null;
+        }
+
+        if (in_array($subjectSlug, self::DISPLAY_ASSET_BACKED_MANUAL_HOLD_SLUGS, true)) {
+            return null;
+        }
+
+        if (! $this->hasDisplayAssetBackedAuthority($occupation)) {
+            return null;
+        }
+
+        $asset = $this->validDisplayAssetBackedAsset($occupation, $subjectSlug);
+        if (! $asset instanceof CareerJobDisplayAsset) {
+            return null;
+        }
+
+        if (
+            $this->displaySurfaceBuilder->buildForOccupation($occupation, 'zh-CN') === null
+            || $this->displaySurfaceBuilder->buildForOccupation($occupation, 'en') === null
+        ) {
+            return null;
+        }
+
+        $canonicalTitleZh = $occupation->canonical_title_zh ?: $occupation->canonical_title_en;
+        $scoreBundle = $this->displayAssetBackedScoreBundle();
+        $warnings = [
+            'red_flags' => [],
+            'amber_flags' => ['display_asset_backed_directory_draft_shell'],
+            'blocked_claims' => ['compiled_recommendation_claims_unavailable'],
+        ];
+        $lifecycleOperational = $this->lifecycleOperationalSummaryService->buildForSlug($subjectSlug);
+        $conversionClosure = $this->conversionClosureBuilder->buildForSubjectSlug($subjectSlug);
+
+        return new CareerJobDetailBundle(
+            identity: [
+                'occupation_uuid' => $occupation->id,
+                'canonical_slug' => $subjectSlug,
+                'entity_level' => $occupation->entity_level,
+                'family_uuid' => $occupation->family_id,
+                'parent_uuid' => $occupation->parent_id,
+            ],
+            localePolicy: [
+                'truth_market' => $occupation->truth_market,
+                'display_market' => $occupation->display_market,
+                'crosswalk_mode' => $occupation->crosswalk_mode,
+                'locale_warning' => $occupation->truth_market !== $occupation->display_market
+                    ? 'cross_market_display'
+                    : null,
+                'truth_notice_required' => $occupation->truth_market !== $occupation->display_market,
+            ],
+            titles: [
+                'canonical_en' => $occupation->canonical_title_en,
+                'canonical_zh' => $canonicalTitleZh,
+                'search_h1_zh' => $occupation->search_h1_zh ?: $canonicalTitleZh,
+                'short_title_en' => $occupation->canonical_title_en,
+                'short_title_zh' => $canonicalTitleZh,
+            ],
+            aliasIndex: $occupation->aliases
+                ->sortBy([
+                    ['lang', 'asc'],
+                    ['register', 'asc'],
+                    ['alias', 'asc'],
+                ])
+                ->values()
+                ->map(static fn ($alias): array => [
+                    'alias' => $alias->alias,
+                    'normalized' => $alias->normalized,
+                    'lang' => $alias->lang,
+                    'register' => $alias->register,
+                    'intent_scope' => $alias->intent_scope,
+                    'target_kind' => $alias->target_kind,
+                    'target_uuid' => $alias->occupation_id ?? $alias->family_id,
+                    'precision' => $alias->precision_score,
+                    'confidence' => $alias->confidence_score,
+                ])
+                ->all(),
+            ontology: [
+                'task_prototype_signature' => is_array($occupation->task_prototype_signature) ? $occupation->task_prototype_signature : [],
+                'structural_stability' => $occupation->structural_stability,
+                'market_semantics_gap' => $occupation->market_semantics_gap,
+                'regulatory_divergence' => $occupation->regulatory_divergence,
+                'toolchain_divergence' => $occupation->toolchain_divergence,
+                'skill_gap_threshold' => $occupation->skill_gap_threshold,
+                'trust_inheritance_scope' => is_array($occupation->trust_inheritance_scope) ? $occupation->trust_inheritance_scope : [],
+                'crosswalks' => $this->crosswalkPayload($occupation),
+            ],
+            truthLayer: [
+                'source_refs' => [],
+                'median_pay_usd_annual' => null,
+                'jobs_2024' => null,
+                'projected_jobs_2034' => null,
+                'employment_change' => null,
+                'outlook_pct_2024_2034' => null,
+                'outlook_description' => null,
+                'entry_education' => null,
+                'work_experience' => null,
+                'on_the_job_training' => null,
+                'ai_exposure' => null,
+                'ai_rationale' => null,
+                'truth_market' => $occupation->truth_market,
+                'truth_last_reviewed_at' => null,
+            ],
+            contentSections: [],
+            contentBodyMd: null,
+            trustManifest: [
+                'manifest_version' => 'trust_manifest.v1',
+                'entity_id' => $subjectSlug,
+                'page_type' => 'career_job_detail',
+                'page_slug' => $subjectSlug,
+                'content_version' => 'display_asset_backed_v4_2',
+                'data_version' => 'career_job_display_assets.v4.2',
+                'logic_version' => 'career.protocol.job_detail.display_asset_backed.v1',
+                'locale_context' => [
+                    'truth_market' => $occupation->truth_market,
+                    'display_market' => $occupation->display_market,
+                ],
+                'methodology' => [
+                    'crosswalk_mode' => $occupation->crosswalk_mode,
+                    'derivation_policy' => 'validated_display_asset_backed_shell',
+                    'notes' => ['Detail bundle shell exists only when authority and display asset contracts pass.'],
+                ],
+                'reviewer_status' => 'pilot_display_asset',
+                'reviewed_at' => null,
+                'ai_assistance' => [],
+                'quality' => [
+                    'complete' => false,
+                    'reviewed' => false,
+                    'stale' => false,
+                    'blocked_reasons' => ['compiled_recommendation_snapshot_missing'],
+                ],
+                'last_substantive_update_at' => optional($asset->updated_at)->toISOString(),
+                'next_review_due_at' => null,
+            ],
+            scoreBundle: $scoreBundle,
+            whiteBoxScores: $this->whiteBoxScorePayloadBuilder->build($scoreBundle, $warnings),
+            warnings: $warnings,
+            claimPermissions: [
+                'allow_strong_claim' => false,
+                'allow_salary_comparison' => false,
+                'allow_ai_strategy' => false,
+                'allow_transition_recommendation' => false,
+                'allow_cross_market_pay_copy' => false,
+                'reason_codes' => ['display_asset_claim_permissions_required'],
+            ],
+            integritySummary: [
+                'integrity_state' => 'display_asset_backed',
+                'critical_missing_fields' => ['compiled_recommendation_snapshot'],
+                'confidence_cap' => 60,
+                'degradation_factor' => 1,
+            ],
+            seoContract: $this->buildDisplayAssetBackedSeoContract($occupation),
+            provenanceMeta: [
+                'content_version' => 'display_asset_backed_v4_2',
+                'data_version' => 'career_job_display_assets.v4.2',
+                'logic_version' => 'career.protocol.job_detail.display_asset_backed.v1',
+                'compiler_version' => null,
+                'compiled_at' => null,
+                'truth_metric_id' => null,
+                'trust_manifest_id' => null,
+                'index_state_id' => null,
+                'compile_run_id' => null,
+                'import_run_id' => null,
+                'source_trace_id' => null,
+                'compile_refs' => [
+                    'display_asset_id' => (string) $asset->id,
+                    'surface_version' => (string) $asset->surface_version,
+                    'asset_version' => (string) $asset->asset_version,
+                    'status' => (string) $asset->status,
+                ],
+            ],
+            lifecycleCompanion: [],
             lifecycleOperational: $lifecycleOperational,
             shortlistContract: [
                 'enabled' => true,
@@ -545,6 +750,127 @@ final class CareerJobDetailBundleBuilder
             'surface_type' => $surface['surface_type'] ?? null,
             'robots_policy' => $surface['robots_policy'] ?? $robotsPolicy,
             'metadata_fingerprint' => $surface['metadata_fingerprint'] ?? null,
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function buildDisplayAssetBackedSeoContract(Occupation $occupation): array
+    {
+        $canonicalPath = '/career/jobs/'.$occupation->canonical_slug;
+        $robotsPolicy = 'noindex,follow';
+        $surface = $this->seoSurfaceContractService->build([
+            'metadata_scope' => 'career_protocol_bundle',
+            'surface_type' => 'career_job_detail_display_asset_backed_bundle',
+            'canonical_url' => $canonicalPath,
+            'robots_policy' => $robotsPolicy,
+            'title' => $occupation->canonical_title_en,
+            'description' => $occupation->canonical_title_en,
+            'indexability_state' => 'noindex',
+            'sitemap_state' => 'excluded',
+        ]);
+
+        return [
+            'canonical_path' => $canonicalPath,
+            'canonical_target' => $canonicalPath,
+            'index_state' => 'noindex',
+            'index_eligible' => false,
+            'reason_codes' => ['display_asset_backed_public_pilot'],
+            'metadata_contract_version' => $surface['metadata_contract_version'] ?? $surface['version'] ?? null,
+            'surface_type' => $surface['surface_type'] ?? null,
+            'robots_policy' => $surface['robots_policy'] ?? $robotsPolicy,
+            'metadata_fingerprint' => $surface['metadata_fingerprint'] ?? null,
+        ];
+    }
+
+    private function hasDisplayAssetBackedAuthority(Occupation $occupation): bool
+    {
+        $occupation->loadMissing('crosswalks');
+
+        $requiredSystems = ['us_soc', 'onet_soc_2019'];
+        foreach ($requiredSystems as $sourceSystem) {
+            $rows = $occupation->crosswalks
+                ->filter(static fn (OccupationCrosswalk $crosswalk): bool => strtolower((string) $crosswalk->source_system) === $sourceSystem)
+                ->values();
+
+            if ($rows->count() !== 1) {
+                return false;
+            }
+
+            $sourceCode = trim((string) $rows->first()?->source_code);
+            if ($sourceCode === '') {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function validDisplayAssetBackedAsset(Occupation $occupation, string $subjectSlug): ?CareerJobDisplayAsset
+    {
+        $assets = CareerJobDisplayAsset::query()
+            ->where('occupation_id', $occupation->id)
+            ->where('canonical_slug', $subjectSlug)
+            ->where('surface_version', self::DISPLAY_SURFACE_VERSION)
+            ->where('asset_version', self::DISPLAY_ASSET_VERSION)
+            ->where('template_version', self::DISPLAY_ASSET_VERSION)
+            ->where('status', self::DISPLAY_READY_STATUS)
+            ->where('asset_type', self::DISPLAY_ASSET_TYPE)
+            ->get();
+
+        if ($assets->count() !== 1) {
+            return null;
+        }
+
+        $asset = $assets->first();
+        if (! $asset instanceof CareerJobDisplayAsset) {
+            return null;
+        }
+
+        $componentOrder = is_array($asset->component_order_json) ? array_values($asset->component_order_json) : [];
+        if (count($componentOrder) !== self::DISPLAY_COMPONENT_ORDER_COUNT) {
+            return null;
+        }
+
+        $pages = is_array($asset->page_payload_json) ? $asset->page_payload_json : [];
+        $localizedPages = is_array($pages['page'] ?? null) ? $pages['page'] : $pages;
+        if (! is_array($localizedPages['zh'] ?? null) || ! is_array($localizedPages['en'] ?? null)) {
+            return null;
+        }
+
+        return $asset;
+    }
+
+    /**
+     * @return list<array<string, mixed>>
+     */
+    private function crosswalkPayload(Occupation $occupation): array
+    {
+        $occupation->loadMissing('crosswalks');
+
+        return $occupation->crosswalks
+            ->map(static fn ($crosswalk): array => [
+                'source_system' => $crosswalk->source_system,
+                'source_code' => $crosswalk->source_code,
+                'source_title' => $crosswalk->source_title,
+                'mapping_type' => $crosswalk->mapping_type,
+                'confidence_score' => $crosswalk->confidence_score,
+            ])
+            ->all();
+    }
+
+    /**
+     * @return array<string, array<string, mixed>>
+     */
+    private function displayAssetBackedScoreBundle(): array
+    {
+        return [
+            'fit_score' => $this->scoreResult(null, 'compiled_fit_score_unavailable'),
+            'strain_score' => $this->scoreResult(null, 'compiled_strain_score_unavailable'),
+            'ai_survival_score' => $this->scoreResult(null, 'compiled_ai_score_unavailable'),
+            'mobility_score' => $this->scoreResult(null, 'compiled_mobility_score_unavailable'),
+            'confidence_score' => $this->scoreResult(60, 'display_asset_backed_confidence_cap'),
         ];
     }
 
