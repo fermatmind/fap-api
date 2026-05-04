@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-05T01:36:00+08:00",
+  "updated_at": "2026-05-05T00:01:08+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -5541,9 +5541,9 @@
         "PR-D12": {
           "repo": "fap-api",
           "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-          "status": "pr_open",
+          "status": "merged",
           "branch": "codex/pr-d12-career-display-import-batch",
-          "commit_sha": "edba1fee82ad548a52a821d92a7104518cffe894",
+          "commit_sha": "f6537e71b043f94af1b85731da2ade69a127654c",
           "pr_url": "https://github.com/fermatmind/fap-api/pull/1140",
           "checks": {
             "local": [
@@ -5575,9 +5575,9 @@
           },
           "failure_reason": "",
           "resume_policy": "manual_only",
-          "merged_at": "",
-          "remote_branch_deleted": false,
-          "local_cleanup_executed": false,
+          "merged_at": "2026-05-05T00:01:08+08:00",
+          "remote_branch_deleted": true,
+          "local_cleanup_executed": true,
           "history": [
             {
               "at": "2026-05-05T01:10:00+08:00",
@@ -5593,6 +5593,73 @@
               "at": "2026-05-05T01:36:00+08:00",
               "status": "pr_open",
               "summary": "Opened draft PR #1140 for the D10 cohort display asset import batch."
+            },
+            {
+              "at": "2026-05-05T00:01:08+08:00",
+              "status": "reconciled_merged",
+              "summary": "Reconciled PR-D12 ledger for D14b dependency: GitHub PR #1140 is merged and origin/main contains f6537e71b043f94af1b85731da2ade69a127654c."
+            }
+          ]
+        },
+        "PR-D14b": {
+          "repo": "fap-api",
+          "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+          "status": "draft_open",
+          "branch": "codex/pr-d14b-legacy-display-asset-normalization",
+          "commit_sha": "c09273437d0814b7ad9dacbf92d962103f093ee6",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1141",
+          "checks": {
+            "local": [
+              {
+                "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+                "status": "passed"
+              },
+              {
+                "command": "vendor/bin/pint --test app/Console/Commands/CareerNormalizeLegacyDisplayAssets.php app/Console/Kernel.php tests/Feature/Console/CareerNormalizeLegacyDisplayAssetsCommandTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+                "status": "passed"
+              },
+              {
+                "command": "php artisan test tests/Feature/Console/CareerNormalizeLegacyDisplayAssetsCommandTest.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Console/CareerFullDisplayWorkbookValidatorCommandTest.php",
+                "status": "passed",
+                "details": "33 tests and 1484 assertions passed."
+              },
+              {
+                "command": "php artisan career:normalize-legacy-display-assets --slugs=actors,accountants-and-auditors,actuaries,architectural-and-engineering-managers,biomedical-engineers,civil-engineers,data-scientists,dentists,financial-analysts,high-school-teachers,market-research-analysts,registered-nurses --dry-run --json",
+                "status": "passed_no_go_local_db_unavailable",
+                "details": "Exit code 0; local dry-run remained read-only and reported no_go because local MySQL fap_api is unavailable. Target DB dry-run is required after deploy before --force."
+              },
+              {
+                "command": "php artisan career:normalize-legacy-display-assets --slugs=software-developers --dry-run --json",
+                "status": "passed_expected_rejection",
+                "details": "Exit code 1; decision=fail, did_write=false, unsupported manual-hold slug rejected."
+              },
+              {
+                "command": "git diff --check && git diff --cached --check",
+                "status": "passed"
+              }
+            ],
+            "github": []
+          },
+          "failure_reason": "",
+          "resume_policy": "manual_only",
+          "merged_at": "",
+          "remote_branch_deleted": false,
+          "local_cleanup_executed": false,
+          "history": [
+            {
+              "at": "2026-05-05T00:01:08+08:00",
+              "status": "in_progress",
+              "summary": "Initialized PR-D14b ledger entry for guarded legacy career display asset normalization after D14a scan identified 12 strict DB contract failures."
+            },
+            {
+              "at": "2026-05-05T00:01:08+08:00",
+              "status": "local_checks_passed",
+              "summary": "D14b scoped Pint, command tests, display import/validator regression tests, local DB-unavailable dry-run guard, software-developers rejection, JSON validation, and diff checks passed without DB writes."
+            },
+            {
+              "at": "2026-05-05T00:01:08+08:00",
+              "status": "draft_open",
+              "summary": "Opened draft PR #1141 for guarded D14b legacy career display asset normalization after scoped local checks passed."
             }
           ]
         }

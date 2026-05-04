@@ -2645,6 +2645,43 @@ prs:
       delete_remote_branch: true
       run_local_cleanup: true
 
+  - id: PR-D14b
+    repo: fap-api
+    repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
+    branch: codex/pr-d14b-legacy-display-asset-normalization
+    base: main
+    depends_on: ["PR-D12"]
+    mode: execute
+    scope: >
+      Normalize legacy v4.2 career display asset rows that failed strict D14
+      DB payload validation. Add a guarded
+      career:normalize-legacy-display-assets command that requires explicit
+      --slugs, defaults to dry-run, requires --force for writes, rejects
+      software-developers and any slug outside the known 12 legacy assets,
+      emits before/after patch summaries, normalizes only the Actors legacy
+      page_payload_json shape, strips false release_gates from public payload
+      columns for the affected 11 legacy assets, and backfills row_fingerprint
+      only for source-verified legacy rows. Do not create/delete rows, alter
+      visible content, component order, sources, status, release gates,
+      sitemap/llms, occupations, or crosswalks.
+    checks:
+      - "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null"
+      - "vendor/bin/pint --test app/Console/Commands/CareerNormalizeLegacyDisplayAssets.php app/Console/Kernel.php tests/Feature/Console/CareerNormalizeLegacyDisplayAssetsCommandTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json"
+      - "php artisan test tests/Feature/Console/CareerNormalizeLegacyDisplayAssetsCommandTest.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Console/CareerFullDisplayWorkbookValidatorCommandTest.php"
+      - "php artisan career:normalize-legacy-display-assets --slugs=actors,accountants-and-auditors,actuaries,architectural-and-engineering-managers,biomedical-engineers,civil-engineers,data-scientists,dentists,financial-analysts,high-school-teachers,market-research-analysts,registered-nurses --dry-run --json"
+      - "php artisan career:normalize-legacy-display-assets --slugs=software-developers --dry-run --json"
+      - "git diff --check"
+      - "git diff --cached --check"
+    stop_if_changed_files_outside_scope: true
+    resume_policy: manual_only
+    merge_policy:
+      mode: github_checks_or_local_verify
+      local_verify_required: true
+      github_checks_required: false
+    cleanup:
+      delete_remote_branch: true
+      run_local_cleanup: true
+
   - id: PR-B84
     repo: fap-api
     repo_path: /Users/rainie/Desktop/GitHub/fap-api/backend
