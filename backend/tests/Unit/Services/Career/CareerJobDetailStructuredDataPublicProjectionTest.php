@@ -6,11 +6,14 @@ namespace Tests\Unit\Services\Career;
 
 use App\DTO\Career\CareerJobDetailBundle;
 use App\Http\Resources\Career\CareerJobDetailResource;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Tests\TestCase;
 
 final class CareerJobDetailStructuredDataPublicProjectionTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_it_exposes_only_curated_job_detail_structured_data_fragments(): void
     {
         $bundle = new CareerJobDetailBundle(
