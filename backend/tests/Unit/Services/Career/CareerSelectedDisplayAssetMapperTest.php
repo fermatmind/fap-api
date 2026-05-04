@@ -84,6 +84,22 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
         );
     }
 
+    public function test_it_maps_d10_cohort_rows_to_display_asset_payloads(): void
+    {
+        foreach ($this->d10Rows() as $row) {
+            $result = app(CareerSelectedDisplayAssetMapper::class)->mapRow($row);
+
+            $this->assertSame([], $result['errors'], $row['Slug'].' should map cleanly.');
+            $this->assertSame($row['Slug'], $result['slug']);
+            $this->assertSame($row['SOC_Code'], $result['expected_soc']);
+            $this->assertSame($row['O_NET_Code'], $result['expected_onet']);
+            $this->assertSame(24, $result['summary']['component_order_count']);
+            $this->assertTrue($result['summary']['has_zh_page']);
+            $this->assertTrue($result['summary']['has_en_page']);
+            $this->assertSame([], $result['summary']['public_payload_forbidden_keys_found']);
+        }
+    }
+
     public function test_biomedical_engineers_rejects_product_substring_if_reintroduced(): void
     {
         $row = $this->row(
@@ -175,6 +191,45 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
             $this->row('community-health-workers', title: 'Community Health Workers', cnTitle: '社区健康工作者', soc: '21-1094', onet: '21-1094.00'),
             $this->row('compensation-and-benefits-managers', title: 'Compensation and Benefits Managers', cnTitle: '薪酬与福利经理', soc: '11-3111', onet: '11-3111.00'),
             $this->row('career-and-technical-education-teachers', title: 'Career/Technical Education Teachers, Secondary School', cnTitle: '中学职业/技术教育教师', soc: '25-2032', onet: '25-2032.00'),
+        ];
+    }
+
+    /**
+     * @return list<array<string, string>>
+     */
+    private function d10Rows(): array
+    {
+        return [
+            $this->row('acute-care-nurses', title: 'Acute Care Nurses', cnTitle: '急性护理护士', soc: '29-1141', onet: '29-1141.01'),
+            $this->row('adapted-physical-education-specialists', title: 'Adapted Physical Education Specialists', cnTitle: '适应性体育教育专家', soc: '25-2059', onet: '25-2059.01'),
+            $this->row('administrative-law-judges-adjudicators-and-hearing-officers', title: 'Administrative Law Judges, Adjudicators, and Hearing Officers', cnTitle: '行政法法官、裁决员和听证官', soc: '23-1021', onet: '23-1021.00'),
+            $this->row('adult-basic-education-adult-secondary-education-and-english-as-a-second-language-instructors', title: 'Adult Basic Education, Adult Secondary Education, and English as a Second Language Instructors', cnTitle: '成人基础教育、成人中等教育和英语作为第二语言教师', soc: '25-3011', onet: '25-3011.00'),
+            $this->row('adult-literacy-and-ged-teachers', title: 'Adult Literacy and GED Teachers', cnTitle: '成人扫盲和GED教师', soc: '25-3011', onet: '25-3011.00'),
+            $this->row('advanced-practice-psychiatric-nurses', title: 'Advanced Practice Psychiatric Nurses', cnTitle: '高级执业精神科护士', soc: '29-1141', onet: '29-1141.02'),
+            $this->row('advertising-promotions-and-marketing-managers', title: 'Advertising, Promotions, and Marketing Managers', cnTitle: '广告、促销和营销经理', soc: '11-2021', onet: '11-2021.00'),
+            $this->row('advertising-sales-agents', title: 'Advertising Sales Agents', cnTitle: '广告销售代理', soc: '41-3011', onet: '41-3011.00'),
+            $this->row('aerospace-engineering-and-operations-technicians', title: 'Aerospace Engineering and Operations Technicians', cnTitle: '航空航天工程和操作技术员', soc: '17-3021', onet: '17-3021.00'),
+            $this->row('agents-and-business-managers-of-artists-performers-and-athletes', title: 'Agents and Business Managers of Artists, Performers, and Athletes', cnTitle: '艺术家、表演者和运动员的经纪人和业务经理', soc: '13-1011', onet: '13-1011.00'),
+            $this->row('agricultural-and-food-science-technicians', title: 'Agricultural and Food Science Technicians', cnTitle: '农业和食品科学技术员', soc: '19-4012', onet: '19-4012.00'),
+            $this->row('agricultural-equipment-operators', title: 'Agricultural Equipment Operators', cnTitle: '农业设备操作员', soc: '45-2091', onet: '45-2091.00'),
+            $this->row('agricultural-sciences-teachers-postsecondary', title: 'Agricultural Sciences Teachers, Postsecondary', cnTitle: '高等教育农业科学教师', soc: '25-1041', onet: '25-1041.00'),
+            $this->row('aircraft-and-avionics-equipment-mechanics-and-technicians', title: 'Aircraft and Avionics Equipment Mechanics and Technicians', cnTitle: '飞机和航空电子设备机械师和技术员', soc: '49-3011', onet: '49-3011.00'),
+            $this->row('aircraft-cargo-handling-supervisors', title: 'Aircraft Cargo Handling Supervisors', cnTitle: '飞机货物处理主管', soc: '53-1041', onet: '53-1041.00'),
+            $this->row('aircraft-launch-and-recovery-officers', title: 'Aircraft Launch and Recovery Officers', cnTitle: '飞机发射和回收官', soc: '55-1012', onet: '55-1012.00'),
+            $this->row('aircraft-launch-and-recovery-specialists', title: 'Aircraft Launch and Recovery Specialists', cnTitle: '飞机发射和回收专家', soc: '55-3012', onet: '55-3012.00'),
+            $this->row('aircraft-mechanics-and-service-technicians', title: 'Aircraft Mechanics and Service Technicians', cnTitle: '飞机机械师和服务技术员', soc: '49-3011', onet: '49-3011.00'),
+            $this->row('aircraft-service-attendants', title: 'Aircraft Service Attendants', cnTitle: '飞机服务员', soc: '53-6032', onet: '53-6032.00'),
+            $this->row('aircraft-structure-surfaces-rigging-and-systems-assemblers', title: 'Aircraft Structure, Surfaces, Rigging, and Systems Assemblers', cnTitle: '飞机结构、表面、索具和系统装配工', soc: '51-2011', onet: '51-2011.00'),
+            $this->row('airfield-operations-specialists', title: 'Airfield Operations Specialists', cnTitle: '机场运营专家', soc: '53-2022', onet: '53-2022.00'),
+            $this->row('airline-pilots-copilots-and-flight-engineers', title: 'Airline Pilots, Copilots, and Flight Engineers', cnTitle: '航空公司飞行员、副驾驶和飞行工程师', soc: '53-2011', onet: '53-2011.00'),
+            $this->row('allergists-and-immunologists', title: 'Allergists and Immunologists', cnTitle: '过敏症和免疫学医师', soc: '29-1229', onet: '29-1229.01'),
+            $this->row('ambulance-drivers-and-attendants-except-emergency-medical-technicians', title: 'Ambulance Drivers and Attendants, Except Emergency Medical Technicians', cnTitle: '救护车司机和随车人员（不包括急救医疗技术员）', soc: '53-3011', onet: '53-3011.00'),
+            $this->row('amusement-and-recreation-attendants', title: 'Amusement and Recreation Attendants', cnTitle: '娱乐和休闲服务员', soc: '39-3091', onet: '39-3091.00'),
+            $this->row('anesthesiologist-assistants', title: 'Anesthesiologist Assistants', cnTitle: '麻醉医师助理', soc: '29-1071', onet: '29-1071.01'),
+            $this->row('anesthesiologists', title: 'Anesthesiologists', cnTitle: '麻醉医师', soc: '29-1211', onet: '29-1211.00'),
+            $this->row('animal-care-and-service-workers', title: 'Animal Care and Service Workers', cnTitle: '动物护理和服务工作者', soc: '39-2021', onet: '39-2021.00'),
+            $this->row('animal-caretakers', title: 'Animal Caretakers', cnTitle: '动物护理员', soc: '39-2021', onet: '39-2021.00'),
+            $this->row('animal-control-workers', title: 'Animal Control Workers', cnTitle: '动物控制工作者', soc: '33-9011', onet: '33-9011.00'),
         ];
     }
 
