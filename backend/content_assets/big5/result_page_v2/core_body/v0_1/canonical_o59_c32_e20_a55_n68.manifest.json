@@ -1,0 +1,76 @@
+{
+  "schema": "fap.big5.result_page_v2.core_body_manifest.v0.1",
+  "version": "v0.1",
+  "asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+  "canonical_profile_key": "canonical_o59_c32_e20_a55_n68",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "asset_files": [
+    "canonical_o59_c32_e20_a55_n68.core_body.json",
+    "canonical_o59_c32_e20_a55_n68.manifest.json",
+    "canonical_o59_c32_e20_a55_n68.source_trace.json",
+    "canonical_o59_c32_e20_a55_n68.review_notes.md"
+  ],
+  "sample_scores": {
+    "O": 59,
+    "C": 32,
+    "E": 20,
+    "A": 55,
+    "N": 68
+  },
+  "profile_label": "敏锐的独立思考者",
+  "profile_axis": "高敏感 × 中高开放 × 克制进入",
+  "section_keys": [
+    "hero_summary",
+    "domains_overview",
+    "domain_deep_dive",
+    "facet_details",
+    "core_portrait",
+    "norms_comparison",
+    "action_plan",
+    "methodology_and_access"
+  ],
+  "section_count": 8,
+  "block_count": 32,
+  "source_documents": [
+    {
+      "document_name": "FermatMind_BigFive_新版结果页_正式上线V2.0.docx",
+      "source_role": "module_master"
+    },
+    {
+      "document_name": "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx",
+      "source_role": "narrative / canonical body master"
+    }
+  ],
+  "module_coverage": [
+    "module_00_trust_bar",
+    "module_01_hero",
+    "module_02_quick_understanding",
+    "module_03_trait_deep_dive",
+    "module_04_coupling",
+    "module_05_facet_reframe",
+    "module_06_application_matrix",
+    "module_07_collaboration_manual",
+    "module_10_method_privacy"
+  ],
+  "excluded_modules": [
+    {
+      "module_key": "module_08_share_save",
+      "reason": "lifecycle / shell_tools module, not main B5-B1 core body"
+    },
+    {
+      "module_key": "module_09_feedback_data_flywheel",
+      "reason": "lifecycle / observation module, not main B5-B1 core body"
+    }
+  ],
+  "runtime_guardrails": {
+    "runtime_wiring_added": false,
+    "frontend_changes_added": false,
+    "selector_runtime_added": false,
+    "config_gate_added": false,
+    "runtime_wrapper_changed": false,
+    "compatibility_transformer_changed": false
+  },
+  "anti_target_visible_fields_checked": true,
+  "local_absolute_source_paths_committed": false
+}

@@ -1,0 +1,846 @@
+{
+  "version": "v0.1",
+  "asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+  "canonical_profile_key": "canonical_o59_c32_e20_a55_n68",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "source_documents": [
+    {
+      "document_name": "FermatMind_BigFive_新版结果页_正式上线V2.0.docx",
+      "source_role": "module_master"
+    },
+    {
+      "document_name": "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx",
+      "source_role": "narrative / canonical body master"
+    }
+  ],
+  "sample_scores": {
+    "O": 59,
+    "C": 32,
+    "E": 20,
+    "A": 55,
+    "N": 68
+  },
+  "profile_label": "敏锐的独立思考者",
+  "profile_axis": "高敏感 × 中高开放 × 克制进入",
+  "sections": [
+    {
+      "section_key": "hero_summary",
+      "title_zh": "首屏快读",
+      "subtitle_zh": "先用一屏看懂这组 O59 / C32 / E20 / A55 / N68 分数正在共同指向什么。",
+      "source_modules": [
+        "module_01_hero",
+        "module_02_quick_understanding"
+      ],
+      "source_doc_refs": [
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 1｜首屏快读卡",
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 2｜三分钟理解版",
+        "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#第 1 节｜结果摘要"
+      ],
+      "blocks": [
+        {
+          "block_key": "hero_identity",
+          "block_kind": "hero_summary",
+          "title_zh": "敏锐的独立思考者",
+          "body_zh": "高敏感 × 中高开放 × 克制进入。这个名称只是辅助理解标签，不是固定类型，也不是对你这个人的最终定义。Big Five 描述的是五个连续特质在当前作答中的相对位置；你不是属于某一型，而是在这组分数上呈现出一种敏锐、细致、克制进入的倾向。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 1｜首屏快读卡",
+            "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#第 1 节｜结果摘要"
+          ],
+          "safety_tags": [
+            "non_type",
+            "non_diagnostic",
+            "staging_only"
+          ]
+        },
+        {
+          "block_key": "hero_one_sentence",
+          "block_kind": "hero_summary",
+          "title_zh": "一句话总结",
+          "body_zh": "你不是没有力量，而是力量主要来自感受、理解和判断，不来自持续外放与高压硬推。真正的发展重点，不是把自己改造成另一种人，而是让这套敏锐、细致、克制的系统，在现实里更稳定地发力。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 1｜一句话总结",
+            "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#一句话总结"
+          ],
+          "safety_tags": [
+            "non_moralizing",
+            "growth_frame"
+          ]
+        },
+        {
+          "block_key": "hero_score_snapshot",
+          "block_kind": "trait_bars",
+          "title_zh": "五维快照",
+          "table_zh": [
+            {
+              "维度": "开放性",
+              "分数": "59",
+              "位置": "中高",
+              "说明": "理解复杂性，但仍有现实过滤器。"
+            },
+            {
+              "维度": "尽责性",
+              "分数": "32",
+              "位置": "偏低",
+              "说明": "不是无序，而是持续推进依赖意义和反馈。"
+            },
+            {
+              "维度": "外向性",
+              "分数": "20",
+              "位置": "明显偏低",
+              "说明": "不是冷淡，而是进入克制、能量内收。"
+            },
+            {
+              "维度": "宜人性",
+              "分数": "55",
+              "位置": "中位略高",
+              "说明": "能合作，但不会无限迎合。"
+            },
+            {
+              "维度": "情绪性",
+              "分数": "68",
+              "位置": "中高",
+              "说明": "对风险、误差和关系张力更早有体感。"
+            }
+          ],
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 1｜五维快照"
+          ],
+          "safety_tags": [
+            "score_as_reference",
+            "non_screening"
+          ]
+        },
+        {
+          "block_key": "hero_strengths_risks",
+          "block_kind": "quick_cards",
+          "title_zh": "优势与风险",
+          "bullets_zh": [
+            "优势：能更早感知风险、误差和关系张力。",
+            "优势：能理解复杂性，不轻易下粗糙结论。",
+            "优势：有边界感，不容易被热闹和表面共识带着跑。",
+            "风险：容易把感受长期留在内部，形成慢性内耗。",
+            "风险：容易在低反馈、低意义任务中启动困难。",
+            "风险：容易因为进入慢、表达晚，让别人看不见你的价值。"
+          ],
+          "body_zh": "这组分数最值得保留的不是单项高低，而是它们组合出的工作方式：你会先扫描风险、确认意义、判断边界，再决定是否进入。它能保护你不被粗糙环境带走，也会在反馈不足时让你卡住。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 1｜你的三个优势/风险"
+          ],
+          "safety_tags": [
+            "balanced_tradeoff",
+            "non_moralizing"
+          ]
+        },
+        {
+          "block_key": "hero_48h_action",
+          "block_kind": "quick_cards",
+          "title_zh": "接下来 48 小时",
+          "body_zh": "选一件重要但不紧急的事，只做 20 分钟。不要要求完成，只要求开始。开始前写一句：我现在是在处理真实问题，还是在处理不确定性压力？结束后只记录一个结果：我更清楚了什么。",
+          "action_zh": "设置一个 20 分钟计时器；选最小可开始动作；结束后用一句话命名来源。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 1｜接下来 48 小时",
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 2｜行动出口"
+          ],
+          "safety_tags": [
+            "low_pressure_action",
+            "non_diagnostic"
+          ]
+        }
+      ],
+      "body_quality": {
+        "status": "staging_imported",
+        "density": "thick_enough_to_replace_short_overview",
+        "required_points_covered": [
+          "profile_label",
+          "auxiliary_label_boundary",
+          "one_sentence_summary",
+          "score_snapshot",
+          "three_strengths",
+          "three_risks",
+          "48h_action"
+        ]
+      },
+      "safety_tags": [
+        "non_type",
+        "non_diagnostic",
+        "non_screening"
+      ],
+      "render_targets": [
+        "current_8_section_skeleton",
+        "backend_owned_core_body_asset"
+      ],
+      "anti_target_terms_checked": true,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "section_key": "domains_overview",
+      "title_zh": "五维阅读说明",
+      "subtitle_zh": "先理解 Big Five 的阅读方式，再看 O59 / C32 / E20 / A55 / N68 的组合。",
+      "source_modules": [
+        "module_02_quick_understanding",
+        "module_03_trait_deep_dive"
+      ],
+      "source_doc_refs": [
+        "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#第 2 节｜维度总览与阅读说明",
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 3｜五维分数深解"
+      ],
+      "blocks": [
+        {
+          "block_key": "domains_how_to_read",
+          "block_kind": "quick_cards",
+          "title_zh": "如何阅读 Big Five",
+          "body_zh": "Big Five 是五个连续特质维度，不是人格类型。高低分不是好坏，也不是身份判断；它只是在描述某种倾向在你当前作答里更明显或更不明显。真正影响日常表现的，往往不是单项分数，而是这些维度如何一起工作、互相补偿、互相拉扯。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#如何阅读这份报告"
+          ],
+          "safety_tags": [
+            "non_type",
+            "non_moralizing"
+          ]
+        },
+        {
+          "block_key": "domains_snapshot",
+          "block_kind": "trait_bars",
+          "title_zh": "这组分数的基本读法",
+          "bullets_zh": [
+            "O59：愿意理解复杂性，也保有现实过滤器。",
+            "C32：不是没有秩序，而是持续推进更依赖意义、路径和阶段反馈。",
+            "E20：不是冷淡，而是先观察、先理解、先判断，再决定如何进入。",
+            "A55：愿意合作，也会在边界模糊或责任漂移时后退。",
+            "N68：对误解、不确定性、关系张力和失控感更早有体感。"
+          ],
+          "source_doc_refs": [
+            "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#五维快照"
+          ],
+          "safety_tags": [
+            "score_as_reference",
+            "descriptive"
+          ]
+        },
+        {
+          "block_key": "domains_combination_matters",
+          "block_kind": "quick_cards",
+          "title_zh": "为什么组合比单项更重要",
+          "body_zh": "如果只看单项，你可能会误以为自己只是敏感、慢热或不够自律；把分数放在一起看，画面会更准确：高情绪性让你更早感到风险，中高开放性让你继续理解复杂性，低外向让你进入克制，偏低尽责性让长期低反馈任务更难维持，中位宜人性让你能合作但不愿无限迎合。组合读法能把自责改成结构化理解。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#总览结论"
+          ],
+          "safety_tags": [
+            "non_moralizing",
+            "combination_framing"
+          ]
+        }
+      ],
+      "body_quality": {
+        "status": "staging_imported",
+        "density": "overview_plus_interpretation_frame",
+        "required_points_covered": [
+          "how_to_read_big_five",
+          "continuous_traits",
+          "high_low_not_good_bad",
+          "score_snapshot",
+          "combination_over_single_score"
+        ]
+      },
+      "safety_tags": [
+        "non_type",
+        "non_moralizing"
+      ],
+      "render_targets": [
+        "current_8_section_skeleton",
+        "backend_owned_core_body_asset"
+      ],
+      "anti_target_terms_checked": true,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "section_key": "domain_deep_dive",
+      "title_zh": "五维深解",
+      "subtitle_zh": "每个维度都按分数位置、如何帮助你、如何消耗你、如何使用来阅读。",
+      "source_modules": [
+        "module_03_trait_deep_dive"
+      ],
+      "source_doc_refs": [
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 3｜五维分数深解",
+        "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#第 2 节｜维度总览与阅读说明"
+      ],
+      "blocks": [
+        {
+          "block_key": "domain_o59",
+          "block_kind": "trait_deep_dive",
+          "title_zh": "开放性 59｜理解复杂性，但有现实锚点",
+          "body_zh": "分数位置：中高。你愿意理解复杂性，也愿意接触新想法，但不会为了显得前卫而强迫自己喜欢某些东西。它如何帮助你：你不容易被空洞口号收编，也更可能在复杂问题里保留细腻和耐心。它如何消耗你：当别人只想要快答案时，你可能会觉得环境粗糙，并在内部多想一步、多看一层。你该怎么用它：用开放性做判断，而不是让复杂性拖住行动；先写出“我现在最确定的一点是什么”。这不是高低优劣，而是一种理解和筛选方式。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#开放性 59｜理解复杂性，但有现实锚点"
+          ],
+          "safety_tags": [
+            "non_moralizing",
+            "domain_o"
+          ]
+        },
+        {
+          "block_key": "domain_c32",
+          "block_kind": "trait_deep_dive",
+          "title_zh": "尽责性 32｜不是无序，而是持续推进依赖意义",
+          "body_zh": "分数位置：偏低。你并非没有秩序感，也不是不懂责任，而是更难长期靠纯意志力高压推进。它如何帮助你：只要你认定事情重要、路径清楚、反馈存在，你往往会迅速进入认真状态。它如何消耗你：你容易在“看起来应该做”和“我真心认同值得做”之间出现落差，进而形成拖延。你该怎么用它：把任务拆短，增加阶段反馈，明确当前阶段为什么值得投入。这里的重点不是责备，而是给行动系统加支架。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#尽责性 32｜不是无序，而是持续推进依赖意义"
+          ],
+          "safety_tags": [
+            "non_moralizing",
+            "domain_c"
+          ]
+        },
+        {
+          "block_key": "domain_e20",
+          "block_kind": "trait_deep_dive",
+          "title_zh": "外向性 20｜进入克制，不是疏离",
+          "body_zh": "分数位置：明显偏低。你不太依赖持续互动来获取能量，也不会天然把自己推到场景中心。它如何帮助你：你不容易被场面带着跑，也不需要通过过度曝光证明自己。它如何消耗你：如果洞察和判断不主动表达，别人不一定能看见你的能力。你该怎么用它：训练低成本进入，提前准备一句观点、会后补充反馈、用文字表达判断。偏低外向不是社交失败，而是能量获取和进入节奏不同。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#外向性 20｜进入克制，不是疏离"
+          ],
+          "safety_tags": [
+            "non_moralizing",
+            "domain_e"
+          ]
+        },
+        {
+          "block_key": "domain_a55",
+          "block_kind": "trait_deep_dive",
+          "title_zh": "宜人性 55｜能合作，也会后退",
+          "body_zh": "分数位置：中位略高。你愿意合作，也能顾及他人处境，但不是没有边界的人。它如何帮助你：在规则清楚、目标一致时，你可以合作得很好，甚至比别人更稳定。它如何消耗你：当边界模糊、责任漂移或情绪期待过多时，你会明显退后。你该怎么用它：不要等到完全耗尽才表达；不舒服刚出现时先说一半。这个分数不说明你应该更讨好或更强硬，而是提醒你把合作建立在清楚边界上。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#宜人性 55｜能合作，也会后退"
+          ],
+          "safety_tags": [
+            "non_moralizing",
+            "domain_a"
+          ]
+        },
+        {
+          "block_key": "domain_n68",
+          "block_kind": "trait_deep_dive",
+          "title_zh": "情绪性 68｜高体感，是优势，也是成本",
+          "body_zh": "分数位置：中高。你对误解、评价、不确定性、关系张力和失控感比很多人更有体感。它如何帮助你：你能更快发现风险，察觉别人忽视的小裂缝。它如何消耗你：你也更容易比别人更早进入消耗，把预警升级成长期内耗。你该怎么用它：敏感之后要接上命名、表达和恢复，而不是一直留在内部循环。这个分数不是脆弱判断，而是在描述更早预警、更高成本的感受系统。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#情绪性 68｜高体感，是优势，也是成本"
+          ],
+          "safety_tags": [
+            "non_moralizing",
+            "domain_n"
+          ]
+        }
+      ],
+      "body_quality": {
+        "status": "staging_imported",
+        "density": "five_domains_have_position_help_cost_use",
+        "required_points_covered": [
+          "O59_deep_dive",
+          "C32_deep_dive",
+          "E20_deep_dive",
+          "A55_deep_dive",
+          "N68_deep_dive",
+          "non_moralizing_frame"
+        ]
+      },
+      "safety_tags": [
+        "non_moralizing",
+        "descriptive"
+      ],
+      "render_targets": [
+        "current_8_section_skeleton",
+        "backend_owned_core_body_asset"
+      ],
+      "anti_target_terms_checked": true,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "section_key": "facet_details",
+      "title_zh": "侧面线索解释",
+      "subtitle_zh": "这里使用解释性推断帮助理解分数结构，不把侧面线索写成独立诊断或纯排名列表。",
+      "source_modules": [
+        "module_05_facet_reframe"
+      ],
+      "source_doc_refs": [
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 5｜Facet 反直觉发现"
+      ],
+      "blocks": [
+        {
+          "block_key": "facet_inference_boundary",
+          "block_kind": "facet_reframe",
+          "title_zh": "先看边界",
+          "body_zh": "以下内容是基于当前五维分数结构的解释性推断，并非独立测量结论，也不是医学或心理诊断。它不适合被阅读成逐项排名，更不适合被用来给自己贴死标签。它的作用是把常见误读重新翻译成更可行动的解释。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Facet 风险提示"
+          ],
+          "safety_tags": [
+            "facet_inference_only",
+            "non_diagnostic"
+          ]
+        },
+        {
+          "block_key": "facet_reframes",
+          "block_kind": "facet_reframe",
+          "title_zh": "三个反直觉发现",
+          "bullets_zh": [
+            "不是没尽责：你可能很会整理和理解，但不擅长长期无反馈硬推。更有效的做法是增加阶段反馈，而不是只骂自己不自律。",
+            "不是社交差：你不是对人没兴趣，而是高筛选进入。更有效的做法是训练低频但高质量表达，而不是逼自己持续外放。",
+            "不是玻璃心：你是高负荷内循环，感受需要被命名、外化和转成决策。每次烦、累、拖、退时，先写下真正来源。"
+          ],
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#反直觉发现"
+          ],
+          "safety_tags": [
+            "shame_reduction",
+            "non_moralizing"
+          ]
+        },
+        {
+          "block_key": "facet_top_five",
+          "block_kind": "facet_reframe",
+          "title_zh": "最值得先看懂的 5 个侧面解释点",
+          "bullets_zh": [
+            "压力信号感知：你对不舒服、不确定和误解的感知比很多人快。这是预警力，也是成本。",
+            "条理能力：你其实很会把事情理顺，只是不能长期靠意志把自己拧在高压推进状态里。",
+            "进入门槛：你并不是没兴趣，而是对“值不值得进入”非常敏感。这会保护你，也会拖慢你。",
+            "自我效能：一旦你认定事情重要，而且知道从哪里开始，你往往并不缺能力感。",
+            "现实过滤下的开放：你不是为了新而新，而是愿意理解、愿意探索，但最终仍以现实价值来筛选。"
+          ],
+          "body_zh": "这 5 点不是独立诊断项，也不是用百分位来证明你是谁。它们更像解释索引：当你在现实里遇到启动困难、关系内耗、表达偏晚或过度扫描时，可以回到这些点上，看见问题更可能发生在动力结构、反馈设计和边界表达，而不是发生在个人价值上。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Top Facets：最值得先看懂的 5 个"
+          ],
+          "safety_tags": [
+            "facet_inference_only",
+            "avoid_percentile_list"
+          ]
+        }
+      ],
+      "body_quality": {
+        "status": "staging_imported",
+        "density": "explanatory_body_not_percentile_list",
+        "required_points_covered": [
+          "inference_boundary",
+          "not_independent_diagnosis",
+          "not_percentile_list",
+          "not_low_conscientiousness_shame",
+          "not_social_failure",
+          "not_fragility",
+          "top_five_points"
+        ]
+      },
+      "safety_tags": [
+        "facet_inference_only",
+        "non_diagnostic"
+      ],
+      "render_targets": [
+        "current_8_section_skeleton",
+        "backend_owned_core_body_asset"
+      ],
+      "anti_target_terms_checked": true,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "section_key": "core_portrait",
+      "title_zh": "核心画像",
+      "subtitle_zh": "把五个维度放回同一个动力系统里，理解它们如何互相牵引。",
+      "source_modules": [
+        "module_02_quick_understanding",
+        "module_04_coupling"
+      ],
+      "source_doc_refs": [
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 4｜核心动力耦合",
+        "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#第 3 节｜画像主线：核心动力耦合分析"
+      ],
+      "blocks": [
+        {
+          "block_key": "portrait_coupling_sensitive_open",
+          "block_kind": "coupling_cards",
+          "title_zh": "高情绪性 × 中高开放性",
+          "body_zh": "这是你的核心认知引擎。你不是单纯敏感，而是会在感到风险后继续理解、分析和寻找更深层原因。正向时，它让你早发现风险、保留复杂判断、不轻易下粗糙结论；成本是想得很细、停不下来，在事情还没爆发前已经很累。",
+          "action_zh": "当你开始反复想一件事时，先写一句：我现在是在处理真实问题，还是在处理不确定性压力？",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#高情绪性 × 中高开放性"
+          ],
+          "safety_tags": [
+            "coupling",
+            "non_diagnostic"
+          ]
+        },
+        {
+          "block_key": "portrait_coupling_low_e_low_c",
+          "block_kind": "coupling_cards",
+          "title_zh": "低外向 × 低续航尽责性",
+          "body_zh": "这组耦合解释你的行动瓶颈。你不适合长期依靠外部热闹和纯意志力推进，需要意义、反馈和小启动。拖延很多时候不是懒，而是进入系统缺少支架；当路径清楚、事情值得、反馈可见时，你并不缺投入能力。",
+          "action_zh": "把长期任务改成 20 分钟启动，不要用“必须完成”作为开始条件。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#低外向 × 低续航尽责性"
+          ],
+          "safety_tags": [
+            "coupling",
+            "non_moralizing"
+          ]
+        },
+        {
+          "block_key": "portrait_coupling_a_mid_n_high",
+          "block_kind": "coupling_cards",
+          "title_zh": "中位宜人性 × 高情绪性",
+          "body_zh": "你既会体谅别人，也会很快感到边界被消耗。边界清楚、沟通直接时，你可以非常合作；边界模糊、推诿或隐性期待太多时，你会更快进入不适。常见成本是先忍、晚表达，然后从内耗直接进入安静后退。",
+          "action_zh": "不舒服刚出现时，先说一半，而不是等到完全耗尽才退后。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#中位宜人性 × 高情绪性"
+          ],
+          "safety_tags": [
+            "coupling",
+            "boundary_expression"
+          ]
+        },
+        {
+          "block_key": "portrait_conflict_misread_growth",
+          "block_kind": "quick_cards",
+          "title_zh": "主导冲突、常见误读与发展路径",
+          "body_zh": "主导冲突是：你看得深、感觉早、进入慎重，但现实世界常常奖励更快表达、更强外放和更硬的持续推进。常见误读包括把你看成冷、慢、不主动，或者把启动困难看成能力不足。更准确的发展路径是：更早表达边界，更短节奏启动，更及时恢复，把内部判断翻译成外部可见的行动。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 2｜三分钟理解版",
+            "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#总览结论"
+          ],
+          "safety_tags": [
+            "growth_frame",
+            "non_type"
+          ]
+        }
+      ],
+      "body_quality": {
+        "status": "staging_imported",
+        "density": "three_couplings_plus_conflict_path",
+        "required_points_covered": [
+          "high_n_mid_high_o",
+          "low_e_low_sustained_c",
+          "mid_a_high_n",
+          "dominant_conflict",
+          "common_misreads",
+          "development_path"
+        ]
+      },
+      "safety_tags": [
+        "non_type",
+        "non_diagnostic"
+      ],
+      "render_targets": [
+        "current_8_section_skeleton",
+        "backend_owned_core_body_asset"
+      ],
+      "anti_target_terms_checked": true,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "section_key": "norms_comparison",
+      "title_zh": "常模与分数边界",
+      "subtitle_zh": "分数可以帮助定位倾向，但不能替代常模说明，也不能变成身份判断。",
+      "source_modules": [
+        "module_10_method_privacy"
+      ],
+      "source_doc_refs": [
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 10｜常模与 facet 说明",
+        "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#第 8 节｜方法与边界说明"
+      ],
+      "blocks": [
+        {
+          "block_key": "norms_boundary",
+          "block_kind": "method_boundary",
+          "title_zh": "中文方法边界",
+          "body_zh": "这份内容用中文解释当前 Big Five 分数的行为含义。若当前没有发布稳定常模，就不展示超过多少人的排名，也不展示正态曲线。此时可以展示 0-100 分数条和偏低、中位、偏高区间，但它们只能作为阅读参考，不能作为身份判断、能力判断或筛选依据。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#常模与 facet 说明"
+          ],
+          "safety_tags": [
+            "norm_unavailable_boundary",
+            "non_screening"
+          ]
+        },
+        {
+          "block_key": "norms_score_reference",
+          "block_kind": "method_boundary",
+          "title_zh": "如何使用分数",
+          "body_zh": "O59、C32、E20、A55、N68 的价值在于提供一张当前倾向地图，而不是判定你是谁。阅读时应把分数带回现实情境验证：什么环境放大你，什么环境消耗你，哪些行动支架能让你更稳定。分数不应用于招聘筛选、医学判断或对个人做单一结论。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#如何正确使用这份报告"
+          ],
+          "safety_tags": [
+            "score_as_reference",
+            "non_diagnostic",
+            "non_screening"
+          ]
+        }
+      ],
+      "body_quality": {
+        "status": "staging_imported",
+        "density": "boundary_body_for_norm_unavailable_state",
+        "required_points_covered": [
+          "chinese_method_boundary",
+          "no_percentile_when_norm_unavailable",
+          "no_normal_curve_when_norm_unavailable",
+          "scores_reference_only",
+          "no_english_heading"
+        ]
+      },
+      "safety_tags": [
+        "norm_unavailable_boundary",
+        "non_screening"
+      ],
+      "render_targets": [
+        "current_8_section_skeleton",
+        "backend_owned_core_body_asset"
+      ],
+      "anti_target_terms_checked": true,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "section_key": "action_plan",
+      "title_zh": "现实行动计划",
+      "subtitle_zh": "把理解落到工作、关系、压力和成长行动里。",
+      "source_modules": [
+        "module_06_application_matrix",
+        "module_07_collaboration_manual"
+      ],
+      "source_doc_refs": [
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 6｜现实应用矩阵",
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 7｜和我高效协作的 9 个提示",
+        "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#第 7 节｜现实应用"
+      ],
+      "blocks": [
+        {
+          "block_key": "action_workplace",
+          "block_kind": "application_matrix",
+          "title_zh": "工作 workplace",
+          "body_zh": "你更适合节奏清楚、目标明确、允许深度处理、不要求持续表演式外放的环境。容易发挥的方向包括分析、策略、内容、产品判断、研究、用户体验、深度咨询和复杂问题拆解。高损耗场景通常是高频打断、长期低反馈、目标模糊、责任不清，只讲执行却不讲意义。",
+          "action_zh": "来源命名：遇到拖延时先写下它来自任务本身、反馈不足、边界不清，还是意义感不足。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#工作 Tab｜你适合怎样工作"
+          ],
+          "safety_tags": [
+            "workplace",
+            "non_screening"
+          ]
+        },
+        {
+          "block_key": "action_relationship",
+          "block_kind": "application_matrix",
+          "title_zh": "关系 relationship",
+          "body_zh": "你的关系优势是认真、细腻、不表演、重视真实，并且会对重要的人稳定投入。风险是边界表达偏晚、不舒服时先忍、习惯自己消化，退开时别人可能不知道发生了什么。你要练的不是更能忍，而是更早说清楚。",
+          "action_zh": "提前表达边界：当不舒服刚出现时，先说一半，例如“我需要一点时间整理，稍后给你完整反馈”。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#关系 Tab｜你在关系里真正需要什么"
+          ],
+          "safety_tags": [
+            "relationship",
+            "boundary_expression"
+          ]
+        },
+        {
+          "block_key": "action_stress",
+          "block_kind": "application_matrix",
+          "title_zh": "压力 stress",
+          "body_zh": "你的压力通常不是突然出现，而是在模糊边界、长期误解、不确定性反复、低反馈拖延和硬扛不适中逐渐过载。过载时可能表现为高精度内耗、瘫痪式拖延和安静后退。",
+          "action_zh": "恢复协议：物理断连 → 命名来源 → 缩小动作 → 回到身体 → 补表达。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#压力 Tab｜你的压力不是突然爆发，而是慢慢过载"
+          ],
+          "safety_tags": [
+            "stress",
+            "recovery_protocol"
+          ]
+        },
+        {
+          "block_key": "action_growth",
+          "block_kind": "application_matrix",
+          "title_zh": "成长行动 growth/action",
+          "body_zh": "不要再试图用更自律解决所有问题。你的第一杠杆是更清楚的节奏、更及时的边界表达、以及更低成本的恢复机制。保留你的感受力和判断力，把开放性理解力用在有方向的探索上，同时把关键任务拆成更短的启动单元。",
+          "action_zh": "20 分钟启动：选一件重要但不紧急的事，只推进 20 分钟，不要求做完，只要求开始。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#四、行动矩阵"
+          ],
+          "safety_tags": [
+            "growth",
+            "low_pressure_action"
+          ]
+        },
+        {
+          "block_key": "action_30_60_90",
+          "block_kind": "application_matrix",
+          "title_zh": "30 / 60 / 90 天路径",
+          "table_zh": [
+            {
+              "阶段": "未来 30 天",
+              "目标": "先解决进入",
+              "任务": "每周一次 20 分钟启动；每天一次来源命名；在一次合作中提前表达边界。"
+            },
+            {
+              "阶段": "未来 60 天",
+              "目标": "再解决续航",
+              "任务": "给长期任务增加阶段反馈；建立短恢复和长恢复；减少高噪音环境暴露。"
+            },
+            {
+              "阶段": "未来 90 天",
+              "目标": "最后解决整合",
+              "任务": "复盘最放大你和最消耗你的环境；明确工作、关系、生活里的三条非谈判边界；训练早表达。"
+            }
+          ],
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#行动 Tab｜30 / 60 / 90 天路径",
+            "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#五、30 / 60 / 90 天行动路径"
+          ],
+          "safety_tags": [
+            "planning",
+            "growth"
+          ]
+        },
+        {
+          "block_key": "action_collaboration",
+          "block_kind": "collaboration_manual",
+          "title_zh": "协作说明",
+          "body_zh": "和你高效协作时，最好给清楚背景，不要只丢结论；复杂问题先用文字说明；如果你当场沉默，不一定是不同意，可能是在内部处理。会消耗你的包括模糊责任、反复变动的边界、高频打断、即时响应压力、长期低反馈和低意义任务。",
+          "cta_zh": "我的行动承诺：我会练习更早表达边界，也会把重要判断更清楚地说出来。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 7｜和我高效协作的 9 个提示"
+          ],
+          "safety_tags": [
+            "collaboration",
+            "share_safe_behavioral"
+          ]
+        }
+      ],
+      "body_quality": {
+        "status": "staging_imported",
+        "density": "four_scenarios_plus_path_and_protocol",
+        "required_points_covered": [
+          "workplace",
+          "relationship",
+          "stress",
+          "growth_action",
+          "30_60_90_path",
+          "20_minute_start",
+          "source_naming",
+          "early_boundary_expression",
+          "recovery_protocol"
+        ]
+      },
+      "safety_tags": [
+        "actionable",
+        "non_screening"
+      ],
+      "render_targets": [
+        "current_8_section_skeleton",
+        "backend_owned_core_body_asset"
+      ],
+      "anti_target_terms_checked": true,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "section_key": "methodology_and_access",
+      "title_zh": "方法、边界与访问说明",
+      "subtitle_zh": "说明这份结果可以如何使用，以及不应该被如何使用。",
+      "source_modules": [
+        "module_00_trust_bar",
+        "module_10_method_privacy"
+      ],
+      "source_doc_refs": [
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 0｜顶部信任条",
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 10｜方法、边界与隐私说明",
+        "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#第 8 节｜方法与边界说明"
+      ],
+      "blocks": [
+        {
+          "block_key": "method_boundaries",
+          "block_kind": "method_boundary",
+          "title_zh": "使用边界",
+          "body_zh": "Big Five 描述的是连续人格特质，不是固定人格类型。本报告用于自我理解、职业反思和行动规划，不用于医学诊断、心理治疗、招聘筛选或给自己贴死标签。画像名只是辅助理解标签；高低分不代表好坏；结果应带回工作、关系和压力情境里验证。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 0｜顶部短声明",
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 10｜底部方法边界完整版"
+          ],
+          "safety_tags": [
+            "non_type",
+            "non_diagnostic",
+            "non_screening"
+          ]
+        },
+        {
+          "block_key": "method_facet_norms",
+          "block_kind": "method_boundary",
+          "title_zh": "侧面线索与常模说明",
+          "body_zh": "报告中既包含分数事实，也包含基于人格模型的解释性推断和帮助理解的语言表达。如果侧面线索没有独立题项和信度支持，应标注为解释性推断。若当前尚未发布稳定常模，只展示 0-100 分数条与偏低、中位、偏高区间，不展示超过多少人的排名，也不展示曲线比较。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#常模与 facet 说明"
+          ],
+          "safety_tags": [
+            "facet_inference_only",
+            "norm_unavailable_boundary"
+          ]
+        },
+        {
+          "block_key": "method_privacy_data",
+          "block_kind": "method_boundary",
+          "title_zh": "隐私与数据使用",
+          "body_zh": "你的测试结果和反馈只用于生成报告、改善解释准确度和优化产品体验。邮箱不是必填项；不填写也可以完整阅读报告。分享内容只会在你主动生成时创建，敏感心理内容不会默认分享。你可以申请删除个人测试结果与反馈数据。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#隐私与数据使用说明"
+          ],
+          "safety_tags": [
+            "privacy",
+            "data_use"
+          ]
+        },
+        {
+          "block_key": "method_retest",
+          "block_kind": "method_boundary",
+          "title_zh": "复测建议",
+          "body_zh": "本结果基于你当前作答生成。建议在未来 4-8 周后，结合现实行为再次复测或回看：最近最明显的耗损来自哪里，哪一个判断已经在报告里提前写出来，是否开始更早表达边界，以及是否把节奏问题继续误判成意志力问题。",
+          "source_doc_refs": [
+            "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 0｜展开后补充说明",
+            "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#最后的提醒"
+          ],
+          "safety_tags": [
+            "retest_recommended",
+            "self_observation"
+          ]
+        }
+      ],
+      "body_quality": {
+        "status": "staging_imported",
+        "density": "boundary_privacy_data_use_retest",
+        "required_points_covered": [
+          "non_type_statement",
+          "non_diagnostic_statement",
+          "non_screening_statement",
+          "facet_inference_statement",
+          "norm_statement",
+          "privacy_statement",
+          "data_use_statement",
+          "4_8_week_retest"
+        ]
+      },
+      "safety_tags": [
+        "non_type",
+        "non_diagnostic",
+        "non_screening",
+        "privacy"
+      ],
+      "render_targets": [
+        "current_8_section_skeleton",
+        "backend_owned_core_body_asset"
+      ],
+      "anti_target_terms_checked": true,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    }
+  ]
+}

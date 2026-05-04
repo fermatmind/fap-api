@@ -1,0 +1,129 @@
+{
+  "schema": "fap.big5.result_page_v2.core_body_source_trace.v0.1",
+  "version": "v0.1",
+  "asset_key": "canonical_o59_c32_e20_a55_n68.core_body.v0_1",
+  "canonical_profile_key": "canonical_o59_c32_e20_a55_n68",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "source_documents": [
+    {
+      "document_name": "FermatMind_BigFive_新版结果页_正式上线V2.0.docx",
+      "classification": "module_master",
+      "authority_basis": "Defines module 00-10 intent, module naming, safety boundary language, and module-level responsibilities for the V2 result page."
+    },
+    {
+      "document_name": "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx",
+      "classification": "narrative / canonical body master",
+      "authority_basis": "Provides longform narrative density, sequencing, and the O59 / C32 / E20 / A55 / N68 canonical body."
+    }
+  ],
+  "governance_sources": [
+    {
+      "path": "backend/content_assets/big5/result_page_v2/governance/big5_v2_source_authority_map_v0_1.md",
+      "role": "source_priority_and_boundary"
+    },
+    {
+      "path": "backend/content_assets/big5/result_page_v2/governance/big5_v2_module_to_section_mapping_v0_1.json",
+      "role": "module_to_current_8_section_mapping"
+    },
+    {
+      "path": "backend/content_assets/big5/result_page_v2/governance/big5_v2_anti_target_render_terms_v0_1.json",
+      "role": "visible_text_anti_target_checklist"
+    }
+  ],
+  "section_traces": [
+    {
+      "section_key": "hero_summary",
+      "source_modules": [
+        "module_01_hero",
+        "module_02_quick_understanding"
+      ],
+      "source_doc_refs": [
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 1｜首屏快读卡",
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 2｜三分钟理解版",
+        "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#第 1 节｜结果摘要"
+      ]
+    },
+    {
+      "section_key": "domains_overview",
+      "source_modules": [
+        "module_02_quick_understanding",
+        "module_03_trait_deep_dive"
+      ],
+      "source_doc_refs": [
+        "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#第 2 节｜维度总览与阅读说明",
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 3｜五维分数深解"
+      ]
+    },
+    {
+      "section_key": "domain_deep_dive",
+      "source_modules": [
+        "module_03_trait_deep_dive"
+      ],
+      "source_doc_refs": [
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 3｜五维分数深解",
+        "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#第 2 节｜维度总览与阅读说明"
+      ]
+    },
+    {
+      "section_key": "facet_details",
+      "source_modules": [
+        "module_05_facet_reframe"
+      ],
+      "source_doc_refs": [
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 5｜Facet 反直觉发现"
+      ]
+    },
+    {
+      "section_key": "core_portrait",
+      "source_modules": [
+        "module_02_quick_understanding",
+        "module_04_coupling"
+      ],
+      "source_doc_refs": [
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 4｜核心动力耦合",
+        "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#第 3 节｜画像主线：核心动力耦合分析"
+      ]
+    },
+    {
+      "section_key": "norms_comparison",
+      "source_modules": [
+        "module_10_method_privacy"
+      ],
+      "source_doc_refs": [
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 10｜常模与 facet 说明",
+        "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#第 8 节｜方法与边界说明"
+      ]
+    },
+    {
+      "section_key": "action_plan",
+      "source_modules": [
+        "module_06_application_matrix",
+        "module_07_collaboration_manual"
+      ],
+      "source_doc_refs": [
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 6｜现实应用矩阵",
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 7｜和我高效协作的 9 个提示",
+        "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#第 7 节｜现实应用"
+      ]
+    },
+    {
+      "section_key": "methodology_and_access",
+      "source_modules": [
+        "module_00_trust_bar",
+        "module_10_method_privacy"
+      ],
+      "source_doc_refs": [
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 0｜顶部信任条",
+        "FermatMind_BigFive_新版结果页_正式上线V2.0.docx#Module 10｜方法、边界与隐私说明",
+        "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx#第 8 节｜方法与边界说明"
+      ]
+    }
+  ],
+  "forbidden_sources_not_used": [
+    "compact online copy",
+    "frontend fallback",
+    "generated filler prose",
+    "325 selector assets runtime"
+  ]
+}
