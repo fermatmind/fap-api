@@ -1,0 +1,166 @@
+{
+  "schema": "fap.big5.result_page_v2.governance.module_to_section_mapping.v0.1",
+  "version": "v0.1",
+  "runtime_skeleton": "current_8_section_big5_runtime_skeleton",
+  "runtime_sections": [
+    "hero_summary",
+    "domains_overview",
+    "domain_deep_dive",
+    "facet_details",
+    "core_portrait",
+    "norms_comparison",
+    "action_plan",
+    "methodology_and_access"
+  ],
+  "modules": [
+    {
+      "module_key": "module_00_trust_bar",
+      "module_name_zh": "可信说明",
+      "primary_section": "methodology_and_access",
+      "secondary_surface": "shell_trust_strip",
+      "b5_b1_role": "boundary_and_trust_frame",
+      "allowed_in_b5_b1": true,
+      "forbidden_use": [
+        "diagnosis_language",
+        "hiring_screening",
+        "fixed_type_statement",
+        "hard_personality_assignment"
+      ],
+      "notes": "Can map into method and access or shell trust strip, but must remain boundary language rather than diagnostic or screening output."
+    },
+    {
+      "module_key": "module_01_hero",
+      "module_name_zh": "首屏快读",
+      "primary_section": "hero_summary",
+      "secondary_surface": null,
+      "b5_b1_role": "entry_summary_and_primary_signal",
+      "allowed_in_b5_b1": true,
+      "forbidden_use": [
+        "fixed_type_label",
+        "user_confirmed_type",
+        "compact_english_subtitle_reuse"
+      ],
+      "notes": "Primary B5-B1 entry point for the first-screen summary and main signal framing."
+    },
+    {
+      "module_key": "module_02_quick_understanding",
+      "module_name_zh": "三分钟理解",
+      "primary_section": "hero_summary",
+      "secondary_surface": "core_portrait",
+      "b5_b1_role": "scope_strategy_and_short_explanation",
+      "allowed_in_b5_b1": true,
+      "forbidden_use": [
+        "single_type_collapse",
+        "selector_debug_output"
+      ],
+      "notes": "Bridges fast understanding into portrait-level interpretation without creating a second runtime section system."
+    },
+    {
+      "module_key": "module_03_trait_deep_dive",
+      "module_name_zh": "五维分数",
+      "primary_section": "domain_deep_dive",
+      "secondary_surface": null,
+      "b5_b1_role": "trait_level_core_body",
+      "allowed_in_b5_b1": true,
+      "forbidden_use": [
+        "compact_trait_stub_copy",
+        "selector_only_metadata"
+      ],
+      "notes": "Direct B5-B1 core body target for trait-level depth."
+    },
+    {
+      "module_key": "module_04_coupling",
+      "module_name_zh": "动力耦合",
+      "primary_section": "core_portrait",
+      "secondary_surface": null,
+      "b5_b1_role": "cross_trait_portrait_logic",
+      "allowed_in_b5_b1": true,
+      "forbidden_use": [
+        "ungrounded_pair_claim",
+        "debug_slot_name_render"
+      ],
+      "notes": "Supports portrait assembly through coupling interpretation rather than a standalone runtime section."
+    },
+    {
+      "module_key": "module_05_facet_reframe",
+      "module_name_zh": "Facet 信号",
+      "primary_section": "facet_details",
+      "secondary_surface": null,
+      "b5_b1_role": "facet_reframe_and_exception_handling",
+      "allowed_in_b5_b1": true,
+      "forbidden_use": [
+        "facet_percentile_list_as_main_body",
+        "independent_measurement_claim_without_support"
+      ],
+      "notes": "Facet content should emphasize structural reframe, not collapse into percentile rows."
+    },
+    {
+      "module_key": "module_06_application_matrix",
+      "module_name_zh": "现实应用",
+      "primary_section": "action_plan",
+      "secondary_surface": null,
+      "b5_b1_role": "scenario_application_core_body",
+      "allowed_in_b5_b1": true,
+      "forbidden_use": [
+        "short_generic_action_stub",
+        "runtime_placeholder_copy"
+      ],
+      "notes": "Primary B5-B1 action mapping surface for work, relationship, stress, and next-step application."
+    },
+    {
+      "module_key": "module_07_collaboration_manual",
+      "module_name_zh": "协作说明",
+      "primary_section": "action_plan",
+      "secondary_surface": "lifecycle",
+      "b5_b1_role": "partial_action_support_full_lifecycle_handoff",
+      "allowed_in_b5_b1": true,
+      "forbidden_use": [
+        "share_unsafe_collaboration_excerpt",
+        "full_lifecycle_owner_claim_inside_b5_b1"
+      ],
+      "notes": "Can partially support action_plan in B5-B1, but full ownership should move to lifecycle surfaces later."
+    },
+    {
+      "module_key": "module_08_share_save",
+      "module_name_zh": "分享与保存",
+      "primary_section": "lifecycle",
+      "secondary_surface": "shell_tools",
+      "b5_b1_role": "lifecycle_shell_only",
+      "allowed_in_b5_b1": false,
+      "forbidden_use": [
+        "main_core_body_section",
+        "unsanitized_share_payload",
+        "runtime_body_owner"
+      ],
+      "notes": "Primarily lifecycle and shell-tools oriented, not a main B5-B1 body module."
+    },
+    {
+      "module_key": "module_09_feedback_data_flywheel",
+      "module_name_zh": "模块反馈",
+      "primary_section": "lifecycle",
+      "secondary_surface": "observation",
+      "b5_b1_role": "observation_and_feedback_later_batch",
+      "allowed_in_b5_b1": false,
+      "forbidden_use": [
+        "main_core_body_section",
+        "user_confirmed_type_loop",
+        "runtime_feedback_owner_now"
+      ],
+      "notes": "Primarily lifecycle and observation oriented, not part of the B5-B1 core body import."
+    },
+    {
+      "module_key": "module_10_method_privacy",
+      "module_name_zh": "方法与隐私",
+      "primary_section": "methodology_and_access",
+      "secondary_surface": null,
+      "b5_b1_role": "method_boundary_and_privacy_frame",
+      "allowed_in_b5_b1": true,
+      "forbidden_use": [
+        "old_compact_method_stub",
+        "percentile_claim_without_norms",
+        "privacy_metadata_leak"
+      ],
+      "notes": "Owns method, privacy, and access boundary framing for the current runtime skeleton."
+    }
+  ]
+}

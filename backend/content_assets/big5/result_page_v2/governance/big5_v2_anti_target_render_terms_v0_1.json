@@ -1,0 +1,89 @@
+{
+  "schema": "fap.big5.result_page_v2.governance.anti_target_render_terms.v0.1",
+  "version": "v0.1",
+  "scope": "user_visible_rendered_text",
+  "anti_target_sources": [
+    "current_compact_online_big5_page",
+    "legacy_frontend_fallback",
+    "compact_v1_report_body"
+  ],
+  "terms": [
+    {
+      "term": "A compact overview of your Big Five profile and headline signals.",
+      "category": "compact_english_subtitle",
+      "should_block_as_rendered_text": true
+    },
+    {
+      "term": "Five-domain distribution with percentile-oriented context.",
+      "category": "compact_english_subtitle",
+      "should_block_as_rendered_text": true
+    },
+    {
+      "term": "Focused read on domain-level strengths and potential trade-offs.",
+      "category": "compact_english_subtitle",
+      "should_block_as_rendered_text": true
+    },
+    {
+      "term": "Facet-level signals arranged for quick interpretation and follow-up.",
+      "category": "compact_english_subtitle",
+      "should_block_as_rendered_text": true
+    },
+    {
+      "term": "Norms Comparison",
+      "category": "legacy_english_heading",
+      "should_block_as_rendered_text": true
+    },
+    {
+      "term": "Methodology and Access",
+      "category": "legacy_english_heading",
+      "should_block_as_rendered_text": true
+    },
+    {
+      "term": "Dominant trait structure and calibrated profile framing.",
+      "category": "compact_english_subtitle",
+      "should_block_as_rendered_text": true
+    },
+    {
+      "term": "N1 百分位",
+      "category": "facet_percentile_lead",
+      "should_block_as_rendered_text": true,
+      "contextual_rule": "This does not ban every percentile mention globally. Percentile can appear in directory, appendix, or method contexts, but facet_details must not be led by percentile-row rendering as the primary explanation."
+    },
+    {
+      "term": "优先关注成长面向",
+      "category": "short_action_stub",
+      "should_block_as_rendered_text": true
+    },
+    {
+      "term": "all",
+      "category": "placeholder_or_debug_leak",
+      "should_block_as_rendered_text": true,
+      "contextual_rule": "Do not treat the ordinary English word all as globally banned in code or prose. Block it only when rendered as a facet row label, placeholder, selector debug value, or visible fallback leakage in user-facing Big Five output."
+    },
+    {
+      "term": "frontend_fallback",
+      "category": "internal_fallback_leak",
+      "should_block_as_rendered_text": true
+    },
+    {
+      "term": "internal_metadata",
+      "category": "internal_metadata_leak",
+      "should_block_as_rendered_text": true
+    },
+    {
+      "term": "[object Object]",
+      "category": "serialization_leak",
+      "should_block_as_rendered_text": true
+    },
+    {
+      "term": "deferred_to_future",
+      "category": "policy_placeholder_leak",
+      "should_block_as_rendered_text": true
+    },
+    {
+      "term": "policy_not_shipped",
+      "category": "policy_placeholder_leak",
+      "should_block_as_rendered_text": true
+    }
+  ]
+}
