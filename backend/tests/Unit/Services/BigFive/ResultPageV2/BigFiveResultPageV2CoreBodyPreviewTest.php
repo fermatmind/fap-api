@@ -304,7 +304,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function gitChangedFilesInBranchDiff(array $paths): array
     {
         $repoRoot = dirname(base_path());
-        $baseRef = trim((string) shell_exec('git -C '.escapeshellarg($repoRoot).' merge-base origin/main HEAD'));
+        $baseRef = $this->mergeBaseWithMain($repoRoot);
         $this->assertNotSame('', $baseRef);
 
         $command = array_merge(['git', '-C', $repoRoot, 'diff', '--name-only', "{$baseRef}...HEAD", '--'], $paths);
@@ -312,6 +312,33 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame(0, $exitCode);
 
         return array_values(array_unique(array_filter($output)));
+    }
+
+    private function mergeBaseWithMain(string $repoRoot): string
+    {
+        $gitPrefix = 'git -C '.escapeshellarg($repoRoot).' ';
+        $baseRef = trim((string) shell_exec($gitPrefix.'merge-base origin/main HEAD 2>/dev/null'));
+        if ($baseRef !== '') {
+            return $baseRef;
+        }
+
+        exec($gitPrefix.'fetch --no-tags --depth=1 origin main:refs/remotes/origin/main 2>/dev/null', output: $output, result_code: $exitCode);
+        if ($exitCode === 0) {
+            $baseRef = trim((string) shell_exec($gitPrefix.'merge-base origin/main HEAD 2>/dev/null'));
+            if ($baseRef !== '') {
+                return $baseRef;
+            }
+        }
+
+        $isShallow = trim((string) shell_exec($gitPrefix.'rev-parse --is-shallow-repository 2>/dev/null')) === 'true';
+        if ($isShallow) {
+            exec($gitPrefix.'fetch --no-tags --unshallow origin 2>/dev/null', output: $unshallowOutput, result_code: $unshallowExitCode);
+            if ($unshallowExitCode === 0) {
+                exec($gitPrefix.'fetch --no-tags origin main:refs/remotes/origin/main 2>/dev/null');
+            }
+        }
+
+        return trim((string) shell_exec($gitPrefix.'merge-base origin/main HEAD 2>/dev/null'));
     }
 
     /**
