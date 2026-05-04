@@ -121,7 +121,7 @@ final class CareerImportSelectedDisplayAssets extends Command
                 ]), false);
             }
 
-            $report['decision'] = $report['would_write_count'] === count($items) && $items !== []
+            $report['decision'] = ($report['failed_count'] ?? 0) === 0 && $items !== []
                 ? 'pass'
                 : 'no_go';
             $report['would_write'] = $report['would_write_count'] > 0;
@@ -133,6 +133,10 @@ final class CareerImportSelectedDisplayAssets extends Command
             $written = DB::transaction(function () use ($items, $file): array {
                 $written = [];
                 foreach ($items as $item) {
+                    if (($item['would_write'] ?? false) !== true) {
+                        continue;
+                    }
+
                     /** @var array<string, mixed> $payload */
                     $payload = $item['payload'];
                     /** @var Occupation $occupation */
@@ -350,9 +354,19 @@ final class CareerImportSelectedDisplayAssets extends Command
             $blockingReasons[] = "Public API fallback onet_soc_2019 crosswalk must match {$expectedOnet}.";
         }
 
+        $authorityState = 'authority_unavailable';
+        if ($occupationFound && $socValid && $onetValid) {
+            $authorityState = 'public_api_fallback_verified';
+        } elseif (app()->environment(['local', 'testing'])) {
+            $authorityState = 'local_dry_run_authority_deferred';
+            $blockingReasons[] = 'Local dry-run deferred authority validation to target DB dry-run because the local authority DB is unavailable.';
+        } else {
+            $errors = $blockingReasons;
+        }
+
         return [
             'authority_source' => 'public_api_fallback',
-            'authority_state' => 'authority_unavailable',
+            'authority_state' => $authorityState,
             'occupation_found' => $occupationFound,
             'occupation_id' => null,
             'soc_crosswalk_valid' => $socValid,
@@ -371,6 +385,11 @@ final class CareerImportSelectedDisplayAssets extends Command
      */
     private function item(array $mapped, array $authority, array $errors): array
     {
+        $authorityReady = ($authority['occupation_found'] ?? false) === true
+            && ($authority['soc_crosswalk_valid'] ?? false) === true
+            && ($authority['onet_crosswalk_valid'] ?? false) === true;
+        $authorityDeferredForLocalDryRun = ($authority['authority_state'] ?? null) === 'local_dry_run_authority_deferred';
+
         return [
             'slug' => $mapped['slug'],
             'row_number' => $mapped['row_number'],
@@ -382,9 +401,8 @@ final class CareerImportSelectedDisplayAssets extends Command
             'onet_crosswalk_valid' => $authority['onet_crosswalk_valid'],
             'existing_display_asset' => $authority['existing_display_asset'],
             'would_write' => $errors === []
-                && ($authority['occupation_found'] ?? false) === true
-                && ($authority['soc_crosswalk_valid'] ?? false) === true
-                && ($authority['onet_crosswalk_valid'] ?? false) === true,
+                && ($authorityReady || $authorityDeferredForLocalDryRun)
+                && ($authority['existing_display_asset'] ?? false) !== true,
             'payload_summary' => $mapped['summary'],
             'payload' => $mapped['payload'],
             'release_gates_changed' => false,
@@ -401,6 +419,7 @@ final class CareerImportSelectedDisplayAssets extends Command
     {
         return [
             'would_write_count' => count(array_filter($items, static fn (array $item): bool => ($item['would_write'] ?? false) === true)),
+            'already_exists_count' => count(array_filter($items, static fn (array $item): bool => ($item['existing_display_asset'] ?? false) === true && ($item['errors'] ?? []) === [])),
             'failed_count' => count(array_filter($items, static fn (array $item): bool => ($item['errors'] ?? []) !== [])),
             'created_count' => 0,
             'updated_count' => 0,
@@ -467,6 +486,7 @@ final class CareerImportSelectedDisplayAssets extends Command
             'items' => [],
             'would_write' => false,
             'would_write_count' => 0,
+            'already_exists_count' => 0,
             'did_write' => false,
             'created_count' => 0,
             'updated_count' => 0,

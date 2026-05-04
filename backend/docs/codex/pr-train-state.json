@@ -1,7 +1,7 @@
 {
   "train_name": "career-night-train",
   "started_at": "2026-04-09T00:00:00Z",
-  "updated_at": "2026-05-04T21:55:00+08:00",
+  "updated_at": "2026-05-05T01:36:00+08:00",
   "mode": "local_clone_preferred",
   "base_branch": "main",
   "stop_on_failure": true,
@@ -5457,10 +5457,10 @@
         "PR-D11": {
           "repo": "fap-api",
           "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-          "status": "local_checks_passed",
+          "status": "target_ops_complete",
           "branch": "codex/pr-d11-career-authority-batch",
-          "commit_sha": "",
-          "pr_url": "",
+          "commit_sha": "ca7c2402cb3805e130ce91a9a08b2fa6acd13976",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1139",
           "checks": {
             "local": [
               {
@@ -5490,13 +5490,26 @@
                 "status": "passed"
               }
             ],
-            "github": []
+            "github": [
+              {
+                "name": "hygiene",
+                "status": "passed"
+              },
+              {
+                "name": "verify-mbti-legacy",
+                "status": "passed"
+              },
+              {
+                "name": "verify-mbti-v2",
+                "status": "passed"
+              }
+            ]
           },
           "failure_reason": "",
           "resume_policy": "manual_only",
-          "merged_at": "",
-          "remote_branch_deleted": false,
-          "local_cleanup_executed": false,
+          "merged_at": "2026-05-04T16:36:00Z",
+          "remote_branch_deleted": true,
+          "local_cleanup_executed": true,
           "history": [
             {
               "at": "2026-05-04T21:40:00+08:00",
@@ -5512,6 +5525,74 @@
               "at": "2026-05-04T22:13:00+08:00",
               "status": "local_checks_passed",
               "summary": "After D11-preflight PR #1138 merged, D11 scoped Pint, command tests, broad career console/unit acceptance, D10 workbook dry-run, and diff checks passed without DB writes."
+            },
+            {
+              "at": "2026-05-05T00:36:00+08:00",
+              "status": "merged",
+              "summary": "PR #1139 merged with guarded career authority batch command for the first D10 cohort."
+            },
+            {
+              "at": "2026-05-05T00:58:00+08:00",
+              "status": "target_ops_complete",
+              "summary": "D11 target authority ops completed against 10.20.1.13:fap_prod with occupations +7, occupation_crosswalks +37, career_job_display_assets +0, idempotency dry-run pass, and sitemap/llms unchanged."
+            }
+          ]
+        },
+        "PR-D12": {
+          "repo": "fap-api",
+          "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+          "status": "pr_open",
+          "branch": "codex/pr-d12-career-display-import-batch",
+          "commit_sha": "8f26358c9032e0cdb48b3136358868dfc0008833",
+          "pr_url": "https://github.com/fermatmind/fap-api/pull/1140",
+          "checks": {
+            "local": [
+              {
+                "command": "vendor/bin/pint --test app/Console/Commands/CareerImportSelectedDisplayAssets.php app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php app/Console/Kernel.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+                "status": "passed"
+              },
+              {
+                "command": "php artisan test tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Console/CareerFullDisplayWorkbookValidatorCommandTest.php",
+                "status": "passed",
+                "details": "36 tests and 1820 assertions passed."
+              },
+              {
+                "command": "php artisan career:import-selected-display-assets --file=/tmp/fermat_career_assets_v4_2_v9_d10_30_repaired.xlsx --slugs=$D10_SLUGS --dry-run --json",
+                "status": "passed",
+                "details": "decision=pass, validated_count=30, would_write_count=30, already_exists_count=0, failed_count=0, did_write=false, release_gates_changed=false; local authority validation deferred to target DB dry-run because local authority DB is unavailable."
+              },
+              {
+                "command": "php artisan career:import-selected-display-assets --file=/tmp/fermat_career_assets_v4_2_v9_d10_30_repaired.xlsx --slugs=software-developers --dry-run --json",
+                "status": "passed_expected_rejection",
+                "details": "exit_code=1, decision=fail, did_write=false, unsupported slug rejected."
+              },
+              {
+                "command": "git diff --check && git diff --cached --check",
+                "status": "passed"
+              }
+            ],
+            "github": []
+          },
+          "failure_reason": "",
+          "resume_policy": "manual_only",
+          "merged_at": "",
+          "remote_branch_deleted": false,
+          "local_cleanup_executed": false,
+          "history": [
+            {
+              "at": "2026-05-05T01:10:00+08:00",
+              "status": "in_progress",
+              "summary": "Initialized PR-D12 ledger entry for guarded display asset import of the first D10 cohort after D11 target authority alignment completed."
+            },
+            {
+              "at": "2026-05-05T01:30:00+08:00",
+              "status": "local_checks_passed",
+              "summary": "D12 scoped Pint, command/mapper validation tests, real D10 workbook dry-run, software-developers rejection check, and diff checks passed without DB writes."
+            },
+            {
+              "at": "2026-05-05T01:36:00+08:00",
+              "status": "pr_open",
+              "summary": "Opened draft PR #1140 for the D10 cohort display asset import batch."
             }
           ]
         }
