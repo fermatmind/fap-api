@@ -198,6 +198,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_display_import_service_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_keeps_mbti_and_bigfive_runtime_changes_blocked(): void
     {
         $changed = [
@@ -360,6 +369,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerDisplayImportServiceFile($file)) {
+                continue;
+            }
+
             if (
                 $file === 'backend/app/Console/Kernel.php'
                 && $this->kernelDiffIsCareerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
@@ -376,6 +389,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     private function isCareerConsoleCommandFile(string $file): bool
     {
         return preg_match('#^backend/app/Console/Commands/Career[A-Za-z0-9_]*\.php$#', $file) === 1;
+    }
+
+    private function isCareerDisplayImportServiceFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php';
     }
 
     /**
