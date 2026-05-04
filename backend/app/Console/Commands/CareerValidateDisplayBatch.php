@@ -9,6 +9,7 @@ use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\Scopes\TenantScope;
 use App\Services\Career\Authority\CareerCrosswalkModePolicy;
+use App\Services\Career\Governance\CareerTrustFactReviewPolicy;
 use DOMDocument;
 use DOMElement;
 use DOMNode;
@@ -18,6 +19,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;
+use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
 use XMLReader;
 use ZipArchive;
@@ -131,6 +133,8 @@ final class CareerValidateDisplayBatch extends Command
     /** @var array<string, mixed>|null */
     private ?array $authoritySnapshot = null;
 
+    private bool $factReviewLedgerPresent = false;
+
     protected $signature = 'career:validate-display-batch
         {--file= : Absolute path to a v4.2 career asset workbook}
         {--slugs= : Optional comma-separated explicit slug allowlist; omitted means read-only full workbook scan}
@@ -237,6 +241,7 @@ final class CareerValidateDisplayBatch extends Command
         $duplicateRows = [];
         $d5RowsBySlug = [];
         $this->authoritySnapshot = $this->preloadAuthoritySnapshot();
+        $this->factReviewLedgerPresent = in_array('Fact_Review_Ledger', $this->workbookSheetNames($file), true);
 
         $workbook = $this->readWorkbook($file, [], function (array $row) use (&$items, &$seenSlugs, &$duplicateRows, &$d5RowsBySlug): void {
             $slug = strtolower(trim((string) ($row['Slug'] ?? '')));
@@ -285,6 +290,7 @@ final class CareerValidateDisplayBatch extends Command
             'blockers_by_owner' => $this->blockersByOwner($items),
             'recommended_next_batches' => $this->recommendedNextBatches($items),
             'crosswalk_policy_summary' => $this->crosswalkPolicySummary($items),
+            'trust_fact_review_summary' => app(CareerTrustFactReviewPolicy::class)->workbookSummary($this->factReviewLedgerPresent),
             'd5_repair_presence' => $this->d5RepairPresence($d5RowsBySlug),
             'strategic_architecture_gap_scan' => $this->strategicArchitectureGapScan(),
             'items' => $items,
@@ -374,6 +380,7 @@ final class CareerValidateDisplayBatch extends Command
         $evidenceGate = $this->evidenceGate($row, $json, $sourceGate, $schemaGate);
         $authorityGate = $this->authorityGate($slug, $this->stringValue($row, 'SOC_Code'), $this->stringValue($row, 'O_NET_Code'));
         $crosswalkPolicy = app(CareerCrosswalkModePolicy::class)->classifyWorkbookRow($row);
+        $trustFactReview = app(CareerTrustFactReviewPolicy::class)->evaluateRow($json['source_refs'], $this->factReviewLedgerPresent);
         $scores = $this->scores($contentGate, $authorityGate, $evidenceGate, $schemaGate, $ctaGate, $sourceGate, $linkGate);
 
         return [
@@ -393,6 +400,7 @@ final class CareerValidateDisplayBatch extends Command
             'link_gate' => $linkGate,
             'evidence_gate' => $evidenceGate,
             'crosswalk_policy' => $crosswalkPolicy,
+            'trust_fact_review' => $trustFactReview,
             'scores' => $scores,
             'recommended_status' => $this->recommendedStatus($row, $authorityGate, $scores),
             'release_gate' => [
@@ -1431,7 +1439,7 @@ final class CareerValidateDisplayBatch extends Command
         }
 
         if ((bool) $this->option('json')) {
-            $this->line($json);
+            $this->output->write($json.PHP_EOL, false, OutputInterface::OUTPUT_RAW);
         } else {
             $this->line('validator_version='.$report['validator_version']);
             $this->line('decision='.$report['decision']);
@@ -1615,6 +1623,46 @@ final class CareerValidateDisplayBatch extends Command
         }
 
         return str_starts_with($target, 'xl/') ? $target : 'xl/'.$target;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function workbookSheetNames(string $path): array
+    {
+        if (! class_exists(ZipArchive::class)) {
+            throw new RuntimeException('ZipArchive extension is required to read XLSX workbooks.');
+        }
+
+        $zip = new ZipArchive;
+        if ($zip->open($path) !== true) {
+            throw new RuntimeException('Unable to open XLSX workbook: '.$path);
+        }
+
+        try {
+            $workbookXml = $zip->getFromName('xl/workbook.xml');
+            if (! is_string($workbookXml)) {
+                throw new RuntimeException('Invalid XLSX workbook: missing workbook.xml.');
+            }
+
+            $workbook = $this->loadXml($workbookXml);
+            $xpath = new DOMXPath($workbook);
+            $xpath->registerNamespace('x', 'http://schemas.openxmlformats.org/spreadsheetml/2006/main');
+
+            $names = [];
+            foreach ($xpath->query('//x:sheet') as $sheet) {
+                if ($sheet instanceof DOMElement) {
+                    $name = trim($sheet->getAttribute('name'));
+                    if ($name !== '') {
+                        $names[] = $name;
+                    }
+                }
+            }
+
+            return $names;
+        } finally {
+            $zip->close();
+        }
     }
 
     /**
