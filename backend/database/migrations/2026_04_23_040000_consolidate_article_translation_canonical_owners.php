@@ -182,8 +182,7 @@ return new class extends Migration
         object $duplicateSource,
         object $englishDraft,
         string $publicGroupId
-    ): bool
-    {
+    ): bool {
         return (string) ($public->translation_group_id ?? '') === $publicGroupId
             && $public->source_article_id === null
             && (string) ($duplicateSource->translation_status ?? '') === Article::TRANSLATION_STATUS_ARCHIVED
