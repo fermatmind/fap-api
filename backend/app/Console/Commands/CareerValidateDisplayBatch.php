@@ -25,7 +25,7 @@ final class CareerValidateDisplayBatch extends Command
 {
     private const COMMAND_NAME = 'career:validate-display-batch';
 
-    private const VALIDATOR_VERSION = 'career_display_batch_validator_v0.1';
+    private const VALIDATOR_VERSION = 'career_display_batch_validator_v0.2';
 
     private const SHEET_NAME = 'Career_Assets_v4_1';
 
@@ -115,9 +115,24 @@ final class CareerValidateDisplayBatch extends Command
         'raw_ai_exposure_score',
     ];
 
+    /** @var list<string> */
+    private const D5_CONTEXT_SLUGS = [
+        'actuaries',
+        'financial-analysts',
+        'high-school-teachers',
+        'market-research-analysts',
+        'architectural-and-engineering-managers',
+        'civil-engineers',
+        'biomedical-engineers',
+        'dentists',
+    ];
+
+    /** @var array<string, mixed>|null */
+    private ?array $authoritySnapshot = null;
+
     protected $signature = 'career:validate-display-batch
         {--file= : Absolute path to a v4.2 career asset workbook}
-        {--slugs= : Comma-separated explicit slug allowlist}
+        {--slugs= : Optional comma-separated explicit slug allowlist; omitted means read-only full workbook scan}
         {--json : Emit JSON report}
         {--output= : Optional report output path}
         {--strict-authority : Fail when local authority DB validation is unavailable}';
@@ -128,12 +143,17 @@ final class CareerValidateDisplayBatch extends Command
     {
         try {
             $file = $this->requiredFile();
-            $slugs = $this->requiredSlugs();
-            $workbook = $this->readWorkbook($file, $slugs);
+            $requestedSlugs = $this->optionalSlugs();
+
+            if ($requestedSlugs === []) {
+                return $this->handleFullWorkbookScan($file);
+            }
+
+            $workbook = $this->readWorkbook($file, $requestedSlugs);
 
             $missingHeaders = array_values(array_diff(self::REQUIRED_HEADERS, $workbook['headers']));
             if ($missingHeaders !== []) {
-                return $this->finish($this->baseReport($file, $slugs, $workbook, [
+                return $this->finish($this->baseReport($file, $requestedSlugs, $workbook, [
                     'decision' => 'fail',
                     'errors' => ['Workbook is missing required headers: '.implode(', ', $missingHeaders).'.'],
                 ]), false);
@@ -143,13 +163,18 @@ final class CareerValidateDisplayBatch extends Command
             foreach ($workbook['rows'] as $row) {
                 $slug = strtolower(trim((string) ($row['Slug'] ?? '')));
                 if ($slug !== '') {
-                    $rowsBySlug[$slug] = $row;
+                    $rowsBySlug[$slug][] = $row;
                 }
             }
 
+            $slugs = $requestedSlugs === [] ? array_keys($rowsBySlug) : $requestedSlugs;
             $missingRows = array_values(array_filter(
                 $slugs,
                 static fn (string $slug): bool => ! isset($rowsBySlug[$slug]),
+            ));
+            $duplicateRows = array_keys(array_filter(
+                $rowsBySlug,
+                static fn (array $rows): bool => count($rows) > 1,
             ));
 
             $items = [];
@@ -158,7 +183,7 @@ final class CareerValidateDisplayBatch extends Command
                     continue;
                 }
 
-                $items[] = $this->validateRow($rowsBySlug[$slug], $slug);
+                $items[] = $this->validateRow($rowsBySlug[$slug][0], $slug);
             }
 
             $summary = $this->summary($items);
@@ -174,8 +199,14 @@ final class CareerValidateDisplayBatch extends Command
 
             $report = $this->baseReport($file, $slugs, $workbook, [
                 'decision' => $decision,
+                'scan_scope' => $requestedSlugs === [] ? 'full_workbook' : 'explicit_slugs',
+                'explicit_slugs' => $requestedSlugs !== [],
                 'missing_slugs' => $missingRows,
+                'duplicate_slugs' => $duplicateRows,
                 'summary' => $summary,
+                'blockers_by_owner' => $this->blockersByOwner($items),
+                'recommended_next_batches' => $this->recommendedNextBatches($items),
+                'd5_repair_presence' => $this->d5RepairPresence($rowsBySlug),
                 'items' => $items,
             ]);
 
@@ -197,14 +228,80 @@ final class CareerValidateDisplayBatch extends Command
         }
     }
 
+    private function handleFullWorkbookScan(string $file): int
+    {
+        $items = [];
+        $seenSlugs = [];
+        $duplicateRows = [];
+        $d5RowsBySlug = [];
+        $this->authoritySnapshot = $this->preloadAuthoritySnapshot();
+
+        $workbook = $this->readWorkbook($file, [], function (array $row) use (&$items, &$seenSlugs, &$duplicateRows, &$d5RowsBySlug): void {
+            $slug = strtolower(trim((string) ($row['Slug'] ?? '')));
+            if ($slug === '') {
+                return;
+            }
+
+            if (isset($seenSlugs[$slug])) {
+                $duplicateRows[$slug] = true;
+            }
+            $seenSlugs[$slug] = true;
+
+            if (in_array($slug, self::D5_CONTEXT_SLUGS, true)) {
+                $d5RowsBySlug[$slug][] = $row;
+            }
+
+            $items[] = $this->validateRow($row, $slug);
+        });
+
+        $missingHeaders = array_values(array_diff(self::REQUIRED_HEADERS, $workbook['headers']));
+        if ($missingHeaders !== []) {
+            return $this->finish($this->baseReport($file, [], $workbook, [
+                'decision' => 'fail',
+                'errors' => ['Workbook is missing required headers: '.implode(', ', $missingHeaders).'.'],
+            ]), false);
+        }
+
+        $slugs = array_keys($seenSlugs);
+        $summary = $this->summary($items);
+        $strictAuthorityFailure = (bool) $this->option('strict-authority')
+            && $summary['blocked_authority_unavailable'] > 0;
+
+        $decision = match (true) {
+            $strictAuthorityFailure => 'fail',
+            $summary['ready_for_second_pilot_validation'] === count($items) && $items !== [] => 'pass',
+            default => 'no_go',
+        };
+
+        $report = $this->baseReport($file, $slugs, $workbook, [
+            'decision' => $decision,
+            'scan_scope' => 'full_workbook',
+            'explicit_slugs' => false,
+            'missing_slugs' => [],
+            'duplicate_slugs' => array_keys($duplicateRows),
+            'summary' => $summary,
+            'blockers_by_owner' => $this->blockersByOwner($items),
+            'recommended_next_batches' => $this->recommendedNextBatches($items),
+            'd5_repair_presence' => $this->d5RepairPresence($d5RowsBySlug),
+            'strategic_architecture_gap_scan' => $this->strategicArchitectureGapScan(),
+            'items' => $items,
+        ]);
+
+        if ($strictAuthorityFailure) {
+            $report['errors'] = ['Local authority DB is unavailable and --strict-authority was requested.'];
+        }
+
+        return $this->finish($report, ! $strictAuthorityFailure);
+    }
+
     /**
      * @return list<string>
      */
-    private function requiredSlugs(): array
+    private function optionalSlugs(): array
     {
         $raw = trim((string) $this->option('slugs'));
         if ($raw === '') {
-            throw new RuntimeException('--slugs is required and must be an explicit comma-separated allowlist.');
+            return [];
         }
 
         $slugs = array_values(array_unique(array_filter(array_map(
@@ -213,7 +310,7 @@ final class CareerValidateDisplayBatch extends Command
         ), static fn (string $slug): bool => $slug !== '')));
 
         if ($slugs === []) {
-            throw new RuntimeException('--slugs is required and must include at least one slug.');
+            throw new RuntimeException('--slugs must include at least one slug when provided.');
         }
 
         return $slugs;
@@ -493,6 +590,10 @@ final class CareerValidateDisplayBatch extends Command
             return $this->authorityUnavailableGate($slug, $socCode, $onetCode);
         }
 
+        if ($this->authoritySnapshot !== null) {
+            return $this->authorityGateFromSnapshot($slug, $socCode, $onetCode);
+        }
+
         try {
             $occupation = Occupation::query()
                 ->with('crosswalks')
@@ -535,6 +636,117 @@ final class CareerValidateDisplayBatch extends Command
             ];
         } catch (QueryException) {
             return $this->authorityUnavailableGate($slug, $socCode, $onetCode);
+        }
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function authorityGateFromSnapshot(string $slug, string $socCode, string $onetCode): array
+    {
+        if (! (bool) ($this->authoritySnapshot['available'] ?? false)) {
+            return [
+                'authority_state' => 'authority_unavailable',
+                'authority_source' => 'local_db_unavailable',
+                'occupation_exists' => false,
+                'SOC_crosswalk_exists' => false,
+                'O_NET_crosswalk_exists' => false,
+                'display_surface_ready' => false,
+                'public_API_state' => 'authority_unavailable',
+                'authority_error' => 'Authority database unavailable for read-only validation.',
+            ];
+        }
+
+        $occupation = $this->authoritySnapshot['occupations'][$slug] ?? null;
+        $occupationExists = is_array($occupation);
+        $crosswalkCodes = $occupationExists ? (array) ($occupation['crosswalk_codes'] ?? []) : [];
+        $socCrosswalkExists = in_array($socCode, $crosswalkCodes, true);
+        $onetCrosswalkExists = in_array($onetCode, $crosswalkCodes, true);
+        $displaySurfaceReady = isset($this->authoritySnapshot['display_assets'][$slug]);
+        $directoryDraft = $occupationExists && (string) ($occupation['crosswalk_mode'] ?? '') === 'directory_draft';
+        $docxFallback = ! $occupationExists && isset($this->authoritySnapshot['docx_fallbacks'][$slug]);
+
+        return [
+            'authority_state' => match (true) {
+                $displaySurfaceReady => 'display_surface_ready',
+                $directoryDraft => 'directory_draft',
+                $occupationExists => 'occupation_backed',
+                $docxFallback => 'docx_fallback',
+                default => 'API_404',
+            },
+            'authority_source' => 'local_db_snapshot',
+            'occupation_exists' => $occupationExists,
+            'SOC_crosswalk_exists' => $socCrosswalkExists,
+            'O_NET_crosswalk_exists' => $onetCrosswalkExists,
+            'display_surface_ready' => $displaySurfaceReady,
+            'public_API_state' => match (true) {
+                $displaySurfaceReady => 'display_surface_ready',
+                $directoryDraft => 'directory_draft',
+                $occupationExists => 'occupation_backed',
+                $docxFallback => 'docx_fallback',
+                default => 'API_404',
+            },
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function preloadAuthoritySnapshot(): array
+    {
+        try {
+            $occupations = [];
+            foreach (Occupation::query()->with('crosswalks')->get() as $occupation) {
+                if (! $occupation instanceof Occupation) {
+                    continue;
+                }
+
+                $occupations[(string) $occupation->canonical_slug] = [
+                    'crosswalk_mode' => (string) $occupation->crosswalk_mode,
+                    'crosswalk_codes' => $occupation->crosswalks
+                        ->map(static fn ($crosswalk): string => (string) $crosswalk->source_code)
+                        ->filter()
+                        ->values()
+                        ->all(),
+                ];
+            }
+
+            $displayAssets = CareerJobDisplayAsset::query()
+                ->where('status', 'ready_for_pilot')
+                ->pluck('canonical_slug')
+                ->mapWithKeys(static fn (string $slug): array => [$slug => true])
+                ->all();
+
+            $docxFallbacks = [];
+            $jobs = CareerJob::query()
+                ->withoutGlobalScope(TenantScope::class)
+                ->with('seoMeta')
+                ->where('org_id', 0)
+                ->where('locale', 'zh-CN')
+                ->where('status', CareerJob::STATUS_PUBLISHED)
+                ->where('is_public', true)
+                ->where(static function ($query): void {
+                    $query->whereNull('published_at')
+                        ->orWhere('published_at', '<=', now());
+                })
+                ->get();
+
+            foreach ($jobs as $job) {
+                if ($job instanceof CareerJob
+                    && is_string(Arr::get($job->seoMeta?->jsonld_overrides_json, 'source_docx'))
+                    && Arr::get($job->market_demand_json, 'source_refs.0.url') !== null) {
+                    $docxFallbacks[(string) $job->slug] = true;
+                }
+            }
+
+            return [
+                'available' => true,
+                'occupations' => $occupations,
+                'display_assets' => $displayAssets,
+                'docx_fallbacks' => $docxFallbacks,
+            ];
+        } catch (QueryException) {
+            return ['available' => false];
         }
     }
 
@@ -851,6 +1063,284 @@ final class CareerValidateDisplayBatch extends Command
     }
 
     /**
+     * @param  list<array<string, mixed>>  $items
+     * @return array<string, int>
+     */
+    private function blockersByOwner(array $items): array
+    {
+        $owners = [
+            'workbook' => 0,
+            'authority' => 0,
+            'display_asset' => 0,
+            'release_gate' => 0,
+        ];
+
+        foreach ($items as $item) {
+            $scores = (array) ($item['scores'] ?? []);
+            $authority = (array) ($item['authority_gate'] ?? []);
+            $release = (array) ($item['release_gate'] ?? []);
+
+            if (($scores['content_score'] ?? 0) < 100
+                || ($scores['evidence_score'] ?? 0) < 100
+                || ($scores['schema_score'] ?? 0) < 100
+                || ($scores['cta_score'] ?? 0) < 100
+                || ($scores['source_score'] ?? 0) < 100
+                || ($scores['link_score'] ?? 0) < 100) {
+                $owners['workbook']++;
+            }
+            if (($scores['authority_score'] ?? 0) < 100) {
+                $owners['authority']++;
+            }
+            if (! (bool) ($authority['display_surface_ready'] ?? false)) {
+                $owners['display_asset']++;
+            }
+            if (! (bool) ($release['ready_for_sitemap'] ?? false)
+                || ! (bool) ($release['ready_for_llms'] ?? false)
+                || ! (bool) ($release['ready_for_paid'] ?? false)
+                || ! (bool) ($release['ready_for_backlink'] ?? false)) {
+                $owners['release_gate']++;
+            }
+        }
+
+        return $owners;
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $items
+     * @return array<string, list<string>>
+     */
+    private function recommendedNextBatches(array $items): array
+    {
+        $batches = [
+            'ready_for_display_validation' => [],
+            'needs_workbook_repair' => [],
+            'needs_authority_alignment' => [],
+            'needs_display_asset_import' => [],
+            'blocked_mapping_or_source' => [],
+        ];
+
+        foreach ($items as $item) {
+            $slug = (string) data_get($item, 'identity.slug', '');
+            if ($slug === '') {
+                continue;
+            }
+
+            $scores = (array) ($item['scores'] ?? []);
+            $authority = (array) ($item['authority_gate'] ?? []);
+            if (($scores['import_score'] ?? 0) === 100 && (bool) ($authority['display_surface_ready'] ?? false)) {
+                $batches['ready_for_display_validation'][] = $slug;
+            } elseif (($scores['content_score'] ?? 0) < 100
+                || ($scores['schema_score'] ?? 0) < 100
+                || ($scores['cta_score'] ?? 0) < 100
+                || ($scores['source_score'] ?? 0) < 100
+                || ($scores['link_score'] ?? 0) < 100) {
+                $batches['needs_workbook_repair'][] = $slug;
+            } elseif (($scores['authority_score'] ?? 0) < 100) {
+                $batches['needs_authority_alignment'][] = $slug;
+            } elseif (! (bool) ($authority['display_surface_ready'] ?? false)) {
+                $batches['needs_display_asset_import'][] = $slug;
+            } else {
+                $batches['blocked_mapping_or_source'][] = $slug;
+            }
+        }
+
+        return array_map(static fn (array $slugs): array => array_slice($slugs, 0, 50), $batches);
+    }
+
+    /**
+     * @param  array<string, list<array<string, string|int>>>  $rowsBySlug
+     * @return list<array<string, mixed>>
+     */
+    private function d5RepairPresence(array $rowsBySlug): array
+    {
+        return array_map(function (string $slug) use ($rowsBySlug): array {
+            $row = $rowsBySlug[$slug][0] ?? null;
+            if (! is_array($row)) {
+                return [
+                    'slug' => $slug,
+                    'row_present' => false,
+                    'cta_ok' => false,
+                    'fermat_label_ok' => false,
+                    'links_ok' => false,
+                    'product_absent' => false,
+                    'soc_onet_ok' => false,
+                ];
+            }
+
+            $sourceRefs = $this->decodeJson($row, 'Claim_Level_Source_Refs');
+            $enLinks = $this->decodeJson($row, 'EN_Internal_Links');
+            $cnLinks = $this->decodeJson($row, 'CN_Internal_Links');
+            $schemaText = $this->encodedText([
+                $this->decodeJson($row, 'EN_Occupation_Schema_JSON'),
+                $this->decodeJson($row, 'CN_Occupation_Schema_JSON'),
+            ]);
+
+            return [
+                'slug' => $slug,
+                'row_present' => true,
+                'cta_ok' => $this->stringValue($row, 'Primary_CTA_Target_Action') === 'start_riasec_test'
+                    && $this->stringValue($row, 'Source_Page_Type') === 'career_job_detail'
+                    && $this->stringValue($row, 'Entry_Surface') === 'career_job_detail'
+                    && $this->stringValue($row, 'Subject_Slug') === $slug
+                    && $this->stringValue($row, 'Primary_Test_Slug') === 'holland-career-interest-test-riasec',
+                'fermat_label_ok' => str_contains($this->encodedText($sourceRefs), 'fermatmind')
+                    && str_contains($this->encodedText($sourceRefs), 'interpretation'),
+                'links_ok' => $this->structuredLinksOk($enLinks) && $this->structuredLinksOk($cnLinks),
+                'product_absent' => ! str_contains($schemaText, 'product'),
+                'soc_onet_ok' => preg_match('/^\\d{2}-\\d{4}$/', $this->stringValue($row, 'SOC_Code')) === 1
+                    && preg_match('/^\\d{2}-\\d{4}\\.\\d{2}$/', $this->stringValue($row, 'O_NET_Code')) === 1,
+            ];
+        }, self::D5_CONTEXT_SLUGS);
+    }
+
+    private function structuredLinksOk(mixed $links): bool
+    {
+        return is_array($links)
+            && array_key_exists('related_tests', $links)
+            && array_key_exists('related_jobs', $links)
+            && array_key_exists('related_guides', $links)
+            && array_key_exists('validation_policy', $links);
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function strategicArchitectureGapScan(): array
+    {
+        return [
+            'executive_decision' => [
+                'current_d5_d6_pipeline_aligned_with_long_term_career_architecture' => 'partially',
+                'can_proceed_without_blocking_d5_live_validation' => true,
+                'critical_before_2786_release' => [
+                    'claim permissions and graceful degradation',
+                    'trust/index gate hardening',
+                    'state machine and projection lineage',
+                ],
+            ],
+            'gap_matrix' => [
+                [
+                    'protocol_section' => '§1',
+                    'target_capability' => 'Five-dimensional scoring engine with claim permissions and graceful degradation.',
+                    'current_status' => 'Partial validator scores exist for content, authority, schema, CTA, source, link, evidence, import, and release gates.',
+                    'existing_files_or_commands' => [
+                        'app/Console/Commands/CareerValidateDisplayBatch.php',
+                        'career:validate-display-batch',
+                        'career:validate-full-display-workbook',
+                    ],
+                    'missing_components' => [
+                        'ScoringEngine5D domain service',
+                        'claim_permissions policy model',
+                        'integrity_state / graceful_degradation contract',
+                        'UI claim entitlement guard for salary, AI, and strong market claims',
+                    ],
+                    'risk_if_missing' => 'Renderer and downstream consumers may treat workbook text as equally permitted public claims even when evidence or integrity state is degraded.',
+                    'recommended_next_PR' => 'PR-D6a-protocol-freeze-and-claim-permission-spec',
+                    'priority' => 'P0 before 2786 release',
+                    'must_not_mix_with' => ['D5d frontend allowlist', 'D5e live validation', 'display asset import'],
+                ],
+                [
+                    'protocol_section' => '§2',
+                    'target_capability' => 'Occupation ontology layer with aliases and crosswalk semantics.',
+                    'current_status' => 'Occupation and occupation_crosswalks authority layer exists with selected direct us_soc / onet_soc_2019 usage and validators rejecting CN proxy, broad group, and multiple O*NET unresolved rows.',
+                    'existing_files_or_commands' => [
+                        'app/Models/Occupation.php',
+                        'app/Models/OccupationCrosswalk.php',
+                        'career:align-selected-authority-crosswalks',
+                        'career:validate-display-batch',
+                    ],
+                    'missing_components' => [
+                        'alias authority model',
+                        'formal mapping_type taxonomy for exact, trust_inheritance, functional_equivalent, local_heavy_interpretation, family_proxy, unmapped',
+                        'policy ledger for CN proxy / broad group / multiple O*NET resolution',
+                    ],
+                    'risk_if_missing' => 'Small batches can be aligned safely, but large intake may blur exact US-track mappings with proxy or family-level interpretations.',
+                    'recommended_next_PR' => 'PR-D6b-occupation-alias-crosswalk-taxonomy',
+                    'priority' => 'P0 before 2786 release',
+                    'must_not_mix_with' => ['display surface builder allowlist', 'frontend renderer', 'sitemap gates'],
+                ],
+                [
+                    'protocol_section' => '§3',
+                    'target_capability' => 'Transition Engine with explainable paths, loss, bridge steps, mobility, and confidence.',
+                    'current_status' => 'No dedicated transition engine found in current D5 display asset pipeline; related career links are validation-gated placeholders.',
+                    'existing_files_or_commands' => [
+                        'EN_Internal_Links / CN_Internal_Links workbook contract',
+                        'related_jobs requires later live validation policy',
+                    ],
+                    'missing_components' => [
+                        'transition_paths model/service',
+                        'why_this_path',
+                        'what_is_lost',
+                        'bridge_steps_90d',
+                        'mobility_score',
+                        'confidence_score',
+                    ],
+                    'risk_if_missing' => 'Career adjacency can render as generic related content rather than a trustworthy transition recommendation.',
+                    'recommended_next_PR' => 'PR-D6d-transition-engine-design-and-readonly-prototype',
+                    'priority' => 'P1 after claim/trust gates',
+                    'must_not_mix_with' => ['D5/D6 intake validator', 'authority crosswalk writes', 'frontend display allowlist'],
+                ],
+                [
+                    'protocol_section' => '§4',
+                    'target_capability' => 'Trust manifest, index policy, SEO gateway, sitemap/llms release gates, and final-public validation.',
+                    'current_status' => 'Trust manifest fields and release gate checks exist in validators; sitemap/llms remain closed for D5. Final 200, canonical, noindex, cache, schema, internal link, and CTA checks are currently operational validation steps, not a unified release gateway service.',
+                    'existing_files_or_commands' => [
+                        'career:validate-display-batch',
+                        'career:import-selected-display-assets',
+                        'D5e live validation procedure',
+                        'public sitemap.xml / llms.txt / llms-full.txt checks',
+                    ],
+                    'missing_components' => [
+                        'central index policy service',
+                        'release gate ledger',
+                        'final public URL validation command',
+                        'schema/internal-link/CTA gate aggregation',
+                    ],
+                    'risk_if_missing' => 'A page can be API/live-ready while still not release-ready; without a central gate, future batches risk accidental sitemap or llms exposure.',
+                    'recommended_next_PR' => 'PR-D6c-trust-index-gate-service',
+                    'priority' => 'P0 before sitemap/llms opening',
+                    'must_not_mix_with' => ['content import', 'display asset import', 'frontend rendering'],
+                ],
+                [
+                    'protocol_section' => '§5',
+                    'target_capability' => 'State machine with UUID, immutable context snapshots, projection lineage, recommendation snapshots, time-travel, rollback, and audit trail.',
+                    'current_status' => 'Selected import commands are guarded and idempotent, but there is no complete career display state machine or immutable projection lineage for workbook-to-asset-to-public rendering.',
+                    'existing_files_or_commands' => [
+                        'career:align-selected-authority-crosswalks',
+                        'career:import-selected-display-assets',
+                        'career_job_display_assets metadata_json',
+                    ],
+                    'missing_components' => [
+                        'career display state machine',
+                        'immutable context_snapshot',
+                        'projection_lineage',
+                        'recommendation_snapshot',
+                        'time-travel validator',
+                        'rollback/audit ledger',
+                    ],
+                    'risk_if_missing' => 'Rollback remains possible by targeted row deletion/update, but system-wide provenance and historical replay are incomplete for large-scale release governance.',
+                    'recommended_next_PR' => 'PR-D6e-state-machine-lineage-ledger',
+                    'priority' => 'P1 before broad rollout automation',
+                    'must_not_mix_with' => ['D5 live validation', 'frontend adapter changes', 'sitemap/llms release'],
+                ],
+            ],
+            'do_not_mix_list' => [
+                'Do not implement ScoringEngine5D in D5d/D5e/D6.',
+                'Do not implement Transition Engine in D5d/D5e/D6.',
+                'Do not add migrations, state-machine tables, or lineage tables in D6.',
+                'Do not change sitemap, llms, release gates, display asset rows, or frontend renderer.',
+            ],
+            'recommended_post_d6_pr_roadmap' => [
+                'protocol_freeze_PR' => 'PR-D6a-protocol-freeze-and-claim-permission-spec',
+                'scoring_claim_permission_PR' => 'PR-D6a-scoring-claim-permissions-read-model',
+                'trust_index_gate_PR' => 'PR-D6c-trust-index-gate-service',
+                'transition_engine_PR' => 'PR-D6d-transition-engine-design-and-readonly-prototype',
+                'state_machine_lineage_PR' => 'PR-D6e-state-machine-lineage-ledger',
+                'release_governance_PRs' => 'PR-D7-series-2786-release-governance',
+            ],
+        ];
+    }
+
+    /**
      * @param  list<string>  $slugs
      * @param  array{headers: list<string>, rows: list<array<string, string|int>>, total_rows: int}  $workbook
      * @param  array<string, mixed>  $extra
@@ -862,9 +1352,11 @@ final class CareerValidateDisplayBatch extends Command
             'command' => self::COMMAND_NAME,
             'validator_version' => self::VALIDATOR_VERSION,
             'source_file_basename' => basename($file),
+            'source_file_path' => $file,
             'source_file_sha256' => hash_file('sha256', $file) ?: null,
             'sheet' => self::SHEET_NAME,
             'total_rows' => $workbook['total_rows'],
+            'column_count' => count($workbook['headers']),
             'header_exact_match' => $workbook['headers'] === self::REQUIRED_HEADERS,
             'allowlisted_slugs' => $slugs,
             'validated_count' => 0,
@@ -1020,9 +1512,10 @@ final class CareerValidateDisplayBatch extends Command
 
     /**
      * @param  list<string>  $slugs
+     * @param  (callable(array<string, string|int>): void)|null  $onRow
      * @return array{headers: list<string>, rows: list<array<string, string|int>>, total_rows: int}
      */
-    private function readWorkbook(string $path, array $slugs): array
+    private function readWorkbook(string $path, array $slugs, ?callable $onRow = null): array
     {
         if (! class_exists(ZipArchive::class)) {
             throw new RuntimeException('ZipArchive extension is required to read XLSX workbooks.');
@@ -1037,7 +1530,7 @@ final class CareerValidateDisplayBatch extends Command
             $sheetPath = $this->resolveSheetPath($zip);
             $sharedStrings = $this->readSharedStrings($zip);
 
-            return $this->readSheetXml($path, $sheetPath, $sharedStrings, $slugs);
+            return $this->readSheetXml($path, $sheetPath, $sharedStrings, $slugs, $onRow);
         } finally {
             $zip->close();
         }
@@ -1107,9 +1600,10 @@ final class CareerValidateDisplayBatch extends Command
     /**
      * @param  list<string>  $sharedStrings
      * @param  list<string>  $slugs
+     * @param  (callable(array<string, string|int>): void)|null  $onRow
      * @return array{headers: list<string>, rows: list<array<string, string|int>>, total_rows: int}
      */
-    private function readSheetXml(string $workbookPath, string $sheetPath, array $sharedStrings, array $slugs): array
+    private function readSheetXml(string $workbookPath, string $sheetPath, array $sharedStrings, array $slugs, ?callable $onRow = null): array
     {
         if (! class_exists(XMLReader::class)) {
             throw new RuntimeException('XMLReader extension is required to read large XLSX workbooks.');
@@ -1119,6 +1613,7 @@ final class CareerValidateDisplayBatch extends Command
         $rows = [];
         $totalRows = 0;
         $allowlist = array_fill_keys($slugs, true);
+        $scanAllRows = $slugs === [];
         $reader = new XMLReader;
         $uri = 'zip://'.$workbookPath.'#'.$sheetPath;
         if ($reader->open($uri) !== true) {
@@ -1131,24 +1626,34 @@ final class CareerValidateDisplayBatch extends Command
                     continue;
                 }
 
-                $rowXml = $reader->readOuterXml();
-                if ($rowXml === '') {
-                    continue;
-                }
-
-                $document = $this->loadXml($rowXml);
-                $xpath = new DOMXPath($document);
-                $xpath->registerNamespace('x', 'http://schemas.openxmlformats.org/spreadsheetml/2006/main');
-                $rowNode = $document->documentElement;
-                if (! $rowNode instanceof DOMElement) {
-                    continue;
-                }
-
+                $rowNumber = (int) $reader->getAttribute('r');
+                $rowDepth = $reader->depth;
                 $cells = [];
-                foreach ($xpath->query('x:c', $rowNode) as $cellNode) {
+                while ($reader->read()) {
+                    if ($reader->nodeType === XMLReader::END_ELEMENT
+                        && $reader->localName === 'row'
+                        && $reader->depth === $rowDepth) {
+                        break;
+                    }
+
+                    if ($reader->nodeType !== XMLReader::ELEMENT || $reader->localName !== 'c') {
+                        continue;
+                    }
+
+                    $cellRef = $reader->getAttribute('r');
+                    $cellXml = $reader->readOuterXml();
+                    if ($cellRef === null || $cellXml === '') {
+                        continue;
+                    }
+
+                    $document = $this->loadXml($cellXml);
+                    $xpath = new DOMXPath($document);
+                    $xpath->registerNamespace('x', 'http://schemas.openxmlformats.org/spreadsheetml/2006/main');
+                    $cellNode = $document->documentElement;
                     if (! $cellNode instanceof DOMElement) {
                         continue;
                     }
+
                     $cells[$this->columnIndex($cellNode->getAttribute('r'))] = $this->readCellValue($xpath, $cellNode, $sharedStrings);
                 }
 
@@ -1181,11 +1686,17 @@ final class CareerValidateDisplayBatch extends Command
                 }
                 $totalRows++;
                 $slug = strtolower(trim((string) ($assoc['Slug'] ?? '')));
-                if (! isset($allowlist[$slug])) {
+                if (! $scanAllRows && ! isset($allowlist[$slug])) {
                     continue;
                 }
 
-                $assoc['_row_number'] = (int) $rowNode->getAttribute('r');
+                $assoc['_row_number'] = $rowNumber;
+                if ($onRow !== null) {
+                    $onRow($assoc);
+
+                    continue;
+                }
+
                 $rows[] = $assoc;
             }
         } finally {
