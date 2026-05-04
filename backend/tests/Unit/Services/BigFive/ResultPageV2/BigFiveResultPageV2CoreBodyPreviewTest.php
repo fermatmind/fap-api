@@ -184,6 +184,34 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $changed);
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_only_artisan_command_changes(): void
+    {
+        $changed = [
+            'backend/app/Console/Commands/CareerAlignD8AuthorityCrosswalks.php',
+            'backend/app/Console/Kernel.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\CareerAlignD8AuthorityCrosswalks;',
+            '+        CareerAlignD8AuthorityCrosswalks::class,',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
+    public function test_runtime_freeze_classifier_keeps_mbti_and_bigfive_runtime_changes_blocked(): void
+    {
+        $changed = [
+            'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2Transformer.php',
+            'backend/app/Console/Kernel.php',
+        ];
+        $kernelChangedLines = [
+            '+use App\\Console\\Commands\\MbtiPrewarmCommand;',
+            '+        MbtiPrewarmCommand::class,',
+        ];
+
+        $this->assertSame($changed, $this->mbtiImpactingRuntimeChanges($changed, '', '', $kernelChangedLines));
+    }
+
     /**
      * @return array<string,mixed>
      */
@@ -311,7 +339,103 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         exec(implode(' ', array_map('escapeshellarg', $command)), $output, $exitCode);
         $this->assertSame(0, $exitCode);
 
-        return array_values(array_unique(array_filter($output)));
+        return $this->mbtiImpactingRuntimeChanges(array_values(array_unique(array_filter($output))), $repoRoot, $baseRef);
+    }
+
+    /**
+     * @param  list<string>  $changed
+     * @param  list<string>|null  $kernelChangedLines
+     * @return list<string>
+     */
+    private function mbtiImpactingRuntimeChanges(
+        array $changed,
+        string $repoRoot,
+        string $baseRef,
+        ?array $kernelChangedLines = null,
+    ): array {
+        $impacting = [];
+
+        foreach ($changed as $file) {
+            if ($this->isCareerConsoleCommandFile($file)) {
+                continue;
+            }
+
+            if (
+                $file === 'backend/app/Console/Kernel.php'
+                && $this->kernelDiffIsCareerOnly($kernelChangedLines ?? $this->kernelChangedLines($repoRoot, $baseRef))
+            ) {
+                continue;
+            }
+
+            $impacting[] = $file;
+        }
+
+        return array_values(array_unique($impacting));
+    }
+
+    private function isCareerConsoleCommandFile(string $file): bool
+    {
+        return preg_match('#^backend/app/Console/Commands/Career[A-Za-z0-9_]*\.php$#', $file) === 1;
+    }
+
+    /**
+     * @param  list<string>  $changedLines
+     */
+    private function kernelDiffIsCareerOnly(array $changedLines): bool
+    {
+        if ($changedLines === []) {
+            return false;
+        }
+
+        foreach ($changedLines as $line) {
+            if (preg_match('/\b(MBTI|Mbti|BigFive|Big5|Prewarm|ResultPage|Report)\b/u', $line) === 1) {
+                return false;
+            }
+
+            if (preg_match('/\bCareer[A-Za-z0-9_\\\\]*\b|career:/u', $line) !== 1) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function kernelChangedLines(string $repoRoot, string $baseRef): array
+    {
+        if ($repoRoot === '' || $baseRef === '') {
+            return [];
+        }
+
+        $command = [
+            'git',
+            '-C',
+            $repoRoot,
+            'diff',
+            '--unified=0',
+            "{$baseRef}...HEAD",
+            '--',
+            'backend/app/Console/Kernel.php',
+        ];
+        exec(implode(' ', array_map('escapeshellarg', $command)), $output, $exitCode);
+        $this->assertSame(0, $exitCode);
+
+        return array_values(array_filter(array_map(
+            static function (string $line): ?string {
+                if (str_starts_with($line, '+++') || str_starts_with($line, '---')) {
+                    return null;
+                }
+
+                if (! str_starts_with($line, '+') && ! str_starts_with($line, '-')) {
+                    return null;
+                }
+
+                return substr($line, 1);
+            },
+            $output,
+        )));
     }
 
     private function mergeBaseWithMain(string $repoRoot): string
