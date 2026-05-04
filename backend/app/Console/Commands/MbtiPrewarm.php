@@ -11,6 +11,7 @@ use App\Services\Content\ClinicalComboPackLoader;
 use App\Services\Content\EnneagramPackLoader;
 use App\Services\Content\Eq60PackLoader;
 use App\Services\Content\QuestionsService;
+use App\Services\Content\RiasecPackLoader;
 use App\Services\Content\Sds20PackLoader;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
@@ -28,8 +29,10 @@ final class MbtiPrewarm extends Command
     public function handle(): int
     {
         $slug = trim((string) $this->option('slug'));
+        $rawForms = (string) $this->option('forms');
         $locales = $this->parseCsvOption((string) $this->option('locales'));
-        $forms = $this->parseCsvOption((string) $this->option('forms'));
+        $forms = $this->parseCsvOption($rawForms);
+        $usesDefaultForms = $rawForms === 'mbti_93,mbti_144';
 
         if ($slug === '' || $locales === [] || $forms === []) {
             $this->error('slug, locales and forms must not be empty.');
@@ -45,6 +48,7 @@ final class MbtiPrewarm extends Command
         $sds20PackLoader = app(Sds20PackLoader::class);
         $eq60PackLoader = app(Eq60PackLoader::class);
         $enneagramPackLoader = app(EnneagramPackLoader::class);
+        $riasecPackLoader = app(RiasecPackLoader::class);
 
         $failed = false;
 
@@ -70,7 +74,7 @@ final class MbtiPrewarm extends Command
                 $failed = true;
             }
 
-            foreach ($forms as $formCode) {
+            foreach ($this->formsForLocale($locale, $forms, $usesDefaultForms) as $formCode) {
                 $questionLocale = $this->normalizeQuestionLocale($locale);
                 $questionsRequest = Request::create('/api/v0.3/scales/MBTI/questions', 'GET', [
                     'locale' => $questionLocale,
@@ -86,7 +90,8 @@ final class MbtiPrewarm extends Command
                         $clinicalPackLoader,
                         $sds20PackLoader,
                         $eq60PackLoader,
-                        $enneagramPackLoader
+                        $enneagramPackLoader,
+                        $riasecPackLoader
                     );
                     $this->line(sprintf(
                         'questions locale=%s form=%s status=%d cache=%s',
@@ -142,6 +147,23 @@ final class MbtiPrewarm extends Command
             'zh', 'zh-cn', 'zh_cn' => 'zh-CN',
             'en', 'en-us', 'en_us' => 'en',
             default => $locale !== '' ? $locale : 'zh-CN',
+        };
+    }
+
+    /**
+     * @param  list<string>  $forms
+     * @return list<string>
+     */
+    private function formsForLocale(string $locale, array $forms, bool $usesDefaultForms): array
+    {
+        if (! $usesDefaultForms) {
+            return $forms;
+        }
+
+        return match ($this->normalizeQuestionLocale($locale)) {
+            'zh-CN' => ['mbti_93'],
+            'en' => ['mbti_144'],
+            default => $forms,
         };
     }
 }
