@@ -5159,6 +5159,92 @@
             "summary": "Initialized PR-D7e ledger entry for read-only display asset lineage and rollback reporting after PR-D7d merged."
           }
         ]
+      },
+      "PR-D8b": {
+        "repo": "fap-api",
+        "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+        "status": "local_checks_passed",
+        "branch": "codex/pr-d8b-authority-alignment-batch",
+        "commit_sha": "3971c01c9757f51b2027a2e66101360ef06c63ef",
+        "pr_url": "https://github.com/fermatmind/fap-api/pull/1130",
+        "checks": {
+          "local": [
+            {
+              "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+              "status": "passed"
+            },
+            {
+              "command": "vendor/bin/pint --test app/Console/Commands app/Services/Career app/Console/Kernel.php tests/Feature/Console tests/Unit/Services/Career docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+              "status": "passed"
+            },
+            {
+              "command": "php artisan test tests/Feature/Console tests/Unit/Services/Career",
+              "status": "passed"
+            },
+            {
+              "command": "php artisan career:align-d8-authority-crosswalks --file=/tmp/fermat_career_assets_v4_2_v9_d8a_20_repaired.xlsx --slugs=software-developers,web-developers,marketing-managers,lawyers,pharmacists,acupuncturists,business-intelligence-analysts,clinical-data-managers,budget-analysts,human-resources-managers,administrative-services-managers,advertising-and-promotions-managers,architects,air-traffic-controllers,airline-and-commercial-pilots,chemists-and-materials-scientists,clinical-laboratory-technologists-and-technicians,community-health-workers,compensation-and-benefits-managers,career-and-technical-education-teachers --dry-run --json",
+              "status": "passed",
+              "details": "Local DB unavailable path returned decision=pass, validated_count=20, would_create_occupation_count=20, would_create_crosswalk_count=40, did_write=false."
+            },
+            {
+              "command": "git diff --check",
+              "status": "passed"
+            },
+            {
+              "command": "git diff --cached --check",
+              "status": "passed"
+            }
+          ],
+          "github": [
+            {
+              "name": "verify-mbti-legacy",
+              "status": "failed",
+              "details": "Tests\\Unit\\Services\\BigFive\\ResultPageV2\\BigFiveResultPageV2CoreBodyPreviewTest asserts no changed runtime files and detected backend/app/Console/Commands/CareerAlignSelectedAuthorityCrosswalks.php before the D8b recovery refactor."
+            },
+            {
+              "name": "verify-mbti-v2",
+              "status": "failed",
+              "details": "Same BigFive runtime path guard failure before the D8b recovery refactor isolated the D8 command."
+            }
+          ]
+        },
+        "failure_reason": "",
+        "resume_policy": "manual_only",
+        "merged_at": "",
+        "remote_branch_deleted": false,
+        "local_cleanup_executed": false,
+        "history": [
+          {
+            "at": "2026-05-04T15:30:00+08:00",
+            "status": "in_progress",
+            "summary": "Initialized PR-D8b ledger entry for guarded D8 authority occupation and SOC/O*NET crosswalk alignment after D8a workbook artifact repair."
+          },
+          {
+            "at": "2026-05-04T15:42:00+08:00",
+            "status": "local_checks_passed",
+            "summary": "D8b scoped implementation and broad local checks passed; real D8 repaired workbook dry-run reports +20 occupations and +40 crosswalks without writes."
+          },
+          {
+            "at": "2026-05-04T15:44:00+08:00",
+            "status": "committed",
+            "summary": "Committed D8b authority alignment implementation on codex/pr-d8b-authority-alignment-batch."
+          },
+          {
+            "at": "2026-05-04T15:48:00+08:00",
+            "status": "pr_open",
+            "summary": "Opened draft PR #1130 for D8b authority alignment batch."
+          },
+          {
+            "at": "2026-05-04T15:56:00+08:00",
+            "status": "github_checks_failed",
+            "summary": "PR #1130 CI failed in verify-mbti-legacy and verify-mbti-v2 due BigFive runtime changed-files guard detecting the scoped D8b command file."
+          },
+          {
+            "at": "2026-05-04T17:05:00+08:00",
+            "status": "local_checks_passed",
+            "summary": "Recovered PR #1130 by restoring CareerAlignSelectedAuthorityCrosswalks.php to main, adding isolated career:align-d8-authority-crosswalks command, and passing D8 workbook dry-run with validated_count=20, would_create_occupation_count=20, would_create_crosswalk_count=40, did_write=false."
+          }
+        ]
       }
     }
   }
