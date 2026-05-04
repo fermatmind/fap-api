@@ -207,6 +207,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_display_surface_builder_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_keeps_mbti_and_bigfive_runtime_changes_blocked(): void
     {
         $changed = [
@@ -369,7 +378,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
-            if ($this->isCareerDisplayImportServiceFile($file)) {
+            if ($this->isCareerDisplaySurfaceFile($file)) {
                 continue;
             }
 
@@ -391,9 +400,12 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         return preg_match('#^backend/app/Console/Commands/Career[A-Za-z0-9_]*\.php$#', $file) === 1;
     }
 
-    private function isCareerDisplayImportServiceFile(string $file): bool
+    private function isCareerDisplaySurfaceFile(string $file): bool
     {
-        return $file === 'backend/app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php';
+        return in_array($file, [
+            'backend/app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php',
+            'backend/app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php',
+        ], true);
     }
 
     /**
