@@ -258,16 +258,15 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
             'interpretation' => ['label' => 'FermatMind interpretation', 'url' => 'https://www.onetonline.org/link/details/15-2051.00'],
             'jobs' => ['url' => 'https://www.bls.gov/emp/', 'claim' => 'jobs employment'],
         ]);
-        $row['EN_Internal_Links'] = $this->encodeJson([
-            'related_tests' => ['/en/tests/holland-career-interest-test-riasec'],
-            'validation_policy' => ['render_policy' => 'hide_or_plain_text_if_unvalidated'],
-            'tracking_json' => ['do_not_show' => true],
+        $row['EN_Comparison_Block'] = $this->encodeJson([
+            'release_gates' => ['sitemap' => false],
         ]);
         $workbook = $this->writeWorkbook([$row]);
 
         [$exitCode, $report] = $this->runImport($workbook, 'data-scientists');
 
         $this->assertSame(1, $exitCode);
+        $this->assertContains('page_payload_json.page.en.adjacent_career_comparison_table.release_gates', data_get($report, 'items.0.payload_summary.public_payload_forbidden_keys_found', []));
         $errors = implode(' ', $report['errors']);
         $this->assertStringContainsString('EN_Occupation_Schema_JSON must not include Product schema.', $errors);
         $this->assertStringContainsString('Forbidden public payload keys found', $errors);

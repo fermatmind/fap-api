@@ -33,6 +33,33 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         'dentists' => ['soc' => '29-1021', 'onet' => '29-1021.00', 'title' => 'Dentists'],
     ];
 
+    private const COMPONENT_ORDER = [
+        'breadcrumb',
+        'hero',
+        'fermat_decision_card',
+        'primary_cta',
+        'career_snapshot_primary_locale',
+        'career_snapshot_secondary_locale',
+        'fit_decision_checklist',
+        'riasec_fit_block',
+        'personality_fit_block',
+        'definition_block',
+        'responsibilities_block',
+        'work_context_block',
+        'market_signal_card',
+        'adjacent_career_comparison_table',
+        'ai_impact_table',
+        'career_risk_cards',
+        'contract_project_risk_block',
+        'next_steps_block',
+        'faq_block',
+        'related_next_pages',
+        'source_card',
+        'review_validity_card',
+        'boundary_notice',
+        'final_cta',
+    ];
+
     public function test_it_adds_display_surface_for_eligible_actors_asset(): void
     {
         $occupation = $this->seedCompiledOccupation('actors');
@@ -51,10 +78,12 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             ->assertJsonPath('display_surface_v1.page.content.hero.title', '演员职业判断');
 
         $this->assertContains('fermat_decision_card', $response->json('display_surface_v1.component_order'));
+        $this->assertCount(24, $response->json('display_surface_v1.component_order'));
         $this->assertIsArray($response->json('display_surface_v1.page.content.hero'));
 
         $encoded = json_encode($response->json('display_surface_v1'), JSON_THROW_ON_ERROR);
         $this->assertStringNotContainsString('release_gate', $encoded);
+        $this->assertStringNotContainsString('release_gates', $encoded);
         $this->assertStringNotContainsString('qa_risk', $encoded);
         $this->assertStringNotContainsString('admin_review_state', $encoded);
         $this->assertStringNotContainsString('tracking_json', $encoded);
@@ -80,6 +109,7 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
 
             $encoded = json_encode($response->json('display_surface_v1'), JSON_THROW_ON_ERROR);
             $this->assertStringNotContainsString('release_gate', $encoded);
+            $this->assertStringNotContainsString('release_gates', $encoded);
             $this->assertStringNotContainsString('qa_risk', $encoded);
             $this->assertStringNotContainsString('admin_review_state', $encoded);
             $this->assertStringNotContainsString('tracking_json', $encoded);
@@ -114,9 +144,11 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
                 ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
 
             $this->assertContains('fermat_decision_card', $response->json('display_surface_v1.component_order'));
+            $this->assertCount(24, $response->json('display_surface_v1.component_order'));
 
             $encoded = json_encode($response->json('display_surface_v1'), JSON_THROW_ON_ERROR);
             $this->assertStringNotContainsString('release_gate', $encoded);
+            $this->assertStringNotContainsString('release_gates', $encoded);
             $this->assertStringNotContainsString('qa_risk', $encoded);
             $this->assertStringNotContainsString('admin_review_state', $encoded);
             $this->assertStringNotContainsString('tracking_json', $encoded);
@@ -211,11 +243,17 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
             'asset_type' => 'career_job_public_display',
             'asset_role' => 'formal_pilot_master',
             'status' => 'ready_for_pilot',
-            'component_order_json' => ['hero', 'fermat_decision_card', 'market_signal_card', 'evidence_container'],
+            'component_order_json' => self::COMPONENT_ORDER,
             'page_payload_json' => [
                 'zh' => [
                     'hero' => ['title' => '演员职业判断'],
-                    'release_gate' => ['do_not_show' => true],
+                    'boundary_notice' => [
+                        'release_gate' => ['do_not_show' => true],
+                        'release_gates' => [
+                            'sitemap' => false,
+                            'llms' => false,
+                        ],
+                    ],
                 ],
                 'en' => [
                     'hero' => ['title' => 'Actor career fit'],
