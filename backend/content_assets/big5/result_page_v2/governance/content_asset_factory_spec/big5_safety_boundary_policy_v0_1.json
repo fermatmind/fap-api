@@ -1,0 +1,97 @@
+{
+  "schema_key": "big5_safety_boundary_policy_v0_1",
+  "schema_version": "fap.big5.safety_boundary_policy.v0_1_1",
+  "package_key": "B5-CONTENT-0",
+  "package_version": "v0.1.1",
+  "locale": "zh-CN",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "hard_boundaries": [
+    "Big Five 是连续人格特质，不是固定人格类型。",
+    "画像名只能作为辅助理解标签，不可作为用户身份判定。",
+    "不得用于医学诊断、心理治疗、招聘筛选或录用建议。",
+    "不得声称准确率、外部效度或科学证明用户是什么人。",
+    "不得把 Big Five 分数与 MBTI、九型或其他量表分数直接比较。",
+    "不得让用户自我确认覆盖测量结果。",
+    "不得在 frontend fallback 中发明人格解释。",
+    "不得把 selector metadata 渲染给用户。"
+  ],
+  "banned_body_phrases": [
+    "你就是",
+    "你属于某一型",
+    "固定人格类型",
+    "注定",
+    "天生只能",
+    "准确率",
+    "外部效度",
+    "科学证明你",
+    "临床诊断",
+    "医学判断",
+    "心理疾病",
+    "招聘筛选",
+    "适合录用",
+    "不适合录用",
+    "最终判定",
+    "最终人格",
+    "这个组合证明你"
+  ],
+  "internal_metadata_must_not_render": [
+    "frontend_fallback",
+    "internal_metadata",
+    "selector_basis",
+    "review_required",
+    "source_reference",
+    "[object Object]",
+    "deferred_to_future",
+    "policy_not_shipped"
+  ],
+  "qa_state_machine": [
+    {
+      "status": "draft",
+      "ready_for_pilot": false
+    },
+    {
+      "status": "source_mapped",
+      "ready_for_pilot": false
+    },
+    {
+      "status": "editorial_reviewed",
+      "ready_for_pilot": false
+    },
+    {
+      "status": "safety_reviewed",
+      "ready_for_pilot": false
+    },
+    {
+      "status": "mapping_qa_passed",
+      "ready_for_pilot": false
+    },
+    {
+      "status": "render_preview_passed",
+      "ready_for_pilot": false
+    },
+    {
+      "status": "ready_for_pilot",
+      "ready_for_pilot": true
+    },
+    {
+      "status": "blocked",
+      "ready_for_pilot": false
+    },
+    {
+      "status": "deprecated",
+      "ready_for_pilot": false
+    }
+  ],
+  "ready_for_pilot_hard_gate": {
+    "coverage_qa_passed": true,
+    "safety_qa_passed": true,
+    "editorial_qa_passed": true,
+    "mapping_qa_passed": true,
+    "rendered_preview_qa_passed": true,
+    "repair_log_all_closed": true,
+    "no_p0_blockers": true,
+    "otherwise_ready_for_pilot": false,
+    "production_use_allowed_default": false
+  }
+}

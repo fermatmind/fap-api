@@ -1,0 +1,157 @@
+{
+  "schema_key": "big5_generation_batch_plan_v0_1",
+  "schema_version": "fap.big5.generation_batch_plan.v0_1_1",
+  "package_key": "B5-CONTENT-0",
+  "package_version": "v0.1.1",
+  "locale": "zh-CN",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "long_term_goal": "建立 3125 个 Big Five 五维组合的内容资产矩阵。",
+  "phase_0": "B5-CONTENT-0 only defines structure and QA templates; no prose generation.",
+  "deferred_to_b5_a_lite": [
+    "source authority map",
+    "runtime layer decision",
+    "current rendered anti-target terms",
+    "production/live owner declaration"
+  ],
+  "do_not_start_with": [
+    "3125 full reports",
+    "runtime integration",
+    "frontend rendering",
+    "selector runtime",
+    "production import"
+  ],
+  "batch_sequence": [
+    {
+      "batch_key": "B5-CONTENT-0",
+      "name": "内容资产结构规范",
+      "goal": "schema / key / section / safety / batch plan / QA templates",
+      "estimated_assets": "files only",
+      "runtime": "no"
+    },
+    {
+      "batch_key": "B5-A-lite",
+      "name": "Source Authority + Mapping",
+      "goal": "separate governance package for source authority, runtime decision and anti-target terms",
+      "estimated_assets": "4 governance files",
+      "runtime": "no"
+    },
+    {
+      "batch_key": "B5-B1",
+      "name": "O59 Canonical Core Body",
+      "goal": "O59/C32/E20/A55/N68 canonical 8-section body staging import",
+      "estimated_assets": "40-80 assets",
+      "runtime": "no"
+    },
+    {
+      "batch_key": "B5-B1-QA",
+      "name": "O59 Rendered Preview QA",
+      "goal": "desktop/mobile/PDF rendered QA for one canonical profile",
+      "estimated_assets": "4-6 QA files",
+      "runtime": "no"
+    },
+    {
+      "batch_key": "B5-B2",
+      "name": "8-12 Canonical Profiles",
+      "goal": "expand canonical deep body families",
+      "estimated_assets": "300-600 assets",
+      "runtime": "no"
+    },
+    {
+      "batch_key": "B5-C",
+      "name": "5-band Trait Assets",
+      "goal": "O/C/E/A/N x 5 bands",
+      "estimated_assets": "150-200 assets",
+      "runtime": "no"
+    },
+    {
+      "batch_key": "B5-D",
+      "name": "Coupling / Synergy Assets",
+      "goal": "binary and triple pattern dynamics",
+      "estimated_assets": "50-100 assets",
+      "runtime": "no"
+    },
+    {
+      "batch_key": "B5-E",
+      "name": "Facet Precision Assets",
+      "goal": "facet glossary / reframe / anomaly",
+      "estimated_assets": "90-150 assets",
+      "runtime": "no"
+    },
+    {
+      "batch_key": "B5-F",
+      "name": "Scenario Action Matrix",
+      "goal": "work / relationships / stress / growth actions",
+      "estimated_assets": "120-180 assets",
+      "runtime": "no"
+    },
+    {
+      "batch_key": "B5-G",
+      "name": "Result State Assets",
+      "goal": "low quality / flat / mixed / norm unavailable",
+      "estimated_assets": "50-80 assets",
+      "runtime": "no"
+    },
+    {
+      "batch_key": "B5-H",
+      "name": "Rendered Preview QA",
+      "goal": "desktop / mobile / PDF / share QA",
+      "estimated_assets": "20-50 cases",
+      "runtime": "no"
+    },
+    {
+      "batch_key": "B5-I",
+      "name": "Lifecycle Mapping",
+      "goal": "history / compare / pdf / shell tools mapping",
+      "estimated_assets": "50-100 assets",
+      "runtime": "later"
+    },
+    {
+      "batch_key": "B5-J",
+      "name": "Production Import Governance",
+      "goal": "merge preview / import policy",
+      "estimated_assets": "5-10 files",
+      "runtime": "later"
+    },
+    {
+      "batch_key": "B5-K",
+      "name": "3125 Matrix Expansion",
+      "goal": "all combination rows reference approved assets, not full reports",
+      "estimated_assets": "3125 rows",
+      "runtime": "later"
+    }
+  ],
+  "b5_b1_first_principle": {
+    "canonical_scores_0_100": {
+      "O": 59,
+      "C": 32,
+      "E": 20,
+      "A": 55,
+      "N": 68
+    },
+    "canonical_combination_key": "O3_C2_E2_A3_N4",
+    "profile_label": "敏锐的独立思考者",
+    "must_not_generalize_to_all_users": true,
+    "runtime_use": "staging_only"
+  },
+  "3125_expansion_rule": {
+    "do_not_generate_3125_reports": true,
+    "generate_3125_matrix_rows": true,
+    "each_row_should_reference_assets": true,
+    "each_row_should_not_contain_full_report": true,
+    "matrix_row_fields": [
+      "combination_key",
+      "domain_bands",
+      "display_band_labels",
+      "canonical_family",
+      "primary_assets",
+      "secondary_assets",
+      "facet_rules",
+      "action_rules",
+      "result_state_rules",
+      "safety_rules",
+      "fallback_policy",
+      "ready_for_pilot"
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "package_key": "B5-A-lite",
+  "package_name": "Big Five V2 Source Authority + Module Mapping Governance",
+  "version": "v0.1",
+  "locale": "zh-CN",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_b5_b1": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "created_at_utc": "2026-05-04T09:33:36.564735Z",
+  "schema_key": "big5_b5_a_lite_qa_summary_v0_1",
+  "source_authority_defined": true,
+  "module_mapping_defined": true,
+  "runtime_decision_defined": true,
+  "anti_target_terms_defined": true,
+  "b5_b1_readiness_defined": true,
+  "blocking_issues": [],
+  "non_blocking_notes": [
+    "B5-B1 still must create O59 canonical core body assets separately.",
+    "325 selector-ready assets remain staging-only and are not production body.",
+    "QA / Policy pack remains staging-only and is not body copy.",
+    "Rendered preview QA is required before any production runtime decision."
+  ],
+  "next_recommended_batch": "B5-B1",
+  "qa_gates": {
+    "coverage_QA_required_for_runtime": true,
+    "safety_QA_required_for_runtime": true,
+    "editorial_QA_required_for_runtime": true,
+    "mapping_QA_required_for_runtime": true,
+    "rendered_preview_QA_required_for_runtime": true,
+    "repair_log_closed_required_for_runtime": true,
+    "no_P0_blockers_required_for_runtime": true
+  }
+}

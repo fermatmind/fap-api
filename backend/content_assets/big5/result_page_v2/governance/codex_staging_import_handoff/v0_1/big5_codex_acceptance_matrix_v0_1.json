@@ -1,0 +1,138 @@
+{
+  "schema": "fap.big5.codex.acceptance_matrix.v0.1",
+  "created_at_utc": "2026-05-05T00:47:28+00:00",
+  "rows": [
+    {
+      "priority": "P0-1",
+      "task_key": "staging_import_all_assets",
+      "task_name": "导入 / 校验 B5-A-lite + B5-B1 + B5-B1-Preview + B5-CONTENT-0~7 到 fap-api staging content_assets",
+      "target_repo": "fap-api",
+      "allowed_mode": "execute",
+      "acceptance": [
+        "all packages imported under staging content_assets paths",
+        "no runtime/app/content_packs/frontend files changed",
+        "JSON/JSONL/CSV/SHA checks pass",
+        "runtime_use remains staging_only or not_runtime",
+        "production_use_allowed remains false"
+      ],
+      "blocked_by": [],
+      "must_not": [
+        "runtime_wire",
+        "production_import",
+        "body_copy_generation"
+      ]
+    },
+    {
+      "priority": "P0-2",
+      "task_key": "o59_rendered_preview_contract_test",
+      "task_name": "执行 fap-web O59 rendered preview contract test",
+      "target_repo": "fap-web",
+      "allowed_mode": "execute",
+      "acceptance": [
+        "can read O59 fixture",
+        "valid payload renders via Big5 V2 preview path",
+        "must-render visible terms present",
+        "P0 must-not-render terms absent",
+        "tested/pending/passed/failed surface structure emitted",
+        "unsupported PDF/share/history/compare surfaces are pending, not passed"
+      ],
+      "blocked_by": [
+        "P0-1"
+      ],
+      "must_not": [
+        "runtime_wire",
+        "backend_modification",
+        "new_body_copy"
+      ]
+    },
+    {
+      "priority": "P1-1",
+      "task_key": "selector_reference_consistency_scan",
+      "task_name": "扫描 325 selector-ready assets 与 B5-CONTENT-1~6 的引用一致性",
+      "target_repo": "fap-api",
+      "allowed_mode": "scan",
+      "acceptance": [
+        "selector asset keys parsed",
+        "references to trait/coupling/facet/profile/scenario routes checked",
+        "naming drift report generated",
+        "no runtime changes"
+      ],
+      "blocked_by": [
+        "P0-1"
+      ],
+      "must_not": [
+        "runtime_wire",
+        "production_import"
+      ]
+    },
+    {
+      "priority": "P1-2",
+      "task_key": "selector_qa_policy_fix",
+      "task_name": "修复 Golden Cases + Selection Policy + Conflict Resolution QA policy pack",
+      "target_repo": "fap-api",
+      "allowed_mode": "execute",
+      "acceptance": [
+        "production O59 golden case added",
+        "golden_group added",
+        "slot naming drift resolved",
+        "rendered regression banned scan expanded",
+        "policy remains staging_only"
+      ],
+      "blocked_by": [
+        "P1-1"
+      ],
+      "must_not": [
+        "treat_as_body_assets",
+        "runtime_wire"
+      ]
+    },
+    {
+      "priority": "P1-3",
+      "task_key": "b5_h_rendered_preview_expansion",
+      "task_name": "扩展 B5-H rendered preview QA",
+      "target_repo": "fap-web + fap-api",
+      "allowed_mode": "execute",
+      "acceptance": [
+        "desktop/mobile/PDF/share/history/compare QA plan expanded",
+        "pending_surface policy respected",
+        "no unsupported surface marked passed"
+      ],
+      "blocked_by": [
+        "P0-2"
+      ],
+      "must_not": [
+        "production_runtime",
+        "new_content_body"
+      ]
+    },
+    {
+      "priority": "P2",
+      "task_key": "future_b5_b2_cms_runtime",
+      "task_name": "再考虑 B5-B2 canonical thick body expansion、CMS import、runtime composer、production import governance",
+      "target_repo": "fap-api + fap-web",
+      "allowed_mode": "future_only",
+      "acceptance": [
+        "only start after P0/P1 gates",
+        "requires explicit user approval",
+        "requires production import policy"
+      ],
+      "blocked_by": [
+        "P0-1",
+        "P0-2",
+        "P1-1",
+        "P1-2",
+        "P1-3"
+      ],
+      "must_not": [
+        "start_in_this_handoff"
+      ]
+    }
+  ],
+  "final_status": {
+    "ready_for_codex_execution": true,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  }
+}

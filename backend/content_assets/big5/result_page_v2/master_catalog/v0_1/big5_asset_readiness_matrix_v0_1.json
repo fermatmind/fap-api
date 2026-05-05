@@ -1,0 +1,238 @@
+{
+  "catalog_version": "v0.1",
+  "rules": {
+    "ready_for_pilot_default": false,
+    "ready_for_pilot_requires_rendered_qa_passed": true,
+    "ready_for_runtime_must_be_false": true,
+    "ready_for_production_must_be_false": true,
+    "production_use_allowed_must_be_false": true,
+    "runtime_use_allowed_values": [
+      "staging_only",
+      "not_runtime"
+    ]
+  },
+  "rows": [
+    {
+      "package_key": "B5-CONTENT-0",
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "runtime_use": "not_runtime",
+      "production_use_allowed": false,
+      "required_next_qa": [
+        "schema consistency QA",
+        "package checksum QA"
+      ],
+      "blocking_reasons": [
+        "governance only; not runtime content"
+      ]
+    },
+    {
+      "package_key": "B5-A-lite",
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "runtime_use": "not_runtime",
+      "production_use_allowed": false,
+      "required_next_qa": [
+        "source authority QA",
+        "mapping QA"
+      ],
+      "blocking_reasons": [
+        "governance only; not runtime content"
+      ]
+    },
+    {
+      "package_key": "B5-B1-O59-core-body",
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "required_next_qa": [
+        "rendered preview QA",
+        "safety QA",
+        "editorial QA"
+      ],
+      "blocking_reasons": [
+        "rendered preview execution not passed",
+        "not generalized to all users"
+      ]
+    },
+    {
+      "package_key": "B5-B1-Preview",
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "runtime_use": "not_runtime",
+      "production_use_allowed": false,
+      "required_next_qa": [
+        "actual fap-web rendered preview execution"
+      ],
+      "blocking_reasons": [
+        "definitions only; no rendered execution yet"
+      ]
+    },
+    {
+      "package_key": "B5-B1-Preview-Codex-Handoff",
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "runtime_use": "not_runtime",
+      "production_use_allowed": false,
+      "required_next_qa": [
+        "Codex fap-web execution",
+        "pending surface accounting"
+      ],
+      "blocking_reasons": [
+        "handoff only; no test execution yet"
+      ]
+    },
+    {
+      "package_key": "B5-CONTENT-1",
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "required_next_qa": [
+        "asset review",
+        "rendered preview when selected"
+      ],
+      "blocking_reasons": [
+        "not imported",
+        "not rendered QA passed"
+      ]
+    },
+    {
+      "package_key": "B5-CONTENT-2",
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "required_next_qa": [
+        "asset review",
+        "reference consistency QA"
+      ],
+      "blocking_reasons": [
+        "not rendered QA passed"
+      ]
+    },
+    {
+      "package_key": "B5-CONTENT-3",
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "required_next_qa": [
+        "facet inference boundary QA",
+        "rendered facet preview QA"
+      ],
+      "blocking_reasons": [
+        "not rendered QA passed"
+      ]
+    },
+    {
+      "package_key": "B5-CONTENT-4",
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "required_next_qa": [
+        "profile label safety QA",
+        "route consistency QA"
+      ],
+      "blocking_reasons": [
+        "not rendered QA passed",
+        "not runtime mapping approved"
+      ]
+    },
+    {
+      "package_key": "B5-CONTENT-5",
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "required_next_qa": [
+        "share safety QA",
+        "surface-level action QA"
+      ],
+      "blocking_reasons": [
+        "not rendered QA passed",
+        "not scenario selector approved"
+      ]
+    },
+    {
+      "package_key": "B5-CONTENT-6",
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "required_next_qa": [
+        "route reference consistency QA",
+        "semantic consistency QA",
+        "rendered preview of representative rows"
+      ],
+      "blocking_reasons": [
+        "route matrix not connected",
+        "selector QA not passed"
+      ]
+    },
+    {
+      "package_key": "selector-ready-assets-v0.3-p0-full",
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "required_next_qa": [
+        "reference consistency with B5-CONTENT-1~6",
+        "coverage warning review",
+        "rendered regression QA"
+      ],
+      "blocking_reasons": [
+        "runtime_ready=false",
+        "known coverage warnings",
+        "not reconciled with B5-CONTENT-1~6"
+      ]
+    },
+    {
+      "package_key": "selector-qa-policy-v0.1",
+      "ready_for_asset_review": false,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "required_next_qa": [
+        "add O59 production canonical case",
+        "fix golden_group",
+        "fix slot naming",
+        "expand banned terms"
+      ],
+      "blocking_reasons": [
+        "missing O59 canonical case",
+        "golden_group missing",
+        "slot/module naming drift",
+        "banned scan incomplete"
+      ]
+    }
+  ]
+}

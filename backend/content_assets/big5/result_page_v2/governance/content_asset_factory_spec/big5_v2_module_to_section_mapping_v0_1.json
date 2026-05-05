@@ -1,0 +1,156 @@
+{
+  "schema_key": "big5_v2_module_to_section_mapping_v0_1",
+  "schema_version": "fap.big5.v2_module_to_section_mapping.v0_1_1",
+  "package_key": "B5-CONTENT-0",
+  "package_version": "v0.1.1",
+  "locale": "zh-CN",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "runtime_skeleton": "big5_8_section",
+  "runtime_sections": [
+    "hero_summary",
+    "domains_overview",
+    "domain_deep_dive",
+    "facet_details",
+    "core_portrait",
+    "norms_comparison",
+    "action_plan",
+    "methodology_and_access"
+  ],
+  "modules": [
+    {
+      "module_key": "module_00_trust_bar",
+      "module_name_zh": "顶部信任条",
+      "primary_section": "methodology_and_access",
+      "secondary_surface": "shell_trust_strip",
+      "b5_b1_role": "boundary_and_non_type_trust_copy",
+      "allowed_in_b5_b1": true,
+      "forbidden_use": [
+        "diagnosis_claim",
+        "hiring_claim",
+        "hard_type_claim"
+      ],
+      "notes": "可映射为方法边界，也可在 shell 层做短信任条。"
+    },
+    {
+      "module_key": "module_01_hero",
+      "module_name_zh": "首屏快读卡",
+      "primary_section": "hero_summary",
+      "secondary_surface": null,
+      "b5_b1_role": "result_entry_and_snapshot",
+      "allowed_in_b5_b1": true,
+      "forbidden_use": [
+        "full_deep_body"
+      ],
+      "notes": "用于结果摘要入口层。"
+    },
+    {
+      "module_key": "module_02_quick_understanding",
+      "module_name_zh": "三分钟理解版",
+      "primary_section": "hero_summary",
+      "secondary_surface": "core_portrait",
+      "b5_b1_role": "quick_logic_and_core_tension",
+      "allowed_in_b5_b1": true,
+      "forbidden_use": [
+        "replace_domain_deep_dive"
+      ],
+      "notes": "承接首屏并可进入人格总览。"
+    },
+    {
+      "module_key": "module_03_trait_deep_dive",
+      "module_name_zh": "五维分数深解",
+      "primary_section": "domain_deep_dive",
+      "secondary_surface": null,
+      "b5_b1_role": "trait_first_deep_explanation",
+      "allowed_in_b5_b1": true,
+      "forbidden_use": [
+        "facet_only_explanation"
+      ],
+      "notes": "五维深解主体。"
+    },
+    {
+      "module_key": "module_04_coupling",
+      "module_name_zh": "核心动力耦合",
+      "primary_section": "core_portrait",
+      "secondary_surface": null,
+      "b5_b1_role": "primary_and_secondary_dynamics",
+      "allowed_in_b5_b1": true,
+      "forbidden_use": [
+        "hard_profile_type"
+      ],
+      "notes": "用于组合动力和主轴收束。"
+    },
+    {
+      "module_key": "module_05_facet_reframe",
+      "module_name_zh": "Facet 反直觉发现",
+      "primary_section": "facet_details",
+      "secondary_surface": null,
+      "b5_b1_role": "facet_reframe_and_anomaly",
+      "allowed_in_b5_b1": true,
+      "forbidden_use": [
+        "percentile_list_only"
+      ],
+      "notes": "facet_details 主体。"
+    },
+    {
+      "module_key": "module_06_application_matrix",
+      "module_name_zh": "现实应用矩阵",
+      "primary_section": "action_plan",
+      "secondary_surface": null,
+      "b5_b1_role": "work_relationship_stress_growth_actions",
+      "allowed_in_b5_b1": true,
+      "forbidden_use": [
+        "generic_chicken_soup"
+      ],
+      "notes": "四场景行动矩阵。"
+    },
+    {
+      "module_key": "module_07_collaboration_manual",
+      "module_name_zh": "协作说明书",
+      "primary_section": "action_plan",
+      "secondary_surface": "lifecycle",
+      "b5_b1_role": "collaboration_guidance_partial",
+      "allowed_in_b5_b1": true,
+      "forbidden_use": [
+        "force_as_main_deep_body"
+      ],
+      "notes": "可部分进入 action_plan，完整承接归 lifecycle。"
+    },
+    {
+      "module_key": "module_08_share_save",
+      "module_name_zh": "分享与保存",
+      "primary_section": "lifecycle",
+      "secondary_surface": "shell_tools",
+      "b5_b1_role": "not_main_body",
+      "allowed_in_b5_b1": false,
+      "forbidden_use": [
+        "core_body"
+      ],
+      "notes": "偏 lifecycle / shell tools，不是 B5-B1 主正文。"
+    },
+    {
+      "module_key": "module_09_feedback_data_flywheel",
+      "module_name_zh": "反馈与数据飞轮",
+      "primary_section": "lifecycle",
+      "secondary_surface": "observation",
+      "b5_b1_role": "not_main_body",
+      "allowed_in_b5_b1": false,
+      "forbidden_use": [
+        "core_body"
+      ],
+      "notes": "偏 lifecycle / observation，不是 B5-B1 主正文。"
+    },
+    {
+      "module_key": "module_10_method_privacy",
+      "module_name_zh": "方法、边界与隐私",
+      "primary_section": "methodology_and_access",
+      "secondary_surface": null,
+      "b5_b1_role": "method_boundary_privacy",
+      "allowed_in_b5_b1": true,
+      "forbidden_use": [
+        "diagnosis_or_accuracy_claim"
+      ],
+      "notes": "方法与边界说明。"
+    }
+  ]
+}

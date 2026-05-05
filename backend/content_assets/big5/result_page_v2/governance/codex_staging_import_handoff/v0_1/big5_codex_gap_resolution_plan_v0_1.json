@@ -1,0 +1,67 @@
+{
+  "schema": "fap.big5.codex.gap_resolution_plan.v0.1",
+  "created_at_utc": "2026-05-05T00:47:28+00:00",
+  "gaps": [
+    {
+      "gap_key": "b5_b2_thick_body_not_generated",
+      "severity": "P0",
+      "description": "B5-B2 厚正文尚未生成；only O59 canonical has B5-B1 core body.",
+      "recommended_batch": "future B5-B2",
+      "codex_action": "do_not_generate_now; keep as next content milestone"
+    },
+    {
+      "gap_key": "rendered_preview_needs_real_fap_web_validation",
+      "severity": "P0",
+      "description": "B5-B1 rendered preview QA pack exists, but actual fap-web rendered preview test still needs execution.",
+      "recommended_batch": "P0-2 fap-web O59 rendered preview contract test",
+      "codex_action": "execute contract test if harness exists; mark unsupported surfaces pending"
+    },
+    {
+      "gap_key": "golden_cases_policy_needs_p0_fix",
+      "severity": "P0",
+      "description": "Golden cases still need production canonical case, golden_group, slot naming repairs, and rendered regression scan expansion.",
+      "recommended_batch": "P1-2 selector QA policy fix",
+      "codex_action": "scan/fix staging QA policy only after P0 import and O59 rendered preview"
+    },
+    {
+      "gap_key": "runtime_composer_not_wired",
+      "severity": "P0",
+      "description": "Runtime composer is intentionally not connected to staging assets.",
+      "recommended_batch": "future runtime composer after QA gates",
+      "codex_action": "do not wire runtime in handoff"
+    },
+    {
+      "gap_key": "production_import_policy_not_approved",
+      "severity": "P0",
+      "description": "No production import policy approval; all packages remain production_use_allowed=false.",
+      "recommended_batch": "future production import governance",
+      "codex_action": "keep production flags false"
+    },
+    {
+      "gap_key": "selector_assets_reference_consistency_pending",
+      "severity": "P1",
+      "description": "325 selector assets need consistency scan against B5-CONTENT-1~6 references.",
+      "recommended_batch": "P1-1 selector reference consistency scan",
+      "codex_action": "generate scan-only consistency report"
+    },
+    {
+      "gap_key": "surface_qa_pdf_share_history_compare_pending",
+      "severity": "P1",
+      "description": "PDF/share/history/compare need surface-level rendered QA or pending_surface status.",
+      "recommended_batch": "P1-3 B5-H rendered preview QA expansion",
+      "codex_action": "test if harness exists; otherwise mark pending"
+    },
+    {
+      "gap_key": "cms_import_pipeline_not_connected",
+      "severity": "P1",
+      "description": "CMS import pipeline is not connected; staged assets are not CMS/runtime content.",
+      "recommended_batch": "future CMS import",
+      "codex_action": "do not import CMS now"
+    }
+  ],
+  "policy": {
+    "unresolved_p0_blocks_pilot": true,
+    "unresolved_p0_blocks_runtime": true,
+    "unresolved_p0_blocks_production": true
+  }
+}

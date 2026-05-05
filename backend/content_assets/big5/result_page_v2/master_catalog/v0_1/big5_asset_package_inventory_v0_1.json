@@ -1,0 +1,639 @@
+{
+  "catalog_version": "v0.1",
+  "created_at_utc": "2026-05-05T00:28:59Z",
+  "inventory_rows": [
+    {
+      "package_key": "B5-CONTENT-0",
+      "package_name": "内容资产结构规范",
+      "version": "v0.1.1",
+      "package_type": "governance",
+      "asset_scope": "schema / QA templates / generation batch plan",
+      "source_role": "asset_factory_foundation",
+      "is_governance_package": true,
+      "is_body_asset_package": false,
+      "is_selector_package": false,
+      "is_route_matrix_package": false,
+      "is_qa_policy_package": false,
+      "asset_count": 0,
+      "row_count": 0,
+      "file_count": 17,
+      "source_documents": [
+        "V2.0正式稿",
+        "两万字完整稿",
+        "职业板块QA治理经验"
+      ],
+      "depends_on": [],
+      "consumed_by": [
+        "B5-CONTENT-1",
+        "B5-CONTENT-2",
+        "B5-CONTENT-3",
+        "B5-CONTENT-4",
+        "B5-CONTENT-5",
+        "B5-CONTENT-6",
+        "B5-CONTENT-7"
+      ],
+      "runtime_use": "not_runtime",
+      "production_use_allowed": false,
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "import_priority": "P0",
+      "required_next_qa": [
+        "schema consistency QA",
+        "package checksum QA"
+      ],
+      "blocking_reasons": [
+        "governance only; not runtime content"
+      ],
+      "recommended_codex_action": "stage package as governance spec; do not wire runtime",
+      "notes": "Defines schema, band key rules, QA templates, ready_for_pilot hard gate, and batch plan."
+    },
+    {
+      "package_key": "B5-A-lite",
+      "package_name": "Source Authority + Module Mapping Governance",
+      "version": "v0.1",
+      "package_type": "source_authority",
+      "asset_scope": "source authority / module mapping / runtime decision / anti-target terms / B5-B1 readiness",
+      "source_role": "authority_governance",
+      "is_governance_package": true,
+      "is_body_asset_package": false,
+      "is_selector_package": false,
+      "is_route_matrix_package": false,
+      "is_qa_policy_package": false,
+      "asset_count": 0,
+      "row_count": 0,
+      "file_count": 15,
+      "source_documents": [
+        "B5-CONTENT-0 v0.1.1",
+        "V2.0正式稿",
+        "两万字完整稿",
+        "当前8-section skeleton",
+        "325 selector-ready assets",
+        "QA/Policy pack"
+      ],
+      "depends_on": [
+        "B5-CONTENT-0"
+      ],
+      "consumed_by": [
+        "B5-B1",
+        "B5-CONTENT-1",
+        "B5-CONTENT-2",
+        "B5-CONTENT-3",
+        "B5-CONTENT-4",
+        "B5-CONTENT-5",
+        "B5-CONTENT-6"
+      ],
+      "runtime_use": "not_runtime",
+      "production_use_allowed": false,
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "import_priority": "P0",
+      "required_next_qa": [
+        "source authority QA",
+        "mapping QA"
+      ],
+      "blocking_reasons": [
+        "governance only; not runtime content"
+      ],
+      "recommended_codex_action": "stage governance files before body import; do not edit app/runtime",
+      "notes": "Declares V2.0 as module master and two万字稿 as O59 canonical body master."
+    },
+    {
+      "package_key": "B5-B1-O59-core-body",
+      "package_name": "O59 Canonical Core Body Asset Import",
+      "version": "v0.1",
+      "package_type": "core_body",
+      "asset_scope": "O59 / C32 / E20 / A55 / N68 8-section core body staging assets",
+      "source_role": "canonical_body_seed",
+      "is_governance_package": false,
+      "is_body_asset_package": true,
+      "is_selector_package": false,
+      "is_route_matrix_package": false,
+      "is_qa_policy_package": false,
+      "asset_count": 79,
+      "row_count": 79,
+      "file_count": 13,
+      "source_documents": [
+        "V2.0正式稿",
+        "两万字完整稿",
+        "B5-A-lite"
+      ],
+      "depends_on": [
+        "B5-CONTENT-0",
+        "B5-A-lite"
+      ],
+      "consumed_by": [
+        "B5-B1-Preview",
+        "B5-B1-Preview-Codex-Handoff",
+        "B5-CONTENT-4",
+        "B5-CONTENT-6"
+      ],
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "import_priority": "P0",
+      "required_next_qa": [
+        "rendered preview QA",
+        "safety QA",
+        "editorial QA"
+      ],
+      "blocking_reasons": [
+        "rendered preview execution not passed",
+        "not generalized to all users"
+      ],
+      "recommended_codex_action": "stage as O59 canonical body fixture; do not generalize",
+      "notes": "Covers 8 sections for sensitive_independent_thinker; source of O59 canonical body."
+    },
+    {
+      "package_key": "B5-B1-Preview",
+      "package_name": "O59 Rendered Preview QA Pack",
+      "version": "v0.1",
+      "package_type": "rendered_preview_qa",
+      "asset_scope": "rendered QA expectations for desktop/mobile/pdf/share/history/compare",
+      "source_role": "rendered_preview_gate_definition",
+      "is_governance_package": true,
+      "is_body_asset_package": false,
+      "is_selector_package": false,
+      "is_route_matrix_package": false,
+      "is_qa_policy_package": false,
+      "asset_count": 0,
+      "row_count": 0,
+      "file_count": 16,
+      "source_documents": [
+        "B5-B1 core body",
+        "B5-A-lite anti-target terms"
+      ],
+      "depends_on": [
+        "B5-B1-O59-core-body",
+        "B5-A-lite"
+      ],
+      "consumed_by": [
+        "B5-B1-Preview-Codex-Handoff",
+        "future rendered QA execution"
+      ],
+      "runtime_use": "not_runtime",
+      "production_use_allowed": false,
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "import_priority": "P0",
+      "required_next_qa": [
+        "actual fap-web rendered preview execution"
+      ],
+      "blocking_reasons": [
+        "definitions only; no rendered execution yet"
+      ],
+      "recommended_codex_action": "use as QA contract input for fap-web tests",
+      "notes": "Defines must-render/must-not-render and section surface contracts."
+    },
+    {
+      "package_key": "B5-B1-Preview-Codex-Handoff",
+      "package_name": "O59 Rendered Preview Execution Brief",
+      "version": "v0.1.1",
+      "package_type": "codex_handoff",
+      "asset_scope": "fap-web rendered preview contract test handoff",
+      "source_role": "codex_execution_brief",
+      "is_governance_package": true,
+      "is_body_asset_package": false,
+      "is_selector_package": false,
+      "is_route_matrix_package": false,
+      "is_qa_policy_package": false,
+      "asset_count": 0,
+      "row_count": 0,
+      "file_count": 14,
+      "source_documents": [
+        "B5-B1-Preview",
+        "B5-B1 fixture",
+        "fap-api PR #1129 fixture reference"
+      ],
+      "depends_on": [
+        "B5-B1-Preview",
+        "B5-B1-O59-core-body"
+      ],
+      "consumed_by": [
+        "fap-web rendered preview contract test"
+      ],
+      "runtime_use": "not_runtime",
+      "production_use_allowed": false,
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "import_priority": "P1",
+      "required_next_qa": [
+        "Codex fap-web execution",
+        "pending surface accounting"
+      ],
+      "blocking_reasons": [
+        "handoff only; no test execution yet"
+      ],
+      "recommended_codex_action": "create fap-web contract test only when explicitly requested",
+      "notes": "Defines tested/pending/passed/failed surface output structure."
+    },
+    {
+      "package_key": "B5-CONTENT-1",
+      "package_name": "五维 × 五档基础维度资产",
+      "version": "v0.1",
+      "package_type": "trait_band_assets",
+      "asset_scope": "5 traits × 5 internal bands",
+      "source_role": "L2_trait_band_asset_library",
+      "is_governance_package": false,
+      "is_body_asset_package": true,
+      "is_selector_package": false,
+      "is_route_matrix_package": false,
+      "is_qa_policy_package": false,
+      "asset_count": 25,
+      "row_count": 25,
+      "file_count": 13,
+      "source_documents": [
+        "B5-CONTENT-0",
+        "B5-A-lite",
+        "V2.0正式稿",
+        "两万字完整稿"
+      ],
+      "depends_on": [
+        "B5-CONTENT-0",
+        "B5-A-lite"
+      ],
+      "consumed_by": [
+        "B5-CONTENT-2",
+        "B5-CONTENT-4",
+        "B5-CONTENT-5",
+        "B5-CONTENT-6"
+      ],
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "import_priority": "P0",
+      "required_next_qa": [
+        "asset review",
+        "rendered preview when selected"
+      ],
+      "blocking_reasons": [
+        "not imported",
+        "not rendered QA passed"
+      ],
+      "recommended_codex_action": "stage import and validate as trait-band library",
+      "notes": "25 domain-band assets; O59 key support is O3_C2_E2_A3_N4."
+    },
+    {
+      "package_key": "B5-CONTENT-2",
+      "package_name": "维度耦合 / 组合动力资产",
+      "version": "v0.1",
+      "package_type": "coupling_assets",
+      "asset_scope": "12 coupling groups × 5 asset roles",
+      "source_role": "L4_coupling_asset_library",
+      "is_governance_package": false,
+      "is_body_asset_package": true,
+      "is_selector_package": false,
+      "is_route_matrix_package": false,
+      "is_qa_policy_package": false,
+      "asset_count": 60,
+      "row_count": 60,
+      "file_count": 13,
+      "source_documents": [
+        "B5-CONTENT-0",
+        "B5-A-lite",
+        "B5-CONTENT-1",
+        "V2.0正式稿",
+        "两万字完整稿"
+      ],
+      "depends_on": [
+        "B5-CONTENT-0",
+        "B5-A-lite",
+        "B5-CONTENT-1"
+      ],
+      "consumed_by": [
+        "B5-CONTENT-4",
+        "B5-CONTENT-5",
+        "B5-CONTENT-6"
+      ],
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "import_priority": "P0",
+      "required_next_qa": [
+        "asset review",
+        "reference consistency QA"
+      ],
+      "blocking_reasons": [
+        "not rendered QA passed"
+      ],
+      "recommended_codex_action": "stage import and validate references",
+      "notes": "Covers O59's five core coupling routes."
+    },
+    {
+      "package_key": "B5-CONTENT-3",
+      "package_name": "Facet 刻面解释 / 反直觉重构资产",
+      "version": "v0.1",
+      "package_type": "facet_assets",
+      "asset_scope": "30 facets × glossary/high/low reframe",
+      "source_role": "L5_facet_precision_asset_library",
+      "is_governance_package": false,
+      "is_body_asset_package": true,
+      "is_selector_package": false,
+      "is_route_matrix_package": false,
+      "is_qa_policy_package": false,
+      "asset_count": 90,
+      "row_count": 90,
+      "file_count": 13,
+      "source_documents": [
+        "B5-CONTENT-0",
+        "B5-A-lite",
+        "B5-CONTENT-1",
+        "B5-CONTENT-2",
+        "V2.0正式稿",
+        "两万字完整稿"
+      ],
+      "depends_on": [
+        "B5-CONTENT-0",
+        "B5-A-lite",
+        "B5-CONTENT-1",
+        "B5-CONTENT-2"
+      ],
+      "consumed_by": [
+        "B5-CONTENT-4",
+        "B5-CONTENT-5",
+        "B5-CONTENT-6"
+      ],
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "import_priority": "P0",
+      "required_next_qa": [
+        "facet inference boundary QA",
+        "rendered facet preview QA"
+      ],
+      "blocking_reasons": [
+        "not rendered QA passed"
+      ],
+      "recommended_codex_action": "stage import and validate facet_support fields",
+      "notes": "All 30 facets; supports O59反直觉发现 and top facet explanations."
+    },
+    {
+      "package_key": "B5-CONTENT-4",
+      "package_name": "代表性画像 / 标准画像路由资产",
+      "version": "v0.1",
+      "package_type": "canonical_profile_routes",
+      "asset_scope": "8 canonical profiles × 8 sections",
+      "source_role": "L1_core_body_route_library",
+      "is_governance_package": false,
+      "is_body_asset_package": false,
+      "is_selector_package": true,
+      "is_route_matrix_package": false,
+      "is_qa_policy_package": false,
+      "asset_count": 64,
+      "row_count": 64,
+      "file_count": 14,
+      "source_documents": [
+        "B5-CONTENT-1",
+        "B5-CONTENT-2",
+        "B5-CONTENT-3",
+        "B5-B1"
+      ],
+      "depends_on": [
+        "B5-CONTENT-0",
+        "B5-A-lite",
+        "B5-CONTENT-1",
+        "B5-CONTENT-2",
+        "B5-CONTENT-3",
+        "B5-B1-O59-core-body"
+      ],
+      "consumed_by": [
+        "B5-CONTENT-5",
+        "B5-CONTENT-6"
+      ],
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "import_priority": "P0",
+      "required_next_qa": [
+        "profile label safety QA",
+        "route consistency QA"
+      ],
+      "blocking_reasons": [
+        "not rendered QA passed",
+        "not runtime mapping approved"
+      ],
+      "recommended_codex_action": "stage import and validate profile metadata; do not expose as fixed type",
+      "notes": "O59 profile references B5-B1 instead of rewriting it."
+    },
+    {
+      "package_key": "B5-CONTENT-5",
+      "package_name": "场景应用 / 行动矩阵资产",
+      "version": "v0.1.1",
+      "package_type": "scenario_action_assets",
+      "asset_scope": "8 canonical profiles × 5 scenarios × 4 asset roles",
+      "source_role": "L6_scenario_action_asset_library",
+      "is_governance_package": false,
+      "is_body_asset_package": true,
+      "is_selector_package": false,
+      "is_route_matrix_package": false,
+      "is_qa_policy_package": false,
+      "asset_count": 160,
+      "row_count": 160,
+      "file_count": 14,
+      "source_documents": [
+        "B5-CONTENT-1",
+        "B5-CONTENT-2",
+        "B5-CONTENT-3",
+        "B5-CONTENT-4",
+        "V2.0正式稿"
+      ],
+      "depends_on": [
+        "B5-CONTENT-0",
+        "B5-A-lite",
+        "B5-CONTENT-1",
+        "B5-CONTENT-2",
+        "B5-CONTENT-3",
+        "B5-CONTENT-4"
+      ],
+      "consumed_by": [
+        "B5-CONTENT-6"
+      ],
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "import_priority": "P0",
+      "required_next_qa": [
+        "share safety QA",
+        "surface-level action QA"
+      ],
+      "blocking_reasons": [
+        "not rendered QA passed",
+        "not scenario selector approved"
+      ],
+      "recommended_codex_action": "stage import and validate scenario/profile matrix",
+      "notes": "160 scenario action assets; v0.1.1 fixes checksum rule only."
+    },
+    {
+      "package_key": "B5-CONTENT-6",
+      "package_name": "3125 五维组合路由矩阵",
+      "version": "v0.1.1",
+      "package_type": "route_matrix",
+      "asset_scope": "5^5 combination route rows",
+      "source_role": "combination_route_matrix",
+      "is_governance_package": false,
+      "is_body_asset_package": false,
+      "is_selector_package": true,
+      "is_route_matrix_package": true,
+      "is_qa_policy_package": false,
+      "asset_count": 0,
+      "row_count": 3125,
+      "file_count": 20,
+      "source_documents": [
+        "B5-CONTENT-1",
+        "B5-CONTENT-2",
+        "B5-CONTENT-3",
+        "B5-CONTENT-4",
+        "B5-CONTENT-5"
+      ],
+      "depends_on": [
+        "B5-CONTENT-0",
+        "B5-A-lite",
+        "B5-CONTENT-1",
+        "B5-CONTENT-2",
+        "B5-CONTENT-3",
+        "B5-CONTENT-4",
+        "B5-CONTENT-5"
+      ],
+      "consumed_by": [
+        "future selector/composer staging"
+      ],
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "import_priority": "P0",
+      "required_next_qa": [
+        "route reference consistency QA",
+        "semantic consistency QA",
+        "rendered preview of representative rows"
+      ],
+      "blocking_reasons": [
+        "route matrix not connected",
+        "selector QA not passed"
+      ],
+      "recommended_codex_action": "stage import and validate all 3125 route rows; do not wire runtime",
+      "notes": "v0.1.1 fixes low-confidence profile label leakage; O59 row remains direct_profile_route."
+    },
+    {
+      "package_key": "selector-ready-assets-v0.3-p0-full",
+      "package_name": "325 selector-ready assets v0.3 P0 full candidate",
+      "version": "v0.3_p0_full",
+      "package_type": "selector_ready_assets",
+      "asset_scope": "325 selector candidate blocks across 12 registries",
+      "source_role": "selector_candidates",
+      "is_governance_package": false,
+      "is_body_asset_package": false,
+      "is_selector_package": true,
+      "is_route_matrix_package": false,
+      "is_qa_policy_package": false,
+      "asset_count": 325,
+      "row_count": 325,
+      "file_count": 6,
+      "source_documents": [
+        "V2.0正式稿",
+        "selector asset bundle"
+      ],
+      "depends_on": [
+        "B5-A-lite"
+      ],
+      "consumed_by": [
+        "future selector QA",
+        "future composer staging"
+      ],
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_asset_review": true,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "import_priority": "P1",
+      "required_next_qa": [
+        "reference consistency with B5-CONTENT-1~6",
+        "coverage warning review",
+        "rendered regression QA"
+      ],
+      "blocking_reasons": [
+        "runtime_ready=false",
+        "known coverage warnings",
+        "not reconciled with B5-CONTENT-1~6"
+      ],
+      "recommended_codex_action": "staging import only after reference consistency check; do not runtime wire",
+      "notes": "Has asset_count 325 and sha proof in prior scan; not B5-B body."
+    },
+    {
+      "package_key": "selector-qa-policy-v0.1",
+      "package_name": "Golden Cases + Selection Policy + Conflict Resolution",
+      "version": "v0.1",
+      "package_type": "selector_qa_policy",
+      "asset_scope": "30 golden cases + policy + conflict rules",
+      "source_role": "selector_qa_policy_pack",
+      "is_governance_package": true,
+      "is_body_asset_package": false,
+      "is_selector_package": false,
+      "is_route_matrix_package": false,
+      "is_qa_policy_package": true,
+      "asset_count": 0,
+      "row_count": 30,
+      "file_count": 5,
+      "source_documents": [
+        "QA policy bundle",
+        "325 selector-ready assets"
+      ],
+      "depends_on": [
+        "selector-ready-assets-v0.3-p0-full"
+      ],
+      "consumed_by": [
+        "future selector QA",
+        "B5-H/B5-J governance"
+      ],
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "ready_for_asset_review": false,
+      "ready_for_pilot": false,
+      "ready_for_runtime": false,
+      "ready_for_production": false,
+      "import_priority": "P1",
+      "required_next_qa": [
+        "add O59 production canonical case",
+        "fix golden_group",
+        "fix slot naming",
+        "expand banned terms"
+      ],
+      "blocking_reasons": [
+        "missing O59 canonical case",
+        "golden_group missing",
+        "slot/module naming drift",
+        "banned scan incomplete"
+      ],
+      "recommended_codex_action": "repair P0 policy issues before using as gate",
+      "notes": "Not content body; currently not a passing selector QA gate."
+    }
+  ]
+}

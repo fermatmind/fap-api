@@ -1,0 +1,8 @@
+qa_key,required,pass_condition,blocks_ready_for_pilot_if_fail
+coverage_qa,yes,all required dimensions/sections/assets for the batch are covered,yes
+safety_qa,yes,"no banned phrase, no diagnostic/hiring/accuracy/hard typing claims, no metadata leakage",yes
+editorial_qa,yes,"body_zh user-facing, no internal instructions, no repetition/low-quality template drift",yes
+mapping_qa,yes,module_key/section_key/slot_key/combination_key/read mode/render surface valid,yes
+rendered_preview_qa,yes,desktop/mobile/PDF or designated surfaces show no readability/layout/internal metadata issue,yes
+repair_log,yes,all P0/P1 repair log entries closed or explicitly waived by reviewer,yes
+p0_blocker_check,yes,no P0 blockers remain,yes

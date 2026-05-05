@@ -1,0 +1,9 @@
+gap_key,severity,description,affected_packages,recommended_next_step
+B5-B2_thick_body_not_generated,P0,B5-B2 厚正文尚未生成。,"[""B5-CONTENT-4"", ""B5-CONTENT-6""]","Only after B5-B1 rendered preview execution passes, start B5-B2 planning."
+rendered_preview_not_executed,P0,Rendered preview 仍需真实 fap-web 验证。,"[""B5-B1-Preview"", ""B5-B1-Preview-Codex-Handoff""]",Execute fap-web rendered preview contract tests.
+selector_325_reference_consistency,P1,325 selector assets 仍需和 B5-CONTENT-1~6 做引用一致性检查。,"[""selector-ready-assets-v0.3-p0-full"", ""B5-CONTENT-1"", ""B5-CONTENT-2"", ""B5-CONTENT-3"", ""B5-CONTENT-4"", ""B5-CONTENT-5"", ""B5-CONTENT-6""]",Run asset reference validator before staging selector QA.
+golden_cases_policy_p0_fixes,P0,Golden Cases 仍需修 production canonical case / slot naming / rendered regression scan。,"[""selector-qa-policy-v0.1""]","Add O59 case, golden_group, module slot normalization, expanded banned terms."
+surface_level_QA_missing,P1,share card / PDF / history / compare 仍需 surface-level QA。,"[""B5-B1-Preview"", ""B5-B1-Preview-Codex-Handoff"", ""B5-CONTENT-5""]",Mark unsupported surfaces pending until harness exists.
+runtime_composer_not_connected,P0,runtime composer 未接。,"[""B5-CONTENT-1"", ""B5-CONTENT-2"", ""B5-CONTENT-3"", ""B5-CONTENT-4"", ""B5-CONTENT-5"", ""B5-CONTENT-6""]",Do not wire runtime until rendered preview and import policy pass.
+CMS_import_pipeline_not_connected,P1,CMS import pipeline 未接。,"[""all""]",Design staging import pipeline only after catalog approval.
+production_import_policy_not_approved,P0,production import policy 未批准。,"[""all""]",Create B5-J production import / merge preview governance before production use.

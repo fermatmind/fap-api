@@ -1,0 +1,70 @@
+{
+  "schema_key": "big5_mapping_qa_template_v0_1",
+  "schema_version": "fap.big5.mapping_qa_template.v0_1_1",
+  "package_key": "B5-CONTENT-0",
+  "package_version": "v0.1.1",
+  "batch_key": "<BATCH_KEY>",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "checks": [
+    {
+      "check_key": "module_key_exists",
+      "status": "not_run",
+      "severity": "P0"
+    },
+    {
+      "check_key": "section_key_exists",
+      "status": "not_run",
+      "severity": "P0"
+    },
+    {
+      "check_key": "slot_key_allowed",
+      "status": "not_run",
+      "severity": "P0"
+    },
+    {
+      "check_key": "combination_key_valid",
+      "status": "not_run",
+      "severity": "P0"
+    },
+    {
+      "check_key": "trait_band_keys_valid",
+      "status": "not_run",
+      "severity": "P0"
+    },
+    {
+      "check_key": "display_band_label_separate_from_internal_band",
+      "status": "not_run",
+      "severity": "P1"
+    },
+    {
+      "check_key": "reading_mode_valid",
+      "status": "not_run",
+      "severity": "P1"
+    },
+    {
+      "check_key": "render_surface_valid",
+      "status": "not_run",
+      "severity": "P1"
+    },
+    {
+      "check_key": "dedupe_group_present",
+      "status": "not_run",
+      "severity": "P1"
+    },
+    {
+      "check_key": "cannot_combine_with_present",
+      "status": "not_run",
+      "severity": "P1"
+    },
+    {
+      "check_key": "source_trace_present",
+      "status": "not_run",
+      "severity": "P1"
+    }
+  ],
+  "result": {
+    "mapping_qa_passed": false,
+    "blocking_reasons": []
+  }
+}

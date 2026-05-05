@@ -1,0 +1,31 @@
+column,type,required,default,description
+asset_id,string,yes,,Globally unique content asset id.
+asset_key,string,yes,,Human-readable stable key for selector and QA.
+asset_version,string,yes,,"Asset-level version, for example v0_1."
+asset_type,enum,yes,,Type of content asset.
+asset_layer,enum,yes,,"Factory layer, for example L1_core_body or L5_facet_precision."
+module_key,enum,yes,,"V2 module key, module_00 through module_10."
+section_key,enum,yes,,Big Five 8-section skeleton key.
+slot_key,string,yes,,Slot inside module/section.
+copy_role,enum,yes,,"Role of the copy, e.g. user_visible_body, title, boundary, schema_example."
+reading_mode,array<string>,yes,,
+title_zh,string|null,conditional/no,,User-visible Chinese title when applicable.
+body_zh,string|null,conditional/no,,User-visible body. Schema examples must not be production copy.
+short_body_zh,string|null,conditional/no,,Short card or quick-read body.
+cta_zh,string|null,conditional/no,,User-visible CTA label when applicable.
+applies_to,object,yes,,Selector conditions.
+avoid_when,array<object>,yes,,Suppression / downgrade rules.
+can_combine_with,array<string>,yes,,Positive composition tags.
+cannot_combine_with,array<string>,yes,,Conflict / dedupe tags.
+dedupe_group,string,yes,,Only one item from same group unless explicitly allowed.
+selection_priority,number,yes,,Base selection priority.
+selection_specificity,number,yes,,Match specificity score.
+fallback_allowed,boolean,yes,False,
+render_surface,array<string>,yes,,Allowed surfaces. Schema examples must use [] and not runtime surfaces.
+body_quality,object,yes,,"Author-side quality metadata, not final QA."
+safety_tags,array<string>,yes,,Safety and boundary tags.
+qa_status,enum,yes,,
+ready_for_pilot,boolean,yes,,"Hard gate, see ready_for_pilot template."
+runtime_use,enum,yes,,
+production_use_allowed,boolean,yes,False,
+source_trace,object,yes,,"Source document, batch and reviewer trace."

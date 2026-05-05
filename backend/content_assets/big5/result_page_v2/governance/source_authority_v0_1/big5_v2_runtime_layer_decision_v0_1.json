@@ -1,0 +1,156 @@
+{
+  "package_key": "B5-A-lite",
+  "package_name": "Big Five V2 Source Authority + Module Mapping Governance",
+  "version": "v0.1",
+  "locale": "zh-CN",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_b5_b1": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "created_at_utc": "2026-05-04T09:33:36.564735Z",
+  "schema_key": "big5_v2_runtime_layer_decision_v0_1",
+  "global_decision": {
+    "runtime_wiring_allowed_now": false,
+    "frontend_changes_allowed_now": false,
+    "selector_runtime_allowed_now": false,
+    "production_runtime_allowed_now": false,
+    "b5_b1_import_target": "backend/content_assets/big5/result_page_v2/core_body/v0_1/",
+    "ready_for_b5_b1": true,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  "production_runtime_blocked_until": [
+    "rendered preview QA passed",
+    "source authority QA passed",
+    "safety QA passed",
+    "mapping QA passed",
+    "repair log closed",
+    "no P0 blockers"
+  ],
+  "layers": [
+    {
+      "layer_key": "B5-CONTENT-0",
+      "status": "not_runtime",
+      "role": "governance_only",
+      "allowed_use": [
+        "content factory structure",
+        "schema baseline",
+        "QA templates"
+      ],
+      "not_allowed": [
+        "runtime wiring",
+        "production import",
+        "body generation"
+      ],
+      "production_use_allowed": false
+    },
+    {
+      "layer_key": "B5-A-lite",
+      "status": "not_runtime",
+      "role": "governance_only",
+      "allowed_use": [
+        "source authority",
+        "module mapping",
+        "runtime decision",
+        "anti-target scan",
+        "B5-B1 readiness"
+      ],
+      "not_allowed": [
+        "body generation",
+        "runtime wiring",
+        "frontend change",
+        "selector execution"
+      ],
+      "production_use_allowed": false
+    },
+    {
+      "layer_key": "B5-B1",
+      "status": "staging_preview_only",
+      "role": "canonical O59 only",
+      "canonical_profile": {
+        "scores": {
+          "O": 59,
+          "C": 32,
+          "E": 20,
+          "A": 55,
+          "N": 68
+        },
+        "internal_combination_key": "O3_C2_E2_A3_N4",
+        "profile_label_zh": "敏锐的独立思考者"
+      },
+      "not_generalized_to_all_users": true,
+      "allowed_use": [
+        "O59 canonical 8-section body staging",
+        "rendered preview fixture"
+      ],
+      "not_allowed": [
+        "production runtime",
+        "3125 coverage",
+        "all-user body"
+      ],
+      "production_use_allowed": false
+    },
+    {
+      "layer_key": "325_selector_ready_assets",
+      "status": "staging_only",
+      "role": "selector_candidates",
+      "do_not_runtime_wire": true,
+      "allowed_use": [
+        "selector candidate QA",
+        "coverage analysis",
+        "future P0 selector QA fix"
+      ],
+      "not_allowed": [
+        "production runtime",
+        "B5-B body",
+        "full content library claim"
+      ],
+      "production_use_allowed": false
+    },
+    {
+      "layer_key": "QA_Policy_Pack",
+      "status": "staging_only",
+      "role": "qa_only",
+      "allowed_use": [
+        "selector QA",
+        "conflict resolution",
+        "render leak baseline"
+      ],
+      "not_allowed": [
+        "content body",
+        "runtime wiring",
+        "frontend fallback copy"
+      ],
+      "production_use_allowed": false
+    },
+    {
+      "layer_key": "frontend_fallback",
+      "status": "legacy_temporary_only",
+      "role": "forbidden_as_content_owner",
+      "allowed_use": [
+        "temporary failure tolerance"
+      ],
+      "not_allowed": [
+        "generate_personality_body",
+        "generate_longform_explanation",
+        "replace B5-B1 body"
+      ],
+      "production_use_allowed": false
+    },
+    {
+      "layer_key": "production_runtime",
+      "status": "blocked",
+      "role": "not_allowed_now",
+      "blocked_until": [
+        "rendered preview QA passed",
+        "source authority QA passed",
+        "safety QA passed",
+        "mapping QA passed",
+        "repair log closed",
+        "no P0 blockers"
+      ],
+      "production_use_allowed": false
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+﻿layer_key,status,role,allowed_use,not_allowed,production_use_allowed,blocked_until,not_generalized_to_all_users,do_not_runtime_wire
+B5-CONTENT-0,not_runtime,governance_only,"[""content factory structure"", ""schema baseline"", ""QA templates""]","[""runtime wiring"", ""production import"", ""body generation""]",false,,,
+B5-A-lite,not_runtime,governance_only,"[""source authority"", ""module mapping"", ""runtime decision"", ""anti-target scan"", ""B5-B1 readiness""]","[""body generation"", ""runtime wiring"", ""frontend change"", ""selector execution""]",false,,,
+B5-B1,staging_preview_only,canonical O59 only,"[""O59 canonical 8-section body staging"", ""rendered preview fixture""]","[""production runtime"", ""3125 coverage"", ""all-user body""]",false,,true,
+325_selector_ready_assets,staging_only,selector_candidates,"[""selector candidate QA"", ""coverage analysis"", ""future P0 selector QA fix""]","[""production runtime"", ""B5-B body"", ""full content library claim""]",false,,,true
+QA_Policy_Pack,staging_only,qa_only,"[""selector QA"", ""conflict resolution"", ""render leak baseline""]","[""content body"", ""runtime wiring"", ""frontend fallback copy""]",false,,,
+frontend_fallback,legacy_temporary_only,forbidden_as_content_owner,"[""temporary failure tolerance""]","[""generate_personality_body"", ""generate_longform_explanation"", ""replace B5-B1 body""]",false,,,
+production_runtime,blocked,not_allowed_now,,,false,"[""rendered preview QA passed"", ""source authority QA passed"", ""safety QA passed"", ""mapping QA passed"", ""repair log closed"", ""no P0 blockers""]",,

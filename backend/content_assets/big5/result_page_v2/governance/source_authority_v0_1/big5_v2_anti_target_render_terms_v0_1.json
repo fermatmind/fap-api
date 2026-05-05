@@ -1,0 +1,215 @@
+{
+  "package_key": "B5-A-lite",
+  "package_name": "Big Five V2 Source Authority + Module Mapping Governance",
+  "version": "v0.1",
+  "locale": "zh-CN",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_b5_b1": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "created_at_utc": "2026-05-04T09:33:36.564735Z",
+  "schema_key": "big5_v2_anti_target_render_terms_v0_1",
+  "scope": "user_visible_rendered_text",
+  "anti_target_sources": [
+    "current_compact_online_big5_page",
+    "legacy_frontend_fallback",
+    "compact_v1_report_body",
+    "selector_policy_internal_metadata_leakage"
+  ],
+  "terms": [
+    {
+      "term_id": "anti_target_01",
+      "term": "A compact overview",
+      "severity": "P0",
+      "surface": "result_page",
+      "allowed_context": "never user-visible in zh final page",
+      "forbidden_context": "compact English subtitle in result page",
+      "repair_action": "replace through B5-B1 section body and zh title/subtitle assets"
+    },
+    {
+      "term_id": "anti_target_02",
+      "term": "Five-domain distribution with percentile-oriented context",
+      "severity": "P0",
+      "surface": "result_page",
+      "allowed_context": "never user-visible in zh final page",
+      "forbidden_context": "English fallback subtitle",
+      "repair_action": "replace with zh domains_overview copy"
+    },
+    {
+      "term_id": "anti_target_03",
+      "term": "Focused read on domain-level strengths",
+      "severity": "P0",
+      "surface": "result_page",
+      "allowed_context": "never user-visible in zh final page",
+      "forbidden_context": "English fallback subtitle",
+      "repair_action": "replace with zh domain_deep_dive copy"
+    },
+    {
+      "term_id": "anti_target_04",
+      "term": "Facet-level signals arranged for quick interpretation",
+      "severity": "P0",
+      "surface": "result_page",
+      "allowed_context": "never user-visible in zh final page",
+      "forbidden_context": "English fallback subtitle",
+      "repair_action": "replace with zh facet_details narrative"
+    },
+    {
+      "term_id": "anti_target_05",
+      "term": "Norms Comparison",
+      "severity": "P0",
+      "surface": "result_page",
+      "allowed_context": "never user-visible in zh final page",
+      "forbidden_context": "English section heading",
+      "repair_action": "use 相对参照 heading"
+    },
+    {
+      "term_id": "anti_target_06",
+      "term": "Methodology and Access",
+      "severity": "P0",
+      "surface": "result_page",
+      "allowed_context": "never user-visible in zh final page",
+      "forbidden_context": "English section heading",
+      "repair_action": "use 方法与边界说明 heading"
+    },
+    {
+      "term_id": "anti_target_07",
+      "term": "N1 百分位",
+      "severity": "P1",
+      "surface": "result_page",
+      "allowed_context": "allowed only in full_facet_directory / appendix / metric row",
+      "forbidden_context": "facet_details primary body or repeated percentile-only list",
+      "repair_action": "move percentile to directory and add narrative facet reframe"
+    },
+    {
+      "term_id": "anti_target_08",
+      "term": "all",
+      "severity": "P1",
+      "surface": "all",
+      "allowed_context": "allowed only as ordinary code text outside user-visible rendered output",
+      "forbidden_context": "facet row placeholder, debug leakage, or unexplained rendered token",
+      "repair_action": "remove placeholder and render specific facet category or omit"
+    },
+    {
+      "term_id": "anti_target_09",
+      "term": "优先关注成长面向",
+      "severity": "P1",
+      "surface": "result_page",
+      "allowed_context": "allowed only as internal legacy note if not user-visible",
+      "forbidden_context": "action_plan primary body",
+      "repair_action": "replace with scenario-bound action matrix"
+    },
+    {
+      "term_id": "anti_target_10",
+      "term": "O6, C5, E6",
+      "severity": "P1",
+      "surface": "result_page",
+      "allowed_context": "allowed only in internal QA / diagnostic debug files",
+      "forbidden_context": "user-visible action recommendation without explanation",
+      "repair_action": "translate to user-facing action rationale or move to hidden trace"
+    },
+    {
+      "term_id": "anti_target_11",
+      "term": "[object Object]",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "never",
+      "forbidden_context": "any user-visible surface",
+      "repair_action": "fix renderer serialization and add rendered regression scan"
+    },
+    {
+      "term_id": "anti_target_12",
+      "term": "deferred_to_future",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "never",
+      "forbidden_context": "any user-visible surface",
+      "repair_action": "suppress placeholders or provide approved boundary copy"
+    },
+    {
+      "term_id": "anti_target_13",
+      "term": "policy_not_shipped",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "never",
+      "forbidden_context": "any user-visible surface",
+      "repair_action": "suppress policy marker from public payload"
+    },
+    {
+      "term_id": "anti_target_14",
+      "term": "frontend_fallback",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "never",
+      "forbidden_context": "any user-visible surface",
+      "repair_action": "remove internal fallback marker from rendered text"
+    },
+    {
+      "term_id": "anti_target_15",
+      "term": "internal_metadata",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "never",
+      "forbidden_context": "any user-visible surface",
+      "repair_action": "strip metadata before render"
+    },
+    {
+      "term_id": "anti_target_16",
+      "term": "selector_basis",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "never",
+      "forbidden_context": "any user-visible surface",
+      "repair_action": "keep selector trace private"
+    },
+    {
+      "term_id": "anti_target_17",
+      "term": "selection_guidance",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "never",
+      "forbidden_context": "any user-visible surface",
+      "repair_action": "keep selection guidance internal"
+    },
+    {
+      "term_id": "anti_target_18",
+      "term": "editor_notes",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "never",
+      "forbidden_context": "any user-visible surface",
+      "repair_action": "keep editor notes internal"
+    },
+    {
+      "term_id": "anti_target_19",
+      "term": "qa_notes",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "never",
+      "forbidden_context": "any user-visible surface",
+      "repair_action": "keep QA notes internal"
+    },
+    {
+      "term_id": "anti_target_20",
+      "term": "source_reference",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "never",
+      "forbidden_context": "any user-visible surface",
+      "repair_action": "keep source trace internal"
+    },
+    {
+      "term_id": "anti_target_21",
+      "term": "import_policy",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "never",
+      "forbidden_context": "any user-visible surface",
+      "repair_action": "keep import policy internal"
+    }
+  ],
+  "final_decision": {
+    "must_be_used_in_b5_b1_rendered_preview": true,
+    "ready_for_runtime": false
+  }
+}
