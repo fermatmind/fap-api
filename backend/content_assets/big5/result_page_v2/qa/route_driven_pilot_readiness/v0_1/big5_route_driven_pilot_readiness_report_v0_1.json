@@ -1,0 +1,135 @@
+{
+  "schema": "fap.big5.result_page_v2.route_driven_pilot_readiness_report.v0_1",
+  "package_key": "big5_result_page_v2.route_driven_pilot_readiness.v0_1",
+  "version": "0.1",
+  "mode": "route_driven_pilot_readiness_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_go": false,
+  "evidence": {
+    "route_driven_payload_fixture_count": 9,
+    "route_driven_payload_fixture_paths": [
+      "backend/tests/Fixtures/big5_result_page_v2/route_driven_o59_canonical_pilot_payload_v0_1.payload.json",
+      "backend/tests/Fixtures/big5_result_page_v2/route_driven_sensitive_independent_thinker_pilot_payload_v0_1.payload.json",
+      "backend/tests/Fixtures/big5_result_page_v2/route_driven_vigilant_perfectionist_pilot_payload_v0_1.payload.json",
+      "backend/tests/Fixtures/big5_result_page_v2/route_driven_complex_explorer_low_structure_pilot_payload_v0_1.payload.json",
+      "backend/tests/Fixtures/big5_result_page_v2/route_driven_quiet_deep_worker_pilot_payload_v0_1.payload.json",
+      "backend/tests/Fixtures/big5_result_page_v2/route_driven_connective_coordinator_pilot_payload_v0_1.payload.json",
+      "backend/tests/Fixtures/big5_result_page_v2/route_driven_sharp_exploratory_driver_pilot_payload_v0_1.payload.json",
+      "backend/tests/Fixtures/big5_result_page_v2/route_driven_orderly_supporter_pilot_payload_v0_1.payload.json",
+      "backend/tests/Fixtures/big5_result_page_v2/route_driven_overloaded_internalizer_pilot_payload_v0_1.payload.json"
+    ],
+    "backend_golden_case_count": 16,
+    "backend_golden_case_package": "backend/content_assets/big5/result_page_v2/qa/route_driven_golden_cases/v0_1",
+    "frontend_rendered_qa_contracts": [
+      "fap-web/tests/contracts/big5-route-driven-rendered-qa.contract.test.tsx",
+      "fap-web/tests/contracts/big5-expanded-route-driven-rendered-cases.contract.test.tsx"
+    ],
+    "runtime_safety_tests": [
+      "backend/tests/Feature/V0_3/BigFiveV2PilotRuntimeFlagTest.php",
+      "backend/tests/Feature/V0_3/BigFiveV2PilotRuntimeFailClosedTest.php"
+    ],
+    "runtime_flag_config": "backend/config/big5_result_page_v2.php"
+  },
+  "surface_matrix": [
+    {
+      "surface_key": "result_page_desktop",
+      "status": "pass",
+      "evidence": [
+        "fap-web/tests/contracts/big5-route-driven-rendered-qa.contract.test.tsx",
+        "fap-web/tests/contracts/big5-expanded-route-driven-rendered-cases.contract.test.tsx"
+      ],
+      "notes": "Route-driven O59 and canonical profile family fixtures render through the V2 payload shell."
+    },
+    {
+      "surface_key": "result_page_mobile",
+      "status": "pass",
+      "evidence": [
+        "fap-web/tests/contracts/big5-route-driven-rendered-qa.contract.test.tsx",
+        "fap-web/tests/contracts/big5-expanded-route-driven-rendered-cases.contract.test.tsx"
+      ],
+      "notes": "Mobile viewport contract coverage exists for route-driven fixtures."
+    },
+    {
+      "surface_key": "pdf",
+      "status": "pending_surface",
+      "evidence": [],
+      "blocker": "No route-driven PDF render harness or contract evidence exists."
+    },
+    {
+      "surface_key": "share_card",
+      "status": "pending_surface",
+      "evidence": [],
+      "blocker": "No route-driven share-card render harness or contract evidence exists."
+    },
+    {
+      "surface_key": "history",
+      "status": "pending_surface",
+      "evidence": [],
+      "blocker": "No history surface contract consumes route-driven Big Five V2 pilot payloads."
+    },
+    {
+      "surface_key": "compare",
+      "status": "pending_surface",
+      "evidence": [],
+      "blocker": "No compare surface contract consumes route-driven Big Five V2 pilot payloads."
+    }
+  ],
+  "status_counts": {
+    "pass": 2,
+    "pending_surface": 4,
+    "fail": 0
+  },
+  "pilot_gate_status": {
+    "pilot_runtime_flag_default_off": true,
+    "access_gate_default_deny": true,
+    "allowed_non_production_attach_path_tested": true,
+    "production_disabled": true,
+    "rollback": "Set the pilot flag BIG5_RESULT_PAGE_V2_PILOT_RUNTIME_ENABLED=false and keep pilot allowlists empty."
+  },
+  "go_no_go": {
+    "controlled_pilot": {
+      "status": "ready_for_small_allowlisted_non_production_pilot",
+      "can_enter": true,
+      "scope": "result-page-only, allowlisted, non-production, default-off flag and default-deny access gate"
+    },
+    "public_pilot": {
+      "status": "no_go",
+      "can_enter": false,
+      "blockers": [
+        "PDF/share/history/compare remain pending_surface.",
+        "Public pilot governance and release criteria are not approved in this QA package.",
+        "Do not treat controlled pilot evidence as public pilot approval."
+      ]
+    },
+    "production": {
+      "status": "no_go",
+      "can_enter": false,
+      "blockers": [
+        "production_use_allowed remains false.",
+        "ready_for_production remains false.",
+        "Production governance, release snapshot, CMS review flow, and production import gate remain future work.",
+        "Runtime flag remains default-off and production disabled."
+      ]
+    }
+  },
+  "known_sidecar_blockers": [
+    {
+      "key": "fap_web_typecheck_sbti_image_modules",
+      "classification": "out_of_scope_existing_sidecar_blocker",
+      "status": "open",
+      "notes": "fap-web pnpm typecheck reports pre-existing SBTI image module declaration errors outside Big Five V2 route-driven rendered QA scope."
+    }
+  ],
+  "must_not_change": [
+    "Do not enable production.",
+    "Do not mark public pilot or production as go from this report.",
+    "Do not mark pending surfaces as pass without real surface harnesses.",
+    "Do not connect CMS or dynamic norms.",
+    "Do not generate new content body."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "fap.big5.result_page_v2.route_driven_pilot_readiness_summary.v0_1",
+  "package_key": "big5_result_page_v2.route_driven_pilot_readiness.v0_1",
+  "version": "0.1",
+  "mode": "route_driven_pilot_readiness_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_go": false,
+  "route_driven_payload_fixture_count": 9,
+  "canonical_profile_family_fixture_count": 8,
+  "golden_case_count": 16,
+  "rendered_surface_status_counts": {
+    "pass": 2,
+    "pending_surface": 4,
+    "fail": 0
+  },
+  "controlled_pilot_status": "ready_for_small_allowlisted_non_production_pilot",
+  "public_pilot_status": "no_go",
+  "production_status": "no_go",
+  "pdf_share_history_compare_pending": true,
+  "pilot_runtime_flag_default_off": true,
+  "access_gate_default_deny": true,
+  "production_disabled": true,
+  "cms_out_of_scope": true,
+  "dynamic_norms_out_of_scope": true,
+  "no_body_generated": true
+}
