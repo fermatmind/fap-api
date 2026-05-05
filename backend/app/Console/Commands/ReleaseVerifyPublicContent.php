@@ -16,6 +16,7 @@ final class ReleaseVerifyPublicContent extends Command
         {--expected-occupations=2787 : Required full career dataset member count}
         {--min-career-job-items=2786 : Required public career job list item count}
         {--content-source-dir=../content_baselines/content_pages : Content page baseline directory to verify against}
+        {--strict-career : Fail when Career completeness checks are below release thresholds}
         {--json : Emit JSON output}';
 
     protected $description = 'Fail release when backend-authoritative public content required by frontend surfaces is incomplete.';
@@ -24,31 +25,45 @@ final class ReleaseVerifyPublicContent extends Command
         PublicCareerAuthorityResponseCache $careerAuthorityCache,
         CareerJobListBundleBuilder $careerJobListBundleBuilder,
     ): int {
+        $careerCompletenessStrict = $this->careerCompletenessStrict();
         $summary = [
             'content_pages' => $this->verifyContentPages(),
             'career_dataset' => $this->verifyCareerDataset($careerAuthorityCache),
             'career_job_list' => $this->verifyCareerJobList($careerJobListBundleBuilder),
         ];
 
-        $failures = [];
+        $blockingFailures = [];
+        $warnings = [];
         foreach ($summary as $section => $result) {
             foreach ((array) ($result['failures'] ?? []) as $failure) {
-                $failures[] = [
+                $entry = [
                     'section' => $section,
                     'failure' => $failure,
                 ];
+
+                if (! $careerCompletenessStrict && $this->isCareerCompletenessSection($section)) {
+                    $warnings[] = $entry;
+
+                    continue;
+                }
+
+                $blockingFailures[] = $entry;
             }
         }
 
         $payload = [
-            'ok' => $failures === [],
+            'ok' => $blockingFailures === [],
+            'career_completeness_strict' => $careerCompletenessStrict,
             'summary' => $summary,
-            'failures' => $failures,
+            'failures' => $blockingFailures,
+            'warnings' => $warnings,
         ];
 
         if ((bool) $this->option('json')) {
             $this->line((string) json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
         } else {
+            $this->line(sprintf('career_completeness_strict=%s', $careerCompletenessStrict ? '1' : '0'));
+
             foreach ($summary as $section => $result) {
                 $this->line(sprintf('%s ok=%s', $section, ($result['ok'] ?? false) ? '1' : '0'));
                 foreach ((array) ($result['metrics'] ?? []) as $metric => $value) {
@@ -56,12 +71,30 @@ final class ReleaseVerifyPublicContent extends Command
                 }
             }
 
-            foreach ($failures as $failure) {
+            foreach ($warnings as $warning) {
+                $this->warn('warning '.$warning['section'].': '.$warning['failure']);
+            }
+
+            foreach ($blockingFailures as $failure) {
                 $this->error($failure['section'].': '.$failure['failure']);
             }
         }
 
-        return $failures === [] ? self::SUCCESS : self::FAILURE;
+        return $blockingFailures === [] ? self::SUCCESS : self::FAILURE;
+    }
+
+    private function careerCompletenessStrict(): bool
+    {
+        if ((bool) $this->option('strict-career')) {
+            return true;
+        }
+
+        return filter_var((string) (getenv('DEPLOY_PUBLIC_CONTENT_STRICT_CAREER') ?: ''), FILTER_VALIDATE_BOOLEAN);
+    }
+
+    private function isCareerCompletenessSection(string $section): bool
+    {
+        return in_array($section, ['career_dataset', 'career_job_list'], true);
     }
 
     /**

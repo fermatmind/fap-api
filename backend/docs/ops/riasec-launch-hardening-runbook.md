@@ -142,6 +142,8 @@ php artisan release:verify-public-content \
 php artisan route:list | grep -E 'api/v0\.5/landing-surfaces|api/v0\.3/scales/lookup|api/v0\.3/scales/.*/questions|api/v0\.3/attempts/.*/report-access'
 ```
 
+`release:verify-public-content` hard-fails missing backend content pages. Career dataset and job-list completeness are warning-only unless the operator reruns with `--strict-career` or deploys with `DEPLOY_PUBLIC_CONTENT_STRICT_CAREER=1`.
+
 Then run:
 
 ```bash
