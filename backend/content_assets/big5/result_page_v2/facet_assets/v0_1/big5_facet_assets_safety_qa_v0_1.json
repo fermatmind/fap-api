@@ -1,0 +1,28 @@
+{
+  "schema": "fap.big5.content_assets.safety_qa.v0.1",
+  "package_key": "B5-CONTENT-3_facet_assets_v0_1",
+  "asset_count": 90,
+  "safety_scan_scope": [
+    "title_zh",
+    "summary_zh",
+    "body_zh",
+    "short_body_zh",
+    "benefit_zh",
+    "cost_zh",
+    "common_misread_zh",
+    "action_zh"
+  ],
+  "banned_user_visible_body_hits": 0,
+  "banned_hit_samples": [],
+  "missing_required_safety_tags": 0,
+  "missing_required_safety_tag_samples": [],
+  "all_assets_inference_only": true,
+  "all_assets_not_independent_measurement": true,
+  "all_assets_requires_method_boundary": true,
+  "percentile_as_primary_explanation_allowed": false,
+  "facet_directory_metric_row_allowed": true,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false
+}

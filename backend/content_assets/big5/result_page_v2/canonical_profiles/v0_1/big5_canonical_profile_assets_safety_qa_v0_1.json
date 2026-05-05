@@ -1,0 +1,52 @@
+{
+  "schema": "fap.big5.content_assets.canonical_profile_assets.safety_qa.v0_1",
+  "batch_key": "B5-CONTENT-4",
+  "version": "v0.1",
+  "created_at_utc": "2026-05-04T14:32:45.490581Z",
+  "hard_boundary_checks": {
+    "no_fixed_personality_type": "PASS",
+    "profile_label_assistive_only": "PASS",
+    "no_you_are_type_language": "PASS",
+    "no_diagnostic_language": "PASS",
+    "no_hiring_language": "PASS",
+    "no_accuracy_claim": "PASS",
+    "no_combination_key_as_user_type": "PASS",
+    "no_frontend_fallback": "PASS",
+    "no_internal_metadata_visible_body": "PASS",
+    "no_object_object": "PASS",
+    "no_deferred_to_future": "PASS",
+    "no_o59_generalized_to_all_users": "PASS"
+  },
+  "banned_scan_terms": [
+    "你就是",
+    "这个组合证明",
+    "临床诊断",
+    "医学判断",
+    "心理疾病",
+    "招聘筛选",
+    "适合录用",
+    "不适合录用",
+    "准确率",
+    "外部效度",
+    "frontend_fallback",
+    "internal_metadata",
+    "[object Object]",
+    "deferred_to_future",
+    "user_confirmed_type"
+  ],
+  "banned_user_visible_body_hits": 0,
+  "banned_user_visible_body_hit_samples": [],
+  "required_safety_tags": [
+    "continuous_trait_language",
+    "non_diagnostic",
+    "non_hiring",
+    "no_hard_typing",
+    "no_accuracy_claim",
+    "profile_label_assistive_only"
+  ],
+  "missing_required_safety_tags": 0,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false
+}

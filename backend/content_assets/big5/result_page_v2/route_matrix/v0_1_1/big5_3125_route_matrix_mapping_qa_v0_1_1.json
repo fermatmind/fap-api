@@ -1,0 +1,25 @@
+{
+  "schema": "fap.big5.content_6.route_matrix.mapping_qa.v0_1_1",
+  "version": "v0.1.1",
+  "checked_at_utc": "2026-05-04T16:52:51Z",
+  "total_rows_checked": 3125,
+  "combination_space_complete": true,
+  "all_rows_have_8_section_route": true,
+  "all_rows_have_valid_profile_family": true,
+  "all_rows_have_valid_trait_band_refs": true,
+  "all_rows_have_valid_coupling_refs": true,
+  "all_rows_have_valid_facet_route_refs": true,
+  "all_rows_have_valid_scenario_refs": true,
+  "all_rows_have_canonical_profile_usage": true,
+  "all_rows_have_profile_label_public_allowed": true,
+  "invalid_asset_references": [],
+  "o59_canonical_row_present": true,
+  "o59_canonical_row_valid": true,
+  "semantic_route_consistency": {
+    "semantic_axis_band_mismatch_count": 0,
+    "low_confidence_canonical_axis_leak_count": 0,
+    "low_confidence_public_profile_label_count": 0,
+    "status": "PASS"
+  },
+  "module_dependency_note": "This matrix routes to B5-CONTENT-1..5 and B5-B1 references only; it does not generate report body copy."
+}

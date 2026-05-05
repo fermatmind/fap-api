@@ -1,0 +1,161 @@
+{
+  "schema": "fap.big5.content_assets.trait_band.manifest.v0_1",
+  "package_key": "B5-CONTENT-1",
+  "package_name": "五维 × 五档基础维度资产",
+  "version": "v0.1",
+  "locale": "zh-CN",
+  "created_at_utc": "2026-05-04T13:07:53Z",
+  "asset_count": 25,
+  "expected_asset_count": 25,
+  "coverage": {
+    "traits": [
+      {
+        "code": "O",
+        "label_zh": "开放性",
+        "public_name_zh": "经验开放度"
+      },
+      {
+        "code": "C",
+        "label_zh": "尽责性",
+        "public_name_zh": "秩序与推进力"
+      },
+      {
+        "code": "E",
+        "label_zh": "外向性",
+        "public_name_zh": "社交能量与进入方式"
+      },
+      {
+        "code": "A",
+        "label_zh": "宜人性",
+        "public_name_zh": "合作与边界方式"
+      },
+      {
+        "code": "N",
+        "label_zh": "情绪性",
+        "public_name_zh": "压力反应敏感度"
+      }
+    ],
+    "bands": [
+      {
+        "internal_band": "very_low",
+        "order": 1,
+        "score_range_0_100": [
+          0,
+          19
+        ],
+        "internal_band_threshold": "B1_0_19",
+        "display_band_label": "明显偏低"
+      },
+      {
+        "internal_band": "low",
+        "order": 2,
+        "score_range_0_100": [
+          20,
+          39
+        ],
+        "internal_band_threshold": "B2_20_39",
+        "display_band_label": "偏低"
+      },
+      {
+        "internal_band": "mid",
+        "order": 3,
+        "score_range_0_100": [
+          40,
+          59
+        ],
+        "internal_band_threshold": "B3_40_59",
+        "display_band_label": "中位"
+      },
+      {
+        "internal_band": "high",
+        "order": 4,
+        "score_range_0_100": [
+          60,
+          79
+        ],
+        "internal_band_threshold": "B4_60_79",
+        "display_band_label": "中高"
+      },
+      {
+        "internal_band": "very_high",
+        "order": 5,
+        "score_range_0_100": [
+          80,
+          100
+        ],
+        "internal_band_threshold": "B5_80_100",
+        "display_band_label": "明显偏高"
+      }
+    ],
+    "canonical_o59_support": {
+      "internal_combination_key": "O3_C2_E2_A3_N4",
+      "profile_label": "敏锐的独立思考者",
+      "axis": "高敏感 × 中高开放 × 克制进入",
+      "band_support": {
+        "O": {
+          "score": 59,
+          "internal_band": "mid",
+          "display_band_label": "中高",
+          "support_note": "O59 位于 B3 上沿，内部使用 mid/O3；产品可显示为中高。"
+        },
+        "C": {
+          "score": 32,
+          "internal_band": "low",
+          "display_band_label": "偏低",
+          "support_note": "C32 使用 low/C2。"
+        },
+        "E": {
+          "score": 20,
+          "internal_band": "low",
+          "display_band_label": "明显偏低",
+          "support_note": "E20 位于 B2 下沿，内部使用 low/E2；产品可显示为明显偏低。"
+        },
+        "A": {
+          "score": 55,
+          "internal_band": "mid",
+          "display_band_label": "中位略高",
+          "support_note": "A55 使用 mid/A3；产品可显示为中位略高。"
+        },
+        "N": {
+          "score": 68,
+          "internal_band": "high",
+          "display_band_label": "中高",
+          "support_note": "N68 使用 high/N4。"
+        }
+      }
+    }
+  },
+  "runtime_use": "staging_only",
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_use_allowed": false,
+  "source_documents": {
+    "module_master": "FermatMind Big Five 新版结果页正式上线 V2.0",
+    "narrative_master": "FermatMind Big Five 完整结果页全文（最终成稿）",
+    "schema_baseline": "B5-CONTENT-0 v0.1.1",
+    "governance_baseline": "B5-A-lite v0.1"
+  },
+  "files": {
+    "README.md": "README.md",
+    "SHA256SUMS.txt": "SHA256SUMS.txt",
+    "big5_trait_band_assets_coverage_v0_1.csv": "big5_trait_band_assets_coverage_v0_1.csv",
+    "big5_trait_band_assets_main_v0_1.csv": "big5_trait_band_assets_main_v0_1.csv",
+    "big5_trait_band_assets_manifest_v0_1.json": "big5_trait_band_assets_manifest_v0_1.json",
+    "big5_trait_band_assets_mapping_qa_v0_1.csv": "big5_trait_band_assets_mapping_qa_v0_1.csv",
+    "big5_trait_band_assets_mapping_qa_v0_1.json": "big5_trait_band_assets_mapping_qa_v0_1.json",
+    "big5_trait_band_assets_qa_summary_v0_1.json": "big5_trait_band_assets_qa_summary_v0_1.json",
+    "big5_trait_band_assets_ready_for_pilot_v0_1.json": "big5_trait_band_assets_ready_for_pilot_v0_1.json",
+    "big5_trait_band_assets_repair_log_v0_1.md": "big5_trait_band_assets_repair_log_v0_1.md",
+    "big5_trait_band_assets_safety_qa_v0_1.json": "big5_trait_band_assets_safety_qa_v0_1.json",
+    "big5_trait_band_assets_v0_1.json": "big5_trait_band_assets_v0_1.json",
+    "big5_trait_band_assets_v0_1.jsonl": "big5_trait_band_assets_v0_1.jsonl"
+  },
+  "notes": [
+    "This package contains trait-band baseline assets only.",
+    "It does not include coupling, facet, canonical profile, selector runtime, or 3125 matrix assets.",
+    "All assets are staging_only and production_use_allowed=false."
+  ],
+  "file_count": 13
+}

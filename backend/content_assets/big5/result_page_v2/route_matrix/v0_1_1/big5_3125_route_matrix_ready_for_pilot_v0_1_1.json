@@ -1,0 +1,26 @@
+{
+  "schema": "fap.big5.content_6.route_matrix.ready_for_pilot.v0_1_1",
+  "version": "v0.1.1",
+  "batch_key": "B5-CONTENT-6",
+  "asset_type": "3125_route_matrix",
+  "revision_scope": "semantic_route_consistency_only",
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_use_allowed": false,
+  "runtime_use": "staging_only",
+  "blocking_reasons": [
+    "route_matrix_is_staging_only",
+    "rendered_preview_QA_not_executed",
+    "runtime_selector_not_connected",
+    "production_import_policy_not_approved"
+  ],
+  "requirements_before_pilot": [
+    "independent_mapping_QA",
+    "independent_safety_QA",
+    "rendered_preview_QA_for_representative_cases",
+    "repair_log_all_P0_closed",
+    "no P0 blockers"
+  ]
+}

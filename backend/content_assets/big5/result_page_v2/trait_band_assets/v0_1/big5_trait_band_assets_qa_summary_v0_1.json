@@ -1,0 +1,85 @@
+{
+  "schema": "fap.big5.content_assets.trait_band.qa_summary.v0_1",
+  "package_key": "B5-CONTENT-1",
+  "version": "v0.1",
+  "created_at_utc": "2026-05-04T13:07:53Z",
+  "asset_count": 25,
+  "expected_asset_count": 25,
+  "coverage": {
+    "traits_expected": [
+      "O",
+      "C",
+      "E",
+      "A",
+      "N"
+    ],
+    "bands_expected": [
+      "very_low",
+      "low",
+      "mid",
+      "high",
+      "very_high"
+    ],
+    "coverage_by_trait": {
+      "O": 5,
+      "C": 5,
+      "E": 5,
+      "A": 5,
+      "N": 5
+    },
+    "coverage_by_band": {
+      "very_low": 5,
+      "low": 5,
+      "mid": 5,
+      "high": 5,
+      "very_high": 5
+    },
+    "missing_trait_band_cells": [],
+    "all_trait_band_cells_covered": true
+  },
+  "field_checks": {
+    "duplicate_asset_keys": 0,
+    "duplicate_body_zh": 0,
+    "empty_body_zh": 0,
+    "missing_benefit_zh": 0,
+    "missing_cost_zh": 0,
+    "missing_common_misread_zh": 0,
+    "missing_action_zh": 0,
+    "fallback_allowed_true": 0,
+    "production_use_allowed_true": 0,
+    "runtime_use_not_staging_only": 0,
+    "ready_for_pilot_true": 0
+  },
+  "body_quality_summary": {
+    "body_chars_min": 181,
+    "body_chars_max": 242,
+    "body_chars_avg": 203.1,
+    "max_sentence_length_max": 69,
+    "all_assets_have_benefit_cost_misread_action": true
+  },
+  "safety_summary": {
+    "banned_user_visible_body_hits": 0,
+    "banned_user_visible_body_hit_samples": [],
+    "body_scan_fields": [
+      "title_zh",
+      "summary_zh",
+      "body_zh",
+      "short_body_zh",
+      "benefit_zh",
+      "cost_zh",
+      "common_misread_zh",
+      "action_zh"
+    ]
+  },
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_use_allowed": false,
+  "blocking_before_pilot": [
+    "human editorial QA not yet passed",
+    "independent safety QA not yet passed",
+    "rendered preview QA not yet passed",
+    "repair log not yet closed"
+  ]
+}

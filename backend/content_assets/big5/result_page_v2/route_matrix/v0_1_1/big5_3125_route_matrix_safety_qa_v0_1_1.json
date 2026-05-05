@@ -1,0 +1,33 @@
+{
+  "schema": "fap.big5.content_6.route_matrix.safety_qa.v0_1_1",
+  "version": "v0.1.1",
+  "checked_at_utc": "2026-05-04T16:52:51Z",
+  "total_rows_checked": 3125,
+  "body_zh_field_count": 0,
+  "banned_user_visible_text_hit_count": 0,
+  "banned_user_visible_text_hits": [],
+  "share_safety_violations": 0,
+  "production_use_allowed_true_count": 0,
+  "runtime_use_not_staging_only_count": 0,
+  "ready_for_pilot_true_count": 0,
+  "semantic_axis_band_mismatch_count": 0,
+  "low_confidence_public_profile_label_count": 0,
+  "low_confidence_canonical_axis_leak_count": 0,
+  "safety_requirements": {
+    "no_fixed_type_language": true,
+    "no_user_confirmed_type": true,
+    "no_diagnostic_language": true,
+    "no_hiring_screening_language": true,
+    "no_accuracy_claim": true,
+    "combination_key_not_user_visible_type": true,
+    "share_safe_summary_no_raw_scores": true,
+    "no_body_zh": true,
+    "runtime_use_all_staging_only": true,
+    "production_use_allowed_all_false": true,
+    "ready_for_pilot_all_false": true,
+    "low_confidence_labels_internal_only": true,
+    "low_confidence_no_canonical_axis_leak": true,
+    "semantic_axis_matches_domain_bands": true
+  },
+  "status": "PASS_AUTHOR_PREFLIGHT_STAGING_ONLY"
+}

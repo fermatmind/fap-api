@@ -1,0 +1,45 @@
+{
+  "schema": "fap.big5.content_assets.package_manifest.v0.1",
+  "package_key": "B5-CONTENT-3_facet_assets_v0_1",
+  "package_name": "B5-CONTENT-3｜Facet 刻面解释 / 反直觉重构资产 v0.1",
+  "version": "v0_1",
+  "created_at_utc": "2026-05-04T14:11:31.365872Z",
+  "locale": "zh-CN",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "asset_count": 90,
+  "expected_asset_count": 90,
+  "source_documents": {
+    "module_master": "FermatMind Big Five 新版结果页正式上线 V2.0",
+    "narrative_master": "FermatMind Big Five 完整结果页全文",
+    "selector_qa_policy": "staging_only reference, not content source"
+  },
+  "files": {
+    "assets_json": "big5_facet_assets_v0_1.json",
+    "assets_jsonl": "big5_facet_assets_v0_1.jsonl",
+    "manifest": "big5_facet_assets_manifest_v0_1.json",
+    "qa_summary": "big5_facet_assets_qa_summary_v0_1.json",
+    "mapping_qa": "big5_facet_assets_mapping_qa_v0_1.json",
+    "safety_qa": "big5_facet_assets_safety_qa_v0_1.json",
+    "ready_for_pilot": "big5_facet_assets_ready_for_pilot_v0_1.json",
+    "main_csv": "big5_facet_assets_main_v0_1.csv",
+    "coverage_csv": "big5_facet_assets_coverage_v0_1.csv",
+    "mapping_qa_csv": "big5_facet_assets_mapping_qa_v0_1.csv",
+    "readme": "README.md",
+    "repair_log": "big5_facet_assets_repair_log_v0_1.md",
+    "sha256": "SHA256SUMS.txt"
+  },
+  "constraints": {
+    "no_complete_report": true,
+    "no_3125_matrix": true,
+    "no_runtime": true,
+    "no_code": true,
+    "no_frontend_change": true,
+    "no_canonical_profiles": true,
+    "no_scenario_action": true
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "fap.big5.content_assets.scenario_action.ready_for_pilot.v0_1",
+  "package": "B5-CONTENT-5",
+  "asset_count": 160,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_use_allowed": false,
+  "runtime_use": "staging_only",
+  "blocking_reasons_for_pilot": [
+    "independent_editorial_review_not_run",
+    "rendered_preview_qa_not_run",
+    "runtime_mapping_not_allowed_in_this_batch"
+  ],
+  "hard_gates": {
+    "coverage_qa_passed": true,
+    "safety_qa_passed": true,
+    "editorial_qa_passed": false,
+    "mapping_qa_passed": true,
+    "rendered_preview_qa_passed": false,
+    "repair_log_all_closed": true,
+    "no_p0_blockers": true
+  }
+}

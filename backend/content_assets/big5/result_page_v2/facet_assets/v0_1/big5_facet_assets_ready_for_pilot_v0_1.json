@@ -1,0 +1,25 @@
+{
+  "schema": "fap.big5.content_assets.ready_for_pilot.v0.1",
+  "package_key": "B5-CONTENT-3_facet_assets_v0_1",
+  "asset_count": 90,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_use_allowed": false,
+  "runtime_use": "staging_only",
+  "hard_gates": {
+    "coverage_qa_passed": true,
+    "safety_qa_passed": true,
+    "editorial_qa_passed": false,
+    "mapping_qa_passed": true,
+    "rendered_preview_qa_passed": false,
+    "repair_log_all_closed": true,
+    "no_p0_blockers": true
+  },
+  "blocking_reasons_for_pilot": [
+    "editorial_qa_not_yet_performed",
+    "rendered_preview_qa_not_yet_performed"
+  ],
+  "next_recommended_batch": "B5-CONTENT-3 editorial review and rendered preview QA before any pilot use"
+}
