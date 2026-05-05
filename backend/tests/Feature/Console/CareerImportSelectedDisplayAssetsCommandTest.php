@@ -83,6 +83,129 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
     }
 
     #[Test]
+    public function valid_plan_manifest_dry_run_imports_manifest_candidates_without_static_allowlist_support(): void
+    {
+        $row = $this->row('manifest-only-career', title: 'Manifest Only Career', soc: '15-2011', onet: '15-2011.00');
+        $this->createAuthorityOccupation($row['Slug'], $row['SOC_Code'], $row['O_NET_Code']);
+        $workbook = $this->writeWorkbook([$row]);
+        $manifest = $this->writeManifest($workbook, [$row]);
+        $before = $this->tableCounts();
+
+        [$exitCode, $report] = $this->runImportWithManifest($workbook, $manifest);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame($before, $this->tableCounts());
+        $this->assertSame('pass', $report['decision']);
+        $this->assertSame('dry_run', $report['mode']);
+        $this->assertSame(1, $report['validated_count']);
+        $this->assertSame(1, $report['would_write_count']);
+        $this->assertFalse($report['did_write']);
+        $this->assertSame(0, CareerJobDisplayAsset::query()->count());
+        $this->assertSame(hash_file('sha256', $manifest), $report['manifest_sha256']);
+        $this->assertSame(1, $report['manifest_expected_delta']['career_job_display_assets']);
+    }
+
+    #[Test]
+    public function plan_manifest_rejects_invalid_or_held_candidates(): void
+    {
+        $row = $this->row('manifest-only-career', title: 'Manifest Only Career', soc: '15-2011', onet: '15-2011.00');
+        $this->createAuthorityOccupation($row['Slug'], $row['SOC_Code'], $row['O_NET_Code']);
+        $workbook = $this->writeWorkbook([$row]);
+
+        [$exitCode, $report] = $this->runImportWithManifest(
+            $workbook,
+            $this->writeManifest($workbook, [$row], workbookSha: 'wrong-sha'),
+        );
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('Manifest workbook sha256 must match --file.', implode(' ', $report['errors']));
+
+        [$exitCode, $report] = $this->runImportWithManifest(
+            $workbook,
+            $this->writeManifest($workbook, [$row], plannerVersion: ''),
+        );
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('Manifest planner.version must be career_full_upload_planner_v0.1.', implode(' ', $report['errors']));
+
+        [$exitCode, $report] = $this->runImportWithManifest(
+            $workbook,
+            $this->writeManifest($workbook, [$row], expectedDelta: 2),
+        );
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('expected display asset delta must equal import candidate count', implode(' ', $report['errors']));
+
+        $software = $this->row('software-developers', title: 'Software Developers', cnTitle: '软件开发人员', soc: '15-1252', onet: '15-1252.00');
+        $softwareWorkbook = $this->writeWorkbook([$software]);
+        [$exitCode, $report] = $this->runImportWithManifest(
+            $softwareWorkbook,
+            $this->writeManifest($softwareWorkbook, [$software]),
+        );
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('software-developers', implode(' ', $report['errors']));
+
+        $broad = $this->row('agricultural-workers-all-other', title: 'Agricultural Workers, All Other', soc: 'BLS_BROAD_GROUP', onet: 'multiple_onet_occupations');
+        $broadWorkbook = $this->writeWorkbook([$broad]);
+        $this->createAuthorityOccupation($broad['Slug'], $broad['SOC_Code'], $broad['O_NET_Code']);
+        [$exitCode, $report] = $this->runImportWithManifest(
+            $broadWorkbook,
+            $this->writeManifest($broadWorkbook, [$broad]),
+        );
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('broad group hold rows', implode(' ', $report['errors']));
+
+        $cnProxy = $this->row('cn-2-01-01-00', title: 'CN Proxy', soc: 'CN-2-01-01-00', onet: 'not_applicable_cn_occupation');
+        $cnWorkbook = $this->writeWorkbook([$cnProxy]);
+        $this->createAuthorityOccupation($cnProxy['Slug'], $cnProxy['SOC_Code'], $cnProxy['O_NET_Code']);
+        [$exitCode, $report] = $this->runImportWithManifest(
+            $cnWorkbook,
+            $this->writeManifest($cnWorkbook, [$cnProxy]),
+        );
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('CN proxy hold rows', implode(' ', $report['errors']));
+    }
+
+    #[Test]
+    public function plan_manifest_rejects_already_imported_rows_from_current_baseline_but_allows_idempotency_after_force(): void
+    {
+        $row = $this->row('manifest-only-career', title: 'Manifest Only Career', soc: '15-2011', onet: '15-2011.00');
+        $occupation = $this->createAuthorityOccupation($row['Slug'], $row['SOC_Code'], $row['O_NET_Code']);
+        $workbook = $this->writeWorkbook([$row]);
+
+        CareerJobDisplayAsset::query()->create([
+            'occupation_id' => $occupation->id,
+            'canonical_slug' => $row['Slug'],
+            'surface_version' => 'display.surface.v1',
+            'asset_version' => 'v4.2',
+            'template_version' => 'v4.2',
+            'asset_type' => 'career_job_public_display',
+            'asset_role' => 'formal_pilot_master',
+            'status' => 'ready_for_pilot',
+            'component_order_json' => ['hero'],
+            'page_payload_json' => ['page' => ['zh' => [], 'en' => []]],
+            'seo_payload_json' => [],
+            'sources_json' => [],
+            'structured_data_json' => [],
+            'implementation_contract_json' => [],
+            'metadata_json' => [],
+        ]);
+
+        [$exitCode, $report] = $this->runImportWithManifest(
+            $workbook,
+            $this->writeManifest($workbook, [$row], baselineDisplayAssets: 1),
+        );
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('already has a selected display asset', implode(' ', $report['errors']));
+
+        [$exitCode, $report] = $this->runImportWithManifest(
+            $workbook,
+            $this->writeManifest($workbook, [$row], baselineDisplayAssets: 0),
+        );
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame(0, $report['would_write_count']);
+        $this->assertSame(1, $report['already_exists_count']);
+        $this->assertFalse($report['did_write']);
+    }
+
+    #[Test]
     public function d5_selected_slugs_dry_run_generates_payloads_without_writing_database_rows(): void
     {
         foreach ($this->d5Rows() as $row) {
@@ -755,6 +878,80 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
         ], $options));
 
         return [$exitCode, json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR)];
+    }
+
+    /**
+     * @return array{int, array<string, mixed>}
+     */
+    private function runImportWithManifest(string $file, string $manifest, array $options = []): array
+    {
+        $exitCode = Artisan::call('career:import-selected-display-assets', array_merge([
+            '--file' => $file,
+            '--manifest' => $manifest,
+            '--json' => true,
+        ], $options));
+
+        return [$exitCode, json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR)];
+    }
+
+    /**
+     * @param  list<array<string, string>>  $rows
+     */
+    private function writeManifest(
+        string $workbook,
+        array $rows,
+        ?string $workbookSha = null,
+        string $plannerVersion = 'career_full_upload_planner_v0.1',
+        ?int $expectedDelta = null,
+        int $baselineDisplayAssets = 0,
+    ): string {
+        $manifestRows = array_map(static fn (array $row, int $index): array => [
+            'row_number' => $index + 2,
+            'slug' => $row['Slug'],
+            'status' => 'upload_candidate',
+            'canonical_slug' => $row['Slug'],
+            'hold_reason' => null,
+            'import_eligible' => true,
+            'cohort_id' => 'full_upload_manifest',
+        ], $rows, array_keys($rows));
+        $candidateSlugs = array_values(array_map(
+            static fn (array $row): string => strtolower((string) $row['Slug']),
+            $rows,
+        ));
+        $actualWorkbookSha = hash_file('sha256', $workbook) ?: '';
+        $manifestWorkbookSha = $workbookSha ?? $actualWorkbookSha;
+        $payload = [
+            'planner_version' => $plannerVersion,
+            'workbook_sha256' => $actualWorkbookSha,
+            'row_count' => count($manifestRows),
+            'upload_candidate_slugs' => $candidateSlugs,
+        ];
+        $manifest = [
+            'workbook' => [
+                'path' => $workbook,
+                'sha256' => $manifestWorkbookSha,
+                'sheet' => 'Career_Assets_v4_1',
+                'rows' => count($manifestRows),
+                'columns' => count(CareerSelectedDisplayAssetMapper::REQUIRED_HEADERS),
+            ],
+            'planner' => [
+                'version' => $plannerVersion,
+                'generated_at' => '2026-05-05T00:00:00Z',
+                'db_baseline' => [
+                    'career_job_display_assets' => $baselineDisplayAssets,
+                ],
+                'upload_manifest_sha256' => hash('sha256', json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: ''),
+            ],
+            'expected_delta' => [
+                'career_job_display_assets' => $expectedDelta ?? count($candidateSlugs),
+            ],
+            'rows' => $manifestRows,
+        ];
+
+        $path = $this->tempDir().'/career_full_upload_manifest.json';
+        file_put_contents($path, json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+
+        return $path;
     }
 
     /**
