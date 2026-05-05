@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-05T23:42:22+08:00",
+  "updated_at": "2026-05-05T23:58:15+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -75,7 +75,7 @@
       "depends_on": [
         "backend-email-binding-foundation"
       ],
-      "commit_sha": "f2b02007a5ef66280fe9e8dedf855b7e7d401ab7",
+      "commit_sha": "e040734a19faf236105a56bf7e82545a1b522e31",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1187",
       "checks": {
         "dependency": {
@@ -116,7 +116,7 @@
         "bigfive_freeze_gate": {
           "status": "pass",
           "command": "APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=':memory:' php artisan test tests/Unit/Services/BigFive/ResultPageV2/BigFiveResultPageV2CoreBodyPreviewTest.php",
-          "evidence": "25 tests passed, 367 assertions."
+          "evidence": "25 tests passed, 369 assertions; route diff classifier now ignores PR2 lookup route blank-line diff."
         },
         "openapi_snapshot": {
           "status": "pass",
@@ -129,8 +129,8 @@
           "evidence": "Full script exited 0."
         },
         "github_required_checks": {
-          "status": "pending",
-          "evidence": "PR opened at https://github.com/fermatmind/fap-api/pull/1187; GitHub checks are queued/in progress."
+          "status": "pending_after_ci_fix",
+          "evidence": "Previous verify-mbti checks failed on the PR2 route diff freeze gate. Fixed in e040734a19faf236105a56bf7e82545a1b522e31 and awaiting GitHub checks on the new head."
         }
       },
       "sidecar_issues": [
