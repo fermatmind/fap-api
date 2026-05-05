@@ -1,0 +1,413 @@
+{
+  "schema": "fap.big5.result_page_v2.selector_qa_policy.slot_resolution_report.v0_1",
+  "mode": "staging_only_advisory_scan",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "source_asset_batch": "big5_result_page_v2.selector_ready_assets.v0.3_p0_full",
+  "policy_package": "big5_result_page_v2.selector_qa_policy.v0.1",
+  "summary": {
+    "golden_case_count": 31,
+    "selector_asset_count": 325,
+    "total_include_slots": 95,
+    "unresolved_reference_count": 0,
+    "normalization_change_count": 10
+  },
+  "normalization_changes": [
+    {
+      "case_key": "golden_case_10_o_high_c_low",
+      "field": "expected_selection.include_slots",
+      "from": "module_05_facet_reframe.facet_card.O5.high",
+      "to": "module_05_facet_reframe.facet_card.o5.high",
+      "reason": "facet slot keys in selector_ready_assets use lowercase facet ids"
+    },
+    {
+      "case_key": "golden_case_17_c_low_c1_c2_high_c5_low",
+      "field": "expected_selection.include_slots",
+      "from": "module_05_facet_reframe.facet_card.C1.high",
+      "to": "module_05_facet_reframe.facet_card.c1.high",
+      "reason": "facet slot keys in selector_ready_assets use lowercase facet ids"
+    },
+    {
+      "case_key": "golden_case_17_c_low_c1_c2_high_c5_low",
+      "field": "expected_selection.include_slots",
+      "from": "module_05_facet_reframe.facet_card.C2.high",
+      "to": "module_05_facet_reframe.facet_card.c2.high",
+      "reason": "facet slot keys in selector_ready_assets use lowercase facet ids"
+    },
+    {
+      "case_key": "golden_case_17_c_low_c1_c2_high_c5_low",
+      "field": "expected_selection.include_slots",
+      "from": "module_05_facet_reframe.facet_card.C5.low",
+      "to": "module_05_facet_reframe.facet_card.c5.low",
+      "reason": "facet slot keys in selector_ready_assets use lowercase facet ids"
+    },
+    {
+      "case_key": "golden_case_18_e_low_e1_e2_mid_e3_low",
+      "field": "expected_selection.include_slots",
+      "from": "module_05_facet_reframe.facet_card.E1.high",
+      "to": "module_05_facet_reframe.facet_card.e1.high",
+      "reason": "facet slot keys in selector_ready_assets use lowercase facet ids"
+    },
+    {
+      "case_key": "golden_case_18_e_low_e1_e2_mid_e3_low",
+      "field": "expected_selection.include_slots",
+      "from": "module_05_facet_reframe.facet_card.E3.low",
+      "to": "module_05_facet_reframe.facet_card.e3.low",
+      "reason": "facet slot keys in selector_ready_assets use lowercase facet ids"
+    },
+    {
+      "case_key": "golden_case_19_n_high_n1_n3_high",
+      "field": "expected_selection.include_slots",
+      "from": "module_05_facet_reframe.facet_card.N1.high",
+      "to": "module_05_facet_reframe.facet_card.n1.high",
+      "reason": "facet slot keys in selector_ready_assets use lowercase facet ids"
+    },
+    {
+      "case_key": "golden_case_19_n_high_n1_n3_high",
+      "field": "expected_selection.include_slots",
+      "from": "module_05_facet_reframe.facet_card.N3.high",
+      "to": "module_05_facet_reframe.facet_card.n3.high",
+      "reason": "facet slot keys in selector_ready_assets use lowercase facet ids"
+    },
+    {
+      "case_key": "golden_case_20_a_high_boundary_late",
+      "field": "expected_selection.include_slots",
+      "from": "module_05_facet_reframe.facet_card.A3.high",
+      "to": "module_05_facet_reframe.facet_card.a3.high",
+      "reason": "facet slot keys in selector_ready_assets use lowercase facet ids"
+    },
+    {
+      "case_key": "golden_case_21_o_high_o5_high_c_low",
+      "field": "expected_selection.include_slots",
+      "from": "module_05_facet_reframe.facet_card.O5.high",
+      "to": "module_05_facet_reframe.facet_card.o5.high",
+      "reason": "facet slot keys in selector_ready_assets use lowercase facet ids"
+    }
+  ],
+  "case_reports": [
+    {
+      "case_key": "golden_case_01_sensitive_independent_thinker",
+      "golden_group": "clear_signature",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 4,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_02_structured_stabilizer",
+      "golden_group": "clear_signature",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_03_expressive_connector",
+      "golden_group": "clear_signature",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 2,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_04_quiet_operator",
+      "golden_group": "clear_signature",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_05_creative_sprinter",
+      "golden_group": "clear_signature",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 4,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_06_careful_realist",
+      "golden_group": "clear_signature",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_07_n_high_o_high",
+      "golden_group": "high_tension_or_mixed",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_08_c_high_n_high",
+      "golden_group": "high_tension_or_mixed",
+      "include_slot_count": 4,
+      "resolved_include_slot_count": 4,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 4,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_09_c_low_n_high",
+      "golden_group": "high_tension_or_mixed",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_10_o_high_c_low",
+      "golden_group": "high_tension_or_mixed",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_11_a_high_n_high",
+      "golden_group": "high_tension_or_mixed",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_12_a_low_n_high",
+      "golden_group": "high_tension_or_mixed",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_13_e_low_n_high",
+      "golden_group": "high_tension_or_mixed",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_14_balanced_mid_all",
+      "golden_group": "balanced_or_diffuse",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_15_lightly_high_no_axis",
+      "golden_group": "balanced_or_diffuse",
+      "include_slot_count": 2,
+      "resolved_include_slot_count": 2,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_16_broad_mixed_without_extremes",
+      "golden_group": "balanced_or_diffuse",
+      "include_slot_count": 2,
+      "resolved_include_slot_count": 2,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_17_c_low_c1_c2_high_c5_low",
+      "golden_group": "facet_reframe",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 2,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_18_e_low_e1_e2_mid_e3_low",
+      "golden_group": "facet_reframe",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 2,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_19_n_high_n1_n3_high",
+      "golden_group": "facet_reframe",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_20_a_high_boundary_late",
+      "golden_group": "facet_reframe",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_21_o_high_o5_high_c_low",
+      "golden_group": "facet_reframe",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_22_low_quality",
+      "golden_group": "safety_downgrade",
+      "include_slot_count": 2,
+      "resolved_include_slot_count": 2,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_23_norm_unavailable",
+      "golden_group": "safety_downgrade",
+      "include_slot_count": 2,
+      "resolved_include_slot_count": 2,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_24_facet_inconsistent",
+      "golden_group": "safety_downgrade",
+      "include_slot_count": 2,
+      "resolved_include_slot_count": 2,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_25_retest_recommended",
+      "golden_group": "safety_downgrade",
+      "include_slot_count": 2,
+      "resolved_include_slot_count": 2,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 2,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_26_share_safe_summary_only",
+      "golden_group": "safety_downgrade",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_27_work_low_e_high_o",
+      "golden_group": "scenario_application",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 2,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_28_relationship_high_a_high_n",
+      "golden_group": "scenario_application",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_29_stress_high_n_low_e",
+      "golden_group": "scenario_application",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 3,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_30_collaboration_document_first",
+      "golden_group": "scenario_application",
+      "include_slot_count": 3,
+      "resolved_include_slot_count": 3,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 2,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    },
+    {
+      "case_key": "golden_case_31_o59_canonical_preview",
+      "golden_group": "canonical_o59_preview",
+      "include_slot_count": 10,
+      "resolved_include_slot_count": 10,
+      "unresolved_include_slots": [],
+      "include_registry_key_count": 5,
+      "unresolved_registry_keys": [],
+      "status": "pass"
+    }
+  ],
+  "unresolved_references": [],
+  "interpretation": {
+    "blocking_for_staging_preview": false,
+    "blocking_for_runtime_selector": false,
+    "notes": [
+      "This report validates QA policy references against selector-ready staging assets only.",
+      "It does not wire selector policy into runtime.",
+      "Zero unresolved references is required before this QA policy can be used by a future runtime selector gate."
+    ]
+  }
+}

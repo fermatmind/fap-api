@@ -1,0 +1,3240 @@
+[
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_01_sensitive_independent_thinker",
+    "case_type": "selector_golden_case",
+    "title_zh": "高情绪 × 高开放 × 低外向：敏锐独立思考者",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 72,
+        "C": 42,
+        "E": 18,
+        "A": 54,
+        "N": 78
+      },
+      "domain_bands": {
+        "O": "high",
+        "C": "mid",
+        "E": "very_low",
+        "A": "mid",
+        "N": "high"
+      },
+      "facet_patterns": [
+        {
+          "facet": "N1",
+          "band": "high"
+        },
+        {
+          "facet": "O5",
+          "band": "high"
+        },
+        {
+          "facet": "E3",
+          "band": "low"
+        }
+      ],
+      "coupling_keys": [
+        "n_high_x_o_high",
+        "n_high_x_e_low",
+        "o_high_x_e_low"
+      ],
+      "triple_pattern_keys": [
+        "n_o_e"
+      ],
+      "interpretation_scope": "high_tension_profile",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "quick",
+      "scenario": null
+    },
+    "expected_selection": {
+      "primary_signature_key": "sensitive_independent_thinker",
+      "include_slots": [
+        "module_01_hero.primary_signature.sensitive_independent_thinker",
+        "module_04_coupling.coupling_card.o_n.high_high",
+        "module_06_application_matrix.stress_card.internal_overload"
+      ],
+      "include_registry_keys": [
+        "profile_signature_registry",
+        "coupling_registry",
+        "scenario_registry",
+        "state_scope_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "high_tension_profile prioritizes coupling and stress recovery",
+        "hero shows auxiliary label not type"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": true
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "覆盖样本画像主轴：高敏感 × 中高开放 × 克制进入。",
+    "golden_group": "clear_signature",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_02_structured_stabilizer",
+    "case_type": "selector_golden_case",
+    "title_zh": "高尽责 × 低开放 × 低情绪：稳态执行者",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 24,
+        "C": 86,
+        "E": 44,
+        "A": 56,
+        "N": 18
+      },
+      "domain_bands": {
+        "O": "low",
+        "C": "very_high",
+        "E": "mid",
+        "A": "mid",
+        "N": "very_low"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [
+        "o_low_x_c_high"
+      ],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "clear_signature",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "quick",
+      "scenario": null
+    },
+    "expected_selection": {
+      "primary_signature_key": "structured_stabilizer",
+      "include_slots": [
+        "module_01_hero.primary_signature.structured_stabilizer",
+        "module_03_trait_deep_dive.domain_card.C.very_high",
+        "module_06_application_matrix.work_card.quality_guarding"
+      ],
+      "include_registry_keys": [
+        "profile_signature_registry",
+        "domain_registry",
+        "scenario_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "clear_signature selects one primary signature and concise action"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "clear_signature",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_03_expressive_connector",
+    "case_type": "selector_golden_case",
+    "title_zh": "高外向 × 高宜人 × 低情绪：外部连接推动者",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 48,
+        "C": 55,
+        "E": 84,
+        "A": 82,
+        "N": 15
+      },
+      "domain_bands": {
+        "O": "mid",
+        "C": "mid",
+        "E": "very_high",
+        "A": "very_high",
+        "N": "very_low"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "clear_signature",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "standard",
+      "scenario": "collaboration"
+    },
+    "expected_selection": {
+      "primary_signature_key": "expressive_connector",
+      "include_slots": [
+        "module_01_hero.primary_signature.expressive_connector",
+        "module_06_application_matrix.work_card.team_energy_fit",
+        "module_07_collaboration_manual.collaboration_card.fast_sync_fit"
+      ],
+      "include_registry_keys": [
+        "profile_signature_registry",
+        "scenario_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "collaboration scenario includes high-energy sync guidance"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "clear_signature",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_04_quiet_operator",
+    "case_type": "selector_golden_case",
+    "title_zh": "低外向 × 高尽责 × 低情绪：安静推进者",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 52,
+        "C": 81,
+        "E": 22,
+        "A": 50,
+        "N": 28
+      },
+      "domain_bands": {
+        "O": "mid",
+        "C": "high",
+        "E": "low",
+        "A": "mid",
+        "N": "low"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [
+        "c_high_x_e_low"
+      ],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "clear_signature",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "standard",
+      "scenario": "work"
+    },
+    "expected_selection": {
+      "primary_signature_key": "quiet_operator",
+      "include_slots": [
+        "module_01_hero.primary_signature.quiet_operator",
+        "module_06_application_matrix.work_card.low_noise_focus",
+        "module_07_collaboration_manual.collaboration_card.quiet_processing_time"
+      ],
+      "include_registry_keys": [
+        "profile_signature_registry",
+        "scenario_registry",
+        "coupling_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "low E does not get social deficit language"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "clear_signature",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_05_creative_sprinter",
+    "case_type": "selector_golden_case",
+    "title_zh": "高开放 × 高外向 × 低中尽责：创意冲刺者",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 86,
+        "C": 38,
+        "E": 76,
+        "A": 45,
+        "N": 34
+      },
+      "domain_bands": {
+        "O": "very_high",
+        "C": "low",
+        "E": "high",
+        "A": "mid",
+        "N": "low"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [
+        "o_high_x_c_low",
+        "o_high_x_e_high"
+      ],
+      "triple_pattern_keys": [
+        "o_e_c"
+      ],
+      "interpretation_scope": "mixed_signature",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "quick",
+      "scenario": "action"
+    },
+    "expected_selection": {
+      "primary_signature_key": "creative_sprinter",
+      "include_slots": [
+        "module_01_hero.primary_signature.creative_sprinter",
+        "module_04_coupling.coupling_card.o_c.high_low",
+        "module_06_application_matrix.action_card.verification_loop"
+      ],
+      "include_registry_keys": [
+        "profile_signature_registry",
+        "coupling_registry",
+        "action_plan_registry",
+        "scenario_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "mixed_signature prioritizes idea-to-execution bridge"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "clear_signature",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_06_careful_realist",
+    "case_type": "selector_golden_case",
+    "title_zh": "低开放 × 高尽责 × 中低情绪：谨慎现实建构者",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 18,
+        "C": 82,
+        "E": 46,
+        "A": 52,
+        "N": 32
+      },
+      "domain_bands": {
+        "O": "very_low",
+        "C": "high",
+        "E": "mid",
+        "A": "mid",
+        "N": "low"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "clear_signature",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "standard",
+      "scenario": null
+    },
+    "expected_selection": {
+      "primary_signature_key": "careful_realist",
+      "include_slots": [
+        "module_01_hero.primary_signature.careful_realist",
+        "module_03_trait_deep_dive.domain_card.O.very_low",
+        "module_06_application_matrix.work_card.boundary_with_manager"
+      ],
+      "include_registry_keys": [
+        "profile_signature_registry",
+        "domain_registry",
+        "scenario_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "low O is framed as reality filter, not deficiency"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "clear_signature",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_07_n_high_o_high",
+    "case_type": "selector_golden_case",
+    "title_zh": "高情绪 × 高开放：复杂理解与风险体感同开",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 83,
+        "C": 51,
+        "E": 43,
+        "A": 57,
+        "N": 82
+      },
+      "domain_bands": {
+        "O": "very_high",
+        "C": "mid",
+        "E": "mid",
+        "A": "mid",
+        "N": "very_high"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [
+        "n_high_x_o_high"
+      ],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "high_tension_profile",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "deep",
+      "scenario": null
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_04_coupling.coupling_card.o_n.high_high",
+        "module_06_application_matrix.stress_card.ambiguity_loop",
+        "module_06_application_matrix.action_plan.verify.high_tension_profile"
+      ],
+      "include_registry_keys": [
+        "coupling_registry",
+        "scenario_registry",
+        "action_plan_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "coupling selected before generic domain repetition"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "high_tension_or_mixed",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_08_c_high_n_high",
+    "case_type": "selector_golden_case",
+    "title_zh": "高尽责 × 高情绪：责任感放大压力",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 44,
+        "C": 88,
+        "E": 50,
+        "A": 42,
+        "N": 80
+      },
+      "domain_bands": {
+        "O": "mid",
+        "C": "very_high",
+        "E": "mid",
+        "A": "mid",
+        "N": "high"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [
+        "c_high_x_n_high"
+      ],
+      "triple_pattern_keys": [
+        "c_n_a"
+      ],
+      "interpretation_scope": "high_tension_profile",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "standard",
+      "scenario": "stress"
+    },
+    "expected_selection": {
+      "primary_signature_key": "responsible_monitor",
+      "include_slots": [
+        "module_01_hero.primary_signature.responsible_monitor",
+        "module_04_coupling.coupling_card.c_n.high_high",
+        "module_06_application_matrix.stress_card.overcontrol_pressure",
+        "module_06_application_matrix.action_plan.recover.high_tension_profile"
+      ],
+      "include_registry_keys": [
+        "profile_signature_registry",
+        "coupling_registry",
+        "scenario_registry",
+        "action_plan_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "stop-rule or recovery guidance appears"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "high_tension_or_mixed",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_09_c_low_n_high",
+    "case_type": "selector_golden_case",
+    "title_zh": "低尽责 × 高情绪：越重要越先耗能",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 58,
+        "C": 22,
+        "E": 36,
+        "A": 54,
+        "N": 76
+      },
+      "domain_bands": {
+        "O": "mid",
+        "C": "very_low",
+        "E": "low",
+        "A": "mid",
+        "N": "high"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [
+        "c_low_x_n_high"
+      ],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "high_tension_profile",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "quick",
+      "scenario": "action"
+    },
+    "expected_selection": {
+      "primary_signature_key": "execution_rebuilder",
+      "include_slots": [
+        "module_01_hero.primary_signature.execution_rebuilder",
+        "module_04_coupling.coupling_card.c_n.low_high",
+        "module_06_application_matrix.action_card.twenty_minute_start"
+      ],
+      "include_registry_keys": [
+        "profile_signature_registry",
+        "coupling_registry",
+        "scenario_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "does not moralize low C as laziness"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "high_tension_or_mixed",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_10_o_high_c_low",
+    "case_type": "selector_golden_case",
+    "title_zh": "高开放 × 低尽责：想法与推进之间缺桥",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 84,
+        "C": 28,
+        "E": 48,
+        "A": 50,
+        "N": 45
+      },
+      "domain_bands": {
+        "O": "very_high",
+        "C": "low",
+        "E": "mid",
+        "A": "mid",
+        "N": "mid"
+      },
+      "facet_patterns": [
+        {
+          "facet": "O5",
+          "band": "high"
+        },
+        {
+          "facet": "C5",
+          "band": "low"
+        }
+      ],
+      "coupling_keys": [
+        "o_high_x_c_low"
+      ],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "mixed_signature",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "standard",
+      "scenario": "action"
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_04_coupling.coupling_card.o_c.high_low",
+        "module_05_facet_reframe.facet_card.o5.high",
+        "module_06_application_matrix.action_card.verification_loop"
+      ],
+      "include_registry_keys": [
+        "coupling_registry",
+        "facet_pattern_registry",
+        "scenario_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "idea-to-verification action selected"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": true
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "high_tension_or_mixed",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_11_a_high_n_high",
+    "case_type": "selector_golden_case",
+    "title_zh": "高宜人 × 高情绪：体谅与边界消耗并存",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 50,
+        "C": 48,
+        "E": 42,
+        "A": 84,
+        "N": 78
+      },
+      "domain_bands": {
+        "O": "mid",
+        "C": "mid",
+        "E": "mid",
+        "A": "very_high",
+        "N": "high"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [
+        "a_high_x_n_high"
+      ],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "high_tension_profile",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "standard",
+      "scenario": "relationship"
+    },
+    "expected_selection": {
+      "primary_signature_key": "empathetic_boundary_builder",
+      "include_slots": [
+        "module_01_hero.primary_signature.empathetic_boundary_builder",
+        "module_04_coupling.coupling_card.a_n.high_high",
+        "module_06_application_matrix.relationship_card.early_boundary_expression"
+      ],
+      "include_registry_keys": [
+        "profile_signature_registry",
+        "coupling_registry",
+        "scenario_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "relationship boundary guidance appears before generic A explanation"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "high_tension_or_mixed",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_12_a_low_n_high",
+    "case_type": "selector_golden_case",
+    "title_zh": "低宜人 × 高情绪：敏锐锋利且边界强",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 62,
+        "C": 55,
+        "E": 45,
+        "A": 22,
+        "N": 76
+      },
+      "domain_bands": {
+        "O": "high",
+        "C": "mid",
+        "E": "mid",
+        "A": "low",
+        "N": "high"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [
+        "a_low_x_n_high"
+      ],
+      "triple_pattern_keys": [
+        "o_high_a_low_n_high"
+      ],
+      "interpretation_scope": "high_tension_profile",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "standard",
+      "scenario": "relationship"
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_04_coupling.coupling_card.a_n.low_high",
+        "module_06_application_matrix.relationship_card.direct_but_warm",
+        "module_06_application_matrix.stress_card.conflict_activation"
+      ],
+      "include_registry_keys": [
+        "coupling_registry",
+        "scenario_registry",
+        "triple_pattern_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "directness gets warmth protocol, not pathology"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "high_tension_or_mixed",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_13_e_low_n_high",
+    "case_type": "selector_golden_case",
+    "title_zh": "低外向 × 高情绪：内部高负荷",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 54,
+        "C": 45,
+        "E": 18,
+        "A": 52,
+        "N": 80
+      },
+      "domain_bands": {
+        "O": "mid",
+        "C": "mid",
+        "E": "very_low",
+        "A": "mid",
+        "N": "very_high"
+      },
+      "facet_patterns": [
+        {
+          "facet": "N1",
+          "band": "high"
+        },
+        {
+          "facet": "E3",
+          "band": "low"
+        }
+      ],
+      "coupling_keys": [
+        "n_high_x_e_low"
+      ],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "high_tension_profile",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "quick",
+      "scenario": "stress"
+    },
+    "expected_selection": {
+      "primary_signature_key": "high_signal_observer",
+      "include_slots": [
+        "module_01_hero.primary_signature.high_signal_observer",
+        "module_04_coupling.coupling_card.e_n.low_high",
+        "module_06_application_matrix.stress_card.internal_overload"
+      ],
+      "include_registry_keys": [
+        "profile_signature_registry",
+        "coupling_registry",
+        "scenario_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "internal load is externalized into low-cost expression"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": true
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "high_tension_or_mixed",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_14_balanced_mid_all",
+    "case_type": "selector_golden_case",
+    "title_zh": "五维全中位：不要强行戏剧化",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 50,
+        "C": 51,
+        "E": 49,
+        "A": 52,
+        "N": 48
+      },
+      "domain_bands": {
+        "O": "mid",
+        "C": "mid",
+        "E": "mid",
+        "A": "mid",
+        "N": "mid"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [],
+      "triple_pattern_keys": [
+        "balanced_mid_all"
+      ],
+      "interpretation_scope": "balanced_profile",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "standard",
+      "scenario": null
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_02_quick.triple_pattern.balanced_mid_all",
+        "module_02_quick.scope_strategy.balanced_profile",
+        "module_06_application_matrix.action_card.meaning_before_task"
+      ],
+      "include_registry_keys": [
+        "state_scope_registry",
+        "triple_pattern_registry",
+        "scenario_registry"
+      ],
+      "exclude_slots": [
+        "module_01_hero.primary_signature.sensitive_independent_thinker"
+      ],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "no strong dramatic profile; emphasize context activation"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "balanced_or_diffuse",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_15_lightly_high_no_axis",
+    "case_type": "selector_golden_case",
+    "title_zh": "多个维度轻微偏高但无强主轴",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 58,
+        "C": 57,
+        "E": 56,
+        "A": 59,
+        "N": 54
+      },
+      "domain_bands": {
+        "O": "mid",
+        "C": "mid",
+        "E": "mid",
+        "A": "mid",
+        "N": "mid"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "balanced_profile",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "quick",
+      "scenario": null
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_02_quick.scope_strategy.balanced_profile",
+        "module_10_method_privacy.scope_boundary.balanced_profile"
+      ],
+      "include_registry_keys": [
+        "state_scope_registry",
+        "method_registry",
+        "boundary_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "avoid forcing profile_signature; show method/balanced boundary"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "balanced_or_diffuse",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_16_broad_mixed_without_extremes",
+    "case_type": "selector_golden_case",
+    "title_zh": "混合但无极端：场景优先",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 61,
+        "C": 44,
+        "E": 43,
+        "A": 60,
+        "N": 58
+      },
+      "domain_bands": {
+        "O": "high",
+        "C": "mid",
+        "E": "mid",
+        "A": "high",
+        "N": "mid"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "mixed_signature",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "standard",
+      "scenario": "work"
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_02_quick.scope_strategy.mixed_signature",
+        "module_06_application_matrix.work_card.deep_processing_environment"
+      ],
+      "include_registry_keys": [
+        "state_scope_registry",
+        "scenario_registry",
+        "domain_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "mixed_signature can choose scenario-specific block over weak signature"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "balanced_or_diffuse",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_17_c_low_c1_c2_high_c5_low",
+    "case_type": "selector_golden_case",
+    "title_zh": "C 低但 C1/C2 高、C5 低：不是没能力",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 58,
+        "C": 30,
+        "E": 42,
+        "A": 55,
+        "N": 60
+      },
+      "domain_bands": {
+        "O": "mid",
+        "C": "low",
+        "E": "mid",
+        "A": "mid",
+        "N": "high"
+      },
+      "facet_patterns": [
+        {
+          "facet": "C1",
+          "band": "high"
+        },
+        {
+          "facet": "C2",
+          "band": "high"
+        },
+        {
+          "facet": "C5",
+          "band": "low"
+        }
+      ],
+      "coupling_keys": [],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "facet_inconsistent",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "deep",
+      "scenario": null
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_05_facet_reframe.facet_card.c1.high",
+        "module_05_facet_reframe.facet_card.c2.high",
+        "module_05_facet_reframe.facet_card.c5.low"
+      ],
+      "include_registry_keys": [
+        "facet_pattern_registry",
+        "method_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "facet content is inference-aware and not an independent diagnosis"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": true
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "facet_reframe",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_18_e_low_e1_e2_mid_e3_low",
+    "case_type": "selector_golden_case",
+    "title_zh": "E 低但 E1/E2 中高、E3 低：不是社交差",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 52,
+        "C": 48,
+        "E": 24,
+        "A": 58,
+        "N": 46
+      },
+      "domain_bands": {
+        "O": "mid",
+        "C": "mid",
+        "E": "low",
+        "A": "mid",
+        "N": "mid"
+      },
+      "facet_patterns": [
+        {
+          "facet": "E1",
+          "band": "mid"
+        },
+        {
+          "facet": "E2",
+          "band": "mid"
+        },
+        {
+          "facet": "E3",
+          "band": "low"
+        }
+      ],
+      "coupling_keys": [],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "facet_inconsistent",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "deep",
+      "scenario": null
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_05_facet_reframe.facet_card.e1.high",
+        "module_05_facet_reframe.facet_card.e3.low",
+        "module_07_collaboration_manual.collaboration_card.quiet_processing_time"
+      ],
+      "include_registry_keys": [
+        "facet_pattern_registry",
+        "scenario_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "low E framed as entry threshold, not social deficit"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": true
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "facet_reframe",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_19_n_high_n1_n3_high",
+    "case_type": "selector_golden_case",
+    "title_zh": "N 高且 N1/N3 高：内部高负荷",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 50,
+        "C": 48,
+        "E": 36,
+        "A": 52,
+        "N": 84
+      },
+      "domain_bands": {
+        "O": "mid",
+        "C": "mid",
+        "E": "low",
+        "A": "mid",
+        "N": "very_high"
+      },
+      "facet_patterns": [
+        {
+          "facet": "N1",
+          "band": "high"
+        },
+        {
+          "facet": "N3",
+          "band": "high"
+        }
+      ],
+      "coupling_keys": [],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "high_tension_profile",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "deep",
+      "scenario": "stress"
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_05_facet_reframe.facet_card.n1.high",
+        "module_05_facet_reframe.facet_card.n3.high",
+        "module_06_application_matrix.stress_card.internal_overload"
+      ],
+      "include_registry_keys": [
+        "facet_pattern_registry",
+        "scenario_registry",
+        "action_plan_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "sensitive non-clinical language only"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": true
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "facet_reframe",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_20_a_high_boundary_late",
+    "case_type": "selector_golden_case",
+    "title_zh": "A 高且边界表达偏晚",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 48,
+        "C": 50,
+        "E": 40,
+        "A": 82,
+        "N": 66
+      },
+      "domain_bands": {
+        "O": "mid",
+        "C": "mid",
+        "E": "mid",
+        "A": "very_high",
+        "N": "high"
+      },
+      "facet_patterns": [
+        {
+          "facet": "A3",
+          "band": "high"
+        },
+        {
+          "facet": "A4",
+          "band": "high"
+        },
+        {
+          "facet": "A6",
+          "band": "high"
+        }
+      ],
+      "coupling_keys": [],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "mixed_signature",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "standard",
+      "scenario": "relationship"
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_05_facet_reframe.facet_card.a3.high",
+        "module_06_application_matrix.relationship_card.early_boundary_expression",
+        "module_06_application_matrix.action_plan.boundaries.mixed_signature"
+      ],
+      "include_registry_keys": [
+        "facet_pattern_registry",
+        "scenario_registry",
+        "action_plan_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "boundary is framed as cooperation condition, not selfishness"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": true
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "facet_reframe",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_21_o_high_o5_high_c_low",
+    "case_type": "selector_golden_case",
+    "title_zh": "O 高 + O5 高 + C 低：想法与推进缺桥",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 88,
+        "C": 25,
+        "E": 45,
+        "A": 50,
+        "N": 58
+      },
+      "domain_bands": {
+        "O": "very_high",
+        "C": "low",
+        "E": "mid",
+        "A": "mid",
+        "N": "mid"
+      },
+      "facet_patterns": [
+        {
+          "facet": "O5",
+          "band": "high"
+        },
+        {
+          "facet": "C5",
+          "band": "low"
+        }
+      ],
+      "coupling_keys": [
+        "o_high_x_c_low"
+      ],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "mixed_signature",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "deep",
+      "scenario": "action"
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_04_coupling.coupling_card.o_c.high_low",
+        "module_05_facet_reframe.facet_card.o5.high",
+        "module_06_application_matrix.action_card.verification_loop"
+      ],
+      "include_registry_keys": [
+        "coupling_registry",
+        "facet_pattern_registry",
+        "scenario_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "idea-to-action bridge selected"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": true
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "facet_reframe",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_22_low_quality",
+    "case_type": "selector_golden_case",
+    "title_zh": "低质量作答：只输出边界和复测",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 50,
+        "C": 50,
+        "E": 50,
+        "A": 50,
+        "N": 50
+      },
+      "domain_bands": {
+        "O": "mid",
+        "C": "mid",
+        "E": "mid",
+        "A": "mid",
+        "N": "mid"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "low_quality",
+      "quality_status": "low",
+      "norm_status": "available",
+      "reading_mode": "quick",
+      "scenario": null
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_10_method_privacy.quality_boundary.low_quality",
+        "module_09_feedback.retest_prompt.retest_recommended"
+      ],
+      "include_registry_keys": [
+        "state_scope_registry",
+        "method_registry",
+        "boundary_registry"
+      ],
+      "exclude_slots": [
+        "module_01_hero.primary_signature.sensitive_independent_thinker",
+        "module_04_coupling.coupling_card.o_n.high_high",
+        "module_05_facet_reframe.facet_card.N1.high"
+      ],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "only degraded/boundary-safe assets selected"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "safety_downgrade",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_23_norm_unavailable",
+    "case_type": "selector_golden_case",
+    "title_zh": "无常模：禁止百分位和正态曲线",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 72,
+        "C": 38,
+        "E": 30,
+        "A": 50,
+        "N": 68
+      },
+      "domain_bands": {
+        "O": "high",
+        "C": "low",
+        "E": "low",
+        "A": "mid",
+        "N": "high"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "norm_unavailable",
+      "quality_status": "valid",
+      "norm_status": "unavailable",
+      "reading_mode": "standard",
+      "scenario": null
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_10_method_privacy.norm_boundary.norm_unavailable",
+        "module_10_method_privacy.method.norm_method"
+      ],
+      "include_registry_keys": [
+        "state_scope_registry",
+        "method_registry",
+        "boundary_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "percentile",
+        "normal_curve",
+        "超过多少人",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "no percentile or normal_curve fields rendered"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": true,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "safety_downgrade",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_24_facet_inconsistent",
+    "case_type": "selector_golden_case",
+    "title_zh": "Facet 不一致：降级为解释性推断",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 50,
+        "C": 34,
+        "E": 45,
+        "A": 52,
+        "N": 50
+      },
+      "domain_bands": {
+        "O": "mid",
+        "C": "low",
+        "E": "mid",
+        "A": "mid",
+        "N": "mid"
+      },
+      "facet_patterns": [
+        {
+          "facet": "C1",
+          "band": "high"
+        },
+        {
+          "facet": "C2",
+          "band": "high"
+        },
+        {
+          "facet": "C5",
+          "band": "low"
+        }
+      ],
+      "coupling_keys": [],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "facet_inconsistent",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "deep",
+      "scenario": null
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_05_facet_reframe.scope_boundary.facet_inconsistent",
+        "module_10_method_privacy.method.facet_method"
+      ],
+      "include_registry_keys": [
+        "state_scope_registry",
+        "method_registry",
+        "facet_pattern_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "facet claims are not independent measurement conclusions"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": true
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "safety_downgrade",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_25_retest_recommended",
+    "case_type": "selector_golden_case",
+    "title_zh": "建议复测：不扩大解释强度",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 55,
+        "C": 45,
+        "E": 50,
+        "A": 48,
+        "N": 60
+      },
+      "domain_bands": {
+        "O": "mid",
+        "C": "mid",
+        "E": "mid",
+        "A": "mid",
+        "N": "mid"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "retest_recommended",
+      "quality_status": "uncertain",
+      "norm_status": "available",
+      "reading_mode": "quick",
+      "scenario": null
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_09_feedback.retest_prompt.retest_recommended",
+        "module_10_method_privacy.method.retest_method"
+      ],
+      "include_registry_keys": [
+        "state_scope_registry",
+        "method_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "retest suggestion does not claim previous result was wrong"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "safety_downgrade",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_26_share_safe_summary_only",
+    "case_type": "selector_golden_case",
+    "title_zh": "分享模式：只输出脱敏摘要",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 72,
+        "C": 40,
+        "E": 25,
+        "A": 52,
+        "N": 70
+      },
+      "domain_bands": {
+        "O": "high",
+        "C": "mid",
+        "E": "low",
+        "A": "mid",
+        "N": "high"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "share_safe_summary_only",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "quick",
+      "scenario": null
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_08_share_save.scope_boundary.share_safe_summary_only",
+        "module_08_share_save.share_policy.summary_card_transform",
+        "module_08_share_save.share_policy.forbidden_fields_filter"
+      ],
+      "include_registry_keys": [
+        "state_scope_registry",
+        "share_safety_registry",
+        "boundary_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "raw score",
+        "sensitive percentile",
+        "敏感分数",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "share output hides raw scores and sensitive stress details"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "safety_downgrade",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_27_work_low_e_high_o",
+    "case_type": "selector_golden_case",
+    "title_zh": "工作：低 E × 高 O，文档先行与深度处理",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 78,
+        "C": 52,
+        "E": 24,
+        "A": 50,
+        "N": 48
+      },
+      "domain_bands": {
+        "O": "high",
+        "C": "mid",
+        "E": "low",
+        "A": "mid",
+        "N": "mid"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [
+        "o_high_x_e_low"
+      ],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "mixed_signature",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "standard",
+      "scenario": "work"
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_06_application_matrix.work_card.deep_processing_environment",
+        "module_07_collaboration_manual.collaboration_card.document_first",
+        "module_07_collaboration_manual.collaboration_card.quiet_processing_time"
+      ],
+      "include_registry_keys": [
+        "scenario_registry",
+        "coupling_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "collaboration guidance is share-safe and behavior-based"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "scenario_application",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_28_relationship_high_a_high_n",
+    "case_type": "selector_golden_case",
+    "title_zh": "关系：高 A × 高 N，早表达边界",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 48,
+        "C": 45,
+        "E": 40,
+        "A": 86,
+        "N": 78
+      },
+      "domain_bands": {
+        "O": "mid",
+        "C": "mid",
+        "E": "mid",
+        "A": "very_high",
+        "N": "high"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [
+        "a_high_x_n_high"
+      ],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "high_tension_profile",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "standard",
+      "scenario": "relationship"
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_06_application_matrix.relationship_card.early_boundary_expression",
+        "module_06_application_matrix.action_plan.boundaries.high_tension_profile",
+        "module_04_coupling.coupling_card.a_n.high_high"
+      ],
+      "include_registry_keys": [
+        "scenario_registry",
+        "action_plan_registry",
+        "coupling_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "relationship advice emphasizes early boundary not endurance"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "scenario_application",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_29_stress_high_n_low_e",
+    "case_type": "selector_golden_case",
+    "title_zh": "压力：高 N × 低 E，内部高负荷",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 54,
+        "C": 42,
+        "E": 18,
+        "A": 52,
+        "N": 84
+      },
+      "domain_bands": {
+        "O": "mid",
+        "C": "mid",
+        "E": "very_low",
+        "A": "mid",
+        "N": "very_high"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [
+        "n_high_x_e_low"
+      ],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "high_tension_profile",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "standard",
+      "scenario": "stress"
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_06_application_matrix.stress_card.internal_overload",
+        "module_06_application_matrix.action_plan.recover.high_tension_profile",
+        "module_04_coupling.coupling_card.e_n.low_high"
+      ],
+      "include_registry_keys": [
+        "scenario_registry",
+        "action_plan_registry",
+        "coupling_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "recovery protocol appears before generic N high text"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "scenario_application",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_30_collaboration_document_first",
+    "case_type": "selector_golden_case",
+    "title_zh": "协作：低 E × 高 O，先文档后讨论",
+    "runtime_use": "staging_only",
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 76,
+        "C": 48,
+        "E": 20,
+        "A": 58,
+        "N": 55
+      },
+      "domain_bands": {
+        "O": "high",
+        "C": "mid",
+        "E": "low",
+        "A": "mid",
+        "N": "mid"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [
+        "o_high_x_e_low"
+      ],
+      "triple_pattern_keys": [],
+      "interpretation_scope": "mixed_signature",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "quick",
+      "scenario": "collaboration"
+    },
+    "expected_selection": {
+      "primary_signature_key": null,
+      "include_slots": [
+        "module_07_collaboration_manual.collaboration_card.document_first",
+        "module_07_collaboration_manual.collaboration_card.quiet_processing_time",
+        "module_08_share_save.share_policy.collaboration_manual_transform"
+      ],
+      "include_registry_keys": [
+        "scenario_registry",
+        "share_safety_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "raw_sensitive_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "diagnosis_language",
+        "diagnostic_language",
+        "internal_metadata",
+        "frontend_fallback",
+        "[object Object]",
+        "type_assignment",
+        "raw_score",
+        "unsupported_population_rank",
+        "medical_diagnosis",
+        "hiring_screening",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "shareable collaboration manual contains behavior preferences only"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": false
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "",
+    "golden_group": "scenario_application",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  {
+    "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+    "case_key": "golden_case_31_o59_canonical_preview",
+    "case_type": "selector_golden_case",
+    "golden_group": "canonical_o59_preview",
+    "title_zh": "O59 / C32 / E20 / A55 / N68 canonical rendered preview case",
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "ready_for_asset_review": true,
+    "ready_for_pilot": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "input_projection": {
+      "scale_code": "BIG5_OCEAN",
+      "domain_scores": {
+        "O": 59,
+        "C": 32,
+        "E": 20,
+        "A": 55,
+        "N": 68
+      },
+      "domain_bands": {
+        "O": "mid",
+        "C": "low",
+        "E": "low",
+        "A": "mid",
+        "N": "high"
+      },
+      "facet_patterns": [],
+      "coupling_keys": [
+        "n_high_x_o_high",
+        "n_high_x_e_low",
+        "o_high_x_e_low"
+      ],
+      "triple_pattern_keys": [
+        "n_o_e"
+      ],
+      "interpretation_scope": "high_tension_profile",
+      "quality_status": "valid",
+      "norm_status": "available",
+      "reading_mode": "quick",
+      "scenario": null,
+      "source_profile_id": "canonical_o59_c32_e20_a55_n68"
+    },
+    "expected_selection": {
+      "primary_signature_key": "sensitive_independent_thinker",
+      "include_slots": [
+        "module_01_hero.primary_signature.sensitive_independent_thinker",
+        "module_03_trait_deep_dive.domain_card.O.mid",
+        "module_03_trait_deep_dive.domain_card.C.low",
+        "module_03_trait_deep_dive.domain_card.E.low",
+        "module_03_trait_deep_dive.domain_card.A.mid",
+        "module_03_trait_deep_dive.domain_card.N.high",
+        "module_04_coupling.coupling_card.o_n.high_high",
+        "module_04_coupling.coupling_card.e_n.low_high",
+        "module_06_application_matrix.stress_card.internal_overload",
+        "module_06_application_matrix.action_card.twenty_minute_start"
+      ],
+      "include_registry_keys": [
+        "profile_signature_registry",
+        "domain_registry",
+        "coupling_registry",
+        "scenario_registry",
+        "state_scope_registry"
+      ],
+      "exclude_slots": [],
+      "max_profile_signatures": 1,
+      "must_not_contain": [
+        "user_confirmed_type",
+        "fixed_type",
+        "固定人格类型",
+        "你就是某一型",
+        "type_assignment",
+        "raw_sensitive_score",
+        "raw_score",
+        "normal_curve_without_norm",
+        "percentile_claim_without_norm",
+        "unsupported_population_rank",
+        "diagnosis_language",
+        "diagnostic_language",
+        "medical_diagnosis",
+        "hiring_screening",
+        "internal_metadata",
+        "selector_basis",
+        "review_required",
+        "source_reference",
+        "editor_notes",
+        "qa_notes",
+        "selection_guidance",
+        "import_policy",
+        "frontend_fallback",
+        "[object Object]",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "production_use_allowed",
+        "ready_for_runtime",
+        "ready_for_pilot",
+        "ready_for_production"
+      ],
+      "expected_behavior": [
+        "canonical O59 preview remains a selector QA case only",
+        "selected slots resolve to current selector-ready staging assets",
+        "hero label is auxiliary and must not be rendered as a fixed type"
+      ]
+    },
+    "safety_expectations": {
+      "no_fixed_type": true,
+      "no_diagnostic_language": true,
+      "no_user_confirmed_type": true,
+      "no_raw_sensitive_score": true,
+      "no_frontend_authored_interpretation_fallback": true,
+      "norm_unavailable_suppresses_percentile_and_normal_curve": false,
+      "facet_content_is_inference_aware": true
+    },
+    "review_status": "golden_case_candidate",
+    "notes_zh": "O59 canonical preview QA case derived from the repo-owned canonical O59 source trace; this is not a prose asset and is not runtime-connected."
+  }
+]

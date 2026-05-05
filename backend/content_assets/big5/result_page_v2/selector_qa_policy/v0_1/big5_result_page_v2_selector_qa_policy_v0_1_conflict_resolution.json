@@ -1,0 +1,174 @@
+{
+  "version": "fap.big5.result_page_v2.selector_qa_policy.v0.1",
+  "policy_key": "big5_result_page_v2.conflict_resolution.v0_1",
+  "runtime_use": "staging_only",
+  "description_zh": "处理多资产命中、互斥、降级、安全和渲染泄漏的规则。",
+  "resolution_order": [
+    "safety_override",
+    "runtime_scope_override",
+    "reading_mode_filter",
+    "trigger_match_filter",
+    "mutual_exclusion_group_dedupe",
+    "slot_limit_dedupe",
+    "semantic_conflict_guard",
+    "public_payload_sanitization",
+    "rendered_text_leak_scan"
+  ],
+  "safety_override": {
+    "low_quality_blocks_persona_and_deep_claims": true,
+    "norm_unavailable_blocks_percentile_and_normal_curve": true,
+    "facet_without_support_blocks_independent_claim": true,
+    "share_context_blocks_raw_scores_and_sensitive_stress": true,
+    "medical_or_hiring_language_always_blocked": true
+  },
+  "mutual_exclusion_rules": [
+    {
+      "group_pattern": "profile_signature.primary",
+      "max_keep": 1,
+      "resolution": "keep_highest_score_then_priority",
+      "reason": "首屏只能有一个主画像标签，且必须是辅助理解标签。"
+    },
+    {
+      "group_pattern": "domain_signal.hero.{trait}",
+      "max_keep": 1,
+      "resolution": "keep_exact_band_match",
+      "reason": "同一维度首屏只能显示一个分段信号。"
+    },
+    {
+      "group_pattern": "domain_deep.{trait}",
+      "max_keep": 1,
+      "resolution": "keep_exact_band_match",
+      "reason": "同一维度深解卡避免重复。"
+    },
+    {
+      "group_pattern": "coupling.{pair}",
+      "max_keep": 1,
+      "resolution": "keep_highest_specificity",
+      "reason": "同一维度 pair 只保留最匹配的 polarity variant。"
+    },
+    {
+      "group_pattern": "facet.{facet}",
+      "max_keep": 1,
+      "resolution": "keep_highest_confidence_then_priority",
+      "reason": "同一 facet 避免高低矛盾。"
+    },
+    {
+      "group_pattern": "scenario.{scenario}.primary",
+      "max_keep": 2,
+      "resolution": "keep_scenario_match_then_priority",
+      "reason": "每个场景最多两条主建议。"
+    },
+    {
+      "group_pattern": "action_plan.{category}",
+      "max_keep": 1,
+      "resolution": "keep_scope_match_then_priority",
+      "reason": "同一行动类型只给一个可执行下一步。"
+    }
+  ],
+  "semantic_conflict_guards": [
+    {
+      "conflict": "strong_profile_in_balanced_profile",
+      "condition": {
+        "scope": "balanced_profile"
+      },
+      "action": "suppress_profile_signature_registry",
+      "exception": "resilient_minimalist only if balanced_profile trigger exact match"
+    },
+    {
+      "conflict": "deep_claim_in_low_quality",
+      "condition": {
+        "scope": "low_quality"
+      },
+      "action": "allow_only_boundary_method_retest"
+    },
+    {
+      "conflict": "percentile_in_norm_unavailable",
+      "condition": {
+        "norm_status": "unavailable"
+      },
+      "action": "strip_percentile_and_normal_curve"
+    },
+    {
+      "conflict": "facet_claim_without_support",
+      "condition": {
+        "registry_key": "facet_pattern_registry"
+      },
+      "action": "require_facet_support_or_drop"
+    },
+    {
+      "conflict": "shareable_sensitive_content",
+      "condition": {
+        "shareable": true
+      },
+      "action": "require_share_safety_registry_and_strip_scores"
+    },
+    {
+      "conflict": "profile_label_as_type",
+      "condition": {
+        "registry_key": "profile_signature_registry"
+      },
+      "action": "require_label_role_auxiliary_and_non_type_boundary"
+    }
+  ],
+  "rendered_text_banned_scan": {
+    "must_not_render": [
+      "user_confirmed_type",
+      "fixed_type",
+      "raw_sensitive_score",
+      "internal_metadata",
+      "selector_basis",
+      "review_required",
+      "source_reference",
+      "frontend_fallback",
+      "[object Object]",
+      "deferred_to_future",
+      "policy_not_shipped",
+      "固定人格类型",
+      "你就是某一型",
+      "type_assignment",
+      "raw_score",
+      "normal_curve_without_norm",
+      "percentile_claim_without_norm",
+      "unsupported_population_rank",
+      "diagnosis_language",
+      "diagnostic_language",
+      "medical_diagnosis",
+      "hiring_screening",
+      "editor_notes",
+      "qa_notes",
+      "selection_guidance",
+      "import_policy",
+      "production_use_allowed",
+      "ready_for_runtime",
+      "ready_for_pilot",
+      "ready_for_production"
+    ],
+    "surfaces": [
+      "result_page_desktop",
+      "result_page_mobile",
+      "pdf",
+      "share_card",
+      "history",
+      "compare"
+    ]
+  },
+  "trace_requirements": {
+    "each_selected_asset_must_emit": [
+      "asset_key",
+      "module_key",
+      "slot_key",
+      "registry_key",
+      "priority",
+      "matched_trigger_fields",
+      "suppressed_by",
+      "selection_score"
+    ],
+    "trace_public": false
+  },
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "policy_use": "advisory_only"
+}
