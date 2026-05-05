@@ -33,7 +33,14 @@ final class BigFiveResultPageV2SelectorReferenceConsistencyTest extends TestCase
         $this->assertSame(325, data_get($report, 'summary.selector_asset_count'));
         $this->assertSame(3125, data_get($report, 'summary.route_matrix_row_count'));
         $this->assertSame(25, data_get($report, 'summary.trait_band_reference_count'));
-        $this->assertSame(12, data_get($report, 'summary.coupling_key_count'));
+        $this->assertSame(50, data_get($report, 'summary.coupling_key_count'));
+        $this->assertSame(12, data_get($report, 'summary.canonical_coupling_key_count'));
+        $this->assertSame(38, data_get($report, 'summary.supplemental_coupling_key_count'));
+        $this->assertSame(3, data_get($report, 'summary.approved_coupling_alias_count'));
+        $this->assertSame(41, data_get($report, 'summary.coupling_inventory_resolved_reference_count'));
+        $this->assertSame(41, data_get($report, 'summary.coupling_deferred_suppression_reference_count'));
+        $this->assertSame(0, data_get($report, 'summary.post_import_unresolved_coupling_key_count'));
+        $this->assertFalse((bool) data_get($report, 'summary.selector_suppression_behavior_changed', true));
         $this->assertSame(30, data_get($report, 'summary.facet_key_count'));
         $this->assertSame(8, data_get($report, 'summary.canonical_profile_key_count'));
         $this->assertSame(5, data_get($report, 'summary.scenario_key_count'));
@@ -52,13 +59,16 @@ final class BigFiveResultPageV2SelectorReferenceConsistencyTest extends TestCase
         $report = $this->report();
         $policy = data_get($report, 'public_pilot_resolution_policy');
 
-        $this->assertSame('safe_coupling_alias_resolution_v0_1_applied', data_get($policy, 'policy_status'));
+        $this->assertSame('supplemental_coupling_inventory_v0_1_recognized_deferred_selector_consumption', data_get($policy, 'policy_status'));
         $this->assertSame('not_runtime', data_get($policy, 'runtime_use'));
         $this->assertFalse((bool) data_get($policy, 'production_use_allowed', true));
         $this->assertSame(92, data_get($policy, 'current_unresolved_reference_count'));
         $this->assertSame(data_get($report, 'summary.unresolved_by_type'), data_get($policy, 'current_unresolved_by_type'));
         $this->assertSame(3, data_get($policy, 'public_pilot_resolution_summary.safe_alias_or_normalization_count'));
         $this->assertSame(38, data_get($policy, 'public_pilot_resolution_summary.new_coupling_required_count'));
+        $this->assertSame(38, data_get($policy, 'public_pilot_resolution_summary.supplemental_repo_owned_count'));
+        $this->assertSame(41, data_get($policy, 'public_pilot_resolution_summary.coupling_refs_resolved_by_inventory_count'));
+        $this->assertSame(0, data_get($policy, 'public_pilot_resolution_summary.post_import_unresolved_coupling_key_count'));
         $this->assertSame(92, data_get($policy, 'public_pilot_resolution_summary.selector_suppression_reference_count'));
         $this->assertFalse((bool) data_get($policy, 'public_pilot_resolution_summary.selector_suppression_behavior_changed', true));
         $this->assertTrue((bool) data_get($policy, 'public_pilot_resolution_summary.alias_aware_selector_or_composer_required_before_unsuppression'));
@@ -67,6 +77,23 @@ final class BigFiveResultPageV2SelectorReferenceConsistencyTest extends TestCase
         $this->assertTrue((bool) data_get($policy, 'phase_1_freeze.subsequent_resolution_prs_must_preserve_body_copy'));
         $this->assertTrue((bool) data_get($policy, 'phase_1_freeze.subsequent_resolution_prs_must_preserve_staging_only_flags'));
         $this->assertTrue((bool) data_get($policy, 'phase_1_freeze.selected_unresolved_refs_must_remain_suppressed_until_resolved'));
+        $this->assertFalse((bool) data_get($policy, 'phase_1_freeze.routing_2_may_enable_selector_consumption', true));
+        $this->assertTrue((bool) data_get($policy, 'phase_1_freeze.routing_4_required_before_unsuppression'));
+
+        $this->assertSame('B5-CONTENT-2B', data_get($policy, 'supplemental_coupling_inventory.package_key'));
+        $this->assertSame('coupling_assets/supplemental/v0_1', data_get($policy, 'supplemental_coupling_inventory.repo_path'));
+        $this->assertSame(190, data_get($policy, 'supplemental_coupling_inventory.asset_count'));
+        $this->assertSame(38, data_get($policy, 'supplemental_coupling_inventory.coupling_key_count'));
+        $this->assertSame(5, data_get($policy, 'supplemental_coupling_inventory.asset_roles_per_key'));
+        $this->assertTrue((bool) data_get($policy, 'supplemental_coupling_inventory.recognized_for_reference_inventory'));
+        $this->assertFalse((bool) data_get($policy, 'supplemental_coupling_inventory.selector_consumption_enabled', true));
+        $this->assertSame('ROUTING-4', data_get($policy, 'supplemental_coupling_inventory.selector_consumption_blocked_until'));
+        $this->assertSame('staging_only', data_get($policy, 'supplemental_coupling_inventory.runtime_use'));
+        $this->assertFalse((bool) data_get($policy, 'supplemental_coupling_inventory.production_use_allowed', true));
+        $this->assertFalse((bool) data_get($policy, 'supplemental_coupling_inventory.ready_for_pilot', true));
+        $this->assertFalse((bool) data_get($policy, 'supplemental_coupling_inventory.ready_for_runtime', true));
+        $this->assertFalse((bool) data_get($policy, 'supplemental_coupling_inventory.ready_for_production', true));
+        $this->assertCount(38, data_get($policy, 'supplemental_coupling_inventory.coupling_keys'));
 
         $this->assertContains('approved_alias_mapping', data_get($policy, 'allowed_resolution_modes'));
         $this->assertContains('approved_key_normalization', data_get($policy, 'allowed_resolution_modes'));
@@ -109,10 +136,15 @@ final class BigFiveResultPageV2SelectorReferenceConsistencyTest extends TestCase
         $this->assertSame('pass', data_get($checks, 'route_matrix_to_imported_content_assets.status'));
         $this->assertSame(0, data_get($checks, 'route_matrix_to_imported_content_assets.unresolved_reference_count'));
 
-        $this->assertSame('advisory_gap', data_get($checks, 'selector_coupling_registry_to_coupling_assets.status'));
+        $this->assertSame('advisory_deferred_resolution', data_get($checks, 'selector_coupling_registry_to_coupling_assets.status'));
         $this->assertSame(3, data_get($checks, 'selector_coupling_registry_to_coupling_assets.resolved_alias_reference_count'));
         $this->assertSame(38, data_get($checks, 'selector_coupling_registry_to_coupling_assets.new_coupling_required_count'));
         $this->assertSame(41, data_get($checks, 'selector_coupling_registry_to_coupling_assets.unresolved_reference_count'));
+        $this->assertSame(38, data_get($checks, 'selector_coupling_registry_to_coupling_assets.supplemental_coupling_key_count'));
+        $this->assertSame(38, data_get($checks, 'selector_coupling_registry_to_coupling_assets.supplemental_resolved_reference_count'));
+        $this->assertSame(0, data_get($checks, 'selector_coupling_registry_to_coupling_assets.post_import_unresolved_coupling_key_count'));
+        $this->assertSame(41, data_get($checks, 'selector_coupling_registry_to_coupling_assets.deferred_suppression_reference_count'));
+        $this->assertFalse((bool) data_get($checks, 'selector_coupling_registry_to_coupling_assets.selector_behavior_changed', true));
         $this->assertSame('advisory_gap', data_get($checks, 'selector_profile_signature_registry_to_canonical_profiles.status'));
         $this->assertSame(19, data_get($checks, 'selector_profile_signature_registry_to_canonical_profiles.unresolved_reference_count'));
         $this->assertSame('advisory_gap', data_get($checks, 'selector_scenario_registry_to_scenario_action_assets.status'));
@@ -128,6 +160,24 @@ final class BigFiveResultPageV2SelectorReferenceConsistencyTest extends TestCase
             'reference_type' => 'coupling_key',
             'reference' => 'o_high_x_c_high',
         ], data_get($checks, 'selector_coupling_registry_to_coupling_assets.unresolved_references'));
+
+        $this->assertContains([
+            'asset_key' => 'asset.module_04_coupling.coupling_registry.o_c_high_high.v0_3',
+            'reference_type' => 'coupling_key',
+            'reference' => 'o_high_x_c_high',
+            'resolved_to' => 'o_high_x_c_high',
+            'decision_type' => 'SUPPLEMENTAL_REPO_OWNED',
+            'source_package' => 'B5-CONTENT-2B',
+            'selector_consumption' => 'deferred_until_ROUTING-4',
+        ], data_get($checks, 'selector_coupling_registry_to_coupling_assets.supplemental_resolved_references'));
+
+        $this->assertContains([
+            'asset_key' => 'asset.module_04_coupling.coupling_registry.o_c_high_high.v0_3',
+            'reference_type' => 'coupling_key',
+            'reference' => 'o_high_x_c_high',
+            'deferred_resolution' => 'supplemental_repo_owned_but_selector_runtime_not_alias_aware',
+            'suppression_required_until' => 'ROUTING-4',
+        ], data_get($checks, 'selector_coupling_registry_to_coupling_assets.deferred_suppression_references'));
 
         $this->assertSame([
             [
