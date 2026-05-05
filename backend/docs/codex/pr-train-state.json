@@ -4077,7 +4077,7 @@
       "history": [
         {
           "at": "2026-05-03T12:33:19.747370Z",
-          "status": "in_progress",
+          "status": "local_checks_passed",
           "summary": "Started PR-D3a selected display asset import command scope from latest main; D1 and D2b dependencies reconciled as merged."
         },
         {
@@ -5604,9 +5604,9 @@
         "PR-D14b": {
           "repo": "fap-api",
           "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
-          "status": "draft_open",
+          "status": "merged",
           "branch": "codex/pr-d14b-legacy-display-asset-normalization",
-          "commit_sha": "c09273437d0814b7ad9dacbf92d962103f093ee6",
+          "commit_sha": "40464c6c5e2e5487314e936d0a17bd6b842ccfd9",
           "pr_url": "https://github.com/fermatmind/fap-api/pull/1141",
           "checks": {
             "local": [
@@ -5642,9 +5642,9 @@
           },
           "failure_reason": "",
           "resume_policy": "manual_only",
-          "merged_at": "",
-          "remote_branch_deleted": false,
-          "local_cleanup_executed": false,
+          "merged_at": "2026-05-05T00:00:00+08:00",
+          "remote_branch_deleted": true,
+          "local_cleanup_executed": true,
           "history": [
             {
               "at": "2026-05-05T00:01:08+08:00",
@@ -5660,6 +5660,68 @@
               "at": "2026-05-05T00:01:08+08:00",
               "status": "draft_open",
               "summary": "Opened draft PR #1141 for guarded D14b legacy career display asset normalization after scoped local checks passed."
+            },
+            {
+              "at": "2026-05-05T00:00:00+08:00",
+              "status": "reconciled_merged",
+              "summary": "Reconciled PR-D14b ledger for PR-D18 dependency: GitHub PR #1141 is merged and origin/main contains 40464c6c5e2e5487314e936d0a17bd6b842ccfd9."
+            }
+          ]
+        },
+        "PR-D18": {
+          "repo": "fap-api",
+          "repo_path": "/Users/rainie/Desktop/GitHub/fap-api/backend",
+          "status": "local_checks_passed",
+          "branch": "codex/pr-d18-career-display-import-cohort-002",
+          "commit_sha": "7072829e",
+          "pr_url": "",
+          "checks": {
+            "local": [
+              {
+                "command": "python3 -m json.tool docs/codex/pr-train-state.json >/dev/null",
+                "status": "passed"
+              },
+              {
+                "command": "vendor/bin/pint --test app/Console/Commands/CareerImportSelectedDisplayAssets.php app/Services/Career/Import/CareerSelectedDisplayAssetMapper.php app/Console/Kernel.php tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php docs/codex/pr-train.yaml docs/codex/pr-train-state.json",
+                "status": "passed"
+              },
+              {
+                "command": "php artisan test tests/Feature/Console/CareerImportSelectedDisplayAssetsCommandTest.php tests/Unit/Services/Career/CareerSelectedDisplayAssetMapperTest.php tests/Feature/Console/CareerValidateDisplayBatchCommandTest.php tests/Feature/Console/CareerFullDisplayWorkbookValidatorCommandTest.php",
+                "status": "passed",
+                "details": "39 tests and 3248 assertions passed."
+              },
+              {
+                "command": "php artisan career:import-selected-display-assets --file=/tmp/fermat_career_assets_v4_2_v9_d16_50_repaired.xlsx --slugs=$D16_SLUGS --dry-run --json",
+                "status": "passed",
+                "details": "decision=pass, validated_count=50, would_write_count=50, already_exists_count=0, failed_count=0, did_write=false, release_gates_changed=false."
+              },
+              {
+                "command": "php artisan career:import-selected-display-assets --file=/tmp/fermat_career_assets_v4_2_v9_d16_50_repaired.xlsx --slugs=software-developers --dry-run --json",
+                "status": "passed_expected_rejection",
+                "details": "exit_code=1, decision=fail, did_write=false, unsupported slug rejected."
+              },
+              {
+                "command": "git diff --check && git diff --cached --check",
+                "status": "passed"
+              }
+            ],
+            "github": []
+          },
+          "failure_reason": "",
+          "resume_policy": "manual_only",
+          "merged_at": "",
+          "remote_branch_deleted": false,
+          "local_cleanup_executed": false,
+          "history": [
+            {
+              "at": "2026-05-05T00:00:00+08:00",
+              "status": "in_progress",
+              "summary": "Initialized PR-D18 ledger entry for guarded display asset import support for D16 cohort 002 after D18 target dry-run found an import allowlist gap."
+            },
+            {
+              "at": "2026-05-05T00:00:00+08:00",
+              "status": "local_checks_passed",
+              "summary": "D18 scoped Pint, command/mapper tests, real D16 workbook dry-run, software-developers rejection check, JSON validation, and diff checks passed without DB writes."
             }
           ]
         }
