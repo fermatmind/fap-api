@@ -15,6 +15,7 @@ final class BigFiveV2DeterministicSelector
 
     public function __construct(
         private readonly BigFiveV2AssetPackageLoader $packageLoader = new BigFiveV2AssetPackageLoader(),
+        private readonly BigFiveV2CouplingResolver $couplingResolver = new BigFiveV2CouplingResolver(),
     ) {}
 
     public function select(BigFiveV2SelectorInput $input): BigFiveV2SelectionResult
@@ -25,7 +26,7 @@ final class BigFiveV2DeterministicSelector
         }
 
         $assets = $this->selectorAssets();
-        $unresolvedSuppressions = $this->unresolvedReferenceSuppressions();
+        $unresolvedSuppressions = $this->unresolvedReferenceSuppressions($input->enableResolvedCouplingRefs);
         $unresolvedAssetKeys = array_fill_keys(array_map(
             static fn (array $suppression): string => (string) $suppression['asset_key'],
             $unresolvedSuppressions,
@@ -125,7 +126,7 @@ final class BigFiveV2DeterministicSelector
     /**
      * @return list<array<string,mixed>>
      */
-    private function unresolvedReferenceSuppressions(): array
+    private function unresolvedReferenceSuppressions(bool $enableResolvedCouplingRefs): array
     {
         $report = $this->decodeJsonFile(base_path(self::REFERENCE_REPORT_PATH));
         $suppressionsByAssetKey = [];
@@ -141,14 +142,23 @@ final class BigFiveV2DeterministicSelector
                     continue;
                 }
 
+                $referenceType = (string) ($reference['reference_type'] ?? '');
+                $referenceValue = (string) ($reference['reference'] ?? '');
+                if ($enableResolvedCouplingRefs && $referenceType === 'coupling_key') {
+                    $resolution = $this->couplingResolver->resolve($referenceValue, 'result_page');
+                    if ($resolution->selectable) {
+                        continue;
+                    }
+                }
+
                 $suppressionsByAssetKey[$assetKey] ??= [
                     'asset_key' => $assetKey,
                     'reason' => 'unresolved_selector_reference',
                     'references' => [],
                 ];
                 $suppressionsByAssetKey[$assetKey]['references'][] = [
-                    'reference_type' => (string) ($reference['reference_type'] ?? ''),
-                    'reference' => (string) ($reference['reference'] ?? ''),
+                    'reference_type' => $referenceType,
+                    'reference' => $referenceValue,
                 ];
             }
         }

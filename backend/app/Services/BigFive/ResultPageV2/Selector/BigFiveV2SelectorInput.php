@@ -28,6 +28,7 @@ final readonly class BigFiveV2SelectorInput
         public BigFiveV2RouteMatrixRow $routeRow,
         public array $includeSlots = [],
         public array $includeRegistryKeys = [],
+        public bool $enableResolvedCouplingRefs = false,
     ) {}
 
     /**
