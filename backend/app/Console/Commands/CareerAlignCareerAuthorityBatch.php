@@ -92,6 +92,7 @@ final class CareerAlignCareerAuthorityBatch extends Command
     protected $signature = 'career:align-career-authority-batch
         {--file= : Absolute path to repaired career upload workbook}
         {--slugs= : Comma-separated explicit slug allowlist}
+        {--directory-draft-scope= : Validated full-upload planner scope for directory_draft state resolution}
         {--dry-run : Validate and report without writing}
         {--force : Required to write authority Occupation and crosswalk rows}
         {--json : Emit machine-readable report}
@@ -121,6 +122,11 @@ final class CareerAlignCareerAuthorityBatch extends Command
             }
 
             $file = $this->requiredFile();
+            $directoryDraftScope = $this->directoryDraftScope();
+            if ($directoryDraftScope !== null) {
+                return $this->handleDirectoryDraftScope($report, $file, $directoryDraftScope, $force);
+            }
+
             $slugs = $this->requiredSlugs();
             $workbook = $this->workbookReader->readWorkbook($file, $slugs);
             $missingHeaders = array_values(array_diff(self::REQUIRED_HEADERS, $workbook['headers']));
@@ -199,6 +205,102 @@ final class CareerAlignCareerAuthorityBatch extends Command
                 'errors' => [$this->safeErrorMessage($throwable)],
             ]), false);
         }
+    }
+
+    /**
+     * @param  array<string, mixed>  $report
+     * @param  array{path:string, sha256:string, payload:array<string,mixed>, rows:array<string,array<string,mixed>>, slugs:list<string>}  $scope
+     */
+    private function handleDirectoryDraftScope(array $report, string $file, array $scope, bool $force): int
+    {
+        $workbook = $this->workbookReader->readWorkbook($file, $scope['slugs']);
+        $missingHeaders = array_values(array_diff(self::REQUIRED_HEADERS, $workbook['headers']));
+
+        $report = array_merge($report, [
+            'operation' => 'resolve_directory_draft',
+            'mode' => $force ? 'force' : 'dry_run',
+            'source_file_sha256' => hash_file('sha256', $file) ?: null,
+            'directory_draft_scope' => $scope['path'],
+            'directory_draft_scope_sha256' => $scope['sha256'],
+            'source_plan' => (string) ($scope['payload']['source_plan'] ?? ''),
+            'requested_slugs' => $scope['slugs'],
+            'target_crosswalk_mode' => 'direct_match',
+            'total_rows' => $workbook['total_rows'],
+        ]);
+
+        $expectedWorkbookSha = trim((string) ($scope['payload']['source_repaired_workbook_sha256'] ?? ''));
+        if ($expectedWorkbookSha === '' || $expectedWorkbookSha !== $report['source_file_sha256']) {
+            return $this->finish(array_merge($report, [
+                'decision' => 'fail',
+                'errors' => ['Directory draft scope workbook sha256 does not match --file.'],
+            ]), false);
+        }
+
+        if ($missingHeaders !== []) {
+            return $this->finish(array_merge($report, [
+                'decision' => 'fail',
+                'errors' => ['Workbook is missing required headers: '.implode(', ', $missingHeaders).'.'],
+            ]), false);
+        }
+
+        $rowsBySlug = [];
+        foreach ($workbook['rows'] as $row) {
+            $slug = strtolower(trim((string) ($row['Slug'] ?? '')));
+            if ($slug !== '') {
+                $rowsBySlug[$slug][] = $row;
+            }
+        }
+
+        $items = [];
+        $errors = [];
+        foreach ($scope['slugs'] as $slug) {
+            $matchingRows = $rowsBySlug[$slug] ?? [];
+            if ($matchingRows === []) {
+                $errors[] = "Directory draft scope slug {$slug} was not found in workbook.";
+
+                continue;
+            }
+            if (count($matchingRows) > 1) {
+                $errors[] = "Directory draft scope slug {$slug} appears more than once in workbook.";
+
+                continue;
+            }
+
+            $scopeRow = $scope['rows'][$slug] ?? [];
+            $item = $this->validateRow($slug, $matchingRows[0], $force);
+            $item = $this->validateDirectoryDraftItem($item, $scopeRow);
+            foreach ($item['errors'] as $error) {
+                $errors[] = "{$slug}: {$error}";
+            }
+            $items[] = $item;
+        }
+
+        $transitionSummary = $this->summarizeDirectoryDraftItems($items);
+        $report = array_merge($report, [
+            'validated_count' => count($items),
+            'items' => $items,
+        ], $this->summarize($items), $transitionSummary);
+
+        if ($errors !== []) {
+            return $this->finish(array_merge($report, [
+                'decision' => 'fail',
+                'errors' => $errors,
+            ]), false);
+        }
+
+        $report['decision'] = 'pass';
+        $report['would_write'] = ($transitionSummary['would_transition_directory_draft_count'] ?? 0) > 0;
+
+        if (! $force) {
+            return $this->finish($report, true);
+        }
+
+        $result = DB::transaction(fn (): array => $this->applyDirectoryDraftTransition($items, $scope, $file));
+        $afterForceSummary = $this->summarizeDirectoryDraftAfterForce($items, $result);
+
+        return $this->finish(array_merge($report, $result, [
+            'did_write' => ($result['transitioned_directory_draft_count'] ?? 0) > 0,
+        ], $afterForceSummary), true);
     }
 
     /**
@@ -311,6 +413,64 @@ final class CareerAlignCareerAuthorityBatch extends Command
     }
 
     /**
+     * @return array{path:string, sha256:string, payload:array<string,mixed>, rows:array<string,array<string,mixed>>, slugs:list<string>}|null
+     */
+    private function directoryDraftScope(): ?array
+    {
+        $path = trim((string) $this->option('directory-draft-scope'));
+        if ($path === '') {
+            return null;
+        }
+        if (! is_file($path)) {
+            throw new RuntimeException('--directory-draft-scope does not exist: '.$path);
+        }
+
+        $payload = json_decode((string) file_get_contents($path), true);
+        if (! is_array($payload)) {
+            throw new RuntimeException('--directory-draft-scope must be a JSON object.');
+        }
+        if (($payload['scope'] ?? null) !== 'career_full_directory_draft_resolution') {
+            throw new RuntimeException('--directory-draft-scope has unsupported scope.');
+        }
+
+        $declaredRows = $payload['rows'] ?? null;
+        if (! is_array($declaredRows) || $declaredRows === []) {
+            throw new RuntimeException('--directory-draft-scope must include exact rows.');
+        }
+
+        $rows = [];
+        foreach ($declaredRows as $row) {
+            if (! is_array($row)) {
+                throw new RuntimeException('--directory-draft-scope rows must be JSON objects.');
+            }
+
+            $slug = strtolower(trim((string) ($row['slug'] ?? $row['canonical_slug'] ?? '')));
+            if ($slug === '') {
+                throw new RuntimeException('--directory-draft-scope rows must include non-empty slugs.');
+            }
+            if (isset($rows[$slug])) {
+                throw new RuntimeException('--directory-draft-scope contains duplicate slug: '.$slug);
+            }
+            $rows[$slug] = $row;
+        }
+
+        $slugs = array_keys($rows);
+        $this->guardSlugs($slugs, 'directory draft scope');
+        $rowCount = (int) ($payload['row_count'] ?? 0);
+        if ($rowCount !== count($slugs)) {
+            throw new RuntimeException('--directory-draft-scope row_count does not match rows.');
+        }
+
+        return [
+            'path' => $path,
+            'sha256' => hash_file('sha256', $path) ?: '',
+            'payload' => $payload,
+            'rows' => $rows,
+            'slugs' => $slugs,
+        ];
+    }
+
+    /**
      * @return list<string>
      */
     private function requiredSlugs(): array
@@ -329,22 +489,30 @@ final class CareerAlignCareerAuthorityBatch extends Command
             throw new RuntimeException('--slugs is required and must include at least one slug.');
         }
 
+        $this->guardSlugs($slugs, '--slugs');
+
+        return $slugs;
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     */
+    private function guardSlugs(array $slugs, string $source): void
+    {
         $protected = array_values(array_intersect($slugs, self::PROTECTED_SLUGS));
         if ($protected !== []) {
-            throw new RuntimeException('Protected validated slug(s) cannot be authority-aligned by this command: '.implode(', ', $protected).'.');
+            throw new RuntimeException('Protected validated slug(s) cannot be authority-aligned by '.$source.': '.implode(', ', $protected).'.');
         }
 
         $manualHold = array_values(array_intersect($slugs, self::MANUAL_HOLD_SLUGS));
         if ($manualHold !== []) {
-            throw new RuntimeException('Manual-hold slug(s) cannot be authority-aligned by this command: '.implode(', ', $manualHold).'.');
+            throw new RuntimeException('Manual-hold slug(s) cannot be authority-aligned by '.$source.': '.implode(', ', $manualHold).'.');
         }
 
         $cnSlugs = array_values(array_filter($slugs, static fn (string $slug): bool => str_starts_with($slug, 'cn-')));
         if ($cnSlugs !== []) {
-            throw new RuntimeException('CN proxy slug(s) cannot be authority-aligned by this command: '.implode(', ', $cnSlugs).'.');
+            throw new RuntimeException('CN proxy slug(s) cannot be authority-aligned by '.$source.': '.implode(', ', $cnSlugs).'.');
         }
-
-        return $slugs;
     }
 
     /**
@@ -513,6 +681,98 @@ final class CareerAlignCareerAuthorityBatch extends Command
     }
 
     /**
+     * @param  array<string, mixed>  $item
+     * @param  array<string, mixed>  $scopeRow
+     * @return array<string, mixed>
+     */
+    private function validateDirectoryDraftItem(array $item, array $scopeRow): array
+    {
+        $errors = $item['errors'] ?? [];
+        $status = (string) ($scopeRow['status'] ?? '');
+        $authorityState = (string) ($scopeRow['authority_state'] ?? data_get($scopeRow, 'authority_gate.authority_state', ''));
+        $holdReason = trim((string) ($scopeRow['hold_reason'] ?? ''));
+
+        $this->expect($status === 'needs_authority_alignment', 'Directory draft scope row must have status=needs_authority_alignment.', $errors);
+        $this->expect($authorityState === 'directory_draft', 'Directory draft scope row must have authority_state=directory_draft.', $errors);
+        $this->expect($holdReason === '', 'Held rows cannot be resolved by directory draft transition.', $errors);
+        $this->expect(($item['occupation_found'] ?? false) === true, 'Existing occupation is required for directory draft transition.', $errors);
+        $this->expect(($item['already_exists_us_soc_crosswalk'] ?? false) === true, 'Existing us_soc crosswalk is required before directory draft transition.', $errors);
+        $this->expect(($item['already_exists_onet_soc_2019_crosswalk'] ?? false) === true, 'Existing onet_soc_2019 crosswalk is required before directory draft transition.', $errors);
+        $this->expect((int) ($item['display_asset_count_before'] ?? 0) === 0, 'Existing display asset rows cannot be changed by directory draft transition.', $errors);
+
+        $occupation = Occupation::query()->where('canonical_slug', $item['slug'])->first();
+        $currentMode = $occupation instanceof Occupation ? (string) $occupation->crosswalk_mode : '';
+        $item['current_crosswalk_mode'] = $currentMode;
+        $item['target_crosswalk_mode'] = 'direct_match';
+        $item['would_transition_directory_draft'] = $errors === [] && $currentMode === 'directory_draft';
+        $item['already_resolved_directory_draft'] = $errors === [] && $currentMode === 'direct_match';
+        $item['authority_state_transitioned'] = false;
+
+        if ($errors === [] && ! in_array($currentMode, ['directory_draft', 'direct_match'], true)) {
+            $errors[] = 'Occupation crosswalk_mode must be directory_draft or already direct_match.';
+            $item['would_transition_directory_draft'] = false;
+            $item['already_resolved_directory_draft'] = false;
+        }
+
+        $item['errors'] = $errors;
+
+        return $item;
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $items
+     * @param  array{path:string, sha256:string, payload:array<string,mixed>, rows:array<string,array<string,mixed>>, slugs:list<string>}  $scope
+     * @return array<string, mixed>
+     */
+    private function applyDirectoryDraftTransition(array $items, array $scope, string $file): array
+    {
+        $transitioned = [];
+
+        foreach ($items as $item) {
+            if (($item['would_transition_directory_draft'] ?? false) !== true) {
+                continue;
+            }
+
+            $occupation = Occupation::query()
+                ->where('canonical_slug', $item['slug'])
+                ->where('crosswalk_mode', 'directory_draft')
+                ->first();
+
+            if (! $occupation instanceof Occupation) {
+                continue;
+            }
+
+            $trustScope = is_array($occupation->trust_inheritance_scope)
+                ? $occupation->trust_inheritance_scope
+                : [];
+            $occupation->forceFill([
+                'crosswalk_mode' => 'direct_match',
+                'trust_inheritance_scope' => array_merge($trustScope, [
+                    'status' => 'career_upload_directory_draft_resolved',
+                    'previous_crosswalk_mode' => 'directory_draft',
+                    'source_asset' => basename($file),
+                    'source_scope' => basename($scope['path']),
+                    'source_plan' => basename((string) ($scope['payload']['source_plan'] ?? '')),
+                ]),
+            ])->save();
+
+            $transitioned[] = [
+                'slug' => $item['slug'],
+                'occupation_id' => $occupation->id,
+                'from' => 'directory_draft',
+                'to' => 'direct_match',
+            ];
+        }
+
+        return [
+            'transitioned_directory_draft_count' => count($transitioned),
+            'transitioned_directory_drafts' => $transitioned,
+            'created_occupation_count' => 0,
+            'created_crosswalk_count' => 0,
+        ];
+    }
+
+    /**
      * @return array<string, mixed>
      */
     private function crosswalkReport(OccupationCrosswalk $crosswalk): array
@@ -595,6 +855,22 @@ final class CareerAlignCareerAuthorityBatch extends Command
 
     /**
      * @param  list<array<string, mixed>>  $items
+     * @return array<string, int>
+     */
+    private function summarizeDirectoryDraftItems(array $items): array
+    {
+        return [
+            'would_transition_directory_draft_count' => count(array_filter($items, static fn (array $item): bool => ($item['would_transition_directory_draft'] ?? false) === true)),
+            'transitioned_directory_draft_count' => 0,
+            'already_resolved_directory_draft_count' => count(array_filter($items, static fn (array $item): bool => ($item['already_resolved_directory_draft'] ?? false) === true)),
+            'occupation_delta' => 0,
+            'occupation_crosswalk_delta' => 0,
+            'career_job_display_assets_delta' => 0,
+        ];
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $items
      * @param  array<string, mixed>  $result
      * @return array<string, int>
      */
@@ -608,6 +884,23 @@ final class CareerAlignCareerAuthorityBatch extends Command
             'failed_count' => 0,
             'created_occupation_count' => (int) ($result['created_occupation_count'] ?? 0),
             'created_crosswalk_count' => (int) ($result['created_crosswalk_count'] ?? 0),
+        ];
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $items
+     * @param  array<string, mixed>  $result
+     * @return array<string, int>
+     */
+    private function summarizeDirectoryDraftAfterForce(array $items, array $result): array
+    {
+        return [
+            'would_transition_directory_draft_count' => 0,
+            'already_resolved_directory_draft_count' => count($items),
+            'transitioned_directory_draft_count' => (int) ($result['transitioned_directory_draft_count'] ?? 0),
+            'occupation_delta' => 0,
+            'occupation_crosswalk_delta' => 0,
+            'career_job_display_assets_delta' => 0,
         ];
     }
 
@@ -648,8 +941,11 @@ final class CareerAlignCareerAuthorityBatch extends Command
     private function finish(array $report, bool $success): int
     {
         if (($report['mode'] ?? null) === 'force') {
+            $writeCount = (int) ($report['created_occupation_count'] ?? 0)
+                + (int) ($report['created_crosswalk_count'] ?? 0)
+                + (int) ($report['transitioned_directory_draft_count'] ?? 0);
             $report['read_only'] = false;
-            $report['writes_database'] = $success && (($report['created_occupation_count'] ?? 0) + ($report['created_crosswalk_count'] ?? 0)) > 0;
+            $report['writes_database'] = $success && $writeCount > 0;
         }
 
         $outputPath = trim((string) ($this->option('output') ?? ''));
@@ -667,6 +963,9 @@ final class CareerAlignCareerAuthorityBatch extends Command
             $this->line('failed_count='.(string) $report['failed_count']);
             $this->line('created_occupation_count='.(string) $report['created_occupation_count']);
             $this->line('created_crosswalk_count='.(string) $report['created_crosswalk_count']);
+            if (array_key_exists('transitioned_directory_draft_count', $report)) {
+                $this->line('transitioned_directory_draft_count='.(string) $report['transitioned_directory_draft_count']);
+            }
             $this->line('decision='.$report['decision']);
             if (isset($report['errors'])) {
                 $this->line('errors='.json_encode($report['errors'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));

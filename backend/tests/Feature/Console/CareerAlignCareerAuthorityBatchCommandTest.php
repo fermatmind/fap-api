@@ -149,6 +149,85 @@ final class CareerAlignCareerAuthorityBatchCommandTest extends TestCase
     }
 
     #[Test]
+    public function directory_draft_scope_dry_run_reports_state_transition_without_writing(): void
+    {
+        $occupation = $this->createOccupation('acute-care-nurses');
+        $this->createCrosswalk($occupation, 'us_soc', '29-1141');
+        $this->createCrosswalk($occupation, 'onet_soc_2019', '29-1141.01');
+        $workbook = $this->writeWorkbook([$this->row('acute-care-nurses')]);
+        $scope = $this->writeDirectoryDraftScope($workbook, [$this->directoryDraftScopeRow('acute-care-nurses')]);
+
+        [$exitCode, $report] = $this->runAlignDirectoryDraftScope($workbook, $scope, ['--dry-run' => true]);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame('pass', $report['decision']);
+        $this->assertSame('resolve_directory_draft', $report['operation']);
+        $this->assertTrue($report['read_only']);
+        $this->assertFalse($report['writes_database']);
+        $this->assertSame(1, $report['validated_count']);
+        $this->assertSame(1, $report['would_transition_directory_draft_count']);
+        $this->assertSame(0, $report['transitioned_directory_draft_count']);
+        $this->assertSame(0, $report['occupation_delta']);
+        $this->assertSame(0, $report['occupation_crosswalk_delta']);
+        $this->assertSame(0, $report['career_job_display_assets_delta']);
+        $this->assertTrue($report['would_write']);
+        $this->assertSame('directory_draft', $occupation->fresh()->crosswalk_mode);
+        $this->assertSame(0, CareerJobDisplayAsset::query()->count());
+    }
+
+    #[Test]
+    public function directory_draft_scope_force_transitions_state_and_is_idempotent(): void
+    {
+        $occupation = $this->createOccupation('animal-caretakers');
+        $this->createCrosswalk($occupation, 'us_soc', '39-2021');
+        $this->createCrosswalk($occupation, 'onet_soc_2019', '39-2021.00');
+        $workbook = $this->writeWorkbook([$this->row('animal-caretakers', soc: '39-2021', onet: '39-2021.00')]);
+        $scope = $this->writeDirectoryDraftScope($workbook, [$this->directoryDraftScopeRow('animal-caretakers')]);
+
+        [$exitCode, $report] = $this->runAlignDirectoryDraftScope($workbook, $scope, ['--force' => true]);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame('pass', $report['decision']);
+        $this->assertTrue($report['writes_database']);
+        $this->assertSame(1, $report['transitioned_directory_draft_count']);
+        $this->assertSame(0, $report['created_occupation_count']);
+        $this->assertSame(0, $report['created_crosswalk_count']);
+        $this->assertSame('direct_match', $occupation->fresh()->crosswalk_mode);
+        $this->assertSame('career_upload_directory_draft_resolved', data_get($occupation->fresh()->trust_inheritance_scope, 'status'));
+
+        [$exitCode, $secondReport] = $this->runAlignDirectoryDraftScope($workbook, $scope, ['--dry-run' => true]);
+
+        $this->assertSame(0, $exitCode, json_encode($secondReport, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertFalse($secondReport['would_write']);
+        $this->assertFalse($secondReport['writes_database']);
+        $this->assertSame(0, $secondReport['would_transition_directory_draft_count']);
+        $this->assertSame(1, $secondReport['already_resolved_directory_draft_count']);
+        $this->assertSame(2, OccupationCrosswalk::query()->count());
+    }
+
+    #[Test]
+    public function directory_draft_scope_rejects_wrong_workbook_and_manual_holds(): void
+    {
+        $workbook = $this->writeWorkbook([$this->row('acute-care-nurses')]);
+        $scope = $this->writeDirectoryDraftScope($workbook, [$this->directoryDraftScopeRow('acute-care-nurses')], 'not-the-workbook-sha');
+
+        [$exitCode, $report] = $this->runAlignDirectoryDraftScope($workbook, $scope, ['--dry-run' => true]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('workbook sha256 does not match', implode(' ', $report['errors']));
+
+        $manualHoldWorkbook = $this->writeWorkbook([
+            $this->row('software-developers', soc: '15-1252', onet: '15-1252.00'),
+        ]);
+        $manualHoldScope = $this->writeDirectoryDraftScope($manualHoldWorkbook, [$this->directoryDraftScopeRow('software-developers')]);
+
+        [$exitCode, $report] = $this->runAlignDirectoryDraftScope($manualHoldWorkbook, $manualHoldScope, ['--dry-run' => true]);
+
+        $this->assertSame(1, $exitCode);
+        $this->assertStringContainsString('Manual-hold slug(s)', implode(' ', $report['errors']));
+    }
+
+    #[Test]
     public function missing_duplicate_proxy_and_conflicting_rows_fail(): void
     {
         $workbook = $this->writeWorkbook([$this->row('acute-care-nurses')]);
@@ -214,6 +293,21 @@ final class CareerAlignCareerAuthorityBatchCommandTest extends TestCase
         return [$exitCode, json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR)];
     }
 
+    /**
+     * @param  array<string, mixed>  $options
+     * @return array{int, array<string, mixed>}
+     */
+    private function runAlignDirectoryDraftScope(string $file, string $scope, array $options = []): array
+    {
+        $exitCode = Artisan::call('career:align-career-authority-batch', array_merge([
+            '--file' => $file,
+            '--directory-draft-scope' => $scope,
+            '--json' => true,
+        ], $options));
+
+        return [$exitCode, json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR)];
+    }
+
     private function seedExpectedExistingD10Authority(): void
     {
         foreach ($this->cohortRows() as $index => $row) {
@@ -257,6 +351,54 @@ final class CareerAlignCareerAuthorityBatchCommandTest extends TestCase
             'mapping_type' => 'direct_match',
             'confidence_score' => 1.0,
         ]);
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $rows
+     */
+    private function writeDirectoryDraftScope(string $workbook, array $rows, ?string $workbookSha = null): string
+    {
+        $path = $this->tempDir().'/directory_draft_scope.json';
+        $slugs = array_map(static fn (array $row): string => (string) $row['slug'], $rows);
+        file_put_contents($path, json_encode([
+            'scope' => 'career_full_directory_draft_resolution',
+            'source_plan' => '/tmp/career_full_upload_plan_after_authority.json',
+            'source_repaired_workbook' => $workbook,
+            'source_repaired_workbook_sha256' => $workbookSha ?? hash_file('sha256', $workbook),
+            'row_count' => count($rows),
+            'slugs' => $slugs,
+            'rows' => $rows,
+            'current_state' => 'directory_draft',
+            'target_state' => null,
+            'existing_crosswalks_present' => true,
+            'exclusions' => [
+                'already_imported_311' => true,
+                'held_rows' => true,
+                'software_developers' => true,
+                'duplicate_identity_holds' => true,
+                'broad_group_holds' => true,
+                'CN_proxy_holds' => true,
+                'manual_holds' => true,
+            ],
+            'blockers' => [],
+        ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+
+        return $path;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function directoryDraftScopeRow(string $slug): array
+    {
+        return [
+            'row_number' => 2,
+            'slug' => $slug,
+            'canonical_slug' => $slug,
+            'status' => 'needs_authority_alignment',
+            'authority_state' => 'directory_draft',
+            'hold_reason' => null,
+        ];
     }
 
     /**
