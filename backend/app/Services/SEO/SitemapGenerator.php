@@ -435,6 +435,7 @@ class SitemapGenerator
             ->whereIn('locale', CareerJob::SUPPORTED_LOCALES)
             ->whereNotNull('slug')
             ->where('slug', '<>', '')
+            ->whereNotIn('slug', self::CAREER_DISPLAY_MANUAL_HOLD_SLUGS)
             ->where(static function ($query): void {
                 $query->whereNull('published_at')
                     ->orWhere('published_at', '<=', now());
