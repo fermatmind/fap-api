@@ -211,6 +211,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         $changed = [
             'backend/app/Services/SEO/SitemapGenerator.php',
+            'backend/app/Services/SEO/SitemapCache.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -496,7 +497,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
     private function isCareerPublicDistributionFile(string $file): bool
     {
-        return $file === 'backend/app/Services/SEO/SitemapGenerator.php';
+        return in_array($file, [
+            'backend/app/Services/SEO/SitemapGenerator.php',
+            'backend/app/Services/SEO/SitemapCache.php',
+        ], true);
     }
 
     private function isBigFiveV2PilotSupportFile(string $file): bool
