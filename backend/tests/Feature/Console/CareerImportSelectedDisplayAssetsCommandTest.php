@@ -252,6 +252,39 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
     }
 
     #[Test]
+    public function d32_cohort_dry_run_generates_payloads_without_writing_database_rows(): void
+    {
+        foreach ($this->d32Rows() as $row) {
+            $this->createAuthorityOccupation($row['Slug'], $row['SOC_Code'], $row['O_NET_Code']);
+        }
+        $workbook = $this->writeWorkbook($this->d32Rows());
+        $before = $this->tableCounts();
+
+        [$exitCode, $report] = $this->runImport($workbook, implode(',', array_column($this->d32Rows(), 'Slug')), [
+            '--dry-run' => true,
+        ]);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertSame($before, $this->tableCounts());
+        $this->assertSame('pass', $report['decision']);
+        $this->assertSame('dry_run', $report['mode']);
+        $this->assertSame(100, $report['validated_count']);
+        $this->assertSame(100, $report['would_write_count']);
+        $this->assertSame(0, $report['already_exists_count']);
+        $this->assertFalse($report['did_write']);
+        $this->assertFalse($report['release_gates_changed']);
+
+        foreach ($report['items'] as $item) {
+            $this->assertTrue($item['would_write']);
+            $this->assertSame(24, $item['payload_summary']['component_order_count']);
+            $this->assertTrue($item['payload_summary']['has_zh_page']);
+            $this->assertTrue($item['payload_summary']['has_en_page']);
+            $this->assertSame([], $item['payload_summary']['public_payload_forbidden_keys_found']);
+            $this->assertSame(false, data_get($item, 'payload_summary.release_gates.sitemap'));
+        }
+    }
+
+    #[Test]
     public function force_writes_exactly_three_display_asset_rows(): void
     {
         foreach ($this->selectedRows() as $row) {
@@ -915,6 +948,31 @@ final class CareerImportSelectedDisplayAssetsCommandTest extends TestCase
                 $slug,
                 title: $title,
                 cnTitle: $cnTitle,
+                soc: $expected['soc'],
+                onet: $expected['onet'],
+            );
+        }
+
+        return $rows;
+    }
+
+    /**
+     * @return list<array<string, string>>
+     */
+    private function d32Rows(): array
+    {
+        $rows = [];
+        foreach (CareerSelectedDisplayAssetMapper::COHORT_D32_SLUGS as $slug => $expected) {
+            $fixtureTitleSlug = strtr($slug, [
+                'production' => 'operations',
+                'products' => 'goods',
+                'product' => 'goods',
+            ]);
+
+            $rows[] = $this->row(
+                $slug,
+                title: ucwords(str_replace('-', ' ', $fixtureTitleSlug)),
+                cnTitle: str_replace('-', ' ', $fixtureTitleSlug),
                 soc: $expected['soc'],
                 onet: $expected['onet'],
             );
