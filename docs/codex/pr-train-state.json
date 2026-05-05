@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-06T00:36:52+08:00",
+  "updated_at": "2026-05-06T00:43:22+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -152,11 +152,11 @@
     "backend-email-gated-report-read": {
       "repo": "fap-api",
       "branch": "codex/backend-email-gated-report-read",
-      "status": "open_pending_github_checks",
+      "status": "github_checks_passed",
       "depends_on": [
         "backend-email-result-lookup"
       ],
-      "commit_sha": "14db8dd1c0a3d627779569b2be04d6c5094d721b",
+      "commit_sha": "4b4c5073d782b0a4055430797997d5a1927ccbe6",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1191",
       "checks": {
         "dependency": {
@@ -210,8 +210,8 @@
           "evidence": "Full script exited 0."
         },
         "github_required_checks": {
-          "status": "pending",
-          "evidence": "PR opened at https://github.com/fermatmind/fap-api/pull/1191; waiting for required checks."
+          "status": "pass",
+          "evidence": "PR #1191 CI passed: hygiene, verify-mbti-v2, and verify-mbti-legacy completed successfully."
         }
       },
       "sidecar_issues": [
