@@ -156,14 +156,27 @@ php artisan release:verify-public-content \
   --content-source-dir=/absolute/path/to/content_baselines/content_pages
 ```
 
-The deploy recipe runs this command automatically. The release must stop if any of these fail:
+The deploy recipe runs this command automatically. By default, the release must stop when any content page baseline row is not present as `status=published` and `is_public=true` in `content_pages`.
 
-- every content page baseline row is not present as `status=published` and `is_public=true` in `content_pages`
+Career completeness is a default warning, not a release blocker. The guard still reports warnings when:
+
 - the career dataset member count is below `2787`
 - career dataset tracking is incomplete or has missing occupations
 - the career job list item count is below `2786`
 
-If the guard fails, fix the backend-authoritative data import or compile path first. Do not patch frontend fallback content to hide the failure.
+Use strict Career mode only when the operator intentionally wants Career completeness to block the deploy:
+
+```bash
+DEPLOY_PUBLIC_CONTENT_STRICT_CAREER=1 vendor/bin/dep deploy production
+
+php artisan release:verify-public-content \
+  --expected-occupations=2787 \
+  --min-career-job-items=2786 \
+  --content-source-dir=/absolute/path/to/content_baselines/content_pages \
+  --strict-career
+```
+
+If the guard fails, fix the backend-authoritative data import or compile path first. If Career warnings appear in non-strict mode, either continue the deploy with the warnings recorded or rerun in strict mode when Career completeness is required. Do not patch frontend fallback content to hide the failure.
 
 ## Repository Rule Impact
 

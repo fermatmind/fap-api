@@ -50,6 +50,57 @@ final class ReleaseVerifyPublicContentCommandTest extends TestCase
             ->assertExitCode(0);
     }
 
+    #[Test]
+    public function it_warns_on_career_completeness_failures_by_default(): void
+    {
+        $this->artisan('content-pages:import-local-baseline', [
+            '--upsert' => true,
+            '--status' => 'published',
+            '--source-dir' => '../content_baselines/content_pages',
+        ])->assertExitCode(0);
+
+        $this->createDirectoryDraftOccupation('example-directory-job', 'Example directory job', '示例目录职业');
+
+        $this->artisan('release:verify-public-content', [
+            '--expected-occupations' => 999,
+            '--min-career-job-items' => 999,
+            '--content-source-dir' => '../content_baselines/content_pages',
+        ])
+            ->expectsOutputToContain('career_completeness_strict=0')
+            ->expectsOutputToContain('content_pages ok=1')
+            ->expectsOutputToContain('career_dataset ok=0')
+            ->expectsOutputToContain('career_job_list ok=0')
+            ->expectsOutputToContain('warning career_dataset: career_dataset_member_count_below_expected:')
+            ->expectsOutputToContain('warning career_job_list: career_job_list_count_below_expected:')
+            ->assertExitCode(0);
+    }
+
+    #[Test]
+    public function it_fails_on_career_completeness_failures_when_strict_mode_is_enabled(): void
+    {
+        $this->artisan('content-pages:import-local-baseline', [
+            '--upsert' => true,
+            '--status' => 'published',
+            '--source-dir' => '../content_baselines/content_pages',
+        ])->assertExitCode(0);
+
+        $this->createDirectoryDraftOccupation('example-directory-job', 'Example directory job', '示例目录职业');
+
+        $this->artisan('release:verify-public-content', [
+            '--expected-occupations' => 999,
+            '--min-career-job-items' => 999,
+            '--content-source-dir' => '../content_baselines/content_pages',
+            '--strict-career' => true,
+        ])
+            ->expectsOutputToContain('career_completeness_strict=1')
+            ->expectsOutputToContain('content_pages ok=1')
+            ->expectsOutputToContain('career_dataset ok=0')
+            ->expectsOutputToContain('career_job_list ok=0')
+            ->expectsOutputToContain('career_dataset: career_dataset_member_count_below_expected:')
+            ->expectsOutputToContain('career_job_list: career_job_list_count_below_expected:')
+            ->assertExitCode(1);
+    }
+
     private function createDirectoryDraftOccupation(string $slug, string $titleEn, string $titleZh): void
     {
         $family = OccupationFamily::query()->firstOrCreate(
