@@ -1,0 +1,359 @@
+{
+  "catalog_version": "v0.1",
+  "node_count": 13,
+  "edge_count": 37,
+  "nodes": [
+    {
+      "package_key": "B5-CONTENT-0",
+      "package_name": "内容资产结构规范",
+      "package_type": "governance",
+      "runtime_use": "not_runtime",
+      "production_use_allowed": false
+    },
+    {
+      "package_key": "B5-A-lite",
+      "package_name": "Source Authority + Module Mapping Governance",
+      "package_type": "source_authority",
+      "runtime_use": "not_runtime",
+      "production_use_allowed": false
+    },
+    {
+      "package_key": "B5-B1-O59-core-body",
+      "package_name": "O59 Canonical Core Body Asset Import",
+      "package_type": "core_body",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "package_key": "B5-B1-Preview",
+      "package_name": "O59 Rendered Preview QA Pack",
+      "package_type": "rendered_preview_qa",
+      "runtime_use": "not_runtime",
+      "production_use_allowed": false
+    },
+    {
+      "package_key": "B5-B1-Preview-Codex-Handoff",
+      "package_name": "O59 Rendered Preview Execution Brief",
+      "package_type": "codex_handoff",
+      "runtime_use": "not_runtime",
+      "production_use_allowed": false
+    },
+    {
+      "package_key": "B5-CONTENT-1",
+      "package_name": "五维 × 五档基础维度资产",
+      "package_type": "trait_band_assets",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "package_key": "B5-CONTENT-2",
+      "package_name": "维度耦合 / 组合动力资产",
+      "package_type": "coupling_assets",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "package_key": "B5-CONTENT-3",
+      "package_name": "Facet 刻面解释 / 反直觉重构资产",
+      "package_type": "facet_assets",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "package_key": "B5-CONTENT-4",
+      "package_name": "代表性画像 / 标准画像路由资产",
+      "package_type": "canonical_profile_routes",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "package_key": "B5-CONTENT-5",
+      "package_name": "场景应用 / 行动矩阵资产",
+      "package_type": "scenario_action_assets",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "package_key": "B5-CONTENT-6",
+      "package_name": "3125 五维组合路由矩阵",
+      "package_type": "route_matrix",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "package_key": "selector-ready-assets-v0.3-p0-full",
+      "package_name": "325 selector-ready assets v0.3 P0 full candidate",
+      "package_type": "selector_ready_assets",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "package_key": "selector-qa-policy-v0.1",
+      "package_name": "Golden Cases + Selection Policy + Conflict Resolution",
+      "package_type": "selector_qa_policy",
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    }
+  ],
+  "edges": [
+    {
+      "from_package_key": "B5-CONTENT-0",
+      "to_package_key": "B5-A-lite",
+      "dependency_type": "requires_before_use",
+      "required_for": "source_authority",
+      "notes": "B5-A-lite depends on B5-CONTENT-0"
+    },
+    {
+      "from_package_key": "B5-CONTENT-0",
+      "to_package_key": "B5-B1-O59-core-body",
+      "dependency_type": "requires_before_use",
+      "required_for": "core_body",
+      "notes": "B5-B1-O59-core-body depends on B5-CONTENT-0"
+    },
+    {
+      "from_package_key": "B5-A-lite",
+      "to_package_key": "B5-B1-O59-core-body",
+      "dependency_type": "requires_before_use",
+      "required_for": "core_body",
+      "notes": "B5-B1-O59-core-body depends on B5-A-lite"
+    },
+    {
+      "from_package_key": "B5-B1-O59-core-body",
+      "to_package_key": "B5-B1-Preview",
+      "dependency_type": "requires_before_use",
+      "required_for": "rendered_preview_qa",
+      "notes": "B5-B1-Preview depends on B5-B1-O59-core-body"
+    },
+    {
+      "from_package_key": "B5-A-lite",
+      "to_package_key": "B5-B1-Preview",
+      "dependency_type": "requires_before_use",
+      "required_for": "rendered_preview_qa",
+      "notes": "B5-B1-Preview depends on B5-A-lite"
+    },
+    {
+      "from_package_key": "B5-B1-Preview",
+      "to_package_key": "B5-B1-Preview-Codex-Handoff",
+      "dependency_type": "requires_before_use",
+      "required_for": "codex_handoff",
+      "notes": "B5-B1-Preview-Codex-Handoff depends on B5-B1-Preview"
+    },
+    {
+      "from_package_key": "B5-B1-O59-core-body",
+      "to_package_key": "B5-B1-Preview-Codex-Handoff",
+      "dependency_type": "requires_before_use",
+      "required_for": "codex_handoff",
+      "notes": "B5-B1-Preview-Codex-Handoff depends on B5-B1-O59-core-body"
+    },
+    {
+      "from_package_key": "B5-CONTENT-0",
+      "to_package_key": "B5-CONTENT-1",
+      "dependency_type": "requires_before_use",
+      "required_for": "trait_band_assets",
+      "notes": "B5-CONTENT-1 depends on B5-CONTENT-0"
+    },
+    {
+      "from_package_key": "B5-A-lite",
+      "to_package_key": "B5-CONTENT-1",
+      "dependency_type": "requires_before_use",
+      "required_for": "trait_band_assets",
+      "notes": "B5-CONTENT-1 depends on B5-A-lite"
+    },
+    {
+      "from_package_key": "B5-CONTENT-0",
+      "to_package_key": "B5-CONTENT-2",
+      "dependency_type": "requires_before_use",
+      "required_for": "coupling_assets",
+      "notes": "B5-CONTENT-2 depends on B5-CONTENT-0"
+    },
+    {
+      "from_package_key": "B5-A-lite",
+      "to_package_key": "B5-CONTENT-2",
+      "dependency_type": "requires_before_use",
+      "required_for": "coupling_assets",
+      "notes": "B5-CONTENT-2 depends on B5-A-lite"
+    },
+    {
+      "from_package_key": "B5-CONTENT-1",
+      "to_package_key": "B5-CONTENT-2",
+      "dependency_type": "requires_before_use",
+      "required_for": "coupling_assets",
+      "notes": "B5-CONTENT-2 depends on B5-CONTENT-1"
+    },
+    {
+      "from_package_key": "B5-CONTENT-0",
+      "to_package_key": "B5-CONTENT-3",
+      "dependency_type": "requires_before_use",
+      "required_for": "facet_assets",
+      "notes": "B5-CONTENT-3 depends on B5-CONTENT-0"
+    },
+    {
+      "from_package_key": "B5-A-lite",
+      "to_package_key": "B5-CONTENT-3",
+      "dependency_type": "requires_before_use",
+      "required_for": "facet_assets",
+      "notes": "B5-CONTENT-3 depends on B5-A-lite"
+    },
+    {
+      "from_package_key": "B5-CONTENT-1",
+      "to_package_key": "B5-CONTENT-3",
+      "dependency_type": "requires_before_use",
+      "required_for": "facet_assets",
+      "notes": "B5-CONTENT-3 depends on B5-CONTENT-1"
+    },
+    {
+      "from_package_key": "B5-CONTENT-2",
+      "to_package_key": "B5-CONTENT-3",
+      "dependency_type": "requires_before_use",
+      "required_for": "facet_assets",
+      "notes": "B5-CONTENT-3 depends on B5-CONTENT-2"
+    },
+    {
+      "from_package_key": "B5-CONTENT-0",
+      "to_package_key": "B5-CONTENT-4",
+      "dependency_type": "requires_before_use",
+      "required_for": "canonical_profile_routes",
+      "notes": "B5-CONTENT-4 depends on B5-CONTENT-0"
+    },
+    {
+      "from_package_key": "B5-A-lite",
+      "to_package_key": "B5-CONTENT-4",
+      "dependency_type": "requires_before_use",
+      "required_for": "canonical_profile_routes",
+      "notes": "B5-CONTENT-4 depends on B5-A-lite"
+    },
+    {
+      "from_package_key": "B5-CONTENT-1",
+      "to_package_key": "B5-CONTENT-4",
+      "dependency_type": "requires_before_use",
+      "required_for": "canonical_profile_routes",
+      "notes": "B5-CONTENT-4 depends on B5-CONTENT-1"
+    },
+    {
+      "from_package_key": "B5-CONTENT-2",
+      "to_package_key": "B5-CONTENT-4",
+      "dependency_type": "requires_before_use",
+      "required_for": "canonical_profile_routes",
+      "notes": "B5-CONTENT-4 depends on B5-CONTENT-2"
+    },
+    {
+      "from_package_key": "B5-CONTENT-3",
+      "to_package_key": "B5-CONTENT-4",
+      "dependency_type": "requires_before_use",
+      "required_for": "canonical_profile_routes",
+      "notes": "B5-CONTENT-4 depends on B5-CONTENT-3"
+    },
+    {
+      "from_package_key": "B5-B1-O59-core-body",
+      "to_package_key": "B5-CONTENT-4",
+      "dependency_type": "requires_before_use",
+      "required_for": "canonical_profile_routes",
+      "notes": "B5-CONTENT-4 depends on B5-B1-O59-core-body"
+    },
+    {
+      "from_package_key": "B5-CONTENT-0",
+      "to_package_key": "B5-CONTENT-5",
+      "dependency_type": "requires_before_use",
+      "required_for": "scenario_action_assets",
+      "notes": "B5-CONTENT-5 depends on B5-CONTENT-0"
+    },
+    {
+      "from_package_key": "B5-A-lite",
+      "to_package_key": "B5-CONTENT-5",
+      "dependency_type": "requires_before_use",
+      "required_for": "scenario_action_assets",
+      "notes": "B5-CONTENT-5 depends on B5-A-lite"
+    },
+    {
+      "from_package_key": "B5-CONTENT-1",
+      "to_package_key": "B5-CONTENT-5",
+      "dependency_type": "requires_before_use",
+      "required_for": "scenario_action_assets",
+      "notes": "B5-CONTENT-5 depends on B5-CONTENT-1"
+    },
+    {
+      "from_package_key": "B5-CONTENT-2",
+      "to_package_key": "B5-CONTENT-5",
+      "dependency_type": "requires_before_use",
+      "required_for": "scenario_action_assets",
+      "notes": "B5-CONTENT-5 depends on B5-CONTENT-2"
+    },
+    {
+      "from_package_key": "B5-CONTENT-3",
+      "to_package_key": "B5-CONTENT-5",
+      "dependency_type": "requires_before_use",
+      "required_for": "scenario_action_assets",
+      "notes": "B5-CONTENT-5 depends on B5-CONTENT-3"
+    },
+    {
+      "from_package_key": "B5-CONTENT-4",
+      "to_package_key": "B5-CONTENT-5",
+      "dependency_type": "requires_before_use",
+      "required_for": "scenario_action_assets",
+      "notes": "B5-CONTENT-5 depends on B5-CONTENT-4"
+    },
+    {
+      "from_package_key": "B5-CONTENT-0",
+      "to_package_key": "B5-CONTENT-6",
+      "dependency_type": "requires_before_use",
+      "required_for": "route_matrix",
+      "notes": "B5-CONTENT-6 depends on B5-CONTENT-0"
+    },
+    {
+      "from_package_key": "B5-A-lite",
+      "to_package_key": "B5-CONTENT-6",
+      "dependency_type": "requires_before_use",
+      "required_for": "route_matrix",
+      "notes": "B5-CONTENT-6 depends on B5-A-lite"
+    },
+    {
+      "from_package_key": "B5-CONTENT-1",
+      "to_package_key": "B5-CONTENT-6",
+      "dependency_type": "requires_before_use",
+      "required_for": "route_matrix",
+      "notes": "B5-CONTENT-6 depends on B5-CONTENT-1"
+    },
+    {
+      "from_package_key": "B5-CONTENT-2",
+      "to_package_key": "B5-CONTENT-6",
+      "dependency_type": "requires_before_use",
+      "required_for": "route_matrix",
+      "notes": "B5-CONTENT-6 depends on B5-CONTENT-2"
+    },
+    {
+      "from_package_key": "B5-CONTENT-3",
+      "to_package_key": "B5-CONTENT-6",
+      "dependency_type": "requires_before_use",
+      "required_for": "route_matrix",
+      "notes": "B5-CONTENT-6 depends on B5-CONTENT-3"
+    },
+    {
+      "from_package_key": "B5-CONTENT-4",
+      "to_package_key": "B5-CONTENT-6",
+      "dependency_type": "requires_before_use",
+      "required_for": "route_matrix",
+      "notes": "B5-CONTENT-6 depends on B5-CONTENT-4"
+    },
+    {
+      "from_package_key": "B5-CONTENT-5",
+      "to_package_key": "B5-CONTENT-6",
+      "dependency_type": "requires_before_use",
+      "required_for": "route_matrix",
+      "notes": "B5-CONTENT-6 depends on B5-CONTENT-5"
+    },
+    {
+      "from_package_key": "B5-A-lite",
+      "to_package_key": "selector-ready-assets-v0.3-p0-full",
+      "dependency_type": "requires_before_use",
+      "required_for": "selector_ready_assets",
+      "notes": "selector-ready-assets-v0.3-p0-full depends on B5-A-lite"
+    },
+    {
+      "from_package_key": "selector-ready-assets-v0.3-p0-full",
+      "to_package_key": "selector-qa-policy-v0.1",
+      "dependency_type": "requires_before_use",
+      "required_for": "selector_qa_policy",
+      "notes": "selector-qa-policy-v0.1 depends on selector-ready-assets-v0.3-p0-full"
+    }
+  ]
+}

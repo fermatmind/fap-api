@@ -1,0 +1,206 @@
+{
+  "package_key": "B5-A-lite",
+  "package_name": "Big Five V2 Source Authority + Module Mapping Governance",
+  "version": "v0.1",
+  "locale": "zh-CN",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_b5_b1": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "created_at_utc": "2026-05-04T09:33:36.564735Z",
+  "schema_key": "big5_v2_source_authority_map_v0_1",
+  "description": "Defines the source authority hierarchy for Big Five Result Page V2 content asset governance. Governance-only; no body generation and no runtime wiring.",
+  "source_authority": [
+    {
+      "source_key": "big5_formal_result_page_v2_doc",
+      "source_name_zh": "FermatMind Big Five 新版结果页正式上线 V2.0",
+      "role": "module_master",
+      "priority": 1,
+      "use_for": [
+        "module structure",
+        "user-facing V2 copy",
+        "interaction modules",
+        "quick-standard-deep reading modes",
+        "module 00-10 naming baseline",
+        "B5-B1 section source planning"
+      ],
+      "runtime_status": "source_only",
+      "runtime_use": "not_runtime",
+      "production_use_allowed": false,
+      "b5_b1_relevance": "Defines module intent and user-facing V2 reading system; may guide O59 canonical body import, but this package does not import body text.",
+      "must_not_use_for": [
+        "direct runtime wiring",
+        "all-user generic full report",
+        "3125 report generation",
+        "selector QA pass/fail"
+      ],
+      "source_evidence_summary": "The V2.0 document positions itself as the formal new Big Five result page draft, preserving the longform report core while adding modular reading, feedback, share and save modules."
+    },
+    {
+      "source_key": "big5_twenty_thousand_word_final_doc",
+      "source_name_zh": "FermatMind Big Five 完整结果页全文（最终成稿）",
+      "role": "narrative_master / canonical_body_master",
+      "priority": 2,
+      "use_for": [
+        "O59 canonical longform body",
+        "8-section deep copy",
+        "canonical body source trace",
+        "B5-B1 content import planning"
+      ],
+      "runtime_status": "source_only",
+      "runtime_use": "not_runtime",
+      "production_use_allowed": false,
+      "canonical_profile": {
+        "scores": {
+          "O": 59,
+          "C": 32,
+          "E": 20,
+          "A": 55,
+          "N": 68
+        },
+        "internal_combination_key": "O3_C2_E2_A3_N4",
+        "profile_label_zh": "敏锐的独立思考者",
+        "axis_zh": "高敏感 × 中高开放 × 克制进入"
+      },
+      "b5_b1_relevance": "Primary source for O59 canonical 8-section core body. Must not be generalized to all users.",
+      "must_not_use_for": [
+        "all-user copy",
+        "production runtime before QA",
+        "non-O59 canonical profiles",
+        "3125 full reports"
+      ],
+      "source_evidence_summary": "The final longform document states it is based on the O59/C32/E20/A55/N68 sample and intended for launch review, content decomposition and future ingestion."
+    },
+    {
+      "source_key": "big5_current_8_section_skeleton",
+      "source_name_zh": "当前 Big Five 8-section skeleton",
+      "role": "runtime_skeleton",
+      "priority": 3,
+      "sections": [
+        "hero_summary",
+        "domains_overview",
+        "domain_deep_dive",
+        "facet_details",
+        "core_portrait",
+        "norms_comparison",
+        "action_plan",
+        "methodology_and_access"
+      ],
+      "use_for": [
+        "B5-B1 import target skeleton",
+        "section placement",
+        "mapping QA",
+        "rendered preview segmentation"
+      ],
+      "runtime_status": "current_skeleton",
+      "runtime_use": "skeleton_only",
+      "production_use_allowed": false,
+      "b5_b1_relevance": "All O59 canonical body assets must map back to this 8-section skeleton.",
+      "must_not_use_for": [
+        "new unsupported section invention",
+        "bypassing existing result page skeleton"
+      ]
+    },
+    {
+      "source_key": "big5_selector_ready_assets_325",
+      "source_name_zh": "Big Five V2 325 selector-ready assets",
+      "role": "selector_candidates / staging_assets",
+      "priority": 4,
+      "asset_count": 325,
+      "runtime_ready": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "not_b5_b_body": true,
+      "use_for": [
+        "future selector candidate evaluation",
+        "coverage analysis",
+        "staging-only selection tests"
+      ],
+      "runtime_status": "staging_only",
+      "b5_b1_relevance": "May inform future selector expansion, but does not solve O59 core body import and must not be treated as B5-B body.",
+      "must_not_use_for": [
+        "production runtime",
+        "B5-B core body replacement",
+        "full report output",
+        "declaring Big Five content complete"
+      ],
+      "known_warnings": [
+        "module_00_trust_bar only 1 asset",
+        "module_07_collaboration_manual only 8 assets",
+        "shareable assets only 3",
+        "balanced_profile only 4",
+        "norm_unavailable only 2"
+      ]
+    },
+    {
+      "source_key": "big5_selector_qa_policy_pack",
+      "source_name_zh": "Golden Cases + Selection Policy + Conflict Resolution",
+      "role": "selector_qa_policy_pack",
+      "priority": 5,
+      "not_content_body": true,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false,
+      "use_for": [
+        "selector QA",
+        "conflict resolution QA",
+        "safety downgrade QA",
+        "render leak scan baseline"
+      ],
+      "runtime_status": "staging_only_external_or_staging",
+      "b5_b1_relevance": "Useful later for P0 selector QA fix; not a body asset and not a source for B5-B1 prose.",
+      "must_not_use_for": [
+        "content body",
+        "production runtime",
+        "frontend fallback copy",
+        "B5-B core result body"
+      ]
+    },
+    {
+      "source_key": "big5_frontend_fallback",
+      "source_name_zh": "frontend fallback / synthetic copy",
+      "role": "forbidden_long_term_content_owner",
+      "priority": 6,
+      "policy": "must_not_generate_personality_body",
+      "runtime_use": "legacy_fallback_only",
+      "production_use_allowed": false,
+      "use_for": [
+        "temporary failure tolerance only"
+      ],
+      "runtime_status": "must_be_migrated_away_from_content_authority",
+      "b5_b1_relevance": "B5-B1 must reduce reliance on frontend-authored personality body.",
+      "must_not_use_for": [
+        "long-term personality explanation",
+        "core portrait body",
+        "facet main explanation",
+        "action plan body"
+      ]
+    },
+    {
+      "source_key": "big5_compact_online_page",
+      "source_name_zh": "当前 compact 线上页",
+      "role": "anti_target",
+      "priority": 7,
+      "use_for": [
+        "render regression banned scan",
+        "anti-target QA"
+      ],
+      "runtime_use": "anti_target_only",
+      "production_use_allowed": false,
+      "runtime_status": "must_not_regress_to_this",
+      "b5_b1_relevance": "Defines what B5-B1 must not render.",
+      "must_not_use_for": [
+        "content target",
+        "B5-B1 body source",
+        "acceptable final result page baseline"
+      ]
+    }
+  ],
+  "final_decision": {
+    "ready_for_b5_b1": true,
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "next_recommended_batch": "B5-B1",
+    "b5_b1_import_target": "backend/content_assets/big5/result_page_v2/core_body/v0_1/"
+  }
+}

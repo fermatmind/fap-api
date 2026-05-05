@@ -1,0 +1,39 @@
+{
+  "schema": "fap.big5.codex.runtime_no_touch_policy.v0.1",
+  "created_at_utc": "2026-05-05T00:47:28+00:00",
+  "codex_must_not": [
+    "modify_routes",
+    "modify_controllers",
+    "modify_scoring",
+    "modify_migrations",
+    "modify_models",
+    "modify_frontend_runtime",
+    "wire_runtime_composer",
+    "modify_backend_content_packs",
+    "set_production_use_allowed_true",
+    "mark_any_package_runtime_ready",
+    "let_frontend_fallback_generate_personality_body",
+    "treat_qa_policy_pack_as_body_assets",
+    "treat_325_selector_assets_as_production_ready",
+    "generate_new_body_copy",
+    "rewrite_existing_body_copy",
+    "import_to_production",
+    "change_big_five_scoring_or_bands",
+    "copy_enneagram_type_logic_into_big_five",
+    "expose_combination_key_as_user_visible_type"
+  ],
+  "codex_may": [
+    "import_staging_content_assets",
+    "add_fixtures",
+    "add_validator_tests",
+    "add_contract_tests",
+    "add_rendered_preview_tests",
+    "add_checksum_tests",
+    "add_coverage_tests",
+    "add_scan_only_reports",
+    "add_staging_only_docs",
+    "generate_reference_consistency_report",
+    "generate_rendered_preview_pending_surface_report"
+  ],
+  "policy_summary": "Codex may stage and validate content assets. Codex must not alter runtime behavior, production flags, scoring, routes, controllers, models, migrations, frontend runtime, or content meaning."
+}

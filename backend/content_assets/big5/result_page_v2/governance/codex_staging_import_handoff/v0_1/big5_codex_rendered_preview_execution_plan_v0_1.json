@@ -1,0 +1,109 @@
+{
+  "schema": "fap.big5.codex.rendered_preview_execution_plan.v0.1",
+  "created_at_utc": "2026-05-05T00:47:28+00:00",
+  "source_package": "B5-B1-Preview-Codex-Handoff",
+  "target_repo": "fap-web",
+  "required_surface_output_structure": {
+    "tested_surfaces": [],
+    "pending_surfaces": [],
+    "passed_surfaces": [],
+    "failed_surfaces": []
+  },
+  "surfaces": [
+    {
+      "surface": "result_page_desktop",
+      "required": true,
+      "expected_status": "must_test",
+      "harness_policy": "use existing fap-web contract/render utilities; do not create runtime",
+      "must_render_terms": [
+        "敏锐的独立思考者",
+        "O59 / C32 / E20 / A55 / N68",
+        "高敏感 × 中高开放 × 克制进入",
+        "Big Five 描述的是连续人格特质，不是固定人格类型"
+      ],
+      "must_not_render_terms": [
+        "A compact overview",
+        "Norms Comparison",
+        "Methodology and Access",
+        "[object Object]",
+        "frontend_fallback",
+        "internal_metadata"
+      ],
+      "pending_policy": "not allowed unless no result-page render test utility exists"
+    },
+    {
+      "surface": "result_page_mobile",
+      "required": true,
+      "expected_status": "must_test",
+      "harness_policy": "use existing responsive/mobile test utility if available",
+      "must_render_terms": [
+        "敏锐的独立思考者",
+        "不是没尽责",
+        "不是社交差",
+        "不是玻璃心"
+      ],
+      "must_not_render_terms": [
+        "A compact overview",
+        "Facet-level signals arranged for quick interpretation",
+        "all"
+      ],
+      "pending_policy": "not allowed unless mobile render harness does not exist"
+    },
+    {
+      "surface": "pdf",
+      "required": false,
+      "expected_status": "test_if_supported_else_pending_surface",
+      "harness_policy": "do not create PDF runtime; use existing PDF test harness only",
+      "pending_policy": "if unsupported, add to pending_surfaces and do not claim pass"
+    },
+    {
+      "surface": "share_card",
+      "required": false,
+      "expected_status": "test_if_supported_else_pending_surface",
+      "harness_policy": "use existing share-card test harness only",
+      "pending_policy": "if unsupported, add to pending_surfaces and do not claim pass"
+    },
+    {
+      "surface": "history",
+      "required": false,
+      "expected_status": "test_if_supported_else_pending_surface",
+      "harness_policy": "use existing history safe-summary tests only",
+      "pending_policy": "if unsupported, add to pending_surfaces and do not claim pass"
+    },
+    {
+      "surface": "compare",
+      "required": false,
+      "expected_status": "test_if_supported_else_pending_surface",
+      "harness_policy": "use existing compare safe-summary tests only",
+      "pending_policy": "if unsupported, add to pending_surfaces and do not claim pass"
+    }
+  ],
+  "global_must_not_render": [
+    "A compact overview",
+    "Five-domain distribution with percentile-oriented context",
+    "Focused read on domain-level strengths",
+    "Facet-level signals arranged for quick interpretation",
+    "Norms Comparison",
+    "Methodology and Access",
+    "N1 百分位 作为主体解释",
+    "优先关注成长面向",
+    "O6, C5, E6",
+    "[object Object]",
+    "deferred_to_future",
+    "policy_not_shipped",
+    "frontend_fallback",
+    "internal_metadata",
+    "selector_basis",
+    "selection_guidance",
+    "editor_notes",
+    "qa_notes",
+    "source_reference",
+    "import_policy",
+    "runtime_use",
+    "production_use_allowed"
+  ],
+  "contextual_rules": {
+    "all": "Only forbid user-visible isolated placeholder/debug token 'all'. Do not scan raw substring; do not fail on callout/allowlisted/schema kind/internal code string.",
+    "N1 百分位": "Allowed in full facet directory or metric row; forbidden as facet_details primary explanation."
+  }
+}

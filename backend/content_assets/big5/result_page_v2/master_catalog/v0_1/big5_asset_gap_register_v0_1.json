@@ -1,0 +1,93 @@
+{
+  "catalog_version": "v0.1",
+  "gap_count": 8,
+  "gaps": [
+    {
+      "gap_key": "B5-B2_thick_body_not_generated",
+      "severity": "P0",
+      "description": "B5-B2 厚正文尚未生成。",
+      "affected_packages": [
+        "B5-CONTENT-4",
+        "B5-CONTENT-6"
+      ],
+      "recommended_next_step": "Only after B5-B1 rendered preview execution passes, start B5-B2 planning."
+    },
+    {
+      "gap_key": "rendered_preview_not_executed",
+      "severity": "P0",
+      "description": "Rendered preview 仍需真实 fap-web 验证。",
+      "affected_packages": [
+        "B5-B1-Preview",
+        "B5-B1-Preview-Codex-Handoff"
+      ],
+      "recommended_next_step": "Execute fap-web rendered preview contract tests."
+    },
+    {
+      "gap_key": "selector_325_reference_consistency",
+      "severity": "P1",
+      "description": "325 selector assets 仍需和 B5-CONTENT-1~6 做引用一致性检查。",
+      "affected_packages": [
+        "selector-ready-assets-v0.3-p0-full",
+        "B5-CONTENT-1",
+        "B5-CONTENT-2",
+        "B5-CONTENT-3",
+        "B5-CONTENT-4",
+        "B5-CONTENT-5",
+        "B5-CONTENT-6"
+      ],
+      "recommended_next_step": "Run asset reference validator before staging selector QA."
+    },
+    {
+      "gap_key": "golden_cases_policy_p0_fixes",
+      "severity": "P0",
+      "description": "Golden Cases 仍需修 production canonical case / slot naming / rendered regression scan。",
+      "affected_packages": [
+        "selector-qa-policy-v0.1"
+      ],
+      "recommended_next_step": "Add O59 case, golden_group, module slot normalization, expanded banned terms."
+    },
+    {
+      "gap_key": "surface_level_QA_missing",
+      "severity": "P1",
+      "description": "share card / PDF / history / compare 仍需 surface-level QA。",
+      "affected_packages": [
+        "B5-B1-Preview",
+        "B5-B1-Preview-Codex-Handoff",
+        "B5-CONTENT-5"
+      ],
+      "recommended_next_step": "Mark unsupported surfaces pending until harness exists."
+    },
+    {
+      "gap_key": "runtime_composer_not_connected",
+      "severity": "P0",
+      "description": "runtime composer 未接。",
+      "affected_packages": [
+        "B5-CONTENT-1",
+        "B5-CONTENT-2",
+        "B5-CONTENT-3",
+        "B5-CONTENT-4",
+        "B5-CONTENT-5",
+        "B5-CONTENT-6"
+      ],
+      "recommended_next_step": "Do not wire runtime until rendered preview and import policy pass."
+    },
+    {
+      "gap_key": "CMS_import_pipeline_not_connected",
+      "severity": "P1",
+      "description": "CMS import pipeline 未接。",
+      "affected_packages": [
+        "all"
+      ],
+      "recommended_next_step": "Design staging import pipeline only after catalog approval."
+    },
+    {
+      "gap_key": "production_import_policy_not_approved",
+      "severity": "P0",
+      "description": "production import policy 未批准。",
+      "affected_packages": [
+        "all"
+      ],
+      "recommended_next_step": "Create B5-J production import / merge preview governance before production use."
+    }
+  ]
+}

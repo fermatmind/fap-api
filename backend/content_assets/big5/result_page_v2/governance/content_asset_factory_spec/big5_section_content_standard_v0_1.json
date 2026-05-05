@@ -1,0 +1,292 @@
+{
+  "schema_key": "big5_section_content_standard_v0_1",
+  "schema_version": "fap.big5.section_content_standard.v0_1_1",
+  "package_key": "B5-CONTENT-0",
+  "package_version": "v0.1.1",
+  "locale": "zh-CN",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "sections": [
+    {
+      "section_key": "hero_summary",
+      "section_title_zh": "结果摘要",
+      "page_layer": "入口层",
+      "section_role": "在 20–30 秒内让用户知道这次画像的主轴、关键张力和阅读价值。",
+      "module_refs": [
+        "module_01_hero",
+        "module_02_quick_understanding"
+      ],
+      "required_blocks": [
+        "profile_assistive_label",
+        "one_sentence_summary",
+        "domain_snapshot",
+        "top_strengths",
+        "top_risks",
+        "first_action"
+      ],
+      "allowed_asset_types": [
+        "hero_summary",
+        "quick_understanding",
+        "trust_bar"
+      ],
+      "must_not_contain": [
+        "固定人格类型",
+        "临床诊断",
+        "招聘筛选",
+        "准确率承诺",
+        "外部效度证明",
+        "前端 fallback 发明人格解释"
+      ],
+      "quality_standard": {
+        "target_chars": "300-1800",
+        "rendered_preview_required": true
+      }
+    },
+    {
+      "section_key": "domains_overview",
+      "section_title_zh": "维度总览",
+      "page_layer": "总览层",
+      "section_role": "解释 Big Five 怎么读，并给出五维整体快照。",
+      "module_refs": [
+        "module_02_quick_understanding",
+        "module_03_trait_deep_dive"
+      ],
+      "required_blocks": [
+        "how_to_read_big5",
+        "five_domain_snapshot",
+        "high_low_not_good_bad",
+        "broad_trait_vs_facet_intro"
+      ],
+      "allowed_asset_types": [
+        "domain_band",
+        "domain_core",
+        "method_boundary"
+      ],
+      "must_not_contain": [
+        "固定人格类型",
+        "临床诊断",
+        "招聘筛选",
+        "准确率承诺",
+        "外部效度证明",
+        "前端 fallback 发明人格解释"
+      ],
+      "quality_standard": {
+        "target_chars": "400-2200",
+        "rendered_preview_required": true
+      }
+    },
+    {
+      "section_key": "domain_deep_dive",
+      "section_title_zh": "五维深解",
+      "page_layer": "主体层",
+      "section_role": "逐个 trait 解释定义、分数位置、帮助、代价、现实表现和使用方式。",
+      "module_refs": [
+        "module_03_trait_deep_dive"
+      ],
+      "required_blocks": [
+        "definition",
+        "score_position",
+        "how_it_helps",
+        "how_it_costs",
+        "real_world_manifestation",
+        "how_to_use_it"
+      ],
+      "allowed_asset_types": [
+        "domain_core",
+        "domain_band",
+        "domain_modifier"
+      ],
+      "must_not_contain": [
+        "固定人格类型",
+        "临床诊断",
+        "招聘筛选",
+        "准确率承诺",
+        "外部效度证明",
+        "前端 fallback 发明人格解释"
+      ],
+      "quality_standard": {
+        "target_chars": "3000-6000 deep total",
+        "rendered_preview_required": true
+      }
+    },
+    {
+      "section_key": "facet_details",
+      "section_title_zh": "细分维度焦点",
+      "page_layer": "第二主体层",
+      "section_role": "解释 broad trait 下面的 facet 差异，重点处理反直觉发现。",
+      "module_refs": [
+        "module_05_facet_reframe"
+      ],
+      "required_blocks": [
+        "facet_intro",
+        "top_facet_reframes",
+        "facet_anomaly_cards",
+        "full_facet_directory"
+      ],
+      "allowed_asset_types": [
+        "facet_glossary",
+        "facet_reframe",
+        "facet_anomaly"
+      ],
+      "must_not_contain": [
+        "固定人格类型",
+        "临床诊断",
+        "招聘筛选",
+        "准确率承诺",
+        "外部效度证明",
+        "前端 fallback 发明人格解释"
+      ],
+      "quality_standard": {
+        "target_chars": "1200-4500",
+        "rendered_preview_required": true
+      }
+    },
+    {
+      "section_key": "core_portrait",
+      "section_title_zh": "人格总览",
+      "page_layer": "整合层",
+      "section_role": "把五维、facet、组合动力重新收束成人格结构解释。",
+      "module_refs": [
+        "module_02_quick_understanding",
+        "module_04_coupling"
+      ],
+      "required_blocks": [
+        "primary_coupling",
+        "secondary_coupling",
+        "dominant_tension",
+        "common_misread",
+        "development_logic"
+      ],
+      "allowed_asset_types": [
+        "coupling",
+        "triple_pattern",
+        "profile_signature"
+      ],
+      "must_not_contain": [
+        "固定人格类型",
+        "临床诊断",
+        "招聘筛选",
+        "准确率承诺",
+        "外部效度证明",
+        "前端 fallback 发明人格解释"
+      ],
+      "quality_standard": {
+        "target_chars": "1000-4000",
+        "rendered_preview_required": true
+      }
+    },
+    {
+      "section_key": "norms_comparison",
+      "section_title_zh": "相对参照",
+      "page_layer": "参照层",
+      "section_role": "解释分数、常模、相对位置和高低不是优劣。",
+      "module_refs": [
+        "module_09_feedback_data_flywheel",
+        "module_10_method_privacy"
+      ],
+      "required_blocks": [
+        "what_score_means",
+        "who_you_are_compared_with",
+        "strongest_relative_differences",
+        "not_good_or_bad_boundary",
+        "norm_unavailable_boundary"
+      ],
+      "allowed_asset_types": [
+        "norms_explanation",
+        "result_state",
+        "method_boundary"
+      ],
+      "must_not_contain": [
+        "固定人格类型",
+        "临床诊断",
+        "招聘筛选",
+        "准确率承诺",
+        "外部效度证明",
+        "前端 fallback 发明人格解释"
+      ],
+      "quality_standard": {
+        "target_chars": "600-1800",
+        "rendered_preview_required": true
+      }
+    },
+    {
+      "section_key": "action_plan",
+      "section_title_zh": "成长与下一步动作",
+      "page_layer": "行动层",
+      "section_role": "把理解转成工作、关系、压力、成长和下一步行动。",
+      "module_refs": [
+        "module_06_application_matrix",
+        "module_07_collaboration_manual"
+      ],
+      "required_blocks": [
+        "workplace",
+        "relationships",
+        "stress_recovery",
+        "personal_growth",
+        "continue_start_stop_observe"
+      ],
+      "allowed_asset_types": [
+        "scenario_work",
+        "scenario_relationship",
+        "scenario_stress",
+        "scenario_growth",
+        "action_plan"
+      ],
+      "must_not_contain": [
+        "固定人格类型",
+        "临床诊断",
+        "招聘筛选",
+        "准确率承诺",
+        "外部效度证明",
+        "前端 fallback 发明人格解释"
+      ],
+      "quality_standard": {
+        "target_chars": "1200-5000",
+        "rendered_preview_required": true
+      }
+    },
+    {
+      "section_key": "methodology_and_access",
+      "section_title_zh": "方法与边界说明",
+      "page_layer": "信任层",
+      "section_role": "建立方法感、边界感、隐私感和安全使用方式。",
+      "module_refs": [
+        "module_00_trust_bar",
+        "module_10_method_privacy"
+      ],
+      "required_blocks": [
+        "big5_is_continuous_traits",
+        "not_type_not_diagnosis",
+        "not_hiring_screening",
+        "score_and_norms_boundary",
+        "facet_inference_boundary",
+        "privacy_and_data_boundary",
+        "retest_guidance"
+      ],
+      "allowed_asset_types": [
+        "trust_bar",
+        "method_boundary",
+        "privacy_boundary",
+        "result_state"
+      ],
+      "must_not_contain": [
+        "固定人格类型",
+        "临床诊断",
+        "招聘筛选",
+        "准确率承诺",
+        "外部效度证明",
+        "前端 fallback 发明人格解释"
+      ],
+      "quality_standard": {
+        "target_chars": "500-1600",
+        "rendered_preview_required": true
+      }
+    }
+  ],
+  "global_section_rules": {
+    "all_sections_require_source_trace": true,
+    "all_user_visible_titles_must_be_zh": true,
+    "section_copy_must_not_be_runtime_generated_by_frontend_fallback": true,
+    "production_use_allowed_default": false
+  }
+}

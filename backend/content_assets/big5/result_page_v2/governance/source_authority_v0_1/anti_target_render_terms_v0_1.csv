@@ -1,0 +1,22 @@
+﻿term_id,term,severity,surface,allowed_context,forbidden_context,repair_action
+anti_target_01,A compact overview,P0,result_page,never user-visible in zh final page,compact English subtitle in result page,replace through B5-B1 section body and zh title/subtitle assets
+anti_target_02,Five-domain distribution with percentile-oriented context,P0,result_page,never user-visible in zh final page,English fallback subtitle,replace with zh domains_overview copy
+anti_target_03,Focused read on domain-level strengths,P0,result_page,never user-visible in zh final page,English fallback subtitle,replace with zh domain_deep_dive copy
+anti_target_04,Facet-level signals arranged for quick interpretation,P0,result_page,never user-visible in zh final page,English fallback subtitle,replace with zh facet_details narrative
+anti_target_05,Norms Comparison,P0,result_page,never user-visible in zh final page,English section heading,use 相对参照 heading
+anti_target_06,Methodology and Access,P0,result_page,never user-visible in zh final page,English section heading,use 方法与边界说明 heading
+anti_target_07,N1 百分位,P1,result_page,allowed only in full_facet_directory / appendix / metric row,facet_details primary body or repeated percentile-only list,move percentile to directory and add narrative facet reframe
+anti_target_08,all,P1,all,allowed only as ordinary code text outside user-visible rendered output,"facet row placeholder, debug leakage, or unexplained rendered token",remove placeholder and render specific facet category or omit
+anti_target_09,优先关注成长面向,P1,result_page,allowed only as internal legacy note if not user-visible,action_plan primary body,replace with scenario-bound action matrix
+anti_target_10,"O6, C5, E6",P1,result_page,allowed only in internal QA / diagnostic debug files,user-visible action recommendation without explanation,translate to user-facing action rationale or move to hidden trace
+anti_target_11,[object Object],P0,all,never,any user-visible surface,fix renderer serialization and add rendered regression scan
+anti_target_12,deferred_to_future,P0,all,never,any user-visible surface,suppress placeholders or provide approved boundary copy
+anti_target_13,policy_not_shipped,P0,all,never,any user-visible surface,suppress policy marker from public payload
+anti_target_14,frontend_fallback,P0,all,never,any user-visible surface,remove internal fallback marker from rendered text
+anti_target_15,internal_metadata,P0,all,never,any user-visible surface,strip metadata before render
+anti_target_16,selector_basis,P0,all,never,any user-visible surface,keep selector trace private
+anti_target_17,selection_guidance,P0,all,never,any user-visible surface,keep selection guidance internal
+anti_target_18,editor_notes,P0,all,never,any user-visible surface,keep editor notes internal
+anti_target_19,qa_notes,P0,all,never,any user-visible surface,keep QA notes internal
+anti_target_20,source_reference,P0,all,never,any user-visible surface,keep source trace internal
+anti_target_21,import_policy,P0,all,never,any user-visible surface,keep import policy internal

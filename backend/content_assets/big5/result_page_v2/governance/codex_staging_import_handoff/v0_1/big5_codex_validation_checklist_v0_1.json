@@ -1,0 +1,188 @@
+{
+  "schema": "fap.big5.codex.validation_checklist.v0.1",
+  "created_at_utc": "2026-05-05T00:47:28+00:00",
+  "checks": [
+    {
+      "check_key": "zip_file_count_validation",
+      "description": "Verify each source zip has the expected file count.",
+      "applies_to": "all_packages",
+      "severity": "P0",
+      "pass_fail_criteria": "actual_file_count == expected_files",
+      "recommended_output_field": "zip_file_count_validation_result"
+    },
+    {
+      "check_key": "package_manifest_validation",
+      "description": "Parse each manifest and compare package_key/version/counts.",
+      "applies_to": "all_packages",
+      "severity": "P0",
+      "pass_fail_criteria": "manifest parses and package identity matches handoff",
+      "recommended_output_field": "package_manifest_validation_result"
+    },
+    {
+      "check_key": "SHA256SUMS_validation",
+      "description": "Verify SHA256SUMS entries against real package files.",
+      "applies_to": "all_packages",
+      "severity": "P0",
+      "pass_fail_criteria": "all hashes match; no self-hash drift",
+      "recommended_output_field": "SHA256SUMS_validation_result"
+    },
+    {
+      "check_key": "JSON_parse_validation",
+      "description": "Parse every JSON file.",
+      "applies_to": "all_json_files",
+      "severity": "P0",
+      "pass_fail_criteria": "no parse failures",
+      "recommended_output_field": "JSON_parse_validation_result"
+    },
+    {
+      "check_key": "JSONL_row_count_validation",
+      "description": "Count JSONL rows and compare expected counts.",
+      "applies_to": "jsonl_packages",
+      "severity": "P0",
+      "pass_fail_criteria": "row counts match manifest; route matrix shards are 625 each",
+      "recommended_output_field": "JSONL_row_count_validation_result"
+    },
+    {
+      "check_key": "CSV_parse_validation",
+      "description": "Parse every CSV file with UTF-8 or UTF-8-SIG fallback.",
+      "applies_to": "all_csv_files",
+      "severity": "P1",
+      "pass_fail_criteria": "no parse failures; headers present",
+      "recommended_output_field": "CSV_parse_validation_result"
+    },
+    {
+      "check_key": "required_field_validation",
+      "description": "Check package-specific required fields.",
+      "applies_to": "all_packages",
+      "severity": "P0",
+      "pass_fail_criteria": "no missing required fields",
+      "recommended_output_field": "required_field_validation_result"
+    },
+    {
+      "check_key": "duplicate_key_validation",
+      "description": "Check duplicate asset_key / combination_key / package_key.",
+      "applies_to": "all_packages",
+      "severity": "P0",
+      "pass_fail_criteria": "duplicate count = 0",
+      "recommended_output_field": "duplicate_key_validation_result"
+    },
+    {
+      "check_key": "runtime_flag_validation",
+      "description": "Check runtime_use is staging_only or not_runtime.",
+      "applies_to": "all_packages",
+      "severity": "P0",
+      "pass_fail_criteria": "runtime_use not production/live",
+      "recommended_output_field": "runtime_flag_validation_result"
+    },
+    {
+      "check_key": "production_flag_validation",
+      "description": "Check production_use_allowed is false.",
+      "applies_to": "all_packages",
+      "severity": "P0",
+      "pass_fail_criteria": "no production_use_allowed=true",
+      "recommended_output_field": "production_flag_validation_result"
+    },
+    {
+      "check_key": "body_zh_forbidden_check_for_route_matrix",
+      "description": "Ensure B5-CONTENT-6 rows contain no body_zh.",
+      "applies_to": "B5-CONTENT-6",
+      "severity": "P0",
+      "pass_fail_criteria": "body_zh_field_count = 0",
+      "recommended_output_field": "body_zh_forbidden_check_for_route_matrix_result"
+    },
+    {
+      "check_key": "body_zh_required_check_for_body_asset_packages",
+      "description": "Ensure body asset packages include nonempty body_zh where applicable.",
+      "applies_to": "B5-B1/B5-CONTENT-1~5",
+      "severity": "P0",
+      "pass_fail_criteria": "empty_body_zh = 0",
+      "recommended_output_field": "body_zh_required_check_for_body_asset_packages_result"
+    },
+    {
+      "check_key": "anti_target_render_term_scan",
+      "description": "Scan assets and fixtures for compact/legacy anti-target terms.",
+      "applies_to": "preview/imported_assets",
+      "severity": "P0",
+      "pass_fail_criteria": "no P0 term visible in rendered preview fixtures",
+      "recommended_output_field": "anti_target_render_term_scan_result"
+    },
+    {
+      "check_key": "no_frontend_fallback_scan",
+      "description": "Check imported assets do not introduce frontend_fallback body fields.",
+      "applies_to": "all_packages",
+      "severity": "P0",
+      "pass_fail_criteria": "frontend_fallback visible hits = 0",
+      "recommended_output_field": "no_frontend_fallback_scan_result"
+    },
+    {
+      "check_key": "no_internal_metadata_visible_scan",
+      "description": "Ensure internal metadata terms are not in user-visible preview output.",
+      "applies_to": "rendered_preview",
+      "severity": "P0",
+      "pass_fail_criteria": "no internal metadata visible",
+      "recommended_output_field": "no_internal_metadata_visible_scan_result"
+    },
+    {
+      "check_key": "no_fixed_type_scan",
+      "description": "Ensure Big Five copy does not hard-type users.",
+      "applies_to": "all_body_assets",
+      "severity": "P0",
+      "pass_fail_criteria": "no hard typing phrase hits",
+      "recommended_output_field": "no_fixed_type_scan_result"
+    },
+    {
+      "check_key": "no_diagnosis_language_scan",
+      "description": "Ensure no clinical/diagnostic claims.",
+      "applies_to": "all_body_assets",
+      "severity": "P0",
+      "pass_fail_criteria": "no diagnosis phrase hits",
+      "recommended_output_field": "no_diagnosis_language_scan_result"
+    },
+    {
+      "check_key": "no_hiring_language_scan",
+      "description": "Ensure no hiring/screening claims.",
+      "applies_to": "all_body_assets",
+      "severity": "P0",
+      "pass_fail_criteria": "no hiring phrase hits",
+      "recommended_output_field": "no_hiring_language_scan_result"
+    },
+    {
+      "check_key": "O59_canonical_row_validation",
+      "description": "Validate O3_C2_E2_A3_N4 route row and canonical mapping.",
+      "applies_to": "B5-CONTENT-6",
+      "severity": "P0",
+      "pass_fail_criteria": "O59 row present and maps to sensitive_independent_thinker",
+      "recommended_output_field": "O59_canonical_row_validation_result"
+    },
+    {
+      "check_key": "3125_row_coverage_validation",
+      "description": "Validate complete 5^5 combination space.",
+      "applies_to": "B5-CONTENT-6",
+      "severity": "P0",
+      "pass_fail_criteria": "3125 unique combination keys; no missing keys",
+      "recommended_output_field": "3125_row_coverage_validation_result"
+    },
+    {
+      "check_key": "selector_reference_consistency_validation",
+      "description": "Scan 325 selector assets against B5-CONTENT-1~6 references.",
+      "applies_to": "selector_ready_assets",
+      "severity": "P1",
+      "pass_fail_criteria": "generate mismatch report; do not runtime wire",
+      "recommended_output_field": "selector_reference_consistency_validation_result"
+    },
+    {
+      "check_key": "rendered_preview_pending_surface_policy",
+      "description": "If harness missing for PDF/share/history/compare, mark pending not passed.",
+      "applies_to": "fap-web_preview_tests",
+      "severity": "P0",
+      "pass_fail_criteria": "tested/pending/passed/failed surfaces emitted; no unsupported surface marked passed",
+      "recommended_output_field": "rendered_preview_pending_surface_policy_result"
+    }
+  ],
+  "global_acceptance": {
+    "must_fail_on_p0": true,
+    "must_not_claim_pilot_ready": true,
+    "must_not_claim_runtime_ready": true,
+    "must_not_claim_production_ready": true
+  }
+}

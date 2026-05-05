@@ -1,0 +1,18 @@
+{
+  "catalog_version": "v0.1",
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_use_allowed": false,
+  "hard_gate": {
+    "coverage_QA_passed": false,
+    "safety_QA_passed": false,
+    "editorial_QA_passed": false,
+    "mapping_QA_passed": false,
+    "rendered_preview_QA_passed": false,
+    "repair_log_all_closed": false,
+    "no_P0_blockers": false
+  },
+  "reason": "Master catalog can enter asset review, but pilot/runtime/production are blocked by unresolved P0/P1 gaps and missing rendered preview execution."
+}

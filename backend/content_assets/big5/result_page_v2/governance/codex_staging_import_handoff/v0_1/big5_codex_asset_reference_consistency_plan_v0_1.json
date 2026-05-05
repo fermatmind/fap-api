@@ -1,0 +1,67 @@
+{
+  "schema": "fap.big5.codex.asset_reference_consistency_plan.v0.1",
+  "created_at_utc": "2026-05-05T00:47:28+00:00",
+  "scope": "Scan-only consistency validation between 325 selector-ready assets and B5-CONTENT-1~6 asset keys/routes.",
+  "target_packages": [
+    "selector-ready-assets-v0.3-p0-full",
+    "B5-CONTENT-1",
+    "B5-CONTENT-2",
+    "B5-CONTENT-3",
+    "B5-CONTENT-4",
+    "B5-CONTENT-5",
+    "B5-CONTENT-6"
+  ],
+  "checks": [
+    {
+      "check_key": "trait_band_reference_check",
+      "source": "B5-CONTENT-6.primary_trait_band_assets / selector domain slots",
+      "target": "B5-CONTENT-1.asset_key",
+      "failure_severity": "P1"
+    },
+    {
+      "check_key": "coupling_reference_check",
+      "source": "B5-CONTENT-6.primary_coupling_assets / selector coupling slots",
+      "target": "B5-CONTENT-2.coupling_key / asset_key",
+      "failure_severity": "P1"
+    },
+    {
+      "check_key": "facet_route_reference_check",
+      "source": "B5-CONTENT-6.facet_route_priorities / selector facet slots",
+      "target": "B5-CONTENT-3.facet_key / route labels",
+      "failure_severity": "P1"
+    },
+    {
+      "check_key": "canonical_profile_reference_check",
+      "source": "B5-CONTENT-6.nearest_canonical_profile_key",
+      "target": "B5-CONTENT-4.profile_key",
+      "failure_severity": "P0"
+    },
+    {
+      "check_key": "scenario_reference_check",
+      "source": "B5-CONTENT-6.scenario_priorities",
+      "target": "B5-CONTENT-5.scenario",
+      "failure_severity": "P1"
+    },
+    {
+      "check_key": "slot_naming_drift_scan",
+      "source": "selector-ready-assets slot_key",
+      "target": "B5-A-lite module-to-section mapping and B5-CONTENT package slot_key conventions",
+      "failure_severity": "P1"
+    },
+    {
+      "check_key": "production_canonical_case_gap",
+      "source": "selector QA golden cases",
+      "target": "O3_C2_E2_A3_N4 / O59 C32 E20 A55 N68",
+      "failure_severity": "P0"
+    }
+  ],
+  "output_required": [
+    "missing_references",
+    "invalid_references",
+    "naming_drift_findings",
+    "case_gap_findings",
+    "recommended_repairs",
+    "no_runtime_changes_statement"
+  ],
+  "runtime_wire_allowed": false
+}

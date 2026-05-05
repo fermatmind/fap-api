@@ -1,0 +1,307 @@
+{
+  "package_key": "B5-A-lite",
+  "package_name": "Big Five V2 Source Authority + Module Mapping Governance",
+  "version": "v0.1",
+  "locale": "zh-CN",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_b5_b1": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "created_at_utc": "2026-05-04T09:33:36.564735Z",
+  "schema_key": "big5_v2_module_to_section_mapping_v0_1",
+  "runtime_skeleton": "big5_8_section",
+  "runtime_sections": [
+    "hero_summary",
+    "domains_overview",
+    "domain_deep_dive",
+    "facet_details",
+    "core_portrait",
+    "norms_comparison",
+    "action_plan",
+    "methodology_and_access"
+  ],
+  "notes": {
+    "lifecycle_is_not_8_section": true,
+    "module_08_and_module_09_are_deferred": true,
+    "no_runtime_wiring_in_this_package": true
+  },
+  "modules": [
+    {
+      "module_key": "module_00_trust_bar",
+      "module_name_zh": "顶部信任条",
+      "target_section_keys": [
+        "methodology_and_access"
+      ],
+      "primary_section_key": "methodology_and_access",
+      "secondary_surface": "shell_trust_strip",
+      "source_authority": [
+        "big5_formal_result_page_v2_doc"
+      ],
+      "allowed_asset_layers": [
+        "L0_governance",
+        "L7_result_state",
+        "L10_QA_only"
+      ],
+      "not_allowed_in_this_module": [
+        "diagnostic_claim",
+        "hiring_screening_claim",
+        "fixed_type_language",
+        "long_personality_body"
+      ],
+      "b5_b1_import_relevance": "partial_required_boundary_copy",
+      "qa_notes": "May feed methodology boundary or shell trust strip; must not become a diagnostic or screening statement."
+    },
+    {
+      "module_key": "module_01_hero",
+      "module_name_zh": "首屏快读卡",
+      "target_section_keys": [
+        "hero_summary"
+      ],
+      "primary_section_key": "hero_summary",
+      "secondary_surface": "result_page_hero",
+      "source_authority": [
+        "big5_formal_result_page_v2_doc",
+        "big5_twenty_thousand_word_final_doc"
+      ],
+      "allowed_asset_layers": [
+        "L1_core_body",
+        "L2_trait_band",
+        "L4_coupling"
+      ],
+      "not_allowed_in_this_module": [
+        "complete_longform_report",
+        "full_action_matrix",
+        "clinical_claim",
+        "hard_type_label"
+      ],
+      "b5_b1_import_relevance": "required",
+      "qa_notes": "Use for O59 profile label, one-sentence summary, strengths/risks and first action without generalizing to all users."
+    },
+    {
+      "module_key": "module_02_quick_understanding",
+      "module_name_zh": "三分钟理解版",
+      "target_section_keys": [
+        "hero_summary",
+        "core_portrait"
+      ],
+      "primary_section_key": "hero_summary",
+      "secondary_surface": "core_portrait",
+      "source_authority": [
+        "big5_formal_result_page_v2_doc",
+        "big5_twenty_thousand_word_final_doc"
+      ],
+      "allowed_asset_layers": [
+        "L1_core_body",
+        "L4_coupling",
+        "L6_scenario_action"
+      ],
+      "not_allowed_in_this_module": [
+        "full_facet_directory",
+        "full_methodology",
+        "fixed_type_language"
+      ],
+      "b5_b1_import_relevance": "required",
+      "qa_notes": "Bridges quick comprehension and core portrait; resolves drift from module_02_quick to canonical module_02_quick_understanding."
+    },
+    {
+      "module_key": "module_03_trait_deep_dive",
+      "module_name_zh": "五维分数深解",
+      "target_section_keys": [
+        "domain_deep_dive"
+      ],
+      "primary_section_key": "domain_deep_dive",
+      "secondary_surface": "none",
+      "source_authority": [
+        "big5_formal_result_page_v2_doc",
+        "big5_twenty_thousand_word_final_doc"
+      ],
+      "allowed_asset_layers": [
+        "L1_core_body",
+        "L2_trait_band",
+        "L3_gradient_modifier"
+      ],
+      "not_allowed_in_this_module": [
+        "facet_anomaly_primary",
+        "scenario_only_action",
+        "norms_claim_without_context"
+      ],
+      "b5_b1_import_relevance": "required",
+      "qa_notes": "Must cover O/C/E/A/N with position, help, cost, real-world use and boundary."
+    },
+    {
+      "module_key": "module_04_coupling",
+      "module_name_zh": "核心动力耦合",
+      "target_section_keys": [
+        "core_portrait"
+      ],
+      "primary_section_key": "core_portrait",
+      "secondary_surface": "none",
+      "source_authority": [
+        "big5_formal_result_page_v2_doc",
+        "big5_twenty_thousand_word_final_doc"
+      ],
+      "allowed_asset_layers": [
+        "L4_coupling",
+        "L1_core_body",
+        "L5_facet_precision"
+      ],
+      "not_allowed_in_this_module": [
+        "single_trait_only_claim",
+        "profile_as_type",
+        "unsupported_selector_card"
+      ],
+      "b5_b1_import_relevance": "required",
+      "qa_notes": "Use for primary and secondary dynamics; resolves drift from coupling_card to primary_coupling/secondary_coupling."
+    },
+    {
+      "module_key": "module_05_facet_reframe",
+      "module_name_zh": "Facet 反直觉发现",
+      "target_section_keys": [
+        "facet_details"
+      ],
+      "primary_section_key": "facet_details",
+      "secondary_surface": "none",
+      "source_authority": [
+        "big5_formal_result_page_v2_doc",
+        "big5_twenty_thousand_word_final_doc"
+      ],
+      "allowed_asset_layers": [
+        "L5_facet_precision",
+        "L1_core_body"
+      ],
+      "not_allowed_in_this_module": [
+        "pure_percentile_list_as_main_body",
+        "unsupported_facet_claim",
+        "all_placeholder"
+      ],
+      "b5_b1_import_relevance": "required",
+      "qa_notes": "Facet percentile may appear in directory/appendix, but main explanation must be narrative and inference-aware."
+    },
+    {
+      "module_key": "module_06_application_matrix",
+      "module_name_zh": "现实应用矩阵",
+      "target_section_keys": [
+        "action_plan"
+      ],
+      "primary_section_key": "action_plan",
+      "secondary_surface": "none",
+      "source_authority": [
+        "big5_formal_result_page_v2_doc",
+        "big5_twenty_thousand_word_final_doc"
+      ],
+      "allowed_asset_layers": [
+        "L6_scenario_action",
+        "L4_coupling",
+        "L7_result_state"
+      ],
+      "not_allowed_in_this_module": [
+        "generic_growth_bullet_only",
+        "clinical_advice",
+        "hiring_advice"
+      ],
+      "b5_b1_import_relevance": "required",
+      "qa_notes": "Must cover work, relationship, stress and growth. Resolves drift from work_card/relationship_card/stress_card/action_card."
+    },
+    {
+      "module_key": "module_07_collaboration_manual",
+      "module_name_zh": "协作说明书",
+      "target_section_keys": [
+        "action_plan",
+        "lifecycle"
+      ],
+      "primary_section_key": "action_plan",
+      "secondary_surface": "lifecycle",
+      "source_authority": [
+        "big5_formal_result_page_v2_doc"
+      ],
+      "allowed_asset_layers": [
+        "L6_scenario_action",
+        "L8_lifecycle",
+        "L9_share_feedback"
+      ],
+      "not_allowed_in_this_module": [
+        "private_stress_detail_for_share",
+        "recruiting_claim",
+        "full_lifecycle_runtime_wiring"
+      ],
+      "b5_b1_import_relevance": "partial_deferred",
+      "qa_notes": "Can contribute to action_plan, but full collaboration lifecycle belongs to later lifecycle/runtime mapping."
+    },
+    {
+      "module_key": "module_08_share_save",
+      "module_name_zh": "分享与保存",
+      "target_section_keys": [
+        "lifecycle"
+      ],
+      "primary_section_key": "lifecycle",
+      "secondary_surface": "shell_tools",
+      "source_authority": [
+        "big5_formal_result_page_v2_doc"
+      ],
+      "allowed_asset_layers": [
+        "L8_lifecycle",
+        "L9_share_feedback",
+        "L10_QA_only"
+      ],
+      "not_allowed_in_this_module": [
+        "B5-B1_main_body",
+        "raw_scores_in_share",
+        "sensitive_stress_detail",
+        "runtime_wiring_now"
+      ],
+      "b5_b1_import_relevance": "deferred_to_lifecycle",
+      "qa_notes": "Not an 8-section core body target. Keep for later lifecycle / shell tools pack."
+    },
+    {
+      "module_key": "module_09_feedback_data_flywheel",
+      "module_name_zh": "反馈与数据飞轮",
+      "target_section_keys": [
+        "lifecycle"
+      ],
+      "primary_section_key": "lifecycle",
+      "secondary_surface": "observation",
+      "source_authority": [
+        "big5_formal_result_page_v2_doc"
+      ],
+      "allowed_asset_layers": [
+        "L8_lifecycle",
+        "L9_share_feedback",
+        "L10_QA_only"
+      ],
+      "not_allowed_in_this_module": [
+        "B5-B1_main_body",
+        "public_selector_metadata",
+        "runtime_wiring_now"
+      ],
+      "b5_b1_import_relevance": "deferred_to_lifecycle",
+      "qa_notes": "Resolves drift from module_09_feedback to canonical module_09_feedback_data_flywheel."
+    },
+    {
+      "module_key": "module_10_method_privacy",
+      "module_name_zh": "方法、边界与隐私",
+      "target_section_keys": [
+        "methodology_and_access"
+      ],
+      "primary_section_key": "methodology_and_access",
+      "secondary_surface": "none",
+      "source_authority": [
+        "big5_formal_result_page_v2_doc",
+        "big5_twenty_thousand_word_final_doc"
+      ],
+      "allowed_asset_layers": [
+        "L0_governance",
+        "L7_result_state",
+        "L1_core_body"
+      ],
+      "not_allowed_in_this_module": [
+        "accuracy_claim",
+        "external_validity_claim",
+        "medical_claim",
+        "hiring_claim"
+      ],
+      "b5_b1_import_relevance": "required_boundary",
+      "qa_notes": "Must state continuous traits, not type, not diagnosis, not hiring, score/norm/facet boundary and privacy usage."
+    }
+  ]
+}

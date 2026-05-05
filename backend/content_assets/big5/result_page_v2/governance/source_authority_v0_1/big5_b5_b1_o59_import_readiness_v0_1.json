@@ -1,0 +1,304 @@
+{
+  "package_key": "B5-A-lite",
+  "package_name": "Big Five V2 Source Authority + Module Mapping Governance",
+  "version": "v0.1",
+  "locale": "zh-CN",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_b5_b1": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "created_at_utc": "2026-05-04T09:33:36.564735Z",
+  "schema_key": "big5_b5_b1_o59_import_readiness_v0_1",
+  "purpose": "Defines readiness criteria for the next B5-B1 O59 canonical core body import. No body text is generated in this package.",
+  "canonical_profile": {
+    "scores": {
+      "O": 59,
+      "C": 32,
+      "E": 20,
+      "A": 55,
+      "N": 68
+    },
+    "internal_combination_key": "O3_C2_E2_A3_N4",
+    "display_band_label": {
+      "O": "中高",
+      "C": "偏低",
+      "E": "明显偏低",
+      "A": "中位略高",
+      "N": "中高"
+    },
+    "profile_label": "敏锐的独立思考者",
+    "axis": "高敏感 × 中高开放 × 克制进入",
+    "source_role": "canonical_body_seed"
+  },
+  "required_sections": [
+    "hero_summary",
+    "domains_overview",
+    "domain_deep_dive",
+    "facet_details",
+    "core_portrait",
+    "norms_comparison",
+    "action_plan",
+    "methodology_and_access"
+  ],
+  "section_readiness": [
+    {
+      "section_key": "hero_summary",
+      "required_source_modules": [
+        "module_00_trust_bar",
+        "module_01_hero",
+        "module_02_quick_understanding"
+      ],
+      "required_longform_sections": [
+        "第1节｜结果摘要",
+        "性格指纹图谱",
+        "数据核心层"
+      ],
+      "minimum_block_count": 5,
+      "required_body_quality": [
+        "profile label as auxiliary only",
+        "one-sentence summary",
+        "data core",
+        "strength/risk summary",
+        "first action not generic"
+      ],
+      "safety_requirements": [
+        "non_type",
+        "non_diagnostic",
+        "not_generalized_to_all_users"
+      ],
+      "anti_target_terms": [
+        "A compact overview",
+        "frontend_fallback",
+        "[object Object]"
+      ],
+      "rendered_preview_required": true
+    },
+    {
+      "section_key": "domains_overview",
+      "required_source_modules": [
+        "module_02_quick_understanding",
+        "module_03_trait_deep_dive"
+      ],
+      "required_longform_sections": [
+        "第2节｜维度总览与阅读说明",
+        "五维快照",
+        "总览结论"
+      ],
+      "minimum_block_count": 6,
+      "required_body_quality": [
+        "how to read Big Five",
+        "five domain snapshot",
+        "high/low not good/bad",
+        "combination not single-score"
+      ],
+      "safety_requirements": [
+        "continuous_trait_language",
+        "no_type_language"
+      ],
+      "anti_target_terms": [
+        "Five-domain distribution with percentile-oriented context",
+        "all",
+        "internal_metadata"
+      ],
+      "rendered_preview_required": true
+    },
+    {
+      "section_key": "domain_deep_dive",
+      "required_source_modules": [
+        "module_03_trait_deep_dive"
+      ],
+      "required_longform_sections": [
+        "五维深解",
+        "开放性",
+        "尽责性",
+        "外向性",
+        "宜人性",
+        "情绪性"
+      ],
+      "minimum_block_count": 10,
+      "required_body_quality": [
+        "all five domains",
+        "position/help/cost/use",
+        "not thin cards",
+        "not English fallback"
+      ],
+      "safety_requirements": [
+        "no ranking as value",
+        "no diagnosis",
+        "no hiring"
+      ],
+      "anti_target_terms": [
+        "Focused read on domain-level strengths",
+        "selection_guidance",
+        "qa_notes"
+      ],
+      "rendered_preview_required": true
+    },
+    {
+      "section_key": "facet_details",
+      "required_source_modules": [
+        "module_05_facet_reframe"
+      ],
+      "required_longform_sections": [
+        "细分维度焦点",
+        "Facet 反直觉发现",
+        "结构性偏离"
+      ],
+      "minimum_block_count": 8,
+      "required_body_quality": [
+        "narrative facet reframe",
+        "top anomaly cards",
+        "directory separated from main explanation",
+        "no percentile-only main body"
+      ],
+      "safety_requirements": [
+        "inference-aware",
+        "no unsupported facet claim",
+        "percentile contextualized"
+      ],
+      "anti_target_terms": [
+        "Facet-level signals arranged for quick interpretation",
+        "N1 百分位",
+        "all",
+        "O6, C5, E6"
+      ],
+      "rendered_preview_required": true
+    },
+    {
+      "section_key": "core_portrait",
+      "required_source_modules": [
+        "module_02_quick_understanding",
+        "module_04_coupling"
+      ],
+      "required_longform_sections": [
+        "画像主线",
+        "核心动力耦合",
+        "主导冲突",
+        "常见误判"
+      ],
+      "minimum_block_count": 5,
+      "required_body_quality": [
+        "primary coupling",
+        "secondary tension",
+        "dominant conflict",
+        "misread clarification",
+        "development logic"
+      ],
+      "safety_requirements": [
+        "profile label auxiliary only",
+        "no fixed type",
+        "no absolute judgement"
+      ],
+      "anti_target_terms": [
+        "Dominant trait structure",
+        "selector_basis",
+        "source_reference"
+      ],
+      "rendered_preview_required": true
+    },
+    {
+      "section_key": "norms_comparison",
+      "required_source_modules": [
+        "module_10_method_privacy",
+        "module_09_feedback_data_flywheel"
+      ],
+      "required_longform_sections": [
+        "相对参照",
+        "percentile 说明",
+        "高低不等于优劣"
+      ],
+      "minimum_block_count": 4,
+      "required_body_quality": [
+        "what percentile means",
+        "comparison boundary",
+        "norm availability handling",
+        "no ranking as value"
+      ],
+      "safety_requirements": [
+        "no normal curve without norms",
+        "no ability ranking",
+        "no score-space mixing"
+      ],
+      "anti_target_terms": [
+        "Norms Comparison",
+        "internal_metadata",
+        "source_reference"
+      ],
+      "rendered_preview_required": true
+    },
+    {
+      "section_key": "action_plan",
+      "required_source_modules": [
+        "module_06_application_matrix",
+        "module_07_collaboration_manual"
+      ],
+      "required_longform_sections": [
+        "现实应用矩阵",
+        "行动建议",
+        "工作",
+        "关系",
+        "压力",
+        "成长"
+      ],
+      "minimum_block_count": 8,
+      "required_body_quality": [
+        "workplace",
+        "relationships",
+        "stress_recovery",
+        "personal_growth",
+        "concrete next steps",
+        "not generic growth facets"
+      ],
+      "safety_requirements": [
+        "no clinical advice",
+        "no hiring advice",
+        "scenario boundaries"
+      ],
+      "anti_target_terms": [
+        "优先关注成长面向",
+        "O6, C5, E6",
+        "deferred_to_future"
+      ],
+      "rendered_preview_required": true
+    },
+    {
+      "section_key": "methodology_and_access",
+      "required_source_modules": [
+        "module_00_trust_bar",
+        "module_10_method_privacy"
+      ],
+      "required_longform_sections": [
+        "方法、边界与隐私说明",
+        "方法与边界说明"
+      ],
+      "minimum_block_count": 4,
+      "required_body_quality": [
+        "Big Five continuous traits",
+        "not type",
+        "not diagnosis",
+        "not hiring",
+        "privacy/data boundary",
+        "retest guidance"
+      ],
+      "safety_requirements": [
+        "no accuracy claim",
+        "no external validity claim",
+        "no medical claim",
+        "no hiring claim"
+      ],
+      "anti_target_terms": [
+        "Methodology and Access",
+        "import_policy",
+        "policy_not_shipped"
+      ],
+      "rendered_preview_required": true
+    }
+  ],
+  "b5_b1_must_not_do": [
+    "do not generalize O59 body to all users",
+    "do not runtime wire",
+    "do not generate 3125 reports",
+    "do not use selector-ready assets as body source"
+  ]
+}

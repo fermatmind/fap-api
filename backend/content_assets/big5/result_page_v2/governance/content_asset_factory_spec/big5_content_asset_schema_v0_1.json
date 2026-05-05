@@ -1,0 +1,313 @@
+{
+  "schema_key": "big5_content_asset_schema_v0_1",
+  "schema_version": "fap.big5.content_asset_schema.v0_1_1",
+  "package_key": "B5-CONTENT-0",
+  "package_version": "v0.1.1",
+  "locale": "zh-CN",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "description": "Defines the main table schema for Big Five selectable content assets. This file does not contain production body copy.",
+  "asset_unit": "single_selectable_content_block",
+  "defaults": {
+    "runtime_use": "not_runtime",
+    "production_use_allowed": false,
+    "ready_for_pilot": false,
+    "render_surface": []
+  },
+  "required_fields": [
+    "asset_id",
+    "asset_key",
+    "asset_version",
+    "asset_type",
+    "asset_layer",
+    "module_key",
+    "section_key",
+    "slot_key",
+    "copy_role",
+    "reading_mode",
+    "applies_to",
+    "avoid_when",
+    "can_combine_with",
+    "cannot_combine_with",
+    "dedupe_group",
+    "selection_priority",
+    "selection_specificity",
+    "fallback_allowed",
+    "render_surface",
+    "body_quality",
+    "safety_tags",
+    "qa_status",
+    "ready_for_pilot",
+    "runtime_use",
+    "production_use_allowed",
+    "source_trace"
+  ],
+  "field_definitions": {
+    "asset_id": {
+      "type": "string",
+      "description": "Globally unique content asset id."
+    },
+    "asset_key": {
+      "type": "string",
+      "description": "Human-readable stable key for selector and QA."
+    },
+    "asset_version": {
+      "type": "string",
+      "description": "Asset-level version, for example v0_1."
+    },
+    "asset_type": {
+      "type": "enum",
+      "description": "Type of content asset."
+    },
+    "asset_layer": {
+      "type": "enum",
+      "description": "Factory layer, for example L1_core_body or L5_facet_precision."
+    },
+    "module_key": {
+      "type": "enum",
+      "description": "V2 module key, module_00 through module_10."
+    },
+    "section_key": {
+      "type": "enum",
+      "description": "Big Five 8-section skeleton key."
+    },
+    "slot_key": {
+      "type": "string",
+      "description": "Slot inside module/section."
+    },
+    "copy_role": {
+      "type": "enum",
+      "description": "Role of the copy, e.g. user_visible_body, title, boundary, schema_example."
+    },
+    "reading_mode": {
+      "type": "array<string>",
+      "allowed": [
+        "quick",
+        "standard",
+        "deep"
+      ]
+    },
+    "title_zh": {
+      "type": "string|null",
+      "description": "User-visible Chinese title when applicable."
+    },
+    "body_zh": {
+      "type": "string|null",
+      "description": "User-visible body. Schema examples must not be production copy."
+    },
+    "short_body_zh": {
+      "type": "string|null",
+      "description": "Short card or quick-read body."
+    },
+    "cta_zh": {
+      "type": "string|null",
+      "description": "User-visible CTA label when applicable."
+    },
+    "applies_to": {
+      "type": "object",
+      "description": "Selector conditions."
+    },
+    "avoid_when": {
+      "type": "array<object>",
+      "description": "Suppression / downgrade rules."
+    },
+    "can_combine_with": {
+      "type": "array<string>",
+      "description": "Positive composition tags."
+    },
+    "cannot_combine_with": {
+      "type": "array<string>",
+      "description": "Conflict / dedupe tags."
+    },
+    "dedupe_group": {
+      "type": "string",
+      "description": "Only one item from same group unless explicitly allowed."
+    },
+    "selection_priority": {
+      "type": "number",
+      "description": "Base selection priority."
+    },
+    "selection_specificity": {
+      "type": "number",
+      "description": "Match specificity score."
+    },
+    "fallback_allowed": {
+      "type": "boolean",
+      "default": false
+    },
+    "render_surface": {
+      "type": "array<string>",
+      "description": "Allowed surfaces. Schema examples must use [] and not runtime surfaces."
+    },
+    "body_quality": {
+      "type": "object",
+      "description": "Author-side quality metadata, not final QA."
+    },
+    "safety_tags": {
+      "type": "array<string>",
+      "description": "Safety and boundary tags."
+    },
+    "qa_status": {
+      "type": "enum",
+      "allowed": [
+        "draft",
+        "source_mapped",
+        "editorial_reviewed",
+        "safety_reviewed",
+        "mapping_qa_passed",
+        "render_preview_passed",
+        "ready_for_pilot",
+        "blocked",
+        "deprecated"
+      ]
+    },
+    "ready_for_pilot": {
+      "type": "boolean",
+      "description": "Hard gate, see ready_for_pilot template."
+    },
+    "runtime_use": {
+      "type": "enum",
+      "allowed": [
+        "not_runtime",
+        "staging_only",
+        "pilot_only",
+        "runtime_allowed"
+      ]
+    },
+    "production_use_allowed": {
+      "type": "boolean",
+      "default": false
+    },
+    "source_trace": {
+      "type": "object",
+      "description": "Source document, batch and reviewer trace."
+    }
+  },
+  "asset_type_enum": [
+    "trust_bar",
+    "hero_summary",
+    "quick_understanding",
+    "domain_core",
+    "domain_band",
+    "domain_modifier",
+    "coupling",
+    "triple_pattern",
+    "facet_glossary",
+    "facet_reframe",
+    "facet_anomaly",
+    "scenario_work",
+    "scenario_relationship",
+    "scenario_stress",
+    "scenario_growth",
+    "action_plan",
+    "norms_explanation",
+    "method_boundary",
+    "privacy_boundary",
+    "result_state",
+    "share_safe",
+    "feedback_prompt",
+    "lifecycle_continuation",
+    "pdf_archive",
+    "history_revisit",
+    "compare_guidance",
+    "schema_example"
+  ],
+  "asset_layer_enum": [
+    "L0_governance",
+    "L1_core_body",
+    "L2_trait_band",
+    "L3_gradient_modifier",
+    "L4_coupling",
+    "L5_facet_precision",
+    "L6_scenario_action",
+    "L7_result_state",
+    "L8_lifecycle",
+    "L9_share_feedback",
+    "L10_QA_only"
+  ],
+  "example_asset": {
+    "asset_id": "b5_content_v0_1_schema_example_001",
+    "asset_key": "schema_example_non_runtime_placeholder",
+    "asset_version": "v0_1_1",
+    "asset_type": "schema_example",
+    "asset_layer": "L0_governance",
+    "module_key": "module_04_coupling",
+    "section_key": "core_portrait",
+    "slot_key": "primary_coupling",
+    "copy_role": "schema_example",
+    "reading_mode": [
+      "standard"
+    ],
+    "title_zh": "示例标题，不是正文资产",
+    "body_zh": "这里仅展示字段结构；不得作为用户可见正文、不得进入 runtime、不得生产使用。",
+    "short_body_zh": "字段结构示例。",
+    "cta_zh": null,
+    "applies_to": {
+      "scale_code": [
+        "BIG5_OCEAN"
+      ],
+      "combination_key": [
+        "O3_C2_E2_A3_N4"
+      ],
+      "domain_bands": {
+        "O": "B3",
+        "C": "B2",
+        "E": "B2",
+        "A": "B3",
+        "N": "B4"
+      }
+    },
+    "avoid_when": [
+      {
+        "field": "qa_status",
+        "operator": "not_equals",
+        "value": "ready_for_pilot",
+        "action": "suppress"
+      }
+    ],
+    "can_combine_with": [],
+    "cannot_combine_with": [
+      "production_use",
+      "runtime_use",
+      "user_visible_body_claim"
+    ],
+    "dedupe_group": "schema_example.only",
+    "selection_priority": 0,
+    "selection_specificity": 0,
+    "fallback_allowed": false,
+    "render_surface": [],
+    "body_quality": {
+      "body_chars": 0,
+      "sentence_count": 0,
+      "has_trait_layer": false,
+      "has_score_band_layer": false,
+      "has_coupling_layer": false,
+      "has_facet_layer": false,
+      "has_real_world_layer": false,
+      "has_cost_layer": false,
+      "has_strength_layer": false,
+      "has_action_layer": false,
+      "has_boundary_layer": false,
+      "has_editorial_leakage": false,
+      "template_risk": "not_applicable",
+      "rendered_preview_required": false
+    },
+    "safety_tags": [
+      "schema_example",
+      "not_user_visible",
+      "not_runtime"
+    ],
+    "qa_status": "draft",
+    "ready_for_pilot": false,
+    "runtime_use": "not_runtime",
+    "production_use_allowed": false,
+    "source_trace": {
+      "source_pack": "B5-CONTENT-0",
+      "source_role": "schema_example",
+      "derived_from": [
+        "content_asset_schema_only"
+      ]
+    },
+    "repair_log_refs": []
+  }
+}

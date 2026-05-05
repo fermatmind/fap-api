@@ -1,0 +1,61 @@
+{
+  "package_key": "B5-A-lite",
+  "package_name": "Big Five V2 Source Authority + Module Mapping Governance",
+  "version": "v0.1",
+  "locale": "zh-CN",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_b5_b1": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "created_at_utc": "2026-05-04T09:33:36.564735Z",
+  "schema_key": "B5-A-lite_v0_1.manifest",
+  "description": "Source authority, module-to-section mapping, runtime decision, anti-target render terms, and B5-B1 readiness governance package.",
+  "inputs": {
+    "depends_on_package": "B5-CONTENT-0_v0_1_1",
+    "module_master": "FermatMind Big Five 新版结果页正式上线 V2.0",
+    "narrative_master": "FermatMind Big Five 完整结果页全文（最终成稿）",
+    "selector_candidates": "325 selector-ready assets, staging_only",
+    "qa_policy_pack": "Golden Cases + Selection Policy + Conflict Resolution, staging_only",
+    "runtime_skeleton": "Big Five 8-section skeleton"
+  },
+  "files": {
+    "json": [
+      "big5_v2_source_authority_map_v0_1.json",
+      "big5_v2_module_to_section_mapping_v0_1.json",
+      "big5_v2_runtime_layer_decision_v0_1.json",
+      "big5_v2_anti_target_render_terms_v0_1.json",
+      "big5_b5_b1_o59_import_readiness_v0_1.json",
+      "big5_b5_a_lite_qa_summary_v0_1.json",
+      "manifest.json"
+    ],
+    "csv": [
+      "source_authority_table_v0_1.csv",
+      "module_to_section_mapping_v0_1.csv",
+      "runtime_layer_decision_table_v0_1.csv",
+      "anti_target_render_terms_v0_1.csv",
+      "b5_b1_readiness_checklist_v0_1.csv"
+    ],
+    "markdown": [
+      "README.md",
+      "big5_b5_a_lite_repair_log_template_v0_1.md",
+      "SHA256SUMS.txt"
+    ]
+  },
+  "status": {
+    "ready_for_b5_b1": true,
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "production_use_allowed": false,
+    "runtime_use": "not_runtime"
+  },
+  "hard_boundaries": [
+    "No body generation",
+    "No 3125 reports",
+    "No runtime wiring",
+    "No code changes",
+    "No B5-B1 execution",
+    "325 selector-ready assets remain staging-only",
+    "QA / Policy pack remains QA-only"
+  ]
+}

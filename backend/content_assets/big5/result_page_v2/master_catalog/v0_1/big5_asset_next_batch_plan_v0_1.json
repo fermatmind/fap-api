@@ -1,0 +1,67 @@
+{
+  "catalog_version": "v0.1",
+  "do_not_start_now": [
+    "B5-B2",
+    "B5-CONTENT-8",
+    "runtime wiring",
+    "production import"
+  ],
+  "recommended_sequence": [
+    {
+      "batch": "Codex staging import of B5-CONTENT-0 through B5-CONTENT-6",
+      "priority": "P0",
+      "mode": "staging_import_only",
+      "goal": "Place approved asset packages under governed content_assets path and run checksum/schema validation.",
+      "blocked_actions": [
+        "runtime wire",
+        "production import",
+        "generate new body copy"
+      ]
+    },
+    {
+      "batch": "fap-web B5-B1 rendered preview execution",
+      "priority": "P0",
+      "mode": "contract_test_execution",
+      "goal": "Validate O59 canonical rendered preview against must-render/must-not-render rules.",
+      "blocked_actions": [
+        "claim QA passed for pending surfaces"
+      ]
+    },
+    {
+      "batch": "Selector reference consistency check",
+      "priority": "P1",
+      "mode": "scan/verify",
+      "goal": "Check 325 selector assets and QA policy against B5-CONTENT-1~6 route and asset references.",
+      "blocked_actions": [
+        "runtime wire"
+      ]
+    },
+    {
+      "batch": "Golden Cases P0 repair",
+      "priority": "P1",
+      "mode": "staging_policy_repair",
+      "goal": "Add O59 canonical golden case, golden_group, slot normalization, expanded render regression scan.",
+      "blocked_actions": [
+        "treat as content body"
+      ]
+    },
+    {
+      "batch": "B5-H expanded rendered preview QA",
+      "priority": "P1",
+      "mode": "QA expansion",
+      "goal": "Add representative rendered QA across desktop/mobile/pdf/share/history/compare.",
+      "blocked_actions": [
+        "production import"
+      ]
+    },
+    {
+      "batch": "B5-J production import governance",
+      "priority": "P0 before runtime",
+      "mode": "governance",
+      "goal": "Define import policy, replacement policy, merge preview and release gate.",
+      "blocked_actions": [
+        "import as production without gate"
+      ]
+    }
+  ]
+}

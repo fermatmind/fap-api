@@ -1,0 +1,291 @@
+{
+  "catalog_version": "v0.1",
+  "rows": [
+    {
+      "import_priority": "P0",
+      "package_key": "B5-A-lite",
+      "package_name": "Source Authority + Module Mapping Governance",
+      "recommended_codex_action": "stage governance files before body import; do not edit app/runtime",
+      "allowed_action": "governance_stage_or_review_only",
+      "blocked_actions": [
+        "runtime_wire",
+        "production_import",
+        "write_new_body_copy",
+        "frontend_fallback_invention"
+      ],
+      "required_before_next": [
+        "source authority QA",
+        "mapping QA"
+      ],
+      "notes": "Declares V2.0 as module master and two万字稿 as O59 canonical body master."
+    },
+    {
+      "import_priority": "P0",
+      "package_key": "B5-B1-O59-core-body",
+      "package_name": "O59 Canonical Core Body Asset Import",
+      "recommended_codex_action": "stage as O59 canonical body fixture; do not generalize",
+      "allowed_action": "staging_import_or_validation_only",
+      "blocked_actions": [
+        "runtime_wire",
+        "production_import",
+        "write_new_body_copy",
+        "frontend_fallback_invention"
+      ],
+      "required_before_next": [
+        "rendered preview QA",
+        "safety QA",
+        "editorial QA"
+      ],
+      "notes": "Covers 8 sections for sensitive_independent_thinker; source of O59 canonical body."
+    },
+    {
+      "import_priority": "P0",
+      "package_key": "B5-B1-Preview",
+      "package_name": "O59 Rendered Preview QA Pack",
+      "recommended_codex_action": "use as QA contract input for fap-web tests",
+      "allowed_action": "governance_stage_or_review_only",
+      "blocked_actions": [
+        "runtime_wire",
+        "production_import",
+        "write_new_body_copy",
+        "frontend_fallback_invention"
+      ],
+      "required_before_next": [
+        "actual fap-web rendered preview execution"
+      ],
+      "notes": "Defines must-render/must-not-render and section surface contracts."
+    },
+    {
+      "import_priority": "P0",
+      "package_key": "B5-CONTENT-0",
+      "package_name": "内容资产结构规范",
+      "recommended_codex_action": "stage package as governance spec; do not wire runtime",
+      "allowed_action": "governance_stage_or_review_only",
+      "blocked_actions": [
+        "runtime_wire",
+        "production_import",
+        "write_new_body_copy",
+        "frontend_fallback_invention"
+      ],
+      "required_before_next": [
+        "schema consistency QA",
+        "package checksum QA"
+      ],
+      "notes": "Defines schema, band key rules, QA templates, ready_for_pilot hard gate, and batch plan."
+    },
+    {
+      "import_priority": "P0",
+      "package_key": "B5-CONTENT-1",
+      "package_name": "五维 × 五档基础维度资产",
+      "recommended_codex_action": "stage import and validate as trait-band library",
+      "allowed_action": "staging_import_or_validation_only",
+      "blocked_actions": [
+        "runtime_wire",
+        "production_import",
+        "write_new_body_copy",
+        "frontend_fallback_invention"
+      ],
+      "required_before_next": [
+        "asset review",
+        "rendered preview when selected"
+      ],
+      "notes": "25 domain-band assets; O59 key support is O3_C2_E2_A3_N4."
+    },
+    {
+      "import_priority": "P0",
+      "package_key": "B5-CONTENT-2",
+      "package_name": "维度耦合 / 组合动力资产",
+      "recommended_codex_action": "stage import and validate references",
+      "allowed_action": "staging_import_or_validation_only",
+      "blocked_actions": [
+        "runtime_wire",
+        "production_import",
+        "write_new_body_copy",
+        "frontend_fallback_invention"
+      ],
+      "required_before_next": [
+        "asset review",
+        "reference consistency QA"
+      ],
+      "notes": "Covers O59's five core coupling routes."
+    },
+    {
+      "import_priority": "P0",
+      "package_key": "B5-CONTENT-3",
+      "package_name": "Facet 刻面解释 / 反直觉重构资产",
+      "recommended_codex_action": "stage import and validate facet_support fields",
+      "allowed_action": "staging_import_or_validation_only",
+      "blocked_actions": [
+        "runtime_wire",
+        "production_import",
+        "write_new_body_copy",
+        "frontend_fallback_invention"
+      ],
+      "required_before_next": [
+        "facet inference boundary QA",
+        "rendered facet preview QA"
+      ],
+      "notes": "All 30 facets; supports O59反直觉发现 and top facet explanations."
+    },
+    {
+      "import_priority": "P0",
+      "package_key": "B5-CONTENT-4",
+      "package_name": "代表性画像 / 标准画像路由资产",
+      "recommended_codex_action": "stage import and validate profile metadata; do not expose as fixed type",
+      "allowed_action": "staging_import_or_validation_only",
+      "blocked_actions": [
+        "runtime_wire",
+        "production_import",
+        "write_new_body_copy",
+        "frontend_fallback_invention"
+      ],
+      "required_before_next": [
+        "profile label safety QA",
+        "route consistency QA"
+      ],
+      "notes": "O59 profile references B5-B1 instead of rewriting it."
+    },
+    {
+      "import_priority": "P0",
+      "package_key": "B5-CONTENT-5",
+      "package_name": "场景应用 / 行动矩阵资产",
+      "recommended_codex_action": "stage import and validate scenario/profile matrix",
+      "allowed_action": "staging_import_or_validation_only",
+      "blocked_actions": [
+        "runtime_wire",
+        "production_import",
+        "write_new_body_copy",
+        "frontend_fallback_invention"
+      ],
+      "required_before_next": [
+        "share safety QA",
+        "surface-level action QA"
+      ],
+      "notes": "160 scenario action assets; v0.1.1 fixes checksum rule only."
+    },
+    {
+      "import_priority": "P0",
+      "package_key": "B5-CONTENT-6",
+      "package_name": "3125 五维组合路由矩阵",
+      "recommended_codex_action": "stage import and validate all 3125 route rows; do not wire runtime",
+      "allowed_action": "staging_import_or_validation_only",
+      "blocked_actions": [
+        "runtime_wire",
+        "production_import",
+        "write_new_body_copy",
+        "frontend_fallback_invention"
+      ],
+      "required_before_next": [
+        "route reference consistency QA",
+        "semantic consistency QA",
+        "rendered preview of representative rows"
+      ],
+      "notes": "v0.1.1 fixes low-confidence profile label leakage; O59 row remains direct_profile_route."
+    },
+    {
+      "import_priority": "P1",
+      "package_key": "B5-B1-Preview-Codex-Handoff",
+      "package_name": "O59 Rendered Preview Execution Brief",
+      "recommended_codex_action": "create fap-web contract test only when explicitly requested",
+      "allowed_action": "governance_stage_or_review_only",
+      "blocked_actions": [
+        "runtime_wire",
+        "production_import",
+        "write_new_body_copy",
+        "frontend_fallback_invention"
+      ],
+      "required_before_next": [
+        "Codex fap-web execution",
+        "pending surface accounting"
+      ],
+      "notes": "Defines tested/pending/passed/failed surface output structure."
+    },
+    {
+      "import_priority": "P1",
+      "package_key": "selector-qa-policy-v0.1",
+      "package_name": "Golden Cases + Selection Policy + Conflict Resolution",
+      "recommended_codex_action": "repair P0 policy issues before using as gate",
+      "allowed_action": "staging_import_or_validation_only",
+      "blocked_actions": [
+        "runtime_wire",
+        "production_import",
+        "write_new_body_copy",
+        "frontend_fallback_invention"
+      ],
+      "required_before_next": [
+        "add O59 production canonical case",
+        "fix golden_group",
+        "fix slot naming",
+        "expand banned terms"
+      ],
+      "notes": "Not content body; currently not a passing selector QA gate."
+    },
+    {
+      "import_priority": "P1",
+      "package_key": "selector-ready-assets-v0.3-p0-full",
+      "package_name": "325 selector-ready assets v0.3 P0 full candidate",
+      "recommended_codex_action": "staging import only after reference consistency check; do not runtime wire",
+      "allowed_action": "staging_import_or_validation_only",
+      "blocked_actions": [
+        "runtime_wire",
+        "production_import",
+        "write_new_body_copy",
+        "frontend_fallback_invention"
+      ],
+      "required_before_next": [
+        "reference consistency with B5-CONTENT-1~6",
+        "coverage warning review",
+        "rendered regression QA"
+      ],
+      "notes": "Has asset_count 325 and sha proof in prior scan; not B5-B body."
+    },
+    {
+      "import_priority": "P2",
+      "package_key": "future-B5-B2-canonical-profile-thick-body",
+      "package_name": "future B5-B2 canonical profile thick body",
+      "recommended_codex_action": "not started; prepare only after B5-B1 rendered preview and source authority are stable",
+      "allowed_action": "planning_only",
+      "blocked_actions": [
+        "runtime_wire",
+        "production_import",
+        "write_without_source_authority"
+      ],
+      "required_before_next": [
+        "B5-H rendered QA expansion",
+        "B5-B1 preview execution"
+      ],
+      "notes": "Future thick-body expansion; not part of current catalog import."
+    },
+    {
+      "import_priority": "P2",
+      "package_key": "future-rendered-QA-expansion",
+      "package_name": "future rendered QA expansion",
+      "recommended_codex_action": "build broader rendered preview QA after representative content is staged",
+      "allowed_action": "QA planning",
+      "blocked_actions": [
+        "claim production ready without screenshots/tests"
+      ],
+      "required_before_next": [
+        "fap-web surface harness"
+      ],
+      "notes": "Needed for desktop/mobile/PDF/share/history/compare."
+    },
+    {
+      "import_priority": "P2",
+      "package_key": "future-CMS-runtime-import",
+      "package_name": "future CMS/runtime import",
+      "recommended_codex_action": "blocked until import policy and rendered QA pass",
+      "allowed_action": "planning_only",
+      "blocked_actions": [
+        "runtime_wire",
+        "production_import"
+      ],
+      "required_before_next": [
+        "production import policy",
+        "merge preview",
+        "no P0 blockers"
+      ],
+      "notes": "Runtime/CMS import is not approved."
+    }
+  ]
+}

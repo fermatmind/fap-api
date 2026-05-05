@@ -1,0 +1,23 @@
+check_key,description,applies_to,severity,pass_fail_criteria,recommended_output_field
+zip_file_count_validation,Verify each source zip has the expected file count.,all_packages,P0,actual_file_count == expected_files,zip_file_count_validation_result
+package_manifest_validation,Parse each manifest and compare package_key/version/counts.,all_packages,P0,manifest parses and package identity matches handoff,package_manifest_validation_result
+SHA256SUMS_validation,Verify SHA256SUMS entries against real package files.,all_packages,P0,all hashes match; no self-hash drift,SHA256SUMS_validation_result
+JSON_parse_validation,Parse every JSON file.,all_json_files,P0,no parse failures,JSON_parse_validation_result
+JSONL_row_count_validation,Count JSONL rows and compare expected counts.,jsonl_packages,P0,row counts match manifest; route matrix shards are 625 each,JSONL_row_count_validation_result
+CSV_parse_validation,Parse every CSV file with UTF-8 or UTF-8-SIG fallback.,all_csv_files,P1,no parse failures; headers present,CSV_parse_validation_result
+required_field_validation,Check package-specific required fields.,all_packages,P0,no missing required fields,required_field_validation_result
+duplicate_key_validation,Check duplicate asset_key / combination_key / package_key.,all_packages,P0,duplicate count = 0,duplicate_key_validation_result
+runtime_flag_validation,Check runtime_use is staging_only or not_runtime.,all_packages,P0,runtime_use not production/live,runtime_flag_validation_result
+production_flag_validation,Check production_use_allowed is false.,all_packages,P0,no production_use_allowed=true,production_flag_validation_result
+body_zh_forbidden_check_for_route_matrix,Ensure B5-CONTENT-6 rows contain no body_zh.,B5-CONTENT-6,P0,body_zh_field_count = 0,body_zh_forbidden_check_for_route_matrix_result
+body_zh_required_check_for_body_asset_packages,Ensure body asset packages include nonempty body_zh where applicable.,B5-B1/B5-CONTENT-1~5,P0,empty_body_zh = 0,body_zh_required_check_for_body_asset_packages_result
+anti_target_render_term_scan,Scan assets and fixtures for compact/legacy anti-target terms.,preview/imported_assets,P0,no P0 term visible in rendered preview fixtures,anti_target_render_term_scan_result
+no_frontend_fallback_scan,Check imported assets do not introduce frontend_fallback body fields.,all_packages,P0,frontend_fallback visible hits = 0,no_frontend_fallback_scan_result
+no_internal_metadata_visible_scan,Ensure internal metadata terms are not in user-visible preview output.,rendered_preview,P0,no internal metadata visible,no_internal_metadata_visible_scan_result
+no_fixed_type_scan,Ensure Big Five copy does not hard-type users.,all_body_assets,P0,no hard typing phrase hits,no_fixed_type_scan_result
+no_diagnosis_language_scan,Ensure no clinical/diagnostic claims.,all_body_assets,P0,no diagnosis phrase hits,no_diagnosis_language_scan_result
+no_hiring_language_scan,Ensure no hiring/screening claims.,all_body_assets,P0,no hiring phrase hits,no_hiring_language_scan_result
+O59_canonical_row_validation,Validate O3_C2_E2_A3_N4 route row and canonical mapping.,B5-CONTENT-6,P0,O59 row present and maps to sensitive_independent_thinker,O59_canonical_row_validation_result
+3125_row_coverage_validation,Validate complete 5^5 combination space.,B5-CONTENT-6,P0,3125 unique combination keys; no missing keys,3125_row_coverage_validation_result
+selector_reference_consistency_validation,Scan 325 selector assets against B5-CONTENT-1~6 references.,selector_ready_assets,P1,generate mismatch report; do not runtime wire,selector_reference_consistency_validation_result
+rendered_preview_pending_surface_policy,"If harness missing for PDF/share/history/compare, mark pending not passed.",fap-web_preview_tests,P0,tested/pending/passed/failed surfaces emitted; no unsupported surface marked passed,rendered_preview_pending_surface_policy_result

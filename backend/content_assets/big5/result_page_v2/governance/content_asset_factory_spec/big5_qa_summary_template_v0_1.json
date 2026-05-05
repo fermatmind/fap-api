@@ -1,0 +1,40 @@
+{
+  "schema_key": "big5_qa_summary_template_v0_1",
+  "schema_version": "fap.big5.qa_summary_template.v0_1_1",
+  "package_key": "B5-CONTENT-0",
+  "package_version": "v0.1.1",
+  "batch_key": "<BATCH_KEY>",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "summary": {
+    "asset_count": 0,
+    "duplicate_asset_keys": 0,
+    "duplicate_body_zh": 0,
+    "missing_required_fields": 0,
+    "banned_phrase_hits": 0,
+    "internal_metadata_leak_hits": 0,
+    "mapping_errors": 0,
+    "coverage_qa_status": "not_run",
+    "safety_qa_status": "not_run",
+    "editorial_qa_status": "not_run",
+    "mapping_qa_status": "not_run",
+    "rendered_preview_qa_status": "not_run",
+    "repair_log_status": "not_started",
+    "p0_blocker_count": 0,
+    "p1_issue_count": 0,
+    "ready_for_pilot_count": 0,
+    "blocked_count": 0,
+    "production_use_allowed_count": 0
+  },
+  "ready_for_pilot_hard_gate": {
+    "coverage_qa_passed": false,
+    "safety_qa_passed": false,
+    "editorial_qa_passed": false,
+    "mapping_qa_passed": false,
+    "rendered_preview_qa_passed": false,
+    "repair_log_all_closed": false,
+    "no_p0_blockers": false,
+    "ready_for_pilot": false,
+    "production_use_allowed": false
+  }
+}

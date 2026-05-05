@@ -1,0 +1,201 @@
+{
+  "schema_key": "big5_3125_combination_key_rules_v0_1",
+  "schema_version": "fap.big5.3125_combination_key_rules.v0_1_1",
+  "package_key": "B5-CONTENT-0",
+  "package_version": "v0.1.1",
+  "locale": "zh-CN",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "combination_key_format": "O{1-5}_C{1-5}_E{1-5}_A{1-5}_N{1-5}",
+  "trait_order": [
+    "O",
+    "C",
+    "E",
+    "A",
+    "N"
+  ],
+  "band_definitions": [
+    {
+      "band_code": "B1",
+      "internal_index": 1,
+      "score_range_0_100": [
+        0,
+        19
+      ],
+      "internal_band_threshold": "0 <= score <= 19",
+      "default_display_band_label": "明显偏低"
+    },
+    {
+      "band_code": "B2",
+      "internal_index": 2,
+      "score_range_0_100": [
+        20,
+        39
+      ],
+      "internal_band_threshold": "20 <= score <= 39",
+      "default_display_band_label": "偏低"
+    },
+    {
+      "band_code": "B3",
+      "internal_index": 3,
+      "score_range_0_100": [
+        40,
+        59
+      ],
+      "internal_band_threshold": "40 <= score <= 59",
+      "default_display_band_label": "中位"
+    },
+    {
+      "band_code": "B4",
+      "internal_index": 4,
+      "score_range_0_100": [
+        60,
+        79
+      ],
+      "internal_band_threshold": "60 <= score <= 79",
+      "default_display_band_label": "中高"
+    },
+    {
+      "band_code": "B5",
+      "internal_index": 5,
+      "score_range_0_100": [
+        80,
+        100
+      ],
+      "internal_band_threshold": "80 <= score <= 100",
+      "default_display_band_label": "明显偏高"
+    }
+  ],
+  "display_band_label_policy": {
+    "description": "display_band_label is user-facing language and may be more nuanced than the internal band_code. It must not change the internal combination_key.",
+    "requires_internal_band_code": true,
+    "requires_score_0_100": true,
+    "allows_trait_specific_label": true,
+    "allows_edge_label": true
+  },
+  "trait_band_keys": {
+    "O": {
+      "B1": "O1",
+      "B2": "O2",
+      "B3": "O3",
+      "B4": "O4",
+      "B5": "O5"
+    },
+    "C": {
+      "B1": "C1",
+      "B2": "C2",
+      "B3": "C3",
+      "B4": "C4",
+      "B5": "C5"
+    },
+    "E": {
+      "B1": "E1",
+      "B2": "E2",
+      "B3": "E3",
+      "B4": "E4",
+      "B5": "E5"
+    },
+    "A": {
+      "B1": "A1",
+      "B2": "A2",
+      "B3": "A3",
+      "B4": "A4",
+      "B5": "A5"
+    },
+    "N": {
+      "B1": "N1",
+      "B2": "N2",
+      "B3": "N3",
+      "B4": "N4",
+      "B5": "N5"
+    }
+  },
+  "canonical_o59_c32_e20_a55_n68": {
+    "scores_0_100": {
+      "O": 59,
+      "C": 32,
+      "E": 20,
+      "A": 55,
+      "N": 68
+    },
+    "internal_band_codes": {
+      "O": "B3",
+      "C": "B2",
+      "E": "B2",
+      "A": "B3",
+      "N": "B4"
+    },
+    "trait_band_keys": {
+      "O": "O3",
+      "C": "C2",
+      "E": "E2",
+      "A": "A3",
+      "N": "N4"
+    },
+    "combination_key": "O3_C2_E2_A3_N4",
+    "display_band_labels": {
+      "O": "中高",
+      "C": "偏低",
+      "E": "明显偏低",
+      "A": "中位略高",
+      "N": "中高"
+    },
+    "profile_reference": "敏锐的独立思考者",
+    "note": "Internal key follows the 5-band threshold. User-facing display labels remain separate and may use more nuanced language.",
+    "key_integrity_note": "Internal key must remain O3_C2_E2_A3_N4 under the B1-B5 score_range_0_100 thresholds."
+  },
+  "combination_record_template": {
+    "combination_key": "O3_C2_E2_A3_N4",
+    "scores_0_100": {
+      "O": 59,
+      "C": 32,
+      "E": 20,
+      "A": 55,
+      "N": 68
+    },
+    "internal_band_codes": {
+      "O": "B3",
+      "C": "B2",
+      "E": "B2",
+      "A": "B3",
+      "N": "B4"
+    },
+    "display_band_labels": {
+      "O": "中高",
+      "C": "偏低",
+      "E": "明显偏低",
+      "A": "中位略高",
+      "N": "中高"
+    },
+    "dominant_traits": [
+      "N",
+      "O"
+    ],
+    "low_traits": [
+      "E",
+      "C"
+    ],
+    "relative_balance": "mixed_profile",
+    "primary_couplings": [
+      "N4_x_O3",
+      "E2_x_C2"
+    ],
+    "suggested_canonical_family": "sensitive_independent_thinker",
+    "selector_scope": "canonical_candidate",
+    "body_import_status": "not_imported",
+    "ready_for_pilot": false
+  },
+  "hard_rule": {
+    "combination_key_is_not_type": true,
+    "must_not_say": [
+      "你属于 O3_C2_E2_A3_N4 型",
+      "这是你的固定人格类型",
+      "这个组合证明你就是某种人"
+    ],
+    "must_say_instead": [
+      "这组分数表示用户当前在五个连续维度上的相对位置。",
+      "组合 key 只用于内容选择，不作为用户可见人格类型。",
+      "画像名只能作为辅助理解标签。"
+    ]
+  }
+}
