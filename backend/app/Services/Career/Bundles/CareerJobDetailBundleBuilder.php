@@ -94,6 +94,11 @@ final class CareerJobDetailBundleBuilder
             ->first();
 
         if (! $snapshot instanceof RecommendationSnapshot) {
+            $displayAssetBackedBundle = $this->buildDisplayAssetBackedBundle($occupation, $normalizedSlug);
+            if ($displayAssetBackedBundle instanceof CareerJobDetailBundle) {
+                return $displayAssetBackedBundle;
+            }
+
             return $this->buildFromPublishedDocxCareerJob($normalizedSlug);
         }
 
