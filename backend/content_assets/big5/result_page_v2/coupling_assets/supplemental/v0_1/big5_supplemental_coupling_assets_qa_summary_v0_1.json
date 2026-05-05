@@ -1,0 +1,717 @@
+{
+  "package_key": "B5-CONTENT-2B",
+  "version": "v0_1",
+  "created_at_utc": "2026-05-05T11:20:18Z",
+  "asset_count": 190,
+  "expected_asset_count": 190,
+  "coupling_key_count": 38,
+  "coverage_by_coupling_key": {
+    "a_high_x_n_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "a_high_x_n_low": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "a_low_x_n_low": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "c_high_x_a_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "c_high_x_a_low": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "c_high_x_e_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "c_high_x_e_low": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "c_high_x_n_low": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "c_low_x_a_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "c_low_x_a_low": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "c_low_x_e_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "c_low_x_n_low": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "c_mid_x_a_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "c_mid_x_e_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "c_mid_x_n_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "e_high_x_a_low": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "e_high_x_n_low": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "e_low_x_a_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "e_low_x_a_low": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "e_low_x_n_low": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "e_mid_x_a_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "e_mid_x_n_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "o_high_x_a_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "o_high_x_c_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "o_high_x_e_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "o_high_x_e_low": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "o_high_x_n_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "o_high_x_n_low": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "o_low_x_a_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "o_low_x_a_low": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "o_low_x_c_low": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "o_low_x_e_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "o_low_x_e_low": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "o_low_x_n_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "o_low_x_n_low": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "o_mid_x_a_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "o_mid_x_c_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    },
+    "o_mid_x_e_high": {
+      "expected_roles": [
+        "coupling_core_explanation",
+        "coupling_benefit_cost",
+        "coupling_common_misread",
+        "coupling_action_strategy",
+        "coupling_scenario_bridge"
+      ],
+      "asset_count": 5,
+      "roles": {
+        "coupling_core_explanation": "covered",
+        "coupling_benefit_cost": "covered",
+        "coupling_common_misread": "covered",
+        "coupling_action_strategy": "covered",
+        "coupling_scenario_bridge": "covered"
+      },
+      "status": "PASS"
+    }
+  },
+  "coverage_by_asset_role": {
+    "coupling_core_explanation": 38,
+    "coupling_benefit_cost": 38,
+    "coupling_common_misread": 38,
+    "coupling_action_strategy": 38,
+    "coupling_scenario_bridge": 38
+  },
+  "duplicate_asset_keys": [],
+  "duplicate_body_zh": [],
+  "empty_body_zh": [],
+  "banned_user_visible_body_hits": [],
+  "missing_required_fields": [],
+  "missing_safety_tags": [],
+  "missing_or_failed_body_quality": [],
+  "body_char_min": 329,
+  "body_char_max": 422,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "qa_status": "PASS"
+}

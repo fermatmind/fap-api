@@ -1,0 +1,1353 @@
+{
+  "package_key": "B5-CONTENT-2B",
+  "version": "v0_1",
+  "created_at_utc": "2026-05-05T11:20:18Z",
+  "asset_count": 190,
+  "expected_asset_count": 190,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "gate_status": {
+    "coverage": "PASS",
+    "mapping": "PASS",
+    "safety": "PASS",
+    "pilot": "BLOCKED_BY_POLICY",
+    "runtime": "BLOCKED_BY_POLICY",
+    "production": "BLOCKED_BY_POLICY"
+  },
+  "item_gate_summary": [
+    {
+      "asset_key": "big5_content_2b_a_high_x_n_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_a_high_x_n_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_a_high_x_n_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_a_high_x_n_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_a_high_x_n_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_a_high_x_n_low_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_a_high_x_n_low_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_a_high_x_n_low_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_a_high_x_n_low_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_a_high_x_n_low_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_a_low_x_n_low_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_a_low_x_n_low_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_a_low_x_n_low_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_a_low_x_n_low_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_a_low_x_n_low_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_a_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_a_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_a_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_a_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_a_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_a_low_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_a_low_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_a_low_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_a_low_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_a_low_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_e_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_e_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_e_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_e_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_e_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_e_low_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_e_low_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_e_low_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_e_low_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_e_low_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_n_low_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_n_low_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_n_low_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_n_low_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_high_x_n_low_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_a_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_a_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_a_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_a_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_a_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_a_low_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_a_low_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_a_low_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_a_low_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_a_low_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_e_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_e_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_e_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_e_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_e_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_n_low_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_n_low_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_n_low_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_n_low_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_low_x_n_low_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_mid_x_a_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_mid_x_a_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_mid_x_a_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_mid_x_a_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_mid_x_a_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_mid_x_e_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_mid_x_e_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_mid_x_e_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_mid_x_e_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_mid_x_e_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_mid_x_n_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_mid_x_n_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_mid_x_n_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_mid_x_n_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_c_mid_x_n_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_high_x_a_low_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_high_x_a_low_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_high_x_a_low_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_high_x_a_low_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_high_x_a_low_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_high_x_n_low_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_high_x_n_low_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_high_x_n_low_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_high_x_n_low_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_high_x_n_low_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_low_x_a_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_low_x_a_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_low_x_a_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_low_x_a_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_low_x_a_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_low_x_a_low_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_low_x_a_low_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_low_x_a_low_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_low_x_a_low_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_low_x_a_low_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_low_x_n_low_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_low_x_n_low_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_low_x_n_low_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_low_x_n_low_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_low_x_n_low_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_mid_x_a_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_mid_x_a_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_mid_x_a_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_mid_x_a_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_mid_x_a_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_mid_x_n_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_mid_x_n_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_mid_x_n_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_mid_x_n_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_e_mid_x_n_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_a_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_a_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_a_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_a_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_a_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_c_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_c_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_c_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_c_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_c_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_e_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_e_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_e_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_e_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_e_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_e_low_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_e_low_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_e_low_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_e_low_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_e_low_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_n_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_n_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_n_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_n_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_n_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_n_low_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_n_low_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_n_low_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_n_low_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_high_x_n_low_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_a_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_a_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_a_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_a_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_a_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_a_low_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_a_low_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_a_low_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_a_low_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_a_low_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_c_low_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_c_low_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_c_low_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_c_low_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_c_low_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_e_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_e_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_e_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_e_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_e_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_e_low_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_e_low_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_e_low_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_e_low_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_e_low_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_n_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_n_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_n_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_n_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_n_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_n_low_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_n_low_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_n_low_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_n_low_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_low_x_n_low_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_mid_x_a_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_mid_x_a_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_mid_x_a_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_mid_x_a_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_mid_x_a_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_mid_x_c_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_mid_x_c_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_mid_x_c_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_mid_x_c_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_mid_x_c_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_mid_x_e_high_coupling_core_explanation_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_mid_x_e_high_coupling_benefit_cost_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_mid_x_e_high_coupling_common_misread_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_mid_x_e_high_coupling_action_strategy_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    },
+    {
+      "asset_key": "big5_content_2b_o_mid_x_e_high_coupling_scenario_bridge_v0_1",
+      "qa_status": "asset_review_ready",
+      "ready_for_pilot": false,
+      "runtime_use": "staging_only",
+      "production_use_allowed": false
+    }
+  ]
+}

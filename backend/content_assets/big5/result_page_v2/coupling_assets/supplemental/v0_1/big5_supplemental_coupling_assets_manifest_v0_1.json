@@ -1,0 +1,152 @@
+{
+  "package_key": "B5-CONTENT-2B",
+  "package_name": "Big Five Supplemental Coupling Content Assets",
+  "version": "v0_1",
+  "locale": "zh-CN",
+  "created_at_utc": "2026-05-05T11:20:18Z",
+  "asset_scope": "big5_result_page_v2_content_assets",
+  "asset_type": "coupling",
+  "asset_layer": "L4_coupling",
+  "asset_count": 190,
+  "expected_asset_count": 190,
+  "coupling_key_count": 38,
+  "included_coupling_keys": [
+    "a_high_x_n_high",
+    "a_high_x_n_low",
+    "a_low_x_n_low",
+    "c_high_x_a_high",
+    "c_high_x_a_low",
+    "c_high_x_e_high",
+    "c_high_x_e_low",
+    "c_high_x_n_low",
+    "c_low_x_a_high",
+    "c_low_x_a_low",
+    "c_low_x_e_high",
+    "c_low_x_n_low",
+    "c_mid_x_a_high",
+    "c_mid_x_e_high",
+    "c_mid_x_n_high",
+    "e_high_x_a_low",
+    "e_high_x_n_low",
+    "e_low_x_a_high",
+    "e_low_x_a_low",
+    "e_low_x_n_low",
+    "e_mid_x_a_high",
+    "e_mid_x_n_high",
+    "o_high_x_a_high",
+    "o_high_x_c_high",
+    "o_high_x_e_high",
+    "o_high_x_e_low",
+    "o_high_x_n_high",
+    "o_high_x_n_low",
+    "o_low_x_a_high",
+    "o_low_x_a_low",
+    "o_low_x_c_low",
+    "o_low_x_e_high",
+    "o_low_x_e_low",
+    "o_low_x_n_high",
+    "o_low_x_n_low",
+    "o_mid_x_a_high",
+    "o_mid_x_c_high",
+    "o_mid_x_e_high"
+  ],
+  "included_asset_roles": [
+    "coupling_core_explanation",
+    "coupling_benefit_cost",
+    "coupling_common_misread",
+    "coupling_action_strategy",
+    "coupling_scenario_bridge"
+  ],
+  "module_key": "module_04_coupling",
+  "section_key": "core_portrait",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "source_context": {
+    "content_structure_source": "B5-CONTENT-0 v0.1.1",
+    "authority_source": "B5-A-lite v0.1",
+    "trait_band_dependency": "B5-CONTENT-1 v0.1",
+    "base_coupling_assets": "B5-CONTENT-2 v0.1",
+    "decision_table_basis": "41 coupling decision table remainder supplied by user"
+  },
+  "not_in_scope": [
+    "complete reports",
+    "route matrix work",
+    "selector work",
+    "runtime wiring",
+    "frontend changes",
+    "backend changes"
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "93bfe74051ecf8b500df0bc97b5a5c45e7a0f5cf9ba89582c2ea9425546206fc",
+      "bytes": 1448
+    },
+    {
+      "path": "big5_supplemental_coupling_assets_coverage_v0_1.csv",
+      "sha256": "0e3e607c1866e104ea0e5165a2a7a005c83aef1c6b3f4cdfd628928613ad009c",
+      "bytes": 2550
+    },
+    {
+      "path": "big5_supplemental_coupling_assets_main_v0_1.csv",
+      "sha256": "eed139cc5b6c0fe9bdfc7d8f9e368d29e75d256eb4b282b0c1a02e465fed8b0c",
+      "bytes": 985429
+    },
+    {
+      "path": "big5_supplemental_coupling_assets_mapping_qa_v0_1.csv",
+      "sha256": "0969046240832e6ef57c3a8477383e7004558f312c1d4e208915a63eca539352",
+      "bytes": 21897
+    },
+    {
+      "path": "big5_supplemental_coupling_assets_mapping_qa_v0_1.json",
+      "sha256": "0bfa9342f49f68203f14f815e4b7ea4fdbb21d45b4e80ef1e76cc51040c9585f",
+      "bytes": 59948
+    },
+    {
+      "path": "big5_supplemental_coupling_assets_qa_summary_v0_1.json",
+      "sha256": "1c4bb1fb53c4760d0574e47e286ce6d3f8056482016cc1321d4ec8856cd5ba06",
+      "bytes": 21661
+    },
+    {
+      "path": "big5_supplemental_coupling_assets_ready_for_pilot_v0_1.json",
+      "sha256": "80574122853d2efd09c8829f8817c479940887f44c4bf9ddd9fefb98e30b7fa4",
+      "bytes": 46814
+    },
+    {
+      "path": "big5_supplemental_coupling_assets_repair_log_v0_1.md",
+      "sha256": "033adad24b45863346aaaf14435993ee08dc87564a8b8bcfc6a5357bc6bfd3e3",
+      "bytes": 636
+    },
+    {
+      "path": "big5_supplemental_coupling_assets_safety_qa_v0_1.json",
+      "sha256": "187cf47952d8ee9686188fded7a1b095c2fe2e6ca42335b27d47d9f3f743032f",
+      "bytes": 1008
+    },
+    {
+      "path": "big5_supplemental_coupling_assets_v0_1.json",
+      "sha256": "812262ce74ccf5857634769ad287a34547eb16bdeac6208ce1de0da581051167",
+      "bytes": 1378303
+    },
+    {
+      "path": "big5_supplemental_coupling_assets_v0_1.jsonl",
+      "sha256": "8e43bbc98b763231dc24da0031b8c66ce2dc2df656a9ee0e52096eb68fc3e640",
+      "bytes": 1062616
+    },
+    {
+      "path": "big5_supplemental_coupling_assets_manifest_v0_1.json",
+      "sha256": null,
+      "bytes": 4485,
+      "note": "see SHA256SUMS.txt"
+    },
+    {
+      "path": "SHA256SUMS.txt",
+      "sha256": null,
+      "bytes": 1375,
+      "note": "hash file"
+    }
+  ]
+}
