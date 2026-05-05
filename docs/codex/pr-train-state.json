@@ -1,12 +1,12 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-05T22:58:00+08:00",
+  "updated_at": "2026-05-05T23:00:00+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
       "branch": "codex/backend-email-binding-foundation",
       "status": "open_pending_github_checks",
-      "commit_sha": "a4f4374c9bde89621596d9e0d111cab951e3fac3",
+      "commit_sha": "e9a491120687eac4acbd41ccda605a30de8c3565",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1184",
       "checks": {
         "scope_validation": {
@@ -48,8 +48,8 @@
           "evidence": "Full script exited 0 after OpenAPI snapshot update."
         },
         "github_required_checks": {
-          "status": "pending",
-          "evidence": "PR marked ready at https://github.com/fermatmind/fap-api/pull/1184; hygiene checks are queued."
+          "status": "pass_no_required_checks_reported",
+          "evidence": "PR marked ready; GitHub reports mergeStateStatus=CLEAN and statusCheckRollup=[] for https://github.com/fermatmind/fap-api/pull/1184."
         }
       },
       "sidecar_issues": [
