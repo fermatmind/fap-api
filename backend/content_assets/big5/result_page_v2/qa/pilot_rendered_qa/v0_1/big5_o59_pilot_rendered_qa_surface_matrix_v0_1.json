@@ -1,0 +1,126 @@
+{
+  "schema": "fap.big5.result_page_v2.pilot_rendered_qa_surface_matrix.v0_1",
+  "package_key": "big5_result_page_v2.o59_pilot_rendered_qa.v0_1",
+  "created_at_utc": "2026-05-05T07:50:34Z",
+  "mode": "pilot_rendered_qa_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "profile": {
+    "profile_id": "canonical_o59_c32_e20_a55_n68",
+    "scores": {
+      "O": 59,
+      "C": 32,
+      "E": 20,
+      "A": 55,
+      "N": 68
+    },
+    "profile_label": "敏锐的独立思考者",
+    "route_matrix_combination_key": "O3_C2_E1_A3_N4"
+  },
+  "source_files": {
+    "pilot_payload_fixture": "tests/Fixtures/big5_result_page_v2/pilot_o59_staging_payload_v0_1.payload.json",
+    "pilot_runtime_flag_test": "tests/Feature/V0_3/BigFiveV2PilotRuntimeFlagTest.php",
+    "pilot_payload_only_renderer_contract": "fap-web/tests/contracts/big5-pilot-payload-only-renderer.contract.test.tsx"
+  },
+  "surfaces": [
+    {
+      "surface_key": "result_page_desktop",
+      "status": "pass",
+      "coverage": "existing_fap_web_pilot_payload_only_contract",
+      "evidence": [
+        "fap-web/tests/contracts/big5-pilot-payload-only-renderer.contract.test.tsx",
+        "PILOT-5 merged payload-only renderer contract"
+      ],
+      "must_render_terms": [
+        "敏锐的独立思考者",
+        "开放性中位｜优势、代价与使用方式",
+        "尽责性偏低｜优势、代价与使用方式",
+        "外向性偏低｜优势、代价与使用方式",
+        "宜人性中位｜优势、代价与使用方式",
+        "情绪性偏高｜优势、代价与使用方式"
+      ],
+      "must_not_render_terms": [
+        "frontend_fallback",
+        "internal_metadata",
+        "selector_basis",
+        "source_reference",
+        "production_use_allowed",
+        "runtime_use",
+        "[object Object]",
+        "A compact overview",
+        "Norms Comparison",
+        "Methodology and Access"
+      ],
+      "notes": "Desktop result page has an existing payload-only renderer contract. PILOT-7B should add explicit desktop/mobile rendered QA contracts."
+    },
+    {
+      "surface_key": "result_page_mobile",
+      "status": "pending_surface",
+      "coverage": "pending_explicit_mobile_contract",
+      "evidence": [],
+      "pending_reason": "PILOT-7B must add a fap-web mobile rendered QA contract or keep this surface pending with an explicit reason."
+    },
+    {
+      "surface_key": "pdf",
+      "status": "pending_surface",
+      "coverage": "no_pilot_pdf_render_harness",
+      "evidence": [],
+      "pending_reason": "No pilot payload PDF render harness is available in this PR."
+    },
+    {
+      "surface_key": "share_card",
+      "status": "pending_surface",
+      "coverage": "no_pilot_share_card_render_harness",
+      "evidence": [],
+      "pending_reason": "No pilot payload share-card render harness is available in this PR."
+    },
+    {
+      "surface_key": "history",
+      "status": "pending_surface",
+      "coverage": "no_pilot_history_surface_contract",
+      "evidence": [],
+      "pending_reason": "No history surface consumes the pilot payload fixture in this PR."
+    },
+    {
+      "surface_key": "compare",
+      "status": "pending_surface",
+      "coverage": "no_pilot_compare_surface_contract",
+      "evidence": [],
+      "pending_reason": "No compare surface consumes the pilot payload fixture in this PR."
+    }
+  ],
+  "status_counts": {
+    "pass": 1,
+    "pending_surface": 5,
+    "fail": 0
+  },
+  "banned_rendered_terms_union": [
+    "frontend_fallback",
+    "internal_metadata",
+    "selector_basis",
+    "source_reference",
+    "production_use_allowed",
+    "runtime_use",
+    "ready_for_runtime",
+    "ready_for_production",
+    "review_status",
+    "qa_notes",
+    "editor_notes",
+    "[object Object]",
+    "A compact overview",
+    "Norms Comparison",
+    "Methodology and Access",
+    "N1 百分位 作为主体解释",
+    "fixed type",
+    "user_confirmed_type"
+  ],
+  "not_allowed": [
+    "Do not mark pending surfaces as pass without a real rendered harness.",
+    "Do not wire this QA package to production.",
+    "Do not expose selector trace, source references, staging flags, or metadata in public rendered output."
+  ]
+}
