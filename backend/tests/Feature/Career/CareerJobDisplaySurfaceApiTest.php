@@ -292,6 +292,30 @@ final class CareerJobDisplaySurfaceApiTest extends TestCase
         }
     }
 
+    public function test_approved_display_asset_without_compiled_snapshot_builds_public_detail_bundle(): void
+    {
+        $occupation = $this->seedDisplayAssetBackedDirectoryDraftOccupation('architects');
+        $occupation->forceFill([
+            'crosswalk_mode' => 'direct_match',
+        ])->save();
+
+        $this->createDisplayAsset($occupation->refresh());
+
+        $response = $this->getJson('/api/v0.5/career/jobs/architects?locale=zh-CN')
+            ->assertOk()
+            ->assertJsonPath('identity.canonical_slug', 'architects')
+            ->assertJsonPath('locale_policy.crosswalk_mode', 'direct_match')
+            ->assertJsonPath('seo_contract.index_eligible', true)
+            ->assertJsonPath('seo_contract.index_state', 'indexable')
+            ->assertJsonPath('seo_contract.robots_policy', 'index,follow')
+            ->assertJsonPath('seo_contract.reason_codes.0', 'validated_display_asset_backed_release')
+            ->assertJsonPath('provenance_meta.logic_version', 'career.protocol.job_detail.display_asset_backed.v1')
+            ->assertJsonPath('display_surface_v1.subject.canonical_slug', 'architects')
+            ->assertJsonPath('display_surface_v1.page.locale', 'zh-CN');
+
+        $this->assertCount(24, $response->json('display_surface_v1.component_order'));
+    }
+
     public function test_manual_hold_software_developers_is_not_force_enabled_even_with_display_asset(): void
     {
         $occupation = $this->seedCompiledOccupation('software-developers');
