@@ -16,6 +16,7 @@ use App\Services\Mbti\MbtiPublicFormSummaryBuilder;
 use App\Services\Payments\PaymentProviderRegistry;
 use App\Services\Payments\PaymentRouter;
 use App\Services\Report\ReportAccess;
+use App\Services\Results\ResultAccessTokenService;
 use App\Support\OrgContext;
 use App\Support\RegionContext;
 use Illuminate\Http\JsonResponse;
@@ -43,6 +44,7 @@ class CommerceController extends Controller
         private LemonSqueezyCheckoutService $lemonSqueezyCheckout,
         private WechatPayCheckoutService $wechatPayCheckout,
         private AlipayCheckoutService $alipayCheckout,
+        private ResultAccessTokenService $resultAccessTokens,
     ) {}
 
     /**
@@ -234,6 +236,12 @@ class CommerceController extends Controller
                 $payload[ReportAccess::ACCESS_HUB_KEY] = $mbtiAccessHub;
             }
         }
+
+        $payload = $this->attachResultAccessTokenForPaymentRecovery(
+            $payload,
+            $orgId,
+            $paymentRecoveryVerified
+        );
 
         return response()->json($payload);
     }
@@ -1959,6 +1967,87 @@ class CommerceController extends Controller
     private function buildOrderDelivery(object $order): array
     {
         return $this->orders->presentOrderDelivery($order);
+    }
+
+    /**
+     * @param  array<string, mixed>  $payload
+     * @return array<string, mixed>
+     */
+    private function attachResultAccessTokenForPaymentRecovery(array $payload, int $orgId, bool $paymentRecoveryVerified): array
+    {
+        if (! $paymentRecoveryVerified) {
+            return $payload;
+        }
+
+        $entry = is_array($payload['exact_result_entry'] ?? null)
+            ? $payload['exact_result_entry']
+            : null;
+        $attemptId = $this->trimNullableString($entry['attempt_id'] ?? ($payload['attempt_id'] ?? null));
+        if ($attemptId === null) {
+            return $payload;
+        }
+
+        $token = $this->resultAccessTokens->issueForActiveAttemptBinding($orgId, $attemptId);
+        if (! is_array($token) || $this->trimNullableString($token['token'] ?? null) === null) {
+            return $payload;
+        }
+
+        if ($entry !== null) {
+            $payload['exact_result_entry'] = $this->withResultAccessToken($entry, $token);
+        }
+
+        if (is_array($payload[ReportAccess::ACCESS_HUB_KEY] ?? null)) {
+            $hub = $payload[ReportAccess::ACCESS_HUB_KEY];
+            if (is_array($hub['exact_result_entry'] ?? null)) {
+                $hub['exact_result_entry'] = $this->withResultAccessToken($hub['exact_result_entry'], $token);
+                $payload[ReportAccess::ACCESS_HUB_KEY] = $hub;
+            }
+        }
+
+        $resultUrl = $this->trimNullableString($payload['result_url'] ?? null);
+        if ($resultUrl !== null) {
+            $payload['result_url'] = $this->appendAccessTokenToUrl($resultUrl, (string) $token['token']);
+        }
+
+        return $payload;
+    }
+
+    /**
+     * @param  array<string, mixed>  $entry
+     * @param  array{token:string,expires_at:string}  $token
+     * @return array<string, mixed>
+     */
+    private function withResultAccessToken(array $entry, array $token): array
+    {
+        $rawToken = (string) $token['token'];
+        $entry['result_access_token'] = $rawToken;
+        $entry['result_access_token_expires_at'] = (string) $token['expires_at'];
+
+        if (is_array($entry['actions'] ?? null)) {
+            foreach (['page_href', 'wait_href'] as $key) {
+                $href = $this->trimNullableString($entry['actions'][$key] ?? null);
+                if ($href !== null) {
+                    $entry['actions'][$key] = $this->appendAccessTokenToUrl($href, $rawToken);
+                }
+            }
+        }
+
+        return $entry;
+    }
+
+    private function appendAccessTokenToUrl(string $url, string $token): string
+    {
+        $fragment = '';
+        $base = $url;
+        $fragmentPosition = strpos($url, '#');
+        if ($fragmentPosition !== false) {
+            $base = substr($url, 0, $fragmentPosition);
+            $fragment = substr($url, $fragmentPosition);
+        }
+
+        $separator = str_contains($base, '?') ? '&' : '?';
+
+        return $base.$separator.'access_token='.rawurlencode($token).$fragment;
     }
 
     private function resolvePublicOrderStatus(object $order): string
