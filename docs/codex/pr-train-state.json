@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-06T00:35:28+08:00",
+  "updated_at": "2026-05-06T00:36:52+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -152,12 +152,12 @@
     "backend-email-gated-report-read": {
       "repo": "fap-api",
       "branch": "codex/backend-email-gated-report-read",
-      "status": "local_checks_passed",
+      "status": "open_pending_github_checks",
       "depends_on": [
         "backend-email-result-lookup"
       ],
-      "commit_sha": "c93bfb16bbb5690b5b29358c599d41b693516de5",
-      "pr_url": null,
+      "commit_sha": "14db8dd1c0a3d627779569b2be04d6c5094d721b",
+      "pr_url": "https://github.com/fermatmind/fap-api/pull/1191",
       "checks": {
         "dependency": {
           "status": "pass",
@@ -211,7 +211,7 @@
         },
         "github_required_checks": {
           "status": "pending",
-          "evidence": "Local checks passed; PR not opened yet."
+          "evidence": "PR opened at https://github.com/fermatmind/fap-api/pull/1191; waiting for required checks."
         }
       },
       "sidecar_issues": [
