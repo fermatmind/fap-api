@@ -82,6 +82,9 @@ final class BigFiveV2PilotRuntimeFlagTest extends TestCase
         $this->assertSame(BigFiveV2PilotPayloadComposer::PACKAGE_VERSION, $payload['package_version'] ?? null);
         $this->assertSame('pilot_o59_staging_payload_v0_1', $payload['fixture_key'] ?? null);
         $this->assertSame('sensitive_independent_thinker', $payload['canonical_profile_key'] ?? null);
+        $this->assertSame(3, data_get($payload, 'projection_v2.domains.O.score'));
+        $this->assertSame(2, data_get($payload, 'projection_v2.domains.E.score'));
+        $this->assertNotSame('pending_asset_resolution', data_get($payload, 'modules.4.blocks.0.content.availability'));
         $this->assertSame($fixture['legacy_sections'], $response->json('report.sections'));
         $this->assertFalse($this->containsKeyRecursive($payload, 'production_use_allowed'));
         $this->assertFalse($this->containsKeyRecursive($payload, 'runtime_use'));
@@ -107,6 +110,41 @@ final class BigFiveV2PilotRuntimeFlagTest extends TestCase
         $response->assertOk();
         $this->assertArrayNotHasKey(BigFiveResultPageV2Contract::PAYLOAD_KEY, $response->json());
         $this->assertSame($fixture['legacy_sections'], $response->json('report.sections'));
+    }
+
+    public function test_pilot_runtime_fails_closed_when_projection_is_locked_or_redacted(): void
+    {
+        config()->set('big5_result_page_v2.enabled', false);
+        config()->set('big5_result_page_v2.pilot_runtime_enabled', true);
+        config()->set('big5_result_page_v2.pilot_allowed_environments', ['testing']);
+        config()->set('big5_result_page_v2.pilot_production_allowlist_enabled', false);
+        config()->set('big5_report_engine.v2_bridge_enabled', false);
+        $fixture = $this->createCanonicalBigFiveBridgeFixture('anon_big5_v2_pilot_locked_projection');
+        config()->set('big5_result_page_v2.pilot_access_allowed_anon_ids', [$fixture['anon_id']]);
+
+        $payload = app(BigFiveResultPageV2RuntimeWrapper::class)->appendIfEnabled(
+            $fixture['attempt'],
+            $fixture['result'],
+            [
+                'report' => ['sections' => $fixture['legacy_sections']],
+                'big5_public_projection_v1' => [
+                    '_meta' => [
+                        'locked' => true,
+                        'redacted' => true,
+                    ],
+                    'trait_vector' => [
+                        ['key' => 'O', 'percentile' => 59],
+                        ['key' => 'C', 'percentile' => 32],
+                        ['key' => 'E', 'percentile' => 20],
+                        ['key' => 'A', 'percentile' => 55],
+                        ['key' => 'N', 'percentile' => 68],
+                    ],
+                ],
+            ],
+        );
+
+        $this->assertArrayNotHasKey(BigFiveResultPageV2Contract::PAYLOAD_KEY, $payload);
+        $this->assertSame($fixture['legacy_sections'], data_get($payload, 'report.sections'));
     }
 
     /**
