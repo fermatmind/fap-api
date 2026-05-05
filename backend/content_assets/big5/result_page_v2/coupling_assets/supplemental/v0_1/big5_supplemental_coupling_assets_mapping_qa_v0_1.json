@@ -1,0 +1,1960 @@
+{
+  "package_key": "B5-CONTENT-2B",
+  "version": "v0_1",
+  "created_at_utc": "2026-05-05T11:20:18Z",
+  "expected_coupling_keys": [
+    "a_high_x_n_high",
+    "a_high_x_n_low",
+    "a_low_x_n_low",
+    "c_high_x_a_high",
+    "c_high_x_a_low",
+    "c_high_x_e_high",
+    "c_high_x_e_low",
+    "c_high_x_n_low",
+    "c_low_x_a_high",
+    "c_low_x_a_low",
+    "c_low_x_e_high",
+    "c_low_x_n_low",
+    "c_mid_x_a_high",
+    "c_mid_x_e_high",
+    "c_mid_x_n_high",
+    "e_high_x_a_low",
+    "e_high_x_n_low",
+    "e_low_x_a_high",
+    "e_low_x_a_low",
+    "e_low_x_n_low",
+    "e_mid_x_a_high",
+    "e_mid_x_n_high",
+    "o_high_x_a_high",
+    "o_high_x_c_high",
+    "o_high_x_e_high",
+    "o_high_x_e_low",
+    "o_high_x_n_high",
+    "o_high_x_n_low",
+    "o_low_x_a_high",
+    "o_low_x_a_low",
+    "o_low_x_c_low",
+    "o_low_x_e_high",
+    "o_low_x_e_low",
+    "o_low_x_n_high",
+    "o_low_x_n_low",
+    "o_mid_x_a_high",
+    "o_mid_x_c_high",
+    "o_mid_x_e_high"
+  ],
+  "expected_asset_roles": [
+    "coupling_core_explanation",
+    "coupling_benefit_cost",
+    "coupling_common_misread",
+    "coupling_action_strategy",
+    "coupling_scenario_bridge"
+  ],
+  "checks": [
+    {
+      "coupling_key": "a_high_x_n_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "a_high_x_n_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "a_high_x_n_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "a_high_x_n_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "a_high_x_n_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "a_high_x_n_low",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "a_high_x_n_low",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "a_high_x_n_low",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "a_high_x_n_low",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "a_high_x_n_low",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "a_low_x_n_low",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "a_low_x_n_low",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "a_low_x_n_low",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "a_low_x_n_low",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "a_low_x_n_low",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_a_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_a_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_a_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_a_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_a_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_a_low",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_a_low",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_a_low",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_a_low",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_a_low",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_e_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_e_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_e_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_e_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_e_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_e_low",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_e_low",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_e_low",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_e_low",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_e_low",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_n_low",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_n_low",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_n_low",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_n_low",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_high_x_n_low",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_a_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_a_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_a_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_a_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_a_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_a_low",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_a_low",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_a_low",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_a_low",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_a_low",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_e_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_e_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_e_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_e_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_e_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_n_low",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_n_low",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_n_low",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_n_low",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_low_x_n_low",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_mid_x_a_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_mid_x_a_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_mid_x_a_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_mid_x_a_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_mid_x_a_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_mid_x_e_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_mid_x_e_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_mid_x_e_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_mid_x_e_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_mid_x_e_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_mid_x_n_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_mid_x_n_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_mid_x_n_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_mid_x_n_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "c_mid_x_n_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_high_x_a_low",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_high_x_a_low",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_high_x_a_low",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_high_x_a_low",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_high_x_a_low",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_high_x_n_low",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_high_x_n_low",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_high_x_n_low",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_high_x_n_low",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_high_x_n_low",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_low_x_a_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_low_x_a_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_low_x_a_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_low_x_a_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_low_x_a_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_low_x_a_low",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_low_x_a_low",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_low_x_a_low",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_low_x_a_low",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_low_x_a_low",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_low_x_n_low",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_low_x_n_low",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_low_x_n_low",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_low_x_n_low",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_low_x_n_low",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_mid_x_a_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_mid_x_a_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_mid_x_a_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_mid_x_a_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_mid_x_a_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_mid_x_n_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_mid_x_n_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_mid_x_n_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_mid_x_n_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "e_mid_x_n_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_a_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_a_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_a_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_a_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_a_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_c_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_c_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_c_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_c_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_c_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_e_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_e_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_e_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_e_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_e_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_e_low",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_e_low",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_e_low",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_e_low",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_e_low",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_n_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_n_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_n_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_n_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_n_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_n_low",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_n_low",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_n_low",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_n_low",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_high_x_n_low",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_a_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_a_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_a_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_a_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_a_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_a_low",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_a_low",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_a_low",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_a_low",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_a_low",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_c_low",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_c_low",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_c_low",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_c_low",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_c_low",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_e_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_e_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_e_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_e_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_e_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_e_low",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_e_low",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_e_low",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_e_low",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_e_low",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_n_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_n_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_n_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_n_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_n_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_n_low",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_n_low",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_n_low",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_n_low",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_low_x_n_low",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_mid_x_a_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_mid_x_a_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_mid_x_a_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_mid_x_a_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_mid_x_a_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_mid_x_c_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_mid_x_c_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_mid_x_c_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_mid_x_c_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_mid_x_c_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_mid_x_e_high",
+      "asset_role": "coupling_core_explanation",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.core_explanation",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_mid_x_e_high",
+      "asset_role": "coupling_benefit_cost",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.benefit_cost",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_mid_x_e_high",
+      "asset_role": "coupling_common_misread",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.common_misread",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_mid_x_e_high",
+      "asset_role": "coupling_action_strategy",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.action_strategy",
+      "status": "PASS"
+    },
+    {
+      "coupling_key": "o_mid_x_e_high",
+      "asset_role": "coupling_scenario_bridge",
+      "expected_count": 1,
+      "actual_count": 1,
+      "module_key": "module_04_coupling",
+      "section_key": "core_portrait",
+      "slot_key": "primary_coupling.scenario_bridge",
+      "status": "PASS"
+    }
+  ],
+  "summary": {
+    "check_count": 190,
+    "pass_count": 190,
+    "fail_count": 0,
+    "status": "PASS"
+  }
+}
