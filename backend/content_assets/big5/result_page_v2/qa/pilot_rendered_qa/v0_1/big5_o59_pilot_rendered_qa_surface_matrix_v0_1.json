@@ -24,7 +24,8 @@
   "source_files": {
     "pilot_payload_fixture": "tests/Fixtures/big5_result_page_v2/pilot_o59_staging_payload_v0_1.payload.json",
     "pilot_runtime_flag_test": "tests/Feature/V0_3/BigFiveV2PilotRuntimeFlagTest.php",
-    "pilot_payload_only_renderer_contract": "fap-web/tests/contracts/big5-pilot-payload-only-renderer.contract.test.tsx"
+    "pilot_payload_only_renderer_contract": "fap-web/tests/contracts/big5-pilot-payload-only-renderer.contract.test.tsx",
+    "pilot_rendered_qa_contract": "fap-web/tests/contracts/big5-pilot-rendered-qa.contract.test.tsx"
   },
   "surfaces": [
     {
@@ -33,7 +34,9 @@
       "coverage": "existing_fap_web_pilot_payload_only_contract",
       "evidence": [
         "fap-web/tests/contracts/big5-pilot-payload-only-renderer.contract.test.tsx",
-        "PILOT-5 merged payload-only renderer contract"
+        "fap-web/tests/contracts/big5-pilot-rendered-qa.contract.test.tsx",
+        "PILOT-5 merged payload-only renderer contract",
+        "PILOT-7B merged desktop rendered QA contract"
       ],
       "must_render_terms": [
         "敏锐的独立思考者",
@@ -55,14 +58,37 @@
         "Norms Comparison",
         "Methodology and Access"
       ],
-      "notes": "Desktop result page has an existing payload-only renderer contract. PILOT-7B should add explicit desktop/mobile rendered QA contracts."
+      "notes": "Desktop result page has both the payload-only renderer contract and explicit rendered QA contract evidence."
     },
     {
       "surface_key": "result_page_mobile",
-      "status": "pending_surface",
-      "coverage": "pending_explicit_mobile_contract",
-      "evidence": [],
-      "pending_reason": "PILOT-7B must add a fap-web mobile rendered QA contract or keep this surface pending with an explicit reason."
+      "status": "pass",
+      "coverage": "fap_web_pilot_rendered_qa_contract",
+      "evidence": [
+        "fap-web/tests/contracts/big5-pilot-rendered-qa.contract.test.tsx",
+        "PILOT-7B merged mobile rendered QA contract"
+      ],
+      "must_render_terms": [
+        "敏锐的独立思考者",
+        "开放性中位｜优势、代价与使用方式",
+        "尽责性偏低｜优势、代价与使用方式",
+        "外向性偏低｜优势、代价与使用方式",
+        "宜人性中位｜优势、代价与使用方式",
+        "情绪性偏高｜优势、代价与使用方式"
+      ],
+      "must_not_render_terms": [
+        "frontend_fallback",
+        "internal_metadata",
+        "selector_basis",
+        "source_reference",
+        "production_use_allowed",
+        "runtime_use",
+        "[object Object]",
+        "A compact overview",
+        "Norms Comparison",
+        "Methodology and Access"
+      ],
+      "notes": "Mobile result page has explicit fap-web rendered QA evidence from PILOT-7B."
     },
     {
       "surface_key": "pdf",
@@ -94,8 +120,8 @@
     }
   ],
   "status_counts": {
-    "pass": 1,
-    "pending_surface": 5,
+    "pass": 2,
+    "pending_surface": 4,
     "fail": 0
   },
   "banned_rendered_terms_union": [

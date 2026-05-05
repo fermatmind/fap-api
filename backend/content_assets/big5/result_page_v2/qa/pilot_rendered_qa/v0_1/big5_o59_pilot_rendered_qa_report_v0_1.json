@@ -11,16 +11,16 @@
   "ready_for_production": false,
   "surface_count": 6,
   "surface_status_counts": {
-    "pass": 1,
-    "pending_surface": 5,
+    "pass": 2,
+    "pending_surface": 4,
     "fail": 0
   },
   "passed_surfaces": [
-    "result_page_desktop"
+    "result_page_desktop",
+    "result_page_mobile"
   ],
   "failed_surfaces": [],
   "pending_surfaces": [
-    "result_page_mobile",
     "pdf",
     "share_card",
     "history",
@@ -35,7 +35,7 @@
     "pilot_runtime_flag_default_off": true,
     "pilot_runtime_available_in_allowed_non_production_environment": true,
     "result_page_desktop_contract_available": true,
-    "result_page_mobile_contract_available": false,
+    "result_page_mobile_contract_available": true,
     "all_required_surfaces_passed": false,
     "pilot_rendered_qa_complete": false,
     "pilot_can_proceed_for_default_off_backend_payload_preview": true,
@@ -43,10 +43,6 @@
     "production_blocked": true
   },
   "remaining_blockers": [
-    {
-      "surface_key": "result_page_mobile",
-      "blocker": "PILOT-7B must add explicit mobile rendered QA or keep pending_surface."
-    },
     {
       "surface_key": "pdf",
       "blocker": "No pilot PDF render harness yet."
