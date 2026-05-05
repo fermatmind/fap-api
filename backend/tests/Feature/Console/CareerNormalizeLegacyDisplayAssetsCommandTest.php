@@ -49,14 +49,18 @@ final class CareerNormalizeLegacyDisplayAssetsCommandTest extends TestCase
 
     /** @var list<string> */
     private const LINEAGE_SAFE_SLUGS = [
+        'accountants-and-auditors',
+        'actors',
         'actuaries',
         'architectural-and-engineering-managers',
         'biomedical-engineers',
         'civil-engineers',
+        'data-scientists',
         'dentists',
         'financial-analysts',
         'high-school-teachers',
         'market-research-analysts',
+        'registered-nurses',
     ];
 
     #[Test]
@@ -77,8 +81,9 @@ final class CareerNormalizeLegacyDisplayAssetsCommandTest extends TestCase
         $this->assertSame(12, $report['would_update_count']);
         $this->assertSame(1, $report['actor_shape_normalized_count']);
         $this->assertSame(22, $report['release_gates_removed_count']);
-        $this->assertSame(8, $report['lineage_backfilled_count']);
-        $this->assertSame(4, $report['lineage_hold_count']);
+        $this->assertSame(12, $report['lineage_backfilled_count']);
+        $this->assertSame(0, $report['lineage_hold_count']);
+        $this->assertSame(1, $report['Product_schema_removed_count']);
         $this->assertFalse($report['release_gates_changed']);
         $this->assertSame($before, $this->snapshotAssets());
     }
@@ -106,8 +111,9 @@ final class CareerNormalizeLegacyDisplayAssetsCommandTest extends TestCase
         $this->assertSame(12, $report['updated_count']);
         $this->assertSame(1, $report['actor_shape_normalized_count']);
         $this->assertSame(22, $report['release_gates_removed_count']);
-        $this->assertSame(8, $report['lineage_backfilled_count']);
-        $this->assertSame(4, $report['lineage_hold_count']);
+        $this->assertSame(12, $report['lineage_backfilled_count']);
+        $this->assertSame(0, $report['lineage_hold_count']);
+        $this->assertSame(1, $report['Product_schema_removed_count']);
         $this->assertFileExists($backupPath);
         $this->assertCount(12, json_decode((string) file_get_contents($backupPath), true, 512, JSON_THROW_ON_ERROR));
         $this->assertSame($beforeCounts, $this->counts());
@@ -117,7 +123,12 @@ final class CareerNormalizeLegacyDisplayAssetsCommandTest extends TestCase
         $this->assertIsArray(data_get($actors->page_payload_json, 'page.zh'));
         $this->assertArrayNotHasKey('en', $actors->page_payload_json);
         $this->assertArrayNotHasKey('zh', $actors->page_payload_json);
-        $this->assertNull(data_get($actors->metadata_json, 'row_fingerprint'));
+        $this->assertIsString(data_get($actors->metadata_json, 'row_fingerprint'));
+        $this->assertIsString(data_get($actors->metadata_json, 'workbook_sha256'));
+        $this->assertSame(basename($this->lineageWorkbook()), data_get($actors->metadata_json, 'workbook_basename'));
+        $this->assertSame(3, data_get($actors->metadata_json, 'row_number'));
+        $this->assertSame('career_legacy_display_asset_normalizer_v0.1', data_get($actors->metadata_json, 'mapper_version'));
+        $this->assertStringNotContainsString('"@type":"Product"', json_encode($actors->structured_data_json, JSON_THROW_ON_ERROR));
 
         foreach (self::RELEASE_GATE_SLUGS as $slug) {
             $asset = $this->asset($slug);
@@ -137,10 +148,6 @@ final class CareerNormalizeLegacyDisplayAssetsCommandTest extends TestCase
 
         foreach (self::LINEAGE_SAFE_SLUGS as $slug) {
             $this->assertIsString(data_get($this->asset($slug)->metadata_json, 'row_fingerprint'));
-        }
-
-        foreach (['actors', 'accountants-and-auditors', 'data-scientists', 'registered-nurses'] as $slug) {
-            $this->assertNull(data_get($this->asset($slug)->metadata_json, 'row_fingerprint'));
         }
 
         $this->assertSame($beforeGuard, $this->guardSnapshot('actuaries'));
@@ -209,7 +216,12 @@ final class CareerNormalizeLegacyDisplayAssetsCommandTest extends TestCase
                     : $this->legacyReleaseGatePage($releaseGateOverrides[$slug] ?? []),
                 'seo_payload_json' => ['en' => ['title' => $slug], 'zh' => ['title' => $slug]],
                 'sources_json' => ['references' => [['label' => 'Official source']]],
-                'structured_data_json' => ['faq_page' => ['en' => ['mainEntity' => []], 'zh' => ['mainEntity' => []]]],
+                'structured_data_json' => $slug === 'actors'
+                    ? ['@graph' => [
+                        ['@type' => 'Occupation', 'name' => 'Actors'],
+                        ['@type' => 'Product', 'name' => 'Legacy actors product schema'],
+                    ]]
+                    : ['faq_page' => ['en' => ['mainEntity' => []], 'zh' => ['mainEntity' => []]]],
                 'implementation_contract_json' => ['claim_permissions' => ['visible' => true]],
                 'metadata_json' => [
                     'command' => 'legacy-import',
@@ -329,10 +341,21 @@ final class CareerNormalizeLegacyDisplayAssetsCommandTest extends TestCase
     {
         $exitCode = Artisan::call('career:normalize-legacy-display-assets', array_merge([
             '--slugs' => $slugs,
+            '--lineage-workbook' => $this->lineageWorkbook(),
             '--json' => true,
         ], $options));
 
         return [$exitCode, json_decode(Artisan::output(), true, 512, JSON_THROW_ON_ERROR)];
+    }
+
+    private function lineageWorkbook(): string
+    {
+        $path = sys_get_temp_dir().'/career-normalize-lineage-workbook.xlsx';
+        if (! is_file($path)) {
+            file_put_contents($path, 'lineage workbook fixture');
+        }
+
+        return $path;
     }
 
     private function allSlugs(): string
@@ -372,6 +395,7 @@ final class CareerNormalizeLegacyDisplayAssetsCommandTest extends TestCase
                 $asset->canonical_slug => hash('sha256', json_encode([
                     $asset->page_payload_json,
                     $asset->metadata_json,
+                    $asset->structured_data_json,
                 ], JSON_THROW_ON_ERROR)),
             ])
             ->all();
