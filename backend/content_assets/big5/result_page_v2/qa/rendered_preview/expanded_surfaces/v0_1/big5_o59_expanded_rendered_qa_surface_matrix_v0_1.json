@@ -1,0 +1,648 @@
+{
+  "schema": "fap.big5.result_page_v2.expanded_rendered_qa_surface_matrix.v0_1",
+  "package_key": "big5_result_page_v2.o59_expanded_rendered_qa.v0_1",
+  "mode": "staging_preview_qa_advisory",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_asset_review": true,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "profile": {
+    "profile_id": "canonical_o59_c32_e20_a55_n68",
+    "scores": {
+      "O": 59,
+      "C": 32,
+      "E": 20,
+      "A": 55,
+      "N": 68
+    },
+    "profile_label": "敏锐的独立思考者",
+    "axis": "高敏感 × 中高开放 × 克制进入"
+  },
+  "source_files": {
+    "surface_execution_matrix": "qa/handoff/o59_rendered_preview/canonical_o59_surface_execution_matrix_v0_1.json",
+    "visible_text_assertion_matrix": "qa/handoff/o59_rendered_preview/canonical_o59_visible_text_assertion_matrix_v0_1.json",
+    "payload_fixture": "tests/Fixtures/big5_result_page_v2/canonical_o59_core_body_preview.payload.json"
+  },
+  "surfaces": [
+    {
+      "surface_key": "result_page_desktop",
+      "status": "pass",
+      "coverage": "existing_fap_web_contract",
+      "expected_sections": [
+        "hero_summary",
+        "domains_overview",
+        "domain_deep_dive",
+        "facet_details",
+        "core_portrait",
+        "norms_comparison",
+        "action_plan",
+        "methodology_and_access"
+      ],
+      "expected_visible_terms": [
+        "敏锐的独立思考者",
+        "O59 / C32 / E20 / A55 / N68",
+        "高敏感 × 中高开放 × 克制进入",
+        "Big Five 描述的是连续人格特质，不是固定人格类型",
+        "不用于医学诊断",
+        "不用于心理治疗",
+        "不用于招聘筛选",
+        "画像名只是辅助理解标签",
+        "不是没尽责",
+        "不是社交差",
+        "不是玻璃心",
+        "工作",
+        "关系",
+        "压力",
+        "个人成长",
+        "30 / 60 / 90 天路径",
+        "方法与边界说明"
+      ],
+      "forbidden_visible_terms": [
+        "A compact overview",
+        "Five-domain distribution with percentile-oriented context",
+        "Focused read on domain-level strengths",
+        "Facet-level signals arranged for quick interpretation",
+        "Norms Comparison",
+        "Methodology and Access",
+        "N1 百分位 作为主体解释",
+        "all",
+        "优先关注成长面向",
+        "O6, C5, E6",
+        "[object Object]",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "frontend_fallback",
+        "internal_metadata",
+        "selector_basis",
+        "selection_guidance",
+        "editor_notes",
+        "qa_notes",
+        "source_reference",
+        "import_policy",
+        "runtime_use",
+        "production_use_allowed"
+      ],
+      "metadata_leak_terms": [
+        "internal_metadata",
+        "selector_basis",
+        "selection_guidance",
+        "editor_notes",
+        "qa_notes",
+        "source_reference",
+        "import_policy",
+        "runtime_use",
+        "production_use_allowed"
+      ],
+      "contextual_forbidden_rules": {
+        "all": {
+          "term": "all",
+          "scope": "user_visible_rendered_text_only",
+          "match_mode": "standalone_visible_token_exact",
+          "raw_substring_scan_allowed": false,
+          "case_sensitive": false,
+          "normalization": "trim visible text node; collapse whitespace; compare exact visible token",
+          "allowed_context": [
+            "words containing all, including 'callout' and 'allowlisted'",
+            "schema kind values",
+            "internal code strings",
+            "non-rendered JSON, TypeScript, fixture, or QA metadata"
+          ],
+          "forbidden_context": [
+            "standalone visible line exactly equal to 'all'",
+            "placeholder/debug leakage rendered in facet rows or table cells",
+            "raw internal placeholder exposed to user-visible UI"
+          ],
+          "implementation_warning": "Do not use raw substring matching for 'all'. Do not fail 'callout', 'allowlisted', or internal code strings."
+        },
+        "N1 百分位": {
+          "term": "N1 百分位",
+          "scope": "facet_details",
+          "allowed_context": [
+            "full facet directory",
+            "metric row",
+            "appendix-like score table"
+          ],
+          "forbidden_context": [
+            "facet_details primary narrative",
+            "anomaly card body",
+            "section intro"
+          ]
+        }
+      },
+      "evidence": [
+        "fap-web/tests/contracts/big5-o59-rendered-preview.contract.test.tsx",
+        "P0-2 merged rendered preview contract for desktop viewport"
+      ],
+      "notes": "Desktop result page uses the backend O59 payload fixture and checks must-render / must-not-render terms."
+    },
+    {
+      "surface_key": "result_page_mobile",
+      "status": "pass",
+      "coverage": "existing_fap_web_contract",
+      "expected_sections": [
+        "hero_summary",
+        "domains_overview",
+        "domain_deep_dive",
+        "facet_details",
+        "core_portrait",
+        "norms_comparison",
+        "action_plan",
+        "methodology_and_access"
+      ],
+      "expected_visible_terms": [
+        "敏锐的独立思考者",
+        "O59 / C32 / E20 / A55 / N68",
+        "高敏感 × 中高开放 × 克制进入",
+        "Big Five 描述的是连续人格特质，不是固定人格类型",
+        "不用于医学诊断",
+        "不用于心理治疗",
+        "不用于招聘筛选",
+        "画像名只是辅助理解标签",
+        "不是没尽责",
+        "不是社交差",
+        "不是玻璃心",
+        "工作",
+        "关系",
+        "压力",
+        "个人成长",
+        "30 / 60 / 90 天路径",
+        "方法与边界说明"
+      ],
+      "forbidden_visible_terms": [
+        "A compact overview",
+        "Five-domain distribution with percentile-oriented context",
+        "Focused read on domain-level strengths",
+        "Facet-level signals arranged for quick interpretation",
+        "Norms Comparison",
+        "Methodology and Access",
+        "N1 百分位 作为主体解释",
+        "all",
+        "优先关注成长面向",
+        "O6, C5, E6",
+        "[object Object]",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "frontend_fallback",
+        "internal_metadata",
+        "selector_basis",
+        "selection_guidance",
+        "editor_notes",
+        "qa_notes",
+        "source_reference",
+        "import_policy",
+        "runtime_use",
+        "production_use_allowed"
+      ],
+      "metadata_leak_terms": [
+        "internal_metadata",
+        "selector_basis",
+        "selection_guidance",
+        "editor_notes",
+        "qa_notes",
+        "source_reference",
+        "import_policy",
+        "runtime_use",
+        "production_use_allowed"
+      ],
+      "contextual_forbidden_rules": {
+        "all": {
+          "term": "all",
+          "scope": "user_visible_rendered_text_only",
+          "match_mode": "standalone_visible_token_exact",
+          "raw_substring_scan_allowed": false,
+          "case_sensitive": false,
+          "normalization": "trim visible text node; collapse whitespace; compare exact visible token",
+          "allowed_context": [
+            "words containing all, including 'callout' and 'allowlisted'",
+            "schema kind values",
+            "internal code strings",
+            "non-rendered JSON, TypeScript, fixture, or QA metadata"
+          ],
+          "forbidden_context": [
+            "standalone visible line exactly equal to 'all'",
+            "placeholder/debug leakage rendered in facet rows or table cells",
+            "raw internal placeholder exposed to user-visible UI"
+          ],
+          "implementation_warning": "Do not use raw substring matching for 'all'. Do not fail 'callout', 'allowlisted', or internal code strings."
+        },
+        "N1 百分位": {
+          "term": "N1 百分位",
+          "scope": "facet_details",
+          "allowed_context": [
+            "full facet directory",
+            "metric row",
+            "appendix-like score table"
+          ],
+          "forbidden_context": [
+            "facet_details primary narrative",
+            "anomaly card body",
+            "section intro"
+          ]
+        }
+      },
+      "evidence": [
+        "fap-web/tests/contracts/big5-o59-rendered-preview.contract.test.tsx",
+        "P0-2 merged rendered preview contract for mobile viewport"
+      ],
+      "notes": "Mobile result page uses the backend O59 payload fixture and checks must-render / must-not-render terms."
+    },
+    {
+      "surface_key": "pdf",
+      "status": "pending_surface",
+      "coverage": "no_o59_pdf_render_harness_in_p1_3_api_scope",
+      "expected_sections": [
+        "hero_summary",
+        "domains_overview",
+        "domain_deep_dive",
+        "facet_details",
+        "core_portrait",
+        "norms_comparison",
+        "action_plan",
+        "methodology_and_access"
+      ],
+      "expected_visible_terms": [
+        "敏锐的独立思考者",
+        "O59 / C32 / E20 / A55 / N68",
+        "高敏感 × 中高开放 × 克制进入",
+        "Big Five 描述的是连续人格特质，不是固定人格类型",
+        "不用于医学诊断",
+        "不用于心理治疗",
+        "不用于招聘筛选",
+        "画像名只是辅助理解标签",
+        "不是没尽责",
+        "不是社交差",
+        "不是玻璃心",
+        "工作",
+        "关系",
+        "压力",
+        "个人成长",
+        "30 / 60 / 90 天路径",
+        "方法与边界说明"
+      ],
+      "forbidden_visible_terms": [
+        "A compact overview",
+        "Five-domain distribution with percentile-oriented context",
+        "Focused read on domain-level strengths",
+        "Facet-level signals arranged for quick interpretation",
+        "Norms Comparison",
+        "Methodology and Access",
+        "N1 百分位 作为主体解释",
+        "all",
+        "优先关注成长面向",
+        "O6, C5, E6",
+        "[object Object]",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "frontend_fallback",
+        "internal_metadata",
+        "selector_basis",
+        "selection_guidance",
+        "editor_notes",
+        "qa_notes",
+        "source_reference",
+        "import_policy",
+        "runtime_use",
+        "production_use_allowed"
+      ],
+      "metadata_leak_terms": [
+        "internal_metadata",
+        "selector_basis",
+        "selection_guidance",
+        "editor_notes",
+        "qa_notes",
+        "source_reference",
+        "import_policy",
+        "runtime_use",
+        "production_use_allowed"
+      ],
+      "contextual_forbidden_rules": {
+        "all": {
+          "term": "all",
+          "scope": "user_visible_rendered_text_only",
+          "match_mode": "standalone_visible_token_exact",
+          "raw_substring_scan_allowed": false,
+          "case_sensitive": false,
+          "normalization": "trim visible text node; collapse whitespace; compare exact visible token",
+          "allowed_context": [
+            "words containing all, including 'callout' and 'allowlisted'",
+            "schema kind values",
+            "internal code strings",
+            "non-rendered JSON, TypeScript, fixture, or QA metadata"
+          ],
+          "forbidden_context": [
+            "standalone visible line exactly equal to 'all'",
+            "placeholder/debug leakage rendered in facet rows or table cells",
+            "raw internal placeholder exposed to user-visible UI"
+          ],
+          "implementation_warning": "Do not use raw substring matching for 'all'. Do not fail 'callout', 'allowlisted', or internal code strings."
+        },
+        "N1 百分位": {
+          "term": "N1 百分位",
+          "scope": "facet_details",
+          "allowed_context": [
+            "full facet directory",
+            "metric row",
+            "appendix-like score table"
+          ],
+          "forbidden_context": [
+            "facet_details primary narrative",
+            "anomaly card body",
+            "section intro"
+          ]
+        }
+      },
+      "evidence": [],
+      "notes": "Do not claim pass until an O59 PDF render harness exists and checks public rendered output."
+    },
+    {
+      "surface_key": "share_card",
+      "status": "pending_surface",
+      "coverage": "no_o59_share_card_render_harness_in_p1_3_api_scope",
+      "expected_sections": [
+        "hero_summary",
+        "methodology_and_access"
+      ],
+      "expected_visible_terms": [
+        "敏锐的独立思考者",
+        "高敏感 × 中高开放 × 克制进入",
+        "画像名只是辅助理解标签"
+      ],
+      "forbidden_visible_terms": [
+        "A compact overview",
+        "Five-domain distribution with percentile-oriented context",
+        "Focused read on domain-level strengths",
+        "Facet-level signals arranged for quick interpretation",
+        "Norms Comparison",
+        "Methodology and Access",
+        "N1 百分位 作为主体解释",
+        "all",
+        "优先关注成长面向",
+        "O6, C5, E6",
+        "[object Object]",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "frontend_fallback",
+        "internal_metadata",
+        "selector_basis",
+        "selection_guidance",
+        "editor_notes",
+        "qa_notes",
+        "source_reference",
+        "import_policy",
+        "runtime_use",
+        "production_use_allowed"
+      ],
+      "metadata_leak_terms": [
+        "internal_metadata",
+        "selector_basis",
+        "selection_guidance",
+        "editor_notes",
+        "qa_notes",
+        "source_reference",
+        "import_policy",
+        "runtime_use",
+        "production_use_allowed"
+      ],
+      "contextual_forbidden_rules": {
+        "all": {
+          "term": "all",
+          "scope": "user_visible_rendered_text_only",
+          "match_mode": "standalone_visible_token_exact",
+          "raw_substring_scan_allowed": false,
+          "case_sensitive": false,
+          "normalization": "trim visible text node; collapse whitespace; compare exact visible token",
+          "allowed_context": [
+            "words containing all, including 'callout' and 'allowlisted'",
+            "schema kind values",
+            "internal code strings",
+            "non-rendered JSON, TypeScript, fixture, or QA metadata"
+          ],
+          "forbidden_context": [
+            "standalone visible line exactly equal to 'all'",
+            "placeholder/debug leakage rendered in facet rows or table cells",
+            "raw internal placeholder exposed to user-visible UI"
+          ],
+          "implementation_warning": "Do not use raw substring matching for 'all'. Do not fail 'callout', 'allowlisted', or internal code strings."
+        },
+        "N1 百分位": {
+          "term": "N1 百分位",
+          "scope": "facet_details",
+          "allowed_context": [
+            "full facet directory",
+            "metric row",
+            "appendix-like score table"
+          ],
+          "forbidden_context": [
+            "facet_details primary narrative",
+            "anomaly card body",
+            "section intro"
+          ]
+        }
+      },
+      "evidence": [],
+      "notes": "Do not claim pass until an O59 share-card harness verifies safe summary rendering."
+    },
+    {
+      "surface_key": "history",
+      "status": "pending_surface",
+      "coverage": "existing_history_harness_is_not_o59_v2_payload_rendered_preview",
+      "expected_sections": [
+        "safe_summary"
+      ],
+      "expected_visible_terms": [
+        "敏锐的独立思考者"
+      ],
+      "forbidden_visible_terms": [
+        "A compact overview",
+        "Five-domain distribution with percentile-oriented context",
+        "Focused read on domain-level strengths",
+        "Facet-level signals arranged for quick interpretation",
+        "Norms Comparison",
+        "Methodology and Access",
+        "N1 百分位 作为主体解释",
+        "all",
+        "优先关注成长面向",
+        "O6, C5, E6",
+        "[object Object]",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "frontend_fallback",
+        "internal_metadata",
+        "selector_basis",
+        "selection_guidance",
+        "editor_notes",
+        "qa_notes",
+        "source_reference",
+        "import_policy",
+        "runtime_use",
+        "production_use_allowed"
+      ],
+      "metadata_leak_terms": [
+        "internal_metadata",
+        "selector_basis",
+        "selection_guidance",
+        "editor_notes",
+        "qa_notes",
+        "source_reference",
+        "import_policy",
+        "runtime_use",
+        "production_use_allowed"
+      ],
+      "contextual_forbidden_rules": {
+        "all": {
+          "term": "all",
+          "scope": "user_visible_rendered_text_only",
+          "match_mode": "standalone_visible_token_exact",
+          "raw_substring_scan_allowed": false,
+          "case_sensitive": false,
+          "normalization": "trim visible text node; collapse whitespace; compare exact visible token",
+          "allowed_context": [
+            "words containing all, including 'callout' and 'allowlisted'",
+            "schema kind values",
+            "internal code strings",
+            "non-rendered JSON, TypeScript, fixture, or QA metadata"
+          ],
+          "forbidden_context": [
+            "standalone visible line exactly equal to 'all'",
+            "placeholder/debug leakage rendered in facet rows or table cells",
+            "raw internal placeholder exposed to user-visible UI"
+          ],
+          "implementation_warning": "Do not use raw substring matching for 'all'. Do not fail 'callout', 'allowlisted', or internal code strings."
+        },
+        "N1 百分位": {
+          "term": "N1 百分位",
+          "scope": "facet_details",
+          "allowed_context": [
+            "full facet directory",
+            "metric row",
+            "appendix-like score table"
+          ],
+          "forbidden_context": [
+            "facet_details primary narrative",
+            "anomaly card body",
+            "section intro"
+          ]
+        }
+      },
+      "evidence": [],
+      "notes": "Do not claim pass until history consumes a backend-safe summary for this V2 payload without metadata leakage."
+    },
+    {
+      "surface_key": "compare",
+      "status": "pending_surface",
+      "coverage": "existing_compare_harness_is_not_o59_v2_payload_rendered_preview",
+      "expected_sections": [
+        "safe_summary"
+      ],
+      "expected_visible_terms": [
+        "敏锐的独立思考者"
+      ],
+      "forbidden_visible_terms": [
+        "A compact overview",
+        "Five-domain distribution with percentile-oriented context",
+        "Focused read on domain-level strengths",
+        "Facet-level signals arranged for quick interpretation",
+        "Norms Comparison",
+        "Methodology and Access",
+        "N1 百分位 作为主体解释",
+        "all",
+        "优先关注成长面向",
+        "O6, C5, E6",
+        "[object Object]",
+        "deferred_to_future",
+        "policy_not_shipped",
+        "frontend_fallback",
+        "internal_metadata",
+        "selector_basis",
+        "selection_guidance",
+        "editor_notes",
+        "qa_notes",
+        "source_reference",
+        "import_policy",
+        "runtime_use",
+        "production_use_allowed"
+      ],
+      "metadata_leak_terms": [
+        "internal_metadata",
+        "selector_basis",
+        "selection_guidance",
+        "editor_notes",
+        "qa_notes",
+        "source_reference",
+        "import_policy",
+        "runtime_use",
+        "production_use_allowed"
+      ],
+      "contextual_forbidden_rules": {
+        "all": {
+          "term": "all",
+          "scope": "user_visible_rendered_text_only",
+          "match_mode": "standalone_visible_token_exact",
+          "raw_substring_scan_allowed": false,
+          "case_sensitive": false,
+          "normalization": "trim visible text node; collapse whitespace; compare exact visible token",
+          "allowed_context": [
+            "words containing all, including 'callout' and 'allowlisted'",
+            "schema kind values",
+            "internal code strings",
+            "non-rendered JSON, TypeScript, fixture, or QA metadata"
+          ],
+          "forbidden_context": [
+            "standalone visible line exactly equal to 'all'",
+            "placeholder/debug leakage rendered in facet rows or table cells",
+            "raw internal placeholder exposed to user-visible UI"
+          ],
+          "implementation_warning": "Do not use raw substring matching for 'all'. Do not fail 'callout', 'allowlisted', or internal code strings."
+        },
+        "N1 百分位": {
+          "term": "N1 百分位",
+          "scope": "facet_details",
+          "allowed_context": [
+            "full facet directory",
+            "metric row",
+            "appendix-like score table"
+          ],
+          "forbidden_context": [
+            "facet_details primary narrative",
+            "anomaly card body",
+            "section intro"
+          ]
+        }
+      },
+      "evidence": [],
+      "notes": "Do not claim pass until compare consumes a backend-safe summary for this V2 payload without metadata leakage."
+    }
+  ],
+  "banned_rendered_terms_union": [
+    "A compact overview",
+    "Five-domain distribution with percentile-oriented context",
+    "Focused read on domain-level strengths",
+    "Facet-level signals arranged for quick interpretation",
+    "Norms Comparison",
+    "Methodology and Access",
+    "N1 百分位 作为主体解释",
+    "all",
+    "优先关注成长面向",
+    "O6, C5, E6",
+    "[object Object]",
+    "deferred_to_future",
+    "policy_not_shipped",
+    "frontend_fallback",
+    "internal_metadata",
+    "selector_basis",
+    "selection_guidance",
+    "editor_notes",
+    "qa_notes",
+    "source_reference",
+    "import_policy",
+    "runtime_use",
+    "production_use_allowed"
+  ],
+  "status_counts": {
+    "pass": 2,
+    "pending_surface": 4,
+    "fail": 0
+  }
+}
