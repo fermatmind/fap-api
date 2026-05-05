@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Services\BigFive\ResultPageV2\Composer;
 
 use App\Services\BigFive\ResultPageV2\BigFiveResultPageV2Contract;
+use App\Services\BigFive\ResultPageV2\ContentAssets\BigFiveV2ContentAssetLookup;
+use App\Services\BigFive\ResultPageV2\ContentAssets\BigFiveV2ResolvedContentAsset;
 use App\Services\BigFive\ResultPageV2\Selector\BigFiveV2SelectedAssetRef;
 use App\Services\BigFive\ResultPageV2\Selector\BigFiveV2SelectionResult;
 use App\Services\BigFive\ResultPageV2\Selector\BigFiveV2SelectorInput;
@@ -57,7 +59,40 @@ final class BigFiveV2PilotPayloadComposer
         'ready_for_runtime',
         'ready_for_production',
         'frontend_fallback',
+        'source_trace',
+        'repair_log_refs',
+        'asset_id',
+        'asset_key',
+        'asset_version',
+        'asset_layer',
+        'asset_type',
+        'applies_to',
+        'avoid_when',
+        'body_quality',
+        'can_combine_with',
+        'cannot_combine_with',
+        'copy_role',
+        'dedupe_group',
+        'fallback_allowed',
+        'internal_combination_key',
+        'section_key',
+        'slot_key',
+        'qa_status',
+        'reading_mode',
+        'render_surface',
+        'selection_priority',
+        'selection_specificity',
+        'source_trace',
+        'must_include_assets',
+        'must_suppress_assets',
+        'recommended_trait_band_assets',
+        'recommended_coupling_assets',
+        'recommended_facet_assets',
     ];
+
+    public function __construct(
+        private readonly BigFiveV2ContentAssetLookup $contentAssetLookup = new BigFiveV2ContentAssetLookup(),
+    ) {}
 
     /**
      * @return array<string,array<string,mixed>>
@@ -103,6 +138,16 @@ final class BigFiveV2PilotPayloadComposer
             $asset = $assetsByKey[$ref->assetKey] ?? null;
             if ($asset === null) {
                 throw new RuntimeException("Selected Big Five V2 asset ref does not resolve: {$ref->assetKey}");
+            }
+
+            if ($input->enableResolvedCouplingRefs) {
+                $modules[$ref->moduleKey]['blocks'][] = $this->blockFromResolvedContentAsset(
+                    $ref,
+                    $asset,
+                    $this->contentAssetLookup->resolve($ref, $input),
+                );
+
+                continue;
             }
 
             $publicPayload = $asset['public_payload'] ?? null;
@@ -154,6 +199,29 @@ final class BigFiveV2PilotPayloadComposer
             'registry_refs' => ["{$ref->registryKey}:{$ref->assetKey}"],
             'safety_level' => $this->contractSafetyLevel((string) ($asset['safety_level'] ?? '')),
             'evidence_level' => $this->contractEvidenceLevel((string) ($asset['evidence_level'] ?? '')),
+            'shareable' => false,
+            'content_source' => 'registry_asset',
+            'fallback_policy' => 'omit_block',
+        ];
+    }
+
+    /**
+     * @param  array<string,mixed>  $selectorAsset
+     * @return array<string,mixed>
+     */
+    private function blockFromResolvedContentAsset(BigFiveV2SelectedAssetRef $ref, array $selectorAsset, BigFiveV2ResolvedContentAsset $resolved): array
+    {
+        return [
+            'block_key' => $ref->blockKey,
+            'block_kind' => (string) ($selectorAsset['block_kind'] ?? self::MODULE_BLOCK_KINDS[$ref->moduleKey] ?? ''),
+            'module_key' => $ref->moduleKey,
+            'content' => $this->filterPublicPayload($resolved->publicContent),
+            'projection_refs' => $this->projectionRefsForRegistry($ref->registryKey),
+            'registry_refs' => [
+                $this->publicRegistryKey($ref->registryKey).":{$resolved->assetKey}",
+            ],
+            'safety_level' => $this->contractSafetyLevel((string) ($selectorAsset['safety_level'] ?? data_get($resolved->publicContent, 'safety_tags.0', ''))),
+            'evidence_level' => $this->contractEvidenceLevel((string) ($selectorAsset['evidence_level'] ?? data_get($resolved->publicContent, 'asset_layer', ''))),
             'shareable' => false,
             'content_source' => 'registry_asset',
             'fallback_policy' => 'omit_block',
@@ -266,8 +334,18 @@ final class BigFiveV2PilotPayloadComposer
             'domain_registry' => ['domains', 'domain_bands'],
             'profile_signature_registry' => ['profile_signature', 'interpretation_scope'],
             'coupling_registry' => ['dominant_couplings', 'domain_bands'],
-            'scenario_registry' => ['domain_bands', 'interpretation_scope'],
+            'scenario_registry', 'action_plan_registry' => ['domain_bands', 'interpretation_scope'],
+            'facet_pattern_registry' => ['facet_highlights', 'quality_status'],
             default => ['interpretation_scope', 'quality_status', 'norm_status'],
+        };
+    }
+
+    private function publicRegistryKey(string $registryKey): string
+    {
+        return match ($registryKey) {
+            'facet_pattern_registry' => 'facet_registry',
+            'action_plan_registry' => 'scenario_registry',
+            default => $registryKey,
         };
     }
 
