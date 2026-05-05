@@ -38,6 +38,35 @@
       "scenario_key": 32
     }
   },
+  "public_pilot_resolution_policy": {
+    "policy_status": "frozen_for_public_pilot_phase_1",
+    "runtime_use": "not_runtime",
+    "production_use_allowed": false,
+    "allowed_resolution_modes": [
+      "approved_alias_mapping",
+      "approved_key_normalization",
+      "explicit_suppression_policy"
+    ],
+    "disallowed_resolution_modes": [
+      "new_body_copy_generation",
+      "new_report_generation",
+      "frontend_interpretation_fallback",
+      "production_gate_enablement",
+      "runtime_selector_rewrite"
+    ],
+    "current_unresolved_reference_count": 92,
+    "current_unresolved_by_type": {
+      "coupling_key": 41,
+      "profile_key": 19,
+      "scenario_key": 32
+    },
+    "phase_1_freeze": {
+      "public_sel_1_may_resolve_refs": false,
+      "subsequent_resolution_prs_must_preserve_body_copy": true,
+      "subsequent_resolution_prs_must_preserve_staging_only_flags": true,
+      "selected_unresolved_refs_must_remain_suppressed_until_resolved": true
+    }
+  },
   "checks": [
     {
       "check_key": "selector_domain_registry_to_trait_band_assets",
