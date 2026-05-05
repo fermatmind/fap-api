@@ -266,6 +266,18 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_bigfive_v2_routing_adapter_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/BigFive/ResultPageV2/Routing/BigFiveV2BandMapper.php',
+            'backend/app/Services/BigFive/ResultPageV2/Routing/BigFiveV2ProjectionRouteInputAdapter.php',
+            'backend/app/Services/BigFive/ResultPageV2/Routing/BigFiveV2RouteInput.php',
+            'backend/app/Services/BigFive/ResultPageV2/Routing/BigFiveV2RouteMatrixLookup.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_bigfive_v2_pilot_runtime_flag_wrapper_change(): void
     {
         $changed = [
@@ -507,7 +519,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
     {
         return $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveResultPageV2RuntimeWrapper.php'
             || $file === 'backend/app/Services/BigFive/ResultPageV2/BigFiveV2PilotRuntimeObservability.php'
-            || preg_match('#^backend/app/Services/BigFive/ResultPageV2/(ContentAssets|RouteMatrix|Selector|Composer|Access)/[A-Za-z0-9_]+\.php$#', $file) === 1;
+            || preg_match('#^backend/app/Services/BigFive/ResultPageV2/(ContentAssets|RouteMatrix|Selector|Composer|Access|Routing)/[A-Za-z0-9_]+\.php$#', $file) === 1;
     }
 
     /**
