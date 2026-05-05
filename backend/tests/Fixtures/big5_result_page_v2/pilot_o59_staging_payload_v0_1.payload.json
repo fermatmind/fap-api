@@ -1,0 +1,501 @@
+{
+    "big5_result_page_v2": {
+        "schema_version": "fap.big5.result_page.v2",
+        "payload_key": "big5_result_page_v2",
+        "scale_code": "BIG5_OCEAN",
+        "fixture_key": "pilot_o59_staging_payload_v0_1",
+        "content_version": "big5_result_page_v2.pilot_payload.v0_1",
+        "package_version": "B5-CONTENT-staging-pilot.v0_1",
+        "canonical_profile_key": "sensitive_independent_thinker",
+        "profile_label_zh": "敏锐的独立思考者",
+        "projection_v2": {
+            "schema_version": "fap.big5.projection.v2",
+            "attempt_id": "attempt_big5_o59_pilot_fixture",
+            "result_version": "big5_result_page_v2.pilot_payload.v0_1",
+            "scale_code": "BIG5_OCEAN",
+            "form_code": "big5_120",
+            "domains": {
+                "O": {
+                    "score": 59,
+                    "band": "mid"
+                },
+                "C": {
+                    "score": 32,
+                    "band": "low"
+                },
+                "E": {
+                    "score": 20,
+                    "band": "low"
+                },
+                "A": {
+                    "score": 55,
+                    "band": "mid"
+                },
+                "N": {
+                    "score": 68,
+                    "band": "high"
+                }
+            },
+            "domain_bands": {
+                "O": "mid",
+                "C": "low",
+                "E": "low",
+                "A": "mid",
+                "N": "high"
+            },
+            "facets": [],
+            "facet_highlights": [],
+            "norm_status": "CALIBRATED",
+            "norm_group_id": "pilot_fixture_norm_group",
+            "norm_version": "pilot_fixture_norm_v0_1",
+            "quality_status": "valid",
+            "quality_flags": [],
+            "profile_signature": {
+                "signature_key": "sensitive_independent_thinker",
+                "label_key": "signature.sensitive_independent_thinker",
+                "is_fixed_type": false,
+                "system": "trait_signature",
+                "label_zh": "敏锐的独立思考者",
+                "axis_zh": "低外向 × 高情绪 × 低尽责"
+            },
+            "dominant_couplings": [
+                {
+                    "coupling_key": "n_high_x_o_mid_high",
+                    "strength": "route_matrix_candidate"
+                },
+                {
+                    "coupling_key": "n_high_x_e_low",
+                    "strength": "route_matrix_candidate"
+                },
+                {
+                    "coupling_key": "e_low_x_c_low",
+                    "strength": "route_matrix_candidate"
+                },
+                {
+                    "coupling_key": "c_low_x_n_high",
+                    "strength": "route_matrix_candidate"
+                },
+                {
+                    "coupling_key": "a_mid_x_n_high",
+                    "strength": "route_matrix_candidate"
+                }
+            ],
+            "interpretation_scope": "high_tension_profile",
+            "confidence_flags": [
+                "pilot_staging_fixture",
+                "selector_refs_only"
+            ],
+            "safety_flags": [
+                "non_diagnostic",
+                "not_type_system",
+                "staging_only"
+            ],
+            "public_fields": [
+                "domains",
+                "domain_bands",
+                "facet_highlights",
+                "profile_signature",
+                "dominant_couplings",
+                "interpretation_scope"
+            ],
+            "internal_only_fields": []
+        },
+        "modules": [
+            {
+                "module_key": "module_00_trust_bar",
+                "blocks": [
+                    {
+                        "block_key": "module_00_trust_bar.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "trust_bar",
+                        "module_key": "module_00_trust_bar",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "method_registry:pilot_boundary"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "backend_required"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_01_hero",
+                "blocks": [
+                    {
+                        "block_key": "module_01_hero.profile_signature_registry.sensitive_independent_thinker.v0_3",
+                        "block_kind": "hero_summary",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "label_zh": "敏锐的独立思考者",
+                            "label_role_zh": "辅助理解标签",
+                            "axis_zh": "高敏感 × 中高开放 × 克制进入",
+                            "summary_zh": "你更像是在内部完成高强度扫描，再决定是否进入场景的人。",
+                            "body_zh": "你更像是在内部完成高强度扫描，再决定是否进入场景的人。 这个标签只用于快速理解当前分数结构，不代表身份归类。",
+                            "action_zh": "先看主轴，再看分数、耦合和行动建议。"
+                        },
+                        "projection_refs": [
+                            "profile_signature",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "profile_signature_registry:asset.module_01_hero.profile_signature_registry.sensitive_independent_thinker.v0_3"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_02_quick_understanding",
+                "blocks": [
+                    {
+                        "block_key": "module_02_quick_understanding.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "quick_cards",
+                        "module_key": "module_02_quick_understanding",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "state_scope_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_03_trait_deep_dive",
+                "blocks": [
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.o_mid_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "title_zh": "开放性中位｜优势、代价与使用方式",
+                            "summary_zh": "开放性不是单独决定你的人格，而是与你的其他维度共同塑造现实表现。",
+                            "body_zh": "当开放性处在中位时，它会改变你面对任务、关系和压力时的默认路径。请结合耦合与场景模块理解，而不是单独下结论。",
+                            "benefit_zh": "可能帮助你更清楚地处理理解复杂性与新可能。",
+                            "cost_zh": "需要留心复杂性拖住行动。",
+                            "action_zh": "把新想法落成一个可验证动作。"
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:asset.module_03_trait_deep_dive.domain_registry.o_mid_deep_strategy.v0_3"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.c_low_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "title_zh": "尽责性偏低｜优势、代价与使用方式",
+                            "summary_zh": "尽责性不是单独决定你的人格，而是与你的其他维度共同塑造现实表现。",
+                            "body_zh": "当尽责性处在偏低时，它会改变你面对任务、关系和压力时的默认路径。请结合耦合与场景模块理解，而不是单独下结论。",
+                            "benefit_zh": "可能帮助你更清楚地处理计划、秩序与持续推进。",
+                            "cost_zh": "需要留心结构不足或过度紧绷。",
+                            "action_zh": "给任务设置阶段反馈和停止标准。"
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:asset.module_03_trait_deep_dive.domain_registry.c_low_deep_strategy.v0_3"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.e_low_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "title_zh": "外向性偏低｜优势、代价与使用方式",
+                            "summary_zh": "外向性不是单独决定你的人格，而是与你的其他维度共同塑造现实表现。",
+                            "body_zh": "当外向性处在偏低时，它会改变你面对任务、关系和压力时的默认路径。请结合耦合与场景模块理解，而不是单独下结论。",
+                            "benefit_zh": "可能帮助你更清楚地处理表达、互动与外部能量。",
+                            "cost_zh": "需要留心进入过慢或过度外放。",
+                            "action_zh": "为重要场景设计合适表达节奏。"
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:asset.module_03_trait_deep_dive.domain_registry.e_low_deep_strategy.v0_3"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.a_mid_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "title_zh": "宜人性中位｜优势、代价与使用方式",
+                            "summary_zh": "宜人性不是单独决定你的人格，而是与你的其他维度共同塑造现实表现。",
+                            "body_zh": "当宜人性处在中位时，它会改变你面对任务、关系和压力时的默认路径。请结合耦合与场景模块理解，而不是单独下结论。",
+                            "benefit_zh": "可能帮助你更清楚地处理合作、体谅与边界。",
+                            "cost_zh": "需要留心过度迎合或表达过硬。",
+                            "action_zh": "把边界说成合作条件。"
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:asset.module_03_trait_deep_dive.domain_registry.a_mid_deep_strategy.v0_3"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.n_high_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "title_zh": "情绪性偏高｜优势、代价与使用方式",
+                            "summary_zh": "情绪性不是单独决定你的人格，而是与你的其他维度共同塑造现实表现。",
+                            "body_zh": "当情绪性处在偏高时，它会改变你面对任务、关系和压力时的默认路径。请结合耦合与场景模块理解，而不是单独下结论。",
+                            "benefit_zh": "可能帮助你更清楚地处理压力体感与风险预警。",
+                            "cost_zh": "需要留心预警系统长期高负荷。",
+                            "action_zh": "命名来源、缩小动作、安排恢复。"
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:asset.module_03_trait_deep_dive.domain_registry.n_high_deep_strategy.v0_3"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_04_coupling",
+                "blocks": [
+                    {
+                        "block_key": "module_04_coupling.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "coupling_cards",
+                        "module_key": "module_04_coupling",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "coupling_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_05_facet_reframe",
+                "blocks": [
+                    {
+                        "block_key": "module_05_facet_reframe.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "facet_reframe",
+                        "module_key": "module_05_facet_reframe",
+                        "content": {
+                            "availability": "pending_asset_resolution",
+                            "facets": []
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "facet_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_06_application_matrix",
+                "blocks": [
+                    {
+                        "block_key": "module_06_application_matrix.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_07_collaboration_manual",
+                "blocks": [
+                    {
+                        "block_key": "module_07_collaboration_manual.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_08_share_save",
+                "blocks": [
+                    {
+                        "block_key": "module_08_share_save.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "share_save",
+                        "module_key": "module_08_share_save",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "share_safety_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_09_feedback_data_flywheel",
+                "blocks": [
+                    {
+                        "block_key": "module_09_feedback_data_flywheel.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "feedback_block",
+                        "module_key": "module_09_feedback_data_flywheel",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "state_scope_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_10_method_privacy",
+                "blocks": [
+                    {
+                        "block_key": "module_10_method_privacy.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "method_boundary",
+                        "module_key": "module_10_method_privacy",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "method_registry:pilot_boundary"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "backend_required"
+                    }
+                ]
+            }
+        ]
+    }
+}
