@@ -3706,6 +3706,23 @@
                 ]
             }
         },
+        "/api/v0.5/seo/sitemap-source": {
+            "get": {
+                "operationId": "get_api_v0_5_seo_sitemap_source",
+                "tags": [
+                    "api:v0.5"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_5\\SEO\\SitemapSourceController@index",
+                "x-laravel-middleware": [
+                    "api"
+                ]
+            }
+        },
         "/api/v0.5/support/articles": {
             "get": {
                 "operationId": "get_api_v0_5_support_articles",

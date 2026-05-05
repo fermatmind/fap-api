@@ -56,26 +56,7 @@ class SitemapGenerator
 
     public function generate(): array
     {
-        $locale = (string) config('app.locale', 'en');
-
-        $urls = array_merge(
-            $this->getScaleUrls($locale),
-            $this->getArticleUrls(),
-            $this->getCareerJobUrls(),
-            $this->getCareerGuideUrls(),
-            $this->getCareerDatasetUrls(),
-            $this->getPersonalityUrls(),
-            $this->getTopicUrls()
-        );
-
-        $urls = collect($urls)
-            ->unique('loc')
-            ->values()
-            ->all();
-
-        usort($urls, static function (array $a, array $b): int {
-            return strcmp((string) ($a['loc'] ?? ''), (string) ($b['loc'] ?? ''));
-        });
+        $urls = $this->generateUrls();
 
         $slugList = [];
         $maxUpdatedAt = null;
@@ -105,6 +86,32 @@ class SitemapGenerator
             'slug_count' => count($slugList),
             'max_updated_at' => $maxUpdatedAt ? $maxUpdatedAt->toDateTimeString() : '',
         ];
+    }
+
+    public function generateUrls(): array
+    {
+        $locale = (string) config('app.locale', 'en');
+
+        $urls = array_merge(
+            $this->getScaleUrls($locale),
+            $this->getArticleUrls(),
+            $this->getCareerJobUrls(),
+            $this->getCareerGuideUrls(),
+            $this->getCareerDatasetUrls(),
+            $this->getPersonalityUrls(),
+            $this->getTopicUrls()
+        );
+
+        $urls = collect($urls)
+            ->unique('loc')
+            ->values()
+            ->all();
+
+        usort($urls, static function (array $a, array $b): int {
+            return strcmp((string) ($a['loc'] ?? ''), (string) ($b['loc'] ?? ''));
+        });
+
+        return $urls;
     }
 
     private function getScaleUrls(string $locale): array
