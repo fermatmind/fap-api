@@ -230,6 +230,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $changed = [
             'backend/app/Services/BigFive/ResultPageV2/ContentAssets/BigFiveV2AssetPackageLoader.php',
             'backend/app/Services/BigFive/ResultPageV2/RouteMatrix/BigFiveV2RouteMatrixParser.php',
+            'backend/app/Services/BigFive/ResultPageV2/Selector/BigFiveV2DeterministicSelector.php',
         ];
 
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
@@ -434,7 +435,7 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
 
     private function isBigFiveV2PilotSupportFile(string $file): bool
     {
-        return preg_match('#^backend/app/Services/BigFive/ResultPageV2/(ContentAssets|RouteMatrix)/[A-Za-z0-9_]+\.php$#', $file) === 1;
+        return preg_match('#^backend/app/Services/BigFive/ResultPageV2/(ContentAssets|RouteMatrix|Selector)/[A-Za-z0-9_]+\.php$#', $file) === 1;
     }
 
     /**
