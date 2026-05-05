@@ -312,6 +312,31 @@
                 "x-laravel-name": "api.v0_3.attempts.show"
             }
         },
+        "/api/v0.3/attempts/{id}/email-bind": {
+            "post": {
+                "operationId": "api.v0_3.attempts.email_bind",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\AttemptEmailBindingController@store",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "App\\Http\\Middleware\\ForcePublicAttemptRealm",
+                    "App\\Http\\Middleware\\FmTokenAuth",
+                    "App\\Http\\Middleware\\EnsureUuidRouteParams:id"
+                ],
+                "x-laravel-name": "api.v0_3.attempts.email_bind"
+            }
+        },
         "/api/v0.3/attempts/{id}/enneagram/observation": {
             "get": {
                 "operationId": "api.v0_3.attempts.enneagram.observation.show",

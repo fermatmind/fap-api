@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\V0_3\AttemptEmailBindingController;
 use App\Http\Controllers\API\V0_3\AttemptInviteUnlockController;
 use App\Http\Controllers\API\V0_3\AttemptProgressController;
 use App\Http\Controllers\API\V0_3\AttemptReadController;
@@ -214,6 +215,10 @@ Route::prefix('v0.3')->middleware([
                 ->middleware(['throttle:api_attempt_submit', \App\Http\Middleware\FmTokenAuth::class])
                 ->defaults('public_realm', true)
                 ->name('api.v0_3.attempts.submit');
+            Route::post('/attempts/{id}/email-bind', [AttemptEmailBindingController::class, 'store'])
+                ->middleware([\App\Http\Middleware\FmTokenAuth::class, 'uuid:id'])
+                ->defaults('public_realm', true)
+                ->name('api.v0_3.attempts.email_bind');
             Route::put('/attempts/{attempt_id}/progress', [AttemptProgressController::class, 'upsert'])
                 ->middleware('uuid:attempt_id');
             Route::get('/attempts/{attempt_id}/progress', [AttemptProgressController::class, 'show'])
