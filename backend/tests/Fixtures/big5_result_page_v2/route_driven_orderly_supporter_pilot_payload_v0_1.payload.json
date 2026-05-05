@@ -1,0 +1,3208 @@
+{
+    "big5_result_page_v2": {
+        "schema_version": "fap.big5.result_page.v2",
+        "payload_key": "big5_result_page_v2",
+        "scale_code": "BIG5_OCEAN",
+        "fixture_key": "pilot_o59_staging_payload_v0_1",
+        "content_version": "big5_result_page_v2.pilot_payload.v0_1",
+        "package_version": "B5-CONTENT-staging-pilot.v0_1",
+        "canonical_profile_key": "orderly_supporter",
+        "profile_label_zh": "秩序维护型支持者",
+        "projection_v2": {
+            "schema_version": "fap.big5.projection.v2",
+            "attempt_id": "attempt_big5_o59_pilot_fixture",
+            "result_version": "big5_result_page_v2.pilot_payload.v0_1",
+            "scale_code": "BIG5_OCEAN",
+            "form_code": "big5_120",
+            "domains": {
+                "O": {
+                    "score": 1,
+                    "band": "very_low"
+                },
+                "C": {
+                    "score": 1,
+                    "band": "very_low"
+                },
+                "E": {
+                    "score": 1,
+                    "band": "very_low"
+                },
+                "A": {
+                    "score": 5,
+                    "band": "very_high"
+                },
+                "N": {
+                    "score": 1,
+                    "band": "very_low"
+                }
+            },
+            "domain_bands": {
+                "O": "very_low",
+                "C": "very_low",
+                "E": "very_low",
+                "A": "very_high",
+                "N": "very_low"
+            },
+            "facets": [],
+            "facet_highlights": [],
+            "norm_status": "CALIBRATED",
+            "norm_group_id": "pilot_fixture_norm_group",
+            "norm_version": "pilot_fixture_norm_v0_1",
+            "quality_status": "valid",
+            "quality_flags": [],
+            "profile_signature": {
+                "signature_key": "orderly_supporter",
+                "label_key": "signature.orderly_supporter",
+                "is_fixed_type": false,
+                "system": "trait_signature",
+                "label_zh": "秩序维护型支持者",
+                "axis_zh": "实际五维路由｜低情绪 / 低开放 / 低尽责"
+            },
+            "dominant_couplings": [
+                {
+                    "coupling_key": "e_low_x_c_low",
+                    "strength": "route_matrix_candidate"
+                }
+            ],
+            "interpretation_scope": "high_tension_profile",
+            "confidence_flags": [
+                "pilot_staging_fixture",
+                "selector_refs_only"
+            ],
+            "safety_flags": [
+                "non_diagnostic",
+                "not_type_system",
+                "staging_only"
+            ],
+            "public_fields": [
+                "domains",
+                "domain_bands",
+                "facet_highlights",
+                "profile_signature",
+                "dominant_couplings",
+                "interpretation_scope"
+            ],
+            "internal_only_fields": []
+        },
+        "modules": [
+            {
+                "module_key": "module_00_trust_bar",
+                "blocks": [
+                    {
+                        "block_key": "module_00_trust_bar.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "trust_bar",
+                        "module_key": "module_00_trust_bar",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "method_registry:pilot_boundary"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "backend_required"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_01_hero",
+                "blocks": [
+                    {
+                        "block_key": "module_01_hero.domain_registry.o_very_low_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "O",
+                                "label_zh": "开放性",
+                                "public_name_zh": "经验开放度",
+                                "domain_theme_zh": "新经验、复杂概念、审美变化和非标准答案"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "开放性明显偏低：稳定框架中的现实判断",
+                            "summary_zh": "你更容易信任熟悉路径、已验证经验和可落地方案。",
+                            "body_zh": "开放性处在明显偏低区间时，新的概念、审美变化和非标准答案通常不会自动吸引你。你更愿意先确认一件事是否可靠、是否必要、是否真的能改善现实，再决定要不要投入注意力。这样的结构能减少被新鲜感带跑的风险，也能让你在需要稳定执行的环境里保持清醒。代价是，当环境需要试错、跨界理解或重新定义问题时，你可能会先看到不确定和成本，而不是可能性。常见误读是把这种位置理解成“没有想象力”；更准确地说，你的开放性需要明确的现实入口。使用它时，可以把探索压缩成一个小实验，而不是要求自己立刻接受整套新框架。",
+                            "short_body_zh": "更信任熟悉路径和可验证方案；适合稳定落地，也需要给新经验留一个小入口。",
+                            "benefit_zh": "不容易被空洞概念和短期新鲜感裹挟，适合守住现实边界。",
+                            "cost_zh": "在需要试错、跨界理解或快速转换视角时，可能进入较慢。",
+                            "common_misread_zh": "这不等于没有想象力，而是新想法需要先通过现实价值检验。",
+                            "action_zh": "每周只选一个低风险新尝试，先问它能解决什么真实问题。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.o.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_01_hero.domain_registry.c_very_low_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "C",
+                                "label_zh": "尽责性",
+                                "public_name_zh": "秩序与推进力",
+                                "domain_theme_zh": "计划、秩序、自我约束、责任执行和持续完成"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "尽责性明显偏低：高流动系统与外部结构需求",
+                            "summary_zh": "你更依赖兴趣、状态、环境和即时反馈来启动与推进。",
+                            "body_zh": "尽责性明显偏低时，计划、排序、收尾和持续自我约束通常不是你的天然优势。你可能很清楚一件事重要，却仍难以稳定进入；也可能在灵感、压力或外部催化出现时突然推进很快。优势是弹性高，不容易被僵硬流程完全锁死，也更能适应变化中的机会。代价是，长期目标、重复任务和低反馈事务很容易被拖延。常见误读是把它写成懒或不负责；更准确地说，你的推进系统需要意义、反馈和外置结构。更好使用方式，是不要等待自律爆发，而是把开始做得足够短、足够具体、足够可见。",
+                            "short_body_zh": "不适合长期靠纯意志推进；需要外部结构、短启动和明确反馈。",
+                            "benefit_zh": "灵活度高，能在变化中保留转向空间。",
+                            "cost_zh": "长期任务、重复收尾和低反馈事务容易掉速。",
+                            "common_misread_zh": "这不等于懒或不负责，而是推进系统需要更强外部支架。",
+                            "action_zh": "把重要任务改成 5 分钟启动，并让进度对别人或工具可见。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.c.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_01_hero.domain_registry.e_very_low_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "E",
+                                "label_zh": "外向性",
+                                "public_name_zh": "社交能量与进入方式",
+                                "domain_theme_zh": "表达、互动、外部反馈、现场感和能量补给"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "外向性明显偏低：深度内收与低刺激进入",
+                            "summary_zh": "你更适合先观察、先内化，再选择性表达。",
+                            "body_zh": "外向性明显偏低时，你通常不会依赖高频互动、持续曝光和外部热闹来获得能量。你更可能在安静、低噪音和自主节奏里恢复判断，也更习惯先把信息放进内部处理。优势是你不容易被场面带跑，能保留深度观察和独立判断。代价是，如果洞察长期不外化，别人可能看不见你的价值，也误以为你冷淡或没有想法。常见误读是把它等同于社交差；更准确地说，你需要更低成本、更可控的进入方式。使用它时，不必强迫自己变得外放，可以先训练一句话表达、一段文字反馈或会后补充。",
+                            "short_body_zh": "低刺激、深处理、慢进入；重点不是变外放，而是让价值被看见。",
+                            "benefit_zh": "能保留独立观察和深度判断，不容易被场面牵着走。",
+                            "cost_zh": "表达太晚时，能力和判断可能不被看见。",
+                            "common_misread_zh": "不是社交差，而是更需要可控、低成本的进入方式。",
+                            "action_zh": "每次会议或讨论前准备一句观点，先让自己被看见一次。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.e.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_01_hero.domain_registry.a_very_high_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "A",
+                                "label_zh": "宜人性",
+                                "public_name_zh": "合作与边界方式",
+                                "domain_theme_zh": "共情、合作、冲突处理、关系承接和边界表达"
+                            },
+                            "band": {
+                                "internal_band": "very_high",
+                                "display_band_label": "明显偏高",
+                                "score_range_0_100": [
+                                    80,
+                                    100
+                                ],
+                                "internal_band_threshold": "B5_80_100"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "宜人性明显偏高：高承接系统与边界保护",
+                            "summary_zh": "你很容易先理解、先照顾、先维护关系整体感。",
+                            "body_zh": "宜人性明显偏高时，你会自然捕捉他人的需要、情绪和处境，也更容易主动缓和冲突、补位和承接。优势是共情、合作与关系修复能力强，能让人感到被理解和被照顾。代价是，如果边界不足，你可能把过多关系成本吸收到自己身上，甚至在不知不觉中替别人承担责任。常见误读是把你看成天生应该照顾别人；更准确地说，你的承接能力需要被保护，而不是被无限调用。更好使用方式，是在照顾他人前先确认自己的资源，明确哪些可以给，哪些需要保留。",
+                            "short_body_zh": "高共情、高承接、高合作；需要保护边界，避免被无限调用。",
+                            "benefit_zh": "能稳定关系、修复冲突，并让他人感到被理解。",
+                            "cost_zh": "容易过度承担关系成本，忽略自己的需求与恢复。",
+                            "common_misread_zh": "不是应该无限照顾别人，而是你的承接能力需要边界保护。",
+                            "action_zh": "在答应前先停三秒：我现在是否真的有资源承担这件事？",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.a.very_high.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_01_hero.domain_registry.n_very_low_hero_signal.v0_3",
+                        "block_kind": "trait_bars",
+                        "module_key": "module_01_hero",
+                        "content": {
+                            "trait": {
+                                "code": "N",
+                                "label_zh": "情绪性",
+                                "public_name_zh": "压力反应敏感度",
+                                "domain_theme_zh": "压力、评价、不确定性、关系张力和恢复负荷"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "情绪性明显偏低：低波动稳态与风险补偿",
+                            "summary_zh": "你通常不容易被短时压力、误解或不确定性推离基线。",
+                            "body_zh": "情绪性明显偏低时，你的压力反应系统整体更稳。很多突发变化、评价或关系张力不会立刻把你拉高，你也更容易在复杂环境中保持冷静。优势是恢复快、抗干扰强，不容易被小波动反复带走。代价是，你可能较晚注意到关系里的细小裂缝、环境里的早期风险，或别人已经承受的情绪成本。常见误读是把稳定看成完全没问题；更准确地说，低波动也需要保留风险敏感度。更好使用方式，是在保持稳定的同时主动检查早期信号，而不是只等问题变大。",
+                            "short_body_zh": "情绪系统偏稳，恢复快；需要主动补充早期风险觉察。",
+                            "benefit_zh": "能在压力和不确定中保持基线，不容易被小波动打乱。",
+                            "cost_zh": "可能较晚注意到关系张力、环境风险和他人情绪成本。",
+                            "common_misread_zh": "不是没有问题，而是你的系统不容易立刻被问题拉高。",
+                            "action_zh": "每周主动问一次：这里有没有被我低估的早期风险？",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.n.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_02_quick_understanding",
+                "blocks": [
+                    {
+                        "block_key": "module_02_quick_understanding.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "quick_cards",
+                        "module_key": "module_02_quick_understanding",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "state_scope_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_03_trait_deep_dive",
+                "blocks": [
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.o_very_low_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "O",
+                                "label_zh": "开放性",
+                                "public_name_zh": "经验开放度",
+                                "domain_theme_zh": "新经验、复杂概念、审美变化和非标准答案"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "开放性明显偏低：稳定框架中的现实判断",
+                            "summary_zh": "你更容易信任熟悉路径、已验证经验和可落地方案。",
+                            "body_zh": "开放性处在明显偏低区间时，新的概念、审美变化和非标准答案通常不会自动吸引你。你更愿意先确认一件事是否可靠、是否必要、是否真的能改善现实，再决定要不要投入注意力。这样的结构能减少被新鲜感带跑的风险，也能让你在需要稳定执行的环境里保持清醒。代价是，当环境需要试错、跨界理解或重新定义问题时，你可能会先看到不确定和成本，而不是可能性。常见误读是把这种位置理解成“没有想象力”；更准确地说，你的开放性需要明确的现实入口。使用它时，可以把探索压缩成一个小实验，而不是要求自己立刻接受整套新框架。",
+                            "short_body_zh": "更信任熟悉路径和可验证方案；适合稳定落地，也需要给新经验留一个小入口。",
+                            "benefit_zh": "不容易被空洞概念和短期新鲜感裹挟，适合守住现实边界。",
+                            "cost_zh": "在需要试错、跨界理解或快速转换视角时，可能进入较慢。",
+                            "common_misread_zh": "这不等于没有想象力，而是新想法需要先通过现实价值检验。",
+                            "action_zh": "每周只选一个低风险新尝试，先问它能解决什么真实问题。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.o.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.c_very_low_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "C",
+                                "label_zh": "尽责性",
+                                "public_name_zh": "秩序与推进力",
+                                "domain_theme_zh": "计划、秩序、自我约束、责任执行和持续完成"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "尽责性明显偏低：高流动系统与外部结构需求",
+                            "summary_zh": "你更依赖兴趣、状态、环境和即时反馈来启动与推进。",
+                            "body_zh": "尽责性明显偏低时，计划、排序、收尾和持续自我约束通常不是你的天然优势。你可能很清楚一件事重要，却仍难以稳定进入；也可能在灵感、压力或外部催化出现时突然推进很快。优势是弹性高，不容易被僵硬流程完全锁死，也更能适应变化中的机会。代价是，长期目标、重复任务和低反馈事务很容易被拖延。常见误读是把它写成懒或不负责；更准确地说，你的推进系统需要意义、反馈和外置结构。更好使用方式，是不要等待自律爆发，而是把开始做得足够短、足够具体、足够可见。",
+                            "short_body_zh": "不适合长期靠纯意志推进；需要外部结构、短启动和明确反馈。",
+                            "benefit_zh": "灵活度高，能在变化中保留转向空间。",
+                            "cost_zh": "长期任务、重复收尾和低反馈事务容易掉速。",
+                            "common_misread_zh": "这不等于懒或不负责，而是推进系统需要更强外部支架。",
+                            "action_zh": "把重要任务改成 5 分钟启动，并让进度对别人或工具可见。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.c.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.e_very_low_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "E",
+                                "label_zh": "外向性",
+                                "public_name_zh": "社交能量与进入方式",
+                                "domain_theme_zh": "表达、互动、外部反馈、现场感和能量补给"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "外向性明显偏低：深度内收与低刺激进入",
+                            "summary_zh": "你更适合先观察、先内化，再选择性表达。",
+                            "body_zh": "外向性明显偏低时，你通常不会依赖高频互动、持续曝光和外部热闹来获得能量。你更可能在安静、低噪音和自主节奏里恢复判断，也更习惯先把信息放进内部处理。优势是你不容易被场面带跑，能保留深度观察和独立判断。代价是，如果洞察长期不外化，别人可能看不见你的价值，也误以为你冷淡或没有想法。常见误读是把它等同于社交差；更准确地说，你需要更低成本、更可控的进入方式。使用它时，不必强迫自己变得外放，可以先训练一句话表达、一段文字反馈或会后补充。",
+                            "short_body_zh": "低刺激、深处理、慢进入；重点不是变外放，而是让价值被看见。",
+                            "benefit_zh": "能保留独立观察和深度判断，不容易被场面牵着走。",
+                            "cost_zh": "表达太晚时，能力和判断可能不被看见。",
+                            "common_misread_zh": "不是社交差，而是更需要可控、低成本的进入方式。",
+                            "action_zh": "每次会议或讨论前准备一句观点，先让自己被看见一次。",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.e.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.a_very_high_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "A",
+                                "label_zh": "宜人性",
+                                "public_name_zh": "合作与边界方式",
+                                "domain_theme_zh": "共情、合作、冲突处理、关系承接和边界表达"
+                            },
+                            "band": {
+                                "internal_band": "very_high",
+                                "display_band_label": "明显偏高",
+                                "score_range_0_100": [
+                                    80,
+                                    100
+                                ],
+                                "internal_band_threshold": "B5_80_100"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "宜人性明显偏高：高承接系统与边界保护",
+                            "summary_zh": "你很容易先理解、先照顾、先维护关系整体感。",
+                            "body_zh": "宜人性明显偏高时，你会自然捕捉他人的需要、情绪和处境，也更容易主动缓和冲突、补位和承接。优势是共情、合作与关系修复能力强，能让人感到被理解和被照顾。代价是，如果边界不足，你可能把过多关系成本吸收到自己身上，甚至在不知不觉中替别人承担责任。常见误读是把你看成天生应该照顾别人；更准确地说，你的承接能力需要被保护，而不是被无限调用。更好使用方式，是在照顾他人前先确认自己的资源，明确哪些可以给，哪些需要保留。",
+                            "short_body_zh": "高共情、高承接、高合作；需要保护边界，避免被无限调用。",
+                            "benefit_zh": "能稳定关系、修复冲突，并让他人感到被理解。",
+                            "cost_zh": "容易过度承担关系成本，忽略自己的需求与恢复。",
+                            "common_misread_zh": "不是应该无限照顾别人，而是你的承接能力需要边界保护。",
+                            "action_zh": "在答应前先停三秒：我现在是否真的有资源承担这件事？",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.a.very_high.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_03_trait_deep_dive.domain_registry.n_very_low_deep_strategy.v0_3",
+                        "block_kind": "trait_deep_dive",
+                        "module_key": "module_03_trait_deep_dive",
+                        "content": {
+                            "trait": {
+                                "code": "N",
+                                "label_zh": "情绪性",
+                                "public_name_zh": "压力反应敏感度",
+                                "domain_theme_zh": "压力、评价、不确定性、关系张力和恢复负荷"
+                            },
+                            "band": {
+                                "internal_band": "very_low",
+                                "display_band_label": "明显偏低",
+                                "score_range_0_100": [
+                                    0,
+                                    19
+                                ],
+                                "internal_band_threshold": "B1_0_19"
+                            },
+                            "module_key": "module_03_trait_deep_dive",
+                            "title_zh": "情绪性明显偏低：低波动稳态与风险补偿",
+                            "summary_zh": "你通常不容易被短时压力、误解或不确定性推离基线。",
+                            "body_zh": "情绪性明显偏低时，你的压力反应系统整体更稳。很多突发变化、评价或关系张力不会立刻把你拉高，你也更容易在复杂环境中保持冷静。优势是恢复快、抗干扰强，不容易被小波动反复带走。代价是，你可能较晚注意到关系里的细小裂缝、环境里的早期风险，或别人已经承受的情绪成本。常见误读是把稳定看成完全没问题；更准确地说，低波动也需要保留风险敏感度。更好使用方式，是在保持稳定的同时主动检查早期信号，而不是只等问题变大。",
+                            "short_body_zh": "情绪系统偏稳，恢复快；需要主动补充早期风险觉察。",
+                            "benefit_zh": "能在压力和不确定中保持基线，不容易被小波动打乱。",
+                            "cost_zh": "可能较晚注意到关系张力、环境风险和他人情绪成本。",
+                            "common_misread_zh": "不是没有问题，而是你的系统不容易立刻被问题拉高。",
+                            "action_zh": "每周主动问一次：这里有没有被我低估的早期风险？",
+                            "safety_tags": [
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_accuracy_claim",
+                                "no_hard_typing",
+                                "continuous_trait_language",
+                                "non_clinical",
+                                "no_cross_scale_comparison"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domains",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "domain_registry:domain_band.n.very_low.v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_04_coupling",
+                "blocks": [
+                    {
+                        "block_key": "module_04_coupling.coupling_registry.c_e_low_low.v0_3",
+                        "block_kind": "coupling_cards",
+                        "module_key": "module_04_coupling",
+                        "content": {
+                            "coupling_key": "e_low_x_c_low",
+                            "coupling_group": "低外向 × 低尽责",
+                            "involved_traits": [
+                                {
+                                    "trait": "E",
+                                    "trait_label_zh": "外向性"
+                                },
+                                {
+                                    "trait": "C",
+                                    "trait_label_zh": "尽责性"
+                                }
+                            ],
+                            "involved_bands": {
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "module_key": "module_04_coupling",
+                            "title_zh": "低外向 × 低尽责｜核心动力",
+                            "summary_zh": "说明低外向 × 低尽责如何形成核心动力。",
+                            "body_zh": "低外向 × 低尽责的关键，不是把两个分数并排读，而是看它们怎样一起推动你的进入方式。低外向降低从外部互动中取能的比例，低尽责又让长期纯靠意志推进变得困难。因此，这组组合更像一套内部动力：一边提供判断和能量，一边也要求更清楚的边界与节奏。它适合放在核心画像里解释主轴，因为它能说明你为什么在某些场景里很快有反应、很快看见问题，又为什么不一定会用最直接或最稳定的方式把反应带出去。这条内容只描述连续维度的互动方式，用于帮助理解当下倾向，不把组合写成固定身份。",
+                            "short_body_zh": "低外向 × 低尽责说明两个维度如何一起影响进入、判断和消耗。",
+                            "benefit_zh": "它让你不容易被热闹和表面进度带着跑，也能保留自主筛选。",
+                            "cost_zh": "代价是进入慢、反馈弱时更容易掉速，任务容易卡在知道该做但迟迟没有启动。",
+                            "common_misread_zh": "常被误读为懒或不在乎，其实问题更像启动机制与反馈机制没有被搭起来。",
+                            "action_zh": "把任务改成短启动、可见反馈和低噪声推进，而不是要求自己突然长期高能。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim"
+                            ]
+                        },
+                        "projection_refs": [
+                            "dominant_couplings",
+                            "domain_bands"
+                        ],
+                        "registry_refs": [
+                            "coupling_registry:big5_content_2_e_low_x_c_low_coupling_core_explanation_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_05_facet_reframe",
+                "blocks": [
+                    {
+                        "block_key": "module_05_facet_reframe.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "facet_reframe",
+                        "module_key": "module_05_facet_reframe",
+                        "content": {
+                            "availability": "pending_asset_resolution",
+                            "facets": []
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "facet_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_06_application_matrix",
+                "blocks": [
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.start_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.express_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.recover_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.boundaries_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_clear_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_mixed_signature.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_high_tension_profile.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_low_quality.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_06_application_matrix.action_plan_registry.verify_retest_recommended.v0_3",
+                        "block_kind": "application_matrix",
+                        "module_key": "module_06_application_matrix",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "personal_growth",
+                            "scenario_label_zh": "个人成长",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_06_application_matrix",
+                            "title_zh": "秩序维护型支持者｜个人成长：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为个人成长中的可执行观察和行动。",
+                            "body_zh": "在个人成长里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当30 / 60 / 90 天路径、自我观察、复测和节奏管理变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "个人成长｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成个人成长里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在30 / 60 / 90 天路径、自我管理、复测、观察任务中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把改变拆成 30 / 60 / 90 天路径：先观察，再固定一个动作，最后复盘是否有效。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__personal_growth__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "degraded",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_07_collaboration_manual",
+                "blocks": [
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_document_first.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "秩序维护型支持者｜协作说明书：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_clear_owner_deadline.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "秩序维护型支持者｜协作说明书：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_meaning_and_feedback.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "秩序维护型支持者｜协作说明书：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_quiet_processing_time.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "秩序维护型支持者｜协作说明书：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_share_safe_manual.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "秩序维护型支持者｜协作说明书：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_fast_sync_fit.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "秩序维护型支持者｜协作说明书：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_conflict_protocol.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "秩序维护型支持者｜协作说明书：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    },
+                    {
+                        "block_key": "module_07_collaboration_manual.scenario_registry.collaboration_handoff_clarity.v0_3",
+                        "block_kind": "collaboration_manual",
+                        "module_key": "module_07_collaboration_manual",
+                        "content": {
+                            "profile_key": "orderly_supporter",
+                            "profile_label_zh": "秩序维护型支持者",
+                            "label_role_zh": "辅助理解标签",
+                            "not_fixed_type": true,
+                            "scenario": "collaboration",
+                            "scenario_label_zh": "协作说明书",
+                            "scenario_role": "scenario_core_pattern",
+                            "profile_axis_zh": "低开放 × 高尽责 × 高宜人",
+                            "representative_domain_bands": {
+                                "O": {
+                                    "internal_band": "very_low",
+                                    "display_band_label": "明显偏低"
+                                },
+                                "C": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "E": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                },
+                                "A": {
+                                    "internal_band": "very_high",
+                                    "display_band_label": "明显偏高"
+                                },
+                                "N": {
+                                    "internal_band": "low",
+                                    "display_band_label": "偏低"
+                                }
+                            },
+                            "primary_couplings": [
+                                "o_low_x_c_high"
+                            ],
+                            "module_key": "module_07_collaboration_manual",
+                            "title_zh": "秩序维护型支持者｜协作说明书：核心表现方式",
+                            "summary_zh": "将低开放 × 高尽责 × 高宜人转译为协作说明书中的可执行观察和行动。",
+                            "body_zh": "在协作说明书里，秩序维护型支持者这个辅助标签主要提示一种进入方式：用稳定、责任和合作维护系统。你通常不是先被单一分数驱动，而是被低开放 × 高尽责 × 高宜人这组结构影响；当沟通偏好、激发条件、协作消耗和团队共享说明变得清楚时，可靠、秩序维护、耐心支持和流程稳定更容易被调动。如果场景开始接近不断变更规则、同时要求你保持照顾和稳定的场景，你也更容易把能量用在防守、观望或过度承担上。使用时要把它放回具体场景，只看当下最稳定的反应，不把标签当成身份归类。",
+                            "short_body_zh": "协作说明书｜核心表现方式：围绕低开放 × 高尽责 × 高宜人做低风险使用。",
+                            "benefit_zh": "帮助你把可靠、秩序维护、耐心支持和流程稳定转成协作说明书里的可见价值。",
+                            "cost_zh": "代价是变化抗拒、过度配合、把自己放到太后面可能在如何沟通、什么会消耗我、如何激发我、团队共享中被放大。",
+                            "common_misread_zh": "常见误读是把秩序维护型支持者当成固定身份，或只看见外在行为而忽略场景触发。",
+                            "action_zh": "把协作说明压缩成可分享的偏好：怎样沟通、怎样反馈、怎样避免无效消耗。",
+                            "repair_zh": "如果被误读，先声明这只是辅助理解标签，再把需求落到一个具体请求。",
+                            "safety_tags": [
+                                "continuous_trait_language",
+                                "non_diagnostic",
+                                "non_hiring",
+                                "no_hard_typing",
+                                "no_accuracy_claim",
+                                "profile_label_assistive_only",
+                                "low_risk_action_only",
+                                "share_safe",
+                                "no_sensitive_score_in_share"
+                            ]
+                        },
+                        "projection_refs": [
+                            "domain_bands",
+                            "interpretation_scope"
+                        ],
+                        "registry_refs": [
+                            "scenario_registry:b5_content_5_orderly_supporter__collaboration__scenario_core_pattern_v0_1"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "registry_backed",
+                        "shareable": false,
+                        "content_source": "registry_asset",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_08_share_save",
+                "blocks": [
+                    {
+                        "block_key": "module_08_share_save.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "share_save",
+                        "module_key": "module_08_share_save",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "share_safety_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_09_feedback_data_flywheel",
+                "blocks": [
+                    {
+                        "block_key": "module_09_feedback_data_flywheel.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "feedback_block",
+                        "module_key": "module_09_feedback_data_flywheel",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "state_scope_registry:pending_asset_resolution"
+                        ],
+                        "safety_level": "standard",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "omit_block"
+                    }
+                ]
+            },
+            {
+                "module_key": "module_10_method_privacy",
+                "blocks": [
+                    {
+                        "block_key": "module_10_method_privacy.pilot.pending_asset_resolution.v0_1",
+                        "block_kind": "method_boundary",
+                        "module_key": "module_10_method_privacy",
+                        "content": {
+                            "availability": "pending_asset_resolution"
+                        },
+                        "projection_refs": [
+                            "interpretation_scope",
+                            "quality_status",
+                            "norm_status"
+                        ],
+                        "registry_refs": [
+                            "method_registry:pilot_boundary"
+                        ],
+                        "safety_level": "boundary",
+                        "evidence_level": "descriptive",
+                        "shareable": false,
+                        "content_source": "composer_projection",
+                        "fallback_policy": "backend_required"
+                    }
+                ]
+            }
+        ]
+    }
+}
