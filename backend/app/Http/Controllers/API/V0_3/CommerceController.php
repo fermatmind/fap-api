@@ -1042,11 +1042,11 @@ class CommerceController extends Controller
         }
 
         $payType = strtolower(trim((string) ($pay['type'] ?? '')));
-        $payValue = $this->stripPaymentRecoveryTokenFromUrl($pay['value'] ?? null) ?? '';
+        $payValue = $this->sanitizePaymentActionUrl($pay['value'] ?? null) ?? '';
         if ($payType === '' || $payValue === '') {
             return null;
         }
-        $checkoutUrl = $this->stripPaymentRecoveryTokenFromUrl($payload['checkout_url'] ?? null);
+        $checkoutUrl = $this->sanitizePaymentActionUrl($payload['checkout_url'] ?? null);
 
         return [
             'provider' => $provider,
@@ -1080,11 +1080,11 @@ class CommerceController extends Controller
         }
 
         $payType = strtolower(trim((string) ($pay['type'] ?? '')));
-        $payValue = $this->stripPaymentRecoveryTokenFromUrl($pay['value'] ?? null) ?? '';
+        $payValue = $this->sanitizePaymentActionUrl($pay['value'] ?? null) ?? '';
         if ($payType === '' || $payValue === '') {
             return;
         }
-        $checkoutUrl = $this->stripPaymentRecoveryTokenFromUrl($payload['checkout_url'] ?? null);
+        $checkoutUrl = $this->sanitizePaymentActionUrl($payload['checkout_url'] ?? null);
 
         $meta = $this->decodeMeta($order->meta_json ?? null);
         $cache = is_array($meta['payment_action_cache'] ?? null) ? $meta['payment_action_cache'] : [];
@@ -1157,12 +1157,12 @@ class CommerceController extends Controller
         $provider = strtolower(trim((string) ($order->provider ?? '')));
         $safePayPayload = $payPayload;
         if (is_array($safePayPayload)) {
-            $safePayValue = $this->stripPaymentRecoveryTokenFromUrl($safePayPayload['value'] ?? null);
+            $safePayValue = $this->sanitizePaymentActionUrl($safePayPayload['value'] ?? null);
             if ($safePayValue !== null) {
                 $safePayPayload['value'] = $safePayValue;
             }
         }
-        $safeCheckoutUrl = $this->stripPaymentRecoveryTokenFromUrl($checkoutUrl);
+        $safeCheckoutUrl = $this->sanitizePaymentActionUrl($checkoutUrl);
         $payloadMeta = [
             'scene' => $scene,
             'pay_type' => strtolower(trim((string) ($safePayPayload['type'] ?? ''))),
@@ -1292,6 +1292,40 @@ class CommerceController extends Controller
         }
 
         return $rebuilt !== '' ? $rebuilt : $url;
+    }
+
+    private function sanitizePaymentActionUrl(mixed $value): ?string
+    {
+        $url = $this->stripPaymentRecoveryTokenFromUrl($value);
+        if ($url === null) {
+            return null;
+        }
+
+        return $this->normalizeInternalPaymentActionPath($url) ?? $url;
+    }
+
+    private function normalizeInternalPaymentActionPath(string $url): ?string
+    {
+        $parts = parse_url($url);
+        if (! is_array($parts)) {
+            return null;
+        }
+
+        $path = (string) ($parts['path'] ?? '');
+        if (! preg_match('#^/api/v0\.3/orders/[^/]+/pay/alipay$#', $path)) {
+            return null;
+        }
+
+        $rebuilt = $path;
+        $query = (string) ($parts['query'] ?? '');
+        if ($query !== '') {
+            $rebuilt .= '?'.$query;
+        }
+        if (isset($parts['fragment'])) {
+            $rebuilt .= '#'.$parts['fragment'];
+        }
+
+        return $rebuilt;
     }
 
     private function resolvePaymentActionScene(string $userAgent): string

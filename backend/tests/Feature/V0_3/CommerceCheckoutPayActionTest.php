@@ -299,9 +299,10 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $response->assertJsonPath('provider', 'alipay');
         $response->assertJsonPath('pay.type', 'html');
         $response->assertJsonPath('checkout_url', null);
-        $this->assertStringContainsString('/api/v0.3/orders/', (string) $response->json('pay.value'));
-        $this->assertStringContainsString('/pay/alipay?scene=desktop', (string) $response->json('pay.value'));
         $orderNo = (string) $response->json('order_no');
+        $response->assertJsonPath('pay.value', '/api/v0.3/orders/'.$orderNo.'/pay/alipay?scene=desktop');
+        $this->assertStringStartsNotWith('http://', (string) $response->json('pay.value'));
+        $this->assertStringStartsNotWith('https://', (string) $response->json('pay.value'));
         $paymentRecoveryToken = (string) $response->json('payment_recovery_token');
         $this->assertNotSame('', $paymentRecoveryToken);
         $this->assertStringNotContainsString('paymentRecoveryToken=', (string) $response->json('pay.value'));
@@ -332,7 +333,10 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $response->assertJsonPath('provider', 'alipay');
         $response->assertJsonPath('pay.type', 'redirect');
         $response->assertJsonPath('checkout_url', $response->json('pay.value'));
-        $this->assertStringContainsString('/pay/alipay?scene=mobile', (string) $response->json('pay.value'));
+        $response->assertJsonPath(
+            'pay.value',
+            '/api/v0.3/orders/'.$response->json('order_no').'/pay/alipay?scene=mobile'
+        );
         $this->assertNotSame('', (string) $response->json('payment_recovery_token'));
         $this->assertStringNotContainsString('paymentRecoveryToken=', (string) $response->json('pay.value'));
     }
@@ -364,7 +368,10 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonPath('provider', 'alipay');
         $response->assertJsonPath('pay.type', 'html');
-        $this->assertStringContainsString('/pay/alipay?scene=desktop', (string) $response->json('pay.value'));
+        $response->assertJsonPath(
+            'pay.value',
+            '/api/v0.3/orders/'.$response->json('order_no').'/pay/alipay?scene=desktop'
+        );
     }
 
     public function test_checkout_legacy_billing_remains_compatible_without_pay_action(): void
@@ -578,8 +585,8 @@ final class CommerceCheckoutPayActionTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonPath('provider', 'alipay');
         $response->assertJsonPath('pay.type', 'html');
-        $response->assertJsonPath('pay.value', 'https://api.example.test/api/v0.3/orders/'.$orderNo.'/pay/alipay?scene=desktop');
-        $response->assertJsonPath('checkout_url', 'https://api.example.test/api/v0.3/orders/'.$orderNo.'/pay/alipay?scene=desktop');
+        $response->assertJsonPath('pay.value', '/api/v0.3/orders/'.$orderNo.'/pay/alipay?scene=desktop');
+        $response->assertJsonPath('checkout_url', '/api/v0.3/orders/'.$orderNo.'/pay/alipay?scene=desktop');
         $this->assertStringNotContainsString($legacyToken, (string) $response->json('pay.value'));
         $this->assertStringNotContainsString('paymentRecoveryToken=', (string) $response->json('checkout_url'));
     }
