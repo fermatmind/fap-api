@@ -21,6 +21,7 @@ final class BigFiveResultPageV2RuntimeWrapper
         private readonly BigFiveResultPageV2TransformerContract $transformer,
         private readonly BigFiveResultPageV2Validator $validator,
         private readonly BigFiveV2PilotAccessGate $pilotAccessGate,
+        private readonly BigFiveV2PilotRuntimeObservability $pilotObservability,
     ) {}
 
     /**
@@ -32,11 +33,16 @@ final class BigFiveResultPageV2RuntimeWrapper
         $legacyRuntimeEnabled = (bool) config('big5_result_page_v2.enabled', false);
         $pilotRuntimeEnabled = $this->pilotRuntimeEnabled();
 
-        if (! $legacyRuntimeEnabled && ! $pilotRuntimeEnabled) {
+        if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) !== BigFiveResultPageV2Contract::SCALE_CODE) {
             return $responsePayload;
         }
 
-        if (strtoupper(trim((string) ($attempt->scale_code ?? ''))) !== BigFiveResultPageV2Contract::SCALE_CODE) {
+        if (! $legacyRuntimeEnabled && ! $pilotRuntimeEnabled) {
+            $this->pilotObservability->recordFlagOff($attempt, $result, [
+                'pilot_runtime_configured' => (bool) config('big5_result_page_v2.pilot_runtime_enabled', false),
+                'fallback_reason' => 'pilot_runtime_disabled',
+            ]);
+
             return $responsePayload;
         }
 
@@ -81,14 +87,17 @@ final class BigFiveResultPageV2RuntimeWrapper
     private function appendPilotPayload(Attempt $attempt, Result $result, array $responsePayload): array
     {
         $accessDecision = $this->pilotAccessGate->decide($attempt);
+        $this->pilotObservability->recordAccessDecision($attempt, $result, $accessDecision);
         if (! $accessDecision->allowed) {
             return $responsePayload;
         }
 
         try {
-            $envelope = $this->buildPilotEnvelope();
+            $build = $this->buildPilotEnvelope();
+            $envelope = $build['envelope'];
             $errors = $this->validator->validateEnvelope($envelope);
             if ($errors !== []) {
+                $this->pilotObservability->recordPayloadValidationFailed($attempt, $result, $errors);
                 Log::warning('BIG5_RESULT_PAGE_V2_PILOT_PAYLOAD_INVALID', [
                     'attempt_id' => (string) ($attempt->id ?? ''),
                     'result_id' => (string) ($result->id ?? ''),
@@ -102,8 +111,10 @@ final class BigFiveResultPageV2RuntimeWrapper
             $payload = $envelope[BigFiveResultPageV2Contract::PAYLOAD_KEY] ?? null;
             if (is_array($payload)) {
                 $responsePayload[BigFiveResultPageV2Contract::PAYLOAD_KEY] = $payload;
+                $this->pilotObservability->recordPayloadAttached($attempt, $result, $build['metrics']);
             }
         } catch (\Throwable $exception) {
+            $this->pilotObservability->recordPayloadGenerationFailed($attempt, $result, $exception);
             Log::warning('BIG5_RESULT_PAGE_V2_PILOT_RUNTIME_WRAPPER_FAILED', [
                 'attempt_id' => (string) ($attempt->id ?? ''),
                 'result_id' => (string) ($result->id ?? ''),
@@ -155,7 +166,7 @@ final class BigFiveResultPageV2RuntimeWrapper
     }
 
     /**
-     * @return array{big5_result_page_v2: array<string,mixed>}
+     * @return array{envelope: array{big5_result_page_v2: array<string,mixed>}, metrics: array<string,mixed>}
      */
     private function buildPilotEnvelope(): array
     {
@@ -172,7 +183,17 @@ final class BigFiveResultPageV2RuntimeWrapper
         $input = BigFiveV2SelectorInput::fromGoldenCase($this->o59GoldenCase(), $routeRow);
         $selection = (new BigFiveV2DeterministicSelector())->select($input);
 
-        return (new BigFiveV2PilotPayloadComposer())->compose($input, $selection);
+        return [
+            'envelope' => (new BigFiveV2PilotPayloadComposer())->compose($input, $selection),
+            'metrics' => [
+                'selector_suppressed_ref_count' => count($selection->suppressedAssetRefs),
+                'unresolved_ref_count' => count($selection->unresolvedRefSuppressions),
+                'surface_status_summary' => [
+                    'pending_surfaces' => $selection->pendingSurfaces,
+                    'pending_surface_count' => count($selection->pendingSurfaces),
+                ],
+            ],
+        ];
     }
 
     /**
