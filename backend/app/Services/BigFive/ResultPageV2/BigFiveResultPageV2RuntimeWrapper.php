@@ -7,6 +7,7 @@ namespace App\Services\BigFive\ResultPageV2;
 use App\Models\Attempt;
 use App\Models\Result;
 use App\Services\BigFive\ReportEngine\Bridge\BigFiveLiveRuntimeBridge;
+use App\Services\BigFive\ResultPageV2\Access\BigFiveV2PilotAccessGate;
 use App\Services\BigFive\ResultPageV2\Composer\BigFiveV2PilotPayloadComposer;
 use App\Services\BigFive\ResultPageV2\RouteMatrix\BigFiveV2RouteMatrixParser;
 use App\Services\BigFive\ResultPageV2\Selector\BigFiveV2DeterministicSelector;
@@ -19,6 +20,7 @@ final class BigFiveResultPageV2RuntimeWrapper
     public function __construct(
         private readonly BigFiveResultPageV2TransformerContract $transformer,
         private readonly BigFiveResultPageV2Validator $validator,
+        private readonly BigFiveV2PilotAccessGate $pilotAccessGate,
     ) {}
 
     /**
@@ -78,6 +80,11 @@ final class BigFiveResultPageV2RuntimeWrapper
      */
     private function appendPilotPayload(Attempt $attempt, Result $result, array $responsePayload): array
     {
+        $accessDecision = $this->pilotAccessGate->decide($attempt);
+        if (! $accessDecision->allowed) {
+            return $responsePayload;
+        }
+
         try {
             $envelope = $this->buildPilotEnvelope();
             $errors = $this->validator->validateEnvelope($envelope);
