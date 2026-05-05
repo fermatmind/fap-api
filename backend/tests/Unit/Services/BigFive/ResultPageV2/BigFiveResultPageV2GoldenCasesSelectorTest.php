@@ -38,7 +38,7 @@ final class BigFiveResultPageV2GoldenCasesSelectorTest extends TestCase
         $selector = new BigFiveV2DeterministicSelector();
         $result = $selector->select(BigFiveV2SelectorInput::fromGoldenCase($this->o59GoldenCase(), $this->o59RouteRow()));
 
-        $this->assertSame('O3_C2_E1_A3_N4', data_get($result->selectionTraceInternal, 'route_combination_key'));
+        $this->assertSame('O3_C2_E2_A3_N4', data_get($result->selectionTraceInternal, 'route_combination_key'));
         $this->assertSame('sensitive_independent_thinker', data_get($result->selectionTraceInternal, 'route_profile_key'));
         $this->assertSame(6, count($result->selectedAssetRefs));
         $this->assertFalse($result->safetyDecisions['ready_for_pilot']);
