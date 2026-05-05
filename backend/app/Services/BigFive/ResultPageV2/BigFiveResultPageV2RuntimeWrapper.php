@@ -9,9 +9,11 @@ use App\Models\Result;
 use App\Services\BigFive\ReportEngine\Bridge\BigFiveLiveRuntimeBridge;
 use App\Services\BigFive\ResultPageV2\Access\BigFiveV2PilotAccessGate;
 use App\Services\BigFive\ResultPageV2\Composer\BigFiveV2PilotPayloadComposer;
-use App\Services\BigFive\ResultPageV2\RouteMatrix\BigFiveV2RouteMatrixParser;
+use App\Services\BigFive\ResultPageV2\Routing\BigFiveV2ProjectionRouteInputAdapter;
+use App\Services\BigFive\ResultPageV2\Routing\BigFiveV2RouteDrivenSelectorInputBuilder;
+use App\Services\BigFive\ResultPageV2\Routing\BigFiveV2RouteInput;
+use App\Services\BigFive\ResultPageV2\Routing\BigFiveV2RouteMatrixLookup;
 use App\Services\BigFive\ResultPageV2\Selector\BigFiveV2DeterministicSelector;
-use App\Services\BigFive\ResultPageV2\Selector\BigFiveV2SelectorInput;
 use Illuminate\Support\Facades\Log;
 use RuntimeException;
 
@@ -93,7 +95,7 @@ final class BigFiveResultPageV2RuntimeWrapper
         }
 
         try {
-            $build = $this->buildPilotEnvelope();
+            $build = $this->buildPilotEnvelope($attempt, $result, $responsePayload);
             $envelope = $build['envelope'];
             $errors = $this->validator->validateEnvelope($envelope);
             if ($errors !== []) {
@@ -168,24 +170,28 @@ final class BigFiveResultPageV2RuntimeWrapper
     /**
      * @return array{envelope: array{big5_result_page_v2: array<string,mixed>}, metrics: array<string,mixed>}
      */
-    private function buildPilotEnvelope(): array
+    private function buildPilotEnvelope(Attempt $attempt, Result $result, array $responsePayload): array
     {
-        $routeMatrix = (new BigFiveV2RouteMatrixParser())->parse();
-        if ($routeMatrix->errors !== []) {
-            throw new RuntimeException('Big Five V2 pilot route matrix is not validator-clean.');
-        }
-
-        $routeRow = $routeMatrix->row(BigFiveV2RouteMatrixParser::O59_COMBINATION_KEY);
+        $routeInput = $this->buildRouteInput($result, $responsePayload);
+        $routeRow = (new BigFiveV2RouteMatrixLookup())->lookup($routeInput);
         if ($routeRow === null) {
-            throw new RuntimeException('Big Five V2 pilot O59 route row is missing.');
+            throw new RuntimeException("Big Five V2 pilot route row is missing: {$routeInput->combinationKey}");
         }
 
-        $input = BigFiveV2SelectorInput::fromGoldenCase($this->o59GoldenCase(), $routeRow);
+        $formSummary = is_array($responsePayload['big5_form_v1'] ?? null) ? $responsePayload['big5_form_v1'] : [];
+        $input = (new BigFiveV2RouteDrivenSelectorInputBuilder())->build(
+            routeInput: $routeInput,
+            routeRow: $routeRow,
+            formCode: $this->resolveFormCode($attempt, $formSummary),
+        );
         $selection = (new BigFiveV2DeterministicSelector())->select($input);
 
         return [
             'envelope' => (new BigFiveV2PilotPayloadComposer())->compose($input, $selection),
             'metrics' => [
+                'combination_key' => $routeInput->combinationKey,
+                'quality_status' => $routeInput->qualityStatus,
+                'norm_status' => $routeInput->normStatus,
                 'selector_suppressed_ref_count' => count($selection->suppressedAssetRefs),
                 'unresolved_ref_count' => count($selection->unresolvedRefSuppressions),
                 'surface_status_summary' => [
@@ -197,28 +203,59 @@ final class BigFiveResultPageV2RuntimeWrapper
     }
 
     /**
-     * @return array<string,mixed>
+     * @param  array<string,mixed>  $responsePayload
      */
-    private function o59GoldenCase(): array
+    private function buildRouteInput(Result $result, array $responsePayload): BigFiveV2RouteInput
     {
-        $path = base_path('content_assets/big5/result_page_v2/selector_qa_policy/v0_1/big5_result_page_v2_selector_qa_policy_v0_1_golden_cases.json');
-        $json = file_get_contents($path);
-        if (! is_string($json)) {
-            throw new RuntimeException('Big Five V2 O59 golden cases are unreadable.');
-        }
-
-        $cases = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
-        if (! is_array($cases)) {
-            throw new RuntimeException('Big Five V2 O59 golden cases must be a JSON list.');
-        }
-
-        foreach ($cases as $case) {
-            if (is_array($case) && ($case['case_key'] ?? null) === 'golden_case_31_o59_canonical_preview') {
-                return $case;
+        $projection = $responsePayload['big5_public_projection_v1'] ?? null;
+        if (is_array($projection) && $projection !== []) {
+            $meta = (array) ($projection['_meta'] ?? []);
+            if (($meta['redacted'] ?? false) === true || ($meta['locked'] ?? false) === true) {
+                throw new RuntimeException('Big Five V2 pilot projection is locked or redacted.');
             }
         }
 
-        throw new RuntimeException('Big Five V2 O59 canonical golden case is missing.');
+        $scoreResult = $this->scoreResult($result);
+        if ($scoreResult !== []) {
+            $adapter = new BigFiveV2ProjectionRouteInputAdapter();
+            $routeInput = $adapter->fromScoreResult($scoreResult);
+            if ($routeInput instanceof BigFiveV2RouteInput) {
+                return $routeInput;
+            }
+
+            throw new RuntimeException('Big Five V2 pilot route input is invalid: '.implode('; ', $adapter->errors()));
+        }
+
+        if (is_array($projection) && $projection !== []) {
+            $adapter = new BigFiveV2ProjectionRouteInputAdapter();
+            $routeInput = $adapter->fromProjection($projection);
+            if ($routeInput instanceof BigFiveV2RouteInput) {
+                return $routeInput;
+            }
+
+            throw new RuntimeException('Big Five V2 pilot route projection is invalid: '.implode('; ', $adapter->errors()));
+        }
+
+        throw new RuntimeException('Big Five V2 pilot score result is missing.');
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    private function scoreResult(Result $result): array
+    {
+        $resultJson = is_array($result->result_json) ? $result->result_json : [];
+        foreach ([
+            data_get($resultJson, 'normed_json'),
+            data_get($resultJson, 'breakdown_json.score_result'),
+            data_get($resultJson, 'axis_scores_json.score_result'),
+        ] as $candidate) {
+            if (is_array($candidate) && $candidate !== []) {
+                return $candidate;
+            }
+        }
+
+        return [];
     }
 
     /**
