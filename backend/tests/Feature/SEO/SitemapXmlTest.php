@@ -360,6 +360,23 @@ class SitemapXmlTest extends TestCase
             'updated_at' => $nowB,
         ]);
 
+        CareerJob::query()->create([
+            'org_id' => 0,
+            'job_code' => 'software-developers',
+            'slug' => 'software-developers',
+            'locale' => 'en',
+            'title' => 'Software Developers',
+            'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 1, 31, 12, 52, 0),
+            'scheduled_at' => null,
+            'schema_version' => 'v1',
+            'sort_order' => 0,
+            'created_at' => $nowB,
+            'updated_at' => $nowB,
+        ]);
+
         $this->createDisplayAsset(
             $this->createOccupation('agricultural-inspectors', 'Agricultural Inspectors'),
             ['updated_at' => Carbon::create(2026, 1, 31, 12, 55, 0)]
