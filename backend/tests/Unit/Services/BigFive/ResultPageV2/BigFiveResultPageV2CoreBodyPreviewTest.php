@@ -555,6 +555,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isResultEmailGatedReadFile($file)) {
+                continue;
+            }
+
             if (
                 $file === 'backend/routes/api.php'
                 && $this->routeDiffIsEmailAccessTrainOnly($routeChangedLines ?? $this->routeChangedLines($repoRoot, $baseRef))
@@ -643,6 +647,14 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Http/Requests/V0_3/ResultEmailLookupRequest.php',
             'backend/app/Services/Results/ResultAccessTokenService.php',
             'backend/app/Services/Results/ResultEmailLookupService.php',
+        ], true);
+    }
+
+    private function isResultEmailGatedReadFile(string $file): bool
+    {
+        return in_array($file, [
+            'backend/app/Http/Controllers/API/V0_3/AttemptReadController.php',
+            'backend/app/Services/Results/ResultEmailReadAccessService.php',
         ], true);
     }
 

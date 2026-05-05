@@ -21,9 +21,14 @@ return [
         'security_v2' => (bool) env('FAP_FEATURE_SECURITY_V2', true),
         'tenant_strict_v2' => (bool) env('FAP_FEATURE_TENANT_STRICT_V2', true),
         'clinical_consent_enforce' => (bool) env('FAP_FEATURE_CLINICAL_CONSENT_ENFORCE', false),
+        'email_first_result_access' => (bool) env('FAP_FEATURE_EMAIL_FIRST_RESULT_ACCESS', false),
         'model_router_v2' => (bool) env('FAP_FEATURE_MODEL_ROUTER_V2', true),
         'submit_async_v2' => (bool) env('FAP_FEATURE_SUBMIT_ASYNC_V2', true),
         'report_snapshot_strict_v2' => (bool) env('FAP_FEATURE_REPORT_SNAPSHOT_STRICT_V2', true),
+    ],
+
+    'result_email_gate' => [
+        'enabled_scale_codes' => ['MBTI', 'BIG5_OCEAN', 'IQ_RAVEN', 'EQ_60', 'ENNEAGRAM', 'RIASEC'],
     ],
 
     'queue' => [
