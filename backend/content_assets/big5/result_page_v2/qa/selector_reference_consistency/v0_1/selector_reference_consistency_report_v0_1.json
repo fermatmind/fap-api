@@ -39,7 +39,7 @@
     }
   },
   "public_pilot_resolution_policy": {
-    "policy_status": "frozen_for_public_pilot_phase_1",
+    "policy_status": "safe_coupling_alias_resolution_v0_1_applied",
     "runtime_use": "not_runtime",
     "production_use_allowed": false,
     "allowed_resolution_modes": [
@@ -60,8 +60,39 @@
       "profile_key": 19,
       "scenario_key": 32
     },
+    "public_pilot_resolution_summary": {
+      "safe_alias_or_normalization_count": 3,
+      "new_coupling_required_count": 38,
+      "selector_suppression_reference_count": 92,
+      "selector_suppression_behavior_changed": false,
+      "alias_aware_selector_or_composer_required_before_unsuppression": true
+    },
+    "approved_coupling_aliases": [
+      {
+        "source_coupling_key": "c_low_x_e_low",
+        "resolved_to": "e_low_x_c_low",
+        "decision_type": "EXACT_ALIAS",
+        "semantic_basis": "same_traits_same_bands_trait_order_only",
+        "requires_new_asset": false
+      },
+      {
+        "source_coupling_key": "e_low_x_n_high",
+        "resolved_to": "n_high_x_e_low",
+        "decision_type": "EXACT_ALIAS",
+        "semantic_basis": "same_traits_same_bands_trait_order_only",
+        "requires_new_asset": false
+      },
+      {
+        "source_coupling_key": "o_mid_x_n_high",
+        "resolved_to": "n_high_x_o_mid_high",
+        "decision_type": "NORMALIZATION_REQUIRED",
+        "semantic_basis": "same_traits_same_intended_bands_trait_order_and_mid_high_token_normalization",
+        "requires_new_asset": false
+      }
+    ],
     "phase_1_freeze": {
       "public_sel_1_may_resolve_refs": false,
+      "public_sel_2a_resolves_safe_aliases_only": true,
       "subsequent_resolution_prs_must_preserve_body_copy": true,
       "subsequent_resolution_prs_must_preserve_staging_only_flags": true,
       "selected_unresolved_refs_must_remain_suppressed_until_resolved": true
@@ -79,7 +110,32 @@
       "check_key": "selector_coupling_registry_to_coupling_assets",
       "status": "advisory_gap",
       "checked_reference_count": 50,
+      "resolved_alias_reference_count": 3,
+      "new_coupling_required_count": 38,
       "unresolved_reference_count": 41,
+      "resolved_references": [
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_e_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_low_x_e_low",
+          "resolved_to": "e_low_x_c_low",
+          "decision_type": "EXACT_ALIAS"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_n_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_low_x_n_high",
+          "resolved_to": "n_high_x_e_low",
+          "decision_type": "EXACT_ALIAS"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_n_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_mid_x_n_high",
+          "resolved_to": "n_high_x_o_mid_high",
+          "decision_type": "NORMALIZATION_REQUIRED"
+        }
+      ],
       "unresolved_references": [
         {
           "asset_key": "asset.module_04_coupling.coupling_registry.a_n_high_high.v0_3",
