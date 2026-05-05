@@ -1,0 +1,558 @@
+{
+  "schema": "fap.big5.result_page_v2.selector_reference_consistency_report.v0_1",
+  "mode": "staging_only_advisory_scan",
+  "runtime_use": "not_runtime",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "source_packages": {
+    "selector_ready_assets": "selector_ready_assets/v0_3_p0_full",
+    "trait_band_assets": "trait_band_assets/v0_1",
+    "coupling_assets": "coupling_assets/v0_1",
+    "facet_assets": "facet_assets/v0_1",
+    "canonical_profiles": "canonical_profiles/v0_1",
+    "scenario_action_assets": "scenario_action_assets/v0_1_1",
+    "route_matrix": "route_matrix/v0_1_1"
+  },
+  "summary": {
+    "selector_asset_count": 325,
+    "route_matrix_row_count": 3125,
+    "trait_band_reference_count": 25,
+    "coupling_key_count": 12,
+    "facet_key_count": 30,
+    "canonical_profile_key_count": 8,
+    "scenario_key_count": 5,
+    "unresolved_reference_count": 92,
+    "unresolved_by_check": {
+      "selector_domain_registry_to_trait_band_assets": 0,
+      "selector_coupling_registry_to_coupling_assets": 41,
+      "selector_facet_pattern_registry_to_facet_assets": 0,
+      "selector_profile_signature_registry_to_canonical_profiles": 19,
+      "selector_scenario_registry_to_scenario_action_assets": 32,
+      "route_matrix_to_imported_content_assets": 0
+    },
+    "unresolved_by_type": {
+      "coupling_key": 41,
+      "profile_key": 19,
+      "scenario_key": 32
+    }
+  },
+  "checks": [
+    {
+      "check_key": "selector_domain_registry_to_trait_band_assets",
+      "status": "pass",
+      "checked_reference_count": 50,
+      "unresolved_reference_count": 0,
+      "unresolved_references": []
+    },
+    {
+      "check_key": "selector_coupling_registry_to_coupling_assets",
+      "status": "advisory_gap",
+      "checked_reference_count": 50,
+      "unresolved_reference_count": 41,
+      "unresolved_references": [
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.a_n_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "a_high_x_n_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.a_n_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "a_high_x_n_low"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.a_n_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "a_low_x_n_low"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_a_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_high_x_a_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_a_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_high_x_a_low"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_a_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_low_x_a_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_a_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_low_x_a_low"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_a_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_mid_x_a_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_e_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_high_x_e_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_e_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_high_x_e_low"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_e_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_low_x_e_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_e_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_low_x_e_low"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_e_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_mid_x_e_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_n_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_high_x_n_low"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_n_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_low_x_n_low"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.c_n_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "c_mid_x_n_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_a_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_high_x_a_low"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_a_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_low_x_a_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_a_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_low_x_a_low"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_a_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_mid_x_a_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_n_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_high_x_n_low"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_n_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_low_x_n_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_n_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_low_x_n_low"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.e_n_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "e_mid_x_n_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_a_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_high_x_a_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_a_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_a_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_a_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_a_low"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_a_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_mid_x_a_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_c_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_high_x_c_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_c_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_c_low"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_c_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_mid_x_c_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_e_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_high_x_e_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_e_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_high_x_e_low"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_e_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_e_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_e_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_e_low"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_e_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_mid_x_e_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_n_high_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_high_x_n_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_n_high_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_high_x_n_low"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_n_low_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_n_high"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_n_low_low.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_low_x_n_low"
+        },
+        {
+          "asset_key": "asset.module_04_coupling.coupling_registry.o_n_mid_high.v0_3",
+          "reference_type": "coupling_key",
+          "reference": "o_mid_x_n_high"
+        }
+      ]
+    },
+    {
+      "check_key": "selector_facet_pattern_registry_to_facet_assets",
+      "status": "pass",
+      "checked_reference_count": 60,
+      "unresolved_reference_count": 0,
+      "unresolved_references": []
+    },
+    {
+      "check_key": "selector_profile_signature_registry_to_canonical_profiles",
+      "status": "advisory_gap",
+      "checked_reference_count": 20,
+      "unresolved_reference_count": 19,
+      "unresolved_references": [
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.adaptive_explorer.v0_3",
+          "reference_type": "profile_key",
+          "reference": "adaptive_explorer"
+        },
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.boundary_first_realist.v0_3",
+          "reference_type": "profile_key",
+          "reference": "boundary_first_realist"
+        },
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.calm_connector.v0_3",
+          "reference_type": "profile_key",
+          "reference": "calm_connector"
+        },
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.careful_realist.v0_3",
+          "reference_type": "profile_key",
+          "reference": "careful_realist"
+        },
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.creative_sprinter.v0_3",
+          "reference_type": "profile_key",
+          "reference": "creative_sprinter"
+        },
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.deep_quality_guardian.v0_3",
+          "reference_type": "profile_key",
+          "reference": "deep_quality_guardian"
+        },
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.empathetic_boundary_builder.v0_3",
+          "reference_type": "profile_key",
+          "reference": "empathetic_boundary_builder"
+        },
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.execution_rebuilder.v0_3",
+          "reference_type": "profile_key",
+          "reference": "execution_rebuilder"
+        },
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.expressive_connector.v0_3",
+          "reference_type": "profile_key",
+          "reference": "expressive_connector"
+        },
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.gentle_reformer.v0_3",
+          "reference_type": "profile_key",
+          "reference": "gentle_reformer"
+        },
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.high_signal_observer.v0_3",
+          "reference_type": "profile_key",
+          "reference": "high_signal_observer"
+        },
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.low_noise_specialist.v0_3",
+          "reference_type": "profile_key",
+          "reference": "low_noise_specialist"
+        },
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.pragmatic_executor.v0_3",
+          "reference_type": "profile_key",
+          "reference": "pragmatic_executor"
+        },
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.principled_collaborator.v0_3",
+          "reference_type": "profile_key",
+          "reference": "principled_collaborator"
+        },
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.quiet_operator.v0_3",
+          "reference_type": "profile_key",
+          "reference": "quiet_operator"
+        },
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.resilient_minimalist.v0_3",
+          "reference_type": "profile_key",
+          "reference": "resilient_minimalist"
+        },
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.responsible_monitor.v0_3",
+          "reference_type": "profile_key",
+          "reference": "responsible_monitor"
+        },
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.structured_stabilizer.v0_3",
+          "reference_type": "profile_key",
+          "reference": "structured_stabilizer"
+        },
+        {
+          "asset_key": "asset.module_01_hero.profile_signature_registry.tension_translator.v0_3",
+          "reference_type": "profile_key",
+          "reference": "tension_translator"
+        }
+      ]
+    },
+    {
+      "check_key": "selector_scenario_registry_to_scenario_action_assets",
+      "status": "advisory_gap",
+      "checked_reference_count": 40,
+      "unresolved_reference_count": 32,
+      "unresolved_references": [
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.action_boundary_half_step.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "action"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.action_meaning_before_task.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "action"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.action_one_sentence_expression.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "action"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.action_recovery_anchor.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "action"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.action_source_naming.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "action"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.action_stop_rule.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "action"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.action_twenty_minute_start.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "action"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.action_verification_loop.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "action"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.relationship_autonomy_need.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "relationship"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.relationship_direct_but_warm.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "relationship"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.relationship_early_boundary_expression.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "relationship"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.relationship_high_harmony_cost.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "relationship"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.relationship_relationship_overload_warning.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "relationship"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.relationship_repair_after_withdrawal.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "relationship"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.relationship_shared_decision_space.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "relationship"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.relationship_slow_trust_entry.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "relationship"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.stress_ambiguity_loop.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "stress"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.stress_avoidance_from_low_feedback.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "stress"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.stress_conflict_activation.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "stress"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.stress_fatigue_signal.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "stress"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.stress_internal_overload.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "stress"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.stress_low_pressure_underresponse.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "stress"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.stress_overcontrol_pressure.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "stress"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.stress_social_overstimulation.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "stress"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.work_boundary_with_manager.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "work"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.work_creative_iteration.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "work"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.work_deep_processing_environment.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "work"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.work_execution_feedback_need.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "work"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.work_high_visibility_cost.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "work"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.work_low_noise_focus.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "work"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.work_quality_guarding.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "work"
+        },
+        {
+          "asset_key": "asset.module_06_application_matrix.scenario_registry.work_team_energy_fit.v0_3",
+          "reference_type": "scenario_key",
+          "reference": "work"
+        }
+      ]
+    },
+    {
+      "check_key": "route_matrix_to_imported_content_assets",
+      "status": "pass",
+      "checked_reference_count": 52875,
+      "unresolved_reference_count": 0,
+      "unresolved_references": []
+    }
+  ],
+  "interpretation": {
+    "blocking_for_staging_preview": false,
+    "blocking_for_runtime_selector": true,
+    "notes": [
+      "Domain band and facet selector references resolve against imported B5-CONTENT-1 and B5-CONTENT-3 assets.",
+      "Route matrix references resolve against imported trait band, coupling, canonical profile, and scenario packages.",
+      "Selector coupling/profile/scenario gaps are advisory for staging preview but must be repaired before pilot runtime selector use.",
+      "This report does not approve runtime, pilot, production, CMS import, or frontend fallback ownership."
+    ]
+  }
+}
