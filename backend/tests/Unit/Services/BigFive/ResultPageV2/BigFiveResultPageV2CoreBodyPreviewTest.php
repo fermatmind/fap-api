@@ -207,6 +207,15 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
         $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
     }
 
+    public function test_runtime_freeze_classifier_ignores_career_public_distribution_owner_changes(): void
+    {
+        $changed = [
+            'backend/app/Services/SEO/SitemapGenerator.php',
+        ];
+
+        $this->assertSame([], $this->mbtiImpactingRuntimeChanges($changed, '', ''));
+    }
+
     public function test_runtime_freeze_classifier_ignores_commerce_payment_action_changes(): void
     {
         $changed = [
@@ -439,6 +448,10 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
                 continue;
             }
 
+            if ($this->isCareerPublicDistributionFile($file)) {
+                continue;
+            }
+
             if ($this->isBigFiveV2PilotSupportFile($file)) {
                 continue;
             }
@@ -479,6 +492,11 @@ final class BigFiveResultPageV2CoreBodyPreviewTest extends TestCase
             'backend/app/Services/Career/Bundles/CareerJobDetailBundleBuilder.php',
             'backend/app/Services/Career/Bundles/CareerJobDisplaySurfaceBuilder.php',
         ], true);
+    }
+
+    private function isCareerPublicDistributionFile(string $file): bool
+    {
+        return $file === 'backend/app/Services/SEO/SitemapGenerator.php';
     }
 
     private function isBigFiveV2PilotSupportFile(string $file): bool
