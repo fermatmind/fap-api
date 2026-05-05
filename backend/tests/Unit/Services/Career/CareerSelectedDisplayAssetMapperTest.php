@@ -135,6 +135,25 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
         }
     }
 
+    public function test_it_maps_d32_cohort_rows_to_display_asset_payloads(): void
+    {
+        $this->assertCount(100, CareerSelectedDisplayAssetMapper::COHORT_D32_SLUGS);
+
+        foreach ($this->d32Rows() as $row) {
+            $result = app(CareerSelectedDisplayAssetMapper::class)->mapRow($row);
+
+            $this->assertSame([], $result['errors'], $row['Slug'].' should map cleanly.');
+            $this->assertSame($row['Slug'], $result['slug']);
+            $this->assertSame($row['SOC_Code'], $result['expected_soc']);
+            $this->assertSame($row['O_NET_Code'], $result['expected_onet']);
+            $this->assertSame(24, $result['summary']['component_order_count']);
+            $this->assertTrue($result['summary']['has_zh_page']);
+            $this->assertTrue($result['summary']['has_en_page']);
+            $this->assertSame([], $result['summary']['public_payload_forbidden_keys_found']);
+            $this->assertSame(false, $result['summary']['release_gates']['sitemap']);
+        }
+    }
+
     public function test_duplicate_identity_broad_group_and_cn_proxy_rows_are_not_import_supported(): void
     {
         foreach ([
@@ -218,6 +237,31 @@ final class CareerSelectedDisplayAssetMapperTest extends TestCase
                 $slug,
                 title: $title,
                 cnTitle: $cnTitle,
+                soc: $expected['soc'],
+                onet: $expected['onet'],
+            );
+        }
+
+        return $rows;
+    }
+
+    /**
+     * @return list<array<string, string>>
+     */
+    private function d32Rows(): array
+    {
+        $rows = [];
+        foreach (CareerSelectedDisplayAssetMapper::COHORT_D32_SLUGS as $slug => $expected) {
+            $fixtureTitleSlug = strtr($slug, [
+                'production' => 'operations',
+                'products' => 'goods',
+                'product' => 'goods',
+            ]);
+
+            $rows[] = $this->row(
+                $slug,
+                title: ucwords(str_replace('-', ' ', $fixtureTitleSlug)),
+                cnTitle: str_replace('-', ' ', $fixtureTitleSlug),
                 soc: $expected['soc'],
                 onet: $expected['onet'],
             );
