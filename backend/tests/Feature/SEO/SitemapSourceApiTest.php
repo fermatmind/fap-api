@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\SEO;
 
+use App\Models\CareerJob;
 use App\Models\CareerJobDisplayAsset;
 use App\Models\Occupation;
 use App\Models\OccupationFamily;
@@ -42,6 +43,35 @@ class SitemapSourceApiTest extends TestCase
         $this->assertSame(count($locs), $response->json('count'));
     }
 
+    public function test_sitemap_source_only_exports_display_asset_backed_career_job_detail_urls(): void
+    {
+        config(['app.frontend_url' => 'https://www.fermatmind.com']);
+
+        $this->createCareerJob('backend-engineer', 'Backend Engineer', 'en');
+        $this->createCareerJob('backend-engineer', 'Backend Engineer', 'zh-CN');
+        $this->createCareerJob('software-engineer', 'Software Engineer', 'en');
+        $this->createCareerJob('software-engineer', 'Software Engineer', 'zh-CN');
+
+        $this->createDisplayAsset(
+            $this->createOccupation('data-scientists', 'Data Scientists'),
+            ['updated_at' => Carbon::create(2026, 1, 31, 12, 57, 0)]
+        );
+
+        $response = $this->getJson('/api/v0.5/seo/sitemap-source');
+
+        $response->assertOk();
+        $locs = collect($response->json('items'))->pluck('loc')->all();
+
+        $this->assertContains('https://fermatmind.com/en/career/jobs/data-scientists', $locs);
+        $this->assertContains('https://fermatmind.com/zh/career/jobs/data-scientists', $locs);
+        $this->assertNotContains('https://www.fermatmind.com/en/career/jobs/data-scientists', $locs);
+        $this->assertNotContains('https://www.fermatmind.com/zh/career/jobs/data-scientists', $locs);
+        $this->assertNotContains('https://fermatmind.com/en/career/jobs/backend-engineer', $locs);
+        $this->assertNotContains('https://fermatmind.com/zh/career/jobs/backend-engineer', $locs);
+        $this->assertNotContains('https://fermatmind.com/en/career/jobs/software-engineer', $locs);
+        $this->assertNotContains('https://fermatmind.com/zh/career/jobs/software-engineer', $locs);
+    }
+
     private function createOccupation(string $slug, string $title): Occupation
     {
         $family = OccupationFamily::query()->create([
@@ -69,6 +99,27 @@ class SitemapSourceApiTest extends TestCase
             'trust_inheritance_scope' => [],
             'created_at' => Carbon::create(2026, 1, 31, 12, 54, 0),
             'updated_at' => Carbon::create(2026, 1, 31, 12, 54, 0),
+        ]);
+    }
+
+    private function createCareerJob(string $slug, string $title, string $locale): CareerJob
+    {
+        return CareerJob::query()->create([
+            'org_id' => 0,
+            'job_code' => $slug,
+            'slug' => $slug,
+            'locale' => $locale,
+            'title' => $title,
+            'excerpt' => $title,
+            'status' => CareerJob::STATUS_PUBLISHED,
+            'is_public' => true,
+            'is_indexable' => true,
+            'published_at' => Carbon::create(2026, 1, 31, 12, 45, 0),
+            'scheduled_at' => null,
+            'schema_version' => 'v1',
+            'sort_order' => 0,
+            'created_at' => Carbon::create(2026, 1, 31, 12, 44, 0),
+            'updated_at' => Carbon::create(2026, 1, 31, 12, 45, 0),
         ]);
     }
 
