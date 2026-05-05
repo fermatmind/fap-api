@@ -1,6 +1,6 @@
 {
   "train_id": "email-first-result-access",
-  "updated_at": "2026-05-05T23:58:15+08:00",
+  "updated_at": "2026-05-06T00:04:20+08:00",
   "items": {
     "backend-email-binding-foundation": {
       "repo": "fap-api",
@@ -75,7 +75,7 @@
       "depends_on": [
         "backend-email-binding-foundation"
       ],
-      "commit_sha": "e040734a19faf236105a56bf7e82545a1b522e31",
+      "commit_sha": "5bf7f62faff90f167727b4550550ea4084da0798",
       "pr_url": "https://github.com/fermatmind/fap-api/pull/1187",
       "checks": {
         "dependency": {
@@ -129,8 +129,8 @@
           "evidence": "Full script exited 0."
         },
         "github_required_checks": {
-          "status": "pending_after_ci_fix",
-          "evidence": "Previous verify-mbti checks failed on the PR2 route diff freeze gate. Fixed in e040734a19faf236105a56bf7e82545a1b522e31 and awaiting GitHub checks on the new head."
+          "status": "pass",
+          "evidence": "GitHub checks passed on head 5bf7f62faff90f167727b4550550ea4084da0798: hygiene, verify-mbti-legacy, and verify-mbti-v2."
         }
       },
       "sidecar_issues": [
