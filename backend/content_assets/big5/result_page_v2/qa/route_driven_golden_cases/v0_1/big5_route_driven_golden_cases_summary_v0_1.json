@@ -1,0 +1,34 @@
+{
+  "version": "big5_route_driven_golden_cases.v0_1",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_pilot": false,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "case_count": 16,
+  "canonical_profile_family_case_count": 8,
+  "variant_case_count": 8,
+  "covered_profile_families": [
+    "sensitive_independent_thinker",
+    "vigilant_perfectionist",
+    "complex_explorer_low_structure",
+    "quiet_deep_worker",
+    "connective_coordinator",
+    "sharp_exploratory_driver",
+    "orderly_supporter",
+    "overloaded_internalizer"
+  ],
+  "variant_groups": [
+    "norm_unavailable",
+    "degraded_quality",
+    "low_profile_confidence",
+    "unresolved_suppression",
+    "surface_safety",
+    "coupling_alias_resolution",
+    "supplemental_coupling_resolution",
+    "metadata_non_leak"
+  ],
+  "no_body_generated": true,
+  "public_pilot_readiness_impact": "advisory_only_expanded_backend_golden_coverage",
+  "production_go": false
+}
