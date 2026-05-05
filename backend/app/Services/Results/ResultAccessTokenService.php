@@ -41,6 +41,29 @@ final class ResultAccessTokenService
     }
 
     /**
+     * @return array{token:string,expires_at:string}|null
+     */
+    public function issueForActiveAttemptBinding(int $orgId, string $attemptId): ?array
+    {
+        $normalizedAttemptId = trim($attemptId);
+        if ($normalizedAttemptId === '') {
+            return null;
+        }
+
+        $binding = AttemptEmailBinding::query()
+            ->where('org_id', max(0, $orgId))
+            ->where('attempt_id', $normalizedAttemptId)
+            ->where('status', AttemptEmailBinding::STATUS_ACTIVE)
+            ->orderByDesc('updated_at')
+            ->orderByDesc('created_at')
+            ->first();
+
+        return $binding instanceof AttemptEmailBinding
+            ? $this->issueForBinding($binding)
+            : null;
+    }
+
+    /**
      * @return array{
      *   v:int,
      *   typ:string,

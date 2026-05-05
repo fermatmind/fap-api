@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\Feature\V0_3;
 
 use App\Services\Commerce\PaymentRecoveryToken;
+use App\Services\Results\ResultAccessTokenService;
+use App\Support\PiiCipher;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -329,6 +331,66 @@ final class CommerceOrderReadFallbackTest extends TestCase
             ->assertJsonMissingPath('order');
     }
 
+    public function test_payment_recovery_paid_mbti_order_returns_email_bound_result_access_token_without_owner_identity(): void
+    {
+        config(['app.frontend_url' => 'https://web.example.test']);
+
+        $orderNo = 'ord_recovery_mbti_'.Str::lower(Str::random(10));
+        $attemptId = (string) Str::uuid();
+        $this->insertAttempt($attemptId, self::ANON_OWNER, 'MBTI', 'zh-CN');
+        $this->insertOrderForOwner($orderNo, $attemptId, 'fulfilled');
+        $this->insertResult($attemptId);
+        $this->insertActiveGrant($attemptId, $orderNo);
+        $this->insertEmailBinding($attemptId, 'owner@example.test');
+        $this->insertProjection($attemptId, [
+            'access_state' => 'ready',
+            'report_state' => 'ready',
+            'pdf_state' => 'ready',
+            'reason_code' => 'entitlement_granted',
+            'payload_json' => [
+                'access_level' => 'full',
+                'variant' => 'full',
+                'modules_allowed' => ['core_full', 'career', 'relationships'],
+                'modules_preview' => [],
+            ],
+        ]);
+
+        $paymentRecoveryToken = app(PaymentRecoveryToken::class)->issue($orderNo);
+        $response = $this->withHeaders([
+            'X-Payment-Recovery-Token' => $paymentRecoveryToken,
+        ])->getJson('/api/v0.3/orders/'.$orderNo);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('ok', true)
+            ->assertJsonPath('ownership_verified', false)
+            ->assertJsonPath('status', 'paid')
+            ->assertJsonPath('attempt_id', $attemptId)
+            ->assertJsonPath('payment_recovery_token', $paymentRecoveryToken)
+            ->assertJsonPath('exact_result_entry.attempt_id', $attemptId)
+            ->assertJsonPath('exact_result_entry.ready_to_enter', true);
+
+        $pageHref = (string) $response->json('exact_result_entry.actions.page_href');
+        $resultUrl = (string) $response->json('result_url');
+        $resultAccessToken = (string) $response->json('exact_result_entry.result_access_token');
+        $this->assertStringStartsWith("/result/{$attemptId}?access_token=", $pageHref);
+        $this->assertStringStartsWith("https://web.example.test/zh/result/{$attemptId}?access_token=", $resultUrl);
+        $this->assertNotSame('', $resultAccessToken);
+
+        $parsed = parse_url($pageHref);
+        parse_str((string) ($parsed['query'] ?? ''), $query);
+        $this->assertSame($resultAccessToken, $query['access_token'] ?? null);
+
+        $grant = app(ResultAccessTokenService::class)->verify($resultAccessToken);
+        $this->assertIsArray($grant);
+        $this->assertSame($attemptId, $grant['attempt_id']);
+
+        $this->getJson('/api/v0.3/attempts/'.$attemptId.'/report-access?access_token='.urlencode($resultAccessToken))
+            ->assertOk()
+            ->assertJsonPath('attempt_id', $attemptId)
+            ->assertJsonPath('access_state', 'ready')
+            ->assertJsonPath('report_state', 'ready');
+    }
+
     public function test_expired_payment_recovery_token_is_rejected(): void
     {
         $orderNo = 'ord_recovery_expired_'.Str::lower(Str::random(10));
@@ -501,6 +563,29 @@ final class CommerceOrderReadFallbackTest extends TestCase
             'source_event_id' => null,
             'created_at' => now(),
             'updated_at' => now(),
+        ]);
+    }
+
+    private function insertEmailBinding(string $attemptId, string $email): void
+    {
+        $cipher = app(PiiCipher::class);
+        $normalizedEmail = $cipher->normalizeEmail($email);
+
+        DB::table('attempt_email_bindings')->insert([
+            'id' => (string) Str::uuid(),
+            'org_id' => 0,
+            'attempt_id' => $attemptId,
+            'pii_email_key_version' => (string) $cipher->currentKeyVersion(),
+            'email_hash' => $cipher->emailHash($normalizedEmail),
+            'email_enc' => $cipher->encrypt($normalizedEmail),
+            'bound_anon_id' => self::ANON_OWNER,
+            'bound_user_id' => null,
+            'status' => 'active',
+            'source' => 'result_gate',
+            'first_bound_at' => now()->subMinute(),
+            'last_accessed_at' => null,
+            'created_at' => now()->subMinute(),
+            'updated_at' => now()->subMinute(),
         ]);
     }
 
