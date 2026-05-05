@@ -1,0 +1,107 @@
+{
+  "schema": "fap.big5.b5_b1.section_mapping_qa.v0_1",
+  "package_key": "B5-B1_O59_canonical_core_body_v0_1",
+  "status": "PASS",
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "checks": [
+    {
+      "check": "all_8_sections_present",
+      "status": "PASS",
+      "expected": [
+        "hero_summary",
+        "domains_overview",
+        "domain_deep_dive",
+        "facet_details",
+        "core_portrait",
+        "norms_comparison",
+        "action_plan",
+        "methodology_and_access"
+      ],
+      "actual": [
+        "hero_summary",
+        "domains_overview",
+        "domain_deep_dive",
+        "facet_details",
+        "core_portrait",
+        "norms_comparison",
+        "action_plan",
+        "methodology_and_access"
+      ]
+    },
+    {
+      "check": "norms_comparison_module_09_not_required",
+      "status": "PASS",
+      "actual_source_modules": [
+        "module_10_method_privacy"
+      ],
+      "note": "norms_comparison uses module_10_method_privacy plus longform norms/method content; module_09 remains deferred."
+    },
+    {
+      "check": "sections_meet_minimum_block_count",
+      "status": "PASS",
+      "details": [
+        {
+          "section_key": "hero_summary",
+          "block_count": 6,
+          "minimum": 5,
+          "status": "PASS"
+        },
+        {
+          "section_key": "domains_overview",
+          "block_count": 7,
+          "minimum": 6,
+          "status": "PASS"
+        },
+        {
+          "section_key": "domain_deep_dive",
+          "block_count": 6,
+          "minimum": 5,
+          "status": "PASS"
+        },
+        {
+          "section_key": "facet_details",
+          "block_count": 35,
+          "minimum": 8,
+          "status": "PASS"
+        },
+        {
+          "section_key": "core_portrait",
+          "block_count": 5,
+          "minimum": 5,
+          "status": "PASS"
+        },
+        {
+          "section_key": "norms_comparison",
+          "block_count": 5,
+          "minimum": 4,
+          "status": "PASS"
+        },
+        {
+          "section_key": "action_plan",
+          "block_count": 9,
+          "minimum": 7,
+          "status": "PASS"
+        },
+        {
+          "section_key": "methodology_and_access",
+          "block_count": 6,
+          "minimum": 5,
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "check": "all_sections_staging_only",
+      "status": "PASS"
+    },
+    {
+      "check": "all_sections_production_blocked",
+      "status": "PASS"
+    },
+    {
+      "check": "rendered_preview_required",
+      "status": "PASS"
+    }
+  ]
+}

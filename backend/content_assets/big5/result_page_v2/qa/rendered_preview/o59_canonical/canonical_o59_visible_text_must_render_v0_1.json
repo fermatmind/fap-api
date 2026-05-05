@@ -1,0 +1,208 @@
+{
+  "schema": "fap.big5.b5_b1.visible_text.must_render.v0_1",
+  "profile": {
+    "scores": {
+      "O": 59,
+      "C": 32,
+      "E": 20,
+      "A": 55,
+      "N": 68
+    },
+    "internal_combination_key": "O3_C2_E2_A3_N4",
+    "profile_label": "敏锐的独立思考者",
+    "axis": "高敏感 × 中高开放 × 克制进入",
+    "source_role": "canonical_body_seed"
+  },
+  "terms": [
+    {
+      "term": "敏锐的独立思考者",
+      "severity": "P0",
+      "required_surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf",
+        "share_card",
+        "history",
+        "compare"
+      ],
+      "expected_context": "profile label / result identity / safe summary"
+    },
+    {
+      "term": "O59 / C32 / E20 / A55 / N68",
+      "severity": "P0",
+      "required_surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "expected_context": "canonical score signature"
+    },
+    {
+      "term": "高敏感 × 中高开放 × 克制进入",
+      "severity": "P0",
+      "required_surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf",
+        "share_card",
+        "history",
+        "compare"
+      ],
+      "expected_context": "canonical axis / main tension"
+    },
+    {
+      "term": "Big Five 描述的是连续人格特质，不是固定人格类型",
+      "severity": "P0",
+      "required_surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf",
+        "share_card"
+      ],
+      "expected_context": "method / boundary / trust strip"
+    },
+    {
+      "term": "不用于医学诊断",
+      "severity": "P0",
+      "required_surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf",
+        "share_card"
+      ],
+      "expected_context": "safety boundary"
+    },
+    {
+      "term": "不用于心理治疗",
+      "severity": "P0",
+      "required_surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "expected_context": "safety boundary"
+    },
+    {
+      "term": "不用于招聘筛选",
+      "severity": "P0",
+      "required_surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf",
+        "share_card"
+      ],
+      "expected_context": "safety boundary"
+    },
+    {
+      "term": "画像名只是辅助理解标签",
+      "severity": "P0",
+      "required_surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf",
+        "share_card"
+      ],
+      "expected_context": "non-type boundary"
+    },
+    {
+      "term": "不是没尽责",
+      "severity": "P0",
+      "required_surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "expected_context": "facet reframe primary explanation"
+    },
+    {
+      "term": "不是社交差",
+      "severity": "P0",
+      "required_surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "expected_context": "facet reframe primary explanation"
+    },
+    {
+      "term": "不是玻璃心",
+      "severity": "P0",
+      "required_surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "expected_context": "facet reframe primary explanation"
+    },
+    {
+      "term": "工作",
+      "severity": "P1",
+      "required_surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf",
+        "history",
+        "compare"
+      ],
+      "expected_context": "scenario/action/lifecycle surface"
+    },
+    {
+      "term": "关系",
+      "severity": "P1",
+      "required_surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf",
+        "history",
+        "compare"
+      ],
+      "expected_context": "scenario/action/lifecycle surface"
+    },
+    {
+      "term": "压力",
+      "severity": "P1",
+      "required_surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf",
+        "history",
+        "compare"
+      ],
+      "expected_context": "scenario/action/lifecycle surface"
+    },
+    {
+      "term": "个人成长",
+      "severity": "P1",
+      "required_surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "expected_context": "scenario/action/lifecycle surface"
+    },
+    {
+      "term": "30 / 60 / 90 天路径",
+      "severity": "P0",
+      "required_surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "expected_context": "action_plan long-horizon path"
+    },
+    {
+      "term": "方法与边界说明",
+      "severity": "P0",
+      "required_surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "expected_context": "methodology_and_access section title"
+    }
+  ],
+  "notes": [
+    "Terms are QA expectations, not new generated body copy.",
+    "Surface scope determines where each term must appear."
+  ]
+}

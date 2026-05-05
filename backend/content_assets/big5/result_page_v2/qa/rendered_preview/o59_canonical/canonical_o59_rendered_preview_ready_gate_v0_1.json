@@ -1,0 +1,39 @@
+{
+  "schema": "fap.big5.b5_b1.rendered_preview_ready_gate.v0_1",
+  "profile": {
+    "scores": {
+      "O": 59,
+      "C": 32,
+      "E": 20,
+      "A": 55,
+      "N": 68
+    },
+    "internal_combination_key": "O3_C2_E2_A3_N4",
+    "profile_label": "敏锐的独立思考者",
+    "axis": "高敏感 × 中高开放 × 克制进入",
+    "source_role": "canonical_body_seed"
+  },
+  "ready_for_rendered_preview_execution": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_use_allowed": false,
+  "gate_requirements": {
+    "desktop_passed": false,
+    "mobile_passed": false,
+    "pdf_passed": false,
+    "share_card_passed": false,
+    "history_compare_no_metadata_leak": false,
+    "no_p0_banned_terms": false,
+    "repair_log_all_p0_closed": false
+  },
+  "pass_when_all_true": [
+    "desktop_passed",
+    "mobile_passed",
+    "pdf_passed",
+    "share_card_passed",
+    "history_compare_no_metadata_leak",
+    "no_p0_banned_terms",
+    "repair_log_all_p0_closed"
+  ],
+  "blocking_rule": "If any required flag remains false after execution, rendered preview QA fails and runtime/prod remain blocked."
+}

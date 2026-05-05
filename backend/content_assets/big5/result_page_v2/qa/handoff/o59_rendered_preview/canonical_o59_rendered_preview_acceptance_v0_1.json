@@ -1,0 +1,92 @@
+{
+  "schema": "fap.big5.b5_b1_o59.rendered_preview_acceptance.v0_1_1",
+  "acceptance": [
+    {
+      "id": "ACC-001",
+      "requirement": "fap-web contract test can read O59 fixture copied or referenced from fap-api PR #1129 fixture",
+      "blocking": true
+    },
+    {
+      "id": "ACC-002",
+      "requirement": "valid payload enters Big5 V2 rendered preview path",
+      "blocking": true
+    },
+    {
+      "id": "ACC-003",
+      "requirement": "result_page_desktop renders required visible terms and no P0 forbidden terms",
+      "blocking": true
+    },
+    {
+      "id": "ACC-004",
+      "requirement": "result_page_mobile renders required visible terms and no P0 forbidden terms",
+      "blocking": true
+    },
+    {
+      "id": "ACC-005",
+      "requirement": "invalid payload safely falls back to old path without invented body copy",
+      "blocking": true
+    },
+    {
+      "id": "ACC-006",
+      "requirement": "missing payload safely falls back to old path without claiming preview pass",
+      "blocking": true
+    },
+    {
+      "id": "ACC-007",
+      "requirement": "PDF/share/history/compare either pass existing harness or are marked pending_surface",
+      "blocking": true
+    },
+    {
+      "id": "ACC-008",
+      "requirement": "no backend, runtime, registry, or new prose changes are included in fap-web PR",
+      "blocking": true
+    },
+    {
+      "id": "ACC-009",
+      "requirement": "Codex final report includes tested_surfaces, pending_surfaces, passed_surfaces, and failed_surfaces arrays",
+      "blocking": true
+    },
+    {
+      "id": "ACC-010",
+      "requirement": "the term 'all' is checked only as a standalone visible placeholder/debug token, never by raw substring scan",
+      "blocking": true
+    }
+  ],
+  "ready_gate": {
+    "ready_for_codex_execution": true,
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "production_use_allowed": false
+  },
+  "revision": "v0.1.1",
+  "revision_notes": [
+    "v0.1.1 fixes manifest file list/count consistency.",
+    "v0.1.1 deduplicates surfaces arrays, including duplicated pdf entries.",
+    "v0.1.1 strengthens contextual all matching: no raw substring scan.",
+    "v0.1.1 requires tested_surfaces/pending_surfaces/passed_surfaces/failed_surfaces in Codex output."
+  ],
+  "version": "v0.1.1",
+  "required_codex_output_structure": {
+    "tested_surfaces": [],
+    "pending_surfaces": [],
+    "passed_surfaces": [],
+    "failed_surfaces": [],
+    "rule": "Every declared surface must appear in exactly one of pending_surfaces, passed_surfaces, or failed_surfaces. pending_surfaces do not count as passed."
+  },
+  "conditional_surface_policy": {
+    "conditional_surfaces": [
+      "compare",
+      "history",
+      "pdf",
+      "share_card"
+    ],
+    "if_existing_test_harness_missing": "mark pending_surface",
+    "must_not_claim_passed_without_harness": true,
+    "required_output_arrays": [
+      "tested_surfaces",
+      "pending_surfaces",
+      "passed_surfaces",
+      "failed_surfaces"
+    ]
+  }
+}

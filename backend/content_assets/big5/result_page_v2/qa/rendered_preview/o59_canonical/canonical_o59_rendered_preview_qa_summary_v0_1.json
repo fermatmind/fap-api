@@ -1,0 +1,37 @@
+{
+  "schema": "fap.big5.b5_b1.rendered_preview_qa_summary.v0_1",
+  "package_key": "B5-B1-Preview",
+  "created_at_utc": "2026-05-04T10:46:59.134843Z",
+  "profile": {
+    "scores": {
+      "O": 59,
+      "C": 32,
+      "E": 20,
+      "A": 55,
+      "N": 68
+    },
+    "internal_combination_key": "O3_C2_E2_A3_N4",
+    "profile_label": "敏锐的独立思考者",
+    "axis": "高敏感 × 中高开放 × 克制进入",
+    "source_role": "canonical_body_seed"
+  },
+  "surface_count": 6,
+  "surfaces": [
+    "result_page_desktop",
+    "result_page_mobile",
+    "pdf",
+    "share_card",
+    "history",
+    "compare"
+  ],
+  "expected_section_count_primary_surfaces": 8,
+  "must_render_term_count": 17,
+  "must_not_render_term_count": 23,
+  "ready_for_rendered_preview_execution": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "production_use_allowed": false,
+  "execution_status": "not_executed_yet",
+  "blocking_issues": [],
+  "next_step": "Codex / fap-web rendered preview execution using this QA pack"
+}

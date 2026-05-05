@@ -1,0 +1,162 @@
+{
+  "schema": "fap.big5.b5_b1.source_trace.v0_1",
+  "package_key": "B5-B1_O59_canonical_core_body_v0_1",
+  "source_documents": [
+    {
+      "source_id": "module_master",
+      "title": "FermatMind Big Five 新版结果页｜正式上线 V2.0",
+      "role": "module_master",
+      "used_for": [
+        "module structure",
+        "quick-standard-deep reading modes",
+        "module_00_to_10 source modules",
+        "user-facing V2 copy anchors"
+      ]
+    },
+    {
+      "source_id": "narrative_master",
+      "title": "FermatMind｜Big Five 完整结果页全文（最终成稿）",
+      "role": "narrative_master / canonical_body_master",
+      "used_for": [
+        "O59 canonical longform body",
+        "8-section deep copy",
+        "profile axis and core narrative"
+      ]
+    },
+    {
+      "source_id": "mapping_authority",
+      "title": "B5-A-lite v0.1",
+      "role": "section mapping authority",
+      "used_for": [
+        "module-to-section mapping",
+        "runtime/staging boundary",
+        "anti-target render terms"
+      ]
+    }
+  ],
+  "profile": {
+    "profile_id": "canonical_o59_c32_e20_a55_n68",
+    "scores": {
+      "O": 59,
+      "C": 32,
+      "E": 20,
+      "A": 55,
+      "N": 68
+    },
+    "internal_combination_key": "O3_C2_E2_A3_N4",
+    "profile_label": "敏锐的独立思考者",
+    "axis": "高敏感 × 中高开放 × 克制进入",
+    "source_role": "canonical_body_seed",
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  "section_source_map": [
+    {
+      "section_key": "hero_summary",
+      "source_modules": [
+        "module_01_hero",
+        "module_02_quick_understanding"
+      ],
+      "source_doc_refs": [
+        "V2.0 Module 1 首屏快读卡",
+        "V2.0 Module 2 三分钟理解版",
+        "两万字稿 第 1 节 结果摘要"
+      ],
+      "block_count": 6
+    },
+    {
+      "section_key": "domains_overview",
+      "source_modules": [
+        "module_02_quick_understanding",
+        "module_03_trait_deep_dive"
+      ],
+      "source_doc_refs": [
+        "V2.0 Module 1 五维快照",
+        "V2.0 Module 3 五维分数深解",
+        "两万字稿 第 2 节 维度总览与阅读说明"
+      ],
+      "block_count": 7
+    },
+    {
+      "section_key": "domain_deep_dive",
+      "source_modules": [
+        "module_03_trait_deep_dive"
+      ],
+      "source_doc_refs": [
+        "V2.0 Module 3 五维分数深解",
+        "两万字稿 五维深解相关段落"
+      ],
+      "block_count": 6
+    },
+    {
+      "section_key": "facet_details",
+      "source_modules": [
+        "module_05_facet_reframe"
+      ],
+      "source_doc_refs": [
+        "V2.0 Module 5 Facet 反直觉发现",
+        "两万字稿 facet 焦点与数据核心层"
+      ],
+      "block_count": 35
+    },
+    {
+      "section_key": "core_portrait",
+      "source_modules": [
+        "module_02_quick_understanding",
+        "module_04_coupling"
+      ],
+      "source_doc_refs": [
+        "V2.0 Module 2 三分钟理解版",
+        "V2.0 Module 4 核心动力耦合",
+        "两万字稿 性格指纹图谱与主导冲突"
+      ],
+      "block_count": 5
+    },
+    {
+      "section_key": "norms_comparison",
+      "source_modules": [
+        "module_10_method_privacy"
+      ],
+      "source_doc_refs": [
+        "V2.0 Module 10 方法、边界与隐私说明",
+        "两万字稿 第 2 节 如何阅读这份报告",
+        "两万字稿 相对参照与分数解释内容"
+      ],
+      "block_count": 5
+    },
+    {
+      "section_key": "action_plan",
+      "source_modules": [
+        "module_06_application_matrix",
+        "module_07_collaboration_manual"
+      ],
+      "source_doc_refs": [
+        "V2.0 Module 6 现实应用矩阵",
+        "V2.0 Module 7 协作说明书",
+        "两万字稿 行动建议与 30/60/90 天路径"
+      ],
+      "block_count": 9
+    },
+    {
+      "section_key": "methodology_and_access",
+      "source_modules": [
+        "module_00_trust_bar",
+        "module_10_method_privacy"
+      ],
+      "source_doc_refs": [
+        "V2.0 Module 0 顶部信任条",
+        "V2.0 Module 10 方法、边界与隐私说明",
+        "两万字稿 第 8 节 方法与边界说明"
+      ],
+      "block_count": 6
+    }
+  ],
+  "notes": [
+    "This package is canonical O59 staging content only.",
+    "No 325 selector-ready asset body was used as B5-B1 core body.",
+    "QA / Policy package is not used as prose source.",
+    "module_09_feedback_data_flywheel is not a required source for norms_comparison; it remains deferred to lifecycle / observation."
+  ]
+}

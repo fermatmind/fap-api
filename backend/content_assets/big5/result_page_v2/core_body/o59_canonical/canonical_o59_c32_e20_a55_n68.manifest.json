@@ -1,0 +1,79 @@
+{
+  "schema": "fap.big5.b5_b1.manifest.v0_1",
+  "package_key": "B5-B1_O59_canonical_core_body_v0_1",
+  "created_at_utc": "2026-05-04T09:56:36.584272Z",
+  "locale": "zh-CN",
+  "profile": {
+    "profile_id": "canonical_o59_c32_e20_a55_n68",
+    "scores": {
+      "O": 59,
+      "C": 32,
+      "E": 20,
+      "A": 55,
+      "N": 68
+    },
+    "internal_combination_key": "O3_C2_E2_A3_N4",
+    "profile_label": "敏锐的独立思考者",
+    "axis": "高敏感 × 中高开放 × 克制进入",
+    "source_role": "canonical_body_seed",
+    "runtime_use": "staging_only",
+    "production_use_allowed": false,
+    "ready_for_runtime": false,
+    "ready_for_production": false
+  },
+  "file_count": 13,
+  "section_count": 8,
+  "block_count": 79,
+  "runtime_use": "staging_only",
+  "production_use_allowed": false,
+  "ready_for_rendered_preview": true,
+  "ready_for_runtime": false,
+  "ready_for_production": false,
+  "source_authority": {
+    "module_master": "FermatMind_BigFive_新版结果页_正式上线V2.0.docx",
+    "narrative_master": "FermatMind_BigFive_正式上线结果页全文_两万字最终稿.docx",
+    "mapping_authority": "B5-A-lite_v0_1 module-to-section mapping"
+  },
+  "forbidden_use": [
+    "do_not_generalize_to_all_users",
+    "do_not_use_as_3125_report",
+    "do_not_runtime_wire",
+    "do_not_treat_325_selector_assets_as_body",
+    "do_not_treat_QA_policy_as_body"
+  ],
+  "files": {
+    "json": [
+      "canonical_o59_c32_e20_a55_n68.core_body.json",
+      "canonical_o59_c32_e20_a55_n68.manifest.json",
+      "canonical_o59_c32_e20_a55_n68.source_trace.json",
+      "canonical_o59_c32_e20_a55_n68.section_mapping_qa.json",
+      "canonical_o59_c32_e20_a55_n68.safety_qa_summary.json",
+      "canonical_o59_c32_e20_a55_n68.ready_for_preview.json"
+    ],
+    "csv": [
+      "canonical_o59_core_body_assets.csv",
+      "canonical_o59_section_coverage.csv",
+      "canonical_o59_source_trace.csv"
+    ],
+    "markdown": [
+      "README.md",
+      "canonical_o59_review_notes.md",
+      "canonical_o59_repair_log.md",
+      "SHA256SUMS.txt"
+    ]
+  },
+  "sha256": {
+    "README.md": "11735728fcd28c9b6f476a2a9a4c8a65b92ae19b8ed5996bb84d78f3e4f4b15b",
+    "canonical_o59_c32_e20_a55_n68.core_body.json": "afe86fd71e668fdbcde6ba09288d981ce256be0751794ad9f7064bfd6537e20e",
+    "canonical_o59_c32_e20_a55_n68.manifest.json": "031f7662ab13014f1d4ebd3a2fc62ccc1c6e6cfecc360fce1d0a27fb23b5ce30",
+    "canonical_o59_c32_e20_a55_n68.ready_for_preview.json": "b1eda5d09f8d009a2330a13befb92a72d53cec72ac21a9d731f049ea9d04f4ab",
+    "canonical_o59_c32_e20_a55_n68.safety_qa_summary.json": "daf0a6320a635d5ede056b06e760ecddbd7663a7d4ff62462df49f1def080dd3",
+    "canonical_o59_c32_e20_a55_n68.section_mapping_qa.json": "c327e65677a31dda09c112979d156f3d4419f64be3b0ede95b96248b260cbc95",
+    "canonical_o59_c32_e20_a55_n68.source_trace.json": "3dc4ea28151df7595e8eaf8de715e4d8d028dc181452b076e51327564ccdc09b",
+    "canonical_o59_core_body_assets.csv": "7d306868f272b57815a9ca825fe42665e36858390011e73be5bda0c1e37e82bb",
+    "canonical_o59_repair_log.md": "6b2d2066977f09875614968d8d26b7a462fe543ebe3782c9a2e20affa28de700",
+    "canonical_o59_review_notes.md": "3f5662fb6549f0de436f14bdd9d726bcc32189b53f8edc6c788d5a44f37dded6",
+    "canonical_o59_section_coverage.csv": "c3ba5026fbf02fbe9f7d6202eb8f596837b8622fce7ef36626e4b4ff3f36a3f5",
+    "canonical_o59_source_trace.csv": "c0a4bb323d83c5b6bebc9b41e4c46568f9cb8f3984021160f8796edd1351427f"
+  }
+}

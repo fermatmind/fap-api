@@ -1,0 +1,433 @@
+{
+  "schema": "fap.big5.b5_b1_o59.visible_text_assertion_matrix.v0_1_1",
+  "must_render_terms": [
+    {
+      "term": "敏锐的独立思考者",
+      "category": "profile_label",
+      "severity": "P0",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf",
+        "share_card",
+        "history",
+        "compare"
+      ],
+      "required_on_primary_result_surfaces": true
+    },
+    {
+      "term": "O59 / C32 / E20 / A55 / N68",
+      "category": "score_vector",
+      "severity": "P0",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "required_on_primary_result_surfaces": true
+    },
+    {
+      "term": "高敏感 × 中高开放 × 克制进入",
+      "category": "axis",
+      "severity": "P0",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf",
+        "share_card"
+      ],
+      "required_on_primary_result_surfaces": true
+    },
+    {
+      "term": "Big Five 描述的是连续人格特质，不是固定人格类型",
+      "category": "boundary",
+      "severity": "P0",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "required_on_primary_result_surfaces": true
+    },
+    {
+      "term": "不用于医学诊断",
+      "category": "boundary",
+      "severity": "P0",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "required_on_primary_result_surfaces": true
+    },
+    {
+      "term": "不用于心理治疗",
+      "category": "boundary",
+      "severity": "P0",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "required_on_primary_result_surfaces": true
+    },
+    {
+      "term": "不用于招聘筛选",
+      "category": "boundary",
+      "severity": "P0",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "required_on_primary_result_surfaces": true
+    },
+    {
+      "term": "画像名只是辅助理解标签",
+      "category": "boundary",
+      "severity": "P0",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "required_on_primary_result_surfaces": true
+    },
+    {
+      "term": "不是没尽责",
+      "category": "facet_reframe",
+      "severity": "P0",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "required_on_primary_result_surfaces": true
+    },
+    {
+      "term": "不是社交差",
+      "category": "facet_reframe",
+      "severity": "P0",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "required_on_primary_result_surfaces": true
+    },
+    {
+      "term": "不是玻璃心",
+      "category": "facet_reframe",
+      "severity": "P0",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "required_on_primary_result_surfaces": true
+    },
+    {
+      "term": "工作",
+      "category": "action_scenario",
+      "severity": "P1",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "required_on_primary_result_surfaces": true
+    },
+    {
+      "term": "关系",
+      "category": "action_scenario",
+      "severity": "P1",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "required_on_primary_result_surfaces": true
+    },
+    {
+      "term": "压力",
+      "category": "action_scenario",
+      "severity": "P1",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "required_on_primary_result_surfaces": true
+    },
+    {
+      "term": "个人成长",
+      "category": "action_scenario",
+      "severity": "P1",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "required_on_primary_result_surfaces": true
+    },
+    {
+      "term": "30 / 60 / 90 天路径",
+      "category": "action_path",
+      "severity": "P1",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "required_on_primary_result_surfaces": true
+    },
+    {
+      "term": "方法与边界说明",
+      "category": "method_boundary_section_title",
+      "severity": "P0",
+      "surfaces": [
+        "result_page_desktop",
+        "result_page_mobile",
+        "pdf"
+      ],
+      "required_on_primary_result_surfaces": true
+    }
+  ],
+  "must_not_render_terms": [
+    {
+      "term": "A compact overview",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "any user-visible result body, heading, subtitle, fixture rendered text",
+      "repair_action": "route rendered body to O59 canonical core body; remove compact fallback source"
+    },
+    {
+      "term": "Five-domain distribution with percentile-oriented context",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "any user-visible section subtitle",
+      "repair_action": "replace legacy frontend microcopy with canonical section title/subtitle from fixture"
+    },
+    {
+      "term": "Focused read on domain-level strengths",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "any user-visible section subtitle",
+      "repair_action": "ensure domain_deep_dive renders canonical O59 body blocks"
+    },
+    {
+      "term": "Facet-level signals arranged for quick interpretation",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "facet_details section subtitle or body",
+      "repair_action": "ensure facet_details renders reframe body and directory separately"
+    },
+    {
+      "term": "Norms Comparison",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "non-rendered code comments only",
+      "forbidden_context": "user-visible heading/subtitle/body",
+      "repair_action": "render 中文 section title 相对参照 or approved Chinese heading"
+    },
+    {
+      "term": "Methodology and Access",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "non-rendered internal key only",
+      "forbidden_context": "user-visible heading/subtitle/body",
+      "repair_action": "render 方法与边界说明"
+    },
+    {
+      "term": "N1 百分位 作为主体解释",
+      "severity": "P0",
+      "surface": "result_page_desktop|result_page_mobile|pdf",
+      "allowed_context": "N1 百分位 may appear only inside full facet directory / metric row, never as primary facet_details narrative",
+      "forbidden_context": "facet_details primary explanation, anomaly card body, section intro",
+      "repair_action": "move percentile rows to directory; render reframe blocks as section body"
+    },
+    {
+      "term": "all",
+      "severity": "P1",
+      "surface": "all",
+      "allowed_context": "Allowed inside words like 'callout'/'allowlisted', schema kind values, internal code strings, and non-rendered JSON/code/fixtures.",
+      "forbidden_context": "Only a standalone visible placeholder/debug token exactly equal to 'all' in rendered user-visible text.",
+      "repair_action": "Filter placeholder/debug token from rendered output; do not implement raw substring scan.",
+      "match_mode": "standalone_visible_token_exact",
+      "raw_substring_scan_allowed": false,
+      "case_sensitive": false
+    },
+    {
+      "term": "优先关注成长面向",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "action_plan or shell body",
+      "repair_action": "render scenario-bound action plan and 30/60/90 path"
+    },
+    {
+      "term": "O6, C5, E6",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "non-user-visible fixture source only",
+      "forbidden_context": "user-visible action summary or growth priority",
+      "repair_action": "replace short facet-code action with canonical action blocks"
+    },
+    {
+      "term": "[object Object]",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "none",
+      "forbidden_context": "any visible text",
+      "repair_action": "fix renderer serialization / block flattening"
+    },
+    {
+      "term": "deferred_to_future",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "non-rendered QA metadata only",
+      "forbidden_context": "visible text",
+      "repair_action": "suppress pending placeholders from UI"
+    },
+    {
+      "term": "policy_not_shipped",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "non-rendered QA metadata only",
+      "forbidden_context": "visible text",
+      "repair_action": "suppress QA policy state from UI"
+    },
+    {
+      "term": "frontend_fallback",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "non-rendered test name only",
+      "forbidden_context": "visible text",
+      "repair_action": "do not render fallback provenance/debug fields"
+    },
+    {
+      "term": "internal_metadata",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "non-rendered trace only",
+      "forbidden_context": "visible text",
+      "repair_action": "sanitize view model before render"
+    },
+    {
+      "term": "selector_basis",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "non-rendered selector trace only",
+      "forbidden_context": "visible text",
+      "repair_action": "sanitize selector trace fields"
+    },
+    {
+      "term": "selection_guidance",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "non-rendered asset metadata only",
+      "forbidden_context": "visible text",
+      "repair_action": "block metadata fields from renderer"
+    },
+    {
+      "term": "editor_notes",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "non-rendered QA metadata only",
+      "forbidden_context": "visible text",
+      "repair_action": "block editor notes from public payload"
+    },
+    {
+      "term": "qa_notes",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "non-rendered QA metadata only",
+      "forbidden_context": "visible text",
+      "repair_action": "block QA fields from render"
+    },
+    {
+      "term": "source_reference",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "non-rendered source trace only",
+      "forbidden_context": "visible text",
+      "repair_action": "do not expose source trace to user UI"
+    },
+    {
+      "term": "import_policy",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "non-rendered governance metadata only",
+      "forbidden_context": "visible text",
+      "repair_action": "block governance metadata from UI"
+    },
+    {
+      "term": "runtime_use",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "non-rendered metadata only",
+      "forbidden_context": "visible text",
+      "repair_action": "do not render internal asset flags"
+    },
+    {
+      "term": "production_use_allowed",
+      "severity": "P0",
+      "surface": "all",
+      "allowed_context": "non-rendered metadata only",
+      "forbidden_context": "visible text",
+      "repair_action": "do not render internal asset flags"
+    }
+  ],
+  "contextual_rules": {
+    "all": "Only fail standalone visible placeholder/debug leakage. Do not fail words containing all such as callout or non-visible schema kind values.",
+    "N1 百分位": "Allowed in full facet directory / metric row. Fails if used as facet_details primary narrative or anomaly-card substitute."
+  },
+  "revision": "v0.1.1",
+  "revision_notes": [
+    "v0.1.1 fixes manifest file list/count consistency.",
+    "v0.1.1 deduplicates surfaces arrays, including duplicated pdf entries.",
+    "v0.1.1 strengthens contextual all matching: no raw substring scan.",
+    "v0.1.1 requires tested_surfaces/pending_surfaces/passed_surfaces/failed_surfaces in Codex output."
+  ],
+  "version": "v0.1.1",
+  "global_contextual_rules": {
+    "all": {
+      "term": "all",
+      "scope": "user_visible_rendered_text_only",
+      "match_mode": "standalone_visible_token_exact",
+      "raw_substring_scan_allowed": false,
+      "case_sensitive": false,
+      "normalization": "trim visible text node; collapse whitespace; compare exact visible token",
+      "allowed_context": [
+        "words containing all, including 'callout' and 'allowlisted'",
+        "schema kind values",
+        "internal code strings",
+        "non-rendered JSON, TypeScript, fixture, or QA metadata"
+      ],
+      "forbidden_context": [
+        "standalone visible line exactly equal to 'all'",
+        "placeholder/debug leakage rendered in facet rows or table cells",
+        "raw internal placeholder exposed to user-visible UI"
+      ],
+      "implementation_warning": "Do not use raw substring matching for 'all'. Do not fail 'callout', 'allowlisted', or internal code strings."
+    },
+    "N1 百分位": {
+      "term": "N1 百分位",
+      "scope": "facet_details",
+      "allowed_context": [
+        "full facet directory",
+        "metric row",
+        "appendix-like score table"
+      ],
+      "forbidden_context": [
+        "facet_details primary narrative",
+        "anomaly card body",
+        "section intro"
+      ]
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schema": "fap.big5.b5_b1_o59.rendered_preview_handoff.manifest.v0_1_1",
+  "package": "B5-B1_O59_rendered_preview_codex_handoff_v0_1_1_file_package",
+  "version": "v0.1.1",
+  "created_at": "2026-05-04T00:00:00Z",
+  "source_packages": [
+    "B5-B1 O59 canonical core body v0.1",
+    "B5-B1-Preview O59 rendered preview QA v0.1",
+    "B5-B1-Preview-Codex-Handoff v0.1 revised into v0.1.1",
+    "fap-api PR #1129 fixture: backend/tests/Fixtures/big5_result_page_v2/canonical_o59_core_body_preview.payload.json"
+  ],
+  "revision_summary": [
+    "manifest files list is unique and matches actual zip contents",
+    "file_count equals actual unique file count",
+    "visible text matrix surfaces are deduplicated",
+    "'all' is scoped to standalone visible placeholder/debug token only",
+    "Codex final output must include tested_surfaces, pending_surfaces, passed_surfaces, failed_surfaces"
+  ],
+  "files": [
+    "README.md",
+    "SHA256SUMS.txt",
+    "canonical_o59_fap_web_fixture_import_plan_v0_1.json",
+    "canonical_o59_frontend_contract_test_requirements_v0_1.json",
+    "canonical_o59_rendered_preview_acceptance_v0_1.json",
+    "canonical_o59_rendered_preview_codex_handoff_v0_1.json",
+    "canonical_o59_surface_execution_matrix_v0_1.json",
+    "canonical_o59_visible_text_assertion_matrix_v0_1.json",
+    "codex_instruction_b5_b1_o59_rendered_preview_contract_test.md",
+    "contract_test_acceptance.csv",
+    "manifest.json",
+    "repair_log_template.md",
+    "surface_execution_matrix.csv",
+    "visible_text_assertion_matrix.csv"
+  ],
+  "file_count": 14,
+  "status": {
+    "ready_for_codex_execution": true,
+    "ready_for_runtime": false,
+    "ready_for_production": false,
+    "production_use_allowed": false
+  },
+  "required_codex_output_structure": {
+    "tested_surfaces": [],
+    "pending_surfaces": [],
+    "passed_surfaces": [],
+    "failed_surfaces": [],
+    "rule": "Every declared surface must appear in exactly one of pending_surfaces, passed_surfaces, or failed_surfaces. pending_surfaces do not count as passed."
+  }
+}
