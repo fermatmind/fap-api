@@ -140,6 +140,8 @@ final class CareerValidateDisplayBatch extends Command
         {--slugs= : Optional comma-separated explicit slug allowlist; omitted means read-only full workbook scan}
         {--json : Emit JSON report}
         {--output= : Optional report output path}
+        {--plan-output= : Optional full-upload plan JSON output path for full workbook scans}
+        {--plan-md-output= : Optional full-upload plan Markdown summary output path for full workbook scans}
         {--strict-authority : Fail when local authority DB validation is unavailable}';
 
     protected $description = 'Read-only readiness validator for allowlisted career display workbook rows.';
@@ -287,6 +289,7 @@ final class CareerValidateDisplayBatch extends Command
             'missing_slugs' => [],
             'duplicate_slugs' => array_keys($duplicateRows),
             'summary' => $summary,
+            'full_upload_plan' => $this->fullUploadPlan($file, $workbook, $items),
             'blockers_by_owner' => $this->blockersByOwner($items),
             'recommended_next_batches' => $this->recommendedNextBatches($items),
             'crosswalk_policy_summary' => $this->crosswalkPolicySummary($items),
@@ -299,6 +302,8 @@ final class CareerValidateDisplayBatch extends Command
         if ($strictAuthorityFailure) {
             $report['errors'] = ['Local authority DB is unavailable and --strict-authority was requested.'];
         }
+
+        $this->writeFullUploadPlanArtifacts((array) $report['full_upload_plan']);
 
         return $this->finish($report, ! $strictAuthorityFailure);
     }
@@ -386,6 +391,7 @@ final class CareerValidateDisplayBatch extends Command
         return [
             'identity' => [
                 'slug' => $slug,
+                'row_number' => (int) ($row['_row_number'] ?? 0),
                 'title_en' => $this->stringValue($row, 'EN_Title'),
                 'title_zh' => $this->stringValue($row, 'CN_Title'),
                 'SOC_Code' => $this->stringValue($row, 'SOC_Code'),
@@ -758,7 +764,7 @@ final class CareerValidateDisplayBatch extends Command
                 'display_assets' => $displayAssets,
                 'docx_fallbacks' => $docxFallbacks,
             ];
-        } catch (QueryException) {
+        } catch (Throwable) {
             return ['available' => false];
         }
     }
@@ -1195,6 +1201,230 @@ final class CareerValidateDisplayBatch extends Command
         }
 
         return array_map(static fn (array $slugs): array => array_slice($slugs, 0, 50), $batches);
+    }
+
+    /**
+     * @param  array{headers: list<string>, rows: list<array<string, string|int>>, total_rows: int}  $workbook
+     * @param  list<array<string, mixed>>  $items
+     * @return array<string, mixed>
+     */
+    private function fullUploadPlan(string $file, array $workbook, array $items): array
+    {
+        $rows = array_map(fn (array $item): array => $this->fullUploadPlanRow($item), $items);
+        $summary = $this->fullUploadPlanSummary($rows);
+        $manifestPayload = [
+            'planner_version' => 'career_full_upload_planner_v0.1',
+            'workbook_sha256' => hash_file('sha256', $file) ?: null,
+            'row_count' => count($rows),
+            'upload_candidate_slugs' => array_values(array_map(
+                static fn (array $row): string => (string) $row['slug'],
+                array_filter($rows, static fn (array $row): bool => (bool) $row['import_eligible']),
+            )),
+        ];
+
+        return [
+            'workbook' => [
+                'path' => $file,
+                'sha256' => hash_file('sha256', $file) ?: null,
+                'sheet' => self::SHEET_NAME,
+                'rows' => $workbook['total_rows'],
+                'columns' => count($workbook['headers']),
+            ],
+            'planner' => [
+                'version' => 'career_full_upload_planner_v0.1',
+                'generated_at' => now()->toISOString(),
+                'db_baseline' => [
+                    'career_job_display_assets' => $this->displayAssetBaselineCount(),
+                ],
+                'upload_manifest_sha256' => hash('sha256', json_encode($manifestPayload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: ''),
+            ],
+            'rows' => $rows,
+            'summary' => $summary,
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $item
+     * @return array<string, mixed>
+     */
+    private function fullUploadPlanRow(array $item): array
+    {
+        $identity = (array) ($item['identity'] ?? []);
+        $authority = (array) ($item['authority_gate'] ?? []);
+        $scores = (array) ($item['scores'] ?? []);
+        $status = $this->fullUploadPlanStatus($item);
+        $importEligible = $status === 'upload_candidate';
+
+        return [
+            'row_number' => (int) ($identity['row_number'] ?? 0),
+            'slug' => (string) ($identity['slug'] ?? ''),
+            'status' => $status,
+            'canonical_slug' => (string) ($identity['slug'] ?? ''),
+            'hold_reason' => $this->fullUploadHoldReason($status),
+            'import_eligible' => $importEligible,
+            'cohort_id' => $importEligible ? 'full_upload_manifest' : null,
+            'authority_state' => (string) ($authority['authority_state'] ?? ''),
+            'display_surface_ready' => (bool) ($authority['display_surface_ready'] ?? false),
+            'scores' => [
+                'import_score' => (int) ($scores['import_score'] ?? 0),
+                'authority_score' => (int) ($scores['authority_score'] ?? 0),
+                'content_score' => (int) ($scores['content_score'] ?? 0),
+                'schema_score' => (int) ($scores['schema_score'] ?? 0),
+                'cta_score' => (int) ($scores['cta_score'] ?? 0),
+                'source_score' => (int) ($scores['source_score'] ?? 0),
+                'link_score' => (int) ($scores['link_score'] ?? 0),
+                'evidence_score' => (int) ($scores['evidence_score'] ?? 0),
+            ],
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $item
+     */
+    private function fullUploadPlanStatus(array $item): string
+    {
+        $identity = (array) ($item['identity'] ?? []);
+        $authority = (array) ($item['authority_gate'] ?? []);
+        $scores = (array) ($item['scores'] ?? []);
+        $slug = (string) ($identity['slug'] ?? '');
+        $socCode = (string) ($identity['SOC_Code'] ?? '');
+        $onetCode = (string) ($identity['O_NET_Code'] ?? '');
+
+        if ($slug === 'software-developers') {
+            return 'manual_hold';
+        }
+        if (str_starts_with($slug, 'cn-') || str_starts_with($socCode, 'CN-') || $onetCode === 'not_applicable_cn_occupation') {
+            return 'CN_proxy_hold';
+        }
+        if ($socCode === 'BLS_BROAD_GROUP' || $onetCode === 'multiple_onet_occupations' || str_ends_with($slug, '-all-other')) {
+            return 'broad_group_hold';
+        }
+        if ((string) ($authority['authority_state'] ?? '') === 'docx_fallback') {
+            return 'duplicate_identity_hold';
+        }
+        if ((string) ($authority['authority_state'] ?? '') === 'authority_unavailable') {
+            return 'blocked_external_sidecar';
+        }
+        if ((bool) ($authority['display_surface_ready'] ?? false)) {
+            return 'already_imported_validated';
+        }
+        if (($scores['content_score'] ?? 0) < 100
+            || ($scores['schema_score'] ?? 0) < 100
+            || ($scores['cta_score'] ?? 0) < 100
+            || ($scores['source_score'] ?? 0) < 100
+            || ($scores['link_score'] ?? 0) < 100
+            || ($scores['evidence_score'] ?? 0) < 100) {
+            return 'needs_workbook_repair';
+        }
+        if (($scores['authority_score'] ?? 0) < 100) {
+            return 'needs_authority_alignment';
+        }
+        if (($scores['import_score'] ?? 0) === 100) {
+            return 'upload_candidate';
+        }
+
+        return 'non_importable';
+    }
+
+    private function fullUploadHoldReason(string $status): ?string
+    {
+        return match ($status) {
+            'manual_hold' => 'manual hold; excluded from selected display import',
+            'duplicate_identity_hold' => 'duplicate/docx fallback identity; requires identity governance before import',
+            'broad_group_hold' => 'broad group or multi-occupation mapping; excluded from canonical display import',
+            'CN_proxy_hold' => 'CN proxy authority row; excluded from canonical selected display import',
+            'blocked_external_sidecar' => 'authority DB unavailable; planner cannot safely classify import eligibility',
+            default => null,
+        };
+    }
+
+    private function displayAssetBaselineCount(): ?int
+    {
+        if (is_array($this->authoritySnapshot)
+            && (bool) ($this->authoritySnapshot['available'] ?? false)) {
+            return count((array) ($this->authoritySnapshot['display_assets'] ?? []));
+        }
+
+        return null;
+    }
+
+    /**
+     * @param  list<array<string, mixed>>  $rows
+     * @return array<string, mixed>
+     */
+    private function fullUploadPlanSummary(array $rows): array
+    {
+        $counts = array_fill_keys([
+            'already_imported_validated',
+            'upload_candidate',
+            'needs_workbook_repair',
+            'needs_authority_alignment',
+            'duplicate_identity_hold',
+            'broad_group_hold',
+            'CN_proxy_hold',
+            'manual_hold',
+            'non_importable',
+            'blocked_external_sidecar',
+        ], 0);
+
+        foreach ($rows as $row) {
+            $status = (string) ($row['status'] ?? 'non_importable');
+            $counts[$status] = ($counts[$status] ?? 0) + 1;
+        }
+
+        $holdCount = $counts['manual_hold']
+            + $counts['duplicate_identity_hold']
+            + $counts['broad_group_hold']
+            + $counts['CN_proxy_hold'];
+
+        return [
+            'already_imported_validated' => $counts['already_imported_validated'],
+            'upload_candidates' => $counts['upload_candidate'],
+            'holds' => [
+                'manual_hold' => $counts['manual_hold'],
+                'duplicate_identity_hold' => $counts['duplicate_identity_hold'],
+                'broad_group_hold' => $counts['broad_group_hold'],
+                'CN_proxy_hold' => $counts['CN_proxy_hold'],
+                'total' => $holdCount,
+            ],
+            'needs_workbook_repair' => $counts['needs_workbook_repair'],
+            'needs_authority_alignment' => $counts['needs_authority_alignment'],
+            'unresolved' => $counts['non_importable'] + $counts['blocked_external_sidecar'],
+            'status_counts' => $counts,
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $plan
+     */
+    private function writeFullUploadPlanArtifacts(array $plan): void
+    {
+        $jsonOutput = trim((string) ($this->option('plan-output') ?? ''));
+        if ($jsonOutput !== '') {
+            $json = json_encode($plan, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            if (! is_string($json) || file_put_contents($jsonOutput, $json.PHP_EOL) === false) {
+                throw new RuntimeException('Unable to write full-upload plan output: '.$jsonOutput);
+            }
+        }
+
+        $mdOutput = trim((string) ($this->option('plan-md-output') ?? ''));
+        if ($mdOutput !== '') {
+            $summary = (array) ($plan['summary'] ?? []);
+            $workbook = (array) ($plan['workbook'] ?? []);
+            $markdown = "# Career Full Upload Plan\n\n"
+                .'workbook: '.(string) ($workbook['path'] ?? '')."\n\n"
+                .'sha256: '.(string) ($workbook['sha256'] ?? '')."\n\n"
+                .'rows: '.(string) ($workbook['rows'] ?? '')."\n\n"
+                .'already_imported_validated: '.(string) ($summary['already_imported_validated'] ?? 0)."\n\n"
+                .'upload_candidates: '.(string) ($summary['upload_candidates'] ?? 0)."\n\n"
+                .'needs_workbook_repair: '.(string) ($summary['needs_workbook_repair'] ?? 0)."\n\n"
+                .'needs_authority_alignment: '.(string) ($summary['needs_authority_alignment'] ?? 0)."\n\n"
+                .'holds: '.json_encode($summary['holds'] ?? [], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)."\n";
+
+            if (file_put_contents($mdOutput, $markdown) === false) {
+                throw new RuntimeException('Unable to write full-upload plan Markdown output: '.$mdOutput);
+            }
+        }
     }
 
     /**

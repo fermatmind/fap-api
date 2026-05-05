@@ -125,6 +125,76 @@ final class CareerValidateDisplayBatchCommandTest extends TestCase
     }
 
     #[Test]
+    public function it_emits_untruncated_full_upload_plan_for_every_workbook_row(): void
+    {
+        $existingOccupation = $this->createAuthorityOccupation('existing-display-slug', '15-2051', '15-2051.00');
+        $this->createDisplayAsset($existingOccupation, 'existing-display-slug');
+        $this->createAuthorityOccupation('ready-upload-slug', '15-2011', '15-2011.00');
+
+        $workbook = $this->writeWorkbook([
+            $this->row('existing-display-slug', schemaValid: true, linksStrict: true, ctaAction: 'start_riasec_test'),
+            $this->row('ready-upload-slug', title: 'Ready Upload', soc: '15-2011', onet: '15-2011.00', schemaValid: true, linksStrict: true, ctaAction: 'start_riasec_test'),
+            $this->row('needs-repair-slug', title: 'Needs Repair', soc: '17-1011', onet: '17-1011.00'),
+            $this->row('software-developers', title: 'Software Developers', soc: '15-1252', onet: '15-1252.00', schemaValid: true, linksStrict: true, ctaAction: 'start_riasec_test'),
+        ]);
+        $planOutput = $this->tempDir().'/career_full_upload_plan.json';
+        $planMarkdown = $this->tempDir().'/career_full_upload_plan.md';
+
+        $exitCode = Artisan::call('career:validate-display-batch', [
+            '--file' => $workbook,
+            '--json' => true,
+            '--plan-output' => $planOutput,
+            '--plan-md-output' => $planMarkdown,
+        ]);
+        $report = json_decode(Artisan::output(), true, flags: JSON_THROW_ON_ERROR);
+        $plan = json_decode((string) file_get_contents($planOutput), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame(0, $exitCode, json_encode($report, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+        $this->assertFileExists($planOutput);
+        $this->assertFileExists($planMarkdown);
+        $this->assertSame(4, $plan['workbook']['rows']);
+        $this->assertCount(4, $plan['rows']);
+        $this->assertSame($plan['planner']['upload_manifest_sha256'], $report['full_upload_plan']['planner']['upload_manifest_sha256']);
+
+        $rows = collect($plan['rows'])->keyBy('slug');
+        $this->assertSame('already_imported_validated', $rows->get('existing-display-slug')['status']);
+        $this->assertFalse($rows->get('existing-display-slug')['import_eligible']);
+        $this->assertSame('upload_candidate', $rows->get('ready-upload-slug')['status']);
+        $this->assertTrue($rows->get('ready-upload-slug')['import_eligible']);
+        $this->assertSame('needs_workbook_repair', $rows->get('needs-repair-slug')['status']);
+        $this->assertFalse($rows->get('needs-repair-slug')['import_eligible']);
+        $this->assertSame('manual_hold', $rows->get('software-developers')['status']);
+        $this->assertFalse($rows->get('software-developers')['import_eligible']);
+
+        $this->assertSame(1, $plan['summary']['already_imported_validated']);
+        $this->assertSame(1, $plan['summary']['upload_candidates']);
+        $this->assertSame(1, $plan['summary']['needs_workbook_repair']);
+        $this->assertSame(1, $plan['summary']['holds']['manual_hold']);
+    }
+
+    #[Test]
+    public function it_changes_manifest_hash_when_workbook_content_changes(): void
+    {
+        $this->createAuthorityOccupation('ready-upload-slug', '15-2011', '15-2011.00');
+        $this->createAuthorityOccupation('ready-upload-slug-two', '15-2011', '15-2011.00');
+
+        $first = $this->writeWorkbook([
+            $this->row('ready-upload-slug', title: 'Ready Upload', soc: '15-2011', onet: '15-2011.00', schemaValid: true, linksStrict: true, ctaAction: 'start_riasec_test'),
+        ]);
+        $second = $this->writeWorkbook([
+            $this->row('ready-upload-slug-two', title: 'Ready Upload Two', soc: '15-2011', onet: '15-2011.00', schemaValid: true, linksStrict: true, ctaAction: 'start_riasec_test'),
+        ]);
+
+        [, $firstReport] = $this->runValidator($first, '');
+        [, $secondReport] = $this->runValidator($second, '');
+
+        $this->assertNotSame(
+            $firstReport['full_upload_plan']['planner']['upload_manifest_sha256'],
+            $secondReport['full_upload_plan']['planner']['upload_manifest_sha256'],
+        );
+    }
+
+    #[Test]
     public function it_validates_only_explicit_allowlisted_slugs_without_writing_database_rows(): void
     {
         $this->createAuthorityOccupation('data-scientists', '15-2051', '15-2051.00');
@@ -377,6 +447,7 @@ final class CareerValidateDisplayBatchCommandTest extends TestCase
         bool $schemaValid = false,
         bool $linksStrict = false,
         bool $sourceStrict = true,
+        string $ctaAction = 'start_click',
     ): array {
         $row = array_fill_keys(self::HEADERS, '');
         $row['Asset_Version'] = 'v4.2';
@@ -445,7 +516,7 @@ final class CareerValidateDisplayBatchCommandTest extends TestCase
             : $this->encodeJson(['/zh/tests/holland-career-interest-test-riasec']);
         $row['Primary_CTA_Label'] = 'Take the Holland / RIASEC Career Interest Test';
         $row['Primary_CTA_URL'] = '/en/tests/holland-career-interest-test-riasec';
-        $row['Primary_CTA_Target_Action'] = 'start_click';
+        $row['Primary_CTA_Target_Action'] = $ctaAction;
         $row['Secondary_CTA_Label'] = 'Secondary';
         $row['Secondary_CTA_URL'] = $this->encodeJson(['/en/tests/holland-career-interest-test-riasec']);
         $row['Entry_Surface'] = 'career_job_detail';
@@ -458,6 +529,27 @@ final class CareerValidateDisplayBatchCommandTest extends TestCase
         $row['Ready_For_Paid'] = 'false';
 
         return $row;
+    }
+
+    private function createDisplayAsset(Occupation $occupation, string $slug): CareerJobDisplayAsset
+    {
+        return CareerJobDisplayAsset::query()->create([
+            'occupation_id' => $occupation->id,
+            'canonical_slug' => $slug,
+            'surface_version' => 'display.surface.v1',
+            'asset_version' => 'v4.2',
+            'template_version' => 'v4.2',
+            'asset_type' => 'career_job_public_display',
+            'asset_role' => 'formal_pilot_master',
+            'status' => 'ready_for_pilot',
+            'component_order_json' => ['hero', 'faq_block'],
+            'page_payload_json' => ['page' => ['content' => ['hero' => ['title' => $slug]]]],
+            'seo_payload_json' => ['title' => $slug],
+            'sources_json' => ['source_card' => ['items' => ['BLS']]],
+            'structured_data_json' => ['schema_rules' => ['faq_visible_only' => true]],
+            'implementation_contract_json' => ['component_order_count' => 24],
+            'metadata_json' => ['command' => 'career:import-selected-display-assets'],
+        ]);
     }
 
     private function faq(): string
