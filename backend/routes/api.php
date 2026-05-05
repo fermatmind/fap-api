@@ -20,6 +20,7 @@ use App\Http\Controllers\API\V0_3\MeController as MeV03Controller;
 use App\Http\Controllers\API\V0_3\OrgInvitesController;
 use App\Http\Controllers\API\V0_3\OrgsController;
 use App\Http\Controllers\API\V0_3\PublicGatewaySurfaceController;
+use App\Http\Controllers\API\V0_3\ResultEmailLookupController;
 use App\Http\Controllers\API\V0_3\ScalesController;
 use App\Http\Controllers\API\V0_3\ScalesLookupController;
 use App\Http\Controllers\API\V0_3\ScalesSitemapSourceController;
@@ -205,6 +206,11 @@ Route::prefix('v0.3')->middleware([
         Route::get('/scales/{scale_code}/questions', [ScalesController::class, 'questions']);
         Route::get('/scales/{scale_code}/technical-note', [ScalesController::class, 'technicalNote']);
         Route::get('/scales/{scale_code}', [ScalesController::class, 'show']);
+
+        Route::post('/results/lookup-by-email', [ResultEmailLookupController::class, 'store'])
+            ->middleware('throttle:api_result_lookup')
+            ->defaults('public_realm', true)
+            ->name('api.v0_3.results.lookup_by_email');
 
         // 2) Attempts lifecycle
         Route::middleware(ForcePublicAttemptRealm::class)->group(function () {

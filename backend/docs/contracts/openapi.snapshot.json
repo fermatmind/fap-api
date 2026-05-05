@@ -1759,6 +1759,29 @@
                 ]
             }
         },
+        "/api/v0.3/results/lookup-by-email": {
+            "post": {
+                "operationId": "api.v0_3.results.lookup_by_email",
+                "tags": [
+                    "api:v0.3"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "x-laravel-action": "App\\Http\\Controllers\\API\\V0_3\\ResultEmailLookupController@store",
+                "x-laravel-middleware": [
+                    "api",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_public",
+                    "App\\Http\\Middleware\\NormalizeApiErrorContract",
+                    "App\\Http\\Middleware\\ResolveAnonId",
+                    "App\\Http\\Middleware\\ResolveOrgContext",
+                    "Illuminate\\Routing\\Middleware\\ThrottleRequests:api_result_lookup"
+                ],
+                "x-laravel-name": "api.v0_3.results.lookup_by_email"
+            }
+        },
         "/api/v0.3/scales": {
             "get": {
                 "operationId": "get_api_v0_3_scales",

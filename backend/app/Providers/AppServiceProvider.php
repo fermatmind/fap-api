@@ -460,6 +460,19 @@ class AppServiceProvider extends ServiceProvider
                 ->response($response('RATE_LIMIT_ORDER_LOOKUP', 'Too many order lookup requests. Please retry later.'));
         });
 
+        RateLimiter::for('api_result_lookup', function (Request $request) use ($response, $shouldBypassRateLimits, $scopedRateKey) {
+            if ($shouldBypassRateLimits()) {
+                return Limit::none();
+            }
+
+            $limit = (int) config('fap.rate_limits.api_result_lookup_per_minute', 20);
+            $limit = max(1, $limit);
+
+            return Limit::perMinute($limit)
+                ->by($scopedRateKey($request, 'api_result_lookup'))
+                ->response($response('RATE_LIMIT_RESULT_LOOKUP', 'Too many result lookup requests. Please retry later.'));
+        });
+
         RateLimiter::for('api_track', function (Request $request) use ($response, $shouldBypassRateLimits, $scopedRateKey) {
             if ($shouldBypassRateLimits()) {
                 return Limit::none();
